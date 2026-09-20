@@ -1,0 +1,47 @@
+name: Automated Evidence Audit
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  evidence-audit:
+    name: Run Enterprise Evidence Collectors & Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio
+
+      - name: Run Audit Engine Self-Tests
+        run: |
+          pytest enterprise_audit_engine/tests/ -v
+
+      - name: Execute Enterprise Verification Platform
+        run: |
+          python -m enterprise_audit_engine.cli.main verify-enterprise --repo-root . --output-dir audit_output
+
+      - name: Verify Evidence Store Cryptographic Integrity
+        run: |
+          python -m enterprise_audit_engine.cli.main verify-integrity --output-dir audit_output
+
+      - name: Archive Audit Evidence & Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-artifacts
+          path: audit_output/
