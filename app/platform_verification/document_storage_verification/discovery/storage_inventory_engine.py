@@ -179,7 +179,7 @@ class StorageInventoryEngine(IStorageInventoryEngine):
             sha_hex = hashlib.sha256(hash_input).hexdigest()
             sample_items.append(
                 StorageInventoryItem(
-                    object_id=f"obj-{hashlib.md5(hash_input).hexdigest()[:12]}",
+                    object_id=f"obj-{hashlib.sha256(hash_input).hexdigest()[:12]}",
                     tenant_id=tenant,
                     category=cat,
                     storage_path=path,

@@ -94,11 +94,11 @@ class LoadBalancerEngine:
         for ep in endpoints:
             for v_idx in range(50):  # 50 virtual nodes per endpoint
                 v_key = f"{ep.endpoint_id}#{v_idx}".encode("utf-8")
-                node_hash = int(hashlib.md5(v_key).hexdigest(), 16)
+                node_hash = int(hashlib.sha256(v_key).hexdigest(), 16)
                 ring.append((node_hash, ep))
 
         ring.sort(key=lambda x: x[0])
-        req_hash = int(hashlib.md5(hash_key.encode("utf-8")).hexdigest(), 16)
+        req_hash = int(hashlib.sha256(hash_key.encode("utf-8")).hexdigest(), 16)
 
         # Binary search for the first node with hash >= req_hash
         ring_hashes = [r[0] for r in ring]

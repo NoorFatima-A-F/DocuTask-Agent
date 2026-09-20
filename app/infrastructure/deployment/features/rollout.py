@@ -81,5 +81,5 @@ class FeatureRolloutManager:
 
     def _hash_bucket(self, key: str) -> float:
         """Compute consistent deterministic bucket 0.0 - 100.0 for rollout partitioning."""
-        h = int(hashlib.md5(key.encode("utf-8")).hexdigest(), 16)
+        h = int(hashlib.sha256(key.encode("utf-8")).hexdigest(), 16)
         return float(h % 10000) / 100.0
