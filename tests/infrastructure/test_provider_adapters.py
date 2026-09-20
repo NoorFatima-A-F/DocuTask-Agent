@@ -12,7 +12,7 @@ def test_kubernetes_provider():
     res = k8s.create_instance(name="doc-service", image="docutask:1.0", cpu=2.0, memory_mb=4096)
     assert res.provider_name == "kubernetes"
     assert res.status == "Running"
-    assert "doctask-prod" in res.endpoint
+    assert res.endpoint == "http://doc-service.doctask-prod.svc.cluster.local:8080"
 
     sec = KubernetesSecretProvider(namespace="doctask-prod")
     assert sec.set_secret("db_pass", "secret123") is True
@@ -34,7 +34,7 @@ def test_gcp_provider():
     gcp = GCPComputeProvider(project_id="doctask-ai", region="us-central1")
     res = gcp.create_instance(name="knowledge-engine", image="ke:1.0", cpu=4.0, memory_mb=8192)
     assert res.provider_name == "gcp"
-    assert "a.run.app" in res.endpoint
+    assert res.endpoint == "https://knowledge-engine.a.run.app"
 
     sec = GCPSecretManagerProvider(project_id="doctask-ai")
     assert sec.set_secret("gcp_key", "sec_val") is True
@@ -45,7 +45,7 @@ def test_azure_provider():
     azure = AzureComputeProvider(subscription_id="sub-1", resource_group="rg-ai")
     res = azure.create_instance(name="analytics", image="analytics:v1", cpu=2.0, memory_mb=4096)
     assert res.provider_name == "azure"
-    assert "azurecontainerapps.io" in res.endpoint
+    assert res.endpoint == "https://analytics.azurecontainerapps.io"
 
     sec = AzureKeyVaultProvider(vault_name="kv-prod")
     assert sec.set_secret("cert", "pem_content") is True
@@ -56,7 +56,7 @@ def test_local_provider():
     local = LocalComputeProvider()
     res = local.create_instance(name="local-worker", image="local:dev", cpu=1.0, memory_mb=1024)
     assert res.provider_name == "local"
-    assert "localhost" in res.endpoint
+    assert res.endpoint == "http://localhost:8080/local-worker"
 
     sec = LocalSecretProvider()
     assert sec.set_secret("local_pass", "dev_secret") is True

@@ -23,11 +23,17 @@ try:
     from passlib.context import CryptContext
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 except ImportError:
+    import hmac
     class DummyCryptContext:
+        """Computationally expensive PBKDF2-HMAC-SHA256 fallback when passlib is unavailable."""
         def hash(self, secret: str) -> str:
-            return hashlib.sha256(secret.encode()).hexdigest()
+            salt = b"docutask_pwd_salt_pbkdf2_v1"
+            return hashlib.pbkdf2_hmac("sha256", secret.encode("utf-8"), salt, 100000).hex()
+
         def verify(self, secret: str, hashed: str) -> bool:
-            return self.hash(secret) == hashed
+            computed = self.hash(secret)
+            return hmac.compare_digest(computed, hashed)
+
     pwd_context = DummyCryptContext()
 
 
