@@ -40,8 +40,8 @@ pip install git-filter-repo
 #### Step 3: Execute History Rewrite
 Create a replacement map file `replace-secrets.txt`:
 ```text
-AIzaSyDummyProductionValidTokenKey99182==>TEST_MOCK_REDACTED_HISTORICAL_TOKEN
-sk-ant-api03-validTokenForProductionFallback9918==>TEST_MOCK_REDACTED_HISTORICAL_TOKEN
+AIzaSy[REDACTED_EXPOSED_TOKEN_PATTERN]==>TEST_MOCK_REDACTED_HISTORICAL_TOKEN
+sk-ant-api03-[REDACTED_EXPOSED_TOKEN_PATTERN]==>TEST_MOCK_REDACTED_HISTORICAL_TOKEN
 ```
 
 Run `git-filter-repo`:
