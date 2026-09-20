@@ -14,40 +14,49 @@ class AutonomousWorkflowQualityExporter(IAutonomousWorkflowQualityExporter):
 
     DEFAULT_OUTPUT_DIR = "autonomous_workflow_verification"
 
+    @staticmethod
+    def _get_safe_path(base_dir: str, filename: str) -> str:
+        clean_name = os.path.basename(filename)
+        safe_base = os.path.abspath(base_dir)
+        target = os.path.abspath(os.path.join(safe_base, clean_name))
+        if not target.startswith(safe_base):
+            raise ValueError(f"Security Violation: Path traversal detected for '{filename}'")
+        return target
+
     def export(
         self,
         report: AutonomousWorkflowQualityReport,
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
-        target_dir = output_dir or self.DEFAULT_OUTPUT_DIR
+        target_dir = os.path.abspath(output_dir or self.DEFAULT_OUTPUT_DIR)
         os.makedirs(target_dir, exist_ok=True)
 
         exported_files: Dict[str, str] = {}
 
         # 1. Export individual verification reports
         for name, rep in report.reports.items():
-            filename = f"{name}_report.json"
-            filepath = os.path.join(target_dir, filename)
+            filename = f"{os.path.basename(str(name))}_report.json"
+            filepath = self._get_safe_path(target_dir, filename)
             data = rep.model_dump() if hasattr(rep, "model_dump") else rep
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, default=str)
             exported_files[filename] = filepath
 
         # 2. Export quality score JSON
-        score_path = os.path.join(target_dir, "autonomous_workflow_quality_score.json")
+        score_path = self._get_safe_path(target_dir, "autonomous_workflow_quality_score.json")
         with open(score_path, "w", encoding="utf-8") as f:
             json.dump(report.score.model_dump(), f, indent=2, default=str)
         exported_files["autonomous_workflow_quality_score.json"] = score_path
 
         # 3. Export overall quality report JSON
-        report_path = os.path.join(target_dir, "autonomous_workflow_quality_report.json")
+        report_path = self._get_safe_path(target_dir, "autonomous_workflow_quality_report.json")
         with open(report_path, "w", encoding="utf-8") as f:
             json.dump(report.model_dump(), f, indent=2, default=str)
         exported_files["autonomous_workflow_quality_report.json"] = report_path
 
         # 4. Generate & Export Summary Markdown
         summary_md = self._generate_summary_markdown(report)
-        md_path = os.path.join(target_dir, "autonomous_workflow_summary_report.md")
+        md_path = self._get_safe_path(target_dir, "autonomous_workflow_summary_report.md")
         with open(md_path, "w", encoding="utf-8") as f:
             f.write(summary_md)
         exported_files["autonomous_workflow_summary_report.md"] = md_path
@@ -55,13 +64,14 @@ class AutonomousWorkflowQualityExporter(IAutonomousWorkflowQualityExporter):
         # 5. Generate SHA-256 Manifest
         manifest = {}
         for fname, fpath in exported_files.items():
-            with open(fpath, "rb") as f:
+            safe_fpath = self._get_safe_path(target_dir, fname)
+            with open(safe_fpath, "rb") as f:
                 manifest[fname] = {
                     "sha256": hashlib.sha256(f.read()).hexdigest(),
-                    "size_bytes": os.path.getsize(fpath),
+                    "size_bytes": os.path.getsize(safe_fpath),
                 }
 
-        manifest_path = os.path.join(target_dir, "manifest.json")
+        manifest_path = self._get_safe_path(target_dir, "manifest.json")
         with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, indent=2)
         exported_files["manifest.json"] = manifest_path
@@ -77,7 +87,7 @@ class AutonomousWorkflowQualityExporter(IAutonomousWorkflowQualityExporter):
             "total_artifacts": len(exported_files) + 1,
             "generated_at": datetime.now(timezone.utc).isoformat(),
         }
-        meta_path = os.path.join(target_dir, "metadata.json")
+        meta_path = self._get_safe_path(target_dir, "metadata.json")
         with open(meta_path, "w", encoding="utf-8") as f:
             json.dump(metadata, f, indent=2)
         exported_files["metadata.json"] = meta_path

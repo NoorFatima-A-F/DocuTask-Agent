@@ -27,24 +27,31 @@ class PortfolioPresentationGenerator(IPortfolioPresentationGenerator):
         )
 
         if output_dir:
-            os.makedirs(output_dir, exist_ok=True)
+            safe_dir = os.path.abspath(output_dir)
+            os.makedirs(safe_dir, exist_ok=True)
             # Write Case Studies
             for cs in case_studies:
                 safe_title = "".join(c if c.isalnum() else "_" for c in cs.title.lower())[:30].strip("_")
                 filename = f"case_study_{safe_title}.md"
-                with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:
-                    f.write(cs.full_markdown)
+                fpath = os.path.abspath(os.path.join(safe_dir, filename))
+                if fpath.startswith(safe_dir):
+                    with open(fpath, "w", encoding="utf-8") as f:
+                        f.write(cs.full_markdown)
 
             # Write Demo Scripts
             for ds in scripts:
                 safe_aud = "".join(c if c.isalnum() else "_" for c in ds.target_audience.lower())[:30].strip("_")
                 filename = f"demo_script_{safe_aud}.md"
-                with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:
-                    f.write(self._format_script_markdown(ds))
+                fpath = os.path.abspath(os.path.join(safe_dir, filename))
+                if fpath.startswith(safe_dir):
+                    with open(fpath, "w", encoding="utf-8") as f:
+                        f.write(self._format_script_markdown(ds))
 
             # Write Architecture Diagram
-            with open(os.path.join(output_dir, "platform_architecture.mermaid"), "w", encoding="utf-8") as f:
-                f.write(mermaid_diag)
+            diag_path = os.path.abspath(os.path.join(safe_dir, "platform_architecture.mermaid"))
+            if diag_path.startswith(safe_dir):
+                with open(diag_path, "w", encoding="utf-8") as f:
+                    f.write(mermaid_diag)
 
         return artifacts
 

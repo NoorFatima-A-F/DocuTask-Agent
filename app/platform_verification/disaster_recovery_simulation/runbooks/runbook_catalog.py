@@ -19,7 +19,8 @@ class RunbookCatalog:
     """
 
     def generate_all_runbooks(self, output_dir: str = "runbooks") -> Dict[str, str]:
-        os.makedirs(output_dir, exist_ok=True)
+        safe_dir = os.path.abspath(output_dir)
+        os.makedirs(safe_dir, exist_ok=True)
         manifests = {}
 
         # 1. Database Failure Runbook
@@ -159,7 +160,8 @@ Defines safe procedures to roll back traffic from disaster recovery region back 
         return manifests
 
     def _write(self, path: str, content: str) -> str:
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, "w", encoding="utf-8") as f:
+        safe_path = os.path.abspath(path)
+        os.makedirs(os.path.dirname(safe_path), exist_ok=True)
+        with open(safe_path, "w", encoding="utf-8") as f:
             f.write(content)
-        return os.path.abspath(path)
+        return safe_path

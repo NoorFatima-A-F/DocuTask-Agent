@@ -7,6 +7,7 @@ APIRequestContext generation for multi-tenant governance security boundaries.
 from datetime import datetime, timezone
 from enum import Enum
 import hashlib
+import hmac
 import secrets
 from typing import Any, Dict, List, Optional, Set
 from pydantic import BaseModel, Field
@@ -81,8 +82,9 @@ class AuthenticationManager:
 
     @staticmethod
     def hash_key(raw_key: str) -> str:
-        """Compute secure SHA-256 hash of plaintext key."""
-        return hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
+        """Compute secure HMAC-SHA-256 hash of plaintext key."""
+        salt = b"gov_api_key_salt_v1"
+        return hmac.new(salt, raw_key.encode("utf-8"), hashlib.sha256).hexdigest()
 
     def create_api_key(
         self,

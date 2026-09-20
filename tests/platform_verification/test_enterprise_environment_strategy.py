@@ -48,7 +48,7 @@ def test_environment_provisioning_lifecycle():
     res = environment_strategy_runtime.provision_environment(EnvironmentClassification.STAGING)
     assert res.is_success is True
     assert res.status == "READY"
-    assert "https://staging.verify" in res.endpoint_url
+    assert res.endpoint_url.startswith("https://staging.verify")
     assert res.allocated_resources["cluster"] == "k8s-platform-us-central1"
 
     # Reset

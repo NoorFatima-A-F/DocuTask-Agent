@@ -16,7 +16,8 @@ class SelfHealingEvidenceExporter(ISelfHealingEvidenceExporter):
         validation_report: RecoveryValidationReport,
         scorecard: SelfHealingScorecard,
     ) -> List[str]:
-        os.makedirs(output_dir, exist_ok=True)
+        safe_dir = os.path.abspath(output_dir)
+        os.makedirs(safe_dir, exist_ok=True)
         files_written = []
 
         now_str = datetime.now(timezone.utc).isoformat()
@@ -41,7 +42,10 @@ class SelfHealingEvidenceExporter(ISelfHealingEvidenceExporter):
         }
 
         for fname, data in manifests.items():
-            path = os.path.join(output_dir, fname)
+            clean_name = os.path.basename(fname)
+            path = os.path.abspath(os.path.join(safe_dir, clean_name))
+            if not path.startswith(safe_dir):
+                raise ValueError(f"Path traversal detected: {fname}")
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, default=str)
             files_written.append(path)

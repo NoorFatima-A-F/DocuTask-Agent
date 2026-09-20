@@ -15,7 +15,8 @@ class ReadinessEvidenceExporter(IReadinessEvidenceExporter):
         output_dir: str,
         scorecard: OperationalReadinessScorecard,
     ) -> List[str]:
-        os.makedirs(output_dir, exist_ok=True)
+        safe_dir = os.path.abspath(output_dir)
+        os.makedirs(safe_dir, exist_ok=True)
         files_written = []
 
         manifests: Dict[str, Any] = {
@@ -61,7 +62,10 @@ class ReadinessEvidenceExporter(IReadinessEvidenceExporter):
         }
 
         for filename, data in manifests.items():
-            path = os.path.join(output_dir, filename)
+            clean_name = os.path.basename(filename)
+            path = os.path.abspath(os.path.join(safe_dir, clean_name))
+            if not path.startswith(safe_dir):
+                raise ValueError(f"Path traversal detected: {filename}")
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, default=str)
             files_written.append(path)

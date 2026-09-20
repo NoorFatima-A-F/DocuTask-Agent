@@ -37,7 +37,7 @@ class CustomerExperienceRuntime(ICustomerExperienceRuntime):
         self.portfolio_generator = PortfolioPresentationGenerator()
 
     def run_full_simulation(self, output_dir: Optional[str] = None) -> Dict[str, Any]:
-        target_dir = output_dir or self.DEFAULT_OUTPUT_DIR
+        target_dir = os.path.abspath(output_dir or self.DEFAULT_OUTPUT_DIR)
         os.makedirs(target_dir, exist_ok=True)
 
         simulation_id = f"SIM-RUN-{uuid.uuid4().hex[:8].upper()}"

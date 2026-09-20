@@ -40,7 +40,7 @@ class RestoreEvidenceManifestEngine(IRestoreEvidenceManifestEngine):
         """
         Exports all 13 JSON artifacts to disk with complete machine-readable audit logs.
         """
-        target_dir = output_dir or self.DEFAULT_OUTPUT_DIR
+        target_dir = os.path.abspath(output_dir or self.DEFAULT_OUTPUT_DIR)
         os.makedirs(target_dir, exist_ok=True)
 
         exported_paths: Dict[str, str] = {}
@@ -73,9 +73,12 @@ class RestoreEvidenceManifestEngine(IRestoreEvidenceManifestEngine):
 
         for filename, data_content in file_mappings.items():
             serialized = _serialize_obj(data_content)
-            file_path = os.path.join(target_dir, filename)
+            clean_name = os.path.basename(filename)
+            file_path = os.path.abspath(os.path.join(target_dir, clean_name))
+            if not file_path.startswith(target_dir):
+                raise ValueError(f"Path traversal detected: {filename}")
             with open(file_path, "w", encoding="utf-8") as f:
                 json.dump(serialized, f, indent=2, ensure_ascii=False)
-            exported_paths[filename] = os.path.abspath(file_path)
+            exported_paths[filename] = file_path
 
         return exported_paths
