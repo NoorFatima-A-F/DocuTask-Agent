@@ -3,13 +3,13 @@
 import os
 from pathlib import Path
 from typing import List, Dict, Any
-from ..domain.evidence.models import (
+from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,
     EvidenceClassification,
     EvidenceConfidence,
     EvidenceSourceType,
 )
-from ..base import BaseCollector
+from enterprise_audit_engine.collectors.base import BaseCollector
 
 
 class RepositoryCollector(BaseCollector):
