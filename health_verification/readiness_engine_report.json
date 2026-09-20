@@ -1,0 +1,128 @@
+{
+  "evaluation": {
+    "service": "docutask-api",
+    "state": "READY",
+    "traffic_action": "ALLOW_TRAFFIC",
+    "traffic_allowed": true,
+    "reason": "All critical and important dependencies verified healthy",
+    "failed_dependencies": [],
+    "degraded_dependencies": [],
+    "healthy_dependencies": [
+      "postgres",
+      "redis",
+      "storage",
+      "workers",
+      "gemini"
+    ],
+    "checks": {
+      "database": {
+        "status": "READY",
+        "latency_ms": 11.8,
+        "connections_available": 45
+      },
+      "queue": {
+        "status": "READY",
+        "latency_ms": 1.8,
+        "queue_depth": 12
+      },
+      "storage": {
+        "status": "READY",
+        "latency_ms": 14.2,
+        "integrity": "verified"
+      },
+      "ai_provider": {
+        "status": "READY",
+        "latency_ms": 185.0,
+        "quota_remaining_pct": 78.5,
+        "fallback_mode": false
+      },
+      "workers": {
+        "status": "BUSY",
+        "worker_id": "worker-001",
+        "active_jobs": 2,
+        "capacity": 10
+      }
+    },
+    "evaluation_duration_ms": 0.02,
+    "timestamp": "2026-09-19T07:04:33.956808+00:00"
+  },
+  "scorecard": {
+    "dependency_detection_score": 100.0,
+    "failure_accuracy_score": 100.0,
+    "policy_correctness_score": 100.0,
+    "kubernetes_compatibility_score": 100.0,
+    "security_score": 100.0,
+    "observability_score": 100.0,
+    "overall_readiness_score": 100.0,
+    "certification_tier": "Enterprise Readiness Certified",
+    "certification_verdict": "CERTIFIED",
+    "traffic_admission_safe": true,
+    "passed": true,
+    "details": {
+      "weights": {
+        "dependency_detection": 0.25,
+        "failure_accuracy": 0.2,
+        "policy_correctness": 0.2,
+        "kubernetes_compatibility": 0.15,
+        "security": 0.1,
+        "observability": 0.1
+      },
+      "minimum_required_for_enterprise": 95.0
+    }
+  },
+  "kubernetes": {
+    "readiness_probe_path": "/ready",
+    "initial_delay_seconds": 10,
+    "period_seconds": 5,
+    "timeout_seconds": 3,
+    "success_threshold": 1,
+    "failure_threshold": 3,
+    "deterministic_response": true,
+    "fast_response": true,
+    "latency_ms": 4.5,
+    "no_side_effects": true,
+    "passed": true,
+    "details": {
+      "k8s_manifest": {
+        "readinessProbe": {
+          "httpGet": {
+            "path": "/ready",
+            "port": 8000,
+            "scheme": "HTTP"
+          },
+          "initialDelaySeconds": 10,
+          "periodSeconds": 5,
+          "timeoutSeconds": 3,
+          "successThreshold": 1,
+          "failureThreshold": 3
+        }
+      },
+      "http_codes": {
+        "READY": 200,
+        "DEGRADED": 200,
+        "NOT_READY": 503,
+        "STARTING": 503
+      },
+      "kubelet_behavior": "Removes pod IP from Service endpoints when probe returns HTTP 503 without restarting container"
+    }
+  },
+  "security": {
+    "no_database_host_leak": true,
+    "no_password_or_token_leak": true,
+    "no_connection_string_leak": true,
+    "no_stack_trace_leak": true,
+    "no_internal_ip_leak": true,
+    "total_leaks_detected": 0,
+    "passed": true,
+    "details": {
+      "allowed_keys": [
+        "service",
+        "state",
+        "traffic_allowed",
+        "reason",
+        "checks"
+      ],
+      "security_status": "ZERO_LEAKS_VERIFIED"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "report_title": "Graceful Degradation & Fallback Strategy Report",
+  "total_degradation_modes": 4,
+  "scenarios": [
+    {
+      "subsystem_failure": "PostgreSQL Primary Node Unavailability",
+      "degraded_mode": "DB_READ_ONLY",
+      "retained_functionality": "Read document metadata, query job statuses, serve cached results via read replicas; enqueue write mutations to Redis durable buffer",
+      "user_messaging_sanitized": true,
+      "audit_trail_recorded": true,
+      "recovery_transition_automatic": true,
+      "is_resilient": true
+    },
+    {
+      "subsystem_failure": "Gemini AI Provider Rate Limit / Outage",
+      "degraded_mode": "AI_FALLBACK_CACHED",
+      "retained_functionality": "Serve high-confidence historical embeddings and cached schema extractions for identical document layouts",
+      "user_messaging_sanitized": true,
+      "audit_trail_recorded": true,
+      "recovery_transition_automatic": true,
+      "is_resilient": true
+    },
+    {
+      "subsystem_failure": "Gemini AI Extended Outage (> 5 minutes)",
+      "degraded_mode": "AI_OFFLINE_BUFFERED",
+      "retained_functionality": "Buffer unextracted documents in Redis persistence queue with status QUEUED_FOR_OFFLINE_AI; notify client of delayed processing without job loss",
+      "user_messaging_sanitized": true,
+      "audit_trail_recorded": true,
+      "recovery_transition_automatic": true,
+      "is_resilient": true
+    },
+    {
+      "subsystem_failure": "Tesseract OCR Process Crash / High Load",
+      "degraded_mode": "OCR_NATIVE_PDF_FALLBACK",
+      "retained_functionality": "Fallback immediately to native PDF text layer extraction (pypdf/pdfplumber) for vector documents, bypassing heavy raster OCR",
+      "user_messaging_sanitized": true,
+      "audit_trail_recorded": true,
+      "recovery_transition_automatic": true,
+      "is_resilient": true
+    }
+  ],
+  "graceful_degradation_verified": true
+}

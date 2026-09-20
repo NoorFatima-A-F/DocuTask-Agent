@@ -1,0 +1,74 @@
+{
+  "section_id": "SECTION_D_SCHEDULER",
+  "title": "Section D: Task Scheduler Verification",
+  "description": "Validates cron/interval scheduling calculations, exponential backoff with jitter, distributed lease/lock expiration, and missed schedule catch-up policies.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.08,
+  "metrics": {
+    "cron_evaluations_count": 5,
+    "backoff_attempts_tested": 5,
+    "jitter_range_valid": true,
+    "lease_lock_acquired": true,
+    "lease_lock_expired_and_reassigned": true,
+    "missed_runs_handled": 3,
+    "coalesced_executions": 1
+  },
+  "assertions": [
+    {
+      "name": "Cron_And_Interval_Schedule_Calculation",
+      "passed": true,
+      "message": "Schedule interval intervals calculated with zero drift across 5 occurrences.",
+      "execution_time_ms": 0.007,
+      "details": {
+        "next_runs": [
+          1700000060,
+          1700000120,
+          1700000180,
+          1700000240,
+          1700000300
+        ],
+        "interval_sec": 60
+      }
+    },
+    {
+      "name": "Exponential_Backoff_With_Jitter",
+      "passed": true,
+      "message": "Exponential backoff with full jitter tested across 5 retries (Bounded by 32.0s).",
+      "execution_time_ms": 0.037,
+      "details": {
+        "backoff_delays": [
+          0.82,
+          1.03,
+          2.55,
+          4.89,
+          13.89
+        ]
+      }
+    },
+    {
+      "name": "Distributed_Lock_Lease_Expiration",
+      "passed": true,
+      "message": "Distributed lease expired cleanly and reassigned to secondary worker without deadlock.",
+      "execution_time_ms": 0.003,
+      "details": {
+        "final_owner": "worker_node_2"
+      }
+    },
+    {
+      "name": "Missed_Schedule_CatchUp_Coalesce_Policy",
+      "passed": true,
+      "message": "Coalesced 3 missed schedule runs into single execution preventing queue deluge.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "missed_count": 3,
+        "coalesced_runs": [
+          "2026-09-18T12:00:00Z"
+        ]
+      }
+    }
+  ]
+}

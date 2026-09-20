@@ -1,0 +1,96 @@
+{
+  "verifier_id": "VERIFY-3J.11.3-OPTIMIZATION-RECOMMENDATION",
+  "phase_id": "3J.11.3",
+  "phase_name": "Performance Optimization Recommendation Engine",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Compute Optimization Recommendation Validated",
+      "passed": true,
+      "details": "Worker scaling recommendation generated: 10 -> 20 pods with +80% throughput gain.",
+      "metrics": {
+        "rec_id": "REC-OPT-001",
+        "throughput_gain_pct": 80.0
+      }
+    },
+    {
+      "name": "Database Query & Index Optimization Validated",
+      "passed": true,
+      "details": "Database index recommendation generated: 800ms -> 40ms query execution.",
+      "metrics": {
+        "rec_id": "REC-OPT-002",
+        "speedup": "20x"
+      }
+    },
+    {
+      "name": "AI Token & Routing Optimization Validated",
+      "passed": true,
+      "details": "LLM routing recommendation verified: -28.4% token usage, -34.2% cost reduction.",
+      "metrics": {
+        "rec_id": "REC-OPT-003",
+        "cost_reduction_pct": 34.2
+      }
+    },
+    {
+      "name": "Architectural Batching & Async Optimization Validated",
+      "passed": true,
+      "details": "Async batch pipeline recommendation verified: -45% API ingress latency.",
+      "metrics": {
+        "rec_id": "REC-OPT-004",
+        "latency_reduction_pct": 45.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:03.579347+00:00",
+  "execution_timestamp": "2026-09-19T07:05:03.579397+00:00",
+  "summary": "4 actionable optimization plans generated across Compute, Database, AI, and Architecture layers.",
+  "report_title": "Performance Optimization Recommendation Report",
+  "total_recommendations": 4,
+  "recommendations": [
+    {
+      "recommendation_id": "REC-OPT-001",
+      "category": "Compute Optimization",
+      "target_component": "worker_deployment",
+      "recommended_action": "Scale Celery worker pod replicas from 10 to 20",
+      "expected_improvement": "Queue drain acceleration +80%, P95 turnaround 35m -> 8m",
+      "throughput_gain_pct": 80.0,
+      "risk_level": "Low",
+      "confidence_score_pct": 96.0
+    },
+    {
+      "recommendation_id": "REC-OPT-002",
+      "category": "Database Optimization",
+      "target_component": "postgresql_documents_table",
+      "recommended_action": "Create composite B-tree index on documents (created_at DESC, status)",
+      "expected_improvement": "P95 query latency reduction 800ms -> 40ms (20x improvement)",
+      "throughput_gain_pct": 15.0,
+      "risk_level": "Low",
+      "confidence_score_pct": 98.0
+    },
+    {
+      "recommendation_id": "REC-OPT-003",
+      "category": "AI Pipeline Optimization",
+      "target_component": "gemini_llm_extractor",
+      "recommended_action": "Apply dynamic model routing and context pruning on standard invoices",
+      "expected_improvement": "Token consumption -28.4%, inference cost -34.2%",
+      "throughput_gain_pct": 25.0,
+      "risk_level": "Low",
+      "confidence_score_pct": 92.5
+    },
+    {
+      "recommendation_id": "REC-OPT-004",
+      "category": "Architecture Optimization",
+      "target_component": "task_ingestion_pipeline",
+      "recommended_action": "Enable async Redis pipeline batch dispatch for multi-page PDF uploads",
+      "expected_improvement": "API ingress latency reduction -45%, Redis network roundtrips -80%",
+      "throughput_gain_pct": 30.0,
+      "risk_level": "Low",
+      "confidence_score_pct": 95.0
+    }
+  ],
+  "compute_opt_ready": true,
+  "database_opt_ready": true,
+  "ai_opt_ready": true,
+  "architecture_opt_ready": true
+}

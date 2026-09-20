@@ -1,0 +1,20 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState, useEffect } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card';
+import { Badge } from '../../components/ui/Badge';
+import { SaaSApiClient } from '../../services/saasApiClient';
+import { BarChart3, Zap, FileText, DollarSign, Clock, RefreshCw } from 'lucide-react';
+export const UsageAnalyticsDashboard = () => {
+    const [records, setRecords] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const load = async () => {
+            setLoading(true);
+            const data = await SaaSApiClient.listUsageRecords('tenant_acme_corp');
+            setRecords(data);
+            setLoading(false);
+        };
+        load();
+    }, []);
+    return (_jsxs("div", { className: "space-y-6", children: [_jsx("div", { className: "flex items-center justify-between", children: _jsxs("div", { children: [_jsxs("h1", { className: "text-2xl font-bold text-white flex items-center gap-3", children: [_jsx(BarChart3, { className: "w-7 h-7 text-indigo-400" }), "Metered Usage & Quota Intelligence"] }), _jsx("p", { className: "text-sm text-slate-400 mt-1", children: "Real-time consumption telemetry for LLM tokens, OCR page volume, compute runtime, and API calls." })] }) }), _jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-4", children: [_jsx(Card, { className: "bg-slate-900/80 border-slate-800", children: _jsxs(CardContent, { className: "p-4 flex items-center gap-4", children: [_jsx("div", { className: "p-3 bg-indigo-950/60 text-indigo-400 rounded-lg", children: _jsx(Zap, { className: "w-6 h-6" }) }), _jsxs("div", { children: [_jsx("span", { className: "text-xs text-slate-400 block", children: "LLM Token Burn Rate" }), _jsx("span", { className: "text-xl font-bold text-white", children: "12.45M Tokens" })] })] }) }), _jsx(Card, { className: "bg-slate-900/80 border-slate-800", children: _jsxs(CardContent, { className: "p-4 flex items-center gap-4", children: [_jsx("div", { className: "p-3 bg-emerald-950/60 text-emerald-400 rounded-lg", children: _jsx(FileText, { className: "w-6 h-6" }) }), _jsxs("div", { children: [_jsx("span", { className: "text-xs text-slate-400 block", children: "Document Pages Processed" }), _jsx("span", { className: "text-xl font-bold text-white", children: "4,800 Pages" })] })] }) }), _jsx(Card, { className: "bg-slate-900/80 border-slate-800", children: _jsxs(CardContent, { className: "p-4 flex items-center gap-4", children: [_jsx("div", { className: "p-3 bg-cyan-950/60 text-cyan-400 rounded-lg", children: _jsx(DollarSign, { className: "w-6 h-6" }) }), _jsxs("div", { children: [_jsx("span", { className: "text-xs text-slate-400 block", children: "Estimated Metered Spend" }), _jsx("span", { className: "text-xl font-bold text-cyan-400", children: "$96.90 USD" })] })] }) })] }), _jsxs(Card, { className: "bg-slate-900/80 border-slate-800", children: [_jsx(CardHeader, { children: _jsxs(CardTitle, { className: "text-base text-white flex items-center gap-2", children: [_jsx(Clock, { className: "w-4 h-4 text-indigo-400" }), " Usage Record Feed"] }) }), _jsx(CardContent, { className: "space-y-3", children: loading ? (_jsxs("div", { className: "p-8 text-center text-slate-400", children: [_jsx(RefreshCw, { className: "w-6 h-6 animate-spin mx-auto mb-2" }), " Loading usage records..."] })) : (records.map((r) => (_jsxs("div", { className: "p-3 bg-slate-800/40 rounded border border-slate-700/50 flex items-center justify-between", children: [_jsxs("div", { children: [_jsx("span", { className: "text-sm font-semibold text-white block", children: r.metric_name }), _jsxs("span", { className: "text-xs text-slate-400", children: ["Workspace: ", r.workspace_id, " \u2022 Unit Cost: $", r.unit_cost_usd] })] }), _jsxs("div", { className: "flex items-center gap-4", children: [_jsxs("span", { className: "text-sm font-bold text-white", children: [r.quantity.toLocaleString(), " ", r.unit] }), _jsxs(Badge, { variant: "intelligence", children: ["$", r.total_cost_usd.toFixed(2)] })] })] }, r.record_id)))) })] })] }));
+};

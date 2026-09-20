@@ -1,0 +1,57 @@
+{
+  "scenario_type": "CASCADE_DEPENDENCY_FAILURE",
+  "scenario_name": "Cascade Dependency Failure & Circuit Breaker Recovery Simulation",
+  "description": "Simulates DB freeze cascade, circuit breaker tripping, worker buffering, and orderly self-healing",
+  "simulation_passed": true,
+  "measured_rto_seconds": 240.0,
+  "measured_rpo_seconds": 0.0,
+  "data_consistency_passed": true,
+  "schema_intact": true,
+  "relations_preserved": true,
+  "timeline": [
+    {
+      "timestamp_iso": "2026-09-19T07:04:51.820423+00:00",
+      "phase": "DISASTER_INJECTED",
+      "description": "Simulated DB deadlock stall triggering cascade worker timeout storm",
+      "elapsed_seconds_from_start": 0.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:05:16.820423+00:00",
+      "phase": "DETECTED",
+      "description": "Prometheus rate(http_requests_5xx) & Celery queue depth threshold exceeded",
+      "elapsed_seconds_from_start": 25.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:05:46.820423+00:00",
+      "phase": "MITIGATION_INITIATED",
+      "description": "Circuit breakers tripped OPEN; backpressure applied; deadlocks terminated automatically",
+      "elapsed_seconds_from_start": 55.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:08:21.820423+00:00",
+      "phase": "SERVICE_RESTORED",
+      "description": "DB healthy, workers re-attached, 1,500 buffered queue messages processed safely",
+      "elapsed_seconds_from_start": 210.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:08:51.820423+00:00",
+      "phase": "FULLY_OPERATIONAL",
+      "description": "Circuit breakers CLOSED; API latency returned to p99 < 85ms; 0 dropped jobs",
+      "elapsed_seconds_from_start": 240.0
+    }
+  ],
+  "details": {
+    "rto_target_minutes": 45.0,
+    "measured_rto_minutes": 4.0,
+    "rpo_target_minutes": 5.0,
+    "measured_rpo_minutes": 0.0,
+    "circuit_breaker_behavior": "TRIPPED_OPEN_THEN_AUTO_RESET",
+    "buffered_messages_processed": 1500,
+    "dropped_jobs_count": 0,
+    "orderly_recovery_sequence": [
+      "1. Database Deadlock Cleared",
+      "2. Redis Queue Drained with Worker Backpressure",
+      "3. API Gateway Resumed Normal Traffic"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "scenario_type": "STORAGE_FAILURE",
+  "scenario_name": "Object Storage Catastrophic Loss & Hash Parity Simulation",
+  "description": "Simulates document repository loss, cross-region failover, and cryptographic hash verification",
+  "simulation_passed": true,
+  "measured_rto_seconds": 320.0,
+  "measured_rpo_seconds": 30.0,
+  "data_consistency_passed": true,
+  "schema_intact": true,
+  "relations_preserved": true,
+  "timeline": [
+    {
+      "timestamp_iso": "2026-09-19T07:04:51.820190+00:00",
+      "phase": "DISASTER_INJECTED",
+      "description": "Simulated total unavailability and deletion of primary document storage bucket",
+      "elapsed_seconds_from_start": 0.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:05:11.820190+00:00",
+      "phase": "DETECTED",
+      "description": "Storage synthetic health probe failed with S3 API error; SEV-1 triggered",
+      "elapsed_seconds_from_start": 20.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:05:41.820190+00:00",
+      "phase": "MITIGATION_INITIATED",
+      "description": "DNS failover switched read path to us-west-2 replica; vault restore initiated for primary",
+      "elapsed_seconds_from_start": 50.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:09:31.820190+00:00",
+      "phase": "SERVICE_RESTORED",
+      "description": "Primary bucket recreated, 245 backup packages synchronized from WORM vault",
+      "elapsed_seconds_from_start": 280.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:10:11.820190+00:00",
+      "phase": "FULLY_OPERATIONAL",
+      "description": "All document SHA-256 hashes matched original manifests (100.0% integrity match)",
+      "elapsed_seconds_from_start": 320.0
+    }
+  ],
+  "details": {
+    "rto_target_minutes": 45.0,
+    "measured_rto_minutes": 5.33,
+    "rpo_target_minutes": 5.0,
+    "measured_rpo_minutes": 0.5,
+    "total_documents_verified": 245,
+    "hash_matches_count": 245,
+    "hash_mismatches_count": 0,
+    "cryptographic_hash_parity_verified": true,
+    "storage_provider_restored": "AWS S3 Multi-AZ + Object Lock"
+  }
+}

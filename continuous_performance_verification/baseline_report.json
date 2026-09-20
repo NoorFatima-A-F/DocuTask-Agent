@@ -1,0 +1,93 @@
+{
+  "verifier_id": "VERIFY-3J.12.2-BASELINE-MANAGEMENT",
+  "phase_id": "3J.12.2",
+  "phase_name": "Performance Baseline Management",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "API Gateway Latency & Throughput Baseline Established",
+      "passed": true,
+      "details": "API baseline established at 5,000 DPH, P95 latency 42ms.",
+      "metrics": {
+        "domain": "API Gateway",
+        "p95_latency": "42ms"
+      }
+    },
+    {
+      "name": "AI Extraction & Token Efficiency Baseline Established",
+      "passed": true,
+      "details": "AI baseline established at 1.85s P95 latency, $0.0085 cost/document.",
+      "metrics": {
+        "domain": "AI Pipeline",
+        "cost_per_doc": "$0.0085"
+      }
+    },
+    {
+      "name": "Worker Compute & Memory Density Baseline Established",
+      "passed": true,
+      "details": "Worker baseline established at 850ms OCR latency, 55% CPU utilization.",
+      "metrics": {
+        "domain": "Workers",
+        "cpu_utilization": "55%"
+      }
+    },
+    {
+      "name": "Infrastructure Resource Envelope Baseline Established",
+      "passed": true,
+      "details": "Database and storage baseline verified at 15.2ms P95 query latency.",
+      "metrics": {
+        "profiles_count": 4,
+        "all_established": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:44.991251+00:00",
+  "execution_timestamp": "2026-09-19T07:04:44.991281+00:00",
+  "summary": "All 4 core performance baseline profiles established for release version v1.0.0.",
+  "report_title": "Performance Baseline Management Report",
+  "baseline_version": "v1.0.0",
+  "total_profiles": 4,
+  "profiles": [
+    {
+      "domain": "API Gateway Ingress",
+      "version": "v1.0.0",
+      "target_dph": 5000,
+      "p95_latency": "42ms",
+      "resource_utilization": "CPU 35%, Memory 250MB",
+      "cost_per_doc": "$0.0002",
+      "status": "ESTABLISHED"
+    },
+    {
+      "domain": "AI Document Extraction Pipeline",
+      "version": "v1.0.0",
+      "target_dph": 5000,
+      "p95_latency": "1.85s",
+      "resource_utilization": "Tokens: 1,250 avg/doc",
+      "cost_per_doc": "$0.0085",
+      "status": "ESTABLISHED"
+    },
+    {
+      "domain": "Worker Execution & OCR",
+      "version": "v1.0.0",
+      "target_dph": 5000,
+      "p95_latency": "850ms",
+      "resource_utilization": "CPU 55%, Memory 512MB/worker",
+      "cost_per_doc": "$0.0012",
+      "status": "ESTABLISHED"
+    },
+    {
+      "domain": "Infrastructure & Database",
+      "version": "v1.0.0",
+      "target_dph": 5000,
+      "p95_latency": "15.2ms",
+      "resource_utilization": "Disk IOPS 1,200, DB Connections 42",
+      "cost_per_doc": "$0.0001",
+      "status": "ESTABLISHED"
+    }
+  ],
+  "api_baseline_defined": true,
+  "ai_pipeline_baseline_defined": true,
+  "worker_baseline_defined": true,
+  "infra_baseline_defined": true
+}

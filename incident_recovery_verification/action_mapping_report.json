@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "mapped_incident_types_count": 5,
+  "mappings": {
+    "DATABASE_OUTAGE": {
+      "step_count": 5,
+      "steps": [
+        "verify_container_state",
+        "restart_database_service",
+        "validate_connections",
+        "run_health_checks",
+        "restore_traffic"
+      ],
+      "all_idempotent": true,
+      "has_rollback": true
+    },
+    "WORKER_POOL_CRASH": {
+      "step_count": 3,
+      "steps": [
+        "restart_workers",
+        "verify_heartbeat",
+        "validate_queue_processing"
+      ],
+      "all_idempotent": true,
+      "has_rollback": false
+    },
+    "AI_PROVIDER_DEGRADATION": {
+      "step_count": 3,
+      "steps": [
+        "enable_fallback_mode",
+        "queue_pending_tasks",
+        "retry_failed_requests"
+      ],
+      "all_idempotent": true,
+      "has_rollback": true
+    },
+    "REDIS_QUEUE_FAILURE": {
+      "step_count": 2,
+      "steps": [
+        "restart_redis_service",
+        "verify_queue_depth_and_ping"
+      ],
+      "all_idempotent": true,
+      "has_rollback": false
+    },
+    "STORAGE_OUTAGE": {
+      "step_count": 2,
+      "steps": [
+        "switch_storage_endpoint",
+        "verify_storage_read_write"
+      ],
+      "all_idempotent": true,
+      "has_rollback": true
+    }
+  },
+  "all_mappings_valid": true
+}

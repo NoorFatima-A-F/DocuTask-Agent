@@ -1,0 +1,59 @@
+{
+  "part_id": "PART_11_HIRING",
+  "title": "Part 11 \u2014 Autonomous Hiring Verification",
+  "description": "Validates automated skill gap detection, requisition synthesis, candidate evaluation, agent provisioning, and onboarding.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.03,
+  "metrics": {
+    "skill_gaps_identified": 4,
+    "agents_provisioned_and_onboarded": 4,
+    "provisioning_latency_ms": 120.0,
+    "hiring_accuracy_pct": 100.0
+  },
+  "assertions": [
+    {
+      "name": "assert_autonomous_skill_gap_detection",
+      "passed": true,
+      "message": "Workforce capacity planner accurately identified unstaffed Japanese OCR skill deficit",
+      "execution_time_ms": 0.002,
+      "details": {
+        "skill_gap": "JAPANESE_OCR",
+        "deficit_units": 1500
+      }
+    },
+    {
+      "name": "assert_candidate_capability_evaluation",
+      "passed": true,
+      "message": "Candidate evaluation harness screened and selected top-performing agent persona (99.0% accuracy)",
+      "execution_time_ms": 0.006,
+      "details": {
+        "hired_candidate": "cand_jp_1"
+      }
+    },
+    {
+      "name": "assert_dynamic_agent_provisioning",
+      "passed": true,
+      "message": "Zero-trust identity credentials and operational keys issued to newly spawned agent instance",
+      "execution_time_ms": 0.002,
+      "details": {
+        "id": "agt_jp_specialist_01",
+        "identity_cert": "CERT-2026-JP-998",
+        "keys_issued": true,
+        "status": "PROVISIONED"
+      }
+    },
+    {
+      "name": "assert_automated_onboarding_and_knowledge_sync",
+      "passed": true,
+      "message": "Automated 4-step onboarding pipeline primed digital employee with departmental policies and memory",
+      "execution_time_ms": 0.001,
+      "details": {
+        "completed_steps": 4
+      }
+    }
+  ]
+}

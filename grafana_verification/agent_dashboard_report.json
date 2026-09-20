@@ -1,0 +1,61 @@
+{
+  "dashboard_id": "docutask-agent-runtime",
+  "title": "Agent Runtime Operations",
+  "category": "agent_runtime",
+  "total_panels": 5,
+  "refresh_rate": "5s",
+  "panels": [
+    {
+      "panel_id": 1,
+      "title": "Active, Completed & Failed Agent Tasks",
+      "panel_type": "stat",
+      "promql_query": "docutask_agent_active_tasks",
+      "operational_question": "How many autonomous agent tasks are currently running in parallel?",
+      "threshold_critical": null,
+      "threshold_warning": null,
+      "unit": "tasks"
+    },
+    {
+      "panel_id": 2,
+      "title": "Planner Execution Duration",
+      "panel_type": "timeseries",
+      "promql_query": "histogram_quantile(0.95, sum(rate(docutask_agent_planning_seconds_bucket[5m])) by (le))",
+      "operational_question": "How long does the agent planner take to synthesize execution steps?",
+      "threshold_critical": 5.0,
+      "threshold_warning": 2.0,
+      "unit": "s"
+    },
+    {
+      "panel_id": 3,
+      "title": "Agent Tool Call Invocations",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_agent_tool_calls_total[5m])) by (tool)",
+      "operational_question": "Which external tools are being called most frequently?",
+      "threshold_critical": null,
+      "threshold_warning": null,
+      "unit": "calls/s"
+    },
+    {
+      "panel_id": 4,
+      "title": "Context Store & Memory Operations Latency",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_agent_memory_ops_duration_seconds[5m]))",
+      "operational_question": "Is the conversational context store responding quickly?",
+      "threshold_critical": 0.5,
+      "threshold_warning": 0.1,
+      "unit": "s"
+    },
+    {
+      "panel_id": 5,
+      "title": "Reflection Runs & Self-Correction Cycles",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_agent_reflection_runs_total[5m]))",
+      "operational_question": "How frequently is the agent performing self-correction loops?",
+      "threshold_critical": null,
+      "threshold_warning": null,
+      "unit": "cycles/s"
+    }
+  ],
+  "all_queries_valid": true,
+  "status": "PASS"
+}

@@ -1,0 +1,63 @@
+{
+  "report_title": "Health Signal Correlation Report",
+  "total_raw_signals": 11,
+  "total_correlated_incidents": 3,
+  "noise_reduction_pct": 72.73,
+  "incidents": [
+    {
+      "incident_id": "INC-CORR-001",
+      "incident_name": "Database Connection Starvation & API Gateway Cascade",
+      "root_component": "postgres-database",
+      "severity": "CRITICAL",
+      "raw_signals": [
+        "postgres_pool_checkout_timeout",
+        "postgres_active_connections_100",
+        "fastapi_http_500_surge",
+        "readiness_probe_failing"
+      ],
+      "temporal_window": "Events clustered within 180 seconds",
+      "dependency_chain": [
+        "postgres-database",
+        "fastapi-core-gateway",
+        "kubernetes-service-ingress"
+      ],
+      "incident_status": "RESOLVED"
+    },
+    {
+      "incident_id": "INC-CORR-002",
+      "incident_name": "Worker Memory Creep & Queue Depth Growth Incident",
+      "root_component": "celery-worker-pool",
+      "severity": "HIGH",
+      "raw_signals": [
+        "worker_rss_memory_high",
+        "tesseract_ocr_latency_spike",
+        "redis_queue_backlog_exceeded",
+        "celery_subprocess_oom_kill"
+      ],
+      "temporal_window": "Events clustered within 240 seconds",
+      "dependency_chain": [
+        "celery-worker-pool",
+        "redis-task-queue"
+      ],
+      "incident_status": "RESOLVED"
+    },
+    {
+      "incident_id": "INC-CORR-003",
+      "incident_name": "Upstream Gemini AI Quota Saturation & Document Delay",
+      "root_component": "gemini-1.5-flash-client",
+      "severity": "HIGH",
+      "raw_signals": [
+        "gemini_api_http_429",
+        "tpm_token_bucket_exhausted",
+        "document_extraction_stage_timeout"
+      ],
+      "temporal_window": "Events clustered within 60 seconds",
+      "dependency_chain": [
+        "gemini-1.5-flash-client",
+        "extraction-pipeline-executor"
+      ],
+      "incident_status": "RESOLVED"
+    }
+  ],
+  "correlation_valid": true
+}

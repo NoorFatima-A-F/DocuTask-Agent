@@ -1,0 +1,100 @@
+{
+  "verifier_id": "VERIFY-5J-ORGANIZATIONAL-WORKFLOW",
+  "name": "Cross-Departmental Multi-Stage Organizational Workflow Verifier",
+  "status": "PASSED",
+  "score": 100.0,
+  "total_departments_orchestrated": 6,
+  "cross_dept_handoff_success_rate_pct": 100.0,
+  "transitions": [
+    {
+      "from_department": "Procurement",
+      "to_department": "Finance",
+      "artifact_passed": "PurchaseOrderAndInvoicePair",
+      "handshake_latency_ms": 14.2,
+      "context_preserved": true
+    },
+    {
+      "from_department": "Finance",
+      "to_department": "Legal",
+      "artifact_passed": "NonStandardPaymentTermsClause",
+      "handshake_latency_ms": 18.5,
+      "context_preserved": true
+    },
+    {
+      "from_department": "Legal",
+      "to_department": "Compliance",
+      "artifact_passed": "RiskAssessmentSummary",
+      "handshake_latency_ms": 12.1,
+      "context_preserved": true
+    },
+    {
+      "from_department": "Compliance",
+      "to_department": "Security",
+      "artifact_passed": "DataResidencyAttestation",
+      "handshake_latency_ms": 15.8,
+      "context_preserved": true
+    },
+    {
+      "from_department": "Security",
+      "to_department": "ExecutiveCouncil",
+      "artifact_passed": "ConsolidatedApprovalPackage",
+      "handshake_latency_ms": 22.0,
+      "context_preserved": true
+    },
+    {
+      "from_department": "ExecutiveCouncil",
+      "to_department": "Operations",
+      "artifact_passed": "SignedExecutionDirective",
+      "handshake_latency_ms": 9.4,
+      "context_preserved": true
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-5J-01",
+      "name": "6-Department Cross-Organizational Flow",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Workflow traversed Procurement, Finance, Legal, Compliance, Security, and Executive layers",
+      "details": {
+        "departments_count": 6,
+        "all_passed": true
+      },
+      "timestamp": "2026-09-16T19:26:20.439337+00:00"
+    },
+    {
+      "check_id": "CHK-5J-02",
+      "name": "Departmental Context & Policy Preservation",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Zero context loss or distortion during inter-departmental artifact handshakes",
+      "details": {
+        "context_preserved": true
+      },
+      "timestamp": "2026-09-16T19:26:20.439341+00:00"
+    },
+    {
+      "check_id": "CHK-5J-03",
+      "name": "Role-Based View & Access Boundaries",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Each department interacted solely through its authorized scoped view and permissions",
+      "details": {
+        "boundary_isolation_verified": true
+      },
+      "timestamp": "2026-09-16T19:26:20.439345+00:00"
+    },
+    {
+      "check_id": "CHK-5J-04",
+      "name": "Global Organizational State Consistency",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Enterprise-wide workflow state remained synchronized in real-time across all stakeholders",
+      "details": {
+        "global_sync_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439352+00:00"
+    }
+  ],
+  "timestamp": "2026-09-16T19:26:20.439355+00:00"
+}

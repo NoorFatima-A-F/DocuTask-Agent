@@ -1,0 +1,53 @@
+{
+  "verifier_id": "VERIFY-3J.5.15-CAPACITY-PLANNING",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Worker Unit Processing Velocity (120 docs/worker/hour)",
+      "passed": true,
+      "details": "Each worker node delivers 120.0 documents/hour steady throughput",
+      "metrics": {
+        "rate_per_worker": 120.0
+      }
+    },
+    {
+      "name": "10k Documents/Hour Scaling Formula Validation",
+      "passed": true,
+      "details": "Scaling formula (10,000 / 120) yields exactly 84 worker instances required",
+      "metrics": {
+        "target_workload": 10000,
+        "required_workers": 84
+      }
+    },
+    {
+      "name": "Infrastructure Scalability & Footprint Feasibility (< 100 Nodes)",
+      "passed": true,
+      "details": "Required cluster footprint (84 workers) is well within current cluster capacity ceiling (100 nodes)",
+      "metrics": {
+        "max_nodes": 100,
+        "projected_nodes": 84
+      }
+    },
+    {
+      "name": "Linear Scale Cost & CPU Extrapolation",
+      "passed": true,
+      "details": "Linear scaling model validated with sub-linear resource overhead during worker pool expansion",
+      "metrics": {
+        "scaling_model": "Linear"
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:01.749140+00:00",
+  "execution_timestamp": "2026-09-19T07:05:01.749206+00:00",
+  "summary": "",
+  "report_title": "Capacity Planning & Scaling Model Report",
+  "current_capacity_dph": 1200,
+  "current_workers": 10,
+  "target_workload_dph": 10000,
+  "required_workers": 84,
+  "capacity_formula": "Capacity = Workers x Processing Rate (120 docs/hr/worker)",
+  "scaling_plan_feasible": true
+}

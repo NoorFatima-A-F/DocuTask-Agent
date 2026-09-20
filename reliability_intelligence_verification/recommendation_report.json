@@ -1,0 +1,43 @@
+{
+  "report_title": "Resilience Recommendation Report",
+  "total_recommendations": 4,
+  "recommendations": [
+    {
+      "recommendation_id": "REC-RES-001",
+      "component": "OCR Pipeline",
+      "category": "Configuration",
+      "recommendation_text": "Enforce Celery max-tasks-per-child=50 and hard cgroup memory ceiling of 512MB per child process.",
+      "priority": "P2-High",
+      "expected_impact": "Reduces worker memory creep crash risk by 85%.",
+      "effort_estimate": "Low (Configuration update)"
+    },
+    {
+      "recommendation_id": "REC-RES-002",
+      "component": "AI Provider",
+      "category": "Scaling & Architecture",
+      "recommendation_text": "Deploy adaptive client-side token-bucket rate limiter with automatic multi-model fallback to secondary Flash endpoints.",
+      "priority": "P2-High",
+      "expected_impact": "Eliminates 429 quota exhaustion bursts during morning traffic peaks.",
+      "effort_estimate": "Medium (Code change)"
+    },
+    {
+      "recommendation_id": "REC-RES-003",
+      "component": "Database",
+      "category": "Monitoring",
+      "recommendation_text": "Add statement_timeout=5000ms to all asynchronous search sessions and alert when active pool > 80%.",
+      "priority": "P3-Medium",
+      "expected_impact": "Prevents connection starvation from rogue read queries.",
+      "effort_estimate": "Low (Config / SQL update)"
+    },
+    {
+      "recommendation_id": "REC-RES-004",
+      "component": "Queue",
+      "category": "Scaling",
+      "recommendation_text": "Configure Kubernetes KEDA / Celery worker autoscaling based on Redis queue depth metric (> 100 items).",
+      "priority": "P3-Medium",
+      "expected_impact": "Guarantees p95 document queue latency remains under 5.0 seconds.",
+      "effort_estimate": "Medium (K8s HPA manifest)"
+    }
+  ],
+  "high_priority_count": 2
+}

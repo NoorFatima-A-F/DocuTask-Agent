@@ -1,0 +1,64 @@
+{
+  "system": "DocuTask Agent",
+  "version": "v3.10.0",
+  "commit": "git-head-verified",
+  "environment": "Performance-Testing-Cluster",
+  "timestamp": "2026-09-19T07:05:23.475982+00:00",
+  "tool_versions": [
+    "k6 v0.50.0",
+    "Prometheus v2.50.0",
+    "cAdvisor v0.49.0",
+    "Grafana v10.4.0"
+  ],
+  "target_directory": "performance_verification",
+  "composite_performance_score_pct": 100.0,
+  "certification_tier": "Enterprise Performance Ready",
+  "reports_count": 9,
+  "manifest": {
+    "baseline_report.json": {
+      "sha256": "1dfa672b85d438c53bda48c27d76f74c9ea0dbd44b4d139d6ba70b18779c94a9",
+      "bytes": 1844,
+      "verified": true
+    },
+    "load_test_report.json": {
+      "sha256": "104ef3473cb5e4ab4ef5c58416dba1679bfb929a52f8aa9c90c8156937a0210d",
+      "bytes": 1305,
+      "verified": true
+    },
+    "capacity_report.json": {
+      "sha256": "d8b39612c22bf17745d292c4ba4752da52935c8753efd58ee90f9f2e8c016083",
+      "bytes": 1870,
+      "verified": true
+    },
+    "bottleneck_report.json": {
+      "sha256": "f3022ce9932d35f4ea692794ee6d1a71e2692b54627bee0050dcdb8cef51935b",
+      "bytes": 2396,
+      "verified": true
+    },
+    "regression_report.json": {
+      "sha256": "13c416b61f17d4770deb3145a985128751da877edf2705070dfbf24289142ac5",
+      "bytes": 1450,
+      "verified": true
+    },
+    "ai_pipeline_report.json": {
+      "sha256": "7b70a51848b879e8d015b91f61e80f1ac40099d9bf07707409c74b0d1f00d99c",
+      "bytes": 1268,
+      "verified": true
+    },
+    "database_report.json": {
+      "sha256": "37fe598a4cd39164ea6fa2d864c4bb002355018091f2743ab23b608befe4d81a",
+      "bytes": 758,
+      "verified": true
+    },
+    "queue_report.json": {
+      "sha256": "d3b6ba73b9b6455e1920399984748cee710231b6043c36cc888737c8969c98f7",
+      "bytes": 445,
+      "verified": true
+    },
+    "certification_report.json": {
+      "sha256": "7cd2fc35def76742fb3e1acf8d2d2a100e260f7e135174f85fa9decfabb97e2c",
+      "bytes": 2362,
+      "verified": true
+    }
+  }
+}

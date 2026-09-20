@@ -1,0 +1,60 @@
+{
+  "verification_id": "health-rec-caeedc04",
+  "timestamp": "2026-09-19T07:05:11.726082+00:00",
+  "overall_recovery_score": 99.17,
+  "certification_tier": "Autonomous Recovery Ready",
+  "passed": true,
+  "pillar_scores": [
+    {
+      "pillar_name": "Failure Detection",
+      "weight": 0.2,
+      "raw_score": 100.0,
+      "weighted_score": 20.0,
+      "status": "EXCELLENT",
+      "details": "5/5 failure modes detected. MTTD: 1.8s."
+    },
+    {
+      "pillar_name": "Recovery Correctness",
+      "weight": 0.25,
+      "raw_score": 96.67,
+      "weighted_score": 24.17,
+      "status": "EXCELLENT",
+      "details": "Components recovered: 5/5, Self-healing: 100.0%."
+    },
+    {
+      "pillar_name": "Recovery Safety",
+      "weight": 0.2,
+      "raw_score": 100.0,
+      "weighted_score": 20.0,
+      "status": "EXCELLENT",
+      "details": "5 safety protections active (backoffs, limits, blast-radius isolation)."
+    },
+    {
+      "pillar_name": "Validation Quality",
+      "weight": 0.15,
+      "raw_score": 100.0,
+      "weighted_score": 15.0,
+      "status": "EXCELLENT",
+      "details": "Probes passed: 4/4, Chaos passed: 4/4."
+    },
+    {
+      "pillar_name": "Observability",
+      "weight": 0.1,
+      "raw_score": 100.0,
+      "weighted_score": 10.0,
+      "status": "EXCELLENT",
+      "details": "6 recovery metrics exported to Prometheus; dashboard active."
+    },
+    {
+      "pillar_name": "Security",
+      "weight": 0.1,
+      "raw_score": 100.0,
+      "weighted_score": 10.0,
+      "status": "EXCELLENT",
+      "details": "RBAC authorization enforced; 1 unauthorized recovery attempts blocked, 2 authorized actions executed."
+    }
+  ],
+  "mttr_seconds": 10.23,
+  "mttd_seconds": 1.8,
+  "recovery_success_rate": 100.0
+}

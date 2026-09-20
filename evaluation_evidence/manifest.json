@@ -1,0 +1,58 @@
+{
+  "ai_capability_report.json": {
+    "sha256": "525d0e9c79a270f0bac934d73ae69841e34a13bab5857d99ce04ab7562b20b5e",
+    "size_bytes": 2804
+  },
+  "llm_evaluation_report.json": {
+    "sha256": "a3490abef78a9248ed987b54bf64f3dbd8e41f9ac17f7475fb23cb40e0a74e28",
+    "size_bytes": 2973
+  },
+  "agent_evaluation_report.json": {
+    "sha256": "9aa894c8849d1b9f166b6503bea766a9944d324a0cc715cdbde5894f6fe380f9",
+    "size_bytes": 2901
+  },
+  "rag_evaluation_report.json": {
+    "sha256": "9dec4ae9f0002c02b5c097f10c112ecde9cb357d3b5beef0096f2ec04a30bc00",
+    "size_bytes": 3036
+  },
+  "performance_report.json": {
+    "sha256": "b3ebc30e4b260bcb2281bb6c510c6317e91fd6f5c4601638ca1bbee1086e9cc1",
+    "size_bytes": 2830
+  },
+  "cost_business_report.json": {
+    "sha256": "4ba3ea9f6295579c2cb7cf78c64f59cd420d1320ed6498e7f143024afeb25442",
+    "size_bytes": 3084
+  },
+  "reliability_report.json": {
+    "sha256": "4c1480986f478aa117a9d352fd806238ff47c6ba05d17f4af15cfe91373d268f",
+    "size_bytes": 2779
+  },
+  "security_report.json": {
+    "sha256": "c792813b140aeeeb660bf8f8abd274a88ad0e928c02137ca097a649df46cd752",
+    "size_bytes": 2751
+  },
+  "explainability_report.json": {
+    "sha256": "e3427ac913cdb7c6bb5d8042133cb67646862024b403823cd8940c9ec0d57ac9",
+    "size_bytes": 3071
+  },
+  "human_experience_report.json": {
+    "sha256": "e4363186bb8adca7a3c30c7f62d7c11d49846f1571df6ba13b44dd314fc641bb",
+    "size_bytes": 3039
+  },
+  "ai_evaluation_score.json": {
+    "sha256": "6310bcf63aa6c7c77893916f540dda7044ccdd1309b9665cd25040a13485055f",
+    "size_bytes": 1520
+  },
+  "portfolio_showcase_report.json": {
+    "sha256": "309258293999eb6b3c68add12d989bbd5145a5ded8a1db83af03f4720f129779",
+    "size_bytes": 35743
+  },
+  "executive_case_study.md": {
+    "sha256": "e773bace24ff47cfe49986d8c30c0d8e26ab467c5bd50abf5fa764127c595cc7",
+    "size_bytes": 2186
+  },
+  "technical_whitepaper.md": {
+    "sha256": "ba72b4eb172b2560262f3f7503448fecd20a2f3f75a08da72177bcf8f068b1cf",
+    "size_bytes": 1813
+  }
+}

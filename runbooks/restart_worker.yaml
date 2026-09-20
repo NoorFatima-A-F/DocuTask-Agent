@@ -1,0 +1,44 @@
+version: "1.0"
+runbook_id: "RB-WORKER-001"
+name: "Celery Worker Graceful Recycle & Recovery"
+target_service: "worker_fleet"
+risk_level: "LOW"
+auto_execute: true
+approval_required: false
+timeout_seconds: 60
+
+pre_checks:
+  - name: "Verify worker failure signal"
+    condition: "worker_active_count < 2 or (time() - worker_heartbeat_timestamp > 60)"
+  - name: "Verify queue broker connectivity"
+    condition: "redis_queue_status == 'HEALTHY'"
+
+steps:
+  - step: 1
+    action: "drain_in_flight_tasks"
+    command: "celery -A app.worker control cancel_consumer document_tasks --timeout=10"
+    allow_failure: true
+  - step: 2
+    action: "stop_unhealthy_worker_container"
+    command: "docker stop --time=10 docutask-worker-node"
+  - step: 3
+    action: "restart_worker_container"
+    command: "docker start docutask-worker-node"
+  - step: 4
+    action: "verify_worker_heartbeat"
+    command: "curl -s -f http://worker:8002/health/live"
+    retry_count: 3
+    retry_interval_seconds: 5
+  - step: 5
+    action: "resume_queue_processing"
+    command: "celery -A app.worker control add_consumer document_tasks"
+
+post_checks:
+  - name: "Validate worker fleet count"
+    condition: "worker_active_count >= 2"
+  - name: "Validate queue drain rate"
+    condition: "rate(redis_queue_depth[1m]) <= 0"
+
+rollback:
+  action: "spawn_ephemeral_fallback_worker"
+  command: "docker run -d --name docutask-worker-fallback docutask/worker:latest"

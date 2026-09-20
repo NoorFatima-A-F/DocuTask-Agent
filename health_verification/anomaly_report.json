@@ -1,0 +1,47 @@
+{
+  "total_anomalies_detected": 3,
+  "anomalies": [
+    {
+      "metric": "ai.model_latency",
+      "service": "gemini",
+      "observed_value": 1850.0,
+      "expected_range": "150.0 - 800.0 ms (z-score=4.8)",
+      "severity": "WARNING",
+      "confidence": 0.92,
+      "detection_method": "statistical_zscore",
+      "timestamp": "2026-09-19T07:05:25.349822+00:00"
+    },
+    {
+      "metric": "queue.depth",
+      "service": "celery",
+      "observed_value": 3200.0,
+      "expected_range": "< 500 count (slope=+450/min)",
+      "severity": "CRITICAL",
+      "confidence": 0.95,
+      "detection_method": "trend_slope",
+      "timestamp": "2026-09-19T07:05:25.349822+00:00"
+    },
+    {
+      "metric": "db.connection_usage",
+      "service": "postgres",
+      "observed_value": 88.0,
+      "expected_range": "10.0 - 60.0 % (warn=75%, crit=90%)",
+      "severity": "WARNING",
+      "confidence": 0.99,
+      "detection_method": "threshold",
+      "timestamp": "2026-09-19T07:05:25.349822+00:00"
+    }
+  ],
+  "statistical_detection_active": true,
+  "trend_detection_active": true,
+  "passed": true,
+  "details": {
+    "algorithms_active": [
+      "threshold",
+      "statistical_zscore",
+      "trend_slope",
+      "pattern"
+    ],
+    "z_score_threshold": 2.5
+  }
+}

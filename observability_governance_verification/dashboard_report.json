@@ -1,0 +1,44 @@
+{
+  "report_title": "Enterprise Operations Dashboard Verification Report",
+  "views": [
+    {
+      "tier": "Executive",
+      "view_name": "Executive Reliability & Business Impact Overview",
+      "key_metrics": [
+        "Platform Uptime (30-Day: 99.98%)",
+        "Error Budget Burn Rate & Remaining Budget ($USD Risk)",
+        "Document Processing Volume & SLA Compliance Rate (99.8%)",
+        "AIOps Autonomous Remediation Success Rate (100%)"
+      ],
+      "real_time_streaming": true,
+      "drill_down_supported": true
+    },
+    {
+      "tier": "Engineering",
+      "view_name": "Engineering SRE & Distributed Service Topology",
+      "key_metrics": [
+        "Live Microservice Dependency Graph & Health Overlays",
+        "Distributed Trace Latency Heatmaps & Span Bottlenecks",
+        "Infrastructure Resource Saturation (CPU, RAM, DB Connections)",
+        "Queue Depths, Consumer Lag, and Dead-Letter Activity"
+      ],
+      "real_time_streaming": true,
+      "drill_down_supported": true
+    },
+    {
+      "tier": "AI Operations",
+      "view_name": "AI Agent & LLM Ingestion Intelligence Cockpit",
+      "key_metrics": [
+        "Multi-Model Provider Ingestion Latencies & Fallback Status",
+        "Token Consumption, Cost per Workflow, and Quota Headroom",
+        "Agent Task Planning Accuracy & Step Execution Velocity",
+        "Embedding & Vector Index Query Latency Distributions"
+      ],
+      "real_time_streaming": true,
+      "drill_down_supported": true
+    }
+  ],
+  "views_count": 3,
+  "multi_tier_coverage_pct": 100.0,
+  "status": "PASS"
+}

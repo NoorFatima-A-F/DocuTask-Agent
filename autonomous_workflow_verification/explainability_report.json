@@ -1,0 +1,87 @@
+{
+  "verifier_id": "VERIFY-5L-EXPLAINABILITY",
+  "name": "AI Decision Explainability, Provenance & Reasoning Transparency Verifier",
+  "status": "PASSED",
+  "score": 100.0,
+  "explainability_coverage_pct": 100.0,
+  "citation_fidelity_score_pct": 100.0,
+  "items": [
+    {
+      "item_type": "InvoiceAmountMismatchReasoning",
+      "explanation_provided": true,
+      "evidence_citation_valid": true,
+      "policy_reference_linked": true
+    },
+    {
+      "item_type": "LegalClauseRiskClassification",
+      "explanation_provided": true,
+      "evidence_citation_valid": true,
+      "policy_reference_linked": true
+    },
+    {
+      "item_type": "MedicalTreatmentPriorAuthDecision",
+      "explanation_provided": true,
+      "evidence_citation_valid": true,
+      "policy_reference_linked": true
+    },
+    {
+      "item_type": "FraudDetectionAnomalyJustification",
+      "explanation_provided": true,
+      "evidence_citation_valid": true,
+      "policy_reference_linked": true
+    },
+    {
+      "item_type": "VendorSelectionEvaluationBreakdown",
+      "explanation_provided": true,
+      "evidence_citation_valid": true,
+      "policy_reference_linked": true
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-5L-01",
+      "name": "100% Decision Explainability Coverage",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Every autonomous decision accompanies human-readable reasoning and risk rationale",
+      "details": {
+        "explainability_coverage_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439415+00:00"
+    },
+    {
+      "check_id": "CHK-5L-02",
+      "name": "Verifiable Source Document Citations",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "100% of explanations link directly to verifiable source text spans and page bounding boxes",
+      "details": {
+        "citation_fidelity_score_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439420+00:00"
+    },
+    {
+      "check_id": "CHK-5L-03",
+      "name": "Organizational Policy Reference Mapping",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Decisions cite specific compliance clauses, standard operating procedures, and business rules",
+      "details": {
+        "policy_linked_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439425+00:00"
+    },
+    {
+      "check_id": "CHK-5L-04",
+      "name": "Rejected Alternative Justification",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Explanations explicitly state why competing interpretations or actions were dismissed",
+      "details": {
+        "counterfactual_explanations_present": true
+      },
+      "timestamp": "2026-09-16T19:26:20.439429+00:00"
+    }
+  ],
+  "timestamp": "2026-09-16T19:26:20.439432+00:00"
+}

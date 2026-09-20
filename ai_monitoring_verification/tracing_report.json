@@ -1,0 +1,72 @@
+{
+  "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+  "total_spans_in_workflow": 8,
+  "total_workflow_duration_ms": 2436.0,
+  "ai_inference_duration_ms": 1850.0,
+  "ai_latency_percentage": 75.94,
+  "bottleneck_identified": "gemini_inference_generation (75.9% of total workflow duration)",
+  "spans": [
+    {
+      "span_name": "http_ingress_upload",
+      "service_name": "api_gateway",
+      "avg_duration_ms": 45.0,
+      "is_bottleneck": false,
+      "status_code": "OK"
+    },
+    {
+      "span_name": "task_creation_enqueue",
+      "service_name": "celery_broker",
+      "avg_duration_ms": 18.0,
+      "is_bottleneck": false,
+      "status_code": "OK"
+    },
+    {
+      "span_name": "agent_pipeline_dispatch",
+      "service_name": "agent_runtime",
+      "avg_duration_ms": 32.0,
+      "is_bottleneck": false,
+      "status_code": "OK"
+    },
+    {
+      "span_name": "ocr_text_extraction",
+      "service_name": "ocr_service",
+      "avg_duration_ms": 420.0,
+      "is_bottleneck": false,
+      "status_code": "OK"
+    },
+    {
+      "span_name": "ai_prompt_construction",
+      "service_name": "ai_provider_manager",
+      "avg_duration_ms": 12.0,
+      "is_bottleneck": false,
+      "status_code": "OK"
+    },
+    {
+      "span_name": "gemini_inference_generation",
+      "service_name": "gemini_provider",
+      "avg_duration_ms": 1850.0,
+      "is_bottleneck": true,
+      "status_code": "OK"
+    },
+    {
+      "span_name": "schema_output_validation",
+      "service_name": "validation_engine",
+      "avg_duration_ms": 24.0,
+      "is_bottleneck": false,
+      "status_code": "OK"
+    },
+    {
+      "span_name": "database_result_save",
+      "service_name": "postgres_db",
+      "avg_duration_ms": 35.0,
+      "is_bottleneck": false,
+      "status_code": "OK"
+    }
+  ],
+  "passed": true,
+  "details": {
+    "tracing_standard": "W3C Trace Context (traceparent / tracestate)",
+    "sampling_rate": "100% on errors / 10% on success",
+    "storage_backend": "Grafana Tempo / Jaeger"
+  }
+}

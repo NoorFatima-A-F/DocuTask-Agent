@@ -1,0 +1,4 @@
+# Strictly ignore non-production verification artifacts
+*
+!.gitignore
+!README.md

@@ -1,0 +1,9 @@
+{
+  "payloads_scanned": 5,
+  "api_key_leaks_found": 0,
+  "password_leaks_found": 0,
+  "token_leaks_found": 0,
+  "customer_pii_leaks_found": 0,
+  "zero_leak_verified": true,
+  "status": "PASS"
+}

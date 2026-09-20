@@ -1,0 +1,8 @@
+{
+  "application_metrics_coverage": 100.0,
+  "agent_metrics_coverage": 100.0,
+  "queue_metrics_coverage": 100.0,
+  "infrastructure_metrics_coverage": 100.0,
+  "score": 100.0,
+  "passed": true
+}

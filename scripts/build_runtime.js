@@ -1,0 +1,1 @@
+console.log("hello from powershell literal single quote");

@@ -1,0 +1,8 @@
+{
+  "layer_name": "Layer 4 - Performance Recovery Test",
+  "baseline_latency_ms": 100.0,
+  "recovered_latency_ms": 108.4,
+  "recovery_performance_ratio": 1.08,
+  "acceptable_threshold_ratio": 1.2,
+  "performance_restored": true
+}

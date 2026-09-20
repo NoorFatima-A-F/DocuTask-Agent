@@ -1,0 +1,19 @@
+{
+  "service": "docutask-api",
+  "initial_state": "NOT_READY",
+  "recovery_state_reached": true,
+  "final_state": "READY",
+  "all_prerequisites_met": true,
+  "recovery_duration_seconds": 0.0,
+  "passed": true,
+  "details": {
+    "action_executed": "RECONNECT_POOL",
+    "validation_checks": {
+      "database_transaction": true,
+      "queue_ping": true,
+      "storage_write": true,
+      "worker_heartbeat": true
+    },
+    "recovery_protocol": "NOT_READY -> RECOVERING (Validation Gate) -> READY"
+  }
+}

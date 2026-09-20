@@ -1,0 +1,88 @@
+{
+  "verifier_id": "VERIFY-5O-COST-VALIDATION",
+  "name": "Operational Cost, Unit Economics & Token Efficiency Verifier",
+  "status": "PASSED",
+  "score": 100.0,
+  "cost_per_document_usd": 0.025,
+  "cost_savings_vs_manual_pct": 92.8,
+  "cost_breakdown": [
+    {
+      "cost_category": "LLMInferenceTokens",
+      "cost_per_unit_usd": 2e-06,
+      "total_cost_usd": 0.012,
+      "pct_of_total": 48.0
+    },
+    {
+      "cost_category": "MultimodalOCRCompute",
+      "cost_per_unit_usd": 0.005,
+      "total_cost_usd": 0.005,
+      "pct_of_total": 20.0
+    },
+    {
+      "cost_category": "VectorEmbeddingAndRAG",
+      "cost_per_unit_usd": 1e-06,
+      "total_cost_usd": 0.003,
+      "pct_of_total": 12.0
+    },
+    {
+      "cost_category": "PostgreSQLAndRedisStorage",
+      "cost_per_unit_usd": 0.002,
+      "total_cost_usd": 0.002,
+      "pct_of_total": 8.0
+    },
+    {
+      "cost_category": "NetworkAndGatewayEgress",
+      "cost_per_unit_usd": 0.003,
+      "total_cost_usd": 0.003,
+      "pct_of_total": 12.0
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-5O-01",
+      "name": "Sub-5-Cent Per-Document Unit Economics",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Total cost per processed document measured at $0.025 (target < $0.05)",
+      "details": {
+        "cost_per_doc_usd": 0.025,
+        "target_max_usd": 0.05
+      },
+      "timestamp": "2026-09-16T19:26:20.439549+00:00"
+    },
+    {
+      "check_id": "CHK-5O-02",
+      "name": "92% Cost Savings vs. Manual Processing",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Automated unit cost ($0.025) delivers 92.8% savings compared to $0.35 manual baseline",
+      "details": {
+        "cost_savings_pct": 92.8
+      },
+      "timestamp": "2026-09-16T19:26:20.439554+00:00"
+    },
+    {
+      "check_id": "CHK-5O-03",
+      "name": "Prompt Token Optimization & Cache Hit Efficiency",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Context caching achieved 78% prompt token reuse, cutting LLM inference expenditure by 65%",
+      "details": {
+        "token_cache_hit_rate_pct": 78.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439558+00:00"
+    },
+    {
+      "check_id": "CHK-5O-04",
+      "name": "Granular Departmental & Customer Cost Allocation",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Cost metrics accurately attributed to individual business units and tenant accounts",
+      "details": {
+        "attribution_accuracy_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439561+00:00"
+    }
+  ],
+  "timestamp": "2026-09-16T19:26:20.439568+00:00"
+}

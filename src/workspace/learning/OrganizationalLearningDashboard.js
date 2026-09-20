@@ -1,0 +1,47 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { Badge } from '../../components/ui/Badge';
+import { Card } from '../../components/ui/Card';
+import { BookOpen, Zap, Award, ArrowRight } from 'lucide-react';
+export const OrganizationalLearningDashboard = () => {
+    const learningSummary = {
+        totalReflections: 12,
+        totalMinedLessons: 28,
+        activeStrategies: 7,
+        knowledgeRecords: 44,
+        avgConfidence: 96.2,
+        governanceApprovalRate: 92.5,
+    };
+    const minedLessons = [
+        {
+            id: 'lsn-001',
+            title: 'Parallel Wavefront OCR Sharding',
+            category: 'CONCURRENCY_ALLOCATION',
+            confidence: 96.5,
+            rulesCount: 3,
+            speedup: '+34.2%',
+            guidance: 'Partition document batches > 10 pages into 4 parallel worker shards with jittered retry.',
+            status: 'VERIFIED',
+        },
+        {
+            id: 'lsn-002',
+            title: 'SMT Invariant Pre-Validation Gating',
+            category: 'VALIDATION_STRATEGY',
+            confidence: 99.1,
+            rulesCount: 2,
+            speedup: '100% Invariance',
+            guidance: 'Enforce mathematical SMT verification before emitting confidence score to downstream subscribers.',
+            status: 'VERIFIED',
+        },
+        {
+            id: 'lsn-003',
+            title: 'Exponential Backoff on Upstream Throttling',
+            category: 'RESILIENCE_STRATEGY',
+            confidence: 97.8,
+            rulesCount: 4,
+            speedup: 'Zero Dropped Tasks',
+            guidance: 'Apply base 250ms backoff with exponential multiplier upon encountering HTTP 429 status codes.',
+            status: 'VERIFIED',
+        },
+    ];
+    return (_jsxs("div", { className: "p-6 space-y-6 bg-[#0B1120] min-h-screen text-[#F8FAFC]", children: [_jsxs("div", { className: "flex flex-wrap items-center justify-between gap-4 border-b border-[#1E293B] pb-6", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "p-2 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-xl text-cyan-400", children: _jsx(BookOpen, { className: "w-5 h-5" }) }), _jsxs("div", { children: [_jsxs("h1", { className: "text-xl font-bold font-mono tracking-tight text-white flex items-center gap-2", children: ["Organizational Learning & Knowledge Intelligence", _jsx(Badge, { variant: "intelligence", size: "sm", children: "Phase 13.5 Core" })] }), _jsx("p", { className: "text-xs text-[#94A3B8] font-mono", children: "Continuous institutional learning pipeline extracting verified lessons, execution strategies, and evolutionary rules" })] })] }), _jsx("div", { className: "flex items-center gap-2", children: _jsx(Badge, { variant: "success", size: "md", children: "Self-Improving Autonomous System" }) })] }), _jsxs("div", { className: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4", children: [_jsxs(Card, { className: "p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl font-mono", children: [_jsx("span", { className: "text-[11px] text-[#64748B] block", children: "Total Reflections" }), _jsx("span", { className: "text-2xl font-bold text-white mt-1 block", children: learningSummary.totalReflections })] }), _jsxs(Card, { className: "p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl font-mono", children: [_jsx("span", { className: "text-[11px] text-[#64748B] block", children: "Mined Lessons" }), _jsx("span", { className: "text-2xl font-bold text-cyan-400 mt-1 block", children: learningSummary.totalMinedLessons })] }), _jsxs(Card, { className: "p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl font-mono", children: [_jsx("span", { className: "text-[11px] text-[#64748B] block", children: "Active Strategies" }), _jsx("span", { className: "text-2xl font-bold text-indigo-400 mt-1 block", children: learningSummary.activeStrategies })] }), _jsxs(Card, { className: "p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl font-mono", children: [_jsx("span", { className: "text-[11px] text-[#64748B] block", children: "Knowledge Records" }), _jsx("span", { className: "text-2xl font-bold text-purple-400 mt-1 block", children: learningSummary.knowledgeRecords })] }), _jsxs(Card, { className: "p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl font-mono", children: [_jsx("span", { className: "text-[11px] text-[#64748B] block", children: "Mean Confidence" }), _jsxs("span", { className: "text-2xl font-bold text-emerald-400 mt-1 block", children: [learningSummary.avgConfidence, "%"] })] }), _jsxs(Card, { className: "p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl font-mono", children: [_jsx("span", { className: "text-[11px] text-[#64748B] block", children: "Gov Approval Rate" }), _jsxs("span", { className: "text-2xl font-bold text-teal-400 mt-1 block", children: [learningSummary.governanceApprovalRate, "%"] })] })] }), _jsxs(Card, { className: "p-6 rounded-2xl border border-[#1E293B] bg-gradient-to-br from-[#0F172A] to-[#121B2F] font-mono space-y-4", children: [_jsxs("div", { className: "flex items-center justify-between border-b border-[#1E293B] pb-3", children: [_jsxs("span", { className: "text-xs font-bold text-white flex items-center gap-2", children: [_jsx(Zap, { className: "w-4 h-4 text-amber-400" }), "Autonomous Scientific Learning Cycle"] }), _jsx("span", { className: "text-[11px] text-[#94A3B8]", children: "Hypothesis \u2192 Replay Validation \u2192 Promotion" })] }), _jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-5 gap-3 pt-2 text-center text-xs", children: [_jsxs("div", { className: "p-3 bg-[#0B1120] border border-[#1E293B] rounded-xl space-y-1", children: [_jsx("div", { className: "w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto text-[11px] font-bold", children: "1" }), _jsx("span", { className: "font-bold text-white block", children: "Mission Replay" }), _jsx("span", { className: "text-[10px] text-[#64748B] block", children: "Immutable event traces" })] }), _jsxs("div", { className: "p-3 bg-[#0B1120] border border-[#1E293B] rounded-xl space-y-1", children: [_jsx("div", { className: "w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center mx-auto text-[11px] font-bold", children: "2" }), _jsx("span", { className: "font-bold text-white block", children: "Reflection" }), _jsx("span", { className: "text-[10px] text-[#64748B] block", children: "Macro & Micro KPIs" })] }), _jsxs("div", { className: "p-3 bg-[#0B1120] border border-[#1E293B] rounded-xl space-y-1", children: [_jsx("div", { className: "w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center mx-auto text-[11px] font-bold", children: "3" }), _jsx("span", { className: "font-bold text-white block", children: "Pattern Mining" }), _jsx("span", { className: "text-[10px] text-[#64748B] block", children: "Rule extraction" })] }), _jsxs("div", { className: "p-3 bg-[#0B1120] border border-[#1E293B] rounded-xl space-y-1", children: [_jsx("div", { className: "w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto text-[11px] font-bold", children: "4" }), _jsx("span", { className: "font-bold text-white block", children: "Counterfactual Sim" }), _jsx("span", { className: "text-[10px] text-[#64748B] block", children: "Monte-Carlo replays" })] }), _jsxs("div", { className: "p-3 bg-[#0B1120] border border-[#1E293B] rounded-xl space-y-1", children: [_jsx("div", { className: "w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-[11px] font-bold", children: "5" }), _jsx("span", { className: "font-bold text-white block", children: "Governance Gate" }), _jsx("span", { className: "text-[10px] text-[#64748B] block", children: "Automated promotion" })] })] })] }), _jsxs("div", { className: "space-y-4 font-mono", children: [_jsxs("div", { className: "flex items-center justify-between", children: [_jsxs("h2", { className: "text-sm font-bold text-white flex items-center gap-2", children: [_jsx(Award, { className: "w-4 h-4 text-cyan-400" }), "Recently Mined Institutional Lessons"] }), _jsxs("span", { className: "text-xs text-[#94A3B8]", children: ["Total Lessons: ", minedLessons.length] })] }), _jsx("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-6", children: minedLessons.map((lesson) => (_jsxs(Card, { className: "p-5 rounded-xl border border-[#1E293B] bg-[#0F172A] space-y-3 flex flex-col justify-between", children: [_jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex items-start justify-between gap-2", children: [_jsx(Badge, { variant: "intelligence", size: "sm", children: lesson.category }), _jsxs("span", { className: "text-xs font-bold text-emerald-400", children: [lesson.confidence, "% Conf"] })] }), _jsx("h3", { className: "text-sm font-bold text-white", children: lesson.title }), _jsx("p", { className: "text-xs text-[#94A3B8] leading-relaxed", children: lesson.guidance })] }), _jsxs("div", { className: "pt-3 border-t border-[#1E293B] flex items-center justify-between text-xs", children: [_jsxs("span", { className: "text-cyan-400 font-bold flex items-center gap-1", children: [_jsx(Zap, { className: "w-3.5 h-3.5" }), lesson.speedup] }), _jsxs("span", { className: "text-[#64748B] flex items-center gap-1", children: [lesson.rulesCount, " Rules ", _jsx(ArrowRight, { className: "w-3 h-3 text-[#94A3B8]" })] })] })] }, lesson.id))) })] })] }));
+};

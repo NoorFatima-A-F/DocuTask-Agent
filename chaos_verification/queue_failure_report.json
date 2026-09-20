@@ -1,0 +1,58 @@
+{
+  "verifier_id": "VERIFY-3K.4-QUEUE-FAILURE",
+  "phase_id": "3K.4",
+  "phase_name": "Redis Queue Failure Chaos Testing",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Redis Queue Outage Graceful Degradation Verified",
+      "passed": true,
+      "details": "API entered local synchronous fallback & ingestion buffering when Redis was stopped.",
+      "metrics": {
+        "degraded_mode_activated": true
+      }
+    },
+    {
+      "name": "In-Flight Message Persistence & Zero Drop Verified",
+      "passed": true,
+      "details": "150 in-flight tasks persisted via Redis AOF persistence and Celery unacked task buffers.",
+      "metrics": {
+        "messages_lost": 0,
+        "tasks_preserved": true
+      }
+    },
+    {
+      "name": "Queue Auto-Reconnection & Task Drain Verified",
+      "passed": true,
+      "details": "Workers re-connected to Redis in 12.4s and drained all pending tasks without manual reset.",
+      "metrics": {
+        "queue_recovery_time_seconds": 12.4
+      }
+    },
+    {
+      "name": "Worker Duplicate Task Idempotency Enforced",
+      "passed": true,
+      "details": "Redis deduplication locks ensured zero duplicate extraction records were generated.",
+      "metrics": {
+        "idempotency_enforced": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:41.015527+00:00",
+  "execution_timestamp": "2026-09-19T07:04:41.015547+00:00",
+  "summary": "Redis queue outage chaos verified: zero message loss, graceful API degradation, and 12.4s auto-reconnect.",
+  "report_title": "Redis Queue Failure Chaos Report",
+  "degraded_mode_activated": true,
+  "tasks_preserved": true,
+  "queue_recovery_time_seconds": 12.4,
+  "messages_lost_count": 0,
+  "idempotency_enforced": true,
+  "metrics_summary": {
+    "messages_in_flight": 150,
+    "messages_lost": 0,
+    "retry_count": 3,
+    "queue_reconnect_time_seconds": 12.4,
+    "duplicate_work_prevented": true
+  }
+}

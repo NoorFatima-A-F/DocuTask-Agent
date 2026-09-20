@@ -1,0 +1,11 @@
+{
+  "report_title": "AI Provider Fallback & Degraded Mode Continuity Report",
+  "primary_provider": "Gemini-1.5-Pro",
+  "fallback_provider": "Gemini-1.5-Flash",
+  "timeout_threshold_exceeded": true,
+  "fallback_mode_activated": true,
+  "core_platform_operational": true,
+  "document_extraction_continued": true,
+  "degradation_graceful": true,
+  "ai_recovery_passed": true
+}

@@ -1,0 +1,13 @@
+{
+  "auth_login_enforced": true,
+  "rbac_roles_configured": [
+    "Viewer",
+    "Operator",
+    "Admin"
+  ],
+  "api_key_exposure_found": 0,
+  "token_exposure_found": 0,
+  "pii_customer_data_exposure_found": 0,
+  "zero_leak_verified": true,
+  "status": "PASS"
+}

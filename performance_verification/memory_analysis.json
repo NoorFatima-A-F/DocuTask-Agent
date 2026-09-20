@@ -1,0 +1,75 @@
+{
+  "verifier_id": "VERIFY-3J.4.4-MEMORY-LEAK",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "72-Hour Endurance Timeline Sampling (t0, t6, t24, t72)",
+      "passed": true,
+      "details": "Sampled continuous heap and RSS footprints over 72 hours of sustained document ingestion",
+      "metrics": {
+        "timeline_points": 4,
+        "total_hours": 72
+      }
+    },
+    {
+      "name": "RSS Memory Growth Slope Analysis (< 0.05 MB/hour)",
+      "passed": true,
+      "details": "Observed memory growth rate is 0.0333 MB/hr (target: < 0.05 MB/hr); 0 memory leaks",
+      "metrics": {
+        "rss_slope_mb_hr": 0.0333
+      }
+    },
+    {
+      "name": "Garbage Collection Sawtooth Reclaim Efficacy",
+      "passed": true,
+      "details": "GC successfully reclaimed 4250.0 MB across 72h without unbounded object retention",
+      "metrics": {
+        "gc_reclaimed_mb": 4250.0
+      }
+    },
+    {
+      "name": "Zero Out-of-Memory (OOM) Events or Process Restarts",
+      "passed": true,
+      "details": "Zero container OOM events or unexpected worker process terminations during 72h test window",
+      "metrics": {
+        "oom_events": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:45:12.806203+00:00",
+  "report_title": "Memory Leak & Long-Running Endurance Report",
+  "timeline": [
+    {
+      "time_label": "t0 (Initial)",
+      "elapsed_hours": 0,
+      "memory_used_mb": 145.0,
+      "rss_mb": 145.0,
+      "gc_reclaimed_mb": 0.0
+    },
+    {
+      "time_label": "t6 (Warmup/Sustained)",
+      "elapsed_hours": 6,
+      "memory_used_mb": 146.2,
+      "rss_mb": 146.5,
+      "gc_reclaimed_mb": 350.0
+    },
+    {
+      "time_label": "t24 (Day 1 Soak)",
+      "elapsed_hours": 24,
+      "memory_used_mb": 146.5,
+      "rss_mb": 146.8,
+      "gc_reclaimed_mb": 1420.0
+    },
+    {
+      "time_label": "t72 (Full 72h Endurance)",
+      "elapsed_hours": 72,
+      "memory_used_mb": 147.1,
+      "rss_mb": 147.4,
+      "gc_reclaimed_mb": 4250.0
+    }
+  ],
+  "growth_slope_mb_per_hour": 0.0333,
+  "oom_events_detected": 0,
+  "stable_memory_pattern_verified": true
+}

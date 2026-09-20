@@ -1,0 +1,9 @@
+{
+  "title": "GET /ready Contract Verification",
+  "endpoint": "/ready",
+  "http_method": "GET",
+  "deterministic": true,
+  "zero_sensitive_leak": true,
+  "latency_ms": 8.5,
+  "status": "PASS"
+}

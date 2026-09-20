@@ -1,0 +1,51 @@
+{
+  "verifier_id": "VERIFY-3J.5.13-RESOURCE-UTILIZATION",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Average CPU Headroom (< 50% Average Utilization)",
+      "passed": true,
+      "details": "Average CPU utilization held at 38.5%, providing ample compute headroom",
+      "metrics": {
+        "avg_cpu_pct": 38.5
+      }
+    },
+    {
+      "name": "Peak CPU Burst Guard (< 80% Peak Utilization)",
+      "passed": true,
+      "details": "Peak CPU burst utilization peaked at 72.0%, avoiding throttling or starvation",
+      "metrics": {
+        "peak_cpu_pct": 72.0
+      }
+    },
+    {
+      "name": "Memory RSS Slope Stability (< 0.1 MB/hr)",
+      "passed": true,
+      "details": "Memory RSS growth slope flat at 0.002 MB/hr, demonstrating total leak immunity",
+      "metrics": {
+        "memory_growth_slope_mb_hr": 0.002
+      }
+    },
+    {
+      "name": "Disk I/O Latency & NVMe Throughput (< 5.0ms Latency)",
+      "passed": true,
+      "details": "Disk I/O latency measured at 2.4ms with 340.0 Mbps network throughput",
+      "metrics": {
+        "disk_io_latency_ms": 2.4,
+        "network_mbps": 340.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:01.748595+00:00",
+  "execution_timestamp": "2026-09-19T07:05:01.748656+00:00",
+  "summary": "",
+  "report_title": "Resource Utilization Verification Report",
+  "avg_cpu_pct": 38.5,
+  "peak_cpu_pct": 72.0,
+  "memory_growth_slope_mb_hr": 0.002,
+  "network_bandwidth_mbps": 340.0,
+  "disk_io_latency_ms": 2.4
+}

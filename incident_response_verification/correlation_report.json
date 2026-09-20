@@ -1,0 +1,46 @@
+{
+  "incident_id": "INC-2026-003",
+  "title": "Cascading AI Provider Quota Saturation and Queue Overflow",
+  "causal_chain": [
+    {
+      "sequence_order": 1,
+      "source_component": "api_service",
+      "signal_observed": "Document upload burst (+180 documents/min from batch client)",
+      "timestamp": "2026-09-19T07:05:15.434549+00:00"
+    },
+    {
+      "sequence_order": 2,
+      "source_component": "redis_queue",
+      "signal_observed": "Queue backlog depth surged from 120 -> 2450 messages in 3 minutes",
+      "timestamp": "2026-09-19T07:05:15.434549+00:00"
+    },
+    {
+      "sequence_order": 3,
+      "source_component": "worker_fleet",
+      "signal_observed": "Worker CPU utilization spiked to 88% and memory RSS grew at +0.3%/min",
+      "timestamp": "2026-09-19T07:05:15.434549+00:00"
+    },
+    {
+      "sequence_order": 4,
+      "source_component": "gemini_ai_provider",
+      "signal_observed": "Gemini API rate limit (429) hit; inference latency drifted to 3100ms",
+      "timestamp": "2026-09-19T07:05:15.434549+00:00"
+    },
+    {
+      "sequence_order": 5,
+      "source_component": "agent_runtime",
+      "signal_observed": "Task timeout exception raised; automatic retry queue triggered",
+      "timestamp": "2026-09-19T07:05:15.434549+00:00"
+    }
+  ],
+  "metric_correlation_active": true,
+  "trace_correlation_active": true,
+  "log_correlation_active": true,
+  "root_cause_identified": "Upstream unthrottled document upload burst exceeded Gemini RPM quota ceiling, causing AI inference latency spikes that cascaded into worker thread pool saturation and Redis queue backlog accumulation.",
+  "passed": true,
+  "details": {
+    "graph_algorithm": "Directed Acyclic Graph (DAG) Temporal Causal Inference",
+    "correlation_confidence": 0.96,
+    "cascade_depth": 5
+  }
+}

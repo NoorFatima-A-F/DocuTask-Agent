@@ -1,0 +1,16 @@
+{
+  "replication_health": "HEALTHY",
+  "current_primary_lsn": "16/B374A080",
+  "replica_replay_lsn": "16/B374A080",
+  "replication_lag_seconds": 0.8,
+  "standby_promotion_latency_sec": 12.4,
+  "data_loss_bytes": 0,
+  "passed": true,
+  "details": {
+    "replication_protocol": "PostgreSQL 16 Physical Streaming Replication + pgBackRest WAL Archiving",
+    "synchronous_commit": "remote_write",
+    "measured_lag_bytes": 0,
+    "promotion_mechanism": "Patroni DCS Raft Quorum Standby Leader Promotion",
+    "verdict": "DATABASE_CROSS_REGION_RESILIENCE_VERIFIED"
+  }
+}

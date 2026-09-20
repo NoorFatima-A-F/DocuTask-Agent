@@ -1,0 +1,37 @@
+{
+  "report_title": "AI Model & Prompt Versioning Governance Report",
+  "total_ai_changes_audited": 3,
+  "benchmarks": [
+    {
+      "model_identifier": "gemini-1.5-flash -> gemini-1.5-pro",
+      "prompt_version": "invoice_extraction_prompt_v2.4",
+      "schema_compatibility_pct": 100.0,
+      "extraction_accuracy_pct": 99.6,
+      "latency_delta_ms": 120.0,
+      "token_cost_delta_pct": 15.0,
+      "regression_tests_passed": true,
+      "instant_rollback_capable": true
+    },
+    {
+      "model_identifier": "gemini-1.5-flash (optimized system prompt)",
+      "prompt_version": "receipt_ocr_cleaning_prompt_v3.1",
+      "schema_compatibility_pct": 100.0,
+      "extraction_accuracy_pct": 99.2,
+      "latency_delta_ms": -60.0,
+      "token_cost_delta_pct": -18.0,
+      "regression_tests_passed": true,
+      "instant_rollback_capable": true
+    },
+    {
+      "model_identifier": "gemini-1.5-flash (few-shot structured json)",
+      "prompt_version": "bank_statement_table_parser_v1.8",
+      "schema_compatibility_pct": 100.0,
+      "extraction_accuracy_pct": 99.4,
+      "latency_delta_ms": -25.0,
+      "token_cost_delta_pct": -10.5,
+      "regression_tests_passed": true,
+      "instant_rollback_capable": true
+    }
+  ],
+  "zero_regression_verified": true
+}

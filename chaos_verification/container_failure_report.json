@@ -1,0 +1,73 @@
+{
+  "verifier_id": "VERIFY-3K.2-CONTAINER-FAILURE",
+  "phase_id": "3K.2",
+  "phase_name": "Container Failure Experiments",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Worker Container Hard Termination Resilience Passed",
+      "passed": true,
+      "details": "Worker SIGKILL detected in 2.8s; replacement worker spawned and claimed task in 14.5s.",
+      "metrics": {
+        "detection_sec": 2.8,
+        "recovery_sec": 14.5
+      }
+    },
+    {
+      "name": "In-Flight Document Processing Protection Verified (0 lost jobs)",
+      "passed": true,
+      "details": "In-flight document task preserved via Redis visibility timeout and re-queued cleanly.",
+      "metrics": {
+        "lost_jobs": 0,
+        "duplicates": 0
+      }
+    },
+    {
+      "name": "API Container Fast Restart Resilience Verified",
+      "passed": true,
+      "details": "API gateway restarted and resumed traffic acceptance in 8.2s with zero job loss.",
+      "metrics": {
+        "recovery_time_seconds": 8.2
+      }
+    },
+    {
+      "name": "Zero Data Loss Guarantee Maintained Across Container Failures",
+      "passed": true,
+      "details": "Cryptographic hash validation verified zero corruptions or missing payloads.",
+      "metrics": {
+        "total_data_loss_events": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:41.015229+00:00",
+  "execution_timestamp": "2026-09-19T07:04:41.015244+00:00",
+  "summary": "Container failure chaos experiments verified: zero data loss and automated recovery within 14.5s.",
+  "report_title": "Container Failure Chaos Report",
+  "experiments_executed": 2,
+  "worker_kill_recovery_seconds": 14.5,
+  "api_restart_recovery_seconds": 8.2,
+  "total_data_loss_events": 0,
+  "scenarios": [
+    {
+      "target_container": "celery-worker-pod-1",
+      "injection_action": "SIGKILL during OCR and LLM schema extraction of 50-page PDF",
+      "detection_time_seconds": 2.8,
+      "recovery_time_seconds": 14.5,
+      "lost_jobs_count": 0,
+      "duplicate_processing_count": 0,
+      "data_loss_detected": false,
+      "passed": true
+    },
+    {
+      "target_container": "api-gateway-pod",
+      "injection_action": "SIGTERM sudden restart during active 500-concurrent document upload",
+      "detection_time_seconds": 1.2,
+      "recovery_time_seconds": 8.2,
+      "lost_jobs_count": 0,
+      "duplicate_processing_count": 0,
+      "data_loss_detected": false,
+      "passed": true
+    }
+  ]
+}

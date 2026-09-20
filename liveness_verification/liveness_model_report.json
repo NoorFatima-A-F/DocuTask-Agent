@@ -1,0 +1,150 @@
+{
+  "total_services_defined": 6,
+  "services": [
+    "api",
+    "worker",
+    "scheduler",
+    "gateway",
+    "ocr_engine",
+    "agent_runtime"
+  ],
+  "contracts_valid": true,
+  "isolation_enforced": true,
+  "passed": true,
+  "details": {
+    "contracts": {
+      "api": {
+        "service_name": "docutask-api",
+        "role": "FastAPI REST Gateway",
+        "definition": {
+          "alive": [
+            "process_running",
+            "event_loop_responsive",
+            "internal_state_valid"
+          ],
+          "isolated_from_dependencies": true
+        },
+        "thresholds": {
+          "max_probe_latency_ms": 500,
+          "max_event_loop_lag_ms": 100,
+          "max_memory_percent": 90
+        },
+        "failure_action": {
+          "restart": true,
+          "restart_signal": "SIGKILL",
+          "orchestrator_action": "container_restart"
+        }
+      },
+      "worker": {
+        "service_name": "docutask-worker",
+        "role": "Async Background Task Processor",
+        "definition": {
+          "alive": [
+            "process_running",
+            "heartbeat_active",
+            "task_progress_viable"
+          ],
+          "isolated_from_dependencies": true
+        },
+        "thresholds": {
+          "max_heartbeat_staleness_seconds": 30,
+          "max_stuck_task_duration_seconds": 300,
+          "max_memory_percent": 85
+        },
+        "failure_action": {
+          "restart": true,
+          "restart_signal": "SIGTERM",
+          "orchestrator_action": "pod_recycle"
+        }
+      },
+      "scheduler": {
+        "service_name": "docutask-scheduler",
+        "role": "Periodic Task & Cron Scheduler",
+        "definition": {
+          "alive": [
+            "process_running",
+            "schedule_tick_active"
+          ],
+          "isolated_from_dependencies": true
+        },
+        "thresholds": {
+          "max_tick_drift_seconds": 15,
+          "max_memory_percent": 75
+        },
+        "failure_action": {
+          "restart": true,
+          "restart_signal": "SIGTERM",
+          "orchestrator_action": "container_restart"
+        }
+      },
+      "gateway": {
+        "service_name": "docutask-gateway",
+        "role": "Reverse Proxy & TLS Terminator",
+        "definition": {
+          "alive": [
+            "socket_accepting",
+            "worker_processes_active"
+          ],
+          "isolated_from_dependencies": true
+        },
+        "thresholds": {
+          "max_probe_latency_ms": 200,
+          "max_memory_percent": 80
+        },
+        "failure_action": {
+          "restart": true,
+          "restart_signal": "SIGTERM",
+          "orchestrator_action": "container_restart"
+        }
+      },
+      "ocr_engine": {
+        "service_name": "docutask-ocr",
+        "role": "Local OCR Extraction Engine",
+        "definition": {
+          "alive": [
+            "worker_thread_active",
+            "binary_executable_responsive"
+          ],
+          "isolated_from_dependencies": true
+        },
+        "thresholds": {
+          "max_inference_queue_lag_seconds": 60,
+          "max_memory_percent": 90
+        },
+        "failure_action": {
+          "restart": true,
+          "restart_signal": "SIGKILL",
+          "orchestrator_action": "worker_recycle"
+        }
+      },
+      "agent_runtime": {
+        "service_name": "docutask-agent-runtime",
+        "role": "Autonomous Agent Orchestrator",
+        "definition": {
+          "alive": [
+            "process_running",
+            "inference_loop_responsive"
+          ],
+          "isolated_from_dependencies": true
+        },
+        "thresholds": {
+          "max_execution_freeze_seconds": 45,
+          "max_memory_percent": 85
+        },
+        "failure_action": {
+          "restart": true,
+          "restart_signal": "SIGTERM",
+          "orchestrator_action": "pod_recycle"
+        }
+      }
+    },
+    "supported_states": [
+      "STARTING",
+      "ALIVE",
+      "DEGRADED",
+      "STUCK",
+      "FAILED"
+    ],
+    "verdict": "ENTERPRISE_LIVENESS_CONTRACTS_CERTIFIED"
+  }
+}

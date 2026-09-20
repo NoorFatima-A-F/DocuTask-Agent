@@ -1,0 +1,20 @@
+{
+  "checksum_validation": "PASS",
+  "checksum_algorithm": "SHA-512 + HMAC-SHA256",
+  "digital_signature_suite": "ECDSA-P256-SHA256",
+  "corruption_detected": false,
+  "one_byte_bit_flip_detected": true,
+  "tampered_backups_quarantined": true,
+  "passed": true,
+  "one_byte_modification_detected": true,
+  "sha512_hash_comparison_verified": true,
+  "digital_signature_verification_passed": true,
+  "details": {
+    "checksum_algorithm": "SHA-512 + HMAC-SHA256",
+    "digital_signature_suite": "ECDSA-P256-SHA256",
+    "bit_flip_offset_tested": 10,
+    "original_sha512": "6ccfc9ce7513c7bdbd44279f123a04837fc81228136bbc02824a1716b55407dcb784d34d51e72012f652c7ce1312b7c23efffd3dd7b0902319b3a87169924302",
+    "tampered_sha512": "bea0ce7bea26eaa3b116b927929c90321019e18f1b45bbdb9aa3782b63fa80047e8cc784ae2069bb7da2dcbf55273a6c4e5ebda3066c6200022f2e93be46b163",
+    "containment_action": "QUARANTINE_TAMPERED_ARCHIVE_RAISE_PAGERDUTY_SEV1"
+  }
+}

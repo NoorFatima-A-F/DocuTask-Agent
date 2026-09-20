@@ -1,0 +1,79 @@
+{
+  "verifier_id": "VERIFY-3M.3-COMPUTE-RESOURCE",
+  "phase_id": "3M.3",
+  "phase_name": "Cloud Compute Resource Allocation",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Resource Request and Limit Specifications",
+      "passed": true,
+      "details": "All 3 core service tiers have bounded CPU and memory requests/limits defined.",
+      "metrics": {
+        "services_profiled": 3
+      }
+    },
+    {
+      "name": "CPU Throttling Mitigation",
+      "passed": true,
+      "details": "Throttling limits calibrated with 35% headroom to prevent latency degradation during burst traffic.",
+      "metrics": {
+        "cpu_throttling_prevented": true,
+        "headroom_pct": 35.0
+      }
+    },
+    {
+      "name": "Out-of-Memory (OOM) Protection",
+      "passed": true,
+      "details": "Memory thresholds and heap boundaries prevent unhandled OOM kernel panics.",
+      "metrics": {
+        "oom_prevention_verified": true
+      }
+    },
+    {
+      "name": "Autoscaling Trigger Metric Alignment",
+      "passed": true,
+      "details": "Target average CPU utilization (70%) and memory thresholds align with cloud HPA metrics.",
+      "metrics": {
+        "hpa_aligned": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:42.376658+00:00",
+  "execution_timestamp": "2026-09-19T07:04:42.376666+00:00",
+  "summary": "Cloud compute resource allocation verified: optimal requests/limits defined with OOM protection.",
+  "report_title": "Cloud Compute Resource Allocation Report",
+  "services_profiled": 3,
+  "oom_prevention_verified": true,
+  "cpu_throttling_prevented": true,
+  "autoscaling_headroom_pct": 35.0,
+  "service_allocations": [
+    {
+      "service_name": "API Gateway (FastAPI)",
+      "cpu_limit": "2.0",
+      "memory_limit": "2Gi",
+      "cpu_request": "500m",
+      "memory_request": "512Mi",
+      "concurrency_limit": 250,
+      "throttling_detected": false
+    },
+    {
+      "service_name": "Celery Workers (OCR/AI)",
+      "cpu_limit": "4.0",
+      "memory_limit": "8Gi",
+      "cpu_request": "1.0",
+      "memory_request": "2Gi",
+      "concurrency_limit": 8,
+      "throttling_detected": false
+    },
+    {
+      "service_name": "Agent Autonomous Runtime",
+      "cpu_limit": "2.0",
+      "memory_limit": "4Gi",
+      "cpu_request": "500m",
+      "memory_request": "1Gi",
+      "concurrency_limit": 20,
+      "throttling_detected": false
+    }
+  ]
+}

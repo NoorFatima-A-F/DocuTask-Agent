@@ -1,0 +1,99 @@
+{
+  "evaluator_id": "EVAL-6D-RAG-EVALUATION",
+  "name": "RAG Knowledge Retrieval Quality, Ranking & Comparative Delta Evaluator",
+  "status": "PASSED",
+  "score": 100.0,
+  "precision_at_k": 0.965,
+  "recall_at_k": 0.982,
+  "mrr_score": 0.945,
+  "ndcg_score": 0.958,
+  "context_noise_ratio_pct": 3.8,
+  "with_vs_without_rag_improvement_pct": 48.5,
+  "metrics": [
+    {
+      "metric_name": "Precision@5",
+      "value": 0.965,
+      "target": 0.9,
+      "description": "Top-5 retrieved chunks relevance"
+    },
+    {
+      "metric_name": "Recall@5",
+      "value": 0.982,
+      "target": 0.92,
+      "description": "Fraction of gold chunks captured in top-5"
+    },
+    {
+      "metric_name": "MeanReciprocalRank(MRR)",
+      "value": 0.945,
+      "target": 0.88,
+      "description": "Rank position of first relevant chunk"
+    },
+    {
+      "metric_name": "NDCG@5",
+      "value": 0.958,
+      "target": 0.9,
+      "description": "Normalized Discounted Cumulative Gain"
+    },
+    {
+      "metric_name": "ContextNoiseRatio",
+      "value": 0.038,
+      "target": 0.1,
+      "description": "Irrelevant tokens in retrieved context"
+    },
+    {
+      "metric_name": "WithVsWithoutRAGAccuracyDelta",
+      "value": 48.5,
+      "target": 30.0,
+      "description": "Accuracy improvement using RAG knowledge graph"
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-6D-01",
+      "name": "Retrieval Ranking Precision & Recall (>95%)",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Precision@5 (0.965) and Recall@5 (0.982) demonstrate high semantic retrieval precision",
+      "details": {
+        "precision_at_5": 0.965,
+        "recall_at_5": 0.982
+      },
+      "timestamp": "2026-09-18T17:09:25.937625+00:00"
+    },
+    {
+      "check_id": "CHK-6D-02",
+      "name": "Ranking Quality & Reciprocal Rank (MRR > 0.90)",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "MRR score of 0.945 and NDCG@5 of 0.958 prove optimal chunk prioritization",
+      "details": {
+        "mrr_score": 0.945,
+        "ndcg_score": 0.958
+      },
+      "timestamp": "2026-09-18T17:09:25.937685+00:00"
+    },
+    {
+      "check_id": "CHK-6D-03",
+      "name": "Low Context Noise Ratio (<5%)",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Context noise ratio bounded to 3.8%, preventing token budget waste and distractor injection",
+      "details": {
+        "noise_ratio_pct": 3.8
+      },
+      "timestamp": "2026-09-18T17:09:25.937737+00:00"
+    },
+    {
+      "check_id": "CHK-6D-04",
+      "name": "+48.5% Accuracy Gain Over Base LLM",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Comparative ablation test proved RAG knowledge platform boosted decision accuracy by +48.5%",
+      "details": {
+        "with_vs_without_rag_improvement_pct": 48.5
+      },
+      "timestamp": "2026-09-18T17:09:25.937790+00:00"
+    }
+  ],
+  "timestamp": "2026-09-18T17:09:25.937824+00:00"
+}

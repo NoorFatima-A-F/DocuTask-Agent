@@ -1,0 +1,11 @@
+{
+  "evidence_timestamp": "2026-09-19T07:04:39.935220+00:00",
+  "sources": [
+    "postgresql_backup_verification",
+    "document_storage_verification",
+    "configuration_secrets_verification",
+    "restore_verification",
+    "backup_security_verification"
+  ],
+  "artifacts_verified": 245
+}

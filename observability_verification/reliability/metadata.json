@@ -1,0 +1,66 @@
+{
+  "framework_phase": "Phase 3I.6 \u2014 Observability Governance, SLO Engineering & Reliability Certification",
+  "exported_at": "2026-09-19T07:05:26.829935+00:00",
+  "target_directory": "observability_verification/reliability",
+  "overall_certification_tier": "Enterprise Reliability Certified",
+  "overall_score_pct": 100.0,
+  "certification_granted": true,
+  "total_reports_exported": 11,
+  "manifest": {
+    "governance_report.json": {
+      "file_path": "observability_verification/reliability\\governance_report.json",
+      "file_size_bytes": 1965,
+      "sha256_hash": "b855ac6ad3195cd451d2025c16aa7098bf541ba402d26b62120070c3708cfe80"
+    },
+    "sli_report.json": {
+      "file_path": "observability_verification/reliability\\sli_report.json",
+      "file_size_bytes": 1555,
+      "sha256_hash": "dd865796b9172abd4395b53ba1390998fa7e930e619ba408d01a48c1d9200d74"
+    },
+    "slo_report.json": {
+      "file_path": "observability_verification/reliability\\slo_report.json",
+      "file_size_bytes": 1220,
+      "sha256_hash": "4e36d6d19ce2e8c8fa16c7a24679ccb84bcb33291e154735aa4541e0e20da7e5"
+    },
+    "error_budget_report.json": {
+      "file_path": "observability_verification/reliability\\error_budget_report.json",
+      "file_size_bytes": 1603,
+      "sha256_hash": "eb3eaf137ef41c06cea8364d0b0588990e020b00ed806776149692336c5ade33"
+    },
+    "dashboard_report.json": {
+      "file_path": "observability_verification/reliability\\dashboard_report.json",
+      "file_size_bytes": 1325,
+      "sha256_hash": "f9a105843d2427dca2720ce017da6bdf15e2b72efdc7ccf719a5ce8e41fa74cb"
+    },
+    "trend_analysis_report.json": {
+      "file_path": "observability_verification/reliability\\trend_analysis_report.json",
+      "file_size_bytes": 1348,
+      "sha256_hash": "8f0f81acfd629b3815606c84cac46373f625e78c286001e5bdb8abd4bf401828"
+    },
+    "production_gate_report.json": {
+      "file_path": "observability_verification/reliability\\production_gate_report.json",
+      "file_size_bytes": 1411,
+      "sha256_hash": "9fcb187a882ebf2197cfb585ff0d4bbb9dcc362303a0d8dc9cb13fe4afe2c805"
+    },
+    "regression_report.json": {
+      "file_path": "observability_verification/reliability\\regression_report.json",
+      "file_size_bytes": 1526,
+      "sha256_hash": "40d24c8e485217bfe9c9a0ab19971d962bbc0938e3d4d5f737e833e7c4dd28fb"
+    },
+    "telemetry_quality_report.json": {
+      "file_path": "observability_verification/reliability\\telemetry_quality_report.json",
+      "file_size_bytes": 632,
+      "sha256_hash": "efd2274420570bb7508474f9e0e334f42f3ca16f16226203ff0aebc6b10f972e"
+    },
+    "automation_report.json": {
+      "file_path": "observability_verification/reliability\\automation_report.json",
+      "file_size_bytes": 1284,
+      "sha256_hash": "b81fad81548377ad462221f0714f07f8a4929e67bc55b3061874c4ca4572e2d0"
+    },
+    "certification_report.json": {
+      "file_path": "observability_verification/reliability\\certification_report.json",
+      "file_size_bytes": 1638,
+      "sha256_hash": "95cd32abd9dfd26cee3f2aa383317169306a044c659648ffaa01e3b59c477131"
+    }
+  }
+}

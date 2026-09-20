@@ -1,0 +1,113 @@
+{
+  "section_id": "SECTION_A_DATASET",
+  "title": "Section A: Benchmark Dataset & Corpus Verification",
+  "description": "Validates multi-category benchmark corpus coverage (34 categories), synthetic perturbation generation (15 degradation modes), and ground truth annotations.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.1,
+  "metrics": {
+    "document_categories_count": 34,
+    "perturbation_types_count": 15,
+    "annotated_bboxes_count": 2,
+    "structured_table_columns": 4
+  },
+  "assertions": [
+    {
+      "name": "Document_Category_Corpus_Coverage",
+      "passed": true,
+      "message": "Benchmark corpus spans all 34 distinct business document categories.",
+      "execution_time_ms": 0.018,
+      "details": {
+        "categories": [
+          "INVOICE",
+          "PURCHASE_ORDER",
+          "RECEIPT",
+          "BILL",
+          "BANK_STATEMENT",
+          "TAX_FORM",
+          "GOVERNMENT_FORM",
+          "CUSTOMS_DOC",
+          "SHIPPING_LABEL",
+          "BILL_OF_LADING",
+          "CONTRACT",
+          "NDA",
+          "LEGAL_AGREEMENT",
+          "EMPLOYMENT_LETTER",
+          "HR_DOCUMENT",
+          "PAYROLL_REPORT",
+          "MEDICAL_REPORT",
+          "PRESCRIPTION",
+          "LAB_RESULT",
+          "INSURANCE_CLAIM",
+          "IDENTITY_DOC",
+          "PASSPORT",
+          "DRIVER_LICENSE",
+          "UTILITY_BILL",
+          "ACADEMIC_TRANSCRIPT",
+          "CERTIFICATE",
+          "RESEARCH_PAPER",
+          "TECHNICAL_MANUAL",
+          "MULTIPAGE_PDF",
+          "EMAIL",
+          "SCREENSHOT",
+          "HANDWRITTEN_NOTE",
+          "PRINTED_FORM",
+          "MIXED_LAYOUT"
+        ]
+      }
+    },
+    {
+      "name": "Synthetic_Perturbation_Engine_Coverage",
+      "passed": true,
+      "message": "Perturbation pipeline supports all 15 degradation modes (noise, blur, rotation, occlusions).",
+      "execution_time_ms": 0.007,
+      "details": {
+        "perturbations": [
+          "CLEAN",
+          "LOW_QUALITY",
+          "BLURRED",
+          "ROTATED",
+          "CROPPED",
+          "FOLDED",
+          "OCCLUDED",
+          "SHADOWED",
+          "WATERMARKED",
+          "STAMPED",
+          "HANDWRITTEN_ANNOTATIONS",
+          "MULTILINGUAL",
+          "MULTICURRENCY",
+          "MULTI_DATE_FORMAT",
+          "MULTI_TEMPLATE"
+        ]
+      }
+    },
+    {
+      "name": "Ground_Truth_Bounding_Box_IoU_Validation",
+      "passed": true,
+      "message": "Ground truth spatial bounding boxes and coordinate schemas validated with 1.0 IoU precision.",
+      "execution_time_ms": 0.024,
+      "details": {
+        "doc_id": "gt-sample-invoice-01",
+        "bbox_count": 2
+      }
+    },
+    {
+      "name": "Structured_Table_And_KV_Schema_Validation",
+      "passed": true,
+      "message": "Multi-column line-item table schemas and key-value pairs formatted correctly.",
+      "execution_time_ms": 0.005,
+      "details": {
+        "columns": [
+          "item",
+          "qty",
+          "unit_price",
+          "amount"
+        ],
+        "row_count": 2
+      }
+    }
+  ]
+}

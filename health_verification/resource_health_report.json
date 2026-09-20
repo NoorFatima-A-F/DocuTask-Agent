@@ -1,0 +1,15 @@
+{
+  "memory_rss_mb": 185.0,
+  "memory_heap_mb": 120.0,
+  "memory_growth_rate_pct": 1.2,
+  "memory_state": "NORMAL",
+  "cpu_usage_pct": 4.2,
+  "cpu_throttled": false,
+  "load_average": 0.85,
+  "passed": true,
+  "details": {
+    "memory_growth_trajectory": "10MB -> 50MB -> 185MB (STABLE)",
+    "cpu_evaluation_rule": "CPU 90% + responsive => PASS; CPU 100% + no response => FAIL",
+    "status": "HEALTHY"
+  }
+}

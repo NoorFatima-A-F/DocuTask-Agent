@@ -1,0 +1,189 @@
+{
+  "total_metrics_collected": 17,
+  "categories_covered": [
+    "infrastructure",
+    "application",
+    "ai_workflows",
+    "queues",
+    "database"
+  ],
+  "schema_compliant": true,
+  "passed": true,
+  "sample_telemetry": [
+    {
+      "metric": "host.cpu_utilization",
+      "service": "worker",
+      "value": 42.5,
+      "unit": "%",
+      "timestamp": "2026-09-19T07:05:25.349094+00:00",
+      "metadata": {
+        "category": "infrastructure"
+      }
+    },
+    {
+      "metric": "host.memory_utilization",
+      "service": "worker",
+      "value": 68.0,
+      "unit": "%",
+      "timestamp": "2026-09-19T07:05:25.349148+00:00",
+      "metadata": {
+        "category": "infrastructure"
+      }
+    },
+    {
+      "metric": "host.disk_usage",
+      "service": "storage",
+      "value": 54.0,
+      "unit": "%",
+      "timestamp": "2026-09-19T07:05:25.349176+00:00",
+      "metadata": {
+        "category": "infrastructure"
+      }
+    },
+    {
+      "metric": "container.restarts_total",
+      "service": "api",
+      "value": 0.0,
+      "unit": "count",
+      "timestamp": "2026-09-19T07:05:25.349201+00:00",
+      "metadata": {
+        "category": "infrastructure"
+      }
+    },
+    {
+      "metric": "app.request_latency",
+      "service": "api",
+      "value": 35.0,
+      "unit": "ms",
+      "timestamp": "2026-09-19T07:05:25.349225+00:00",
+      "metadata": {
+        "category": "application"
+      }
+    },
+    {
+      "metric": "app.error_rate",
+      "service": "api",
+      "value": 0.02,
+      "unit": "%",
+      "timestamp": "2026-09-19T07:05:25.349250+00:00",
+      "metadata": {
+        "category": "application"
+      }
+    },
+    {
+      "metric": "app.throughput",
+      "service": "api",
+      "value": 120.0,
+      "unit": "rps",
+      "timestamp": "2026-09-19T07:05:25.349273+00:00",
+      "metadata": {
+        "category": "application"
+      }
+    },
+    {
+      "metric": "ai.agent_execution_latency",
+      "service": "docutask-agent",
+      "value": 480.0,
+      "unit": "ms",
+      "timestamp": "2026-09-19T07:05:25.349297+00:00",
+      "metadata": {
+        "category": "ai_workflows"
+      }
+    },
+    {
+      "metric": "ai.tool_failures",
+      "service": "docutask-agent",
+      "value": 0.0,
+      "unit": "count",
+      "timestamp": "2026-09-19T07:05:25.349321+00:00",
+      "metadata": {
+        "category": "ai_workflows"
+      }
+    },
+    {
+      "metric": "ai.model_timeout_rate",
+      "service": "gemini-api",
+      "value": 0.001,
+      "unit": "%",
+      "timestamp": "2026-09-19T07:05:25.349346+00:00",
+      "metadata": {
+        "category": "ai_workflows"
+      }
+    },
+    {
+      "metric": "ai.token_consumption_rate",
+      "service": "gemini-api",
+      "value": 1450.0,
+      "unit": "tokens/sec",
+      "timestamp": "2026-09-19T07:05:25.349370+00:00",
+      "metadata": {
+        "category": "ai_workflows"
+      }
+    },
+    {
+      "metric": "queue.depth",
+      "service": "celery",
+      "value": 340.0,
+      "unit": "count",
+      "timestamp": "2026-09-19T07:05:25.349393+00:00",
+      "metadata": {
+        "category": "queues"
+      }
+    },
+    {
+      "metric": "queue.oldest_message_age",
+      "service": "celery",
+      "value": 1.8,
+      "unit": "seconds",
+      "timestamp": "2026-09-19T07:05:25.349416+00:00",
+      "metadata": {
+        "category": "queues"
+      }
+    },
+    {
+      "metric": "queue.dlq_size",
+      "service": "celery",
+      "value": 0.0,
+      "unit": "count",
+      "timestamp": "2026-09-19T07:05:25.349438+00:00",
+      "metadata": {
+        "category": "queues"
+      }
+    },
+    {
+      "metric": "db.connection_usage",
+      "service": "postgres",
+      "value": 38.0,
+      "unit": "%",
+      "timestamp": "2026-09-19T07:05:25.349461+00:00",
+      "metadata": {
+        "category": "database"
+      }
+    },
+    {
+      "metric": "db.query_latency",
+      "service": "postgres",
+      "value": 8.5,
+      "unit": "ms",
+      "timestamp": "2026-09-19T07:05:25.349484+00:00",
+      "metadata": {
+        "category": "database"
+      }
+    },
+    {
+      "metric": "db.lock_contention",
+      "service": "postgres",
+      "value": 0.0,
+      "unit": "count",
+      "timestamp": "2026-09-19T07:05:25.349507+00:00",
+      "metadata": {
+        "category": "database"
+      }
+    }
+  ],
+  "details": {
+    "schema_file": "health_telemetry_schema.json",
+    "total_categories": 5,
+    "sampling_frequency_seconds": 10
+  }
+}

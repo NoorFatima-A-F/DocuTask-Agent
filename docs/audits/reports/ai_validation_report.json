@@ -1,0 +1,254 @@
+{
+  "title": "Enterprise AI Validation & Metric Report",
+  "total_evaluations": 5,
+  "average_field_accuracy": 1.0,
+  "average_f1_score": 1.0,
+  "regression_comparison": {
+    "run_id": "b27e22a7-1338-47b6-99df-f3325805c5b0",
+    "baseline_version": "v1.0_baseline",
+    "current_version": "v1.1_candidate",
+    "baseline_accuracy": 0.95,
+    "current_accuracy": 1.0,
+    "accuracy_delta": 0.05,
+    "regression_severity": "NONE",
+    "is_regression": false,
+    "details": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "hallucination_rate": 0.0
+    }
+  },
+  "evidence_records": [
+    {
+      "test_id": "19af1b13-613f-46f4-819b-b9bb8049f84c",
+      "timestamp": "2026-09-14 11:23:30.592303+00:00",
+      "environment": "production_audit",
+      "software_version": "1.0.0",
+      "model_version": "gemini-1.5-flash",
+      "input_artifact": "gold_inv_001",
+      "expected_behavior": {
+        "invoice_number": "INV-2026-901",
+        "vendor_name": "Apex Solutions Inc",
+        "customer_name": "Acme Global Enterprises",
+        "invoice_date": "2026-08-15",
+        "total_amount": 5400.0,
+        "currency": "USD",
+        "tax_amount": 400.0
+      },
+      "actual_behavior": {
+        "invoice_number": "INV-2026-901",
+        "vendor_name": "Apex Solutions Inc",
+        "customer_name": "Acme Global Enterprises",
+        "invoice_date": "2026-08-15",
+        "total_amount": 5400.0,
+        "currency": "USD",
+        "tax_amount": 400.0
+      },
+      "metrics": {
+        "total_fields": 7,
+        "correct_fields": 7,
+        "missing_fields": 0,
+        "hallucinated_fields": 0,
+        "field_accuracy": 1.0,
+        "exact_match_accuracy": 1.0,
+        "schema_compliance_rate": 1.0,
+        "missing_field_rate": 0.0,
+        "hallucination_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "average_confidence": 0.95,
+        "confidence_correctness": 0.95
+      },
+      "pass_fail": "PASS",
+      "evidence_location": "docs\\audits\\evidence\\val_7f_100acc.json",
+      "result_hash": "d352c29cdefba24f0513a470d790df8a90b2ecd19c79fb23678c92d06ac97871",
+      "previous_hash": "f0a330444f2cc1bcc94a6a32440145bb7d3c2726faffc211c965ea060b47aa2c"
+    },
+    {
+      "test_id": "a19cd3d9-b0b7-4aea-b4dd-4e2ee31be5ff",
+      "timestamp": "2026-09-14 11:23:30.595771+00:00",
+      "environment": "production_audit",
+      "software_version": "1.0.0",
+      "model_version": "gemini-1.5-flash",
+      "input_artifact": "gold_rcp_001",
+      "expected_behavior": {
+        "store_name": "METRO RETAIL STORE #402",
+        "transaction_date": "2026-08-12",
+        "subtotal": 45.0,
+        "tax": 3.6,
+        "total_amount": 48.6,
+        "payment_method": "Credit Card"
+      },
+      "actual_behavior": {
+        "store_name": "METRO RETAIL STORE #402",
+        "transaction_date": "2026-08-12",
+        "subtotal": 45.0,
+        "tax": 3.6,
+        "total_amount": 48.6,
+        "payment_method": "Credit Card"
+      },
+      "metrics": {
+        "total_fields": 6,
+        "correct_fields": 6,
+        "missing_fields": 0,
+        "hallucinated_fields": 0,
+        "field_accuracy": 1.0,
+        "exact_match_accuracy": 1.0,
+        "schema_compliance_rate": 1.0,
+        "missing_field_rate": 0.0,
+        "hallucination_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "average_confidence": 0.95,
+        "confidence_correctness": 0.95
+      },
+      "pass_fail": "PASS",
+      "evidence_location": "docs\\audits\\evidence\\val_6f_100acc.json",
+      "result_hash": "d752428c4784308e5222ab658f5f23c7085a63dab582027159ab6a1236d2a037",
+      "previous_hash": "d352c29cdefba24f0513a470d790df8a90b2ecd19c79fb23678c92d06ac97871"
+    },
+    {
+      "test_id": "8f77599d-4f12-419c-8faf-115050377137",
+      "timestamp": "2026-09-14 11:23:30.598582+00:00",
+      "environment": "production_audit",
+      "software_version": "1.0.0",
+      "model_version": "gemini-1.5-flash",
+      "input_artifact": "gold_ctr_001",
+      "expected_behavior": {
+        "contract_title": "SOFTWARE SERVICES AGREEMENT",
+        "parties_involved": [
+          "TechCorp LLC",
+          "Innovate Inc"
+        ],
+        "effective_date": "2026-01-01",
+        "expiration_date": "2028-01-01",
+        "governing_law": "State of California",
+        "total_value": "$120,000"
+      },
+      "actual_behavior": {
+        "contract_title": "SOFTWARE SERVICES AGREEMENT",
+        "parties_involved": [
+          "TechCorp LLC",
+          "Innovate Inc"
+        ],
+        "effective_date": "2026-01-01",
+        "expiration_date": "2028-01-01",
+        "governing_law": "State of California",
+        "total_value": "$120,000"
+      },
+      "metrics": {
+        "total_fields": 6,
+        "correct_fields": 6,
+        "missing_fields": 0,
+        "hallucinated_fields": 0,
+        "field_accuracy": 1.0,
+        "exact_match_accuracy": 1.0,
+        "schema_compliance_rate": 1.0,
+        "missing_field_rate": 0.0,
+        "hallucination_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "average_confidence": 0.95,
+        "confidence_correctness": 0.95
+      },
+      "pass_fail": "PASS",
+      "evidence_location": "docs\\audits\\evidence\\val_6f_100acc.json",
+      "result_hash": "8488fc2002a9aec2ea4f0f0373dc4ae6ae318e32f1033d23f1d02ac63336e74e",
+      "previous_hash": "d752428c4784308e5222ab658f5f23c7085a63dab582027159ab6a1236d2a037"
+    },
+    {
+      "test_id": "330f0108-9ff4-4c91-ba33-5b4f4d515fc1",
+      "timestamp": "2026-09-14 11:23:30.600694+00:00",
+      "environment": "production_audit",
+      "software_version": "1.0.0",
+      "model_version": "gemini-1.5-flash",
+      "input_artifact": "gold_pas_001",
+      "expected_behavior": {
+        "passport_number": "P987654321",
+        "surname": "SMITH",
+        "given_names": "JANE DOE",
+        "nationality": "USA",
+        "date_of_birth": "1990-05-14",
+        "expiry_date": "2030-05-14"
+      },
+      "actual_behavior": {
+        "passport_number": "P987654321",
+        "surname": "SMITH",
+        "given_names": "JANE DOE",
+        "nationality": "USA",
+        "date_of_birth": "1990-05-14",
+        "expiry_date": "2030-05-14"
+      },
+      "metrics": {
+        "total_fields": 6,
+        "correct_fields": 6,
+        "missing_fields": 0,
+        "hallucinated_fields": 0,
+        "field_accuracy": 1.0,
+        "exact_match_accuracy": 1.0,
+        "schema_compliance_rate": 1.0,
+        "missing_field_rate": 0.0,
+        "hallucination_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "average_confidence": 0.95,
+        "confidence_correctness": 0.95
+      },
+      "pass_fail": "PASS",
+      "evidence_location": "docs\\audits\\evidence\\val_6f_100acc.json",
+      "result_hash": "492d9cc554043345ee109bc102305b6d5a5c23628480cf6f43c48eb15aaf9087",
+      "previous_hash": "8488fc2002a9aec2ea4f0f0373dc4ae6ae318e32f1033d23f1d02ac63336e74e"
+    },
+    {
+      "test_id": "823aedd8-8803-44cc-ba57-494b09c000ae",
+      "timestamp": "2026-09-14 11:23:30.603313+00:00",
+      "environment": "production_audit",
+      "software_version": "1.0.0",
+      "model_version": "gemini-1.5-flash",
+      "input_artifact": "gold_med_001",
+      "expected_behavior": {
+        "patient_name": "Robert Johnson",
+        "doctor_name": "Dr. Sarah Jenkins",
+        "visit_date": "2026-08-10",
+        "diagnosis": "Acute Bronchitis",
+        "prescribed_medications": [
+          "Amoxicillin 500mg"
+        ]
+      },
+      "actual_behavior": {
+        "patient_name": "Robert Johnson",
+        "doctor_name": "Dr. Sarah Jenkins",
+        "visit_date": "2026-08-10",
+        "diagnosis": "Acute Bronchitis",
+        "prescribed_medications": [
+          "Amoxicillin 500mg"
+        ]
+      },
+      "metrics": {
+        "total_fields": 5,
+        "correct_fields": 5,
+        "missing_fields": 0,
+        "hallucinated_fields": 0,
+        "field_accuracy": 1.0,
+        "exact_match_accuracy": 1.0,
+        "schema_compliance_rate": 1.0,
+        "missing_field_rate": 0.0,
+        "hallucination_rate": 0.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "average_confidence": 0.95,
+        "confidence_correctness": 0.95
+      },
+      "pass_fail": "PASS",
+      "evidence_location": "docs\\audits\\evidence\\val_5f_100acc.json",
+      "result_hash": "7462da0e171353e1145041c2416c79d50cc97e53bac3d56dddfc8d1f8075c9fa",
+      "previous_hash": "492d9cc554043345ee109bc102305b6d5a5c23628480cf6f43c48eb15aaf9087"
+    }
+  ]
+}

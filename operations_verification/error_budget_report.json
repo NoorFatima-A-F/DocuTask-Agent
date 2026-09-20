@@ -1,0 +1,15 @@
+{
+  "service": "document_processing",
+  "measurement_window_days": 30,
+  "total_budget_minutes": 216.0,
+  "consumed_budget_minutes": 8.4,
+  "remaining_budget_minutes": 207.6,
+  "remaining_budget_pct": 96.11,
+  "downtime_minutes_total": 4.2,
+  "failed_jobs_count": 2,
+  "latency_violations_count": 5,
+  "budget_exhausted": false,
+  "deployment_freeze_active": false,
+  "policy_recommendation": "Deployments permitted (Healthy Error Budget: > 90% remaining)",
+  "timestamp": "2026-09-19T07:05:00.639764+00:00"
+}

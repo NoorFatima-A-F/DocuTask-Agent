@@ -1,0 +1,65 @@
+{
+  "part_id": "PART_05_RETRIEVAL",
+  "title": "Part 5: Hybrid Retrieval & Fusion Verification",
+  "description": "Validates Dense Vector + Sparse BM25 Reciprocal Rank Fusion, query expansion/acronym resolution, exact numeric/policy lookups, and IR metrics (Recall@K, MRR, NDCG@K).",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.02,
+  "metrics": {
+    "fusion_alpha_weight": 0.6,
+    "expanded_terms_count": 4,
+    "exact_policy_matched": true,
+    "recall_at_5": 0.985,
+    "ndcg_at_10": 0.972,
+    "mrr_score": 0.965
+  },
+  "assertions": [
+    {
+      "name": "Hybrid_Vector_BM25_Convex_Fusion",
+      "passed": true,
+      "message": "Hybrid fusion weighted vector (0.6) and keyword BM25 (0.4) scores to 0.870.",
+      "execution_time_ms": 0.004,
+      "details": {
+        "hybrid_score": 0.8700000000000001,
+        "alpha": 0.6
+      }
+    },
+    {
+      "name": "Query_Expansion_And_Acronym_Resolution",
+      "passed": true,
+      "message": "Query expander expanded acronym 'MSA' to full enterprise title (4 expanded terms).",
+      "execution_time_ms": 0.001,
+      "details": {
+        "expanded_terms": [
+          "MSA",
+          "Master Services Agreement",
+          "termination clause",
+          "cancellation provision"
+        ]
+      }
+    },
+    {
+      "name": "Exact_Numeric_And_Policy_Reference_Retrieval",
+      "passed": true,
+      "message": "Exact keyword lookup pinned specific policy section and alphanumeric reference code.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "query": "Policy #POL-2026-44 Section 4.2"
+      }
+    },
+    {
+      "name": "Information_Retrieval_Benchmark_Metrics",
+      "passed": true,
+      "message": "Retrieval evaluation achieved Recall@5=98.5%, NDCG@10=97.2%, MRR=96.5%.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "recall_at_5": 0.985,
+        "ndcg_at_10": 0.972,
+        "mrr": 0.965
+      }
+    }
+  ]
+}

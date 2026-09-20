@@ -1,0 +1,18 @@
+{
+  "experiment": "database_failure",
+  "detected": true,
+  "recovered": true,
+  "rto": 24.5,
+  "data_loss": 0,
+  "score": 99.0,
+  "drill_id": "DRILL-2026-WK-37",
+  "drill_name": "Weekly Random Failure Drill: PostgreSQL Master AZ Disconnect",
+  "details": {
+    "drill_execution_timestamp_utc": "2026-09-15T08:10:57.894940+00:00",
+    "simulated_environment": "STAGING_CHAOS_ISOLATED_CLUSTER",
+    "orchestrator_engine": "DocuTask Chaos & Drill Runner v3G.5",
+    "rto_sla_bound_sec": 300.0,
+    "data_loss_tolerance_bytes": 0,
+    "verdict": "AUTOMATED_DRILL_PASSED_WITH_EXEMPLARY_RTO"
+  }
+}

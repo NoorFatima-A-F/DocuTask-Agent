@@ -1,0 +1,67 @@
+{
+  "metadata_version": "1.0.0",
+  "phase": "Phase 3I.10 \u2014 Observability Intelligence Governance, Reliability Automation Maturity & Enterprise Operations Certification",
+  "system_name": "DocuTask Agent Platform",
+  "generated_at": "2026-09-19T07:05:19.465153+00:00",
+  "target_directory": "observability_governance_verification",
+  "composite_operations_score_pct": 100.0,
+  "certification_tier": "Enterprise Autonomous Operations Certified",
+  "reports_count": 11,
+  "manifest": {
+    "governance_architecture_report.json": {
+      "sha256": "ecbeb6c76c560fe9b4f46504972aed3f12e4d7598442481223e853164ca2d194",
+      "bytes": 1701,
+      "verified": true
+    },
+    "policy_report.json": {
+      "sha256": "31a52511f5a189b4d659e70d9538cf5c3390c614ea5e0bb96071545016d8d901",
+      "bytes": 2508,
+      "verified": true
+    },
+    "maturity_report.json": {
+      "sha256": "eeb72be2dda8ea67e3ad5a136b884bb37ac4b29b603900cc7ba35faa2cf3d35f",
+      "bytes": 2099,
+      "verified": true
+    },
+    "sre_report.json": {
+      "sha256": "ce556762a880140266745a95b6162b5fb2c3cc0feca3776d9c36858d01b4e3fb",
+      "bytes": 1474,
+      "verified": true
+    },
+    "runbook_report.json": {
+      "sha256": "25acd0b11810eb3c2a56709f78d35ccf8a89d971436b2f12ae12053e518abd02",
+      "bytes": 2652,
+      "verified": true
+    },
+    "automation_safety_report.json": {
+      "sha256": "ee5da99c53aa7f02453d01f98ec563d18b7401fb3274157a0f6c9f5f6c6a69db",
+      "bytes": 1746,
+      "verified": true
+    },
+    "change_management_report.json": {
+      "sha256": "d049fcffde9af1d4a92ddecb534b9ff7c1b774e703683276e1b7c766bc9bbd28",
+      "bytes": 2021,
+      "verified": true
+    },
+    "incident_report.json": {
+      "sha256": "d3349e629159582a7a76eb5433bc49aef0f08c3aafbdb3582b714cc3614249bb",
+      "bytes": 1047,
+      "verified": true
+    },
+    "improvement_report.json": {
+      "sha256": "e462355569f38631393390c5d01f69cba14d2bd43c93fbdc40e570f0c207faad",
+      "bytes": 1286,
+      "verified": true
+    },
+    "dashboard_report.json": {
+      "sha256": "95a2c16e786cb22929113b73dcbf69bd7ff1dd8bdc47b9e8fcd2ba01d33f68de",
+      "bytes": 1576,
+      "verified": true
+    },
+    "certification_report.json": {
+      "sha256": "32d456ce73a4a5124b2fcefae7bd3d562f6eb5730d05adf558fb7ae067ceee69",
+      "bytes": 2218,
+      "verified": true
+    }
+  }
+}

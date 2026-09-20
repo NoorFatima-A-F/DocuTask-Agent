@@ -1,0 +1,38 @@
+{
+  "report_title": "End-to-End Synthetic Document Pipeline Recovery Validation Report",
+  "synthetic_test_executed": true,
+  "pipeline_steps": [
+    {
+      "step_name": "Upload",
+      "status": "PASSED",
+      "duration_ms": 45.0
+    },
+    {
+      "step_name": "OCR",
+      "status": "PASSED",
+      "duration_ms": 180.0
+    },
+    {
+      "step_name": "AI_Extraction",
+      "status": "PASSED",
+      "duration_ms": 320.0
+    },
+    {
+      "step_name": "Validation",
+      "status": "PASSED",
+      "duration_ms": 35.0
+    },
+    {
+      "step_name": "Storage",
+      "status": "PASSED",
+      "duration_ms": 65.0
+    },
+    {
+      "step_name": "Response",
+      "status": "PASSED",
+      "duration_ms": 15.0
+    }
+  ],
+  "overall_pipeline_passed": true,
+  "all_dependencies_operational": true
+}

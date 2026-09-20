@@ -1,0 +1,89 @@
+{
+  "report_title": "Production Readiness Gate Verification Report",
+  "stages": [
+    {
+      "stage_name": "Build & Artifact Integrity",
+      "stage_order": 1,
+      "criteria_evaluated": [
+        "Deterministic container build",
+        "SBOM generation",
+        "Cosign container signature"
+      ],
+      "health_score": 100.0,
+      "passed": true
+    },
+    {
+      "stage_name": "Security & Vulnerability Scanning",
+      "stage_order": 2,
+      "criteria_evaluated": [
+        "Zero Critical/High CVEs (Trivy scan)",
+        "SAST security scan pass",
+        "Secret detection check"
+      ],
+      "health_score": 100.0,
+      "passed": true
+    },
+    {
+      "stage_name": "Infrastructure & GitOps Validation",
+      "stage_order": 3,
+      "criteria_evaluated": [
+        "Kubernetes manifest validation",
+        "Resource request/limit boundaries",
+        "NetworkPolicy enforcement"
+      ],
+      "health_score": 98.5,
+      "passed": true
+    },
+    {
+      "stage_name": "Observability Standardization Check",
+      "stage_order": 4,
+      "criteria_evaluated": [
+        "Prometheus metric exposure",
+        "Structured JSON logging schema",
+        "OTel trace propagation headers"
+      ],
+      "health_score": 100.0,
+      "passed": true
+    },
+    {
+      "stage_name": "Reliability & Chaos Verification",
+      "stage_order": 5,
+      "criteria_evaluated": [
+        "Chaos pod failure recovery < 30s",
+        "Circuit breaker fallback validation",
+        "Graceful shutdown handling"
+      ],
+      "health_score": 98.0,
+      "passed": true
+    },
+    {
+      "stage_name": "Performance & Load Testing",
+      "stage_order": 6,
+      "criteria_evaluated": [
+        "P95 latency < 500ms under 2x peak load",
+        "Zero memory leaks in 1-hour soak",
+        "DB pool headroom > 30%"
+      ],
+      "health_score": 98.8,
+      "passed": true
+    },
+    {
+      "stage_name": "Final Release Approval Gate",
+      "stage_order": 7,
+      "criteria_evaluated": [
+        "Automated multi-gate synthesis",
+        "Rollback plan validated",
+        "SRE automated sign-off"
+      ],
+      "health_score": 100.0,
+      "passed": true
+    }
+  ],
+  "health_score_threshold": 90.0,
+  "overall_health_score": 99.33,
+  "no_critical_vulnerabilities": true,
+  "observability_complete": true,
+  "rollback_available": true,
+  "release_approval_granted": true,
+  "status": "PASS"
+}

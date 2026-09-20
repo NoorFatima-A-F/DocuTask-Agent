@@ -1,0 +1,56 @@
+{
+  "total_injections": 4,
+  "passed_injections": 4,
+  "crash_detected": true,
+  "freeze_detected": true,
+  "oom_detected": true,
+  "heartbeat_loss_detected": true,
+  "all_failures_handled": true,
+  "passed": true,
+  "injection_results": [
+    {
+      "injection_id": "INJ-001-KILL-PROCESS",
+      "failure_type": "PROCESS_CRASH",
+      "description": "Simulate abrupt SIGKILL on API Gateway worker",
+      "simulated_condition": "PID terminates unexpectedly without socket deregistration",
+      "expected_state": "FAILED",
+      "actual_state": "FAILED",
+      "orchestration_action": "Kubernetes kubelet / Docker daemon restarts pod immediately",
+      "detected": true,
+      "passed": true
+    },
+    {
+      "injection_id": "INJ-002-APP-FREEZE",
+      "failure_type": "APPLICATION_FREEZE",
+      "description": "Simulate frozen event loop / synchronous GIL blockage",
+      "simulated_condition": "Event loop lag exceeds 5000ms threshold",
+      "expected_state": "STUCK",
+      "actual_state": "STUCK",
+      "orchestration_action": "Liveness probe timeout (>3s) triggers container restart",
+      "detected": true,
+      "passed": true
+    },
+    {
+      "injection_id": "INJ-003-OOM-EXHAUSTION",
+      "failure_type": "MEMORY_EXHAUSTION",
+      "description": "Simulate heap ballooning beyond 90% memory limit",
+      "simulated_condition": "Process RSS memory crosses OOM critical boundary",
+      "expected_state": "FAILED",
+      "actual_state": "FAILED",
+      "orchestration_action": "Cgroup OOM killer triggers container restart with memory alert",
+      "detected": true,
+      "passed": true
+    },
+    {
+      "injection_id": "INJ-004-HEARTBEAT-LOSS",
+      "failure_type": "HEARTBEAT_LOSS",
+      "description": "Simulate silent background worker thread death",
+      "simulated_condition": "Worker heartbeat missing for >30s while process remains alive",
+      "expected_state": "STUCK",
+      "actual_state": "STUCK",
+      "orchestration_action": "Worker supervisor recycles stuck worker process",
+      "detected": true,
+      "passed": true
+    }
+  ]
+}

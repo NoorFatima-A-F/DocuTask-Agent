@@ -1,0 +1,11 @@
+{
+  "highest_risk": "NONE",
+  "total_risks": 0,
+  "critical_risks_count": 0,
+  "high_risks_count": 0,
+  "medium_risks_count": 0,
+  "low_risks_count": 0,
+  "production_blocker_present": false,
+  "risks": [],
+  "evaluated_at": "2026-09-19T07:04:56.992113+00:00"
+}

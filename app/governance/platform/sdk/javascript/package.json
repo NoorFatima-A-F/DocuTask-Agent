@@ -1,0 +1,19 @@
+{
+  "name": "@doctask/governance-sdk",
+  "version": "1.0.0",
+  "description": "Official TypeScript/JavaScript SDK for DocuTask Enterprise AI Governance Operating System",
+  "main": "dist/client.js",
+  "types": "dist/client.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "ai-governance",
+    "policy-enforcement",
+    "responsible-ai",
+    "guardrails",
+    "audit"
+  ],
+  "author": "DocuTask Enterprise Governance Team",
+  "license": "Apache-2.0"
+}

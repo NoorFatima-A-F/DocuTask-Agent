@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "total_scenarios_tested": 5,
+  "successful_executions": 5,
+  "automation_success_rate": 100.0,
+  "executions": [
+    {
+      "incident_type": "DATABASE_OUTAGE",
+      "plan_id": "plan-56646a22",
+      "steps_total": 5,
+      "steps_succeeded": 5,
+      "duration_ms": 40.02969999331981,
+      "final_state": "SERVICE_RESTORED",
+      "success": true
+    },
+    {
+      "incident_type": "WORKER_POOL_CRASH",
+      "plan_id": "plan-5df2531f",
+      "steps_total": 3,
+      "steps_succeeded": 3,
+      "duration_ms": 24.044000000343658,
+      "final_state": "SERVICE_RESTORED",
+      "success": true
+    },
+    {
+      "incident_type": "AI_PROVIDER_DEGRADATION",
+      "plan_id": "plan-25df017b",
+      "steps_total": 3,
+      "steps_succeeded": 3,
+      "duration_ms": 24.015099998563528,
+      "final_state": "SERVICE_RESTORED",
+      "success": true
+    },
+    {
+      "incident_type": "REDIS_QUEUE_FAILURE",
+      "plan_id": "plan-41c943dc",
+      "steps_total": 2,
+      "steps_succeeded": 2,
+      "duration_ms": 16.010800002200995,
+      "final_state": "SERVICE_RESTORED",
+      "success": true
+    },
+    {
+      "incident_type": "STORAGE_OUTAGE",
+      "plan_id": "plan-94f1c7fa",
+      "steps_total": 2,
+      "steps_succeeded": 2,
+      "duration_ms": 16.010100004146807,
+      "final_state": "SERVICE_RESTORED",
+      "success": true
+    }
+  ],
+  "is_automated_workflow_verified": true
+}

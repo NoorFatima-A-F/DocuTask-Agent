@@ -1,0 +1,111 @@
+{
+  "program": "Phase V5 \u2014 Enterprise Document Intelligence & AI Extraction Verification Program",
+  "timestamp": "2026-09-18T17:42:31.842490+00:00",
+  "composite_score": 100.0,
+  "grade": "A+",
+  "production_ready": true,
+  "total_assertions": 72,
+  "passed_assertions": 72,
+  "files": {
+    "document_intelligence_scorecard.json": {
+      "path": "document_intelligence_verification_evidence/document_intelligence_scorecard.json",
+      "sha256": "5f43ffc383800f288895754590c8174ebd7fdec7c259cc1981ee05ccdf96e902",
+      "size_bytes": 46669
+    },
+    "section_a_dataset_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_a_dataset_evidence.json",
+      "sha256": "74694665c4bc6a28214c9664b483d2eb59351703b9e5163fda234b1833640a5b",
+      "size_bytes": 3242
+    },
+    "section_b_ingestion_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_b_ingestion_evidence.json",
+      "sha256": "e1fd33c28113ea61827994bf96afe8427e14a49fef4fb5cba7945fca93db703b",
+      "size_bytes": 1876
+    },
+    "section_c_classification_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_c_classification_evidence.json",
+      "sha256": "56d3d58b199dbf15d32e5505cd757bd95b6ebcf4566252f1a42e2fcb04ac7a49",
+      "size_bytes": 2358
+    },
+    "section_d_ocr_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_d_ocr_evidence.json",
+      "sha256": "7921f42ae0d4ba93d497e07d08b82323fbebb0568052c0289b9d651b51cca841",
+      "size_bytes": 1970
+    },
+    "section_e_layout_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_e_layout_evidence.json",
+      "sha256": "56ed1beb300bb1f63f07163f15c12bfb6bd7776b380f8d6fc02816ac4b76c0fd",
+      "size_bytes": 2695
+    },
+    "section_f_extraction_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_f_extraction_evidence.json",
+      "sha256": "0d972c04fc19612503652c2dd096a27fec8a3351014419997a6891ec8dbee477",
+      "size_bytes": 2108
+    },
+    "section_g_schema_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_g_schema_evidence.json",
+      "sha256": "dd59c7f2a75fd9697e8421d8f6b9026d035c83b62e6cd521db9f54601e989975",
+      "size_bytes": 1986
+    },
+    "section_h_repair_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_h_repair_evidence.json",
+      "sha256": "cd8c2fa56732f889ae7184a0da92f586144b8a14152ac981dabcf7743b2e832f",
+      "size_bytes": 1999
+    },
+    "section_i_grounding_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_i_grounding_evidence.json",
+      "sha256": "192132a23e7b8163c19fbe1d50fd4f4b6aeb0a8976b726c25ff5be7f1c8ebf7b",
+      "size_bytes": 2203
+    },
+    "section_j_calibration_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_j_calibration_evidence.json",
+      "sha256": "13d0ee56c37729dbb8371bbae4d22cb7da7d98c8c2e08ee6257564b6e5f470d6",
+      "size_bytes": 2120
+    },
+    "section_k_business_rules_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_k_business_rules_evidence.json",
+      "sha256": "5e7f8dfa4ca43b8412b6bb40904d2d44768dae105e8a969ab62ed1c4cb09714f",
+      "size_bytes": 1974
+    },
+    "section_l_multilingual_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_l_multilingual_evidence.json",
+      "sha256": "98fd4ca8b9f13acc9568bb33a6eb6882789026cce4aa62adb44b44cf7c7313f4",
+      "size_bytes": 2083
+    },
+    "section_m_robustness_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_m_robustness_evidence.json",
+      "sha256": "3c334a4a162d958c0fac5bd4886e415ffd76761bce9c688dee04703f93c6c117",
+      "size_bytes": 1851
+    },
+    "section_n_pipeline_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_n_pipeline_evidence.json",
+      "sha256": "7fb7979240dce3d83b5952a218c2902558030c5a27023b349a22d0cda5094164",
+      "size_bytes": 2565
+    },
+    "section_o_security_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_o_security_evidence.json",
+      "sha256": "e1b3d0c83b38f1bc5d80db1ba300e661fb779b9d8f00257f3fe3c3f11b87f186",
+      "size_bytes": 1976
+    },
+    "section_p_performance_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_p_performance_evidence.json",
+      "sha256": "87709db6f4b337207f55a471419f2ae616e46eded6b85ed938b54b1be7a1e274",
+      "size_bytes": 2351
+    },
+    "section_q_regression_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_q_regression_evidence.json",
+      "sha256": "d27b4eebe6f59e9741bdb5fed50f898f920f88e9eff868de30943dafabe52cc0",
+      "size_bytes": 2145
+    },
+    "section_r_readiness_evidence.json": {
+      "path": "document_intelligence_verification_evidence/section_r_readiness_evidence.json",
+      "sha256": "ae375ecd0febeb27726b506be1744316e40bc2a6aa786d5d9a86d49879899d42",
+      "size_bytes": 2764
+    },
+    "phase_V5_document_intelligence_verification_report.md": {
+      "path": "docs/phase_V5_document_intelligence_verification_report.md",
+      "sha256": "8e8049676d8fb9c396ee79ba7fbec51065bf4d98f1252336411858bd1fba09f6",
+      "size_bytes": 22154
+    }
+  }
+}

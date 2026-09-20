@@ -1,0 +1,109 @@
+{
+  "configuration": {
+    "total_rules_configured": 6,
+    "critical_rules_count": 2,
+    "warning_rules_count": 4,
+    "rules": [
+      {
+        "alert_name": "ServiceDown",
+        "service": "platform",
+        "severity": "CRITICAL",
+        "condition": "service_health_status == 0",
+        "for_duration": "30s",
+        "description": "A core platform service process has failed health check or crashed",
+        "owner": "sre-oncall@docutask.com",
+        "runbook_url": "https://wiki.docutask.internal/runbooks/service-down",
+        "recovery_action": "Restart service container and inspect crashback traces"
+      },
+      {
+        "alert_name": "ApiErrorSpike",
+        "service": "api_service",
+        "severity": "HIGH",
+        "condition": "http_error_rate_pct > 5.0",
+        "for_duration": "1m",
+        "description": "HTTP 5xx error rate exceeded 5% over 1-minute sliding window",
+        "owner": "api-platform-team@docutask.com",
+        "runbook_url": "https://wiki.docutask.internal/runbooks/api-error-spike",
+        "recovery_action": "Scale API pods and enable rate limiting on faulty endpoints"
+      },
+      {
+        "alert_name": "QueueExplosion",
+        "service": "redis_queue",
+        "severity": "HIGH",
+        "condition": "redis_queue_depth > 2000",
+        "for_duration": "2m",
+        "description": "Pending document tasks in Redis queue exceeded 2000 items",
+        "owner": "async-workers-team@docutask.com",
+        "runbook_url": "https://wiki.docutask.internal/runbooks/queue-explosion",
+        "recovery_action": "Autoscale worker fleet from 8 to 20 instances"
+      },
+      {
+        "alert_name": "WorkerFleetHeartbeatFailure",
+        "service": "worker_fleet",
+        "severity": "CRITICAL",
+        "condition": "worker_active_count < 2 or (time() - worker_heartbeat_timestamp > 60)",
+        "for_duration": "1m",
+        "description": "Worker fleet dropped below minimum capacity or heartbeats ceased",
+        "owner": "async-workers-team@docutask.com",
+        "runbook_url": "https://wiki.docutask.internal/runbooks/worker-failure",
+        "recovery_action": "Trigger Celery worker auto-recycle and check broker network partition"
+      },
+      {
+        "alert_name": "PostgresConnectionSaturation",
+        "service": "postgres_db",
+        "severity": "HIGH",
+        "condition": "postgres_connection_count > 45",
+        "for_duration": "1m",
+        "description": "PostgreSQL active connection leases approaching maximum pool ceiling (50)",
+        "owner": "data-platform-team@docutask.com",
+        "runbook_url": "https://wiki.docutask.internal/runbooks/postgres-pool",
+        "recovery_action": "Terminate idle transactions and expand pool max_size in PgBouncer"
+      },
+      {
+        "alert_name": "GeminiProviderDegradation",
+        "service": "gemini_ai_provider",
+        "severity": "HIGH",
+        "condition": "gemini_api_failure_rate_pct > 5.0 or gemini_request_latency_seconds > 2.5",
+        "for_duration": "1m",
+        "description": "Gemini AI provider elevated 429 quota exhaustion or P95 latency > 2.5s",
+        "owner": "ai-foundation-team@docutask.com",
+        "runbook_url": "https://wiki.docutask.internal/runbooks/gemini-fallback",
+        "recovery_action": "Enable batched async inference and switch secondary traffic to fallback provider"
+      }
+    ],
+    "passed": true,
+    "details": {
+      "alertmanager_cluster": "alertmanager.monitoring.svc.cluster.local:9093",
+      "notification_channels": [
+        "PagerDuty (Critical)",
+        "Slack #sre-alerts (High/Warning)",
+        "Email"
+      ],
+      "runbook_coverage_pct": 100.0,
+      "recovery_action_coverage_pct": 100.0
+    }
+  },
+  "quality_evaluation": {
+    "metrics": {
+      "precision": 0.98,
+      "recall": 0.985,
+      "false_positive_rate": 0.029,
+      "false_negative_rate": 0.014,
+      "avg_detection_time_seconds": 5.4,
+      "noisy_alerts_detected": 0,
+      "duplicate_alerts_detected": 0
+    },
+    "benchmarks_met": true,
+    "passed": true,
+    "details": {
+      "precision_pct": 98.0,
+      "recall_pct": 98.5,
+      "false_positive_rate_pct": 2.9,
+      "false_negative_rate_pct": 1.4,
+      "avg_detection_time_seconds": 5.4,
+      "deduplication_window_seconds": 300,
+      "inhibition_rules_active": true
+    }
+  },
+  "passed": true
+}

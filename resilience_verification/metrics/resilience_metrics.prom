@@ -1,0 +1,12 @@
+# HELP docutask_resilience_mttd_seconds Mean Time To Detect in seconds
+# TYPE docutask_resilience_mttd_seconds gauge
+docutask_resilience_mttd_seconds 3.6
+# HELP docutask_resilience_mttr_seconds Mean Time To Recovery in seconds
+# TYPE docutask_resilience_mttr_seconds gauge
+docutask_resilience_mttr_seconds 14.8
+# HELP docutask_resilience_score Overall operational resilience composite score
+# TYPE docutask_resilience_score gauge
+docutask_resilience_score 100.0
+# HELP docutask_resilience_success_rate_pct Percentage of automated recovery successes
+# TYPE docutask_resilience_success_rate_pct gauge
+docutask_resilience_success_rate_pct 100.0

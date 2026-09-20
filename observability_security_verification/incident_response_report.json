@@ -1,0 +1,42 @@
+{
+  "report_title": "Telemetry Leakage Incident Response & Containment Report",
+  "containment_steps": [
+    {
+      "phase": "Detection",
+      "description": "Automated telemetry stream scanner identifies anomalous pattern matching unmasked token",
+      "measured_time_sec": 2.5,
+      "target_sla_sec": 5.0,
+      "sla_met": true
+    },
+    {
+      "phase": "Alerting & Paging",
+      "description": "P1 Security Alert dispatched to Security Operations Center (SOC) on-call channel",
+      "measured_time_sec": 4.0,
+      "target_sla_sec": 10.0,
+      "sla_met": true
+    },
+    {
+      "phase": "Access Restriction & Quarantine",
+      "description": "Temporary block placed on query API for affected partition index to prevent read exposure",
+      "measured_time_sec": 6.5,
+      "target_sla_sec": 15.0,
+      "sla_met": true
+    },
+    {
+      "phase": "Targeted Surgical Purge",
+      "description": "Cryptographically verified redaction and index purge executed on offending log record",
+      "measured_time_sec": 12.0,
+      "target_sla_sec": 30.0,
+      "sla_met": true
+    },
+    {
+      "phase": "Root Cause Analysis & Prevention",
+      "description": "Automated pull-request rule update and pipeline sanitizer regression test generated",
+      "measured_time_sec": 17.0,
+      "target_sla_sec": 60.0,
+      "sla_met": true
+    }
+  ],
+  "total_containment_time_sec": 42.0,
+  "sla_compliant": true
+}

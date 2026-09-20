@@ -1,0 +1,39 @@
+{
+  "total_failover_scenarios": 3,
+  "avg_failover_latency_ms": 130.5,
+  "failovers": [
+    {
+      "failover_id": "FAILOVER-001",
+      "from_provider": "gemini",
+      "to_provider": "claude_fallback",
+      "trigger_reason": "Gemini 503 Provider Outage Simulation",
+      "failover_latency_ms": 184.5,
+      "success_rate_pct": 100.0,
+      "data_consistency_verified": true
+    },
+    {
+      "failover_id": "FAILOVER-002",
+      "from_provider": "gemini",
+      "to_provider": "local_vllm",
+      "trigger_reason": "Gemini Public DNS / Egress Blackhole Simulation",
+      "failover_latency_ms": 112.0,
+      "success_rate_pct": 100.0,
+      "data_consistency_verified": true
+    },
+    {
+      "failover_id": "FAILOVER-003",
+      "from_provider": "claude_fallback",
+      "to_provider": "local_vllm",
+      "trigger_reason": "Secondary Claude 429 Quota Exhaustion",
+      "failover_latency_ms": 95.0,
+      "success_rate_pct": 100.0,
+      "data_consistency_verified": true
+    }
+  ],
+  "passed": true,
+  "details": {
+    "routing_mechanism": "Dynamic Circuit Breaker & Weighted Adaptive Routing Engine",
+    "max_failover_budget_ms": 300.0,
+    "data_normalization": "Unified JSON schema conversion layer across Gemini, Claude, and OpenAI formats"
+  }
+}

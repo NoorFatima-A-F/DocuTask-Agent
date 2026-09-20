@@ -1,0 +1,74 @@
+{
+  "verifier_id": "VERIFY-3J.5.12-STORAGE-PERFORMANCE",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Large Payload Tier Ingestion (10MB, 100MB, 1GB)",
+      "passed": true,
+      "details": "Verified multipart streaming and chunked storage across 10MB, 100MB, and 1GB file tiers",
+      "metrics": {
+        "tiers_tested": 3,
+        "max_size_mb": 1024.0
+      }
+    },
+    {
+      "name": "Sustained Storage Throughput (> 80 MB/s)",
+      "passed": true,
+      "details": "All upload streams exceeded 80 MB/s (min: 85.4 MB/s)",
+      "metrics": {
+        "min_upload_speed_mb_s": 85.4
+      }
+    },
+    {
+      "name": "Zero Data Corruption Integrity Check",
+      "passed": true,
+      "details": "SHA-256 byte-by-byte validation confirmed 0 bytes altered or corrupted during write/read cycles",
+      "metrics": {
+        "corruption_detected": false
+      }
+    },
+    {
+      "name": "Zero Storage Timeout Immunity",
+      "passed": true,
+      "details": "All storage I/O operations completed well within connection and request timeout budgets",
+      "metrics": {
+        "timeouts_count": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:01.748358+00:00",
+  "execution_timestamp": "2026-09-19T07:05:01.748430+00:00",
+  "summary": "",
+  "report_title": "Storage Performance & Large File Handling Report",
+  "file_benchmarks": [
+    {
+      "file_size_label": "10MB PDF Document",
+      "size_mb": 10.0,
+      "upload_speed_mb_s": 85.4,
+      "download_speed_mb_s": 142.0,
+      "corruption_detected": false,
+      "timeout_detected": false
+    },
+    {
+      "file_size_label": "100MB Multi-Page Dossier",
+      "size_mb": 100.0,
+      "upload_speed_mb_s": 92.1,
+      "download_speed_mb_s": 165.5,
+      "corruption_detected": false,
+      "timeout_detected": false
+    },
+    {
+      "file_size_label": "1GB High-Resolution Archive",
+      "size_mb": 1024.0,
+      "upload_speed_mb_s": 88.7,
+      "download_speed_mb_s": 158.2,
+      "corruption_detected": false,
+      "timeout_detected": false
+    }
+  ],
+  "zero_corruption_verified": true,
+  "zero_timeout_verified": true
+}

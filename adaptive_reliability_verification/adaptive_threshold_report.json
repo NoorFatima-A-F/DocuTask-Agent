@@ -1,0 +1,30 @@
+{
+  "report_title": "Adaptive Health Threshold Report",
+  "thresholds": [
+    {
+      "metric_name": "Worker CPU Utilization",
+      "component": "Celery Worker Pool",
+      "static_threshold": "CPU > 85%",
+      "learned_normal_baseline": "Normal baseline: 40%; Morning peak: 65%",
+      "adaptive_warning_trigger": "Slope > +25%/min OR current > 75% sustained for 3m during off-peak",
+      "context_period": "Dynamic 24h diurnal pattern"
+    },
+    {
+      "metric_name": "Document Queue Depth",
+      "component": "Redis Broker",
+      "static_threshold": "Queue > 500 items",
+      "learned_normal_baseline": "Normal: 5-20 items; Batch ingestion window: 250 items",
+      "adaptive_warning_trigger": "Queue growth rate > 50 items/min alongside consumer latency increase",
+      "context_period": "Morning batch window (09:00 - 11:00 UTC)"
+    },
+    {
+      "metric_name": "API Request Latency (p95)",
+      "component": "FastAPI Gateway",
+      "static_threshold": "Latency > 1000ms",
+      "learned_normal_baseline": "Baseline: 85ms; Heavy multi-page OCR: 350ms",
+      "adaptive_warning_trigger": "p95 > 2.5x rolling 1-hour exponential moving average",
+      "context_period": "Real-time rolling window"
+    }
+  ],
+  "adaptive_monitoring_active": true
+}

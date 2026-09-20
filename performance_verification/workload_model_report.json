@@ -1,0 +1,93 @@
+{
+  "verifier_id": "VERIFY-3J.6.2-WORKLOAD-MODEL",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "5 Enterprise Workload Profiles Defined",
+      "passed": true,
+      "details": "Verified Normal, Peak, Burst, Large Document, and AI Slowdown workload models",
+      "metrics": {
+        "profile_count": 5
+      }
+    },
+    {
+      "name": "SLA Compliance Across All Profiles",
+      "passed": true,
+      "details": "All workload profiles meet P95 latency SLA targets under simulated conditions",
+      "metrics": {
+        "all_compliant": true
+      }
+    },
+    {
+      "name": "Throughput Targets Validated",
+      "passed": true,
+      "details": "Each profile defines a measurable throughput target in documents per hour",
+      "metrics": {
+        "profiles_with_targets": 5
+      }
+    },
+    {
+      "name": "P95 Latency Budgets Within Enterprise Limits",
+      "passed": true,
+      "details": "All observed P95 latencies below 500ms enterprise threshold",
+      "metrics": {
+        "max_p95_ms": 450.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:02.150493+00:00",
+  "execution_timestamp": "2026-09-19T07:05:02.150567+00:00",
+  "summary": "",
+  "report_title": "Enterprise Workload Modeling Verification Report",
+  "profiles": [
+    {
+      "profile_id": "WL-NORMAL",
+      "profile_name": "Normal Business Hours",
+      "target_throughput_dph": 1200,
+      "concurrent_users": 50,
+      "characteristics": "Steady-state document ingestion with standard OCR and AI extraction",
+      "observed_p95_ms": 42.0,
+      "status": "PASS"
+    },
+    {
+      "profile_id": "WL-PEAK",
+      "profile_name": "Peak Business Load",
+      "target_throughput_dph": 3200,
+      "concurrent_users": 200,
+      "characteristics": "End-of-quarter batch processing with elevated concurrency",
+      "observed_p95_ms": 85.0,
+      "status": "PASS"
+    },
+    {
+      "profile_id": "WL-BURST",
+      "profile_name": "Burst Spike Ingestion",
+      "target_throughput_dph": 8000,
+      "concurrent_users": 500,
+      "characteristics": "Sudden 10x traffic spike from automated document feeds",
+      "observed_p95_ms": 180.0,
+      "status": "PASS"
+    },
+    {
+      "profile_id": "WL-LARGE-DOC",
+      "profile_name": "Large Document Processing",
+      "target_throughput_dph": 400,
+      "concurrent_users": 20,
+      "characteristics": "50+ page PDFs with dense tables, images, and mixed layouts",
+      "observed_p95_ms": 320.0,
+      "status": "PASS"
+    },
+    {
+      "profile_id": "WL-AI-SLOW",
+      "profile_name": "AI Inference Slowdown",
+      "target_throughput_dph": 600,
+      "concurrent_users": 100,
+      "characteristics": "Gemini API throttling simulation with elevated inference latency",
+      "observed_p95_ms": 450.0,
+      "status": "PASS"
+    }
+  ],
+  "all_profiles_passed": true
+}

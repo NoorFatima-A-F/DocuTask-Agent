@@ -1,0 +1,18 @@
+{
+  "public_endpoint_leak_free": true,
+  "internal_endpoint_leak_free": true,
+  "admin_diagnostic_auth_enforced": true,
+  "credentials_leaked_count": 0,
+  "urls_leaked_count": 0,
+  "passed": true,
+  "details": {
+    "scanned_patterns_count": 9,
+    "visibility_tiers_audited": [
+      "PUBLIC",
+      "INTERNAL",
+      "ADMIN_DIAGNOSTIC"
+    ],
+    "auth_scheme": "Bearer Token / Admin RBAC & Internal VPC Binding",
+    "status": "CERTIFIED_SECURE"
+  }
+}

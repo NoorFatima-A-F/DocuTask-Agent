@@ -1,0 +1,87 @@
+{
+  "verifier_id": "VERIFY-3N.3-CONTAINER-SEC",
+  "phase_id": "3N.3",
+  "phase_name": "Container Security Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Non-Root User Execution Enforcement",
+      "passed": true,
+      "details": "All 4 containers run under unprivileged non-root user (UID 10001: appuser).",
+      "metrics": {
+        "non_root_verified": true
+      }
+    },
+    {
+      "name": "Read-Only Root Filesystem (readOnlyRootFilesystem: true)",
+      "passed": true,
+      "details": "Containers execute with read-only root filesystem; only ephemeral /tmp tmpfs mounts permitted.",
+      "metrics": {
+        "read_only_rootfs_verified": true
+      }
+    },
+    {
+      "name": "Linux Capabilities Dropped (drop: ALL)",
+      "passed": true,
+      "details": "All default Linux kernel capabilities dropped to prevent container breakout exploits.",
+      "metrics": {
+        "capabilities_dropped_all": true
+      }
+    },
+    {
+      "name": "Privilege Escalation Prevention (allowPrivilegeEscalation: false)",
+      "passed": true,
+      "details": "Privilege escalation flags blocked; simulated setuid/sudo escalation attempts denied.",
+      "metrics": {
+        "privilege_escalation_prevented": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:58.301512+00:00",
+  "execution_timestamp": "2026-09-19T07:04:58.301520+00:00",
+  "summary": "Container security verified: All 4 containers hardened with non-root UID 10001, read-only rootfs, and dropped capabilities.",
+  "report_title": "Container Security Verification Report",
+  "containers_audited": 4,
+  "non_root_execution_verified": true,
+  "read_only_rootfs_verified": true,
+  "privilege_escalation_prevented": true,
+  "containers": [
+    {
+      "container_name": "docutask-api",
+      "user_uid": 10001,
+      "read_only_rootfs": true,
+      "capabilities_dropped": [
+        "ALL"
+      ],
+      "privilege_escalation_blocked": true
+    },
+    {
+      "container_name": "docutask-worker",
+      "user_uid": 10001,
+      "read_only_rootfs": true,
+      "capabilities_dropped": [
+        "ALL"
+      ],
+      "privilege_escalation_blocked": true
+    },
+    {
+      "container_name": "docutask-agent-runtime",
+      "user_uid": 10001,
+      "read_only_rootfs": true,
+      "capabilities_dropped": [
+        "ALL"
+      ],
+      "privilege_escalation_blocked": true
+    },
+    {
+      "container_name": "docutask-db-migration",
+      "user_uid": 10001,
+      "read_only_rootfs": true,
+      "capabilities_dropped": [
+        "ALL"
+      ],
+      "privilege_escalation_blocked": true
+    }
+  ]
+}

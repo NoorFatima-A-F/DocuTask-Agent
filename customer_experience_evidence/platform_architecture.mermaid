@@ -1,0 +1,40 @@
+```mermaid
+graph TD
+    subgraph Enterprise_User_Experience ["Enterprise User Experience"]
+        UI[Customer Platform & Automation Studio]
+        HITL[Approval & Exception Center]
+        Analytics[Executive ROI Dashboard]
+        Trust[Trust & Governance Center]
+    end
+
+    subgraph Integration_Tier ["Enterprise Connector Hub"]
+        ConnComm[Slack / Teams / Gmail / Outlook]
+        ConnStore[Google Drive / SharePoint / S3]
+        ConnERP[QuickBooks / NetSuite / Salesforce]
+    end
+
+    subgraph Autonomous_MultiAgent_Kernel ["Autonomous Multi-Agent Kernel"]
+        Supervisor[Supervisory Orchestrator Agent]
+        OCRAgent[Multimodal OCR & Layout Parser]
+        ExtractionAgent[LLM Extraction & Grounding Agent]
+        ValidationAgent[Deterministic Business Rules & PO Matcher]
+        SelfHealingAgent[SRE Resilience & Auto-Remediator]
+    end
+
+    subgraph Knowledge_Memory_Infrastructure ["Knowledge & Memory Infrastructure"]
+        VectorDB[Qdrant / PGVector Hybrid RAG]
+        MemStore[Episodic & Procedural Agent Memory]
+        AuditLog[Cryptographic Immutable Audit Ledger]
+    end
+
+    UI & HITL --> Supervisor
+    ConnComm & ConnStore --> Supervisor
+    Supervisor --> OCRAgent --> ExtractionAgent --> ValidationAgent
+    ValidationAgent -.->|Confidence < 95%| HITL
+    ValidationAgent -->|Auto-Approved| ConnERP
+    SelfHealingAgent --> Supervisor
+    ExtractionAgent <--> VectorDB
+    Supervisor <--> MemStore
+    ValidationAgent --> AuditLog
+    Analytics --> AuditLog
+```

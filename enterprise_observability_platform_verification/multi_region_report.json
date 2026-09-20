@@ -1,0 +1,29 @@
+{
+  "report_title": "Multi-Region Reliability Verification Report",
+  "regions": [
+    {
+      "region_id": "us-east-1",
+      "region_name": "US East (Primary Core Region)",
+      "health_score_pct": 99.98,
+      "latency_p95_ms": 38.5,
+      "replication_lag_ms": 8.0,
+      "active_traffic_pct": 50.0,
+      "status": "HEALTHY"
+    },
+    {
+      "region_id": "eu-west-1",
+      "region_name": "EU West (Secondary Core Region)",
+      "health_score_pct": 99.95,
+      "latency_p95_ms": 44.2,
+      "replication_lag_ms": 12.5,
+      "active_traffic_pct": 50.0,
+      "status": "HEALTHY"
+    }
+  ],
+  "regional_health_monitoring": true,
+  "failover_visibility": true,
+  "latency_comparison_active": true,
+  "replication_monitoring_active": true,
+  "automated_failover_verified": true,
+  "status": "PASS"
+}

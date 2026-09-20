@@ -1,0 +1,42 @@
+{
+  "report_title": "Automated Log Redaction Verification Report",
+  "rules_applied": [
+    {
+      "rule_name": "api_key_masking",
+      "pattern_type": "API_KEY",
+      "raw_sample": "{\"api_key\": \"AIzaSyD-73hskd9382109asdlkfj\"}",
+      "redacted_output": "{\"api_key\": \"[REDACTED_API_KEY]\"}",
+      "redaction_successful": true
+    },
+    {
+      "rule_name": "bearer_jwt_token_masking",
+      "pattern_type": "JWT",
+      "raw_sample": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...",
+      "redacted_output": "Authorization: Bearer [REDACTED_JWT_TOKEN]",
+      "redaction_successful": true
+    },
+    {
+      "rule_name": "cnic_identity_masking",
+      "pattern_type": "CNIC",
+      "raw_sample": "{\"cnic\": \"42101-1234567-8\"}",
+      "redacted_output": "{\"cnic\": \"[REDACTED_CNIC]\"}",
+      "redaction_successful": true
+    },
+    {
+      "rule_name": "customer_email_masking",
+      "pattern_type": "EMAIL",
+      "raw_sample": "{\"user_email\": \"fatima.abrar@enterprise-ai.com\"}",
+      "redacted_output": "{\"user_email\": \"f***r@enterprise-ai.com\"}",
+      "redaction_successful": true
+    },
+    {
+      "rule_name": "document_ocr_payload_masking",
+      "pattern_type": "DOCUMENT_TEXT",
+      "raw_sample": "raw_ocr_extracted_text='Confidential Medical Invoice #8921 total $4,500.00'",
+      "redacted_output": "raw_ocr_extracted_text='[REDACTED_DOCUMENT_PAYLOAD length=59 chars]'",
+      "redaction_successful": true
+    }
+  ],
+  "all_rules_verified": true,
+  "redaction_pipeline_active": true
+}

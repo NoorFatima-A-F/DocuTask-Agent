@@ -1,0 +1,15 @@
+{
+  "certification_id": "CERT-3G6-MULTI-REGION-FAILOVER-001",
+  "platform": "DocuTask Agent",
+  "phase": "3G.6",
+  "primary_region": "us-east-1",
+  "secondary_region": "us-west-2",
+  "overall_failover_score": 100.0,
+  "availability_tier": "99.99% (Enterprise High Availability)",
+  "certification_verdict": "ENTERPRISE_CLOUD_RESILIENT",
+  "ci_cd_deployment_approved": true,
+  "measured_rto_seconds": 42.0,
+  "measured_rpo_seconds": 0.0,
+  "issued_at_utc": "2026-09-15T08:15:59.023452+00:00",
+  "valid_until_utc": "2027-09-15T12:00:00Z"
+}

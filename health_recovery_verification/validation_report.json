@@ -1,0 +1,40 @@
+{
+  "report_title": "Recovery Validation Engine Report",
+  "total_probes_executed": 4,
+  "passed_probes_count": 4,
+  "probes": [
+    {
+      "component": "PostgreSQL_Database",
+      "pre_recovery_state": "UNHEALTHY",
+      "post_recovery_state": "READY",
+      "functional_probe_type": "SELECT 1 + Transaction Write/Rollback Probe",
+      "probe_passed": true,
+      "probe_latency_ms": 11.2
+    },
+    {
+      "component": "OCR_Worker",
+      "pre_recovery_state": "UNHEALTHY",
+      "post_recovery_state": "READY",
+      "functional_probe_type": "Synthetic Document Ingestion & Heartbeat Check",
+      "probe_passed": true,
+      "probe_latency_ms": 85.0
+    },
+    {
+      "component": "Redis_Task_Queue",
+      "pre_recovery_state": "DEGRADED",
+      "post_recovery_state": "READY",
+      "functional_probe_type": "Synthetic Message Push & Immediate Pop Acknowledgment",
+      "probe_passed": true,
+      "probe_latency_ms": 6.4
+    },
+    {
+      "component": "API_Gateway",
+      "pre_recovery_state": "UNHEALTHY",
+      "post_recovery_state": "READY",
+      "functional_probe_type": "Synthetic HTTP /health/ready Status Probe",
+      "probe_passed": true,
+      "probe_latency_ms": 14.8
+    }
+  ],
+  "post_recovery_verification_confirmed": true
+}

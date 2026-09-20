@@ -1,0 +1,78 @@
+{
+  "report_title": "Service Level Indicator (SLI) Continuous Telemetry Report",
+  "total_subsystems": 7,
+  "subsystems": [
+    {
+      "subsystem": "API_Gateway",
+      "good_events": 99960,
+      "total_events": 100000,
+      "current_sli_pct": 99.96,
+      "latency_p95_ms": 185.0,
+      "error_rate_pct": 0.04,
+      "target_slo_pct": 99.9,
+      "meeting_slo": true
+    },
+    {
+      "subsystem": "PostgreSQL_Database",
+      "good_events": 249920,
+      "total_events": 250000,
+      "current_sli_pct": 99.968,
+      "latency_p95_ms": 22.5,
+      "error_rate_pct": 0.032,
+      "target_slo_pct": 99.95,
+      "meeting_slo": true
+    },
+    {
+      "subsystem": "Redis_Task_Queue",
+      "good_events": 49850,
+      "total_events": 50000,
+      "current_sli_pct": 99.7,
+      "latency_p95_ms": 120.0,
+      "error_rate_pct": 0.3,
+      "target_slo_pct": 99.0,
+      "meeting_slo": true
+    },
+    {
+      "subsystem": "Distributed_Workers",
+      "good_events": 49780,
+      "total_events": 50000,
+      "current_sli_pct": 99.56,
+      "latency_p95_ms": 450.0,
+      "error_rate_pct": 0.44,
+      "target_slo_pct": 99.5,
+      "meeting_slo": true
+    },
+    {
+      "subsystem": "Gemini_AI_Provider",
+      "good_events": 19860,
+      "total_events": 20000,
+      "current_sli_pct": 99.3,
+      "latency_p95_ms": 1850.0,
+      "error_rate_pct": 0.7,
+      "target_slo_pct": 99.0,
+      "meeting_slo": true
+    },
+    {
+      "subsystem": "OCR_Pipeline",
+      "good_events": 29700,
+      "total_events": 30000,
+      "current_sli_pct": 99.0,
+      "latency_p95_ms": 850.0,
+      "error_rate_pct": 1.0,
+      "target_slo_pct": 98.5,
+      "meeting_slo": true
+    },
+    {
+      "subsystem": "Storage_Persistence",
+      "good_events": 99995,
+      "total_events": 100000,
+      "current_sli_pct": 99.995,
+      "latency_p95_ms": 35.0,
+      "error_rate_pct": 0.005,
+      "target_slo_pct": 99.99,
+      "meeting_slo": true
+    }
+  ],
+  "collection_active": true,
+  "telemetry_pipeline_healthy": true
+}

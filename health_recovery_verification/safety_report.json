@@ -1,0 +1,39 @@
+{
+  "report_title": "Recovery Safety & Blast Radius Isolation Report",
+  "total_safety_rules_verified": 5,
+  "safety_checks": [
+    {
+      "safety_rule": "Infinite Restart Loop Protection",
+      "target_component": "All_Subsystems",
+      "protection_active": true,
+      "mitigation_details": "Max retry limit capped at 3 attempts within 5-minute rolling window before escalating to operator."
+    },
+    {
+      "safety_rule": "Exponential Backoff & Jitter",
+      "target_component": "PostgreSQL & Redis",
+      "protection_active": true,
+      "mitigation_details": "Initial backoff 1s, factor 2.0 with \u00b120% randomized jitter; max backoff 30s."
+    },
+    {
+      "safety_rule": "Component Blast Radius Isolation",
+      "target_component": "Gemini_AI_Provider",
+      "protection_active": true,
+      "mitigation_details": "AI provider failure degrades extraction mode gracefully; API Gateway and core DB remain 100% operational."
+    },
+    {
+      "safety_rule": "Mandatory Recovery Action Timeout",
+      "target_component": "Worker_Spawn & Pool_Recycle",
+      "protection_active": true,
+      "mitigation_details": "Hard timeout of 45 seconds enforced via asyncio.wait_for; cancels hanging child processes on expiry."
+    },
+    {
+      "safety_rule": "Flapping & Cooldown Suppression",
+      "target_component": "Auto_Scaler & Health_Probes",
+      "protection_active": true,
+      "mitigation_details": "Minimum 60-second cooldown enforced between automated recovery executions."
+    }
+  ],
+  "infinite_loop_protection_active": true,
+  "blast_radius_isolated": true,
+  "timeouts_enforced": true
+}

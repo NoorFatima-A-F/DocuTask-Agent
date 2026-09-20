@@ -1,0 +1,11 @@
+{
+  "container_scan_status": "PASSED",
+  "secret_scan_status": "PASSED",
+  "dependency_scan_status": "PASSED",
+  "critical_vulnerabilities": 0,
+  "high_vulnerabilities": 0,
+  "secrets_detected": 0,
+  "gate_passed": true,
+  "blocking_reasons": [],
+  "timestamp": "2026-09-19T07:04:46.286700+00:00"
+}

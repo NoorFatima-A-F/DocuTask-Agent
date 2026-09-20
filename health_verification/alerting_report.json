@@ -1,0 +1,46 @@
+{
+  "total_alerts_generated": 3,
+  "critical_alerts_count": 1,
+  "warning_alerts_count": 1,
+  "recovery_alerts_count": 1,
+  "alerts": [
+    {
+      "alert_name": "ServiceDegradedWarning",
+      "severity": "WARNING",
+      "service": "docutask-api",
+      "summary": "Service operating in DEGRADED mode: Gemini AI latency elevation detected",
+      "description": "Triggered by signal 'ai_latency_probe' at 2026-09-19T07:05:13.811621+00:00",
+      "timestamp": "2026-09-19T07:05:13.811621+00:00"
+    },
+    {
+      "alert_name": "ServiceUnhealthyCritical",
+      "severity": "CRITICAL",
+      "service": "docutask-api",
+      "summary": "Service transitioned to NOT_READY: PostgreSQL connection dropped",
+      "description": "Triggered by signal 'db_connection_failure' at 2026-09-19T07:05:13.811722+00:00",
+      "timestamp": "2026-09-19T07:05:13.811722+00:00"
+    },
+    {
+      "alert_name": "ServiceRecoveredInfo",
+      "severity": "RECOVERY",
+      "service": "docutask-api",
+      "summary": "Service successfully restored to READY: All validation prerequisites satisfied",
+      "description": "Validated recovery at 2026-09-19T07:05:13.811908+00:00",
+      "timestamp": "2026-09-19T07:05:13.811908+00:00"
+    }
+  ],
+  "prometheus_alertmanager_compatible": true,
+  "passed": true,
+  "details": {
+    "alertmanager_rules": [
+      "ServiceUnhealthyCritical",
+      "ServiceDegradedWarning",
+      "ServiceRecoveredInfo"
+    ],
+    "notification_routing": [
+      "slack_sre_channel",
+      "pagerduty_p1",
+      "datadog_webhook"
+    ]
+  }
+}

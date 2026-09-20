@@ -1,0 +1,8 @@
+{
+  "deduplication_enabled": true,
+  "inhibition_rules_active": true,
+  "cascade_grouping_verified": true,
+  "maintenance_window_suppression_verified": true,
+  "noise_reduction_ratio": 0.94,
+  "status": "PASS"
+}

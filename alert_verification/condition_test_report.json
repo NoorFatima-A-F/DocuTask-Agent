@@ -1,0 +1,63 @@
+{
+  "rules_tested_count": 8,
+  "transition_results": [
+    {
+      "alert_name": "DocuTaskDatabaseDown",
+      "condition_false_state": "NORMAL",
+      "condition_true_state": "FIRING",
+      "condition_recovered_state": "RESOLVED",
+      "transition_success": true
+    },
+    {
+      "alert_name": "DocuTaskAPIServiceDown",
+      "condition_false_state": "NORMAL",
+      "condition_true_state": "FIRING",
+      "condition_recovered_state": "RESOLVED",
+      "transition_success": true
+    },
+    {
+      "alert_name": "DocuTaskWorkerPoolExhausted",
+      "condition_false_state": "NORMAL",
+      "condition_true_state": "FIRING",
+      "condition_recovered_state": "RESOLVED",
+      "transition_success": true
+    },
+    {
+      "alert_name": "DocuTaskHighAPILatency",
+      "condition_false_state": "NORMAL",
+      "condition_true_state": "FIRING",
+      "condition_recovered_state": "RESOLVED",
+      "transition_success": true
+    },
+    {
+      "alert_name": "DocuTaskGeminiProviderSlow",
+      "condition_false_state": "NORMAL",
+      "condition_true_state": "FIRING",
+      "condition_recovered_state": "RESOLVED",
+      "transition_success": true
+    },
+    {
+      "alert_name": "DocuTaskQueueDepthBacklog",
+      "condition_false_state": "NORMAL",
+      "condition_true_state": "FIRING",
+      "condition_recovered_state": "RESOLVED",
+      "transition_success": true
+    },
+    {
+      "alert_name": "DocuTaskMemoryPressure",
+      "condition_false_state": "NORMAL",
+      "condition_true_state": "FIRING",
+      "condition_recovered_state": "RESOLVED",
+      "transition_success": true
+    },
+    {
+      "alert_name": "DocuTaskUnauthorizedAccessSpike",
+      "condition_false_state": "NORMAL",
+      "condition_true_state": "FIRING",
+      "condition_recovered_state": "RESOLVED",
+      "transition_success": true
+    }
+  ],
+  "lifecycle_accuracy_score": 100.0,
+  "status": "PASS"
+}

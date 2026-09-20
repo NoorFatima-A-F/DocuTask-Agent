@@ -1,0 +1,47 @@
+{
+  "workflow_stages_audited": [
+    {
+      "workflow_stage": "Document Ingestion & OCR",
+      "retains_raw_prompt": false,
+      "retains_model_response": false,
+      "retains_agent_memory": false,
+      "retains_abstract_metadata": true,
+      "is_privacy_compliant": true
+    },
+    {
+      "workflow_stage": "Prompt Construction",
+      "retains_raw_prompt": false,
+      "retains_model_response": false,
+      "retains_agent_memory": false,
+      "retains_abstract_metadata": true,
+      "is_privacy_compliant": true
+    },
+    {
+      "workflow_stage": "Gemini LLM Inference Call",
+      "retains_raw_prompt": false,
+      "retains_model_response": false,
+      "retains_agent_memory": false,
+      "retains_abstract_metadata": true,
+      "is_privacy_compliant": true
+    },
+    {
+      "workflow_stage": "Structured Entity Extraction & Schema Validation",
+      "retains_raw_prompt": false,
+      "retains_model_response": false,
+      "retains_agent_memory": false,
+      "retains_abstract_metadata": true,
+      "is_privacy_compliant": true
+    },
+    {
+      "workflow_stage": "Agentic Memory & Multi-Step Reasoning",
+      "retains_raw_prompt": false,
+      "retains_model_response": false,
+      "retains_agent_memory": false,
+      "retains_abstract_metadata": true,
+      "is_privacy_compliant": true
+    }
+  ],
+  "zero_prompt_leakage_verified": true,
+  "zero_response_leakage_verified": true,
+  "ai_observability_safe": true
+}

@@ -1,0 +1,42 @@
+{
+  "total_alert_mappings": 5,
+  "mappings": [
+    {
+      "alert_name": "DocuTaskDatabaseDown",
+      "target_incident_title": "PostgreSQL Database Unavailable",
+      "mapped_priority": "P1_CRITICAL",
+      "assigned_owner": "Database Reliability Team",
+      "verified": true
+    },
+    {
+      "alert_name": "DocuTaskAPIServiceDown",
+      "target_incident_title": "Core API Service Outage",
+      "mapped_priority": "P1_CRITICAL",
+      "assigned_owner": "SRE Platform Team",
+      "verified": true
+    },
+    {
+      "alert_name": "DocuTaskWorkerPoolExhausted",
+      "target_incident_title": "Document Processing Worker Pool Failure",
+      "mapped_priority": "P1_CRITICAL",
+      "assigned_owner": "Agent Runtime Operations",
+      "verified": true
+    },
+    {
+      "alert_name": "DocuTaskHighAPILatency",
+      "target_incident_title": "API Request Latency Degradation",
+      "mapped_priority": "P2_HIGH",
+      "assigned_owner": "SRE Platform Team",
+      "verified": true
+    },
+    {
+      "alert_name": "DocuTaskGeminiProviderSlow",
+      "target_incident_title": "External Gemini LLM Latency Spike",
+      "mapped_priority": "P2_HIGH",
+      "assigned_owner": "AI Platform Reliability Team",
+      "verified": true
+    }
+  ],
+  "mapping_accuracy_score": 100.0,
+  "status": "PASS"
+}

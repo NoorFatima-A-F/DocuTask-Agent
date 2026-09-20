@@ -1,0 +1,98 @@
+{
+  "total_clusters": 3,
+  "clusters": [
+    {
+      "cluster_id": "CLUSTER-001-POSTGRES",
+      "correlated_signals_count": 3,
+      "primary_component": "postgresql",
+      "signals": [
+        {
+          "signal_id": "SIG-01",
+          "source_component": "postgresql",
+          "signal_type": "metric_breach",
+          "description": "Connection pool saturation > 95%",
+          "value": 98.0,
+          "timestamp": "2026-09-19T07:04:12.980787+00:00"
+        },
+        {
+          "signal_id": "SIG-02",
+          "source_component": "postgresql",
+          "signal_type": "error_log",
+          "description": "FATAL: remaining connection slots are reserved for non-replication superuser",
+          "value": 1.0,
+          "timestamp": "2026-09-19T07:04:12.980947+00:00"
+        },
+        {
+          "signal_id": "SIG-03",
+          "source_component": "api_gateway",
+          "signal_type": "metric_breach",
+          "description": "HTTP 500 spike on /api/v1/documents",
+          "value": 14.5,
+          "timestamp": "2026-09-19T07:04:12.981002+00:00"
+        }
+      ],
+      "correlation_score": 0.96,
+      "summary": "PostgreSQL connection exhaustion leading to API transaction failures"
+    },
+    {
+      "cluster_id": "CLUSTER-002-REDIS",
+      "correlated_signals_count": 3,
+      "primary_component": "redis_queue",
+      "signals": [
+        {
+          "signal_id": "SIG-04",
+          "source_component": "redis_queue",
+          "signal_type": "metric_breach",
+          "description": "Queue length exceeded 1000 items",
+          "value": 1240.0,
+          "timestamp": "2026-09-19T07:04:12.981118+00:00"
+        },
+        {
+          "signal_id": "SIG-05",
+          "source_component": "redis_queue",
+          "signal_type": "trace_latency",
+          "description": "Redis PING response time > 250ms",
+          "value": 310.0,
+          "timestamp": "2026-09-19T07:04:12.981163+00:00"
+        },
+        {
+          "signal_id": "SIG-06",
+          "source_component": "worker_fleet",
+          "signal_type": "state_change",
+          "description": "Worker task processing throughput dropped by 80%",
+          "value": 0.2,
+          "timestamp": "2026-09-19T07:04:12.981210+00:00"
+        }
+      ],
+      "correlation_score": 0.94,
+      "summary": "Redis queue memory pressure and task accumulation delaying worker throughput"
+    },
+    {
+      "cluster_id": "CLUSTER-003-GEMINI",
+      "correlated_signals_count": 2,
+      "primary_component": "gemini_ai",
+      "signals": [
+        {
+          "signal_id": "SIG-07",
+          "source_component": "gemini_ai",
+          "signal_type": "metric_breach",
+          "description": "External AI API HTTP 503 response rate > 50%",
+          "value": 65.0,
+          "timestamp": "2026-09-19T07:04:12.981308+00:00"
+        },
+        {
+          "signal_id": "SIG-08",
+          "source_component": "gemini_ai",
+          "signal_type": "error_log",
+          "description": "GoogleGenAIError: Model overloaded, backoff initiated",
+          "value": 1.0,
+          "timestamp": "2026-09-19T07:04:12.981355+00:00"
+        }
+      ],
+      "correlation_score": 0.92,
+      "summary": "Gemini external endpoint 503 outage triggering fallback routing"
+    }
+  ],
+  "avg_correlation_confidence": 0.94,
+  "status": "PASS"
+}

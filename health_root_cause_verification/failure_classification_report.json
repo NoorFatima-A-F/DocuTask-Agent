@@ -1,0 +1,57 @@
+{
+  "title": "Failure Classification & False Positive Control Report",
+  "false_positive_audit": {
+    "total_signals_evaluated": 150,
+    "transient_spikes_damped": 12,
+    "multi_signal_confirmed_count": 4,
+    "false_positive_rate_pct": 0.0,
+    "status": "PASS"
+  },
+  "historical_incident_signatures": {
+    "total_known_signatures": 4,
+    "signatures": [
+      {
+        "signature_id": "SIG-01-REDIS-MEM",
+        "failure_pattern": "Queue spike preceded by worker processing stall",
+        "root_cause": "Redis memory exhaustion and eviction lockup",
+        "historical_occurrences": 5,
+        "matching_indicators": [
+          "redis_memory_utilization > 90%",
+          "queue_latency > 300ms"
+        ]
+      },
+      {
+        "signature_id": "SIG-02-POSTGRES-CONN",
+        "failure_pattern": "Gradual connection accumulation without release under heavy report query loads",
+        "root_cause": "PostgreSQL connection pool exhaustion",
+        "historical_occurrences": 8,
+        "matching_indicators": [
+          "db_active_connections == max_connections",
+          "http_500_rate > 5%"
+        ]
+      },
+      {
+        "signature_id": "SIG-03-GEMINI-503",
+        "failure_pattern": "Batch document submission causing Gemini rate limit / 503 Overloaded response",
+        "root_cause": "External AI provider quota exhaustion / service degradation",
+        "historical_occurrences": 3,
+        "matching_indicators": [
+          "ai_http_503_rate > 40%",
+          "ai_token_quota_headroom < 5%"
+        ]
+      },
+      {
+        "signature_id": "SIG-04-WORKER-OOM",
+        "failure_pattern": "Massive 500+ page PDF OCR ingestion causing worker container termination",
+        "root_cause": "Worker container process terminated by Linux kernel OOM-killer",
+        "historical_occurrences": 4,
+        "matching_indicators": [
+          "worker_exit_code == 137",
+          "resident_set_size > 2048MB"
+        ]
+      }
+    ],
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

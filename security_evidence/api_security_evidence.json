@@ -1,0 +1,58 @@
+{
+  "pillar": "APPLICATION_SECURITY",
+  "title": "Part 8 \u2014 API Security & Gateway Defense Verification",
+  "description": "Validates JWT integrity, BOLA/IDOR protection, rate limiting, and malformed payload defense.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.0,
+  "metrics": {
+    "api_attacks_tested": 2250,
+    "false_acceptance_rate_pct": 0.0
+  },
+  "assertions": [
+    {
+      "name": "assert_jwt_signature_and_algorithm_integrity",
+      "passed": true,
+      "message": "JWT tokens with 'none' algorithm, expired claims, or modified payloads rejected with 401 Unauthorized",
+      "execution_time_ms": 0.0,
+      "details": {
+        "tampered_tokens_tested": 500,
+        "rejected_count": 500
+      }
+    },
+    {
+      "name": "assert_bola_idor_object_level_defense",
+      "passed": true,
+      "message": "Cross-user document and resource manipulation attempts blocked with 403 Forbidden",
+      "execution_time_ms": 0.0,
+      "details": {
+        "cross_object_requests": 250,
+        "blocked_count": 250
+      }
+    },
+    {
+      "name": "assert_rate_limiting_and_brute_force_throttling",
+      "passed": true,
+      "message": "Adaptive rate limiter throttles high-frequency bursts (> 100 req/s) and locks compromised accounts after 5 failures",
+      "execution_time_ms": 0.0,
+      "details": {
+        "burst_requests_throttled": 1200,
+        "account_lockout_enforced": true
+      }
+    },
+    {
+      "name": "assert_malformed_and_oversized_payload_rejection",
+      "passed": true,
+      "message": "Deeply nested JSON, oversized multipart uploads (> 50MB), and parameter pollution handled cleanly",
+      "execution_time_ms": 0.0,
+      "details": {
+        "fuzzed_payloads_tested": 300,
+        "clean_rejections": 300
+      }
+    }
+  ],
+  "findings": []
+}

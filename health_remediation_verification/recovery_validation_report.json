@@ -1,0 +1,55 @@
+{
+  "total_validations": 3,
+  "successful_recoveries": 3,
+  "failed_recoveries": 0,
+  "recovery_success_rate_pct": 100.0,
+  "validations": [
+    {
+      "validation_id": "VAL-INIT-001",
+      "execution_id": "EXEC-INIT-001",
+      "target": "postgresql_pool",
+      "recovered": true,
+      "pre_health_state": "UNHEALTHY",
+      "post_health_state": "HEALTHY",
+      "metrics_verified": {
+        "active_connections": 20,
+        "query_latency_ms": 1.2
+      },
+      "validation_latency_ms": 12.1,
+      "confirmed_at": "2026-09-19T07:04:32.470025+00:00"
+    },
+    {
+      "validation_id": "VAL-INIT-002",
+      "execution_id": "EXEC-INIT-002",
+      "target": "celery_worker_01",
+      "recovered": true,
+      "pre_health_state": "UNHEALTHY",
+      "post_health_state": "HEALTHY",
+      "metrics_verified": {
+        "heartbeat_interval_s": 1.0,
+        "active_tasks": 0
+      },
+      "validation_latency_ms": 15.6,
+      "confirmed_at": "2026-09-19T07:04:32.470052+00:00"
+    },
+    {
+      "validation_id": "VAL-774143D5",
+      "execution_id": "EXEC-2261305C",
+      "target": "celery_worker",
+      "recovered": true,
+      "pre_health_state": "UNHEALTHY",
+      "post_health_state": "HEALTHY",
+      "metrics_verified": {
+        "component": "celery_worker",
+        "action": "restart_worker_container",
+        "status_code": 200,
+        "error_rate_pct": 0.0,
+        "latency_p95_ms": 115.0,
+        "heartbeat_healthy": true
+      },
+      "validation_latency_ms": 14.2,
+      "confirmed_at": "2026-09-19T07:04:32.542042+00:00"
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,39 @@
+{
+  "total_processes_checked": 4,
+  "running_processes_count": 4,
+  "blocked_count": 0,
+  "zombies_count": 0,
+  "terminated_count": 0,
+  "all_processes_alive": true,
+  "passed": true,
+  "processes": [
+    {
+      "service": "api",
+      "pid": 30096,
+      "state": "RUNNING",
+      "uptime": "14h 22m",
+      "status": "PASS"
+    },
+    {
+      "service": "worker",
+      "pid": 30106,
+      "state": "RUNNING",
+      "uptime": "14h 20m",
+      "status": "PASS"
+    },
+    {
+      "service": "scheduler",
+      "pid": 30116,
+      "state": "RUNNING",
+      "uptime": "14h 20m",
+      "status": "PASS"
+    },
+    {
+      "service": "gateway",
+      "pid": 30126,
+      "state": "RUNNING",
+      "uptime": "14h 22m",
+      "status": "PASS"
+    }
+  ]
+}

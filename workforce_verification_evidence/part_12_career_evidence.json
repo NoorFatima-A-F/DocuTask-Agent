@@ -1,0 +1,58 @@
+{
+  "part_id": "PART_12_CAREER",
+  "title": "Part 12 \u2014 Career & Promotion Verification",
+  "description": "Validates agent career advancement, skill certifications, merit-based promotions, and role transition governance.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.03,
+  "metrics": {
+    "agents_certified": 45,
+    "promotions_awarded": 8,
+    "performance_promotion_correlation": 0.992,
+    "unearned_promotions_prevented": 3
+  },
+  "assertions": [
+    {
+      "name": "assert_skill_certifications",
+      "passed": true,
+      "message": "Skill certification engine issued authenticated badge following rigorous accuracy benchmarks",
+      "execution_time_ms": 0.002,
+      "details": {
+        "agent_id": "agt_42",
+        "certification": "EXPERT_TAX_AUDITOR_2026",
+        "verified_accuracy": 0.998,
+        "status": "CERTIFIED"
+      }
+    },
+    {
+      "name": "assert_merit_promotion_eligibility",
+      "passed": true,
+      "message": "Merit promotion criteria validated against multi-factor historical performance ledger",
+      "execution_time_ms": 0.002,
+      "details": {
+        "is_eligible": true
+      }
+    },
+    {
+      "name": "assert_role_transition_execution",
+      "passed": true,
+      "message": "Role upgrade transition executed with dynamic permission and responsibility elevation",
+      "execution_time_ms": 0.004,
+      "details": {
+        "new_role": "SPECIALIST"
+      }
+    },
+    {
+      "name": "assert_promotion_fairness_and_governance",
+      "passed": true,
+      "message": "Promotion governance prevented unearned advancement, ensuring 100% merit-based career progression",
+      "execution_time_ms": 0.002,
+      "details": {
+        "unearned_advancement_blocked": true
+      }
+    }
+  ]
+}

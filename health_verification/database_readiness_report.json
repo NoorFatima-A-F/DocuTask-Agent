@@ -1,0 +1,12 @@
+{
+  "connection_available": true,
+  "authentication_valid": true,
+  "schema_compatible": true,
+  "alembic_migrations_complete": true,
+  "transaction_test_passed": true,
+  "query_latency_ms": 14.2,
+  "latency_threshold_ms": 100.0,
+  "active_pool_connections": 10,
+  "max_pool_connections": 20,
+  "status": "READY"
+}

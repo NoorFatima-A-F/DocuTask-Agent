@@ -1,0 +1,8 @@
+{
+  "total_alerts_generated": 102,
+  "unique_incidents_opened": 12,
+  "alerts_per_incident_ratio": 1.4,
+  "duplicate_suppression_rate": 0.96,
+  "noise_index_score": 96.5,
+  "status": "PASS"
+}

@@ -1,0 +1,14 @@
+{
+  "version": "3.17.0",
+  "overall_score": 100.0,
+  "certification": "Enterprise Infrastructure Ready",
+  "categories": {
+    "Reliability": 100.0,
+    "Security": 100.0,
+    "Scalability": 100.0,
+    "Observability": 100.0,
+    "Deployment Quality": 100.0,
+    "Recovery Capability": 100.0
+  },
+  "recorded_at": "2026-09-19T07:04:57.205506+00:00"
+}

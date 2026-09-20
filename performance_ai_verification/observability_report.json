@@ -1,0 +1,109 @@
+{
+  "verifier_id": "VERIFY-3J.9.12-OBSERVABILITY",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "SRE 4 Golden Signals Active (Latency, Traffic, Errors, Saturation)",
+      "passed": true,
+      "details": "HTTP request latency, request rate, error rate, and host resource saturation mapped to Prometheus",
+      "metrics": {
+        "golden_signals_count": 4
+      }
+    },
+    {
+      "name": "AI & Document Pipeline Telemetry Integration (6 Metrics)",
+      "passed": true,
+      "details": "Custom metrics track documents processed, token usage, LLM/OCR latency, queue lag, and worker pool utilization",
+      "metrics": {
+        "ai_signals_count": 6
+      }
+    },
+    {
+      "name": "Grafana Dashboard Mapping Validation",
+      "passed": true,
+      "details": "100% of collected signals visualized in production Grafana operational performance dashboards",
+      "metrics": {
+        "dashboards_mapped_pct": 100.0
+      }
+    },
+    {
+      "name": "OpenTelemetry Distributed Trace Instrumentation",
+      "passed": true,
+      "details": "Distributed trace spans link upload -> queue -> OCR -> Gemini -> DB -> response with unique trace_id",
+      "metrics": {
+        "tracing_active": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:39:58.436561+00:00",
+  "execution_timestamp": "2026-09-16T18:39:58.436579+00:00",
+  "summary": "",
+  "report_title": "Performance Golden Signals & AI Observability Report",
+  "signals": [
+    {
+      "signal_type": "Golden: Latency",
+      "metric_name": "http_request_duration_seconds",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "Golden: Traffic",
+      "metric_name": "http_requests_total",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "Golden: Errors",
+      "metric_name": "http_errors_total",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "Golden: Saturation",
+      "metric_name": "system_cpu_usage_pct",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "AI: Throughput",
+      "metric_name": "documents_processed_total",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "AI: Token Usage",
+      "metric_name": "tokens_used_total",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "AI: LLM Latency",
+      "metric_name": "llm_latency_seconds",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "AI: OCR Latency",
+      "metric_name": "ocr_latency_seconds",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "AI: Queue Lag",
+      "metric_name": "queue_delay_seconds",
+      "collected": true,
+      "dashboard_mapped": true
+    },
+    {
+      "signal_type": "AI: Worker Utilization",
+      "metric_name": "worker_utilization_ratio",
+      "collected": true,
+      "dashboard_mapped": true
+    }
+  ],
+  "golden_signals_active": true,
+  "ai_telemetry_integrated": true
+}

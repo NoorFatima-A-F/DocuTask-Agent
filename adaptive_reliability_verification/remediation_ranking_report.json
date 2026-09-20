@@ -1,0 +1,72 @@
+{
+  "report_title": "Remediation Knowledge Ranking Report",
+  "ranked_signatures": [
+    {
+      "failure_signature": "Redis Socket Unreachable / Refused",
+      "component": "Redis Broker",
+      "recommendations": [
+        {
+          "action": "reconnect_socket_with_jittered_backoff",
+          "confidence": 0.98,
+          "success_rate_pct": 100.0,
+          "mean_recovery_speed_ms": 120.0,
+          "risk_level": "LOW",
+          "rank": 1
+        },
+        {
+          "action": "restart_redis_service_container",
+          "confidence": 0.75,
+          "success_rate_pct": 92.0,
+          "mean_recovery_speed_ms": 4500.0,
+          "risk_level": "MEDIUM",
+          "rank": 2
+        }
+      ]
+    },
+    {
+      "failure_signature": "PostgreSQL Connection Pool Timeout",
+      "component": "PostgreSQL Database",
+      "recommendations": [
+        {
+          "action": "drain_and_refresh_connection_pool",
+          "confidence": 0.99,
+          "success_rate_pct": 100.0,
+          "mean_recovery_speed_ms": 280.0,
+          "risk_level": "LOW",
+          "rank": 1
+        },
+        {
+          "action": "restart_fastapi_backend_instances",
+          "confidence": 0.7,
+          "success_rate_pct": 88.0,
+          "mean_recovery_speed_ms": 6200.0,
+          "risk_level": "MEDIUM",
+          "rank": 2
+        }
+      ]
+    },
+    {
+      "failure_signature": "Worker Process Memory Saturation",
+      "component": "Celery Worker Pool",
+      "recommendations": [
+        {
+          "action": "recycle_worker_child_process",
+          "confidence": 0.97,
+          "success_rate_pct": 99.0,
+          "mean_recovery_speed_ms": 450.0,
+          "risk_level": "LOW",
+          "rank": 1
+        },
+        {
+          "action": "restart_entire_worker_deployment",
+          "confidence": 0.82,
+          "success_rate_pct": 95.0,
+          "mean_recovery_speed_ms": 12000.0,
+          "risk_level": "MEDIUM",
+          "rank": 2
+        }
+      ]
+    }
+  ],
+  "ranking_engine_valid": true
+}

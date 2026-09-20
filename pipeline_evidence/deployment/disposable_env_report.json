@@ -1,0 +1,15 @@
+{
+  "environment_id": "env-ci-ephemeral-7421",
+  "isolation_mode": "Isolated Ephemeral Docker Bridge (ci_network_7421)",
+  "services_deployed": [
+    "api",
+    "worker",
+    "postgres",
+    "redis",
+    "minio"
+  ],
+  "startup_duration_sec": 3.6,
+  "health_check_status": "PASSED",
+  "teardown_status": "PASSED",
+  "timestamp": "2026-09-19T07:04:46.286735+00:00"
+}

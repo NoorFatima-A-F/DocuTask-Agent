@@ -1,0 +1,30 @@
+{
+  "report_title": "Service Level Indicators (SLI) & SLO Compliance Report",
+  "indicators": [
+    {
+      "sli_name": "API Availability (Successful / Total Requests)",
+      "target_slo_pct": 99.95,
+      "achieved_sli_pct": 99.98,
+      "status": "COMPLIANT"
+    },
+    {
+      "sli_name": "API Latency (95% of Requests < 500ms)",
+      "target_slo_pct": 95.0,
+      "achieved_sli_pct": 97.8,
+      "status": "COMPLIANT"
+    },
+    {
+      "sli_name": "Document Processing Reliability (Successful / Total Documents)",
+      "target_slo_pct": 99.9,
+      "achieved_sli_pct": 99.94,
+      "status": "COMPLIANT"
+    },
+    {
+      "sli_name": "AI Extraction Latency (P90 < 2000ms)",
+      "target_slo_pct": 90.0,
+      "achieved_sli_pct": 94.2,
+      "status": "COMPLIANT"
+    }
+  ],
+  "all_slos_met": true
+}

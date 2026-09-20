@@ -1,0 +1,39 @@
+version: "1.0"
+runbook_id: "RB-SVC-004"
+name: "API Gateway Service Restart & Ingress Traffic Restoration"
+target_service: "api_service"
+risk_level: "LOW"
+auto_execute: true
+approval_required: false
+timeout_seconds: 60
+
+pre_checks:
+  - name: "Verify API process crash"
+    condition: "service_health_status{service='api'} == 0 or http_error_rate_pct > 20.0"
+
+steps:
+  - step: 1
+    action: "divert_ingress_traffic_to_standby"
+    command: "kubectl patch ingress docutask-ingress -p '{\"spec\":{\"rules\":[{\"http\":{\"paths\":[{\"backend\":{\"service\":{\"name\":\"api-standby\"}}}]}}]}}'"
+  - step: 2
+    action: "restart_api_deployment"
+    command: "kubectl rollout restart deployment docutask-api"
+  - step: 3
+    action: "wait_for_rollout_completion"
+    command: "kubectl rollout status deployment docutask-api --timeout=45s"
+  - step: 4
+    action: "verify_api_liveness_and_readiness"
+    command: "curl -s -f http://api:8000/health/ready"
+    retry_count: 5
+    retry_interval_seconds: 3
+  - step: 5
+    action: "restore_primary_ingress_traffic"
+    command: "kubectl patch ingress docutask-ingress -p '{\"spec\":{\"rules\":[{\"http\":{\"paths\":[{\"backend\":{\"service\":{\"name\":\"docutask-api\"}}}]}}]}}'"
+
+post_checks:
+  - name: "Validate API health"
+    condition: "service_health_status{service='api'} == 1 and http_error_rate_pct < 0.1"
+
+rollback:
+  action: "maintain_standby_and_alert_sre"
+  command: "python -m app.platform_verification.scripts.escalate_to_pagerduty --sev=1"

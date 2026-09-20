@@ -1,0 +1,14 @@
+{
+  "report_title": "Redis / Task Queue Outage & Backlog Resilience Report",
+  "scenario_id": "QUEUE_FAILURE_001",
+  "target_broker": "Redis Cluster / RabbitMQ",
+  "graceful_degradation_active": true,
+  "stuck_jobs_detected": 0,
+  "unprocessed_jobs_buffered_locally": true,
+  "worker_backoff_applied": true,
+  "broker_reconnected": true,
+  "system_crashed": false,
+  "time_to_detect_ms": 380.0,
+  "time_to_recover_ms": 980.0,
+  "simulation_passed": true
+}

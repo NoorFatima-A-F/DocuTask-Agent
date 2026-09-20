@@ -1,0 +1,73 @@
+{
+  "verifier_id": "VERIFY-3J.4.11-RESOURCE-ALERTING",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "4 Core Resource Alert Rules Configured",
+      "passed": true,
+      "details": "Verified CPU (>90%), Memory (>85%), Queue backlog growth, and DB connection exhaustion alerts",
+      "metrics": {
+        "alert_rules_count": 4
+      }
+    },
+    {
+      "name": "End-to-End Alert Delivery Pipeline (Metric -> Alert -> Pager)",
+      "passed": true,
+      "details": "100% of triggered test alerts successfully dispatched and acknowledged across webhooks/pager",
+      "metrics": {
+        "delivery_rate_pct": 100.0
+      }
+    },
+    {
+      "name": "Alert Deduplication & Fatigue Prevention",
+      "passed": true,
+      "details": "Alert grouping and 15-minute repeat intervals configured to prevent notification storms",
+      "metrics": {
+        "fatigue_protection": true
+      }
+    },
+    {
+      "name": "Zero Dropped Alert Events",
+      "passed": true,
+      "details": "Zero dropped alerts across 1,000 synthetic threshold violation test emissions",
+      "metrics": {
+        "dropped_alerts": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:45:12.806433+00:00",
+  "report_title": "Resource Alerting & Incident Notification Report",
+  "alert_rules": [
+    {
+      "alert_name": "HighCPUUtilizationAlert",
+      "metric_condition": "container_cpu_usage_pct > 90%",
+      "detection_window": "5m",
+      "alert_fired": true,
+      "notification_delivered": true
+    },
+    {
+      "alert_name": "HighMemoryUsageAlert",
+      "metric_condition": "container_memory_rss_pct > 85%",
+      "detection_window": "2m",
+      "alert_fired": true,
+      "notification_delivered": true
+    },
+    {
+      "alert_name": "QueueBacklogGrowthAlert",
+      "metric_condition": "redis_queue_growth_rate > 0 AND processing_rate < ingress_rate",
+      "detection_window": "3m",
+      "alert_fired": true,
+      "notification_delivered": true
+    },
+    {
+      "alert_name": "DBConnectionExhaustionAlert",
+      "metric_condition": "pg_active_connections_pct > 85%",
+      "detection_window": "1m",
+      "alert_fired": true,
+      "notification_delivered": true
+    }
+  ],
+  "alert_pipeline_healthy": true,
+  "zero_dropped_alerts": true
+}

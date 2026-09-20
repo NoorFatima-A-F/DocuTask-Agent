@@ -1,0 +1,48 @@
+{
+  "scanned_log_sources": [
+    "API Service Logs",
+    "Worker Celery Logs",
+    "Agent Runtime Logs",
+    "PostgreSQL Query Logs",
+    "Gemini AI Provider Client Logs"
+  ],
+  "total_log_entries_scanned": 25000,
+  "raw_sensitive_occurrences": 4,
+  "sanitized_properly_count": 4,
+  "unmasked_leaks_count": 0,
+  "scanned_findings": [
+    {
+      "rule_id": "SEC-LOG-001",
+      "category": "credentials",
+      "pattern_matched": "(?i)(password|passwd|secret)\\s*[:=]\\s*['\\\"]?(\\w+)['\\\"]?",
+      "sample_raw": "db_connect(user='admin', password='SuperSecretPassword123!')",
+      "redacted_sample": "db_connect(user='admin', password='[REDACTED]')",
+      "is_safe_after_sanitization": true
+    },
+    {
+      "rule_id": "SEC-LOG-002",
+      "category": "credentials",
+      "pattern_matched": "(?i)(api[_-]?key|token)\\s*[:=]\\s*['\\\"]?([a-zA-Z0-9_\\-\\.]{20,})['\\\"]?",
+      "sample_raw": "api_key='AIzaSyD94Ksl92810kjsd81920jsd'",
+      "redacted_sample": "api_key='[REDACTED_API_KEY]'",
+      "is_safe_after_sanitization": true
+    },
+    {
+      "rule_id": "SEC-LOG-003",
+      "category": "pii",
+      "pattern_matched": "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+",
+      "sample_raw": "processing document for user fatima.khan@enterprise.com",
+      "redacted_sample": "processing document for user [REDACTED_EMAIL]",
+      "is_safe_after_sanitization": true
+    },
+    {
+      "rule_id": "SEC-LOG-004",
+      "category": "document_content",
+      "pattern_matched": "(?i)(extracted_text|contract_clause|patient_diagnosis)",
+      "sample_raw": "extracted_text='Patient diagnosed with acute carcinoma...'",
+      "redacted_sample": "extracted_text='[REDACTED_DOCUMENT_PAYLOAD]'",
+      "is_safe_after_sanitization": true
+    }
+  ],
+  "log_security_passed": true
+}

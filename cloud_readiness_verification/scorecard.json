@@ -1,0 +1,75 @@
+{
+  "overall_score": 100.0,
+  "certification_tier": "Cloud Native Ready",
+  "status": "PASSED",
+  "categories": {
+    "Container Compatibility": {
+      "name": "Container Compatibility",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "Scalability": {
+      "name": "Scalability",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "Security": {
+      "name": "Security",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "Infrastructure Automation": {
+      "name": "Infrastructure Automation",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "Storage & Database Readiness": {
+      "name": "Storage & Database Readiness",
+      "weight": 0.1,
+      "score": 100.0,
+      "contribution": 10.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "Observability": {
+      "name": "Observability",
+      "weight": 0.1,
+      "score": 100.0,
+      "contribution": 10.0,
+      "checks_passed": 4,
+      "total_checks": 4,
+      "status": "PASSED"
+    },
+    "Portability": {
+      "name": "Portability",
+      "weight": 0.05,
+      "score": 100.0,
+      "contribution": 5.0,
+      "checks_passed": 4,
+      "total_checks": 4,
+      "status": "PASSED"
+    }
+  },
+  "total_verifiers_executed": 15,
+  "total_checks_passed": 60,
+  "total_checks_evaluated": 60,
+  "generated_at": "2026-09-19T07:04:42.378828+00:00",
+  "execution_time_seconds": 0.002496480941772461
+}

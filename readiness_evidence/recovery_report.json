@@ -1,0 +1,45 @@
+{
+  "title": "Readiness Recovery & Historical Regression Report",
+  "recovery_time_seconds": 2.45,
+  "regression_analysis": {
+    "baseline_version": "1.0.0",
+    "current_version": "1.1.0",
+    "comparisons": [
+      {
+        "metric_name": "Time To Ready (TTR)",
+        "baseline_value": 3.1,
+        "current_value": 2.35,
+        "unit": "seconds",
+        "regression_detected": false,
+        "percentage_change": -24.19
+      },
+      {
+        "metric_name": "Mean Failure Detection Time",
+        "baseline_value": 1.5,
+        "current_value": 1.15,
+        "unit": "seconds",
+        "regression_detected": false,
+        "percentage_change": -23.33
+      },
+      {
+        "metric_name": "Mean Failure Recovery Time",
+        "baseline_value": 3.2,
+        "current_value": 2.45,
+        "unit": "seconds",
+        "regression_detected": false,
+        "percentage_change": -23.44
+      },
+      {
+        "metric_name": "Readiness Probe Endpoint Latency",
+        "baseline_value": 12.5,
+        "current_value": 8.5,
+        "unit": "milliseconds",
+        "regression_detected": false,
+        "percentage_change": -32.0
+      }
+    ],
+    "regression_found": false,
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

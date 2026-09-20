@@ -1,0 +1,99 @@
+{
+  "verifier_id": "VERIFY-3J.10.9-PERFORMANCE-RECOVERY",
+  "phase_id": "3J.10.9",
+  "phase_name": "Performance Recovery Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Mean Time To Detect (MTTD) Under Target (<10s)",
+      "passed": true,
+      "details": "MTTD observed: 4.20s (well below target of 10.0s).",
+      "metrics": {
+        "mttd_mean_seconds": 4.2,
+        "target_seconds": 10.0
+      }
+    },
+    {
+      "name": "Mean Time To Recover (MTTR) Under Target (<60s)",
+      "passed": true,
+      "details": "MTTR observed: 28.50s (well below SLA limit of 60.0s).",
+      "metrics": {
+        "mttr_mean_seconds": 28.5,
+        "target_seconds": 60.0
+      }
+    },
+    {
+      "name": "Autonomous Remediation Trigger Rate (>=95%)",
+      "passed": true,
+      "details": "Autonomous remediation succeeded in 98.5% of degraded event simulations.",
+      "metrics": {
+        "auto_remediation_success_rate_pct": 98.5
+      }
+    },
+    {
+      "name": "Post-Degradation State Consistency & Restoration Verified",
+      "passed": true,
+      "details": "All 4 incident timelines reached full steady-state restoration without data loss.",
+      "metrics": {
+        "incidents_evaluated": 4,
+        "all_restored": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:07.952388+00:00",
+  "execution_timestamp": "2026-09-19T07:05:07.952436+00:00",
+  "summary": "Rapid detection and autonomous recovery verified with mean MTTD=4.2s and MTTR=28.5s.",
+  "report_title": "Performance Recovery & MTTD/MTTR Report",
+  "mttd_mean_seconds": 4.2,
+  "mttr_mean_seconds": 28.5,
+  "auto_remediation_success_rate_pct": 98.5,
+  "incidents_evaluated": 4,
+  "full_restoration_verified": true,
+  "recovery_timelines": [
+    {
+      "incident_id": "INC-REC-01",
+      "incident_type": "API Gateway Latency Surge",
+      "fault_start_seconds": 0.0,
+      "detection_seconds": 3.8,
+      "mitigation_seconds": 12.0,
+      "restored_seconds": 22.5,
+      "mttd_seconds": 3.8,
+      "mttr_seconds": 22.5,
+      "status": "RESTORED"
+    },
+    {
+      "incident_id": "INC-REC-02",
+      "incident_type": "Redis Queue Task Overload",
+      "fault_start_seconds": 0.0,
+      "detection_seconds": 4.2,
+      "mitigation_seconds": 15.0,
+      "restored_seconds": 35.0,
+      "mttd_seconds": 4.2,
+      "mttr_seconds": 35.0,
+      "status": "RESTORED"
+    },
+    {
+      "incident_id": "INC-REC-03",
+      "incident_type": "AI Inference Delay Fallback",
+      "fault_start_seconds": 0.0,
+      "detection_seconds": 2.4,
+      "mitigation_seconds": 5.0,
+      "restored_seconds": 18.0,
+      "mttd_seconds": 2.4,
+      "mttr_seconds": 18.0,
+      "status": "RESTORED"
+    },
+    {
+      "incident_id": "INC-REC-04",
+      "incident_type": "DB Lock Contention Recovery",
+      "fault_start_seconds": 0.0,
+      "detection_seconds": 6.4,
+      "mitigation_seconds": 18.0,
+      "restored_seconds": 38.5,
+      "mttd_seconds": 6.4,
+      "mttr_seconds": 38.5,
+      "status": "RESTORED"
+    }
+  ]
+}

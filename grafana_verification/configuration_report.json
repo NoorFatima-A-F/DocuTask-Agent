@@ -1,0 +1,10 @@
+{
+  "grafana_version": "11.2.0",
+  "datasource_type": "prometheus",
+  "datasource_endpoint": "http://prometheus:9090",
+  "authentication_enabled": true,
+  "persistent_storage_enabled": true,
+  "backup_configured": true,
+  "secure_access_https": true,
+  "status": "PASS"
+}

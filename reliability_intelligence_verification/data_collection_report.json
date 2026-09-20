@@ -1,0 +1,117 @@
+{
+  "report_title": "Reliability Data Collection Report",
+  "total_components_monitored": 10,
+  "telemetry_items": [
+    {
+      "component": "API Gateway",
+      "time_period": "24h",
+      "availability_pct": 99.98,
+      "error_count": 2,
+      "p95_latency_ms": 45.0,
+      "mttr_seconds": 12.0,
+      "failure_count": 1,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "Agent Runtime",
+      "time_period": "24h",
+      "availability_pct": 99.95,
+      "error_count": 4,
+      "p95_latency_ms": 120.0,
+      "mttr_seconds": 15.0,
+      "failure_count": 2,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "Planner",
+      "time_period": "24h",
+      "availability_pct": 99.99,
+      "error_count": 1,
+      "p95_latency_ms": 85.0,
+      "mttr_seconds": 8.0,
+      "failure_count": 0,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "Execution Engine",
+      "time_period": "24h",
+      "availability_pct": 99.96,
+      "error_count": 3,
+      "p95_latency_ms": 150.0,
+      "mttr_seconds": 14.0,
+      "failure_count": 1,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "Workers",
+      "time_period": "24h",
+      "availability_pct": 99.92,
+      "error_count": 8,
+      "p95_latency_ms": 280.0,
+      "mttr_seconds": 18.0,
+      "failure_count": 3,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "Queue",
+      "time_period": "24h",
+      "availability_pct": 99.99,
+      "error_count": 0,
+      "p95_latency_ms": 1.5,
+      "mttr_seconds": 4.0,
+      "failure_count": 0,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "Database",
+      "time_period": "24h",
+      "availability_pct": 99.99,
+      "error_count": 1,
+      "p95_latency_ms": 3.2,
+      "mttr_seconds": 6.0,
+      "failure_count": 0,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "Storage",
+      "time_period": "24h",
+      "availability_pct": 99.99,
+      "error_count": 0,
+      "p95_latency_ms": 5.8,
+      "mttr_seconds": 5.0,
+      "failure_count": 0,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "OCR Pipeline",
+      "time_period": "24h",
+      "availability_pct": 99.94,
+      "error_count": 5,
+      "p95_latency_ms": 450.0,
+      "mttr_seconds": 22.0,
+      "failure_count": 2,
+      "llm_tokens_consumed": null,
+      "telemetry_valid": true
+    },
+    {
+      "component": "AI Provider",
+      "time_period": "24h",
+      "availability_pct": 99.91,
+      "error_count": 12,
+      "p95_latency_ms": 620.0,
+      "mttr_seconds": 16.0,
+      "failure_count": 3,
+      "llm_tokens_consumed": 1450000,
+      "telemetry_valid": true
+    }
+  ],
+  "collection_pipeline_healthy": true
+}

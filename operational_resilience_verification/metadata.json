@@ -1,0 +1,67 @@
+{
+  "framework_phase": "Phase 3H.7 \u2014 Enterprise Operational Resilience, Fault Tolerance & Self-Healing Verification",
+  "verification_id": "RESIL-VERIF-960BDF44",
+  "timestamp": "2026-09-16T07:07:26.059687+00:00",
+  "target_tier": "Enterprise Autonomous Resilience",
+  "certified_tier": "Enterprise Autonomous Resilience",
+  "overall_resilience_score": 100.0,
+  "status": "PASSED",
+  "total_reports_exported": 11,
+  "manifest": {
+    "resilience_architecture_report.json": {
+      "file_path": "operational_resilience_verification/resilience_architecture_report.json",
+      "size_bytes": 5176,
+      "sha256_checksum": "bdec4691673ed7a58efc3b4547dd32b2d8d72a960ba639667d74ffdfe5438ac7"
+    },
+    "circuit_breaker_report.json": {
+      "file_path": "operational_resilience_verification/circuit_breaker_report.json",
+      "size_bytes": 1843,
+      "sha256_checksum": "78ec5ab48423dde4547ff6cb69f19e7c7b9b450eaa303d9b57d8bb10cdb27b8d"
+    },
+    "retry_strategy_report.json": {
+      "file_path": "operational_resilience_verification/retry_strategy_report.json",
+      "size_bytes": 2123,
+      "sha256_checksum": "661ec2a38efe0a708e4e0e63a36b52cb6428cb8f5b74055548c585d83a74aa0a"
+    },
+    "graceful_degradation_report.json": {
+      "file_path": "operational_resilience_verification/graceful_degradation_report.json",
+      "size_bytes": 1955,
+      "sha256_checksum": "c919774d5e94c96245588b3f9b9caec75073b9edb3a142f035f4b5210a95f337"
+    },
+    "bulkhead_report.json": {
+      "file_path": "operational_resilience_verification/bulkhead_report.json",
+      "size_bytes": 1443,
+      "sha256_checksum": "ff4b6d0bee21b6e63c7007f9548498893c8a9c6a6c5983cf8b9af53f0694cc5a"
+    },
+    "load_shedding_report.json": {
+      "file_path": "operational_resilience_verification/load_shedding_report.json",
+      "size_bytes": 1317,
+      "sha256_checksum": "aac212066e8330152fbd1319614e7756b7066f0701369101e3e57fbc54ebbd6d"
+    },
+    "self_healing_report.json": {
+      "file_path": "operational_resilience_verification/self_healing_report.json",
+      "size_bytes": 2186,
+      "sha256_checksum": "2338492666f5686699c0850da85e9985f8eb5375894dbc262a1bc8da5f12a7b0"
+    },
+    "chaos_resilience_report.json": {
+      "file_path": "operational_resilience_verification/chaos_resilience_report.json",
+      "size_bytes": 1958,
+      "sha256_checksum": "bf9289f567b369d832e25b8dda6f7a71d912d3b963cb5c649642bfde84bf00f8"
+    },
+    "business_continuity_report.json": {
+      "file_path": "operational_resilience_verification/business_continuity_report.json",
+      "size_bytes": 1236,
+      "sha256_checksum": "6daab2b66331aa82836aeb33ca83633471c4310b21ea10953d8d0789dec82605"
+    },
+    "resilience_metrics_report.json": {
+      "file_path": "operational_resilience_verification/resilience_metrics_report.json",
+      "size_bytes": 1752,
+      "sha256_checksum": "dad2b38d2f1aa3ebca30de355a28311d242f2f364c586e2a0ed8613f7693e22a"
+    },
+    "resilience_certification_report.json": {
+      "file_path": "operational_resilience_verification/resilience_certification_report.json",
+      "size_bytes": 2345,
+      "sha256_checksum": "429d0ac3990a17067c5aca7272747c2cd7e2af062712b426dd90646c2b1afb44"
+    }
+  }
+}

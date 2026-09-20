@@ -1,0 +1,28 @@
+[
+  {
+    "scenario_id": "LEG-CNT-001",
+    "industry": "LEGAL",
+    "workflow_type": "contract_clause_analysis",
+    "sample_input": {
+      "contract_id": "CNT-2026-8801",
+      "parties": ["Enterprise Corp", "Vendor LLC"],
+      "liability_cap_amount": 5000000.0,
+      "indemnification_clause_present": true,
+      "governing_law": "State of New York"
+    },
+    "ground_truth": {
+      "contract_id": "CNT-2026-8801",
+      "parties": ["Enterprise Corp", "Vendor LLC"],
+      "liability_cap_amount": 5000000.0,
+      "indemnification_clause_present": true,
+      "governing_law": "State of New York",
+      "risk_rating": "LOW"
+    },
+    "human_baseline_time_minutes": 45.0,
+    "human_error_rate_pct": 5.0,
+    "human_cost_per_doc": 4.50,
+    "ai_processing_time_seconds": 45.0,
+    "ai_cost_per_doc": 0.15,
+    "expected_accuracy_pct": 99.4
+  }
+]

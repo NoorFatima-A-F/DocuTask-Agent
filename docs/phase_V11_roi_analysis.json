@@ -1,0 +1,21 @@
+{
+  "roi_analysis": {
+    "monthly_document_volume": 10000,
+    "employee_hourly_rate": 28.0,
+    "baseline_monthly_cost": 74666.67,
+    "ai_monthly_cost": 2080.0,
+    "monthly_net_savings": 72586.67,
+    "annual_net_savings": 871040.0,
+    "annual_platform_investment": 24000.0,
+    "net_annual_roi_pct": 3629.33,
+    "roi_multiple": 35.9,
+    "payback_period_months": 0.33
+  },
+  "productivity_impact": {
+    "baseline_human_hours_annual": 37500.0,
+    "ai_human_hours_annual": 1041.7,
+    "hours_liberated_annual": 36458.3,
+    "fte_capacity_liberated": 18.23,
+    "throughput_expansion_multiplier": 36.0
+  }
+}

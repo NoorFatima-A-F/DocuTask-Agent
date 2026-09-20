@@ -1,0 +1,32 @@
+{
+  "title": "AI Recovery & SRE Resilience Metrics",
+  "metrics": {
+    "total_experiments": 7,
+    "total_documents_processed": 350,
+    "successful_recoveries": 350,
+    "lost_tasks": 0,
+    "duplicate_tasks": 0,
+    "corrupted_results": 0,
+    "mean_detection_time_seconds": 1.45,
+    "mean_recovery_time_seconds": 2.85,
+    "overall_ai_resilience_percentage": 100.0,
+    "uptime_during_chaos_pct": 99.95,
+    "alerts_triggered_count": 12,
+    "auto_mitigations_executed": 12,
+    "manual_intervention_required": 0,
+    "status": "PASS"
+  },
+  "task_preservation": {
+    "scenario": "task_preservation",
+    "total_simulated_documents": 100,
+    "tasks_interrupted_by_faults": 45,
+    "tasks_persisted_in_db": 100,
+    "tasks_in_retry_pending_state": 45,
+    "idempotency_tokens_verified": 100,
+    "duplicate_tasks_created": 0,
+    "lost_documents_count": 0,
+    "data_consistency_score_pct": 100.0,
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,45 @@
+{
+  "total_registered_workers": 4,
+  "active_workers_count": 4,
+  "stuck_workers_count": 0,
+  "crashed_workers_count": 0,
+  "total_fleet_capacity": 40,
+  "utilized_fleet_capacity": 12,
+  "available_fleet_capacity": 28,
+  "workers": [
+    {
+      "worker_id": "worker-agent-1",
+      "status": "BUSY",
+      "last_seen_seconds_ago": 1.2,
+      "current_task": "invoice_extraction",
+      "available_capacity": 7,
+      "max_capacity": 10
+    },
+    {
+      "worker_id": "worker-agent-2",
+      "status": "IDLE",
+      "last_seen_seconds_ago": 0.8,
+      "current_task": "idle",
+      "available_capacity": 10,
+      "max_capacity": 10
+    },
+    {
+      "worker_id": "worker-agent-3",
+      "status": "BUSY",
+      "last_seen_seconds_ago": 2.1,
+      "current_task": "receipt_validation",
+      "available_capacity": 5,
+      "max_capacity": 10
+    },
+    {
+      "worker_id": "worker-agent-4",
+      "status": "IDLE",
+      "last_seen_seconds_ago": 1.5,
+      "current_task": "idle",
+      "available_capacity": 6,
+      "max_capacity": 10
+    }
+  ],
+  "sufficient_capacity": true,
+  "status": "READY"
+}

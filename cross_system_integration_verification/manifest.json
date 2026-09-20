@@ -1,0 +1,102 @@
+{
+  "dependency_mapping_report.json": {
+    "sha256": "90d5f57fa4e53763e81a979b8b76739b734f1083d2227d729b3f2aeaaa4ccb2d",
+    "size_bytes": 4232
+  },
+  "interface_contract_report.json": {
+    "sha256": "539b3ebcba511de10edebe4bc256ef1467a04daeaca6014c3e82706b92945b08",
+    "size_bytes": 3786
+  },
+  "api_chain_report.json": {
+    "sha256": "097ee2ee9c69317f9dbe6e01369d77e3d09a13e007ccaf501f5af654afe1a18a",
+    "size_bytes": 4462
+  },
+  "state_propagation_report.json": {
+    "sha256": "d8008260db215ae9f8dd34df2f2991fb9c9c40cb967228b8050af003107b2414",
+    "size_bytes": 3398
+  },
+  "knowledge_flow_report.json": {
+    "sha256": "803cd8ebeca6d05d2d184289af29afc1d091b11dc5b23acc4341427967784ef3",
+    "size_bytes": 4883
+  },
+  "memory_interaction_report.json": {
+    "sha256": "b09c931e26191e7f94e5718fd622995976d2759bc89dfe2af50a69ce37254f75",
+    "size_bytes": 3391
+  },
+  "planning_pipeline_report.json": {
+    "sha256": "4b3a715de5eb7c89d9afaee2a7a73b629b48326325d06fe18b56c0b70311fd15",
+    "size_bytes": 3403
+  },
+  "agent_collaboration_report.json": {
+    "sha256": "604b13390f9c30f8502ea3348f990dfe8dbe247e5f8304dc29c3ed2090d002e2",
+    "size_bytes": 3575
+  },
+  "cognitive_integration_report.json": {
+    "sha256": "b6be813c7f0584ab1cc614f8d55667dcfefc872659761d3b92d6dee0dfb536c8",
+    "size_bytes": 2851
+  },
+  "security_boundary_report.json": {
+    "sha256": "fe3d39b76c9d1cffb61a87fcf4a11353ffaba3c6e33d3c79bfe6de547b8b5586",
+    "size_bytes": 3256
+  },
+  "lifecycle_integration_report.json": {
+    "sha256": "919872db050d1fc1c3e490740fb84ed51eac9597ed0dfaa6eeaa4236cf4d97ad",
+    "size_bytes": 3327
+  },
+  "deployment_integration_report.json": {
+    "sha256": "944e6e50a1ade2c7e481957a33c9cb93e84ff30f7e32cee265c06e7c3a940e2c",
+    "size_bytes": 2455
+  },
+  "marketplace_validation_report.json": {
+    "sha256": "42eeabfbde335452744babebc464c31c77da63e7a9bfea121ddb37d46d14c0db",
+    "size_bytes": 2959
+  },
+  "event_bus_report.json": {
+    "sha256": "2432d0f4a57590f95e2584d3624d71546c2414ea5f17caf5d256823659504bc5",
+    "size_bytes": 2849
+  },
+  "scheduler_report.json": {
+    "sha256": "458100b32792bab9bdf7d140a6bde07e301201a86ba374bb8a9c5a16db23d14f",
+    "size_bytes": 2705
+  },
+  "observability_integration_report.json": {
+    "sha256": "c3cee8789ee780c85ef5ca92e0bc6684cac63c0556449bbe8603fa13cb4ef430",
+    "size_bytes": 3138
+  },
+  "data_integrity_report.json": {
+    "sha256": "5fad433d86fab3e22ab33ea01b8c743a2063a600bcc66c9775e073701b9dacb3",
+    "size_bytes": 3076
+  },
+  "failure_propagation_report.json": {
+    "sha256": "1192ed6bec353d71c572eb60df86fd35217c06d728a893a12da5956f46d6dc40",
+    "size_bytes": 3177
+  },
+  "cross_system_performance_report.json": {
+    "sha256": "af973247da23b50770dfab11d1b921b97a66e4b07949b8fcdaf4023ac838fa94",
+    "size_bytes": 3090
+  },
+  "enterprise_workflows_report.json": {
+    "sha256": "b22365d2dd34961a41ce0d3a451bf254737613e8712cd740a2ba12ffb28265dc",
+    "size_bytes": 4166
+  },
+  "integration_regression_report.json": {
+    "sha256": "253cec651c00116bd948d1a1c59e70dd0173217047623068a01c86d69b8282a7",
+    "size_bytes": 2955
+  },
+  "evidence_generation_report.json": {
+    "sha256": "b1d088eca5a41da7ab5865d581778542676af21ca78f39429b5ecd061b02bc34",
+    "size_bytes": 3987
+  },
+  "cross_system_integration_quality_score.json": {
+    "sha256": "4aecb1d5120e3d0bbd3852d8ddfa7724030d0237e2a7eaba104795cf8f2a0b86",
+    "size_bytes": 1822
+  },
+  "cross_system_integration_quality_report.json": {
+    "sha256": "36c9d299468d308ce69d0cc4d9d33dfca67e61658d14c9df1729290867c16507",
+    "size_bytes": 87524
+  },
+  "cross_system_integration_summary_report.md": {
+    "sha256": "d225fed974240e4a32510266b54408263b9062788c8d9c7a38afbff22343761e",
+    "size_bytes": 4181
+  }
+}

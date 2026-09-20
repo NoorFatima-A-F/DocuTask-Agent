@@ -1,0 +1,47 @@
+{
+  "report_title": "AI Pipeline Performance Analysis Verification Report",
+  "stage_latencies": [
+    {
+      "stage_name": "Document Upload & Hash Verification",
+      "latency_ms": 45.0,
+      "percentage_of_total": 3.46
+    },
+    {
+      "stage_name": "OCR Pre-Processing & Text Extraction",
+      "latency_ms": 320.0,
+      "percentage_of_total": 24.62
+    },
+    {
+      "stage_name": "Document Semantic Chunking",
+      "latency_ms": 35.0,
+      "percentage_of_total": 2.69
+    },
+    {
+      "stage_name": "Task Prompt Formulation & Context Injection",
+      "latency_ms": 20.0,
+      "percentage_of_total": 1.54
+    },
+    {
+      "stage_name": "Gemini LLM Inference & Entity Parsing",
+      "latency_ms": 900.0,
+      "percentage_of_total": 69.23
+    },
+    {
+      "stage_name": "Schema Cross-Validation & Consistency Check",
+      "latency_ms": 80.0,
+      "percentage_of_total": 6.15
+    },
+    {
+      "stage_name": "Database & Vector State Persistence",
+      "latency_ms": 25.0,
+      "percentage_of_total": 1.92
+    }
+  ],
+  "ocr_latency_ms": 320.0,
+  "gemini_llm_latency_ms": 900.0,
+  "validation_latency_ms": 80.0,
+  "total_pipeline_latency_ms": 1425.0,
+  "avg_tokens_per_document": 2150,
+  "avg_cost_per_document_usd": 0.0042,
+  "status": "PASS"
+}

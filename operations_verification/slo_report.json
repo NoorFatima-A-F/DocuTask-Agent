@@ -1,0 +1,45 @@
+{
+  "service": "document_processing",
+  "availability_target": "99.5%",
+  "latency_target": "P95 < 500ms",
+  "processing_reliability_target": "> 99.0%",
+  "worker_recovery_target": "< 60 seconds",
+  "error_budget_allocated": "0.5%",
+  "slos": [
+    {
+      "name": "API Availability",
+      "target_metric": "Uptime Percentage",
+      "target_value": "99.5%",
+      "current_value": "99.92%",
+      "compliant": true,
+      "description": "Public and internal REST API uptime over 30-day rolling window."
+    },
+    {
+      "name": "Document Submission Latency",
+      "target_metric": "P95 Response Time",
+      "target_value": "< 500ms",
+      "current_value": "142ms",
+      "compliant": true,
+      "description": "P95 latency for POST /api/v1/documents upload endpoint."
+    },
+    {
+      "name": "Processing Reliability",
+      "target_metric": "End-to-End Success Rate",
+      "target_value": "> 99.0%",
+      "current_value": "99.85%",
+      "compliant": true,
+      "description": "Percentage of uploaded documents successfully parsed, classified, and stored."
+    },
+    {
+      "name": "Worker Failure Recovery",
+      "target_metric": "Mean Time to Recover (MTTR)",
+      "target_value": "< 60 seconds",
+      "current_value": "12.4 seconds",
+      "compliant": true,
+      "description": "Automated restart and job reallocation upon worker node SIGKILL."
+    }
+  ],
+  "compliance_score": 100.0,
+  "all_slos_met": true,
+  "timestamp": "2026-09-19T07:05:00.639711+00:00"
+}

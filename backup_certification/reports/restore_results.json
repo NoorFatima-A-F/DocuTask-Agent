@@ -1,0 +1,20 @@
+{
+  "restore_success": true,
+  "restore_duration_seconds": 420.0,
+  "rto_target_seconds": 2700.0,
+  "rto_met": true,
+  "recovered_data_accuracy_pct": 100.0,
+  "dependency_recovery_verified": true,
+  "restore_capability_score": 100.0,
+  "passed": true,
+  "details": {
+    "restore_success": true,
+    "measured_duration_seconds": 420.0,
+    "measured_duration_minutes": 7.0,
+    "rto_target_minutes": 45.0,
+    "rto_margin_seconds": 2280.0,
+    "data_accuracy_percent": 100.0,
+    "dependency_recovery_verified": true,
+    "restore_verdict": "RECOVERY_VERIFIED_OPERATIONAL"
+  }
+}

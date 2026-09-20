@@ -1,0 +1,162 @@
+{
+  "project": "DocuTask-Agent",
+  "framework": "Enterprise Production Operations Governance Framework",
+  "version": "3.20.0",
+  "environment": "Production Managed Environment",
+  "timestamp": "2026-09-19T07:05:00.901647+00:00",
+  "overall_score": 98.8,
+  "certification": "Enterprise Operations Mature",
+  "governance_approved": true,
+  "files": [
+    {
+      "filename": "ai_ops_report.json",
+      "report_title": "Ai Ops Report",
+      "sha256": "f7ee45f825a1115f8a76d40ca01d15304289bfaa0c2c809e60318af01db47242",
+      "size_bytes": 503
+    },
+    {
+      "filename": "alert_report.json",
+      "report_title": "Alert Report",
+      "sha256": "0cf9005c7481214b4cf5755675b4c7084d5f5647d4a33439e5ef7fc97f3b2ea6",
+      "size_bytes": 2573
+    },
+    {
+      "filename": "audit_report.json",
+      "report_title": "Audit Report",
+      "sha256": "6ca862c63e6c949da52efdc24ea7b6abee2db18baca23442fe096ac2f66c9746",
+      "size_bytes": 1952
+    },
+    {
+      "filename": "change_history.json",
+      "report_title": "Change History",
+      "sha256": "5bf58dafbfb81d07f84e11cba9fb78f239d0466a799a72833c83d2f163948a14",
+      "size_bytes": 1842
+    },
+    {
+      "filename": "error_budget_report.json",
+      "report_title": "Error Budget Report",
+      "sha256": "092108e26eaf46035eaf059f2446a785ab68ca48c57af8a8c48ac21e1ffffb6d",
+      "size_bytes": 523
+    },
+    {
+      "filename": "finops_report.json",
+      "report_title": "Finops Report",
+      "sha256": "4a8b09d50f124e260aef31a6d12d0956c8d96a930a96fd0ce73cc50b0e84ce66",
+      "size_bytes": 455
+    },
+    {
+      "filename": "health_report.json",
+      "report_title": "Health Report",
+      "sha256": "e9529e7ba42eb63548d1fcffd23e2fbc1e7548974c9bda6b636ad0ea92032d4a",
+      "size_bytes": 2033
+    },
+    {
+      "filename": "incident_report.json",
+      "report_title": "Incident Report",
+      "sha256": "6ef3c700069453712d8146ca6e096ff48f956ec30725dc75fbaa79802d15cb33",
+      "size_bytes": 1816
+    },
+    {
+      "filename": "maturity_score.json",
+      "report_title": "Maturity Score",
+      "sha256": "cf09d5e1bb0ad396ea8734d42402e7b4aeac995fbbfc2af46b376a8053eeff87",
+      "size_bytes": 367
+    },
+    {
+      "filename": "root_cause_analysis.json",
+      "report_title": "Root Cause Analysis",
+      "sha256": "3a14fe2a89e1b213c8476a86ca6104bb348773a431a37ff9acd06b6637dd221c",
+      "size_bytes": 2236
+    },
+    {
+      "filename": "runbook_report.json",
+      "report_title": "Runbook Report",
+      "sha256": "860cc1260e4b50816d39a54a739da63f529b70883379211dfc6c2ef278b10e28",
+      "size_bytes": 2382
+    },
+    {
+      "filename": "self_healing_report.json",
+      "report_title": "Self Healing Report",
+      "sha256": "af9a0fc8d889088a89f2fc581bc539572d22d847564832aa160beba2419aef2a",
+      "size_bytes": 1394
+    },
+    {
+      "filename": "slo_report.json",
+      "report_title": "Slo Report",
+      "sha256": "d0173c9daf79e6b2617d664a1c3847fecc6a25fee4d5c32580ab30b2e58d5a8f",
+      "size_bytes": 1528
+    },
+    {
+      "filename": "runbooks/ai_provider_failure.md",
+      "report_title": "Ai Provider Failure",
+      "sha256": "518449a7664bb54e157108622d9ec13a9748868b3536b9429053d43fdabb41f3",
+      "size_bytes": 1900
+    },
+    {
+      "filename": "runbooks/communication.md",
+      "report_title": "Communication",
+      "sha256": "22e4dcf20f4e82dd0487215d92536fa06f4a739dd1c4d2962f640750d32f8317",
+      "size_bytes": 437
+    },
+    {
+      "filename": "runbooks/complete_outage.md",
+      "report_title": "Complete Outage",
+      "sha256": "fd732599c17226887f1535312f28bc1e160cca6c11dc16f06fa796597dc8eba4",
+      "size_bytes": 918
+    },
+    {
+      "filename": "runbooks/database_failure.md",
+      "report_title": "Database Failure",
+      "sha256": "0805847f070324bbb7bbd1f91dce289e51e871b4ad04b28f34446dd8027a508d",
+      "size_bytes": 1426
+    },
+    {
+      "filename": "runbooks/deployment_failure.md",
+      "report_title": "Deployment Failure",
+      "sha256": "ac4a36ec32bd0b5dfb99763df7988450b537e128819b26bfee41e995c3e83581",
+      "size_bytes": 1768
+    },
+    {
+      "filename": "runbooks/queue_failure.md",
+      "report_title": "Queue Failure",
+      "sha256": "b14dea48a655839a6bda63cadd262035f98a5a477167efea467a6eed508219a2",
+      "size_bytes": 1908
+    },
+    {
+      "filename": "runbooks/queue_overflow.md",
+      "report_title": "Queue Overflow",
+      "sha256": "bf20d6c36eb06de2bdb036d12631ecfda9cea5351fd87dd64f57db3366dfaf13",
+      "size_bytes": 1761
+    },
+    {
+      "filename": "runbooks/recovery_procedure.md",
+      "report_title": "Recovery Procedure",
+      "sha256": "454313cbbc98f15a3a778badbc29d7cd810cfce8375eeedbedb5a3f94bb36907",
+      "size_bytes": 2053
+    },
+    {
+      "filename": "runbooks/rollback.md",
+      "report_title": "Rollback",
+      "sha256": "9c45db6f80d110c649bab1b5c486168dd5e24fd0b69468b0d6b0492e4359fc8e",
+      "size_bytes": 476
+    },
+    {
+      "filename": "runbooks/security_incident.md",
+      "report_title": "Security Incident",
+      "sha256": "674648127ac360150d024b16d958781b14f76a07ab32552854d7e470c141ff02",
+      "size_bytes": 1889
+    },
+    {
+      "filename": "runbooks/storage_failure.md",
+      "report_title": "Storage Failure",
+      "sha256": "d79fab26798de88e539298ff41b1d913813844c7c359c51330101f680663ed38",
+      "size_bytes": 958
+    },
+    {
+      "filename": "runbooks/worker_failure.md",
+      "report_title": "Worker Failure",
+      "sha256": "d733bdfd7f9797feba16262e7f44af10027d3b4dad8924522b6f42645ca271ef",
+      "size_bytes": 1991
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "dashboard_id": "docutask-infra",
+  "title": "Infrastructure & Dependency Resources",
+  "category": "infrastructure",
+  "total_panels": 4,
+  "refresh_rate": "10s",
+  "panels": [
+    {
+      "panel_id": 1,
+      "title": "Container CPU & Memory Utilization",
+      "panel_type": "timeseries",
+      "promql_query": "process_cpu_seconds_total",
+      "operational_question": "Are containers operating within memory and CPU limits?",
+      "threshold_critical": 90.0,
+      "threshold_warning": 70.0,
+      "unit": "percent"
+    },
+    {
+      "panel_id": 2,
+      "title": "PostgreSQL Connection Pool & Latency",
+      "panel_type": "timeseries",
+      "promql_query": "docutask_db_connections_active",
+      "operational_question": "Is the database connection pool saturated?",
+      "threshold_critical": 95.0,
+      "threshold_warning": 80.0,
+      "unit": "conns"
+    },
+    {
+      "panel_id": 3,
+      "title": "Redis Queue Depth & Memory",
+      "panel_type": "timeseries",
+      "promql_query": "docutask_redis_connected_clients",
+      "operational_question": "Is the Redis queue backing up?",
+      "threshold_critical": 2000.0,
+      "threshold_warning": 500.0,
+      "unit": "items"
+    },
+    {
+      "panel_id": 4,
+      "title": "Disk I/O & Storage Capacity",
+      "panel_type": "timeseries",
+      "promql_query": "docutask_disk_usage_bytes",
+      "operational_question": "Is local temporary document storage nearing capacity?",
+      "threshold_critical": 90.0,
+      "threshold_warning": 80.0,
+      "unit": "percent"
+    }
+  ],
+  "all_queries_valid": true,
+  "status": "PASS"
+}

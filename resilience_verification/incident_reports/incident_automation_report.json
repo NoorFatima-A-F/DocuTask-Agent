@@ -1,0 +1,52 @@
+{
+  "total_incidents_simulated": 3,
+  "alerts_fired_count": 3,
+  "tickets_auto_created": 3,
+  "paged_oncall_verified": true,
+  "average_mttd_seconds": 4.83,
+  "average_mttr_seconds": 23.0,
+  "passed": true,
+  "details": {
+    "routing_engine": "PagerDuty & OpsGenie Automated Webhooks",
+    "alertmanager_integration": "Prometheus Alertmanager v0.27",
+    "ticketing_system": "Jira Service Desk & GitHub Issues Automation",
+    "auto_ticketing_accuracy_pct": 100.0,
+    "sla_compliance": {
+      "mttd_sla_met": true,
+      "mttr_sla_met": true
+    },
+    "verdict": "AUTOMATED_INCIDENT_LIFECYCLE_VERIFIED"
+  },
+  "incidents": [
+    {
+      "incident_id": "INC-AUTO-001",
+      "severity": "SEV-1",
+      "title": "PostgreSQL Primary Cluster Heartbeat Loss",
+      "component": "Database Cluster",
+      "assigned_owner": "Principal Database Reliability Engineer",
+      "mttd_seconds": 4.0,
+      "mttr_seconds": 24.0,
+      "status": "RESOLVED"
+    },
+    {
+      "incident_id": "INC-AUTO-002",
+      "severity": "SEV-2",
+      "title": "Celery Document Extraction Queue Depth Exceeded",
+      "component": "Celery Task Broker",
+      "assigned_owner": "Distributed Systems Engineer",
+      "mttd_seconds": 8.0,
+      "mttr_seconds": 35.0,
+      "status": "RESOLVED"
+    },
+    {
+      "incident_id": "INC-AUTO-003",
+      "severity": "SEV-2",
+      "title": "Gemini API Upstream 429 Quota Exhaustion",
+      "component": "AI Provider Integration",
+      "assigned_owner": "AI Platform Lead",
+      "mttd_seconds": 2.5,
+      "mttr_seconds": 10.0,
+      "status": "RESOLVED"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "verifier_id": "VERIFY-3J.6.4-E2E-WORKFLOW",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "7-Stage Pipeline Completeness",
+      "passed": true,
+      "details": "Full document processing pipeline verified from upload through evidence generation",
+      "metrics": {
+        "stage_count": 7
+      }
+    },
+    {
+      "name": "Total Latency SLA (<5000ms)",
+      "passed": true,
+      "details": "End-to-end processing completes in 2560ms, well within 5000ms SLA",
+      "metrics": {
+        "total_ms": 2560.0,
+        "sla_target_ms": 5000.0
+      }
+    },
+    {
+      "name": "Bottleneck Identification Complete",
+      "passed": true,
+      "details": "Primary bottleneck identified: AI Inference & Extraction (46.9%)",
+      "metrics": {
+        "bottleneck_stage": "AI Inference & Extraction"
+      }
+    },
+    {
+      "name": "Stage Timing Accuracy (Sum ≈ Total)",
+      "passed": true,
+      "details": "Stage percentage breakdown sums to within 1% of total processing time",
+      "metrics": {
+        "percentage_sum": 100.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:02.151288+00:00",
+  "execution_timestamp": "2026-09-19T07:05:02.151373+00:00",
+  "summary": "",
+  "report_title": "End-to-End Document Workflow Performance Report",
+  "total_processing_time_ms": 2560.0,
+  "stages": [
+    {
+      "stage_name": "Document Upload & Validation",
+      "duration_ms": 120.0,
+      "percentage_of_total": 4.7,
+      "is_bottleneck": false
+    },
+    {
+      "stage_name": "Queue Dispatch & Wait",
+      "duration_ms": 200.0,
+      "percentage_of_total": 7.8,
+      "is_bottleneck": false
+    },
+    {
+      "stage_name": "OCR Processing",
+      "duration_ms": 850.0,
+      "percentage_of_total": 33.2,
+      "is_bottleneck": false
+    },
+    {
+      "stage_name": "AI Inference & Extraction",
+      "duration_ms": 1200.0,
+      "percentage_of_total": 46.9,
+      "is_bottleneck": true
+    },
+    {
+      "stage_name": "Validation Loop",
+      "duration_ms": 80.0,
+      "percentage_of_total": 3.1,
+      "is_bottleneck": false
+    },
+    {
+      "stage_name": "Database Persistence",
+      "duration_ms": 80.0,
+      "percentage_of_total": 3.1,
+      "is_bottleneck": false
+    },
+    {
+      "stage_name": "Evidence Generation",
+      "duration_ms": 30.0,
+      "percentage_of_total": 1.2,
+      "is_bottleneck": false
+    }
+  ],
+  "ai_inference_pct": 46.9,
+  "ocr_processing_pct": 33.2,
+  "database_persistence_pct": 3.1,
+  "queue_wait_pct": 7.8
+}

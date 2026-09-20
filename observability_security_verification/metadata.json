@@ -1,0 +1,79 @@
+{
+  "project": "DocuTask-Agent",
+  "phase": "3I.7",
+  "framework_phase": "Phase 3I.7 \u2014 Observability Security, Privacy & Compliance Verification",
+  "security_level": "enterprise",
+  "exported_at": "2026-09-19T07:05:20.273560+00:00",
+  "target_directory": "observability_security_verification",
+  "overall_certification_tier": "Enterprise Observability Secure",
+  "overall_score_pct": 100.0,
+  "certification_granted": true,
+  "total_reports_exported": 13,
+  "manifest": {
+    "threat_model_report.json": {
+      "file_path": "observability_security_verification\\threat_model_report.json",
+      "file_size_bytes": 1864,
+      "sha256_hash": "ec912960352e6a01b711862a2408bb2003f40a06407ea9c2ef7c14623a4d5305"
+    },
+    "sensitive_data_report.json": {
+      "file_path": "observability_security_verification\\sensitive_data_report.json",
+      "file_size_bytes": 752,
+      "sha256_hash": "984f1699373a3a1a9059c6862aadc2bc8fe992f9a64143646a5fb446bdf46ddb"
+    },
+    "redaction_report.json": {
+      "file_path": "observability_security_verification\\redaction_report.json",
+      "file_size_bytes": 1531,
+      "sha256_hash": "11ffd2361d70e2f156fa09a1222c3ae7e5aeadd0af21bc7559939ba6d18bb38f"
+    },
+    "ai_privacy_report.json": {
+      "file_path": "observability_security_verification\\ai_privacy_report.json",
+      "file_size_bytes": 1657,
+      "sha256_hash": "442c27b7647f19632d72e853fd6efb8899f1f90d84848b108fe83496e9eb1490"
+    },
+    "access_control_report.json": {
+      "file_path": "observability_security_verification\\access_control_report.json",
+      "file_size_bytes": 1457,
+      "sha256_hash": "08c6a940dd9548f4a2e1ec0cc7d35c063654c83feb4284886edd54e5a1d26c28"
+    },
+    "encryption_report.json": {
+      "file_path": "observability_security_verification\\encryption_report.json",
+      "file_size_bytes": 1400,
+      "sha256_hash": "d94756b067f92b17b6168e2ebdfde739ce6676c6b37025659cb6a60d86e94fb4"
+    },
+    "retention_report.json": {
+      "file_path": "observability_security_verification\\retention_report.json",
+      "file_size_bytes": 1189,
+      "sha256_hash": "88224856b4b2af409332914f24add83c25f9988932b0d31280cf48a125fb31b3"
+    },
+    "audit_report.json": {
+      "file_path": "observability_security_verification\\audit_report.json",
+      "file_size_bytes": 1148,
+      "sha256_hash": "b5d13064ca3c12da1e245982efe77935fc815a429e095be1114b8bf683bc4c33"
+    },
+    "compliance_report.json": {
+      "file_path": "observability_security_verification\\compliance_report.json",
+      "file_size_bytes": 1417,
+      "sha256_hash": "3dbbf8d8c77b8c30f4a4f9f5cbfb6272a4092edf4350b7dd531dd349ffc29dbd"
+    },
+    "attack_simulation_report.json": {
+      "file_path": "observability_security_verification\\attack_simulation_report.json",
+      "file_size_bytes": 2023,
+      "sha256_hash": "8dd310075269b93287cf644bba6629a8d3d4d5fb13913fc9e8dbab469be73e8c"
+    },
+    "incident_response_report.json": {
+      "file_path": "observability_security_verification\\incident_response_report.json",
+      "file_size_bytes": 1414,
+      "sha256_hash": "e87e16ffefe2cd2468265c1b7eb013e885467524ae27bf1cf0a4b718e8b2593f"
+    },
+    "continuous_security_report.json": {
+      "file_path": "observability_security_verification\\continuous_security_report.json",
+      "file_size_bytes": 1097,
+      "sha256_hash": "8ea83c06823f60ec4bf741d30f97ec5e465ed8c6d38565560d651b3687e3ddc8"
+    },
+    "certification_report.json": {
+      "file_path": "observability_security_verification\\certification_report.json",
+      "file_size_bytes": 1650,
+      "sha256_hash": "5a1fd75559cc8af3f47f8c6b601cd835579f2df93990f4fd4b3200545f11b0cd"
+    }
+  }
+}

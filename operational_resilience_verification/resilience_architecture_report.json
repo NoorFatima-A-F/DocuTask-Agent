@@ -1,0 +1,122 @@
+{
+  "report_title": "Enterprise Resilience Architecture & Strategy Specification Report",
+  "total_strategies_defined": 6,
+  "strategies": [
+    {
+      "strategy_id": "STRAT-CB-001",
+      "name": "Downstream Service Isolation via Circuit Breaking",
+      "purpose": "Prevent cascading failure by cutting off faulty AI providers, DB queries, or OCR services",
+      "activation_condition": "Failure rate exceeds 50% or 5 consecutive timeouts within 30 seconds",
+      "dependencies": [
+        "Gemini_API",
+        "Tesseract_OCR",
+        "PostgreSQL",
+        "Redis"
+      ],
+      "recovery_action": "Trip circuit breaker to OPEN, route to fallback, schedule probe requests after 30s",
+      "exit_condition": "3 consecutive successful probe requests in HALF-OPEN state",
+      "observability_hooks": [
+        "prometheus_cb_state_gauge",
+        "audit_log_event",
+        "pagerduty_p2_alert"
+      ],
+      "automation_policy": "Fully Autonomous State Transition",
+      "is_active": true
+    },
+    {
+      "strategy_id": "STRAT-RETRY-002",
+      "name": "Bounded Exponential Backoff with Jitter",
+      "purpose": "Absorb transient network spikes and database lock contention safely",
+      "activation_condition": "Transient HTTP 429/503 or DB connection timeout",
+      "dependencies": [
+        "PostgreSQL_Pool",
+        "Redis_Queue",
+        "External_APIs"
+      ],
+      "recovery_action": "Retry up to 3 times with exponential backoff (200ms -> 5000ms max) + full jitter; route to DLQ upon exhaustion",
+      "exit_condition": "Successful response or DLQ handoff",
+      "observability_hooks": [
+        "retry_attempt_counter",
+        "dlq_routed_counter"
+      ],
+      "automation_policy": "Autonomous with Global Retry Budget Cap (20%)",
+      "is_active": true
+    },
+    {
+      "strategy_id": "STRAT-DEGRADE-003",
+      "name": "Multi-Tier Graceful Degradation",
+      "purpose": "Maintain core document ingestion and status queries even when AI or primary DB is degraded",
+      "activation_condition": "AI Provider Outage or DB Primary Read-Only Failover",
+      "dependencies": [
+        "Gemini_AI",
+        "PostgreSQL_Replica",
+        "Redis_Cache"
+      ],
+      "recovery_action": "Serve cached extractions, fallback to native PDF parsing, buffer writes to Redis offline queue",
+      "exit_condition": "Primary downstream health status revalidated GREEN",
+      "observability_hooks": [
+        "degraded_mode_gauge",
+        "cached_response_ratio"
+      ],
+      "automation_policy": "Autonomous Failover and Auto-Reconciliation",
+      "is_active": true
+    },
+    {
+      "strategy_id": "STRAT-BULKHEAD-004",
+      "name": "Resource Bulkhead Isolation",
+      "purpose": "Prevent heavy document OCR or AI batch jobs from starving real-time status and ingestion APIs",
+      "activation_condition": "Resource contention or worker pool saturation",
+      "dependencies": [
+        "ThreadPoolExecutor",
+        "Celery_Queues",
+        "AsyncIO_EventLoop"
+      ],
+      "recovery_action": "Enforce strict thread pool quotas and queue capacities per domain tier",
+      "exit_condition": "Thread saturation drops below 75%",
+      "observability_hooks": [
+        "bulkhead_utilization_ratio",
+        "queue_backlog_gauge"
+      ],
+      "automation_policy": "Deterministic Static Quota Enforcement",
+      "is_active": true
+    },
+    {
+      "strategy_id": "STRAT-SHED-005",
+      "name": "Adaptive Load Shedding and Priority Admission Control",
+      "purpose": "Protect system stability under extreme CPU/memory overload",
+      "activation_condition": "Host CPU > 85% or Memory > 90% or P99 Latency > 2000ms",
+      "dependencies": [
+        "FastAPI_Middleware",
+        "OS_Resource_Monitor"
+      ],
+      "recovery_action": "Shed low-priority batch jobs and telemetry; prioritize interactive ingestion and health probes",
+      "exit_condition": "System CPU < 75% and Memory < 80% for 60 consecutive seconds",
+      "observability_hooks": [
+        "load_shedding_dropped_counter",
+        "admission_control_status"
+      ],
+      "automation_policy": "Autonomous Dynamic Rate Throttling",
+      "is_active": true
+    },
+    {
+      "strategy_id": "STRAT-HEAL-006",
+      "name": "Automated Self-Healing and State Recovery",
+      "purpose": "Autonomously detect dead workers, stale locks, and orphaned tasks without human intervention",
+      "activation_condition": "Heartbeat timeout > 45s, lock age > TTL, or task in PROCESSING for > 300s",
+      "dependencies": [
+        "Redis_Lock_Manager",
+        "Supervisor_Daemon",
+        "DB_Reaper"
+      ],
+      "recovery_action": "Evict stale lock, recycle dead worker process, reset orphaned task to PENDING with backoff",
+      "exit_condition": "Worker re-registered and orphaned task recovered",
+      "observability_hooks": [
+        "self_healing_recovery_counter",
+        "orphan_reaped_counter"
+      ],
+      "automation_policy": "Autonomous Periodic Engine (every 30s)",
+      "is_active": true
+    }
+  ],
+  "architecture_certified": true
+}

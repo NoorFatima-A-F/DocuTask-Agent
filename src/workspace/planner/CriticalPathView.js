@@ -1,0 +1,25 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState, useEffect } from 'react';
+import { Zap, RefreshCw, } from 'lucide-react';
+import { ApdlePlannerApiClient } from '../../services/apdlePlannerApiClient';
+export const CriticalPathView = () => {
+    const [cpm, setCpm] = useState(null);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        loadCpm();
+    }, []);
+    const loadCpm = async () => {
+        setLoading(true);
+        try {
+            const data = await ApdlePlannerApiClient.getCriticalPath('default_mission');
+            setCpm(data);
+        }
+        catch (e) {
+            console.error('Failed to load CPM:', e);
+        }
+        finally {
+            setLoading(false);
+        }
+    };
+    return (_jsxs("div", { className: "space-y-6 font-mono", children: [_jsxs("div", { className: "bg-slate-900/80 border border-slate-800 rounded-xl p-5 space-y-4", children: [_jsxs("div", { className: "flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3", children: [_jsxs("div", { children: [_jsxs("h3", { className: "text-sm font-bold text-cyan-300 flex items-center gap-2", children: [_jsx(Zap, { className: "w-4 h-4 text-amber-400" }), "Critical Path Method (CPM) Analytical View"] }), _jsx("p", { className: "text-xs text-slate-400 mt-0.5", children: "Calculates earliest/latest start and finish boundaries. Zero slack tasks dictate minimum end-to-end turnaround time." })] }), _jsx("button", { onClick: loadCpm, disabled: loading, className: "text-slate-400 hover:text-cyan-400 p-1.5 rounded", title: "Refresh", children: _jsx(RefreshCw, { className: `w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}` }) })] }), _jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-3", children: [_jsxs("div", { className: "bg-slate-950/80 border border-slate-800 rounded-lg p-3 text-center", children: [_jsx("div", { className: "text-[10px] text-slate-500 uppercase", children: "Critical Path Duration" }), _jsxs("div", { className: "text-2xl font-bold text-amber-400 mt-1", children: [(cpm?.total_critical_path_duration_ms ?? 780.0).toFixed(1), "ms"] })] }), _jsxs("div", { className: "bg-slate-950/80 border border-slate-800 rounded-lg p-3 text-center", children: [_jsx("div", { className: "text-[10px] text-slate-500 uppercase", children: "Critical Nodes (0 Slack)" }), _jsxs("div", { className: "text-2xl font-bold text-purple-300 mt-1", children: [cpm?.critical_nodes_count ?? 3, " Nodes"] })] }), _jsxs("div", { className: "bg-slate-950/80 border border-slate-800 rounded-lg p-3 text-center", children: [_jsx("div", { className: "text-[10px] text-slate-500 uppercase", children: "Parallel Branch Headroom" }), _jsx("div", { className: "text-2xl font-bold text-cyan-300 mt-1", children: "100.0ms" })] })] })] }), _jsxs("div", { className: "bg-slate-900/80 border border-slate-800 rounded-xl p-5 space-y-4", children: [_jsx("div", { className: "text-xs uppercase text-slate-300 tracking-wider border-b border-slate-800 pb-2", children: "Node-Level Schedule Bounds & Float Analysis" }), _jsx("div", { className: "overflow-x-auto", children: _jsxs("table", { className: "w-full text-left text-xs", children: [_jsx("thead", { children: _jsxs("tr", { className: "text-slate-500 border-b border-slate-800", children: [_jsx("th", { className: "pb-2", children: "Node Name" }), _jsx("th", { className: "pb-2", children: "Type" }), _jsx("th", { className: "pb-2 text-right", children: "Est. Runtime" }), _jsx("th", { className: "pb-2 text-right", children: "Earliest Start (EST)" }), _jsx("th", { className: "pb-2 text-right", children: "Latest Start (LST)" }), _jsx("th", { className: "pb-2 text-right", children: "Total Slack" }), _jsx("th", { className: "pb-2 text-center", children: "Critical?" })] }) }), _jsx("tbody", { className: "divide-y divide-slate-800/60", children: Object.entries(cpm?.nodes_cpm || {}).map(([nid, details]) => (_jsxs("tr", { className: `hover:bg-slate-950/40 ${details.is_critical ? 'bg-amber-950/20' : ''}`, children: [_jsx("td", { className: "py-2.5 font-bold text-slate-200", children: details.name }), _jsx("td", { className: "py-2.5 text-slate-400", children: details.task_type }), _jsxs("td", { className: "py-2.5 text-right font-bold text-slate-300", children: [details.estimated_runtime_ms.toFixed(0), "ms"] }), _jsxs("td", { className: "py-2.5 text-right text-slate-400", children: [details.earliest_start_ms.toFixed(0), "ms"] }), _jsxs("td", { className: "py-2.5 text-right text-slate-400", children: [details.latest_start_ms.toFixed(0), "ms"] }), _jsxs("td", { className: `py-2.5 text-right font-bold ${details.total_slack_ms === 0 ? 'text-amber-400' : 'text-cyan-300'}`, children: [details.total_slack_ms.toFixed(0), "ms"] }), _jsx("td", { className: "py-2.5 text-center", children: details.is_critical ? (_jsx("span", { className: "px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-800 font-bold", children: "CRITICAL" })) : (_jsx("span", { className: "text-slate-600 text-[10px]", children: "Slack" })) })] }, nid))) })] }) })] })] }));
+};

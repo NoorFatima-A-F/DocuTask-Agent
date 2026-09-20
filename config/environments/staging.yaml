@@ -1,0 +1,8 @@
+# Staging Environment Configuration Profile
+environment: STAGING
+timeout_seconds: 300
+retry_limit: 3
+hardware_profile:
+  gpu_required: true
+  min_cpu_cores: 16
+  min_memory_gb: 64

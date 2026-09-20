@@ -1,0 +1,49 @@
+{
+  "report_title": "Production Readiness Gate & Change Management Report",
+  "gates": [
+    {
+      "gate_name": "availability_error_budget_guard",
+      "category": "Reliability",
+      "minimum_threshold_pct": 20.0,
+      "evaluated_score_pct": 72.0,
+      "gate_status": "PASSED"
+    },
+    {
+      "gate_name": "p95_latency_regression_gate",
+      "category": "Performance",
+      "minimum_threshold_pct": 95.0,
+      "evaluated_score_pct": 99.2,
+      "gate_status": "PASSED"
+    },
+    {
+      "gate_name": "ai_quality_confidence_gate",
+      "category": "AI Quality",
+      "minimum_threshold_pct": 98.5,
+      "evaluated_score_pct": 99.1,
+      "gate_status": "PASSED"
+    },
+    {
+      "gate_name": "observability_telemetry_coverage_gate",
+      "category": "Observability",
+      "minimum_threshold_pct": 95.0,
+      "evaluated_score_pct": 100.0,
+      "gate_status": "PASSED"
+    },
+    {
+      "gate_name": "security_vulnerability_and_secret_leak_gate",
+      "category": "Security",
+      "minimum_threshold_pct": 100.0,
+      "evaluated_score_pct": 100.0,
+      "gate_status": "PASSED"
+    },
+    {
+      "gate_name": "canary_pre_vs_post_slo_impact_verification",
+      "category": "Change Management",
+      "minimum_threshold_pct": 98.0,
+      "evaluated_score_pct": 99.8,
+      "gate_status": "PASSED"
+    }
+  ],
+  "pre_vs_post_slo_regression_detected": false,
+  "deployment_approved": true
+}

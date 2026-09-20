@@ -1,0 +1,66 @@
+{
+  "total_warnings": 5,
+  "warnings": [
+    {
+      "alert_id": "EW-19970F",
+      "category": "CAPACITY_RISK",
+      "severity": "HIGH",
+      "service": "celery_worker",
+      "message": "Queue depth growing (+120/min); capacity overflow projected in 15 minutes",
+      "predicted_impact_time": "T+15 minutes",
+      "suggested_action": "Scale worker fleet from 5 to 10 instances",
+      "timestamp": "2026-09-19T07:05:25.350022+00:00"
+    },
+    {
+      "alert_id": "EW-D18CCC",
+      "category": "RESOURCE_RISK",
+      "severity": "HIGH",
+      "service": "worker_rss",
+      "message": "Memory leak slope (+0.4%/min); OOM threshold reached in 45 minutes",
+      "predicted_impact_time": "T+45 minutes",
+      "suggested_action": "Gracefully recycle worker process after task completion",
+      "timestamp": "2026-09-19T07:05:25.350022+00:00"
+    },
+    {
+      "alert_id": "EW-FB28EF",
+      "category": "DEPENDENCY_RISK",
+      "severity": "MEDIUM",
+      "service": "postgres",
+      "message": "Database connection pool at 88% utilization; exhaustion projected in 30 minutes",
+      "predicted_impact_time": "T+30 minutes",
+      "suggested_action": "Increase connection pool max_size from 50 to 80",
+      "timestamp": "2026-09-19T07:05:25.350022+00:00"
+    },
+    {
+      "alert_id": "EW-CBE8FC",
+      "category": "AI_FAILURE_RISK",
+      "severity": "MEDIUM",
+      "service": "gemini_api",
+      "message": "Model endpoint latency drifting upward (720ms); 429 quota pressure detected",
+      "predicted_impact_time": "T+60 minutes",
+      "suggested_action": "Enable batched async inference and prepare fallback queue",
+      "timestamp": "2026-09-19T07:05:25.350022+00:00"
+    },
+    {
+      "alert_id": "EW-40B50E",
+      "category": "PERFORMANCE_RISK",
+      "severity": "LOW",
+      "service": "api_gateway",
+      "message": "Event loop lag rising from 4ms to 18ms under concurrent payload parsing",
+      "predicted_impact_time": "T+120 minutes",
+      "suggested_action": "Offload JSON schema validation to threadpool executor",
+      "timestamp": "2026-09-19T07:05:25.350022+00:00"
+    }
+  ],
+  "passed": true,
+  "details": {
+    "all_categories_covered": true,
+    "categories": [
+      "RESOURCE_RISK",
+      "DEPENDENCY_RISK",
+      "PERFORMANCE_RISK",
+      "AI_FAILURE_RISK",
+      "CAPACITY_RISK"
+    ]
+  }
+}

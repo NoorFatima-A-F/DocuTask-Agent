@@ -1,0 +1,58 @@
+# DocuTask Agent — Enterprise Readiness Policy Specification (Part 3H.3.1)
+version: "1.0"
+platform: "DocuTask Agent"
+
+readiness:
+  critical:
+    - name: "postgres"
+      type: "critical"
+      description: "Primary relational state and document metadata database"
+      failure_action: "NOT_READY"
+      traffic_action: "WITHHOLD_TRAFFIC"
+      timeout_ms: 1000
+
+    - name: "redis"
+      type: "critical"
+      description: "Message broker and active task distribution queue"
+      failure_action: "NOT_READY"
+      traffic_action: "WITHHOLD_TRAFFIC"
+      timeout_ms: 500
+
+    - name: "storage"
+      type: "critical"
+      description: "S3/MinIO raw and processed document artifact vault"
+      failure_action: "NOT_READY"
+      traffic_action: "WITHHOLD_TRAFFIC"
+      timeout_ms: 1500
+
+    - name: "workers"
+      type: "critical"
+      description: "Active background worker pool for OCR and AI task execution"
+      failure_action: "NOT_READY"
+      traffic_action: "WITHHOLD_TRAFFIC"
+      timeout_ms: 2000
+
+  degraded:
+    - name: "gemini"
+      type: "non_critical"
+      description: "External Gemini Multimodal AI Provider"
+      failure_action: "DEGRADED"
+      traffic_action: "THROTTLE_TRAFFIC"
+      fallback_strategy: "queue_extraction_and_use_cached_intents"
+      timeout_ms: 3000
+
+    - name: "analytics"
+      type: "non_critical"
+      description: "Non-critical analytics and telemetry aggregation"
+      failure_action: "DEGRADED"
+      traffic_action: "ADMIT_TRAFFIC"
+      fallback_strategy: "drop_or_buffer_in_memory"
+      timeout_ms: 500
+
+    - name: "optional_monitoring"
+      type: "non_critical"
+      description: "Secondary health telemetry and trace exporter"
+      failure_action: "DEGRADED"
+      traffic_action: "ADMIT_TRAFFIC"
+      fallback_strategy: "fail_open_silent_bypass"
+      timeout_ms: 200

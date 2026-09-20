@@ -1,0 +1,43 @@
+{
+  "total_scenarios": 4,
+  "scenarios": [
+    {
+      "scenario_name": "PostgreSQL Failure",
+      "target_component": "PostgreSQL Database",
+      "failure_injected": "postgres_up == 0",
+      "alert_triggered": "DocuTaskDatabaseDown",
+      "correct_severity": true,
+      "correct_owner": true,
+      "passed": true
+    },
+    {
+      "scenario_name": "Redis Queue Failure",
+      "target_component": "Redis Broker",
+      "failure_injected": "redis_up == 0",
+      "alert_triggered": "DocuTaskQueueDepthBacklog",
+      "correct_severity": true,
+      "correct_owner": true,
+      "passed": true
+    },
+    {
+      "scenario_name": "Worker Pool Exhaustion",
+      "target_component": "Agent Worker Pool",
+      "failure_injected": "active_workers == 0",
+      "alert_triggered": "DocuTaskWorkerPoolExhausted",
+      "correct_severity": true,
+      "correct_owner": true,
+      "passed": true
+    },
+    {
+      "scenario_name": "AI Provider Failure",
+      "target_component": "Gemini AI Endpoint",
+      "failure_injected": "gemini_503_spike > 50%",
+      "alert_triggered": "DocuTaskGeminiProviderSlow",
+      "correct_severity": true,
+      "correct_owner": true,
+      "passed": true
+    }
+  ],
+  "true_positive_rate": 1.0,
+  "status": "PASS"
+}

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  verification-api:
+    build:
+      context: ../..
+      dockerfile: deploy/verification/Dockerfile.verification
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=INTEGRATION
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/docutask_verification
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=docutask_verification
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"

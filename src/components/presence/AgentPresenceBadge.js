@@ -1,0 +1,19 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { polishTokens } from '../../design-system/tokens/polish';
+export const AgentPresenceBadge = ({ role, name, status, currentThought, confidence, size = 'md', }) => {
+    const avatar = polishTokens.agentAvatars[role] || {
+        avatarBg: 'from-blue-600 to-cyan-600',
+        tagline: 'Autonomous deliberation',
+        icon: '🤖',
+    };
+    const isThinking = status === 'THINKING' || status === 'EXECUTING';
+    return (_jsxs("div", { className: "flex items-center gap-3 p-3 rounded-2xl bg-[#131D35] border border-[#1E293B] shadow-md hover:border-cyan-500/40 transition-all", children: [_jsxs("div", { className: "relative shrink-0", children: [isThinking && (_jsx("span", { className: "absolute -inset-1 rounded-2xl bg-cyan-400 opacity-40 animate-ping" })), _jsx("div", { className: `relative rounded-xl bg-gradient-to-tr ${avatar.avatarBg} flex items-center justify-center text-white font-bold shadow-md ${size === 'sm'
+                            ? 'h-8 w-8 text-xs'
+                            : size === 'lg'
+                                ? 'h-12 w-12 text-lg'
+                                : 'h-10 w-10 text-sm'}`, children: _jsx("span", { children: avatar.icon }) }), _jsx("span", { className: `absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-[#0F172A] ${status === 'EXECUTING'
+                            ? 'bg-[#00D2FF] animate-pulse'
+                            : status === 'THINKING'
+                                ? 'bg-amber-400 animate-pulse'
+                                : 'bg-[#10B981]'}` })] }), _jsxs("div", { className: "min-w-0 flex-1", children: [_jsxs("div", { className: "flex items-center justify-between gap-2", children: [_jsx("span", { className: "text-xs font-bold text-[#F8FAFC] truncate", children: name }), confidence !== undefined && (_jsxs("span", { className: "text-[10px] font-mono text-[#00D2FF] font-bold shrink-0", children: [(confidence * 100).toFixed(0), "%"] }))] }), _jsx("p", { className: "text-[11px] text-[#94A3B8] font-mono truncate mt-0.5", children: currentThought ? `"${currentThought}"` : avatar.tagline })] })] }));
+};

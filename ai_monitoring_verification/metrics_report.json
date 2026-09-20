@@ -1,0 +1,293 @@
+{
+  "total_metrics_collected": 18,
+  "metrics_by_category": {
+    "AVAILABILITY": 3,
+    "PERFORMANCE": 3,
+    "RELIABILITY": 4,
+    "QUALITY": 4,
+    "COST": 4
+  },
+  "metrics": [
+    {
+      "metric_name": "ai_provider_available",
+      "category": "AVAILABILITY",
+      "metric_type": "Gauge",
+      "description": "Binary reachability status of AI inference provider (1=Up, 0=Down)",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 1.0,
+      "unit": "status",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_health_status",
+      "category": "AVAILABILITY",
+      "metric_type": "Gauge",
+      "description": "Discrete health state enum index (2=Available, 1=Degraded, 0=Unavailable)",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 2.0,
+      "unit": "enum_index",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_failure_count",
+      "category": "AVAILABILITY",
+      "metric_type": "Counter",
+      "description": "Cumulative connection and provider level fatal error count",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 2.0,
+      "unit": "count",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_request_latency_ms",
+      "category": "PERFORMANCE",
+      "metric_type": "Histogram",
+      "description": "End-to-end duration of AI inference invocation in milliseconds",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 420.0,
+      "unit": "milliseconds",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_first_token_latency",
+      "category": "PERFORMANCE",
+      "metric_type": "Histogram",
+      "description": "Time to first generated token chunk (TTFT)",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 145.0,
+      "unit": "milliseconds",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_completion_latency",
+      "category": "PERFORMANCE",
+      "metric_type": "Histogram",
+      "description": "Generation duration after first token emission",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 275.0,
+      "unit": "milliseconds",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_error_rate",
+      "category": "RELIABILITY",
+      "metric_type": "Gauge",
+      "description": "5-minute rolling HTTP/API error percentage",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 0.04,
+      "unit": "percent",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_timeout_rate",
+      "category": "RELIABILITY",
+      "metric_type": "Gauge",
+      "description": "Ratio of requests cancelled by client timeout thresholds",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 0.01,
+      "unit": "percent",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_retry_count",
+      "category": "RELIABILITY",
+      "metric_type": "Counter",
+      "description": "Total exponential backoff retry attempts executed",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 14.0,
+      "unit": "count",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_fallback_count",
+      "category": "RELIABILITY",
+      "metric_type": "Counter",
+      "description": "Total multi-provider failover routing switches",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 3.0,
+      "unit": "count",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_schema_failure_rate",
+      "category": "QUALITY",
+      "metric_type": "Gauge",
+      "description": "Percentage of LLM responses failing Pydantic schema validation",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 0.0,
+      "unit": "percent",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_validation_failure_rate",
+      "category": "QUALITY",
+      "metric_type": "Gauge",
+      "description": "Percentage of document extractions failing post-processing quality checks",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 0.005,
+      "unit": "percent",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_confidence_score",
+      "category": "QUALITY",
+      "metric_type": "Gauge",
+      "description": "Mean extraction confidence score (0.00 to 1.00)",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 0.985,
+      "unit": "score",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_hallucination_indicator",
+      "category": "QUALITY",
+      "metric_type": "Gauge",
+      "description": "Confidence penalty when extracted values lack ground-truth OCR backing",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 0.0,
+      "unit": "score",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_token_input",
+      "category": "COST",
+      "metric_type": "Counter",
+      "description": "Cumulative prompt tokens ingested across all models",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 4821000.0,
+      "unit": "tokens",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_token_output",
+      "category": "COST",
+      "metric_type": "Counter",
+      "description": "Cumulative completion tokens generated across all models",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 1240500.0,
+      "unit": "tokens",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_cost_estimate",
+      "category": "COST",
+      "metric_type": "Gauge",
+      "description": "Estimated cumulative inference spend in USD",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 14.28,
+      "unit": "USD",
+      "collected_successfully": true
+    },
+    {
+      "metric_name": "ai_cost_per_document",
+      "category": "COST",
+      "metric_type": "Gauge",
+      "description": "Average inference cost per successfully processed multi-page document",
+      "labels": [
+        "provider",
+        "model",
+        "environment",
+        "service"
+      ],
+      "current_value": 0.0142,
+      "unit": "USD/doc",
+      "collected_successfully": true
+    }
+  ],
+  "passed": true,
+  "details": {
+    "metrics_format": "Prometheus Exposition Format (OpenMetrics v1.0)",
+    "scrape_interval_seconds": 15,
+    "label_dimensions": [
+      "provider",
+      "model",
+      "environment",
+      "service"
+    ]
+  }
+}

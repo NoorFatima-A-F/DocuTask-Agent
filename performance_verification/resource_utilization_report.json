@@ -1,0 +1,56 @@
+{
+  "verifier_id": "VERIFY-3J.6.9-RESOURCE-UTIL",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "CPU Usage Under 60% Threshold",
+      "passed": true,
+      "details": "Average CPU utilization: 38.5% — sufficient headroom for burst handling",
+      "metrics": {
+        "cpu_avg_pct": 38.5,
+        "threshold": 60.0
+      }
+    },
+    {
+      "name": "Zero CPU Throttling Events",
+      "passed": true,
+      "details": "No CPU throttling detected under sustained workload",
+      "metrics": {
+        "throttling_events": 0
+      }
+    },
+    {
+      "name": "Memory Usage Under 80% of Allocation",
+      "passed": true,
+      "details": "Memory consumption: 850.0MB of 2048MB allocation (41.5%)",
+      "metrics": {
+        "memory_mb": 850.0,
+        "allocation_mb": 2048.0
+      }
+    },
+    {
+      "name": "Network Packet Loss 0%",
+      "passed": true,
+      "details": "Zero network packet loss across all service communication channels",
+      "metrics": {
+        "packet_loss_pct": 0.0,
+        "bandwidth_mbps": 340.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:02.152616+00:00",
+  "execution_timestamp": "2026-09-19T07:05:02.152679+00:00",
+  "summary": "",
+  "report_title": "System Resource Utilization Verification Report",
+  "cpu_usage_avg_pct": 38.5,
+  "cpu_throttling_events": 0,
+  "load_average_15m": 1.42,
+  "memory_usage_mb": 850.0,
+  "disk_throughput_mb_s": 125.0,
+  "disk_io_wait_pct": 0.8,
+  "network_bandwidth_mbps": 340.0,
+  "network_packet_loss_pct": 0.0
+}

@@ -1,0 +1,94 @@
+{
+  "scenario_library_report.json": {
+    "sha256": "3af390c5f4fc0172a8dc98ceda023e227f13fa499fd2e095bea8befe63c90209",
+    "size_bytes": 5037
+  },
+  "complete_execution_report.json": {
+    "sha256": "f4546240ac491249c91200157c63128b9aff86166e57e4647ab77996f6c291df",
+    "size_bytes": 5109
+  },
+  "human_in_the_loop_report.json": {
+    "sha256": "c27495b4cc20adcb95ab004640116c480ba3562fb3749ce04984b0fbde0e7c96",
+    "size_bytes": 3184
+  },
+  "multi_agent_collaboration_report.json": {
+    "sha256": "80775533428b246714a4b80f18e91c2614b5924e4b9b1714eb92796ea6a6a4ed",
+    "size_bytes": 3667
+  },
+  "decision_quality_report.json": {
+    "sha256": "9e8db19d8fba873e37cd3e69723a2448405b692e2860ed7a592ca251504bd7a3",
+    "size_bytes": 2947
+  },
+  "business_rules_report.json": {
+    "sha256": "1ff3a8997a391e681309379288b4b7e70372b3ab1d76b8dba0cfd51bf3d64af2",
+    "size_bytes": 3074
+  },
+  "exception_workflow_report.json": {
+    "sha256": "edad3d450f74b35da6ed7895d33fb64a6c9aba4cbdd9b4c94f8a6a4436854de7",
+    "size_bytes": 3189
+  },
+  "business_kpi_report.json": {
+    "sha256": "02108ad1473a232e222c7b5c8021894f8abdf22b6faee363582a87d6b8bfa620",
+    "size_bytes": 2796
+  },
+  "autonomous_recovery_report.json": {
+    "sha256": "70c1e04ed40bf54df7dfe9ec5b7865ada75c72d605b13633dad03fe739346593",
+    "size_bytes": 2873
+  },
+  "organizational_workflow_report.json": {
+    "sha256": "7540da3e26b417bc6c9e9fc851f216e20b689a9717c9edff812fd8a8654b8c94",
+    "size_bytes": 3227
+  },
+  "long_running_report.json": {
+    "sha256": "06953125baa6efaa887d51a865953e2ae389e6d6055176ff6c5995bdb4996cf0",
+    "size_bytes": 2555
+  },
+  "explainability_report.json": {
+    "sha256": "2848584f95adc3337c32c6b30a78ad963f88e4179e02221f032cef42f9c51a1e",
+    "size_bytes": 2854
+  },
+  "audit_trail_report.json": {
+    "sha256": "32927ff7a5c8f297d93777312c3e198b8d1a1af5cd35caafbc90fa3fef6fcab0",
+    "size_bytes": 3232
+  },
+  "compliance_report.json": {
+    "sha256": "90f59fbb2cfaf2cbe8ddebc1d68984fd7c1ab33f6a62d284096cbd3f76ab39fe",
+    "size_bytes": 2662
+  },
+  "cost_validation_report.json": {
+    "sha256": "9c6abebd74f567d0e2606c321aae2e38430ccea0f34d0b531a64f45e8d827e32",
+    "size_bytes": 2714
+  },
+  "optimization_report.json": {
+    "sha256": "6d7e6b1b9fc5eb7779c10447d8d1aa4f267730feb791033f7bb3f5f8e1639818",
+    "size_bytes": 2654
+  },
+  "business_value_report.json": {
+    "sha256": "249205ac368deecab6b9b0ede2ad275026b424959f9f58100d80b73c10f1f541",
+    "size_bytes": 2826
+  },
+  "enterprise_dataset_report.json": {
+    "sha256": "7d85df7e03d98f784662ad229d89f06fa8b00f3cd07e78861a4d066e678407d9",
+    "size_bytes": 3326
+  },
+  "scalability_report.json": {
+    "sha256": "fcc2784aa0924a031ca186d33d2742e9aac06d2bc8a4e2881ee4a5cce742864d",
+    "size_bytes": 2668
+  },
+  "executive_readiness_report.json": {
+    "sha256": "af2cb4814b3921cf25dca30496096eae6ccf73e366b7deca34de81fdaa84a0f0",
+    "size_bytes": 3355
+  },
+  "autonomous_workflow_quality_score.json": {
+    "sha256": "96e48fdf7067f263e8ea4ab1b5862582eb5d65f3683894e15ad606c7dfc31e4b",
+    "size_bytes": 1838
+  },
+  "autonomous_workflow_quality_report.json": {
+    "sha256": "6f4d4061cb64142b7dbe39dfbab85dd4922e755b0683b4e78c3bf31d03949a97",
+    "size_bytes": 74928
+  },
+  "autonomous_workflow_summary_report.md": {
+    "sha256": "8c56cd596fe2a9837771c387dba056a7503df08dfdb5d5249e22418c39a88d7d",
+    "size_bytes": 3873
+  }
+}

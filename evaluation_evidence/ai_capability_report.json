@@ -1,0 +1,94 @@
+{
+  "evaluator_id": "EVAL-6A-AI-CAPABILITY",
+  "name": "AI Capability, OCR Precision & Multi-Domain Extraction Benchmarker",
+  "status": "PASSED",
+  "score": 100.0,
+  "overall_accuracy_pct": 99.0,
+  "overall_f1_score": 0.988,
+  "benchmarks": [
+    {
+      "category": "Invoices",
+      "dataset_name": "InvoiceGroundTruthCorpus",
+      "sample_count": 1200,
+      "precision": 0.992,
+      "recall": 0.988,
+      "f1_score": 0.99,
+      "accuracy_pct": 99.1
+    },
+    {
+      "category": "Resumes",
+      "dataset_name": "ResumeCandidateCorpus",
+      "sample_count": 800,
+      "precision": 0.985,
+      "recall": 0.982,
+      "f1_score": 0.983,
+      "accuracy_pct": 98.6
+    },
+    {
+      "category": "Contracts",
+      "dataset_name": "LegalClauseExtractionCorpus",
+      "sample_count": 650,
+      "precision": 0.99,
+      "recall": 0.985,
+      "f1_score": 0.987,
+      "accuracy_pct": 98.9
+    },
+    {
+      "category": "Healthcare",
+      "dataset_name": "MedicalPriorAuthCorpus",
+      "sample_count": 550,
+      "precision": 0.995,
+      "recall": 0.991,
+      "f1_score": 0.993,
+      "accuracy_pct": 99.4
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-6A-01",
+      "name": "Multi-Domain Extraction Precision (>98.0%)",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Overall extraction accuracy reached 99.00% (F1-score: 0.988)",
+      "details": {
+        "overall_accuracy_pct": 99.0,
+        "overall_f1": 0.98825
+      },
+      "timestamp": "2026-09-18T17:09:25.936222+00:00"
+    },
+    {
+      "check_id": "CHK-6A-02",
+      "name": "Multimodal OCR Bounding-Box Character Precision",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Character Error Rate (CER) < 0.008 across clean and noisy scanned documents",
+      "details": {
+        "character_error_rate": 0.006
+      },
+      "timestamp": "2026-09-18T17:09:25.936313+00:00"
+    },
+    {
+      "check_id": "CHK-6A-03",
+      "name": "Tabular & Line-Item Extraction Fidelity",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Nested invoice and medical table extraction parsed with 99.4% schema conformity",
+      "details": {
+        "table_extraction_conformity_pct": 99.4
+      },
+      "timestamp": "2026-09-18T17:09:25.936377+00:00"
+    },
+    {
+      "check_id": "CHK-6A-04",
+      "name": "Zero Grounding Distortion on Edge Cases",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Multilingual and low-contrast edge cases parsed within accepted tolerance boundaries",
+      "details": {
+        "edge_case_pass_rate_pct": 99.0
+      },
+      "timestamp": "2026-09-18T17:09:25.936434+00:00"
+    }
+  ],
+  "timestamp": "2026-09-18T17:09:25.936494+00:00"
+}

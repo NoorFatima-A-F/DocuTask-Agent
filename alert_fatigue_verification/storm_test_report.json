@@ -1,0 +1,10 @@
+{
+  "events_injected": 10000,
+  "events_processed": 10000,
+  "pipeline_crashed": false,
+  "max_memory_mb": 148.5,
+  "throughput_events_per_sec": 189794.02,
+  "primary_incidents_created": 2,
+  "critical_signals_preserved": true,
+  "status": "PASS"
+}

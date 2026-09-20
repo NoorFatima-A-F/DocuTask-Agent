@@ -1,0 +1,58 @@
+{
+  "part_id": "PART_16_TRUST",
+  "title": "Part 16 \u2014 Trust & Reputation Verification",
+  "description": "Validates agent reputation scoring, trust dynamics, penalty adjustments for policy violations, and gradual recovery.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.03,
+  "metrics": {
+    "monitored_agent_trust_scores": 128,
+    "trust_reputation_accuracy_pct": 100.0,
+    "agents_on_probation": 2,
+    "asymmetric_penalty_multiplier": 5.0
+  },
+  "assertions": [
+    {
+      "name": "assert_trust_score_growth",
+      "passed": true,
+      "message": "Verified task completion incrementally elevated agent reputation score (+0.01)",
+      "execution_time_ms": 0.005,
+      "details": {
+        "old_trust": 0.95,
+        "new_trust": 0.96
+      }
+    },
+    {
+      "name": "assert_asymmetric_trust_penalty",
+      "passed": true,
+      "message": "Policy violation incurred asymmetric reputation penalty, immediately degrading task routing priority",
+      "execution_time_ms": 0.004,
+      "details": {
+        "penalized_trust": 0.8999999999999999
+      }
+    },
+    {
+      "name": "assert_probationary_recovery",
+      "passed": true,
+      "message": "Probationary recovery protocol successfully restored rehabilitated agent after 10 audited successes",
+      "execution_time_ms": 0.002,
+      "details": {
+        "trust": 0.8,
+        "status": "ACTIVE",
+        "supervised_successes": 10
+      }
+    },
+    {
+      "name": "assert_trust_normalization_bounds",
+      "passed": true,
+      "message": "100% of workforce reputation scores strictly bounded within unit interval [0.0, 1.0]",
+      "execution_time_ms": 0.005,
+      "details": {
+        "bounded": true
+      }
+    }
+  ]
+}

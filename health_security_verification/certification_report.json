@@ -1,0 +1,67 @@
+{
+  "verification_id": "health-sec-40608872",
+  "timestamp": "2026-09-19T07:05:13.490031+00:00",
+  "overall_health_security_score": 100.0,
+  "certification_tier": "Secure Observability Ready",
+  "passed": true,
+  "category_scores": [
+    {
+      "category_name": "Endpoint Security & Info Exposure",
+      "weight_percentage": 20.0,
+      "raw_score": 100.0,
+      "weighted_score": 20.0,
+      "status": "EXCELLENT",
+      "details": "6/6 endpoints sanitized and secure."
+    },
+    {
+      "category_name": "Health RBAC & Authorization",
+      "weight_percentage": 15.0,
+      "raw_score": 100.0,
+      "weighted_score": 15.0,
+      "status": "EXCELLENT",
+      "details": "7/7 authentication & authorization checks enforced."
+    },
+    {
+      "category_name": "Metrics Privacy & Label Protection",
+      "weight_percentage": 15.0,
+      "raw_score": 100.0,
+      "weighted_score": 15.0,
+      "status": "EXCELLENT",
+      "details": "6/6 metrics verified free of PII and high cardinality."
+    },
+    {
+      "category_name": "Operational Log & Trace Sanitization",
+      "weight_percentage": 20.0,
+      "raw_score": 100.0,
+      "weighted_score": 20.0,
+      "status": "EXCELLENT",
+      "details": "Logs: 4/4 sanitized | Traces: 4/4 secure."
+    },
+    {
+      "category_name": "Secret Exposure Prevention",
+      "weight_percentage": 15.0,
+      "raw_score": 100.0,
+      "weighted_score": 15.0,
+      "status": "EXCELLENT",
+      "details": "5 observability surfaces scanned; zero credential leaks detected."
+    },
+    {
+      "category_name": "Dashboard & Telemetry Storage Security",
+      "weight_percentage": 10.0,
+      "raw_score": 100.0,
+      "weighted_score": 10.0,
+      "status": "EXCELLENT",
+      "details": "4/4 telemetry storage components hardened with TLS & RBAC."
+    },
+    {
+      "category_name": "Compliance & Standards Alignment",
+      "weight_percentage": 5.0,
+      "raw_score": 100.0,
+      "weighted_score": 5.0,
+      "status": "EXCELLENT",
+      "details": "7/7 controls passed across OWASP, SOC 2, and GDPR."
+    }
+  ],
+  "total_audits_performed": 53,
+  "zero_critical_vulnerabilities": true
+}

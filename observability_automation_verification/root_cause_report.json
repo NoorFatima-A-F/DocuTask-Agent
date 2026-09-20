@@ -1,0 +1,36 @@
+{
+  "report_title": "AI-Assisted Root Cause Analysis Verification Report",
+  "hypotheses": [
+    {
+      "hypothesis_id": "HYP-001",
+      "suspected_cause": "Gemini LLM Provider Regional Latency Spike & Rate Limit Throttling",
+      "confidence": 0.94,
+      "evidence_references": [
+        "otel_trace_span: gemini_api_call duration=12.4s (normal=0.8s)",
+        "prometheus_metric: ai_provider_http_429_count increased by 340%",
+        "structured_log: 'RateLimitExceeded: quota exceeded for model gemini-2.5-flash in us-central1'"
+      ],
+      "affected_services": [
+        "gemini_llm_gateway",
+        "async_document_worker",
+        "agent_planning_runtime"
+      ],
+      "is_primary_cause": true
+    },
+    {
+      "hypothesis_id": "HYP-002",
+      "suspected_cause": "Worker Pod Memory Pressure Triggering GC Pause",
+      "confidence": 0.22,
+      "evidence_references": [
+        "prometheus_metric: container_memory_working_set_bytes at 68% limit"
+      ],
+      "affected_services": [
+        "async_document_worker"
+      ],
+      "is_primary_cause": false
+    }
+  ],
+  "primary_root_cause": "Gemini LLM Provider Regional Latency Spike & Rate Limit Throttling",
+  "average_confidence": 0.58,
+  "status": "PASS"
+}

@@ -1,0 +1,66 @@
+{
+  "overall_score": 100.0,
+  "certification_tier": "Enterprise Performance Reliability Ready",
+  "status": "PASSED",
+  "categories": {
+    "SLA Definition": {
+      "name": "SLA Definition",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 4,
+      "total_checks": 4,
+      "status": "PASSED"
+    },
+    "SLO Implementation": {
+      "name": "SLO Implementation",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "Continuous Monitoring": {
+      "name": "Continuous Monitoring",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "Regression Detection": {
+      "name": "Regression Detection",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "Incident Handling": {
+      "name": "Incident Handling",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "Evidence Quality": {
+      "name": "Evidence Quality",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 4,
+      "total_checks": 4,
+      "status": "PASSED"
+    }
+  },
+  "total_verifiers_executed": 12,
+  "total_checks_passed": 48,
+  "total_checks_evaluated": 48,
+  "generated_at": "2026-09-19T07:05:07.977913+00:00",
+  "execution_time_seconds": 0.08
+}

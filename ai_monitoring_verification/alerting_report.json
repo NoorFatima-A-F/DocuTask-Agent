@@ -1,0 +1,60 @@
+{
+  "total_alert_rules": 4,
+  "rules": [
+    {
+      "alert_name": "AIProviderOutageCritical",
+      "condition_expr": "ai_error_rate > 10.0",
+      "duration_threshold": "5m",
+      "severity": "CRITICAL (P1)",
+      "prescribed_action": "Trigger automated multi-provider failover switch and page on-call SRE",
+      "notification_channels": [
+        "PagerDuty",
+        "Slack #sre-incidents",
+        "OpsGenie"
+      ],
+      "rule_active": true
+    },
+    {
+      "alert_name": "AILatencyDegradationWarning",
+      "condition_expr": "histogram_quantile(0.95, sum(rate(ai_request_latency_seconds_bucket[5m])) by (le)) > 2.5",
+      "duration_threshold": "3m",
+      "severity": "WARNING (P2)",
+      "prescribed_action": "Flag provider DEGRADED, throttle non-priority document queues, notify operations",
+      "notification_channels": [
+        "Slack #sre-alerts",
+        "Email Ops"
+      ],
+      "rule_active": true
+    },
+    {
+      "alert_name": "AIQualitySchemaCollapse",
+      "condition_expr": "rate(ai_schema_failure_rate[5m]) > 0.05",
+      "duration_threshold": "2m",
+      "severity": "WARNING (P2)",
+      "prescribed_action": "Activate secondary model validation filter and alert Prompt Engineering lead",
+      "notification_channels": [
+        "Slack #ai-quality",
+        "Jira Auto-Ticket"
+      ],
+      "rule_active": true
+    },
+    {
+      "alert_name": "AICostAnomalyBudgetExceeded",
+      "condition_expr": "sum(increase(ai_cost_estimate[1h])) > 50.0",
+      "duration_threshold": "15m",
+      "severity": "WARNING (P3)",
+      "prescribed_action": "Send budget warning, enable aggressive batch caching, alert engineering lead",
+      "notification_channels": [
+        "Slack #finops-alerts",
+        "Email Management"
+      ],
+      "rule_active": true
+    }
+  ],
+  "passed": true,
+  "details": {
+    "alerting_engine": "Prometheus AlertManager v0.27",
+    "deduplication_window": "5m",
+    "repeat_interval": "4h"
+  }
+}

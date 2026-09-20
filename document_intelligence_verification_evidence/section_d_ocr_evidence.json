@@ -1,0 +1,57 @@
+{
+  "section_id": "SECTION_D_OCR",
+  "title": "Section D: OCR Quality & Metric Verification",
+  "description": "Validates OCR Character Error Rate (CER), Word Error Rate (WER), handwriting recognition, skew/perspective rectification, and Unicode/RTL handling.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 1.45,
+  "metrics": {
+    "cer_rate_pct": 0.0,
+    "wer_rate_pct": 0.0,
+    "handwriting_accuracy_pct": 100.0,
+    "skew_corrected_degrees": 12.5,
+    "rtl_unicode_preserved": true
+  },
+  "assertions": [
+    {
+      "name": "CER_And_WER_Accuracy_Benchmark",
+      "passed": true,
+      "message": "OCR benchmark achieved CER=0.00% and WER=0.00% (Threshold <= 1.5%).",
+      "execution_time_ms": 1.433,
+      "details": {
+        "cer_pct": 0.0,
+        "wer_pct": 0.0
+      }
+    },
+    {
+      "name": "Handwritten_Annotation_And_Signature_OCR",
+      "passed": true,
+      "message": "Handwriting OCR engine achieved 100.0% recognition accuracy on doctor signatures.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "accuracy_pct": 100.0
+      }
+    },
+    {
+      "name": "Geometric_Skew_And_Perspective_Rectification",
+      "passed": true,
+      "message": "Geometric deskewing detected 12.5 deg tilt and rectified image to 0.0 deg baseline.",
+      "execution_time_ms": 0.0,
+      "details": {
+        "skew_angle_deg": 12.5
+      }
+    },
+    {
+      "name": "Unicode_RTL_And_Currency_Symbol_Preservation",
+      "passed": true,
+      "message": "Preserved full Unicode fidelity for RTL Arabic/Urdu scripts, currency signs (\u20ac), and scientific exponents.",
+      "execution_time_ms": 0.0,
+      "details": {
+        "output": "Total: \u20ac4,500.50 | \u0627\u0644\u0641\u0627\u062a\u0648\u0631\u0629 \u0631\u0642\u0645: \u06f1\u06f2\u06f3\u06f4\u06f5 | 1.25 \u00d7 10\u2074 Pa"
+      }
+    }
+  ]
+}

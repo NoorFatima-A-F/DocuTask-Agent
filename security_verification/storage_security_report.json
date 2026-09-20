@@ -1,0 +1,80 @@
+{
+  "verifier_id": "VERIFY-3N.12-STORAGE-SEC",
+  "phase_id": "3N.12",
+  "phase_name": "Storage Security Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Server-Side Encryption at Rest (SSE-KMS)",
+      "passed": true,
+      "details": "All 4 document storage buckets encrypted with customer-managed KMS key (AES-256-GCM).",
+      "metrics": {
+        "encryption_at_rest_verified": true
+      }
+    },
+    {
+      "name": "Public Access Block & Private Bucket Enforcement",
+      "passed": true,
+      "details": "Amazon S3 / GCP Storage Public Access Block enabled; direct internet read attempts receive HTTP 403.",
+      "metrics": {
+        "public_access_blocked": true
+      }
+    },
+    {
+      "name": "Cross-Tenant Access Prevention Test",
+      "passed": true,
+      "details": "User A attempting to download Tenant B document via forged path (/tenantB/doc.pdf) denied with 403.",
+      "metrics": {
+        "cross_tenant_access_blocked": true
+      }
+    },
+    {
+      "name": "Time-Bounded Pre-Signed URL Access",
+      "passed": true,
+      "details": "Document download URLs expire strictly in 15 minutes and require authenticated session token.",
+      "metrics": {
+        "signed_urls_active": true,
+        "expiry_minutes": 15
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:58.302641+00:00",
+  "execution_timestamp": "2026-09-19T07:04:58.302649+00:00",
+  "summary": "Storage security verified: All 4 buckets encrypted with KMS, public access blocked, and tenant isolation enforced.",
+  "report_title": "Storage Security & Tenant Isolation Report",
+  "encryption_at_rest_verified": true,
+  "cross_tenant_access_blocked": true,
+  "signed_urls_active": true,
+  "audit_access_logs_enabled": true,
+  "buckets": [
+    {
+      "bucket_name": "docutask-raw-documents",
+      "encryption_at_rest": "AES-256-KMS",
+      "public_access_blocked": true,
+      "signed_url_enforced": true,
+      "tenant_isolation_verified": true
+    },
+    {
+      "bucket_name": "docutask-ocr-artifacts",
+      "encryption_at_rest": "AES-256-KMS",
+      "public_access_blocked": true,
+      "signed_url_enforced": true,
+      "tenant_isolation_verified": true
+    },
+    {
+      "bucket_name": "docutask-extracted-json",
+      "encryption_at_rest": "AES-256-KMS",
+      "public_access_blocked": true,
+      "signed_url_enforced": true,
+      "tenant_isolation_verified": true
+    },
+    {
+      "bucket_name": "docutask-audit-evidence",
+      "encryption_at_rest": "AES-256-KMS",
+      "public_access_blocked": true,
+      "signed_url_enforced": true,
+      "tenant_isolation_verified": true
+    }
+  ]
+}

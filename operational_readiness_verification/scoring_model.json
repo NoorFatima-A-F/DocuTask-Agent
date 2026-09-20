@@ -1,0 +1,37 @@
+{
+  "model_name": "Enterprise Operational Readiness Weighted Scoring Framework",
+  "categories": [
+    {
+      "category": "Metrics Completeness",
+      "weight": 0.2,
+      "score": 100.0
+    },
+    {
+      "category": "Monitoring Accuracy",
+      "weight": 0.2,
+      "score": 100.0
+    },
+    {
+      "category": "Alert Reliability",
+      "weight": 0.2,
+      "score": 99.32
+    },
+    {
+      "category": "Incident Quality",
+      "weight": 0.15,
+      "score": 100.0
+    },
+    {
+      "category": "Dashboard Usability",
+      "weight": 0.15,
+      "score": 100.0
+    },
+    {
+      "category": "Security Readiness",
+      "weight": 0.1,
+      "score": 100.0
+    }
+  ],
+  "composite_formula": "Final Score = (Metrics * 0.20) + (Monitoring * 0.20) + (Alert * 0.20) + (Incident * 0.15) + (Dashboard * 0.15) + (Security * 0.10)",
+  "composite_score": 99.86
+}

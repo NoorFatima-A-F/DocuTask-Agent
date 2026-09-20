@@ -1,0 +1,34 @@
+{
+  "report_title": "Continuous Observability Security CI/CD Gate Report",
+  "checks": [
+    {
+      "tool_name": "Gitleaks Pre-Commit & CI Secret Scanner",
+      "check_type": "Hardcoded Secrets & API Token Detection in Telemetry Code",
+      "findings_count": 0,
+      "blocking_enabled": true,
+      "status": "PASSED"
+    },
+    {
+      "tool_name": "Trivy Container & Dependency Vulnerability Scanner",
+      "check_type": "OTel Collector & Prometheus Exporter Image Vulnerabilities",
+      "findings_count": 0,
+      "blocking_enabled": true,
+      "status": "PASSED"
+    },
+    {
+      "tool_name": "Semgrep Static Code Analysis (SAST)",
+      "check_type": "Unredacted Logger Calls & Raw Payload Logging in Python/Go",
+      "findings_count": 0,
+      "blocking_enabled": true,
+      "status": "PASSED"
+    },
+    {
+      "tool_name": "OpenTelemetry Semantic Conventions Security Linter",
+      "check_type": "High-Cardinality & Sensitive Attribute Enforcement",
+      "findings_count": 0,
+      "blocking_enabled": true,
+      "status": "PASSED"
+    }
+  ],
+  "ci_cd_gate_enforced": true
+}

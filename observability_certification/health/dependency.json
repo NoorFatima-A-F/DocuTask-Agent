@@ -1,0 +1,10 @@
+{
+  "dependencies_checked": [
+    "PostgreSQL",
+    "Redis",
+    "Storage",
+    "WorkerPool",
+    "GeminiLLM"
+  ],
+  "status": "HEALTHY"
+}

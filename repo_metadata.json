@@ -1,0 +1,94 @@
+{
+  "repository_name": "ai_document_processing_platform",
+  "platform_name": "DocuTask Agent Enterprise Verification Platform",
+  "repository_version": "2.4.0",
+  "architecture_version": "3.0.0-hexagonal",
+  "verification_platform_version": "2.1.0",
+  "plugin_api_version": "1.2.0",
+  "minimum_python_version": "3.12",
+  "target_python_version": "3.14",
+  "compatibility_matrix": {
+    "python": [
+      ">=3.12",
+      "<=3.14"
+    ],
+    "fastapi": ">=0.110.0",
+    "pydantic": ">=2.7.0",
+    "sqlalchemy": ">=2.0.0",
+    "postgresql": ">=15.0"
+  },
+  "bounded_contexts": [
+    {
+      "name": "platform_verification",
+      "path": "app/platform_verification",
+      "domain": "Verification Core"
+    },
+    {
+      "name": "shared_kernel",
+      "path": "app/shared_kernel",
+      "domain": "Enterprise Primitives"
+    },
+    {
+      "name": "infrastructure",
+      "path": "app/infrastructure",
+      "domain": "External Adapters"
+    },
+    {
+      "name": "interfaces",
+      "path": "app/interfaces",
+      "domain": "Entry Points & Ingress"
+    }
+  ],
+  "topology_roots": [
+    {
+      "name": "app",
+      "description": "Production source code",
+      "owner": "@platform-architects"
+    },
+    {
+      "name": "config",
+      "description": "Configuration profiles and schemas",
+      "owner": "@devops-leads"
+    },
+    {
+      "name": "datasets",
+      "description": "Verification corpora, benchmarks & manifests",
+      "owner": "@mlops-team"
+    },
+    {
+      "name": "evidence",
+      "description": "Non-production verification artifacts & CAS",
+      "owner": "@qa-automation"
+    },
+    {
+      "name": "docs",
+      "description": "Architecture specs, ADRs, runbooks & guides",
+      "owner": "@architecture-board"
+    },
+    {
+      "name": "tooling",
+      "description": "Development, migration, and governance tools",
+      "owner": "@developer-experience"
+    },
+    {
+      "name": "deploy",
+      "description": "Cloud-native deployment manifests and IaC",
+      "owner": "@release-engineering"
+    },
+    {
+      "name": "security",
+      "description": "Security policies, threat models & compliance",
+      "owner": "@security-architects"
+    },
+    {
+      "name": "observability",
+      "description": "Dashboards, alerts, telemetry & schemas",
+      "owner": "@sre-team"
+    },
+    {
+      "name": "tests",
+      "description": "Hierarchical test suites across all tiers",
+      "owner": "@qa-leads"
+    }
+  ]
+}

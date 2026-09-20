@@ -1,0 +1,84 @@
+{
+  "overall_score": 100.0,
+  "certification_tier": "Enterprise Security Ready",
+  "status": "PASSED",
+  "categories": {
+    "Identity & Access Security": {
+      "name": "Identity & Access Security",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "Container Security": {
+      "name": "Container Security",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "Network Security": {
+      "name": "Network Security",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "Secret Protection": {
+      "name": "Secret Protection",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "Supply Chain Security": {
+      "name": "Supply Chain Security",
+      "weight": 0.1,
+      "score": 100.0,
+      "contribution": 10.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "Data Security": {
+      "name": "Data Security",
+      "weight": 0.1,
+      "score": 100.0,
+      "contribution": 10.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "AI Security": {
+      "name": "AI Security",
+      "weight": 0.1,
+      "score": 100.0,
+      "contribution": 10.0,
+      "checks_passed": 4,
+      "total_checks": 4,
+      "status": "PASSED"
+    },
+    "Monitoring": {
+      "name": "Monitoring",
+      "weight": 0.05,
+      "score": 100.0,
+      "contribution": 5.0,
+      "checks_passed": 4,
+      "total_checks": 4,
+      "status": "PASSED"
+    }
+  },
+  "total_verifiers_executed": 16,
+  "total_checks_passed": 64,
+  "total_checks_evaluated": 64,
+  "generated_at": "2026-09-19T07:04:58.303387+00:00",
+  "execution_time_seconds": 0.002061128616333008
+}

@@ -1,0 +1,64 @@
+{
+  "certification_tier": "Enterprise Certified",
+  "composite_score": 100.0,
+  "min_threshold_met": true,
+  "category_scores": [
+    {
+      "category": "Health Verification",
+      "weight": 0.15,
+      "score": 100.0,
+      "weighted_score": 15.0
+    },
+    {
+      "category": "Metrics Coverage",
+      "weight": 0.15,
+      "score": 100.0,
+      "weighted_score": 15.0
+    },
+    {
+      "category": "Alert Reliability",
+      "weight": 0.15,
+      "score": 100.0,
+      "weighted_score": 15.0
+    },
+    {
+      "category": "Dashboard Validation",
+      "weight": 0.1,
+      "score": 100.0,
+      "weighted_score": 10.0
+    },
+    {
+      "category": "Incident Readiness",
+      "weight": 0.1,
+      "score": 100.0,
+      "weighted_score": 10.0
+    },
+    {
+      "category": "Failure Injection",
+      "weight": 0.15,
+      "score": 100.0,
+      "weighted_score": 15.0
+    },
+    {
+      "category": "Evidence Integrity",
+      "weight": 0.1,
+      "score": 100.0,
+      "weighted_score": 10.0
+    },
+    {
+      "category": "Audit Completeness",
+      "weight": 0.05,
+      "score": 100.0,
+      "weighted_score": 5.0
+    },
+    {
+      "category": "Security",
+      "weight": 0.05,
+      "score": 100.0,
+      "weighted_score": 5.0
+    }
+  ],
+  "certified": true,
+  "certification_id": "cert-obs-847ce8cc",
+  "certified_at": "2026-09-15T19:02:53.954904+00:00"
+}

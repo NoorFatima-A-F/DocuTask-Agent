@@ -1,0 +1,14 @@
+{
+  "monthly_budget_usd": 500.0,
+  "current_month_spend_usd": 184.5,
+  "budget_utilized_pct": 36.9,
+  "compute_infrastructure_cost_usd": 68.2,
+  "database_and_cache_cost_usd": 38.5,
+  "storage_cost_usd": 12.8,
+  "ai_model_api_cost_usd": 65.0,
+  "cost_per_document_usd": 0.0042,
+  "cost_per_active_user_usd": 0.92,
+  "cost_trend": "STEADY / WITHIN_FORECAST",
+  "cost_efficiency_score": 96.5,
+  "timestamp": "2026-09-19T07:05:00.641621+00:00"
+}

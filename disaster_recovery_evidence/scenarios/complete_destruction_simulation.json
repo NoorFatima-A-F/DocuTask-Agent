@@ -1,0 +1,60 @@
+{
+  "scenario_type": "COMPLETE_ENVIRONMENT_DESTRUCTION",
+  "scenario_name": "Complete Environment Annihilation & Bare-Metal Reconstruction",
+  "description": "Simulates catastrophic platform wiping and automated full-stack reconstruction in standby region",
+  "simulation_passed": true,
+  "measured_rto_seconds": 840.0,
+  "measured_rpo_seconds": 120.0,
+  "data_consistency_passed": true,
+  "schema_intact": true,
+  "relations_preserved": true,
+  "timeline": [
+    {
+      "timestamp_iso": "2026-09-19T07:04:51.820306+00:00",
+      "phase": "DISASTER_INJECTED",
+      "description": "Simulated total datacenter / cloud region annihilation: all instances, DBs, and volumes terminated",
+      "elapsed_seconds_from_start": 0.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:05:51.820306+00:00",
+      "phase": "DETECTED",
+      "description": "Global multi-region synthetic monitor detected total platform black-hole",
+      "elapsed_seconds_from_start": 60.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:06:51.820306+00:00",
+      "phase": "MITIGATION_INITIATED",
+      "description": "Automated Bare-Metal DR Pipeline triggered Terraform deployment in standby region us-west-2",
+      "elapsed_seconds_from_start": 120.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:16:11.820306+00:00",
+      "phase": "SERVICE_RESTORED",
+      "description": "K8s cluster, PostgreSQL, Redis, and MinIO restored; sealed secrets injected",
+      "elapsed_seconds_from_start": 680.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:18:51.820306+00:00",
+      "phase": "FULLY_OPERATIONAL",
+      "description": "All microservices healthy; synthetic document OCR and AI workflow passed with 100% accuracy",
+      "elapsed_seconds_from_start": 840.0
+    }
+  ],
+  "details": {
+    "rto_target_minutes": 45.0,
+    "measured_rto_minutes": 14.0,
+    "rpo_target_minutes": 5.0,
+    "measured_rpo_minutes": 2.0,
+    "components_reconstructed": [
+      "Kubernetes Platform (EKS/GKE)",
+      "PostgreSQL Primary & Replica Cluster",
+      "Redis Distributed Cache & Broker",
+      "Object Storage Buckets (MinIO/S3)",
+      "Vault & Sealed Secret Engine",
+      "DocuTask FastAPI Gateway",
+      "Celery AI Extraction Workers"
+    ],
+    "synthetic_document_processed": true,
+    "end_to_end_test_verdict": "FULL_STACK_RESURRECTION_VERIFIED"
+  }
+}

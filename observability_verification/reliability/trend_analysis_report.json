@@ -1,0 +1,47 @@
+{
+  "report_title": "Reliability Trend & Gradual Degradation Analysis Report",
+  "trends": [
+    {
+      "metric_name": "memory_growth_pattern",
+      "timeframe": "monthly",
+      "historical_baseline": 512.0,
+      "current_observation": 518.4,
+      "trend_direction": "STABLE",
+      "degradation_detected": false
+    },
+    {
+      "metric_name": "model_accuracy_drift",
+      "timeframe": "monthly",
+      "historical_baseline": 99.1,
+      "current_observation": 99.05,
+      "trend_direction": "STABLE",
+      "degradation_detected": false
+    },
+    {
+      "metric_name": "queue_processing_latency_p95",
+      "timeframe": "weekly",
+      "historical_baseline": 450.0,
+      "current_observation": 432.0,
+      "trend_direction": "IMPROVING",
+      "degradation_detected": false
+    },
+    {
+      "metric_name": "api_error_rate_drift",
+      "timeframe": "weekly",
+      "historical_baseline": 0.08,
+      "current_observation": 0.07,
+      "trend_direction": "IMPROVING",
+      "degradation_detected": false
+    },
+    {
+      "metric_name": "database_connection_pool_saturation",
+      "timeframe": "monthly",
+      "historical_baseline": 34.0,
+      "current_observation": 33.5,
+      "trend_direction": "STABLE",
+      "degradation_detected": false
+    }
+  ],
+  "gradual_degradation_detected": false,
+  "trend_stability_pct": 100.0
+}

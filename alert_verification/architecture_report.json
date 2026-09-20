@@ -1,0 +1,14 @@
+{
+  "alert_system": "Prometheus AlertManager",
+  "rules_defined_count": 8,
+  "severity_levels_count": 4,
+  "supported_lifecycle_states": [
+    "NORMAL",
+    "PENDING",
+    "FIRING",
+    "ACKNOWLEDGED",
+    "RESOLVED"
+  ],
+  "alertmanager_cluster_healthy": true,
+  "status": "PASS"
+}

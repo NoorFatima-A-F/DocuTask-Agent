@@ -1,0 +1,49 @@
+{
+  "active_incidents_count": 0,
+  "resolved_incidents_count": 3,
+  "sev1_count": 0,
+  "sev2_count": 1,
+  "sev3_count": 2,
+  "mean_time_to_detect_sec": 14.5,
+  "mean_time_to_recover_sec": 42.0,
+  "incidents": [
+    {
+      "id": "INC-202609-001",
+      "title": "Transient Redis Worker Concurrency Backlog",
+      "severity": "SEV2",
+      "status": "RESOLVED",
+      "detected_at": "2026-09-14T08:12:00Z",
+      "resolved_at": "2026-09-14T08:12:45Z",
+      "mttr_seconds": 45.0,
+      "impact": "Document ingestion latency elevated for 45 seconds during burst traffic.",
+      "root_cause_summary": "Worker queue saturation mitigated by automated worker pool scaling.",
+      "action_items_count": 2
+    },
+    {
+      "id": "INC-202609-002",
+      "title": "PostgreSQL Read Replica Connection Pool Timeout",
+      "severity": "SEV3",
+      "status": "POSTMORTEM_COMPLETED",
+      "detected_at": "2026-09-10T14:20:00Z",
+      "resolved_at": "2026-09-10T14:20:30Z",
+      "mttr_seconds": 30.0,
+      "impact": "Analytical query endpoint retried requests for 30 seconds.",
+      "root_cause_summary": "Connection pool max capacity reached; automated pool expansion enacted.",
+      "action_items_count": 1
+    },
+    {
+      "id": "INC-202609-003",
+      "title": "Minor OCR Preprocessing Memory Spike",
+      "severity": "SEV3",
+      "status": "RESOLVED",
+      "detected_at": "2026-09-05T19:05:00Z",
+      "resolved_at": "2026-09-05T19:05:51Z",
+      "mttr_seconds": 51.0,
+      "impact": "Single worker memory threshold warning trigger.",
+      "root_cause_summary": "Unusually dense scanned PDF document garbage collected cleanly.",
+      "action_items_count": 1
+    }
+  ],
+  "incident_management_healthy": true,
+  "timestamp": "2026-09-19T07:05:00.640050+00:00"
+}

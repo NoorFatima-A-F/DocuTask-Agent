@@ -1,0 +1,20 @@
+{
+  "total_rollbacks_triggered": 1,
+  "successful_rollbacks": 1,
+  "escalated_incidents_count": 1,
+  "rollback_success_rate_pct": 100.0,
+  "records": [
+    {
+      "rollback_id": "ROLL-INIT-001",
+      "execution_id": "EXEC-SAMPLE-FAIL",
+      "action_reverted": "scale_queue_workers",
+      "target": "queue_fleet",
+      "rollback_action": "scale_down_workers_to_original_count",
+      "reverted_successfully": true,
+      "reversion_duration_ms": 22.4,
+      "escalated_to_human": true,
+      "timestamp": "2026-09-19T07:04:32.479277+00:00"
+    }
+  ],
+  "status": "PASS"
+}

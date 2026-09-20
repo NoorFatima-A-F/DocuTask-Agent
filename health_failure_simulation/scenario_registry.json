@@ -1,0 +1,157 @@
+{
+  "report_title": "Enterprise Failure Scenario Registry & Simulation Catalog",
+  "total_scenarios": 12,
+  "scenarios": [
+    {
+      "scenario_id": "DB_FAILURE_001",
+      "category": "INFRASTRUCTURE",
+      "component": "postgresql",
+      "failure_type": "database_down",
+      "severity": "CRITICAL",
+      "expected_state_before": "healthy",
+      "expected_state_during": "unhealthy",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    },
+    {
+      "scenario_id": "QUEUE_FAILURE_001",
+      "category": "INFRASTRUCTURE",
+      "component": "redis",
+      "failure_type": "redis_down",
+      "severity": "HIGH",
+      "expected_state_before": "healthy",
+      "expected_state_during": "unhealthy",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    },
+    {
+      "scenario_id": "STORAGE_FAILURE_001",
+      "category": "INFRASTRUCTURE",
+      "component": "s3_storage",
+      "failure_type": "storage_unavailable",
+      "severity": "HIGH",
+      "expected_state_before": "healthy",
+      "expected_state_during": "unhealthy",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    },
+    {
+      "scenario_id": "API_CRASH_001",
+      "category": "APPLICATION",
+      "component": "api_gateway",
+      "failure_type": "api_crash",
+      "severity": "CRITICAL",
+      "expected_state_before": "healthy",
+      "expected_state_during": "unhealthy",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 20
+    },
+    {
+      "scenario_id": "WORKER_CRASH_001",
+      "category": "APPLICATION",
+      "component": "async_workers",
+      "failure_type": "worker_crash",
+      "severity": "MEDIUM",
+      "expected_state_before": "healthy",
+      "expected_state_during": "unhealthy",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 25
+    },
+    {
+      "scenario_id": "RUNTIME_FAILURE_001",
+      "category": "APPLICATION",
+      "component": "agent_runtime",
+      "failure_type": "agent_runtime_failure",
+      "severity": "HIGH",
+      "expected_state_before": "healthy",
+      "expected_state_during": "unhealthy",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 25
+    },
+    {
+      "scenario_id": "GEMINI_TIMEOUT_001",
+      "category": "EXTERNAL_DEPENDENCY",
+      "component": "gemini_llm",
+      "failure_type": "gemini_timeout",
+      "severity": "MEDIUM",
+      "expected_state_before": "healthy",
+      "expected_state_during": "degraded",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    },
+    {
+      "scenario_id": "LLM_RATE_LIMIT_001",
+      "category": "EXTERNAL_DEPENDENCY",
+      "component": "llm_router",
+      "failure_type": "llm_rate_limit",
+      "severity": "MEDIUM",
+      "expected_state_before": "healthy",
+      "expected_state_during": "degraded",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    },
+    {
+      "scenario_id": "PROVIDER_UNAVAILABLE_001",
+      "category": "EXTERNAL_DEPENDENCY",
+      "component": "multi_llm_gateway",
+      "failure_type": "provider_unavailable",
+      "severity": "HIGH",
+      "expected_state_before": "healthy",
+      "expected_state_during": "degraded",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    },
+    {
+      "scenario_id": "MEMORY_PRESSURE_001",
+      "category": "RESOURCE",
+      "component": "container_memory",
+      "failure_type": "memory_pressure",
+      "severity": "HIGH",
+      "expected_state_before": "healthy",
+      "expected_state_during": "degraded",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    },
+    {
+      "scenario_id": "CPU_SATURATION_001",
+      "category": "RESOURCE",
+      "component": "container_cpu",
+      "failure_type": "cpu_saturation",
+      "severity": "HIGH",
+      "expected_state_before": "healthy",
+      "expected_state_during": "degraded",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    },
+    {
+      "scenario_id": "DISK_FULL_001",
+      "category": "RESOURCE",
+      "component": "node_storage",
+      "failure_type": "disk_full",
+      "severity": "CRITICAL",
+      "expected_state_before": "healthy",
+      "expected_state_during": "unhealthy",
+      "expected_state_after": "healthy",
+      "rollback_required": true,
+      "max_duration_seconds": 30
+    }
+  ],
+  "categories_covered": [
+    "APPLICATION",
+    "EXTERNAL_DEPENDENCY",
+    "INFRASTRUCTURE",
+    "RESOURCE"
+  ],
+  "registry_validated": true
+}

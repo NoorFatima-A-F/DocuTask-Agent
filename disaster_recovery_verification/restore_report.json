@@ -1,0 +1,112 @@
+{
+  "verifier_id": "VERIFY-3L.8-SYSTEM-RESTORE",
+  "phase_id": "3L.8",
+  "phase_name": "Complete System Restore Test",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Bare-Metal Disaster Recovery Sequence",
+      "passed": true,
+      "details": "All 9 sequential disaster recovery stages completed successfully in 16.0 minutes.",
+      "metrics": {
+        "total_rebuild_time_minutes": 16.0,
+        "steps_passed": 9
+      }
+    },
+    {
+      "name": "Application Functionality Post-Restore",
+      "passed": true,
+      "details": "User authentication, document upload, OCR extraction, AI model inference, and audit logging verified operational.",
+      "metrics": {
+        "user_login": true,
+        "upload": true,
+        "ai_processing": true,
+        "audit_trail": true
+      }
+    },
+    {
+      "name": "Total Recovery Time within 60m SLA",
+      "passed": true,
+      "details": "Total system reconstruction time of 16.0m is well below the 60-minute enterprise RTO.",
+      "metrics": {
+        "max_allowed_rto_minutes": 60.0,
+        "actual_rto_minutes": 16.0
+      }
+    },
+    {
+      "name": "End-to-End Workflow Parity",
+      "passed": true,
+      "details": "End-to-end document processing pipeline achieves identical schema extraction accuracy on restored platform.",
+      "metrics": {
+        "extraction_parity_pct": 100.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:50.219932+00:00",
+  "execution_timestamp": "2026-09-19T07:04:50.219943+00:00",
+  "summary": "Complete system disaster simulation passed: platform rebuilt and functional in 16.0m.",
+  "report_title": "Complete System Restore Simulation Report",
+  "user_login_works": true,
+  "document_upload_works": true,
+  "ai_processing_works": true,
+  "results_available": true,
+  "audit_trail_exists": true,
+  "total_rebuild_time_minutes": 16.0,
+  "e2e_steps": [
+    {
+      "step_name": "1. Infrastructure Provisioning",
+      "action": "Spin up compute, networking, security groups",
+      "duration_seconds": 320.0,
+      "passed": true
+    },
+    {
+      "step_name": "2. Secrets Decryption & Injection",
+      "action": "Inject KMS-decrypted environment variables",
+      "duration_seconds": 15.0,
+      "passed": true
+    },
+    {
+      "step_name": "3. Database Snapshot & WAL Replay",
+      "action": "Restore PostgreSQL schema and table data",
+      "duration_seconds": 180.0,
+      "passed": true
+    },
+    {
+      "step_name": "4. Object Storage Mirror Restoration",
+      "action": "Restore document storage files",
+      "duration_seconds": 240.0,
+      "passed": true
+    },
+    {
+      "step_name": "5. Microservice Deployment",
+      "action": "Deploy FastAPI, Celery, Redis, Prometheus",
+      "duration_seconds": 180.0,
+      "passed": true
+    },
+    {
+      "step_name": "6. User Authentication Test",
+      "action": "Authenticate test user & issue JWT token",
+      "duration_seconds": 2.5,
+      "passed": true
+    },
+    {
+      "step_name": "7. Document Ingestion Test",
+      "action": "Upload multi-page invoice PDF",
+      "duration_seconds": 4.8,
+      "passed": true
+    },
+    {
+      "step_name": "8. OCR & AI Processing Test",
+      "action": "Execute OCR and Gemini model extraction",
+      "duration_seconds": 12.4,
+      "passed": true
+    },
+    {
+      "step_name": "9. Audit Trail & Result Verification",
+      "action": "Validate result retrieval and audit event",
+      "duration_seconds": 3.1,
+      "passed": true
+    }
+  ]
+}

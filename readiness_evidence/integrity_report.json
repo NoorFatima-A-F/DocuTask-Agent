@@ -1,0 +1,92 @@
+{
+  "total_artifacts_hashed": 12,
+  "all_hashes_verified": true,
+  "tampering_detected": false,
+  "artifacts": [
+    {
+      "file_name": "metadata.json",
+      "relative_path": "metadata.json",
+      "sha256_hash": "e6bb04552785e2d41d2906e139b50718c55868d864a913c8bfc75c4cd63b0a5f",
+      "size_bytes": 436,
+      "verified": true
+    },
+    {
+      "file_name": "readiness_contract_report.json",
+      "relative_path": "readiness_contract_report.json",
+      "sha256_hash": "e8f365692932eccb783bd5695f6752a0204555f9381e9c737b5aa279206c0414",
+      "size_bytes": 202,
+      "verified": true
+    },
+    {
+      "file_name": "dependency_report.json",
+      "relative_path": "dependency_report.json",
+      "sha256_hash": "435f1c59aca4a45de830eb9b93155a29bab998a04426b64964e09b8c8dee8171",
+      "size_bytes": 306,
+      "verified": true
+    },
+    {
+      "file_name": "database_report.json",
+      "relative_path": "database_report.json",
+      "sha256_hash": "dbf345a66b26fb51da7c3356dea3d0121169fbc4a6c38bae9ae913e4b79b6d81",
+      "size_bytes": 256,
+      "verified": true
+    },
+    {
+      "file_name": "queue_report.json",
+      "relative_path": "queue_report.json",
+      "sha256_hash": "2c28e47e4be0c43c95bcee1d970b267128688dd59759cdc2efd1d1d451701ad5",
+      "size_bytes": 182,
+      "verified": true
+    },
+    {
+      "file_name": "worker_report.json",
+      "relative_path": "worker_report.json",
+      "sha256_hash": "e72d8f7aa43795bc7f449407f599ef140fc8fe0204f8e7346c37baf92f027121",
+      "size_bytes": 211,
+      "verified": true
+    },
+    {
+      "file_name": "ai_provider_report.json",
+      "relative_path": "ai_provider_report.json",
+      "sha256_hash": "c476d016b2b3c6f3060e8e5ebad4f30c48075c2213387ab2d02f33657c4caae4",
+      "size_bytes": 260,
+      "verified": true
+    },
+    {
+      "file_name": "startup_report.json",
+      "relative_path": "startup_report.json",
+      "sha256_hash": "fb6041f2755d6d84e6e7817a46b07dcb13968908a6843f4d12d8e287b2c58d0f",
+      "size_bytes": 1761,
+      "verified": true
+    },
+    {
+      "file_name": "failure_report.json",
+      "relative_path": "failure_report.json",
+      "sha256_hash": "1137ddf02091fc884a33007c52b62340d8af29e5acf94e7976df203722d85310",
+      "size_bytes": 1740,
+      "verified": true
+    },
+    {
+      "file_name": "recovery_report.json",
+      "relative_path": "recovery_report.json",
+      "sha256_hash": "b2549d89d7f2af9506e9d4b7d169f0f09a58cee0c5a4214d3656a92ac405a250",
+      "size_bytes": 1275,
+      "verified": true
+    },
+    {
+      "file_name": "metrics_report.json",
+      "relative_path": "metrics_report.json",
+      "sha256_hash": "3d9e45c55b433624b6cb07af2235e14518014e422a6f7ad8c639ce980309e049",
+      "size_bytes": 421,
+      "verified": true
+    },
+    {
+      "file_name": "certification_report.json",
+      "relative_path": "certification_report.json",
+      "sha256_hash": "33612004b28e2d73120cab59cc897ce2f21826de6ae3cd1a1013967c75a76c27",
+      "size_bytes": 431,
+      "verified": true
+    }
+  ],
+  "status": "PASS"
+}

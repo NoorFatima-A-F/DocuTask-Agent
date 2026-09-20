@@ -1,0 +1,15 @@
+{
+  "metrics_count": 6,
+  "prometheus_metrics_exposed": [
+    "service_readiness_state",
+    "dependency_health_status",
+    "readiness_failure_total",
+    "time_to_ready_seconds",
+    "degraded_duration_seconds",
+    "recovery_duration_seconds"
+  ],
+  "service_readiness_dashboard_ready": true,
+  "dependency_dashboard_ready": true,
+  "grafana_json_generated": true,
+  "status": "PASS"
+}

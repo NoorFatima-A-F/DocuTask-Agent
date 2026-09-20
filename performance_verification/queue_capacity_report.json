@@ -1,0 +1,55 @@
+{
+  "verifier_id": "VERIFY-3J.6.7-QUEUE-CAP",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Processing Rate Exceeds Enqueue Rate",
+      "passed": true,
+      "details": "Processing: 1200 jobs/min > Enqueue: 1000 jobs/min — queue drains faster than fills",
+      "metrics": {
+        "processing_rate": 1200,
+        "enqueue_rate": 1000
+      }
+    },
+    {
+      "name": "Queue Depth Under Safety Threshold (<5000)",
+      "passed": true,
+      "details": "Peak queue depth: 480 items (threshold: 5000)",
+      "metrics": {
+        "peak_depth": 480,
+        "threshold": 5000
+      }
+    },
+    {
+      "name": "Zero Retry Rate Under Normal Load",
+      "passed": true,
+      "details": "No job retries detected — all jobs processed successfully on first attempt",
+      "metrics": {
+        "retry_rate_pct": 0.0
+      }
+    },
+    {
+      "name": "No Saturation Under 10K Job Workload",
+      "passed": true,
+      "details": "Queue handled 10000 jobs without saturation or backpressure failure",
+      "metrics": {
+        "max_workload": 10000,
+        "saturated": false
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:02.152108+00:00",
+  "execution_timestamp": "2026-09-19T07:05:02.152169+00:00",
+  "summary": "",
+  "report_title": "Redis Queue Capacity & Ingestion Dynamics Report",
+  "queue_depth_peak": 480,
+  "enqueue_rate_jobs_min": 1000,
+  "processing_rate_jobs_min": 1200,
+  "avg_waiting_time_ms": 14.5,
+  "retry_rate_pct": 0.0,
+  "max_tested_workload_jobs": 10000,
+  "queue_saturation_detected": false
+}

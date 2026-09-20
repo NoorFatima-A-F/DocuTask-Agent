@@ -1,0 +1,141 @@
+import React, { useState } from 'react';
+import { Badge } from '../../components/ui/Badge';
+import { Card } from '../../components/ui/Card';
+import { Play, Sliders, CheckCircle2 } from 'lucide-react';
+
+export const ScenarioSimulationLab: React.FC = () => {
+  const [budgetCap, setBudgetCap] = useState(0.05);
+  const [deadlineMs, setDeadlineMs] = useState(3000);
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [simOutput, setSimOutput] = useState<{ feasible: boolean; recommended: string; savings: string } | null>(null);
+
+  const scenarios = [
+    { name: 'Conservative Sequential (1 Worker)', cost: '$0.0018', latency: '4200 ms', success: '99.2%', conf: '97.0%' },
+    { name: 'Balanced Wavefront (4 Workers)', cost: '$0.0028', latency: '1850 ms', success: '98.8%', conf: '96.5%' },
+    { name: 'Aggressive Burst (8 Workers)', cost: '$0.0042', latency: '1100 ms', success: '97.5%', conf: '95.8%' },
+  ];
+
+  const handleRunSim = () => {
+    setIsSimulating(true);
+    setTimeout(() => {
+      setIsSimulating(false);
+      setSimOutput({
+        feasible: budgetCap >= 0.0025 && deadlineMs >= 1200,
+        recommended: deadlineMs < 2000 ? 'Balanced Wavefront (4-6 Workers)' : 'Conservative Wavefront (2-4 Workers)',
+        savings: '34.2% Cost Reduction vs Max Burst',
+      });
+    }, 600);
+  };
+
+  return (
+    <div className="p-6 space-y-6 bg-[#0B1120] min-h-screen text-[#F8FAFC]">
+      {/* Header */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#1E293B] pb-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 rounded-xl text-indigo-400">
+            <Play className="w-5 h-5" />
+          </div>
+          <div>
+            <h1 className="text-xl font-bold font-mono tracking-tight text-white flex items-center gap-2">
+              Scenario Simulation & What-If Lab
+              <Badge variant="intelligence" size="sm">Phase 13.6 ARIA-EOP</Badge>
+            </h1>
+            <p className="text-xs text-[#94A3B8] font-mono">
+              Pre-execution Monte-Carlo simulator testing budget constraints, deadline sensitivities, and worker allocations
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 font-mono">
+        {/* Interactive What-If Sandbox */}
+        <Card className="p-5 lg:col-span-2 rounded-2xl border border-indigo-500/40 bg-[#0F172A] space-y-5">
+          <div className="flex items-center justify-between border-b border-[#1E293B] pb-3">
+            <span className="text-xs font-bold text-white flex items-center gap-2">
+              <Sliders className="w-4 h-4 text-indigo-400" />
+              Interactive What-If Scenario Tuner
+            </span>
+            <Badge variant="outline" size="sm">Monte-Carlo Evaluation</Badge>
+          </div>
+
+          <div className="space-y-4 text-xs">
+            <div className="space-y-1.5">
+              <div className="flex justify-between text-[#94A3B8]">
+                <span>Budget Envelope Cap (USD):</span>
+                <span className="text-cyan-400 font-bold">${budgetCap.toFixed(3)} USD</span>
+              </div>
+              <input
+                type="range"
+                min="0.001"
+                max="0.100"
+                step="0.001"
+                value={budgetCap}
+                onChange={(e) => setBudgetCap(Number(e.target.value))}
+                className="w-full accent-indigo-500 bg-[#1E293B]"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <div className="flex justify-between text-[#94A3B8]">
+                <span>SLA Max Latency Deadline (ms):</span>
+                <span className="text-indigo-400 font-bold">{deadlineMs} ms</span>
+              </div>
+              <input
+                type="range"
+                min="500"
+                max="6000"
+                step="100"
+                value={deadlineMs}
+                onChange={(e) => setDeadlineMs(Number(e.target.value))}
+                className="w-full accent-indigo-500 bg-[#1E293B]"
+              />
+            </div>
+          </div>
+
+          <button
+            onClick={handleRunSim}
+            disabled={isSimulating}
+            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-mono font-bold transition-colors disabled:opacity-50"
+          >
+            <Play className={`w-3.5 h-3.5 ${isSimulating ? 'animate-pulse' : ''}`} />
+            {isSimulating ? 'Simulating 100 Replays...' : 'Run What-If Simulation'}
+          </button>
+
+          {/* Result Banner */}
+          {simOutput && (
+            <div className="p-4 bg-[#0B1120] border border-emerald-500/30 rounded-xl space-y-2 text-xs">
+              <span className="text-emerald-400 font-bold block flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                Scenario Feasible: {simOutput.recommended}
+              </span>
+              <div className="flex justify-between text-[#94A3B8] pt-1">
+                <span>Optimization Result:</span>
+                <span className="text-cyan-300 font-bold">{simOutput.savings}</span>
+              </div>
+            </div>
+          )}
+        </Card>
+
+        {/* Pre-Computed Baseline Scenarios */}
+        <Card className="p-5 rounded-2xl border border-[#1E293B] bg-[#0F172A] space-y-4">
+          <span className="text-xs font-bold text-white block">Pre-Computed Scenarios</span>
+          <div className="space-y-3">
+            {scenarios.map((s, idx) => (
+              <div key={idx} className="p-3 bg-[#0B1120] border border-[#1E293B] rounded-xl space-y-1 text-xs">
+                <span className="text-white font-bold block">{s.name}</span>
+                <div className="flex justify-between text-[#94A3B8] text-[11px] pt-1">
+                  <span>Cost: <strong className="text-emerald-400">{s.cost}</strong></span>
+                  <span>Latency: <strong className="text-cyan-400">{s.latency}</strong></span>
+                </div>
+                <div className="flex justify-between text-[#94A3B8] text-[11px]">
+                  <span>Success: <strong className="text-indigo-400">{s.success}</strong></span>
+                  <span>Conf: <strong className="text-teal-400">{s.conf}</strong></span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
+};

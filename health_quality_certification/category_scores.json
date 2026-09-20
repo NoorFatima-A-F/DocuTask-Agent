@@ -1,0 +1,74 @@
+[
+  {
+    "category_id": "liveness",
+    "category_name": "Liveness Reliability",
+    "weight": 0.15,
+    "raw_score": 99.0,
+    "weighted_score": 14.85,
+    "status": "EXCELLENT",
+    "details": "Accuracy: 99.8%, Latency: 10.2ms, False-alive: 0.0%."
+  },
+  {
+    "category_id": "readiness",
+    "category_name": "Readiness Accuracy",
+    "weight": 0.15,
+    "raw_score": 98.5,
+    "weighted_score": 14.77,
+    "status": "EXCELLENT",
+    "details": "Accuracy: 99.2%, Detection: 18.5ms, False-ready: 0.0%."
+  },
+  {
+    "category_id": "dependencies",
+    "category_name": "Dependency Health Intelligence",
+    "weight": 0.15,
+    "raw_score": 99.5,
+    "weighted_score": 14.92,
+    "status": "EXCELLENT",
+    "details": "Visibility: 100.0%, Isolation: 100.0%, Monitored: 6 services."
+  },
+  {
+    "category_id": "failure_detection",
+    "category_name": "Failure Detection Capability",
+    "weight": 0.15,
+    "raw_score": 97.5,
+    "weighted_score": 14.62,
+    "status": "EXCELLENT",
+    "details": "MTTD: 1.8s, Scenarios: 5/5 detected."
+  },
+  {
+    "category_id": "recovery",
+    "category_name": "Recovery Capability",
+    "weight": 0.15,
+    "raw_score": 96.0,
+    "weighted_score": 14.4,
+    "status": "EXCELLENT",
+    "details": "MTTR: 12.4s, Success rate: 100.0%, Stages verified: 5."
+  },
+  {
+    "category_id": "monitoring",
+    "category_name": "Monitoring Integration",
+    "weight": 0.1,
+    "raw_score": 98.5,
+    "weighted_score": 9.85,
+    "status": "EXCELLENT",
+    "details": "Coverage: 99.0%, Dashboard quality: 98.0%, Integrations: 4."
+  },
+  {
+    "category_id": "security",
+    "category_name": "Security Compliance",
+    "weight": 0.1,
+    "raw_score": 100.0,
+    "weighted_score": 10.0,
+    "status": "EXCELLENT",
+    "details": "Secrets exposed: 0, Sanitization rate: 100.0%, RBAC enforced: True."
+  },
+  {
+    "category_id": "evidence",
+    "category_name": "Evidence Quality",
+    "weight": 0.05,
+    "raw_score": 100.0,
+    "weighted_score": 5.0,
+    "status": "EXCELLENT",
+    "details": "Reports, logs, metrics, test results, and environment metadata fully validated."
+  }
+]

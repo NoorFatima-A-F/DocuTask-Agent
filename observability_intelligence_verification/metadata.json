@@ -1,0 +1,84 @@
+{
+  "project": "DocuTask-Agent",
+  "phase": "3I.9",
+  "capability": "Predictive Reliability Intelligence",
+  "framework_phase": "Phase 3I.9 \u2014 Observability Intelligence, Predictive Reliability & AIOps Maturity",
+  "exported_at": "2026-09-19T07:05:18.865410+00:00",
+  "target_directory": "observability_intelligence_verification",
+  "overall_certification_tier": "Predictive Reliability Ready",
+  "overall_score_pct": 100.0,
+  "certification_granted": true,
+  "total_reports_exported": 14,
+  "manifest": {
+    "aiops_architecture_report.json": {
+      "file_path": "observability_intelligence_verification\\aiops_architecture_report.json",
+      "file_size_bytes": 3506,
+      "sha256_hash": "15b0ac4c228d335fb2dbdfbd6e23496023962b536a76aec9feec2c245935e5ec"
+    },
+    "data_quality_report.json": {
+      "file_path": "observability_intelligence_verification\\data_quality_report.json",
+      "file_size_bytes": 1142,
+      "sha256_hash": "90364c34ff076dec307ea15fe0ef3004c6ce9ca4a828461b1e97732c6f37e02f"
+    },
+    "prediction_report.json": {
+      "file_path": "observability_intelligence_verification\\prediction_report.json",
+      "file_size_bytes": 1926,
+      "sha256_hash": "abf290cfa2eabe4c232eac912d5c4242ae9ff36935ff70f54a120606b1600ff5"
+    },
+    "capacity_report.json": {
+      "file_path": "observability_intelligence_verification\\capacity_report.json",
+      "file_size_bytes": 1234,
+      "sha256_hash": "686db693d26f5b914a6789491940bd45a0cc1b8730092a6bb9c932d20c64c513"
+    },
+    "baseline_report.json": {
+      "file_path": "observability_intelligence_verification\\baseline_report.json",
+      "file_size_bytes": 1181,
+      "sha256_hash": "2b4021cbdbd087c2613c0af7d120384590a6f8777f4561189820ab47f47e1801"
+    },
+    "anomaly_prediction_report.json": {
+      "file_path": "observability_intelligence_verification\\anomaly_prediction_report.json",
+      "file_size_bytes": 1243,
+      "sha256_hash": "2c70358d402541f8ea3f0621cee4de0db73ec0689684a6b55eb75abe647a1450"
+    },
+    "reliability_score_report.json": {
+      "file_path": "observability_intelligence_verification\\reliability_score_report.json",
+      "file_size_bytes": 962,
+      "sha256_hash": "8a9e4167a6d799fe7204743536013e1fca3171b9c8d87f687a63a53cb1c2d33f"
+    },
+    "prevention_report.json": {
+      "file_path": "observability_intelligence_verification\\prevention_report.json",
+      "file_size_bytes": 1589,
+      "sha256_hash": "8612c725dedbc7c178ffce1f93c4da86f49b8d7039be1ecc96344810ed66e6d2"
+    },
+    "deployment_intelligence_report.json": {
+      "file_path": "observability_intelligence_verification\\deployment_intelligence_report.json",
+      "file_size_bytes": 1078,
+      "sha256_hash": "919e9a1c515539db1ead35857f8989892ef665ab20547af683aa59e533b5ffc5"
+    },
+    "ai_reliability_report.json": {
+      "file_path": "observability_intelligence_verification\\ai_reliability_report.json",
+      "file_size_bytes": 1129,
+      "sha256_hash": "e58f5f614437c5d74b5939b3b745d63e7694046c871d72b5397b2ddf6edb12c9"
+    },
+    "optimization_report.json": {
+      "file_path": "observability_intelligence_verification\\optimization_report.json",
+      "file_size_bytes": 1404,
+      "sha256_hash": "a5d894327fca26d4b08bcba98a4e315f2ce46482d16604dca9fe0694a012a17f"
+    },
+    "explainability_report.json": {
+      "file_path": "observability_intelligence_verification\\explainability_report.json",
+      "file_size_bytes": 1666,
+      "sha256_hash": "f6d1c64b239f18c1ffd963dda8b953b79ef92d19b0aca83ab70a6ecc05ab84d4"
+    },
+    "validation_report.json": {
+      "file_path": "observability_intelligence_verification\\validation_report.json",
+      "file_size_bytes": 1694,
+      "sha256_hash": "c3e7d8bd32079adab7cbceee1590551827f1ae0bcef78c25abc9f949108d47bb"
+    },
+    "certification_report.json": {
+      "file_path": "observability_intelligence_verification\\certification_report.json",
+      "file_size_bytes": 1718,
+      "sha256_hash": "335eda8fde39533ef61faeb3d2c4fb5a7e1d4e72a05ceb526eca7de52b88013c"
+    }
+  }
+}

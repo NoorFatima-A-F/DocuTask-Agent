@@ -1,0 +1,146 @@
+{
+  "verifier_id": "VERIFY-3L.2-BIA",
+  "phase_id": "3L.2",
+  "phase_name": "Business Impact Analysis Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Service Criticality Tier Classification",
+      "passed": true,
+      "details": "All 10 services classified across Tier 0 (Mission Critical), Tier 1 (Critical), Tier 2 (Important), and Tier 3 (Non-Critical).",
+      "metrics": {
+        "total_services": 10,
+        "tiers_populated": 4
+      }
+    },
+    {
+      "name": "Mission-Critical Tier 0 Isolation",
+      "passed": true,
+      "details": "Tier 0 services (PostgreSQL, Storage, Auth) have stringent RTO (<15m) and RPO (<5m) boundaries.",
+      "metrics": {
+        "tier_0_count": 3
+      }
+    },
+    {
+      "name": "Dependency Graph Traceability",
+      "passed": true,
+      "details": "Inter-service dependency chains mapped to ensure correct sequential restoration order.",
+      "metrics": {
+        "dependencies_mapped": true
+      }
+    },
+    {
+      "name": "Business Disruption Tolerance Alignment",
+      "passed": true,
+      "details": "Service RTO/RPO targets align with enterprise business continuity risk tolerance.",
+      "metrics": {
+        "compliance_rate_pct": 100.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:50.218674+00:00",
+  "execution_timestamp": "2026-09-19T07:04:50.218685+00:00",
+  "summary": "Business impact analysis complete with 10 services tiered and prioritized for recovery sequencing.",
+  "report_title": "Business Impact Analysis Report",
+  "tier_0_mission_critical_count": 3,
+  "tier_1_critical_count": 3,
+  "tier_2_important_count": 3,
+  "tier_3_non_critical_count": 1,
+  "total_services_classified": 10,
+  "services": [
+    {
+      "service_name": "PostgreSQL Core DB",
+      "tier": "Tier 0",
+      "impact_level": "Complete Platform Outage",
+      "dependencies": [],
+      "rto_target_minutes": 15,
+      "rpo_target_minutes": 5
+    },
+    {
+      "service_name": "Document Object Storage",
+      "tier": "Tier 0",
+      "impact_level": "Inability to access document files",
+      "dependencies": [],
+      "rto_target_minutes": 15,
+      "rpo_target_minutes": 5
+    },
+    {
+      "service_name": "Authentication & AuthZ",
+      "tier": "Tier 0",
+      "impact_level": "User access completely blocked",
+      "dependencies": [
+        "PostgreSQL Core DB"
+      ],
+      "rto_target_minutes": 15,
+      "rpo_target_minutes": 0
+    },
+    {
+      "service_name": "Celery Worker Processing",
+      "tier": "Tier 1",
+      "impact_level": "Document ingestion and task queue stopped",
+      "dependencies": [
+        "PostgreSQL Core DB",
+        "Redis Queue"
+      ],
+      "rto_target_minutes": 30,
+      "rpo_target_minutes": 10
+    },
+    {
+      "service_name": "Redis Message Queue",
+      "tier": "Tier 1",
+      "impact_level": "Background tasks cannot enqueue",
+      "dependencies": [],
+      "rto_target_minutes": 30,
+      "rpo_target_minutes": 10
+    },
+    {
+      "service_name": "AI Extraction Pipeline",
+      "tier": "Tier 1",
+      "impact_level": "Automated extraction delayed",
+      "dependencies": [
+        "Celery Worker Processing"
+      ],
+      "rto_target_minutes": 45,
+      "rpo_target_minutes": 15
+    },
+    {
+      "service_name": "Platform Analytics",
+      "tier": "Tier 2",
+      "impact_level": "Aggregated reports unavailable",
+      "dependencies": [
+        "PostgreSQL Core DB"
+      ],
+      "rto_target_minutes": 120,
+      "rpo_target_minutes": 60
+    },
+    {
+      "service_name": "Reporting Engine",
+      "tier": "Tier 2",
+      "impact_level": "Historical report downloads delayed",
+      "dependencies": [
+        "PostgreSQL Core DB"
+      ],
+      "rto_target_minutes": 120,
+      "rpo_target_minutes": 60
+    },
+    {
+      "service_name": "Admin Dashboards",
+      "tier": "Tier 2",
+      "impact_level": "Operational visualization degraded",
+      "dependencies": [
+        "PostgreSQL Core DB"
+      ],
+      "rto_target_minutes": 120,
+      "rpo_target_minutes": 60
+    },
+    {
+      "service_name": "Development Testing Utilities",
+      "tier": "Tier 3",
+      "impact_level": "Internal dev workflows paused",
+      "dependencies": [],
+      "rto_target_minutes": 480,
+      "rpo_target_minutes": 240
+    }
+  ]
+}

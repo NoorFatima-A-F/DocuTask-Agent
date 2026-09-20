@@ -1,0 +1,116 @@
+import React, { useState } from 'react';
+import { Badge } from '../../components/ui/Badge';
+import { Button } from '../../components/ui/Button';
+
+export const WorkflowBuilder: React.FC = () => {
+  const [selectedNode, setSelectedNode] = useState<string>('node-2');
+
+  const nodes = [
+    { id: 'node-1', type: 'TRIGGER', label: 'Email Inbound Trigger', desc: 'ap_inbox@apexfinancial.com (PDF)', icon: '📥', color: 'border-blue-500 bg-blue-950/30' },
+    { id: 'node-2', type: 'AGENT', label: 'Multimodal OCR & Layout Agent', desc: 'Table parsing & 2D bounding boxes', icon: '🤖', color: 'border-cyan-500 bg-cyan-950/30' },
+    { id: 'node-3', type: 'TOOL', label: '3-Way PO Matching Engine', desc: 'NetSuite ERP Vendor Ledger query', icon: '⚙️', color: 'border-purple-500 bg-purple-950/30' },
+    { id: 'node-4', type: 'CONDITION', label: 'Confidence > 95% & PO Matched?', desc: 'Deterministic branch validation', icon: '🔀', color: 'border-amber-500 bg-amber-950/30' },
+    { id: 'node-5', type: 'APPROVAL', label: 'Human-in-the-Loop Review', desc: 'Visual bounding-box sign-off', icon: '👤', color: 'border-rose-500 bg-rose-950/30' },
+    { id: 'node-6', type: 'ACTION', label: 'Post to QuickBooks & Slack', desc: 'Dispatched to #finance-ops', icon: '🚀', color: 'border-emerald-500 bg-emerald-950/30' },
+  ];
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#0F172A] to-[#1E293B] border border-[#334155]/60 shadow-xl">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <Badge variant="intelligence" size="sm">VISUAL DAG WORKFLOW DESIGNER</Badge>
+            <span className="text-xs text-emerald-400 font-mono">DAG Validated (0 Cycles)</span>
+          </div>
+          <h1 className="text-2xl font-black text-white">Invoice Autonomous Processing Pipeline</h1>
+          <p className="text-sm text-[#94A3B8]">
+            Drag-and-drop triggers, subagent reasoning steps, external tools, and human approval gates.
+          </p>
+        </div>
+        <div className="flex gap-3">
+          <Button variant="outline" size="md">Test Dry-Run</Button>
+          <Button variant="primary" size="md">Deploy v1.2.0</Button>
+        </div>
+      </div>
+
+      {/* Visual Canvas & Inspector Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Canvas Area */}
+        <div className="lg:col-span-2 p-6 rounded-2xl bg-[#0A0F1D] border border-[#1E293B] shadow-2xl relative min-h-[500px] flex flex-col justify-between overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(#1E293B_1px,transparent_1px)] [background-size:16px_16px] opacity-40 pointer-events-none" />
+
+          {/* Nodes Flow */}
+          <div className="relative z-10 space-y-4">
+            {nodes.map((node, index) => (
+              <div
+                key={node.id}
+                onClick={() => setSelectedNode(node.id)}
+                className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${node.color} ${
+                  selectedNode === node.id ? 'ring-2 ring-[#00D2FF] shadow-[0_0_15px_rgba(0,210,255,0.3)]' : 'hover:border-white/40'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">{node.icon}</span>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="default" size="sm">{node.type}</Badge>
+                      <span className="text-xs font-bold text-white">{node.label}</span>
+                    </div>
+                    <span className="text-[11px] text-[#94A3B8]">{node.desc}</span>
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-[#64748B]">Step {index + 1}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="relative z-10 pt-4 flex items-center justify-between text-xs text-[#94A3B8] border-t border-[#1E293B]">
+            <span>6 Nodes • 5 Edges • Synchronous Pure-Python Execution</span>
+            <span className="text-emerald-400 font-mono">100% Deterministic Flow</span>
+          </div>
+        </div>
+
+        {/* Node Inspector Panel */}
+        <div className="p-6 rounded-2xl bg-[#0F172A]/90 border border-[#1E293B] shadow-xl space-y-4">
+          <h2 className="text-base font-bold text-white flex items-center gap-2">
+            <span>⚙️</span> Node Configuration Inspector
+          </h2>
+          <div className="p-4 rounded-xl bg-[#0A0F1D] border border-[#1E293B] space-y-3">
+            <div>
+              <span className="text-[10px] text-[#94A3B8] uppercase font-mono block">Node ID</span>
+              <span className="text-xs font-bold text-cyan-400 font-mono">{selectedNode}</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-[#94A3B8] uppercase font-mono block">Model Architecture</span>
+              <span className="text-xs text-white">Anthropic Claude 3.5 Sonnet (Temp: 0.0)</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-[#94A3B8] uppercase font-mono block">Confidence Threshold</span>
+              <span className="text-xs text-emerald-400 font-mono">&gt;= 0.950 (95.0%)</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-[#94A3B8] uppercase font-mono block">Exception Escalation</span>
+              <span className="text-xs text-white">Route to Human Review Queue on Anomaly</span>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <span className="text-xs font-bold text-[#CBD5E1] block">Guardrail Rules Applied</span>
+            <div className="space-y-1.5">
+              {['Dual-Stage Grounding Check', 'Zero LLM Training Retention', 'AST Schema Validator'].map((rule, idx) => (
+                <div key={idx} className="flex items-center gap-2 text-xs text-[#94A3B8]">
+                  <span className="text-emerald-400">✓</span> {rule}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <Button variant="primary" size="sm" className="w-full">
+            Save Node Configuration
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};

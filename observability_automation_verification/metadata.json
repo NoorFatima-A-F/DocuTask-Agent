@@ -1,0 +1,79 @@
+{
+  "project": "DocuTask-Agent",
+  "phase": "3I.8",
+  "framework_phase": "Phase 3I.8 \u2014 Observability Automation, Self-Healing Operations & Autonomous Reliability",
+  "automation_level": "autonomous",
+  "exported_at": "2026-09-19T07:05:17.951413+00:00",
+  "target_directory": "observability_automation_verification",
+  "overall_certification_tier": "Autonomous Operations Ready",
+  "overall_score_pct": 100.0,
+  "certification_granted": true,
+  "total_reports_exported": 13,
+  "manifest": {
+    "architecture_report.json": {
+      "file_path": "observability_automation_verification\\architecture_report.json",
+      "file_size_bytes": 3073,
+      "sha256_hash": "4a231a969a21d67632961cb366a455295c0cac8232c89d7315c7e4ac7b55a00e"
+    },
+    "anomaly_report.json": {
+      "file_path": "observability_automation_verification\\anomaly_report.json",
+      "file_size_bytes": 1544,
+      "sha256_hash": "fea0c8c3c37daf8599b64a6689b2187f7fe4b0d77a78e1663d417a3b663a9723"
+    },
+    "correlation_report.json": {
+      "file_path": "observability_automation_verification\\correlation_report.json",
+      "file_size_bytes": 1211,
+      "sha256_hash": "babeeda8034875aa0475fd41a2c4c4d7f74d3eebac48c87f053c3cd4b2229e9c"
+    },
+    "root_cause_report.json": {
+      "file_path": "observability_automation_verification\\root_cause_report.json",
+      "file_size_bytes": 1233,
+      "sha256_hash": "80d91017b875b801f92f28d3b9d4ef3532bbd8235324e372935fc4b3db6ec088"
+    },
+    "remediation_report.json": {
+      "file_path": "observability_automation_verification\\remediation_report.json",
+      "file_size_bytes": 1472,
+      "sha256_hash": "8d926f6ecc8de718675dd8bb84276d175df638120831667deb1c7ba6e335f76c"
+    },
+    "safety_report.json": {
+      "file_path": "observability_automation_verification\\safety_report.json",
+      "file_size_bytes": 1486,
+      "sha256_hash": "e9a42d6f2f5fc04ef8f6968ddb9228158400cf47d43249599ef5e990eccd04d7"
+    },
+    "self_healing_report.json": {
+      "file_path": "observability_automation_verification\\self_healing_report.json",
+      "file_size_bytes": 1283,
+      "sha256_hash": "c6a7bb9502fcba34184f4d184d0e3493efd634cb85c836810f1688c3cd98da5d"
+    },
+    "incident_report.json": {
+      "file_path": "observability_automation_verification\\incident_report.json",
+      "file_size_bytes": 1432,
+      "sha256_hash": "a8a12e51f236a5438792d98c2ef14be3ca76b6cd06d089b66b165d928faa8d5d"
+    },
+    "learning_report.json": {
+      "file_path": "observability_automation_verification\\learning_report.json",
+      "file_size_bytes": 1587,
+      "sha256_hash": "7955a4e450b8fa075ccce9ed9934e8eed383476a34a2659131069dd1b49ca1b3"
+    },
+    "testing_report.json": {
+      "file_path": "observability_automation_verification\\testing_report.json",
+      "file_size_bytes": 2017,
+      "sha256_hash": "a4a9e9200397d4b4ef642c1db280ee59c77e80751026ec75af651570ef0376e8"
+    },
+    "human_control_policy_report.json": {
+      "file_path": "observability_automation_verification\\human_control_policy_report.json",
+      "file_size_bytes": 1252,
+      "sha256_hash": "24b57744596855e1626b92f693de86eedb445f5e9e1a3d8a8cceec05d6ce53e4"
+    },
+    "autonomous_dashboard_report.json": {
+      "file_path": "observability_automation_verification\\autonomous_dashboard_report.json",
+      "file_size_bytes": 1185,
+      "sha256_hash": "faece36fe27ba39544f887597ef2505b5605ef834f07d9f988e99046615b36d1"
+    },
+    "certification_report.json": {
+      "file_path": "observability_automation_verification\\certification_report.json",
+      "file_size_bytes": 1702,
+      "sha256_hash": "415190600d012ed13005b423e9654f06d3d3f8e6103c67c06703aa9bf8a6d7db"
+    }
+  }
+}

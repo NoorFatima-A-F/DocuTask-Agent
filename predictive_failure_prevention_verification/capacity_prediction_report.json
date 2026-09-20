@@ -1,0 +1,48 @@
+{
+  "report_title": "Capacity Prediction Report",
+  "total_capacity_predictions": 4,
+  "predictions": [
+    {
+      "prediction_id": "CAP-001",
+      "resource": "database_connections",
+      "prediction_type": "connection_pool_exhaustion",
+      "current_utilization_pct": 82.0,
+      "growth_rate": "3_connections_per_minute",
+      "estimated_exhaustion_time": "22_minutes",
+      "risk_level": "HIGH",
+      "confidence": 0.91
+    },
+    {
+      "prediction_id": "CAP-002",
+      "resource": "redis_task_queue",
+      "prediction_type": "queue_depth_overflow",
+      "current_utilization_pct": 75.0,
+      "growth_rate": "50_tasks_per_minute",
+      "estimated_exhaustion_time": "35_minutes",
+      "risk_level": "HIGH",
+      "confidence": 0.89
+    },
+    {
+      "prediction_id": "CAP-003",
+      "resource": "document_storage",
+      "prediction_type": "capacity_exhaustion",
+      "current_utilization_pct": 68.0,
+      "growth_rate": "1.2_GB_per_day",
+      "estimated_exhaustion_time": "14_days",
+      "risk_level": "MEDIUM",
+      "confidence": 0.93
+    },
+    {
+      "prediction_id": "CAP-004",
+      "resource": "worker_memory",
+      "prediction_type": "memory_exhaustion",
+      "current_utilization_pct": 88.0,
+      "growth_rate": "12_MB_per_minute",
+      "estimated_exhaustion_time": "15_minutes",
+      "risk_level": "CRITICAL",
+      "confidence": 0.95
+    }
+  ],
+  "critical_resources": 3,
+  "capacity_prediction_valid": true
+}

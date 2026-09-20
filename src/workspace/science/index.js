@@ -1,0 +1,12 @@
+export { ScientificDiscoveryDashboard } from './ScientificDiscoveryDashboard';
+export { HypothesisGenerationCenter } from './HypothesisGenerationCenter';
+export { ExperimentDesignStudio } from './ExperimentDesignStudio';
+export { EvidenceExplorer } from './EvidenceExplorer';
+export { ValidationWorkbench } from './ValidationWorkbench';
+export { KnowledgeGraphExplorer } from './KnowledgeGraphExplorer';
+export { ResearchPlanningCenter } from './ResearchPlanningCenter';
+export { PublicationCenter } from './PublicationCenter';
+export { ConsensusReviewCenter } from './ConsensusReviewCenter';
+export { OntologyExplorer } from './OntologyExplorer';
+export { DiscoveryTimeline } from './DiscoveryTimeline';
+export { ExecutiveResearchDashboard } from './ExecutiveResearchDashboard';

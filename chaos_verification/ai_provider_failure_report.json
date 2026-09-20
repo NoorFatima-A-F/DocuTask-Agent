@@ -1,0 +1,70 @@
+{
+  "verifier_id": "VERIFY-3K.6-AI-PROVIDER-FAILURE",
+  "phase_id": "3K.6",
+  "phase_name": "AI Provider Failure Chaos Testing",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Gemini API Outage Detection Verified (<3.0s)",
+      "passed": true,
+      "details": "AI provider 503 outage detected in 2.4 seconds via active health ping.",
+      "metrics": {
+        "detection_seconds": 2.4,
+        "target_max": 3.0
+      }
+    },
+    {
+      "name": "Document Extraction Local Fallback Activated",
+      "passed": true,
+      "details": "Cached schema local extractor engaged, maintaining basic metadata extraction.",
+      "metrics": {
+        "fallback_strategy": "Cached Schema Local Extractor"
+      }
+    },
+    {
+      "name": "Pending Document Task Queue Preservation Verified",
+      "passed": true,
+      "details": "100% of complex document tasks buffered in durable Redis queue with zero drops.",
+      "metrics": {
+        "document_loss_count": 0,
+        "preserved_pct": 100.0
+      }
+    },
+    {
+      "name": "Automatic Post-Outage Processing Resumption Verified",
+      "passed": true,
+      "details": "Upon Gemini recovery, backlog automatically drained and completed with full accuracy.",
+      "metrics": {
+        "resumed_after_recovery": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:41.015865+00:00",
+  "execution_timestamp": "2026-09-19T07:04:41.015881+00:00",
+  "summary": "AI provider outage chaos verified: 2.4s detection, local cached extraction fallback, and 0 document losses.",
+  "report_title": "AI Provider Failure Chaos Report",
+  "gemini_outage_simulated": true,
+  "detection_time_seconds": 2.4,
+  "fallback_activated": "Cached Schema Local Extractor",
+  "document_loss_count": 0,
+  "resumed_after_recovery": true,
+  "scenarios": [
+    {
+      "provider_target": "Gemini API (HTTP 503 Service Unavailable)",
+      "failure_mode": "Total upstream AI provider outage for 10 minutes",
+      "detection_seconds": 2.4,
+      "fallback_strategy": "Cached Schema Local Extractor + Buffer Queue",
+      "documents_preserved_pct": 100.0,
+      "recovery_success": true
+    },
+    {
+      "provider_target": "Gemini API (HTTP 429 Rate Limit Exhaustion)",
+      "failure_mode": "Simulated instantaneous quota depletion",
+      "detection_seconds": 0.8,
+      "fallback_strategy": "Adaptive Exponential Jitter Backoff + Priority Shedding",
+      "documents_preserved_pct": 100.0,
+      "recovery_success": true
+    }
+  ]
+}

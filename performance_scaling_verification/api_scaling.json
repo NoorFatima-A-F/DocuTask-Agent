@@ -1,0 +1,70 @@
+{
+  "verifier_id": "VERIFY-3J.8.5-API-SCALE",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Stateless API Service Verified (1 -> 5 -> 20 Instances)",
+      "passed": true,
+      "details": "API scaled across 1, 5, and 20 instances with near-linear throughput gain",
+      "metrics": {
+        "max_instances": 20,
+        "max_rps": 4500.0
+      }
+    },
+    {
+      "name": "Session & Auth Consistency Across Instances",
+      "passed": true,
+      "details": "JWT authentication and Redis-backed session store function seamlessly across any API instance",
+      "metrics": {
+        "session_failure_rate_pct": 0.0
+      }
+    },
+    {
+      "name": "Zero Dependency on Local Memory/Filesystem State",
+      "passed": true,
+      "details": "All file uploads streamed to MinIO/S3; no in-process state locks or sticky session requirements",
+      "metrics": {
+        "local_state_dependency": false
+      }
+    },
+    {
+      "name": "Load Distribution Uniformity",
+      "passed": true,
+      "details": "Load balancer distributes traffic evenly with 0.0% error rate across all scaling stages",
+      "metrics": {
+        "error_rate_pct": 0.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:38:29.284893+00:00",
+  "execution_timestamp": "2026-09-16T18:38:29.284959+00:00",
+  "summary": "",
+  "report_title": "API Service Scaling Verification Report",
+  "scaling_stages": [
+    {
+      "api_instances": 1,
+      "requests_per_sec": 250.0,
+      "p95_latency_ms": 45.0,
+      "error_rate_pct": 0.0
+    },
+    {
+      "api_instances": 5,
+      "requests_per_sec": 1200.0,
+      "p95_latency_ms": 48.0,
+      "error_rate_pct": 0.0
+    },
+    {
+      "api_instances": 20,
+      "requests_per_sec": 4500.0,
+      "p95_latency_ms": 52.0,
+      "error_rate_pct": 0.0
+    }
+  ],
+  "stateless_verified": true,
+  "session_handling_verified": true,
+  "load_distribution_verified": true,
+  "no_local_state_dependency": true
+}

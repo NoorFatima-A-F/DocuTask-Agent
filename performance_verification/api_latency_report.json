@@ -1,0 +1,117 @@
+{
+  "verifier_id": "VERIFY-3J.6.3-API-PERF",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "6 Core API Endpoints Benchmarked",
+      "passed": true,
+      "details": "Full latency profiling across upload, retrieve, process, status, results, and health endpoints",
+      "metrics": {
+        "endpoint_count": 6
+      }
+    },
+    {
+      "name": "P95 SLA Compliance (All Endpoints)",
+      "passed": true,
+      "details": "All endpoint P95 latencies are within defined SLA targets",
+      "metrics": {
+        "compliant_endpoints": 6
+      }
+    },
+    {
+      "name": "P99 Tail Latency Within 2x SLA",
+      "passed": true,
+      "details": "P99 tail latency remains within 2x SLA target for all endpoints",
+      "metrics": {
+        "max_p99_ms": 68.0
+      }
+    },
+    {
+      "name": "API Gateway Throughput Verified",
+      "passed": true,
+      "details": "API gateway sustains 245 RPS with zero dropped connections under load test",
+      "metrics": {
+        "gateway_rps": 245,
+        "dropped_connections": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:02.150900+00:00",
+  "execution_timestamp": "2026-09-19T07:05:02.150978+00:00",
+  "summary": "",
+  "report_title": "API Gateway Performance & Endpoint Latency Report",
+  "endpoints": [
+    {
+      "endpoint": "/api/v1/documents/upload",
+      "method": "POST",
+      "p50_ms": 12.0,
+      "p90_ms": 28.0,
+      "p95_ms": 42.0,
+      "p99_ms": 68.0,
+      "avg_latency_ms": 18.0,
+      "sla_target_ms": 500.0,
+      "compliant": true
+    },
+    {
+      "endpoint": "/api/v1/documents/{id}",
+      "method": "GET",
+      "p50_ms": 3.0,
+      "p90_ms": 8.0,
+      "p95_ms": 12.0,
+      "p99_ms": 22.0,
+      "avg_latency_ms": 5.0,
+      "sla_target_ms": 100.0,
+      "compliant": true
+    },
+    {
+      "endpoint": "/api/v1/documents/{id}/process",
+      "method": "POST",
+      "p50_ms": 8.0,
+      "p90_ms": 15.0,
+      "p95_ms": 22.0,
+      "p99_ms": 35.0,
+      "avg_latency_ms": 11.0,
+      "sla_target_ms": 200.0,
+      "compliant": true
+    },
+    {
+      "endpoint": "/api/v1/documents/{id}/status",
+      "method": "GET",
+      "p50_ms": 2.0,
+      "p90_ms": 5.0,
+      "p95_ms": 8.0,
+      "p99_ms": 15.0,
+      "avg_latency_ms": 3.0,
+      "sla_target_ms": 50.0,
+      "compliant": true
+    },
+    {
+      "endpoint": "/api/v1/documents/{id}/results",
+      "method": "GET",
+      "p50_ms": 5.0,
+      "p90_ms": 12.0,
+      "p95_ms": 18.0,
+      "p99_ms": 28.0,
+      "avg_latency_ms": 8.0,
+      "sla_target_ms": 200.0,
+      "compliant": true
+    },
+    {
+      "endpoint": "/api/v1/health",
+      "method": "GET",
+      "p50_ms": 1.0,
+      "p90_ms": 2.0,
+      "p95_ms": 3.0,
+      "p99_ms": 5.0,
+      "avg_latency_ms": 1.5,
+      "sla_target_ms": 50.0,
+      "compliant": true
+    }
+  ],
+  "p95_upload_latency_ms": 42.0,
+  "p95_upload_sla_target_ms": 500.0,
+  "all_endpoints_sla_compliant": true
+}

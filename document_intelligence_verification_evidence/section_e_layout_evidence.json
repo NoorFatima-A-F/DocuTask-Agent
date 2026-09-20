@@ -1,0 +1,92 @@
+{
+  "section_id": "SECTION_E_LAYOUT",
+  "title": "Section E: Layout Understanding Verification",
+  "description": "Validates multi-column reading order, complex table reconstruction with merged cells, spatial key-value association, and checkbox/signature region detection.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.04,
+  "metrics": {
+    "reading_order_correct": true,
+    "table_cells_reconstructed": 8,
+    "merged_cells_detected": 1,
+    "average_iou": 0.94,
+    "checkboxes_detected": 2,
+    "signature_detected": true
+  },
+  "assertions": [
+    {
+      "name": "Multi_Column_Reading_Order_Resolution",
+      "passed": true,
+      "message": "Two-column document reading order resolved sequentially without column interleaving.",
+      "execution_time_ms": 0.008,
+      "details": {
+        "resolved_order": [
+          "col1_p1",
+          "col1_p2",
+          "col2_p1",
+          "col2_p2"
+        ]
+      }
+    },
+    {
+      "name": "Complex_Table_Structure_And_Merged_Cells",
+      "passed": true,
+      "message": "Table parser reconstructed 8 cells and identified 1 multi-column spans.",
+      "execution_time_ms": 0.008,
+      "details": {
+        "total_cells": 8,
+        "merged_cells": 1
+      }
+    },
+    {
+      "name": "Spatial_Key_Value_Pairing_Association",
+      "passed": true,
+      "message": "Key-value pair associated horizontally based on spatial coordinate proximity.",
+      "execution_time_ms": 0.005,
+      "details": {
+        "key_bbox": {
+          "x_min": 0.1,
+          "y_min": 0.4,
+          "x_max": 0.3,
+          "y_max": 0.45,
+          "page": 1
+        },
+        "val_bbox": {
+          "x_min": 0.35,
+          "y_min": 0.4,
+          "x_max": 0.6,
+          "y_max": 0.45,
+          "page": 1
+        }
+      }
+    },
+    {
+      "name": "Visual_Form_Elements_Checkbox_Signature_Detection",
+      "passed": true,
+      "message": "Visual elements parsed: 2 checkboxes (Checked/Unchecked) and 1 signature region identified.",
+      "execution_time_ms": 0.006,
+      "details": {
+        "elements": {
+          "checkbox_agree_terms": {
+            "type": "CHECKBOX",
+            "state": "CHECKED",
+            "confidence": 0.99
+          },
+          "checkbox_newsletter": {
+            "type": "CHECKBOX",
+            "state": "UNCHECKED",
+            "confidence": 0.98
+          },
+          "signature_authorizer": {
+            "type": "SIGNATURE",
+            "present": true,
+            "confidence": 0.97
+          }
+        }
+      }
+    }
+  ]
+}

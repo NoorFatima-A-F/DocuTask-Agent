@@ -1,0 +1,94 @@
+{
+  "verifier_id": "VERIFY-3J.2.1-PERF-ENV",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Isolated Services Topology Verification",
+      "passed": true,
+      "details": "All 8 target services running in dedicated performance test network namespace",
+      "metrics": {
+        "isolated_services_count": 8
+      }
+    },
+    {
+      "name": "Zero Shared Production Database Enforcement",
+      "passed": true,
+      "details": "Strict network firewall and credential segregation prevents any interaction with production database",
+      "metrics": {
+        "shared_db_detected": false
+      }
+    },
+    {
+      "name": "Synthetic Workload Data Isolation",
+      "passed": true,
+      "details": "100% synthetic document payloads; zero PII or production customer data present",
+      "metrics": {
+        "synthetic_data_ratio": 1.0
+      }
+    },
+    {
+      "name": "Isolated Ephemeral Artifact Storage",
+      "passed": true,
+      "details": "Dedicated sandbox S3/MinIO bucket configured with auto-expiry lifecycle",
+      "metrics": {
+        "storage_isolated": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:35:47.160378+00:00",
+  "report_title": "Performance Environment Isolation Verification Report",
+  "isolated_services_count": 8,
+  "shared_db_detected": false,
+  "synthetic_data_only": true,
+  "services": [
+    {
+      "service_name": "k6 Distributed Load Generator",
+      "role": "Synthetic load generation cluster",
+      "isolated_from_prod": true,
+      "status": "VERIFIED"
+    },
+    {
+      "service_name": "API Gateway (FastAPI)",
+      "role": "Isolated ingress endpoint target",
+      "isolated_from_prod": true,
+      "status": "VERIFIED"
+    },
+    {
+      "service_name": "Task Creation & Orchestration",
+      "role": "Ephemeral task router",
+      "isolated_from_prod": true,
+      "status": "VERIFIED"
+    },
+    {
+      "service_name": "Celery / Redis Queue Broker",
+      "role": "Isolated dedicated test broker",
+      "isolated_from_prod": true,
+      "status": "VERIFIED"
+    },
+    {
+      "service_name": "Agent Runtime & Planner",
+      "role": "Dedicated worker pool test replica",
+      "isolated_from_prod": true,
+      "status": "VERIFIED"
+    },
+    {
+      "service_name": "OCR Tesseract Engine",
+      "role": "Isolated OCR container group",
+      "isolated_from_prod": true,
+      "status": "VERIFIED"
+    },
+    {
+      "service_name": "PostgreSQL Performance DB",
+      "role": "Isolated standalone database instance",
+      "isolated_from_prod": true,
+      "status": "VERIFIED"
+    },
+    {
+      "service_name": "Document Evidence Storage",
+      "role": "Ephemeral S3/MinIO bucket",
+      "isolated_from_prod": true,
+      "status": "VERIFIED"
+    }
+  ]
+}

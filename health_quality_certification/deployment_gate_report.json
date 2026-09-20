@@ -1,0 +1,61 @@
+{
+  "report_title": "Production Readiness Deployment Gate Report",
+  "deployment_id": "deploy-prod-3h511",
+  "minimum_score_required": 90.0,
+  "actual_score": 98.42,
+  "critical_requirements_met": true,
+  "block_on_failure": true,
+  "decision": "APPROVED",
+  "checks": [
+    {
+      "check_name": "Overall Quality Score Threshold",
+      "required_threshold": ">= 90.0%",
+      "actual_value": "98.42%",
+      "passed": true,
+      "is_critical_requirement": true
+    },
+    {
+      "check_name": "Critical Pillar: Liveness Reliability",
+      "required_threshold": ">= 90.0%",
+      "actual_value": "99.00%",
+      "passed": true,
+      "is_critical_requirement": true
+    },
+    {
+      "check_name": "Critical Pillar: Readiness Accuracy",
+      "required_threshold": ">= 90.0%",
+      "actual_value": "98.50%",
+      "passed": true,
+      "is_critical_requirement": true
+    },
+    {
+      "check_name": "Critical Pillar: Security & Secret Sanitization",
+      "required_threshold": ">= 95.0%",
+      "actual_value": "100.00%",
+      "passed": true,
+      "is_critical_requirement": true
+    },
+    {
+      "check_name": "Critical Pillar: Failure Detection MTTD",
+      "required_threshold": ">= 90.0%",
+      "actual_value": "97.50%",
+      "passed": true,
+      "is_critical_requirement": true
+    },
+    {
+      "check_name": "SRE Availability SLO (99.9%)",
+      "required_threshold": ">= 99.90%",
+      "actual_value": "99.96%",
+      "passed": true,
+      "is_critical_requirement": false
+    },
+    {
+      "check_name": "Quality Regression Policy",
+      "required_threshold": "Delta >= -2.0%",
+      "actual_value": "+1.67%",
+      "passed": true,
+      "is_critical_requirement": true
+    }
+  ],
+  "reason": "All production readiness checks, SRE metrics, and quality gates successfully passed."
+}

@@ -1,0 +1,51 @@
+{
+  "validation_id": "val-6960fd4b",
+  "liveness_status": "ALIVE",
+  "liveness_passed": true,
+  "readiness_status": "READY",
+  "readiness_passed": true,
+  "dependency_checks": [
+    {
+      "dependency_name": "PostgreSQL",
+      "status": "HEALTHY",
+      "latency_ms": 1.8,
+      "healthy": true
+    },
+    {
+      "dependency_name": "Redis",
+      "status": "HEALTHY",
+      "latency_ms": 0.6,
+      "healthy": true
+    },
+    {
+      "dependency_name": "Storage_MinIO",
+      "status": "HEALTHY",
+      "latency_ms": 4.2,
+      "healthy": true
+    },
+    {
+      "dependency_name": "WorkerPool",
+      "status": "HEALTHY",
+      "latency_ms": 2.1,
+      "healthy": true
+    },
+    {
+      "dependency_name": "Gemini_AI_Provider",
+      "status": "HEALTHY",
+      "latency_ms": 18.5,
+      "healthy": true
+    }
+  ],
+  "functional_test": {
+    "test_name": "end_to_end_document_extraction_smoke_test",
+    "document_id": "doc-canary-fd568c",
+    "upload_success": true,
+    "processing_success": true,
+    "extraction_success": true,
+    "duration_ms": 84.2,
+    "extracted_text_preview": "INVOICE #98234 - Total: $1,450.00 - Vendor: Acme Corp",
+    "all_passed": true
+  },
+  "overall_health_validated": true,
+  "validation_timestamp": "2026-09-19 07:05:14.407337"
+}

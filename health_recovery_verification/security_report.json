@@ -1,0 +1,36 @@
+{
+  "report_title": "Recovery Security & Access Control Report",
+  "total_actions_audited": 3,
+  "authorized_actions_count": 2,
+  "unauthorized_actions_blocked": 1,
+  "audit_records": [
+    {
+      "action_id": "SEC_AUDIT_001",
+      "operator_principal": "serviceaccount:docutask-recovery-controller",
+      "action_type": "SPAWN_REPLACEMENT_WORKER",
+      "target_resource": "k8s/deployments/ocr-worker-node",
+      "authenticated": true,
+      "authorized_by_rbac": true,
+      "audit_log_persisted": true
+    },
+    {
+      "action_id": "SEC_AUDIT_002",
+      "operator_principal": "serviceaccount:docutask-recovery-controller",
+      "action_type": "RESTART_POOL",
+      "target_resource": "db/connection-pool/postgres-primary",
+      "authenticated": true,
+      "authorized_by_rbac": true,
+      "audit_log_persisted": true
+    },
+    {
+      "action_id": "SEC_AUDIT_003_BLOCKED",
+      "operator_principal": "unauthorized_actor",
+      "action_type": "RESTART_DEPENDENCY",
+      "target_resource": "db/cluster/drop_database",
+      "authenticated": false,
+      "authorized_by_rbac": false,
+      "audit_log_persisted": true
+    }
+  ],
+  "zero_unauthorized_recovery_actions": true
+}

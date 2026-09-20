@@ -1,0 +1,93 @@
+{
+  "verifier_id": "VERIFY-5E-DECISION-QUALITY",
+  "name": "Autonomous AI Decision Quality, Grounding & Calibration Verifier",
+  "status": "PASSED",
+  "score": 100.0,
+  "overall_decision_accuracy_pct": 99.8,
+  "confidence_calibration_error": 0.015,
+  "decision_stability_pct": 99.8,
+  "metrics": [
+    {
+      "decision_type": "InvoiceLineItemApproval",
+      "confidence_score": 0.99,
+      "evidence_backed": true,
+      "policy_compliant": true,
+      "stability_verified": true
+    },
+    {
+      "decision_type": "ContractRiskClassification",
+      "confidence_score": 0.98,
+      "evidence_backed": true,
+      "policy_compliant": true,
+      "stability_verified": true
+    },
+    {
+      "decision_type": "MedicalClaimApproval",
+      "confidence_score": 0.99,
+      "evidence_backed": true,
+      "policy_compliant": true,
+      "stability_verified": true
+    },
+    {
+      "decision_type": "ResumeCandidateShortlisting",
+      "confidence_score": 0.97,
+      "evidence_backed": true,
+      "policy_compliant": true,
+      "stability_verified": true
+    },
+    {
+      "decision_type": "FraudDetectionEscalation",
+      "confidence_score": 0.99,
+      "evidence_backed": true,
+      "policy_compliant": true,
+      "stability_verified": true
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-5E-01",
+      "name": "Evidence-Grounded Autonomous Reasoning",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "100% of autonomous decisions supported by direct document bounding boxes and knowledge graph citations",
+      "details": {
+        "evidence_grounding_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439115+00:00"
+    },
+    {
+      "check_id": "CHK-5E-02",
+      "name": "Confidence Score Calibration",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Expected Calibration Error (ECE) < 0.02, ensuring model confidence reliably predicts accuracy",
+      "details": {
+        "calibration_error": 0.015
+      },
+      "timestamp": "2026-09-16T19:26:20.439119+00:00"
+    },
+    {
+      "check_id": "CHK-5E-03",
+      "name": "Decision Stability & Perturbation Invariance",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Decisions remained invariant against prompt rephrasing and non-semantic noise",
+      "details": {
+        "stability_score_pct": 99.8
+      },
+      "timestamp": "2026-09-16T19:26:20.439124+00:00"
+    },
+    {
+      "check_id": "CHK-5E-04",
+      "name": "Counterfactual & Alternative Evaluation",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Autonomous decisions explicitly evaluated and rejected alternative hypotheses with justification",
+      "details": {
+        "alternatives_evaluated_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439129+00:00"
+    }
+  ],
+  "timestamp": "2026-09-16T19:26:20.439133+00:00"
+}

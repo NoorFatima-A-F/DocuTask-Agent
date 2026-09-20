@@ -1,0 +1,47 @@
+{
+  "report_title": "Failure Simulation & Learning Test Report",
+  "total_scenarios_simulated": 4,
+  "results": [
+    {
+      "scenario_id": "SIM-SCENARIO-01",
+      "scenario_name": "Repeated Worker OOM Crashes Under PDF OCR Load",
+      "injected_failure": "Simulated 10 consecutive OCR worker panics caused by large raster memory allocation.",
+      "pattern_detected": true,
+      "rca_identified": "Worker heap memory saturation in long-lived subprocesses.",
+      "knowledge_extracted": true,
+      "policy_adapted": true,
+      "simulation_passed": true
+    },
+    {
+      "scenario_id": "SIM-SCENARIO-02",
+      "scenario_name": "Database Connection Exhaustion Under Batch Peak",
+      "injected_failure": "Injected 100 concurrent asynchronous tasks holding DB sessions open without timeout.",
+      "pattern_detected": true,
+      "rca_identified": "Database connection pool starvation due to missing statement timeouts.",
+      "knowledge_extracted": true,
+      "policy_adapted": true,
+      "simulation_passed": true
+    },
+    {
+      "scenario_id": "SIM-SCENARIO-03",
+      "scenario_name": "Gemini Provider Degradation & Quota Exhaustion",
+      "injected_failure": "Injected upstream HTTP 429 quota exhaustion responses for 30 consecutive API requests.",
+      "pattern_detected": true,
+      "rca_identified": "Upstream AI provider token-per-minute rate limit hit due to unthrottled task dispatch.",
+      "knowledge_extracted": true,
+      "policy_adapted": true,
+      "simulation_passed": true
+    },
+    {
+      "scenario_id": "SIM-SCENARIO-04",
+      "scenario_name": "Slow Memory Leak Degradation Detection",
+      "injected_failure": "Injected slow 10MB/min memory creep across Celery workers over simulated 4-hour window.",
+      "pattern_detected": true,
+      "rca_identified": "Hidden memory degradation trend identified before reaching container OOM threshold.",
+      "knowledge_extracted": true,
+      "policy_adapted": true,
+      "simulation_passed": true
+    }
+  ],
+  "all_scenarios_passed": true
+}

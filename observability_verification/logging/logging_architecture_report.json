@@ -1,0 +1,38 @@
+{
+  "report_title": "Enterprise Logging Architecture & Ingestion Pipeline Report",
+  "pipeline_state": "INITIALIZED",
+  "collectors": [
+    {
+      "name": "OTelLogCollector",
+      "collector_type": "OpenTelemetry Log Pipeline",
+      "status": "READY",
+      "supported_formats": [
+        "JSON",
+        "OTEL_LOGS_PROTOBUF",
+        "STRUCTLOG_NATIVE"
+      ]
+    },
+    {
+      "name": "LokiAggregatorSink",
+      "collector_type": "Distributed Log Store",
+      "status": "READY",
+      "supported_formats": [
+        "GRAFANA_LOKI_STREAM",
+        "JSON_PAYLOAD"
+      ]
+    },
+    {
+      "name": "ElasticsearchArchiveSink",
+      "collector_type": "Audit Search Index",
+      "status": "READY",
+      "supported_formats": [
+        "NDJSON_BULK"
+      ]
+    }
+  ],
+  "sink_backends": [
+    "Grafana Loki",
+    "Elasticsearch"
+  ],
+  "architecture_valid": true
+}

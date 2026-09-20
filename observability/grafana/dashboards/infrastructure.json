@@ -1,0 +1,56 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Container CPU & Memory Utilization",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "sum(rate(container_cpu_usage_seconds_total[5m])) by (container)", "refId": "CPU" },
+        { "expr": "sum(container_memory_working_set_bytes) by (container)", "refId": "RAM" }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+    },
+    {
+      "id": 2,
+      "title": "Container Restarts & Crash Loops",
+      "type": "stat",
+      "targets": [{ "expr": "sum(changes(container_last_seen[15m])) by (container)", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+    },
+    {
+      "id": 3,
+      "title": "PostgreSQL Connection Pool & Query Latency",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "docutask_db_active_connections", "refId": "Conn" },
+        { "expr": "docutask_db_query_duration_seconds", "refId": "Latency" }
+      ],
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 8 }
+    },
+    {
+      "id": 4,
+      "title": "Redis Memory & Queue Depth",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "docutask_redis_memory_bytes", "refId": "Mem" },
+        { "expr": "docutask_redis_queue_length", "refId": "Queue" }
+      ],
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 8 }
+    },
+    {
+      "id": 5,
+      "title": "Persistent Storage IOPS & Disk Usage",
+      "type": "timeseries",
+      "targets": [{ "expr": "node_filesystem_free_bytes / node_filesystem_size_bytes * 100", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 8 }
+    }
+  ],
+  "refresh": "15s",
+  "schemaVersion": 39,
+  "tags": ["docutask", "infra", "containers"],
+  "title": "Infrastructure Reliability",
+  "uid": "docutask-infrastructure",
+  "version": 1
+}

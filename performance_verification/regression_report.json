@@ -1,0 +1,49 @@
+{
+  "report_title": "Performance Regression Detection Verification Report",
+  "comparisons": [
+    {
+      "metric_name": "API Upload Ingestion Latency (P95)",
+      "previous_version_value": "480 ms",
+      "current_version_value": "450 ms",
+      "delta_pct": -6.25,
+      "regression_detected": false,
+      "within_sla": true
+    },
+    {
+      "metric_name": "OCR Processing Average Duration",
+      "previous_version_value": "350 ms",
+      "current_version_value": "320 ms",
+      "delta_pct": -8.57,
+      "regression_detected": false,
+      "within_sla": true
+    },
+    {
+      "metric_name": "Gemini LLM Inference Roundtrip (P95)",
+      "previous_version_value": "950 ms",
+      "current_version_value": "900 ms",
+      "delta_pct": -5.26,
+      "regression_detected": false,
+      "within_sla": true
+    },
+    {
+      "metric_name": "PostgreSQL Query P95 Latency",
+      "previous_version_value": "12.0 ms",
+      "current_version_value": "8.5 ms",
+      "delta_pct": -29.17,
+      "regression_detected": false,
+      "within_sla": true
+    },
+    {
+      "metric_name": "Maximum Sustainable Throughput (RPS)",
+      "previous_version_value": "210 RPS",
+      "current_version_value": "240 RPS",
+      "delta_pct": 14.28,
+      "regression_detected": false,
+      "within_sla": true
+    }
+  ],
+  "regression_gate_enforced": true,
+  "zero_blocking_regressions_verified": true,
+  "max_tolerable_regression_pct": 20.0,
+  "status": "PASS"
+}

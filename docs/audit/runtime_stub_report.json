@@ -1,0 +1,282 @@
+[
+  {
+    "module": "exceptions.py",
+    "line": 20,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 25,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 30,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 35,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 40,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 45,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 50,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 55,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 60,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "exceptions.py",
+    "line": 65,
+    "code": "pass",
+    "pattern": "\\bpass\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "initializer.py",
+    "line": 23,
+    "code": "# Non-invasive factory resolution or standard mock/instance binding",
+    "pattern": "mock",
+    "severity": "critical",
+    "is_exception_or_abstract": false
+  },
+  {
+    "module": "interfaces.py",
+    "line": 20,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 25,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 30,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 39,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 44,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 49,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 58,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 67,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 72,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 81,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 86,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 95,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 100,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 109,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 118,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 123,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 131,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "interfaces.py",
+    "line": 135,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "plugin_manager.py",
+    "line": 35,
+    "code": "# Simulation instance or entrypoint resolution",
+    "pattern": "simulation",
+    "severity": "critical",
+    "is_exception_or_abstract": false
+  },
+  {
+    "module": "runtime_repository.py",
+    "line": 18,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "runtime_repository.py",
+    "line": 22,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "runtime_repository.py",
+    "line": 26,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "runtime_repository.py",
+    "line": 30,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  },
+  {
+    "module": "runtime_repository.py",
+    "line": 34,
+    "code": "raise NotImplementedError",
+    "pattern": "\\bNotImplementedError\\b",
+    "severity": "low",
+    "is_exception_or_abstract": true
+  }
+]

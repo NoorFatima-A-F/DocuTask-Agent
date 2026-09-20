@@ -1,0 +1,10 @@
+{
+  "baseline_p95_ms": 40.0,
+  "current_p95_ms": 42.1,
+  "latency_increase_pct": 5.25,
+  "max_throughput_dph": 3200,
+  "regression_detected": false,
+  "threshold_exceeded": false,
+  "status": "PASSED",
+  "timestamp": "2026-09-19T07:04:46.286806+00:00"
+}

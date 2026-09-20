@@ -1,0 +1,52 @@
+{
+  "report_title": "Learning Safety Governance Report",
+  "actions_governed": [
+    {
+      "action_name": "recycle_worker_task_subprocess",
+      "current_state": "ACTIVE",
+      "simulation_passed": true,
+      "canary_passed": true,
+      "confidence_score": 0.98,
+      "approval_threshold": 0.9,
+      "lifecycle_approved": true
+    },
+    {
+      "action_name": "drain_and_refresh_connection_pool",
+      "current_state": "ACTIVE",
+      "simulation_passed": true,
+      "canary_passed": true,
+      "confidence_score": 0.99,
+      "approval_threshold": 0.9,
+      "lifecycle_approved": true
+    },
+    {
+      "action_name": "adaptive_token_bucket_pacing",
+      "current_state": "ACTIVE",
+      "simulation_passed": true,
+      "canary_passed": true,
+      "confidence_score": 0.97,
+      "approval_threshold": 0.9,
+      "lifecycle_approved": true
+    },
+    {
+      "action_name": "dynamic_memory_limit_expansion",
+      "current_state": "VALIDATED",
+      "simulation_passed": true,
+      "canary_passed": false,
+      "confidence_score": 0.91,
+      "approval_threshold": 0.9,
+      "lifecycle_approved": true
+    },
+    {
+      "action_name": "experimental_aggressive_socket_kill",
+      "current_state": "RETIRED",
+      "simulation_passed": false,
+      "canary_passed": false,
+      "confidence_score": 0.45,
+      "approval_threshold": 0.9,
+      "lifecycle_approved": false
+    }
+  ],
+  "unsafe_evolution_blocked": true,
+  "governance_passed": true
+}

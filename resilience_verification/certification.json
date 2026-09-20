@@ -1,0 +1,21 @@
+{
+  "certification_id": "CERT-3G5-OPERATIONAL-RESILIENCE-001",
+  "platform": "DocuTask Agent Enterprise Platform",
+  "phase": "3G.5",
+  "overall_resilience_score": 100.0,
+  "resilience_tier": "Enterprise Resilient",
+  "certification_verdict": "ENTERPRISE_RESILIENT_CERTIFIED",
+  "ci_cd_deployment_approved": true,
+  "issued_at_utc": "2026-09-15T08:10:57.897657+00:00",
+  "valid_until_utc": "2027-09-15T12:00:00Z",
+  "evaluated_capabilities": [
+    "Automated Recovery Orchestration (Part 3G.5A)",
+    "Self-Healing Containers, Queues & DB Connections (Part 3G.5B)",
+    "Failure Injection in 6 Domains (Part 3G.5C)",
+    "Incident Lifecycle & Auto-Ticketing (Part 3G.5D)",
+    "Executable Runbooks with Automated CLI (Part 3G.5E)",
+    "Dependency Graceful Degradation & AI Fallback (Part 3G.5F)",
+    "State Invariants & Idempotency Verification (Part 3G.5G)",
+    "Automated Continuous DR Drills (Part 3G.5H)"
+  ]
+}

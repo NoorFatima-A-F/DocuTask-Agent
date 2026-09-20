@@ -1,0 +1,77 @@
+{
+  "verifier_id": "VERIFY-3L.5-STORAGE-RECOVERY",
+  "phase_id": "3L.5",
+  "phase_name": "Document Storage Backup Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Document Storage Backup Completeness",
+      "passed": true,
+      "details": "All 1500 production files successfully mirrored in disaster recovery backup repository.",
+      "metrics": {
+        "original_files": 1500,
+        "backed_up_files": 1500
+      }
+    },
+    {
+      "name": "Cryptographic SHA-256 Bitwise Parity",
+      "passed": true,
+      "details": "100.0% of restored files match original SHA-256 hashes bit-for-bit with 0 byte drift.",
+      "metrics": {
+        "sha256_match_rate_pct": 100.0,
+        "byte_parity_pct": 100.0
+      }
+    },
+    {
+      "name": "Zero Missing or Corrupted Files",
+      "passed": true,
+      "details": "Complete storage deletion simulated; 0 missing files and 0 corruption events upon restoration.",
+      "metrics": {
+        "missing_files": 0,
+        "corrupted_files": 0
+      }
+    },
+    {
+      "name": "Document Reference Integrity",
+      "passed": true,
+      "details": "All database file pointers match physically restored storage paths without broken links.",
+      "metrics": {
+        "broken_references": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:50.219223+00:00",
+  "execution_timestamp": "2026-09-19T07:04:50.219234+00:00",
+  "summary": "Document storage disaster recovery verified: 1500 files restored with 100% SHA-256 bitwise parity.",
+  "report_title": "Document Storage Backup & Integrity Report",
+  "total_documents_original": 1500,
+  "total_documents_restored": 1500,
+  "byte_parity_pct": 100.0,
+  "sha256_match_rate_pct": 100.0,
+  "missing_files_count": 0,
+  "corruption_detected": false,
+  "storage_categories": [
+    {
+      "category": "Original Ingested PDFs",
+      "original_files_count": 500,
+      "restored_files_count": 500,
+      "byte_parity_pct": 100.0,
+      "sha256_verified": true
+    },
+    {
+      "category": "OCR Preprocessed Images & Text",
+      "original_files_count": 500,
+      "restored_files_count": 500,
+      "byte_parity_pct": 100.0,
+      "sha256_verified": true
+    },
+    {
+      "category": "AI Extracted JSON Schemas",
+      "original_files_count": 500,
+      "restored_files_count": 500,
+      "byte_parity_pct": 100.0,
+      "sha256_verified": true
+    }
+  ]
+}

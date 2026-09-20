@@ -1,0 +1,37 @@
+{
+  "total_remediations_executed": 3,
+  "successful_remediations": 3,
+  "failed_remediations": 0,
+  "average_recovery_time_sec": 8.23,
+  "actions": [
+    {
+      "action_id": "SH-ACT-001",
+      "trigger_event": "Celery Worker Heartbeat Missed (>15s)",
+      "target_service": "docutask-worker-pool",
+      "remediation_strategy": "Graceful SIGTERM -> Restart Container -> Verify /health/worker",
+      "execution_time_seconds": 8.4,
+      "verification_status": "HEALTHY (0 dropped tasks)",
+      "success": true
+    },
+    {
+      "action_id": "SH-ACT-002",
+      "trigger_event": "Queue Backlog Surged to 450 Tasks (>300 Threshold)",
+      "target_service": "docutask-autoscaler",
+      "remediation_strategy": "Auto-scale worker replicas from 4 -> 8 workers",
+      "execution_time_seconds": 14.2,
+      "verification_status": "HEALTHY (Queue depth returned to < 20)",
+      "success": true
+    },
+    {
+      "action_id": "SH-ACT-003",
+      "trigger_event": "PostgreSQL Idle Socket Timeout on Read Pool",
+      "target_service": "docutask-db-pool",
+      "remediation_strategy": "Flush pool -> Re-establish TCP keep-alive sockets",
+      "execution_time_seconds": 2.1,
+      "verification_status": "HEALTHY (Connection latency 3.2ms)",
+      "success": true
+    }
+  ],
+  "self_healing_enabled": true,
+  "timestamp": "2026-09-19T07:05:00.640408+00:00"
+}

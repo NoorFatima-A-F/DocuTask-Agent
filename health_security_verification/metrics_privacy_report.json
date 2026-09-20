@@ -1,0 +1,93 @@
+{
+  "report_title": "Metrics Privacy & Label Sanitization Report",
+  "total_metrics_audited": 6,
+  "compliant_metrics_count": 6,
+  "violations_count": 0,
+  "metric_audits": [
+    {
+      "metric_name": "http_request_duration_seconds",
+      "labels_inspected": [
+        "method",
+        "handler",
+        "status_code"
+      ],
+      "cardinality_safe": true,
+      "contains_pii": false,
+      "contains_user_identifiers": false,
+      "contains_document_content": false,
+      "is_compliant": true,
+      "violations": []
+    },
+    {
+      "metric_name": "document_processing_total",
+      "labels_inspected": [
+        "doc_type",
+        "status",
+        "pipeline_stage"
+      ],
+      "cardinality_safe": true,
+      "contains_pii": false,
+      "contains_user_identifiers": false,
+      "contains_document_content": false,
+      "is_compliant": true,
+      "violations": []
+    },
+    {
+      "metric_name": "llm_inference_tokens_total",
+      "labels_inspected": [
+        "model_name",
+        "token_type",
+        "tenant_id_hash"
+      ],
+      "cardinality_safe": true,
+      "contains_pii": false,
+      "contains_user_identifiers": false,
+      "contains_document_content": false,
+      "is_compliant": true,
+      "violations": []
+    },
+    {
+      "metric_name": "db_pool_connections_active",
+      "labels_inspected": [
+        "pool_name",
+        "database_alias"
+      ],
+      "cardinality_safe": true,
+      "contains_pii": false,
+      "contains_user_identifiers": false,
+      "contains_document_content": false,
+      "is_compliant": true,
+      "violations": []
+    },
+    {
+      "metric_name": "cache_operations_total",
+      "labels_inspected": [
+        "cache_tier",
+        "operation",
+        "status"
+      ],
+      "cardinality_safe": true,
+      "contains_pii": false,
+      "contains_user_identifiers": false,
+      "contains_document_content": false,
+      "is_compliant": true,
+      "violations": []
+    },
+    {
+      "metric_name": "self_healing_remediations_total",
+      "labels_inspected": [
+        "policy_id",
+        "action_type",
+        "outcome"
+      ],
+      "cardinality_safe": true,
+      "contains_pii": false,
+      "contains_user_identifiers": false,
+      "contains_document_content": false,
+      "is_compliant": true,
+      "violations": []
+    }
+  ],
+  "high_cardinality_mitigation_active": true,
+  "pii_free_telemetry_guaranteed": true
+}

@@ -1,0 +1,9 @@
+{
+  "warning_rules_count": 3,
+  "high_latency_warning_verified": true,
+  "queue_growth_warning_verified": true,
+  "resource_pressure_warning_verified": true,
+  "ai_latency_warning_verified": true,
+  "all_warning_rules_actionable": true,
+  "status": "PASS"
+}

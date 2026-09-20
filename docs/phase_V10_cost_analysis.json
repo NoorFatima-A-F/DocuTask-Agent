@@ -1,0 +1,55 @@
+{
+  "workflow_cost_profiles": [
+    {
+      "workflow_name": "Accounts Payable Invoice Processing",
+      "ocr_cost_per_doc": 0.002,
+      "llm_cost_per_doc": 0.005,
+      "storage_cost_per_doc": 0.001,
+      "total_ai_cost_per_doc": 0.008,
+      "manual_baseline_cost_per_doc": 5.0,
+      "cost_reduction_pct": 99.84,
+      "prompt_tokens_avg": 1420,
+      "completion_tokens_avg": 380,
+      "annual_savings_100k_docs": 499200.0,
+      "roi_multiple": 625.0
+    },
+    {
+      "workflow_name": "Commercial Contract & NDA Risk Analysis",
+      "ocr_cost_per_doc": 0.006,
+      "llm_cost_per_doc": 0.015,
+      "storage_cost_per_doc": 0.002,
+      "total_ai_cost_per_doc": 0.023,
+      "manual_baseline_cost_per_doc": 35.0,
+      "cost_reduction_pct": 99.93,
+      "prompt_tokens_avg": 6200,
+      "completion_tokens_avg": 1450,
+      "annual_savings_100k_docs": 3497700.0,
+      "roi_multiple": 1521.7
+    },
+    {
+      "workflow_name": "HR Candidate Resume Screening & Matching",
+      "ocr_cost_per_doc": 0.001,
+      "llm_cost_per_doc": 0.003,
+      "storage_cost_per_doc": 0.0005,
+      "total_ai_cost_per_doc": 0.0045,
+      "manual_baseline_cost_per_doc": 8.5,
+      "cost_reduction_pct": 99.95,
+      "prompt_tokens_avg": 980,
+      "completion_tokens_avg": 260,
+      "annual_savings_100k_docs": 849550.0,
+      "roi_multiple": 1888.9
+    }
+  ],
+  "resource_efficiency": {
+    "cpu_average_pct": 33.5,
+    "cpu_peak_pct": 52.8,
+    "cpu_returns_to_baseline": true,
+    "memory_allocated_mb": 392.5,
+    "memory_reclaimed_pct": 95.4,
+    "db_connection_pool_active": 18,
+    "db_connection_pool_max": 100,
+    "db_connection_exhaustion": false,
+    "storage_growth_mb_per_1k_docs": 3.75,
+    "estimated_storage_cost_monthly": 0.0001
+  }
+}

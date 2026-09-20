@@ -1,0 +1,52 @@
+{
+  "report_title": "Automated Release Reliability Regression Report",
+  "regression_tests": [
+    {
+      "test_scenario": "document_processing_p95_latency_test",
+      "baseline_value": 1.85,
+      "candidate_value": 1.82,
+      "allowed_variance_pct": 5.0,
+      "actual_variance_pct": -1.62,
+      "regression_detected": false,
+      "status": "PASSED"
+    },
+    {
+      "test_scenario": "concurrent_pipeline_throughput_stress_test",
+      "baseline_value": 1200.0,
+      "candidate_value": 1240.0,
+      "allowed_variance_pct": 5.0,
+      "actual_variance_pct": 3.33,
+      "regression_detected": false,
+      "status": "PASSED"
+    },
+    {
+      "test_scenario": "ai_entity_extraction_accuracy_benchmark",
+      "baseline_value": 99.1,
+      "candidate_value": 99.2,
+      "allowed_variance_pct": 1.0,
+      "actual_variance_pct": 0.1,
+      "regression_detected": false,
+      "status": "PASSED"
+    },
+    {
+      "test_scenario": "worker_crash_recovery_time_test",
+      "baseline_value": 350.0,
+      "candidate_value": 340.0,
+      "allowed_variance_pct": 10.0,
+      "actual_variance_pct": -2.86,
+      "regression_detected": false,
+      "status": "PASSED"
+    },
+    {
+      "test_scenario": "database_connection_pool_exhaustion_resilience",
+      "baseline_value": 100.0,
+      "candidate_value": 100.0,
+      "allowed_variance_pct": 0.0,
+      "actual_variance_pct": 0.0,
+      "regression_detected": false,
+      "status": "PASSED"
+    }
+  ],
+  "all_tests_passed": true,
+  "zero_regression_verified": true
+}

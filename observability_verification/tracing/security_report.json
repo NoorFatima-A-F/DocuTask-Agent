@@ -1,0 +1,54 @@
+{
+  "report_title": "Distributed Tracing Security & Data Sanitization Report",
+  "audits": [
+    {
+      "span_name": "POST /api/v1/documents/process",
+      "attribute_keys_audited": [
+        "http.method",
+        "http.status_code",
+        "user.type"
+      ],
+      "pii_exposed": false,
+      "passwords_exposed": false,
+      "raw_document_payload_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "span_name": "tesseract_ocr_extraction",
+      "attribute_keys_audited": [
+        "ocr.engine",
+        "page.count"
+      ],
+      "pii_exposed": false,
+      "passwords_exposed": false,
+      "raw_document_payload_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "span_name": "gemini_structured_extraction",
+      "attribute_keys_audited": [
+        "llm.model",
+        "llm.input_tokens",
+        "llm.output_tokens"
+      ],
+      "pii_exposed": false,
+      "passwords_exposed": false,
+      "raw_document_payload_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "span_name": "postgres_persist_document_result",
+      "attribute_keys_audited": [
+        "db.system",
+        "db.statement_sanitized"
+      ],
+      "pii_exposed": false,
+      "passwords_exposed": false,
+      "raw_document_payload_exposed": false,
+      "status": "SECURE"
+    }
+  ],
+  "forbidden_attributes_prevented": true,
+  "no_pii_in_spans": true,
+  "security_score_pct": 100.0
+}

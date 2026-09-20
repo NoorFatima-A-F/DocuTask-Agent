@@ -1,0 +1,40 @@
+{
+  "report_title": "Human-in-the-Loop & Tiered Operational Control Report",
+  "policies": [
+    {
+      "tier_name": "Tier 1: Fully Automatic Operations",
+      "risk_level": "LOW",
+      "example_actions": [
+        "Restart crashed worker container replica",
+        "Evict stale Redis cache namespace",
+        "Rotate ephemeral worker access tokens",
+        "Requeue failed idempotent task"
+      ],
+      "escalation_timeout_min": 0,
+      "audit_logged": true
+    },
+    {
+      "tier_name": "Tier 2: Semi-Autonomous (Approval Required)",
+      "risk_level": "MEDIUM",
+      "example_actions": [
+        "Scale production cluster capacity > 200%",
+        "Engage global LLM fallback region routing",
+        "Engage full CI/CD deployment freeze"
+      ],
+      "escalation_timeout_min": 15,
+      "audit_logged": true
+    },
+    {
+      "tier_name": "Tier 3: Human Controlled (Manual Execution Only)",
+      "risk_level": "HIGH",
+      "example_actions": [
+        "Execute database disaster recovery failover",
+        "Roll back persistent database schema migrations",
+        "Rotate platform master KMS encryption keys"
+      ],
+      "escalation_timeout_min": 60,
+      "audit_logged": true
+    }
+  ],
+  "human_oversight_enforced": true
+}

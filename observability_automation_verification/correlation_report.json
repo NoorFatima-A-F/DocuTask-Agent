@@ -1,0 +1,34 @@
+{
+  "report_title": "Multi-Signal Event Correlation Verification Report",
+  "incidents": [
+    {
+      "incident_id": "INC-CORR-101",
+      "incident_title": "PostgreSQL Connection Pool Exhaustion Cascading Incident",
+      "raw_signals_count": 4,
+      "correlated_root": "postgresql_primary_db: Connection Pool Max Capacity Reached",
+      "dependency_graph": [
+        "postgresql_primary_db",
+        "async_document_worker",
+        "redis_task_queue",
+        "api_gateway"
+      ],
+      "blast_radius": "Document ingestion queue processing slowed by 45%",
+      "correlation_accuracy_pct": 100.0
+    },
+    {
+      "incident_id": "INC-CORR-102",
+      "incident_title": "Gemini AI Regional Endpoint Degradation Incident",
+      "raw_signals_count": 3,
+      "correlated_root": "gemini_llm_gateway: Upstream Regional Throttling Event",
+      "dependency_graph": [
+        "gemini_llm_gateway",
+        "agent_planning_runtime",
+        "ocr_processing_service"
+      ],
+      "blast_radius": "Invoice schema extraction workflows falling back to secondary region",
+      "correlation_accuracy_pct": 100.0
+    }
+  ],
+  "signal_reduction_ratio": "4:1 (75% noise reduction)",
+  "correlation_verified": true
+}

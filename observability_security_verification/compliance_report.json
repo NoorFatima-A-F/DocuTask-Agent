@@ -1,0 +1,36 @@
+{
+  "report_title": "Observability Compliance & Regulatory Mapping Report",
+  "standards": [
+    {
+      "standard": "OWASP Logging Cheat Sheet",
+      "control_id": "OWASP-LOG-01",
+      "description": "Do not log sensitive data (PII, tokens, passwords, credit cards, CNICs)",
+      "status": "COMPLIANT"
+    },
+    {
+      "standard": "OWASP Application Security Verification Standard (ASVS v4.0)",
+      "control_id": "ASVS-V8-LOGGING",
+      "description": "Verify that logs are protected against unauthorized access, modification, and tampering",
+      "status": "COMPLIANT"
+    },
+    {
+      "standard": "OWASP Top 10 for Large Language Model Applications",
+      "control_id": "LLM-06-SENSITIVE-INFO",
+      "description": "Prevent sensitive data disclosure and prompt extraction leakage through telemetry channels",
+      "status": "COMPLIANT"
+    },
+    {
+      "standard": "General Data Protection Regulation (GDPR)",
+      "control_id": "GDPR-ART-25-32",
+      "description": "Data protection by design and default, storage limitation, and technical security controls",
+      "status": "COMPLIANT"
+    },
+    {
+      "standard": "SOC 2 Type II Trust Services Criteria",
+      "control_id": "SOC2-CC6.1-CC6.6",
+      "description": "Logical access controls, encryption of telemetry in transit/at rest, and audit trail maintenance",
+      "status": "COMPLIANT"
+    }
+  ],
+  "overall_compliance_pct": 100.0
+}

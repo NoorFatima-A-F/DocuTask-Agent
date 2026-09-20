@@ -1,0 +1,59 @@
+{
+  "section_id": "SECTION_B_INGESTION",
+  "title": "Section B: Document Ingestion Verification",
+  "description": "Validates streaming uploads, corrupted/encrypted file handling, magic-byte security checks, and storage checksum consistency.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.42,
+  "metrics": {
+    "chunks_processed": 4,
+    "corrupted_detected": true,
+    "password_protected_flagged": true,
+    "disguised_file_rejected": true,
+    "upload_checksum_matched": true
+  },
+  "assertions": [
+    {
+      "name": "Streaming_Upload_And_Chunk_Reassembly",
+      "passed": true,
+      "message": "Streamed ingestion reassembled 4 chunks (50 bytes) flawlessly.",
+      "execution_time_ms": 0.01,
+      "details": {
+        "chunks_count": 4,
+        "total_bytes": 50
+      }
+    },
+    {
+      "name": "Corrupted_And_Encrypted_Document_Detection",
+      "passed": true,
+      "message": "Ingestion pipeline flagged corrupted payload and identified password-protected PDF.",
+      "execution_time_ms": 0.004,
+      "details": {
+        "is_corrupt": true,
+        "is_encrypted": true
+      }
+    },
+    {
+      "name": "Magic_Byte_Security_And_MIME_Verification",
+      "passed": true,
+      "message": "Magic-byte inspector rejected disguised executable and accepted authentic PDF binary.",
+      "execution_time_ms": 0.003,
+      "details": {
+        "fake_rejected": true,
+        "valid_accepted": true
+      }
+    },
+    {
+      "name": "Ingestion_Storage_SHA256_Checksum_Integrity",
+      "passed": true,
+      "message": "Storage layer verified exact SHA-256 cryptographic match against in-flight upload.",
+      "execution_time_ms": 0.391,
+      "details": {
+        "sha256": "7a6f7637be17a89e"
+      }
+    }
+  ]
+}

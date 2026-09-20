@@ -1,0 +1,13 @@
+{
+  "report_title": "Chaos Blast-Radius Safety & Auto-Abort Controls Report",
+  "blast_radius_contained": true,
+  "max_blast_radius_pct": 3.5,
+  "tolerated_blast_radius_pct": 5.0,
+  "experiment_timeout_enforced": true,
+  "max_experiment_timeout_seconds": 30,
+  "auto_abort_triggers_verified": true,
+  "critical_data_loss_risk_detected": false,
+  "environment_isolation_verified": true,
+  "target_environment": "STAGING_SANDBOX",
+  "safety_audit_passed": true
+}

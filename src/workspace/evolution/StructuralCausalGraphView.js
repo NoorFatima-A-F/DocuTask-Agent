@@ -1,0 +1,31 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState, useEffect } from 'react';
+import { Compass, Sliders, RefreshCw, Zap, } from 'lucide-react';
+import { CognitiveEvolutionApiClient } from '../../services/cognitiveEvolutionApiClient';
+export const StructuralCausalGraphView = () => {
+    const [nodes, setNodes] = useState([]);
+    const [intervention, setIntervention] = useState(null);
+    const [treatmentVal, setTreatmentVal] = useState(8.0);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        loadCausalModel();
+    }, [treatmentVal]);
+    const loadCausalModel = async () => {
+        setLoading(true);
+        try {
+            const [nodesRes, intervRes] = await Promise.all([
+                CognitiveEvolutionApiClient.getCausalModel(),
+                CognitiveEvolutionApiClient.executeDoIntervention(treatmentVal),
+            ]);
+            setNodes(nodesRes);
+            setIntervention(intervRes);
+        }
+        catch (e) {
+            console.error('Failed to load SCM data:', e);
+        }
+        finally {
+            setLoading(false);
+        }
+    };
+    return (_jsxs("div", { className: "space-y-6 font-mono", children: [_jsxs("div", { className: "bg-slate-900/80 border border-slate-800 rounded-xl p-5 space-y-4", children: [_jsxs("div", { className: "flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3", children: [_jsxs("div", { children: [_jsxs("h3", { className: "text-sm font-bold text-cyan-300 flex items-center gap-2", children: [_jsx(Compass, { className: "w-4 h-4 text-purple-400" }), "Structural Causal Models & Pearl's Do-Calculus Interventions"] }), _jsx("p", { className: "text-xs text-slate-400 mt-0.5", children: "Distinguishes causation from correlation. Evaluates interventional distributions $P(Y \\mid do(X = x))$ via graph surgery and backdoor criteria." })] }), _jsx("button", { onClick: loadCausalModel, disabled: loading, className: "text-slate-400 hover:text-cyan-400 p-1.5 rounded", title: "Refresh", children: _jsx(RefreshCw, { className: `w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}` }) })] }), _jsxs("div", { className: "bg-slate-950/80 border border-slate-800 rounded-lg p-4 space-y-3", children: [_jsxs("div", { className: "flex items-center justify-between text-xs", children: [_jsxs("span", { className: "text-slate-300 flex items-center gap-2", children: [_jsx(Sliders, { className: "w-3.5 h-3.5 text-purple-400" }), "Graph Surgery Treatment: ", _jsxs("span", { className: "text-purple-300 font-bold", children: ["do(Worker Concurrency = ", treatmentVal, ")"] })] }), _jsxs("span", { className: "text-cyan-300 font-bold", children: [treatmentVal, " Nodes"] })] }), _jsx("input", { type: "range", min: "1", max: "16", step: "1", value: treatmentVal, onChange: (e) => setTreatmentVal(parseInt(e.target.value)), className: "w-full accent-purple-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg" }), _jsxs("div", { className: "flex justify-between text-[10px] text-slate-500", children: [_jsx("span", { children: "1 Node (Sequential)" }), _jsx("span", { children: "4 Nodes (Observational Default)" }), _jsx("span", { children: "16 Nodes (Massive Parallel)" })] })] })] }), intervention && (_jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-6", children: [_jsxs("div", { className: "lg:col-span-2 bg-slate-900/80 border border-slate-800 rounded-xl p-5 space-y-4", children: [_jsxs("div", { className: "flex items-center justify-between border-b border-slate-800 pb-3", children: [_jsxs("h4", { className: "text-xs uppercase text-slate-300 tracking-wider flex items-center gap-2", children: [_jsx(Zap, { className: "w-4 h-4 text-cyan-400" }), "Interventional Effect Calculation"] }), _jsx("span", { className: "px-2 py-0.5 rounded text-[10px] bg-purple-950 text-purple-300 border border-purple-800", children: "Backdoor Adjusted" })] }), _jsxs("div", { className: "grid grid-cols-3 gap-3", children: [_jsxs("div", { className: "bg-slate-950/70 border border-slate-800 rounded-lg p-3 text-center", children: [_jsx("div", { className: "text-[10px] text-slate-500 uppercase", children: "Observational E[Y]" }), _jsxs("div", { className: "text-lg font-bold text-slate-200 mt-1", children: [intervention.observational_expectation_e_y.toFixed(0), "ms"] })] }), _jsxs("div", { className: "bg-slate-950/70 border border-slate-800 rounded-lg p-3 text-center", children: [_jsx("div", { className: "text-[10px] text-slate-500 uppercase", children: "Interventional E[Y|do(X)]" }), _jsxs("div", { className: "text-lg font-bold text-emerald-400 mt-1", children: [intervention.interventional_expectation_e_y_do_x.toFixed(0), "ms"] })] }), _jsxs("div", { className: "bg-slate-950/70 border border-slate-800 rounded-lg p-3 text-center", children: [_jsx("div", { className: "text-[10px] text-slate-500 uppercase", children: "Causal Effect (ATE)" }), _jsxs("div", { className: "text-lg font-bold text-cyan-300 mt-1", children: [intervention.causal_effect_ate.toFixed(0), "ms"] })] })] }), _jsxs("div", { className: "p-3 bg-slate-950/80 border border-slate-800 rounded-lg text-xs text-slate-300", children: [_jsx("span", { className: "text-slate-500", children: "Causal Explanation: " }), intervention.summary] })] }), _jsxs("div", { className: "bg-slate-900/80 border border-slate-800 rounded-xl p-5 space-y-3", children: [_jsx("div", { className: "text-xs uppercase text-slate-300 tracking-wider", children: "SCM Variable Nodes" }), _jsx("div", { className: "space-y-2", children: nodes.map((n) => (_jsxs("div", { className: "p-2.5 bg-slate-950/70 border border-slate-800 rounded text-xs", children: [_jsxs("div", { className: "flex justify-between items-center", children: [_jsx("span", { className: "font-bold text-slate-200", children: n.name }), _jsx("span", { className: "text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400", children: n.is_treatment ? 'TREATMENT' : n.is_outcome ? 'OUTCOME' : n.is_confounder ? 'CONFOUNDER' : 'MEDIATOR' })] }), _jsxs("div", { className: "text-[10px] text-slate-500 mt-1", children: ["Parents: ", n.parents.length > 0 ? n.parents.join(', ') : 'None (Exogenous)'] })] }, n.node_id))) })] })] }))] }));
+};

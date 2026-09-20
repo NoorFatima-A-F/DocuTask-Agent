@@ -1,0 +1,38 @@
+version: "1.0"
+runbook_id: "RB-QUEUE-003"
+name: "Redis Queue Backlog Drain & Dead Letter Quarantine"
+target_service: "redis_queue"
+risk_level: "MEDIUM"
+auto_execute: true
+approval_required: false
+timeout_seconds: 120
+
+pre_checks:
+  - name: "Verify queue backlog surge"
+    condition: "redis_queue_depth > 2000"
+
+steps:
+  - step: 1
+    action: "quarantine_poison_pill_messages"
+    command: "python -m app.worker.scripts.quarantine_dead_letters --threshold=3"
+  - step: 2
+    action: "autoscale_worker_fleet"
+    command: "kubectl scale deployment docutask-worker --replicas=16"
+  - step: 3
+    action: "enable_burst_processing_mode"
+    command: "curl -X POST http://api:8000/internal/queue/burst-mode?enabled=true"
+  - step: 4
+    action: "monitor_queue_drain_rate"
+    command: "python -m app.worker.scripts.verify_drain_rate --min-rps=50"
+    retry_count: 6
+    retry_interval_seconds: 10
+
+post_checks:
+  - name: "Validate queue backlog normalized"
+    condition: "redis_queue_depth < 500"
+  - name: "Validate DLQ isolation"
+    condition: "redis_failed_jobs_total == 0"
+
+rollback:
+  action: "scale_back_workers"
+  command: "kubectl scale deployment docutask-worker --replicas=8"

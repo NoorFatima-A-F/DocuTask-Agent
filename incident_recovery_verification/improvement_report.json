@@ -1,0 +1,63 @@
+{
+  "incident_id": "inc-db-failover-001",
+  "root_cause_summary": "Connection starvation caused by runaway bulk extraction batch without pool throttling.",
+  "timeline_events": [
+    {
+      "time": "2026-09-19T07:04:29.407868",
+      "event": "Anomaly detected in PostgreSQL latency metric"
+    },
+    {
+      "time": "2026-09-19T07:04:34.407868",
+      "event": "P1 Incident triggered and owner auto-assigned"
+    },
+    {
+      "time": "2026-09-19T07:04:39.407868",
+      "event": "Automated recovery plan initiated"
+    },
+    {
+      "time": "2026-09-19T07:04:54.407868",
+      "event": "PostgreSQL service restarted and pool refreshed"
+    },
+    {
+      "time": "2026-09-19T07:05:04.407868",
+      "event": "Synthetic validation test passed (100% healthy)"
+    },
+    {
+      "time": "2026-09-19T07:05:14.407868",
+      "event": "Traffic restored and incident marked resolved"
+    }
+  ],
+  "impact_summary": "12 requests failed during 28.6s automated recovery window. Zero permanent data loss.",
+  "detection_quality_score": 100.0,
+  "recovery_quality_score": 100.0,
+  "lessons_learned": [
+    "Automated restart successfully resolved transient starvation within 28.6s.",
+    "Backpressure limits must be enforced on batch submission endpoints."
+  ],
+  "preventive_actions": [
+    {
+      "action_id": "act-001",
+      "title": "Increase PostgreSQL max_connections and enable pgbouncer pooling",
+      "category": "Infrastructure",
+      "assigned_team": "Database SRE",
+      "priority": "P1",
+      "jira_ticket": "SRE-4921"
+    },
+    {
+      "action_id": "act-002",
+      "title": "Add predictive saturation alert on active database worker handles",
+      "category": "Observability",
+      "assigned_team": "Platform Monitoring",
+      "priority": "P2",
+      "jira_ticket": "SRE-4922"
+    },
+    {
+      "action_id": "act-003",
+      "title": "Implement read-replica automatic failover circuit breaker",
+      "category": "Architecture",
+      "assigned_team": "Backend Core",
+      "priority": "P2",
+      "jira_ticket": "SRE-4923"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Active, Completed & Failed Agent Tasks",
+      "type": "stat",
+      "targets": [
+        { "expr": "docutask_agent_active_tasks", "refId": "Active" },
+        { "expr": "sum(rate(docutask_agent_tasks_completed_total[5m]))", "refId": "Completed" },
+        { "expr": "sum(rate(docutask_agent_tasks_failed_total[5m]))", "refId": "Failed" }
+      ],
+      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 0 }
+    },
+    {
+      "id": 2,
+      "title": "Planner Execution Duration",
+      "type": "timeseries",
+      "targets": [{ "expr": "histogram_quantile(0.95, sum(rate(docutask_agent_planning_seconds_bucket[5m])) by (le))", "refId": "A" }],
+      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 0 }
+    },
+    {
+      "id": 3,
+      "title": "Agent Tool Call Invocations",
+      "type": "timeseries",
+      "targets": [{ "expr": "sum(rate(docutask_agent_tool_calls_total[5m])) by (tool)", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 6 }
+    },
+    {
+      "id": 4,
+      "title": "Context Store & Memory Operations Latency",
+      "type": "timeseries",
+      "targets": [{ "expr": "sum(rate(docutask_agent_memory_ops_duration_seconds[5m]))", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 6 }
+    },
+    {
+      "id": 5,
+      "title": "Reflection Runs & Self-Correction Cycles",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "sum(rate(docutask_agent_reflection_runs_total[5m]))", "refId": "Reflections" },
+        { "expr": "sum(rate(docutask_agent_self_corrections_total[5m]))", "refId": "Corrections" }
+      ],
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 6 }
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": ["docutask", "agent", "runtime"],
+  "title": "Agent Runtime Operations",
+  "uid": "docutask-agent-runtime",
+  "version": 1
+}

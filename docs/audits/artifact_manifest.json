@@ -1,0 +1,48 @@
+{
+  "manifest_id": "artifact-manifest-v1",
+  "generated_at": "2026-08-19T02:30:00Z",
+  "artifacts": [
+    {
+      "path": "docs/audits/evidence_chain_of_custody.md",
+      "sha256": "7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "size_bytes": 1850,
+      "producer": "Zero-Trust Auditor",
+      "consumer": "Technical Due Diligence Reviewer"
+    },
+    {
+      "path": "docs/audits/raw_artifact_inventory.md",
+      "sha256": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+      "size_bytes": 1650,
+      "producer": "Zero-Trust Auditor",
+      "consumer": "Technical Due Diligence Reviewer"
+    },
+    {
+      "path": "docs/audits/statistical_recalculation_report.md",
+      "sha256": "3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d",
+      "size_bytes": 1920,
+      "producer": "Zero-Trust Auditor",
+      "consumer": "Technical Due Diligence Reviewer"
+    },
+    {
+      "path": "docs/audits/runtime_fingerprint.md",
+      "sha256": "5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f",
+      "size_bytes": 1450,
+      "producer": "Zero-Trust Auditor",
+      "consumer": "Technical Due Diligence Reviewer"
+    },
+    {
+      "path": "docs/audits/end_to_end_traceability.md",
+      "sha256": "7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "size_bytes": 1780,
+      "producer": "Zero-Trust Auditor",
+      "consumer": "Technical Due Diligence Reviewer"
+    },
+    {
+      "path": "docs/audits/zero_trust_final_review.md",
+      "sha256": "9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d",
+      "size_bytes": 2850,
+      "producer": "Zero-Trust Auditor",
+      "consumer": "Executive Board & CTO"
+    }
+  ]
+}

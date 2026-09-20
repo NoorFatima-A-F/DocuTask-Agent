@@ -1,0 +1,38 @@
+{
+  "report_title": "Adaptive Load Shedding & Overload Protection Report",
+  "cpu_pressure_threshold_pct": 85.0,
+  "memory_pressure_threshold_pct": 90.0,
+  "decisions": [
+    {
+      "traffic_priority_level": "Critical Document Ingestion (P0)",
+      "decision_under_stress": "ACCEPTED",
+      "admission_control_active": true,
+      "critical_path_preserved": true
+    },
+    {
+      "traffic_priority_level": "Interactive Status & Health Probes (P0)",
+      "decision_under_stress": "ACCEPTED",
+      "admission_control_active": true,
+      "critical_path_preserved": true
+    },
+    {
+      "traffic_priority_level": "Standard Synchronous Extraction (P1)",
+      "decision_under_stress": "ACCEPTED_WITH_RATE_LIMIT",
+      "admission_control_active": true,
+      "critical_path_preserved": true
+    },
+    {
+      "traffic_priority_level": "Background Batch OCR Re-Indexing (P2)",
+      "decision_under_stress": "THROTTLED",
+      "admission_control_active": true,
+      "critical_path_preserved": true
+    },
+    {
+      "traffic_priority_level": "Non-Critical Analytics & Telemetry Export (P3)",
+      "decision_under_stress": "DROPPED_GRACEFULLY",
+      "admission_control_active": true,
+      "critical_path_preserved": true
+    }
+  ],
+  "overload_protection_active": true
+}

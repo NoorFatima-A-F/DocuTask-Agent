@@ -1,0 +1,81 @@
+{
+  "total_configured_alerts": 6,
+  "active_firing_alerts": 0,
+  "silenced_alerts": 0,
+  "notification_channels": [
+    "pagerduty",
+    "slack_ops",
+    "email_oncall",
+    "webhook_siem"
+  ],
+  "alerts": [
+    {
+      "alert_id": "ALT-AVAIL-001",
+      "name": "API Gateway Outage Alert",
+      "category": "Availability",
+      "severity": "CRITICAL",
+      "threshold_condition": "API error rate > 5% for > 1 minute",
+      "current_value": "0.02%",
+      "is_firing": false,
+      "notification_channel": "pagerduty",
+      "last_triggered": "Never"
+    },
+    {
+      "alert_id": "ALT-PERF-002",
+      "name": "Document Submission Latency Spike",
+      "category": "Performance",
+      "severity": "WARNING",
+      "threshold_condition": "P95 latency > 500ms for > 2 minutes",
+      "current_value": "142ms",
+      "is_firing": false,
+      "notification_channel": "slack_ops",
+      "last_triggered": "2026-09-14T08:12:00Z"
+    },
+    {
+      "alert_id": "ALT-QUEUE-003",
+      "name": "Redis Queue Depth Monotonic Growth",
+      "category": "Queue",
+      "severity": "WARNING",
+      "threshold_condition": "Queue depth > 500 for > 3 minutes",
+      "current_value": "14 jobs",
+      "is_firing": false,
+      "notification_channel": "slack_ops",
+      "last_triggered": "Never"
+    },
+    {
+      "alert_id": "ALT-AI-004",
+      "name": "AI Document Schema Extraction Failure Spike",
+      "category": "AI Workflow",
+      "severity": "CRITICAL",
+      "threshold_condition": "Extraction failure rate > 5% over 100 docs",
+      "current_value": "0.6%",
+      "is_firing": false,
+      "notification_channel": "pagerduty",
+      "last_triggered": "Never"
+    },
+    {
+      "alert_id": "ALT-SEC-005",
+      "name": "Unauthorized IAM Access Attempt",
+      "category": "Security",
+      "severity": "CRITICAL",
+      "threshold_condition": "Unauthorized admin API calls > 3 in 1 min",
+      "current_value": "0",
+      "is_firing": false,
+      "notification_channel": "webhook_siem",
+      "last_triggered": "Never"
+    },
+    {
+      "alert_id": "ALT-DB-006",
+      "name": "PostgreSQL Connection Pool Exhaustion",
+      "category": "Database",
+      "severity": "WARNING",
+      "threshold_condition": "Pool utilization > 85% for > 2 minutes",
+      "current_value": "28.0%",
+      "is_firing": false,
+      "notification_channel": "slack_ops",
+      "last_triggered": "Never"
+    }
+  ],
+  "pipeline_status": "ALL_ALERTS_NOMINAL",
+  "timestamp": "2026-09-19T07:05:00.640176+00:00"
+}

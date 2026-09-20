@@ -1,0 +1,65 @@
+{
+  "report_title": "Distributed Tracing Privacy & Payload Protection Report",
+  "total_spans_audited": 4,
+  "secure_spans_count": 4,
+  "span_audits": [
+    {
+      "span_name": "http_request_handler",
+      "service_name": "api-gateway",
+      "attributes_inspected": [
+        "http.method",
+        "http.route",
+        "http.status_code",
+        "user_id_hash"
+      ],
+      "contains_raw_prompts": false,
+      "contains_bearer_tokens": false,
+      "user_id_hashed": true,
+      "trace_safe": true
+    },
+    {
+      "span_name": "document_extraction_stage",
+      "service_name": "ocr-service",
+      "attributes_inspected": [
+        "doc_id_hash",
+        "page_count",
+        "ocr_engine",
+        "duration_ms"
+      ],
+      "contains_raw_prompts": false,
+      "contains_bearer_tokens": false,
+      "user_id_hashed": true,
+      "trace_safe": true
+    },
+    {
+      "span_name": "llm_generate_completion",
+      "service_name": "inference-gateway",
+      "attributes_inspected": [
+        "llm.model",
+        "llm.tokens.prompt",
+        "llm.tokens.completion",
+        "tenant_id_hash"
+      ],
+      "contains_raw_prompts": false,
+      "contains_bearer_tokens": false,
+      "user_id_hashed": true,
+      "trace_safe": true
+    },
+    {
+      "span_name": "db_query_execution",
+      "service_name": "document-repository",
+      "attributes_inspected": [
+        "db.system",
+        "db.name",
+        "db.operation",
+        "db.statement_sanitized"
+      ],
+      "contains_raw_prompts": false,
+      "contains_bearer_tokens": false,
+      "user_id_hashed": true,
+      "trace_safe": true
+    }
+  ],
+  "trace_payload_masking_active": true,
+  "telemetry_header_sanitization_valid": true
+}

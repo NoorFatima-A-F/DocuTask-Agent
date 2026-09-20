@@ -1,0 +1,21 @@
+{
+  "broker": "redis",
+  "status": "READY",
+  "ping_pong_ok": true,
+  "enqueue_accessible": true,
+  "queue_state_readable": true,
+  "queue_depth": 12,
+  "oldest_message_age_seconds": 0.5,
+  "processing_delay_ms": 5.0,
+  "latency_ms": 1.8,
+  "passed": true,
+  "details": {
+    "ping_command": "PING -> PONG",
+    "max_threshold_depth": 1000,
+    "active_channels": [
+      "task_queue",
+      "ocr_jobs",
+      "dlq"
+    ]
+  }
+}

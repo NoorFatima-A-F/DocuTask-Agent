@@ -1,0 +1,73 @@
+{
+  "part_id": "PART_01_REGISTRY",
+  "title": "Part 1 \u2014 Workforce Registry Verification",
+  "description": "Validates digital employee registration, identity issuance, skill declarations, clearance tracking, and lifecycle transitions.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.12,
+  "metrics": {
+    "total_registered_agents": 25,
+    "active_percentage": 100.0,
+    "clearance_levels_covered": 5
+  },
+  "assertions": [
+    {
+      "name": "assert_valid_agent_registration",
+      "passed": true,
+      "message": "Digital employee identity, role, department, clearance, and skill catalog successfully registered",
+      "execution_time_ms": 0.046,
+      "details": {
+        "agent_id": "agt_extract_01",
+        "name": "Invoice Extraction Specialist",
+        "role": "SPECIALIST",
+        "department": "FINANCE_AP",
+        "clearance": 3,
+        "skills": [
+          "OCR_PARSING",
+          "TABLE_EXTRACTION",
+          "TAX_MATH"
+        ],
+        "state": "ACTIVE",
+        "trust_score": 1.0,
+        "cost_per_task": 0.005,
+        "created_at": "2026-09-18T18:07:09.096546+00:00"
+      }
+    },
+    {
+      "name": "assert_invalid_registration_rejection",
+      "passed": true,
+      "message": "Registry admission controller quarantined 2 invalid agent registration requests",
+      "execution_time_ms": 0.005,
+      "details": {
+        "rejected_count": 2
+      }
+    },
+    {
+      "name": "assert_lifecycle_state_machine",
+      "passed": true,
+      "message": "Digital employee lifecycle state transitions validated across all 6 formal lifecycle stages",
+      "execution_time_ms": 0.005,
+      "details": {
+        "transitions_validated": 4
+      }
+    },
+    {
+      "name": "assert_clearance_and_cost_binding",
+      "passed": true,
+      "message": "Granular security clearance levels (Level 1 Public to Level 5 Executive) and cost profiles bound to identities",
+      "execution_time_ms": 0.012,
+      "details": {
+        "clearance_levels": [
+          "LEVEL_1_PUBLIC",
+          "LEVEL_2_INTERNAL",
+          "LEVEL_3_CONFIDENTIAL",
+          "LEVEL_4_RESTRICTED",
+          "LEVEL_5_EXECUTIVE"
+        ]
+      }
+    }
+  ]
+}

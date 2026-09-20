@@ -1,0 +1,77 @@
+{
+  "verifier_id": "VERIFY-3J.9.10-CAPACITY-PLAN",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Multi-Horizon Sizing Forecast (25k -> 100k -> 500k Docs/Day)",
+      "passed": true,
+      "details": "Linear-quadratic capacity model forecasts API, worker, database, storage, and AI quota requirements",
+      "metrics": {
+        "forecast_horizons": 3
+      }
+    },
+    {
+      "name": "AI Token Quota Demand Modeling",
+      "passed": true,
+      "details": "Accurately models LLM TPM (Tokens Per Minute) tier requirements (2.0M TPM for 100k docs/day)",
+      "metrics": {
+        "q_target_tpm": 2000000
+      }
+    },
+    {
+      "name": "PostgreSQL Connection & IOPS Scalability Model",
+      "passed": true,
+      "details": "Database connection pool requirements remain within single-instance capacity up to 100k daily volume",
+      "metrics": {
+        "q_target_db_conns": 65
+      }
+    },
+    {
+      "name": "Storage Growth Sizing & Retention Policy",
+      "passed": true,
+      "details": "1TB storage budget accommodates 500k documents with raw PDF + OCR text + JSON extraction metadata",
+      "metrics": {
+        "annual_storage_gb": 1000.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:39:58.436285+00:00",
+  "execution_timestamp": "2026-09-16T18:39:58.436318+00:00",
+  "summary": "",
+  "report_title": "Predictive Capacity Planning Model Report",
+  "projections": [
+    {
+      "horizon_label": "Current State",
+      "target_docs_per_day": 25000,
+      "required_api_replicas": 2,
+      "required_workers": 10,
+      "required_db_connections": 25,
+      "required_storage_gb": 50.0,
+      "estimated_ai_tpm_quota": 500000
+    },
+    {
+      "horizon_label": "Quarterly Target (100k)",
+      "target_docs_per_day": 100000,
+      "required_api_replicas": 4,
+      "required_workers": 40,
+      "required_db_connections": 65,
+      "required_storage_gb": 200.0,
+      "estimated_ai_tpm_quota": 2000000
+    },
+    {
+      "horizon_label": "Annual Enterprise (500k)",
+      "target_docs_per_day": 500000,
+      "required_api_replicas": 12,
+      "required_workers": 120,
+      "required_db_connections": 150,
+      "required_storage_gb": 1000.0,
+      "estimated_ai_tpm_quota": 10000000
+    }
+  ],
+  "current_capacity_docs_per_day": 25000,
+  "max_forecast_capacity_docs_per_day": 500000,
+  "capacity_model_validated": true
+}

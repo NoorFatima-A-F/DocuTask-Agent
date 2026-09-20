@@ -1,0 +1,9 @@
+{
+  "redis_ping_pong_ok": true,
+  "write_test_passed": true,
+  "read_test_passed": true,
+  "queue_depth": 145,
+  "backlog_status": "READY",
+  "enqueue_to_pickup_latency_ms": 24.5,
+  "status": "READY"
+}

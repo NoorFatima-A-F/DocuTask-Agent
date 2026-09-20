@@ -1,0 +1,42 @@
+{
+  "report_title": "Application HTTP & Request Telemetry Report",
+  "endpoints": [
+    {
+      "endpoint": "/api/v1/documents/upload",
+      "method": "POST",
+      "requests_total": 10000,
+      "requests_per_second": 142.5,
+      "avg_latency_ms": 115.0,
+      "p95_latency_ms": 320.0,
+      "p99_latency_ms": 480.0,
+      "error_count": 8,
+      "error_rate_pct": 0.08
+    },
+    {
+      "endpoint": "/api/v1/documents/process",
+      "method": "POST",
+      "requests_total": 8500,
+      "requests_per_second": 95.0,
+      "avg_latency_ms": 210.0,
+      "p95_latency_ms": 450.0,
+      "p99_latency_ms": 720.0,
+      "error_count": 12,
+      "error_rate_pct": 0.14
+    },
+    {
+      "endpoint": "/api/v1/documents/status",
+      "method": "GET",
+      "requests_total": 6500,
+      "requests_per_second": 180.0,
+      "avg_latency_ms": 25.0,
+      "p95_latency_ms": 65.0,
+      "p99_latency_ms": 110.0,
+      "error_count": 2,
+      "error_rate_pct": 0.03
+    }
+  ],
+  "total_system_requests": 25000,
+  "overall_p95_latency_ms": 285.0,
+  "overall_error_rate_pct": 0.088,
+  "application_metrics_healthy": true
+}

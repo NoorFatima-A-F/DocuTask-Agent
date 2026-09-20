@@ -1,0 +1,53 @@
+{
+  "scenario_type": "DATABASE_CORRUPTION",
+  "scenario_name": "Database Logical & Physical Corruption PITR Simulation",
+  "description": "Simulates table/index corruption and validates Point-in-Time Recovery to clean state",
+  "simulation_passed": true,
+  "measured_rto_seconds": 350.0,
+  "measured_rpo_seconds": 90.0,
+  "data_consistency_passed": true,
+  "schema_intact": true,
+  "relations_preserved": true,
+  "timeline": [
+    {
+      "timestamp_iso": "2026-09-19T07:04:51.820038+00:00",
+      "phase": "DISASTER_INJECTED",
+      "description": "Injected 128 corrupted block headers into document_metadata table",
+      "elapsed_seconds_from_start": 0.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:05:21.820038+00:00",
+      "phase": "DETECTED",
+      "description": "PostgreSQL page checksum daemon & SRE integrity probe identified corruption",
+      "elapsed_seconds_from_start": 30.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:05:51.820038+00:00",
+      "phase": "MITIGATION_INITIATED",
+      "description": "Table quarantined; automated PITR initiated to recovery target timestamp (T - 2m)",
+      "elapsed_seconds_from_start": 60.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:10:01.820038+00:00",
+      "phase": "SERVICE_RESTORED",
+      "description": "PITR completed, clean table re-attached, B-Tree indexes rebuilt concurrently",
+      "elapsed_seconds_from_start": 310.0
+    },
+    {
+      "timestamp_iso": "2026-09-19T07:10:41.820038+00:00",
+      "phase": "FULLY_OPERATIONAL",
+      "description": "VACUUM FULL & integrity scan completed with 0 errors across 100,000 rows",
+      "elapsed_seconds_from_start": 350.0
+    }
+  ],
+  "details": {
+    "rto_target_minutes": 45.0,
+    "measured_rto_minutes": 5.83,
+    "rpo_target_minutes": 5.0,
+    "measured_rpo_minutes": 1.5,
+    "corrupted_blocks_repaired": 128,
+    "index_rebuild_status": "CONCURRENT_INDEX_REBUILD_SUCCESS",
+    "pitr_target_timestamp": "2026-09-19T07:02:51.820038+00:00",
+    "data_loss_tuples": 0
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "report_title": "Availability Service Level Objective Verification Report",
+  "target_slo_pct": 99.9,
+  "measured_availability_pct": 99.9641,
+  "slo_satisfied": true,
+  "profiles": [
+    {
+      "traffic_profile": "Normal Steady-State Traffic (100 req/sec)",
+      "total_requests": 500000,
+      "successful_requests": 499950,
+      "failed_requests": 50,
+      "availability_pct": 99.99,
+      "slo_target_pct": 99.9,
+      "slo_satisfied": true
+    },
+    {
+      "traffic_profile": "High Sustained Traffic (500 req/sec)",
+      "total_requests": 1000000,
+      "successful_requests": 999650,
+      "failed_requests": 350,
+      "availability_pct": 99.965,
+      "slo_target_pct": 99.9,
+      "slo_satisfied": true
+    },
+    {
+      "traffic_profile": "Peak Burst Spike (2000 req/sec)",
+      "total_requests": 250000,
+      "successful_requests": 249820,
+      "failed_requests": 180,
+      "availability_pct": 99.928,
+      "slo_target_pct": 99.9,
+      "slo_satisfied": true
+    },
+    {
+      "traffic_profile": "Partial Degraded / Subsystem Failover",
+      "total_requests": 100000,
+      "successful_requests": 99915,
+      "failed_requests": 85,
+      "availability_pct": 99.915,
+      "slo_target_pct": 99.9,
+      "slo_satisfied": true
+    }
+  ]
+}

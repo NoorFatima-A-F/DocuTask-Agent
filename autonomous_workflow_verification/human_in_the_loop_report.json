@@ -1,0 +1,99 @@
+{
+  "verifier_id": "VERIFY-5C-HITL-VALIDATION",
+  "name": "Human-in-the-Loop, Approval Workflow & Policy Override Verifier",
+  "status": "PASSED",
+  "score": 100.0,
+  "total_hitl_events": 5,
+  "approval_accuracy_pct": 100.0,
+  "timeout_handling_verified": true,
+  "interactions": [
+    {
+      "interaction_id": "HITL-01",
+      "event_type": "HighValueInvoiceApproval",
+      "human_role": "FinanceDirector",
+      "response_latency_sec": 4.5,
+      "outcome": "APPROVED",
+      "audit_logged": true
+    },
+    {
+      "interaction_id": "HITL-02",
+      "event_type": "LowConfidenceExtractionCorrection",
+      "human_role": "OperationsReviewer",
+      "response_latency_sec": 12.2,
+      "outcome": "MANUALLY_CORRECTED",
+      "audit_logged": true
+    },
+    {
+      "interaction_id": "HITL-03",
+      "event_type": "PolicyExceptionEscalation",
+      "human_role": "ComplianceOfficer",
+      "response_latency_sec": 8.0,
+      "outcome": "POLICY_OVERRIDE_GRANTED",
+      "audit_logged": true
+    },
+    {
+      "interaction_id": "HITL-04",
+      "event_type": "SuspiciousClaimRejection",
+      "human_role": "FraudInvestigator",
+      "response_latency_sec": 15.0,
+      "outcome": "REJECTED_WITH_FEEDBACK",
+      "audit_logged": true
+    },
+    {
+      "interaction_id": "HITL-05",
+      "event_type": "ReviewTimeoutEscalation",
+      "human_role": "BackupManager",
+      "response_latency_sec": 1.5,
+      "outcome": "TIMEOUT_ESCALATED",
+      "audit_logged": true
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-5C-01",
+      "name": "Interactive Human-AI Task Collaboration Flow",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Interactive approval requests, rejections, and manual corrections successfully processed",
+      "details": {
+        "events_evaluated": 5,
+        "approval_accuracy_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439015+00:00"
+    },
+    {
+      "check_id": "CHK-5C-02",
+      "name": "Timeout Governance & Automatic Escalation",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Review timeouts safely escalated to designated backup supervisors without stalled queues",
+      "details": {
+        "timeout_handling_verified": true
+      },
+      "timestamp": "2026-09-16T19:26:20.439021+00:00"
+    },
+    {
+      "check_id": "CHK-5C-03",
+      "name": "Manual Correction Feedback & Learning Loop",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Human corrections captured as fine-tuning feedback for reflection and memory layers",
+      "details": {
+        "feedback_captured": true
+      },
+      "timestamp": "2026-09-16T19:26:20.439025+00:00"
+    },
+    {
+      "check_id": "CHK-5C-04",
+      "name": "Complete HITL Action Audit Logging",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "100% of human interactions, overrides, and timestamps recorded in immutable audit log",
+      "details": {
+        "audit_logged_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439030+00:00"
+    }
+  ],
+  "timestamp": "2026-09-16T19:26:20.439035+00:00"
+}

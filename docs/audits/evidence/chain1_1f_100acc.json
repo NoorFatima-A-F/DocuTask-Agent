@@ -1,0 +1,34 @@
+{
+  "test_id": "034ded3c-0f14-4345-80a7-3b71ece9ea24",
+  "timestamp": "2026-09-14T11:23:30.568314Z",
+  "environment": "production_audit",
+  "software_version": "1.0.0",
+  "model_version": "gemini-1.5-flash",
+  "input_artifact": "test_doc_001",
+  "expected_behavior": {
+    "invoice_number": "INV-1"
+  },
+  "actual_behavior": {
+    "invoice_number": "INV-1"
+  },
+  "metrics": {
+    "total_fields": 1,
+    "correct_fields": 1,
+    "missing_fields": 0,
+    "hallucinated_fields": 0,
+    "field_accuracy": 1.0,
+    "exact_match_accuracy": 1.0,
+    "schema_compliance_rate": 1.0,
+    "missing_field_rate": 0.0,
+    "hallucination_rate": 0.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "average_confidence": 1.0,
+    "confidence_correctness": 1.0
+  },
+  "pass_fail": "PASS",
+  "evidence_location": "docs\\audits\\evidence\\chain1_1f_100acc.json",
+  "result_hash": "c0a73671e22b6b505961f9ab5dbb388626bc855d6f7ea02e42aa562bc59dcb7b",
+  "previous_hash": "GENESIS_HASH"
+}

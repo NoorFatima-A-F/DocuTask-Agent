@@ -1,0 +1,47 @@
+{
+  "total_recommendations": 4,
+  "recommendations": [
+    {
+      "recommendation_id": "REC-6FB513",
+      "action_type": "SCALE_WORKERS",
+      "target_service": "celery_worker",
+      "rationale": "Queue backlog growth (+120/min) threatens SLA breach in 15 minutes",
+      "expected_risk_reduction_pct": 85.0,
+      "automated_executable": true,
+      "requires_approval": false
+    },
+    {
+      "recommendation_id": "REC-F95B0D",
+      "action_type": "RESTART_LEAKING_WORKER",
+      "target_service": "ocr_worker",
+      "rationale": "Worker RSS memory at 82% with linear leak slope",
+      "expected_risk_reduction_pct": 95.0,
+      "automated_executable": true,
+      "requires_approval": false
+    },
+    {
+      "recommendation_id": "REC-A933AF",
+      "action_type": "EXPAND_DB_POOL",
+      "target_service": "postgres",
+      "rationale": "Connection pool at 88% with active lease accumulation",
+      "expected_risk_reduction_pct": 80.0,
+      "automated_executable": true,
+      "requires_approval": false
+    },
+    {
+      "recommendation_id": "REC-6E47C7",
+      "action_type": "ENABLE_FALLBACK_PROVIDER",
+      "target_service": "gemini_api",
+      "rationale": "Gemini latency drift approaching 800ms threshold",
+      "expected_risk_reduction_pct": 75.0,
+      "automated_executable": true,
+      "requires_approval": false
+    }
+  ],
+  "automation_pipeline_verified": true,
+  "passed": true,
+  "details": {
+    "automation_policy": "Safe auto-remediation enabled for non-destructive actions",
+    "risk_mitigation_coverage": "Infrastructure, Queue, Database, AI provider"
+  }
+}

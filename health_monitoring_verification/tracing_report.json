@@ -1,0 +1,121 @@
+{
+  "trace": {
+    "trace_id": "trace-d76ddb1cefdc43048560c62de671329f",
+    "root_span_name": "POST /api/v1/documents/process",
+    "total_spans": 8,
+    "spans": [
+      {
+        "span_id": "span-dc798e22e4d6",
+        "parent_span_id": null,
+        "name": "POST /api/v1/documents/process",
+        "service": "api_service",
+        "duration_ms": 2850.0,
+        "status_code": "OK",
+        "attributes": {
+          "http.method": "POST",
+          "http.status_code": 200,
+          "client.ip": "10.0.4.12"
+        }
+      },
+      {
+        "span_id": "span-d4dd9e34be17",
+        "parent_span_id": "span-dc798e22e4d6",
+        "name": "agent.runtime.orchestrate",
+        "service": "agent_runtime",
+        "duration_ms": 2700.0,
+        "status_code": "OK",
+        "attributes": {
+          "agent.version": "2.4.0",
+          "task.id": "task-8910"
+        }
+      },
+      {
+        "span_id": "span-c2a9d488fe99",
+        "parent_span_id": "span-dc798e22e4d6",
+        "name": "planner.decompose_and_route",
+        "service": "agent_runtime",
+        "duration_ms": 180.0,
+        "status_code": "OK",
+        "attributes": {
+          "planner.steps": 4,
+          "planner.strategy": "hierarchical"
+        }
+      },
+      {
+        "span_id": "span-3556aac4d972",
+        "parent_span_id": "span-dc798e22e4d6",
+        "name": "worker.celery.execute_pipeline",
+        "service": "worker_fleet",
+        "duration_ms": 2350.0,
+        "status_code": "OK",
+        "attributes": {
+          "worker.node": "worker-pool-03",
+          "queue": "document_tasks"
+        }
+      },
+      {
+        "span_id": "span-14d305e5283b",
+        "parent_span_id": "span-dc798e22e4d6",
+        "name": "ocr.rasterize_and_extract",
+        "service": "ocr_pipeline",
+        "duration_ms": 850.0,
+        "status_code": "OK",
+        "attributes": {
+          "ocr.engine": "tesseract-hybrid",
+          "pages": 2
+        }
+      },
+      {
+        "span_id": "span-b84efcda1299",
+        "parent_span_id": "span-dc798e22e4d6",
+        "name": "gemini.generate_structured_extraction",
+        "service": "gemini_ai_provider",
+        "duration_ms": 680.0,
+        "status_code": "OK",
+        "attributes": {
+          "gemini.model": "gemini-2.0-flash",
+          "tokens.total": 1250
+        }
+      },
+      {
+        "span_id": "span-f6e3f6191652",
+        "parent_span_id": "span-dc798e22e4d6",
+        "name": "postgres.persist_document_entities",
+        "service": "postgres_db",
+        "duration_ms": 25.0,
+        "status_code": "OK",
+        "attributes": {
+          "db.statement": "INSERT INTO extracted_documents ...",
+          "db.rows": 1
+        }
+      },
+      {
+        "span_id": "span-c8e7a6c1ecef",
+        "parent_span_id": "span-dc798e22e4d6",
+        "name": "api.serialize_and_respond",
+        "service": "api_service",
+        "duration_ms": 15.0,
+        "status_code": "OK",
+        "attributes": {
+          "response.content_type": "application/json"
+        }
+      }
+    ],
+    "context_propagated": true,
+    "missing_spans_count": 0
+  },
+  "propagation_verified": true,
+  "correlation_ids_valid": true,
+  "span_accuracy_pct": 100.0,
+  "passed": true,
+  "details": {
+    "w3c_traceparent": "00-trace-d76ddb1cefdc43048560c62de671329f-span-dc798e22e4d6-01",
+    "sampler": "ParentBased(TraceIdRatioBased(1.0))",
+    "instrumentation_libraries": [
+      "opentelemetry-instrumentation-fastapi",
+      "opentelemetry-instrumentation-celery",
+      "opentelemetry-instrumentation-psycopg2",
+      "opentelemetry-instrumentation-requests"
+    ]
+  }
+}

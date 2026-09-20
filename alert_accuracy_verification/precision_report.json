@@ -1,0 +1,8 @@
+{
+  "total_triggered_alerts": 98,
+  "true_positive_alerts": 96,
+  "false_positive_alerts": 2,
+  "precision_score": 0.9796,
+  "precision_target_met": true,
+  "status": "PASS"
+}

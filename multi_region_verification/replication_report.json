@@ -1,0 +1,14 @@
+{
+  "database_replication": {
+    "health": "HEALTHY",
+    "lag_seconds": 0.8,
+    "primary_lsn": "16/B374A080",
+    "replica_lsn": "16/B374A080"
+  },
+  "storage_replication": {
+    "total_documents": 1000,
+    "sha256_match_pct": 100.0,
+    "sync_lag_sec": 1.2
+  },
+  "passed": true
+}

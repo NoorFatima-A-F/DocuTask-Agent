@@ -1,0 +1,34 @@
+{
+  "report_title": "Reliability Control Automation Verification Report",
+  "actions": [
+    {
+      "action_type": "Global Worker Predictive Scaling",
+      "trigger_condition": "Predictive ingestion surge > 200 docs/sec forecast within 15 mins",
+      "execution_scope": "Multi-Region Kubernetes Clusters",
+      "authorization_enforced": true,
+      "rollback_supported": true,
+      "audit_logged": true
+    },
+    {
+      "action_type": "Cross-Environment Deployment Protection",
+      "trigger_condition": "Staging memory/latency regression detected during canary rollout",
+      "execution_scope": "Global CI/CD Deployment Pipelines",
+      "authorization_enforced": true,
+      "rollback_supported": true,
+      "audit_logged": true
+    },
+    {
+      "action_type": "Automated Regional Recovery & Traffic Shift",
+      "trigger_condition": "Primary region health score < 85% or cloud provider network degradation",
+      "execution_scope": "Global Anycast DNS & Service Mesh",
+      "authorization_enforced": true,
+      "rollback_supported": true,
+      "audit_logged": true
+    }
+  ],
+  "action_authorization_verified": true,
+  "automated_rollback_verified": true,
+  "audit_logging_verified": true,
+  "automation_safety_score_pct": 100.0,
+  "status": "PASS"
+}

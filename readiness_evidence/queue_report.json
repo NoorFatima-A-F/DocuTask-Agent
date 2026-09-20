@@ -1,0 +1,8 @@
+{
+  "title": "Redis Queue Readiness Report",
+  "ping": "PONG_OK",
+  "queue_depth": 145,
+  "backlog_status": "READY",
+  "enqueue_pickup_latency_ms": 24.5,
+  "status": "READY"
+}

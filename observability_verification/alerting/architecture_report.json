@@ -1,0 +1,38 @@
+{
+  "report_title": "Enterprise Alerting Architecture & Dispatch Report",
+  "alert_manager": "Prometheus Alertmanager v0.27.0",
+  "rule_engine": "Prometheus Rules Engine + Grafana Unified Alerting",
+  "rules_configured_count": 124,
+  "notification_channels": [
+    {
+      "channel_name": "PagerDuty-OnCall-Primary",
+      "channel_type": "PagerDuty",
+      "target_destination": "https://events.pagerduty.com/v2/enqueue",
+      "enabled": true,
+      "delivery_latency_ms": 95.0
+    },
+    {
+      "channel_name": "Slack-Incident-Room",
+      "channel_type": "Slack",
+      "target_destination": "https://hooks.slack.com/services/T00/B00/X00",
+      "enabled": true,
+      "delivery_latency_ms": 110.0
+    },
+    {
+      "channel_name": "Email-SRE-Escalation",
+      "channel_type": "Email",
+      "target_destination": "sre-team@docutask-agent.internal",
+      "enabled": true,
+      "delivery_latency_ms": 250.0
+    },
+    {
+      "channel_name": "Automated-Remediation-Webhook",
+      "channel_type": "Webhook",
+      "target_destination": "http://auto-healer.internal/api/v1/remediate",
+      "enabled": true,
+      "delivery_latency_ms": 45.0
+    }
+  ],
+  "monitored_services": 8,
+  "status": "PASS"
+}

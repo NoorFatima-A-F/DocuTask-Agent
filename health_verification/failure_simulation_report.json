@@ -1,0 +1,50 @@
+{
+  "total_simulations": 4,
+  "passed_simulations": 4,
+  "mean_detection_time_seconds": 1.15,
+  "mean_recovery_time_seconds": 2.45,
+  "false_positive_rate_pct": 0.0,
+  "simulations": [
+    {
+      "simulation_id": "SIM-01-DB-STOP",
+      "injected_failure": "PostgreSQL service stopped / connection timeout",
+      "expected_state": "NOT_READY",
+      "actual_state": "NOT_READY",
+      "detection_time_seconds": 1.1,
+      "recovery_time_seconds": 2.3,
+      "false_positive": false,
+      "passed": true
+    },
+    {
+      "simulation_id": "SIM-02-REDIS-DOWN",
+      "injected_failure": "Redis PING failure / queue inaccessible",
+      "expected_state": "NOT_READY",
+      "actual_state": "NOT_READY",
+      "detection_time_seconds": 0.8,
+      "recovery_time_seconds": 1.9,
+      "false_positive": false,
+      "passed": true
+    },
+    {
+      "simulation_id": "SIM-03-WORKERS-DEAD",
+      "injected_failure": "All worker processes stopped (zero capacity)",
+      "expected_state": "NOT_READY",
+      "actual_state": "NOT_READY",
+      "detection_time_seconds": 1.2,
+      "recovery_time_seconds": 2.8,
+      "false_positive": false,
+      "passed": true
+    },
+    {
+      "simulation_id": "SIM-04-AI-OUTAGE",
+      "injected_failure": "External Gemini API returns 503 / network timeout",
+      "expected_state": "DEGRADED",
+      "actual_state": "DEGRADED",
+      "detection_time_seconds": 1.5,
+      "recovery_time_seconds": 2.8,
+      "false_positive": false,
+      "passed": true
+    }
+  ],
+  "status": "PASS"
+}

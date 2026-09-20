@@ -1,0 +1,66 @@
+{
+  "overall_score": 100.0,
+  "certification_tier": "Continuous Performance Engineering Ready",
+  "status": "PASSED",
+  "categories": {
+    "Baseline accuracy": {
+      "name": "Baseline accuracy",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 4,
+      "total_checks": 4,
+      "status": "PASSED"
+    },
+    "Benchmark automation": {
+      "name": "Benchmark automation",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    },
+    "Regression detection": {
+      "name": "Regression detection",
+      "weight": 0.25,
+      "score": 100.0,
+      "contribution": 25.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "CI/CD integration": {
+      "name": "CI/CD integration",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 4,
+      "total_checks": 4,
+      "status": "PASSED"
+    },
+    "Trend analysis": {
+      "name": "Trend analysis",
+      "weight": 0.1,
+      "score": 100.0,
+      "contribution": 10.0,
+      "checks_passed": 12,
+      "total_checks": 12,
+      "status": "PASSED"
+    },
+    "Performance knowledge": {
+      "name": "Performance knowledge",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "checks_passed": 8,
+      "total_checks": 8,
+      "status": "PASSED"
+    }
+  },
+  "total_verifiers_executed": 12,
+  "total_checks_passed": 48,
+  "total_checks_evaluated": 48,
+  "generated_at": "2026-09-19T07:04:45.033696+00:00",
+  "execution_time_seconds": 0.047
+}

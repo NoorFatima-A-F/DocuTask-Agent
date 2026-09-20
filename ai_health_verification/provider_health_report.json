@@ -1,0 +1,69 @@
+{
+  "total_providers_monitored": 3,
+  "primary_provider": "gemini",
+  "primary_status": "AVAILABLE",
+  "providers": [
+    {
+      "provider": "gemini",
+      "status": "AVAILABLE",
+      "latency_ms": 420.0,
+      "authentication": "VALID",
+      "quota_status": "AVAILABLE",
+      "model": "gemini-1.5-flash",
+      "timestamp": "2026-09-15T21:45:00Z",
+      "failure_count_24h": 2,
+      "last_successful_request": "2026-09-15T21:44:55Z",
+      "details": {
+        "provider_type": "PRIMARY",
+        "structured_output_supported": true,
+        "context_window_tokens": 1048576
+      }
+    },
+    {
+      "provider": "claude_fallback",
+      "status": "AVAILABLE",
+      "latency_ms": 680.0,
+      "authentication": "VALID",
+      "quota_status": "AVAILABLE",
+      "model": "claude-3-5-sonnet",
+      "timestamp": "2026-09-15T21:45:00Z",
+      "failure_count_24h": 0,
+      "last_successful_request": "2026-09-15T21:40:00Z",
+      "details": {
+        "provider_type": "SECONDARY_FALLBACK",
+        "structured_output_supported": true,
+        "context_window_tokens": 200000
+      }
+    },
+    {
+      "provider": "local_vllm",
+      "status": "AVAILABLE",
+      "latency_ms": 190.0,
+      "authentication": "VALID",
+      "quota_status": "AVAILABLE",
+      "model": "mistral-nemo-12b",
+      "timestamp": "2026-09-15T21:45:00Z",
+      "failure_count_24h": 0,
+      "last_successful_request": "2026-09-15T21:42:10Z",
+      "details": {
+        "provider_type": "TERTIARY_LOCAL_FALLBACK",
+        "structured_output_supported": true,
+        "context_window_tokens": 32768
+      }
+    }
+  ],
+  "passed": true,
+  "details": {
+    "supported_states": [
+      "UNKNOWN",
+      "INITIALIZING",
+      "AVAILABLE",
+      "DEGRADED",
+      "RATE_LIMITED",
+      "UNAVAILABLE",
+      "RECOVERING"
+    ],
+    "contract_specification": "DocuTask Enterprise AI Health Contract v1.2",
+    "probed_at": "2026-09-19T07:04:29.561681+00:00"
+  }
+}

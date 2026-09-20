@@ -1,0 +1,58 @@
+{
+  "report_title": "Enterprise Error Budget Management Report",
+  "measurement_window": "Rolling 30 Days (43,200 total minutes)",
+  "overall_remaining_budget_pct": 83.19,
+  "subsystem_budgets": [
+    {
+      "subsystem": "API_Gateway",
+      "total_budget_minutes": 43.2,
+      "consumed_budget_minutes": 6.5,
+      "remaining_budget_minutes": 36.7,
+      "remaining_budget_pct": 84.95,
+      "burn_rate_current": 0.75,
+      "projected_exhaustion_days": 40.0,
+      "is_budget_healthy": true
+    },
+    {
+      "subsystem": "PostgreSQL_Database",
+      "total_budget_minutes": 21.6,
+      "consumed_budget_minutes": 3.2,
+      "remaining_budget_minutes": 18.4,
+      "remaining_budget_pct": 85.18,
+      "burn_rate_current": 0.68,
+      "projected_exhaustion_days": 44.1,
+      "is_budget_healthy": true
+    },
+    {
+      "subsystem": "Redis_Task_Queue",
+      "total_budget_minutes": 432.0,
+      "consumed_budget_minutes": 65.0,
+      "remaining_budget_minutes": 367.0,
+      "remaining_budget_pct": 84.95,
+      "burn_rate_current": 0.82,
+      "projected_exhaustion_days": 36.6,
+      "is_budget_healthy": true
+    },
+    {
+      "subsystem": "Distributed_Workers",
+      "total_budget_minutes": 216.0,
+      "consumed_budget_minutes": 42.0,
+      "remaining_budget_minutes": 174.0,
+      "remaining_budget_pct": 80.55,
+      "burn_rate_current": 0.92,
+      "projected_exhaustion_days": 32.6,
+      "is_budget_healthy": true
+    },
+    {
+      "subsystem": "Gemini_AI_Provider",
+      "total_budget_minutes": 432.0,
+      "consumed_budget_minutes": 85.0,
+      "remaining_budget_minutes": 347.0,
+      "remaining_budget_pct": 80.32,
+      "burn_rate_current": 0.95,
+      "projected_exhaustion_days": 31.5,
+      "is_budget_healthy": true
+    }
+  ],
+  "error_budget_policy_healthy": true
+}

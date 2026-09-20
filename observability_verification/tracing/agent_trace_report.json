@@ -1,0 +1,91 @@
+{
+  "report_title": "AI Agent Autonomous Lifecycle Tracing Report",
+  "agent_id": "agent_doc_processor_v3",
+  "task_id": "task_extract_inv_9981",
+  "goal": "Extract invoice line items, tax, and supplier details",
+  "execution_time_ms": 3540.0,
+  "agent_spans": [
+    {
+      "stage": "Goal",
+      "span_name": "agent_goal_initialize",
+      "duration_ms": 45.0,
+      "tool_name": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "confidence_score": null,
+      "status": "OK"
+    },
+    {
+      "stage": "Planning",
+      "span_name": "agent_generate_execution_plan",
+      "duration_ms": 120.0,
+      "tool_name": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "confidence_score": 0.98,
+      "status": "OK"
+    },
+    {
+      "stage": "Tool Selection",
+      "span_name": "agent_select_ocr_and_extractor_tools",
+      "duration_ms": 35.0,
+      "tool_name": "tesseract_ocr_tool",
+      "input_tokens": null,
+      "output_tokens": null,
+      "confidence_score": null,
+      "status": "OK"
+    },
+    {
+      "stage": "OCR Execution",
+      "span_name": "agent_execute_tesseract_ocr",
+      "duration_ms": 580.0,
+      "tool_name": "tesseract_ocr_tool",
+      "input_tokens": null,
+      "output_tokens": null,
+      "confidence_score": null,
+      "status": "OK"
+    },
+    {
+      "stage": "LLM Extraction",
+      "span_name": "agent_invoke_gemini_extraction",
+      "duration_ms": 2350.0,
+      "tool_name": "gemini_llm_tool",
+      "input_tokens": 3200,
+      "output_tokens": 750,
+      "confidence_score": 0.96,
+      "status": "OK"
+    },
+    {
+      "stage": "Validation",
+      "span_name": "agent_validate_extracted_fields",
+      "duration_ms": 160.0,
+      "tool_name": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "confidence_score": 0.99,
+      "status": "OK"
+    },
+    {
+      "stage": "Reflection",
+      "span_name": "agent_self_healing_reflection",
+      "duration_ms": 110.0,
+      "tool_name": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "confidence_score": 0.97,
+      "status": "OK"
+    },
+    {
+      "stage": "Result Store",
+      "span_name": "agent_persist_structured_output",
+      "duration_ms": 140.0,
+      "tool_name": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "confidence_score": null,
+      "status": "OK"
+    }
+  ],
+  "decision_reconstruction_complete": true,
+  "ai_observability_score": 100.0
+}

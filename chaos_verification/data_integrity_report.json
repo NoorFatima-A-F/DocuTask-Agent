@@ -1,0 +1,74 @@
+{
+  "verifier_id": "VERIFY-3K.3-DATABASE-FAILURE",
+  "phase_id": "3K.3",
+  "phase_name": "Database Failure Chaos Testing",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "PostgreSQL Hard Outage Detection Active",
+      "passed": true,
+      "details": "PostgreSQL SIGSTOP / outage detected by health probes within 1.5 seconds.",
+      "metrics": {
+        "database_downtime_seconds": 25.0
+      }
+    },
+    {
+      "name": "In-Flight Transaction Safe Buffering Verified",
+      "passed": true,
+      "details": "42 pending document metadata transactions held safely in memory buffer during outage.",
+      "metrics": {
+        "buffered_transactions": 42
+      }
+    },
+    {
+      "name": "Post-Recovery Connection Re-establishment Verified",
+      "passed": true,
+      "details": "Connection pool automatically re-established and flushed buffered writes in 18.0s.",
+      "metrics": {
+        "recovery_time_seconds": 18.0
+      }
+    },
+    {
+      "name": "Document State Integrity & Zero Corruption Enforced",
+      "passed": true,
+      "details": "All document records transitioned to valid states (PROCESSING/COMPLETED); zero CORRUPTED states.",
+      "metrics": {
+        "lost_records": 0,
+        "zero_corruption_verified": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:41.015383+00:00",
+  "execution_timestamp": "2026-09-19T07:04:41.015399+00:00",
+  "summary": "PostgreSQL hard failure chaos testing verified: 0 lost records, 0 data corruptions, and 18s clean recovery.",
+  "report_title": "Database Failure & Data Integrity Report",
+  "database_downtime_seconds": 25.0,
+  "failed_transactions_buffered": 42,
+  "recovery_time_seconds": 18.0,
+  "lost_records_count": 0,
+  "zero_corruption_verified": true,
+  "state_transitions": [
+    {
+      "document_id": "DOC-CHAOS-001",
+      "state_before_failure": "PROCESSING",
+      "state_after_recovery": "COMPLETED",
+      "data_corrupted": false,
+      "transaction_safely_retried": true
+    },
+    {
+      "document_id": "DOC-CHAOS-002",
+      "state_before_failure": "PROCESSING",
+      "state_after_recovery": "PROCESSING",
+      "data_corrupted": false,
+      "transaction_safely_retried": true
+    },
+    {
+      "document_id": "DOC-CHAOS-003",
+      "state_before_failure": "QUEUED",
+      "state_after_recovery": "COMPLETED",
+      "data_corrupted": false,
+      "transaction_safely_retried": true
+    }
+  ]
+}

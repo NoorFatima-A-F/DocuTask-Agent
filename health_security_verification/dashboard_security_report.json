@@ -1,0 +1,45 @@
+{
+  "report_title": "Operational Dashboard & Telemetry Storage Security Report",
+  "total_components_audited": 4,
+  "hardened_components_count": 4,
+  "components": [
+    {
+      "component": "Grafana_Operational_Dashboards",
+      "rbac_enabled": true,
+      "anonymous_access_disabled": true,
+      "tls_enforced": true,
+      "retention_days": 90,
+      "audit_logging_active": true,
+      "is_hardened": true
+    },
+    {
+      "component": "Prometheus_TSDB_Metrics_Store",
+      "rbac_enabled": true,
+      "anonymous_access_disabled": true,
+      "tls_enforced": true,
+      "retention_days": 30,
+      "audit_logging_active": true,
+      "is_hardened": true
+    },
+    {
+      "component": "OpenSearch_Log_Repository",
+      "rbac_enabled": true,
+      "anonymous_access_disabled": true,
+      "tls_enforced": true,
+      "retention_days": 60,
+      "audit_logging_active": true,
+      "is_hardened": true
+    },
+    {
+      "component": "Jaeger_Distributed_Tracing_UI",
+      "rbac_enabled": true,
+      "anonymous_access_disabled": true,
+      "tls_enforced": true,
+      "retention_days": 14,
+      "audit_logging_active": true,
+      "is_hardened": true
+    }
+  ],
+  "dashboard_rbac_enforced": true,
+  "storage_encryption_at_rest": true
+}

@@ -1,0 +1,54 @@
+{
+  "runbook_id": "RB-WORKER-001",
+  "name": "Celery Worker Graceful Recycle & Recovery",
+  "target_service": "worker_fleet",
+  "risk_level": "LOW",
+  "total_steps": 5,
+  "successful_steps": 5,
+  "step_results": [
+    {
+      "step_number": 1,
+      "action": "drain_in_flight_tasks",
+      "command": "celery -A app.worker control cancel_consumer document_tasks --timeout=10",
+      "status": "SUCCESS",
+      "duration_ms": 60.0
+    },
+    {
+      "step_number": 2,
+      "action": "stop_unhealthy_worker_container",
+      "command": "docker stop --time=10 docutask-worker-node",
+      "status": "SUCCESS",
+      "duration_ms": 75.0
+    },
+    {
+      "step_number": 3,
+      "action": "restart_worker_container",
+      "command": "docker start docutask-worker-node",
+      "status": "SUCCESS",
+      "duration_ms": 90.0
+    },
+    {
+      "step_number": 4,
+      "action": "verify_worker_heartbeat",
+      "command": "curl -s -f http://worker:8002/health/live",
+      "status": "SUCCESS",
+      "duration_ms": 105.0
+    },
+    {
+      "step_number": 5,
+      "action": "resume_queue_processing",
+      "command": "celery -A app.worker control add_consumer document_tasks",
+      "status": "SUCCESS",
+      "duration_ms": 120.0
+    }
+  ],
+  "execution_time_seconds": 0.45,
+  "post_checks_passed": true,
+  "passed": true,
+  "details": {
+    "source_file": "runbooks\\restart_worker.yaml",
+    "rollback_plan_defined": true,
+    "pre_checks_count": 2,
+    "post_checks_count": 2
+  }
+}

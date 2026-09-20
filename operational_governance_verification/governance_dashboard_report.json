@@ -1,0 +1,47 @@
+{
+  "report_title": "Operational Governance & Change Risk Dashboard Report",
+  "active_deployments_count": 0,
+  "pending_approvals_count": 0,
+  "recent_rollbacks_count": 0,
+  "configuration_drift_count": 0,
+  "deployment_success_rate_pct": 100.0,
+  "operational_risk_index": 0.02,
+  "metrics": [
+    {
+      "name": "governance.change.active_deployments",
+      "value": 0,
+      "unit": "deployments",
+      "status": "HEALTHY"
+    },
+    {
+      "name": "governance.change.pending_approvals",
+      "value": 0,
+      "unit": "requests",
+      "status": "HEALTHY"
+    },
+    {
+      "name": "governance.change.deployment_success_rate_pct",
+      "value": 100.0,
+      "unit": "percent",
+      "status": "HEALTHY"
+    },
+    {
+      "name": "governance.change.rollback_frequency_pct",
+      "value": 0.0,
+      "unit": "percent",
+      "status": "HEALTHY"
+    },
+    {
+      "name": "governance.change.unauthorized_drift_detected",
+      "value": 0,
+      "unit": "items",
+      "status": "HEALTHY"
+    },
+    {
+      "name": "governance.change.operational_risk_index",
+      "value": 0.02,
+      "unit": "risk_score",
+      "status": "HEALTHY"
+    }
+  ]
+}

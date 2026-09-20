@@ -1,0 +1,32 @@
+{
+  "report_title": "Failure Pattern Recognition Report",
+  "patterns": [
+    {
+      "pattern_id": "PAT-FREQ-001",
+      "pattern_type": "FREQUENCY",
+      "description": "Repeated worker process OOM terminations under heavy PDF rasterization",
+      "frequency_per_week": 18,
+      "detected_issue": "Recurring worker memory fragmentation in long-lived processes",
+      "prediction_confidence": 0.96
+    },
+    {
+      "pattern_id": "PAT-TEMP-002",
+      "pattern_type": "TEMPORAL",
+      "description": "Nightly 00:00 UTC database backup IOPS burst causing queue backlog increase",
+      "frequency_per_week": 7,
+      "detected_issue": "Scheduled maintenance contention on primary database volume",
+      "prediction_confidence": 0.98
+    },
+    {
+      "pattern_id": "PAT-DEP-003",
+      "pattern_type": "DEPENDENCY",
+      "description": "Gemini API latency spike cascading into Celery worker hold and Redis backlog surge",
+      "frequency_per_week": 12,
+      "detected_issue": "External AI dependency bottleneck due to un-isolated synchronous task awaits",
+      "prediction_confidence": 0.97
+    }
+  ],
+  "pattern_detection_accuracy": 98.5,
+  "false_pattern_rate": 1.2,
+  "mean_prediction_confidence": 0.97
+}

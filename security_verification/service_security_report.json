@@ -1,0 +1,78 @@
+{
+  "verifier_id": "VERIFY-3N.9-SERVICE-SEC",
+  "phase_id": "3N.9",
+  "phase_name": "Service-to-Service Security Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Internal Service Authentication Enforcement",
+      "passed": true,
+      "details": "All 4 internal microservice communication channels require cryptographically verified service identities.",
+      "metrics": {
+        "channels_audited_count": 4
+      }
+    },
+    {
+      "name": "Fake / Rogue Worker Rejection Test",
+      "passed": true,
+      "details": "Unauthenticated worker connection attempt to queue broker rejected immediately with authentication failure.",
+      "metrics": {
+        "unauthorized_service_rejection": true
+      }
+    },
+    {
+      "name": "Mutual TLS (mTLS) Encryption in Transit",
+      "passed": true,
+      "details": "Service mesh / internal proxies enforce mTLS with short-lived SPIFFE/SPIRE x509 certificates.",
+      "metrics": {
+        "mtls_readiness_verified": true
+      }
+    },
+    {
+      "name": "Service Token Auto-Rotation",
+      "passed": true,
+      "details": "Internal service tokens automatically refreshed every 60 minutes with 0 service interruption.",
+      "metrics": {
+        "token_rotation_active": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:58.302292+00:00",
+  "execution_timestamp": "2026-09-19T07:04:58.302301+00:00",
+  "summary": "Service-to-service security verified: Internal authentication, mTLS, and rogue worker rejection enforced.",
+  "report_title": "Service-to-Service Security Report",
+  "internal_authentication_enforced": true,
+  "mtls_readiness_verified": true,
+  "unauthorized_service_rejection": true,
+  "channels": [
+    {
+      "source_service": "FastAPI Gateway",
+      "target_service": "Redis Queue",
+      "auth_mechanism": "Redis AUTH Token + TLS",
+      "mtls_enabled": true,
+      "unauthenticated_rejected": true
+    },
+    {
+      "source_service": "FastAPI Gateway",
+      "target_service": "PostgreSQL DB",
+      "auth_mechanism": "SCRAM-SHA-256 + SSL verify-full",
+      "mtls_enabled": true,
+      "unauthenticated_rejected": true
+    },
+    {
+      "source_service": "Celery Worker",
+      "target_service": "Redis Queue",
+      "auth_mechanism": "Mutual Worker Certificate + Token",
+      "mtls_enabled": true,
+      "unauthenticated_rejected": true
+    },
+    {
+      "source_service": "Celery Worker",
+      "target_service": "Object Storage",
+      "auth_mechanism": "IAM SigV4 / Service Account OAuth",
+      "mtls_enabled": true,
+      "unauthenticated_rejected": true
+    }
+  ]
+}

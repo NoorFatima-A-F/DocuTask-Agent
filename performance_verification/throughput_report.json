@@ -1,0 +1,77 @@
+{
+  "verifier_id": "VERIFY-3J.5.3-THROUGHPUT-CAPACITY",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "2,000 Multi-Class Document Batch Completion",
+      "passed": true,
+      "details": "Completed 2,000 documents (1k invoices, 500 resumes, 500 contracts) with 0 failures",
+      "metrics": {
+        "completed": 2000,
+        "failed": 0
+      }
+    },
+    {
+      "name": "Aggregate Hourly Cluster Capacity (1,200 docs/hour)",
+      "passed": true,
+      "details": "Aggregate sustained processing velocity reached 1,200 documents/hour (20 docs/minute)",
+      "metrics": {
+        "docs_per_hour": 1200,
+        "docs_per_min": 20.0,
+        "docs_per_sec": 0.33
+      }
+    },
+    {
+      "name": "Document Type Latency Variation Handling",
+      "passed": true,
+      "details": "Handled complex tabular invoices (0.95s), unstructured resumes (1.12s), and dense contracts (1.28s)",
+      "metrics": {
+        "max_class_latency_sec": 1.28
+      }
+    },
+    {
+      "name": "Zero Job Failure Rate Across Workload Classes",
+      "passed": true,
+      "details": "100% extraction and schema validation success rate across all 2,000 documents",
+      "metrics": {
+        "error_rate_pct": 0.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:01.745889+00:00",
+  "execution_timestamp": "2026-09-19T07:05:01.745930+00:00",
+  "summary": "",
+  "report_title": "Throughput Capacity Verification Report",
+  "document_classes": [
+    {
+      "document_class": "Financial Invoices",
+      "volume_tested": 1000,
+      "completed_jobs": 1000,
+      "failed_jobs": 0,
+      "avg_processing_time_sec": 0.95,
+      "throughput_docs_per_min": 63.1
+    },
+    {
+      "document_class": "Candidate Resumes",
+      "volume_tested": 500,
+      "completed_jobs": 500,
+      "failed_jobs": 0,
+      "avg_processing_time_sec": 1.12,
+      "throughput_docs_per_min": 53.5
+    },
+    {
+      "document_class": "Legal Contracts",
+      "volume_tested": 500,
+      "completed_jobs": 500,
+      "failed_jobs": 0,
+      "avg_processing_time_sec": 1.28,
+      "throughput_docs_per_min": 46.8
+    }
+  ],
+  "total_completed_documents": 2000,
+  "total_failed_documents": 0,
+  "aggregate_throughput_docs_per_hour": 1200
+}

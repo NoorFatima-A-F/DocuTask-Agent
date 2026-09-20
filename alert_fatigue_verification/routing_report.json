@@ -1,0 +1,35 @@
+{
+  "total_routing_policies": 4,
+  "policies": [
+    {
+      "alert_type": "database_outage",
+      "owning_team": "Database Reliability Team",
+      "priority": "P1",
+      "escalation_timeout_minutes": 5,
+      "verified": true
+    },
+    {
+      "alert_type": "ai_provider_degradation",
+      "owning_team": "AI Platform Reliability Team",
+      "priority": "P2",
+      "escalation_timeout_minutes": 10,
+      "verified": true
+    },
+    {
+      "alert_type": "worker_capacity_failure",
+      "owning_team": "Agent Runtime Operations",
+      "priority": "P1",
+      "escalation_timeout_minutes": 5,
+      "verified": true
+    },
+    {
+      "alert_type": "security_anomaly",
+      "owning_team": "SecOps Incident Response",
+      "priority": "P1",
+      "escalation_timeout_minutes": 0,
+      "verified": true
+    }
+  ],
+  "routing_accuracy_percentage": 100.0,
+  "status": "PASS"
+}

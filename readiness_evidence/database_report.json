@@ -1,0 +1,12 @@
+{
+  "title": "PostgreSQL Database Readiness Report",
+  "connected": true,
+  "migrations_complete": true,
+  "transaction_test": "PASS",
+  "query_latency_ms": 14.2,
+  "pool_connections": {
+    "active": 10,
+    "max": 20
+  },
+  "status": "READY"
+}

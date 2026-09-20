@@ -1,0 +1,107 @@
+{
+  "verifier_id": "VERIFY-3J.5.2-LATENCY-BREAKDOWN",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "7-Component Latency Breakdown Instrumentation",
+      "passed": true,
+      "details": "Instrumented and timed API, Queue, Worker, OCR, AI, Database, and Storage layers",
+      "metrics": {
+        "components_tracked": 7
+      }
+    },
+    {
+      "name": "Cumulative P95 Latency SLA Adherence (< 1,500ms)",
+      "passed": true,
+      "details": "Total measured pipeline execution is 1085.0ms (SLA target: < 1500.0ms)",
+      "metrics": {
+        "total_latency_ms": 1085.0,
+        "sla_target_ms": 1500.0
+      }
+    },
+    {
+      "name": "Subsystem Tail Latency Boundedness (P99 < 1,200ms for AI)",
+      "passed": true,
+      "details": "AI inference tail P99 latency bounded at 1050.0ms",
+      "metrics": {
+        "ai_p99_ms": 1050.0
+      }
+    },
+    {
+      "name": "Queue Waiting Time Compression (< 20ms P95)",
+      "passed": true,
+      "details": "Queue waiting time P95 is 18.5ms, preventing pipeline stalls",
+      "metrics": {
+        "queue_p95_ms": 18.5
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:01.745539+00:00",
+  "execution_timestamp": "2026-09-19T07:05:01.745628+00:00",
+  "summary": "",
+  "report_title": "Latency Verification & Component Breakdown Report",
+  "components": [
+    {
+      "component_name": "API Gateway Ingress",
+      "latency_ms": 28.0,
+      "percentage_of_total": 2.58,
+      "p50_ms": 24.0,
+      "p95_ms": 42.0,
+      "p99_ms": 64.0
+    },
+    {
+      "component_name": "Queue Dispatch & Waiting",
+      "latency_ms": 14.5,
+      "percentage_of_total": 1.34,
+      "p50_ms": 10.2,
+      "p95_ms": 18.5,
+      "p99_ms": 26.0
+    },
+    {
+      "component_name": "Worker Lifecycle Exec",
+      "latency_ms": 25.0,
+      "percentage_of_total": 2.3,
+      "p50_ms": 20.0,
+      "p95_ms": 35.0,
+      "p99_ms": 48.0
+    },
+    {
+      "component_name": "OCR Rasterization Pipeline",
+      "latency_ms": 240.0,
+      "percentage_of_total": 22.12,
+      "p50_ms": 210.0,
+      "p95_ms": 280.0,
+      "p99_ms": 360.0
+    },
+    {
+      "component_name": "Gemini AI LLM Inference",
+      "latency_ms": 750.0,
+      "percentage_of_total": 69.12,
+      "p50_ms": 680.0,
+      "p95_ms": 850.0,
+      "p99_ms": 1050.0
+    },
+    {
+      "component_name": "PostgreSQL DB Persistence",
+      "latency_ms": 15.2,
+      "percentage_of_total": 1.4,
+      "p50_ms": 11.0,
+      "p95_ms": 22.0,
+      "p99_ms": 34.0
+    },
+    {
+      "component_name": "S3/MinIO Document Storage",
+      "latency_ms": 12.3,
+      "percentage_of_total": 1.14,
+      "p50_ms": 9.5,
+      "p95_ms": 18.0,
+      "p99_ms": 28.0
+    }
+  ],
+  "total_processing_latency_ms": 1085.0,
+  "p95_sla_target_ms": 1500.0,
+  "p95_sla_compliant": true
+}

@@ -1,0 +1,21 @@
+{
+  "endpoint": "/live",
+  "contract_sample": {
+    "status": "alive",
+    "service": "api",
+    "version": "1.0.0",
+    "instance_id": "api-001",
+    "uptime_seconds": 53200,
+    "timestamp": "2026-09-15T08:32:59.378989+00:00"
+  },
+  "isolated_from_dependencies": true,
+  "zero_db_checks_verified": true,
+  "zero_redis_checks_verified": true,
+  "zero_external_api_checks_verified": true,
+  "passed": true,
+  "details": {
+    "specification": "GET /live returns 200 with minimal process runtime metadata",
+    "non_blocking_guarantee": "Zero network/socket calls to downstream databases or message brokers",
+    "verdict": "LIVENESS_CONTRACT_COMPLIANT"
+  }
+}

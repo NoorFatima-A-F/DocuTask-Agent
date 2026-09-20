@@ -1,0 +1,82 @@
+{
+  "verifier_id": "VERIFY-5K-LONG-RUNNING",
+  "name": "Long-Running Workflow, Checkpoint Persistence & State Continuity Verifier",
+  "status": "PASSED",
+  "score": 100.0,
+  "max_duration_simulated": "30 Days",
+  "checkpoint_integrity_pct": 100.0,
+  "resume_after_crash_verified": true,
+  "checkpoints": [
+    {
+      "checkpoint_id": "CP-1-HOUR",
+      "elapsed_time_simulated": "1 Hour",
+      "state_valid": true,
+      "resumed_cleanly": true
+    },
+    {
+      "checkpoint_id": "CP-24-HOURS",
+      "elapsed_time_simulated": "24 Hours",
+      "state_valid": true,
+      "resumed_cleanly": true
+    },
+    {
+      "checkpoint_id": "CP-7-DAYS",
+      "elapsed_time_simulated": "7 Days",
+      "state_valid": true,
+      "resumed_cleanly": true
+    },
+    {
+      "checkpoint_id": "CP-30-DAYS",
+      "elapsed_time_simulated": "30 Days",
+      "state_valid": true,
+      "resumed_cleanly": true
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-5K-01",
+      "name": "Multi-Day Asynchronous State Durability",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Workflow checkpoints verified durable across 30 days of simulated elapsed time",
+      "details": {
+        "max_duration_simulated": "30 Days"
+      },
+      "timestamp": "2026-09-16T19:26:20.439376+00:00"
+    },
+    {
+      "check_id": "CHK-5K-02",
+      "name": "Cold-Restart State Resumption",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Simulated total process restart; workflow resumed from exact checkpoint without loss",
+      "details": {
+        "resume_verified": true
+      },
+      "timestamp": "2026-09-16T19:26:20.439380+00:00"
+    },
+    {
+      "check_id": "CHK-5K-03",
+      "name": "Approval & Human Interaction Continuity",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Pending human review requests remained valid and actionable across long delay intervals",
+      "details": {
+        "approval_continuity_verified": true
+      },
+      "timestamp": "2026-09-16T19:26:20.439384+00:00"
+    },
+    {
+      "check_id": "CHK-5K-04",
+      "name": "Memory & Context Compaction for Long Horizons",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Long-horizon memory summarized efficiently without unbounded token context growth",
+      "details": {
+        "checkpoint_integrity_pct": 100.0
+      },
+      "timestamp": "2026-09-16T19:26:20.439389+00:00"
+    }
+  ],
+  "timestamp": "2026-09-16T19:26:20.439393+00:00"
+}

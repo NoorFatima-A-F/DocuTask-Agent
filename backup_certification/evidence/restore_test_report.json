@@ -1,0 +1,12 @@
+{
+  "restore_success": true,
+  "duration_seconds": 420.0,
+  "rto_target_seconds": 2700.0,
+  "measured_rto_minutes": 7.0,
+  "measured_rpo_minutes": 2.5,
+  "data_verified": true,
+  "accuracy_percent": 100.0,
+  "schema_integrity_checked": true,
+  "row_count_matched": true,
+  "dependency_recovery_passed": true
+}

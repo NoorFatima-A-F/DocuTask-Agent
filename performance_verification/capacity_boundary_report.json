@@ -1,0 +1,54 @@
+{
+  "verifier_id": "VERIFY-3J.6.12-CAP-BOUNDARY",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "DPH Capacity Meets Enterprise Target (≥1000)",
+      "passed": true,
+      "details": "Maximum sustainable throughput: 3200 documents/hour (target: ≥1000)",
+      "metrics": {
+        "max_dph": 3200,
+        "target": 1000
+      }
+    },
+    {
+      "name": "Concurrent User Capacity (≥500)",
+      "passed": true,
+      "details": "Maximum concurrent users supported: 2000 (target: ≥500)",
+      "metrics": {
+        "max_users": 2000,
+        "target": 500
+      }
+    },
+    {
+      "name": "Worker Scaling Boundary Identified",
+      "passed": true,
+      "details": "Maximum effective worker count: 84 before diminishing returns",
+      "metrics": {
+        "max_workers": 84
+      }
+    },
+    {
+      "name": "Operating Envelope Documented",
+      "passed": true,
+      "details": "Full operating envelope: 3200 DPH, 2000 users, 84 workers, 15000 queue depth, 100 DB connections",
+      "metrics": {
+        "queue_depth": 15000,
+        "db_connections": 100
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:02.153610+00:00",
+  "execution_timestamp": "2026-09-19T07:05:02.153670+00:00",
+  "summary": "",
+  "report_title": "Capacity Limit Discovery & Boundary Specification Report",
+  "max_sustainable_dph": 3200,
+  "max_concurrent_users": 2000,
+  "max_worker_count": 84,
+  "max_queue_depth_safe": 15000,
+  "max_database_connections_safe": 100,
+  "operating_envelope_defined": true
+}

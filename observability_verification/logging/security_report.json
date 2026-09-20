@@ -1,0 +1,51 @@
+{
+  "report_title": "Logging Security & Sensitive Information Masking Report",
+  "secrets_prevented": true,
+  "pii_masked": true,
+  "medical_data_protected": true,
+  "masking_rules": [
+    {
+      "data_category": "CNIC",
+      "pattern": "\\d{5}-\\d{7}-\\d",
+      "sample_raw": "42101-1234567-1",
+      "sample_masked": "****-*******-1",
+      "masking_verified": true
+    },
+    {
+      "data_category": "Email",
+      "pattern": "[\\w\\.-]+@[\\w\\.-]+",
+      "sample_raw": "patient@hospital.org",
+      "sample_masked": "p****t@hospital.org",
+      "masking_verified": true
+    },
+    {
+      "data_category": "Phone",
+      "pattern": "\\+?\\d{10,13}",
+      "sample_raw": "+923001234567",
+      "sample_masked": "+92300****567",
+      "masking_verified": true
+    },
+    {
+      "data_category": "API Keys",
+      "pattern": "AIza[0-9A-Za-z-_]{35}",
+      "sample_raw": "AIzaSyA8samplekey1234567890abcdefghij",
+      "sample_masked": "AIza*********************************",
+      "masking_verified": true
+    },
+    {
+      "data_category": "Passwords",
+      "pattern": "password=[^&\\s]+",
+      "sample_raw": "password=SecretPass123!",
+      "sample_masked": "password=[REDACTED]",
+      "masking_verified": true
+    },
+    {
+      "data_category": "JWT Tokens",
+      "pattern": "Bearer eyJ[a-zA-Z0-9\\._-]+",
+      "sample_raw": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "sample_masked": "Bearer [REDACTED_JWT]",
+      "masking_verified": true
+    }
+  ],
+  "security_score_pct": 100.0
+}

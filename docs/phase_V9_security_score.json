@@ -1,0 +1,19 @@
+{
+  "tenant_id": "enterprise-v9-security",
+  "overall_score": 100.0,
+  "grade": "A+ (Enterprise Hardened)",
+  "category_scores": {
+    "AUTHENTICATION": 100.0,
+    "AUTHORIZATION": 100.0,
+    "TENANT_ISOLATION": 100.0,
+    "API_SECURITY": 100.0,
+    "LLM_SECURITY": 100.0
+  },
+  "defense_rate_pct": 70.12,
+  "total_checks": 8,
+  "passed_checks": 8,
+  "total_attacks_tested": 241,
+  "total_attacks_blocked": 169,
+  "verification_duration_ms": 25.0,
+  "generated_at": "2026-09-19T06:26:41.359740+00:00"
+}

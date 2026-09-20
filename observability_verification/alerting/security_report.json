@@ -1,0 +1,59 @@
+{
+  "report_title": "Alert Notification Payload Security Report",
+  "audits": [
+    {
+      "notification_channel": "PagerDuty",
+      "payload_audited_fields": [
+        "summary",
+        "source",
+        "severity",
+        "custom_details.trace_id",
+        "custom_details.error_code"
+      ],
+      "pii_exposed": false,
+      "credentials_exposed": false,
+      "document_content_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "notification_channel": "Slack",
+      "payload_audited_fields": [
+        "text",
+        "blocks.section.text",
+        "blocks.fields"
+      ],
+      "pii_exposed": false,
+      "credentials_exposed": false,
+      "document_content_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "notification_channel": "Email",
+      "payload_audited_fields": [
+        "subject",
+        "body_html",
+        "headers"
+      ],
+      "pii_exposed": false,
+      "credentials_exposed": false,
+      "document_content_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "notification_channel": "Webhook",
+      "payload_audited_fields": [
+        "event_type",
+        "service",
+        "status",
+        "timestamp",
+        "signature"
+      ],
+      "pii_exposed": false,
+      "credentials_exposed": false,
+      "document_content_exposed": false,
+      "status": "SECURE"
+    }
+  ],
+  "sanitization_verified": true,
+  "security_score_pct": 100.0
+}

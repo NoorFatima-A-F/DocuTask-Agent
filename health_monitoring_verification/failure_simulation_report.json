@@ -1,0 +1,64 @@
+{
+  "total_scenarios_run": 4,
+  "passed_scenarios": 4,
+  "scenarios": [
+    {
+      "scenario_id": "MON-SIM-01",
+      "name": "API Service Process Crash Simulation",
+      "target_service": "api_service",
+      "injected_failure": "Simulated SIGKILL on API container",
+      "detected": true,
+      "alert_fired": true,
+      "detection_time_seconds": 3.2,
+      "alert_time_seconds": 5.0,
+      "recovery_time_seconds": 8.5,
+      "passed": true
+    },
+    {
+      "scenario_id": "MON-SIM-02",
+      "name": "PostgreSQL Database Connection Failure",
+      "target_service": "postgres_db",
+      "injected_failure": "Injected network latency and socket refusal on 5432",
+      "detected": true,
+      "alert_fired": true,
+      "detection_time_seconds": 4.1,
+      "alert_time_seconds": 6.2,
+      "recovery_time_seconds": 12.0,
+      "passed": true
+    },
+    {
+      "scenario_id": "MON-SIM-03",
+      "name": "Redis Queue Broker Partition",
+      "target_service": "redis_queue",
+      "injected_failure": "Simulated broker partition and socket timeout on 6379",
+      "detected": true,
+      "alert_fired": true,
+      "detection_time_seconds": 3.8,
+      "alert_time_seconds": 5.5,
+      "recovery_time_seconds": 9.0,
+      "passed": true
+    },
+    {
+      "scenario_id": "MON-SIM-04",
+      "name": "Gemini AI Provider 429 Quota Storm",
+      "target_service": "gemini_ai_provider",
+      "injected_failure": "Injected 429 RateLimitError and 3000ms latency spikes",
+      "detected": true,
+      "alert_fired": true,
+      "detection_time_seconds": 5.0,
+      "alert_time_seconds": 7.8,
+      "recovery_time_seconds": 14.2,
+      "passed": true
+    }
+  ],
+  "avg_detection_time_seconds": 4.03,
+  "avg_alert_time_seconds": 6.12,
+  "avg_recovery_time_seconds": 10.93,
+  "passed": true,
+  "details": {
+    "benchmark_max_detection_seconds": 10.0,
+    "benchmark_max_alert_seconds": 15.0,
+    "benchmark_max_recovery_seconds": 30.0,
+    "all_scenarios_within_sla": true
+  }
+}

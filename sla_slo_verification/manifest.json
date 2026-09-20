@@ -1,0 +1,155 @@
+{
+  "system": "DocuTask Agent",
+  "version": "3.10.0",
+  "commit": "HEAD",
+  "environment": "Enterprise Production SRE",
+  "timestamp": "2026-09-19T07:05:08.226533+00:00",
+  "overall_score": 100.0,
+  "certification_tier": "Enterprise Performance Reliability Ready",
+  "files": [
+    {
+      "filename": "alert_report.json",
+      "report_title": "Alert Report",
+      "sha256": "349aa37d24805559889fce1a2ffd6de2004ea6dbc8d86738825122ec2c42a638",
+      "size_bytes": 3264
+    },
+    {
+      "filename": "continuous_monitoring_report.json",
+      "report_title": "Continuous Monitoring Report",
+      "sha256": "ea378d1c7cdc49e68f0f09679127034a147b9fde0e9f99b350394cb967f0e489",
+      "size_bytes": 3211
+    },
+    {
+      "filename": "dashboard_report.json",
+      "report_title": "Dashboard Report",
+      "sha256": "eca5699fbb8b32c62e47995d2e0b28878424dad60b201441fecc0677daf210be",
+      "size_bytes": 3552
+    },
+    {
+      "filename": "dashboard_validation_report.json",
+      "report_title": "Dashboard Validation Report",
+      "sha256": "eca5699fbb8b32c62e47995d2e0b28878424dad60b201441fecc0677daf210be",
+      "size_bytes": 3552
+    },
+    {
+      "filename": "endurance_performance_report.json",
+      "report_title": "Endurance Performance Report",
+      "sha256": "b114050bd0dcbf54e06f5330f4b33efdfc7819ccc595250d1f21fd7e076cd8f2",
+      "size_bytes": 3054
+    },
+    {
+      "filename": "endurance_report.json",
+      "report_title": "Endurance Report",
+      "sha256": "b114050bd0dcbf54e06f5330f4b33efdfc7819ccc595250d1f21fd7e076cd8f2",
+      "size_bytes": 3054
+    },
+    {
+      "filename": "error_budget.json",
+      "report_title": "Error Budget",
+      "sha256": "a8442e5fbdcd0d33622cdec387a38802429fd7276d6f3643ed379f6befcfedae",
+      "size_bytes": 3017
+    },
+    {
+      "filename": "error_budget_report.json",
+      "report_title": "Error Budget Report",
+      "sha256": "a8442e5fbdcd0d33622cdec387a38802429fd7276d6f3643ed379f6befcfedae",
+      "size_bytes": 3017
+    },
+    {
+      "filename": "incident_report.json",
+      "report_title": "Incident Report",
+      "sha256": "624e8481e717bb0b8211574ad900149937b2473567ee3e8da0aabacc7d9e0f78",
+      "size_bytes": 3778
+    },
+    {
+      "filename": "monitoring_report.json",
+      "report_title": "Monitoring Report",
+      "sha256": "ea378d1c7cdc49e68f0f09679127034a147b9fde0e9f99b350394cb967f0e489",
+      "size_bytes": 3211
+    },
+    {
+      "filename": "performance_alert_report.json",
+      "report_title": "Performance Alert Report",
+      "sha256": "349aa37d24805559889fce1a2ffd6de2004ea6dbc8d86738825122ec2c42a638",
+      "size_bytes": 3264
+    },
+    {
+      "filename": "performance_governance_report.json",
+      "report_title": "Performance Governance Report",
+      "sha256": "30864f3ce8f0cd9291052f8042f9496dabe5270f3c501b6e20760fbcdae2b5ce",
+      "size_bytes": 2688
+    },
+    {
+      "filename": "performance_incident_report.json",
+      "report_title": "Performance Incident Report",
+      "sha256": "624e8481e717bb0b8211574ad900149937b2473567ee3e8da0aabacc7d9e0f78",
+      "size_bytes": 3778
+    },
+    {
+      "filename": "performance_pipeline_report.json",
+      "report_title": "Performance Pipeline Report",
+      "sha256": "fde0dc85b34fd57a58ca8a4e57e7b9b882f2458e9456265a16e0f45179a87c02",
+      "size_bytes": 3951
+    },
+    {
+      "filename": "performance_recovery_report.json",
+      "report_title": "Performance Recovery Report",
+      "sha256": "937bf6c00cc5356eb38492b85ac107319863dd2867faf2d9eb367cf18680d399",
+      "size_bytes": 3120
+    },
+    {
+      "filename": "performance_reliability_scorecard.json",
+      "report_title": "Performance Reliability Scorecard",
+      "sha256": "c7319693d8aa40e693753f938951a008975b59751327511dc76756aefc53fdef",
+      "size_bytes": 1700
+    },
+    {
+      "filename": "recovery_report.json",
+      "report_title": "Recovery Report",
+      "sha256": "937bf6c00cc5356eb38492b85ac107319863dd2867faf2d9eb367cf18680d399",
+      "size_bytes": 3120
+    },
+    {
+      "filename": "regression_detection_report.json",
+      "report_title": "Regression Detection Report",
+      "sha256": "c03dd78ffc49073a88bd1d684c9038f048ee22eb360f79e61ddd213c6b566898",
+      "size_bytes": 2970
+    },
+    {
+      "filename": "regression_report.json",
+      "report_title": "Regression Report",
+      "sha256": "c03dd78ffc49073a88bd1d684c9038f048ee22eb360f79e61ddd213c6b566898",
+      "size_bytes": 2970
+    },
+    {
+      "filename": "scorecard.json",
+      "report_title": "Scorecard",
+      "sha256": "c7319693d8aa40e693753f938951a008975b59751327511dc76756aefc53fdef",
+      "size_bytes": 1700
+    },
+    {
+      "filename": "sla_definition.json",
+      "report_title": "Sla Definition",
+      "sha256": "f2939f51dfbbde3863c694df67e011a4389b03e6c93704c68962597883cf3b12",
+      "size_bytes": 3310
+    },
+    {
+      "filename": "sla_definition_report.json",
+      "report_title": "Sla Definition Report",
+      "sha256": "f2939f51dfbbde3863c694df67e011a4389b03e6c93704c68962597883cf3b12",
+      "size_bytes": 3310
+    },
+    {
+      "filename": "slo_configuration_report.json",
+      "report_title": "Slo Configuration Report",
+      "sha256": "dd03e04b58d3ba37852b8fb0a98bf3c7cadb1d5d6e9f2848eeb5e0d64236b33f",
+      "size_bytes": 3095
+    },
+    {
+      "filename": "slo_report.json",
+      "report_title": "Slo Report",
+      "sha256": "dd03e04b58d3ba37852b8fb0a98bf3c7cadb1d5d6e9f2848eeb5e0d64236b33f",
+      "size_bytes": 3095
+    }
+  ]
+}

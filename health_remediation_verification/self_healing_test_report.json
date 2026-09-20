@@ -1,0 +1,72 @@
+{
+  "total_scenarios": 5,
+  "passed_scenarios": 5,
+  "scenarios": [
+    {
+      "scenario_id": "SCEN-01-WORKER-CRASH",
+      "name": "Worker Crash Autonomous Recovery",
+      "injected_failure": "SIGKILL sent to celery_worker_01 process",
+      "detected_cause": "worker_heartbeat_missing",
+      "executed_action": "restart_worker_container",
+      "action_level": "Level 2 - Controlled Recovery",
+      "health_transition": "UNHEALTHY -> RECOVERING -> HEALTHY",
+      "validated": true,
+      "rollback_tested": false,
+      "duration_seconds": 2.8,
+      "passed": true
+    },
+    {
+      "scenario_id": "SCEN-02-DB-POOL",
+      "name": "Database Connection Pool Exhaustion Recovery",
+      "injected_failure": "Simulated 100 hung idle connections exhausting max_pool_size",
+      "detected_cause": "database_connection_exhausted",
+      "executed_action": "restart_connection_pool",
+      "action_level": "Level 1 - Auto Safe Action",
+      "health_transition": "UNHEALTHY -> RECOVERING -> HEALTHY",
+      "validated": true,
+      "rollback_tested": false,
+      "duration_seconds": 1.2,
+      "passed": true
+    },
+    {
+      "scenario_id": "SCEN-03-QUEUE-SURGE",
+      "name": "Async Job Queue Surge Autoscale Recovery",
+      "injected_failure": "Burst injection of 5,000 PDF document processing jobs",
+      "detected_cause": "redis_queue_backlog",
+      "executed_action": "scale_queue_workers",
+      "action_level": "Level 2 - Controlled Recovery",
+      "health_transition": "DEGRADED -> RECOVERING -> HEALTHY",
+      "validated": true,
+      "rollback_tested": false,
+      "duration_seconds": 3.4,
+      "passed": true
+    },
+    {
+      "scenario_id": "SCEN-04-AI-FALLBACK",
+      "name": "AI Provider HTTP 503 Fallback Activation",
+      "injected_failure": "External Gemini API endpoint returning HTTP 503 Service Unavailable",
+      "detected_cause": "gemini_api_503_outage",
+      "executed_action": "activate_fallback_provider",
+      "action_level": "Level 1 - Auto Safe Action",
+      "health_transition": "DEGRADED -> RECOVERING -> HEALTHY",
+      "validated": true,
+      "rollback_tested": false,
+      "duration_seconds": 1.5,
+      "passed": true
+    },
+    {
+      "scenario_id": "SCEN-05-REMEDIATION-FAIL",
+      "name": "Remediation Failure, Safe Rollback & SRE Escalation",
+      "injected_failure": "Persistent node kernel fault preventing container launch",
+      "detected_cause": "node_hardware_fault",
+      "executed_action": "rollback_and_escalate_to_sre",
+      "action_level": "Level 3 - Human Approval Required",
+      "health_transition": "UNHEALTHY -> FAILED_RECOVERY -> ESCALATED",
+      "validated": true,
+      "rollback_tested": true,
+      "duration_seconds": 2.1,
+      "passed": true
+    }
+  ],
+  "status": "PASS"
+}

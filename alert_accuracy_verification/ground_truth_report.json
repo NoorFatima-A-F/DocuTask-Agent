@@ -1,0 +1,9 @@
+{
+  "total_evaluations": 198,
+  "true_positives": 96,
+  "false_positives": 2,
+  "false_negatives": 2,
+  "true_negatives": 98,
+  "overall_accuracy_percentage": 97.98,
+  "status": "PASS"
+}

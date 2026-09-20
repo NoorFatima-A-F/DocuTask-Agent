@@ -1,0 +1,66 @@
+{
+  "total_fields_audited": 8,
+  "public_fields": 1,
+  "internal_fields": 2,
+  "confidential_fields": 1,
+  "restricted_fields": 4,
+  "items": [
+    {
+      "field_name": "docutask.service.status",
+      "telemetry_type": "metric",
+      "classification": "PUBLIC",
+      "allowed_in_observability": true,
+      "sanitization_required": false
+    },
+    {
+      "field_name": "document_id",
+      "telemetry_type": "log",
+      "classification": "INTERNAL",
+      "allowed_in_observability": true,
+      "sanitization_required": false
+    },
+    {
+      "field_name": "processing_duration_ms",
+      "telemetry_type": "metric",
+      "classification": "INTERNAL",
+      "allowed_in_observability": true,
+      "sanitization_required": false
+    },
+    {
+      "field_name": "user_email",
+      "telemetry_type": "log",
+      "classification": "CONFIDENTIAL",
+      "allowed_in_observability": false,
+      "sanitization_required": true
+    },
+    {
+      "field_name": "document_extracted_text",
+      "telemetry_type": "log",
+      "classification": "RESTRICTED",
+      "allowed_in_observability": false,
+      "sanitization_required": true
+    },
+    {
+      "field_name": "authorization_header_jwt",
+      "telemetry_type": "trace",
+      "classification": "RESTRICTED",
+      "allowed_in_observability": false,
+      "sanitization_required": true
+    },
+    {
+      "field_name": "llm_prompt_raw_text",
+      "telemetry_type": "trace",
+      "classification": "RESTRICTED",
+      "allowed_in_observability": false,
+      "sanitization_required": true
+    },
+    {
+      "field_name": "database_password",
+      "telemetry_type": "log",
+      "classification": "RESTRICTED",
+      "allowed_in_observability": false,
+      "sanitization_required": true
+    }
+  ],
+  "classification_policy_passed": true
+}

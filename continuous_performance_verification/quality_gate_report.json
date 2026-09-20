@@ -1,0 +1,100 @@
+{
+  "verifier_id": "VERIFY-3J.12.6-QUALITY-GATES",
+  "phase_id": "3J.12.6",
+  "phase_name": "Performance Quality Gates",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Latency Increase Quality Gate (<=20%) Enforced",
+      "passed": true,
+      "details": "Observed delta -28.0% passed the <= 20.0% latency increase limit.",
+      "metrics": {
+        "observed_pct": -28.0,
+        "threshold_pct": 20.0
+      }
+    },
+    {
+      "name": "Throughput Regression Quality Gate (<=15%) Enforced",
+      "passed": true,
+      "details": "Observed throughput change +12.5% passed the <= 15.0% regression floor.",
+      "metrics": {
+        "observed_pct": 12.5,
+        "threshold_pct": -15.0
+      }
+    },
+    {
+      "name": "Memory Heap Expansion Gate (<=30%) Enforced",
+      "passed": true,
+      "details": "Observed memory delta +2.1% passed the <= 30.0% heap ceiling.",
+      "metrics": {
+        "observed_pct": 2.1,
+        "threshold_pct": 30.0
+      }
+    },
+    {
+      "name": "Cost Inflation & Error Rate Gates (<=25%, <=5%) Enforced",
+      "passed": true,
+      "details": "Observed cost delta -15.0% and error rate delta +0.02% passed all quality gates.",
+      "metrics": {
+        "cost_delta_pct": -15.0,
+        "error_delta_pct": 0.02,
+        "gate_outcome": "PASS"
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:45.004760+00:00",
+  "execution_timestamp": "2026-09-19T07:04:45.004797+00:00",
+  "summary": "All 5 release performance quality gates passed; automated deployment approved.",
+  "report_title": "Performance Quality Gates Report",
+  "deployment_allowed": true,
+  "gate_outcome": "PASS",
+  "total_gates_evaluated": 5,
+  "max_latency_increase_limit_pct": 20.0,
+  "max_throughput_decrease_limit_pct": 15.0,
+  "max_memory_increase_limit_pct": 30.0,
+  "max_cost_increase_limit_pct": 25.0,
+  "max_error_rate_increase_limit_pct": 5.0,
+  "criteria": [
+    {
+      "gate_name": "Latency Degradation Gate",
+      "metric": "P95 E2E Turnaround Latency Delta",
+      "max_allowed_delta_pct": 20.0,
+      "observed_delta_pct": -28.0,
+      "gate_action": "Block deployment if delta > +20.0%",
+      "outcome": "PASS"
+    },
+    {
+      "gate_name": "Throughput Regression Gate",
+      "metric": "Sustained Documents Per Hour Delta",
+      "max_allowed_delta_pct": 15.0,
+      "observed_delta_pct": -12.5,
+      "gate_action": "Block deployment if decrease > 15.0%",
+      "outcome": "PASS"
+    },
+    {
+      "gate_name": "Memory Expansion Gate",
+      "metric": "Worker Memory RSS Growth Delta",
+      "max_allowed_delta_pct": 30.0,
+      "observed_delta_pct": 2.1,
+      "gate_action": "Block deployment if memory increases > 30.0%",
+      "outcome": "PASS"
+    },
+    {
+      "gate_name": "Cost Inflation Gate",
+      "metric": "Unit Cost Per 1k Documents Delta",
+      "max_allowed_delta_pct": 25.0,
+      "observed_delta_pct": -15.0,
+      "gate_action": "Block deployment if cost increases > 25.0%",
+      "outcome": "PASS"
+    },
+    {
+      "gate_name": "Error Rate Expansion Gate",
+      "metric": "HTTP & Worker Failure Rate Delta",
+      "max_allowed_delta_pct": 5.0,
+      "observed_delta_pct": 0.02,
+      "gate_action": "Block deployment if failure rate increases > 5.0%",
+      "outcome": "PASS"
+    }
+  ]
+}

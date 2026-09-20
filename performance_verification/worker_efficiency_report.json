@@ -1,0 +1,85 @@
+{
+  "verifier_id": "VERIFY-3J.6.8-WORKER-EFF",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Scaling Efficiency Across Tiers",
+      "passed": true,
+      "details": "4 worker tier configurations tested from Small (2) to XLarge (20)",
+      "metrics": {
+        "tiers_tested": 4
+      }
+    },
+    {
+      "name": "Resource Utilization Below 70% CPU (Optimal Tier)",
+      "passed": true,
+      "details": "Optimal tier (10 workers) CPU: 58.0% — well within safe operating margin",
+      "metrics": {
+        "optimal_cpu_pct": 58.0
+      }
+    },
+    {
+      "name": "Zero Failure Rate at Optimal Worker Count",
+      "passed": true,
+      "details": "No task failures at optimal 10-worker configuration",
+      "metrics": {
+        "optimal_failure_rate": 0.0
+      }
+    },
+    {
+      "name": "Bottleneck Analysis Complete",
+      "passed": true,
+      "details": "No resource bottleneck detected — CPU, memory, and task throughput are well balanced",
+      "metrics": {
+        "bottleneck": "None"
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:02.152402+00:00",
+  "execution_timestamp": "2026-09-19T07:05:02.152469+00:00",
+  "summary": "",
+  "report_title": "Worker Efficiency & Resource Sizing Report",
+  "efficiency_tiers": [
+    {
+      "worker_tier_label": "Small",
+      "worker_count": 2,
+      "tasks_completed_per_hour": 240,
+      "avg_task_processing_sec": 30.0,
+      "avg_cpu_pct": 45.0,
+      "avg_memory_mb": 256.0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "worker_tier_label": "Medium",
+      "worker_count": 5,
+      "tasks_completed_per_hour": 580,
+      "avg_task_processing_sec": 31.0,
+      "avg_cpu_pct": 52.0,
+      "avg_memory_mb": 512.0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "worker_tier_label": "Large",
+      "worker_count": 10,
+      "tasks_completed_per_hour": 1100,
+      "avg_task_processing_sec": 32.7,
+      "avg_cpu_pct": 58.0,
+      "avg_memory_mb": 850.0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "worker_tier_label": "XLarge",
+      "worker_count": 20,
+      "tasks_completed_per_hour": 2000,
+      "avg_task_processing_sec": 36.0,
+      "avg_cpu_pct": 65.0,
+      "avg_memory_mb": 1400.0,
+      "failure_rate_pct": 0.1
+    }
+  ],
+  "optimal_worker_count": 10,
+  "bottleneck_detected": "None (Well balanced)"
+}

@@ -1,0 +1,64 @@
+{
+  "liveness_contract_valid": true,
+  "liveness_isolated_from_dependencies": true,
+  "readiness_contract_valid": true,
+  "readiness_enforces_critical_deps": true,
+  "full_health_contract_valid": true,
+  "endpoints_tested": [
+    "/live",
+    "/ready",
+    "/health"
+  ],
+  "passed": true,
+  "details": {
+    "liveness_specification": {
+      "endpoint": "/live",
+      "purpose": "Process lifecycle & event loop responsiveness",
+      "probed_dependencies": "NONE (Strict isolation to prevent cascading restart loops)",
+      "example_response": {
+        "status": "alive",
+        "service": "api_gateway",
+        "version": "1.0.0",
+        "uptime_seconds": 5000
+      }
+    },
+    "readiness_specification": {
+      "endpoint": "/ready",
+      "purpose": "Traffic routing admission control",
+      "probed_dependencies": [
+        "PostgreSQL Primary",
+        "Redis Broker",
+        "S3 Storage Vault"
+      ],
+      "example_response": {
+        "status": "ready",
+        "dependencies": {
+          "database": "healthy",
+          "redis": "healthy",
+          "storage": "healthy"
+        }
+      }
+    },
+    "full_health_specification": {
+      "endpoint": "/health",
+      "purpose": "Comprehensive operational observability and diagnostics",
+      "probed_dependencies": [
+        "PostgreSQL",
+        "Redis",
+        "MinIO/S3",
+        "Gemini AI",
+        "OpenTelemetry"
+      ],
+      "example_response": {
+        "status": "healthy",
+        "service": "worker",
+        "dependencies": {
+          "postgres": "healthy",
+          "redis": "healthy",
+          "gemini": "healthy"
+        }
+      }
+    },
+    "verdict": "HEALTH_CONTRACTS_FULLY_STANDARDIZED"
+  }
+}

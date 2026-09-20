@@ -1,0 +1,73 @@
+{
+  "total_services_evaluated": 5,
+  "avg_composite_score": 95.98,
+  "service_scores": [
+    {
+      "service": "api_service",
+      "availability_score": 99.8,
+      "failure_rate_score": 98.5,
+      "recovery_time_score": 96.0,
+      "incident_frequency_score": 95.0,
+      "capacity_risk_score": 94.0,
+      "security_risk_score": 100.0,
+      "composite_score": 97.85,
+      "risk_tier": "LOW"
+    },
+    {
+      "service": "worker_fleet",
+      "availability_score": 99.2,
+      "failure_rate_score": 94.0,
+      "recovery_time_score": 95.0,
+      "incident_frequency_score": 90.0,
+      "capacity_risk_score": 88.0,
+      "security_risk_score": 100.0,
+      "composite_score": 95.1,
+      "risk_tier": "LOW"
+    },
+    {
+      "service": "postgres_db",
+      "availability_score": 99.9,
+      "failure_rate_score": 97.0,
+      "recovery_time_score": 94.0,
+      "incident_frequency_score": 92.0,
+      "capacity_risk_score": 90.0,
+      "security_risk_score": 100.0,
+      "composite_score": 96.5,
+      "risk_tier": "LOW"
+    },
+    {
+      "service": "gemini_ai_provider",
+      "availability_score": 99.1,
+      "failure_rate_score": 92.0,
+      "recovery_time_score": 90.0,
+      "incident_frequency_score": 85.0,
+      "capacity_risk_score": 86.0,
+      "security_risk_score": 100.0,
+      "composite_score": 92.95,
+      "risk_tier": "MEDIUM"
+    },
+    {
+      "service": "redis_queue",
+      "availability_score": 99.95,
+      "failure_rate_score": 98.0,
+      "recovery_time_score": 98.0,
+      "incident_frequency_score": 94.0,
+      "capacity_risk_score": 92.0,
+      "security_risk_score": 100.0,
+      "composite_score": 97.5,
+      "risk_tier": "LOW"
+    }
+  ],
+  "passed": true,
+  "details": {
+    "weight_distribution": {
+      "availability": 0.25,
+      "failure_rate": 0.2,
+      "recovery_time": 0.2,
+      "incident_frequency": 0.15,
+      "capacity_risk": 0.1,
+      "security_risk": 0.1
+    },
+    "highest_risk_service": "gemini_ai_provider (92.95 / MEDIUM)"
+  }
+}

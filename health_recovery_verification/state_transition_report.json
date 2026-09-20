@@ -1,0 +1,90 @@
+{
+  "report_title": "Health State Transition Verification Report",
+  "total_transitions_evaluated": 9,
+  "valid_transitions_count": 8,
+  "invalid_transitions_rejected": 1,
+  "transitions": [
+    {
+      "transition_id": "TRANS_001",
+      "component": "API_Gateway",
+      "from_state": "UNKNOWN",
+      "to_state": "STARTING",
+      "trigger_event": "Process bootstrap initiated",
+      "is_valid_transition": true,
+      "transition_timestamp": "2026-09-19T07:05:11.721434+00:00"
+    },
+    {
+      "transition_id": "TRANS_002",
+      "component": "API_Gateway",
+      "from_state": "STARTING",
+      "to_state": "READY",
+      "trigger_event": "Readiness probes passed",
+      "is_valid_transition": true,
+      "transition_timestamp": "2026-09-19T07:05:11.721538+00:00"
+    },
+    {
+      "transition_id": "TRANS_003",
+      "component": "PostgreSQL_Repository",
+      "from_state": "READY",
+      "to_state": "UNHEALTHY",
+      "trigger_event": "Connection pool exhausted",
+      "is_valid_transition": true,
+      "transition_timestamp": "2026-09-19T07:05:11.721605+00:00"
+    },
+    {
+      "transition_id": "TRANS_004",
+      "component": "PostgreSQL_Repository",
+      "from_state": "UNHEALTHY",
+      "to_state": "RECOVERING",
+      "trigger_event": "Recovery policy triggered (pool recycle)",
+      "is_valid_transition": true,
+      "transition_timestamp": "2026-09-19T07:05:11.721667+00:00"
+    },
+    {
+      "transition_id": "TRANS_005",
+      "component": "PostgreSQL_Repository",
+      "from_state": "RECOVERING",
+      "to_state": "READY",
+      "trigger_event": "Post-recovery transactional probe verified",
+      "is_valid_transition": true,
+      "transition_timestamp": "2026-09-19T07:05:11.721731+00:00"
+    },
+    {
+      "transition_id": "TRANS_006",
+      "component": "OCR_Worker",
+      "from_state": "READY",
+      "to_state": "DEGRADED",
+      "trigger_event": "Queue latency exceeded 500ms SLA",
+      "is_valid_transition": true,
+      "transition_timestamp": "2026-09-19T07:05:11.721801+00:00"
+    },
+    {
+      "transition_id": "TRANS_007",
+      "component": "OCR_Worker",
+      "from_state": "DEGRADED",
+      "to_state": "RECOVERING",
+      "trigger_event": "Worker horizontal auto-scale initiated",
+      "is_valid_transition": true,
+      "transition_timestamp": "2026-09-19T07:05:11.721870+00:00"
+    },
+    {
+      "transition_id": "TRANS_008",
+      "component": "OCR_Worker",
+      "from_state": "RECOVERING",
+      "to_state": "READY",
+      "trigger_event": "Queue depth normalized to 0",
+      "is_valid_transition": true,
+      "transition_timestamp": "2026-09-19T07:05:11.721942+00:00"
+    },
+    {
+      "transition_id": "TRANS_009_REJECTED",
+      "component": "Queue_Manager",
+      "from_state": "FAILED",
+      "to_state": "READY",
+      "trigger_event": "Direct bypass attempt without recovery probe",
+      "is_valid_transition": false,
+      "transition_timestamp": "2026-09-19T07:05:11.722016+00:00"
+    }
+  ],
+  "state_machine_deterministic": true
+}

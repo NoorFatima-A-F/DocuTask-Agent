@@ -1,0 +1,47 @@
+{
+  "report_title": "Long-Term Statistical Trend Analysis & Trajectory Report",
+  "evaluated_trends_count": 5,
+  "trajectories": [
+    {
+      "metric_name": "API Ingress P95 Latency",
+      "historical_direction": "IMPROVING",
+      "percentage_change_30d": -14.5,
+      "projected_direction": "STABLE",
+      "seasonal_pattern_detected": true,
+      "summary": "P95 latency dropped from 310ms to 240ms following FastAPI middleware optimization."
+    },
+    {
+      "metric_name": "Gemini AI Token Efficiency",
+      "historical_direction": "IMPROVING",
+      "percentage_change_30d": -18.2,
+      "projected_direction": "IMPROVING",
+      "seasonal_pattern_detected": false,
+      "summary": "Prompt compression and structured schema templates reduced token usage per document by 18.2%."
+    },
+    {
+      "metric_name": "Document Processing Throughput (docs/min)",
+      "historical_direction": "IMPROVING",
+      "percentage_change_30d": 24.0,
+      "projected_direction": "IMPROVING",
+      "seasonal_pattern_detected": true,
+      "summary": "Platform capacity scaled from 250 docs/min to 310 docs/min under current resource allocation."
+    },
+    {
+      "metric_name": "Self-Healing Mean Recovery Duration (MTTR)",
+      "historical_direction": "IMPROVING",
+      "percentage_change_30d": -32.0,
+      "projected_direction": "STABLE",
+      "seasonal_pattern_detected": false,
+      "summary": "Automated worker recycling and stale lock eviction reduced MTTR from 3.6s to 2.45s."
+    },
+    {
+      "metric_name": "Cold Storage Document Footprint",
+      "historical_direction": "STABLE",
+      "percentage_change_30d": 8.5,
+      "projected_direction": "STABLE",
+      "seasonal_pattern_detected": true,
+      "summary": "Storage growth is steady at 8.5% MoM, well within 90-day provisioned disk quotas."
+    }
+  ],
+  "platform_trajectory_healthy": true
+}

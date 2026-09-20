@@ -1,0 +1,97 @@
+{
+  "report_title": "Component Reliability Score Report",
+  "total_components_scored": 10,
+  "component_scores": [
+    {
+      "component": "API Gateway",
+      "availability_score": 99.8,
+      "performance_score": 98.55,
+      "recovery_score": 96.4,
+      "stability_score": 97.5,
+      "composite_component_score": 98.35,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "Agent Runtime",
+      "availability_score": 99.5,
+      "performance_score": 96.8,
+      "recovery_score": 95.5,
+      "stability_score": 95.0,
+      "composite_component_score": 97.12,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "Planner",
+      "availability_score": 99.9,
+      "performance_score": 98.65,
+      "recovery_score": 97.6,
+      "stability_score": 100.0,
+      "composite_component_score": 99.15,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "Execution Engine",
+      "availability_score": 99.6,
+      "performance_score": 97.0,
+      "recovery_score": 95.8,
+      "stability_score": 97.5,
+      "composite_component_score": 97.77,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "Workers",
+      "availability_score": 99.2,
+      "performance_score": 93.2,
+      "recovery_score": 94.6,
+      "stability_score": 92.5,
+      "composite_component_score": 95.44,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "Queue",
+      "availability_score": 99.9,
+      "performance_score": 99.98,
+      "recovery_score": 98.8,
+      "stability_score": 100.0,
+      "composite_component_score": 99.72,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "Database",
+      "availability_score": 99.9,
+      "performance_score": 99.47,
+      "recovery_score": 98.2,
+      "stability_score": 100.0,
+      "composite_component_score": 99.47,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "Storage",
+      "availability_score": 99.9,
+      "performance_score": 99.94,
+      "recovery_score": 98.5,
+      "stability_score": 100.0,
+      "composite_component_score": 99.65,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "OCR Pipeline",
+      "availability_score": 99.4,
+      "performance_score": 93.0,
+      "recovery_score": 93.4,
+      "stability_score": 95.0,
+      "composite_component_score": 95.72,
+      "status": "HEALTHY"
+    },
+    {
+      "component": "AI Provider",
+      "availability_score": 99.1,
+      "performance_score": 87.8,
+      "recovery_score": 95.2,
+      "stability_score": 92.5,
+      "composite_component_score": 94.17,
+      "status": "HEALTHY"
+    }
+  ],
+  "mean_component_reliability_score": 97.66
+}

@@ -1,0 +1,18 @@
+{
+  "routing_channels_configured": [
+    "PagerDuty",
+    "Slack",
+    "Email",
+    "Webhook"
+  ],
+  "team_routes_verified": {
+    "database-infra": "PagerDuty (#oncall-db)",
+    "sre-platform": "PagerDuty (#oncall-sre)",
+    "agent-runtime": "Slack (#agent-ops)",
+    "queue-infra": "Slack (#infra-ops)",
+    "ai-platform": "Slack (#ai-ops)",
+    "security-secops": "PagerDuty (#secops-p1)"
+  },
+  "escalation_matrix_verified": true,
+  "status": "PASS"
+}

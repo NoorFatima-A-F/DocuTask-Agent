@@ -1,0 +1,92 @@
+{
+  "services_instrumented": 8,
+  "total_expected_services": 8,
+  "metrics_pipeline_active": true,
+  "tracing_pipeline_active": true,
+  "logging_pipeline_active": true,
+  "services": [
+    {
+      "service_name": "api_service",
+      "category": "api",
+      "metrics_enabled": true,
+      "tracing_enabled": true,
+      "logging_structured": true,
+      "health_endpoint": "/health/live",
+      "owner_team": "api-platform-team"
+    },
+    {
+      "service_name": "agent_runtime",
+      "category": "agent_runtime",
+      "metrics_enabled": true,
+      "tracing_enabled": true,
+      "logging_structured": true,
+      "health_endpoint": "/health/agent",
+      "owner_team": "agent-core-team"
+    },
+    {
+      "service_name": "worker_fleet",
+      "category": "worker",
+      "metrics_enabled": true,
+      "tracing_enabled": true,
+      "logging_structured": true,
+      "health_endpoint": "/health/worker",
+      "owner_team": "async-workers-team"
+    },
+    {
+      "service_name": "postgres_db",
+      "category": "database",
+      "metrics_enabled": true,
+      "tracing_enabled": true,
+      "logging_structured": true,
+      "health_endpoint": "/health/database",
+      "owner_team": "data-platform-team"
+    },
+    {
+      "service_name": "redis_queue",
+      "category": "queue",
+      "metrics_enabled": true,
+      "tracing_enabled": true,
+      "logging_structured": true,
+      "health_endpoint": "/health/queue",
+      "owner_team": "infrastructure-team"
+    },
+    {
+      "service_name": "storage_layer",
+      "category": "storage",
+      "metrics_enabled": true,
+      "tracing_enabled": true,
+      "logging_structured": true,
+      "health_endpoint": "/health/storage",
+      "owner_team": "storage-platform-team"
+    },
+    {
+      "service_name": "ocr_pipeline",
+      "category": "ocr",
+      "metrics_enabled": true,
+      "tracing_enabled": true,
+      "logging_structured": true,
+      "health_endpoint": "/health/ocr",
+      "owner_team": "vision-ml-team"
+    },
+    {
+      "service_name": "gemini_ai_provider",
+      "category": "ai_provider",
+      "metrics_enabled": true,
+      "tracing_enabled": true,
+      "logging_structured": true,
+      "health_endpoint": "/health/ai_provider",
+      "owner_team": "ai-foundation-team"
+    }
+  ],
+  "passed": true,
+  "details": {
+    "opentelemetry_sdk_version": "1.25.0",
+    "telemetry_collector": "OpenTelemetry Collector Contrib v0.98.0",
+    "metrics_backend": "Prometheus v2.51.0",
+    "tracing_backend": "Tempo / Jaeger v1.55.0",
+    "logging_backend": "Grafana Loki v3.0.0",
+    "alerting_backend": "Prometheus AlertManager v0.27.0",
+    "service_boundary_isolation": "Verified",
+    "context_propagation_format": "W3C TraceContext (traceparent, tracestate)"
+  }
+}

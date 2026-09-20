@@ -1,0 +1,132 @@
+{
+  "verifier_id": "VERIFY-3J.8.2-SCALE-METRICS",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Worker Scaling Metrics Configured",
+      "passed": true,
+      "details": "4 worker scaling signals configured: queue_depth, wait_time, utilization, latency",
+      "metrics": {
+        "worker_metrics_count": 4
+      }
+    },
+    {
+      "name": "API Scaling Metrics Configured",
+      "passed": true,
+      "details": "3 API scaling signals configured: requests/sec, P95 latency, CPU utilization",
+      "metrics": {
+        "api_metrics_count": 3
+      }
+    },
+    {
+      "name": "Database Scaling Signals Tracked",
+      "passed": true,
+      "details": "Database backpressure indicators configured: connections, latency, lock metrics",
+      "metrics": {
+        "db_metrics_count": 3
+      }
+    },
+    {
+      "name": "Threshold Hysteresis Configured",
+      "passed": true,
+      "details": "Hysteresis gap between scale-up and scale-down thresholds prevents flapping",
+      "metrics": {
+        "hysteresis_verified": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:38:29.284047+00:00",
+  "execution_timestamp": "2026-09-16T18:38:29.284105+00:00",
+  "summary": "",
+  "report_title": "Scaling Metrics Verification Report",
+  "worker_metrics": [
+    {
+      "metric_name": "queue_depth",
+      "target_component": "Worker Pool",
+      "current_value": 320.0,
+      "scale_up_threshold": 1000.0,
+      "scale_down_threshold": 100.0,
+      "unit": "jobs"
+    },
+    {
+      "metric_name": "job_wait_time_sec",
+      "target_component": "Worker Pool",
+      "current_value": 2.4,
+      "scale_up_threshold": 15.0,
+      "scale_down_threshold": 1.0,
+      "unit": "seconds"
+    },
+    {
+      "metric_name": "worker_utilization_pct",
+      "target_component": "Worker Pool",
+      "current_value": 62.0,
+      "scale_up_threshold": 80.0,
+      "scale_down_threshold": 30.0,
+      "unit": "%"
+    },
+    {
+      "metric_name": "processing_latency_sec",
+      "target_component": "Worker Pool",
+      "current_value": 2.56,
+      "scale_up_threshold": 5.0,
+      "scale_down_threshold": 1.5,
+      "unit": "seconds"
+    }
+  ],
+  "api_metrics": [
+    {
+      "metric_name": "requests_per_sec",
+      "target_component": "API Gateway",
+      "current_value": 450.0,
+      "scale_up_threshold": 1200.0,
+      "scale_down_threshold": 200.0,
+      "unit": "req/s"
+    },
+    {
+      "metric_name": "p95_latency_ms",
+      "target_component": "API Gateway",
+      "current_value": 42.0,
+      "scale_up_threshold": 200.0,
+      "scale_down_threshold": 50.0,
+      "unit": "ms"
+    },
+    {
+      "metric_name": "cpu_usage_pct",
+      "target_component": "API Gateway",
+      "current_value": 38.5,
+      "scale_up_threshold": 75.0,
+      "scale_down_threshold": 25.0,
+      "unit": "%"
+    }
+  ],
+  "database_metrics": [
+    {
+      "metric_name": "active_connections",
+      "target_component": "PostgreSQL",
+      "current_value": 42.0,
+      "scale_up_threshold": 80.0,
+      "scale_down_threshold": 15.0,
+      "unit": "conns"
+    },
+    {
+      "metric_name": "query_p95_latency_ms",
+      "target_component": "PostgreSQL",
+      "current_value": 15.2,
+      "scale_up_threshold": 50.0,
+      "scale_down_threshold": 10.0,
+      "unit": "ms"
+    },
+    {
+      "metric_name": "deadlocks_per_min",
+      "target_component": "PostgreSQL",
+      "current_value": 0.0,
+      "scale_up_threshold": 1.0,
+      "scale_down_threshold": 0.0,
+      "unit": "events"
+    }
+  ],
+  "all_metrics_configured": true
+}

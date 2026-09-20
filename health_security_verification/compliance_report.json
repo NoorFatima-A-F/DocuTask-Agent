@@ -1,0 +1,74 @@
+{
+  "report_title": "Health Security Compliance & Enterprise Standards Report",
+  "frameworks_evaluated": [
+    "GDPR_ART_25_32",
+    "OWASP_API_TOP_10",
+    "OWASP_ASVS_V4",
+    "SOC2_TYPE_II"
+  ],
+  "total_controls": 7,
+  "passed_controls": 7,
+  "compliance_percentage": 100.0,
+  "controls": [
+    {
+      "framework": "OWASP_ASVS_V4",
+      "control_id": "ASVS-13.1.1",
+      "control_title": "Verify that health endpoints do not disclose detailed system information, software versions, or database topology.",
+      "verification_status": "PASS",
+      "evidence_reference": "endpoint_security_verifier: audited /live, /ready, /health, /metrics without infrastructure leaks",
+      "score": 100.0
+    },
+    {
+      "framework": "OWASP_ASVS_V4",
+      "control_id": "ASVS-8.3.1",
+      "control_title": "Verify that sensitive data, credentials, and PII are not stored in unencrypted log files or telemetry streams.",
+      "verification_status": "PASS",
+      "evidence_reference": "log_security_verifier & secret_scan_verifier: zero unmasked secrets detected across all telemetry surfaces",
+      "score": 100.0
+    },
+    {
+      "framework": "OWASP_API_TOP_10",
+      "control_id": "API-3:2023",
+      "control_title": "Broken Object Property Level Authorization - Verify that sensitive operational diagnostic properties require privileged roles.",
+      "verification_status": "PASS",
+      "evidence_reference": "health_authorization_verifier: /diagnostics and deep probes enforce PLATFORM_ADMIN role",
+      "score": 100.0
+    },
+    {
+      "framework": "OWASP_API_TOP_10",
+      "control_id": "API-8:2023",
+      "control_title": "Security Misconfiguration - Verify default credentials and anonymous diagnostic access are completely disabled.",
+      "verification_status": "PASS",
+      "evidence_reference": "dashboard_security_verifier: Grafana/Prometheus anonymous access disabled, TLS 1.3 enforced",
+      "score": 100.0
+    },
+    {
+      "framework": "SOC2_TYPE_II",
+      "control_id": "SOC2-CC6.1",
+      "control_title": "Logical Access Controls - Restrict administrative access to observability telemetry to authorized operational personnel.",
+      "verification_status": "PASS",
+      "evidence_reference": "health_authorization_verifier & dashboard_security_verifier: Role-based access control with audit trails",
+      "score": 100.0
+    },
+    {
+      "framework": "SOC2_TYPE_II",
+      "control_id": "SOC2-CC6.6",
+      "control_title": "Boundary Defense - Protect internal metrics and health diagnostic endpoints from public unauthorized ingress.",
+      "verification_status": "PASS",
+      "evidence_reference": "endpoint_security_verifier: Tiered separation (Public /live vs Internal /ready vs Admin /diagnostics)",
+      "score": 100.0
+    },
+    {
+      "framework": "GDPR_ART_25_32",
+      "control_id": "GDPR-Art25",
+      "control_title": "Data Protection by Design & Default - Ensure metrics labels and trace spans do not ingest or persist identifiable personal data.",
+      "verification_status": "PASS",
+      "evidence_reference": "metrics_privacy_verifier & trace_security_verifier: Token hashing and tenant ID pseudonymization active",
+      "score": 100.0
+    }
+  ],
+  "owasp_asvs_compliant": true,
+  "owasp_api_security_compliant": true,
+  "soc2_cc6_compliant": true,
+  "gdpr_art25_compliant": true
+}

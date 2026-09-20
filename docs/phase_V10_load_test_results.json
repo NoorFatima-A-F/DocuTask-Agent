@@ -1,0 +1,48 @@
+{
+  "load_scenarios": [
+    {
+      "scenario_name": "Normal Enterprise Load (50 Concurrent Users, 8-hr Shift)",
+      "concurrent_users": 50,
+      "duration_simulated_hrs": 8.0,
+      "total_requests": 12500,
+      "successful_requests": 12500,
+      "failed_requests": 0,
+      "error_rate_pct": 0.0,
+      "latency": {
+        "p50_ms": 337.5,
+        "p90_ms": 526.0,
+        "p95_ms": 583.0,
+        "p99_ms": 628.6,
+        "max_ms": 640.0,
+        "mean_ms": 356.5,
+        "std_dev_ms": 127.94,
+        "sample_count": 20,
+        "sla_target_p95_ms": 1000.0,
+        "sla_met": true
+      },
+      "status": "OPTIMAL"
+    },
+    {
+      "scenario_name": "Month-End Surge (500 Concurrent Uploads, 2-hr Rush)",
+      "concurrent_users": 500,
+      "duration_simulated_hrs": 2.0,
+      "total_requests": 30000,
+      "successful_requests": 30000,
+      "failed_requests": 0,
+      "error_rate_pct": 0.0,
+      "latency": {
+        "p50_ms": 615.0,
+        "p90_ms": 1196.0,
+        "p95_ms": 1349.0,
+        "p99_ms": 1485.8,
+        "max_ms": 1520.0,
+        "mean_ms": 711.75,
+        "std_dev_ms": 338.79,
+        "sample_count": 20,
+        "sla_target_p95_ms": 2000.0,
+        "sla_met": true
+      },
+      "status": "OPTIMAL"
+    }
+  ]
+}

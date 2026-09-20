@@ -1,0 +1,142 @@
+{
+  "verifier_id": "VERIFY-3J.7.1-PERF-ARCH-PROFILE",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Service Topology Mapped (8 Services)",
+      "passed": true,
+      "details": "Complete topology with 8 services and 12 inter-service dependencies profiled",
+      "metrics": {
+        "services": 8,
+        "dependencies": 12
+      }
+    },
+    {
+      "name": "Critical Path Identified (5 Hops)",
+      "passed": true,
+      "details": "Critical path: API Gateway → Agent Runtime → Redis Queue → Workers → AI Providers",
+      "metrics": {
+        "critical_path_length": 5
+      }
+    },
+    {
+      "name": "Latency Hotspot Detected: AI Providers (1200ms)",
+      "passed": true,
+      "details": "AI Provider dependency is the dominant latency contributor at 1200ms avg",
+      "metrics": {
+        "hotspot": "AI Providers",
+        "latency_ms": 1200.0
+      }
+    },
+    {
+      "name": "All Dependencies Reachable",
+      "passed": true,
+      "details": "All 12 service dependencies responding within 5000ms timeout threshold",
+      "metrics": {
+        "unreachable_count": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:37:02.166554+00:00",
+  "execution_timestamp": "2026-09-16T18:37:02.166591+00:00",
+  "summary": "",
+  "report_title": "Performance Architecture Profiling Report",
+  "services_count": 8,
+  "dependencies_count": 12,
+  "critical_path": [
+    "API Gateway",
+    "Agent Runtime",
+    "Redis Queue",
+    "Workers",
+    "AI Providers"
+  ],
+  "dependencies": [
+    {
+      "source": "User",
+      "target": "API Gateway",
+      "protocol": "HTTPS",
+      "avg_latency_ms": 5.0,
+      "is_critical_path": true
+    },
+    {
+      "source": "API Gateway",
+      "target": "Agent Runtime",
+      "protocol": "HTTP",
+      "avg_latency_ms": 2.0,
+      "is_critical_path": true
+    },
+    {
+      "source": "Agent Runtime",
+      "target": "Redis Queue",
+      "protocol": "TCP",
+      "avg_latency_ms": 1.5,
+      "is_critical_path": true
+    },
+    {
+      "source": "Redis Queue",
+      "target": "Workers",
+      "protocol": "TCP",
+      "avg_latency_ms": 1.0,
+      "is_critical_path": true
+    },
+    {
+      "source": "Workers",
+      "target": "AI Providers",
+      "protocol": "HTTPS",
+      "avg_latency_ms": 1200.0,
+      "is_critical_path": true
+    },
+    {
+      "source": "Workers",
+      "target": "PostgreSQL",
+      "protocol": "TCP",
+      "avg_latency_ms": 8.0,
+      "is_critical_path": false
+    },
+    {
+      "source": "Workers",
+      "target": "Object Storage",
+      "protocol": "HTTPS",
+      "avg_latency_ms": 25.0,
+      "is_critical_path": false
+    },
+    {
+      "source": "Agent Runtime",
+      "target": "PostgreSQL",
+      "protocol": "TCP",
+      "avg_latency_ms": 8.0,
+      "is_critical_path": false
+    },
+    {
+      "source": "API Gateway",
+      "target": "Redis Cache",
+      "protocol": "TCP",
+      "avg_latency_ms": 0.5,
+      "is_critical_path": false
+    },
+    {
+      "source": "Workers",
+      "target": "OCR Engine",
+      "protocol": "HTTP",
+      "avg_latency_ms": 850.0,
+      "is_critical_path": true
+    },
+    {
+      "source": "Agent Runtime",
+      "target": "Monitoring",
+      "protocol": "HTTP",
+      "avg_latency_ms": 3.0,
+      "is_critical_path": false
+    },
+    {
+      "source": "Workers",
+      "target": "Evidence Store",
+      "protocol": "HTTPS",
+      "avg_latency_ms": 15.0,
+      "is_critical_path": false
+    }
+  ]
+}

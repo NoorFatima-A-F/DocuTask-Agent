@@ -1,0 +1,35 @@
+{
+  "report_title": "Historical Reliability Trend & Regression Analysis Report",
+  "periods": [
+    {
+      "timeframe": "Last 24 Hours",
+      "availability_trend_pct": 99.99,
+      "p95_latency_ms": 180.0,
+      "incident_count": 0,
+      "trend_direction": "STABLE"
+    },
+    {
+      "timeframe": "Last 7 Days",
+      "availability_trend_pct": 99.97,
+      "p95_latency_ms": 185.0,
+      "incident_count": 0,
+      "trend_direction": "IMPROVING"
+    },
+    {
+      "timeframe": "Last 30 Days",
+      "availability_trend_pct": 99.96,
+      "p95_latency_ms": 190.0,
+      "incident_count": 1,
+      "trend_direction": "IMPROVING"
+    },
+    {
+      "timeframe": "Last 90 Days",
+      "availability_trend_pct": 99.94,
+      "p95_latency_ms": 198.0,
+      "incident_count": 3,
+      "trend_direction": "IMPROVING"
+    }
+  ],
+  "stability_trend": "STABLE_AND_IMPROVING",
+  "regression_detected": false
+}

@@ -1,0 +1,40 @@
+{
+  "report_title": "Multi-Window Error Budget Burn Rate Analysis Report",
+  "evaluated_windows": [
+    {
+      "window_duration": "1 Hour (Short Window)",
+      "burn_rate_multiplier": 0.45,
+      "budget_consumed_in_window_pct": 0.06,
+      "severity": "SAFE",
+      "alert_triggered": false,
+      "recommended_action": "Normal operations; no mitigation required."
+    },
+    {
+      "window_duration": "6 Hours (Medium Window)",
+      "burn_rate_multiplier": 0.52,
+      "budget_consumed_in_window_pct": 0.43,
+      "severity": "SAFE",
+      "alert_triggered": false,
+      "recommended_action": "Normal operations; telemetry steady."
+    },
+    {
+      "window_duration": "24 Hours (Long Window)",
+      "burn_rate_multiplier": 0.68,
+      "budget_consumed_in_window_pct": 2.26,
+      "severity": "SAFE",
+      "alert_triggered": false,
+      "recommended_action": "Daily consumption within expected engineering tolerances."
+    },
+    {
+      "window_duration": "3 Days (Extended Window)",
+      "burn_rate_multiplier": 0.72,
+      "budget_consumed_in_window_pct": 7.2,
+      "severity": "SAFE",
+      "alert_triggered": false,
+      "recommended_action": "Budget sustainability confirmed for release cycle."
+    }
+  ],
+  "fast_burn_detected": false,
+  "slow_burn_detected": false,
+  "overall_burn_rate_status": "SAFE"
+}

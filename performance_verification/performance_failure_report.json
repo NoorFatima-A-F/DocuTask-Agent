@@ -1,0 +1,68 @@
+{
+  "verifier_id": "VERIFY-3J.3.11-PERF-FAILURE",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Memory Exhaustion Graceful Handling & Recovery",
+      "passed": true,
+      "details": "Worker handled memory threshold via controlled task abortion, release, and automatic restart",
+      "metrics": {
+        "memory_recovered": true
+      }
+    },
+    {
+      "name": "Queue Ingress Backpressure & Throttling",
+      "passed": true,
+      "details": "Backpressure flow control protected broker memory without losing enqueued tasks",
+      "metrics": {
+        "backpressure_effective": true
+      }
+    },
+    {
+      "name": "Database Saturation Circuit Breaking & Retries",
+      "passed": true,
+      "details": "Circuit breaker tripped immediately on DB exhaustion, recovering within 2.5s post-clearance",
+      "metrics": {
+        "circuit_breaker_recovered": true
+      }
+    },
+    {
+      "name": "Correctness Preservation Under Failure Stress",
+      "passed": true,
+      "details": "Zero corrupted task states, zero duplicate extractions, and zero lost documents during all failure scenarios",
+      "metrics": {
+        "state_corruptions": 0,
+        "duplicate_extractions": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:40:05.452485+00:00",
+  "report_title": "Performance Failure & Degradation Analysis Report",
+  "scenarios": [
+    {
+      "scenario_name": "Memory Exhaustion Stress",
+      "injected_condition": "Allocated 95% available heap memory in worker process",
+      "observed_behavior": "Automatic GC trigger + worker restart with task redelivery without data loss",
+      "graceful_handling": true,
+      "recovered": true
+    },
+    {
+      "scenario_name": "Queue Overload Ingress Burst",
+      "injected_condition": "10,000 tasks enqueued instantaneously",
+      "observed_behavior": "Adaptive backpressure activated, HTTP 429 Retry-After emitted, queue drained cleanly",
+      "graceful_handling": true,
+      "recovered": true
+    },
+    {
+      "scenario_name": "Database Connection Saturation",
+      "injected_condition": "Exhausted all 100 DB pool connections with artificial latency",
+      "observed_behavior": "Circuit breaker opened, queries buffered with jittered exponential retries",
+      "graceful_handling": true,
+      "recovered": true
+    }
+  ],
+  "backpressure_active": true,
+  "circuit_breaking_active": true,
+  "graceful_degradation_proven": true
+}

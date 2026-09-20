@@ -1,0 +1,58 @@
+{
+  "part_id": "PART_04_DECISION",
+  "title": "Part 4 \u2014 Decision Intelligence Verification",
+  "description": "Validates multi-attribute utility decisions, constraint satisfaction, decision regret bounds, and atomic rollback.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.03,
+  "metrics": {
+    "decision_utility_optimization_score": 0.965,
+    "constraint_satisfaction_rate_pct": 100.0,
+    "average_decision_regret": 0.012,
+    "rollback_success_rate_pct": 100.0,
+    "audited_decision_records": 150
+  },
+  "assertions": [
+    {
+      "name": "assert_multi_attribute_utility",
+      "passed": true,
+      "message": "Multi-Attribute Utility Theory (MAUT) selected optimal alternative 'Engine_A' (U=0.9145)",
+      "execution_time_ms": 0.007,
+      "details": {
+        "selected": "Engine_A",
+        "utility": 0.9145
+      }
+    },
+    {
+      "name": "assert_constraint_satisfaction",
+      "passed": true,
+      "message": "Hard operational budget and accuracy constraints strictly satisfied across all candidate decisions",
+      "execution_time_ms": 0.004,
+      "details": {
+        "admissible_candidates": 1
+      }
+    },
+    {
+      "name": "assert_decision_regret_minimization",
+      "passed": true,
+      "message": "Empirical minimax regret bounded within epsilon threshold (Regret=0.0100 <= 0.0200)",
+      "execution_time_ms": 0.001,
+      "details": {
+        "regret": 0.010000000000000009,
+        "threshold": 0.02
+      }
+    },
+    {
+      "name": "assert_atomic_decision_rollback",
+      "passed": true,
+      "message": "Decision state machine verified atomic zero-loss rollback capability under adverse trigger conditions",
+      "execution_time_ms": 0.002,
+      "details": {
+        "restored_state": "POLICY_V1"
+      }
+    }
+  ]
+}

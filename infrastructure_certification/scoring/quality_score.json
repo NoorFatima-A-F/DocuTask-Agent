@@ -1,0 +1,64 @@
+{
+  "overall_score": 100.0,
+  "grade": "ENTERPRISE_READY",
+  "categories": {
+    "Reliability": {
+      "category": "Reliability",
+      "weight": 0.25,
+      "score": 100.0,
+      "contribution": 25.0,
+      "passed_items": 67,
+      "total_items": 67,
+      "status": "PASSED"
+    },
+    "Security": {
+      "category": "Security",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "passed_items": 119,
+      "total_items": 119,
+      "status": "PASSED"
+    },
+    "Scalability": {
+      "category": "Scalability",
+      "weight": 0.2,
+      "score": 100.0,
+      "contribution": 20.0,
+      "passed_items": 221,
+      "total_items": 221,
+      "status": "PASSED"
+    },
+    "Observability": {
+      "category": "Observability",
+      "weight": 0.15,
+      "score": 100.0,
+      "contribution": 15.0,
+      "passed_items": 13,
+      "total_items": 13,
+      "status": "PASSED"
+    },
+    "Deployment Quality": {
+      "category": "Deployment Quality",
+      "weight": 0.1,
+      "score": 100.0,
+      "contribution": 10.0,
+      "passed_items": 79,
+      "total_items": 79,
+      "status": "PASSED"
+    },
+    "Recovery Capability": {
+      "category": "Recovery Capability",
+      "weight": 0.1,
+      "score": 100.0,
+      "contribution": 10.0,
+      "passed_items": 67,
+      "total_items": 67,
+      "status": "PASSED"
+    }
+  },
+  "total_evidence_evaluated": 566,
+  "total_evidence_passed": 566,
+  "calculated_at": "2026-09-19T07:04:56.991716+00:00",
+  "execution_time_seconds": 0.08695387840270996
+}

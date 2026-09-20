@@ -1,0 +1,322 @@
+{
+  "total_metrics_cataloged": 32,
+  "categories_covered": [
+    "agent",
+    "ai_provider",
+    "api",
+    "availability",
+    "database",
+    "ocr",
+    "queue",
+    "storage",
+    "worker"
+  ],
+  "services_covered": [
+    "agent_runtime",
+    "api_service",
+    "gemini_ai_provider",
+    "ocr_pipeline",
+    "platform",
+    "postgres_db",
+    "redis_queue",
+    "storage_layer",
+    "worker_fleet"
+  ],
+  "metrics": [
+    {
+      "name": "service_up",
+      "service": "platform",
+      "category": "availability",
+      "metric_type": "gauge",
+      "unit": "binary",
+      "description": "Service process running (1=up, 0=down)",
+      "sample_value": 1.0
+    },
+    {
+      "name": "service_health_status",
+      "service": "platform",
+      "category": "availability",
+      "metric_type": "gauge",
+      "unit": "status_code",
+      "description": "Liveness state (1=alive, 0=dead)",
+      "sample_value": 1.0
+    },
+    {
+      "name": "service_ready_status",
+      "service": "platform",
+      "category": "availability",
+      "metric_type": "gauge",
+      "unit": "status_code",
+      "description": "Readiness state (1=ready, 0=not ready)",
+      "sample_value": 1.0
+    },
+    {
+      "name": "http_requests_total",
+      "service": "api_service",
+      "category": "api",
+      "metric_type": "counter",
+      "unit": "requests",
+      "description": "Total incoming HTTP request count",
+      "sample_value": 145200.0
+    },
+    {
+      "name": "http_request_duration_seconds",
+      "service": "api_service",
+      "category": "api",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "description": "HTTP request latency distribution (P95=320ms)",
+      "sample_value": 0.32
+    },
+    {
+      "name": "http_error_rate_pct",
+      "service": "api_service",
+      "category": "api",
+      "metric_type": "gauge",
+      "unit": "percent",
+      "description": "API error rate percentage (5xx / total)",
+      "sample_value": 0.04
+    },
+    {
+      "name": "http_status_distribution",
+      "service": "api_service",
+      "category": "api",
+      "metric_type": "counter",
+      "unit": "status_codes",
+      "description": "Count of 2xx, 4xx, 5xx responses",
+      "sample_value": 200.0
+    },
+    {
+      "name": "agent_execution_total",
+      "service": "agent_runtime",
+      "category": "agent",
+      "metric_type": "counter",
+      "unit": "executions",
+      "description": "Total agent workflow executions",
+      "sample_value": 8940.0
+    },
+    {
+      "name": "agent_failure_rate_pct",
+      "service": "agent_runtime",
+      "category": "agent",
+      "metric_type": "gauge",
+      "unit": "percent",
+      "description": "Agent execution failure rate percentage",
+      "sample_value": 0.8
+    },
+    {
+      "name": "agent_task_duration_seconds",
+      "service": "agent_runtime",
+      "category": "agent",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "description": "Total end-to-end agent task duration",
+      "sample_value": 4.2
+    },
+    {
+      "name": "agent_retry_total",
+      "service": "agent_runtime",
+      "category": "agent",
+      "metric_type": "counter",
+      "unit": "retries",
+      "description": "Agent task retry count",
+      "sample_value": 42.0
+    },
+    {
+      "name": "agent_tool_failure_total",
+      "service": "agent_runtime",
+      "category": "agent",
+      "metric_type": "counter",
+      "unit": "failures",
+      "description": "Agent tool execution failures",
+      "sample_value": 3.0
+    },
+    {
+      "name": "worker_active_count",
+      "service": "worker_fleet",
+      "category": "worker",
+      "metric_type": "gauge",
+      "unit": "workers",
+      "description": "Number of currently active worker instances",
+      "sample_value": 8.0
+    },
+    {
+      "name": "worker_heartbeat_timestamp",
+      "service": "worker_fleet",
+      "category": "worker",
+      "metric_type": "gauge",
+      "unit": "unix_epoch",
+      "description": "Latest worker heartbeat timestamp",
+      "sample_value": 1773700000.0
+    },
+    {
+      "name": "worker_failure_total",
+      "service": "worker_fleet",
+      "category": "worker",
+      "metric_type": "counter",
+      "unit": "failures",
+      "description": "Total worker task crash count",
+      "sample_value": 2.0
+    },
+    {
+      "name": "worker_processing_duration_seconds",
+      "service": "worker_fleet",
+      "category": "worker",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "description": "Document processing time per worker task",
+      "sample_value": 1.85
+    },
+    {
+      "name": "redis_queue_depth",
+      "service": "redis_queue",
+      "category": "queue",
+      "metric_type": "gauge",
+      "unit": "messages",
+      "description": "Pending document tasks in queue",
+      "sample_value": 145.0
+    },
+    {
+      "name": "redis_queue_wait_time_seconds",
+      "service": "redis_queue",
+      "category": "queue",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "description": "Task latency in queue before worker pickup",
+      "sample_value": 0.65
+    },
+    {
+      "name": "redis_failed_jobs_total",
+      "service": "redis_queue",
+      "category": "queue",
+      "metric_type": "counter",
+      "unit": "jobs",
+      "description": "Tasks dispatched to Dead Letter Queue (DLQ)",
+      "sample_value": 0.0
+    },
+    {
+      "name": "redis_retry_count_total",
+      "service": "redis_queue",
+      "category": "queue",
+      "metric_type": "counter",
+      "unit": "retries",
+      "description": "Queue-level task redelivery count",
+      "sample_value": 12.0
+    },
+    {
+      "name": "postgres_connection_count",
+      "service": "postgres_db",
+      "category": "database",
+      "metric_type": "gauge",
+      "unit": "connections",
+      "description": "Active PostgreSQL connection pool leases",
+      "sample_value": 32.0
+    },
+    {
+      "name": "postgres_query_latency_seconds",
+      "service": "postgres_db",
+      "category": "database",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "description": "Database query execution latency (P95=12ms)",
+      "sample_value": 0.012
+    },
+    {
+      "name": "postgres_transaction_failure_rate",
+      "service": "postgres_db",
+      "category": "database",
+      "metric_type": "gauge",
+      "unit": "percent",
+      "description": "Transaction rollback and error rate",
+      "sample_value": 0.01
+    },
+    {
+      "name": "postgres_deadlocks_total",
+      "service": "postgres_db",
+      "category": "database",
+      "metric_type": "counter",
+      "unit": "deadlocks",
+      "description": "Detected PostgreSQL deadlock occurrences",
+      "sample_value": 0.0
+    },
+    {
+      "name": "storage_disk_utilization_pct",
+      "service": "storage_layer",
+      "category": "storage",
+      "metric_type": "gauge",
+      "unit": "percent",
+      "description": "Document storage volume utilization",
+      "sample_value": 54.0
+    },
+    {
+      "name": "storage_read_write_iops",
+      "service": "storage_layer",
+      "category": "storage",
+      "metric_type": "gauge",
+      "unit": "iops",
+      "description": "Storage IOPS throughput",
+      "sample_value": 840.0
+    },
+    {
+      "name": "ocr_processing_latency_seconds",
+      "service": "ocr_pipeline",
+      "category": "ocr",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "description": "OCR rasterization and text extraction latency",
+      "sample_value": 1.25
+    },
+    {
+      "name": "ocr_confidence_score",
+      "service": "ocr_pipeline",
+      "category": "ocr",
+      "metric_type": "gauge",
+      "unit": "ratio",
+      "description": "Average OCR text bounding box confidence",
+      "sample_value": 0.96
+    },
+    {
+      "name": "gemini_request_latency_seconds",
+      "service": "gemini_ai_provider",
+      "category": "ai_provider",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "description": "Gemini 2.0 Flash API latency (P95=680ms)",
+      "sample_value": 0.68
+    },
+    {
+      "name": "gemini_api_failure_rate_pct",
+      "service": "gemini_ai_provider",
+      "category": "ai_provider",
+      "metric_type": "gauge",
+      "unit": "percent",
+      "description": "Gemini API error / timeout rate (429/5xx)",
+      "sample_value": 0.05
+    },
+    {
+      "name": "gemini_quota_usage_pct",
+      "service": "gemini_ai_provider",
+      "category": "ai_provider",
+      "metric_type": "gauge",
+      "unit": "percent",
+      "description": "Current RPM/TPM quota consumption",
+      "sample_value": 48.0
+    },
+    {
+      "name": "gemini_token_consumption_total",
+      "service": "gemini_ai_provider",
+      "category": "ai_provider",
+      "metric_type": "counter",
+      "unit": "tokens",
+      "description": "Cumulative token consumption",
+      "sample_value": 1850000.0
+    }
+  ],
+  "passed": true,
+  "details": {
+    "total_categories": 9,
+    "total_services": 9,
+    "export_format": "Prometheus Exposition v0.0.4 & OTLP v1.0",
+    "scrape_interval_recommended": "15s"
+  }
+}

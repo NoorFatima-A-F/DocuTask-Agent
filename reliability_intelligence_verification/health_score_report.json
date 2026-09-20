@@ -1,0 +1,44 @@
+{
+  "report_title": "System Reliability Health Report",
+  "overall_health_score": 98.99,
+  "health_tier": "Excellent Reliability",
+  "category_breakdown": [
+    {
+      "category": "Availability",
+      "weight": 0.25,
+      "raw_score": 99.5,
+      "weighted_score": 24.88
+    },
+    {
+      "category": "Performance",
+      "weight": 0.2,
+      "raw_score": 98.2,
+      "weighted_score": 19.64
+    },
+    {
+      "category": "Recovery Capability",
+      "weight": 0.2,
+      "raw_score": 99.0,
+      "weighted_score": 19.8
+    },
+    {
+      "category": "Failure Prevention",
+      "weight": 0.15,
+      "raw_score": 98.5,
+      "weighted_score": 14.77
+    },
+    {
+      "category": "Observability",
+      "weight": 0.1,
+      "raw_score": 99.2,
+      "weighted_score": 9.92
+    },
+    {
+      "category": "Security Resilience",
+      "weight": 0.1,
+      "raw_score": 99.8,
+      "weighted_score": 9.98
+    }
+  ],
+  "production_ready": true
+}

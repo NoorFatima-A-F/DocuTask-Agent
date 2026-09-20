@@ -1,0 +1,153 @@
+{
+  "report_title": "Service Level Objective (SLO) Architecture Specification Report",
+  "total_slos_defined": 8,
+  "active_slos": [
+    {
+      "slo_id": "SLO_AVAIL_001",
+      "name": "Ingress API Availability",
+      "category": "Availability",
+      "description": "99.9% of HTTP requests return non-5xx status codes over rolling 30 days.",
+      "business_purpose": "Ensure platform is continuously reachable for document submission.",
+      "target_pct": 99.9,
+      "measurement_window": "Rolling 30 Days",
+      "sli_formula": "count(http_status < 500) / count(http_requests_total)",
+      "owner": "Team Platform SRE",
+      "severity": "CRITICAL",
+      "dependencies": [
+        "API_Gateway",
+        "Auth_Middleware"
+      ],
+      "is_active": true
+    },
+    {
+      "slo_id": "SLO_LATENCY_002",
+      "name": "API Ingress P95 Latency",
+      "category": "Latency",
+      "description": "95% of synchronous API requests complete within 500ms.",
+      "business_purpose": "Maintain rapid interactive experience for document upload and status probes.",
+      "target_pct": 95.0,
+      "measurement_window": "Rolling 30 Days",
+      "sli_formula": "histogram_quantile(0.95, http_request_duration_seconds) < 0.5s",
+      "owner": "Team API Gateway",
+      "severity": "HIGH",
+      "dependencies": [
+        "API_Gateway",
+        "FastAPI_Runtime"
+      ],
+      "is_active": true
+    },
+    {
+      "slo_id": "SLO_DB_003",
+      "name": "PostgreSQL Transaction Reliability",
+      "category": "Database",
+      "description": "99.95% of database transactions complete successfully with P95 < 50ms.",
+      "business_purpose": "Guarantee document metadata consistency and persistence without data loss.",
+      "target_pct": 99.95,
+      "measurement_window": "Rolling 30 Days",
+      "sli_formula": "sum(rate(pg_stat_database_xact_commit)) / sum(rate(pg_stat_database_xact_total))",
+      "owner": "Team Database Infrastructure",
+      "severity": "CRITICAL",
+      "dependencies": [
+        "PostgreSQL",
+        "PgBouncer_Pool"
+      ],
+      "is_active": true
+    },
+    {
+      "slo_id": "SLO_QUEUE_004",
+      "name": "Queue Ingestion & Dispatch Latency",
+      "category": "Queue",
+      "description": "99.0% of document jobs wait less than 2.0s in Redis queue prior to worker pickup.",
+      "business_purpose": "Prevent backlog starvation and guarantee real-time ingestion SLA.",
+      "target_pct": 99.0,
+      "measurement_window": "Rolling 30 Days",
+      "sli_formula": "count(job_queue_wait_seconds <= 2.0) / count(job_queue_total)",
+      "owner": "Team Messaging & Queues",
+      "severity": "HIGH",
+      "dependencies": [
+        "Redis_Queue",
+        "Queue_Dispatcher"
+      ],
+      "is_active": true
+    },
+    {
+      "slo_id": "SLO_WORKER_005",
+      "name": "Worker Task Execution Success",
+      "category": "Worker",
+      "description": "99.5% of background worker tasks finish without unhandled fatal exceptions.",
+      "business_purpose": "Ensure predictable, fault-tolerant asynchronous document processing.",
+      "target_pct": 99.5,
+      "measurement_window": "Rolling 30 Days",
+      "sli_formula": "count(worker_task_status == 'SUCCESS') / count(worker_tasks_total)",
+      "owner": "Team Distributed Workers",
+      "severity": "CRITICAL",
+      "dependencies": [
+        "Worker_Pool",
+        "Task_Executor"
+      ],
+      "is_active": true
+    },
+    {
+      "slo_id": "SLO_AI_006",
+      "name": "Gemini Extraction Availability & Success",
+      "category": "AI",
+      "description": "99.0% of Gemini AI inferences return valid structured extractions within 4.0s.",
+      "business_purpose": "Provide highly reliable document entity extraction without schema failures.",
+      "target_pct": 99.0,
+      "measurement_window": "Rolling 30 Days",
+      "sli_formula": "count(ai_inference_success == 1) / count(ai_inference_total)",
+      "owner": "Team AI Engineering",
+      "severity": "HIGH",
+      "dependencies": [
+        "Gemini_Provider",
+        "Circuit_Breaker"
+      ],
+      "is_active": true
+    },
+    {
+      "slo_id": "SLO_OCR_007",
+      "name": "OCR Text Recognition Reliability",
+      "category": "OCR",
+      "description": "98.5% of multi-page documents recognized without unrecoverable OCR errors.",
+      "business_purpose": "Ensure clean tokenization and text extraction from raw document scans.",
+      "target_pct": 98.5,
+      "measurement_window": "Rolling 30 Days",
+      "sli_formula": "count(ocr_page_status == 'SUCCESS') / count(ocr_pages_total)",
+      "owner": "Team Document Processing",
+      "severity": "MEDIUM",
+      "dependencies": [
+        "Tesseract_Engine",
+        "PDF_Plumber"
+      ],
+      "is_active": true
+    },
+    {
+      "slo_id": "SLO_STORAGE_008",
+      "name": "Artifact Storage Persistence Reliability",
+      "category": "Storage",
+      "description": "99.99% of document artifact read and write operations succeed without corruption.",
+      "business_purpose": "Guarantee immutable artifact storage and rapid download retrieval.",
+      "target_pct": 99.99,
+      "measurement_window": "Rolling 30 Days",
+      "sli_formula": "count(storage_io_success == 1) / count(storage_io_total)",
+      "owner": "Team Cloud Storage",
+      "severity": "CRITICAL",
+      "dependencies": [
+        "Blob_Storage",
+        "Disk_Filesystem"
+      ],
+      "is_active": true
+    }
+  ],
+  "subsystems_covered": [
+    "AI",
+    "Availability",
+    "Database",
+    "Latency",
+    "OCR",
+    "Queue",
+    "Storage",
+    "Worker"
+  ],
+  "architecture_compliant": true
+}

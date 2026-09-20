@@ -1,0 +1,35 @@
+{
+  "report_title": "Continuous Operational Insight Freshness & Lifecycle Report",
+  "streams_audited_count": 4,
+  "streams": [
+    {
+      "insight_stream": "Real-Time Anomaly Detection Stream",
+      "refresh_cadence": "Every 15 seconds",
+      "last_refreshed_timestamp": "2026-09-16T07:15:59.141681+00:00",
+      "stale_insights_purged_count": 4,
+      "is_fresh": true
+    },
+    {
+      "insight_stream": "Hourly Operational Performance Aggregation",
+      "refresh_cadence": "Every 60 minutes",
+      "last_refreshed_timestamp": "2026-09-16T07:15:59.141696+00:00",
+      "stale_insights_purged_count": 0,
+      "is_fresh": true
+    },
+    {
+      "insight_stream": "Daily Capacity & Budget Forecast Pipeline",
+      "refresh_cadence": "Every 24 hours",
+      "last_refreshed_timestamp": "2026-09-16T07:15:59.141706+00:00",
+      "stale_insights_purged_count": 1,
+      "is_fresh": true
+    },
+    {
+      "insight_stream": "Continuous Recommendation Policy Evaluator",
+      "refresh_cadence": "Every 6 hours",
+      "last_refreshed_timestamp": "2026-09-16T07:15:59.141714+00:00",
+      "stale_insights_purged_count": 2,
+      "is_fresh": true
+    }
+  ],
+  "continuous_insight_pipeline_active": true
+}

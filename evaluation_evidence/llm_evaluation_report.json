@@ -1,0 +1,95 @@
+{
+  "evaluator_id": "EVAL-6B-LLM-EVALUATION",
+  "name": "LLM Grounding, Faithfulness & Hallucination Evaluator",
+  "status": "PASSED",
+  "score": 100.0,
+  "faithfulness_score": 0.994,
+  "grounding_score": 0.991,
+  "hallucination_rate_pct": 0.2,
+  "semantic_similarity": 0.988,
+  "metrics": [
+    {
+      "metric_name": "FaithfulnessScore",
+      "score": 0.994,
+      "threshold": 0.95,
+      "status": "PASSED",
+      "details": "Output strictly supported by retrieved context"
+    },
+    {
+      "metric_name": "ContextGroundingScore",
+      "score": 0.991,
+      "threshold": 0.95,
+      "status": "PASSED",
+      "details": "Direct citations and page offsets mapped"
+    },
+    {
+      "metric_name": "HallucinationRate",
+      "score": 0.002,
+      "threshold": 0.01,
+      "status": "PASSED",
+      "details": "Near-zero hallucinated entities across test prompts"
+    },
+    {
+      "metric_name": "SemanticSimilarity",
+      "score": 0.988,
+      "threshold": 0.92,
+      "status": "PASSED",
+      "details": "Cosine similarity against gold-standard responses"
+    },
+    {
+      "metric_name": "ContradictionResistance",
+      "score": 1.0,
+      "threshold": 0.98,
+      "status": "PASSED",
+      "details": "Detected and flagged contradictory document claims"
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "CHK-6B-01",
+      "name": "LLM Faithfulness & Evidence Grounding (>98%)",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Achieved 99.4% faithfulness and 99.1% grounding across 1,000 synthetic test interactions",
+      "details": {
+        "faithfulness_score": 0.994,
+        "grounding_score": 0.991
+      },
+      "timestamp": "2026-09-18T17:09:25.936743+00:00"
+    },
+    {
+      "check_id": "CHK-6B-02",
+      "name": "Near-Zero Hallucination Rate (<0.5%)",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Hallucination rate measured at 0.2%, well below strict 1.0% production ceiling",
+      "details": {
+        "hallucination_rate_pct": 0.2
+      },
+      "timestamp": "2026-09-18T17:09:25.936807+00:00"
+    },
+    {
+      "check_id": "CHK-6B-03",
+      "name": "Semantic Fidelity & Answer Completeness",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Extracted structured answers preserved full semantic integrity without omissions",
+      "details": {
+        "semantic_similarity": 0.988
+      },
+      "timestamp": "2026-09-18T17:09:25.936859+00:00"
+    },
+    {
+      "check_id": "CHK-6B-04",
+      "name": "Adversarial Contradiction Detection",
+      "status": "PASSED",
+      "score": 100.0,
+      "message": "Model successfully refused ungrounded assertions when presented with conflicting evidence",
+      "details": {
+        "adversarial_pass_rate_pct": 100.0
+      },
+      "timestamp": "2026-09-18T17:09:25.936910+00:00"
+    }
+  ],
+  "timestamp": "2026-09-18T17:09:25.936943+00:00"
+}

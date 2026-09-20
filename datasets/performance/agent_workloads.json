@@ -1,0 +1,26 @@
+[
+  {
+    "task_id": "AGT-SIMPLE-01",
+    "type": "single_step_extraction",
+    "description": "Extract total amount and tax ID from invoice",
+    "steps_count": 1,
+    "max_allowed_duration_ms": 250,
+    "sla_completion_pct": 99.9
+  },
+  {
+    "task_id": "AGT-MULTI-02",
+    "type": "multi_step_analysis",
+    "description": "Extract contract terms -> verify against compliance policy -> calculate risk score",
+    "steps_count": 3,
+    "max_allowed_duration_ms": 850,
+    "sla_completion_pct": 99.2
+  },
+  {
+    "task_id": "AGT-AUTO-03",
+    "type": "autonomous_e2e_workflow",
+    "description": "Document Ingestion -> OCR -> Semantic Parse -> Multi-Agent Review -> ERP Export -> Executive Notification",
+    "steps_count": 6,
+    "max_allowed_duration_ms": 1800,
+    "sla_completion_pct": 98.5
+  }
+]

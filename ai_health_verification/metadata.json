@@ -1,0 +1,32 @@
+{
+  "platform": "DocuTask Agent Enterprise",
+  "phase": "PART 3H.3.8 - AI Provider Health Verification Framework",
+  "generated_at": "2026-09-19T07:04:29.571046+00:00",
+  "primary_provider": "gemini",
+  "primary_status": "AVAILABLE",
+  "manifest_files_count": 8,
+  "overall_status": "CERTIFIED",
+  "scorecard_summary": {
+    "availability_score": 99.96,
+    "authentication_score": 100.0,
+    "latency_score": 100.0,
+    "failure_handling_score": 100.0,
+    "response_quality_score": 100.0,
+    "security_score": 100.0,
+    "overall_score": 99.99,
+    "certification_tier": "AI Reliability Certified",
+    "certification_verdict": "CERTIFIED",
+    "passed": true,
+    "details": {
+      "target_threshold_pct": 95.0,
+      "category_weights": {
+        "availability_detection": 0.2,
+        "authentication_verification": 0.15,
+        "latency_monitoring": 0.15,
+        "failure_handling": 0.2,
+        "response_quality_validation": 0.15,
+        "security": 0.15
+      }
+    }
+  }
+}

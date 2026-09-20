@@ -1,0 +1,94 @@
+{
+  "total_policies": 7,
+  "level_0_count": 1,
+  "level_1_count": 3,
+  "level_2_count": 2,
+  "level_3_count": 1,
+  "policies": [
+    {
+      "condition": "p95_latency_slight_increase",
+      "target_component": "api_gateway",
+      "action": "log_latency_telemetry_only",
+      "action_level": "Level 0 - Informational",
+      "risk": "low",
+      "max_attempts": 0,
+      "cooldown_seconds": 0,
+      "blast_radius": "single_instance",
+      "requires_preconditions": false,
+      "rollback_supported": false
+    },
+    {
+      "condition": "database_connection_exhausted",
+      "target_component": "postgresql_pool",
+      "action": "restart_connection_pool",
+      "action_level": "Level 1 - Auto Safe Action",
+      "risk": "low",
+      "max_attempts": 3,
+      "cooldown_seconds": 300,
+      "blast_radius": "single_instance",
+      "requires_preconditions": true,
+      "rollback_supported": true
+    },
+    {
+      "condition": "cache_memory_saturation",
+      "target_component": "redis_cache",
+      "action": "clear_expired_cache",
+      "action_level": "Level 1 - Auto Safe Action",
+      "risk": "low",
+      "max_attempts": 3,
+      "cooldown_seconds": 180,
+      "blast_radius": "single_instance",
+      "requires_preconditions": true,
+      "rollback_supported": true
+    },
+    {
+      "condition": "gemini_api_503_outage",
+      "target_component": "ai_provider_router",
+      "action": "activate_fallback_provider",
+      "action_level": "Level 1 - Auto Safe Action",
+      "risk": "low",
+      "max_attempts": 1,
+      "cooldown_seconds": 60,
+      "blast_radius": "local_service",
+      "requires_preconditions": true,
+      "rollback_supported": true
+    },
+    {
+      "condition": "worker_heartbeat_missing",
+      "target_component": "celery_worker",
+      "action": "restart_worker_container",
+      "action_level": "Level 2 - Controlled Recovery",
+      "risk": "medium",
+      "max_attempts": 3,
+      "cooldown_seconds": 300,
+      "blast_radius": "single_instance",
+      "requires_preconditions": true,
+      "rollback_supported": true
+    },
+    {
+      "condition": "redis_queue_backlog",
+      "target_component": "queue_fleet",
+      "action": "scale_queue_workers",
+      "action_level": "Level 2 - Controlled Recovery",
+      "risk": "medium",
+      "max_attempts": 2,
+      "cooldown_seconds": 600,
+      "blast_radius": "local_service",
+      "requires_preconditions": true,
+      "rollback_supported": true
+    },
+    {
+      "condition": "database_corruption_detected",
+      "target_component": "database_cluster",
+      "action": "restore_database_from_backup",
+      "action_level": "Level 3 - Human Approval Required",
+      "risk": "critical",
+      "max_attempts": 1,
+      "cooldown_seconds": 3600,
+      "blast_radius": "fleet",
+      "requires_preconditions": true,
+      "rollback_supported": true
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,58 @@
+{
+  "total_security_checks": 5,
+  "secrets_leaked": false,
+  "redaction_verified": true,
+  "auth_enforced": true,
+  "checks": [
+    {
+      "check_name": "Gemini API Key Masking in Metric Labels",
+      "category": "Credential Redaction",
+      "exposed_sensitive_data": false,
+      "redaction_active": true,
+      "passed": true,
+      "sample_safe_output": "gemini_api_status{provider=\"gemini\",tier=\"production\"} 1"
+    },
+    {
+      "check_name": "PostgreSQL Connection String Password Redaction",
+      "category": "Credential Redaction",
+      "exposed_sensitive_data": false,
+      "redaction_active": true,
+      "passed": true,
+      "sample_safe_output": "postgres_db_status{host=\"postgres-primary\",port=\"5432\",user=\"docutask_app\"} 1"
+    },
+    {
+      "check_name": "Customer Document PII Sanitization in Trace Attributes",
+      "category": "Data Privacy",
+      "exposed_sensitive_data": false,
+      "redaction_active": true,
+      "passed": true,
+      "sample_safe_output": "attributes: {\"document_id\": \"doc_12345\", \"file_size_kb\": 2450}"
+    },
+    {
+      "check_name": "Prometheus Metrics Endpoint Scrape Authentication",
+      "category": "Access Control",
+      "exposed_sensitive_data": false,
+      "redaction_active": true,
+      "passed": true,
+      "sample_safe_output": "HTTP 401 Unauthorized when Authorization header missing; Mutual TLS active"
+    },
+    {
+      "check_name": "Grafana Dashboard RBAC & Session Security",
+      "category": "Access Control",
+      "exposed_sensitive_data": false,
+      "redaction_active": true,
+      "passed": true,
+      "sample_safe_output": "Role-Based Access Control enforced (Viewer, Editor, Admin) via OIDC SSO"
+    }
+  ],
+  "passed": true,
+  "details": {
+    "sanitization_policy": "Zero Sensitive Data Exposure in Telemetry",
+    "redaction_rules": [
+      "Regex mask on API keys: AIzaSy[0-9A-Za-z-_]{33}",
+      "Regex mask on JWT/Bearer tokens: Bearer [A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.?[A-Za-z0-9-_.+/=]*",
+      "Redact raw OCR text payload from traces"
+    ],
+    "tls_version": "TLS 1.3"
+  }
+}

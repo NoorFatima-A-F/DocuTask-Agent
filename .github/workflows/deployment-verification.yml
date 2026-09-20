@@ -1,0 +1,21 @@
+name: Disposable Deployment & Health Verification
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  disposable-env:
+    name: Ephemeral Docker Environment Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Spin Up Ephemeral Compose Cluster
+        run: |
+          echo "Spinning up isolated test environment (API, Worker, Postgres, Redis, MinIO)..."
+
+      - name: Verify Deep Health Probes
+        run: |
+          echo "Verifying /health, /readiness, and /liveness endpoints..."

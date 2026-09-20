@@ -1,0 +1,75 @@
+{
+  "verifier_id": "VERIFY-3N.8-NETWORK-SEC",
+  "phase_id": "3N.8",
+  "phase_name": "Network Security Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Database Port 5432 Isolation",
+      "passed": true,
+      "details": "PostgreSQL port 5432 strictly isolated to internal VPC subnet; external connection probes rejected.",
+      "metrics": {
+        "database_port_isolated": true
+      }
+    },
+    {
+      "name": "Redis Port 6379 Isolation",
+      "passed": true,
+      "details": "Redis port 6379 strictly isolated to internal VPC subnet with AUTH enabled; external probes rejected.",
+      "metrics": {
+        "redis_port_isolated": true
+      }
+    },
+    {
+      "name": "Public Ingress Perimeter Defense",
+      "passed": true,
+      "details": "Only HTTPS 443 on API Load Balancer is accessible publicly; backend microservices are non-routable.",
+      "metrics": {
+        "public_network_segregated": true
+      }
+    },
+    {
+      "name": "Security Group Ingress Whitelisting",
+      "passed": true,
+      "details": "Inter-service network policies explicitly restrict ingress traffic by source security group ID.",
+      "metrics": {
+        "firewall_rules_enforced": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:58.302166+00:00",
+  "execution_timestamp": "2026-09-19T07:04:58.302175+00:00",
+  "summary": "Network security verified: 100% private subnet isolation for database and message broker.",
+  "report_title": "Network Security & Isolation Report",
+  "public_network_segregated": true,
+  "database_port_isolated": true,
+  "redis_port_isolated": true,
+  "firewall_rules_enforced": true,
+  "rules": [
+    {
+      "service_name": "PostgreSQL Database",
+      "internal_port": 5432,
+      "public_exposure": false,
+      "security_group_bound": true
+    },
+    {
+      "service_name": "Redis Broker/Cache",
+      "internal_port": 6379,
+      "public_exposure": false,
+      "security_group_bound": true
+    },
+    {
+      "service_name": "Celery Internal Worker Mesh",
+      "internal_port": 0,
+      "public_exposure": false,
+      "security_group_bound": true
+    },
+    {
+      "service_name": "FastAPI Ingress Gateway",
+      "internal_port": 8000,
+      "public_exposure": true,
+      "security_group_bound": true
+    }
+  ]
+}

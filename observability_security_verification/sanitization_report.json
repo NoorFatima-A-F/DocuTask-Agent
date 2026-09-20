@@ -1,0 +1,43 @@
+{
+  "active_sanitization_rules": [
+    {
+      "rule_name": "Password Masking",
+      "target_pattern": "(?i)(password|passwd|secret)\\s*[:=]\\s*['\\\"]?([^'\\\"\\s]+)['\\\"]?",
+      "replacement_template": "\\1='[REDACTED]'",
+      "active": true
+    },
+    {
+      "rule_name": "JWT Bearer Token Masking",
+      "target_pattern": "(?i)Bearer\\s+eyJ[a-zA-Z0-9_\\-\\.]+",
+      "replacement_template": "Bearer [REDACTED_JWT]",
+      "active": true
+    },
+    {
+      "rule_name": "Google API Key Masking",
+      "target_pattern": "AIza[0-9A-Za-z-_]{30,40}",
+      "replacement_template": "[REDACTED_GEMINI_KEY]",
+      "active": true
+    },
+    {
+      "rule_name": "Email Address Masking",
+      "target_pattern": "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+",
+      "replacement_template": "[REDACTED_EMAIL]",
+      "active": true
+    },
+    {
+      "rule_name": "Credit Card / CNIC / SSN Masking",
+      "target_pattern": "\\b\\d{4}[-\\s]?\\d{4}[-\\s]?\\d{4}[-\\s]?\\d{4}\\b",
+      "replacement_template": "[REDACTED_CARD_NUMBER]",
+      "active": true
+    },
+    {
+      "rule_name": "Document Text Buffer Masking",
+      "target_pattern": "(?i)(raw_text|ocr_content|prompt_content)\\s*[:=]\\s*['\\\"].*?['\\\"]",
+      "replacement_template": "\\1='[REDACTED_CONTENT]'",
+      "active": true
+    }
+  ],
+  "sample_tests_passed": 6,
+  "sample_tests_failed": 0,
+  "sanitization_verified": true
+}

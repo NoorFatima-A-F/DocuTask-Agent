@@ -1,0 +1,14 @@
+{
+  "3_year_tco_comparison": {
+    "year_1_human_tco": 895200.0,
+    "year_1_ai_tco": 24960.0,
+    "year_2_human_tco": 939960.0,
+    "year_2_ai_tco": 24864.0,
+    "year_3_human_tco": 986958.0,
+    "year_3_ai_tco": 24777.6,
+    "cumulative_3yr_human_tco": 2822118.0,
+    "cumulative_3yr_ai_tco": 74601.6,
+    "cumulative_3yr_net_savings": 2747516.4,
+    "scaling_elasticity": "Near-Zero Marginal Labor Scaling Cost (O(1) vs O(N))"
+  }
+}

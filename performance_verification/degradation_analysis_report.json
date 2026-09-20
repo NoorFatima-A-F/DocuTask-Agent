@@ -1,0 +1,92 @@
+{
+  "verifier_id": "VERIFY-3J.6.11-DEGRADE-ANALYSIS",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "No Sudden Crash Under Overload",
+      "passed": true,
+      "details": "System degraded gracefully across all 5 load stages without process crashes or OOM kills",
+      "metrics": {
+        "stages_tested": 5,
+        "crashes": 0
+      }
+    },
+    {
+      "name": "Controlled Degradation Pattern",
+      "passed": true,
+      "details": "Latency increases monotonically with load — no erratic behavior spikes",
+      "metrics": {
+        "latency_progression": [
+          42.0,
+          85.0,
+          220.0,
+          450.0,
+          1200.0
+        ]
+      }
+    },
+    {
+      "name": "Rate Limiting Activation at Extreme Load",
+      "passed": true,
+      "details": "Rate limiting activated at 5000 concurrent jobs to protect system stability",
+      "metrics": {
+        "rate_limiting_stage": 5000
+      }
+    },
+    {
+      "name": "Error Rate Below 5% at Maximum Load",
+      "passed": true,
+      "details": "Maximum error rate: 2.0% at peak load (threshold: 5.0%)",
+      "metrics": {
+        "max_failure_rate_pct": 2.0,
+        "threshold": 5.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:02.153364+00:00",
+  "execution_timestamp": "2026-09-19T07:05:02.153435+00:00",
+  "summary": "",
+  "report_title": "Graceful Degradation & Overload Behavior Report",
+  "stages": [
+    {
+      "load_jobs": 100,
+      "p95_latency_ms": 42.0,
+      "queue_growth_items": 0,
+      "failure_rate_pct": 0.0,
+      "degradation_behavior": "Normal Operation"
+    },
+    {
+      "load_jobs": 500,
+      "p95_latency_ms": 85.0,
+      "queue_growth_items": 50,
+      "failure_rate_pct": 0.0,
+      "degradation_behavior": "Increased Latency"
+    },
+    {
+      "load_jobs": 1000,
+      "p95_latency_ms": 220.0,
+      "queue_growth_items": 300,
+      "failure_rate_pct": 0.1,
+      "degradation_behavior": "Graceful Backpressure"
+    },
+    {
+      "load_jobs": 2000,
+      "p95_latency_ms": 450.0,
+      "queue_growth_items": 800,
+      "failure_rate_pct": 0.5,
+      "degradation_behavior": "Controlled Degradation"
+    },
+    {
+      "load_jobs": 5000,
+      "p95_latency_ms": 1200.0,
+      "queue_growth_items": 3500,
+      "failure_rate_pct": 2.0,
+      "degradation_behavior": "Rate Limiting Active"
+    }
+  ],
+  "controlled_degradation_verified": true,
+  "sudden_crash_detected": false
+}

@@ -1,0 +1,44 @@
+{
+  "report_title": "Predictive Incident Report",
+  "total_predictive_incidents": 4,
+  "incidents": [
+    {
+      "incident_id": "PINC-001",
+      "incident_type": "PREDICTIVE",
+      "risk_component": "postgres-database",
+      "failure_probability": 0.91,
+      "recommended_action": "reduce connection pressure and rotate pool",
+      "risk_level": "CRITICAL",
+      "incident_created": true
+    },
+    {
+      "incident_id": "PINC-002",
+      "incident_type": "PREDICTIVE",
+      "risk_component": "celery-worker-pool",
+      "failure_probability": 0.87,
+      "recommended_action": "restart leaking worker before memory exhaustion",
+      "risk_level": "HIGH",
+      "incident_created": true
+    },
+    {
+      "incident_id": "PINC-003",
+      "incident_type": "PREDICTIVE",
+      "risk_component": "redis-task-queue",
+      "failure_probability": 0.92,
+      "recommended_action": "scale workers or throttle ingestion",
+      "risk_level": "CRITICAL",
+      "incident_created": true
+    },
+    {
+      "incident_id": "PINC-004",
+      "incident_type": "PREDICTIVE",
+      "risk_component": "gemini-1.5-flash-client",
+      "failure_probability": 0.65,
+      "recommended_action": "enable fallback AI provider",
+      "risk_level": "MEDIUM",
+      "incident_created": true
+    }
+  ],
+  "all_incidents_actionable": true,
+  "predictive_incident_valid": true
+}

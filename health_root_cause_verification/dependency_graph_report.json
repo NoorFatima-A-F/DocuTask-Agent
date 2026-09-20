@@ -1,0 +1,94 @@
+{
+  "total_nodes": 7,
+  "critical_path_nodes": [
+    "api_gateway",
+    "postgresql",
+    "redis_queue",
+    "worker_fleet",
+    "document_storage"
+  ],
+  "nodes": {
+    "api_gateway": {
+      "name": "api_gateway",
+      "component_type": "api_gateway",
+      "criticality": "critical",
+      "depends_on": [],
+      "dependents": [
+        "postgresql",
+        "redis_queue"
+      ],
+      "healthy": true
+    },
+    "postgresql": {
+      "name": "postgresql",
+      "component_type": "database",
+      "criticality": "critical",
+      "depends_on": [
+        "api_gateway"
+      ],
+      "dependents": [
+        "worker_fleet"
+      ],
+      "healthy": true
+    },
+    "redis_queue": {
+      "name": "redis_queue",
+      "component_type": "queue",
+      "criticality": "critical",
+      "depends_on": [
+        "api_gateway"
+      ],
+      "dependents": [
+        "worker_fleet"
+      ],
+      "healthy": true
+    },
+    "worker_fleet": {
+      "name": "worker_fleet",
+      "component_type": "worker",
+      "criticality": "critical",
+      "depends_on": [
+        "postgresql",
+        "redis_queue"
+      ],
+      "dependents": [
+        "gemini_ai",
+        "ocr_provider",
+        "document_storage"
+      ],
+      "healthy": true
+    },
+    "gemini_ai": {
+      "name": "gemini_ai",
+      "component_type": "ai_provider",
+      "criticality": "high",
+      "depends_on": [
+        "worker_fleet"
+      ],
+      "dependents": [],
+      "healthy": true
+    },
+    "ocr_provider": {
+      "name": "ocr_provider",
+      "component_type": "ocr_service",
+      "criticality": "medium",
+      "depends_on": [
+        "worker_fleet"
+      ],
+      "dependents": [],
+      "healthy": true
+    },
+    "document_storage": {
+      "name": "document_storage",
+      "component_type": "storage",
+      "criticality": "critical",
+      "depends_on": [
+        "worker_fleet"
+      ],
+      "dependents": [],
+      "healthy": true
+    }
+  },
+  "cascading_risk_score": 92.5,
+  "status": "PASS"
+}

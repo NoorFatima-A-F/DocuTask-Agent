@@ -1,0 +1,15 @@
+export { CustomerDashboard } from './CustomerDashboard';
+export { AutomationStudio } from './AutomationStudio';
+export { WorkflowBuilder } from './WorkflowBuilder';
+export { TemplateMarketplace } from './TemplateMarketplace';
+export { ConnectorCenter } from './ConnectorCenter';
+export { ApprovalCenter } from './ApprovalCenter';
+export { AnalyticsDashboard } from './AnalyticsDashboard';
+export { TrustCenter } from './TrustCenter';
+export { PerformanceCommandCenter } from './PerformanceCommandCenter';
+export { BusinessValueCommandCenter } from './BusinessValueCommandCenter';
+export { EnterpriseReadinessCommandCenter } from './EnterpriseReadinessCommandCenter';
+export { DemoMode } from './DemoMode';
+export { IndustrySolutions } from './IndustrySolutions';
+export { CaseStudies } from './CaseStudies';
+export { CustomerPlatformPage } from './CustomerPlatformPage';

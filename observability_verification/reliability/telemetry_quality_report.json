@@ -1,0 +1,27 @@
+{
+  "report_title": "Observability Telemetry Data Quality Report",
+  "audits": [
+    {
+      "telemetry_type": "Metrics",
+      "completeness_pct": 100.0,
+      "accuracy_pct": 99.9,
+      "freshness_latency_sec": 1.2,
+      "status": "VERIFIED"
+    },
+    {
+      "telemetry_type": "Logs",
+      "completeness_pct": 100.0,
+      "accuracy_pct": 100.0,
+      "freshness_latency_sec": 0.8,
+      "status": "VERIFIED"
+    },
+    {
+      "telemetry_type": "Traces",
+      "completeness_pct": 99.8,
+      "accuracy_pct": 99.9,
+      "freshness_latency_sec": 1.5,
+      "status": "VERIFIED"
+    }
+  ],
+  "data_quality_score_pct": 99.93
+}

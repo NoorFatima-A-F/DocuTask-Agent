@@ -1,0 +1,11 @@
+{
+  "scenario": "Canary Deployment Failure Rollback",
+  "original_version": "v2.14.0",
+  "failed_target_version": "v2.15.0-rc1",
+  "rollback_triggered_automatically": true,
+  "rollback_duration_ms": 420.0,
+  "configuration_restored": true,
+  "database_compatibility_preserved": true,
+  "service_restored_after_rollback": true,
+  "rollback_successful": true
+}

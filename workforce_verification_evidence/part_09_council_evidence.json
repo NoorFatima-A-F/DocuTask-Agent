@@ -1,0 +1,62 @@
+{
+  "part_id": "PART_09_COUNCIL",
+  "title": "Part 9 \u2014 Executive AI Council Verification",
+  "description": "Validates executive governance council, policy review voting, model upgrade sign-off, and strategic budget allocations.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.03,
+  "metrics": {
+    "council_members_registered": 7,
+    "governance_resolutions_ratified": 18,
+    "voting_quorum_threshold_pct": 71.4,
+    "veto_mechanism_validated": true
+  },
+  "assertions": [
+    {
+      "name": "assert_council_quorum_voting",
+      "passed": true,
+      "message": "Executive AI Council achieved full 7-member quorum and ratified resolution with 5/7 majority",
+      "execution_time_ms": 0.004,
+      "details": {
+        "YES": 5,
+        "NO": 2
+      }
+    },
+    {
+      "name": "assert_security_policy_ratification",
+      "passed": true,
+      "message": "Executive council successfully ratified zero-trust security policy with mandatory CISO sign-off",
+      "execution_time_ms": 0.001,
+      "details": {
+        "title": "Mandate AES-256-GCM for all tenant storage",
+        "ciso_approved": true
+      }
+    },
+    {
+      "name": "assert_model_upgrade_signoff",
+      "passed": true,
+      "message": "Executive council evaluated benchmark pass rates and signed off on production LLM model upgrade",
+      "execution_time_ms": 0.002,
+      "details": {
+        "model_version": "gemini-2.5-flash",
+        "eval_pass_rate": 0.994,
+        "cost_delta_pct": -12.5,
+        "council_decision": "APPROVED"
+      }
+    },
+    {
+      "name": "assert_budget_allocation_governance",
+      "passed": true,
+      "message": "Departmental compute and token budgets allocated with formal executive fiduciary approval",
+      "execution_time_ms": 0.002,
+      "details": {
+        "dept": "FINANCE_AP",
+        "allocated_tokens_m": 500,
+        "approved_by_cfo": true
+      }
+    }
+  ]
+}

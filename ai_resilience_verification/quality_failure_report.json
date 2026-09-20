@@ -1,0 +1,29 @@
+{
+  "title": "AI Response Quality & Schema Failure Report",
+  "malformed_response_handling": {
+    "scenario": "malformed_response",
+    "total_corrupted_payloads": 50,
+    "json_syntax_errors_injected": 17,
+    "schema_missing_fields_injected": 17,
+    "plain_text_injected": 16,
+    "schema_validation_failures_detected": 50,
+    "repair_attempts_triggered": 50,
+    "repair_success_count": 34,
+    "fallback_rerouted_count": 16,
+    "uncaught_exceptions": 0,
+    "status": "PASS"
+  },
+  "quality_degradation_handling": {
+    "scenario": "quality_degradation",
+    "low_confidence_injected": 20,
+    "hallucinated_fields_injected": 20,
+    "incorrect_totals_injected": 20,
+    "evaluator_rejections": 60,
+    "auto_repair_rate_pct": 66.7,
+    "routed_to_human_review_count": 20,
+    "bad_data_escaped_to_db": 0,
+    "status": "PASS"
+  },
+  "bad_data_escaped_to_db": 0,
+  "status": "PASS"
+}

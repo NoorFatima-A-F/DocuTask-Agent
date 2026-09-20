@@ -1,0 +1,144 @@
+{
+  "soc2_controls": [
+    {
+      "framework": "SOC 2 Type II",
+      "control_id": "CC6.1",
+      "control_name": "Logical Access Controls & IAM Boundaries",
+      "domain": "Security",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-SEC-001",
+        "EV-SEC-002",
+        "EV-SEC-003",
+        "EV-SEC-004"
+      ],
+      "description": "RBAC enforced with strict role isolation and token revocation."
+    },
+    {
+      "framework": "SOC 2 Type II",
+      "control_id": "CC6.6",
+      "control_name": "Boundary Protection & Container Isolation",
+      "domain": "Security",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-CONT-001",
+        "EV-CONT-002",
+        "EV-CONT-003"
+      ],
+      "description": "Non-root container execution with dropped Linux capabilities."
+    },
+    {
+      "framework": "SOC 2 Type II",
+      "control_id": "A1.2",
+      "control_name": "Environmental Redundancy & Chaos Recovery",
+      "domain": "Availability",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-CHAOS-001",
+        "EV-CHAOS-002",
+        "EV-CHAOS-003"
+      ],
+      "description": "Sub-5s automatic pod eviction self-healing verified."
+    },
+    {
+      "framework": "SOC 2 Type II",
+      "control_id": "A1.3",
+      "control_name": "Disaster Recovery & Backup Restoration",
+      "domain": "Availability",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-REC-001",
+        "EV-REC-002",
+        "EV-REC-003"
+      ],
+      "description": "Point-in-time database restore verified within 4.2 min SLA."
+    }
+  ],
+  "iso27001_controls": [
+    {
+      "framework": "ISO/IEC 27001:2022",
+      "control_id": "A.8.8",
+      "control_name": "Management of Technical Vulnerabilities",
+      "domain": "Technological Controls",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-SEC-001",
+        "EV-SEC-002",
+        "EV-SEC-003",
+        "EV-SEC-004"
+      ],
+      "description": "Continuous Trivy/Grype image scans zero critical CVEs policy."
+    },
+    {
+      "framework": "ISO/IEC 27001:2022",
+      "control_id": "A.8.24",
+      "control_name": "Use of Cryptography & KMS Protection",
+      "domain": "Technological Controls",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-SEC-001",
+        "EV-SEC-002",
+        "EV-SEC-003",
+        "EV-SEC-004"
+      ],
+      "description": "KMS envelope encryption for sensitive payload data at rest."
+    },
+    {
+      "framework": "ISO/IEC 27001:2022",
+      "control_id": "A.8.13",
+      "control_name": "Information Backup Management",
+      "domain": "Operational Controls",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-REC-001",
+        "EV-REC-002",
+        "EV-REC-003"
+      ],
+      "description": "Cryptographic SHA-256 validation of all immutable backup snapshots."
+    }
+  ],
+  "nist_controls": [
+    {
+      "framework": "NIST CSF 2.0",
+      "control_id": "PR.DS-01",
+      "control_name": "Data-at-Rest and In-Transit Protection",
+      "domain": "Protect (PR)",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-SEC-001",
+        "EV-SEC-002",
+        "EV-SEC-003",
+        "EV-SEC-004"
+      ],
+      "description": "AES-256 and TLS 1.3 enforced across all data paths."
+    },
+    {
+      "framework": "NIST CSF 2.0",
+      "control_id": "DE.CM-01",
+      "control_name": "Continuous Security Telemetry & Monitoring",
+      "domain": "Detect (DE)",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-OBS-001",
+        "EV-OBS-002",
+        "EV-OBS-003"
+      ],
+      "description": "OpenTelemetry distributed tracing and SIEM log audit streams active."
+    },
+    {
+      "framework": "NIST CSF 2.0",
+      "control_id": "RC.RP-01",
+      "control_name": "Recovery Plan Execution & SLA Validation",
+      "domain": "Recover (RC)",
+      "status": "COMPLIANT",
+      "evidence_ids": [
+        "EV-REC-001",
+        "EV-REC-002",
+        "EV-REC-003"
+      ],
+      "description": "Automated disaster recovery drill verified RTO < 15m and RPO < 5m."
+    }
+  ],
+  "overall_compliance_pct": 100.0,
+  "generated_at": "2026-09-19T07:04:53.669432+00:00"
+}

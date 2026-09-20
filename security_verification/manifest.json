@@ -1,0 +1,168 @@
+{
+  "project": "DocuTask-Agent",
+  "security_framework": "Enterprise DevSecOps & Zero-Trust",
+  "version": "3.16.0",
+  "commit": "HEAD",
+  "environment": "Enterprise Infrastructure Security Lab",
+  "timestamp": "2026-09-19T07:04:58.621814+00:00",
+  "overall_score": 100.0,
+  "certification_tier": "Enterprise Security Ready",
+  "files": [
+    {
+      "filename": "ai_security_report.json",
+      "report_title": "Ai Security Report",
+      "sha256": "60afbd4da2ab13df4e8b19664a4e6536ce349679013973a8d992f9bc331ee9d6",
+      "size_bytes": 3150
+    },
+    {
+      "filename": "api_security_report.json",
+      "report_title": "Api Security Report",
+      "sha256": "885a29b0f5ce527330d814ef2cba6a04052d09c7aafbe532ce64d5b89893d880",
+      "size_bytes": 3042
+    },
+    {
+      "filename": "architecture_report.json",
+      "report_title": "Architecture Report",
+      "sha256": "3beee92b234b683c0277412e0c84a1a8ae49afcb98a7ed3804740836cdace745",
+      "size_bytes": 2918
+    },
+    {
+      "filename": "attack_simulation_report.json",
+      "report_title": "Attack Simulation Report",
+      "sha256": "c5ea66d16daca2c6270028579571dc18edd9982bf5c0a177eb604f0942ef1f90",
+      "size_bytes": 3949
+    },
+    {
+      "filename": "cicd_security_report.json",
+      "report_title": "Cicd Security Report",
+      "sha256": "65b87187b551a7f5395c8c4faaa42b00cc67fc15185bc796607467939e9ba607",
+      "size_bytes": 2953
+    },
+    {
+      "filename": "container_security_report.json",
+      "report_title": "Container Security Report",
+      "sha256": "0e735d0c4a3e893340e3233b594885412214e213cbfc42616554b8f02281bff4",
+      "size_bytes": 2699
+    },
+    {
+      "filename": "database_security_report.json",
+      "report_title": "Database Security Report",
+      "sha256": "db48cd71d9ff50942ac97edd5c6ce1ee71141c23afa9151157946e3384d125ca",
+      "size_bytes": 2494
+    },
+    {
+      "filename": "iam_report.json",
+      "report_title": "Iam Report",
+      "sha256": "edeebf196daee10d5aa06e692a64bd067be3cdd9fcd2bf4310847e4266856c10",
+      "size_bytes": 2922
+    },
+    {
+      "filename": "iam_security_report.json",
+      "report_title": "Iam Security Report",
+      "sha256": "edeebf196daee10d5aa06e692a64bd067be3cdd9fcd2bf4310847e4266856c10",
+      "size_bytes": 2922
+    },
+    {
+      "filename": "image_security_report.json",
+      "report_title": "Image Security Report",
+      "sha256": "15175d01ea1fb42c721f8789ec6bde6fcdfeffc98e9a033f4e5e63ec5426c8f3",
+      "size_bytes": 2700
+    },
+    {
+      "filename": "image_supply_chain_report.json",
+      "report_title": "Image Supply Chain Report",
+      "sha256": "15175d01ea1fb42c721f8789ec6bde6fcdfeffc98e9a033f4e5e63ec5426c8f3",
+      "size_bytes": 2700
+    },
+    {
+      "filename": "network_report.json",
+      "report_title": "Network Report",
+      "sha256": "bb9253afce4fd1ee54b18061933d8bec49b5c1ffed1cb17649ef038a0b90d678",
+      "size_bytes": 2376
+    },
+    {
+      "filename": "network_security_report.json",
+      "report_title": "Network Security Report",
+      "sha256": "bb9253afce4fd1ee54b18061933d8bec49b5c1ffed1cb17649ef038a0b90d678",
+      "size_bytes": 2376
+    },
+    {
+      "filename": "scorecard.json",
+      "report_title": "Scorecard",
+      "sha256": "b2d2e5878829956c9e4e805780faa9961a376c15d75b40883d1bfe915ec59da4",
+      "size_bytes": 2134
+    },
+    {
+      "filename": "secret_report.json",
+      "report_title": "Secret Report",
+      "sha256": "3515af62151bdad5152a2438b279302b43ee3b0155ba36214f4ec5fbf880997b",
+      "size_bytes": 2562
+    },
+    {
+      "filename": "secret_security_report.json",
+      "report_title": "Secret Security Report",
+      "sha256": "3515af62151bdad5152a2438b279302b43ee3b0155ba36214f4ec5fbf880997b",
+      "size_bytes": 2562
+    },
+    {
+      "filename": "security_architecture_report.json",
+      "report_title": "Security Architecture Report",
+      "sha256": "3beee92b234b683c0277412e0c84a1a8ae49afcb98a7ed3804740836cdace745",
+      "size_bytes": 2918
+    },
+    {
+      "filename": "security_attack_simulation_report.json",
+      "report_title": "Security Attack Simulation Report",
+      "sha256": "c5ea66d16daca2c6270028579571dc18edd9982bf5c0a177eb604f0942ef1f90",
+      "size_bytes": 3949
+    },
+    {
+      "filename": "security_certification.json",
+      "report_title": "Security Certification",
+      "sha256": "b2d2e5878829956c9e4e805780faa9961a376c15d75b40883d1bfe915ec59da4",
+      "size_bytes": 2134
+    },
+    {
+      "filename": "security_monitoring_report.json",
+      "report_title": "Security Monitoring Report",
+      "sha256": "0fc22cfb17174848e9c47c90dfbf3aeea30239bba22e6790f204d8ef232c4d78",
+      "size_bytes": 2615
+    },
+    {
+      "filename": "security_scorecard.json",
+      "report_title": "Security Scorecard",
+      "sha256": "b2d2e5878829956c9e4e805780faa9961a376c15d75b40883d1bfe915ec59da4",
+      "size_bytes": 2134
+    },
+    {
+      "filename": "service_security_report.json",
+      "report_title": "Service Security Report",
+      "sha256": "8fdf31217a80a88a5c5f6ba0c76f6b5b589a7be3d5829595d45a47bf72873a2c",
+      "size_bytes": 2680
+    },
+    {
+      "filename": "software_bill_of_materials.json",
+      "report_title": "Software Bill Of Materials",
+      "sha256": "15175d01ea1fb42c721f8789ec6bde6fcdfeffc98e9a033f4e5e63ec5426c8f3",
+      "size_bytes": 2700
+    },
+    {
+      "filename": "storage_security_report.json",
+      "report_title": "Storage Security Report",
+      "sha256": "8fdfb831edc426cff085434ed4f456cc94cd43b8f6156921dcfc73a0c8171e63",
+      "size_bytes": 2718
+    },
+    {
+      "filename": "threat_model_report.json",
+      "report_title": "Threat Model Report",
+      "sha256": "da154b7dc56fb19841b88bb4ba1bed660b70445a1ca55457063151b9b823345c",
+      "size_bytes": 3602
+    },
+    {
+      "filename": "vulnerability_report.json",
+      "report_title": "Vulnerability Report",
+      "sha256": "c21148e58157bdb63f2e01de1b332fcebb2ab05cf3d53f9bd2e9ec5f272322be",
+      "size_bytes": 2561
+    }
+  ]
+}

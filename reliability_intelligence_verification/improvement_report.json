@@ -1,0 +1,45 @@
+{
+  "total_cycles_reviewed": 4,
+  "improvement_velocity_active": true,
+  "cycles": [
+    {
+      "cycle_name": "SRE Review Sprint 2026-W34",
+      "review_period": "2026-08-17 to 2026-08-23",
+      "incident_count": 6,
+      "mttr_trend_pct": -14.5,
+      "slo_attainment_pct": 99.62,
+      "completed_action_items": 8
+    },
+    {
+      "cycle_name": "SRE Review Sprint 2026-W35",
+      "review_period": "2026-08-24 to 2026-08-30",
+      "incident_count": 4,
+      "mttr_trend_pct": -18.2,
+      "slo_attainment_pct": 99.78,
+      "completed_action_items": 11
+    },
+    {
+      "cycle_name": "SRE Review Sprint 2026-W36",
+      "review_period": "2026-08-31 to 2026-09-06",
+      "incident_count": 3,
+      "mttr_trend_pct": -22.0,
+      "slo_attainment_pct": 99.85,
+      "completed_action_items": 14
+    },
+    {
+      "cycle_name": "SRE Review Sprint 2026-W37",
+      "review_period": "2026-09-07 to 2026-09-13",
+      "incident_count": 2,
+      "mttr_trend_pct": -26.4,
+      "slo_attainment_pct": 99.91,
+      "completed_action_items": 12
+    }
+  ],
+  "passed": true,
+  "details": {
+    "average_mttr_reduction_pct": 20.27,
+    "average_slo_attainment_pct": 99.79,
+    "total_completed_action_items": 45,
+    "review_cadence": "Weekly SRE Retrospective & Postmortem Review"
+  }
+}

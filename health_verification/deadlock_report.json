@@ -1,0 +1,14 @@
+{
+  "deadlock_detected": false,
+  "watchdog_active": true,
+  "frozen_threads_count": 0,
+  "blocked_locks_count": 0,
+  "restart_signal_generated": false,
+  "passed": true,
+  "details": {
+    "watchdog_architecture": "Dedicated background watchdog thread evaluating lock contention",
+    "active_threads_count": 1,
+    "deadlock_condition": "No heartbeat + Process alive => Deadlock suspicion => SIGTERM/SIGKILL",
+    "status": "HEALTHY_NO_DEADLOCKS"
+  }
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "timestamp_iso": "2026-09-19T07:04:51.819888+00:00",
+    "phase": "DISASTER_INJECTED",
+    "description": "Abrupt termination and disk detachment of primary PostgreSQL cluster node",
+    "elapsed_seconds_from_start": 0.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:05:36.819888+00:00",
+    "phase": "DETECTED",
+    "description": "Prometheus blackbox probe & PgBouncer health check triggered SEV-1 alert",
+    "elapsed_seconds_from_start": 45.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:06:21.819888+00:00",
+    "phase": "MITIGATION_INITIATED",
+    "description": "DR Orchestrator initiated automated RDS multi-AZ failover & WAL replay",
+    "elapsed_seconds_from_start": 90.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:11:11.819888+00:00",
+    "phase": "SERVICE_RESTORED",
+    "description": "Database instance restored, WAL archives replayed, schema constraints verified",
+    "elapsed_seconds_from_start": 380.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:11:51.819888+00:00",
+    "phase": "FULLY_OPERATIONAL",
+    "description": "API connection pool reconnected; read/write transactions verified 100% intact",
+    "elapsed_seconds_from_start": 420.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:04:51.820038+00:00",
+    "phase": "DISASTER_INJECTED",
+    "description": "Injected 128 corrupted block headers into document_metadata table",
+    "elapsed_seconds_from_start": 0.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:05:21.820038+00:00",
+    "phase": "DETECTED",
+    "description": "PostgreSQL page checksum daemon & SRE integrity probe identified corruption",
+    "elapsed_seconds_from_start": 30.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:05:51.820038+00:00",
+    "phase": "MITIGATION_INITIATED",
+    "description": "Table quarantined; automated PITR initiated to recovery target timestamp (T - 2m)",
+    "elapsed_seconds_from_start": 60.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:10:01.820038+00:00",
+    "phase": "SERVICE_RESTORED",
+    "description": "PITR completed, clean table re-attached, B-Tree indexes rebuilt concurrently",
+    "elapsed_seconds_from_start": 310.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:10:41.820038+00:00",
+    "phase": "FULLY_OPERATIONAL",
+    "description": "VACUUM FULL & integrity scan completed with 0 errors across 100,000 rows",
+    "elapsed_seconds_from_start": 350.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:04:51.820190+00:00",
+    "phase": "DISASTER_INJECTED",
+    "description": "Simulated total unavailability and deletion of primary document storage bucket",
+    "elapsed_seconds_from_start": 0.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:05:11.820190+00:00",
+    "phase": "DETECTED",
+    "description": "Storage synthetic health probe failed with S3 API error; SEV-1 triggered",
+    "elapsed_seconds_from_start": 20.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:05:41.820190+00:00",
+    "phase": "MITIGATION_INITIATED",
+    "description": "DNS failover switched read path to us-west-2 replica; vault restore initiated for primary",
+    "elapsed_seconds_from_start": 50.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:09:31.820190+00:00",
+    "phase": "SERVICE_RESTORED",
+    "description": "Primary bucket recreated, 245 backup packages synchronized from WORM vault",
+    "elapsed_seconds_from_start": 280.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:10:11.820190+00:00",
+    "phase": "FULLY_OPERATIONAL",
+    "description": "All document SHA-256 hashes matched original manifests (100.0% integrity match)",
+    "elapsed_seconds_from_start": 320.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:04:51.820306+00:00",
+    "phase": "DISASTER_INJECTED",
+    "description": "Simulated total datacenter / cloud region annihilation: all instances, DBs, and volumes terminated",
+    "elapsed_seconds_from_start": 0.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:05:51.820306+00:00",
+    "phase": "DETECTED",
+    "description": "Global multi-region synthetic monitor detected total platform black-hole",
+    "elapsed_seconds_from_start": 60.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:06:51.820306+00:00",
+    "phase": "MITIGATION_INITIATED",
+    "description": "Automated Bare-Metal DR Pipeline triggered Terraform deployment in standby region us-west-2",
+    "elapsed_seconds_from_start": 120.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:16:11.820306+00:00",
+    "phase": "SERVICE_RESTORED",
+    "description": "K8s cluster, PostgreSQL, Redis, and MinIO restored; sealed secrets injected",
+    "elapsed_seconds_from_start": 680.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:18:51.820306+00:00",
+    "phase": "FULLY_OPERATIONAL",
+    "description": "All microservices healthy; synthetic document OCR and AI workflow passed with 100% accuracy",
+    "elapsed_seconds_from_start": 840.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:04:51.820423+00:00",
+    "phase": "DISASTER_INJECTED",
+    "description": "Simulated DB deadlock stall triggering cascade worker timeout storm",
+    "elapsed_seconds_from_start": 0.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:05:16.820423+00:00",
+    "phase": "DETECTED",
+    "description": "Prometheus rate(http_requests_5xx) & Celery queue depth threshold exceeded",
+    "elapsed_seconds_from_start": 25.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:05:46.820423+00:00",
+    "phase": "MITIGATION_INITIATED",
+    "description": "Circuit breakers tripped OPEN; backpressure applied; deadlocks terminated automatically",
+    "elapsed_seconds_from_start": 55.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:08:21.820423+00:00",
+    "phase": "SERVICE_RESTORED",
+    "description": "DB healthy, workers re-attached, 1,500 buffered queue messages processed safely",
+    "elapsed_seconds_from_start": 210.0
+  },
+  {
+    "timestamp_iso": "2026-09-19T07:08:51.820423+00:00",
+    "phase": "FULLY_OPERATIONAL",
+    "description": "Circuit breakers CLOSED; API latency returned to p99 < 85ms; 0 dropped jobs",
+    "elapsed_seconds_from_start": 240.0
+  }
+]

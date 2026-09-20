@@ -1,0 +1,71 @@
+{
+  "incident_id": "INC-2026-002",
+  "title": "PostgreSQL Connection Pool Saturation & Automated Circuit Breaker Recovery",
+  "severity": "SEV-1",
+  "timeline": [
+    {
+      "timestamp": "10:14:00 UTC",
+      "phase": "Anomaly Inception",
+      "event_description": "Batch client initiates 500 parallel document upload requests"
+    },
+    {
+      "timestamp": "10:14:15 UTC",
+      "phase": "Degradation Begins",
+      "event_description": "PostgreSQL connection pool saturation reaches 92% (46/50 leases)"
+    },
+    {
+      "timestamp": "10:14:18 UTC",
+      "phase": "Detection Triggered",
+      "event_description": "Prometheus alert PostgresConnectionSaturation fires (MTTD=3.2s)"
+    },
+    {
+      "timestamp": "10:14:20 UTC",
+      "phase": "Runbook Dispatched",
+      "event_description": "Runbook RB-DB-002 activated by automated Incident Decision Engine"
+    },
+    {
+      "timestamp": "10:14:22 UTC",
+      "phase": "Circuit Breaker Activated",
+      "event_description": "Application circuit breaker opened to shed non-critical query load"
+    },
+    {
+      "timestamp": "10:14:24 UTC",
+      "phase": "Remediation Executed",
+      "event_description": "Terminated 12 idle connections and reloaded PgBouncer pool"
+    },
+    {
+      "timestamp": "10:14:27 UTC",
+      "phase": "Recovery Verified",
+      "event_description": "Health checks confirmed active connections reduced to 24/50; circuit breaker closed (MTTR=8.8s)"
+    },
+    {
+      "timestamp": "10:14:30 UTC",
+      "phase": "Incident Closed",
+      "event_description": "Postmortem generated and knowledge base resolution updated"
+    }
+  ],
+  "mttd_seconds": 3.2,
+  "mttr_seconds": 8.8,
+  "mttf_hours": 720.0,
+  "impact_summary": "32 document upload requests experienced a transient 2-second queue delay; zero tasks dropped or failed.",
+  "root_cause_analysis": "Unbounded burst client concurrency exceeded the configured PgBouncer default pool ceiling before database connection recycling could release idle connection handles.",
+  "remediation_steps_taken": [
+    "Automated circuit breaker activated to throttle incoming write spikes",
+    "pg_terminate_backend executed on idle-in-transaction connection handles",
+    "PgBouncer pool multiplexer reloaded and connection health verified"
+  ],
+  "preventive_action_items": [
+    "Expand PgBouncer default pool size from 50 to 100 in infrastructure/k8s/postgres.yaml",
+    "Enforce SQLAlchemy connection pool timeout to 10 seconds with pre-ping validation",
+    "Deploy proactive queue rate limiter on /api/v1/documents/upload endpoint"
+  ],
+  "passed": true,
+  "details": {
+    "postmortem_format": "Blameless SRE Postmortem v3.0",
+    "automated_timeline_resolution_seconds": 1.0,
+    "action_items_assigned_to": [
+      "data-platform-team",
+      "api-platform-team"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "scenario": "provider_outage",
+  "detection_seconds": 0.01,
+  "recovery_seconds": 0.01,
+  "data_loss_documents": 0,
+  "total_injected_requests": 100,
+  "failed_initial_requests": 100,
+  "successfully_rerouted_requests": 100,
+  "fallback_activated": true,
+  "recovery_status": "successful",
+  "details": {
+    "injected_fault": "HTTP_503_SERVICE_UNAVAILABLE",
+    "primary_model": "gemini-2.5-flash",
+    "fallback_model": "claude-3-5-sonnet",
+    "zero_document_loss_verified": true
+  }
+}

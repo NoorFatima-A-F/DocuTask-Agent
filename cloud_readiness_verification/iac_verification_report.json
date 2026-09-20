@@ -1,0 +1,87 @@
+{
+  "verifier_id": "VERIFY-3M.11-IAC",
+  "phase_id": "3M.11",
+  "phase_name": "Infrastructure as Code Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Declarative Terraform & Helm Specifications",
+      "passed": true,
+      "details": "All 5 IaC modules verified with clean static analysis and plan validation.",
+      "metrics": {
+        "iac_modules_count": 5,
+        "resources_managed": 28
+      }
+    },
+    {
+      "name": "Idempotent Re-Application Test",
+      "passed": true,
+      "details": "Re-running terraform apply on already provisioned infrastructure produces 0 changes, 0 destructions.",
+      "metrics": {
+        "idempotency_tested": true
+      }
+    },
+    {
+      "name": "Automated Infrastructure Teardown & Rebuild",
+      "passed": true,
+      "details": "Complete infrastructure environment destroyed and rebuilt cleanly from IaC code in single automated run.",
+      "metrics": {
+        "rebuild_verified": true
+      }
+    },
+    {
+      "name": "Parameterization & Environment Separation",
+      "passed": true,
+      "details": "Configuration decoupled into dev/staging/prod tfvars with 0 hardcoded environment-specific credentials.",
+      "metrics": {
+        "parameterized_tfvars": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:42.377824+00:00",
+  "execution_timestamp": "2026-09-19T07:04:42.377832+00:00",
+  "summary": "IaC verification verified: 28 resources managed idempotently via Terraform and Helm.",
+  "report_title": "Infrastructure as Code (IaC) Verification Report",
+  "terraform_modules_verified": true,
+  "kubernetes_helm_charts_verified": true,
+  "idempotency_tested": true,
+  "total_resources_managed": 28,
+  "modules": [
+    {
+      "module_name": "terraform/modules/vpc_networking",
+      "tool": "Terraform",
+      "resources_count": 8,
+      "plan_verified": true,
+      "idempotent_reapply": true
+    },
+    {
+      "module_name": "terraform/modules/managed_postgres",
+      "tool": "Terraform",
+      "resources_count": 4,
+      "plan_verified": true,
+      "idempotent_reapply": true
+    },
+    {
+      "module_name": "terraform/modules/managed_redis",
+      "tool": "Terraform",
+      "resources_count": 3,
+      "plan_verified": true,
+      "idempotent_reapply": true
+    },
+    {
+      "module_name": "terraform/modules/object_storage",
+      "tool": "Terraform",
+      "resources_count": 3,
+      "plan_verified": true,
+      "idempotent_reapply": true
+    },
+    {
+      "module_name": "helm/charts/docutask-agent",
+      "tool": "Helm / K8s",
+      "resources_count": 10,
+      "plan_verified": true,
+      "idempotent_reapply": true
+    }
+  ]
+}

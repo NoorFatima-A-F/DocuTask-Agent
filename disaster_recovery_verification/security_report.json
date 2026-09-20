@@ -1,0 +1,84 @@
+{
+  "verifier_id": "VERIFY-3L.10-BACKUP-SECURITY",
+  "phase_id": "3L.10",
+  "phase_name": "Backup Security Verification",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Backup Encryption at Rest & In-Transit",
+      "passed": true,
+      "details": "AES-256 at rest and TLS 1.3 in transit verified compliant across all backup endpoints.",
+      "metrics": {
+        "encryption_at_rest": "AES-256",
+        "encryption_in_transit": "TLS 1.3"
+      }
+    },
+    {
+      "name": "Immutable WORM Object Locking",
+      "passed": true,
+      "details": "Write-Once-Read-Many lock enabled on backup vault, preventing unauthorized modification or ransomware deletion.",
+      "metrics": {
+        "worm_lock_enabled": true,
+        "retention_days": 90
+      }
+    },
+    {
+      "name": "Role-Based Access Control (RBAC) Enforcement",
+      "passed": true,
+      "details": "Principle of least privilege strictly enforced; non-DR users cannot access backup archives.",
+      "metrics": {
+        "rbac_enforced": true
+      }
+    },
+    {
+      "name": "Tamper-Evident Signature Verification",
+      "passed": true,
+      "details": "SHA-256 signed manifests and continuous integrity scans guarantee tamper-proof backup preservation.",
+      "metrics": {
+        "tamper_detection_active": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:50.220248+00:00",
+  "execution_timestamp": "2026-09-19T07:04:50.220260+00:00",
+  "summary": "Backup security verified: AES-256 encryption, TLS 1.3, WORM immutability locks, and RBAC active.",
+  "report_title": "Backup Security & Immutability Report",
+  "encryption_at_rest": "AES-256",
+  "encryption_in_transit": "TLS 1.3",
+  "immutable_worm_lock_enabled": true,
+  "rbac_enforced": true,
+  "tamper_detection_active": true,
+  "security_controls": [
+    {
+      "control_name": "Encryption at Rest",
+      "requirement": "AES-256-GCM / KMS Managed",
+      "implementation": "All database snapshots and storage mirrors encrypted with customer-managed KMS key",
+      "status": "COMPLIANT"
+    },
+    {
+      "control_name": "Encryption in Transit",
+      "requirement": "TLS 1.3 Strict",
+      "implementation": "All replication traffic and backup transfers enforced over TLS 1.3 with cipher restrictions",
+      "status": "COMPLIANT"
+    },
+    {
+      "control_name": "Immutability / WORM Lock",
+      "requirement": "Write-Once-Read-Many",
+      "implementation": "Object lock compliance mode active; backup deletion and overwrites blocked for 90 days",
+      "status": "COMPLIANT"
+    },
+    {
+      "control_name": "RBAC & Least Privilege",
+      "requirement": "Strict Access Segregation",
+      "implementation": "Restoration privileges restricted to automated DR service account and emergency SRE break-glass",
+      "status": "COMPLIANT"
+    },
+    {
+      "control_name": "Ransomware & Tamper Defense",
+      "requirement": "Tamper-Evident Signatures",
+      "implementation": "Automated cryptographic signature validation on backup manifest triggers immediate alert on modification",
+      "status": "COMPLIANT"
+    }
+  ]
+}

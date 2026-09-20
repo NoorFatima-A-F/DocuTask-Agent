@@ -1,0 +1,10 @@
+{
+  "worker_failure_recovered": true,
+  "db_failure_recovered": true,
+  "queue_partition_recovered": true,
+  "lost_jobs": 0,
+  "recovery_duration_sec": 3.4,
+  "resilience_passed": true,
+  "status": "PASSED",
+  "timestamp": "2026-09-19T07:04:46.286839+00:00"
+}

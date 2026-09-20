@@ -1,0 +1,198 @@
+{
+  "architecture_name": "DocuTask Automated Enterprise Observability Evidence Pipeline",
+  "total_sources_covered": 8,
+  "source_categories": [
+    "Health",
+    "Metrics",
+    "Dashboards",
+    "Alerts",
+    "Incidents",
+    "Failure_Tests",
+    "Audit",
+    "Security"
+  ],
+  "evidence_manifest_count": 18,
+  "is_fully_automated": true,
+  "manifests": [
+    {
+      "category": "Health",
+      "filename": "liveness.json",
+      "relative_path": "health/liveness.json",
+      "sha256_hash": "31de1412b4e221a5263a183321bdfbd0e329cb9a85a6e7e16fb6453825b227e0",
+      "size_bytes": 34,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.2",
+      "is_valid": true
+    },
+    {
+      "category": "Health",
+      "filename": "readiness.json",
+      "relative_path": "health/readiness.json",
+      "sha256_hash": "9befc5272cc0e5e560a370ba783a2d06b492a7db0bd0f60e5d72fd48757c88e4",
+      "size_bytes": 35,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.3",
+      "is_valid": true
+    },
+    {
+      "category": "Health",
+      "filename": "dependency.json",
+      "relative_path": "health/dependency.json",
+      "sha256_hash": "73afbca722f3e70fa023261287fbd7e2829877a7a5f78765747ebb8e0b020b66",
+      "size_bytes": 34,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.1",
+      "is_valid": true
+    },
+    {
+      "category": "Metrics",
+      "filename": "prometheus.json",
+      "relative_path": "metrics/prometheus.json",
+      "sha256_hash": "4f5467e01746af50a0661dc0ac7fe8c6a0a2376972acdd57c3d0cfe38b44600e",
+      "size_bytes": 35,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.3",
+      "is_valid": true
+    },
+    {
+      "category": "Metrics",
+      "filename": "otel.json",
+      "relative_path": "metrics/otel.json",
+      "sha256_hash": "254a27056cbcea1ec4f367a5342c0e31e9ef7fa500b5b412106e1af727039aa4",
+      "size_bytes": 29,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.2",
+      "is_valid": true
+    },
+    {
+      "category": "Metrics",
+      "filename": "resource_metrics.json",
+      "relative_path": "metrics/resource_metrics.json",
+      "sha256_hash": "eea39d783bbb18b525c3662a0b352abaadc1b7a0b38cb1669249075050c0e7f7",
+      "size_bytes": 33,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.2",
+      "is_valid": true
+    },
+    {
+      "category": "Dashboards",
+      "filename": "infrastructure.json",
+      "relative_path": "dashboards/infrastructure.json",
+      "sha256_hash": "97711819aeefdfc53e33a0dee5c90cd7f0cad2e78637c1dd0c3228bf18785c66",
+      "size_bytes": 32,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.4",
+      "is_valid": true
+    },
+    {
+      "category": "Dashboards",
+      "filename": "ai_runtime.json",
+      "relative_path": "dashboards/ai_runtime.json",
+      "sha256_hash": "049d2fcacaf1e340f89a98874320b27056021ecaf51de1b88b91ea3946033edf",
+      "size_bytes": 29,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.4",
+      "is_valid": true
+    },
+    {
+      "category": "Alerts",
+      "filename": "rules.json",
+      "relative_path": "alerts/rules.json",
+      "sha256_hash": "b650b201ab5d9eb4aa9aa7700481b245a3e3b1d3770449d016d3613a255f75dd",
+      "size_bytes": 28,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.5",
+      "is_valid": true
+    },
+    {
+      "category": "Alerts",
+      "filename": "accuracy.json",
+      "relative_path": "alerts/accuracy.json",
+      "sha256_hash": "e0b3034eac7e60ea4f5b90fa816f1b66352a9ffc8bc0c6b54805e5af2d26d27b",
+      "size_bytes": 31,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.6",
+      "is_valid": true
+    },
+    {
+      "category": "Alerts",
+      "filename": "fatigue.json",
+      "relative_path": "alerts/fatigue.json",
+      "sha256_hash": "94b3e71267529b1e7ef6ab83402460b00de2c213592987ce3d869c84d7406f3c",
+      "size_bytes": 30,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.8",
+      "is_valid": true
+    },
+    {
+      "category": "Incidents",
+      "filename": "incidents.json",
+      "relative_path": "incidents/incidents.json",
+      "sha256_hash": "9c68bc09ca1fab2fbe80aa4554e05d3abc4f16560cc7f2ef2010685d8347e1cc",
+      "size_bytes": 32,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.7",
+      "is_valid": true
+    },
+    {
+      "category": "Incidents",
+      "filename": "timelines.json",
+      "relative_path": "incidents/timelines.json",
+      "sha256_hash": "9861138b77e72c5f94a24c11942d4f19af980ba71706342c0f938cf7595de014",
+      "size_bytes": 35,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.7",
+      "is_valid": true
+    },
+    {
+      "category": "Failure_Tests",
+      "filename": "chaos.json",
+      "relative_path": "failure_tests/chaos.json",
+      "sha256_hash": "ed859fb7fb75db2205e108f476cec61bf86e88badf745508da5aae8acf8e3bb1",
+      "size_bytes": 33,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.9",
+      "is_valid": true
+    },
+    {
+      "category": "Failure_Tests",
+      "filename": "recovery.json",
+      "relative_path": "failure_tests/recovery.json",
+      "sha256_hash": "d192b34cd09688b5226098ce18731e7821762ec255d8f4a45e96dafd81f3ea10",
+      "size_bytes": 34,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.9",
+      "is_valid": true
+    },
+    {
+      "category": "Failure_Tests",
+      "filename": "mttr.json",
+      "relative_path": "failure_tests/mttr.json",
+      "sha256_hash": "65058a8ec9d7c49965b6dd1cd95320fdaf799aac4b314b665bc5a7dc2fe6e053",
+      "size_bytes": 31,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.9",
+      "is_valid": true
+    },
+    {
+      "category": "Audit",
+      "filename": "compliance.json",
+      "relative_path": "audit/compliance.json",
+      "sha256_hash": "f93921024572bde9919e5b8d3bea2ea4d4acd46dbf749414287ca86f4fc66844",
+      "size_bytes": 36,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.10",
+      "is_valid": true
+    },
+    {
+      "category": "Audit",
+      "filename": "integrity.json",
+      "relative_path": "audit/integrity.json",
+      "sha256_hash": "0ff7a9c7d7460d787c111c6a66778c326ac79c195450751f382a590568ca4c8d",
+      "size_bytes": 26,
+      "generated_at": "2026-09-15T19:02:53.953801+00:00",
+      "source_phase": "3H.4.12.2",
+      "is_valid": true
+    }
+  ]
+}

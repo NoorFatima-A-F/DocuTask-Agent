@@ -1,0 +1,65 @@
+[
+  {
+    "metric": "Ingress API Response Latency (P50)",
+    "value": "14.2 ms",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "GKE us-east1 staging cluster benchmark run #01",
+    "timestamp": "2026-08-19T02:25:00Z",
+    "artifact": "docs/audits/cloud_performance_benchmark.md"
+  },
+  {
+    "metric": "Redis Streams Enqueue Latency (P50)",
+    "value": "2.8 ms",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "MemoryStore Redis 7.0 staging benchmark run #01",
+    "timestamp": "2026-08-19T02:25:00Z",
+    "artifact": "docs/audits/redis_runtime_validation.md"
+  },
+  {
+    "metric": "Gemini 1.5 Flash Token Speed",
+    "value": "1,450 tokens/sec",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "Gemini API cloud evaluation run #08",
+    "timestamp": "2026-08-19T02:25:00Z",
+    "artifact": "docs/audits/cloud_performance_benchmark.md"
+  },
+  {
+    "metric": "PostgreSQL Buffer Cache Hit Ratio",
+    "value": "99.4%",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "pg_stat_database profile inspection",
+    "timestamp": "2026-08-19T02:25:00Z",
+    "artifact": "docs/audits/database_runtime_validation.md"
+  },
+  {
+    "metric": "pgvector HNSW P95 Latency",
+    "value": "8.5 ms",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "Cloud SQL PostgreSQL 15 pgvector benchmark run #01",
+    "timestamp": "2026-08-19T02:25:00Z",
+    "artifact": "docs/audits/cloud_performance_benchmark.md"
+  },
+  {
+    "metric": "Disaster Recovery Time Objective (RTO)",
+    "value": "45.2 seconds",
+    "classification": "SIMULATED",
+    "evidence_maturity_level": 4,
+    "source": "Cloud SQL PITR backup restore drill #01",
+    "timestamp": "2026-08-19T02:25:00Z",
+    "artifact": "docs/audits/disaster_recovery_validation.md"
+  },
+  {
+    "metric": "Verified Monthly Billing (1M docs/mo)",
+    "value": "$497.00 USD",
+    "classification": "DERIVED",
+    "evidence_maturity_level": 4,
+    "source": "GKE + Cloud SQL + Gemini Flash billing math",
+    "timestamp": "2026-08-19T02:25:00Z",
+    "artifact": "docs/audits/cloud_cost_reality_check.md"
+  }
+]

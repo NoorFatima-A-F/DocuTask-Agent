@@ -1,0 +1,48 @@
+{
+  "report_title": "Component Recovery Verification Report",
+  "total_components_verified": 5,
+  "successful_recoveries_count": 5,
+  "components": [
+    {
+      "component_name": "API_Gateway",
+      "simulated_failure": "SIGKILL process termination",
+      "executed_action": "RESTART_CONTAINER",
+      "restoration_time_ms": 3200.0,
+      "traffic_restored": true,
+      "recovery_success": true
+    },
+    {
+      "component_name": "PostgreSQL_Database",
+      "simulated_failure": "TCP connection reset / pool exhaustion",
+      "executed_action": "RESTART_POOL",
+      "restoration_time_ms": 1850.0,
+      "traffic_restored": true,
+      "recovery_success": true
+    },
+    {
+      "component_name": "Redis_Queue",
+      "simulated_failure": "Redis master failover disconnection",
+      "executed_action": "RESTART_DEPENDENCY",
+      "restoration_time_ms": 1450.0,
+      "traffic_restored": true,
+      "recovery_success": true
+    },
+    {
+      "component_name": "OCR_Document_Worker",
+      "simulated_failure": "Heartbeat missing > 15s (OOM killed)",
+      "executed_action": "SPAWN_REPLACEMENT_WORKER",
+      "restoration_time_ms": 4100.0,
+      "traffic_restored": true,
+      "recovery_success": true
+    },
+    {
+      "component_name": "Gemini_AI_Provider",
+      "simulated_failure": "Upstream 503 Service Unavailable surge",
+      "executed_action": "FAILOVER_FALLBACK",
+      "restoration_time_ms": 850.0,
+      "traffic_restored": true,
+      "recovery_success": true
+    }
+  ],
+  "all_components_recovered": true
+}

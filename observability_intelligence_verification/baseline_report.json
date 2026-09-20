@@ -1,0 +1,34 @@
+{
+  "report_title": "Dynamic Behavioral Baseline Learning Report",
+  "patterns": [
+    {
+      "metric_name": "worker_cpu_utilization",
+      "time_window": "Morning Ingestion Peak (08:00 - 11:00 UTC)",
+      "dynamic_normal_range": "45% - 75% CPU",
+      "anomaly_threshold_dynamic": "> 88% sustained for > 5m",
+      "learning_active": true
+    },
+    {
+      "metric_name": "worker_cpu_utilization",
+      "time_window": "Nightly Batch Archival Window (01:00 - 04:00 UTC)",
+      "dynamic_normal_range": "65% - 85% CPU",
+      "anomaly_threshold_dynamic": "> 95% sustained for > 10m",
+      "learning_active": true
+    },
+    {
+      "metric_name": "gemini_llm_inference_latency",
+      "time_window": "Standard Business Hours",
+      "dynamic_normal_range": "250ms - 600ms",
+      "anomaly_threshold_dynamic": "> 1200ms or 3x baseline variance",
+      "learning_active": true
+    },
+    {
+      "metric_name": "redis_queue_depth",
+      "time_window": "Continuous Adaptive Sliding Baseline (24h)",
+      "dynamic_normal_range": "50 - 450 items",
+      "anomaly_threshold_dynamic": "> 1500 items",
+      "learning_active": true
+    }
+  ],
+  "adaptive_baselines_verified": true
+}

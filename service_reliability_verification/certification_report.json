@@ -1,0 +1,68 @@
+{
+  "verification_id": "sre-rel-ff869e5b",
+  "timestamp": "2026-09-19T07:09:26.800379+00:00",
+  "overall_reliability_score": 100.0,
+  "certification_tier": "Enterprise SRE Certified",
+  "passed": true,
+  "pillar_scores": [
+    {
+      "pillar_name": "Availability SLO",
+      "weight": 0.2,
+      "raw_score": 100.0,
+      "weighted_score": 20.0,
+      "status": "EXCELLENT",
+      "details": "Measured availability: 99.964% across all traffic profiles (Target: 99.9%)."
+    },
+    {
+      "pillar_name": "Latency & Responsiveness",
+      "weight": 0.2,
+      "raw_score": 100.0,
+      "weighted_score": 20.0,
+      "status": "EXCELLENT",
+      "details": "6/6 endpoints meeting P95 latency objectives."
+    },
+    {
+      "pillar_name": "Error Budget & Burn Rate",
+      "weight": 0.15,
+      "raw_score": 100.0,
+      "weighted_score": 15.0,
+      "status": "EXCELLENT",
+      "details": "Remaining budget: 83.2%, Multi-window burn rate: SAFE."
+    },
+    {
+      "pillar_name": "Reliability Compliance",
+      "weight": 0.15,
+      "raw_score": 100.0,
+      "weighted_score": 15.0,
+      "status": "EXCELLENT",
+      "details": "6/6 compliance pillars fully satisfied."
+    },
+    {
+      "pillar_name": "AI Workload Reliability",
+      "weight": 0.15,
+      "raw_score": 100.0,
+      "weighted_score": 15.0,
+      "status": "EXCELLENT",
+      "details": "5 AI pipelines verified with zero schema drift and full hallucination retry recovery."
+    },
+    {
+      "pillar_name": "Historical Stability",
+      "weight": 0.1,
+      "raw_score": 100.0,
+      "weighted_score": 10.0,
+      "status": "EXCELLENT",
+      "details": "Trend across 24h/7d/30d/90d: STABLE_AND_IMPROVING."
+    },
+    {
+      "pillar_name": "Deployment Readiness",
+      "weight": 0.05,
+      "raw_score": 100.0,
+      "weighted_score": 5.0,
+      "status": "EXCELLENT",
+      "details": "Gate Decision: APPROVED (5 criteria validated)."
+    }
+  ],
+  "overall_availability_pct": 99.9641,
+  "overall_error_budget_remaining_pct": 83.19,
+  "deployment_gate_decision": "APPROVED"
+}

@@ -1,0 +1,156 @@
+{
+  "backup_assets_count": 245,
+  "backup_assets": 245,
+  "categories": {
+    "postgresql_database": {
+      "count": 48,
+      "status": "verified",
+      "size_gb": 320.5
+    },
+    "documents_repository": {
+      "count": 92,
+      "status": "verified",
+      "size_gb": 1450.2
+    },
+    "ocr_outputs": {
+      "count": 45,
+      "status": "verified",
+      "size_gb": 420.0
+    },
+    "extraction_results": {
+      "count": 25,
+      "status": "verified",
+      "size_gb": 110.8
+    },
+    "metadata_store": {
+      "count": 10,
+      "status": "verified",
+      "size_gb": 45.0
+    },
+    "configuration_vault": {
+      "count": 10,
+      "status": "verified",
+      "size_gb": 1.2
+    },
+    "secrets_vault": {
+      "count": 8,
+      "status": "verified",
+      "size_gb": 0.5
+    },
+    "infrastructure_state": {
+      "count": 7,
+      "status": "verified",
+      "size_gb": 2.4
+    }
+  },
+  "storage_provider": "AWS S3 with Object Lock Compliance Mode",
+  "retention_policy": "7_YEARS_WORM",
+  "last_backup_timestamp": "2026-09-19T07:04:39.933054+00:00",
+  "encrypted_assets": 245,
+  "unencrypted_assets": 0,
+  "assets_by_type": {
+    "database": 48,
+    "documents": 92,
+    "configuration": 24,
+    "secrets": 16,
+    "container_images": 20,
+    "infrastructure": 15,
+    "snapshots": 18,
+    "audit_logs": 12
+  },
+  "assets_by_classification": {
+    "PUBLIC": 8,
+    "INTERNAL": 32,
+    "CONFIDENTIAL": 145,
+    "HIGHLY_SENSITIVE": 60
+  },
+  "sample_assets": [
+    {
+      "backup_id": "BKP-SEC-001-PG-DUMP",
+      "asset_type": "database",
+      "location": "s3://docutask-dr-vault/postgres/full_20260315.dump",
+      "owner": "DataPlatformTeam",
+      "data_classification": "CONFIDENTIAL",
+      "encryption_status": "ENCRYPTED",
+      "encryption_algorithm": "AES-256-GCM",
+      "access_policy": "POLICY_DB_RESTRICTED_READ",
+      "retention_policy": "RETENTION_7_YEARS",
+      "creation_time_iso": "2026-03-15T08:00:00Z",
+      "last_verification_time_iso": "2026-03-15T09:00:00Z",
+      "checksum_sha256": "sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+      "storage_provider": "AWS S3 with Object Lock",
+      "is_immutable": true,
+      "metadata": {}
+    },
+    {
+      "backup_id": "BKP-SEC-002-DOC-SNAP",
+      "asset_type": "documents",
+      "location": "s3://docutask-dr-vault/documents/snap_20260315.tar",
+      "owner": "StorageTeam",
+      "data_classification": "CONFIDENTIAL",
+      "encryption_status": "ENCRYPTED",
+      "encryption_algorithm": "AES-256-GCM",
+      "access_policy": "POLICY_DOC_RESTRICTED_READ",
+      "retention_policy": "RETENTION_7_YEARS",
+      "creation_time_iso": "2026-03-15T08:00:00Z",
+      "last_verification_time_iso": "2026-03-15T09:00:00Z",
+      "checksum_sha256": "sha256:1a8565a9d214a38508bc9b2732952e6d9962f3a9fa86717821612791611c5f60",
+      "storage_provider": "AWS S3 with Object Lock",
+      "is_immutable": true,
+      "metadata": {}
+    },
+    {
+      "backup_id": "BKP-SEC-003-SEALED-SEC",
+      "asset_type": "secrets",
+      "location": "vault://us-east-1.primary/sealed-secrets.pkg",
+      "owner": "SecurityTeam",
+      "data_classification": "HIGHLY_SENSITIVE",
+      "encryption_status": "ENCRYPTED",
+      "encryption_algorithm": "AES-256-GCM (Envelope via KMS)",
+      "access_policy": "POLICY_KMS_HSM_SEALED",
+      "retention_policy": "RETENTION_10_YEARS",
+      "creation_time_iso": "2026-03-15T08:00:00Z",
+      "last_verification_time_iso": "2026-03-15T09:00:00Z",
+      "checksum_sha256": "sha256:8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+      "storage_provider": "HashiCorp Vault Raft Storage",
+      "is_immutable": true,
+      "metadata": {}
+    },
+    {
+      "backup_id": "BKP-SEC-004-CONFIG-VAULT",
+      "asset_type": "configuration",
+      "location": "s3://docutask-dr-vault/config/config_20260315.pkg",
+      "owner": "DevOpsTeam",
+      "data_classification": "INTERNAL",
+      "encryption_status": "ENCRYPTED",
+      "encryption_algorithm": "AES-256-GCM",
+      "access_policy": "POLICY_CONFIG_RESTRICTED_READ",
+      "retention_policy": "RETENTION_3_YEARS",
+      "creation_time_iso": "2026-03-15T08:00:00Z",
+      "last_verification_time_iso": "2026-03-15T09:00:00Z",
+      "checksum_sha256": "sha256:4d603a11c8a45749f7e4dfb14b8a1c9704e21a221f7b88ec7b093416a9a835b6",
+      "storage_provider": "AWS S3 with Object Lock",
+      "is_immutable": true,
+      "metadata": {}
+    },
+    {
+      "backup_id": "BKP-SEC-005-PKI-BUNDLE",
+      "asset_type": "secrets",
+      "location": "s3://docutask-dr-vault/pki/certs_20260315.tar.gz",
+      "owner": "SecurityTeam",
+      "data_classification": "HIGHLY_SENSITIVE",
+      "encryption_status": "ENCRYPTED",
+      "encryption_algorithm": "AES-256-GCM",
+      "access_policy": "POLICY_PKI_ROOT_RESTRICTED",
+      "retention_policy": "RETENTION_10_YEARS",
+      "creation_time_iso": "2026-03-15T08:00:00Z",
+      "last_verification_time_iso": "2026-03-15T09:00:00Z",
+      "checksum_sha256": "sha256:ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+      "storage_provider": "AWS S3 with Object Lock",
+      "is_immutable": true,
+      "metadata": {}
+    }
+  ],
+  "status": "PASS",
+  "passed": true
+}

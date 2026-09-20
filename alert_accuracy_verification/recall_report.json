@@ -1,0 +1,8 @@
+{
+  "total_actual_failures": 98,
+  "detected_failures": 96,
+  "missed_failures": 2,
+  "recall_score": 0.9796,
+  "recall_target_met": true,
+  "status": "PASS"
+}

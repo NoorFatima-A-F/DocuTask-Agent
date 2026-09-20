@@ -1,0 +1,68 @@
+{
+  "total_dependencies": 6,
+  "dependencies": [
+    {
+      "name": "postgres",
+      "criticality": "critical",
+      "failure_action": "reject_traffic",
+      "traffic_action": "REJECT_TRAFFIC",
+      "current_health": "HEALTHY",
+      "latency_ms": 11.8,
+      "healthy": true
+    },
+    {
+      "name": "redis",
+      "criticality": "critical",
+      "failure_action": "reject_queue_operations",
+      "traffic_action": "REJECT_TRAFFIC",
+      "current_health": "HEALTHY",
+      "latency_ms": 1.8,
+      "healthy": true
+    },
+    {
+      "name": "storage",
+      "criticality": "critical",
+      "failure_action": "reject_traffic",
+      "traffic_action": "REJECT_TRAFFIC",
+      "current_health": "HEALTHY",
+      "latency_ms": 14.2,
+      "healthy": true
+    },
+    {
+      "name": "gemini",
+      "criticality": "important",
+      "failure_action": "degraded_mode",
+      "traffic_action": "THROTTLE_TRAFFIC",
+      "current_health": "HEALTHY",
+      "latency_ms": 185.0,
+      "healthy": true
+    },
+    {
+      "name": "workers",
+      "criticality": "critical",
+      "failure_action": "reject_traffic",
+      "traffic_action": "REJECT_TRAFFIC",
+      "current_health": "HEALTHY",
+      "latency_ms": 2.0,
+      "healthy": true
+    },
+    {
+      "name": "analytics",
+      "criticality": "optional",
+      "failure_action": "ignore",
+      "traffic_action": "ALLOW_TRAFFIC",
+      "current_health": "HEALTHY",
+      "latency_ms": 4.1,
+      "healthy": true
+    }
+  ],
+  "critical_dependencies_count": 4,
+  "important_dependencies_count": 1,
+  "optional_dependencies_count": 1,
+  "passed": true,
+  "details": {
+    "policy_file": "dependency_policy.yaml",
+    "policy_version": "1.0",
+    "environment": "production"
+  }
+}

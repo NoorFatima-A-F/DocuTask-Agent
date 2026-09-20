@@ -1,0 +1,74 @@
+{
+  "report_title": "Enterprise Distributed Tracing Architecture Report",
+  "collector": "OpenTelemetry",
+  "backend": "Tempo",
+  "visualizer": "Grafana",
+  "services_instrumented": 8,
+  "services": [
+    {
+      "service_name": "api_gateway",
+      "sdk": "OpenTelemetry Python SDK 1.25.0",
+      "exporter": "OTLP gRPC Exporter",
+      "collector_endpoint": "otel-collector:4317",
+      "backend": "Grafana Tempo",
+      "status": "ACTIVE"
+    },
+    {
+      "service_name": "async_document_worker",
+      "sdk": "OpenTelemetry Python SDK 1.25.0",
+      "exporter": "OTLP gRPC Exporter",
+      "collector_endpoint": "otel-collector:4317",
+      "backend": "Grafana Tempo",
+      "status": "ACTIVE"
+    },
+    {
+      "service_name": "ocr_processing_service",
+      "sdk": "OpenTelemetry Python SDK 1.25.0",
+      "exporter": "OTLP gRPC Exporter",
+      "collector_endpoint": "otel-collector:4317",
+      "backend": "Grafana Tempo",
+      "status": "ACTIVE"
+    },
+    {
+      "service_name": "agent_planning_runtime",
+      "sdk": "OpenTelemetry Python SDK 1.25.0",
+      "exporter": "OTLP gRPC Exporter",
+      "collector_endpoint": "otel-collector:4317",
+      "backend": "Grafana Tempo",
+      "status": "ACTIVE"
+    },
+    {
+      "service_name": "gemini_llm_gateway",
+      "sdk": "OpenTelemetry Python SDK 1.25.0",
+      "exporter": "OTLP gRPC Exporter",
+      "collector_endpoint": "otel-collector:4317",
+      "backend": "Grafana Tempo",
+      "status": "ACTIVE"
+    },
+    {
+      "service_name": "postgresql_primary_db",
+      "sdk": "OpenTelemetry Python SDK 1.25.0",
+      "exporter": "OTLP gRPC Exporter",
+      "collector_endpoint": "otel-collector:4317",
+      "backend": "Grafana Tempo",
+      "status": "ACTIVE"
+    },
+    {
+      "service_name": "redis_task_queue",
+      "sdk": "OpenTelemetry Python SDK 1.25.0",
+      "exporter": "OTLP gRPC Exporter",
+      "collector_endpoint": "otel-collector:4317",
+      "backend": "Grafana Tempo",
+      "status": "ACTIVE"
+    },
+    {
+      "service_name": "security_auth_service",
+      "sdk": "OpenTelemetry Python SDK 1.25.0",
+      "exporter": "OTLP gRPC Exporter",
+      "collector_endpoint": "otel-collector:4317",
+      "backend": "Grafana Tempo",
+      "status": "ACTIVE"
+    }
+  ],
+  "status": "PASS"
+}

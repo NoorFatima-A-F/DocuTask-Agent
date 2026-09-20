@@ -1,0 +1,63 @@
+{
+  "report_title": "Autonomous Decision Safety Verification Report",
+  "safety_rules": [
+    {
+      "action_type": "WorkerPodGracefulRestart",
+      "assigned_safety_level": "Safe",
+      "required_confidence_threshold": 0.85,
+      "risk_evaluation_criteria": [
+        "Non-terminating traffic disruption",
+        "Zero data loss",
+        "Health probe validation"
+      ],
+      "verification_check": "Post-restart pod readiness probe passes within 30s"
+    },
+    {
+      "action_type": "TemporaryCachePurgeAndRebuild",
+      "assigned_safety_level": "Safe",
+      "required_confidence_threshold": 0.85,
+      "risk_evaluation_criteria": [
+        "Key expiry bounds",
+        "Transient DB load increase < 15%"
+      ],
+      "verification_check": "Cache hit ratio climbs above 80% within 2 minutes"
+    },
+    {
+      "action_type": "HorizontalWorkerClusterScaling",
+      "assigned_safety_level": "Controlled",
+      "required_confidence_threshold": 0.9,
+      "risk_evaluation_criteria": [
+        "Node capacity headroom",
+        "Cost rate limit ceiling",
+        "Cooldown period enforced"
+      ],
+      "verification_check": "Cluster queue latency returns below 10s within 5 minutes"
+    },
+    {
+      "action_type": "PrimaryAIProviderSwitchover",
+      "assigned_safety_level": "Controlled",
+      "required_confidence_threshold": 0.92,
+      "risk_evaluation_criteria": [
+        "Secondary provider SLA health",
+        "Prompt schema compatibility"
+      ],
+      "verification_check": "Inference success rate verified on 100 canary calls"
+    },
+    {
+      "action_type": "PostgreSQLSchemaOrConstraintModification",
+      "assigned_safety_level": "Restricted",
+      "required_confidence_threshold": 0.98,
+      "risk_evaluation_criteria": [
+        "Mandatory human SRE dual-approval",
+        "Zero lock blocking verified in staging"
+      ],
+      "verification_check": "Explicit signed cryptographic approval token required"
+    }
+  ],
+  "safe_tier_automation_verified": true,
+  "controlled_tier_approval_verified": true,
+  "restricted_tier_human_gate_verified": true,
+  "zero_harmful_action_guarantee": true,
+  "safety_compliance_pct": 100.0,
+  "status": "PASS"
+}

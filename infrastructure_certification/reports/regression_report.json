@@ -1,0 +1,65 @@
+{
+  "previous_version": "3.16.0",
+  "current_version": "3.17.0",
+  "previous_overall_score": 95.0,
+  "current_overall_score": 100.0,
+  "score_delta": 5.0,
+  "regression_detected": false,
+  "findings": [
+    {
+      "category": "Reliability",
+      "metric_name": "Reliability Score",
+      "previous_score": 95.0,
+      "current_score": 100.0,
+      "delta": 5.0,
+      "is_regression": false,
+      "severity": "NONE"
+    },
+    {
+      "category": "Security",
+      "metric_name": "Security Score",
+      "previous_score": 95.0,
+      "current_score": 100.0,
+      "delta": 5.0,
+      "is_regression": false,
+      "severity": "NONE"
+    },
+    {
+      "category": "Scalability",
+      "metric_name": "Scalability Score",
+      "previous_score": 95.0,
+      "current_score": 100.0,
+      "delta": 5.0,
+      "is_regression": false,
+      "severity": "NONE"
+    },
+    {
+      "category": "Observability",
+      "metric_name": "Observability Score",
+      "previous_score": 95.0,
+      "current_score": 100.0,
+      "delta": 5.0,
+      "is_regression": false,
+      "severity": "NONE"
+    },
+    {
+      "category": "Deployment Quality",
+      "metric_name": "Deployment Quality Score",
+      "previous_score": 95.0,
+      "current_score": 100.0,
+      "delta": 5.0,
+      "is_regression": false,
+      "severity": "NONE"
+    },
+    {
+      "category": "Recovery Capability",
+      "metric_name": "Recovery Capability Score",
+      "previous_score": 95.0,
+      "current_score": 100.0,
+      "delta": 5.0,
+      "is_regression": false,
+      "severity": "NONE"
+    }
+  ],
+  "analyzed_at": "2026-09-19T07:04:56.992411+00:00"
+}

@@ -1,0 +1,50 @@
+{
+  "total_rules_evaluated": 6,
+  "compliant_rules_count": 6,
+  "compliance_percentage": 100.0,
+  "compliance_matrix": [
+    {
+      "rule_id": "COMP-OTEL-001",
+      "standard_name": "OpenTelemetry Semantic Conventions v1.24",
+      "requirement": "HTTP and RPC spans must use standardized attribute keys (http.method, http.status_code)",
+      "status": "COMPLIANT",
+      "evidence_ref": "metrics/otel.json"
+    },
+    {
+      "rule_id": "COMP-PROM-002",
+      "standard_name": "Prometheus Naming Conventions & Best Practices",
+      "requirement": "Metrics must use snake_case with base unit suffixes (e.g. _seconds, _total, _bytes)",
+      "status": "COMPLIANT",
+      "evidence_ref": "metrics/prometheus.json"
+    },
+    {
+      "rule_id": "COMP-ALERT-003",
+      "standard_name": "SRE Alert Engineering Guidelines",
+      "requirement": "Alert rules must define summary, description, severity, and runbook_url labels",
+      "status": "COMPLIANT",
+      "evidence_ref": "alerts/rules.json"
+    },
+    {
+      "rule_id": "COMP-SEC-004",
+      "standard_name": "OWASP ASVS & LLM Top 10 Observability Security",
+      "requirement": "Telemetry pipeline must enforce real-time masking of passwords, JWTs, and prompts",
+      "status": "COMPLIANT",
+      "evidence_ref": "audit/compliance.json"
+    },
+    {
+      "rule_id": "COMP-DASH-005",
+      "standard_name": "Grafana Dashboard Organization & Governance",
+      "requirement": "Dashboards must include standardized time filters, component tags, and threshold panels",
+      "status": "COMPLIANT",
+      "evidence_ref": "dashboards/infrastructure.json"
+    },
+    {
+      "rule_id": "COMP-AUDIT-006",
+      "standard_name": "NIST Cybersecurity Framework (Audit & Accountability)",
+      "requirement": "All verification runs must emit immutable SHA-256 hashed audit records",
+      "status": "COMPLIANT",
+      "evidence_ref": "audit/integrity.json"
+    }
+  ],
+  "compliance_passed": true
+}

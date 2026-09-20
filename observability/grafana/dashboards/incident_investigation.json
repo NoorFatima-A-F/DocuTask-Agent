@@ -1,0 +1,44 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Active Incidents & Alert Severity",
+      "type": "stat",
+      "targets": [{ "expr": "sum(ALERTS{alertstate=\"firing\"}) by (severity)", "refId": "A" }],
+      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 0 }
+    },
+    {
+      "id": 2,
+      "title": "Recent System Exceptions & Failures",
+      "type": "timeseries",
+      "targets": [{ "expr": "sum(rate(docutask_exceptions_total[5m])) by (exception_type)", "refId": "A" }],
+      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 0 }
+    },
+    {
+      "id": 3,
+      "title": "Dependency Degradation Timeline",
+      "type": "status-history",
+      "targets": [
+        { "expr": "docutask_db_status", "refId": "Postgres" },
+        { "expr": "docutask_redis_status", "refId": "Redis" },
+        { "expr": "docutask_ai_provider_status", "refId": "Gemini" }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 6 }
+    },
+    {
+      "id": 4,
+      "title": "Mean Time to Recovery (MTTR) & Health Restoration",
+      "type": "gauge",
+      "targets": [{ "expr": "docutask_recovery_duration_seconds", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 6 }
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": ["docutask", "incident", "investigation"],
+  "title": "Incident Investigation Dashboard",
+  "uid": "docutask-incident-investigation",
+  "version": 1
+}

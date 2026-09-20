@@ -1,0 +1,48 @@
+version: "1.0"
+environment: "production"
+
+rules:
+  memory:
+    warning_threshold_pct: 80.0
+    critical_threshold_pct: 95.0
+    sustained_duration_seconds: 300
+    action_on_critical: "DEGRADED"
+
+  cpu:
+    warning_threshold_pct: 85.0
+    critical_threshold_pct: 98.0
+    action_on_critical: "DEGRADED"
+
+  latency:
+    degraded_threshold_ms: 500.0
+    critical_threshold_ms: 2000.0
+    action_on_degraded: "DEGRADED"
+    action_on_critical: "NOT_READY"
+
+  queue:
+    warning_depth: 500
+    critical_depth: 1000
+    action_on_critical: "DEGRADED"
+
+  database:
+    unavailable_action: "NOT_READY"
+    high_latency_threshold_ms: 100.0
+    pool_exhaustion_action: "NOT_READY"
+
+  ai_provider:
+    timeout_action: "DEGRADED"
+    rate_limit_action: "DEGRADED"
+    circuit_breaker_error_threshold: 5
+
+  flapping:
+    max_transitions_window_seconds: 600
+    max_allowed_transitions: 5
+    dampening_cooldown_seconds: 180
+
+  recovery:
+    min_stable_duration_seconds: 15
+    required_checks:
+      - "database_transaction"
+      - "queue_ping"
+      - "storage_write"
+      - "worker_heartbeat"

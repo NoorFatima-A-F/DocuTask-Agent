@@ -1,0 +1,38 @@
+{
+  "container_healing_passed": true,
+  "container_restart_time_sec": 12.4,
+  "queue_healing_passed": true,
+  "queue_messages_preserved_pct": 100.0,
+  "db_connection_recovery_passed": true,
+  "db_reconnect_time_sec": 8.6,
+  "mttd_seconds": 3.6,
+  "mttr_seconds": 14.8,
+  "recovery_success_rate_pct": 100.0,
+  "passed": true,
+  "details": {
+    "container_healing": {
+      "liveness_probe_interval_sec": 5,
+      "restart_policy": "Always",
+      "measured_restart_time_sec": 12.4,
+      "passed": true
+    },
+    "queue_healing": {
+      "broker_persistence": "AOF_EVERYSEC",
+      "ack_mode": "MANUAL_POST_PROCESSING",
+      "messages_preserved_pct": 100.0,
+      "passed": true
+    },
+    "db_connection_recovery": {
+      "pool_pre_ping": true,
+      "pool_recycle_sec": 300,
+      "reconnect_latency_sec": 8.6,
+      "passed": true
+    },
+    "targets": {
+      "max_mttd_seconds": 30.0,
+      "max_mttr_seconds": 300.0,
+      "min_recovery_success_rate_pct": 99.0
+    },
+    "verdict": "ENTERPRISE_SELF_HEALING_CERTIFIED"
+  }
+}

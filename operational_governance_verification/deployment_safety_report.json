@@ -1,0 +1,69 @@
+{
+  "report_title": "Progressive Deployment Safety & Health Gates Report",
+  "total_deployments_audited": 4,
+  "deployments": [
+    {
+      "deployment_id": "DEP-2026-CANARY-01",
+      "target_service": "api_gateway_ingress",
+      "strategy": "CANARY",
+      "traffic_percentage_progression": [
+        10,
+        25,
+        50,
+        100
+      ],
+      "health_validation_gates_passed": true,
+      "automatic_promotion_enabled": true,
+      "rollback_trigger_configured": true,
+      "deployment_duration_seconds": 120.0,
+      "status": "PROMOTED_SUCCESSFULLY"
+    },
+    {
+      "deployment_id": "DEP-2026-BG-02",
+      "target_service": "gemini_ai_extractor",
+      "strategy": "BLUE_GREEN",
+      "traffic_percentage_progression": [
+        0,
+        100
+      ],
+      "health_validation_gates_passed": true,
+      "automatic_promotion_enabled": true,
+      "rollback_trigger_configured": true,
+      "deployment_duration_seconds": 60.0,
+      "status": "PROMOTED_SUCCESSFULLY"
+    },
+    {
+      "deployment_id": "DEP-2026-ROLLING-03",
+      "target_service": "ocr_worker_pool",
+      "strategy": "ROLLING",
+      "traffic_percentage_progression": [
+        25,
+        50,
+        75,
+        100
+      ],
+      "health_validation_gates_passed": true,
+      "automatic_promotion_enabled": true,
+      "rollback_trigger_configured": true,
+      "deployment_duration_seconds": 90.0,
+      "status": "PROMOTED_SUCCESSFULLY"
+    },
+    {
+      "deployment_id": "DEP-2026-FF-04",
+      "target_service": "document_validation_rules_v2",
+      "strategy": "FEATURE_FLAG",
+      "traffic_percentage_progression": [
+        5,
+        20,
+        50,
+        100
+      ],
+      "health_validation_gates_passed": true,
+      "automatic_promotion_enabled": true,
+      "rollback_trigger_configured": true,
+      "deployment_duration_seconds": 30.0,
+      "status": "PROMOTED_SUCCESSFULLY"
+    }
+  ],
+  "progressive_delivery_enforced": true
+}

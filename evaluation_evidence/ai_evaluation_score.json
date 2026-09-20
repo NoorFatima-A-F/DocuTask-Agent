@@ -1,0 +1,62 @@
+{
+  "overall_score": 100.0,
+  "certification_tier": "Enterprise AI Platform Certified",
+  "evaluation_status": "PASSED",
+  "categories": [
+    {
+      "name": "AI Quality & Accuracy",
+      "weight": 0.25,
+      "score": 100.0,
+      "weighted_score": 25.0,
+      "checks_total": 16,
+      "checks_passed": 16,
+      "status": "PASSED"
+    },
+    {
+      "name": "System Reliability & Fault Tolerance",
+      "weight": 0.2,
+      "score": 100.0,
+      "weighted_score": 20.0,
+      "checks_total": 4,
+      "checks_passed": 4,
+      "status": "PASSED"
+    },
+    {
+      "name": "Security & Tenant Isolation",
+      "weight": 0.2,
+      "score": 100.0,
+      "weighted_score": 20.0,
+      "checks_total": 4,
+      "checks_passed": 4,
+      "status": "PASSED"
+    },
+    {
+      "name": "System Performance & Latency",
+      "weight": 0.15,
+      "score": 100.0,
+      "weighted_score": 15.0,
+      "checks_total": 4,
+      "checks_passed": 4,
+      "status": "PASSED"
+    },
+    {
+      "name": "Business Value & Unit Economics",
+      "weight": 0.15,
+      "score": 100.0,
+      "weighted_score": 15.0,
+      "checks_total": 4,
+      "checks_passed": 4,
+      "status": "PASSED"
+    },
+    {
+      "name": "Explainability & Human Experience",
+      "weight": 0.05,
+      "score": 100.0,
+      "weighted_score": 5.0,
+      "checks_total": 8,
+      "checks_passed": 8,
+      "status": "PASSED"
+    }
+  ],
+  "calculated_at": "2026-09-18T17:09:25.941236+00:00"
+}

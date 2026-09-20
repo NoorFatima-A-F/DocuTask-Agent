@@ -1,0 +1,12 @@
+{
+  "report_title": "SRE Reliability Metrics Report",
+  "uptime_seconds": 86365.0,
+  "total_time_seconds": 86400.0,
+  "availability_pct": 99.9595,
+  "mttd_seconds": 1.8,
+  "mttr_seconds": 12.4,
+  "mtbf_hours": 23.99,
+  "incident_count_last_30d": 1,
+  "slo_target_pct": 99.9,
+  "slo_compliant": true
+}

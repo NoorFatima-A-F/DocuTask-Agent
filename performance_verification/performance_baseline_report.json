@@ -1,0 +1,55 @@
+{
+  "verifier_id": "VERIFY-3J.5.1-PERF-BASELINE",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "API Ingress P95 Latency Baseline (< 120ms)",
+      "passed": true,
+      "details": "Measured API P95 latency is 42.0ms under steady-state baseline",
+      "metrics": {
+        "api_p95": "42.0ms"
+      }
+    },
+    {
+      "name": "End-to-End Processing Pipeline Duration (< 2.0s)",
+      "passed": true,
+      "details": "Complete 6-stage document processing completed in 1.08s",
+      "metrics": {
+        "duration": "1.08s",
+        "stages": 6
+      }
+    },
+    {
+      "name": "Baseline Ingress & Processing Throughput",
+      "passed": true,
+      "details": "Sustained baseline throughput at 120 docs/min (245 RPS ingress capacity)",
+      "metrics": {
+        "throughput": "120 docs/min",
+        "rps": 245.0
+      }
+    },
+    {
+      "name": "Zero Error Rate Baseline Reliability",
+      "passed": true,
+      "details": "Zero dropped connections, validation failures, or timeouts recorded",
+      "metrics": {
+        "error_rate": "0.0%"
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:01.744948+00:00",
+  "execution_timestamp": "2026-09-19T07:05:01.745061+00:00",
+  "summary": "",
+  "report_title": "Enterprise Performance Baseline Measurement Report",
+  "baseline": {
+    "api_latency_p95": "42.0ms",
+    "document_processing_time": "1.08s",
+    "throughput": "120 docs/min",
+    "error_rate": "0.0%"
+  },
+  "api_throughput_rps": 245.0,
+  "processing_pipeline_stages_verified": 6
+}

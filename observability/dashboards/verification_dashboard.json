@@ -1,0 +1,10 @@
+{
+  "title": "Enterprise Verification Platform Mission Control",
+  "version": "2.0.0",
+  "panels": [
+    "Verification Run Throughput",
+    "Gate Pass Rate",
+    "P99 Execution Latency",
+    "Audit Chain Health"
+  ]
+}

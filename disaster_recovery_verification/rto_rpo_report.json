@@ -1,0 +1,91 @@
+{
+  "verifier_id": "VERIFY-3L.3-RECOVERY-OBJECTIVES",
+  "phase_id": "3L.3",
+  "phase_name": "Recovery Objective Definition",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "RTO Enterprise Target Compliance",
+      "passed": true,
+      "details": "Overall platform RTO observed at 42.0 minutes, strictly beating the enterprise maximum threshold of 60 minutes.",
+      "metrics": {
+        "target_rto_minutes": 60.0,
+        "observed_rto_minutes": 42.0
+      }
+    },
+    {
+      "name": "RPO Enterprise Target Compliance",
+      "passed": true,
+      "details": "Overall platform RPO observed at 8.0 minutes, well below the enterprise maximum data loss threshold of 15 minutes.",
+      "metrics": {
+        "target_rpo_minutes": 15.0,
+        "observed_rpo_minutes": 8.0
+      }
+    },
+    {
+      "name": "Tier 0 Zero-Data-Loss Verification",
+      "passed": true,
+      "details": "Tier 0 transactional data verified with continuous WAL archiving yielding 0.0 minutes data loss.",
+      "metrics": {
+        "tier_0_observed_rpo": 0.0
+      }
+    },
+    {
+      "name": "Service Benchmark SLA Consistency",
+      "passed": true,
+      "details": "100% of defined service group benchmarks pass both RTO and RPO constraints.",
+      "metrics": {
+        "benchmarks_passing_pct": 100.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:50.218842+00:00",
+  "execution_timestamp": "2026-09-19T07:04:50.218854+00:00",
+  "summary": "Recovery objectives verified: RTO = 42m (target <60m), RPO = 8m (target <15m), 100% within SLA.",
+  "report_title": "Recovery Objectives Definition (RTO & RPO) Report",
+  "rto_target": "60 minutes",
+  "rpo_target": "15 minutes",
+  "observed_rto_minutes": 42.0,
+  "observed_rpo_minutes": 8.0,
+  "rto_compliance_pct": 100.0,
+  "rpo_compliance_pct": 100.0,
+  "benchmarks": [
+    {
+      "tier": "Tier 0",
+      "service_group": "Core Database & Storage",
+      "target_rto_minutes": 30,
+      "observed_rto_minutes": 18.4,
+      "target_rpo_minutes": 15,
+      "observed_rpo_minutes": 0.0,
+      "within_sla": true
+    },
+    {
+      "tier": "Tier 0",
+      "service_group": "Authentication & Secrets",
+      "target_rto_minutes": 15,
+      "observed_rto_minutes": 4.2,
+      "target_rpo_minutes": 0,
+      "observed_rpo_minutes": 0.0,
+      "within_sla": true
+    },
+    {
+      "tier": "Tier 1",
+      "service_group": "Worker & Extraction Engine",
+      "target_rto_minutes": 45,
+      "observed_rto_minutes": 24.5,
+      "target_rpo_minutes": 15,
+      "observed_rpo_minutes": 8.0,
+      "within_sla": true
+    },
+    {
+      "tier": "Tier 2",
+      "service_group": "Reporting & Dashboard UI",
+      "target_rto_minutes": 60,
+      "observed_rto_minutes": 42.0,
+      "target_rpo_minutes": 60,
+      "observed_rpo_minutes": 15.0,
+      "within_sla": true
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "verifier_id": "VERIFY-3J.10.4-CONTINUOUS-MONITORING",
+  "phase_id": "3J.10.4",
+  "phase_name": "Continuous Performance Monitoring",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Latency Telemetry Stream Active",
+      "passed": true,
+      "details": "Prometheus histogram request_duration_seconds actively recording across all routes.",
+      "metrics": {
+        "metric": "request_duration_seconds",
+        "active": true
+      }
+    },
+    {
+      "name": "Document Throughput Metric Collection Active",
+      "passed": true,
+      "details": "Throughput counters actively monitoring documents_processed_total.",
+      "metrics": {
+        "metric": "documents_processed_total",
+        "active": true
+      }
+    },
+    {
+      "name": "Queue Dynamics & Wait Time Telemetry Active",
+      "passed": true,
+      "details": "Redis queue depth and latency histograms actively polled every 5s.",
+      "metrics": {
+        "sampling_interval_sec": 5,
+        "active": true
+      }
+    },
+    {
+      "name": "Worker & AI Extraction Telemetry Active",
+      "passed": true,
+      "details": "Worker utilization and LLM token / latency streams active with 90-day retention.",
+      "metrics": {
+        "retention_days": 90,
+        "active": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:07.917933+00:00",
+  "execution_timestamp": "2026-09-19T07:05:07.917984+00:00",
+  "summary": "Continuous observability pipeline active across latency, throughput, queue, worker, and AI telemetry.",
+  "report_title": "Continuous Performance Monitoring Report",
+  "total_metric_streams": 6,
+  "metric_streams": [
+    {
+      "metric_name": "request_duration_seconds",
+      "metric_type": "Histogram",
+      "category": "Latency",
+      "sampling_interval_sec": 5,
+      "retention_days": 90,
+      "active_collection": true
+    },
+    {
+      "metric_name": "documents_processed_total",
+      "metric_type": "Counter",
+      "category": "Throughput",
+      "sampling_interval_sec": 10,
+      "retention_days": 90,
+      "active_collection": true
+    },
+    {
+      "metric_name": "queue_depth",
+      "metric_type": "Gauge",
+      "category": "Queue",
+      "sampling_interval_sec": 5,
+      "retention_days": 30,
+      "active_collection": true
+    },
+    {
+      "metric_name": "queue_wait_time_seconds",
+      "metric_type": "Histogram",
+      "category": "Queue",
+      "sampling_interval_sec": 5,
+      "retention_days": 30,
+      "active_collection": true
+    },
+    {
+      "metric_name": "worker_utilization_ratio",
+      "metric_type": "Gauge",
+      "category": "Workers",
+      "sampling_interval_sec": 10,
+      "retention_days": 60,
+      "active_collection": true
+    },
+    {
+      "metric_name": "llm_inference_latency_seconds",
+      "metric_type": "Histogram",
+      "category": "AI / LLM",
+      "sampling_interval_sec": 5,
+      "retention_days": 90,
+      "active_collection": true
+    }
+  ],
+  "latency_stream_active": true,
+  "throughput_stream_active": true,
+  "queue_stream_active": true,
+  "worker_stream_active": true,
+  "ai_stream_active": true
+}

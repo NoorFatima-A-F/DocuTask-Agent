@@ -1,0 +1,49 @@
+{
+  "program": "Phase V12 \u2014 Enterprise AI Platform Verification Certification & Readiness Assessment Program (EAP-VCRAP)",
+  "generated_at": "2026-09-18T17:07:04.181566+00:00",
+  "readiness_score": 100.0,
+  "maturity_tier": "Level 4.8 / 5.0 \u2014 Enterprise AI Operational Maturity",
+  "grade": "A+",
+  "artifacts": {
+    "phase_V12_enterprise_score.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V12_enterprise_score.json",
+      "sha256": "c72ff3f02f99f237d56a69f2a0a2f3053e20b97669b6c1a3cd39ff756c12e799",
+      "size_bytes": 4455
+    },
+    "phase_V12_maturity_assessment.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V12_maturity_assessment.json",
+      "sha256": "b39f6e473a9ee99ed830d37d31fa01dda2204e000e7d8d12901846086c6d9fb9",
+      "size_bytes": 888
+    },
+    "phase_V12_risk_register.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V12_risk_register.json",
+      "sha256": "4cb80359427b118f941e853c468f788ee21a497f6f732adf90f30d85008cbc9d",
+      "size_bytes": 2298
+    },
+    "phase_V12_governance_report.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V12_governance_report.json",
+      "sha256": "a566785dc255975ad538aa88ad2c2bec6f9b660a5f6d619af98e1a41b9ac1c32",
+      "size_bytes": 314
+    },
+    "phase_V12_evidence_graph.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V12_evidence_graph.json",
+      "sha256": "d811a57eeb66f60ec4c6c2b4c49f2583e91aacb9db0a5bec8eeee71b2d0930d4",
+      "size_bytes": 2628
+    },
+    "phase_V12_portfolio_manifest.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V12_portfolio_manifest.json",
+      "sha256": "8b2cb33373b24a8472fe611df1854eaabc8fbdfc3769f3268ea1dfa0036c8b64",
+      "size_bytes": 3833
+    },
+    "phase_V12_system_card.md": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V12_system_card.md",
+      "sha256": "c074bea4d4d81e3658f63aa008eca1011a34227fd1e84d1006ecfc86ce4b3d81",
+      "size_bytes": 2734
+    },
+    "phase_V12_final_assessment_report.md": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V12_final_assessment_report.md",
+      "sha256": "2f11412a582ec36bd88a9ac2ef03b283ea6ddf46624fe8a236ccd629b4157111",
+      "size_bytes": 7652
+    }
+  }
+}

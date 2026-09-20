@@ -1,0 +1,54 @@
+{
+  "total_samples_evaluated": 4,
+  "schema_compliance_rate_pct": 100.0,
+  "avg_confidence_score": 0.9657,
+  "invalid_response_rate_pct": 0.0,
+  "samples": [
+    {
+      "sample_id": "SAMPLE-DOC-001",
+      "provider": "gemini",
+      "schema_compliant": true,
+      "json_valid": true,
+      "required_fields_present": true,
+      "confidence_score": 0.985,
+      "hallucination_detected": false,
+      "passed": true
+    },
+    {
+      "sample_id": "SAMPLE-DOC-002",
+      "provider": "gemini",
+      "schema_compliant": true,
+      "json_valid": true,
+      "required_fields_present": true,
+      "confidence_score": 0.962,
+      "hallucination_detected": false,
+      "passed": true
+    },
+    {
+      "sample_id": "SAMPLE-DOC-003",
+      "provider": "claude_fallback",
+      "schema_compliant": true,
+      "json_valid": true,
+      "required_fields_present": true,
+      "confidence_score": 0.971,
+      "hallucination_detected": false,
+      "passed": true
+    },
+    {
+      "sample_id": "SAMPLE-DOC-004",
+      "provider": "local_vllm",
+      "schema_compliant": true,
+      "json_valid": true,
+      "required_fields_present": true,
+      "confidence_score": 0.945,
+      "hallucination_detected": false,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "details": {
+    "validation_engine": "Pydantic V2 Schema Validator & Guardrails AI",
+    "hallucination_filter": "Strict entity boundary and source citation ground-truth matcher",
+    "automatic_repair_attempts": 2
+  }
+}

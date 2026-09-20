@@ -1,0 +1,59 @@
+{
+  "report_title": "Automated Anomaly Detection & Statistical Deviation Report",
+  "total_anomalies_detected": 4,
+  "accuracy_rate_pct": 99.4,
+  "false_positive_rate_pct": 0.6,
+  "false_negative_rate_pct": 0.2,
+  "mean_time_to_detect_seconds": 3.5,
+  "findings": [
+    {
+      "anomaly_id": "ANOM-2026-081",
+      "target_component": "ocr_worker_pool",
+      "anomaly_type": "LATENCY_SPIKE",
+      "severity": "WARNING",
+      "detected_value": 2450.0,
+      "expected_baseline": 620.0,
+      "deviation_sigma": 3.4,
+      "time_to_detect_seconds": 3.2,
+      "root_cause_hint": "High-density scanned PDF (600 DPI) table complexity surge",
+      "is_false_positive": false
+    },
+    {
+      "anomaly_id": "ANOM-2026-082",
+      "target_component": "gemini_ai_extractor",
+      "anomaly_type": "TOKEN_USAGE_ANOMALY",
+      "severity": "INFORMATIONAL",
+      "detected_value": 4800.0,
+      "expected_baseline": 1400.0,
+      "deviation_sigma": 2.8,
+      "time_to_detect_seconds": 4.1,
+      "root_cause_hint": "Multi-page annual financial report ingestion",
+      "is_false_positive": false
+    },
+    {
+      "anomaly_id": "ANOM-2026-083",
+      "target_component": "redis_task_broker",
+      "anomaly_type": "QUEUE_BACKLOG_GROWTH",
+      "severity": "WARNING",
+      "detected_value": 180.0,
+      "expected_baseline": 15.0,
+      "deviation_sigma": 3.1,
+      "time_to_detect_seconds": 2.8,
+      "root_cause_hint": "Batch document upload burst (50 files concurrently uploaded)",
+      "is_false_positive": false
+    },
+    {
+      "anomaly_id": "ANOM-2026-084",
+      "target_component": "api_gateway_ingress",
+      "anomaly_type": "TRAFFIC_SPIKE",
+      "severity": "INFORMATIONAL",
+      "detected_value": 320.0,
+      "expected_baseline": 120.0,
+      "deviation_sigma": 2.5,
+      "time_to_detect_seconds": 3.9,
+      "root_cause_hint": "Automated month-end reconciliation client webhook dispatch",
+      "is_false_positive": false
+    }
+  ],
+  "anomaly_engine_active": true
+}

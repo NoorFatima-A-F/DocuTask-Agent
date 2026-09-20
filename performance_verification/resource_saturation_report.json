@@ -1,0 +1,87 @@
+{
+  "verifier_id": "VERIFY-3J.7.2-RESOURCE-SAT",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "CPU Saturation Analysis",
+      "passed": true,
+      "details": "CPU: 42.0% used, 43.0% headroom (threshold: 85.0%)",
+      "metrics": {
+        "utilization_pct": 42.0,
+        "headroom_pct": 43.0
+      }
+    },
+    {
+      "name": "Memory Saturation Analysis",
+      "passed": true,
+      "details": "Memory: 55.0% used, 35.0% headroom",
+      "metrics": {
+        "utilization_pct": 55.0,
+        "headroom_pct": 35.0
+      }
+    },
+    {
+      "name": "Disk I/O Saturation Analysis",
+      "passed": true,
+      "details": "Disk: 28.0% IOPS utilized, 52.0% headroom",
+      "metrics": {
+        "utilization_pct": 28.0,
+        "headroom_pct": 52.0
+      }
+    },
+    {
+      "name": "Network Saturation Analysis",
+      "passed": true,
+      "details": "Network: 18.0% bandwidth used, 57.0% headroom",
+      "metrics": {
+        "utilization_pct": 18.0,
+        "headroom_pct": 57.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:37:02.166722+00:00",
+  "execution_timestamp": "2026-09-16T18:37:02.166744+00:00",
+  "summary": "",
+  "report_title": "Resource Saturation Analysis Report",
+  "resource_metrics": [
+    {
+      "resource_type": "CPU",
+      "current_utilization_pct": 42.0,
+      "saturation_threshold_pct": 85.0,
+      "headroom_pct": 43.0,
+      "bottleneck_detected": false,
+      "details": "CPU utilization stable at 42% under production load; 43% headroom available"
+    },
+    {
+      "resource_type": "Memory",
+      "current_utilization_pct": 55.0,
+      "saturation_threshold_pct": 90.0,
+      "headroom_pct": 35.0,
+      "bottleneck_detected": false,
+      "details": "Memory usage at 55% of allocation; no leak detected over 72h soak"
+    },
+    {
+      "resource_type": "Disk",
+      "current_utilization_pct": 28.0,
+      "saturation_threshold_pct": 80.0,
+      "headroom_pct": 52.0,
+      "bottleneck_detected": false,
+      "details": "Disk I/O well within IOPS limits; read latency <2ms, write latency <5ms"
+    },
+    {
+      "resource_type": "Network",
+      "current_utilization_pct": 18.0,
+      "saturation_threshold_pct": 75.0,
+      "headroom_pct": 57.0,
+      "bottleneck_detected": false,
+      "details": "Network bandwidth at 18% capacity; zero packet loss observed"
+    }
+  ],
+  "cpu_saturation_detected": false,
+  "memory_saturation_detected": false,
+  "disk_saturation_detected": false,
+  "network_saturation_detected": false
+}

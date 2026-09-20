@@ -1,0 +1,25 @@
+{
+  "report_title": "AI Agent, OCR & LLM Workflow Observability Report",
+  "agent_lifecycle_events_logged": [
+    "agent_started",
+    "goal_created",
+    "plan_generated",
+    "tool_selected",
+    "task_completed"
+  ],
+  "ocr_events_logged": [
+    "ocr_started",
+    "ocr_completed",
+    "ocr_failed"
+  ],
+  "llm_telemetry_tracked": [
+    "model_name",
+    "provider",
+    "latency",
+    "token_usage",
+    "retry_count",
+    "failure_reason"
+  ],
+  "error_stacktrace_capture_verified": true,
+  "ai_observability_passed": true
+}

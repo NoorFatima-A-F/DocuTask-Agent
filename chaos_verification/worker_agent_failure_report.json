@@ -1,0 +1,67 @@
+{
+  "verifier_id": "VERIFY-3K.8-WORKER-AGENT-FAILURE",
+  "phase_id": "3K.8",
+  "phase_name": "Worker Agent Failure Testing",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Stuck Task Processing Timeout Detection Verified (60s)",
+      "passed": true,
+      "details": "Stuck worker task automatically flagged after 60-second execution cutoff.",
+      "metrics": {
+        "timeout_seconds": 60.0
+      }
+    },
+    {
+      "name": "Autonomous Worker Re-dispatch & Task Recovery Passed",
+      "passed": true,
+      "details": "Degraded worker pod automatically recycled; task re-assigned and completed successfully.",
+      "metrics": {
+        "recovery_action_verified": true
+      }
+    },
+    {
+      "name": "Dual Worker Concurrency Idempotency Verified",
+      "passed": true,
+      "details": "Concurrent duplicate worker execution race resolved cleanly via distributed mutex.",
+      "metrics": {
+        "duplicate_runs_mitigated": true
+      }
+    },
+    {
+      "name": "Canonical Single Result Artifact Enforcement Verified",
+      "passed": true,
+      "details": "Database uniqueness constraints verified exactly 1 final extraction record persisted.",
+      "metrics": {
+        "single_canonical_output_enforced": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:41.016171+00:00",
+  "execution_timestamp": "2026-09-19T07:04:41.016195+00:00",
+  "summary": "Worker agent chaos verified: stuck task timeout recovery at 60s and strict idempotency under duplicate worker execution.",
+  "report_title": "Worker Agent Failure Chaos Report",
+  "stuck_task_timeout_seconds": 60.0,
+  "infinite_loop_mitigated": true,
+  "duplicate_worker_idempotency_verified": true,
+  "single_canonical_output_enforced": true,
+  "scenarios": [
+    {
+      "anomaly_type": "Infinite Processing / Stuck Task",
+      "injected_defect": "Injected infinite while loop inside OCR page normalization stage",
+      "timeout_detected": true,
+      "idempotent_single_result": true,
+      "recovery_action": "Visibility timeout expired (60s); task marked STUCK, worker recycled, task re-dispatched",
+      "passed": true
+    },
+    {
+      "anomaly_type": "Duplicate Worker Execution Race",
+      "injected_defect": "Simulated two concurrent worker pods picking up the exact same document task ID",
+      "timeout_detected": false,
+      "idempotent_single_result": true,
+      "recovery_action": "Redis distributed lock (Redlock) ensured only one worker committed; duplicate aborted cleanly",
+      "passed": true
+    }
+  ]
+}

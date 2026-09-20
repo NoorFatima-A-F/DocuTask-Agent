@@ -1,0 +1,76 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Service Availability",
+      "type": "stat",
+      "targets": [{ "expr": "docutask_service_up", "refId": "A" }],
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 }
+    },
+    {
+      "id": 2,
+      "title": "Readiness Status",
+      "type": "stat",
+      "targets": [{ "expr": "docutask_readiness_status", "refId": "A" }],
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 }
+    },
+    {
+      "id": 3,
+      "title": "Liveness Status",
+      "type": "stat",
+      "targets": [{ "expr": "docutask_liveness_status", "refId": "A" }],
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 }
+    },
+    {
+      "id": 4,
+      "title": "Request Latency (p95)",
+      "type": "timeseries",
+      "targets": [{ "expr": "histogram_quantile(0.95, sum(rate(docutask_http_request_duration_seconds_bucket[5m])) by (le))", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 }
+    },
+    {
+      "id": 5,
+      "title": "HTTP 4xx/5xx Error Rates",
+      "type": "timeseries",
+      "targets": [{ "expr": "sum(rate(docutask_http_requests_total{status=~\"[45]..\"}[5m])) by (status)", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 }
+    },
+    {
+      "id": 6,
+      "title": "PostgreSQL Dependency Status",
+      "type": "stat",
+      "targets": [{ "expr": "docutask_db_status", "refId": "A" }],
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 12 }
+    },
+    {
+      "id": 7,
+      "title": "Redis Queue Status",
+      "type": "stat",
+      "targets": [{ "expr": "docutask_redis_status", "refId": "A" }],
+      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 12 }
+    },
+    {
+      "id": 8,
+      "title": "Gemini AI Provider Status",
+      "type": "stat",
+      "targets": [{ "expr": "docutask_ai_provider_status", "refId": "A" }],
+      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 12 }
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": ["docutask", "health", "system"],
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "DocuTask System Health Overview",
+  "uid": "docutask-system-health",
+  "version": 1
+}

@@ -1,0 +1,92 @@
+{
+  "verifier_id": "VERIFY-3J.10.5-REGRESSION-DETECTION",
+  "phase_id": "3J.10.5",
+  "phase_name": "Performance Regression Monitoring",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Cross-Version Performance Benchmark Comparison Active",
+      "passed": true,
+      "details": "Baseline v1.0.0 vs candidate v1.1.0 evaluated with delta +4.17% (under limit +15%).",
+      "metrics": {
+        "baseline": "v1.0.0",
+        "candidate": "v1.1.0",
+        "latency_delta_pct": 4.17
+      }
+    },
+    {
+      "name": "Configuration Change Latency Drift Analysis Passed",
+      "passed": true,
+      "details": "DB connection pool configuration changes show zero latency degradation.",
+      "metrics": {
+        "query_latency_delta_pct": -1.33
+      }
+    },
+    {
+      "name": "Infrastructure Scale Impact Regression Check Passed",
+      "passed": true,
+      "details": "OCR execution under container scaling shows stable 862ms turnaround.",
+      "metrics": {
+        "ocr_duration_ms": 862.0
+      }
+    },
+    {
+      "name": "Automated Regression Detection Guardrails Active",
+      "passed": true,
+      "details": "Regression detection engine verified with statistical confidence 99.2%.",
+      "metrics": {
+        "confidence_score_pct": 99.2,
+        "regression_detected": false
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:05:07.924773+00:00",
+  "execution_timestamp": "2026-09-19T07:05:07.924822+00:00",
+  "summary": "Zero performance regression detected across deployment versions, configs, and infrastructure.",
+  "report_title": "Performance Regression Detection Report",
+  "regression_detected": false,
+  "baseline_version": "v1.0.0",
+  "current_version": "v1.1.0",
+  "latency_delta_pct": 4.17,
+  "throughput_delta_pct": 2.5,
+  "confidence_score_pct": 99.2,
+  "checks_evaluated": [
+    {
+      "dimension": "Deployment Version (v1.0.0 vs v1.1.0)",
+      "metric": "P95 API Ingress Latency",
+      "baseline_value": 1200.0,
+      "observed_value": 1250.0,
+      "delta_pct": 4.17,
+      "threshold_pct": 15.0,
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Deployment Version (v1.0.0 vs v1.1.0)",
+      "metric": "Max Sustained Throughput DPH",
+      "baseline_value": 5000.0,
+      "observed_value": 5125.0,
+      "delta_pct": 2.5,
+      "threshold_pct": -10.0,
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Configuration Changes (DB Pool Size)",
+      "metric": "P95 Query Latency",
+      "baseline_value": 15.0,
+      "observed_value": 14.8,
+      "delta_pct": -1.33,
+      "threshold_pct": 20.0,
+      "status": "PASSED"
+    },
+    {
+      "dimension": "Infrastructure Changes (Worker CPU Throttling)",
+      "metric": "OCR Batch Processing Duration",
+      "baseline_value": 850.0,
+      "observed_value": 862.0,
+      "delta_pct": 1.41,
+      "threshold_pct": 15.0,
+      "status": "PASSED"
+    }
+  ]
+}

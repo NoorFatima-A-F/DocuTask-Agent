@@ -1,0 +1,42 @@
+{
+  "report_title": "Global Reliability Intelligence Verification Report",
+  "global_reliability_score": 99.19,
+  "risk_level": "LOW",
+  "trend": "stable",
+  "dimensions": [
+    {
+      "dimension_name": "Production Multi-Region Availability",
+      "score_pct": 99.98,
+      "weight_pct": 30.0,
+      "status": "HEALTHY"
+    },
+    {
+      "dimension_name": "Cross-Environment Error Rate Stability",
+      "score_pct": 99.5,
+      "weight_pct": 25.0,
+      "status": "HEALTHY"
+    },
+    {
+      "dimension_name": "Deployment & Change Success Rate",
+      "score_pct": 100.0,
+      "weight_pct": 20.0,
+      "status": "HEALTHY"
+    },
+    {
+      "dimension_name": "Incident MTTR & Autonomous Recovery",
+      "score_pct": 96.8,
+      "weight_pct": 15.0,
+      "status": "HEALTHY"
+    },
+    {
+      "dimension_name": "Predictive AIOps Forecasting Accuracy",
+      "score_pct": 98.0,
+      "weight_pct": 10.0,
+      "status": "HEALTHY"
+    }
+  ],
+  "production_availability_pct": 99.98,
+  "incident_frequency_per_week": 0.2,
+  "prediction_accuracy_pct": 98.0,
+  "status": "PASS"
+}

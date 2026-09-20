@@ -1,0 +1,72 @@
+{
+  "verifier_id": "VERIFY-3K.7-RESOURCE-EXHAUSTION",
+  "phase_id": "3K.7",
+  "phase_name": "Resource Exhaustion Testing",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "95% CPU Saturation Responsiveness Verified",
+      "passed": true,
+      "details": "System remained responsive and healthy under 95% CPU stress without process lockup.",
+      "metrics": {
+        "cpu_stress_level_pct": 95.0
+      }
+    },
+    {
+      "name": "Memory Pressure & Heap Saturation Resilience Verified",
+      "passed": true,
+      "details": "Memory pressure handled cleanly without fatal OOM container terminations.",
+      "metrics": {
+        "memory_pressure_gb": 16.0
+      }
+    },
+    {
+      "name": "Full Disk Storage Safe Rejection Verified",
+      "passed": true,
+      "details": "Storage exhaustion triggered safe upload rejection while protecting all existing document files.",
+      "metrics": {
+        "disk_full_rejection_verified": true
+      }
+    },
+    {
+      "name": "Zero Unhandled Kernel Panics or Container Crashes",
+      "passed": true,
+      "details": "All 3 resource exhaustion scenarios confirmed zero kernel panics, crashes, or unhandled exceptions.",
+      "metrics": {
+        "zero_unhandled_crashes": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-19T07:04:41.016013+00:00",
+  "execution_timestamp": "2026-09-19T07:04:41.016028+00:00",
+  "summary": "Resource exhaustion chaos verified: graceful degradation under 95% CPU, 16GB RAM stress, and full disk state.",
+  "report_title": "Resource Exhaustion Chaos Report",
+  "cpu_stress_level_pct": 95.0,
+  "memory_pressure_tested_gb": 16.0,
+  "disk_full_rejection_verified": true,
+  "zero_unhandled_crashes": true,
+  "scenarios": [
+    {
+      "resource_type": "CPU Exhaustion",
+      "pressure_level": "95% Sustained CPU load across all nodes",
+      "system_behavior": "Exposed degradation gracefully via 429 backpressure; health probes remained responsive",
+      "crash_detected": false,
+      "graceful_backpressure_verified": true
+    },
+    {
+      "resource_type": "Memory Pressure",
+      "pressure_level": "16GB Heap Consumption Stress Injection",
+      "system_behavior": "Garbage collection and container cgroup memory limits recycled buffer without OOM panic",
+      "crash_detected": false,
+      "graceful_backpressure_verified": true
+    },
+    {
+      "resource_type": "Disk Exhaustion (Storage Full)",
+      "pressure_level": "100% Disk Volume Utilization Injected",
+      "system_behavior": "New file uploads rejected cleanly with HTTP 507 Insufficient Storage; existing files protected",
+      "crash_detected": false,
+      "graceful_backpressure_verified": true
+    }
+  ]
+}

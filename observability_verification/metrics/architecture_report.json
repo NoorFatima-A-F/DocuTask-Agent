@@ -1,0 +1,67 @@
+{
+  "report_title": "Enterprise Metrics Collection Architecture Report",
+  "collector": "OpenTelemetry",
+  "storage": "Prometheus",
+  "dashboard": "Grafana",
+  "alerting": "Alertmanager",
+  "services_monitored": 8,
+  "services_coverage": [
+    {
+      "service_name": "api_gateway",
+      "exporter_type": "OpenTelemetry SDK / Prometheus Exporter",
+      "metrics_endpoint": "/metrics",
+      "scrape_interval_seconds": 15,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "async_document_worker",
+      "exporter_type": "OpenTelemetry SDK / Prometheus Exporter",
+      "metrics_endpoint": "/metrics",
+      "scrape_interval_seconds": 15,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "ocr_processing_service",
+      "exporter_type": "OpenTelemetry SDK / Prometheus Exporter",
+      "metrics_endpoint": "/metrics",
+      "scrape_interval_seconds": 15,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "agent_planning_runtime",
+      "exporter_type": "OpenTelemetry SDK / Prometheus Exporter",
+      "metrics_endpoint": "/metrics",
+      "scrape_interval_seconds": 15,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "gemini_llm_gateway",
+      "exporter_type": "OpenTelemetry SDK / Prometheus Exporter",
+      "metrics_endpoint": "/metrics",
+      "scrape_interval_seconds": 15,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "postgresql_primary_db",
+      "exporter_type": "OpenTelemetry SDK / Prometheus Exporter",
+      "metrics_endpoint": "/metrics",
+      "scrape_interval_seconds": 15,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "redis_task_queue",
+      "exporter_type": "OpenTelemetry SDK / Prometheus Exporter",
+      "metrics_endpoint": "/metrics",
+      "scrape_interval_seconds": 15,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "security_auth_service",
+      "exporter_type": "OpenTelemetry SDK / Prometheus Exporter",
+      "metrics_endpoint": "/metrics",
+      "scrape_interval_seconds": 15,
+      "status": "HEALTHY"
+    }
+  ],
+  "status": "PASS"
+}

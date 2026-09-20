@@ -1,0 +1,27 @@
+{
+  "endpoint": "/ready",
+  "status": "ready",
+  "service": "docutask-api",
+  "version": "1.0.0",
+  "timestamp": "2026-09-19T07:05:04.035732+00:00",
+  "checks": {
+    "database": "healthy",
+    "queue": "healthy",
+    "storage": "healthy",
+    "workers": "healthy",
+    "ai_provider": "healthy"
+  },
+  "contract_schema_valid": true,
+  "passed": true,
+  "details": {
+    "required_checks_count": 5,
+    "checks_evaluated": [
+      "database",
+      "queue",
+      "storage",
+      "workers",
+      "ai_provider"
+    ],
+    "verdict": "READINESS_CONTRACT_VERIFIED"
+  }
+}

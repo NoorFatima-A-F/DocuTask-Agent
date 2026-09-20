@@ -1,0 +1,10 @@
+{
+  "transport_encryption_tls13": true,
+  "telemetry_ingestion_auth_required": true,
+  "data_integrity_signing_active": true,
+  "log_retention_days": 30,
+  "trace_retention_days": 7,
+  "retention_lifecycle_enforced": true,
+  "storage_encryption_at_rest": true,
+  "pipeline_security_passed": true
+}

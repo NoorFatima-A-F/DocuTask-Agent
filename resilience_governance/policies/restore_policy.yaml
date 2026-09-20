@@ -1,0 +1,13 @@
+policy_name: DocuTask Enterprise Restore & Recovery Policy
+version: '1.8'
+approval_process:
+  prod_restore_authority:
+  - Principal DBRE
+  - Lead SRE
+  - Incident Commander
+  dual_authorization_required: true
+  change_ticket_required: true
+sandbox_requirements:
+  pre_restore_malware_scan: true
+  schema_integrity_check: true
+  synthetic_workload_verification: true

@@ -1,0 +1,5 @@
+{
+  "deduplication_rate": 90.0,
+  "noise_compression_rate": 96.0,
+  "storm_tested": true
+}

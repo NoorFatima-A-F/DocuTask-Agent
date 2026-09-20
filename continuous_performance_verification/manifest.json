@@ -1,0 +1,173 @@
+{
+  "system": "DocuTask Agent",
+  "version": "3.12.0",
+  "commit": "HEAD",
+  "environment": "Continuous Performance Engineering Platform",
+  "timestamp": "2026-09-19T07:04:45.394272+00:00",
+  "overall_score": 100.0,
+  "certification_tier": "Continuous Performance Engineering Ready",
+  "files": [
+    {
+      "filename": "architecture_report.json",
+      "report_title": "Architecture Report",
+      "sha256": "fa226e214a60afc62ac11a027b3057f70fdef9e295ca60af42d3244477af1f8c",
+      "size_bytes": 4154
+    },
+    {
+      "filename": "baseline_report.json",
+      "report_title": "Baseline Report",
+      "sha256": "b92eb72b6ec8d61875ddcba63c91d31861e8b3e2798ae908aa95f9d66fc8127f",
+      "size_bytes": 2950
+    },
+    {
+      "filename": "benchmark_execution_report.json",
+      "report_title": "Benchmark Execution Report",
+      "sha256": "f940bf5bba6295096de29e3d0095e40b4f0ddfc9291b59eee84766dff5191792",
+      "size_bytes": 3105
+    },
+    {
+      "filename": "benchmark_report.json",
+      "report_title": "Benchmark Report",
+      "sha256": "f940bf5bba6295096de29e3d0095e40b4f0ddfc9291b59eee84766dff5191792",
+      "size_bytes": 3105
+    },
+    {
+      "filename": "change_impact_analysis_report.json",
+      "report_title": "Change Impact Analysis Report",
+      "sha256": "7684b25286407948fb589348a67ec110d6c98abd1449b3c91593e8e0065badc4",
+      "size_bytes": 2822
+    },
+    {
+      "filename": "cicd_performance_pipeline_report.json",
+      "report_title": "Cicd Performance Pipeline Report",
+      "sha256": "57e3dbf269e33984ebea9a924d204b0062b92f5b2107e159747e524a4494d21c",
+      "size_bytes": 2860
+    },
+    {
+      "filename": "cicd_report.json",
+      "report_title": "Cicd Report",
+      "sha256": "57e3dbf269e33984ebea9a924d204b0062b92f5b2107e159747e524a4494d21c",
+      "size_bytes": 2860
+    },
+    {
+      "filename": "continuous_performance_architecture_report.json",
+      "report_title": "Continuous Performance Architecture Report",
+      "sha256": "fa226e214a60afc62ac11a027b3057f70fdef9e295ca60af42d3244477af1f8c",
+      "size_bytes": 4154
+    },
+    {
+      "filename": "continuous_performance_scorecard.json",
+      "report_title": "Continuous Performance Scorecard",
+      "sha256": "d7b8e670403fce1321038b1028726c7c3b8c6259b08acd51151aa3c5e9cb8238",
+      "size_bytes": 1707
+    },
+    {
+      "filename": "dashboard_report.json",
+      "report_title": "Dashboard Report",
+      "sha256": "fb87f228c981851f690437c7b61f8225f227c6dcdfdd27ce31341e48cfcc86b4",
+      "size_bytes": 3461
+    },
+    {
+      "filename": "environment_comparison.json",
+      "report_title": "Environment Comparison",
+      "sha256": "dc9b501afd9b8bc3d3125737ac8c3b40c282b923eaf71fd446df1de8b8e2c77e",
+      "size_bytes": 2753
+    },
+    {
+      "filename": "environment_performance_comparison.json",
+      "report_title": "Environment Performance Comparison",
+      "sha256": "dc9b501afd9b8bc3d3125737ac8c3b40c282b923eaf71fd446df1de8b8e2c77e",
+      "size_bytes": 2753
+    },
+    {
+      "filename": "experiment_report.json",
+      "report_title": "Experiment Report",
+      "sha256": "948804d18c1392e9f17004d658a22c223fe29a4af57cdcb22c3c1f3a9b875b5c",
+      "size_bytes": 3600
+    },
+    {
+      "filename": "impact_analysis.json",
+      "report_title": "Impact Analysis",
+      "sha256": "7684b25286407948fb589348a67ec110d6c98abd1449b3c91593e8e0065badc4",
+      "size_bytes": 2822
+    },
+    {
+      "filename": "knowledge_repository.json",
+      "report_title": "Knowledge Repository",
+      "sha256": "b1cc350955482a9add4965767edb02ce43adb7abf7b67b3e2d70906cc7faaec2",
+      "size_bytes": 3515
+    },
+    {
+      "filename": "multi_environment_comparison_report.json",
+      "report_title": "Multi Environment Comparison Report",
+      "sha256": "dc9b501afd9b8bc3d3125737ac8c3b40c282b923eaf71fd446df1de8b8e2c77e",
+      "size_bytes": 2753
+    },
+    {
+      "filename": "performance_baseline_report.json",
+      "report_title": "Performance Baseline Report",
+      "sha256": "b92eb72b6ec8d61875ddcba63c91d31861e8b3e2798ae908aa95f9d66fc8127f",
+      "size_bytes": 2950
+    },
+    {
+      "filename": "performance_dashboard_report.json",
+      "report_title": "Performance Dashboard Report",
+      "sha256": "fb87f228c981851f690437c7b61f8225f227c6dcdfdd27ce31341e48cfcc86b4",
+      "size_bytes": 3461
+    },
+    {
+      "filename": "performance_experiment_report.json",
+      "report_title": "Performance Experiment Report",
+      "sha256": "948804d18c1392e9f17004d658a22c223fe29a4af57cdcb22c3c1f3a9b875b5c",
+      "size_bytes": 3600
+    },
+    {
+      "filename": "performance_gate_report.json",
+      "report_title": "Performance Gate Report",
+      "sha256": "761234f4ec202ae6eeb113cd85236710a58ccc7500dffc6d6d5456c3804e3256",
+      "size_bytes": 3372
+    },
+    {
+      "filename": "performance_knowledge_report.json",
+      "report_title": "Performance Knowledge Report",
+      "sha256": "b1cc350955482a9add4965767edb02ce43adb7abf7b67b3e2d70906cc7faaec2",
+      "size_bytes": 3515
+    },
+    {
+      "filename": "performance_regression_report.json",
+      "report_title": "Performance Regression Report",
+      "sha256": "f6d790ca3072c406a99bf920d0dfae5ccf2cd67563ed268498afea1d6e81b3c5",
+      "size_bytes": 3186
+    },
+    {
+      "filename": "performance_trend_report.json",
+      "report_title": "Performance Trend Report",
+      "sha256": "58fbb0c5d36ef77b6d7687113ba49ca2713b1c4f903e04b7b39f336bf3dabdf7",
+      "size_bytes": 2715
+    },
+    {
+      "filename": "quality_gate_report.json",
+      "report_title": "Quality Gate Report",
+      "sha256": "761234f4ec202ae6eeb113cd85236710a58ccc7500dffc6d6d5456c3804e3256",
+      "size_bytes": 3372
+    },
+    {
+      "filename": "regression_report.json",
+      "report_title": "Regression Report",
+      "sha256": "f6d790ca3072c406a99bf920d0dfae5ccf2cd67563ed268498afea1d6e81b3c5",
+      "size_bytes": 3186
+    },
+    {
+      "filename": "scorecard.json",
+      "report_title": "Scorecard",
+      "sha256": "d7b8e670403fce1321038b1028726c7c3b8c6259b08acd51151aa3c5e9cb8238",
+      "size_bytes": 1707
+    },
+    {
+      "filename": "trend_analysis.json",
+      "report_title": "Trend Analysis",
+      "sha256": "58fbb0c5d36ef77b6d7687113ba49ca2713b1c4f903e04b7b39f336bf3dabdf7",
+      "size_bytes": 2715
+    }
+  ]
+}

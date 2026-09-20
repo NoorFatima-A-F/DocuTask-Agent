@@ -1,0 +1,44 @@
+{
+  "report_title": "Recovery Chaos & Resilience Testing Report",
+  "total_chaos_experiments": 4,
+  "passed_experiments_count": 4,
+  "experiments": [
+    {
+      "experiment_id": "CHAOS_EXP_001",
+      "target_subsystem": "PostgreSQL_Database",
+      "fault_injection_type": "Abrupt TCP Connection Drop / Pool Reset",
+      "detection_verified": true,
+      "recovery_verified": true,
+      "degradation_contained": true,
+      "pass_status": true
+    },
+    {
+      "experiment_id": "CHAOS_EXP_002",
+      "target_subsystem": "OCR_Document_Worker",
+      "fault_injection_type": "Unannounced SIGKILL termination during PDF ingestion",
+      "detection_verified": true,
+      "recovery_verified": true,
+      "degradation_contained": true,
+      "pass_status": true
+    },
+    {
+      "experiment_id": "CHAOS_EXP_003",
+      "target_subsystem": "Redis_Task_Queue",
+      "fault_injection_type": "Injected 2000ms latency spike & socket timeout",
+      "detection_verified": true,
+      "recovery_verified": true,
+      "degradation_contained": true,
+      "pass_status": true
+    },
+    {
+      "experiment_id": "CHAOS_EXP_004",
+      "target_subsystem": "Gemini_AI_Provider",
+      "fault_injection_type": "Simulated 10-second upstream hanging timeout",
+      "detection_verified": true,
+      "recovery_verified": true,
+      "degradation_contained": true,
+      "pass_status": true
+    }
+  ],
+  "resilience_certified": true
+}

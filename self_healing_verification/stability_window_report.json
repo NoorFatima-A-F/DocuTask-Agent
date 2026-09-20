@@ -1,0 +1,11 @@
+{
+  "layer_name": "Layer 5 - Stability Window Monitoring",
+  "window_5m_stable": true,
+  "window_30m_stable": true,
+  "window_1h_stable": true,
+  "repeated_crashes_detected": 0,
+  "memory_leaks_detected": false,
+  "error_spikes_detected": false,
+  "queue_backlog_stable": true,
+  "overall_stability_passed": true
+}

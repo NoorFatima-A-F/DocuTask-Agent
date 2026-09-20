@@ -1,0 +1,62 @@
+{
+  "framework_phase": "Phase 3H.9 \u2014 Enterprise Operational Intelligence, Anomaly Analytics & Decision Support Verification",
+  "verification_id": "INTEL-VERIF-0422BEAC",
+  "timestamp": "2026-09-16T07:15:59.220974+00:00",
+  "target_tier": "Enterprise Operational Intelligence Certified",
+  "certified_tier": "Enterprise Operational Intelligence Certified",
+  "overall_intelligence_score": 100.0,
+  "status": "PASSED",
+  "total_reports_exported": 10,
+  "manifest": {
+    "telemetry_correlation_report.json": {
+      "file_path": "operational_intelligence_verification/telemetry_correlation_report.json",
+      "size_bytes": 2590,
+      "sha256_checksum": "4fccebfa32c783758ab72b498e5375f589d07021dad7188655b7ef3edf8b1525"
+    },
+    "operational_analytics_report.json": {
+      "file_path": "operational_intelligence_verification/operational_analytics_report.json",
+      "size_bytes": 1734,
+      "sha256_checksum": "6d82ba6d3a15304b65e4e45bb04fb0fe12741586ce42e67b7f5fa5f71702948e"
+    },
+    "anomaly_detection_report.json": {
+      "file_path": "operational_intelligence_verification/anomaly_detection_report.json",
+      "size_bytes": 2045,
+      "sha256_checksum": "8213c37ba91dd37fe217aba6b672d778ffdd4f1c30bee803a0930b4fbf3c0f37"
+    },
+    "trend_analysis_report.json": {
+      "file_path": "operational_intelligence_verification/trend_analysis_report.json",
+      "size_bytes": 1912,
+      "sha256_checksum": "52828e35553840fa27870712fd022df258820e0585abf4b96a7cf7334c0364b5"
+    },
+    "capacity_forecast_report.json": {
+      "file_path": "operational_intelligence_verification/capacity_forecast_report.json",
+      "size_bytes": 1946,
+      "sha256_checksum": "f5a5a119f6356b350c5ece41f6b1a55f006845c8d9985be3dbb70637e191c526"
+    },
+    "recommendation_engine_report.json": {
+      "file_path": "operational_intelligence_verification/recommendation_engine_report.json",
+      "size_bytes": 2095,
+      "sha256_checksum": "b83c0a2db60a614db8315980b219133d76cb2feccc54ec541bddd96aa4f67acb"
+    },
+    "executive_dashboard_report.json": {
+      "file_path": "operational_intelligence_verification/executive_dashboard_report.json",
+      "size_bytes": 1517,
+      "sha256_checksum": "cb748d7425069dd91d7d5ac966690b919e05cf0fab926eaf80afd9f8a7ee08d2"
+    },
+    "decision_support_report.json": {
+      "file_path": "operational_intelligence_verification/decision_support_report.json",
+      "size_bytes": 2379,
+      "sha256_checksum": "62083b1add27a70ea911df3bb1f63e10ee63f97a001c3fd46a084a7b8a4bd483"
+    },
+    "continuous_insight_report.json": {
+      "file_path": "operational_intelligence_verification/continuous_insight_report.json",
+      "size_bytes": 1242,
+      "sha256_checksum": "90cab4028d5e6d5a54b88cac59a229cc4acb08260aa6547664d3ea529806d37d"
+    },
+    "operational_intelligence_certification_report.json": {
+      "file_path": "operational_intelligence_verification/operational_intelligence_certification_report.json",
+      "size_bytes": 2305,
+      "sha256_checksum": "af618e20973db9251071eea832ab66675daea03d43771bd74db829993b1172e7"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "mttd_seconds": 3.8,
+  "mtta_seconds": 12.4,
+  "mttr_seconds": 28.6,
+  "total_recovery_attempts": 50,
+  "successful_recoveries": 50,
+  "failed_recoveries": 0,
+  "recovery_success_rate": 100.0,
+  "target_mttr_met": true
+}

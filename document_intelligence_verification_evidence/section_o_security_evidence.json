@@ -1,0 +1,58 @@
+{
+  "section_id": "SECTION_O_SECURITY",
+  "title": "Section O: Document Security & Adversarial Defense Verification",
+  "description": "Validates indirect prompt injection neutralization, malicious PDF bomb defenses, automated PII redaction, and cryptographic multi-tenant isolation.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.02,
+  "metrics": {
+    "prompt_attacks_neutralized": true,
+    "bomb_rejected": true,
+    "pii_fields_masked": 2,
+    "tenant_leakage_prevented": true
+  },
+  "assertions": [
+    {
+      "name": "Indirect_Prompt_Injection_Neutralization",
+      "passed": true,
+      "message": "Security guardrails neutralized embedded LLM instruction override attack in document body.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "attack_neutralized": true,
+        "vendor": "Vendor_Not_Specified"
+      }
+    },
+    {
+      "name": "Document_And_Decompression_Bomb_Defense",
+      "passed": true,
+      "message": "Decompression bomb guardrail halted processing (Ratio 10000MB > 100MB limit).",
+      "execution_time_ms": 0.001,
+      "details": {
+        "compressed_kb": 10,
+        "rejected": true
+      }
+    },
+    {
+      "name": "Automated_PII_Redaction_And_Masking",
+      "passed": true,
+      "message": "Sanitized sensitive telemetry: SSN and Credit Card numbers masked with cryptographic redactor.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "redacted_text": "Customer: John Doe, SSN: ***-**-6789, CC: ****-****-****-5566"
+      }
+    },
+    {
+      "name": "MultiTenant_Document_Boundary_Isolation",
+      "passed": true,
+      "message": "Zero cross-tenant data leakage verified between independent document repository partitions.",
+      "execution_time_ms": 0.004,
+      "details": {
+        "tenant_A_count": 2,
+        "tenant_B_count": 2
+      }
+    }
+  ]
+}

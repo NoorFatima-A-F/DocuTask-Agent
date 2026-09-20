@@ -1,0 +1,28 @@
+{
+  "changed_components": [
+    "Container Runtime",
+    "Dependencies & Supply Chain",
+    "FastAPI Gateway",
+    "IAM & Zero-Trust Engine",
+    "Task Queue & Worker Engine"
+  ],
+  "files_modified": [
+    "docker-compose.yml",
+    "Dockerfile",
+    "requirements.txt",
+    "app/api/v1/documents.py",
+    "app/workers/celery_app.py",
+    "app/platform_verification/enterprise_infrastructure_security/"
+  ],
+  "required_test_suites": [
+    "chaos_test",
+    "container_verification",
+    "deployment_verification",
+    "performance_test",
+    "security_scan",
+    "vulnerability_verification",
+    "worker_resilience"
+  ],
+  "trigger_reason": "Detected changes across 5 subsystem(s)",
+  "timestamp": "2026-09-19T07:04:46.286601+00:00"
+}

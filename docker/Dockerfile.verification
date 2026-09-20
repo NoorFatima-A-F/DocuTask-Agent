@@ -1,0 +1,26 @@
+# Multi-stage Dockerfile for Enterprise Verification Platform
+FROM python:3.12-slim AS builder
+
+WORKDIR /app
+COPY pyproject.toml .
+RUN pip install --no-cache-dir build
+
+FROM python:3.12-slim AS runtime
+
+WORKDIR /app
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+RUN groupadd -g 10001 verifier && \
+    useradd -u 10000 -g verifier -s /bin/sh -m verifier
+
+COPY . .
+RUN chown -R verifier:verifier /app
+
+USER verifier
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD python -c "from app.infrastructure.observability.health import HealthChecker; assert HealthChecker.is_healthy()" || exit 1
+
+CMD ["python", "-m", "app.main"]

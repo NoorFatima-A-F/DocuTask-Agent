@@ -1,0 +1,95 @@
+{
+  "api_endpoints": {
+    "POST /api/v1/documents/upload": {
+      "p50_ms": 206.69,
+      "p90_ms": 249.92,
+      "p95_ms": 254.62,
+      "p99_ms": 258.32,
+      "max_ms": 258.68,
+      "mean_ms": 207.34,
+      "std_dev_ms": 29.58,
+      "sample_count": 250,
+      "sla_target_p95_ms": 500.0,
+      "sla_met": true
+    },
+    "GET /api/v1/documents/{id}/status": {
+      "p50_ms": 48.0,
+      "p90_ms": 59.47,
+      "p95_ms": 60.7,
+      "p99_ms": 62.13,
+      "max_ms": 62.45,
+      "mean_ms": 47.82,
+      "std_dev_ms": 8.69,
+      "sample_count": 250,
+      "sla_target_p95_ms": 200.0,
+      "sla_met": true
+    },
+    "POST /api/v1/search/hybrid": {
+      "p50_ms": 391.67,
+      "p90_ms": 468.31,
+      "p95_ms": 484.2,
+      "p99_ms": 492.85,
+      "max_ms": 494.48,
+      "mean_ms": 390.53,
+      "std_dev_ms": 59.23,
+      "sample_count": 250,
+      "sla_target_p95_ms": 1000.0,
+      "sla_met": true
+    },
+    "POST /api/v1/agents/execute": {
+      "p50_ms": 3690.79,
+      "p90_ms": 4220.15,
+      "p95_ms": 4273.67,
+      "p99_ms": 4291.66,
+      "max_ms": 4294.43,
+      "mean_ms": 3727.43,
+      "std_dev_ms": 368.11,
+      "sample_count": 50,
+      "sla_target_p95_ms": 10000.0,
+      "sla_met": true
+    }
+  },
+  "pipeline_breakdown": {
+    "pipeline_name": "End-to-End Invoice Intelligence Pipeline",
+    "total_latency_ms": 4510.0,
+    "stages": [
+      {
+        "stage_name": "Multimodal OCR & Layout Parsing",
+        "latency_ms": 1450.0,
+        "percentage_of_total": 32.2,
+        "sla_target_ms": 2000.0,
+        "sla_met": true
+      },
+      {
+        "stage_name": "LLM Entity & Table Extraction",
+        "latency_ms": 1850.0,
+        "percentage_of_total": 41.0,
+        "sla_target_ms": 2500.0,
+        "sla_met": true
+      },
+      {
+        "stage_name": "Deterministic Rule & Schema Validation",
+        "latency_ms": 420.0,
+        "percentage_of_total": 9.3,
+        "sla_target_ms": 600.0,
+        "sla_met": true
+      },
+      {
+        "stage_name": "Autonomous Agent Cognitive Reasoning",
+        "latency_ms": 580.0,
+        "percentage_of_total": 12.9,
+        "sla_target_ms": 1000.0,
+        "sla_met": true
+      },
+      {
+        "stage_name": "PostgreSQL & Vector DB Persistence",
+        "latency_ms": 210.0,
+        "percentage_of_total": 4.7,
+        "sla_target_ms": 400.0,
+        "sla_met": true
+      }
+    ],
+    "sla_target_total_ms": 6000.0,
+    "sla_met": true
+  }
+}

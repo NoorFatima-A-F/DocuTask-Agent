@@ -1,0 +1,31 @@
+{
+  "incident_id": "INC-VERIFY-POSTGRES",
+  "primary_root_cause": {
+    "component": "postgresql",
+    "reason": "connection_pool_exhaustion",
+    "category": "dependency",
+    "confidence": 0.92,
+    "signal_strength": 0.95,
+    "topological_score": 0.9,
+    "historical_match_score": 0.92,
+    "temporal_precedence_score": 0.88,
+    "evidence_summary": "Database connection pool saturated at 100%, causing HTTP 500 errors on API routes.",
+    "recommended_action": "Restart PostgreSQL connection pool and increase max_connections to 200."
+  },
+  "secondary_hypotheses": [
+    {
+      "component": "api_gateway",
+      "reason": "thread_pool_contention",
+      "category": "application",
+      "confidence": 0.12,
+      "signal_strength": 0.3,
+      "topological_score": 0.1,
+      "historical_match_score": 0.05,
+      "temporal_precedence_score": 0.05,
+      "evidence_summary": "Secondary thread blockages resulting from pending DB queries.",
+      "recommended_action": "Scale API gateway workers."
+    }
+  ],
+  "confidence_tier": "high",
+  "status": "PASS"
+}
