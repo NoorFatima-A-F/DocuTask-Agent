@@ -196,9 +196,10 @@ class MissionEngine:
         """Parse raw goal string and construct structured mission."""
         title = goal[:80] + ("..." if len(goal) > 80 else "")
 
-        # Extract percentages or numerical targets
-        cost_match = re.search(r"(\d+)%\s*(?:cost|spend|expense)", goal, re.IGNORECASE)
-        acc_match = re.search(r"(\d+)%\s*accuracy", goal, re.IGNORECASE)
+        # Extract percentages or numerical targets with bounded input and safe quantifiers (ReDoS prevention)
+        bounded_goal = (goal or "")[:500]
+        cost_match = re.search(r"(\d{1,3}(?:\.\d{1,2})?)%\s*(?:cost|spend|expense)", bounded_goal, re.IGNORECASE)
+        acc_match = re.search(r"(\d{1,3}(?:\.\d{1,2})?)%\s*accuracy", bounded_goal, re.IGNORECASE)
 
         target_reduction = float(cost_match.group(1)) if cost_match else 25.0
         target_acc = float(acc_match.group(1)) if acc_match else 98.0
