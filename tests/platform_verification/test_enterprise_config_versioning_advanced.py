@@ -113,24 +113,24 @@ def test_secret_management_masking_and_rotation():
     sec = secret_manager_service.register_secret_reference(
         key_name="GEMINI_API_KEY",
         vault_path="secret/data/gemini_key",
-        initial_value="AIzaSyA_sample_fake_key_1234567890123"
+        initial_value="TEST_SECRET_VAL_ALPHA_12345"
     )
     assert sec.version == 1
 
     # Rotation
     rot = secret_manager_service.rotate_secret(
         key_name="GEMINI_API_KEY",
-        new_value="AIzaSyB_sample_new_key_9876543210987",
+        new_value="TEST_SECRET_VAL_BETA_98765",
         reason="Quarterly key rotation"
     )
     assert rot.new_version == 2
     assert sec.version == 2
 
     # Leak masking
-    dirty_log = "Error connecting with token AIzaSyA_sample_fake_key_1234567890123 to endpoint"
+    dirty_log = "Error connecting with token TEST_SECRET_VAL_ALPHA_12345 to endpoint"
     clean_log = secret_manager_service.mask_secrets(dirty_log)
     assert "[REDACTED_SECRET]" in clean_log
-    assert "AIzaSyA" not in clean_log
+    assert "TEST_SECRET_VAL_ALPHA" not in clean_log
 
 
 def test_reproducibility_engine_execution_snapshot_and_fidelity():

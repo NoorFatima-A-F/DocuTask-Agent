@@ -1,0 +1,71 @@
+name: Security & Vulnerability Gate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0' # Every Sunday at midnight UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  dependency-and-sast:
+    name: Dependency Audit & SAST
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Security Scanners
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-audit bandit safety
+
+      - name: 1. Execute pip-audit Dependency Vulnerability Scan
+        run: pip-audit --desc on -r requirements.txt
+
+      - name: 2. Execute Bandit Static Security Analysis
+        run: bandit -r app/ enterprise_audit_engine/ -ll -q
+
+      - name: 3. Verify Zero Hardcoded Secrets in Active Codebase
+        run: |
+          python -c "
+          import re, sys, os
+          from pathlib import Path
+          
+          PATTERNS = [
+              (re.compile(r'AIzaSy[A-Za-z0-9_-]{33}'), 'Google API Key'),
+              (re.compile(r'sk-ant-[A-Za-z0-9_-]{32,}'), 'Anthropic API Key'),
+              (re.compile(r'ghp_[A-Za-z0-9]{36}'), 'GitHub Token'),
+          ]
+          
+          root = Path('.')
+          violations = []
+          for ext in ['.py', '.json', '.yml', '.yaml', '.env.example']:
+              for f in root.rglob(f'*{ext}'):
+                  if '.git' in str(f) or '.venv' in str(f) or 'node_modules' in str(f):
+                      continue
+                  content = f.read_text(encoding='utf-8', errors='ignore')
+                  for p, name in PATTERNS:
+                      if p.search(content):
+                          violations.append(f'{f}: contains pattern for {name}')
+          
+          if violations:
+              print('[-] Secret Scanner failed! Violations found:')
+              for v in violations:
+                  print('    ' + v)
+              sys.exit(1)
+          else:
+              print('[+] Secret Scanner passed: 0 exposed credential patterns found.')
+          "

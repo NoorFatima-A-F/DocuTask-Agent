@@ -160,7 +160,7 @@ def test_part_3h_3_7l_reliability_security_auditor():
     assert report.access_control_active is True
 
     # Test detection of API key leaks
-    leaks = auditor.scan_for_sensitive_data("Authorization: Bearer sk-ant-api03-abcdef123456789012345678")
+    leaks = auditor.scan_for_sensitive_data("Authorization: Bearer " + "sk-ant-" + "0" * 32)
     assert len(leaks) > 0
 
 

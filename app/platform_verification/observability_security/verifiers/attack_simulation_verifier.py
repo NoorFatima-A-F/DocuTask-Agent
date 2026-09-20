@@ -13,8 +13,8 @@ class AttackSimulationVerifier(IAttackSimulationVerifier):
             SecurityAttackSimulationSpec(
                 test_id="SIM-ATTACK-01",
                 test_name="Secret & API Key Injection Attack",
-                attack_vector="Inject 'AIzaSyD-TEST-KEY-123' into document upload metadata header",
-                input_payload='{"x-api-key": "AIzaSyD-TEST-KEY-123", "doc_name": "tax_invoice.pdf"}',
+                attack_vector="Inject 'TEST_INJECTED_API_KEY_123' into document upload metadata header",
+                input_payload='{"x-api-key": "TEST_INJECTED_API_KEY_123", "doc_name": "tax_invoice.pdf"}',
                 expected_outcome="Key intercepted and replaced with '[REDACTED_API_KEY]' in all emitted logs",
                 actual_outcome="REDACTED",
                 simulation_passed=True,

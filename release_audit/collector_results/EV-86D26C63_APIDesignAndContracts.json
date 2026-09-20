@@ -1,0 +1,145 @@
+{
+  "artifact_paths": [],
+  "category": "APIDesignAndContracts",
+  "classification": "VERIFIED_BY_STATIC_ANALYSIS",
+  "collector": "APICollector",
+  "command": null,
+  "confidence": "MEDIUM",
+  "content_hash": "526e68db0485c2f18674f651254b82d1b8e1187e8d19d1cb72d7d21268078823",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-86D26C63",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "endpoints": [
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "extract_structured_data",
+        "method": "POST"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "extract_structured_data",
+        "method": "POST"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "get_latest_result",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "get_latest_result",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "get_extraction_status",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "get_extraction_status",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "get_extraction_history",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "get_extraction_history",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "delete_result",
+        "method": "DELETE"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai.py",
+        "function": "delete_result",
+        "method": "DELETE"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "get_lifecycle_overview",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "full_lifecycle_release",
+        "method": "POST"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "list_agents",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "register_agent",
+        "method": "POST"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "get_agent",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "update_agent_lifecycle_state",
+        "method": "PUT"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "list_versions",
+        "method": "GET"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "create_version",
+        "method": "POST"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "rollback_version",
+        "method": "POST"
+      },
+      {
+        "file": "app/api/v1/endpoints/ai_lifecycle.py",
+        "function": "run_agent_tests",
+        "method": "POST"
+      }
+    ],
+    "schemas_sample": [
+      "Agent",
+      "AgentIdentity",
+      "AgentProfile",
+      "AgentSkill",
+      "CapabilityProfile",
+      "CapabilityGraph",
+      "CapabilityRequirement",
+      "CapabilityMatchResult",
+      "CollaborationContext",
+      "CollaborationSession",
+      "AgentMessage",
+      "ConflictRecord",
+      "ConflictResolutionResult",
+      "ConsensusOutcome",
+      "CoordinationContext",
+      "CoordinationRequest",
+      "CoordinationResult",
+      "ConversationThread",
+      "CoordinationNode",
+      "CoordinationEdge"
+    ],
+    "total_endpoints_discovered": 1740,
+    "total_schemas_discovered": 2908
+  },
+  "source_type": "STATIC_SOURCE_CODE",
+  "summary": "Discovered 1740 FastAPI HTTP endpoints and 2908 Pydantic validation schemas across platform codebase.",
+  "timestamp": "2026-09-20T19:00:23.803932+00:00"
+}

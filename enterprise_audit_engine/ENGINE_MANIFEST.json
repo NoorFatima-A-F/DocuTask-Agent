@@ -1,0 +1,21 @@
+{
+  "attestation": {
+    "build_timestamp": "2026-09-20T19:38:46.692647+00:00",
+    "configuration_hash": "99d77dba1d60720533fc1d747ab644775df2a559c2b26ea470e9a62e75e06e9d",
+    "dependencies_hash": "f5c5f87dc3bcc3ef5efcb5168212605e831149318ac235b778a1d28bfa5b437b",
+    "engine_version": "2.1.0",
+    "git_commit": "ce9aeb1e4e388cb36af310686a767cf429dc7960",
+    "python_version": "3.14.4"
+  },
+  "capabilities": [
+    "deterministic_reproducibility",
+    "merkle_evidence_sealing",
+    "anti_hallucination_validation",
+    "collector_contract_verification",
+    "tampering_detection",
+    "release_evidence_packaging"
+  ],
+  "engine_name": "enterprise_audit_engine",
+  "manifest_hash": "d3215bdcf7e0ceb60975f41fac9d4f978b202000a1e6651f570e2e735f7da4f1",
+  "version": "2.1.0"
+}

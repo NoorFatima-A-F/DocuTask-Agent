@@ -1,0 +1,41 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "predicate": {
+    "buildType": "https://github.com/NoorFatima-A-F/DocuTask-Agent/enterprise-audit-v2.1",
+    "builder": {
+      "id": "https://github.com/NoorFatima-A-F/DocuTask-Agent/audit-engine-builder"
+    },
+    "invocation": {
+      "configSource": {
+        "digest": {
+          "sha1": "ce9aeb1e4e388cb36af310686a767cf429dc7960"
+        },
+        "entryPoint": "enterprise_audit_engine.cli.main:main",
+        "uri": "git+https://github.com/NoorFatima-A-F/DocuTask-Agent"
+      },
+      "environment": {
+        "platform": "win32",
+        "python_version": "3.14.4"
+      }
+    },
+    "metadata": {
+      "buildInvocationId": "BLD-20260920193846",
+      "buildStartedOn": "2026-09-20T19:38:46.788319+00:00",
+      "completeness": {
+        "environment": true,
+        "materials": true,
+        "parameters": true
+      },
+      "reproducible": true
+    }
+  },
+  "predicateType": "https://slsa.dev/provenance/v0.2",
+  "subject": [
+    {
+      "digest": {
+        "sha256": "bac21e349c6328ff00ed7cca6dab3b698cc07fdec6bd0fb6d8ed7bf4ce0d1bc1"
+      },
+      "name": "enterprise_audit_engine"
+    }
+  ]
+}

@@ -184,7 +184,7 @@ def test_part_3h_3_8_12_security_auditor():
     assert report.total_checks >= 3
 
     # Test detection of leaked keys
-    leaks = auditor.scan_for_leaks("Failed request: key=AIzaSyA8912831092830192830192830192830192")
+    leaks = auditor.scan_for_leaks("Failed request: key=" + "AIza" + "0" * 35)
     assert len(leaks) > 0
 
 

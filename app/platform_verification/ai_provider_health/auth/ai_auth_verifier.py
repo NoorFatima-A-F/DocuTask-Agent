@@ -41,19 +41,19 @@ class AIAuthVerifier(IAIAuthVerifier):
         auth_entries = mock_auth_data or [
             {
                 "provider": "gemini",
-                "key_token": "AIzaSyDummyProductionValidTokenKey99182",
+                "key_token": "TEST_MOCK_GEMINI_KEY_TOKEN_99182",
                 "permissions_sufficient": True,
                 "expiration_detected": False,
             },
             {
                 "provider": "claude_fallback",
-                "key_token": "sk-ant-api03-validTokenForProductionFallback9918",
+                "key_token": "TEST_MOCK_CLAUDE_FALLBACK_TOKEN_9918",
                 "permissions_sufficient": True,
                 "expiration_detected": False,
             },
             {
                 "provider": "local_vllm",
-                "key_token": "internal-vllm-bearer-auth-token-prod-8812",
+                "key_token": "TEST_MOCK_VLLM_BEARER_TOKEN_8812",
                 "permissions_sufficient": True,
                 "expiration_detected": False,
             },

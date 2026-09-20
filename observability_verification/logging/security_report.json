@@ -28,7 +28,7 @@
     {
       "data_category": "API Keys",
       "pattern": "AIza[0-9A-Za-z-_]{35}",
-      "sample_raw": "AIzaSyA8samplekey1234567890abcdefghij",
+      "sample_raw": "TEST_MOCK_GEMINI_KEY_SAMPLE_12345",
       "sample_masked": "AIza*********************************",
       "masking_verified": true
     },

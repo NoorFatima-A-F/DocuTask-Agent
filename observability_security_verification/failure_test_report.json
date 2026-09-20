@@ -2,7 +2,7 @@
   {
     "test_name": "Secret Key Injection in Log Message",
     "injection_type": "API_KEY_LEAKAGE_ATTEMPT",
-    "payload_injected": "log.info('Initializing Gemini client with key AIzaSyD94Ksl92810kjsd81920jsd43892019')",
+    "payload_injected": "log.info('Initializing Gemini client with key TEST_MOCK_GEMINI_KEY_PAYLOAD_94819')",
     "defense_mechanism": "Sanitization Middleware Regex Masker",
     "blocked_or_redacted": true,
     "result_status": "BLOCKED_AND_REDACTED"

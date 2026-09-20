@@ -1,19 +1,16 @@
-# 96. Cryptographic Artifact Signing & Verification Policy
-
-Date: 2026-09-20
+# ADR-096: Cryptographic Artifact Signing with Sigstore, Cosign & Rekor
 
 ## Status
 Accepted
 
 ## Context
-Deploying unauthenticated binaries risks supply chain compromise. Signing must support keyless OIDC identities, KMS-backed keys, and private keys.
+Long-lived private signing keys are susceptible to compromise and management overhead.
 
 ## Decision
-We implement `SigstoreCosignAdapter` and `SupplyChainPolicyEnforcer`.
-Production policy mandates:
-`Artifact Digest Valid AND Signature Valid AND Signer Trusted AND SBOM Present AND Provenance Present AND Security Scan Passed`.
-Any missing requirement triggers `DEPLOYMENT DENIED`.
+We adopt the Sigstore / Cosign ecosystem (`SigstoreCosignAdapter`):
+1. Keyless signing using OpenID Connect (OIDC) identities.
+2. Signatures and certificate bundles are logged to the public Rekor transparency log.
+3. Verification is integrated into the pre-deployment admission controller.
 
 ## Consequences
-- Keyless signing enables short-lived, verifiable developer and CI identities.
-- Cryptographic verification happens at control plane admission time prior to cluster rollout.
+- Eliminates key management friction while providing tamper-evident public audit logs.

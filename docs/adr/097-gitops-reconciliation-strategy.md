@@ -1,16 +1,15 @@
-# 97. GitOps Reconciliation & Drift Detection Strategy
-
-Date: 2026-09-20
+# ADR-097: GitOps Reconciliation Engine & Automated Drift Remediation
 
 ## Status
 Accepted
 
 ## Context
-Declarative infrastructure as code ensures that production state matches version-controlled Git repositories while automatically detecting and resolving unauthorized drift.
+Manual cluster mutations and ad-hoc infrastructure changes lead to configuration drift and reproducibility failures.
 
 ## Decision
-We implement `GitOpsController` with pluggable `GitOpsProvider` adapters (Argo CD, Flux, Generic Git Reconciler). The controller tracks desired vs observed version states and classifies drift into `EXPECTED_DRIFT`, `UNAUTHORIZED_DRIFT`, `EMERGENCY_CHANGE`, or `UNKNOWN_DRIFT`.
+1. Declarative manifests in Git serve as the single source of truth (`GitOpsController`).
+2. Support pluggable providers: `ArgoCDProvider` and `FluxProvider`.
+3. `DriftDetector` classifies drift into `EXPECTED_DRIFT`, `UNAUTHORIZED_DRIFT`, and `EMERGENCY_CHANGE`, automatically executing reconciliation loops when drift is detected.
 
 ## Consequences
-- Automatic reconciliation restores desired states upon unauthorized manual cluster modifications.
-- Decouples platform delivery logic from specific vendor implementations (e.g. Argo CD vs Flux).
+- Zero configuration divergence between Git source and running Kubernetes clusters.

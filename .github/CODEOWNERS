@@ -1,22 +1,7 @@
-# Enterprise Repository CODEOWNERS
-* @docutask/platform-leads @docutask/architecture-board
-/app/shared_kernel/ @docutask/shared-kernel-stewards @docutask/architecture-board
-/app/contexts/verification/ @docutask/verification-squad
-/app/contexts/execution/ @docutask/execution-squad
-/app/contexts/datasets/ @docutask/data-engineering-squad
-/app/contexts/environments/ @docutask/platform-infra-squad
-/app/contexts/configuration/ @docutask/platform-infra-squad
-/app/contexts/evidence/ @docutask/storage-squad
-/app/contexts/metrics/ @docutask/ai-evaluation-squad
-/app/contexts/statistics/ @docutask/data-science-squad
-/app/contexts/quality/ @docutask/qa-governance-squad
-/app/contexts/certification/ @docutask/compliance-security-squad
-/app/contexts/audit/ @docutask/compliance-security-squad
-/app/contexts/plugins/ @docutask/extensibility-squad
-/app/infrastructure/ @docutask/platform-infra-squad
-/app/infrastructure/acl/ @docutask/ai-engineers @docutask/platform-infra-squad
-/tooling/ @docutask/developer-productivity @docutask/architecture-board
-/docs/ @docutask/architecture-board @docutask/tech-writers
-/.github/ @docutask/devops-squad @docutask/security-squad
-/docker/ @docutask/devops-squad
-/k8s/ @docutask/devops-squad
+# Default owners for all files in the repository
+* @NoorFatima-A-F
+
+# Security and supply chain policies
+/.github/workflows/ @NoorFatima-A-F
+/SECURITY.md @NoorFatima-A-F
+/LICENSE @NoorFatima-A-F

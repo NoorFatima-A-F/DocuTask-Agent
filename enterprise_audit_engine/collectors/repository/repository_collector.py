@@ -32,20 +32,29 @@ class RepositoryCollector(BaseCollector):
         extension_counts: Dict[str, int] = {}
         root_items: List[str] = []
 
+        ignored_dirs = {
+            ".git", ".venv", "venv", "__pycache__", ".pytest_cache",
+            ".mypy_cache", "node_modules", "audit_output", "release_audit",
+            "runs", ".tmp", "dist", "build", ".idea", ".vscode"
+        }
+
         # Inspect root directory items
         try:
-            root_items = [p.name for p in self.repo_root.iterdir()]
+            root_items = [
+                p.name for p in self.repo_root.iterdir()
+                if p.name not in ignored_dirs and not p.name.startswith(".")
+            ]
         except Exception:
             root_items = []
 
-        # Traverse repository tree ignoring typical caches
-        ignored_dirs = {".git", ".venv", "venv", "__pycache__", ".pytest_cache", ".mypy_cache", "node_modules"}
-
+        # Traverse repository tree ignoring typical caches and output directories
         for root, dirs, files in os.walk(self.repo_root):
-            dirs[:] = [d for d in dirs if d not in ignored_dirs]
+            dirs[:] = [d for d in dirs if d not in ignored_dirs and not d.startswith(".")]
             total_dirs += len(dirs)
 
             for f in files:
+                if f.startswith("."):
+                    continue
                 ext = Path(f).suffix.lower() or "no_ext"
                 extension_counts[ext] = extension_counts.get(ext, 0) + 1
                 total_files += 1

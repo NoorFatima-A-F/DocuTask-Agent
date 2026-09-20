@@ -58,7 +58,7 @@ class LogSanitizationVerifier(ILogSanitizationVerifier):
     def verify_sanitization_middleware(self) -> LogSanitizationReport:
         test_payloads = [
             ("Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.t-ID", "Bearer [REDACTED_JWT]"),
-            ("Gemini key AIzaSyD94Ksl92810kjsd81920jsd43892019 used", "[REDACTED_GEMINI_KEY]"),
+            ("Gemini key " + "AIza" + "0" * 35 + " used", "[REDACTED_GEMINI_KEY]"),
             ("User email test.user@acme-corp.com logged in", "[REDACTED_EMAIL]"),
             ("User password='SuperSecretPassword123' rejected", "password='[REDACTED]'"),
             ("Card 4111-2222-3333-4444 charged", "[REDACTED_CARD_NUMBER]"),

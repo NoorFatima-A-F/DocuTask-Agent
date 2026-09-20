@@ -1,16 +1,15 @@
-# 98. Progressive Delivery & Telemetry-Driven Automated Rollback
-
-Date: 2026-09-20
+# ADR-098: Metric-Driven Progressive Delivery (Canary, Blue-Green, Shadow)
 
 ## Status
 Accepted
 
 ## Context
-Deployments must minimize user impact and prevent latent regressions from propagating across all cluster nodes.
+Deploying direct all-at-once releases risks widespread customer impact if subtle bugs or performance degradations occur.
 
 ## Decision
-We implement four progressive delivery strategies (Rolling, Blue-Green, Canary, Shadow) governed by `CanaryAnalysisEngine` and `ProgressiveDeliveryController`. Stepwise Canary transitions (1% -> 5% -> 10% -> 25% -> 50% -> 100%) continuously inspect error rate, p95 latency, workflow success, and safety violations. Breaching quality gates triggers an immediate automated abort and rollback via `RollbackController`.
+1. Implement 4 progressive strategies: `RollingStrategy`, `BlueGreenStrategy`, `CanaryStrategy`, and `ShadowStrategy`.
+2. `CanaryAnalysisEngine` evaluates real-time telemetry (error rates, P99 latency, CPU) against `QualityGatePolicy`.
+3. Breaches trigger automated aborts and instant rollback execution via `RollbackController`.
 
 ## Consequences
-- Reduces Mean Time to Recovery (MTTR) to seconds.
-- Every rollback generates a machine-readable forensic incident report.
+- Reduces blast radius of defects to single-digit percentages with sub-minute automated recovery.

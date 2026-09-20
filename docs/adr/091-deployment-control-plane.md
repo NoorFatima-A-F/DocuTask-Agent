@@ -1,17 +1,17 @@
-# 91. Enterprise Deployment Control Plane Architecture
-
-Date: 2026-09-20
+# ADR-091: Deployment Control Plane State Machine & CQRS Architecture
 
 ## Status
 Accepted
 
 ## Context
-As DocuTask Agent scales across multi-region Kubernetes clusters, hybrid cloud, and air-gapped environments, production deployments must not rely on fragmented CI scripts or raw `kubectl apply`. A centralized, authoritative control plane is required to govern the full delivery lifecycle.
+Enterprise release delivery requires deterministic progression across multiple validation, approval, canary, and rollback phases. Traditional script-based CI/CD pipelines lack transactional state tracking, historical event logs, and programmatic rollback triggers.
 
 ## Decision
-We implement `DeploymentControlPlane` backed by an explicit, deterministic state machine (`REQUESTED` -> `VALIDATING` -> `AWAITING_APPROVAL` -> `APPROVED` -> `PREPARING` -> `DEPLOYING` -> `VERIFYING` -> `CANARY` -> `PROMOTING` -> `ACTIVE` + failure states). All production deployments must originate and be reconciled through this control plane.
+We implement a formal `DeploymentStateMachine` and CQRS-based `DeploymentControlPlane`:
+1. All deployment requests are initiated as immutable `RequestDeploymentCommand` structures with mandatory `Idempotency-Key` headers.
+2. The state machine enforces legal lifecycle transitions (`REQUESTED` -> `VALIDATING` -> `AWAITING_APPROVAL` -> `APPROVED` -> `PREPARING` -> `DEPLOYING` -> `VERIFYING` -> `CANARY` -> `PROMOTING` -> `ACTIVE`).
+3. Every state transition is appended to an immutable `TransitionLog` recording the timestamp, actor, and rationale.
 
 ## Consequences
-- Every state transition is recorded in an immutable audit log.
-- Unauthorized transitions fail deterministically before touching infrastructure.
-- Complete CQRS separation between command ingestion and status queries.
+- **Positive**: Complete auditability, deterministic transition rules, elimination of illegal state jumps, and seamless automated recovery.
+- **Negative**: Requires strict state tracking in distributed storage.

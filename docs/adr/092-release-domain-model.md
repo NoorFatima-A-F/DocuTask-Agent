@@ -1,16 +1,15 @@
-# 92. Immutable Release Domain Model & Lifecycle
-
-Date: 2026-09-20
+# ADR-092: Immutable Release Domain Model & SemVer Compatibility Matrix
 
 ## Status
 Accepted
 
 ## Context
-Rebuilding artifacts for each environment creates supply chain vulnerabilities and non-deterministic behavior. Releases must be immutable, versioned, and directly mapped to exact source commits.
+Deploying multi-component architectures (API gateways, worker pools, database schemas, and developer SDKs) often causes silent runtime failures due to mismatched major/minor API versions.
 
 ## Decision
-We define an immutable `Release` entity that binds source commit, build parameters, content-addressed artifact digests, SBOMs, SLSA provenance, and cryptographic signatures. Once published (`RELEASED`), a release version cannot be mutated.
+1. All releases are modeled as immutable `Release` entities identified by a unique ID and canonical version.
+2. Once registered, release manifests cannot be modified.
+3. A centralized `ReleaseCompatibilityMatrix` evaluates semantic version constraints across API, SDK, worker nodes, and database schema revisions prior to authorizing deployment.
 
 ## Consequences
-- The exact same verified artifact is promoted across development, staging, and production tiers.
-- Prevents drift caused by environment-specific rebuilds.
+- Prevents cross-component version drift and invalid rollouts before any infrastructure resources are provisioned.

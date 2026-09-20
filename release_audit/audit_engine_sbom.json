@@ -1,0 +1,196 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "ecosystem": "PyPI",
+      "hash": "03b1833bf36d4031b8b708a98e7220645ea296a5419dc96e7f3e2ce9fd8592cc",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "fastapi>=0.115.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "9c41b11cf200e12205250764c8776c1c28b77a276dd272f621bdcec7296a2ca7",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "uvicorn[standard]>=0.32.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "13164406c2372065d70cd28331b29bdea0e1d05b4c39feef4a681af788da3b76",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "pydantic>=2.9.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "29facc268adea6553dd702a9b55bc44abc0e33e780e0d89358108796efb2782a",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "pydantic-settings>=2.5.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "826fd50db448a5c78380b65ccde092877093a21c978207c33c1744f6f77db7b2",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "email-validator>=2.2.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "9187a8ec95a36f1cb37bb86896e63b33757bd8532010e0ecb2de6e6b00bff7f5",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "sqlalchemy[asyncio]>=2.0.35",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "4244c8a20818449779e1e772a0505c627931cf006eb8aa013f87414779ab38af",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "asyncpg>=0.29.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "254dfd61db9a27286b4cab7f8a8bbc71fcd378e9e6ef02e832203a5c520809b6",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "aiosqlite>=0.20.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "86e1476ecab39013cffa2ed6183318f797fb10703decb6019a3312b1c5ef5592",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "alembic>=1.13.3",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "2465c77e1417c89b1f50347f91bbccac730261e00a83b83a5f86bdde01a1dcb1",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "passlib[bcrypt]>=1.7.4",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "dfe15babadf084f20881ecd364c3e8c814ce404fb650e29a3ae007bfd951bfe8",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "bcrypt>=4.2.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "840f6a70549d813175a893655d7955c14a2f9fc610dec29221a7b3cf6b5a41de",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "cryptography>=43.0.3",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "4190f27998d2c6cf640aede506b92edac23f585e5f1c010140df9303229c3231",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "python-jose[cryptography]>=3.3.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "c08df66f4cc5e40193da3273ea08ca02cc90fc90f9d395bf23c30f08a39f5b51",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "python-multipart>=0.0.20",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "9645d8ff8132c5a017e63f89c7381e5d5f8f6f0256e6966e0e8dc52e7c4aae5e",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "httpx>=0.27.2",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "b03bf1ffbb1b802404b37c101cc62461181a0a4a12b0dbd7b61f2f51c877d3c3",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "google-genai>=0.1.1",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "4b3dbe8fc5920832f185c8333caeb26a2085328328a6e631def508314b1442cb",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "pdfplumber>=0.11.4",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "6c068958705d5ea38eb1faff877941ef053633c411b720ca66020028d557d987",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "pillow>=11.0.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "0f18eef9181677ff887b9014428ad7f4e7888a80b9f1187614a7f18843e40eaf",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "pytesseract>=0.3.13",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "c5b283ad6bfa5f2afbe4b86b8a4c82f5920c9b92dc9b8cc5ef786bafd5db52d9",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "pytest>=8.3.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "bea9d5a4f6b0afcd4e732609cd798080767d6a5dcb9067dc21f143c8a3a9ddb7",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "pytest-asyncio>=0.24.0",
+      "type": "library",
+      "version": "latest"
+    },
+    {
+      "ecosystem": "PyPI",
+      "hash": "272ff1aa12a36913f7865c6f1ab6288ec1ed08bf2c6558d51cfe59249f5dd49b",
+      "license": "Apache-2.0 / BSD / MIT",
+      "name": "pytest-cov>=5.0.0",
+      "type": "library",
+      "version": "latest"
+    }
+  ],
+  "metadata": {
+    "authors": [
+      {
+        "name": "Enterprise Software Audit Board"
+      }
+    ],
+    "component": {
+      "name": "enterprise_audit_engine",
+      "type": "application",
+      "version": "2.1.0"
+    },
+    "timestamp": "2026-09-20T19:38:46.729178+00:00"
+  },
+  "specVersion": "1.5",
+  "version": 1
+}

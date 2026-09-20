@@ -1,90 +1,84 @@
-"""
-Centralized Configuration Settings Module.
-Uses Pydantic v2 BaseSettings to load environment variables safely.
+"""Centralized Application Configuration.
+
+Loads settings from environment variables and optional .env file with strong
+typing, validation, and secure defaults via Pydantic Settings.
 """
 
-from typing import List, Union
-from pydantic import Field, field_validator
-try:
-    from pydantic_settings import BaseSettings, SettingsConfigDict
-except ImportError:
-    from pydantic import BaseModel as BaseSettings
-    def SettingsConfigDict(**kwargs):
-        return kwargs
-
+import os
+from typing import List, Optional
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """Application Settings managed through environment variables."""
-    
+    """Core application settings with environment variable fallbacks."""
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        case_sensitive=True,
-        extra="ignore"
+        extra="ignore",
+        case_sensitive=False,
     )
 
-    # Core Project Settings
-    PROJECT_NAME: str = "AI Document Processing Platform"
-    ENVIRONMENT: str = "development"
-    DEBUG: bool = True
-    API_V1_STR: str = "/api/v1"
+    # Application Info
+    APP_NAME: str = "DocuTask Agent"
+    APP_VERSION: str = "1.0.0"
+    ENVIRONMENT: str = Field(default="development", description="Environment: development, staging, production")
+    DEBUG: bool = Field(default=False, description="Debug mode flag")
+    LOG_LEVEL: str = Field(default="INFO", description="Logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL")
+
+    # API & Server Configuration
+    API_V1_PREFIX: str = "/api/v1"
+    HOST: str = "0.0.0.0"
+    PORT: int = 8000
+    CORS_ORIGINS: List[str] = Field(
+        default_factory=lambda: ["http://localhost:3000", "http://localhost:8000"],
+        description="Allowed CORS origins",
+    )
+
+    # Authentication & Security
+    JWT_SECRET: str = Field(
+        default="replace-with-a-secure-random-secret-in-production-use-openssl-rand-hex-32",
+        description="Secret key used for signing JWT tokens",
+    )
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
 
     # Database Configuration
-    DATABASE_URL: str = "sqlite+aiosqlite:///./ai_doc_platform.db"
+    DATABASE_URL: str = Field(
+        default="sqlite+aiosqlite:///./docutask.db",
+        description="Database connection URL (PostgreSQL asyncpg or SQLite aiosqlite)",
+    )
+    DB_POOL_SIZE: int = 10
+    DB_MAX_OVERFLOW: int = 20
+    DB_ECHO: bool = False
 
-    # Security & JWT Configuration
-    JWT_SECRET: str = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
-    JWT_ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
+    # AI & LLM Provider API Keys (Read exclusively from environment)
+    GOOGLE_API_KEY: Optional[str] = Field(
+        default=None,
+        description="Google Gemini API Key for document extraction and multimodal processing",
+    )
+    ANTHROPIC_API_KEY: Optional[str] = Field(
+        default=None,
+        description="Anthropic Claude API Key for secondary fallback extraction",
+    )
+    OPENAI_API_KEY: Optional[str] = Field(
+        default=None,
+        description="OpenAI API Key for comparative extraction workflows",
+    )
 
-    # Password Policy
-    MIN_PASSWORD_LENGTH: int = 8
-    REQUIRE_PASSWORD_SPECIAL_CHAR: bool = True
+    # Storage & Cache Configuration
+    STORAGE_LOCAL_PATH: str = "./uploads"
+    MAX_UPLOAD_SIZE_MB: int = 50
+    REDIS_URL: Optional[str] = Field(
+        default=None,
+        description="Redis connection URL for background task queues and rate limiting",
+    )
 
-    # Storage & Upload Settings
-    STORAGE_LOCAL_DIR: str = "./storage"
-    UPLOAD_DIRECTORY: str = "./storage/uploads"
-    MAX_UPLOAD_SIZE_MB: int = 25
-    MAX_FILENAME_LENGTH: int = 255
-    ALLOWED_EXTENSIONS: List[str] = [
-        ".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".docx", ".txt"
-    ]
-    ALLOWED_MIME_TYPES: List[str] = [
-        "application/pdf",
-        "image/png",
-        "image/jpeg",
-        "image/tiff",
-        "image/bmp",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "text/plain"
-    ]
-
-    # AI Provider - Gemini Settings
-    GEMINI_API_KEY: str = "dev_placeholder_key"
-    GEMINI_MODEL: str = "gemini-1.5-pro"
-
-    # CORS Settings
-    BACKEND_CORS_ORIGINS: List[str] = ["*"]
-
-    @field_validator("ALLOWED_EXTENSIONS", "ALLOWED_MIME_TYPES", mode="before")
-    @classmethod
-    def assemble_list_settings(cls, v: Union[str, List[str]]) -> List[str]:
-        if isinstance(v, str) and not v.startswith("["):
-            return [i.strip() for i in v.split(",")]
-        elif isinstance(v, list):
-            return v
-        return []
-
-    @field_validator("BACKEND_CORS_ORIGINS", mode="before")
-    @classmethod
-    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
-        if isinstance(v, str) and not v.startswith("["):
-            return [i.strip() for i in v.split(",")]
-        elif isinstance(v, list):
-            return v
-        return ["*"]
+    # Rate Limiting & Gating
+    RATE_LIMIT_PER_MINUTE: int = 60
+    CONFIDENCE_THRESHOLD_HITL: float = 0.85
 
 
+# Global Singleton Instance
 settings = Settings()

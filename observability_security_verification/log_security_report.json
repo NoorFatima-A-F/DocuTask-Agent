@@ -23,7 +23,7 @@
       "rule_id": "SEC-LOG-002",
       "category": "credentials",
       "pattern_matched": "(?i)(api[_-]?key|token)\\s*[:=]\\s*['\\\"]?([a-zA-Z0-9_\\-\\.]{20,})['\\\"]?",
-      "sample_raw": "api_key='AIzaSyD94Ksl92810kjsd81920jsd'",
+      "sample_raw": "api_key='TEST_MOCK_API_KEY_94KSL92810'",
       "redacted_sample": "api_key='[REDACTED_API_KEY]'",
       "is_safe_after_sanitization": true
     },

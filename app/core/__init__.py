@@ -1,3 +1,5 @@
-"""
-Core package containing configuration, security, exceptions, and logging.
-"""
+"""Core application package."""
+
+from .config import settings, Settings
+
+__all__ = ["settings", "Settings"]

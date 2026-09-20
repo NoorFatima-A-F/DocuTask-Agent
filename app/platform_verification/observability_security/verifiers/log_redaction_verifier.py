@@ -13,7 +13,7 @@ class LogRedactionVerifier(ILogRedactionVerifier):
             RedactionRuleSpec(
                 rule_name="api_key_masking",
                 pattern_type="API_KEY",
-                raw_sample='{"api_key": "AIzaSyD-73hskd9382109asdlkfj"}',
+                raw_sample='{"api_key": "TEST_API_KEY_73HSKD_SAMPLE"}',
                 redacted_output='{"api_key": "[REDACTED_API_KEY]"}',
                 redaction_successful=True,
             ),

@@ -1,0 +1,11 @@
+{
+  "1.0.0": {
+    "certificate_id": "CERT-20260920194026",
+    "eqi_score": 99.38,
+    "expiry_timestamp": "2027-03-19T19:40:26.059776+00:00",
+    "issued_timestamp": "2026-09-20T19:40:26.059776+00:00",
+    "merkle_root": "7d0cfac2ddd6a08cd3af75c74a288e7b18328fa27c43c35843b9b9fa5a35cb33",
+    "policy": "enterprise_grade",
+    "status": "VALID"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "artifact_paths": [],
+  "category": "DatabaseArchitectureAndSafety",
+  "classification": "PARTIALLY_VERIFIED",
+  "collector": "DatabaseCollector",
+  "command": null,
+  "confidence": "MEDIUM",
+  "content_hash": "4a731f8e9a4201d06b2d100e7445821d3900cf2d8c64856e6edefd28d44d4a5a",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-3D2A906E",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "has_expand_contract_module": true,
+    "has_safety_linter_module": false
+  },
+  "source_type": "STATIC_SOURCE_CODE",
+  "summary": "Database migration safety verified: expand-contract module (True), safety linter (False).",
+  "timestamp": "2026-09-20T19:00:23.808526+00:00"
+}

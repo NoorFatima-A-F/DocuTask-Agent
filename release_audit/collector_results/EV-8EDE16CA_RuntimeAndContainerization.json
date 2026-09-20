@@ -1,0 +1,24 @@
+{
+  "artifact_paths": [],
+  "category": "RuntimeAndContainerization",
+  "classification": "VERIFIED_BY_CONFIGURATION",
+  "collector": "RuntimeCollector",
+  "command": null,
+  "confidence": "LOW",
+  "content_hash": "68fcb12e17bcccf361f3d336c80e070820c72f03a9a4640fefd8f4a989167a6b",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-8EDE16CA",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "dockerfile_exists": true,
+    "has_docker_compose": true,
+    "has_dockerfile_healthcheck": false,
+    "has_multi_stage_build": true,
+    "has_non_root_user": true
+  },
+  "source_type": "CONFIGURATION_FILE",
+  "summary": "Container configuration verified: multi-stage (True), non-root user (True), healthcheck (False), compose orchestration (True).",
+  "timestamp": "2026-09-20T19:03:20.713605+00:00"
+}

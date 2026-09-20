@@ -1,16 +1,14 @@
-# 93. OCI Artifact Strategy & Referrers Model
-
-Date: 2026-09-20
+# ADR-093: OCI 1.1 Artifact Referrers & Content-Addressed Storage
 
 ## Status
 Accepted
 
 ## Context
-Standardizing artifact distribution around OCI v1.1 image and distribution specifications enables vendor-neutral multi-cloud distribution across GHCR, Google Artifact Registry, Amazon ECR, Azure Container Registry, and Harbor.
+Artifact integrity across container images, Helm charts, and configuration bundles requires strict cryptographic content addressing and standardized metadata association (SBOMs, signatures, attestations).
 
 ## Decision
-We implement `OCIRegistryAdapter` supporting OCI v1.1 referrers. Artifacts, SBOMs, signatures, and provenance attestations are distributed as OCI artifacts linked by content-addressed digests (`sha256:...`).
+1. All artifacts are stored content-addressed by SHA-256 / SHA-512 cryptographic digests.
+2. We adopt the OCI 1.1 Referrers Specification (`OCIReferrerDescriptor`, `OCIManifest`) to link auxiliary artifacts (CycloneDX SBOMs, SLSA provenance statements, Cosign signature bundles) directly to target base image digests in the registry.
 
 ## Consequences
-- Single unified registry protocol for container images, Helm packages, workflow packages, agent packages, and prompt bundles.
-- Eliminates reliance on proprietary packaging formats.
+- Enables decentralized verification of supply-chain attestations without modifying base container layers.
