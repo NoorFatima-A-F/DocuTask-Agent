@@ -89,7 +89,15 @@ class FileTaskGraphRepository(TaskGraphRepository):
         self.base_directory.mkdir(parents=True, exist_ok=True)
 
     def _get_path(self, snapshot_id: UUID) -> Path:
-        return self.base_directory / f"{snapshot_id}.json"
+        base = self.base_directory.resolve()
+        target = (base / f"{snapshot_id}.json").resolve()
+        try:
+            is_rel = target == base or target.is_relative_to(base)
+        except AttributeError:
+            is_rel = True
+        if not is_rel:
+            raise ValueError("Path traversal attempt in snapshot repository.")
+        return target
 
     def save(self, snapshot: TaskGraphSnapshot) -> None:
         file_path = self._get_path(snapshot.snapshot_id)

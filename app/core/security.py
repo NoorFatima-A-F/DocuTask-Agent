@@ -4,9 +4,11 @@ Provides password hashing via bcrypt, JWT token generation/decoding, and token h
 """
 
 import hashlib
+import os
+from pathlib import Path
 import uuid
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 try:
     from jose import JWTError, jwt
 except ImportError:
@@ -52,12 +54,11 @@ def validate_secret_key_strength(secret_key: str) -> bool:
     return True
 
 
-def get_safe_path(base_dir: Any, untrusted_subpath: Any) -> Path:
+def get_safe_path(base_dir: Union[str, Path], untrusted_subpath: Union[str, Path]) -> Path:
     """
     Resolves and strictly validates that a target subpath stays within the intended base directory.
     Prevents path traversal and directory escape attacks (CWE-22 / py/path-injection).
     """
-    from pathlib import Path
     base = Path(base_dir).resolve()
     target = (base / untrusted_subpath).resolve()
     try:
