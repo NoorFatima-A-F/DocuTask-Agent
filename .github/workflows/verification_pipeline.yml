@@ -6,7 +6,11 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
+
   static-governance:
     runs-on: ubuntu-latest
     steps:

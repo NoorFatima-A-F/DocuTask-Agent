@@ -1,5 +1,1 @@
-"""CLI module exports."""
-
-from .main import main
-
-__all__ = ["main"]
+"""CLI package for Enterprise Audit Engine."""

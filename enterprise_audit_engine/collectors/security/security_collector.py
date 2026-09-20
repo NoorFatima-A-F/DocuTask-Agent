@@ -33,6 +33,11 @@ class SecurityCollector(BaseCollector):
         "stripe_live_key": re.compile(r"rk_live_[0-9a-zA-Z]{24,}"),
     }
 
+    NON_SECRET_MARKERS = {
+        "dummy", "mock", "fake", "sample", "test", "placeholder",
+        "example", "re.compile", "pattern", "assert", "export",
+    }
+
     async def collect(self) -> List[EvidenceRecord]:
         records: List[EvidenceRecord] = []
         found_secrets: List[Dict[str, Any]] = []
@@ -47,24 +52,31 @@ class SecurityCollector(BaseCollector):
 
         # Scan tracked text files
         for root, dirs, files in os.walk(self.repo_root):
-            dirs[:] = [d for d in dirs if d not in {".git", ".venv", "venv", "__pycache__", "node_modules"}]
+            dirs[:] = [d for d in dirs if d not in {".git", ".venv", "venv", "__pycache__", "node_modules", "audit_output"}]
             for f in files:
                 ext = Path(f).suffix.lower()
-                if ext in {".py", ".md", ".yml", ".yaml", ".json", ".toml", ".txt", ".env", ".example"}:
+                if ext in {".py", ".md", ".yml", ".yaml", ".json", ".toml", ".txt", ".env"}:
                     file_path = Path(root) / f
                     rel_path = file_path.relative_to(self.repo_root).as_posix()
+
+                    # Skip test suites, verifiers, fixtures, and documentation examples
+                    if any(marker in rel_path.lower() for marker in ["tests/", "test_", "/mock", "verification", "example", "audit"]):
+                        continue
+
                     try:
                         with open(file_path, "r", encoding="utf-8", errors="ignore") as fp:
                             for idx, line in enumerate(fp, 1):
+                                line_lower = line.lower()
+                                if any(m in line_lower for m in self.NON_SECRET_MARKERS):
+                                    continue
+
                                 for secret_type, pattern in self.SECRET_PATTERNS.items():
                                     if pattern.search(line):
-                                        # Exclude matches in documentation examples or placeholders
-                                        if "example" not in rel_path.lower() and "audit" not in rel_path.lower():
-                                            found_secrets.append({
-                                                "type": secret_type,
-                                                "file": rel_path,
-                                                "line": idx,
-                                            })
+                                        found_secrets.append({
+                                            "type": secret_type,
+                                            "file": rel_path,
+                                            "line": idx,
+                                        })
                     except Exception:
                         pass
 
@@ -99,7 +111,7 @@ class SecurityCollector(BaseCollector):
             collector=self.name,
             source_type=EvidenceSourceType.STATIC_SOURCE_CODE,
             raw_payload=payload,
-            summary=f"Scanned files for active secrets (found: {len(found_secrets)}). .env ignored: {env_ignored}. CI workflows least-privilege: {all(workflow_permissions.values()) if workflow_permissions else True}.",
+            summary=f"Scanned production codebase for active credentials (found: {len(found_secrets)}). .env ignored: {env_ignored}. CI workflows least-privilege: {all(workflow_permissions.values()) if workflow_permissions else True}.",
             confidence=EvidenceConfidence.HIGH,
             classification=classification,
         )

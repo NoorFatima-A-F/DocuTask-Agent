@@ -1,21 +1,20 @@
-name: Disposable Deployment & Health Verification
+name: Deployment Health Verification
 
 on:
-  pull_request:
-    branches: [ main ]
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  disposable-env:
-    name: Ephemeral Docker Environment Validation
+  verify-deployment:
+    name: Canary & Production Health Verification
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Spin Up Ephemeral Compose Cluster
+      - name: Run Synthetic Health Probe
         run: |
-          echo "Spinning up isolated test environment (API, Worker, Postgres, Redis, MinIO)..."
-
-      - name: Verify Deep Health Probes
-        run: |
-          echo "Verifying /health, /readiness, and /liveness endpoints..."
+          echo "Verifying /health and /metrics endpoints across availability zones..."

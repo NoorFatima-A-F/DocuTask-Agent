@@ -5,6 +5,9 @@ on:
     - cron: '0 2 * * *'  # Nightly automated resilience run
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   chaos-pipeline:
     name: Automated Chaos Experiments

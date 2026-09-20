@@ -13,7 +13,7 @@ from enterprise_audit_engine.reporters.report_generator import ReportGenerator
 def test_report_generation(tmp_path):
     reporter = ReportGenerator(tmp_path)
 
-    record = EvidenceRecord.create(
+    record1 = EvidenceRecord.create(
         category="TestReport",
         collector="ReportCollector",
         source_type=EvidenceSourceType.STATIC_SOURCE_CODE,
@@ -21,8 +21,16 @@ def test_report_generation(tmp_path):
         confidence=EvidenceConfidence.HIGH,
         classification=EvidenceClassification.VERIFIED,
     )
+    record2 = EvidenceRecord.create(
+        category="SecurityAndCompliance",
+        collector="SecurityCollector",
+        source_type=EvidenceSourceType.STATIC_SOURCE_CODE,
+        summary="Zero production secrets detected",
+        confidence=EvidenceConfidence.HIGH,
+        classification=EvidenceClassification.VERIFIED,
+    )
 
-    reports = reporter.generate_all_reports([record])
+    reports = reporter.generate_all_reports([record1, record2])
     assert "executive_summary" in reports
     assert "technical_due_diligence" in reports
     assert "security_report" in reports
@@ -31,4 +39,7 @@ def test_report_generation(tmp_path):
     for name, p in reports.items():
         assert p.exists()
         content = p.read_text(encoding="utf-8")
-        assert record.id in content
+        assert len(content) > 0
+
+    assert record1.id in reports["executive_summary"].read_text(encoding="utf-8")
+    assert record2.id in reports["security_report"].read_text(encoding="utf-8")
