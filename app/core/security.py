@@ -52,6 +52,24 @@ def validate_secret_key_strength(secret_key: str) -> bool:
     return True
 
 
+def get_safe_path(base_dir: Any, untrusted_subpath: Any) -> Path:
+    """
+    Resolves and strictly validates that a target subpath stays within the intended base directory.
+    Prevents path traversal and directory escape attacks (CWE-22 / py/path-injection).
+    """
+    from pathlib import Path
+    base = Path(base_dir).resolve()
+    target = (base / untrusted_subpath).resolve()
+    try:
+        is_rel = target == base or target.is_relative_to(base)
+    except AttributeError:
+        # Python < 3.9 fallback
+        is_rel = os.path.commonpath([str(base), str(target)]) == str(base)
+    if not is_rel:
+        raise ValueError(f"Security violation: Path traversal attempt detected for '{untrusted_subpath}'")
+    return target
+
+
 
 def hash_password(password: str) -> str:
     """Hashes plain text password using bcrypt."""

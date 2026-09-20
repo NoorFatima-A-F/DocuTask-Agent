@@ -47,8 +47,9 @@ class FeatureFlagRolloutEngine:
             return False
 
         if flag["percentage"] < 100:
-            seed = f"{key}:{context.user_id or context.tenant_id or 'anon'}"
-            bucket = int(hashlib.sha256(seed.encode()).hexdigest()[:8], 16) % 100
-            return bucket < flag["percentage"]
+            # Deterministic hashing of user_id + flag_key
+            hash_val = int(hashlib.sha256(f"{key}:{context.user_id}".encode()).hexdigest(), 16)
+            user_bucket = hash_val % 100
+            return user_bucket < flag["percentage"]
 
         return True

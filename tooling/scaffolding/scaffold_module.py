@@ -15,14 +15,22 @@ TEMPLATE_FILES = {
 }
 
 def scaffold_bounded_context(context_name: str, base_path: str = "app/contexts") -> str:
-    target_dir = os.path.join(base_path, context_name.lower())
+    import re
+    from pathlib import Path
+    sanitized_name = re.sub(r'[^a-zA-Z0-9_]', '_', context_name.lower())
+    base = Path(base_path).resolve()
+    target = (base / sanitized_name).resolve()
+    if not (target == base or target.is_relative_to(base)):
+        raise ValueError(f"Invalid context name: '{context_name}'")
     for rel_path, content in TEMPLATE_FILES.items():
-        full_path = os.path.join(target_dir, rel_path)
-        os.makedirs(os.path.dirname(full_path), exist_ok=True)
-        if not os.path.exists(full_path):
+        full_path = (target / rel_path).resolve()
+        if not full_path.is_relative_to(target):
+            continue
+        full_path.parent.mkdir(parents=True, exist_ok=True)
+        if not full_path.exists():
             with open(full_path, "w", encoding="utf-8") as f:
                 f.write(content)
-    return target_dir
+    return str(target)
 
 if __name__ == "__main__":
     name = sys.argv[1] if len(sys.argv) > 1 else "sample_domain"

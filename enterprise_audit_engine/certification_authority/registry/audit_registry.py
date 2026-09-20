@@ -16,7 +16,11 @@ class AuditRegistry:
 
     def register_certificate(self, record: CertificationRecord) -> Path:
         """Stores a certified release record under its semantic version directory."""
-        version_dir = self.certifications_dir / record.release_version
+        sanitized_version = "".join(c for c in record.release_version if c.isalnum() or c in (".", "-", "_"))
+        base_dir = self.certifications_dir.resolve()
+        version_dir = (base_dir / sanitized_version).resolve()
+        if not (version_dir == base_dir or version_dir.is_relative_to(base_dir)):
+            raise ValueError(f"Security violation: Invalid release version path '{record.release_version}'")
         version_dir.mkdir(parents=True, exist_ok=True)
         cert_file = version_dir / "certificate.json"
         
@@ -29,7 +33,11 @@ class AuditRegistry:
 
     def get_certificate(self, release_version: str) -> Optional[CertificationRecord]:
         """Loads a certification record for a specific release version."""
-        cert_file = self.certifications_dir / release_version / "certificate.json"
+        sanitized_version = "".join(c for c in release_version if c.isalnum() or c in (".", "-", "_"))
+        base_dir = self.certifications_dir.resolve()
+        cert_file = (base_dir / sanitized_version / "certificate.json").resolve()
+        if not (cert_file.is_relative_to(base_dir)):
+            raise ValueError(f"Security violation: Invalid release version path '{release_version}'")
         if not cert_file.exists():
             return None
         with open(cert_file, "r", encoding="utf-8") as fp:

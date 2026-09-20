@@ -14,18 +14,24 @@ capabilities:
 """
 
 def scaffold_plugin(plugin_name: str, base_path: str = "app/plugins") -> str:
-    target_dir = os.path.join(base_path, plugin_name.lower())
-    os.makedirs(target_dir, exist_ok=True)
-    manifest_path = os.path.join(target_dir, "plugin.yaml")
-    init_path = os.path.join(target_dir, "__init__.py")
+    import re
+    from pathlib import Path
+    sanitized_name = re.sub(r'[^a-zA-Z0-9_]', '_', plugin_name.lower())
+    base = Path(base_path).resolve()
+    target = (base / sanitized_name).resolve()
+    if not (target == base or target.is_relative_to(base)):
+        raise ValueError(f"Invalid plugin name: '{plugin_name}'")
+    target.mkdir(parents=True, exist_ok=True)
+    manifest_path = target / "plugin.yaml"
+    init_path = target / "__init__.py"
 
     with open(manifest_path, "w", encoding="utf-8") as f:
-        f.write(PLUGIN_MANIFEST.format(plugin_name=plugin_name))
+        f.write(PLUGIN_MANIFEST.format(plugin_name=sanitized_name))
 
     with open(init_path, "w", encoding="utf-8") as f:
-        f.write(f"# Plugin implementation for {plugin_name}\n")
+        f.write(f"# Plugin implementation for {sanitized_name}\n")
 
-    return target_dir
+    return str(target)
 
 if __name__ == "__main__":
     name = sys.argv[1] if len(sys.argv) > 1 else "sample_plugin"

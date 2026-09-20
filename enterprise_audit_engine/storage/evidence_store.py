@@ -15,8 +15,17 @@ class EvidenceStore:
 
     def save_evidence(self, record: EvidenceRecord) -> Path:
         """Saves an immutable evidence record to disk."""
-        filename = f"{record.id}_{record.category}.json"
-        target_path = self.storage_dir / filename
+        sanitized_id = "".join(c for c in record.id if c.isalnum() or c in ("-", "_"))
+        sanitized_cat = "".join(c for c in record.category if c.isalnum() or c in ("-", "_"))
+        filename = f"{sanitized_id}_{sanitized_cat}.json"
+        base_dir = self.storage_dir.resolve()
+        target_path = (base_dir / filename).resolve()
+        try:
+            is_rel = target_path.is_relative_to(base_dir)
+        except AttributeError:
+            is_rel = True
+        if not is_rel:
+            raise ValueError("Security violation: Path traversal detected in evidence store.")
         data = record.model_dump()
         with open(target_path, "w", encoding="utf-8") as fp:
             json.dump(data, fp, indent=2, sort_keys=True)
