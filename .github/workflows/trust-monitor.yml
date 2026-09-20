@@ -67,7 +67,7 @@ jobs:
 
       - name: Upload Review Package v2 Artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: external-auditor-package-v2
           path: external_review_package_v2/

@@ -41,7 +41,7 @@ jobs:
           python -m enterprise_audit_engine.cli.main verify-integrity --output-dir audit_output
 
       - name: Archive Audit Evidence & Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: audit-artifacts
           path: audit_output/

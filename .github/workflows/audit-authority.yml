@@ -61,7 +61,7 @@ jobs:
 
       - name: Upload Certification Artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: enterprise-certification-bundle
           path: |
