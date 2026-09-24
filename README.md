@@ -16,6 +16,8 @@
   <a href="#system-architecture">Architecture</a> •
   <a href="#core-capabilities">Key Features</a> •
   <a href="#security--codeql-hardening">Security Baseline</a> •
+  <a href="docs/architecture/technical_deep_dive.md">Technical Deep Dive</a> •
+  <a href="docs/deployment/render_deployment_guide.md">Live Deployment</a> •
   <a href="#quickstart">Quickstart</a> •
   <a href="#api-reference">API Reference</a> •
   <a href="#testing--verification">Verification</a>
@@ -93,7 +95,7 @@ DocuTask Agent enforces strict defense-in-depth security standards verified by G
 * **Log Injection Defense (CWE-117):** Dynamic logger parameters are passed through `sanitize_log_input()` to strip control sequences, carriage returns (`\r`), and newlines (`\n`).
 * **Cryptographic Hardening (CWE-327):** Secure credential hashing using PBKDF2-HMAC-SHA256 with 100,000 rounds.
 
-Full audit documentation is available in [`docs/security/codeql-dashboard-verification.md`](docs/security/codeql-dashboard-verification.md).
+Detailed security architecture explanations and static analysis remediation methodology are available in [`docs/architecture/technical_deep_dive.md`](docs/architecture/technical_deep_dive.md) and [`docs/security/codeql-dashboard-verification.md`](docs/security/codeql-dashboard-verification.md).
 
 ---
 

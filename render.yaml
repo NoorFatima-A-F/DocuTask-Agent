@@ -1,0 +1,50 @@
+services:
+  # Web API Service (FastAPI)
+  - type: web
+    name: docutask-api
+    runtime: python
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: PROJECT_NAME
+        value: DocuTask-Agent
+      - key: API_V1_STR
+        value: /api/v1
+      - key: SECRET_KEY
+        generateValue: true
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: docutask-redis
+          property: connectionString
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+
+  # Background Extraction Worker (Celery)
+  - type: worker
+    name: docutask-worker
+    runtime: python
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: celery -A app.jobs.celery_app worker --loglevel=info --concurrency=2
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: docutask-redis
+          property: connectionString
+      - key: GEMINI_API_KEY
+        sync: false
+
+  # In-Memory Cache & Queue Broker
+  - type: redis
+    name: docutask-redis
+    plan: free
+    ipAllowList: []
