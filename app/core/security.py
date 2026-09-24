@@ -194,7 +194,8 @@ def sanitize_log_input(value: Any) -> str:
     """
     if value is None:
         return ""
-    clean = re.sub(r"[\r\n\x00-\x1f\x7f-\x9f]", "_", str(value))
+    clean = str(value).replace("\r", "").replace("\n", "")
+    clean = re.sub(r"[\x00-\x1f\x7f-\x9f]", "_", clean)
     if len(clean) > 256:
         return clean[:253] + "..."
     return clean
