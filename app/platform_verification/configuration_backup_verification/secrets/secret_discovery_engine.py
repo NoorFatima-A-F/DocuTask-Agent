@@ -43,7 +43,7 @@ class SecretDiscoveryEngine(ISecretDiscoveryEngine):
 
     SECRETS_SPEC = [
         ("SEC-001", SecretType.JWT_SIGNING_KEY, "k8s/sealed-secret-backend.yaml", "Gitleaks-v8.18", "jwt_sig_***...7e4f", True, 4.82, True, 90, False),
-        ("SEC-002", SecretType.API_KEY, "aws-secrets-manager/gemini-key", "TruffleHog-v3.63", "AIzaSy***...88ab", True, 4.91, True, 60, False),
+        ("SEC-002", SecretType.API_KEY, "aws-secrets-manager/gemini-key", "TruffleHog-v3.63", "gemini_key_***...88ab", True, 4.91, True, 60, False),
         ("SEC-003", SecretType.DATABASE_PASSWORD, "aws-secrets-manager/db-creds", "Detect-Secrets-v1.4", "pg_pass_***...31df", True, 4.75, True, 30, False),
         ("SEC-004", SecretType.REDIS_PASSWORD, "aws-secrets-manager/redis-creds", "Gitleaks-v8.18", "rd_pass_***...92ac", True, 4.68, True, 30, False),
         ("SEC-005", SecretType.OAUTH_SECRET, "aws-secrets-manager/oauth-client", "TruffleHog-v3.63", "oa_sec_***...45bb", True, 4.88, True, 90, False),

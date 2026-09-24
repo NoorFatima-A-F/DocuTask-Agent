@@ -78,7 +78,7 @@ class MonitoringSecurityAuditor(IMonitoringSecurityAuditor):
             details={
                 "sanitization_policy": "Zero Sensitive Data Exposure in Telemetry",
                 "redaction_rules": [
-                    "Regex mask on API keys: AIzaSy[0-9A-Za-z-_]{33}",
+                    "Regex mask on Gemini API keys: AIza[0-9A-Za-z-_]{30,40}",
                     "Regex mask on JWT/Bearer tokens: Bearer [A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.?[A-Za-z0-9-_.+/=]*",
                     "Redact raw OCR text payload from traces",
                 ],

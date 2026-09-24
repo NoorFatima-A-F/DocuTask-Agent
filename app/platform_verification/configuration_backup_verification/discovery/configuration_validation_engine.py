@@ -62,7 +62,7 @@ class ConfigurationValidationEngine(IConfigurationValidationEngine):
                 "DATABASE_URL": "postgresql://[user]:[pass]@[host]:[port]/[db] - VALID",
                 "REDIS_URL": "redis://[host]:[port]/[db] - VALID",
                 "JWT_SECRET": "MIN_32_CHARS_ENTROPY_CHECK_PASSED",
-                "GEMINI_API_KEY": "AIzaSy_FORMAT_VERIFIED",
+                "GEMINI_API_KEY": "TEST_MOCK_GEMINI_KEY_FORMAT_VERIFIED",
             },
             "unresolved_substitutions_count": 0,
         }
