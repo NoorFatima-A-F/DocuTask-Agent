@@ -81,7 +81,7 @@
       "details": {
         "total_samples": 4200
       },
-      "timestamp": "2026-09-24T21:25:13.293229+00:00"
+      "timestamp": "2026-09-24T22:06:18.541675+00:00"
     },
     {
       "check_id": "CHK-5R-02",
@@ -92,7 +92,7 @@
       "details": {
         "cross_format_accuracy_pct": 99.71666666666665
       },
-      "timestamp": "2026-09-24T21:25:13.293250+00:00"
+      "timestamp": "2026-09-24T22:06:18.541689+00:00"
     },
     {
       "check_id": "CHK-5R-03",
@@ -103,7 +103,7 @@
       "details": {
         "degraded_scan_accuracy_pct": 99.2
       },
-      "timestamp": "2026-09-24T21:25:13.293268+00:00"
+      "timestamp": "2026-09-24T22:06:18.541704+00:00"
     },
     {
       "check_id": "CHK-5R-04",
@@ -114,8 +114,8 @@
       "details": {
         "multilingual_verified": true
       },
-      "timestamp": "2026-09-24T21:25:13.293299+00:00"
+      "timestamp": "2026-09-24T22:06:18.541718+00:00"
     }
   ],
-  "timestamp": "2026-09-24T21:25:13.293313+00:00"
+  "timestamp": "2026-09-24T22:06:18.541729+00:00"
 }

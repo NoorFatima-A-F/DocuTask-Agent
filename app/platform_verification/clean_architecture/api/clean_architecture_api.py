@@ -22,7 +22,6 @@ class DependencyScanRequest(BaseModel):
 def run_dependency_validation_scan(req: DependencyScanRequest):
     """Executes Clean Architecture inward dependency scan and returns evidence."""
     package = _runtime.run_full_validation(
-        target_dir=req.repository_path,
         commit_sha=req.commit_sha,
     )
     return {

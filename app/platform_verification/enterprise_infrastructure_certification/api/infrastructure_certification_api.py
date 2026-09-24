@@ -45,9 +45,9 @@ async def list_pillars() -> List[Dict[str, Any]]:
 
 @router.post("/run", response_model=VerificationManifest)
 @router.post("/verify/all", response_model=VerificationManifest)
-async def run_certification_suite(export_dir: str = "infrastructure_certification") -> VerificationManifest:
+async def run_certification_suite() -> VerificationManifest:
     """Trigger full end-to-end infrastructure evidence collection, quality scoring, risk assessment, and certification export."""
-    manifest = await _runtime.run_all(export_dir=export_dir)
+    manifest = await _runtime.run_all()
     return manifest
 
 

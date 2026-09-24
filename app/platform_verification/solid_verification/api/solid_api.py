@@ -22,7 +22,6 @@ class SolidScanRequest(BaseModel):
 def run_solid_analysis(req: SolidScanRequest):
     """Executes full SOLID AST analysis, scores design quality, and saves evidence."""
     package = _runtime.run_full_scan(
-        target_dir=req.repository_path,
         commit_sha=req.commit_sha,
     )
     score = package.scorecard.total_score if package.scorecard else 0.0

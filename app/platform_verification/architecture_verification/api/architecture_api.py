@@ -22,7 +22,6 @@ class ScanRequest(BaseModel):
 def run_architecture_scan(req: ScanRequest):
     """Executes full AST architecture analysis, evaluates rules, and saves evidence."""
     package = _runtime.run_full_scan(
-        target_dir=req.repository_path,
         commit_sha=req.commit_sha,
     )
     return {

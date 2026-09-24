@@ -46,7 +46,7 @@
       "details": {
         "overall_compliance_rate_pct": 100.0
       },
-      "timestamp": "2026-09-24T21:25:13.292540+00:00"
+      "timestamp": "2026-09-24T22:06:18.540775+00:00"
     },
     {
       "check_id": "CHK-5N-02",
@@ -57,7 +57,7 @@
       "details": {
         "redaction_success_pct": 100.0
       },
-      "timestamp": "2026-09-24T21:25:13.292556+00:00"
+      "timestamp": "2026-09-24T22:06:18.540806+00:00"
     },
     {
       "check_id": "CHK-5N-03",
@@ -68,7 +68,7 @@
       "details": {
         "residency_violations_count": 0
       },
-      "timestamp": "2026-09-24T21:25:13.292573+00:00"
+      "timestamp": "2026-09-24T22:06:18.540834+00:00"
     },
     {
       "check_id": "CHK-5N-04",
@@ -79,8 +79,8 @@
       "details": {
         "evidence_package_generated": true
       },
-      "timestamp": "2026-09-24T21:25:13.292591+00:00"
+      "timestamp": "2026-09-24T22:06:18.540864+00:00"
     }
   ],
-  "timestamp": "2026-09-24T21:25:13.292602+00:00"
+  "timestamp": "2026-09-24T22:06:18.540883+00:00"
 }

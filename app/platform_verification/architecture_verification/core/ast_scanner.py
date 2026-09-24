@@ -31,7 +31,7 @@ class EnterpriseASTScanner(IASTScanner):
                     continue
 
                 total_files += 1
-                full_path = resolve_safe_path(root_path, os.path.join(dirpath, fname))
+                full_path = Path(dirpath) / fname
                 rel_path = os.path.relpath(full_path, root_path).replace("\\", "/")
                 mod_name = rel_path.replace(".py", "").replace("/", ".")
 

@@ -46,9 +46,9 @@ async def list_governance_domains() -> List[Dict[str, str]]:
 
 @router.post("/run", response_model=OperationsManifest)
 @router.post("/verify/all", response_model=OperationsManifest)
-async def run_governance_cycle(export_dir: str = "operations_verification") -> OperationsManifest:
+async def run_governance_cycle() -> OperationsManifest:
     """Execute complete operational governance evaluation cycle."""
-    manifest = await _runtime.run_all(export_dir=export_dir)
+    manifest = await _runtime.run_all()
     return manifest
 
 

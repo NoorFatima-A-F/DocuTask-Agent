@@ -31,7 +31,7 @@ class EnterpriseCleanArchASTScanner(ICleanArchitectureScanner):
                 if not fname.endswith(".py"):
                     continue
 
-                full_path = resolve_safe_path(root_path, os.path.join(dirpath, fname))
+                full_path = Path(dirpath) / fname
                 rel_path = os.path.relpath(full_path, root_path).replace("\\", "/")
                 src_mod = rel_path.replace(".py", "").replace("/", ".")
                 src_layer = classify_module_layer(src_mod)

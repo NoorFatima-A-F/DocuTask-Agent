@@ -45,9 +45,9 @@ async def list_stages() -> List[Dict[str, str]]:
 
 @router.post("/run", response_model=VerificationManifest)
 @router.post("/verify/all", response_model=VerificationManifest)
-async def run_pipeline(export_dir: str = "pipeline_evidence") -> VerificationManifest:
+async def run_pipeline() -> VerificationManifest:
     """Execute the complete end-to-end continuous verification CI/CD pipeline."""
-    manifest = await _runtime.run_all(export_dir=export_dir)
+    manifest = await _runtime.run_all()
     return manifest
 
 

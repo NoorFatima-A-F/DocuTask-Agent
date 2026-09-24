@@ -21,9 +21,9 @@ def get_health() -> Dict[str, Any]:
 
 
 @router.post("/run", response_model=AutonomousWorkflowQualityReport, summary="Execute complete autonomous workflow verification suite")
-def run_verification(output_dir: Optional[str] = Query(None, description="Custom evidence output directory")) -> AutonomousWorkflowQualityReport:
+def run_verification() -> AutonomousWorkflowQualityReport:
     global _latest_report
-    _latest_report = _runtime.execute_all(output_dir=output_dir)
+    _latest_report = _runtime.execute_all()
     return _latest_report
 
 

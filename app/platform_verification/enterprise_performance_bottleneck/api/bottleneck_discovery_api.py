@@ -40,8 +40,8 @@ async def list_phases() -> List[Dict[str, str]]:
 
 
 @router.post("/run", response_model=BottleneckVerificationManifest)
-async def run_verification_suite(output_dir: str = "performance_verification") -> BottleneckVerificationManifest:
-    manifest = await _runtime.run_all(output_dir=output_dir)
+async def run_verification_suite() -> BottleneckVerificationManifest:
+    manifest = await _runtime.run_all()
     return manifest
 
 

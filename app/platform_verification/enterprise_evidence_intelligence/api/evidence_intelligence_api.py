@@ -102,9 +102,9 @@ async def get_portfolio_bundle() -> PortfolioEvidenceBundle:
 
 @router.post("/run", response_model=VerificationManifest)
 @router.post("/verify/all", response_model=VerificationManifest)
-async def run_evidence_pipeline(export_dir: str = "infrastructure_verification") -> VerificationManifest:
+async def run_evidence_pipeline() -> VerificationManifest:
     """Trigger the complete automated evidence intelligence pipeline and export artifacts."""
-    manifest = await _runtime.run_all(export_dir=export_dir)
+    manifest = await _runtime.run_all()
     return manifest
 
 

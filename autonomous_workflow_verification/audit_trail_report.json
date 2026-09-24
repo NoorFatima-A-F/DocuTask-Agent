@@ -54,7 +54,7 @@
         "audit_records_count": 5,
         "reconstruction_pct": 100.0
       },
-      "timestamp": "2026-09-24T21:25:13.292390+00:00"
+      "timestamp": "2026-09-24T22:06:18.540542+00:00"
     },
     {
       "check_id": "CHK-5M-02",
@@ -65,7 +65,7 @@
       "details": {
         "tamper_detection_verified": true
       },
-      "timestamp": "2026-09-24T21:25:13.292408+00:00"
+      "timestamp": "2026-09-24T22:06:18.540573+00:00"
     },
     {
       "check_id": "CHK-5M-03",
@@ -76,7 +76,7 @@
       "details": {
         "independent_replay_passed": true
       },
-      "timestamp": "2026-09-24T21:25:13.292427+00:00"
+      "timestamp": "2026-09-24T22:06:18.540603+00:00"
     },
     {
       "check_id": "CHK-5M-04",
@@ -87,8 +87,8 @@
       "details": {
         "non_repudiation_verified": true
       },
-      "timestamp": "2026-09-24T21:25:13.292445+00:00"
+      "timestamp": "2026-09-24T22:06:18.540633+00:00"
     }
   ],
-  "timestamp": "2026-09-24T21:25:13.292456+00:00"
+  "timestamp": "2026-09-24T22:06:18.540654+00:00"
 }
