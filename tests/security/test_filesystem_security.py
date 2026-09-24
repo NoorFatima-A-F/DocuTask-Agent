@@ -30,7 +30,7 @@ class TestPathContainmentAndResolution:
     def test_base_directory_exact_match(self, tmp_path: Path):
         base = tmp_path / "base"
         base.mkdir()
-        target = resolve_safe_path(base, "", allow_base=True)
+        target = resolve_safe_path(base, ".", allow_base=True)
         assert target == base.resolve()
 
     def test_parent_traversal_rejected(self, tmp_path: Path):

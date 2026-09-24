@@ -128,6 +128,49 @@ def validate_safe_filename_segment(value: str) -> str:
     return sanitized
 
 
+def sanitize_file_path(
+    base_dir: PathInput,
+    untrusted_path: PathInput,
+    *,
+    allow_base: bool = True,
+) -> str:
+    """
+    Authoritative CodeQL-recognized filesystem path sanitizer (CWE-22 / py/path-injection mitigation).
+    Validates containment strictly within base_dir using os.path.abspath, os.path.join, and os.path.commonpath.
+    Rejects null bytes, path traversal attempts, and directory escapes.
+    """
+    if untrusted_path is None:
+        raise UnsafePathError("Empty or None path provided")
+
+    untrusted_str = str(untrusted_path).strip()
+    if not untrusted_str:
+        raise UnsafePathError("Empty path provided")
+
+    if untrusted_str == ".":
+        if allow_base:
+            return os.path.abspath(str(base_dir))
+        raise UnsafePathError("Security violation: Target path matches base directory when allow_base=False")
+
+    if "\x00" in untrusted_str:
+        raise UnsafePathError("Null byte detected in path expression")
+
+    base_abs = os.path.abspath(str(base_dir))
+    target_abs = os.path.abspath(os.path.join(base_abs, untrusted_str))
+
+    try:
+        common = os.path.commonpath([base_abs, target_abs])
+    except ValueError:
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+
+    if common != base_abs:
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+
+    if target_abs == base_abs and not allow_base:
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+
+    return target_abs
+
+
 def resolve_safe_path(
     base_dir: PathInput,
     untrusted_path: PathInput,
@@ -135,19 +178,21 @@ def resolve_safe_path(
     allow_base: bool = True,
 ) -> Path:
     """
+    Pathlib-compatible wrapper for sanitize_file_path with is_relative_to defense-in-depth.
     Resolves and strictly verifies that candidate path is contained within base_dir.
     Rejects directory escape / path traversal (CWE-22 / py/path-injection).
     """
-    base = Path(base_dir).expanduser().resolve()
-    candidate = (base / Path(untrusted_path)).resolve()
+    safe_str = sanitize_file_path(base_dir, untrusted_path, allow_base=allow_base)
+    safe_path = Path(safe_str).resolve()
+    base_path = Path(base_dir).resolve()
     try:
-        is_contained = (candidate == base and allow_base) or candidate.is_relative_to(base)
+        is_contained = (safe_path == base_path and allow_base) or safe_path.is_relative_to(base_path)
     except AttributeError:
         # Python < 3.9 fallback
-        is_contained = (candidate == base and allow_base) or os.path.commonpath([str(base), str(candidate)]) == str(base)
+        is_contained = (safe_path == base_path and allow_base) or os.path.commonpath([str(base_path), str(safe_path)]) == str(base_path)
     if not is_contained:
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base}'")
-    return candidate
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+    return safe_path
 
 
 get_safe_path = resolve_safe_path
