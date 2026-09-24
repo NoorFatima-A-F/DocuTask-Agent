@@ -31,6 +31,10 @@
 
 By decoupling ingestion from multimodal extraction using an asynchronous task queue and enforcing strict Pydantic schemas, DocuTask Agent eliminates model hallucinations and delivers verified, deterministic JSON outputs ready for downstream enterprise data stores.
 
+<p align="center">
+  <img src="docs/assets/pipeline_demo.png" alt="DocuTask Extraction Demo" width="850">
+</p>
+
 ---
 
 ## Core Capabilities
