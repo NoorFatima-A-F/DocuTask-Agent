@@ -9,9 +9,9 @@ runtime = ObservabilityAuditCertificationRuntime()
 
 
 @router.post("/execute", summary="Execute full observability audit, PRR review, and certification pipeline")
-def execute_observability_certification(output_dir: str = Query("observability_certification", description="Output repository directory")):
+def execute_observability_certification():
     try:
-        results = runtime.run_full_audit_and_certification(output_dir=output_dir)
+        results = runtime.run_full_audit_and_certification()
         return {
             "status": "SUCCESS",
             "composite_score": results["composite_score"],

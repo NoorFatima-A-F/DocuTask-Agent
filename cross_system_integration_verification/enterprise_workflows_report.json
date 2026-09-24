@@ -112,7 +112,7 @@
       "details": {
         "scenarios_count": 6
       },
-      "timestamp": "2026-09-16T19:13:51.745457+00:00"
+      "timestamp": "2026-09-24T20:42:57.724340+00:00"
     },
     {
       "check_id": "CHK-4T-02",
@@ -123,7 +123,7 @@
       "details": {
         "overall_accuracy_pct": 99.8
       },
-      "timestamp": "2026-09-16T19:13:51.745462+00:00"
+      "timestamp": "2026-09-24T20:42:57.724363+00:00"
     },
     {
       "check_id": "CHK-4T-03",
@@ -134,7 +134,7 @@
       "details": {
         "provenance_verified": true
       },
-      "timestamp": "2026-09-16T19:13:51.745469+00:00"
+      "timestamp": "2026-09-24T20:42:57.724396+00:00"
     },
     {
       "check_id": "CHK-4T-04",
@@ -145,8 +145,8 @@
       "details": {
         "escalation_accuracy_pct": 100.0
       },
-      "timestamp": "2026-09-16T19:13:51.745475+00:00"
+      "timestamp": "2026-09-24T20:42:57.724422+00:00"
     }
   ],
-  "timestamp": "2026-09-16T19:13:51.745479+00:00"
+  "timestamp": "2026-09-24T20:42:57.724437+00:00"
 }

@@ -144,8 +144,6 @@ def get_portfolio_presentation() -> PortfolioPresentationArtifacts:
 
 
 @router.post("/simulation/run-all")
-def run_full_simulation(
-    output_dir: Optional[str] = Query(default=None, description="Optional custom output directory")
-) -> Dict[str, Any]:
+def run_full_simulation() -> Dict[str, Any]:
     """Execute complete end-to-end customer simulation and export all evidence."""
-    return _runtime.run_full_simulation(output_dir=output_dir)
+    return _runtime.run_full_simulation()

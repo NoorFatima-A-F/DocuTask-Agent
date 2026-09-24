@@ -17,19 +17,13 @@ _runtime = DisasterRecoverySimulationRuntime()
 
 
 @router.post("/simulate", response_model=Dict[str, Any])
-async def execute_disaster_recovery_simulation(
-    cert_dir: str = "disaster_recovery_certification",
-    evidence_dir: str = "disaster_recovery_evidence",
-    runbooks_dir: str = "runbooks",
-):
+async def execute_disaster_recovery_simulation():
     """
     Executes full multi-scenario disaster recovery simulation, chaos testing, and resilience certification.
     """
     try:
         runtime = DisasterRecoverySimulationRuntime()
-        results = runtime.execute_full_dr_program(
-            cert_dir=cert_dir, evidence_dir=evidence_dir, runbooks_dir=runbooks_dir
-        )
+        results = runtime.execute_full_dr_program()
         scorecard = results["scorecard"]
         return {
             "status": "COMPLETED",

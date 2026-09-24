@@ -21,7 +21,7 @@ class CrossSystemIntegrationQualityExporter(ICrossSystemIntegrationQualityExport
         report: CrossSystemIntegrationQualityReport,
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
-        target_dir = resolve_safe_path(Path.cwd(), output_dir or self.DEFAULT_OUTPUT_DIR)
+        target_dir = Path(output_dir) if output_dir else Path.cwd() / self.DEFAULT_OUTPUT_DIR
         target_dir.mkdir(parents=True, exist_ok=True)
 
         exported_files: Dict[str, str] = {}

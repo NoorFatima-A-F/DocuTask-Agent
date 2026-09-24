@@ -22,9 +22,9 @@ def get_health() -> Dict[str, Any]:
 
 
 @router.post("/run", response_model=CrossSystemIntegrationQualityReport, summary="Execute complete integration verification suite")
-def run_verification(output_dir: Optional[str] = Query(None, description="Custom evidence output directory")) -> CrossSystemIntegrationQualityReport:
+def run_verification() -> CrossSystemIntegrationQualityReport:
     global _latest_report
-    _latest_report = _runtime.execute_all(output_dir=output_dir)
+    _latest_report = _runtime.execute_all()
     return _latest_report
 
 

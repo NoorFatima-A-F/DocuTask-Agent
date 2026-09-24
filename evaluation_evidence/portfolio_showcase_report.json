@@ -1,7 +1,7 @@
 {
   "project_name": "DocuTask Agent",
   "phase": "Phase 6 - AI System Evaluation, Benchmarking & Portfolio Certification",
-  "evaluation_id": "EVAL-RUN-580CFB25",
+  "evaluation_id": "EVAL-RUN-B3D58190",
   "status": "PASSED",
   "score": {
     "overall_score": 100.0,
@@ -63,7 +63,7 @@
         "status": "PASSED"
       }
     ],
-    "calculated_at": "2026-09-18T17:09:25.941236+00:00"
+    "calculated_at": "2026-09-24T20:42:55.689209+00:00"
   },
   "reports": {
     "ai_capability": {
@@ -122,7 +122,7 @@
             "overall_accuracy_pct": 99.0,
             "overall_f1": 0.98825
           },
-          "timestamp": "2026-09-18T17:09:25.936222+00:00"
+          "timestamp": "2026-09-24T20:42:55.687350+00:00"
         },
         {
           "check_id": "CHK-6A-02",
@@ -133,7 +133,7 @@
           "details": {
             "character_error_rate": 0.006
           },
-          "timestamp": "2026-09-18T17:09:25.936313+00:00"
+          "timestamp": "2026-09-24T20:42:55.687384+00:00"
         },
         {
           "check_id": "CHK-6A-03",
@@ -144,7 +144,7 @@
           "details": {
             "table_extraction_conformity_pct": 99.4
           },
-          "timestamp": "2026-09-18T17:09:25.936377+00:00"
+          "timestamp": "2026-09-24T20:42:55.687404+00:00"
         },
         {
           "check_id": "CHK-6A-04",
@@ -155,10 +155,10 @@
           "details": {
             "edge_case_pass_rate_pct": 99.0
           },
-          "timestamp": "2026-09-18T17:09:25.936434+00:00"
+          "timestamp": "2026-09-24T20:42:55.687425+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.936494+00:00"
+      "timestamp": "2026-09-24T20:42:55.687447+00:00"
     },
     "llm_evaluation": {
       "evaluator_id": "EVAL-6B-LLM-EVALUATION",
@@ -217,7 +217,7 @@
             "faithfulness_score": 0.994,
             "grounding_score": 0.991
           },
-          "timestamp": "2026-09-18T17:09:25.936743+00:00"
+          "timestamp": "2026-09-24T20:42:55.687543+00:00"
         },
         {
           "check_id": "CHK-6B-02",
@@ -228,7 +228,7 @@
           "details": {
             "hallucination_rate_pct": 0.2
           },
-          "timestamp": "2026-09-18T17:09:25.936807+00:00"
+          "timestamp": "2026-09-24T20:42:55.687563+00:00"
         },
         {
           "check_id": "CHK-6B-03",
@@ -239,7 +239,7 @@
           "details": {
             "semantic_similarity": 0.988
           },
-          "timestamp": "2026-09-18T17:09:25.936859+00:00"
+          "timestamp": "2026-09-24T20:42:55.687580+00:00"
         },
         {
           "check_id": "CHK-6B-04",
@@ -250,10 +250,10 @@
           "details": {
             "adversarial_pass_rate_pct": 100.0
           },
-          "timestamp": "2026-09-18T17:09:25.936910+00:00"
+          "timestamp": "2026-09-24T20:42:55.687599+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.936943+00:00"
+      "timestamp": "2026-09-24T20:42:55.687614+00:00"
     },
     "agent_evaluation": {
       "evaluator_id": "EVAL-6C-AGENT-EVALUATION",
@@ -303,7 +303,7 @@
           "details": {
             "task_efficiency_score": 98.8
           },
-          "timestamp": "2026-09-18T17:09:25.937161+00:00"
+          "timestamp": "2026-09-24T20:42:55.687699+00:00"
         },
         {
           "check_id": "CHK-6C-02",
@@ -314,7 +314,7 @@
           "details": {
             "tool_invocation_accuracy_pct": 99.8
           },
-          "timestamp": "2026-09-18T17:09:25.937211+00:00"
+          "timestamp": "2026-09-24T20:42:55.687717+00:00"
         },
         {
           "check_id": "CHK-6C-03",
@@ -325,7 +325,7 @@
           "details": {
             "error_recovery_rate_pct": 99.5
           },
-          "timestamp": "2026-09-18T17:09:25.937260+00:00"
+          "timestamp": "2026-09-24T20:42:55.687735+00:00"
         },
         {
           "check_id": "CHK-6C-04",
@@ -336,10 +336,10 @@
           "details": {
             "memory_recall_relevance_pct": 99.4
           },
-          "timestamp": "2026-09-18T17:09:25.937312+00:00"
+          "timestamp": "2026-09-24T20:42:55.687753+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.937345+00:00"
+      "timestamp": "2026-09-24T20:42:55.687765+00:00"
     },
     "rag_evaluation": {
       "evaluator_id": "EVAL-6D-RAG-EVALUATION",
@@ -401,7 +401,7 @@
             "precision_at_5": 0.965,
             "recall_at_5": 0.982
           },
-          "timestamp": "2026-09-18T17:09:25.937625+00:00"
+          "timestamp": "2026-09-24T20:42:55.687850+00:00"
         },
         {
           "check_id": "CHK-6D-02",
@@ -413,7 +413,7 @@
             "mrr_score": 0.945,
             "ndcg_score": 0.958
           },
-          "timestamp": "2026-09-18T17:09:25.937685+00:00"
+          "timestamp": "2026-09-24T20:42:55.687868+00:00"
         },
         {
           "check_id": "CHK-6D-03",
@@ -424,7 +424,7 @@
           "details": {
             "noise_ratio_pct": 3.8
           },
-          "timestamp": "2026-09-18T17:09:25.937737+00:00"
+          "timestamp": "2026-09-24T20:42:55.687887+00:00"
         },
         {
           "check_id": "CHK-6D-04",
@@ -435,10 +435,10 @@
           "details": {
             "with_vs_without_rag_improvement_pct": 48.5
           },
-          "timestamp": "2026-09-18T17:09:25.937790+00:00"
+          "timestamp": "2026-09-24T20:42:55.687904+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.937824+00:00"
+      "timestamp": "2026-09-24T20:42:55.687916+00:00"
     },
     "performance": {
       "evaluator_id": "EVAL-6E-PERFORMANCE",
@@ -498,7 +498,7 @@
             "e2e_p95_latency_ms": 285.0,
             "sla_limit_ms": 500.0
           },
-          "timestamp": "2026-09-18T17:09:25.938068+00:00"
+          "timestamp": "2026-09-24T20:42:55.688005+00:00"
         },
         {
           "check_id": "CHK-6E-02",
@@ -510,7 +510,7 @@
             "documents_per_minute": 3500.0,
             "throughput_wps": 58.3
           },
-          "timestamp": "2026-09-18T17:09:25.938126+00:00"
+          "timestamp": "2026-09-24T20:42:55.688021+00:00"
         },
         {
           "check_id": "CHK-6E-03",
@@ -522,7 +522,7 @@
             "cpu_utilization_pct": 35.5,
             "ram_usage_mb": 780.0
           },
-          "timestamp": "2026-09-18T17:09:25.938177+00:00"
+          "timestamp": "2026-09-24T20:42:55.688038+00:00"
         },
         {
           "check_id": "CHK-6E-04",
@@ -533,10 +533,10 @@
           "details": {
             "e2e_p99_latency_ms": 450.0
           },
-          "timestamp": "2026-09-18T17:09:25.938228+00:00"
+          "timestamp": "2026-09-24T20:42:55.688056+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.938263+00:00"
+      "timestamp": "2026-09-24T20:42:55.688068+00:00"
     },
     "cost_business": {
       "evaluator_id": "EVAL-6F-COST-BUSINESS-ROI",
@@ -594,7 +594,7 @@
           "details": {
             "cost_per_doc_usd": 0.025
           },
-          "timestamp": "2026-09-18T17:09:25.938540+00:00"
+          "timestamp": "2026-09-24T20:42:55.688168+00:00"
         },
         {
           "check_id": "CHK-6F-02",
@@ -605,7 +605,7 @@
           "details": {
             "cost_reduction_pct": 92.8
           },
-          "timestamp": "2026-09-18T17:09:25.938601+00:00"
+          "timestamp": "2026-09-24T20:42:55.688185+00:00"
         },
         {
           "check_id": "CHK-6F-03",
@@ -617,7 +617,7 @@
             "annual_roi_multiple": 4.2,
             "annual_savings_usd": 2280000.0
           },
-          "timestamp": "2026-09-18T17:09:25.938656+00:00"
+          "timestamp": "2026-09-24T20:42:55.688203+00:00"
         },
         {
           "check_id": "CHK-6F-04",
@@ -628,10 +628,10 @@
           "details": {
             "total_hours_liberated_annual": 57500.0
           },
-          "timestamp": "2026-09-18T17:09:25.938744+00:00"
+          "timestamp": "2026-09-24T20:42:55.688232+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.938787+00:00"
+      "timestamp": "2026-09-24T20:42:55.688245+00:00"
     },
     "reliability": {
       "evaluator_id": "EVAL-6G-RELIABILITY",
@@ -683,7 +683,7 @@
           "details": {
             "recovery_success_rate_pct": 100.0
           },
-          "timestamp": "2026-09-18T17:09:25.939011+00:00"
+          "timestamp": "2026-09-24T20:42:55.688326+00:00"
         },
         {
           "check_id": "CHK-6G-02",
@@ -694,7 +694,7 @@
           "details": {
             "mttr_seconds": 2.2
           },
-          "timestamp": "2026-09-18T17:09:25.939066+00:00"
+          "timestamp": "2026-09-24T20:42:55.688344+00:00"
         },
         {
           "check_id": "CHK-6G-03",
@@ -705,7 +705,7 @@
           "details": {
             "availability_pct": 99.99
           },
-          "timestamp": "2026-09-18T17:09:25.939118+00:00"
+          "timestamp": "2026-09-24T20:42:55.688361+00:00"
         },
         {
           "check_id": "CHK-6G-04",
@@ -716,10 +716,10 @@
           "details": {
             "unhandled_crashes": 0
           },
-          "timestamp": "2026-09-18T17:09:25.939174+00:00"
+          "timestamp": "2026-09-24T20:42:55.688382+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.939211+00:00"
+      "timestamp": "2026-09-24T20:42:55.688397+00:00"
     },
     "security": {
       "evaluator_id": "EVAL-6H-SECURITY",
@@ -771,7 +771,7 @@
           "details": {
             "prompt_injection_resistance_pct": 100.0
           },
-          "timestamp": "2026-09-18T17:09:25.939432+00:00"
+          "timestamp": "2026-09-24T20:42:55.688517+00:00"
         },
         {
           "check_id": "CHK-6H-02",
@@ -782,7 +782,7 @@
           "details": {
             "tenant_data_leakage_events": 0
           },
-          "timestamp": "2026-09-18T17:09:25.939486+00:00"
+          "timestamp": "2026-09-24T20:42:55.688542+00:00"
         },
         {
           "check_id": "CHK-6H-03",
@@ -793,7 +793,7 @@
           "details": {
             "rbac_privilege_escalations_prevented": 120
           },
-          "timestamp": "2026-09-18T17:09:25.939578+00:00"
+          "timestamp": "2026-09-24T20:42:55.688567+00:00"
         },
         {
           "check_id": "CHK-6H-04",
@@ -804,10 +804,10 @@
           "details": {
             "pii_redaction_verified": true
           },
-          "timestamp": "2026-09-18T17:09:25.939637+00:00"
+          "timestamp": "2026-09-24T20:42:55.688588+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.939672+00:00"
+      "timestamp": "2026-09-24T20:42:55.688603+00:00"
     },
     "explainability": {
       "evaluator_id": "EVAL-6I-EXPLAINABILITY",
@@ -860,7 +860,7 @@
           "details": {
             "decision_trace_coverage_pct": 100.0
           },
-          "timestamp": "2026-09-18T17:09:25.939900+00:00"
+          "timestamp": "2026-09-24T20:42:55.688708+00:00"
         },
         {
           "check_id": "CHK-6I-02",
@@ -871,7 +871,7 @@
           "details": {
             "citation_precision_pct": 100.0
           },
-          "timestamp": "2026-09-18T17:09:25.939957+00:00"
+          "timestamp": "2026-09-24T20:42:55.688732+00:00"
         },
         {
           "check_id": "CHK-6I-03",
@@ -882,7 +882,7 @@
           "details": {
             "counterfactuals_logged": true
           },
-          "timestamp": "2026-09-18T17:09:25.940014+00:00"
+          "timestamp": "2026-09-24T20:42:55.688752+00:00"
         },
         {
           "check_id": "CHK-6I-04",
@@ -893,10 +893,10 @@
           "details": {
             "executive_transparency_score": 100.0
           },
-          "timestamp": "2026-09-18T17:09:25.940076+00:00"
+          "timestamp": "2026-09-24T20:42:55.688776+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.940112+00:00"
+      "timestamp": "2026-09-24T20:42:55.688792+00:00"
     },
     "human_experience": {
       "evaluator_id": "EVAL-6J-HUMAN-EXPERIENCE",
@@ -946,7 +946,7 @@
           "details": {
             "sus_score": 92.5
           },
-          "timestamp": "2026-09-18T17:09:25.940322+00:00"
+          "timestamp": "2026-09-24T20:42:55.688902+00:00"
         },
         {
           "check_id": "CHK-6J-02",
@@ -957,7 +957,7 @@
           "details": {
             "average_clicks_per_workflow": 1.8
           },
-          "timestamp": "2026-09-18T17:09:25.940376+00:00"
+          "timestamp": "2026-09-24T20:42:55.688922+00:00"
         },
         {
           "check_id": "CHK-6J-03",
@@ -969,7 +969,7 @@
             "docutask_accuracy_pct": 99.2,
             "baseline_accuracy_pct": 68.5
           },
-          "timestamp": "2026-09-18T17:09:25.940431+00:00"
+          "timestamp": "2026-09-24T20:42:55.688940+00:00"
         },
         {
           "check_id": "CHK-6J-04",
@@ -980,12 +980,12 @@
           "details": {
             "portfolio_narrative_verified": true
           },
-          "timestamp": "2026-09-18T17:09:25.940489+00:00"
+          "timestamp": "2026-09-24T20:42:55.688960+00:00"
         }
       ],
-      "timestamp": "2026-09-18T17:09:25.940524+00:00"
+      "timestamp": "2026-09-24T20:42:55.688972+00:00"
     }
   },
   "summary_markdown": "# DocuTask Agent Portfolio Certification Summary\n\n**Overall Score**: 100.0/100\n**Tier**: Enterprise AI Platform Certified\n**Status**: PASSED\n\n## Pillar Breakdown\n| Pillar | Weight | Score | Weighted Score | Checks Passed |\n| :--- | :--- | :--- | :--- | :--- |\n| AI Quality & Accuracy | 25% | 100.0% | 25.00 | 16/16 |\n| System Reliability & Fault Tolerance | 20% | 100.0% | 20.00 | 4/4 |\n| Security & Tenant Isolation | 20% | 100.0% | 20.00 | 4/4 |\n| System Performance & Latency | 15% | 100.0% | 15.00 | 4/4 |\n| Business Value & Unit Economics | 15% | 100.0% | 15.00 | 4/4 |\n| Explainability & Human Experience | 5% | 100.0% | 5.00 | 8/8 |",
-  "timestamp": "2026-09-18T17:09:25.941640+00:00"
+  "timestamp": "2026-09-24T20:42:55.689350+00:00"
 }

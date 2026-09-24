@@ -29,7 +29,7 @@ class PortfolioPresentationGenerator(IPortfolioPresentationGenerator):
         )
 
         if output_dir:
-            safe_dir = resolve_safe_path(Path.cwd(), output_dir)
+            safe_dir = Path(output_dir)
             safe_dir.mkdir(parents=True, exist_ok=True)
             # Write Case Studies
             for cs in case_studies:

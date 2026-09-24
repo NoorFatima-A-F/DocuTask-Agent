@@ -34,12 +34,10 @@ def get_evaluation_health() -> HealthResponse:
 
 
 @router.post("/run", response_model=PortfolioShowcaseReport)
-def run_full_evaluation(
-    output_dir: Optional[str] = Query(default=None, description="Optional custom evidence output path")
-) -> PortfolioShowcaseReport:
+def run_full_evaluation() -> PortfolioShowcaseReport:
     """Execute all 10 evaluation modules, compute 6-pillar score, and export portfolio evidence."""
     try:
-        report = _runtime.execute_all(output_dir=output_dir)
+        report = _runtime.execute_all()
         return report
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Evaluation run failed: {str(e)}")

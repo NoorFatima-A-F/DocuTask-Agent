@@ -48,7 +48,7 @@
       "details": {
         "prompt_injection_resistance_pct": 100.0
       },
-      "timestamp": "2026-09-18T17:09:25.939432+00:00"
+      "timestamp": "2026-09-24T20:42:55.688517+00:00"
     },
     {
       "check_id": "CHK-6H-02",
@@ -59,7 +59,7 @@
       "details": {
         "tenant_data_leakage_events": 0
       },
-      "timestamp": "2026-09-18T17:09:25.939486+00:00"
+      "timestamp": "2026-09-24T20:42:55.688542+00:00"
     },
     {
       "check_id": "CHK-6H-03",
@@ -70,7 +70,7 @@
       "details": {
         "rbac_privilege_escalations_prevented": 120
       },
-      "timestamp": "2026-09-18T17:09:25.939578+00:00"
+      "timestamp": "2026-09-24T20:42:55.688567+00:00"
     },
     {
       "check_id": "CHK-6H-04",
@@ -81,8 +81,8 @@
       "details": {
         "pii_redaction_verified": true
       },
-      "timestamp": "2026-09-18T17:09:25.939637+00:00"
+      "timestamp": "2026-09-24T20:42:55.688588+00:00"
     }
   ],
-  "timestamp": "2026-09-18T17:09:25.939672+00:00"
+  "timestamp": "2026-09-24T20:42:55.688603+00:00"
 }
