@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:11.875675+00:00",
-  "execution_timestamp": "2026-09-24T21:55:11.875714+00:00",
+  "timestamp": "2026-09-24T22:20:00.216153+00:00",
+  "execution_timestamp": "2026-09-24T22:20:00.216180+00:00",
   "summary": "",
   "report_title": "Throughput Scaling & Worker Elasticity Report",
   "scaling_curve": [

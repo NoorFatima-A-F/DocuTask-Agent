@@ -48,7 +48,7 @@
       "details": {
         "data_loss_detected": false
       },
-      "timestamp": "2026-09-24T22:06:18.539472+00:00"
+      "timestamp": "2026-09-24T22:19:45.092472+00:00"
     },
     {
       "check_id": "CHK-5I-02",
@@ -59,7 +59,7 @@
       "details": {
         "avg_recovery_time_sec": 2.2
       },
-      "timestamp": "2026-09-24T22:06:18.539503+00:00"
+      "timestamp": "2026-09-24T22:19:45.092485+00:00"
     },
     {
       "check_id": "CHK-5I-03",
@@ -70,7 +70,7 @@
       "details": {
         "compensation_success_pct": 100.0
       },
-      "timestamp": "2026-09-24T22:06:18.539534+00:00"
+      "timestamp": "2026-09-24T22:19:45.092499+00:00"
     },
     {
       "check_id": "CHK-5I-04",
@@ -81,8 +81,8 @@
       "details": {
         "escalation_verified": true
       },
-      "timestamp": "2026-09-24T22:06:18.539565+00:00"
+      "timestamp": "2026-09-24T22:19:45.092513+00:00"
     }
   ],
-  "timestamp": "2026-09-24T22:06:18.539589+00:00"
+  "timestamp": "2026-09-24T22:19:45.092522+00:00"
 }

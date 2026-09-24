@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:54:53.994436+00:00",
-  "execution_timestamp": "2026-09-24T21:54:53.994479+00:00",
+  "timestamp": "2026-09-24T22:19:46.898988+00:00",
+  "execution_timestamp": "2026-09-24T22:19:46.899010+00:00",
   "summary": "All preflight readiness gates passed; platform fully instrumented and ready for chaos testing.",
   "report_title": "Chaos Readiness Validation Report",
   "monitoring": "available",

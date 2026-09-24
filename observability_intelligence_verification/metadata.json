@@ -3,7 +3,7 @@
   "phase": "3I.9",
   "capability": "Predictive Reliability Intelligence",
   "framework_phase": "Phase 3I.9 \u2014 Observability Intelligence, Predictive Reliability & AIOps Maturity",
-  "exported_at": "2026-09-24T21:55:22.757694+00:00",
+  "exported_at": "2026-09-24T22:20:08.171890+00:00",
   "target_directory": "observability_intelligence_verification",
   "overall_certification_tier": "Predictive Reliability Ready",
   "overall_score_pct": 100.0,
@@ -78,7 +78,7 @@
     "certification_report.json": {
       "file_path": "observability_intelligence_verification\\certification_report.json",
       "file_size_bytes": 1718,
-      "sha256_hash": "ea22ad571e9695f34053e6db5bd355c388c0e8df96eb6b10946e788735f11b11"
+      "sha256_hash": "c3ef342b848864237ca16cc31b79ff9b837aac5a6bffa542f8820d3316022826"
     }
   }
 }

@@ -17,13 +17,13 @@ _runtime = BackupCertificationRuntime()
 
 
 @router.post("/certify", response_model=Dict[str, Any])
-async def execute_backup_certification(output_dir: str = "backup_certification"):
+async def execute_backup_certification():
     """
     Executes the complete Backup Readiness Certification pipeline and evaluates CI/CD deployment approval.
     """
     try:
         runtime = BackupCertificationRuntime()
-        results = runtime.execute_full_certification(output_dir=output_dir)
+        results = runtime.execute_full_certification(output_dir="backup_certification")
         scorecard = results["scorecard"]
         return {
             "status": "COMPLETED",

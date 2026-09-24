@@ -40,8 +40,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:16.107116+00:00",
-  "execution_timestamp": "2026-09-24T21:55:16.107147+00:00",
+  "timestamp": "2026-09-24T22:20:03.322752+00:00",
+  "execution_timestamp": "2026-09-24T22:20:03.322794+00:00",
   "summary": "All 4 core enterprise SLAs formally specified with measurable thresholds and violation actions.",
   "report_title": "Performance SLA Definition Report",
   "total_slas_defined": 4,

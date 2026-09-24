@@ -8,7 +8,7 @@
     "unencrypted_assets": 0,
     "failed_backups_last_30d": 0,
     "success_rate_percent": 100.0,
-    "last_successful_backup_iso": "2026-09-24T21:54:53.008196+00:00",
+    "last_successful_backup_iso": "2026-09-24T22:19:46.052333+00:00",
     "backup_cadence": "CONTINUOUS_WAL_AND_DAILY_SNAPSHOTS"
   },
   "recovery_metrics": {
@@ -51,5 +51,5 @@
       "threshold": "> 0 in 1h"
     }
   ],
-  "last_certified_timestamp": "2026-09-24T21:54:53.008196+00:00"
+  "last_certified_timestamp": "2026-09-24T22:19:46.052333+00:00"
 }

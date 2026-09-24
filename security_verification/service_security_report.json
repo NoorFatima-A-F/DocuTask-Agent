@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:08.250360+00:00",
-  "execution_timestamp": "2026-09-24T21:55:08.250371+00:00",
+  "timestamp": "2026-09-24T22:19:57.693603+00:00",
+  "execution_timestamp": "2026-09-24T22:19:57.693611+00:00",
   "summary": "Service-to-service security verified: Internal authentication, mTLS, and rogue worker rejection enforced.",
   "report_title": "Service-to-Service Security Report",
   "internal_authentication_enforced": true,

@@ -11,7 +11,7 @@
       "to_state": "STARTING",
       "trigger_event": "Process bootstrap initiated",
       "is_valid_transition": true,
-      "transition_timestamp": "2026-09-24T21:55:19.172913+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580133+00:00"
     },
     {
       "transition_id": "TRANS_002",
@@ -20,7 +20,7 @@
       "to_state": "READY",
       "trigger_event": "Readiness probes passed",
       "is_valid_transition": true,
-      "transition_timestamp": "2026-09-24T21:55:19.172965+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580165+00:00"
     },
     {
       "transition_id": "TRANS_003",
@@ -29,7 +29,7 @@
       "to_state": "UNHEALTHY",
       "trigger_event": "Connection pool exhausted",
       "is_valid_transition": true,
-      "transition_timestamp": "2026-09-24T21:55:19.172988+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580181+00:00"
     },
     {
       "transition_id": "TRANS_004",
@@ -38,7 +38,7 @@
       "to_state": "RECOVERING",
       "trigger_event": "Recovery policy triggered (pool recycle)",
       "is_valid_transition": true,
-      "transition_timestamp": "2026-09-24T21:55:19.173010+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580197+00:00"
     },
     {
       "transition_id": "TRANS_005",
@@ -47,7 +47,7 @@
       "to_state": "READY",
       "trigger_event": "Post-recovery transactional probe verified",
       "is_valid_transition": true,
-      "transition_timestamp": "2026-09-24T21:55:19.173033+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580212+00:00"
     },
     {
       "transition_id": "TRANS_006",
@@ -56,7 +56,7 @@
       "to_state": "DEGRADED",
       "trigger_event": "Queue latency exceeded 500ms SLA",
       "is_valid_transition": true,
-      "transition_timestamp": "2026-09-24T21:55:19.173063+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580229+00:00"
     },
     {
       "transition_id": "TRANS_007",
@@ -65,7 +65,7 @@
       "to_state": "RECOVERING",
       "trigger_event": "Worker horizontal auto-scale initiated",
       "is_valid_transition": true,
-      "transition_timestamp": "2026-09-24T21:55:19.173093+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580246+00:00"
     },
     {
       "transition_id": "TRANS_008",
@@ -74,7 +74,7 @@
       "to_state": "READY",
       "trigger_event": "Queue depth normalized to 0",
       "is_valid_transition": true,
-      "transition_timestamp": "2026-09-24T21:55:19.173126+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580261+00:00"
     },
     {
       "transition_id": "TRANS_009_REJECTED",
@@ -83,7 +83,7 @@
       "to_state": "READY",
       "trigger_event": "Direct bypass attempt without recovery probe",
       "is_valid_transition": false,
-      "transition_timestamp": "2026-09-24T21:55:19.173157+00:00"
+      "transition_timestamp": "2026-09-24T22:20:05.580278+00:00"
     }
   ],
   "state_machine_deterministic": true

@@ -3,27 +3,27 @@
   "root_cause_summary": "Connection starvation caused by runaway bulk extraction batch without pool throttling.",
   "timeline_events": [
     {
-      "time": "2026-09-24T21:54:35.133067",
+      "time": "2026-09-24T22:19:21.280451",
       "event": "Anomaly detected in PostgreSQL latency metric"
     },
     {
-      "time": "2026-09-24T21:54:40.133067",
+      "time": "2026-09-24T22:19:26.280451",
       "event": "P1 Incident triggered and owner auto-assigned"
     },
     {
-      "time": "2026-09-24T21:54:45.133067",
+      "time": "2026-09-24T22:19:31.280451",
       "event": "Automated recovery plan initiated"
     },
     {
-      "time": "2026-09-24T21:55:00.133067",
+      "time": "2026-09-24T22:19:46.280451",
       "event": "PostgreSQL service restarted and pool refreshed"
     },
     {
-      "time": "2026-09-24T21:55:10.133067",
+      "time": "2026-09-24T22:19:56.280451",
       "event": "Synthetic validation test passed (100% healthy)"
     },
     {
-      "time": "2026-09-24T21:55:20.133067",
+      "time": "2026-09-24T22:20:06.280451",
       "event": "Traffic restored and incident marked resolved"
     }
   ],

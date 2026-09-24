@@ -9,7 +9,7 @@
       "severity": "WARNING",
       "confidence": 0.92,
       "detection_method": "statistical_zscore",
-      "timestamp": "2026-09-24T21:55:27.373112+00:00"
+      "timestamp": "2026-09-24T22:20:11.234363+00:00"
     },
     {
       "metric": "queue.depth",
@@ -19,7 +19,7 @@
       "severity": "CRITICAL",
       "confidence": 0.95,
       "detection_method": "trend_slope",
-      "timestamp": "2026-09-24T21:55:27.373112+00:00"
+      "timestamp": "2026-09-24T22:20:11.234363+00:00"
     },
     {
       "metric": "db.connection_usage",
@@ -29,7 +29,7 @@
       "severity": "WARNING",
       "confidence": 0.99,
       "detection_method": "threshold",
-      "timestamp": "2026-09-24T21:55:27.373112+00:00"
+      "timestamp": "2026-09-24T22:20:11.234363+00:00"
     }
   ],
   "statistical_detection_active": true,

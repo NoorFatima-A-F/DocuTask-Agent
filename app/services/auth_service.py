@@ -52,12 +52,12 @@ class AuthService:
         """
         # Validate email uniqueness
         if await self.user_repo.exists_email(request.email):
-            logger.warning(f"Registration failed: Email '{sanitize_log_input(request.email)}' already exists.")
+            logger.warning("Registration failed: Email '%s' already exists.", sanitize_log_input(request.email))
             raise DuplicateResourceException("An account with this email address already exists.")
 
         # Validate username uniqueness
         if await self.user_repo.exists_username(request.username):
-            logger.warning(f"Registration failed: Username '{sanitize_log_input(request.username)}' already exists.")
+            logger.warning("Registration failed: Username '%s' already exists.", sanitize_log_input(request.username))
             raise DuplicateResourceException("An account with this username already exists.")
 
         # Hash password and persist user
@@ -70,7 +70,7 @@ class AuthService:
             "is_superuser": False,
         }
         user = await self.user_repo.create(user_data)
-        logger.info(f"User successfully registered: ID={sanitize_log_input(user.id)}, Username={sanitize_log_input(user.username)}")
+        logger.info("User successfully registered: ID=%s, Username=%s", sanitize_log_input(user.id), sanitize_log_input(user.username))
         return UserResponse.model_validate(user)
 
     async def login(self, request: LoginRequest) -> TokenResponse:
@@ -87,11 +87,11 @@ class AuthService:
             user = await self.user_repo.get_by_username(identifier)
 
         if not user or not verify_password(request.password, user.hashed_password):
-            logger.warning(f"Login attempt failed for identifier: '{sanitize_log_input(identifier)}'")
+            logger.warning("Login attempt failed for identifier: '%s'", sanitize_log_input(identifier))
             raise InvalidCredentialsException("Invalid email/username or password.")
 
         if not user.is_active:
-            logger.warning(f"Login failed: User account '{sanitize_log_input(user.id)}' is deactivated.")
+            logger.warning("Login failed: User account '%s' is deactivated.", sanitize_log_input(user.id))
             raise AccessDeniedException("User account is inactive. Please contact support.")
 
         # Generate tokens
@@ -107,7 +107,7 @@ class AuthService:
             "revoked": False
         })
 
-        logger.info(f"User logged in successfully: ID={user.id}")
+        logger.info("User logged in successfully: ID=%s", sanitize_log_input(user.id))
         return TokenResponse(
             access_token=access_token,
             refresh_token=raw_refresh_token,
@@ -132,7 +132,7 @@ class AuthService:
         # Check database for valid token record
         token_obj = await self.token_repo.get_valid_token(t_hash)
         if not token_obj:
-            logger.warning(f"Token refresh failed: Revoked or invalid token presented for user {user_id}")
+            logger.warning("Token refresh failed: Revoked or invalid token presented for user %s", sanitize_log_input(user_id))
             raise TokenException("Refresh token is invalid, expired, or has been revoked")
 
         # Verify user active status
@@ -155,7 +155,7 @@ class AuthService:
             "revoked": False
         })
 
-        logger.info(f"Refreshed token successfully for user: ID={user.id}")
+        logger.info("Refreshed token successfully for user: ID=%s", sanitize_log_input(user.id))
         return TokenResponse(
             access_token=new_access_token,
             refresh_token=new_raw_refresh_token,
@@ -171,14 +171,14 @@ class AuthService:
         token_obj = await self.token_repo.get_valid_token(t_hash)
         if token_obj:
             await self.token_repo.revoke(token_obj)
-            logger.info(f"Successfully revoked refresh token for user {token_obj.user_id}")
+            logger.info("Successfully revoked refresh token for user %s", sanitize_log_input(token_obj.user_id))
 
     async def revoke_all_sessions(self, user_id: uuid.UUID) -> None:
         """
         Revokes all active sessions / refresh tokens for a user across all devices.
         """
         await self.token_repo.revoke_all_for_user(user_id)
-        logger.info(f"Revoked all sessions for user {user_id}")
+        logger.info("Revoked all sessions for user %s", sanitize_log_input(user_id))
 
     async def change_password(self, user_id: uuid.UUID, request: ChangePasswordRequest) -> None:
         """
@@ -197,4 +197,4 @@ class AuthService:
 
         # Invalidate all user sessions on password change
         await self.token_repo.revoke_all_for_user(user_id)
-        logger.info(f"Password changed successfully for user {user_id}. All active sessions revoked.")
+        logger.info("Password changed successfully for user %s. All active sessions revoked.", sanitize_log_input(user_id))

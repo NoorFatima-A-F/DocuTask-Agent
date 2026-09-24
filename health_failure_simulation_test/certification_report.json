@@ -1,6 +1,6 @@
 {
   "report_title": "Phase 3H.11 Enterprise Health Failure Simulation & Chaos Certification",
-  "evaluated_at": "2026-09-24T21:55:17.660044+00:00",
+  "evaluated_at": "2026-09-24T22:20:04.524018+00:00",
   "certification_tier": "Chaos Verified Reliable",
   "overall_score_pct": 100.0,
   "minimum_passing_threshold_pct": 95.0,

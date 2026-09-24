@@ -8,6 +8,7 @@ from uuid import UUID
 
 from app.core.exceptions import ResourceNotFoundException
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 from app.models.user import User
 from app.repositories.document_repository import DocumentRepository
 from app.repositories.processing_job_repository import ProcessingJobRepository
@@ -48,7 +49,7 @@ class JobDispatcher:
         # Duplicate job prevention: Check if active job already running for this document
         active_job = await self.job_repo.get_active_job_for_document(document_id)
         if active_job and not force_reextract:
-            logger.warning(f"Active job '{active_job.id}' already running for document '{document_id}'")
+            logger.warning("Active job '%s' already running for document '%s'", sanitize_log_input(active_job.id), sanitize_log_input(document_id))
             raise DuplicateJobException(
                 f"An active background job '{active_job.id}' is already processing this document."
             )
@@ -83,7 +84,7 @@ class JobDispatcher:
         )
         await self.queue.enqueue(task)
 
-        logger.info(f"Dispatched background job '{job_record.id}' for document '{document_id}'")
+        logger.info("Dispatched background job '%s' for document '%s'", sanitize_log_input(job_record.id), sanitize_log_input(document_id))
         return ProcessingJobResponse.model_validate(job_record)
 
     async def get_job_status(self, job_id: UUID, owner: User) -> ProcessingJobResponse:

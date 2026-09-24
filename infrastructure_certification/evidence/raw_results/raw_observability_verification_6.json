@@ -1,11 +1,11 @@
 {
   "source_phase": "observability_verification",
-  "collected_at": "2026-09-24T21:55:06.713415+00:00",
+  "collected_at": "2026-09-24T22:19:56.537570+00:00",
   "evidence_count": 1,
   "raw_payloads": [
     {
       "report_title": "Part 3I Unified Enterprise Observability Infrastructure Certification",
-      "evaluated_at": "2026-09-24T21:44:39.166442+00:00",
+      "evaluated_at": "2026-09-24T21:55:22.386700+00:00",
       "logging_score_pct": 100.0,
       "metrics_score_pct": 100.0,
       "overall_score_pct": 100.0,

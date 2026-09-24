@@ -3,7 +3,7 @@
   "version": "3.15.0",
   "commit": "HEAD",
   "environment": "Enterprise Cloud Readiness & Multi-Cloud Lab",
-  "timestamp": "2026-09-24T21:54:55.635829+00:00",
+  "timestamp": "2026-09-24T22:19:48.162742+00:00",
   "overall_score": 100.0,
   "certification_tier": "Cloud Native Ready",
   "cloud_targets": [
@@ -16,169 +16,169 @@
     {
       "filename": "architecture_report.json",
       "report_title": "Architecture Report",
-      "sha256": "a2764a9257905f900bf293f51fa02d3ab2b44f63d14bf5b582c01bd42cfe4603",
+      "sha256": "279efc567f19a01c801c06b1b83a284eb9ccc1b83ec75dc6db49932c2d825364",
       "size_bytes": 3456
     },
     {
       "filename": "autoscaling_report.json",
       "report_title": "Autoscaling Report",
-      "sha256": "7c68dfd1b5a8328c7b5d5c6992543aaba0702e90467e61d7b9c1b2bd78c35243",
+      "sha256": "813dd791a36de4b92e8a598d780778690a11ef52d9b8e86fe6d18e80e92be7c2",
       "size_bytes": 2595
     },
     {
       "filename": "cloud_architecture_assessment.json",
       "report_title": "Cloud Architecture Assessment",
-      "sha256": "a2764a9257905f900bf293f51fa02d3ab2b44f63d14bf5b582c01bd42cfe4603",
+      "sha256": "279efc567f19a01c801c06b1b83a284eb9ccc1b83ec75dc6db49932c2d825364",
       "size_bytes": 3456
     },
     {
       "filename": "cloud_certification.json",
       "report_title": "Cloud Certification",
-      "sha256": "3f58cdbd8d22d64f82a4af8be0c3c9b5dbde0385b0bdb5801b1298bb09ebeca1",
-      "size_bytes": 1911
+      "sha256": "722cd066bc2c6022992337b4937a67761b9b80725da9812c063495ab4c69bfb5",
+      "size_bytes": 1910
     },
     {
       "filename": "cloud_observability_report.json",
       "report_title": "Cloud Observability Report",
-      "sha256": "17e5b97638153ae5d2375fb777bfe2888b59ec05ce83b9282db4b635f93ce043",
+      "sha256": "99771d8fc6486d2dd83b0ab18d870091834bec17b32317ab9c6c50a5c4e696d3",
       "size_bytes": 2709
     },
     {
       "filename": "cloud_portability_report.json",
       "report_title": "Cloud Portability Report",
-      "sha256": "9c1605d041ad4b176f71213c3cdd8158cb3e077cc2ef99f92024f0d1d6775461",
+      "sha256": "958505e25a58c05ac2a2c50c474d616bcdf6ea47f15e54dd2ee3a81d47c6d17b",
       "size_bytes": 2730
     },
     {
       "filename": "cloud_readiness_scorecard.json",
       "report_title": "Cloud Readiness Scorecard",
-      "sha256": "3f58cdbd8d22d64f82a4af8be0c3c9b5dbde0385b0bdb5801b1298bb09ebeca1",
-      "size_bytes": 1911
+      "sha256": "722cd066bc2c6022992337b4937a67761b9b80725da9812c063495ab4c69bfb5",
+      "size_bytes": 1910
     },
     {
       "filename": "cloud_secret_report.json",
       "report_title": "Cloud Secret Report",
-      "sha256": "1a34317947e8393765c0bff1c2834a7b2553b9674fe6ba9210569135a2ed7590",
+      "sha256": "1c8b72fdd7d6d002c7a8732024cdd3253294918aebb4ad070e027912c35fd7f3",
       "size_bytes": 2658
     },
     {
       "filename": "cloud_security_report.json",
       "report_title": "Cloud Security Report",
-      "sha256": "72f3855d90f722007e2e41ca178bce2238b6792499893d0456357777efab4f5e",
+      "sha256": "a332da45b739ea6fc5b93d472942edacf2e993d4ee0b28624a62792ed082f3c4",
       "size_bytes": 3007
     },
     {
       "filename": "cloud_storage_report.json",
       "report_title": "Cloud Storage Report",
-      "sha256": "d8904bbac8307f0599d1dba55f682803e0ddd05c29e7cd5360f948caa0f0e83a",
+      "sha256": "1143eaacde84426e048fe92963d6f4872d2527144c1aaf527dddfba2c497aebf",
       "size_bytes": 2678
     },
     {
       "filename": "compute_report.json",
       "report_title": "Compute Report",
-      "sha256": "914e9146e9a015220ae7f8bd7155da551fa8588fefd7f8764dde147dff7d13d9",
+      "sha256": "956dde5a68090995d6a2873c2f27e9b726a514a01c6be73406ec67653bb6ea17",
       "size_bytes": 2486
     },
     {
       "filename": "compute_resource_report.json",
       "report_title": "Compute Resource Report",
-      "sha256": "914e9146e9a015220ae7f8bd7155da551fa8588fefd7f8764dde147dff7d13d9",
+      "sha256": "956dde5a68090995d6a2873c2f27e9b726a514a01c6be73406ec67653bb6ea17",
       "size_bytes": 2486
     },
     {
       "filename": "container_cloud_report.json",
       "report_title": "Container Cloud Report",
-      "sha256": "07c15096dde31c80ed306b4dbf882ade4af344dcf0cb9395438c1ba067510929",
+      "sha256": "bce9833bc613190e43077e0eb882f9fde24cd8c1eeb3cafb7b8305ad2879f8b2",
       "size_bytes": 3195
     },
     {
       "filename": "container_report.json",
       "report_title": "Container Report",
-      "sha256": "07c15096dde31c80ed306b4dbf882ade4af344dcf0cb9395438c1ba067510929",
+      "sha256": "bce9833bc613190e43077e0eb882f9fde24cd8c1eeb3cafb7b8305ad2879f8b2",
       "size_bytes": 3195
     },
     {
       "filename": "database_report.json",
       "report_title": "Database Report",
-      "sha256": "818eade72931bfdddeb5f4c5e67ab8a5daa5cd9d13deb423469ef10ba9170f6b",
+      "sha256": "1a663e13ead0d9bb44f931590de3e56586838e6ba5acee83b638c5e08dfe9617",
       "size_bytes": 2543
     },
     {
       "filename": "iac_verification_report.json",
       "report_title": "Iac Verification Report",
-      "sha256": "20a9fa8ba135ac1979de408db18d70b2f93757352f06ab151a91240a05a6dbbb",
+      "sha256": "28f1669cc36ab15170f70c6e8021840084b4e0491272bde7881d909ba656ac33",
       "size_bytes": 2750
     },
     {
       "filename": "kubernetes_readiness_report.json",
       "report_title": "Kubernetes Readiness Report",
-      "sha256": "eda0d2d84399efee61dd9cffd70c7740c85a9a8c69b6b79ff1a0ab67371011dd",
+      "sha256": "fd5da4d1de91ece46aaa8cd24136800d0a75e78cb9c157c6f073ebdf8aeefce2",
       "size_bytes": 3306
     },
     {
       "filename": "kubernetes_report.json",
       "report_title": "Kubernetes Report",
-      "sha256": "eda0d2d84399efee61dd9cffd70c7740c85a9a8c69b6b79ff1a0ab67371011dd",
+      "sha256": "fd5da4d1de91ece46aaa8cd24136800d0a75e78cb9c157c6f073ebdf8aeefce2",
       "size_bytes": 3306
     },
     {
       "filename": "managed_database_report.json",
       "report_title": "Managed Database Report",
-      "sha256": "818eade72931bfdddeb5f4c5e67ab8a5daa5cd9d13deb423469ef10ba9170f6b",
+      "sha256": "1a663e13ead0d9bb44f931590de3e56586838e6ba5acee83b638c5e08dfe9617",
       "size_bytes": 2543
     },
     {
       "filename": "migration_report.json",
       "report_title": "Migration Report",
-      "sha256": "9613f8447f79b62e657edbe797366cb9fe61ae655d7ff0d22962d6d472ae49e0",
+      "sha256": "5707c775aca22bad8963b31d12a263c420ba799749853486426c79377b4a75ad",
       "size_bytes": 3639
     },
     {
       "filename": "migration_simulation_report.json",
       "report_title": "Migration Simulation Report",
-      "sha256": "9613f8447f79b62e657edbe797366cb9fe61ae655d7ff0d22962d6d472ae49e0",
+      "sha256": "5707c775aca22bad8963b31d12a263c420ba799749853486426c79377b4a75ad",
       "size_bytes": 3639
     },
     {
       "filename": "network_report.json",
       "report_title": "Network Report",
-      "sha256": "e433023375aee38b7313c1e6b9e2dc14d61b8fc1816a21f58d5e76a95c4de1c7",
+      "sha256": "fe88fd1829f5a09f8c1706d65d0a1a3999a6fbd3f4f6f1d39389c545cc0b4c1e",
       "size_bytes": 2990
     },
     {
       "filename": "network_security_report.json",
       "report_title": "Network Security Report",
-      "sha256": "e433023375aee38b7313c1e6b9e2dc14d61b8fc1816a21f58d5e76a95c4de1c7",
+      "sha256": "fe88fd1829f5a09f8c1706d65d0a1a3999a6fbd3f4f6f1d39389c545cc0b4c1e",
       "size_bytes": 2990
     },
     {
       "filename": "scaling_report.json",
       "report_title": "Scaling Report",
-      "sha256": "7c68dfd1b5a8328c7b5d5c6992543aaba0702e90467e61d7b9c1b2bd78c35243",
+      "sha256": "813dd791a36de4b92e8a598d780778690a11ef52d9b8e86fe6d18e80e92be7c2",
       "size_bytes": 2595
     },
     {
       "filename": "scorecard.json",
       "report_title": "Scorecard",
-      "sha256": "3f58cdbd8d22d64f82a4af8be0c3c9b5dbde0385b0bdb5801b1298bb09ebeca1",
-      "size_bytes": 1911
+      "sha256": "722cd066bc2c6022992337b4937a67761b9b80725da9812c063495ab4c69bfb5",
+      "size_bytes": 1910
     },
     {
       "filename": "security_report.json",
       "report_title": "Security Report",
-      "sha256": "72f3855d90f722007e2e41ca178bce2238b6792499893d0456357777efab4f5e",
+      "sha256": "a332da45b739ea6fc5b93d472942edacf2e993d4ee0b28624a62792ed082f3c4",
       "size_bytes": 3007
     },
     {
       "filename": "storage_report.json",
       "report_title": "Storage Report",
-      "sha256": "d8904bbac8307f0599d1dba55f682803e0ddd05c29e7cd5360f948caa0f0e83a",
+      "sha256": "1143eaacde84426e048fe92963d6f4872d2527144c1aaf527dddfba2c497aebf",
       "size_bytes": 2678
     },
     {
       "filename": "worker_scaling_report.json",
       "report_title": "Worker Scaling Report",
-      "sha256": "255770cdaabd619810753911f85c636a4fff8b748e7ed04f77f82ff9a7e3e14f",
+      "sha256": "fb30bf35ae62453b0e1ebbd5f74a0fdd597ba3519b928a731a026276cf7a715d",
       "size_bytes": 2701
     }
   ]

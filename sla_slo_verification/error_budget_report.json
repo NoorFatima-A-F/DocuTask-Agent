@@ -43,8 +43,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:16.113866+00:00",
-  "execution_timestamp": "2026-09-24T21:55:16.113894+00:00",
+  "timestamp": "2026-09-24T22:20:03.328387+00:00",
+  "execution_timestamp": "2026-09-24T22:20:03.328406+00:00",
   "summary": "SRE error budgets, burn rate calculation, and multi-window exhaustion guards verified.",
   "report_title": "SRE Error Budget Calculation Report",
   "monthly_budget_minutes": 43.2,

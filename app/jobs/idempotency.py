@@ -22,5 +22,5 @@ class IdempotencyEngine:
         version = processing_version or cls.DEFAULT_PROCESSING_VERSION
         raw_key = f"{document_hash}:{version}"
         idempotency_key = hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
-        logger.debug(f"Generated Idempotency Key: '{sanitize_log_input(idempotency_key[:16])}...' for doc hash '{sanitize_log_input(document_hash[:8])}...'")
+        logger.debug("Generated Idempotency Key: '%s...' for doc hash '%s...'", sanitize_log_input(idempotency_key[:16]), sanitize_log_input(document_hash[:8]))
         return idempotency_key

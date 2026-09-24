@@ -176,10 +176,10 @@ class RegionalFailoverPlanner:
 
         if all_passed:
             plan.status = FailoverStatus.APPROVED
-            logger.info(f"Failover plan '{sanitize_log_input(plan_id)}' passed preflight checks and is APPROVED.")
+            logger.info("Failover plan '%s' passed preflight checks and is APPROVED.", sanitize_log_input(plan_id))
         else:
             plan.status = FailoverStatus.FAILED
-            logger.warning(f"Failover plan '{sanitize_log_input(plan_id)}' failed preflight checks.")
+            logger.warning("Failover plan '%s' failed preflight checks.", sanitize_log_input(plan_id))
 
         return all_passed
 

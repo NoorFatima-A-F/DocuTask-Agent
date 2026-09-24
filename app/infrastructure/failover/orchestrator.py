@@ -147,7 +147,7 @@ class FailoverOrchestrator:
                 audit_trail=audit_trail,
             )
             self._execution_history[plan_id] = result
-            logger.error(f"Failover execution failed for plan '{sanitize_log_input(plan_id)}': {sanitize_log_input(str(e))}")
+            logger.error("Failover execution failed for plan '%s': %s", sanitize_log_input(plan_id), sanitize_log_input(e))
             return result
 
     def get_execution_result(self, plan_id: str) -> Optional[FailoverExecutionResult]:

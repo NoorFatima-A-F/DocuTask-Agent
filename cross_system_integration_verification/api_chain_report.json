@@ -117,7 +117,7 @@
         "stages_executed": 12,
         "all_stages_passed": true
       },
-      "timestamp": "2026-09-24T21:55:00.676118+00:00"
+      "timestamp": "2026-09-24T22:19:51.742380+00:00"
     },
     {
       "check_id": "CHK-4C-02",
@@ -128,7 +128,7 @@
       "details": {
         "silent_corruption_detected": false
       },
-      "timestamp": "2026-09-24T21:55:00.676144+00:00"
+      "timestamp": "2026-09-24T22:19:51.742398+00:00"
     },
     {
       "check_id": "CHK-4C-03",
@@ -139,7 +139,7 @@
       "details": {
         "header_propagation_rate_pct": 100.0
       },
-      "timestamp": "2026-09-24T21:55:00.676167+00:00"
+      "timestamp": "2026-09-24T22:19:51.742414+00:00"
     },
     {
       "check_id": "CHK-4C-04",
@@ -151,8 +151,8 @@
         "total_latency_ms": 362.8,
         "sla_limit_ms": 500.0
       },
-      "timestamp": "2026-09-24T21:55:00.676203+00:00"
+      "timestamp": "2026-09-24T22:19:51.742441+00:00"
     }
   ],
-  "timestamp": "2026-09-24T21:55:00.676217+00:00"
+  "timestamp": "2026-09-24T22:19:51.742451+00:00"
 }

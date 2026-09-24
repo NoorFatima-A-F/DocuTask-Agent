@@ -116,7 +116,7 @@ class OCRService:
             return doc_content
 
         except Exception as exc:
-            logger.error(f"OCR text extraction failed for document '{sanitize_log_input(document_id)}': {str(exc)}")
+            logger.error(f"OCR text extraction failed for document '{sanitize_log_input(document_id)}': {sanitize_log_input(exc)}")
             await self.doc_repo.update_status(doc, "OCR_FAILED")
             raise exc
 

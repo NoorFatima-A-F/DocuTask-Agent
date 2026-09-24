@@ -6,7 +6,7 @@
     {
       "file_name": "metadata.json",
       "relative_path": "metadata.json",
-      "sha256_hash": "e96134c03e79cd4c5c44a1d2ebad06b4475f1e55d40da6f4bc16f79a4df6e882",
+      "sha256_hash": "8e65cf5a72624260d26623d147852204517fe5282d90981683d4a0e87fe28958",
       "size_bytes": 436,
       "verified": true
     },
@@ -83,7 +83,7 @@
     {
       "file_name": "certification_report.json",
       "relative_path": "certification_report.json",
-      "sha256_hash": "9989ff34330be89444ee89a2904bbb0ee4156f8065957939c366414fc9851e26",
+      "sha256_hash": "76f284310111379db3cb00bb8feea22e103e499afe568c087b296afaee997ec3",
       "size_bytes": 431,
       "verified": true
     }

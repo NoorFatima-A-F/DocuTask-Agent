@@ -24,6 +24,6 @@
     "ci_cd_gate_minimum_score": 90.0,
     "mission_critical_threshold": 95.0,
     "status": "CERTIFIED",
-    "execution_duration_ms": 3.695700001117075
+    "execution_duration_ms": 3.134499998850515
   }
 }

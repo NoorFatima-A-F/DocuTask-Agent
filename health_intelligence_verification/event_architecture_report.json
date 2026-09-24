@@ -24,7 +24,7 @@
       "type": "SERVICE_DOWN",
       "severity": "CRITICAL",
       "component": "fastapi-core-gateway",
-      "timestamp": "2026-09-24T21:55:05.594095+00:00",
+      "timestamp": "2026-09-24T22:19:55.473304+00:00",
       "source": "/live probe timeout",
       "metrics": {
         "http_response_code": 503,
@@ -41,7 +41,7 @@
       "type": "DEPENDENCY_FAILURE",
       "severity": "CRITICAL",
       "component": "postgres-database",
-      "timestamp": "2026-09-24T21:55:05.594095+00:00",
+      "timestamp": "2026-09-24T22:19:55.473304+00:00",
       "source": "connection_pool_monitor",
       "metrics": {
         "active_pool_connections": 100,
@@ -55,7 +55,7 @@
       "type": "HIGH_LATENCY",
       "severity": "HIGH",
       "component": "ocr-raster-pipeline",
-      "timestamp": "2026-09-24T21:55:05.594095+00:00",
+      "timestamp": "2026-09-24T22:19:55.473304+00:00",
       "source": "tesseract_exec_timer",
       "metrics": {
         "p95_page_raster_ms": 4200.0,
@@ -71,7 +71,7 @@
       "type": "RESOURCE_EXHAUSTION",
       "severity": "HIGH",
       "component": "celery-worker-pool",
-      "timestamp": "2026-09-24T21:55:05.594095+00:00",
+      "timestamp": "2026-09-24T22:19:55.473304+00:00",
       "source": "cgroup_memory_poller",
       "metrics": {
         "rss_memory_bytes": 3950000000,
@@ -85,7 +85,7 @@
       "type": "QUEUE_OVERFLOW",
       "severity": "MEDIUM",
       "component": "redis-task-queue",
-      "timestamp": "2026-09-24T21:55:05.594095+00:00",
+      "timestamp": "2026-09-24T22:19:55.473304+00:00",
       "source": "celery_queue_depth_sensor",
       "metrics": {
         "pending_task_count": 1250,
@@ -101,7 +101,7 @@
       "type": "WORKER_FAILURE",
       "severity": "HIGH",
       "component": "celery-worker-subprocess-3",
-      "timestamp": "2026-09-24T21:55:05.594095+00:00",
+      "timestamp": "2026-09-24T22:19:55.473304+00:00",
       "source": "worker_heartbeat_supervisor",
       "metrics": {
         "missed_heartbeats": 5,
@@ -115,7 +115,7 @@
       "type": "AI_PROVIDER_FAILURE",
       "severity": "HIGH",
       "component": "gemini-1.5-flash-client",
-      "timestamp": "2026-09-24T21:55:05.594095+00:00",
+      "timestamp": "2026-09-24T22:19:55.473304+00:00",
       "source": "gemini_api_telemetry",
       "metrics": {
         "http_status_code": 429,

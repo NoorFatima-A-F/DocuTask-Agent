@@ -3,7 +3,7 @@
   "version": "v3.10.0",
   "commit": "git-head-verified",
   "environment": "Performance-Testing-Cluster",
-  "timestamp": "2026-09-24T21:55:26.170228+00:00",
+  "timestamp": "2026-09-24T22:20:10.324576+00:00",
   "tool_versions": [
     "k6 v0.50.0",
     "Prometheus v2.50.0",
@@ -56,7 +56,7 @@
       "verified": true
     },
     "certification_report.json": {
-      "sha256": "32c2c5e752dbe991152211a9c0d2701dbe8e1ffb77531371286518ed9627f3b7",
+      "sha256": "9d149e403585a8cd540cb86660b9963cddb4ad6727ee5887391baf5c76dc9928",
       "bytes": 2362,
       "verified": true
     }

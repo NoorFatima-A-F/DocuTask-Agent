@@ -1,41 +1,41 @@
 {
   "incident_id": "INC-2026-0915",
   "service_name": "docutask-api",
-  "start_time": "2026-09-24T21:55:19.937713+00:00",
-  "end_time": "2026-09-24T21:55:19.938836+00:00",
+  "start_time": "2026-09-24T22:20:06.132442+00:00",
+  "end_time": "2026-09-24T22:20:06.133282+00:00",
   "root_cause": "Transient queue backlog and dependency latency spike",
   "total_duration_seconds": 12.4,
   "timeline_entries": [
     {
-      "timestamp": "2026-09-24T21:55:19.937713+00:00",
+      "timestamp": "2026-09-24T22:20:06.132442+00:00",
       "phase": "Detection",
       "event": "Transition: STARTING -> READY",
       "impact": "Service startup sequence and internal validation complete",
       "action_taken": "Triggered by startup_init_complete"
     },
     {
-      "timestamp": "2026-09-24T21:55:19.938746+00:00",
+      "timestamp": "2026-09-24T22:20:06.133206+00:00",
       "phase": "Escalation",
       "event": "Transition: READY -> DEGRADED",
       "impact": "Gemini AI latency elevation detected",
       "action_taken": "Triggered by ai_latency_probe"
     },
     {
-      "timestamp": "2026-09-24T21:55:19.938778+00:00",
+      "timestamp": "2026-09-24T22:20:06.133233+00:00",
       "phase": "Escalation",
       "event": "Transition: DEGRADED -> NOT_READY",
       "impact": "PostgreSQL connection dropped",
       "action_taken": "Triggered by db_connection_failure"
     },
     {
-      "timestamp": "2026-09-24T21:55:19.938807+00:00",
+      "timestamp": "2026-09-24T22:20:06.133258+00:00",
       "phase": "Mitigation",
       "event": "Transition: NOT_READY -> RECOVERING",
       "impact": "Database connection pool restored, validating transactions",
       "action_taken": "Triggered by db_pool_restored"
     },
     {
-      "timestamp": "2026-09-24T21:55:19.938836+00:00",
+      "timestamp": "2026-09-24T22:20:06.133282+00:00",
       "phase": "Resolution",
       "event": "Transition: RECOVERING -> READY",
       "impact": "All validation prerequisites satisfied",

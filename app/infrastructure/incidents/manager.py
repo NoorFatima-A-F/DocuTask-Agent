@@ -95,7 +95,7 @@ class IncidentManager:
                 content=f"Immediate response required for {components}",
             )
 
-        logger.info(f"Created incident '{sanitize_log_input(incident_id)}' with severity {severity.value}")
+        logger.info("Created incident '%s' with severity %s", sanitize_log_input(incident_id), severity.value)
         return incident
 
     def get_incident(self, incident_id: str) -> Optional[Incident]:

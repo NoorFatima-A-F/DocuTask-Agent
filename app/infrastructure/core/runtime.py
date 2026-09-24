@@ -127,7 +127,7 @@ class InfrastructureRuntime:
         if not inst:
             raise InfrastructureError(f"Service instance {instance_id} not found.")
 
-        logger.warning("Initiating self-healing recovery for service %s", instance_id)
+        logger.warning("Initiating self-healing recovery for service %s", sanitize_log_input(instance_id))
         inst.state = RuntimeLifecycleStateMachine.transition(inst.state, RuntimeState.RECOVERING)
         inst.recovery_attempts += 1
 
@@ -135,7 +135,7 @@ class InfrastructureRuntime:
         inst.state = RuntimeLifecycleStateMachine.transition(inst.state, RuntimeState.RUNNING)
         inst.error_message = None
         inst.updated_at = datetime.now(timezone.utc)
-        logger.info("Service %s successfully recovered to RUNNING", instance_id)
+        logger.info("Service %s successfully recovered to RUNNING", sanitize_log_input(instance_id))
         return inst
 
     def get_instance(self, instance_id: str) -> Optional[ServiceInstance]:

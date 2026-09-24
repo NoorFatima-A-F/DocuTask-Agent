@@ -4,7 +4,7 @@
   "version": "3.17.0",
   "commit": "HEAD",
   "environment": "Enterprise Production Readiness Lab",
-  "timestamp": "2026-09-24T21:55:07.262473+00:00",
+  "timestamp": "2026-09-24T22:19:56.981877+00:00",
   "overall_score": 100.0,
   "certification": "Enterprise Infrastructure Ready",
   "deployment_approved": true,
@@ -12,7 +12,7 @@
     {
       "filename": "Infrastructure_Readiness_Report.md",
       "report_title": "Infrastructure Readiness Report",
-      "sha256": "a56cf696f41e19571e49f8c0495b2758e98d9799e35cff0b6e3316a94e6c3f3e",
+      "sha256": "ecda3374f83dba92d4058f7378436fd606099376d04a1cf35435ca9ed5356551",
       "size_bytes": 2872
     },
     {
@@ -24,79 +24,79 @@
     {
       "filename": "evidence/raw_results/raw_chaos_verification_4.json",
       "report_title": "Raw Chaos Verification 4",
-      "sha256": "0238bfd83a64212a962b640fa203846092e64ca4a07616bfbf735b7606734238",
+      "sha256": "55f709b029b1e6e4773c269f9fe0388511bc501ee6edb213c9ab897757088f57",
       "size_bytes": 55583
     },
     {
       "filename": "evidence/raw_results/raw_cloud_readiness_verification_2.json",
       "report_title": "Raw Cloud Readiness Verification 2",
-      "sha256": "6f7e841898eea2e53e3b7fb5e3429d4004667ebb432e3e6dba663bc73c012427",
-      "size_bytes": 89039
+      "sha256": "ee0639b3f2893147341295317325640a974da5f9b4fad8c57c09fa7f11498917",
+      "size_bytes": 89036
     },
     {
       "filename": "evidence/raw_results/raw_disaster_recovery_verification_3.json",
       "report_title": "Raw Disaster Recovery Verification 3",
-      "sha256": "c313ed80640c1ac987d660f87223c91d0fe59690e30503efdd281aec8b5f2330",
-      "size_bytes": 85631
+      "sha256": "74550c9830bb0f886829ecd4532c2bfb2b384aab9ddfde97b43cf48d70394b9d",
+      "size_bytes": 85628
     },
     {
       "filename": "evidence/raw_results/raw_observability_verification_6.json",
       "report_title": "Raw Observability Verification 6",
-      "sha256": "7abc6844c1777718a6bc00a238de6e840eb02f2fdca3488abed371184af47cb9",
+      "sha256": "9457cebb1053c91ebbffdd289a8aa1b5810b11ac75d0db1472a9d5613309704d",
       "size_bytes": 618
     },
     {
       "filename": "evidence/raw_results/raw_performance_verification_5.json",
       "report_title": "Raw Performance Verification 5",
-      "sha256": "e2fc8ab470b1a810f9e22352a9da9b493dc527d0e7399d5622e02e1b4806b23c",
+      "sha256": "31c1afced83169283dd062321e78a36499148f7057659327bc737ee9b0a8ad44",
       "size_bytes": 151645
     },
     {
       "filename": "evidence/raw_results/raw_security_verification_1.json",
       "report_title": "Raw Security Verification 1",
-      "sha256": "7df36a059aa92c8d397867820ade039a47761d03a6074eec18b49bd30d76bc64",
+      "sha256": "a6cbda2508bef46400f381669b46c7b4468f03c83967693eea05e2155257e9bd",
       "size_bytes": 81301
     },
     {
       "filename": "history/previous_scores.json",
       "report_title": "Previous Scores",
-      "sha256": "c8499ba6c93a52d949b13d0fdcf7c4f2a34e7385477a87913b82f3eadbb4a588",
+      "sha256": "4c005f8e613eb4aedf53647b0eec94e7c82fe4ab19f946943d25e0228e943401",
       "size_bytes": 363
     },
     {
       "filename": "reports/certification_report.json",
       "report_title": "Certification Report",
-      "sha256": "a652a888b24c0cb3b2479e675483a74949fc2da9dc16e3ef92b5bdf48f43d92b",
+      "sha256": "363a4612dee4942051d6406bb256421750a3811b51d5c6c0f4a10d9d42594dde",
       "size_bytes": 658
     },
     {
       "filename": "reports/readiness_report.md",
       "report_title": "Readiness Report",
-      "sha256": "a56cf696f41e19571e49f8c0495b2758e98d9799e35cff0b6e3316a94e6c3f3e",
+      "sha256": "ecda3374f83dba92d4058f7378436fd606099376d04a1cf35435ca9ed5356551",
       "size_bytes": 2872
     },
     {
       "filename": "reports/regression_report.json",
       "report_title": "Regression Report",
-      "sha256": "88a87c05cd011b77628349b4e2d6202d7468becb64aee86df70149358a7334cc",
+      "sha256": "2b4abc657fca1ece0bfdd4fbf2f381da706617af7518648703086b0cf2ab3203",
       "size_bytes": 1690
     },
     {
       "filename": "reports/risk_assessment.json",
       "report_title": "Risk Assessment",
-      "sha256": "8e15e5ac5967596662ec7752780b49be91b5e38af45c73094035fefe4cc31097",
+      "sha256": "143cdcb09d45dc2402992e6ef0b6bbf66fc2b52b6c2a375ce993f04cd77493d6",
       "size_bytes": 271
     },
     {
       "filename": "scoring/maturity_assessment.json",
       "report_title": "Maturity Assessment",
-      "sha256": "f8a80c566a7372ad7c66a9eddace10669dc7b580a99ca68a38172ca199e12295",
+      "sha256": "be5606c657b04c432a760da5bee20f9d15dc7f8051e982a44a54a915ae29f6ab",
       "size_bytes": 1070
     },
     {
       "filename": "scoring/quality_score.json",
       "report_title": "Quality Score",
-      "sha256": "b96b5a787e8cce569e085253a690e783c00bcd263d0baf90af7e44d44ad51cf5",
+      "sha256": "e307c36f0e9074537b182d8a63101a8a8630fcf104028ae29bfc05f942fef64e",
       "size_bytes": 1597
     }
   ]

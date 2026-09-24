@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:08.250820+00:00",
-  "execution_timestamp": "2026-09-24T21:55:08.250830+00:00",
+  "timestamp": "2026-09-24T22:19:57.693957+00:00",
+  "execution_timestamp": "2026-09-24T22:19:57.693965+00:00",
   "summary": "Storage security verified: All 4 buckets encrypted with KMS, public access blocked, and tenant isolation enforced.",
   "report_title": "Storage Security & Tenant Isolation Report",
   "encryption_at_rest_verified": true,

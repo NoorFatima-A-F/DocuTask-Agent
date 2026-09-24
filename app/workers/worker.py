@@ -11,6 +11,7 @@ from typing import Optional
 from app.ai.schemas import ExtractionRequest
 
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 from app.database.session import AsyncSessionLocal
 from app.repositories.ai_extraction_repository import AIExtractionRepository
 from app.repositories.document_repository import DocumentRepository
@@ -40,7 +41,7 @@ class AsyncWorkerEngine:
         if not self._running:
             self._running = True
             self._loop_task = asyncio.create_task(self._worker_loop())
-            logger.info(f"Worker Engine [{self.worker_name}] started successfully.")
+            logger.info("Worker Engine [%s] started successfully.", sanitize_log_input(self.worker_name))
 
     async def stop(self) -> None:
         """Stops worker polling loop gracefully."""
@@ -52,7 +53,7 @@ class AsyncWorkerEngine:
                     await self._loop_task
                 except asyncio.CancelledError:
                     pass
-            logger.info(f"Worker Engine [{self.worker_name}] stopped.")
+            logger.info("Worker Engine [%s] stopped.", sanitize_log_input(self.worker_name))
 
     async def _worker_loop(self) -> None:
         """Worker main polling loop."""
@@ -64,12 +65,12 @@ class AsyncWorkerEngine:
             except asyncio.CancelledError:
                 break
             except Exception as e:
-                logger.error(f"Worker Engine error in loop: {str(e)}", exc_info=True)
+                logger.error("Worker Engine error in loop: %s", sanitize_log_input(e), exc_info=True)
                 await asyncio.sleep(1.0)
 
     async def _execute_task(self, task: JobTask) -> None:
         """Executes a single job task within isolated database session."""
-        logger.info(f"Worker [{self.worker_name}] processing job '{task.job_id}' (Doc='{task.document_id}')")
+        logger.info("Worker [%s] processing job '%s' (Doc='%s')", sanitize_log_input(self.worker_name), sanitize_log_input(task.job_id), sanitize_log_input(task.document_id))
 
         async with AsyncSessionLocal() as db:
             job_repo = ProcessingJobRepository(db)
@@ -93,11 +94,11 @@ class AsyncWorkerEngine:
 
             job = await job_repo.get_by_id(task.job_id)
             if not job:
-                logger.warning(f"Job record '{task.job_id}' not found in database.")
+                logger.warning("Job record '%s' not found in database.", sanitize_log_input(task.job_id))
                 return
 
             if job.status == JobState.CANCELLED.value:
-                logger.info(f"Job '{task.job_id}' was cancelled. Skipping execution.")
+                logger.info("Job '%s' was cancelled. Skipping execution.", sanitize_log_input(task.job_id))
                 return
 
             # Increment attempt counter
@@ -122,12 +123,12 @@ class AsyncWorkerEngine:
 
             try:
                 # Step 1: OCR Text Extraction (Progress 40%)
-                logger.info(f"Job '{task.job_id}': Running OCR text extraction...")
+                logger.info("Job '%s': Running OCR text extraction...", sanitize_log_input(task.job_id))
                 await ocr_service.extract_text_for_document(task.document_id, owner, force_reextract=force)
                 await job_repo.update_status(job, status=JobState.RUNNING.value, progress=40.0)
 
                 # Step 2: AI Structured Extraction (Progress 80%)
-                logger.info(f"Job '{task.job_id}': Running AI structured extraction for type '{doc_type}'...")
+                logger.info("Job '%s': Running AI structured extraction for type '%s'...", sanitize_log_input(task.job_id), sanitize_log_input(doc_type))
                 req = ExtractionRequest(document_type=doc_type, force_reextract=force)
                 await ai_service.extract_structured_data(task.document_id, owner, req)
                 await job_repo.update_status(job, status=JobState.RUNNING.value, progress=80.0)
@@ -135,17 +136,17 @@ class AsyncWorkerEngine:
                 # Step 3: Complete Job (Progress 100%)
                 await job_repo.update_status(job, status=JobState.COMPLETED.value, progress=100.0)
                 await db.commit()
-                logger.info(f"Job '{task.job_id}' successfully COMPLETED.")
+                logger.info("Job '%s' successfully COMPLETED.", sanitize_log_input(task.job_id))
 
             except Exception as exc:
                 await db.rollback()
                 err_msg = str(exc)
-                logger.error(f"Job '{task.job_id}' execution failed: {err_msg}")
+                logger.error("Job '%s' execution failed: %s", sanitize_log_input(task.job_id), sanitize_log_input(err_msg))
 
                 # Retry Policy with Exponential Backoff
                 if job.attempts < job.max_attempts:
                     backoff_delay = 2 * (2 ** (job.attempts - 1))  # 2s, 4s, 8s
-                    logger.info(f"Scheduling retry {job.attempts}/{job.max_attempts} for job '{task.job_id}' in {backoff_delay}s")
+                    logger.info("Scheduling retry %d/%d for job '%s' in %ds", job.attempts, job.max_attempts, sanitize_log_input(task.job_id), backoff_delay)
                     await job_repo.update_status(
                         job,
                         status=JobState.RETRYING.value,
@@ -158,7 +159,7 @@ class AsyncWorkerEngine:
                     await asyncio.sleep(backoff_delay)
                     await self.queue.enqueue(task)
                 else:
-                    logger.error(f"Job '{task.job_id}' exhausted max attempts ({job.max_attempts}). Marking FAILED.")
+                    logger.error("Job '%s' exhausted max attempts (%d). Marking FAILED.", sanitize_log_input(task.job_id), job.max_attempts)
                     await job_repo.update_status(
                         job,
                         status=JobState.FAILED.value,

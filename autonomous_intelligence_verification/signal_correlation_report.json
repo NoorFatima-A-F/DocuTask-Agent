@@ -16,7 +16,7 @@
       ],
       "narrative_summary": "Provider rate throttling triggered 429 backoff in LLM router, manifesting as worker task stall and synthetic trace span delay.",
       "correlation_confidence_pct": 99.6,
-      "timestamp": "2026-09-24T21:54:47.880488+00:00"
+      "timestamp": "2026-09-24T22:19:42.109995+00:00"
     },
     {
       "cluster_id": "cluster-sig-002",
@@ -32,7 +32,7 @@
       ],
       "narrative_summary": "Batch upload job generated sudden queue depth jump, triggering auto-scale worker provisioning signal across container cluster.",
       "correlation_confidence_pct": 99.4,
-      "timestamp": "2026-09-24T21:54:47.880517+00:00"
+      "timestamp": "2026-09-24T22:19:42.110039+00:00"
     },
     {
       "cluster_id": "cluster-sig-003",
@@ -46,7 +46,7 @@
       ],
       "narrative_summary": "Cache memory reached 85% limit, leading to volatile key eviction and increased read queries directed at Aurora primary DB.",
       "correlation_confidence_pct": 99.5,
-      "timestamp": "2026-09-24T21:54:47.880536+00:00"
+      "timestamp": "2026-09-24T22:19:42.110072+00:00"
     }
   ],
   "correlation_accuracy_pct": 99.5

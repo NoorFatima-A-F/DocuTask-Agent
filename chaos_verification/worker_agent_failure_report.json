@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:54:53.995776+00:00",
-  "execution_timestamp": "2026-09-24T21:54:53.995794+00:00",
+  "timestamp": "2026-09-24T22:19:46.899831+00:00",
+  "execution_timestamp": "2026-09-24T22:19:46.899843+00:00",
   "summary": "Worker agent chaos verified: stuck task timeout recovery at 60s and strict idempotency under duplicate worker execution.",
   "report_title": "Worker Agent Failure Chaos Report",
   "stuck_task_timeout_seconds": 60.0,

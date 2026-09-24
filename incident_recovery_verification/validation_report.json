@@ -1,5 +1,5 @@
 {
-  "validation_id": "val-3daea24d",
+  "validation_id": "val-ceaedd5a",
   "liveness_status": "ALIVE",
   "liveness_passed": true,
   "readiness_status": "READY",
@@ -38,7 +38,7 @@
   ],
   "functional_test": {
     "test_name": "end_to_end_document_extraction_smoke_test",
-    "document_id": "doc-canary-deca6d",
+    "document_id": "doc-canary-82ce46",
     "upload_success": true,
     "processing_success": true,
     "extraction_success": true,
@@ -47,5 +47,5 @@
     "all_passed": true
   },
   "overall_health_validated": true,
-  "validation_timestamp": "2026-09-24 21:55:20.132873"
+  "validation_timestamp": "2026-09-24 22:20:06.280312"
 }

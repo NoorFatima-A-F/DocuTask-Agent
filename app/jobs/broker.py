@@ -30,7 +30,7 @@ class PriorityMessageBroker:
         else:
             await self.medium_queue.put(payload)
 
-        logger.info(f"Enqueued job '{sanitize_log_input(payload.get('job_id'))}' with priority '{sanitize_log_input(prio)}'")
+        logger.info("Enqueued job '%s' with priority '%s'", sanitize_log_input(payload.get('job_id')), sanitize_log_input(prio))
         return True
 
     async def dequeue(self) -> Optional[Dict[str, Any]]:

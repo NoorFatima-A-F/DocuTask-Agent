@@ -3,7 +3,7 @@
   "events_processed": 10000,
   "pipeline_crashed": false,
   "max_memory_mb": 148.5,
-  "throughput_events_per_sec": 190879.76,
+  "throughput_events_per_sec": 185025.86,
   "primary_incidents_created": 2,
   "critical_signals_preserved": true,
   "status": "PASS"

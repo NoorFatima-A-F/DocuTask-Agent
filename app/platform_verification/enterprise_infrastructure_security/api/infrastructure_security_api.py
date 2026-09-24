@@ -51,9 +51,9 @@ async def list_phases() -> List[Dict[str, str]]:
 
 @router.post("/run", response_model=VerificationManifest)
 @router.post("/verify/all", response_model=VerificationManifest)
-async def run_verification_suite(export_dir: str = "security_verification") -> VerificationManifest:
+async def run_verification_suite() -> VerificationManifest:
     """Trigger full execution of all 16 security verification phases and export evidence artifacts."""
-    manifest = await _runtime.run_all(export_dir=export_dir)
+    manifest = await _runtime.run_all(export_dir="security_verification")
     return manifest
 
 

@@ -82,9 +82,9 @@ class AuthenticationManager:
 
     @staticmethod
     def hash_key(raw_key: str) -> str:
-        """Compute secure HMAC-SHA-256 hash of plaintext key."""
-        salt = b"gov_api_key_salt_v1"
-        return hmac.new(salt, raw_key.encode("utf-8"), hashlib.sha256).hexdigest()
+        """Compute secure PBKDF2-HMAC-SHA-256 hash of plaintext key."""
+        salt = b"gov_api_key_salt_v1_pbkdf2_secure"
+        return hashlib.pbkdf2_hmac("sha256", raw_key.encode("utf-8"), salt, 100000).hex()
 
     def create_api_key(
         self,

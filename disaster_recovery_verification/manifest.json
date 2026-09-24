@@ -3,152 +3,152 @@
   "version": "3.14.0",
   "commit": "HEAD",
   "environment": "Enterprise Disaster Recovery & Continuity Lab",
-  "timestamp": "2026-09-24T21:55:02.654383+00:00",
+  "timestamp": "2026-09-24T22:19:53.235043+00:00",
   "overall_score": 100.0,
   "certification_tier": "Enterprise Disaster Recovery Ready",
   "files": [
     {
       "filename": "architecture_report.json",
       "report_title": "Architecture Report",
-      "sha256": "b5ae79e309286c48fb35da84b7b7b109d6db2f2ca68d57b23063887fc665b3a6",
+      "sha256": "18cda8fa11c10cd6dc1ff74943a16c304b8d4fd268f87afe513740ea7fa34aca",
       "size_bytes": 4662
     },
     {
       "filename": "backup_security_report.json",
       "report_title": "Backup Security Report",
-      "sha256": "f4c877761be8a00e06232a2dbcac5e000cf58e19a979076d5d1d6b91a2899f55",
+      "sha256": "415881c1ffe4a7409d699d67ced0b8d96161a575e8961e719f1a47020d074c01",
       "size_bytes": 3184
     },
     {
       "filename": "business_impact_analysis.json",
       "report_title": "Business Impact Analysis",
-      "sha256": "8f5d954758760e3008addade2b99f0af61038f19de2e3ddf84d157a52a126b71",
+      "sha256": "76a6ffa9ff49cbe0228aa0aaabae66c2d4d0b5d5b2ad1ddfef1f7a7fba0617ba",
       "size_bytes": 4428
     },
     {
       "filename": "complete_system_restore_report.json",
       "report_title": "Complete System Restore Report",
-      "sha256": "6e65e621b18140e9df4d21f4a5f2cc71b2880787869b4931f2d86644954b5163",
+      "sha256": "e001d97464879e49334f0e1a6fcc7170f5fafe3371e2abcba2f8edc0195e3c98",
       "size_bytes": 3598
     },
     {
       "filename": "configuration_recovery_report.json",
       "report_title": "Configuration Recovery Report",
-      "sha256": "c055c3df8632c844ec3566ea8130ca4e51fe934f32a6a93a8a8e19a13f99838e",
+      "sha256": "4477d87997d8536dce54e19a315c5d0252fd977149e821f1eeb861c1ac101edc",
       "size_bytes": 4355
     },
     {
       "filename": "database_backup_report.json",
       "report_title": "Database Backup Report",
-      "sha256": "2f433bc31c97e03273b2c23b79e83a122a51439ec8371f57e2670c36cdacab77",
+      "sha256": "20d3f1b056cabf6c93580d8a8ea424ce3a5446931fb241da80d1667207a16205",
       "size_bytes": 3099
     },
     {
       "filename": "database_recovery_report.json",
       "report_title": "Database Recovery Report",
-      "sha256": "2f433bc31c97e03273b2c23b79e83a122a51439ec8371f57e2670c36cdacab77",
+      "sha256": "20d3f1b056cabf6c93580d8a8ea424ce3a5446931fb241da80d1667207a16205",
       "size_bytes": 3099
     },
     {
       "filename": "disaster_recovery_architecture_report.json",
       "report_title": "Disaster Recovery Architecture Report",
-      "sha256": "b5ae79e309286c48fb35da84b7b7b109d6db2f2ca68d57b23063887fc665b3a6",
+      "sha256": "18cda8fa11c10cd6dc1ff74943a16c304b8d4fd268f87afe513740ea7fa34aca",
       "size_bytes": 4662
     },
     {
       "filename": "disaster_recovery_scorecard.json",
       "report_title": "Disaster Recovery Scorecard",
-      "sha256": "97163efc16efe1aa0ca8666797e86846670e6f138900948a5d1d2e4192df6786",
-      "size_bytes": 1662
+      "sha256": "97ccc00a6f02372168ad8d635fe2a8452a5e81ac6cf187973cdccc87f1a68d5c",
+      "size_bytes": 1661
     },
     {
       "filename": "document_storage_backup.json",
       "report_title": "Document Storage Backup",
-      "sha256": "32d3e78a5cb4148fa71a3d59bd8fb9fb78eb4f8007364c9a6b74bee24608fd29",
+      "sha256": "11949b274416cb34e730e955523d02f0517f451c12b5d0d03838a4abb7637fe9",
       "size_bytes": 2470
     },
     {
       "filename": "dr_automation_report.json",
       "report_title": "Dr Automation Report",
-      "sha256": "33bae5a564c3efdcc01784150aca89c37661b117fa224d36136ea60abf90f9c6",
+      "sha256": "fa74e615f58a7cee2b08375be15913ac7f3937e0262e4db9105f84ff48bdb655",
       "size_bytes": 2914
     },
     {
       "filename": "dr_pipeline_report.json",
       "report_title": "Dr Pipeline Report",
-      "sha256": "33bae5a564c3efdcc01784150aca89c37661b117fa224d36136ea60abf90f9c6",
+      "sha256": "fa74e615f58a7cee2b08375be15913ac7f3937e0262e4db9105f84ff48bdb655",
       "size_bytes": 2914
     },
     {
       "filename": "failure_simulation_report.json",
       "report_title": "Failure Simulation Report",
-      "sha256": "3217d4b48875d1d926dee4f3d72bf4f2b177e0d2309c23b270e90495cf65cf25",
+      "sha256": "2892791bbfaf9aa1edb0064ea8d7bfb3107912433099588d7543e1f12befaf3f",
       "size_bytes": 3299
     },
     {
       "filename": "pitr_recovery_report.json",
       "report_title": "Pitr Recovery Report",
-      "sha256": "5cc6d41e86a0d6b8faace1042ef73aab9677d2a97b1276e992f057715e86b5ab",
+      "sha256": "8d6612704861fd57ff03c427d3d57466a6a37db63ad2cf7bb99a81632d24e515",
       "size_bytes": 2342
     },
     {
       "filename": "recovery_certification.json",
       "report_title": "Recovery Certification",
-      "sha256": "97163efc16efe1aa0ca8666797e86846670e6f138900948a5d1d2e4192df6786",
-      "size_bytes": 1662
+      "sha256": "97ccc00a6f02372168ad8d635fe2a8452a5e81ac6cf187973cdccc87f1a68d5c",
+      "size_bytes": 1661
     },
     {
       "filename": "recovery_metrics.json",
       "report_title": "Recovery Metrics",
-      "sha256": "a04cea2a29833d2298e52c45fb4a479fa530292cdf60edb77a10b9d1be40aaed",
+      "sha256": "e56871d669cb3956d357a8f64c115cde8258f478d4529860e25143c0599da4ce",
       "size_bytes": 3861
     },
     {
       "filename": "recovery_objectives_report.json",
       "report_title": "Recovery Objectives Report",
-      "sha256": "6e2c039abdb370866950e8bbb5a8d2785ed434b3cb3cb4bea320191a284252b7",
+      "sha256": "021095d0051f685347e465a5546740d1f4e67fab2adb86d37ad0e833563b044b",
       "size_bytes": 2918
     },
     {
       "filename": "recovery_observability_report.json",
       "report_title": "Recovery Observability Report",
-      "sha256": "a04cea2a29833d2298e52c45fb4a479fa530292cdf60edb77a10b9d1be40aaed",
+      "sha256": "e56871d669cb3956d357a8f64c115cde8258f478d4529860e25143c0599da4ce",
       "size_bytes": 3861
     },
     {
       "filename": "restore_report.json",
       "report_title": "Restore Report",
-      "sha256": "6e65e621b18140e9df4d21f4a5f2cc71b2880787869b4931f2d86644954b5163",
+      "sha256": "e001d97464879e49334f0e1a6fcc7170f5fafe3371e2abcba2f8edc0195e3c98",
       "size_bytes": 3598
     },
     {
       "filename": "rto_rpo_report.json",
       "report_title": "Rto Rpo Report",
-      "sha256": "6e2c039abdb370866950e8bbb5a8d2785ed434b3cb3cb4bea320191a284252b7",
+      "sha256": "021095d0051f685347e465a5546740d1f4e67fab2adb86d37ad0e833563b044b",
       "size_bytes": 2918
     },
     {
       "filename": "scorecard.json",
       "report_title": "Scorecard",
-      "sha256": "97163efc16efe1aa0ca8666797e86846670e6f138900948a5d1d2e4192df6786",
-      "size_bytes": 1662
+      "sha256": "97ccc00a6f02372168ad8d635fe2a8452a5e81ac6cf187973cdccc87f1a68d5c",
+      "size_bytes": 1661
     },
     {
       "filename": "secret_recovery_report.json",
       "report_title": "Secret Recovery Report",
-      "sha256": "0fee7e08bb4bac8fc0c236562f0adbf4d60347b8fcefc93396d99dedc47cca67",
+      "sha256": "ebc671004ef4c6c9a5589cf91e5fbda4f0f3551796806f3be575ddd28e19ff88",
       "size_bytes": 3135
     },
     {
       "filename": "security_report.json",
       "report_title": "Security Report",
-      "sha256": "f4c877761be8a00e06232a2dbcac5e000cf58e19a979076d5d1d6b91a2899f55",
+      "sha256": "415881c1ffe4a7409d699d67ced0b8d96161a575e8961e719f1a47020d074c01",
       "size_bytes": 3184
     },
     {
       "filename": "storage_recovery_report.json",
       "report_title": "Storage Recovery Report",
-      "sha256": "32d3e78a5cb4148fa71a3d59bd8fb9fb78eb4f8007364c9a6b74bee24608fd29",
+      "sha256": "11949b274416cb34e730e955523d02f0517f451c12b5d0d03838a4abb7637fe9",
       "size_bytes": 2470
     }
   ]

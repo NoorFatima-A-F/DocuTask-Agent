@@ -49,7 +49,7 @@ class DeadLetterQueueEngine:
             original_payload=original_payload
         )
         cls._dlq_store[job_id] = item
-        logger.error(f"Moved permanently failed job '{sanitize_log_input(job_id)}' to DLQ: Reason='{sanitize_log_input(failure_reason)}'")
+        logger.error("Moved permanently failed job '%s' to DLQ: Reason='%s'", sanitize_log_input(job_id), sanitize_log_input(failure_reason))
         return item
 
     @classmethod
@@ -58,7 +58,7 @@ class DeadLetterQueueEngine:
         Replays a failed job from DLQ back into the active processing queue.
         """
         if job_id not in cls._dlq_store:
-            logger.warning(f"DLQ Replay failed: Job '{sanitize_log_input(job_id)}' not found in DLQ.")
+            logger.warning("DLQ Replay failed: Job '%s' not found in DLQ.", sanitize_log_input(job_id))
             return False
 
         item = cls._dlq_store.pop(job_id)
@@ -67,7 +67,7 @@ class DeadLetterQueueEngine:
         payload["attempt_count"] = 0
 
         await job_broker.enqueue(payload, priority=payload.get("priority", "HIGH"))
-        logger.info(f"Successfully replayed DLQ job '{sanitize_log_input(job_id)}' back to active queue.")
+        logger.info("Successfully replayed DLQ job '%s' back to active queue.", sanitize_log_input(job_id))
         return True
 
     @classmethod

@@ -108,14 +108,14 @@ class DocumentService:
         if len(suffixes) > 1:
             for s in suffixes[:-1]:
                 if s.lower() in self.DANGEROUS_EXTENSIONS:
-                    logger.error(f"Double extension attack detected: '{sanitize_log_input(original_filename)}'")
+                    logger.error("Double extension attack detected: '%s'", sanitize_log_input(original_filename))
                     raise ValidationAppException("Malicious file naming structure detected")
 
         # 7. MIME type check
         clean_mime = mime_type.lower().split(";")[0].strip() if mime_type else ""
         allowed_mimes = [m.lower() for m in settings.ALLOWED_MIME_TYPES]
         if clean_mime not in allowed_mimes:
-            logger.warning(f"Unsupported MIME type rejected: '{sanitize_log_input(clean_mime)}' for file '{sanitize_log_input(original_filename)}'")
+            logger.warning("Unsupported MIME type rejected: '%s' for file '%s'", sanitize_log_input(clean_mime), sanitize_log_input(original_filename))
             raise ValidationAppException(
                 f"File MIME type '{clean_mime}' is not supported."
             )
@@ -124,7 +124,7 @@ class DocumentService:
         if ext in self.FILE_SIGNATURES:
             expected_sigs = self.FILE_SIGNATURES[ext]
             if not any(content.startswith(sig) for sig in expected_sigs):
-                logger.error(f"Magic bytes signature mismatch for file '{sanitize_log_input(original_filename)}': Extension='{sanitize_log_input(ext)}'")
+                logger.error("Magic bytes signature mismatch for file '%s': Extension='%s'", sanitize_log_input(original_filename), sanitize_log_input(ext))
                 raise ValidationAppException(
                     f"File content magic byte header does not match declared extension '{ext}'."
                 )
@@ -144,7 +144,7 @@ class DocumentService:
         Ingests file, performs security validation, checks SHA256 duplicate detection,
         stores file safely, and records metadata in database with transactional rollback safety.
         """
-        logger.info(f"Document upload initiated by user '{sanitize_log_input(owner.username)}': File='{sanitize_log_input(original_filename)}'")
+        logger.info("Document upload initiated by user '%s': File='%s'", sanitize_log_input(owner.username), sanitize_log_input(original_filename))
 
         # Validate file parameters & magic bytes
         self.validate_file(content, original_filename, mime_type)
@@ -155,7 +155,7 @@ class DocumentService:
         # Duplicate Detection
         existing_doc = await self.doc_repo.get_by_hash(sha256_h, owner_id=owner.id)
         if existing_doc:
-            logger.info(f"Duplicate document detected for user '{sanitize_log_input(owner.id)}': Hash={sha256_h[:10]}...")
+            logger.info("Duplicate document detected for user '%s': Hash=%s...", sanitize_log_input(owner.id), sha256_h[:10])
             doc_resp = DocumentResponse.model_validate(existing_doc)
             return UploadResponse(
                 document=doc_resp,
@@ -209,7 +209,7 @@ class DocumentService:
 
         # Owner isolation check
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning(f"Unauthorized document access attempt: User '{sanitize_log_input(owner.id)}' on Document '{sanitize_log_input(doc_id)}'")
+            logger.warning("Unauthorized document access attempt: User '%s' on Document '%s'", sanitize_log_input(owner.id), sanitize_log_input(doc_id))
             raise ResourceNotFoundException("Document not found")
 
         return DocumentResponse.model_validate(doc)
@@ -235,7 +235,7 @@ class DocumentService:
         pages = math.ceil(total / page_size) if total > 0 else 0
         items = [DocumentResponse.model_validate(d) for d in docs]
 
-        logger.info(f"Listed documents for user '{sanitize_log_input(owner.username)}': Page={page}/{pages}, Total={total}")
+        logger.info("Listed documents for user '%s': Page=%d/%d, Total=%d", sanitize_log_input(owner.username), page, pages, total)
 
         return DocumentListResponse(
             items=items,
@@ -262,7 +262,7 @@ class DocumentService:
             raise ResourceNotFoundException("Document not found")
 
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning(f"Unauthorized document deletion attempt: User '{sanitize_log_input(owner.id)}' on Document '{sanitize_log_input(doc_id)}'")
+            logger.warning("Unauthorized document deletion attempt: User '%s' on Document '%s'", sanitize_log_input(owner.id), sanitize_log_input(doc_id))
             raise ResourceNotFoundException("Document not found")
 
         # Delete physical file from storage provider
@@ -271,7 +271,7 @@ class DocumentService:
         # Delete database record
         await self.doc_repo.delete(doc)
 
-        logger.info(f"Document successfully deleted: ID={sanitize_log_input(doc_id)} by user '{sanitize_log_input(owner.username)}'")
+        logger.info("Document successfully deleted: ID=%s by user '%s'", sanitize_log_input(doc_id), sanitize_log_input(owner.username))
         return DeleteResponse(
             id=doc_id,
             message="Document deleted successfully"

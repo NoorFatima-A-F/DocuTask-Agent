@@ -42,8 +42,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:16.116472+00:00",
-  "execution_timestamp": "2026-09-24T21:55:16.116497+00:00",
+  "timestamp": "2026-09-24T22:20:03.330836+00:00",
+  "execution_timestamp": "2026-09-24T22:20:03.330884+00:00",
   "summary": "Continuous observability pipeline active across latency, throughput, queue, worker, and AI telemetry.",
   "report_title": "Continuous Performance Monitoring Report",
   "total_metric_streams": 6,

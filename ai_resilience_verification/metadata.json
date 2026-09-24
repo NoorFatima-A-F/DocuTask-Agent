@@ -13,7 +13,7 @@
     "certification_tier": "Enterprise AI Resilient",
     "certification_verdict": "CERTIFIED",
     "passed": true,
-    "timestamp": "2026-09-24T21:54:45.726016+00:00"
+    "timestamp": "2026-09-24T22:19:40.574680+00:00"
   },
   "manifest_files": [
     "failure_injection_report.json",

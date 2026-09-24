@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:02.352458+00:00",
-  "execution_timestamp": "2026-09-24T21:55:02.352467+00:00",
+  "timestamp": "2026-09-24T22:19:53.001748+00:00",
+  "execution_timestamp": "2026-09-24T22:19:53.001756+00:00",
   "summary": "Point-in-time recovery verified: WAL replay restores pre-corruption state in 6.5 minutes with 100% precision.",
   "report_title": "Point-in-Time Recovery (PITR) Report",
   "pitr_enabled": true,

@@ -41,7 +41,7 @@ class OCRPipeline:
         :return: DocumentContent object
         """
         doc_type = DocumentTypeDetector.detect_type(file_content, file_extension, mime_type)
-        logger.info(f"OCR Pipeline selected strategy [{doc_type}] for document '{sanitize_log_input(document_id)}'")
+        logger.info("OCR Pipeline selected strategy [%s] for document '%s'", doc_type, sanitize_log_input(document_id))
 
         pages: List[PageContent] = []
 
@@ -70,7 +70,7 @@ class OCRPipeline:
             pages = await self.pdf_processor.process_pdf(file_content)
 
         else:
-            logger.error(f"Unsupported document format encountered: ext='{sanitize_log_input(file_extension)}', mime='{sanitize_log_input(mime_type)}'")
+            logger.error("Unsupported document format encountered: ext='%s', mime='%s'", sanitize_log_input(file_extension), sanitize_log_input(mime_type))
             raise UnsupportedFileTypeException(f"Unsupported document format '{file_extension}'")
 
         if not pages:
@@ -85,7 +85,11 @@ class OCRPipeline:
         merged_text = "\n\n".join(full_text_chunks)
 
         logger.info(
-            f"Extraction completed for doc '{sanitize_log_input(document_id)}': Strategy={doc_type}, Pages={len(pages)}, AvgConfidence={avg_confidence}"
+            "Extraction completed for doc '%s': Strategy=%s, Pages=%d, AvgConfidence=%f",
+            sanitize_log_input(document_id),
+            doc_type,
+            len(pages),
+            avg_confidence,
         )
 
         return DocumentContent(

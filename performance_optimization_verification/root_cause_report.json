@@ -45,8 +45,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:13.184828+00:00",
-  "execution_timestamp": "2026-09-24T21:55:13.184852+00:00",
+  "timestamp": "2026-09-24T22:20:01.176199+00:00",
+  "execution_timestamp": "2026-09-24T22:20:01.176216+00:00",
   "summary": "Automated RCA accurately identified worker pool OCR compute saturation as primary root cause (p=0.85).",
   "report_title": "Automated Bottleneck Root Cause Analysis Report",
   "incident_issue": "high_document_latency",

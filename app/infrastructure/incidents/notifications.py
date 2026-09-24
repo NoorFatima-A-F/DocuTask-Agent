@@ -78,7 +78,7 @@ class IncidentNotifier:
         last_sent = self._last_sent_time.get(rate_key, 0.0)
 
         if (now - last_sent) < self.rate_limit_cooldown_seconds and severity != SeverityLevel.CATASTROPHIC:
-            logger.info(f"Notification suppressed by rate-limit for {sanitize_log_input(rate_key)}")
+            logger.info("Notification suppressed by rate-limit for %s", sanitize_log_input(rate_key))
             return None
 
         msg = NotificationMessage(
@@ -96,7 +96,7 @@ class IncidentNotifier:
             try:
                 msg.delivered = handler(msg)
             except Exception as e:
-                logger.error(f"Error executing notification handler for {channel.value}: {e}")
+                logger.error("Error executing notification handler for %s: %s", channel.value, sanitize_log_input(e))
                 msg.delivered = False
         else:
             # Default simulated delivery
@@ -104,7 +104,7 @@ class IncidentNotifier:
 
         self._sent_messages.append(msg)
         self._last_sent_time[rate_key] = now
-        logger.info(f"Dispatched {channel.value} notification for incident '{sanitize_log_input(incident_id)}' (severity={severity.value})")
+        logger.info("Dispatched %s notification for incident '%s' (severity=%s)", channel.value, sanitize_log_input(incident_id), severity.value)
         return msg
 
     def list_dispatched_messages(self, incident_id: Optional[str] = None) -> List[NotificationMessage]:

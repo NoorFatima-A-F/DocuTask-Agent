@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 
 from app.core.exceptions import BaseAppException
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 from app.schemas.response import APIResponse
 
 
@@ -20,7 +21,10 @@ def register_exception_handlers(app: FastAPI) -> None:
     async def base_app_exception_handler(request: Request, exc: BaseAppException) -> JSONResponse:
         """Handles custom application domain exceptions."""
         logger.warning(
-            f"Domain Exception [{exc.status_code}]: Path={request.url.path} | Message={exc.message}"
+            "Domain Exception [%s]: Path=%s | Message=%s",
+            exc.status_code,
+            sanitize_log_input(request.url.path),
+            sanitize_log_input(exc.message),
         )
         response_body = APIResponse.error_response(
             message=exc.message,
@@ -42,7 +46,11 @@ def register_exception_handlers(app: FastAPI) -> None:
                 "type": error.get("type", "")
             })
         
-        logger.info(f"Validation Error [422]: Path={request.url.path} | Errors={formatted_errors}")
+        logger.info(
+            "Validation Error [422]: Path=%s | Errors=%s",
+            sanitize_log_input(request.url.path),
+            sanitize_log_input(formatted_errors),
+        )
         response_body = APIResponse.error_response(
             message="Request validation failed",
             errors=formatted_errors
@@ -56,7 +64,10 @@ def register_exception_handlers(app: FastAPI) -> None:
     async def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
         """Handles standard FastAPI HTTP exceptions."""
         logger.warning(
-            f"HTTP Exception [{exc.status_code}]: Path={request.url.path} | Detail={exc.detail}"
+            "HTTP Exception [%s]: Path=%s | Detail=%s",
+            exc.status_code,
+            sanitize_log_input(request.url.path),
+            sanitize_log_input(exc.detail),
         )
         response_body = APIResponse.error_response(
             message=str(exc.detail),
@@ -71,7 +82,10 @@ def register_exception_handlers(app: FastAPI) -> None:
     async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
         """Fallback handler for unexpected system errors."""
         logger.error(
-            f"Unhandled System Error [500]: Path={request.url.path} | Exception={type(exc).__name__}: {str(exc)}",
+            "Unhandled System Error [500]: Path=%s | Exception=%s: %s",
+            sanitize_log_input(request.url.path),
+            type(exc).__name__,
+            sanitize_log_input(exc),
             exc_info=True
         )
         response_body = APIResponse.error_response(

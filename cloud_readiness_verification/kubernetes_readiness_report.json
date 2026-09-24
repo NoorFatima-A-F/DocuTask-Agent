@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:54:55.244517+00:00",
-  "execution_timestamp": "2026-09-24T21:54:55.244527+00:00",
+  "timestamp": "2026-09-24T22:19:47.867884+00:00",
+  "execution_timestamp": "2026-09-24T22:19:47.867893+00:00",
   "summary": "Kubernetes readiness verified: 8 K8s manifests validated with active health probes and rolling updates.",
   "report_title": "Kubernetes Readiness Report",
   "deployments_ready": true,

@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:54:55.243759+00:00",
-  "execution_timestamp": "2026-09-24T21:54:55.243771+00:00",
+  "timestamp": "2026-09-24T22:19:47.866930+00:00",
+  "execution_timestamp": "2026-09-24T22:19:47.866945+00:00",
   "summary": "Auto-scaling readiness verified: HPA policies tested across API and worker tiers with 18.5s scale-out.",
   "report_title": "Auto Scaling Readiness Report",
   "horizontal_pod_autoscaler_ready": true,

@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:08.249284+00:00",
-  "execution_timestamp": "2026-09-24T21:55:08.249295+00:00",
+  "timestamp": "2026-09-24T22:19:57.692915+00:00",
+  "execution_timestamp": "2026-09-24T22:19:57.692923+00:00",
   "summary": "Container security verified: All 4 containers hardened with non-root UID 10001, read-only rootfs, and dropped capabilities.",
   "report_title": "Container Security Verification Report",
   "containers_audited": 4,

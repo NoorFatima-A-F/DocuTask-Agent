@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:54:53.995995+00:00",
-  "execution_timestamp": "2026-09-24T21:54:53.996013+00:00",
+  "timestamp": "2026-09-24T22:19:46.899958+00:00",
+  "execution_timestamp": "2026-09-24T22:19:46.899971+00:00",
   "summary": "Cascading failure chaos verified: 4-tier failure containment, active backpressure, and zero cluster collapse.",
   "report_title": "Cascading Failure Containment Report",
   "collapse_prevented": true,

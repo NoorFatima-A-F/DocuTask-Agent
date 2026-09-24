@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:08.250204+00:00",
-  "execution_timestamp": "2026-09-24T21:55:08.250214+00:00",
+  "timestamp": "2026-09-24T22:19:57.693490+00:00",
+  "execution_timestamp": "2026-09-24T22:19:57.693498+00:00",
   "summary": "Network security verified: 100% private subnet isolation for database and message broker.",
   "report_title": "Network Security & Isolation Report",
   "public_network_segregated": true,

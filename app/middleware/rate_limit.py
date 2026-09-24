@@ -13,6 +13,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 from app.schemas.response import APIResponse
 
 
@@ -56,7 +57,13 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
 
             if len(timestamps) >= max_requests:
                 retry_after = int(window_seconds - (now - timestamps[0])) if timestamps else window_seconds
-                logger.warning(f"Rate limit exceeded for IP '{client_ip}' on '{path}': {len(timestamps)}/{max_requests}")
+                logger.warning(
+                    "Rate limit exceeded for IP '%s' on '%s': %d/%d",
+                    sanitize_log_input(client_ip),
+                    sanitize_log_input(path),
+                    len(timestamps),
+                    max_requests,
+                )
                 
                 response_body = APIResponse.error_response(
                     message="Rate limit exceeded. Please try again later.",

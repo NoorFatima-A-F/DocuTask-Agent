@@ -1,6 +1,6 @@
 {
   "source_phase": "chaos_verification",
-  "collected_at": "2026-09-24T21:55:06.683063+00:00",
+  "collected_at": "2026-09-24T22:19:56.518336+00:00",
   "evidence_count": 19,
   "raw_payloads": [
     {
@@ -45,8 +45,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.995336+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.995355+00:00",
+      "timestamp": "2026-09-24T22:19:46.899591+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899604+00:00",
       "summary": "AI provider outage chaos verified: 2.4s detection, local cached extraction fallback, and 0 document losses.",
       "report_title": "AI Provider Failure Chaos Report",
       "gemini_outage_simulated": true,
@@ -113,8 +113,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.995995+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.996013+00:00",
+      "timestamp": "2026-09-24T22:19:46.899958+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899971+00:00",
       "summary": "Cascading failure chaos verified: 4-tier failure containment, active backpressure, and zero cluster collapse.",
       "report_title": "Cascading Failure Containment Report",
       "collapse_prevented": true,
@@ -193,8 +193,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.996455+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.996469+00:00",
+      "timestamp": "2026-09-24T22:19:46.900236+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.900248+00:00",
       "summary": "Chaos observability verified: precision timing metrics, structured logs, and full forensic trace reconstruction.",
       "report_title": "Chaos Observability & Traceability Report",
       "metrics_captured": true,
@@ -258,8 +258,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.996259+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.996280+00:00",
+      "timestamp": "2026-09-24T22:19:46.900126+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.900142+00:00",
       "summary": "8-stage closed-loop automated chaos pipeline verified for CI/CD integration and continuous resilience testing.",
       "report_title": "Chaos Automation Pipeline Report",
       "pipeline_automated": true,
@@ -357,8 +357,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.994436+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.994479+00:00",
+      "timestamp": "2026-09-24T22:19:46.898988+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899010+00:00",
       "summary": "All preflight readiness gates passed; platform fully instrumented and ready for chaos testing.",
       "report_title": "Chaos Readiness Validation Report",
       "monitoring": "available",
@@ -436,8 +436,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.996781+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.996812+00:00",
+      "timestamp": "2026-09-24T22:19:46.900397+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.900412+00:00",
       "summary": "Chaos reporting engine verified: 8/8 experiments passed with 0 data loss and comprehensive evidence manifests.",
       "report_title": "Chaos Experiment Summary & Evidence Report",
       "total_experiments_documented": 8,
@@ -564,8 +564,8 @@
       "total_verifiers_executed": 12,
       "total_checks_passed": 48,
       "total_checks_evaluated": 48,
-      "generated_at": "2026-09-24T21:54:53.997295+00:00",
-      "execution_time_seconds": 0.0026531219482421875
+      "generated_at": "2026-09-24T22:19:46.900638+00:00",
+      "execution_time_seconds": 0.0015647411346435547
     },
     {
       "verifier_id": "VERIFY-3K.2-CONTAINER-FAILURE",
@@ -609,8 +609,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.994654+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.994671+00:00",
+      "timestamp": "2026-09-24T22:19:46.899134+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899148+00:00",
       "summary": "Container failure chaos experiments verified: zero data loss and automated recovery within 14.5s.",
       "report_title": "Container Failure Chaos Report",
       "experiments_executed": 2,
@@ -681,8 +681,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.994824+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.994842+00:00",
+      "timestamp": "2026-09-24T22:19:46.899255+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899269+00:00",
       "summary": "PostgreSQL hard failure chaos testing verified: 0 lost records, 0 data corruptions, and 18s clean recovery.",
       "report_title": "Database Failure & Data Integrity Report",
       "database_downtime_seconds": 25.0,
@@ -755,8 +755,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.994824+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.994842+00:00",
+      "timestamp": "2026-09-24T22:19:46.899255+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899269+00:00",
       "summary": "PostgreSQL hard failure chaos testing verified: 0 lost records, 0 data corruptions, and 18s clean recovery.",
       "report_title": "Database Failure & Data Integrity Report",
       "database_downtime_seconds": 25.0,
@@ -828,8 +828,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.996781+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.996812+00:00",
+      "timestamp": "2026-09-24T22:19:46.900397+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.900412+00:00",
       "summary": "Chaos reporting engine verified: 8/8 experiments passed with 0 data loss and comprehensive evidence manifests.",
       "report_title": "Chaos Experiment Summary & Evidence Report",
       "total_experiments_documented": 8,
@@ -933,8 +933,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.996259+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.996280+00:00",
+      "timestamp": "2026-09-24T22:19:46.900126+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.900142+00:00",
       "summary": "8-stage closed-loop automated chaos pipeline verified for CI/CD integration and continuous resilience testing.",
       "report_title": "Chaos Automation Pipeline Report",
       "pipeline_automated": true,
@@ -1031,8 +1031,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.995151+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.995171+00:00",
+      "timestamp": "2026-09-24T22:19:46.899470+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899483+00:00",
       "summary": "Network failure chaos verified: 500ms latency tolerance, 10% packet loss handling, and dependency isolation.",
       "report_title": "Network Failure Simulation Report",
       "latency_delay_injected_ms": 500.0,
@@ -1104,8 +1104,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.994979+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.994993+00:00",
+      "timestamp": "2026-09-24T22:19:46.899357+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899368+00:00",
       "summary": "Redis queue outage chaos verified: zero message loss, graceful API degradation, and 12.4s auto-reconnect.",
       "report_title": "Redis Queue Failure Chaos Report",
       "degraded_mode_activated": true,
@@ -1162,8 +1162,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.996455+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.996469+00:00",
+      "timestamp": "2026-09-24T22:19:46.900236+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.900248+00:00",
       "summary": "Chaos observability verified: precision timing metrics, structured logs, and full forensic trace reconstruction.",
       "report_title": "Chaos Observability & Traceability Report",
       "metrics_captured": true,
@@ -1250,8 +1250,8 @@
       "total_verifiers_executed": 12,
       "total_checks_passed": 48,
       "total_checks_evaluated": 48,
-      "generated_at": "2026-09-24T21:54:53.997295+00:00",
-      "execution_time_seconds": 0.0026531219482421875
+      "generated_at": "2026-09-24T22:19:46.900638+00:00",
+      "execution_time_seconds": 0.0015647411346435547
     },
     {
       "verifier_id": "VERIFY-3K.7-RESOURCE-EXHAUSTION",
@@ -1293,8 +1293,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.995595+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.995613+00:00",
+      "timestamp": "2026-09-24T22:19:46.899713+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899728+00:00",
       "summary": "Resource exhaustion chaos verified: graceful degradation under 95% CPU, 16GB RAM stress, and full disk state.",
       "report_title": "Resource Exhaustion Chaos Report",
       "cpu_stress_level_pct": 95.0,
@@ -1388,8 +1388,8 @@
       "total_verifiers_executed": 12,
       "total_checks_passed": 48,
       "total_checks_evaluated": 48,
-      "generated_at": "2026-09-24T21:54:53.997295+00:00",
-      "execution_time_seconds": 0.0026531219482421875
+      "generated_at": "2026-09-24T22:19:46.900638+00:00",
+      "execution_time_seconds": 0.0015647411346435547
     },
     {
       "verifier_id": "VERIFY-3K.8-WORKER-AGENT-FAILURE",
@@ -1431,8 +1431,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-24T21:54:53.995776+00:00",
-      "execution_timestamp": "2026-09-24T21:54:53.995794+00:00",
+      "timestamp": "2026-09-24T22:19:46.899831+00:00",
+      "execution_timestamp": "2026-09-24T22:19:46.899843+00:00",
       "summary": "Worker agent chaos verified: stuck task timeout recovery at 60s and strict idempotency under duplicate worker execution.",
       "report_title": "Worker Agent Failure Chaos Report",
       "stuck_task_timeout_seconds": 60.0,

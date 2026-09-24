@@ -42,8 +42,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:16.136702+00:00",
-  "execution_timestamp": "2026-09-24T21:55:16.136725+00:00",
+  "timestamp": "2026-09-24T22:20:03.348455+00:00",
+  "execution_timestamp": "2026-09-24T22:20:03.348472+00:00",
   "summary": "Performance governance model enforced; all 3 release gating criteria evaluated and passed.",
   "report_title": "Performance Governance & Change Impact Report",
   "governance_enforced": true,

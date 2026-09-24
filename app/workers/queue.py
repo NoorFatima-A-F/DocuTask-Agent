@@ -8,6 +8,7 @@ import asyncio
 from typing import Optional, Set
 from uuid import UUID
 
+from app.core.security import sanitize_log_input
 from app.core.logging import logger
 from app.workers.base import JobQueueProvider
 from app.workers.jobs import JobTask
@@ -23,7 +24,7 @@ class AsyncInMemoryJobQueue(JobQueueProvider):
     async def enqueue(self, task: JobTask) -> None:
         """Pushes job task onto queue."""
         await self._queue.put(task)
-        logger.info(f"Enqueued job '{task.job_id}' (Type={task.job_type}, Document={task.document_id})")
+        logger.info("Enqueued job '%s' (Type=%s, Document=%s)", sanitize_log_input(task.job_id), sanitize_log_input(task.job_type), sanitize_log_input(task.document_id))
 
     async def dequeue(self, timeout: float = 1.0) -> Optional[JobTask]:
         """Dequeues next task from queue within timeout."""
@@ -34,7 +35,7 @@ class AsyncInMemoryJobQueue(JobQueueProvider):
             if task.job_id in self._cancelled_jobs:
                 self._cancelled_jobs.remove(task.job_id)
                 self._queue.task_done()
-                logger.info(f"Skipping cancelled job '{task.job_id}' during dequeue")
+                logger.info("Skipping cancelled job '%s' during dequeue", sanitize_log_input(task.job_id))
                 return None
 
             return task
@@ -44,7 +45,7 @@ class AsyncInMemoryJobQueue(JobQueueProvider):
     async def cancel(self, job_id: UUID) -> bool:
         """Flags job ID as cancelled."""
         self._cancelled_jobs.add(job_id)
-        logger.info(f"Job '{job_id}' marked as cancelled in queue")
+        logger.info("Job '%s' marked as cancelled in queue", sanitize_log_input(job_id))
         return True
 
     async def get_queue_size(self) -> int:

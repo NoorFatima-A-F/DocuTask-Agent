@@ -48,7 +48,7 @@ class AIValidator:
                 for err in error_details
             ]
             error_msg = "; ".join(formatted_errors)
-            logger.warning(f"AI JSON validation failure for document type '{sanitize_log_input(document_type)}': {sanitize_log_input(error_msg)}")
+            logger.warning("AI JSON validation failure for document type '%s': %s", sanitize_log_input(document_type), sanitize_log_input(error_msg))
             raise AIValidationException(
                 message=f"LLM generated JSON failed schema validation: {error_msg}",
                 errors=error_details

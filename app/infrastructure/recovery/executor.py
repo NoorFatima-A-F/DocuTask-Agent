@@ -70,7 +70,7 @@ class RecoveryWorkflowExecutor:
         overall_success = True
         overall_error: Optional[str] = None
 
-        logger.info(f"Starting recovery workflow '{sanitize_log_input(workflow.workflow_id)}' ({workflow.title})")
+        logger.info("Starting recovery workflow '%s' (%s)", sanitize_log_input(workflow.workflow_id), sanitize_log_input(workflow.title))
 
         for step in workflow.steps:
             step.status = StepStatus.EXECUTING
@@ -102,12 +102,12 @@ class RecoveryWorkflowExecutor:
                 step.error = str(e)
                 overall_success = False
                 overall_error = f"Step '{step.name}' threw exception: {e}"
-                logger.error(f"Error executing recovery step '{step.step_id}': {e}")
+                logger.error("Error executing recovery step '%s': %s", sanitize_log_input(step.step_id), sanitize_log_input(e))
                 break
 
         # If failed, rollback previously completed steps in reverse order
         if not overall_success:
-            logger.warning(f"Workflow '{sanitize_log_input(workflow.workflow_id)}' failed. Initiating rollback of completed steps.")
+            logger.warning("Workflow '%s' failed. Initiating rollback of completed steps.", sanitize_log_input(workflow.workflow_id))
             for step in reversed(executed_steps_to_rollback):
                 rb_handler = self._rollback_handlers.get(step.step_id)
                 try:
@@ -116,7 +116,7 @@ class RecoveryWorkflowExecutor:
                     step.status = StepStatus.ROLLED_BACK
                     rolled_back_steps += 1
                 except Exception as rbe:
-                    logger.error(f"Rollback failed for step '{step.step_id}': {rbe}")
+                    logger.error("Rollback failed for step '%s': %s", sanitize_log_input(step.step_id), sanitize_log_input(rbe))
 
         end_time = datetime.now(timezone.utc)
         duration = (end_time - start_time).total_seconds()

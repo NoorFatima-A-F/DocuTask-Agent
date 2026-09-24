@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:08.249124+00:00",
-  "execution_timestamp": "2026-09-24T21:55:08.249134+00:00",
+  "timestamp": "2026-09-24T22:19:57.692790+00:00",
+  "execution_timestamp": "2026-09-24T22:19:57.692799+00:00",
   "summary": "Threat modeling verified: All 6 STRIDE categories mitigated with low residual risk.",
   "report_title": "Threat Modeling Verification Report",
   "methodology": "STRIDE & Attack Tree Analysis",

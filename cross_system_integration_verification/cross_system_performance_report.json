@@ -54,7 +54,7 @@
         "e2e_p95_latency_ms": 112.2,
         "sla_target_ms": 500.0
       },
-      "timestamp": "2026-09-24T21:55:00.679594+00:00"
+      "timestamp": "2026-09-24T22:19:51.744560+00:00"
     },
     {
       "check_id": "CHK-4S-02",
@@ -65,7 +65,7 @@
       "details": {
         "max_token_amplification_ratio": 1.25
       },
-      "timestamp": "2026-09-24T21:55:00.679613+00:00"
+      "timestamp": "2026-09-24T22:19:51.744577+00:00"
     },
     {
       "check_id": "CHK-4S-03",
@@ -76,7 +76,7 @@
       "details": {
         "max_serialization_overhead_pct": 2.1
       },
-      "timestamp": "2026-09-24T21:55:00.679634+00:00"
+      "timestamp": "2026-09-24T22:19:51.744593+00:00"
     },
     {
       "check_id": "CHK-4S-04",
@@ -88,8 +88,8 @@
         "backpressure_respected": true,
         "total_memory_delta_mb": 20.6
       },
-      "timestamp": "2026-09-24T21:55:00.679657+00:00"
+      "timestamp": "2026-09-24T22:19:51.744609+00:00"
     }
   ],
-  "timestamp": "2026-09-24T21:55:00.679669+00:00"
+  "timestamp": "2026-09-24T22:19:51.744619+00:00"
 }

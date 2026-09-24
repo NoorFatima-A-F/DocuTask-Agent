@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:54:55.244092+00:00",
-  "execution_timestamp": "2026-09-24T21:54:55.244102+00:00",
+  "timestamp": "2026-09-24T22:19:47.867350+00:00",
+  "execution_timestamp": "2026-09-24T22:19:47.867369+00:00",
   "summary": "Cloud observability verified: OpenTelemetry traces and structured logs exported to CloudWatch, GCP Monitoring, and Azure Monitor.",
   "report_title": "Cloud Observability Compatibility Report",
   "opentelemetry_standardized": true,

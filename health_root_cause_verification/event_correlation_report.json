@@ -12,7 +12,7 @@
           "signal_type": "metric_breach",
           "description": "Connection pool saturation > 95%",
           "value": 98.0,
-          "timestamp": "2026-09-24T21:54:35.441713+00:00"
+          "timestamp": "2026-09-24T22:19:33.775456+00:00"
         },
         {
           "signal_id": "SIG-02",
@@ -20,7 +20,7 @@
           "signal_type": "error_log",
           "description": "FATAL: remaining connection slots are reserved for non-replication superuser",
           "value": 1.0,
-          "timestamp": "2026-09-24T21:54:35.441743+00:00"
+          "timestamp": "2026-09-24T22:19:33.775479+00:00"
         },
         {
           "signal_id": "SIG-03",
@@ -28,7 +28,7 @@
           "signal_type": "metric_breach",
           "description": "HTTP 500 spike on /api/v1/documents",
           "value": 14.5,
-          "timestamp": "2026-09-24T21:54:35.441758+00:00"
+          "timestamp": "2026-09-24T22:19:33.775490+00:00"
         }
       ],
       "correlation_score": 0.96,
@@ -45,7 +45,7 @@
           "signal_type": "metric_breach",
           "description": "Queue length exceeded 1000 items",
           "value": 1240.0,
-          "timestamp": "2026-09-24T21:54:35.441781+00:00"
+          "timestamp": "2026-09-24T22:19:33.775508+00:00"
         },
         {
           "signal_id": "SIG-05",
@@ -53,7 +53,7 @@
           "signal_type": "trace_latency",
           "description": "Redis PING response time > 250ms",
           "value": 310.0,
-          "timestamp": "2026-09-24T21:54:35.441793+00:00"
+          "timestamp": "2026-09-24T22:19:33.775518+00:00"
         },
         {
           "signal_id": "SIG-06",
@@ -61,7 +61,7 @@
           "signal_type": "state_change",
           "description": "Worker task processing throughput dropped by 80%",
           "value": 0.2,
-          "timestamp": "2026-09-24T21:54:35.441809+00:00"
+          "timestamp": "2026-09-24T22:19:33.775528+00:00"
         }
       ],
       "correlation_score": 0.94,
@@ -78,7 +78,7 @@
           "signal_type": "metric_breach",
           "description": "External AI API HTTP 503 response rate > 50%",
           "value": 65.0,
-          "timestamp": "2026-09-24T21:54:35.441831+00:00"
+          "timestamp": "2026-09-24T22:19:33.775544+00:00"
         },
         {
           "signal_id": "SIG-08",
@@ -86,7 +86,7 @@
           "signal_type": "error_log",
           "description": "GoogleGenAIError: Model overloaded, backoff initiated",
           "value": 1.0,
-          "timestamp": "2026-09-24T21:54:35.441846+00:00"
+          "timestamp": "2026-09-24T22:19:33.775554+00:00"
         }
       ],
       "correlation_score": 0.92,

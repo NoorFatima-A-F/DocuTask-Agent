@@ -10,6 +10,7 @@ from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoin
 from starlette.requests import Request
 from starlette.responses import Response
 
+from app.core.security import sanitize_log_input
 from app.core.logging import logger
 
 
@@ -24,14 +25,18 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
         start_time = time.perf_counter()
         
         # Log request start
-        logger.info(f"HTTP Request Started: {request.method} {request.url.path} | RequestID={request_id}")
+        logger.info("HTTP Request Started: %s %s | RequestID=%s", request.method, sanitize_log_input(request.url.path), sanitize_log_input(request_id))
 
         try:
             response = await call_next(request)
         except Exception as exc:
             duration_ms = int((time.perf_counter() - start_time) * 1000)
             logger.error(
-                f"HTTP Request Failed: {request.method} {request.url.path} | Duration={duration_ms}ms | Error={str(exc)}"
+                "HTTP Request Failed: %s %s | Duration=%dms | Error=%s",
+                request.method,
+                sanitize_log_input(request.url.path),
+                duration_ms,
+                sanitize_log_input(exc),
             )
             raise exc
 

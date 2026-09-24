@@ -40,8 +40,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-24T21:55:13.211316+00:00",
-  "execution_timestamp": "2026-09-24T21:55:13.211359+00:00",
+  "timestamp": "2026-09-24T22:20:01.185041+00:00",
+  "execution_timestamp": "2026-09-24T22:20:01.185060+00:00",
   "summary": "Predictive capacity planning models forecast infrastructure, storage, and AI quota needs to 500k docs/month.",
   "report_title": "Predictive Capacity Planning Report",
   "baseline_docs_per_day": 20000,
