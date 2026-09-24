@@ -9,7 +9,7 @@ import re
 from pathlib import Path
 import uuid
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Set, Union
 try:
     from jose import JWTError, jwt
 except ImportError:
@@ -60,7 +60,57 @@ class UnsafePathError(ValueError):
     pass
 
 
+class UnsafeUrlError(ValueError):
+    """Raised when an untrusted, malformed, or SSRF-prone URL is detected."""
+    pass
+
+
 PathInput = Union[str, Path, os.PathLike]
+
+
+def validate_safe_url(
+    url: str,
+    allowed_domains: Optional[Union[List[str], Set[str]]] = None,
+    disallowed_domains: Optional[Union[List[str], Set[str]]] = None,
+    allowed_schemes: Optional[Set[str]] = None,
+) -> str:
+    """
+    Validates and parses a URL, enforcing allowed schemes (http, https) and strict
+    domain/hostname matching without substring vulnerability (CWE-20 / SSRF prevention).
+    Rejects prefix collision attacks (e.g. 'https://trusted.com.attacker.com').
+    """
+    import urllib.parse
+
+    if not url or not isinstance(url, str):
+        raise UnsafeUrlError("URL cannot be empty or non-string.")
+
+    schemes = allowed_schemes or {"http", "https"}
+    parsed = urllib.parse.urlparse(url.strip())
+
+    if not parsed.scheme or parsed.scheme.lower() not in schemes:
+        raise UnsafeUrlError(f"Security violation: Scheme '{parsed.scheme}' is not permitted (allowed: {sorted(schemes)}).")
+
+    hostname = (parsed.hostname or "").lower().strip()
+    if not hostname:
+        raise UnsafeUrlError(f"Security violation: URL '{url}' has no valid hostname.")
+
+    if disallowed_domains:
+        for disallowed in disallowed_domains:
+            dis_d = disallowed.lower().strip()
+            if hostname == dis_d or hostname.endswith("." + dis_d):
+                raise UnsafeUrlError(f"Security violation: Hostname '{hostname}' matches disallowed domain '{disallowed}'.")
+
+    if allowed_domains is not None:
+        matched = False
+        for allowed in allowed_domains:
+            al_d = allowed.lower().strip()
+            if hostname == al_d or hostname.endswith("." + al_d):
+                matched = True
+                break
+        if not matched:
+            raise UnsafeUrlError(f"Security violation: Hostname '{hostname}' is not in allowed domains {allowed_domains}.")
+
+    return url
 
 
 def validate_safe_filename_segment(value: str) -> str:

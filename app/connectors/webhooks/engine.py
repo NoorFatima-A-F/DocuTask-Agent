@@ -57,10 +57,9 @@ class WebhookEngine:
             raise WebhookVerificationError(f"Webhook endpoint '{endpoint_id}' not found")
 
         secret_bytes = config.secret.encode("utf-8")
-        if config.algorithm == "sha256":
-            expected = hmac.new(secret_bytes, payload_bytes, hashlib.sha256).hexdigest()
-        elif config.algorithm == "sha1":
-            expected = hmac.new(secret_bytes, payload_bytes, hashlib.sha1).hexdigest()
+        if config.algorithm in ("sha256", "sha384", "sha512"):
+            hash_algo = getattr(hashlib, config.algorithm)
+            expected = hmac.new(secret_bytes, payload_bytes, hash_algo).hexdigest()
         else:
             expected = hmac.new(secret_bytes, payload_bytes, hashlib.sha256).hexdigest()
 
@@ -95,13 +94,12 @@ class WebhookEngine:
     def sign_outgoing_payload(self, secret: str, payload_bytes: bytes, algorithm: str = "sha256") -> str:
         """Generates an HMAC signature for outgoing webhook notifications."""
         secret_bytes = secret.encode("utf-8")
-        if algorithm == "sha256":
-            digest = hmac.new(secret_bytes, payload_bytes, hashlib.sha256).hexdigest()
-            return f"sha256={digest}"
-        elif algorithm == "sha1":
-            digest = hmac.new(secret_bytes, payload_bytes, hashlib.sha1).hexdigest()
-            return f"sha1={digest}"
-        return hmac.new(secret_bytes, payload_bytes, hashlib.sha256).hexdigest()
+        if algorithm in ("sha256", "sha384", "sha512"):
+            hash_algo = getattr(hashlib, algorithm)
+            digest = hmac.new(secret_bytes, payload_bytes, hash_algo).hexdigest()
+            return f"{algorithm}={digest}"
+        digest = hmac.new(secret_bytes, payload_bytes, hashlib.sha256).hexdigest()
+        return f"sha256={digest}"
 
     def send_outgoing_webhook(
         self,

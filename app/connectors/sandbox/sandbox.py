@@ -53,15 +53,26 @@ class ConnectorSandbox:
         if not self.config.enforce_isolation:
             return
 
+        from urllib.parse import urlparse
+        if "://" in url_or_host:
+            parsed = urlparse(url_or_host)
+            hostname = (parsed.hostname or "").lower().strip()
+        else:
+            hostname = url_or_host.split(":")[0].strip().lower()
+
         for blocked in self.config.disallowed_domains:
-            if blocked.lower() in url_or_host.lower():
+            b_dom = blocked.lower().strip()
+            if hostname == b_dom or hostname.endswith("." + b_dom):
                 raise SandboxViolationError(
                     f"Access to blocked domain '{blocked}' is denied by connector sandbox policy",
                     details={"target": url_or_host, "blocked_domain": blocked},
                 )
 
         if self.config.allowed_domains is not None:
-            allowed = any(dom.lower() in url_or_host.lower() for dom in self.config.allowed_domains)
+            allowed = any(
+                hostname == dom.lower().strip() or hostname.endswith("." + dom.lower().strip())
+                for dom in self.config.allowed_domains
+            )
             if not allowed:
                 raise SandboxViolationError(
                     f"Access to target '{url_or_host}' is not in allowed sandbox domains",

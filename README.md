@@ -159,10 +159,15 @@ bandit -r app/ -ll -q
 
 ## Security & Governance
 
-- **Zero Hardcoded Secrets**: All credentials and tokens are read exclusively from environment variables via typed Pydantic Settings.
-- **Automated SAST & CodeQL**: Continuous vulnerability scanning via GitHub Actions ([`.github/workflows/codeql.yml`](.github/workflows/codeql.yml)).
-- **Vulnerability Reporting**: Follow the coordinated disclosure guidelines in [SECURITY.md](SECURITY.md).
-- **Dependency Management**: Weekly Dependabot scans ([`.github/dependabot.yml`](.github/dependabot.yml)) and automated `pip-audit` checks.
+DocuTask Agent enforces defense-in-depth architectural security with dedicated verification fixtures:
+
+- **Centralized Filesystem Containment**: Strict path traversal and directory escape prevention using `resolve_safe_path` and `validate_safe_filename_segment` (CWE-22 mitigation).
+- **Cryptographic Standards**: Bcrypt password hashing (with PBKDF2-HMAC-SHA256 fallback), SHA-256 token hashing for database persistence, and timing-attack resistant comparisons via `hmac.compare_digest`.
+- **Log Injection Protection**: Automated CRLF and ASCII control-character stripping on external inputs via `sanitize_log_input` (CWE-117 mitigation).
+- **SSRF & URL Domain Validation**: Strict URL scheme and hostname parsing with prefix-collision attack defense (`validate_safe_url`).
+- **Zero Hardcoded Secrets**: All credentials and tokens are managed via environment variables and typed Pydantic Settings.
+- **Continuous SAST & Scanning**: Integrated CodeQL, Bandit, and pytest security test suite (`tests/security/`).
+- **Vulnerability Reporting**: Coordinated disclosure process documented in [SECURITY.md](SECURITY.md).
 
 ---
 
