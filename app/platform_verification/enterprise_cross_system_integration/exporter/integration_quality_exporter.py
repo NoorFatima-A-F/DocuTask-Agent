@@ -37,38 +37,38 @@ class CrossSystemIntegrationQualityExporter(ICrossSystemIntegrationQualityExport
             exported_files[filename] = filepath
 
         # 2. Export quality score JSON
-        score_path = os.path.join(target_dir, "cross_system_integration_quality_score.json")
+        score_path = resolve_safe_path(target_dir, "cross_system_integration_quality_score.json")
         with open(score_path, "w", encoding="utf-8") as f:
             json.dump(report.score.model_dump(), f, indent=2, default=str)
-        exported_files["cross_system_integration_quality_score.json"] = score_path
+        exported_files["cross_system_integration_quality_score.json"] = str(score_path)
 
         # 3. Export overall quality report JSON
-        report_path = os.path.join(target_dir, "cross_system_integration_quality_report.json")
+        report_path = resolve_safe_path(target_dir, "cross_system_integration_quality_report.json")
         with open(report_path, "w", encoding="utf-8") as f:
             json.dump(report.model_dump(), f, indent=2, default=str)
-        exported_files["cross_system_integration_quality_report.json"] = report_path
+        exported_files["cross_system_integration_quality_report.json"] = str(report_path)
 
         # 4. Generate & Export Summary Markdown
         summary_md = self._generate_summary_markdown(report)
-        md_path = os.path.join(target_dir, "cross_system_integration_summary_report.md")
+        md_path = resolve_safe_path(target_dir, "cross_system_integration_summary_report.md")
         with open(md_path, "w", encoding="utf-8") as f:
             f.write(summary_md)
-        exported_files["cross_system_integration_summary_report.md"] = md_path
+        exported_files["cross_system_integration_summary_report.md"] = str(md_path)
 
         # 5. Generate SHA-256 Manifest
         manifest = {}
-        for fname, fpath in exported_files.items():
+        for fname, fpath_str in exported_files.items():
             safe_fpath = resolve_safe_path(target_dir, fname)
             with open(safe_fpath, "rb") as f:
                 manifest[fname] = {
                     "sha256": hashlib.sha256(f.read()).hexdigest(),
-                    "size_bytes": os.path.getsize(fpath),
+                    "size_bytes": safe_fpath.stat().st_size,
                 }
 
         manifest_path = resolve_safe_path(target_dir, "manifest.json")
         with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, indent=2)
-        exported_files["manifest.json"] = manifest_path
+        exported_files["manifest.json"] = str(manifest_path)
 
         # 6. Generate Metadata JSON
         metadata = {
@@ -84,7 +84,7 @@ class CrossSystemIntegrationQualityExporter(ICrossSystemIntegrationQualityExport
         meta_path = resolve_safe_path(target_dir, "metadata.json")
         with open(meta_path, "w", encoding="utf-8") as f:
             json.dump(metadata, f, indent=2)
-        exported_files["metadata.json"] = meta_path
+        exported_files["metadata.json"] = str(meta_path)
 
         return exported_files
 

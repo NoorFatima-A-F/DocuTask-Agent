@@ -27,6 +27,7 @@ class Settings(BaseSettings):
 
     # Application Info
     APP_NAME: str = "DocuTask Agent"
+    PROJECT_NAME: str = "DocuTask Agent"
     APP_VERSION: str = "1.0.0"
     ENVIRONMENT: str = Field(default="development", description="Environment: development, staging, production")
     DEBUG: bool = Field(default=False, description="Debug mode flag")
@@ -34,11 +35,16 @@ class Settings(BaseSettings):
 
     # API & Server Configuration
     API_V1_PREFIX: str = "/api/v1"
+    API_V1_STR: str = "/api/v1"
     HOST: str = "0.0.0.0"
     PORT: int = 8000
     CORS_ORIGINS: List[str] = Field(
         default_factory=lambda: ["http://localhost:3000", "http://localhost:8000"],
         description="Allowed CORS origins",
+    )
+    BACKEND_CORS_ORIGINS: List[str] = Field(
+        default_factory=lambda: ["http://localhost:3000", "http://localhost:8000"],
+        description="Allowed CORS origins alias",
     )
 
     # Authentication & Security
@@ -74,6 +80,7 @@ class Settings(BaseSettings):
 
     # Storage & Cache Configuration
     STORAGE_LOCAL_PATH: str = "./uploads"
+    STORAGE_LOCAL_DIR: str = "./uploads"
     MAX_UPLOAD_SIZE_MB: int = 50
     REDIS_URL: Optional[str] = Field(
         default=None,

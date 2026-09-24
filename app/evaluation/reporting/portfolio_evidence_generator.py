@@ -65,9 +65,10 @@ class PortfolioEvidenceGenerator(IPortfolioEvidenceGenerator):
         # 6. Generate SHA-256 Manifest
         manifest = {}
         for fname, fpath_str in exported_files.items():
-            safe_fpath = resolve_safe_path(target_dir, fname)
+            safe_fname = validate_safe_filename_segment(fname)
+            safe_fpath = resolve_safe_path(target_dir, safe_fname)
             with open(safe_fpath, "rb") as f:
-                manifest[fname] = {
+                manifest[safe_fname] = {
                     "sha256": hashlib.sha256(f.read()).hexdigest(),
                     "size_bytes": safe_fpath.stat().st_size,
                 }

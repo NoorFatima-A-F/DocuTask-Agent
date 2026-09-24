@@ -33,11 +33,12 @@ class DREvidenceExporter:
             json.dump(data, f, indent=2, default=str)
         return str(safe_path)
 
-    def _write_text(self, path: str, text: str) -> str:
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, "w", encoding="utf-8") as f:
+    def _write_text(self, base_dir: Union[str, Path], filename: str, text: str) -> str:
+        safe_path = resolve_safe_path(base_dir, filename)
+        safe_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(safe_path, "w", encoding="utf-8") as f:
             f.write(text)
-        return os.path.abspath(path)
+        return str(safe_path)
 
     def generate_markdown_report(
         self,
@@ -118,8 +119,12 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
         )
 
         # 1. Certification Directory Export
+        safe_cert_dir = resolve_safe_path(Path.cwd(), cert_dir)
+        safe_evidence_dir = resolve_safe_path(Path.cwd(), evidence_dir)
+
         manifests["certification.json"] = self._write_json(
-            os.path.join(cert_dir, "certification.json"),
+            safe_cert_dir,
+            "certification.json",
             {
                 "system": "DocuTask Agent",
                 "disaster_readiness": {
@@ -136,16 +141,17 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
             },
         )
         manifests["resilience_score.json"] = self._write_json(
-            os.path.join(cert_dir, "resilience_score.json"), asdict(scorecard)
+            safe_cert_dir, "resilience_score.json", asdict(scorecard)
         )
         manifests["recovery_report.md"] = self._write_text(
-            os.path.join(cert_dir, "recovery_report.md"), md_content
+            safe_cert_dir, "recovery_report.md", md_content
         )
         manifests["scenario_results.json"] = self._write_json(
-            os.path.join(cert_dir, "scenario_results.json"), [asdict(s) for s in scenarios]
+            safe_cert_dir, "scenario_results.json", [asdict(s) for s in scenarios]
         )
         manifests["rto_rpo_report.json"] = self._write_json(
-            os.path.join(cert_dir, "rto_rpo_report.json"),
+            safe_cert_dir,
+            "rto_rpo_report.json",
             {
                 "target_rto_minutes": 45.0,
                 "measured_rto_minutes": scorecard.measured_rto_minutes,
@@ -156,7 +162,8 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
             },
         )
         manifests["incident_timeline.json"] = self._write_json(
-            os.path.join(cert_dir, "incident_timeline.json"),
+            safe_cert_dir,
+            "incident_timeline.json",
             {
                 "incident_started": now_iso,
                 "detection_time_seconds": detection.measured_mttd_seconds,
@@ -166,7 +173,8 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
             },
         )
         manifests["risk_register.json"] = self._write_json(
-            os.path.join(cert_dir, "risk_register.json"),
+            safe_cert_dir,
+            "risk_register.json",
             {
                 "total_monitored_disaster_risks": 5,
                 "unmitigated_critical_risks": 0,
@@ -175,7 +183,8 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
             },
         )
         manifests["metadata.json"] = self._write_json(
-            os.path.join(cert_dir, "metadata.json"),
+            safe_cert_dir,
+            "metadata.json",
             {
                 "framework": "PART_3G.3_ENTERPRISE_DR_SIMULATION",
                 "version": "1.0.0",
@@ -194,16 +203,17 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
         }
         for s in scenarios:
             fname = scenario_filenames.get(s.scenario_type.value, f"{s.scenario_type.value.lower()}.json")
-            manifests[f"scenarios/{fname}"] = self._write_json(
-                os.path.join(evidence_dir, "scenarios", fname), asdict(s)
+            safe_sname = validate_safe_filename_segment(fname)
+            manifests[f"scenarios/{safe_sname}"] = self._write_json(
+                safe_evidence_dir, f"scenarios/{safe_sname}", asdict(s)
             )
 
         manifests["execution_logs/recovery_execution_log.json"] = self._write_json(
-            os.path.join(evidence_dir, "execution_logs", "recovery_execution_log.json"),
-            recovery_workflow,
+            safe_evidence_dir, "execution_logs/recovery_execution_log.json", recovery_workflow
         )
         manifests["recovery_metrics/rto_rpo_mttr_metrics.json"] = self._write_json(
-            os.path.join(evidence_dir, "recovery_metrics", "rto_rpo_mttr_metrics.json"),
+            safe_evidence_dir,
+            "recovery_metrics/rto_rpo_mttr_metrics.json",
             {
                 "rto_minutes": scorecard.measured_rto_minutes,
                 "rpo_minutes": scorecard.measured_rpo_minutes,
@@ -212,15 +222,15 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
             },
         )
         manifests["validation_results/recovery_validation_report.json"] = self._write_json(
-            os.path.join(evidence_dir, "validation_results", "recovery_validation_report.json"),
-            asdict(validation),
+            safe_evidence_dir, "validation_results/recovery_validation_report.json", asdict(validation)
         )
         manifests["timeline.json"] = self._write_json(
-            os.path.join(evidence_dir, "timeline.json"),
+            safe_evidence_dir,
+            "timeline.json",
             [asdict(event) for s in scenarios for event in s.timeline],
         )
         manifests["final_report.md"] = self._write_text(
-            os.path.join(evidence_dir, "final_report.md"), md_content
+            safe_evidence_dir, "final_report.md", md_content
         )
 
         return manifests
