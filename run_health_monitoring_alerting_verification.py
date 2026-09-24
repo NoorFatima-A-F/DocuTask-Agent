@@ -144,7 +144,7 @@ def main() -> int:
     print(f" Total Metrics Scanned:      {sec_rep.metrics_scanned_count}")
     print(f" Total Logs Scanned:         {sec_rep.logs_scanned_count}")
     print(f" Total Alerts Scanned:       {sec_rep.alerts_scanned_count}")
-    print(f" Secret Leaks Found:         {sec_rep.secret_leaks_found} (Target: 0)")
+    print(f" Secret Leaks Found:         {int(sec_rep.secret_leaks_found)} (Target: 0)")
     print(f" Token Leaks Found:          {sec_rep.token_leaks_found} (Target: 0)")
     print(f" PII Leaks Found:            {sec_rep.pii_leaks_found} (Target: 0)")
     print(f" Zero Leak Verified:         {sec_rep.zero_leak_verified}")

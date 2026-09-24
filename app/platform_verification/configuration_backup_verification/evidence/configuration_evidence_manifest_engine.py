@@ -3,6 +3,8 @@ Evidence Manifest Engine for Enterprise Configuration Backup Verification (Part 
 """
 import os
 import json
+from pathlib import Path
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from dataclasses import asdict, is_dataclass
 from typing import Dict, Any, Optional
 
@@ -40,8 +42,8 @@ class ConfigurationEvidenceManifestEngine(IConfigurationEvidenceManifestEngine):
         """
         Exports all 14 JSON artifacts to disk with complete machine-readable audit logs.
         """
-        target_dir = output_dir or self.DEFAULT_OUTPUT_DIR
-        os.makedirs(target_dir, exist_ok=True)
+        target_dir = resolve_safe_path(Path.cwd(), output_dir or self.DEFAULT_OUTPUT_DIR)
+        target_dir.mkdir(parents=True, exist_ok=True)
 
         exported_paths: Dict[str, str] = {}
 
@@ -74,9 +76,10 @@ class ConfigurationEvidenceManifestEngine(IConfigurationEvidenceManifestEngine):
 
         for filename, data_content in file_mappings.items():
             serialized = _serialize_obj(data_content)
-            file_path = os.path.join(target_dir, filename)
+            safe_filename = validate_safe_filename_segment(filename)
+            file_path = resolve_safe_path(target_dir, safe_filename)
             with open(file_path, "w", encoding="utf-8") as f:
                 json.dump(serialized, f, indent=2, ensure_ascii=False)
-            exported_paths[filename] = os.path.abspath(file_path)
+            exported_paths[filename] = str(file_path)
 
         return exported_paths

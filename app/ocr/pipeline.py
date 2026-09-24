@@ -1,3 +1,4 @@
+from app.core.security import sanitize_log_input
 """
 OCR Pipeline Orchestrator.
 Coordinates document detection, digital PDF / text native extraction, OCR execution, and output aggregation.
@@ -40,7 +41,7 @@ class OCRPipeline:
         :return: DocumentContent object
         """
         doc_type = DocumentTypeDetector.detect_type(file_content, file_extension, mime_type)
-        logger.info(f"OCR Pipeline selected strategy [{doc_type}] for document '{document_id}'")
+        logger.info(f"OCR Pipeline selected strategy [{doc_type}] for document '{sanitize_log_input(document_id)}'")
 
         pages: List[PageContent] = []
 
@@ -84,7 +85,7 @@ class OCRPipeline:
         merged_text = "\n\n".join(full_text_chunks)
 
         logger.info(
-            f"Extraction completed for doc '{document_id}': Strategy={doc_type}, Pages={len(pages)}, AvgConfidence={avg_confidence}"
+            f"Extraction completed for doc '{sanitize_log_input(document_id)}': Strategy={doc_type}, Pages={len(pages)}, AvgConfidence={avg_confidence}"
         )
 
         return DocumentContent(

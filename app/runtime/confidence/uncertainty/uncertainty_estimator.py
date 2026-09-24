@@ -38,7 +38,7 @@ class UncertaintyEstimator:
         # Epistemic: inversely proportional to sample size of evidence
         epistemic = 1.0 / math.sqrt(max(1, evidence_count) + 10.0)
 
-        total_uncertainty = round(min(0.20, math.sqrt(aleatoric**2 + epistemic**2)), 4)
+        total_uncertainty = round(min(0.20, math.hypot(aleatoric, epistemic)), 4)
         return total_uncertainty, round(aleatoric, 4), round(epistemic, 4)
 
     @classmethod
@@ -65,7 +65,7 @@ class UncertaintyEstimator:
         epistemic = min(1.0, 0.5 * sample_decay + 0.5 * feature_anomaly_score)
 
         # Combined total uncertainty
-        total = min(1.0, math.sqrt(aleatoric ** 2 + epistemic ** 2) / math.sqrt(2.0))
+        total = min(1.0, math.hypot(aleatoric, epistemic) / math.sqrt(2.0))
 
         # Information gain potential
         info_gain = max(0.0, 1.0 - entropy)

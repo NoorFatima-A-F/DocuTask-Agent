@@ -5,6 +5,7 @@ Provides password hashing via bcrypt, JWT token generation/decoding, and token h
 
 import hashlib
 import os
+import re
 from pathlib import Path
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -54,21 +55,66 @@ def validate_secret_key_strength(secret_key: str) -> bool:
     return True
 
 
-def get_safe_path(base_dir: Union[str, Path], untrusted_subpath: Union[str, Path]) -> Path:
+class UnsafePathError(ValueError):
+    """Raised when a path traversal, directory escape, or malicious segment attempt is detected."""
+    pass
+
+
+PathInput = Union[str, Path, os.PathLike]
+
+
+def validate_safe_filename_segment(value: str) -> str:
+    r"""
+    Validates and sanitizes a single filename segment (report ID, runbook ID, evidence ID, etc.).
+    Rejects path traversal characters (/ \ .. null bytes).
     """
-    Resolves and strictly validates that a target subpath stays within the intended base directory.
-    Prevents path traversal and directory escape attacks (CWE-22 / py/path-injection).
+    if not value or not isinstance(value, str):
+        raise UnsafePathError("Filename segment cannot be empty or non-string.")
+    if "\x00" in value or "/" in value or "\\" in value or ".." in value:
+        raise UnsafePathError(f"Security violation: Filename segment contains illegal path traversal characters: '{value}'")
+    sanitized = re.sub(r"[^a-zA-Z0-9_.\-]", "_", value.strip())
+    if not sanitized or sanitized in (".", ".."):
+        raise UnsafePathError(f"Security violation: Invalid filename segment '{value}'")
+    return sanitized
+
+
+def resolve_safe_path(
+    base_dir: PathInput,
+    untrusted_path: PathInput,
+    *,
+    allow_base: bool = True,
+) -> Path:
     """
-    base = Path(base_dir).resolve()
-    target = (base / untrusted_subpath).resolve()
+    Resolves and strictly verifies that candidate path is contained within base_dir.
+    Rejects directory escape / path traversal (CWE-22 / py/path-injection).
+    """
+    base = Path(base_dir).expanduser().resolve()
+    candidate = (base / Path(untrusted_path)).resolve()
     try:
-        is_rel = target == base or target.is_relative_to(base)
+        is_contained = (candidate == base and allow_base) or candidate.is_relative_to(base)
     except AttributeError:
         # Python < 3.9 fallback
-        is_rel = os.path.commonpath([str(base), str(target)]) == str(base)
-    if not is_rel:
-        raise ValueError(f"Security violation: Path traversal attempt detected for '{untrusted_subpath}'")
-    return target
+        is_contained = (candidate == base and allow_base) or os.path.commonpath([str(base), str(candidate)]) == str(base)
+    if not is_contained:
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base}'")
+    return candidate
+
+
+get_safe_path = resolve_safe_path
+
+
+def sanitize_log_input(value: Any) -> str:
+    """
+    Sanitizes user/external input for safe logging by removing newline/CR characters (CWE-117).
+    Prevents log injection / log forging.
+    """
+    if value is None:
+        return ""
+    clean = re.sub(r"[\r\n\x00-\x1f\x7f-\x9f]", "_", str(value))
+    if len(clean) > 256:
+        return clean[:253] + "..."
+    return clean
+
 
 
 

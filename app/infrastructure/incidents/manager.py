@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Incident Manager.
 
@@ -5,9 +6,9 @@ Central coordination for creating, deduping, correlating, escalating,
 and resolving infrastructure incidents across DocuTask Agent.
 """
 
-from __future__ import annotations
 
 import logging
+from app.core.security import sanitize_log_input
 import uuid
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
@@ -94,7 +95,7 @@ class IncidentManager:
                 content=f"Immediate response required for {components}",
             )
 
-        logger.info(f"Created incident '{incident_id}' with severity {severity.value}")
+        logger.info(f"Created incident '{sanitize_log_input(incident_id)}' with severity {severity.value}")
         return incident
 
     def get_incident(self, incident_id: str) -> Optional[Incident]:

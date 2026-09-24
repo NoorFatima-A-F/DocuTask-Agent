@@ -4,7 +4,9 @@ AST Class & Method Analyzer extracting CK metrics and SOLID indicators.
 from __future__ import annotations
 import ast
 import os
+from pathlib import Path
 from typing import Any, Dict, List, Set, Tuple
+from app.core.security import resolve_safe_path
 from app.platform_verification.solid_verification.domain.interfaces import ISolidASTAnalyzer
 from app.platform_verification.solid_verification.domain.models import (
     ClassDesignMetrics,
@@ -18,8 +20,9 @@ class EnterpriseSolidASTAnalyzer(ISolidASTAnalyzer):
     def analyze_classes(self, root_dir: str) -> Tuple[Dict[str, ClassDesignMetrics], Dict[str, InterfaceDesignMetrics]]:
         class_metrics: Dict[str, ClassDesignMetrics] = {}
         interface_metrics: Dict[str, InterfaceDesignMetrics] = {}
+        root_path = Path(root_dir).expanduser().resolve()
 
-        for dirpath, _, filenames in os.walk(root_dir):
+        for dirpath, _, filenames in os.walk(root_path):
             if any(p in dirpath for p in [".git", "__pycache__", ".pytest_cache", "venv", ".venv"]):
                 continue
 
@@ -27,8 +30,8 @@ class EnterpriseSolidASTAnalyzer(ISolidASTAnalyzer):
                 if not fname.endswith(".py"):
                     continue
 
-                full_path = os.path.join(dirpath, fname)
-                rel_path = os.path.relpath(full_path, root_dir).replace("\\", "/")
+                full_path = resolve_safe_path(root_path, os.path.join(dirpath, fname))
+                rel_path = os.path.relpath(full_path, root_path).replace("\\", "/")
 
                 try:
                     with open(full_path, "r", encoding="utf-8", errors="ignore") as f:

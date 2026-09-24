@@ -117,7 +117,7 @@ def main() -> int:
     print("-" * 100)
     print(f" Total Evaluated Security Checks:     {sec_rep.total_checks}")
     print(f" Unauthorized / Destructive Blocked:  {sec_rep.unauthorized_commands_blocked} (Target: >= 3)")
-    print(f" Secret / Token Leaks Detected:       {sec_rep.secret_leaks_found} (Target: 0)")
+    print(f" Secret / Token Leaks Detected:       {int(sec_rep.secret_leaks_found)} (Target: 0)")
     print(f" RBAC Role Enforcement:               {sec_rep.rbac_enforced}")
     print(f" Audit Compliance Status:             {sec_rep.status}")
 

@@ -97,14 +97,16 @@ class PerformanceInfrastructureExporter(IPerformanceInfrastructureExporter):
         certification: EnterprisePerformanceCertificationReport,
         output_dir: str = "performance_verification",
     ) -> PerformanceVerificationManifest:
-        os.makedirs(output_dir, exist_ok=True)
+        safe_out = resolve_safe_path(Path.cwd(), output_dir)
+        safe_out.mkdir(parents=True, exist_ok=True)
         file_hashes: Dict[str, str] = {}
         written_files: List[str] = []
 
         # 1. Export individual verification reports
         for key, report in reports.items():
-            fname = self._resolve_filename(key, report)
-            fpath = os.path.join(output_dir, fname)
+            raw_fname = self._resolve_filename(key, report)
+            fname = validate_safe_filename_segment(raw_fname)
+            fpath = resolve_safe_path(safe_out, fname)
 
             if hasattr(report, "model_dump_json"):
                 content = report.model_dump_json(indent=2)
@@ -119,8 +121,9 @@ class PerformanceInfrastructureExporter(IPerformanceInfrastructureExporter):
 
             # Check aliases
             if fname in self.ALIASES_MAP:
-                alias_name = self.ALIASES_MAP[fname]
-                alias_path = os.path.join(output_dir, alias_name)
+                raw_alias = self.ALIASES_MAP[fname]
+                alias_name = validate_safe_filename_segment(raw_alias)
+                alias_path = resolve_safe_path(safe_out, alias_name)
                 with open(alias_path, "w", encoding="utf-8") as f:
                     f.write(content)
                 file_hashes[alias_name] = hashlib.sha256(content.encode("utf-8")).hexdigest()
@@ -128,7 +131,7 @@ class PerformanceInfrastructureExporter(IPerformanceInfrastructureExporter):
 
         # 2. Export certification report
         cert_name = "certification_report.json"
-        cert_path = os.path.join(output_dir, cert_name)
+        cert_path = resolve_safe_path(safe_out, cert_name)
         cert_content = certification.model_dump_json(indent=2)
         with open(cert_path, "w", encoding="utf-8") as f:
             f.write(cert_content)
@@ -148,7 +151,7 @@ class PerformanceInfrastructureExporter(IPerformanceInfrastructureExporter):
             file_hashes=file_hashes,
         )
 
-        manifest_path = os.path.join(output_dir, "metadata.json")
+        manifest_path = resolve_safe_path(safe_out, "metadata.json")
         manifest_content = manifest.model_dump_json(indent=2)
         with open(manifest_path, "w", encoding="utf-8") as f:
             f.write(manifest_content)

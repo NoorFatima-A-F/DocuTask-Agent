@@ -48,14 +48,14 @@ class OCRService:
 
         # Multi-tenant isolation check
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning(f"Unauthorized OCR extraction attempt: User '{owner.id}' on Document '{document_id}'")
+            logger.warning(f"Unauthorized OCR extraction attempt: User '{sanitize_log_input(owner.id)}' on Document '{sanitize_log_input(document_id)}'")
             raise ResourceNotFoundException("Document not found")
 
         # Caching check
         if not force_reextract:
             existing_pages = await self.text_repo.get_document_text(document_id)
             if existing_pages:
-                logger.info(f"Returning cached extracted text for document '{document_id}'")
+                logger.info(f"Returning cached extracted text for document '{sanitize_log_input(document_id)}'")
                 page_contents = [
                     PageContent(
                         page_number=p.page_number,
@@ -111,11 +111,11 @@ class OCRService:
             # Update status to OCR_COMPLETED
             await self.doc_repo.update_status(doc, "OCR_COMPLETED")
 
-            logger.info(f"Persisted text extraction for document '{document_id}': {len(pages_to_create)} pages")
+            logger.info(f"Persisted text extraction for document '{sanitize_log_input(document_id)}': {len(pages_to_create)} pages")
             return doc_content
 
         except Exception as exc:
-            logger.error(f"OCR text extraction failed for document '{document_id}': {str(exc)}")
+            logger.error(f"OCR text extraction failed for document '{sanitize_log_input(document_id)}': {str(exc)}")
             await self.doc_repo.update_status(doc, "OCR_FAILED")
             raise exc
 

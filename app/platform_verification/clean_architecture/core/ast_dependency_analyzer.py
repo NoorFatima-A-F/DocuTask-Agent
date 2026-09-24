@@ -4,7 +4,9 @@ AST Dependency Analyzer extracting direct, relative, and dynamic imports.
 from __future__ import annotations
 import ast
 import os
+from pathlib import Path
 from typing import Any, Dict, List, Tuple
+from app.core.security import resolve_safe_path
 from app.platform_verification.clean_architecture.core.layer_definitions import classify_module_layer
 from app.platform_verification.clean_architecture.domain.interfaces import ICleanArchitectureScanner
 from app.platform_verification.clean_architecture.domain.models import (
@@ -19,8 +21,9 @@ class EnterpriseCleanArchASTScanner(ICleanArchitectureScanner):
 
     def scan_codebase(self, root_dir: str) -> List[CleanArchDependencyEdge]:
         edges: List[CleanArchDependencyEdge] = []
+        root_path = Path(root_dir).expanduser().resolve()
 
-        for dirpath, _, filenames in os.walk(root_dir):
+        for dirpath, _, filenames in os.walk(root_path):
             if any(p in dirpath for p in [".git", "__pycache__", ".pytest_cache", "venv", ".venv"]):
                 continue
 
@@ -28,8 +31,8 @@ class EnterpriseCleanArchASTScanner(ICleanArchitectureScanner):
                 if not fname.endswith(".py"):
                     continue
 
-                full_path = os.path.join(dirpath, fname)
-                rel_path = os.path.relpath(full_path, root_dir).replace("\\", "/")
+                full_path = resolve_safe_path(root_path, os.path.join(dirpath, fname))
+                rel_path = os.path.relpath(full_path, root_path).replace("\\", "/")
                 src_mod = rel_path.replace(".py", "").replace("/", ".")
                 src_layer = classify_module_layer(src_mod)
 

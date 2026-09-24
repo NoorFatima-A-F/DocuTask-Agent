@@ -3,7 +3,9 @@ Runbook Catalog and Generator for Disaster Recovery Simulation Framework (Part 3
 Provides executable disaster recovery runbooks: database_failure, storage_failure, complete_outage, rollback, communication.
 """
 import os
-from typing import Dict, List
+from pathlib import Path
+from typing import Dict, List, Union
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 
 
 class RunbookCatalog:
@@ -19,8 +21,8 @@ class RunbookCatalog:
     """
 
     def generate_all_runbooks(self, output_dir: str = "runbooks") -> Dict[str, str]:
-        safe_dir = os.path.abspath(output_dir)
-        os.makedirs(safe_dir, exist_ok=True)
+        safe_dir = resolve_safe_path(Path.cwd(), output_dir)
+        safe_dir.mkdir(parents=True, exist_ok=True)
         manifests = {}
 
         # 1. Database Failure Runbook
@@ -63,7 +65,7 @@ python -m app.platform_verification.database_backup_verification.cli
 ## 5. Rollback Procedure
 If restored instance exhibits schema drift, revert DNS to read-replica promoted cluster.
 """
-        manifests["database_failure.md"] = self._write(os.path.join(output_dir, "database_failure.md"), db_content)
+        manifests["database_failure.md"] = self._write(safe_dir, "database_failure.md", db_content)
 
         # 2. Storage Failure Runbook
         storage_content = """# Runbook: Object Storage Outage Recovery
@@ -95,7 +97,7 @@ aws s3api head-bucket --bucket docutask-dr-vault-secondary
 python -m app.platform_verification.document_storage_verification.cli
 ```
 """
-        manifests["storage_failure.md"] = self._write(os.path.join(output_dir, "storage_failure.md"), storage_content)
+        manifests["storage_failure.md"] = self._write(safe_dir, "storage_failure.md", storage_content)
 
         # 3. Complete Outage Runbook
         complete_content = """# Runbook: Complete Regional Cloud Outage & Bare-Metal Resurrection
@@ -142,7 +144,7 @@ Defines safe procedures to roll back traffic from disaster recovery region back 
 3. Switch Route53 Weighted DNS back to 100% Primary.
 4. Resume workers and verify zero message drops in Redis queue.
 """
-        manifests["rollback.md"] = self._write(os.path.join(output_dir, "rollback.md"), rollback_content)
+        manifests["rollback.md"] = self._write(safe_dir, "rollback.md", rollback_content)
 
         # 5. Communication Runbook
         comm_content = """# Runbook: Incident Response & Stakeholder Communication
@@ -155,13 +157,14 @@ Defines safe procedures to roll back traffic from disaster recovery region back 
 * **Internal War Room**: Slack `#incident-war-room-dr` + Zoom Bridge.
 * **PagerDuty Escalation**: `PAGERDUTY_SEV1_TIER1_SRE`.
 """
-        manifests["communication.md"] = self._write(os.path.join(output_dir, "communication.md"), comm_content)
+        manifests["communication.md"] = self._write(safe_dir, "communication.md", comm_content)
 
         return manifests
 
-    def _write(self, path: str, content: str) -> str:
-        safe_path = os.path.abspath(path)
-        os.makedirs(os.path.dirname(safe_path), exist_ok=True)
+    def _write(self, base_dir: Union[str, Path], filename: str, content: str) -> str:
+        safe_name = validate_safe_filename_segment(filename)
+        safe_path = resolve_safe_path(base_dir, safe_name)
+        safe_path.parent.mkdir(parents=True, exist_ok=True)
         with open(safe_path, "w", encoding="utf-8") as f:
             f.write(content)
-        return safe_path
+        return str(safe_path)

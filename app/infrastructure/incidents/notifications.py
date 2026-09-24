@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Incident Notifier & Alert Dispatcher.
 
@@ -5,10 +6,10 @@ Dispatches multi-channel notifications (Webhook, Slack, Email, PagerDuty, Event 
 with deduplication and rate limiting.
 """
 
-from __future__ import annotations
 
 import enum
 import logging
+from app.core.security import sanitize_log_input
 import time
 from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional
@@ -77,7 +78,7 @@ class IncidentNotifier:
         last_sent = self._last_sent_time.get(rate_key, 0.0)
 
         if (now - last_sent) < self.rate_limit_cooldown_seconds and severity != SeverityLevel.CATASTROPHIC:
-            logger.info(f"Notification suppressed by rate-limit for {rate_key}")
+            logger.info(f"Notification suppressed by rate-limit for {sanitize_log_input(rate_key)}")
             return None
 
         msg = NotificationMessage(
@@ -103,7 +104,7 @@ class IncidentNotifier:
 
         self._sent_messages.append(msg)
         self._last_sent_time[rate_key] = now
-        logger.info(f"Dispatched {channel.value} notification for incident '{incident_id}' (severity={severity.value})")
+        logger.info(f"Dispatched {channel.value} notification for incident '{sanitize_log_input(incident_id)}' (severity={severity.value})")
         return msg
 
     def list_dispatched_messages(self, incident_id: Optional[str] = None) -> List[NotificationMessage]:

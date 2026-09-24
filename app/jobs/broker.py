@@ -1,3 +1,4 @@
+from app.core.security import sanitize_log_input
 """
 Priority Message Broker Subsystem.
 Implements HIGH, MEDIUM, and LOW priority queues with starvation prevention.
@@ -29,7 +30,7 @@ class PriorityMessageBroker:
         else:
             await self.medium_queue.put(payload)
 
-        logger.info(f"Enqueued job '{payload.get('job_id')}' with priority '{prio}'")
+        logger.info(f"Enqueued job '{sanitize_log_input(payload.get('job_id'))}' with priority '{sanitize_log_input(prio)}'")
         return True
 
     async def dequeue(self) -> Optional[Dict[str, Any]]:

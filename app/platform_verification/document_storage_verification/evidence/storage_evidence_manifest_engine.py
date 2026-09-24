@@ -3,6 +3,8 @@ Evidence Manifest & Serialization Engine for Enterprise Document Storage (Part 3
 """
 import os
 import json
+from pathlib import Path
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from dataclasses import asdict, is_dataclass
 from typing import Dict, Any, Optional
 

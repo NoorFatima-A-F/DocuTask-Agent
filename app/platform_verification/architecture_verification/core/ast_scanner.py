@@ -4,7 +4,9 @@ AST-based static analysis scanner for Python codebases.
 from __future__ import annotations
 import ast
 import os
+from pathlib import Path
 from typing import Any, Dict, List, Tuple
+from app.core.security import resolve_safe_path
 from app.platform_verification.architecture_verification.domain.interfaces import IASTScanner
 from app.platform_verification.architecture_verification.domain.models import ArchitectureDependency
 
@@ -18,7 +20,9 @@ class EnterpriseASTScanner(IASTScanner):
         total_files = 0
         total_lines = 0
 
-        for dirpath, _, filenames in os.walk(root_dir):
+        root_path = Path(root_dir).expanduser().resolve()
+
+        for dirpath, _, filenames in os.walk(root_path):
             if any(p in dirpath for p in [".git", "__pycache__", ".pytest_cache", "venv", ".venv"]):
                 continue
 
@@ -27,8 +31,8 @@ class EnterpriseASTScanner(IASTScanner):
                     continue
 
                 total_files += 1
-                full_path = os.path.join(dirpath, fname)
-                rel_path = os.path.relpath(full_path, root_dir).replace("\\", "/")
+                full_path = resolve_safe_path(root_path, os.path.join(dirpath, fname))
+                rel_path = os.path.relpath(full_path, root_path).replace("\\", "/")
                 mod_name = rel_path.replace(".py", "").replace("/", ".")
 
                 try:

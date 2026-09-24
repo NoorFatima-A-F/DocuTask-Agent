@@ -1,11 +1,12 @@
+from __future__ import annotations
 """
 Ontology Engine for Phase 13.12 Autonomous Scientific Discovery.
 Manages dynamic semantic ontology expansion, concept taxonomy, and relationship graph.
 """
 
-from __future__ import annotations
 
 import logging
+from app.core.security import sanitize_log_input
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Set
@@ -164,7 +165,7 @@ class OntologyEngine:
                 },
             )
         )
-        logger.info("Registered ontology concept: %s (%s)", name, concept_id)
+        logger.info("Registered ontology concept: %s (%s)", sanitize_log_input(name), sanitize_log_input(concept_id))
         return concept
 
     def link_concepts(

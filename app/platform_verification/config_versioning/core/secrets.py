@@ -14,6 +14,7 @@ class SecretManagerService:
         self._secrets: Dict[str, SecretReference] = {}
         self._rotation_history: List[SecretRotationRecord] = []
         self._mock_vault_store: Dict[str, str] = {}
+        self._known_secret_values: set[str] = set()
 
     def register_secret_reference(
         self,
@@ -30,6 +31,7 @@ class SecretManagerService:
         self._secrets[key_name] = ref
         if initial_value:
             self._mock_vault_store[vault_path] = initial_value
+            self._known_secret_values.add(initial_value)
         return ref
 
     def rotate_secret(self, key_name: str, new_value: str, rotated_by: str = "KMS Automation", reason: str = "Scheduled rotation") -> SecretRotationRecord:
@@ -40,6 +42,8 @@ class SecretManagerService:
         ref.version += 1
         ref.is_rotated = True
         self._mock_vault_store[ref.vault_path] = new_value
+        if new_value:
+            self._known_secret_values.add(new_value)
 
         record = SecretRotationRecord(
             secret_id=ref.secret_id,
@@ -53,7 +57,7 @@ class SecretManagerService:
 
     def mask_secrets(self, text: str) -> str:
         """Sanitizes text, replacing high-entropy token patterns and registered vault secrets with [REDACTED_SECRET]"""
-        for val in self._mock_vault_store.values():
+        for val in list(self._known_secret_values) + list(self._mock_vault_store.values()):
             if val and len(val) >= 6:
                 text = text.replace(val, "[REDACTED_SECRET]")
         pattern = r"(?:AIza[0-9A-Za-z\-_]{20,}|sk-[a-zA-Z0-9]{20,}|ghp_[a-zA-Z0-9]{20,}|bearer\s+[a-zA-Z0-9\._\-]+)"

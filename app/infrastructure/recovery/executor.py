@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Recovery Workflow Executor.
 
@@ -5,9 +6,9 @@ Executes disaster recovery workflow sequences, manages step timeouts,
 coordinates automatic rollbacks upon failure, and generates post-recovery execution reports.
 """
 
-from __future__ import annotations
 
 import logging
+from app.core.security import sanitize_log_input
 import time
 from datetime import datetime, timezone
 from typing import Callable, Dict, List, Optional
@@ -70,7 +71,7 @@ class RecoveryWorkflowExecutor:
         overall_success = True
         overall_error: Optional[str] = None
 
-        logger.info(f"Starting recovery workflow '{workflow.workflow_id}' ({workflow.title})")
+        logger.info(f"Starting recovery workflow '{sanitize_log_input(workflow.workflow_id)}' ({workflow.title})")
 
         for step in workflow.steps:
             step.status = StepStatus.EXECUTING
@@ -107,7 +108,7 @@ class RecoveryWorkflowExecutor:
 
         # If failed, rollback previously completed steps in reverse order
         if not overall_success:
-            logger.warning(f"Workflow '{workflow.workflow_id}' failed. Initiating rollback of completed steps.")
+            logger.warning(f"Workflow '{sanitize_log_input(workflow.workflow_id)}' failed. Initiating rollback of completed steps.")
             for step in reversed(executed_steps_to_rollback):
                 rb_handler = self._rollback_handlers.get(step.step_id)
                 try:

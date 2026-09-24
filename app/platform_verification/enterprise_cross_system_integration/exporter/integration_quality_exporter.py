@@ -3,8 +3,10 @@
 import hashlib
 import json
 import os
+from pathlib import Path
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import ICrossSystemIntegrationQualityExporter
 from ..domain.models import CrossSystemIntegrationQualityReport
 
@@ -19,15 +21,16 @@ class CrossSystemIntegrationQualityExporter(ICrossSystemIntegrationQualityExport
         report: CrossSystemIntegrationQualityReport,
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
-        target_dir = output_dir or self.DEFAULT_OUTPUT_DIR
-        os.makedirs(target_dir, exist_ok=True)
+        target_dir = resolve_safe_path(Path.cwd(), output_dir or self.DEFAULT_OUTPUT_DIR)
+        target_dir.mkdir(parents=True, exist_ok=True)
 
         exported_files: Dict[str, str] = {}
 
         # 1. Export individual subsystem verification reports
         for name, rep in report.reports.items():
-            filename = f"{name}_report.json"
-            filepath = os.path.join(target_dir, filename)
+            safe_name = validate_safe_filename_segment(name)
+            filename = f"{safe_name}_report.json"
+            filepath = resolve_safe_path(target_dir, filename)
             data = rep.model_dump() if hasattr(rep, "model_dump") else rep
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, default=str)
@@ -55,13 +58,14 @@ class CrossSystemIntegrationQualityExporter(ICrossSystemIntegrationQualityExport
         # 5. Generate SHA-256 Manifest
         manifest = {}
         for fname, fpath in exported_files.items():
-            with open(fpath, "rb") as f:
+            safe_fpath = resolve_safe_path(target_dir, fname)
+            with open(safe_fpath, "rb") as f:
                 manifest[fname] = {
                     "sha256": hashlib.sha256(f.read()).hexdigest(),
                     "size_bytes": os.path.getsize(fpath),
                 }
 
-        manifest_path = os.path.join(target_dir, "manifest.json")
+        manifest_path = resolve_safe_path(target_dir, "manifest.json")
         with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, indent=2)
         exported_files["manifest.json"] = manifest_path
@@ -77,7 +81,7 @@ class CrossSystemIntegrationQualityExporter(ICrossSystemIntegrationQualityExport
             "total_artifacts": len(exported_files) + 1,
             "generated_at": datetime.now(timezone.utc).isoformat(),
         }
-        meta_path = os.path.join(target_dir, "metadata.json")
+        meta_path = resolve_safe_path(target_dir, "metadata.json")
         with open(meta_path, "w", encoding="utf-8") as f:
             json.dump(metadata, f, indent=2)
         exported_files["metadata.json"] = meta_path

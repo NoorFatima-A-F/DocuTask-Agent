@@ -1,3 +1,4 @@
+from app.core.security import sanitize_log_input
 """
 Dead Letter Queue (DLQ) & Manual Replay Engine.
 Stores failed jobs exceeding max attempts and provides manual replay capabilities.
@@ -57,7 +58,7 @@ class DeadLetterQueueEngine:
         Replays a failed job from DLQ back into the active processing queue.
         """
         if job_id not in cls._dlq_store:
-            logger.warning(f"DLQ Replay failed: Job '{job_id}' not found in DLQ.")
+            logger.warning(f"DLQ Replay failed: Job '{sanitize_log_input(job_id)}' not found in DLQ.")
             return False
 
         item = cls._dlq_store.pop(job_id)

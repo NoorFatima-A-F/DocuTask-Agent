@@ -4,7 +4,9 @@ Phase 3H.4.11.13: Operational Readiness Evidence Exporter
 import os
 import json
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, Any, List
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import IReadinessEvidenceExporter
 from ..domain.models import OperationalReadinessScorecard
 
@@ -15,8 +17,8 @@ class ReadinessEvidenceExporter(IReadinessEvidenceExporter):
         output_dir: str,
         scorecard: OperationalReadinessScorecard,
     ) -> List[str]:
-        safe_dir = os.path.abspath(output_dir)
-        os.makedirs(safe_dir, exist_ok=True)
+        safe_dir = resolve_safe_path(Path.cwd(), output_dir)
+        safe_dir.mkdir(parents=True, exist_ok=True)
         files_written = []
 
         manifests: Dict[str, Any] = {
@@ -62,12 +64,10 @@ class ReadinessEvidenceExporter(IReadinessEvidenceExporter):
         }
 
         for filename, data in manifests.items():
-            clean_name = os.path.basename(filename)
-            path = os.path.abspath(os.path.join(safe_dir, clean_name))
-            if not path.startswith(safe_dir):
-                raise ValueError(f"Path traversal detected: {filename}")
+            clean_name = validate_safe_filename_segment(filename)
+            path = resolve_safe_path(safe_dir, clean_name)
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, default=str)
-            files_written.append(path)
+            files_written.append(str(path))
 
         return files_written

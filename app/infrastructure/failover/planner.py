@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Regional Failover Planner.
 
@@ -5,10 +6,10 @@ Generates and validates automated and manual failover plans, verifying target re
 capacity headroom, data residency boundaries, tenant isolation, and dependency readiness.
 """
 
-from __future__ import annotations
 
 import enum
 import logging
+from app.core.security import sanitize_log_input
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
@@ -123,7 +124,7 @@ class RegionalFailoverPlanner:
         """Run pre-flight checks before approving a plan."""
         plan = self._plans.get(plan_id)
         if not plan:
-            raise KeyError(f"Failover plan '{plan_id}' not found.")
+            raise KeyError(f"Failover plan '{sanitize_log_input(plan_id)}' not found.")
 
         plan.status = FailoverStatus.VALIDATING
         checks: List[PreflightCheckResult] = []
@@ -175,10 +176,10 @@ class RegionalFailoverPlanner:
 
         if all_passed:
             plan.status = FailoverStatus.APPROVED
-            logger.info(f"Failover plan '{plan_id}' passed preflight checks and is APPROVED.")
+            logger.info(f"Failover plan '{sanitize_log_input(plan_id)}' passed preflight checks and is APPROVED.")
         else:
             plan.status = FailoverStatus.FAILED
-            logger.warning(f"Failover plan '{plan_id}' failed preflight checks.")
+            logger.warning(f"Failover plan '{sanitize_log_input(plan_id)}' failed preflight checks.")
 
         return all_passed
 

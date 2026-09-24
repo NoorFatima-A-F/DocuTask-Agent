@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Failover Orchestrator.
 
@@ -5,9 +6,9 @@ Coordinates end-to-end failover execution including pre-flight verification,
 graceful draining, lease revocation, target activation, traffic re-routing, and post-audit.
 """
 
-from __future__ import annotations
 
 import logging
+from app.core.security import sanitize_log_input
 import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -149,7 +150,7 @@ class FailoverOrchestrator:
                 audit_trail=audit_trail,
             )
             self._execution_history[plan_id] = result
-            logger.error(f"Failover execution failed for plan '{plan_id}': {e}")
+            logger.error(f"Failover execution failed for plan '{sanitize_log_input(plan_id)}': {sanitize_log_input(str(e))}")
             return result
 
     def get_execution_result(self, plan_id: str) -> Optional[FailoverExecutionResult]:

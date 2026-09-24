@@ -4,7 +4,9 @@ Phase 3H.5.5: Self-Healing Evidence Exporter
 import os
 import json
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Dict, Any, List
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import ISelfHealingEvidenceExporter
 from ..domain.models import RecoveryValidationReport, SelfHealingScorecard
 
@@ -16,8 +18,8 @@ class SelfHealingEvidenceExporter(ISelfHealingEvidenceExporter):
         validation_report: RecoveryValidationReport,
         scorecard: SelfHealingScorecard,
     ) -> List[str]:
-        safe_dir = os.path.abspath(output_dir)
-        os.makedirs(safe_dir, exist_ok=True)
+        safe_dir = resolve_safe_path(Path.cwd(), output_dir)
+        safe_dir.mkdir(parents=True, exist_ok=True)
         files_written = []
 
         now_str = datetime.now(timezone.utc).isoformat()
@@ -42,12 +44,10 @@ class SelfHealingEvidenceExporter(ISelfHealingEvidenceExporter):
         }
 
         for fname, data in manifests.items():
-            clean_name = os.path.basename(fname)
-            path = os.path.abspath(os.path.join(safe_dir, clean_name))
-            if not path.startswith(safe_dir):
-                raise ValueError(f"Path traversal detected: {fname}")
+            clean_name = validate_safe_filename_segment(fname)
+            path = resolve_safe_path(safe_dir, clean_name)
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, default=str)
-            files_written.append(path)
+            files_written.append(str(path))
 
         return files_written

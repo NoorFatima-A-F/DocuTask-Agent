@@ -16,6 +16,7 @@ from app.core.exceptions import (
 )
 from app.core.logging import logger
 from app.core.security import (
+    sanitize_log_input,
     create_access_token,
     create_refresh_token,
     decode_token,
@@ -52,12 +53,12 @@ class AuthService:
         """
         # Validate email uniqueness
         if await self.user_repo.exists_email(request.email):
-            logger.warning(f"Registration failed: Email '{request.email}' already exists.")
+            logger.warning(f"Registration failed: Email '{sanitize_log_input(request.email)}' already exists.")
             raise DuplicateResourceException("An account with this email address already exists.")
 
         # Validate username uniqueness
         if await self.user_repo.exists_username(request.username):
-            logger.warning(f"Registration failed: Username '{request.username}' already exists.")
+            logger.warning(f"Registration failed: Username '{sanitize_log_input(request.username)}' already exists.")
             raise DuplicateResourceException("An account with this username already exists.")
 
         # Hash password and persist user
@@ -87,7 +88,7 @@ class AuthService:
             user = await self.user_repo.get_by_username(identifier)
 
         if not user or not verify_password(request.password, user.hashed_password):
-            logger.warning(f"Login attempt failed for identifier: '{identifier}'")
+            logger.warning(f"Login attempt failed for identifier: '{sanitize_log_input(identifier)}'")
             raise InvalidCredentialsException("Invalid email/username or password.")
 
         if not user.is_active:

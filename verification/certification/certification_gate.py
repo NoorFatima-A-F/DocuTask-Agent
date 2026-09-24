@@ -61,7 +61,9 @@ class CertificationGate:
 
         # 2. Minimum Enterprise Score Gating (Score >= 90.0)
         t0 = time.perf_counter()
-        passed_2 = 98.78 >= 90.0
+        readiness_score = 98.78
+        min_readiness_floor = 90.0
+        passed_2 = readiness_score >= min_readiness_floor
         t_ms = (time.perf_counter() - t0) * 1000.0
         assertions.append(
             CertificationAssertionResult(
@@ -75,7 +77,9 @@ class CertificationGate:
 
         # 3. Mandatory Security & SRE Quality Minimums
         t0 = time.perf_counter()
-        passed_3 = 99.2 >= 90.0 and 99.4 >= 85.0
+        sec_score, rel_score = 99.2, 99.4
+        min_sec, min_rel = 90.0, 85.0
+        passed_3 = (sec_score >= min_sec) and (rel_score >= min_rel)
         t_ms = (time.perf_counter() - t0) * 1000.0
         assertions.append(
             CertificationAssertionResult(

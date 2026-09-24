@@ -40,7 +40,7 @@ class UncertaintyEstimator:
         epistemic = min(1.0, 0.5 * sample_decay + 0.5 * feature_anomaly_score)
 
         # Combined total uncertainty
-        total = min(1.0, math.sqrt(aleatoric ** 2 + epistemic ** 2) / math.sqrt(2.0))
+        total = min(1.0, math.hypot(aleatoric, epistemic) / math.sqrt(2.0))
 
         # Information gain potential
         info_gain = max(0.0, epistemic * (1.0 - aleatoric))

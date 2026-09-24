@@ -16,6 +16,7 @@ from enterprise_audit_engine.domain.evidence.models import (
     EvidenceSourceType,
 )
 from enterprise_audit_engine.certification_authority.policy.policy_engine import CertificationPolicyEngine
+from enterprise_audit_engine.certification_authority.domain.models import EQIBreakdown
 from enterprise_audit_engine.governance.claim_validator import ClaimValidator
 
 
@@ -69,15 +70,23 @@ class ExternalBenchmarkSuite:
                 classification=EvidenceClassification.VERIFIED,
             ),
         ]
-        eqi_good = {"overall_eqi_score": 95.0}
+        eqi_good = EQIBreakdown(
+            evidence_coverage_score=24.0,
+            verification_depth_score=24.0,
+            reproducibility_score=19.0,
+            integrity_score=14.0,
+            freshness_score=14.0,
+            total_eqi=95.0,
+            rating="ENTERPRISE_GRADE",
+        )
         eval_good = CertificationPolicyEngine.evaluate_policy(
             policy_name="enterprise_grade",
             overall_confidence="HIGH",
             overall_classification="VERIFIED_BY_EXECUTION",
             critical_findings=[],
-            eqi_result=eqi_good,
-            security_audit_passed=True,
-            categories_covered=["AutomatedTesting", "SecurityAndCompliance", "RuntimeExecutionAndHealth"],
+            eqi=eqi_good,
+            is_reproducible=True,
+            active_domains=["runtime", "security", "testing", "reproducibility"],
         )
         good_pass = eval_good["passed"]
         results.append(BenchmarkArchetypeResult(
@@ -102,14 +111,23 @@ class ExternalBenchmarkSuite:
                 classification=EvidenceClassification.CRITICAL_FINDING,
             ),
         ]
+        eqi_vuln = EQIBreakdown(
+            evidence_coverage_score=10.0,
+            verification_depth_score=10.0,
+            reproducibility_score=8.0,
+            integrity_score=6.0,
+            freshness_score=6.0,
+            total_eqi=40.0,
+            rating="DEGRADED",
+        )
         eval_vuln = CertificationPolicyEngine.evaluate_policy(
             policy_name="enterprise_grade",
             overall_confidence="HIGH",
             overall_classification="CRITICAL_FINDING",
             critical_findings=["Critical SQL Injection vulnerability"],
-            eqi_result={"overall_eqi_score": 40.0},
-            security_audit_passed=False,
-            categories_covered=["SecurityAndCompliance"],
+            eqi=eqi_vuln,
+            is_reproducible=False,
+            active_domains=["security"],
         )
         vuln_blocked = not eval_vuln["passed"]
         results.append(BenchmarkArchetypeResult(

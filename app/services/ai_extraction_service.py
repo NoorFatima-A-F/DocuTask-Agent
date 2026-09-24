@@ -88,7 +88,7 @@ class AIExtractionService:
 
         # Ownership authorization check
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning(f"Unauthorized AI extraction attempt: User '{owner.id}' on Document '{document_id}'")
+            logger.warning(f"Unauthorized AI extraction attempt: User '{sanitize_log_input(owner.id)}' on Document '{sanitize_log_input(document_id)}'")
             raise ResourceNotFoundException("Document not found")
 
         doc_type = request.document_type.lower().strip()
@@ -97,7 +97,7 @@ class AIExtractionService:
         if not request.force_reextract:
             latest = await self.ai_repo.get_latest(document_id, document_type=doc_type)
             if latest:
-                logger.info(f"Returning cached AI extraction for document '{document_id}' type '{doc_type}'")
+                logger.info(f"Returning cached AI extraction for document '{sanitize_log_input(document_id)}' type '{sanitize_log_input(doc_type)}'")
                 return self._to_response_schema(latest)
 
         # Update status to EXTRACTION_RUNNING
@@ -108,11 +108,11 @@ class AIExtractionService:
             try:
                 doc_content = await self.ocr_service.get_extracted_text(document_id, owner)
             except ResourceNotFoundException:
-                logger.info(f"No text found for doc '{document_id}'. Executing OCR extraction first...")
+                logger.info(f"No text found for doc '{sanitize_log_input(document_id)}'. Executing OCR extraction first...")
                 doc_content = await self.ocr_service.extract_text_for_document(document_id, owner)
 
             if not doc_content.text or not doc_content.text.strip():
-                logger.warning(f"Document '{document_id}' contains no text content for AI extraction")
+                logger.warning(f"Document '{sanitize_log_input(document_id)}' contains no text content for AI extraction")
                 doc_text = "No readable text content was found in this document."
             else:
                 doc_text = doc_content.text
@@ -157,10 +157,10 @@ class AIExtractionService:
                 except Exception as exc:
                     retry_count += 1
                     logger.warning(
-                        f"AI extraction validation failure on attempt {retry_count}/{self.MAX_RETRIES} for doc '{document_id}': {str(exc)}"
+                        f"AI extraction validation failure on attempt {retry_count}/{self.MAX_RETRIES} for doc '{sanitize_log_input(document_id)}': {sanitize_log_input(str(exc))}"
                     )
                     if retry_count >= self.MAX_RETRIES:
-                        logger.error(f"Max retries reached for doc '{document_id}'.")
+                        logger.error(f"Max retries reached for doc '{sanitize_log_input(document_id)}'.")
                         raise AIRetryLimitExceededException(
                             f"Failed to obtain valid JSON schema output after {self.MAX_RETRIES} attempts: {str(exc)}"
                         )
@@ -195,7 +195,7 @@ class AIExtractionService:
             await self.doc_repo.update_status(doc, "EXTRACTION_COMPLETED")
 
             logger.info(
-                f"AI extraction completed for doc '{document_id}': Type='{doc_type}', Time={processing_time_ms}ms, Cost=${estimated_cost}"
+                f"AI extraction completed for doc '{sanitize_log_input(document_id)}': Type='{sanitize_log_input(doc_type)}', Time={processing_time_ms}ms, Cost=${estimated_cost}"
             )
 
             return ExtractionResponse(
@@ -223,7 +223,7 @@ class AIExtractionService:
             )
 
         except Exception as exc:
-            logger.error(f"AI extraction failed for document '{document_id}': {str(exc)}")
+            logger.error(f"AI extraction failed for document '{sanitize_log_input(document_id)}': {sanitize_log_input(str(exc))}")
             await self.doc_repo.update_status(doc, "EXTRACTION_FAILED")
             raise exc
 
@@ -272,4 +272,4 @@ class AIExtractionService:
         latest = await self.ai_repo.get_latest(document_id)
         if latest:
             await self.ai_repo.delete(latest.id)
-            logger.info(f"Deleted AI extraction result for document '{document_id}'")
+            logger.info(f"Deleted AI extraction result for document '{sanitize_log_input(document_id)}'")

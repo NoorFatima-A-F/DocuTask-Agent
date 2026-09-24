@@ -15,21 +15,17 @@ class AutonomousWorkflowQualityExporter(IAutonomousWorkflowQualityExporter):
     DEFAULT_OUTPUT_DIR = "autonomous_workflow_verification"
 
     @staticmethod
-    def _get_safe_path(base_dir: str, filename: str) -> str:
-        clean_name = os.path.basename(filename)
-        safe_base = os.path.abspath(base_dir)
-        target = os.path.abspath(os.path.join(safe_base, clean_name))
-        if not target.startswith(safe_base):
-            raise ValueError(f"Security Violation: Path traversal detected for '{filename}'")
-        return target
+    def _get_safe_path(base_dir: Union[str, Path], filename: str) -> str:
+        safe_name = validate_safe_filename_segment(filename)
+        return str(resolve_safe_path(base_dir, safe_name))
 
     def export(
         self,
         report: AutonomousWorkflowQualityReport,
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
-        target_dir = os.path.abspath(output_dir or self.DEFAULT_OUTPUT_DIR)
-        os.makedirs(target_dir, exist_ok=True)
+        target_dir = resolve_safe_path(Path.cwd(), output_dir or self.DEFAULT_OUTPUT_DIR)
+        target_dir.mkdir(parents=True, exist_ok=True)
 
         exported_files: Dict[str, str] = {}
 

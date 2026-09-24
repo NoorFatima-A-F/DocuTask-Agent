@@ -5,8 +5,10 @@ Exports full evidence packages to disaster_recovery_evidence/ and certification 
 import os
 import json
 import datetime
-from typing import Dict, Any, List
+from pathlib import Path
+from typing import Dict, Any, List, Union
 from dataclasses import asdict
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 
 from app.platform_verification.disaster_recovery_simulation.domain.models import (
     ScenarioSimulationResult,
@@ -24,11 +26,12 @@ class DREvidenceExporter:
     Serializes and exports all disaster recovery evidence and certification artifacts.
     """
 
-    def _write_json(self, path: str, data: Any) -> str:
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(path, "w", encoding="utf-8") as f:
+    def _write_json(self, base_dir: Union[str, Path], filename: str, data: Any) -> str:
+        safe_path = resolve_safe_path(base_dir, filename)
+        safe_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(safe_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, default=str)
-        return os.path.abspath(path)
+        return str(safe_path)
 
     def _write_text(self, path: str, text: str) -> str:
         os.makedirs(os.path.dirname(path), exist_ok=True)

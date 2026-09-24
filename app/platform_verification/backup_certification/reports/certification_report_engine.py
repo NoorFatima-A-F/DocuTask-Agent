@@ -5,7 +5,9 @@ Generates human-readable executive summaries and exports machine-readable JSON a
 import os
 import json
 import datetime
-from typing import Dict, Any
+from pathlib import Path
+from typing import Dict, Any, Union
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from dataclasses import asdict
 
 from app.platform_verification.backup_certification.domain.models import (
@@ -32,17 +34,19 @@ class CertificationReportEngine:
     def __init__(self, root_output_dir: str = "backup_certification"):
         self.root_output_dir = root_output_dir
 
-    def _write_json(self, filepath: str, data: Any) -> str:
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-        with open(filepath, "w", encoding="utf-8") as f:
+    def _write_json(self, base_dir: Union[str, Path], filepath: str, data: Any) -> str:
+        safe_path = resolve_safe_path(base_dir, filepath)
+        safe_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(safe_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, default=str)
-        return os.path.abspath(filepath)
+        return str(safe_path)
 
-    def _write_text(self, filepath: str, content: str) -> str:
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-        with open(filepath, "w", encoding="utf-8") as f:
+    def _write_text(self, base_dir: Union[str, Path], filepath: str, content: str) -> str:
+        safe_path = resolve_safe_path(base_dir, filepath)
+        safe_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(safe_path, "w", encoding="utf-8") as f:
             f.write(content)
-        return os.path.abspath(filepath)
+        return str(safe_path)
 
     def generate_executive_summary_md(
         self,
@@ -156,13 +160,11 @@ DocuTask Agent has successfully undergone automated enterprise backup and restor
             "commit": "HEAD_VERIFIED_3G.2G",
             "environment": "production",
         }
-        manifests["certification.json"] = self._write_json(
-            os.path.join(output_dir, "certification.json"), cert_data
+        manifests["certification.json"] = self._write_json(safe_out, "certification.json", cert_data
         )
 
         # 2. Evidence Files
-        manifests["evidence/evidence_index.json"] = self._write_json(
-            os.path.join(output_dir, "evidence", "evidence_index.json"),
+        manifests["evidence/evidence_index.json"] = self._write_json(safe_out, os.path.join("evidence", "evidence_index.json"),
             {
                 "evidence_timestamp": now_iso,
                 "sources": [
@@ -175,20 +177,16 @@ DocuTask Agent has successfully undergone automated enterprise backup and restor
                 "artifacts_verified": 245,
             },
         )
-        manifests["evidence/backup_inventory.json"] = self._write_json(
-            os.path.join(output_dir, "evidence", "backup_inventory.json"),
+        manifests["evidence/backup_inventory.json"] = self._write_json(safe_out, os.path.join("evidence", "backup_inventory.json"),
             evidence.backup_inventory,
         )
-        manifests["evidence/restore_test_report.json"] = self._write_json(
-            os.path.join(output_dir, "evidence", "restore_test_report.json"),
+        manifests["evidence/restore_test_report.json"] = self._write_json(safe_out, os.path.join("evidence", "restore_test_report.json"),
             evidence.restore_test_report,
         )
-        manifests["evidence/integrity_report.json"] = self._write_json(
-            os.path.join(output_dir, "evidence", "integrity_report.json"),
+        manifests["evidence/integrity_report.json"] = self._write_json(safe_out, os.path.join("evidence", "integrity_report.json"),
             evidence.integrity_report,
         )
-        manifests["evidence/security_validation.json"] = self._write_json(
-            os.path.join(output_dir, "evidence", "security_validation.json"),
+        manifests["evidence/security_validation.json"] = self._write_json(safe_out, os.path.join("evidence", "security_validation.json"),
             evidence.security_validation,
         )
 
@@ -196,17 +194,13 @@ DocuTask Agent has successfully undergone automated enterprise backup and restor
         exec_md = self.generate_executive_summary_md(
             scorecard, completeness, integrity, restore, rto_rpo, policy, risks, dashboard
         )
-        manifests["reports/executive_summary.md"] = self._write_text(
-            os.path.join(output_dir, "reports", "executive_summary.md"), exec_md
+        manifests["reports/executive_summary.md"] = self._write_text(safe_out, os.path.join("reports", "executive_summary.md"), exec_md
         )
-        manifests["reports/restore_results.json"] = self._write_json(
-            os.path.join(output_dir, "reports", "restore_results.json"), asdict(restore)
+        manifests["reports/restore_results.json"] = self._write_json(safe_out, os.path.join("reports", "restore_results.json"), asdict(restore)
         )
-        manifests["reports/risk_register.json"] = self._write_json(
-            os.path.join(output_dir, "reports", "risk_register.json"), asdict(risks)
+        manifests["reports/risk_register.json"] = self._write_json(safe_out, os.path.join("reports", "risk_register.json"), asdict(risks)
         )
-        manifests["reports/compliance_report.json"] = self._write_json(
-            os.path.join(output_dir, "reports", "compliance_report.json"),
+        manifests["reports/compliance_report.json"] = self._write_json(safe_out, os.path.join("reports", "compliance_report.json"),
             {
                 "compliance_score": 100.0,
                 "frameworks": ["NIST_SP_800_53", "CIS_BENCHMARKS", "ISO_27001", "SOC_2", "GDPR_ART_32"],
@@ -215,23 +209,19 @@ DocuTask Agent has successfully undergone automated enterprise backup and restor
         )
 
         # 4. Scores
-        manifests["scores/certification_score.json"] = self._write_json(
-            os.path.join(output_dir, "scores", "certification_score.json"), asdict(scorecard)
+        manifests["scores/certification_score.json"] = self._write_json(safe_out, os.path.join("scores", "certification_score.json"), asdict(scorecard)
         )
 
         # 5. Policies
-        manifests["policies/backup_policy_evaluation.json"] = self._write_json(
-            os.path.join(output_dir, "policies", "backup_policy_evaluation.json"), asdict(policy)
+        manifests["policies/backup_policy_evaluation.json"] = self._write_json(safe_out, os.path.join("policies", "backup_policy_evaluation.json"), asdict(policy)
         )
 
         # 6. Dashboards
-        manifests["dashboards/backup_health_dashboard.json"] = self._write_json(
-            os.path.join(output_dir, "dashboards", "backup_health_dashboard.json"), asdict(dashboard)
+        manifests["dashboards/backup_health_dashboard.json"] = self._write_json(safe_out, os.path.join("dashboards", "backup_health_dashboard.json"), asdict(dashboard)
         )
 
         # 7. Metadata
-        manifests["metadata.json"] = self._write_json(
-            os.path.join(output_dir, "metadata.json"),
+        manifests["metadata.json"] = self._write_json(safe_out, "metadata.json",
             {
                 "framework": "PART_3G.2G_ENTERPRISE_BACKUP_CERTIFICATION",
                 "version": "1.0.0",

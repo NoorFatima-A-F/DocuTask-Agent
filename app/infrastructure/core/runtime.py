@@ -2,6 +2,7 @@
 
 from datetime import datetime, timezone
 import logging
+from app.core.security import sanitize_log_input
 import secrets
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
@@ -79,7 +80,7 @@ class InfrastructureRuntime:
         inst.updated_at = datetime.now(timezone.utc)
 
         self._instances[inst_id] = inst
-        logger.info("Deployed service %s (instance %s) in %s [RUNNING]", service, inst_id, environment)
+        logger.info("Deployed service %s (instance %s) in %s [RUNNING]", sanitize_log_input(service), sanitize_log_input(inst_id), sanitize_log_input(environment))
         return inst
 
     def start_service(self, instance_id: str) -> ServiceInstance:

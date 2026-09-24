@@ -38,14 +38,15 @@ class OperationsGovernanceExporter:
         self.set_base_dir(base_dir or "operations_verification")
 
     def set_base_dir(self, base_dir: Union[str, Path]) -> None:
-        self.base_dir = Path(base_dir)
+        self.base_dir = resolve_safe_path(Path.cwd(), base_dir)
         self.base_dir.mkdir(parents=True, exist_ok=True)
         self.runbooks_dir = self.base_dir / "runbooks"
         self.runbooks_dir.mkdir(parents=True, exist_ok=True)
 
     def _compute_sha256(self, file_path: Path) -> str:
+        safe_fp = resolve_safe_path(self.base_dir, file_path)
         sha256_hash = hashlib.sha256()
-        with open(file_path, "rb") as f:
+        with open(safe_fp, "rb") as f:
             for byte_block in iter(lambda: f.read(4096), b""):
                 sha256_hash.update(byte_block)
         return sha256_hash.hexdigest()

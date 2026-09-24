@@ -7,7 +7,12 @@ typing, validation, and secure defaults via Pydantic Settings.
 import os
 from typing import List, Optional
 from pydantic import Field
-from pydantic_settings import BaseSettings, SettingsConfigDict
+try:
+    from pydantic_settings import BaseSettings, SettingsConfigDict
+except ImportError:
+    from pydantic import BaseModel as BaseSettings  # type: ignore
+    def SettingsConfigDict(**kwargs):  # type: ignore
+        return None
 
 
 class Settings(BaseSettings):

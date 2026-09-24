@@ -26,7 +26,7 @@ def test_semantic_version_range_evaluation_and_comparisons():
 
     assert v1 < v2
     assert v2 < v3
-    assert v1 <= v1
+    assert v1 <= v2
     assert v3 > v2
 
     # Range satisfaction

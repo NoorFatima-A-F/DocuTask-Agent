@@ -3,6 +3,8 @@
 from datetime import datetime, timezone
 import os
 from typing import Dict, List, Optional
+from pathlib import Path
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import IPortfolioPresentationGenerator
 from ..domain.models import (
     CaseStudyDocument,
@@ -27,31 +29,30 @@ class PortfolioPresentationGenerator(IPortfolioPresentationGenerator):
         )
 
         if output_dir:
-            safe_dir = os.path.abspath(output_dir)
-            os.makedirs(safe_dir, exist_ok=True)
+            safe_dir = resolve_safe_path(Path.cwd(), output_dir)
+            safe_dir.mkdir(parents=True, exist_ok=True)
             # Write Case Studies
             for cs in case_studies:
-                safe_title = "".join(c if c.isalnum() else "_" for c in cs.title.lower())[:30].strip("_")
+                raw_title = "".join(c if c.isalnum() else "_" for c in cs.title.lower())[:30].strip("_") or "case_study"
+                safe_title = validate_safe_filename_segment(raw_title)
                 filename = f"case_study_{safe_title}.md"
-                fpath = os.path.abspath(os.path.join(safe_dir, filename))
-                if fpath.startswith(safe_dir):
-                    with open(fpath, "w", encoding="utf-8") as f:
-                        f.write(cs.full_markdown)
+                fpath = resolve_safe_path(safe_dir, filename)
+                with open(fpath, "w", encoding="utf-8") as f:
+                    f.write(cs.full_markdown)
 
             # Write Demo Scripts
             for ds in scripts:
-                safe_aud = "".join(c if c.isalnum() else "_" for c in ds.target_audience.lower())[:30].strip("_")
+                raw_aud = "".join(c if c.isalnum() else "_" for c in ds.target_audience.lower())[:30].strip("_") or "audience"
+                safe_aud = validate_safe_filename_segment(raw_aud)
                 filename = f"demo_script_{safe_aud}.md"
-                fpath = os.path.abspath(os.path.join(safe_dir, filename))
-                if fpath.startswith(safe_dir):
-                    with open(fpath, "w", encoding="utf-8") as f:
-                        f.write(self._format_script_markdown(ds))
+                fpath = resolve_safe_path(safe_dir, filename)
+                with open(fpath, "w", encoding="utf-8") as f:
+                    f.write(self._format_script_markdown(ds))
 
             # Write Architecture Diagram
-            diag_path = os.path.abspath(os.path.join(safe_dir, "platform_architecture.mermaid"))
-            if diag_path.startswith(safe_dir):
-                with open(diag_path, "w", encoding="utf-8") as f:
-                    f.write(mermaid_diag)
+            diag_path = resolve_safe_path(safe_dir, "platform_architecture.mermaid")
+            with open(diag_path, "w", encoding="utf-8") as f:
+                f.write(mermaid_diag)
 
         return artifacts
 

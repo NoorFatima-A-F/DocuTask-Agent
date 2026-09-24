@@ -3,9 +3,11 @@
 import hashlib
 import json
 import os
+from pathlib import Path
 from typing import Any, Dict, Optional
 import uuid
 
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..analytics.customer_analytics_engine import CustomerAnalyticsEngine
 from ..approvals.approval_center_engine import ApprovalCenterEngine
 from ..connectors.connector_manager import ConnectorManager
@@ -37,8 +39,8 @@ class CustomerExperienceRuntime(ICustomerExperienceRuntime):
         self.portfolio_generator = PortfolioPresentationGenerator()
 
     def run_full_simulation(self, output_dir: Optional[str] = None) -> Dict[str, Any]:
-        target_dir = os.path.abspath(output_dir or self.DEFAULT_OUTPUT_DIR)
-        os.makedirs(target_dir, exist_ok=True)
+        target_dir = resolve_safe_path(Path.cwd(), output_dir or self.DEFAULT_OUTPUT_DIR)
+        target_dir.mkdir(parents=True, exist_ok=True)
 
         simulation_id = f"SIM-RUN-{uuid.uuid4().hex[:8].upper()}"
 
@@ -113,22 +115,24 @@ class CustomerExperienceRuntime(ICustomerExperienceRuntime):
         }
 
         # Export JSON files
-        showcase_path = os.path.join(target_dir, "customer_simulation_showcase.json")
+        showcase_path = resolve_safe_path(target_dir, "customer_simulation_showcase.json")
         with open(showcase_path, "w", encoding="utf-8") as f:
             json.dump(summary_payload, f, indent=2, default=str)
 
         # Export SHA-256 manifest
         manifest = {}
         for fname in os.listdir(target_dir):
-            fpath = os.path.join(target_dir, fname)
-            if os.path.isfile(fpath):
+            safe_fname = validate_safe_filename_segment(fname)
+            fpath = resolve_safe_path(target_dir, safe_fname)
+            if fpath.is_file():
                 with open(fpath, "rb") as f:
-                    manifest[fname] = {
+                    manifest[safe_fname] = {
                         "sha256": hashlib.sha256(f.read()).hexdigest(),
-                        "size_bytes": os.path.getsize(fpath),
+                        "size_bytes": fpath.stat().st_size,
                     }
 
-        with open(os.path.join(target_dir, "manifest.json"), "w", encoding="utf-8") as f:
+        manifest_path = resolve_safe_path(target_dir, "manifest.json")
+        with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, indent=2)
 
         return summary_payload

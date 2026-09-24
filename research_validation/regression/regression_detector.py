@@ -50,6 +50,7 @@ class ScientificRegressionDetector:
         dim_results: List[DimensionDriftResult] = []
         crit_count = 0
         reg_count = 0
+        higher_better: bool = True
 
         for m_name, base_val in baseline_metrics.items():
             eval_val = evaluated_metrics.get(m_name, base_val)

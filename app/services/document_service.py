@@ -13,6 +13,7 @@ from typing import Optional
 from uuid import UUID
 
 from app.core.config import settings
+from app.core.security import sanitize_log_input
 from app.core.exceptions import (
     AccessDeniedException,
     ResourceNotFoundException,
@@ -211,7 +212,7 @@ class DocumentService:
 
         # Owner isolation check
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning(f"Unauthorized document access attempt: User '{owner.id}' on Document '{doc_id}'")
+            logger.warning(f"Unauthorized document access attempt: User '{sanitize_log_input(owner.id)}' on Document '{sanitize_log_input(doc_id)}'")
             raise ResourceNotFoundException("Document not found")
 
         return DocumentResponse.model_validate(doc)
@@ -264,7 +265,7 @@ class DocumentService:
             raise ResourceNotFoundException("Document not found")
 
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning(f"Unauthorized document deletion attempt: User '{owner.id}' on Document '{doc_id}'")
+            logger.warning(f"Unauthorized document deletion attempt: User '{sanitize_log_input(owner.id)}' on Document '{sanitize_log_input(doc_id)}'")
             raise ResourceNotFoundException("Document not found")
 
         # Delete physical file from storage provider
@@ -273,7 +274,7 @@ class DocumentService:
         # Delete database record
         await self.doc_repo.delete(doc)
 
-        logger.info(f"Document successfully deleted: ID={doc_id} by user '{owner.username}'")
+        logger.info(f"Document successfully deleted: ID={sanitize_log_input(doc_id)} by user '{sanitize_log_input(owner.username)}'")
         return DeleteResponse(
             id=doc_id,
             message="Document deleted successfully"

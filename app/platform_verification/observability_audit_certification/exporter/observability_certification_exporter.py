@@ -4,7 +4,9 @@ Phase 3H.4.12.8 & 3H.4.12.9: Observability Certification Repository Exporter
 import os
 import json
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Dict, Any, List
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import IObservabilityCertificationExporter
 from ..domain.models import (
     EvidenceCollectionArchitectureReport,
@@ -29,7 +31,8 @@ class ObservabilityCertificationExporter(IObservabilityCertificationExporter):
         certification_report: ObservabilityCertificationReport,
         cicd_gate_report: CICDGateReport,
     ) -> List[str]:
-        os.makedirs(output_dir, exist_ok=True)
+        safe_out = resolve_safe_path(Path.cwd(), output_dir)
+        safe_out.mkdir(parents=True, exist_ok=True)
         files_written = []
 
         # Subdirectories as requested in 3H.4.12.8
@@ -106,10 +109,11 @@ class ObservabilityCertificationExporter(IObservabilityCertificationExporter):
         }
 
         for rel_path, data in repo_manifests.items():
-            full_path = os.path.join(output_dir, rel_path)
+            full_path = resolve_safe_path(safe_out, rel_path)
+            full_path.parent.mkdir(parents=True, exist_ok=True)
             with open(full_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, default=str)
-            files_written.append(full_path)
+            files_written.append(str(full_path))
 
         # Generate certification_summary.md
         summary_md = f"""# Enterprise Observability Certification Summary
@@ -144,9 +148,9 @@ class ObservabilityCertificationExporter(IObservabilityCertificationExporter):
 ---
 *Signed and sealed by DocuTask Agent Automated Certification Engine.*
 """
-        summary_path = os.path.join(output_dir, "certification_summary.md")
+        summary_path = resolve_safe_path(safe_out, "certification_summary.md")
         with open(summary_path, "w", encoding="utf-8") as f:
             f.write(summary_md)
-        files_written.append(summary_path)
+        files_written.append(str(summary_path))
 
         return files_written

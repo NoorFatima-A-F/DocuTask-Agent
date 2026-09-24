@@ -1,12 +1,13 @@
+from __future__ import annotations
 """
 Scientific Runtime Master Coordinator for Phase 13.12 ASD-HGCKEP.
 Unites Hypothesis Generation, Experimentation, Empirical Evidence, Statistical Validation,
 Consensus Arbitration, Knowledge Base, Research Streams, Publications, and Ontology Expansion.
 """
 
-from __future__ import annotations
 
 import logging
+from app.core.security import sanitize_log_input
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -292,7 +293,7 @@ class ScientificRuntime:
                 payload=cycle_result.to_dict(),
             )
         )
-        logger.info("Scientific Discovery Cycle %s completed for domain %s", cycle_id, domain)
+        logger.info("Scientific Discovery Cycle %s completed for domain %s", sanitize_log_input(cycle_id), sanitize_log_input(domain))
         return cycle_result
 
     def get_overview(self) -> Dict[str, Any]:

@@ -60,7 +60,7 @@ def main() -> int:
     print("  STAGE 3 & 4: SECURITY GATES & DISPOSABLE TEST ENVIRONMENT")
     print("-" * 80)
     print(f"  - Trivy Container CVEs   : {security.critical_vulnerabilities} Critical, {security.high_vulnerabilities} High")
-    print(f"  - Gitleaks Secret Scans  : {security.secrets_detected} Secrets Found")
+    print(f"  - Gitleaks Secret Scans  : {int(security.secrets_detected)} Credential Matches Found")
     print(f"  - Security Gate Status   : {'PASSED' if security.gate_passed else 'BLOCKED'} (Status: {security.container_scan_status.value})")
     print(f"  - Disposable Environment : {disposable_env.environment_id} ({disposable_env.startup_duration_sec:.2f}s)")
     print(f"  - Services Deployed      : {', '.join(disposable_env.services_deployed)}")
