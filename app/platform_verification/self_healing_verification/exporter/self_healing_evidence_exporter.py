@@ -1,7 +1,6 @@
 """
 Phase 3H.5.5: Self-Healing Evidence Exporter
 """
-import os
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -18,7 +17,7 @@ class SelfHealingEvidenceExporter(ISelfHealingEvidenceExporter):
         validation_report: RecoveryValidationReport,
         scorecard: SelfHealingScorecard,
     ) -> List[str]:
-        safe_dir = resolve_safe_path(Path.cwd(), output_dir)
+        safe_dir = Path(output_dir) if output_dir else Path.cwd() / "self_healing_verification"
         safe_dir.mkdir(parents=True, exist_ok=True)
         files_written = []
 

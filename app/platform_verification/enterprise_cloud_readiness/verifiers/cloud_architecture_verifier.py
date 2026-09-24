@@ -2,7 +2,7 @@
 Phase 3M.1: Cloud Architecture Assessment Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICloudArchitectureAssessmentVerifier
 from ..domain.models import (

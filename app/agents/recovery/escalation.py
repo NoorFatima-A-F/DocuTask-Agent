@@ -4,9 +4,7 @@ Manages progressive escalation from Automatic Recovery -> Planner Re-entry -> Hu
 """
 
 from enum import Enum
-from uuid import UUID
 from app.agents.recovery.failure import Failure
-from app.agents.recovery.incident import Incident
 from app.agents.recovery.incident_manager import IncidentManager
 
 

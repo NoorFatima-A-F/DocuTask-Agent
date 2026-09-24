@@ -20,14 +20,12 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
-import math
-import os
 import statistics
 import tempfile
 import time
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional
 
 from app.evidence.benchmarking.timer_calibration import ClockSource
 

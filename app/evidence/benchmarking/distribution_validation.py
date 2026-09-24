@@ -14,7 +14,7 @@ from __future__ import annotations
 import logging
 import math
 import statistics
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -591,7 +591,7 @@ class DistributionValidationEngine:
         n = len(samples)
         mean_all = statistics.mean(samples)
         var_all = statistics.variance(samples) if n > 1 else 1.0
-        std_all = math.sqrt(var_all)
+        math.sqrt(var_all)
 
         # 1-Component Gaussian BIC: k=2 (mean, var), logL
         logl_1 = sum(

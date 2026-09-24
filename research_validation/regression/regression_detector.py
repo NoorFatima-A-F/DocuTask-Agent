@@ -8,10 +8,10 @@ correlating degradation with root causes and emitting structured alerts.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 
 from research_validation.regression.drift_detector import (
-    DriftDimension, DriftSeverity, DimensionDriftResult, MultiDimensionalDriftDetector
+    DriftSeverity, DimensionDriftResult, MultiDimensionalDriftDetector
 )
 from research_validation.provenance.hashing import hash_canonical_json
 

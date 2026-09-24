@@ -3,14 +3,11 @@ Unit Tests for Scientific Confidence Calibration (QDIOP / SDIOP).
 Tests Platt scaling, reliability diagrams, ECE, MCE, and Brier scoring.
 """
 
-import pytest
 from app.runtime.calibration import (
-    ReliabilityDiagramGenerator,
     CalibrationStatistics,
-    CalibrationValidator,
     scientific_calibration_engine,
 )
-from app.runtime.confidence.confidence_calibration import PlattCalibrator, TemperatureScaler
+from app.runtime.confidence.confidence_calibration import PlattCalibrator
 
 
 def test_platt_calibrator_logistic_bounds():

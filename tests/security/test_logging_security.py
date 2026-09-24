@@ -4,7 +4,6 @@ Validates CWE-117 mitigation via sanitize_log_input.
 """
 
 import logging
-import pytest
 from app.core.security import sanitize_log_input
 
 

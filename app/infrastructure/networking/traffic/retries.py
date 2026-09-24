@@ -2,8 +2,7 @@
 
 from dataclasses import dataclass
 import random
-import time
-from typing import Callable, List, Optional, Set, TypeVar
+from typing import Optional, Set, TypeVar
 
 T = TypeVar("T")
 

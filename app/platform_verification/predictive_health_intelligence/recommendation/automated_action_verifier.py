@@ -6,7 +6,7 @@ Validates that automated preventive actions follow the strict 4-step reliability
 3. Action Execution (Dry-run or live mitigation)
 4. Post-Action Verification (Residual risk metric validation)
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from app.platform_verification.predictive_health_intelligence.domain.models import (
     PreventiveActionType,
     PreventiveRecommendation,

@@ -2,7 +2,7 @@
 Statistical Analysis Engine: Bootstrap CI, variance, stddev, hypothesis testing, anomaly detection.
 Supports both synchronous domain analysis and async interface invocations.
 """
-from typing import List, Dict, Any, Optional
+from typing import Any, Optional
 import statistics
 import math
 from pydantic import BaseModel

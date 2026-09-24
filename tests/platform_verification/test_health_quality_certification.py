@@ -17,7 +17,6 @@ from app.platform_verification.health_quality_certification.evaluators import (
     DeploymentReadinessGate,
 )
 from app.platform_verification.health_quality_certification.scoring import HealthQualityScorer
-from app.platform_verification.health_quality_certification.exporter import HealthQualityExporter
 from app.platform_verification.health_quality_certification.runtime import HealthQualityRuntime
 from app.platform_verification.health_quality_certification.api.health_quality_api import (
     get_health_certification_status,

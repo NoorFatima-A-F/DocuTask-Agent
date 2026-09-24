@@ -87,7 +87,6 @@ class ScalabilityVerifier:
     def _verify_concurrency_throughput(self) -> AssertionResult:
         t0 = time.perf_counter()
         # Simulated 500 QPS load test metrics
-        simulated_requests = 1000
         p50 = 6.2
         p95 = 12.4
         p99 = 28.1

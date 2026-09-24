@@ -3,7 +3,7 @@ Memory Adapter for Recovery Subsystem.
 Queries MemoryManager for historical remediation patterns and past incident solutions.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from app.agents.memory.manager import MemoryManager
 
 

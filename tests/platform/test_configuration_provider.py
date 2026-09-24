@@ -2,9 +2,8 @@
 Tests for Enterprise 11-Tier Configuration Precedence and Validation.
 """
 
-import pytest
 from app.platform.configuration.provider import ConfigurationProvider
-from app.platform.configuration.schema import ConfigDomain, ConfigEntrySchema, ConfigSource
+from app.platform.configuration.schema import ConfigDomain, ConfigSource
 
 
 def test_configuration_defaults():

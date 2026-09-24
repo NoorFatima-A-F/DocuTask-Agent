@@ -2,7 +2,7 @@
 Abstract Interfaces for Enterprise Document Storage Backup & Recovery Verification (Part 3G.2C).
 """
 from abc import ABC, abstractmethod
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 
 from app.platform_verification.document_storage_verification.domain.models import (
     StorageInventoryReport,

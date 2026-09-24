@@ -1,15 +1,11 @@
 """Chaos and Security Tests: Impersonation, Expired Certs, DNS Partitions, Policy Bypasses."""
 
-import pytest
 from app.infrastructure.networking.security import (
-    SPIFFEIdentity,
-    WorkloadIdentityManager,
     CertificateAuthorityManager,
     MTLSEngine,
-    ZeroTrustPolicyEngine,
     ZeroTrustRule,
 )
-from app.infrastructure.networking.control_plane import ZeroTrustAction, CertificateStatus
+from app.infrastructure.networking.control_plane import ZeroTrustAction
 from app.infrastructure.networking.sdk.network_sdk import NetworkSDK
 
 
@@ -54,7 +50,7 @@ def test_mesh_network_partition_failover() -> None:
     # Register primary instance in failing zone
     inst_primary = sdk.register_service("storage-broker", host="10.0.1.10", port=443)
     # Register standby instance in secondary zone
-    inst_secondary = sdk.register_service("storage-broker", host="10.0.2.20", port=443)
+    sdk.register_service("storage-broker", host="10.0.2.20", port=443)
 
     # Primary crashes / fails health check
     sdk.discovery_registry.update_instance_health(inst_primary.instance_id, state=sdk.discovery_registry.get_instance(inst_primary.instance_id).health_state.UNHEALTHY)

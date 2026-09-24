@@ -3,7 +3,7 @@ Centralized Agent Domain Enumerations.
 Defines strongly typed enums for goals, tasks, workflows, results, artifacts, policies, and capabilities.
 """
 
-from enum import Enum, auto
+from enum import Enum
 
 
 class GoalType(str, Enum):

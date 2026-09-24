@@ -3,9 +3,9 @@ Workflow Event Gateway.
 Listens for external Google Cloud Pub/Sub, Webhook, and Cloud Tasks callback events to resume workflows.
 """
 
-from typing import Any, Callable, Dict, List
+from typing import Any, Dict, List
 from uuid import UUID
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class GatewaySubscription(BaseModel):

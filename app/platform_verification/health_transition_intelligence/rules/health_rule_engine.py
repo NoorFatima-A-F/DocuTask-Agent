@@ -5,7 +5,7 @@ to determine appropriate health state transitions.
 """
 import os
 import yaml
-from typing import Dict, Any, Optional, Tuple
+from typing import Dict, Any, Tuple
 from app.platform_verification.health_transition_intelligence.domain.models import HealthState
 
 

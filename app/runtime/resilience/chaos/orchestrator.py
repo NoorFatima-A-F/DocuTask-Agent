@@ -4,7 +4,6 @@ Phase 12: Autonomous Production Reliability & Operational Resilience (APRCORP+)
 """
 
 import time
-import uuid
 from typing import Dict, List, Any, Optional
 from app.runtime.resilience.chaos.scenarios import (
     ChaosScenario,

@@ -2,7 +2,7 @@
 Phase 3M.12: Kubernetes Readiness Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IKubernetesReadinessVerifier
 from ..domain.models import (

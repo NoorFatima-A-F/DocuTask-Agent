@@ -3,7 +3,7 @@ Phase 3K: Enterprise Chaos Engineering Quality Scorer & Certification Engine.
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 
 from ..domain.models import (
     BaseVerificationReport,

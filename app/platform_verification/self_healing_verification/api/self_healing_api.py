@@ -9,9 +9,9 @@ runtime = SelfHealingRuntime()
 
 
 @router.post("/execute", summary="Execute full 5-layer self-healing verification suite")
-def execute_self_healing_verification(output_dir: str = Query("self_healing_verification", description="Output directory for manifests")):
+def execute_self_healing_verification():
     try:
-        results = runtime.run_full_self_healing_verification(output_dir=output_dir)
+        results = runtime.run_full_self_healing_verification()
         return {
             "status": "SUCCESS",
             "composite_score": results["composite_score"],

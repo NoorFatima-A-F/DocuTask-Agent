@@ -8,7 +8,7 @@ and statistical convergence thresholds for planned experiment DAGs.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 
 
 class TargetHardware(str, Enum):

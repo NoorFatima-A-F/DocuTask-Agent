@@ -1,7 +1,6 @@
 """Audit Event Enrichment Processors."""
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
 from ..core.events import AuditEvent
 
 

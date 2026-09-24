@@ -3,9 +3,8 @@
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 import threading
-import uuid
 
 
 class NetworkProtocol(str, Enum):

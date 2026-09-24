@@ -6,13 +6,11 @@ Executes deterministic re-runs of captured snapshots to mathematically prove
 
 from __future__ import annotations
 
-import hashlib
 import json
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-from app.runtime.reproducibility.runtime_snapshot import RuntimeSnapshot
 from app.runtime.reproducibility.snapshot_manager import (
     SnapshotManager,
     global_snapshot_manager,
@@ -85,7 +83,7 @@ class Reproducer:
             "memory_digest": snapshot.memory_state_digest,
             "models": snapshot.model_configurations,
         }
-        raw_sim = json.dumps(sim_payload, sort_keys=True)
+        json.dumps(sim_payload, sort_keys=True)
         # Match original hash if deterministic criteria met
         reproduced_hash = snapshot.recorded_output_digest
 

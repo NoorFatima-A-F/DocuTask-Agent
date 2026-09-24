@@ -3,7 +3,7 @@ Abstract interfaces for SOLID Principle Automated Verification.
 """
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 from app.platform_verification.solid_verification.domain.models import (
     ClassDesignMetrics,
     InterfaceDesignMetrics,

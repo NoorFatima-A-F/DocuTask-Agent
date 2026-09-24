@@ -4,7 +4,7 @@ Maps operational failure conditions to approved remediation actions, action leve
 risk classifications, execution limits, and safety cooldowns.
 """
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from ..domain.models import (
     RemediationPolicyItem,
     RemediationPolicyReport,

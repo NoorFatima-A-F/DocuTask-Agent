@@ -3,7 +3,7 @@ Lesson Extractor for Phase 13.5 (ARLP-KIP).
 Compiles atomic, verifiable institutional lessons and operational rules from mined execution patterns.
 """
 
-from typing import Dict, Any, List, Optional, Union
+from typing import Any, List, Optional
 from pydantic import BaseModel, Field
 import uuid
 

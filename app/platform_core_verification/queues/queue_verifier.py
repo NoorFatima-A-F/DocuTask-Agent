@@ -6,7 +6,7 @@ Verifies Strict FIFO Ordering, Priority Routing, Dead-Letter Queue (DLQ) Poison 
 import collections
 import heapq
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,

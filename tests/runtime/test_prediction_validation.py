@@ -2,7 +2,6 @@
 Unit and Integration Tests for Prediction Error Quantification & Residual Analysis (ASVSP Pillar 2).
 """
 
-import pytest
 from app.runtime.predictions import (
     PredictionErrorEngine,
     ResidualAnalyzer,

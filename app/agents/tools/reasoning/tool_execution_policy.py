@@ -10,9 +10,8 @@ import asyncio
 import logging
 import time
 from dataclasses import dataclass, field
-from typing import Any, Callable, Coroutine, Dict, List, Optional
+from typing import Any, Dict, Optional
 
-from app.agents.tools.reasoning.tool_definition import ToolDefinition
 from app.agents.tools.reasoning.tool_registry import ToolReasoningRegistry
 
 logger = logging.getLogger(__name__)
@@ -88,7 +87,7 @@ class ToolExecutionPolicy:
             fallback_tool = self.registry.get(fallback_tool_id)
             if fallback_tool:
                 logger.info("Triggering fallback tool %s for failed %s", fallback_tool_id, primary_tool_id)
-                fb_start = time.perf_counter()
+                time.perf_counter()
                 try:
                     if fallback_tool.executor:
                         fb_output = await asyncio.wait_for(

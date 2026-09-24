@@ -4,19 +4,11 @@ Unit and integration tests for Phase V10 — Enterprise Performance, Scalability
 
 import os
 import json
-import pytest
 
 from app.performance_validation import (
     VerificationStatus,
-    WorkloadComplexity,
-    FailureType,
-    ReliabilityTier,
     LatencyProfile,
     AICostMetric,
-    ChaosExperimentResult,
-    PerformanceAssertionResult,
-    PillarPerformanceResult,
-    PerformanceScorecard,
     BaselineBenchmarkVerifier,
     WorkloadGeneratorVerifier,
     AIPerformanceVerifier,

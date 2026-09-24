@@ -1,7 +1,7 @@
 """Abstract interfaces for Autonomous Health Remediation sub-engines."""
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict, Any
 from .models import (
     RemediationPolicyReport,
     FailureContext,

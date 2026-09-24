@@ -1,13 +1,12 @@
 """Safety Pipeline coordinating Pre-Execution, Tool Guard, and Post-Execution stages."""
 
 from typing import List, Optional
-from .context import SafetyContext, ToolContext
+from .context import SafetyContext
 from .decision import (
     SafetyDecision,
     SafetyStatus,
     SafetyViolation,
     ViolationSeverity,
-    SafetyCategory,
 )
 from ..input.validator import InputSafetyValidator
 from ..injection.scanners import InjectionScanner

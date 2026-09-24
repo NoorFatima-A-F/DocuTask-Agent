@@ -5,12 +5,10 @@ Coordinates bootstrapper, dependency injection container, lifecycle state transi
 service registries, event mesh, and graceful shutdown.
 """
 
-import asyncio
 from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional
 from .states import RuntimeState, RuntimeStateEvent, VALID_STATE_TRANSITIONS
 from ..kernel.exceptions import BootstrapException, LifecycleException
-from ..kernel.events import KernelEvent, KernelEventType
 from ...core.container.container import DependencyContainer
 from ..configuration.provider import ConfigurationProvider
 from ..lifecycle.manager import LifecycleManager
@@ -149,7 +147,7 @@ class RuntimeManager:
             await self.lifecycle_manager.start_all()
             # 11. Health Checking
             self.transition(RuntimeState.HEALTH_CHECKING)
-            health_rep = await self.health_manager.check_health()
+            await self.health_manager.check_health()
             # 12. Ready
             self.health_manager.set_ready(True)
             self.health_manager.set_startup_complete(True)

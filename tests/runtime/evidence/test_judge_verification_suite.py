@@ -1,6 +1,5 @@
 """Tests for Judge Verification Suite and Ledger Verification."""
 
-import pytest
 from app.runtime.judge_verification.verification_suite import (
     HashChainVerifier,
     VerificationSuite,

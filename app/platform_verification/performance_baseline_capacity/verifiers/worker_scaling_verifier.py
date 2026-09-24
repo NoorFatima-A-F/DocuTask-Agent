@@ -55,7 +55,7 @@ class WorkerScalingVerifier(IWorkerScalingVerifier):
             ),
         ]
 
-        mean_efficiency = sum(p.efficiency_pct for p in points) / len(points)
+        sum(p.efficiency_pct for p in points) / len(points)
         scaling_10w_eff = points[-1].efficiency_pct
 
         checks: List[CheckResult] = [

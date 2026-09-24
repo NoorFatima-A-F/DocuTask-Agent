@@ -5,8 +5,7 @@ Defines measurable, statistically testable criteria for goal achievement.
 """
 
 from enum import Enum
-from dataclasses import dataclass, field
-from typing import Any, Dict, Optional
+from dataclasses import dataclass
 
 
 class Comparator(str, Enum):

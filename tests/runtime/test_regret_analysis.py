@@ -2,7 +2,6 @@
 Unit & Asymptotic Tests for Regret Analysis (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.evaluation import RegretAnalyzer
 
 

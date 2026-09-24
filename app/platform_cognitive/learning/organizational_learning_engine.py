@@ -4,7 +4,6 @@ Discovers best practices across agent execution histories, pattern mining, polic
 """
 from typing import Dict, List, Any
 from datetime import datetime, timezone
-from ..models.schemas import ExperienceMemoryEntry
 
 class OrganizationalLearningEngine:
     def __init__(self):
@@ -12,7 +11,6 @@ class OrganizationalLearningEngine:
 
     def process_execution_traces(self, tenant_id: str, traces: List[Dict[str, Any]]) -> Dict[str, Any]:
         # Analyze traces for speed/quality convergence
-        fastest_agent = "InvoiceAgent_02"
         insight = {
             "id": f"insight-{len(self._learned_insights) + 1}",
             "tenant_id": tenant_id,

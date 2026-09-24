@@ -3,8 +3,8 @@ Enterprise Document Understanding Layer
 Extracts entities, relationships, events, dates, and policy rules.
 """
 import re
-from typing import Dict, Any, List
-from ..models.schemas import KnowledgeAsset, EntityType
+from typing import Dict, Any
+from ..models.schemas import KnowledgeAsset
 
 class DocumentUnderstandingLayer:
     @staticmethod

@@ -8,7 +8,6 @@ from dataclasses import dataclass, asdict, field
 import hashlib
 import json
 import time
-import uuid
 
 
 @dataclass

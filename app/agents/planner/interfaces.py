@@ -4,7 +4,6 @@ Defines IIntelligentPlanner, IPlanningPipeline, and IPlanningEngine.
 """
 
 from abc import ABC, abstractmethod
-from typing import Optional
 from app.agents.planner.context import PlannerRequest
 from app.agents.planning.contracts import Plan, PlanningResult
 

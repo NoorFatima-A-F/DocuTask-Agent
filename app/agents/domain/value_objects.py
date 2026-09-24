@@ -3,9 +3,8 @@ Immutable Agent Domain Value Objects.
 Eliminates primitive obsession by providing strongly typed, validated immutable value objects using Pydantic v2.
 """
 
-from typing import Any
 from uuid import UUID, uuid4
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 
 
 class GoalID(BaseModel):

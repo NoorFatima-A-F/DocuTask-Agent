@@ -9,7 +9,6 @@ import uuid
 from pydantic import BaseModel, Field
 
 from app.runtime.learning.governance.policy_guardrails import PolicyGuardrailsValidator
-from app.runtime.learning.governance.risk_assessment import RiskAssessmentEngine, RiskScoreResult
 
 
 class GovernanceEvaluation(BaseModel):

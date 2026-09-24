@@ -13,9 +13,8 @@ from app.runtime.organization.events.organization_events import (
     OrganizationState,
     GovernanceVerdict,
     ConflictStatus,
-    org_event_bus,
 )
-from app.runtime.organization.mission.mission_engine import mission_engine, Mission
+from app.runtime.organization.mission.mission_engine import mission_engine
 from app.runtime.organization.strategy.organization_strategy_engine import organization_strategy_engine
 from app.runtime.organization.organization.organization_engine import organization_engine
 from app.runtime.organization.workforce.workforce_engine import workforce_engine

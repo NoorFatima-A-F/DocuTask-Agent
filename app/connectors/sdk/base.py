@@ -14,7 +14,6 @@ from app.connectors.core.models import (
     Connector,
     ConnectorCategory,
     ConnectorHealth,
-    ConnectorStatus,
     TriggerDescriptor,
 )
 

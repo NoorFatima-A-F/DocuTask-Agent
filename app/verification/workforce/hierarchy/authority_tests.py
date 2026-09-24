@@ -3,7 +3,7 @@ Section 2.2: Authority & Permission Inheritance Verification
 Validates role hierarchy levels (1-8), clearance ranks, and command authorization boundaries.
 """
 from typing import Dict, List, Any
-from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType
+from app.platform_workforce.models.schemas import EmployeeRole
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
 
 CLEARANCE_RANKS: Dict[str, int] = {

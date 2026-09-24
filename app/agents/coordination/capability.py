@@ -3,7 +3,7 @@ Capability, Skill, and Resource Models.
 Defines formal specifications of what an agent can perform, its cost, latency, and tool requirements.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 

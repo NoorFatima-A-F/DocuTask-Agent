@@ -3,7 +3,7 @@ Scientific Confidence Engine - Confidence Validator
 Ensures mathematical invariants: bounded probability [0, 1], monotonicity, and determinism.
 """
 
-from typing import Dict, Any, List, Tuple
+from typing import Dict, List, Tuple
 import math
 
 

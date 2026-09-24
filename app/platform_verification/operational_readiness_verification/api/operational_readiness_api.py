@@ -9,9 +9,9 @@ runtime = OperationalReadinessRuntime()
 
 
 @router.post("/evaluate", summary="Evaluate operational readiness and generate certification")
-def evaluate_readiness(output_dir: str = Query("operational_readiness_verification", description="Output directory for manifests")):
+def evaluate_readiness():
     try:
-        results = runtime.evaluate_operational_readiness(output_dir=output_dir)
+        results = runtime.evaluate_operational_readiness()
         return {
             "status": "SUCCESS",
             "composite_score": results["composite_score"],

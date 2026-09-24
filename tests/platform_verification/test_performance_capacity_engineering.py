@@ -1,7 +1,6 @@
 """
 Test Suite: Phase 3J.1 Performance Infrastructure Verification: Load Testing & Baseline Capacity Engineering
 """
-import os
 import json
 import pytest
 from fastapi.testclient import TestClient
@@ -9,8 +8,6 @@ from fastapi import FastAPI
 
 from app.platform_verification.performance_capacity_engineering.domain.models import (
     PerformanceCertificationTier,
-    WorkloadClass,
-    BottleneckSeverity,
     PerformanceArchitectureReport,
     BaselinePerformanceReport,
     WorkloadModelingReport,
@@ -38,9 +35,6 @@ from app.platform_verification.performance_capacity_engineering.verifiers import
 )
 from app.platform_verification.performance_capacity_engineering.scoring import (
     PerformanceCertificationScorer,
-)
-from app.platform_verification.performance_capacity_engineering.exporter import (
-    PerformanceVerificationExporter,
 )
 from app.platform_verification.performance_capacity_engineering.runtime import (
     PerformanceVerificationRuntime,

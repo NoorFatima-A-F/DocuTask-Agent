@@ -3,7 +3,7 @@ AMAEOP Pillar 4 - Heartbeat & Liveness Monitor
 Tracks periodic heartbeats from worker departments, detects stalled operations, and triggers failover.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 import time
 

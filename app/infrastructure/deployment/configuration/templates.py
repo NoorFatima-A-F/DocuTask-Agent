@@ -1,8 +1,8 @@
 """Configuration Templates and Environment Variable Interpolation."""
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import re
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclass

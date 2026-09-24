@@ -4,15 +4,12 @@ import pytest
 from app.networking.identity.certificates import (
     CertificateBackend,
     CertificateManager,
-    X509Certificate,
 )
 from app.networking.identity.service_identity import (
     ServiceIdentityManager,
     SPIFFEIdentity,
-    WorkloadIdentity,
 )
 from app.networking.identity.workload import (
-    AttestationEvidence,
     SVIDType,
     WorkloadAttestationManager,
 )

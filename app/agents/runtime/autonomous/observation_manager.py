@@ -8,7 +8,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from app.agents.runtime.autonomous.runtime_context import RuntimeContext
 from app.agents.workflow.task_graph.dynamic_task_graph import NodeState

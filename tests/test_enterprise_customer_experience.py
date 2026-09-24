@@ -22,10 +22,7 @@ from app.customer_experience.portfolio_generator.portfolio_presentation_generato
 from app.customer_experience.runtime.customer_experience_runtime import CustomerExperienceRuntime
 from app.customer_experience.domain.models import (
     ApprovalStatus,
-    ConnectorCategory,
-    ConnectorStatus,
     IndustrySector,
-    OnboardingStepStatus,
     SimulationRunStatus,
     WorkflowDefinition,
     WorkflowEdge,

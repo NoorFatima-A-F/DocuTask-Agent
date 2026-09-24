@@ -1,9 +1,8 @@
 """Tests for SLO Calculations, Burn Rates, and Error Budget Release Gates."""
 
-import pytest
 from app.observability.slo.budgets import BudgetStatus, ErrorBudgetEngine
 from app.observability.slo.calculator import SLOCalculator
-from app.observability.slo.models import SLI, ServiceLevelObjective, SLIType
+from app.observability.slo.models import ServiceLevelObjective
 
 
 def test_slo_calculator_compliance_and_burn_rate():

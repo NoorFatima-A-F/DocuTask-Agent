@@ -6,12 +6,9 @@ and master forensic reports linking claims directly to verified evidence.
 
 from __future__ import annotations
 
-import json
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional
 
-from app.evidence.registry.evidence_models import EvidenceItem, VerificationStatus
 from app.evidence.registry.evidence_registry import EvidenceRegistry
 from app.evidence.traceability.traceability_engine import EvidenceTraceabilityEngine
 

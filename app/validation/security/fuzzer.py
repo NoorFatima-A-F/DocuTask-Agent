@@ -6,7 +6,7 @@ malformed JSON, and encoding permutations.
 
 import random
 import string
-from typing import Dict, List
+from typing import Any, Dict
 from app.ai.prompt_builder import PromptBuilder
 from app.core.logging import logger
 
@@ -35,14 +35,14 @@ class SecurityFuzzer:
 
             try:
                 sanitized = PromptBuilder.sanitize_text(fuzz_str)
-                user_prompt = PromptBuilder.build_prompt(sanitized, "invoice")
+                PromptBuilder.build_prompt(sanitized, "invoice")
 
                 # Assertion: System tags must not leak into system space
                 if "SYSTEM:" not in sanitized and "<|im_start|>" not in sanitized:
                     passed += 1
                 else:
                     failed += 1
-            except Exception as exc:
+            except Exception:
                 failed += 1
 
         pass_rate = round((passed / iterations) * 100.0, 2)

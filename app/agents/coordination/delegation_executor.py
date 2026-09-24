@@ -3,10 +3,10 @@ Delegation Executor.
 Dispatches planned tasks to assigned agents and manages fallback execution if primary fails.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from uuid import UUID
 from app.agents.coordination.agent_registry import AgentRegistry
-from app.agents.coordination.delegation import DelegationRequest, DelegationResult, DelegationStatus, DelegationTask
+from app.agents.coordination.delegation import DelegationRequest, DelegationResult, DelegationStatus
 from app.agents.coordination.interfaces import IDelegationEngine
 
 

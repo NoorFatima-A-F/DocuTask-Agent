@@ -7,7 +7,7 @@ Maintains priority-ordered scheduling queues for tasks ready for worker executio
 from __future__ import annotations
 
 import heapq
-from typing import Dict, List, Optional
+from typing import List, Optional
 from app.runtime.planning.graph.node import DAGNode
 
 

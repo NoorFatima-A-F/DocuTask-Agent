@@ -1,7 +1,6 @@
 """Cluster Capability Registry and Query Engine."""
 
-from typing import Dict, List, Optional, Set
-from .models import Cluster
+from typing import Dict, List, Set
 
 
 class StandardCapabilities:

@@ -2,7 +2,6 @@
 Comprehensive Unit & Integration Test Suite for Part 1.2:
 Enterprise Verification Environment Strategy & Infrastructure Architecture.
 """
-import pytest
 from app.platform_verification.environment_strategy.domain.models import (
     EnvironmentClassification, EnvironmentHealthState, EnvironmentSecurityLevel,
     ChaosFailureType, SecurityAttackVector, ChaosExperimentSpec, SecurityLabExperimentSpec
@@ -11,8 +10,6 @@ from app.platform_verification.environment_strategy.core.registry import environ
 from app.platform_verification.environment_strategy.core.provisioner import environment_provisioner
 from app.platform_verification.environment_strategy.core.chaos_engine import chaos_engine
 from app.platform_verification.environment_strategy.core.security_lab import security_lab_runner
-from app.platform_verification.environment_strategy.core.deployment import deployment_orchestrator
-from app.platform_verification.environment_strategy.core.quality_gates import quality_gate_engine
 from app.platform_verification.environment_strategy.core.observability import environment_observability
 from app.platform_verification.environment_strategy.core.recovery import environment_recovery
 from app.platform_verification.environment_strategy.runtime.environment_strategy_runtime import environment_strategy_runtime

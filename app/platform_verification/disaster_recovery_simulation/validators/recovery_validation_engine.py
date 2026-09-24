@@ -2,7 +2,6 @@
 Post-Recovery Validation Engine for Part 3G.3.
 Verifies full-stack application health, database schemas/relations, document hash parity, and AI agent workflow resumption.
 """
-from typing import Dict, Any, List
 from app.platform_verification.disaster_recovery_simulation.domain.models import (
     PostRecoveryValidationReport,
 )

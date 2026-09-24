@@ -10,7 +10,6 @@ import time
 from typing import Any, Callable, Coroutine, Dict, List, Optional
 from app.agents.runtime.bootstrap import PlatformBootstrapper
 from app.agents.runtime.configuration import PlatformRuntimeConfig
-from app.agents.runtime.dependency_container import DependencyContainer
 from app.agents.runtime.dependency_manager import DependencyManager
 from app.agents.runtime.events import (
     ModuleDiscoveredEvent,

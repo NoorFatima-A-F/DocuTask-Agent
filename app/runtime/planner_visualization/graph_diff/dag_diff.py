@@ -5,7 +5,7 @@ Computes topological and state deltas between DAG revisions.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 from app.runtime.planner_visualization.ui_models.models import PlannerDAGSnapshot
 
 

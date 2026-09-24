@@ -6,13 +6,11 @@ Test suite for Enterprise Championship AAOS modules:
 """
 
 import pytest
-import asyncio
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.agents.events.event_types import GoalReceivedEvent
 from app.agents.planning.adaptive.replanning_engine import (
     AdaptiveReplanningEngine,
-    MutationActionType,
 )
 from app.agents.planning.execution_plan import PlannedTask
 from app.agents.reflection.critics.consensus_evaluator import ConsensusCritiqueResult

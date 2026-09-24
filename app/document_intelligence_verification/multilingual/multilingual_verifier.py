@@ -96,7 +96,6 @@ class MultilingualVerifier:
     def _verify_roman_urdu_and_code_switching(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
         # Mixed Roman Urdu + English business document
-        sample_text = "Hum ne ABC Corp ko total 15000 PKR payment kar di hai for Invoice #9918 on 18 September."
         
         extracted = {
             "vendor": "ABC Corp",

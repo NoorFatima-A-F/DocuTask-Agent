@@ -4,7 +4,7 @@ Production OCR Verification Plugin (CER, WER, Table IoU) conforming to EV-EFIPA.
 from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.models import (
     PluginMetadata, PluginExecutionContext, PluginExecutionResult,
-    PluginHealthMetrics, PluginPermission, SecurityClassification
+    PluginHealthMetrics, PluginPermission
 )
 from app.platform_verification.extension_framework.domain.interfaces import VerificationPluginInterface
 

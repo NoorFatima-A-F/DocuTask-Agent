@@ -1,7 +1,6 @@
 """
 Phase 3H.5.7.1: Reliability Data Collection Framework
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IReliabilityDataCollector
 from ..domain.models import ReliabilityDataCollectionReport, ComponentTelemetryItem
 

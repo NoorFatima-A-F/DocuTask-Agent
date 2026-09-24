@@ -4,8 +4,8 @@ Exposes real-time event-sourced timelines, live DAGs with CPM critical path, gra
 mathematical confidence proofs, worker scheduling, chaos recovery, and multi-corpus benchmarks.
 """
 
-from typing import Dict, Any, List, Optional
-from fastapi import APIRouter, HTTPException, Query, Body
+from typing import Optional
+from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
 
 # 1. Observability
@@ -25,7 +25,6 @@ from app.runtime.dag_visualizer import (
 
 # 3. Cost & Energy Intelligence
 from app.runtime.cost_intelligence import (
-    CostCalculator,
     CostAggregator,
     BudgetGovernor,
 )

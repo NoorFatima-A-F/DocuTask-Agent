@@ -6,28 +6,18 @@ Achieves 100% coverage of app/agents/ (state transitions, lifecycle, context, ev
 from uuid import uuid4
 import pytest
 
-from app.agents.base.agent import BaseAgent
 from app.agents.config import AgentConfig
-from app.agents.context import AgentContext, SharedVariables
+from app.agents.context import AgentContext
 from app.agents.dependency.container import AgentContainer
 from app.agents.document_agent import DocumentAgent
 from app.agents.events import (
-    AgentCompletedEvent,
-    AgentFailedEvent,
-    ExecutionCompletedEvent,
     GoalReceivedEvent,
-    PlanningStartedEvent,
 )
 from app.agents.exceptions import (
-    AgentException,
     ConfigurationException,
     InvalidStateTransitionException,
 )
-from app.agents.interfaces.event_bus import AgentEventBus
 from app.agents.interfaces.planner import AgentPlanner
-from app.agents.logging import AgentLogger
-from app.agents.metrics import NoOpAgentMetricsCollector
-from app.agents.observability import NoOpAgentObservabilityHook
 from app.agents.state import AgentState, AgentStateMachine
 
 

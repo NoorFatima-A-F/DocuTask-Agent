@@ -3,7 +3,7 @@ Decision Validation Engine - Unified Decision Validator
 Validates candidate plans before dispatch across constraints, invariants, monotonicity, and schema versioning.
 """
 
-from typing import Dict, List, Any, Tuple
+from typing import Dict, List, Any
 from dataclasses import dataclass
 
 from app.runtime.decision_validation.invariants import InvariantChecker

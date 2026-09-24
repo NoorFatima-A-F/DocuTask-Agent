@@ -3,7 +3,7 @@ Compensation Engine.
 Plans and executes semantic compensating actions for completed nodes when rolling back.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 from pydantic import BaseModel, Field
 
 

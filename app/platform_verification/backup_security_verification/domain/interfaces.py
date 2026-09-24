@@ -2,7 +2,7 @@
 Abstract Interfaces for Enterprise Backup Security Verification Framework (Part 3G.2F).
 """
 from abc import ABC, abstractmethod
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 
 from app.platform_verification.backup_security_verification.domain.models import (
     BackupSecurityInventoryReport,

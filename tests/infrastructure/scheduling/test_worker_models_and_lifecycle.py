@@ -4,7 +4,6 @@ import pytest
 from app.infrastructure.workers.models import (
     ResourceCapacity,
     Worker,
-    WorkerLease,
     WorkerStatus,
     WorkerType,
 )

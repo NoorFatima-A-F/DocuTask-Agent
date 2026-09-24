@@ -3,7 +3,6 @@ Phase 3I.4: Enterprise Distributed Tracing Infrastructure Verification - Unit an
 """
 import os
 import json
-import pytest
 import hashlib
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
@@ -13,27 +12,7 @@ from app.platform_verification.tracing_infrastructure.domain.models import (
     TracingCertificationTier,
     TracingServiceInstrumentation,
     TracingArchitectureReport,
-    TraceContextPropagationHop,
-    ContextPropagationReport,
     SpanDetail,
-    WorkflowTraceReport,
-    AgentLifecycleSpan,
-    AgentTraceReport,
-    QueueWorkerSpanSummary,
-    DatabaseSpanSummary,
-    ExternalDependencySpan,
-    DependencyTraceReport,
-    FailedSpanDiagnostic,
-    ErrorTraceReport,
-    TraceCorrelationReport,
-    SamplingRuleSpec,
-    TraceSamplingReport,
-    SpanSecurityAuditSpec,
-    TraceSecurityReport,
-    TracePerformanceReport,
-    ChaosTraceScenarioSpec,
-    ChaosTraceReport,
-    TracingPillarScore,
     TracingCertificationReport,
 )
 from app.platform_verification.tracing_infrastructure.verifiers.tracing_architecture_verifier import TracingArchitectureVerifier
@@ -48,7 +27,6 @@ from app.platform_verification.tracing_infrastructure.verifiers.trace_security_v
 from app.platform_verification.tracing_infrastructure.verifiers.trace_performance_verifier import TracePerformanceVerifier
 from app.platform_verification.tracing_infrastructure.verifiers.failure_simulation_trace_verifier import FailureSimulationTraceVerifier
 from app.platform_verification.tracing_infrastructure.scoring.tracing_quality_scorer import TracingQualityScorer
-from app.platform_verification.tracing_infrastructure.exporter.tracing_evidence_exporter import TracingEvidenceExporter
 from app.platform_verification.tracing_infrastructure.runtime.tracing_verification_runtime import TracingVerificationRuntime
 from app.platform_verification.tracing_infrastructure.api.tracing_verification_api import router as tracing_api_router
 

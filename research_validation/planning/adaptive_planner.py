@@ -8,7 +8,7 @@ hypotheses, available datasets, and target statistical confidence criteria.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from research_validation.hypothesis.hypothesis_model import ScientificHypothesis
 from research_validation.planning.execution_strategy import (

@@ -3,7 +3,7 @@ AMAEOP Pillar 2 - Inter-Department Coordination Engine
 Manages barrier synchronizations, cross-team data contracts, and dependency resolution between departments.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 import time
 

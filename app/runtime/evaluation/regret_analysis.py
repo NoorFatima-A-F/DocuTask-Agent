@@ -4,7 +4,6 @@ Calculates instantaneous and cumulative regret against an ex-post optimal oracle
 """
 
 from typing import List, Dict, Any
-import math
 
 
 class RegretAnalyzer:

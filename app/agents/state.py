@@ -4,7 +4,7 @@ Provides production-grade state machine enforcing valid agent state transitions.
 States: Created, Initialized, Planning, Executing, Observing, Reflecting, Waiting, Retrying, Completed, Failed, Cancelled.
 """
 
-from enum import Enum, auto
+from enum import Enum
 from typing import Dict, List, Set
 from app.agents.exceptions import InvalidStateTransitionException
 

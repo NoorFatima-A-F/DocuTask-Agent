@@ -4,7 +4,7 @@ Mission Scheduler Service
 Manages mission queuing, priority ordering, concurrency throttling, and dependency gating.
 """
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from research_validation.goal.models.mission import Mission
 from research_validation.goal.models.mission_state import MissionState, StateTransitionRecord, MissionStateMachine
 from research_validation.goal.models.goal import PriorityLevel

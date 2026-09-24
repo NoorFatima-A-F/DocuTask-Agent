@@ -1,12 +1,10 @@
 """Tests for Declarative Network Policies, Ingress, and Egress Isolation."""
 
-import pytest
 from app.infrastructure.networking.policies import (
     NetworkPolicy,
     NetworkPolicyRule,
     NetworkPolicyEngine,
     NetworkPolicyType,
-    IngressPolicyManager,
     EgressPolicyManager,
 )
 from app.infrastructure.networking.control_plane import ZeroTrustAction

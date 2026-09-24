@@ -2,7 +2,6 @@
 Planner Plan Validation Engine.
 """
 
-from typing import List
 from app.agents.planning.contracts import Plan
 from app.agents.planning.validation import GraphValidationResult, PlanValidator
 

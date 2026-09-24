@@ -4,7 +4,7 @@
   "version": "3.19.0",
   "commit": "9f8e7d6c5b4a",
   "environment": "CI/CD Ephemeral Production Assurance Environment",
-  "timestamp": "2026-09-19T07:04:46.442248+00:00",
+  "timestamp": "2026-09-24T21:54:58.842767+00:00",
   "overall_score": 100.0,
   "decision": "APPROVED",
   "deployment_approved": true,
@@ -12,61 +12,61 @@
     {
       "filename": "build/build_report.json",
       "report_title": "Build Report",
-      "sha256": "e4fd80bb7fe66c2da30de9fbe397954227d0f39838ef74aa3aa1e28c2462f057",
+      "sha256": "e5fb4571ed16fa01041b9066648f2129dec6b5cef66287b16a4fbfc283c47322",
       "size_bytes": 301
     },
     {
       "filename": "certification/production_readiness_certificate.json",
       "report_title": "Production Readiness Certificate",
-      "sha256": "c41a83fd4770ff1bb948a41ed8e21a9d55af7ba9961f6b2e13698f23094561ed",
+      "sha256": "3741263c2667f2817899f4a009657171b78c0e9a3bde54dbc25f8a4633fc39c5",
       "size_bytes": 316
     },
     {
       "filename": "certification/release_decision.json",
       "report_title": "Release Decision",
-      "sha256": "c541f927b59782d8981ebe7bbe657323b815b6ee52c570a8f6a6f193486831d9",
+      "sha256": "8ad30d88bcc8018b03190d1f7b02433ecb11fdfd4ea6ba92dfef8467067412ef",
       "size_bytes": 453
     },
     {
       "filename": "chaos/chaos_pipeline_report.json",
       "report_title": "Chaos Pipeline Report",
-      "sha256": "814f8a92a9ee9187ffb4315c247c21f895f06576f78f5e55fa908d7931e93c77",
+      "sha256": "f0e884ffcff966ea82c00544c274cef7fcdb2e47461ff62c84f686f7e37db696",
       "size_bytes": 268
     },
     {
       "filename": "deployment/disposable_env_report.json",
       "report_title": "Disposable Env Report",
-      "sha256": "741c107393848c7eebd2592fa17f3098d264b18710300ef0e09a333c4208aee2",
+      "sha256": "b12f76555433ae1871bee1e899b34f76eb5054a440e532a7ce6086e6da913954",
       "size_bytes": 379
     },
     {
       "filename": "deployment/integration_report.json",
       "report_title": "Integration Report",
-      "sha256": "6d7f08824773cb5f655840a890e70e2b6def54d03dfb134617e80fcc6ad97105",
+      "sha256": "f115d69b32c252de129cd9d9ca9c9317fa6e56e54c184d01a741809b3e1c7a33",
       "size_bytes": 309
     },
     {
       "filename": "infrastructure/change_impact_report.json",
       "report_title": "Change Impact Report",
-      "sha256": "940b13b2fb0c507b452b4348d1bcba6fb567c15d491881e905b7785bcec89a55",
+      "sha256": "87037f10353d8f0c8ce8fe405b7633ad98a0fd7710ac24f348ef7a8dad2d5fa7",
       "size_bytes": 762
     },
     {
       "filename": "infrastructure/drift_report.json",
       "report_title": "Drift Report",
-      "sha256": "fc3aa45b6d51b69db21d41bd97ea4544facf63e1cb34256160a66dc14a3e80c7",
+      "sha256": "1bb74c1f0ca9fd78144cf880810a791c2a2fb4e937b03290cc02fc55ce0f225b",
       "size_bytes": 218
     },
     {
       "filename": "performance/performance_regression_report.json",
       "report_title": "Performance Regression Report",
-      "sha256": "e61b0f437023f7fe0aa5ca0908be23c16542a4e1e853991c735840b4121a1bfe",
+      "sha256": "d7001b3806642341e049aa6d890cb578561b7a9d6b172e09199ee028b1ac7da4",
       "size_bytes": 262
     },
     {
       "filename": "security/security_gate_report.json",
       "report_title": "Security Gate Report",
-      "sha256": "de4959bb937d2172cd09aef47e74c7392708bc313f5a450c0e7afcf1e92ea011",
+      "sha256": "8b73773bf360f7c66c5929ef57842c744a51bec6037e8be02048ed176867437c",
       "size_bytes": 308
     }
   ]

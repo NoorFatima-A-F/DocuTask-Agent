@@ -5,7 +5,7 @@ Builds hierarchical execution DAG trees and calculates critical path latencies f
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from app.runtime.events.base import RuntimeEvent
 

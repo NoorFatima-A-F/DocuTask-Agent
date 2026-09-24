@@ -2,7 +2,7 @@
 Phase 3H.8: Operational Governance Verification FastAPI Endpoints
 """
 from fastapi import APIRouter, Query
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 from app.platform_verification.operational_governance.runtime.operational_governance_runtime import OperationalGovernanceRuntime
 

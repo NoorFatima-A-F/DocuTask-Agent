@@ -9,8 +9,6 @@ from typing import Dict, List, Any, Optional
 from ..domain.models import (
     SecurityPillar,
     SecurityStatus,
-    SeverityLevel,
-    ComplianceFramework,
     SecurityAssertionResult,
     PillarVerificationResult,
 )

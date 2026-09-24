@@ -10,7 +10,6 @@ from ..domain.models import (
     VerificationStatus,
     PerformanceAssertionResult,
     PillarPerformanceResult,
-    WorkloadComplexity,
 )
 
 
@@ -22,7 +21,6 @@ class WorkloadGeneratorVerifier:
 
     def verify_workload_generation(self) -> PillarPerformanceResult:
         start_t = time.perf_counter()
-        assertions: List[SecurityAssertionResult] if False else []  # type hint fix
         assertions: List[PerformanceAssertionResult] = []
 
         # 1. Multi-Tier Document Generation Simulation (Low, Medium, Enterprise 1M+/day)

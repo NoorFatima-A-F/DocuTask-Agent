@@ -3,7 +3,7 @@ ARTEICP Dynamic DAG - Critical Path Method (CPM) Analyzer
 Computes Early Start (ES), Late Start (LS), Total Float/Slack, and identifies critical bottleneck vertices.
 """
 
-from typing import Dict, List, Any, Set
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 
 
@@ -31,7 +31,7 @@ class CriticalPathAnalyzer:
         nodes: List[Dict[str, Any]],
         edges: List[Dict[str, Any]],
     ) -> Dict[str, Any]:
-        node_map = {n["id"]: n for n in nodes}
+        {n["id"]: n for n in nodes}
         durations = {n["id"]: float(n.get("duration_ms", 10.0)) for n in nodes}
 
         # Build adjacency lists

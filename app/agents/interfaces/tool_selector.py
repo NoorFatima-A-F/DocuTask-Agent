@@ -4,7 +4,7 @@ Defines contract for dynamic tool selection and execution.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import Any, Dict
 from app.agents.context import AgentContext
 
 

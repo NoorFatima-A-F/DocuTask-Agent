@@ -4,7 +4,7 @@ Immutable, versioned specification of a workflow graph, input schemas, and timeo
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.workflow.workflow_graph import WorkflowGraph

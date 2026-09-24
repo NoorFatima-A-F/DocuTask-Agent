@@ -2,7 +2,7 @@
 Baseline vs Autonomous AI Process Models across core industry verticals.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from app.business_value_verification.domain.models import (
     IndustryVertical,
     ProcessStepType,

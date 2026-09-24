@@ -2,7 +2,6 @@
 Tests for Knowledge Graph, Consensus, Routing, Prediction, Org Learning & Continuous Improvement (Pillars 6-11).
 """
 
-import pytest
 from app.runtime.intelligence.consensus.consensus_engine import (
     AgentContribution,
     ConsensusEngine,
@@ -13,7 +12,6 @@ from app.runtime.intelligence.continuous.continuous_improvement import (
 )
 from app.runtime.intelligence.experience import (
     ExperienceExtractor,
-    ExperienceRecord,
     ExperienceStore,
 )
 from app.runtime.intelligence.knowledge.graph_query import GraphQueryEngine

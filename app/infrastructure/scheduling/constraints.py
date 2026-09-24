@@ -2,7 +2,7 @@
 
 from typing import List, Tuple
 from app.infrastructure.executions.workload import WorkloadRequest
-from app.infrastructure.workers.models import Worker, WorkerStatus
+from app.infrastructure.workers.models import Worker
 from app.infrastructure.workers.lifecycle import WorkerLifecycleStateMachine
 from app.infrastructure.workers.leases import WorkerLeaseManager
 from app.infrastructure.workers.capabilities import WorkerCapabilityRegistry

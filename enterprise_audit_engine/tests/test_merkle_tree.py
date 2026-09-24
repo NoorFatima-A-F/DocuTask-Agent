@@ -1,6 +1,5 @@
 """Tests for Cryptographic Merkle Evidence Tree and Proof Verification."""
 
-import pytest
 from enterprise_audit_engine.certification.merkle_tree import MerkleEvidenceTree
 from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,

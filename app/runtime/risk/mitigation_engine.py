@@ -3,7 +3,7 @@ Scientific Risk Engine - Mitigation Engine
 Generates prescriptive risk mitigation interventions based on failure probabilities.
 """
 
-from typing import Dict, List, Any
+from typing import List
 from dataclasses import dataclass
 from app.runtime.risk.probabilistic_risk import FailureProbabilities
 

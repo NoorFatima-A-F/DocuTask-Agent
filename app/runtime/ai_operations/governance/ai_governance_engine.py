@@ -6,9 +6,8 @@ Manages immutable audit trails, policy enforcement, and compliance reporting.
 from __future__ import annotations
 import hashlib
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from typing import List, Optional
 from app.runtime.ai_operations.models.schemas import GovernanceAuditRecord
-from app.runtime.ai_operations.governance.compliance_monitor import ComplianceMonitor
 
 
 class AIGovernanceEngine:

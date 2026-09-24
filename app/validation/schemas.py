@@ -5,9 +5,9 @@ Includes SHA-256 cryptographic hash chaining attributes for tamper-evident evide
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
-from uuid import UUID, uuid4
-from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, Dict, List
+from uuid import uuid4
+from pydantic import BaseModel, Field
 
 
 class FieldAnnotation(BaseModel):

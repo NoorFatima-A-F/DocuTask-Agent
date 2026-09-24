@@ -4,9 +4,8 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 import uuid
 from ..core.controller import DeploymentController
-from ..core.deployment import Deployment
 from ..core.exceptions import RollbackException
-from .recovery import AutomatedRecoveryEngine, RecoveryDecision
+from .recovery import AutomatedRecoveryEngine
 
 
 @dataclass

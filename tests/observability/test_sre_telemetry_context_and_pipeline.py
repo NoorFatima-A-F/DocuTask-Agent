@@ -1,10 +1,7 @@
 """Tests for ObservabilityContext and TelemetryPipeline."""
 
-import pytest
 from app.observability.core.context import (
     ObservabilityContext,
-    get_current_context,
-    set_current_context,
 )
 from app.observability.core.events import EventCategory, EventStream, PlatformEvent
 from app.observability.core.telemetry import (

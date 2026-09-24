@@ -7,9 +7,9 @@ across historical execution episodes.
 from __future__ import annotations
 
 import logging
-from collections import Counter, defaultdict
+from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from app.agents.memory.intelligence.episodic_memory import EpisodeRecord
 

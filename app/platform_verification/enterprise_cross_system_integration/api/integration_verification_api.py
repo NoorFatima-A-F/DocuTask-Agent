@@ -1,7 +1,7 @@
 """FastAPI REST Endpoints for Enterprise Cross-System Integration."""
 
 from typing import Any, Dict, Optional
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException
 from ..domain.models import CrossSystemIntegrationQualityReport, CrossSystemIntegrationQualityScore
 from ..runtime.integration_verification_runtime import CrossSystemIntegrationVerificationRuntime
 

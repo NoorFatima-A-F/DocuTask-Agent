@@ -3,7 +3,6 @@ Durable Workflow State Manager.
 Persists execution state, task transitions, variables, and event logs.
 """
 
-from copy import deepcopy
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from ..domain.models import ExecutionRecord, ExecutionState, TaskExecutionRecord, WorkflowContext

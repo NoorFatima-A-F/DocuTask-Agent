@@ -3,7 +3,7 @@ Abstract interfaces for Enterprise Architecture Verification Framework.
 """
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from app.platform_verification.architecture_verification.domain.models import (
     ArchitectureDependency,
     ArchitectureEvidencePackage,
@@ -12,7 +12,6 @@ from app.platform_verification.architecture_verification.domain.models import (
     ArchitectureScoreReport,
     ArchitectureViolation,
     CircularDependencyCycle,
-    ScanMetadata,
 )
 
 

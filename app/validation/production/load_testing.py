@@ -3,7 +3,6 @@ Load Testing & Workload Simulation Subsystem.
 Simulates Normal (100 doc/hr), High (1000 doc/hr), and Burst (500 concurrent doc uploads) workloads.
 """
 
-from typing import Dict
 from pydantic import BaseModel
 from app.core.logging import logger
 

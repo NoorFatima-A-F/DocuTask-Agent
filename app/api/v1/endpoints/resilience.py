@@ -3,9 +3,9 @@ DocuTask Agent - Production Reliability & Chaos Engineering REST Endpoints (APRC
 Phase 12: Autonomous Production Reliability, Chaos Engineering & Operational Resilience
 """
 
-from fastapi import APIRouter, HTTPException, Query, Body
+from fastapi import APIRouter, HTTPException
 from typing import Dict, List, Any, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.runtime.resilience import (
     digital_twin_engine,
@@ -20,8 +20,6 @@ from app.runtime.resilience import (
     time_travel_engine,
     stress_arena_engine,
     certification_dossier_engine,
-    NodeHealthStatus,
-    ChaosFaultType,
     FallbackTriggerType,
     IncidentSeverity,
 )

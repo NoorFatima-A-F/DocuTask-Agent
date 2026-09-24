@@ -7,7 +7,6 @@ from typing import List
 from pydantic import BaseModel, Field
 from app.runtime.observability.schemas import RuntimeEvent
 from app.runtime.replay.replay_state_machine import ReplayStateMachine, ReconstructedMissionState
-from app.runtime.replay.replay_diff import ReplayStateDiffEngine, MissionStateDiff
 
 
 class DeterminismValidationReport(BaseModel):

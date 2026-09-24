@@ -3,7 +3,7 @@ Phase 3H.4.9.3: Automated Recovery Workflow Verifier
 """
 import time
 import uuid
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..domain.interfaces import IAutomatedRecoveryVerifier
 from ..domain.models import RecoveryPlan, RecoveryExecutionResult, RecoveryState, IncidentType
 from .action_mapping_verifier import ActionMappingVerifier

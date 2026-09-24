@@ -3,7 +3,7 @@ Scientific Constraints - Feasibility Engine
 Evaluates constraint slack variables and projects candidate plans into feasible subspaces.
 """
 
-from typing import Dict, Any, List, Tuple
+from typing import Dict, List
 from dataclasses import dataclass
 
 

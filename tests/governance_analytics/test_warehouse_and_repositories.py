@@ -1,15 +1,5 @@
 """Tests for Governance Data Warehouse Models, Fact Tables, and Repositories."""
 
-import pytest
-from app.governance.analytics.warehouse.models import (
-    DimTenant,
-    DimUser,
-    DimModel,
-    FactGovernanceDecision,
-    FactPolicyEvent,
-    FactAIExecution,
-    FactRiskEvent,
-)
 from app.governance.analytics.warehouse.repositories import GovernanceDataWarehouseRepository
 from app.governance.analytics.warehouse.schemas import WarehouseQueryFilter
 from app.governance.analytics.events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType

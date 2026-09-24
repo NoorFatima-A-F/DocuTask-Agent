@@ -2,7 +2,6 @@
 1. Enterprise Workforce Registry Subsystem
 """
 from typing import Dict, List, Optional
-from datetime import datetime, timezone
 from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType, EmployeeStatus
 
 class WorkforceRegistry:

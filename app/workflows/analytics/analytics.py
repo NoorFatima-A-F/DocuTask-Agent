@@ -3,7 +3,7 @@ Enterprise Workflow Analytics.
 Aggregates execution metrics, latencies, failure rates, and AI token consumption.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from ..domain.models import ExecutionRecord, ExecutionState
 
 

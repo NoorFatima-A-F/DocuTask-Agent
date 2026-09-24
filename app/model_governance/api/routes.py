@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from typing import List, Optional
+from fastapi import APIRouter, HTTPException, Query, status
 
 from app.model_governance.registry.models import Model, ModelLifecycleState
 from app.model_governance.registry.repository import ModelRegistryRepository
@@ -23,7 +23,6 @@ from app.model_governance.api.schemas import (
     LifecycleTransitionRequestDTO,
     ModelRegisterRequestDTO,
     ModelSelectRequestDTO,
-    RiskAssessmentRequestDTO,
     SnapshotCaptureRequestDTO,
 )
 

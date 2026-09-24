@@ -2,11 +2,9 @@
 Phase 3P: Base Evidence Collector.
 """
 
-from abc import ABC, abstractmethod
-from typing import List
+from abc import ABC
 
 from ..domain.interfaces import IEvidenceCollector
-from ..domain.models import StandardizedEvidenceItem
 
 
 class BaseEvidenceCollector(IEvidenceCollector, ABC):

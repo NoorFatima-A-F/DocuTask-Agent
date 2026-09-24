@@ -2,8 +2,7 @@
 Tests for Decision Proof Engine (Pillar 2).
 """
 
-import pytest
-from app.runtime.truth.decision_proof import DecisionProof, DecisionProofEngine
+from app.runtime.truth.decision_proof import DecisionProofEngine
 
 
 def test_decision_proof_generation_and_utility_ranking():

@@ -1,11 +1,8 @@
 """Tests for Safety Developer SDK, Decorators, and FastAPI REST Routes."""
 
-import pytest
 from app.safety.sdk.client import SafetyRuntimeSDK, safety_guard
 from app.safety.api.routes import (
-    router,
     guard_input,
-    guard_output,
     validate_tool,
     verify_grounding,
     create_incident,
@@ -15,7 +12,6 @@ from app.safety.api.routes import (
 )
 from app.safety.api.schemas import (
     GuardInputRequest,
-    GuardOutputRequest,
     ValidateToolRequest,
     VerifyGroundingRequest,
     IncidentCreateRequest,

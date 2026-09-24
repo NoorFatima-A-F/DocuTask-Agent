@@ -2,8 +2,6 @@
 Phase 3I.10: Master CLI Runner for Enterprise Observability Intelligence Governance & Operations Certification
 """
 import sys
-import json
-from pathlib import Path
 from app.platform_verification.observability_operations_governance.runtime.observability_operations_runtime import (
     ObservabilityOperationsRuntime,
 )

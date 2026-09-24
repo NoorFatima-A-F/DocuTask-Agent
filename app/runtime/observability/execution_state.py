@@ -3,9 +3,8 @@ ARTEICP Observability - Live Execution State Tracker
 Thread-safe tracker of active missions, running DAG tasks, worker allocations, and runtime lifecycle states.
 """
 
-from typing import Dict, List, Any, Optional, Set
+from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict, field
-from datetime import datetime, timezone
 import time
 import threading
 

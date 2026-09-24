@@ -6,9 +6,6 @@ Provides versioned JSON serialization and deserialization compatible with Google
 import json
 from typing import Any, Dict, Type, TypeVar
 from pydantic import BaseModel
-from app.agents.reflection.context import ReflectionRequest, ReflectionResult
-from app.agents.reflection.learning_artifact import LearningArtifact
-from app.agents.reflection.self_critique import SelfCritique
 
 T = TypeVar("T", bound=BaseModel)
 

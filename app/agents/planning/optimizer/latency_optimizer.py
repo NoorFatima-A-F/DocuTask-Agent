@@ -9,7 +9,7 @@ from __future__ import annotations
 import copy
 import logging
 from collections import defaultdict
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Tuple
 
 from app.agents.planning.execution_plan import ExecutionPlan, PlannedTask
 

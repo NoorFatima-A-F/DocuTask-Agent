@@ -1,6 +1,5 @@
 """Test Privacy Masking, Redaction, Tokenization & Access Tracking."""
 
-import pytest
 from app.data_governance.privacy.masking import PrivacyMaskingEngine
 from app.data_governance.access.tracking import DataAccessTracker, DataActionType
 from app.data_governance.access.permissions import DataAccessPermissionEnforcer

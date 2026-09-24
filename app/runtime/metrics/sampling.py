@@ -6,7 +6,7 @@ Provides deterministic window slicing: sliding count, sliding time, tumbling, an
 from __future__ import annotations
 
 from datetime import datetime, timezone, timedelta
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 from app.runtime.events.base import RuntimeEvent
 from app.runtime.metrics.definitions import SamplingRule
 

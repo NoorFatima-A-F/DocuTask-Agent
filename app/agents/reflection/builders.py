@@ -6,13 +6,13 @@ Ensures fail-fast, validated instantiation of core reflection models.
 from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
 from app.agents.reflection.context import ReflectionContext, ReflectionRequest
-from app.agents.reflection.evaluation import DimensionEvaluation, EvaluationDimension, EvaluationMetric, EvaluationReport
-from app.agents.reflection.execution_feedback import ExecutionCritiqueItem, ExecutionFeedback
+from app.agents.reflection.evaluation import DimensionEvaluation, EvaluationReport
+from app.agents.reflection.execution_feedback import ExecutionFeedback
 from app.agents.reflection.feedback_generator import SubsystemFeedbackBundle
 from app.agents.reflection.learning_artifact import LearningArtifact, LearningArtifactType
 from app.agents.reflection.memory_feedback import MemoryFeedback
 from app.agents.reflection.metadata import ReflectionIdentity
-from app.agents.reflection.planner_feedback import PlannerCritiqueItem, PlannerFeedback
+from app.agents.reflection.planner_feedback import PlannerFeedback
 from app.agents.reflection.recommendation_engine import Recommendation, SubsystemTarget
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope, TaskTrace
 from app.agents.reflection.reflection_session import ReflectionSession

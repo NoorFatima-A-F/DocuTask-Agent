@@ -4,7 +4,7 @@ Simulates 100 enterprise tasks with 500 autonomous agents submitting structured 
 """
 import time
 from typing import Dict, List, Any
-from app.platform_workforce.models.schemas import TaskMarketplaceListing, TaskBid, EmployeeStatus
+from app.platform_workforce.models.schemas import TaskMarketplaceListing
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
 
 class MarketplaceBiddingVerifier:

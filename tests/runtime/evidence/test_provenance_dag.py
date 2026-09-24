@@ -1,6 +1,5 @@
 """Tests for Runtime Provenance DAG and Traversal Engine."""
 
-import pytest
 from app.runtime.provenance_dag.provenance_dag_builder import (
     ProvenanceDAGBuilder,
     TraversalEngine,
@@ -9,10 +8,10 @@ from app.runtime.provenance_dag.provenance_dag_builder import (
 
 def test_provenance_dag_and_traversal():
     dag = ProvenanceDAGBuilder()
-    n_in = dag.add_node("node-in", "INPUT", "Raw Document", "hash-doc-raw")
-    n_plan = dag.add_node("node-plan", "PLAN", "Planner Decision", "hash-plan", parent_ids=["node-in"])
-    n_tool = dag.add_node("node-tool", "TOOL", "OCR Tool Execution", "hash-tool", parent_ids=["node-plan"])
-    n_out = dag.add_node("node-out", "OUTPUT", "Extracted JSON", "hash-out", parent_ids=["node-tool"])
+    dag.add_node("node-in", "INPUT", "Raw Document", "hash-doc-raw")
+    dag.add_node("node-plan", "PLAN", "Planner Decision", "hash-plan", parent_ids=["node-in"])
+    dag.add_node("node-tool", "TOOL", "OCR Tool Execution", "hash-tool", parent_ids=["node-plan"])
+    dag.add_node("node-out", "OUTPUT", "Extracted JSON", "hash-out", parent_ids=["node-tool"])
 
     assert dag.count() == 4
 

@@ -8,8 +8,8 @@ sandboxing, and automatic contract generation.
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query
+from typing import Any, Dict, List
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.platform.capability.capability_registry import global_capability_registry
@@ -25,14 +25,10 @@ from app.platform.policy.policy_engine import global_policy_engine
 from app.platform.sandbox.sandbox_runtime import global_sandbox_runtime
 from app.platform.templates.template_engine import global_template_engine
 from app.platform.tools.dynamic_tool_registry import (
-    ToolInvoker,
     ToolMetadata,
     global_tool_registry,
 )
 from app.platform.workflow.workflow_engine import (
-    WorkflowDefinition,
-    WorkflowEdge,
-    WorkflowNode,
     global_workflow_engine,
 )
 

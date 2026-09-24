@@ -2,7 +2,7 @@
 Phase 3H.8: Enterprise Operational Governance, Change Management & Safe Operations — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

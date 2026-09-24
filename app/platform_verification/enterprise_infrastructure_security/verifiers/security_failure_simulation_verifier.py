@@ -2,7 +2,7 @@
 Phase 3N.15: Security Failure Simulation Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ISecurityFailureSimulationVerifier
 from ..domain.models import (

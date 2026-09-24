@@ -6,7 +6,7 @@ Implements persistence operations for asynchronous ProcessingJob entities.
 import uuid
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional, Tuple
-from sqlalchemy import select, func, update, delete
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.document import Document

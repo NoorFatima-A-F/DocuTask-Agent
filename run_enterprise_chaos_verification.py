@@ -5,10 +5,8 @@ Executes all 12 chaos verification phases, evaluates weighted scores across 6 ca
 and exports JSON evidence reports with cryptographic SHA-256 integrity manifest.
 """
 
-import json
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_chaos_verification.runtime.chaos_runtime import (
     ChaosRuntime,

@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from app.connectors.core.exceptions import ConnectorNotFoundError
 from app.connectors.core.models import (
     Connector,

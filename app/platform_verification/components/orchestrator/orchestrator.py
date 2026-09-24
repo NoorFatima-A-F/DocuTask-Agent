@@ -3,7 +3,7 @@ Verification Orchestrator: High-level lifecycle orchestrator.
 Manages workflow execution, lifecycle state transitions, timeouts, stage sequencing,
 and full end-to-end 12-stage verification orchestration.
 """
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from datetime import datetime, timezone
 import uuid
 

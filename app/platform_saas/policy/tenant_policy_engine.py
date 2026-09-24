@@ -4,7 +4,6 @@ Enforces multi-tenant authorization, role permissions, geo-fencing, and spend li
 """
 
 from typing import Dict, List, Optional, Any
-from datetime import datetime, timezone
 import uuid
 from app.platform_saas.models.schemas import TenantPolicy
 
@@ -90,7 +89,6 @@ class TenantPolicyEngine:
         context_attributes: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """Evaluates RBAC + ABAC policy rules."""
-        context = context_attributes or {}
         tenant_policies = [p for p in self._policies.values() if p.tenant_id == tenant_id]
 
         # 1. Explicit Deny check

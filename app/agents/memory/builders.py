@@ -3,8 +3,8 @@ Fluent Builder Suite for Memory Aggregates.
 Provides MemoryBuilder, KnowledgeBuilder, QueryBuilder, and SnapshotBuilder.
 """
 
-from typing import Any, Dict, List, Optional
-from app.agents.memory.knowledge import KnowledgeItem, KnowledgeSource
+from typing import Any, Dict, List
+from app.agents.memory.knowledge import KnowledgeItem
 from app.agents.memory.metadata import MemoryMetadata
 from app.agents.memory.repository import MemoryItem
 from app.agents.memory.retrieval import MemoryQuery

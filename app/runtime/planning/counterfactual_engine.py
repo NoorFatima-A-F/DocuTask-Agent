@@ -6,7 +6,6 @@ Generates mathematical counterfactual explanations answering 'Why was Strategy X
 
 from __future__ import annotations
 
-import copy
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 

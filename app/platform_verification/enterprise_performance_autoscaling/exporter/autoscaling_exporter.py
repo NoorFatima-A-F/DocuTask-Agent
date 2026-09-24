@@ -2,11 +2,12 @@
 
 import hashlib
 import json
-import os
 import re
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List
 
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import IAutoscalingExporter
 from ..domain.models import (
     AutoscalingVerificationManifest,
@@ -80,7 +81,7 @@ class AutoscalingExporter(IAutoscalingExporter):
         certification: EnterpriseAutoscalingCertificationReport,
         output_dir: str = "performance_scaling_verification",
     ) -> AutoscalingVerificationManifest:
-        safe_out = resolve_safe_path(Path.cwd(), output_dir)
+        safe_out = Path(output_dir) if output_dir else Path.cwd() / "performance_scaling_verification"
         safe_out.mkdir(parents=True, exist_ok=True)
         file_hashes: Dict[str, str] = {}
         written_files: List[str] = []

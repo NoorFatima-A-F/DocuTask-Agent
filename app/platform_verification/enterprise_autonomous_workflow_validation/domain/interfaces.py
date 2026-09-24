@@ -1,7 +1,7 @@
 """Domain Interfaces for Phase 5: Enterprise Autonomous Workflow & Business Process Validation Framework."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from .models import (
     AuditTrailValidationReport,
     AutonomousRecoveryReport,

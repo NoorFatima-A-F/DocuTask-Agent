@@ -10,7 +10,6 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.exceptions import ResourceNotFoundException
 from app.ocr.detector import DocumentTypeDetector
 from app.ocr.pipeline import OCRPipeline
 from app.ocr.preprocessor import ImagePreprocessor

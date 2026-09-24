@@ -1,6 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict, Any
-import hashlib
 from app.shared_kernel import BaseEntity, DomainEvent
 
 @dataclass

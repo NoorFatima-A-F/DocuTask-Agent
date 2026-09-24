@@ -11,7 +11,6 @@ import logging
 import math
 from typing import Any, Dict, List, Optional
 
-from app.knowledge.core.exceptions import EmbeddingError
 
 logger = logging.getLogger(__name__)
 

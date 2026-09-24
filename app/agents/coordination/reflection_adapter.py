@@ -3,7 +3,7 @@ Coordination Reflection Adapter.
 Consumes learning artifacts and evaluation feedback from the Reflection Engine to optimize future agent allocations.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 
 class CoordinationReflectionAdapter:

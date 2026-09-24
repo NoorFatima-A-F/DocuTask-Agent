@@ -51,7 +51,7 @@
       "details": {
         "ordering_violations_count": 0
       },
-      "timestamp": "2026-09-24T20:42:57.723353+00:00"
+      "timestamp": "2026-09-24T21:55:00.678708+00:00"
     },
     {
       "check_id": "CHK-4N-02",
@@ -62,7 +62,7 @@
       "details": {
         "idempotency_rate_pct": 100.0
       },
-      "timestamp": "2026-09-24T20:42:57.723371+00:00"
+      "timestamp": "2026-09-24T21:55:00.678728+00:00"
     },
     {
       "check_id": "CHK-4N-03",
@@ -73,7 +73,7 @@
       "details": {
         "dlq_isolation_verified": true
       },
-      "timestamp": "2026-09-24T20:42:57.723389+00:00"
+      "timestamp": "2026-09-24T21:55:00.678747+00:00"
     },
     {
       "check_id": "CHK-4N-04",
@@ -84,8 +84,8 @@
       "details": {
         "event_loss_count": 0
       },
-      "timestamp": "2026-09-24T20:42:57.723409+00:00"
+      "timestamp": "2026-09-24T21:55:00.678767+00:00"
     }
   ],
-  "timestamp": "2026-09-24T20:42:57.723421+00:00"
+  "timestamp": "2026-09-24T21:55:00.678780+00:00"
 }

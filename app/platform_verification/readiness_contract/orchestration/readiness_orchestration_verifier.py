@@ -3,7 +3,6 @@ Readiness Orchestration Verifier (Part 9).
 Validates Kubernetes readinessProbe configurations and multi-cloud container runtime compatibility
 (Docker Compose, AWS ECS, Google Cloud Run, Azure Container Apps).
 """
-from typing import Dict, Any, List
 from app.platform_verification.readiness_contract.domain.models import (
     OrchestrationReport,
 )

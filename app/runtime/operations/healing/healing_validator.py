@@ -3,7 +3,6 @@ AOIS-HROP Phase 13.7 - Healing Validator
 Validates that applied self-healing remedies successfully restored healthy operating invariants.
 """
 
-from typing import Any, Dict
 
 
 class HealingValidator:

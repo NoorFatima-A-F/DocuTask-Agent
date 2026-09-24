@@ -4,9 +4,8 @@ Supports supervisor-led, peer-to-peer, hierarchical, and pipeline collaboration 
 """
 
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from uuid import UUID, uuid4
-from pydantic import BaseModel, Field
 from app.agents.coordination.collaboration_context import CollaborationContext
 from app.agents.coordination.collaboration_session import CollaborationSession
 

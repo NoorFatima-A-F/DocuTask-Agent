@@ -1,6 +1,5 @@
 """Tests for Prompt Versioning, Immutability, and Diff Engine (Phase 8D)."""
 
-import pytest
 from app.prompts.registry.repository import PromptRegistryRepository
 from app.prompts.registry.service import PromptRegistryService
 from app.prompts.versions.diff import PromptDiffEngine

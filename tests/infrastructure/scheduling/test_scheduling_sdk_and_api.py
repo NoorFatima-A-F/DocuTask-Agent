@@ -7,8 +7,6 @@ from app.infrastructure.workers.models import (
 )
 from app.infrastructure.workers.heartbeat import WorkerHeartbeatPayload
 from app.infrastructure.executions.workload import (
-    ResourceRequirements,
-    WorkloadPriority,
     WorkloadRequest,
     WorkloadState,
     WorkloadType,
@@ -19,7 +17,6 @@ from app.infrastructure.sdk.scheduling import SchedulingSDK, WorkerSDK
 from app.infrastructure.api.worker_routes import (
     register_worker,
     get_worker,
-    list_workers,
     worker_heartbeat,
     drain_worker,
     RegisterWorkerRequest,
@@ -29,7 +26,6 @@ from app.infrastructure.api.scheduler_routes import (
     submit_workload,
     get_workload_status,
     cancel_workload,
-    reschedule_workload,
     get_workload_diagnostics,
 )
 

@@ -2,20 +2,15 @@
 
 from app.infrastructure.clusters.models import Cluster, ClusterStatus
 from app.infrastructure.clusters.registry import ClusterRegistry
-from app.infrastructure.regions.models import Geography, Region, RegionStatus
+from app.infrastructure.regions.models import Geography, Region
 from app.infrastructure.regions.registry import RegionRegistry
 from app.infrastructure.workers.models import (
     ResourceCapacity,
     Worker,
-    WorkerStatus,
-    WorkerType,
 )
 from app.infrastructure.workers.registry import WorkerRegistry
 from app.infrastructure.executions.workload import (
-    ResourceRequirements,
-    WorkloadPriority,
     WorkloadRequest,
-    WorkloadState,
     WorkloadType,
 )
 from app.infrastructure.executions.assignment import AssignmentManager

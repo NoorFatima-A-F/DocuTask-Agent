@@ -8,13 +8,11 @@ durations, payloads, and worker status changes.
 
 from __future__ import annotations
 
-import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from app.runtime.observability.metrics_registry import MetricsRegistry
 from app.runtime.observability.schemas import (
     BaseRuntimeEvent,
     EventCategory,
-    MetricRecord,
 )
 
 

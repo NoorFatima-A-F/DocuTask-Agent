@@ -46,7 +46,7 @@
       "details": {
         "prompt_token_reduction_pct": 65.5
       },
-      "timestamp": "2026-09-16T19:26:20.439589+00:00"
+      "timestamp": "2026-09-24T21:25:13.292841+00:00"
     },
     {
       "check_id": "CHK-5P-02",
@@ -57,7 +57,7 @@
       "details": {
         "vector_search_gain_pct": 78.8
       },
-      "timestamp": "2026-09-16T19:26:20.439597+00:00"
+      "timestamp": "2026-09-24T21:25:13.292859+00:00"
     },
     {
       "check_id": "CHK-5P-03",
@@ -68,7 +68,7 @@
       "details": {
         "worker_efficiency_gain_pct": 60.7
       },
-      "timestamp": "2026-09-16T19:26:20.439601+00:00"
+      "timestamp": "2026-09-24T21:25:13.292879+00:00"
     },
     {
       "check_id": "CHK-5P-04",
@@ -79,8 +79,8 @@
       "details": {
         "avg_gain_pct": 72.84
       },
-      "timestamp": "2026-09-16T19:26:20.439606+00:00"
+      "timestamp": "2026-09-24T21:25:13.292904+00:00"
     }
   ],
-  "timestamp": "2026-09-16T19:26:20.439609+00:00"
+  "timestamp": "2026-09-24T21:25:13.292916+00:00"
 }

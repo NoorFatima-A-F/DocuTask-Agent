@@ -3,7 +3,6 @@ Benchmark & Reproducibility Profiling Engine.
 Executes repeated extraction runs on identical input datasets to evaluate determinism and output consistency.
 """
 
-import json
 from typing import Any, Dict, List
 from app.ai.base import LLMProvider
 from app.ai.prompt_builder import PromptBuilder

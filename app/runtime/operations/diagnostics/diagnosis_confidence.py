@@ -3,7 +3,6 @@ AOIS-HROP Phase 13.7 - Diagnosis Confidence Calculator
 Computes statistical confidence scores for inferred root-cause hypotheses.
 """
 
-from typing import List
 
 
 class DiagnosisConfidenceCalculator:

@@ -3,11 +3,10 @@ Fluent Builder Suite for Messaging Subsystem.
 Provides MessageBuilder, EnvelopeBuilder, CommandBuilder, EventBuilder, and QueryBuilder.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from app.agents.messaging.commands import AgentCommand
 from app.agents.messaging.envelopes import MessageEnvelope
 from app.agents.messaging.events import DomainEvent
-from app.agents.messaging.metadata import MessageMetadata
 from app.agents.messaging.queries import AgentQuery
 from app.agents.messaging.validators import MessageValidator
 

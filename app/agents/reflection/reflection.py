@@ -4,7 +4,7 @@ Represents the comprehensive reflection analysis entity for an individual execut
 """
 
 from typing import Any, Dict, List, Optional
-from uuid import UUID, uuid4
+from uuid import UUID
 from pydantic import BaseModel, Field
 from app.agents.reflection.lifecycle import ReflectionLifecycleState
 from app.agents.reflection.metadata import ReflectionIdentity, ReflectionMetadata, ReflectionStatistics

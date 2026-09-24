@@ -2,7 +2,6 @@
 Test Suite: Multi-Corpus Benchmark Execution & Report Generation
 Validates automated corpus execution across invoices/taxes/medical records and official evaluation dossier generation.
 """
-import pytest
 from app.runtime.benchmark_platform.corpus_runner import MultiCorpusBenchmarkRunner
 from app.runtime.benchmark_platform.report_generator import BenchmarkReportGenerator
 

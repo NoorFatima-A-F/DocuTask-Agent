@@ -4,7 +4,7 @@ Executes frame-by-frame state derivation from event logs without running underly
 """
 
 from typing import Dict, Any, List
-from app.runtime.replay.reconstruction.mission_reconstructor import MissionReconstructor, ReconstructedMissionState
+from app.runtime.replay.reconstruction.mission_reconstructor import MissionReconstructor
 
 
 class ReplayExecutor:

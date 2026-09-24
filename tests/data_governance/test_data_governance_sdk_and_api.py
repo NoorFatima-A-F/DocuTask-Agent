@@ -1,6 +1,5 @@
 """Test Data Governance SDK Facade and REST API Router."""
 
-import pytest
 from app.data_governance.sdk.client import DataGovernanceSDK
 from app.data_governance.registry.models import ClassificationLevel, AssetType
 from app.data_governance.api.routes import create_data_governance_router, RegisterAssetRequest, ClassifyTextRequest

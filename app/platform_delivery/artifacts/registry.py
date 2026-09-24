@@ -1,5 +1,5 @@
 """Authoritative Enterprise Artifact Registry (Req 13, 14, 15, 24)."""
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import uuid
 
 from .digests import DigestCalculator

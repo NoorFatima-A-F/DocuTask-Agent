@@ -11,7 +11,7 @@ from app.infrastructure.clusters.models import (
 from app.infrastructure.clusters.registry import ClusterRegistry
 from app.infrastructure.clusters.diagnostics import ClusterDiagnosticsService
 from app.infrastructure.clusters.health import SubComponentHealth
-from app.infrastructure.regions.models import Geography, LatencyClass, Region, RegionStatus
+from app.infrastructure.regions.models import Geography, Region, RegionStatus
 from app.infrastructure.regions.registry import RegionRegistry
 from app.infrastructure.regions.affinity import TenantAffinityManager, TenantAffinityRule
 from app.infrastructure.control_plane.global_cp.manager import GlobalControlPlane

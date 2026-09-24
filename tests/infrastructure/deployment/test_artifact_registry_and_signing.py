@@ -6,7 +6,6 @@ from app.infrastructure.deployment.artifacts import (
     VulnerabilitySeverity,
     VulnerabilityFinding,
     SBOMComponent,
-    ArtifactMetadata,
     ArtifactSigner,
     ArtifactRegistry,
 )

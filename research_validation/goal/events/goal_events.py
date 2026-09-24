@@ -5,7 +5,6 @@ Strongly typed domain events emitted during goal creation, validation, and statu
 """
 
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
 from research_validation.goal.interfaces.event_bus import GoalIntelligenceDomainEvent
 
 

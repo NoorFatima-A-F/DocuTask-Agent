@@ -3,7 +3,7 @@ Runtime Observability and Telemetry Integration.
 Collects task latency, execution latency, queue latency, scheduling latency, and OpenTelemetry spans.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict
 from pydantic import BaseModel, Field
 
 

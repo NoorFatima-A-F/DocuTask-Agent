@@ -3,8 +3,7 @@ Runtime Health Monitor.
 Tracks queue depths, execution latencies, and deadlock risks.
 """
 
-from typing import Dict
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class RuntimeHealthStatus(BaseModel):

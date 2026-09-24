@@ -1,6 +1,5 @@
 """Tests for Plugin Certification and Auto-Generated Contracts."""
 
-import pytest
 from app.platform.certification.certification_pipeline import (
     CertificationPipeline,
 )

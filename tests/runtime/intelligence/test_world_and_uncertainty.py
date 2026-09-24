@@ -1,5 +1,4 @@
-import pytest
-from app.runtime.intelligence.world_model import WorldModel, WorldStateForecast
+from app.runtime.intelligence.world_model import WorldModel
 from app.runtime.intelligence.planner_uncertainty import PlannerUncertaintyEngine
 from app.runtime.intelligence.active_information import ActiveInformationEngine
 from app.runtime.intelligence.belief_state import BeliefStateEngine

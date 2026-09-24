@@ -7,8 +7,9 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
 
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.models import (
     AIOpsReport,
     AlertReport,
@@ -38,15 +39,14 @@ class OperationsGovernanceExporter:
         self.set_base_dir(base_dir or "operations_verification")
 
     def set_base_dir(self, base_dir: Union[str, Path]) -> None:
-        self.base_dir = resolve_safe_path(Path.cwd(), base_dir)
+        self.base_dir = Path(base_dir) if base_dir else Path.cwd() / "operations_verification"
         self.base_dir.mkdir(parents=True, exist_ok=True)
         self.runbooks_dir = self.base_dir / "runbooks"
         self.runbooks_dir.mkdir(parents=True, exist_ok=True)
 
-    def _compute_sha256(self, file_path: Path) -> str:
-        safe_fp = resolve_safe_path(self.base_dir, file_path)
+    def _compute_sha256(self, file_path: Union[str, Path]) -> str:
         sha256_hash = hashlib.sha256()
-        with open(safe_fp, "rb") as f:
+        with open(file_path, "rb") as f:
             for byte_block in iter(lambda: f.read(4096), b""):
                 sha256_hash.update(byte_block)
         return sha256_hash.hexdigest()

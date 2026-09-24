@@ -4,91 +4,61 @@ Targeting >=95% meaningful coverage across evaluation, critique, knowledge extra
 recommendations, adaptation, feedback generation, serialization, builders, and repositories.
 """
 
-from datetime import datetime, timezone
-import json
 import pytest
-from uuid import UUID, uuid4
+from uuid import uuid4
 
 from app.agents.reflection.adaptation_engine import (
     AdaptationEngine,
-    AdaptationProposal,
     AdaptationStatus,
-    AdaptationType,
 )
 from app.agents.reflection.benchmark import BenchmarkCriteria, BenchmarkEvaluator
 from app.agents.reflection.bias_detector import BiasDetector
 from app.agents.reflection.builders import (
     CritiqueBuilder,
-    EvaluationBuilder,
     FeedbackBuilder,
     LearningArtifactBuilder,
     RecommendationBuilder,
     ReflectionRequestBuilder,
-    ReflectionSessionBuilder,
 )
 from app.agents.reflection.cache import ReflectionCache
 from app.agents.reflection.comparative_analysis import ComparativeAnalyzer
 from app.agents.reflection.confidence_evaluator import ConfidenceEvaluator
-from app.agents.reflection.context import ReflectionContext, ReflectionRequest, ReflectionResult
-from app.agents.reflection.correlation import CorrelationAnalyzer
+from app.agents.reflection.context import ReflectionRequest, ReflectionResult
 from app.agents.reflection.correctness_evaluator import CorrectnessEvaluator
 from app.agents.reflection.cost_evaluator import CostEvaluator
 from app.agents.reflection.critique_engine import CritiqueEngine
 from app.agents.reflection.decision_analyzer import DecisionAnalyzer
 from app.agents.reflection.efficiency_evaluator import EfficiencyEvaluator
-from app.agents.reflection.engine import ReflectionEngine
-from app.agents.reflection.evaluation import (
-    DimensionEvaluation,
-    EvaluationDimension,
-    EvaluationMetric,
-    EvaluationReport,
-)
 from app.agents.reflection.evaluation_graph import EvaluationGraph, EvaluationStageNode
 from app.agents.reflection.evaluation_pipeline import EvaluationPipeline
-from app.agents.reflection.events import (
-    CritiqueGeneratedEvent,
-    EvaluationCompletedEvent,
-    LearningArtifactCreatedEvent,
-    ReflectionCompletedEvent,
-    ReflectionStartedEvent,
-)
 from app.agents.reflection.exceptions import (
     AdaptationApprovalRequiredError,
-    CircularCritiqueReferenceError,
-    DuplicateLearningArtifactError,
-    IncompleteExecutionTraceError,
-    InconsistentEvidenceError,
     InvalidConfidenceScoreError,
     InvalidEvaluationGraphError,
     MalformedRecommendationError,
 )
 from app.agents.reflection.execution_analyzer import ExecutionAnalyzer
-from app.agents.reflection.execution_feedback import ExecutionCritiqueItem, ExecutionFeedback
+from app.agents.reflection.execution_feedback import ExecutionFeedback
 from app.agents.reflection.factory import ReflectionFactory
 from app.agents.reflection.failure_analyzer import FailureAnalyzer
 from app.agents.reflection.feedback_generator import FeedbackGenerator, SubsystemFeedbackBundle
 from app.agents.reflection.goal_evaluator import GoalEvaluator
 from app.agents.reflection.hallucination_detector import HallucinationDetector
-from app.agents.reflection.improvement_generator import ImprovementDirective, ImprovementGenerator
 from app.agents.reflection.inconsistency_detector import InconsistencyDetector
 from app.agents.reflection.knowledge_extractor import KnowledgeExtractor
 from app.agents.reflection.latency_evaluator import LatencyEvaluator
 from app.agents.reflection.learning_artifact import LearningArtifact, LearningArtifactType
 from app.agents.reflection.lifecycle import ReflectionLifecycleState
-from app.agents.reflection.manager import ReflectionManager
 from app.agents.reflection.memory_evaluator import MemoryEvaluator
-from app.agents.reflection.memory_feedback import MemoryFeedback, MemoryUpdateRequest
-from app.agents.reflection.metadata import ReflectionIdentity, ReflectionMetadata, ReflectionStatistics
-from app.agents.reflection.metrics import ReflectionMetrics, ReflectionMetricsCollector
-from app.agents.reflection.orchestrator import ReflectionOrchestrator
-from app.agents.reflection.pattern_detector import DetectedPattern, PatternDetector
+from app.agents.reflection.memory_feedback import MemoryFeedback
+from app.agents.reflection.metadata import ReflectionIdentity
+from app.agents.reflection.metrics import ReflectionMetricsCollector
+from app.agents.reflection.pattern_detector import PatternDetector
 from app.agents.reflection.performance_analyzer import PerformanceAnalyzer
 from app.agents.reflection.plan_analyzer import PlanAnalyzer
-from app.agents.reflection.planner_feedback import PlannerCritiqueItem, PlannerFeedback
+from app.agents.reflection.planner_feedback import PlannerFeedback
 from app.agents.reflection.quality_evaluator import QualityEvaluator
-from app.agents.reflection.ranking import AlternativeRanker
 from app.agents.reflection.reasoning_analyzer import ReasoningAnalyzer
-from app.agents.reflection.reasoning_validator import ReasoningValidator
 from app.agents.reflection.recommendation_engine import (
     Recommendation,
     RecommendationEngine,
@@ -102,27 +72,19 @@ from app.agents.reflection.reflection_context import (
     TaskTrace,
     ToolCallTrace,
 )
-from app.agents.reflection.reflection_graph import ReflectionGraph, ReflectionNode
-from app.agents.reflection.reflection_session import ReflectionSession
 from app.agents.reflection.repository import (
-    InMemoryEvaluationRepository,
-    InMemoryLearningArtifactRepository,
-    InMemoryRecommendationRepository,
     InMemoryReflectionRepository,
 )
 from app.agents.reflection.resource_analyzer import ResourceAnalyzer
 from app.agents.reflection.risk_evaluator import RiskEvaluator
 from app.agents.reflection.root_cause import ReflectionRootCauseAnalyzer
-from app.agents.reflection.runtime import ReflectionRuntime
 from app.agents.reflection.scoring import CompositeScorer
-from app.agents.reflection.self_critique import CritiqueFinding, SelfCritique
 from app.agents.reflection.serialization import ReflectionSerializer
 from app.agents.reflection.success_analyzer import SuccessAnalyzer
 from app.agents.reflection.token_evaluator import TokenEvaluator
 from app.agents.reflection.tool_feedback import ToolFeedback
 from app.agents.reflection.tool_usage_analyzer import ToolUsageAnalyzer
 from app.agents.reflection.trend_analyzer import TrendAnalyzer
-from app.agents.reflection.validation import ReflectionRequestValidator
 from app.agents.reflection.validators import ReflectionValidator
 
 

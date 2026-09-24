@@ -2,7 +2,7 @@
 Enterprise Goal Alignment Engine
 Hierarchy mapping connecting Task -> Agent -> Department Goal -> Business Goal -> Corporate KPI.
 """
-from typing import Dict, List, Any
+from typing import Dict, List
 from ..models.schemas import GoalAlignmentNode
 
 class GoalAlignmentEngine:

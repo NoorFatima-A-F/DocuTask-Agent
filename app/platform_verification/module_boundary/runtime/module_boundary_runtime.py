@@ -2,7 +2,7 @@
 Enterprise Module Boundary Platform Runtime facade.
 """
 from __future__ import annotations
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 import uuid
 from app.platform_verification.module_boundary.core.boundary_validator import EnterpriseModuleBoundaryValidator
 from app.platform_verification.module_boundary.core.compatibility_engine import EnterpriseCompatibilityValidator

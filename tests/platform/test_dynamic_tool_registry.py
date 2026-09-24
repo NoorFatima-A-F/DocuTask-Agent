@@ -4,7 +4,6 @@ import pytest
 from app.platform.tools.dynamic_tool_registry import (
     DynamicToolRegistry,
     ToolInvoker,
-    ToolMetadata,
 )
 
 

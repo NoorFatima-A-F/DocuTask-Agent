@@ -8,8 +8,8 @@ from __future__ import annotations
 
 import hashlib
 import time
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Any, Dict, List
 
 from app.runtime.decision_ledger.decision_ledger import global_decision_ledger
 from app.runtime.evidence.artifact_registry import global_artifact_registry
@@ -161,7 +161,7 @@ class VerificationSuite:
 
         # Check 5: Content-Addressable Artifact Consistency
         t0 = time.perf_counter()
-        art_count = global_artifact_registry.count()
+        global_artifact_registry.count()
         ch5_pass = True
         dt5 = round((time.perf_counter() - t0) * 1000.0, 2)
         checks.append(

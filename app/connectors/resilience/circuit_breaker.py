@@ -6,12 +6,11 @@ States: CLOSED -> OPEN -> HALF_OPEN -> RECOVERY.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from enum import Enum
 import logging
 import time
-from typing import Any, Callable, Dict, Optional
-from pydantic import BaseModel, Field
+from typing import Any, Callable, Optional
+from pydantic import BaseModel
 
 from app.connectors.core.exceptions import CircuitBreakerOpenError
 

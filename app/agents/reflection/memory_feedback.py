@@ -5,7 +5,7 @@ Reflection never updates Memory directly.
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.reflection.learning_artifact import LearningArtifact

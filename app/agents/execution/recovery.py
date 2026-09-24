@@ -3,7 +3,6 @@ Runtime Recovery Engine.
 Implements recovery strategies: retry task, retry subtree, alternate tool, checkpoint restore.
 """
 
-from typing import Optional
 from uuid import UUID
 from app.agents.execution.checkpoint_manager import CheckpointManager
 from app.agents.execution.execution_graph import ExecutionGraph

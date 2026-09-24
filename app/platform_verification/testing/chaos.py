@@ -4,7 +4,7 @@ Simulates network latency, storage outages, process crashes, and corrupted paylo
 """
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional, Callable, Any
+from typing import Optional
 import time
 
 class ChaosFaultType(str, Enum):

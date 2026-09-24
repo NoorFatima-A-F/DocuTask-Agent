@@ -1,11 +1,9 @@
 """Certification Authority Self-Integrity Verification Engine."""
 
 import hashlib
-import inspect
-import json
 import os
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

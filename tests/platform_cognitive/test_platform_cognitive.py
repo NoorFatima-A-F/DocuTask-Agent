@@ -6,9 +6,6 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 from app.platform_cognitive.runtime.cognitive_master_orchestrator import cognitive_orchestrator
-from app.platform_cognitive.models.schemas import (
-    CognitiveNode, CognitiveEdge, ReasoningNodeType, ReasoningRelationType
-)
 
 client = TestClient(app)
 

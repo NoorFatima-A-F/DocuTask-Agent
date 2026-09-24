@@ -4,7 +4,6 @@ Unit and Integration Tests for Disaster Recovery Architecture Verification (Part
 import pytest
 from app.platform_verification.disaster_recovery_verification.domain.models import (
     ComponentTier,
-    DRScenarioType,
     DRCertificationTier,
     DRMaturityLevel,
 )

@@ -1,10 +1,10 @@
 """
 Knowledge Ingestion Engine
 """
-from typing import List, Dict, Any, Optional
+from typing import List, Optional
 from datetime import datetime, timezone
 from ..models.schemas import (
-    KnowledgeAsset, KnowledgeSource, KnowledgeLifecycleState,
+    KnowledgeAsset, KnowledgeLifecycleState,
     KnowledgeSourceType, SecurityClassification, KnowledgeMetadata
 )
 from .connectors import EnterpriseConnectorFactory

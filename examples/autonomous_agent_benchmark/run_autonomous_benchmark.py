@@ -10,7 +10,6 @@ Runtime Graph Mutation (Node Injection) -> Self-Correction ->
 from __future__ import annotations
 
 import asyncio
-import json
 import logging
 import os
 import sys
@@ -36,7 +35,6 @@ from app.agents.memory.intelligence import (
 from app.agents.planning import (
     AutonomousPlanner,
     CapabilityDiscovery,
-    PlannedTask,
 )
 from app.agents.reflection import (
     CorrectionAction,
@@ -44,7 +42,6 @@ from app.agents.reflection import (
 )
 from app.agents.tools.reasoning import (
     Modality,
-    ToolDefinition,
     ToolExecutionPolicy,
     ToolReasoningRegistry,
     ToolSelector,
@@ -86,7 +83,7 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
     agent_registry.register(AgentProfile("agent_compliance_sox", "COMPLIANCE_AUDIT_AGENT", ["regulatory_audit"], cost_per_call=0.001, latency_p95_ms=150.0))
     agent_registry.register(AgentProfile("agent_correction_gemini", "CORRECTION_AGENT", ["reflection_repair"], cost_per_call=0.005, latency_p95_ms=400.0, confidence_rating=0.99))
 
-    agent_discovery = AgentDiscoveryService(agent_registry)
+    AgentDiscoveryService(agent_registry)
     agent_negotiator = AgentNegotiator(agent_registry)
     message_bus = AgentMessageBus()
 
@@ -198,7 +195,7 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
             logger.info("   Tool Selected: %s (Reason: %s)", tool_selection.selected_tool.name, tool_selection.reasoning[:80])
 
             # B. Execute Tool Policy
-            tool_res = await tool_execution_policy.execute_with_policy(
+            await tool_execution_policy.execute_with_policy(
                 primary_tool_id=tool_selection.selected_tool.tool_id,
                 arguments={"task_id": current_task.task_id, "input": current_task.input_parameters},
             )
@@ -319,7 +316,7 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
     print(f"Graph Mutations       : {len(graph.get_mutation_history())}")
     for m in graph.get_mutation_history():
         print(f"   * Mutation [{m.mutation_type}] on node {m.node_id}")
-    final_output = graph.get_all_outputs()
+    graph.get_all_outputs()
     corrected_data = execution_context.get("corrected_extracted_entities") or execution_context.get("extracted_entities") or {}
     total_val = corrected_data.get("total_amount", 0.0)
     print(f"Corrected Total Amount: ${total_val:.2f}")

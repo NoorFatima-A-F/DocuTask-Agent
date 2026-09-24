@@ -2,7 +2,6 @@
 Event Subscription Models.
 """
 
-from typing import Callable, Coroutine
 from pydantic import BaseModel, Field
 
 

@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-import time
 import uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Callable, Dict, Optional
 
 from .data_plane import DataPlaneInterceptor, MeshRequest, MeshResponse

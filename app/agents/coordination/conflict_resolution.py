@@ -7,7 +7,6 @@ from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field
-from app.agents.coordination.agent import Agent
 from app.agents.coordination.interfaces import IConflictResolver
 
 

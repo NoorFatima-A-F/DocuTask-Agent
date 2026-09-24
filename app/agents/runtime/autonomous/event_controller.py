@@ -6,7 +6,7 @@ Bridges runtime state machine events, task progress, and anomaly signals to the 
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, Optional
+from typing import Optional
 
 from app.agents.events.event_bus import EnterpriseEventBus
 from app.agents.events.event_types import (
@@ -14,7 +14,6 @@ from app.agents.events.event_types import (
     AgentFailedEvent,
     GoalReceivedEvent,
     PlanOptimizedEvent,
-    PlanningStartedEvent,
     ReflectionCritiqueCompletedEvent,
     StateTransitionEvent,
 )

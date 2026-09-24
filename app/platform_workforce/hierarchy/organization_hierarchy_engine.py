@@ -1,7 +1,7 @@
 """
 2. Organization Hierarchy Engine Subsystem
 """
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from app.platform_workforce.models.schemas import Department, DepartmentType, DigitalEmployee
 from app.platform_workforce.registry.workforce_registry import workforce_registry
 

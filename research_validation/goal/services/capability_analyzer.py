@@ -5,14 +5,14 @@ Analyzes required capabilities against available subsystem providers,
 detects gaps, and calculates overall capability confidence.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set
+from dataclasses import dataclass
+from typing import List, Optional
 
 from research_validation.goal.models.capability_requirement import (
     CapabilityRequirement, CapabilityCriticality
 )
 from research_validation.goal.interfaces.capability_provider import (
-    ICapabilityProvider, DiscoveredCapability, DefaultSystemCapabilityProvider
+    ICapabilityProvider, DefaultSystemCapabilityProvider
 )
 
 

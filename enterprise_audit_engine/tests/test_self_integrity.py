@@ -1,8 +1,6 @@
 """Tests for Audit Engine Self-Integrity & Environment Verification."""
 
 import pytest
-import tempfile
-from pathlib import Path
 from enterprise_audit_engine.assurance.self_integrity import (
     SelfIntegrityVerifier,
     EngineIntegrityFingerprint,

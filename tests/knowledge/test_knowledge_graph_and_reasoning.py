@@ -2,7 +2,6 @@
 Tests for KnowledgeGraphEngine.
 """
 
-import pytest
 from app.knowledge.graph.engine import KnowledgeGraphEngine
 
 
@@ -10,10 +9,10 @@ def test_knowledge_graph_entities_and_traversals():
     graph = KnowledgeGraphEngine()
 
     # Add Entities
-    e_alice = graph.add_entity("ent-user-1", "Person", "Alice Smith", {"role": "CISO"})
-    e_policy = graph.add_entity("ent-doc-1", "Policy", "Access Control Policy", {"version": "2.0"})
-    e_dept = graph.add_entity("ent-dept-1", "Department", "Information Security", {})
-    e_acme = graph.add_entity("ent-org-1", "Company", "Acme Corporation", {})
+    graph.add_entity("ent-user-1", "Person", "Alice Smith", {"role": "CISO"})
+    graph.add_entity("ent-doc-1", "Policy", "Access Control Policy", {"version": "2.0"})
+    graph.add_entity("ent-dept-1", "Department", "Information Security", {})
+    graph.add_entity("ent-org-1", "Company", "Acme Corporation", {})
 
     # Add Relationships
     graph.add_relation("ent-user-1", "ent-doc-1", "approved_by")

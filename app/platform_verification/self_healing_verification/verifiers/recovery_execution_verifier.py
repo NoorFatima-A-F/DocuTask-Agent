@@ -1,7 +1,6 @@
 """
 Phase 3H.5.4: Recovery Execution Verifier
 """
-from typing import Dict, Any, List
 from ..domain.interfaces import IRecoveryExecutionVerifier
 from ..domain.models import (
     RecoveryExecutionReport,

@@ -1,7 +1,5 @@
 """Request DTOs for the Public and Internal Governance Platform APIs."""
 
-from datetime import datetime, timezone
-from enum import Enum
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 

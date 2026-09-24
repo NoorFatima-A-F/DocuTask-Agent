@@ -3,7 +3,7 @@ Counterfactual Simulator - Comparison Engine
 Calculates Opportunity Cost, Delta Utility, and Planner Regret between factual and counterfactual outcomes.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 from app.runtime.counterfactual.alternate_planner import CounterfactualCandidate
 

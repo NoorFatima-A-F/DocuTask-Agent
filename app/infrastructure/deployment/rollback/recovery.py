@@ -5,8 +5,8 @@ from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional
 import threading
 
-from .executor import RollbackRequest, RollbackResult, RollbackExecutor, RollbackTriggerType
-from ..control_plane.state import DeploymentRecord, DeploymentStatus
+from .executor import RollbackRequest, RollbackExecutor, RollbackTriggerType
+from ..control_plane.state import DeploymentRecord
 
 
 @dataclass

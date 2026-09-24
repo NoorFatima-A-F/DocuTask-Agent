@@ -4,7 +4,6 @@ Implements Bully-style priority election and Raft-inspired heartbeats for electi
 """
 
 from typing import List, Optional
-from uuid import UUID
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.interfaces import ILeaderElectionEngine
 

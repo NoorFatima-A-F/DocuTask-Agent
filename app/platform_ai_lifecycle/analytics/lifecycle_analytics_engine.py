@@ -3,7 +3,7 @@ Phase 13.20: AI Lifecycle Analytics & Business ROI Platform.
 Calculates ROI, developer hours saved, agent adoption scores, and fleet reliability metrics.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional
 from datetime import datetime, timezone
 from app.platform_ai_lifecycle.models.schemas import AgentAnalytics, LifecycleOverview
 

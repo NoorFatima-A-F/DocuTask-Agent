@@ -1,7 +1,7 @@
 """Request and Response Schemas for Infrastructure REST API."""
 
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from datetime import datetime
+from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field
 
 

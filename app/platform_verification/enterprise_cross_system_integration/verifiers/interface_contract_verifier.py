@@ -1,7 +1,7 @@
 """Part B: Cross-System Interface Verification."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IInterfaceContractVerifier
 from ..domain.models import (
     CheckResult,

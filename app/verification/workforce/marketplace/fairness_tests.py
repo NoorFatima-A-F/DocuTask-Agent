@@ -15,7 +15,6 @@ class MarketplaceFairnessVerifier:
         
         # 1. Distribute 200 tasks among 50 agents with capacity gates (prevent starvation & hoarding)
         agent_task_counts = {f"emp-agent-{i:02d}": 0 for i in range(agent_count)}
-        max_tasks_per_agent = 6
         
         for t in range(task_count):
             # Sort agents by least loaded, with tie-break

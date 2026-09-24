@@ -71,7 +71,7 @@ async def test_auth_service_full_flow(db_session: AsyncSession):
 
     # 5. Change Password
     # Re-login to get active refresh token
-    login_tokens = await auth_service.login(login_req)
+    await auth_service.login(login_req)
     change_pwd_req = ChangePasswordRequest(
         old_password="Password123!",
         new_password="NewPassword456!"

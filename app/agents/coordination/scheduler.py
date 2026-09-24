@@ -3,7 +3,7 @@ Distributed Agent Scheduler.
 Determines task allocation order, priority matching, and execution windows across distributed agents.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field
 from app.agents.coordination.agent import Agent

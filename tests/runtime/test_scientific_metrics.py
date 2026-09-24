@@ -3,11 +3,9 @@ Scientific Metrics Engine Test Suite.
 Verifies all canonical formulas, statistical estimators, percentiles, confidence intervals, and Merkle proofs.
 """
 
-import pytest
 from datetime import datetime, timezone, timedelta
 from app.runtime.events.base import RuntimeEvent
-from app.runtime.metrics.definitions import MetricDefinition, MetricUnit
-from app.runtime.metrics.formulas import CANONICAL_FORMULAS
+from app.runtime.metrics.definitions import MetricUnit
 from app.runtime.metrics.registry import get_global_metric_registry
 from app.runtime.metrics.calculator import ScientificMetricCalculator
 from app.runtime.metrics.statistics import ScientificStatisticsEngine

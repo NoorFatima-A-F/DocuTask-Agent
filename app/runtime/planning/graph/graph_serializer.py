@@ -6,7 +6,6 @@ Exports ExecutionDAG to JSON dictionaries, Mermaid flowchart syntax, and Graphvi
 
 from __future__ import annotations
 
-import json
 from typing import Any, Dict
 from app.runtime.planning.graph.dag import ExecutionDAG
 

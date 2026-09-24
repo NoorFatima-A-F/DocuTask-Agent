@@ -3,7 +3,7 @@ Rollback Manager for Phase 13.5 (ARLP-KIP).
 Provides 1-click atomic rollback to baseline or known-good policy configurations upon anomaly detection.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import List
 from datetime import datetime, timezone
 import uuid
 from pydantic import BaseModel, Field

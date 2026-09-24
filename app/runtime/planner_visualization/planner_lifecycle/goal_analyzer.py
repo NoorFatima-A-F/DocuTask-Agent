@@ -5,7 +5,7 @@ Exposes deep goal decomposition, objectives, constraints, and resources.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from app.runtime.planner_visualization.ui_models.models import GoalObjective
 
 

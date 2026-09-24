@@ -8,7 +8,6 @@ and managing recovery/escalation.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 import logging
 
@@ -17,7 +16,7 @@ from app.agents.communication.message_bus import (
     AgentMessageBus,
     AgentMessageType,
 )
-from app.agents.domain.agent_entity import Agent, AgentLifecycleState, AgentPlan, AgentType, PlanStep
+from app.agents.domain.agent_entity import Agent, AgentLifecycleState, AgentPlan, AgentType
 from app.agents.lifecycle.manager import AgentLifecycleManager
 
 logger = logging.getLogger(__name__)
@@ -88,7 +87,7 @@ class SupervisorAgent:
         )
 
         completed_steps: set[str] = set()
-        step_map = {s.id: s for s in plan.steps}
+        {s.id: s for s in plan.steps}
         iteration = 0
         current_cost = 0.0
 

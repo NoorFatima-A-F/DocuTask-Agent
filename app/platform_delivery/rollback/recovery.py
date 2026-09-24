@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 import uuid
 
-from ..control_plane.controller import DeploymentControlPlane, DeploymentRecord
+from ..control_plane.controller import DeploymentControlPlane
 from ..control_plane.state_machine import DeploymentState
 from .policies import RollbackTriggerType
 

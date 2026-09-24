@@ -2,7 +2,6 @@
 Tests for ObservabilitySDK and FastAPI Observability REST API Endpoints.
 """
 
-import pytest
 
 from app.infrastructure.observability.alerts.models import AlertRule, AlertSeverity
 from app.infrastructure.observability.api.observability_routes import (
@@ -12,7 +11,6 @@ from app.infrastructure.observability.api.observability_routes import (
     emit_log,
     get_dependencies,
     get_metrics,
-    get_trace_analysis,
     list_alerts,
     list_slos,
     record_metric,

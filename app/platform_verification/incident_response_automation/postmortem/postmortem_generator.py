@@ -7,7 +7,7 @@ MTTD, MTTR, MTTF metrics, root cause attribution, and preventative action items.
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.incident_response_automation.domain.interfaces import (
     IPostmortemGenerator,
@@ -23,7 +23,7 @@ class PostmortemGenerator(IPostmortemGenerator):
     """Generates structured postmortem reports from operational incident data."""
 
     def generate_postmortem(self, incident_id: str = "INC-2026-002") -> PostmortemReport:
-        now_iso = datetime.now(timezone.utc).isoformat()
+        datetime.now(timezone.utc).isoformat()
 
         timeline: List[PostmortemTimelineItem] = [
             PostmortemTimelineItem("10:14:00 UTC", "Anomaly Inception", "Batch client initiates 500 parallel document upload requests"),

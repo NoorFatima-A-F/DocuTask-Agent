@@ -1,12 +1,10 @@
 """Tests for Reproducibility Engine, Snapshot Manager, and Replay Reproducer."""
 
-import pytest
 from app.runtime.reproducibility.environment_capture import (
     DependencyCapture,
     EnvironmentCapture,
 )
 from app.runtime.reproducibility.reproducer import Reproducer
-from app.runtime.reproducibility.runtime_snapshot import RuntimeSnapshot
 from app.runtime.reproducibility.snapshot_manager import SnapshotManager
 
 
@@ -38,7 +36,7 @@ def test_snapshot_creation_and_diff():
     assert s1.snapshot_hash is not None
     assert mgr.get_snapshot("snap-01") is not None
 
-    s2 = mgr.create_snapshot(
+    mgr.create_snapshot(
         snapshot_id="snap-02",
         mission_id="mission-1",
         step_index=1,
@@ -58,7 +56,7 @@ def test_snapshot_creation_and_diff():
 
 def test_reproducer_deterministic_replay():
     mgr = SnapshotManager()
-    snap = mgr.create_snapshot(
+    mgr.create_snapshot(
         snapshot_id="snap-replay-test",
         mission_id="mission-replay",
         step_index=1,

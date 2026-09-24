@@ -6,10 +6,9 @@ isolate root causes for plan deviation, and tune predictive models over time.
 
 from __future__ import annotations
 
-import math
 import uuid
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 from pydantic import BaseModel, Field
 
 

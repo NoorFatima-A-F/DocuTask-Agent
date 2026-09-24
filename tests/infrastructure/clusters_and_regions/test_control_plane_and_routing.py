@@ -4,15 +4,13 @@ from app.infrastructure.clusters.models import (
     CapacityModel,
     Cluster,
     ClusterStatus,
-    ClusterType,
 )
 from app.infrastructure.clusters.registry import ClusterRegistry
-from app.infrastructure.regions.models import Region, RegionStatus
+from app.infrastructure.regions.models import Region
 from app.infrastructure.regions.registry import RegionRegistry
 from app.infrastructure.control_plane.global_cp.manager import GlobalControlPlane
 from app.infrastructure.control_plane.regional.manager import RegionalControlPlane
 from app.infrastructure.control_plane.topology.graph import NodeType, TopologyGraph
-from app.infrastructure.control_plane.topology.discovery import TopologyDiscoveryService
 from app.infrastructure.control_plane.config.distributor import ConfigurationDistributor
 from app.infrastructure.control_plane.config.versions import CompatibilityMatrix
 from app.infrastructure.routing.metadata import WorkloadRoutingRequest

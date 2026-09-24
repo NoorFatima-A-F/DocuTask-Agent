@@ -1,7 +1,7 @@
 """Canary Progressive Traffic Shifting Strategy."""
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Callable, List, Optional, Tuple
 from ..core.exceptions import StrategyExecutionException
 
 

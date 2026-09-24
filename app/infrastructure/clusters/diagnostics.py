@@ -1,7 +1,7 @@
 """Cluster Diagnostics and Inspection Platform."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, List, Union
 from pydantic import BaseModel, Field
 
 from .health import ClusterHealthAggregator

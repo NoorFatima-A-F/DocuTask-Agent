@@ -3,7 +3,7 @@ Scientific Model Router - Unified Model Router
 Selects optimal AI model based on multi-attribute expected utility and records provenance.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 import uuid
 

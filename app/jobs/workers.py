@@ -5,7 +5,7 @@ and lease expiration timeout recovery.
 """
 
 from datetime import datetime, timedelta, timezone
-from typing import Dict, List, Optional
+from typing import Dict, List
 from pydantic import BaseModel, Field
 from app.core.logging import logger
 

@@ -2,13 +2,11 @@
 Phase 3H.8: Comprehensive Test Suite for Enterprise Operational Governance & Safe Operations Verification
 """
 import pytest
-from pathlib import Path
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
 from app.platform_verification.operational_governance.domain.models import (
     RiskLevel,
-    ChangeStatus,
     DeploymentStrategyType,
     GovernanceCertificationTier,
 )
@@ -25,7 +23,6 @@ from app.platform_verification.operational_governance.verifiers import (
     GovernanceDashboardVerifier,
 )
 from app.platform_verification.operational_governance.scoring import OperationalGovernanceScorer
-from app.platform_verification.operational_governance.exporter import OperationalGovernanceExporter
 from app.platform_verification.operational_governance.runtime import OperationalGovernanceRuntime
 from app.platform_verification.operational_governance.api import router
 

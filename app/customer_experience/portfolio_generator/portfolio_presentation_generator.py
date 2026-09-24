@@ -1,8 +1,7 @@
 """Part J-M: Portfolio Presentation, Case Studies & Demo Script Generator."""
 
 from datetime import datetime, timezone
-import os
-from typing import Dict, List, Optional
+from typing import List, Optional
 from pathlib import Path
 from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import IPortfolioPresentationGenerator

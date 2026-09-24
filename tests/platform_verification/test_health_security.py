@@ -7,8 +7,6 @@ import pytest
 
 from app.platform_verification.health_security.domain.models import (
     SecurityTier,
-    RedactionState,
-    ComplianceFramework,
     HealthSecurityCertificationTier,
 )
 from app.platform_verification.health_security.verifiers import (
@@ -24,9 +22,7 @@ from app.platform_verification.health_security.verifiers import (
     ComplianceSecurityVerifier,
 )
 from app.platform_verification.health_security.scoring import HealthSecurityScorer
-from app.platform_verification.health_security.exporter import HealthSecurityExporter
 from app.platform_verification.health_security.runtime import HealthSecurityRuntime
-from app.platform_verification.health_security.api import router as health_security_router
 
 
 class TestHealthSecurityVerification:

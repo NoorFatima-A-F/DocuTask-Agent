@@ -1,7 +1,6 @@
 """
 Test Suite: Phase 3I.12 Autonomous Reliability Engineering, Continuous Optimization & Operational Intelligence
 """
-import os
 import json
 import pytest
 from fastapi.testclient import TestClient
@@ -9,8 +8,6 @@ from fastapi import FastAPI
 
 from app.platform_verification.autonomous_reliability_engineering.domain.models import (
     AutonomousCertificationTier,
-    ActionSafetyLevel,
-    FailureSeverity,
     AutonomousArchitectureReport,
     AnomalyIntelligenceReport,
     FailurePredictionReport,
@@ -40,9 +37,6 @@ from app.platform_verification.autonomous_reliability_engineering.verifiers impo
 )
 from app.platform_verification.autonomous_reliability_engineering.scoring import (
     AutonomousReliabilityScorer,
-)
-from app.platform_verification.autonomous_reliability_engineering.exporter import (
-    AutonomousReliabilityExporter,
 )
 from app.platform_verification.autonomous_reliability_engineering.runtime import (
     AutonomousReliabilityRuntime,

@@ -8,7 +8,6 @@ import logging
 from typing import Dict, List, Optional
 from uuid import UUID
 from app.agents.runtime.enterprise.scheduler_state import (
-    JobPriority,
     JobStatus,
     ScheduledJob,
 )

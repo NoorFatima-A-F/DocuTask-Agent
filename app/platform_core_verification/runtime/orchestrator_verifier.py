@@ -5,7 +5,7 @@ Verifies Task Graph DAGs, cycle detection, worker allocation/throttling, state c
 
 import collections
 import time
-from typing import Dict, List, Set, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,

@@ -1,7 +1,6 @@
 # Enterprise Event Taxonomy for DocuTask Agent
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Any, Dict
 from app.runtime.events.base import RuntimeEvent
 
 # Planner

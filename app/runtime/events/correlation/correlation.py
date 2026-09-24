@@ -3,7 +3,7 @@ DocuTask Agent - Distributed Correlation Tracker
 Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List
 from app.runtime.events.models.event import DomainEvent
 
 

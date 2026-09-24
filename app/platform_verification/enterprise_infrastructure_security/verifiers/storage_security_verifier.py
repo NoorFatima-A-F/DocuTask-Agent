@@ -2,7 +2,7 @@
 Phase 3N.12: Storage Security Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IStorageSecurityVerifier
 from ..domain.models import (

@@ -10,10 +10,10 @@ Coordinates the complete self-rewriting loop:
 from __future__ import annotations
 
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from pydantic import BaseModel, Field
 
-from app.runtime.evolution.genetic_optimizer import GeneticPlannerOptimizer, PlannerChromosome
+from app.runtime.evolution.genetic_optimizer import GeneticPlannerOptimizer
 from app.runtime.evolution.bayesian_optimizer import BayesianPlannerOptimizer
 from app.runtime.evolution.planner_version_registry import PlannerVersionRegistry, PlannerGeneration
 

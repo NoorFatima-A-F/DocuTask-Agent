@@ -3,8 +3,7 @@ Coordination Manager.
 Coordinates session tracking, lease lifecycle, and active team memberships.
 """
 
-from typing import Dict, List, Optional
-from uuid import UUID
+from typing import Optional
 from app.agents.coordination.agent_registry import AgentRegistry
 from app.agents.coordination.lease_manager import LeaseManager
 from app.agents.coordination.presence import PresenceManager

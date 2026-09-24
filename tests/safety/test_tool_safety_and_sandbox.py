@@ -1,10 +1,8 @@
 """Tests for Tool Safety Validator, Permission Manager, and Sandboxing."""
 
-import pytest
-from app.safety.tools.permissions import ToolDangerLevel, ToolPermissionManager
+from app.safety.tools.permissions import ToolPermissionManager
 from app.safety.tools.validator import ToolSafetyValidator
 from app.safety.tools.sandbox import ToolSandboxEngine
-from app.safety.gateway.decision import ViolationSeverity
 
 
 def test_tool_permission_manager():

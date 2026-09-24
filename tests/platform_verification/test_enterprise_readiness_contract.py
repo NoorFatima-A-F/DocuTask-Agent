@@ -1,14 +1,12 @@
 """
 Pytest Test Suite for Part 3H.3.1: Enterprise Readiness Contract Architecture Verification Framework
 """
-import os
 import json
 import pytest
 
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessState,
     TrafficAction,
-    DependencyType,
     ReadinessTier,
 )
 from app.platform_verification.readiness_contract.state_machine.readiness_state_machine import ReadinessStateMachine
@@ -20,8 +18,6 @@ from app.platform_verification.readiness_contract.transitions.failure_transition
 from app.platform_verification.readiness_contract.orchestration.readiness_orchestration_verifier import ReadinessOrchestrationVerifier
 from app.platform_verification.readiness_contract.security.readiness_security_verifier import ReadinessSecurityVerifier
 from app.platform_verification.readiness_contract.observability.readiness_metrics_exporter import ReadinessMetricsExporter
-from app.platform_verification.readiness_contract.scoring.readiness_score_engine import ReadinessScoreEngine
-from app.platform_verification.readiness_contract.exporter.readiness_evidence_exporter import ReadinessEvidenceExporter
 from app.platform_verification.readiness_contract.runtime.readiness_runtime import ReadinessRuntime
 
 
@@ -188,7 +184,7 @@ def test_score_engine_and_certification():
 
 def test_evidence_exporter_generates_all_files(tmp_path):
     runtime = ReadinessRuntime(evidence_dir=str(tmp_path))
-    results = runtime.execute_full_verification()
+    runtime.execute_full_verification()
 
     expected_files = [
         "readiness_contract_report.json",

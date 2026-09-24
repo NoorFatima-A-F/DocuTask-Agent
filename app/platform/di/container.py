@@ -6,7 +6,7 @@ global runtime singletons and all services are lifecycle-managed and mockable.
 
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, Optional, Type
+from typing import Any, Callable, Dict, Type
 
 
 class DIContainer:

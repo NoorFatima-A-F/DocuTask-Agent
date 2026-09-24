@@ -2,7 +2,7 @@ from typing import Dict, Any, Optional
 import hashlib
 import json
 from ..domain.certification_domain import ComplianceCertificateAggregate, CertificateIssued
-from app.shared_kernel import Result, Ok, Err, get_event_bus
+from app.shared_kernel import Result, Ok, get_event_bus
 
 class CertificationService:
     def __init__(self, repo):

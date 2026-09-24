@@ -6,10 +6,9 @@ Provides contract verification, schema conformance validation, mock APIs, and fa
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
-from app.connectors.core.models import ActionDescriptor, Connector
 from app.connectors.sdk.base import BaseConnector
 
 logger = logging.getLogger(__name__)

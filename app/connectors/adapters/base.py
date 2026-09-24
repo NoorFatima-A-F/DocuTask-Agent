@@ -6,7 +6,6 @@ Provides standard adapters for REST, GraphQL, SOAP, gRPC, and File-based externa
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-import json
 import logging
 from typing import Any, Dict, Optional
 

@@ -3,7 +3,7 @@ Evidence Graph & Lineage Query Engine.
 Traverses and proves the complete provenance chain:
 Objective -> Definition -> Plan -> DatasetVersion -> ConfigSnapshot -> EnvSnapshot -> Execution -> Evidence -> Metrics -> QualityDecision -> Certification -> Audit
 """
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from app.platform_verification.domain_model.persistence.repositories.in_memory_repos import verification_domain_repository
 
 

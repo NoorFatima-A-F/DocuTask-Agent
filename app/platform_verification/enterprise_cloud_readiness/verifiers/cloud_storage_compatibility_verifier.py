@@ -2,7 +2,7 @@
 Phase 3M.5: Cloud Storage Compatibility Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICloudStorageCompatibilityVerifier
 from ..domain.models import (

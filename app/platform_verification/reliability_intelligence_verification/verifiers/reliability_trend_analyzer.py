@@ -1,7 +1,6 @@
 """
 Phase 3H.5.7.9: Reliability Trend Analyzer
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IReliabilityTrendAnalyzer
 from ..domain.models import ReliabilityTrendReport, ReliabilityTrendItem
 

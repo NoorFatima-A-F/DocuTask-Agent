@@ -72,8 +72,6 @@ class QualityVerifier:
 
     def _verify_contradiction_detection(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
-        doc_a = "Policy A: Remote work is permitted 100% full time without exceptions."
-        doc_b = "Policy B: All staff must work on-site 5 days a week in the corporate office."
 
         # NLI / Contradiction detector flags opposition
         is_contradiction = True

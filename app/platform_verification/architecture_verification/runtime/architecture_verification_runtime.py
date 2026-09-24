@@ -3,6 +3,7 @@ Enterprise Architecture Verification Platform Runtime facade.
 """
 from __future__ import annotations
 import os
+from pathlib import Path
 from typing import Optional
 import uuid
 from app.platform_verification.architecture_verification.core.ast_scanner import EnterpriseASTScanner
@@ -21,7 +22,7 @@ class EnterpriseArchitectureVerificationRuntime:
     """Unified facade for AST scanning, graph analysis, rule evaluation, scoring, and regression detection."""
 
     def __init__(self, base_repo_dir: Optional[str] = None):
-        self.base_repo_dir = base_repo_dir or r"c:\Users\User\Desktop\ai_document_processing_platform"
+        self.base_repo_dir = base_repo_dir or str(Path.cwd())
         self.scanner = EnterpriseASTScanner()
         self.graph_engine = EnterpriseDependencyGraphEngine()
         self.rule_engine = EnterpriseArchitectureRuleEngine()

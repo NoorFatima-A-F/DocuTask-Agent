@@ -4,8 +4,8 @@ Geographic latency-aware task routing across global cloud regions (US, EU, Asia,
 """
 
 from __future__ import annotations
-from typing import Dict, List, Optional, Any
-from app.runtime.distributed.models.schemas import RegionName, WorkerNode
+from typing import Dict, List, Any
+from app.runtime.distributed.models.schemas import RegionName
 
 
 class RegionRouter:

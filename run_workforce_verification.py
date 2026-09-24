@@ -6,12 +6,10 @@ and exports cryptographically signed audit evidence and report (Part 21).
 
 import sys
 import time
-from typing import Dict
 
 from app.workforce_verification import (
     WorkforceScorer,
     EvidenceGenerator,
-    WorkforceReadinessScorecard,
 )
 from app.workforce_verification.registry.registry_verifier import RegistryVerifier
 from app.workforce_verification.capabilities.capabilities_verifier import CapabilitiesVerifier

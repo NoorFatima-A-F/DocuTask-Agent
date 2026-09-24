@@ -3,12 +3,11 @@ Phase 3J.11: Intelligent Performance Optimization & Autonomous Capacity Manageme
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from .models import (
     AIPipelineOptimizationReport,
     AutomatedRemediationReport,
-    BaseVerificationReport,
     CapacityPredictionReport,
     ContinuousOptimizationLoopReport,
     DatabaseOptimizationReport,

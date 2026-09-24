@@ -1,6 +1,5 @@
 """Tests for mTLS Validation and Zero-Trust Policy Engine."""
 
-import pytest
 from app.infrastructure.networking.security import (
     CertificateAuthorityManager,
     MTLSEngine,

@@ -11,7 +11,7 @@ Enforces governance constraints at the organization and workspace levels:
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Set
+from typing import Dict, Set
 from pydantic import BaseModel, Field
 from app.tenancy.core.models import Region
 from app.tenancy.core.exceptions import TenancyError, ComplianceViolationError

@@ -3,7 +3,8 @@ Enterprise Clean Architecture Runtime facade.
 """
 from __future__ import annotations
 import os
-from typing import Dict, List, Optional
+from pathlib import Path
+from typing import List, Optional
 import uuid
 from app.platform_verification.clean_architecture.core.ast_dependency_analyzer import EnterpriseCleanArchASTScanner
 from app.platform_verification.clean_architecture.core.domain_isolation_verifier import EnterpriseDomainIsolationVerifier
@@ -20,7 +21,7 @@ class EnterpriseCleanArchitectureRuntime:
     """Unified runtime facade for Clean Architecture scanning, metrics, and rule evaluation."""
 
     def __init__(self, base_repo_dir: Optional[str] = None):
-        self.base_repo_dir = base_repo_dir or r"c:\Users\User\Desktop\ai_document_processing_platform"
+        self.base_repo_dir = base_repo_dir or str(Path.cwd())
         self.scanner = EnterpriseCleanArchASTScanner()
         self.rule_engine = EnterpriseDependencyRuleEngine()
         self.metrics_calculator = EnterpriseDependencyMetricsCalculator()

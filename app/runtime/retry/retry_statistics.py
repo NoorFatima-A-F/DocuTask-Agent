@@ -3,7 +3,7 @@ Quantitative Retry Optimization - Retry Statistics
 Tracks empirical recovery rates, delay distributions, and cumulative costs.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 
 
 class RetryStatistics:

@@ -6,8 +6,6 @@ import os
 import pytest
 from app.performance_verification.domain.models import (
     PerformanceStatus,
-    ChaosFailureType,
-    LatencyDistribution,
 )
 from app.performance_verification.infrastructure.latency_analyzer import LatencyAnalyzer
 from app.performance_verification.infrastructure.metric_collector import MetricCollector

@@ -3,7 +3,7 @@ Platform Resource Manager.
 Enforces multi-tenant limits, quotas, token budgets, and capacity reservations.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from .models import ResourceQuota, ResourceType, ResourceUsage
 from ...core.errors.exceptions import PlatformException
 from ...core.errors.error_codes import ErrorCategory

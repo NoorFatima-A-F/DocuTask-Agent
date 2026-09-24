@@ -2,7 +2,6 @@
 Document Storage Cross-Region Replication Verifier (Part 3G.6D).
 Validates cross-region object storage replication and SHA-256 byte-for-byte cryptographic parity.
 """
-from typing import Dict, Any
 from app.platform_verification.multi_region_failover.domain.models import (
     StorageReplicationReport,
 )

@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-import importlib
-import json
-import os
 import time
 from typing import Any, Dict, List, Optional
 
@@ -15,7 +12,6 @@ from app.platform.capability.capability_registry import (
 )
 from app.platform.di.container import DIContainer, global_di_container
 from app.platform.plugins.plugin_manifest import PluginManifest
-from app.sdk.agent_sdk import BaseAgent
 
 
 class PluginContext:

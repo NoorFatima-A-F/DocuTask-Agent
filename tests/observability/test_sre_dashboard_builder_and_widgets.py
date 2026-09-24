@@ -1,8 +1,6 @@
 """Tests for Dashboard Engine and Widget Rendering."""
 
-import pytest
-from app.observability.dashboards.builder import Dashboard, DashboardEngine, DashboardType
-from app.observability.dashboards.widgets import DashboardWidget, WidgetType
+from app.observability.dashboards.builder import DashboardEngine, DashboardType
 from app.observability.metrics.registry import MetricRegistry
 
 

@@ -4,11 +4,8 @@ Unit and integration tests for Phase V5 — Enterprise Document Intelligence & A
 
 import os
 import json
-import pytest
 from app.document_intelligence_verification import (
     BoundingBox,
-    DocumentCategory,
-    PerturbationType,
     DatasetVerifier,
     IngestionVerifier,
     ClassificationVerifier,

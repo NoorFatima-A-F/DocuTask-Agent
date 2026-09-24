@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 from app.infrastructure.clusters.models import Cluster, ClusterStatus
 from app.infrastructure.clusters.registry import ClusterRegistry
-from app.infrastructure.regions.models import Region, RegionStatus
+from app.infrastructure.regions.models import RegionStatus
 from app.infrastructure.regions.registry import RegionRegistry
 from app.infrastructure.control_plane.global_cp.state import GlobalControlPlaneState
 from app.infrastructure.control_plane.global_cp.coordinator import GlobalCoordinator

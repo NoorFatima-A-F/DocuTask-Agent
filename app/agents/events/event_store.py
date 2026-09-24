@@ -11,8 +11,7 @@ import json
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional, Sequence
-from uuid import UUID
+from typing import Any, Callable, Dict, List, Optional
 
 from app.agents.events.event_types import AgentEvent
 

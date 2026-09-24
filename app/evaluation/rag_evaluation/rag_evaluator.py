@@ -1,7 +1,7 @@
 """Part D: RAG Knowledge Evaluation."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IRAGEvaluator
 from ..domain.models import (
     EvaluationCheck,

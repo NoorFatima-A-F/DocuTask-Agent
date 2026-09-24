@@ -2,7 +2,7 @@
 Phase 3H.7: Enterprise Operational Resilience, Fault Tolerance & Self-Healing — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import List
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

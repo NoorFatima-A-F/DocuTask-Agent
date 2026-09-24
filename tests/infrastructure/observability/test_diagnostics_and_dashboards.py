@@ -2,7 +2,6 @@
 Tests for Dependency Graphs, Health Analysis, Root Cause Analysis, and Dashboard Framework.
 """
 
-import pytest
 
 from app.infrastructure.observability.dashboards.builder import (
     DashboardBuilder,

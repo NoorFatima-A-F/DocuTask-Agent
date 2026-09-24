@@ -4,7 +4,7 @@ Tracks agent liveness from heartbeats and flags degraded or hung agents.
 """
 
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict
 from uuid import UUID
 from app.agents.coordination.heartbeat import AgentHeartbeat
 

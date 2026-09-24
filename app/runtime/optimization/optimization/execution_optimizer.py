@@ -3,8 +3,7 @@ Execution Optimizer for Phase 13.6 (ARIA-EOP).
 Translates selected strategy into execution directives (batching chunks, concurrency pool bounds, retry delays).
 """
 
-from typing import Dict, Any, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class ExecutionDirective(BaseModel):

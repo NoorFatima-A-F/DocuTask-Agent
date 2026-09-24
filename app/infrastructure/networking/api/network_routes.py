@@ -2,7 +2,7 @@
 
 from dataclasses import asdict
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from ..sdk.network_sdk import NetworkSDK

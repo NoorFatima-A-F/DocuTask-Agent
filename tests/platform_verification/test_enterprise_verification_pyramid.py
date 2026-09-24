@@ -1,7 +1,6 @@
 """
 Comprehensive test suite for Enterprise Verification Pyramid Architecture (PART 2).
 """
-import pytest
 from app.platform_verification.pyramid_engine import (
     VerificationLevel,
     TestClassification,
@@ -10,9 +9,6 @@ from app.platform_verification.pyramid_engine import (
     ContinuousTrigger,
     TestDefinition,
     MaturityEngine,
-    DependencyGate,
-    FailureManager,
-    RegressionEngine,
     ContinuousVerificationManager,
     PyramidPlatformRuntime,
 )

@@ -3,7 +3,6 @@ Bayesian Evidence Fusion and Confidence Engine Test Suite.
 Verifies calibrated log-odds fusion, sample size attenuation, likelihood ratios, and zero-fabrication sentinels.
 """
 
-import pytest
 from app.runtime.metrics.confidence import (
     BayesianConfidenceEngine,
     EvidenceSignal,

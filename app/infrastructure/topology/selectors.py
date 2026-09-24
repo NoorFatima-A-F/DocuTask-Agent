@@ -1,6 +1,6 @@
 """Topology Selectors for Cluster and Regional Filtering."""
 
-from typing import List, Optional, Set
+from typing import List
 from app.infrastructure.clusters.models import Cluster, ClusterStatus
 from app.infrastructure.clusters.registry import ClusterRegistry
 from app.infrastructure.regions.models import Region, RegionStatus

@@ -4,8 +4,7 @@ Coverage target: > 90%.
 """
 
 import os
-import pytest
-from app.validation.security.attack_cases import AttackCase, AttackRepository
+from app.validation.security.attack_cases import AttackCase
 from app.validation.security.attack_runner import SecurityAttackRunner
 from app.validation.security.calibration import ConfidenceCalibrator
 from app.validation.security.context_attacks import ContextAttackTester

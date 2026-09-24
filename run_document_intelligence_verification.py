@@ -4,7 +4,6 @@ Executes all 18 Section Verifiers (Sections A through R), generates production r
 and exports cryptographically signed audit evidence.
 """
 
-import sys
 import time
 from typing import Dict
 

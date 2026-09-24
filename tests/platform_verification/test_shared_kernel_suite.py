@@ -6,46 +6,29 @@ SemVer, security, resilience, and event bus.
 """
 import pytest
 from dataclasses import dataclass
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from typing import List
 
 from app.shared_kernel import (
-    BaseEntity, Entity, AggregateRoot, ValueObject, Specification,
-    TypedId, EntityId, ExecutionId, DatasetId, VerificationId, EvidenceId,
+    BaseEntity, AggregateRoot, ValueObject, Specification,
+    ExecutionId, DatasetId, VerificationId, EvidenceId,
     MetricId, PluginId, ConfigurationId, EnvironmentId, AuditId,
-    CertificationId, CertificateId, TenantId, CorrelationId, TraceId,
+    CertificationId, TenantId, CorrelationId, TraceId,
     RequestId, SessionId, CausationId,
-    Result, Ok, Err, ErrorModel, ErrorSeverity, ErrorCategory,
+    Result, ErrorSeverity, ErrorCategory,
     Success, Failure, ValidationFailure, AuthorizationFailure,
     InfrastructureFailure, BusinessRuleFailure, UnexpectedFailure,
-    PlatformException, PlatformVerificationError, DomainException,
-    InvariantViolationError, ApplicationException, InfrastructureException,
-    ValidationException, ConfigurationException, SecurityException,
-    TamperDetectionError, TimeoutException, DependencyException,
-    EnvironmentNotReadyError, QualityGateFailedError, ConcurrencyException,
-    SerializationException,
-    ValidationResult, ValidationErrorDetail, ValidationSeverity,
-    RequiredRule, LengthRule, RangeRule, RegexRule, EnumRule, PredicateRule,
-    TimeProvider, SystemClock, SystemTimeProvider, MonotonicClock,
-    VirtualClock, DeterministicTimeProvider, FrozenClock,
-    CorrelationContext, get_current_correlation, set_current_correlation,
+    PlatformException, DomainException,
+    InvariantViolationError, SecurityException,
+    TamperDetectionError, DependencyException,
+    EnvironmentNotReadyError, ValidationResult, RequiredRule, LengthRule, RangeRule, RegexRule, EnumRule, PredicateRule,
+    SystemClock, VirtualClock, CorrelationContext, get_current_correlation, set_current_correlation,
     correlation_scope,
-    PaginationQuery, PaginatedResult, CursorPaginationQuery,
-    CursorPaginatedResult, SortOrder, SortCriteria, FilterOperator,
+    PaginationQuery, PaginatedResult, SortOrder, SortCriteria, FilterOperator,
     FilterCriteria,
-    SemanticVersion, VersionModel, SchemaVersion, DatasetVersion,
-    SensitiveDataMasker, LogLevel, LogRecord,
-    MetricType, MetricUnit, SpanStatus,
-    DomainEvent, ApplicationEvent, IntegrationEvent, SystemEvent,
-    EventBus, get_event_bus,
-    SerializationFormat, JsonSerializer,
-    PermissionContract, RoleContract, PrincipalContract, SecurityContext,
+    SemanticVersion, SensitiveDataMasker, DomainEvent, EventBus, PermissionContract, PrincipalContract, SecurityContext,
     Hasher, HmacSigner,
-    RetryStrategy, RetryPolicy, CircuitState,
-    StorageType, FileMetadata,
-    ISO_8601_FORMAT, HASH_SHA256, ENCODING_UTF8,
-    AiPromptRequest, AiInferenceResult, OcrRequest, OcrExtractionData,
-    SharedKernelGovernancePolicy
+    RetryStrategy, RetryPolicy, SharedKernelGovernancePolicy
 )
 
 

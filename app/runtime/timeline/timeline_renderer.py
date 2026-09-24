@@ -3,7 +3,6 @@ Timeline Renderer.
 Transforms raw RuntimeEvents into structured TimelineEntry items with duration metrics and hash badges.
 """
 
-from typing import List
 from app.runtime.observability.schemas import RuntimeEvent, EventCategory
 from app.runtime.timeline.timeline_index import TimelineEntry
 

@@ -2,7 +2,7 @@
 Chaos Engineering and Failure Injection Engine for resilience verification.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from app.performance_verification.domain.models import (
     ChaosFailureType,
     ChaosRecoveryResult,

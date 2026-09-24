@@ -4,10 +4,9 @@ Domain Models for Enterprise Verification Evidence Collection, Traceability & Au
 from __future__ import annotations
 import hashlib
 import uuid
-from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 

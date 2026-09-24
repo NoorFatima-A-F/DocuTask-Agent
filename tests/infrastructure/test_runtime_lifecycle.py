@@ -2,7 +2,6 @@
 
 import pytest
 from app.infrastructure.core.exceptions import (
-    InfrastructureError,
     InvalidStateTransitionError,
 )
 from app.infrastructure.core.lifecycle import (

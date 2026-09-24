@@ -1,7 +1,6 @@
 """Approval Service for managing approval chains, step execution, and policy evaluation."""
 
-from typing import Dict, Any, List, Optional, Tuple
-from datetime import datetime, timezone
+from typing import Dict, List, Optional, Tuple
 import uuid
 
 from .models import (
@@ -9,11 +8,9 @@ from .models import (
     ApprovalStep,
     ApprovalStrategy,
     StepExecutionStatus,
-    ApprovalPolicyType,
 )
 from .policies import ApprovalPolicy, ApprovalPolicyEngine
 from ..core.context import OversightContext
-from ..core.exceptions import ApprovalPolicyViolationError
 
 
 class ApprovalService:

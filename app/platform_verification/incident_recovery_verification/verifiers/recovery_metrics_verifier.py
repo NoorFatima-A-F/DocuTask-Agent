@@ -1,7 +1,6 @@
 """
 Phase 3H.4.9.5: Recovery Metrics Verifier
 """
-from typing import Dict, Any
 from ..domain.interfaces import IRecoveryMetricsVerifier
 from ..domain.models import RecoveryMetricsReport
 

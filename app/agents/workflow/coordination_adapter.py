@@ -5,7 +5,6 @@ Enables orchestrating multi-agent collaboration sessions, swarms, and team execu
 """
 
 from typing import Any, Dict, Optional
-from uuid import UUID
 
 
 class WorkflowCoordinationAdapter:

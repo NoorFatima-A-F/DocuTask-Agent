@@ -3,7 +3,7 @@ Domain Models for Health Check Architecture Verification Framework (Part 3H.1).
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 
 
 class HealthState(str, Enum):

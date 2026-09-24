@@ -3,7 +3,6 @@ Pytest Suite for Phase 13.2 Autonomous Planner Execution Visualization (APEV-DAG
 Tests 14-state lifecycle, goal decomposition, DAG generation, live mutation, scheduling, critical path, and decision ledger.
 """
 
-import pytest
 from app.runtime.planner_visualization.planner_lifecycle.lifecycle_engine import PlannerLifecycleEngine
 from app.runtime.planner_visualization.planner_lifecycle.goal_analyzer import GoalAnalysisEngine
 from app.runtime.planner_visualization.planner_lifecycle.task_decomposer import TaskDecompositionEngine
@@ -17,7 +16,7 @@ from app.runtime.planner_visualization.replanning.replanning_coordinator import 
 from app.runtime.planner_visualization.metrics.planner_metrics import PlannerMetricsCalculator
 from app.runtime.planner_visualization.metrics.decision_ledger import PlannerDecisionLedger
 from app.runtime.planner_visualization.api.planner_api_service import PlannerAPIService
-from app.runtime.planner_visualization.ui_models.models import PlannerStateEnum, TaskNodeType, TaskExecutionState
+from app.runtime.planner_visualization.ui_models.models import PlannerStateEnum, TaskNodeType
 
 
 def test_planner_lifecycle_state_machine():

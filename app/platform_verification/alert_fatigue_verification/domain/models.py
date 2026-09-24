@@ -6,7 +6,7 @@ severity matrices, suppression rules, grouping policies, noise metrics, alert st
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import List
 from datetime import datetime, timezone
 
 

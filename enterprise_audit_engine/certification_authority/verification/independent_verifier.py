@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 
 from enterprise_audit_engine.certification_authority.domain.models import (
     CertificationRecord,
-    CertificationStatus,
 )
 from enterprise_audit_engine.certification_authority.signing.verifier import CertificateSignatureVerifier
 from enterprise_audit_engine.certification_authority.registry.revocation_registry import CertificationRevocationRegistry

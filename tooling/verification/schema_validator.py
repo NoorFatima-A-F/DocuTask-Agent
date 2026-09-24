@@ -4,7 +4,7 @@ Verification Schema & Contract Validator.
 from typing import Dict, Any
 import json
 from pydantic import ValidationError
-from app.platform_verification.domain.models import VerificationDefinition, QualityGateRule
+from app.platform_verification.domain.models import VerificationDefinition
 
 def validate_definition_schema(json_str: str) -> Dict[str, Any]:
     try:

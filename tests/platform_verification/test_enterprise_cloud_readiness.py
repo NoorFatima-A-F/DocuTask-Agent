@@ -2,8 +2,6 @@
 Phase 3M: Comprehensive Test Suite for Enterprise Cloud Readiness Verification Framework.
 """
 
-import json
-import os
 from pathlib import Path
 import pytest
 from fastapi import FastAPI
@@ -11,7 +9,6 @@ from fastapi.testclient import TestClient
 
 from app.platform_verification.enterprise_cloud_readiness.domain.models import (
     AutoScalingReport,
-    BaseVerificationReport,
     CheckResult,
     CloudArchitectureAssessmentReport,
     CloudComputeResourceReport,
@@ -19,7 +16,6 @@ from app.platform_verification.enterprise_cloud_readiness.domain.models import (
     CloudNetworkingReport,
     CloudObservabilityReport,
     CloudQueueWorkerReport,
-    CloudReadinessScorecard,
     CloudReadinessTier,
     CloudSecretReport,
     CloudSecurityReport,

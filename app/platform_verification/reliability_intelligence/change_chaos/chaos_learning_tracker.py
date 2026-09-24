@@ -6,7 +6,7 @@ controlled chaos engineering game days and failure injection experiments.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.reliability_intelligence.domain.interfaces import (
     IChaosLearningTracker,

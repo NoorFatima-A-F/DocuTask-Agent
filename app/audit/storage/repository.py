@@ -1,6 +1,6 @@
 """Audit Repository Interface with Multi-Key Indexing."""
 
-from typing import List, Optional, Dict, Any
+from typing import List, Optional
 from ..core.events import AuditEvent
 from .immutable_store import ImmutableAuditStore
 

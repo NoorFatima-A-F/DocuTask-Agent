@@ -2,9 +2,8 @@
 Phase 3H.5.5: Enterprise Health Self-Healing & Automated Recovery Framework - Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import List
 from pydantic import BaseModel, Field
-from datetime import datetime
 
 
 class FailureCategory(str, Enum):

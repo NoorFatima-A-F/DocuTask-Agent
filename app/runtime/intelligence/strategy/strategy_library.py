@@ -7,7 +7,7 @@ Provides search, retrieval, ranking, and promotion management for mined executio
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 from app.runtime.intelligence.strategy.strategy_model import ExecutionStrategy
 

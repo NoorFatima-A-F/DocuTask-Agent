@@ -6,7 +6,7 @@ Continuously aggregates runtime telemetry, mission outcomes, swarm topology, and
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 import uuid
 
 

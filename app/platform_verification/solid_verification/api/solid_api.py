@@ -4,7 +4,7 @@ REST API Router for SOLID Principle Verification (PART 2C).
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.platform_verification.solid_verification.runtime.solid_verification_runtime import (
     EnterpriseSolidVerificationRuntime,
 )

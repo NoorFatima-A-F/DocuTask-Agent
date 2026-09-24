@@ -1,7 +1,6 @@
 """
 Configuration Restore Simulation Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
-from typing import List, Dict, Any
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
     ConfigurationRestoreSimulationReport,

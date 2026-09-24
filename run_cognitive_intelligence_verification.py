@@ -4,14 +4,11 @@ Executes all 19 Verification Engines (Parts 1 through 19), aggregates cognitive 
 and exports cryptographically signed audit evidence and report.
 """
 
-import sys
 import time
-from typing import Dict
 
 from app.cognitive_intelligence_verification import (
     CognitivePlatformScorer,
     EvidenceGenerator,
-    CognitiveReadinessScorecard,
 )
 from app.cognitive_intelligence_verification.reasoning.reasoning_verifier import ReasoningVerifier
 from app.cognitive_intelligence_verification.graph.cognitive_graph_verifier import CognitiveGraphVerifier

@@ -2,7 +2,6 @@
 Self-Healing Engine for Operational Resilience Framework (Part 3G.5B).
 Verifies automatic remediation across Container, Queue, and Database Connection subsystems.
 """
-from typing import Dict, Any
 from app.platform_verification.operational_resilience.domain.models import (
     SelfHealingReport,
 )

@@ -3,8 +3,7 @@ Health Alerting Engine (Part 3H.3.3.11).
 Evaluates health events to generate multi-tier alerts compatible with Prometheus AlertManager,
 Grafana, and incident management notification channels (CRITICAL, WARNING, RECOVERY).
 """
-from datetime import datetime, timezone
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthEvent,
     HealthState,

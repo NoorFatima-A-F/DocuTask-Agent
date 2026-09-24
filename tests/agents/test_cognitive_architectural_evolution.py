@@ -7,7 +7,6 @@ Test suite for Forensic AAOS Cognitive & Architectural Evolution modules:
 """
 
 import time
-import pytest
 
 from app.agents.events.cloudevents_formatter import CloudEventsFormatter
 from app.agents.events.event_types import GoalReceivedEvent

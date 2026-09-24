@@ -5,7 +5,7 @@ Estimates required confidence thresholds and assesses whether sample sizes guara
 """
 
 import math
-from typing import Dict, List, Optional
+from typing import List
 from research_validation.goal.models.confidence_threshold import ConfidenceThreshold, ConfidenceLevel
 from research_validation.goal.models.success_criteria import SuccessCriterion
 

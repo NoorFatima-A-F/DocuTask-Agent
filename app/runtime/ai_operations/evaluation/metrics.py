@@ -4,10 +4,7 @@ Calculates Task Success, Grounding, Hallucination Index, Tool Efficiency, Safety
 """
 
 from __future__ import annotations
-import math
-import random
-from typing import Dict, List, Optional, Any
-from app.runtime.ai_operations.models.schemas import MetricScore, EvaluationResult
+from typing import List
 
 
 class EvaluationMetricsCalculator:

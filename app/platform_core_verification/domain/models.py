@@ -5,7 +5,7 @@ Domain models and schemas for Part 4 - Enterprise Platform Core Services Verific
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 
 
 class VerificationStatus(str, Enum):

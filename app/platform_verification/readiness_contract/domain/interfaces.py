@@ -2,7 +2,6 @@
 Abstract Interfaces for Enterprise Readiness Contract Architecture (Part 3H.3.1).
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessContractReport,
     StateMachineReport,

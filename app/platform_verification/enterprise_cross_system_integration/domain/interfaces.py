@@ -1,7 +1,7 @@
 """Domain Interfaces for Phase 4: Enterprise Cross-System Integration & End-to-End Platform Validation Framework."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from .models import (
     APIChainReport,
     AgentCollaborationReport,

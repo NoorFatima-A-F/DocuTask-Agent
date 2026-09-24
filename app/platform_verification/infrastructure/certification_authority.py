@@ -3,7 +3,7 @@ HMAC-SHA256 Cryptographic Certification Authority
 """
 import hmac
 import hashlib
-from typing import Dict, Optional
+from typing import Dict
 from datetime import datetime, timezone
 from app.platform_verification.domain.models import VerificationRun, CryptographicCertificate
 from app.platform_verification.domain.interfaces import CertificationAuthorityInterface

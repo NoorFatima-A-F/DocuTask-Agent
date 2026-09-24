@@ -42,8 +42,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-19T07:04:44.998183+00:00",
-  "execution_timestamp": "2026-09-19T07:04:44.998211+00:00",
+  "timestamp": "2026-09-24T21:54:57.526770+00:00",
+  "execution_timestamp": "2026-09-24T21:54:57.526803+00:00",
   "summary": "Cross-version comparison verified zero performance regressions (Latency -28%, Throughput +12.5%, Cost -15%).",
   "report_title": "Performance Regression Detection Report",
   "regressions_detected": 0,

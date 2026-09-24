@@ -3,8 +3,7 @@ Adaptive Scheduling Subsystem for Phase 13.6 (ARIA-EOP).
 Manages dynamic parallelism, earliest-deadline-first (EDF) queue dispatch, and batch optimization.
 """
 
-from typing import Dict, Any, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class SchedulePlan(BaseModel):

@@ -8,14 +8,12 @@ import pytest
 from app.agents.collaboration.agent_profile import AgentProfile
 from app.agents.collaboration.agent_registry import AgentRegistry
 from app.agents.collaboration.reputation.agent_metrics import (
-    AgentExecutionMetrics,
     RollingPerformanceWindow,
     SingleExecutionOutcome,
 )
 from app.agents.collaboration.reputation.performance_tracker import PerformanceTracker
 from app.agents.collaboration.reputation.reputation_engine import ReputationEngine
 from app.agents.memory.consolidation.consolidation_agent import (
-    ConsolidationCycleReport,
     MemoryConsolidationAgent,
 )
 from app.agents.memory.consolidation.knowledge_extractor import (
@@ -25,7 +23,7 @@ from app.agents.memory.consolidation.knowledge_extractor import (
 from app.agents.memory.consolidation.memory_promoter import MemoryPromoter
 from app.agents.memory.consolidation.pattern_miner import MinedPattern, PatternMiner
 from app.agents.memory.intelligence.episodic_memory import EpisodeRecord, EpisodicMemory
-from app.agents.memory.intelligence.semantic_memory import SemanticFact, SemanticMemory
+from app.agents.memory.intelligence.semantic_memory import SemanticMemory
 
 
 @pytest.fixture
@@ -352,7 +350,7 @@ class TestDynamicAgentReputation:
 
         promoted1 = promoter.promote_rules([rule1])
         assert len(promoted1) == 1
-        promoted2 = promoter.promote_rules([rule2])
+        promoter.promote_rules([rule2])
         # Verify persistence and retrieval
         facts = sem_mem.retrieve_relevant_facts("VendorA")
         assert len(facts) >= 1

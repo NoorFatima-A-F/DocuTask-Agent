@@ -1,7 +1,7 @@
 """Governance Gate Enforcement Engine (Req 51, 52)."""
-from typing import List, Tuple
+from typing import Optional, Tuple
 from .policies import ReleaseFreezeManager
-from .risk import ReleaseRiskEvaluator, RiskLevel
+from .risk import RiskLevel
 
 
 class DeploymentGovernanceEnforcer:

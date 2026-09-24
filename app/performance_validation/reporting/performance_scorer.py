@@ -5,7 +5,7 @@ and calculates composite readiness score and SRE reliability grade.
 """
 
 import time
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 from ..domain.models import (
     PerformanceScorecard,
     PillarPerformanceResult,

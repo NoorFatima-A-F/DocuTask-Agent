@@ -2,7 +2,7 @@
 Phase 3L.12: Disaster Recovery Failure Simulations Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IDRFailureSimulationVerifier
 from ..domain.models import (

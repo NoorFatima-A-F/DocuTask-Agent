@@ -3,8 +3,8 @@ Risk Assessment Engine for Phase 13.5 (ARLP-KIP).
 Evaluates candidate policy mutation risks across novelty, regression, and impact dimensions.
 """
 
-from typing import Dict, Any, List
-from pydantic import BaseModel, Field
+from typing import Dict, Any
+from pydantic import BaseModel
 
 
 class RiskScoreResult(BaseModel):

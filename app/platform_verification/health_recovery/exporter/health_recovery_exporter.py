@@ -4,7 +4,7 @@ Phase 3H.5.12: Health Recovery Evidence Exporter
 import os
 import json
 import hashlib
-from typing import Dict, Any
+from typing import Dict
 from datetime import datetime, timezone
 
 from ..domain.models import (

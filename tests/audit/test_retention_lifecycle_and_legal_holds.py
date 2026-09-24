@@ -1,6 +1,5 @@
 """Tests for Retention Policies, Lifecycle Archival, and Legal Holds."""
 
-import pytest
 from datetime import datetime, timezone, timedelta
 from app.audit.storage.repository import AuditRepository
 from app.audit.core.events import AuditEvent

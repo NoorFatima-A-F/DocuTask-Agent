@@ -6,7 +6,7 @@ Enforces FSM transitions, state validations, and records immutable transition au
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, List, Optional, Union
 from app.prompts.registry.models import Prompt, PromptLifecycleState
 from app.prompts.lifecycle.states import PromptLifecycleAuditEvent
 from app.prompts.lifecycle.transitions import is_valid_prompt_transition

@@ -1,8 +1,7 @@
 """Tests for Configuration Templating, Versioning, and Feature Flag Targeting."""
 
-import pytest
 from app.infrastructure.deployment.configuration import ConfigTemplate, ConfigurationManager
-from app.infrastructure.deployment.features import RolloutRule, FeatureFlag, FeatureRolloutManager
+from app.infrastructure.deployment.features import RolloutRule, FeatureRolloutManager
 
 
 def test_config_template_rendering_and_version_rollback() -> None:

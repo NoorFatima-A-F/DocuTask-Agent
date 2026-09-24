@@ -2,7 +2,6 @@
 Test Suite: Audit Intelligence & End-to-End Cryptographic Provenance
 Validates field-level provenance lineage tracing (pixel -> OCR -> LLM -> validation -> DB) and decision audit query engine.
 """
-import pytest
 from app.runtime.audit_intelligence.provenance_graph import FieldProvenanceTracer
 from app.runtime.audit_intelligence.audit_query_engine import AuditQueryEngine
 

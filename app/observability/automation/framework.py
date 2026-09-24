@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Callable, Dict, List, Optional
 
 from .actions import AutoActionType, AutomationExecutionResult, SREActionExecutor
-from ..alerts.engine import ActiveAlert, AlertSeverity
+from ..alerts.engine import ActiveAlert
 
 
 @dataclass

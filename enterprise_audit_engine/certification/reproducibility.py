@@ -1,11 +1,7 @@
 """Deterministic Audit Reproducibility Engine."""
 
-import asyncio
-import json
-import shutil
-import tempfile
 from pathlib import Path
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List
 from enterprise_audit_engine.orchestration.audit_runner import AuditRunner
 from enterprise_audit_engine.certification.merkle_tree import MerkleEvidenceTree
 

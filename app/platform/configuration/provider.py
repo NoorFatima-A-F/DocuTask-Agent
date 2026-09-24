@@ -4,8 +4,8 @@ Resolves configuration values across the 11-tier precedence hierarchy with origi
 """
 
 import os
-from typing import Any, Dict, List, Optional
-from .schema import ConfigDomain, ConfigEntrySchema, ConfigSource, ResolvedConfigValue
+from typing import Any, Dict, Optional
+from .schema import ConfigDomain, ConfigSource, ResolvedConfigValue
 from .validator import ConfigurationValidator
 from .registry import ConfigurationRegistry
 

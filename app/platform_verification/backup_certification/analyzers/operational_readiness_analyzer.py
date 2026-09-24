@@ -2,7 +2,6 @@
 Operational Readiness Analyzer for Backup Certification Framework (Part 3G.2G).
 Evaluates automation, monitoring, alerts, documentation, and operational ownership.
 """
-from typing import Dict, Any
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     OperationalReadinessEvaluation,

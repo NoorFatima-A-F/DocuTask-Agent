@@ -2,7 +2,6 @@
 Phase 3H.5.5: Layer 3 - Functional Document Workflow Recovery Verifier
 """
 import uuid
-from typing import Dict, Any, List
 from ..domain.interfaces import ILayer3WorkflowRecoveryVerifier
 from ..domain.models import WorkflowValidationReport, WorkflowStepResult
 

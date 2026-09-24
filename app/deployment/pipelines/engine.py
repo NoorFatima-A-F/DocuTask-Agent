@@ -4,7 +4,6 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional
 import uuid
-from ..core.exceptions import DeploymentException
 from .stages import PipelineStage, PipelineStageResult
 
 

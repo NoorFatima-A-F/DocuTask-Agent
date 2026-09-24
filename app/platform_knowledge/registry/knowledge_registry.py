@@ -6,7 +6,7 @@ from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from ..models.schemas import (
     KnowledgeAsset, KnowledgeSource, KnowledgeLifecycleState,
-    SecurityClassification, AccessPolicy, KnowledgeMetadata
+    SecurityClassification
 )
 
 class KnowledgeRegistryService:

@@ -2,7 +2,6 @@
 Integrity Analyzer for Backup Certification Framework (Part 3G.2G).
 Validates cryptographic checksums, zero bit-rot corruption, and digital signature authenticity.
 """
-from typing import Dict, Any
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     IntegrityEvaluation,

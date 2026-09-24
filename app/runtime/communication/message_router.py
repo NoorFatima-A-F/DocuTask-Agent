@@ -3,8 +3,8 @@ AMAEOP Pillar 6 - Enterprise Message Router
 Routes messages according to channel subscriptions, priority tiers, and security access policies.
 """
 
-from typing import Dict, List, Any, Optional
-from app.runtime.communication.communication_bus import EnterpriseMessage, communication_bus
+from typing import Dict, List
+from app.runtime.communication.communication_bus import EnterpriseMessage
 
 
 class MessageRouter:

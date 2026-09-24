@@ -9,11 +9,9 @@ Provides formal schemas for:
 
 from __future__ import annotations
 
-import time
-import uuid
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List
 
 from research_validation.provenance.provenance_models import (
     ProvActivity, ProvAgent, ProvEntity, ProvRelationType

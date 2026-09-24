@@ -7,7 +7,7 @@ and resumes execution cleanly from interrupted DAG nodes without repeating compl
 from __future__ import annotations
 
 import logging
-from typing import Optional, Tuple
+from typing import Optional
 
 from app.agents.planning.execution_plan import PlannedTask, TaskStatus
 from app.agents.workflow.persistence.task_graph_repository import TaskGraphRepository

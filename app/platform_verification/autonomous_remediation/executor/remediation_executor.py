@@ -4,7 +4,7 @@ Performs controlled recovery operations on target components and captures
 structured execution logs, before/after states, timings, and standard outputs.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import List
 import uuid
 import time
 from ..domain.models import (

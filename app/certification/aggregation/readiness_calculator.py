@@ -2,7 +2,6 @@
 Master Enterprise Readiness Score Calculator.
 """
 
-from typing import Dict, Any
 from app.certification.domain.models import MasterReadinessScore
 
 

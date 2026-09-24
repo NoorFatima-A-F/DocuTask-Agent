@@ -1,7 +1,6 @@
 """
 Phase 3H.4.10.7: Alert Security & Privacy Verifier
 """
-from typing import Dict, Any, List
 from ..domain.interfaces import IAlertSecurityVerifier
 from ..domain.models import AlertSecurityReport, AlertTemplateAudit
 

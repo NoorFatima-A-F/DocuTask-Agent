@@ -4,7 +4,7 @@ Tracks asynchronous background job status, attempts, progress percentages, and w
 """
 
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Optional, TYPE_CHECKING
 from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, Text, Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship

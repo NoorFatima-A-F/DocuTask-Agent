@@ -4,7 +4,6 @@ Comprehensive Test Suite for Enterprise Automated Restore Verification System (P
 import os
 import json
 import pytest
-from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.platform_verification.restore_verification.domain.models import (
@@ -52,9 +51,6 @@ from app.platform_verification.restore_verification.scheduler.continuous_recover
 )
 from app.platform_verification.restore_verification.scoring.restore_quality_scoring_engine import (
     RestoreQualityScoringEngine,
-)
-from app.platform_verification.restore_verification.evidence_generator.restore_evidence_manifest_engine import (
-    RestoreEvidenceManifestEngine,
 )
 from app.platform_verification.restore_verification.runtime.restore_verification_runtime import (
     RestoreVerificationRuntime,

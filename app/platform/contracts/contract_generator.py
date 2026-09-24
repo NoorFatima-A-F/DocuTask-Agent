@@ -6,9 +6,8 @@ tool definitions, and SDK documentation directly from registered plugins with ze
 
 from __future__ import annotations
 
-import json
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Any, Dict, Optional
 
 from app.platform.capability.capability_registry import (
     CapabilityRegistry,

@@ -4,7 +4,7 @@ Defines IEventBus, ICommandBus, IQueryBus, and IMessageBroker contracts.
 """
 
 from abc import ABC, abstractmethod
-from typing import Callable, Coroutine, List
+from typing import Callable, Coroutine
 from app.agents.messaging.commands import AgentCommand, CommandResult
 from app.agents.messaging.events import DomainEvent
 from app.agents.messaging.queries import AgentQuery, QueryResult

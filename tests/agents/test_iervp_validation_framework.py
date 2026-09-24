@@ -10,14 +10,13 @@ threat modeling, and external review readiness dossiers.
 """
 
 import math
-import pytest
 from pathlib import Path
 
 from research_validation.reference_validation.reference_equivalence import (
-    ReferenceEquivalenceLab, EquivalenceStatus
+    ReferenceEquivalenceLab
 )
 from research_validation.numerical.numerical_stress_lab import (
-    NumericalStressLab, StressScenarioStatus, PrecisionType
+    NumericalStressLab
 )
 from research_validation.numerical.float_error_propagation import (
     FloatErrorPropagationFramework, PrecisionInterval
@@ -38,7 +37,7 @@ from research_validation.drift.drift_observatory import (
     DatasetDriftObservatory, DriftModality
 )
 from research_validation.adversarial.adversarial_stress_lab import (
-    AdversarialStressLab, AdversarialVector
+    AdversarialStressLab
 )
 from research_validation.explainability.explainability_verification import (
     ExplainabilityVerificationLab
@@ -50,10 +49,10 @@ from research_validation.telemetry.production_telemetry_v2 import (
     ProductionTelemetryValidatorV2, ServiceOperationalTelemetry, TelemetryOrigin
 )
 from research_validation.security.security_fuzzing_lab import (
-    SecurityFuzzingLab, FuzzStrategy
+    SecurityFuzzingLab
 )
 from research_validation.differential.differential_intelligence import (
-    DifferentialIntelligenceLab, SemanticDivergenceCategory
+    DifferentialIntelligenceLab
 )
 from research_validation.endurance.long_duration_lab import (
     LongDurationReliabilityLab, SoakTargetWindow, SoakSnapshotTelemetry
@@ -65,7 +64,7 @@ from research_validation.fair.fair_packaging import (
     FAIRPackagingLab, IdentifierScope
 )
 from research_validation.threats.formal_threat_modeling import (
-    FormalThreatModelingPlatform, RiskLevel
+    FormalThreatModelingPlatform
 )
 from research_validation.readiness.external_review_readiness import (
     ExternalReviewReadinessPlatform, ReadinessVerdict

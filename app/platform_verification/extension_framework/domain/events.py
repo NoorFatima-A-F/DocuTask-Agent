@@ -2,9 +2,9 @@
 Strongly-typed Domain Events for Plugin Extensibility.
 """
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
+from typing import Optional
 from datetime import datetime, timezone
-from app.platform_verification.extension_framework.domain.models import PluginLifecycleState, PluginHealthState
+from app.platform_verification.extension_framework.domain.models import PluginHealthState
 
 
 @dataclass(frozen=True)

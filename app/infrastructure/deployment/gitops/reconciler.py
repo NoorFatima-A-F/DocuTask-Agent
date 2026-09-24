@@ -6,7 +6,7 @@ from enum import Enum
 from typing import Any, Dict, List, Optional
 import json
 
-from .synchronizer import GitOpsManifest, GitOpsSynchronizer
+from .synchronizer import GitOpsSynchronizer
 
 
 class DriftType(str, Enum):

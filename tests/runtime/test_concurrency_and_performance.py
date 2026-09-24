@@ -63,7 +63,6 @@ async def test_high_throughput_scheduler_dispatch():
         pri = JobPriority.CRITICAL if i % 3 == 0 else JobPriority.NORMAL
         scheduler.submit_job(ScheduledJob(name=f"job-{i}", priority=pri))
 
-    dispatched = []
     workers = [f"worker-{w}" for w in range(5)]
 
     async def worker_loop(worker_id: str):

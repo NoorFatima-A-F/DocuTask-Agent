@@ -2,7 +2,6 @@
 Startup Readiness Validator (Part 6).
 Validates the deterministic startup sequence and guarantees prevention of false readiness.
 """
-from typing import Dict, Any, List
 from app.platform_verification.readiness_contract.domain.models import (
     StartupValidationReport,
 )

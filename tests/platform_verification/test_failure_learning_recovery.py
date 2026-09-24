@@ -3,9 +3,7 @@ Comprehensive Unit and Integration Tests for Phase 3H.5.6: Enterprise Failure Le
 """
 import os
 import json
-import pytest
 from app.platform_verification.failure_learning_verification.domain.models import (
-    FailureSeverity,
     AutonomyLevel,
     KnowledgeCategory,
     IntelligenceTier,

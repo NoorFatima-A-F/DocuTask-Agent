@@ -2,7 +2,6 @@
 
 from typing import Dict, Any, List, Optional
 from enterprise_audit_engine.certification_authority.domain.models import (
-    CertificationRecord,
     EQIBreakdown,
 )
 

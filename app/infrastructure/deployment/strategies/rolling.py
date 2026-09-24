@@ -1,8 +1,7 @@
 """Rolling Deployment Strategy with batch sizing and instance health validation."""
 
 from dataclasses import dataclass
-from typing import Any, Callable, Dict, List, Optional
-import time
+from typing import Callable, Optional
 
 
 @dataclass

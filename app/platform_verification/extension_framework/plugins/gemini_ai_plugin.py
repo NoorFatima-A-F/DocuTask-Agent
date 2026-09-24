@@ -1,7 +1,7 @@
 """
 Reference AI Provider Plugin: Gemini AI Model Provider.
 """
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import AIProviderPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
     PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,

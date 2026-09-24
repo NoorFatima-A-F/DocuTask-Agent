@@ -4,7 +4,7 @@ Distills general heuristics, decomposition rules, and execution strategies from 
 Never directly updates Memory; outputs immutable LearningArtifacts.
 """
 
-from typing import Any, List, Optional
+from typing import List
 from uuid import uuid4
 from app.agents.reflection.interfaces import IKnowledgeExtractor
 from app.agents.reflection.learning_artifact import LearningArtifact, LearningArtifactType

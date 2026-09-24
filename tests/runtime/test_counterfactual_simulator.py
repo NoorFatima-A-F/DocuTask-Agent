@@ -2,13 +2,11 @@
 Unit and Integration Tests for Counterfactual Simulator & Replay (ASVSP Pillar 3).
 """
 
-import pytest
 from app.runtime.counterfactual import (
     ScenarioGenerator,
     AlternatePlanner,
     CounterfactualComparisonEngine,
     CounterfactualReplayOptimizer,
-    CounterfactualSimulator,
 )
 
 

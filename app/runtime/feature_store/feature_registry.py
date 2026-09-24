@@ -3,8 +3,8 @@ Scientific Feature Store - Feature Registry
 Declares canonical feature schemas, physical bounds, types, default imputations, and semantic categories.
 """
 
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass, field
+from typing import Dict, List, Optional
+from dataclasses import dataclass
 from enum import Enum
 
 

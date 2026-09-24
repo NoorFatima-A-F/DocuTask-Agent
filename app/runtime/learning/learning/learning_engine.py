@@ -3,7 +3,7 @@ Learning Engine for Phase 13.5 (ARLP-KIP).
 Coordinates pattern mining, institutional rule extraction, and strategy synthesis from reflections.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime, timezone
 import uuid
 from pydantic import BaseModel, Field

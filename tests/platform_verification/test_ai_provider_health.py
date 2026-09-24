@@ -5,7 +5,6 @@ Tests all 15 parts, API routes, failure simulations, security redactions, and ma
 
 import os
 import json
-import pytest
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
@@ -22,8 +21,6 @@ from app.platform_verification.ai_provider_health.failover.ai_failover_verifier 
 from app.platform_verification.ai_provider_health.monitoring.ai_monitoring_bridge import AIMonitoringBridge
 from app.platform_verification.ai_provider_health.security.ai_security_auditor import AISecurityAuditor
 from app.platform_verification.ai_provider_health.simulation.ai_failure_simulator import AIFailureSimulator
-from app.platform_verification.ai_provider_health.scoring.ai_health_scorer import AIHealthScorer
-from app.platform_verification.ai_provider_health.exporter.ai_evidence_exporter import AIEvidenceExporter
 from app.platform_verification.ai_provider_health.runtime.ai_provider_health_runtime import AIProviderHealthRuntime
 from app.platform_verification.ai_provider_health.api.ai_provider_health_api import router as ai_health_router
 from app.platform_verification.ai_provider_health.domain.models import (
@@ -202,7 +199,7 @@ def test_part_3h_3_8_13_failure_simulator():
 def test_part_3h_3_8_14_evidence_exporter_and_8_manifests(tmp_path):
     output_dir = str(tmp_path / "ai_verification_out")
     runtime = AIProviderHealthRuntime(export_dir=output_dir)
-    res = runtime.run_full_verification()
+    runtime.run_full_verification()
 
     assert os.path.exists(output_dir)
     expected_files = [

@@ -3,14 +3,13 @@ Unit and Integration Test Suite for Enterprise Bounded Contexts and Hexagonal Ar
 Validates independent execution, CQRS application services, Domain Event Bus, and Anti-Corruption Layers.
 """
 import pytest
-import asyncio
 from typing import List
 
-from app.contexts.runtime import BoundedContextsRuntime, get_contexts_runtime
+from app.contexts.runtime import BoundedContextsRuntime
 from app.shared_kernel.events import DomainEvent, get_event_bus
 from app.infrastructure.acl import GeminiAiAntiCorruptionLayer, OcrEngineAntiCorruptionLayer
 from app.contexts.verification.contracts import VerificationDefinitionCreated
-from app.contexts.execution.contracts import ExecutionStarted, ExecutionCompleted
+from app.contexts.execution.contracts import ExecutionStarted
 from app.contexts.datasets.contracts import DatasetRegistered
 from app.contexts.audit.contracts import AuditRecordAppended
 

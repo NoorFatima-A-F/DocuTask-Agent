@@ -1,6 +1,5 @@
 """Tests for Multi-Factor Composite Risk Scoring and Governance Policy Bridge."""
 
-import pytest
 from app.safety.gateway.context import (
     SafetyContext,
     ModelContext,
@@ -10,7 +9,7 @@ from app.safety.gateway.context import (
 )
 from app.safety.risk.scoring import CompositeRiskScorer
 from app.safety.risk.assessment import RiskAssessmentEngine
-from app.safety.policies.integration import SafetyPolicyBridge, TenantSafetyPolicy
+from app.safety.policies.integration import SafetyPolicyBridge
 from app.safety.gateway.decision import SafetyStatus, ViolationSeverity, SafetyViolation, SafetyCategory
 
 

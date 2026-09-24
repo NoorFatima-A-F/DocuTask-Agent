@@ -7,7 +7,7 @@ and required capabilities.
 from __future__ import annotations
 
 import re
-from typing import List, Set
+from typing import List
 from app.prompts.metadata.schemas import (
     ComprehensivePromptMetadata,
     PromptBusinessMetadata,

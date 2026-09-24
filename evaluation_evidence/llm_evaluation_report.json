@@ -55,7 +55,7 @@
         "faithfulness_score": 0.994,
         "grounding_score": 0.991
       },
-      "timestamp": "2026-09-24T20:42:55.687543+00:00"
+      "timestamp": "2026-09-24T21:27:19.820402+00:00"
     },
     {
       "check_id": "CHK-6B-02",
@@ -66,7 +66,7 @@
       "details": {
         "hallucination_rate_pct": 0.2
       },
-      "timestamp": "2026-09-24T20:42:55.687563+00:00"
+      "timestamp": "2026-09-24T21:27:19.820444+00:00"
     },
     {
       "check_id": "CHK-6B-03",
@@ -77,7 +77,7 @@
       "details": {
         "semantic_similarity": 0.988
       },
-      "timestamp": "2026-09-24T20:42:55.687580+00:00"
+      "timestamp": "2026-09-24T21:27:19.820488+00:00"
     },
     {
       "check_id": "CHK-6B-04",
@@ -88,8 +88,8 @@
       "details": {
         "adversarial_pass_rate_pct": 100.0
       },
-      "timestamp": "2026-09-24T20:42:55.687599+00:00"
+      "timestamp": "2026-09-24T21:27:19.820532+00:00"
     }
   ],
-  "timestamp": "2026-09-24T20:42:55.687614+00:00"
+  "timestamp": "2026-09-24T21:27:19.820559+00:00"
 }

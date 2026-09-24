@@ -3,7 +3,6 @@ Section 4.2: Multi-Criteria Task Allocation & Cost Optimization Verification
 Validates allocation precision, cost savings vs ceiling budget, and SLA optimization.
 """
 from typing import Dict, List, Any
-from app.platform_workforce.models.schemas import TaskMarketplaceListing
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
 
 class MarketplaceAllocationVerifier:

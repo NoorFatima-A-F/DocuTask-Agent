@@ -12,20 +12,17 @@ Master orchestrator coordinating:
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional
 
 from research_validation.provenance.digital_signatures import ProvenanceSigner
-from research_validation.provenance.evidence_bundle import EvidenceBundleBuilder, SealedEvidenceBundle
-from research_validation.provenance.evidence_graph import EvidenceGraph, LineageAncestryTrace
+from research_validation.provenance.evidence_graph import EvidenceGraph
 from research_validation.provenance.evidence_store import EvidenceStore
 from research_validation.provenance.lineage_tracker import CompleteLineageChain, LineageTracker
 from research_validation.provenance.provenance_api import ProvenanceAPI
 from research_validation.provenance.provenance_models import (
-    EvidenceNode, EvidenceQualityLevel, LineageStage
+    EvidenceQualityLevel
 )
-from research_validation.provenance.provenance_validator import ProvenanceAuditReport, ProvenanceValidator
 
 
 class ProvenanceEngine:

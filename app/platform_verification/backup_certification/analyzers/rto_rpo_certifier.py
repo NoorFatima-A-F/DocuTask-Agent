@@ -2,7 +2,6 @@
 RTO and RPO Certification Engine for Backup Certification Framework (Part 3G.2G).
 Validates Recovery Time Objective (RTO) and Recovery Point Objective (RPO) thresholds.
 """
-from typing import Dict, Any
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     RTORPOCertification,

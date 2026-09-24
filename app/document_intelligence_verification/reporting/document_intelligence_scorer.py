@@ -2,12 +2,11 @@
 Scoring engine for Phase V5 — Enterprise Document Intelligence & AI Extraction Verification Program.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict
 from ..domain.models import (
     ProductionReadinessScorecard,
     SectionId,
     SectionVerificationResult,
-    VerificationStatus,
 )
 
 

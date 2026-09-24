@@ -5,7 +5,7 @@ Aggregates planner lifecycle, DAG, scheduler, decision, and metric engines into 
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from app.runtime.planner_visualization.planner_lifecycle.lifecycle_engine import PlannerLifecycleEngine
 from app.runtime.planner_visualization.planner_lifecycle.goal_analyzer import GoalAnalysisEngine

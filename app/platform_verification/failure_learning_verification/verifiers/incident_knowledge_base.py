@@ -1,7 +1,6 @@
 """
 Phase 3H.5.6.4: Incident Knowledge Base
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IIncidentKnowledgeBase
 from ..domain.models import KnowledgeBaseReport, IncidentKnowledgeItem, KnowledgeCategory
 

@@ -17,11 +17,10 @@ For every attack scenario, captures: Expected, Observed, Detection, Mitigation, 
 from __future__ import annotations
 
 import io
-import json
 import zipfile
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Dict, List
 
 
 class AdversarialVector(str, Enum):
@@ -80,13 +79,12 @@ class AdversarialStressLab:
         zip_bytes = buf.getvalue()
 
         # Test safe inspector
-        blocked = False
         with zipfile.ZipFile(io.BytesIO(zip_bytes), "r") as zf:
             total_uncompressed = sum(info.file_size for info in zf.infolist())
             if total_uncompressed > max_uncompressed_bytes:
-                blocked = True  # Blocked before extraction
+                pass  # Blocked before extraction
             else:
-                blocked = True  # Safe size bounded
+                pass  # Safe size bounded
 
         return AdversarialExperimentEvaluation(
             vector=AdversarialVector.ZIP_BOMB,
@@ -104,7 +102,7 @@ class AdversarialStressLab:
         """Evaluate normalization of Cyrillic homoglyphs."""
         import unicodedata
         normalized = unicodedata.normalize("NFKD", input_text)
-        is_safe = len(normalized) > 0
+        len(normalized) > 0
 
         return AdversarialExperimentEvaluation(
             vector=AdversarialVector.UNICODE_HOMOGLYPH,

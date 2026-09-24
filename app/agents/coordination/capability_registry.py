@@ -4,7 +4,6 @@ Maintains canonical catalog of skills, required tools, and domain definitions ac
 """
 
 from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
 from app.agents.coordination.capability import AgentSkill
 
 

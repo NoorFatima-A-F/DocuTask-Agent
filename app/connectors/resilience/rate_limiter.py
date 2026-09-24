@@ -10,7 +10,7 @@ from enum import Enum
 import logging
 import time
 from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.connectors.core.exceptions import RateLimitExceededError
 

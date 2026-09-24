@@ -2,7 +2,6 @@
 Unit & Invariant Tests for Decision Validation Engine (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.decision_validation import (
     InvariantChecker,
     ReplayVerifier,

@@ -17,7 +17,7 @@ import struct
 import time
 from dataclasses import asdict, dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Dict, List
 
 logger = logging.getLogger(__name__)
 
@@ -149,7 +149,6 @@ class MathVerificationLab:
         records.append(cls.verify_algorithm("Cohens_Kappa_Pairwise", 0.80, k_val, tolerance=0.02, authority="Cohen (1960)"))
 
         # 5. Little's Law Concurrency (lambda=100, W=0.05 -> L=5.0)
-        from app.evidence.benchmarking.queueing_theory import QueueingTheoryValidationEngine
         w_sec = 0.05
         records.append(cls.verify_algorithm("Littles_Law_L_lambda_W", 5.0, 100.0 * w_sec, tolerance=1e-6, authority="Little (1961) Operations Research"))
 

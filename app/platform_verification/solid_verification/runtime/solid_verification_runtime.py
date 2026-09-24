@@ -3,6 +3,7 @@ Enterprise SOLID Verification Runtime facade.
 """
 from __future__ import annotations
 import os
+from pathlib import Path
 from typing import Optional
 import uuid
 from app.platform_verification.solid_verification.core.ast_class_analyzer import EnterpriseSolidASTAnalyzer
@@ -16,7 +17,7 @@ class EnterpriseSolidVerificationRuntime:
     """Unified runtime facade for SOLID static analysis, rule evaluations, and scoring."""
 
     def __init__(self, base_repo_dir: Optional[str] = None):
-        self.base_repo_dir = base_repo_dir or r"c:\Users\User\Desktop\ai_document_processing_platform"
+        self.base_repo_dir = base_repo_dir or str(Path.cwd())
         self.analyzer = EnterpriseSolidASTAnalyzer()
         self.rule_evaluator = EnterpriseSolidRuleEvaluator()
         self.scoring_engine = EnterpriseSolidScoringEngine()

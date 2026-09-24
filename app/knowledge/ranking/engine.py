@@ -9,9 +9,9 @@ from datetime import datetime, timezone
 import logging
 import math
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
-from app.knowledge.core.models import KnowledgeChunk, RetrievalResult
+from app.knowledge.core.models import RetrievalResult
 
 logger = logging.getLogger(__name__)
 

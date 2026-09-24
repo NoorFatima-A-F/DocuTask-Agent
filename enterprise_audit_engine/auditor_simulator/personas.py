@@ -1,6 +1,6 @@
 """Auditor Personas and Evaluation Rules."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from pydantic import BaseModel, Field
 
 

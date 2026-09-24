@@ -7,20 +7,11 @@ import sys
 import tempfile
 from pathlib import Path
 
-from enterprise_audit_engine.orchestration.audit_runner import AuditRunner
-from enterprise_audit_engine.domain.evidence.models import AuditReportManifest
-from enterprise_audit_engine.governance.integrity_verifier import EvidenceIntegrityVerifier
 from enterprise_audit_engine.certification.certifier import EnterpriseCertifier
 from enterprise_audit_engine.certification.reproducibility import AuditReproducibilityVerifier
-from enterprise_audit_engine.certification_authority.authority import CertificationAuthority
-from enterprise_audit_engine.certification_authority.domain.models import RevocationReason
-from enterprise_audit_engine.certification_authority.testing.mutation_suite import AuditMutationSuite
 from enterprise_audit_engine.assurance.self_integrity import SelfIntegrityVerifier
 from enterprise_audit_engine.assurance.testing.expanded_mutation_suite import ExpandedMutationSuite
-from enterprise_audit_engine.baseline.baseline_manager import GoldenBaselineManager
 from enterprise_audit_engine.transparency.transparency_log import CertificationTransparencyLog
-from enterprise_audit_engine.compliance.compliance_mapper import ComplianceMappingEngine
-from enterprise_audit_engine.dashboard.dashboard_generator import DashboardGenerator
 
 # Reality Validation & External Trust Components
 from enterprise_audit_engine.external_validation.api_validator import ApiRealityValidator
@@ -34,7 +25,6 @@ from enterprise_audit_engine.drift_detection.drift_detector import DriftDetector
 from enterprise_audit_engine.benchmark.benchmark_suite import ExternalBenchmarkSuite
 from enterprise_audit_engine.adversarial_audit.mutation_matrix_250 import MutationMatrix250
 from enterprise_audit_engine.external_verifier.package_exporter_v2 import ExternalReviewPackageExporterV2
-from enterprise_audit_engine.validation_registry.registry import ValidationRegistry
 
 
 def parse_args():
@@ -67,10 +57,10 @@ def parse_args():
     drift_parser.add_argument("--certified-commit", type=str, default="HEAD", help="Certified Git commit SHA")
 
     # Command: run-benchmarks
-    bench_parser = subparsers.add_parser("run-benchmarks", help="Run external benchmark calibration suite across Good, Vulnerable, and Misleading systems")
+    subparsers.add_parser("run-benchmarks", help="Run external benchmark calibration suite across Good, Vulnerable, and Misleading systems")
 
     # Command: run-250-mutations
-    mut250_parser = subparsers.add_parser("run-250-mutations", help="Run 250+ adversarial mutation and penetration attack vectors")
+    subparsers.add_parser("run-250-mutations", help="Run 250+ adversarial mutation and penetration attack vectors")
 
     # Command: export-auditor-package-v2
     exp_v2_parser = subparsers.add_parser("export-auditor-package-v2", help="Export standalone Zero-Dependency Auditor Review Package v2")
@@ -112,10 +102,10 @@ def parse_args():
     rev_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
 
     # Command: run-mutations
-    mut_parser = subparsers.add_parser("run-mutations", help="Run synthetic mutation defect injection tests to verify engine guardrails")
+    subparsers.add_parser("run-mutations", help="Run synthetic mutation defect injection tests to verify engine guardrails")
     
     # Command: run-expanded-mutations
-    exp_mut_parser = subparsers.add_parser("run-expanded-mutations", help="Run 50+ expanded mutation adversarial attack scenarios")
+    subparsers.add_parser("run-expanded-mutations", help="Run 50+ expanded mutation adversarial attack scenarios")
 
     # Command: run-all
     run_parser = subparsers.add_parser("run-all", help="Execute all evidence collectors and generate reports")
@@ -165,8 +155,8 @@ def main():
         res = asyncio.run(certifier.certify_engine_and_repository(policy_name=policy, release_version=version))
 
         cert = res["certificate"]
-        eqi = res.get("eqi", {})
-        policy_eval = res.get("policy_evaluation", {})
+        res.get("eqi", {})
+        res.get("policy_evaluation", {})
 
         # 4. Auditor consensus simulation
         auditor_sim = AuditorSimulator.run_simulation([], {}, target_system="DocuTask Agent", target_version=version)

@@ -1,6 +1,6 @@
 """Master Runtime Coordinator for Phase 3H.4.3 Autonomous Health Remediation Framework."""
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from ..policies.remediation_policy_engine import RemediationPolicyEngine
 from ..classifier.action_classifier import ActionClassifier
 from ..planner.recovery_decision_engine import RecoveryDecisionEngine

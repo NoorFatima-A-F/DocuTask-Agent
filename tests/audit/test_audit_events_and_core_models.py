@@ -1,6 +1,5 @@
 """Tests for AuditEvent Core Domain Models, Enums, and Contexts."""
 
-import pytest
 from app.audit.core.events import (
     AuditEvent,
     ActorType,
@@ -9,9 +8,6 @@ from app.audit.core.events import (
     EventCategory,
 )
 from app.audit.core.models import (
-    AuditActor,
-    AuditResource,
-    PolicyContext,
     AIExecutionAuditContext,
 )
 from app.audit.core.context import AuditContext

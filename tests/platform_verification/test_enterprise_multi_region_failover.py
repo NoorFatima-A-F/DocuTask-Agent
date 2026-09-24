@@ -3,24 +3,11 @@ Comprehensive Test Suite for Part 3G.6:
 Multi-Region & Cloud Failover Verification Framework.
 """
 import pytest
-import os
-import json
-from pathlib import Path
 
 from app.platform_verification.multi_region_failover.domain.models import (
     CloudRegion,
-    FailoverMode,
     ReplicationHealth,
     AvailabilityTier,
-    MultiRegionArchitectureReport,
-    CloudPortabilityReport,
-    DatabaseReplicationReport,
-    StorageReplicationReport,
-    TrafficFailoverReport,
-    WorkflowCheckpointReport,
-    ChaosOutageReport,
-    AvailabilityMetricsReport,
-    MultiRegionScorecard,
 )
 from app.platform_verification.multi_region_failover.architecture.architecture_validator import (
     MultiRegionArchitectureValidator,
@@ -37,9 +24,6 @@ from app.platform_verification.multi_region_failover.replication.storage_replica
 from app.platform_verification.multi_region_failover.traffic.traffic_failover_engine import (
     TrafficFailoverEngine,
 )
-from app.platform_verification.multi_region_failover.orchestrator.failover_orchestrator import (
-    FailoverOrchestrator,
-)
 from app.platform_verification.multi_region_failover.state_and_resilience.workflow_checkpoint_verifier import (
     WorkflowCheckpointVerifier,
 )
@@ -54,9 +38,6 @@ from app.platform_verification.multi_region_failover.chaos_and_metrics.availabil
 )
 from app.platform_verification.multi_region_failover.scoring.multi_region_score_engine import (
     MultiRegionScoreEngine,
-)
-from app.platform_verification.multi_region_failover.exporter.failover_exporter import (
-    FailoverExporter,
 )
 from app.platform_verification.multi_region_failover.runtime.failover_runtime import (
     FailoverRuntime,

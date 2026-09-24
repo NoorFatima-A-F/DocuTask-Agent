@@ -10,36 +10,28 @@ from __future__ import annotations
 import logging
 import time
 from typing import Any, Dict, List, Optional
-import uuid
 
 from app.connectors.actions.executor import ActionExecutor
 from app.connectors.analytics.analytics import ConnectorAnalytics
 from app.connectors.authentication.auth_manager import AuthenticationManager
 from app.connectors.authentication.credential_store import CredentialStore
 from app.connectors.core.exceptions import (
-    ActionExecutionError,
     CapabilityNotFoundError,
     CircuitBreakerOpenError,
-    ConnectorNotFoundError,
     PolicyViolationError,
-    RateLimitExceededError,
 )
 from app.connectors.core.models import (
     ActionDescriptor,
-    Connector,
-    ConnectorHealth,
-    ConnectorStatus,
     ExecutionResult,
 )
 from app.connectors.observability.metrics import ConnectorObservability
 from app.connectors.policies.policy_engine import ConnectorPolicyEngine
 from app.connectors.registry.capability_registry import CapabilityRegistry
 from app.connectors.registry.connector_registry import ConnectorRegistry
-from app.connectors.resilience.circuit_breaker import CircuitBreaker, CircuitBreakerConfig
+from app.connectors.resilience.circuit_breaker import CircuitBreaker
 from app.connectors.resilience.rate_limiter import RateLimiter
-from app.connectors.resilience.retry_engine import ConnectorFailureCategory, ConnectorRetryEngine, RetryPolicy
+from app.connectors.resilience.retry_engine import ConnectorRetryEngine
 from app.connectors.sandbox.sandbox import ConnectorSandbox
-from app.connectors.sdk.base import BaseConnector
 
 logger = logging.getLogger(__name__)
 

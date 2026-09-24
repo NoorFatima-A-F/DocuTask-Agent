@@ -1,7 +1,7 @@
 """
 Configuration Catalog Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
-from typing import List, Dict, Any
+from typing import List, Dict
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
     ConfigurationCategory,

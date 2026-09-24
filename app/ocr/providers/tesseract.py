@@ -11,7 +11,7 @@ import pytesseract
 
 from app.core.logging import logger
 from app.ocr.base import OCRProvider
-from app.ocr.exceptions import CorruptedDocumentException, OCRException
+from app.ocr.exceptions import CorruptedDocumentException
 from app.ocr.preprocessor import ImagePreprocessor
 from app.ocr.schemas import PageContent
 

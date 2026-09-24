@@ -6,12 +6,11 @@ and effect sizes across datasets and baselines.
 """
 
 from __future__ import annotations
-import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
-from research_validation.provenance.hashing import hash_canonical_json, compute_sha256
+from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)

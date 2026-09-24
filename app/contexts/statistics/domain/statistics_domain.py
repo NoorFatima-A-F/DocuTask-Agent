@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import List, Optional
 from app.shared_kernel import BaseEntity, DomainEvent
 
 @dataclass

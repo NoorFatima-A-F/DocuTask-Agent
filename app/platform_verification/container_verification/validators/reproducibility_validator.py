@@ -1,7 +1,6 @@
 """
 Build Reproducibility Validator.
 """
-import hashlib
 from typing import Dict, Any
 from app.platform_verification.container_verification.models.verification_models import BuildReproducibilityReport
 

@@ -3,7 +3,7 @@ AMAEOP Pillar 9 - Automated Postmortem Report Generator
 Generates blameless postmortem reports, architectural action items, and prevention rules following incident resolution.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from app.runtime.incident.incident_commander import incident_commander
 
 

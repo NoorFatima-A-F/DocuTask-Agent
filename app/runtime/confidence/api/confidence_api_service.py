@@ -5,15 +5,13 @@ Aggregates all scientific confidence calculation modules into unified REST API e
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from datetime import datetime, timezone
 
 from app.runtime.confidence.models.confidence_dimensions import ConfidenceDimension, ConfidenceStatus
 from app.runtime.confidence.models.confidence_models import (
     MissionConfidenceReport,
     ConfidenceScoreDetail,
-    FeatureContribution,
-    CalibrationMetrics,
 )
 from app.runtime.confidence.features.feature_registry import FeatureRegistry
 from app.runtime.confidence.features.event_feature_extractor import EventFeatureExtractor
@@ -27,11 +25,8 @@ from app.runtime.confidence.calibration.calibration_monitor import CalibrationMo
 from app.runtime.confidence.governance.governance_policy import ConfidenceGovernancePolicy
 from app.runtime.confidence.lineage.confidence_lineage import ConfidenceLineageEngine
 from app.runtime.confidence.explainability.confidence_explainer import ConfidenceExplainer
-from app.runtime.confidence.explainability.formula_visualizer import FormulaVisualizer
-from app.runtime.confidence.explainability.decision_summary import DecisionSummaryService
 from app.runtime.confidence.validation.distribution_analysis import DistributionAnalysisService
 from app.runtime.confidence.validation.stability_analysis import StabilityAnalysisEngine
-from app.runtime.confidence.metrics.confidence_metrics import ConfidenceMetricsService
 from app.runtime.confidence.versioning.confidence_versioning import ConfidenceVersioningRegistry
 
 

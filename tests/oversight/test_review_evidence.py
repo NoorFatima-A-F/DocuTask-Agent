@@ -1,6 +1,5 @@
 """Tests for Review Requests, Evidence Packages, and Deliberation Comments."""
 
-import pytest
 from app.oversight.reviews.requests import ReviewRequest, ReviewPriority
 from app.oversight.reviews.evidence import ReviewEvidencePackage, SourceCitation
 from app.oversight.reviews.comments import ReviewComment

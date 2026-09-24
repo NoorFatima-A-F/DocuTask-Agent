@@ -7,16 +7,14 @@ distributed traces, profiling, alerts, SLOs, service dependencies, and diagnosti
 
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, Generator, List, Optional
+from typing import Any, Dict, List, Optional
 
-from app.infrastructure.observability.alerts.models import AlertInstance, AlertRule, AlertSeverity
+from app.infrastructure.observability.alerts.models import AlertInstance
 from app.infrastructure.observability.alerts.notifications import AlertDispatcher
 from app.infrastructure.observability.alerts.rules import AlertRuleEvaluator
-from app.infrastructure.observability.dashboards.builder import DashboardBuilder
-from app.infrastructure.observability.dashboards.models import Dashboard
 from app.infrastructure.observability.dashboards.widgets import WidgetQueryEvaluator
 from app.infrastructure.observability.diagnostics.dependency_graph import DependencyEdge, ServiceDependencyGraph
-from app.infrastructure.observability.diagnostics.health_analysis import CrossLayerHealthAnalyzer, PlatformHealthReport
+from app.infrastructure.observability.diagnostics.health_analysis import CrossLayerHealthAnalyzer
 from app.infrastructure.observability.diagnostics.root_cause import RCAReport, RootCauseAnalyzer
 from app.infrastructure.observability.logs.indexing import LogIndex
 from app.infrastructure.observability.logs.ingestion import LogIngestionPipeline
@@ -28,14 +26,12 @@ from app.infrastructure.observability.metrics.collectors import (
 )
 from app.infrastructure.observability.metrics.registry import MetricRegistry
 from app.infrastructure.observability.metrics.types import MetricSeries, MetricType
-from app.infrastructure.observability.profiling.cpu import CPUHotspot, CPUProfiler, StackFrame
-from app.infrastructure.observability.profiling.memory import MemoryLeakWarning, MemoryProfiler
+from app.infrastructure.observability.profiling.cpu import CPUProfiler
+from app.infrastructure.observability.profiling.memory import MemoryProfiler
 from app.infrastructure.observability.slo.budgets import ErrorBudgetStatus, ErrorBudgetTracker
-from app.infrastructure.observability.slo.objectives import SLOObjective
 from app.infrastructure.observability.telemetry.collector import TelemetryCollectorPipeline
-from app.infrastructure.observability.telemetry.context import TelemetryContext, get_current_context
 from app.infrastructure.observability.telemetry.sdk import TelemetrySDK
-from app.infrastructure.observability.tracing.models import Span, SpanKind
+from app.infrastructure.observability.tracing.models import SpanKind
 from app.infrastructure.observability.tracing.spans import TraceAnalysisReport, TraceTreeAnalyzer
 from app.infrastructure.observability.tracing.tracer import Tracer
 

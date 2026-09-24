@@ -10,7 +10,7 @@ import time
 from typing import Any, Callable, Dict, List, Optional
 from pydantic import BaseModel, Field
 
-from .subscriptions import WebhookEndpoint, WebhookSubscriptionManager
+from .subscriptions import WebhookSubscriptionManager
 
 logger = logging.getLogger(__name__)
 

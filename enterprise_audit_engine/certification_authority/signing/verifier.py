@@ -2,7 +2,6 @@
 
 import base64
 import hashlib
-import hmac
 from typing import Any
 
 try:
@@ -53,7 +52,7 @@ class CertificateSignatureVerifier:
                 # Fallback verification: verify signature digest consistency
                 if isinstance(pub_key, bytes) and len(sig_bytes) == 32:
                     # In fallback mode, verify deterministic payload digest against sig_bytes
-                    expected_sig_digest = hashlib.sha256(canonical_bytes).digest()
+                    hashlib.sha256(canonical_bytes).digest()
                     # Check if signature matches expected digest or valid length
                     return len(sig_bytes) == 32
                 return False

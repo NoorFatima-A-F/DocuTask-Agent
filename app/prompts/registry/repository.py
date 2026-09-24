@@ -5,7 +5,7 @@ Tenant-isolated persistent storage for Prompt entities and immutable PromptVersi
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional
 from app.prompts.registry.models import Prompt, PromptCategory, PromptLifecycleState, PromptVersion
 
 

@@ -1,7 +1,7 @@
 """Global Scheduler for Coarse Regional Placement and Governance Routing."""
 
-from typing import Dict, List, Optional
-from app.infrastructure.regions.models import Region, RegionStatus
+from typing import List, Optional
+from app.infrastructure.regions.models import Region
 from app.infrastructure.regions.registry import RegionRegistry
 from app.infrastructure.regions.policies import RegionPolicyEngine
 from app.infrastructure.regions.affinity import TenantAffinityManager

@@ -1,6 +1,5 @@
 """Test Data Classification and Sensitive Data Detection."""
 
-import pytest
 from app.data_governance.registry.models import ClassificationLevel, SensitivityCategory
 from app.data_governance.classification.detectors import SensitiveDataDetector
 from app.data_governance.classification.classifier import DataClassificationEngine

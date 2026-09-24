@@ -2,7 +2,7 @@
 Phase 3L.5: Document Storage Backup & Integrity Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IStorageRecoveryVerifier
 from ..domain.models import (

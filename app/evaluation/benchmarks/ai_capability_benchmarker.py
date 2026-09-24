@@ -1,7 +1,7 @@
 """Part A: AI Capability Benchmarking."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IAICapabilityBenchmarker
 from ..domain.models import (
     AICapabilityBenchmarkReport,

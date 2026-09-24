@@ -1,7 +1,7 @@
 """Part A: Enterprise Business Scenario Library Verifier."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IScenarioLibraryVerifier
 from ..domain.models import (
     BusinessScenarioSpec,

@@ -1,8 +1,8 @@
 """Progressive Delivery Controller."""
-from typing import Callable, List, Optional
+from typing import Optional
 from ..control_plane.controller import DeploymentRecord
 from ..strategies.canary import CanaryStrategy
-from .analysis import CanaryAnalysisEngine, QualityGatePolicy, RolloutDecision
+from .analysis import CanaryAnalysisEngine, RolloutDecision
 
 
 class ProgressiveDeliveryController:

@@ -11,7 +11,6 @@ from typing import Any, Dict, List, Optional
 
 from app.agents.intelligence.goal.goal_parser import GoalParser
 from app.agents.intelligence.goal.goal_specification import (
-    GoalPriority,
     GoalSpecification,
     GoalStatus,
 )

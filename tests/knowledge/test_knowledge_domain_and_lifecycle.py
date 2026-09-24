@@ -6,10 +6,8 @@ import pytest
 from app.knowledge.core.exceptions import InvalidKnowledgeStateError
 from app.knowledge.core.models import (
     ClassificationLevel,
-    KnowledgeDocument,
     KnowledgeLifecycleState,
     KnowledgeObject,
-    KnowledgeObjectType,
     SensitivityLevel,
 )
 from app.knowledge.lifecycle.manager import KnowledgeLifecycleManager

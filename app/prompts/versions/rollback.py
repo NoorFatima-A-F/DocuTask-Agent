@@ -5,8 +5,7 @@ Enables instant, deterministic reversion to previous validated prompt releases.
 
 from __future__ import annotations
 
-from typing import Optional
-from app.prompts.registry.models import Prompt, PromptVersion
+from app.prompts.registry.models import Prompt
 from app.prompts.registry.repository import PromptRegistryRepository
 
 

@@ -5,7 +5,6 @@ Tests all 14 parts (3H.3.7A to 3H.3.7N), API endpoints, runtime orchestration, a
 
 import os
 import json
-import pytest
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
@@ -21,13 +20,10 @@ from app.platform_verification.reliability_intelligence.change_chaos.chaos_learn
 from app.platform_verification.reliability_intelligence.improvement.reliability_recommender import ReliabilityRecommender
 from app.platform_verification.reliability_intelligence.improvement.continuous_improvement_loop import ContinuousImprovementLoop
 from app.platform_verification.reliability_intelligence.security.reliability_security_auditor import ReliabilitySecurityAuditor
-from app.platform_verification.reliability_intelligence.scoring.reliability_maturity_scorer import ReliabilityMaturityScorer
-from app.platform_verification.reliability_intelligence.exporter.reliability_evidence_exporter import ReliabilityEvidenceExporter
 from app.platform_verification.reliability_intelligence.runtime.reliability_intelligence_runtime import ReliabilityIntelligenceRuntime
 from app.platform_verification.reliability_intelligence.api.reliability_intelligence_api import router as reliability_router
 from app.platform_verification.reliability_intelligence.domain.models import (
     ReliabilityMaturityTier,
-    SLIType,
     RecommendationPriority,
 )
 
@@ -167,7 +163,7 @@ def test_part_3h_3_7l_reliability_security_auditor():
 def test_part_3h_3_7m_evidence_exporter_and_11_manifests(tmp_path):
     output_dir = str(tmp_path / "verification_output")
     runtime = ReliabilityIntelligenceRuntime(export_dir=output_dir)
-    res = runtime.run_full_verification()
+    runtime.run_full_verification()
 
     assert os.path.exists(output_dir)
     expected_files = [

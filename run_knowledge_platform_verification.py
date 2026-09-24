@@ -4,14 +4,11 @@ Executes all 18 Verification Engines (Parts 1 through 18), aggregates production
 and exports cryptographically signed audit evidence and report.
 """
 
-import sys
 import time
-from typing import Dict
 
 from app.knowledge_platform_verification import (
     KnowledgePlatformScorer,
     EvidenceGenerator,
-    KnowledgeReadinessScorecard,
 )
 from app.knowledge_platform_verification.ingestion.ingestion_verifier import IngestionVerifier
 from app.knowledge_platform_verification.registry.registry_verifier import RegistryVerifier

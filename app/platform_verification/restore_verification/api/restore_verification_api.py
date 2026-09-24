@@ -21,12 +21,10 @@ runtime_instance = RestoreVerificationRuntime()
 
 
 @router.post("/run", response_model=Dict[str, Any])
-def run_full_restore_verification(
-    output_dir: str = Query(default="evidence/restore_verification", description="Evidence export directory")
-) -> Dict[str, Any]:
+def run_full_restore_verification() -> Dict[str, Any]:
     """Triggers the full enterprise automated restore verification pipeline."""
     try:
-        result = runtime_instance.execute_full_restore_verification(output_dir=output_dir)
+        result = runtime_instance.execute_full_restore_verification()
         scorecard = result.get("scorecard")
         return {
             "status": "SUCCESS",

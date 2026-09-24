@@ -3,7 +3,6 @@ Readiness State Machine (Part 2).
 Implements the 6-state deterministic lifecycle model:
 INITIALIZING -> CHECKING_DEPENDENCIES -> READY <-> DEGRADED <-> NOT_READY -> RECOVERING -> READY.
 """
-from typing import Dict, Any, List
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessState,
     StateMachineReport,

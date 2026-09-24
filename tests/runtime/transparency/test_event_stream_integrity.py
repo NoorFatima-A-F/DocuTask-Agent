@@ -2,11 +2,10 @@
 Test Suite: Event Stream Integrity & Timeline Builder
 Validates unforgeable timeline construction, state machine transitions, worker monitor, and runtime metrics.
 """
-import pytest
 import time
-from app.runtime.observability.timeline_builder import TimelineBuilder, TimelineEntry
-from app.runtime.observability.execution_state import ExecutionStateManager, TaskExecutionState, MissionExecutionSnapshot
-from app.runtime.observability.worker_monitor import WorkerMonitor, WorkerTelemetryInfo
+from app.runtime.observability.timeline_builder import TimelineBuilder
+from app.runtime.observability.execution_state import ExecutionStateManager
+from app.runtime.observability.worker_monitor import WorkerMonitor
 from app.runtime.observability.runtime_metrics import LiveRuntimeMetrics
 
 

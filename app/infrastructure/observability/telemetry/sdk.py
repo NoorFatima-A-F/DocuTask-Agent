@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import contextlib
 import time
-from typing import Any, Callable, Dict, Generator, List, Optional
+from typing import Any, Dict, Generator, Optional
 
 from app.infrastructure.observability.telemetry.collector import TelemetryCollectorPipeline
 from app.infrastructure.observability.telemetry.context import (

@@ -4,7 +4,6 @@ from typing import Dict, Any, List, Callable, Optional
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 import uuid
-from ..gateway.decision import SafetyDecision, SafetyViolation, ViolationSeverity
 
 
 class SafetyBaseEvent(BaseModel):

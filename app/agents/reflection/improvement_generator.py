@@ -3,8 +3,8 @@ Improvement Generator.
 Generates concrete improvement directives from self-critiques and evaluation scores.
 """
 
-from typing import Any, Dict, List
-from pydantic import BaseModel, Field
+from typing import List
+from pydantic import BaseModel
 from app.agents.reflection.evaluation import EvaluationReport
 from app.agents.reflection.self_critique import SelfCritique
 

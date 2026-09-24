@@ -45,7 +45,7 @@ class VerificationLifecycleEngineFacade:
         custom_workload: Optional[Callable[[Dict[str, Any]], Dict[str, Any]]] = None
     ) -> EndToEndVerificationJourneyResult:
         t0 = time.monotonic()
-        timeline = LifecycleTimelineTracker()
+        LifecycleTimelineTracker()
         sm = VerificationStateMachine(VerificationState.DRAFT)
 
         sm.transition_to(VerificationState.DEFINED, reason="Specification authored")

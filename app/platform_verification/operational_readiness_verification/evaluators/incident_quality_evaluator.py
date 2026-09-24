@@ -1,7 +1,6 @@
 """
 Phase 3H.4.11.6: Incident Quality Evaluator
 """
-from typing import Dict, Any
 from ..domain.interfaces import IIncidentQualityEvaluator
 from ..domain.models import IncidentQualityScore
 

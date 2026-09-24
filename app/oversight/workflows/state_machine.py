@@ -1,6 +1,6 @@
 """Approval Lifecycle State Machine."""
 
-from typing import Dict, Any, List, Optional, Set, Tuple
+from typing import Dict, Any, List, Optional, Set
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid

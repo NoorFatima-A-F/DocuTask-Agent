@@ -5,8 +5,7 @@ Scans inputs, prompts, and outputs for sensitive credentials, PII, and complianc
 
 from __future__ import annotations
 import re
-from typing import Dict, List, Tuple, Any
-from app.runtime.ai_operations.models.schemas import GovernanceAuditRecord
+from typing import List, Tuple
 
 
 class ComplianceMonitor:

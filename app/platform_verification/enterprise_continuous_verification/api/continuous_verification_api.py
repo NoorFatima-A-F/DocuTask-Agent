@@ -4,7 +4,7 @@ FastAPI REST API Router for Continuous Infrastructure Verification & CI/CD Assur
 
 import json
 import os
-from typing import Any, Dict, List
+from typing import Dict, List
 from fastapi import APIRouter, HTTPException
 
 from ..domain.models import (

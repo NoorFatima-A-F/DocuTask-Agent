@@ -5,7 +5,7 @@ Continuously supervises planner, scheduler, workers, optimization, learning, rep
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from app.runtime.operations.events.operation_events import SubsystemType
 
 

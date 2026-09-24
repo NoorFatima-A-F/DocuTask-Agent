@@ -13,7 +13,7 @@ import os
 import time
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Type, TypeVar
+from typing import Any, Dict, List, Optional, Type, TypeVar
 from pydantic import BaseModel
 
 from app.agents.events.event_types import AgentEvent
@@ -119,7 +119,6 @@ class VertexAIGeminiGateway:
         """Invokes Gemini on Vertex AI with retries, latency tracking, and fallback."""
         async with self._semaphore:
             start_time = time.perf_counter()
-            temp = temperature if temperature is not None else self.config.temperature
 
             # Estimate tokens
             p_tokens = len(prompt.split()) * 2

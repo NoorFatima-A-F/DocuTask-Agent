@@ -2,7 +2,7 @@
 
 from typing import Dict, Any, Optional
 from pydantic import BaseModel, Field
-from ..gateway.context import SafetyContext, ToolContext, SourceTrustLevel
+from ..gateway.context import SafetyContext, SourceTrustLevel
 
 
 class RiskWeights(BaseModel):

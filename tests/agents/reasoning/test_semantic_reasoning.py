@@ -10,7 +10,6 @@ from uuid import UUID
 
 from app.agents.intelligence.reasoning.llm_reasoning_client import (
     LLMReasoningClient,
-    ReasoningResponse,
 )
 from app.agents.intelligence.reasoning.reasoning_memory import (
     Hypothesis,

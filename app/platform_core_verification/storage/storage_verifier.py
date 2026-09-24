@@ -5,7 +5,7 @@ Verifies Blob Store, Metadata Indexing, Tenant Quotas, SHA-256 Deduplication, an
 
 import hashlib
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,

@@ -20,7 +20,6 @@ from .schemas import (
     CreateBundleRequest,
     EvaluateComplianceRequest,
     CreateInvestigationCaseRequest,
-    TransitionCaseRequest,
 )
 
 router = APIRouter(prefix="/api/v1/audit", tags=["Enterprise Audit & Compliance Evidence Platform"])

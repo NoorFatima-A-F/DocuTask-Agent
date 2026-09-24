@@ -8,6 +8,7 @@ from uuid import UUID
 
 from app.core.exceptions import ResourceNotFoundException
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 from app.models.user import User
 from app.ocr.pipeline import OCRPipeline
 from app.ocr.schemas import DocumentContent, PageContent

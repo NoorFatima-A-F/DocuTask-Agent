@@ -2,7 +2,7 @@
 Strategic Objective Models.
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class StrategicObjective(BaseModel):

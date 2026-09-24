@@ -5,10 +5,8 @@ from typing import Any, Dict, List, Optional
 from .models import (
     ApprovalItem,
     AutomationTemplate,
-    CaseStudyDocument,
     CustomerAnalyticsReport,
     DemoRunResult,
-    DemoScript,
     EnterpriseConnector,
     EnterpriseTenant,
     ExceptionItem,

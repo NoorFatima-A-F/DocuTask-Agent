@@ -6,7 +6,7 @@ Evaluates multidimensional risk vectors across 9 scientific and operational cate
 
 from enum import Enum
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import List
 
 
 class RiskSeverity(str, Enum):

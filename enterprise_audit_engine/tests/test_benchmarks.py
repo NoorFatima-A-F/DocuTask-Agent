@@ -1,6 +1,5 @@
 """Tests for External Calibration Benchmark Suite."""
 
-import pytest
 from enterprise_audit_engine.benchmark.benchmark_suite import (
     ExternalBenchmarkSuite,
     BenchmarkSuiteReport,

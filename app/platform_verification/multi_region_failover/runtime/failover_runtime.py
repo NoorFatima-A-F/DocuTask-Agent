@@ -5,8 +5,8 @@ cross-region database and storage replication audits, traffic failover simulatio
 workflow checkpoint verifications, chaos experiments, availability metrics calculation,
 scorecard generation, and evidence export.
 """
-from dataclasses import dataclass, field
-from typing import Dict, Any, List, Optional
+from dataclasses import dataclass
+from typing import Dict, Any
 
 from app.platform_verification.multi_region_failover.domain.models import (
     MultiRegionArchitectureReport,

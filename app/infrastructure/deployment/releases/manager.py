@@ -8,7 +8,7 @@ import threading
 import uuid
 
 from .versions import ReleaseVersion
-from .approvals import ReleaseApprovalGate, ApprovalDecision
+from .approvals import ReleaseApprovalGate
 
 
 class ReleaseLifecycleStatus(str, Enum):

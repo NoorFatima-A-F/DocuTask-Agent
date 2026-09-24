@@ -3,7 +3,7 @@ Failure Reconstruction for Phase 13.4.
 Provides microsecond-accurate post-mortem failure timelines and recovery mechanism triggers.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from pydantic import BaseModel, Field
 
 

@@ -2,7 +2,6 @@
 
 import pytest
 import json
-from pathlib import Path
 from enterprise_audit_engine.certification_authority.domain.models import CertificationRecord
 from enterprise_audit_engine.certification_authority.signing.signer import CertificateSigner
 from enterprise_audit_engine.external_verifier.standalone_verifier import StandaloneExternalVerifier

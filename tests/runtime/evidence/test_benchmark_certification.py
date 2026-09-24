@@ -1,6 +1,5 @@
 """Tests for Benchmark Certification and Repeatability Verifier."""
 
-import pytest
 from app.runtime.benchmark_cert.benchmark_certifier import (
     BenchmarkCertifier,
     ReproducibilityVerifier,

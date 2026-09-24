@@ -12,7 +12,7 @@ from typing import Any, Callable, Dict, List, Optional
 import uuid
 from pydantic import BaseModel, Field
 
-from app.connectors.core.models import NormalizedEvent, TriggerDescriptor, TriggerType
+from app.connectors.core.models import NormalizedEvent, TriggerDescriptor
 
 logger = logging.getLogger(__name__)
 

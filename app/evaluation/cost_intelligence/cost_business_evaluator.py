@@ -1,7 +1,7 @@
 """Part F & Q: Cost Intelligence & Business Value Evaluation."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import ICostBusinessEvaluator
 from ..domain.models import (
     BusinessROISpec,

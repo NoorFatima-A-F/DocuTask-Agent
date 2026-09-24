@@ -2,7 +2,6 @@
 Tests for Capability Registry and Plugin Management.
 """
 
-import pytest
 import asyncio
 from app.platform.capabilities.registry import CapabilityRegistry
 from app.platform.plugins.manager import PluginManager

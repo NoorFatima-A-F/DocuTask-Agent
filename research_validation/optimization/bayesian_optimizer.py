@@ -9,9 +9,8 @@ from __future__ import annotations
 import math
 import random
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from enum import Enum
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Callable, List, Optional, Tuple
 
 from research_validation.optimization.gaussian_process import GaussianProcessRegressor
 from research_validation.optimization.acquisition_functions import (

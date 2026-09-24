@@ -4,9 +4,6 @@ Defines formal communication protocols: FIPA-ACL, Contract Net, Auction, Consens
 """
 
 from enum import Enum
-from typing import Dict, List, Optional
-from uuid import UUID
-from pydantic import BaseModel, Field
 
 
 class ProtocolType(str, Enum):

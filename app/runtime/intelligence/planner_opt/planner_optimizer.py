@@ -7,9 +7,7 @@ and formulate verifiable planner optimizations.
 
 from __future__ import annotations
 
-import time
-import uuid
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from app.runtime.intelligence.experience.experience_record import ExperienceRecord
 from app.runtime.intelligence.planner_opt.planner_version import (
@@ -18,7 +16,6 @@ from app.runtime.intelligence.planner_opt.planner_version import (
 )
 from app.runtime.intelligence.planner_opt.prediction_error import (
     PredictionErrorAnalyzer,
-    PredictionErrorRecord,
 )
 
 

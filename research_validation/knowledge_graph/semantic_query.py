@@ -8,7 +8,7 @@ across the Scientific Knowledge Graph.
 from __future__ import annotations
 from collections import deque
 from dataclasses import dataclass
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 
 from research_validation.knowledge_graph.knowledge_node import KnowledgeNode
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType

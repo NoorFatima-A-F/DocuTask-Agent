@@ -3,7 +3,7 @@ Redis / Queue Readiness Checker (Part 3H.3.2.4).
 Verifies Redis broker availability (PING/PONG), queue accessibility (enqueue/state reading),
 and queue pressure (depth, oldest message age, processing delay).
 """
-from typing import Dict, Any, Optional
+from typing import Optional
 from app.platform_verification.readiness_engine.domain.models import (
     QueueReadinessReport,
 )

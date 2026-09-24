@@ -1,7 +1,6 @@
 """GitOps Provider Abstraction (Req 26)."""
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
 
 
 @dataclass

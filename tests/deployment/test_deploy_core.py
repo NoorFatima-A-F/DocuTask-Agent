@@ -1,7 +1,7 @@
 """Unit tests for Deployment Core and Control Plane."""
 import pytest
 from app.deployment.core.controller import DeploymentController
-from app.deployment.core.deployment import Deployment, DeploymentStrategyType
+from app.deployment.core.deployment import DeploymentStrategyType
 from app.deployment.core.exceptions import DeploymentException, ReleaseException
 from app.deployment.core.lifecycle import DeploymentStateEngine, DeploymentStatus
 from app.deployment.core.release import Release, ReleaseStatus

@@ -1,6 +1,5 @@
 """Release Compatibility Matrix & Semantic Version Evaluation (Req 11, 12)."""
-import re
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List, Tuple
 
 
 class ReleaseCompatibilityMatrix:

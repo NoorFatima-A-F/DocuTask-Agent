@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import logging
 import threading
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from app.infrastructure.observability.metrics.types import (
     MetricPoint,
     MetricSeries,

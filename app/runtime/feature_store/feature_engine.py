@@ -4,8 +4,7 @@ Computes, aggregates, and transforms raw telemetry and context into runtime feat
 """
 
 from typing import Dict, Any, Optional
-import math
-from app.runtime.feature_store.feature_registry import feature_registry, CANONICAL_FEATURES
+from app.runtime.feature_store.feature_registry import feature_registry
 
 
 class FeatureEngine:

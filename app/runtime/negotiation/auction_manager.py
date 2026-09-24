@@ -3,7 +3,7 @@ AMAEOP Pillar 3 - Vickrey Auction Manager
 Implements second-price sealed-bid auctions for scarce shared compute (GPU acceleration, LLM high-rate quota, memory slots).
 """
 
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict, field
 import time
 import uuid

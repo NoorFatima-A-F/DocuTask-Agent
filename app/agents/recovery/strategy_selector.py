@@ -3,7 +3,6 @@ Recovery Strategy Selector.
 Selects optimal recovery strategy based on failure classification, root cause analysis, cost, and policy constraints.
 """
 
-from typing import Optional
 from app.agents.recovery.failure import Failure, FailureCategory, FailureSeverity
 from app.agents.recovery.recovery_strategy import RecoveryStrategy, RecoveryStrategyDefinition
 from app.agents.recovery.root_cause import RootCauseReport

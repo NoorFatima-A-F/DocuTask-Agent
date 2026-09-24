@@ -7,7 +7,7 @@ import json
 import datetime
 from pathlib import Path
 from typing import Dict, Any, Union
-from app.core.security import resolve_safe_path, validate_safe_filename_segment
+from app.core.security import resolve_safe_path
 from dataclasses import asdict
 
 from app.platform_verification.backup_certification.domain.models import (
@@ -144,6 +144,7 @@ DocuTask Agent has successfully undergone automated enterprise backup and restor
         output_dir: str = "backup_certification",
     ) -> Dict[str, str]:
         manifests: Dict[str, str] = {}
+        safe_out = Path(output_dir) if output_dir else Path.cwd() / "backup_certification"
 
         now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
 

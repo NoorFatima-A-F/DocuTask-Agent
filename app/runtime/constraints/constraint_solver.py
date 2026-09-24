@@ -3,10 +3,10 @@ Scientific Constraints - Deterministic Constraint Solver
 Solves feasible boundary envelopes across budget, latency, memory, compliance, and worker limits.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass
 from app.runtime.constraints.constraint_graph import ConstraintGraph, ConstraintNode
-from app.runtime.constraints.feasibility_engine import FeasibilityEngine, FeasibilityEvaluation
+from app.runtime.constraints.feasibility_engine import FeasibilityEngine
 
 
 @dataclass

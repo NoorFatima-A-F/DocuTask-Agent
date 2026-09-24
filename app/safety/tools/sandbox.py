@@ -1,8 +1,8 @@
 """Tool Sandbox Engine and Execution Barrier."""
 
 from typing import Dict, Any, Optional
-from pydantic import BaseModel, Field
-from .permissions import ToolPermissionManager, ToolDangerLevel
+from pydantic import BaseModel
+from .permissions import ToolPermissionManager
 from .validator import ToolSafetyValidator
 
 

@@ -5,7 +5,7 @@ and computes the composite readiness score and executive value scorecard.
 """
 
 import time
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 from ..domain.models import (
     BusinessScorecard,
     PillarBusinessResult,

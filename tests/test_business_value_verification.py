@@ -6,7 +6,6 @@ import os
 import pytest
 from app.business_value_verification.domain.models import (
     IndustryVertical,
-    ProcessStepType,
 )
 from app.business_value_verification.metrics.automation_metrics import AutomationMetricsCalculator
 from app.business_value_verification.metrics.productivity_analyzer import ProductivityAnalyzer

@@ -1,8 +1,6 @@
 """Formal Contract Tests for All Evidence Collectors."""
 
 import asyncio
-import pytest
-from pathlib import Path
 from enterprise_audit_engine.collectors import ALL_COLLECTORS
 from enterprise_audit_engine.collectors.base import BaseCollector
 from enterprise_audit_engine.domain.evidence.models import EvidenceRecord, EvidenceSourceType

@@ -3,7 +3,6 @@ Agent Catalog.
 Standardized templates and archetypes for creating autonomous agents in the platform.
 """
 
-from typing import Dict
 from app.agents.coordination.agent_profile import AgentProfile
 from app.agents.coordination.capability import AgentSkill, CapabilityProfile
 from app.agents.coordination.agent_identity import AgentIdentity

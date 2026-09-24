@@ -4,7 +4,6 @@ Compares two planner policies side-by-side across utility, cost, latency, and su
 """
 
 from typing import Dict, List, Any
-import math
 
 
 class PolicyComparator:

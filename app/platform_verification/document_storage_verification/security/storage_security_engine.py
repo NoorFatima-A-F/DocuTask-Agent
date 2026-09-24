@@ -1,7 +1,6 @@
 """
 Storage Security & Encryption Engine for Enterprise Document Storage (Part 3G.2C).
 """
-from typing import Dict, Any
 
 from app.platform_verification.document_storage_verification.domain.models import (
     StorageEncryptionReport,

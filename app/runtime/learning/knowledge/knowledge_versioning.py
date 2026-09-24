@@ -3,7 +3,7 @@ Knowledge Versioning for Phase 13.5 (ARLP-KIP).
 Semantic versioning and history tracking for knowledge artifacts.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Optional
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

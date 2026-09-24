@@ -3,11 +3,10 @@ Workflow Aggregate Root.
 Domain aggregate modeling a workflow definition, current state, active checkpoints, and lifecycle state.
 """
 
-from typing import Any, Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field
 from app.agents.workflow.lifecycle import WorkflowLifecycleState
-from app.agents.workflow.metadata import WorkflowIdentity, WorkflowStatistics
+from app.agents.workflow.metadata import WorkflowStatistics
 from app.agents.workflow.workflow_definition import WorkflowDefinition
 from app.agents.workflow.workflow_instance import WorkflowInstance
 

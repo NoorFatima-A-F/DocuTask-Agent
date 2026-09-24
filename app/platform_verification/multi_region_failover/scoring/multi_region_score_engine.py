@@ -2,10 +2,8 @@
 Multi-Region Failover Scoring Engine (Part 3G.6).
 Computes composite multi-region resilience score and assigns cloud certification tiers.
 """
-from typing import Dict, Any
 
 from app.platform_verification.multi_region_failover.domain.models import (
-    AvailabilityTier,
     MultiRegionArchitectureReport,
     CloudPortabilityReport,
     DatabaseReplicationReport,

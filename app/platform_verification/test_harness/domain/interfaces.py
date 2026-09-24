@@ -7,12 +7,10 @@ from typing import Any, Dict, List, Optional
 from app.platform_verification.test_harness.domain.models import (
     VerificationTestSpec,
     VerificationContext,
-    ExecutionJob,
     HarnessExecutionResult,
     HarnessExecutionReport,
     WorkerNode,
     ExecutionMode,
-    TestLifecycleState,
 )
 
 

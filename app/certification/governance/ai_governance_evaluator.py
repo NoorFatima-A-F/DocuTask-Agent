@@ -2,7 +2,6 @@
 NIST AI RMF & Responsible AI Governance Evaluator.
 """
 
-from typing import Dict, Any
 from app.certification.domain.models import GovernanceAudit
 
 

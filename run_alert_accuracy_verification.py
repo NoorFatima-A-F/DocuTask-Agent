@@ -9,9 +9,6 @@ sys.path.insert(0, os.path.abspath("."))
 from app.platform_verification.alert_accuracy_verification.runtime.alert_accuracy_verification_runtime import (
     AlertAccuracyVerificationRuntime,
 )
-from app.platform_verification.alert_accuracy_verification.domain.models import (
-    AlertAccuracyTier,
-)
 
 
 def main():

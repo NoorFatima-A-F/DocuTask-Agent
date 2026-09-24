@@ -3,8 +3,8 @@ Resource Registry & Inventory for Phase 13.6 (ARIA-EOP).
 Tracks active worker pools, LLM quotas, OCR nodes, GPU acceleration, and cache layers.
 """
 
-from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from typing import Dict, List, Optional
+from pydantic import BaseModel
 
 
 class ResourceNode(BaseModel):

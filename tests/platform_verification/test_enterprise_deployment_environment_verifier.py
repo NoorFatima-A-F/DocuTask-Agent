@@ -5,8 +5,6 @@ import pytest
 from app.platform_verification.deployment_verification.runtime.deployment_verification_runtime import DeploymentVerificationRuntime
 from app.platform_verification.deployment_verification.domain.models import (
     DeploymentCertificationTier,
-    DeploymentStrategy,
-    RollbackTrigger,
 )
 
 

@@ -4,9 +4,8 @@ Resilience Policies, Exponential Backoff, Circuit Breaker and Rate Limiter Contr
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import List, Type, Optional, Callable, Any
+from typing import List, Type
 import math
-import time
 
 class RetryStrategy(str, Enum):
     IMMEDIATE = "IMMEDIATE"

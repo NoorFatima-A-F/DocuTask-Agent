@@ -1,7 +1,6 @@
 """
 Test Suite: Phase 3I.10 Observability Intelligence Governance, Reliability Automation Maturity & Enterprise Operations Certification
 """
-import os
 import json
 import pytest
 from fastapi.testclient import TestClient
@@ -10,8 +9,6 @@ from fastapi import FastAPI
 from app.platform_verification.observability_operations_governance.domain.models import (
     OperationsCertificationTier,
     MaturityLevel,
-    IncidentSeverity,
-    ActionRiskTier,
     GovernanceArchitectureReport,
     ObservabilityPolicyReport,
     ReliabilityMaturityReport,
@@ -39,9 +36,6 @@ from app.platform_verification.observability_operations_governance.verifiers imp
 )
 from app.platform_verification.observability_operations_governance.scoring import (
     OperationsCertificationScorer,
-)
-from app.platform_verification.observability_operations_governance.exporter import (
-    ObservabilityGovernanceEvidenceExporter,
 )
 from app.platform_verification.observability_operations_governance.runtime import (
     ObservabilityOperationsRuntime,

@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import time
-from typing import Dict, List, Optional
+from typing import Any, Dict, Optional
 
-from ..core.events import EventCategory, PlatformEvent, EventStream
+from ..core.events import PlatformEvent, EventStream
 
 
 class EventProcessor:

@@ -5,7 +5,6 @@ Evaluates cognitive steps, assumptions, evidence linkage, and logical coherence.
 
 from typing import Any, Dict, List
 from app.agents.reflection.interfaces import IReasoningAnalyzer
-from app.agents.reflection.reflection_context import ReasoningStepTrace
 
 
 class ReasoningAnalyzer(IReasoningAnalyzer):

@@ -5,7 +5,7 @@ and visual graph exports.
 """
 
 from typing import Dict, List, Optional, Set
-from app.agents.runtime.dependency_graph import CircularDependencyError, DependencyGraph
+from app.agents.runtime.dependency_graph import DependencyGraph
 from app.agents.runtime.exceptions import ModuleLoadError
 
 

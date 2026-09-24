@@ -6,7 +6,6 @@ import time
 from typing import Any, Dict, List, Optional
 
 from ..schemas.requests import DecisionEvaluationRequest
-from ..schemas.responses import DecisionEvaluationResponse
 from ...gateway.authentication import APIRequestContext
 from .policies import policy_service
 

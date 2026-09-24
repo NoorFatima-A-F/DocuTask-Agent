@@ -6,7 +6,6 @@ from datetime import datetime, timedelta, timezone
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.user import User
 from app.repositories.user_repository import UserRepository
 from app.repositories.refresh_token_repository import RefreshTokenRepository
 
@@ -87,13 +86,13 @@ async def test_refresh_token_repository_operations(db_session: AsyncSession):
     assert fetched_after_revoke is None
 
     # 4. Create multiple tokens and revoke_all_for_user
-    t1 = await token_repo.create({
+    await token_repo.create({
         "user_id": user.id,
         "token_hash": "hash_1",
         "expires_at": expires_at,
         "revoked": False
     })
-    t2 = await token_repo.create({
+    await token_repo.create({
         "user_id": user.id,
         "token_hash": "hash_2",
         "expires_at": expires_at,

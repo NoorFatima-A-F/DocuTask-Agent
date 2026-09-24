@@ -2,7 +2,6 @@
 Unit Tests for Decision DAG Graph Construction.
 """
 
-import pytest
 from app.runtime.decision.provenance_engine import DecisionProvenanceEngine
 from app.runtime.decision.decision_graph import DecisionGraphBuilder
 

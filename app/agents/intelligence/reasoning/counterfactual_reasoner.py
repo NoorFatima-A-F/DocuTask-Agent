@@ -6,11 +6,10 @@ estimate branch risk/reward utility, and select optimal futures before execution
 
 from __future__ import annotations
 
-import copy
 import logging
 import uuid
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 

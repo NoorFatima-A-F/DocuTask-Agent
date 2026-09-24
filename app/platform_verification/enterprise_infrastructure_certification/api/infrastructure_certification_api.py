@@ -12,7 +12,6 @@ from fastapi.responses import PlainTextResponse
 from ..domain.models import (
     CertificationDecision,
     MaturityAssessment,
-    QualityRegressionReport,
     QualityScorecard,
     RiskAssessmentReport,
     VerificationManifest,
@@ -114,5 +113,5 @@ async def get_markdown_report() -> str:
     md_path = Path("infrastructure_certification") / "Infrastructure_Readiness_Report.md"
     if md_path.exists():
         return md_path.read_text(encoding="utf-8")
-    res = _runtime.run_full_certification()
+    _runtime.run_full_certification()
     return (Path("infrastructure_certification") / "Infrastructure_Readiness_Report.md").read_text(encoding="utf-8")

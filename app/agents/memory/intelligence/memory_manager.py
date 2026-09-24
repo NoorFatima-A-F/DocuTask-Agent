@@ -10,7 +10,7 @@ Coordinates the 4-Tier Memory Architecture:
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
 from app.agents.memory.intelligence.episodic_memory import (

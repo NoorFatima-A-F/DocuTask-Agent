@@ -1,6 +1,5 @@
 """Tests for GitOps Synchronizer, Reconciler, Drift Detection, and Controller."""
 
-import pytest
 from app.infrastructure.deployment.gitops import (
     GitOpsManifest,
     GitOpsSynchronizer,

@@ -11,7 +11,7 @@ from typing import Any, Callable, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from app.connectors.core.exceptions import MCPProtocolError
-from app.connectors.core.models import ActionDescriptor, CapabilityDescriptor, ConnectorCategory
+from app.connectors.core.models import CapabilityDescriptor, ConnectorCategory
 from app.connectors.registry.capability_registry import CapabilityRegistry
 
 logger = logging.getLogger(__name__)

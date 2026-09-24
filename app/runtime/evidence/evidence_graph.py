@@ -8,12 +8,10 @@ from __future__ import annotations
 
 import collections
 import hashlib
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from app.runtime.evidence.execution_evidence import (
     EvidenceNode,
-    EvidenceStatus,
-    EvidenceType,
     MerkleNode,
 )
 

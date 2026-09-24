@@ -7,7 +7,7 @@ and maps abstract intents to ranked, healthy connector providers.
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from app.connectors.core.exceptions import CapabilityNotFoundError
 from app.connectors.core.models import (
     CapabilityDescriptor,

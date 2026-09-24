@@ -1,6 +1,5 @@
 """Tests for Policy Intelligence, Coverage, and Effectiveness Engine."""
 
-import pytest
 from app.governance.analytics.warehouse.repositories import GovernanceDataWarehouseRepository
 from app.governance.analytics.events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
 from app.governance.analytics.policies.analytics import PolicyAnalyticsEngine

@@ -1,6 +1,6 @@
 """Extension Contract and Capability Validators."""
 
-from typing import Any, List, Optional, Type
+from typing import Any, List
 from .contracts import (
     CustomRiskEvaluatorContract,
     ExtensionCapability,

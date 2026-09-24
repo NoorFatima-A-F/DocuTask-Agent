@@ -9,9 +9,6 @@ from pathlib import Path
 from app.platform_verification.configuration_backup_verification.runtime.configuration_backup_runtime import (
     ConfigurationBackupVerificationRuntime,
 )
-from app.platform_verification.configuration_backup_verification.domain.models import (
-    ConfigCertificationTier,
-)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("ConfigurationBackupVerifier")
@@ -39,7 +36,7 @@ def main() -> int:
     iac = result["infrastructure_configuration"]
     drift = result["configuration_drift"]
     restore = result["restore_simulation"]
-    sec = result["security_report"]
+    result["security_report"]
     comp = result["compliance_report"]
     artifacts = result["exported_manifest_paths"]
 

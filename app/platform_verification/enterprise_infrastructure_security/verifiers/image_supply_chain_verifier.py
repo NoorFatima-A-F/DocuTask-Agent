@@ -2,7 +2,7 @@
 Phase 3N.4: Container Image Supply Chain Security Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IImageSupplyChainSecurityVerifier
 from ..domain.models import (

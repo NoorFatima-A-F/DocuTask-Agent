@@ -1,10 +1,5 @@
 """Enterprise Audit Engine Certifier & Master Assurance Runner."""
 
-import asyncio
-import hashlib
-import json
-import os
-import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -44,10 +39,10 @@ class EnterpriseCertifier:
         release_version: str = "1.0.0",
     ) -> Dict[str, Any]:
         """Executes full 11-step end-to-end certification and digital signing pipeline."""
-        start_time = datetime.now(timezone.utc)
+        datetime.now(timezone.utc)
 
         # 1. Engine Attestation & Manifest
-        attestation_files = EngineAttestation.save_attestation_files(
+        EngineAttestation.save_attestation_files(
             engine_dir=self.engine_root,
             repo_root=self.repo_root,
         )

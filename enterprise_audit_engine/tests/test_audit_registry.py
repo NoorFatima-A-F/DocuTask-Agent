@@ -1,9 +1,7 @@
 """Tests for Audit Registry, History Regression Detector, and Revocation Registry."""
 
-import pytest
 from enterprise_audit_engine.certification_authority.domain.models import (
     CertificationRecord,
-    CertificationStatus,
     RevocationReason,
 )
 from enterprise_audit_engine.certification_authority.registry.audit_registry import AuditRegistry

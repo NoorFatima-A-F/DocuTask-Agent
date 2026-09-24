@@ -1,6 +1,6 @@
 """CQRS Query Models and Filter Providers for Platform Delivery Control Plane."""
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Optional
 
 
 @dataclass

@@ -5,7 +5,6 @@ Captures runtime versions (Python, Docker, OS, PostgreSQL) and application metad
 """
 
 import sys
-import platform
 from datetime import datetime, timezone
 from ..domain.models import EvidenceMetadata
 from ..domain.interfaces import IEvidenceMetadataGenerator

@@ -1,7 +1,7 @@
 """Enterprise Artifact Registry managing container images, models, and packages."""
 
 import hashlib
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import threading
 import uuid
 
@@ -10,7 +10,6 @@ from .metadata import (
     ArtifactType,
     SBOMComponent,
     VulnerabilityFinding,
-    VulnerabilitySeverity,
 )
 from .signing import ArtifactSigner
 

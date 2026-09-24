@@ -1,7 +1,7 @@
 """Abstract interfaces for Alert Fatigue Prevention & Signal Optimization sub-engines."""
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict
 from .models import (
     FatigueArchitectureReport,
     DeduplicationReport,

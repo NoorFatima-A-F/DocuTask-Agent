@@ -3,7 +3,7 @@ Message Router.
 Routes messages between agents, ensuring correct point-to-point, broadcast, or multicast delivery.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, List
 from uuid import UUID
 from app.agents.coordination.communication import AgentMessage, CommunicationPattern
 from app.agents.coordination.exceptions import InvalidCommunicationRouteError

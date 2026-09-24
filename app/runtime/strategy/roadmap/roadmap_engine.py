@@ -4,14 +4,13 @@ Multi-Horizon (30d, 90d, 180d, 365d) Automated Roadmap Generation and Critical P
 """
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 import uuid
 
 from app.runtime.strategy.events.strategy_events import (
     StrategicHorizon,
     RoadmapGenerated,
-    RoadmapUpdated,
 )
 
 

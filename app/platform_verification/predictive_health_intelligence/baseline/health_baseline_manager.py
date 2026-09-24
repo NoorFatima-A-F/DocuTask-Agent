@@ -4,7 +4,7 @@ Loads declarative operational baselines from health_baseline.yaml and validates 
 """
 import os
 import yaml
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from app.platform_verification.predictive_health_intelligence.domain.models import (
     BaselineProfile,
     BaselineReport,

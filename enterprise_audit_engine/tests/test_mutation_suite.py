@@ -1,6 +1,5 @@
 """Tests for Audit Mutation Suite & Defect Detection."""
 
-import pytest
 from enterprise_audit_engine.certification_authority.testing.mutation_suite import AuditMutationSuite
 
 

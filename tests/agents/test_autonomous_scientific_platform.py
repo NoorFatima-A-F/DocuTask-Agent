@@ -6,15 +6,10 @@ Bayesian Optimization, Regression Detection, Observatory, Decision, Publication,
 Governance, Scientific Agents, and Master Intelligence Engine.
 """
 
-import math
-import pytest
-from typing import Dict, List
 
 # 83C Knowledge Graph
-from research_validation.knowledge_graph.ontology import EntityType, RelationshipType, ScientificOntology
-from research_validation.knowledge_graph.knowledge_node import create_node
+from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
 from research_validation.knowledge_graph.knowledge_graph import ScientificKnowledgeGraph
-from research_validation.knowledge_graph.reasoning_engine import ScientificReasoningEngine
 
 # 84C Memory
 from research_validation.memory.experiment_memory import ExperimentMemoryStore
@@ -36,16 +31,12 @@ from research_validation.hypothesis.hypothesis_generator import AutonomousHypoth
 from research_validation.hypothesis.hypothesis_prioritizer import HypothesisPrioritizer
 
 # 87C Planning
-from research_validation.planning.execution_strategy import AdaptiveExecutionStrategy, TargetHardware
 from research_validation.planning.adaptive_planner import AdaptiveExperimentPlanner
 
 # 88C Optimization
-from research_validation.optimization.gaussian_process import GaussianProcessRegressor
-from research_validation.optimization.acquisition_functions import expected_improvement, upper_confidence_bound
 from research_validation.optimization.bayesian_optimizer import BayesianResearchOptimizer, AcquisitionStrategy
 
 # 89C Regression
-from research_validation.regression.drift_detector import MultiDimensionalDriftDetector, DriftSeverity
 from research_validation.regression.regression_detector import ScientificRegressionDetector
 
 # 90C Observatory
@@ -61,11 +52,9 @@ from research_validation.decision.research_decision_engine import ResearchDecisi
 from research_validation.publication.publication_evolution_engine import PublicationEvolutionEngine
 
 # 93C Governance
-from research_validation.governance.governance_policy import PolicyCategory
 from research_validation.governance.governance_engine import ResearchGovernanceEngine
 
 # 94C Scientific Agents
-from research_validation.scientific_agents.agent_definitions import ScientificAgentRole
 from research_validation.scientific_agents.scientific_agent_runtime import ScientificAgentRuntime
 
 # 95C Master Orchestrator
@@ -74,12 +63,12 @@ from research_validation.scientific_runtime.scientific_intelligence_engine impor
 
 def test_scientific_knowledge_graph_and_reasoning():
     kg = ScientificKnowledgeGraph()
-    n_exp = kg.add_node("exp_1", EntityType.EXPERIMENT, "LayoutLMv3 Fine-tuning")
-    n_ds = kg.add_node("ds_funsd", EntityType.DATASET, "FUNSD")
-    n_met = kg.add_node("met_f1", EntityType.METRIC, "F1 Score")
+    kg.add_node("exp_1", EntityType.EXPERIMENT, "LayoutLMv3 Fine-tuning")
+    kg.add_node("ds_funsd", EntityType.DATASET, "FUNSD")
+    kg.add_node("met_f1", EntityType.METRIC, "F1 Score")
 
-    e1 = kg.add_relationship("exp_1", RelationshipType.EVALUATES, "ds_funsd")
-    e2 = kg.add_relationship("exp_1", RelationshipType.PRODUCES_METRIC, "met_f1")
+    kg.add_relationship("exp_1", RelationshipType.EVALUATES, "ds_funsd")
+    kg.add_relationship("exp_1", RelationshipType.PRODUCES_METRIC, "met_f1")
 
     assert len(kg.nodes) == 3
     assert len(kg.rel_engine.edges) == 2
@@ -103,7 +92,7 @@ def test_scientific_memory_engine_and_consolidation():
     exp_mem = ExperimentMemoryStore()
     fail_mem = FailureMemoryStore()
     succ_mem = SuccessMemoryStore()
-    reg_mem = RegressionMemoryStore()
+    RegressionMemoryStore()
     epi_mem = EpisodicMemoryStore()
     lt_mem = LongTermMemoryStore()
 

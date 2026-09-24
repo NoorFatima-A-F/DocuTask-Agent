@@ -4,8 +4,8 @@ Master orchestrator that executes failure experiments, self-healing audits,
 incident automation, runbook verification, dependency resilience checks,
 state consistency validation, DR drills, scorecard computation, and evidence export.
 """
-from dataclasses import dataclass, field
-from typing import Dict, Any, List, Optional
+from dataclasses import dataclass
+from typing import Dict, Any, List
 
 from app.platform_verification.operational_resilience.domain.models import (
     FailureExperimentResult,

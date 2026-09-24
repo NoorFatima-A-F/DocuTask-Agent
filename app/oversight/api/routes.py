@@ -5,7 +5,6 @@ from fastapi import APIRouter, HTTPException, status, Depends
 
 from ..core.engine import HumanOversightEngine
 from ..core.exceptions import OversightException, UnauthorizedReviewerError, InvalidOverrideError
-from ..approvals.policies import ApprovalPolicy
 from ..reviews.requests import ReviewRequest
 from ..reviews.evidence import ReviewEvidencePackage
 from ..reviews.comments import ReviewComment

@@ -4,7 +4,6 @@ Coordinates asynchronous publish-subscribe message distribution across teams, to
 """
 
 from typing import Callable, Dict, List
-from uuid import UUID
 from app.agents.coordination.communication import AgentMessage
 
 

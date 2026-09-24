@@ -4,7 +4,7 @@ Coordinates scenario execution, chaos injection, incident detection, recovery or
 validation, resilience scoring, and dual-directory artifact export.
 """
 import datetime
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 
 from app.platform_verification.disaster_recovery_simulation.scenarios.database_loss_scenario import (
     DatabaseLossScenario,

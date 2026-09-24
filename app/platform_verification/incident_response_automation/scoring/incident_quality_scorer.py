@@ -11,7 +11,6 @@ Computes composite quality scorecards across the 6 core incident response automa
 
 from __future__ import annotations
 
-from typing import Any, Dict
 
 from app.platform_verification.incident_response_automation.domain.interfaces import (
     IIncidentQualityScorer,

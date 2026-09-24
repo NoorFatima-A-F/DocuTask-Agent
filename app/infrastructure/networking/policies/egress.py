@@ -1,6 +1,6 @@
 """Egress Policy Manager for restricting outbound platform calls."""
 
-from typing import List, Optional
+from typing import List
 import threading
 
 from .network_policy import NetworkPolicy, NetworkPolicyRule, NetworkPolicyEngine, NetworkPolicyType

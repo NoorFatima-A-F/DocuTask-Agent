@@ -3,9 +3,8 @@ FastAPI REST API Router for Disaster Recovery Governance & Operational Resilienc
 Exposes endpoints for querying platform resilience scorecard, ownership matrix,
 policies, live metrics, risk register, and CI/CD gate evaluation.
 """
-from typing import Dict, Any, List
-from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel
+from typing import Dict, Any
+from fastapi import APIRouter
 
 from app.platform_verification.resilience_governance.runtime.governance_runtime import (
     GovernanceRuntime,

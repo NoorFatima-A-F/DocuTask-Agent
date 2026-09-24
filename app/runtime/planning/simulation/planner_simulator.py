@@ -8,7 +8,7 @@ completion times, tail latencies ($P_{90}, P_{99}$), expected cost, and failure 
 from __future__ import annotations
 
 import random
-from typing import Any, Dict, List
+from typing import List
 from pydantic import BaseModel
 from app.runtime.planning.graph.dag import ExecutionDAG
 

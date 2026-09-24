@@ -5,7 +5,7 @@ Aggregates verification outputs across 3G.2A through 3G.2F.
 import os
 import json
 import datetime
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,

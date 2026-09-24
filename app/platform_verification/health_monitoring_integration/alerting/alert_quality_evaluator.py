@@ -6,7 +6,6 @@ and false negative rates to eliminate alert fatigue.
 
 from __future__ import annotations
 
-from typing import Any, Dict
 
 from app.platform_verification.health_monitoring_integration.domain.interfaces import (
     IAlertQualityEvaluator,

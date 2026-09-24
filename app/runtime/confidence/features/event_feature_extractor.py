@@ -3,7 +3,7 @@ Event Feature Extractor for Phase 13.3 (ASCE-CGP).
 Extracts numerical features from runtime Domain Events.
 """
 
-from typing import Any, Dict, List
+from typing import Dict, List
 from app.runtime.events.models.event import DomainEvent
 from app.runtime.confidence.features.feature_normalizer import FeatureNormalizer
 

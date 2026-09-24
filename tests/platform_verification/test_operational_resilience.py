@@ -2,7 +2,6 @@
 Phase 3H.7: Comprehensive Test Suite for Enterprise Operational Resilience, Fault Tolerance & Self-Healing Verification
 """
 import pytest
-from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.platform_verification.operational_resilience.domain.models import (
@@ -23,7 +22,6 @@ from app.platform_verification.operational_resilience.verifiers import (
     ResilienceMetricsVerifier,
 )
 from app.platform_verification.operational_resilience.scoring import OperationalResilienceScorer
-from app.platform_verification.operational_resilience.exporter import OperationalResilienceExporter
 from app.platform_verification.operational_resilience.runtime import OperationalResilienceRuntime
 from app.platform_verification.operational_resilience.api import router
 from fastapi import FastAPI

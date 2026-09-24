@@ -9,8 +9,6 @@ from ..domain.models import (
     AssertionResult,
     PartId,
     PartVerificationResult,
-    RetrievalMode,
-    RetrievalResult,
     VerificationStatus,
 )
 
@@ -97,7 +95,6 @@ class HybridRetrievalVerifier:
 
     def _verify_query_expansion(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
-        raw_query = "What is the MSA termination clause?"
         # Acronym & Synonym expansion: MSA -> Master Services Agreement, clause -> provision/term
         expanded_terms = ["MSA", "Master Services Agreement", "termination clause", "cancellation provision"]
 

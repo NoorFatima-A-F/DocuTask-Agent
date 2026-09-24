@@ -5,7 +5,7 @@ Resilience scoring, availability metrics (99.99%), MTTR, MTBF, MTTD, recovery su
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, Optional
 
 
 @dataclass

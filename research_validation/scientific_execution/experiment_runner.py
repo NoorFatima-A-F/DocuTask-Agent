@@ -7,12 +7,10 @@ and final outputs.
 """
 
 from __future__ import annotations
-import hashlib
-import json
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional
 
 from research_validation.scientific_execution.experiment_manifest import (
     ExperimentManifest, ExperimentStatus
@@ -80,7 +78,7 @@ class ScientificExperimentRunner:
         stage_metrics: Dict[str, float] = {}
 
         # 1. Preprocessing stage
-        t0 = time.perf_counter()
+        time.perf_counter()
         prep_h = compute_sha256(f"prep_{len(samples)}_{manifest.parameters.seed}".encode())
         intermediate_hashes["preprocessing"] = prep_h
 

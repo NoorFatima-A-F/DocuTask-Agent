@@ -10,7 +10,7 @@ Selects optimal approved AI model based on:
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Set
+from typing import List, Optional, Set
 from pydantic import BaseModel, Field
 from app.model_governance.registry.models import Model, ModelLifecycleState, RiskLevel
 from app.model_governance.registry.repository import ModelRegistryRepository

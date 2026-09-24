@@ -1,7 +1,6 @@
 """Tests for Cryptographic Hash Chaining, Digital Signatures, and Tamper Detection."""
 
-import pytest
-from app.audit.core.events import AuditEvent, ActorType, EventCategory
+from app.audit.core.events import AuditEvent
 from app.audit.integrity.hashing import HashChainCalculator
 from app.audit.integrity.signatures import AuditSigner
 from app.audit.integrity.verification import AuditIntegrityVerifier

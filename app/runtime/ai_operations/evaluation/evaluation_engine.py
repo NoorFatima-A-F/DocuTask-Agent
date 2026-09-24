@@ -5,7 +5,6 @@ Executes automated rule checks, semantic assertion tests, and LLM Judge evaluati
 
 from __future__ import annotations
 import random
-from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 from app.runtime.ai_operations.models.schemas import (
     MetricScore,

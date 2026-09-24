@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from typing import Dict, List, Optional, Set
 from app.tenancy.core.models import Membership, MembershipRole
-from app.tenancy.core.exceptions import TenancyError
 
 
 class MembershipManager:

@@ -6,7 +6,7 @@ Decentralized task auctions, agent bidding, Pareto-optimal bid evaluation, and a
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union
 import uuid
 
 

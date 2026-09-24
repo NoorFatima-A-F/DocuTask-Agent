@@ -1,10 +1,8 @@
 """
 Container Verification Evidence Generator and Report Compiler.
 """
-import hashlib
 import json
 from pathlib import Path
-from typing import Dict, Any
 from app.platform_verification.container_verification.models.verification_models import (
     ContainerVerificationEvidencePackage,
     ContainerCertificationReport,

@@ -2,8 +2,7 @@
 Test Suite: Organizational Hierarchy & Specialized Department Engine
 Validates organizational departments, graph topology, state manager metrics, and escalation paths.
 """
-import pytest
-from app.runtime.organization.department import CANONICAL_DEPARTMENTS, Department
+from app.runtime.organization.department import CANONICAL_DEPARTMENTS
 from app.runtime.organization.organization_graph import OrganizationGraphBuilder
 from app.runtime.organization.organizational_state import OrganizationalStateManager
 from app.runtime.organization.hierarchy_manager import HierarchyManager

@@ -2,7 +2,7 @@
 Phase 3H.7: Operational Resilience Verification FastAPI Endpoints
 """
 from fastapi import APIRouter, Query
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 from app.platform_verification.operational_resilience.runtime.operational_resilience_runtime import OperationalResilienceRuntime
 

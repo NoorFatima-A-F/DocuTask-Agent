@@ -2,7 +2,6 @@
 Phase 3H.5.6: Interfaces for Failure Learning, RCA & Recovery Optimization
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
 from .models import (
     FailureEventReport,
     RootCauseReport,

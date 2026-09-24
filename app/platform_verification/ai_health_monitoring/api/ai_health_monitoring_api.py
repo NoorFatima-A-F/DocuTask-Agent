@@ -3,7 +3,7 @@
 FastAPI router exposing AI observability pipelines, metric collections, dashboards, and scorecards.
 """
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter
 from typing import Dict, Any
 import json
 

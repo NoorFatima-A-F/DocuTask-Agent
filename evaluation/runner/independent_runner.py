@@ -6,14 +6,10 @@ Zero compile-time dependencies on internal agent or runtime classes.
 
 from __future__ import annotations
 
-import json
 import logging
-import subprocess
-import tempfile
 import time
-from dataclasses import asdict, dataclass, field
-from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional
+from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, List
 
 from evaluation.metrics.evaluation_metrics import EvaluationMetrics, EvaluationMetricSummary
 

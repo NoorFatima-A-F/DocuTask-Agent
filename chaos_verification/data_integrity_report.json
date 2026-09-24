@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-19T07:04:41.015383+00:00",
-  "execution_timestamp": "2026-09-19T07:04:41.015399+00:00",
+  "timestamp": "2026-09-24T21:54:53.994824+00:00",
+  "execution_timestamp": "2026-09-24T21:54:53.994842+00:00",
   "summary": "PostgreSQL hard failure chaos testing verified: 0 lost records, 0 data corruptions, and 18s clean recovery.",
   "report_title": "Database Failure & Data Integrity Report",
   "database_downtime_seconds": 25.0,

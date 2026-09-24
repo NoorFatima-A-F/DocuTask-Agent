@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.health_monitoring_integration.domain.interfaces import (
     IIncidentVisibilityEngine,

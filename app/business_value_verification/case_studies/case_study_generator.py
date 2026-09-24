@@ -2,7 +2,7 @@
 Portfolio-ready executive case study generator.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from app.business_value_verification.domain.models import CaseStudyResult
 
 

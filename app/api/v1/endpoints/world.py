@@ -3,8 +3,8 @@ AWM-PSDTIP Phase 13.10 - REST API Endpoints
 REST API for Autonomous World Modeling, Predictive Simulation, Digital Twin Intelligence, Causal Reasoning, Forecasting, and Predictive Governance.
 """
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, Body
+from typing import Any, Dict, List
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.runtime.world import (
@@ -12,7 +12,6 @@ from app.runtime.world import (
     RiskLevel,
     HorizonScope,
     ScenarioType,
-    CausalRelationType,
     SimulationMode,
 )
 

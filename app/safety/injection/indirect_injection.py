@@ -1,7 +1,7 @@
 """Indirect Prompt Injection Detection for Untrusted Third-Party Documents & RAG Contexts."""
 
 import re
-from typing import List, Tuple, Optional
+from typing import List, Tuple
 from ..gateway.context import SourceTrustLevel, KnowledgeChunk
 from ..gateway.decision import SafetyCategory, ViolationSeverity, SafetyViolation
 

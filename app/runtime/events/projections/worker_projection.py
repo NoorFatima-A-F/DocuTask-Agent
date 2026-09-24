@@ -3,7 +3,7 @@ DocuTask Agent - Worker Read Projection Engine
 Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 import time
 from app.runtime.events.models.event import DomainEvent
 from app.runtime.events.models.event_types import DomainEventType

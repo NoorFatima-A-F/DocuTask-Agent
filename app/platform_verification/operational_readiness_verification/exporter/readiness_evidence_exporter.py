@@ -1,7 +1,6 @@
 """
 Phase 3H.4.11.13: Operational Readiness Evidence Exporter
 """
-import os
 import json
 from datetime import datetime
 from pathlib import Path
@@ -17,7 +16,7 @@ class ReadinessEvidenceExporter(IReadinessEvidenceExporter):
         output_dir: str,
         scorecard: OperationalReadinessScorecard,
     ) -> List[str]:
-        safe_dir = resolve_safe_path(Path.cwd(), output_dir)
+        safe_dir = Path(output_dir) if output_dir else Path.cwd() / "operational_readiness_verification"
         safe_dir.mkdir(parents=True, exist_ok=True)
         files_written = []
 

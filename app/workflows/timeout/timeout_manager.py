@@ -4,7 +4,7 @@ Tracks and enforces deadlines for workflows, individual tasks, AI calls, connect
 """
 
 from datetime import datetime, timezone
-from typing import Dict, Optional
+from typing import Optional
 from ..domain.exceptions import WorkflowTimeoutException
 
 

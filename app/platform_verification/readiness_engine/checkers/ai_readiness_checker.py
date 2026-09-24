@@ -3,7 +3,7 @@ AI Provider Readiness Checker (Part 3H.3.2.6).
 Verifies Gemini AI model endpoint availability: API key authentication, request latency,
 quota headroom, response validation, and automatic degraded fallback handling.
 """
-from typing import Dict, Any, Optional
+from typing import Optional
 from app.platform_verification.readiness_engine.domain.models import (
     AIProviderReadinessReport,
 )

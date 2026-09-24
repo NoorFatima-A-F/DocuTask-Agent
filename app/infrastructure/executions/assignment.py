@@ -7,8 +7,8 @@ import threading
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
-from app.infrastructure.executions.workload import ResourceRequirements, WorkloadRequest, WorkloadState
-from app.infrastructure.workers.models import Worker, WorkerStatus
+from app.infrastructure.executions.workload import ResourceRequirements, WorkloadRequest
+from app.infrastructure.workers.models import Worker
 from app.infrastructure.workers.registry import WorkerRegistry
 
 

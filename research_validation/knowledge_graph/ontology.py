@@ -7,8 +7,8 @@ for autonomous scientific reasoning and hypothesis formation.
 
 from __future__ import annotations
 from enum import Enum
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set
+from dataclasses import dataclass
+from typing import Set
 
 
 class EntityType(str, Enum):

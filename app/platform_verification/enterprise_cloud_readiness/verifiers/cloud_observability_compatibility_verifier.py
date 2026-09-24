@@ -2,7 +2,7 @@
 Phase 3M.10: Cloud Observability Compatibility Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICloudObservabilityCompatibilityVerifier
 from ..domain.models import (

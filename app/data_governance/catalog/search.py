@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
-from app.data_governance.registry.models import DataAsset, ClassificationLevel, AssetType
+from typing import List, Optional
+from pydantic import BaseModel
+from app.data_governance.registry.models import ClassificationLevel, AssetType
 from app.data_governance.registry.repository import DataAssetRepository
 from app.data_governance.catalog.indexing import CatalogIndex
 

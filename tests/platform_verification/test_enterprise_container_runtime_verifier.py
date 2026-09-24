@@ -6,8 +6,6 @@ from app.platform_verification.container_verification.cli import ContainerVerifi
 from app.platform_verification.container_verification.models.verification_models import (
     ContainerCertificationTier,
     ServiceDefinition,
-    ContainerArchitectureModel,
-    VulnerabilitySeverity,
 )
 
 
@@ -150,7 +148,7 @@ def test_end_to_end_container_verification_and_evidence(container_platform, tmp_
     assert package.package_sha256 != ""
 
     # Test evidence export
-    out_dir = container_platform.evidence_generator.export_results_directory(package, str(tmp_path / "evidence_out"))
+    container_platform.evidence_generator.export_results_directory(package, str(tmp_path / "evidence_out"))
     assert (tmp_path / "evidence_out" / "metadata.json").exists()
     assert (tmp_path / "evidence_out" / "architecture_report.json").exists()
     assert (tmp_path / "evidence_out" / "dockerfile_report.json").exists()

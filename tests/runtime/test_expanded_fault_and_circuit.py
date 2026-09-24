@@ -9,14 +9,12 @@ from app.agents.runtime.enterprise.circuit_breaker import (
     CircuitBreaker,
     CircuitBreakerOpenError,
     CircuitState,
-    MemoryCircuitStateStore,
 )
 from app.agents.runtime.enterprise.fault_injector import (
     FaultInjector,
     FaultType,
     InjectedFaultException,
 )
-from app.agents.runtime.enterprise.chaos_engine import ChaosEngine
 
 
 @pytest.mark.parametrize("failure_threshold", [1, 2, 3, 5])
@@ -62,7 +60,7 @@ async def test_circuit_breaker_half_open_recovery_thresholds(success_threshold):
 
     # In HALF_OPEN, requires success_threshold successes to close
     for i in range(success_threshold - 1):
-        res = await cb.execute(lambda: asyncio.sleep(0.001))
+        await cb.execute(lambda: asyncio.sleep(0.001))
         assert cb.state == CircuitState.HALF_OPEN
         assert cb.success_count == i + 1
 

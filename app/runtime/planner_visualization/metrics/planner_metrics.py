@@ -5,7 +5,7 @@ Computes live planner performance, parallelism factor, branching factor, and que
 
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Dict
 from app.runtime.planner_visualization.ui_models.models import PlannerMetrics
 from app.runtime.planner_visualization.dag.dag_engine import DAGBuilderEngine
 
@@ -21,7 +21,6 @@ class PlannerMetricsCalculator:
     def compute_metrics(self) -> PlannerMetrics:
         snapshot = self.dag_builder.get_snapshot()
         total_nodes = snapshot.total_nodes
-        completed = snapshot.completed_nodes
         running = sum(1 for n in snapshot.nodes if n.state.value == "RUNNING")
         waiting = sum(1 for n in snapshot.nodes if n.state.value == "WAITING")
 

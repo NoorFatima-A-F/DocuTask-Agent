@@ -4,15 +4,15 @@ Provides PlanBuilder, GraphBuilder, WorkflowBuilder, TaskBuilder, GoalBuilder, D
 Enforces structural integrity during graph and plan creation.
 """
 
-from typing import Any, Dict, List, Optional
-from uuid import UUID, uuid4
+from typing import Dict, List, Optional
+from uuid import uuid4
 from app.agents.planning.constraints import ConstraintType, PlanConstraint
 from app.agents.planning.contracts import Plan
 from app.agents.planning.dependencies import Dependency, DependencyType
 from app.agents.planning.edges import EdgeType, PlanEdge
 from app.agents.planning.goals import PlanGoal
 from app.agents.planning.graph import PlanGraph
-from app.agents.planning.metadata import PlanIdentity, PlanMetadata, PlanStatistics
+from app.agents.planning.metadata import PlanIdentity, PlanStatistics
 from app.agents.planning.nodes import NodeType, PlanNode
 from app.agents.planning.tasks import PlanningTask
 from app.agents.planning.validators import PlanStructuralValidator

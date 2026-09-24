@@ -2,14 +2,12 @@
 Phase 3H.9: Comprehensive Test Suite for Enterprise Operational Intelligence Verification
 """
 import pytest
-from pathlib import Path
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
 from app.platform_verification.operational_intelligence.domain.models import (
     AnomalySeverity,
     RecommendationPriority,
-    ForecastHorizon,
     IntelligenceCertificationTier,
 )
 from app.platform_verification.operational_intelligence.verifiers import (
@@ -24,7 +22,6 @@ from app.platform_verification.operational_intelligence.verifiers import (
     ContinuousInsightVerifier,
 )
 from app.platform_verification.operational_intelligence.scoring import OperationalIntelligenceScorer
-from app.platform_verification.operational_intelligence.exporter import OperationalIntelligenceExporter
 from app.platform_verification.operational_intelligence.runtime import OperationalIntelligenceRuntime
 from app.platform_verification.operational_intelligence.api import router
 

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict, List
 import uuid
 from .definitions import VerificationSpecification
 from app.shared_kernel.exceptions import EnvironmentNotReadyError, InvariantViolationError

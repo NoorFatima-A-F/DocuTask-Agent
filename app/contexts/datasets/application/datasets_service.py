@@ -1,7 +1,7 @@
-from typing import Dict, Any, Union
+from typing import Union
 import hashlib
 from ..domain.datasets_domain import DatasetAggregate, DatasetRegistered
-from app.shared_kernel import Result, Ok, Err, get_event_bus
+from app.shared_kernel import Result, Ok, get_event_bus
 
 class DatasetService:
     def __init__(self, repo):

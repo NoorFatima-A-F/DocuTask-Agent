@@ -7,7 +7,7 @@ ensuring the agent learns from human supervision and never repeats corrected mis
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, Optional
+from typing import Optional
 
 from app.agents.human.feedback_processor import HumanFeedbackDirective
 from app.agents.memory.intelligence.episodic_memory import EpisodeRecord, EpisodicMemory

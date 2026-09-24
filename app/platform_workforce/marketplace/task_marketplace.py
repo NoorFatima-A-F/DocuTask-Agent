@@ -1,9 +1,9 @@
 """
 4. Task Marketplace & Internal Economy Subsystem
 """
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional
 from datetime import datetime, timezone
-from app.platform_workforce.models.schemas import TaskMarketplaceListing, TaskBid, EmployeeStatus
+from app.platform_workforce.models.schemas import TaskMarketplaceListing, EmployeeStatus
 from app.platform_workforce.registry.workforce_registry import workforce_registry
 
 class TaskMarketplace:

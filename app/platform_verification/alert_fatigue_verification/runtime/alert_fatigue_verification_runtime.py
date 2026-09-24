@@ -3,18 +3,8 @@
 Coordinates full end-to-end alert fatigue reduction, signal optimization, and noise suppression verification.
 """
 
-from typing import Dict, Any, Tuple
+from typing import Dict, Tuple
 from ..domain.models import (
-    FatigueArchitectureReport,
-    DeduplicationReport,
-    CorrelationReport,
-    SeverityOptimizationReport,
-    RoutingReport,
-    SuppressionReport,
-    GroupingReport,
-    NoiseMetricsReport,
-    AlertStormReport,
-    MachinePrioritizationReport,
     AlertFatigueScorecard,
 )
 from ..verifiers.fatigue_architecture_verifier import FatigueArchitectureVerifier

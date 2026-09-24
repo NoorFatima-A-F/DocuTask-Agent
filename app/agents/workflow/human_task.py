@@ -5,7 +5,7 @@ Represents an asynchronous human review or approval checkpoint requiring human i
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 

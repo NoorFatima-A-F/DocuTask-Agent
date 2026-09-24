@@ -1,5 +1,4 @@
 from typing import List, Optional
-import hashlib
 from ..domain.evidence_domain import EvidenceAggregate, EvidenceCaptured
 from app.shared_kernel import Result, Ok, get_event_bus
 

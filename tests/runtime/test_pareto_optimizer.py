@@ -2,7 +2,6 @@
 Unit & Dominance Tests for Pareto Optimizer (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.optimization.pareto_optimizer import ParetoOptimizer
 from app.runtime.optimization.optimizer_validator import OptimizerValidator
 

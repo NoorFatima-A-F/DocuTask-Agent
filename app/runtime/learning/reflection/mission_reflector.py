@@ -4,7 +4,7 @@ Analyzes macro execution KPIs, throughput, total duration, SLA adherence, and co
 """
 
 from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class MacroKPIs(BaseModel):

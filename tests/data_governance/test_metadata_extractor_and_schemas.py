@@ -1,6 +1,5 @@
 """Test Metadata Extractor & 4-Dimensional Metadata Schemas."""
 
-import pytest
 from app.data_governance.metadata.extractor import MetadataExtractor
 from app.data_governance.metadata.manager import MetadataManager
 from app.data_governance.registry.models import ClassificationLevel

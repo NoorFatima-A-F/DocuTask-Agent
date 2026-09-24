@@ -3,7 +3,6 @@ Tests for Metrics Registry, Slicing, Specialized Collectors, and Time-Window Agg
 """
 
 import time
-import pytest
 
 from app.infrastructure.observability.metrics.types import (
     MetricPoint,

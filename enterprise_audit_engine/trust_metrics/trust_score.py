@@ -3,7 +3,7 @@
 Replaces binary certification stamps with a continuous, evidence-grounded Evidence Trust Score.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

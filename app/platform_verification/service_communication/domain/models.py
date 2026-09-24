@@ -3,7 +3,7 @@ Domain models for Part 3B: Enterprise Service Communication & Distributed System
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List
 from datetime import datetime, timezone
 
 

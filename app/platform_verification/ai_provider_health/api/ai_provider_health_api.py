@@ -3,7 +3,7 @@
 FastAPI router exposing AI provider health metrics, failover states, and LLMOps reliability scorecards.
 """
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter
 from typing import Dict, Any
 import json
 

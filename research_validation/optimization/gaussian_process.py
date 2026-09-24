@@ -6,7 +6,6 @@ Continuous Gaussian Process Regressor with RBF kernel and analytical posterior c
 
 from __future__ import annotations
 import math
-from dataclasses import dataclass
 from typing import List, Tuple
 
 
@@ -46,7 +45,7 @@ class GaussianProcessRegressor:
             return 0.0, self.sigma_f ** 2
 
         # 1. Compute kernel vector k_star between x and training points
-        k_star = [self._kernel(x, xi) for xi in self.X_train]
+        [self._kernel(x, xi) for xi in self.X_train]
 
         # 2. Kernel matrix K for training points + noise
         # For lightweight zero-dependency computation, solve simple inverse or weighted sum

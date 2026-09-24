@@ -10,7 +10,7 @@ from enum import Enum
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
-from app.runtime.planning.mutable_dag import MutableExecutionDAG, DAGNode, DAGNodeStatus, DAGMutationType
+from app.runtime.planning.mutable_dag import MutableExecutionDAG, DAGNode, DAGNodeStatus
 from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine
 
 

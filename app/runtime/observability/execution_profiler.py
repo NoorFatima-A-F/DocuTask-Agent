@@ -8,7 +8,7 @@ Identifies execution bottlenecks across Planner, Scheduler, Workers, Storage, an
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Any, Dict, List
 from app.runtime.observability.schemas import (
     BaseRuntimeEvent,
     FlameGraphNode,

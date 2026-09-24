@@ -4,7 +4,7 @@ REST API Router for Enterprise Architecture Verification (PART 2A).
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.platform_verification.architecture_verification.runtime.architecture_verification_runtime import (
     EnterpriseArchitectureVerificationRuntime,
 )

@@ -3,7 +3,7 @@ Phase 13.20: Enterprise AI Starter Template Catalog.
 Provides turnkey templates for rapid agent scaffolding.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional
 from app.platform_ai_lifecycle.models.schemas import AgentTemplate, AgentCategory
 
 

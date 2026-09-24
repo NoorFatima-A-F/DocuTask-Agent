@@ -2,7 +2,6 @@
 Tests for ReliabilitySDK and FastAPI Reliability REST API Endpoints.
 """
 
-import pytest
 
 from app.infrastructure.api.reliability_routes import (
     FailoverExecuteRequest,

@@ -11,10 +11,9 @@ from app.runtime.operations.healing.domain_actuators import (
     PlannerRecoveryActuator,
     ResourceRecoveryActuator,
     MemoryRecoveryActuator,
-    HealingExecutionResult,
 )
 from app.runtime.operations.healing.healing_validator import HealingValidator
-from app.runtime.operations.healing.healing_audit import HealingAuditLedger, HealingAuditRecord
+from app.runtime.operations.healing.healing_audit import HealingAuditLedger
 from app.runtime.operations.events.operation_events import HealingActionType, OperationalSeverity, SubsystemType
 
 

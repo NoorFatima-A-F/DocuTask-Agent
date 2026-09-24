@@ -2,10 +2,8 @@
 Tests for Hypothesis Generation and Experimentation Engines (Pillars 4 & 5).
 """
 
-import pytest
 from app.runtime.intelligence.experience import (
     ExperienceExtractor,
-    ExperienceRecord,
     ExperienceStore,
 )
 from app.runtime.intelligence.experiments.ab_validator import ABValidator
@@ -14,7 +12,6 @@ from app.runtime.intelligence.experiments.statistical_comparator import (
 )
 from app.runtime.intelligence.hypothesis.hypothesis_engine import (
     HypothesisEngine,
-    HypothesisStatus,
 )
 from app.runtime.intelligence.strategy.strategy_miner import StrategyMiner
 

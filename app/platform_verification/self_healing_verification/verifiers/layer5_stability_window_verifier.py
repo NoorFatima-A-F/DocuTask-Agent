@@ -1,7 +1,6 @@
 """
 Phase 3H.5.5: Layer 5 - Stability Window Monitoring Verifier
 """
-from typing import Dict, Any
 from ..domain.interfaces import ILayer5StabilityWindowVerifier
 from ..domain.models import StabilityWindowReport
 

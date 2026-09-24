@@ -6,7 +6,6 @@ Stores, retrieves, and diffs execution snapshots to verify environmental consist
 from __future__ import annotations
 
 import collections
-import time
 from typing import Any, Dict, List, Optional
 
 from app.runtime.reproducibility.environment_capture import EnvironmentCapture

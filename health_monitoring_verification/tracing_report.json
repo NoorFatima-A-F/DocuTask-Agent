@@ -1,11 +1,11 @@
 {
   "trace": {
-    "trace_id": "trace-d76ddb1cefdc43048560c62de671329f",
+    "trace_id": "trace-53946e7c6dee453aaefcdb595863d77f",
     "root_span_name": "POST /api/v1/documents/process",
     "total_spans": 8,
     "spans": [
       {
-        "span_id": "span-dc798e22e4d6",
+        "span_id": "span-fd9816619c64",
         "parent_span_id": null,
         "name": "POST /api/v1/documents/process",
         "service": "api_service",
@@ -18,8 +18,8 @@
         }
       },
       {
-        "span_id": "span-d4dd9e34be17",
-        "parent_span_id": "span-dc798e22e4d6",
+        "span_id": "span-3f8f12c200f6",
+        "parent_span_id": "span-fd9816619c64",
         "name": "agent.runtime.orchestrate",
         "service": "agent_runtime",
         "duration_ms": 2700.0,
@@ -30,8 +30,8 @@
         }
       },
       {
-        "span_id": "span-c2a9d488fe99",
-        "parent_span_id": "span-dc798e22e4d6",
+        "span_id": "span-ccbc45fb52f4",
+        "parent_span_id": "span-fd9816619c64",
         "name": "planner.decompose_and_route",
         "service": "agent_runtime",
         "duration_ms": 180.0,
@@ -42,8 +42,8 @@
         }
       },
       {
-        "span_id": "span-3556aac4d972",
-        "parent_span_id": "span-dc798e22e4d6",
+        "span_id": "span-1c056c183d1d",
+        "parent_span_id": "span-fd9816619c64",
         "name": "worker.celery.execute_pipeline",
         "service": "worker_fleet",
         "duration_ms": 2350.0,
@@ -54,8 +54,8 @@
         }
       },
       {
-        "span_id": "span-14d305e5283b",
-        "parent_span_id": "span-dc798e22e4d6",
+        "span_id": "span-eb767d8a5944",
+        "parent_span_id": "span-fd9816619c64",
         "name": "ocr.rasterize_and_extract",
         "service": "ocr_pipeline",
         "duration_ms": 850.0,
@@ -66,8 +66,8 @@
         }
       },
       {
-        "span_id": "span-b84efcda1299",
-        "parent_span_id": "span-dc798e22e4d6",
+        "span_id": "span-7690c4adb046",
+        "parent_span_id": "span-fd9816619c64",
         "name": "gemini.generate_structured_extraction",
         "service": "gemini_ai_provider",
         "duration_ms": 680.0,
@@ -78,8 +78,8 @@
         }
       },
       {
-        "span_id": "span-f6e3f6191652",
-        "parent_span_id": "span-dc798e22e4d6",
+        "span_id": "span-55c4f6ff23e0",
+        "parent_span_id": "span-fd9816619c64",
         "name": "postgres.persist_document_entities",
         "service": "postgres_db",
         "duration_ms": 25.0,
@@ -90,8 +90,8 @@
         }
       },
       {
-        "span_id": "span-c8e7a6c1ecef",
-        "parent_span_id": "span-dc798e22e4d6",
+        "span_id": "span-f9ea0716b2eb",
+        "parent_span_id": "span-fd9816619c64",
         "name": "api.serialize_and_respond",
         "service": "api_service",
         "duration_ms": 15.0,
@@ -109,7 +109,7 @@
   "span_accuracy_pct": 100.0,
   "passed": true,
   "details": {
-    "w3c_traceparent": "00-trace-d76ddb1cefdc43048560c62de671329f-span-dc798e22e4d6-01",
+    "w3c_traceparent": "00-trace-53946e7c6dee453aaefcdb595863d77f-span-fd9816619c64-01",
     "sampler": "ParentBased(TraceIdRatioBased(1.0))",
     "instrumentation_libraries": [
       "opentelemetry-instrumentation-fastapi",

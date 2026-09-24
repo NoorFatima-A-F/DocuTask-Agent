@@ -4,7 +4,7 @@ Audits readiness payloads to guarantee zero leakage of internal database hostnam
 credentials, connection strings, stack traces, and internal IP addresses.
 """
 import re
-from typing import Dict, Any, List
+from typing import Dict, Any
 from app.platform_verification.readiness_engine.domain.models import (
     ReadinessSecurityReport,
 )

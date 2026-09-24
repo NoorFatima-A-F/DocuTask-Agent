@@ -4,7 +4,7 @@ Implements the classic FIPA-compliant Contract Net Protocol:
 Call For Proposals (CFP) -> Bids -> Evaluation -> Award / Rejection.
 """
 
-from typing import Dict, List, Optional
+from typing import Optional
 from uuid import UUID, uuid4
 from app.agents.coordination.negotiation import Bid, NegotiationSession
 

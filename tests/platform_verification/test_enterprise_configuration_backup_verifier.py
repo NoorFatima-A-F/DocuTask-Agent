@@ -4,15 +4,9 @@ Comprehensive Test Suite for Enterprise Configuration, Secret & Cryptographic Ba
 import os
 import json
 import pytest
-from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
-    ConfigurationSourceType,
-    ConfigurationCategory,
-    ConfigurationSensitivity,
-    SecretType,
-    KeyAlgorithm,
     ConfigCertificationTier,
 )
 from app.platform_verification.configuration_backup_verification.discovery.configuration_inventory_engine import (
@@ -59,9 +53,6 @@ from app.platform_verification.configuration_backup_verification.simulation.conf
 )
 from app.platform_verification.configuration_backup_verification.scoring.configuration_quality_scoring_engine import (
     ConfigurationQualityScoringEngine,
-)
-from app.platform_verification.configuration_backup_verification.evidence.configuration_evidence_manifest_engine import (
-    ConfigurationEvidenceManifestEngine,
 )
 from app.platform_verification.configuration_backup_verification.runtime.configuration_backup_runtime import (
     ConfigurationBackupVerificationRuntime,

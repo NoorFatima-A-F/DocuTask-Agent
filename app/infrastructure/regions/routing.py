@@ -1,7 +1,7 @@
 """Multi-Region Routing and Region Selection Utilities."""
 
 from typing import Dict, List, Optional
-from app.infrastructure.regions.models import LatencyClass, Region, RegionStatus
+from app.infrastructure.regions.models import Region, RegionStatus
 from app.infrastructure.regions.affinity import TenantAffinityManager
 
 

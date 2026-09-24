@@ -3,7 +3,7 @@ Phase 13.20: Enterprise Agent Registry Service.
 Maintains the centralized enterprise inventory of AI applications, metadata, and lifecycle states.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional
 from datetime import datetime, timezone
 import uuid
 from app.platform_ai_lifecycle.models.schemas import (

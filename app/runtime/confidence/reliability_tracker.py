@@ -3,8 +3,7 @@ Scientific Confidence Engine - Reliability Tracker
 Tracks historical empirical accuracy and reliability metrics per worker, domain, and model.
 """
 
-from typing import Dict, List, Any
-import math
+from typing import Dict
 
 
 class ReliabilityTracker:

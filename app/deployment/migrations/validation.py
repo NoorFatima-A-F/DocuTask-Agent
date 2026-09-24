@@ -1,6 +1,5 @@
 """Expand-Contract Schema Migration Safety Validator."""
 import re
-from typing import List
 from ..core.exceptions import MigrationException
 from .schema import MigrationPhase, SchemaMigration
 

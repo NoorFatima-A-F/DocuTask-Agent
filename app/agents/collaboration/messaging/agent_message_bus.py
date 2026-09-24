@@ -6,12 +6,11 @@ dead-letter queue (DLQ), and distributed message tracing.
 
 from __future__ import annotations
 
-import asyncio
 import logging
 from collections import defaultdict
 from typing import Any, Callable, Coroutine, Dict, List, Optional
 
-from app.agents.collaboration.messaging.agent_message import AgentMessage, MessageType
+from app.agents.collaboration.messaging.agent_message import AgentMessage
 
 logger = logging.getLogger(__name__)
 

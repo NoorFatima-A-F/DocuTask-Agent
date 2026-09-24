@@ -7,7 +7,7 @@ The winning agent receives the allocation at the price bid by the second-highest
 from __future__ import annotations
 
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 
 

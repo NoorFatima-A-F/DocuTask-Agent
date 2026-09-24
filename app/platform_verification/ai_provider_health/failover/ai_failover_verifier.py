@@ -5,7 +5,7 @@ Verifies automated seamless failover from primary to secondary/local models with
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.ai_provider_health.domain.interfaces import (
     IAIFailoverVerifier,

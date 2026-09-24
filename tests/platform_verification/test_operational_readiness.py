@@ -3,7 +3,6 @@ Phase 3H.4.11: Enterprise Operational Readiness Scoring Test Suite
 """
 import os
 import json
-import pytest
 from app.platform_verification.operational_readiness_verification.evaluators import (
     MetricsCompletenessEvaluator,
     MonitoringAccuracyEvaluator,
@@ -22,7 +21,6 @@ from app.platform_verification.operational_readiness_verification.runtime.operat
 from app.platform_verification.operational_readiness_verification.domain.models import (
     MaturityLevel,
     CertificationStatus,
-    RiskLevel,
 )
 
 

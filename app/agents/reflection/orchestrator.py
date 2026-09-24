@@ -5,7 +5,6 @@ learning extraction, recommendations, and feedback formulation across reflection
 """
 
 from typing import Any, Dict, List, Optional
-from uuid import uuid4
 from app.agents.reflection.adaptation_engine import AdaptationEngine, AdaptationProposal
 from app.agents.reflection.critique_engine import CritiqueEngine
 from app.agents.reflection.evaluation import EvaluationReport

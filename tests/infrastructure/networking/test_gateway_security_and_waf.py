@@ -1,10 +1,8 @@
 """Tests for API Gateway Security, WAF Inspection, Rate Limiting, and HMAC."""
 
-import pytest
 from app.infrastructure.networking.gateway import (
     APIGatewaySecurityManager,
     TokenBucketRateLimiter,
-    IPFilter,
     WAFInspector,
     HMACSignatureValidator,
 )

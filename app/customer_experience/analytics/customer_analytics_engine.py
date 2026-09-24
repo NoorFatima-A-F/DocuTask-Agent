@@ -1,7 +1,6 @@
 """Part G: Customer Value & Executive Analytics Dashboard Engine."""
 
 from datetime import datetime, timezone
-from typing import Dict
 from ..domain.interfaces import ICustomerAnalyticsEngine
 from ..domain.models import (
     AutomationMetric,

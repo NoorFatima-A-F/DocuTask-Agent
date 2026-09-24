@@ -1,7 +1,7 @@
 """Compliance Framework Evaluator, Control Coverage, and Framework Scoring."""
 
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
@@ -91,7 +91,7 @@ class ComplianceEvaluator:
             cname = c_def["name"]
             matching = [e for e in compliance_events if e.control_id == cid]
 
-            has_evidence = any(e.evidence_id for e in matching) or len(matching) > 0
+            any(e.evidence_id for e in matching) or len(matching) > 0
             evd_count = sum(1 for e in matching if e.evidence_id)
             total_evd += evd_count
 

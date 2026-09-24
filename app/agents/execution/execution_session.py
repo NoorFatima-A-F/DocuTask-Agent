@@ -4,7 +4,6 @@ Represents an ongoing or completed stateful execution session.
 """
 
 from typing import Any, Dict, Optional
-from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.execution.context import RuntimeContext
 from app.agents.execution.lifecycle import ExecutionLifecycleState

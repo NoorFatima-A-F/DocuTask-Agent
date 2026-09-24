@@ -3,7 +3,7 @@ Composite Scoring Engine.
 Applies weighted multi-factor aggregation to synthesize a single normalized reflection score.
 """
 
-from typing import Dict, List
+from typing import Dict
 from app.agents.reflection.evaluation import EvaluationReport
 
 

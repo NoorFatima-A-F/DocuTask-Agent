@@ -18,8 +18,6 @@ from app.platform_saas.marketplace.ai_marketplace_service import AIMarketplaceSe
 from app.platform_saas.integrations.integration_hub import IntegrationHub
 from app.platform_saas.policy.tenant_policy_engine import TenantPolicyEngine
 from app.platform_saas.audit.enterprise_audit_service import EnterpriseAuditService
-from app.platform_saas.branding.white_label_service import WhiteLabelService
-from app.platform_saas.analytics.saas_analytics_engine import SaaSAnalyticsEngine
 from app.platform_saas.runtime.tenant_runtime_isolation import TenantRuntimeIsolation
 from app.platform_saas.runtime.saas_master_orchestrator import SaaSMasterOrchestrator
 from app.platform_saas.models.schemas import (
@@ -29,7 +27,6 @@ from app.platform_saas.models.schemas import (
     SSOProtocol,
     AssetType,
     ConnectorType,
-    BillingProvider,
     InvoiceStatus,
 )
 
@@ -101,7 +98,7 @@ def test_org_hierarchy_and_workspaces():
         business_unit="Defense & AI",
         country_code="US",
     )
-    child_org = org_svc.create_organization(
+    org_svc.create_organization(
         tenant_id="tenant_stark_ind",
         name="Arc Reactor Robotics",
         parent_org_id=parent_org.organization_id,

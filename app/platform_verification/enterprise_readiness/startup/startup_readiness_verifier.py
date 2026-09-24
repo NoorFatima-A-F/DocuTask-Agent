@@ -4,7 +4,6 @@ Verifies the cold-start sequence, measures Time-To-Ready (TTR), and guarantees
 traffic is rejected until full initialization completes.
 """
 
-from typing import List
 from ..domain.models import StartupReadinessReport
 from ..domain.interfaces import IStartupReadinessVerifier
 

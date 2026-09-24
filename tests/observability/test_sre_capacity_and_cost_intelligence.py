@@ -1,6 +1,5 @@
 """Tests for Capacity Planning, Saturation Forecasting, and Cost Optimization."""
 
-import pytest
 from app.observability.capacity.planner import CapacityPlanner
 from app.observability.cost.analyzer import CostAnalyzer
 from app.observability.cost.optimization import CostOptimizationEngine, RecommendationType

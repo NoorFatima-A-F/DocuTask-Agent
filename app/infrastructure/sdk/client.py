@@ -1,17 +1,14 @@
 """Enterprise Infrastructure Developer SDK Client."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from ..config.manager import ConfigurationManager
-from ..core.environment import EnvironmentManager, EnvironmentType
+from ..core.environment import EnvironmentManager
 from ..core.resources import (
     AllocatedResource,
-    ComputeType,
-    NetworkType,
     ResourceCategory,
     ResourceManager,
     ResourceSpecification,
-    StorageType,
 )
 from ..core.runtime import InfrastructureRuntime, ServiceInstance
 from ..events.publisher import InfrastructureEventPublisher
@@ -19,7 +16,7 @@ from ..providers.base import SecretProvider
 from ..providers.kubernetes.secrets import KubernetesSecretProvider
 from ..services.discovery import ServiceDiscovery
 from ..services.health import ServiceHealth, ServiceHealthMonitor
-from ..services.registry import ServiceRegistration, ServiceRegistry
+from ..services.registry import ServiceRegistry
 
 
 class InfrastructureSDK:

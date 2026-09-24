@@ -1,13 +1,12 @@
 """Tests for Cost Predictor, Latency Predictor, Risk Intelligence, and Simulator."""
 
-import pytest
 from app.runtime.planning.goal_engine import GoalUnderstandingEngine
 from app.runtime.planning.constraint_engine import ConstraintExtractionEngine
 from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine
 from app.runtime.planning.strategy_generator import CandidateStrategyGenerator
 from app.runtime.planning.cost_predictor import CostPredictionEngine
 from app.runtime.planning.latency_predictor import LatencyPredictionEngine
-from app.runtime.planning.risk_engine import RiskIntelligenceEngine, RiskVectorType
+from app.runtime.planning.risk_engine import RiskIntelligenceEngine
 from app.runtime.planning.execution_simulator import ExecutionSimulator
 
 

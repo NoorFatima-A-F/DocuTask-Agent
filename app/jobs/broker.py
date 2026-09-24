@@ -5,7 +5,7 @@ Implements HIGH, MEDIUM, and LOW priority queues with starvation prevention.
 """
 
 import asyncio
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from app.core.logging import logger
 
 

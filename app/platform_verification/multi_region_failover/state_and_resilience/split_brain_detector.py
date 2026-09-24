@@ -3,7 +3,7 @@ Split-Brain Prevention & Fencing Token Subsystem (Part 3G.6H).
 Proves that simultaneous regional activations or network partitions never permit dual active writers.
 """
 from dataclasses import dataclass, field
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 
 @dataclass

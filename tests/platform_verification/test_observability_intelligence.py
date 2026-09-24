@@ -66,12 +66,6 @@ from app.platform_verification.observability_intelligence.verifiers.aiops_explai
 from app.platform_verification.observability_intelligence.verifiers.aiops_validation_verifier import (
     AIOpsValidationVerifier,
 )
-from app.platform_verification.observability_intelligence.scoring.predictive_reliability_scorer import (
-    PredictiveReliabilityScorer,
-)
-from app.platform_verification.observability_intelligence.exporter.observability_intelligence_evidence_exporter import (
-    ObservabilityIntelligenceEvidenceExporter,
-)
 from app.platform_verification.observability_intelligence.runtime.observability_intelligence_runtime import (
     ObservabilityIntelligenceRuntime,
 )

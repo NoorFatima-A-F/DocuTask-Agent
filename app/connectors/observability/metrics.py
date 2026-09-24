@@ -5,9 +5,9 @@ Captures real-time telemetry: invocation counters, latency percentiles, error ra
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from app.connectors.core.models import ExecutionResult

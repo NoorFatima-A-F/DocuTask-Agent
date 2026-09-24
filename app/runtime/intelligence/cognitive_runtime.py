@@ -7,7 +7,7 @@ planner uncertainty decomposition, and EVOI sensing action execution.
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.runtime.events.event_bus import EventBus
 from app.runtime.events.probabilistic_events import (
@@ -15,12 +15,11 @@ from app.runtime.events.probabilistic_events import (
     BeliefUpdatedEvent,
     PosteriorComputedEvent,
     EntropyReducedEvent,
-    InformationRequestedEvent,
     WorldPredictionGeneratedEvent,
     PlannerConfidenceCalculatedEvent,
     ExpectedValueInformationComputedEvent,
 )
-from app.runtime.intelligence.belief_state import BeliefStateEngine, BeliefSnapshot, BetaBelief
+from app.runtime.intelligence.belief_state import BeliefStateEngine
 from app.runtime.intelligence.world_model import WorldModel, WorldStateForecast
 from app.runtime.intelligence.bayesian_update import BayesianUpdateEngine, BayesianPosteriorReport
 from app.runtime.intelligence.planner_uncertainty import PlannerUncertaintyEngine, UncertaintyDecomposition

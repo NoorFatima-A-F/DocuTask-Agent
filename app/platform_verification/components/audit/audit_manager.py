@@ -1,7 +1,7 @@
 """
 Audit Manager: Immutable append-only hash-chained ledger: H_n = SHA256(H_{n-1} || Payload_n).
 """
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 import hashlib
 import json
 from datetime import datetime, timezone

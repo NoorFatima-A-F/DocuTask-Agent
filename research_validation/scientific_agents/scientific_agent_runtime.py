@@ -92,13 +92,13 @@ class ScientificAgentRuntime:
         cycle_id = f"cycle_{len(self.message_history)}"
 
         # 1. Coordinator routes intent to Planner and Memory
-        m1 = self.send_message(
+        self.send_message(
             ScientificAgentRole.COORDINATOR,
             ScientificAgentRole.PLANNER,
             action="REQUEST_PLAN",
             payload={"topic": research_topic},
         )
-        m2 = self.send_message(
+        self.send_message(
             ScientificAgentRole.COORDINATOR,
             ScientificAgentRole.MEMORY,
             action="QUERY_PRIORS",
@@ -106,13 +106,13 @@ class ScientificAgentRuntime:
         )
         
         # 2. Benchmark and Statistics collaborate
-        m3 = self.send_message(
+        self.send_message(
             ScientificAgentRole.PLANNER,
             ScientificAgentRole.BENCHMARK,
             action="SPECIFY_DATASETS",
             payload={"datasets": ["funsd", "sroie"]},
         )
-        m4 = self.send_message(
+        self.send_message(
             ScientificAgentRole.BENCHMARK,
             ScientificAgentRole.STATISTICS,
             action="REQUEST_UNCERTAINTY_BUDGET",
@@ -120,13 +120,13 @@ class ScientificAgentRuntime:
         )
 
         # 3. Governance and Reviewer evaluate compliance
-        m5 = self.send_message(
+        self.send_message(
             ScientificAgentRole.STATISTICS,
             ScientificAgentRole.GOVERNANCE,
             action="VERIFY_POLICIES",
             payload={"slsa_level": 3, "zero_fabrication": True},
         )
-        m6 = self.send_message(
+        self.send_message(
             ScientificAgentRole.GOVERNANCE,
             ScientificAgentRole.REVIEWER,
             action="SIMULATE_PEER_REVIEW",
@@ -134,7 +134,7 @@ class ScientificAgentRuntime:
         )
 
         # 4. Publication summarizes
-        m7 = self.send_message(
+        self.send_message(
             ScientificAgentRole.REVIEWER,
             ScientificAgentRole.PUBLICATION,
             action="EMIT_DRAFT_UPDATE",

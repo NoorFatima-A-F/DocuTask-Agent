@@ -1,6 +1,5 @@
 """Tests for Risk Scoring, Category Breakdown, and Trend Detection."""
 
-import pytest
 from app.governance.analytics.risk.scoring import RiskCategory, RiskScoringModel
 from app.governance.analytics.risk.analyzer import RiskAnalyzer
 from app.governance.analytics.risk.trends import RiskTrendAnalyzer

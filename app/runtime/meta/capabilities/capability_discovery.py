@@ -5,7 +5,6 @@ Discovers missing domain capabilities, synthesizes reusable workflow templates, 
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import hashlib
 from typing import Any, Dict, List, Optional
 import uuid
 

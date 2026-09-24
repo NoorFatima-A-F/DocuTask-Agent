@@ -16,7 +16,7 @@ from typing import Any, Dict, List
 import xml.etree.ElementTree as ET
 
 from research_validation.provenance.provenance_schema import (
-    OpenLineageRunEvent, ProvDocument, ProvRelation
+    OpenLineageRunEvent, ProvDocument
 )
 
 

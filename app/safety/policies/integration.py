@@ -1,7 +1,7 @@
 """Governance Policy Integration & Tenant Safety Policy Configuration."""
 
-from typing import Dict, Optional
-from pydantic import BaseModel, Field
+from typing import Dict
+from pydantic import BaseModel
 
 
 class TenantSafetyPolicy(BaseModel):

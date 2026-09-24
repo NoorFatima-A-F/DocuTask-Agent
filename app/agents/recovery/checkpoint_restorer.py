@@ -5,7 +5,6 @@ Selects optimal checkpoint (nearest, best, policy-driven) and orchestrates state
 
 from typing import Any, Dict, Optional
 from uuid import UUID
-from app.agents.recovery.exceptions import CheckpointRestorationException
 
 
 class CheckpointRestorer:

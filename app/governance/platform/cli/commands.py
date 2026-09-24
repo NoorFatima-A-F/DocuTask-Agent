@@ -2,7 +2,6 @@
 
 import argparse
 import json
-import sys
 from typing import Any, Dict, List, Optional
 from .client import CLIConfig
 

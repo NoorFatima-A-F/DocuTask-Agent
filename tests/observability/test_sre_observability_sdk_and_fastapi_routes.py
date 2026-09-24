@@ -1,21 +1,16 @@
 """Tests for Observability SDK, Decorators, and FastAPI REST API Endpoints."""
 
-import pytest
 from app.observability.api.routes import (
-    acknowledge_alert,
     create_alert_rule,
     create_incident,
     get_dashboard_data,
     get_metrics_snapshot,
     get_observability_sdk,
-    get_trace_by_id,
-    list_alerts,
     list_incidents,
     perform_rca,
     search_logs,
 )
 from app.observability.api.schemas import (
-    AlertAcknowledgeRequest,
     AlertCreateRequest,
     IncidentCreateRequest,
     LogQueryRequest,

@@ -11,10 +11,10 @@ import time
 import uuid
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
-from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine, CapabilityProfile
+from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine
 
 
 class QueuePriority(int, Enum):

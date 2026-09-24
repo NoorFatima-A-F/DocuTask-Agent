@@ -3,7 +3,7 @@
 from typing import List, Optional
 from pydantic import BaseModel
 from ..gateway.decision import SafetyStatus, ViolationSeverity, SafetyViolation
-from .scoring import CompositeRiskScorer, RiskComponentScores, RiskWeights
+from .scoring import CompositeRiskScorer, RiskComponentScores
 
 
 class RiskAssessmentResult(BaseModel):

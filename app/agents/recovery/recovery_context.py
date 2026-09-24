@@ -2,8 +2,7 @@
 Recovery Context Details.
 """
 
-from typing import Any, Dict, Optional
-from uuid import UUID
+from typing import Any, Dict
 from pydantic import BaseModel, Field
 
 

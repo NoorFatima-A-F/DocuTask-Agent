@@ -4,7 +4,7 @@ Identifies recurring patterns, systemic tool degradation, planner drift, and rec
 across multiple execution traces.
 """
 
-from typing import Any, Dict, List
+from typing import Dict, List
 from pydantic import BaseModel, Field
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 

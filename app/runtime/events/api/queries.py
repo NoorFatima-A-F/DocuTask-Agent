@@ -5,12 +5,10 @@ Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 
 from typing import Dict, List, Any, Optional
 from app.runtime.events.models.event import DomainEvent
-from app.runtime.events.models.event_types import DomainEventType
 from app.runtime.events.store.event_store import domain_event_store
 from app.runtime.events.bus.event_bus import domain_event_bus
 from app.runtime.events.projections.dashboard_projection import dashboard_projection
 from app.runtime.events.projections.planner_projection import planner_projection
-from app.runtime.events.projections.mission_projection import mission_projection
 from app.runtime.events.projections.worker_projection import worker_projection
 from app.runtime.events.projections.telemetry_projection import telemetry_projection
 from app.runtime.events.filters.filtering import EventFilterEngine, EventFilterCriteria

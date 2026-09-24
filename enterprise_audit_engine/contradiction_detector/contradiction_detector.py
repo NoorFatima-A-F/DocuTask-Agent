@@ -9,7 +9,6 @@ Detects discrepancies and semantic conflicts between:
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
-from enterprise_audit_engine.domain.evidence.models import EvidenceClassification
 
 
 class ContradictionItem(BaseModel):

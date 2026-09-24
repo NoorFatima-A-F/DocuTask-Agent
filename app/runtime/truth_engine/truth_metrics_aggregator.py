@@ -7,8 +7,8 @@ active ledgers, evidence graphs, and cryptographic anchors with zero synthetic s
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Any, Dict
 
 from app.runtime.decision_ledger.decision_ledger import global_decision_ledger
 from app.runtime.evidence.artifact_registry import global_artifact_registry

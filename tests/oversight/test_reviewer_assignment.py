@@ -1,6 +1,5 @@
 """Tests for Reviewer Assignment Engine, Skills, and Authority Matrix."""
 
-import pytest
 from app.oversight.core.context import OversightContext
 from app.oversight.reviews.requests import ReviewRequest
 from app.oversight.reviews.assignments import (

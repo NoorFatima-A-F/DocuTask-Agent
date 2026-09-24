@@ -9,9 +9,6 @@ from pathlib import Path
 from app.platform_verification.document_storage_verification.runtime.storage_backup_runtime import (
     StorageBackupVerificationRuntime,
 )
-from app.platform_verification.document_storage_verification.domain.models import (
-    StorageCertificationTier,
-)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("DocumentStorageVerifier")
@@ -35,11 +32,11 @@ def main() -> int:
     versioning = result["storage_versioning"]
     consistency = result["metadata_consistency"]
     corruption = result["storage_corruption"]
-    tenant = result["tenant_isolation"]
-    security = result["storage_encryption"]
+    result["tenant_isolation"]
+    result["storage_encryption"]
     compression = result["compression_dedup"]
     perf = result["storage_performance"]
-    restore = result["restore_simulation"]
+    result["restore_simulation"]
     cross_sys = result["cross_system_validation"]
     artifacts = result["exported_manifest_paths"]
 

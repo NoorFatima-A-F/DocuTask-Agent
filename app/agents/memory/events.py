@@ -3,7 +3,7 @@ Memory Subsystem Domain Events.
 Pub/Sub compatible domain events for memory lifecycle changes.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from app.agents.events import AgentEvent
 
 

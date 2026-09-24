@@ -3,7 +3,6 @@ Tests for MemoryIntelligencePlatform and MemoryConsolidationEngine.
 """
 
 import time
-import pytest
 from app.knowledge.memory.consolidation import MemoryConsolidationEngine
 from app.knowledge.memory.engine import MemoryIntelligencePlatform, MemoryTier
 
@@ -66,7 +65,7 @@ def test_memory_consolidation_engine():
     )
 
     # High-access item in SHORT_TERM memory
-    st_item = platform.store(
+    platform.store(
         tier=MemoryTier.SHORT_TERM,
         key="frequent_vendor_vat",
         value="US-TAX-99887766",

@@ -7,15 +7,13 @@ with agent assignments, tool selection, fallback strategies, and verification ga
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Optional
 
 from app.agents.intelligence.goal.goal_specification import GoalSpecification
 from app.agents.planning.capability_discovery import CapabilityDiscovery
 from app.agents.planning.execution_plan import (
     ExecutionPlan,
     FallbackStrategy,
-    PlannedTask,
-    TaskStatus,
 )
 from app.agents.planning.task_decomposer import TaskDecomposer
 

@@ -1,7 +1,7 @@
 """Domain models for Enterprise Audit Certification Authority."""
 
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime, timezone, timedelta
 from pydantic import BaseModel, Field, ConfigDict
 

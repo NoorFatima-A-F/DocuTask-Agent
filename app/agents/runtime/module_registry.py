@@ -3,7 +3,7 @@ Module Registry & Descriptor.
 Defines ModuleDescriptor contracts and maintains the platform catalog of subsystem modules.
 """
 
-from typing import Any, Callable, Dict, List, Optional, Type
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 

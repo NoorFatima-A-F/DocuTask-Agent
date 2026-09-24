@@ -10,20 +10,14 @@ from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.exceptions import ResourceNotFoundException
-from app.ocr.pipeline import OCRPipeline
-from app.ocr.providers.tesseract import TesseractOCRProvider
-from app.repositories.ai_extraction_repository import AIExtractionRepository
 from app.repositories.document_repository import DocumentRepository
-from app.repositories.extracted_text_repository import ExtractedTextRepository
 from app.repositories.processing_job_repository import ProcessingJobRepository
 from app.repositories.user_repository import UserRepository
-from app.services.ai_extraction_service import AIExtractionService
 from app.services.document_service import DocumentService
-from app.services.ocr_service import OCRService
 from app.storage.local import LocalStorageProvider
 from app.workers.dispatcher import JobDispatcher
-from app.workers.exceptions import DuplicateJobException, JobNotFoundException
-from app.workers.jobs import JobState, JobTask, JobType
+from app.workers.exceptions import DuplicateJobException
+from app.workers.jobs import JobState, JobTask
 from app.workers.queue import AsyncInMemoryJobQueue
 from app.workers.worker import AsyncWorkerEngine
 

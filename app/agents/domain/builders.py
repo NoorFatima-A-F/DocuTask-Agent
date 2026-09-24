@@ -7,18 +7,14 @@ Enforces fail-fast validation during construction.
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 
-from app.agents.domain.artifacts import ExecutionArtifact
 from app.agents.domain.enums import (
-    ArtifactType,
     GoalType,
     PriorityLevel,
-    ResultStatus,
     TaskType,
     WorkflowType,
 )
 from app.agents.domain.goals import Goal, GoalMetadata
 from app.agents.domain.policies import ExecutionPolicy, RetryPolicy, TimeoutPolicy
-from app.agents.domain.results import AgentResult, ExecutionResult, PlanningResult
 from app.agents.domain.tasks import AgentTask, ExtractionTask, OCRTask
 from app.agents.domain.validators import DomainValidator
 from app.agents.domain.workflows import WorkflowEdge, WorkflowGraph, WorkflowNode

@@ -3,7 +3,7 @@ DocuTask Agent - Causation DAG Builder & Trace Engine
 Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from app.runtime.events.models.event import DomainEvent
 
 

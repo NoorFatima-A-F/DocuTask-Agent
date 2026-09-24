@@ -1,7 +1,7 @@
 """Part A: Enterprise Dependency Mapping Verifier."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IDependencyMappingVerifier
 from ..domain.models import (
     CheckResult,

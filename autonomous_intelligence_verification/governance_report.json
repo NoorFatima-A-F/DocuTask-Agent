@@ -10,7 +10,7 @@
       "policy_name": "policy-immutable-ledger-integrity",
       "status": "COMPLIANT",
       "evidence_signature": "4195de53b317bceafb18368f2b13008614f56cc2ee0c6f2c865da006f4874cf9",
-      "verified_at": "2026-09-19T07:04:32.985599+00:00"
+      "verified_at": "2026-09-24T21:54:47.881000+00:00"
     },
     {
       "check_id": "gov-chk-002",
@@ -18,7 +18,7 @@
       "policy_name": "policy-autonomous-execution-privilege",
       "status": "COMPLIANT",
       "evidence_signature": "43b44e2c1918694cf6e4f67f1880f603b5a095dccf8f93e94c34d349b79d9257",
-      "verified_at": "2026-09-19T07:04:32.985627+00:00"
+      "verified_at": "2026-09-24T21:54:47.881030+00:00"
     },
     {
       "check_id": "gov-chk-003",
@@ -26,7 +26,7 @@
       "policy_name": "policy-gdpr-soc2-audit-tracking",
       "status": "COMPLIANT",
       "evidence_signature": "158027467a399a1335f44f9296d1e09c1a82e1fb56b8b1334e89df1d633411b3",
-      "verified_at": "2026-09-19T07:04:32.985651+00:00"
+      "verified_at": "2026-09-24T21:54:47.881054+00:00"
     },
     {
       "check_id": "gov-chk-004",
@@ -34,7 +34,7 @@
       "policy_name": "policy-pii-scrubbing-in-telemetry",
       "status": "COMPLIANT",
       "evidence_signature": "5c88404f4e046be7783c67114645d52ff03b8b1c2ca73d08bd37604b8d4327bc",
-      "verified_at": "2026-09-19T07:04:32.985674+00:00"
+      "verified_at": "2026-09-24T21:54:47.881075+00:00"
     },
     {
       "check_id": "gov-chk-005",
@@ -42,7 +42,7 @@
       "policy_name": "policy-canary-rollback-safety-net",
       "status": "COMPLIANT",
       "evidence_signature": "f52169cb6900fe6fcaafae4ff6897d0e76ccf1ce0b4c1177847069160545cfc3",
-      "verified_at": "2026-09-19T07:04:32.985697+00:00"
+      "verified_at": "2026-09-24T21:54:47.881096+00:00"
     }
   ],
   "immutable_ledger_verified": true

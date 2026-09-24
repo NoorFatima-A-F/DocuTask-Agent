@@ -3,11 +3,8 @@ Comprehensive Unit and Integration Test Suite for Phase V12 — Enterprise AI Pl
 """
 
 import os
-import pytest
 from app.certification.domain.models import (
     MaturityTier,
-    RiskCategory,
-    RiskSeverity,
 )
 from app.certification.aggregation.result_aggregator import ResultAggregator
 from app.certification.aggregation.maturity_engine import MaturityEngine

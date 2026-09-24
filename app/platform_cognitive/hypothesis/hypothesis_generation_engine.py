@@ -2,8 +2,7 @@
 Hypothesis Generation Engine
 Proactively generates business and operational hypotheses with confidence scoring and suggested action.
 """
-from typing import Dict, List, Any
-from datetime import datetime, timezone
+from typing import Dict, List
 from ..models.schemas import Hypothesis
 
 class HypothesisGenerationEngine:

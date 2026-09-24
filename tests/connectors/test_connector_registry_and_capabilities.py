@@ -5,7 +5,6 @@ Tests for ConnectorRegistry and CapabilityRegistry.
 import pytest
 from app.connectors.core.exceptions import CapabilityNotFoundError, ConnectorNotFoundError
 from app.connectors.core.models import (
-    CapabilityDescriptor,
     Connector,
     ConnectorCategory,
     ConnectorHealth,

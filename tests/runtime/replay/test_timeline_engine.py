@@ -2,7 +2,6 @@
 Unit Tests for Event-Sourced Timeline Engine.
 """
 
-import pytest
 from app.runtime.observability.schemas import RuntimeEvent, EventCategory, EventType, EventSeverity
 from app.runtime.timeline.timeline_engine import MasterTimelineEngine
 

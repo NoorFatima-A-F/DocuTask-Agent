@@ -2,7 +2,7 @@
 Feature Flag System.
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any
+from typing import Dict
 
 class FeatureFlagProvider(ABC):
     @abstractmethod

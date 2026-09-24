@@ -16,11 +16,9 @@ Demonstrates the end-to-end execution of Phases 72A through 81A:
 
 from __future__ import annotations
 import json
-import os
-import sys
 
 from research_validation.provenance.independent_verifier import (
-    IndependentProvenanceVerifier, VerificationStatus
+    IndependentProvenanceVerifier
 )
 from research_validation.provenance.evidence_graph import EvidenceGraph
 from research_validation.provenance.provenance_models import (
@@ -28,19 +26,19 @@ from research_validation.provenance.provenance_models import (
 )
 from research_validation.datasets.public_benchmarks import DatasetType
 from research_validation.datasets.benchmark_executor import (
-    PublicBenchmarkExecutor, BenchmarkExecutionStatus
+    PublicBenchmarkExecutor
 )
 from research_validation.endurance.experiment_scheduler import (
-    AsynchronousExperimentScheduler, ExperimentStatus
+    AsynchronousExperimentScheduler
 )
 from research_validation.telemetry.production_evidence_collector import (
-    ProductionEvidenceCollector, TelemetryCollectionStatus
+    ProductionEvidenceCollector
 )
 from research_validation.claims.claim_verifier import (
-    ScientificClaimVerifier, ClaimClassification
+    ScientificClaimVerifier
 )
 from research_validation.reproducibility.reproduce_all import (
-    MasterReproducibilityOrchestrator, ReproducibilityVerdict
+    MasterReproducibilityOrchestrator
 )
 from research_validation.meta_validation.validator_benchmark import (
     ValidatorMetaBenchmarkRunner
@@ -52,7 +50,7 @@ from research_validation.workspace.reviewer_workspace import (
     ReviewerWorkspaceBuilder
 )
 from research_validation.confidence.scientific_confidence_engine import (
-    ScientificConfidenceEngine, ScientificReadinessBadge
+    ScientificConfidenceEngine
 )
 
 

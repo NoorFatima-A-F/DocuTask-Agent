@@ -5,7 +5,6 @@ Predictive Intelligence, A/B Canary Experimentation, HITL Improvements, AI Gover
 """
 
 import pytest
-import asyncio
 from fastapi.testclient import TestClient
 from app.main import app
 from app.runtime.ai_operations import (
@@ -15,7 +14,6 @@ from app.runtime.ai_operations import (
     EvaluationMetricsCalculator,
     LLMJudge,
     EvaluationEngine,
-    TraceAnalyzer,
     FailureClassifier,
     DebuggingEngine,
     ModelCatalog,

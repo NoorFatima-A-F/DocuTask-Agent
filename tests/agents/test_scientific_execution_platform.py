@@ -3,13 +3,12 @@ Comprehensive Test Suite for Orchestrated Scientific Experimentation Platform
 (Phases 82B.1 through 82B.12)
 """
 
-import json
 import pytest
 from research_validation.scientific_execution.experiment_manifest import (
     ExperimentManifest, ExperimentParameters, DatasetFingerprint, ExperimentStatus
 )
 from research_validation.scientific_execution.experiment_registry import (
-    ExperimentRegistry, ExperimentRecord
+    ExperimentRegistry
 )
 from research_validation.scientific_execution.experiment_dependency_graph import (
     ExperimentDependencyGraph, PipelineStageType, NodeState
@@ -18,28 +17,28 @@ from research_validation.scientific_execution.experiment_runner import (
     ScientificExperimentRunner, ExperimentRunResult
 )
 from research_validation.scientific_execution.experiment_orchestrator import (
-    ScientificExperimentOrchestrator, OrchestrationReport
+    ScientificExperimentOrchestrator
 )
 from research_validation.scientific_execution.experiment_replay import (
-    ExperimentReplayEngine, ExperimentReplayReport
+    ExperimentReplayEngine
 )
 from research_validation.scientific_execution.experiment_archive import (
-    ExperimentArchiver, ArchivedExperimentBundle
+    ExperimentArchiver
 )
 from research_validation.scientific_execution.experiment_versioning import (
-    ExperimentVersionManager, VersionChangeType, SemanticVersion
+    ExperimentVersionManager, VersionChangeType
 )
 from research_validation.scientific_execution.experiment_scheduler_v2 import (
     ExperimentSchedulerV2, PriorityLevel
 )
 from research_validation.scientific_execution.evidence_reconciliation import (
-    EvidenceReconciliationEngine, ConflictSeverity, ConsensusReport
+    EvidenceReconciliationEngine, ConflictSeverity
 )
 from research_validation.artifact_generation.paper_figures import (
-    PaperFigureGenerator, GeneratedFigure
+    PaperFigureGenerator
 )
 from research_validation.artifact_generation.publication_tables import (
-    PublicationTableGenerator, PublicationTable
+    PublicationTableGenerator
 )
 from research_validation.artifact_generation.latex_export import LatexExporter
 from research_validation.artifact_generation.markdown_export import MarkdownExporter
@@ -47,17 +46,14 @@ from research_validation.artifact_generation.csv_export import CSVExporter
 from research_validation.artifact_generation.parquet_export import ParquetDatasetExporter
 from research_validation.artifact_generation.artifact_index import ArtifactIndexer
 from research_validation.review.artifact_completeness_checker import (
-    ArtifactCompletenessChecker, MandatoryField
-)
-from research_validation.review.review_comment_generator import (
-    ReviewCommentGenerator, CommentCategory
+    ArtifactCompletenessChecker
 )
 from research_validation.review.review_score_predictor import (
-    ReviewScorePredictor, ReviewVerdict
+    ReviewVerdict
 )
 from research_validation.review.review_simulator import ReviewSimulator
 from research_validation.review.review_readiness_matrix import (
-    ReviewReadinessMatrixBuilder, DimensionStatus
+    ReviewReadinessMatrixBuilder
 )
 from research_validation.uncertainty.uncertainty_propagation import (
     UncertaintyPropagationEngine
@@ -70,14 +66,13 @@ from research_validation.uncertainty.evidence_weighting import (
 )
 from research_validation.uncertainty.calibration import EmpiricalCalibrationEngine
 from research_validation.reproducibility.cross_platform_runner import (
-    CrossPlatformRunner, PlatformTarget
+    CrossPlatformRunner
 )
 from research_validation.reproducibility.cross_architecture_runner import (
-    CrossArchitectureRunner, ArchitectureTarget
+    CrossArchitectureRunner
 )
 from research_validation.reproducibility.environment_diff import EnvironmentDiffEngine
 from research_validation.reproducibility.binary_reproducibility import BinaryReproducibilityAnalyzer
-from research_validation.reproducibility.execution_diff import ExecutionDiffComparator
 
 
 # Fixture: Sample Manifest

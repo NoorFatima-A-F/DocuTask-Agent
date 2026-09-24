@@ -6,11 +6,10 @@ chaos fault injections, golden dataset evaluations, cost analytics, and FMEA.
 
 from __future__ import annotations
 
-import asyncio
 import logging
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from app.evidence.collectors.test_collector import TestEvidenceCollector
 from app.evidence.evaluators.benchmark_suite import SubsystemBenchmarkSuite
@@ -20,10 +19,9 @@ from app.evidence.evaluators.fmea_risk_engine import FMEARiskEngine
 from app.evidence.evaluators.golden_dataset import GoldenDatasetEvaluationHarness
 from app.evidence.evaluators.readiness_evaluator import ProductionReadinessEvaluator
 from app.evidence.evaluators.scalability_suite import ScalabilityValidationLaboratory
-from app.evidence.registry.evidence_models import EvidenceItem
 from app.evidence.registry.evidence_registry import EvidenceRegistry
 from app.evidence.traceability.traceability_engine import EvidenceTraceabilityEngine
-from app.evidence.validators.evidence_validator import EvidenceValidator, ValidationReport
+from app.evidence.validators.evidence_validator import EvidenceValidator
 
 logger = logging.getLogger(__name__)
 

@@ -1,6 +1,5 @@
 """Tests for Runtime Truth Engine."""
 
-import pytest
 from app.runtime.truth_engine.truth_metrics_aggregator import (
     TruthMetricsAggregator,
 )

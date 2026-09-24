@@ -1,6 +1,6 @@
 """Enterprise Database Migration Manager."""
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional
+from typing import Callable, Dict, List, Optional
 from ..core.exceptions import MigrationException
 from .schema import MigrationPhase, SchemaMigration
 from .validation import ExpandContractValidator

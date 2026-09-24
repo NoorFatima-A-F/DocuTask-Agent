@@ -1,10 +1,9 @@
 """GitOps Controller and State Reconciliation Engine (Req 25, 27)."""
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, Optional
-import uuid
+from typing import Dict, Optional
 
-from .drift import DriftDetector, DriftPolicyAction, DriftReport
+from .drift import DriftDetector, DriftReport
 from .providers.argocd import ArgoCDProvider
 from .providers.base import GitOpsProvider
 

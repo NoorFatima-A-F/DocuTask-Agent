@@ -3,7 +3,7 @@ Knowledge Validator for Phase 13.5 (ARLP-KIP).
 Validates schema conformance, confidence thresholds, and lineage verification for knowledge records.
 """
 
-from typing import Dict, Any, List
+from typing import Any, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

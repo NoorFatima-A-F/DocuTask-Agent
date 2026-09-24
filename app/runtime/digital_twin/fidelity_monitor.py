@@ -3,7 +3,7 @@ Digital Twin Runtime - Fidelity Monitor
 Quantifies how closely the digital twin shadow environment mirrors production reality.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 
 

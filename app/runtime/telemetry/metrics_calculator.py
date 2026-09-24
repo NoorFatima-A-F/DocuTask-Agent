@@ -1,7 +1,7 @@
 # Derived Metrics Engine
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Any, Dict, Generic, List, Optional, TypeVar
+from typing import Generic, List, Optional, TypeVar
 from app.runtime.events.base import RuntimeEvent
 from app.runtime.telemetry.store import RuntimeTelemetryStore
 

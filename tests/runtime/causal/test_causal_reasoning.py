@@ -1,4 +1,3 @@
-import pytest
 from app.runtime.causal.structural_causal_model import StructuralCausalModel
 from app.runtime.causal.do_calculus import DoCalculusEngine
 from app.runtime.causal.causal_discovery import CausalDiscoveryEngine

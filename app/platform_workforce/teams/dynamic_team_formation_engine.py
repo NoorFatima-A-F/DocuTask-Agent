@@ -1,9 +1,8 @@
 """
 3. Dynamic Team Formation Engine Subsystem
 """
-from typing import Dict, List, Optional
-from datetime import datetime, timezone
-from app.platform_workforce.models.schemas import DynamicTeam, DigitalEmployee, EmployeeStatus
+from typing import Dict, List
+from app.platform_workforce.models.schemas import DynamicTeam, EmployeeStatus
 from app.platform_workforce.registry.workforce_registry import workforce_registry
 
 class DynamicTeamFormationEngine:

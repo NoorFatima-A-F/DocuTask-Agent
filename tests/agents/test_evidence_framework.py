@@ -12,7 +12,6 @@ Test suite for Evidence-Driven Engineering Subsystem:
 10. Master Evidence Generator End-to-End Execution
 """
 
-import time
 import pytest
 from pathlib import Path
 
@@ -20,7 +19,7 @@ from app.evidence.collectors.benchmark_collector import BenchmarkEvidenceCollect
 from app.evidence.evaluators.chaos_suite import ChaosEngineeringPlatform
 from app.evidence.evaluators.cost_intelligence import CostIntelligencePlatform
 from app.evidence.evaluators.fmea_risk_engine import FMEARiskEngine
-from app.evidence.evaluators.golden_dataset import GoldenDatasetEvaluationHarness, GoldenDatasetRepository
+from app.evidence.evaluators.golden_dataset import GoldenDatasetEvaluationHarness
 from app.evidence.evaluators.readiness_evaluator import ProductionReadinessEvaluator
 from app.evidence.evaluators.scalability_suite import ScalabilityValidationLaboratory
 from app.evidence.generators.evidence_generator import MasterEvidenceGenerator

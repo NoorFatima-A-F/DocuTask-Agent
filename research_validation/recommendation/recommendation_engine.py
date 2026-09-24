@@ -7,7 +7,6 @@ hyperparameter sweeps, and missing statistical validations.
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -15,7 +14,7 @@ from research_validation.recommendation.roi_calculator import (
     ExperimentROICalculator, ExperimentROIEstimate
 )
 from research_validation.recommendation.uncertainty_sampler import (
-    UncertaintySampler, UncertaintyTarget
+    UncertaintySampler
 )
 from research_validation.provenance.hashing import hash_canonical_json
 

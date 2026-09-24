@@ -2,7 +2,6 @@
 Platform Plugin Validator.
 """
 
-from typing import Any, Dict
 from .models import PluginManifest
 from ..kernel.exceptions import PluginException
 from ..kernel.versioning import SemanticVersion

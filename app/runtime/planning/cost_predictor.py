@@ -7,10 +7,10 @@ pricing, OCR API calls, compute resource time, and memory indexing.
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Optional
+from typing import Dict
 from pydantic import BaseModel, Field
 
-from app.runtime.planning.strategy_generator import CandidateStrategy, StrategyStep
+from app.runtime.planning.strategy_generator import CandidateStrategy
 
 
 class CostPredictionResult(BaseModel):

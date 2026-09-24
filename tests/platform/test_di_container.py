@@ -1,7 +1,7 @@
 """Tests for Dependency Injection Container."""
 
 import pytest
-from app.platform.di.container import DIContainer, ServiceProvider
+from app.platform.di.container import DIContainer
 
 
 def test_di_container_resolution():

@@ -1,9 +1,8 @@
 """Override Validation against Policies and Safety Constraints."""
 
-from typing import Dict, Any, List, Optional, Tuple
+from typing import List, Optional, Tuple
 from .policies import OverridePolicy
 from ..core.context import OversightContext
-from ..core.exceptions import InvalidOverrideError
 
 
 class OverrideValidator:

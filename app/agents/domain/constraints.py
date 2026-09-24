@@ -3,7 +3,7 @@ Reusable Domain Constraint Models.
 Models Time, Budget, Token, Security, Document, Resource, Latency, Compliance, Quality, and Confidence constraints.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any
 from pydantic import BaseModel, Field
 from app.agents.domain.enums import ConstraintType
 

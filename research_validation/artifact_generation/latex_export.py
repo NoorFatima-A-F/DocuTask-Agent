@@ -6,7 +6,7 @@ code utilizing booktabs and standard academic formatting.
 """
 
 from __future__ import annotations
-from typing import Any, Dict, List, Optional
+from typing import Optional
 
 from research_validation.artifact_generation.publication_tables import PublicationTable
 

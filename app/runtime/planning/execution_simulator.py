@@ -7,7 +7,7 @@ critical path bottlenecks, token usage distributions, and execution resilience.
 from __future__ import annotations
 
 import random
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 from app.runtime.planning.strategy_generator import CandidateStrategy

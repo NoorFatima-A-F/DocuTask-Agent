@@ -6,8 +6,8 @@ EVOI active sensing, meta-planning critique, formal SMT verification, and scient
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from typing import Dict, List, Optional
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
 from app.runtime.intelligence.cognitive_runtime import ProbabilisticCognitiveRuntime, CognitiveStateSummary
@@ -16,12 +16,12 @@ from app.runtime.intelligence.world_model import WorldStateForecast
 from app.runtime.intelligence.active_information import InformationActionRecommendation
 from app.runtime.meta.meta_planner import MetaPlanner, MetaPlanningReview
 from app.runtime.knowledge.experience_graph import CausalExperienceGraph
-from app.runtime.knowledge.policy_library import PolicyLibrary, PlanningPolicy
+from app.runtime.knowledge.policy_library import PolicyLibrary
 from app.runtime.knowledge.knowledge_distillation import KnowledgeDistillationEngine, DistillationReport
 from app.runtime.governance.formal_verification import FormalVerificationEngine, FormalVerificationProof
 from app.runtime.governance.decision_provenance import DecisionProvenanceEngine, DecisionProvenanceTree
-from app.runtime.governance.governance import EnterpriseGovernanceEngine, GovernanceDecision
-from app.runtime.governance.compliance_engine import RegulatoryComplianceEngine, ComplianceAuditReport
+from app.runtime.governance.governance import EnterpriseGovernanceEngine
+from app.runtime.governance.compliance_engine import RegulatoryComplianceEngine
 from app.runtime.benchmark.planner_benchmark import ScientificPlannerBenchmark, BenchmarkSuiteResult
 
 router = APIRouter()

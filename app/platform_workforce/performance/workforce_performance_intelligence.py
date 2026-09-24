@@ -1,7 +1,6 @@
 """
 9. Workforce Performance Intelligence Subsystem
 """
-from typing import Dict, List, Any
 from app.platform_workforce.models.schemas import WorkforcePerformanceMetric
 from app.platform_workforce.registry.workforce_registry import workforce_registry
 

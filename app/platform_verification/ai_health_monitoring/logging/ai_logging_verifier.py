@@ -5,8 +5,7 @@ Validates structured JSON logging formats across Request, Response, and Failure 
 
 from __future__ import annotations
 
-import re
-from typing import Any, Dict, List, Optional
+from typing import List
 
 from app.platform_verification.ai_health_monitoring.domain.interfaces import (
     IAILoggingVerifier,

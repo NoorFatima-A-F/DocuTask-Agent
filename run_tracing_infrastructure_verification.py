@@ -2,8 +2,6 @@
 Phase 3I.4: Master CLI Runner for Enterprise Distributed Tracing Verification
 """
 import sys
-import os
-import json
 from app.platform_verification.tracing_infrastructure.runtime.tracing_verification_runtime import TracingVerificationRuntime
 
 

@@ -1,7 +1,7 @@
 """Tenant Affinity & Isolation Management across Multi-Region topology."""
 
 import threading
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
 

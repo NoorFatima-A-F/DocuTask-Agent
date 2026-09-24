@@ -4,8 +4,7 @@ Verifies document storage availability by running an ephemeral probe lifecycle:
 Create temporary test object -> Read -> Validate hash -> Clean Delete (Zero residual files).
 """
 import hashlib
-import time
-from typing import Dict, Any, Optional
+from typing import Optional
 from app.platform_verification.readiness_engine.domain.models import (
     StorageReadinessReport,
 )

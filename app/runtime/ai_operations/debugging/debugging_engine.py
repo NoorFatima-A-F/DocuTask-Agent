@@ -4,14 +4,13 @@ Manages execution failure diagnostics, anomaly reports, and remediation recommen
 """
 
 from __future__ import annotations
-from typing import Dict, List, Optional, Any
+from typing import List, Optional
 from app.runtime.ai_operations.models.schemas import (
     ExecutionTrace,
     FailureAnalysisResult,
     FailureCategory,
 )
 from app.runtime.ai_operations.debugging.trace_analyzer import (
-    TraceAnalyzer,
     FailureClassifier,
 )
 

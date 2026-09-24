@@ -4,8 +4,8 @@ Domain Interfaces for Configuration & Dependency Management.
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional, Any
 from app.platform_verification.config_versioning.domain.models import (
-    ConfigurationSnapshot, DependencyItem, SBOMManifest, DriftReport,
-    ChangeRequest, RollbackRecord, ConfigurationDiff
+    ConfigurationSnapshot, DependencyItem, DriftReport,
+    ChangeRequest, RollbackRecord
 )
 
 class ConfigurationRegistryInterface(ABC):

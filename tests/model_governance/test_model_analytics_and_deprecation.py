@@ -1,7 +1,6 @@
 """Tests for Model Analytics, Cost Tracking, and Deprecation Management (Phase 8C)."""
 
 import time
-import pytest
 from app.model_governance.analytics.usage import ModelUsageTracker, UsageEvent
 from app.model_governance.analytics.cost import ModelCostCalculator
 from app.model_governance.analytics.performance import ModelPerformanceAnalyzer, PerformanceMetricSample

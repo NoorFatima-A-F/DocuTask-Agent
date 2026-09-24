@@ -2,7 +2,7 @@
 Phase 3H.5.11: Enterprise Health Quality Scoring & Operational Certification Framework — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

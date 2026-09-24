@@ -13,11 +13,10 @@ import asyncio
 import json
 import logging
 import math
-import os
 import sys
 import time
 from pathlib import Path
-from typing import Any, Callable, Coroutine, Dict, List
+from typing import Any, Dict, List
 
 # Ensure project root is on sys.path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -31,7 +30,6 @@ from app.agents.runtime.enterprise.scheduler_state import JobPriority, Scheduled
 from app.agents.runtime.enterprise.circuit_breaker import CircuitBreaker
 from app.agents.runtime.enterprise.audit_log import ImmutableRuntimeAuditLog
 from app.agents.runtime.enterprise.audit_event import AuditEventType
-from app.agents.runtime.runtime_supervisor import SupervisorTree, RestartStrategy
 from examples.autonomous_invoice_workflow.run_autonomous_invoice_pipeline import AutonomousInvoicePipeline
 
 logging.basicConfig(level=logging.WARNING)

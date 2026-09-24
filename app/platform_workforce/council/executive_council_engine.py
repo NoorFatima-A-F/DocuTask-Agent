@@ -2,7 +2,6 @@
 8. Executive AI Council Subsystem
 """
 from typing import Dict, List, Optional, Any
-from datetime import datetime, timezone
 from app.platform_workforce.models.schemas import ExecutiveCouncilProposition
 
 class ExecutiveCouncilEngine:

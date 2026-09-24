@@ -6,7 +6,7 @@ Tracks heartbeat status, consecutive failure counters, and latency averages for 
 from datetime import datetime, timezone
 from typing import Dict
 from pydantic import BaseModel, Field
-from app.agents.tools.provider import ProviderHealth, ProviderStatus
+from app.agents.tools.provider import ProviderStatus
 
 
 class ToolHealthRecord(BaseModel):

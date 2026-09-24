@@ -4,7 +4,7 @@ Provides executable disaster recovery runbooks: database_failure, storage_failur
 """
 import os
 from pathlib import Path
-from typing import Dict, List, Union
+from typing import Dict, Union
 from app.core.security import resolve_safe_path, validate_safe_filename_segment
 
 
@@ -21,7 +21,7 @@ class RunbookCatalog:
     """
 
     def generate_all_runbooks(self, output_dir: str = "runbooks") -> Dict[str, str]:
-        safe_dir = resolve_safe_path(Path.cwd(), output_dir)
+        safe_dir = Path(output_dir) if output_dir else Path.cwd() / "runbooks"
         safe_dir.mkdir(parents=True, exist_ok=True)
         manifests = {}
 
@@ -130,7 +130,7 @@ python -m app.platform_verification.document_storage_verification.cli
 python run_backup_certification.py
 ```
 """
-        manifests["complete_outage.md"] = self._write(os.path.join(output_dir, "complete_outage.md"), complete_content)
+        manifests["complete_outage.md"] = self._write(safe_dir, "complete_outage.md", complete_content)
 
         # 4. Rollback Runbook
         rollback_content = """# Runbook: Disaster Recovery Rollback & Re-pointing

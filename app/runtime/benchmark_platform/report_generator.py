@@ -3,8 +3,8 @@ ARTEICP Benchmark Platform - Formal Report Generator
 Generates exportable markdown and structured JSON benchmark dossiers.
 """
 
-from typing import Dict, List, Any
-from app.runtime.benchmark_platform.corpus_runner import CorpusBenchmarkScorecard, CANONICAL_CORPORA
+from typing import Dict, Any
+from app.runtime.benchmark_platform.corpus_runner import CANONICAL_CORPORA
 
 
 class BenchmarkReportGenerator:

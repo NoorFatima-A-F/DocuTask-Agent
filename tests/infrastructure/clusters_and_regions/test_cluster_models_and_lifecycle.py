@@ -2,10 +2,7 @@
 
 import pytest
 from app.infrastructure.clusters.models import (
-    CapacityModel,
     Cluster,
-    ClusterIdentity,
-    ClusterLease,
     ClusterStatus,
     ClusterType,
 )

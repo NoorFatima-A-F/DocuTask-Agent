@@ -2,7 +2,7 @@
 Phase 3L.4: Database Backup & Recovery Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IDatabaseRecoveryVerifier
 from ..domain.models import (

@@ -1,9 +1,8 @@
 """Tests for SRE Automation Framework and Closed-Loop Self-Healing."""
 
-import pytest
 from app.observability.alerts.engine import ActiveAlert, AlertSeverity
 from app.observability.automation.actions import AutoActionType, SREActionExecutor
-from app.observability.automation.framework import SelfHealingRule, SREAutomationFramework
+from app.observability.automation.framework import SREAutomationFramework
 
 
 def test_sre_action_executor():

@@ -2,9 +2,8 @@
 Tests for Saga Distributed Compensation and Reverse Rollback.
 """
 
-import pytest
 import asyncio
-from app.workflows.domain.models import ExecutionState, TaskDefinition, TaskType, WorkflowDefinition
+from app.workflows.domain.models import ExecutionState, TaskDefinition, WorkflowDefinition
 from app.workflows.runtime.runtime import WorkflowRuntime
 
 

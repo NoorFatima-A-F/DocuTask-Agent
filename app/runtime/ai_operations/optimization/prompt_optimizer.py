@@ -6,10 +6,9 @@ Automated prompt mutation, few-shot pruning, token compression, and cost analyti
 from __future__ import annotations
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from app.runtime.ai_operations.models.schemas import (
     PromptVersion,
-    ModelRouteDecision,
 )
 
 

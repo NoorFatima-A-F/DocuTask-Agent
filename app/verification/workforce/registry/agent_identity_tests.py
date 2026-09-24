@@ -5,8 +5,7 @@ Scale test: 10,000 digital employee identities, zero collisions, sub-100ms looku
 import time
 import uuid
 from typing import Dict, List, Any
-from datetime import datetime, timezone
-from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType, EmployeeStatus
+from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
 
 class AgentIdentityVerifier:

@@ -4,7 +4,7 @@ Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
 import asyncio
-from typing import Dict, List, Set, Optional, Callable, Awaitable
+from typing import Any, Dict, List, Optional, Set
 import time
 from app.runtime.events.models.event import DomainEvent
 from app.runtime.events.models.event_types import DomainEventType, EventSubsystem

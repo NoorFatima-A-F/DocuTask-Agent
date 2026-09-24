@@ -1,7 +1,7 @@
 """
 Abstract interfaces and protocols for Part 3H.3.4.
 """
-from typing import Dict, Any, List, Protocol
+from typing import Protocol
 from app.platform_verification.predictive_health_intelligence.domain.models import (
     TelemetryReport,
     BaselineReport,

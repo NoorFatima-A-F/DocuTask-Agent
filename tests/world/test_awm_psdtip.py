@@ -35,7 +35,6 @@ from app.runtime.world import (
     OpportunityDiscoveryEngine,
     TemporalKnowledgeGraph,
     PredictivePlanningEngine,
-    PredictiveGovernanceEngine,
     ScenarioType,
     SimulationMode,
 )

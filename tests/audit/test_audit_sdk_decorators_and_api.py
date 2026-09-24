@@ -1,19 +1,15 @@
 """Tests for Audit SDK, @audited Decorator, and FastAPI REST Endpoints."""
 
 import pytest
-import asyncio
 from app.audit.sdk.client import AuditSDK, audited
 from app.audit.api.routes import (
-    router,
     record_event,
     search_events,
-    get_event,
     verify_integrity,
     create_artifact,
     create_evidence_bundle,
     evaluate_compliance,
     create_investigation_case,
-    list_investigations,
     get_investigation_timeline,
 )
 from app.audit.api.schemas import (

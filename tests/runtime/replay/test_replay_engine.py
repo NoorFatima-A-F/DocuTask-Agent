@@ -2,10 +2,8 @@
 Unit Tests for Replay Engine and Playback Controller.
 """
 
-import pytest
 from app.runtime.observability.schemas import RuntimeEvent, EventCategory, EventType, EventSeverity
 from app.runtime.replay.replay_engine import MasterReplayEngine
-from app.runtime.replay.replay_speed import ReplaySpeed
 from app.runtime.replay.replay_bookmarks import BookmarkType
 
 

@@ -4,7 +4,7 @@ Defines contracts for IMemoryManager, IMemoryRetriever, IMemoryIndexer, and IMem
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any, List, Optional
 from app.agents.memory.repository import MemoryItem
 
 

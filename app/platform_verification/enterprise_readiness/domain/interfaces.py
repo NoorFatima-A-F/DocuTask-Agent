@@ -1,7 +1,7 @@
 """Abstract interfaces for Phase 3H.3 Enterprise Readiness Verification Framework."""
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict
 from .models import (
     ReadinessContractReport,
     DependencyReadinessReport,

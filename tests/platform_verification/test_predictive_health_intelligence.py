@@ -9,7 +9,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
 
 from app.platform_verification.predictive_health_intelligence.anomaly.health_anomaly_detector import (
     HealthAnomalyDetector,
@@ -21,17 +20,12 @@ from app.platform_verification.predictive_health_intelligence.domain.models impo
     AccuracyReport,
     AIWorkflowHealthReport,
     AnomalyReport,
-    AnomalySeverity,
     BaselineReport,
-    EarlyWarningAlert,
     EarlyWarningCategory,
     EarlyWarningReport,
     PredictiveHealthScorecard,
     PredictiveHealthTier,
-    PreventiveActionType,
-    PreventiveRecommendation,
     RecommendationReport,
-    ResourceExhaustionEstimate,
     RiskLevel,
     RiskPredictionReport,
     TelemetryItem,
@@ -63,9 +57,6 @@ from app.platform_verification.predictive_health_intelligence.risk.health_risk_e
 )
 from app.platform_verification.predictive_health_intelligence.runtime.predictive_health_runtime import (
     PredictiveHealthRuntime,
-)
-from app.platform_verification.predictive_health_intelligence.scoring.predictive_health_scorer import (
-    PredictiveHealthScorer,
 )
 from app.platform_verification.predictive_health_intelligence.simulation.predictive_simulation_runner import (
     PredictiveSimulationRunner,

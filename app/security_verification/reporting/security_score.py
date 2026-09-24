@@ -2,7 +2,7 @@
 Section 12.1: Master AI Security Scoring Engine
 Computes the weighted AI Security Score across the 8 core enterprise domains.
 """
-from typing import Dict, List, Any
+from typing import Dict, List
 from ..domain.models import SecuritySectionResult, MasterSecurityScore, SecurityCategory
 
 WEIGHT_DISTRIBUTION: Dict[SecurityCategory, float] = {

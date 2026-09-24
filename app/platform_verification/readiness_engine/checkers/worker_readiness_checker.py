@@ -3,7 +3,7 @@ Worker Pool Readiness Checker (Part 3H.3.2.7).
 Verifies background worker fleet status (/worker/ready): registration, heartbeat recency,
 active jobs vs capacity, and operational worker states (AVAILABLE, BUSY, OVERLOADED, FAILED).
 """
-from typing import Dict, Any, Optional
+from typing import Optional
 from app.platform_verification.readiness_engine.domain.models import (
     WorkerReadinessReport,
     WorkerState,

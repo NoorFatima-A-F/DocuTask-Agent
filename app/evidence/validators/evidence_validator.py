@@ -9,14 +9,11 @@ Performs zero-trust verification of evidence items:
 
 from __future__ import annotations
 
-import hashlib
-import json
 import logging
-import os
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from app.evidence.registry.evidence_models import EvidenceItem, VerificationStatus
 

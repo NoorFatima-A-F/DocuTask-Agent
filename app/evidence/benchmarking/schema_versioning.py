@@ -7,9 +7,9 @@ benchmark, evaluation protocol, and report schemas with automated migration pipe
 from __future__ import annotations
 
 import logging
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
 

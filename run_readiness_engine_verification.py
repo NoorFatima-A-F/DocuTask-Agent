@@ -3,7 +3,6 @@ Master CLI Runner for Enterprise Dependency-Aware Readiness Decision Engine Veri
 Executes full verification, prints a rich summary table, and exports all 8 audit manifests to health_verification/.
 """
 import sys
-import json
 import time
 
 # Ensure UTF-8 output on Windows

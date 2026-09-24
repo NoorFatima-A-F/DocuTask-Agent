@@ -4,9 +4,8 @@ Discovers and instantiates platform modules with dependency verification.
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Type
+from typing import Any, Dict, Optional, Type
 from .models import ModuleRecord, ModuleState
-from ..kernel.interfaces import IModule
 from ..kernel.metadata import ModuleMetadata
 from ..kernel.exceptions import ModuleLoadException
 from ..kernel.versioning import SemanticVersion

@@ -6,8 +6,8 @@ regret calculation, and Multi-Armed Bandit policy exploration.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Any, Dict, Optional
+from pydantic import BaseModel
 
 from app.runtime.events.event_bus import EventBus
 from app.runtime.events.probabilistic_events import (

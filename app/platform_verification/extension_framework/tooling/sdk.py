@@ -3,7 +3,7 @@ Plugin Developer SDK and CLI Generator Tooling.
 """
 from typing import Any, Dict, List, Optional, Tuple
 from app.platform_verification.extension_framework.domain.models import (
-    PluginCategory, PluginManifest, SecurityClassification, PluginPermission
+    PluginCategory
 )
 from app.platform_verification.extension_framework.tooling.scaffolding import plugin_scaffolder
 from app.platform_verification.extension_framework.tooling.validator import plugin_contract_validator

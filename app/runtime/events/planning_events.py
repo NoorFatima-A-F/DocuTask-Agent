@@ -5,9 +5,7 @@ Defines strongly-typed, immutable runtime events emitted by all 16 autonomous pl
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from uuid import uuid4
 from app.runtime.events.base import RuntimeEvent
 

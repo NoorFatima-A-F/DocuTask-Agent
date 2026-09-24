@@ -7,12 +7,12 @@ telemetry and multi-run benchmark datasets.
 
 from __future__ import annotations
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Optional, Tuple
 
 from research_validation.artifact_generation.publication_tables import PublicationTable
-from research_validation.provenance.hashing import hash_canonical_json, compute_sha256
+from research_validation.provenance.hashing import compute_sha256
 
 
 @dataclass(frozen=True)

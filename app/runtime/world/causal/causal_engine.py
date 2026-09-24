@@ -3,10 +3,9 @@ AWM-PSDTIP Phase 13.10 - Causal Reasoning Engine
 Structural Causal Models, DAG causal graphs, intervention analysis (do-calculus), and spurious correlation suppression.
 """
 
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from dataclasses import dataclass
 import hashlib
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import uuid
 from app.runtime.world.events.world_events import CausalRelationType
 

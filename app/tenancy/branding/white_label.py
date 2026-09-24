@@ -6,7 +6,7 @@ Manages organization branding, logos, color schemes, typography, and portal styl
 from __future__ import annotations
 
 import uuid
-from typing import Dict, Optional
+from typing import Dict
 from app.tenancy.core.models import BrandingProfile
 
 

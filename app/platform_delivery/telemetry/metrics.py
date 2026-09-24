@@ -1,7 +1,6 @@
 """DORA & Platform Delivery Telemetry Metrics (Req 67, 69)."""
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
-from typing import Dict, List
+from dataclasses import dataclass
+from typing import Any, Dict
 
 
 @dataclass

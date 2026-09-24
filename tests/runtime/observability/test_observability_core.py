@@ -8,7 +8,6 @@ from app.runtime.observability.schemas import (
     BaseRuntimeEvent,
     EventCategory,
     EventPriority,
-    EventSeverity,
     MissionEvent,
     ExecutionEvent,
 )

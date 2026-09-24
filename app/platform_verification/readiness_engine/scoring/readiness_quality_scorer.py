@@ -8,7 +8,6 @@ Evaluates the 6 core dimensions of readiness verification and computes weighted 
 5. Security: 10%
 6. Observability: 10%
 """
-from typing import Dict, Any
 from app.platform_verification.readiness_engine.domain.models import (
     DatabaseReadinessReport,
     QueueReadinessReport,

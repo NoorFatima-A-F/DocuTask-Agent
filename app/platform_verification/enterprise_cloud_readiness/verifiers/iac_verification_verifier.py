@@ -2,7 +2,7 @@
 Phase 3M.11: Infrastructure as Code (IaC) Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IInfrastructureAsCodeVerifier
 from ..domain.models import (

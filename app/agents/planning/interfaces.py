@@ -7,7 +7,6 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 from uuid import UUID
 from app.agents.planning.contracts import Plan, PlanningRequest, PlanningResult
-from app.agents.planning.graph import PlanGraph
 
 
 class IPlanValidator(ABC):

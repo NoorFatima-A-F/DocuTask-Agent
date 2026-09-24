@@ -2,9 +2,9 @@
 REST API Router for Module Boundary & Plugin Verification (PART 2D).
 """
 from __future__ import annotations
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.platform_verification.module_boundary.runtime.module_boundary_runtime import (
     EnterpriseModuleBoundaryRuntime,
 )

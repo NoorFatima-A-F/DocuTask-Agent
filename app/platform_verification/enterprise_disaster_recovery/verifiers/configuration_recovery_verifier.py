@@ -2,7 +2,7 @@
 Phase 3L.6: Application Configuration Recovery Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IConfigurationRecoveryVerifier
 from ..domain.models import (

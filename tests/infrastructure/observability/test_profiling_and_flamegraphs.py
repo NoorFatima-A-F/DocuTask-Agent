@@ -3,17 +3,14 @@ Tests for CPU Profiler, Memory Profiler, and Flamegraph Generation.
 """
 
 import time
-import pytest
 
 from app.infrastructure.observability.profiling.cpu import (
-    CPUHotspot,
     CPUProfileSample,
     CPUProfiler,
     StackFrame,
 )
 from app.infrastructure.observability.profiling.memory import (
     MemoryAllocationSample,
-    MemoryLeakWarning,
     MemoryProfiler,
 )
 from app.infrastructure.observability.profiling.flamegraphs import (

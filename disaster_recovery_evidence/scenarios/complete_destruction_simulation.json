@@ -10,31 +10,31 @@
   "relations_preserved": true,
   "timeline": [
     {
-      "timestamp_iso": "2026-09-19T07:04:51.820306+00:00",
+      "timestamp_iso": "2026-09-24T21:55:03.508593+00:00",
       "phase": "DISASTER_INJECTED",
       "description": "Simulated total datacenter / cloud region annihilation: all instances, DBs, and volumes terminated",
       "elapsed_seconds_from_start": 0.0
     },
     {
-      "timestamp_iso": "2026-09-19T07:05:51.820306+00:00",
+      "timestamp_iso": "2026-09-24T21:56:03.508593+00:00",
       "phase": "DETECTED",
       "description": "Global multi-region synthetic monitor detected total platform black-hole",
       "elapsed_seconds_from_start": 60.0
     },
     {
-      "timestamp_iso": "2026-09-19T07:06:51.820306+00:00",
+      "timestamp_iso": "2026-09-24T21:57:03.508593+00:00",
       "phase": "MITIGATION_INITIATED",
       "description": "Automated Bare-Metal DR Pipeline triggered Terraform deployment in standby region us-west-2",
       "elapsed_seconds_from_start": 120.0
     },
     {
-      "timestamp_iso": "2026-09-19T07:16:11.820306+00:00",
+      "timestamp_iso": "2026-09-24T22:06:23.508593+00:00",
       "phase": "SERVICE_RESTORED",
       "description": "K8s cluster, PostgreSQL, Redis, and MinIO restored; sealed secrets injected",
       "elapsed_seconds_from_start": 680.0
     },
     {
-      "timestamp_iso": "2026-09-19T07:18:51.820306+00:00",
+      "timestamp_iso": "2026-09-24T22:09:03.508593+00:00",
       "phase": "FULLY_OPERATIONAL",
       "description": "All microservices healthy; synthetic document OCR and AI workflow passed with 100% accuracy",
       "elapsed_seconds_from_start": 840.0

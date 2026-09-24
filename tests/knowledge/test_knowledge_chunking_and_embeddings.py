@@ -6,10 +6,6 @@ import pytest
 from app.knowledge.chunking.chunker import (
     ChunkingEngine,
     CodeChunker,
-    FixedChunker,
-    HeadingChunker,
-    HierarchicalChunker,
-    SemanticChunker,
 )
 from app.knowledge.core.models import KnowledgeDocument
 from app.knowledge.embeddings.provider import DeterministicEmbeddingProvider
@@ -90,7 +86,7 @@ def test_deterministic_embedding_provider():
 
     vec1 = provider.embed("invoice payment process")
     vec2 = provider.embed("invoice payment process")
-    vec3 = provider.embed("completely unrelated biology genome data")
+    provider.embed("completely unrelated biology genome data")
 
     # Determinism
     assert vec1 == vec2

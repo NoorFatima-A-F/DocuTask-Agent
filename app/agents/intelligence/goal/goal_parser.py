@@ -6,7 +6,7 @@ rich GoalSpecification with parsed requirements, priority, risk, and criteria.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from app.agents.intelligence.goal.constraint_extractor import (
     ConstraintExtractor,
@@ -17,7 +17,6 @@ from app.agents.intelligence.goal.goal_specification import (
     GoalSpecification,
     GoalStatus,
     RiskLevel,
-    SuccessCriteria,
 )
 from app.agents.intelligence.goal.intent_classifier import (
     IntentClassifier,

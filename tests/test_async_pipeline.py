@@ -4,7 +4,7 @@ Coverage target: > 90%.
 """
 
 import pytest
-from app.jobs.broker import PriorityMessageBroker, job_broker
+from app.jobs.broker import PriorityMessageBroker
 from app.jobs.dlq import DeadLetterQueueEngine
 from app.jobs.idempotency import IdempotencyEngine
 from app.jobs.locking import DistributedLockManager

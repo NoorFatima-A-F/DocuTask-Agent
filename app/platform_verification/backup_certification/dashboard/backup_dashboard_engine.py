@@ -2,7 +2,6 @@
 Backup Dashboard Engine for Backup Certification Framework (Part 3G.2G).
 Generates operational and executive metrics for monitoring platform disaster recovery readiness.
 """
-from typing import Dict, Any, List
 from app.platform_verification.backup_certification.domain.models import (
     BackupReadinessScorecard,
     RTORPOCertification,

@@ -6,7 +6,7 @@ circuit breaker state machines, and resilience scorecard models.
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from datetime import datetime, timezone
 
 

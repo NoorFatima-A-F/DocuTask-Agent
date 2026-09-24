@@ -3,9 +3,8 @@ Workflow Instance Model.
 Represents an active, long-running execution instance of a WorkflowDefinition.
 """
 
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
-from uuid import UUID, uuid4
+from typing import List
+from uuid import UUID
 from pydantic import BaseModel, Field
 from app.agents.workflow.lifecycle import WorkflowLifecycleState
 from app.agents.workflow.metadata import WorkflowIdentity, WorkflowStatistics

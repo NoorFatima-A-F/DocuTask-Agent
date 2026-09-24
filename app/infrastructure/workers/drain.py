@@ -1,7 +1,7 @@
 """Worker Graceful Draining and Evacuation Manager."""
 
 import threading
-from typing import Dict, List, Optional
+from typing import Dict
 from app.infrastructure.workers.models import Worker, WorkerStatus
 from app.infrastructure.workers.lifecycle import WorkerLifecycleStateMachine
 

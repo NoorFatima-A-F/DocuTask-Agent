@@ -3,7 +3,7 @@ AMAEOP Pillar 2 - Executive Coordination Controller
 Provides top-level strategic oversight, mission authorization, priority arbitration, and organizational synchronization.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict, field
 import time
 import uuid

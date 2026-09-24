@@ -1,14 +1,8 @@
 """Tests for Safety Context, Decision Models, and Gateway Pipeline."""
 
-import pytest
 from app.safety.gateway.context import (
     SafetyContext,
     SourceTrustLevel,
-    ModelContext,
-    PromptContext,
-    ToolContext,
-    DataContext,
-    KnowledgeChunk,
 )
 from app.safety.gateway.decision import (
     SafetyDecision,
@@ -17,7 +11,6 @@ from app.safety.gateway.decision import (
     SafetyCategory,
     SafetyViolation,
 )
-from app.safety.gateway.pipeline import SafetyPipeline
 from app.safety.gateway.runtime import SafetyGateway
 
 

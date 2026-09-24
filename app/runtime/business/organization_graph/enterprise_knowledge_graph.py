@@ -3,7 +3,7 @@ Phase 13.19: Enterprise Organizational Knowledge Graph.
 Models departments, roles, approval hierarchies, and enterprise IT systems.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Optional
 from app.runtime.business.models.schemas import (
     Department,
     EmployeeOrAgentRole,

@@ -3,7 +3,6 @@ Circuit Breaker State Machine & Exponential Backoff Engine.
 Validates Circuit Breaker state transitions (CLOSED -> OPEN -> HALF-OPEN) and retry backoff correctness.
 """
 
-from typing import Dict
 from pydantic import BaseModel
 from app.core.logging import logger
 
@@ -28,10 +27,8 @@ class CircuitBreakerValidator:
         """
         # 1. Closed state under normal calls
         state = "CLOSED"
-        failures = 0
 
         # 2. Trigger 5 failures -> Transition to OPEN
-        failures = 5
         state = "OPEN"
         circuit_opened = 1
 

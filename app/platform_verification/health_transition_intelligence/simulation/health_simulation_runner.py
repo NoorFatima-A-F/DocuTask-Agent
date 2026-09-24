@@ -6,7 +6,7 @@ Executes the 4 mandatory health intelligence failure & recovery simulations:
 - Test 3: AI Provider Slow Response (READY -> DEGRADED)
 - Test 4: Worker Memory Leak & Auto-Recovery (READY -> DEGRADED -> Auto-Recycled -> READY)
 """
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
     SimulationScenarioResult,

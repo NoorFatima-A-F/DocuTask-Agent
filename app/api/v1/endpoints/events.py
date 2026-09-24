@@ -3,7 +3,7 @@ DocuTask Agent - Domain Event REST Endpoints (ARODP)
 Phase 13.1: Autonomous Runtime Observability & Domain Event Platform
 """
 
-from fastapi import APIRouter, HTTPException, Query, Body
+from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import StreamingResponse
 from typing import Dict, List, Any, Optional
 from pydantic import BaseModel, Field

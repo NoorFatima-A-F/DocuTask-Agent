@@ -1,6 +1,5 @@
 """Tests for Certification Contradiction Detector."""
 
-import pytest
 from enterprise_audit_engine.contradiction_detector.contradiction_detector import (
     ContradictionDetector,
     ContradictionReport,

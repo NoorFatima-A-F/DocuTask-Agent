@@ -5,10 +5,9 @@ Infers dependencies across goals, tasks, datasets, tools, and models; detects ci
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Set
 
-from research_validation.goal.models.dependency import GoalDependency, DependencyType
-from research_validation.goal.exceptions import CircularDependencyError
+from research_validation.goal.models.dependency import GoalDependency
 
 
 @dataclass(frozen=True)

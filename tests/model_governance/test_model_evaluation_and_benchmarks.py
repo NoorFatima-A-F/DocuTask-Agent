@@ -1,6 +1,5 @@
 """Tests for Model Evaluation, Benchmarking, and Scoring Leaderboard (Phase 8C)."""
 
-import pytest
 from app.model_governance.evaluation.metrics import ModelEvaluationMetrics
 from app.model_governance.evaluation.benchmarks import ModelBenchmarkDataset, ModelBenchmarkRunner
 from app.model_governance.evaluation.scoring import ModelEvaluationScorer

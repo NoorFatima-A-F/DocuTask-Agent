@@ -3,7 +3,7 @@ DocuTask Agent - Planner Event Factory Builders
 Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
-from typing import Dict, List, Any, Optional
+from typing import List, Optional
 from app.runtime.events.models.event import DomainEvent
 from app.runtime.events.models.event_types import DomainEventType, EventSubsystem, EventSeverity
 from app.runtime.events.models.event_metadata import EventActor

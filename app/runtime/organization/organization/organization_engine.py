@@ -6,14 +6,13 @@ Dynamically configures virtual enterprise structures, departments, teams, report
 from __future__ import annotations
 import time
 import uuid
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from app.runtime.organization.events.organization_events import (
     AgentRole,
     OrganizationState,
     OrganizationDesigned,
-    DepartmentCreated,
     TeamMerged,
     org_event_bus,
 )

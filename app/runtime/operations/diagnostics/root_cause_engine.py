@@ -5,7 +5,7 @@ Infers root causes using Replay snapshots, Learning graph priors, Optimization r
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import List
 import uuid
 from app.runtime.operations.diagnostics.dependency_analyzer import DependencyAnalyzer
 from app.runtime.operations.diagnostics.causal_reasoner import CausalReasoner, CausalDiagnosticExplanation

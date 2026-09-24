@@ -18,14 +18,12 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.runtime.swarm import (
-    get_swarm_runtime,
     AgentRole,
     AgentState,
     SwarmAgentProfile,
     AgentRegistry,
     AgentLifecycleManager,
     AgentDirectory,
-    AgentCoordinator,
     MessageType,
     SwarmMessage,
     CommunicationBus,

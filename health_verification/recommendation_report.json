@@ -2,7 +2,7 @@
   "total_recommendations": 4,
   "recommendations": [
     {
-      "recommendation_id": "REC-6FB513",
+      "recommendation_id": "REC-20EB5E",
       "action_type": "SCALE_WORKERS",
       "target_service": "celery_worker",
       "rationale": "Queue backlog growth (+120/min) threatens SLA breach in 15 minutes",
@@ -11,7 +11,7 @@
       "requires_approval": false
     },
     {
-      "recommendation_id": "REC-F95B0D",
+      "recommendation_id": "REC-A8F490",
       "action_type": "RESTART_LEAKING_WORKER",
       "target_service": "ocr_worker",
       "rationale": "Worker RSS memory at 82% with linear leak slope",
@@ -20,7 +20,7 @@
       "requires_approval": false
     },
     {
-      "recommendation_id": "REC-A933AF",
+      "recommendation_id": "REC-7FA73A",
       "action_type": "EXPAND_DB_POOL",
       "target_service": "postgres",
       "rationale": "Connection pool at 88% with active lease accumulation",
@@ -29,7 +29,7 @@
       "requires_approval": false
     },
     {
-      "recommendation_id": "REC-6E47C7",
+      "recommendation_id": "REC-C10767",
       "action_type": "ENABLE_FALLBACK_PROVIDER",
       "target_service": "gemini_api",
       "rationale": "Gemini latency drift approaching 800ms threshold",

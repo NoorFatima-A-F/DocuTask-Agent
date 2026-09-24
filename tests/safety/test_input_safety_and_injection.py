@@ -1,6 +1,5 @@
 """Tests for Input Safety Validation, Direct and Indirect Prompt Injection Defenses."""
 
-import pytest
 from app.safety.input.validator import InputSafetyValidator
 from app.safety.input.classifier import InputIntentClassifier, InputIntent
 from app.safety.injection.prompt_injection import PromptInjectionDetector

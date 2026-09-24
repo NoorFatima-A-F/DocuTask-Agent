@@ -3,9 +3,8 @@ Adaptive Weight Learning - Weight Learner
 Proposes objective weight adjustments based on empirical regret and outcome feedback.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List
 from dataclasses import dataclass
-import math
 
 
 @dataclass

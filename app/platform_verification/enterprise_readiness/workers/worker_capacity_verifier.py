@@ -4,7 +4,6 @@ Verifies background AI worker registrations, heartbeat freshness, fleet capacity
 and detects crashed or stuck workers.
 """
 
-from typing import List
 from ..domain.models import WorkerReadinessReport, WorkerHeartbeatItem, WorkerState
 from ..domain.interfaces import IWorkerCapacityVerifier
 

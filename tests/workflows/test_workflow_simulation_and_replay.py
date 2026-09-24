@@ -2,7 +2,6 @@
 Tests for Workflow Simulator and Replay Engine.
 """
 
-import pytest
 import asyncio
 from app.workflows.domain.models import ExecutionState, TaskDefinition, TaskType, WorkflowDefinition
 from app.workflows.simulator.simulator import WorkflowSimulator

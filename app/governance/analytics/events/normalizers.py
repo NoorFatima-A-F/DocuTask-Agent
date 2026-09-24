@@ -1,7 +1,7 @@
 """Governance Analytics Event Normalization and Canonical Schemas."""
 
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid

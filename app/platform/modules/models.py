@@ -3,9 +3,9 @@ Platform Module Domain Models and 9-State Lifecycle Machine.
 """
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from ..kernel.metadata import ModuleMetadata
 from ..kernel.versioning import SemanticVersion
 

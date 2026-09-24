@@ -8,7 +8,7 @@ execution traces, uncertainty bounds, and publication claims.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List, Optional
 
 from research_validation.governance.governance_policy import (
     PolicyCategory, PolicyEnforcementAction, GovernancePolicyRule
@@ -16,7 +16,6 @@ from research_validation.governance.governance_policy import (
 from research_validation.governance.governance_audit import (
     GovernanceAuditRecord, GovernanceAuditLog
 )
-from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)

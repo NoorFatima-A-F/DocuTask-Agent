@@ -7,7 +7,6 @@ operational maturity assessment, regression detection, and signed artifact expor
 
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_infrastructure_certification.runtime.infrastructure_certification_runtime import (
     InfrastructureCertificationRuntime,

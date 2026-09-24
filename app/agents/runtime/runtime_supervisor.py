@@ -16,7 +16,7 @@ import multiprocessing
 import threading
 import time
 from typing import Any, Callable, Coroutine, Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.agents.runtime.exceptions import SubsystemCrashError
 from app.agents.runtime.interfaces import IRuntimeSupervisor
 

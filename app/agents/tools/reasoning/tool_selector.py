@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from app.agents.tools.reasoning.tool_definition import Modality, ToolDefinition
 from app.agents.tools.reasoning.tool_registry import ToolReasoningRegistry

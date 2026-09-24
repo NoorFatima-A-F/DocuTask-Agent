@@ -21,7 +21,6 @@ from .models import (
     AuditEntry,
     TraceabilityNode,
     PluginDescriptor,
-    ComponentHealth,
 )
 
 

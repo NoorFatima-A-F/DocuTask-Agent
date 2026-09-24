@@ -10,10 +10,9 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-from app.evidence.collectors.benchmark_collector import BenchmarkEvidenceCollector
 from app.evidence.registry.evidence_models import EvidenceItem, EvidenceType, VerificationStatus
 from app.evidence.registry.evidence_registry import EvidenceRegistry
 

@@ -11,10 +11,8 @@ import logging
 from typing import Any, Dict, List, Optional
 import uuid
 
-from app.knowledge.core.exceptions import IngestionError
 from app.knowledge.core.models import (
     KnowledgeDocument,
-    KnowledgeObject,
     KnowledgeSource,
     SyncMode,
 )

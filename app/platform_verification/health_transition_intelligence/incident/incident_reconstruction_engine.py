@@ -5,7 +5,7 @@ and remediation actions to aid SRE post-mortem analysis.
 """
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthEvent,
     IncidentTimelineEntry,

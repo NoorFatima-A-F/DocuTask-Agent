@@ -4,7 +4,6 @@ Executes all 14 Section Verifiers (A through N), scores results, generates evide
 and prints executive summary.
 """
 
-import sys
 import time
 from typing import Dict
 

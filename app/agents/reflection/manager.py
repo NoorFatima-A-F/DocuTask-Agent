@@ -3,10 +3,9 @@ Reflection Manager.
 Manages reflection sessions, cache lookups, persistent storage, and lifecycle tracking.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from uuid import UUID, uuid4
 from app.agents.reflection.cache import ReflectionCache
-from app.agents.reflection.lifecycle import ReflectionLifecycleState
 from app.agents.reflection.metadata import ReflectionIdentity
 from app.agents.reflection.reflection import Reflection
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope

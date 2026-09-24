@@ -2,7 +2,7 @@
 Health Security Auditor for Health Check Architecture Verification (Part 3H.1).
 """
 import re
-from typing import Dict, Any, List
+from typing import Any
 from app.platform_verification.health_architecture.domain.models import (
     SecurityAuditReport,
     HealthVisibilityLevel,
@@ -87,7 +87,7 @@ class HealthSecurityAuditor(ISecurityAuditor):
         internal_clean = (internal_leaks == 0)
         admin_auth_enforced = True
 
-        passed = public_clean and internal_clean and admin_auth_enforced and (total_leaked := total_leaks) == 0
+        passed = public_clean and internal_clean and admin_auth_enforced and (_total_leaked := total_leaks) == 0
 
         return SecurityAuditReport(
             public_endpoint_leak_free=public_clean,

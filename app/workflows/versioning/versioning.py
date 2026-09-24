@@ -3,9 +3,7 @@ Workflow Versioning and Migration Management.
 Guarantees that active running workflow executions remain pinned to their original definition version.
 """
 
-from typing import Dict, List, Optional
-from ..domain.models import WorkflowDefinition
-from ..domain.exceptions import WorkflowValidationException
+from typing import Dict, Optional
 from ...platform.kernel.versioning import SemanticVersion
 
 

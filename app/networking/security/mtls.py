@@ -6,9 +6,9 @@ import time
 import uuid
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Dict, Optional
 
-from ..identity.certificates import CertificateManager, X509Certificate
+from ..identity.certificates import CertificateManager
 
 
 class MTLSMode(str, Enum):

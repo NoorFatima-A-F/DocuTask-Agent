@@ -2,10 +2,8 @@
 Tests for Scientific Planner Optimization (Pillar 3).
 """
 
-import pytest
 from app.runtime.intelligence.planner_opt.planner_optimizer import PlannerOptimizer
 from app.runtime.intelligence.planner_opt.planner_version import (
-    PlannerVersionConfig,
     PlannerVersionManager,
 )
 from app.runtime.intelligence.planner_opt.prediction_error import (

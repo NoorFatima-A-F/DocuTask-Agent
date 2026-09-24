@@ -2,7 +2,6 @@
 
 from typing import Dict, Any, List, Optional
 import collections
-from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
 from ..warehouse.repositories import GovernanceDataWarehouseRepository

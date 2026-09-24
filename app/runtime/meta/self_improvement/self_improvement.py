@@ -6,7 +6,7 @@ Coordinates end-to-end self-improvement cycles across observation, reflection, r
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import uuid
 from app.runtime.meta.events.meta_events import ImprovementStatus
 

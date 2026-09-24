@@ -2,9 +2,9 @@
 Schema, Dataset, and Configuration Migration Tool.
 Manages versioned, reversible schema and artifact migrations.
 """
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import List, Dict, Any
+from typing import List
 
 @dataclass
 class MigrationRecord:

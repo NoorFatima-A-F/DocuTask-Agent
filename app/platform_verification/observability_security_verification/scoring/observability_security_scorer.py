@@ -1,7 +1,6 @@
 """
 Phase 3H.4.10.12: Observability Security Quality Scorer
 """
-from typing import Dict, Any
 from ..domain.interfaces import IObservabilitySecurityScorer
 from ..domain.models import (
     ObservabilitySecurityScorecard,

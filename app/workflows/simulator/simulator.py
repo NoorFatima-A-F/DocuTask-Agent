@@ -4,9 +4,8 @@ Performs dry-run simulations with mock capabilities to estimate expected duratio
 """
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from ..domain.models import TaskType, WorkflowDefinition
-from ..graph.graph import ExecutionGraph
 from ..compiler.compiler import WorkflowCompiler
 
 
@@ -39,7 +38,7 @@ class WorkflowSimulator:
     @classmethod
     def simulate(cls, definition: WorkflowDefinition) -> SimulationReport:
         """Simulate workflow execution."""
-        graph = WorkflowCompiler.compile(definition)
+        WorkflowCompiler.compile(definition)
 
         total_duration = 0.0
         total_cost = 0.0

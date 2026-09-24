@@ -3,7 +3,7 @@ Phase 13.19: SaaS Business Intelligence & Platform Analytics Engine.
 Calculates MRR, ARR, Churn, Customer LTV, Token Volume, and Executive Overview KPIs.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from datetime import datetime, timezone
 from app.platform_saas.models.schemas import SaaSExecutiveOverview
 

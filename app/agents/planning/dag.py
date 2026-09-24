@@ -7,7 +7,6 @@ from typing import Dict, List, Set
 from app.agents.planning.exceptions import (
     CyclicDependencyException,
     MissingDependencyException,
-    UnreachableNodeException,
 )
 from app.agents.planning.graph import PlanGraph
 

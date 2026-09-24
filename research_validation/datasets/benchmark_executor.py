@@ -21,7 +21,7 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
-from research_validation.datasets.public_benchmarks import DatasetType, BoundingBox
+from research_validation.datasets.public_benchmarks import DatasetType
 
 
 class BenchmarkExecutionStatus(str, Enum):

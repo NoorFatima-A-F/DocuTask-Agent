@@ -36,9 +36,6 @@ from app.platform_verification.enterprise_autonomous_workflow_validation.verifie
 from app.platform_verification.enterprise_autonomous_workflow_validation.scoring.workflow_quality_scorer import (
     AutonomousWorkflowQualityScorer,
 )
-from app.platform_verification.enterprise_autonomous_workflow_validation.exporter.workflow_quality_exporter import (
-    AutonomousWorkflowQualityExporter,
-)
 from app.platform_verification.enterprise_autonomous_workflow_validation.runtime.workflow_verification_runtime import (
     AutonomousWorkflowVerificationRuntime,
 )
@@ -268,7 +265,7 @@ def test_workflow_quality_scorer():
 
 def test_workflow_quality_exporter(tmp_output_dir):
     runtime = AutonomousWorkflowVerificationRuntime()
-    report = runtime.execute_all(output_dir=tmp_output_dir)
+    runtime.execute_all(output_dir=tmp_output_dir)
 
     assert os.path.exists(tmp_output_dir)
     assert os.path.exists(os.path.join(tmp_output_dir, "manifest.json"))

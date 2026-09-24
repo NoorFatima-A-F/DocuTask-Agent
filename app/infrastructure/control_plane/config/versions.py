@@ -1,6 +1,6 @@
 """Compatibility Matrix for Control Plane, Kubernetes, and Data Plane Versions."""
 
-from typing import Dict, List, Optional, Tuple
+from typing import List, Tuple
 from packaging import version
 
 

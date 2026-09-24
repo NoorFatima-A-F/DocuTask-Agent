@@ -1,6 +1,5 @@
 """Tests for Progressive Traffic Splitting (Canary, Blue-Green, Shadow Mirroring)."""
 
-import pytest
 from app.networking.mesh.data_plane import MeshRequest, MeshResponse
 from app.networking.routing.traffic_split import (
     SplitType,

@@ -3,7 +3,7 @@ Domain Models for Enterprise Automated Restore Verification System (Part 3G.2E).
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 
 
 class RestoreExecutionMode(str, Enum):

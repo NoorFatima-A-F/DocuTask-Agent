@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Set
+from typing import List, Set
 from pydantic import BaseModel, Field
 from app.data_governance.registry.models import ClassificationLevel, SensitivityCategory
 

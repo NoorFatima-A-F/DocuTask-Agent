@@ -2,7 +2,6 @@
 Phase 3H.4.9.4: Health Based Recovery Validation Verifier
 """
 import uuid
-from typing import Dict, Any, List
 from ..domain.interfaces import IHealthValidationVerifier
 from ..domain.models import (
     HealthValidationReport,

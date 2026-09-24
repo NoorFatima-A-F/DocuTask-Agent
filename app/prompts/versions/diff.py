@@ -7,7 +7,7 @@ variable additions/removals, constraint adjustments, and output schema differenc
 from __future__ import annotations
 
 import difflib
-from typing import Any, Dict, List, Set
+from typing import List, Set
 from pydantic import BaseModel, Field
 from app.prompts.registry.models import PromptVersion
 

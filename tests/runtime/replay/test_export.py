@@ -2,7 +2,6 @@
 Unit Tests for Forensic Export Formatting and Signatures.
 """
 
-import pytest
 import json
 from app.runtime.observability.schemas import RuntimeEvent, EventCategory, EventType, EventSeverity
 from app.runtime.observability.event_serializer import EventSerializer

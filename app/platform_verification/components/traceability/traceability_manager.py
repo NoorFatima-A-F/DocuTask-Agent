@@ -1,7 +1,7 @@
 """
 Traceability Manager: Full bidirectional lineage DAG (Objective <-> Requirement <-> Spec <-> Run <-> Cert).
 """
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 from ..interfaces import TraceabilityManagerInterface
 from ...crosscutting.observability import ComponentObservability
 from ...domain.models import TraceabilityNode

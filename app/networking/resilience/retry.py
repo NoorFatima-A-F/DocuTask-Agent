@@ -6,7 +6,7 @@ import random
 import time
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Callable, List, Optional, Set
+from typing import Callable, Optional, Set
 
 from ..mesh.data_plane import MeshRequest, MeshResponse
 

@@ -5,7 +5,7 @@ Domain Models and Schemas for Phase V11 — Enterprise Business Validation, ROI 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 
 
 class BusinessVerificationStatus(str, Enum):

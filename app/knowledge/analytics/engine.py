@@ -5,9 +5,8 @@ Provides operational metrics, query volume tracking, retrieval latency percentil
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)

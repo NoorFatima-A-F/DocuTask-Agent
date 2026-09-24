@@ -1,6 +1,5 @@
 """Dependency and Supply Chain Package Collector."""
 
-from pathlib import Path
 from typing import List, Dict, Any
 from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,

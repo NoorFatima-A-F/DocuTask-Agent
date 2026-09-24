@@ -4,7 +4,6 @@ Queries and stores episodic coordination records and shared memory references in
 """
 
 from typing import Any, Dict, List, Optional
-from uuid import UUID
 
 
 class CoordinationMemoryAdapter:

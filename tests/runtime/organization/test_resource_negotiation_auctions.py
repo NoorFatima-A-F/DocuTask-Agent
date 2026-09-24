@@ -2,7 +2,6 @@
 Test Suite: Autonomous Negotiation & Game-Theoretic Framework
 Validates Vickrey second-price auctions, bilateral resource trades, Nash Bargaining, and signed SLA contracts.
 """
-import pytest
 from app.runtime.negotiation.auction_manager import VickreyAuctionManager, AuctionBid
 from app.runtime.negotiation.resource_negotiation import ResourceNegotiator
 from app.runtime.negotiation.utility_negotiator import UtilityNegotiator

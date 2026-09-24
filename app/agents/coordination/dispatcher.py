@@ -3,8 +3,6 @@ Agent Task Dispatcher.
 Dispatches scheduled task assignments to target agents, managing handshakes and acknowledgments.
 """
 
-from typing import Any, Dict, List
-from uuid import UUID
 from app.agents.coordination.agent_registry import AgentRegistry
 from app.agents.coordination.scheduler import ScheduledTaskItem
 

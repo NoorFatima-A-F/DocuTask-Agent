@@ -1,7 +1,6 @@
 """Human Oversight Developer SDK Client."""
 
 from typing import Dict, Any, List, Optional, Tuple
-from datetime import datetime, timezone
 
 from ..core.context import OversightContext
 from ..core.decisions import HumanDecision, DecisionOutcome, FeedbackAssessment
@@ -10,7 +9,6 @@ from ..approvals.models import ApprovalChain
 from ..approvals.policies import ApprovalPolicy
 from ..reviews.requests import ReviewRequest, ReviewPriority
 from ..reviews.evidence import ReviewEvidencePackage
-from ..reviews.assignments import Reviewer
 from ..overrides.service import HumanOverrideRecord
 from ..analytics.metrics import OversightAnalyticsSummary
 

@@ -3,7 +3,7 @@ Coordination Recovery Adapter.
 Delegates failed agent recovery and self-healing to the Autonomous Recovery Engine.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 from uuid import UUID
 
 

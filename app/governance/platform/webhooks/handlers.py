@@ -2,7 +2,6 @@
 
 from typing import Any, Callable, Dict, List, Optional
 from .dispatcher import WebhookDispatcher
-from .subscriptions import WebhookEventType
 
 
 class GovernanceEventHandler:

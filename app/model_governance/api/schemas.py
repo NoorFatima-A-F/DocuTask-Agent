@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Any, Dict, List, Optional, Set
 from pydantic import BaseModel, Field
 from app.model_governance.registry.models import (
-    ApprovalStatus,
     DeploymentType,
     ModelCategory,
     ModelLifecycleState,

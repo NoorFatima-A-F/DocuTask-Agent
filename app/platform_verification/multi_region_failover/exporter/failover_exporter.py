@@ -3,9 +3,8 @@ Multi-Region Failover Evidence Exporter (Part 3G.6M).
 Exports all 9 verification manifests and certificates into multi_region_verification/
 """
 import json
-import os
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any
 from datetime import datetime, timezone
 
 from app.platform_verification.multi_region_failover.domain.models import (

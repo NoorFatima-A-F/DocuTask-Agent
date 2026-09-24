@@ -6,8 +6,7 @@ decisions regarding execution, replication, rejection, or statistical escalation
 """
 
 from __future__ import annotations
-import math
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from research_validation.decision.decision_rules import ResearchAction, ResearchDecision
 from research_validation.hypothesis.hypothesis_model import ScientificHypothesis

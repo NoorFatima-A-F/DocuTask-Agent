@@ -3,22 +3,16 @@ Phase 13.4: Autonomous Event-Sourced Mission Replay, Runtime Forensics & Enterpr
 Reconstructs runtime execution exclusively from immutable domain events and Truth Ledger Merkle roots.
 """
 
-from fastapi import APIRouter, HTTPException, Query, Body
+from fastapi import APIRouter, Query, Body
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
-import hashlib
-import json
 
 from app.runtime.replay.engine.mission_replay_engine import mission_replay_engine
 from app.runtime.replay.engine.replay_controller import replay_controller
 from app.runtime.replay.engine.timeline_player import TimelinePlayer
-from app.runtime.replay.forensic.forensic_engine import ForensicEngine
 from app.runtime.replay.forensic.timeline_diff import TimelineDiffEngine
-from app.runtime.replay.verification.replay_verifier import ReplayVerifier
-from app.runtime.replay.audit.audit_report_generator import AuditReportGenerator
 from app.runtime.replay.audit.audit_certificate import AuditCertificateIssuer
 from app.runtime.replay.audit.compliance_summary import ComplianceSummaryService
-from app.runtime.replay.intelligence.replay_statistics import ReplayStatisticsEngine
 
 router = APIRouter()
 
@@ -27,7 +21,7 @@ def _get_demo_events(mission_id: str) -> List[Dict[str, Any]]:
     """
     Returns ordered domain events for a mission.
     """
-    now = datetime.now(timezone.utc).isoformat()
+    datetime.now(timezone.utc).isoformat()
     return [
         {
             "event_id": f"evt_{mission_id}_001",

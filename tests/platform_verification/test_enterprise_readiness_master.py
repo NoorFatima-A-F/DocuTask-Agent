@@ -2,12 +2,9 @@
 
 import os
 import json
-import pytest
 from app.platform_verification.enterprise_readiness.domain.models import (
     ReadinessState,
-    DependencyCriticality,
     TrafficAction,
-    WorkerState,
     ReadinessCertificationTier,
 )
 from app.platform_verification.enterprise_readiness.contract.readiness_contract_verifier import (
@@ -39,12 +36,6 @@ from app.platform_verification.enterprise_readiness.orchestration.orchestrator_i
 )
 from app.platform_verification.enterprise_readiness.observability.readiness_observability_exporter import (
     ReadinessObservabilityExporter,
-)
-from app.platform_verification.enterprise_readiness.scoring.readiness_certification_scorer import (
-    ReadinessCertificationScorer,
-)
-from app.platform_verification.enterprise_readiness.exporter.readiness_evidence_exporter import (
-    ReadinessEvidenceExporter,
 )
 from app.platform_verification.enterprise_readiness.runtime.enterprise_readiness_runtime import (
     EnterpriseReadinessRuntime,

@@ -1,6 +1,5 @@
 """AI Network Failure Simulation Verifier (3H.3.10.7)."""
 
-from typing import List
 from ..domain.models import NetworkFailureReport
 from ..domain.interfaces import INetworkFailureVerifier
 from ..simulation.failure_scenarios.network_failure import NetworkFailureScenario

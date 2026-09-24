@@ -2,8 +2,6 @@
 Phase 3I.3: Master CLI Runner for Enterprise Metrics Infrastructure Verification
 """
 import sys
-import os
-import json
 from app.platform_verification.metrics_infrastructure.runtime.metrics_verification_runtime import MetricsVerificationRuntime
 
 

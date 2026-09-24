@@ -3,7 +3,6 @@ Regression Testing & Historical Quality Detection Subsystem.
 Detects extraction quality degradation across prompt, model, or provider iterations.
 """
 
-from typing import Any, Dict, List
 from app.core.logging import logger
 from app.validation.schemas import MetricEvaluationResult, RegressionComparison
 

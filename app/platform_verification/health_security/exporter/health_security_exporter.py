@@ -4,7 +4,7 @@ Phase 3H.5.10: Health Security Evidence Exporter
 import os
 import json
 import hashlib
-from typing import Dict, Any
+from typing import Dict
 from datetime import datetime, timezone
 
 from ..domain.models import (

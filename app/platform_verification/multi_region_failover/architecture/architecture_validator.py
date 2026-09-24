@@ -2,7 +2,7 @@
 Multi-Region Architecture Validator (Part 3G.6A).
 Validates that 100% of critical platform services have redundant deployments in the secondary cloud region.
 """
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.multi_region_failover.domain.models import (
     CloudRegion,
     RegionalServiceItem,

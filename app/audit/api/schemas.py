@@ -2,15 +2,10 @@
 
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field
-from datetime import datetime
-from ..core.events import ActorType, AuditSeverity, OutcomeType, EventCategory, AuditEvent
-from ..integrity.verification import IntegrityVerificationResult
-from ..compliance.mappings import ComplianceAssessmentReport
+from ..core.events import ActorType, AuditSeverity, OutcomeType, EventCategory
 from ..compliance.frameworks import ComplianceFramework
-from ..evidence.artifacts import EvidenceType, EvidenceArtifact
-from ..evidence.manager import EvidenceBundle
-from ..investigations.cases import CaseLifecycleState, InvestigationCase
-from ..investigations.timeline import InvestigationTimeline
+from ..evidence.artifacts import EvidenceType
+from ..investigations.cases import CaseLifecycleState
 
 
 class CreateEventRequest(BaseModel):

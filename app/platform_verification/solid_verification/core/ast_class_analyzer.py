@@ -20,7 +20,7 @@ class EnterpriseSolidASTAnalyzer(ISolidASTAnalyzer):
     def analyze_classes(self, root_dir: str) -> Tuple[Dict[str, ClassDesignMetrics], Dict[str, InterfaceDesignMetrics]]:
         class_metrics: Dict[str, ClassDesignMetrics] = {}
         interface_metrics: Dict[str, InterfaceDesignMetrics] = {}
-        root_path = Path(root_dir).expanduser().resolve()
+        root_path = resolve_safe_path(Path.cwd(), root_dir)
 
         for dirpath, _, filenames in os.walk(root_path):
             if any(p in dirpath for p in [".git", "__pycache__", ".pytest_cache", "venv", ".venv"]):

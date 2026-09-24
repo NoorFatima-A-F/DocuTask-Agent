@@ -1,7 +1,7 @@
 """Abstract interfaces for Enterprise Incident Signal Verification sub-engines."""
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict
 from .models import (
     IncidentArchitectureReport,
     AlertMappingReport,

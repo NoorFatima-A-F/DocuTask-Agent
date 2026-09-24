@@ -1,7 +1,7 @@
 """Governance Report Templates and Types."""
 
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid

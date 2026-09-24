@@ -3,7 +3,7 @@ Domain Models for Enterprise Readiness Contract Architecture (Part 3H.3.1).
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 
 
 class ReadinessState(str, Enum):

@@ -4,7 +4,7 @@ Ensures that GET /ready endpoints filter out internal infrastructure details, co
 and secrets, preventing information disclosure to unauthorized parties.
 """
 import re
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 
 class ReadinessSecurityVerifier:

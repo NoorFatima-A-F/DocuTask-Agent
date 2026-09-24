@@ -11,7 +11,7 @@ from typing import Any, Dict, List, Optional
 
 from app.agents.reflection.critics.historical_critic import HistoricalCritic
 from app.agents.reflection.critics.llm_critic import LLMCritic
-from app.agents.reflection.critics.rule_critic import CritiqueFeedback, RuleCritic
+from app.agents.reflection.critics.rule_critic import RuleCritic
 
 logger = logging.getLogger(__name__)
 

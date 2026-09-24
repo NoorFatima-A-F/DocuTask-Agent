@@ -1,16 +1,10 @@
 import pytest
 from app.platform_verification.lifecycle import (
-    VerificationState, VerificationStateMachine, ALLOWED_TRANSITIONS,
-    VerificationType, QualityGateRuleDefinition, VerificationSpecification,
-    VerificationPlanner, VerificationPlan, ExecutionStep,
-    VerificationTask, TaskState,
-    VerificationExecutionEngine, ExecutionSession,
-    EvidenceLifecycleManager, SealedEvidenceArtifact,
-    MetricProcessingPipeline,
+    VerificationState, VerificationStateMachine, VerificationType, QualityGateRuleDefinition, VerificationSpecification,
+    VerificationPlanner, VerificationExecutionEngine, EvidenceLifecycleManager, MetricProcessingPipeline,
     IndependentEvaluationEngine,
     QualityGateDecision, QualityGateDecisionEngine,
     CertificationAuthorityWorkflow, VerificationCertificate,
-    LifecycleRecoveryManager,
     VerificationLifecycleEngineFacade
 )
 from app.shared_kernel.exceptions import InvariantViolationError, EnvironmentNotReadyError

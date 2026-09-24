@@ -8,8 +8,6 @@ import asyncio
 import uuid
 from typing import Optional
 
-from app.ai.factory import LLMFactory
-from app.ai.prompt_builder import PromptBuilder
 from app.ai.schemas import ExtractionRequest
 
 from app.core.logging import logger

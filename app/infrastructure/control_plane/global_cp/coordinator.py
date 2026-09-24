@@ -1,10 +1,10 @@
 """Global Control Plane Coordinator for Multi-Region Synchronization and Consensus."""
 
 import threading
-from typing import Dict, List, Optional
+from typing import Dict
 from datetime import datetime, timezone
 from app.infrastructure.regions.registry import RegionRegistry
-from app.infrastructure.regions.models import Region, RegionStatus
+from app.infrastructure.regions.models import RegionStatus
 
 
 class GlobalCoordinator:

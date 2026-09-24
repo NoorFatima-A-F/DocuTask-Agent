@@ -1,7 +1,7 @@
 """
 Restore Failure Simulator for Automated Restore Verification System (Part 3G.2E).
 """
-from typing import List, Dict, Any
+from typing import List
 
 from app.platform_verification.restore_verification.domain.models import (
     FailureSimulationItem,

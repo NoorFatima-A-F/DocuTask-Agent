@@ -3,7 +3,7 @@ Voting Engine.
 Supports plurality, majority, and approval voting mechanisms for multi-agent decision making.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from uuid import UUID
 from pydantic import BaseModel, Field
 

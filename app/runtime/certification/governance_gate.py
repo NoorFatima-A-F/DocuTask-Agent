@@ -3,7 +3,7 @@ Governance & Certification - Multi-Stage Governance Gate
 Enforces approval workflows across automated checks, engineering signoff, and compliance.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict, field
 import time
 

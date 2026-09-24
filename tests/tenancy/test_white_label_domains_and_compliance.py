@@ -13,7 +13,7 @@ def test_white_label_branding_profile():
     branding_engine = WhiteLabelEngine()
     org_id = "org_brand_test"
 
-    profile = branding_engine.set_branding(
+    branding_engine.set_branding(
         organization_id=org_id,
         logo_url="https://assets.acme.com/logo.svg",
         primary_color="#FF5500",

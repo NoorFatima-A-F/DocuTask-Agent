@@ -1,6 +1,5 @@
 """Tests for Intelligent Model Selection and Failover Routing (Phase 8C)."""
 
-import pytest
 from app.model_governance.registry.models import (
     Model,
     ModelCategory,

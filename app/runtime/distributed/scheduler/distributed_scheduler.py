@@ -4,14 +4,12 @@ Priority scheduling, SLA enforcement, and multi-tenant fair quota distribution.
 """
 
 from __future__ import annotations
-import asyncio
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 from app.runtime.distributed.models.schemas import (
     ScheduledJob,
     JobPriority,
     JobState,
-    WorkerNode,
 )
 from app.runtime.distributed.queue.distributed_queue import QueueManager
 

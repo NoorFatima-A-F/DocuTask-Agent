@@ -7,7 +7,6 @@ import time
 from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
-    ProductionReadinessScorecard,
     SectionId,
     SectionVerificationResult,
     VerificationStatus,

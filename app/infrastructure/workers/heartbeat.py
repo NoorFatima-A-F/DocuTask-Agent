@@ -2,10 +2,10 @@
 
 from datetime import datetime, timezone
 import threading
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
-from app.infrastructure.workers.models import Worker, WorkerStatus
+from app.infrastructure.workers.models import WorkerStatus
 from app.infrastructure.workers.leases import WorkerLeaseManager
 
 

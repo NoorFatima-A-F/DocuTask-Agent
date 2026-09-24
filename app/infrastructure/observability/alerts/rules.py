@@ -11,9 +11,7 @@ from typing import Dict, List, Optional
 from app.infrastructure.observability.alerts.models import (
     AlertInstance,
     AlertRule,
-    AlertSeverity,
     AlertStatus,
-    RuleType,
 )
 
 logger = logging.getLogger("infrastructure.observability.alerts.rules")

@@ -3,10 +3,9 @@ Worker Runtime Liveness & Thread/Task Monitor (Parts 5 & 8).
 Tracks worker heartbeats, task processing viability, and identifies zombie workers.
 """
 import time
-from typing import Dict, Any, List
+from typing import Dict, Any
 from app.platform_verification.liveness.domain.models import (
     WorkerLivenessReport,
-    LivenessState,
 )
 
 

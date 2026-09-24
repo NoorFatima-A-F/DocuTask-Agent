@@ -3,7 +3,7 @@ Scientific Confidence Engine - Confidence Calibration
 Implements Platt Scaling (logistic sigmoid) and Isotonic calibration mapping.
 """
 
-from typing import List, Tuple
+from typing import List
 import math
 
 

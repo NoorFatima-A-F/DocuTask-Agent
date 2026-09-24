@@ -7,7 +7,6 @@ AI Runtime, Workflow Platform, and Multi-Tenant views.
 
 from __future__ import annotations
 
-from typing import List
 from app.infrastructure.observability.dashboards.models import (
     Dashboard,
     DashboardPanel,

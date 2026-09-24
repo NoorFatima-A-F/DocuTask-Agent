@@ -2,7 +2,7 @@
 Phase 3N.3: Container Security Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IContainerSecurityVerifier
 from ..domain.models import (

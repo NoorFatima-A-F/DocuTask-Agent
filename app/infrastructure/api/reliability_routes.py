@@ -4,10 +4,10 @@ FastAPI Routes for Enterprise Reliability, Health, Failover, and Incidents.
 
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.infrastructure.failover.planner import FailoverScope, FailoverType
-from app.infrastructure.health.probes import HealthProbe, ProbeType
+from app.infrastructure.health.probes import ProbeType
 from app.infrastructure.incidents.models import IncidentStatus
 from app.infrastructure.recovery.workflows import RecoveryWorkflow
 from app.infrastructure.reliability.models import SeverityLevel

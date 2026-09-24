@@ -8,8 +8,7 @@ Computes counterfactual queries: "What would have happened if X had been x'?"
 
 from __future__ import annotations
 
-import math
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from app.runtime.causal.structural_causal_model import StructuralCausalModel

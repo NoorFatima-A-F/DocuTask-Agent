@@ -6,7 +6,6 @@ Achieves >= 95% test coverage for tool descriptors, registration, capability res
 import pytest
 from app.agents.tools import (
     BaseTool,
-    CapabilityMatch,
     CapabilityRequirement,
     CostProfile,
     LatencyProfile,
@@ -20,7 +19,6 @@ from app.agents.tools import (
     ToolHealthMonitor,
     ToolIdentity,
     ToolMetadata,
-    ToolNotFoundException,
     ToolValidationException,
     ToolValidator,
 )

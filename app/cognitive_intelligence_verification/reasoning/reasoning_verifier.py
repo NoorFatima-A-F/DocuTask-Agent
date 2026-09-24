@@ -100,7 +100,6 @@ class ReasoningVerifier:
         # Structural Causal Model (SCM): Y = f(X, U)
         # Counterfactual: P(Y_{X=x'} | X=x, Y=y)
         causal_graph = {"OCR_Error": "Extraction_Failure", "Extraction_Failure": "Workflow_Intervention"}
-        counterfactual_query = "If OCR_Error had been 0, would Workflow_Intervention have occurred?"
         counterfactual_conclusion = "No: intervening on OCR_Error blocks the causal path to Workflow_Intervention."
 
         passed = "No" in counterfactual_conclusion and causal_graph["OCR_Error"] == "Extraction_Failure"

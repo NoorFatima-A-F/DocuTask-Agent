@@ -2,7 +2,6 @@
 Integration Tests for APDLE Planner REST API Endpoints.
 """
 
-import pytest
 from fastapi.testclient import TestClient
 from app.main import app
 

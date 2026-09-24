@@ -12,7 +12,7 @@ from typing import Any, Dict, Optional
 
 from app.connectors.authentication.credential_store import CredentialStore
 from app.connectors.core.exceptions import AuthenticationError
-from app.connectors.core.models import AuthType, CredentialMetadata
+from app.connectors.core.models import AuthType
 
 logger = logging.getLogger(__name__)
 

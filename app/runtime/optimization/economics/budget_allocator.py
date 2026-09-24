@@ -3,7 +3,7 @@ Budget Allocator for Phase 13.6 (ARIA-EOP).
 Manages dynamic budget reservations, spending caps, and multi-mission financial envelopes.
 """
 
-from typing import Dict, Any, Optional
+from typing import Dict
 import uuid
 from pydantic import BaseModel, Field
 

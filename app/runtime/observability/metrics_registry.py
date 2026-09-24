@@ -11,8 +11,7 @@ from __future__ import annotations
 import collections
 import math
 import threading
-import time
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from app.runtime.observability.schemas import MetricRecord
 
 

@@ -2,9 +2,9 @@
 Enterprise Configuration Schema Specifications.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 
 class ConfigSource(str, Enum):

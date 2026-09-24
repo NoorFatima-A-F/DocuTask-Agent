@@ -3,7 +3,7 @@ Pattern Miner for Phase 13.5 (ARLP-KIP).
 Mines sequential execution patterns, recurring failure modes, and optimal worker allocations across missions.
 """
 
-from typing import Dict, Any, List, Optional, Union
+from typing import Any, List, Optional, Union
 from pydantic import BaseModel, Field
 import uuid
 

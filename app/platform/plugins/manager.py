@@ -4,8 +4,8 @@ Orchestrates plugin registration, validation, activation, and deactivation.
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
-from .models import PluginManifest, PluginRecord, PluginStatus, PluginType
+from typing import Any, Dict, Optional
+from .models import PluginManifest, PluginRecord, PluginStatus
 from .registry import PluginRegistry
 from .validator import PluginValidator
 from ..kernel.exceptions import PluginException

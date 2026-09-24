@@ -3,7 +3,7 @@ Reflection Validator for Phase 13.5 (ARLP-KIP).
 Validates structural integrity, statistical consistency, and event grounding of reflection reports.
 """
 
-from typing import Dict, Any, List
+from typing import Any, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

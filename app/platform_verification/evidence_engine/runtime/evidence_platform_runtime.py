@@ -2,17 +2,13 @@
 Unified Enterprise Verification Evidence Platform Runtime Facade.
 """
 from __future__ import annotations
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from app.platform_verification.evidence_engine.domain.models import (
     EvidenceArtifact,
     EvidenceCategory,
-    AuditEvent,
     CertificationEvidencePackage,
     AiDecisionEvidence,
     ValidationReport,
-    EvidenceRole,
-    IntegrityRecord,
-    EvidenceContext,
 )
 from app.platform_verification.evidence_engine.core.store import ContentAddressableStore
 from app.platform_verification.evidence_engine.core.collector import EvidenceCollector

@@ -13,9 +13,8 @@ Conducts empirical human-in-the-loop and operator usability studies:
 
 from __future__ import annotations
 
-import math
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
+from dataclasses import dataclass
+from typing import List
 
 
 @dataclass

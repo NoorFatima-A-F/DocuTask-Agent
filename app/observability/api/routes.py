@@ -1,7 +1,7 @@
 """FastAPI REST API Routes for Observability, SRE & Operational Intelligence."""
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, Depends, HTTPException, Query
+from typing import List, Optional
+from fastapi import APIRouter, Depends, HTTPException
 
 from .schemas import (
     AlertAcknowledgeRequest,
@@ -15,7 +15,7 @@ from .schemas import (
     RCAResponse,
 )
 from ..alerts.rules import AlertRule, AlertSeverity, RuleConditionType
-from ..incidents.manager import IncidentSeverity, IncidentStatus
+from ..incidents.manager import IncidentSeverity
 from ..sdk.client import ObservabilitySDK
 
 router = APIRouter(prefix="/observability", tags=["Observability & SRE Platform"])

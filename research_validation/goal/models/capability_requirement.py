@@ -6,7 +6,7 @@ Defines required subsystems, models, tools, and hardware needed for goal executi
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 
 
 class CapabilityCriticality(str, Enum):

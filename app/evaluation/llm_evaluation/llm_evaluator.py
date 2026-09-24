@@ -1,7 +1,7 @@
 """Part B: LLM Evaluation Framework."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import ILLMEvaluator
 from ..domain.models import (
     EvaluationCheck,

@@ -1,9 +1,9 @@
 """
 Domain models for Enterprise Disaster Recovery Architecture Verification (Part 3G.1).
 """
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, List, Any, Optional
+from typing import Dict, List
 
 
 class DRMaturityLevel(str, Enum):

@@ -11,7 +11,6 @@ from pydantic import BaseModel, Field
 from app.runtime.learning.policy.policy_generator import PolicyGenerator, PolicyAdjustment
 from app.runtime.learning.policy.policy_evaluator import PolicyEvaluator, PolicySimulationResult
 from app.runtime.learning.policy.policy_comparator import PolicyComparator, PolicyComparisonReport
-from app.runtime.learning.policy.policy_validator import PolicyValidator
 
 
 class CandidatePolicy(BaseModel):

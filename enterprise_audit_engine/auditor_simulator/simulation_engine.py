@@ -7,7 +7,7 @@ aggregating verdicts, blocking ungrounded claims, and computing consensus scores
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
-from .personas import AuditorPersonas, PersonaReviewResult, AuditorFinding
+from .personas import AuditorPersonas, PersonaReviewResult
 
 
 class AuditorSimulationReport(BaseModel):

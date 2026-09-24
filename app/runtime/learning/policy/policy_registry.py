@@ -5,7 +5,6 @@ Stores active, candidate, and archived evolution policies with lineage links.
 
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
-import uuid
 from pydantic import BaseModel, Field
 
 

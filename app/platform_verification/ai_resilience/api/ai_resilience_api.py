@@ -1,8 +1,8 @@
 """FastAPI Router for AI Resilience & Chaos Verification endpoints."""
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter
 from dataclasses import asdict
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from ..runtime.ai_resilience_runtime import AIResilienceRuntime
 
 router = APIRouter(prefix="/health/ai-resilience", tags=["AI Failure Simulation & Resilience"])

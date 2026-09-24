@@ -1,7 +1,6 @@
 """
 Phase 3H.5.6: Automated Recovery Execution Verifier
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IRecoveryExecutionVerifier
 from ..domain.models import RecoveryExecutionReport, RecoveryExecutionStep
 

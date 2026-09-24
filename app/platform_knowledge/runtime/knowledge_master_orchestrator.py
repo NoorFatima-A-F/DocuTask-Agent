@@ -14,8 +14,8 @@ from ..quality.knowledge_quality_intelligence import KnowledgeQualityIntelligenc
 from ..optimization.autonomous_knowledge_optimizer import AutonomousKnowledgeOptimizer
 from ..security.knowledge_security_engine import KnowledgeSecurityEngine
 from ..models.schemas import (
-    KnowledgeAsset, KnowledgeSource, KnowledgeSourceType, SecurityClassification,
-    ContextRetrievalRequest, ContextRetrievalResponse, MemoryTier
+    KnowledgeAsset, KnowledgeSourceType, SecurityClassification,
+    ContextRetrievalRequest, ContextRetrievalResponse
 )
 
 class KnowledgeMasterOrchestrator:

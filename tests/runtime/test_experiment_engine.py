@@ -2,12 +2,10 @@
 Unit and Integration Tests for Scientific Experiment Engine & Testing (ASVSP Pillar 6).
 """
 
-import pytest
 from app.runtime.experiments import (
     ABTestingEngine,
     BayesianExperimentEngine,
     SequentialProbabilityRatioTest,
-    ExperimentRegistry,
     ExperimentEngine,
 )
 

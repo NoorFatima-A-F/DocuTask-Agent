@@ -6,7 +6,6 @@ Provides high-performance, in-memory caching for repeated execution traces, eval
 from collections import OrderedDict
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
-from uuid import UUID
 
 
 class ReflectionCache:

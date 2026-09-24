@@ -3,7 +3,7 @@ Capability Matcher.
 Matches task execution requirements (skills, tools, domains, latency limits) against candidate agents.
 """
 
-from typing import Any, Dict, List
+from typing import List, Optional
 from pydantic import BaseModel, Field
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.interfaces import ICapabilityMatcher

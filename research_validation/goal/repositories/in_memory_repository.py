@@ -4,7 +4,7 @@ In-Memory Goal and Mission Repositories
 High-performance in-memory repository implementations supporting immutable version histories.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from research_validation.goal.interfaces.repository import IGoalRepository, IMissionRepository
 from research_validation.goal.models.goal import Goal
 from research_validation.goal.models.mission import Mission

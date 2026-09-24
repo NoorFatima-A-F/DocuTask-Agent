@@ -17,8 +17,6 @@ from app.runtime.science.events.science_events import (
     ExperimentStarted,
     ExperimentStatus,
     ScienceEventBus,
-    ScientificDomainEvent,
-    ScientificEventType,
 )
 
 

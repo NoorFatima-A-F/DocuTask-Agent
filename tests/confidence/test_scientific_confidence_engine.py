@@ -3,13 +3,9 @@ Pytest Suite for Phase 13.3 Scientific Confidence Engine & Governance Platform (
 Tests deterministic computation, calibration, uncertainty, lineage, and governance policies.
 """
 
-import pytest
-from app.runtime.confidence.models.confidence_dimensions import ConfidenceDimension, ConfidenceStatus
+from app.runtime.confidence.models.confidence_dimensions import ConfidenceStatus
 from app.runtime.confidence.features.feature_registry import FeatureRegistry
 from app.runtime.confidence.features.feature_validator import FeatureValidator
-from app.runtime.confidence.features.feature_normalizer import FeatureNormalizer
-from app.runtime.confidence.features.event_feature_extractor import EventFeatureExtractor
-from app.runtime.confidence.formulas.weights import ConfidenceWeightPolicy
 from app.runtime.confidence.formulas.formula_executor import FormulaExecutor
 from app.runtime.confidence.formulas.formula_validator import FormulaValidator
 from app.runtime.confidence.uncertainty.uncertainty_estimator import UncertaintyEstimator

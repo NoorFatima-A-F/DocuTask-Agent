@@ -1,8 +1,7 @@
 """Automated Post-Deployment Recovery and Telemetry Sentry."""
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional
-from ..core.exceptions import RollbackException
+from typing import List, Optional
 
 
 @dataclass

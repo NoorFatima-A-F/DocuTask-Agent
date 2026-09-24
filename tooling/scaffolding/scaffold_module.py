@@ -2,7 +2,6 @@
 Bounded Context & Module Scaffolder CLI.
 Generates complete 4-layer Hexagonal architecture layout for new verification domains.
 """
-import os
 import sys
 
 TEMPLATE_FILES = {

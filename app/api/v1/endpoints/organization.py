@@ -12,7 +12,6 @@ from pydantic import BaseModel, Field
 # Legacy Pillar 1
 from app.runtime.organization.organization_graph import OrganizationGraphBuilder
 from app.runtime.organization.organizational_state import org_state_manager
-from app.runtime.organization.hierarchy_manager import HierarchyManager
 from app.runtime.organization.organization_registry import OrganizationRegistry
 
 # Legacy Pillar 2
@@ -37,7 +36,6 @@ from app.runtime.operations.lease_manager import lease_manager
 
 # Legacy Pillar 5
 from app.runtime.org_health.org_health_aggregator import OrgHealthAggregator
-from app.runtime.org_health.department_health import DepartmentHealthScorer
 
 # Legacy Pillar 6
 from app.runtime.communication.communication_bus import communication_bus
@@ -46,7 +44,6 @@ from app.runtime.communication.conversation_history import ConversationHistory
 
 # Legacy Pillar 7
 from app.runtime.org_learning.department_memory import department_memory_manager
-from app.runtime.org_learning.department_reflection import DepartmentReflectionEngine
 from app.runtime.org_learning.organizational_learning import OrganizationalLearningSynthesizer
 
 # Legacy Pillar 8
@@ -66,7 +63,6 @@ from app.runtime.org_simulation.resilience_report import ResilienceReportGenerat
 from app.runtime.organization.events.organization_events import (
     AgentRole,
     MissionPriority,
-    org_event_bus,
 )
 from app.runtime.organization.mission.mission_engine import mission_engine
 from app.runtime.organization.strategy.organization_strategy_engine import organization_strategy_engine
@@ -80,7 +76,6 @@ from app.runtime.organization.negotiation.negotiation_engine import negotiation_
 from app.runtime.organization.governance.governance_engine import governance_engine
 from app.runtime.organization.simulation.simulation_engine import (
     organization_simulation_engine,
-    SimulationScenario,
 )
 from app.runtime.organization.runtime.organization_runtime import organization_runtime
 

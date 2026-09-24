@@ -5,8 +5,8 @@ Unifies SCM DAG inspection, do-calculus estimation, and root-cause attribution.
 
 from typing import Dict, List, Any
 from app.runtime.causal_analysis.scm import StructuralCausalModel
-from app.runtime.causal_analysis.do_calculus import DoCalculusEngine, CausalInterventionResult
-from app.runtime.causal_analysis.attribution import CausalAttributionEngine, CausalAttributionItem
+from app.runtime.causal_analysis.do_calculus import DoCalculusEngine
+from app.runtime.causal_analysis.attribution import CausalAttributionEngine
 
 
 class CausalAnalysisEngine:

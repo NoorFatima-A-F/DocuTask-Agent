@@ -5,7 +5,7 @@ Decoupled feature entitlement checking without hardcoding 'if enterprise:' check
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict
 from app.tenancy.core.models import SubscriptionTier
 from app.tenancy.core.exceptions import FeatureNotEntitledError
 from app.tenancy.subscriptions.engine import SubscriptionEngine

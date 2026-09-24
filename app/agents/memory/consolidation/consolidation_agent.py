@@ -15,7 +15,7 @@ from app.agents.memory.consolidation.knowledge_extractor import KnowledgeExtract
 from app.agents.memory.consolidation.memory_promoter import MemoryPromoter
 from app.agents.memory.consolidation.pattern_miner import PatternMiner
 from app.agents.memory.intelligence.episodic_memory import EpisodicMemory
-from app.agents.memory.intelligence.semantic_memory import SemanticFact, SemanticMemory
+from app.agents.memory.intelligence.semantic_memory import SemanticMemory
 
 logger = logging.getLogger(__name__)
 

@@ -11,9 +11,8 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
-from app.agents.collaboration.agent_profile import AgentProfile
 from app.agents.collaboration.agent_registry import AgentRegistry
 
 logger = logging.getLogger(__name__)

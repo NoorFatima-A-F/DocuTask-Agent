@@ -2,7 +2,7 @@
 Phase 3I.9: Observability Intelligence, Predictive Reliability & AIOps Maturity — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import List
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

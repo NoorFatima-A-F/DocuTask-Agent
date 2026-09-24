@@ -6,9 +6,8 @@ Manages checkpointing and atomic rollback of execution states and uncommitted no
 
 from __future__ import annotations
 
-import copy
 import time
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from app.runtime.planning.graph.dag import ExecutionDAG
 
 

@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import logging
 import math
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from app.knowledge.core.models import KnowledgeChunk, KnowledgeEmbedding, RetrievalResult
 from app.knowledge.embeddings.provider import DeterministicEmbeddingProvider, EmbeddingProvider

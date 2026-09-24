@@ -3,7 +3,7 @@ Abstract interfaces for Clean Architecture & Dependency Validation.
 """
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 from app.platform_verification.clean_architecture.domain.models import (
     ArchitectureExceptionWaiver,
     CleanArchDependencyEdge,

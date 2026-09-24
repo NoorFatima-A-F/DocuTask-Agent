@@ -4,9 +4,8 @@ Validates that remediation operations successfully restored target component hea
 comparing pre-remediation failure indicators with post-remediation operational metrics.
 """
 
-from typing import Dict, List, Any
+from typing import List
 import uuid
-import time
 from ..domain.models import (
     ExecutionLogEntry,
     RecoveryValidationResult,

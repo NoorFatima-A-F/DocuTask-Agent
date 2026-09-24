@@ -6,12 +6,11 @@ and non-repudiation of EvidenceNodes across the execution graph.
 
 from __future__ import annotations
 
-import hashlib
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 from app.runtime.evidence.evidence_graph import EvidenceGraph
-from app.runtime.evidence.execution_evidence import EvidenceNode, EvidenceStatus
+from app.runtime.evidence.execution_evidence import EvidenceNode
 
 
 class ValidationReport:

@@ -2,7 +2,6 @@
 
 import pytest
 from app.prompts.registry.models import (
-    Prompt,
     PromptCategory,
     PromptLifecycleState,
     RiskLevel,

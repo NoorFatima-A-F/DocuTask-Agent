@@ -4,7 +4,7 @@ Evaluates the quality of plan decomposition, redundant or duplicated tasks, miss
 and structural complexity.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from app.agents.reflection.interfaces import IPlanAnalyzer
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 

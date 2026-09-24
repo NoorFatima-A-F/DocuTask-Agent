@@ -9,7 +9,6 @@ Validates:
 """
 
 from uuid import uuid4
-import pytest
 from app.agents.runtime.enterprise.distributed_scheduler import DistributedScheduler
 from app.agents.runtime.enterprise.scheduler_state import (
     JobPriority,

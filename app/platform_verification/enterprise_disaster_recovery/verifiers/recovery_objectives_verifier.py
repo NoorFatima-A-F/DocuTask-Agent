@@ -2,7 +2,7 @@
 Phase 3L.3: Recovery Objective Definition (RTO & RPO) Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IRecoveryObjectivesVerifier
 from ..domain.models import (

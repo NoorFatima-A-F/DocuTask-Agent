@@ -2,7 +2,6 @@
 Spike testing runner measuring burst resilience and queue backpressure.
 """
 
-from typing import Dict, Any
 from app.performance_verification.domain.models import (
     SpikeTestResult,
     PerformanceStatus,

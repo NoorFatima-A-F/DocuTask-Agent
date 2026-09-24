@@ -45,7 +45,7 @@
   },
   "storage_provider": "AWS S3 with Object Lock Compliance Mode",
   "retention_policy": "7_YEARS_WORM",
-  "last_backup_timestamp": "2026-09-19T07:04:39.933054+00:00",
+  "last_backup_timestamp": "2026-09-24T21:54:53.008196+00:00",
   "encrypted_assets": 245,
   "unencrypted_assets": 0,
   "assets_by_type": {

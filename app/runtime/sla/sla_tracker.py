@@ -5,7 +5,6 @@ Tracks SLA/SLO compliance, Mean Time to Recovery (MTTR), Mean Time Between Failu
 
 from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
-import time
 
 
 @dataclass

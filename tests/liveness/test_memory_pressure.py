@@ -1,7 +1,6 @@
 """
 Tests for Resource and Memory Health (Parts 6 & 7).
 """
-import pytest
 from app.platform_verification.liveness.resources.resource_monitor import ResourceMonitor
 
 

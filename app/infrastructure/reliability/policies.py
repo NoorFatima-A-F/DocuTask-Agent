@@ -11,8 +11,7 @@ import asyncio
 import logging
 import random
 import time
-from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional, TypeVar, Union
+from typing import Any, Callable, Dict, Optional, TypeVar
 
 from app.infrastructure.reliability.models import (
     BulkheadConfig,

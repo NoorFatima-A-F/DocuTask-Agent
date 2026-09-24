@@ -1,6 +1,6 @@
 """Master Runtime Coordinator for Phase 3H.4.2 Health Root Cause Analysis Framework."""
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from ..topology.dependency_graph import DependencyGraphEngine
 from ..correlation.health_event_correlator import HealthEventCorrelator
 from ..classifier.failure_classifier import FailureClassifier

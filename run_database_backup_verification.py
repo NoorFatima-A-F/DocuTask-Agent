@@ -9,9 +9,6 @@ from pathlib import Path
 from app.platform_verification.database_backup_verification.runtime.database_backup_runtime import (
     DatabaseBackupVerificationRuntime,
 )
-from app.platform_verification.database_backup_verification.domain.models import (
-    DBCertificationTier,
-)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("DatabaseBackupVerifier")

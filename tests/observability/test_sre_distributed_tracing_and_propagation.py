@@ -1,9 +1,8 @@
 """Tests for Tracing Engine, Span Scopes, and W3C Header Propagation."""
 
-import pytest
 from app.observability.tracing.propagation import TraceContextPropagator
-from app.observability.tracing.spans import SpanContext, SpanKind, SpanStatus
-from app.observability.tracing.tracer import SamplingStrategy, TracingEngine
+from app.observability.tracing.spans import SpanContext, SpanStatus
+from app.observability.tracing.tracer import TracingEngine
 
 
 def test_tracing_engine_span_hierarchy():

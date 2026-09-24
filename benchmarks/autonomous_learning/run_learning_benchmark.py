@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import asyncio
 import logging
-import os
 import random
 import sys
 import time
@@ -24,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from app.agents.memory.consolidation.consolidation_agent import MemoryConsolidationAgent
 from app.agents.memory.consolidation.pattern_miner import PatternMiner
 from app.agents.memory.intelligence.episodic_memory import EpisodeRecord, EpisodicMemory
-from app.agents.memory.intelligence.semantic_memory import SemanticFact, SemanticMemory
+from app.agents.memory.intelligence.semantic_memory import SemanticMemory
 from app.agents.runtime.autonomous.autonomous_runtime import AutonomousRuntime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")

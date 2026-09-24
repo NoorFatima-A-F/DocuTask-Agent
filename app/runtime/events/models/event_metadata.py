@@ -5,7 +5,6 @@ Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional
-import time
 from app.runtime.events.models.event_types import EventSubsystem, EventSeverity
 
 

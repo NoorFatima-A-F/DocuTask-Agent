@@ -2,10 +2,9 @@
 Tests for ContextBuilder and CitationEngine.
 """
 
-import pytest
 from app.knowledge.citations.engine import CitationEngine
 from app.knowledge.context.builder import ContextBuilder
-from app.knowledge.core.models import Citation, KnowledgeChunk, RetrievalResult
+from app.knowledge.core.models import KnowledgeChunk, RetrievalResult
 
 
 def test_citation_engine_creation_and_grounding():

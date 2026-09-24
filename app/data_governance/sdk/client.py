@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from app.data_governance.registry.models import (
     DataAsset,
     AssetType,
@@ -12,11 +12,9 @@ from app.data_governance.registry.models import (
 from app.data_governance.registry.service import DataGovernanceRegistryService
 from app.data_governance.classification.classifier import DataClassificationEngine, ClassificationResult
 from app.data_governance.lineage.tracker import LineageTracker
-from app.data_governance.lineage.graph import LineageGraphEngine
 from app.data_governance.provenance.history import ProvenanceHistoryEngine
-from app.data_governance.provenance.source import ProvenanceSourceRecord
 from app.data_governance.catalog.search import EnterpriseDataCatalog
-from app.data_governance.quality.scoring import DataQualityScorer, DataQualityReport
+from app.data_governance.quality.scoring import DataQualityScorer
 from app.data_governance.retention.scheduler import RetentionAndLegalHoldEngine
 from app.data_governance.privacy.masking import PrivacyMaskingEngine
 from app.data_governance.access.tracking import DataAccessTracker, DataActionType

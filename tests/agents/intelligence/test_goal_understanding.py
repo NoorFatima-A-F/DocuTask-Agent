@@ -14,14 +14,12 @@ import pytest
 
 from app.agents.intelligence.goal import (
     ConstraintExtractor,
-    ExtractedConstraints,
     GoalManager,
     GoalParser,
     GoalPriority,
     GoalSpecification,
     GoalStatus,
     IntentClassifier,
-    IntentResult,
     IntentType,
     RiskLevel,
     SuccessCriteria,

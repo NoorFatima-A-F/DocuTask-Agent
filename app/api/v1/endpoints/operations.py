@@ -20,7 +20,6 @@ from app.runtime.operations import (
     FailurePredictor,
     RiskForecastEngine,
     SubsystemType,
-    OperationalSeverity,
     HealingActionType,
 )
 

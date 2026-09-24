@@ -3,12 +3,9 @@ Unit and Integration tests for Module Boundary & Plugin Architecture Verificatio
 """
 import pytest
 from app.platform_verification.module_boundary import (
-    BoundaryViolationSeverity,
     EnterpriseModuleBoundaryRuntime,
     ModularityCertificationBand,
     ModuleDependencyEdge,
-    ModuleManifest,
-    ModuleType,
     PluginInterface,
 )
 

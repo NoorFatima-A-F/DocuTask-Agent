@@ -1,6 +1,5 @@
 """Tests for Event Processor, Deduplication, and Event Analyzer."""
 
-import pytest
 from app.observability.core.events import EventCategory, EventStream, PlatformEvent
 from app.observability.events.analyzer import EventAnalyzer
 from app.observability.events.processor import EventProcessor

@@ -1,12 +1,10 @@
 """Tests for Prompt Multi-Tier Approval Workflow and Security Scanning (Phase 8D)."""
 
-import pytest
 from app.prompts.registry.repository import PromptRegistryRepository
 from app.prompts.registry.service import PromptRegistryService
 from app.prompts.approvals.workflow import ApprovalStageStatus, PromptApprovalWorkflowEngine
 from app.prompts.security.injection import PromptInjectionScanner
 from app.prompts.security.leakage import PromptLeakageScanner
-from app.prompts.security.validation import PromptSecurityValidator
 
 
 def test_prompt_injection_scanner():

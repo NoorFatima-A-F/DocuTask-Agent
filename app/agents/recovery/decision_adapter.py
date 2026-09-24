@@ -3,7 +3,6 @@ Decision Adapter for Recovery Subsystem.
 Queries DecisionEngine to clear recovery strategies against governance, cost, and compliance policies.
 """
 
-from typing import Optional
 from app.agents.decision.context import DecisionContext
 from app.agents.decision.engine import DecisionEngine, DecisionResult
 

@@ -2,7 +2,7 @@
 Domain interfaces for Enterprise Performance, Scaling & Chaos Verification.
 """
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
+from typing import List, Dict
 from app.platform_verification.performance_chaos_verification.domain.models import (
     PerformanceBaselineReport,
     LoadTestReport,

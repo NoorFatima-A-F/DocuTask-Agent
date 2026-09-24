@@ -5,7 +5,7 @@ Specifies resource budgets, execution limits, privacy rules, and governance rest
 """
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from research_validation.goal.constants import (
     DEFAULT_MAX_RUNTIME_HOURS, DEFAULT_MAX_GPU_HOURS, DEFAULT_MAX_CPU_HOURS,
     DEFAULT_MAX_RAM_GB, DEFAULT_MAX_STORAGE_GB, DEFAULT_MAX_COST_USD,

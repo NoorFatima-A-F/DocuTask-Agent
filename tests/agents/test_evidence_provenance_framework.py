@@ -7,18 +7,15 @@ tamper detection, immutable store versioning, visualizers, and quality level gra
 """
 
 import json
-import math
 import pytest
 from pathlib import Path
 
 from research_validation.provenance.hashing import HashAlgorithm, ProvenanceHasher
 from research_validation.provenance.provenance_models import (
-    EvidenceNode, EvidenceQualityLevel, LineageStage, EnvironmentFingerprint,
-    ProvEntity, ProvActivity, ProvAgent, ProvRelationType
+    EvidenceNode, EvidenceQualityLevel, LineageStage, ProvEntity, ProvActivity, ProvAgent, ProvRelationType
 )
-from research_validation.provenance.merkle_dag import MerkleDAG, MerkleVerificationResult
 from research_validation.provenance.digital_signatures import (
-    DetachedSignature, ProvenanceSigner, SignatureAlgorithm, CertificateInfo
+    DetachedSignature, ProvenanceSigner, SignatureAlgorithm
 )
 from research_validation.provenance.provenance_schema import (
     ProvDocument, ProvRelation, OpenLineageJob, OpenLineageRun,
@@ -26,16 +23,14 @@ from research_validation.provenance.provenance_schema import (
     OpenLineageRunEvent, OpenLineageEventType
 )
 from research_validation.provenance.provenance_serialization import ProvenanceSerializer
-from research_validation.provenance.evidence_graph import EvidenceGraph, LineageAncestryTrace
-from research_validation.provenance.lineage_tracker import LineageTracker, CompleteLineageChain
-from research_validation.provenance.evidence_store import EvidenceStore, VersionedEvidenceRecord
-from research_validation.provenance.evidence_diff import EvidenceDiffer, EvidenceBundleDiffReport
+from research_validation.provenance.evidence_graph import EvidenceGraph
+from research_validation.provenance.evidence_store import EvidenceStore
+from research_validation.provenance.evidence_diff import EvidenceDiffer
 from research_validation.provenance.provenance_validator import (
-    ProvenanceValidator, ProvenanceAuditReport, ProvenanceValidationVerdict
+    ProvenanceValidator, ProvenanceValidationVerdict
 )
 from research_validation.provenance.provenance_visualizer import ProvenanceVisualizer
-from research_validation.provenance.evidence_bundle import EvidenceBundleBuilder, SealedEvidenceBundle
-from research_validation.provenance.provenance_api import ProvenanceAPI
+from research_validation.provenance.evidence_bundle import EvidenceBundleBuilder
 from research_validation.provenance.provenance_engine import ProvenanceEngine
 
 
@@ -219,8 +214,8 @@ def test_evidence_differ():
 
 def test_provenance_validator():
     graph = EvidenceGraph()
-    n1 = graph.record_node("r1", LineageStage.RAW_OBSERVATION, "Raw", "Raw data", {}, [], EvidenceQualityLevel.LEVEL_B)
-    n2 = graph.record_node("m1", LineageStage.FINAL_METRIC, "Metric", "Metric data", {}, ["r1"], EvidenceQualityLevel.LEVEL_B)
+    graph.record_node("r1", LineageStage.RAW_OBSERVATION, "Raw", "Raw data", {}, [], EvidenceQualityLevel.LEVEL_B)
+    graph.record_node("m1", LineageStage.FINAL_METRIC, "Metric", "Metric data", {}, ["r1"], EvidenceQualityLevel.LEVEL_B)
 
     audit = ProvenanceValidator.audit_graph(graph)
     assert audit.is_valid is True
@@ -230,8 +225,8 @@ def test_provenance_validator():
 
 def test_provenance_visualizer():
     graph = EvidenceGraph()
-    n1 = graph.record_node("r1", LineageStage.RAW_OBSERVATION, "Raw Observations", "500 samples", {}, [], EvidenceQualityLevel.LEVEL_A)
-    n2 = graph.record_node("m1", LineageStage.FINAL_METRIC, "Entity Macro F1", "F1=0.96", {}, ["r1"], EvidenceQualityLevel.LEVEL_A)
+    graph.record_node("r1", LineageStage.RAW_OBSERVATION, "Raw Observations", "500 samples", {}, [], EvidenceQualityLevel.LEVEL_A)
+    graph.record_node("m1", LineageStage.FINAL_METRIC, "Entity Macro F1", "F1=0.96", {}, ["r1"], EvidenceQualityLevel.LEVEL_A)
 
     # Mermaid
     mermaid_str = ProvenanceVisualizer.to_mermaid(graph)

@@ -8,12 +8,10 @@ Conducts sensitivity analyses, Monte Carlo perturbations, and robustness sweeps.
 from __future__ import annotations
 import math
 import random
-from dataclasses import dataclass, field
-from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Optional
 
 from research_validation.provenance.provenance_models import EvidenceQualityLevel
-from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)

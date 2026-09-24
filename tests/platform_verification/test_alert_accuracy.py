@@ -1,8 +1,6 @@
 """Comprehensive Unit and Integration Tests for Phase 3H.4.6 — Enterprise Alert Accuracy Verification Framework."""
 
 import json
-import os
-import pytest
 
 from app.platform_verification.alert_accuracy_verification.domain.models import (
     AlertAccuracyTier,
@@ -39,9 +37,6 @@ from app.platform_verification.alert_accuracy_verification.evaluators.anomaly_de
 )
 from app.platform_verification.alert_accuracy_verification.evaluators.alert_recovery_verifier import (
     AlertRecoveryVerifier,
-)
-from app.platform_verification.alert_accuracy_verification.scoring.alert_accuracy_scorer import (
-    AlertAccuracyScorer,
 )
 from app.platform_verification.alert_accuracy_verification.runtime.alert_accuracy_verification_runtime import (
     AlertAccuracyVerificationRuntime,

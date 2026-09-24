@@ -2,7 +2,7 @@
 Workflow Execution Lifecycle Hooks.
 """
 
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List
 from ..domain.models import ExecutionRecord, TaskDefinition, TaskExecutionRecord
 
 

@@ -3,10 +3,9 @@ Section D: Task Scheduler Verification.
 Verifies Cron/Interval Precision, Exponential Backoff with Jitter, Distributed Lease Expiration, and Missed Schedule Catch-Up.
 """
 
-import math
 import random
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,

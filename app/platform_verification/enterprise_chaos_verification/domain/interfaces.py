@@ -3,11 +3,10 @@ Phase 3K: Enterprise Chaos Engineering Verification — Interfaces.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from .models import (
     AIProviderFailureReport,
-    BaseVerificationReport,
     CascadingFailureReport,
     ChaosObservabilityReport,
     ChaosPipelineReport,

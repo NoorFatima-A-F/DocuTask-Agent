@@ -3,7 +3,7 @@ AMAEOP Pillar 6 - Enterprise Channel Manager
 Manages real-time topic channels, message retention, and communication channel health.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 
 

@@ -6,11 +6,10 @@ unmeasurable, or contradictory goals with machine-readable error reasons.
 """
 
 from dataclasses import dataclass, field
-from typing import List, Tuple
+from typing import List
 from research_validation.goal.models.goal import Goal
 from research_validation.goal.models.confidence_threshold import ConfidenceLevel
 from research_validation.goal.services.dependency_analyzer import DependencyAnalyzer
-from research_validation.goal.exceptions import GoalValidationError
 
 
 @dataclass(frozen=True)

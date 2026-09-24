@@ -3,7 +3,6 @@ Master CLI Runner for Enterprise Health State Transition & Service Recovery Inte
 Executes full verification, prints a rich summary scorecard, and exports all 8 audit manifests to health_verification/.
 """
 import sys
-import json
 import time
 
 # Ensure UTF-8 output on Windows

@@ -1,7 +1,7 @@
 """Versioned Configuration Management (Req 48, 49)."""
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 import hashlib
 import uuid
 

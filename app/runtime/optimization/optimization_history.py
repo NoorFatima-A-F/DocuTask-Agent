@@ -4,7 +4,6 @@ Maintains provenance records of optimizer runs, candidate inputs, and selected o
 """
 
 from typing import Dict, List, Any, Optional
-from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
 
 

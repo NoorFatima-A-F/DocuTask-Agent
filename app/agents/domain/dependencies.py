@@ -3,7 +3,7 @@ Task Dependency Domain Model.
 Models Hard, Soft, Optional, Conditional, and Runtime Task Dependencies.
 """
 
-from typing import Any, Dict, Optional
+from typing import Optional
 from pydantic import BaseModel, Field
 from app.agents.domain.enums import DependencyType
 from app.agents.domain.value_objects import TaskID

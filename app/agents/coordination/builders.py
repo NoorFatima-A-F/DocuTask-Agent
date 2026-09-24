@@ -5,7 +5,6 @@ Ensures validated, fail-fast construction of teams, delegation requests, and coo
 
 from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
-from app.agents.coordination.context import CoordinationContext, CoordinationRequest
 from app.agents.coordination.delegation import DelegationMode, DelegationRequest, DelegationTask
 from app.agents.coordination.team import Team, TeamMember, TeamRole, TeamType
 

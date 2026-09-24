@@ -9,10 +9,6 @@ from app.main import app
 
 from app.runtime.world_model.events.world_model_events import (
     ObservationSource,
-    ObservationQuality,
-    WorldModelEventType,
-    WorldModelEvent,
-    world_model_event_bus,
 )
 from app.runtime.world_model.observation.observation_engine import observation_engine
 from app.runtime.world_model.knowledge.knowledge_fusion_engine import knowledge_fusion_engine

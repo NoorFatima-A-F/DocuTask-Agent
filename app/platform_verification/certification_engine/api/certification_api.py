@@ -4,15 +4,13 @@ REST API Router for Enterprise Verification Quality Gates & Certification (PART 
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.platform_verification.certification_engine.domain.models import (
     ApprovalAction,
     ApprovalReview,
     CertificationLevel,
-    CertificationRecord,
     ChangeType,
     ExceptionRequest,
-    QualityGateDecision,
     RiskLevel,
 )
 from app.platform_verification.certification_engine.runtime.certification_platform_runtime import (

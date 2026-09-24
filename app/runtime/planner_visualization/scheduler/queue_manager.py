@@ -5,8 +5,7 @@ Manages multi-state runtime queues (WAITING, RUNNING, BLOCKED, RETRY, RECOVERY, 
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
-from app.runtime.planner_visualization.ui_models.models import TaskExecutionState
+from typing import Any, Dict
 
 
 class RuntimeQueueManager:

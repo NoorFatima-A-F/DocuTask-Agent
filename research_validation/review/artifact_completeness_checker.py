@@ -6,10 +6,10 @@ scientific integrity requirements (ACM, USENIX, IEEE, MLCommons standards).
 """
 
 from __future__ import annotations
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Tuple
 
 from research_validation.provenance.hashing import hash_canonical_json
 

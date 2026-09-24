@@ -3,7 +3,7 @@ AMAEOP Pillar 2 - Executive Organizational Metrics
 Calculates macro-level organizational efficiency, inter-department delegation ratios, and strategic alignment KPIs.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from app.runtime.organization.organizational_state import org_state_manager
 from app.runtime.executive.executive_controller import executive_controller
 from app.runtime.executive.mission_director import mission_director

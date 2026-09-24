@@ -3,9 +3,9 @@ Governance & Certification - Master Certification Engine Facade
 Coordinates scientific dossier generation, cryptographic signing, and governance gate approval flows.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from app.runtime.certification.certification_package import CertificationPackageBuilder, ScientificCertificationPackage
-from app.runtime.certification.governance_gate import GovernanceGateManager, GovernanceApprovalRecord
+from app.runtime.certification.governance_gate import GovernanceGateManager
 
 
 class ScientificCertificationEngine:

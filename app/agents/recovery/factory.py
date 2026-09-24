@@ -4,7 +4,6 @@ Wires RecoveryEngine, RecoveryManager, RecoveryRuntime, FailureClassifier,
 RootCauseAnalyzer, RecoveryStrategySelector, and DeadLetterQueue.
 """
 
-from typing import Optional
 from app.agents.recovery.dead_letter import DeadLetterQueue
 from app.agents.recovery.engine import RecoveryEngine
 from app.agents.recovery.failure_classifier import FailureClassifier

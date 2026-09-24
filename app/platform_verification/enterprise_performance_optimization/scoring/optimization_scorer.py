@@ -3,7 +3,7 @@ Phase 3J.11: Intelligent Performance Optimization Quality Scorer & Certification
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 
 from ..domain.models import (
     AutonomousPerformanceTier,

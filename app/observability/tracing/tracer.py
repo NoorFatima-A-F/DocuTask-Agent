@@ -5,12 +5,11 @@ from __future__ import annotations
 import contextlib
 import random
 import threading
-import time
 import uuid
 from enum import Enum
 from typing import Any, Dict, Generator, List, Optional
 
-from .spans import Span, SpanContext, SpanKind, SpanStatus
+from .spans import Span, SpanContext, SpanKind
 
 
 class SamplingStrategy(str, Enum):

@@ -9,7 +9,6 @@ from __future__ import annotations
 import time
 from typing import Dict, Set
 from app.runtime.planning.graph.dag import ExecutionDAG
-from app.runtime.planning.graph.node import NodeStatus
 
 
 class CompletionEstimator:

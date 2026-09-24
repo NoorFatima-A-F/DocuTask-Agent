@@ -2,9 +2,8 @@
 Phase 3H.5.9: Predictive Health Intelligence & Proactive Failure Prevention — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import List
 from pydantic import BaseModel, Field
-from datetime import datetime
 
 
 class PredictionRiskLevel(str, Enum):

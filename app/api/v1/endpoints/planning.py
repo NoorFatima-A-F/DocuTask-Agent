@@ -7,13 +7,13 @@ mutable DAG visualization and mutation, resource scheduler monitoring, adaptive 
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
 from app.runtime.planning.planner_runtime import AutonomousPlanningRuntime, MissionPlanResult
-from app.runtime.planning.mutable_dag import MutableExecutionDAG, DAGNode, DAGMutationType
-from app.runtime.planning.strategy_ranker import StrategySelectionRecord, StrategyComparisonMatrix
-from app.runtime.planning.counterfactual_engine import CounterfactualExplanation, CounterfactualQuery
+from app.runtime.planning.mutable_dag import MutableExecutionDAG, DAGMutationType
+from app.runtime.planning.strategy_ranker import StrategyComparisonMatrix
+from app.runtime.planning.counterfactual_engine import CounterfactualExplanation
 from app.runtime.planning.scheduler import WorkerLease, QueuePriority
 from app.runtime.planning.adaptive_replanner import ReplanningTrigger, ReplanningTriggerType, SubGraphReplanningResult
 from app.runtime.planning.self_evaluator import PlanCalibrationMetric

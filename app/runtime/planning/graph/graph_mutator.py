@@ -9,11 +9,11 @@ from __future__ import annotations
 
 import time
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 from app.runtime.planning.graph.dag import ExecutionDAG
-from app.runtime.planning.graph.edge import DAGEdge, EdgeType
-from app.runtime.planning.graph.node import DAGNode, NodeStatus
+from app.runtime.planning.graph.edge import DAGEdge
+from app.runtime.planning.graph.node import DAGNode
 
 
 class GraphMutationRecord(BaseModel):

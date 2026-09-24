@@ -2,7 +2,7 @@
 Stress testing and capacity boundary identification.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from app.performance_verification.domain.models import CapacityBoundary
 
 

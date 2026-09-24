@@ -7,7 +7,7 @@ from app.infrastructure.clusters.health import (
     ClusterHealthAggregator,
     SubComponentHealth,
 )
-from app.infrastructure.clusters.models import Cluster, ClusterLease, ClusterStatus
+from app.infrastructure.clusters.models import ClusterLease
 
 
 def test_cluster_capability_registry():

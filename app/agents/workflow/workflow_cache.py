@@ -5,7 +5,7 @@ High-throughput LRU and TTL memory cache for workflow definitions, graph topolog
 
 import time
 from collections import OrderedDict
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Optional, Tuple
 
 
 class WorkflowCache:

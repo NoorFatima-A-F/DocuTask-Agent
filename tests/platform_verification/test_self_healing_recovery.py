@@ -3,10 +3,7 @@ Comprehensive Unit and Integration Tests for Phase 3H.5.5: Enterprise Health Sel
 """
 import os
 import json
-import pytest
 from app.platform_verification.self_healing_verification.domain.models import (
-    FailureCategory,
-    RecoveryStrategyType,
     SelfHealingTier,
     RecoveryValidationReport,
 )
@@ -39,9 +36,6 @@ from app.platform_verification.self_healing_verification.verifiers.layer5_stabil
 )
 from app.platform_verification.self_healing_verification.scoring.self_healing_scorer import (
     SelfHealingScorer,
-)
-from app.platform_verification.self_healing_verification.exporter.self_healing_evidence_exporter import (
-    SelfHealingEvidenceExporter,
 )
 from app.platform_verification.self_healing_verification.runtime.self_healing_runtime import (
     SelfHealingRuntime,

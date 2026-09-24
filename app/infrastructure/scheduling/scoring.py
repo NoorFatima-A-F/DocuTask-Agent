@@ -1,7 +1,7 @@
 """Placement Scoring Engine for Candidate Ranking."""
 
-from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import List, Optional
+from pydantic import BaseModel
 
 from app.infrastructure.executions.workload import WorkloadRequest
 from app.infrastructure.workers.models import Worker

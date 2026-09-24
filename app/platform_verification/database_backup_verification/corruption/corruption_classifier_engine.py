@@ -2,7 +2,7 @@
 Corruption Classifier and Fault Injection Engine (Part 3G.2B Phase 10).
 Injects controlled corruption and categorizes into Recoverable, Partially Recoverable, and Irrecoverable.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from app.platform_verification.database_backup_verification.domain.models import (
     CorruptionSeverity,
     CorruptionClassificationItem,

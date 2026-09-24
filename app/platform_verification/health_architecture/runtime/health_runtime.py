@@ -1,7 +1,7 @@
 """
 Health Verification Runtime for Health Check Architecture Verification (Part 3H.1).
 """
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from app.platform_verification.health_architecture.state_machine.health_state_machine import (
     HealthStateMachine,
 )

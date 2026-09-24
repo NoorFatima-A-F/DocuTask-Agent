@@ -9,7 +9,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, List, Optional
 from uuid import UUID
 from app.agents.runtime.enterprise.scheduler_state import JobStatus, ScheduledJob
-from app.agents.runtime.scheduler.task_queue import TaskLease, TaskQueueBackend
+from app.agents.runtime.scheduler.task_queue import TaskQueueBackend
 
 logger = logging.getLogger(__name__)
 

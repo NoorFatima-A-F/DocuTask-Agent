@@ -10,14 +10,13 @@ from __future__ import annotations
 import json
 import os
 import threading
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from research_validation.scientific_execution.experiment_manifest import (
     ExperimentManifest, ExperimentStatus
 )
-from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)

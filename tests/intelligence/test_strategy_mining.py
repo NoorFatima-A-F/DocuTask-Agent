@@ -3,7 +3,7 @@ Tests for Strategy Mining Engine (Pillar 2).
 """
 
 import pytest
-from app.runtime.intelligence.experience import ExperienceExtractor, ExperienceRecord, ExperienceStore
+from app.runtime.intelligence.experience import ExperienceExtractor, ExperienceStore
 from app.runtime.intelligence.strategy.strategy_library import StrategyLibrary
 from app.runtime.intelligence.strategy.strategy_miner import StrategyMiner
 

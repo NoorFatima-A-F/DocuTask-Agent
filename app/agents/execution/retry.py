@@ -4,7 +4,6 @@ Implements Immediate, FixedDelay, ExponentialBackoff, Jitter, and Adaptive retry
 """
 
 from enum import Enum
-import math
 import random
 from pydantic import BaseModel, Field
 

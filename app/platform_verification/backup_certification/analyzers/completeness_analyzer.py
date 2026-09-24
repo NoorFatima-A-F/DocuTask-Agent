@@ -2,7 +2,7 @@
 Completeness Analyzer for Backup Certification Framework (Part 3G.2G).
 Audits whether backups contain all essential components for complete disaster recovery.
 """
-from typing import List, Dict, Any
+from typing import List
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     CompletenessEvaluation,

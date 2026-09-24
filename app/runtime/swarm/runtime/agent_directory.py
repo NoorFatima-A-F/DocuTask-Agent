@@ -3,9 +3,9 @@ AMCN-SIP Phase 13.8 - Agent Directory & Semantic Discovery
 Semantic capability search, nearest expert matching, and replacement discovery.
 """
 
-from typing import List, Optional
+from typing import Optional
 from app.runtime.swarm.runtime.agent_registry import AgentRegistry, SwarmAgentProfile
-from app.runtime.swarm.events.swarm_events import AgentRoleType, AgentLifecycleState, AgentRole, AgentState
+from app.runtime.swarm.events.swarm_events import AgentRoleType, AgentRole, AgentState
 
 
 class AgentDirectory:

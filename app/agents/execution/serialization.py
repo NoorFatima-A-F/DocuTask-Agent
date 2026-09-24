@@ -4,7 +4,6 @@ Serializes execution requests, sessions, and snapshots for Pub/Sub, Cloud Tasks,
 """
 
 from typing import Any, Dict
-from app.agents.execution.context import ExecutionRequest, ExecutionResult
 
 
 class ExecutionSerializer:

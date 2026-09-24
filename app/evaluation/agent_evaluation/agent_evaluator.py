@@ -1,7 +1,7 @@
 """Part C: Agent Evaluation."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IAgentEvaluator
 from ..domain.models import (
     AgentEvaluationReport,

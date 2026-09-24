@@ -1,8 +1,7 @@
 """Report Generator compiling governance metrics, risk posture, and compliance findings."""
 
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from datetime import datetime, timezone
-import uuid
 
 from .templates import ReportType, GovernanceReport, GovernanceReportSection
 from ..core.engine import GovernanceMetricsEngine

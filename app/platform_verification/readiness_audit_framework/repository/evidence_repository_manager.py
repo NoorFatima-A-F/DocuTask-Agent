@@ -6,7 +6,6 @@ Organizes readiness evidence into versioned and structured directories:
 """
 
 import os
-from typing import Dict, Any
 from datetime import datetime, timezone
 
 

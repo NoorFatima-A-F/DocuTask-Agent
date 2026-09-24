@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field
 
 from app.runtime.planning.goal_engine import GoalGraph, ObjectiveType
 from app.runtime.planning.constraint_engine import MissionConstraintSet
-from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine, CapabilityType
+from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine
 
 
 class StrategyArchetype(str, Enum):

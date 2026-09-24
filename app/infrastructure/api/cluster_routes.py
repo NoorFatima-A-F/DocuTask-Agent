@@ -6,7 +6,6 @@ from pydantic import BaseModel, Field
 
 from app.infrastructure.clusters.models import (
     CapacityModel,
-    Cluster,
     ClusterStatus,
     ClusterType,
 )

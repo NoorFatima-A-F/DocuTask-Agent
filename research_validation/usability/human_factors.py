@@ -10,9 +10,8 @@ Evaluates the usability, cognitive workload, and human-in-the-loop interaction e
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List
 
 
 @dataclass

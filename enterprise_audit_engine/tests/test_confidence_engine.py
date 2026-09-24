@@ -1,6 +1,5 @@
 """Unit tests for Deterministic Confidence & Maturity Engine."""
 
-import pytest
 from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,
     EvidenceClassification,

@@ -4,14 +4,12 @@ Safely handles remediation failures by reverting state changes, restoring prior
 configurations, preventing cascading instability, and escalating to human engineers.
 """
 
-from typing import Dict, List, Any
+from typing import List
 import uuid
-import time
 from ..domain.models import (
     ExecutionLogEntry,
     RollbackRecord,
     RollbackReport,
-    RemediationStatus,
 )
 from ..domain.interfaces import IRollbackManager
 

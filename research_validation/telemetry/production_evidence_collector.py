@@ -15,13 +15,12 @@ with explicit NOT_COLLECTED or SIMULATED provenance tags.
 """
 
 from __future__ import annotations
-import json
 import os
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from research_validation.provenance.hashing import hash_canonical_json
 

@@ -12,7 +12,7 @@ import contextvars
 import time
 import uuid
 from contextlib import asynccontextmanager, contextmanager
-from typing import Any, AsyncIterator, Dict, Iterator, Optional
+from typing import AsyncIterator, Dict, Iterator, Optional
 
 from app.runtime.observability.schemas import TraceContext
 

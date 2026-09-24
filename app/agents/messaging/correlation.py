@@ -2,7 +2,6 @@
 Correlation & Causation Manager.
 """
 
-from typing import Optional
 from app.agents.messaging.metadata import CorrelationContext
 
 

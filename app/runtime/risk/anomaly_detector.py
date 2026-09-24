@@ -3,7 +3,7 @@ Scientific Risk Engine - Statistical Anomaly Detector
 Detects out-of-distribution runtime feature vectors using Mahalanobis distance and robust Z-bounds.
 """
 
-from typing import Dict, List, Tuple
+from typing import Dict, Tuple
 import math
 
 

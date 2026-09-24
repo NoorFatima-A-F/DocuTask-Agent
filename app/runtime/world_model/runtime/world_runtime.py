@@ -3,9 +3,8 @@ Master World Model & Cognitive Intelligence Runtime for Phase 13.16.
 Coordinates multi-runtime observation ingestion, causal learning, forecasting, counterfactuals, and expected utility optimization.
 """
 
-from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 import uuid
 
 from app.runtime.world_model.causal.causal_engine import causal_engine
@@ -15,7 +14,6 @@ from app.runtime.world_model.events.world_model_events import (
     ObservationSource,
     WorldModelEvent,
     WorldModelEventType,
-    WorldState,
     world_model_event_bus,
 )
 from app.runtime.world_model.forecasting.predictive_engine import predictive_engine
@@ -75,7 +73,7 @@ class WorldRuntime:
         chk = self.world.create_checkpoint()
 
         # 4. Causal & Intervention Analysis
-        causal_res = self.causal.simulate_do_intervention("k8s_replicas_count", 4.0)
+        self.causal.simulate_do_intervention("k8s_replicas_count", 4.0)
 
         # 5. Formulate Hypothesis
         hyp = self.hypothesis.create_hypothesis(

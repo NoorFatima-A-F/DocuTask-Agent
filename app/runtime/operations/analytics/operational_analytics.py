@@ -3,7 +3,7 @@ AOIS-HROP Phase 13.7 - Operational Analytics Engine
 Master enterprise SRE analytics consolidating health KPIs, recovery analytics, capacity trends, availability metrics, and cost impacts.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from datetime import datetime, timezone
 from app.runtime.operations.health.health_engine import get_health_engine
 from app.runtime.operations.incidents.incident_engine import get_incident_engine

@@ -1,5 +1,4 @@
 import os
-import pytest
 
 from tooling.governance.naming_standards_validator import validate_naming
 from tooling.governance.dependency_auditor import audit_dependencies

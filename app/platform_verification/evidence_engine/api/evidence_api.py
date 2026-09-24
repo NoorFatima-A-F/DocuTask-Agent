@@ -2,13 +2,9 @@
 Evidence Query and Management REST API Router.
 """
 from __future__ import annotations
-import json
 from typing import Any, Dict, List, Optional
 from app.platform_verification.evidence_engine.domain.models import (
     EvidenceCategory,
-    EvidenceArtifact,
-    CertificationEvidencePackage,
-    IntegrityRecord,
 )
 from app.platform_verification.evidence_engine.core.store import ContentAddressableStore
 from app.platform_verification.evidence_engine.core.collector import EvidenceCollector

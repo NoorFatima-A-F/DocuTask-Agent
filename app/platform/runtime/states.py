@@ -5,7 +5,7 @@ Platform Runtime 17-State Finite State Machine Definitions.
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 import uuid
 
 

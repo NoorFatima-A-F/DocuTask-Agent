@@ -5,7 +5,6 @@ Temporal-like persistent workflow lifecycle: pause, resume, step-level checkpoin
 
 from __future__ import annotations
 import hashlib
-import uuid
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 from app.runtime.distributed.models.schemas import (

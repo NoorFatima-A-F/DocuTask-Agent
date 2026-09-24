@@ -6,12 +6,10 @@ Evaluates queue pressure, worker CPU/RAM utilization, and SLA deadlines to scale
 from __future__ import annotations
 import math
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from app.runtime.distributed.models.schemas import (
     AutoscalingPolicy,
     ScalingAction,
-    WorkerNode,
-    WorkerStatus,
 )
 from app.runtime.distributed.queue.distributed_queue import QueueManager
 from app.runtime.distributed.workers.worker_fleet_manager import WorkerFleetManager

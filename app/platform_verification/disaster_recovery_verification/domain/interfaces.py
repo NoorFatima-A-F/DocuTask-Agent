@@ -2,13 +2,12 @@
 Domain interfaces for Disaster Recovery Architecture Verification (Part 3G.1).
 """
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from app.platform_verification.disaster_recovery_verification.domain.models import (
     DRServiceInventory,
     ComponentCriticalityEntry,
     BusinessImpactAnalysisEntry,
     RecoveryDependencyGraph,
-    BackupPolicy,
     DataRecoveryValidationReport,
     DRTestScenarioResult,
     DRSecurityValidationReport,

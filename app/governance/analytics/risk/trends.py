@@ -1,10 +1,9 @@
 """Risk Trend Analysis and Pattern Detection."""
 
-from typing import Dict, Any, List, Optional
-from datetime import datetime, timezone, timedelta
+from typing import Dict, List, Optional
+from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
-from .scoring import RiskCategory
 from ..warehouse.repositories import GovernanceDataWarehouseRepository
 from ..warehouse.schemas import WarehouseQueryFilter
 
@@ -26,7 +25,7 @@ class RiskTrendAnalyzer:
     def detect_trend_signals(self, tenant_id: str = "*") -> List[RiskTrendSignal]:
         signals: List[RiskTrendSignal] = []
         q = WarehouseQueryFilter(tenant_id=tenant_id)
-        risk_events = self.repo.query_risk_events(q)
+        self.repo.query_risk_events(q)
         policy_events = self.repo.query_policy_events(q)
         executions = self.repo.query_ai_executions(q)
 

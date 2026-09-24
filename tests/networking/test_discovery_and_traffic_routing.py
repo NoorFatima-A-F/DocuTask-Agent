@@ -1,6 +1,5 @@
 """Tests for Service Discovery, Virtual Host Resolution, and Dynamic Traffic Routing."""
 
-import pytest
 from app.networking.discovery.registry import (
     EndpointHealth,
     ServiceEndpoint,

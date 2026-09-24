@@ -1,8 +1,7 @@
 """Tests for Compliance Framework Controls and Compliance Assessment Engine."""
 
-import pytest
 from app.audit.compliance.frameworks import ComplianceFramework
-from app.audit.compliance.controls import ControlStatus, DEFAULT_COMPLIANCE_CONTROLS
+from app.audit.compliance.controls import DEFAULT_COMPLIANCE_CONTROLS
 from app.audit.compliance.mappings import ComplianceAssessmentEngine
 from app.audit.storage.repository import AuditRepository
 from app.audit.evidence.manager import EvidenceManager

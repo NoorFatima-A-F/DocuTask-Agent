@@ -8,7 +8,7 @@ ERI = 0.30 * Execution Reality +
       0.10 * External Reproducibility
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

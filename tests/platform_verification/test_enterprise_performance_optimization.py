@@ -3,8 +3,6 @@ Phase 3J.11: Comprehensive Test Suite for Intelligent Performance Optimization &
 """
 
 import json
-import os
-from pathlib import Path
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -21,15 +19,11 @@ from app.platform_verification.enterprise_performance_optimization.domain.models
     OptimizationPipelineReport,
     OptimizationRecommendationReport,
     OptimizationSafetyReport,
-    OptimizationScorecard,
     PerformanceAnomalyReport,
     PerformanceIntelligenceArchitectureReport,
     RootCauseAnalysisReport,
     VerificationStatus,
     WorkerAutoscalingReport,
-)
-from app.platform_verification.enterprise_performance_optimization.domain.interfaces import (
-    IOptimizationVerifier,
 )
 from app.platform_verification.enterprise_performance_optimization.verifiers import (
     AIPipelineOptimizationVerifier,

@@ -7,7 +7,7 @@ evaluating detection latency, precision, recall, and false positive/negative rat
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.incident_response_automation.domain.interfaces import (
     IIncidentDetector,

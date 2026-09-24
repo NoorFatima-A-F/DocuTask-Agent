@@ -3,7 +3,7 @@ DocuTask Agent - In-Memory Multi-Key Event Index Trees
 Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
-from typing import Dict, List, Set, Any, Optional
+from typing import Dict, List
 from app.runtime.events.models.event import DomainEvent
 
 

@@ -7,7 +7,6 @@ HTML, and JSON formats with full mathematical decision proofs and evidence linka
 
 from __future__ import annotations
 
-import json
 import time
 from typing import Any, Dict, Optional
 

@@ -3,11 +3,11 @@ Counterfactual Simulator - High-level simulator facade.
 Coordinates scenario generation, candidate branch generation, and differential evaluation.
 """
 
-from typing import Dict, List, Any, Optional
-from app.runtime.counterfactual.scenario_generator import ScenarioGenerator, EnvironmentalScenario
-from app.runtime.counterfactual.alternate_planner import AlternatePlanner, CounterfactualCandidate
-from app.runtime.counterfactual.comparison_engine import CounterfactualComparisonEngine, CounterfactualDifferential
-from app.runtime.counterfactual.replay_optimizer import CounterfactualReplayOptimizer, ReplaySimulationResult
+from typing import Dict, List, Any
+from app.runtime.counterfactual.scenario_generator import ScenarioGenerator
+from app.runtime.counterfactual.alternate_planner import AlternatePlanner
+from app.runtime.counterfactual.comparison_engine import CounterfactualComparisonEngine
+from app.runtime.counterfactual.replay_optimizer import CounterfactualReplayOptimizer
 
 
 class CounterfactualSimulator:

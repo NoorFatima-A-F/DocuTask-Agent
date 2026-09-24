@@ -5,10 +5,8 @@ Executes all 13 disaster recovery verification phases, evaluates weighted scores
 and exports JSON evidence reports with cryptographic SHA-256 integrity manifest.
 """
 
-import json
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_disaster_recovery.runtime.disaster_recovery_runtime import (
     DisasterRecoveryRuntime,

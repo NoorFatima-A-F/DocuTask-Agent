@@ -4,12 +4,11 @@ REST API Endpoints for Autonomous Planner Visualization, Dynamic DAG Execution &
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
-from pydantic import BaseModel, Field
+from typing import Any, Dict, Optional
+from fastapi import APIRouter, Query, status
+from pydantic import BaseModel
 
 from app.runtime.planning.graph.graph_builder import ExecutionGraphBuilder
-from app.runtime.planning.graph.graph_serializer import GraphSerializer
 from app.runtime.planning.replanning.replanner import AdaptiveReplanner
 from app.runtime.planning.scheduler.critical_path import CriticalPathEngine as LegacyCriticalPathEngine
 from app.runtime.planning.scheduler.scheduler import DAGScheduler

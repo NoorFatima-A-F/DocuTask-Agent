@@ -5,7 +5,7 @@ Standardizes storage abstractions for Evidence, Datasets, Artifacts, and Snapsho
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Optional, Dict, Any, AsyncIterator
+from typing import Optional, Dict, Any
 
 class StorageType(str, Enum):
     ARTIFACT = "ARTIFACT"

@@ -9,7 +9,6 @@ import sys
 from typing import List
 from app.ai.providers.gemini import GeminiProvider
 from app.core.logging import logger
-from app.validation.benchmarks import ReproducibilityEngine
 from app.validation.datasets import DatasetManager
 from app.validation.evidence import EvidenceLogger
 from app.validation.metrics import EvaluationMetricsEngine
@@ -41,7 +40,6 @@ class ValidationRunner:
             ocr_text = item.ocr_text
             ground_truth = item.ground_truth_json
 
-            schema = provider.PRICING_PER_1K  # Dummy reference for schema call
             # Generate simulated/mock extraction in dev fallback mode
             parsed_json, raw_text, _, _ = await provider.generate_json(
                 prompt=ocr_text,

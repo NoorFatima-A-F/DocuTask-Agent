@@ -10,7 +10,6 @@ from fastapi.security import OAuth2PasswordBearer
 
 from app.core.exceptions import AccessDeniedException, TokenException
 from app.core.security import decode_token
-from app.database.session import get_db
 from app.models.user import User
 from app.repositories.user_repository import UserRepository
 from app.dependencies.db import get_user_repository

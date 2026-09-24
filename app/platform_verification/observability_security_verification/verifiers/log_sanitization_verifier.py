@@ -2,7 +2,7 @@
 Phase 3H.4.10.3: Log Sanitization Middleware Verifier
 """
 import re
-from typing import Dict, Any, List
+from typing import List
 from ..domain.interfaces import ILogSanitizationVerifier
 from ..domain.models import LogSanitizationReport, SanitizationRule
 

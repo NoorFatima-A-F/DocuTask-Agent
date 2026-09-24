@@ -6,7 +6,6 @@ and real-time SLO error budget burn rate calculators.
 
 from __future__ import annotations
 
-import asyncio
 import logging
 import time
 import uuid

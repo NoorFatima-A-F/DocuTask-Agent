@@ -3,9 +3,8 @@ Context Window Assembly & Token Budgeting Subsystem.
 Provides TokenBudget, ContextWindow, and ContextAssembler to prepare token-bounded context windows for Planners.
 """
 
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel, Field
-from app.agents.memory.exceptions import ContextWindowExceededException
 from app.agents.memory.repository import MemoryItem
 
 

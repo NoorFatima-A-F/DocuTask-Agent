@@ -1,16 +1,12 @@
 """Test SaaS Scale Simulation (10,000 Tenants & High-Throughput Metering)."""
 
-import pytest
 from app.tenancy.core.models import (
-    TenantLifecycleState,
     SubscriptionTier,
     Region,
-    ComplianceProfileType,
 )
 from app.tenancy.organizations.manager import OrganizationManager
 from app.tenancy.quotas.manager import QuotaManager
 from app.tenancy.metering.engine import UsageMeteringPlatform
-from app.tenancy.context.resolver import TenantContextResolver
 from app.tenancy.sdk.client import SaaSSDK
 
 

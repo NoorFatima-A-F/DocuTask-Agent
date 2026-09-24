@@ -6,7 +6,7 @@ Provides standardized reference system profiles:
 3. Misleading System: Inflated claims ("100% secure"), unbacked documentation -> Expected: DETECTED_FRAUD
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 from enterprise_audit_engine.domain.evidence.models import (
@@ -48,7 +48,7 @@ class ExternalBenchmarkSuite:
         results: List[BenchmarkArchetypeResult] = []
 
         # 1. Archetype: Good System
-        good_evidence = [
+        [
             EvidenceRecord(
                 id="EV-BENCH-GOOD-1",
                 collector="PytestCollector",
@@ -99,7 +99,7 @@ class ExternalBenchmarkSuite:
         ))
 
         # 2. Archetype: Vulnerable System
-        vuln_evidence = [
+        [
             EvidenceRecord(
                 id="EV-BENCH-VULN-1",
                 collector="SecurityScanner",

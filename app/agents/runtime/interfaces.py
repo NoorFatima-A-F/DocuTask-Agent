@@ -5,8 +5,7 @@ plugin manager, dependency container, supervisor, and health monitoring.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, List, Optional, Type, TypeVar
-from uuid import UUID
+from typing import Any, Callable, List, Optional, Type, TypeVar
 
 T = TypeVar("T")
 

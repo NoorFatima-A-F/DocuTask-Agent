@@ -2,7 +2,6 @@
 Backup Policy Validator for Backup Certification Framework (Part 3G.2G).
 Validates backup configuration against enterprise SLAs (frequency, retention, restore testing).
 """
-from typing import Dict, Any
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     BackupPolicyEvaluation,

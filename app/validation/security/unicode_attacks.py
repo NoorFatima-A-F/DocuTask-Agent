@@ -3,7 +3,6 @@ Unicode & Obfuscation Security Testing Engine.
 Evaluates system defense against zero-width characters, homoglyphs, and RTL override attacks.
 """
 
-import re
 from app.ai.prompt_builder import PromptBuilder
 from app.core.logging import logger
 from app.validation.security.attack_cases import AttackCase, AttackResult

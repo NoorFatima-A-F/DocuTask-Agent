@@ -2,7 +2,7 @@
 Phase 3L.2: Business Impact Analysis Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IBusinessImpactAnalysisVerifier
 from ..domain.models import (

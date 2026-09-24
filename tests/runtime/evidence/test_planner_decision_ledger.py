@@ -1,9 +1,7 @@
 """Tests for Planner Decision Ledger and Regret Calculation."""
 
-import pytest
 from app.runtime.decision_ledger.candidate_plan_evaluator import (
     CandidatePlanEvaluator,
-    RegretCalculator,
 )
 from app.runtime.decision_ledger.decision_ledger import DecisionLedger
 

@@ -10,7 +10,6 @@ from app.platform_verification.evidence_engine.domain.models import (
     AuditEvent,
     EvidenceLineageNode,
     CertificationEvidencePackage,
-    EvidenceContext,
     AiDecisionEvidence,
     ValidationReport,
     EvidenceRole,

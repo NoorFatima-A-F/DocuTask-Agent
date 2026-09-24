@@ -5,10 +5,8 @@ Manages persistent external system connections, protocols, authentication bindin
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import json
 import time
 from typing import Any, Dict, List, Optional
-import uuid
 
 from app.runtime.execution.events.execution_events import (
     ConnectorCategory,

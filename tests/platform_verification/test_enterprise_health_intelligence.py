@@ -3,7 +3,6 @@ Comprehensive Unit and Integration Tests for Phase 3H.5: Enterprise Health Intel
 """
 import os
 import json
-import pytest
 from app.platform_verification.enterprise_health_intelligence.domain.models import (
     HealthEventType,
     FailureCategory,
@@ -39,9 +38,6 @@ from app.platform_verification.enterprise_health_intelligence.verifiers.health_o
 )
 from app.platform_verification.enterprise_health_intelligence.verifiers.chaos_intelligence_validator import (
     ChaosIntelligenceValidator,
-)
-from app.platform_verification.enterprise_health_intelligence.scoring.health_intelligence_scorer import (
-    HealthIntelligenceScorer,
 )
 from app.platform_verification.enterprise_health_intelligence.runtime.health_intelligence_runtime import (
     HealthIntelligenceRuntime,

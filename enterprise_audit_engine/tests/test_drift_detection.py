@@ -1,7 +1,5 @@
 """Tests for Certification Drift Detection."""
 
-import pytest
-from pathlib import Path
 from enterprise_audit_engine.drift_detection.drift_detector import (
     DriftDetector,
     CertificationDriftReport,

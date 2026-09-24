@@ -3,17 +3,13 @@ Agent Coordinator.
 Coordinates discovery, team formation, delegation planning, and distributed execution.
 """
 
-from typing import Any, Dict, List, Optional
-from uuid import UUID
-from app.agents.coordination.agent import Agent
+from typing import Any, Optional
 from app.agents.coordination.agent_registry import AgentRegistry
-from app.agents.coordination.capability_matcher import CapabilityRequirement
-from app.agents.coordination.delegation import DelegationMode, DelegationRequest, DelegationResult, DelegationTask
+from app.agents.coordination.delegation import DelegationResult
 from app.agents.coordination.delegation_executor import DelegationExecutor
 from app.agents.coordination.delegation_planner import DelegationPlanner
 from app.agents.coordination.formation import TeamFormationEngine
 from app.agents.coordination.interfaces import IAgentCoordinator
-from app.agents.coordination.team import Team
 
 
 class AgentCoordinator(IAgentCoordinator):

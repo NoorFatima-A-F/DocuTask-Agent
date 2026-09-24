@@ -7,7 +7,6 @@ and resource utilization to produce certified Benchmark EvidenceItems.
 from __future__ import annotations
 
 import logging
-import math
 import statistics
 import time
 from dataclasses import dataclass, field

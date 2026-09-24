@@ -4,7 +4,6 @@ Unit and integration tests for Phase V6 — Enterprise Knowledge Platform Verifi
 
 import os
 import json
-import pytest
 from app.knowledge_platform_verification import (
     PartId,
     KnowledgeAssetType,

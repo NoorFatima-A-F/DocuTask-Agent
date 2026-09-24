@@ -1,12 +1,11 @@
 """Service Resolver for name resolution, multi-region failover, and alias lookup."""
 
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Any, Dict, Optional
 import time
 import threading
 
-from .registry import ServiceDiscoveryRegistry, ServiceInstance, ServiceHealthState
+from .registry import ServiceDiscoveryRegistry, ServiceInstance
 
 
 @dataclass

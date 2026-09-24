@@ -2,18 +2,14 @@
 Tests for Ingestion Adapters, DocumentIntelligencePipeline, KnowledgeSDK, and Analytics.
 """
 
-import pytest
 from app.knowledge.core.models import (
     ClassificationLevel,
     KnowledgeDocument,
     KnowledgeObject,
-    KnowledgeSource,
-    SyncMode,
 )
 from app.knowledge.governance.engine import UserSecurityContext
-from app.knowledge.ingestion.adapter import BatchFileAdapter
 from app.knowledge.processing.pipeline import DocumentIntelligencePipeline
-from app.knowledge.sdk.builder import KnowledgeBuilder, KnowledgeSDK
+from app.knowledge.sdk.builder import KnowledgeBuilder
 
 
 def test_document_intelligence_pipeline_processing():

@@ -1,6 +1,5 @@
 """Tests for Model Capabilities and Capability Matching Engine (Phase 8C)."""
 
-import pytest
 from app.model_governance.capabilities.registry import ModelCapability
 from app.model_governance.capabilities.discovery import CapabilityMatchingEngine
 from app.model_governance.registry.models import Model, ModelCategory, ModelProvider

@@ -1,8 +1,6 @@
 """Comprehensive Unit and Integration Tests for Phase 3H.4.8 — Alert Fatigue Prevention & Signal Optimization."""
 
 import json
-import os
-import pytest
 
 from app.platform_verification.alert_fatigue_verification.domain.models import (
     AlertIntelligenceTier,
@@ -36,9 +34,6 @@ from app.platform_verification.alert_fatigue_verification.verifiers.alert_storm_
 )
 from app.platform_verification.alert_fatigue_verification.verifiers.machine_prioritization_verifier import (
     MachinePrioritizationVerifier,
-)
-from app.platform_verification.alert_fatigue_verification.scoring.alert_fatigue_scorer import (
-    AlertFatigueScorer,
 )
 from app.platform_verification.alert_fatigue_verification.runtime.alert_fatigue_verification_runtime import (
     AlertFatigueVerificationRuntime,

@@ -7,7 +7,7 @@ Mission -> Strategy -> Organization Design -> Workforce Allocation -> Project Ex
 from __future__ import annotations
 import time
 import uuid
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from pydantic import BaseModel, Field
 
 from app.runtime.organization.events.organization_events import (
@@ -80,7 +80,7 @@ class OrganizationRuntime:
         mission_engine.validate_mission(mission.mission_id)
 
         # 2. Strategy Generation & Selection
-        strategies = organization_strategy_engine.generate_strategies(mission.mission_id, count=3)
+        organization_strategy_engine.generate_strategies(mission.mission_id, count=3)
         optimal_strat = organization_strategy_engine.select_optimal_strategy(mission.mission_id)
 
         # 3. Organization Structure Design

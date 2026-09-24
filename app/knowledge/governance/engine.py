@@ -6,7 +6,7 @@ Enforces multi-level classification clearance, role-based ACLs, zero-trust retri
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from app.knowledge.core.exceptions import ClassificationViolationError, PermissionDeniedError

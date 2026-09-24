@@ -8,8 +8,6 @@ Guarantees reversible rollbacks and complete audit history.
 
 from __future__ import annotations
 
-import hashlib
-import json
 import time
 import uuid
 from dataclasses import asdict, dataclass, field

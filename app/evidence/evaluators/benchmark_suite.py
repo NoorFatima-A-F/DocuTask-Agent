@@ -13,7 +13,6 @@ Executes micro-benchmarks across every subsystem:
 
 from __future__ import annotations
 
-import asyncio
 import logging
 import time
 from typing import Any, Dict, List, Optional
@@ -27,7 +26,7 @@ from app.agents.events.event_bus import EnterpriseEventBus
 from app.agents.events.event_types import GoalReceivedEvent
 from app.agents.intelligence.goal.goal_specification import GoalSpecification
 from app.agents.intelligence.reasoning.semantic_reasoner import SemanticReasoner
-from app.agents.memory.intelligence.semantic_memory import SemanticFact, SemanticMemory
+from app.agents.memory.intelligence.semantic_memory import SemanticMemory
 from app.agents.planning.adaptive.replanning_engine import AdaptiveReplanningEngine
 from app.agents.planning.autonomous_planner import AutonomousPlanner
 from app.agents.reflection.critics.consensus_evaluator import MultiCriticConsensusEvaluator

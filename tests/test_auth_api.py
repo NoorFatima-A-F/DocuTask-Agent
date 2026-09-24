@@ -80,7 +80,7 @@ async def test_auth_api_full_workflow(client: AsyncClient):
     assert refresh_res.status_code == 200
     new_tokens = refresh_res.json()["data"]
     new_access_token = new_tokens["access_token"]
-    new_refresh_token = new_tokens["refresh_token"]
+    new_tokens["refresh_token"]
 
     # 5. Change Password
     new_headers = {"Authorization": f"Bearer {new_access_token}"}

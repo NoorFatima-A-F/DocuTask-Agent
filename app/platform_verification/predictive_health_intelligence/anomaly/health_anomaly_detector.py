@@ -7,7 +7,7 @@ Detects abnormal operational behavior using 4 complementary algorithms:
 4. Pattern Anomaly Detection (cyclic frequency spikes)
 """
 from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from app.platform_verification.predictive_health_intelligence.domain.models import (
     AnomalyItem,
     AnomalyReport,

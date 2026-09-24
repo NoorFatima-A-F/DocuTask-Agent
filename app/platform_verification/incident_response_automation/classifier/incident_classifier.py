@@ -6,7 +6,7 @@ from SEV-1 (Critical Outage) through SEV-4 (Minor Anomaly) with impact estimatio
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Dict, List
 
 from app.platform_verification.incident_response_automation.domain.interfaces import (
     IIncidentClassifier,

@@ -4,7 +4,7 @@ Defines models for bids, offers, counter-offers, and negotiation sessions.
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 

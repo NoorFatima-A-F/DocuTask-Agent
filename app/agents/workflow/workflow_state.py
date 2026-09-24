@@ -3,7 +3,7 @@ Workflow State and Variable Container.
 Maintains state variables, node results, and execution payloads during a workflow run.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 

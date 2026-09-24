@@ -3,8 +3,8 @@ Trend Analyzer.
 Computes longitudinal trends for latency, token consumption, cost, and planner accuracy over time.
 """
 
-from typing import Any, Dict, List
-from pydantic import BaseModel, Field
+from typing import List
+from pydantic import BaseModel
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 

@@ -10,7 +10,6 @@ Validates:
 """
 
 import asyncio
-import time
 import pytest
 from app.agents.runtime.runtime_supervisor import (
     ChildProcessRegistry,

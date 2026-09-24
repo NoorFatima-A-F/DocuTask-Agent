@@ -6,10 +6,9 @@ Proactive anomaly detection, context window overflow forecasting, and agent conf
 from __future__ import annotations
 import random
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from app.runtime.ai_operations.models.schemas import (
     AgentTelemetry,
-    AgentHealthStatus,
 )
 
 

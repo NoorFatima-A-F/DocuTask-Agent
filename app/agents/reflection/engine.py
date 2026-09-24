@@ -6,19 +6,7 @@ generating critiques, extracting knowledge, and emitting cross-subsystem feedbac
 
 import time
 from typing import Optional
-from uuid import uuid4
 from app.agents.reflection.context import ReflectionRequest, ReflectionResult
-from app.agents.reflection.events import (
-    AdaptationProposalCreatedEvent,
-    CritiqueGeneratedEvent,
-    EvaluationCompletedEvent,
-    LearningArtifactCreatedEvent,
-    PlannerFeedbackGeneratedEvent,
-    RecommendationGeneratedEvent,
-    ReflectionCompletedEvent,
-    ReflectionFailedEvent,
-    ReflectionStartedEvent,
-)
 from app.agents.reflection.interfaces import IReflectionEngine
 from app.agents.reflection.lifecycle import ReflectionLifecycleState
 from app.agents.reflection.manager import ReflectionManager

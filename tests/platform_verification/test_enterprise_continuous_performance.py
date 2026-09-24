@@ -3,8 +3,6 @@ Phase 3J.12: Comprehensive Test Suite for Continuous Performance Engineering & R
 """
 
 import json
-import os
-from pathlib import Path
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -17,7 +15,6 @@ from app.platform_verification.continuous_performance_engineering.domain.models 
     CICDPerformancePipelineReport,
     ContinuousPerformanceArchitectureReport,
     ContinuousPerformanceEngineeringTier,
-    ContinuousPerformanceScorecard,
     MultiEnvironmentComparisonReport,
     PerformanceBaselineReport,
     PerformanceDashboardReport,
@@ -27,9 +24,6 @@ from app.platform_verification.continuous_performance_engineering.domain.models 
     PerformanceRegressionReport,
     PerformanceTrendReport,
     VerificationStatus,
-)
-from app.platform_verification.continuous_performance_engineering.domain.interfaces import (
-    IContinuousPerformanceVerifier,
 )
 from app.platform_verification.continuous_performance_engineering.verifiers import (
     BenchmarkExecutionVerifier,

@@ -6,7 +6,7 @@ Token-bucket rate limiting, provider fallback chains, and high-performance cachi
 from __future__ import annotations
 import hashlib
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional, Any
 
 
 class DistributedCache:

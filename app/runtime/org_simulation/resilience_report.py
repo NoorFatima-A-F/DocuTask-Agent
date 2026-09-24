@@ -3,7 +3,7 @@ AMAEOP Pillar 10 - Organizational Resilience Report Generator
 Generates comprehensive enterprise resilience dossiers with capacity headroom and failure recovery curves.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from app.runtime.org_simulation.org_simulator import OrganizationSimulator
 
 

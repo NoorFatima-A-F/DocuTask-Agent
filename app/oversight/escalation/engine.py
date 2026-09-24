@@ -1,6 +1,6 @@
 """Escalation Engine for monitoring SLAs and triggering escalation policies."""
 
-from typing import Dict, Any, List, Optional, Tuple
+from typing import List, Optional, Tuple
 from datetime import datetime, timezone
 
 from .rules import EscalationLevel, EscalationRule

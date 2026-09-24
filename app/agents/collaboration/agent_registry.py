@@ -41,7 +41,7 @@ class AgentRegistry:
         return profile
 
     def list_all(self) -> List[AgentProfile]:
-        now = time.time()
+        time.time()
         for p in self._profiles.values():
             self._check_health(p)
         return list(self._profiles.values())

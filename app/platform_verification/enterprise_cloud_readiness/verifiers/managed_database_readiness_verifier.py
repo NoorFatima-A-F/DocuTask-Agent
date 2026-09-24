@@ -2,7 +2,7 @@
 Phase 3M.6: Managed Database Readiness Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IManagedDatabaseReadinessVerifier
 from ..domain.models import (

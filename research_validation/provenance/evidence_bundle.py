@@ -11,13 +11,12 @@ from __future__ import annotations
 
 import json
 import time
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from research_validation.provenance.digital_signatures import DetachedSignature, ProvenanceSigner
 from research_validation.provenance.evidence_graph import EvidenceGraph
-from research_validation.provenance.hashing import HashAlgorithm, ProvenanceHasher
 from research_validation.provenance.provenance_models import EvidenceQualityLevel
 from research_validation.provenance.provenance_serialization import ProvenanceSerializer
 

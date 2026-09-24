@@ -1,6 +1,5 @@
 """Blue-Green Deployment Strategy with Atomic Traffic Cutover."""
 
-from dataclasses import dataclass
 from typing import Callable, Optional
 
 

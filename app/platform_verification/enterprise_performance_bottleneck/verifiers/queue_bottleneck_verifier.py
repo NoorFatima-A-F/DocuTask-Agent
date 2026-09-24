@@ -31,7 +31,6 @@ class QueueBottleneckVerifier(IQueueBottleneckVerifier):
         enqueue_rate = 1000
         processing_rate = 1250
         consumer_lag = 0
-        queue_growth = processing_rate >= enqueue_rate
         worker_shortage = processing_rate < enqueue_rate
 
         checks: List[CheckResult] = [

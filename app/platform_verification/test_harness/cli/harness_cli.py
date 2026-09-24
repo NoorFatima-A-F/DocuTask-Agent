@@ -6,7 +6,6 @@ from typing import Any, Dict, List
 from app.platform_verification.test_harness.domain.models import (
     VerificationTestSpec,
     ExecutionMode,
-    HarnessExecutionReport,
 )
 from app.platform_verification.test_harness.core.execution_engine import HarnessExecutionEngine
 

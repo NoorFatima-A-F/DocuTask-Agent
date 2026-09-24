@@ -7,13 +7,12 @@ computes 95% Credible Intervals, and maintains an immutable cryptographic eviden
 from __future__ import annotations
 
 import hashlib
-import json
 import uuid
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 
-from app.runtime.intelligence.belief_state import BeliefStateEngine, BetaBelief
+from app.runtime.intelligence.belief_state import BeliefStateEngine
 
 
 class BayesianEvidenceNode(BaseModel):

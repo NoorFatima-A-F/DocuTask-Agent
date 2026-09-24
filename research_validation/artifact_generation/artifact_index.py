@@ -6,10 +6,9 @@ raw CSV datasets, LaTeX snippets, and markdown reports.
 """
 
 from __future__ import annotations
-import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from research_validation.artifact_generation.paper_figures import GeneratedFigure
 from research_validation.artifact_generation.publication_tables import PublicationTable

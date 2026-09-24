@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-19T07:04:42.377824+00:00",
-  "execution_timestamp": "2026-09-19T07:04:42.377832+00:00",
+  "timestamp": "2026-09-24T21:54:55.244288+00:00",
+  "execution_timestamp": "2026-09-24T21:54:55.244299+00:00",
   "summary": "IaC verification verified: 28 resources managed idempotently via Terraform and Helm.",
   "report_title": "Infrastructure as Code (IaC) Verification Report",
   "terraform_modules_verified": true,

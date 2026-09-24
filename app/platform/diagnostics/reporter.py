@@ -6,7 +6,7 @@ Gathers runtime status, loaded modules, capabilities, infrastructure health, and
 from datetime import datetime, timezone
 import os
 import sys
-from typing import Any, Dict, Optional
+from typing import Optional
 from ..kernel.diagnostics import DiagnosticReport
 from ..modules.registry import ModuleRegistry
 from ..plugins.registry import PluginRegistry
@@ -39,11 +39,10 @@ class DiagnosticsReporter:
         services = [s.name for s in self.service_registry.list_services()] if self.service_registry else []
         capabilities = [c.name for c in self.capability_registry.list_capabilities()] if self.capability_registry else []
 
-        health_data = {}
         status_str = "HEALTHY"
         if self.health_manager:
             h_rep = await self.health_manager.check_health()
-            health_data = h_rep.to_dict()
+            h_rep.to_dict()
             status_str = h_rep.status.value
 
         infra_status = {

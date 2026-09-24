@@ -6,10 +6,9 @@ Validates third-party and ecosystem connector packages against strict security, 
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 
-from app.connectors.core.exceptions import CertificationError
 from app.connectors.marketplace.registry import ConnectorPackageManifest
 from app.connectors.sdk.base import BaseConnector
 

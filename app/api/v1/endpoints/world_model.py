@@ -3,13 +3,12 @@ Phase 13.16: Autonomous World Modeling, Predictive Intelligence & Causal Reasoni
 FastAPI REST API Router exposing all 15 cognitive world model subsystems.
 """
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from typing import Any, Dict, List
+from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
 
 from app.runtime.world_model.events.world_model_events import (
     ObservationSource,
-    WorldModelEventType,
     world_model_event_bus,
 )
 from app.runtime.world_model.observation.observation_engine import observation_engine

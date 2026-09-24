@@ -6,7 +6,7 @@ Defines IDecisionEngine, IPolicyEvaluator, and IRuleEvaluator contracts.
 from abc import ABC, abstractmethod
 from typing import Any
 from app.agents.decision.context import DecisionContext
-from app.agents.decision.policies import CostPolicy, SecurityPolicy
+from app.agents.decision.policies import CostPolicy
 from app.agents.decision.rules import BusinessRule
 
 

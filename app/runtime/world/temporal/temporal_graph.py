@@ -5,7 +5,6 @@ Time-aware knowledge graph supporting historical traversal, evolutionary state t
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import hashlib
 from typing import Any, Dict, List, Optional
 import uuid
 

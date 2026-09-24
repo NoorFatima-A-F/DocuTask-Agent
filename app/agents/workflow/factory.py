@@ -53,11 +53,11 @@ class WorkflowFactory:
         # Adapters
         exec_adapter = WorkflowExecutionAdapter(execution_engine)
         coord_adapter = WorkflowCoordinationAdapter(coordination_engine)
-        decision_adapter = WorkflowDecisionAdapter(decision_engine)
-        planner_adapter = WorkflowPlannerAdapter(planner)
-        recovery_adapter = WorkflowRecoveryAdapter(recovery_engine)
-        reflection_adapter = WorkflowReflectionAdapter(reflection_engine)
-        memory_adapter = WorkflowMemoryAdapter(memory_foundation)
+        WorkflowDecisionAdapter(decision_engine)
+        WorkflowPlannerAdapter(planner)
+        WorkflowRecoveryAdapter(recovery_engine)
+        WorkflowReflectionAdapter(reflection_engine)
+        WorkflowMemoryAdapter(memory_foundation)
 
         # Dispatcher & Sub-engines
         dispatcher = WorkflowDispatcher(

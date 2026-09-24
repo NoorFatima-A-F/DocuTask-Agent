@@ -2,11 +2,9 @@
 
 import os
 import json
-import pytest
 from app.platform_verification.ai_resilience.domain.models import (
     ChaosScenarioType,
     CircuitBreakerState,
-    TaskResilienceStatus,
     AIResilienceTier,
 )
 from app.platform_verification.ai_resilience.simulation.ai_failure_simulator import (
@@ -47,12 +45,6 @@ from app.platform_verification.ai_resilience.chaos_runner.ai_chaos_runner import
 )
 from app.platform_verification.ai_resilience.metrics.ai_recovery_metrics_collector import (
     AIRecoveryMetricsCollector,
-)
-from app.platform_verification.ai_resilience.exporter.ai_resilience_evidence_exporter import (
-    AIResilienceEvidenceExporter,
-)
-from app.platform_verification.ai_resilience.scoring.ai_resilience_scorer import (
-    AIResilienceScorer,
 )
 from app.platform_verification.ai_resilience.runtime.ai_resilience_runtime import (
     AIResilienceRuntime,

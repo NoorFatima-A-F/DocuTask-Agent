@@ -3,7 +3,6 @@ Section 10: Enterprise AI Red Team Adversarial Simulation Campaign
 Executes 5,000+ automated adversarial test cases across 8 threat vectors with detailed mitigation telemetry.
 """
 import time
-import uuid
 from typing import Dict, List, Any
 from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel, AttackVector
 

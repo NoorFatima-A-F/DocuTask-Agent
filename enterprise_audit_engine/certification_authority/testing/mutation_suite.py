@@ -1,7 +1,6 @@
 """Audit Engine Mutation Testing Suite."""
 
 from typing import Dict, Any, List
-import copy
 from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,
     AuditFinding,
@@ -10,7 +9,6 @@ from enterprise_audit_engine.domain.evidence.models import (
     EvidenceSourceType,
 )
 from enterprise_audit_engine.governance.claim_validator import ClaimValidator, UnsupportedClaimError
-from enterprise_audit_engine.governance.integrity_verifier import EvidenceIntegrityVerifier
 from enterprise_audit_engine.certification.anti_hallucination import ClaimEvidenceMatcher
 from enterprise_audit_engine.certification.coverage_analyzer import (
     EvidenceCoverageAnalyzer,
@@ -18,7 +16,6 @@ from enterprise_audit_engine.certification.coverage_analyzer import (
 )
 from enterprise_audit_engine.certification_authority.domain.models import (
     CertificationRecord,
-    CertificationStatus,
 )
 from enterprise_audit_engine.certification_authority.signing.signer import CertificateSigner
 from enterprise_audit_engine.certification_authority.signing.verifier import CertificateSignatureVerifier

@@ -11,7 +11,7 @@ from __future__ import annotations
 import asyncio
 from collections import deque
 import logging
-from typing import Callable, Coroutine, Dict, List, Optional, Set, Tuple
+from typing import Any, Callable, Coroutine, Dict, List, Optional, Tuple
 from app.runtime.observability.schemas import (
     BaseRuntimeEvent,
     EventCategory,

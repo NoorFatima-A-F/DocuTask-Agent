@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import collections
 import time
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from app.platform.capability.capability_registry import (
     CapabilityRegistry,
@@ -12,8 +12,6 @@ from app.platform.capability.capability_registry import (
 )
 from app.platform.workflow.workflow_graph import (
     WorkflowDefinition,
-    WorkflowEdge,
-    WorkflowNode,
 )
 
 

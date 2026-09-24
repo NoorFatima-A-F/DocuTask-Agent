@@ -6,8 +6,8 @@ Aggregates operational usage, failure distributions, cost attribution, and versi
 from __future__ import annotations
 
 import statistics
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Any, Dict, List
+from pydantic import BaseModel
 from app.prompts.monitoring.metrics import PromptExecutionEvent
 
 

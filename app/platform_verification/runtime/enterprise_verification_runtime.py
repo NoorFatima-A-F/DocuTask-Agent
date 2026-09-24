@@ -19,20 +19,6 @@ from ..components.traceability.traceability_manager import TraceabilityManager
 from ..components.plugins.plugin_manager import PluginManager
 from ..components.orchestrator.orchestrator import VerificationOrchestrator
 from ..domain.models import (
-    VerificationDefinition,
-    VerificationRun,
-    DatasetRecord,
-    EnvironmentReadiness,
-    ConfigurationSnapshot,
-    EvidenceItem,
-    MetricValue,
-    StatisticalSummary,
-    QualityGateEvaluation,
-    ComplianceCertificate,
-    VerificationReport,
-    AuditEntry,
-    TraceabilityNode,
-    PluginDescriptor,
     ComponentHealth,
 )
 

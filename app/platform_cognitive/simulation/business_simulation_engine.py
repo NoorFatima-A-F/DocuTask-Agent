@@ -2,7 +2,7 @@
 Business Simulation Engine
 Performs "what-if" simulations over latency, cost, worker scaling, and ROI impact.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..models.schemas import SimulationScenario
 
 class BusinessSimulationEngine:

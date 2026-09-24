@@ -2,7 +2,7 @@
 Phase 3M.15: Cloud Migration Simulation Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICloudMigrationSimulationVerifier
 from ..domain.models import (

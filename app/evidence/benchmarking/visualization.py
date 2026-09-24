@@ -13,12 +13,8 @@ Generates publication-quality vector SVG charts and interactive HTML dashboards:
 from __future__ import annotations
 
 import html
-import json
 import logging
-import math
-import statistics
-from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List, Tuple
 
 logger = logging.getLogger(__name__)
 

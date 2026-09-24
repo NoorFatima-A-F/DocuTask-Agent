@@ -1,6 +1,5 @@
 """Tests for Cryptographic Execution Snapshots and Reproducibility (Phase 8C)."""
 
-import pytest
 from app.model_governance.reproducibility.snapshot import ReproducibilityService
 
 

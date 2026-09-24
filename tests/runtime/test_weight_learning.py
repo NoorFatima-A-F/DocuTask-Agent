@@ -2,11 +2,9 @@
 Unit & Governance Tests for Adaptive Weight Learning (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.learning import (
     AdaptiveWeightLearner,
     policy_store,
-    AdaptivePolicyManager,
 )
 
 

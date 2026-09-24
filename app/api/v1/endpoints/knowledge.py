@@ -2,14 +2,14 @@
 FastAPI Endpoints for Phase 13.21 Enterprise AI Knowledge & Context Intelligence Platform (EAKCIP)
 """
 from typing import Dict, Any, List, Optional
-from fastapi import APIRouter, HTTPException, Query, Depends
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from app.platform_knowledge.runtime.knowledge_master_orchestrator import knowledge_orchestrator
 from app.platform_knowledge.models.schemas import (
     KnowledgeAsset, KnowledgeSource, KnowledgeSourceType, SecurityClassification,
     ContextRetrievalRequest, ContextRetrievalResponse, GraphNode, GraphEdge,
-    EntityType, MemoryEntry, MemoryTier, KnowledgeQualityReport
+    MemoryEntry, MemoryTier, KnowledgeQualityReport
 )
 
 router = APIRouter(tags=["Enterprise AI Knowledge & Context Intelligence"])

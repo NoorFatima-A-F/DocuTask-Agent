@@ -3,7 +3,7 @@ AMCN-SIP Phase 13.8 - Coordination Replay & Swarm Explainability
 Deterministic step-by-step replay of multi-agent interactions, cryptographic frame proofs, and timeline reconstruction.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
 import json

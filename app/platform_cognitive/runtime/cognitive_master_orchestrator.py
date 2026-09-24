@@ -2,7 +2,6 @@
 Cognitive Master Orchestrator
 Unified facade coordinating all 11 cognitive and organizational learning subsystems.
 """
-from typing import Dict, Any, List
 from ..graph.cognitive_graph_engine import CognitiveGraphEngine
 from ..learning.organizational_learning_engine import OrganizationalLearningEngine
 from ..experience.cross_agent_experience_memory import CrossAgentExperienceMemory

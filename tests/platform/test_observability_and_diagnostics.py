@@ -2,12 +2,11 @@
 Tests for Platform Observability (Logging, Metrics, Tracing, Health, Diagnostics).
 """
 
-import pytest
 import asyncio
 from app.observability.metrics.metrics import MetricsRegistry
 from app.observability.tracing.tracer import Tracer
 from app.observability.health.manager import HealthManager
-from app.observability.health.models import HealthLevel, HealthStatus
+from app.observability.health.models import HealthStatus
 from app.platform.diagnostics.reporter import DiagnosticsReporter
 
 

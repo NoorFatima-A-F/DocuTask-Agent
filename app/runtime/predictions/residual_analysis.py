@@ -3,7 +3,7 @@ Prediction Validation Engine - Residual Analysis
 Analyzes residual distributions for normality, homoscedasticity, and autocorrelation.
 """
 
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any
 from dataclasses import dataclass, asdict
 import math
 

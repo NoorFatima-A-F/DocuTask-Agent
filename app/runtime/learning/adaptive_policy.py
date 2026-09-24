@@ -3,8 +3,8 @@ Adaptive Weight Learning - Adaptive Policy Execution
 Executes planner decisions with active certified policy and supports shadow testing.
 """
 
-from typing import Dict, Any, Optional
-from app.runtime.learning.policy_store import policy_store, VersionedPolicy
+from typing import Dict
+from app.runtime.learning.policy_store import policy_store
 from app.runtime.learning.weight_learner import AdaptiveWeightLearner, WeightProposal
 
 

@@ -4,7 +4,7 @@ Phase 3J.4: Resource Utilization & Capacity Engineering Verification Framework â
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 

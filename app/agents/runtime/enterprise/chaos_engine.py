@@ -6,7 +6,7 @@ measuring time-to-recovery (TTR) and recovery success ratios.
 
 import time
 import logging
-from typing import Any, Callable, Coroutine, Dict, Optional
+from typing import Any, Callable, Coroutine, Optional
 from app.agents.runtime.enterprise.fault_injector import FaultInjector, FaultType
 
 logger = logging.getLogger(__name__)

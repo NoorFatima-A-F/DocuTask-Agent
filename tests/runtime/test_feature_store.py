@@ -3,15 +3,11 @@ Unit & Regression Tests for Scientific Feature Store (QDIOP / SDIOP).
 Tests feature registry, normalizers, validation, and versioned pipelines.
 """
 
-import pytest
-import math
 from app.runtime.feature_store import (
     feature_registry,
     FeatureNormalizer,
     FeatureValidator,
-    FeatureValidationError,
     feature_pipeline,
-    FeatureStatisticsTracker,
     FeatureVersionManager,
 )
 from app.runtime.feature_store.feature_registry import FeatureDefinition, FeatureCategory, NormalizationType

@@ -1,7 +1,7 @@
 """Part M: Audit Trail Validation."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IAuditTrailValidationVerifier
 from ..domain.models import (
     AuditLogEntry,

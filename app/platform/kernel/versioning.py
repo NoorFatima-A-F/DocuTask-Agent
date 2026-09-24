@@ -5,7 +5,7 @@ Implements SemVer 2.0.0 parsing, comparison, and version range matching.
 
 from dataclasses import dataclass
 import re
-from typing import Optional, Tuple
+from typing import Optional
 
 
 @dataclass(frozen=True, order=True)

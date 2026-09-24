@@ -3,7 +3,7 @@ Security Attack Cases & Adversarial Payload Repository.
 Defines structured attack case schemas and curated adversarial test suites.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import List
 from uuid import uuid4
 from pydantic import BaseModel, Field
 

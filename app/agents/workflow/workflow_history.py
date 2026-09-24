@@ -4,7 +4,7 @@ Append-only event audit log recording all node completions, state transitions, a
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 

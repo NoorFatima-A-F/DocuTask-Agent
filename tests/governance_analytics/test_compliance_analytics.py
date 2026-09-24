@@ -1,6 +1,5 @@
 """Tests for Compliance Framework Evaluators, Scoring, and Audit Readiness."""
 
-import pytest
 from app.governance.analytics.warehouse.repositories import GovernanceDataWarehouseRepository
 from app.governance.analytics.events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
 from app.governance.analytics.compliance.evaluator import ComplianceEvaluator, ComplianceFramework

@@ -1,6 +1,5 @@
 """Tests for Prompt Evaluation Runner, Datasets, and Regression Testing (Phase 8D)."""
 
-import pytest
 from app.prompts.registry.repository import PromptRegistryRepository
 from app.prompts.registry.service import PromptRegistryService
 from app.prompts.evaluation.datasets import PromptEvaluationDataset

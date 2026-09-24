@@ -3,7 +3,7 @@ Enterprise Module Manager.
 Orchestrates module lifecycles, dependency satisfaction, and runtime execution.
 """
 
-from typing import Any, Dict, List, Optional, Type
+from typing import Any, Dict, Optional, Type
 from .models import ModuleRecord, ModuleState
 from .registry import ModuleRegistry
 from .loader import ModuleLoader

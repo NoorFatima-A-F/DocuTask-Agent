@@ -1,6 +1,6 @@
 """FastAPI Routes for Global Workload Scheduling and Diagnostics."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from fastapi import APIRouter, HTTPException, status
 
 from app.infrastructure.executions.workload import WorkloadRequest

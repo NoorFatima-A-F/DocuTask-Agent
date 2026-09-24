@@ -1,8 +1,6 @@
 """Tests for Model Registry and Metadata Management (Phase 8C)."""
 
-import pytest
 from app.model_governance.registry.models import (
-    ApprovalStatus,
     DeploymentType,
     Model,
     ModelCategory,

@@ -3,7 +3,7 @@ Causal Analysis - Pearl's do-Calculus & Intervention Engine
 Applies the Backdoor Adjustment Formula: P(Y | do(X=x)) = sum_z P(Y | X=x, Z=z) * P(Z=z)
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 
 

@@ -1,7 +1,7 @@
 """FastAPI Router for Phase 6: AI System Evaluation & Portfolio Certification."""
 
-from typing import Any, Dict, Optional
-from fastapi import APIRouter, HTTPException, Query
+from typing import Any, Dict
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from ..domain.models import (

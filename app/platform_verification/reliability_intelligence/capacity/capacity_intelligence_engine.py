@@ -6,7 +6,7 @@ CPU, Memory RSS leaks, Queue backlogs, and Database connection pools.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.reliability_intelligence.domain.interfaces import (
     ICapacityIntelligenceEngine,

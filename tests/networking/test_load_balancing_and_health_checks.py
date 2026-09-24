@@ -1,6 +1,5 @@
 """Tests for Multi-Algorithm Load Balancing and Health Outlier Detection."""
 
-import pytest
 from app.networking.discovery.registry import EndpointHealth, ServiceEndpoint, ServiceRegistry
 from app.networking.load_balancing.algorithms import LoadBalancerEngine
 from app.networking.load_balancing.health import HealthCheckEngine

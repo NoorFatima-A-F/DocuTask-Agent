@@ -1,7 +1,7 @@
 """
 Phase 3H.4.12: Observability Audit Certification Runtime
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..verifiers import (
     EvidenceCollectionArchitectureVerifier,
     EvidenceIntegrityVerifier,

@@ -8,7 +8,7 @@ from __future__ import annotations
 from dataclasses import asdict
 from typing import Any, Dict, Optional
 
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter, status
 
 from app.platform_verification.health_monitoring_integration.runtime.monitoring_integration_runtime import (
     MonitoringIntegrationRuntime,

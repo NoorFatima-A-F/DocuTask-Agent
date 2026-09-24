@@ -1,7 +1,6 @@
 """Worker Health Aggregation and Failure Detection."""
 
 from typing import Optional
-from app.infrastructure.workers.models import Worker, WorkerStatus
 from app.infrastructure.workers.heartbeat import WorkerHeartbeatPayload
 
 

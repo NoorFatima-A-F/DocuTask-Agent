@@ -3,18 +3,15 @@ Tests for Distributed Tracing, W3C/B3 Context Propagation, and Trace Tree Analys
 """
 
 import time
-import pytest
 
 from app.infrastructure.observability.tracing.models import (
     Span,
-    SpanKind,
     SpanStatus,
 )
 from app.infrastructure.observability.tracing.propagation import (
     TraceContextPropagator,
 )
 from app.infrastructure.observability.tracing.tracer import (
-    TraceSampler,
     Tracer,
 )
 from app.infrastructure.observability.tracing.spans import (

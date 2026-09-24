@@ -2,7 +2,6 @@
 Interfaces and Abstract Protocols for Backup Certification Framework (Part 3G.2G).
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List, Optional
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     CompletenessEvaluation,

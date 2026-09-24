@@ -4,7 +4,6 @@ Verifies distributed leasing, worker failover, lease expiration, DLQ routing, an
 """
 
 import asyncio
-from datetime import datetime, timezone
 import pytest
 from app.agents.runtime.enterprise.scheduler_state import JobPriority, JobStatus, ScheduledJob
 from app.agents.runtime.scheduler import (

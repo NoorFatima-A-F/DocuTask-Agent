@@ -2,7 +2,7 @@
 Enterprise Cognitive Graph Engine
 Performs multi-hop causal reasoning over relational organizational entities.
 """
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional, Any
 from ..models.schemas import CognitiveNode, CognitiveEdge, ReasoningNodeType, ReasoningRelationType
 
 class CognitiveGraphEngine:

@@ -1,7 +1,7 @@
 """Abstract interfaces for Phase 3H.4 Enterprise Health Monitoring & Alerting Framework."""
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict
 from .models import (
     HealthSignalArchitectureReport,
     MetricsCollectionReport,

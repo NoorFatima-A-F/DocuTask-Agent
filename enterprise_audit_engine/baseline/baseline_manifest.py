@@ -1,6 +1,6 @@
 """Golden Baseline Manifest Models."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

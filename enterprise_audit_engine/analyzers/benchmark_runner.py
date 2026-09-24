@@ -2,7 +2,7 @@
 
 import os
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 
 class BenchmarkRunnerVerifier:
@@ -21,7 +21,6 @@ class BenchmarkRunnerVerifier:
         benchmark_files_count = 0
         has_load_testing = False
         has_latency_targets = False
-        metrics_found: Dict[str, Any] = {}
 
         for bpath in benchmark_paths:
             if bpath.is_file():

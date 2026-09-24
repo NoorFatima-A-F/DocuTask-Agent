@@ -3,7 +3,7 @@
 import json
 import shutil
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict
 from enterprise_audit_engine.certification_authority.domain.models import CertificationRecord
 
 

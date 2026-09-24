@@ -6,7 +6,6 @@ from typing import Any, Dict, Optional
 from ..domain.interfaces import ICrossSystemIntegrationVerificationRuntime
 from ..domain.models import (
     CrossSystemIntegrationQualityReport,
-    VerificationStatus,
 )
 from ..exporter.integration_quality_exporter import CrossSystemIntegrationQualityExporter
 from ..scoring.integration_quality_scorer import CrossSystemIntegrationQualityScorer

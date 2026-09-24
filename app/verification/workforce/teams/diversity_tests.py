@@ -3,7 +3,7 @@ Section 3.3: Team Diversity & Single-Point-of-Failure (SPOF) Verification
 Ensures cross-functional domain balance and prevents single-agent dependency bottlenecks.
 """
 from typing import Dict, List, Any
-from app.platform_workforce.models.schemas import DynamicTeam, DigitalEmployee, EmployeeRole, DepartmentType
+from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
 
 class TeamDiversityVerifier:
@@ -39,7 +39,6 @@ class TeamDiversityVerifier:
         
         # 2. Single-Point-of-Failure (SPOF) Redundancy Test
         # In case 1 agent fails or drops, is there backup / fallback capacity?
-        critical_skills = ["OCR", "Validation", "Security"]
         # Simulate redundancy mapping
         backup_agent = DigitalEmployee(id="emp-backup-01", tenant_id=self.tenant_id, name="Backup Standby Specialist", role=EmployeeRole.SENIOR_SPECIALIST, department=DepartmentType.OPERATIONS, skills=["OCR", "Validation"], trust_score=0.96)
         

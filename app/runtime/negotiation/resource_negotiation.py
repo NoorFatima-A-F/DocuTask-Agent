@@ -3,7 +3,7 @@ AMAEOP Pillar 3 - Inter-Department Resource Negotiation Engine
 Handles bilateral resource trading, quota loaning, and mutual SLA commitments between departments.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 import time
 import uuid

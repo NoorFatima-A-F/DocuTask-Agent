@@ -1,6 +1,6 @@
 """Unified Injection Scanner combining Direct and Indirect Analyzers."""
 
-from typing import List, Tuple, Optional
+from typing import List
 from pydantic import BaseModel, Field
 from ..gateway.context import SafetyContext
 from ..gateway.decision import SafetyViolation

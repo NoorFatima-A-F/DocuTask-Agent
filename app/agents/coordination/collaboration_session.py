@@ -4,7 +4,7 @@ Maintains stateful operational context, participating agents, and communication 
 """
 
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.coordination.collaboration_context import CollaborationContext

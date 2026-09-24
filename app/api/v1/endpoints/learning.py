@@ -7,22 +7,21 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Query, status
 
-from app.runtime.learning.reflection.reflection_engine import reflection_engine, MissionReflectionReport
-from app.runtime.learning.learning.learning_engine import learning_engine, MinedLesson
-from app.runtime.learning.knowledge.knowledge_registry import knowledge_registry, KnowledgeRecord
+from app.runtime.learning.reflection.reflection_engine import reflection_engine
+from app.runtime.learning.learning.learning_engine import learning_engine
+from app.runtime.learning.knowledge.knowledge_registry import knowledge_registry
 from app.runtime.learning.knowledge.knowledge_graph import knowledge_graph
 from app.runtime.learning.knowledge.knowledge_search import knowledge_search_engine
 from app.runtime.learning.knowledge.knowledge_lineage import knowledge_lineage_tracker
-from app.runtime.learning.policy.policy_engine import policy_engine, CandidatePolicy
+from app.runtime.learning.policy.policy_engine import policy_engine
 from app.runtime.learning.policy.policy_registry import evolution_policy_registry
 from app.runtime.learning.governance.learning_governance import learning_governance_gatekeeper
 from app.runtime.learning.governance.approval_workflow import approval_workflow_manager
 from app.runtime.learning.governance.promotion_pipeline import promotion_pipeline_manager
 from app.runtime.learning.governance.rollback_manager import rollback_manager
 from app.runtime.learning.governance.policy_guardrails import PolicyGuardrailsValidator
-from app.runtime.learning.governance.risk_assessment import RiskAssessmentEngine
 
 router = APIRouter()
 

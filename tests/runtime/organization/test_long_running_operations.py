@@ -2,8 +2,6 @@
 Test Suite: Long Running Operations & State Durability
 Validates persistent checkpointing, heartbeat monitoring, persistent scheduler, crash recovery, and distributed leases.
 """
-import pytest
-import time
 from app.runtime.operations.checkpoint_manager import CheckpointManager
 from app.runtime.operations.heartbeat_manager import HeartbeatManager
 from app.runtime.operations.persistent_scheduler import PersistentScheduler

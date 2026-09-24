@@ -8,9 +8,8 @@ and concurrency optimization over execution graphs.
 from __future__ import annotations
 
 import collections
-from typing import Dict, List, Set
+from typing import Any, Dict, Set
 from app.runtime.planning.graph.dag import ExecutionDAG
-from app.runtime.planning.graph.edge import DAGEdge
 
 
 class GraphOptimizer:

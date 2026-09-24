@@ -2,7 +2,7 @@
 Phase 3H.10: Autonomous Operational Intelligence & Self-Optimization — Interfaces
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict, Any
 from .models import (
     OperationalGraphReport,
     SignalCorrelationReport,

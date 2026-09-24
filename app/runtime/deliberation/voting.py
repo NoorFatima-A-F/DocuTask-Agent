@@ -6,7 +6,7 @@ Implements Borda Count rank-order voting and consensus entropy measurement over 
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 from pydantic import BaseModel, Field
 
 from app.runtime.deliberation.agents import CouncilAgentVote

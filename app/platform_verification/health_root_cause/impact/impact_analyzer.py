@@ -4,7 +4,7 @@ Determines operational blast radius, affected business services, unaffected modu
 and business severity classification when failures occur.
 """
 
-from typing import Dict, List
+from typing import List
 from ..domain.models import (
     ImpactAssessment,
     ImpactAnalysisReport,

@@ -3,7 +3,6 @@ Planner Serializer Subsystem.
 """
 
 from typing import Any, Dict
-from app.agents.planner.metadata import CandidatePlan, PlanningTrace
 
 
 class PlannerSerializer:

@@ -5,7 +5,6 @@ import pytest
 from app.platform_verification.performance_chaos_verification.domain.models import (
     PerformanceCertificationTier,
     BottleneckCategory,
-    ChaosExperimentType,
 )
 from app.platform_verification.performance_chaos_verification.runtime.performance_chaos_runtime import (
     PerformanceChaosVerificationRuntime,

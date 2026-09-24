@@ -27,7 +27,7 @@ class SSEEventStream:
                 pass
 
         sub_id = f"sse-client-{id(queue)}"
-        sub = domain_event_bus.subscribe(sub_id, handler)
+        domain_event_bus.subscribe(sub_id, handler)
 
         try:
             while True:

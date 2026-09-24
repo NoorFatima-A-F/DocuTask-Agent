@@ -10,7 +10,6 @@ Weights:
 - Security: 10%
 """
 
-from typing import Dict, Any, Optional
 from app.platform_verification.reliability_intelligence.domain.models import (
     ReliabilityMaturityScorecard,
     ReliabilityMaturityTier,

@@ -6,7 +6,7 @@ Tiered authority hierarchy, delegation contracts, anti-usurpation invariants, an
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from enum import Enum
 
 

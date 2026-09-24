@@ -1,9 +1,7 @@
 """Tests for Enterprise Policy Engine."""
 
-import pytest
 from app.platform.policy.policy_engine import (
     PolicyEngine,
-    PolicyRule,
 )
 
 

@@ -1,7 +1,7 @@
 {
-  "incident_started": "2026-09-19T07:04:51.824866+00:00",
+  "incident_started": "2026-09-24T21:55:03.512952+00:00",
   "detection_time_seconds": 38.5,
   "recovery_duration_minutes": 14.0,
-  "system_restored": "2026-09-19T07:04:51.824866+00:00",
+  "system_restored": "2026-09-24T21:55:03.512952+00:00",
   "total_duration_minutes": 7.88
 }

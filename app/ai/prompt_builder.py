@@ -7,7 +7,6 @@ Includes prompt injection sanitization.
 from typing import Any, Dict, Type
 from pydantic import BaseModel
 
-from app.ai.exceptions import AIPromptException
 from app.ai.schemas import (
     BankStatementExtraction,
     ContractExtraction,

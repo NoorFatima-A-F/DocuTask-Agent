@@ -1,7 +1,6 @@
 """
 Asynchronous In-Memory Event Bus with Dead Letter Queue and Filters.
 """
-import asyncio
 from typing import Callable, Dict, List, Type, Any
 from app.platform_verification.shared_kernel.events import BaseEvent
 

@@ -17,9 +17,6 @@ from app.platform_verification.config_versioning.domain.models import (
     EnvironmentFingerprint,
     EnvironmentTier,
     PromptTemplateVersion,
-    RAGRetrievalConfigVersion,
-    AgentConfigVersion,
-    AIModelMetadata,
 )
 from app.platform_verification.config_versioning.runtime.config_versioning_runtime import (
     EnterpriseConfigVersioningRuntime,

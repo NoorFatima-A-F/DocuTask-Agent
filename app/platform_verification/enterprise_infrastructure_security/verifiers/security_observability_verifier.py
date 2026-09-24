@@ -2,7 +2,7 @@
 Phase 3N.16: Security Observability Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ISecurityObservabilityVerifier
 from ..domain.models import (

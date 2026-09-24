@@ -3,13 +3,12 @@ Security Evidence Collector.
 Persists structured attack payloads, request/response records, audit logs, and security telemetry.
 """
 
-import os
 import json
 import hashlib
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from datetime import datetime, timezone
-from ..domain.models import AttackPayload, SecurityFinding, SecurityScorecard
+from ..domain.models import AttackPayload, SecurityScorecard
 
 
 class SecurityEvidenceCollector:

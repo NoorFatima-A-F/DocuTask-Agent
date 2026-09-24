@@ -11,7 +11,6 @@ from app.runtime.strategy.events.strategy_events import (
     GoalPriority,
     GoalStatus,
     StrategicHorizon,
-    DecisionImportance,
     MissionValue,
 )
 

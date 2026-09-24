@@ -9,7 +9,7 @@ from __future__ import annotations
 import time
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
-from app.model_governance.registry.models import Model, ModelLifecycleState
+from app.model_governance.registry.models import ModelLifecycleState
 from app.model_governance.registry.repository import ModelRegistryRepository
 from app.model_governance.lifecycle.manager import ModelLifecycleManager
 

@@ -3,12 +3,11 @@ AOIS-HROP Phase 13.7 - Operational Runtime
 Master runtime coordinator orchestrating supervisor, inspector, heartbeat, watchdog, and operational subsystems.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from app.runtime.operations.runtime.runtime_supervisor import RuntimeSupervisor
-from app.runtime.operations.runtime.runtime_inspector import RuntimeInspector, InspectionSnapshot
-from app.runtime.operations.runtime.runtime_heartbeat import RuntimeHeartbeat, HeartbeatPulse
-from app.runtime.operations.runtime.runtime_watchdog import RuntimeWatchdog, WatchdogAlert
-from app.runtime.operations.events.operation_events import SubsystemType
+from app.runtime.operations.runtime.runtime_inspector import RuntimeInspector
+from app.runtime.operations.runtime.runtime_heartbeat import RuntimeHeartbeat
+from app.runtime.operations.runtime.runtime_watchdog import RuntimeWatchdog
 
 
 class OperationalRuntime:

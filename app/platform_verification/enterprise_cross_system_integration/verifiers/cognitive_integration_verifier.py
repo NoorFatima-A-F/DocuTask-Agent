@@ -1,7 +1,7 @@
 """Part I: Knowledge + Cognitive Integration."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import ICognitiveIntegrationVerifier
 from ..domain.models import (
     CheckResult,

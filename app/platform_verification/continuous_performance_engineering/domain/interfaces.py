@@ -3,10 +3,9 @@ Phase 3J.12: Continuous Performance Engineering & Regression Intelligence — In
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from .models import (
-    BaseVerificationReport,
     BenchmarkExecutionReport,
     ChangeImpactAnalysisReport,
     CICDPerformancePipelineReport,

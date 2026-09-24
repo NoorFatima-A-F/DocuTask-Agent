@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 from app.platform_verification.extension_framework.domain.models import (
     PluginMetadata, PluginExecutionResult, PluginHealthMetrics,
-    PluginLifecycleState, PluginHealthState
+    PluginLifecycleState
 )
 from app.platform_verification.extension_framework.runtime.extension_framework_runtime import (
     ExtensionFrameworkRuntime, extension_framework_runtime

@@ -3,7 +3,7 @@ Domain models for Part 2F: Enterprise Database Architecture Verification Framewo
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional
 from datetime import datetime, timezone
 
 

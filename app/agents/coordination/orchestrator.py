@@ -3,8 +3,7 @@ Coordination Orchestrator.
 Coordinates teams, swarms, consensus evaluations, and multi-agent workflows.
 """
 
-from typing import Any, Dict, List, Optional
-from uuid import UUID
+from typing import Any, Optional
 from app.agents.coordination.agent_registry import AgentRegistry
 from app.agents.coordination.coordinator import AgentCoordinator
 from app.agents.coordination.swarm import SwarmEngine

@@ -5,7 +5,7 @@ Execution Graph Node Definitions.
 from abc import ABC
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
-from ..domain.models import TaskDefinition, TaskType
+from ..domain.models import TaskDefinition
 
 
 @dataclass

@@ -4,9 +4,9 @@ Collects telemetry, startup/shutdown timings, active sessions, CPU/memory, and p
 """
 
 import time
-from contextlib import asynccontextmanager, contextmanager
-from typing import Any, AsyncIterator, Dict, Iterator, List, Optional
-from pydantic import BaseModel, Field
+from contextlib import asynccontextmanager
+from typing import Any, AsyncIterator, Dict, List, Optional
+from pydantic import BaseModel
 
 
 class RuntimeMetricsSnapshot(BaseModel):

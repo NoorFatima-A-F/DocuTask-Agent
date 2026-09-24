@@ -7,10 +7,10 @@ Strongly typed entities in the scientific knowledge graph.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from research_validation.knowledge_graph.ontology import EntityType
-from research_validation.provenance.hashing import compute_sha256, hash_canonical_json
+from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)

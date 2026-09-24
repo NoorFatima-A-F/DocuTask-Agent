@@ -6,18 +6,13 @@ Orchestrates multi-step Directed Acyclic Graphs (DAGs) with Saga compensating tr
 from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import json
 import re
-from typing import Any, Dict, List, Optional, Set
-import uuid
+from typing import Any, Dict, List, Optional
 
 from app.runtime.execution.events.execution_events import (
-    ExecutionEvent,
-    ExecutionEventType,
     RiskLevel,
     StepStatus,
     WorkflowExecutionMode,
-    execution_event_bus,
 )
 
 
@@ -115,7 +110,7 @@ class WorkflowDefinition:
 
     def get_execution_order(self) -> List[List[str]]:
         """Returns topological tiers for parallel or sequential execution."""
-        step_ids = {s.step_id for s in self.steps}
+        {s.step_id for s in self.steps}
         in_degree: Dict[str, int] = {s.step_id: len(s.depends_on) for s in self.steps}
         adj_list: Dict[str, List[str]] = {s.step_id: [] for s in self.steps}
 

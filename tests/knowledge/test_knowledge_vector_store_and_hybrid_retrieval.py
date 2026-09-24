@@ -2,10 +2,9 @@
 Tests for VectorStoreInterface and HybridRetrievalEngine.
 """
 
-import pytest
 from app.knowledge.core.models import KnowledgeChunk, KnowledgeEmbedding
 from app.knowledge.embeddings.provider import DeterministicEmbeddingProvider
-from app.knowledge.retrieval.engine import HybridRetrievalEngine, bm25_score
+from app.knowledge.retrieval.engine import HybridRetrievalEngine
 from app.knowledge.vector.store import InMemoryVectorStore, cosine_similarity
 
 

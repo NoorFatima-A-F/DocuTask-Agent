@@ -10,7 +10,7 @@ Governs profiles:
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Dict, List
 from pydantic import BaseModel, Field
 from app.tenancy.core.models import ComplianceProfileType, Region
 from app.tenancy.core.exceptions import ComplianceViolationError

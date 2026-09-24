@@ -1,7 +1,7 @@
 """
 Reference Notification Plugin: Webhook and Alert Dispatcher.
 """
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import NotificationPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
     PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,

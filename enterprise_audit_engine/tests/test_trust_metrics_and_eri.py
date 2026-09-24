@@ -1,6 +1,5 @@
 """Tests for ERI Calculator & Composite Trust Score System."""
 
-import pytest
 from enterprise_audit_engine.trust_metrics.eri_calculator import (
     EvidenceReliabilityIndexCalculator,
     EvidenceReliabilityReport,

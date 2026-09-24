@@ -11,24 +11,6 @@ from app.platform_verification.automated_recovery_verification.domain.models imp
     CircuitBreakerState,
     RecoveryActionType,
     RecoveryCertificationTier,
-    RecoverySubsystemSpec,
-    RecoveryArchitectureReport,
-    RecoveryPolicyRule,
-    RecoveryPolicyReport,
-    ServiceRestartReport,
-    DatabaseRecoveryReport,
-    QueueRecoveryReport,
-    WorkerRecoveryReport,
-    AIRecoveryReport,
-    CircuitBreakerReport,
-    ValidationStepResult,
-    RecoveryValidationReport,
-    ReliabilityMetricsReport,
-    RecoverySafetyReport,
-    RecoveryAuditEvent,
-    RecoveryAuditReport,
-    RecoveryPillarScore,
-    RecoveryCertificationReport,
 )
 
 from app.platform_verification.automated_recovery_verification.verifiers.recovery_architecture_verifier import (
@@ -68,12 +50,6 @@ from app.platform_verification.automated_recovery_verification.verifiers.recover
     RecoveryAuditVerifier,
 )
 
-from app.platform_verification.automated_recovery_verification.scoring.automated_recovery_scorer import (
-    AutomatedRecoveryScorer,
-)
-from app.platform_verification.automated_recovery_verification.exporter.automated_recovery_exporter import (
-    AutomatedRecoveryExporter,
-)
 from app.platform_verification.automated_recovery_verification.runtime.automated_recovery_runtime import (
     AutomatedRecoveryRuntime,
 )

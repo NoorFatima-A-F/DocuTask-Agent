@@ -7,7 +7,6 @@ from fastapi import APIRouter, Response, status
 from typing import Dict, Any
 
 from app.platform_verification.readiness_contract.runtime.readiness_runtime import ReadinessRuntime
-from app.platform_verification.readiness_contract.domain.models import ReadinessState
 
 router = APIRouter(prefix="/verification/readiness", tags=["Readiness Verification"])
 runtime = ReadinessRuntime()

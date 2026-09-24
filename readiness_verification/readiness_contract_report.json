@@ -3,7 +3,7 @@
   "status": "ready",
   "service": "docutask-api",
   "version": "1.0.0",
-  "timestamp": "2026-09-19T07:05:04.035732+00:00",
+  "timestamp": "2026-09-24T21:55:13.596271+00:00",
   "checks": {
     "database": "healthy",
     "queue": "healthy",

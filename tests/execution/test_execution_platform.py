@@ -3,7 +3,6 @@ Pytest Test Suite for Phase 13.15: Autonomous Real-World Execution Platform (ARW
 Covers all 15 backend subsystems, mathematical CPM algorithms, Saga rollbacks, cryptographic ledgers, and REST endpoints.
 """
 
-import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -12,10 +11,8 @@ from app.runtime.execution.events import (
     CredentialType,
     ExecutionEvent,
     ExecutionEventType,
-    MissionStatus,
     PolicyDecision,
     RiskLevel,
-    StepStatus,
     ToolType,
     execution_event_bus,
 )
@@ -29,8 +26,6 @@ from app.runtime.execution.connectors.connector_engine import (
     connector_engine,
 )
 from app.runtime.execution.browser.browser_engine import (
-    BrowserAction,
-    BrowserSession,
     browser_engine,
 )
 from app.runtime.execution.workflow.workflow_engine import (
@@ -40,13 +35,12 @@ from app.runtime.execution.workflow.workflow_engine import (
 )
 from app.runtime.execution.planner.execution_planner import execution_planner
 from app.runtime.execution.credential.credential_engine import credential_engine
-from app.runtime.execution.policy.policy_engine import policy_engine, PolicyRule
+from app.runtime.execution.policy.policy_engine import policy_engine
 from app.runtime.execution.simulation.execution_simulation import execution_simulation_engine
 from app.runtime.execution.verification.verification_engine import verification_engine
 from app.runtime.execution.rollback.rollback_engine import rollback_engine
 from app.runtime.execution.monitoring.monitoring_engine import monitoring_engine
 from app.runtime.execution.audit.audit_engine import audit_engine
-from app.runtime.execution.execution.execution_engine import execution_engine
 from app.runtime.execution.runtime.execution_runtime import execution_runtime
 
 client = TestClient(app)

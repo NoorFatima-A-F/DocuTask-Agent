@@ -7,7 +7,7 @@ x86_64 (Intel/AMD) vs aarch64 (ARM64).
 
 from __future__ import annotations
 import platform
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
@@ -56,7 +56,7 @@ class CrossArchitectureRunner:
         remote_arm_trace: Optional[Dict[str, Any]] = None,
     ) -> CrossArchitectureReport:
         """Evaluate architectural consistency."""
-        now_str = datetime.now(timezone.utc).isoformat()
+        datetime.now(timezone.utc).isoformat()
         curr_m = platform.machine().lower()
         is_arm = "arm" in curr_m or "aarch" in curr_m
         host_arch = ArchitectureTarget.ARM64 if is_arm else ArchitectureTarget.X86_64

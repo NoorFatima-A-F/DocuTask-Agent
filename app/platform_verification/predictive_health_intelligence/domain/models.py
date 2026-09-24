@@ -3,7 +3,7 @@ Domain Models for Predictive Health Intelligence & Early Failure Detection (Part
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 
 
 class RiskLevel(str, Enum):

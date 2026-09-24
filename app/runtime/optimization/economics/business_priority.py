@@ -3,8 +3,7 @@ Business Priority Model for Phase 13.6 (ARIA-EOP).
 Manages organizational priority tiers (CRITICAL_SLA, HIGH_VALUE, BALANCED_STANDARD, BACKGROUND_BATCH).
 """
 
-from typing import Dict, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class PriorityWeights(BaseModel):

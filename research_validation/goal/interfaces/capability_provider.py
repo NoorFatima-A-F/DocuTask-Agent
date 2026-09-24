@@ -6,7 +6,7 @@ Abstract contract for querying available execution subsystems, models, tools, an
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 
 
 @dataclass(frozen=True)

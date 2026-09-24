@@ -1,6 +1,5 @@
 """Test Lineage Graph Engine and Transformation Tracker."""
 
-import pytest
 from app.data_governance.lineage.nodes import LineageNode, LineageNodeType
 from app.data_governance.lineage.edges import LineageEdge, LineageEdgeType
 from app.data_governance.lineage.graph import LineageGraphEngine
@@ -13,11 +12,11 @@ def test_lineage_graph_traversal():
     org_id = "org_lineage_test"
 
     # Nodes: Doc -> Task -> JSON -> Model -> Summary
-    doc_node = graph.add_node(LineageNode(node_id="node_doc", node_type=LineageNodeType.DOCUMENT, label="Invoice.pdf", organization_id=org_id))
-    ocr_node = graph.add_node(LineageNode(node_id="node_ocr", node_type=LineageNodeType.TASK, label="OCR Pipeline", organization_id=org_id))
-    json_node = graph.add_node(LineageNode(node_id="node_json", node_type=LineageNodeType.DATASET, label="Extracted.json", organization_id=org_id))
-    ai_node = graph.add_node(LineageNode(node_id="node_ai", node_type=LineageNodeType.MODEL, label="Gemini LLM", organization_id=org_id))
-    summary_node = graph.add_node(LineageNode(node_id="node_summary", node_type=LineageNodeType.DOCUMENT, label="Summary.txt", organization_id=org_id))
+    graph.add_node(LineageNode(node_id="node_doc", node_type=LineageNodeType.DOCUMENT, label="Invoice.pdf", organization_id=org_id))
+    graph.add_node(LineageNode(node_id="node_ocr", node_type=LineageNodeType.TASK, label="OCR Pipeline", organization_id=org_id))
+    graph.add_node(LineageNode(node_id="node_json", node_type=LineageNodeType.DATASET, label="Extracted.json", organization_id=org_id))
+    graph.add_node(LineageNode(node_id="node_ai", node_type=LineageNodeType.MODEL, label="Gemini LLM", organization_id=org_id))
+    graph.add_node(LineageNode(node_id="node_summary", node_type=LineageNodeType.DOCUMENT, label="Summary.txt", organization_id=org_id))
 
     # Edges
     graph.add_edge(LineageEdge(edge_id="e1", source_node_id="node_doc", target_node_id="node_ocr", edge_type=LineageEdgeType.READ, organization_id=org_id))

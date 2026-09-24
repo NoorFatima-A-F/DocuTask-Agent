@@ -17,7 +17,7 @@ Exports 11 structured JSON manifests into health_verification/:
 import os
 import json
 from dataclasses import asdict
-from typing import Dict, Any
+from typing import Dict
 from ..domain.models import (
     ReadinessContractReport,
     DependencyReadinessReport,

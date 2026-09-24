@@ -5,7 +5,7 @@ applies the dependency policy, and generates deterministic traffic admission dec
 """
 import time
 from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from app.platform_verification.readiness_engine.domain.models import (
     ReadinessState,
     DependencyCriticality,

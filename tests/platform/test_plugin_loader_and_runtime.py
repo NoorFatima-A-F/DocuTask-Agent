@@ -1,9 +1,7 @@
 """Tests for Plugin Loader and Plugin Runtime."""
 
-import pytest
 from app.platform.plugins.plugin_loader import (
     PluginLoader,
-    PluginManifest,
 )
 from app.platform.plugins.plugin_runtime import PluginRuntime
 

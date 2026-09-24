@@ -2,7 +2,7 @@
 from __future__ import annotations
 import asyncio
 from collections import defaultdict
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from app.runtime.events.base import RuntimeEvent
 
 class EventStore:

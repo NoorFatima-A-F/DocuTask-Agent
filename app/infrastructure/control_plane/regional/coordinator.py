@@ -1,8 +1,7 @@
 """Regional Coordinator for local cluster reconciliation and heartbeat tracking."""
 
 import threading
-from typing import Dict, List, Optional
-from datetime import datetime, timezone
+from typing import Dict
 from app.infrastructure.clusters.registry import ClusterRegistry
 from app.infrastructure.clusters.models import ClusterStatus
 

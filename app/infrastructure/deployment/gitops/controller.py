@@ -6,7 +6,7 @@ import logging
 import threading
 
 from .synchronizer import GitOpsManifest, GitOpsSynchronizer
-from .reconciler import GitOpsReconciler, DriftItem
+from .reconciler import GitOpsReconciler
 
 logger = logging.getLogger("app.infrastructure.deployment.gitops")
 

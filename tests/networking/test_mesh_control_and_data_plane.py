@@ -1,10 +1,8 @@
 """Tests for Mesh Control Plane, Data Plane Interceptor, and Service Proxies."""
 
-import pytest
 from app.networking.mesh.control_plane import (
     MeshNode,
     MeshServiceSpec,
-    MeshState,
     ProtocolType,
     ServiceMeshController,
 )
@@ -12,7 +10,6 @@ from app.networking.mesh.data_plane import (
     DataPlaneInterceptor,
     MeshRequest,
     MeshResponse,
-    TrafficDirection,
 )
 from app.networking.mesh.proxy import ServiceProxy
 

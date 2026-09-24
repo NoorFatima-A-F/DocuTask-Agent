@@ -2,7 +2,7 @@
 Phase 3H.4.11: Operational Readiness Scoring - Abstract Interfaces
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import List
 from .models import (
     MetricsCompletenessScore,
     MonitoringAccuracyScore,

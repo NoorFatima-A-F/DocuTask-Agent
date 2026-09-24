@@ -18,7 +18,6 @@ from app.agents.tools.policy.compliance_policy import (
     CompliancePolicy,
 )
 from app.agents.tools.policy.privacy_policy import PrivacyPolicy
-from app.agents.tools.policy.security_policy import SecurityPolicy
 from app.agents.tools.policy.tool_decision_engine import (
     PolicyDecision,
     ToolDecisionEngine,

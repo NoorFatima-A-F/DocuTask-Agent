@@ -2,7 +2,6 @@
 Resource Allocator.
 """
 
-from typing import Optional
 from app.agents.execution.resource_manager import ResourceManager
 from app.agents.planning.resources import ResourceRequirement
 

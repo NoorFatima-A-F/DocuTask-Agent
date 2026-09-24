@@ -3,7 +3,7 @@ ARTEICP Feedback Pipeline - Reflection Orchestrator
 Coordinates reflection agent self-critique, hypothesis formulation, and digital twin validation before committing rules.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 from app.runtime.feedback_pipeline.feedback_processor import HumanFeedbackRecord
 

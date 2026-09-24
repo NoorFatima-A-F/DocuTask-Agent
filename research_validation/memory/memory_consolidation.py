@@ -6,7 +6,7 @@ Periodically distills episodic traces, failures, and successes into long-term in
 
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 from research_validation.memory.episodic_memory import EpisodicMemoryStore
 from research_validation.memory.failure_memory import FailureMemoryStore

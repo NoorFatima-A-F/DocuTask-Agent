@@ -5,7 +5,7 @@ Abstract repository contracts for persisting and retrieving immutable Goal and M
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any, List, Optional
 
 
 class IGoalRepository(ABC):

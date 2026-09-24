@@ -5,7 +5,6 @@ Autoscaling, Multi-Region Fabric, Model Gateway, Disaster Recovery, and REST API
 """
 
 import pytest
-import asyncio
 from fastapi.testclient import TestClient
 from app.main import app
 from app.runtime.distributed import (
@@ -14,7 +13,6 @@ from app.runtime.distributed import (
     FairnessAllocator,
     DistributedScheduler,
     WorkerFleetManager,
-    IntelligentLoadBalancer,
     ExecutionFabric,
     CheckpointEngine,
     DurableWorkflowEngine,
@@ -24,7 +22,6 @@ from app.runtime.distributed import (
     DistributedCache,
     ModelGateway,
     DisasterRecoveryEngine,
-    DeploymentOrchestrator,
     DistributedRuntime,
     WorkerStatus,
     JobPriority,

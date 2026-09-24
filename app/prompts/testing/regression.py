@@ -5,11 +5,10 @@ Compares candidate prompt versions against baseline releases to prevent performa
 
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, List, Optional
 from pydantic import BaseModel, Field
 from app.prompts.registry.models import PromptVersion
 from app.prompts.evaluation.datasets import PromptEvaluationDataset
-from app.prompts.evaluation.metrics import PromptEvaluationMetrics
 from app.prompts.evaluation.runner import PromptEvaluationRunner
 
 

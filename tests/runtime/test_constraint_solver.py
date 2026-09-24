@@ -2,12 +2,9 @@
 Unit & Feasibility Tests for Constraint Solver (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.constraints import (
     ConstraintSolver,
     FeasibilityEngine,
-    ConstraintValidator,
-    ConstraintViolationError,
 )
 
 

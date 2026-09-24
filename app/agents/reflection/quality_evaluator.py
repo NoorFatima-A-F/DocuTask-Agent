@@ -3,7 +3,6 @@ Quality Evaluator.
 Evaluates the qualitative standards of generated execution outputs and artifacts.
 """
 
-from typing import Any
 from app.agents.reflection.evaluation import DimensionEvaluation, EvaluationDimension, EvaluationMetric
 from app.agents.reflection.interfaces import IEvaluator
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope

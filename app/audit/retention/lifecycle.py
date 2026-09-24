@@ -1,7 +1,7 @@
 """Retention Lifecycle Manager & Legal Hold Enforcement."""
 
-from typing import Dict, List, Optional, Set
-from datetime import datetime, timezone, timedelta
+from typing import Dict, List, Optional
+from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid
 from ..core.events import AuditEvent

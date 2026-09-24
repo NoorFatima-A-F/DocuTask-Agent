@@ -6,7 +6,6 @@ import os
 from app.platform_verification.predictive_failure_prevention.runtime.predictive_health_runtime import (
     PredictiveHealthRuntime,
 )
-from app.platform_verification.predictive_failure_prevention.domain.models import PredictiveCertificationTier
 
 
 def main():

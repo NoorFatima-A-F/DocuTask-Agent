@@ -3,9 +3,8 @@ Portfolio Evidence Package Builder generating all 9 presentation deliverables.
 """
 
 import os
-import json
 import hashlib
-from typing import Dict, Any, List
+from typing import List
 from app.certification.domain.models import PortfolioDocument
 
 

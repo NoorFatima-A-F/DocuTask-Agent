@@ -6,27 +6,25 @@ topological execution, checkpointing, uncertainty propagation, and artifact disp
 """
 
 from __future__ import annotations
-import json
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from research_validation.scientific_execution.experiment_manifest import (
     ExperimentManifest, ExperimentStatus
 )
 from research_validation.scientific_execution.experiment_registry import (
-    ExperimentRegistry, ExperimentRecord
+    ExperimentRegistry
 )
 from research_validation.scientific_execution.experiment_dependency_graph import (
-    ExperimentDependencyGraph, PipelineStageType, NodeState
+    ExperimentDependencyGraph, PipelineStageType
 )
 from research_validation.scientific_execution.experiment_runner import (
     ScientificExperimentRunner, ExperimentRunResult
 )
 from research_validation.provenance.evidence_graph import EvidenceGraph
-from research_validation.provenance.provenance_models import LineageStage, EvidenceQualityLevel
-from research_validation.provenance.hashing import hash_canonical_json
+from research_validation.provenance.provenance_models import LineageStage
 
 
 @dataclass(frozen=True)
@@ -111,7 +109,7 @@ class ScientificExperimentOrchestrator:
             dag.update_node_output(stage_name, stage_h)
 
         # Final Metric node
-        final_node = prov_graph.record_node(
+        prov_graph.record_node(
             node_id=f"final_{manifest.experiment_id}",
             stage=LineageStage.FINAL_METRIC,
             name=f"Metrics: {manifest.title}",

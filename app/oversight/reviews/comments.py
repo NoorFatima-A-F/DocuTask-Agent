@@ -1,6 +1,6 @@
 """Review Comments and Auditor Notes."""
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 import uuid

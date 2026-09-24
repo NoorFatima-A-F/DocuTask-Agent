@@ -6,7 +6,6 @@ evidence export, and end-to-end composite scoring with sub-second deterministic 
 
 import os
 import json
-import pytest
 from app.business_validation import (
     BusinessVerificationStatus,
     IndustryVertical,
@@ -14,13 +13,7 @@ from app.business_validation import (
     KPICategory,
     UATPersona,
     ReadinessPillar,
-    BusinessScenario,
     ROICalculationResult,
-    HumanEffortMetric,
-    UATTestCase,
-    EnterpriseAdoptionScore,
-    BusinessAssertionResult,
-    PillarBusinessResult,
     BusinessScorecard,
     ScenarioBenchmarkVerifier,
     BusinessAccuracyVerifier,

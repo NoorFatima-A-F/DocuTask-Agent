@@ -2,7 +2,7 @@
 Change Impact Analyzer for Disaster Recovery Governance Framework (Part 3G.4).
 Audits recent infrastructure, schema, and microservice changes to ensure zero orphaned recovery dependencies.
 """
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.resilience_governance.domain.models import (
     ChangeImpactItem,
     RecoveryChangeImpactReport,

@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import logging
-from typing import Any, Dict, List, Optional
+from typing import List
 import uuid
 
 from app.knowledge.core.models import Citation, KnowledgeChunk

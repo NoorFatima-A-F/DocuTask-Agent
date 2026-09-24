@@ -1,10 +1,9 @@
 """FastAPI REST API Routes for Enterprise Governance Analytics & Reporting."""
 
-from typing import List, Optional, Dict, Any
-from fastapi import APIRouter, HTTPException, status, Depends, Query
+from typing import List, Optional
+from fastapi import APIRouter, status, Depends, Query
 
 from ..sdk.client import GovernanceAnalyticsSDK
-from ..reporting.templates import ReportType, ReportFormat
 from ..dashboards.schemas import ExecutiveDashboardDTO, AdministratorDashboardDTO, DeveloperDashboardDTO
 from ..risk.analyzer import RiskAnalysisSummary
 from ..policies.analytics import PolicyIntelligenceReport

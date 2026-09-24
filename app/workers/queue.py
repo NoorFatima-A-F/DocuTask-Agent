@@ -5,7 +5,7 @@ Prepared for seamless replacement with Redis/Celery/RabbitMQ.
 """
 
 import asyncio
-from typing import Dict, Optional, Set
+from typing import Optional, Set
 from uuid import UUID
 
 from app.core.logging import logger

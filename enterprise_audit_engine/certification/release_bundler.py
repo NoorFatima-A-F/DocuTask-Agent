@@ -3,8 +3,7 @@
 import json
 import shutil
 from pathlib import Path
-from typing import Dict, Any, List
-from enterprise_audit_engine.domain.evidence.models import EvidenceRecord, AuditReportManifest
+from typing import Dict, Any
 
 
 class ReleaseEvidenceBundler:

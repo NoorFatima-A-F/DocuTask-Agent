@@ -1,18 +1,10 @@
 """FastAPI Request and Response Schemas for Governance Analytics."""
 
 from typing import Dict, Any, List, Optional
-from datetime import datetime, timezone
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
-from ..events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
-from ..reporting.templates import ReportType, ReportFormat, GovernanceReport
-from ..dashboards.schemas import ExecutiveDashboardDTO, AdministratorDashboardDTO, DeveloperDashboardDTO
-from ..risk.analyzer import RiskAnalysisSummary
-from ..policies.analytics import PolicyIntelligenceReport
-from ..ai_systems.agents import AgentSystemAnalytics
-from ..ai_systems.models import ModelSystemAnalytics
-from ..ai_systems.workflows import WorkflowSystemAnalytics
-from ..alerts.detector import AlertEvent
+from ..events.normalizers import GovernanceAnalyticsEvent
+from ..reporting.templates import ReportType, ReportFormat
 
 
 class IngestEventRequest(BaseModel):

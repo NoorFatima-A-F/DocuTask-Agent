@@ -6,16 +6,13 @@ transactional storage rollback safety, and retrieval authorization.
 
 import hashlib
 import math
-import os
 from pathlib import Path
-import re
 from typing import Optional
 from uuid import UUID
 
 from app.core.config import settings
 from app.core.security import sanitize_log_input
 from app.core.exceptions import (
-    AccessDeniedException,
     ResourceNotFoundException,
     ValidationAppException,
 )
@@ -97,11 +94,11 @@ class DocumentService:
             raise ValidationAppException("Uploaded file missing file extension")
 
         if ext in self.DANGEROUS_EXTENSIONS:
-            logger.error(f"Executable file upload rejected: '{original_filename}'")
+            logger.error(f"Executable file upload rejected: '{sanitize_log_input(original_filename)}'")
             raise ValidationAppException(f"Forbidden executable file extension '{ext}'")
 
         if ext not in [e.lower() for e in settings.ALLOWED_EXTENSIONS]:
-            logger.warning(f"Unsupported extension rejected: '{ext}' for file '{original_filename}'")
+            logger.warning(f"Unsupported extension rejected: '{sanitize_log_input(ext)}' for file '{sanitize_log_input(original_filename)}'")
             raise ValidationAppException(
                 f"File extension '{ext}' is not supported. Allowed extensions: {', '.join(settings.ALLOWED_EXTENSIONS)}"
             )
@@ -111,14 +108,14 @@ class DocumentService:
         if len(suffixes) > 1:
             for s in suffixes[:-1]:
                 if s.lower() in self.DANGEROUS_EXTENSIONS:
-                    logger.error(f"Double extension attack detected: '{original_filename}'")
+                    logger.error(f"Double extension attack detected: '{sanitize_log_input(original_filename)}'")
                     raise ValidationAppException("Malicious file naming structure detected")
 
         # 7. MIME type check
         clean_mime = mime_type.lower().split(";")[0].strip() if mime_type else ""
         allowed_mimes = [m.lower() for m in settings.ALLOWED_MIME_TYPES]
         if clean_mime not in allowed_mimes:
-            logger.warning(f"Unsupported MIME type rejected: '{clean_mime}' for file '{original_filename}'")
+            logger.warning(f"Unsupported MIME type rejected: '{sanitize_log_input(clean_mime)}' for file '{sanitize_log_input(original_filename)}'")
             raise ValidationAppException(
                 f"File MIME type '{clean_mime}' is not supported."
             )
@@ -127,7 +124,7 @@ class DocumentService:
         if ext in self.FILE_SIGNATURES:
             expected_sigs = self.FILE_SIGNATURES[ext]
             if not any(content.startswith(sig) for sig in expected_sigs):
-                logger.error(f"Magic bytes signature mismatch for file '{original_filename}': Extension='{ext}'")
+                logger.error(f"Magic bytes signature mismatch for file '{sanitize_log_input(original_filename)}': Extension='{sanitize_log_input(ext)}'")
                 raise ValidationAppException(
                     f"File content magic byte header does not match declared extension '{ext}'."
                 )
@@ -147,7 +144,7 @@ class DocumentService:
         Ingests file, performs security validation, checks SHA256 duplicate detection,
         stores file safely, and records metadata in database with transactional rollback safety.
         """
-        logger.info(f"Document upload initiated by user '{owner.username}': File='{original_filename}'")
+        logger.info(f"Document upload initiated by user '{sanitize_log_input(owner.username)}': File='{sanitize_log_input(original_filename)}'")
 
         # Validate file parameters & magic bytes
         self.validate_file(content, original_filename, mime_type)
@@ -158,7 +155,7 @@ class DocumentService:
         # Duplicate Detection
         existing_doc = await self.doc_repo.get_by_hash(sha256_h, owner_id=owner.id)
         if existing_doc:
-            logger.info(f"Duplicate document detected for user '{owner.id}': Hash={sha256_h[:10]}...")
+            logger.info(f"Duplicate document detected for user '{sanitize_log_input(owner.id)}': Hash={sha256_h[:10]}...")
             doc_resp = DocumentResponse.model_validate(existing_doc)
             return UploadResponse(
                 document=doc_resp,
@@ -238,7 +235,7 @@ class DocumentService:
         pages = math.ceil(total / page_size) if total > 0 else 0
         items = [DocumentResponse.model_validate(d) for d in docs]
 
-        logger.info(f"Listed documents for user '{owner.username}': Page={page}/{pages}, Total={total}")
+        logger.info(f"Listed documents for user '{sanitize_log_input(owner.username)}': Page={page}/{pages}, Total={total}")
 
         return DocumentListResponse(
             items=items,

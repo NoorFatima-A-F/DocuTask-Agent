@@ -2,7 +2,7 @@
 Phase 3L.9: Point-in-Time Recovery (PITR) Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IPITRRecoveryVerifier
 from ..domain.models import (

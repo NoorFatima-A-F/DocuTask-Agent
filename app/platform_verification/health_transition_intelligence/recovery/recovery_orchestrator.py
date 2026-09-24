@@ -4,7 +4,6 @@ Orchestrates automated recovery decisions (e.g. worker recycling, pool reconnect
 validates all prerequisite conditions in the RECOVERING state, and promotes healthy services back to READY.
 """
 import time
-from typing import Dict, Any, List, Optional
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
     RecoveryActionType,

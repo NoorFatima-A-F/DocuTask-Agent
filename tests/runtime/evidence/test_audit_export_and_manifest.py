@@ -1,6 +1,5 @@
 """Tests for Independent Audit Export and Manifest Signing."""
 
-import pytest
 from app.runtime.audit_export.bundle_exporter import (
     BundleExporter,
     ManifestSigner,

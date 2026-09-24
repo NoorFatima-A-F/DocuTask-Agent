@@ -2,7 +2,6 @@
 Test Suite: Autonomous Organization Digital Twin Simulation
 Validates 100-organization Monte Carlo stress testing under budget cuts, outages, surges, and chaos failures.
 """
-import pytest
 from app.runtime.org_simulation.org_simulator import OrganizationSimulator
 from app.runtime.org_simulation.resilience_report import ResilienceReportGenerator
 

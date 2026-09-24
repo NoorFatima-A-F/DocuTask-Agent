@@ -2,7 +2,7 @@
 from __future__ import annotations
 import asyncio
 import logging
-from typing import Any, Callable, Coroutine, Dict, List
+from typing import Any, Callable, Coroutine, Dict
 from app.runtime.events.base import RuntimeEvent
 from app.runtime.events.subscriptions import EventSubscription
 

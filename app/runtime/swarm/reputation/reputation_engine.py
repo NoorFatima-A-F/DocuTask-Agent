@@ -5,7 +5,7 @@ Multi-dimensional reputation scoring, pairwise trust networks, and adaptive inac
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 
 @dataclass

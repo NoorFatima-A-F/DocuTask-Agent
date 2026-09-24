@@ -3,7 +3,6 @@ REST API Router for Enterprise Document Storage Backup & Recovery Verification P
 Exposes all verification phases, multi-tenant checks, corruption audits, and quality scorecards.
 """
 from typing import Dict, Any
-from dataclasses import asdict
 from fastapi import APIRouter, HTTPException, Query
 
 from app.platform_verification.document_storage_verification.runtime.storage_backup_runtime import (
@@ -22,12 +21,10 @@ runtime_instance = StorageBackupVerificationRuntime()
 
 
 @router.post("/run", response_model=Dict[str, Any])
-def run_full_document_storage_verification(
-    output_dir: str = Query(default="evidence/document_storage_verification", description="Evidence export directory")
-) -> Dict[str, Any]:
+def run_full_document_storage_verification() -> Dict[str, Any]:
     """Triggers the full enterprise document storage backup & recovery verification pipeline."""
     try:
-        result = runtime_instance.execute_full_verification(output_dir=output_dir)
+        result = runtime_instance.execute_full_verification()
         scorecard = result.get("storage_quality_scorecard")
         return {
             "status": "SUCCESS",

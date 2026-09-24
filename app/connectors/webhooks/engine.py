@@ -11,7 +11,7 @@ import hmac
 import logging
 import time
 from typing import Any, Dict, List, Optional, Set
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.connectors.core.exceptions import WebhookVerificationError
 

@@ -3,7 +3,7 @@ Coordination Graph DAG Representation.
 Represents the network of collaborating agents, supervision hierarchies, and delegation links as a DAG.
 """
 
-from typing import Dict, List, Set
+from typing import Dict, List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.coordination.exceptions import CircularDelegationError

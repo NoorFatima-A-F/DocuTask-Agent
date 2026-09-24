@@ -3,7 +3,7 @@ Domain Models for Enterprise Document Storage Backup & Recovery Verification Fra
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 
 
 class StorageArtifactCategory(str, Enum):

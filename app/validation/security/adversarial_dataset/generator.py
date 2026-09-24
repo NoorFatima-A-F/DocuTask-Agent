@@ -4,10 +4,9 @@ Generates 500+ structured adversarial attack test cases across 6 languages:
 English, Urdu, Arabic, Roman Urdu, Chinese, Spanish.
 """
 
-import hashlib
 import json
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import List
 from app.validation.security.attack_cases import AttackCase
 
 

@@ -6,12 +6,11 @@ splicing, failure recovery replanning, and edge rerouting without restarting wor
 
 from __future__ import annotations
 
-import copy
 import logging
 import uuid
 from typing import Any, Dict, List, Optional
 
-from app.agents.planning.execution_plan import PlannedTask, TaskStatus
+from app.agents.planning.execution_plan import PlannedTask
 from app.agents.workflow.task_graph.dynamic_task_graph import DynamicTaskGraph, NodeState
 
 logger = logging.getLogger(__name__)

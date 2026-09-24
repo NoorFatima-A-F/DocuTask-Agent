@@ -2,7 +2,6 @@
 Phase 3H.4.9: Incident Recovery Verification API
 """
 from fastapi import APIRouter, HTTPException, Query
-from typing import Dict, Any, List
 from ..runtime.recovery_verification_runtime import RecoveryVerificationRuntime
 
 router = APIRouter(prefix="/platform-verification/incident-recovery", tags=["Incident Recovery Verification"])
@@ -10,9 +9,9 @@ runtime = RecoveryVerificationRuntime()
 
 
 @router.post("/execute-all", summary="Run full incident recovery verification suite")
-def run_recovery_verification(output_dir: str = Query("incident_recovery_verification", description="Output directory for manifests")):
+def run_recovery_verification():
     try:
-        results = runtime.run_all_verifications(output_dir=output_dir)
+        results = runtime.run_all_verifications()
         return {
             "status": "SUCCESS",
             "composite_score": results["scorecard"].composite_score,

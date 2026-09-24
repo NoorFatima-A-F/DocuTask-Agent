@@ -6,7 +6,7 @@ Executes evaluation datasets against prompt versions, computes scores, and deter
 from __future__ import annotations
 
 import time
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable
 from app.prompts.registry.models import PromptVersion
 from app.prompts.templates.renderer import PromptTemplateRenderer
 from app.prompts.evaluation.datasets import PromptEvaluationDataset
@@ -63,7 +63,7 @@ class PromptEvaluationRunner:
             except Exception:
                 pass
 
-        total_time = (time.time() - start_time) * 1000.0
+        (time.time() - start_time) * 1000.0
         avg_latency = sum(latencies) / len(latencies) if latencies else 0.0
         accuracy = round(passed / total, 4) if total > 0 else 1.0
 

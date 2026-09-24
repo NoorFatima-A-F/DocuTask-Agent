@@ -1,6 +1,6 @@
 """Unified High-Level Scheduling and Worker Management SDK."""
 
-from typing import Any, Dict, List, Optional, Set, Tuple, Union
+from typing import Dict, List, Optional, Set, Tuple
 from app.infrastructure.clusters.registry import ClusterRegistry
 from app.infrastructure.regions.registry import RegionRegistry
 from app.infrastructure.workers.models import (
@@ -13,11 +13,8 @@ from app.infrastructure.workers.models import (
 from app.infrastructure.workers.registry import WorkerRegistry
 from app.infrastructure.workers.heartbeat import WorkerHeartbeatPayload
 from app.infrastructure.executions.workload import (
-    ResourceRequirements,
-    WorkloadPriority,
     WorkloadRequest,
     WorkloadState,
-    WorkloadType,
 )
 from app.infrastructure.executions.assignment import (
     AssignmentManager,

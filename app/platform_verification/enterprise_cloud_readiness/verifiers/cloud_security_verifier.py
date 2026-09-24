@@ -2,7 +2,7 @@
 Phase 3M.13: Cloud Security Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICloudSecurityVerifier
 from ..domain.models import (

@@ -2,7 +2,6 @@
 Tests for Feature Flag Engine.
 """
 
-import pytest
 from app.core.feature_flags.service import FeatureFlagService
 
 

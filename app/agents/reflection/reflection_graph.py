@@ -4,7 +4,7 @@ Represents the stages of reflection (analysis, evaluation, critique, knowledge e
 as a directed acyclic graph.
 """
 
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import Any, Dict, List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.reflection.exceptions import InvalidEvaluationGraphError

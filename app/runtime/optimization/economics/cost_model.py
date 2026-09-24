@@ -3,8 +3,7 @@ Cost Model for Phase 13.6 (ARIA-EOP).
 Parametric pricing models for LLMs (Gemini, Claude), OCR engines, CPU/GPU compute, and storage.
 """
 
-from typing import Dict, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class UnitCostBreakdown(BaseModel):

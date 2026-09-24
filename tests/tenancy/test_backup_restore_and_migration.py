@@ -1,6 +1,5 @@
 """Test Backup, Restore, and Migration Engines."""
 
-import pytest
 from app.tenancy.core.models import Region
 from app.tenancy.organizations.manager import OrganizationManager
 from app.tenancy.backup.engine import TenantBackupRestoreEngine
@@ -38,7 +37,7 @@ def test_tenant_migration_and_cloning():
     backup_engine = TenantBackupRestoreEngine()
     migration_engine = TenantMigrationEngine(org_mgr, backup_engine)
 
-    org = org_mgr.create_organization(
+    org_mgr.create_organization(
         org_id="org_source_1",
         name="Source Corp",
         owner_id="user_owner",

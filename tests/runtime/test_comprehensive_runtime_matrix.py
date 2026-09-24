@@ -10,14 +10,12 @@ Exercises exhaustive test matrices across:
 - PlatformRuntimeConfig validation and immutability
 """
 
-from uuid import uuid4
 import pytest
 from app.agents.runtime.configuration import PlatformRuntimeConfig
 from app.agents.runtime.dependency_graph import CircularDependencyError, DependencyGraph
 from app.agents.runtime.enterprise.compatibility_checker import VersionCompatibilityChecker
 from app.agents.runtime.enterprise.scheduler_state import (
     JobPriority,
-    JobStatus,
     ScheduledJob,
 )
 from app.agents.runtime.exceptions import (

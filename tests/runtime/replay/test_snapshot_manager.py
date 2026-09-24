@@ -2,7 +2,6 @@
 Unit Tests for Snapshot Manager and Incremental State Restoration.
 """
 
-import pytest
 from app.runtime.observability.schemas import RuntimeEvent, EventCategory, EventType, EventSeverity
 from app.runtime.replay.replay_state_machine import ReplayStateMachine
 from app.runtime.snapshot.snapshot_manager import SnapshotManager

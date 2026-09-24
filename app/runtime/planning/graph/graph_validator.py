@@ -38,9 +38,8 @@ class GraphValidator:
                 errors.append(f"Dangling edge {eid}: target {edge.target_node_id} does not exist.")
 
         # 3. Reachability & Connectivity
-        topo = []
         try:
-            topo = dag.topological_sort()
+            dag.topological_sort()
         except ValueError as ex:
             errors.append(f"Topological sort error: {ex}")
 

@@ -5,9 +5,9 @@ Exports comprehensive AI evaluation reports in Markdown, JSON, and HTML formats.
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Dict, List
 from app.core.logging import logger
-from app.validation.schemas import EvidenceRecord, MetricEvaluationResult, RegressionComparison
+from app.validation.schemas import EvidenceRecord, RegressionComparison
 
 
 class ReportGenerator:

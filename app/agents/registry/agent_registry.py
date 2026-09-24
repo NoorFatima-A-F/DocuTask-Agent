@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Set
+from typing import Dict, List, Optional
 import logging
 
 from app.agents.domain.agent_entity import Agent, AgentLifecycleState, AgentType

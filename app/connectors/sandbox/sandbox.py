@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import logging
 import time
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, List, Optional
 from pydantic import BaseModel, Field
 
 from app.connectors.core.exceptions import SandboxViolationError

@@ -4,7 +4,6 @@ Coverage target: > 90%.
 """
 
 import os
-import pytest
 from app.validation.security.adversarial_dataset.generator import AdversarialDatasetGenerator
 from app.validation.security.fuzzer import SecurityFuzzer
 from app.validation.security.multi_turn import MultiTurnSecurityTester

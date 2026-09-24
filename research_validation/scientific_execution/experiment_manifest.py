@@ -7,15 +7,14 @@ hashes, and cryptographic validation digests.
 """
 
 from __future__ import annotations
-import json
 import uuid
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple
 
-from research_validation.provenance.hashing import hash_canonical_json, compute_sha256
-from research_validation.provenance.provenance_models import EvidenceQualityLevel, EnvironmentFingerprint
+from research_validation.provenance.hashing import hash_canonical_json
+from research_validation.provenance.provenance_models import EvidenceQualityLevel
 
 
 class ExperimentStatus(str, Enum):

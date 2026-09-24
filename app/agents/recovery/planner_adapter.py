@@ -3,8 +3,6 @@ Planner Adapter for Recovery Subsystem.
 Bridges RecoveryEngine to IntelligentPlanner for partial replanning and goal re-entry.
 """
 
-from typing import Any, Dict, Optional
-from uuid import UUID
 from app.agents.planner.planner import IntelligentPlanner
 
 

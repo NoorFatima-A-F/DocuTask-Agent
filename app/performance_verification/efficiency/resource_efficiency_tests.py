@@ -2,7 +2,6 @@
 Resource efficiency and infrastructure footprint verifier.
 """
 
-from typing import Dict, Any
 from app.performance_verification.infrastructure.resource_profiler import ResourceProfiler
 from app.performance_verification.domain.models import ResourceEfficiencyProfile
 

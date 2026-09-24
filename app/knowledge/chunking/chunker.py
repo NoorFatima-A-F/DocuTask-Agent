@@ -9,7 +9,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 import logging
 import re
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import uuid
 
 from app.knowledge.core.models import KnowledgeChunk, KnowledgeDocument

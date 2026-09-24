@@ -6,7 +6,7 @@ and instantiation of autonomous agents.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import uuid
 
 from app.agents.domain.agent_entity import Agent, AgentLifecycleState, AgentType, TrustLevel

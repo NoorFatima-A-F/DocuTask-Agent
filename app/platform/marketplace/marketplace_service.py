@@ -5,7 +5,6 @@ Catalog for discovering, downloading, and 1-click installing verified autonomous
 
 from __future__ import annotations
 
-import time
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
@@ -148,7 +147,7 @@ class MarketplaceService:
             raise KeyError(f"Package '{package_id}' not found in marketplace")
 
         manifest = PluginManifest.from_dict(pkg.manifest)
-        ctx = self.loader.load_plugin(manifest)
+        self.loader.load_plugin(manifest)
         pkg.download_count += 1
 
         return {

@@ -2,11 +2,10 @@
 Automated Disaster Recovery Drill System (Part 3G.5H).
 Orchestrates scheduled and randomized recovery drills to prove live operational resilience.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from datetime import datetime, timezone
 import json
 import os
-import random
 
 from app.platform_verification.operational_resilience.domain.models import (
     DrillResult,

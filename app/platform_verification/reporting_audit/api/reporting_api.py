@@ -2,9 +2,9 @@
 REST API Router for Enterprise Reporting & Audit Intelligence (PART 8).
 """
 from __future__ import annotations
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.platform_verification.reporting_audit.domain.models import (
     ReportFormat,
     ReportType,

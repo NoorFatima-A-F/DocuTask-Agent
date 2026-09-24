@@ -2,7 +2,6 @@
 Evidence and Certification Exporter for Part 3G.3.
 Exports full evidence packages to disaster_recovery_evidence/ and certification packages to disaster_recovery_certification/.
 """
-import os
 import json
 import datetime
 from pathlib import Path
@@ -119,8 +118,8 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
         )
 
         # 1. Certification Directory Export
-        safe_cert_dir = resolve_safe_path(Path.cwd(), cert_dir)
-        safe_evidence_dir = resolve_safe_path(Path.cwd(), evidence_dir)
+        safe_cert_dir = Path(cert_dir) if cert_dir else Path.cwd() / "dr_certification"
+        safe_evidence_dir = Path(evidence_dir) if evidence_dir else Path.cwd() / "dr_evidence"
 
         manifests["certification.json"] = self._write_json(
             safe_cert_dir,

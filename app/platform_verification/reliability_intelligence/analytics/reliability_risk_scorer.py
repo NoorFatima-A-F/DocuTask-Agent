@@ -11,7 +11,7 @@ Calculates multi-factor service reliability risk scores weighted across:
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, List
 
 from app.platform_verification.reliability_intelligence.domain.interfaces import (
     IReliabilityRiskScorer,

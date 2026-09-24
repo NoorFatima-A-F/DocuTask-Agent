@@ -3,7 +3,7 @@ Simulation Subsystem for Phase 13.6 (ARIA-EOP).
 Monte-Carlo execution simulators, what-if scenario analyzers, and comparative benchmarking runners.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 import uuid
 from pydantic import BaseModel, Field
 

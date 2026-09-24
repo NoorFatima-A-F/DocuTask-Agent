@@ -4,7 +4,7 @@ Coordinates automated, audited rollback procedures for artifacts, configurations
 """
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import List, Dict, Any
+from typing import List
 
 @dataclass(frozen=True)
 class RollbackRecord:

@@ -10,12 +10,11 @@ Executes multi-run experimental campaigns to quantify:
 from __future__ import annotations
 
 import logging
-import math
 import statistics
 import time
 from dataclasses import asdict, dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List
 
 logger = logging.getLogger(__name__)
 

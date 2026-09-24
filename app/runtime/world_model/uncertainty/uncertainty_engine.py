@@ -6,7 +6,7 @@ Decomposes epistemic and aleatoric uncertainty, computing entropy and belief sta
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import math
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import uuid
 
 from app.runtime.world_model.events.world_model_events import (

@@ -2,14 +2,10 @@
 Unit & Determinism Tests for Scientific Confidence Engine (QDIOP / SDIOP).
 """
 
-import pytest
-import math
 from app.runtime.confidence import (
     ConfidenceModel,
     ConfidenceIntervalEstimator,
     UncertaintyEstimator,
-    EvidenceWeighter,
-    ConfidenceValidator,
     scientific_confidence_engine,
 )
 

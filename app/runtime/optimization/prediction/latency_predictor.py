@@ -3,8 +3,7 @@ Prediction Subsystem for Phase 13.6 (ARIA-EOP).
 Probabilistic predictors for latency distributions, token spend, success likelihoods, and posterior confidence.
 """
 
-from typing import Dict, Any, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class PredictionReport(BaseModel):

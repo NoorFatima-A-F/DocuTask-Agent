@@ -1,6 +1,6 @@
 """North-South API Gateway Security Manager."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from .filters import (
     GatewayFilterResult,
     TokenBucketRateLimiter,

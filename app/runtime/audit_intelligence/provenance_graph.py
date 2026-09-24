@@ -3,7 +3,7 @@ ARTEICP Audit Intelligence - End-to-End Field Provenance Graph
 Traces every extracted entity back to document pixel coordinates, OCR tokens, model inference, validation, and database storage.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 
 

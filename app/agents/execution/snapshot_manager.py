@@ -3,9 +3,9 @@ Snapshot Manager.
 Manages runtime and worker snapshots.
 """
 
-from typing import Dict, List
-from pydantic import BaseModel, Field
-from app.agents.execution.checkpoint_manager import CheckpointManager, ExecutionSnapshot
+from typing import List
+from pydantic import BaseModel
+from app.agents.execution.checkpoint_manager import CheckpointManager
 from app.agents.execution.worker import Worker
 
 

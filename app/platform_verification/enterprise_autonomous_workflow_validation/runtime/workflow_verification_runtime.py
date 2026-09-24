@@ -6,7 +6,6 @@ from typing import Any, Dict, Optional
 from ..domain.interfaces import IAutonomousWorkflowVerificationRuntime
 from ..domain.models import (
     AutonomousWorkflowQualityReport,
-    VerificationStatus,
 )
 from ..exporter.workflow_quality_exporter import AutonomousWorkflowQualityExporter
 from ..scoring.workflow_quality_scorer import AutonomousWorkflowQualityScorer

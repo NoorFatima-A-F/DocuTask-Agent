@@ -1,7 +1,7 @@
 """Governance Analytics Event Processing, Validation, and Enrichment Pipeline."""
 
-from typing import Dict, Any, List, Optional, Callable
-from .normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
+from typing import List, Callable
+from .normalizers import GovernanceAnalyticsEvent
 
 
 class EventProcessor:

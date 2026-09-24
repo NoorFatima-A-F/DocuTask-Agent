@@ -4,7 +4,7 @@ Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
 import json
-from typing import Dict, Any, Union
+from typing import Dict, Any
 from app.runtime.events.models.event import DomainEvent
 
 

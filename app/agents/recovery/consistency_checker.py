@@ -3,8 +3,8 @@ Consistency Checker.
 Audits consistency across execution states, worker leases, and checkpoint registries.
 """
 
-from typing import Dict, List
-from pydantic import BaseModel, Field
+from typing import List
+from pydantic import BaseModel
 
 
 class InconsistencyRecord(BaseModel):

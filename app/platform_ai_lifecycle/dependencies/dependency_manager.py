@@ -3,7 +3,7 @@ Phase 13.20: Agent Dependency DAG Manager.
 Tracks and validates dependencies (Tools, Models, Connectors, Datasets, Policies) and flags breaking changes.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 import uuid
 from app.platform_ai_lifecycle.models.schemas import AgentDependency
 

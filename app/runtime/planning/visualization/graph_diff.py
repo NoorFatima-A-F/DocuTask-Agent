@@ -7,8 +7,8 @@ identifies added nodes, removed nodes, rewired edges, and critical path shifts.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Set
-from pydantic import BaseModel, Field
+from typing import Any, Dict, List
+from pydantic import BaseModel
 from app.runtime.planning.graph.dag import ExecutionDAG
 
 

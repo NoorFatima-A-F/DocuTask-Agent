@@ -3,7 +3,7 @@ Health State Machine & Four-Layer Health Model (Part 3H.1A).
 Implements the 7-state operational health lifecycle and evaluates the four architectural health layers:
 Process, Dependency, Service Capability, and Business Workflow.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from app.platform_verification.health_architecture.domain.models import (
     HealthState,
     HealthLayer,

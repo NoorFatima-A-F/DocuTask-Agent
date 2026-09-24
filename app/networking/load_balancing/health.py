@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, field
-from typing import Callable, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Callable, Dict, Optional
 
 from ..discovery.registry import EndpointHealth, ServiceEndpoint, ServiceRegistry
 

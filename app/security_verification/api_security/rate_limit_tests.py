@@ -4,7 +4,7 @@ Tests 100,000 requests burst to verify token-bucket rate limiter, 429 status res
 """
 import time
 from typing import Dict, List, Any
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
+from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus
 
 class RateLimitVerifier:
     def __init__(self):

@@ -9,9 +9,9 @@ runtime = ObservabilitySecurityRuntime()
 
 
 @router.post("/execute-all", summary="Run full observability security verification suite")
-def run_observability_security_verification(output_dir: str = Query("observability_security_verification", description="Output directory for manifests")):
+def run_observability_security_verification():
     try:
-        results = runtime.run_all_verifications(output_dir=output_dir)
+        results = runtime.run_all_verifications()
         return {
             "status": "SUCCESS",
             "composite_score": results["scorecard"].composite_score,

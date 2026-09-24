@@ -6,7 +6,6 @@ Never invokes external tools.
 
 from typing import Any, Dict, List
 from app.agents.reflection.interfaces import IToolUsageAnalyzer
-from app.agents.reflection.reflection_context import ToolCallTrace
 
 
 class ToolUsageAnalyzer(IToolUsageAnalyzer):

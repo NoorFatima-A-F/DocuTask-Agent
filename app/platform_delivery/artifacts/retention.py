@@ -1,7 +1,7 @@
 """Artifact Retention and Immutability Policy Engine."""
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import List, Optional
+from typing import Optional
 from .models import ArtifactIdentity, ArtifactQuarantineStatus
 
 

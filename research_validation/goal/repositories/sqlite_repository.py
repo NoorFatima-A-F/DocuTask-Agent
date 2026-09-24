@@ -6,19 +6,17 @@ Persistent SQLite implementations for Goals and Missions with ACID transaction s
 
 import json
 import sqlite3
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from research_validation.goal.interfaces.repository import IGoalRepository, IMissionRepository
 from research_validation.goal.models.goal import Goal, GoalType, PriorityLevel, GoalStatus
 from research_validation.goal.models.confidence_threshold import ConfidenceThreshold, ConfidenceLevel
 from research_validation.goal.models.mission import Mission
-from research_validation.goal.models.mission_state import MissionState, StateTransitionRecord
+from research_validation.goal.models.mission_state import MissionState
 from research_validation.goal.models.execution_budget import ExecutionBudget
 from research_validation.goal.models.resource_budget import ResourceBudget
-from research_validation.goal.models.risk_profile import RiskProfile, RiskSeverity, RiskItem
+from research_validation.goal.models.risk_profile import RiskProfile, RiskSeverity
 from research_validation.goal.models.mission_metrics import MissionMetrics
-from research_validation.provenance.hashing import hash_canonical_json
 
 
 class SqliteGoalRepository(IGoalRepository):

@@ -3,7 +3,7 @@ Knowledge Search Engine for Phase 13.5 (ARLP-KIP).
 Performs hybrid full-text and semantic keyword searches across indexed knowledge records.
 """
 
-from typing import Dict, Any, List
+from typing import List
 from pydantic import BaseModel, Field
 
 from app.runtime.learning.knowledge.knowledge_registry import knowledge_registry, KnowledgeRecord

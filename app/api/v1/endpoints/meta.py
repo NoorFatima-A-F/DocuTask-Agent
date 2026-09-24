@@ -3,14 +3,12 @@ AMRS-RSIP Phase 13.9 - REST API Endpoints
 REST API for Autonomous Meta-Reasoning, Strategic Planning, Recursive Reflection, Replay Experimentation, Capability Discovery, Policy Evolution, and Self-Improvement Governance.
 """
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, Body
+from typing import Any, Dict, List
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.runtime.meta import (
     get_meta_runtime,
-    ReflectionTier,
-    ImprovementStatus,
 )
 
 router = APIRouter()

@@ -10,7 +10,7 @@ from __future__ import annotations
 import enum
 import logging
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger("infrastructure.replication.conflict_resolution")

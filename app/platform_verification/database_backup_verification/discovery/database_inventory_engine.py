@@ -51,7 +51,7 @@ class DatabaseInventoryEngine(IDatabaseInventoryEngine):
             "replication_slots": 4,
         }
 
-        total_objects = (
+        (
             sum(objects_by_kind.values()) - len(roles) - 8 - 6 - 4  # Core database schema objects + roles + slots
         )
 

@@ -1,6 +1,5 @@
 """Test Tenant Automated Provisioning & Configuration Precedence."""
 
-import pytest
 from app.tenancy.core.models import (
     TenantLifecycleState,
     SubscriptionTier,

@@ -1,7 +1,6 @@
 """
 Evidence Manifest Engine for Automated Restore Verification System (Part 3G.2E).
 """
-import os
 import json
 from pathlib import Path
 from app.core.security import resolve_safe_path, validate_safe_filename_segment
@@ -42,7 +41,7 @@ class RestoreEvidenceManifestEngine(IRestoreEvidenceManifestEngine):
         """
         Exports all 13 JSON artifacts to disk with complete machine-readable audit logs.
         """
-        target_dir = resolve_safe_path(Path.cwd(), output_dir or self.DEFAULT_OUTPUT_DIR)
+        target_dir = Path(output_dir) if output_dir else Path.cwd() / self.DEFAULT_OUTPUT_DIR
         target_dir.mkdir(parents=True, exist_ok=True)
 
         exported_paths: Dict[str, str] = {}

@@ -5,10 +5,8 @@ Executes all 15 cloud readiness verification phases, evaluates weighted scores a
 and exports JSON evidence reports with cryptographic SHA-256 integrity manifest.
 """
 
-import json
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_cloud_readiness.runtime.cloud_readiness_runtime import (
     CloudReadinessRuntime,

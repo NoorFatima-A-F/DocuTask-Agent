@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-19T07:04:58.301625+00:00",
-  "execution_timestamp": "2026-09-19T07:04:58.301634+00:00",
+  "timestamp": "2026-09-24T21:55:08.249549+00:00",
+  "execution_timestamp": "2026-09-24T21:55:08.249561+00:00",
   "summary": "Supply chain security verified: SBOMs generated, images signed with Cosign, and base digests pinned.",
   "report_title": "Container Image Supply Chain Security Report",
   "sbom_generated": true,

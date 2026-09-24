@@ -17,6 +17,7 @@ from .models import (
     ProgressiveLoadReport,
     RecoveryReport,
     RegressionReport,
+    WorkerScalingReport,
 )
 
 

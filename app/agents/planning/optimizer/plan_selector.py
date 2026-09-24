@@ -7,7 +7,7 @@ scoring Quality, Cost, Latency, Reliability, and Risk against strategic goals.
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 
 from app.agents.planning.execution_plan import ExecutionPlan

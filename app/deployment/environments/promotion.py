@@ -2,7 +2,7 @@
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import uuid
 from ..core.controller import DeploymentController
 from ..core.deployment import Deployment, DeploymentStrategyType

@@ -1,7 +1,6 @@
 """
 Access Control Engine for Backup Security Verification Framework (Part 3G.2F).
 """
-from typing import Dict, Any
 
 from app.platform_verification.backup_security_verification.domain.models import (
     AccessControlReport,

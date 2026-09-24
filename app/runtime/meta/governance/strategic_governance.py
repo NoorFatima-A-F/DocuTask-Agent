@@ -6,7 +6,7 @@ Enforces safety guardrails, human approval policies where required, anti-usurpat
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 import uuid
 
 

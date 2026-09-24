@@ -4,11 +4,7 @@ Covers RuntimeStateMachine, RuntimeContext, ObservationManager, ExecutionControl
 DecisionLoop, AutonomousRuntime, RecoveryManager, MultiCriticConsensusEvaluator, and CloudHealthMonitor.
 """
 
-import asyncio
 import pytest
-from datetime import datetime, timezone
-from pathlib import Path
-from uuid import uuid4
 
 from app.agents.events.event_bus import EnterpriseEventBus
 from app.agents.planning.execution_plan import ExecutionPlan, PlannedTask
@@ -20,7 +16,7 @@ from app.agents.reflection.critics.historical_critic import HistoricalCritic
 from app.agents.reflection.critics.llm_critic import LLMCritic
 from app.agents.reflection.critics.rule_critic import RuleCritic
 from app.agents.runtime.autonomous.autonomous_runtime import AutonomousRuntime
-from app.agents.runtime.autonomous.decision_loop import DecisionCycleResult, DecisionLoop
+from app.agents.runtime.autonomous.decision_loop import DecisionCycleResult
 from app.agents.runtime.autonomous.event_controller import EventController
 from app.agents.runtime.autonomous.execution_controller import ExecutionController
 from app.agents.runtime.autonomous.observation_manager import ObservationManager
@@ -28,7 +24,6 @@ from app.agents.runtime.autonomous.runtime_context import RuntimeContext
 from app.agents.runtime.autonomous.state_machine import (
     AutonomousState,
     RuntimeStateMachine,
-    VALID_TRANSITIONS,
 )
 from app.agents.runtime.cloud.health_monitor import CloudHealthMonitor
 from app.agents.runtime.cloud.telemetry_exporter import (

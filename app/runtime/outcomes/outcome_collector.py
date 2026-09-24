@@ -3,8 +3,8 @@ Outcome Verification Engine - Outcome Collector
 Captures and pairs pre-execution predictions with post-execution observations across all operational dimensions.
 """
 
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass, asdict, field
+from typing import Dict, Any, List
+from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 
 

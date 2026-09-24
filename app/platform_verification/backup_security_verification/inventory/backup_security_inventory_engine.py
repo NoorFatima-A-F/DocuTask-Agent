@@ -1,7 +1,7 @@
 """
 Backup Security Inventory Engine for Backup Security Verification Framework (Part 3G.2F).
 """
-from typing import List, Dict, Any
+from typing import List
 
 from app.platform_verification.backup_security_verification.domain.models import (
     DataClassificationLevel,

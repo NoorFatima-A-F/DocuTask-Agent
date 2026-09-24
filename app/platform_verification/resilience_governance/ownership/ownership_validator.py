@@ -4,7 +4,7 @@ Validates that all 42 critical platform components have clear operational owners
 """
 import os
 import yaml
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.resilience_governance.domain.models import (
     ComponentOwnershipItem,
     OwnershipValidationReport,

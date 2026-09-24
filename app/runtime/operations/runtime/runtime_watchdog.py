@@ -3,9 +3,9 @@ AOIS-HROP Phase 13.7 - Runtime Watchdog
 Detects deadlocks, stalls, hung workers, frozen planners, infinite retries, and resource starvation.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import uuid
 
 

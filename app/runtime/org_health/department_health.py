@@ -3,7 +3,7 @@ AMAEOP Pillar 5 - Department Health Scorer
 Calculates granular health scores (0-100%) factoring worker utilization, queue congestion, latency variance, and error rates.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 from app.runtime.organization.department import Department
 

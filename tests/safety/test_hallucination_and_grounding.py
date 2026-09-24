@@ -1,6 +1,5 @@
 """Tests for Grounding Verification and Numeric Hallucination Detection."""
 
-import pytest
 from app.safety.gateway.context import KnowledgeChunk, SourceTrustLevel
 from app.safety.hallucination.grounding import GroundingVerifier
 from app.safety.hallucination.detector import HallucinationDetector

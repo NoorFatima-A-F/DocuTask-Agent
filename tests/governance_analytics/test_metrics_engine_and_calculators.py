@@ -1,11 +1,10 @@
 """Tests for Metrics Engine, Calculators, and Governance Health Score."""
 
-import pytest
 from app.governance.analytics.warehouse.repositories import GovernanceDataWarehouseRepository
 from app.governance.analytics.events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
 from app.governance.analytics.core.engine import GovernanceMetricsEngine
 from app.governance.analytics.core.aggregators import TimeSeriesAggregator
-from app.governance.analytics.core.metrics import MetricPeriod, MetricTrend
+from app.governance.analytics.core.metrics import MetricTrend
 
 
 def test_metrics_engine_calculations():

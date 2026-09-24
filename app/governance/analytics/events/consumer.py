@@ -1,7 +1,6 @@
 """Governance Event Consumer for batch ingestion and stream handling."""
 
-from typing import Dict, Any, List, Optional, Callable
-from datetime import datetime, timezone
+from typing import Any, List, Optional, Callable
 from .normalizers import GovernanceAnalyticsEvent, AnalyticsEventType, EventNormalizer
 from .processors import EventProcessor
 

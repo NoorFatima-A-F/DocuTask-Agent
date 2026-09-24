@@ -2,7 +2,6 @@
 Test Suite: Hackathon Demo Engine Execution
 Validates 1-click end-to-end hackathon demo step sequences, live telemetry snapshots, and mission summaries.
 """
-import pytest
 from app.runtime.demo_engine.demo_engine import HackathonDemoEngine
 
 

@@ -9,7 +9,6 @@ from fastapi import FastAPI
 
 from app.platform_verification.observability_automation.domain.models import (
     AutonomousCertificationTier,
-    RiskLevel,
     AutomationActionType,
     AutonomousArchitectureReport,
     AnomalyDetectionReport,
@@ -61,12 +60,6 @@ from app.platform_verification.observability_automation.verifiers.human_control_
 )
 from app.platform_verification.observability_automation.verifiers.autonomous_dashboard_verifier import (
     AutonomousDashboardVerifier,
-)
-from app.platform_verification.observability_automation.scoring.autonomous_reliability_scorer import (
-    AutonomousReliabilityScorer,
-)
-from app.platform_verification.observability_automation.exporter.observability_automation_evidence_exporter import (
-    ObservabilityAutomationEvidenceExporter,
 )
 from app.platform_verification.observability_automation.runtime.observability_automation_runtime import (
     ObservabilityAutomationRuntime,

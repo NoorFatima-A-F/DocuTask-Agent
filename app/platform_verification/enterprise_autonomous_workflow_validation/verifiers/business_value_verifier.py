@@ -1,7 +1,7 @@
 """Part Q: Business Value Validation."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IBusinessValueVerifier
 from ..domain.models import (
     BusinessValueReport,

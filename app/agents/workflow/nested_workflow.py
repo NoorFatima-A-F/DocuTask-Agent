@@ -3,8 +3,7 @@ Nested Workflow Executor.
 Coordinates execution of nested workflows with depth checking and variable passing.
 """
 
-from typing import Any, Callable, Coroutine, Dict, List, Optional
-from uuid import UUID
+from typing import Any, Callable, Coroutine
 from app.agents.workflow.exceptions import WorkflowException
 from app.agents.workflow.workflow_instance import WorkflowInstance
 

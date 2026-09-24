@@ -4,13 +4,11 @@ Provides ExecutionRequestBuilder, ExecutionSessionBuilder, RuntimeContextBuilder
 WorkerBuilder, CheckpointBuilder, and ExecutionResultBuilder.
 """
 
-from typing import Any, Dict, List, Optional
-from uuid import UUID, uuid4
+from typing import Any, Dict, List
+from uuid import UUID
 from app.agents.execution.checkpoint_manager import CheckpointMetadata, ExecutionSnapshot
 from app.agents.execution.context import ExecutionRequest, ExecutionResult, RuntimeContext
-from app.agents.execution.execution_session import ExecutionSession
 from app.agents.execution.lifecycle import ExecutionLifecycleState
-from app.agents.execution.metadata import ExecutionIdentity, ExecutionMetadata, ExecutionStatistics
 from app.agents.execution.worker import Worker, WorkerStatus
 from app.agents.planning.contracts import Plan
 

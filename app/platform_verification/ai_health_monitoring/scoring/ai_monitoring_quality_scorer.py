@@ -12,7 +12,6 @@ Weights:
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
 
 from app.platform_verification.ai_health_monitoring.domain.interfaces import (
     IAIObservabilityQualityScorer,

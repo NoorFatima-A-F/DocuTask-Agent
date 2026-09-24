@@ -13,21 +13,21 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 import uuid
 
-from app.runtime.science.consensus.consensus_engine import ConsensusEngine, ConsensusReview
+from app.runtime.science.consensus.consensus_engine import ConsensusEngine
 from app.runtime.science.events.science_events import (
     ScienceEventBus,
     ScientificConsensus,
     ScientificDomainEvent,
     ScientificEventType,
 )
-from app.runtime.science.evidence.evidence_engine import EvidenceEngine, ScientificEvidence
-from app.runtime.science.experiment.experiment_engine import ExperimentEngine, ScientificExperiment
-from app.runtime.science.hypothesis.hypothesis_engine import HypothesisEngine, ScientificHypothesis
-from app.runtime.science.knowledge.knowledge_engine import KnowledgeEngine, ScientificFact, ScientificLaw
+from app.runtime.science.evidence.evidence_engine import EvidenceEngine
+from app.runtime.science.experiment.experiment_engine import ExperimentEngine
+from app.runtime.science.hypothesis.hypothesis_engine import HypothesisEngine
+from app.runtime.science.knowledge.knowledge_engine import KnowledgeEngine
 from app.runtime.science.ontology.ontology_engine import OntologyEngine
-from app.runtime.science.publication.publication_engine import PublicationEngine, ScientificPublication
-from app.runtime.science.research.research_engine import ResearchEngine, ResearchStream
-from app.runtime.science.validation.validation_engine import ValidationEngine, ValidationReport
+from app.runtime.science.publication.publication_engine import PublicationEngine
+from app.runtime.science.research.research_engine import ResearchEngine
+from app.runtime.science.validation.validation_engine import ValidationEngine
 
 logger = logging.getLogger(__name__)
 
@@ -221,7 +221,7 @@ class ScientificRuntime:
             )
             facts_created += 1
 
-            law = self.knowledge_engine.formulate_law(
+            self.knowledge_engine.formulate_law(
                 title=f"Law of Context-Optimal Attention ({domain.capitalize()})",
                 governing_equation="Accuracy_gain = 1.0 - exp(-k * Pruning_ratio)",
                 domain=domain,

@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-19T07:04:50.220896+00:00",
-  "execution_timestamp": "2026-09-19T07:04:50.220908+00:00",
+  "timestamp": "2026-09-24T21:55:02.353120+00:00",
+  "execution_timestamp": "2026-09-24T21:55:02.353128+00:00",
   "summary": "Recovery observability verified: 12 metrics captured, structured audit logging active, and distributed tracing enabled.",
   "report_title": "Recovery Observability & Telemetry Report",
   "telemetry_pipeline_active": true,

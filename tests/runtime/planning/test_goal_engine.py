@@ -1,14 +1,8 @@
 """Tests for Goal Understanding Engine."""
 
-import pytest
 from app.runtime.planning.goal_engine import (
     GoalUnderstandingEngine,
-    GoalGraph,
-    SemanticObjective,
-    ObjectiveType,
-    PriorityLevel,
     CompletionCriteria,
-    Deliverable,
 )
 
 

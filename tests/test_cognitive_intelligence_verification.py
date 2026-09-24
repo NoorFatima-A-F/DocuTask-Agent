@@ -4,18 +4,15 @@ Unit and integration tests for Phase V7 — Enterprise Cognitive Intelligence Ve
 
 import os
 import json
-import pytest
 from app.cognitive_intelligence_verification import (
     PartId,
     ReasoningType,
     HypothesisType,
-    GoalLevel,
     VerificationStatus,
     ReasoningTrace,
     CognitiveNode,
     CognitiveEdge,
     Hypothesis,
-    DecisionRecord,
     CognitivePlatformScorer,
     EvidenceGenerator,
 )

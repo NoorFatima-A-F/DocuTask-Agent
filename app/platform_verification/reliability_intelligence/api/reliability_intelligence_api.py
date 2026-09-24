@@ -3,7 +3,7 @@
 FastAPI router exposing SRE intelligence, SLO metrics, and reliability scorecards.
 """
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter
 from typing import Dict, Any
 
 from app.platform_verification.reliability_intelligence.runtime.reliability_intelligence_runtime import ReliabilityIntelligenceRuntime

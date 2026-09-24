@@ -3,7 +3,7 @@ Scientific Calibration Platform - Unified Calibration Engine
 Manages calibration curves, reliability diagrams, empirical benchmarking, and quality gating.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 import random
 
 from app.runtime.calibration.reliability_diagram import ReliabilityDiagramGenerator

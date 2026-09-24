@@ -4,8 +4,6 @@ Coordinates zero-downtime, in-flight schema migrations of running workflow insta
 """
 
 import logging
-from typing import Any, Dict, Optional
-from uuid import UUID
 from app.agents.workflow.exceptions import InvalidWorkflowMigrationError
 from app.agents.workflow.lifecycle import WorkflowLifecycleState
 from app.agents.workflow.workflow_definition import WorkflowDefinition

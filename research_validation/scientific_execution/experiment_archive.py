@@ -8,11 +8,9 @@ research bundles for long-term preservation and external peer review.
 from __future__ import annotations
 import json
 import os
-import tarfile
-import zipfile
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 from research_validation.scientific_execution.experiment_manifest import ExperimentManifest
 from research_validation.scientific_execution.experiment_runner import ExperimentRunResult

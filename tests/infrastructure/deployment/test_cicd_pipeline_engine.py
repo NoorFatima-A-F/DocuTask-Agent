@@ -1,6 +1,5 @@
 """Tests for CI/CD Pipeline Engine, Stages, and Runners."""
 
-import pytest
 from app.infrastructure.deployment.pipelines import (
     StageType,
     StageStatus,

@@ -1,6 +1,5 @@
 """Tests for Certification Policy Engine and Evidence Quality Index (EQI)."""
 
-import pytest
 from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,
     EvidenceSourceType,

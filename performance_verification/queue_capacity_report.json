@@ -41,8 +41,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-19T07:05:02.152108+00:00",
-  "execution_timestamp": "2026-09-19T07:05:02.152169+00:00",
+  "timestamp": "2026-09-24T21:55:11.875937+00:00",
+  "execution_timestamp": "2026-09-24T21:55:11.875976+00:00",
   "summary": "",
   "report_title": "Redis Queue Capacity & Ingestion Dynamics Report",
   "queue_depth_peak": 480,

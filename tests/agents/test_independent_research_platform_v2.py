@@ -4,13 +4,12 @@ Unit and Integration Tests for Research Validation & Scientific Lineage v2
 """
 
 import json
-import pytest
 from research_validation.provenance.independent_verifier import (
-    IndependentProvenanceVerifier, VerificationStatus, ProvenanceVerificationResult
+    IndependentProvenanceVerifier, VerificationStatus
 )
 from research_validation.provenance.evidence_graph import EvidenceGraph
 from research_validation.provenance.provenance_models import (
-    EvidenceNode, LineageStage, EvidenceQualityLevel
+    LineageStage, EvidenceQualityLevel
 )
 from research_validation.datasets.public_benchmarks import DatasetType
 from research_validation.datasets.benchmark_executor import (
@@ -23,13 +22,13 @@ from research_validation.telemetry.production_evidence_collector import (
     ProductionEvidenceCollector, TelemetryCollectionStatus
 )
 from research_validation.claims.claim_verifier import (
-    ScientificClaimVerifier, ClaimClassification
+    ScientificClaimVerifier
 )
 from research_validation.reproducibility.reproduce_all import (
     MasterReproducibilityOrchestrator, ReproducibilityVerdict
 )
 from research_validation.meta_validation.validator_benchmark import (
-    ValidatorMetaBenchmarkRunner, MutationType
+    ValidatorMetaBenchmarkRunner
 )
 from research_validation.threats.threats_to_validity_generator import (
     ThreatsToValidityGenerator, ValidityDimension
@@ -75,7 +74,7 @@ def test_independent_provenance_verifier_conflict_detection():
 
 def test_independent_provenance_dag_replay():
     graph = EvidenceGraph("replay_test")
-    n1 = graph.record_node("n1", LineageStage.RAW_OBSERVATION, "Input", "Input observation", {"data": 123}, [], EvidenceQualityLevel.LEVEL_C)
+    graph.record_node("n1", LineageStage.RAW_OBSERVATION, "Input", "Input observation", {"data": 123}, [], EvidenceQualityLevel.LEVEL_C)
 
     steps = [{"id": "n1", "content": {"entity_name": "Input"}, "parent_ids": []}]
     comparison = IndependentProvenanceVerifier.replay_and_compare(graph, steps)
@@ -135,7 +134,7 @@ def test_experiment_scheduler_lifecycle():
     assert job.actual_elapsed_seconds == 5.0
 
     # Trigger completion
-    ckpt2 = scheduler.record_checkpoint(job.job_id, elapsed_delta_seconds=6.0, metrics={"rss_mb": 130.0})
+    scheduler.record_checkpoint(job.job_id, elapsed_delta_seconds=6.0, metrics={"rss_mb": 130.0})
     assert job.status == ExperimentStatus.COMPLETED
     assert job.actual_elapsed_seconds == 11.0
 
@@ -169,7 +168,7 @@ def test_production_evidence_collector():
 # 5. Phase 76A: Scientific Claim Verification Engine
 def test_claim_verification_engine():
     graph = EvidenceGraph("claim_graph")
-    n1 = graph.record_node("n1", LineageStage.RAW_OBSERVATION, "Benchmark F1 Measurement", "Empirical measurement", {"precision": 0.985}, [], EvidenceQualityLevel.LEVEL_A)
+    graph.record_node("n1", LineageStage.RAW_OBSERVATION, "Benchmark F1 Measurement", "Empirical measurement", {"precision": 0.985}, [], EvidenceQualityLevel.LEVEL_A)
 
     verifier = ScientificClaimVerifier(graph)
     text = (

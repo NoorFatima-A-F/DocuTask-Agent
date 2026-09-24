@@ -6,11 +6,10 @@ Distills thousands of raw execution traces and causal graph patterns into compac
 from __future__ import annotations
 
 import uuid
-from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from app.runtime.knowledge.experience_graph import CausalExperienceGraph
-from app.runtime.knowledge.heuristic_mining import HeuristicMiningEngine, MinedHeuristic
+from app.runtime.knowledge.heuristic_mining import HeuristicMiningEngine
 from app.runtime.knowledge.policy_library import PlanningPolicy, PolicyLibrary
 
 

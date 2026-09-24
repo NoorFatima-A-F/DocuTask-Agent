@@ -19,7 +19,6 @@ from app.agents.runtime.plugin_runtime.isolation_policy import (
     NetworkOriginDeniedError,
     PathAccessDeniedError,
 )
-from app.agents.runtime.plugin_runtime.plugin_executor import PluginExecutor
 
 
 @pytest.mark.parametrize("permission", [

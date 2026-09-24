@@ -11,9 +11,7 @@ import uuid
 from typing import Any, Dict, List, Optional
 
 from app.runtime.evidence.execution_evidence import (
-    CryptoProof,
     EvidenceNode,
-    EvidenceStatus,
     EvidenceType,
 )
 

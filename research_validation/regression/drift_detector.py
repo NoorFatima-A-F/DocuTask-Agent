@@ -6,13 +6,9 @@ confidence, environment, and hardware drift without fabricating data.
 """
 
 from __future__ import annotations
-import math
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
 
-from research_validation.provenance.hashing import hash_canonical_json
 
 
 class DriftDimension(str, Enum):

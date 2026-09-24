@@ -11,7 +11,6 @@ Validates:
 """
 
 from uuid import uuid4
-import pytest
 from app.agents.runtime.runtime_context import ContextPropagationMiddleware, RuntimeContext
 from app.agents.runtime.runtime_session import RuntimeSession
 

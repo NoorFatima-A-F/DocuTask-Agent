@@ -12,11 +12,8 @@ from app.oversight.sdk.decorators import require_oversight
 from app.oversight.api.routes import (
     evaluate_context,
     create_review_request,
-    list_reviews,
-    get_review,
     get_review_evidence,
     submit_decision,
-    execute_override,
     add_comment,
     list_comments,
     get_analytics,
@@ -27,7 +24,6 @@ from app.oversight.api.schemas import (
     EvaluateContextRequest,
     CreateReviewRequestPayload,
     SubmitDecisionPayload,
-    OverridePayload,
     AddCommentPayload,
 )
 

@@ -1,7 +1,6 @@
 """
 Phase 3H.4.10.8 & 3H.4.10.9: Telemetry Pipeline & Storage Security Verifier
 """
-from typing import Dict, Any
 from ..domain.interfaces import IPipelineSecurityVerifier
 from ..domain.models import PipelineSecurityReport
 

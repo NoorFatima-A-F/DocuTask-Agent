@@ -3,7 +3,7 @@ Timeline Diff for Phase 13.4.
 Calculates structural, behavioral, and confidence differences between two mission executions.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from pydantic import BaseModel, Field
 
 

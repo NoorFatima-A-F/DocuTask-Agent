@@ -10,7 +10,6 @@ Validates:
 """
 
 import asyncio
-import time
 import pytest
 from app.agents.runtime.enterprise.circuit_breaker import (
     CircuitBreaker,

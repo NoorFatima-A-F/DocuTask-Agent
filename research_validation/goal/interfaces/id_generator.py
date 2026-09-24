@@ -6,7 +6,6 @@ Generates strongly typed, unique, and deterministic identifiers for goals, missi
 
 import uuid
 from abc import ABC, abstractmethod
-from typing import Optional
 
 
 class IIdGenerator(ABC):

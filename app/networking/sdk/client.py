@@ -4,24 +4,23 @@ from __future__ import annotations
 
 import time
 import uuid
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, Optional
 
-from ..mesh.control_plane import MeshNode, MeshServiceSpec, ServiceMeshController
-from ..mesh.data_plane import DataPlaneInterceptor, MeshRequest, MeshResponse
-from ..identity.service_identity import ServiceIdentityManager, SPIFFEIdentity
-from ..identity.certificates import CertificateManager, X509Certificate
+from ..mesh.control_plane import ServiceMeshController
+from ..mesh.data_plane import MeshRequest, MeshResponse
+from ..identity.service_identity import ServiceIdentityManager
+from ..identity.certificates import CertificateManager
 from ..identity.workload import WorkloadAttestationManager, SVIDType
-from ..security.mtls import MTLSManager, MTLSMode, TLSVersion
-from ..security.policies import NetworkPolicyEngine, PolicyAction, NetworkPolicy, NetworkPolicyRule
+from ..security.mtls import MTLSManager, MTLSMode
+from ..security.policies import NetworkPolicyEngine, PolicyAction
 from ..security.authorization import ZeroTrustEvaluator, ZeroTrustSubject, ZeroTrustResource
-from ..discovery.registry import ServiceRegistry, ServiceEndpoint, EndpointHealth
+from ..discovery.registry import ServiceRegistry, ServiceEndpoint
 from ..discovery.resolver import ServiceResolver
-from ..routing.router import TrafficRouter, RouteRule, RouteDestination
+from ..routing.router import TrafficRouter
 from ..routing.policies import RoutingPolicyEngine, LoadBalancingAlgorithm
 from ..routing.traffic_split import TrafficSplitter
 from ..resilience.retry import RetryPolicyEngine, RetryPolicy
-from ..resilience.circuit_breaker import CircuitBreaker, CircuitBreakerConfig
-from ..resilience.timeout import TimeoutManager
+from ..resilience.circuit_breaker import CircuitBreaker
 from ..resilience.fault_injection import FaultInjectionEngine
 from ..load_balancing.algorithms import LoadBalancerEngine
 from ..load_balancing.health import HealthCheckEngine

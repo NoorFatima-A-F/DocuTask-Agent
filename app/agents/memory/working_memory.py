@@ -3,7 +3,7 @@ Working Memory Sub-Tier.
 Manages immediate active state, variables, and transient context for running agent tasks.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 from app.agents.memory.providers import BaseMemoryProvider, InMemoryProvider
 from app.agents.memory.repository import MemoryItem
 

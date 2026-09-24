@@ -3,11 +3,9 @@ Thread-Safe Handler & Subscriber Registries.
 """
 
 import asyncio
-from typing import Callable, Coroutine, Dict, List, Set
-from app.agents.messaging.commands import AgentCommand
+from typing import Callable, Coroutine, Dict, List
 from app.agents.messaging.events import DomainEvent
-from app.agents.messaging.handlers import CommandHandler, EventHandler, QueryHandler
-from app.agents.messaging.queries import AgentQuery
+from app.agents.messaging.handlers import CommandHandler, QueryHandler
 
 
 class HandlerRegistry:

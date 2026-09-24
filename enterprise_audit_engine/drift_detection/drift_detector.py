@@ -8,9 +8,8 @@ Detects when an issued certification becomes stale due to:
 
 import subprocess
 import platform
-import sys
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

@@ -2,7 +2,6 @@
 
 from datetime import datetime, timezone, timedelta
 from app.infrastructure.executions.workload import (
-    WorkloadPriority,
     WorkloadRequest,
     WorkloadState,
     WorkloadType,
@@ -23,7 +22,6 @@ from app.infrastructure.workers.models import (
     Worker,
     WorkerLease,
     WorkerStatus,
-    WorkerType,
 )
 from app.infrastructure.workers.registry import WorkerRegistry
 

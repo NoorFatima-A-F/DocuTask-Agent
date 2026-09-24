@@ -2,9 +2,8 @@
 Phase 3J.11: Intelligent Performance Optimization REST API Endpoints.
 """
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel
+from typing import Any, Dict
+from fastapi import APIRouter, HTTPException
 
 from ..runtime.optimization_runtime import OptimizationRuntime
 

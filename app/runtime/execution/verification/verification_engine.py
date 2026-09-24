@@ -13,7 +13,6 @@ import uuid
 from app.runtime.execution.events.execution_events import (
     ExecutionEvent,
     ExecutionEventType,
-    RiskLevel,
     execution_event_bus,
 )
 

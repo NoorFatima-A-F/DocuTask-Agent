@@ -1,10 +1,8 @@
 """Tests for Rolling, Canary, Blue/Green, and Shadow Deployment Strategies."""
 
-import pytest
 from app.infrastructure.deployment.strategies import (
     RollingStrategyConfig,
     RollingDeploymentStrategy,
-    CanaryStep,
     CanaryDeploymentStrategy,
     BlueGreenDeploymentStrategy,
     ShadowDeploymentStrategy,

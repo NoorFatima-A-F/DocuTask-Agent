@@ -1,7 +1,6 @@
 """OpenAPI & API Contract Verifier."""
 
-from typing import List, Dict, Any
-from pathlib import Path
+from typing import Dict, Any
 
 
 class APIContractVerifier:

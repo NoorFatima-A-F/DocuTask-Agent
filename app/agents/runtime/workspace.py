@@ -3,7 +3,6 @@ Workspace Manager.
 Manages per-tenant and per-agent workspace directories, sandboxing, and file isolation.
 """
 
-import os
 from pathlib import Path
 from typing import Optional
 

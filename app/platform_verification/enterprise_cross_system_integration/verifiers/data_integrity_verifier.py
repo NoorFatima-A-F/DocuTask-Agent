@@ -1,7 +1,7 @@
 """Part Q: Data Integrity."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IDataIntegrityVerifier
 from ..domain.models import (
     CheckResult,

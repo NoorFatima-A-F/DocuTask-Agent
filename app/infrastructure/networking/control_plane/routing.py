@@ -1,10 +1,10 @@
 """Global Network Routing Engine synthesizing mesh rules, topologies, and latencies."""
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import random
 import threading
 
-from .registry import NetworkControlPlaneRegistry, RouteRule, RoutingStrategy, NetworkEndpoint
+from .registry import NetworkControlPlaneRegistry, RoutingStrategy, NetworkEndpoint
 
 
 class GlobalNetworkRouter:

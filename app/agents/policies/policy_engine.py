@@ -73,7 +73,7 @@ class AgentPolicyEngine:
 
         # 1. Permission check
         if required_permission:
-            agent_skills_and_caps = set(agent.skills + agent.capabilities)
+            set(agent.skills + agent.capabilities)
             # In enterprise mode, verify trust level or capability
             if agent.trust_level == "UNTRUSTED":
                 violations.append(f"Untrusted agent {agent.id} forbidden from action '{action}'")

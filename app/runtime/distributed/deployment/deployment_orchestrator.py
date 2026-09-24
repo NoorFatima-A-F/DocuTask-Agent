@@ -4,7 +4,7 @@ Generates multi-cloud container manifests (Cloud Run, Kubernetes YAML, Dockerfil
 """
 
 from __future__ import annotations
-from typing import Dict, List, Any
+from typing import Dict, Any
 
 
 class DeploymentOrchestrator:

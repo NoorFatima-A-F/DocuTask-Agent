@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Set
+from typing import List, Optional, Set
 from pydantic import BaseModel, Field
 from app.data_governance.registry.models import ClassificationLevel, SensitivityCategory
 from app.data_governance.classification.rules import DEFAULT_CLASSIFICATION_RULES, ClassificationRule

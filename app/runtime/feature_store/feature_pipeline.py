@@ -3,9 +3,9 @@ Scientific Feature Store - Feature Pipeline
 Orchestrates end-to-end extraction, normalization, validation, versioning, and statistics tracking.
 """
 
-from typing import Dict, Any, Tuple, Optional
+from typing import Dict, Any, Optional
 from dataclasses import dataclass
-from app.runtime.feature_store.feature_registry import feature_registry, CANONICAL_FEATURES
+from app.runtime.feature_store.feature_registry import feature_registry
 from app.runtime.feature_store.feature_engine import FeatureEngine
 from app.runtime.feature_store.feature_normalizer import FeatureNormalizer
 from app.runtime.feature_store.feature_validator import FeatureValidator, FeatureValidationError

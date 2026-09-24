@@ -3,7 +3,6 @@ Dependency Resilience & Graceful Degradation Manager (Part 3G.5F).
 Verifies that external dependency outages (Gemini, PostgreSQL, Redis, Storage, Email, Auth)
 do not cause catastrophic platform collapse and instead degrade gracefully.
 """
-from typing import Dict, Any, List
 from app.platform_verification.operational_resilience.domain.models import (
     DependencyResilienceReport,
 )

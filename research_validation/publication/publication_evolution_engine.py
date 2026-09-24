@@ -8,7 +8,7 @@ when new empirical evidence is validated, recording full cryptographic provenanc
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 from research_validation.publication.publication_diff import (
     PublicationDiffItem, PublicationEvolutionReport

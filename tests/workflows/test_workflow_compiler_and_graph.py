@@ -7,9 +7,6 @@ from app.workflows.domain.models import TaskDefinition, TaskType, WorkflowDefini
 from app.workflows.domain.exceptions import WorkflowValidationException
 from app.workflows.compiler.compiler import WorkflowCompiler
 from app.workflows.validator.validator import WorkflowValidator
-from app.workflows.graph.graph import ExecutionGraph
-from app.workflows.graph.nodes import TaskNode
-from app.workflows.graph.edges import EdgeType, GraphEdge
 
 
 def test_compiler_builds_valid_dag():

@@ -11,21 +11,14 @@ Executes an end-to-end verifiable lineage pipeline:
 6. Renders SVG, interactive HTML, Graphviz DOT, and sealed evidence packages.
 """
 
-import json
 import logging
 import sys
 import time
 from pathlib import Path
 
-from research_validation.provenance.digital_signatures import ProvenanceSigner
 from research_validation.provenance.evidence_bundle import EvidenceBundleBuilder
-from research_validation.provenance.evidence_graph import EvidenceGraph
-from research_validation.provenance.evidence_store import EvidenceStore
-from research_validation.provenance.provenance_api import ProvenanceAPI
 from research_validation.provenance.provenance_engine import ProvenanceEngine
-from research_validation.provenance.provenance_models import EvidenceQualityLevel, LineageStage
-from research_validation.provenance.provenance_serialization import ProvenanceSerializer
-from research_validation.provenance.provenance_visualizer import ProvenanceVisualizer
+from research_validation.provenance.provenance_models import EvidenceQualityLevel
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("ProvenanceDemo")
@@ -48,7 +41,7 @@ def main() -> int:
 
     # 2. Record Empirical Lineage Pipelines across Quality Levels
     logger.info("Recording 7-stage empirical lineage pipeline (Level A: External Public Benchmark)...")
-    chain_cord = engine.record_empirical_pipeline(
+    engine.record_empirical_pipeline(
         chain_name="CORD Benchmark F1 Evaluation",
         raw_samples=[0.96, 0.95, 0.97, 0.96, 0.95, 0.98],
         transformation_fn=lambda xs: [x for x in xs if x >= 0.0],
@@ -59,7 +52,7 @@ def main() -> int:
     )
 
     logger.info("Recording 7-stage empirical lineage pipeline (Level B: Reference Equivalence)...")
-    chain_math = engine.record_empirical_pipeline(
+    engine.record_empirical_pipeline(
         chain_name="Normal CDF Probit SciPy Verification",
         raw_samples=[1.95996398454, 1.95996398454],
         transformation_fn=lambda xs: xs,

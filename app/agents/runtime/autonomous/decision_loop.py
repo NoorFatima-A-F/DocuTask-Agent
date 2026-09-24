@@ -9,8 +9,8 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Any, Dict, Optional
 
 from app.agents.human.human_task_manager import HumanTaskManager
 from app.agents.intelligence.goal.goal_manager import GoalManager
@@ -24,7 +24,7 @@ from app.agents.reflection.critics.consensus_evaluator import (
 )
 from app.agents.runtime.autonomous.event_controller import EventController
 from app.agents.runtime.autonomous.execution_controller import ExecutionController
-from app.agents.runtime.autonomous.observation_manager import Observation, ObservationManager
+from app.agents.runtime.autonomous.observation_manager import ObservationManager
 from app.agents.runtime.autonomous.runtime_context import RuntimeContext
 from app.agents.runtime.autonomous.state_machine import AutonomousState, RuntimeStateMachine
 from app.agents.workflow.persistence.task_graph_repository import TaskGraphRepository
@@ -88,7 +88,7 @@ class DecisionLoop:
 
         # 2. State: INITIALIZING -> OBSERVING
         self._transition(AutonomousState.OBSERVING, ctx)
-        obs = self.obs_mgr.observe(ctx)
+        self.obs_mgr.observe(ctx)
 
         # 3. State: OBSERVING -> REASONING
         self._transition(AutonomousState.REASONING, ctx)

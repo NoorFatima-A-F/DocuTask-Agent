@@ -8,9 +8,6 @@ import asyncio
 import os
 import sys
 
-from app.platform_verification.enterprise_performance_infrastructure.domain.models import (
-    PerformanceVerificationStatus,
-)
 from app.platform_verification.enterprise_performance_infrastructure.runtime.performance_infrastructure_runtime import (
     PerformanceInfrastructureRuntime,
 )

@@ -7,7 +7,6 @@ from app.infrastructure.clusters.models import (
     ClusterType,
 )
 from app.infrastructure.clusters.health import SubComponentHealth
-from app.infrastructure.regions.models import RegionStatus
 from app.infrastructure.regions.affinity import TenantAffinityRule
 from app.infrastructure.routing.metadata import WorkloadRoutingRequest
 from app.infrastructure.api.cluster_routes import (
@@ -23,14 +22,10 @@ from app.infrastructure.api.cluster_routes import (
 )
 from app.infrastructure.api.region_routes import (
     register_region,
-    get_region,
-    list_regions,
-    update_region_status,
     set_tenant_affinity,
     evaluate_routing,
     get_topology,
     RegisterRegionRequest,
-    UpdateRegionStatusRequest,
 )
 
 

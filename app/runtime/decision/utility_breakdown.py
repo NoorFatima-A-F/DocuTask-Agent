@@ -3,7 +3,7 @@ Utility Breakdown & Objective Scoring for Explainable Decision Provenance.
 Computes multi-objective Pareto trade-offs (Cost, Latency, Risk, Accuracy) without exposing hidden chain-of-thought.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from pydantic import BaseModel, Field
 
 

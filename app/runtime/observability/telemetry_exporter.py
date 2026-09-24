@@ -7,7 +7,7 @@ Formats runtime metrics into standard Prometheus exposition format and OpenTelem
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List
+from typing import Any, Dict
 from app.runtime.observability.metrics_registry import MetricsRegistry
 
 

@@ -1,4 +1,3 @@
-from typing import List
 from ..domain.metrics_domain import MetricAggregate, MetricComputed
 from app.shared_kernel import Result, Ok, get_event_bus
 

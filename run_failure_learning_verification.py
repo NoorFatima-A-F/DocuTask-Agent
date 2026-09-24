@@ -6,7 +6,6 @@ import os
 from app.platform_verification.failure_learning_verification.runtime.failure_learning_runtime import (
     FailureLearningRuntime,
 )
-from app.platform_verification.failure_learning_verification.domain.models import IntelligenceTier
 
 
 def main():

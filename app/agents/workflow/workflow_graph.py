@@ -3,7 +3,7 @@ Workflow Graph DAG Model.
 Represents directed acyclic graphs of workflow nodes and edges with topological sorting and cycle detection.
 """
 
-from typing import Dict, List, Set
+from typing import Dict, List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.workflow.exceptions import CyclicWorkflowGraphError

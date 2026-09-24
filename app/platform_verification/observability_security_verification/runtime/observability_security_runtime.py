@@ -1,7 +1,7 @@
 """
 Phase 3H.4.10: Observability Security Verification Runtime
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..verifiers import (
     DataClassificationVerifier,
     LogSecurityVerifier,
@@ -16,7 +16,6 @@ from ..verifiers import (
 )
 from ..scoring.observability_security_scorer import ObservabilitySecurityScorer
 from ..exporter.observability_security_exporter import ObservabilitySecurityExporter
-from ..domain.models import ObservabilitySecurityScorecard
 
 
 class ObservabilitySecurityRuntime:

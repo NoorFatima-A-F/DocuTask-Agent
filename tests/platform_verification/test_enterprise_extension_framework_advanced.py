@@ -3,12 +3,10 @@ Advanced Verification Tests for Part 1.1F:
 Multi-Category Plugins (Execution, Dataset, Metric, AI, Storage, Notification),
 Marketplace Certification, Developer SDK, and Quarantine Governance.
 """
-import pytest
 from app.platform_verification.extension_framework.domain.models import (
-    PluginCategory, SecurityClassification, PluginPermission, PluginSecurityContext
+    PluginCategory, SecurityClassification
 )
 from app.platform_verification.extension_framework.core.marketplace import plugin_marketplace
-from app.platform_verification.extension_framework.core.registry import plugin_registry
 from app.platform_verification.extension_framework.tooling.sdk import plugin_sdk
 from app.platform_verification.extension_framework.runtime.extension_framework_runtime import extension_framework_runtime
 

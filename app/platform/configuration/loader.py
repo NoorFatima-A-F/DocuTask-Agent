@@ -5,7 +5,7 @@ Loads configuration from files (YAML/JSON), environment, or cloud dictionaries.
 
 import json
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from .schema import ConfigSource
 from .provider import ConfigurationProvider
 

@@ -1,7 +1,6 @@
 """
 Health Score Engine for Health Check Architecture Verification (Part 3H.1).
 """
-from typing import Dict, Any
 from app.platform_verification.health_architecture.domain.models import (
     HealthStateModelReport,
     HealthContractReport,

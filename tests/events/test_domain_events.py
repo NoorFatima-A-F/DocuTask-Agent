@@ -4,7 +4,6 @@ Phase 13.1: Autonomous Runtime Observability & Domain Event Platform
 """
 
 import pytest
-import asyncio
 from fastapi.testclient import TestClient
 from app.main import app
 
@@ -12,31 +11,21 @@ from app.runtime.events import (
     DomainEvent,
     DomainEventType,
     EventSubsystem,
-    EventSeverity,
-    EventActor,
     MissionEventFactory,
     PlannerEventFactory,
     WorkerEventFactory,
-    domain_event_bus,
     AsyncDomainEventBus,
-    domain_event_store,
     DomainEventStore,
     AppendOnlyEventLog,
-    MissionPartitionManager,
     planner_projection,
     mission_projection,
     worker_projection,
-    telemetry_projection,
     dashboard_projection,
     EventSerializer,
-    EventSchemaVersioning,
-    correlation_tracker,
     CausationDAGBuilder,
     EventFilterEngine,
     EventFilterCriteria,
     EventIndexTree,
-    EventPlatformMetrics,
-    event_query_service,
 )
 
 
@@ -88,7 +77,7 @@ async def test_async_event_bus_pub_sub():
     async def test_handler(event: DomainEvent):
         received.append(event)
 
-    sub = bus.subscribe(
+    bus.subscribe(
         subscriber_id="sub-test-1",
         handler=test_handler,
         event_types={DomainEventType.PLANNER_STARTED},

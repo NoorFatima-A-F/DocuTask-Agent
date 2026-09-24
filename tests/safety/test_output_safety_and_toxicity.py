@@ -1,7 +1,6 @@
 """Tests for Output Safety, Toxicity Detection, and Secret Leakage."""
 
-import pytest
-from app.safety.output.toxicity import ToxicityDetector, ToxicityCategory
+from app.safety.output.toxicity import ToxicityDetector
 from app.safety.output.leakage import DataLeakageDetector
 from app.safety.output.validator import OutputSafetyValidator
 from app.safety.gateway.decision import ViolationSeverity

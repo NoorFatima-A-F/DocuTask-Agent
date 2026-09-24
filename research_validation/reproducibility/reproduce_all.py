@@ -14,21 +14,17 @@ Executes a 6-stage automated validation pipeline:
 """
 
 from __future__ import annotations
-import hashlib
-import json
-import os
 import platform
 import sys
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
-from research_validation.provenance.hashing import hash_canonical_json, compute_sha256
-from research_validation.provenance.provenance_models import EnvironmentFingerprint, EvidenceQualityLevel
+from research_validation.provenance.hashing import hash_canonical_json
 from research_validation.datasets.public_benchmarks import DatasetType
-from research_validation.datasets.benchmark_executor import PublicBenchmarkExecutor, BenchmarkExecutionStatus
+from research_validation.datasets.benchmark_executor import PublicBenchmarkExecutor
 
 
 class ReproducibilityVerdict(str, Enum):

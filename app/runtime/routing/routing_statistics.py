@@ -3,7 +3,7 @@ Scientific Model Router - Routing Statistics
 Aggregates routing distributions, latency-cost tradeoff profiles, and empirical accuracy per model.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 
 
 class ModelRoutingStatistics:

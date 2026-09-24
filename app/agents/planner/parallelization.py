@@ -3,7 +3,7 @@ Parallelization and Concurrency Optimization Engine.
 Identifies tasks with disjoint dependencies to maximize parallel execution throughput.
 """
 
-from typing import List, Set
+from typing import List
 from app.agents.planning.tasks import PlanningTask
 
 

@@ -6,7 +6,6 @@ from typing import Any, Dict, List, Optional
 from .models import (
     AIProviderPerformanceReport,
     ApplicationBottleneckReport,
-    BottleneckVerificationManifest,
     CapacityBoundaryReport,
     DatabaseBottleneckReport,
     EnterpriseBottleneckCertificationReport,

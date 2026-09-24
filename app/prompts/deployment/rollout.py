@@ -7,8 +7,8 @@ from __future__ import annotations
 
 import random
 from enum import Enum
-from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Dict, Optional
+from pydantic import BaseModel
 from app.prompts.deployment.publisher import DeploymentEnvironment, PromptPublisher
 
 

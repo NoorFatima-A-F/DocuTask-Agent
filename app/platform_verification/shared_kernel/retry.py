@@ -3,7 +3,7 @@ Enterprise Retry Policies & Circuit Breakers.
 """
 import time
 import random
-from typing import Callable, TypeVar, Any, Optional
+from typing import Callable, TypeVar, Optional
 
 T = TypeVar("T")
 

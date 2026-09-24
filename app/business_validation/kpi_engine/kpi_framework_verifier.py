@@ -10,7 +10,6 @@ from ..domain.models import (
     BusinessVerificationStatus,
     BusinessAssertionResult,
     PillarBusinessResult,
-    KPICategory,
 )
 
 

@@ -22,9 +22,6 @@ from app.platform_verification.autonomous_reliability_engineering.scoring import
 from app.platform_verification.autonomous_reliability_engineering.exporter import (
     AutonomousReliabilityExporter,
 )
-from app.platform_verification.autonomous_reliability_engineering.domain.models import (
-    AutonomousReliabilityCertificationReport,
-)
 
 
 class AutonomousReliabilityRuntime:

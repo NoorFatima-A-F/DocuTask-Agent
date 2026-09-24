@@ -6,12 +6,11 @@ experiment IDs, Merkle digests, and confidence intervals.
 """
 
 from __future__ import annotations
-import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
-from research_validation.provenance.hashing import hash_canonical_json, compute_sha256
+from research_validation.provenance.hashing import compute_sha256
 
 
 @dataclass(frozen=True)
@@ -44,7 +43,7 @@ class PaperFigureGenerator:
         fig_id = f"fig_bar_{originating_exp_id[:8]}"
 
         items = list(benchmark_metrics.items())
-        n = len(items)
+        len(items)
         max_val = max(items, key=lambda x: x[1])[1] if items else 1.0
         max_val = max(max_val, 1.0)
 

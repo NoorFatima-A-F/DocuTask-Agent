@@ -5,7 +5,7 @@ Agent Runtime, Safety Layer, and Audit Pipeline to communicate directly with
 the Governance Platform without passing through public authentication overhead.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from ...gateway.authentication import APIRequestContext
 
 

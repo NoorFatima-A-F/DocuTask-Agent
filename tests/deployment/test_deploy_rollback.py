@@ -1,5 +1,4 @@
 """Unit tests for Rollback and Automated Recovery Engine."""
-import pytest
 from app.deployment.core.controller import DeploymentController
 from app.deployment.core.lifecycle import DeploymentStatus
 from app.deployment.rollback.manager import RollbackManager

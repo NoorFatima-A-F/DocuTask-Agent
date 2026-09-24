@@ -1,6 +1,6 @@
 """Software Supply Chain Signature Policy Engine (Req 23, 70, 71)."""
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set
+from typing import List, Optional, Set
 from .sigstore_adapter import SigstoreCosignAdapter
 
 

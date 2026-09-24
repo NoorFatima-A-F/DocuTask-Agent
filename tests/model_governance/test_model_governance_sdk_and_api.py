@@ -1,13 +1,11 @@
 """Tests for Model Governance Developer SDK and FastAPI Endpoints (Phase 8C)."""
 
-import pytest
 from app.model_governance.sdk.client import ModelGovernanceSDK
 from app.model_governance.registry.models import (
     Model,
     ModelCategory,
     ModelLifecycleState,
     ModelProvider,
-    RiskLevel,
 )
 from app.model_governance.api.routes import (
     register_model,

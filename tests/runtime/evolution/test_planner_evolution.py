@@ -1,4 +1,3 @@
-import pytest
 from app.runtime.evolution.genetic_optimizer import GeneticPlannerOptimizer
 from app.runtime.evolution.bayesian_optimizer import BayesianPlannerOptimizer
 from app.runtime.evolution.planner_version_registry import PlannerVersionRegistry

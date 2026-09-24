@@ -3,7 +3,7 @@ Phase 3H.4.12.6: Observability Certification Engine
 """
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, Any, List
+from typing import List
 from ..domain.interfaces import ICertificationEngine
 from ..domain.models import (
     ObservabilityCertificationReport,

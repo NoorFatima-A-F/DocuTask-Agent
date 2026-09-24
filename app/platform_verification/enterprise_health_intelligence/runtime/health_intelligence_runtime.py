@@ -1,7 +1,7 @@
 """
 Phase 3H.5: Enterprise Health Intelligence Runtime
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..verifiers import (
     HealthEventArchitectureVerifier,
     FailureClassificationEngine,

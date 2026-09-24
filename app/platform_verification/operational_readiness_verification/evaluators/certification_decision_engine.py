@@ -8,7 +8,6 @@ from ..domain.models import (
     CertificationStatus,
     MaturityReport,
     OperationalRiskReport,
-    RiskLevel,
 )
 
 

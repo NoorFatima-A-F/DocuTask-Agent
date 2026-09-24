@@ -3,8 +3,6 @@ CLI Runner for Enterprise Backup Certification Framework.
 Part 3G.2G — Backup Readiness Certification System for DocuTask Agent.
 """
 import sys
-import os
-import json
 import logging
 
 if hasattr(sys.stdout, "reconfigure"):

@@ -66,7 +66,7 @@ async def get_phase_report(phase_id: str) -> Dict[str, Any]:
 @router.get("/certification", response_model=EnterprisePerformanceCertificationReport)
 async def get_certification() -> EnterprisePerformanceCertificationReport:
     """Run full verification and return only the final Enterprise Performance Certification Report."""
-    manifest = await _runtime.run_all()
+    await _runtime.run_all()
     # Read certification report
     cert_path = os.path.join("performance_verification", "certification_report.json")
     if os.path.exists(cert_path):

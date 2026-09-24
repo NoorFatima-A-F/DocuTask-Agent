@@ -10,7 +10,6 @@ from app.infrastructure.reliability.models import (
     ReliabilityTarget,
     RPOObjective,
     RTOObjective,
-    SeverityLevel,
 )
 from app.infrastructure.reliability.state_machine import (
     ReliabilityInvalidTransitionError,
@@ -53,23 +52,23 @@ def test_reliability_state_machine_valid_transitions():
     assert sm.current_state == ReliabilityState.DEGRADED
 
     # DEGRADED -> FAILING
-    rec2 = sm.transition_to(ReliabilityState.FAILING, reason="Error rate > 20%")
+    sm.transition_to(ReliabilityState.FAILING, reason="Error rate > 20%")
     assert sm.current_state == ReliabilityState.FAILING
 
     # FAILING -> OUTAGE
-    rec3 = sm.transition_to(ReliabilityState.OUTAGE, reason="Unresponsive nodes")
+    sm.transition_to(ReliabilityState.OUTAGE, reason="Unresponsive nodes")
     assert sm.current_state == ReliabilityState.OUTAGE
 
     # OUTAGE -> RECOVERING
-    rec4 = sm.transition_to(ReliabilityState.RECOVERING, reason="Recovery workflow started")
+    sm.transition_to(ReliabilityState.RECOVERING, reason="Recovery workflow started")
     assert sm.current_state == ReliabilityState.RECOVERING
 
     # RECOVERING -> RECOVERED
-    rec5 = sm.transition_to(ReliabilityState.RECOVERED, reason="Readiness checks passed")
+    sm.transition_to(ReliabilityState.RECOVERED, reason="Readiness checks passed")
     assert sm.current_state == ReliabilityState.RECOVERED
 
     # RECOVERED -> OPTIMAL
-    rec6 = sm.transition_to(ReliabilityState.OPTIMAL, reason="Full soak period completed")
+    sm.transition_to(ReliabilityState.OPTIMAL, reason="Full soak period completed")
     assert sm.current_state == ReliabilityState.OPTIMAL
 
     assert len(sm.history) == 6
@@ -136,7 +135,7 @@ def test_reliability_manager_integration():
         timeout_budget_seconds=15.0,
     )
 
-    target = manager.register_target(
+    manager.register_target(
         target_id="target-db",
         component_name="primary-database",
         fault_domain=FaultDomain.DATABASE,

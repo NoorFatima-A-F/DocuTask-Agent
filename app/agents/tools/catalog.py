@@ -3,7 +3,7 @@ Tool Catalog Subsystem.
 Provides searchable directory index for tool descriptors, categories, and capability matrices.
 """
 
-from typing import Dict, List, Optional
+from typing import List
 from app.agents.tools.descriptor import ToolDescriptor
 from app.agents.tools.interfaces import IToolRegistry
 

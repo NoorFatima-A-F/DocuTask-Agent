@@ -12,7 +12,6 @@ from app.core.exceptions import (
     InvalidCredentialsException,
     ResourceNotFoundException,
     TokenException,
-    ValidationAppException,
 )
 from app.core.logging import logger
 from app.core.security import (
@@ -71,7 +70,7 @@ class AuthService:
             "is_superuser": False,
         }
         user = await self.user_repo.create(user_data)
-        logger.info(f"User successfully registered: ID={user.id}, Username={user.username}")
+        logger.info(f"User successfully registered: ID={sanitize_log_input(user.id)}, Username={sanitize_log_input(user.username)}")
         return UserResponse.model_validate(user)
 
     async def login(self, request: LoginRequest) -> TokenResponse:
@@ -92,7 +91,7 @@ class AuthService:
             raise InvalidCredentialsException("Invalid email/username or password.")
 
         if not user.is_active:
-            logger.warning(f"Login failed: User account '{user.id}' is deactivated.")
+            logger.warning(f"Login failed: User account '{sanitize_log_input(user.id)}' is deactivated.")
             raise AccessDeniedException("User account is inactive. Please contact support.")
 
         # Generate tokens

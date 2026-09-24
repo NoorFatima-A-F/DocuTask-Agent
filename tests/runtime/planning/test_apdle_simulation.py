@@ -2,7 +2,6 @@
 Unit Tests for APDLE Planner Simulation, Execution Predictor, and Completion Estimator.
 """
 
-import pytest
 from app.runtime.planning.graph.graph_builder import ExecutionGraphBuilder
 from app.runtime.planning.simulation.completion_estimator import CompletionEstimator
 from app.runtime.planning.simulation.execution_predictor import ExecutionPredictor

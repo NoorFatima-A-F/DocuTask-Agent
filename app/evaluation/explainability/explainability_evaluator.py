@@ -1,7 +1,7 @@
 """Part I: Explainability & Decision Trace Viewer Evaluator."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IExplainabilityEvaluator
 from ..domain.models import (
     DecisionTraceEntry,

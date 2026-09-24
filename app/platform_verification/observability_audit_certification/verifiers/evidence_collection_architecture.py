@@ -3,7 +3,7 @@ Phase 3H.4.12.1: Evidence Collection Architecture Verifier
 """
 import hashlib
 from datetime import datetime, timezone
-from typing import Dict, Any, List
+from typing import List
 from ..domain.interfaces import IEvidenceCollectionArchitectureVerifier
 from ..domain.models import (
     EvidenceCollectionArchitectureReport,

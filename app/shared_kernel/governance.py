@@ -2,7 +2,6 @@
 Shared Kernel Governance Rules and Invariant Checker.
 Ensures that the Shared Kernel remains minimal, framework-independent, domain-independent, and strictly governed.
 """
-from typing import List, Set
 
 FORBIDDEN_DEPENDENCY_PATTERNS = {
     "fastapi", "sqlalchemy", "redis", "celery", "temporal",

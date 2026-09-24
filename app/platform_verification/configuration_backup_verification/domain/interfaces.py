@@ -2,7 +2,7 @@
 Abstract Interfaces for Enterprise Configuration, Secret & Cryptographic Material Backup Verification (Part 3G.2D).
 """
 from abc import ABC, abstractmethod
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
     ConfigurationInventoryReport,

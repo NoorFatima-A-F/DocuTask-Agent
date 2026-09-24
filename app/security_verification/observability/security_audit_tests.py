@@ -5,7 +5,7 @@ Validates structured telemetry logging, actor attribution, risk scoring, and SHA
 import hashlib
 from typing import Dict, List, Any
 from datetime import datetime, timezone
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
+from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus
 
 SAMPLE_SECURITY_EVENTS = [
     {"timestamp": datetime.now(timezone.utc).isoformat(), "actor": "192.168.1.105", "action": "BRUTE_FORCE_LOCKOUT", "resource": "/api/v1/auth/login", "decision": "LOCKED", "risk_score": 0.95},

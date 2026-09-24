@@ -4,7 +4,7 @@ Analyzes goal decompositions, replanning triggers, dynamic DAG mutations, and sc
 """
 
 from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class PlannerReflectionMetrics(BaseModel):

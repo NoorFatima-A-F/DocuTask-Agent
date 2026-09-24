@@ -21,8 +21,6 @@ from app.platform_verification.health_recovery.verifiers import (
     RecoveryObservabilityVerifier,
     RecoverySecurityVerifier,
 )
-from app.platform_verification.health_recovery.scoring import HealthRecoveryScorer
-from app.platform_verification.health_recovery.exporter import HealthRecoveryExporter
 from app.platform_verification.health_recovery.runtime import HealthRecoveryRuntime
 from app.platform_verification.health_recovery.api.health_recovery_api import (
     get_health_recovery_status,

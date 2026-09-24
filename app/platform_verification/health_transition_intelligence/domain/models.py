@@ -3,7 +3,7 @@ Domain Models for Health State Transition & Service Recovery Intelligence (Part 
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 
 
 class HealthState(str, Enum):

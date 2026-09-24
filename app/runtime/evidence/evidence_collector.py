@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import collections
 import threading
-import time
 from typing import Any, Callable, Dict, List, Optional
 
 from app.runtime.evidence.evidence_builder import EvidenceBuilder

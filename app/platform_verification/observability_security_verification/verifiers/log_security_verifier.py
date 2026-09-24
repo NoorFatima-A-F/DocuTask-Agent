@@ -1,8 +1,6 @@
 """
 Phase 3H.4.10.2: Log Security Verifier
 """
-import re
-from typing import Dict, Any, List
 from ..domain.interfaces import ILogSecurityVerifier
 from ..domain.models import LogSecurityReport, LogScanFinding
 

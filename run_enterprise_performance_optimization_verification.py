@@ -5,10 +5,8 @@ Executes all 12 optimization verification phases, evaluates weighted scores acro
 and exports JSON evidence reports with cryptographic SHA-256 integrity manifest.
 """
 
-import json
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_performance_optimization.runtime.optimization_runtime import (
     OptimizationRuntime,

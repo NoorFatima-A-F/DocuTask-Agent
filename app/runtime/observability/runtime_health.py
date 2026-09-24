@@ -9,7 +9,6 @@ Eliminates arbitrary static percentages.
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List
 from app.runtime.observability.anomaly_detection import AnomalyDetector
 from app.runtime.observability.metrics_engine import MetricsEngine
 from app.runtime.observability.resource_monitor import ResourceMonitor

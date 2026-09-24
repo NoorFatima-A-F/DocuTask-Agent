@@ -20,17 +20,11 @@ Tests all 17 research-grade phases:
 17. BenchmarkGovernanceEngine
 """
 
-import math
 import random
-import statistics
-import pytest
-from typing import List
 
 from app.evidence.benchmarking.distribution_validation import (
     CandidateDistribution,
-    DistributionEvaluationReport,
     DistributionValidationEngine,
-    HypothesisTestResult,
     TestDecision,
 )
 from app.evidence.benchmarking.bootstrap_engine import (
@@ -40,7 +34,6 @@ from app.evidence.benchmarking.bootstrap_engine import (
     BootstrapValidationResult,
 )
 from app.evidence.benchmarking.timer_lab import (
-    TimerSuitability,
     TimerValidationLab,
     TimerValidationLabReport,
     WorkloadType,
@@ -57,21 +50,17 @@ from app.evidence.benchmarking.evidence_signer import (
 from app.evidence.benchmarking.steady_state_validator import (
     ConvergenceState,
     SteadyStateValidationEngine,
-    SteadyStateValidationReport,
 )
 from app.evidence.benchmarking.queueing_theory import (
     QueueingTheoryValidationEngine,
-    QueueingValidationReport,
     QueueValidationStatus,
 )
 from app.evidence.benchmarking.workload_library import (
     BenchmarkWorkloadLibrary,
-    WorkloadCategory,
     WorkloadSpecification,
 )
 from app.evidence.benchmarking.power_analysis import (
     PowerAdequacyStatus,
-    PowerAnalysisReport,
     StatisticalPowerEngine,
 )
 from app.evidence.benchmarking.visualization import (
@@ -103,7 +92,6 @@ from app.evidence.benchmarking.schema_versioning import (
     SchemaType,
 )
 from app.evidence.benchmarking.framework_validation import (
-    ComplexityVerificationVerdict,
     FrameworkSelfValidationReport,
     FrameworkValidationSuite,
 )

@@ -9,7 +9,7 @@ Generates proactive early warning alerts across the 5 core reliability categorie
 """
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.predictive_health_intelligence.domain.models import (
     EarlyWarningCategory,
     EarlyWarningAlert,

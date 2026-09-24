@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict
 
 from app.platform_verification.health_monitoring_integration.domain.models import (
     AlertConfigurationReport,

@@ -2,7 +2,7 @@
 Readiness Contract Manager (Part 1).
 Exposes and validates the standardized GET /ready schema and component checks.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from datetime import datetime, timezone
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessContractReport,

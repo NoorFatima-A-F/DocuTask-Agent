@@ -3,7 +3,7 @@ Evidence Domain: Content-Addressable Storage (CAS), Artifacts, Retention Policie
 """
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Dict
 from pydantic import BaseModel, Field
 import uuid
 

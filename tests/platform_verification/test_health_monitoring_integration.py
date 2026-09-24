@@ -10,7 +10,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
 
 from app.platform_verification.health_monitoring_integration.alerting.alert_quality_evaluator import (
     AlertQualityEvaluator,
@@ -24,7 +23,6 @@ from app.platform_verification.health_monitoring_integration.architecture.observ
 from app.platform_verification.health_monitoring_integration.domain.models import (
     AlertConfigurationReport,
     AlertQualityReport,
-    AlertSeverity,
     FailureSimulationReport,
     GrafanaDashboardReport,
     HealthMetricsInventoryReport,
@@ -53,9 +51,6 @@ from app.platform_verification.health_monitoring_integration.prometheus.promethe
 )
 from app.platform_verification.health_monitoring_integration.runtime.monitoring_integration_runtime import (
     MonitoringIntegrationRuntime,
-)
-from app.platform_verification.health_monitoring_integration.scoring.monitoring_quality_scorer import (
-    MonitoringQualityScorer,
 )
 from app.platform_verification.health_monitoring_integration.security.monitoring_security_auditor import (
     MonitoringSecurityAuditor,

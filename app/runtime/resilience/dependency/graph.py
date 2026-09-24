@@ -4,7 +4,7 @@ Phase 12: Autonomous Production Reliability & Operational Resilience (APRCORP+)
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Set, Any, Optional
+from typing import Dict, List, Set, Optional
 
 
 @dataclass

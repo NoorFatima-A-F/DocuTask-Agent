@@ -14,12 +14,9 @@ Generates empirical reproduction matrices highlighting exact numerical divergenc
 
 from __future__ import annotations
 
-import hashlib
-import json
-import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List, Tuple
 
 
 class EvaluatorRole(str, Enum):

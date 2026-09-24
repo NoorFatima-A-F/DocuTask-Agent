@@ -3,7 +3,7 @@
 from datetime import datetime, timezone
 from enum import Enum
 import secrets
-from typing import Any, Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set
 from pydantic import BaseModel, Field
 
 

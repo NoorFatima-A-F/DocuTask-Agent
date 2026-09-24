@@ -3,11 +3,10 @@ Evidence Manifest & Serialization Engine for Enterprise Document Storage (Part 3
 """
 import os
 import json
-from pathlib import Path
-from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from dataclasses import asdict, is_dataclass
 from typing import Dict, Any, Optional
 
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from app.platform_verification.document_storage_verification.domain.interfaces import (
     IStorageEvidenceManifestEngine,
 )
@@ -92,12 +91,10 @@ class StorageEvidenceManifestEngine(IStorageEvidenceManifestEngine):
 
         for filename, data_content in file_mappings.items():
             serialized = _serialize_obj(data_content)
-            clean_filename = os.path.basename(filename)
-            file_path = os.path.abspath(os.path.join(target_dir, clean_filename))
-            if not file_path.startswith(target_dir):
-                raise ValueError(f"Path traversal detected: {filename}")
+            clean_filename = validate_safe_filename_segment(filename)
+            file_path = resolve_safe_path(target_dir, clean_filename)
             with open(file_path, "w", encoding="utf-8") as f:
                 json.dump(serialized, f, indent=2, ensure_ascii=False)
-            exported_paths[filename] = file_path
+            exported_paths[filename] = str(file_path)
 
         return exported_paths

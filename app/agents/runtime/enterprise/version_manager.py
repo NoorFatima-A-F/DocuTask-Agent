@@ -4,7 +4,7 @@ Enforces version negotiation, validates subsystem module versions against kernel
 and rejects breaking API versions.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from app.agents.runtime.enterprise.compatibility_checker import VersionCompatibilityChecker
 from app.agents.runtime.exceptions import RuntimeKernelException
 

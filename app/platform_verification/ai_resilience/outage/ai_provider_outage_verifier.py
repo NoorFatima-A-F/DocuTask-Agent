@@ -1,7 +1,6 @@
 """AI Provider Outage Simulation Verifier (3H.3.10.2)."""
 
 import time
-from typing import Dict, Any
 from ..domain.models import OutageSimulationReport
 from ..domain.interfaces import IProviderOutageVerifier
 from ..simulation.failure_scenarios.provider_unavailable import ProviderUnavailableScenario

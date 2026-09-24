@@ -3,7 +3,7 @@ Phase 3R: Abstract Interfaces and Protocols for Enterprise Operations Governance
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from .models import (
     AIOpsReport,
     AlertReport,
@@ -13,7 +13,6 @@ from .models import (
     FinOpsReport,
     IncidentReport,
     OperationalMaturityScore,
-    OperationsManifest,
     ProductionHealthReport,
     RootCauseAnalysisReport,
     RunbookReport,

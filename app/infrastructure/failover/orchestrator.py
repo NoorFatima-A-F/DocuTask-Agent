@@ -9,15 +9,12 @@ graceful draining, lease revocation, target activation, traffic re-routing, and 
 
 import logging
 from app.core.security import sanitize_log_input
-import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from app.infrastructure.failover.planner import (
-    FailoverPlan,
     FailoverStatus,
-    FailoverType,
     RegionalFailoverPlanner,
 )
 from app.infrastructure.failover.routing import FailoverRouter

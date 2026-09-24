@@ -2,10 +2,10 @@
 Interfaces and Contracts for Enterprise Verification Dataset Architecture.
 """
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List, Optional, Tuple
 from app.platform_verification.dataset_governance.domain.models import (
     DatasetMetadata, DatasetSample, GroundTruthAnnotation, DatasetQualityReport,
-    DatasetSnapshot, DatasetCategory, DatasetLifecycleState
+    DatasetCategory
 )
 
 

@@ -3,19 +3,8 @@
 Coordinates full end-to-end alert intelligence and rule validation across all 14 sub-phases.
 """
 
-from typing import Dict, Any, Tuple
+from typing import Dict, Tuple
 from ..domain.models import (
-    ArchitectureReport,
-    TaxonomyReport,
-    CriticalAlertReport,
-    WarningAlertReport,
-    ConditionTestReport,
-    SeverityReport,
-    MessageQualityReport,
-    RoutingReport,
-    FatigueReport,
-    FailureTestReport,
-    PerformanceReport,
     AlertQualityScorecard,
 )
 from ..verifiers.alert_architecture_verifier import AlertArchitectureVerifier

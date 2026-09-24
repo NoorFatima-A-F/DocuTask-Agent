@@ -3,7 +3,6 @@ Calibration Monitor for Phase 13.3 (ASCE-CGP).
 Calculates Expected Calibration Error (ECE), Maximum Calibration Error (MCE), and Brier Score.
 """
 
-from typing import Any, Dict, List
 from datetime import datetime, timezone
 from app.runtime.confidence.models.confidence_models import CalibrationMetrics
 

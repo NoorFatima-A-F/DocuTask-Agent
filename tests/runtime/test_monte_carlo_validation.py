@@ -3,8 +3,7 @@ Monte Carlo and Metric Property Invariant Verification Test Suite.
 Verifies statistical consistency, unbiasedness, and strict domain boundaries.
 """
 
-import pytest
-from app.runtime.metrics.definitions import MetricDefinition, MetricUnit, AggregationType
+from app.runtime.metrics.definitions import MetricDefinition, MetricUnit
 from app.runtime.metrics.provenance import MetricProvenanceRecord, compute_merkle_root
 from app.runtime.metrics.validation import MetricValidator
 

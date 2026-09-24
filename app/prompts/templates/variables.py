@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import enum
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Any, Optional
+from pydantic import BaseModel
 
 
 class VariableType(str, enum.Enum):

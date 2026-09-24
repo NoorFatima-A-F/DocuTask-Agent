@@ -1,7 +1,7 @@
 """
 REST API Router for Enterprise Backup Architecture Verification (Part 3G.2A).
 """
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from fastapi import APIRouter, HTTPException, Query
 from app.platform_verification.backup_architecture_verification.runtime.backup_verification_runtime import (
     BackupArchitectureVerificationRuntime,

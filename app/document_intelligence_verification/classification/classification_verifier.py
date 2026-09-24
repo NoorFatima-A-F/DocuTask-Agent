@@ -103,7 +103,6 @@ class ClassificationVerifier:
 
     def _verify_unknown_doc_detection(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
-        random_noise_text = "asdkjfh 987234 lkjhasdf 98123 random noise garbage content"
         confidence_threshold = 0.65
         
         # Classifier gives low confidence to unknown text

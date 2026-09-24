@@ -2,8 +2,6 @@
 Phase 3H.4.12: Enterprise Observability Evidence, Audit & Certification Test Suite
 """
 import os
-import json
-import pytest
 from app.platform_verification.observability_audit_certification.verifiers import (
     EvidenceCollectionArchitectureVerifier,
     EvidenceIntegrityVerifier,
@@ -125,7 +123,7 @@ class TestObservabilityAuditCertification:
         """3H.4.12.8 & 3H.4.12.9: Verify export to standardized repository directory."""
         runtime = ObservabilityAuditCertificationRuntime()
         out_dir = str(tmp_path / "observability_certification")
-        results = runtime.run_full_audit_and_certification(output_dir=out_dir)
+        runtime.run_full_audit_and_certification(output_dir=out_dir)
 
         expected_dirs = [
             "health",

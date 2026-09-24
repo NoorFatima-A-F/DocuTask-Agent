@@ -4,13 +4,11 @@ Enqueues document processing jobs, checks active job duplicate prevention, and m
 """
 
 import math
-from typing import Optional
 from uuid import UUID
 
 from app.core.exceptions import ResourceNotFoundException
 from app.core.logging import logger
 from app.models.user import User
-from app.models.processing_job import ProcessingJob
 from app.repositories.document_repository import DocumentRepository
 from app.repositories.processing_job_repository import ProcessingJobRepository
 from app.schemas.job import JobListResponse, ProcessingJobResponse

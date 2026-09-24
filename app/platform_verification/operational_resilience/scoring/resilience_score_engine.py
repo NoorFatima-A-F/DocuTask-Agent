@@ -8,7 +8,7 @@ Computes weighted composite resilience score across 6 core categories:
 5. Operational Visibility (10%)
 6. Documentation (10%)
 """
-from typing import Dict, Any, List
+from typing import List
 
 from app.platform_verification.operational_resilience.domain.models import (
     ResilienceTier,

@@ -1,6 +1,6 @@
 {
   "source_phase": "security_verification",
-  "collected_at": "2026-09-19T07:04:56.914035+00:00",
+  "collected_at": "2026-09-24T21:55:06.656040+00:00",
   "evidence_count": 26,
   "raw_payloads": [
     {
@@ -43,8 +43,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.854040+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.854057+00:00",
+      "timestamp": "2026-09-24T21:44:09.739541+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.739562+00:00",
       "summary": "AI infrastructure security verified: 4 AI threat scenarios neutralized (prompt injection, secret leaks, output sanitization).",
       "report_title": "AI Infrastructure Security Report",
       "prompt_injection_neutralized": true,
@@ -119,8 +119,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.853266+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.853286+00:00",
+      "timestamp": "2026-09-24T21:44:09.738668+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.738693+00:00",
       "summary": "API infrastructure security verified: 6 attack vectors mitigated with JWT auth, rate limiting, and input validation.",
       "report_title": "API Infrastructure Security Report",
       "jwt_auth_enforced": true,
@@ -207,8 +207,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.850528+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.850567+00:00",
+      "timestamp": "2026-09-24T21:44:09.735648+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.735690+00:00",
       "summary": "Security architecture assessment complete: 25 assets cataloged and Zero-Trust trust boundaries enforced.",
       "report_title": "Security Architecture Assessment Report",
       "assets_identified": 25,
@@ -294,8 +294,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.854760+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.854781+00:00",
+      "timestamp": "2026-09-24T21:44:09.740239+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.740259+00:00",
       "summary": "Security attack simulation verified: 5/5 real-world attack scenarios neutralized cleanly.",
       "report_title": "Security Attack Simulation Report",
       "scenarios_executed": 5,
@@ -388,8 +388,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.854339+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.854357+00:00",
+      "timestamp": "2026-09-24T21:44:09.739869+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.739890+00:00",
       "summary": "CI/CD security gate verified: 6 automated DevSecOps gates active blocking insecure deployments.",
       "report_title": "CI/CD Security Gate Verification Report",
       "secret_scan_gate_active": true,
@@ -475,8 +475,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.851179+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.851197+00:00",
+      "timestamp": "2026-09-24T21:44:09.736377+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.736407+00:00",
       "summary": "Container security verified: All 4 containers hardened with non-root UID 10001, read-only rootfs, and dropped capabilities.",
       "report_title": "Container Security Verification Report",
       "containers_audited": 4,
@@ -562,8 +562,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.853518+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.853537+00:00",
+      "timestamp": "2026-09-24T21:44:09.738955+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.738975+00:00",
       "summary": "Database security verified: SSL enforced, DDL destruction blocked, and least privilege user active.",
       "report_title": "Database Security Verification Report",
       "ssl_connections_enforced": true,
@@ -633,8 +633,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.852305+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.852324+00:00",
+      "timestamp": "2026-09-24T21:44:09.737554+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.737573+00:00",
       "summary": "IAM security verified: Least privilege RBAC enforced with 100% privilege escalation defense.",
       "report_title": "Identity and Access Management (IAM) Report",
       "rbac_enforced": true,
@@ -728,8 +728,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.852305+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.852324+00:00",
+      "timestamp": "2026-09-24T21:44:09.737554+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.737573+00:00",
       "summary": "IAM security verified: Least privilege RBAC enforced with 100% privilege escalation defense.",
       "report_title": "Identity and Access Management (IAM) Report",
       "rbac_enforced": true,
@@ -823,8 +823,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.851430+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.851448+00:00",
+      "timestamp": "2026-09-24T21:44:09.736670+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.736690+00:00",
       "summary": "Supply chain security verified: SBOMs generated, images signed with Cosign, and base digests pinned.",
       "report_title": "Container Image Supply Chain Security Report",
       "sbom_generated": true,
@@ -894,8 +894,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.851430+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.851448+00:00",
+      "timestamp": "2026-09-24T21:44:09.736670+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.736690+00:00",
       "summary": "Supply chain security verified: SBOMs generated, images signed with Cosign, and base digests pinned.",
       "report_title": "Container Image Supply Chain Security Report",
       "sbom_generated": true,
@@ -965,8 +965,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.852570+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.852588+00:00",
+      "timestamp": "2026-09-24T21:44:09.737837+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.737856+00:00",
       "summary": "Network security verified: 100% private subnet isolation for database and message broker.",
       "report_title": "Network Security & Isolation Report",
       "public_network_segregated": true,
@@ -1040,8 +1040,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.852570+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.852588+00:00",
+      "timestamp": "2026-09-24T21:44:09.737837+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.737856+00:00",
       "summary": "Network security verified: 100% private subnet isolation for database and message broker.",
       "report_title": "Network Security & Isolation Report",
       "public_network_segregated": true,
@@ -1156,8 +1156,8 @@
       "total_verifiers_executed": 16,
       "total_checks_passed": 64,
       "total_checks_evaluated": 64,
-      "generated_at": "2026-09-16T19:15:38.855597+00:00",
-      "execution_time_seconds": 0.004839181900024414
+      "generated_at": "2026-09-24T21:44:09.741224+00:00",
+      "execution_time_seconds": 0.005266427993774414
     },
     {
       "verifier_id": "VERIFY-3N.6-SECRET-SEC",
@@ -1199,8 +1199,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.852003+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.852023+00:00",
+      "timestamp": "2026-09-24T21:44:09.737232+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.737252+00:00",
       "summary": "Secret security verified: 0 hardcoded secrets detected across Git, Docker layers, and application logs.",
       "report_title": "Secret Security & Exposure Report",
       "git_history_clean": true,
@@ -1278,8 +1278,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.852003+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.852023+00:00",
+      "timestamp": "2026-09-24T21:44:09.737232+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.737252+00:00",
       "summary": "Secret security verified: 0 hardcoded secrets detected across Git, Docker layers, and application logs.",
       "report_title": "Secret Security & Exposure Report",
       "git_history_clean": true,
@@ -1357,8 +1357,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.850528+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.850567+00:00",
+      "timestamp": "2026-09-24T21:44:09.735648+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.735690+00:00",
       "summary": "Security architecture assessment complete: 25 assets cataloged and Zero-Trust trust boundaries enforced.",
       "report_title": "Security Architecture Assessment Report",
       "assets_identified": 25,
@@ -1444,8 +1444,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.854760+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.854781+00:00",
+      "timestamp": "2026-09-24T21:44:09.740239+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.740259+00:00",
       "summary": "Security attack simulation verified: 5/5 real-world attack scenarios neutralized cleanly.",
       "report_title": "Security Attack Simulation Report",
       "scenarios_executed": 5,
@@ -1579,8 +1579,8 @@
       "total_verifiers_executed": 16,
       "total_checks_passed": 64,
       "total_checks_evaluated": 64,
-      "generated_at": "2026-09-16T19:15:38.855597+00:00",
-      "execution_time_seconds": 0.004839181900024414
+      "generated_at": "2026-09-24T21:44:09.741224+00:00",
+      "execution_time_seconds": 0.005266427993774414
     },
     {
       "verifier_id": "VERIFY-3N.16-SEC-MONITORING",
@@ -1622,8 +1622,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.855063+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.855081+00:00",
+      "timestamp": "2026-09-24T21:44:09.740552+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.740573+00:00",
       "summary": "Security monitoring verified: SIEM integration, immutable audit logs, and anomaly alerting operational.",
       "report_title": "Security Monitoring & Observability Report",
       "siem_integration_active": true,
@@ -1744,8 +1744,8 @@
       "total_verifiers_executed": 16,
       "total_checks_passed": 64,
       "total_checks_evaluated": 64,
-      "generated_at": "2026-09-16T19:15:38.855597+00:00",
-      "execution_time_seconds": 0.004839181900024414
+      "generated_at": "2026-09-24T21:44:09.741224+00:00",
+      "execution_time_seconds": 0.005266427993774414
     },
     {
       "verifier_id": "VERIFY-3N.9-SERVICE-SEC",
@@ -1787,8 +1787,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.852968+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.852988+00:00",
+      "timestamp": "2026-09-24T21:44:09.738261+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.738299+00:00",
       "summary": "Service-to-service security verified: Internal authentication, mTLS, and rogue worker rejection enforced.",
       "report_title": "Service-to-Service Security Report",
       "internal_authentication_enforced": true,
@@ -1865,8 +1865,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.851430+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.851448+00:00",
+      "timestamp": "2026-09-24T21:44:09.736670+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.736690+00:00",
       "summary": "Supply chain security verified: SBOMs generated, images signed with Cosign, and base digests pinned.",
       "report_title": "Container Image Supply Chain Security Report",
       "sbom_generated": true,
@@ -1937,8 +1937,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.853793+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.853811+00:00",
+      "timestamp": "2026-09-24T21:44:09.739267+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.739287+00:00",
       "summary": "Storage security verified: All 4 buckets encrypted with KMS, public access blocked, and tenant isolation enforced.",
       "report_title": "Storage Security & Tenant Isolation Report",
       "encryption_at_rest_verified": true,
@@ -2017,8 +2017,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.850860+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.850909+00:00",
+      "timestamp": "2026-09-24T21:44:09.735992+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.736015+00:00",
       "summary": "Threat modeling verified: All 6 STRIDE categories mitigated with low residual risk.",
       "report_title": "Threat Modeling Verification Report",
       "methodology": "STRIDE & Attack Tree Analysis",
@@ -2116,8 +2116,8 @@
           }
         }
       ],
-      "timestamp": "2026-09-16T19:15:38.851726+00:00",
-      "execution_timestamp": "2026-09-16T19:15:38.851745+00:00",
+      "timestamp": "2026-09-24T21:44:09.736962+00:00",
+      "execution_timestamp": "2026-09-24T21:44:09.736980+00:00",
       "summary": "Vulnerability management verified: 0 Critical and 0 High CVEs across OS, Python, and IaC layers.",
       "report_title": "Vulnerability Management Report",
       "critical_vulnerabilities_count": 0,

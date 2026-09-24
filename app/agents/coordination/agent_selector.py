@@ -4,7 +4,6 @@ Selects optimal agents based on capabilities, current workload, availability, an
 """
 
 from typing import List, Optional
-from uuid import UUID
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.capability_matcher import CapabilityMatcher, CapabilityRequirement
 from app.agents.coordination.exceptions import MissingCapabilityError

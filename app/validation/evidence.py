@@ -5,7 +5,6 @@ Logs structured, verifiable audit evidence with SHA-256 cryptographic hash chain
 
 import hashlib
 import json
-import os
 from pathlib import Path
 from typing import Any, Dict
 from app.core.logging import logger

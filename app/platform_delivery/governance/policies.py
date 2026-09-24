@@ -1,8 +1,8 @@
 """Release Freeze and Change Window Policies (Req 54)."""
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
-from typing import Dict, List, Optional, Set
+from typing import List, Optional, Tuple
 
 
 class FreezeScope(str, Enum):

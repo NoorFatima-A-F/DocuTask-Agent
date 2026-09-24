@@ -3,7 +3,7 @@ Scientific Constraints - Constraint Graph
 Represents constraint dependency graphs, detecting binding constraints and conflict cycles.
 """
 
-from typing import Dict, List, Any, Set, Tuple
+from typing import Dict, List, Any, Tuple
 from dataclasses import dataclass
 
 

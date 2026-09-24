@@ -8,7 +8,7 @@ from app.runtime.planning.strategy_generator import CandidateStrategyGenerator
 from app.runtime.planning.cost_predictor import CostPredictionEngine
 from app.runtime.planning.latency_predictor import LatencyPredictionEngine
 from app.runtime.planning.risk_engine import RiskIntelligenceEngine
-from app.runtime.planning.utility_engine import MultiObjectiveUtilityEngine, UtilityWeights
+from app.runtime.planning.utility_engine import MultiObjectiveUtilityEngine
 from app.runtime.planning.strategy_ranker import StrategyRankingEngine
 from app.runtime.planning.counterfactual_engine import CounterfactualEngine
 

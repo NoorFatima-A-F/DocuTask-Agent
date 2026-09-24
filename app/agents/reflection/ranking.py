@@ -3,7 +3,7 @@ Ranking Engine.
 Ranks executions, strategies, tools, or planner alternatives by evaluated performance.
 """
 
-from typing import Any, Callable, Dict, List
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 

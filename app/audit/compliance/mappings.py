@@ -1,11 +1,11 @@
 """Compliance Evidence Mapping & Assessment Engine."""
 
-from typing import List, Dict, Any, Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 from ..storage.repository import AuditRepository
 from ..evidence.manager import EvidenceManager
-from .frameworks import ComplianceFramework, FRAMEWORK_PROFILES
+from .frameworks import ComplianceFramework
 from .controls import ComplianceControl, ControlStatus, DEFAULT_COMPLIANCE_CONTROLS
 
 

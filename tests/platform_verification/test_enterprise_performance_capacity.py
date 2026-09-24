@@ -1,10 +1,8 @@
 """Comprehensive Test Suite for Phase 3J.5 Enterprise Performance Baseline & Capacity Verification Framework."""
 
-import json
 import os
 import shutil
 import tempfile
-import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
@@ -22,11 +20,9 @@ from app.platform_verification.enterprise_performance_capacity.domain.models imp
     EnterprisePerformanceCertificationReport,
     EnterprisePerformanceTier,
     LatencyBreakdownReport,
-    LoadTestReport,
     PerformanceBaselineReport,
     PerformanceRegressionReport,
     PerformanceVerificationManifest,
-    PerformanceVerificationStatus,
     QueuePerformanceReport,
     ResourceUtilizationReport,
     SpikeTestReport,

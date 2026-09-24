@@ -3,9 +3,9 @@ Workflow Wait Condition Manager.
 Coordinates asynchronous barrier conditions and multi-signal synchronizations.
 """
 
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Set
 from uuid import UUID
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class WaitCondition(BaseModel):

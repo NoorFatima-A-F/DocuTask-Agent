@@ -3,12 +3,10 @@ Production Tests for Event-Driven Agent Architecture.
 Covers EnterpriseEventBus, EventStore, DeadLetterQueue, wildcard matching, async dispatch, and hash chaining.
 """
 
-import asyncio
 import pytest
-from datetime import datetime, timezone
 from uuid import uuid4
 
-from app.agents.events.dead_letter_queue import DeadLetterQueue, DeadLetterRecord
+from app.agents.events.dead_letter_queue import DeadLetterQueue
 from app.agents.events.event_bus import EnterpriseEventBus
 from app.agents.events.event_store import EventEntry, EventStore
 from app.agents.events.event_types import (

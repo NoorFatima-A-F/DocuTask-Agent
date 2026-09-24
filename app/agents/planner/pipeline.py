@@ -29,7 +29,7 @@ class PlanningPipeline(IPlanningPipeline):
 
     async def execute_pipeline(self, request: PlannerRequest) -> Plan:
         # 1. Goal Analysis
-        analysis_report = self.goal_analyzer.analyze_goal(request.goal, request.context)
+        self.goal_analyzer.analyze_goal(request.goal, request.context)
 
         # 2. Candidate Generation
         raw_candidates = self.candidate_generator.generate_candidates(request)

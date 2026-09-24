@@ -3,10 +3,9 @@
 import platform
 import subprocess
 import sys
-import os
 import hashlib
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

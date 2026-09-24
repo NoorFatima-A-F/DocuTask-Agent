@@ -2,7 +2,6 @@
 Master Business Value and Enterprise Operational Impact Scorer.
 """
 
-from typing import Dict, Any
 from app.business_value_verification.domain.models import MasterBusinessValueScore
 
 

@@ -3,7 +3,7 @@ Lifecycle Component Protocol and Base Class.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from ..kernel.lifecycle import LifecycleState
 from ..kernel.health import ComponentHealth, HealthStatus
 

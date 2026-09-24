@@ -1,7 +1,6 @@
 """
 Tests for Internal Runtime Responsiveness (Part 3H.2C).
 """
-import pytest
 from app.platform_verification.liveness.responsiveness.responsiveness_verifier import (
     ResponsivenessVerifier,
 )

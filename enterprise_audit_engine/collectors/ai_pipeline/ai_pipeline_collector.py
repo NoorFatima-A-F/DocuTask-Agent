@@ -1,6 +1,5 @@
 """AI Pipeline, Prompt Registry & Safety Gateway Collector."""
 
-from pathlib import Path
 from typing import List, Dict, Any
 from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,

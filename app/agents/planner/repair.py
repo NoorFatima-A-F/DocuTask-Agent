@@ -4,10 +4,8 @@ Performs incremental graph repair, constraint adjustment, and dependency relinki
 """
 
 from app.agents.planner.reflection import ReflectionCritique
-from app.agents.planning.builders import GraphBuilder, PlanBuilder
 from app.agents.planning.contracts import Plan
 from app.agents.planning.edges import EdgeType, PlanEdge
-from app.agents.planning.nodes import NodeType, PlanNode
 
 
 class PlanRepairEngine:

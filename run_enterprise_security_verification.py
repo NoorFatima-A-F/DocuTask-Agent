@@ -5,10 +5,8 @@ Executes all 16 infrastructure security verification phases, evaluates weighted 
 and exports JSON evidence reports with cryptographic SHA-256 integrity manifest.
 """
 
-import json
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_infrastructure_security.runtime.infrastructure_security_runtime import (
     InfrastructureSecurityRuntime,

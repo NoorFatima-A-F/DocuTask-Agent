@@ -21,9 +21,6 @@ from app.platform_verification.performance_capacity_engineering.scoring import (
 from app.platform_verification.performance_capacity_engineering.exporter import (
     PerformanceVerificationExporter,
 )
-from app.platform_verification.performance_capacity_engineering.domain.models import (
-    PerformanceCertificationReport,
-)
 
 
 class PerformanceVerificationRuntime:

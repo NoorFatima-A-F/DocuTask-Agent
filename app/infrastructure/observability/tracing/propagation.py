@@ -8,7 +8,6 @@ across HTTP, gRPC, and asynchronous message queues.
 from __future__ import annotations
 
 import logging
-import uuid
 from typing import Dict, Optional, Tuple
 
 logger = logging.getLogger("infrastructure.observability.tracing.propagation")

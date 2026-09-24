@@ -5,10 +5,9 @@ Optimizes continuous planner scoring parameters via Expected Improvement (EI) ac
 
 from __future__ import annotations
 
-import math
 import random
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Dict, List
+from pydantic import BaseModel
 
 
 class ParameterEvaluationPoint(BaseModel):
@@ -59,7 +58,7 @@ class BayesianPlannerOptimizer:
             
             # Expected Improvement calculation: EI = (mu - f_best) * Phi(Z) + sigma * phi(Z)
             improvement = pred_mean - best_observed
-            z = improvement / max(1e-6, pred_sigma)
+            improvement / max(1e-6, pred_sigma)
             ei = max(0.0, improvement) + (pred_sigma * 0.3989)  # 0.3989 ~ 1/sqrt(2pi)
             
             candidates.append((ei, {"weight_accuracy": round(w_acc, 3), "weight_cost": round(w_cost, 3), "weight_latency": round(w_lat, 3)}))

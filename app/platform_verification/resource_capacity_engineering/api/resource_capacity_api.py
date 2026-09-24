@@ -4,9 +4,8 @@ FastAPI Router for Phase 3J.4: Resource Utilization & Capacity Engineering Verif
 
 from typing import Any, Dict, Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, status
 
-from ..domain.models import ResourceCapacityCertificationReport
 from ..runtime.resource_capacity_runtime import ResourceCapacityRuntime
 
 router = APIRouter(

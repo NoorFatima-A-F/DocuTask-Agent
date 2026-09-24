@@ -3,7 +3,7 @@ Phase 13.20: AI Retirement & Deprecation Lifecycle Manager.
 Handles controlled agent deprecation, migration recommendations, sunset schedules, and data archival.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional
 from datetime import datetime, timezone, timedelta
 import uuid
 from app.platform_ai_lifecycle.models.schemas import AgentRetirementPlan

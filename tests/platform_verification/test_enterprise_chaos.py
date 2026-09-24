@@ -2,8 +2,6 @@
 Phase 3K: Comprehensive Test Suite for Enterprise Chaos Engineering Verification Framework.
 """
 
-import json
-import os
 from pathlib import Path
 import pytest
 from fastapi import FastAPI
@@ -11,14 +9,12 @@ from fastapi.testclient import TestClient
 
 from app.platform_verification.enterprise_chaos_verification.domain.models import (
     AIProviderFailureReport,
-    BaseVerificationReport,
     CascadingFailureReport,
     ChaosObservabilityReport,
     ChaosPipelineReport,
     ChaosReadinessReport,
     ChaosReportGenerationReport,
     ChaosResilienceTier,
-    ChaosScorecard,
     CheckResult,
     ContainerFailureReport,
     DatabaseFailureReport,

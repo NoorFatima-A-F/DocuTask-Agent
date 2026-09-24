@@ -6,11 +6,10 @@ Models time series sequences, periodicity patterns, seasonality cycles, and conc
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import math
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import uuid
 
 from app.runtime.world_model.events.world_model_events import (
-    TemporalResolution,
     WorldModelEvent,
     WorldModelEventType,
     world_model_event_bus,

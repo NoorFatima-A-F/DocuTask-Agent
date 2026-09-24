@@ -6,7 +6,7 @@ Bridges planner graph state changes to live WebSockets and SSE streams.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from app.runtime.planning.graph.dag import ExecutionDAG
 from app.runtime.planning.visualization.graph_snapshot import VisualGraphSnapshot
 

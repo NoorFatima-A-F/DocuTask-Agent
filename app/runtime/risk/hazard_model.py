@@ -3,7 +3,7 @@ Scientific Risk Engine - Hazard Model
 Models time-to-failure and Cox proportional hazard rates across execution runtime.
 """
 
-from typing import Dict, List, Tuple
+from typing import Dict, List
 import math
 
 

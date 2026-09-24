@@ -1,10 +1,9 @@
 """Reviewer Assignment Engine, Roles, and Delegation Authorities."""
 
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 
-from ..core.exceptions import UnauthorizedReviewerError
 from ..core.context import OversightContext
 from .requests import ReviewRequest
 

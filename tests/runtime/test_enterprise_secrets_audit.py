@@ -12,7 +12,6 @@ import pytest
 from app.agents.runtime.enterprise.audit_event import AuditEventType
 from app.agents.runtime.enterprise.audit_log import ImmutableRuntimeAuditLog
 from app.agents.runtime.enterprise.secret_manager import (
-    EnvironmentSecretProvider,
     InMemorySecretProvider,
     SecretManager,
 )
@@ -79,7 +78,6 @@ def test_audit_log_tamper_detection():
 
 
 def test_secret_rotation_and_versioning():
-    from app.agents.runtime.enterprise.secret_manager import SecretExpiredError, SecretRevokedError
 
     vault = InMemorySecretProvider()
     sm = SecretManager(primary_provider=vault)

@@ -1,6 +1,5 @@
 """Evidence Tampering & Cryptographic Integrity Verifier."""
 
-import hashlib
 import json
 from pathlib import Path
 from typing import List, Dict, Any, Tuple

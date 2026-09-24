@@ -2,7 +2,7 @@
 Phase 3N.8: Network Security Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import INetworkSecurityVerifier
 from ..domain.models import (

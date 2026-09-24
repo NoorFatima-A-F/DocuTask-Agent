@@ -12,10 +12,9 @@ Evaluates agent and extraction model resilience against:
 from __future__ import annotations
 
 import random
-import re
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List
 
 
 class AttackType(str, Enum):

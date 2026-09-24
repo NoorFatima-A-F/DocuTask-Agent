@@ -3,7 +3,7 @@ AMRS-RSIP Phase 13.9 - Meta Runtime
 Master coordinator managing autonomous meta-reasoning, strategic planning, and recursive self-improvement.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from app.runtime.meta.observation.strategic_observation import StrategicObservationLayer
 from app.runtime.meta.reasoning.meta_reasoning import MetaReasoningEngine
 from app.runtime.meta.reflection.recursive_reflection import RecursiveReflectionEngine

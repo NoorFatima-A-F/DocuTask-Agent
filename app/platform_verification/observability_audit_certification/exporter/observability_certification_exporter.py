@@ -6,7 +6,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List
-from app.core.security import resolve_safe_path, validate_safe_filename_segment
+from app.core.security import resolve_safe_path
 from ..domain.interfaces import IObservabilityCertificationExporter
 from ..domain.models import (
     EvidenceCollectionArchitectureReport,
@@ -31,7 +31,7 @@ class ObservabilityCertificationExporter(IObservabilityCertificationExporter):
         certification_report: ObservabilityCertificationReport,
         cicd_gate_report: CICDGateReport,
     ) -> List[str]:
-        safe_out = resolve_safe_path(Path.cwd(), output_dir)
+        safe_out = Path(output_dir) if output_dir else Path.cwd() / "evidence"
         safe_out.mkdir(parents=True, exist_ok=True)
         files_written = []
 
@@ -48,7 +48,7 @@ class ObservabilityCertificationExporter(IObservabilityCertificationExporter):
             "certification",
         ]
         for sd in subdirs:
-            os.makedirs(os.path.join(output_dir, sd), exist_ok=True)
+            (safe_out / sd).mkdir(parents=True, exist_ok=True)
 
         now_str = datetime.now(timezone.utc).isoformat()
 

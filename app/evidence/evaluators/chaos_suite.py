@@ -11,7 +11,6 @@ Measures Recovery Time (MTTR), Data Loss (Zero Tolerance), and Failure Isolation
 
 from __future__ import annotations
 
-import asyncio
 import logging
 import time
 from dataclasses import dataclass, field

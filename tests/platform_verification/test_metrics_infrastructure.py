@@ -3,7 +3,6 @@ Phase 3I.3: Enterprise Metrics Infrastructure Verification - Unit and Integratio
 """
 import os
 import json
-import pytest
 import hashlib
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
@@ -14,31 +13,6 @@ from app.platform_verification.metrics_infrastructure.domain.models import (
     MetricsServiceCoverage,
     MetricsArchitectureReport,
     MetricDefinitionSpec,
-    MetricsStandardReport,
-    EndpointMetricSummary,
-    ApplicationMetricsReport,
-    AgentExecutionMetricSpec,
-    LLMProviderMetricSpec,
-    AIMetricsReport,
-    QueueMetricSpec,
-    WorkerMetricSpec,
-    DatabaseMetricSpec,
-    ContainerResourceSpec,
-    InfrastructureMetricsReport,
-    BusinessSLAMetricsReport,
-    DashboardPanelSpec,
-    DashboardSpec,
-    DashboardReport,
-    AlertRuleValidationSpec,
-    AlertValidationReport,
-    MetricAccuracySimulationSpec,
-    MetricsAccuracyReport,
-    LabelSecurityAuditSpec,
-    MetricsSecurityReport,
-    MetricsPerformanceReport,
-    ChaosMetricScenarioSpec,
-    ChaosMetricReport,
-    MetricsPillarScore,
     MetricsCertificationReport,
 )
 from app.platform_verification.metrics_infrastructure.verifiers.metrics_architecture_verifier import MetricsArchitectureVerifier
@@ -54,7 +28,6 @@ from app.platform_verification.metrics_infrastructure.verifiers.metrics_security
 from app.platform_verification.metrics_infrastructure.verifiers.metrics_performance_verifier import MetricsPerformanceVerifier
 from app.platform_verification.metrics_infrastructure.verifiers.failure_simulation_metrics_verifier import FailureSimulationMetricsVerifier
 from app.platform_verification.metrics_infrastructure.scoring.metrics_quality_scorer import MetricsQualityScorer
-from app.platform_verification.metrics_infrastructure.exporter.metrics_evidence_exporter import MetricsEvidenceExporter
 from app.platform_verification.metrics_infrastructure.runtime.metrics_verification_runtime import MetricsVerificationRuntime
 from app.platform_verification.metrics_infrastructure.api.metrics_verification_api import router as metrics_api_router
 

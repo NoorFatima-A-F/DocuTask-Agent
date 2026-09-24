@@ -1,8 +1,8 @@
 """PII Redaction & Reversible Pseudonymization Engine."""
 
-from typing import Dict, Tuple, List, Optional
+from typing import Dict, List
 from pydantic import BaseModel, Field
-from .pii_detector import PIIDetector, PIIType, PIIMatch
+from .pii_detector import PIIDetector, PIIType
 
 
 class RedactionResult(BaseModel):

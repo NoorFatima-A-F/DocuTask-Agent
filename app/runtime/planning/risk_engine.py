@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import uuid
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 
 from app.runtime.planning.strategy_generator import CandidateStrategy

@@ -7,7 +7,7 @@ Formal representation of autonomously synthesized scientific hypotheses.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import List
 
 from research_validation.provenance.hashing import hash_canonical_json
 

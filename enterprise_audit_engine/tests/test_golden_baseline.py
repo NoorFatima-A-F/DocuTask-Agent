@@ -1,7 +1,6 @@
 """Tests for Golden Baseline Manager & Invariant Verification."""
 
 import pytest
-from pathlib import Path
 from enterprise_audit_engine.baseline.baseline_manager import GoldenBaselineManager
 from enterprise_audit_engine.baseline.baseline_manifest import GoldenBaselineManifest
 

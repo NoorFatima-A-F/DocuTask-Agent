@@ -2,12 +2,9 @@
 Unit & Determinism Tests for Multi-Objective Plan Optimizer (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.optimization import (
     MultiObjectivePlanOptimizer,
     ObjectiveFunctions,
-    OptimizationStatistics,
-    optimization_history,
 )
 
 

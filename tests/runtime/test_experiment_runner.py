@@ -2,7 +2,6 @@
 Unit & Reproducibility Tests for Experiment Runner (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.benchmarking import ExperimentRunner
 
 

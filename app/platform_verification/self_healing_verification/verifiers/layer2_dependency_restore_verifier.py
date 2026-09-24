@@ -1,7 +1,6 @@
 """
 Phase 3H.5.5: Layer 2 - Dependency Restoration Verifier
 """
-from typing import Dict, Any, List
 from ..domain.interfaces import ILayer2DependencyRestoreVerifier
 from ..domain.models import DependencyRestoreReport, DependencyItemHealth
 

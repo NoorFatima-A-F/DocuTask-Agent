@@ -1,7 +1,7 @@
 """Compliance Framework Definitions & Profiles."""
 
 from enum import Enum
-from typing import Dict, Any, List
+from typing import Dict, List
 from pydantic import BaseModel, Field
 
 

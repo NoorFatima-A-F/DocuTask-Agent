@@ -3,8 +3,8 @@ AMCN-SIP Phase 13.8 - Swarm Runtime
 Master coordinator managing the complete society of autonomous agents.
 """
 
-from typing import Any, Dict, List, Optional
-from app.runtime.swarm.runtime.agent_registry import AgentRegistry, SwarmAgentProfile
+from typing import Any, Dict, Optional
+from app.runtime.swarm.runtime.agent_registry import AgentRegistry
 from app.runtime.swarm.runtime.agent_lifecycle import AgentLifecycleManager
 from app.runtime.swarm.runtime.agent_directory import AgentDirectory
 from app.runtime.swarm.runtime.agent_coordinator import AgentCoordinator

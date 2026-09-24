@@ -4,7 +4,7 @@ Establishes the contract that future Intelligent Planners and Decomposition Engi
 """
 
 from typing import Optional
-from app.agents.planning.contracts import Plan, PlanningRequest, PlanningResult
+from app.agents.planning.contracts import PlanningRequest, PlanningResult
 from app.agents.planning.interfaces import IBasePlanner
 from app.agents.planning.validation import PlanValidator
 

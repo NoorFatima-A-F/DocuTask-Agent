@@ -6,10 +6,9 @@ semantic query engine, and deductive reasoning.
 """
 
 from __future__ import annotations
-import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, Optional
 
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
 from research_validation.knowledge_graph.knowledge_node import (
@@ -20,7 +19,7 @@ from research_validation.knowledge_graph.relationship_engine import (
 )
 from research_validation.knowledge_graph.semantic_query import SemanticQueryEngine
 from research_validation.knowledge_graph.reasoning_engine import (
-    ScientificReasoningEngine, CausalGraphResult
+    ScientificReasoningEngine
 )
 from research_validation.provenance.hashing import hash_canonical_json
 

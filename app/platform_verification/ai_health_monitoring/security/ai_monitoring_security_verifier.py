@@ -5,7 +5,7 @@ Verifies RBAC access controls, metric/log privacy boundaries, and TLS/AES-256 en
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.ai_health_monitoring.domain.interfaces import (
     IAIMonitoringSecurityVerifier,

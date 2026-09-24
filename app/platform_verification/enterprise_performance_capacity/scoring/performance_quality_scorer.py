@@ -16,7 +16,6 @@ from typing import Any, Dict, List, Optional
 from ..domain.interfaces import IPerformanceScorer
 from ..domain.models import (
     AIWorkloadReport,
-    BaseVerificationReport,
     BottleneckAnalysisReport,
     CapacityPlanReport,
     CategoryScore,

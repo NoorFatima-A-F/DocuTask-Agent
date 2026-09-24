@@ -3,10 +3,10 @@ Self-Evolution Runtime - Rollback Manager
 Performs atomic instant rollback to the last verified safe baseline policy.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict, field
 import time
-from app.runtime.self_evolution.policy_lifecycle import PolicyLifecycleManager, PolicyDefinition
+from app.runtime.self_evolution.policy_lifecycle import PolicyLifecycleManager
 
 
 @dataclass

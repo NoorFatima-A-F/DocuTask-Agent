@@ -6,8 +6,8 @@ Explicitly forbids dangerous operations, resource tampering, and privilege escal
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set
+from dataclasses import dataclass
+from typing import Dict, Optional, Set
 
 from app.agents.security.agent_permission import AgentPermission, AgentRole, ROLE_PERMISSION_MATRIX
 

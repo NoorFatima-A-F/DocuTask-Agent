@@ -3,8 +3,6 @@ CLI Runner for Enterprise Backup Security Verification Framework.
 Part 3G.2F — Backup Security, Encryption, Integrity, Access Control & Compliance.
 """
 import sys
-import os
-import json
 import logging
 
 if hasattr(sys.stdout, "reconfigure"):

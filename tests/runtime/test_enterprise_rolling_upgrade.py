@@ -6,7 +6,6 @@ Validates:
 - State migration pipeline application across version schemas
 """
 
-import pytest
 from app.agents.runtime.enterprise.migration_manager import MigrationManager
 from app.agents.runtime.enterprise.rolling_upgrade import (
     DeploymentSlot,

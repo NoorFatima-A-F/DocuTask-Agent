@@ -15,7 +15,6 @@ class RiskEvaluator(IEvaluator):
         """Evaluates governance and risk score."""
         decisions = trace.decisions
         if not decisions:
-            score = 1.0
             status = "EXCELLENT"
             findings = ["No policy risk events triggered; clean execution."]
             metrics = [EvaluationMetric(

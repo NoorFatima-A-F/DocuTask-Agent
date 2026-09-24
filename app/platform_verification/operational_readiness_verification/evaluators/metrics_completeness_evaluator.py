@@ -1,7 +1,6 @@
 """
 Phase 3H.4.11.3: Metrics Completeness Evaluator
 """
-from typing import Dict, Any
 from ..domain.interfaces import IMetricsCompletenessEvaluator
 from ..domain.models import MetricsCompletenessScore
 

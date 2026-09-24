@@ -2,7 +2,7 @@
 Task Complexity and Capability Requirement Analyzer.
 """
 
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 from app.agents.planning.tasks import PlanningTask
 

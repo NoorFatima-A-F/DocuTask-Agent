@@ -3,9 +3,6 @@ Section 2.3: Recursive Delegation & Batch Orchestration Verification
 Validates top-down batch delegation: Manager -> Planner Agent -> Invoice Specialists -> Reviewers.
 """
 from typing import Dict, List, Any
-import uuid
-from datetime import datetime, timezone
-from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
 
 class DelegationVerifier:
@@ -17,10 +14,7 @@ class DelegationVerifier:
         metrics: Dict[str, Any] = {}
         
         # 1. Manager initiates delegation of 10,000 invoices
-        manager_id = "emp-v8-ops-mgr"
-        planner_id = "emp-v8-planner-spec"
         worker_ids = [f"emp-v8-worker-{i:02d}" for i in range(10)]
-        reviewer_id = "emp-v8-qa-rev"
         
         # Step A: Planner shards batch into chunks of 1,000
         batch_size = 1000

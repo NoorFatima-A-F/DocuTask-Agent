@@ -1,24 +1,18 @@
 """Tests for Unified DeploymentSDK and FastAPI REST API Endpoints."""
 
-import pytest
 from app.infrastructure.deployment import DeploymentSDK, get_deployment_sdk
 from app.infrastructure.deployment.api.deployment_routes import (
     list_deployments,
     trigger_deployment,
     get_deployment,
     rollback_deployment,
-    list_releases,
     create_release,
-    list_pipelines,
     run_pipeline,
-    list_artifacts,
-    promote_artifact,
     create_or_enable_feature,
     DeploymentCreateRequest,
     RollbackTriggerRequest,
     ReleaseCreateRequest,
     PipelineRunRequest,
-    PromoteRequest,
     FeatureFlagCreateRequest,
 )
 
@@ -65,7 +59,7 @@ def test_deployment_sdk_end_to_end_flow() -> None:
 
 
 def test_deployment_fastapi_routes() -> None:
-    sdk = get_deployment_sdk()
+    get_deployment_sdk()
 
     # 1. Trigger deployment
     dep_req = DeploymentCreateRequest(

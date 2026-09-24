@@ -6,7 +6,7 @@ and clickable cryptographic provenance links.
 """
 
 from __future__ import annotations
-from typing import Any, Dict, List, Optional
+from typing import List
 
 from research_validation.artifact_generation.publication_tables import PublicationTable
 

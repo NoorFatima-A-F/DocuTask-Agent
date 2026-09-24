@@ -1,7 +1,6 @@
 """
 Phase 3H.5.6.7: Failure Prevention Verifier
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IFailurePreventionVerifier
 from ..domain.models import FailurePreventionReport, PreventionSignalItem
 

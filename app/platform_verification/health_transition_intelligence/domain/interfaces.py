@@ -1,7 +1,7 @@
 """
 Abstract interfaces and protocols for Part 3H.3.3.
 """
-from typing import Dict, Any, List, Protocol
+from typing import Dict, List, Protocol
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
     HealthEvent,

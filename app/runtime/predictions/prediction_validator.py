@@ -3,7 +3,7 @@ Prediction Validation Engine - Prediction Validator
 Enforces maximum error tolerance bounds on model predictions.
 """
 
-from typing import Dict, List, Tuple, Optional
+from typing import Any, Dict, List, Tuple
 from dataclasses import dataclass, asdict
 from app.runtime.predictions.prediction_error import PredictionAccuracyMetrics
 

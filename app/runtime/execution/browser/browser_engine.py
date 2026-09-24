@@ -5,15 +5,12 @@ Manages headless browser sessions, DOM tree extractions, vision snapshots, and s
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import hashlib
-import json
 from typing import Any, Dict, List, Optional
 import uuid
 
 from app.runtime.execution.events.execution_events import (
     ExecutionEvent,
     ExecutionEventType,
-    RiskLevel,
     execution_event_bus,
 )
 

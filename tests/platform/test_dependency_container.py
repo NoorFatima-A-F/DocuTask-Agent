@@ -6,8 +6,6 @@ import pytest
 from app.core.container.container import DependencyContainer, Lifetime
 from app.core.container.exceptions import (
     CircularDependencyException,
-    ResolutionException,
-    ServiceNotFoundException,
 )
 
 

@@ -4,7 +4,7 @@ Takes failure diagnosis and RCA context, evaluates confidence thresholds,
 selects the optimal remediation policy, and produces an actionable decision plan.
 """
 
-from typing import Dict, Any, Optional
+from typing import Optional
 import uuid
 from ..domain.models import (
     FailureContext,
@@ -47,7 +47,7 @@ class RecoveryDecisionEngine(IRecoveryDecisionEngine):
                 parameters={},
             )
 
-        classification = self.classifier.classify_action(policy.action)
+        self.classifier.classify_action(policy.action)
         confidence_met = context.confidence >= self.min_confidence_threshold
 
         if not confidence_met:

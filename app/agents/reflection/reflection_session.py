@@ -3,7 +3,7 @@ Reflection Session Container.
 Maintains stateful operational context, trace references, and staged learning artifacts during a reflection lifecycle.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.reflection.lifecycle import ReflectionLifecycleState

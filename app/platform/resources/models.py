@@ -2,9 +2,8 @@
 Platform Resource Management Models.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, Optional
 
 
 class ResourceType(str, Enum):

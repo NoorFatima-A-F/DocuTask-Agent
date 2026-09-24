@@ -5,11 +5,10 @@ and computes composite readiness grade and security scorecard.
 """
 
 import time
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 from ..domain.models import (
     SecurityScorecard,
     PillarVerificationResult,
-    SecurityPillar,
 )
 from ..framework.test_runner import SecurityTestRunner
 from ..scanners.asvs_scanner import OWASPASVSScanner

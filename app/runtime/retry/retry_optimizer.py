@@ -5,7 +5,6 @@ Calculates Expected Improvement, Probability of Recovery, Marginal Benefit, and 
 
 from typing import Dict, Any, Optional
 from dataclasses import dataclass, asdict
-import math
 
 from app.runtime.retry.retry_policy import RetryPolicy, DEFAULT_RETRY_POLICY
 from app.runtime.retry.retry_validator import RetryValidator

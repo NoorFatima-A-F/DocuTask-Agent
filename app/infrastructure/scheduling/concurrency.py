@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 import threading
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 from app.infrastructure.executions.workload import WorkloadRequest
 
 

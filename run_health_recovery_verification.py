@@ -2,12 +2,8 @@
 Phase 3H.5.12: Automated Health Recovery Verification Framework Master CLI Runner
 """
 import sys
-import os
 from app.platform_verification.health_recovery.runtime.health_recovery_runtime import (
     HealthRecoveryRuntime,
-)
-from app.platform_verification.health_recovery.domain.models import (
-    RecoveryCertificationTier,
 )
 
 

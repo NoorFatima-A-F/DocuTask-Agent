@@ -1,7 +1,7 @@
 """Part L: Explainability Validation."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IExplainabilityValidationVerifier
 from ..domain.models import (
     CheckResult,

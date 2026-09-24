@@ -3,7 +3,6 @@ Liveness Orchestration Verifier (Part 3H.2J).
 Validates Docker HEALTHCHECK definitions, Kubernetes livenessProbe specifications,
 and automated container restart and recovery workflows.
 """
-from typing import Dict, Any
 from app.platform_verification.liveness.domain.models import OrchestrationReport
 from app.platform_verification.liveness.domain.interfaces import ILivenessOrchestrationVerifier
 

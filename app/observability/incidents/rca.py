@@ -37,7 +37,6 @@ class RCAEngine:
         trace_spans: Optional[List[Dict[str, Any]]] = None,
     ) -> RCACorrelationResult:
         metrics = metrics_snapshot or {}
-        logs = error_logs or []
         spans = trace_spans or []
 
         causal_chain: List[CausalHop] = []

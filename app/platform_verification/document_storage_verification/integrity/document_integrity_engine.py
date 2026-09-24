@@ -1,8 +1,6 @@
 """
 Document Integrity Engine for Enterprise Document Storage (Part 3G.2C).
 """
-import hashlib
-from typing import Dict, Any, List
 
 from app.platform_verification.document_storage_verification.domain.models import (
     DocumentIntegrityReport,

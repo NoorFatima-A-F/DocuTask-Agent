@@ -7,12 +7,9 @@ the computed value back to raw RuntimeEvents via cryptographic digests and formu
 from __future__ import annotations
 
 import hashlib
-import json
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
-from app.runtime.metrics.definitions import MetricDefinition
-from app.runtime.metrics.statistics import StatisticalSummary
 
 
 def compute_merkle_root(event_ids: List[str]) -> str:

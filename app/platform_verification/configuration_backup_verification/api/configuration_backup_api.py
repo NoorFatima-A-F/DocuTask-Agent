@@ -21,12 +21,10 @@ runtime_instance = ConfigurationBackupVerificationRuntime()
 
 
 @router.post("/run", response_model=Dict[str, Any])
-def run_full_configuration_verification(
-    output_dir: str = Query(default="evidence/configuration_backup_verification", description="Evidence export directory")
-) -> Dict[str, Any]:
+def run_full_configuration_verification() -> Dict[str, Any]:
     """Triggers the full enterprise configuration & secret backup verification pipeline."""
     try:
-        result = runtime_instance.execute_full_verification(output_dir=output_dir)
+        result = runtime_instance.execute_full_verification()
         scorecard = result.get("scorecard")
         return {
             "status": "SUCCESS",

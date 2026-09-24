@@ -3,22 +3,21 @@ Comprehensive Unit & Integration Test Suite for Phase 13.13 (ASEAORIP).
 Validates Profiler, Diagnostics, Capability, Architecture, Optimizer, Mutations, Benchmarks, Simulation, Governance, Deployment, and closed-loop Evolution Cycles.
 """
 
-import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.runtime.evolution.events import EvolutionEventBus, EvolutionStage, OptimizationObjective
+from app.runtime.evolution.events import EvolutionEventBus, OptimizationObjective
 from app.runtime.evolution.profiler import ProfilerEngine, PlatformHealthSnapshot
-from app.runtime.evolution.diagnostics import DiagnosticEngine, WeaknessDiagnosis
-from app.runtime.evolution.capability import CapabilityEngine, CapabilityDescriptor
-from app.runtime.evolution.architecture import ArchitectureEngine, ArchitectureImprovementPlan
-from app.runtime.evolution.optimizer import OptimizerEngine, OptimizationCandidate
-from app.runtime.evolution.self_modification import MutationEngine, ArchitectureMutationProposal
-from app.runtime.evolution.benchmark import BenchmarkEngine, BenchmarkComparison
-from app.runtime.evolution.simulation import SimulationEngine, SimulationReport
-from app.runtime.evolution.governance import GovernanceEngine, EvolutionGovernanceReview, RollbackSnapshot
-from app.runtime.evolution.deployment import DeploymentEngine, DeploymentRecord
-from app.runtime.evolution.runtime import EvolutionRuntime, get_evolution_runtime
+from app.runtime.evolution.diagnostics import DiagnosticEngine
+from app.runtime.evolution.capability import CapabilityEngine
+from app.runtime.evolution.architecture import ArchitectureEngine
+from app.runtime.evolution.optimizer import OptimizerEngine
+from app.runtime.evolution.self_modification import MutationEngine
+from app.runtime.evolution.benchmark import BenchmarkEngine
+from app.runtime.evolution.simulation import SimulationEngine
+from app.runtime.evolution.governance import GovernanceEngine
+from app.runtime.evolution.deployment import DeploymentEngine
+from app.runtime.evolution.runtime import EvolutionRuntime
 
 client = TestClient(app)
 
@@ -316,7 +315,7 @@ def test_api_governance_and_deployment():
         "risk_level": "LOW",
     })
     assert res_gov.status_code == 200
-    rev_id = res_gov.json()["review_id"]
+    res_gov.json()["review_id"]
 
     # Launch Canary
     res_dep = client.post("/api/v1/evolution/deployments/launch", json={

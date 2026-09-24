@@ -12,11 +12,9 @@ Produces compliant open science packaging artifacts:
 from __future__ import annotations
 
 import hashlib
-import json
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 
 class IdentifierScope(str, Enum):

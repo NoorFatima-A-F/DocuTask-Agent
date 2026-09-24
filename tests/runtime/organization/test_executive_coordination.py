@@ -2,7 +2,6 @@
 Test Suite: Executive Coordination & Strategic Mission Direction
 Validates executive decision issuing, multi-department mission lifecycle, barrier sync, and delegation policies.
 """
-import pytest
 from app.runtime.executive.executive_controller import ExecutiveController
 from app.runtime.executive.mission_director import MissionDirector
 from app.runtime.executive.coordination_engine import CoordinationEngine

@@ -6,14 +6,13 @@ tool failures, constraint violations, and human feedback.
 
 from __future__ import annotations
 
-import copy
 import logging
 import uuid
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from app.agents.planning.execution_plan import PlannedTask, TaskStatus
+from app.agents.planning.execution_plan import PlannedTask
 from app.agents.reflection.critics.consensus_evaluator import ConsensusCritiqueResult
 from app.agents.workflow.task_graph.dynamic_task_graph import DynamicTaskGraph, NodeState
 

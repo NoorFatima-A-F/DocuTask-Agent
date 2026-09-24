@@ -6,17 +6,11 @@ import pytest
 from app.connectors.actions.executor import ActionExecutor
 from app.connectors.core.exceptions import (
     ActionExecutionError,
-    CapabilityNotFoundError,
     PolicyViolationError,
 )
 from app.connectors.core.models import (
     ActionDescriptor,
-    AuthType,
-    CapabilityDescriptor,
-    Connector,
     ConnectorCategory,
-    ConnectorPolicyRule,
-    ConnectorStatus,
 )
 from app.connectors.runtime.runtime import ConnectorRuntime
 from app.connectors.sdk.builder import ConnectorBuilder

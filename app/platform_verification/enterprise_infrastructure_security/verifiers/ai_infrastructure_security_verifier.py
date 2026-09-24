@@ -2,7 +2,7 @@
 Phase 3N.13: AI Infrastructure Security Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IAIInfrastructureSecurityVerifier
 from ..domain.models import (

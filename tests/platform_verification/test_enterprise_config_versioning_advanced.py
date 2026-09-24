@@ -3,10 +3,8 @@ Advanced Verification Tests for Part 1.1E:
 Configuration Domains, Lifecycle, Reproducibility Engine, Database Migrations,
 Feature Flags, and Secret Governance.
 """
-import pytest
 from app.platform_verification.config_versioning.domain.models import (
-    SemanticVersion, EnvironmentTier, ConfigDomain, PromptTemplateVersion,
-    ArtifactMetadata
+    SemanticVersion, EnvironmentTier, ConfigDomain, PromptTemplateVersion
 )
 from app.platform_verification.config_versioning.domain.schemas import schema_validator
 from app.platform_verification.config_versioning.domain.lifecycle import (
@@ -93,7 +91,7 @@ def test_database_migration_versioning_and_rollback():
 
 
 def test_feature_flag_percentage_and_environment_gating():
-    flag = feature_flag_manager.define_flag(
+    feature_flag_manager.define_flag(
         flag_key="experimental_llm_judge",
         name="Experimental LLM Judge Evaluation",
         description="Enables Gemini 2.5 Flash as synthetic judge",

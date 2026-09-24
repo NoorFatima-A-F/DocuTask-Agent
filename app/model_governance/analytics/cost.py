@@ -7,7 +7,7 @@ and issues budget threshold alerts.
 from __future__ import annotations
 
 from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.model_governance.registry.models import Model
 from app.model_governance.analytics.usage import UsageEvent
 

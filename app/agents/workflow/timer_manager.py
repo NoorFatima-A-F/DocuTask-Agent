@@ -4,7 +4,7 @@ Coordinates durable workflow sleep intervals, timeouts, and scheduled wake-ups.
 """
 
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict, List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.workflow.exceptions import InvalidTimerConfigurationError

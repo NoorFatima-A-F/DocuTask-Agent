@@ -3,7 +3,7 @@
 import hashlib
 import json
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 

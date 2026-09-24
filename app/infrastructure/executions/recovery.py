@@ -1,14 +1,13 @@
 """Lost Worker Detection and Safe Recovery Coordinator."""
 
-from datetime import datetime, timezone
 from enum import Enum
 import threading
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 from app.infrastructure.executions.workload import WorkloadRequest, WorkloadState
 from app.infrastructure.executions.assignment import AssignmentManager, AssignmentStatus
 from app.infrastructure.executions.leases import ExecutionLeaseManager
-from app.infrastructure.workers.models import Worker, WorkerStatus
+from app.infrastructure.workers.models import WorkerStatus
 from app.infrastructure.workers.registry import WorkerRegistry
 
 

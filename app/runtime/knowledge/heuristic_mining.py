@@ -7,10 +7,10 @@ from accumulated empirical mission trajectories.
 from __future__ import annotations
 
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 
-from app.runtime.knowledge.experience_graph import CausalExperienceGraph, ExperienceNode
+from app.runtime.knowledge.experience_graph import CausalExperienceGraph
 
 
 class MinedHeuristic(BaseModel):

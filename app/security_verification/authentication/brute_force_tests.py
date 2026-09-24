@@ -11,7 +11,7 @@ class BruteForceVerifier:
         self.tenant_id = tenant_id
 
     def verify_brute_force_protection(self, attack_attempts: int = 10_000) -> SecuritySectionResult:
-        runs: List[WorkforceVerificationRun] = []
+        runs: List[SecurityVerificationRun] = []
         metrics: Dict[str, Any] = {}
         
         # Security Policy:

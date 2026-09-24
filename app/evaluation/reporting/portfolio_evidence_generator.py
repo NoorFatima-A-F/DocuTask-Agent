@@ -2,10 +2,9 @@
 
 import hashlib
 import json
-import os
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import IPortfolioEvidenceGenerator
 from ..domain.models import PortfolioShowcaseReport

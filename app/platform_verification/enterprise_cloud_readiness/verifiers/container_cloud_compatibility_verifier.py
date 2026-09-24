@@ -2,7 +2,7 @@
 Phase 3M.2: Container Cloud Compatibility Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IContainerCloudCompatibilityVerifier
 from ..domain.models import (

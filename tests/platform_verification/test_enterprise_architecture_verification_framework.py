@@ -5,11 +5,9 @@ import pytest
 from app.platform_verification.architecture_verification import (
     ArchitectureCertificationBand,
     ArchitectureDependency,
-    ArchitectureRule,
     CircularDependencyCycle,
     EnterpriseArchitectureVerificationRuntime,
     RuleCategory,
-    RuleFailureAction,
     RuleSeverity,
 )
 

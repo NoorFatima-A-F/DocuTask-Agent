@@ -6,7 +6,7 @@ and reflection policy mutations (why a policy was proposed, accepted, or rejecte
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
 

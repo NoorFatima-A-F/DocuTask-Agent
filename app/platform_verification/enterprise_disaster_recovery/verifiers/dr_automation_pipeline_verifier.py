@@ -2,7 +2,7 @@
 Phase 3L.11: Disaster Recovery Automation Pipeline Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IDRAutomationPipelineVerifier
 from ..domain.models import (

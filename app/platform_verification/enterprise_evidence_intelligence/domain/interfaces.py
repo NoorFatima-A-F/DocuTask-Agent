@@ -3,7 +3,7 @@ Phase 3P: Enterprise Verification Evidence Intelligence System — Interfaces.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import List
 
 from .models import (
     ComplianceReport,

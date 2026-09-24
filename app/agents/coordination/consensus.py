@@ -4,8 +4,7 @@ Verifies quorum thresholds and confirms distributed consensus on decisions acros
 """
 
 from typing import List, Optional
-from uuid import UUID
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.agents.coordination.exceptions import ConsensusNotReachedError
 from app.agents.coordination.interfaces import IConsensusEngine
 from app.agents.coordination.voting import AgentVote, VotingEngine, VotingResult

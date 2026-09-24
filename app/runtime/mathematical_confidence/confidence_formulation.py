@@ -5,7 +5,7 @@ Confidence(x) = sigma(w1*OCR + w2*SchemaVal + w3*CrossDoc + w4*MemorySim + w5*Co
 """
 
 import math
-from typing import Dict, List, Any, Tuple
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 
 

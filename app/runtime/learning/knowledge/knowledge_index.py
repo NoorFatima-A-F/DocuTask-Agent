@@ -3,7 +3,7 @@ Knowledge Index for Phase 13.5 (ARLP-KIP).
 Inverted index providing fast token-based indexing for knowledge search.
 """
 
-from typing import Dict, Any, List, Set
+from typing import Dict, List, Set
 from pydantic import BaseModel, Field
 
 

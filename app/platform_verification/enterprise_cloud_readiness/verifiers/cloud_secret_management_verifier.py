@@ -2,7 +2,7 @@
 Phase 3M.9: Cloud Secret Management Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICloudSecretManagementVerifier
 from ..domain.models import (

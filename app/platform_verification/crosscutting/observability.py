@@ -3,7 +3,7 @@ OpenTelemetry-compatible Observability, Structured Logging, and Metrics Export f
 """
 import time
 import logging
-from typing import Dict, Any, List
+from typing import List
 from ..domain.models import ComponentHealth
 
 logger = logging.getLogger("EnterpriseVerificationPlatform")

@@ -2,11 +2,9 @@
 Health History Storage Engine (Part 3H.3.3.5).
 Persists and queries health lifecycle transitions, failure events, and recovery durations.
 """
-from typing import Dict, Any, List, Optional
-from datetime import datetime, timezone
+from typing import Dict, Any, List
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthEvent,
-    HealthState,
 )
 
 

@@ -8,10 +8,9 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import logging
-from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
-from app.knowledge.memory.engine import MemoryIntelligencePlatform, MemoryItem, MemoryTier
+from app.knowledge.memory.engine import MemoryIntelligencePlatform, MemoryTier
 
 logger = logging.getLogger(__name__)
 

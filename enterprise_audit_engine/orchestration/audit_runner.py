@@ -1,11 +1,10 @@
 """Audit Orchestrator & Execution Engine."""
 
-import asyncio
 import os
 import subprocess
 import time
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from datetime import datetime, timezone
 
 from ..domain.evidence.models import (
@@ -26,7 +25,6 @@ from ..analyzers.confidence_engine import ConfidenceEngine
 from ..analyzers.verification_strength_model import VerificationStrengthModel
 from ..governance.provenance_tracker import ProvenanceTracker
 from ..governance.claim_validator import ClaimValidator
-from ..governance.integrity_verifier import EvidenceIntegrityVerifier
 
 
 class AuditRunner:

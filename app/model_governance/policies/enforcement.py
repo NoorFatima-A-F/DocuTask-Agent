@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
-from app.model_governance.registry.models import Model, ModelLifecycleState, RiskLevel
+from typing import Dict, List
+from app.model_governance.registry.models import Model, ModelLifecycleState
 from app.model_governance.policies.rules import ModelGovernancePolicyRule
 
 

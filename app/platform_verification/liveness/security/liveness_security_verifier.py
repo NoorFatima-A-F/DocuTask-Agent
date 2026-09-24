@@ -4,7 +4,6 @@ Validates that liveness probe endpoints are free of sensitive information leakag
 (database hosts, api keys, credentials, connection strings, infrastructure IPs) and enforce rate limiting.
 """
 import re
-from typing import Dict, Any, List
 from app.platform_verification.liveness.domain.models import SecurityReport
 
 

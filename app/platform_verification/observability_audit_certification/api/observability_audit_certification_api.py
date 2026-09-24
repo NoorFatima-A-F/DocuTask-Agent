@@ -1,7 +1,7 @@
 """
 Phase 3H.4.12: Observability Audit Certification API
 """
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException
 from ..runtime.observability_audit_certification_runtime import ObservabilityAuditCertificationRuntime
 
 router = APIRouter(prefix="/platform-verification/observability-certification", tags=["Observability Audit & Certification"])

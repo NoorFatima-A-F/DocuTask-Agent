@@ -3,21 +3,16 @@ Tests for Centralized Structured Logging, Inverted Index Search, and Retention P
 """
 
 from datetime import datetime, timezone, timedelta
-import pytest
 
 from app.infrastructure.observability.logs.models import (
     LogLevel,
     LogRecord,
-)
-from app.infrastructure.observability.logs.ingestion import (
-    LogIngestionPipeline,
 )
 from app.infrastructure.observability.logs.indexing import (
     LogIndex,
 )
 from app.infrastructure.observability.logs.retention import (
     LogRetentionManager,
-    LogRetentionPolicy,
 )
 
 

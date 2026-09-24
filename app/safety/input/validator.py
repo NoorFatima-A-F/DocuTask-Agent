@@ -2,7 +2,7 @@
 
 from typing import List, Tuple
 from ..gateway.decision import SafetyCategory, ViolationSeverity, SafetyViolation
-from .classifier import InputIntentClassifier, InputIntent
+from .classifier import InputIntentClassifier
 from .detectors import MaliciousPatternDetector
 
 

@@ -3,8 +3,6 @@ Hierarchical Task Decomposition Engine.
 Performs recursive hierarchical decomposition from Goal -> Objectives -> Milestones -> Tasks -> Atomic Tasks.
 """
 
-from typing import List
-from uuid import uuid4
 from app.agents.planner.hierarchy import (
     AbstractionLevel,
     DecompositionNode,

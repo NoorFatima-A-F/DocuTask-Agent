@@ -13,12 +13,10 @@ AutonomyScore = (Planning + Allocation + Recovery + Reflection + Memory) / 5
 
 from __future__ import annotations
 
-import asyncio
 import os
 import sys
 import time
 from dataclasses import dataclass
-from typing import Any, Dict
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
@@ -34,10 +32,8 @@ from app.agents.memory.intelligence import (
 )
 from app.agents.planning import (
     AutonomousPlanner,
-    CapabilityDiscovery,
 )
 from app.agents.reflection import (
-    CorrectionAction,
     ReflectionAgent,
 )
 from app.agents.workflow.task_graph import (

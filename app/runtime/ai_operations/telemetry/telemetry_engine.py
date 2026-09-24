@@ -8,7 +8,6 @@ import random
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 from app.runtime.ai_operations.models.schemas import (
-    Span,
     SpanType,
     SpanStatus,
     ExecutionTrace,
@@ -16,8 +15,6 @@ from app.runtime.ai_operations.models.schemas import (
     AgentHealthStatus,
 )
 from app.runtime.ai_operations.models.events import (
-    AIOpsEvent,
-    AIOpsEventType,
     AIOpsEventBus,
 )
 from app.runtime.ai_operations.telemetry.collectors import (
@@ -102,7 +99,7 @@ class TelemetryEngine:
         success: bool = True,
         error_msg: Optional[str] = None,
     ) -> ExecutionTrace:
-        meta = self._agents.get(agent_id, {"name": agent_id, "role": "Autonomous Agent"})
+        self._agents.get(agent_id, {"name": agent_id, "role": "Autonomous Agent"})
         trace = self.collector.start_trace(
             session_id=f"sess_{random.randint(1000, 9999)}",
             agent_id=agent_id,

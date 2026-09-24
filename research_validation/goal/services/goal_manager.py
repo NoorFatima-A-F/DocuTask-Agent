@@ -4,7 +4,7 @@ Goal Manager Service
 Primary application service providing CRUD, validation, revisioning, and lifecycle management for Goals.
 """
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List, Optional
 from research_validation.goal.models.goal import (
     Goal, GoalType, PriorityLevel, GoalStatus
 )
@@ -14,14 +14,13 @@ from research_validation.goal.models.success_criteria import SuccessCriterion
 from research_validation.goal.models.stopping_condition import StoppingCondition
 from research_validation.goal.models.capability_requirement import CapabilityRequirement
 from research_validation.goal.models.dependency import GoalDependency
-from research_validation.goal.models.evidence_requirement import EvidenceRequirement
 from research_validation.goal.interfaces.repository import IGoalRepository
 from research_validation.goal.interfaces.event_bus import IEventBus
 from research_validation.goal.interfaces.id_generator import IIdGenerator
 from research_validation.goal.interfaces.clock import IClock
 from research_validation.goal.services.goal_validator import GoalValidator
 from research_validation.goal.events.goal_events import (
-    GoalCreatedEvent, GoalValidatedEvent, GoalRejectedEvent, GoalUpdatedEvent
+    GoalCreatedEvent, GoalValidatedEvent, GoalRejectedEvent
 )
 from research_validation.goal.exceptions import GoalValidationError, EntityNotFoundError
 

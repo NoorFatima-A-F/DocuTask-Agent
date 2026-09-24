@@ -1,8 +1,6 @@
 """
 Unit and Integration Tests for Foundational Verification Platform Architecture (FVPA)
 """
-import pytest
-from app.platform_verification.runtime.verification_master import verification_master
 from app.platform_verification.core.lifecycle_orchestrator import lifecycle_orchestrator
 from app.platform_verification.core.statistical_engine import statistical_engine
 from app.platform_verification.core.quality_gate_engine import quality_gate_engine

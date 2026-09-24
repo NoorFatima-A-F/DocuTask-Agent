@@ -1,7 +1,6 @@
 """PII Masking Engine (Partial Obfuscation)."""
 
-from typing import List
-from .pii_detector import PIIDetector, PIIType, PIIMatch
+from .pii_detector import PIIDetector, PIIType
 
 
 class DataMasker:

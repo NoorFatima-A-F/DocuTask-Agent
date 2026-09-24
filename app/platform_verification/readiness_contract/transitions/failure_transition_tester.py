@@ -6,7 +6,6 @@ Test 2: Database Failure (READY -> NOT_READY)
 Test 3: Recovery (NOT_READY -> RECOVERING -> READY)
 Test 4: Optional Dependency Failure (READY -> DEGRADED)
 """
-from typing import Dict, Any, List
 from app.platform_verification.readiness_contract.domain.models import (
     FailureTransitionReport,
     ReadinessState,

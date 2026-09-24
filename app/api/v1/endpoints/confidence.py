@@ -4,8 +4,7 @@ REST API Endpoints for Phase 13.3 Autonomous Scientific Confidence Engine, Runti
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Query
 
 from app.runtime.confidence.api.confidence_api_service import ConfidenceAPIService
 

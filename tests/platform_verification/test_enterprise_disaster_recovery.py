@@ -2,8 +2,6 @@
 Phase 3L: Comprehensive Test Suite for Enterprise Backup, Disaster Recovery & Continuity Framework.
 """
 
-import json
-import os
 from pathlib import Path
 import pytest
 from fastapi import FastAPI
@@ -11,14 +9,12 @@ from fastapi.testclient import TestClient
 
 from app.platform_verification.enterprise_disaster_recovery.domain.models import (
     BackupSecurityReport,
-    BaseVerificationReport,
     BusinessImpactAnalysisReport,
     CheckResult,
     CompleteSystemRestoreReport,
     ConfigurationRecoveryReport,
     DatabaseRecoveryReport,
     DisasterRecoveryArchitectureReport,
-    DisasterRecoveryScorecard,
     DisasterRecoveryTier,
     DRAutomationReport,
     DRFailureSimulationReport,

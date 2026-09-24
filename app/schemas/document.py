@@ -4,7 +4,7 @@ Document Request and Response Pydantic Schemas.
 
 from datetime import datetime
 from enum import Enum
-from typing import List, Optional, Generic, TypeVar
+from typing import List, Optional, TypeVar
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, Field
 

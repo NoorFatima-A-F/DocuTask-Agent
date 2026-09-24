@@ -2,7 +2,7 @@
 Autonomous Knowledge Improvement Engine
 Self-improves knowledge base, reconciles conflicts, and recommends archiving stale assets.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..models.schemas import KnowledgeLifecycleState
 from ..quality.knowledge_quality_intelligence import KnowledgeQualityIntelligence
 from ..registry.knowledge_registry import KnowledgeRegistryService

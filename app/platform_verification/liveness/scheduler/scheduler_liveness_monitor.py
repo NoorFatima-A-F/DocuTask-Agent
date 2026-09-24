@@ -4,7 +4,6 @@ Monitors periodic scheduler ticks, next execution windows, and detects missed jo
 """
 import time
 from datetime import datetime, timezone, timedelta
-from typing import Dict, Any
 from app.platform_verification.liveness.domain.models import SchedulerLivenessReport
 
 

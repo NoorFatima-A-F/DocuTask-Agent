@@ -2,7 +2,6 @@
 Automation metrics and straight-through processing (STP) calculator.
 """
 
-from typing import Dict, Any
 from app.business_value_verification.domain.models import AutomationMetrics
 
 

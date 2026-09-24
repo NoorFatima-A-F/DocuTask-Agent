@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Any, List, Optional, Set, Union
+from typing import Any, Optional, Set
 from pydantic import BaseModel, Field, model_validator
-from app.model_governance.registry.models import ModelCategory, ModelProvider, RiskLevel
+from app.model_governance.registry.models import RiskLevel
 
 
 class ModelGovernancePolicyRule(BaseModel):

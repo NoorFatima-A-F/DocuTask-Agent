@@ -1,8 +1,8 @@
 """Risk Scoring Formula, Factor Weighting, and Category Taxonomy."""
 
 from enum import Enum
-from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from typing import Dict
+from pydantic import BaseModel
 
 
 class RiskCategory(str, Enum):

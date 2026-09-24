@@ -5,7 +5,7 @@ Domain Models and Schemas for Phase V12 — Enterprise AI Platform Certification
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 
 
 class CertificationLevel(str, Enum):

@@ -5,7 +5,7 @@ Verifies multi-signal incident detection, alert triggering, dashboard state tran
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.ai_health_monitoring.domain.interfaces import (
     IAIIncidentDetectorVerifier,

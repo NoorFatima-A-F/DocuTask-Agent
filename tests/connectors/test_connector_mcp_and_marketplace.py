@@ -2,7 +2,6 @@
 Tests for MarketplaceRegistry, ConnectorCertification, MCPGateway, and ProtocolAdapters.
 """
 
-import pytest
 from app.connectors.adapters.base import GraphQLAdapter, RESTAdapter, SOAPAdapter, gRPCAdapter
 from app.connectors.certification.framework import ConnectorCertification
 from app.connectors.core.models import ConnectorCategory

@@ -6,17 +6,14 @@ from app.platform_verification.environment_strategy.domain.models import (
     EnvironmentClassification, EnvironmentDefinition, EnvironmentProvisioningRequest,
     EnvironmentProvisioningResult, ChaosExperimentSpec, ChaosExperimentResult,
     SecurityLabExperimentSpec, SecurityLabExperimentResult, DeploymentPromotionRecord,
-    EnvironmentHealthState, EnvironmentMetadataRecord
+    EnvironmentHealthState
 )
-from app.platform_verification.environment_strategy.core.registry import environment_registry, EnvironmentMetadataRegistry
-from app.platform_verification.environment_strategy.core.provisioner import environment_provisioner, EnvironmentProvisioner
-from app.platform_verification.environment_strategy.core.chaos_engine import chaos_engine, ChaosEngineeringEngine
-from app.platform_verification.environment_strategy.core.security_lab import security_lab_runner, SecurityLaboratoryRunner
-from app.platform_verification.environment_strategy.core.deployment import deployment_orchestrator, EnvironmentDeploymentOrchestrator
-from app.platform_verification.environment_strategy.core.quality_gates import quality_gate_engine, EnvironmentQualityGateEngine
-from app.platform_verification.environment_strategy.core.observability import environment_observability, EnvironmentObservabilityService
-from app.platform_verification.environment_strategy.core.recovery import environment_recovery, EnvironmentRecoveryService
-from app.platform_verification.environment_strategy.core.reproducibility import environment_reconstruction, EnvironmentReconstructionEngine
+from app.platform_verification.environment_strategy.core.registry import environment_registry
+from app.platform_verification.environment_strategy.core.provisioner import environment_provisioner
+from app.platform_verification.environment_strategy.core.chaos_engine import chaos_engine
+from app.platform_verification.environment_strategy.core.security_lab import security_lab_runner
+from app.platform_verification.environment_strategy.core.deployment import deployment_orchestrator
+from app.platform_verification.environment_strategy.core.observability import environment_observability
 
 
 class EnterpriseEnvironmentStrategyRuntime:

@@ -3,7 +3,7 @@
 import ast
 import os
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 
 class TestQualityAnalyzer:

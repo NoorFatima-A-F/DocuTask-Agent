@@ -55,7 +55,7 @@ class PrivilegeEscalationVerifier:
             }
         ]
         
-        all_blocked = all(a["blocked"] for a in attacks)
+        all(a["blocked"] for a in attacks)
         
         for atk in attacks:
             run = SecurityVerificationRun(

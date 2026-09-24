@@ -1,9 +1,8 @@
 """
 Domain Models & Value Objects for Quality.
 """
-from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from pydantic import BaseModel, Field as PydField
 import uuid
 

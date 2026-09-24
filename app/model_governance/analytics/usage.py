@@ -7,7 +7,7 @@ and model-level workload distribution.
 from __future__ import annotations
 
 import time
-from typing import Dict, List, Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 
 

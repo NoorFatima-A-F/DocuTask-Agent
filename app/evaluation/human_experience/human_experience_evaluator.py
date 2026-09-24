@@ -1,7 +1,7 @@
 """Part J & K: Human Experience & Comparison Benchmark Evaluator."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IHumanExperienceEvaluator
 from ..domain.models import (
     ApproachComparison,

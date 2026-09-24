@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import logging
 from enum import Enum
-from typing import Dict, Optional, Set
+from typing import Dict, Set
 
 logger = logging.getLogger(__name__)
 

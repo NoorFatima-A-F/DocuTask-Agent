@@ -8,7 +8,6 @@ import sys
 import os
 import io
 import argparse
-import json
 
 # Enforce UTF-8 stdout for Windows terminals
 if sys.platform == "win32":
@@ -23,7 +22,6 @@ from app.platform_verification.ai_resilience.simulation.ai_failure_simulator imp
 from app.platform_verification.ai_resilience.chaos_runner.ai_chaos_runner import (
     AIChaosRunner,
 )
-from app.platform_verification.ai_resilience.domain.models import ChaosScenarioType
 
 
 def main():

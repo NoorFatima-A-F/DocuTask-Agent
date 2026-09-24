@@ -4,7 +4,7 @@ Calculates future failure probabilities and classifies risk into LOW (0-30%),
 MEDIUM (31-70%), HIGH (71-90%), and CRITICAL (91-100%) tiers.
 """
 from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
+from typing import List
 from app.platform_verification.predictive_health_intelligence.domain.models import (
     RiskLevel,
     RiskPredictionItem,

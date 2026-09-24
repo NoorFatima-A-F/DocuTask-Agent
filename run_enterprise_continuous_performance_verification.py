@@ -5,10 +5,8 @@ Executes all 12 continuous performance verification phases, evaluates weighted s
 and exports JSON evidence reports with cryptographic SHA-256 integrity manifest.
 """
 
-import json
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.continuous_performance_engineering.runtime.continuous_performance_runtime import (
     ContinuousPerformanceRuntime,

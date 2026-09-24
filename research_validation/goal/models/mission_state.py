@@ -7,7 +7,7 @@ Defines the 14 formal states of the mission lifecycle and transition validation 
 from enum import Enum
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Set
+from typing import Dict, Set
 
 from research_validation.goal.exceptions import InvalidStateTransitionError
 

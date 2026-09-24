@@ -2,7 +2,6 @@
 Backup Readiness Scoring Engine for Backup Certification Framework (Part 3G.2G).
 Calculates weighted scores across 7 dimensions and certifies enterprise readiness tiers.
 """
-from typing import Dict, Any
 from app.platform_verification.backup_certification.domain.models import (
     BackupCertificationTier,
     BackupReadinessScorecard,

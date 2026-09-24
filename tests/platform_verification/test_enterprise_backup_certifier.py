@@ -4,15 +4,12 @@ Part 3G.2G — Backup Readiness Certification System for DocuTask Agent.
 """
 import pytest
 import os
-import json
 import tempfile
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
 from app.platform_verification.backup_certification.domain.models import (
     BackupCertificationTier,
-    RiskSeverity,
-    CollectedBackupEvidence,
 )
 from app.platform_verification.backup_certification.collector.evidence_collector import (
     EvidenceCollector,

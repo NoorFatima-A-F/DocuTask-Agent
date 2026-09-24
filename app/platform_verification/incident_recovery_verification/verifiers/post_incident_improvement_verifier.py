@@ -2,7 +2,6 @@
 Phase 3H.4.9.10: Post Incident Improvement Verifier
 """
 from datetime import datetime, timedelta
-from typing import Dict, Any, List
 from ..domain.interfaces import IPostIncidentImprovementVerifier
 from ..domain.models import (
     PostIncidentImprovementReport,

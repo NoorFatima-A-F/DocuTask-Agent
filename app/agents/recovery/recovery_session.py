@@ -3,8 +3,7 @@ Recovery Session Aggregate Root.
 Maintains state, diagnosed failure, selected strategy, and resolution history for a recovery operation.
 """
 
-from typing import Any, Dict, Optional
-from uuid import UUID
+from typing import Optional
 from pydantic import BaseModel, Field
 from app.agents.recovery.failure import Failure
 from app.agents.recovery.lifecycle import RecoveryLifecycleState

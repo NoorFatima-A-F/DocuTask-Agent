@@ -5,7 +5,6 @@ Distributes incoming tasks across qualified agents using Round-Robin, Least-Load
 
 from enum import Enum
 from typing import List, Optional
-from uuid import UUID
 from app.agents.coordination.agent import Agent
 
 

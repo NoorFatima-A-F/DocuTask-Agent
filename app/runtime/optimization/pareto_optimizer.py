@@ -5,7 +5,6 @@ Implements non-dominated sorting, Pareto dominance filtering, and hypervolume co
 
 from typing import Dict, List, Any, Tuple
 from dataclasses import dataclass
-import math
 
 
 @dataclass

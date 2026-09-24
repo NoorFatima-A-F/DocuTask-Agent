@@ -5,10 +5,8 @@ Manages tool definitions, JSON schemas, rate limits, health checks, and capabili
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import json
 import re
 from typing import Any, Dict, List, Optional
-import uuid
 
 from app.runtime.execution.events.execution_events import (
     ExecutionEvent,

@@ -2,7 +2,6 @@
 Network Partition Chaos Injector for Part 3G.3.
 Simulates network partition between FastAPI backend and database cluster, testing retries and circuit breaking.
 """
-from typing import Dict, Any
 from app.platform_verification.disaster_recovery_simulation.domain.models import (
     ChaosExperimentType,
     ChaosExperimentResult,

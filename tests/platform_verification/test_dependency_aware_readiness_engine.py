@@ -1,9 +1,7 @@
 """
 Pytest Test Suite for Part 3H.3.2: Enterprise Dependency-Aware Readiness Decision Engine Verification Framework
 """
-import os
 import json
-import pytest
 
 from app.platform_verification.readiness_engine.domain.models import (
     ReadinessState,
@@ -23,8 +21,6 @@ from app.platform_verification.readiness_engine.simulation.readiness_failure_sim
 from app.platform_verification.readiness_engine.orchestration.k8s_readiness_verifier import KubernetesReadinessVerifier
 from app.platform_verification.readiness_engine.security.readiness_security_auditor import ReadinessSecurityAuditor
 from app.platform_verification.readiness_engine.observability.readiness_metrics_exporter import ReadinessMetricsExporter
-from app.platform_verification.readiness_engine.scoring.readiness_quality_scorer import ReadinessQualityScorer
-from app.platform_verification.readiness_engine.exporter.readiness_evidence_writer import ReadinessEvidenceWriter
 from app.platform_verification.readiness_engine.runtime.readiness_engine_runtime import ReadinessEngineRuntime
 
 
@@ -296,7 +292,7 @@ def test_quality_scorer_and_certification():
 
 def test_evidence_writer_generates_all_files(tmp_path):
     runtime = ReadinessEngineRuntime(evidence_dir=str(tmp_path))
-    results = runtime.execute_full_verification()
+    runtime.execute_full_verification()
 
     expected_files = [
         "readiness_engine_report.json",

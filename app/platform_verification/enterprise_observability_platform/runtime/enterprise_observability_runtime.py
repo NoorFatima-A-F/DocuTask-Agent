@@ -22,9 +22,6 @@ from app.platform_verification.enterprise_observability_platform.scoring import 
 from app.platform_verification.enterprise_observability_platform.exporter import (
     EnterpriseObservabilityExporter,
 )
-from app.platform_verification.enterprise_observability_platform.domain.models import (
-    GlobalOperationsCertificationReport,
-)
 
 
 class EnterpriseObservabilityRuntime:

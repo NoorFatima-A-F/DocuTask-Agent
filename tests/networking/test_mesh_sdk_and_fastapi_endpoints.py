@@ -1,6 +1,5 @@
 """Tests for Mesh SDK, Decorators, and FastAPI REST Endpoints."""
 
-import pytest
 
 from app.networking.api.routes import (
     register_service,
@@ -24,9 +23,9 @@ from app.networking.api.schemas import (
     ServiceRegistrationRequest,
     TrafficSplitRequest,
 )
-from app.networking.mesh.data_plane import MeshRequest, MeshResponse
+from app.networking.mesh.data_plane import MeshResponse
 from app.networking.sdk.client import MeshClient
-from app.networking.sdk.decorators import circuit_protected, mesh_endpoint, mesh_service, with_retry
+from app.networking.sdk.decorators import mesh_endpoint, mesh_service, with_retry
 
 
 def test_mesh_client_end_to_end_call():

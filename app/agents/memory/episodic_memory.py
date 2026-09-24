@@ -3,7 +3,7 @@ Episodic Memory Sub-Tier.
 Stores chronological execution events, past tool calls, and agent experience history.
 """
 
-from typing import Any, List, Optional
+from typing import Any, Optional
 from app.agents.memory.providers import BaseMemoryProvider, InMemoryProvider
 from app.agents.memory.repository import MemoryItem
 

@@ -3,13 +3,11 @@ Enterprise Task Scheduler & Multi-Tier Priority Queues.
 Supports 10 dedicated queues: critical, high, normal, low, background, ai, human, connector, retry, dead-letter.
 """
 
-import asyncio
 from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
-import uuid
+from typing import Any, Dict, Optional
 from ..domain.models import TaskPriority, TaskType
 
 

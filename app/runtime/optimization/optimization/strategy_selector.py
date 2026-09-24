@@ -3,7 +3,7 @@ Strategy Selector for Phase 13.6 (ARIA-EOP).
 Evaluates candidate execution strategies under multi-objective scalarization and selects Pareto-optimal plans.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import List
 import uuid
 from pydantic import BaseModel, Field
 

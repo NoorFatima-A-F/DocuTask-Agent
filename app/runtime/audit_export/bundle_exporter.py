@@ -9,11 +9,10 @@ from __future__ import annotations
 import hashlib
 import json
 import time
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Any, Dict, List
 
 from app.runtime.decision_ledger.decision_ledger import global_decision_ledger
-from app.runtime.evidence.artifact_registry import global_artifact_registry
 from app.runtime.evidence.evidence_collector import global_evidence_collector
 from app.runtime.reproducibility.snapshot_manager import global_snapshot_manager
 from app.runtime.tool_ledger.tool_execution_ledger import global_tool_ledger

@@ -8,14 +8,14 @@ from datetime import datetime, timezone
 
 from tooling.governance.repository_validator import RepositoryTopologyValidator
 from app.shared_kernel import (
-    Result, Ok, Err,
-    EntityId, VerificationRunId, DatasetId, EvidenceId, CertificateId,
-    TimeProvider, SystemTimeProvider, DeterministicTimeProvider,
-    BaseEntity, ValueObject,
+    Ok, Err,
+    VerificationRunId, DatasetId, EvidenceId, CertificateId,
+    DeterministicTimeProvider,
     CorrelationContext, get_current_correlation, set_current_correlation,
     PlatformVerificationError, InvariantViolationError
 )
-from app.infrastructure import ContentAddressableStore, TelemetryAdapter
+from app.infrastructure.storage.cas_store import ContentAddressableStore
+from app.infrastructure.telemetry.otel_adapter import TelemetryAdapter
 from app.interfaces import run_verification_cli, PlatformVerificationApiRouter
 
 
@@ -78,7 +78,7 @@ def test_shared_kernel_deterministic_time():
 
 def test_shared_kernel_correlation_context():
     ctx = CorrelationContext(tenant_id="tenant-acme", originator="ci_runner")
-    token = set_current_correlation(ctx)
+    set_current_correlation(ctx)
     try:
         active = get_current_correlation()
         assert active.tenant_id == "tenant-acme"

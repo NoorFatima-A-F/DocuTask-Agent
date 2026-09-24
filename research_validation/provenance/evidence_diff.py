@@ -13,9 +13,8 @@ Compares two scientific evidence bundles and highlights:
 
 from __future__ import annotations
 
-import json
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Tuple
 
 from research_validation.provenance.provenance_models import EvidenceNode, EvidenceQualityLevel
 

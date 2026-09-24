@@ -12,10 +12,9 @@ Renders multi-format visualizations of scientific evidence graphs:
 from __future__ import annotations
 
 import json
-from typing import Any, Dict, List, Optional
 
 from research_validation.provenance.evidence_graph import EvidenceGraph
-from research_validation.provenance.provenance_models import EvidenceNode, LineageStage
+from research_validation.provenance.provenance_models import LineageStage
 
 
 class ProvenanceVisualizer:

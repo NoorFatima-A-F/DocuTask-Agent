@@ -70,7 +70,7 @@ class OCRPipeline:
             pages = await self.pdf_processor.process_pdf(file_content)
 
         else:
-            logger.error(f"Unsupported document format encountered: ext='{file_extension}', mime='{mime_type}'")
+            logger.error(f"Unsupported document format encountered: ext='{sanitize_log_input(file_extension)}', mime='{sanitize_log_input(mime_type)}'")
             raise UnsupportedFileTypeException(f"Unsupported document format '{file_extension}'")
 
         if not pages:

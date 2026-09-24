@@ -2,8 +2,7 @@
 Tests for Runtime Truth Ledger (Pillar 1).
 """
 
-import pytest
-from app.runtime.truth.ledger import TruthLedger, TruthLedgerEntry
+from app.runtime.truth.ledger import TruthLedger
 
 
 def test_truth_ledger_append_and_hash_chain():
@@ -34,7 +33,7 @@ def test_truth_ledger_append_and_hash_chain():
 def test_truth_ledger_tamper_detection():
     ledger = TruthLedger()
     e1 = ledger.append_event(mission_id="msn_1", event_type="PLANNER_DECISION")
-    e2 = ledger.append_event(mission_id="msn_1", event_type="TOOL_EXECUTION")
+    ledger.append_event(mission_id="msn_1", event_type="TOOL_EXECUTION")
 
     # Simulate retroactive tamper
     e1.planner_version = "v9.9.9_tampered"

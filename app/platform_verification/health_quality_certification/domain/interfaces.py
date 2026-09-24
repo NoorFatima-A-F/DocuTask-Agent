@@ -2,7 +2,7 @@
 Phase 3H.5.11: Domain Interfaces for Health Quality Scoring & Certification Framework
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict
 from .models import (
     LivenessQualityMetrics,
     ReadinessQualityMetrics,
@@ -15,9 +15,7 @@ from .models import (
     SREReliabilityMetrics,
     RegressionReport,
     DeploymentGateReport,
-    HealthQualityCertificationReport,
     HealthQualityScorecard,
-    CategoryScoreItem,
 )
 
 

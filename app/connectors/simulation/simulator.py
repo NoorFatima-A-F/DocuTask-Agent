@@ -6,7 +6,7 @@ Enables workflow and multi-agent execution testing without live external APIs, A
 from __future__ import annotations
 
 import logging
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Dict
 from app.connectors.core.models import ExecutionResult
 
 logger = logging.getLogger(__name__)

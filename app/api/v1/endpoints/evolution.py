@@ -9,20 +9,20 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, Query, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 # Legacy Phase 11.x imports
-from app.runtime.strategy_discovery.graph_synthesis import HTNGraphSynthesizer, SynthesizedDAG
+from app.runtime.strategy_discovery.graph_synthesis import HTNGraphSynthesizer
 from app.runtime.strategy_discovery.mutation import EvolutionaryGraphMutator, MutationResult
-from app.runtime.strategy_discovery.evaluation import StrategyEvaluator, StrategyEvaluationReport
+from app.runtime.strategy_discovery.evaluation import StrategyEvaluator
 from app.runtime.strategy_discovery.repository import StrategyRepository, SynthesizedStrategyRecord
 from app.runtime.evolution.planner_evolution_engine import PlannerSelfEvolutionEngine, EvolutionCycleReport
 from app.runtime.evolution.planner_version_registry import PlannerVersionRegistry, PlannerGeneration
 from app.runtime.simulation.cluster_simulator import DigitalTwinClusterSimulator, DigitalTwinClusterReport
-from app.runtime.simulation.scale_simulator import MonteCarloScaleSimulator, MonteCarloScaleReport
+from app.runtime.simulation.scale_simulator import MonteCarloScaleSimulator
 from app.runtime.causal.structural_causal_model import StructuralCausalModel, CausalNode
-from app.runtime.causal.do_calculus import DoCalculusEngine, InterventionResult, CounterfactualResult
-from app.runtime.causal.causal_discovery import CausalDiscoveryEngine, CausalDiscoveryReport
+from app.runtime.causal.do_calculus import DoCalculusEngine, InterventionResult
+from app.runtime.causal.causal_discovery import CausalDiscoveryEngine
 from app.runtime.deliberation.council import DeliberationCouncilCoordinator, DeliberationSessionSummary
 
 # Phase 13.13 Subsystem Engines

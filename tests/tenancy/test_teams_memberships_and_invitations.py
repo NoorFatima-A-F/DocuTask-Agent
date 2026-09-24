@@ -1,8 +1,6 @@
 """Test Teams, Memberships, and Invitation System."""
 
-import pytest
 from app.tenancy.core.models import MembershipRole, InvitationState
-from app.tenancy.core.exceptions import TenancyError
 from app.tenancy.teams.team_manager import TeamManager
 from app.tenancy.teams.membership_manager import MembershipManager
 from app.tenancy.teams.invitation_manager import InvitationManager

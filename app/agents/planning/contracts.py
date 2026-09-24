@@ -3,7 +3,7 @@ Core Planning Domain Contracts and Aggregate Models.
 Defines Plan, PlanReference, PlanningRequest, PlanningResult, and PlanningSession.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.planning.constraints import PlanConstraint

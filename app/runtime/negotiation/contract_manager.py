@@ -3,7 +3,7 @@ AMAEOP Pillar 3 - Formal Resource Contract Manager
 Maintains immutable signed resource contracts between departments with SLA penalties and cryptographic validation.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 import hashlib
 import time

@@ -1,7 +1,6 @@
 """
 Phase 3H.5.4: Root Cause Analysis Verifier
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IRootCauseAnalysisVerifier
 from ..domain.models import RCAReport, RCAResult
 

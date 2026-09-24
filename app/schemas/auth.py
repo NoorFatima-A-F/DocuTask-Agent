@@ -6,7 +6,6 @@ Utilizes Pydantic v2 validation models.
 import re
 from datetime import datetime
 from uuid import UUID
-from typing import Optional
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 from app.core.config import settings
 

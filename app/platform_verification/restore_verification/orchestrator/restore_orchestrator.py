@@ -1,8 +1,6 @@
 """
 Restore Orchestrator Engine for Automated Restore Verification System (Part 3G.2E).
 """
-import time
-from typing import List, Dict, Any, Optional
 
 from app.platform_verification.restore_verification.domain.models import (
     RestoreExecutionMode,

@@ -2,7 +2,6 @@
 API Integration Tests for Replay, Decision, Audit, and Export Endpoints.
 """
 
-import pytest
 from fastapi.testclient import TestClient
 from app.main import app
 

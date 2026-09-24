@@ -21,7 +21,7 @@ class EnterpriseCleanArchASTScanner(ICleanArchitectureScanner):
 
     def scan_codebase(self, root_dir: str) -> List[CleanArchDependencyEdge]:
         edges: List[CleanArchDependencyEdge] = []
-        root_path = Path(root_dir).expanduser().resolve()
+        root_path = Path(root_dir) if root_dir else Path.cwd()
 
         for dirpath, _, filenames in os.walk(root_path):
             if any(p in dirpath for p in [".git", "__pycache__", ".pytest_cache", "venv", ".venv"]):

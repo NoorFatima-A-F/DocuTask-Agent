@@ -1,7 +1,7 @@
 """Cluster Labeling and Scheduling Metadata System."""
 
 import re
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 from pydantic import BaseModel, Field
 
 

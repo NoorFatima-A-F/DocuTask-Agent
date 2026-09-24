@@ -6,7 +6,7 @@ Rule-based and heuristic pattern matchers for PII, Financial, Healthcare, and Le
 from __future__ import annotations
 
 import re
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Tuple
 from app.data_governance.registry.models import SensitivityCategory
 
 

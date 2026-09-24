@@ -1,6 +1,6 @@
 """Escalation Event Handlers and Alert Generation."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid

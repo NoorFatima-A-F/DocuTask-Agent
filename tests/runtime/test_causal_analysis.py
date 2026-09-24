@@ -2,7 +2,6 @@
 Unit and Integration Tests for SCM & Pearl's do-Calculus (ASVSP Pillar 7).
 """
 
-import pytest
 from app.runtime.causal_analysis import (
     StructuralCausalModel,
     DoCalculusEngine,

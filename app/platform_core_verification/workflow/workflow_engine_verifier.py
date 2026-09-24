@@ -4,7 +4,7 @@ Verifies Conditional Branching, Parallel Fan-Out/Fan-In Sync, Human-in-the-Loop 
 """
 
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,

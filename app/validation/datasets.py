@@ -3,7 +3,7 @@ Gold Dataset System & Annotation Loader Module.
 Provides curated gold standard ground truth evaluation datasets across document categories.
 """
 
-from typing import Dict, List
+from typing import List
 from app.validation.schemas import DatasetMetadata, FieldAnnotation, GoldDatasetItem
 
 

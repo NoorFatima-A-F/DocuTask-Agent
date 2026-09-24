@@ -2,11 +2,9 @@
 Unit and Integration Tests for Policy Self-Evolution & Rollback (ASVSP Pillar 8).
 """
 
-import pytest
 from app.runtime.self_evolution import (
     PolicyLifecycleManager,
     PolicyMutationGenerator,
-    RollbackManager,
     SelfEvolutionEngine,
 )
 

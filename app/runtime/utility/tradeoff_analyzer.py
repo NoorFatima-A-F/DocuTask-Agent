@@ -3,8 +3,7 @@ Scientific Utility Engine - Tradeoff Analyzer
 Analyzes Marginal Rate of Substitution (MRS) and opportunity costs between competing objectives.
 """
 
-from typing import Dict, Any, List, Tuple
-import math
+from typing import Dict
 
 
 class TradeoffAnalyzer:

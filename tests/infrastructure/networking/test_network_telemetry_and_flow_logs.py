@@ -1,6 +1,5 @@
 """Tests for Network Telemetry and Flow Log Collection."""
 
-import pytest
 from app.infrastructure.networking.telemetry import (
     NetworkTelemetryCollector,
     NetworkFlowLogger,

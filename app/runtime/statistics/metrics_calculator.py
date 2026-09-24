@@ -3,7 +3,7 @@ Scientific Statistics - Metrics Calculator
 Calculates summary percentiles, variance, skewness, kurtosis, and confidence intervals.
 """
 
-from typing import List, Dict, Any
+from typing import List, Dict
 import math
 
 

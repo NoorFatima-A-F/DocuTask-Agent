@@ -3,10 +3,7 @@ DocuTask Agent - WebSocket Event Streaming Protocol
 Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
-from typing import Dict, Any, List
-import asyncio
-from app.runtime.events.models.event import DomainEvent
-from app.runtime.events.bus.event_bus import domain_event_bus
+from typing import Any, List
 
 
 class WebSocketStreamManager:

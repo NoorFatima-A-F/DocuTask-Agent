@@ -3,7 +3,7 @@ Domain Models for Multi-Region / Cloud Failover Verification Framework (Part 3G.
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 
 
 class CloudRegion(str, Enum):

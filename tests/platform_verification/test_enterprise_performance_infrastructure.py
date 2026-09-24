@@ -1,10 +1,8 @@
 """Comprehensive Test Suite for Phase 3J.6 Enterprise Performance Infrastructure Verification Framework."""
 
-import json
 import os
 import shutil
 import tempfile
-import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
@@ -15,7 +13,6 @@ from app.platform_verification.enterprise_performance_infrastructure.domain.mode
     APILatencyReport,
     BaseVerificationReport,
     CapacityBoundaryReport,
-    CategoryScore,
     DatabasePerformanceReport,
     DegradationAnalysisReport,
     E2EWorkflowReport,

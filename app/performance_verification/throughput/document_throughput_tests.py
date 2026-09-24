@@ -2,7 +2,7 @@
 Document throughput and queue capacity benchmarks.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from app.performance_verification.domain.models import (
     ThroughputResult,
     PerformanceStatus,

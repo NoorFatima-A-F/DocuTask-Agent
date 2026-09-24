@@ -10,7 +10,6 @@ from ..domain.models import (
     VerificationStatus,
     PerformanceAssertionResult,
     PillarPerformanceResult,
-    AICostMetric,
 )
 
 

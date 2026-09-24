@@ -7,7 +7,7 @@ FREE -> DEVELOPER -> PROFESSIONAL -> BUSINESS -> ENTERPRISE -> CUSTOM
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Dict, Optional
+from typing import Dict
 from app.tenancy.core.models import Subscription, SubscriptionTier
 from app.tenancy.core.exceptions import SubscriptionExpiredError
 

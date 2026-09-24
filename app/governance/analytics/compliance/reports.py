@@ -1,10 +1,10 @@
 """Compliance Audit Readiness Assessment and Gap Analysis."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
-from .evaluator import ComplianceEvaluator, ComplianceFramework, FrameworkComplianceScore
+from .evaluator import ComplianceEvaluator, FrameworkComplianceScore
 
 
 class ComplianceGap(BaseModel):

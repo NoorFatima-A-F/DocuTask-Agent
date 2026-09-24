@@ -5,7 +5,6 @@ Monitors error rates and triggers automated rollback if error thresholds are exc
 
 from __future__ import annotations
 
-from typing import Dict, Optional
 from app.prompts.deployment.publisher import DeploymentEnvironment, PromptPublisher
 from app.prompts.versions.rollback import PromptRollbackService
 

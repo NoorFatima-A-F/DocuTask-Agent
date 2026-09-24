@@ -3,7 +3,7 @@ AMAEOP Pillar 7 - Organizational Learning Synthesizer
 Synthesizes cross-department learnings into enterprise policy evolutions and systemic operational gains.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from app.runtime.org_learning.department_memory import department_memory_manager
 from app.runtime.org_learning.department_reflection import DepartmentReflectionEngine
 

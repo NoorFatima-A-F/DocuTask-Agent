@@ -1,6 +1,5 @@
 """Tests for Resilience, Circuit Breakers, and Exponential Retries."""
 
-import pytest
 from app.networking.mesh.data_plane import MeshRequest, MeshResponse
 from app.networking.resilience.circuit_breaker import (
     CircuitBreaker,

@@ -1,7 +1,7 @@
 """Part C: API Chain Verification."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IAPIChainVerifier
 from ..domain.models import (
     APIChainReport,

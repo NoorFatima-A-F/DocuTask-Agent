@@ -7,9 +7,8 @@ to their target folders:
 - resilience_certification/
 """
 import json
-import os
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 from app.platform_verification.resilience_governance.domain.models import (
     OwnershipValidationReport,

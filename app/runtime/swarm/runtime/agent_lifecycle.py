@@ -5,7 +5,7 @@ Manages the 11-state agent lifecycle transitions and enforces valid lifecycle in
 
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Set, Tuple, Union
-from app.runtime.swarm.events.swarm_events import AgentLifecycleState, AgentState
+from app.runtime.swarm.events.swarm_events import AgentLifecycleState
 
 
 class AgentLifecycleManager:

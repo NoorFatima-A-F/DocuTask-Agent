@@ -2,7 +2,6 @@
 Restore Capability Analyzer for Backup Certification Framework (Part 3G.2G).
 Validates whether the system can actually execute recovery within RTO parameters with 100% data fidelity.
 """
-from typing import Dict, Any
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     RestoreCapabilityEvaluation,

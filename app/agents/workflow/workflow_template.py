@@ -3,7 +3,6 @@ Workflow Templates.
 Standardized blueprints for constructing recurring enterprise workflow graphs.
 """
 
-from typing import Dict, List
 from uuid import uuid4
 from app.agents.workflow.workflow_definition import WorkflowDefinition
 from app.agents.workflow.workflow_edge import WorkflowEdge

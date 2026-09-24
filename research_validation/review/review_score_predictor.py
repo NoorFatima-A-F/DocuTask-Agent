@@ -6,9 +6,9 @@ rubrics based on empirical completeness, statistical power, and provenance integ
 """
 
 from __future__ import annotations
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict
 
 
 class ReviewVerdict(str, Enum):

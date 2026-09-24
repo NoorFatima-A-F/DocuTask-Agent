@@ -1,7 +1,7 @@
 """
 OpenTelemetry Telemetry and Distributed Tracing Adapter.
 """
-from typing import Dict, Any, Optional
+from typing import Dict, Optional
 
 class TelemetryAdapter:
     def __init__(self, service_name: str = "verification-platform"):

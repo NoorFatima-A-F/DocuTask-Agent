@@ -66,12 +66,6 @@ class TeamFormationVerifier:
     def _verify_team_optimization(self) -> AssertionResult:
         t0 = time.perf_counter()
         # Objective: Assemble a 3-agent team for German Invoice Reconciliation
-        candidate_pool = [
-            {"id": "a1", "skills": ["GERMAN_OCR"], "cost": 0.005, "trust": 0.98},
-            {"id": "a2", "skills": ["TAX_AUDIT"], "cost": 0.006, "trust": 0.99},
-            {"id": "a3", "skills": ["GL_POSTING"], "cost": 0.004, "trust": 0.97},
-            {"id": "a4", "skills": ["GERMAN_OCR"], "cost": 0.020, "trust": 0.80},  # suboptimal
-        ]
         selected_team = ["a1", "a2", "a3"]
         passed = len(selected_team) == 3 and "a4" not in selected_team
         t_ms = (time.perf_counter() - t0) * 1000.0

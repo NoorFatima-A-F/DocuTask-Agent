@@ -7,9 +7,8 @@ Character Error Rate (CER), and Word Error Rate (WER) via Levenshtein edit dista
 from __future__ import annotations
 
 import logging
-import math
-from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
+from dataclasses import dataclass, field
+from typing import Any, Dict, List
 
 logger = logging.getLogger(__name__)
 

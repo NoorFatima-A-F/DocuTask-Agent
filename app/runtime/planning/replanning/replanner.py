@@ -7,13 +7,11 @@ and recovery branch injection during live mission execution.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from app.runtime.planning.graph.dag import ExecutionDAG
 from app.runtime.planning.graph.graph_mutator import GraphMutationRecord, GraphMutator
-from app.runtime.planning.graph.node import DAGNode
-from app.runtime.planning.replanning.adaptive_execution import AdaptationTrigger
 from app.runtime.planning.replanning.recovery_graph import RecoveryGraphGenerator
-from app.runtime.planning.replanning.strategy_switch import PlanningStrategy, StrategySwitcher
+from app.runtime.planning.replanning.strategy_switch import PlanningStrategy
 
 
 class AdaptiveReplanner:
@@ -70,7 +68,7 @@ class AdaptiveReplanner:
         observed_confidence: float,
     ) -> GraphMutationRecord:
         """Injects secondary verification when intermediate confidence drops below threshold."""
-        node = dag.nodes.get(node_id)
+        dag.nodes.get(node_id)
         children = dag._adjacency_out.get(node_id, [])
         target_id = children[0] if children else node_id
 

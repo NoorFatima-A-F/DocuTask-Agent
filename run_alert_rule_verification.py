@@ -9,9 +9,6 @@ sys.path.insert(0, os.path.abspath("."))
 from app.platform_verification.alert_rule_verification.runtime.alert_rule_verification_runtime import (
     AlertRuleVerificationRuntime,
 )
-from app.platform_verification.alert_rule_verification.domain.models import (
-    AlertCertificationTier,
-)
 
 
 def main():

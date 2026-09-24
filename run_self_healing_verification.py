@@ -6,7 +6,6 @@ import os
 from app.platform_verification.self_healing_verification.runtime.self_healing_runtime import (
     SelfHealingRuntime,
 )
-from app.platform_verification.self_healing_verification.domain.models import SelfHealingTier
 
 
 def main():
@@ -19,7 +18,7 @@ def main():
     results = runtime.run_full_self_healing_verification(output_dir="self_healing_verification")
     scorecard = results["scorecard"]
     val_report = results["validation_report"]
-    exec_report = results["execution_report"]
+    results["execution_report"]
 
     print("-" * 80)
     print("ENTERPRISE SELF-HEALING & RECOVERY SCORECARD")

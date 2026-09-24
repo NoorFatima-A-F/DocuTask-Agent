@@ -3,7 +3,7 @@ Checkpoint Manager for Phase 13.4.
 Coordinates point-in-time state restoration for time-travel inspection.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 from app.runtime.replay.snapshots.snapshot_manager import SnapshotManager, ReplayCheckpoint
 
 

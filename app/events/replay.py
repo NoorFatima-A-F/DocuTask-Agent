@@ -3,9 +3,8 @@ Event Replay Engine.
 Replays past events from event history/store through the Event Bus.
 """
 
-from typing import List, Optional
+from typing import Optional
 from .bus import EventBus
-from .models import CloudEventEnvelope
 
 
 class EventReplayEngine:

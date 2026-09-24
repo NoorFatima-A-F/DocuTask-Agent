@@ -6,8 +6,8 @@ Observability Health Domain Models.
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
-from ...platform.kernel.health import ComponentHealth, HealthStatus
+from typing import Any, Dict
+from ...platform.kernel.health import HealthStatus
 
 
 class HealthLevel(str, Enum):

@@ -2,7 +2,6 @@
 Test Suite: Mathematical Confidence Formulation & Calibration Curve
 Validates composite confidence derivation, 95% confidence interval propagation, and calibration metrics.
 """
-import pytest
 from app.runtime.mathematical_confidence.confidence_formulation import MathematicalConfidenceEngine
 from app.runtime.mathematical_confidence.calibration_curve_builder import CalibrationCurveBuilder
 

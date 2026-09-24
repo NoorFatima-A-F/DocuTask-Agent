@@ -2,7 +2,7 @@
 Documentation Drift Detector for Disaster Recovery Governance Framework (Part 3G.4).
 Compares actual infrastructure manifests against disaster recovery runbooks to prevent documentation rot.
 """
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.resilience_governance.domain.models import (
     DocumentationDriftItem,
     DocumentationDriftReport,

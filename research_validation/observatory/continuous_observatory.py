@@ -11,13 +11,11 @@ Perpetual longitudinal performance and benchmark telemetry repository:
 
 from __future__ import annotations
 
-import json
-import math
 import time
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 
 class CadenceType(str, Enum):
@@ -111,7 +109,7 @@ class ContinuousBenchmarkObservatory:
         var_v = sum((v - mean_v) ** 2 for v in vals)
         r_sq = ((cov_tv ** 2) / (var_t * var_v)) if (var_t * var_v) > 1e-12 else 0.0
 
-        last_t = t_days[-1]
+        t_days[-1]
         last_val = vals[-1]
         fc_30 = last_val + (slope * 30.0)
         fc_90 = last_val + (slope * 90.0)

@@ -2,7 +2,7 @@
 Phase 3M.3: Cloud Compute Resource Allocation Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICloudComputeResourceVerifier
 from ..domain.models import (

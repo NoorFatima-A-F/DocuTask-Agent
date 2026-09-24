@@ -4,7 +4,7 @@ Defines strongly typed MemoryItem aggregate model and abstract repository contra
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 from pydantic import BaseModel, Field
 
 from app.agents.memory.embeddings import VectorEmbedding

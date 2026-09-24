@@ -1,6 +1,5 @@
 """Enterprise Audit Certification Authority (ACA) Master Controller."""
 
-import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
@@ -11,7 +10,6 @@ from enterprise_audit_engine.certification_authority.domain.models import (
     RevocationReason,
 )
 from enterprise_audit_engine.certification_authority.signing.signer import CertificateSigner
-from enterprise_audit_engine.certification_authority.signing.verifier import CertificateSignatureVerifier
 from enterprise_audit_engine.certification_authority.policy.policy_engine import CertificationPolicyEngine
 from enterprise_audit_engine.certification_authority.metrics.eqi_calculator import EvidenceQualityIndexCalculator
 from enterprise_audit_engine.certification_authority.registry.audit_registry import AuditRegistry
@@ -19,7 +17,6 @@ from enterprise_audit_engine.certification_authority.registry.revocation_registr
 from enterprise_audit_engine.certification_authority.registry.regression_detector import AuditRegressionDetector
 from enterprise_audit_engine.certification_authority.verification.independent_verifier import IndependentCertificateVerifier
 from enterprise_audit_engine.certification_authority.exporter.review_package_exporter import ExternalReviewPackageExporter
-from enterprise_audit_engine.certification_authority.supply_chain.sbom_generator import AuditEngineSupplyChainAuditor
 from enterprise_audit_engine.domain.evidence.models import EvidenceRecord
 
 

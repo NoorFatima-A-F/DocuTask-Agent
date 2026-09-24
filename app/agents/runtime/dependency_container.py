@@ -7,7 +7,7 @@ and lifetime safety analysis.
 
 import inspect
 from enum import Enum
-from typing import Any, Callable, Dict, Optional, Set, Type, TypeVar
+from typing import Any, Dict, Optional, Set, Type, TypeVar
 from app.agents.runtime.exceptions import (
     CyclicDependencyError,
     InvalidBindingError,

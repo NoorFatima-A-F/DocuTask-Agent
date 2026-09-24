@@ -13,8 +13,7 @@ Implements 8 distinct specialized agent roles that advocate for their objectives
 
 from __future__ import annotations
 
-import uuid
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 

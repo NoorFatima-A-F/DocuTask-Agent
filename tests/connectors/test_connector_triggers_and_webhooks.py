@@ -5,7 +5,7 @@ Tests for TriggerEngine and WebhookEngine.
 import time
 import pytest
 from app.connectors.core.exceptions import WebhookVerificationError
-from app.connectors.core.models import NormalizedEvent, TriggerDescriptor, TriggerType
+from app.connectors.core.models import TriggerDescriptor, TriggerType
 from app.connectors.triggers.engine import TriggerEngine, TriggerState
 from app.connectors.webhooks.engine import WebhookConfig, WebhookEngine
 

@@ -1,6 +1,5 @@
 """Tests for Service Mesh Adapters (Istio, Linkerd, Consul)."""
 
-import pytest
 from app.infrastructure.networking.control_plane import RouteRule, RoutingStrategy, NetworkEndpoint
 from app.infrastructure.networking.mesh import (
     IstioMeshAdapter,

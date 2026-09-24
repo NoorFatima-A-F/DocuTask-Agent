@@ -20,11 +20,11 @@ def test_goal_hierarchy_and_management():
     )
     assert parent.id.startswith("goal-")
 
-    subgoal1 = manager.add_subgoal(
+    manager.add_subgoal(
         parent_goal_id=parent.id,
         description="Extract and validate vendor line items",
     )
-    subgoal2 = manager.add_subgoal(
+    manager.add_subgoal(
         parent_goal_id=parent.id,
         description="Verify tax compliance against rules",
     )

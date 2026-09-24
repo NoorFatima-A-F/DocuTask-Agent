@@ -3,10 +3,9 @@ Knowledge Lineage Tracker for Phase 13.5 (ARLP-KIP).
 Cryptographic provenance tracking using SHA-256 hash chains for tamper-evident knowledge audits.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime, timezone
 import hashlib
-import json
 import uuid
 from pydantic import BaseModel, Field
 

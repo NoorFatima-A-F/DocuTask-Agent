@@ -331,7 +331,7 @@ class TestTaskGraphInvariantsAndEdgeCases:
 
         # Mutate: inject node between t1 and t2
         mut = TaskGraphMutationEngine(graph)
-        ins = mut.insert_node_between("t1", "t2", PlannedTask("t_mid", "Mid", "mid"))
+        mut.insert_node_between("t1", "t2", PlannedTask("t_mid", "Mid", "mid"))
 
         # t2 must be demoted to PENDING because t_mid is not finished!
         assert graph.get_state("t2") == NodeState.PENDING
@@ -495,7 +495,7 @@ class TestExpandedTaskGraphScenarios:
         graph.add_task(PlannedTask("t_other", "Other", "act"))
         graph.add_task(PlannedTask("t2", "T2", "act", dependencies=["t1", "t_other"]))
         mut = TaskGraphMutationEngine(graph)
-        ins = mut.insert_node_between("t1", "t2", PlannedTask("t_mid", "Mid", "act"))
+        mut.insert_node_between("t1", "t2", PlannedTask("t_mid", "Mid", "act"))
         assert set(graph.get_task("t2").dependencies) == {"t_mid", "t_other"}
 
     def test_graph_clear_outputs_by_recording_none(self):

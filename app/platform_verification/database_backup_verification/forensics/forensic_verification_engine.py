@@ -5,7 +5,7 @@ Preserves provenance metadata, cryptographic digests, operator signatures, and v
 import uuid
 import hashlib
 from datetime import datetime, timezone
-from typing import Dict, Any, List
+from typing import Dict, Any
 from app.platform_verification.database_backup_verification.domain.models import (
     ForensicReport,
 )

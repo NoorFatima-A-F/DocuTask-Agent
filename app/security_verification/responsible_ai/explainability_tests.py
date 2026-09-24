@@ -3,7 +3,7 @@ Section 9.2: Responsible AI Decision Explainability & Provenance Verification
 Validates that every autonomous extraction output includes rationale, bounding-box citations, and source provenance.
 """
 from typing import Dict, List, Any
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
+from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus
 
 SAMPLE_AI_DECISIONS = [
     {

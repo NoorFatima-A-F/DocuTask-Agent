@@ -2,11 +2,9 @@
 Unit and Integration Tests for Digital Twin Shadow Execution & Safety Sandboxing (ASVSP Pillar 4).
 """
 
-import pytest
 from app.runtime.digital_twin import (
     SafetySandbox,
     FidelityMonitor,
-    ShadowExecutor,
     DigitalTwinEngine,
 )
 

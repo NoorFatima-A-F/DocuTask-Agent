@@ -9,7 +9,6 @@ Validates:
 import pytest
 from app.agents.runtime.runtime_metrics import (
     RuntimeMetricsCollector,
-    RuntimeSpan,
     RuntimeTracer,
 )
 

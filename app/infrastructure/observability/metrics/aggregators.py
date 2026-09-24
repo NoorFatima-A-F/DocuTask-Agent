@@ -11,7 +11,6 @@ import time
 from typing import List, Optional
 from app.infrastructure.observability.metrics.types import (
     AggregatedMetricSummary,
-    MetricPoint,
     MetricSeries,
 )
 

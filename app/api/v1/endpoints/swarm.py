@@ -4,7 +4,7 @@ Comprehensive REST API for Multi-Agent Coordination, Negotiation, Consensus, Coa
 """
 
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, Body
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.runtime.swarm import (

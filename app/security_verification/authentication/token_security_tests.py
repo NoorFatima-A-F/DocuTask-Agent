@@ -34,7 +34,7 @@ class TokenSecurityVerifier:
         metrics: Dict[str, Any] = {}
         
         # 1. Generate test vectors proportional to scale_count
-        start_time = time.perf_counter()
+        time.perf_counter()
         valid_count = max(1, int(scale_count * 0.10))
         invalid_count = max(1, scale_count - valid_count)
         

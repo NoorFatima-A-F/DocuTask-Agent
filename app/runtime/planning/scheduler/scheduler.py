@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import asyncio
 import time
-from typing import Any, Callable, Coroutine, Dict, List, Optional, Set
+from typing import Any, Callable, Coroutine, Dict, Optional, Set
 from app.runtime.planning.graph.dag import ExecutionDAG
 from app.runtime.planning.graph.node import DAGNode, NodeStatus
 from app.runtime.planning.scheduler.critical_path import CriticalPathEngine

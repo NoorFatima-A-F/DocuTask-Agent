@@ -4,7 +4,6 @@ Part 3G.3 — Disaster Recovery Simulation & Operational Resilience Verification
 """
 import pytest
 import os
-import json
 import tempfile
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
@@ -55,9 +54,6 @@ from app.platform_verification.disaster_recovery_simulation.metrics.resilience_m
 )
 from app.platform_verification.disaster_recovery_simulation.runbooks.runbook_catalog import (
     RunbookCatalog,
-)
-from app.platform_verification.disaster_recovery_simulation.evidence.dr_evidence_exporter import (
-    DREvidenceExporter,
 )
 from app.platform_verification.disaster_recovery_simulation.runtime.dr_simulation_runtime import (
     DisasterRecoverySimulationRuntime,

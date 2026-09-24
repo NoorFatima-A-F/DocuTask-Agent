@@ -3,7 +3,7 @@ AMAEOP Pillar 7 - Department Specialized Memory Engine
 Maintains isolated and cross-shared memory domains per department (e.g. OCR contrast heuristics, Extraction prompt adapters).
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 import time
 import uuid

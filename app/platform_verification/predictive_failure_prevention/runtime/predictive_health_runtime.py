@@ -1,7 +1,7 @@
 """
 Phase 3H.5.9: Predictive Health Intelligence Runtime Orchestrator
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..verifiers import (
     PredictiveArchitectureVerifier,
     FeatureEngineeringVerifier,

@@ -16,7 +16,7 @@
         "query_latency_ms": 1.2
       },
       "validation_latency_ms": 12.1,
-      "confirmed_at": "2026-09-19T07:04:32.470025+00:00"
+      "confirmed_at": "2026-09-24T21:54:47.385834+00:00"
     },
     {
       "validation_id": "VAL-INIT-002",
@@ -30,11 +30,11 @@
         "active_tasks": 0
       },
       "validation_latency_ms": 15.6,
-      "confirmed_at": "2026-09-19T07:04:32.470052+00:00"
+      "confirmed_at": "2026-09-24T21:54:47.385862+00:00"
     },
     {
-      "validation_id": "VAL-774143D5",
-      "execution_id": "EXEC-2261305C",
+      "validation_id": "VAL-C3BF2779",
+      "execution_id": "EXEC-776366B6",
       "target": "celery_worker",
       "recovered": true,
       "pre_health_state": "UNHEALTHY",
@@ -48,7 +48,7 @@
         "heartbeat_healthy": true
       },
       "validation_latency_ms": 14.2,
-      "confirmed_at": "2026-09-19T07:04:32.542042+00:00"
+      "confirmed_at": "2026-09-24T21:54:47.497232+00:00"
     }
   ],
   "status": "PASS"

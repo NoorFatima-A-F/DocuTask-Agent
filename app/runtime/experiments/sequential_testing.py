@@ -4,7 +4,7 @@ Enables online early-stopping decisions with strict error rate guarantees.
 """
 
 import math
-from typing import List, Dict, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 
 

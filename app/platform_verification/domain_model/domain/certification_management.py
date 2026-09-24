@@ -3,7 +3,7 @@ Certification Domain: 5 Certification Levels, Digital Sealing, and Expiration Li
 """
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from pydantic import BaseModel, Field
 import uuid
 

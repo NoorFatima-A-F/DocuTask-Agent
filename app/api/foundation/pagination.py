@@ -3,7 +3,7 @@ API Pagination Standard Models.
 """
 
 from dataclasses import dataclass, field
-from typing import Any, Generic, List, Optional, TypeVar
+from typing import Generic, List, Optional, TypeVar
 
 T = TypeVar("T")
 

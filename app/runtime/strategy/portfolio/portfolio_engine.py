@@ -5,7 +5,7 @@ Multi-Objective Pareto Frontier Optimization and Portfolio Balancing.
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import uuid
 
 from app.runtime.strategy.events.strategy_events import (

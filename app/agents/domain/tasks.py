@@ -4,7 +4,7 @@ Defines executable task models (OCR, Extraction, Validation, Storage, Classifica
 Tasks describe executable work without containing execution logic directly.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 from app.agents.domain.capabilities import CapabilityRequirement

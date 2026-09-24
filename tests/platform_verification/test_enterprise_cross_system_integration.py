@@ -38,9 +38,6 @@ from app.platform_verification.enterprise_cross_system_integration.verifiers imp
 from app.platform_verification.enterprise_cross_system_integration.scoring.integration_quality_scorer import (
     CrossSystemIntegrationQualityScorer,
 )
-from app.platform_verification.enterprise_cross_system_integration.exporter.integration_quality_exporter import (
-    CrossSystemIntegrationQualityExporter,
-)
 from app.platform_verification.enterprise_cross_system_integration.runtime.integration_verification_runtime import (
     CrossSystemIntegrationVerificationRuntime,
 )
@@ -308,7 +305,7 @@ def test_integration_quality_scorer():
 
 def test_integration_quality_exporter(tmp_output_dir):
     runtime = CrossSystemIntegrationVerificationRuntime()
-    report = runtime.execute_all(output_dir=tmp_output_dir)
+    runtime.execute_all(output_dir=tmp_output_dir)
 
     assert os.path.exists(tmp_output_dir)
     assert os.path.exists(os.path.join(tmp_output_dir, "manifest.json"))

@@ -1,8 +1,6 @@
 """Tests for Workload Identity (SPIFFE/SVID) and Certificate Authority Lifecycle."""
 
-import pytest
 from app.infrastructure.networking.security import (
-    SPIFFEIdentity,
     WorkloadIdentityManager,
     CertificateAuthorityManager,
 )

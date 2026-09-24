@@ -2,12 +2,8 @@
 Phase 3H.5.10: Enterprise Health Security, Privacy & Information Exposure Verification Master CLI Runner
 """
 import sys
-import os
 from app.platform_verification.health_security.runtime.health_security_runtime import (
     HealthSecurityRuntime,
-)
-from app.platform_verification.health_security.domain.models import (
-    HealthSecurityCertificationTier,
 )
 
 

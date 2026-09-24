@@ -8,7 +8,7 @@ database state, and AI runtime providers.
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger("infrastructure.observability.diagnostics.health_analysis")

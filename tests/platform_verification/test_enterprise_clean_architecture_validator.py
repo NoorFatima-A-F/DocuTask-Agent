@@ -9,8 +9,6 @@ from app.platform_verification.clean_architecture import (
     CleanArchSeverity,
     EnterpriseCleanArchitectureRuntime,
     ImportType,
-    LayerDependencyRule,
-    ModuleQualityMetrics,
 )
 
 

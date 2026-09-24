@@ -9,8 +9,6 @@ from fastapi import FastAPI
 
 from app.platform_verification.observability_security.domain.models import (
     SecurityCertificationTier,
-    ThreatSeverity,
-    RBACRole,
     ObservabilityThreatModelReport,
     SensitiveDataReport,
     LogRedactionReport,
@@ -61,12 +59,6 @@ from app.platform_verification.observability_security.verifiers.incident_respons
 )
 from app.platform_verification.observability_security.verifiers.continuous_security_verifier import (
     ContinuousSecurityVerifier,
-)
-from app.platform_verification.observability_security.scoring.observability_security_scorer import (
-    ObservabilitySecurityScorer,
-)
-from app.platform_verification.observability_security.exporter.observability_security_evidence_exporter import (
-    ObservabilitySecurityEvidenceExporter,
 )
 from app.platform_verification.observability_security.runtime.observability_security_runtime import (
     ObservabilitySecurityRuntime,

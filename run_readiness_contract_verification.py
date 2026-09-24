@@ -3,7 +3,6 @@ Master CLI Runner for Enterprise Readiness Contract Architecture Verification (P
 Executes end-to-end certification, prints a rich summary table, and exports all 8 audit manifests.
 """
 import sys
-import json
 import time
 
 # Ensure UTF-8 output on Windows

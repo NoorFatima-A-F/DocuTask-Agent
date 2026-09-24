@@ -2,7 +2,6 @@
 Tamper Detector Engine for Backup Security Verification Framework (Part 3G.2F).
 """
 import hashlib
-from typing import Dict, Any
 
 from app.platform_verification.backup_security_verification.domain.models import (
     TamperDetectionReport,

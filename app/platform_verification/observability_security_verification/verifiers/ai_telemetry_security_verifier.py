@@ -1,7 +1,6 @@
 """
 Phase 3H.4.10.10: AI Telemetry Privacy & Abstraction Verifier
 """
-from typing import Dict, Any, List
 from ..domain.interfaces import IAISecurityVerifier
 from ..domain.models import AISecurityReport, AITelemetryAudit
 

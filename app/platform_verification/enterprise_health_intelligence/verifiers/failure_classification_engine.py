@@ -1,7 +1,6 @@
 """
 Phase 3H.5.2: Failure Classification Engine
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IFailureClassificationEngine
 from ..domain.models import (
     FailureClassificationReport,

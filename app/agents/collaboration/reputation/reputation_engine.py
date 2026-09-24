@@ -7,7 +7,7 @@ and refines multi-agent negotiation bids based on historical performance.
 from __future__ import annotations
 
 import logging
-from typing import Dict, Optional
+from typing import Optional
 
 from app.agents.collaboration.agent_profile import AgentProfile
 from app.agents.collaboration.agent_registry import AgentRegistry

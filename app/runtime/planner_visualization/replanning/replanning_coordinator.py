@@ -5,14 +5,11 @@ Coordinates in-flight replanning, strategy adaptation, and recovery node injecti
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from datetime import datetime, timezone
 
 from app.runtime.planner_visualization.dag.dag_engine import DAGBuilderEngine
 from app.runtime.planner_visualization.dag.dag_mutator import DAGMutationEngine
-from app.runtime.planner_visualization.ui_models.models import PlannerStateEnum
-from app.runtime.events.bus.event_bus import get_global_event_bus
-from app.runtime.events.models.planner_event import PlannerEventFactory
 
 
 class ReplanningCoordinator:
@@ -27,7 +24,7 @@ class ReplanningCoordinator:
 
     def trigger_replan_on_failure(self, failed_node_id: str, reason: str, alternative_strategy: str = "FALLBACK_OCR") -> Dict[str, Any]:
         # 1. Inject recovery branch into DAG (emits replanned event)
-        mutation_res = self.dag_mutator.inject_recovery_node(failed_node_id, recovery_strategy=alternative_strategy)
+        self.dag_mutator.inject_recovery_node(failed_node_id, recovery_strategy=alternative_strategy)
 
         replan_record = {
             "timestamp": datetime.now(timezone.utc).isoformat(),

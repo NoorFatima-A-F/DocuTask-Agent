@@ -3,8 +3,7 @@ Runtime State Migration Manager.
 Coordinates database schema migrations and in-flight session schema transformations across versions.
 """
 
-from typing import Any, Callable, Dict, List, Optional
-from uuid import UUID
+from typing import Any, Callable, Dict, List
 
 
 class MigrationManager:

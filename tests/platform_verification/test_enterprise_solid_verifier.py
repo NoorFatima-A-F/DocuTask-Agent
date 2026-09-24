@@ -6,7 +6,6 @@ from app.platform_verification.solid_verification import (
     ClassDesignMetrics,
     EnterpriseSolidVerificationRuntime,
     InterfaceDesignMetrics,
-    SolidCertificationBand,
     SolidPrinciple,
     SolidViolationSeverity,
 )

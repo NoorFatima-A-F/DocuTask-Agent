@@ -8,11 +8,10 @@ User Goal -> Runtime Kernel -> Agent Session -> Task Planning (DAG) -> Multi-Age
 import asyncio
 import json
 import logging
-import os
 import sys
 import time
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict
 from uuid import uuid4
 
 # Ensure project root is on sys.path
@@ -29,8 +28,6 @@ from app.agents.runtime.enterprise.audit_event import AuditEventType
 from app.agents.runtime.runtime_supervisor import (
     WorkerLifecycleManager,
     CheckpointRecoveryManager,
-    AsyncTaskWorker,
-    WorkerStatus,
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
@@ -143,7 +140,7 @@ class AutonomousInvoicePipeline:
                 logger.info(f"[Supervisor] Worker {extraction_worker_id} recovered from checkpoint v{v1}. Retrying...")
                 await asyncio.sleep(0.05)
 
-        v2 = await self.context_store.checkpoint_context(runtime_id, {"stage": "EXTRACTION_DONE", "state": pipeline_state})
+        await self.context_store.checkpoint_context(runtime_id, {"stage": "EXTRACTION_DONE", "state": pipeline_state})
 
         # -------------------------------------------------------------
         # Step 4: Validation Agent Execution
@@ -190,7 +187,7 @@ class AutonomousInvoicePipeline:
             "recommendation": "APPROVE_FOR_POSTING",
         }
         pipeline_state["reflection_critique"] = reflection_critique
-        v5 = await self.context_store.checkpoint_context(runtime_id, {"stage": "COMPLETED", "state": pipeline_state})
+        await self.context_store.checkpoint_context(runtime_id, {"stage": "COMPLETED", "state": pipeline_state})
         logger.info(f"[Step 6: ReflectionAgent] Quality Score: {reflection_score} -> {reflection_critique['recommendation']}")
 
         # -------------------------------------------------------------

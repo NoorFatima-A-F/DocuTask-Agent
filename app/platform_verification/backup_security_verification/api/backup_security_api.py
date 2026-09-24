@@ -17,13 +17,13 @@ _runtime = BackupSecurityVerificationRuntime()
 
 
 @router.post("/execute", response_model=Dict[str, Any])
-async def execute_backup_security_verification(evidence_dir: str = "evidence/backup_security_verification"):
+async def execute_backup_security_verification():
     """
     Triggers an end-to-end Enterprise Backup Security Verification scan.
     """
     try:
         runtime = BackupSecurityVerificationRuntime()
-        results = runtime.execute_full_security_verification(output_dir=evidence_dir)
+        results = runtime.execute_full_security_verification()
         scorecard = results["scorecard"]
         return {
             "status": "COMPLETED",

@@ -1,7 +1,7 @@
 """Approval Policy Types, Step Definitions, and Chains."""
 
 from enum import Enum
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from pydantic import BaseModel, Field
 import uuid
 

@@ -5,8 +5,8 @@ Tests prompt resistance against adversarial attacks, injection, and data exfiltr
 
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, List
-from pydantic import BaseModel, Field
+from typing import Callable, List
+from pydantic import BaseModel
 from app.prompts.registry.models import PromptVersion
 from app.prompts.templates.renderer import PromptTemplateRenderer
 

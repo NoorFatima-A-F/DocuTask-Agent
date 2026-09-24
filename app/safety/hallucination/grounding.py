@@ -1,7 +1,7 @@
 """Grounding Verifier across Knowledge Chunks."""
 
 import re
-from typing import List, Optional
+from typing import List
 from ..gateway.context import KnowledgeChunk
 from .confidence import GroundingClaim, GroundingReport, GroundingConfidenceScorer
 

@@ -5,9 +5,8 @@ delegation orchestration, and collaborative goal achievement.
 """
 
 import time
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from uuid import uuid4
-from app.agents.coordination.agent_registry import AgentRegistry
 from app.agents.coordination.context import CoordinationRequest, CoordinationResult
 from app.agents.coordination.coordinator import AgentCoordinator
 from app.agents.coordination.delegation import DelegationMode, DelegationRequest, DelegationTask

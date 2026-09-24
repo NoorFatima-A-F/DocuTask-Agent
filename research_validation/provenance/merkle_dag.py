@@ -8,11 +8,11 @@ and descendant tampering invalidation.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Set, Tuple
 
 from research_validation.provenance.hashing import HashAlgorithm, ProvenanceHasher
-from research_validation.provenance.provenance_models import EvidenceNode, LineageStage
+from research_validation.provenance.provenance_models import EvidenceNode
 
 
 @dataclass

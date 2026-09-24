@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
-from app.prompts.registry.models import Prompt, PromptApprovalStatus, PromptLifecycleState, PromptVersion
+from app.prompts.registry.models import PromptApprovalStatus, PromptLifecycleState
 from app.prompts.registry.repository import PromptRegistryRepository
 from app.prompts.lifecycle.manager import PromptLifecycleManager
 

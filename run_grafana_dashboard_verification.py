@@ -9,9 +9,6 @@ sys.path.insert(0, os.path.abspath("."))
 from app.platform_verification.grafana_verification.runtime.grafana_verification_runtime import (
     GrafanaVerificationRuntime,
 )
-from app.platform_verification.grafana_verification.domain.models import (
-    DashboardCertificationTier,
-)
 
 
 def main():

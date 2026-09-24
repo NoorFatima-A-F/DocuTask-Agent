@@ -9,9 +9,6 @@ sys.path.insert(0, os.path.abspath("."))
 from app.platform_verification.alert_fatigue_verification.runtime.alert_fatigue_verification_runtime import (
     AlertFatigueVerificationRuntime,
 )
-from app.platform_verification.alert_fatigue_verification.domain.models import (
-    AlertIntelligenceTier,
-)
 
 
 def main():

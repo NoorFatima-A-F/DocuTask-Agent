@@ -3,7 +3,7 @@ Domain models for Enterprise Database Backup & Recovery Verification Platform (P
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 
 
 class DatabaseBackupStrategyType(str, Enum):

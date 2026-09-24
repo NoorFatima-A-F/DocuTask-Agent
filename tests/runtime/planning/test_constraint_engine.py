@@ -1,9 +1,7 @@
 """Tests for Constraint Extraction & Verification Engine."""
 
-import pytest
 from app.runtime.planning.constraint_engine import (
     ConstraintExtractionEngine,
-    MissionConstraintSet,
     MissionConstraint,
     ConstraintType,
     ConstraintEnforcement,

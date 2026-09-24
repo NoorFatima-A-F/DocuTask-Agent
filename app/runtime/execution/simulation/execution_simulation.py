@@ -5,7 +5,6 @@ Simulates tool executions, computes state mutations in shadow environments, pred
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import json
 from typing import Any, Dict, List, Optional
 import uuid
 
@@ -17,7 +16,7 @@ from app.runtime.execution.events.execution_events import (
     execution_event_bus,
 )
 from app.runtime.execution.tool_registry.tool_registry_engine import tool_registry_engine
-from app.runtime.execution.workflow.workflow_engine import WorkflowDefinition, WorkflowStep
+from app.runtime.execution.workflow.workflow_engine import WorkflowDefinition
 
 
 @dataclass
@@ -99,7 +98,6 @@ class ExecutionSimulationEngine:
 
         for step in workflow.steps:
             tool = tool_registry_engine.get_tool(step.tool_id)
-            tool_name = tool.name if tool else step.tool_id
             duration = (tool.average_latency_ms if tool else 40.0) * 1.1  # safety factor
             cost = 0.001
             mutations = []

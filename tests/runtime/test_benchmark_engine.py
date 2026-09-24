@@ -2,9 +2,7 @@
 Unit & Significance Tests for Scientific Benchmark Engine (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.benchmarking import (
-    scientific_benchmark_engine,
     BenchmarkStatistics,
     BENCHMARK_SUITES,
 )

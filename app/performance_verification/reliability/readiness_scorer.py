@@ -2,7 +2,6 @@
 Enterprise Performance, Reliability & Readiness Score Calculator.
 """
 
-from typing import Dict, Any
 from app.performance_verification.domain.models import EnterpriseReadinessScore
 
 

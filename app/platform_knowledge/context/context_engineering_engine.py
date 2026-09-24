@@ -3,9 +3,8 @@ Context Engineering Engine
 Optimal context selection, token budgeting, relevance re-ranking, and memory compression.
 """
 import time
-from typing import List, Dict, Any
 from ..models.schemas import (
-    ContextRetrievalRequest, ContextRetrievalResponse, RetrievedSnippet
+    ContextRetrievalRequest, ContextRetrievalResponse
 )
 from ..vector.semantic_vector_engine import SemanticVectorEngine
 from ..knowledge_graph.enterprise_knowledge_graph import EnterpriseKnowledgeGraph

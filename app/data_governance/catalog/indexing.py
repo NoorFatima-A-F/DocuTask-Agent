@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Set
+from typing import Dict, Set
 from app.data_governance.registry.models import DataAsset
 
 

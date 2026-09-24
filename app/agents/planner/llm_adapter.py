@@ -5,7 +5,6 @@ Decouples Planner from Gemini, Vertex AI, or any other LLM provider.
 
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
-from app.agents.planner.context import PlannerRequest
 
 
 class ILLMPlanningAdapter(ABC):

@@ -6,7 +6,6 @@ import os
 from app.platform_verification.enterprise_health_intelligence.runtime.health_intelligence_runtime import (
     HealthIntelligenceRuntime,
 )
-from app.platform_verification.enterprise_health_intelligence.domain.models import IntelligenceCertificationTier
 
 
 def main():
@@ -23,7 +22,7 @@ def main():
     corr_report = results["corr_report"]
     rca_report = results["rca_report"]
     remed_report = results["remed_report"]
-    recov_report = results["recov_report"]
+    results["recov_report"]
     self_heal_report = results["self_heal_report"]
     chaos_report = results["chaos_report"]
 

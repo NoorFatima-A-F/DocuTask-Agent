@@ -11,10 +11,10 @@ Calculates the Claim Groundedness Index (CGI).
 
 from __future__ import annotations
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from research_validation.provenance.hashing import hash_canonical_json
 from research_validation.provenance.provenance_models import EvidenceNode, EvidenceQualityLevel

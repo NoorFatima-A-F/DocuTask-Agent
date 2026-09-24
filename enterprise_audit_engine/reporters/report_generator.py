@@ -4,7 +4,6 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 from ..domain.evidence.models import (
     EvidenceRecord,
-    AuditReportManifest,
     AuditRunMetadata,
     CollectorExecutionManifest,
     VerificationScorecard,

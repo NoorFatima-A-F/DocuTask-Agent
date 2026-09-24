@@ -2,12 +2,10 @@
 Tests for Experience Intelligence Engine (Pillar 1).
 """
 
-import pytest
 from app.runtime.intelligence.experience.experience_extractor import ExperienceExtractor
 from app.runtime.intelligence.experience.experience_record import (
     ExperienceRecord,
     ExperienceStore,
-    ToolTraceRecord,
 )
 
 
@@ -37,7 +35,7 @@ def test_experience_store_append_and_query():
         task_type="extraction",
         telemetry={"total_latency_ms": 950.0, "total_cost_usd": 0.009, "final_confidence": 0.98},
     )
-    rec2 = extractor.extract_from_mission(
+    extractor.extract_from_mission(
         mission_id="msn_2",
         document_type="contract",
         task_type="extraction",

@@ -4,15 +4,12 @@ Unified Enterprise Verification Pyramid Platform Runtime Facade.
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from app.platform_verification.pyramid_engine.domain.models import (
-    VerificationLevel,
     TestDefinition,
     ContinuousTrigger,
     PyramidExecutionReport,
     PyramidDashboardSummary,
     DefectRecord,
     RegressionRecord,
-    ComponentCoverageItem,
-    FailureSeverity,
 )
 from app.platform_verification.pyramid_engine.core.maturity_engine import MaturityEngine
 from app.platform_verification.pyramid_engine.core.dependency_graph import DependencyGate

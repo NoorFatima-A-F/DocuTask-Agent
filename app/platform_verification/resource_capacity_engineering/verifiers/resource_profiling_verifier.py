@@ -33,7 +33,7 @@ class ResourceProfilingVerifier(IResourceProfilingVerifier):
 
     def verify(self) -> ResourceProfileReport:
         collectors = get_all_collectors()
-        collector_data = {c.collector_name: c.collect() for c in collectors}
+        {c.collector_name: c.collect() for c in collectors}
 
         services = [
             ServiceResourceProfile(service_name="API Gateway (FastAPI)", cpu_average_pct=24.5, memory_average_mb=580.0, network_bandwidth_mbps=85.0, status="HEALTHY"),

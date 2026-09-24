@@ -7,7 +7,7 @@ Formal actions and threshold policies for autonomous research governance.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 
 class ResearchAction(str, Enum):

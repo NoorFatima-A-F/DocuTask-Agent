@@ -1,8 +1,7 @@
 """Policy Usage, Coverage, and Friction Analytics."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 import collections
-from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
 from ..warehouse.repositories import GovernanceDataWarehouseRepository
@@ -39,7 +38,7 @@ class PolicyAnalyticsEngine:
         q = WarehouseQueryFilter(tenant_id=tenant_id)
         decisions = self.repo.query_decisions(q)
         policy_events = self.repo.query_policy_events(q)
-        approvals = self.repo.query_approvals(q)
+        self.repo.query_approvals(q)
 
         all_pols = [p for p in self.repo.dim_policies.values() if tenant_id == "*" or p.tenant_id == tenant_id]
 

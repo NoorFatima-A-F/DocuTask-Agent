@@ -4,9 +4,9 @@ Orchestrates automated execution across prompt injection, Unicode, encoding, con
 and schema attack suites.
 """
 
-from typing import Dict, List
+from typing import List
 from app.core.logging import logger
-from app.validation.security.attack_cases import AttackCase, AttackRepository, AttackResult
+from app.validation.security.attack_cases import AttackRepository, AttackResult
 from app.validation.security.context_attacks import ContextAttackTester
 from app.validation.security.encoding_attacks import EncodingAttackTester
 from app.validation.security.prompt_injection import PromptInjectionTester

@@ -18,9 +18,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import sys
-import time
 from pathlib import Path
-from typing import Any, Dict
 
 # Ensure project root in sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
@@ -35,16 +33,13 @@ from app.agents.human.human_task_manager import HumanTaskManager
 from app.agents.intelligence.reasoning.semantic_reasoner import SemanticReasoner
 from app.agents.memory.consolidation.consolidation_agent import MemoryConsolidationAgent
 from app.agents.memory.intelligence.episodic_memory import EpisodeRecord, EpisodicMemory
-from app.agents.memory.intelligence.semantic_memory import SemanticFact, SemanticMemory
+from app.agents.memory.intelligence.semantic_memory import SemanticMemory
 from app.agents.planning.execution_plan import ExecutionPlan, PlannedTask
 from app.agents.planning.optimizer.optimization_strategy import OptimizationStrategy
 from app.agents.planning.optimizer.plan_selector import PlanSelector
 from app.agents.reflection.critics.consensus_evaluator import MultiCriticConsensusEvaluator
 from app.agents.reflection.critics.historical_critic import HistoricalCritic
 from app.agents.runtime.autonomous.autonomous_runtime import AutonomousRuntime
-from app.agents.runtime.autonomous.runtime_context import RuntimeContext
-from app.agents.runtime.autonomous.state_machine import AutonomousState
-from app.agents.security.agent_permission import AgentPermission, AgentRole
 from app.agents.security.security_guardian import SecurityGuardian
 from app.agents.tools.policy.tool_decision_engine import ToolDecisionEngine
 
@@ -66,9 +61,9 @@ async def run_enterprise_autonomous_demo() -> None:
     semantic_mem = SemanticMemory()
     registry = AgentRegistry()
     perf_tracker = PerformanceTracker()
-    rep_engine = ReputationEngine(performance_tracker=perf_tracker, registry=registry)
+    ReputationEngine(performance_tracker=perf_tracker, registry=registry)
     tool_engine = ToolDecisionEngine()
-    guardian = SecurityGuardian()
+    SecurityGuardian()
     reasoner = SemanticReasoner()
     plan_selector = PlanSelector()
     hist_critic = HistoricalCritic(semantic_memory=semantic_mem, episodic_memory=episodic_mem)
@@ -126,7 +121,7 @@ async def run_enterprise_autonomous_demo() -> None:
     # 5. Execution, Anomaly Detection & Self-Correction
     # ---------------------------------------------------------
     print("\n--- [5/9] Execution Waves & Self-Correcting DAG Mutation ---")
-    runtime = AutonomousRuntime(event_bus=event_bus, agent_registry=registry)
+    AutonomousRuntime(event_bus=event_bus, agent_registry=registry)
     print("  [+] Executing DAG Wave 1 (OCR Ingest)... OK")
     print("  [+] Executing DAG Wave 2 (Field Extract)... Detected OCR Table Cell Boundary Anomaly!")
     anomaly = await reasoner.evaluate_anomaly(
@@ -166,7 +161,7 @@ async def run_enterprise_autonomous_demo() -> None:
     print(f"  [+] Review Ticket Enqueued: {ticket.ticket_id} (Priority: {ticket.priority.name})")
     
     # Operator resolution
-    directive = hitl_mgr.submit_operator_decision(
+    hitl_mgr.submit_operator_decision(
         ticket_id=ticket.ticket_id,
         action=HumanActionType.MODIFY,
         operator_id="senior_auditor_jane",

@@ -5,7 +5,7 @@ from __future__ import annotations
 import time
 import uuid
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, Optional, Set
 
 from .policies import NetworkPolicyEngine, PolicyAction
 from ..identity.service_identity import SPIFFEIdentity

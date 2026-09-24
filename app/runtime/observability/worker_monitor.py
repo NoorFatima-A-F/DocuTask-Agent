@@ -3,7 +3,7 @@ ARTEICP Observability - Worker Monitor
 Tracks CPU/GPU/API worker queue depths, utilization, throughput, and active execution heartbeats.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict, field
 import time
 

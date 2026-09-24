@@ -3,7 +3,7 @@ ARTEICP Feedback Pipeline - Versioned Knowledge Manager
 Maintains versioned semantic rules and memory trees with commit hashes and rollback capabilities.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict, field
 import hashlib
 import time

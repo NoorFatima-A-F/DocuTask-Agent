@@ -4,7 +4,7 @@ Executes all 20 verification engines, aggregates assertions, and calculates comp
 """
 
 import time
-from typing import Dict, List, Any
+from typing import Dict, Any
 from ..domain.models import (
     WorkforceReadinessScorecard,
     PartVerificationResult,

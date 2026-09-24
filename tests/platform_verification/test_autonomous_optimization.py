@@ -12,26 +12,6 @@ from app.platform_verification.autonomous_optimization.domain.models import (
     ExecutionMode,
     OptimizationActionType,
     AutonomousCertificationTier,
-    GraphNode,
-    GraphEdge,
-    OperationalGraphReport,
-    CorrelatedSignalCluster,
-    SignalCorrelationReport,
-    MetricTrendTrajectory,
-    TrendAnalysisReport,
-    PredictiveRiskForecast,
-    PredictiveReliabilityReport,
-    OptimizationRecommendation,
-    OptimizationRecommendationsReport,
-    SafetyGateVerification,
-    AutonomousExecutionReport,
-    ExplainabilityTrace,
-    ExplainabilityReport,
-    LearningCycleMetric,
-    LearningEffectivenessReport,
-    GovernanceAuditCheck,
-    GovernanceReport,
-    CertificationReport,
 )
 
 from app.platform_verification.autonomous_optimization.verifiers.operational_graph_verifier import (
@@ -62,12 +42,6 @@ from app.platform_verification.autonomous_optimization.verifiers.governance_veri
     GovernanceVerifier,
 )
 
-from app.platform_verification.autonomous_optimization.scoring.autonomous_optimization_scorer import (
-    AutonomousOptimizationScorer,
-)
-from app.platform_verification.autonomous_optimization.exporter.autonomous_optimization_exporter import (
-    AutonomousOptimizationExporter,
-)
 from app.platform_verification.autonomous_optimization.runtime.autonomous_optimization_runtime import (
     AutonomousOptimizationRuntime,
 )

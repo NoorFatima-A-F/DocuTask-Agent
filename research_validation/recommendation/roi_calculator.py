@@ -8,7 +8,6 @@ Expected Information Gain (EIG), uncertainty reduction, and computational cost.
 from __future__ import annotations
 import math
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
 
 
 @dataclass(frozen=True)

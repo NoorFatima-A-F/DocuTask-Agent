@@ -3,8 +3,7 @@ Scientific Calibration Platform - Reliability Diagram Data Generator
 Bins predictions and empirical observations into confidence intervals for reliability visualization.
 """
 
-from typing import List, Dict, Any, Tuple
-import math
+from typing import List, Dict, Any
 
 
 class ReliabilityDiagramGenerator:

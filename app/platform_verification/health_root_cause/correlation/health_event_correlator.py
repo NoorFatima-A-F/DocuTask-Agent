@@ -4,7 +4,7 @@ Correlates heterogeneous telemetry signals (metrics, logs, traces, state changes
 across time windows into coherent operational incident clusters.
 """
 
-from typing import List, Dict
+from typing import List
 from ..domain.models import (
     RawTelemetrySignal,
     CorrelatedEventCluster,

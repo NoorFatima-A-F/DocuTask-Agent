@@ -1,20 +1,16 @@
 """Tests for Unified NetworkSDK and FastAPI REST API routes."""
 
-import pytest
 from app.infrastructure.networking import NetworkSDK, get_network_sdk
 from app.infrastructure.networking.api.network_routes import (
     list_registered_services,
     register_service,
     list_routes,
-    list_policies,
     create_policy,
-    rotate_certificate,
     get_traffic_telemetry,
     resolve_service_endpoint,
     make_secure_call,
     ServiceRegisterRequest,
     NetworkPolicyCreateRequest,
-    CertificateRotateRequest,
     SecureCallRequest,
 )
 
@@ -45,7 +41,7 @@ def test_network_sdk_end_to_end_secure_call() -> None:
 
 
 def test_network_fastapi_routes() -> None:
-    sdk = get_network_sdk()
+    get_network_sdk()
 
     # 1. Register service route
     reg_req = ServiceRegisterRequest(

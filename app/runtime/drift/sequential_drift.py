@@ -4,7 +4,7 @@ Implements streaming sequential change-point algorithms: CUSUM, Page-Hinkley, an
 """
 
 import math
-from typing import List, Dict, Any, Optional
+from typing import List
 
 
 class CUSUMDetector:

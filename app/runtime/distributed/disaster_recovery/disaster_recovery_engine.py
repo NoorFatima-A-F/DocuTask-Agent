@@ -6,7 +6,7 @@ Cross-region snapshot replication, automated backup drills, and RPO/RTO validati
 from __future__ import annotations
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from app.runtime.distributed.models.schemas import (
     DisasterRecoverySnapshot,
     RegionName,

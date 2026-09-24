@@ -3,9 +3,8 @@ DocuTask Agent - Multi-Criteria Event Filtering Engine
 Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 """
 
-from typing import List, Dict, Any, Optional, Set
+from typing import List, Optional, Set
 from app.runtime.events.models.event import DomainEvent
-from app.runtime.events.models.event_types import DomainEventType, EventSubsystem, EventSeverity
 
 
 class EventFilterCriteria:

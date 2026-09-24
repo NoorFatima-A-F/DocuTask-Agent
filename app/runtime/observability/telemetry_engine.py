@@ -7,7 +7,7 @@ Acts as the central telemetry interface for Replay, Governance, and Benchmark mo
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from app.runtime.observability.aggregation import TimeWindowAggregator
 from app.runtime.observability.event_store import EventStore
 from app.runtime.observability.metrics_engine import MetricsEngine

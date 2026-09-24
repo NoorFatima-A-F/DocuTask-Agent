@@ -8,10 +8,10 @@ from __future__ import annotations
 
 import copy
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 
-from app.runtime.strategy_discovery.graph_synthesis import SynthesizedDAG, PrimitiveOperatorNode
+from app.runtime.strategy_discovery.graph_synthesis import SynthesizedDAG
 
 
 class GraphGrammarRule(BaseModel):

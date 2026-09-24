@@ -3,7 +3,7 @@ Reflection Root Cause Analyzer.
 Performs post-mortem causal attribution for observed execution failures and inefficiencies.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 

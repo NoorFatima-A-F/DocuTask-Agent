@@ -2,7 +2,6 @@
 Human Operational Tabletop Simulator for Part 3G.3.
 Simulates SRE on-call response, incident commander coordination, decision quality, and communications.
 """
-from typing import Dict, Any, List
 from app.platform_verification.disaster_recovery_simulation.domain.models import (
     TabletopExerciseResult,
 )

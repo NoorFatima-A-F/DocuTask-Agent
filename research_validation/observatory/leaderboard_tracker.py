@@ -5,7 +5,6 @@ Maintains historical and competitive leaderboard positioning for scientific pape
 """
 
 from __future__ import annotations
-from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from research_validation.observatory.observatory_models import LeaderboardEntry

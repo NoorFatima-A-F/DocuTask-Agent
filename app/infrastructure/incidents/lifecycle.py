@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import logging
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Set
+from typing import Dict, Set
 import uuid
 
 from app.infrastructure.incidents.models import (

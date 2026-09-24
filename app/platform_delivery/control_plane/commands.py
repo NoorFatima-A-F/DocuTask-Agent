@@ -1,7 +1,6 @@
 """CQRS Command Models for Platform Delivery Control Plane."""
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
-import uuid
 
 
 @dataclass

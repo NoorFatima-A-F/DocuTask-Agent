@@ -6,8 +6,7 @@ decision ledgers, deterministic reproducer, judge verification suite, and audit 
 
 from __future__ import annotations
 
-import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
@@ -17,7 +16,6 @@ from app.runtime.benchmark_cert.benchmark_certifier import (
     ReproducibilityVerifier,
 )
 from app.runtime.decision_ledger.decision_ledger import global_decision_ledger
-from app.runtime.evidence.artifact_registry import global_artifact_registry
 from app.runtime.evidence.evidence_collector import global_evidence_collector
 from app.runtime.evidence.evidence_validator import EvidenceValidator
 from app.runtime.evidence.execution_evidence import EvidenceType
@@ -25,20 +23,14 @@ from app.runtime.explainability.decision_explainer import DecisionExplainer
 from app.runtime.explainability.planner_explainer import PlannerExplainer
 from app.runtime.explainability.toolcall_explainer import ToolCallExplainer
 from app.runtime.explainability.validation_explainer import (
-    ReflectionExplainer,
     ValidationExplainer,
 )
 from app.runtime.judge_verification.verification_suite import (
-    HashChainVerifier,
     VerificationSuite,
 )
 from app.runtime.provenance_dag.provenance_dag_builder import (
     TraversalEngine,
     global_provenance_dag,
-)
-from app.runtime.reproducibility.environment_capture import (
-    DependencyCapture,
-    EnvironmentCapture,
 )
 from app.runtime.reproducibility.reproducer import global_reproducer
 from app.runtime.reproducibility.snapshot_manager import global_snapshot_manager
@@ -69,7 +61,7 @@ def _seed_initial_evidence_if_empty():
             context={"mission_id": "mission-alpha-889"},
             parent_hashes=[ev1.hash_digest],
         )
-        ev3 = global_evidence_collector.record_event(
+        global_evidence_collector.record_event(
             evidence_type=EvidenceType.VALIDATION_CHECK,
             source_agent="docutask-qa-department",
             inputs={"extracted_total": 4850.0, "sum_line_items": 4850.0},
@@ -120,11 +112,11 @@ def _seed_initial_evidence_if_empty():
         )
 
     if global_provenance_dag.count() == 0:
-        p1 = global_provenance_dag.add_node("node-raw-doc", "INPUT", "Raw PDF Document #8891", "c7e12f00a8918231")
-        p2 = global_provenance_dag.add_node("node-plan-dec", "PLAN", "Planner Strategy (Flash+P3)", "8891dec0001a", parent_ids=["node-raw-doc"])
-        p3 = global_provenance_dag.add_node("node-ocr-tool", "TOOL", "Adaptive OCR Execution", "ocr001trace99", parent_ids=["node-plan-dec"])
-        p4 = global_provenance_dag.add_node("node-val-check", "VALIDATION", "Rule Reconciliation Check", "val001pass77", parent_ids=["node-ocr-tool"])
-        p5 = global_provenance_dag.add_node("node-out-json", "OUTPUT", "Certified Extraction JSON", "f81d4fae7dec11", parent_ids=["node-val-check"])
+        global_provenance_dag.add_node("node-raw-doc", "INPUT", "Raw PDF Document #8891", "c7e12f00a8918231")
+        global_provenance_dag.add_node("node-plan-dec", "PLAN", "Planner Strategy (Flash+P3)", "8891dec0001a", parent_ids=["node-raw-doc"])
+        global_provenance_dag.add_node("node-ocr-tool", "TOOL", "Adaptive OCR Execution", "ocr001trace99", parent_ids=["node-plan-dec"])
+        global_provenance_dag.add_node("node-val-check", "VALIDATION", "Rule Reconciliation Check", "val001pass77", parent_ids=["node-ocr-tool"])
+        global_provenance_dag.add_node("node-out-json", "OUTPUT", "Certified Extraction JSON", "f81d4fae7dec11", parent_ids=["node-val-check"])
 
 
 _seed_initial_evidence_if_empty()

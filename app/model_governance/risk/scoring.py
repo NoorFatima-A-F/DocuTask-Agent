@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import uuid
-from typing import Dict, List, Optional, Union
+from typing import Union
 from app.model_governance.registry.models import Model, RiskLevel, ModelProvider, DeploymentType
 from app.model_governance.risk.assessment import ModelRiskProfile
 

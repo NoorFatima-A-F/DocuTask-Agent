@@ -7,8 +7,8 @@ API latencies) and decides when runtime graph adaptation or replanning is requir
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Any, Dict, Optional
+from pydantic import BaseModel
 
 
 class AdaptationTrigger(BaseModel):

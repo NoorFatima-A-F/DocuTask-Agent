@@ -3,7 +3,7 @@ Readiness Decision Engine (Part 3).
 Evaluates incoming dependency health signals and computes deterministic readiness states
 and automated load balancer traffic routing actions.
 """
-from typing import Dict, Any, Tuple
+from typing import Dict, Tuple
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessState,
     TrafficAction,

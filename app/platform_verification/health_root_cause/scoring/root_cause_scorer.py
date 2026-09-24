@@ -4,7 +4,6 @@ Computes Bayesian causal attribution scores:
 Confidence = (0.35 * SignalStrength) + (0.25 * TopologicalScore) + (0.20 * HistoricalMatch) + (0.20 * TemporalPrecedence)
 """
 
-from typing import Dict, List, Optional
 from ..domain.models import (
     RootCauseHypothesis,
     RootCauseReport,

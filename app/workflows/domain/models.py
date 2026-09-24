@@ -6,7 +6,7 @@ Complete declarative workflow specifications, lifecycle state machines, executio
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 import uuid
 from ...platform.kernel.versioning import SemanticVersion
 

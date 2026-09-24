@@ -1,7 +1,6 @@
 """
 Phase 3H.4.11.8: Security Readiness Evaluator
 """
-from typing import Dict, Any
 from ..domain.interfaces import ISecurityReadinessEvaluator
 from ..domain.models import SecurityReadinessScore
 

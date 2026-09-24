@@ -4,7 +4,7 @@ Verifies Domain/Integration Event Boundaries, Pub-Sub Fan-Out, Event Deduplicati
 """
 
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,
@@ -102,7 +102,6 @@ class EventBusVerifier:
         subscribers = ["audit_logger", "search_indexer", "webhook_dispatcher", "analytics_pipeline"]
         received_by = []
 
-        published_event = {"event_id": "evt_publish_101", "name": "DocumentCompleted"}
 
         for sub in subscribers:
             received_by.append(sub)

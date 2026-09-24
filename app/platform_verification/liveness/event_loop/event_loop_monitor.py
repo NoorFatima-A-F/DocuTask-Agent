@@ -2,9 +2,6 @@
 Event Loop Responsiveness Monitor (Part 3).
 Performs periodic heartbeat task recording event loop response time (failure threshold >5000ms).
 """
-import asyncio
-import time
-from typing import Dict, Any
 from app.platform_verification.liveness.domain.models import EventLoopHealthReport
 
 

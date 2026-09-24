@@ -4,7 +4,7 @@ Risk Assessor Service
 Assesses multidimensional risk across 9 scientific, operational, and governance categories.
 """
 
-from typing import List, Optional
+from typing import List
 from research_validation.goal.models.goal import Goal
 from research_validation.goal.models.risk_profile import (
     RiskProfile, RiskItem, RiskSeverity

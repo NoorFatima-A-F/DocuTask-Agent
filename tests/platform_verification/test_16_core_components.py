@@ -4,8 +4,6 @@ Validates all 16 core components against their interface contracts and tests end
 """
 
 import pytest
-import asyncio
-from datetime import datetime, timezone
 
 from app.platform_verification.components import (
     VerificationOrchestratorInterface,
@@ -41,7 +39,7 @@ from app.platform_verification.components import (
     TraceabilityManager,
     PluginManager,
 )
-from app.platform_verification.components.runtime import EnterpriseVerificationRuntime, get_verification_runtime
+from app.platform_verification.components.runtime import EnterpriseVerificationRuntime
 
 
 @pytest.mark.asyncio
@@ -407,7 +405,7 @@ async def test_full_enterprise_runtime_pipeline():
     await runtime.traceability_manager.link_nodes(run_id, cert["certificate_id"], "CERTIFIES")
     
     # 10. Generate Reports & Seal Audit Hash Chain
-    report = await runtime.reporting_engine.generate_report(run_id, "executive", {"summary": "Passed all gates"})
+    await runtime.reporting_engine.generate_report(run_id, "executive", {"summary": "Passed all gates"})
     await runtime.audit_manager.log_event("RUN_CERTIFIED", "certification_engine", {"certificate_id": cert["certificate_id"]})
     await runtime.orchestrator.transition_state(run_id, "COMPLETED")
     

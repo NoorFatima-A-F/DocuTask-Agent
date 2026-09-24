@@ -3,7 +3,7 @@ Scientific Benchmark Engine - Benchmark Suite
 Defines standardized enterprise document processing test suites and synthetic workload distributions.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, List
 from dataclasses import dataclass
 
 

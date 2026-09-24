@@ -3,7 +3,7 @@ Service Locator.
 Provides decoupled access to registered platform services without direct dependency coupling.
 """
 
-from typing import Any, Optional, Type, TypeVar
+from typing import Optional, Type, TypeVar
 from app.agents.runtime.interfaces import IServiceLocator, IServiceRegistry
 from app.agents.runtime.service_registry import ServiceRegistry
 

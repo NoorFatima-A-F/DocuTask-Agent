@@ -15,7 +15,6 @@ from app.knowledge.core.models import (
     ClassificationLevel,
     KnowledgeLifecycleState,
     KnowledgeObject,
-    KnowledgeObjectType,
     KnowledgeVersion,
 )
 from app.knowledge.lifecycle.manager import KnowledgeLifecycleManager

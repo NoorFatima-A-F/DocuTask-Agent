@@ -1,10 +1,9 @@
 """
 Container Architecture and Configuration Validator.
 """
-from typing import Dict, List, Any
+from typing import List
 from app.platform_verification.container_verification.models.verification_models import (
     ContainerArchitectureModel,
-    ServiceDefinition,
     ArchitectureDiscoveryReport,
 )
 

@@ -1,8 +1,8 @@
 """Safety Gateway & Runtime Execution Facade."""
 
-from typing import Optional, Dict, Any, List
-from .context import SafetyContext, ToolContext
-from .decision import SafetyDecision, SafetyStatus, ViolationSeverity, SafetyCategory
+from typing import Optional
+from .context import SafetyContext
+from .decision import SafetyDecision, ViolationSeverity, SafetyCategory
 from .pipeline import SafetyPipeline
 from ..incidents.manager import SafetyIncidentManager
 from ..events.publisher import (
@@ -15,7 +15,7 @@ from ..events.publisher import (
     HallucinationDetectedEvent,
     SafetyIncidentCreatedEvent,
 )
-from ..policies.integration import SafetyPolicyBridge, TenantSafetyPolicy
+from ..policies.integration import SafetyPolicyBridge
 
 
 class SafetyGateway:

@@ -1,6 +1,5 @@
 """Tests for Agent Marketplace and Organization Templates."""
 
-import pytest
 from app.platform.marketplace.marketplace_service import (
     MarketplaceService,
 )

@@ -52,5 +52,5 @@ def test_migration_manager_apply_and_rollback():
     assert len(manager.get_applied_migrations("tenant_a")) == 1
 
     # Rollback
-    rolled_back = manager.rollback_migration("tenant_a", mig.migration_id)
+    manager.rollback_migration("tenant_a", mig.migration_id)
     assert len(manager.get_applied_migrations("tenant_a")) == 0

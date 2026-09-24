@@ -6,21 +6,19 @@ Goal -> Goal Intelligence -> Mission Definition -> Validation -> Capability Anal
 -> Risk Assessment -> Resource Planning -> Success Criteria -> Mission Graph -> Ready For Observation
 """
 
-import sys
 from research_validation.goal.models import (
-    Goal, GoalType, PriorityLevel, GoalStatus, GoalConstraints,
+    GoalType, PriorityLevel, GoalConstraints,
     ConfidenceLevel, ConfidenceThreshold, StoppingConditionType, StoppingCondition,
-    Comparator, SuccessCriterion, CapabilityCriticality, CapabilityRequirement,
-    MissionState
+    Comparator, SuccessCriterion, CapabilityCriticality, CapabilityRequirement
 )
 from research_validation.goal.interfaces import (
     SystemClock, DeterministicIdGenerator, InMemoryEventBus, DefaultSystemCapabilityProvider
 )
 from research_validation.goal.repositories import (
-    InMemoryGoalRepository, InMemoryMissionRepository, SqliteGoalRepository, SqliteMissionRepository
+    InMemoryGoalRepository, InMemoryMissionRepository
 )
 from research_validation.goal.services import (
-    GoalManager, MissionBuilder, MissionRegistry, MissionScheduler, MissionSerializer
+    GoalManager, MissionBuilder, MissionScheduler
 )
 
 

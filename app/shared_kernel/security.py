@@ -3,7 +3,7 @@ Platform Security Primitives, Cryptographic Hasher, and HMAC Signer.
 """
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import List, Set, Optional
+from typing import Set, Optional
 import hashlib
 import hmac
 

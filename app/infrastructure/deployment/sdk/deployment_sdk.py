@@ -1,9 +1,6 @@
 """Unified Deployment SDK providing high-level programmatic release automation capabilities."""
 
-from dataclasses import dataclass
-from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional
-import uuid
+from typing import Callable, List, Optional
 
 from ..control_plane.state import (
     DeploymentStatus,
@@ -13,35 +10,25 @@ from ..control_plane.state import (
 )
 from ..control_plane.orchestrator import DeploymentOrchestrator
 from ..control_plane.manager import DeploymentControlPlaneManager
-from ..pipelines.stages import StageType, StageStatus, PipelineStageConfig
+from ..pipelines.stages import PipelineStageConfig
 from ..pipelines.runners import StageRunner
 from ..pipelines.engine import PipelineRun, PipelineEngine
-from ..artifacts.metadata import (
-    ArtifactType,
-    VulnerabilitySeverity,
-    VulnerabilityFinding,
-    SBOMComponent,
-    ArtifactMetadata,
-)
 from ..artifacts.signing import ArtifactSigner
 from ..artifacts.registry import ArtifactRegistry
-from ..gitops.synchronizer import GitOpsManifest, GitOpsSynchronizer
-from ..gitops.reconciler import DriftType, DriftItem, GitOpsReconciler
+from ..gitops.synchronizer import GitOpsSynchronizer
+from ..gitops.reconciler import GitOpsReconciler
 from ..gitops.controller import GitOpsController
-from ..environments.manager import EnvironmentType, EnvironmentConfig, EnvironmentManager
-from ..environments.policies import EnvironmentPolicy
+from ..environments.manager import EnvironmentManager
 from ..environments.promotion import PromotionChecklist, EnvironmentPromotionManager
-from ..releases.versions import ReleaseVersion
-from ..releases.approvals import ApprovalDecision, ReleaseApproval, ReleaseApprovalGate
-from ..releases.manager import ReleaseLifecycleStatus, ReleaseMetadata, ReleaseManager
+from ..releases.approvals import ReleaseApprovalGate
+from ..releases.manager import ReleaseMetadata, ReleaseManager
 from ..strategies.rolling import RollingDeploymentStrategy
 from ..strategies.canary import CanaryDeploymentStrategy
 from ..strategies.blue_green import BlueGreenDeploymentStrategy
 from ..strategies.shadow import ShadowDeploymentStrategy
-from ..rollback.executor import RollbackTriggerType, RollbackRequest, RollbackResult, RollbackExecutor
+from ..rollback.executor import RollbackTriggerType, RollbackExecutor
 from ..rollback.recovery import PostRollbackRCAReport, RollbackRecoveryManager
-from ..configuration.templates import ConfigTemplate
-from ..configuration.manager import ConfigurationBundle, ConfigurationManager
+from ..configuration.manager import ConfigurationManager
 from ..features.flags import RolloutRule, FeatureFlag
 from ..features.rollout import FeatureRolloutManager
 

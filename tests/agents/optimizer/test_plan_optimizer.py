@@ -5,7 +5,7 @@ Covers CostOptimizer, LatencyOptimizer, RiskOptimizer, OptimizationStrategy, and
 
 import pytest
 
-from app.agents.planning.execution_plan import ExecutionPlan, PlannedTask, TaskStatus
+from app.agents.planning.execution_plan import ExecutionPlan, PlannedTask
 from app.agents.planning.optimizer.cost_optimizer import CostOptimizer
 from app.agents.planning.optimizer.latency_optimizer import LatencyOptimizer
 from app.agents.planning.optimizer.optimization_strategy import (

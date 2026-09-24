@@ -4,7 +4,7 @@ Verifies Circuit Breakers, Bulkheads, Timeout Deadlines, and Adaptive Load Shedd
 """
 
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,
@@ -114,7 +114,6 @@ class ResilienceVerifier:
         # Service A has max concurrency 4, Service B has max concurrency 2
         bulkhead_a_capacity = 4
         active_a = 0
-        bulkhead_b_capacity = 2
         active_b = 0
 
         # Flood Service A with 10 requests -> caps at 4, 6 rejected/queued

@@ -2,7 +2,7 @@
 Phase 13.19: Domain Events for SaaS Platform.
 """
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

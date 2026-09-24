@@ -2,7 +2,7 @@
 Platform API Middleware & Exception Handlers.
 """
 
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Dict
 from .request_context import RequestContext
 from ...core.errors.exceptions import PlatformException
 from ...core.errors.problem_details import ProblemDetails

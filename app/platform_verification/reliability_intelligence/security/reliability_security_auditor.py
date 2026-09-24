@@ -4,7 +4,7 @@ Part 3H.3.7L: Access Control, Secret Masking & PII Redaction in SRE Telemetry.
 """
 
 import re
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from app.platform_verification.reliability_intelligence.domain.models import (
     ReliabilitySecurityCheck,
     ReliabilitySecurityReport,

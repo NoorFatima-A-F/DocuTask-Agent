@@ -7,7 +7,7 @@ GPU utilization, queue depths, token consumption velocity, budget burn, memory p
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 
 

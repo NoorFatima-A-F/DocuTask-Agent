@@ -1,6 +1,5 @@
 """Tests for Multi-Signal RCA and Continuous Profiling."""
 
-import pytest
 from app.observability.incidents.rca import RCAEngine
 from app.observability.profiling.analyzer import HotspotAnalyzer
 from app.observability.profiling.profiler import ContinuousProfiler

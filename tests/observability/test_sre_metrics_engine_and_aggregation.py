@@ -1,6 +1,5 @@
 """Tests for Metric Registry, Collectors, and Rolling Aggregation."""
 
-import pytest
 from app.observability.metrics.aggregation import RollingAggregationEngine
 from app.observability.metrics.collector import PlatformMetricsCollector
 from app.observability.metrics.registry import MetricRegistry

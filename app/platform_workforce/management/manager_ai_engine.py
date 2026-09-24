@@ -3,7 +3,7 @@
 """
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
-from app.platform_workforce.models.schemas import ManagerReviewRecord, EmployeeStatus
+from app.platform_workforce.models.schemas import ManagerReviewRecord
 from app.platform_workforce.registry.workforce_registry import workforce_registry
 
 class ManagerAIEngine:

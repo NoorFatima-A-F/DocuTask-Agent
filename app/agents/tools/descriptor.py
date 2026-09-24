@@ -5,7 +5,7 @@ Descriptors contain only metadata and metadata attributes; never execution logic
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 from app.agents.tools.metadata import CostProfile, LatencyProfile, ToolResourceRequirements, ToolSecurityProfile

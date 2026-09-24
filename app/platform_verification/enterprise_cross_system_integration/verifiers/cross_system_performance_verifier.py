@@ -1,7 +1,7 @@
 """Part S: Cross-System Performance."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import ICrossSystemPerformanceVerifier
 from ..domain.models import (
     CheckResult,

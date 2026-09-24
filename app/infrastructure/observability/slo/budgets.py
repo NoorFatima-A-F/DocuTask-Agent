@@ -9,11 +9,10 @@ from __future__ import annotations
 
 import logging
 from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.infrastructure.observability.slo.objectives import (
     SLIIndicator,
-    SLIType,
     SLOObjective,
 )
 

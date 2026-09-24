@@ -3,7 +3,6 @@ Agent Factory.
 Instantiates agents using standard templates or custom definitions.
 """
 
-from typing import Optional
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.agent_builder import AgentBuilder
 from app.agents.coordination.agent_catalog import AgentCatalog

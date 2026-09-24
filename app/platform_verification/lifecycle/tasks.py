@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Optional, Any, Callable
+from typing import Dict, Optional, Any, Callable
 import time
 
 class TaskState(str, Enum):

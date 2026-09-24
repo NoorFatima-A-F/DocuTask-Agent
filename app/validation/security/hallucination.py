@@ -4,7 +4,7 @@ Measures hallucination rate, unsupported claim rate, and fabricated field rate a
 """
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.core.logging import logger
 
 

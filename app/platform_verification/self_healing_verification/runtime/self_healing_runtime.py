@@ -2,7 +2,7 @@
 Phase 3H.5.5: Self-Healing & Automated Recovery Runtime
 """
 import uuid
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..verifiers import (
     SelfHealingArchitectureVerifier,
     FailureClassificationVerifier,
@@ -16,7 +16,7 @@ from ..verifiers import (
 )
 from ..scoring.self_healing_scorer import SelfHealingScorer
 from ..exporter.self_healing_evidence_exporter import SelfHealingEvidenceExporter
-from ..domain.models import RecoveryValidationReport, SelfHealingScorecard
+from ..domain.models import RecoveryValidationReport
 
 
 class SelfHealingRuntime:
@@ -34,7 +34,7 @@ class SelfHealingRuntime:
         self.exporter = SelfHealingEvidenceExporter()
 
     def run_full_self_healing_verification(self, output_dir: str = "self_healing_verification") -> Dict[str, Any]:
-        arch_report = self.arch_verifier.verify_architecture()
+        self.arch_verifier.verify_architecture()
         classification_report = self.classification_verifier.verify_failure_classification()
         policy_report = self.policy_engine.evaluate_policies()
         execution_report = self.execution_verifier.verify_recovery_executions()

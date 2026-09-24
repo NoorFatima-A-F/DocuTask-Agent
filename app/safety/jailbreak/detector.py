@@ -4,7 +4,7 @@ import re
 from typing import List, Tuple
 from ..gateway.decision import SafetyCategory, ViolationSeverity, SafetyViolation
 from .patterns import JailbreakPatternRegistry
-from .classifier import JailbreakClassifier, JailbreakClassification
+from .classifier import JailbreakClassifier
 
 
 class JailbreakDetector:

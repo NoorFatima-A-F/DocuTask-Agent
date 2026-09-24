@@ -3,9 +3,8 @@ Scientific Risk Engine - Probabilistic Risk
 Computes explicit joint and marginal failure probabilities across operational dimensions.
 """
 
-from typing import Dict, Any, List
+from typing import Dict
 from dataclasses import dataclass, asdict
-import math
 
 
 @dataclass

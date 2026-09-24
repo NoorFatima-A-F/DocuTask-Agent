@@ -2,7 +2,6 @@
 Tests for TransformationEngine and SchemaMapper.
 """
 
-import pytest
 from app.connectors.mappings.schema_mapper import FieldMappingRule, SchemaMapper, SchemaMappingPlan
 from app.connectors.transformations.engine import TransformationEngine
 

@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from app.tenancy.core.models import (
-    TenantLifecycleState,
     SubscriptionTier,
     Region,
 )

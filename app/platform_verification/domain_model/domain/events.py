@@ -2,7 +2,6 @@
 Domain Events representing verification milestones across bounded contexts.
 """
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
 from datetime import datetime, timezone
 
 

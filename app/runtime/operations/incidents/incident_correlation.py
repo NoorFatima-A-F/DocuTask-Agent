@@ -5,7 +5,7 @@ Groups related failures and cascading alerts into unified, actionable incident c
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 import uuid
 
 

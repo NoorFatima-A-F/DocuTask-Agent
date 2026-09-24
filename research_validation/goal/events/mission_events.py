@@ -6,7 +6,6 @@ state transitions, risk evaluation, and budget estimation.
 """
 
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
 from research_validation.goal.interfaces.event_bus import GoalIntelligenceDomainEvent
 
 

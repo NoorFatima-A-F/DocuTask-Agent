@@ -5,7 +5,6 @@ Provides fast filtering, full-text search, and cryptographic verification over e
 
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
-import time
 
 
 @dataclass

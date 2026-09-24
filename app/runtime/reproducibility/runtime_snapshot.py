@@ -10,10 +10,9 @@ import hashlib
 import json
 import time
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 
 from app.runtime.reproducibility.environment_capture import (
-    EnvironmentCapture,
     EnvironmentFingerprint,
 )
 

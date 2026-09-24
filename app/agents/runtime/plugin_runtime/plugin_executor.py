@@ -3,8 +3,8 @@ Plugin Executor Engine.
 Coordinates permission checking, resource bounds enforcement, and sandbox provider invocation.
 """
 
-from typing import Any, Callable, Coroutine, Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Any, Callable, Coroutine, List, Optional
+from pydantic import BaseModel
 from app.agents.runtime.plugin_runtime.isolation_policy import PluginIsolationPolicy
 from app.agents.runtime.plugin_runtime.permission_manager import PluginPermissionManager
 from app.agents.runtime.plugin_runtime.resource_limiter import PluginResourceLimiter

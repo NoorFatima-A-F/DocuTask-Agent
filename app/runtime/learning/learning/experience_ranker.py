@@ -4,7 +4,7 @@ Ranks past mission experiences and reflections by empirical utility and confiden
 """
 
 from typing import Dict, Any, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class RankedExperience(BaseModel):

@@ -23,8 +23,6 @@ from app.governance.platform.api.public.analytics import (
 from app.governance.platform.api.public.approvals import (
     approval_api_service,
     handle_approve_request,
-    handle_list_approvals,
-    handle_reject_request,
 )
 from app.governance.platform.api.internal.services import (
     handle_internal_sync_agent,

@@ -253,9 +253,9 @@ class TestHumanTaskManager:
 
     def test_manager_get_tickets_by_execution(self):
         mgr = HumanTaskManager()
-        t1 = mgr.escalate(execution_id="exec_A", task_id="t1", reason="R1", extracted_data={})
-        t2 = mgr.escalate(execution_id="exec_A", task_id="t2", reason="R2", extracted_data={})
-        t3 = mgr.escalate(execution_id="exec_B", task_id="t3", reason="R3", extracted_data={})
+        mgr.escalate(execution_id="exec_A", task_id="t1", reason="R1", extracted_data={})
+        mgr.escalate(execution_id="exec_A", task_id="t2", reason="R2", extracted_data={})
+        mgr.escalate(execution_id="exec_B", task_id="t3", reason="R3", extracted_data={})
 
         assert len(mgr.get_tickets_for_execution("exec_A")) == 2
         assert len(mgr.get_tickets_for_execution("exec_B")) == 1

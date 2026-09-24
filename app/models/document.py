@@ -4,7 +4,7 @@ Stores document metadata, file system path references, and processing status.
 """
 
 import uuid
-from typing import TYPE_CHECKING
+from typing import List, TYPE_CHECKING
 from sqlalchemy import BigInteger, ForeignKey, String, Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 

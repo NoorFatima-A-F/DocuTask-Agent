@@ -5,8 +5,8 @@ Manages worker node registration, health tracking, capacity reporting, and autom
 
 from __future__ import annotations
 import random
-from datetime import datetime, timezone, timedelta
-from typing import Dict, List, Optional, Any
+from datetime import datetime, timezone
+from typing import Dict, List, Optional
 from app.runtime.distributed.models.schemas import (
     WorkerNode,
     WorkerStatus,
@@ -14,8 +14,6 @@ from app.runtime.distributed.models.schemas import (
     RegionName,
 )
 from app.runtime.distributed.models.events import (
-    DistributedEvent,
-    DistributedEventType,
     DistributedEventBus,
 )
 

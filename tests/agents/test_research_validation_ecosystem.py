@@ -20,10 +20,10 @@ Verifies:
 
 import time
 import pytest
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 # Phase 18: Independent Evaluation & Metrics
-from evaluation.metrics.evaluation_metrics import EvaluationMetrics, EvaluationMetricSummary
+from evaluation.metrics.evaluation_metrics import EvaluationMetrics
 from evaluation.runner.independent_runner import (
     BlackBoxEvaluationResult,
     BlackBoxEvaluationTask,
@@ -61,7 +61,6 @@ from app.evidence.benchmarking.observatory import (
     ContinuousBenchmarkObservatory,
     HistoricalBenchmarkDataPoint,
     ObservatoryAnalysisReport,
-    RegressionSeverity,
 )
 
 # Phase 24: Explainable Evidence
@@ -87,7 +86,6 @@ from app.evidence.reproducibility.research_package import (
 from app.evidence.governance.lifecycle import (
     EvidenceLifecycleManager,
     EvidenceLifecycleState,
-    ManagedEvidenceMetadata,
 )
 
 # Phase 28: Benchmark Registry
@@ -99,7 +97,6 @@ from app.evidence.governance.benchmark_registry import (
 # Phase 29: Confidence Calibration
 from app.evidence.benchmarking.calibration import (
     CalibrationAnalysisReport,
-    CalibrationStatus,
     ConfidenceCalibrationEngine,
 )
 

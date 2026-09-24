@@ -3,7 +3,7 @@ Domain Models for Enterprise Liveness Verification Framework (Part 3H.2).
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 
 
 class LivenessState(str, Enum):

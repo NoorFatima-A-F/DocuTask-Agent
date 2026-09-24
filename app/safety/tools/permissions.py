@@ -1,7 +1,7 @@
 """Tool Danger Classification & Permission Manager."""
 
 from enum import Enum
-from typing import Dict, Set, Optional, List
+from typing import Dict, Optional, List
 from pydantic import BaseModel, Field
 
 

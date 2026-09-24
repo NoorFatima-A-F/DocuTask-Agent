@@ -4,7 +4,7 @@ Verifies Structured JSON Logging, W3C Trace Context Propagation, RED Metrics, an
 """
 
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,

@@ -1,7 +1,6 @@
 """
 Phase 3H.4.10.5: Trace Security & Attribute Sanitization Verifier
 """
-from typing import Dict, Any, List
 from ..domain.interfaces import ITraceSecurityVerifier
 from ..domain.models import TraceSecurityReport, TraceAttributeAudit
 

@@ -6,7 +6,7 @@ import pytest
 import asyncio
 from app.platform.runtime.manager import RuntimeManager
 from app.platform.runtime.states import RuntimeState
-from app.platform.kernel.exceptions import BootstrapException, LifecycleException
+from app.platform.kernel.exceptions import LifecycleException
 
 
 def test_runtime_initial_state():

@@ -5,7 +5,7 @@ Sequences all 10 verification test layers and generates structured execution evi
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Optional, Callable, Any
+from typing import Dict, List, Callable, Any
 import time
 
 class TestTier(str, Enum):

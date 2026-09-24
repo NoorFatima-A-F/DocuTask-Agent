@@ -2,7 +2,7 @@
 
 import pytest
 from app.tenancy.core.models import TenantLifecycleState, EnvironmentType, Region
-from app.tenancy.core.exceptions import InvalidTenantStateError, WorkspaceNotFoundError, TenancyError
+from app.tenancy.core.exceptions import InvalidTenantStateError, WorkspaceNotFoundError
 from app.tenancy.organizations.manager import OrganizationManager
 from app.tenancy.organizations.lifecycle import OrganizationLifecycleManager
 from app.tenancy.workspaces.manager import WorkspaceManager

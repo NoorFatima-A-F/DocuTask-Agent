@@ -3,7 +3,7 @@
 Part 3H.3.7K: Closed-Loop Reliability Review & Evolution.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from app.platform_verification.reliability_intelligence.domain.models import (
     ContinuousImprovementItem,
     ContinuousImprovementReport,

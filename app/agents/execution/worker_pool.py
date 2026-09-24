@@ -4,7 +4,7 @@ Manages bounded pool of execution workers with concurrency limiting and lease tr
 """
 
 import asyncio
-from typing import Dict, List, Optional
+from typing import Optional
 from uuid import uuid4
 from app.agents.execution.exceptions import WorkerExhaustionException
 from app.agents.execution.lease_manager import WorkerLease, WorkerLeaseManager

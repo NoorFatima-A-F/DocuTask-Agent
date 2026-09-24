@@ -3,7 +3,7 @@ Scientific Confidence Engine - Confidence Model
 Defines explicit Bayesian updating models for multi-sensor confidence estimation.
 """
 
-from typing import Dict, Any, List
+from typing import List
 import math
 
 

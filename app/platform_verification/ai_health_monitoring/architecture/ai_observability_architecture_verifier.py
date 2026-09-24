@@ -5,7 +5,7 @@ Validates end-to-end telemetry pipelines from OpenTelemetry collectors to Promet
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.ai_health_monitoring.domain.interfaces import (
     IAIObservabilityArchitectureVerifier,

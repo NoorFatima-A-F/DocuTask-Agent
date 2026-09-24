@@ -1,4 +1,3 @@
-import pytest
 from app.runtime.simulation.cluster_simulator import DigitalTwinClusterSimulator
 from app.runtime.simulation.scale_simulator import MonteCarloScaleSimulator
 from app.runtime.simulation.chaos_generator import ChaosFaultGenerator

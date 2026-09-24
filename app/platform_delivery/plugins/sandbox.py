@@ -1,6 +1,6 @@
 """Plugin Capability Sandboxing and Permission Enforcement (Req 62)."""
 from dataclasses import dataclass, field
-from typing import List, Set
+from typing import List, Optional, Set
 
 
 @dataclass

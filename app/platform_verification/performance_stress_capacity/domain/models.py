@@ -4,7 +4,7 @@ Phase 3J.2: Performance Stress Verification & Capacity Boundary Analysis — Dom
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 

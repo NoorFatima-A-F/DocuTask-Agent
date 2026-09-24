@@ -8,10 +8,10 @@ Generates balanced pipeline topologies with data/control edges and initial cost/
 from __future__ import annotations
 
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from app.runtime.planning.graph.dag import ExecutionDAG
-from app.runtime.planning.graph.edge import DAGEdge, EdgeType
-from app.runtime.planning.graph.node import DAGNode, DependencySpec, DependencyType, NodeStatus
+from app.runtime.planning.graph.edge import DAGEdge
+from app.runtime.planning.graph.node import DAGNode
 
 
 class ExecutionGraphBuilder:

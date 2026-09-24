@@ -2,7 +2,6 @@
 Abstract Interfaces for Multi-Region & Cloud Failover Framework (Part 3G.6).
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
 from app.platform_verification.multi_region_failover.domain.models import (
     MultiRegionArchitectureReport,
     CloudPortabilityReport,

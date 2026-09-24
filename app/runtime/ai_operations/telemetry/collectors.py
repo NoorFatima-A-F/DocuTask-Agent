@@ -4,7 +4,6 @@ Real-time ingestion of agent invocations, tool latency, token consumption, and m
 """
 
 from __future__ import annotations
-import math
 import numpy as np
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any

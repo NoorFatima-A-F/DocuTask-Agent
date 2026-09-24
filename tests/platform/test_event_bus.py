@@ -2,7 +2,6 @@
 Tests for Platform Event Bus, DLQ, Idempotency, and Replay.
 """
 
-import pytest
 import asyncio
 from app.events.bus import EventBus
 from app.events.models import CloudEventEnvelope

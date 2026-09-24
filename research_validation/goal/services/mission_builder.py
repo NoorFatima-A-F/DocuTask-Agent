@@ -5,10 +5,9 @@ Orchestrates the complete 8-stage transformation from a raw Goal to a validated
 Mission in READY_FOR_OBSERVATION state, advancing through the FSM deterministically.
 """
 
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import List, Optional
 
-from research_validation.goal.models.goal import Goal, GoalStatus
+from research_validation.goal.models.goal import Goal
 from research_validation.goal.models.mission import Mission
 from research_validation.goal.models.mission_state import (
     MissionState, StateTransitionRecord, MissionStateMachine
@@ -20,13 +19,12 @@ from research_validation.goal.services.dependency_analyzer import DependencyAnal
 from research_validation.goal.services.risk_assessor import RiskAssessor
 from research_validation.goal.services.budget_estimator import BudgetEstimator
 from research_validation.goal.services.goal_decomposer import GoalDecomposer
-from research_validation.goal.services.mission_hashing import MissionHashingService
 from research_validation.goal.interfaces.event_bus import IEventBus, InMemoryEventBus
 from research_validation.goal.interfaces.id_generator import IIdGenerator, Uuid4IdGenerator
 from research_validation.goal.interfaces.clock import IClock, SystemClock
 from research_validation.goal.interfaces.capability_provider import ICapabilityProvider
 from research_validation.goal.events.mission_events import (
-    MissionCreatedEvent, MissionStateTransitionEvent, CapabilityAnalysisCompletedEvent,
+    MissionCreatedEvent, CapabilityAnalysisCompletedEvent,
     DependencyAnalysisCompletedEvent, RiskCalculatedEvent, BudgetEstimatedEvent,
     MissionReadyForObservationEvent
 )

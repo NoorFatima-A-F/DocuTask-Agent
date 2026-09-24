@@ -1,7 +1,7 @@
 """Part L: Deployment Integration."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IDeploymentIntegrationVerifier
 from ..domain.models import (
     CheckResult,

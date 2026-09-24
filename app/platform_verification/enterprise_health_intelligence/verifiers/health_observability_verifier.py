@@ -1,7 +1,6 @@
 """
 Phase 3H.5.9: Health Intelligence Observability Verifier
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IHealthObservabilityVerifier
 from ..domain.models import HealthDashboardReport, DashboardMetric
 

@@ -3,11 +3,9 @@ Agent Directory.
 Provides fast multi-index queries over agents by role, domain, skills, and availability.
 """
 
-from typing import List, Optional
-from uuid import UUID
+from typing import List
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.agent_registry import AgentRegistry
-from app.agents.coordination.lifecycle import AgentLifecycleState
 
 
 class AgentDirectory:

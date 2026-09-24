@@ -2,7 +2,6 @@
 Test Suite: Organization Health Intelligence & Diagnostics
 Validates granular department health breakdowns, queue penalties, burnout risk, and enterprise health indexing.
 """
-import pytest
 from app.runtime.organization.department import CANONICAL_DEPARTMENTS
 from app.runtime.org_health.department_health import DepartmentHealthScorer
 from app.runtime.org_health.org_health_aggregator import OrgHealthAggregator

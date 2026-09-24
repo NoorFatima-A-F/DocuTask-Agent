@@ -2,15 +2,14 @@
 FastAPI REST Gateway for Enterprise Verification Domain Model & Data Architecture.
 Part 1.2 of the Enterprise Verification Platform.
 """
-from typing import Any, Dict, List, Optional
+from typing import List
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel
 
 from app.platform_verification.domain_model.domain.verification_management import (
-    VerificationDefinition, VerificationRequirement, VerificationCategory
+    VerificationDefinition
 )
 from app.platform_verification.domain_model.domain.verification_plan import VerificationPlan
-from app.platform_verification.domain_model.domain.dataset_management import Dataset, DatasetVersion
+from app.platform_verification.domain_model.domain.dataset_management import Dataset
 from app.platform_verification.domain_model.domain.execution_management import VerificationExecution
 from app.platform_verification.domain_model.domain.evidence_management import EvidenceArtifact
 from app.platform_verification.domain_model.domain.metrics_management import MetricResult

@@ -8,7 +8,6 @@ and generates audit-ready executive, engineering, and portfolio presentation art
 
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_evidence_intelligence.runtime.evidence_intelligence_runtime import (
     EvidenceIntelligenceRuntime,
@@ -32,8 +31,8 @@ def main() -> int:
     compliance = result["compliance"]
     failures = result["failures"]
     executive = result["executive_report"]
-    audit = result["audit_report"]
-    portfolio = result["portfolio"]
+    result["audit_report"]
+    result["portfolio"]
     manifest = result["manifest"]
 
     print()

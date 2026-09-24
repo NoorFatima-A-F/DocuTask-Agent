@@ -8,9 +8,6 @@ automatically subtracting calibration bias and rejecting impossible sub-resoluti
 from __future__ import annotations
 
 import logging
-import math
-import os
-import platform
 import statistics
 import time
 from dataclasses import dataclass, field

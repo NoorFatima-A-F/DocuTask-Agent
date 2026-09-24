@@ -6,8 +6,8 @@ Provides directed acyclic graph (DAG) storage and traversal for end-to-end data 
 from __future__ import annotations
 
 from typing import Dict, List, Optional, Set
-from app.data_governance.lineage.nodes import LineageNode, LineageNodeType
-from app.data_governance.lineage.edges import LineageEdge, LineageEdgeType
+from app.data_governance.lineage.nodes import LineageNode
+from app.data_governance.lineage.edges import LineageEdge
 
 
 class LineageGraphEngine:

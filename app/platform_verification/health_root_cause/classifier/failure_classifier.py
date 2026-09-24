@@ -14,7 +14,7 @@ And assigns 4 incident severity levels:
 - SEV-4 Warning (Transient latency spike / warning threshold)
 """
 
-from typing import Dict, Any
+from typing import Dict
 from ..domain.models import FailureCategory, IncidentSeverity
 
 

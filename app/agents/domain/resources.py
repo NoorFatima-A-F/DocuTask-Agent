@@ -3,7 +3,7 @@ Execution Resource Requirements Domain Models.
 Models CPU, Memory, GPU, LLM, Storage, Database, Queue, Cache, and External API resource requests.
 """
 
-from typing import Dict, Optional
+from typing import Dict
 from pydantic import BaseModel, Field
 
 

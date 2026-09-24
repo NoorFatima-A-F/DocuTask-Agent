@@ -2,7 +2,6 @@
 
 import os
 import json
-import pytest
 from app.platform_verification.readiness_audit_framework.domain.models import (
     EvidenceStatus,
     EvidenceSeverity,
@@ -20,9 +19,6 @@ from app.platform_verification.readiness_audit_framework.repository.evidence_rep
 from app.platform_verification.readiness_audit_framework.metadata.evidence_metadata_generator import (
     EvidenceMetadataGenerator,
 )
-from app.platform_verification.readiness_audit_framework.integrity.evidence_integrity_verifier import (
-    EvidenceIntegrityVerifier,
-)
 from app.platform_verification.readiness_audit_framework.timeline.readiness_timeline_reconstructor import (
     ReadinessTimelineReconstructor,
 )
@@ -37,12 +33,6 @@ from app.platform_verification.readiness_audit_framework.observability.operation
 )
 from app.platform_verification.readiness_audit_framework.cicd.cicd_deployment_gate_evaluator import (
     CICDDeploymentGateEvaluator,
-)
-from app.platform_verification.readiness_audit_framework.scoring.evidence_quality_scorer import (
-    EvidenceQualityScorer,
-)
-from app.platform_verification.readiness_audit_framework.package.final_evidence_package_generator import (
-    FinalEvidencePackageGenerator,
 )
 from app.platform_verification.readiness_audit_framework.runtime.readiness_audit_runtime import (
     ReadinessAuditRuntime,

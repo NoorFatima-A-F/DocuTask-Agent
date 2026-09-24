@@ -2,7 +2,7 @@
 Phase 3I.3: Enterprise Metrics Infrastructure Verification — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import List
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

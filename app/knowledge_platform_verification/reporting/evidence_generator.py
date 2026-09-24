@@ -5,7 +5,6 @@ Exports JSON evidence files, computes SHA-256 cryptographic manifest, and genera
 
 import json
 import hashlib
-import os
 from pathlib import Path
 from typing import Dict, Any
 from ..domain.models import KnowledgeReadinessScorecard

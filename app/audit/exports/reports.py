@@ -1,8 +1,8 @@
 """Audit Report Generator."""
 
-from typing import Optional, List
+from typing import Optional
 from ..storage.repository import AuditRepository
-from ..evidence.manager import EvidenceManager, EvidenceBundle
+from ..evidence.manager import EvidenceManager
 from .formats import AuditExporter
 
 

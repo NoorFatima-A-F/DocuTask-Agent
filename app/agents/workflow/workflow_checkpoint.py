@@ -4,7 +4,6 @@ Durable, point-in-time state capture enabling safe restart, recovery, and replay
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.workflow.lifecycle import WorkflowLifecycleState

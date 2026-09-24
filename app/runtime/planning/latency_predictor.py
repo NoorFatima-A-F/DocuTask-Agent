@@ -5,11 +5,10 @@ Calculates critical path latency, queuing delays, concurrency pipelining, and P5
 
 from __future__ import annotations
 
-import math
-from typing import Any, Dict, List, Optional
+from typing import Dict, Optional
 from pydantic import BaseModel, Field
 
-from app.runtime.planning.strategy_generator import CandidateStrategy, StrategyStep
+from app.runtime.planning.strategy_generator import CandidateStrategy
 
 
 class LatencyPredictionResult(BaseModel):

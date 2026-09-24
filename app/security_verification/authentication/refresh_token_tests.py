@@ -3,7 +3,7 @@ Section 1.2: Refresh Token Lifecycle & Reuse Attack Verification
 Validates single-use refresh token rotation, replay attacks, family revocation, and expiration.
 """
 import uuid
-from typing import Dict, List, Any, Set
+from typing import Dict, List, Any
 from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
 
 class RefreshTokenVerifier:

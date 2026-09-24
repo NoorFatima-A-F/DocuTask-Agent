@@ -11,7 +11,7 @@ import enum
 import hashlib
 import json
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, List, Optional
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger("infrastructure.recovery.verification")

@@ -4,7 +4,7 @@ Phase 3M: Enterprise Cloud Readiness Verification Framework — Domain Models.
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 

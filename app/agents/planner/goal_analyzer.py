@@ -4,7 +4,7 @@ Analyzes user goals identifying objectives, constraints, missing information,
 ambiguity, dependencies, resources, success criteria, and assumptions.
 """
 
-from typing import Any, Dict, List
+from typing import List
 from pydantic import BaseModel, Field
 from app.agents.planner.context import PlannerContext
 from app.agents.planning.goals import PlanGoal

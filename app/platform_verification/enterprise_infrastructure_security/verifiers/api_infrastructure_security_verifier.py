@@ -2,7 +2,7 @@
 Phase 3N.10: API Infrastructure Security Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IAPIInfrastructureSecurityVerifier
 from ..domain.models import (

@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 import logging
 import re
-from typing import Any, Dict, List, Optional, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar
 from pydantic import BaseModel, ValidationError
 
 logger = logging.getLogger(__name__)

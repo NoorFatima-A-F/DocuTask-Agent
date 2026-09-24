@@ -3,13 +3,13 @@ AOIS-HROP Phase 13.7 - Health Engine
 Master health coordinator integrating evaluator, calculator, dependency graph, trend analyzer, and forecast engine.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from app.runtime.operations.health.subsystem_health import SubsystemHealthEvaluator, SubsystemHealthReport
 from app.runtime.operations.health.health_calculator import HealthScoreCalculator
 from app.runtime.operations.health.dependency_health import DependencyHealthGraph
 from app.runtime.operations.health.health_trend import HealthTrendAnalyzer
-from app.runtime.operations.health.health_forecast import HealthForecastEngine, HealthForecastResult
-from app.runtime.operations.events.operation_events import SubsystemType, HealthEvaluated
+from app.runtime.operations.health.health_forecast import HealthForecastEngine
+from app.runtime.operations.events.operation_events import SubsystemType
 
 
 class HealthEngine:

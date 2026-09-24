@@ -2,7 +2,6 @@
 Domain models for Enterprise Verification Test Harness Framework (PART 3).
 """
 from __future__ import annotations
-import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum

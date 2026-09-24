@@ -6,7 +6,6 @@ from ..core.engine import GovernanceMetricsEngine
 from ..risk.analyzer import RiskAnalyzer
 from ..compliance.reports import ComplianceReportingEngine
 from ..policies.effectiveness import PolicyEffectivenessEngine
-from ..warehouse.repositories import GovernanceDataWarehouseRepository
 
 
 class DashboardService:

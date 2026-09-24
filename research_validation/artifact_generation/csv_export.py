@@ -8,7 +8,7 @@ with RFC 4180 compliance and SHA-256 digest computation.
 from __future__ import annotations
 import csv
 import io
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Tuple
 
 from research_validation.artifact_generation.publication_tables import PublicationTable
 from research_validation.provenance.hashing import compute_sha256

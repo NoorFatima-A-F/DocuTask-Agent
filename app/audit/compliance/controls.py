@@ -1,7 +1,7 @@
 """Compliance Controls Domain Models & Registry."""
 
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 from .frameworks import ComplianceFramework
 

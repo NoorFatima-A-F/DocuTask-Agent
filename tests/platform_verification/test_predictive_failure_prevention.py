@@ -4,7 +4,6 @@ Predictive Health Intelligence & Proactive Failure Prevention Verification Frame
 """
 import os
 import json
-import pytest
 from app.platform_verification.predictive_failure_prevention.domain.models import (
     PredictionRiskLevel,
     SystemReliabilityState,
@@ -44,9 +43,6 @@ from app.platform_verification.predictive_failure_prevention.verifiers.chaos_pre
 )
 from app.platform_verification.predictive_failure_prevention.verifiers.predictive_dashboard_verifier import (
     PredictiveDashboardVerifier,
-)
-from app.platform_verification.predictive_failure_prevention.scoring.predictive_health_scorer import (
-    PredictiveHealthScorer,
 )
 from app.platform_verification.predictive_failure_prevention.runtime.predictive_health_runtime import (
     PredictiveHealthRuntime,

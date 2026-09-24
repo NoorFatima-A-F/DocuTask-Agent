@@ -2,10 +2,9 @@
 
 from typing import Dict, Any, List, Optional
 import collections
-from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
-from .scoring import RiskCategory, RiskScoringModel, RiskScoreBreakdown
+from .scoring import RiskCategory
 from ..warehouse.repositories import GovernanceDataWarehouseRepository
 from ..warehouse.schemas import WarehouseQueryFilter
 
@@ -29,8 +28,8 @@ class RiskAnalyzer:
     def analyze_risk_posture(self, tenant_id: str = "*") -> RiskAnalysisSummary:
         q = WarehouseQueryFilter(tenant_id=tenant_id)
         risk_events = self.repo.query_risk_events(q)
-        decisions = self.repo.query_decisions(q)
-        executions = self.repo.query_ai_executions(q)
+        self.repo.query_decisions(q)
+        self.repo.query_ai_executions(q)
 
         category_events: Dict[str, List[float]] = collections.defaultdict(list)
         for r in risk_events:

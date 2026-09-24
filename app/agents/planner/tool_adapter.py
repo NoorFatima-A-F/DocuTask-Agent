@@ -3,7 +3,7 @@ Tool Registry Capability Adapter for Planning Subsystem.
 Queries Tool Registry to confirm capability availability without executing tools.
 """
 
-from typing import List, Optional
+from typing import Optional
 from app.agents.tools.registry import ToolRegistry
 
 

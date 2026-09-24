@@ -1,7 +1,7 @@
 """
 FastAPI Endpoints for Health Check Architecture Verification (Part 3H.1).
 """
-from fastapi import APIRouter, HTTPException, Header, Depends
+from fastapi import APIRouter, Header
 from typing import Dict, Any, Optional
 from dataclasses import asdict
 

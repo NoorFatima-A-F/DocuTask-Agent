@@ -5,7 +5,7 @@ Tracks operational incidents generated when automatic recovery escalates.
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import List, Optional
+from typing import Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 

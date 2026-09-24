@@ -1,6 +1,6 @@
 """Task State & Document Preservation Verifier (3H.3.10.10)."""
 
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..domain.models import TaskPreservationReport, TaskResilienceStatus
 from ..domain.interfaces import ITaskPreservationVerifier
 

@@ -1,7 +1,7 @@
 """Part G: Planning Pipeline Validation."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IPlanningPipelineVerifier
 from ..domain.models import (
     CheckResult,

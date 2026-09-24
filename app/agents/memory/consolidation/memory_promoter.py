@@ -6,7 +6,7 @@ Promotes high-confidence distilled knowledge rules into permanent Semantic Memor
 from __future__ import annotations
 
 import logging
-from typing import List, Optional
+from typing import List
 
 from app.agents.memory.consolidation.knowledge_extractor import ExtractedKnowledgeRule
 from app.agents.memory.intelligence.semantic_memory import SemanticFact, SemanticMemory

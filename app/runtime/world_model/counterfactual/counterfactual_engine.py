@@ -5,7 +5,7 @@ Simulates twin-world alternative histories and computes divergence metrics.
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import uuid
 
 from app.runtime.world_model.events.world_model_events import (

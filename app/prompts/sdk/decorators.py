@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import functools
 import inspect
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Optional
 from app.prompts.sdk.client import PromptGovernanceSDK
 
 

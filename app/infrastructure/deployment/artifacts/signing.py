@@ -2,8 +2,6 @@
 
 import hashlib
 import hmac
-import json
-from typing import Any, Dict, Optional
 
 from .metadata import ArtifactMetadata
 

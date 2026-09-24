@@ -9,8 +9,8 @@ import uuid
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
-from app.data_governance.registry.models import DataAsset, AssetLifecycleState
-from app.data_governance.retention.policies import RetentionPolicy, RetentionAction, DEFAULT_RETENTION_POLICIES
+from app.data_governance.registry.models import DataAsset
+from app.data_governance.retention.policies import RetentionPolicy, DEFAULT_RETENTION_POLICIES
 
 
 class LegalHold(BaseModel):

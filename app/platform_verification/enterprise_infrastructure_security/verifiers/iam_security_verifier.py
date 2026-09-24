@@ -2,7 +2,7 @@
 Phase 3N.7: Identity and Access Management (IAM) Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IIAMSecurityVerifier
 from ..domain.models import (

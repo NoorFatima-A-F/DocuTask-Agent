@@ -3,7 +3,7 @@ Phase 3I.6: Observability Governance, SLO Engineering & Reliability Certificatio
 Orchestrates all verifiers, scoring engine, and evidence exporter.
 """
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 from ..verifiers.governance_architecture_verifier import GovernanceArchitectureVerifier
 from ..verifiers.sli_definition_verifier import SLIDefinitionVerifier

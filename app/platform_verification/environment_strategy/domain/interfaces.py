@@ -2,11 +2,11 @@
 Interfaces and Contracts for Enterprise Verification Environment Infrastructure.
 """
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 from app.platform_verification.environment_strategy.domain.models import (
     EnvironmentDefinition, EnvironmentProvisioningRequest, EnvironmentProvisioningResult,
     ChaosExperimentSpec, ChaosExperimentResult, SecurityLabExperimentSpec,
-    SecurityLabExperimentResult, EnvironmentQualityGateResult, DeploymentPromotionRecord,
+    SecurityLabExperimentResult, DeploymentPromotionRecord,
     EnvironmentHealthState, EnvironmentClassification
 )
 

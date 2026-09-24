@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 
 from app.platform_cognitive.runtime.cognitive_master_orchestrator import cognitive_orchestrator
 from app.platform_cognitive.models.schemas import (
-    CognitiveNode, CognitiveEdge, ExperienceMemoryEntry, DiscoveredProcess,
+    ExperienceMemoryEntry, DiscoveredProcess,
     DecisionRecord, Hypothesis, SimulationScenario, OptimizationOpportunity,
     GoalAlignmentNode, StrategicRecommendation, ExecutiveInsightReport
 )

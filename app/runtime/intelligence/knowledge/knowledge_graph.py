@@ -8,8 +8,6 @@ Every edge explicitly references cryptographic evidence hashes.
 
 from __future__ import annotations
 
-import hashlib
-import json
 import time
 from dataclasses import asdict, dataclass, field
 from typing import Any, Dict, List, Optional, Set

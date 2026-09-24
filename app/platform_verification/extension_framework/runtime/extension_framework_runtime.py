@@ -4,20 +4,14 @@ Master Unified Runtime Facade for Enterprise Extension Framework & Plugin Archit
 from typing import Any, Dict, List, Optional
 from app.platform_verification.extension_framework.domain.models import (
     PluginMetadata, PluginExecutionContext, PluginExecutionResult, PluginHealthMetrics,
-    PluginLifecycleState, PluginPermission, PluginSecurityContext, PluginCategory,
-    PluginMarketplaceEntry, SecurityClassification
+    PluginLifecycleState, PluginSecurityContext, PluginCategory
 )
 from app.platform_verification.extension_framework.domain.interfaces import (
-    BasePluginInterface, VerificationPluginInterface, ExecutionBackendPluginInterface,
-    DatasetProviderPluginInterface, MetricEvaluatorPluginInterface, AIProviderPluginInterface,
-    StorageProviderPluginInterface, NotificationPluginInterface
+    BasePluginInterface
 )
-from app.platform_verification.extension_framework.core.registry import plugin_registry, PluginRegistry
-from app.platform_verification.extension_framework.core.lifecycle import plugin_lifecycle_manager, PluginLifecycleManager
-from app.platform_verification.extension_framework.core.security import plugin_security_manager
+from app.platform_verification.extension_framework.core.registry import plugin_registry
+from app.platform_verification.extension_framework.core.lifecycle import plugin_lifecycle_manager
 from app.platform_verification.extension_framework.core.health import plugin_health_monitor
-from app.platform_verification.extension_framework.core.dependencies import plugin_dependency_validator
-from app.platform_verification.extension_framework.core.configuration import plugin_config_engine
 from app.platform_verification.extension_framework.core.executor import plugin_executor
 from app.platform_verification.extension_framework.core.marketplace import plugin_marketplace
 from app.platform_verification.extension_framework.plugins.ocr_plugin import OCRVerificationPlugin

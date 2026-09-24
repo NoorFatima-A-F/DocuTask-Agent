@@ -6,7 +6,6 @@ Test 2: Event Loop Freeze (inject blocking operation -> heartbeat failure detect
 Test 3: Memory Exhaustion (inject memory pressure -> health failure detected)
 Test 4: Worker Deadlock (freeze worker -> worker unhealthy detected)
 """
-from typing import Dict, Any, List
 from app.platform_verification.liveness.domain.models import FailureSimulationReport
 
 

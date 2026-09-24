@@ -1,9 +1,8 @@
 """
 Unit and Integration Tests for Phase 13.23: Enterprise Autonomous Agent Workforce & Digital Organization Platform (EAAWDOP)
 """
-import pytest
 from app.platform_workforce.models.schemas import (
-    DigitalEmployee, EmployeeRole, DepartmentType, EmployeeStatus
+    DigitalEmployee, EmployeeRole, DepartmentType
 )
 from app.platform_workforce.registry.workforce_registry import workforce_registry
 from app.platform_workforce.hierarchy.organization_hierarchy_engine import organization_hierarchy_engine

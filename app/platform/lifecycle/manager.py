@@ -5,7 +5,7 @@ Coordinates platform component dependency resolution, ordered startup, and rever
 
 from collections import deque
 from datetime import datetime, timezone
-from typing import Callable, Dict, List, Optional, Set
+from typing import Callable, Dict, List, Optional
 from ..kernel.exceptions import LifecycleException
 from ..kernel.health import ComponentHealth, HealthStatus
 from ..kernel.lifecycle import LifecycleState, LifecycleTransition

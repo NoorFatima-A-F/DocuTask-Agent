@@ -1,7 +1,6 @@
 """
 Phase 3H.5.5: Self-Healing & Automated Recovery Scorer
 """
-from typing import Dict, Any
 from ..domain.interfaces import ISelfHealingScorer
 from ..domain.models import (
     SelfHealingScorecard,

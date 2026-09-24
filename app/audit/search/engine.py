@@ -1,6 +1,6 @@
 """Multi-Facet Audit Search Engine & Execution Timeline Graph Reconstruction."""
 
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict
 from pydantic import BaseModel, Field
 from datetime import datetime
 from ..core.events import AuditEvent

@@ -4,7 +4,7 @@ Coordinates initialization of canonical platform subsystems and registers their 
 """
 
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 from app.agents.runtime.service_registry import ServiceRegistry
 
 logger = logging.getLogger(__name__)

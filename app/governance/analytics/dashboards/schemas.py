@@ -1,6 +1,6 @@
 """Dashboard Data Transfer Objects (DTOs) for Executive, Admin, and Developer Personas."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
@@ -11,8 +11,6 @@ from ..core.metrics import (
     ModelMetricsSummary,
     PromptMetricsSummary,
 )
-from ..risk.analyzer import RiskAnalysisSummary
-from ..compliance.reports import AuditReadinessReport
 
 
 class ExecutiveDashboardDTO(BaseModel):

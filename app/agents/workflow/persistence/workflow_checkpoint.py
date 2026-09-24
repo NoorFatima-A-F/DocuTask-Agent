@@ -8,13 +8,13 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from uuid import UUID, uuid4
 
-from app.agents.planning.execution_plan import PlannedTask, TaskStatus
-from app.agents.workflow.task_graph.dynamic_task_graph import DynamicTaskGraph, NodeState
+from app.agents.planning.execution_plan import TaskStatus
+from app.agents.workflow.task_graph.dynamic_task_graph import DynamicTaskGraph
 
 
 @dataclass

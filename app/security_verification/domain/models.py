@@ -4,7 +4,7 @@ Domain Models & Verification Schemas
 """
 from __future__ import annotations
 from enum import Enum
-from typing import Dict, List, Optional, Any, Union
+from typing import Dict, List, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid

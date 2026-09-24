@@ -5,7 +5,7 @@ Job States, Types, and Task Representations.
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from uuid import UUID
 
 

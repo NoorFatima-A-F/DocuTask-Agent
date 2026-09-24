@@ -4,8 +4,7 @@ Provides in-memory time-series storage, sliding-window retention,
 and statistical aggregation (mean, standard deviation, linear slope).
 """
 import math
-from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
+from typing import Dict, List
 from app.platform_verification.predictive_health_intelligence.domain.models import TelemetryItem
 
 

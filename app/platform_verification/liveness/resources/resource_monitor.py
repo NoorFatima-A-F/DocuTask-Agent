@@ -3,8 +3,6 @@ Resource & Memory Health Monitor (Parts 6 & 7).
 Monitors RSS memory, heap usage, memory growth rate (states: NORMAL, WARNING, CRITICAL, UNHEALTHY),
 and CPU saturation vs responsiveness.
 """
-import os
-from typing import Dict, Any
 from app.platform_verification.liveness.domain.models import ResourceHealthReport
 
 try:

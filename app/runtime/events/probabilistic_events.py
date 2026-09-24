@@ -6,7 +6,7 @@ world models, active EVOI calculators, meta-planners, and formal verification so
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from uuid import uuid4
 from app.runtime.events.base import RuntimeEvent
 

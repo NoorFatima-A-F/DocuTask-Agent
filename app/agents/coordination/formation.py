@@ -4,7 +4,7 @@ Assembles and provisions dynamic, supervisor-led, peer, and ephemeral teams from
 """
 
 from typing import List, Optional
-from uuid import UUID, uuid4
+from uuid import uuid4
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.team import Team, TeamMember, TeamRole, TeamType
 

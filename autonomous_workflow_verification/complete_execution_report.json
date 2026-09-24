@@ -145,7 +145,7 @@
         "stages_count": 18,
         "total_duration_ms": 464.0
       },
-      "timestamp": "2026-09-16T19:26:20.438957+00:00"
+      "timestamp": "2026-09-24T21:25:13.290566+00:00"
     },
     {
       "check_id": "CHK-5B-02",
@@ -156,7 +156,7 @@
       "details": {
         "provenance_verified": true
       },
-      "timestamp": "2026-09-16T19:26:20.438963+00:00"
+      "timestamp": "2026-09-24T21:25:13.290589+00:00"
     },
     {
       "check_id": "CHK-5B-03",
@@ -167,7 +167,7 @@
       "details": {
         "data_loss_detected": false
       },
-      "timestamp": "2026-09-16T19:26:20.438968+00:00"
+      "timestamp": "2026-09-24T21:25:13.290613+00:00"
     },
     {
       "check_id": "CHK-5B-04",
@@ -179,8 +179,8 @@
         "total_duration_ms": 464.0,
         "sla_limit_ms": 1000.0
       },
-      "timestamp": "2026-09-16T19:26:20.438978+00:00"
+      "timestamp": "2026-09-24T21:25:13.290651+00:00"
     }
   ],
-  "timestamp": "2026-09-16T19:26:20.438983+00:00"
+  "timestamp": "2026-09-24T21:25:13.290665+00:00"
 }

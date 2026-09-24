@@ -2,7 +2,6 @@
 Endurance and soak testing runner verifying long-term stability and memory integrity.
 """
 
-from typing import Dict, Any
 from app.performance_verification.domain.models import EnduranceTestResult
 
 

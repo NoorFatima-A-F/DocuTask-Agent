@@ -8,7 +8,7 @@ from typing import List, Optional
 from uuid import UUID
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
-from app.agents.runtime.enterprise.scheduler_state import ScheduledJob, JobStatus
+from app.agents.runtime.enterprise.scheduler_state import ScheduledJob
 
 
 class TaskLease(BaseModel):

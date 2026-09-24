@@ -2,8 +2,6 @@
 Phase 3I.7: Master CLI Runner for Enterprise Observability Security, Privacy & Compliance Verification
 """
 import sys
-import os
-import json
 from app.platform_verification.observability_security.runtime.observability_security_runtime import ObservabilitySecurityRuntime
 
 

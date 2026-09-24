@@ -2,14 +2,12 @@
 Unit & Integration Tests for MetricsEngine, ExecutionProfiler, AnomalyDetector, and HealthEvaluator.
 """
 
-import pytest
 from app.runtime.observability.schemas import (
     CostEvent,
     EventCategory,
     ExecutionEvent,
     MissionEvent,
     TraceContext,
-    WorkerEvent,
 )
 from app.runtime.observability.anomaly_detection import AnomalyDetector
 from app.runtime.observability.execution_profiler import ExecutionProfiler

@@ -2,7 +2,7 @@
 Phase 3H.9: Operational Intelligence Verification FastAPI Endpoints
 """
 from fastapi import APIRouter, Query
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 from app.platform_verification.operational_intelligence.runtime.operational_intelligence_runtime import OperationalIntelligenceRuntime
 

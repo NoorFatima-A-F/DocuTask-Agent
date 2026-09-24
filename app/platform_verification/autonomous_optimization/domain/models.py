@@ -2,7 +2,7 @@
 Phase 3H.10: Autonomous Operational Intelligence & Self-Optimization — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

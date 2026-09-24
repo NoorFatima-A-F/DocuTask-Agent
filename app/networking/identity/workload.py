@@ -10,8 +10,8 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from .certificates import CertificateManager, X509Certificate
-from .service_identity import SPIFFEIdentity, WorkloadIdentity
+from .certificates import CertificateManager
+from .service_identity import SPIFFEIdentity
 
 
 class SVIDType(str, Enum):

@@ -8,9 +8,9 @@ and platform resilience status reporting.
 from __future__ import annotations
 
 import logging
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 
-from app.infrastructure.reliability.coordinator import ReliabilityAssessment, ReliabilityCoordinator
+from app.infrastructure.reliability.coordinator import ReliabilityCoordinator
 from app.infrastructure.reliability.models import (
     FaultDomain,
     ReliabilityPolicy,
@@ -20,7 +20,6 @@ from app.infrastructure.reliability.models import (
     RPOObjective,
 )
 from app.infrastructure.reliability.policies import ReliabilityPolicyEngine
-from app.infrastructure.reliability.state_machine import ReliabilityLifecycleStateMachine
 
 logger = logging.getLogger("infrastructure.reliability.manager")
 

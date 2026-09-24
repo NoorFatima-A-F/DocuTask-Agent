@@ -1,6 +1,5 @@
 """Tests for Prompt Deployment, Canary Rollouts, and Automated Rollback (Phase 8D)."""
 
-import pytest
 from app.prompts.registry.repository import PromptRegistryRepository
 from app.prompts.registry.service import PromptRegistryService
 from app.prompts.registry.models import PromptApprovalStatus

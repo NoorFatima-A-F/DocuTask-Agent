@@ -131,7 +131,7 @@ class DatabaseBackupVerificationRuntime:
 
         # Phase 7: Transaction Consistency
         tx_consistency_report = self.consistency_engine.verify_transaction_consistency()
-        tx_consistency_json = self.consistency_engine.export_consistency_json(tx_consistency_report)
+        self.consistency_engine.export_consistency_json(tx_consistency_report)
 
         # Phase 8: Replication Verification
         replication_report = self.replication_verifier.verify_replication_subsystem()

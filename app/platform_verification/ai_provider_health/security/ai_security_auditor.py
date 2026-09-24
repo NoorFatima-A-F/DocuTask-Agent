@@ -6,7 +6,7 @@ Audits AI telemetry, logs, and health endpoints to ensure zero leakage of API ke
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from app.platform_verification.ai_provider_health.domain.interfaces import (
     IAISecurityAuditor,

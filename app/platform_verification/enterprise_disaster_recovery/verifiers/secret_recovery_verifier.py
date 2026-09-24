@@ -2,7 +2,7 @@
 Phase 3L.7: Secret and Credential Recovery Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ISecretRecoveryVerifier
 from ..domain.models import (

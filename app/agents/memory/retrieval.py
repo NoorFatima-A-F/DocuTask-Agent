@@ -3,7 +3,7 @@ Memory Retrieval Layer.
 Defines MemoryQuery, RetrievalResult, and MemoryRetriever supporting keyword, semantic, and hybrid search.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 from app.agents.memory.interfaces import IMemoryRetriever
 from app.agents.memory.providers import BaseMemoryProvider

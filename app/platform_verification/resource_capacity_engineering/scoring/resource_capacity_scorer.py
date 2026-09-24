@@ -17,7 +17,7 @@ Certification Tiers:
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IResourceScorer
 from ..domain.models import (
@@ -48,7 +48,7 @@ class ResourceCapacityScorer(IResourceScorer):
         worker_rep = reports.get("worker_capacity")
         queue_rep = reports.get("queue_capacity")
         db_rep = reports.get("database_capacity")
-        ai_rep = reports.get("ai_resource_profile")
+        reports.get("ai_resource_profile")
         model_rep = reports.get("capacity_modeling")
         scale_rep = reports.get("autoscaling_readiness")
         alert_rep = reports.get("resource_alerting")

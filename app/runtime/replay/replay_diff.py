@@ -3,7 +3,7 @@ Replay State Diff Subsystem.
 Computes structural and data differences between two reconstructed mission states.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, List
 from pydantic import BaseModel, Field
 from app.runtime.replay.replay_state_machine import ReconstructedMissionState
 

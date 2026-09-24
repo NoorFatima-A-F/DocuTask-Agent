@@ -1,7 +1,7 @@
 """
 Phase 3H.4.9: Incident Recovery Verification Runtime
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..verifiers import (
     RecoveryArchitectureVerifier,
     ActionMappingVerifier,
@@ -16,7 +16,6 @@ from ..verifiers import (
 )
 from ..scoring.recovery_scorer import RecoveryScorer
 from ..exporter.recovery_evidence_exporter import RecoveryEvidenceExporter
-from ..domain.models import RecoveryScorecard
 
 
 class RecoveryVerificationRuntime:

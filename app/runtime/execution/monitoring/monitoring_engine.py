@@ -5,7 +5,6 @@ Tracks real-time tool metrics, latency histograms, error rates, throughput, and 
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import random
 from typing import Any, Dict, List, Optional
 import uuid
 

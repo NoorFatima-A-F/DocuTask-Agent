@@ -1,7 +1,5 @@
 """Tests for Engine Defensive Security Validator."""
 
-import pytest
-from pathlib import Path
 from enterprise_audit_engine.certification.security_auditor import EngineSecurityValidator
 
 

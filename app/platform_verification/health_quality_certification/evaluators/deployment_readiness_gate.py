@@ -1,7 +1,7 @@
 """
 Phase 3H.5.11.5 & 3H.5.11.9: Production Readiness Deployment Gatekeeper
 """
-from typing import Dict, Any, List
+from typing import List
 from ..domain.models import (
     DeploymentGateReport,
     DeploymentGateCheckItem,

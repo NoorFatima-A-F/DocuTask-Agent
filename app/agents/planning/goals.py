@@ -4,7 +4,7 @@ Defines PlanGoal, StrategicGoal, and GoalStatus.
 """
 
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 

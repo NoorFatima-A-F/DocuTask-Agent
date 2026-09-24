@@ -5,23 +5,10 @@ Observe -> Evaluate -> Diagnose -> Optimize -> Propose -> Experiment -> Deploy -
 """
 
 from __future__ import annotations
-import asyncio
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional, Any
 from app.runtime.ai_operations.models.schemas import (
-    Span,
-    SpanType,
     SpanStatus,
-    ExecutionTrace,
-    AgentTelemetry,
-    EvaluationResult,
-    FailureAnalysisResult,
-    ModelRouteDecision,
-    PromptVersion,
-    ImprovementProposal,
-    ExperimentRecord,
-    GovernanceAuditRecord,
-    ProposalStatus,
 )
 from app.runtime.ai_operations.models.events import (
     AIOpsEvent,

@@ -1,6 +1,6 @@
 """Multi-Dimensional Verification Strength Model."""
 
-from typing import List, Dict
+from typing import List
 from ..domain.evidence.models import (
     EvidenceRecord,
     EvidenceClassification,

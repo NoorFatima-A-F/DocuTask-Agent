@@ -4,11 +4,10 @@ Deterministically reconstructs workflow instance state and progression from hist
 """
 
 import logging
-from typing import Any, Dict, Optional
 from uuid import UUID
 from app.agents.workflow.interfaces import IWorkflowReplayEngine
 from app.agents.workflow.lifecycle import WorkflowLifecycleState
-from app.agents.workflow.workflow_history import WorkflowHistory, WorkflowHistoryEvent
+from app.agents.workflow.workflow_history import WorkflowHistory
 from app.agents.workflow.workflow_state import WorkflowState
 
 logger = logging.getLogger(__name__)

@@ -8,7 +8,7 @@ and HealthEvaluator into a comprehensive payload for the dashboard UI and API.
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List
+from typing import Any, Dict
 from app.runtime.observability.anomaly_detection import AnomalyDetector
 from app.runtime.observability.event_store import EventStore
 from app.runtime.observability.metrics_engine import MetricsEngine

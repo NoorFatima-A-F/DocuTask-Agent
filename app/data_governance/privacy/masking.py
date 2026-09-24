@@ -4,8 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import re
-from typing import Dict, List, Optional
-from app.data_governance.privacy.pii import PIIType
+from typing import Dict
 
 
 class PrivacyMaskingEngine:

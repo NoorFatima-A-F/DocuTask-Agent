@@ -1,7 +1,6 @@
 """
 Phase 3H.5.7.3: System Reliability Health Score Engine
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import ISystemHealthScoreEngine
 from ..domain.models import (
     ComponentReliabilityScoreReport,
@@ -15,7 +14,6 @@ class SystemHealthScoreEngine(ISystemHealthScoreEngine):
     def calculate_system_health(
         self, comp_report: ComponentReliabilityScoreReport
     ) -> SystemReliabilityHealthReport:
-        mean_comp = comp_report.mean_component_reliability_score
 
         # Category scores
         avail_raw = 99.5

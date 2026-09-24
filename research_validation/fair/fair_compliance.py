@@ -11,10 +11,9 @@ Audits research artifacts and code against the FAIR Guiding Principles (Wilkinso
 
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 
 class FAIRCategory(str, Enum):

@@ -1,6 +1,5 @@
 """Tests for Incident Management Lifecycle and Postmortem Generation."""
 
-import pytest
 from app.observability.incidents.manager import (
     IncidentManager,
     IncidentSeverity,

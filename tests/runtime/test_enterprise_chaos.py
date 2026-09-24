@@ -94,7 +94,6 @@ async def test_fault_injector_burst_count():
 
 @pytest.mark.asyncio
 async def test_chaos_latency_jitter_and_metrics():
-    import time
     engine = ChaosEngine()
 
     async def workload():

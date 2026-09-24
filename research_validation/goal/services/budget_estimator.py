@@ -18,7 +18,7 @@ class BudgetEstimator:
     def estimate_budget(cls, goal: Goal) -> ExecutionBudget:
         """Estimates resource and execution budget."""
         dataset_count = max(1, len(goal.required_datasets))
-        criteria_count = max(1, len(goal.success_metrics))
+        max(1, len(goal.success_metrics))
 
         # Base estimates depending on goal type
         if goal.goal_type == GoalType.OPTIMIZATION:

@@ -37,9 +37,9 @@ def test_budget_manager_progressive_actions():
 def test_agent_scheduler_priority_queuing_and_concurrency():
     scheduler = AgentScheduler(max_concurrent_tasks=2)
 
-    t_low = scheduler.schedule("task-low", "ExecutionAgent", priority=TaskPriority.LOW)
-    t_crit = scheduler.schedule("task-crit", "SecurityAgent", priority=TaskPriority.CRITICAL)
-    t_high = scheduler.schedule("task-high", "ValidationAgent", priority=TaskPriority.HIGH)
+    scheduler.schedule("task-low", "ExecutionAgent", priority=TaskPriority.LOW)
+    scheduler.schedule("task-crit", "SecurityAgent", priority=TaskPriority.CRITICAL)
+    scheduler.schedule("task-high", "ValidationAgent", priority=TaskPriority.HIGH)
 
     assert scheduler.queue_size == 3
 

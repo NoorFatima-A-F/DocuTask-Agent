@@ -18,9 +18,6 @@ sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 from app.platform_verification.enterprise_readiness.runtime.enterprise_readiness_runtime import (
     EnterpriseReadinessRuntime,
 )
-from app.platform_verification.enterprise_readiness.domain.models import (
-    ReadinessCertificationTier,
-)
 
 
 def main():

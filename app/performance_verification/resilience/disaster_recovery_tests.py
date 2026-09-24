@@ -2,7 +2,6 @@
 Disaster Recovery, Snapshot Validation, RTO, and RPO Verifier.
 """
 
-from typing import Dict, Any
 from app.performance_verification.domain.models import DisasterRecoveryMetric
 
 

@@ -3,7 +3,7 @@ Phase 13.6 Optimization & Economic Orchestration Domain Events (ARIA-EOP).
 Typed immutable events capturing optimization lifecycles, resource allocations, routing decisions, and budget reservations.
 """
 
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 import uuid

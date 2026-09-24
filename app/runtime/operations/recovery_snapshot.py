@@ -3,10 +3,10 @@ AMAEOP Pillar 4 - Recovery Snapshot Engine
 Recovers operations from uncorrupted crash snapshots, performs state reconciliation, and restarts execution graphs.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 import time
-from app.runtime.operations.checkpoint_manager import CheckpointManager, checkpoint_manager
+from app.runtime.operations.checkpoint_manager import checkpoint_manager
 
 
 @dataclass

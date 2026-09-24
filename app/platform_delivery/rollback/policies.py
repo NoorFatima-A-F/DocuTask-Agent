@@ -1,6 +1,5 @@
 """Automated Rollback Triggers & Safety Policies (Req 42, 44)."""
 from enum import Enum
-from typing import List
 
 
 class RollbackTriggerType(str, Enum):

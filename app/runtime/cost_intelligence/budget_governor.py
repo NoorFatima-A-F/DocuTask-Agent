@@ -3,7 +3,7 @@ ARTEICP Cost Intelligence - Enterprise Budget Governor
 Enforces hard cost ceilings, budget guardrails, and dynamic Pareto quality-cost optimization trade-offs.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 
 

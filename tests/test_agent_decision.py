@@ -8,9 +8,6 @@ from uuid import uuid4
 import pytest
 
 from app.agents.decision import (
-    ApprovalPolicy,
-    ApprovalWorkflow,
-    BusinessRule,
     ComplianceRule,
     ConstraintEvaluator,
     CostPolicy,
@@ -18,9 +15,7 @@ from app.agents.decision import (
     DecisionBuilder,
     DecisionCache,
     DecisionContext,
-    DecisionEngine,
     DecisionEvaluationException,
-    DecisionExplanation,
     DecisionFactory,
     DecisionGraph,
     DecisionGraphEdge,
@@ -29,15 +24,10 @@ from app.agents.decision import (
     DecisionResult,
     DecisionSerializer,
     DecisionSimulator,
-    DecisionTrace,
     DecisionValidator,
-    EscalationRequirement,
     Evidence,
-    ExecutionPolicy,
     ExplanationBuilder,
-    GovernanceFramework,
     OptimizationBuilder,
-    OptimizationConstraint,
     OptimizationEngine,
     OptimizationMetric,
     OptimizationStrategy,
@@ -47,18 +37,10 @@ from app.agents.decision import (
     PolicyEvaluator,
     RecommendationBuilder,
     RecommendationEngine,
-    RetryPolicy,
-    RiskAssessment,
-    RiskProfile,
-    RiskScore,
-    RoutingRule,
     RuleBuilder,
     RuleEvaluator,
     RuleGroup,
-    SecurityPolicy,
     SecurityRule,
-    ValidationRule,
-    WorkflowRule,
 )
 
 
@@ -218,7 +200,7 @@ async def test_decision_cache_and_repository():
 
 def test_decision_serialization_and_validation():
     """Verifies DecisionSerializer JSON serialization and DecisionValidator fail-fast checks."""
-    ctx = DecisionContext(estimated_cost_usd=1.0)
+    DecisionContext(estimated_cost_usd=1.0)
     result = DecisionResult()
 
     serialized = DecisionSerializer.to_json(result)

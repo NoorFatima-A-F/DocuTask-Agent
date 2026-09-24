@@ -10,31 +10,26 @@ import pytest
 import tempfile
 from pathlib import Path
 
-from research_validation.goal.constants import NonFabricationState
 from research_validation.goal.models import (
     Goal, GoalType, PriorityLevel, GoalStatus, GoalConstraints,
     ConfidenceLevel, ConfidenceThreshold, StoppingConditionType, StoppingCondition,
-    Comparator, SuccessCriterion, ResourceBudget, ExecutionBudget,
-    CapabilityCriticality, CapabilityRequirement, DependencyType, GoalDependency,
-    RiskSeverity, RiskItem, RiskProfile, EvidenceRequirement, MissionMetrics,
-    MissionState, StateTransitionRecord, MissionStateMachine,
-    MissionNode, ActionNode, TaskNode, SubgoalNode, MilestoneNode, ObjectiveNode, Mission
+    Comparator, SuccessCriterion, CapabilityCriticality, CapabilityRequirement, DependencyType, GoalDependency,
+    RiskSeverity, MissionState, MissionStateMachine
 )
 from research_validation.goal.interfaces import (
-    SystemClock, FrozenClock, Uuid4IdGenerator, DeterministicIdGenerator,
+    SystemClock, DeterministicIdGenerator,
     InMemoryEventBus, DefaultSystemCapabilityProvider
 )
 from research_validation.goal.repositories import (
-    InMemoryGoalRepository, InMemoryMissionRepository, SqliteGoalRepository, SqliteMissionRepository
+    InMemoryGoalRepository, InMemoryMissionRepository, SqliteGoalRepository
 )
 from research_validation.goal.services import (
-    MissionHashingService, MissionSerializer, ConfidenceEstimatorService, ConstraintEngine,
+    MissionSerializer, ConstraintEngine,
     CapabilityAnalyzer, DependencyAnalyzer, RiskAssessor, BudgetEstimator,
-    GoalDecomposer, GoalValidator, MissionBuilder, GoalManager, MissionRegistry, MissionScheduler
+    GoalValidator, MissionBuilder, GoalManager, MissionScheduler
 )
 from research_validation.goal.exceptions import (
-    GoalValidationError, InvalidStateTransitionError, MissingCapabilityError,
-    CircularDependencyError, RiskThresholdExceededError
+    InvalidStateTransitionError
 )
 
 

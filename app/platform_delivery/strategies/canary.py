@@ -1,7 +1,7 @@
 """Argo-Rollouts aligned Stepwise Canary Strategy (Req 36)."""
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Callable, List, Optional, Tuple
+from typing import List, Optional
 
 
 @dataclass

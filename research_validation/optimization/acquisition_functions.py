@@ -8,7 +8,6 @@ and Thompson Sampling (TS) for scientific experimentation optimization.
 from __future__ import annotations
 import math
 import random
-from typing import Callable, Tuple
 
 
 def norm_pdf(x: float) -> float:

@@ -7,11 +7,11 @@ subtasks with clear dependencies, inputs, outputs, and validation steps.
 from __future__ import annotations
 
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import List
 
 from app.agents.intelligence.goal.goal_specification import GoalSpecification
 from app.agents.intelligence.goal.intent_classifier import IntentType
-from app.agents.planning.execution_plan import PlannedTask, TaskStatus
+from app.agents.planning.execution_plan import PlannedTask
 
 
 class TaskDecomposer:

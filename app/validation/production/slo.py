@@ -4,7 +4,6 @@ Evaluates production Availability (99.5%), Extraction Success (>98%), P95 Latenc
 and Recovery Time (<60s) metrics.
 """
 
-from typing import Dict
 from pydantic import BaseModel
 from app.core.logging import logger
 

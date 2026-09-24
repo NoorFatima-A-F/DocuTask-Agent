@@ -5,7 +5,7 @@ Defines required SLSA provenance level, raw telemetry bindings, and cryptographi
 """
 
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import List
 
 
 @dataclass(frozen=True)

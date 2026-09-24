@@ -1,12 +1,10 @@
 """Tests for Escalation Rules, Handlers, and Timeout Engine."""
 
 from datetime import datetime, timezone, timedelta
-import pytest
 
 from app.oversight.reviews.requests import ReviewRequest, ReviewPriority
 from app.oversight.approvals.lifecycle import ApprovalLifecycleState
-from app.oversight.escalation.rules import EscalationLevel, EscalationRule
-from app.oversight.escalation.handlers import EscalationHandler
+from app.oversight.escalation.rules import EscalationLevel
 from app.oversight.escalation.engine import EscalationEngine
 
 

@@ -4,7 +4,7 @@ Prevents concurrent execution of the same document job across worker nodes using
 """
 
 import asyncio
-from typing import Dict, Set
+from typing import Set
 from app.core.logging import logger
 
 

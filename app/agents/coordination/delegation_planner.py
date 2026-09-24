@@ -4,11 +4,10 @@ Plans task assignments across candidate agents according to delegation mode and 
 """
 
 from typing import List, Optional
-from uuid import UUID
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.agent_selector import AgentSelector
 from app.agents.coordination.capability_matcher import CapabilityRequirement
-from app.agents.coordination.delegation import DelegationMode, DelegationRequest, DelegationTask
+from app.agents.coordination.delegation import DelegationRequest, DelegationTask
 from app.agents.coordination.delegation_policy import DelegationPolicy
 
 

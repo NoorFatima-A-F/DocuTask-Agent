@@ -3,7 +3,7 @@ Coordination Tool Adapter.
 Queries Tool Registry for tool metadata and schemas. Never invokes tools directly.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 
 class CoordinationToolAdapter:

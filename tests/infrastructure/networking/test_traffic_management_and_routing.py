@@ -1,6 +1,5 @@
 """Tests for Traffic Management, Load Balancing, Canary Splits, Retries, and Circuit Breakers."""
 
-import pytest
 from app.infrastructure.networking.control_plane import NetworkEndpoint, RouteRule, RoutingStrategy
 from app.infrastructure.networking.traffic import (
     LoadBalancerEngine,

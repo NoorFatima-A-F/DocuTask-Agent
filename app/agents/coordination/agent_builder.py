@@ -3,7 +3,7 @@ Agent Profile Builder.
 Fluent builder for constructing validated Agent instances and profiles.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import List
 from uuid import UUID, uuid4
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.agent_identity import AgentIdentity

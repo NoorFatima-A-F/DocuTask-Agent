@@ -4,10 +4,10 @@ Dispatches tasks with strict priority ordering (CRITICAL > HIGH > NORMAL > LOW),
 """
 
 from typing import Dict, List, Any, Optional
-from dataclasses import dataclass, asdict, field
+from dataclasses import dataclass, field
 import heapq
 import time
-from app.runtime.resource_scheduler.worker_pool import WorkerPoolManager, WorkerInstance
+from app.runtime.resource_scheduler.worker_pool import WorkerPoolManager
 
 
 @dataclass(order=True)

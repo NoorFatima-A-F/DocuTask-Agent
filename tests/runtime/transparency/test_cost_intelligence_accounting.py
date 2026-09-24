@@ -2,7 +2,6 @@
 Test Suite: Cost & Energy Intelligence Accounting
 Validates token cost models, prompt cache discounts, carbon footprints, and budget governor threshold enforcement.
 """
-import pytest
 from app.runtime.cost_intelligence.cost_calculator import CostCalculator
 from app.runtime.cost_intelligence.cost_aggregator import CostAggregator
 from app.runtime.cost_intelligence.budget_governor import BudgetGovernor

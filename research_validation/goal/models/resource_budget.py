@@ -5,7 +5,7 @@ Specifies estimated and consumed computational resources across hardware and ser
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, Optional
+from typing import Dict
 
 
 @dataclass(frozen=True)

@@ -1,9 +1,7 @@
 """Tests for mTLS 1.3 Handshake and Zero-Trust Authorization Engine."""
 
-import pytest
 from app.networking.identity.certificates import CertificateManager
 from app.networking.security.authorization import (
-    ZeroTrustDecision,
     ZeroTrustEvaluator,
     ZeroTrustResource,
     ZeroTrustSubject,
@@ -11,7 +9,6 @@ from app.networking.security.authorization import (
 from app.networking.security.mtls import (
     MTLSManager,
     MTLSMode,
-    TLSVersion,
 )
 from app.networking.security.policies import (
     NetworkPolicy,

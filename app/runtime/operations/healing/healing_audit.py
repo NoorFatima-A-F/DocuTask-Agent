@@ -6,7 +6,7 @@ Cryptographically signed append-only audit trail for all autonomic self-healing 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
-from typing import Any, Dict, List, Optional
+from typing import List
 import uuid
 
 

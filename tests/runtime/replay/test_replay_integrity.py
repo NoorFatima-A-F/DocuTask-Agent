@@ -2,7 +2,6 @@
 Unit Tests for Replay Cryptographic Hash-Chain Integrity.
 """
 
-import pytest
 from app.runtime.observability.schemas import RuntimeEvent, EventCategory, EventType, EventSeverity
 from app.runtime.observability.event_serializer import EventSerializer
 from app.runtime.replay.replay_integrity import ReplayIntegrityVerifier

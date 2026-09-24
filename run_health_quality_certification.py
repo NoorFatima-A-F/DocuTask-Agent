@@ -2,12 +2,10 @@
 Phase 3H.5.11: Enterprise Health Quality Scoring & Operational Certification Framework Master CLI Runner
 """
 import sys
-import os
 from app.platform_verification.health_quality_certification.runtime.health_quality_runtime import (
     HealthQualityRuntime,
 )
 from app.platform_verification.health_quality_certification.domain.models import (
-    CertificationStatus,
     DeploymentDecision,
 )
 

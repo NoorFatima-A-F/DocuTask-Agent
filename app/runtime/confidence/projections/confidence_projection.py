@@ -9,7 +9,7 @@ from typing import Any, Dict
 from datetime import datetime, timezone
 from app.runtime.events.bus.subscriber import EventSubscriber
 from app.runtime.events.models.event import DomainEvent
-from app.runtime.events.models.event_types import EventSubsystem, DomainEventType
+from app.runtime.events.models.event_types import EventSubsystem
 
 
 class ConfidenceProjection(EventSubscriber):

@@ -4,7 +4,7 @@ Evaluates 1,000+ prompt injection attack vectors embedded in prompts and documen
 """
 import re
 from typing import Dict, List, Any
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel, AttackVector
+from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
 
 PROMPT_INJECTION_SIGNATURES = [
     r"ignore\s+(all\s+)?previous\s+instructions",

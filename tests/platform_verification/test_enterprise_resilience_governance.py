@@ -3,22 +3,10 @@ Comprehensive Test Suite for Part 3G.4:
 Disaster Recovery Governance, Continuous Resilience Management & Operational Maturity Verification Framework.
 """
 import pytest
-import os
-import json
 import yaml
-from pathlib import Path
 
 from app.platform_verification.resilience_governance.domain.models import (
     ResilienceMaturityTier,
-    GovernanceRiskSeverity,
-    OwnershipValidationReport,
-    PolicyValidationReport,
-    RecoveryChangeImpactReport,
-    DocumentationDriftReport,
-    ResilienceMaturityScore,
-    PostmortemSectionReport,
-    ContinuousResilienceMetricsReport,
-    GovernanceScorecard,
 )
 from app.platform_verification.resilience_governance.ownership.ownership_validator import (
     OwnershipValidator,
@@ -32,9 +20,6 @@ from app.platform_verification.resilience_governance.change_impact.change_impact
 from app.platform_verification.resilience_governance.drift_detection.doc_drift_detector import (
     DocumentationDriftDetector,
 )
-from app.platform_verification.resilience_governance.maturity.maturity_assessment_engine import (
-    MaturityAssessmentEngine,
-)
 from app.platform_verification.resilience_governance.incidents.incident_lifecycle_verifier import (
     IncidentLifecycleVerifier,
 )
@@ -43,7 +28,6 @@ from app.platform_verification.resilience_governance.metrics.continuous_resilien
 )
 from app.platform_verification.resilience_governance.risk.resilience_risk_manager import (
     RiskCategory,
-    RiskLevel,
     ResilienceRiskManager,
 )
 from app.platform_verification.resilience_governance.compliance_audit.audit_package_generator import (
@@ -51,9 +35,6 @@ from app.platform_verification.resilience_governance.compliance_audit.audit_pack
 )
 from app.platform_verification.resilience_governance.review_pipeline.scheduled_review_engine import (
     ScheduledReviewEngine,
-)
-from app.platform_verification.resilience_governance.exporter.governance_exporter import (
-    GovernanceExporter,
 )
 from app.platform_verification.resilience_governance.runtime.governance_runtime import (
     GovernanceRuntime,

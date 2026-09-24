@@ -1,7 +1,6 @@
 """
 Tests for Deadlock Detection and Liveness Failure Simulations (Parts 4 & 11).
 """
-import pytest
 from app.platform_verification.liveness.deadlock.deadlock_detector import DeadlockDetector
 from app.platform_verification.liveness.failure_injection.liveness_failure_injector import (
     LivenessFailureInjector,

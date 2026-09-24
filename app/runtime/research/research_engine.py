@@ -4,9 +4,9 @@ Coordinates telemetry hypothesis generation, multi-armed bandit exploration, and
 """
 
 from typing import Dict, List, Any
-from app.runtime.research.hypothesis_generator import HypothesisGenerator, ResearchHypothesis
-from app.runtime.research.exploration_strategy import ThompsonSamplingBandit, UCB1Bandit
-from app.runtime.research.discovery_validator import DiscoveryValidator, DiscoveryValidationReport
+from app.runtime.research.hypothesis_generator import HypothesisGenerator
+from app.runtime.research.exploration_strategy import ThompsonSamplingBandit
+from app.runtime.research.discovery_validator import DiscoveryValidator
 
 
 class AutonomousResearchEngine:

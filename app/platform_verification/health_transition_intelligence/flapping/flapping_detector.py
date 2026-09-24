@@ -4,7 +4,7 @@ Identifies rapid oscillatory transitions between healthy and failed states
 and activates dampening to prevent destructive container restart storms.
 """
 from datetime import datetime, timezone, timedelta
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
     FlappingReport,

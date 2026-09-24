@@ -3,7 +3,7 @@ Scientific Confidence Engine - Unified Engine
 Computes posterior confidence, calibration, confidence intervals, uncertainty, and evidence weighting.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from dataclasses import dataclass, asdict
 from app.runtime.confidence.confidence_model import ConfidenceModel
 from app.runtime.confidence.confidence_calibration import PlattCalibrator

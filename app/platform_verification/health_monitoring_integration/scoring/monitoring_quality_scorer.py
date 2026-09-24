@@ -11,7 +11,6 @@ Computes weighted quality scorecards across the 6 core health monitoring dimensi
 
 from __future__ import annotations
 
-from typing import Any, Dict
 
 from app.platform_verification.health_monitoring_integration.domain.interfaces import (
     IMonitoringQualityScorer,

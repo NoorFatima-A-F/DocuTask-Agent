@@ -4,7 +4,7 @@ Implements IHealthMonitor; collects live health checks from registered probes an
 """
 
 import time
-from typing import Any, Callable, Coroutine, Dict, List, Optional
+from typing import Any, Callable, Coroutine, Dict, List
 from app.agents.runtime.interfaces import IHealthMonitor
 from app.agents.runtime.runtime_health import (
     PlatformHealthReport,

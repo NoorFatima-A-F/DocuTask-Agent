@@ -4,8 +4,7 @@ Coordinates Blue/Green zero-downtime platform upgrades and automated rollback on
 """
 
 from enum import Enum
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field
+from typing import Optional
 
 
 class DeploymentSlot(str, Enum):

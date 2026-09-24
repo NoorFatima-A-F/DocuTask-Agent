@@ -3,8 +3,8 @@ Timeline Index Subsystem.
 Provides O(1) indexed lookup of timeline records by timestamp, stage, and event ID.
 """
 
-from typing import Dict, List, Optional, Set
-from pydantic import BaseModel, Field
+from typing import Dict, List, Optional
+from pydantic import BaseModel
 
 
 class TimelineEntry(BaseModel):

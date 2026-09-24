@@ -3,9 +3,8 @@ Incident Automation Engine for Operational Resilience Framework (Part 3G.5D).
 Verifies complete incident lifecycle automation:
 Failure -> Detection -> Alerting -> Severity Classification -> Auto-Ticketing -> Routing -> Resolution -> Post-Incident Summary.
 """
-from typing import Dict, Any, List
+from typing import List
 from datetime import datetime, timezone
-import uuid
 
 from app.platform_verification.operational_resilience.domain.models import (
     IncidentSeverity,

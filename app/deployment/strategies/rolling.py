@@ -1,7 +1,7 @@
 """Rolling Deployment Strategy Engine."""
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional
+from typing import Callable, List, Optional
 from ..core.exceptions import StrategyExecutionException
 
 
@@ -52,7 +52,7 @@ class RollingStrategy:
             is_healthy = False
             try:
                 is_healthy = self.health_check_fn()
-            except Exception as e:
+            except Exception:
                 is_healthy = False
 
             step_res = RollingStepResult(

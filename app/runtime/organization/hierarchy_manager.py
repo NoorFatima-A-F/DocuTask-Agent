@@ -3,7 +3,7 @@ AMAEOP Pillar 1 - Hierarchy & Escalation Manager
 Manages organizational reporting structures, escalation trees, and dynamic chain-of-command routing.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 from app.runtime.organization.department import CANONICAL_DEPARTMENTS
 

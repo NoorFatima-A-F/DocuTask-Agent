@@ -2,12 +2,9 @@
 Unit & Marginal Benefit Tests for Retry Optimizer (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.retry import (
     RetryOptimizer,
-    RetryPolicy,
     DEFAULT_RETRY_POLICY,
-    retry_statistics,
 )
 
 

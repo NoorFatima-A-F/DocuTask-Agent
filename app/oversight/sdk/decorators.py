@@ -2,7 +2,7 @@
 
 import functools
 import inspect
-from typing import Callable, Any, Optional
+from typing import Callable, Optional
 
 from ..core.context import OversightContext
 from ..core.exceptions import ApprovalPolicyViolationError

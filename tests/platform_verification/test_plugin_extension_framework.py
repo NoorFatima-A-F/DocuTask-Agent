@@ -9,27 +9,20 @@ from app.platform_verification.extension_framework.domain.models import (
     PluginHealthState,
     PluginPermission,
     PluginSecurityContext,
-    PluginExecutionContext,
-    PluginExecutionResult,
-    PluginHealthMetrics,
     PluginDependencyDeclaration,
     SecurityClassification,
 )
-from app.platform_verification.extension_framework.domain.interfaces import VerificationPluginInterface
-from app.platform_verification.extension_framework.core.registry import plugin_registry, PluginRegistry
-from app.platform_verification.extension_framework.core.lifecycle import plugin_lifecycle_manager, PluginLifecycleManager
+from app.platform_verification.extension_framework.core.registry import PluginRegistry
+from app.platform_verification.extension_framework.core.lifecycle import PluginLifecycleManager
 from app.platform_verification.extension_framework.core.security import plugin_security_manager
 from app.platform_verification.extension_framework.core.health import plugin_health_monitor
 from app.platform_verification.extension_framework.core.dependencies import plugin_dependency_validator
 from app.platform_verification.extension_framework.core.configuration import plugin_config_engine
-from app.platform_verification.extension_framework.core.executor import plugin_executor
 from app.platform_verification.extension_framework.tooling.scaffolding import plugin_scaffolder
 from app.platform_verification.extension_framework.tooling.validator import plugin_contract_validator
 from app.platform_verification.extension_framework.tooling.docs_generator import plugin_doc_generator
 from app.platform_verification.extension_framework.plugins.ocr_plugin import OCRVerificationPlugin
 from app.platform_verification.extension_framework.plugins.ai_extraction_plugin import AIExtractionEvaluationPlugin
-from app.platform_verification.extension_framework.plugins.rag_eval_plugin import RAGEvaluationPlugin
-from app.platform_verification.extension_framework.plugins.prompt_injection_plugin import PromptInjectionSecurityPlugin
 from app.platform_verification.extension_framework.runtime.extension_framework_runtime import extension_framework_runtime
 
 

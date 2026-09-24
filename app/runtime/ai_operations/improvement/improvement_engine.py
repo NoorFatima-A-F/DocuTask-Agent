@@ -9,12 +9,8 @@ from typing import Dict, List, Optional, Any
 from app.runtime.ai_operations.models.schemas import (
     ImprovementProposal,
     ProposalStatus,
-    EvaluationResult,
-    FailureAnalysisResult,
 )
 from app.runtime.ai_operations.models.events import (
-    AIOpsEvent,
-    AIOpsEventType,
     AIOpsEventBus,
 )
 from app.runtime.ai_operations.improvement.experiment_engine import ExperimentEngine

@@ -1,6 +1,5 @@
 """AI Latency Chaos Testing Verifier (3H.3.10.3)."""
 
-from typing import List
 from ..domain.models import LatencyChaosReport
 from ..domain.interfaces import ILatencyChaosVerifier
 from ..simulation.failure_scenarios.latency_injection import LatencyInjectionScenario

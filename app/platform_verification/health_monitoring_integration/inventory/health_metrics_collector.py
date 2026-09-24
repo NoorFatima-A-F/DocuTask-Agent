@@ -6,7 +6,7 @@ Service Availability, API, Agent Runtime, Workers, Queues, PostgreSQL, Storage, 
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.health_monitoring_integration.domain.interfaces import (
     IHealthMetricsCollector,

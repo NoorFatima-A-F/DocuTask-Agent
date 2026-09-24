@@ -8,7 +8,6 @@ import time
 from typing import Dict, List, Any, Optional
 from ..domain.models import (
     CertificationLevel,
-    CertificationDecisionStatus,
     ScoringDimensionResult,
     CertificationAssertionResult,
     CertificationPillarResult,

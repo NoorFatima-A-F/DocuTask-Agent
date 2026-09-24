@@ -3,7 +3,7 @@ Conversation Memory Sub-Tier.
 Stores user dialogue turns and interaction context.
 """
 
-from typing import Any, List, Optional
+from typing import Optional
 from app.agents.memory.providers import BaseMemoryProvider, InMemoryProvider
 
 from app.agents.memory.repository import MemoryItem

@@ -4,7 +4,6 @@ Achieves >= 95% test coverage for Plan, PlanGraph, DAGValidator, WorkflowDefinit
 Simulation, Builders, Manager, Validation, and Serialization.
 """
 
-from uuid import uuid4
 import pytest
 
 from app.agents.planning import (
@@ -22,11 +21,8 @@ from app.agents.planning import (
     NodeType,
     Plan,
     PlanBuilder,
-    PlanCache,
     PlanningFactory,
-    PlanningRequest,
     PlanningSimulation,
-    PlanRepository,
     PlanSerializer,
     PlanStructuralValidator,
     PlanValidationException,

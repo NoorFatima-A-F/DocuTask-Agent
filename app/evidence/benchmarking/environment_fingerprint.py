@@ -7,7 +7,6 @@ and dependency metadata, generating a cryptographic SHA-256 environment hash.
 from __future__ import annotations
 
 import hashlib
-import json
 import logging
 import os
 import platform

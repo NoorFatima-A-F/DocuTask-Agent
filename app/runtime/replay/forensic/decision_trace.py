@@ -3,7 +3,7 @@ Decision Trace for Phase 13.4.
 Traces planner decisions back to evidence inputs, cost models, and utility calculations.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from pydantic import BaseModel, Field
 
 

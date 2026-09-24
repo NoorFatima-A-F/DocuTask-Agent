@@ -1,6 +1,5 @@
 """Tests for Multi-Role Dashboards (Executive, Admin, Developer) and Alert Detector."""
 
-import pytest
 from app.governance.analytics.warehouse.repositories import GovernanceDataWarehouseRepository
 from app.governance.analytics.events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
 from app.governance.analytics.core.engine import GovernanceMetricsEngine

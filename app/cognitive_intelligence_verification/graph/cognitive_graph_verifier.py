@@ -146,7 +146,6 @@ class CognitiveGraphVerifier:
     def _verify_graph_repair_and_versioning(self) -> AssertionResult:
         t0 = time.perf_counter()
         # Graph with 1 orphan node connected to root
-        nodes = ["root", "node1", "orphan_node"]
         adj = {"root": ["node1"], "node1": [], "orphan_node": []}
 
         # Automated repair attaches orphan to root

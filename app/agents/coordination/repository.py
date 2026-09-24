@@ -6,7 +6,6 @@ Abstract contracts and in-memory implementations for persisting agent records, t
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional
 from uuid import UUID
-from app.agents.coordination.agent import Agent
 from app.agents.coordination.team import Team
 
 

@@ -6,7 +6,7 @@ Cross-agent knowledge graph, shared memory indices, emergent strategy mining, an
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List
 
 
 @dataclass
@@ -147,7 +147,9 @@ class CollaborationPatternMiner:
         latency_ms: float,
         description: str,
     ) -> CoordinationPattern:
-        pid = f"pat_{hashlib.sha256(f'{name}_{pattern_type}_{''.join(roles_involved)}'.encode()).hexdigest()[:8]}"
+        roles_str = "".join(roles_involved)
+        seed = f"{name}_{pattern_type}_{roles_str}".encode()
+        pid = f"pat_{hashlib.sha256(seed).hexdigest()[:8]}"
         pat = CoordinationPattern(
             pattern_id=pid,
             name=name,

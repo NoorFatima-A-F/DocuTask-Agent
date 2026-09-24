@@ -6,9 +6,8 @@ safe step-by-step remediation procedures with safety checks and post-validation.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 import yaml
 
 from app.platform_verification.incident_response_automation.domain.interfaces import (

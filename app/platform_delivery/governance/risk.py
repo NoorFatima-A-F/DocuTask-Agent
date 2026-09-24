@@ -1,7 +1,5 @@
 """Release Risk Assessment Engine (Req 53)."""
-from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, List
 
 
 class RiskLevel(str, Enum):

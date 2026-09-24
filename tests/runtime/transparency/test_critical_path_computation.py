@@ -2,7 +2,6 @@
 Test Suite: Critical Path Method (CPM) & Execution DAG Analysis
 Validates CPM forward/backward passes, slack calculation, critical path identification, and flamegraph extraction.
 """
-import pytest
 from app.runtime.dag_visualizer.critical_path_analyzer import CriticalPathAnalyzer
 from app.runtime.dag_visualizer.dag_runtime_extractor import DAGRuntimeExtractor
 from app.runtime.dag_visualizer.flamegraph_generator import FlameGraphGenerator

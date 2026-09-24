@@ -7,20 +7,15 @@ from __future__ import annotations
 
 import logging
 import time
-from typing import Any, Dict, List, Optional
-import uuid
+from typing import Dict, List, Optional
 
 from app.knowledge.analytics.engine import KnowledgeAnalytics
 from app.knowledge.chunking.chunker import ChunkingEngine
 from app.knowledge.citations.engine import CitationEngine
 from app.knowledge.context.builder import ContextBuilder, ContextPackage
 from app.knowledge.core.models import (
-    ClassificationLevel,
     KnowledgeChunk,
     KnowledgeDocument,
-    KnowledgeObject,
-    KnowledgeSource,
-    RetrievalResult,
 )
 from app.knowledge.embeddings.provider import DeterministicEmbeddingProvider, EmbeddingProvider
 from app.knowledge.governance.engine import KnowledgeGovernanceEngine, UserSecurityContext
@@ -95,7 +90,7 @@ class KnowledgeSDK:
         Executes document processing, chunking, embedding, and vector indexing.
         """
         # Step 1: Document Intelligence Processing
-        processed = self.processing_pipeline.process(document)
+        self.processing_pipeline.process(document)
 
         # Step 2: Chunking
         chunks = self.chunking_engine.chunk_document(document, strategy=chunking_strategy)

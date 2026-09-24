@@ -13,12 +13,11 @@ Categorizes threats across 5 canonical research dimensions:
 """
 
 from __future__ import annotations
-import json
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from research_validation.provenance.hashing import hash_canonical_json
 

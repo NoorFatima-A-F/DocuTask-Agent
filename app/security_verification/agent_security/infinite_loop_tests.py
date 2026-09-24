@@ -16,13 +16,12 @@ class InfiniteLoopVerifier:
         tokens_consumed = 0
         loop_interrupted = False
         circuit_tripped = False
-        visited_states = set()
         
         cycle_sequence = ["PLANNER_DISPATCH", "WORKER_PARSE", "REVIEWER_REJECT"]
         
         for i in range(100):
             state = cycle_sequence[i % len(cycle_sequence)]
-            state_sig = f"{state}-cycle-{i // 3}"
+            f"{state}-cycle-{i // 3}"
             
             steps_executed += 1
             tokens_consumed += 1200

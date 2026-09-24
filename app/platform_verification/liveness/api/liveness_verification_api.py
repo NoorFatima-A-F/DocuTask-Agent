@@ -1,8 +1,8 @@
 """
 FastAPI Router for Enterprise Liveness Verification Framework (Part 3H.2).
 """
-from fastapi import APIRouter, Response, Header
-from typing import Dict, Any, Optional
+from fastapi import APIRouter, Response
+from typing import Dict, Any
 from datetime import datetime, timezone
 from dataclasses import asdict
 

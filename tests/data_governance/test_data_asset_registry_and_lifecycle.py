@@ -1,10 +1,8 @@
 """Test Data Asset Registry and 8-State Lifecycle FSM."""
 
-import pytest
 from app.data_governance.registry.models import (
     AssetType,
     ClassificationLevel,
-    SensitivityCategory,
     AssetLifecycleState,
     DataOwnership,
 )

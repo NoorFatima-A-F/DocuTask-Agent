@@ -9,22 +9,7 @@ from fastapi import FastAPI
 
 from app.platform_verification.health_failure_simulation.domain.models import (
     FailureSeverity,
-    ExperimentState,
     ChaosCertificationTier,
-    ChaosComponentSpec,
-    ChaosArchitectureReport,
-    FailureScenario,
-    ScenarioRegistryReport,
-    DatabaseFailureReport,
-    QueueFailureReport,
-    WorkerFailureReport,
-    AIProviderFailureReport,
-    ResourceFailureReport,
-    FailureDetectionMetricsReport,
-    RollbackValidationReport,
-    ChaosSafetyReport,
-    ChaosPillarScore,
-    ChaosCertificationReport,
 )
 
 from app.platform_verification.health_failure_simulation.verifiers.chaos_architecture_verifier import (
@@ -58,12 +43,6 @@ from app.platform_verification.health_failure_simulation.verifiers.safety_verifi
     ChaosSafetyVerifier,
 )
 
-from app.platform_verification.health_failure_simulation.scoring.chaos_reliability_scorer import (
-    ChaosReliabilityScorer,
-)
-from app.platform_verification.health_failure_simulation.exporter.chaos_evidence_exporter import (
-    ChaosEvidenceExporter,
-)
 from app.platform_verification.health_failure_simulation.runtime.chaos_simulation_runtime import (
     ChaosSimulationRuntime,
 )

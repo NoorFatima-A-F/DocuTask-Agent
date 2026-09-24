@@ -2,7 +2,7 @@
 Anti-Corruption Layer (ACL) for Google Gemini AI SDK.
 Translates external provider responses into pure domain DTOs.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ...shared_kernel import Result, Ok, Err
 
 class GeminiAiAntiCorruptionLayer:

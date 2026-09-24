@@ -1,13 +1,9 @@
 """Comprehensive Unit and Integration Tests for Phase 3H.4.5 — Enterprise Alert Rule Verification Framework."""
 
 import json
-import os
-import pytest
 
 from app.platform_verification.alert_rule_verification.domain.models import (
     AlertLifecycleState,
-    AlertCategory,
-    AlertSeverity,
     AlertCertificationTier,
 )
 from app.platform_verification.alert_rule_verification.verifiers.alert_architecture_verifier import (
@@ -45,9 +41,6 @@ from app.platform_verification.alert_rule_verification.verifiers.failure_injecti
 )
 from app.platform_verification.alert_rule_verification.verifiers.alert_performance_verifier import (
     AlertPerformanceVerifier,
-)
-from app.platform_verification.alert_rule_verification.scoring.alert_quality_scorer import (
-    AlertQualityScorer,
 )
 from app.platform_verification.alert_rule_verification.runtime.alert_rule_verification_runtime import (
     AlertRuleVerificationRuntime,

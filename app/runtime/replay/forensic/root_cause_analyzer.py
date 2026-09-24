@@ -3,7 +3,7 @@ Root Cause Analyzer for Phase 13.4.
 Backtracks event causal trees to identify the definitive trigger of incidents, replans, or confidence degradation.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from pydantic import BaseModel, Field
 
 

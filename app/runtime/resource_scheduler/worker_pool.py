@@ -5,7 +5,6 @@ Manages dedicated worker pools: OCR Workers, LLM Reasoning Workers, Validation W
 
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
-import time
 
 
 @dataclass

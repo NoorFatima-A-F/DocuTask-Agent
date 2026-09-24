@@ -8,8 +8,8 @@ calculating edge call counts, average/p99 latencies, and error rates.
 from __future__ import annotations
 
 import logging
-from typing import Dict, List, Optional, Set
-from pydantic import BaseModel, Field
+from typing import Dict, List, Set
+from pydantic import BaseModel
 
 from app.infrastructure.observability.tracing.models import Span, SpanStatus
 

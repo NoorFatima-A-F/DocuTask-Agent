@@ -12,10 +12,9 @@ Quantifies consensus rates, divergence categories, and semantic disagreements.
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Tuple
 
 
 class DivergenceType(str, Enum):

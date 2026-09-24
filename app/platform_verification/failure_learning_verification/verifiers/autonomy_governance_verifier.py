@@ -1,7 +1,6 @@
 """
 Phase 3H.5.6.8: Human-in-the-Loop Autonomy Matrix & Governance Verifier
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IAutonomyGovernanceVerifier
 from ..domain.models import AutonomyMatrixReport, AutonomyMatrixItem, AutonomyLevel
 

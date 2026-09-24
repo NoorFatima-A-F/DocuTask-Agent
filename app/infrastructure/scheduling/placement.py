@@ -1,6 +1,6 @@
 """End-to-End Placement Engine Orchestrating Global and Regional Placement."""
 
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 from app.infrastructure.clusters.registry import ClusterRegistry
 from app.infrastructure.executions.assignment import AssignmentManager, WorkloadAssignment

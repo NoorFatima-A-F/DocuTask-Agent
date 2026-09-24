@@ -3,7 +3,7 @@ Abstract interfaces for Enterprise Verification Quality Gate & Certification Eng
 """
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from app.platform_verification.certification_engine.domain.models import (
     ApprovalReview,
     CertificationDashboardView,

@@ -1,6 +1,5 @@
 """Tests for Workflow Composer, DSL Parser, and Compiler."""
 
-import pytest
 from app.platform.capability.capability_registry import CapabilityRegistry
 from app.platform.dsl.dsl_parser import DSLCompiler, DSLParser
 from app.platform.workflow.workflow_engine import (
@@ -8,7 +7,6 @@ from app.platform.workflow.workflow_engine import (
     WorkflowEdge,
     WorkflowEngine,
     WorkflowNode,
-    WorkflowValidator,
 )
 
 

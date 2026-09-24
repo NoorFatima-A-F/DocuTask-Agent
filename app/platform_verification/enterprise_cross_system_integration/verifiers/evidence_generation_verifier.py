@@ -1,7 +1,7 @@
 """Part V: Evidence Generation."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IEvidenceGenerationVerifier
 from ..domain.models import (
     CheckResult,

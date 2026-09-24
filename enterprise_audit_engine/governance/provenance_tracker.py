@@ -4,7 +4,7 @@ import hashlib
 import json
 from typing import List, Dict, Any, Optional
 from datetime import datetime, timezone
-from ..domain.evidence.models import EvidenceRecord, AuditRunMetadata
+from ..domain.evidence.models import AuditRunMetadata
 
 
 class ProvenanceTracker:

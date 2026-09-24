@@ -5,7 +5,6 @@ import pytest
 from app.platform_verification.test_architecture_verification.runtime.test_verification_runtime import TestVerificationRuntime
 from app.platform_verification.test_architecture_verification.domain.models import (
     TestCertificationTier,
-    FlakinessClass,
 )
 
 

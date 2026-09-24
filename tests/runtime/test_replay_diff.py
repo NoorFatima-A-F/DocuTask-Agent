@@ -4,7 +4,6 @@ Verifies engineering replay comparison between step A and step B.
 """
 
 import pytest
-from datetime import datetime, timezone
 from app.runtime.events.base import RuntimeEvent
 from app.runtime.events.persistence import EventStore
 from app.runtime.events.replay import EventReplayEngine

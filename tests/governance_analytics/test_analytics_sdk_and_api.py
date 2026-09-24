@@ -1,6 +1,5 @@
 """Tests for Governance Analytics Developer SDK and FastAPI REST Routes."""
 
-import pytest
 from app.governance.analytics.sdk.client import GovernanceAnalyticsSDK
 from app.governance.analytics.events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
 from app.governance.analytics.reporting.templates import ReportType, ReportFormat

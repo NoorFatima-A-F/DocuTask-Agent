@@ -21,7 +21,7 @@ class AIQualityDegradationVerifier(IQualityDegradationVerifier):
         for i in range(degraded_count):
             qf = fault_types[i % len(fault_types)]
             req = {"document_id": f"DOC-QUALITY-{i+1:04d}"}
-            res = QualityDegradationScenario.execute(req, quality_fault=qf)
+            QualityDegradationScenario.execute(req, quality_fault=qf)
 
             rejections += 1
 

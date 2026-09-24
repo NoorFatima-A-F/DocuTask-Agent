@@ -1,7 +1,5 @@
 """End-to-End Tests for Certification Authority & Independent Verification."""
 
-import pytest
-from pathlib import Path
 from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,
     EvidenceSourceType,

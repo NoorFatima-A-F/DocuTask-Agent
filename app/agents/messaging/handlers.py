@@ -3,7 +3,6 @@ Message Handler Abstractions.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any
 from app.agents.messaging.commands import AgentCommand, CommandResult
 from app.agents.messaging.events import DomainEvent
 from app.agents.messaging.queries import AgentQuery, QueryResult

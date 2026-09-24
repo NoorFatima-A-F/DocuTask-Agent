@@ -1,6 +1,5 @@
 """Tests for Asymmetric Digital Signing and Verification (Ed25519)."""
 
-import pytest
 from enterprise_audit_engine.certification_authority.domain.models import CertificationRecord, CertificationStatus
 from enterprise_audit_engine.certification_authority.signing.signer import CertificateSigner
 from enterprise_audit_engine.certification_authority.signing.verifier import CertificateSignatureVerifier

@@ -1,24 +1,18 @@
 """
 Unit and Integration Tests for Enterprise Verification Repository Architecture & Shared Kernel.
 """
-import pytest
 from app.platform_verification.shared_kernel.result import Success, Failure, Some, Empty
 from app.platform_verification.shared_kernel.identifiers import (
-    StronglyTypedId, CorrelationId, ExecutionId, TenantId, RunId
+    CorrelationId, ExecutionId, TenantId, RunId
 )
 from app.platform_verification.shared_kernel.clock import VirtualClock
-from app.platform_verification.shared_kernel.pagination import PaginationQuery, PageMetadata, PaginatedResult
+from app.platform_verification.shared_kernel.pagination import PaginationQuery
 from app.platform_verification.shared_kernel.filtering import FilterCriteria, SearchQuery, SortOrder
-from app.platform_verification.shared_kernel.exceptions import (
-    DomainException, EntityNotFoundException, InvariantViolationException, SecurityViolationException
-)
-from app.platform_verification.shared_kernel.retry import RetryPolicy, CircuitBreaker
-from app.platform_verification.shared_kernel.flags import MemoryFeatureFlagProvider
-from app.platform_verification.shared_kernel.security import CanonicalHasher, HMACSigner
+from app.platform_verification.shared_kernel.security import CanonicalHasher
 from app.platform_verification.configuration.scopes import ConfigScope
 from app.platform_verification.configuration.manager import verification_config_manager
 from app.platform_verification.events.bus import EnterpriseEventBus
-from app.platform_verification.events.domain_events import VerificationStartedDomainEvent, EvidenceSealedDomainEvent
+from app.platform_verification.events.domain_events import VerificationStartedDomainEvent
 from app.platform_verification.modules.core.interfaces.facade import core_facade
 from app.platform_verification.modules.ocr.interfaces.facade import ocr_facade
 from app.platform_verification.modules.datasets.interfaces.facade import datasets_facade
@@ -62,7 +56,7 @@ def test_shared_kernel_strongly_typed_identifiers():
 
 def test_shared_kernel_virtual_clock():
     clock = VirtualClock()
-    t1 = clock.now()
+    clock.now()
     t1_iso = clock.now_iso()
     assert "2026-01-01" in t1_iso
 

@@ -2,8 +2,7 @@
 
 import re
 from enum import Enum
-from typing import List, Tuple, Dict, Any
-from pydantic import BaseModel, Field
+from typing import List, Tuple
 from ..gateway.decision import SafetyCategory, ViolationSeverity, SafetyViolation
 
 

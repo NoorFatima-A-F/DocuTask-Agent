@@ -9,7 +9,6 @@ import time
 from app.security_validation import (
     SecurityScorer,
     SecurityReportGenerator,
-    SecurityScorecard,
     SecurityTestRunner,
     OWASPASVSScanner,
     VulnerabilityScanner,

@@ -2,7 +2,6 @@
 Phase 3H.5.5: Layer 1 - Service Health Recovery Verifier
 """
 from datetime import datetime, timezone
-from typing import Dict, Any
 from ..domain.interfaces import ILayer1HealthRecoveryVerifier
 from ..domain.models import HealthRecoveryReport
 

@@ -1,10 +1,10 @@
 """Stage Runners supporting sequential and parallel stage execution with retry logic."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 import time
 
-from .stages import PipelineStageConfig, StageExecutionResult, StageStatus, StageType
+from .stages import PipelineStageConfig, StageExecutionResult, StageStatus
 
 
 class StageRunner:

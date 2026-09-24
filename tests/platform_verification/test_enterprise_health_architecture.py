@@ -9,9 +9,7 @@ from fastapi import FastAPI
 
 from app.platform_verification.health_architecture.domain.models import (
     HealthState,
-    HealthLayer,
     DependencyPriority,
-    HealthVisibilityLevel,
     HealthArchitectureTier,
 )
 from app.platform_verification.health_architecture.state_machine.health_state_machine import (
@@ -34,9 +32,6 @@ from app.platform_verification.health_architecture.automation.orchestration_auto
 )
 from app.platform_verification.health_architecture.scoring.health_score_engine import (
     HealthScoreEngine,
-)
-from app.platform_verification.health_architecture.exporter.health_evidence_exporter import (
-    HealthEvidenceExporter,
 )
 from app.platform_verification.health_architecture.runtime.health_runtime import (
     HealthVerificationRuntime,

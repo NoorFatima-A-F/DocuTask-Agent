@@ -3,7 +3,7 @@ ARTEICP Cost Intelligence - Granular Cost & Energy Calculator
 Calculates exact token pricing, prompt cache discounts, API baseline charges, and compute carbon/energy footprints.
 """
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 
 

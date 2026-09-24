@@ -4,7 +4,7 @@ Captures failed messages after retry policy exhaustion for inspection and replay
 """
 
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 from app.agents.messaging.envelopes import MessageEnvelope
 

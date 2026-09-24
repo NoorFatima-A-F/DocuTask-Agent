@@ -1,7 +1,7 @@
 """
 Phase 3H.5.6: Failure Learning, RCA & Recovery Optimization Runtime
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..verifiers import (
     FailureEventCollector,
     RootCauseEngine,
@@ -15,7 +15,6 @@ from ..verifiers import (
 )
 from ..scoring.failure_learning_scorer import FailureLearningScorer
 from ..exporter.failure_learning_exporter import FailureLearningExporter
-from ..domain.models import FailureLearningScorecard
 
 
 class FailureLearningRuntime:

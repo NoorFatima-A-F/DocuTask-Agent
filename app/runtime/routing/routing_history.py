@@ -3,8 +3,7 @@ Scientific Model Router - Routing History
 Maintains provenance records for model routing decisions and predicted vs actual metrics.
 """
 
-from typing import Dict, List, Any, Optional
-from datetime import datetime, timezone
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 
 

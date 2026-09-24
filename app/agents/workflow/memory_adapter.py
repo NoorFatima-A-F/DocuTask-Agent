@@ -4,7 +4,7 @@ Bridges Workflow Runtime with the Memory Foundation (app.agents.memory).
 Persists and retrieves cross-workflow long-term semantic context, execution summaries, and artifacts.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from uuid import UUID
 
 

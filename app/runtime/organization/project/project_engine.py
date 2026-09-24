@@ -13,7 +13,6 @@ from app.runtime.organization.events.organization_events import (
     AgentRole,
     ProjectCreated,
     ProjectCompleted,
-    ObjectiveCompleted,
     org_event_bus,
 )
 

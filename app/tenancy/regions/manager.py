@@ -5,7 +5,7 @@ Governs geographical deployment targets and data residency boundaries across US,
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Dict, List
 from app.tenancy.core.models import Region
 
 

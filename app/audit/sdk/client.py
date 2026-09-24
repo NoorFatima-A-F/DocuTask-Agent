@@ -3,7 +3,7 @@
 import functools
 import inspect
 import time
-from typing import Optional, Dict, Any, List, Callable, Union
+from typing import Optional, Dict, Any, Callable
 from ..core.events import AuditEvent, ActorType, AuditSeverity, OutcomeType, EventCategory
 from ..collector.gateway import AuditCollectorGateway
 from ..storage.repository import AuditRepository

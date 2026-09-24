@@ -2,7 +2,6 @@
 Enterprise AI Maturity Model calculation engine (Levels 0-5).
 """
 
-from typing import List, Dict, Any
 from app.certification.domain.models import MaturityTier, MaturityAssessment
 
 

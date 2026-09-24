@@ -6,21 +6,14 @@ PRR checklist, risk register, governance, continuous monitoring, and official ce
 
 import os
 import json
-import pytest
 from verification import (
     CertificationLevel,
     CertificationDecisionStatus,
     RiskCategory,
     RiskSeverity,
-    RiskProbability,
     RiskStatus,
     PRRPillar,
     VerificationEvidence,
-    ScoringDimensionResult,
-    PRRChecklistItem,
-    RiskEntry,
-    CertificationAssertionResult,
-    CertificationPillarResult,
     EnterpriseReadinessScorecard,
     EvidenceRegistryEngine,
     VerificationScoreEngine,

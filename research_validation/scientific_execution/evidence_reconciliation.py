@@ -7,12 +7,11 @@ and produces a formal Consensus Report without silently overwriting data.
 """
 
 from __future__ import annotations
-import math
 import statistics
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from research_validation.scientific_execution.experiment_runner import ExperimentRunResult
 from research_validation.provenance.hashing import hash_canonical_json

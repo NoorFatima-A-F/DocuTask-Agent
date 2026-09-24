@@ -2,7 +2,6 @@
 Database Cross-Region Replication Verifier (Part 3G.6C).
 Validates PostgreSQL cross-region streaming replication, replication lag, and standby promotion.
 """
-from typing import Dict, Any
 from app.platform_verification.multi_region_failover.domain.models import (
     ReplicationHealth,
     DatabaseReplicationReport,

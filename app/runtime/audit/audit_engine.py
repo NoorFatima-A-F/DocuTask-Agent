@@ -4,7 +4,7 @@ Guarantees 100% audit action coverage and validates cryptographic signature chai
 """
 
 from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.runtime.audit.audit_record import AuditRecord
 from app.runtime.audit.audit_builder import AuditLogBuilder
 from app.runtime.audit.audit_signature import AuditSignatureEngine

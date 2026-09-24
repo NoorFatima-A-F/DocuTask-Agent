@@ -4,7 +4,7 @@ Provides dependency analysis, topological sorting, cycle detection, and branch t
 """
 
 from collections import defaultdict, deque
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional
 from .nodes import GraphNode
 from .edges import EdgeType, GraphEdge
 from ..domain.exceptions import WorkflowValidationException

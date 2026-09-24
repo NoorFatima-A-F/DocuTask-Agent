@@ -8,10 +8,8 @@ from typing import Any, Dict, List, Optional
 from ..domain.interfaces import IInfrastructureSecurityVerifier
 from ..domain.models import (
     BaseVerificationReport,
-    SecurityCertificationTier,
     SecurityScorecard,
     VerificationManifest,
-    VerificationStatus,
 )
 from ..exporter.infrastructure_security_exporter import InfrastructureSecurityExporter
 from ..scoring.infrastructure_security_scorer import InfrastructureSecurityScorer

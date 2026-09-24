@@ -3,7 +3,7 @@ Agent Profile Model.
 Comprehensive descriptor of an autonomous agent: identity, capabilities, performance traits, and limits.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from pydantic import BaseModel, Field
 from app.agents.coordination.agent_identity import AgentIdentity
 from app.agents.coordination.capability import CapabilityProfile

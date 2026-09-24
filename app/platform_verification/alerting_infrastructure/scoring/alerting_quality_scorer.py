@@ -1,7 +1,6 @@
 """
 Phase 3I.5: 6-Pillar Enterprise Alerting & Incident Detection Quality Scorer
 """
-from typing import List
 from datetime import datetime, timezone
 from ..domain.models import (
     AlertCertificationTier,
@@ -80,8 +79,8 @@ class AlertingQualityScorer(IAlertingQualityScorer):
         total_score = cov_weighted + acc_weighted + ai_weighted + rout_weighted + auto_weighted + sec_weighted
         total_score = round(total_score, 2)
 
-        pillar_scores: List[AlertingPillarScore] = [
-            LoggingPillar := AlertingPillarScore(
+        pillar_scores = [
+            AlertingPillarScore(
                 pillar_name="Detection Coverage & Multi-Signal Telemetry",
                 weight_pct=cov_weight,
                 achieved_score_pct=round(cov_score, 2),

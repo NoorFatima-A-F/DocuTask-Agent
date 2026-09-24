@@ -6,7 +6,7 @@ Phase 13.1: Autonomous Runtime Observability & Domain Event Platform (ARODP)
 from typing import Dict, List, Any
 import time
 from app.runtime.events.models.event import DomainEvent
-from app.runtime.events.models.event_types import DomainEventType, EventSeverity
+from app.runtime.events.models.event_types import EventSeverity
 
 
 class TelemetryProjection:

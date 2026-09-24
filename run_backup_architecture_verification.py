@@ -3,16 +3,11 @@ Enterprise Backup Strategy & Architecture Verification Runner (Part 3G.2A).
 Executes the full automated 14-part verification engine and exports audit artifacts.
 """
 import sys
-import os
-import json
 import logging
 from pathlib import Path
 
 from app.platform_verification.backup_architecture_verification.runtime.backup_verification_runtime import (
     BackupArchitectureVerificationRuntime,
-)
-from app.platform_verification.backup_architecture_verification.domain.models import (
-    CertificationTier,
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")

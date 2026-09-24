@@ -1,7 +1,7 @@
 """Part P: Observability Integration."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IObservabilityIntegrationVerifier
 from ..domain.models import (
     CheckResult,

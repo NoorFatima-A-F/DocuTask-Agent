@@ -14,7 +14,7 @@ from app.runtime.events.models.event_types import (
     EventSubsystem,
     EventSeverity,
 )
-from app.runtime.events.models.event_metadata import EventActor, EventMetadata
+from app.runtime.events.models.event_metadata import EventActor
 
 
 @dataclass

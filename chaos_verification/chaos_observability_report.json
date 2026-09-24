@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-19T07:04:41.016745+00:00",
-  "execution_timestamp": "2026-09-19T07:04:41.016759+00:00",
+  "timestamp": "2026-09-24T21:54:53.996455+00:00",
+  "execution_timestamp": "2026-09-24T21:54:53.996469+00:00",
   "summary": "Chaos observability verified: precision timing metrics, structured logs, and full forensic trace reconstruction.",
   "report_title": "Chaos Observability & Traceability Report",
   "metrics_captured": true,

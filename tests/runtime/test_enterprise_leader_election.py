@@ -9,7 +9,6 @@ Validates:
 """
 
 import time
-import pytest
 from app.agents.runtime.enterprise.leader_election import LeaderElectionCoordinator
 
 

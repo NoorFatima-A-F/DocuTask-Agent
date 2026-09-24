@@ -5,8 +5,6 @@ from app.tenancy.core.models import TenantContext, Region, SubscriptionTier, Com
 from app.tenancy.context.context import (
     TenantContextScope,
     get_current_tenant_context,
-    set_current_tenant_context,
-    reset_tenant_context,
 )
 from app.tenancy.context.resolver import TenantContextResolver
 from app.tenancy.core.exceptions import TenantNotFoundError

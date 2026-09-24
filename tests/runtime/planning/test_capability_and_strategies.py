@@ -1,9 +1,8 @@
 """Tests for Capability Discovery and Candidate Strategy Generation."""
 
-import pytest
 from app.runtime.planning.goal_engine import GoalUnderstandingEngine
 from app.runtime.planning.constraint_engine import ConstraintExtractionEngine
-from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine, CapabilityType, CapabilityHealth
+from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine, CapabilityType
 from app.runtime.planning.strategy_generator import CandidateStrategyGenerator, StrategyArchetype
 
 

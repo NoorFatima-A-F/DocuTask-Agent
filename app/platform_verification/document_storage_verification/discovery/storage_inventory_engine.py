@@ -2,7 +2,7 @@
 Storage Inventory & Backup Coverage Discovery Engine for Enterprise Document Storage (Part 3G.2C).
 """
 import hashlib
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Optional
 
 from app.platform_verification.document_storage_verification.domain.models import (
     StorageArtifactCategory,

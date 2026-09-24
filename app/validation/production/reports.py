@@ -6,9 +6,7 @@ and exports docs/audits/ai_production_readiness_report.md.
 
 import json
 from pathlib import Path
-from typing import Any, Dict
 from app.core.logging import logger
-from app.validation.evidence import EvidenceLogger
 from app.validation.production.benchmarks import ProviderBenchmarkResult
 from app.validation.production.chaos import ChaosExperimentResult
 from app.validation.production.cost import CostControlMetrics

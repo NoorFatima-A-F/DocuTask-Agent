@@ -8,7 +8,7 @@ tenant boundaries, and component tags.
 from __future__ import annotations
 
 import logging
-from typing import Dict, List, Optional, Set
+from typing import List, Optional, Set
 from pydantic import BaseModel, Field
 
 from app.infrastructure.observability.alerts.models import AlertInstance, AlertSeverity

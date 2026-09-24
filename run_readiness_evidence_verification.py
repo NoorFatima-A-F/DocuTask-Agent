@@ -19,9 +19,6 @@ sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 from app.platform_verification.readiness_audit_framework.runtime.readiness_audit_runtime import (
     ReadinessAuditRuntime,
 )
-from app.platform_verification.readiness_audit_framework.domain.models import (
-    AuditCertificationTier,
-)
 
 
 def main():
@@ -39,7 +36,7 @@ def main():
     timeline = results["timeline_report"]
     failures = results["failure_report"]
     regression = results["regression_report"]
-    dashboard = results["dashboard_evidence"]
+    results["dashboard_evidence"]
     integrity = results["integrity_report"]
     scorecard = results["scorecard"]
     cicd = results["cicd_decision"]

@@ -1,6 +1,5 @@
 """Tests for Prompt Telemetry Analytics, Alerting, and A/B Testing (Phase 8D)."""
 
-import pytest
 from app.prompts.monitoring.metrics import PromptExecutionEvent
 from app.prompts.monitoring.analytics import PromptAnalyticsEngine
 from app.prompts.monitoring.alerts import PromptAlertManager

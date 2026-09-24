@@ -3,9 +3,9 @@ AMAEOP Pillar 1 - Organizational Graph & Reporting Hierarchy
 Represents the organization as a directed graph with management, reporting, and cross-team coordination edges.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
-from app.runtime.organization.department import CANONICAL_DEPARTMENTS, Department
+from app.runtime.organization.department import CANONICAL_DEPARTMENTS
 
 
 @dataclass

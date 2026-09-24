@@ -3,7 +3,7 @@ ARTEICP Feedback Pipeline - Feedback Processor
 Ingests field-level human corrections and extracts structured error vectors.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict, field
 import uuid
 import time

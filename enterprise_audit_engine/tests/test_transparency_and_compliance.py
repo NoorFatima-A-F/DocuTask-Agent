@@ -2,7 +2,6 @@
 
 import pytest
 import json
-from pathlib import Path
 from enterprise_audit_engine.transparency.transparency_log import (
     CertificationTransparencyLog,
     TransparencyLogEntry,

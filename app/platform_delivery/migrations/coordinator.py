@@ -1,6 +1,6 @@
 """Migration Coordinator Platform (Req 45)."""
 from typing import Callable, Dict, List, Optional
-from .expand_contract import ExpandContractPhase, MigrationSafetyValidator, MigrationStep
+from .expand_contract import MigrationSafetyValidator, MigrationStep
 
 
 class MigrationCoordinator:

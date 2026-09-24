@@ -3,7 +3,6 @@ Failure Analyzer.
 Evaluates failure patterns across recent execution sessions and identifies repeating failure clusters.
 """
 
-from typing import List
 from app.agents.recovery.failure import Failure, FailureCategory
 
 

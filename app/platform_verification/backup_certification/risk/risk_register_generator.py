@@ -2,7 +2,7 @@
 Risk Register Generator for Backup Certification Framework (Part 3G.2G).
 Automatically identifies potential failure modes, evaluates operational severity, and generates auditable risk registers.
 """
-from typing import List, Dict, Any
+from typing import List
 from app.platform_verification.backup_certification.domain.models import (
     RiskSeverity,
     BackupRiskItem,

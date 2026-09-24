@@ -11,9 +11,8 @@ from __future__ import annotations
 import functools
 import inspect
 import time
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable
 from app.runtime.observability.schemas import (
-    BaseRuntimeEvent,
     EventCategory,
     EventPriority,
     EventSeverity,

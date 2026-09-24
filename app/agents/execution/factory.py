@@ -4,7 +4,6 @@ Wires ExecutionEngine, RuntimeScheduler, WorkerPool, CheckpointManager,
 ExecutionMetricsCollector, ExecutionRepository, and ExecutionCache.
 """
 
-from typing import Optional
 from app.agents.execution.cache import ExecutionCache
 from app.agents.execution.checkpoint_manager import CheckpointManager
 from app.agents.execution.engine import ExecutionEngine

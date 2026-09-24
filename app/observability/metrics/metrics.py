@@ -5,7 +5,7 @@ Provides Counter, Gauge, Histogram, Timer metrics primitives and registry.
 
 from collections import defaultdict
 import time
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 
 class Counter:

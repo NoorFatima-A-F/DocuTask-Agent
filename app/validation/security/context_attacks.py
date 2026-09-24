@@ -17,7 +17,7 @@ class ContextAttackTester:
         Executes context delimiter confusion attack test.
         """
         sanitized = PromptBuilder.sanitize_text(attack_case.payload)
-        user_prompt = PromptBuilder.build_prompt(sanitized, "invoice")
+        PromptBuilder.build_prompt(sanitized, "invoice")
 
         # System override tags should be stripped
         passed = "SYSTEM:" not in sanitized

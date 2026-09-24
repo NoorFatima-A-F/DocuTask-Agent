@@ -2,12 +2,11 @@
 
 from dataclasses import asdict
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
 from ..sdk.deployment_sdk import DeploymentSDK
-from ..control_plane.state import DeploymentStrategyType, DeploymentStatus
-from ..artifacts.metadata import ArtifactType
+from ..control_plane.state import DeploymentStrategyType
 from ..rollback.executor import RollbackTriggerType
 
 router = APIRouter(prefix="/deployments", tags=["Enterprise Deployment & Release Engineering"])

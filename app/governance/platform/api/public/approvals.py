@@ -2,7 +2,7 @@
 
 from datetime import datetime, timezone
 import secrets
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from ..schemas.requests import ApprovalDecisionRequest
 from ...gateway.authentication import APIRequestContext

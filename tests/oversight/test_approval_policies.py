@@ -1,16 +1,10 @@
 """Tests for Approval Policy Engine, Rules, and Chains."""
 
-import pytest
 from app.oversight.core.context import OversightContext
 from app.oversight.approvals.models import (
     ApprovalPolicyType,
-    ApprovalStrategy,
-    ApprovalChain,
-    ApprovalStep,
 )
 from app.oversight.approvals.policies import (
-    ApprovalPolicy,
-    ApprovalPolicyCondition,
     ApprovalPolicyEngine,
 )
 from app.oversight.approvals.service import ApprovalService

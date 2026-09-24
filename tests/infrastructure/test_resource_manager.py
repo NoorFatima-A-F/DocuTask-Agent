@@ -1,6 +1,5 @@
 """Tests for Resource Abstraction and Lifecycle Transitions."""
 
-import pytest
 from app.infrastructure.core.lifecycle import (
     ResourceLifecycleStateMachine,
     ResourceState,
@@ -10,7 +9,6 @@ from app.infrastructure.core.resources import (
     ResourceCategory,
     ResourceManager,
     ResourceSpecification,
-    StorageType,
 )
 
 

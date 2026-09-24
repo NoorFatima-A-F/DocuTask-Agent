@@ -3,7 +3,7 @@ Rollback Engine.
 Performs node rollback, subtree rollback, workflow compensation, and rollback branch traversal.
 """
 
-from typing import Any, Dict, List
+from typing import List
 from app.agents.execution.execution_graph import ExecutionGraph
 from app.agents.execution.execution_state_machine import ExecutionStateMachine
 from app.agents.execution.lifecycle import ExecutionLifecycleState

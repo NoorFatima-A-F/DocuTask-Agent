@@ -20,7 +20,6 @@ from app.evaluation.security.security_evaluator import SecurityEvaluator
 from app.evaluation.explainability.explainability_evaluator import ExplainabilityEvaluator
 from app.evaluation.human_experience.human_experience_evaluator import HumanExperienceEvaluator
 from app.evaluation.scoring.portfolio_certification_scorer import PortfolioCertificationScorer
-from app.evaluation.reporting.portfolio_evidence_generator import PortfolioEvidenceGenerator
 from app.evaluation.runtime.evaluation_runtime import EvaluationRuntime
 from app.evaluation.datasets.evaluation_datasets import (
     INVOICE_GROUND_TRUTH,
@@ -241,7 +240,7 @@ def test_portfolio_certification_scorer():
 # 14. Portfolio Evidence Generator Tests (SHA-256 and Manifest)
 def test_portfolio_evidence_generator(temp_evidence_dir):
     runtime = EvaluationRuntime()
-    showcase = runtime.execute_all(output_dir=temp_evidence_dir)
+    runtime.execute_all(output_dir=temp_evidence_dir)
 
     assert os.path.exists(temp_evidence_dir)
     expected_files = [

@@ -2,7 +2,7 @@
 Phase 3N.2: Threat Modeling Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IThreatModelingVerifier
 from ..domain.models import (

@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 from app.agents.domain.enums import WorkflowType
 from app.agents.domain.policies import ExecutionPolicy
 from app.agents.domain.tasks import AgentTask
-from app.agents.domain.value_objects import TaskID, WorkflowID
+from app.agents.domain.value_objects import WorkflowID
 
 
 class WorkflowNode(BaseModel):

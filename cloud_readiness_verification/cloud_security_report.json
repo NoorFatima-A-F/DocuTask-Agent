@@ -40,8 +40,8 @@
       }
     }
   ],
-  "timestamp": "2026-09-19T07:04:42.378146+00:00",
-  "execution_timestamp": "2026-09-19T07:04:42.378154+00:00",
+  "timestamp": "2026-09-24T21:54:55.244702+00:00",
+  "execution_timestamp": "2026-09-24T21:54:55.244713+00:00",
   "summary": "Cloud security verified: 5 security pillars compliant with non-root containers, IRSA, and 0 CVEs.",
   "report_title": "Cloud Security Verification Report",
   "least_privilege_iam_enforced": true,

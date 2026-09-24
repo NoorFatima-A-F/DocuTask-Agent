@@ -1,6 +1,5 @@
 """Tests for AI System Intelligence (Agents, Models, and Workflows)."""
 
-import pytest
 from app.governance.analytics.warehouse.repositories import GovernanceDataWarehouseRepository
 from app.governance.analytics.events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
 from app.governance.analytics.ai_systems.agents import AgentAnalyticsEngine

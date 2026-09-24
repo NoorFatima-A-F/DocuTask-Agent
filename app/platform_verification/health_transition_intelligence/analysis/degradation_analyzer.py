@@ -3,7 +3,7 @@ Degradation Detection Engine (Part 3H.3.3.4).
 Analyzes time-series metric trends to detect gradual system degradation
 (e.g., latency creep, memory leaks, queue accumulation) before critical failure.
 """
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 from app.platform_verification.health_transition_intelligence.domain.models import (
     DegradationReport,
     DegradationSeverity,

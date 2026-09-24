@@ -9,9 +9,6 @@ from pathlib import Path
 from app.platform_verification.restore_verification.runtime.restore_verification_runtime import (
     RestoreVerificationRuntime,
 )
-from app.platform_verification.restore_verification.domain.models import (
-    RestoreCertificationTier,
-)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("RestoreVerifier")
@@ -34,10 +31,10 @@ def main() -> int:
     db_rep = result["database_restore_validation"]
     doc_rep = result["document_restore_validation"]
     cfg_rep = result["configuration_restore_validation"]
-    sec_rep = result["secret_restore_validation"]
+    result["secret_restore_validation"]
     svc_rep = result["service_startup_report"]
     fn_rep = result["functional_recovery_report"]
-    integ_rep = result["integrity_validation_report"]
+    result["integrity_validation_report"]
     rto_rep = result["rto_rpo_report"]
     fail_rep = result["failure_simulation_report"]
     artifacts = result["exported_manifest_paths"]

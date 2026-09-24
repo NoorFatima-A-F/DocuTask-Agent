@@ -2,7 +2,7 @@
 Phase 3J.1: Performance Infrastructure Verification: Load Testing & Baseline Capacity Engineering — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import List
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

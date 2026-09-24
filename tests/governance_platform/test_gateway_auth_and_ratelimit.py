@@ -10,7 +10,6 @@ from app.governance.platform.gateway.rate_limit import (
     RateLimitPolicy,
     TokenBucket,
 )
-from app.governance.platform.gateway.middleware import GatewayMiddleware
 from app.governance.platform.gateway.router import GatewayRouter
 
 

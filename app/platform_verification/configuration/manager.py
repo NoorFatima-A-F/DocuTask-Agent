@@ -7,7 +7,6 @@ import json
 from typing import Any, Dict, Optional
 from app.platform_verification.configuration.scopes import ConfigScope
 from app.platform_verification.configuration.schemas import VerificationPlatformConfig
-from app.platform_verification.shared_kernel.exceptions import ConfigurationException
 
 class EnterpriseConfigurationManager:
     def __init__(self):

@@ -3,7 +3,6 @@ Execution Adapter for Recovery Subsystem.
 Bridges RecoveryEngine to ExecutionEngine for checkpoint restoration, state resets, and rollbacks.
 """
 
-from typing import Any, Dict, Optional
 from uuid import UUID
 from app.agents.execution.engine import ExecutionEngine
 

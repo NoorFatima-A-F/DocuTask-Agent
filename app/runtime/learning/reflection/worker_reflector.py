@@ -4,7 +4,7 @@ Analyzes worker task distribution, tool invocation reliability, execution latenc
 """
 
 from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class WorkerReflectionMetrics(BaseModel):

@@ -7,7 +7,7 @@ to isolate primary root causes from downstream cascade symptoms.
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.incident_response_automation.domain.interfaces import (
     IIncidentCorrelationEngine,

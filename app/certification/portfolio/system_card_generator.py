@@ -2,7 +2,6 @@
 AI System Card Generator for DocuTask Agent.
 """
 
-from typing import Dict, Any
 
 
 class SystemCardGenerator:

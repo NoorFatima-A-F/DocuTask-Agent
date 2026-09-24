@@ -11,10 +11,7 @@ from fastapi import FastAPI
 
 from app.platform_verification.backup_security_verification.domain.models import (
     DataClassificationLevel,
-    BackupEncryptionAlgorithm,
-    KeyProviderType,
     SecurityCertificationTier,
-    BackupSecurityAssetItem,
 )
 from app.platform_verification.backup_security_verification.inventory.backup_security_inventory_engine import (
     BackupSecurityInventoryEngine,
@@ -60,9 +57,6 @@ from app.platform_verification.backup_security_verification.compliance_engine.ba
 )
 from app.platform_verification.backup_security_verification.scoring.backup_security_scoring_engine import (
     BackupSecurityQualityScoringEngine,
-)
-from app.platform_verification.backup_security_verification.evidence_generator.backup_security_evidence_engine import (
-    BackupSecurityEvidenceEngine,
 )
 from app.platform_verification.backup_security_verification.runtime.backup_security_runtime import (
     BackupSecurityVerificationRuntime,

@@ -3,7 +3,6 @@ Unit Tests for Replay Runtime, Determinism Validation, and Speed Controls.
 """
 
 import pytest
-import asyncio
 from app.runtime.observability.schemas import RuntimeEvent, EventCategory, EventType, EventSeverity
 from app.runtime.replay.replay_runtime import ReplayRuntimeSession
 from app.runtime.replay.replay_speed import ReplaySpeed

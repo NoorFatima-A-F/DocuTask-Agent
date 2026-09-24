@@ -1,8 +1,7 @@
 """
 Unit & Integration Tests for Phase V9 — Enterprise AI Security & Responsible AI Verification Program
 """
-import pytest
-from app.security_verification.domain.models import SecurityStatus, SeverityLevel
+from app.security_verification.domain.models import SecurityStatus
 from app.security_verification.authentication import TokenSecurityVerifier, RefreshTokenVerifier, BruteForceVerifier
 from app.security_verification.authorization import RBACBoundaryVerifier, PrivilegeEscalationVerifier
 from app.security_verification.tenant_security import CrossTenantLeakageVerifier, MemoryIsolationVerifier

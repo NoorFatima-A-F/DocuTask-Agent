@@ -5,7 +5,7 @@ Domain models and schemas for Phase V7 — Enterprise Cognitive Intelligence Ver
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 
 
 class VerificationStatus(str, Enum):

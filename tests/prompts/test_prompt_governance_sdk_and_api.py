@@ -1,6 +1,5 @@
 """Tests for Prompt Governance Developer SDK, Decorators, and FastAPI Endpoints (Phase 8D)."""
 
-import pytest
 from app.prompts.sdk.client import PromptGovernanceSDK
 from app.prompts.sdk.decorators import governed_prompt
 from app.prompts.evaluation.datasets import PromptEvaluationDataset

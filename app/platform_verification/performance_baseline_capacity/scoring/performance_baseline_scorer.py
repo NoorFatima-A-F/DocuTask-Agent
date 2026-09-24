@@ -17,7 +17,7 @@ Certification Tiers:
 """
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IPerformanceScorer
 from ..domain.models import (
@@ -47,10 +47,10 @@ class PerformanceBaselineScorer(IPerformanceScorer):
         cap_rep = reports.get("capacity_model")
         lat_rep = reports.get("latency_distribution")
         res_rep = reports.get("resource_utilization")
-        db_rep = reports.get("database_performance")
-        queue_rep = reports.get("queue_capacity")
+        reports.get("database_performance")
+        reports.get("queue_capacity")
         worker_rep = reports.get("worker_scaling")
-        fail_rep = reports.get("performance_failure")
+        reports.get("performance_failure")
         reg_rep = reports.get("performance_regression")
 
         # 1. Latency Performance (20%)

@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 from app.tenancy.core.models import TenantContext, TenantLifecycleState
 from app.tenancy.organizations.manager import OrganizationManager

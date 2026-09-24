@@ -2,7 +2,7 @@
 Enterprise AI Risk Register Engine.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from app.certification.domain.models import RiskCategory, RiskSeverity, RiskEntry
 
 

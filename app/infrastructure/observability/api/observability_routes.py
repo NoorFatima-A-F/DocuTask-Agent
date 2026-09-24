@@ -3,14 +3,13 @@ FastAPI REST Routes for Enterprise Observability, Telemetry & SRE.
 """
 
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
-from app.infrastructure.observability.alerts.models import AlertRule, AlertSeverity, RuleType
+from app.infrastructure.observability.alerts.models import AlertRule
 from app.infrastructure.observability.logs.models import LogLevel
 from app.infrastructure.observability.metrics.types import MetricType
 from app.infrastructure.observability.sdk.observability import ObservabilitySDK
-from app.infrastructure.observability.slo.objectives import SLIType, SLOObjective
 
 router = APIRouter(prefix="/api/v1/infrastructure/observability", tags=["Platform Observability & SRE"])
 

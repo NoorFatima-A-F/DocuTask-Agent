@@ -102,13 +102,9 @@ from app.infrastructure.observability.sdk.observability import (
     ObservabilitySDK,
 )
 
-# Legacy exports for backwards compatibility
-try:
-    from .health import HealthChecker, ProbeStatus
-    from .metadata import DeploymentMetadata, DeploymentMetadataProfiler
-    from .telemetry import TelemetryCollector
-except ImportError:
-    pass
+from .health import HealthChecker, ProbeStatus
+from .metadata import DeploymentMetadata, DeploymentMetadataProfiler
+from .telemetry import TelemetryCollector
 
 __all__ = [
     "AIMetricCollector",

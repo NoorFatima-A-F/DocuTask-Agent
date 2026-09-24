@@ -4,7 +4,6 @@ Asserts mathematical, physical, and domain bounds on optimization outputs.
 """
 
 from typing import Dict, List, Any, Tuple
-import math
 
 
 class InvariantChecker:

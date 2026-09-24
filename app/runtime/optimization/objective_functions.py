@@ -3,7 +3,7 @@ Multi-Objective Optimization Engine - Objective Functions
 Implements formal scalarization and distance-to-utopian-point objective formulations.
 """
 
-from typing import Dict, List, Any
+from typing import Dict
 import math
 
 

@@ -6,12 +6,10 @@ Provides pre-planning query capabilities with cryptographically verified edge tr
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from app.runtime.intelligence.knowledge.knowledge_graph import (
     AdaptiveKnowledgeGraph,
-    GraphEdge,
-    GraphNode,
 )
 
 

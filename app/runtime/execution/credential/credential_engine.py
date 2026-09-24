@@ -5,7 +5,6 @@ Manages enterprise vaults, scoped credentials, OAuth tokens, and lease rotation.
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone, timedelta
-import hashlib
 from typing import Any, Dict, List, Optional
 import uuid
 

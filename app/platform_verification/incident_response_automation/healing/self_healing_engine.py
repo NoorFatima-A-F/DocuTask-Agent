@@ -8,7 +8,7 @@ Executes automated self-healing verification tests:
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.incident_response_automation.domain.interfaces import (
     ISelfHealingEngine,

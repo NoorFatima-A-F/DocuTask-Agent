@@ -6,7 +6,6 @@ Classifies input documents into native_pdf, scanned_pdf, image, txt, docx, or un
 import io
 from typing import Set
 import pdfplumber
-from PIL import Image
 
 from app.core.logging import logger
 

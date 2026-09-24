@@ -5,10 +5,8 @@ Executes all 12 SLA/SLO verification phases, evaluates weighted scores across 6 
 and exports JSON evidence reports with cryptographic SHA-256 integrity manifest.
 """
 
-import json
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_sla_slo_verification.runtime.sla_slo_runtime import (
     SLASLORuntime,

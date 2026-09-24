@@ -17,10 +17,8 @@ from ..exporter.infrastructure_certification_exporter import InfrastructureCerti
 from ..domain.models import (
     CertificationDecision,
     MaturityAssessment,
-    NormalizedEvidenceItem,
     QualityRegressionReport,
     QualityScorecard,
-    RawEvidenceBundle,
     RiskAssessmentReport,
     VerificationManifest,
 )

@@ -3,8 +3,7 @@ Confidence Calibration & Uncertainty Evaluation Subsystem.
 Computes Expected Calibration Error (ECE), Brier Score, and Reliability Calibration Curves.
 """
 
-import math
-from typing import List, Tuple
+from typing import List
 from pydantic import BaseModel, Field
 from app.core.logging import logger
 

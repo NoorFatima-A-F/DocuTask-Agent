@@ -2,7 +2,7 @@
 Phase 3N.11: Database Security Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IDatabaseSecurityVerifier
 from ..domain.models import (

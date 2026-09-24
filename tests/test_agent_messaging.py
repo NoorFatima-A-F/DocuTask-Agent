@@ -7,17 +7,14 @@ import pytest
 
 from app.agents.messaging import (
     AgentCommand,
-    AgentEvent,
     AgentQuery,
     CommandBuilder,
     CommandHandler,
     CommandResult,
-    CorrelationContext,
     DeadLetterQueue,
     DomainEvent,
     EnvelopeBuilder,
     EventBuilder,
-    EventHandler,
     HandlerNotFoundException,
     MessageEnvelope,
     MessageMetadata,
@@ -29,7 +26,6 @@ from app.agents.messaging import (
     QueryHandler,
     QueryResult,
     TracingHook,
-    UnifiedMessageBus,
 )
 
 

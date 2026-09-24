@@ -3,12 +3,11 @@ Core Services Scorer for Part 4 - Platform Core Services Verification.
 Aggregates section verification results and calculates composite score and maturity grades.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict
 from ..domain.models import (
     PlatformCoreVerificationScorecard,
     SectionId,
     SectionVerificationResult,
-    VerificationStatus,
 )
 
 

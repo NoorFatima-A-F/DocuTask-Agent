@@ -7,7 +7,6 @@ and structured telemetry routing to Prometheus, Grafana, and AlertManager.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
 
 from app.platform_verification.health_monitoring_integration.domain.interfaces import (
     IObservabilityArchVerifier,

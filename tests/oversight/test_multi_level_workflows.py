@@ -1,6 +1,5 @@
 """Tests for Sequential, Parallel, and Threshold Multi-Level Approval Workflows."""
 
-import pytest
 from app.oversight.approvals.models import (
     ApprovalChain,
     ApprovalStep,

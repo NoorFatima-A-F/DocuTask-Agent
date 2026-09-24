@@ -47,7 +47,7 @@ class ReadinessAuditRuntime:
         dashboard_evidence = self.dashboard_builder.build_dashboard_evidence()
 
         # 3. Create run directory
-        run_dir = self.repo_manager.create_run_directory()
+        self.repo_manager.create_run_directory()
 
         # 4. Preliminary integrity check
         initial_integrity = self.integrity_verifier.compute_and_verify_integrity(self.export_dir)

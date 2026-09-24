@@ -3,7 +3,7 @@ Root Cause Analysis Engine.
 Reconstructs causal chains and produces structured RootCauseReports.
 """
 
-from typing import List, Optional
+from typing import List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.recovery.failure import Failure

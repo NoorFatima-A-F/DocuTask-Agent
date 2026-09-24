@@ -5,14 +5,14 @@ Exports all structured performance reports, certification summary, and cryptogra
 
 import hashlib
 import json
-import os
 import re
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from pathlib import Path
+from typing import Any, Dict, List
 
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import IPerformanceExporter
 from ..domain.models import (
-    BaseVerificationReport,
     EnterprisePerformanceCertificationReport,
     PerformanceVerificationManifest,
 )
@@ -103,7 +103,7 @@ class PerformanceQualityExporter(IPerformanceExporter):
         certification: EnterprisePerformanceCertificationReport,
         output_dir: str = "performance_verification",
     ) -> PerformanceVerificationManifest:
-        safe_out = resolve_safe_path(Path.cwd(), output_dir)
+        safe_out = Path(output_dir) if output_dir else Path.cwd() / "performance_verification"
         safe_out.mkdir(parents=True, exist_ok=True)
         file_hashes: Dict[str, str] = {}
         written_files: List[str] = []

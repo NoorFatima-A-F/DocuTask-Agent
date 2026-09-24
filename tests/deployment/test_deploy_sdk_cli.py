@@ -1,5 +1,4 @@
 """Unit tests for Infrastructure SDK and doctaskctl CLI."""
-import pytest
 from app.deployment.cli.commands import run_cli
 from app.deployment.core.deployment import DeploymentStrategyType
 from app.deployment.sdk.client import InfrastructureSDK

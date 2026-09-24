@@ -1,7 +1,6 @@
 """Tests for Evidence Artifacts, Attachments, and Signed Evidence Bundles."""
 
-import pytest
-from app.audit.evidence.artifacts import EvidenceType, EvidenceArtifact
+from app.audit.evidence.artifacts import EvidenceType
 from app.audit.evidence.manager import EvidenceManager
 from app.audit.storage.repository import AuditRepository
 from app.audit.core.events import AuditEvent
@@ -34,7 +33,7 @@ def test_evidence_bundle_generation_and_manifest_signing():
     manager = EvidenceManager(repository=repo)
 
     # 1. Record events
-    ev1 = repo.record(
+    repo.record(
         AuditEvent(
             event_id="ev_bnd_1",
             event_type="model.invoke",

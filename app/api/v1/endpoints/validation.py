@@ -5,16 +5,12 @@ digital twin execution, online drift detection, experiment engines, SCM causal a
 policy self-evolution, and cryptographic certification.
 """
 
-from typing import Dict, Any, List, Optional
-from fastapi import APIRouter, HTTPException, Query, Body
+from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
 
 # 1. Outcomes
 from app.runtime.outcomes import (
     OutcomeCollector,
-    MissionOutcomeRecord,
-    OutcomeValidator,
-    OutcomeReconstructor,
     OutcomeStatisticsTracker,
 )
 
@@ -22,72 +18,47 @@ from app.runtime.outcomes import (
 from app.runtime.predictions import (
     PredictionErrorEngine,
     ResidualAnalyzer,
-    CalibrationDriftMonitor,
-    PredictionStatisticsTracker,
     PredictionValidator,
 )
 
 # 3. Counterfactual
 from app.runtime.counterfactual import (
     CounterfactualSimulator,
-    ScenarioGenerator,
-    AlternatePlanner,
-    CounterfactualComparisonEngine,
-    CounterfactualReplayOptimizer,
 )
 
 # 4. Digital Twin
 from app.runtime.digital_twin import (
     DigitalTwinEngine,
-    SafetySandbox,
-    FidelityMonitor,
-    ShadowExecutor,
 )
 
 # 5. Drift
 from app.runtime.drift import (
     OnlineDriftDetector,
-    StatisticalDriftMetrics,
-    DriftAlertAdvisor,
 )
 
 # 6. Experiments
 from app.runtime.experiments import (
     ExperimentEngine,
-    ABTestingEngine,
-    BayesianExperimentEngine,
-    SequentialProbabilityRatioTest,
-    ExperimentRegistry,
 )
 
 # 7. Causal Analysis
 from app.runtime.causal_analysis import (
     CausalAnalysisEngine,
-    StructuralCausalModel,
-    DoCalculusEngine,
-    CausalAttributionEngine,
 )
 
 # 8. Self-Evolution
 from app.runtime.self_evolution import (
     SelfEvolutionEngine,
-    PolicyLifecycleManager,
-    PolicyMutationGenerator,
-    RollbackManager,
 )
 
 # 9. Research
 from app.runtime.research import (
     AutonomousResearchEngine,
-    HypothesisGenerator,
-    DiscoveryValidator,
 )
 
 # 10. Certification
 from app.runtime.certification import (
     ScientificCertificationEngine,
-    CertificationPackageBuilder,
-    GovernanceGateManager,
 )
 
 router = APIRouter()

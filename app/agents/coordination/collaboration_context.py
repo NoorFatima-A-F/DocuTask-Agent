@@ -3,7 +3,7 @@ Collaboration Context.
 Shared, thread-safe context holding intermediate artifacts, variables, and conversation references.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 

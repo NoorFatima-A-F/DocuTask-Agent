@@ -8,7 +8,6 @@ Computes weighted composite quality scorecards across the 6 core health intellig
 5. Alerting: 10%
 6. Evidence Quality: 10%
 """
-from typing import Dict, Any
 from app.platform_verification.health_transition_intelligence.domain.models import (
     StateMachineReport,
     DegradationReport,

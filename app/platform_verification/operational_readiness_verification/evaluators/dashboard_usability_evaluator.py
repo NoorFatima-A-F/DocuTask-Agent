@@ -1,7 +1,6 @@
 """
 Phase 3H.4.11.7: Dashboard Usability Evaluator
 """
-from typing import Dict, Any
 from ..domain.interfaces import IDashboardUsabilityEvaluator
 from ..domain.models import DashboardUsabilityScore
 

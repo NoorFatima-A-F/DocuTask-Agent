@@ -2,9 +2,9 @@
 
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
-from app.infrastructure.regions.models import Geography, LatencyClass, Region, RegionStatus
+from app.infrastructure.regions.models import Geography, RegionStatus
 from app.infrastructure.regions.affinity import TenantAffinityRule
 from app.infrastructure.routing.metadata import WorkloadRoutingRequest
 from app.infrastructure.sdk.clusters import ClusterSDK

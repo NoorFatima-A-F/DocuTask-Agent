@@ -3,7 +3,6 @@ Process State Verifier (Part 2).
 Monitors application process state (RUNNING -> BLOCKED -> ZOMBIE -> TERMINATED).
 """
 import os
-from typing import Dict, Any, List
 from app.platform_verification.liveness.domain.models import (
     ProcessStateReport,
     ProcessStatus,

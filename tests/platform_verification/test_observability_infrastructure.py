@@ -2,35 +2,12 @@
 Test Suite: Part 3I Enterprise Observability Infrastructure (Logging & Metrics) Verification
 """
 import os
-import json
 import pytest
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
 from app.platform_verification.observability_infrastructure.domain.models import (
-    LogLevel,
-    GoldenSignalType,
-    AlertSeverity,
     ObservabilityCertificationTier,
-    LoggingArchitectureReport,
-    StructuredLoggingReport,
-    CorrelationReport,
-    AIWorkflowLoggingReport,
-    SecurityScanReport,
-    RetentionReport,
-    LogPerformanceReport,
-    LoggingPillarScore,
-    LoggingCertificationReport,
-    MetricInventoryReport,
-    GoldenSignalsReport,
-    AppInfraMetricsReport,
-    SLISLOReport,
-    AlertingReport,
-    DashboardReport,
-    MetricsPerformanceReport,
-    MetricsPillarScore,
-    MetricsCertificationReport,
-    UnifiedObservabilityCertification,
 )
 
 from app.platform_verification.observability_infrastructure.logging_verifiers.logging_architecture_verifier import (
@@ -77,18 +54,6 @@ from app.platform_verification.observability_infrastructure.metrics_verifiers.me
     MetricsPerformanceVerifier,
 )
 
-from app.platform_verification.observability_infrastructure.scoring.logging_quality_scorer import (
-    LoggingQualityScorer,
-)
-from app.platform_verification.observability_infrastructure.scoring.metrics_quality_scorer import (
-    MetricsQualityScorer,
-)
-from app.platform_verification.observability_infrastructure.scoring.observability_composite_scorer import (
-    ObservabilityCompositeScorer,
-)
-from app.platform_verification.observability_infrastructure.exporter.observability_exporter import (
-    ObservabilityExporter,
-)
 from app.platform_verification.observability_infrastructure.runtime.observability_runtime import (
     ObservabilityRuntime,
 )

@@ -5,12 +5,11 @@ Enterprise Agent Observability, Evaluation, Optimization & Controlled Self-Impro
 
 from __future__ import annotations
 from typing import Dict, List, Optional, Any
-from fastapi import APIRouter, HTTPException, Query, Body
-from pydantic import BaseModel, Field
+from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
 
 from app.runtime.ai_operations.runtime.ai_operations_runtime import ai_operations_runtime
 from app.runtime.ai_operations.models.schemas import (
-    Span,
     ExecutionTrace,
     AgentTelemetry,
     EvaluationResult,
@@ -20,7 +19,6 @@ from app.runtime.ai_operations.models.schemas import (
     ImprovementProposal,
     ExperimentRecord,
     GovernanceAuditRecord,
-    ProposalStatus,
 )
 
 router = APIRouter()

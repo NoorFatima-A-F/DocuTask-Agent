@@ -1,7 +1,7 @@
 """
 Environment Manager: 7 environment tiers, readiness validation, hardware profiling.
 """
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, List
 from ..interfaces import EnvironmentManagerInterface
 from ...crosscutting.observability import ComponentObservability
 from ...domain.models import EnvironmentReadiness, EnvironmentType

@@ -3,12 +3,9 @@ Tests for Replication Streams, Lag Metrics, Sync Coordination, and Conflict Reso
 """
 
 from datetime import datetime, timezone, timedelta
-import pytest
 
 from app.infrastructure.replication.models import (
-    ReplicationLagMetric,
     ReplicationMode,
-    ReplicationStream,
 )
 from app.infrastructure.replication.replication_manager import (
     ReplicationManager,
@@ -20,7 +17,6 @@ from app.infrastructure.replication.conflict_resolution import (
     ConflictResolutionStrategy,
     ConflictResolver,
     ReplicationConflict,
-    ResolutionResult,
 )
 
 

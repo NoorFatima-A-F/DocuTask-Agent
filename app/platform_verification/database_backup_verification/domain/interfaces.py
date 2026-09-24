@@ -18,7 +18,6 @@ from app.platform_verification.database_backup_verification.domain.models import
     DataIntegrityReport,
     CryptographicVerificationReport,
     DatabaseSecurityReport,
-    PerformanceBenchmarkingReport,
     AutomatedRestoreReport,
     ForensicReport,
     ContinuousVerificationScheduleReport,

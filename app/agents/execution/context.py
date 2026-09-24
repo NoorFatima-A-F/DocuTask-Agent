@@ -3,11 +3,11 @@ Execution Runtime Context Models.
 Defines RuntimeContext, ExecutionRequest, and ExecutionResult.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.execution.lifecycle import ExecutionLifecycleState
-from app.agents.execution.metadata import ExecutionIdentity, ExecutionMetadata, ExecutionStatistics
+from app.agents.execution.metadata import ExecutionStatistics
 from app.agents.planning.contracts import Plan
 
 

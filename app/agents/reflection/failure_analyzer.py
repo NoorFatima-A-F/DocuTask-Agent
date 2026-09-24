@@ -4,7 +4,7 @@ Investigates failed tasks, error logs, and recovery attempts in finished executi
 Does not perform recovery; only diagnoses reasons for failure.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 

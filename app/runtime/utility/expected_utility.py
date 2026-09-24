@@ -3,8 +3,8 @@ Scientific Utility Engine - Expected Utility Formulation
 Calculates multi-attribute expected utility under Von Neumann-Morgenstern decision theory.
 """
 
-from typing import Dict, Any, Optional
-from dataclasses import dataclass, field
+from typing import Dict, Optional
+from dataclasses import dataclass
 from app.runtime.utility.utility_functions import UtilityFunctions, RiskProfile
 
 

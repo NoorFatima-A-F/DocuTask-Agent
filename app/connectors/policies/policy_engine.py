@@ -9,7 +9,6 @@ import logging
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
-from app.connectors.core.exceptions import PolicyViolationError
 from app.connectors.core.models import ActionDescriptor, Connector, ConnectorPolicyRule
 
 logger = logging.getLogger(__name__)

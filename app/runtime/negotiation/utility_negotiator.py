@@ -3,9 +3,8 @@ AMAEOP Pillar 3 - Nash Bargaining Utility Negotiator
 Finds mathematically optimal Pareto agreements balancing competing utility functions across departments.
 """
 
-from typing import Dict, List, Any, Tuple
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
-import math
 
 
 @dataclass

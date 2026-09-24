@@ -2,7 +2,7 @@
 Phase 3N.14: CI/CD Security Gate Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICICDSecurityGateVerifier
 from ..domain.models import (

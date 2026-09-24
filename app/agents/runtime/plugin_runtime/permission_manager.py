@@ -6,7 +6,6 @@ filesystem.read, filesystem.write, network.access, database.access, secret.acces
 
 from enum import Enum
 from typing import Dict, List, Optional, Set
-from pydantic import BaseModel, Field
 from app.agents.runtime.exceptions import PluginValidationError
 
 

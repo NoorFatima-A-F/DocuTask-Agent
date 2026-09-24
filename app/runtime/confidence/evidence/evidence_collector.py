@@ -5,7 +5,7 @@ Gathers raw evidence metrics exclusively from Planner, Workers, Validation, Reco
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 from app.runtime.confidence.evidence.runtime_snapshot import RuntimeEvidenceSnapshot
 from app.runtime.events.store.event_store import get_global_event_store
 

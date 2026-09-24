@@ -1,7 +1,7 @@
 """Part E: Decision Quality Verification."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IDecisionQualityVerifier
 from ..domain.models import (
     CheckResult,

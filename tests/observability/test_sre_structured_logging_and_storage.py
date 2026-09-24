@@ -1,10 +1,9 @@
 """Tests for Structured Logger, JSON Formatter, and Storage Queries."""
 
-import pytest
 from app.observability.core.context import ObservabilityContext
 from app.observability.logging.formatter import JSONLogFormatter
-from app.observability.logging.logger import LogLevel, StructuredLogger
-from app.observability.logging.storage import LogEntry, LogStorageBackend
+from app.observability.logging.logger import StructuredLogger
+from app.observability.logging.storage import LogStorageBackend
 
 
 def test_json_formatter_masking():

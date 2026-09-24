@@ -3,7 +3,6 @@ Image Preprocessing Subsystem.
 Implements modular image enhancement transforms to maximize OCR character recognition accuracy.
 """
 
-import io
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
 from app.core.logging import logger

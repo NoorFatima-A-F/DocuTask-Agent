@@ -5,7 +5,6 @@ Master coordinator for autonomous root-cause analysis, causal graphs, and explai
 
 from typing import Any, Dict, List, Optional
 from app.runtime.operations.diagnostics.root_cause_engine import RootCauseEngine, RootCauseDiagnosis
-from app.runtime.operations.events.operation_events import DiagnosisCompleted
 
 
 class DiagnosisEngine:

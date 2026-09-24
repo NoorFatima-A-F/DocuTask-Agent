@@ -3,7 +3,7 @@ Phase 3H.4.12.3: Observability Audit Trail Verifier
 """
 import uuid
 from datetime import datetime, timezone, timedelta
-from typing import Dict, Any, List
+from typing import List
 from ..domain.interfaces import IObservabilityAuditTrailVerifier
 from ..domain.models import ObservabilityAuditTrailReport, AuditEvent
 

@@ -1,6 +1,5 @@
 """Tests for Multi-Facet Search Engine, Full-Text Token Indexing, and Timeline Reconstruction."""
 
-import pytest
 from app.audit.storage.repository import AuditRepository
 from app.audit.search.engine import AuditSearchEngine
 from app.audit.search.filters import AuditSearchFilter
@@ -48,7 +47,7 @@ def test_execution_timeline_reconstruction():
     corr_id = "corr_exec_graph_999"
 
     # Root request
-    e1 = repo.record(
+    repo.record(
         AuditEvent(
             event_id="e_req",
             event_type="request.received",
@@ -62,7 +61,7 @@ def test_execution_timeline_reconstruction():
     )
 
     # Child workflow
-    e2 = repo.record(
+    repo.record(
         AuditEvent(
             event_id="e_wf",
             parent_event_id="e_req",
@@ -77,7 +76,7 @@ def test_execution_timeline_reconstruction():
     )
 
     # Child tool call
-    e3 = repo.record(
+    repo.record(
         AuditEvent(
             event_id="e_tool",
             parent_event_id="e_wf",

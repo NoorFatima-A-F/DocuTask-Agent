@@ -48,7 +48,7 @@
         "cost_per_doc_usd": 0.025,
         "target_max_usd": 0.05
       },
-      "timestamp": "2026-09-16T19:26:20.439549+00:00"
+      "timestamp": "2026-09-24T21:25:13.292692+00:00"
     },
     {
       "check_id": "CHK-5O-02",
@@ -59,7 +59,7 @@
       "details": {
         "cost_savings_pct": 92.8
       },
-      "timestamp": "2026-09-16T19:26:20.439554+00:00"
+      "timestamp": "2026-09-24T21:25:13.292710+00:00"
     },
     {
       "check_id": "CHK-5O-03",
@@ -70,7 +70,7 @@
       "details": {
         "token_cache_hit_rate_pct": 78.0
       },
-      "timestamp": "2026-09-16T19:26:20.439558+00:00"
+      "timestamp": "2026-09-24T21:25:13.292729+00:00"
     },
     {
       "check_id": "CHK-5O-04",
@@ -81,8 +81,8 @@
       "details": {
         "attribution_accuracy_pct": 100.0
       },
-      "timestamp": "2026-09-16T19:26:20.439561+00:00"
+      "timestamp": "2026-09-24T21:25:13.292748+00:00"
     }
   ],
-  "timestamp": "2026-09-16T19:26:20.439568+00:00"
+  "timestamp": "2026-09-24T21:25:13.292758+00:00"
 }

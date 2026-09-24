@@ -3,7 +3,6 @@ Tests for Phase 13.4: Autonomous Event-Sourced Mission Replay, Runtime Forensics
 """
 
 import pytest
-from app.runtime.replay.engine.mission_replay_engine import mission_replay_engine
 from app.runtime.replay.engine.replay_controller import replay_controller
 from app.runtime.replay.reconstruction.mission_reconstructor import MissionReconstructor
 from app.runtime.replay.reconstruction.planner_reconstructor import PlannerReconstructor

@@ -6,7 +6,7 @@ import time
 import random
 from typing import Callable, List, Dict, Any, Optional
 from app.performance_verification.infrastructure.latency_analyzer import LatencyAnalyzer
-from app.performance_verification.domain.models import LatencyDistribution, PerformanceStatus
+from app.performance_verification.domain.models import PerformanceStatus
 
 
 class BenchmarkEngine:

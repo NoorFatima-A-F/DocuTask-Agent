@@ -1,7 +1,6 @@
 """
 Phase 3H.5.3: Health Signal Correlation Engine
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IHealthSignalCorrelationEngine
 from ..domain.models import EventCorrelationReport, CorrelatedIncident
 

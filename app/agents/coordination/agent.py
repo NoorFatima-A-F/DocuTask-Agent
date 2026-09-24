@@ -3,7 +3,7 @@ Agent Domain Aggregate.
 Encapsulates an agent instance, its current lifecycle state, active workloads, and operational history.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import List
 from uuid import UUID
 from pydantic import BaseModel, Field
 from app.agents.coordination.agent_profile import AgentProfile

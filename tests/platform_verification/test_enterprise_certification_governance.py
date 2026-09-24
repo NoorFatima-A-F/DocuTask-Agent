@@ -3,21 +3,15 @@ Unit and Integration tests for Enterprise Verification Quality Gate & Certificat
 """
 import pytest
 from app.platform_verification.certification_engine import (
-    ApprovalAction,
-    ApprovalReview,
     CertificationLevel,
     CertificationStatus,
     ChangeType,
     EnterpriseCertificationPlatformRuntime,
     ExceptionRequest,
-    ExceptionStatus,
-    GateCategory,
     GateComparisonOperator,
     QualityGateCondition,
-    QualityGateDefinition,
     ReleaseDecisionType,
     RiskLevel,
-    Severity,
 )
 
 

@@ -1,6 +1,6 @@
 from typing import Dict, Any
 from ..domain.environments_domain import EnvironmentAggregate, EnvironmentReady
-from app.shared_kernel import Result, Ok, Err, get_event_bus
+from app.shared_kernel import Result, Ok, get_event_bus
 
 class EnvironmentService:
     def __init__(self, repo):

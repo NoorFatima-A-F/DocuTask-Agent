@@ -2,7 +2,7 @@
 User adoption and organizational change simulation.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from app.business_value_verification.domain.models import AdoptionMetric
 
 

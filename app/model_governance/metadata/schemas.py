@@ -5,7 +5,7 @@ Defines Technical, Business, and Governance metadata dimensions for AI models.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Set
+from typing import List, Optional, Set
 from pydantic import BaseModel, Field
 from app.model_governance.registry.models import RiskLevel
 

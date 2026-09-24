@@ -2,7 +2,6 @@
 Abstract Interfaces for Enterprise Liveness Verification Framework (Part 3H.2).
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
 from app.platform_verification.liveness.domain.models import (
     LivenessContractReport,
     ResponsivenessReport,

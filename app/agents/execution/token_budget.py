@@ -3,7 +3,6 @@ Token Budget Management.
 Tracks and limits LLM token consumption across all nodes during execution.
 """
 
-from typing import Optional
 from pydantic import BaseModel, Field
 
 

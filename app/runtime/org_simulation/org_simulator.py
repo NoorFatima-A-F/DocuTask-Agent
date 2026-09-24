@@ -3,7 +3,7 @@ AMAEOP Pillar 10 - Autonomous Organization Digital Twin Simulator
 Runs large-scale Monte Carlo stress tests across 100 organizations & 1000 missions under budget cuts, provider outages, and surges.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 import random
 import time

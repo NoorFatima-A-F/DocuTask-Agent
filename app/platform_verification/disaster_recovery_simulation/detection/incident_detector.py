@@ -2,7 +2,6 @@
 Incident Detection Engine for Part 3G.3.
 Verifies real-time Prometheus alert rules, blackbox probes, and Mean Time To Detect (MTTD <= 5m).
 """
-from typing import Dict, Any, List
 from app.platform_verification.disaster_recovery_simulation.domain.models import (
     IncidentDetectionResult,
 )

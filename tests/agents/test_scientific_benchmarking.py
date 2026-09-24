@@ -6,9 +6,7 @@ SLSA/W3C Provenance, Benchmark Isolation, Scientific Benchmark Runner, and Throu
 
 import asyncio
 import gc
-import math
 import pytest
-from typing import List
 
 from app.evidence.benchmarking.benchmark_runner import (
     ScientificBenchmarkResult,
@@ -30,8 +28,6 @@ from app.evidence.benchmarking.provenance import (
 )
 from app.evidence.benchmarking.statistics_engine import (
     AdvancedStatisticsEngine,
-    ConfidenceInterval,
-    DistributionType,
     FullStatisticalReport,
 )
 from app.evidence.benchmarking.throughput_engine import (

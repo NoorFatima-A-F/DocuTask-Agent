@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
 import json
-from typing import Dict, List, Any
+from typing import Dict, Any
 import uuid
 
 @dataclass(frozen=True)

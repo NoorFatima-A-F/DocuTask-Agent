@@ -3,7 +3,6 @@ Phase 3O: Human-Readable Infrastructure Readiness Markdown Generator.
 """
 
 from datetime import datetime, timezone
-from pathlib import Path
 
 from ..domain.models import (
     CertificationDecision,

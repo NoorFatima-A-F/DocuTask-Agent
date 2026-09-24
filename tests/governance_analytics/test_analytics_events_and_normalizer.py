@@ -1,6 +1,5 @@
 """Tests for Governance Analytics Event Canonical Schema, Normalizers, and Processors."""
 
-import pytest
 from app.governance.analytics.events.normalizers import (
     AnalyticsEventType,
     GovernanceAnalyticsEvent,
@@ -59,7 +58,7 @@ def test_governance_event_consumer_ingestion():
     received = []
     consumer.subscribe(lambda e: received.append(e))
 
-    ev1 = consumer.ingest({
+    consumer.ingest({
         "event_type": "ModelInvocation",
         "tenant_id": "tenant_1",
         "model_id": "gemini-1.5-pro",

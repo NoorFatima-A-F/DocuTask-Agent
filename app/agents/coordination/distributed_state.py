@@ -5,7 +5,7 @@ Provides thread-safe state management with optimistic concurrency control across
 
 from typing import Any, Dict, Optional
 from uuid import UUID
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.agents.coordination.exceptions import InconsistentSharedStateError
 
 

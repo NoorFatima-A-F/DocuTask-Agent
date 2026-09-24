@@ -27,7 +27,7 @@ class HealthForecastEngine:
 
     def generate_forecast(self, current_score: float) -> HealthForecastResult:
         slope = self.trend_analyzer.calculate_trend_slope()
-        ema = self.trend_analyzer.calculate_ema()
+        self.trend_analyzer.calculate_ema()
 
         # Extrapolate over intervals
         pred_1h = max(0.0, min(100.0, current_score + (slope * 6.0)))

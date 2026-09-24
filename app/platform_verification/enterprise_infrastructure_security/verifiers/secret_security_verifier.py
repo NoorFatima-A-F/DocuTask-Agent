@@ -2,7 +2,7 @@
 Phase 3N.6: Secret Security Verification Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ISecretSecurityVerifier
 from ..domain.models import (
@@ -35,7 +35,7 @@ class SecretSecurityVerifier(ISecretSecurityVerifier):
             SecretScanTarget(scan_scope="CI/CD Pipeline Configurations", tool_used="Gitleaks CI Action", secrets_detected=0, rotation_capable=True, status="CLEAN"),
         ]
 
-        total_detected = sum(t.secrets_detected for t in targets)
+        sum(t.secrets_detected for t in targets)
 
         checks = [
             CheckResult(

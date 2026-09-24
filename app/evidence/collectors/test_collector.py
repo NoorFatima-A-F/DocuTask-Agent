@@ -7,10 +7,9 @@ into immutable, cryptographically verifiable EvidenceItems.
 from __future__ import annotations
 
 import logging
-import os
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Optional
 
 from app.evidence.registry.evidence_models import EvidenceItem, EvidenceType, VerificationStatus
 

@@ -4,7 +4,6 @@ Unit and integration tests for Part 4 - Enterprise Platform Core Services Verifi
 
 import os
 import json
-import pytest
 from app.platform_core_verification import (
     OrchestratorVerifier,
     AgentKernelVerifier,

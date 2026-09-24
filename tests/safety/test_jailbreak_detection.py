@@ -1,7 +1,5 @@
 """Tests for Multi-Strategy Jailbreak Detection and Classifier."""
 
-import pytest
-from app.safety.jailbreak.patterns import JailbreakPatternRegistry
 from app.safety.jailbreak.classifier import JailbreakClassifier
 from app.safety.jailbreak.detector import JailbreakDetector
 

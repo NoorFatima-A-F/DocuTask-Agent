@@ -9,13 +9,11 @@ invalidation upon upstream modification or data perturbation.
 """
 
 from __future__ import annotations
-import json
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-from research_validation.provenance.hashing import hash_canonical_json
 
 
 class PipelineStageType(str, Enum):

@@ -4,9 +4,8 @@ FastAPI Router for Phase 3J.3: Enterprise Performance Baseline & Capacity Verifi
 
 from typing import Any, Dict, Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, status
 
-from ..domain.models import PerformanceQualityCertificationReport
 from ..runtime.performance_baseline_runtime import PerformanceBaselineRuntime
 
 router = APIRouter(

@@ -1,6 +1,6 @@
 """Evidence Quality Index (EQI) Calculator."""
 
-from typing import List, Dict, Any
+from typing import List, Dict
 from datetime import datetime, timezone
 from enterprise_audit_engine.domain.evidence.models import EvidenceRecord
 from enterprise_audit_engine.certification_authority.domain.models import EQIBreakdown

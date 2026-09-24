@@ -3,7 +3,7 @@ Phase 13.20: Enterprise Agent Security Scanner.
 Scans agents for prompt injections, unsafe tools, excessive privileges, PII/PHI leakage, and CVE vulnerabilities.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, List
 from datetime import datetime, timezone
 import uuid
 from app.platform_ai_lifecycle.models.schemas import (

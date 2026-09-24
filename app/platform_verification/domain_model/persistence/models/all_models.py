@@ -1,12 +1,11 @@
 """
 SQLAlchemy 2.0 Declarative Persistence Models for Verification Platform.
 """
-from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from sqlalchemy import (
-    Column, String, Integer, Float, Boolean, DateTime, ForeignKey, Text, JSON, Enum as SQLEnum, Index
+    String, Integer, Float, Boolean, ForeignKey, Text, JSON
 )
-from sqlalchemy.orm import relationship, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column
 from app.platform_verification.domain_model.persistence.database import VerificationBase
 
 

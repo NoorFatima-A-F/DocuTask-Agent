@@ -3,7 +3,7 @@ Coordination Decision Adapter.
 Delegates policy compliance and risk evaluations to the Decision & Governance Engine.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 from uuid import UUID
 
 

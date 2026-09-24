@@ -3,7 +3,7 @@ Task Dependency Resolver Engine.
 Resolves explicit and implicit prerequisites among planned tasks.
 """
 
-from typing import Dict, List
+from typing import List
 from app.agents.planning.dependencies import Dependency, DependencyType
 from app.agents.planning.tasks import PlanningTask
 

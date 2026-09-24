@@ -2,7 +2,6 @@
 Tests for Human Approvals Gate, Suspension, and Decision Engine.
 """
 
-import pytest
 import asyncio
 from app.workflows.domain.models import ExecutionState, TaskDefinition, TaskType, WorkflowDefinition
 from app.workflows.runtime.runtime import WorkflowRuntime

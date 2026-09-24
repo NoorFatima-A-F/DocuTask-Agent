@@ -5,7 +5,7 @@ Defines strongly typed agent messages, message types, delivery semantics, and co
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 

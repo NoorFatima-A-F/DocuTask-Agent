@@ -4,7 +4,7 @@ Manages distributed time-bound task and resource leases to prevent split-brain a
 """
 
 from datetime import datetime, timezone
-from typing import Dict, Optional
+from typing import Dict
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.coordination.exceptions import StaleLeaseError

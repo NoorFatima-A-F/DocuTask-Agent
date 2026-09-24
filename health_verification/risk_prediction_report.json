@@ -8,7 +8,7 @@
       "risk_level": "HIGH",
       "estimated_time_horizon": "within 25 minutes",
       "primary_risk_driver": "Queue backlog accumulation (+450 items/min)",
-      "timestamp": "2026-09-19T07:05:25.349899+00:00"
+      "timestamp": "2026-09-24T21:55:27.373154+00:00"
     },
     {
       "service": "database",
@@ -16,7 +16,7 @@
       "risk_level": "HIGH",
       "estimated_time_horizon": "within 45 minutes",
       "primary_risk_driver": "Connection pool utilization approaching 90%",
-      "timestamp": "2026-09-19T07:05:25.349899+00:00"
+      "timestamp": "2026-09-24T21:55:27.373154+00:00"
     },
     {
       "service": "gemini-api",
@@ -24,7 +24,7 @@
       "risk_level": "MEDIUM",
       "estimated_time_horizon": "within 60 minutes",
       "primary_risk_driver": "Model latency drift & elevated 429 rate",
-      "timestamp": "2026-09-19T07:05:25.349899+00:00"
+      "timestamp": "2026-09-24T21:55:27.373154+00:00"
     },
     {
       "service": "storage",
@@ -32,7 +32,7 @@
       "risk_level": "LOW",
       "estimated_time_horizon": "nominal (> 7 days)",
       "primary_risk_driver": "Disk utilization steady at 54%",
-      "timestamp": "2026-09-19T07:05:25.349899+00:00"
+      "timestamp": "2026-09-24T21:55:27.373154+00:00"
     }
   ],
   "passed": true,

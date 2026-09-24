@@ -1,7 +1,5 @@
 """Tests for Independent Reality Validators (API, DB, Security)."""
 
-import pytest
-from pathlib import Path
 from enterprise_audit_engine.external_validation.api_validator import (
     ApiRealityValidator,
     ApiRealityValidationResult,

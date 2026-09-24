@@ -1,6 +1,5 @@
 """Tests for Chaos Fault Injection Engine."""
 
-import pytest
 from app.networking.mesh.data_plane import MeshRequest
 from app.networking.resilience.fault_injection import (
     FaultInjectionEngine,

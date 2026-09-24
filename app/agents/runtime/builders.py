@@ -3,7 +3,7 @@ Runtime Fluent Builders.
 Provides declarative fluent builders for PlatformRuntimeConfig, Tenants, PluginManifests, and ModuleDescriptors.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from app.agents.runtime.configuration import PlatformRuntimeConfig
 from app.agents.runtime.feature_flags import RuntimeFeatureFlags
 from app.agents.runtime.module_registry import ModuleDescriptor

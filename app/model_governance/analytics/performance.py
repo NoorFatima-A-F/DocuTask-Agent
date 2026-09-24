@@ -7,8 +7,8 @@ and token throughput (tokens per second).
 from __future__ import annotations
 
 import statistics
-from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import List
+from pydantic import BaseModel
 
 
 class PerformanceMetricSample(BaseModel):

@@ -1,9 +1,8 @@
 """Tests for Alert Rules, Alert Engine Lifecycle, and Router Dispatch."""
 
-import pytest
-from app.observability.alerts.engine import ActiveAlert, AlertEngine, AlertState
+from app.observability.alerts.engine import ActiveAlert, AlertEngine
 from app.observability.alerts.notifications import AlertRouter, ChannelType, NotificationChannel
-from app.observability.alerts.rules import AlertRule, AlertSeverity, RuleConditionType
+from app.observability.alerts.rules import AlertRule, AlertSeverity
 from app.observability.metrics.registry import MetricRegistry
 
 

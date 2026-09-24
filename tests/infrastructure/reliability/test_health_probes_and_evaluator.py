@@ -7,7 +7,6 @@ import pytest
 from app.infrastructure.health.probes import (
     HealthProbe,
     ProbeRegistry,
-    ProbeResult,
     ProbeStatus,
     ProbeType,
 )
@@ -53,7 +52,7 @@ def test_probe_registry_and_sync_execution():
     assert registry.get_probe_status("probe-db-liveness") == ProbeStatus.HEALTHY
 
     # 3. Second consecutive failure triggers status change to UNHEALTHY
-    res3 = registry.execute_probe_sync("probe-db-liveness")
+    registry.execute_probe_sync("probe-db-liveness")
     assert registry.get_probe_status("probe-db-liveness") == ProbeStatus.UNHEALTHY
 
 

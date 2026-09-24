@@ -1,7 +1,6 @@
 """
 Configuration Security Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
-from typing import Dict, Any
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
     ConfigurationSecurityReport,

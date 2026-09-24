@@ -3,7 +3,7 @@ Phase 13.19: Enterprise Process Discovery & Mining Engine.
 Ingests event logs, audit traces, and ERP telemetry to reconstruct actual business processes and pinpoint friction.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from app.runtime.business.models.schemas import DiscoveredProcess
 
 

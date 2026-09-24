@@ -1,14 +1,11 @@
 """
 Pytest Test Suite for Part 3H.3.3: Enterprise Health State Transition & Service Recovery Intelligence Framework
 """
-import os
 import json
 import pytest
 
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
-    DegradationSeverity,
-    RecoveryActionType,
     HealthTier,
 )
 from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import HealthStateMachine
@@ -23,8 +20,6 @@ from app.platform_verification.health_transition_intelligence.orchestration.k8s_
 from app.platform_verification.health_transition_intelligence.alerting.health_alerting_engine import HealthAlertingEngine
 from app.platform_verification.health_transition_intelligence.incident.incident_reconstruction_engine import IncidentReconstructionEngine
 from app.platform_verification.health_transition_intelligence.simulation.health_simulation_runner import HealthSimulationRunner
-from app.platform_verification.health_transition_intelligence.scoring.health_intelligence_scorer import HealthIntelligenceScorer
-from app.platform_verification.health_transition_intelligence.exporter.health_evidence_exporter import HealthEvidenceExporter
 from app.platform_verification.health_transition_intelligence.runtime.health_intelligence_runtime import HealthIntelligenceRuntime
 
 
@@ -222,7 +217,7 @@ def test_health_intelligence_scorer():
 
 def test_health_evidence_exporter(tmp_path):
     runtime = HealthIntelligenceRuntime(evidence_dir=str(tmp_path))
-    results = runtime.execute_full_verification()
+    runtime.execute_full_verification()
 
     expected_files = [
         "state_machine_report.json",

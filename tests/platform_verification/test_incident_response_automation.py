@@ -9,7 +9,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
 
 from app.platform_verification.incident_response_automation.architecture.incident_arch_verifier import (
     IncidentArchVerifier,
@@ -27,7 +26,6 @@ from app.platform_verification.incident_response_automation.detector.incident_de
     IncidentDetector,
 )
 from app.platform_verification.incident_response_automation.domain.models import (
-    ActionRiskLevel,
     CICDPipelineReport,
     IncidentArchitectureReport,
     IncidentAutomationTier,
@@ -38,7 +36,6 @@ from app.platform_verification.incident_response_automation.domain.models import
     IncidentKnowledgeReport,
     IncidentQualityScorecard,
     IncidentSecurityReport,
-    IncidentSeverity,
     PostmortemReport,
     RecoveryPolicyReport,
     RunbookExecutionReport,
@@ -64,9 +61,6 @@ from app.platform_verification.incident_response_automation.runtime.incident_aut
 )
 from app.platform_verification.incident_response_automation.safety.recovery_policy_engine import (
     RecoveryPolicyEngine,
-)
-from app.platform_verification.incident_response_automation.scoring.incident_quality_scorer import (
-    IncidentQualityScorer,
 )
 from app.platform_verification.incident_response_automation.security.incident_security_auditor import (
     IncidentSecurityAuditor,

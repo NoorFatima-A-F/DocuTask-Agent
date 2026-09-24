@@ -5,7 +5,7 @@ CompliancePolicy, PrivacyPolicy, DataPolicy, ToolSelectionPolicy, WorkflowPolicy
 PlannerPolicy, HumanReviewPolicy, EscalationPolicy, ResourcePolicy, and SchedulingPolicy.
 """
 
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 
 

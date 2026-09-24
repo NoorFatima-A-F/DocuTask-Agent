@@ -1,8 +1,7 @@
 """Synchronous Evaluation Runtime for Phase 6 AI System Evaluation & Certification."""
 
 from datetime import datetime, timezone
-import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 import uuid
 
 from ..agent_evaluation.agent_evaluator import AgentEvaluator
@@ -10,7 +9,6 @@ from ..benchmarks.ai_capability_benchmarker import AICapabilityBenchmarker
 from ..cost_intelligence.cost_business_evaluator import CostBusinessEvaluator
 from ..domain.interfaces import IBaseEvaluator, IEvaluationRuntime
 from ..domain.models import (
-    EvaluationStatus,
     PlatformCertificationScore,
     PortfolioShowcaseReport,
 )

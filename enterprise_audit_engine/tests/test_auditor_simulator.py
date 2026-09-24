@@ -1,11 +1,9 @@
 """Tests for Multi-Persona Auditor Simulation Framework."""
 
-import pytest
 from enterprise_audit_engine.auditor_simulator.simulation_engine import (
     AuditorSimulator,
     AuditorSimulationReport,
 )
-from enterprise_audit_engine.auditor_simulator.personas import AuditorPersonas
 
 
 def test_auditor_simulation_full_pass():

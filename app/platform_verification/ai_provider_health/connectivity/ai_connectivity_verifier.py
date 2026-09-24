@@ -5,7 +5,7 @@ Validates DNS resolution, TLS handshake times, connection success rates, and net
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.ai_provider_health.domain.interfaces import (
     IAIConnectivityVerifier,

@@ -1,6 +1,5 @@
 """Tests for Tool Execution Ledger and Trace Collector."""
 
-import pytest
 from app.runtime.tool_ledger.tool_execution_ledger import ToolExecutionLedger
 from app.runtime.tool_ledger.tool_trace_collector import ToolTraceCollector
 

@@ -9,15 +9,12 @@ from __future__ import annotations
 from typing import Any, Callable, Dict, List, Optional, Set
 from app.model_governance.registry.models import (
     Model,
-    ModelCategory,
     ModelLifecycleState,
-    ModelProvider,
-    RiskLevel,
 )
 from app.model_governance.registry.repository import ModelRegistryRepository
 from app.model_governance.registry.service import ModelRegistryService
 from app.model_governance.lifecycle.manager import ModelLifecycleManager
-from app.model_governance.lifecycle.deprecation import ModelDeprecationManager, DeprecationPlan
+from app.model_governance.lifecycle.deprecation import ModelDeprecationManager
 from app.model_governance.approval.workflow import ModelApprovalWorkflowEngine
 from app.model_governance.approval.approvals import StageStatus
 from app.model_governance.selection.selector import (
@@ -26,14 +23,14 @@ from app.model_governance.selection.selector import (
     ModelSelectionService,
 )
 from app.model_governance.selection.routing import ModelRouter, ModelInvocationRecord
-from app.model_governance.evaluation.benchmarks import ModelBenchmarkDataset, ModelBenchmarkRunner
+from app.model_governance.evaluation.benchmarks import ModelBenchmarkRunner
 from app.model_governance.evaluation.scoring import ModelEvaluationScorer
 from app.model_governance.risk.scoring import ModelRiskScorer
 from app.model_governance.policies.enforcement import ModelPolicyEnforcer
 from app.model_governance.reproducibility.snapshot import ReproducibilityService, ExecutionSnapshot
-from app.model_governance.analytics.usage import ModelUsageTracker, UsageEvent
+from app.model_governance.analytics.usage import ModelUsageTracker
 from app.model_governance.analytics.cost import ModelCostCalculator
-from app.model_governance.analytics.performance import ModelPerformanceAnalyzer, PerformanceMetricSample
+from app.model_governance.analytics.performance import ModelPerformanceAnalyzer
 
 
 class ModelGovernanceSDK:

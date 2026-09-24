@@ -1,7 +1,7 @@
 """
 Phase 3H.4.11: Operational Readiness Verification Runtime
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..evaluators import (
     MetricsCompletenessEvaluator,
     MonitoringAccuracyEvaluator,

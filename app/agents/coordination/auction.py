@@ -3,8 +3,7 @@ Auction Allocation Engine.
 Implements First-Price Reverse Auctions and Vickrey-style second-price auctions for agent resource allocation.
 """
 
-from typing import List, Optional
-from uuid import UUID
+from typing import Optional
 from app.agents.coordination.negotiation import Bid, NegotiationSession
 
 

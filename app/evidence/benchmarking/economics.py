@@ -16,8 +16,8 @@ from __future__ import annotations
 
 import logging
 import time
-from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass, field
+from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 

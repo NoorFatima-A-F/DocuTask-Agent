@@ -4,10 +4,9 @@ Provides a pythonic interface for evaluating actions, managing policies, queryin
 audit trails, generating reports, managing webhooks, and subscribing to governance events.
 """
 
-from datetime import datetime, timezone
 import logging
 import time
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import Any, Callable, Dict, List, Optional
 
 from .exceptions import (
     AuthenticationError,
@@ -18,8 +17,6 @@ from .exceptions import (
     ResourceNotFoundError,
 )
 from .models import (
-    ApprovalItem,
-    AuditRecord,
     GovernanceDecision,
     GovernancePolicy,
     GovernanceReport,

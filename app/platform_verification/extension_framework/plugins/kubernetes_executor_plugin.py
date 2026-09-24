@@ -1,7 +1,7 @@
 """
 Reference Execution Backend Plugin: Kubernetes Job Executor.
 """
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import ExecutionBackendPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
     PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,

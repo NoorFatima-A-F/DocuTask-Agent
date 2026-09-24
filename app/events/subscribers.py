@@ -3,7 +3,7 @@ Event Subscriber and Idempotent Consumer Helpers.
 """
 
 from functools import wraps
-from typing import Any, Callable, Dict, Optional, Set
+from typing import Any, Callable, Set
 from .models import CloudEventEnvelope
 
 

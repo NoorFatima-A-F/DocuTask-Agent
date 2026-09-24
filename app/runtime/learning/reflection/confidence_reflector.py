@@ -4,7 +4,7 @@ Analyzes confidence gains, multi-dimension stability, calibration accuracy, and 
 """
 
 from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class ConfidenceReflectionMetrics(BaseModel):

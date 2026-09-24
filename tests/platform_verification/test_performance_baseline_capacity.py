@@ -17,9 +17,6 @@ from app.platform_verification.performance_baseline_capacity.domain.models impor
     BaselineCertificationTier,
     VerificationStatus,
 )
-from app.platform_verification.performance_baseline_capacity.exporter.performance_baseline_exporter import (
-    PerformanceBaselineExporter,
-)
 from app.platform_verification.performance_baseline_capacity.runtime.performance_baseline_runtime import (
     PerformanceBaselineRuntime,
 )

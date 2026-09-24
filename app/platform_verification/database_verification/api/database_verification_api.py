@@ -2,7 +2,6 @@
 In-process REST API Router for Database Architecture Verification.
 """
 from typing import Dict, Any, Optional
-from app.platform_verification.database_verification.domain.models import DatabaseVerificationEvidencePackage
 
 
 class DatabaseVerificationApi:

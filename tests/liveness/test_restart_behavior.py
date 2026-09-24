@@ -3,7 +3,6 @@ Tests for Orchestration Restart Behavior, Quality Scoring, and API Integration (
 """
 import pytest
 import os
-import json
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
@@ -15,9 +14,6 @@ from app.platform_verification.liveness.security.liveness_security_verifier impo
 )
 from app.platform_verification.liveness.scheduler.scheduler_liveness_monitor import (
     SchedulerLivenessMonitor,
-)
-from app.platform_verification.liveness.scoring.liveness_score_engine import (
-    LivenessScoreEngine,
 )
 from app.platform_verification.liveness.runtime.liveness_runtime import (
     LivenessVerificationRuntime,

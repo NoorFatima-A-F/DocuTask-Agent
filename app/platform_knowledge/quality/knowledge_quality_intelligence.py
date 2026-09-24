@@ -2,7 +2,7 @@
 Knowledge Quality Intelligence
 Detects outdated information, duplicate knowledge, conflicting policies, and reliability scores.
 """
-from typing import List, Dict, Any
+from typing import List, Dict
 from ..models.schemas import (
     KnowledgeQualityReport, KnowledgeConflict, KnowledgeAsset
 )

@@ -3,11 +3,9 @@ Enterprise Repository Topology & Architecture Governance Validator.
 Enforces Clean Architecture dependency invariants, metadata integrity, and CODEOWNERS completeness.
 """
 import json
-import os
-import re
 import sys
 from pathlib import Path
-from typing import List, Dict, Tuple, Set
+from typing import List, Tuple
 
 class RepositoryTopologyValidator:
     def __init__(self, repo_root: Path):

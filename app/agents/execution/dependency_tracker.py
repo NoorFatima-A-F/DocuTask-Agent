@@ -6,7 +6,6 @@ Evaluates predecessor node completion, barrier synchronization, and execution el
 from typing import List, Set
 from app.agents.execution.execution_graph import ExecutionGraph
 from app.agents.execution.lifecycle import ExecutionLifecycleState
-from app.agents.planning.nodes import NodeType
 
 
 class DependencyTracker:

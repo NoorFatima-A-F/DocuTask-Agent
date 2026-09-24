@@ -6,11 +6,9 @@ empirical performance frontiers, and historical failure modes.
 """
 
 from __future__ import annotations
-from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from research_validation.knowledge_graph.knowledge_graph import ScientificKnowledgeGraph
-from research_validation.knowledge_graph.ontology import EntityType
 from research_validation.memory.failure_memory import FailureMemoryStore
 from research_validation.hypothesis.hypothesis_model import ScientificHypothesis
 from research_validation.provenance.hashing import hash_canonical_json

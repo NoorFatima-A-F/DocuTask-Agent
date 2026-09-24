@@ -3,8 +3,7 @@ Capacity Manager & Utilization Tracker for Phase 13.6 (ARIA-EOP).
 Monitors live capacity buffers, rate-limit headrooms, and worker utilization trends.
 """
 
-from typing import Dict, Any, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class CapacityStatus(BaseModel):

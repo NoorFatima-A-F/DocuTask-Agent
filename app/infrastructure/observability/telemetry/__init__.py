@@ -15,6 +15,7 @@ from app.infrastructure.observability.telemetry.exporters import (
     TelemetryExporter,
 )
 from app.infrastructure.observability.telemetry.collector import (
+    TelemetryCollector,
     TelemetryCollectorPipeline,
 )
 from app.infrastructure.observability.telemetry.sdk import (
@@ -25,6 +26,7 @@ __all__ = [
     "InMemoryExporter",
     "OTLPJsonExporter",
     "TelemetryBatch",
+    "TelemetryCollector",
     "TelemetryCollectorPipeline",
     "TelemetryContext",
     "TelemetryExporter",

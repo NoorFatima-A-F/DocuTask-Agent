@@ -3,8 +3,8 @@ Comparative Analysis Engine.
 Compares a target execution run against historic baselines or alternative execution paths.
 """
 
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field
+from typing import Optional
+from pydantic import BaseModel
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 

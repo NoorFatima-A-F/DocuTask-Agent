@@ -3,8 +3,10 @@
 import hashlib
 import json
 import os
+from pathlib import Path
 from datetime import datetime, timezone
-from typing import Any, Dict, Optional
+from typing import Dict, Optional, Union
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.interfaces import IAutonomousWorkflowQualityExporter
 from ..domain.models import AutonomousWorkflowQualityReport
 
@@ -24,7 +26,7 @@ class AutonomousWorkflowQualityExporter(IAutonomousWorkflowQualityExporter):
         report: AutonomousWorkflowQualityReport,
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
-        target_dir = resolve_safe_path(Path.cwd(), output_dir or self.DEFAULT_OUTPUT_DIR)
+        target_dir = Path(output_dir) if output_dir else Path.cwd() / self.DEFAULT_OUTPUT_DIR
         target_dir.mkdir(parents=True, exist_ok=True)
 
         exported_files: Dict[str, str] = {}

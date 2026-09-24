@@ -5,9 +5,8 @@ Provides explicit equation mappings, LaTeX representations, and deterministic ev
 
 from __future__ import annotations
 
-import math
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Any, Callable, Dict, List
 
 
 @dataclass(frozen=True)

@@ -7,7 +7,7 @@ Defines availability, latency, AI success rate, and workflow completion SLO spec
 from __future__ import annotations
 
 import enum
-from typing import Any, Dict, Optional
+from typing import Dict
 from pydantic import BaseModel, Field
 
 

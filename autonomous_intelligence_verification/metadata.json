@@ -1,21 +1,21 @@
 {
   "framework_phase": "Phase 3H.10 \u2014 Autonomous Operational Intelligence & Self-Optimization Verification Framework",
-  "exported_at": "2026-09-19T07:04:33.004102+00:00",
+  "exported_at": "2026-09-24T21:54:47.887951+00:00",
   "overall_score_pct": 99.36,
   "certification_tier": "Autonomous Operations Certified",
   "certification_granted": true,
   "total_artifacts": 10,
   "manifest_sha256": {
     "operational_graph_report.json": "78e3dd39e68e80cf5717e17493503f8e98f89de3a58e0a30b3e7048462d6af99",
-    "signal_correlation_report.json": "272048fb6d337c26557b4f9a549ffaf398e1d226a2ff70629835887edaa63e62",
+    "signal_correlation_report.json": "fc70b134bac032bd592036816928a1d2e7c6e5e8c009091790216bf151562a1c",
     "trend_analysis_report.json": "231f0b7e4ec89c6767ac05c46b6dc3843e939b6dc06de1701e2ddf5c12b96f27",
     "predictive_reliability_report.json": "9ea931224f338e05d7d0adb32e5d7524cf29e38a8544270ed050bed4c473290b",
     "optimization_recommendations.json": "7b23cf999cbfb32d88547ccf86f7dd152ae34e1e01762fb5215ba349952f558a",
     "autonomous_execution_report.json": "046e682e824711f0d71421f9317a443f2268299fc71781f974f539537df275ca",
     "explainability_report.json": "9b6cfd71bf02838f058dfa06e2c9916346cc1187928ac23e141c3e53c5725a29",
     "learning_effectiveness_report.json": "18bb7b919d0f5baa507aac2c2b93f162945f99bb52bbed8e5101df1f7c585578",
-    "governance_report.json": "96eb7b3b71c39219543f4921388ff54abee87e353e6250b46bdf20856f0365e7",
-    "certification_report.json": "840ff5ed62855b1128e0161ddda06e3f1fc7c5abc04e75997fb379ca28b472f1"
+    "governance_report.json": "63d7dcdfcd868e65031b68da3acf5a81b589afaa41b98a467ae1481b7ecf2ebd",
+    "certification_report.json": "6d13329a90eceedcac196eee957c2995c47fcb8593c48ffef5028b4034e0c8f0"
   },
   "auditor": "DocuTask Autonomous Reliability & Operations Scorer"
 }

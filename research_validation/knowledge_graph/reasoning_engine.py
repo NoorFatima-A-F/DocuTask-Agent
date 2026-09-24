@@ -6,14 +6,13 @@ contradictions across empirical findings in the Scientific Knowledge Graph.
 """
 
 from __future__ import annotations
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Set, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Set, Tuple
 
 from research_validation.knowledge_graph.knowledge_node import KnowledgeNode
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
 from research_validation.knowledge_graph.relationship_engine import (
-    RelationshipEdge, RelationshipEngine
+    RelationshipEngine
 )
 
 

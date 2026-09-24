@@ -4,7 +4,7 @@ Central registry mapping organizational department capabilities, roles, and agen
 """
 
 from typing import Dict, List, Any, Optional
-from app.runtime.organization.department import CANONICAL_DEPARTMENTS, Department
+from app.runtime.organization.department import CANONICAL_DEPARTMENTS
 
 
 class OrganizationRegistry:

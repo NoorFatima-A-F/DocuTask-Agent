@@ -3,7 +3,7 @@ Policy Evaluator for Phase 13.5 (ARLP-KIP).
 Simulates counterfactual execution runs against replay traces to evaluate candidate policy impact.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any
 from datetime import datetime, timezone
 import uuid
 from pydantic import BaseModel, Field

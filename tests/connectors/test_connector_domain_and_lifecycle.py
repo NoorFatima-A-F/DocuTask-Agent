@@ -5,16 +5,13 @@ Tests for Connector Platform Domain Models, Lifecycle State Machine, and Connect
 import pytest
 from app.connectors.core.exceptions import InvalidConnectorStateError
 from app.connectors.core.models import (
-    ActionDescriptor,
     AuthType,
-    CapabilityDescriptor,
     Connector,
     ConnectorCategory,
     ConnectorHealth,
     ConnectorStatus,
 )
 from app.connectors.lifecycle.manager import ConnectorLifecycleManager
-from app.connectors.sdk.base import BaseConnector
 from app.connectors.sdk.builder import ConnectorBuilder
 
 

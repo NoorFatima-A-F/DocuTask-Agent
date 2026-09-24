@@ -3,7 +3,7 @@ Platform Runtime Configuration.
 Structured Pydantic v2 configuration governing runtime timeouts, concurrency, environments, and feature flags.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from pydantic import BaseModel, Field
 from app.agents.runtime.feature_flags import RuntimeFeatureFlags
 

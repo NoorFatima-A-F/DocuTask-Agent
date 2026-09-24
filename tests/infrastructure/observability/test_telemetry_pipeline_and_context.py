@@ -2,18 +2,14 @@
 Tests for Unified Telemetry Context, Sensitive Data Redaction, and Pipeline Exporters.
 """
 
-import pytest
 
 from app.infrastructure.observability.telemetry.context import (
     TelemetryContext,
-    get_current_context,
     mask_sensitive_data,
-    set_current_context,
 )
 from app.infrastructure.observability.telemetry.exporters import (
     InMemoryExporter,
     OTLPJsonExporter,
-    TelemetryBatch,
 )
 from app.infrastructure.observability.telemetry.collector import (
     TelemetryCollectorPipeline,

@@ -17,9 +17,6 @@ from app.platform_verification.performance_stress_capacity.domain.models import 
     CertificationTier,
     VerificationStatus,
 )
-from app.platform_verification.performance_stress_capacity.exporter.performance_stress_exporter import (
-    PerformanceStressExporter,
-)
 from app.platform_verification.performance_stress_capacity.runtime.performance_stress_runtime import (
     PerformanceStressRuntime,
 )

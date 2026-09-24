@@ -10,8 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ai.factory import LLMFactory
 from app.ai.prompt_builder import PromptBuilder
-from app.ai.providers.gemini import GeminiProvider
-from app.ai.schemas import ExtractionRequest, InvoiceExtraction
+from app.ai.schemas import ExtractionRequest
 from app.ai.validator import AIValidator
 from app.core.exceptions import ResourceNotFoundException
 from app.ocr.pipeline import OCRPipeline

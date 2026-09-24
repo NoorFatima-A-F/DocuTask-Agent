@@ -3,8 +3,6 @@ State Consistency & Idempotency Verifier (Part 3G.5G).
 Proves that worker crashes, transient outages, and retries do not corrupt workflow states,
 generate duplicate records, or leave jobs in impossible conflicting states.
 """
-from typing import Dict, Any, List
-import uuid
 
 from app.platform_verification.operational_resilience.domain.models import (
     WorkflowState,

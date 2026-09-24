@@ -3,7 +3,7 @@ Planning Workflow Domain Representation.
 Defines WorkflowDefinition and execution branching topologies.
 """
 
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 from app.agents.planning.branching import ConditionalBranch, ParallelBranch
 from app.agents.planning.graph import PlanGraph

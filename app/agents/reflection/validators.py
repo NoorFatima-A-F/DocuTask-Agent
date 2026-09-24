@@ -4,7 +4,6 @@ Validates execution traces, evaluation graphs, critique consistency, learning ar
 """
 
 from app.agents.reflection.exceptions import (
-    CircularCritiqueReferenceError,
     DuplicateLearningArtifactError,
     IncompleteExecutionTraceError,
     InconsistentEvidenceError,

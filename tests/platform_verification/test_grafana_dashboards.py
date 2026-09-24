@@ -1,13 +1,10 @@
 """Comprehensive Unit and Integration Tests for Phase 3H.4.4 — Grafana Dashboard Verification Framework."""
 
-import os
 import json
-import pytest
 
 from app.platform_verification.grafana_verification.domain.models import (
     DashboardCertificationTier,
     DashboardCategory,
-    UserRole,
 )
 from app.platform_verification.grafana_verification.verifiers.grafana_configuration_verifier import (
     GrafanaConfigurationVerifier,
@@ -38,12 +35,6 @@ from app.platform_verification.grafana_verification.performance.dashboard_perfor
 )
 from app.platform_verification.grafana_verification.security.dashboard_security_auditor import (
     DashboardSecurityAuditor,
-)
-from app.platform_verification.grafana_verification.scoring.dashboard_quality_scorer import (
-    DashboardQualityScorer,
-)
-from app.platform_verification.grafana_verification.exporter.grafana_evidence_exporter import (
-    GrafanaEvidenceExporter,
 )
 from app.platform_verification.grafana_verification.runtime.grafana_verification_runtime import (
     GrafanaVerificationRuntime,

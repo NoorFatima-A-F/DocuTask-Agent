@@ -8,10 +8,7 @@ to prove fundamental distributed systems properties:
 4. Session tree property: all descendant sessions trace back to the unique root session_id.
 """
 
-import hashlib
-import json
 import random
-from uuid import uuid4
 import pytest
 from app.agents.runtime.dependency_graph import CircularDependencyError, DependencyGraph
 from app.agents.runtime.enterprise.audit_event import AuditEventType

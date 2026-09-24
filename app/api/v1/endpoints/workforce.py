@@ -7,8 +7,7 @@ from pydantic import BaseModel, Field
 
 from app.platform_workforce.runtime.workforce_master_orchestrator import workforce_master_orchestrator
 from app.platform_workforce.models.schemas import (
-    DigitalEmployee, EmployeeRole, DepartmentType, EmployeeStatus,
-    Department, DynamicTeam, TaskMarketplaceListing, NegotiationSession,
+    DigitalEmployee, EmployeeRole, DepartmentType, Department, DynamicTeam, TaskMarketplaceListing, NegotiationSession,
     CollaborationVote, ManagerReviewRecord, ExecutiveCouncilProposition,
     WorkforcePerformanceMetric, EconomicResourceBudget, HiringRequisition,
     CareerPromotionPath, WorkforceScheduleEntry, CollectiveMemoryRecord,

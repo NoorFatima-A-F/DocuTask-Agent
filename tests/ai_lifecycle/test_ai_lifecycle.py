@@ -3,7 +3,6 @@ Phase 13.20: Comprehensive Pytest Suite for Autonomous AI Application Lifecycle 
 Tests all lifecycle states, AVCS versioning, testing engine, security scanner, multi-stage approval, deployment, dependency DAG, marketplace, and API endpoints.
 """
 
-import pytest
 from fastapi.testclient import TestClient
 from app.main import app
 from app.platform_ai_lifecycle.registry.agent_registry_service import AgentRegistryService
@@ -17,7 +16,6 @@ from app.platform_ai_lifecycle.templates.template_catalog_service import Templat
 from app.platform_ai_lifecycle.marketplace.lifecycle_marketplace_service import LifecycleMarketplaceService
 from app.platform_ai_lifecycle.analytics.lifecycle_analytics_engine import LifecycleAnalyticsEngine
 from app.platform_ai_lifecycle.retirement.agent_retirement_service import AgentRetirementService
-from app.platform_ai_lifecycle.governance.lifecycle_governance_service import LifecycleGovernanceService
 from app.platform_ai_lifecycle.runtime.lifecycle_master_orchestrator import LifecycleMasterOrchestrator
 from app.platform_ai_lifecycle.models.schemas import (
     AgentLifecycleState,

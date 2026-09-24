@@ -1,6 +1,5 @@
 """Tests for Dynamic Service Discovery, Registry, Resolver, and Heartbeat."""
 
-import pytest
 from app.infrastructure.networking.discovery import (
     ServiceDiscoveryRegistry,
     ServiceRegistration,

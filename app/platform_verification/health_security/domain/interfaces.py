@@ -2,7 +2,6 @@
 Phase 3H.5.10: Domain Interfaces for Health Security Verification Framework
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
 from .models import (
     EndpointSecurityReport,
     HealthAuthorizationReport,

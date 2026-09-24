@@ -1,6 +1,5 @@
 """Affinity and Anti-Affinity Evaluation Engine."""
 
-from typing import Dict, List, Optional
 from app.infrastructure.executions.workload import WorkloadRequest
 from app.infrastructure.workers.models import Worker
 from app.infrastructure.topology.locality import DataLocalityResolver

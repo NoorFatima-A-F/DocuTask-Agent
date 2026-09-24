@@ -2,7 +2,7 @@
 Phase 3M.7: Cloud Queue and Worker Scalability Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICloudQueueWorkerScalabilityVerifier
 from ..domain.models import (

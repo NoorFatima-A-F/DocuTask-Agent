@@ -4,8 +4,8 @@ Provides endpoints for document submission, job status polling, DLQ listing, and
 """
 
 from uuid import uuid4
-from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel, Field
+from fastapi import APIRouter, HTTPException, status
+from pydantic import BaseModel
 
 from app.jobs.broker import job_broker
 from app.jobs.dlq import DeadLetterQueueEngine

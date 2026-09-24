@@ -1,7 +1,6 @@
 """Standalone External Verifier CLI Entrypoint."""
 
 import argparse
-import json
 import sys
 from pathlib import Path
 from enterprise_audit_engine.external_verifier.standalone_verifier import StandaloneExternalVerifier

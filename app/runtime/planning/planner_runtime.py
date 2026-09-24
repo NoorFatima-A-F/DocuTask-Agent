@@ -7,7 +7,6 @@ adaptive replanning, and planner self-evaluation with full RuntimeEvent publishi
 
 from __future__ import annotations
 
-import uuid
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
@@ -16,7 +15,6 @@ from app.runtime.events.planning_events import (
     GoalParsedEvent,
     GoalGraphCreatedEvent,
     ConstraintsExtractedEvent,
-    CapabilityDiscoveredEvent,
     CandidateStrategyGeneratedEvent,
     StrategySimulationCompletedEvent,
     UtilityCalculatedEvent,
@@ -26,8 +24,6 @@ from app.runtime.events.planning_events import (
     StrategySelectedEvent,
     DAGCreatedEvent,
     DAGMutatedEvent,
-    WorkerLeasedEvent,
-    WorkerReleasedEvent,
     ReplanningStartedEvent,
     ReplanningCompletedEvent,
     PlanningMemoryRetrievedEvent,
@@ -42,13 +38,13 @@ from app.runtime.planning.cost_predictor import CostPredictionEngine, CostPredic
 from app.runtime.planning.latency_predictor import LatencyPredictionEngine, LatencyPredictionResult
 from app.runtime.planning.risk_engine import RiskIntelligenceEngine, StrategyRiskProfile
 from app.runtime.planning.execution_simulator import ExecutionSimulator, SimulationResult
-from app.runtime.planning.utility_engine import MultiObjectiveUtilityEngine, UtilityScore, UtilityWeights
-from app.runtime.planning.strategy_ranker import StrategyRankingEngine, StrategySelectionRecord, StrategyComparisonMatrix
+from app.runtime.planning.utility_engine import MultiObjectiveUtilityEngine, UtilityScore
+from app.runtime.planning.strategy_ranker import StrategyRankingEngine, StrategySelectionRecord
 from app.runtime.planning.counterfactual_engine import CounterfactualEngine, CounterfactualExplanation
 from app.runtime.planning.mutable_dag import MutableExecutionDAG, DAGNode, DAGNodeStatus
-from app.runtime.planning.scheduler import EnterpriseResourceScheduler, WorkerLease
+from app.runtime.planning.scheduler import EnterpriseResourceScheduler
 from app.runtime.planning.adaptive_replanner import AdaptiveReplanningEngine, ReplanningTrigger, SubGraphReplanningResult
-from app.runtime.planning.planning_memory import PlanningMemoryEngine, PlanSignature, StrategyOutcomeRecord
+from app.runtime.planning.planning_memory import PlanningMemoryEngine, PlanSignature
 from app.runtime.planning.self_evaluator import PlannerSelfEvaluationEngine, PlanCalibrationMetric
 
 

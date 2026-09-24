@@ -3,7 +3,7 @@ Platform Plugin Registry.
 """
 
 from typing import Dict, List, Optional
-from .models import PluginManifest, PluginRecord, PluginStatus, PluginType
+from .models import PluginRecord, PluginStatus, PluginType
 from ..kernel.exceptions import PluginException
 
 

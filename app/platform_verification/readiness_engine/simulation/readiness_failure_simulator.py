@@ -6,7 +6,7 @@ Executes 4 controlled failure injection scenarios to verify dependency-aware dec
 - Scenario 3: Gemini AI API timeout -> Graceful degradation -> DEGRADED, traffic throttled (not hard failure)
 - Scenario 4: Storage permission failure -> NOT_READY, traffic rejected
 """
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.readiness_engine.domain.models import (
     ReadinessState,
     TrafficAction,

@@ -1,6 +1,5 @@
 """Tests for Explainability Engine (Planner, Tool Call, Decision, Validation, Reflection)."""
 
-import pytest
 from app.runtime.explainability.decision_explainer import DecisionExplainer
 from app.runtime.explainability.planner_explainer import PlannerExplainer
 from app.runtime.explainability.toolcall_explainer import ToolCallExplainer

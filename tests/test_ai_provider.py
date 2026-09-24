@@ -3,8 +3,6 @@ Unit tests for LLM Provider abstraction and GeminiProvider implementation.
 """
 
 import pytest
-from app.ai.base import LLMProvider
-from app.ai.factory import LLMFactory
 from app.ai.providers.gemini import GeminiProvider
 from app.ai.registry import LLMRegistry
 

@@ -3,7 +3,7 @@ Tool Adapter for Recovery Subsystem.
 Queries ToolRegistry for health checks, versioned alternatives, and fallback capabilities.
 """
 
-from typing import List, Optional
+from typing import Optional
 from app.agents.tools.registry import ToolRegistry
 
 

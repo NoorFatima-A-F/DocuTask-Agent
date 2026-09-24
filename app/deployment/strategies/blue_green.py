@@ -1,8 +1,7 @@
 """Blue-Green Zero-Downtime Deployment Strategy."""
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Callable, Dict, Optional
+from typing import Callable, Optional
 from ..core.exceptions import StrategyExecutionException
 
 

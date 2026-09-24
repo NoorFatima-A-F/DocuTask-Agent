@@ -2,7 +2,7 @@
 Phase 3L.13: Recovery Observability Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IRecoveryObservabilityVerifier
 from ..domain.models import (

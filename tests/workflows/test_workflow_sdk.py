@@ -2,7 +2,6 @@
 Tests for Workflow Fluent SDK Builder.
 """
 
-import pytest
 from app.workflows.sdk.builder import WorkflowBuilder
 from app.workflows.domain.models import TaskType
 from app.workflows.compiler.compiler import WorkflowCompiler

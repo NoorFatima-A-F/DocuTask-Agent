@@ -2,7 +2,6 @@
 Test Suite: Cross-Agent Communication Bus & Cryptographic Messaging
 Validates pub/sub message publishing, channel routing, ACLs, signature verification, and conversation history.
 """
-import pytest
 from app.runtime.communication.communication_bus import CommunicationBus
 from app.runtime.communication.message_router import MessageRouter
 from app.runtime.communication.channel_manager import ChannelManager

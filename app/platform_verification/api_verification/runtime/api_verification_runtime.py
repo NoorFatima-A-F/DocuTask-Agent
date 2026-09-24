@@ -3,7 +3,8 @@ Enterprise API Verification Platform Runtime facade.
 """
 from __future__ import annotations
 import os
-from typing import Dict, List, Optional
+from pathlib import Path
+from typing import Optional
 import uuid
 from app.platform_verification.api_verification.core.api_ast_analyzer import EnterpriseApiASTAnalyzer
 from app.platform_verification.api_verification.core.api_evidence_store import EnterpriseApiEvidenceStore
@@ -24,7 +25,7 @@ class EnterpriseApiVerificationRuntime:
     """Unified runtime facade for API purity scanning, schema compatibility, and security evaluations."""
 
     def __init__(self, base_repo_dir: Optional[str] = None):
-        self.base_repo_dir = base_repo_dir or r"c:\Users\User\Desktop\ai_document_processing_platform"
+        self.base_repo_dir = base_repo_dir or str(Path.cwd())
         self.ast_analyzer = EnterpriseApiASTAnalyzer()
         self.compatibility_engine = EnterpriseApiCompatibilityEngine()
         self.security_validator = EnterpriseApiSecurityValidator()

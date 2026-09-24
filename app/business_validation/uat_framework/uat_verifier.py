@@ -12,8 +12,6 @@ from ..domain.models import (
     BusinessVerificationStatus,
     BusinessAssertionResult,
     PillarBusinessResult,
-    UATPersona,
-    UATTestCase,
 )
 
 

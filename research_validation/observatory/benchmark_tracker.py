@@ -7,7 +7,6 @@ when data sources are not physically present on disk.
 """
 
 from __future__ import annotations
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -15,7 +14,6 @@ from typing import Dict, List, Optional
 from research_validation.observatory.observatory_models import (
     BenchmarkStatus, BenchmarkDatasetRecord
 )
-from research_validation.provenance.hashing import hash_canonical_json
 
 
 class LivingBenchmarkTracker:

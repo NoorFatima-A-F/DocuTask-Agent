@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
 
-from .models import ServiceLevelObjective, SLIType
+from .models import ServiceLevelObjective
 
 
 @dataclass

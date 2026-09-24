@@ -3,8 +3,8 @@ Anomaly Reconstruction for Phase 13.4.
 Detects runtime anomalies, distribution drift, and non-deterministic variations during replay.
 """
 
-from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from typing import Dict, Any, List
+from pydantic import BaseModel
 
 
 class ReplayAnomaly(BaseModel):

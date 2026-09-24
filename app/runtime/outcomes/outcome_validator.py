@@ -3,7 +3,7 @@ Outcome Verification Engine - Outcome Validator
 Validates observational integrity, physical non-negativity, and timestamp monotonicity.
 """
 
-from typing import Dict, Any, List, Tuple
+from typing import List, Tuple
 import math
 from app.runtime.outcomes.outcome_collector import MissionOutcomeRecord
 

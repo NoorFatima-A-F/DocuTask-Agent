@@ -20,8 +20,6 @@ from app.main import app
 from app.runtime.meta import (
     get_meta_runtime,
     StrategicObservationLayer,
-    StrategicEvidenceNode,
-    StrategicEvidenceEdge,
     MetaReasoningEngine,
     RecursiveReflectionEngine,
     ReflectionTier,

@@ -1,6 +1,5 @@
 """Tests for Audit Collection Gateway, Normalization, and Enrichment Processors."""
 
-import pytest
 from app.audit.collector.gateway import AuditCollectorGateway
 from app.audit.collector.normalizer import EventNormalizer
 from app.audit.core.events import EventCategory, ActorType, AuditSeverity, OutcomeType

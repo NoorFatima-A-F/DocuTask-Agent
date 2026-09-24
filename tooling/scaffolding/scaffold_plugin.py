@@ -2,7 +2,6 @@
 Plugin Scaffolder CLI.
 Creates isolated sandboxed verification plugins following the Enterprise Plugin Framework.
 """
-import os
 import sys
 
 PLUGIN_MANIFEST = """name: {plugin_name}

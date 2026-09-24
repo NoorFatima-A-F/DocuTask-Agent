@@ -3,18 +3,15 @@
 from app.infrastructure.executions.workload import (
     ResourceRequirements,
     WorkloadRequest,
-    WorkloadType,
 )
 from app.infrastructure.workers.models import (
     ResourceCapacity,
     Worker,
     WorkerStatus,
-    WorkerType,
 )
 from app.infrastructure.workers.capabilities import WorkerCapabilityRegistry
 from app.infrastructure.workers.leases import WorkerLeaseManager
 from app.infrastructure.scheduling.constraints import ConstraintEvaluator
-from app.infrastructure.scheduling.policies import SchedulingPolicyEngine
 from app.infrastructure.scheduling.affinity import AffinityEngine
 from app.infrastructure.scheduling.scoring import PlacementScoringEngine
 

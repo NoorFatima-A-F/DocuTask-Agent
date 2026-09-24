@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from app.runtime.intelligence.experience.experience_record import ExperienceRecord
 

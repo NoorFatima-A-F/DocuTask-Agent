@@ -1,7 +1,7 @@
 """Abstract interfaces for Health Root Cause Analysis sub-engines."""
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict
 from .models import (
     DependencyGraphReport,
     EventCorrelationReport,
@@ -11,7 +11,6 @@ from .models import (
     CascadeDetectionReport,
     FalsePositiveAuditReport,
     IncidentMemoryReport,
-    HealthDiagnosisResponse,
     HealthRootCauseScorecard,
 )
 

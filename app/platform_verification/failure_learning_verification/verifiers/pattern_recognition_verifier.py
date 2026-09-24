@@ -1,7 +1,6 @@
 """
 Phase 3H.5.6.3: Failure Pattern Recognition Verifier
 """
-from typing import List, Dict, Any
 from datetime import datetime, timezone
 from ..domain.interfaces import IPatternRecognitionVerifier
 from ..domain.models import PatternAnalysisReport, FailurePatternItem

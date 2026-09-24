@@ -7,8 +7,7 @@ with directed causal DAG topology, endogenous variables, and exogenous noise sou
 
 from __future__ import annotations
 
-import uuid
-from typing import Any, Callable, Dict, List, Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
 

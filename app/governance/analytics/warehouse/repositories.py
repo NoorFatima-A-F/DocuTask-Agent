@@ -1,8 +1,6 @@
 """Governance Data Warehouse In-Memory OLAP Repository."""
 
-from typing import Dict, Any, List, Optional
-from datetime import datetime, timezone
-import collections
+from typing import Dict, List
 
 from .models import (
     DimTenant,
@@ -11,7 +9,6 @@ from .models import (
     DimModel,
     DimPolicy,
     DimWorkflow,
-    DimTime,
     FactGovernanceDecision,
     FactPolicyEvent,
     FactAIExecution,
@@ -19,7 +16,7 @@ from .models import (
     FactComplianceEvent,
     FactApproval,
 )
-from .schemas import WarehouseQueryFilter, TimeBucketSummary
+from .schemas import WarehouseQueryFilter
 from ..events.normalizers import GovernanceAnalyticsEvent, AnalyticsEventType
 
 

@@ -9,9 +9,6 @@ sys.path.insert(0, os.path.abspath("."))
 from app.platform_verification.incident_signal_verification.runtime.incident_signal_verification_runtime import (
     IncidentSignalVerificationRuntime,
 )
-from app.platform_verification.incident_signal_verification.domain.models import (
-    IncidentCertificationTier,
-)
 
 
 def main():

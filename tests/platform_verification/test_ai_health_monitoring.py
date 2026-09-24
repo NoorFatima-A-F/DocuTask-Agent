@@ -5,7 +5,6 @@ Tests all 12 modules, API routes, telemetry pipelines, dashboards, alerts, SLOs,
 
 import os
 import json
-import pytest
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
@@ -19,8 +18,6 @@ from app.platform_verification.ai_health_monitoring.slo.ai_slo_monitoring_verifi
 from app.platform_verification.ai_health_monitoring.incidents.ai_incident_detector_verifier import AIIncidentDetectorVerifier
 from app.platform_verification.ai_health_monitoring.automation.ai_automated_response_verifier import AIAutomatedResponseVerifier
 from app.platform_verification.ai_health_monitoring.security.ai_monitoring_security_verifier import AIMonitoringSecurityVerifier
-from app.platform_verification.ai_health_monitoring.scoring.ai_monitoring_quality_scorer import AIMonitoringQualityScorer
-from app.platform_verification.ai_health_monitoring.exporter.ai_monitoring_evidence_exporter import AIMonitoringEvidenceExporter
 from app.platform_verification.ai_health_monitoring.runtime.ai_health_monitoring_runtime import AIHealthMonitoringRuntime
 from app.platform_verification.ai_health_monitoring.api.ai_health_monitoring_api import router as ai_monitoring_router
 from app.platform_verification.ai_health_monitoring.domain.models import (
@@ -151,7 +148,7 @@ def test_part_3h_3_9_10_monitoring_security():
 def test_part_3h_3_9_11_evidence_exporter_and_9_manifests(tmp_path):
     output_dir = str(tmp_path / "ai_monitoring_out")
     runtime = AIHealthMonitoringRuntime(export_dir=output_dir)
-    res = runtime.run_full_verification()
+    runtime.run_full_verification()
 
     assert os.path.exists(output_dir)
     expected_files = [

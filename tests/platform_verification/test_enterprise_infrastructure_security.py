@@ -2,8 +2,6 @@
 Phase 3N: Comprehensive Test Suite for Enterprise Infrastructure Security Verification Framework.
 """
 
-import json
-import os
 from pathlib import Path
 import pytest
 from fastapi import FastAPI
@@ -12,7 +10,6 @@ from fastapi.testclient import TestClient
 from app.platform_verification.enterprise_infrastructure_security.domain.models import (
     AISecurityReport,
     APISecurityReport,
-    BaseVerificationReport,
     CheckResult,
     CICDSecurityReport,
     ContainerSecurityReport,
@@ -25,7 +22,6 @@ from app.platform_verification.enterprise_infrastructure_security.domain.models 
     SecurityAttackSimulationReport,
     SecurityCertificationTier,
     SecurityMonitoringReport,
-    SecurityScorecard,
     ServiceSecurityReport,
     StorageSecurityReport,
     ThreatModelReport,

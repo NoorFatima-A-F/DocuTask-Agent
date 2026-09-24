@@ -6,10 +6,9 @@ auditable MetricProvenanceRecords with full statistical analysis and Merkle line
 
 from __future__ import annotations
 
-import math
 from typing import Any, Dict, List, Optional
 from app.runtime.events.base import RuntimeEvent
-from app.runtime.metrics.definitions import MetricDefinition, MetricUnit
+from app.runtime.metrics.definitions import MetricUnit
 from app.runtime.metrics.formulas import CANONICAL_FORMULAS
 from app.runtime.metrics.provenance import MetricProvenanceRecord, compute_merkle_root
 from app.runtime.metrics.registry import MetricRegistry, get_global_metric_registry

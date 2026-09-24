@@ -3,8 +3,6 @@ Unit and Integration tests for Enterprise API Architecture Verification (PART 2E
 """
 import pytest
 from app.platform_verification.api_verification import (
-    AgentTaskState,
-    ApiCertificationBand,
     EnterpriseApiVerificationRuntime,
 )
 

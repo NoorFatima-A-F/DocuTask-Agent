@@ -1,10 +1,7 @@
 """Tests for Environment Management, Policy Enforcement, and Multi-Stage Promotion."""
 
-import pytest
 from app.infrastructure.deployment.environments import (
     EnvironmentManager,
-    EnvironmentType,
-    EnvironmentConfig,
     EnvironmentPromotionManager,
 )
 from app.infrastructure.deployment.artifacts import ArtifactRegistry, ArtifactType

@@ -2,7 +2,6 @@
 Unit and Integration Tests for Document Ingestion & Storage Subsystem.
 """
 
-import io
 import shutil
 import tempfile
 import pytest

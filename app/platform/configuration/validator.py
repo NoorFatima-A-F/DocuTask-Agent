@@ -2,8 +2,8 @@
 Enterprise Configuration Validator.
 """
 
-from typing import Any, Dict, List, Optional
-from .schema import ConfigEntrySchema, ConfigDomain
+from typing import Any, List, Optional
+from .schema import ConfigEntrySchema
 
 
 class ConfigurationValidationError(Exception):

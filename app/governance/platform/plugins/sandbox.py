@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime, timezone
 import logging
 import time
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, Optional, Set
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)

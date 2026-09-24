@@ -2,7 +2,7 @@
   "total_actions_executed": 3,
   "successful_actions": 3,
   "failed_actions": 0,
-  "avg_execution_duration_ms": 35.17,
+  "avg_execution_duration_ms": 35.18,
   "executions": [
     {
       "execution_id": "EXEC-INIT-001",
@@ -14,7 +14,7 @@
       "stdout": "Initial pool reset verified.",
       "before_state": "UNHEALTHY",
       "after_state": "HEALTHY",
-      "timestamp": "2026-09-19T07:04:32.461382+00:00"
+      "timestamp": "2026-09-24T21:54:47.375143+00:00"
     },
     {
       "execution_id": "EXEC-INIT-002",
@@ -26,19 +26,19 @@
       "stdout": "Initial worker container restart verified.",
       "before_state": "UNHEALTHY",
       "after_state": "HEALTHY",
-      "timestamp": "2026-09-19T07:04:32.461415+00:00"
+      "timestamp": "2026-09-24T21:54:47.375176+00:00"
     },
     {
-      "execution_id": "EXEC-2261305C",
-      "decision_id": "DEC-4A7E2D12",
+      "execution_id": "EXEC-776366B6",
+      "decision_id": "DEC-DF0A7D98",
       "action": "restart_worker_container",
       "target": "celery_worker",
       "status": "success",
-      "duration_ms": 45.02,
+      "duration_ms": 45.04,
       "stdout": "[REMEDIATION] Gracefully drained and restarted Celery worker container 'celery_worker'. Heartbeat established.",
       "before_state": "UNHEALTHY",
       "after_state": "RECOVERING",
-      "timestamp": "2026-09-19T07:04:32.541979+00:00"
+      "timestamp": "2026-09-24T21:54:47.497134+00:00"
     }
   ],
   "status": "PASS"

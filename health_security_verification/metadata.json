@@ -1,8 +1,8 @@
 {
   "framework_phase": "Phase 3H.5.10 \u2014 Enterprise Health Security, Privacy & Information Exposure Verification",
   "platform": "DocuTask Enterprise Agent Platform",
-  "verification_id": "health-sec-40608872",
-  "generated_at": "2026-09-19T07:05:13.598456+00:00",
+  "verification_id": "health-sec-1257db23",
+  "generated_at": "2026-09-24T21:55:19.875549+00:00",
   "overall_score": 100.0,
   "certification_tier": "Secure Observability Ready",
   "passed": true,
@@ -19,6 +19,6 @@
     "dashboard_security_report.json": "33c2144303d982ccfac9474b7fb648cd861b3b6d1343a59f47bcd7e8611240c0",
     "failure_injection_report.json": "d8ebfd81ee60c80f556519a3cb8c369afdb4ac7278e88320c77a2176c337d2a1",
     "compliance_report.json": "eada9708921eca7ecc7a40e5e70ce96aaa8b753c221d3bfaa1ccf4181acd9714",
-    "certification_report.json": "c3ef832503a02507d2eee94aa189ff8204dd4721872bc43003d8b59741011d1a"
+    "certification_report.json": "f4647f4ecc5075a499728a6a5fe2edbc81c391eff74ca13656622f774ce42f25"
   }
 }

@@ -4,9 +4,8 @@ FastAPI Router for Performance Stress Verification & Capacity Boundary Analysis 
 
 from typing import Any, Dict, Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, status
 
-from ..domain.models import CertificationReport
 from ..runtime.performance_stress_runtime import PerformanceStressRuntime
 
 router = APIRouter(

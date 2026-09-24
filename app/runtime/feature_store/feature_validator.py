@@ -5,7 +5,7 @@ Ensures feature vectors satisfy completeness, type consistency, and physical dom
 
 from typing import Dict, Any, List, Tuple
 import math
-from app.runtime.feature_store.feature_registry import FeatureDefinition, feature_registry
+from app.runtime.feature_store.feature_registry import feature_registry
 
 
 class FeatureValidationError(ValueError):

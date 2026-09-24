@@ -6,6 +6,7 @@ import json
 import hashlib
 from typing import Dict, Any
 from datetime import datetime, timezone
+from app.core.security import resolve_safe_path, validate_safe_filename_segment
 from ..domain.models import (
     AlertingArchitectureReport,
     AlertSignalCoverageReport,
@@ -54,8 +55,9 @@ class AlertingEvidenceExporter(IAlertingEvidenceExporter):
         }
 
         manifest: Dict[str, str] = {}
-        for filename, data in report_payloads.items():
-            filepath = os.path.join(output_dir, filename)
+        for raw_filename, data in report_payloads.items():
+            filename = validate_safe_filename_segment(raw_filename)
+            filepath = resolve_safe_path(output_dir, filename)
             content_str = json.dumps(data, indent=2)
             with open(filepath, "w", encoding="utf-8") as f:
                 f.write(content_str)
@@ -77,7 +79,7 @@ class AlertingEvidenceExporter(IAlertingEvidenceExporter):
             "auditor": certification_report.auditor,
         }
 
-        meta_path = os.path.join(output_dir, "metadata.json")
+        meta_path = resolve_safe_path(output_dir, "metadata.json")
         meta_str = json.dumps(metadata, indent=2)
         with open(meta_path, "w", encoding="utf-8") as f:
             f.write(meta_str)

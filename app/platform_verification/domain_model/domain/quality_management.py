@@ -3,7 +3,7 @@ Quality Management Domain: Quality Gates, Blocker Policies, and Decision Aggrega
 """
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from pydantic import BaseModel, Field
 import uuid
 

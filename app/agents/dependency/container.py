@@ -4,7 +4,6 @@ Provides clean dependency inversion and factory instantiation for DocumentAgent
 and its 12 architectural subcomponents.
 """
 
-from typing import Any, Dict
 from app.agents.config import AgentConfig
 from app.agents.document_agent import DocumentAgent
 from app.agents.interfaces.event_bus import AgentEventBus

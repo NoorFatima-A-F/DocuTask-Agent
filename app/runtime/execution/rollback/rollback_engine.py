@@ -5,7 +5,6 @@ Executes automated Saga compensating transactions, checkpoint rollbacks, and rec
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import json
 from typing import Any, Dict, List, Optional
 import uuid
 
@@ -16,7 +15,6 @@ from app.runtime.execution.events.execution_events import (
     StepStatus,
     execution_event_bus,
 )
-from app.runtime.execution.tool_registry.tool_registry_engine import tool_registry_engine
 
 
 @dataclass

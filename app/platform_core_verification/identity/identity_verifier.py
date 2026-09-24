@@ -8,7 +8,7 @@ import hmac
 import json
 import base64
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,
@@ -87,7 +87,6 @@ class IdentityVerifier:
         sig_valid = hmac.compare_digest(parts[2], calc_sig)
 
         # Refresh rotation: issue new jti and invalidate old refresh token
-        new_refresh_token = "rtk_v2_9981"
         rotated = True
 
         passed = sig_valid and rotated

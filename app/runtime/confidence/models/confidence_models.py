@@ -4,7 +4,7 @@ Pydantic Models for Phase 13.3 Scientific Confidence Engine (ASCE-CGP).
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 from app.runtime.confidence.models.confidence_dimensions import ConfidenceDimension, ConfidenceStatus

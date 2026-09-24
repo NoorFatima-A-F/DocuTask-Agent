@@ -2,7 +2,6 @@
 3-Year Total Cost of Ownership (TCO) Comparative Analyzer.
 """
 
-from typing import Dict, Any
 from app.business_value_verification.domain.models import TCOComparison
 
 

@@ -14,7 +14,6 @@ And issues the Production Readiness Certificate with cryptographic SHA-256 manif
 
 import os
 import sys
-from pathlib import Path
 
 from app.platform_verification.enterprise_continuous_verification.runtime.continuous_verification_runtime import (
     ContinuousVerificationRuntime,

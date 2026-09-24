@@ -2,7 +2,6 @@
 Tests for Trust Score, Independent Verifier, Certification, Drift & Reports (Pillars 5-10).
 """
 
-import pytest
 from app.runtime.truth.benchmark_reg import ScientificBenchmarkRegistry
 from app.runtime.truth.certification import CertificationTier, MissionCertifier
 from app.runtime.truth.drift_detector import RuntimeDriftDetector

@@ -2,7 +2,6 @@
 Phase 3H.4.9.7: Data Consistency & Integrity Verifier
 """
 import hashlib
-from typing import Dict, Any
 from ..domain.interfaces import IDataIntegrityVerifier
 from ..domain.models import DataIntegrityReport
 

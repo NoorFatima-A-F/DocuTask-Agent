@@ -8,11 +8,9 @@ and RuntimeDashboard into an authoritative single source of operational truth.
 
 from __future__ import annotations
 
-import asyncio
 import logging
 from typing import Any, Dict, List, Optional
 from app.runtime.observability.anomaly_detection import AnomalyDetector
-from app.runtime.observability.event_serializer import EventSerializer
 from app.runtime.observability.event_store import EventStore
 from app.runtime.observability.event_stream import EventBus
 from app.runtime.observability.execution_profiler import ExecutionProfiler
@@ -24,8 +22,6 @@ from app.runtime.observability.runtime_dashboard import RuntimeDashboardAggregat
 from app.runtime.observability.runtime_health import RuntimeHealthEvaluator
 from app.runtime.observability.schemas import (
     BaseRuntimeEvent,
-    FlameGraphNode,
-    MissionSnapshotPayload,
     RuntimeHealthScore,
 )
 from app.runtime.observability.telemetry_engine import TelemetryEngine

@@ -1,8 +1,7 @@
 """Evidence Completeness & Coverage Verification Analyzer."""
 
-from pathlib import Path
 from typing import List, Dict, Any
-from enterprise_audit_engine.domain.evidence.models import EvidenceRecord, AuditFinding, EvidenceClassification
+from enterprise_audit_engine.domain.evidence.models import EvidenceRecord, AuditFinding
 
 
 class IncompleteEvidenceCoverageError(Exception):

@@ -21,29 +21,27 @@ from app.runtime.optimization.events.optimization_events import (
     OptimizationRejected,
     OptimizationApplied,
 )
-from app.runtime.optimization.optimization.optimization_engine import OptimizationEngine, optimization_engine
-from app.runtime.optimization.optimization.optimization_pipeline import OptimizationPipeline
+from app.runtime.optimization.optimization.optimization_engine import OptimizationEngine
 from app.runtime.optimization.optimization.strategy_selector import StrategySelector, CandidateExecutionStrategy
 from app.runtime.optimization.optimization.constraint_solver import ConstraintSolver
 from app.runtime.optimization.optimization.decision_optimizer import DecisionOptimizer
 from app.runtime.optimization.optimization.execution_optimizer import ExecutionOptimizer
 
-from app.runtime.optimization.economics.economic_engine import EconomicEngine, economic_engine
 from app.runtime.optimization.economics.cost_model import CostModel
 from app.runtime.optimization.economics.value_estimator import ValueEstimator
 from app.runtime.optimization.economics.roi_engine import ROIEngine
 from app.runtime.optimization.economics.business_priority import BusinessPriority
-from app.runtime.optimization.economics.budget_allocator import BudgetAllocator, budget_allocator
+from app.runtime.optimization.economics.budget_allocator import budget_allocator
 
-from app.runtime.optimization.resource.resource_registry import ResourceRegistry, resource_registry
+from app.runtime.optimization.resource.resource_registry import ResourceRegistry
 from app.runtime.optimization.resource.capacity_manager import CapacityManager
-from app.runtime.optimization.resource.allocation_engine import AllocationEngine, allocation_engine
+from app.runtime.optimization.resource.allocation_engine import AllocationEngine
 
 from app.runtime.optimization.routing.model_router import ModelRouter, OCRRouter, ValidationRouter
 from app.runtime.optimization.simulation.execution_simulator import ExecutionSimulator, WhatIfEngine
 from app.runtime.optimization.scheduling.adaptive_scheduler import AdaptiveScheduler
 from app.runtime.optimization.prediction.latency_predictor import LatencyPredictor
-from app.runtime.optimization.policies.optimization_policy import OptimizationPolicySpec, PolicyValidator
+from app.runtime.optimization.policies.optimization_policy import PolicyValidator
 
 
 @pytest.fixture

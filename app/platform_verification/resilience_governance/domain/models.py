@@ -3,7 +3,7 @@ Domain Models for Disaster Recovery Governance & Operational Resilience Framewor
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 
 
 class ResilienceMaturityTier(str, Enum):

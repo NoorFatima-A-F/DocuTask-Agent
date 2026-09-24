@@ -8,7 +8,7 @@ from __future__ import annotations
 import logging
 import time
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from app.agents.collaboration.agent_registry import AgentRegistry
 from app.agents.events.event_bus import EnterpriseEventBus

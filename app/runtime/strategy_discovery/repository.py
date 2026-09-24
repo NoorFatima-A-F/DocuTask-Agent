@@ -5,8 +5,8 @@ Stores, indexes, versions, and retrieves synthesized and evolved strategy DAGs w
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Dict, List, Optional
+from pydantic import BaseModel
 
 from app.runtime.strategy_discovery.graph_synthesis import SynthesizedDAG
 from app.runtime.strategy_discovery.evaluation import StrategyEvaluationReport

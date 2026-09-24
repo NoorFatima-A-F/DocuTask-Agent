@@ -5,7 +5,6 @@ Enterprise load testing runners for normal and month-end surge profiles.
 from typing import List
 from app.performance_verification.domain.models import (
     LoadTestResult,
-    LatencyDistribution,
     PerformanceStatus,
 )
 from app.performance_verification.infrastructure.latency_analyzer import LatencyAnalyzer

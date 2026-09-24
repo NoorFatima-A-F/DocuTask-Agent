@@ -6,11 +6,11 @@ agent assignment, dependency resolution, constraint verification, and cost estim
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, Optional
 import logging
 
 from app.agents.decomposition.task_decomposer import TaskDecomposer
-from app.agents.domain.agent_entity import Agent, AgentPlan, GoalModel
+from app.agents.domain.agent_entity import AgentPlan, GoalModel
 from app.agents.registry.agent_registry import AgentRegistry
 
 logger = logging.getLogger(__name__)

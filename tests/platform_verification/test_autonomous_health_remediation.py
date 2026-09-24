@@ -20,7 +20,6 @@ Plus FastAPI HTTP router endpoints.
 
 import os
 import json
-import pytest
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
@@ -56,12 +55,6 @@ from app.platform_verification.autonomous_remediation.security.remediation_permi
 )
 from app.platform_verification.autonomous_remediation.observability.remediation_telemetry_emitter import (
     RemediationTelemetryEmitter,
-)
-from app.platform_verification.autonomous_remediation.scoring.remediation_quality_scorer import (
-    AutonomousRemediationScorer,
-)
-from app.platform_verification.autonomous_remediation.exporter.remediation_evidence_exporter import (
-    RemediationEvidenceExporter,
 )
 from app.platform_verification.autonomous_remediation.runtime.autonomous_remediation_runtime import (
     AutonomousRemediationRuntime,
@@ -320,7 +313,7 @@ def test_part_3h_4_3_12_observability_and_telemetry():
 def test_part_3h_4_3_13_evidence_exporter_and_8_manifests(tmp_path):
     output_dir = str(tmp_path / "test_remediation_manifests")
     runtime = AutonomousRemediationRuntime(export_dir=output_dir)
-    res = runtime.run_full_verification()
+    runtime.run_full_verification()
 
     assert os.path.exists(output_dir)
     expected_files = [

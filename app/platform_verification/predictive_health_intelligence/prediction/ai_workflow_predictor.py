@@ -3,7 +3,6 @@ AI Workflow Health Predictor (Part 3H.3.4.7).
 Monitors and predicts Gemini AI pipeline performance degradation:
 model latency drift, timeout rates, token spikes, and extraction quality signals.
 """
-from typing import Dict, Any
 from app.platform_verification.predictive_health_intelligence.domain.models import (
     AIWorkflowHealthReport,
 )

@@ -3,8 +3,8 @@ Worker Health Monitor.
 Tracks worker responsiveness, crash frequency, and hung leases.
 """
 
-from typing import Dict, List
-from pydantic import BaseModel, Field
+from typing import Dict
+from pydantic import BaseModel
 
 
 class WorkerHealthStatus(BaseModel):

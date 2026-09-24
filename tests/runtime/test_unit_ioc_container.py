@@ -5,8 +5,7 @@ circular dependency detection, and exception scenarios.
 """
 
 import pytest
-from typing import Any
-from app.agents.runtime.dependency_container import DependencyContainer, Lifetime, ScopedContainer
+from app.agents.runtime.dependency_container import DependencyContainer
 from app.agents.runtime.exceptions import (
     CyclicDependencyError,
     ServiceNotFoundError,

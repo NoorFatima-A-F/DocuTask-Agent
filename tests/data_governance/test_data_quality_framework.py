@@ -1,7 +1,6 @@
 """Test Data Quality Framework and Multidimensional Scoring."""
 
 from datetime import datetime, timezone
-import pytest
 from app.data_governance.quality.scoring import DataQualityScorer
 
 

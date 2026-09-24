@@ -18,7 +18,6 @@ Plus FastAPI HTTP router endpoints.
 
 import os
 import json
-import pytest
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
@@ -52,12 +51,6 @@ from app.platform_verification.health_monitoring_alerting.simulation.monitoring_
 from app.platform_verification.health_monitoring_alerting.security.observability_security_auditor import (
     ObservabilitySecurityAuditor,
 )
-from app.platform_verification.health_monitoring_alerting.scoring.health_monitoring_scorer import (
-    HealthMonitoringScorer,
-)
-from app.platform_verification.health_monitoring_alerting.exporter.health_monitoring_evidence_exporter import (
-    HealthMonitoringEvidenceExporter,
-)
 from app.platform_verification.health_monitoring_alerting.runtime.health_monitoring_alerting_runtime import (
     HealthMonitoringAlertingRuntime,
 )
@@ -65,9 +58,7 @@ from app.platform_verification.health_monitoring_alerting.api.health_monitoring_
     router as health_monitoring_router,
 )
 from app.platform_verification.health_monitoring_alerting.domain.models import (
-    SignalCategory,
     AlertSeverity,
-    IncidentState,
     ObservabilityTier,
 )
 
@@ -229,7 +220,7 @@ def test_part_3h_4_11_scoring_and_enterprise_tier():
 def test_part_3h_4_12_evidence_exporter_and_10_manifests(tmp_path):
     output_dir = str(tmp_path / "test_health_manifests")
     runtime = HealthMonitoringAlertingRuntime(export_dir=output_dir)
-    res = runtime.run_full_verification()
+    runtime.run_full_verification()
 
     assert os.path.exists(output_dir)
     expected_files = [

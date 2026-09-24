@@ -21,7 +21,6 @@ from app.agents.runtime.plugin_loader import (
 from app.agents.runtime.plugin_manager import (
     PluginDependencyResolver,
     PluginManager,
-    PluginRollbackManager,
     PluginSandbox,
 )
 from app.agents.runtime.plugin_registry import PluginRegistry
@@ -93,7 +92,7 @@ def test_plugin_sandbox_enforces_permissions():
 def test_plugin_dependency_resolver():
     registry = PluginRegistry()
     m_base = PluginManifest(plugin_id="base_plugin", name="Base Plugin", entrypoint="base:run")
-    reg_base = registry.register(m_base, instance=None)
+    registry.register(m_base, instance=None)
     registry.update_state("base_plugin", PluginState.RUNNING)
 
     m_dependent = PluginManifest(

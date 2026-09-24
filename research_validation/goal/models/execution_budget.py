@@ -4,8 +4,7 @@ Execution Budget Model
 Specifies execution limits, iterations, retry counts, and estimated experiment counts.
 """
 
-from dataclasses import dataclass, field
-from typing import Optional
+from dataclasses import dataclass
 from research_validation.goal.models.resource_budget import ResourceBudget
 
 

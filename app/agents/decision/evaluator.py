@@ -4,7 +4,6 @@ Provides RuleEvaluator, PolicyEvaluator, ConstraintEvaluator, and DecisionEvalua
 Supports sequential evaluation, parallel evaluation, weighted evaluation, and priority evaluation.
 """
 
-from typing import List
 from app.agents.decision.constraints import PolicyConstraints
 from app.agents.decision.context import DecisionContext
 from app.agents.decision.interfaces import IPolicyEvaluator, IRuleEvaluator

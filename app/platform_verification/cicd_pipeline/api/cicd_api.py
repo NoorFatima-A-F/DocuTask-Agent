@@ -2,11 +2,10 @@
 REST API Router for Enterprise CI/CD Continuous Verification Pipeline (PART 7).
 """
 from __future__ import annotations
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.platform_verification.cicd_pipeline.domain.models import (
-    PipelineChangeType,
     RollbackTriggerReason,
     TargetEnvironment,
 )

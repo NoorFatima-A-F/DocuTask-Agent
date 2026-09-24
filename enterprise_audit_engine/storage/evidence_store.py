@@ -2,7 +2,7 @@
 
 import json
 from pathlib import Path
-from typing import List, Optional
+from typing import List
 from ..domain.evidence.models import EvidenceRecord, AuditReportManifest
 
 

@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from app.platform_verification.evaluation_engine.domain.models import (
     MetricDefinition,
-    MetricCategory,
 )
 from app.platform_verification.evaluation_engine.core.metric_registry import MetricRegistry
 from app.platform_verification.evaluation_engine.core.ab_testing import ABTestingEngine

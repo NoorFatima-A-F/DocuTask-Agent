@@ -4,13 +4,11 @@ Automated root-cause isolation, call tree inspection, and critical path analysis
 """
 
 from __future__ import annotations
-from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from typing import List, Optional
 from app.runtime.ai_operations.models.schemas import (
     ExecutionTrace,
     Span,
     SpanStatus,
-    SpanType,
     FailureCategory,
     FailureAnalysisResult,
 )

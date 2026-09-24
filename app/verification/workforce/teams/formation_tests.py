@@ -3,7 +3,7 @@ Section 3.1: Autonomous Team Formation Verification
 Validates dynamic formation for healthcare document batch processing.
 """
 from typing import Dict, List, Any
-from app.platform_workforce.models.schemas import DynamicTeam, DigitalEmployee, EmployeeRole, DepartmentType, EmployeeStatus
+from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
 
 class TeamFormationVerifier:
@@ -15,7 +15,6 @@ class TeamFormationVerifier:
         metrics: Dict[str, Any] = {}
         
         # 1. Healthcare Mission Requirements
-        mission_name = "Process Healthcare Batch & Prior Authorizations"
         required_skills = ["OCR", "Medical NLP", "HIPAA Extraction", "ICD-10 Coding", "Compliance Guardrails"]
         
         # Candidate roster

@@ -5,7 +5,7 @@ Verifies timeout enforcement, asynchronous cancellation, retry limits, and task 
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.ai_provider_health.domain.interfaces import (
     IAITimeoutVerifier,

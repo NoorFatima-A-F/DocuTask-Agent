@@ -147,7 +147,7 @@ class CoalitionManager:
         return self._coalitions.get(coalition_id)
 
     def _seed_default_coalitions(self):
-        c1 = self.create_coalition(
+        self.create_coalition(
             name_or_id="coalition-alpha",
             name="Alpha Extraction & Validation Coalition",
             objective="High-throughput parallel OCR document processing and verification",

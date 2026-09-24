@@ -1,7 +1,7 @@
 """Regional Control Plane Manager for intra-region cluster management and health monitoring."""
 
 import threading
-from typing import Dict, List, Optional
+from typing import List, Optional
 from datetime import datetime, timezone
 
 from app.infrastructure.clusters.models import Cluster, ClusterStatus

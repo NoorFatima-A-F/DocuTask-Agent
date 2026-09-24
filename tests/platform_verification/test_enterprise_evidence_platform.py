@@ -1,14 +1,12 @@
 """
 Comprehensive test suite for Enterprise Evidence Collection, Traceability & Audit Architecture (PART 4).
 """
-import pytest
 from app.platform_verification.evidence_engine import (
     EvidenceCategory,
     EvidenceClassification,
     EvidenceRole,
     LineageRelation,
     AiDecisionEvidence,
-    EvidenceContext,
     EvidencePlatformRuntime,
 )
 

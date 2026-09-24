@@ -1,10 +1,8 @@
 """Tests for Rollback Executor, Anomaly Tripping, and RCA Report Generation."""
 
-import pytest
 from app.infrastructure.deployment.control_plane import (
     DeploymentRecord,
     DeploymentStatus,
-    DeploymentStrategyType,
 )
 from app.infrastructure.deployment.rollback import (
     RollbackTriggerType,

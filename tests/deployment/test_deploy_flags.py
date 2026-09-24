@@ -1,5 +1,4 @@
 """Unit tests for Feature Flag Platform."""
-import pytest
 from app.deployment.flags.evaluation import FlagEvaluationContext, FlagEvaluator
 from app.deployment.flags.manager import FeatureFlagManager
 
@@ -13,7 +12,7 @@ def test_flag_evaluator_percentage_rollout_deterministic():
 
 def test_flag_manager_targeting_and_kill_switch():
     manager = FeatureFlagManager()
-    flag = manager.create_flag(
+    manager.create_flag(
         key="enable_llm_v3",
         name="LLM V3 Extraction",
         enabled=True,

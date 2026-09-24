@@ -3,8 +3,8 @@ ARTEICP Dynamic DAG - Runtime Graph Extractor
 Extracts live DAG execution state, node statuses, wavefront levels, and dynamic mutations directly from running planners.
 """
 
-from typing import Dict, List, Any, Optional
-from dataclasses import dataclass, asdict, field
+from typing import Dict, List, Any
+from dataclasses import dataclass, asdict
 
 
 @dataclass

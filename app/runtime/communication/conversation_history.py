@@ -3,7 +3,7 @@ AMAEOP Pillar 6 - Conversation History & Cryptographic Provenance Ledger
 Provides tamper-evident chronological retrieval of inter-department discussions linked to mission events.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any
 from app.runtime.communication.communication_bus import communication_bus
 
 

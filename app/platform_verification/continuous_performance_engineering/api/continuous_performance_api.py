@@ -2,9 +2,8 @@
 Phase 3J.12: Continuous Performance Engineering REST API Endpoints.
 """
 
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel
+from typing import Any, Dict
+from fastapi import APIRouter, HTTPException
 
 from ..runtime.continuous_performance_runtime import ContinuousPerformanceRuntime
 

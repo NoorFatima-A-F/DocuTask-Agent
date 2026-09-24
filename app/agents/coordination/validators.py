@@ -9,7 +9,6 @@ from app.agents.coordination.agent import Agent
 from app.agents.coordination.exceptions import (
     CircularDelegationError,
     DuplicateAgentIdError,
-    MissingCapabilityError,
     OrphanedTeamError,
 )
 from app.agents.coordination.team import Team

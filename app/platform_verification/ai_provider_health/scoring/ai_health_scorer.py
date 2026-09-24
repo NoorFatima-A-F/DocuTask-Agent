@@ -12,7 +12,6 @@ Weights:
 
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
 
 from app.platform_verification.ai_provider_health.domain.interfaces import (
     IAIHealthScorer,

@@ -2,7 +2,6 @@
 Maturity Assessment Engine for Disaster Recovery Governance Framework (Part 3G.4).
 Evaluates platform disaster recovery maturity across 6 levels (Level 0 Undefined to Level 5 Adaptive).
 """
-from typing import Dict, Any
 from app.platform_verification.resilience_governance.domain.models import (
     ResilienceMaturityTier,
     ResilienceMaturityScore,

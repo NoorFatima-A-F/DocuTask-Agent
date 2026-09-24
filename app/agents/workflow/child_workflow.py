@@ -3,12 +3,10 @@ Child Workflow Manager.
 Manages hierarchical parent-child workflow lifecycles, cascading cancellations, and child result propagation.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from uuid import UUID
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.agents.workflow.exceptions import OrphanedChildWorkflowError
-from app.agents.workflow.lifecycle import WorkflowLifecycleState
-from app.agents.workflow.workflow_instance import WorkflowInstance
 
 
 class ChildWorkflowLink(BaseModel):

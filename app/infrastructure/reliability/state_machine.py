@@ -8,8 +8,7 @@ for components, services, and regions across the 7 reliability states.
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timezone
-from typing import Callable, Dict, List, Optional, Set, Tuple
+from typing import Callable, Dict, List, Optional, Set
 
 from app.infrastructure.reliability.models import (
     ReliabilityState,

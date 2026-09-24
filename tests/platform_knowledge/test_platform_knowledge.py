@@ -6,8 +6,8 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 from app.platform_knowledge.models.schemas import (
-    KnowledgeAsset, KnowledgeSource, KnowledgeSourceType, SecurityClassification,
-    ContextRetrievalRequest, GraphNode, GraphEdge, EntityType, MemoryTier,
+    SecurityClassification,
+    ContextRetrievalRequest, MemoryTier,
     KnowledgeLifecycleState
 )
 from app.platform_knowledge.runtime.knowledge_master_orchestrator import knowledge_orchestrator

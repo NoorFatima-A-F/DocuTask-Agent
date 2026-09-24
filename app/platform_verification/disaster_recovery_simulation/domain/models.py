@@ -3,7 +3,7 @@ Domain Models for Enterprise Disaster Recovery Simulation Framework (Part 3G.3).
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 
 
 class DisasterScenarioType(str, Enum):

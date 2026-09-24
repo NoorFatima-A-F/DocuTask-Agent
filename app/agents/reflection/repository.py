@@ -5,9 +5,8 @@ recommendations, and learning artifacts. Cloud SQL/AlloyDB compatible.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 from uuid import UUID
-from app.agents.reflection.context import ReflectionResult
 from app.agents.reflection.evaluation import EvaluationReport
 from app.agents.reflection.interfaces import IReflectionRepository
 from app.agents.reflection.learning_artifact import LearningArtifact

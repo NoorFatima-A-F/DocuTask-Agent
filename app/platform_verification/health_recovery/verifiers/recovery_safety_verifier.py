@@ -74,7 +74,7 @@ class RecoverySafetyVerifier(IRecoverySafetyVerifier):
             )
         )
 
-        protected_count = sum(1 for c in checks if c.protection_active)
+        sum(1 for c in checks if c.protection_active)
 
         return RecoverySafetyReport(
             total_safety_rules_verified=len(checks),

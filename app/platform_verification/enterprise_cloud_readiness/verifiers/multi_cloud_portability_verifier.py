@@ -2,7 +2,7 @@
 Phase 3M.14: Multi-Cloud Portability Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IMultiCloudPortabilityVerifier
 from ..domain.models import (

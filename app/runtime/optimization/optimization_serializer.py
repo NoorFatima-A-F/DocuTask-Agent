@@ -4,7 +4,7 @@ Generates deterministic JSON serialization for zero-drift forensic audit and rep
 """
 
 import json
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 
 class OptimizationSerializer:

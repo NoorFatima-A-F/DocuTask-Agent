@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import logging
 from typing import Any, Dict, Optional
-from uuid import UUID
 
 from app.agents.collaboration.agent_registry import AgentRegistry
 from app.agents.collaboration.reputation.performance_tracker import PerformanceTracker
@@ -29,7 +28,8 @@ from app.agents.runtime.autonomous.event_controller import EventController
 from app.agents.runtime.autonomous.execution_controller import ExecutionController
 from app.agents.runtime.autonomous.observation_manager import ObservationManager
 from app.agents.runtime.autonomous.runtime_context import RuntimeContext
-from app.agents.runtime.autonomous.state_machine import AutonomousState, RuntimeStateMachine
+from app.agents.workflow.task_graph.dynamic_task_graph import DynamicTaskGraph
+from app.agents.runtime.autonomous.state_machine import RuntimeStateMachine
 from app.agents.security.security_guardian import SecurityGuardian
 from app.agents.tools.policy.tool_decision_engine import ToolDecisionEngine
 from app.agents.workflow.persistence.recovery_manager import RecoveryManager

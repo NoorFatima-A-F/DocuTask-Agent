@@ -3,9 +3,9 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
-from ..control_plane.registry import RouteRule, RoutingStrategy, NetworkEndpoint
+from ..control_plane.registry import RouteRule
 
 
 @dataclass

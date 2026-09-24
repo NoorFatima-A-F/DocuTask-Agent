@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 import statistics as stats
 import math
 from ..domain.statistics_domain import StatisticalAggregate, StatisticalAnalysisCompleted

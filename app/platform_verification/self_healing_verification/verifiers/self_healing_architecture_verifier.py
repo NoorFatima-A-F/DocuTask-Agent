@@ -1,7 +1,7 @@
 """
 Phase 3H.5.1: Self-Healing Architecture Verifier
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ..domain.interfaces import ISelfHealingArchitectureVerifier
 
 

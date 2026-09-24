@@ -3,7 +3,7 @@ Phase 13.19: White-Labeling & Tenant Custom Branding Service.
 Manages custom domains (CNAME), logos, color palettes, and email footers.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional
 from app.platform_saas.models.schemas import BrandingConfig
 
 

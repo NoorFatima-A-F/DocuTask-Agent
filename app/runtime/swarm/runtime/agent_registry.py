@@ -5,7 +5,7 @@ Dynamic registry maintaining identities, roles, capabilities, tools, permissions
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Set, Union
+from typing import Dict, List, Optional, Set, Union
 import uuid
 from app.runtime.swarm.events.swarm_events import AgentRoleType, AgentLifecycleState, AgentRole, AgentState
 

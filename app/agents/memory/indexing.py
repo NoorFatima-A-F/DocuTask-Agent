@@ -3,7 +3,7 @@ Memory Indexer Subsystem.
 Indexes memory items by tags, session IDs, and execution IDs.
 """
 
-from typing import Dict, List, Set
+from typing import Dict, Set
 from app.agents.memory.repository import MemoryItem
 
 

@@ -4,7 +4,6 @@ Coordinates node, subtree, and workflow rollbacks with the Execution subsystem.
 """
 
 from typing import List
-from uuid import UUID
 from app.agents.recovery.compensation import CompensatingAction, CompensationEngine
 
 

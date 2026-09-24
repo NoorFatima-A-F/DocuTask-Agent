@@ -13,7 +13,6 @@ from app.runtime.organization.events.organization_events import (
     AgentRole,
     AgentAssigned,
     AgentCapabilityExpanded,
-    AgentPromoted,
     AgentRetired,
     org_event_bus,
 )

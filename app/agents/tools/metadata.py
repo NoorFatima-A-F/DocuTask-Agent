@@ -3,7 +3,7 @@ Tool Metadata & Profiles.
 Models security classifications, cost profiles, latency profiles, resource requirements, and auth requirements.
 """
 
-from typing import Dict, List, Optional
+from typing import Optional
 from pydantic import BaseModel, Field
 
 

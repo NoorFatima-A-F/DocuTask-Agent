@@ -2,11 +2,9 @@
 Unit & Integration Tests for APDLE Parallel Scheduler, Worker Allocation, and Master Execution.
 """
 
-import asyncio
 import pytest
 from app.runtime.planning.graph.graph_builder import ExecutionGraphBuilder
 from app.runtime.planning.graph.node import DAGNode, NodeStatus
-from app.runtime.planning.scheduler.parallel_scheduler import ParallelScheduler
 from app.runtime.planning.scheduler.queue_manager import PriorityQueueManager
 from app.runtime.planning.scheduler.scheduler import DAGScheduler
 from app.runtime.planning.scheduler.worker_allocator import WorkerAllocator

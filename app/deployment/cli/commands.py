@@ -1,6 +1,5 @@
 """doctaskctl: Enterprise Developer and SRE Deployment CLI."""
 import argparse
-import sys
 from typing import Any, Dict, List, Optional
 from ..core.deployment import DeploymentStrategyType
 from ..sdk.client import InfrastructureSDK

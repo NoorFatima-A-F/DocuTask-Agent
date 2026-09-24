@@ -2,7 +2,6 @@
 Test Suite: Enterprise Incident Command & Blameless Postmortems
 Validates incident declaration, automated triage, resolution, blast radius assessment, and postmortems.
 """
-import pytest
 from app.runtime.incident.incident_commander import IncidentCommander
 from app.runtime.incident.incident_manager import IncidentManager
 from app.runtime.incident.postmortem_generator import PostmortemGenerator

@@ -2,7 +2,7 @@
 
 import re
 from typing import List, Dict, Any, Tuple
-from enterprise_audit_engine.domain.evidence.models import EvidenceRecord, EvidenceClassification
+from enterprise_audit_engine.domain.evidence.models import EvidenceRecord
 
 
 class ClaimEvidenceMatcher:
@@ -36,7 +36,7 @@ class ClaimEvidenceMatcher:
         sanitized = text
         stripped_claims: List[str] = []
         categories = {r.category for r in records}
-        classifications = {r.category: r.classification for r in records}
+        {r.category: r.classification for r in records}
 
         # 1. Strip absolute unprovable marketing hype
         for pattern in cls.BANNED_UNPROVABLE_PHRASES:

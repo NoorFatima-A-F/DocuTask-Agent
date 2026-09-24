@@ -2,8 +2,6 @@
 
 from pathlib import Path
 from enterprise_audit_engine.analyzers.test_quality_analyzer import TestQualityAnalyzer
-from enterprise_audit_engine.analyzers.api_contract_verifier import APIContractVerifier
-from enterprise_audit_engine.analyzers.ai_quality_verifier import AIQualityVerifier
 from enterprise_audit_engine.analyzers.security_pipeline import SecurityPipelineVerifier
 from enterprise_audit_engine.analyzers.benchmark_runner import BenchmarkRunnerVerifier
 from enterprise_audit_engine.analyzers.runtime_verifier import RuntimeVerifier

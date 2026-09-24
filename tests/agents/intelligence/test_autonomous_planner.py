@@ -14,9 +14,6 @@ import pytest
 from app.agents.intelligence.goal import (
     GoalPriority,
     GoalSpecification,
-    GoalStatus,
-    IntentType,
-    RiskLevel,
 )
 from app.agents.planning import (
     AgentCapabilityRecord,

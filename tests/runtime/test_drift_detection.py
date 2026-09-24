@@ -2,13 +2,10 @@
 Unit and Integration Tests for Online Drift Detection & Sequential Change-Point (ASVSP Pillar 5).
 """
 
-import pytest
 from app.runtime.drift import (
     StatisticalDriftMetrics,
     ADWINDetector,
     CUSUMDetector,
-    PageHinkleyDetector,
-    DriftAlertAdvisor,
     OnlineDriftDetector,
 )
 

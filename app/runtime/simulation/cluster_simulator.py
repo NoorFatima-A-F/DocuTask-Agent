@@ -9,7 +9,7 @@ from __future__ import annotations
 import heapq
 import random
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
 
@@ -101,7 +101,7 @@ class DigitalTwinClusterSimulator:
 
             if evt.event_type == "MISSION_ARRIVAL":
                 # Find least loaded worker
-                worker = min(self.workers.values(), key=lambda w: w.active_tasks)
+                min(self.workers.values(), key=lambda w: w.active_tasks)
                 
                 # Check for chaos fault
                 is_fault = self.random.random() < chaos_fault_rate

@@ -14,20 +14,11 @@ from app.platform_verification.resource_capacity_engineering.api.resource_capaci
     set_runtime,
 )
 from app.platform_verification.resource_capacity_engineering.collectors import (
-    CPUCollector,
-    DatabaseCollector,
-    DiskCollector,
-    MemoryCollector,
-    NetworkCollector,
-    QueueCollector,
     get_all_collectors,
 )
 from app.platform_verification.resource_capacity_engineering.domain.models import (
     ResourceCertificationTier,
     VerificationStatus,
-)
-from app.platform_verification.resource_capacity_engineering.exporter.resource_capacity_exporter import (
-    ResourceCapacityExporter,
 )
 from app.platform_verification.resource_capacity_engineering.runtime.resource_capacity_runtime import (
     ResourceCapacityRuntime,

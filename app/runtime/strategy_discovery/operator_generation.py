@@ -8,10 +8,9 @@ from __future__ import annotations
 
 import ast
 import uuid
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 from pydantic import BaseModel, Field
 
-from app.runtime.strategy_discovery.graph_synthesis import PrimitiveOperatorNode
 
 
 class SynthesizedOperatorSpec(BaseModel):

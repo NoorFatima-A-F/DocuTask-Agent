@@ -7,10 +7,8 @@ Verifies that readiness probe endpoints adhere to Kubernetes standards:
 - Correct readinessProbe manifest alignment
 """
 import time
-from typing import Dict, Any
 from app.platform_verification.readiness_engine.domain.models import (
     KubernetesCompatibilityReport,
-    ReadinessState,
 )
 
 
@@ -36,7 +34,7 @@ class KubernetesReadinessVerifier:
         }
 
     def verify_kubernetes_compatibility(self) -> KubernetesCompatibilityReport:
-        start_time = time.perf_counter()
+        time.perf_counter()
 
         probe_cfg = self.k8s_manifest["readinessProbe"]
         path_valid = (probe_cfg["httpGet"]["path"] == "/ready")

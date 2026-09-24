@@ -1,8 +1,6 @@
 """Expanded 50+ Certification Mutation Testing Suite."""
 
-import base64
 import copy
-import hashlib
 from typing import Dict, Any, List
 from enterprise_audit_engine.domain.evidence.models import (
     EvidenceRecord,
@@ -11,7 +9,7 @@ from enterprise_audit_engine.domain.evidence.models import (
     EvidenceConfidence,
     EvidenceSourceType,
 )
-from enterprise_audit_engine.governance.claim_validator import ClaimValidator, UnsupportedClaimError
+from enterprise_audit_engine.governance.claim_validator import ClaimValidator
 from enterprise_audit_engine.certification.anti_hallucination import ClaimEvidenceMatcher
 from enterprise_audit_engine.certification.coverage_analyzer import (
     EvidenceCoverageAnalyzer,
@@ -20,7 +18,6 @@ from enterprise_audit_engine.certification.coverage_analyzer import (
 from enterprise_audit_engine.certification.merkle_tree import MerkleEvidenceTree
 from enterprise_audit_engine.certification_authority.domain.models import (
     CertificationRecord,
-    CertificationStatus,
 )
 from enterprise_audit_engine.certification_authority.signing.signer import CertificateSigner
 from enterprise_audit_engine.certification_authority.signing.verifier import CertificateSignatureVerifier

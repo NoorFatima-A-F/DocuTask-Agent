@@ -1,7 +1,7 @@
 """Global Control Plane State Models."""
 
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict
 from pydantic import BaseModel, Field
 
 

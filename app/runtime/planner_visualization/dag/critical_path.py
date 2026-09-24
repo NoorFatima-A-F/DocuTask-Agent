@@ -5,7 +5,7 @@ Calculates longest execution path, bottleneck nodes, and slack times across the 
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List
 from app.runtime.planner_visualization.ui_models.models import PlannerDAGNode, PlannerDAGEdge
 
 

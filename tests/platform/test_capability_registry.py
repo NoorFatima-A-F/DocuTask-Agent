@@ -1,6 +1,5 @@
 """Tests for Capability Registry and Resolver."""
 
-import pytest
 from app.platform.capability.capability_model import CapabilityProvider
 from app.platform.capability.capability_registry import (
     CapabilityRegistry,

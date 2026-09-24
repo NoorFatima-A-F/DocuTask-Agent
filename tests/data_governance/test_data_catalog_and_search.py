@@ -1,6 +1,5 @@
 """Test Searchable Enterprise Data Catalog."""
 
-import pytest
 from app.data_governance.registry.models import (
     AssetType,
     ClassificationLevel,

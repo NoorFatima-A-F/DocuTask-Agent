@@ -3,7 +3,7 @@ Scientific Confidence Engine - Evidence Weighting
 Calculates evidentiary weights, credibility discounting, and provenance attributions.
 """
 
-from typing import Dict, Any, List
+from typing import Dict, List
 from dataclasses import dataclass
 
 

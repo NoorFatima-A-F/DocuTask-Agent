@@ -3,7 +3,7 @@ Causal Analysis - Structural Causal Model (SCM)
 Defines Directed Acyclic Graph (DAG) structural equations for document processing.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
 
 

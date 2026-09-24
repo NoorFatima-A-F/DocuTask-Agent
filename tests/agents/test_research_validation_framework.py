@@ -7,7 +7,6 @@ adversarial labs, telemetry verifiers, and certification engines with zero mocke
 """
 
 import math
-import pytest
 
 from research_validation.mathematics.math_verification_lab import MathVerificationLab
 from research_validation.numerical.numerical_stability import NumericalStabilityLab
@@ -18,7 +17,7 @@ from research_validation.replication.independent_replication import (
 )
 from research_validation.uncertainty.uncertainty_quant import UncertaintyQuantificationLab
 from research_validation.drift.distribution_shift import DistributionShiftDetector
-from research_validation.adversarial.adversarial_robustness import AdversarialRobustnessLab, AttackType
+from research_validation.adversarial.adversarial_robustness import AdversarialRobustnessLab
 from research_validation.explainability.explainability_fidelity import (
     ExplainabilityFidelityLab, TokenAttribution
 )
@@ -30,7 +29,7 @@ from research_validation.telemetry.production_telemetry import (
 )
 from research_validation.security.security_validation import SecurityValidationLab
 from research_validation.differential.differential_testing import (
-    DifferentialTestingEngine, DivergenceType
+    DifferentialTestingEngine
 )
 from research_validation.endurance.soak_testing import (
     LongDurationSoakLab, SoakDataPoint
@@ -38,10 +37,10 @@ from research_validation.endurance.soak_testing import (
 from research_validation.sustainability.green_sustainability import (
     GreenSustainabilityLab, CloudRegionGridIntensity
 )
-from research_validation.fair.fair_compliance import FAIRComplianceAuditor, FAIRCategory
-from research_validation.threats.advanced_threat_model import AdvancedThreatModelLab, STRIDEType
+from research_validation.fair.fair_compliance import FAIRComplianceAuditor
+from research_validation.threats.advanced_threat_model import AdvancedThreatModelLab
 from research_validation.certification.external_certification import (
-    ThirdPartyCertificationLab, CertificationStandard
+    ThirdPartyCertificationLab
 )
 
 

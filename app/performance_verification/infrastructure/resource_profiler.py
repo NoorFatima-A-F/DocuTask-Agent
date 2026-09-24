@@ -2,10 +2,7 @@
 System resource profiler evaluating CPU, memory allocation, and database connection pool saturation.
 """
 
-import os
-import sys
 import gc
-from typing import Dict, Any
 from app.performance_verification.domain.models import ResourceEfficiencyProfile
 
 

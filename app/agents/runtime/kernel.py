@@ -5,7 +5,7 @@ dependency graph resolution, Erlang OTP supervision, and multi-tenancy.
 """
 
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 from app.agents.runtime.configuration import PlatformRuntimeConfig
 from app.agents.runtime.dependency_container import DependencyContainer
 from app.agents.runtime.dependency_manager import DependencyManager

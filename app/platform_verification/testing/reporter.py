@@ -3,7 +3,6 @@ Test Evidence & Certification Reporter.
 Renders standardized JSON/Markdown audit evidence from verification test runs.
 """
 import json
-from typing import Dict, Any
 from .runner import TestSuiteReport
 
 class TestEvidenceReporter:

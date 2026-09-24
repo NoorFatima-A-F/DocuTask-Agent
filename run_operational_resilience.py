@@ -2,9 +2,7 @@
 Master CLI Runner for Part 3G.5:
 Enterprise Operational Resilience & Recovery Automation Verification Framework.
 """
-import os
 import sys
-import json
 
 # Ensure UTF-8 output encoding on Windows consoles
 if hasattr(sys.stdout, "reconfigure"):

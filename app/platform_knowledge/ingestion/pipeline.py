@@ -2,8 +2,7 @@
 Document Processing & Ingestion Pipeline
 """
 import re
-from typing import Dict, Any
-from ..models.schemas import KnowledgeAsset, KnowledgeLifecycleState, KnowledgeMetadata, KnowledgeSourceType
+from ..models.schemas import KnowledgeAsset, KnowledgeLifecycleState
 
 class IngestionPipeline:
     @staticmethod

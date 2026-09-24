@@ -7,7 +7,6 @@ import time
 from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
-    ExtractedEntity,
     SectionId,
     SectionVerificationResult,
     VerificationStatus,
@@ -144,10 +143,8 @@ class ExtractionVerifier:
     def _verify_canonical_normalization(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
         # Normalization tests
-        date_raw = "September 18th, 2026"
         date_norm = "2026-09-18"
 
-        amount_raw = "$14,500.50 USD"
         amount_norm = 14500.50
         currency_norm = "USD"
 

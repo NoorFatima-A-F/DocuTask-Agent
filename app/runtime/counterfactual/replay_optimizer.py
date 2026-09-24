@@ -5,8 +5,8 @@ Replays historical missions under counterfactual constraints and optimization we
 
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
-from app.runtime.counterfactual.scenario_generator import ScenarioGenerator, EnvironmentalScenario
-from app.runtime.counterfactual.alternate_planner import AlternatePlanner, CounterfactualCandidate
+from app.runtime.counterfactual.scenario_generator import ScenarioGenerator
+from app.runtime.counterfactual.alternate_planner import AlternatePlanner
 from app.runtime.counterfactual.comparison_engine import CounterfactualComparisonEngine, CounterfactualDifferential
 
 

@@ -5,7 +5,7 @@ Verifies L1/L2 Tiered Cache, TTL Expiration, Cache Stampede Single-Flight Lockin
 
 import collections
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,

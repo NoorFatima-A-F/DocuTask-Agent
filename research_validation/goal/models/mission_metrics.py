@@ -5,7 +5,7 @@ Quantifies mission complexity, readiness, completeness, and feasibility.
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, Optional
+from typing import Dict
 
 
 @dataclass(frozen=True)

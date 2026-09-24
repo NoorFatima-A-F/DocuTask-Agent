@@ -5,7 +5,7 @@ Maintains tamper-evident append-only log with SHA-256 cryptographic hash chainin
 
 import hashlib
 import json
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from app.agents.runtime.enterprise.audit_event import AuditEventType, RuntimeAuditEvent
 
 

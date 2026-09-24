@@ -3,8 +3,8 @@ Failure Catalog.
 Known failure taxonomy, standard error codes, and recommended mitigations.
 """
 
-from typing import Dict, List
-from pydantic import BaseModel, Field
+from typing import Dict
+from pydantic import BaseModel
 from app.agents.recovery.failure import FailureCategory
 
 

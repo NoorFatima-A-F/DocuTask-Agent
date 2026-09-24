@@ -18,13 +18,10 @@ from app.platform_verification.service_reliability.verifiers import (
     ErrorBudgetVerifier,
     BurnRateVerifier,
     ReliabilityComplianceVerifier,
-    DeploymentGateVerifier,
     ExecutiveDashboardVerifier,
     HistoricalTrendVerifier,
     AIWorkloadReliabilityVerifier,
 )
-from app.platform_verification.service_reliability.scoring import ServiceReliabilityScorer
-from app.platform_verification.service_reliability.exporter import ServiceReliabilityExporter
 from app.platform_verification.service_reliability.runtime import ServiceReliabilityRuntime
 from app.platform_verification.service_reliability.api.service_reliability_api import (
     get_reliability_status,

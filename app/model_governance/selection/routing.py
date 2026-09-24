@@ -13,7 +13,6 @@ from app.model_governance.registry.models import Model, ModelLifecycleState
 from app.model_governance.registry.repository import ModelRegistryRepository
 from app.model_governance.selection.selector import (
     ModelSelectionRequest,
-    ModelSelectionResult,
     ModelSelectionService,
 )
 

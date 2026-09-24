@@ -5,7 +5,6 @@ Defines DocumentEmbedding table supporting HNSW vector indexes, embedding provid
 
 import uuid
 from datetime import datetime, timezone
-from typing import Optional
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, Uuid
 from sqlalchemy.orm import Mapped, mapped_column
 

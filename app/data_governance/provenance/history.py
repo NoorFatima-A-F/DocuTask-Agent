@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from app.data_governance.provenance.source import ProvenanceSourceRecord
 from app.data_governance.provenance.transformations import ProvenanceTransformationRecord
 

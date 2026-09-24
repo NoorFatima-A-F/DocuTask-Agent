@@ -152,7 +152,6 @@ class IngestionVerifier:
     def _verify_tenant_ingestion_isolation(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
         tenant_a_uploads = [{"id": "a_1", "tenant": "T_ALPHA"}]
-        tenant_b_uploads = [{"id": "b_1", "tenant": "T_BETA"}]
 
         # Boundary enforcement
         cross_leak = any(u["tenant"] != "T_ALPHA" for u in tenant_a_uploads)

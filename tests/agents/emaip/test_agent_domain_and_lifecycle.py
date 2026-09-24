@@ -10,7 +10,6 @@ from app.agents.domain.agent_entity import (
     TrustLevel,
 )
 from app.agents.lifecycle.manager import (
-    AgentLifecycleEvent,
     AgentLifecycleManager,
     InvalidAgentStateTransitionError,
 )

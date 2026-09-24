@@ -3,7 +3,6 @@ Phase 3P: Comprehensive Test Suite for Enterprise Verification Evidence Intellig
 """
 
 import json
-import os
 from pathlib import Path
 import pytest
 from fastapi import FastAPI
@@ -11,15 +10,10 @@ from fastapi.testclient import TestClient
 
 from app.platform_verification.enterprise_evidence_intelligence.domain.models import (
     ComplianceReport,
-    DeploymentBadge,
     EngineeringAuditReport,
-    EvidenceChain,
-    EvidenceProvenance,
     EvidenceSeverity,
     EvidenceStatus,
     ExecutiveCertificationReport,
-    FailureEvidenceItem,
-    FailureEvidenceReport,
     PortfolioEvidenceBundle,
     StandardizedEvidenceItem,
     VerificationManifest,
@@ -37,19 +31,8 @@ from app.platform_verification.enterprise_evidence_intelligence.collectors impor
 from app.platform_verification.enterprise_evidence_intelligence.validators.evidence_validator import (
     EvidenceValidator,
 )
-from app.platform_verification.enterprise_evidence_intelligence.compliance.compliance_mapper import (
-    ComplianceMapper,
-)
 from app.platform_verification.enterprise_evidence_intelligence.failure.failure_evidence_manager import (
     FailureEvidenceManager,
-)
-from app.platform_verification.enterprise_evidence_intelligence.reporters import (
-    EngineeringAuditGenerator,
-    ExecutiveReportGenerator,
-    PortfolioLayerGenerator,
-)
-from app.platform_verification.enterprise_evidence_intelligence.exporter.evidence_intelligence_exporter import (
-    EvidenceIntelligenceExporter,
 )
 from app.platform_verification.enterprise_evidence_intelligence.runtime.evidence_intelligence_runtime import (
     EvidenceIntelligenceRuntime,

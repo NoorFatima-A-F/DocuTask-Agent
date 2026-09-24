@@ -1,11 +1,8 @@
 """Comprehensive Unit and Integration Tests for Phase 3H.4.7 — Enterprise Incident Signal Verification Framework."""
 
 import json
-import os
-import pytest
 
 from app.platform_verification.incident_signal_verification.domain.models import (
-    IncidentState,
     IncidentPriority,
     IncidentCertificationTier,
 )
@@ -41,9 +38,6 @@ from app.platform_verification.incident_signal_verification.verifiers.incident_s
 )
 from app.platform_verification.incident_signal_verification.verifiers.incident_automation_verifier import (
     IncidentAutomationVerifier,
-)
-from app.platform_verification.incident_signal_verification.scoring.incident_quality_scorer import (
-    IncidentQualityScorer,
 )
 from app.platform_verification.incident_signal_verification.runtime.incident_signal_verification_runtime import (
     IncidentSignalVerificationRuntime,

@@ -3,7 +3,6 @@ Goal Evaluator.
 Assesses whether the original user goal was achieved, partially achieved, failed, or exceeded.
 """
 
-from typing import Any, Dict
 from app.agents.reflection.evaluation import DimensionEvaluation, EvaluationDimension, EvaluationMetric
 from app.agents.reflection.interfaces import IEvaluator
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope

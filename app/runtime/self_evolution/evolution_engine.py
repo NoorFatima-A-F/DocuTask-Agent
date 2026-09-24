@@ -3,10 +3,10 @@ Self-Evolution Runtime - Master Evolution Engine Facade
 Coordinates policy lifecycle, mutation proposals, stage promotions, and instant rollback.
 """
 
-from typing import Dict, List, Any, Optional
-from app.runtime.self_evolution.policy_lifecycle import PolicyLifecycleManager, PolicyDefinition
+from typing import Dict, List, Any
+from app.runtime.self_evolution.policy_lifecycle import PolicyLifecycleManager
 from app.runtime.self_evolution.mutation_generator import PolicyMutationGenerator
-from app.runtime.self_evolution.rollback_manager import RollbackManager, RollbackEvent
+from app.runtime.self_evolution.rollback_manager import RollbackManager
 
 
 class SelfEvolutionEngine:

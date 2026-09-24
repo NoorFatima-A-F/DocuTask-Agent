@@ -4,7 +4,7 @@ Base DDD Entity and ValueObject abstractions for the Enterprise Verification Pla
 from abc import ABC
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict
+from typing import Any
 
 @dataclass
 class BaseEntity(ABC):

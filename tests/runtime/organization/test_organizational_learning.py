@@ -2,7 +2,6 @@
 Test Suite: Organizational Learning & Department Memory
 Validates department knowledge accumulation, retrospective self-critique, and enterprise learning synthesis.
 """
-import pytest
 from app.runtime.org_learning.department_memory import DepartmentMemoryManager
 from app.runtime.org_learning.department_reflection import DepartmentReflectionEngine
 from app.runtime.org_learning.organizational_learning import OrganizationalLearningSynthesizer

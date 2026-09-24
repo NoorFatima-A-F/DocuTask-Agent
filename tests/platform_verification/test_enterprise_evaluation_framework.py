@@ -1,28 +1,13 @@
 """
 Comprehensive test suite for Enterprise Verification Metrics, Evaluation & Scoring Framework (PART 5).
 """
-import pytest
 from app.platform_verification.evaluation_engine import (
     MetricCategory,
     CertificationBand,
     QualityGateStatus,
-    ComparisonTrend,
     RegressionCategory,
-    Severity,
-    MetricDefinition,
     MetricRegistry,
-    StatisticalEngine,
-    ScoringEngine,
-    BenchmarkEngine,
-    QualityGateEngine,
-    QualityGateRule,
-    IndependentAiEvaluator,
-    ABTestingEngine,
-    RegressionDetector,
-    SampleSizeValidator,
-    EvaluationPipeline,
     EvaluationPlatformRuntime,
-    TrendPoint,
 )
 
 

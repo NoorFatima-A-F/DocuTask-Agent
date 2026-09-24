@@ -8,8 +8,8 @@ from __future__ import annotations
 
 import logging
 import time
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Type, TypeVar
+from dataclasses import dataclass
+from typing import Any, Dict, Optional, Type, TypeVar
 from pydantic import BaseModel
 
 from app.agents.intelligence.reasoning.structured_output_parser import StructuredOutputParser

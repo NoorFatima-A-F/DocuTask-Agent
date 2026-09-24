@@ -2,13 +2,11 @@
 CLI Code Generator for New Verification Modules and Plugins.
 Enforces Clean Architecture and SOLID principles automatically.
 """
-import os
 import sys
-import argparse
 
-TEMPLATE_MODELS = """"""
+TEMPLATE_MODELS = """\"\""
 Domain Models for {name}.
-"""
+\"\""
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 import uuid
@@ -21,9 +19,9 @@ class {pascal}Entity(BaseModel):
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 """
 
-TEMPLATE_INTERFACES = """"""
+TEMPLATE_INTERFACES = """\"\""
 Domain Interfaces for {name}.
-"""
+\"\""
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.{name}.domain.models import {pascal}Entity
@@ -38,9 +36,9 @@ class {pascal}RepositoryInterface(ABC):
         pass
 """
 
-TEMPLATE_USE_CASES = """"""
+TEMPLATE_USE_CASES = """\"\""
 Application Use Cases for {name}.
-"""
+\"\""
 from typing import Optional
 from app.platform_verification.modules.{name}.domain.models import {pascal}Entity
 from app.platform_verification.modules.{name}.domain.interfaces import {pascal}RepositoryInterface

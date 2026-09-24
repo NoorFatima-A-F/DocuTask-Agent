@@ -3,7 +3,6 @@ Phase 3H.4.10: Enterprise Observability Security Test Suite
 """
 import os
 import json
-import pytest
 from app.platform_verification.observability_security_verification.verifiers import (
     DataClassificationVerifier,
     LogSecurityVerifier,
@@ -16,16 +15,12 @@ from app.platform_verification.observability_security_verification.verifiers imp
     AISecurityVerifier,
     SecurityFailureSimulator,
 )
-from app.platform_verification.observability_security_verification.scoring.observability_security_scorer import (
-    ObservabilitySecurityScorer,
-)
 from app.platform_verification.observability_security_verification.runtime.observability_security_runtime import (
     ObservabilitySecurityRuntime,
 )
 from app.platform_verification.observability_security_verification.domain.models import (
     DataClassification,
     SecurityTier,
-    RBACRole,
 )
 
 

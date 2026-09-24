@@ -2,7 +2,7 @@
 Verification Domain Events Catalog
 """
 from __future__ import annotations
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid

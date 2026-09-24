@@ -1,7 +1,6 @@
 """
 Phase 3H.5.6.5: Recovery Optimization Engine
 """
-from typing import List, Dict, Any
 from ..domain.interfaces import IRecoveryOptimizationEngine
 from ..domain.models import RecoveryOptimizationReport, RecoveryOptimizationItem
 

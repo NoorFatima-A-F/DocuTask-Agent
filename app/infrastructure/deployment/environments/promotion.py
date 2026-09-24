@@ -2,10 +2,10 @@
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import threading
 
-from .manager import EnvironmentManager, EnvironmentConfig
+from .manager import EnvironmentManager
 from .policies import EnvironmentPolicy
 from ..artifacts.registry import ArtifactRegistry, ArtifactMetadata
 

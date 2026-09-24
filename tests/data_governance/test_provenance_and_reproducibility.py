@@ -1,6 +1,5 @@
 """Test Provenance Engine and Output Reproducibility Verification."""
 
-import pytest
 from app.data_governance.provenance.source import ProvenanceSourceRecord
 from app.data_governance.provenance.transformations import ProvenanceTransformationRecord
 from app.data_governance.provenance.history import ProvenanceHistoryEngine

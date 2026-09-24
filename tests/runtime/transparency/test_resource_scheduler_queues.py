@@ -2,7 +2,6 @@
 Test Suite: Heterogeneous Resource Scheduler & Fair Priority Queue
 Validates worker allocation/release, priority ranking (CRITICAL > HIGH > NORMAL > LOW), and backpressure limits.
 """
-import pytest
 from app.runtime.resource_scheduler.worker_pool import WorkerPoolManager
 from app.runtime.resource_scheduler.priority_scheduler import PriorityScheduler
 

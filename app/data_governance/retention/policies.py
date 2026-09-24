@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import enum
-from typing import Dict, Optional
+from typing import Dict
 from pydantic import BaseModel
 
 

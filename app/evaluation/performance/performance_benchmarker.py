@@ -1,7 +1,7 @@
 """Part E: Performance Benchmarking."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IPerformanceBenchmarker
 from ..domain.models import (
     EvaluationCheck,

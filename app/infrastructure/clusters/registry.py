@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 import threading
-from typing import Any, Dict, List, Optional, Set, Union
+from typing import Dict, List, Optional, Set, Union
 
 from ..core.exceptions import InfrastructureError
 from .capabilities import ClusterCapabilityRegistry

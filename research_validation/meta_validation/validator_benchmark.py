@@ -17,18 +17,17 @@ Recall, and Meta-Validation F1-score.
 
 from __future__ import annotations
 import json
-import math
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, List, Optional, Tuple
 
 from research_validation.provenance.hashing import hash_canonical_json
 from research_validation.provenance.provenance_validator import ProvenanceValidator
 from research_validation.provenance.evidence_graph import EvidenceGraph
-from research_validation.provenance.provenance_models import EvidenceNode, LineageStage, EvidenceQualityLevel
-from research_validation.provenance.independent_verifier import IndependentProvenanceVerifier, VerificationStatus
+from research_validation.provenance.provenance_models import LineageStage, EvidenceQualityLevel
+from research_validation.provenance.independent_verifier import IndependentProvenanceVerifier
 
 
 class MutationType(str, Enum):

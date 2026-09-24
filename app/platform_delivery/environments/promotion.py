@@ -1,7 +1,7 @@
 """Immutable Environment Promotion Manager (Req 32, 33)."""
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import uuid
 
 from ..control_plane.commands import RequestDeploymentCommand

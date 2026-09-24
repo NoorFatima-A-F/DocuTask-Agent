@@ -1,7 +1,7 @@
 """
 Tenant Isolation Engine for Enterprise Document Storage (Part 3G.2C).
 """
-from typing import List, Dict, Any
+from typing import List
 
 from app.platform_verification.document_storage_verification.domain.models import (
     TenantIsolationReport,

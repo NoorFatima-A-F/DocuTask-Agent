@@ -6,7 +6,7 @@ Validates structured JSON output schemas, confidence metrics, and rejection of m
 from __future__ import annotations
 
 import json
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from app.platform_verification.ai_provider_health.domain.interfaces import (
     IAIResponseIntegrityVerifier,

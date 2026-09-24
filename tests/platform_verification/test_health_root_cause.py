@@ -20,7 +20,6 @@ Plus FastAPI HTTP router endpoints.
 
 import os
 import json
-import pytest
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
@@ -54,12 +53,6 @@ from app.platform_verification.health_root_cause.memory.incident_memory import (
 from app.platform_verification.health_root_cause.scenarios.rca_scenarios_verifier import (
     RCAScenariosVerifier,
 )
-from app.platform_verification.health_root_cause.scoring.rca_quality_scorer import (
-    HealthRootCauseScorer,
-)
-from app.platform_verification.health_root_cause.exporter.rca_evidence_exporter import (
-    RCAEvidenceExporter,
-)
 from app.platform_verification.health_root_cause.runtime.health_root_cause_runtime import (
     HealthRootCauseRuntime,
 )
@@ -69,7 +62,6 @@ from app.platform_verification.health_root_cause.api.health_root_cause_api impor
 from app.platform_verification.health_root_cause.domain.models import (
     FailureCategory,
     IncidentSeverity,
-    ComponentCriticality,
     DiagnosisConfidenceTier,
     RCATier,
 )
@@ -204,7 +196,7 @@ def test_part_3h_4_2_12_automated_rca_verification_scenarios():
 def test_part_3h_4_2_13_evidence_exporter_and_8_manifests(tmp_path):
     output_dir = str(tmp_path / "test_rca_manifests")
     runtime = HealthRootCauseRuntime(export_dir=output_dir)
-    res = runtime.run_full_verification()
+    runtime.run_full_verification()
 
     assert os.path.exists(output_dir)
     expected_files = [

@@ -10,31 +10,31 @@
   "relations_preserved": true,
   "timeline": [
     {
-      "timestamp_iso": "2026-09-19T07:04:51.819888+00:00",
+      "timestamp_iso": "2026-09-24T21:55:03.508175+00:00",
       "phase": "DISASTER_INJECTED",
       "description": "Abrupt termination and disk detachment of primary PostgreSQL cluster node",
       "elapsed_seconds_from_start": 0.0
     },
     {
-      "timestamp_iso": "2026-09-19T07:05:36.819888+00:00",
+      "timestamp_iso": "2026-09-24T21:55:48.508175+00:00",
       "phase": "DETECTED",
       "description": "Prometheus blackbox probe & PgBouncer health check triggered SEV-1 alert",
       "elapsed_seconds_from_start": 45.0
     },
     {
-      "timestamp_iso": "2026-09-19T07:06:21.819888+00:00",
+      "timestamp_iso": "2026-09-24T21:56:33.508175+00:00",
       "phase": "MITIGATION_INITIATED",
       "description": "DR Orchestrator initiated automated RDS multi-AZ failover & WAL replay",
       "elapsed_seconds_from_start": 90.0
     },
     {
-      "timestamp_iso": "2026-09-19T07:11:11.819888+00:00",
+      "timestamp_iso": "2026-09-24T22:01:23.508175+00:00",
       "phase": "SERVICE_RESTORED",
       "description": "Database instance restored, WAL archives replayed, schema constraints verified",
       "elapsed_seconds_from_start": 380.0
     },
     {
-      "timestamp_iso": "2026-09-19T07:11:51.819888+00:00",
+      "timestamp_iso": "2026-09-24T22:02:03.508175+00:00",
       "phase": "FULLY_OPERATIONAL",
       "description": "API connection pool reconnected; read/write transactions verified 100% intact",
       "elapsed_seconds_from_start": 420.0

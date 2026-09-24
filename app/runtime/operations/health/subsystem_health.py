@@ -5,7 +5,7 @@ Individual health scoring and status tracking across all 10 platform subsystems.
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 from app.runtime.operations.events.operation_events import SubsystemType
 
 

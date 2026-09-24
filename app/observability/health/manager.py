@@ -6,7 +6,7 @@ Collects and aggregates health across the 6-level hierarchy and provides probes 
 import asyncio
 from datetime import datetime, timezone
 import time
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, Optional
 from .models import HealthCheckResult, HealthLevel, PlatformHealthReport
 from ...platform.kernel.health import HealthStatus
 

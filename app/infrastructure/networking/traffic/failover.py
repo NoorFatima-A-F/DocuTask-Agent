@@ -1,9 +1,9 @@
 """Traffic Failover Manager, Outlier Detection, and Circuit Breakers."""
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone, timedelta
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 import threading
 
 from ..control_plane.registry import NetworkEndpoint

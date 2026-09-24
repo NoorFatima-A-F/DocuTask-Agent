@@ -1,6 +1,6 @@
 """Ingress Policy Manager for namespace and tenant boundary enforcement."""
 
-from typing import Dict, List, Optional
+from typing import Dict
 import threading
 
 from .network_policy import NetworkPolicy, NetworkPolicyRule, NetworkPolicyEngine, NetworkPolicyType

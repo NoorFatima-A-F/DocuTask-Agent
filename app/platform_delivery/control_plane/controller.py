@@ -8,7 +8,6 @@ from .commands import (
     ApproveDeploymentCommand,
     QuarantineArtifactCommand,
     RequestDeploymentCommand,
-    RollbackDeploymentCommand,
 )
 from .queries import GetDeploymentQuery, ListDeploymentsQuery
 from .state_machine import DeploymentState, DeploymentStateMachine

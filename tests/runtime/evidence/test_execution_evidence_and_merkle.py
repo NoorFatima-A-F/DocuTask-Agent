@@ -1,9 +1,7 @@
 """Tests for Execution Evidence Data Structures, Builders, Graphs, and Merkle Trees."""
 
-import pytest
 from app.runtime.evidence.artifact_registry import ArtifactRegistry
 from app.runtime.evidence.evidence_builder import EvidenceBuilder
-from app.runtime.evidence.evidence_collector import EvidenceCollector
 from app.runtime.evidence.evidence_graph import EvidenceGraph
 from app.runtime.evidence.evidence_validator import EvidenceValidator
 from app.runtime.evidence.execution_evidence import (

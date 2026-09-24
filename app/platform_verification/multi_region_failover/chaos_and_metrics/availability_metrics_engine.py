@@ -2,7 +2,6 @@
 Availability Engineering Metrics Engine (Part 3G.6J).
 Computes enterprise availability SLA models (99.99%), regional RTO, and regional RPO.
 """
-from typing import Dict, Any
 from app.platform_verification.multi_region_failover.domain.models import (
     AvailabilityTier,
     AvailabilityMetricsReport,

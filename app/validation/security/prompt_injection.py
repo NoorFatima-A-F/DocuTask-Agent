@@ -4,7 +4,6 @@ Executes direct prompt injections, role manipulation, instruction hierarchy over
 and document-based injection benchmarks.
 """
 
-from typing import List
 from app.ai.prompt_builder import PromptBuilder
 from app.core.logging import logger
 from app.validation.security.attack_cases import AttackCase, AttackResult
@@ -19,7 +18,7 @@ class PromptInjectionTester:
         Executes a prompt injection attack against PromptBuilder.sanitize_text.
         """
         sanitized = PromptBuilder.sanitize_text(attack_case.payload)
-        user_prompt = PromptBuilder.build_prompt(attack_case.payload, "invoice")
+        PromptBuilder.build_prompt(attack_case.payload, "invoice")
 
         # System override tags should be neutralized
         tag_blocked = "SYSTEM:" not in sanitized and "USER:" not in sanitized

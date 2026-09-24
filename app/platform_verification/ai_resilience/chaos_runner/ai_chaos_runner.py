@@ -2,7 +2,7 @@
 
 import time
 from typing import List
-from ..domain.models import ChaosExperimentResult, ChaosScenarioType
+from ..domain.models import ChaosExperimentResult
 from ..domain.interfaces import IChaosExperimentRunner
 from ..simulation.ai_failure_simulator import AIFailureSimulator
 

@@ -1,8 +1,7 @@
 """Extension Contracts and Interfaces for Governance Extensibility."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
+from typing import Any, Dict
 
 
 class ExtensionCapability(str):

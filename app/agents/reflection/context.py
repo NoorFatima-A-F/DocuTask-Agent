@@ -4,10 +4,10 @@ Defines canonical boundaries for invoking and obtaining results from the reflect
 """
 
 from typing import Any, Dict, List, Optional
-from uuid import UUID, uuid4
+from uuid import uuid4
 from pydantic import BaseModel, Field
 from app.agents.reflection.lifecycle import ReflectionLifecycleState
-from app.agents.reflection.metadata import ReflectionIdentity, ReflectionMetadata, ReflectionStatistics
+from app.agents.reflection.metadata import ReflectionIdentity, ReflectionStatistics
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 

@@ -15,14 +15,14 @@ import platform
 import sys
 import time
 import uuid
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set, Tuple
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Set
 
 from research_validation.provenance.hashing import HashAlgorithm, ProvenanceHasher
 from research_validation.provenance.merkle_dag import MerkleDAG, MerkleVerificationResult
 from research_validation.provenance.provenance_models import (
     EnvironmentFingerprint, EvidenceNode, EvidenceQualityLevel, LineageStage,
-    ProvActivity, ProvAgent, ProvEntity, ProvRelationType
+    ProvEntity, ProvRelationType
 )
 from research_validation.provenance.provenance_schema import ProvDocument, ProvRelation
 

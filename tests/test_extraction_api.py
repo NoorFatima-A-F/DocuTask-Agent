@@ -59,7 +59,7 @@ async def test_ai_extraction_api_endpoints(client: AsyncClient):
     assert status_res.json()["data"]["status"] == "EXTRACTION_COMPLETED"
 
     # 6. GET /api/v1/ai/history/{document_id}
-    hist_res = await client.get(f"/api/v1/ai/history/{document_id}", headers=headers)
+    hist_res = await client.get(f"/api/v1/ai/history/{doc_id}", headers=headers)
     assert hist_res.status_code == 200
     assert len(hist_res.json()["data"]) >= 1
 

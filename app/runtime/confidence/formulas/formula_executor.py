@@ -3,7 +3,6 @@ Formula Executor for Phase 13.3 (ASCE-CGP).
 Executes mathematical models (Weighted Sum, Bayesian, Reliability Multiplication, Logistic Scaling, Hybrid Ensemble).
 """
 
-import math
 from typing import Dict, List, Tuple
 from app.runtime.confidence.models.confidence_models import FeatureContribution
 

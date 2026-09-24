@@ -3,7 +3,6 @@ Observability, Structured Logging, and Distributed Tracing Verifier.
 """
 
 import uuid
-from typing import List, Dict, Any
 from app.performance_verification.domain.models import ObservabilityTrace
 
 

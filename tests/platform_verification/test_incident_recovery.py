@@ -3,7 +3,6 @@ Phase 3H.4.9: Enterprise Incident Recovery Verification Test Suite
 """
 import os
 import json
-import pytest
 from app.platform_verification.incident_recovery_verification.verifiers import (
     RecoveryArchitectureVerifier,
     ActionMappingVerifier,
@@ -16,12 +15,9 @@ from app.platform_verification.incident_recovery_verification.verifiers import (
     RecoverySafetyVerifier,
     PostIncidentImprovementVerifier,
 )
-from app.platform_verification.incident_recovery_verification.scoring.recovery_scorer import RecoveryScorer
-from app.platform_verification.incident_recovery_verification.exporter.recovery_evidence_exporter import RecoveryEvidenceExporter
 from app.platform_verification.incident_recovery_verification.runtime.recovery_verification_runtime import RecoveryVerificationRuntime
 from app.platform_verification.incident_recovery_verification.domain.models import (
     IncidentType,
-    RecoveryState,
     RecoveryTier,
 )
 

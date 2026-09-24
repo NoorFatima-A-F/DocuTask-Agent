@@ -1,4 +1,3 @@
-import pytest
 from app.runtime.deliberation.agents import CouncilAgent
 from app.runtime.deliberation.voting import DeliberationVotingEngine
 from app.runtime.deliberation.auction import VickreyTaskAuctioneer, WorkerTaskBid

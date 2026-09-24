@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 
 @dataclass
@@ -133,8 +133,8 @@ class DistributionShiftDetector:
         if not x or not y:
             return 0.0
 
-        n = len(x)
-        m = len(y)
+        len(x)
+        len(y)
 
         # Subsample for computational efficiency if large
         max_s = 200

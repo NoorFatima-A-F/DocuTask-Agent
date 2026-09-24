@@ -2,7 +2,6 @@
 from typing import List, Optional
 from fastapi import APIRouter, HTTPException, status
 from ..core.deployment import DeploymentStrategyType
-from ..core.exceptions import DeploymentException
 from ..sdk.client import InfrastructureSDK
 from .schemas import (
     ApprovePromotionSchema,

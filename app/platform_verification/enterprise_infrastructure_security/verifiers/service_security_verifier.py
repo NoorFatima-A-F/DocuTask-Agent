@@ -2,7 +2,7 @@
 Phase 3N.9: Service-to-Service Security Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IServiceToServiceSecurityVerifier
 from ..domain.models import (

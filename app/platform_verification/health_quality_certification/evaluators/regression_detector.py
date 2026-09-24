@@ -1,7 +1,7 @@
 """
 Phase 3H.5.11.4: Automated Health Quality Regression Detector
 """
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 from ..domain.models import (
     RegressionReport,
     RegressionComparison,

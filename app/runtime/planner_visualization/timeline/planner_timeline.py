@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 from app.runtime.events.store.event_store import get_global_event_store
-from app.runtime.events.models.event_types import EventSubsystem
+from app.runtime.observability.schemas import EventCategory
 
 
 class PlannerTimelineService:

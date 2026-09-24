@@ -3,7 +3,7 @@ Abstract Contracts and Ports for the 16 Enterprise Verification Core Components.
 Strictly enforces the Interface Segregation and Dependency Inversion Principles.
 """
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional, Tuple, Callable
+from typing import Any, Dict, List, Optional, Callable
 
 
 class VerificationOrchestratorInterface(ABC):

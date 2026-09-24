@@ -2,9 +2,8 @@
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from enum import Enum
 import ipaddress
-from typing import Any, Dict, List, Optional, Set
+from typing import Dict, List
 import threading
 
 from ..control_plane.registry import NetworkPolicyType, ZeroTrustAction

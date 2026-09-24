@@ -3,7 +3,6 @@ Autonomous Process Discovery Engine
 Reconstructs workflows automatically from execution logs (Process Mining), detecting bottlenecks and automation opportunities.
 """
 from typing import Dict, List, Any
-from datetime import datetime, timezone
 from ..models.schemas import DiscoveredProcess
 
 class ProcessDiscoveryEngine:

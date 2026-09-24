@@ -4,7 +4,7 @@ Collects telemetry, execution latencies, and counts for OpenTelemetry, Google Cl
 """
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class WorkflowMetricsSnapshot(BaseModel):

@@ -7,9 +7,8 @@ if an execution node is ready to be dispatched to a worker.
 
 from __future__ import annotations
 
-import time
 from typing import Any, Dict, Set
-from app.runtime.planning.graph.node import DAGNode, DependencySpec, DependencyType, NodeStatus
+from app.runtime.planning.graph.node import DAGNode, DependencyType, NodeStatus
 
 
 class DependencyResolver:

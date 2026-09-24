@@ -15,12 +15,9 @@ Demonstrates the full scientific experimentation lifecycle:
 """
 
 from __future__ import annotations
-import json
-import os
-import sys
 
 from research_validation.scientific_execution.experiment_manifest import (
-    ExperimentManifest, ExperimentParameters, DatasetFingerprint, ExperimentStatus
+    ExperimentManifest, ExperimentParameters, DatasetFingerprint
 )
 from research_validation.scientific_execution.experiment_registry import (
     ExperimentRegistry
@@ -34,7 +31,6 @@ from research_validation.scientific_execution.evidence_reconciliation import (
 from research_validation.artifact_generation.paper_figures import PaperFigureGenerator
 from research_validation.artifact_generation.publication_tables import PublicationTableGenerator
 from research_validation.artifact_generation.latex_export import LatexExporter
-from research_validation.artifact_generation.markdown_export import MarkdownExporter
 from research_validation.artifact_generation.csv_export import CSVExporter
 from research_validation.artifact_generation.parquet_export import ParquetDatasetExporter
 from research_validation.artifact_generation.artifact_index import ArtifactIndexer
@@ -45,7 +41,6 @@ from research_validation.uncertainty.uncertainty_propagation import UncertaintyP
 from research_validation.uncertainty.evidence_weighting import (
     DynamicEvidenceWeightEngine, EvidenceQualityLevel
 )
-from research_validation.uncertainty.calibration import EmpiricalCalibrationEngine
 from research_validation.review.artifact_completeness_checker import ArtifactCompletenessChecker
 from research_validation.review.review_simulator import ReviewSimulator
 from research_validation.review.review_readiness_matrix import ReviewReadinessMatrixBuilder
@@ -74,7 +69,7 @@ def run_demo():
         tags=("ieee", "acm_reproduced", "document_ai"),
     )
     registry = ExperimentRegistry()
-    record = registry.register(manifest)
+    registry.register(manifest)
     print(f"  -> Registered ID: {manifest.experiment_id} | SHA-256: {manifest.manifest_digest_sha256[:16]}...")
 
     # 2. Orchestrate Pipeline Execution
@@ -113,9 +108,9 @@ def run_demo():
         ],
         originating_exp_id=manifest.experiment_id,
     )
-    latex_tbl = LatexExporter.export_table(tbl)
+    LatexExporter.export_table(tbl)
     csv_data, csv_sha = CSVExporter.export_table_to_csv(tbl)
-    parquet_manifest = ParquetDatasetExporter.export_table_columnar(tbl)
+    ParquetDatasetExporter.export_table_columnar(tbl)
 
     indexer = ArtifactIndexer()
     indexer.register_figure(fig, "artifacts/figures/funsd_bar.svg")

@@ -6,7 +6,6 @@ Provides fast validation for goals, tasks, workflow graphs, and task dependency 
 from typing import Dict, List, Set
 from app.agents.exceptions import AgentException
 from app.agents.domain.goals import Goal
-from app.agents.domain.tasks import AgentTask
 from app.agents.domain.workflows import WorkflowGraph
 
 

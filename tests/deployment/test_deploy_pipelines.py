@@ -1,6 +1,4 @@
 """Unit tests for Infrastructure Pipeline Engine."""
-import pytest
-from app.deployment.core.exceptions import ApprovalGateException
 from app.deployment.pipelines.approvals import ApprovalGate
 from app.deployment.pipelines.engine import PipelineEngine, PipelineRunStatus
 from app.deployment.pipelines.stages import PipelineStage, PipelineStageType

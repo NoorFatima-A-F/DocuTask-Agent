@@ -5,7 +5,7 @@ The primary execution coordinator for durable, event-driven, fault-tolerant DAG 
 
 import asyncio
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 import uuid
 from ..domain.models import (
     ExecutionRecord,
@@ -17,15 +17,10 @@ from ..domain.models import (
 )
 from ..domain.exceptions import (
     WorkflowExecutionException,
-    TaskExecutionException,
-    CompensationException,
 )
 from ..compiler.compiler import WorkflowCompiler
-from ..graph.graph import ExecutionGraph
-from ..graph.nodes import TaskNode, DecisionNode, ApprovalNode
-from ..graph.edges import EdgeType
+from ..graph.nodes import TaskNode
 from ..storage.state_manager import WorkflowStateManager
-from ..storage.checkpoint_manager import CheckpointManager
 from ..scheduler.scheduler import TaskScheduler
 from ..executor.task_executor import TaskExecutor
 from ..retry.engine import RetryEngine

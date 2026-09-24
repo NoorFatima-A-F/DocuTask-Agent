@@ -2,7 +2,6 @@
 Tests for Agent Message Bus, Skills Registry, Supervisor Agent, and Worker Collaboration.
 """
 
-import pytest
 from app.agents.collaboration.supervisor import SupervisorAgent
 from app.agents.collaboration.worker import WorkerAgent
 from app.agents.communication.message_bus import (

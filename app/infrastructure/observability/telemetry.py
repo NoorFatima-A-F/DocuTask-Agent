@@ -2,7 +2,7 @@
 Telemetry Collector and Metrics Exporter Interface.
 Captures verification duration, throughput, and error metrics for Prometheus / OpenTelemetry export.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 class TelemetryCollector:
     """In-memory telemetry accumulator for verification workloads."""

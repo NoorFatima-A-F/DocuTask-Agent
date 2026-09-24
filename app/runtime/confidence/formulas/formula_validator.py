@@ -3,7 +3,6 @@ Formula Validator for Phase 13.3 (ASCE-CGP).
 Verifies formula mathematical soundness, boundary conditions, and monotonicity.
 """
 
-from typing import Dict, List, Tuple
 
 
 class FormulaValidator:

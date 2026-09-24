@@ -2,11 +2,9 @@
 
 import json
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 from datetime import datetime, timezone
 from enterprise_audit_engine.certification_authority.domain.models import (
-    CertificationRecord,
-    CertificationStatus,
     RevocationRecord,
     RevocationReason,
 )

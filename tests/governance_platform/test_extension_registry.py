@@ -4,7 +4,6 @@ import pytest
 from app.governance.platform.extensions.contracts import (
     CustomRiskEvaluatorContract,
     ExtensionCapability,
-    PolicyExtensionContract,
 )
 from app.governance.platform.extensions.registry import ExtensionRegistry
 from app.governance.platform.extensions.validators import ExtensionValidationError

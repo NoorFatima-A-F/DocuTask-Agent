@@ -7,7 +7,7 @@ import asyncio
 from typing import Dict, List, Optional, Set
 from app.agents.tools.base import BaseTool
 from app.agents.tools.descriptor import ToolDescriptor
-from app.agents.tools.exceptions import ToolNotFoundException, ToolValidationException
+from app.agents.tools.exceptions import ToolValidationException
 from app.agents.tools.interfaces import IToolRegistry
 
 

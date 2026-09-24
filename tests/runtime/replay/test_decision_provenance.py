@@ -2,9 +2,8 @@
 Unit Tests for Decision Provenance Engine and 100% Coverage Guarantees.
 """
 
-import pytest
 from app.runtime.decision.provenance_engine import DecisionProvenanceEngine
-from app.runtime.decision.utility_breakdown import PlanUtilityScore, MultiObjectiveUtilityCalculator
+from app.runtime.decision.utility_breakdown import PlanUtilityScore
 from app.runtime.decision.decision_engine import MasterDecisionEngine
 
 

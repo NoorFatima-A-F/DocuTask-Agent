@@ -3,7 +3,7 @@ Section 5.2: Multilingual Jailbreak Resistance Verification
 Tests jailbreak resistance across English, Arabic, Urdu, Roman Urdu, Chinese, and Spanish.
 """
 from typing import Dict, List, Any
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel, AttackVector
+from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
 
 MULTILINGUAL_JAILBREAK_DATASET = [
     # English

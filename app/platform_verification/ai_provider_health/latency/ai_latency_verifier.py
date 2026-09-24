@@ -5,7 +5,7 @@ Measures P50, P95, and P99 inference latencies and tracks performance degradatio
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import List
 
 from app.platform_verification.ai_provider_health.domain.interfaces import (
     IAILatencyVerifier,

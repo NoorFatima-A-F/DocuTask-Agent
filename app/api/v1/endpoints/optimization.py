@@ -5,21 +5,20 @@ retry optimization, benchmarking, and policy management.
 """
 
 from typing import Dict, Any, List, Optional
-from fastapi import APIRouter, HTTPException, Query, Body
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
-from app.runtime.feature_store import feature_pipeline, feature_registry, feature_statistics_tracker
+from app.runtime.feature_store import feature_registry, feature_statistics_tracker
 from app.runtime.confidence import scientific_confidence_engine
-from app.runtime.optimization import MultiObjectivePlanOptimizer, optimization_history
+from app.runtime.optimization import MultiObjectivePlanOptimizer
 from app.runtime.risk import ProbabilisticRiskEstimator, MultiDimensionalUncertainty, RiskMitigationEngine
 from app.runtime.constraints import ConstraintSolver
-from app.runtime.routing import ScientificModelRouter, routing_history, routing_statistics, AVAILABLE_MODELS
-from app.runtime.retry import RetryOptimizer, retry_statistics
+from app.runtime.routing import ScientificModelRouter
+from app.runtime.retry import RetryOptimizer
 from app.runtime.calibration import scientific_calibration_engine
 from app.runtime.evaluation import policy_evaluator
 from app.runtime.benchmarking import scientific_benchmark_engine
 from app.runtime.learning import policy_store, AdaptiveWeightLearner
-from app.runtime.decision_validation import DecisionValidator
 
 router = APIRouter()
 

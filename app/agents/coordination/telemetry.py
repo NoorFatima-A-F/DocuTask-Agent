@@ -4,7 +4,7 @@ OpenTelemetry tracing, W3C trace context, and correlation propagation across mul
 """
 
 from typing import Dict, Optional
-from uuid import UUID, uuid4
+from uuid import uuid4
 
 
 class CoordinationTelemetry:

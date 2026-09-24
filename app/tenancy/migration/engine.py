@@ -10,7 +10,7 @@ Supports:
 from __future__ import annotations
 
 import uuid
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from app.tenancy.core.models import Region
 from app.tenancy.core.exceptions import TenancyError
 from app.tenancy.organizations.manager import OrganizationManager

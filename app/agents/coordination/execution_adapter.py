@@ -4,8 +4,7 @@ Bridges multi-agent coordination layer with Stateful Execution Engine.
 Delegates physical task dispatching and runtime execution without replacing the Execution Engine.
 """
 
-from typing import Any, Dict, List, Optional
-from uuid import UUID
+from typing import Any, Dict, Optional
 
 
 class CoordinationExecutionAdapter:

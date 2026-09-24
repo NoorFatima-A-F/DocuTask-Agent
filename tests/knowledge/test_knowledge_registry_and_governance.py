@@ -5,7 +5,6 @@ Tests for KnowledgeRegistry and KnowledgeGovernanceEngine.
 import pytest
 from app.knowledge.core.exceptions import (
     ClassificationViolationError,
-    KnowledgeNotFoundError,
     PermissionDeniedError,
 )
 from app.knowledge.core.models import (
@@ -13,7 +12,6 @@ from app.knowledge.core.models import (
     KnowledgeChunk,
     KnowledgeLifecycleState,
     KnowledgeObject,
-    KnowledgePermission,
     RetrievalResult,
 )
 from app.knowledge.governance.engine import KnowledgeGovernanceEngine, UserSecurityContext

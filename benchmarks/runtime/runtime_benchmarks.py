@@ -9,7 +9,6 @@ import json
 import os
 import sys
 import time
-from uuid import uuid4
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
@@ -21,7 +20,6 @@ from app.agents.runtime.enterprise.audit_log import ImmutableRuntimeAuditLog
 from app.agents.runtime.enterprise.distributed_scheduler import DistributedScheduler
 from app.agents.runtime.enterprise.scheduler_state import JobPriority, ScheduledJob
 from app.agents.runtime.runtime_context import RuntimeContext
-from app.agents.runtime.runtime_supervisor import RestartPolicy, RestartStrategy, SupervisorTree
 from app.agents.runtime.startup import StartupPipeline
 
 
@@ -109,7 +107,7 @@ async def benchmark_startup_pipeline() -> float:
     config = PlatformRuntimeConfig(runtime_name="bench_runtime", enable_plugins=False)
     pipeline = StartupPipeline(config=config)
     start = time.perf_counter()
-    res = await pipeline.execute()
+    await pipeline.execute()
     duration_ms = (time.perf_counter() - start) * 1000.0
     print(f"[BENCHMARK] Full 10-Step Boot Pipeline: {duration_ms:.2f} ms")
     return duration_ms

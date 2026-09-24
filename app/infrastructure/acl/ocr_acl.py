@@ -2,7 +2,7 @@
 Anti-Corruption Layer (ACL) for Third-Party OCR Engines.
 Translates proprietary OCR outputs into domain document schemas.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from ...shared_kernel import Result, Ok, Err
 
 class OcrEngineAntiCorruptionLayer:

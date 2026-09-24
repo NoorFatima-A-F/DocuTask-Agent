@@ -5,8 +5,7 @@ Continuously benchmarks predictions against real-world observations, calculating
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import math
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import uuid
 
 from app.runtime.world_model.events.world_model_events import (
@@ -15,7 +14,7 @@ from app.runtime.world_model.events.world_model_events import (
     WorldModelEventType,
     world_model_event_bus,
 )
-from app.runtime.world_model.forecasting.predictive_engine import WorldPrediction, predictive_engine
+from app.runtime.world_model.forecasting.predictive_engine import predictive_engine
 
 
 @dataclass

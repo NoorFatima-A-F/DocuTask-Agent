@@ -5,7 +5,7 @@ and maps failure actions.
 """
 import os
 import yaml
-from typing import Dict, Any, List
+from typing import Dict, Any
 from app.platform_verification.readiness_contract.domain.models import (
     DependencyPolicyReport,
 )

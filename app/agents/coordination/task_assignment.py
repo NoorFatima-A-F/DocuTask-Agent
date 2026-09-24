@@ -4,7 +4,7 @@ Defines assignment envelopes, matrices, and allocation states.
 """
 
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 

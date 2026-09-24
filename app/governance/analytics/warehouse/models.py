@@ -1,6 +1,6 @@
 """Governance Data Warehouse Fact and Dimension Models."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid

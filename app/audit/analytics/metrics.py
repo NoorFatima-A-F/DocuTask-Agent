@@ -1,8 +1,8 @@
 """Audit Metrics Collector."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Optional
 from pydantic import BaseModel, Field
-from ..core.events import AuditEvent, OutcomeType, AuditSeverity
+from ..core.events import OutcomeType, AuditSeverity
 from ..storage.repository import AuditRepository
 
 

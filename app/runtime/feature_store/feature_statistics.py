@@ -3,7 +3,7 @@ Scientific Feature Store - Feature Statistics
 Computes population statistics, rolling windows, drift metrics, and covariance matrices.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List
 import math
 
 

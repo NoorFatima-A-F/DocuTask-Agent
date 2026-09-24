@@ -2,7 +2,6 @@
 Unit Tests for Enterprise Audit Engine and Cryptographic Signatures.
 """
 
-import pytest
 from app.runtime.observability.schemas import RuntimeEvent, EventCategory, EventType, EventSeverity
 from app.runtime.audit.audit_engine import MasterAuditEngine
 

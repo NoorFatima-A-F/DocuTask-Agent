@@ -5,9 +5,9 @@ Coordinates multi-agent task routing, dependency synchronization, distributed sc
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import uuid
-from app.runtime.swarm.runtime.agent_registry import AgentRegistry, SwarmAgentProfile
+from app.runtime.swarm.runtime.agent_registry import AgentRegistry
 from app.runtime.swarm.runtime.agent_directory import AgentDirectory
 from app.runtime.swarm.events.swarm_events import AgentLifecycleState
 

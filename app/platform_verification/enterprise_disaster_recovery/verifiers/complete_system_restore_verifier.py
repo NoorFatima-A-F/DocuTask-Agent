@@ -2,7 +2,7 @@
 Phase 3L.8: Complete System Restore Test Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ICompleteSystemRestoreVerifier
 from ..domain.models import (

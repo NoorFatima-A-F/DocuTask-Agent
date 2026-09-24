@@ -32,7 +32,7 @@ class CausalAttributionEngine:
         observed_ocr_confidence: float = 0.68,
         selected_model: str = "gemini-1.5-pro",
     ) -> List[CausalAttributionItem]:
-        delta = observed_value - expected_baseline
+        observed_value - expected_baseline
 
         items: List[CausalAttributionItem] = []
 

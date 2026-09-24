@@ -4,7 +4,7 @@ Defines contracts for ToolRegistry, CapabilityResolver, ToolSelector, and ToolDi
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from app.agents.tools.base import BaseTool
 from app.agents.tools.capabilities import CapabilityMatch, CapabilityRequirement
 from app.agents.tools.descriptor import ToolDescriptor

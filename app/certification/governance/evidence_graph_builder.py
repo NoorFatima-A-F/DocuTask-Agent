@@ -2,7 +2,7 @@
 Bidirectional Evidence Traceability Graph Builder.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from app.certification.domain.models import EvidenceNode
 
 

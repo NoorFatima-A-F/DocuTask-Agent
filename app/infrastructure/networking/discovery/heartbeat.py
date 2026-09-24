@@ -1,7 +1,7 @@
 """Service Heartbeat & Liveness Management for Dynamic Discovery."""
 
 from datetime import datetime, timezone, timedelta
-from typing import Any, Dict, List
+from typing import List
 import logging
 import threading
 

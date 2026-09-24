@@ -3,7 +3,7 @@ Unified Message Bus Implementation.
 Implements EventBus, CommandBus, QueryBus, and UnifiedMessageBus.
 """
 
-from typing import Callable, Coroutine, Dict, List, Optional
+from typing import Callable, Coroutine, List, Optional
 from app.agents.messaging.commands import AgentCommand, CommandResult
 from app.agents.messaging.dead_letter import DeadLetterQueue
 from app.agents.messaging.events import DomainEvent

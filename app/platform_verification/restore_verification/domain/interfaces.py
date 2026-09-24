@@ -2,7 +2,7 @@
 Abstract Interfaces for Enterprise Automated Restore Verification System (Part 3G.2E).
 """
 from abc import ABC, abstractmethod
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 
 from app.platform_verification.restore_verification.domain.models import (
     RestoreExecutionPlan,

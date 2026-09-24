@@ -3,8 +3,8 @@ Scientific Constraints - Constraint Validator
 Enforces pre-dispatch assertions preventing any non-compliant candidate plan from executing.
 """
 
-from typing import Dict, Any, List
-from app.runtime.constraints.feasibility_engine import FeasibilityEngine, FeasibilityEvaluation
+from typing import Dict
+from app.runtime.constraints.feasibility_engine import FeasibilityEngine
 
 
 class ConstraintViolationError(ValueError):

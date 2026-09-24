@@ -74,7 +74,6 @@ class DatabaseStressVerifier(IPerformanceVerifier):
 
         # 3. Deadlock Detection & Resolution
         deadlocks_encountered = 0
-        deadlocks_resolved_auto = 0
         tx_retries_successful = 100.0
         checks.append(
             CheckResult(

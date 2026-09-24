@@ -2,8 +2,6 @@
 Comprehensive Unit & Integration Test Suite for Part 1.1E:
 Enterprise Verification Configuration, Versioning & Dependency Management Architecture.
 """
-import pytest
-from datetime import datetime, timezone
 from app.platform_verification.config_versioning.domain.models import (
     SemanticVersion,
     DependencyItem,
@@ -13,14 +11,7 @@ from app.platform_verification.config_versioning.domain.models import (
     PromptTemplateVersion,
     RAGRetrievalConfigVersion,
     AgentConfigVersion,
-    EnvironmentFingerprint,
-    ConfigurationSnapshot,
-    ConfigurationDiff,
-    DriftReport,
-    ChangeRequest,
     ChangeApprovalStatus,
-    RollbackRecord,
-    SBOMManifest,
 )
 from app.platform_verification.config_versioning.core.registry import configuration_registry
 from app.platform_verification.config_versioning.core.resolver import configuration_resolver
@@ -287,7 +278,7 @@ def test_change_tracker_and_automated_rollback():
 
     resolved_b = dict(resolved_a)
     resolved_b["timeout_seconds"] = 1200
-    snap_b = snapshot_manager.create_snapshot(resolved_b, EnvironmentTier.PRODUCTION, creator="Engineer 2")
+    snapshot_manager.create_snapshot(resolved_b, EnvironmentTier.PRODUCTION, creator="Engineer 2")
 
     # 2. Submit Change Request
     change_req = change_tracker.submit_change(

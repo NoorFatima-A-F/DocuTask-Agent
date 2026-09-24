@@ -1,6 +1,5 @@
 """Tests for PII Detection, Masking, and Redaction/Pseudonymization."""
 
-import pytest
 from app.safety.privacy.pii_detector import PIIDetector, PIIType
 from app.safety.privacy.masking import DataMasker
 from app.safety.privacy.redaction import DataRedactor

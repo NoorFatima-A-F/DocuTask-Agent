@@ -1,9 +1,8 @@
 """
 Dockerfile Quality and Security Analyzer.
 """
-import re
 from pathlib import Path
-from typing import List, Optional
+from typing import List
 from app.platform_verification.container_verification.models.verification_models import DockerfileQualityReport
 
 

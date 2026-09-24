@@ -3,11 +3,10 @@ OWASP Top 10 for LLM Applications Security Testing Suite.
 Provides testing engines for LLM01 through LLM10 vulnerability categories.
 """
 
-from typing import Any, Dict, List
-from pydantic import BaseModel, Field
+from typing import List
+from pydantic import BaseModel
 from app.ai.prompt_builder import PromptBuilder
 from app.ai.validator import AIValidator
-from app.core.logging import logger
 
 
 class OWASPCheckResult(BaseModel):
@@ -54,7 +53,6 @@ class OWASPSecuritySuite:
     @classmethod
     def check_llm02_insecure_output_handling(cls) -> OWASPCheckResult:
         """LLM02: Insecure Output Handling verification."""
-        malicious_json = {"invoice_number": "<script>alert('XSS')</script>"}
         # Schema validation permits string content but ensures strict Pydantic model typing
         validated, _ = AIValidator.validate({"invoice_number": "INV-101"}, "invoice")
         passed = isinstance(validated.get("invoice_number"), str)

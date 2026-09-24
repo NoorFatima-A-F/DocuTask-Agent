@@ -6,7 +6,7 @@ cost tracking, and database persistence.
 
 import json
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from uuid import UUID
 
 from app.ai.exceptions import AIRetryLimitExceededException
@@ -22,6 +22,7 @@ from app.ai.schemas import (
 from app.ai.validator import AIValidator
 from app.core.exceptions import ResourceNotFoundException
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 from app.models.ai_extraction import AIExtraction
 from app.models.user import User
 from app.repositories.ai_extraction_repository import AIExtractionRepository

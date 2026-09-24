@@ -2,7 +2,7 @@
 Part 3I: Enterprise Observability Infrastructure (Logging & Metrics) — Domain Models
 """
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

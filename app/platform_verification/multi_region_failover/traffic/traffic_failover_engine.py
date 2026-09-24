@@ -2,7 +2,6 @@
 Global Traffic Failover Engine (Part 3G.6E).
 Simulates and measures global traffic migration between cloud regions.
 """
-from typing import Dict, Any
 from app.platform_verification.multi_region_failover.domain.models import (
     TrafficFailoverReport,
 )

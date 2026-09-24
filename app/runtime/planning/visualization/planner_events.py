@@ -8,10 +8,7 @@ fully integrated into AROL EventStore and EventBus.
 
 from __future__ import annotations
 
-import time
-from typing import Any, Dict, List, Optional
-from pydantic import Field
-from app.runtime.observability.schemas import EventCategory, EventPriority, PlannerEvent
+from app.runtime.observability.schemas import EventPriority, PlannerEvent
 
 
 class PlannerStartedEvent(PlannerEvent):

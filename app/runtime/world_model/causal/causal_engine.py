@@ -5,7 +5,6 @@ Implements Pearl's do-calculus interventions, DAG structure discovery, and root 
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import math
 from typing import Any, Dict, List, Optional
 import uuid
 

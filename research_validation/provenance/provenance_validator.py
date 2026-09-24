@@ -14,14 +14,14 @@ Formal validator auditing scientific evidence graphs for:
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import List, Optional, Set
 
 from research_validation.provenance.digital_signatures import DetachedSignature, ProvenanceSigner
 from research_validation.provenance.evidence_graph import EvidenceGraph
 from research_validation.provenance.merkle_dag import MerkleVerificationResult
-from research_validation.provenance.provenance_models import EvidenceNode, LineageStage
+from research_validation.provenance.provenance_models import LineageStage
 
 
 class ProvenanceValidationVerdict(str, Enum):

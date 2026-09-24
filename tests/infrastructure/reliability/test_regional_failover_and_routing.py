@@ -2,10 +2,7 @@
 Tests for Regional Failover Planning, Traffic Shifting, and Failover Orchestration.
 """
 
-import pytest
 from app.infrastructure.failover.planner import (
-    FailoverPlan,
-    FailoverScope,
     FailoverStatus,
     FailoverType,
     RegionalFailoverPlanner,

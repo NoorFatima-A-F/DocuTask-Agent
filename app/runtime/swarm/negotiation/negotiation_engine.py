@@ -6,7 +6,7 @@ Multi-objective bargaining over latency, cost, confidence, conflict resolution, 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional
 import uuid
 from app.runtime.swarm.events.swarm_events import NegotiationStatus
 
@@ -196,7 +196,7 @@ class NegotiationEngine:
     ) -> Dict[str, Any]:
         neg_id = f"neg-{uuid.uuid4().hex[:8]}"
 
-        offer1 = NegotiationOffer(
+        NegotiationOffer(
             offer_id=f"ofr-{uuid.uuid4().hex[:8]}",
             proposer_agent_id=initiator_agent_id,
             target_agent_id=respondent_agent_id,

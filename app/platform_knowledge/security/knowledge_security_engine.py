@@ -3,7 +3,7 @@ Knowledge Security Engine
 RBAC/ABAC enforcement, security classification filtering, PII sanitization, and audit trails.
 """
 import re
-from typing import Dict, Any, List
+from typing import List
 from ..models.schemas import SecurityClassification, KnowledgeAsset
 
 class KnowledgeSecurityEngine:

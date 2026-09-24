@@ -4,7 +4,7 @@ Validates regex and NLP classification and masking of CNICs, Emails, Phones, and
 """
 import re
 from typing import Dict, List, Any
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
+from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus
 
 CNIC_REGEX = re.compile(r"\b\d{5}-\d{7}-\d{1}\b")
 EMAIL_REGEX = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b")

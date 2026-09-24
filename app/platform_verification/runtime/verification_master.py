@@ -2,7 +2,7 @@
 Verification Master Coordinator Singleton
 Registers standard plugins and configures default definitions.
 """
-from typing import List, Optional
+from typing import List
 from app.platform_verification.core.plugin_registry import plugin_registry
 from app.platform_verification.core.lifecycle_orchestrator import lifecycle_orchestrator
 from app.platform_verification.domain.models import VerificationDefinition, QualityGateRule, VerificationRun

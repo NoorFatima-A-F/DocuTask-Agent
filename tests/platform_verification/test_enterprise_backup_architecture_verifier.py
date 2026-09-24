@@ -1,26 +1,20 @@
 """
 Comprehensive Unit & Integration Test Suite for Enterprise Backup Architecture Verification (Part 3G.2A).
 """
-import os
 import pytest
 from app.platform_verification.backup_architecture_verification.domain.models import (
-    AssetCategory,
     CriticalityTier,
     BackupStrategyType,
     LifecycleStage,
     CertificationTier,
     VerificationStatus,
-    AssetInventoryItem,
     BackupStrategyConfig,
     RetentionPolicyConfig,
-    DependencyGraphNode,
-    BackupDependencyGraph,
 )
 from app.platform_verification.backup_architecture_verification.runtime.backup_verification_runtime import (
     BackupArchitectureVerificationRuntime,
 )
 from app.platform_verification.backup_architecture_verification.api.backup_architecture_api import (
-    router,
     get_asset_inventory,
     get_classification_matrix,
     get_strategy_report,

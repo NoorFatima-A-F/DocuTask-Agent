@@ -3,7 +3,7 @@ Internal Responsiveness Verifier (Part 3H.2C).
 Measures probe response latency, timeouts, and router loop execution responsiveness.
 """
 import time
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.liveness.domain.models import ResponsivenessReport
 from app.platform_verification.liveness.domain.interfaces import IResponsivenessVerifier
 
@@ -23,7 +23,7 @@ class ResponsivenessVerifier(IResponsivenessVerifier):
         for _ in range(probe_count):
             start = time.perf_counter()
             # Fast internal simulated route dispatch
-            dummy_payload = {"status": "ALIVE", "timestamp": time.time()}
+            {"status": "ALIVE", "timestamp": time.time()}
             duration_ms = (time.perf_counter() - start) * 1000.0
             latencies.append(duration_ms)
             if duration_ms > self.threshold_ms:

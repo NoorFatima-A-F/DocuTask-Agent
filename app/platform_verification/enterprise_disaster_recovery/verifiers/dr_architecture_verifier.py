@@ -2,8 +2,7 @@
 Phase 3L.1: Disaster Recovery Architecture Design Verifier.
 """
 
-from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IDisasterRecoveryArchitectureVerifier
 from ..domain.models import (

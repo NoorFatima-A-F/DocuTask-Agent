@@ -4,7 +4,7 @@ Verifies PostgreSQL connectivity, authentication, transaction execution (BEGIN; 
 schema migration version compatibility, and connection pool health metrics.
 """
 import time
-from typing import Dict, Any, Optional
+from typing import Optional
 from app.platform_verification.readiness_engine.domain.models import (
     DatabaseReadinessReport,
 )
@@ -30,7 +30,7 @@ class DatabaseReadinessChecker:
         override_latency_ms: Optional[float] = None,
         override_pool_exhausted: Optional[bool] = None,
     ) -> DatabaseReadinessReport:
-        start_time = time.perf_counter()
+        time.perf_counter()
 
         connected = True if override_connected is None else override_connected
         authenticated = True if override_authenticated is None else override_authenticated

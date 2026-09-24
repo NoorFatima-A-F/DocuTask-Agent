@@ -2,7 +2,6 @@
 Test Suite: Closed-Loop Human Feedback & Knowledge Evolution
 Validates human correction ingestion, self-reflection hypothesis formulation, and rule versioning/commit mechanisms.
 """
-import pytest
 from app.runtime.feedback_pipeline.feedback_processor import FeedbackProcessor
 from app.runtime.feedback_pipeline.reflection_orchestrator import ReflectionOrchestrator
 from app.runtime.feedback_pipeline.knowledge_versioner import KnowledgeVersioner

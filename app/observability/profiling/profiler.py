@@ -5,7 +5,7 @@ from __future__ import annotations
 import contextlib
 import time
 from dataclasses import dataclass, field
-from typing import Dict, Generator, List, Optional
+from typing import Generator, List, Optional
 
 
 @dataclass

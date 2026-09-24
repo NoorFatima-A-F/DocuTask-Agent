@@ -1,23 +1,16 @@
 """Developer Infrastructure SDK (Req 55, 56)."""
-from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 import uuid
 
-from ..artifacts.models import ArtifactIdentity, ArtifactType
+from ..artifacts.models import ArtifactType
 from ..artifacts.registry import ArtifactRegistry
 from ..builds.executor import BuildPipelineEngine
-from ..builds.models import BuildResult
 from ..control_plane.commands import (
-    ApproveDeploymentCommand,
     RequestDeploymentCommand,
-    RollbackDeploymentCommand,
 )
 from ..control_plane.controller import DeploymentControlPlane, DeploymentRecord
 from ..control_plane.orchestrator import DeliveryOrchestrator
-from ..control_plane.queries import GetDeploymentQuery
-from ..control_plane.state_machine import DeploymentState
-from ..environments.promotion import PromotionManager, PromotionRecord
-from ..gitops.drift import DriftReport
+from ..environments.promotion import PromotionManager
 from ..gitops.reconciler import GitOpsController
 from ..releases.manager import ReleaseManager
 from ..releases.models import Release
@@ -63,7 +56,7 @@ class InfrastructureSDK:
         """Creates, builds, generates SBOM, signs, and registers a release."""
         # 1. Run build pipeline
         build_res = self.build_engine.execute_pipeline(source_commit=commit_sha)
-        primary_digest = build_res.artifact_digest or f"sha256:{uuid.uuid4().hex}"
+        build_res.artifact_digest or f"sha256:{uuid.uuid4().hex}"
 
         # 2. Register artifact
         art = self.artifact_registry.register_artifact(
@@ -157,7 +150,7 @@ class InfrastructureSDK:
     # --- Verification & Supply Chain ---
     def verify_artifact(self, artifact_digest: str) -> SupplyChainVerificationReport:
         has_sbom = self.sbom_manager.get_sbom(artifact_digest) is not None
-        has_sig = self.sigstore.get_signature(artifact_digest) is not None
+        self.sigstore.get_signature(artifact_digest) is not None
         return self.supply_chain_enforcer.verify_supply_chain(
             artifact_digest=artifact_digest,
             has_sbom=has_sbom,

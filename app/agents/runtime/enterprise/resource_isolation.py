@@ -4,7 +4,7 @@ Implements bulkhead isolation patterns preventing noisy neighbors from starving 
 """
 
 import asyncio
-from typing import Any, Callable, Coroutine, Optional
+from typing import Any, Callable, Coroutine
 from app.agents.runtime.exceptions import RuntimeKernelException
 
 

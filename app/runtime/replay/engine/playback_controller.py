@@ -3,7 +3,6 @@ Playback Controller for Phase 13.4.
 Controls replay stepping rates (0.25x, 0.5x, 1x, 2x, 5x, 10x) and frame loop delays.
 """
 
-from typing import Dict, Any
 
 
 class PlaybackRateController:

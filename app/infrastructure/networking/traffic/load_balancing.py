@@ -1,6 +1,6 @@
 """Traffic Load Balancing Engine implementing L4/L7 Algorithms."""
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 import random
 import threading
 

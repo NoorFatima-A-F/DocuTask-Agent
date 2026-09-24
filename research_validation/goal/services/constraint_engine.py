@@ -7,7 +7,6 @@ Evaluates proposed goals and resource requests against hard limits and policy re
 from typing import List, Tuple
 from research_validation.goal.models.goal_constraints import GoalConstraints
 from research_validation.goal.models.execution_budget import ExecutionBudget
-from research_validation.goal.exceptions import BudgetExceededError
 
 
 class ConstraintEngine:

@@ -5,7 +5,7 @@ Uses relational tables with JSONB fields for transactional integrity and durable
 
 import json
 from typing import Any, Dict, List, Optional
-from app.agents.runtime.context_store.context_store import ContextStore, CheckpointRecord
+from app.agents.runtime.context_store.context_store import ContextStore
 from app.agents.runtime.runtime_context import RuntimeContext
 
 

@@ -1,7 +1,7 @@
 """Abstract interfaces for Enterprise Alert Rule Verification sub-engines."""
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import Dict
 from .models import (
     ArchitectureReport,
     TaxonomyReport,

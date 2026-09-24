@@ -4,7 +4,7 @@ Isolates failure episodes, root-cause attributions, mitigation paths, and recove
 """
 
 from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class FailureEpisode(BaseModel):

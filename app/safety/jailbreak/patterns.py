@@ -1,6 +1,5 @@
 """Jailbreak Pattern Registry and Attack Archetypes."""
 
-import re
 from typing import List, Tuple
 from ..gateway.decision import ViolationSeverity
 

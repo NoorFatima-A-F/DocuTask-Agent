@@ -3,7 +3,7 @@ Workflow Fail-Fast Validators.
 Enforces rules preventing cyclic DAGs, missing saga compensations, orphaned branches, and invalid timer parameters.
 """
 
-from typing import List, Set
+from typing import List
 from app.agents.workflow.exceptions import (
     CyclicWorkflowGraphError,
     InvalidTimerConfigurationError,
@@ -12,7 +12,7 @@ from app.agents.workflow.exceptions import (
 )
 from app.agents.workflow.workflow_definition import WorkflowDefinition
 from app.agents.workflow.workflow_graph import WorkflowGraph
-from app.agents.workflow.workflow_node import WorkflowNode, WorkflowNodeType
+from app.agents.workflow.workflow_node import WorkflowNodeType
 
 
 class WorkflowValidator:

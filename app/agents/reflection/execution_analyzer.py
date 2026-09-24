@@ -3,7 +3,7 @@ Execution Analyzer.
 Examines task execution traces, lifecycle transitions, retries, worker allocation, and bottlenecks.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 from app.agents.reflection.interfaces import IExecutionAnalyzer
 from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 

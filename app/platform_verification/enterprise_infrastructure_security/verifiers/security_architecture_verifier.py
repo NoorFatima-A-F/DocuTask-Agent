@@ -2,7 +2,7 @@
 Phase 3N.1: Security Architecture Assessment Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import ISecurityArchitectureVerifier
 from ..domain.models import (

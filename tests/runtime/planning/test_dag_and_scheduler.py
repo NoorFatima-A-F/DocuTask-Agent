@@ -1,9 +1,8 @@
 """Tests for Mutable Execution DAG, Scheduler Leasing, Preemption, and Adaptive Replanning."""
 
-import pytest
-from app.runtime.planning.mutable_dag import MutableExecutionDAG, DAGNode, DAGNodeStatus, DAGMutationType
+from app.runtime.planning.mutable_dag import MutableExecutionDAG, DAGNode, DAGMutationType
 from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine
-from app.runtime.planning.scheduler import EnterpriseResourceScheduler, QueuePriority, WorkerStatus
+from app.runtime.planning.scheduler import EnterpriseResourceScheduler, QueuePriority
 from app.runtime.planning.adaptive_replanner import AdaptiveReplanningEngine, ReplanningTrigger, ReplanningTriggerType
 
 

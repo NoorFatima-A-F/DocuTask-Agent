@@ -7,7 +7,7 @@ from __future__ import annotations
 import asyncio
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Callable, Any, Optional
+from typing import Any, Callable, Dict, List, Optional, Union
 from pydantic import BaseModel, Field
 import uuid
 
@@ -70,7 +70,7 @@ class AIOpsEventBus:
                     await handler(event)
                 else:
                     handler(event)
-            except Exception as ex:
+            except Exception:
                 pass
 
     def get_history(self, limit: int = 100, event_type: Optional[AIOpsEventType] = None) -> List[AIOpsEvent]:

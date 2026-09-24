@@ -1,7 +1,7 @@
 """
 Phase 3H.5.7.2: Component Reliability Score Engine
 """
-from typing import List, Dict, Any
+from typing import List
 from ..domain.interfaces import IComponentScoreEngine
 from ..domain.models import (
     ReliabilityDataCollectionReport,

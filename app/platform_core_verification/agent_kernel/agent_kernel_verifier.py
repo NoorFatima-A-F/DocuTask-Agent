@@ -4,7 +4,7 @@ Verifies Agent Goal Lifecycle, Memory/Context Window Budget, Infinite Loop Detec
 """
 
 import time
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from ..domain.models import (
     AssertionResult,
     SectionId,

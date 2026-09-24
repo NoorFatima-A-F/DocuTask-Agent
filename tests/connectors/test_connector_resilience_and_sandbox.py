@@ -6,7 +6,6 @@ import time
 import pytest
 from app.connectors.core.exceptions import (
     CircuitBreakerOpenError,
-    PolicyViolationError,
     RateLimitExceededError,
     SandboxViolationError,
 )

@@ -1,7 +1,7 @@
 """
 Reference Metric Evaluator Plugin: Statistical Composite Metric Calculator.
 """
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import MetricEvaluatorPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
     PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,

@@ -1,7 +1,7 @@
 """Part T: Large End-to-End Enterprise Workflows."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict
 from ..domain.interfaces import IEnterpriseWorkflowsVerifier
 from ..domain.models import (
     CheckResult,

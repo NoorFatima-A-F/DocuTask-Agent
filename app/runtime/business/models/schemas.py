@@ -4,7 +4,7 @@ Pydantic Schemas & Data Models.
 """
 
 from enum import Enum
-from typing import Dict, List, Optional, Any, Union
+from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 

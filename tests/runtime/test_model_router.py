@@ -2,7 +2,6 @@
 Unit & Optimization Tests for Model Router (QDIOP / SDIOP).
 """
 
-import pytest
 from app.runtime.routing import (
     ScientificModelRouter,
     RoutingOptimizer,

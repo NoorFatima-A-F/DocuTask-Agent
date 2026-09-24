@@ -2,7 +2,7 @@
 Phase 3L.10: Backup Security & Immutability Verifier.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from ..domain.interfaces import IBackupSecurityVerifier
 from ..domain.models import (

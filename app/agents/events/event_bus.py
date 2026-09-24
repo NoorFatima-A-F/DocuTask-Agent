@@ -16,7 +16,7 @@ from typing import Any, Callable, Coroutine, Dict, List, Optional, Set, Type, Un
 
 from app.agents.events.dead_letter_queue import DeadLetterQueue
 from app.agents.events.event_store import EventStore
-from app.agents.events.event_types import AgentEvent, EventPriority
+from app.agents.events.event_types import AgentEvent
 from app.agents.interfaces.event_bus import AgentEventBus
 
 logger = logging.getLogger(__name__)

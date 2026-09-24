@@ -3,7 +3,7 @@ Domain models for Part 3D: Enterprise Deployment & Environment Verification Fram
 """
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from datetime import datetime, timezone
 
 

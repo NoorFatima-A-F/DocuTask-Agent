@@ -3,8 +3,7 @@ Section 2.1: Organizational Hierarchy & Graph Integrity Verification
 Constructs 1,000-node organization tree, verifies acyclicity, cycle detection, and traversal latency.
 """
 import time
-from typing import Dict, List, Set, Optional, Any
-from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType
+from typing import Dict, List, Any
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
 
 class OrganizationGraphVerifier:

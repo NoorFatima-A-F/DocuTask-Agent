@@ -13,9 +13,8 @@ Evaluates the causal correctness and mathematical faithfulness of model explanat
 
 from __future__ import annotations
 
-import math
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from dataclasses import dataclass
+from typing import Callable, List, Tuple
 
 
 @dataclass

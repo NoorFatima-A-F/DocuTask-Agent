@@ -4,8 +4,8 @@ Measures accuracy, latency percentiles (P50, P90, P95, P99), token accounting,
 cost per document, and provider reliability metrics.
 """
 
-from typing import Any, Dict, List
-from pydantic import BaseModel, Field
+from typing import List
+from pydantic import BaseModel
 from app.ai.providers.gemini import GeminiProvider
 from app.core.logging import logger
 

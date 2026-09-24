@@ -2,8 +2,6 @@
 Phase 3O: Comprehensive Test Suite for Enterprise Infrastructure Quality Scoring & Certification Framework.
 """
 
-import json
-import os
 from pathlib import Path
 import pytest
 from fastapi import FastAPI
@@ -11,18 +9,11 @@ from fastapi.testclient import TestClient
 
 from app.platform_verification.enterprise_infrastructure_certification.domain.models import (
     CategoryQualityScore,
-    CertificationDecision,
     CertificationLevel,
-    MaturityAssessment,
     MaturityLevel,
     NormalizedEvidenceItem,
-    QualityRegressionReport,
     QualityScorecard,
-    RawEvidenceBundle,
-    RiskAssessmentReport,
-    RiskFinding,
     RiskLevel,
-    VerificationManifest,
     VerificationStatus,
 )
 from app.platform_verification.enterprise_infrastructure_certification.core.evidence_collector import (
@@ -45,12 +36,6 @@ from app.platform_verification.enterprise_infrastructure_certification.certifica
 )
 from app.platform_verification.enterprise_infrastructure_certification.regression.quality_regression_detector import (
     QualityRegressionDetector,
-)
-from app.platform_verification.enterprise_infrastructure_certification.reports.readiness_markdown_generator import (
-    ReadinessMarkdownGenerator,
-)
-from app.platform_verification.enterprise_infrastructure_certification.exporter.infrastructure_certification_exporter import (
-    InfrastructureCertificationExporter,
 )
 from app.platform_verification.enterprise_infrastructure_certification.runtime.infrastructure_certification_runtime import (
     InfrastructureCertificationRuntime,
@@ -241,7 +226,7 @@ class TestEnterpriseInfrastructureCertification:
     # ──────────────────────────────────────────────────────────────────────────
 
     def test_regression_detector_clean(self):
-        scorer = InfrastructureQualityScorer()
+        InfrastructureQualityScorer()
         scorecard = QualityScorecard(
             overall_score=100.0,
             categories={

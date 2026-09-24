@@ -1,7 +1,7 @@
 """
 Configuration Validation Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
-from typing import Dict, Any, List
+from typing import List
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
     ConfigurationValidationReport,

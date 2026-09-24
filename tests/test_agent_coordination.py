@@ -4,114 +4,62 @@ Targeting >=95% meaningful coverage across agent lifecycle, capability matching,
 delegation, team formation, protocols, consensus, swarms, work stealing, and adapters.
 """
 
-from datetime import datetime, timezone
 import pytest
-from uuid import UUID, uuid4
+from uuid import uuid4
 
 from app.agents.coordination.agent import Agent
 from app.agents.coordination.agent_builder import AgentBuilder
-from app.agents.coordination.agent_catalog import AgentCatalog
 from app.agents.coordination.agent_directory import AgentDirectory
 from app.agents.coordination.agent_factory import AgentFactory
-from app.agents.coordination.agent_identity import AgentIdentity
-from app.agents.coordination.agent_profile import AgentProfile
 from app.agents.coordination.agent_registry import AgentRegistry
-from app.agents.coordination.agent_selector import AgentMatcher, AgentSelector
+from app.agents.coordination.agent_selector import AgentSelector
 from app.agents.coordination.auction import AuctionEngine
-from app.agents.coordination.builders import DelegationRequestBuilder, TeamBuilder
-from app.agents.coordination.cache import CoordinationCache
-from app.agents.coordination.capability import AgentSkill, CapabilityProfile
+from app.agents.coordination.builders import DelegationRequestBuilder
 from app.agents.coordination.capability_graph import CapabilityGraph
 from app.agents.coordination.capability_matcher import (
     CapabilityMatcher,
-    CapabilityMatchResult,
     CapabilityRequirement,
 )
-from app.agents.coordination.capability_registry import CapabilityRegistry
-from app.agents.coordination.collaboration import CollaborationManager, CollaborationPattern
-from app.agents.coordination.collaboration_context import CollaborationContext
-from app.agents.coordination.collaboration_session import CollaborationSession
 from app.agents.coordination.communication import (
     AgentMessage,
     CommunicationPattern,
-    MessagePerformative,
-)
-from app.agents.coordination.conflict_resolution import (
-    ConflictRecord,
-    ConflictResolutionResult,
-    ConflictResolver,
-    ConflictType,
 )
 from app.agents.coordination.consensus import ConsensusEngine, ConsensusOutcome
-from app.agents.coordination.context import CoordinationContext, CoordinationRequest, CoordinationResult
+from app.agents.coordination.context import CoordinationRequest, CoordinationResult
 from app.agents.coordination.contract_net import ContractNetEngine
-from app.agents.coordination.coordinator import AgentCoordinator
-from app.agents.coordination.decision_adapter import CoordinationDecisionAdapter
 from app.agents.coordination.delegation import (
     DelegationMode,
-    DelegationRequest,
     DelegationResult,
     DelegationStatus,
-    DelegationTask,
 )
 from app.agents.coordination.delegation_executor import DelegationExecutor
 from app.agents.coordination.delegation_planner import DelegationPlanner
 from app.agents.coordination.delegation_policy import DelegationPolicy
-from app.agents.coordination.dispatcher import AgentTaskDispatcher
-from app.agents.coordination.distributed_state import DistributedStateStore, StateEntry
-from app.agents.coordination.engine import CoordinationEngine
-from app.agents.coordination.events import (
-    AgentRegisteredEvent,
-    DelegationCompletedEvent,
-    DelegationStartedEvent,
-    TeamCreatedEvent,
-)
+from app.agents.coordination.distributed_state import DistributedStateStore
 from app.agents.coordination.exceptions import (
-    AgentNotFoundError,
     CircularDelegationError,
     ConsensusNotReachedError,
     DuplicateAgentIdError,
     InconsistentSharedStateError,
-    InvalidCommunicationRouteError,
     MissingCapabilityError,
     OrphanedTeamError,
     StaleLeaseError,
 )
-from app.agents.coordination.execution_adapter import CoordinationExecutionAdapter
 from app.agents.coordination.factory import CoordinationFactory
 from app.agents.coordination.formation import TeamFormationEngine
-from app.agents.coordination.health_monitor import AgentHealthMonitor, AgentHealthStatus
-from app.agents.coordination.heartbeat import AgentHeartbeat
 from app.agents.coordination.leader_election import LeaderElectionEngine
-from app.agents.coordination.lease_manager import LeaseManager, TaskLease
+from app.agents.coordination.lease_manager import LeaseManager
 from app.agents.coordination.lifecycle import AgentLifecycleState, CoordinationLifecycleState
-from app.agents.coordination.load_balancer import AgentLoadBalancer, LoadBalancingStrategy
-from app.agents.coordination.manager import CoordinationManager
-from app.agents.coordination.memory_adapter import CoordinationMemoryAdapter
-from app.agents.coordination.message_bus import CoordinationMessageBus
 from app.agents.coordination.message_router import MessageRouter
-from app.agents.coordination.metadata import CoordinationIdentity, CoordinationStatistics
 from app.agents.coordination.metrics import CoordinationMetricsCollector
 from app.agents.coordination.negotiation import Bid, NegotiationSession
-from app.agents.coordination.orchestrator import CoordinationOrchestrator
-from app.agents.coordination.planner_adapter import CoordinationPlannerAdapter
-from app.agents.coordination.presence import PresenceManager, PresenceState
-from app.agents.coordination.recovery_adapter import CoordinationRecoveryAdapter
-from app.agents.coordination.reflection_adapter import CoordinationReflectionAdapter
-from app.agents.coordination.repository import InMemoryTeamRepository
-from app.agents.coordination.resource_sharing import ResourceSharingManager
-from app.agents.coordination.runtime import CoordinationRuntime
-from app.agents.coordination.scheduler import DistributedAgentScheduler, ScheduledTaskItem
 from app.agents.coordination.serialization import CoordinationSerializer
 from app.agents.coordination.shared_context import SharedContext
-from app.agents.coordination.shared_memory import MemoryReference, SharedMemoryBridge
-from app.agents.coordination.supervisor import SupervisorAgent
-from app.agents.coordination.swarm import SwarmEngine, SwarmExecutionPattern
-from app.agents.coordination.team import Team, TeamMember, TeamRole, TeamType
+from app.agents.coordination.swarm import SwarmEngine
+from app.agents.coordination.team import Team, TeamType
 from app.agents.coordination.telemetry import CoordinationTelemetry
-from app.agents.coordination.tool_adapter import CoordinationToolAdapter
 from app.agents.coordination.validators import CoordinationValidator
-from app.agents.coordination.voting import AgentVote, VotingEngine, VotingResult
+from app.agents.coordination.voting import AgentVote
 from app.agents.coordination.work_stealing import WorkStealingPool
 
 

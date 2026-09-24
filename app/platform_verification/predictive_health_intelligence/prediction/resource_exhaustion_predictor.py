@@ -5,7 +5,7 @@ Forecasts capacity exhaustion horizons:
 - Queue overflow capacity breach time
 - Storage exhaustion horizon
 """
-from typing import Dict, Any, List
+from typing import List
 from app.platform_verification.predictive_health_intelligence.domain.models import (
     ResourceExhaustionEstimate,
 )

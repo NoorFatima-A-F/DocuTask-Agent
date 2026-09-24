@@ -3,8 +3,8 @@ Workflow Edge Model.
 Defines directed dependencies and transition guards between workflow nodes.
 """
 
-from typing import Any, Callable, Dict, Optional
-from pydantic import BaseModel, Field
+from typing import Optional
+from pydantic import BaseModel
 
 
 class WorkflowEdge(BaseModel):

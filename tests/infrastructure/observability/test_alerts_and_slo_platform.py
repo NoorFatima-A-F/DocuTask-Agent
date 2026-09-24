@@ -2,14 +2,12 @@
 Tests for Alert Rule Evaluation, Routing, Throttling, and SLO Error Budgets.
 """
 
-import pytest
 
 from app.infrastructure.observability.alerts.models import (
     AlertInstance,
     AlertRule,
     AlertSeverity,
     AlertStatus,
-    RuleType,
 )
 from app.infrastructure.observability.alerts.rules import (
     AlertRuleEvaluator,
@@ -22,12 +20,10 @@ from app.infrastructure.observability.alerts.notifications import (
     AlertDispatcher,
 )
 from app.infrastructure.observability.slo.objectives import (
-    SLIIndicator,
     SLIType,
     SLOObjective,
 )
 from app.infrastructure.observability.slo.budgets import (
-    ErrorBudgetStatus,
     ErrorBudgetTracker,
 )
 

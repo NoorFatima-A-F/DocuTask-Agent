@@ -1,7 +1,6 @@
 """
 Test Suite: Phase 3I.11 Enterprise Observability Intelligence Platform Integration & Global Reliability Control
 """
-import os
 import json
 import pytest
 from fastapi.testclient import TestClient
@@ -9,7 +8,6 @@ from fastapi import FastAPI
 
 from app.platform_verification.enterprise_observability_platform.domain.models import (
     GlobalCertificationTier,
-    EnvironmentType,
     GlobalRiskLevel,
     GlobalTrend,
     ControlPlaneArchitectureReport,
@@ -41,9 +39,6 @@ from app.platform_verification.enterprise_observability_platform.verifiers impor
 )
 from app.platform_verification.enterprise_observability_platform.scoring import (
     GlobalOperationsScorer,
-)
-from app.platform_verification.enterprise_observability_platform.exporter import (
-    EnterpriseObservabilityExporter,
 )
 from app.platform_verification.enterprise_observability_platform.runtime import (
     EnterpriseObservabilityRuntime,

@@ -3,7 +3,6 @@ Phase 3I.2: Enterprise Logging Infrastructure Verification - Unit and Integratio
 """
 import os
 import json
-import pytest
 import hashlib
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
@@ -17,16 +16,6 @@ from app.platform_verification.logging_infrastructure.domain.models import (
     StructuredLoggingReport,
     CorrelationTraceHop,
     CorrelationReport,
-    AgentDecisionLogEntry,
-    ErrorDiagnosticLogEntry,
-    AgentLoggingReport,
-    MaskedFieldRule,
-    SecurityReport,
-    RetentionTierSpec,
-    PerformanceReport,
-    FailureScenarioLogVerification,
-    FailureTestReport,
-    LoggingPillarScore,
     CertificationReport,
 )
 from app.platform_verification.logging_infrastructure.verifiers.logging_architecture_verifier import LoggingArchitectureVerifier
@@ -275,7 +264,7 @@ def test_logging_quality_scorer():
 
 def test_logging_evidence_exporter(tmp_path):
     out_dir = str(tmp_path / "observability_verification" / "logging")
-    exporter = LoggingEvidenceExporter()
+    LoggingEvidenceExporter()
 
     runtime = LoggingVerificationRuntime()
     result = runtime.run_full_verification(export_dir=out_dir)

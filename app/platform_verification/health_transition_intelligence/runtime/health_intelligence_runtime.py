@@ -3,12 +3,10 @@ Master Health Intelligence Runtime Coordinator (Part 3H.3.3).
 Executes end-to-end health state transition, degradation trend analysis, flapping detection,
 cascading protection, automated recovery orchestration, alerting, and evidence generation.
 """
-from typing import Dict, Any, Optional
-import time
+from typing import Dict, Any
 
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
-    HealthIntelligenceScorecard,
 )
 from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import HealthStateMachine
 from app.platform_verification.health_transition_intelligence.signals.health_signal_collector import HealthSignalCollector

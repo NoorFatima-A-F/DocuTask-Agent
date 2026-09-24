@@ -5,7 +5,7 @@ Domain models and schemas for Phase V12 Enterprise AI Platform Verification Cert
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 
 
 class MaturityTier(str, Enum):

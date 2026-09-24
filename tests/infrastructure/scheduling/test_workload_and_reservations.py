@@ -11,8 +11,6 @@ from app.infrastructure.executions.workload import (
 from app.infrastructure.workers.models import (
     ResourceCapacity,
     Worker,
-    WorkerStatus,
-    WorkerType,
 )
 from app.infrastructure.workers.registry import WorkerRegistry
 from app.infrastructure.scheduling.reservations import (

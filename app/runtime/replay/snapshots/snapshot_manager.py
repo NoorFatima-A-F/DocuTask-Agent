@@ -4,7 +4,7 @@ Manages periodic mission state checkpoints for instant time travel and fast repl
 """
 
 from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 import hashlib
 import json
 

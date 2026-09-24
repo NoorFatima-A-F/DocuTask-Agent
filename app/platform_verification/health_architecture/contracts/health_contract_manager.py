@@ -2,7 +2,7 @@
 Universal Health Contract Manager (Part 3H.1B).
 Enforces and validates the strict contract separation between /live, /ready, and /health endpoints.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any
 from app.platform_verification.health_architecture.domain.models import (
     HealthContractReport,
 )

@@ -9,17 +9,17 @@ publication evolution, and multi-agent deliberation.
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 # Knowledge Graph (83C)
 from research_validation.knowledge_graph.knowledge_graph import (
-    ScientificKnowledgeGraph, KnowledgeGraphSnapshot
+    ScientificKnowledgeGraph
 )
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
 
 # Memory Engine (84C)
 from research_validation.memory.experiment_memory import ExperimentMemoryStore
-from research_validation.memory.failure_memory import FailureMemoryStore, FailureCategory
+from research_validation.memory.failure_memory import FailureMemoryStore
 from research_validation.memory.success_memory import SuccessMemoryStore
 from research_validation.memory.regression_memory import RegressionMemoryStore
 from research_validation.memory.episodic_memory import EpisodicMemoryStore
@@ -39,12 +39,12 @@ from research_validation.hypothesis.hypothesis_prioritizer import (
 
 # Planning (87C)
 from research_validation.planning.adaptive_planner import (
-    AdaptiveExperimentPlanner, PlannedExperimentDAG
+    AdaptiveExperimentPlanner
 )
 
 # Optimization (88C)
 from research_validation.optimization.bayesian_optimizer import (
-    BayesianResearchOptimizer, OptimizationResult
+    BayesianResearchOptimizer
 )
 
 # Regression (89C)
@@ -58,7 +58,7 @@ from research_validation.observatory.leaderboard_tracker import LivingLeaderboar
 
 # Decision (91C)
 from research_validation.decision.research_decision_engine import (
-    ResearchDecisionEngine, ResearchDecision, ResearchAction
+    ResearchDecisionEngine, ResearchDecision
 )
 
 # Publication (92C)
@@ -166,7 +166,7 @@ class ScientificIntelligenceEngine:
         )
 
         # Step 3: Audit benchmark observatory availability (Zero-Fabrication)
-        bench_records = self.benchmark_tracker.audit_benchmark_availability()
+        self.benchmark_tracker.audit_benchmark_availability()
 
         # Step 4: Autonomous Hypothesis Generation & Pareto Prioritization
         current_metrics = {"f1": 0.915, "latency_p99_ms": 32.0}

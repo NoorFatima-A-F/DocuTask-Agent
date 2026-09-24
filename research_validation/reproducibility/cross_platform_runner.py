@@ -11,7 +11,7 @@ exists, marks that platform target as NOT_EXECUTED.
 
 from __future__ import annotations
 import platform
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple

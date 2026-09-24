@@ -3,10 +3,9 @@ Supervisor Agent.
 Supervises agent teams, reviews delegated task outputs, and handles multi-agent escalation.
 """
 
-from typing import Any, Dict, List, Optional
 from uuid import UUID
 from app.agents.coordination.agent import Agent
-from app.agents.coordination.delegation import DelegationRequest, DelegationResult
+from app.agents.coordination.delegation import DelegationResult
 
 
 class SupervisorAgent:

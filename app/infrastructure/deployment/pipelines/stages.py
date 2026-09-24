@@ -1,7 +1,7 @@
 """CI/CD Pipeline Stages, Types, and Results."""
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime
 from enum import Enum
 from typing import Any, Callable, Dict, List, Optional
 

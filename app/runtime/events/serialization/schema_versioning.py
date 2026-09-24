@@ -16,7 +16,7 @@ class EventSchemaVersioning:
     @staticmethod
     def migrate_if_needed(event_dict: Dict[str, Any]) -> Dict[str, Any]:
         """Upgrades older event schema versions to the latest canonical format."""
-        version = event_dict.get("version", "1.0.0")
+        event_dict.get("version", "1.0.0")
         
         # If older schema without correlation_id
         if "correlation_id" not in event_dict:

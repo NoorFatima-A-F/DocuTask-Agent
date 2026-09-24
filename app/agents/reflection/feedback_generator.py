@@ -3,18 +3,16 @@ Feedback Generator.
 Synthesizes strongly typed feedback bundles for Planner, Execution, Memory, and Tool Registry.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import List
 from uuid import uuid4
-from pydantic import BaseModel, Field
-from app.agents.reflection.evaluation import EvaluationReport
+from pydantic import BaseModel
 from app.agents.reflection.execution_feedback import ExecutionCritiqueItem, ExecutionFeedback
 from app.agents.reflection.interfaces import IFeedbackGenerator
-from app.agents.reflection.learning_artifact import LearningArtifact
-from app.agents.reflection.memory_feedback import MemoryFeedback, MemoryUpdateRequest
+from app.agents.reflection.memory_feedback import MemoryFeedback
 from app.agents.reflection.planner_feedback import PlannerCritiqueItem, PlannerFeedback
 from app.agents.reflection.recommendation_engine import Recommendation, SubsystemTarget
 from app.agents.reflection.self_critique import SelfCritique
-from app.agents.reflection.tool_feedback import ToolFeedback, ToolPerformanceFeedback
+from app.agents.reflection.tool_feedback import ToolFeedback
 
 
 class SubsystemFeedbackBundle(BaseModel):

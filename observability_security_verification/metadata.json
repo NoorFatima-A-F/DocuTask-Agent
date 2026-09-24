@@ -3,7 +3,7 @@
   "phase": "3I.7",
   "framework_phase": "Phase 3I.7 \u2014 Observability Security, Privacy & Compliance Verification",
   "security_level": "enterprise",
-  "exported_at": "2026-09-19T07:05:20.273560+00:00",
+  "exported_at": "2026-09-24T21:55:23.753142+00:00",
   "target_directory": "observability_security_verification",
   "overall_certification_tier": "Enterprise Observability Secure",
   "overall_score_pct": 100.0,
@@ -22,8 +22,8 @@
     },
     "redaction_report.json": {
       "file_path": "observability_security_verification\\redaction_report.json",
-      "file_size_bytes": 1531,
-      "sha256_hash": "11ffd2361d70e2f156fa09a1222c3ae7e5aeadd0af21bc7559939ba6d18bb38f"
+      "file_size_bytes": 1529,
+      "sha256_hash": "44d198abcac31ce03ccc59fd9f5a8dcbcf8c7d6ed8f9651332b4118aa926e7f0"
     },
     "ai_privacy_report.json": {
       "file_path": "observability_security_verification\\ai_privacy_report.json",
@@ -57,8 +57,8 @@
     },
     "attack_simulation_report.json": {
       "file_path": "observability_security_verification\\attack_simulation_report.json",
-      "file_size_bytes": 2023,
-      "sha256_hash": "8dd310075269b93287cf644bba6629a8d3d4d5fb13913fc9e8dbab469be73e8c"
+      "file_size_bytes": 2033,
+      "sha256_hash": "0feec06686cab2d4a2c7ed7213879bcff89c715e388821742eba75bfea6f7abe"
     },
     "incident_response_report.json": {
       "file_path": "observability_security_verification\\incident_response_report.json",
@@ -73,7 +73,7 @@
     "certification_report.json": {
       "file_path": "observability_security_verification\\certification_report.json",
       "file_size_bytes": 1650,
-      "sha256_hash": "5a1fd75559cc8af3f47f8c6b601cd835579f2df93990f4fd4b3200545f11b0cd"
+      "sha256_hash": "b398c32d572d5d0da094649404d800dbeafb35b0f7369740495f50cac5af5124"
     }
   }
 }

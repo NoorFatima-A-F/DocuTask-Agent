@@ -1,20 +1,13 @@
 """FastAPI Request and Response Schemas for Human Oversight API."""
 
-from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
-from datetime import datetime
+from typing import Dict, Any, Optional
+from pydantic import BaseModel
 
 from ..core.context import OversightContext
-from ..core.decisions import DecisionOutcome, FeedbackAssessment, HumanDecision
-from ..approvals.models import ApprovalPolicyType, ApprovalStrategy, ApprovalChain
-from ..approvals.lifecycle import ApprovalLifecycleState
+from ..core.decisions import DecisionOutcome, FeedbackAssessment
 from ..approvals.policies import ApprovalPolicy
-from ..reviews.requests import ReviewRequest, ReviewPriority
+from ..reviews.requests import ReviewPriority
 from ..reviews.evidence import ReviewEvidencePackage
-from ..reviews.comments import ReviewComment
-from ..reviews.assignments import Reviewer
-from ..overrides.service import HumanOverrideRecord
-from ..analytics.metrics import OversightAnalyticsSummary
 
 
 class EvaluateContextRequest(BaseModel):

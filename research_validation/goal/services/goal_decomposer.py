@@ -5,7 +5,7 @@ Decomposes high-level Goals into structured hierarchical Mission Graphs:
 Objective -> Milestone -> Subgoal -> Task -> Action.
 """
 
-from typing import List, Tuple
+from typing import Tuple
 from research_validation.goal.models.goal import Goal
 from research_validation.goal.models.mission import (
     ObjectiveNode, MilestoneNode, SubgoalNode, TaskNode, ActionNode

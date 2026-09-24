@@ -3,10 +3,8 @@
 import pytest
 from app.infrastructure.deployment.control_plane import (
     DeploymentStatus,
-    DeploymentStrategyType,
     DeploymentRecord,
     DeploymentHistoryTracker,
-    DeploymentOrchestrator,
     DeploymentControlPlaneManager,
 )
 

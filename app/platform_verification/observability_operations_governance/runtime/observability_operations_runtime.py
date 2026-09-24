@@ -2,7 +2,7 @@
 Phase 3I.10: Observability Operations Governance Runtime Orchestrator
 Coordinates all 10 verifiers, executes certification scoring, and exports evidence manifests.
 """
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from app.platform_verification.observability_operations_governance.verifiers import (
     GovernanceArchitectureVerifier,
     PolicyManagementVerifier,
@@ -20,9 +20,6 @@ from app.platform_verification.observability_operations_governance.scoring impor
 )
 from app.platform_verification.observability_operations_governance.exporter import (
     ObservabilityGovernanceEvidenceExporter,
-)
-from app.platform_verification.observability_operations_governance.domain.models import (
-    EnterpriseOperationsCertificationReport,
 )
 
 

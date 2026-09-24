@@ -4,11 +4,9 @@ Persists security test execution artifacts in docs/audits/security-evidence/
 and generates docs/audits/ai_security_validation_report.md.
 """
 
-import json
 from pathlib import Path
 from typing import List
 from app.core.logging import logger
-from app.validation.evidence import EvidenceLogger
 from app.validation.security.attack_cases import AttackResult
 from app.validation.security.calibration import CalibrationMetrics
 from app.validation.security.hallucination import HallucinationMetrics
@@ -41,8 +39,8 @@ class SecurityReportGenerator:
         # 2. Build Markdown Security Report
         total_attacks = len(attack_results)
         passed_attacks = sum(1 for r in attack_results if r.passed)
-        failed_attacks = total_attacks - passed_attacks
-        blocked_rate = (passed_attacks / total_attacks * 100.0) if total_attacks > 0 else 100.0
+        total_attacks - passed_attacks
+        (passed_attacks / total_attacks * 100.0) if total_attacks > 0 else 100.0
 
         md_content = f"""# Enterprise AI Security, Reliability & Model Behavior Certification Report
 

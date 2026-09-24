@@ -4,7 +4,7 @@ Tracks and limits token consumption, active workflows, and agent concurrency per
 """
 
 from typing import Dict
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.agents.runtime.exceptions import TenantIsolationViolationError
 
 

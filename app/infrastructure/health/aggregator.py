@@ -9,10 +9,10 @@ from __future__ import annotations
 
 import logging
 from typing import Dict, List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.infrastructure.health.evaluator import HealthEvaluator, HealthScore
-from app.infrastructure.health.heartbeat import HeartbeatAggregator, HeartbeatStatus
+from app.infrastructure.health.heartbeat import HeartbeatAggregator
 from app.infrastructure.health.probes import ProbeRegistry, ProbeStatus
 
 logger = logging.getLogger("infrastructure.health.aggregator")

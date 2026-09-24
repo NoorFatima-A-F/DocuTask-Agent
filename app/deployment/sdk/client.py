@@ -5,14 +5,13 @@ from ..artifacts.registry import ArtifactRegistry
 from ..core.controller import DeploymentController
 from ..core.deployment import Deployment, DeploymentStrategyType
 from ..core.release import Release
-from ..environments.promotion import PromotionManager, PromotionRecord
+from ..environments.promotion import PromotionManager
 from ..flags.evaluation import FlagEvaluationContext
-from ..flags.manager import FeatureFlag, FeatureFlagManager
+from ..flags.manager import FeatureFlagManager
 from ..migrations.database import MigrationManager
 from ..migrations.schema import SchemaMigration
-from ..pipelines.engine import PipelineEngine, PipelineRun
 from ..rollback.manager import RollbackManager, RollbackRecord
-from .plugins import DeploymentPlugin, PluginManager
+from .plugins import PluginManager
 
 
 class InfrastructureSDK:
