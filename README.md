@@ -1,214 +1,275 @@
+<div align="center">
+
 # DocuTask Agent
 
-**AI-Powered Enterprise Document Intelligence & Autonomous Extraction Platform**
+**Enterprise-Grade Autonomous AI Document Processing Pipeline & Extraction Engine**
 
-[![CI Quality Gate](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/ci.yml)
-[![CodeQL Security](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/codeql.yml/badge.svg)](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/codeql.yml)
-[![Security Scan](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/security.yml/badge.svg)](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/security.yml)
-[![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Pydantic v2](https://img.shields.io/badge/Pydantic-v2.9+-E92063.svg?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v1.0.0-informational.svg)](CHANGELOG.md)
+[![CI Pipeline](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions)
+[![CodeQL Security Analysis](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/codeql.yml/badge.svg)](https://github.com/NoorFatima-A-F/DocuTask-Agent/actions/workflows/codeql.yml)
+[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Pydantic v2](https://img.shields.io/badge/Pydantic-v2.0-e92063.svg?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker&logoColor=white)](https://www.docker.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+<p align="center">
+  <a href="#system-architecture">Architecture</a> •
+  <a href="#core-capabilities">Key Features</a> •
+  <a href="#security--codeql-hardening">Security Baseline</a> •
+  <a href="#quickstart">Quickstart</a> •
+  <a href="#api-reference">API Reference</a> •
+  <a href="#testing--verification">Verification</a>
+</p>
+
+</div>
 
 ---
 
 ## Overview
 
-**DocuTask Agent** is an asynchronous, high-throughput document intelligence platform designed to ingest, parse, validate, and extract structured data from unstructured and semi-structured documents (invoices, receipts, tax forms, financial statements, and contracts).
+**DocuTask Agent** is an event-driven, asynchronous document processing platform engineered to parse, extract, validate, and structure data from high-volume, unstructured document streams (invoices, legal contracts, regulatory filings, and forms). 
 
-The platform bridges multimodal computer vision, optical character recognition (OCR), and large language models (LLMs) with strict schema validation, field-level confidence scoring, and automated human-in-the-loop (HITL) review routing.
+By decoupling ingestion from multimodal extraction using an asynchronous task queue and enforcing strict Pydantic schemas, DocuTask Agent eliminates model hallucinations and delivers verified, deterministic JSON outputs ready for downstream enterprise data stores.
 
+---
+
+## Core Capabilities
+
+- **Asynchronous Task Architecture:** Non-blocking file ingestion powered by FastAPI, Celery, and Redis with integrated Dead-Letter Queues (DLQ) and idempotency guards.
+- **Multimodal Extraction Agents:** Structured entity extraction utilizing multi-stage LLM prompting, OCR routing (PyMuPDF / Tesseract), and context-aware schema anchoring.
+- **Strict Data Contracts:** Pydantic v2 validation layers with confidence thresholding, boundary validation, and automated field formatting.
+- **Human-in-the-Loop (HITL) Routing:** Automatic fallback and routing of low-confidence extractions (< 85% threshold) to dedicated human review queues.
+- **Enterprise-Grade Security:** Hardened filesystem operations with zero-trust path boundary validation, CRLF log-injection prevention, and cryptographic key hashing.
+- **Self-Healing & Observability:** Granular audit trails, Prometheus metric collection, automated failure recovery runbooks, and structured logging.
+
+---
+
+## System Architecture
+
+```mermaid
+flowchart TB
+    subgraph Ingestion ["Ingestion Layer"]
+        A[Client / Webhook / S3 Drop] --> B[FastAPI Gateway]
+        B --> C[Payload Sanitizer & Auth]
+    end
+
+    subgraph Broker ["Asynchronous Queue"]
+        C --> D[(Redis Broker / DLQ)]
+        D --> E[Worker Pool]
+    end
+
+    subgraph Processing ["Extraction & Verification Pipeline"]
+        E --> F[Document Preprocessing\nPDF Parser / OCR Routing]
+        F --> G[Multimodal LLM Agent\nStructured Prompting]
+        G --> H[Pydantic v2 Validation Layer]
+    end
+
+    subgraph Evaluation ["Decision & Routing Engine"]
+        H -->|Confidence >= 0.85| I[(PostgreSQL / MinIO Storage)]
+        H -->|Confidence < 0.85 / Schema Drift| J[HITL Review Queue]
+        I --> K[Enterprise Webhook / Event Bus]
+    end
+
+    subgraph Security ["Security Perimeter"]
+        direction LR
+        S1[Safe Path Canonicalizer] -.-> F
+        S2[CRLF Log Sanitizer] -.-> E
+        S3[PBKDF2 HMAC-SHA256 Auth] -.-> C
+    end
 ```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                              DOCUTASK AGENT ARCHITECTURE                               │
-├─────────────────────┬──────────────────────┬────────────────────┬──────────────────────┤
-│  1. INGESTION & OCR │  2. AI EXTRACTION    │  3. HITL REVIEW    │  4. DATA PERSISTENCE │
-│  - Multi-page PDF   │  - Multimodal Vision │  - Confidence Gate │  - PostgreSQL Async  │
-│  - Image Pre-proc   │  - Pydantic Schemas  │  - Low Conf (<85%) │  - ACID Transactions │
-│  - Layout & Tables  │  - Field Confidence  │  - Audit Trail     │  - Cryptographic Hash│
-└──────────┬──────────┴──────────┬───────────┴─────────┬──────────┴──────────┬───────────┘
-           │                     │                     │                     │
-           └─────────────────────┴──────────┬──────────┴─────────────────────┘
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                           SECURITY & ENTERPRISE GOVERNANCE                             │
-│  - Centralized Pydantic Settings (.env)        - Automated CodeQL & Bandit SAST        │
-│  - JWT Authentication & RBAC Access Control    - Zero Hardcoded Secret Policy          │
-│  - OpenTelemetry Tracing & Structured Logs     - Dependabot Continuous CVE Audits      │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-```
 
 ---
 
-## Problem & Solution
+## Security & CodeQL Hardening
 
-### The Challenge
-- **High Error Rates**: Legacy template OCR breaks when layouts, fonts, or invoice formats deviate.
-- **Hallucination Risk**: Naive LLM prompts produce ungrounded extractions without confidence bounds or bounding-box provenance.
-- **Operational Silos**: Lack of integrated exception queues results in silent failures on low-resolution or corrupted documents.
+DocuTask Agent enforces strict defense-in-depth security standards verified by GitHub CodeQL static analysis.
 
-### The DocuTask Solution
-- **Deterministic Schema Grounding**: All extractions map to strictly typed Pydantic models with field-level confidence scores (0.00 – 1.00).
-- **Confidence-Gated Human-in-the-Loop**: Extractions falling below the quality threshold ($< 0.85$) are automatically dispatched to a reviewer queue.
-- **Defense-in-Depth Security**: Parameterized database queries, path traversal prevention, JWT authentication, and zero hardcoded credentials.
+* **0 Active CodeQL Vulnerabilities:** Verified clean against `py/path-injection`, `py/log-injection`, `py/weak-sensitive-data-hashing`, and related CWE rules.
+* **Path Traversal Mitigation (CWE-22, CWE-73):** All filesystem writes and dynamic output paths are strictly validated through `resolve_safe_path()` using `os.path.commonpath` boundary verification.
+* **Log Injection Defense (CWE-117):** Dynamic logger parameters are passed through `sanitize_log_input()` to strip control sequences, carriage returns (`\r`), and newlines (`\n`).
+* **Cryptographic Hardening (CWE-327):** Secure credential hashing using PBKDF2-HMAC-SHA256 with 100,000 rounds.
 
----
-
-## Core Features
-
-- **Multimodal Document Parsing**: Ingests PDFs, PNGs, and TIFF scans with layout preservation, OCR text fallback, and table structure recognition.
-- **Multi-Model LLM Extraction**: Native support for Google Gemini 1.5/2.0 Flash/Pro with extensible adapters for Anthropic Claude and OpenAI.
-- **Field Confidence Calibration**: Evaluates extraction accuracy across line items, totals, dates, and entity identifiers.
-- **Human-in-the-Loop (HITL) Workflow**: Real-time review queue capturing manual corrections with full audit lineage.
-- **Asynchronous Task Architecture**: Built on FastAPI, SQLAlchemy asyncpg, and Redis task dispatching for horizontal scalability.
-- **Comprehensive Verification Suite**: 300+ automated unit, integration, and security tests.
+Full audit documentation is available in [`docs/security/codeql-dashboard-verification.md`](docs/security/codeql-dashboard-verification.md).
 
 ---
 
-## Technology Stack
+## Tech Stack
 
-| Layer | Technology | Rationale |
-| :--- | :--- | :--- |
-| **API Framework** | **FastAPI 0.115+** | High-performance asynchronous REST API with automatic OpenAPI documentation. |
-| **Data Validation** | **Pydantic v2.9+ / Settings** | Strict type enforcement, JSON schema generation, and centralized `.env` configuration. |
-| **AI & Multimodal** | **Google GenAI SDK / Gemini** | High-accuracy document layout understanding and native multimodal token processing. |
-| **OCR & Imaging** | **PDFPlumber / Pillow / Tesseract** | Fast local text and table extraction with image binarization and pre-processing. |
-| **Database & ORM** | **SQLAlchemy 2.0 (Async) / Alembic** | Non-blocking database transactions with asyncpg (PostgreSQL) and aiosqlite. |
-| **Security & Auth** | **python-jose / Passlib / Cryptography** | Secure JWT authentication, password hashing with bcrypt, and Ed25519 digital signatures. |
-| **Quality & SAST** | **Pytest / Ruff / MyPy / Bandit** | Automated testing, linting, type validation, and AST security analysis. |
+| Domain | Technology |
+| --- | --- |
+| **Backend Framework** | Python 3.11+, FastAPI, Uvicorn, Starlette |
+| **Data Validation** | Pydantic v2, JSON Schema |
+| **Worker Queue & Broker** | Celery, Redis, RabbitMQ |
+| **Document Processing** | PyMuPDF (fitz), Tesseract OCR, Pillow |
+| **AI / Orchestration** | LangChain, LlamaIndex, Google Gemini API / OpenAI API |
+| **Database & Storage** | PostgreSQL, SQLAlchemy (AsyncIO), MinIO / Amazon S3 |
+| **Static Analysis & Testing** | CodeQL (`security-extended`), Pytest, Ruff |
+| **DevOps & Containers** | Docker, Docker Compose, GitHub Actions CI/CD |
 
 ---
 
-## Quickstart & Installation
+## Quickstart
 
-### 1. Prerequisites
-- Python 3.11 or 3.12
-- Git
-- Tesseract OCR (optional, for local image OCR)
+### Prerequisites
 
-### 2. Clone and Setup Environment
+* Python 3.11+
+* Docker and Docker Compose
+* Tesseract OCR (`sudo apt install tesseract-ocr` or `brew install tesseract`)
+
+### 1. Clone & Set Up Virtual Environment
+
 ```bash
-# Clone the repository
 git clone https://github.com/NoorFatima-A-F/DocuTask-Agent.git
 cd DocuTask-Agent
 
-# Create and activate virtual environment
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+# On Windows:
+.venv\Scripts\activate
+# On Linux/macOS:
+source .venv/bin/activate
 
-# Install dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Environment Configuration
+### 2. Environment Configuration
+
+Copy the example environment file and configure your credentials:
+
 ```bash
-# Copy the example environment template
 cp .env.example .env
-
-# Edit .env and supply your local configuration and API keys:
-# GOOGLE_API_KEY=your_gemini_api_key_here
-# JWT_SECRET=$(openssl rand -hex 32)
 ```
 
-### 4. Start the Application
-```bash
-# Start FastAPI application with hot reload
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+Key environment variables:
+
+```env
+PROJECT_NAME="DocuTask-Agent"
+API_V1_STR="/api/v1"
+SECRET_KEY="your-super-secret-key-change-in-production"
+REDIS_URL="redis://localhost:6379/0"
+DATABASE_URL="postgresql+asyncpg://postgres:postgres@localhost:5432/docutask"
+LLM_PROVIDER="gemini"
+GEMINI_API_KEY="your-api-key-here"
 ```
-Interactive API documentation will be available at: `http://localhost:8000/docs`
 
----
-
-## API Documentation
-
-| Method | Endpoint | Description | Auth Required |
-| :--- | :--- | :--- | :---: |
-| `POST` | `/api/v1/auth/login` | Authenticate user and receive JWT bearer token | No |
-| `POST` | `/api/v1/documents/upload` | Upload PDF or image document for asynchronous processing | Yes |
-| `GET` | `/api/v1/documents/{id}/status` | Check document ingestion and extraction pipeline state | Yes |
-| `GET` | `/api/v1/documents/{id}/results` | Retrieve validated structured JSON extraction and confidence scores | Yes |
-| `POST` | `/api/v1/documents/{id}/review` | Submit human-in-the-loop correction for low-confidence fields | Yes |
-| `GET` | `/health` | Liveness and readiness health check probe | No |
-
----
-
-## Testing & Quality Assurance
-
-DocuTask Agent maintains a comprehensive automated testing suite:
+### 3. Launch via Docker Compose
 
 ```bash
-# Run all unit, integration, and platform verification tests
-pytest tests/ -v
+docker compose up -d --build
+```
 
-# Run tests with code coverage report
-pytest tests/ --cov=app --cov-report=term-missing
+The API will be available at `http://localhost:8000`. Access interactive Swagger documentation at `http://localhost:8000/docs`.
 
-# Run code style linting
-ruff check .
+---
 
-# Run static type checking
-mypy app/ --ignore-missing-imports
+## API Reference
 
-# Run AST security vulnerability analysis
-bandit -r app/ -ll -q
+### Ingest Document for Autonomous Extraction
+
+```http
+POST /api/v1/documents/process
+Content-Type: multipart/form-data
+```
+
+**Request Parameters:**
+
+* `file`: Raw binary (PDF, PNG, TIFF)
+* `document_type`: `invoice` | `contract` | `identity` | `generic`
+* `priority`: `low` | `standard` | `high`
+
+**Sample cURL:**
+
+```bash
+curl -X POST "http://localhost:8000/api/v1/documents/process" \
+     -H "Authorization: Bearer <API_TOKEN>" \
+     -F "file=@invoice_2026_09.pdf" \
+     -F "document_type=invoice"
+```
+
+**Structured JSON Response:**
+
+```json
+{
+  "task_id": "9d8e7c6b-5a4f-4e3d-2c1b-0a9b8c7d6e5f",
+  "status": "completed",
+  "confidence_score": 0.962,
+  "execution_time_ms": 782,
+  "extracted_data": {
+    "invoice_number": "INV-2026-9041",
+    "vendor": {
+      "name": "Acme Industrial Logistics",
+      "tax_id": "US-84920194"
+    },
+    "totals": {
+      "subtotal": 12450.00,
+      "tax": 1027.13,
+      "total_amount": 13477.13,
+      "currency": "USD"
+    },
+    "line_items": [
+      {
+        "description": "Enterprise Automated OCR Nodes (Tier 1)",
+        "quantity": 3,
+        "unit_price": 4150.00,
+        "amount": 12450.00
+      }
+    ]
+  },
+  "review_required": false
+}
 ```
 
 ---
 
-## Security & Governance
+## Testing & Verification
 
-DocuTask Agent enforces defense-in-depth architectural security with dedicated verification fixtures:
+The repository contains an exhaustive test suite covering security controls, API contracts, and platform resilience:
 
-- **Centralized Filesystem Containment**: Strict path traversal and directory escape prevention using `resolve_safe_path` and `validate_safe_filename_segment` (CWE-22 mitigation).
-- **Cryptographic Standards**: Bcrypt password hashing (with PBKDF2-HMAC-SHA256 fallback), SHA-256 token hashing for database persistence, and timing-attack resistant comparisons via `hmac.compare_digest`.
-- **Log Injection Protection**: Automated CRLF and ASCII control-character stripping on external inputs via `sanitize_log_input` (CWE-117 mitigation).
-- **SSRF & URL Domain Validation**: Strict URL scheme and hostname parsing with prefix-collision attack defense (`validate_safe_url`).
-- **Zero Hardcoded Secrets**: All credentials and tokens are managed via environment variables and typed Pydantic Settings.
-- **Continuous SAST & Scanning**: Integrated CodeQL, Bandit, and pytest security test suite (`tests/security/`).
-- **Vulnerability Reporting**: Coordinated disclosure process documented in [SECURITY.md](SECURITY.md).
+```bash
+# Run security regressions (path traversal, symlinks, log sanitization)
+pytest tests/security/ -v
+
+# Run core pipeline & schema validation tests
+pytest tests/core/ -v
+
+# Run platform verification & integration tests
+pytest tests/platform_verification/ -q
+
+# Run full suite
+pytest
+```
 
 ---
 
 ## Project Structure
 
-```
+```text
 DocuTask-Agent/
-├── .github/
-│   ├── workflows/           # CI, CodeQL, Security, and Verification pipelines
-│   ├── ISSUE_TEMPLATE/      # Bug, Feature, and Security issue templates
-│   ├── dependabot.yml       # Automated dependency update configuration
-│   └── CODEOWNERS           # Code ownership and reviewer routing
 ├── app/
-│   ├── core/                # Centralized Pydantic configuration and security
-│   ├── agents/              # Multimodal extraction and processing agents
-│   └── platform_delivery/   # Platform services, storage, and database layer
-├── enterprise_audit_engine/ # Verification baseline and reality testing platform
-├── docs/
-│   └── security/            # Security incident reports and dependency audit documentation
-├── tests/                   # Automated pytest unit and integration test suite
-├── .env.example             # Clean environment configuration template
-├── pyproject.toml           # Project metadata, dependencies, and tool settings
-├── requirements.txt         # Pinned application dependencies
-├── CHANGELOG.md             # Project release history and change tracking
-├── CONTRIBUTING.md          # Open-source contribution guidelines
-├── LICENSE                  # MIT License
-├── README.md                # Project documentation
-└── SECURITY.md              # Enterprise security and disclosure policy
+│   ├── ai/                 # Multimodal extraction logic & prompt templates
+│   ├── core/               # Security primitives, config, and database engines
+│   ├── connectors/         # Storage and external platform adapters
+│   ├── evaluation/         # Confidence thresholding & schema verification
+│   ├── infrastructure/     # Failover planners, orchestrators, and incident monitors
+│   ├── jobs/               # Celery task definitions, broker configs, and DLQ
+│   ├── middleware/         # Request context, rate limiting, and exception handlers
+│   ├── ocr/                # Layout parsers and OCR pipeline wrappers
+│   └── services/           # Extraction, document, and auth service controllers
+├── docs/                   # Architecture diagrams and security verification reports
+├── migrations/             # Alembic database migrations
+├── tests/
+│   ├── connectors/         # Webhook and external storage mock suites
+│   ├── core/               # Token hashing and configuration tests
+│   ├── platform_verification/ # End-to-end integration and resilience tests
+│   └── security/           # Path traversal, log injection, and boundary tests
+├── docker-compose.yml
+├── Dockerfile
+├── requirements.txt
+└── README.md
 ```
-
----
-
-## Roadmap
-
-- [x] **v1.0.0**: Core multimodal ingestion, Pydantic structured extraction, JWT authentication, and CI/CD security hardening.
-- [ ] **v1.1.0**: Celery / Redis asynchronous worker pool for high-throughput batch ingestion (10,000+ documents).
-- [ ] **v1.2.0**: OpenTelemetry distributed tracing and Grafana / Prometheus latency dashboards.
-- [ ] **v1.3.0**: RAG integration with pgvector for cross-document query and financial contract comparison.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
