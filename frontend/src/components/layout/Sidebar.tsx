@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  UploadCloud,
-  Workflow,
-  CheckSquare,
-  BarChart3,
-  Layers,
-  Sparkles,
-} from 'lucide-react';
+import { UploadCloud, Workflow, CheckSquare, BarChart3 } from 'lucide-react';
 
 export type ActiveTab = 'ingestion' | 'pipeline' | 'reviewer' | 'observability';
 
@@ -26,52 +19,40 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const navItems = [
     {
       id: 'ingestion' as ActiveTab,
-      label: 'Ingestion Hub',
-      path: '/upload',
+      label: 'Ingestion Studio',
       icon: UploadCloud,
-      badge: 'Defensive',
-      description: 'Magic byte sniff & 15MB guard',
+      badge: '15MB',
     },
     {
       id: 'pipeline' as ActiveTab,
       label: 'Pipeline Monitor',
-      path: activeJobId ? `/jobs/${activeJobId.substring(0, 8)}` : '/jobs',
       icon: Workflow,
       badge: activeJobId ? 'Active' : undefined,
-      badgeColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
-      description: 'Asynchronous 5-milestone state machine',
     },
     {
       id: 'reviewer' as ActiveTab,
       label: 'HITL Reviewer',
-      path: activeDocId ? `/documents/${activeDocId.substring(0, 8)}/review` : '/reviewer',
       icon: CheckSquare,
-      badge: 'Two-Pane',
-      badgeColor: 'text-amber-400 bg-amber-500/10 border-amber-500/30',
-      description: 'Confidence-gated schema & bounding box',
+      badge: 'Split View',
     },
     {
       id: 'observability' as ActiveTab,
-      label: 'Observability & DLQ',
-      path: '/dashboard',
+      label: 'DLQ & Telemetry',
       icon: BarChart3,
-      badge: 'Real-Time',
-      badgeColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
-      description: 'KPIs, dead letter queue & replay',
+      badge: 'Live',
     },
   ];
 
   return (
-    <aside className="w-64 border-r border-slate-800/80 bg-slate-950/60 p-3 flex flex-col justify-between shrink-0">
-      <div className="space-y-4">
-        <div className="px-3 pt-2">
-          <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold flex items-center gap-1.5">
-            <Layers className="w-3 h-3 text-indigo-400" />
-            Core Workspaces
+    <aside className="w-56 border-r border-[#27272a] bg-[#121215] p-2.5 flex flex-col justify-between shrink-0 select-none">
+      <div className="space-y-3">
+        <div className="px-2 pt-1">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 font-semibold">
+            Workspaces
           </span>
         </div>
 
-        <nav className="space-y-1">
+        <nav className="space-y-0.5">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -80,63 +61,44 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full text-left p-2.5 rounded-lg border transition-all flex flex-col gap-1 ${
+                className={`w-full text-left px-2.5 py-2 rounded border text-xs font-medium transition-colors flex items-center justify-between ${
                   isActive
-                    ? 'bg-slate-900 border-indigo-500/40 shadow-sm shadow-indigo-500/10'
-                    : 'bg-transparent border-transparent hover:bg-slate-900/50 hover:border-slate-800 text-slate-400'
+                    ? 'bg-zinc-800 border-zinc-700 text-zinc-100 shadow-sm'
+                    : 'bg-transparent border-transparent hover:bg-zinc-800/50 hover:text-zinc-200 text-zinc-400'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <Icon
-                      className={`w-4 h-4 ${
-                        isActive ? 'text-indigo-400' : 'text-slate-400'
-                      }`}
-                    />
-                    <span
-                      className={`text-xs font-semibold ${
-                        isActive ? 'text-slate-100' : 'text-slate-300'
-                      }`}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-
-                  {item.badge && (
-                    <span
-                      className={`text-[10px] font-mono px-1.5 py-0.2 rounded border ${
-                        item.badgeColor ||
-                        'text-indigo-400 bg-indigo-500/10 border-indigo-500/30'
-                      }`}
-                    >
-                      {item.badge}
-                    </span>
-                  )}
+                <div className="flex items-center gap-2.5">
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-zinc-100' : 'text-zinc-400'}`} />
+                  <span>{item.label}</span>
                 </div>
 
-                <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pl-6.5">
-                  <span className="truncate">{item.description}</span>
-                </div>
+                {item.badge && (
+                  <span
+                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded border ${
+                      isActive
+                        ? 'bg-zinc-900 text-zinc-300 border-zinc-700'
+                        : 'bg-zinc-900/50 text-zinc-500 border-zinc-800'
+                    }`}
+                  >
+                    {item.badge}
+                  </span>
+                )}
               </button>
             );
           })}
         </nav>
       </div>
 
-      {/* System Status Footnote */}
-      <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-900/40 space-y-2">
-        <div className="flex items-center justify-between text-[11px]">
-          <span className="text-slate-400 font-mono flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-amber-400" />
-            Distillation
-          </span>
-          <span className="font-mono text-emerald-400 text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">
-            Active
-          </span>
+      {/* Operator Metadata Footnote */}
+      <div className="p-2.5 rounded border border-zinc-800/80 bg-zinc-900/30 text-[11px] font-mono text-zinc-500 space-y-1">
+        <div className="flex items-center justify-between text-zinc-400">
+          <span>Target Engine</span>
+          <span className="text-zinc-200">Gemini 1.5</span>
         </div>
-        <p className="text-[10px] text-slate-400 leading-relaxed">
-          Human corrections are dispatched directly to <code className="text-indigo-300">/api/v1/runtime/feedback</code> for continuous policy distillation.
-        </p>
+        <div className="flex items-center justify-between">
+          <span>Schema Contract</span>
+          <span className="text-zinc-300">Pydantic v2</span>
+        </div>
       </div>
     </aside>
   );

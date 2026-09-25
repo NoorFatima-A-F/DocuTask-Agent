@@ -21,7 +21,7 @@ export const AppShell: React.FC<AppShellProps> = ({
   children,
 }) => {
   return (
-    <div className="min-h-screen bg-[#090d16] text-slate-100 flex flex-col font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
+    <div className="min-h-screen bg-[#09090b] text-zinc-100 flex flex-col font-sans antialiased selection:bg-zinc-800 selection:text-zinc-100">
       <Navbar user={user} activeTab={activeTab} />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar
@@ -30,7 +30,7 @@ export const AppShell: React.FC<AppShellProps> = ({
           activeJobId={activeJobId}
           activeDocId={activeDocId}
         />
-        <main className="flex-1 overflow-y-auto bg-slate-950/40 p-6 flex flex-col">
+        <main className="flex-1 overflow-y-auto bg-[#09090b] p-5 flex flex-col">
           {children}
         </main>
       </div>

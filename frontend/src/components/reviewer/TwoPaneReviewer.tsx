@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  CheckCircle2,
-  Sparkles,
-  Layers,
-  Save,
-  Loader2,
-  Table,
-} from 'lucide-react';
+import { CheckCircle2, Save, XOctagon, Loader2, Table } from 'lucide-react';
 import { DocumentCanvas } from './DocumentCanvas';
 import { EditableField } from './EditableField';
 import { ExtractedField, InvoiceLineItem } from '../../types/extraction';
@@ -15,6 +8,7 @@ import { jobsApi } from '../../api/jobs';
 interface TwoPaneReviewerProps {
   documentId?: string;
   onApproveSuccess?: () => void;
+  onRejectBatch?: () => void;
 }
 
 const INITIAL_FIELDS: ExtractedField<string | number>[] = [
@@ -37,7 +31,7 @@ const INITIAL_FIELDS: ExtractedField<string | number>[] = [
     key: 'vendor_tax_id',
     label: 'Vendor Tax ID',
     value: 'US-948291048',
-    confidence: 0.74, // Amber threshold -> auto-focus for review
+    confidence: 0.74, // Amber (<0.90)
     validationRegex: '^[A-Z]{2}-[0-9]{9}$',
     boundingBox: { page: 1, x_min: 0.05, y_min: 0.12, x_max: 0.35, y_max: 0.16 },
   },
@@ -67,7 +61,7 @@ const INITIAL_FIELDS: ExtractedField<string | number>[] = [
     key: 'tax_amount',
     label: 'Tax Amount (8.25%)',
     value: 870.38,
-    confidence: 0.68, // Red threshold (<70%) -> requires explicit confirmation
+    confidence: 0.68, // Red (<0.70)
     boundingBox: { page: 1, x_min: 0.65, y_min: 0.82, x_max: 0.95, y_max: 0.86 },
   },
   {
@@ -106,12 +100,13 @@ const INITIAL_LINE_ITEMS: InvoiceLineItem[] = [
 export const TwoPaneReviewer: React.FC<TwoPaneReviewerProps> = ({
   documentId = 'doc_e847c910a2',
   onApproveSuccess,
+  onRejectBatch,
 }) => {
   const [fields, setFields] = useState<ExtractedField<string | number>[]>(INITIAL_FIELDS);
-  const [lineItems, setLineItems] = useState<InvoiceLineItem[]>(INITIAL_LINE_ITEMS);
+  const [lineItems] = useState<InvoiceLineItem[]>(INITIAL_LINE_ITEMS);
   const [hoveredFieldKey, setHoveredFieldKey] = useState<string | null>(null);
-  const [isSubmittingFeedback, setIsSubmittingFeedback] = useState<boolean>(false);
-  const [approvalConfirmed, setApprovalConfirmed] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isApproved, setIsApproved] = useState<boolean>(false);
 
   const handleFieldValueChange = (key: string, newValue: string | number) => {
     setFields((prev) =>
@@ -123,12 +118,10 @@ export const TwoPaneReviewer: React.FC<TwoPaneReviewerProps> = ({
     );
   };
 
-  const handleSaveAndApprove = async () => {
-    setIsSubmittingFeedback(true);
+  const handleApproveAndPersist = async () => {
+    setIsSubmitting(true);
     try {
-      // Find modified fields and dispatch feedback to /api/v1/runtime/feedback
       const modifiedFields = fields.filter((f) => f.isModified);
-
       for (const field of modifiedFields) {
         await jobsApi.submitFeedback({
           document_id: documentId,
@@ -136,84 +129,50 @@ export const TwoPaneReviewer: React.FC<TwoPaneReviewerProps> = ({
           original_value: String(INITIAL_FIELDS.find((f) => f.key === field.key)?.value || ''),
           corrected_value: String(field.value),
           distillation_type: 'RULE',
-          operator_notes: `Operator verified and calibrated ${field.label} from confidence ${(field.confidence * 100).toFixed(0)}%`,
+          operator_notes: `Operator verified and calibrated ${field.label}`,
         });
       }
-
-      setApprovalConfirmed(true);
-      if (onApproveSuccess) {
-        onApproveSuccess();
-      }
+      setIsApproved(true);
+      if (onApproveSuccess) onApproveSuccess();
     } catch {
-      // Graceful fallback for local review confirmation
-      setApprovalConfirmed(true);
+      setIsApproved(true);
     } finally {
-      setIsSubmittingFeedback(false);
+      setIsSubmitting(false);
     }
   };
 
-  const lowConfidenceCount = fields.filter((f) => f.confidence < 0.90).length;
+  const lowConfidenceFields = fields.filter((f) => f.confidence < 0.90);
 
   return (
-    <div className="flex-1 flex flex-col gap-4">
-      {/* Top Review Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/40 p-4 rounded-xl border border-slate-800">
+    <div className="flex-1 flex flex-col gap-3">
+      {/* Top Header */}
+      <div className="flex items-center justify-between border-b border-[#27272a] pb-2.5">
         <div>
-          <h2 className="text-base font-bold text-slate-100 flex items-center gap-2">
-            <Layers className="w-5 h-5 text-indigo-400" />
-            Human-in-the-Loop Synchronized Reviewer
-          </h2>
-          <p className="text-xs text-slate-400 font-mono mt-0.5">
-            Document: <strong className="text-slate-200">{documentId}</strong> | Schema: <strong className="text-cyan-400">InvoiceTaxonomy.v2</strong>
-          </p>
+          <span className="text-xs font-semibold text-zinc-100 font-mono">
+            HITL Reviewer • {documentId}
+          </span>
+          <span className="text-[11px] font-mono text-zinc-500 ml-2">
+            Schema: <span className="text-zinc-300">InvoiceTaxonomy.v2</span>
+          </span>
         </div>
 
-        <div className="flex items-center gap-3">
-          {lowConfidenceCount > 0 ? (
-            <span className="text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
-              {lowConfidenceCount} Fields Require Attention
+        <div className="flex items-center gap-2">
+          {lowConfidenceFields.length > 0 ? (
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950/40 text-amber-400 border border-amber-800/50">
+              {lowConfidenceFields.length} fields require operator verification
             </span>
           ) : (
-            <span className="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              All Fields Verified
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-800/50">
+              All schema fields verified
             </span>
           )}
-
-          <button
-            onClick={handleSaveAndApprove}
-            disabled={isSubmittingFeedback || approvalConfirmed}
-            className={`px-4 py-2 rounded-lg font-mono text-xs font-semibold flex items-center gap-2 transition-all shadow-lg ${
-              approvalConfirmed
-                ? 'bg-emerald-600 text-white cursor-default'
-                : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-600/20'
-            }`}
-          >
-            {isSubmittingFeedback ? (
-              <>
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                <span>Distilling Feedback...</span>
-              </>
-            ) : approvalConfirmed ? (
-              <>
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Committed & Approved</span>
-              </>
-            ) : (
-              <>
-                <Save className="w-3.5 h-3.5" />
-                <span>Save & Approve</span>
-              </>
-            )}
-          </button>
         </div>
       </div>
 
-      {/* Synchronized Two-Pane Container */}
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[640px]">
-        {/* Left Pane: Document Canvas (7 cols) */}
-        <div className="lg:col-span-7 h-[640px] lg:h-auto">
+      {/* 50/50 Split View */}
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 min-h-[640px]">
+        {/* Left Pane (50% / 6 cols) */}
+        <div className="lg:col-span-6 h-[640px] lg:h-auto">
           <DocumentCanvas
             fields={fields}
             hoveredFieldKey={hoveredFieldKey}
@@ -222,62 +181,98 @@ export const TwoPaneReviewer: React.FC<TwoPaneReviewerProps> = ({
           />
         </div>
 
-        {/* Right Pane: Structured Schema Form (5 cols) */}
-        <div className="lg:col-span-5 flex flex-col gap-4 overflow-y-auto max-h-[720px] p-4 rounded-2xl border border-slate-800 bg-slate-950/60">
-          <div className="border-b border-slate-800 pb-2 flex items-center justify-between">
-            <span className="text-xs font-mono font-bold text-slate-200">
-              Extracted Key-Value Entity Schema
-            </span>
-            <span className="text-[10px] font-mono text-slate-400">
-              Confidence thresholds: &ge;90% (Green), 70-89% (Amber), &lt;70% (Red)
-            </span>
-          </div>
-
-          {/* Key-Value Fields */}
-          <div className="space-y-2.5">
-            {fields.map((field) => (
-              <EditableField
-                key={field.key}
-                field={field}
-                onValueChange={handleFieldValueChange}
-                isHovered={hoveredFieldKey === field.key}
-                onHover={(hovered) => setHoveredFieldKey(hovered ? field.key : null)}
-              />
-            ))}
-          </div>
-
-          {/* Line Items Sub-Table */}
-          <div className="mt-2 border-t border-slate-800 pt-3 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-semibold text-slate-300 flex items-center gap-1.5">
-                <Table className="w-3.5 h-3.5 text-indigo-400" />
-                Parsed Invoice Line Items
+        {/* Right Pane (50% / 6 cols) */}
+        <div className="lg:col-span-6 flex flex-col justify-between border border-[#27272a] bg-[#121215] rounded p-4 overflow-hidden">
+          {/* Scrollable Form */}
+          <div className="overflow-y-auto space-y-3 pr-1 max-h-[580px]">
+            <div className="border-b border-[#27272a] pb-2 flex items-center justify-between">
+              <span className="text-xs font-mono font-semibold text-zinc-200">
+                Extracted Schema Key-Values
               </span>
-              <span className="text-[10px] font-mono text-emerald-400">
-                {lineItems.length} Items Extracted
+              <span className="text-[10px] font-mono text-zinc-500">
+                Confidence: &gt;=90% (Checkmark) • &lt;90% (Review Req)
               </span>
             </div>
 
-            <div className="space-y-2">
-              {lineItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 text-xs font-mono space-y-1.5"
-                >
-                  <div className="flex justify-between text-slate-200">
-                    <span className="font-medium">{item.description.value}</span>
-                    <span className="text-emerald-400 font-bold">${item.total_price.value.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-[11px] text-slate-400">
-                    <span>Qty: {item.quantity.value}</span>
-                    <span>Unit: ${item.unit_price.value.toFixed(2)}</span>
-                    <span className="text-emerald-400/80">
-                      Conf: {(item.total_price.confidence * 100).toFixed(0)}%
-                    </span>
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {fields.map((field) => (
+                <div key={field.key} className={field.key === 'vendor_name' || field.key === 'total_amount' ? 'sm:col-span-2' : ''}>
+                  <EditableField
+                    field={field}
+                    onValueChange={handleFieldValueChange}
+                    isHovered={hoveredFieldKey === field.key}
+                    onHover={(h) => setHoveredFieldKey(h ? field.key : null)}
+                  />
                 </div>
               ))}
             </div>
+
+            {/* Line Items Table */}
+            <div className="border-t border-[#27272a] pt-3 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-semibold text-zinc-300 flex items-center gap-1.5">
+                  <Table className="w-3.5 h-3.5 text-zinc-400" />
+                  Line Items ({lineItems.length})
+                </span>
+              </div>
+
+              <div className="space-y-1.5">
+                {lineItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="p-2 rounded bg-zinc-950 border border-zinc-800 text-xs font-mono flex items-center justify-between"
+                  >
+                    <div className="flex flex-col truncate max-w-[240px]">
+                      <span className="text-zinc-200 truncate">{item.description.value}</span>
+                      <span className="text-[10px] text-zinc-500">
+                        Qty: {item.quantity.value} @ ${item.unit_price.value.toFixed(2)}
+                      </span>
+                    </div>
+                    <span className="text-zinc-100 font-semibold font-mono">
+                      ${item.total_price.value.toFixed(2)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Actions Bar */}
+          <div className="border-t border-[#27272a] pt-3 mt-3 flex items-center justify-between">
+            <button
+              onClick={onRejectBatch}
+              className="px-3 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-rose-400 hover:text-rose-300 font-mono text-xs flex items-center gap-1.5 transition-colors"
+            >
+              <XOctagon className="w-3.5 h-3.5" />
+              <span>Reject Batch</span>
+            </button>
+
+            <button
+              onClick={handleApproveAndPersist}
+              disabled={isSubmitting || isApproved}
+              className={`px-4 py-1.5 rounded font-mono text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                isApproved
+                  ? 'bg-emerald-600 text-white cursor-default'
+                  : 'bg-zinc-100 hover:bg-white text-zinc-950'
+              }`}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Persisting...</span>
+                </>
+              ) : isApproved ? (
+                <>
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>Approved &amp; Persisted</span>
+                </>
+              ) : (
+                <>
+                  <Save className="w-3.5 h-3.5" />
+                  <span>Approve &amp; Persist</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>

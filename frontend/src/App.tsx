@@ -8,7 +8,6 @@ import { TwoPaneReviewer } from './components/reviewer/TwoPaneReviewer';
 import { MetricsSummary } from './components/observability/MetricsSummary';
 import { useAuth } from './hooks/useAuth';
 
-// Initialize React Query client with resilient defaults
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -36,6 +35,10 @@ export const AppContent: React.FC = () => {
     setActiveTab('reviewer');
   };
 
+  const handleRejectBatch = () => {
+    setActiveTab('observability');
+  };
+
   return (
     <AppShell
       user={user}
@@ -45,7 +48,10 @@ export const AppContent: React.FC = () => {
       activeDocId={activeDocId}
     >
       {activeTab === 'ingestion' && (
-        <DragDropZone onJobCreated={handleJobCreated} />
+        <DragDropZone
+          onJobCreated={handleJobCreated}
+          onNavigateToReview={handleNavigateToReview}
+        />
       )}
 
       {activeTab === 'pipeline' && (
@@ -60,6 +66,7 @@ export const AppContent: React.FC = () => {
         <TwoPaneReviewer
           documentId={activeDocId || 'doc_e847c910a2'}
           onApproveSuccess={() => setActiveTab('observability')}
+          onRejectBatch={handleRejectBatch}
         />
       )}
 

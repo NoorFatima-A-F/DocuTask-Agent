@@ -6,7 +6,7 @@
   <title>DocuTask Agent — Enterprise Document Intelligence &amp; HITL Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -22,33 +22,35 @@
     }
   </script>
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
     code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
-<body class="bg-[#090d16] text-slate-100 antialiased min-h-screen selection:bg-indigo-500/30 selection:text-indigo-200">
+<body class="bg-[#09090b] text-zinc-100 antialiased min-h-screen selection:bg-zinc-800 selection:text-zinc-100">
   <div id="app-root" class="min-h-screen flex flex-col"></div>
 
   <script>
     (function() {
-      // --- State Store ---
+      // --- App State ---
       const state = {
         activeTab: 'ingestion', // 'ingestion' | 'pipeline' | 'reviewer' | 'observability'
-        activeJobId: 'job_demo_9841a0',
+        activeJobId: 'job_e847c91a',
         activeDocId: 'doc_e847c910a2',
         selectedFile: null,
+        schemaType: 'Invoice',
+        priority: 'HIGH',
         validationResult: null,
         isUploading: false,
         uploadProgress: 0,
         pipelineProgress: 100,
-        currentMilestoneIdx: 5,
         zoom: 100,
         rotation: 0,
         hoveredFieldKey: null,
         isApproving: false,
-        approvalConfirmed: false,
+        isApproved: false,
         isReplaying: false,
         replayedMessage: null,
+        selectedTrace: null,
         fields: [
           { key: 'invoice_number', label: 'Invoice Number', value: 'INV-2026-8894', confidence: 0.98, regex: '^INV-[0-9]{4}-[0-9]{4}$', box: { left: '65%', top: '5%', width: '30%', height: '7%' } },
           { key: 'vendor_name', label: 'Vendor Name', value: 'ACME CLOUD CORP', confidence: 0.96, box: { left: '5%', top: '3%', width: '45%', height: '9%' } },
@@ -59,6 +61,12 @@
           { key: 'tax_amount', label: 'Tax Amount (8.25%)', value: 870.38, confidence: 0.68, box: { left: '65%', top: '82%', width: '30%', height: '4%' } }, // Red (<0.70)
           { key: 'total_amount', label: 'Grand Total Amount', value: 11420.38, confidence: 0.99, box: { left: '65%', top: '86%', width: '30%', height: '6%' } },
         ],
+        queue: [
+          { taskId: 'task_e847c91a', documentId: 'doc_e847c910a2', filename: 'INV-2026-8894.pdf', schemaType: 'Invoice', priority: 'HIGH', confidence: 0.942, latencyMs: 640, status: 'REVIEW_REQ' },
+          { taskId: 'task_b921fa02', documentId: 'doc_b921fa0281', filename: 'Cloudflare_Subscription_Q3.pdf', schemaType: 'Invoice', priority: 'NORMAL', confidence: 0.985, latencyMs: 412, status: 'COMPLETED' },
+          { taskId: 'task_3821a99f', documentId: 'doc_3821a99fa4', filename: 'Uber_Business_Receipt_98.png', schemaType: 'Receipt', priority: 'LOW', confidence: 0.971, latencyMs: 380, status: 'COMPLETED' },
+          { taskId: 'task_1120aa44', documentId: 'doc_1120aa44bc', filename: 'Master_Services_Agmt_v4.pdf', schemaType: 'Contract', priority: 'HIGH', confidence: 0.912, latencyMs: 820, status: 'COMPLETED' },
+        ],
         dlqItems: [
           {
             id: 'dlq_88a91b',
@@ -66,27 +74,24 @@
             document_id: 'doc_corrupted_scan_8',
             error_classification: 'TIMEOUT_OCR_RASTER',
             error_message: 'PyMuPDF rasterization limit exceeded on 600DPI TIFF page 4',
+            stack_trace: 'Traceback (most recent call last):\n  File "app/jobs/worker.py", line 84, in execute_pipeline\n  File "app/services/ocr_service.py", line 42, in parse_layout\nRuntimeError: OCR parsing failed on corrupted raster stream',
             retry_count: 3,
             max_retries: 3
           }
         ]
       };
 
-      // --- SVG Icons Helper ---
+      // --- SVG Icons ---
       const ICONS = {
-        fileText: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>`,
-        activity: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>`,
-        shieldCheck: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`,
-        terminal: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`,
-        uploadCloud: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>`,
-        workflow: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
-        checkSquare: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>`,
-        barChart: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`,
-        checkCircle: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
-        alertCircle: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
-        clock: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
-        rotateCcw: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
-        layers: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>`,
+        uploadCloud: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>`,
+        workflow: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
+        checkSquare: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>`,
+        barChart: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`,
+        check: `<svg class="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`,
+        alertTriangle: `<svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`,
+        terminal: `<svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`,
+        rotateCcw: `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
+        externalLink: `<svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>`,
       };
 
       // --- Magic Byte Sniffing ---
@@ -113,452 +118,413 @@
             isValid: true,
             mime: mime,
             sizeFormatted: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
-            sha256Hex: '9f83a17e4b2d88c91a0f'
+            sizeBytes: file.size
           };
         } catch(e) {
-          return { isValid: false, error: 'Header read exception.' };
+          return { isValid: false, error: 'Header inspection exception.' };
         }
       }
 
-      // --- Render Layout ---
+      // --- Main Render Function ---
       function render() {
         const root = document.getElementById('app-root');
         root.innerHTML = `
-          <!-- Header -->
-          <header class="h-14 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md px-4 flex items-center justify-between sticky top-0 z-30">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 text-white">
-                ${ICONS.fileText}
+          <!-- Header Bar (Solid Dark) -->
+          <header class="h-12 border-b border-[#27272a] bg-[#121215] px-4 flex items-center justify-between sticky top-0 z-30 select-none">
+            <div class="flex items-center gap-2.5">
+              <div class="w-5 h-5 rounded bg-zinc-100 flex items-center justify-center text-zinc-950 font-bold text-xs font-mono">D</div>
+              <span class="font-semibold text-sm text-zinc-100 tracking-tight">DocuTask</span>
+              <span class="font-mono text-[11px] text-zinc-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">v1.0.0</span>
+            </div>
+
+            <!-- Telemetry Probes -->
+            <div class="hidden md:flex items-center gap-5 text-xs font-mono text-zinc-400">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="text-zinc-300">FastAPI</span>
+                <span class="text-zinc-600">:8000</span>
               </div>
-              <div class="flex flex-col">
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-sm text-slate-100 tracking-tight">DocuTask Agent</span>
-                  <span class="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
-                    v1.0.0-PROD
-                  </span>
-                </div>
-                <span class="text-[11px] text-slate-400 hidden sm:inline">
-                  Enterprise Multimodal Document Intelligence &amp; HITL Platform
-                </span>
+              <div class="h-3 w-px bg-zinc-800"></div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-zinc-400">Redis Broker:</span>
+                <span class="text-emerald-400 font-medium">READY</span>
+              </div>
+              <div class="h-3 w-px bg-zinc-800"></div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-zinc-400">Active Workers:</span>
+                <span class="text-zinc-200 font-semibold">1</span>
+              </div>
+              <div class="h-3 w-px bg-zinc-800"></div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-zinc-400">Queue Depth:</span>
+                <span class="text-zinc-200 font-semibold">0</span>
               </div>
             </div>
 
-            <div class="hidden md:flex items-center gap-4 text-xs font-mono text-slate-400">
-              <div class="flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-slate-300">FastAPI Gateway</span>
-                <span class="text-slate-600">:8000</span>
-              </div>
-              <div class="h-3 w-px bg-slate-800"></div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-indigo-400">${ICONS.activity}</span>
-                <span>Celery &amp; Redis</span>
-                <span class="text-emerald-400 font-semibold">ONLINE</span>
-              </div>
-              <div class="h-3 w-px bg-slate-800"></div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-cyan-400">${ICONS.shieldCheck}</span>
-                <span>Gemini 1.5</span>
-                <span class="text-emerald-400 font-semibold">ACTIVE</span>
-              </div>
-            </div>
-
+            <!-- Actions & Profile -->
             <div class="flex items-center gap-3">
-              <a href="/api/v1/docs" target="_blank" class="flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-slate-200 px-2.5 py-1.5 rounded-md border border-slate-800 hover:border-slate-700 bg-slate-900/60 transition-colors">
-                <span class="text-indigo-400">${ICONS.terminal}</span>
+              <a href="/api/v1/docs" target="_blank" class="flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-zinc-200 px-2.5 py-1 rounded border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 transition-colors">
+                ${ICONS.terminal}
                 <span class="hidden sm:inline">OpenAPI Docs</span>
+                ${ICONS.externalLink}
               </a>
-              <div class="flex items-center gap-2 pl-2 border-l border-slate-800">
-                <div class="w-7 h-7 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-mono text-xs font-bold text-slate-300">OP</div>
-                <div class="hidden lg:flex flex-col">
-                  <span class="text-xs font-medium text-slate-200 leading-none">lead.operator</span>
-                  <span class="text-[10px] text-emerald-400 font-mono">HITL Lead</span>
-                </div>
+              <div class="flex items-center gap-2 pl-2 border-l border-zinc-800">
+                <div class="w-6 h-6 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono text-[11px] font-bold text-zinc-300">OP</div>
+                <span class="text-xs font-medium text-zinc-300 hidden lg:inline">lead.operator</span>
               </div>
             </div>
           </header>
 
-          <!-- Main Body -->
+          <!-- Main Layout Container -->
           <div class="flex-1 flex overflow-hidden">
             <!-- Sidebar -->
-            <aside class="w-64 border-r border-slate-800/80 bg-slate-950/60 p-3 flex flex-col justify-between shrink-0">
-              <div class="space-y-4">
-                <div class="px-3 pt-2">
-                  <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold flex items-center gap-1.5">
-                    <span class="text-indigo-400">${ICONS.layers}</span>
-                    Core Workspaces
-                  </span>
+            <aside class="w-56 border-r border-[#27272a] bg-[#121215] p-2.5 flex flex-col justify-between shrink-0 select-none">
+              <div class="space-y-3">
+                <div class="px-2 pt-1">
+                  <span class="text-[10px] font-mono uppercase tracking-wider text-zinc-500 font-semibold">Workspaces</span>
                 </div>
-                <nav class="space-y-1">
-                  ${renderNavButton('ingestion', 'Ingestion Hub', ICONS.uploadCloud, 'Defensive', 'Magic byte sniff & 15MB guard')}
-                  ${renderNavButton('pipeline', 'Pipeline Monitor', ICONS.workflow, 'Active', '5-milestone state machine', 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30')}
-                  ${renderNavButton('reviewer', 'HITL Reviewer', ICONS.checkSquare, 'Two-Pane', 'Confidence-gated schema & canvas', 'text-amber-400 bg-amber-500/10 border-amber-500/30')}
-                  ${renderNavButton('observability', 'Observability & DLQ', ICONS.barChart, 'Real-Time', 'KPIs, dead letter queue & replay', 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30')}
+                <nav class="space-y-0.5">
+                  ${renderNavItem('ingestion', 'Ingestion Studio', ICONS.uploadCloud, '15MB')}
+                  ${renderNavItem('pipeline', 'Pipeline Monitor', ICONS.workflow, state.activeJobId ? 'Active' : null)}
+                  ${renderNavItem('reviewer', 'HITL Reviewer', ICONS.checkSquare, 'Split View')}
+                  ${renderNavItem('observability', 'DLQ & Telemetry', ICONS.barChart, 'Live')}
                 </nav>
               </div>
 
-              <div class="p-3 rounded-lg border border-slate-800/80 bg-slate-900/40 space-y-2">
-                <div class="flex items-center justify-between text-[11px]">
-                  <span class="text-slate-400 font-mono flex items-center gap-1">Distillation</span>
-                  <span class="font-mono text-emerald-400 text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">Active</span>
+              <div class="p-2.5 rounded border border-zinc-800/80 bg-zinc-900/30 text-[11px] font-mono text-zinc-500 space-y-1">
+                <div class="flex items-center justify-between text-zinc-400">
+                  <span>Target Engine</span>
+                  <span class="text-zinc-200">Gemini 1.5</span>
                 </div>
-                <p class="text-[10px] text-slate-400 leading-relaxed">
-                  Human corrections dispatch directly to <code class="text-indigo-300">/api/v1/runtime/feedback</code>.
-                </p>
+                <div class="flex items-center justify-between">
+                  <span>Schema Contract</span>
+                  <span class="text-zinc-300">Pydantic v2</span>
+                </div>
               </div>
             </aside>
 
             <!-- Screen Viewport -->
-            <main class="flex-1 overflow-y-auto bg-slate-950/40 p-6 flex flex-col">
-              ${renderScreenContent()}
+            <main class="flex-1 overflow-y-auto bg-[#09090b] p-5 flex flex-col">
+              ${renderScreen()}
             </main>
           </div>
         `;
 
-        attachEventListeners();
+        bindEvents();
       }
 
-      function renderNavButton(tabId, label, icon, badge, desc, badgeColor) {
-        const isActive = state.activeTab === tabId;
+      function renderNavItem(id, label, icon, badge) {
+        const isActive = state.activeTab === id;
         return `
-          <button data-tab="${tabId}" class="nav-btn w-full text-left p-2.5 rounded-lg border transition-all flex flex-col gap-1 ${
+          <button data-tab="${id}" class="nav-btn w-full text-left px-2.5 py-2 rounded border text-xs font-medium transition-colors flex items-center justify-between ${
             isActive
-              ? 'bg-slate-900 border-indigo-500/40 shadow-sm shadow-indigo-500/10 text-slate-100'
-              : 'bg-transparent border-transparent hover:bg-slate-900/50 hover:border-slate-800 text-slate-400'
+              ? 'bg-zinc-800 border-zinc-700 text-zinc-100 shadow-sm'
+              : 'bg-transparent border-transparent hover:bg-zinc-800/50 hover:text-zinc-200 text-zinc-400'
           }">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <span class="${isActive ? 'text-indigo-400' : 'text-slate-400'}">${icon}</span>
-                <span class="text-xs font-semibold">${label}</span>
-              </div>
-              ${badge ? `<span class="text-[10px] font-mono px-1.5 py-0.2 rounded border ${badgeColor || 'text-indigo-400 bg-indigo-500/10 border-indigo-500/30'}">${badge}</span>` : ''}
+            <div class="flex items-center gap-2.5">
+              <span class="${isActive ? 'text-zinc-100' : 'text-zinc-400'}">${icon}</span>
+              <span>${label}</span>
             </div>
-            <span class="text-[10px] font-mono text-slate-400 pl-6.5 truncate">${desc}</span>
+            ${badge ? `<span class="text-[10px] font-mono px-1.5 py-0.2 rounded border ${isActive ? 'bg-zinc-900 text-zinc-300 border-zinc-700' : 'bg-zinc-900/50 text-zinc-500 border-zinc-800'}">${badge}</span>` : ''}
           </button>
         `;
       }
 
-      function renderScreenContent() {
-        if (state.activeTab === 'ingestion') return renderIngestionScreen();
-        if (state.activeTab === 'pipeline') return renderPipelineScreen();
-        if (state.activeTab === 'reviewer') return renderReviewerScreen();
-        if (state.activeTab === 'observability') return renderObservabilityScreen();
+      function renderScreen() {
+        if (state.activeTab === 'ingestion') return renderIngestion();
+        if (state.activeTab === 'pipeline') return renderPipeline();
+        if (state.activeTab === 'reviewer') return renderReviewer();
+        if (state.activeTab === 'observability') return renderObservability();
         return '';
       }
 
-      // --- Screen 1: Ingestion Hub ---
-      function renderIngestionScreen() {
+      // --- 1. Ingestion Screen (Two-Column Layout) ---
+      function renderIngestion() {
         return `
-          <div class="space-y-6 max-w-4xl mx-auto w-full">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-              <div>
-                <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
-                  <span class="text-indigo-400">${ICONS.uploadCloud}</span>
-                  Document Ingestion Hub
-                </h2>
-                <p class="text-xs text-slate-400 mt-1">
-                  Enterprise boundary ingestion with client-side defensive guards and &lt;100ms async job dispatch.
-                </p>
-              </div>
-              <div class="flex items-center gap-2 font-mono text-[11px]">
-                <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">MAX PAYLOAD: <strong class="text-indigo-400">15 MB</strong></span>
-                <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">FORMATS: <strong class="text-cyan-400">PDF, TIFF, PNG, JPEG</strong></span>
-              </div>
-            </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 w-full">
+            <!-- Left Column: Compact Studio (4 cols / 35%) -->
+            <div class="lg:col-span-4 flex flex-col gap-4">
+              <div class="border border-[#27272a] bg-[#121215] rounded p-4 space-y-4">
+                <div class="flex items-center justify-between border-b border-[#27272a] pb-3">
+                  <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                    ${ICONS.uploadCloud}
+                    Ingestion Studio
+                  </span>
+                  <span class="text-[10px] font-mono text-zinc-500 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">MAX 15MB</span>
+                </div>
 
-            <!-- Dropzone -->
-            <div id="dropzone" class="border-2 border-dashed border-slate-800 hover:border-indigo-500/50 bg-slate-900/30 hover:bg-slate-900/50 rounded-2xl p-10 text-center cursor-pointer transition-all duration-200 group">
-              <input id="file-input" type="file" class="hidden" accept=".pdf,.png,.jpg,.jpeg,.tiff,.tif" />
-              <div class="flex flex-col items-center justify-center space-y-4">
-                <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all">
-                  ${ICONS.uploadCloud}
-                </div>
-                <div class="space-y-1.5">
-                  <h3 class="text-sm font-semibold text-slate-200">
-                    Drag &amp; drop document here, or <span class="text-indigo-400 underline underline-offset-2">browse filesystem</span>
-                  </h3>
-                  <p class="text-xs text-slate-400 font-mono">Binary sniffing will verify headers before transmitting to backend</p>
-                </div>
-                <div class="flex flex-wrap justify-center gap-2 pt-2 text-[11px] font-mono">
-                  <span class="px-2.5 py-1 rounded-md bg-slate-950/80 border border-slate-800/80 text-slate-400">%PDF-1.7</span>
-                  <span class="px-2.5 py-1 rounded-md bg-slate-950/80 border border-slate-800/80 text-slate-400">image/png</span>
-                  <span class="px-2.5 py-1 rounded-md bg-slate-950/80 border border-slate-800/80 text-slate-400">image/jpeg</span>
-                  <span class="px-2.5 py-1 rounded-md bg-slate-950/80 border border-slate-800/80 text-slate-400">image/tiff</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Validation Result Box -->
-            ${state.validationResult ? `
-              <div class="p-4 rounded-xl border ${state.validationResult.isValid ? 'bg-emerald-950/20 border-emerald-500/30' : 'bg-rose-950/20 border-rose-500/30'}">
-                <div class="flex items-start gap-3">
-                  <span class="${state.validationResult.isValid ? 'text-emerald-400' : 'text-rose-400'}">${state.validationResult.isValid ? ICONS.shieldCheck : ICONS.alertCircle}</span>
-                  <div class="space-y-1">
-                    <h4 class="text-xs font-semibold text-slate-100 flex items-center gap-2">
-                      <span>${state.selectedFile ? state.selectedFile.name : 'Document'}</span>
-                      <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${state.validationResult.isValid ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' : 'text-rose-400 bg-rose-500/10 border-rose-500/30'}">
-                        ${state.validationResult.isValid ? 'VALIDATED' : 'REJECTED'}
-                      </span>
-                    </h4>
-                    <p class="text-[11px] text-slate-400">${state.validationResult.isValid ? 'Passed magic-byte inspection and payload size perimeter.' : state.validationResult.error}</p>
+                <div id="dropzone" class="border border-dashed border-zinc-700/80 hover:border-zinc-500 bg-zinc-900/30 hover:bg-zinc-900/60 rounded p-5 text-center cursor-pointer transition-colors">
+                  <input id="file-input" type="file" class="hidden" accept=".pdf,.png,.jpg,.jpeg,.tiff,.tif" />
+                  <div class="flex flex-col items-center gap-2">
+                    <span class="text-zinc-400">${ICONS.uploadCloud}</span>
+                    <span class="text-xs font-medium text-zinc-200">${state.selectedFile ? state.selectedFile.name : 'Select or drop document'}</span>
+                    <div class="flex items-center gap-1 text-[10px] font-mono text-zinc-500">
+                      <span>PDF</span><span>•</span><span>PNG</span><span>•</span><span>TIFF</span><span>•</span><span>JPEG</span>
+                    </div>
                   </div>
                 </div>
-                ${state.validationResult.isValid ? `
-                  <div class="mt-3 pt-3 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
-                    <div class="p-2 rounded bg-slate-900/60 border border-slate-800"><span class="text-[10px] text-slate-400 uppercase block">MIME Type</span><span class="text-slate-200">${state.validationResult.mime}</span></div>
-                    <div class="p-2 rounded bg-slate-900/60 border border-slate-800"><span class="text-[10px] text-slate-400 uppercase block">Payload Size</span><span class="text-slate-200">${state.validationResult.sizeFormatted} &lt; 15 MB</span></div>
-                    <div class="p-2 rounded bg-slate-900/60 border border-slate-800"><span class="text-[10px] text-slate-400 uppercase block">SHA-256 Digest</span><span class="text-slate-200 truncate">${state.validationResult.sha256Hex}</span></div>
+
+                ${state.validationResult ? `
+                  <div class="p-2.5 rounded border text-xs font-mono flex items-start gap-2 ${
+                    state.validationResult.isValid ? 'bg-emerald-950/20 border-emerald-800/40 text-emerald-400' : 'bg-rose-950/20 border-rose-800/40 text-rose-400'
+                  }">
+                    <div class="space-y-0.5 flex-1 min-w-0">
+                      <div class="flex justify-between">
+                        <span class="font-semibold">${state.validationResult.mime || 'Binary'}</span>
+                        <span>${state.validationResult.sizeFormatted}</span>
+                      </div>
+                      ${state.validationResult.error ? `<p class="text-[11px] text-rose-300">${state.validationResult.error}</p>` : ''}
+                    </div>
                   </div>
                 ` : ''}
-              </div>
-            ` : ''}
 
-            <!-- Upload Progress -->
-            ${state.isUploading ? `
-              <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/40 space-y-3">
-                <div class="flex justify-between text-xs font-mono">
-                  <span class="text-cyan-400 flex items-center gap-1.5">Dispatching to /api/v1/documents/upload (${state.uploadProgress}%)</span>
-                  <span class="text-slate-400">PRIORITY: HIGH</span>
-                </div>
-                <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                  <div class="bg-gradient-to-r from-indigo-500 via-cyan-500 to-emerald-400 h-full rounded-full transition-all duration-300" style="width: ${state.uploadProgress}%"></div>
-                </div>
-              </div>
-            ` : ''}
+                <div class="space-y-3 pt-1">
+                  <div>
+                    <label class="text-[11px] font-mono text-zinc-400 uppercase block mb-1">Document Schema</label>
+                    <select id="schema-select" class="w-full bg-zinc-900 border border-zinc-700/80 rounded px-2.5 py-1.5 text-xs text-zinc-200 font-mono focus:outline-none focus:border-zinc-500">
+                      <option value="Invoice" ${state.schemaType === 'Invoice' ? 'selected' : ''}>InvoiceTaxonomy.v2</option>
+                      <option value="Receipt" ${state.schemaType === 'Receipt' ? 'selected' : ''}>CommercialReceipt.v1</option>
+                      <option value="Contract" ${state.schemaType === 'Contract' ? 'selected' : ''}>EnterpriseContract.v1</option>
+                    </select>
+                  </div>
 
-            <!-- Highlights -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-              <div class="p-3.5 rounded-xl border border-slate-800/80 bg-slate-900/30 space-y-1">
-                <h4 class="text-xs font-semibold text-slate-200">Idempotency &amp; SHA-256</h4>
-                <p class="text-[11px] text-slate-400">Identical document uploads are deduplicated instantly without redundant OCR cost.</p>
+                  <div>
+                    <label class="text-[11px] font-mono text-zinc-400 uppercase block mb-1">Queue Priority</label>
+                    <select id="priority-select" class="w-full bg-zinc-900 border border-zinc-700/80 rounded px-2.5 py-1.5 text-xs text-zinc-200 font-mono focus:outline-none focus:border-zinc-500">
+                      <option value="HIGH" ${state.priority === 'HIGH' ? 'selected' : ''}>High (P0 - Immediate Ingestion)</option>
+                      <option value="NORMAL" ${state.priority === 'NORMAL' ? 'selected' : ''}>Normal (P1 - Standard Queue)</option>
+                      <option value="LOW" ${state.priority === 'LOW' ? 'selected' : ''}>Low (P2 - Batch Processing)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button id="btn-dispatch" ${!state.selectedFile || state.isUploading ? 'disabled' : ''} class="w-full py-2 px-3 rounded bg-zinc-100 hover:bg-white disabled:bg-zinc-800 disabled:text-zinc-500 text-zinc-950 text-xs font-semibold font-mono flex items-center justify-center gap-1.5 transition-colors cursor-pointer disabled:cursor-not-allowed">
+                  <span>${state.isUploading ? `Enqueuing (${state.uploadProgress}%)...` : 'Dispatch Ingestion'}</span>
+                </button>
               </div>
-              <div class="p-3.5 rounded-xl border border-slate-800/80 bg-slate-900/30 space-y-1">
-                <h4 class="text-xs font-semibold text-slate-200">Multimodal Gemini 1.5</h4>
-                <p class="text-[11px] text-slate-400">Combines OCR bounding coordinates with neural entity extraction and schema binding.</p>
-              </div>
-              <div class="p-3.5 rounded-xl border border-slate-800/80 bg-slate-900/30 space-y-1">
-                <h4 class="text-xs font-semibold text-slate-200">Human-In-The-Loop</h4>
-                <p class="text-[11px] text-slate-400">Confidence scores &lt; 90% automatically trigger synchronized visual review.</p>
+            </div>
+
+            <!-- Right Column: Live Queue Table (8 cols / 65%) -->
+            <div class="lg:col-span-8 flex flex-col gap-4">
+              <div class="border border-[#27272a] bg-[#121215] rounded p-4 flex flex-col flex-1">
+                <div class="flex items-center justify-between border-b border-[#27272a] pb-3 mb-3">
+                  <div>
+                    <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">Recent Ingestion Batches &amp; Telemetry</span>
+                    <p class="text-[11px] text-zinc-500 font-mono mt-0.5">Live asynchronous pipeline status (<code class="text-zinc-400">/api/v1/jobs</code>)</p>
+                  </div>
+                </div>
+
+                <div class="overflow-x-auto flex-1">
+                  <table class="w-full text-left text-xs font-mono">
+                    <thead>
+                      <tr class="border-b border-zinc-800 text-zinc-500 text-[10px] uppercase">
+                        <th class="pb-2 font-medium">Task ID</th>
+                        <th class="pb-2 font-medium">Document / Schema</th>
+                        <th class="pb-2 font-medium text-center">Priority</th>
+                        <th class="pb-2 font-medium text-center">Confidence</th>
+                        <th class="pb-2 font-medium text-right">Latency</th>
+                        <th class="pb-2 font-medium text-center">Status</th>
+                        <th class="pb-2 font-medium text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-zinc-800/60 text-zinc-300 text-[11px]">
+                      ${state.queue.map(row => `
+                        <tr class="hover:bg-zinc-800/30 transition-colors">
+                          <td class="py-2.5 text-zinc-200 font-semibold truncate max-w-[110px]">${row.taskId}</td>
+                          <td class="py-2.5 max-w-[180px] truncate" title="${row.filename}">
+                            <div class="flex flex-col">
+                              <span class="text-zinc-200 truncate">${row.filename}</span>
+                              <span class="text-[10px] text-zinc-500">${row.schemaType}</span>
+                            </div>
+                          </td>
+                          <td class="py-2.5 text-center">
+                            <span class="text-[10px] font-mono px-1 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">${row.priority}</span>
+                          </td>
+                          <td class="py-2.5 text-center">
+                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${
+                              row.confidence >= 0.90 ? 'bg-emerald-950/40 text-emerald-400 border-emerald-800/50' : 'bg-amber-950/40 text-amber-400 border-amber-800/50'
+                            }">${(row.confidence * 100).toFixed(1)}%</span>
+                          </td>
+                          <td class="py-2.5 text-right text-zinc-400">${row.latencyMs}ms</td>
+                          <td class="py-2.5 text-center">
+                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${
+                              row.status === 'COMPLETED' ? 'bg-emerald-950/40 text-emerald-400 border-emerald-800/50' : 'bg-amber-950/40 text-amber-400 border-amber-800/50'
+                            }">${row.status}</span>
+                          </td>
+                          <td class="py-2.5 text-right">
+                            <button data-doc-id="${row.documentId}" class="btn-inspect px-2 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-[10px] font-mono inline-flex items-center gap-1 border border-zinc-700 transition-colors">
+                              <span>Inspect</span>
+                            </button>
+                          </td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         `;
       }
 
-      // --- Screen 2: Pipeline Monitor ---
-      function renderPipelineScreen() {
+      // --- 2. Pipeline Screen ---
+      function renderPipeline() {
         const milestones = [
-          { id: '1', title: 'File Ingestion & Checksum', engine: 'Storage Gateway', desc: 'SHA-256 integrity check and duplicate binary gate validated', latency: '120ms' },
-          { id: '2', title: 'OCR & Layout Parsing', engine: 'OCR Core Engine', desc: 'PyMuPDF rasterization and Tesseract character layout stream', latency: '205ms' },
-          { id: '3', title: 'Schema Contract Selection', engine: 'Schema Invariant Engine', desc: 'Pydantic v2 taxonomy matching and target JSON boundary binding', latency: '95ms' },
-          { id: '4', title: 'Multimodal Entity Reasoning', engine: 'Gemini 1.5 Pro / Flash', desc: 'Gemini structured entity distillation with contextual grounding', latency: '140ms' },
-          { id: '5', title: 'Confidence & Validation Gates', engine: 'Bayesian Auditor', desc: 'Bayesian evidence fusion, arithmetic reconciliation and HITL thresholding', latency: '80ms' },
+          { title: 'File Ingestion & Checksum', engine: 'Storage Gateway', desc: 'SHA-256 integrity check and duplicate binary gate validated', latency: '120ms' },
+          { title: 'OCR & Layout Parsing', engine: 'OCR Core Engine', desc: 'PyMuPDF rasterization and Tesseract character layout stream', latency: '205ms' },
+          { title: 'Schema Contract Selection', engine: 'Schema Invariant Engine', desc: 'Pydantic v2 taxonomy matching and target JSON boundary binding', latency: '95ms' },
+          { title: 'Multimodal Entity Reasoning', engine: 'Gemini 1.5 Pro / Flash', desc: 'Gemini structured entity distillation with contextual grounding', latency: '140ms' },
+          { title: 'Confidence & Validation Gates', engine: 'Bayesian Auditor', desc: 'Bayesian evidence fusion, arithmetic reconciliation and HITL thresholding', latency: '80ms' },
         ];
 
         return `
-          <div class="space-y-6 max-w-4xl mx-auto w-full">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-              <div class="flex items-center gap-3">
-                <div class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400">${ICONS.workflow}</div>
+          <div class="space-y-4 max-w-4xl mx-auto w-full">
+            <div class="flex items-center justify-between border-b border-[#27272a] pb-2.5">
+              <div class="flex items-center gap-2.5">
+                <span class="text-zinc-400">${ICONS.workflow}</span>
                 <div>
-                  <h2 class="text-base font-bold text-slate-100 font-mono">Job #${state.activeJobId}</h2>
-                  <span class="text-xs text-slate-400 font-mono">Document Ref: ${state.activeDocId}</span>
+                  <h2 class="text-xs font-semibold text-zinc-100 font-mono">Job #${state.activeJobId}</h2>
+                  <span class="text-[10px] text-zinc-500 font-mono">Doc ID: ${state.activeDocId}</span>
                 </div>
               </div>
-              <div class="flex items-center gap-3 font-mono text-xs">
-                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
-                  <span class="text-cyan-400">${ICONS.clock}</span>
-                  <span>LATENCY: <strong class="text-emerald-400">0.64s (640ms)</strong></span>
-                </div>
-                <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold uppercase">COMPLETED</span>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">Latency: <strong class="text-zinc-200">640ms</strong></span>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-800/50">COMPLETED</span>
               </div>
             </div>
 
-            <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/40 space-y-4">
-              <div class="flex items-center justify-between">
-                <div class="space-y-0.5">
-                  <span class="text-xs font-mono font-semibold text-slate-300">Multi-Milestone Celery Pipeline Execution</span>
-                  <p class="text-[11px] text-slate-400">Polling <code class="text-indigo-300">/api/v1/jobs/${state.activeJobId}/status</code> every 1,500ms</p>
-                </div>
-                <span class="text-sm font-mono font-bold text-indigo-400">${state.pipelineProgress}%</span>
+            <div class="p-4 rounded border border-[#27272a] bg-[#121215] space-y-3">
+              <div class="flex justify-between items-center text-xs font-mono">
+                <span class="text-zinc-300 font-medium">Asynchronous Pipeline Execution</span>
+                <span class="text-zinc-100 font-bold">${state.pipelineProgress}%</span>
+              </div>
+              <div class="w-full bg-zinc-950 rounded-full h-1.5 overflow-hidden border border-zinc-800">
+                <div class="h-full bg-zinc-300 rounded-full transition-all duration-300" style="width: ${state.pipelineProgress}%"></div>
               </div>
 
-              <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
-                <div class="h-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 rounded-full transition-all duration-500" style="width: ${state.pipelineProgress}%"></div>
-              </div>
-
-              <div class="space-y-3 pt-2">
+              <div class="space-y-2 pt-1">
                 ${milestones.map((m, idx) => `
-                  <div class="p-4 rounded-xl border bg-slate-900/40 border-slate-800/80 flex items-start justify-between gap-4">
-                    <div class="flex items-start gap-3.5">
-                      <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border bg-emerald-500/10 border-emerald-500/30 text-emerald-400">
-                        ${ICONS.checkCircle}
-                      </div>
-                      <div class="space-y-0.5">
+                  <div class="p-2.5 rounded border border-zinc-800/80 bg-zinc-900/30 flex items-start justify-between gap-3 text-xs font-mono">
+                    <div class="flex items-start gap-2.5">
+                      <div class="w-5 h-5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-[10px] text-zinc-300 shrink-0 mt-0.5">0${idx+1}</div>
+                      <div>
                         <div class="flex items-center gap-2">
-                          <span class="text-xs font-mono text-slate-400 font-bold">0${idx+1}.</span>
-                          <h4 class="text-xs font-semibold text-slate-100">${m.title}</h4>
-                          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-950 border border-slate-800 text-slate-400">${m.engine}</span>
+                          <span class="font-semibold text-zinc-200">${m.title}</span>
+                          <span class="text-[10px] text-zinc-500 bg-zinc-950 px-1 py-0.2 rounded border border-zinc-800">${m.engine}</span>
                         </div>
-                        <p class="text-[11px] text-slate-400 leading-relaxed">${m.desc}</p>
+                        <p class="text-[11px] text-zinc-400 mt-0.5">${m.desc}</p>
                       </div>
                     </div>
-                    <div class="flex flex-col items-end gap-1 shrink-0 font-mono text-xs">
-                      <span class="flex items-center gap-1 text-emerald-400 text-[11px] bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30 font-semibold">DONE</span>
-                      <span class="text-[10px] text-slate-400">${m.latency}</span>
+                    <div class="flex items-center gap-1 text-[10px] text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-800/50">
+                      <span>DONE</span>
                     </div>
                   </div>
                 `).join('')}
               </div>
             </div>
 
-            <div class="p-4 rounded-xl border border-emerald-500/30 bg-emerald-950/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">${ICONS.checkCircle}</div>
-                <div>
-                  <h4 class="text-xs font-semibold text-emerald-200">Pipeline Completed &amp; Bayesian Confidence Scored (0.942)</h4>
-                  <p class="text-[11px] text-emerald-400/80">Entity bounding boxes mapped. Ready for Human-In-The-Loop review.</p>
-                </div>
-              </div>
-              <button id="btn-goto-review" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20 font-mono shrink-0">
-                <span>Review &amp; Approve</span>
+            <div class="p-3 rounded border border-zinc-800 bg-zinc-900/40 flex items-center justify-between">
+              <span class="text-xs font-mono text-zinc-300">Pipeline completed. Bayesian confidence scored: <strong>94.2%</strong></span>
+              <button id="btn-goto-review" class="px-3 py-1.5 rounded bg-zinc-100 hover:bg-white text-zinc-950 font-mono text-xs font-semibold transition-colors">
+                Proceed to HITL Review →
               </button>
             </div>
           </div>
         `;
       }
 
-      // --- Screen 3: Two-Pane Reviewer ---
-      function renderReviewerScreen() {
+      // --- 3. Two-Pane HITL Reviewer (50/50 Split View) ---
+      function renderReviewer() {
         return `
-          <div class="flex-1 flex flex-col gap-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/40 p-4 rounded-xl border border-slate-800">
+          <div class="flex-1 flex flex-col gap-3">
+            <div class="flex items-center justify-between border-b border-[#27272a] pb-2.5">
               <div>
-                <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-                  <span class="text-indigo-400">${ICONS.layers}</span>
-                  Human-in-the-Loop Synchronized Reviewer
-                </h2>
-                <p class="text-xs text-slate-400 font-mono mt-0.5">
-                  Document: <strong class="text-slate-200">${state.activeDocId}</strong> | Schema: <strong class="text-cyan-400">InvoiceTaxonomy.v2</strong>
-                </p>
+                <span class="text-xs font-semibold text-zinc-100 font-mono">HITL Reviewer • ${state.activeDocId}</span>
+                <span class="text-[11px] font-mono text-zinc-500 ml-2">Schema: <span class="text-zinc-300">InvoiceTaxonomy.v2</span></span>
               </div>
-
-              <div class="flex items-center gap-3">
-                <span class="text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 flex items-center gap-1.5">
-                  2 Low Confidence Alerts Auto-Focused
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950/40 text-amber-400 border border-amber-800/50">
+                  2 fields require operator verification
                 </span>
-
-                <button id="btn-save-approve" class="px-4 py-2 rounded-lg font-mono text-xs font-semibold flex items-center gap-2 transition-all shadow-lg ${
-                  state.approvalConfirmed ? 'bg-emerald-600 text-white' : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-600/20'
-                }">
-                  <span>${state.isApproving ? 'Distilling Feedback...' : state.approvalConfirmed ? 'Committed & Approved' : 'Save & Approve'}</span>
-                </button>
               </div>
             </div>
 
-            <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[640px]">
-              <!-- Left Pane: Document Canvas (7 cols) -->
-              <div class="lg:col-span-7 flex flex-col rounded-2xl border border-slate-800 bg-slate-950/60 overflow-hidden">
-                <div class="h-11 border-b border-slate-800 bg-slate-900/60 px-3 flex items-center justify-between shrink-0 text-xs font-mono">
-                  <div class="flex items-center gap-2 text-slate-300">
-                    <span class="text-indigo-400">${ICONS.layers}</span>
-                    <span>INV-2026-8894.pdf</span>
-                  </div>
+            <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 min-h-[640px]">
+              <!-- Left Pane (50% / 6 cols) -->
+              <div class="lg:col-span-6 flex flex-col rounded border border-[#27272a] bg-[#121215] overflow-hidden">
+                <div class="h-10 border-b border-[#27272a] bg-[#18181b]/60 px-3 flex items-center justify-between shrink-0 text-xs font-mono select-none">
+                  <span class="font-semibold text-zinc-300">INV-2026-8894.pdf</span>
                   <div class="flex items-center gap-1.5">
-                    <button id="btn-zoom-out" class="p-1 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded px-2">-</button>
-                    <span class="px-1.5 text-[11px] text-slate-300">${state.zoom}%</span>
-                    <button id="btn-zoom-in" class="p-1 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded px-2">+</button>
-                    <button id="btn-rotate" class="p-1.5 bg-slate-950 hover:bg-slate-800 rounded-lg border border-slate-800 text-slate-400">↻</button>
+                    <button id="btn-zoom-out" class="p-1 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded px-1.5">-</button>
+                    <span class="px-1 text-[11px] text-zinc-300 min-w-[36px] text-center">${state.zoom}%</span>
+                    <button id="btn-zoom-in" class="p-1 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded px-1.5">+</button>
+                    <button id="btn-fit" class="px-1.5 py-0.5 bg-zinc-950 hover:bg-zinc-800 rounded border border-zinc-800 text-zinc-400 hover:text-zinc-200 text-[10px]">Fit</button>
+                    <button id="btn-rotate" class="p-1 bg-zinc-950 hover:bg-zinc-800 rounded border border-zinc-800 text-zinc-400">↻</button>
                   </div>
                 </div>
 
-                <div class="flex-1 overflow-auto p-6 flex items-center justify-center bg-slate-950/80 relative">
-                  <div style="transform: scale(${state.zoom / 100}) rotate(${state.rotation}deg); transform-origin: center center; transition: transform 0.15s ease-out;" class="relative w-[520px] min-h-[680px] bg-slate-900 border border-slate-800 rounded-lg p-7 shadow-2xl text-slate-200 select-none">
-                    <div class="border-b-2 border-indigo-500/40 pb-4 mb-6 flex justify-between items-start">
+                <div class="flex-1 overflow-auto p-4 flex items-center justify-center bg-[#09090b] relative">
+                  <div style="transform: scale(${state.zoom / 100}) rotate(${state.rotation}deg); transform-origin: center center; transition: transform 0.12s ease-out;" class="relative w-[480px] min-h-[640px] bg-[#121215] border border-zinc-800 rounded p-6 shadow text-zinc-200 select-none">
+                    <div class="border-b border-zinc-700 pb-3 mb-4 flex justify-between items-start">
                       <div>
-                        <h1 class="text-xl font-bold tracking-tight text-white font-mono">ACME CLOUD CORP</h1>
-                        <p class="text-[11px] text-slate-400 mt-1">Enterprise Cloud Infrastructure &amp; Services</p>
-                        <p class="text-[11px] text-slate-400">Tax ID: US-948291048</p>
+                        <h1 class="text-base font-bold tracking-tight text-white font-mono">ACME CLOUD CORP</h1>
+                        <p class="text-[10px] text-zinc-400">Enterprise Cloud Infrastructure</p>
+                        <p class="text-[10px] text-zinc-500 font-mono">Tax ID: US-948291048</p>
                       </div>
                       <div class="text-right">
-                        <span class="text-xs font-mono font-bold px-2 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded">COMMERCIAL INVOICE</span>
-                        <p class="text-xs font-mono text-slate-300 mt-2">#INV-2026-8894</p>
-                        <p class="text-[11px] text-slate-400">Date: 2026-09-24</p>
+                        <span class="text-[10px] font-mono font-semibold px-1.5 py-0.5 bg-zinc-800 text-zinc-200 border border-zinc-700 rounded">COMMERCIAL INVOICE</span>
+                        <p class="text-[11px] font-mono text-zinc-300 mt-1">#INV-2026-8894</p>
+                        <p class="text-[10px] text-zinc-400 font-mono">2026-09-24</p>
                       </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 mb-6 text-xs">
-                      <div class="p-3 bg-slate-950/60 rounded border border-slate-800">
-                        <span class="text-[10px] text-slate-400 uppercase font-mono block mb-1">Billed To:</span>
-                        <p class="font-semibold text-slate-200">Global Logistics Corp</p>
-                        <p class="text-[11px] text-slate-400">742 Evergreen Terrace</p>
+                    <div class="grid grid-cols-2 gap-2.5 mb-4 text-xs">
+                      <div class="p-2 bg-zinc-950 rounded border border-zinc-800/80">
+                        <span class="text-[9px] text-zinc-500 uppercase font-mono block">Billed To</span>
+                        <p class="font-semibold text-zinc-200 text-[11px]">Global Logistics Corp</p>
                       </div>
-                      <div class="p-3 bg-slate-950/60 rounded border border-slate-800">
-                        <span class="text-[10px] text-slate-400 uppercase font-mono block mb-1">Terms:</span>
-                        <p class="text-slate-200 font-mono">Net 30 Days</p>
-                        <p class="text-[11px] text-slate-400">Due: 2026-10-24</p>
+                      <div class="p-2 bg-zinc-950 rounded border border-zinc-800/80">
+                        <span class="text-[9px] text-zinc-500 uppercase font-mono block">Terms</span>
+                        <p class="text-zinc-200 font-mono text-[11px]">Net 30 Days (Due 2026-10-24)</p>
                       </div>
                     </div>
 
-                    <div class="mb-6">
+                    <div class="mb-4">
                       <table class="w-full text-left text-xs font-mono">
                         <thead>
-                          <tr class="border-b border-slate-800 text-slate-400 text-[10px] uppercase">
-                            <th class="pb-2">Description</th>
-                            <th class="pb-2 text-center">Qty</th>
-                            <th class="pb-2 text-right">Unit Price</th>
-                            <th class="pb-2 text-right">Total</th>
+                          <tr class="border-b border-zinc-800 text-zinc-500 text-[9px] uppercase">
+                            <th class="pb-1">Description</th>
+                            <th class="pb-1 text-center">Qty</th>
+                            <th class="pb-1 text-right">Unit Price</th>
+                            <th class="pb-1 text-right">Total</th>
                           </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-800/60 text-slate-300 text-[11px]">
-                          <tr>
-                            <td class="py-2">GPU Compute Cluster (A100 x8)</td>
-                            <td class="py-2 text-center">2</td>
-                            <td class="py-2 text-right">$4,250.00</td>
-                            <td class="py-2 text-right">$8,500.00</td>
-                          </tr>
-                          <tr>
-                            <td class="py-2">Managed High-Throughput NVMe</td>
-                            <td class="py-2 text-center">1</td>
-                            <td class="py-2 text-right">$1,200.00</td>
-                            <td class="py-2 text-right">$1,200.00</td>
-                          </tr>
-                          <tr>
-                            <td class="py-2">Enterprise Direct Connect 10G</td>
-                            <td class="py-2 text-center">1</td>
-                            <td class="py-2 text-right">$850.00</td>
-                            <td class="py-2 text-right">$850.00</td>
-                          </tr>
+                        <tbody class="divide-y divide-zinc-800/60 text-zinc-300 text-[10px]">
+                          <tr><td class="py-1.5">GPU Compute Cluster (A100 x8)</td><td class="py-1.5 text-center">2</td><td class="py-1.5 text-right">$4,250.00</td><td class="py-1.5 text-right">$8,500.00</td></tr>
+                          <tr><td class="py-1.5">Managed High-Throughput NVMe</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-right">$1,200.00</td><td class="py-1.5 text-right">$1,200.00</td></tr>
+                          <tr><td class="py-1.5">Enterprise Direct Connect 10G</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-right">$850.00</td><td class="py-1.5 text-right">$850.00</td></tr>
                         </tbody>
                       </table>
                     </div>
 
-                    <div class="border-t border-slate-800 pt-3 flex justify-end">
-                      <div class="w-48 space-y-1 text-xs font-mono">
-                        <div class="flex justify-between text-slate-400"><span>Subtotal:</span><span>$10,550.00</span></div>
-                        <div class="flex justify-between text-slate-400"><span>Tax (8.25%):</span><span>$870.38</span></div>
-                        <div class="flex justify-between text-slate-100 font-bold border-t border-slate-800 pt-1 text-sm">
-                          <span>Total:</span><span class="text-emerald-400">$11,420.38</span>
-                        </div>
+                    <div class="border-t border-zinc-800 pt-2 flex justify-end">
+                      <div class="w-40 space-y-0.5 text-[11px] font-mono">
+                        <div class="flex justify-between text-zinc-400"><span>Subtotal:</span><span>$10,550.00</span></div>
+                        <div class="flex justify-between text-zinc-400"><span>Tax (8.25%):</span><span>$870.38</span></div>
+                        <div class="flex justify-between text-zinc-100 font-bold border-t border-zinc-800 pt-1 text-xs"><span>Total:</span><span>$11,420.38</span></div>
                       </div>
                     </div>
 
-                    <!-- Bounding box overlays -->
                     ${state.fields.map(f => {
                       if (!f.box) return '';
                       const isHov = state.hoveredFieldKey === f.key;
-                      let color = 'border-emerald-400 bg-emerald-500/10 text-emerald-300';
-                      if (f.confidence < 0.70) color = 'border-rose-500 bg-rose-500/15 text-rose-300';
-                      else if (f.confidence < 0.90) color = 'border-amber-400 bg-amber-500/15 text-amber-300';
+                      let color = 'border-emerald-500/80 bg-emerald-500/10 text-emerald-300';
+                      if (f.confidence < 0.70) color = 'border-rose-500/80 bg-rose-500/15 text-rose-300';
+                      else if (f.confidence < 0.90) color = 'border-amber-500/80 bg-amber-500/15 text-amber-300';
 
                       return `
-                        <div
-                          style="position: absolute; left: ${f.box.left}; top: ${f.box.top}; width: ${f.box.width}; height: ${f.box.height};"
-                          class="border-2 rounded transition-all cursor-pointer ${color} ${isHov ? 'ring-2 ring-indigo-400 scale-[1.02] z-20 shadow-lg' : 'z-10'}"
-                        >
-                          <div class="absolute -top-5 left-0 px-1.5 py-0.2 rounded bg-slate-950/90 border border-slate-700 text-[10px] font-mono font-semibold whitespace-nowrap shadow-md">
-                            ${f.label} (${(f.confidence * 100).toFixed(0)}%)
-                          </div>
+                        <div style="position: absolute; left: ${f.box.left}; top: ${f.box.top}; width: ${f.box.width}; height: ${f.box.height};" class="border rounded-[2px] transition-all cursor-pointer ${color} ${isHov ? 'ring-1 ring-white z-20' : 'z-10'}">
+                          <div class="absolute -top-4 left-0 px-1 py-0.2 rounded bg-zinc-950 border border-zinc-700 text-[9px] font-mono whitespace-nowrap">${f.label}</div>
                         </div>
                       `;
                     }).join('')}
@@ -566,44 +532,60 @@
                 </div>
               </div>
 
-              <!-- Right Pane: Schema Form (5 cols) -->
-              <div class="lg:col-span-5 flex flex-col gap-3 overflow-y-auto max-h-[720px] p-4 rounded-2xl border border-slate-800 bg-slate-950/60">
-                <div class="border-b border-slate-800 pb-2 flex items-center justify-between">
-                  <span class="text-xs font-mono font-bold text-slate-200">Extracted Key-Value Entity Schema</span>
-                  <span class="text-[10px] font-mono text-slate-400">Green &ge;90% | Amber 70-89% | Red &lt;70%</span>
+              <!-- Right Pane: Extracted Schema Form (50% / 6 cols) -->
+              <div class="lg:col-span-6 flex flex-col justify-between border border-[#27272a] bg-[#121215] rounded p-4 overflow-hidden">
+                <div class="overflow-y-auto space-y-2.5 pr-1 max-h-[580px]">
+                  <div class="border-b border-[#27272a] pb-2 flex items-center justify-between">
+                    <span class="text-xs font-mono font-semibold text-zinc-200">Extracted Schema Key-Values</span>
+                    <span class="text-[10px] font-mono text-zinc-500">>=90% (Checkmark) • &lt;90% (Review Req)</span>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    ${state.fields.map(f => {
+                      const isHigh = f.confidence >= 0.90;
+                      return `
+                        <div class="p-2.5 rounded border transition-colors ${
+                          !isHigh ? 'bg-amber-950/20 border-amber-800/40' : 'bg-zinc-900/40 border-zinc-800/80'
+                        } ${f.key === 'vendor_name' || f.key === 'total_amount' ? 'sm:col-span-2' : ''}">
+                          <div class="flex items-center justify-between gap-1 mb-1">
+                            <label class="text-xs font-medium text-zinc-300">${f.label}</label>
+                            ${isHigh ? `
+                              <span class="flex items-center gap-1 text-zinc-400 bg-zinc-900 px-1.5 py-0.2 rounded border border-zinc-800 text-[10px]">
+                                ${ICONS.check}
+                                ${(f.confidence * 100).toFixed(0)}%
+                              </span>
+                            ` : `
+                              <span class="flex items-center gap-1 text-amber-400 bg-amber-950/40 px-1.5 py-0.2 rounded border border-amber-800/50 text-[10px]">
+                                ${ICONS.alertTriangle}
+                                ${(f.confidence * 100).toFixed(0)}% Review Req
+                              </span>
+                            `}
+                          </div>
+                          <input
+                            data-key="${f.key}"
+                            type="${typeof f.value === 'number' ? 'number' : 'text'}"
+                            value="${f.value}"
+                            class="field-input w-full bg-zinc-950 rounded px-2 py-1 text-xs font-mono text-zinc-100 border ${
+                              !isHigh ? 'border-amber-700/60 focus:border-amber-500' : 'border-zinc-800 focus:border-zinc-500'
+                            } focus:outline-none"
+                          />
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
                 </div>
 
-                <div class="space-y-2.5">
-                  ${state.fields.map(f => {
-                    const isHigh = f.confidence >= 0.90;
-                    const isMed = f.confidence >= 0.70 && f.confidence < 0.90;
-                    const isLow = f.confidence < 0.70;
+                <!-- Bottom Actions Bar -->
+                <div class="border-t border-[#27272a] pt-3 mt-3 flex items-center justify-between">
+                  <button id="btn-reject" class="px-3 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-rose-400 hover:text-rose-300 font-mono text-xs flex items-center gap-1.5 transition-colors">
+                    <span>Reject Batch</span>
+                  </button>
 
-                    return `
-                      <div class="p-3 rounded-xl border transition-all ${
-                        isLow ? 'bg-rose-950/20 border-rose-500/40' : isMed ? 'bg-amber-950/20 border-amber-500/40' : 'bg-slate-900/40 border-slate-800/80'
-                      }">
-                        <div class="flex items-center justify-between gap-2 mb-1.5">
-                          <label class="text-xs font-medium text-slate-300">${f.label}</label>
-                          <span class="text-[11px] font-mono px-1.5 py-0.5 rounded border ${
-                            isHigh ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' :
-                            isMed ? 'text-amber-400 bg-amber-500/10 border-amber-500/30' :
-                            'text-rose-400 bg-rose-500/10 border-rose-500/30 animate-pulse'
-                          }">
-                            ${(f.confidence * 100).toFixed(0)}% ${isLow ? 'Review Req' : isMed ? 'Low Conf' : 'Verified'}
-                          </span>
-                        </div>
-                        <input
-                          data-key="${f.key}"
-                          type="${typeof f.value === 'number' ? 'number' : 'text'}"
-                          value="${f.value}"
-                          class="field-input w-full bg-slate-950/80 rounded-lg px-3 py-1.5 text-xs font-mono text-slate-100 border ${
-                            isLow ? 'border-rose-500/50' : isMed ? 'border-amber-500/50' : 'border-slate-800'
-                          } focus:border-indigo-500 focus:outline-none"
-                        />
-                      </div>
-                    `;
-                  }).join('')}
+                  <button id="btn-approve" ${state.isApproving || state.isApproved ? 'disabled' : ''} class="px-4 py-1.5 rounded font-mono text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                    state.isApproved ? 'bg-emerald-600 text-white' : 'bg-zinc-100 hover:bg-white text-zinc-950'
+                  }">
+                    <span>${state.isApproving ? 'Persisting...' : state.isApproved ? 'Approved & Persisted' : 'Approve & Persist'}</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -611,161 +593,104 @@
         `;
       }
 
-      // --- Screen 4: Observability & DLQ ---
-      function renderObservabilityScreen() {
+      // --- 4. Observability Screen ---
+      function renderObservability() {
         return `
-          <div class="space-y-6 max-w-5xl mx-auto w-full">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div class="space-y-4 w-full">
+            <div class="flex items-center justify-between border-b border-[#27272a] pb-2.5">
               <div>
-                <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
-                  <span class="text-indigo-400">${ICONS.barChart}</span>
-                  Operational Observability &amp; Health Center
-                </h2>
-                <p class="text-xs text-slate-400 mt-1">
-                  Real-time telemetry, worker concurrency, Bayesian evidence fusion, and Dead Letter Queue management.
-                </p>
+                <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">System Observability &amp; Telemetry Hub</span>
+                <p class="text-[11px] text-zinc-500 font-mono mt-0.5">Real-time Celery worker load, Bayesian confidence scores, and Dead Letter Queue management.</p>
               </div>
-              <div class="flex items-center gap-2 font-mono text-[11px]">
-                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5 font-semibold">
-                  <span class="text-emerald-400">${ICONS.activity}</span>
-                  System Health: 99.8%
-                </span>
+              <div class="flex items-center gap-1.5 font-mono text-[11px] text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 px-2 py-0.5 rounded">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Health: 99.8%</span>
               </div>
             </div>
 
-            <!-- KPI Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/40 space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-[11px] font-mono text-slate-400 uppercase">Active Celery Workers</span>
-                  <div class="p-1.5 rounded-lg border text-indigo-400 bg-indigo-500/10 border-indigo-500/30">${ICONS.activity}</div>
-                </div>
-                <div class="text-xl font-bold font-mono text-slate-100">4 Pools</div>
-                <div class="text-[10px] font-mono text-slate-400">Concurrency: 1 per container</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div class="p-3.5 rounded border border-[#27272a] bg-[#121215] space-y-1">
+                <span class="text-[11px] font-mono text-zinc-500 uppercase font-medium">Active Workers</span>
+                <div class="text-xl font-bold font-mono text-zinc-100">1 Container</div>
+                <div class="text-[10px] font-mono text-zinc-500">Concurrency: 1 per worker</div>
               </div>
-
-              <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/40 space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-[11px] font-mono text-slate-400 uppercase">Total Ingested Docs</span>
-                  <div class="p-1.5 rounded-lg border text-cyan-400 bg-cyan-500/10 border-cyan-500/30">${ICONS.fileText}</div>
-                </div>
-                <div class="text-xl font-bold font-mono text-slate-100">1,284</div>
-                <div class="text-[10px] font-mono text-slate-400">SHA-256 deduplicated</div>
+              <div class="p-3.5 rounded border border-[#27272a] bg-[#121215] space-y-1">
+                <span class="text-[11px] font-mono text-zinc-500 uppercase font-medium">Ingested Documents</span>
+                <div class="text-xl font-bold font-mono text-zinc-100">1,284</div>
+                <div class="text-[10px] font-mono text-zinc-500">SHA-256 deduplicated</div>
               </div>
-
-              <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/40 space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-[11px] font-mono text-slate-400 uppercase">Avg Pipeline Latency</span>
-                  <div class="p-1.5 rounded-lg border text-emerald-400 bg-emerald-500/10 border-emerald-500/30">${ICONS.clock}</div>
-                </div>
-                <div class="text-xl font-bold font-mono text-slate-100">412ms</div>
-                <div class="text-[10px] font-mono text-slate-400">SLA target: &lt;1000ms</div>
+              <div class="p-3.5 rounded border border-[#27272a] bg-[#121215] space-y-1">
+                <span class="text-[11px] font-mono text-zinc-500 uppercase font-medium">Pipeline Latency (p95)</span>
+                <div class="text-xl font-bold font-mono text-zinc-100">412ms</div>
+                <div class="text-[10px] font-mono text-zinc-500">Target: &lt;1,000ms SLA</div>
               </div>
-
-              <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/40 space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-[11px] font-mono text-slate-400 uppercase">Mean Confidence Score</span>
-                  <div class="p-1.5 rounded-lg border text-amber-400 bg-amber-500/10 border-amber-500/30">${ICONS.shieldCheck}</div>
-                </div>
-                <div class="text-xl font-bold font-mono text-slate-100">94.2%</div>
-                <div class="text-[10px] font-mono text-slate-400">Bayesian evidence fusion</div>
+              <div class="p-3.5 rounded border border-[#27272a] bg-[#121215] space-y-1">
+                <span class="text-[11px] font-mono text-zinc-500 uppercase font-medium">Mean Confidence</span>
+                <div class="text-xl font-bold font-mono text-zinc-100">94.2%</div>
+                <div class="text-[10px] font-mono text-zinc-500">Bayesian evidence fusion</div>
               </div>
             </div>
 
-            <!-- Bayesian Confidence Breakdown -->
-            <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/40 space-y-3">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-mono font-semibold text-slate-300">Bayesian Evidence &amp; Confidence Engine</span>
-                <span class="text-xs font-mono font-bold text-emerald-400">94.2% Posterior</span>
-              </div>
-              <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
-                <div class="bg-gradient-to-r from-amber-500 via-cyan-400 to-emerald-400 h-full rounded-full" style="width: 94.2%"></div>
-              </div>
-              <div class="grid grid-cols-3 gap-2 text-[11px] font-mono text-slate-400 pt-1">
-                <div class="p-2 rounded bg-slate-950/60 border border-slate-800 flex flex-col"><span class="text-[10px] text-slate-500">OCR Evidence</span><span class="text-slate-200 font-semibold">96.5%</span></div>
-                <div class="p-2 rounded bg-slate-950/60 border border-slate-800 flex flex-col"><span class="text-[10px] text-slate-500">Schema Invariant</span><span class="text-slate-200 font-semibold">98.5%</span></div>
-                <div class="p-2 rounded bg-slate-950/60 border border-slate-800 flex flex-col"><span class="text-[10px] text-slate-500">Consensus Audit</span><span class="text-slate-200 font-semibold">97.2%</span></div>
-              </div>
-            </div>
-
-            <!-- Dead Letter Queue (DLQ) Table -->
-            <div class="rounded-2xl border border-slate-800 bg-slate-900/40 p-5 space-y-4">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <!-- DLQ Table -->
+            <div class="border border-[#27272a] bg-[#121215] rounded p-4 space-y-3">
+              <div class="flex items-center justify-between border-b border-[#27272a] pb-2.5">
                 <div>
-                  <h3 class="text-xs font-mono font-bold text-slate-200 flex items-center gap-2">
-                    <span class="text-rose-400">${ICONS.layers}</span>
-                    Dead Letter Queue (DLQ) &amp; Fault Tolerance
-                  </h3>
-                  <p class="text-[11px] text-slate-400 mt-0.5">Quarantined tasks isolated from active worker pools (<code class="text-indigo-300">/api/v1/jobs/dlq/list</code>).</p>
+                  <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">Dead Letter Queue (DLQ) &amp; Exception Quarantine</span>
+                  <p class="text-[11px] text-zinc-500 font-mono mt-0.5">Quarantined Celery task executions (<code class="text-zinc-400">/api/v1/jobs/dlq/list</code>)</p>
                 </div>
               </div>
 
               ${state.replayedMessage ? `
-                <div class="p-3 rounded-lg bg-emerald-950/20 border border-emerald-500/30 text-emerald-300 text-xs font-mono flex items-center gap-2">
-                  <span>${ICONS.checkCircle}</span>
-                  <span>${state.replayedMessage}</span>
+                <div class="p-2.5 rounded bg-emerald-950/20 border border-emerald-800/40 text-emerald-300 text-xs font-mono">
+                  ${state.replayedMessage}
                 </div>
               ` : ''}
 
               <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs font-mono">
                   <thead>
-                    <tr class="border-b border-slate-800 text-slate-400 text-[10px] uppercase">
-                      <th class="pb-2">Failed Task ID</th>
-                      <th class="pb-2">Error Classification</th>
-                      <th class="pb-2">Error Message</th>
-                      <th class="pb-2 text-center">Retries</th>
-                      <th class="pb-2 text-right">Action</th>
+                    <tr class="border-b border-zinc-800 text-zinc-500 text-[10px] uppercase">
+                      <th class="pb-2 font-medium">Task ID</th>
+                      <th class="pb-2 font-medium">Classification</th>
+                      <th class="pb-2 font-medium">Error Message</th>
+                      <th class="pb-2 font-medium text-center">Retries</th>
+                      <th class="pb-2 font-medium text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-slate-800/60 text-slate-300 text-[11px]">
-                    ${state.dlqItems.length === 0 ? `
-                      <tr>
-                        <td colspan="5" class="py-6 text-center text-slate-400">
-                          <div class="flex flex-col items-center justify-center gap-1">
-                            <span class="text-emerald-400">${ICONS.checkCircle}</span>
-                            <span>Dead Letter Queue is currently empty. Zero quarantined tasks.</span>
-                          </div>
-                        </td>
-                      </tr>
-                    ` : state.dlqItems.map(item => `
-                      <tr class="hover:bg-slate-950/40 transition-colors">
-                        <td class="py-3 font-semibold text-slate-200">
-                          <div class="flex items-center gap-1.5">
-                            <span class="text-indigo-400">${ICONS.terminal}</span>
-                            <span>${item.job_id}</span>
-                          </div>
-                        </td>
-                        <td class="py-3">
-                          <span class="px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-300 border border-rose-500/30 text-[10px]">
-                            ${item.error_classification}
-                          </span>
-                        </td>
-                        <td class="py-3 text-slate-400 max-w-xs truncate" title="${item.error_message}">
-                          ${item.error_message}
-                        </td>
-                        <td class="py-3 text-center text-slate-300">
-                          ${item.retry_count}/${item.max_retries}
-                        </td>
-                        <td class="py-3 text-right">
-                          <button data-job-id="${item.job_id}" class="btn-replay px-2.5 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-[11px] font-semibold inline-flex items-center gap-1.5 transition-all shadow-md shadow-indigo-600/20">
-                            ${ICONS.rotateCcw}
-                            <span>Replay Job</span>
-                          </button>
+                  <tbody class="divide-y divide-zinc-800/60 text-zinc-300 text-[11px]">
+                    ${state.dlqItems.map(item => `
+                      <tr class="hover:bg-zinc-800/30 transition-colors">
+                        <td class="py-2.5 font-semibold text-zinc-200">${item.job_id}</td>
+                        <td class="py-2.5"><span class="px-1.5 py-0.2 rounded bg-rose-950/40 text-rose-400 border border-rose-800/50 text-[10px]">${item.error_classification}</span></td>
+                        <td class="py-2.5 text-zinc-400 max-w-xs truncate" title="${item.error_message}">${item.error_message}</td>
+                        <td class="py-2.5 text-center text-zinc-400">${item.retry_count}/${item.max_retries}</td>
+                        <td class="py-2.5 text-right space-x-1.5">
+                          <button data-trace="${item.id}" class="btn-trace px-2 py-0.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 text-[10px]">Trace</button>
+                          <button data-job="${item.job_id}" class="btn-replay-dlq px-2 py-0.5 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-[10px] font-semibold">Replay</button>
                         </td>
                       </tr>
                     `).join('')}
                   </tbody>
                 </table>
               </div>
+
+              ${state.selectedTrace ? `
+                <div class="p-3 rounded bg-zinc-950 border border-zinc-800 space-y-2 text-xs font-mono">
+                  <div class="flex items-center justify-between text-zinc-400">
+                    <span>Stack Trace Preview</span>
+                    <button id="btn-close-trace" class="text-zinc-500 hover:text-zinc-300">✕</button>
+                  </div>
+                  <pre class="text-rose-400 text-[11px] whitespace-pre-wrap">${state.selectedTrace}</pre>
+                </div>
+              ` : ''}
             </div>
           </div>
         `;
       }
 
-      // --- Attach Event Listeners ---
-      function attachEventListeners() {
-        // Navigation buttons
+      // --- Event Binding ---
+      function bindEvents() {
+        // Nav tabs
         document.querySelectorAll('.nav-btn').forEach(btn => {
           btn.addEventListener('click', () => {
             state.activeTab = btn.getAttribute('data-tab');
@@ -773,38 +698,64 @@
           });
         });
 
-        // Dropzone & File Upload
+        // Dropzone & File
         const dropzone = document.getElementById('dropzone');
         const fileInput = document.getElementById('file-input');
         if (dropzone && fileInput) {
           dropzone.addEventListener('click', () => fileInput.click());
           fileInput.addEventListener('change', async (e) => {
             if (e.target.files && e.target.files[0]) {
-              const file = e.target.files[0];
-              state.selectedFile = file;
-              state.validationResult = await validateFile(file);
-              if (state.validationResult.isValid) {
-                state.isUploading = true;
-                state.uploadProgress = 30;
-                render();
-
-                setTimeout(() => { state.uploadProgress = 70; render(); }, 300);
-                setTimeout(() => {
-                  state.uploadProgress = 100;
-                  state.isUploading = false;
-                  state.activeJobId = 'job_' + Math.random().toString(36).substring(2, 9);
-                  state.activeDocId = 'doc_' + Math.random().toString(36).substring(2, 9);
-                  state.activeTab = 'pipeline';
-                  render();
-                }, 700);
-              } else {
-                render();
-              }
+              const f = e.target.files[0];
+              state.selectedFile = f;
+              state.validationResult = await validateFile(f);
+              render();
             }
           });
         }
 
-        // Stepper to Review button
+        // Dispatch CTA
+        const btnDispatch = document.getElementById('btn-dispatch');
+        if (btnDispatch) {
+          btnDispatch.addEventListener('click', async () => {
+            state.isUploading = true;
+            state.uploadProgress = 40;
+            render();
+
+            setTimeout(() => { state.uploadProgress = 80; render(); }, 200);
+            setTimeout(() => {
+              state.uploadProgress = 100;
+              state.isUploading = false;
+              const newTaskId = 'task_' + Math.random().toString(36).substring(2, 9);
+              const newDocId = 'doc_' + Math.random().toString(36).substring(2, 9);
+              state.activeJobId = newTaskId;
+              state.activeDocId = newDocId;
+              state.queue.unshift({
+                taskId: newTaskId,
+                documentId: newDocId,
+                filename: state.selectedFile ? state.selectedFile.name : 'document.pdf',
+                schemaType: state.schemaType,
+                priority: state.priority,
+                confidence: 0.942,
+                latencyMs: 640,
+                status: 'REVIEW_REQ'
+              });
+              state.activeTab = 'pipeline';
+              render();
+            }, 500);
+          });
+        }
+
+        // Inspect row buttons
+        document.querySelectorAll('.btn-inspect').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const docId = btn.getAttribute('data-doc-id');
+            state.activeDocId = docId;
+            state.activeTab = 'reviewer';
+            render();
+          });
+        });
+
+        // Pipeline to review
         const btnGotoReview = document.getElementById('btn-goto-review');
         if (btnGotoReview) {
           btnGotoReview.addEventListener('click', () => {
@@ -813,14 +764,42 @@
           });
         }
 
-        // Save & Approve button
-        const btnSaveApprove = document.getElementById('btn-save-approve');
-        if (btnSaveApprove) {
-          btnSaveApprove.addEventListener('click', async () => {
+        // Reviewer controls
+        const btnZoomIn = document.getElementById('btn-zoom-in');
+        const btnZoomOut = document.getElementById('btn-zoom-out');
+        const btnFit = document.getElementById('btn-fit');
+        const btnRotate = document.getElementById('btn-rotate');
+        if (btnZoomIn) btnZoomIn.addEventListener('click', () => { state.zoom = Math.min(200, state.zoom + 25); render(); });
+        if (btnZoomOut) btnZoomOut.addEventListener('click', () => { state.zoom = Math.max(50, state.zoom - 25); render(); });
+        if (btnFit) btnFit.addEventListener('click', () => { state.zoom = 100; render(); });
+        if (btnRotate) btnRotate.addEventListener('click', () => { state.rotation = (state.rotation + 90) % 360; render(); });
+
+        // Input Field Change
+        document.querySelectorAll('.field-input').forEach(input => {
+          input.addEventListener('input', (e) => {
+            const key = e.target.getAttribute('data-key');
+            const field = state.fields.find(f => f.key === key);
+            if (field) {
+              field.value = e.target.value;
+              field.confidence = 1.0;
+            }
+          });
+        });
+
+        // Approve & Reject
+        const btnReject = document.getElementById('btn-reject');
+        if (btnReject) {
+          btnReject.addEventListener('click', () => {
+            state.activeTab = 'observability';
+            render();
+          });
+        }
+
+        const btnApprove = document.getElementById('btn-approve');
+        if (btnApprove) {
+          btnApprove.addEventListener('click', async () => {
             state.isApproving = true;
             render();
-
-            // Call feedback API
             await fetch('/api/v1/runtime/feedback', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -830,14 +809,12 @@
                 original_value: '870.38',
                 corrected_value: '870.38',
                 distillation_type: 'RULE',
-                operator_notes: 'Operator verified tax calculation'
+                operator_notes: 'Operator confirmed tax rule'
               })
             }).catch(() => {});
-
             state.isApproving = false;
-            state.approvalConfirmed = true;
+            state.isApproved = true;
             render();
-
             setTimeout(() => {
               state.activeTab = 'observability';
               render();
@@ -845,44 +822,31 @@
           });
         }
 
-        // Zoom & Rotate Controls
-        const btnZoomIn = document.getElementById('btn-zoom-in');
-        const btnZoomOut = document.getElementById('btn-zoom-out');
-        const btnRotate = document.getElementById('btn-rotate');
-        if (btnZoomIn) btnZoomIn.addEventListener('click', () => { state.zoom = Math.min(200, state.zoom + 25); render(); });
-        if (btnZoomOut) btnZoomOut.addEventListener('click', () => { state.zoom = Math.max(50, state.zoom - 25); render(); });
-        if (btnRotate) btnRotate.addEventListener('click', () => { state.rotation = (state.rotation + 90) % 360; render(); });
-
-        // Input Field Edits
-        document.querySelectorAll('.field-input').forEach(input => {
-          input.addEventListener('input', (e) => {
-            const key = e.target.getAttribute('data-key');
-            const val = e.target.value;
-            const field = state.fields.find(f => f.key === key);
-            if (field) {
-              field.value = val;
-              field.confidence = 1.0;
-            }
+        // Trace and DLQ replay
+        document.querySelectorAll('.btn-trace').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const item = state.dlqItems[0];
+            state.selectedTrace = item ? item.stack_trace : null;
+            render();
           });
         });
 
-        // DLQ Replay Buttons
-        document.querySelectorAll('.btn-replay').forEach(btn => {
+        const btnCloseTrace = document.getElementById('btn-close-trace');
+        if (btnCloseTrace) btnCloseTrace.addEventListener('click', () => { state.selectedTrace = null; render(); });
+
+        document.querySelectorAll('.btn-replay-dlq').forEach(btn => {
           btn.addEventListener('click', async () => {
-            const jobId = btn.getAttribute('data-job-id');
+            const jobId = btn.getAttribute('data-job');
             await fetch(`/api/v1/jobs/dlq/replay/${jobId}`, { method: 'POST' }).catch(() => {});
-            state.dlqItems = state.dlqItems.filter(item => item.job_id !== jobId);
+            state.dlqItems = state.dlqItems.filter(i => i.job_id !== jobId);
             state.replayedMessage = `Job '${jobId}' successfully replayed back to active queue.`;
             render();
           });
         });
       }
 
-      // Initial Mount
       document.addEventListener('DOMContentLoaded', render);
-      if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        render();
-      }
+      if (document.readyState === 'complete' || document.readyState === 'interactive') render();
     })();
   </script>
 </body>
