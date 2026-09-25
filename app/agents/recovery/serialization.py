@@ -1,0 +1,18 @@
+"""
+Recovery Serializer Subsystem.
+Serializes failures, root cause reports, incidents, and recovery requests for Pub/Sub, Cloud Tasks, and DB storage.
+"""
+
+from typing import Any, Dict
+
+
+class RecoverySerializer:
+    """Serializes recovery models to JSON string and dictionary representations."""
+
+    @staticmethod
+    def to_dict(model: Any) -> Dict[str, Any]:
+        return model.model_dump(mode="json")
+
+    @staticmethod
+    def to_json(model: Any) -> str:
+        return model.model_dump_json()

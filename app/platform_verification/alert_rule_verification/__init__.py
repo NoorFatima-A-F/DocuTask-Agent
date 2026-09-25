@@ -1,0 +1,47 @@
+"""DocuTask Agent - Enterprise Alert Rule Verification Framework (Phase 3H.4.5)."""
+
+from .domain.models import (
+    AlertLifecycleState,
+    AlertCategory,
+    AlertSeverity,
+    AlertCertificationTier,
+    AlertRuleSpec,
+    ArchitectureReport,
+    TaxonomyReport,
+    CriticalAlertReport,
+    WarningAlertReport,
+    ConditionTransitionResult,
+    ConditionTestReport,
+    SeverityReport,
+    MessageQualityReport,
+    RoutingReport,
+    FatigueReport,
+    FailureInjectionResult,
+    FailureTestReport,
+    PerformanceReport,
+    AlertQualityScorecard,
+)
+from .runtime.alert_rule_verification_runtime import AlertRuleVerificationRuntime
+
+__all__ = [
+    "AlertLifecycleState",
+    "AlertCategory",
+    "AlertSeverity",
+    "AlertCertificationTier",
+    "AlertRuleSpec",
+    "ArchitectureReport",
+    "TaxonomyReport",
+    "CriticalAlertReport",
+    "WarningAlertReport",
+    "ConditionTransitionResult",
+    "ConditionTestReport",
+    "SeverityReport",
+    "MessageQualityReport",
+    "RoutingReport",
+    "FatigueReport",
+    "FailureInjectionResult",
+    "FailureTestReport",
+    "PerformanceReport",
+    "AlertQualityScorecard",
+    "AlertRuleVerificationRuntime",
+]

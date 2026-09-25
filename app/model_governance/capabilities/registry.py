@@ -1,0 +1,21 @@
+"""Model Capability Definitions (Phase 8C)."""
+
+from __future__ import annotations
+
+import enum
+
+
+class ModelCapability(str, enum.Enum):
+    """Supported model capabilities."""
+    TEXT_GENERATION = "TEXT_GENERATION"
+    REASONING = "REASONING"
+    DOCUMENT_EXTRACTION = "DOCUMENT_EXTRACTION"
+    SUMMARIZATION = "SUMMARIZATION"
+    VISION = "VISION"
+    CODE_GENERATION = "CODE_GENERATION"
+    EMBEDDINGS = "EMBEDDINGS"
+    EMBEDDING = "EMBEDDING"
+    CLASSIFICATION = "CLASSIFICATION"
+    FUNCTION_CALLING = "FUNCTION_CALLING"
+    STRUCTURED_OUTPUT = "STRUCTURED_OUTPUT"
+    STREAMING = "STREAMING"

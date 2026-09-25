@@ -1,0 +1,50 @@
+"""
+Part 3A: Enterprise Container and Runtime Verification Framework Package.
+"""
+from app.platform_verification.container_verification.cli import ContainerVerificationPlatform
+from app.platform_verification.container_verification.models.verification_models import (
+    ContainerCertificationTier,
+    VulnerabilitySeverity,
+    RestartPolicy,
+    ServiceDefinition,
+    NetworkDefinition,
+    VolumeDefinition,
+    ContainerArchitectureModel,
+    ArchitectureDiscoveryReport,
+    ContainerBoundaryReport,
+    DockerfileQualityReport,
+    ImageSecurityReport,
+    ImageEfficiencyReport,
+    BuildReproducibilityReport,
+    RuntimeHealthReport,
+    ContainerFailureReport,
+    ResourceLimitReport,
+    NetworkSecurityReport,
+    SbomReport,
+    ContainerCertificationReport,
+    ContainerVerificationEvidencePackage,
+)
+
+__all__ = [
+    "ContainerVerificationPlatform",
+    "ContainerCertificationTier",
+    "VulnerabilitySeverity",
+    "RestartPolicy",
+    "ServiceDefinition",
+    "NetworkDefinition",
+    "VolumeDefinition",
+    "ContainerArchitectureModel",
+    "ArchitectureDiscoveryReport",
+    "ContainerBoundaryReport",
+    "DockerfileQualityReport",
+    "ImageSecurityReport",
+    "ImageEfficiencyReport",
+    "BuildReproducibilityReport",
+    "RuntimeHealthReport",
+    "ContainerFailureReport",
+    "ResourceLimitReport",
+    "NetworkSecurityReport",
+    "SbomReport",
+    "ContainerCertificationReport",
+    "ContainerVerificationEvidencePackage",
+]

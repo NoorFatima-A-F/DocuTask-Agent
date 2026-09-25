@@ -1,0 +1,76 @@
+"""
+Phase 3H.5.11: Enterprise Health Quality Scoring & Operational Certification Framework
+"""
+from .domain import (
+    HealthMaturityLevel,
+    CertificationStatus,
+    DeploymentDecision,
+    LivenessQualityMetrics,
+    ReadinessQualityMetrics,
+    DependencyHealthMetrics,
+    FailureDetectionMetrics,
+    RecoveryCapabilityMetrics,
+    MonitoringIntegrationMetrics,
+    SecurityComplianceMetrics,
+    EvidenceQualityMetrics,
+    SREReliabilityMetrics,
+    RegressionComparison,
+    RegressionReport,
+    DeploymentGateCheckItem,
+    DeploymentGateReport,
+    CategoryScoreItem,
+    ScoringModelDefinition,
+    HealthQualityCertificationReport,
+    HealthQualityScorecard,
+    IHealthQualityEvaluator,
+    ISREReliabilityEngine,
+    IRegressionDetector,
+    IDeploymentGatekeeper,
+    IHealthQualityScorer,
+)
+from .evaluators import (
+    HealthQualityEvaluator,
+    SREReliabilityEngine,
+    RegressionDetector,
+    DeploymentReadinessGate,
+)
+from .scoring import HealthQualityScorer
+from .exporter import HealthQualityExporter
+from .runtime import HealthQualityRuntime
+from .api import router as health_quality_router
+
+__all__ = [
+    "HealthMaturityLevel",
+    "CertificationStatus",
+    "DeploymentDecision",
+    "LivenessQualityMetrics",
+    "ReadinessQualityMetrics",
+    "DependencyHealthMetrics",
+    "FailureDetectionMetrics",
+    "RecoveryCapabilityMetrics",
+    "MonitoringIntegrationMetrics",
+    "SecurityComplianceMetrics",
+    "EvidenceQualityMetrics",
+    "SREReliabilityMetrics",
+    "RegressionComparison",
+    "RegressionReport",
+    "DeploymentGateCheckItem",
+    "DeploymentGateReport",
+    "CategoryScoreItem",
+    "ScoringModelDefinition",
+    "HealthQualityCertificationReport",
+    "HealthQualityScorecard",
+    "IHealthQualityEvaluator",
+    "ISREReliabilityEngine",
+    "IRegressionDetector",
+    "IDeploymentGatekeeper",
+    "IHealthQualityScorer",
+    "HealthQualityEvaluator",
+    "SREReliabilityEngine",
+    "RegressionDetector",
+    "DeploymentReadinessGate",
+    "HealthQualityScorer",
+    "HealthQualityExporter",
+    "HealthQualityRuntime",
+    "health_quality_router",
+]
