@@ -72,7 +72,18 @@ def create_application() -> FastAPI:
     # Include Routers
     app.include_router(api_v1_router, prefix=settings.API_V1_STR)
 
+    # Root route serving the full HITL Frontend Dashboard
+    @app.get("/", include_in_schema=False)
+    async def serve_frontend():
+        import os
+        from fastapi.responses import FileResponse, HTMLResponse
+        frontend_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist", "index.html")
+        if os.path.exists(frontend_path):
+            return FileResponse(frontend_path)
+        return HTMLResponse("<h1>DocuTask Agent API</h1><p>Visit <a href='/api/v1/docs'>/api/v1/docs</a> for API inspection.</p>")
+
     return app
 
 
 app = create_application()
+
