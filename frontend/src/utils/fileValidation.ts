@@ -1,98 +1,98 @@
 /**
- * Client-Side Defensive Guards: Magic Byte Sniffing & Payload Size Validation.
- * Validates actual binary signatures before network transmission to prevent 413/415 errors.
+ * Client-Side Defensive Guards & Binary Sniffing
+ * Validates payload size (<=15 MB) and authenticates magic byte signatures
+ * prior to any network dispatch.
  */
 
-export interface ValidationResult {
-  isValid: boolean;
-  detectedMime: string;
-  fileSizeFormatted: string;
-  error?: string;
-  fileBytes?: Uint8Array;
-}
+import { DocumentValidationResult } from '../types/document';
 
-export const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB limit
+export const MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024; // 15 Megabytes
+
+const MAGIC_SIGNATURES: Record<string, { bytes: number[]; offset?: number; mime: string }> = {
+  pdf: {
+    bytes: [0x25, 0x50, 0x44, 0x46], // %PDF
+    mime: 'application/pdf',
+  },
+  png: {
+    bytes: [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A], // PNG magic header
+    mime: 'image/png',
+  },
+  jpeg: {
+    bytes: [0xFF, 0xD8, 0xFF], // JPEG SOI marker
+    mime: 'image/jpeg',
+  },
+  tiff_le: {
+    bytes: [0x49, 0x49, 0x2A, 0x00], // II*. (Little Endian)
+    mime: 'image/tiff',
+  },
+  tiff_be: {
+    bytes: [0x4D, 0x4D, 0x00, 0x2A], // MM.* (Big Endian)
+    mime: 'image/tiff',
+  },
+};
 
 /**
- * Sniffs actual binary header magic numbers from file ArrayBuffer.
+ * Computes SHA-256 hex string of File for duplicate detection and idempotency.
  */
-export async function validateFileMagicBytes(file: File): Promise<ValidationResult> {
-  const fileSizeFormatted = formatBytes(file.size);
+export async function calculateSHA256(file: File): Promise<string> {
+  const arrayBuffer = await file.arrayBuffer();
+  const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+}
 
-  // 1. Client-Side Size Guard (<10MB)
+/**
+ * Validates file binary header against known file signatures.
+ */
+export async function validateDocumentFile(file: File): Promise<DocumentValidationResult> {
+  // 1. Enforce payload size boundary (<15MB)
   if (file.size > MAX_FILE_SIZE_BYTES) {
+    const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
     return {
       isValid: false,
-      detectedMime: 'unknown',
-      fileSizeFormatted,
-      error: `Payload Size Exceeded (${fileSizeFormatted}). Platform limit is 10 MB. Please compress or crop the file.`,
+      error: `File payload exceeds maximum boundary of 15MB (Current: ${sizeMb}MB). Rejected at client perimeter.`,
+      sizeBytes: file.size,
     };
   }
 
   if (file.size === 0) {
     return {
       isValid: false,
-      detectedMime: 'unknown',
-      fileSizeFormatted,
-      error: 'Empty file detected (0 Bytes). Please upload a valid document binary.',
+      error: 'Cannot process empty (0 bytes) document payload.',
+      sizeBytes: 0,
     };
   }
 
-  // 2. Read first 16 bytes for magic number sniffing
-  try {
-    const buffer = await file.slice(0, 16).arrayBuffer();
-    const bytes = new Uint8Array(buffer);
+  // 2. Read first 16 bytes for magic byte sniffing
+  const slice = file.slice(0, 16);
+  const buffer = await slice.arrayBuffer();
+  const headerBytes = new Uint8Array(buffer);
 
-    let detectedMime = 'unknown';
+  let detectedMime: string | undefined = undefined;
 
-    // PDF Magic Bytes: %PDF (0x25 0x50 0x44 0x46)
-    if (bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46) {
-      detectedMime = 'application/pdf';
+  for (const sig of Object.values(MAGIC_SIGNATURES)) {
+    const isMatch = sig.bytes.every((byte, idx) => headerBytes[idx] === byte);
+    if (isMatch) {
+      detectedMime = sig.mime;
+      break;
     }
-    // PNG Magic Bytes: 0x89 0x50 0x4E 0x47 0x0D 0x0A 0x1A 0x0A
-    else if (bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47) {
-      detectedMime = 'image/png';
-    }
-    // JPEG Magic Bytes: 0xFF 0xD8 0xFF
-    else if (bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF) {
-      detectedMime = 'image/jpeg';
-    }
-    // TIFF Magic Bytes: Little-endian 0x49 0x49 0x2A 0x00 or Big-endian 0x4D 0x4D 0x00 0x2A
-    else if ((bytes[0] === 0x49 && bytes[1] === 0x49 && bytes[2] === 0x2A && bytes[3] === 0x00) ||
-             (bytes[0] === 0x4D && bytes[1] === 0x4D && bytes[2] === 0x00 && bytes[3] === 0x2A)) {
-      detectedMime = 'image/tiff';
-    }
+  }
 
-    if (detectedMime === 'unknown') {
-      return {
-        isValid: false,
-        detectedMime: 'application/octet-stream',
-        fileSizeFormatted,
-        error: `Invalid file signature. File header magic bytes do not match supported document types (PDF, PNG, JPEG, TIFF).`,
-      };
-    }
-
-    return {
-      isValid: true,
-      detectedMime,
-      fileSizeFormatted,
-      fileBytes: bytes,
-    };
-  } catch (err: any) {
+  if (!detectedMime) {
     return {
       isValid: false,
-      detectedMime: 'unknown',
-      fileSizeFormatted,
-      error: `Failed to inspect file binary: ${err.message || 'Unknown read error'}`,
+      error: 'Unrecognized or corrupted binary signature. Supported document formats: PDF, TIFF, PNG, JPEG.',
+      sizeBytes: file.size,
     };
   }
-}
 
-export function formatBytes(bytes: number, decimals = 2): string {
-  if (bytes === 0) return '0 Bytes';
-  const k = 1024;
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  // 3. Compute client-side SHA-256
+  const sha256Hex = await calculateSHA256(file);
+
+  return {
+    isValid: true,
+    detectedMimeType: detectedMime,
+    sizeBytes: file.size,
+    sha256Hex,
+  };
 }
