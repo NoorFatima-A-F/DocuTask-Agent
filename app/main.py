@@ -1,11 +1,14 @@
 """
 FastAPI Application Entry Point.
-Initializes application, CORS middleware, exception handlers, and API routers.
+Initializes application, CORS middleware, exception handlers, API routers, and Frontend SPA serving.
 """
 
+import os
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.v1.router import api_v1_router
 from app.core.config import settings
@@ -40,6 +43,23 @@ async def lifespan(app: FastAPI):
     logger.info("Shutting down application...")
 
 
+def find_frontend_index() -> str | None:
+    """Discovers the frontend index.html across production and local dev directories."""
+    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    candidates = [
+        os.path.join(repo_root, "frontend", "dist", "index.html"),
+        os.path.join(repo_root, "frontend", "index.html"),
+        os.path.join(repo_root, "dist", "index.html"),
+        os.path.join(os.getcwd(), "frontend", "dist", "index.html"),
+        os.path.join(os.getcwd(), "frontend", "index.html"),
+        os.path.join(os.getcwd(), "dist", "index.html"),
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    return None
+
+
 def create_application() -> FastAPI:
     """Application factory method."""
     app = FastAPI(
@@ -69,21 +89,41 @@ def create_application() -> FastAPI:
     # Exception Handlers
     register_exception_handlers(app)
 
-    # Include Routers
+    # Include API Routers
     app.include_router(api_v1_router, prefix=settings.API_V1_STR)
 
-    # Root route serving the full HITL Frontend Dashboard
+    # Mount static assets if dist exists
+    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    static_assets_dir = os.path.join(repo_root, "frontend", "dist", "assets")
+    if os.path.exists(static_assets_dir):
+        app.mount("/assets", StaticFiles(directory=static_assets_dir), name="assets")
+
+    # Favicon Route
+    @app.get("/favicon.ico", include_in_schema=False)
+    async def favicon():
+        return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+    # Root route and SPA Catch-all routes serving HITL Frontend Dashboard
     @app.get("/", include_in_schema=False)
+    @app.get("/upload", include_in_schema=False)
+    @app.get("/jobs", include_in_schema=False)
+    @app.get("/jobs/{job_id}", include_in_schema=False)
+    @app.get("/documents/{document_id}/review", include_in_schema=False)
+    @app.get("/reviewer", include_in_schema=False)
+    @app.get("/dashboard", include_in_schema=False)
     async def serve_frontend():
-        import os
-        from fastapi.responses import FileResponse, HTMLResponse
-        frontend_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist", "index.html")
-        if os.path.exists(frontend_path):
-            return FileResponse(frontend_path)
-        return HTMLResponse("<h1>DocuTask Agent API</h1><p>Visit <a href='/api/v1/docs'>/api/v1/docs</a> for API inspection.</p>")
+        index_file = find_frontend_index()
+        if index_file:
+            return FileResponse(index_file)
+        return HTMLResponse(
+            "<!DOCTYPE html><html><body style='background:#090d16;color:#fff;font-family:sans-serif;padding:2rem;text-align:center;'>"
+            "<h1>DocuTask Agent API</h1>"
+            "<p>API is healthy and online.</p>"
+            "<a style='color:#6366f1;' href='/api/v1/docs'>Go to OpenAPI Documentation (/api/v1/docs)</a>"
+            "</body></html>"
+        )
 
     return app
 
 
 app = create_application()
-
