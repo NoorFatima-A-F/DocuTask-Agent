@@ -47,7 +47,7 @@ export const MetricsSummary: React.FC = () => {
   const kpis = [
     {
       title: 'Active Workers',
-      value: `${metrics.active_workers} Active Container${metrics.active_workers === 1 ? '' : 's'}`,
+      value: `${metrics.active_workers} Active ${metrics.active_workers === 1 ? 'Worker' : 'Workers'}`,
       sub: 'Concurrency: 1 per container',
       delta: '100% Online',
       isPositive: true,

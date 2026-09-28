@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           {onOpenCommandPalette && (
             <button
               onClick={onOpenCommandPalette}
-              className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors ml-2"
+              className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors ml-2 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
               title="Search workspaces and commands (Cmd+K / Ctrl+K)"
             >
               <Search className="w-3 h-3 text-zinc-400" />
@@ -84,8 +84,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
           <div className="flex items-center gap-1.5" title="Active Celery Worker Containers">
             <Activity className="w-3.5 h-3.5 text-zinc-400" />
-            <span className="text-zinc-300">Active Workers:</span>
-            <span className="text-zinc-100 font-semibold tabular-nums">{isOnline ? health?.activeWorkers ?? 1 : 0}</span>
+            <span className="text-zinc-300">Workers:</span>
+            <span className="text-zinc-100 font-semibold tabular-nums">
+              {isOnline ? `${health?.activeWorkers ?? 1} Active` : '0'}
+            </span>
           </div>
 
           <div className="h-3 w-px bg-zinc-800" />
@@ -102,7 +104,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             href="/api/v1/docs"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-zinc-100 px-2.5 py-1 rounded border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 transition-colors"
+            className="flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-zinc-100 px-2.5 py-1 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 transition-colors focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
             title="Open OpenAPI Swagger UI"
           >
             <Terminal className="w-3.5 h-3.5 text-zinc-400" />
