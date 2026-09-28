@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppShell } from './components/layout/AppShell';
 import { ActiveTab } from './components/layout/Sidebar';
-import { DragDropZone } from './components/ingestion/DragDropZone';
+import { IngestionStudio } from './pages/IngestionStudio';
 import { AsyncStepper } from './components/pipeline/AsyncStepper';
 import { TwoPaneReviewer } from './components/reviewer/TwoPaneReviewer';
 import { MetricsSummary } from './components/observability/MetricsSummary';
@@ -76,7 +76,7 @@ export const AppContent: React.FC = () => {
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
       >
         {activeTab === 'ingestion' && (
-          <DragDropZone
+          <IngestionStudio
             onJobCreated={handleJobCreated}
             onNavigateToReview={handleNavigateToReview}
           />

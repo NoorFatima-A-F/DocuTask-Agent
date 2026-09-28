@@ -79,11 +79,10 @@
         isSpotlightOpen: false,
         serverOnline: true,
         serverHealth: { activeWorkers: 1, queueDepth: 0 },
-        latencyDataIndex: null,
         searchQuery: '',
         statusFilter: 'ALL',
         isLive: true,
-        selectedTaskPreview: null,
+        selectedTask: null,
         fields: [
           { group: 'Document Metadata', key: 'invoice_number', label: 'Invoice Number', value: 'INV-2026-8894', confidence: 0.98, regex: '^INV-[0-9]{4}-[0-9]{4}$', box: { left: '65%', top: '5%', width: '30%', height: '7%' } },
           { group: 'Document Metadata', key: 'invoice_date', label: 'Issue Date', value: '2026-09-24', confidence: 0.94, regex: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', box: { left: '65%', top: '12%', width: '30%', height: '4%' } },
@@ -100,10 +99,10 @@
           { description: 'Enterprise Direct Connect 10G Dedicated Port', qty: 1, unitPrice: 850.00, total: 850.00 },
         ],
         queue: [
-          { taskId: 'task_e847c91a', documentId: 'doc_e847c910a2', filename: 'INV-2026-8894.pdf', schemaType: 'InvoiceTaxonomy.v2', priority: 'P0', confidence: 94.2, latencyMs: 640, status: 'TAX_ANOMALY', reviewReason: 'Calculated tax variance (68% vs 85% expected)' },
-          { taskId: 'task_b921fa02', documentId: 'doc_b921fa0281', filename: 'Cloudflare_Subscription_Q3.pdf', schemaType: 'InvoiceTaxonomy.v2', priority: 'P1', confidence: 98.5, latencyMs: 412, status: 'COMPLETED', reviewReason: null },
-          { taskId: 'task_3821a99f', documentId: 'doc_3821a99fa4', filename: 'Uber_Business_Receipt_98.png', schemaType: 'CommercialReceipt.v1', priority: 'P2', confidence: 72.4, latencyMs: 380, status: 'LOW_CONFIDENCE', reviewReason: 'Model confidence (72.4%) below 75% threshold' },
-          { taskId: 'task_1120aa44', documentId: 'doc_1120aa44bc', filename: 'Master_Services_Agmt_v4.pdf', schemaType: 'EnterpriseContract.v1', priority: 'P0', confidence: 91.2, latencyMs: 820, status: 'COMPLETED', reviewReason: null },
+          { taskId: 'task_e847c91a', documentId: 'doc_e847c910a2', filename: 'INV-2026-8894.pdf', schemaType: 'InvoiceTaxonomy.v2', priority: 'P0', confidence: 94.2, latencyMs: 640, status: 'Tax Discrepancy', reviewReason: 'Calculated variance (68% vs 85% expected)' },
+          { taskId: 'task_b921fa02', documentId: 'doc_b921fa0281', filename: 'Cloudflare_Subscription_Q3.pdf', schemaType: 'InvoiceTaxonomy.v2', priority: 'P1', confidence: 98.5, latencyMs: 412, status: 'Completed', reviewReason: null },
+          { taskId: 'task_3821a99f', documentId: 'doc_3821a99fa4', filename: 'Uber_Business_Receipt_98.png', schemaType: 'CommercialReceipt.v1', priority: 'P2', confidence: 72.4, latencyMs: 380, status: 'Needs Review', reviewReason: 'Model confidence below 75% threshold' },
+          { taskId: 'task_1120aa44', documentId: 'doc_1120aa44bc', filename: 'Master_Services_Agmt_v4.pdf', schemaType: 'EnterpriseContract.v1', priority: 'P0', confidence: 91.2, latencyMs: 820, status: 'Completed', reviewReason: null },
         ],
         dlqItems: []
       };
@@ -140,24 +139,26 @@
       // --- SVG Icons ---
       const ICONS = {
         uploadCloud: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>`,
+        upload: `<svg class="w-5 h-5 stroke-[1.75]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>`,
         workflow: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
         checkSquare: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>`,
         barChart: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`,
         check: `<svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`,
         alertTriangle: `<svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`,
-        shieldAlert: `<svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`,
+        shieldAlert: `<svg class="w-3.5 h-3.5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`,
         terminal: `<svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`,
         rotateCcw: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
         externalLink: `<svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>`,
         arrowLeft: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>`,
         arrowRight: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>`,
         fileText: `<svg class="w-4 h-4 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>`,
+        fileSearch: `<svg class="h-6 w-6 stroke-[1.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path><circle cx="16" cy="16" r="3"></circle><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 18.5L21 21"></path></svg>`,
         x: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`,
-        eye: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>`,
-        shieldCheck: `<svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`,
+        eye: `<svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>`,
+        shieldCheck: `<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`,
         search: `<svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>`,
         copy: `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>`,
-        loader2: `<svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
+        loader2: `<svg class="w-4 h-4 animate-spin text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
       };
 
       // --- Live Backend Health Probing ---
@@ -315,33 +316,35 @@
 
           <!-- Main Layout Container (Zero Page Scroll) -->
           <div class="flex-1 flex flex-col lg:flex-row min-h-0 w-full max-w-full">
-            <!-- Sidebar -->
+            <!-- Sidebar with Standardized Semantic Badges -->
             <aside aria-label="Workspaces navigation" class="w-full lg:w-56 border-r border-[#27272a] bg-[#121215] p-2.5 flex flex-col justify-between shrink-0 select-none">
               <div class="space-y-3">
                 <div class="px-2 pt-1">
                   <span class="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">Workspaces</span>
                 </div>
                 <nav role="navigation" class="space-y-0.5">
-                  ${renderNavItem('ingestion', 'Ingestion Studio', ICONS.uploadCloud, '15MB')}
-                  ${renderNavItem('pipeline', 'Pipeline Monitor', ICONS.workflow, state.activeJobId ? 'Active' : null)}
-                  ${renderNavItem('reviewer', 'HITL Reviewer', ICONS.checkSquare, 'Split View')}
-                  ${renderNavItem('observability', 'DLQ & Telemetry', ICONS.barChart, 'Live')}
+                  ${renderNavItem('ingestion', 'Ingestion Studio', ICONS.uploadCloud, null)}
+                  ${renderNavItem('pipeline', 'Pipeline Monitor', ICONS.workflow, 'Active', 'bg-emerald-950/40 text-emerald-400 border-emerald-800/50')}
+                  ${renderNavItem('reviewer', 'HITL Reviewer', ICONS.checkSquare, '2 Pending', 'bg-amber-950/40 text-amber-400 border-amber-800/50')}
+                  ${renderNavItem('observability', 'DLQ & Telemetry', ICONS.barChart, 'Healthy', 'bg-emerald-950/40 text-emerald-400 border-emerald-800/50')}
                 </nav>
               </div>
 
-              <div class="p-2.5 rounded border border-zinc-800/80 bg-zinc-900/30 text-[11px] font-mono text-zinc-400 space-y-1 mt-3 lg:mt-0">
+              <div class="p-2.5 rounded-lg border border-zinc-800/80 bg-zinc-900/30 text-[11px] font-mono text-zinc-400 space-y-1 mt-3 lg:mt-0">
                 <div class="flex items-center justify-between">
-                  <span>Extraction Engine</span>
+                  <span class="text-zinc-400">Extraction Engine</span>
                   <span class="text-zinc-200 font-medium">Multimodal v1.5</span>
                 </div>
                 <div class="flex items-center justify-between">
-                  <span>Schema Taxonomy</span>
-                  <span class="text-emerald-400 font-medium flex items-center gap-1">Validated</span>
+                  <span class="text-zinc-400">Schema Taxonomy</span>
+                  <span class="text-emerald-400 font-medium flex items-center gap-1">
+                    <span class="text-emerald-400">${ICONS.check}</span> Validated
+                  </span>
                 </div>
               </div>
             </aside>
 
-            <!-- Screen Viewport (Scrolls naturally when needed, zero horizontal overflow) -->
+            <!-- Screen Viewport (Scrolls naturally, zero horizontal scrollbar) -->
             <main role="main" class="flex-1 min-h-0 min-w-0 w-full max-w-full bg-zinc-950 p-4 lg:p-6 flex flex-col overflow-y-auto">
               ${renderScreen()}
             </main>
@@ -355,7 +358,7 @@
         bindEvents();
       }
 
-      function renderNavItem(id, label, icon, badge) {
+      function renderNavItem(id, label, icon, badge, badgeColor) {
         const isActive = state.activeTab === id;
         return `
           <button data-tab="${id}" class="nav-btn w-full text-left px-2.5 py-2 rounded-lg border text-xs font-medium transition-colors flex items-center justify-between cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none ${
@@ -367,7 +370,7 @@
               <span class="${isActive ? 'text-zinc-100' : 'text-zinc-400'}">${icon}</span>
               <span>${label}</span>
             </div>
-            ${badge ? `<span class="text-[10px] font-mono px-1.5 py-0.2 rounded border ${isActive ? 'bg-zinc-900 text-zinc-200 border-zinc-700' : 'bg-zinc-900/50 text-zinc-400 border-zinc-800'}">${badge}</span>` : ''}
+            ${badge ? `<span class="text-[10px] font-mono px-1.5 py-0.2 rounded border ${badgeColor || (isActive ? 'bg-zinc-900 text-zinc-200 border-zinc-700' : 'bg-zinc-900/50 text-zinc-400 border-zinc-800')}">${badge}</span>` : ''}
           </button>
         `;
       }
@@ -381,110 +384,118 @@
       }
 
       // --- Helper: Render Semantic Status Badge ---
-      function renderStatusBadge(status, reason) {
-        const s = (status || '').toUpperCase();
-        if (s === 'COMPLETED') {
+      function renderStatusCell(status, reason) {
+        const s = (status || '').toLowerCase();
+        if (s === 'completed') {
           return `
-            <span class="inline-flex items-center gap-1.5 rounded-md bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-400 border border-emerald-500/20">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-400">
               ${ICONS.check} Completed
             </span>
           `;
         }
-        if (s === 'TAX_ANOMALY' || (reason && reason.toLowerCase().includes('tax'))) {
+        if (s.includes('tax') || s.includes('discrepancy')) {
           return `
-            <div class="flex flex-col">
-              <span class="inline-flex items-center gap-1 rounded-md bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-400 border border-amber-500/20 w-fit">
+            <div class="flex flex-col items-start gap-0.5">
+              <span class="inline-flex items-center gap-1 rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-400">
                 ${ICONS.alertTriangle} Tax Discrepancy
               </span>
-              <span class="mt-0.5 text-[11px] text-zinc-400 font-sans">${reason || 'Calculated tax variance (68% vs 85% expected)'}</span>
+              <span class="text-[11px] text-zinc-400 font-sans">${reason || 'Calculated variance (68% vs 85% expected)'}</span>
             </div>
           `;
         }
-        if (s === 'LOW_CONFIDENCE' || s === 'REVIEW_REQ' || (reason && reason.toLowerCase().includes('confidence'))) {
+        if (s.includes('review') || s.includes('confidence') || s.includes('low')) {
           return `
-            <div class="flex flex-col">
-              <span class="inline-flex items-center gap-1 rounded-md bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-400 border border-amber-500/20 w-fit">
+            <div class="flex flex-col items-start gap-0.5">
+              <span class="inline-flex items-center gap-1 rounded-full border border-rose-500/20 bg-rose-500/10 px-2 py-0.5 text-xs font-medium text-rose-400">
                 ${ICONS.shieldAlert} Needs Review
               </span>
-              <span class="mt-0.5 text-[11px] text-zinc-400 font-sans">${reason || 'Model confidence (72.4%) below 75% threshold'}</span>
+              <span class="text-[11px] text-zinc-400 font-sans">${reason || 'Model confidence below 75% threshold'}</span>
             </div>
           `;
         }
         return `
-          <span class="inline-flex items-center gap-1 rounded-md bg-zinc-800 px-2 py-1 text-xs font-medium text-zinc-300 border border-zinc-700">
-            ${status}
-          </span>
+          <span class="text-xs text-zinc-400">${status}</span>
         `;
       }
 
-      // --- 1. Ingestion Screen (Split-Pane Workspace + Live Stream Table) ---
+      // --- 1. Ingestion Screen (Dual-Pane Grid Architecture) ---
       function renderIngestion() {
         const currentSchema = SCHEMA_CONFIG[state.schemaType] || SCHEMA_CONFIG['InvoiceTaxonomy.v2'];
-        const filteredQueue = state.queue.filter(row => {
+        const filteredTasks = state.queue.filter(row => {
           const matchSearch = row.taskId.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
             row.filename.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
             row.schemaType.toLowerCase().includes(state.searchQuery.toLowerCase());
           if (!matchSearch) return false;
           if (state.statusFilter === 'ALL') return true;
-          if (state.statusFilter === 'ANOMALIES') return row.status !== 'COMPLETED';
-          if (state.statusFilter === 'COMPLETED') return row.status === 'COMPLETED';
+          if (state.statusFilter === 'ANOMALIES') return row.status !== 'Completed';
+          if (state.statusFilter === 'COMPLETED') return row.status === 'Completed';
           return true;
         });
 
+        const sampleFields = [
+          { key: 'invoice_num', label: 'Invoice #', value: state.selectedTask ? state.selectedTask.filename.replace('.pdf', '') : 'INV-2026-8894', confidence: 0.98, top: '8%', left: '60%', width: '32%', height: '8%' },
+          { key: 'vendor_name', label: 'Vendor Name', value: 'ACME CLOUD CORP', confidence: 0.96, top: '6%', left: '6%', width: '42%', height: '10%' },
+          { key: 'issue_date', label: 'Issue Date', value: '2026-09-24', confidence: 0.94, top: '22%', left: '55%', width: '38%', height: '6%' },
+          { key: 'subtotal', label: 'Subtotal Amount', value: '$10,550.00', confidence: 0.97, top: '74%', left: '58%', width: '35%', height: '6%' },
+          { key: 'tax_amount', label: 'Tax Amount', value: '$870.38', confidence: 0.68, isWarning: true, top: '81%', left: '58%', width: '35%', height: '6%' },
+          { key: 'total_amount', label: 'Total Amount', value: '$11,420.38', confidence: 0.99, top: '88%', left: '58%', width: '35%', height: '8%' },
+        ];
+
         return `
-          <div class="w-full max-w-full space-y-6">
-            <!-- Split-Pane Workspace: Ingestion Dock (5 cols) + Document Inspector (7 cols) -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full max-w-full">
-              <!-- Left Column: Ingestion Dock (5 cols) -->
-              <div class="lg:col-span-5 flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 shadow-sm space-y-4">
+          <div class="mx-auto flex w-full max-w-[1680px] flex-col gap-6">
+            <!-- Workspace Dual-Pane Grid (Left 4-5 cols / Right 7-8 cols) -->
+            <div class="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12">
+              <!-- Left Column: Ingestion Dock -->
+              <div class="lg:col-span-5 xl:col-span-4 flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 shadow-sm space-y-4">
                 <div class="space-y-4">
-                  <!-- Dock Header -->
+                  <!-- Header Bar -->
                   <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
                     <div class="flex items-center gap-2">
                       <span class="text-indigo-400">${ICONS.uploadCloud}</span>
                       <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-200 font-mono">Ingestion Dock</h2>
                     </div>
-                    <span class="rounded bg-zinc-800/80 px-2 py-0.5 text-[10px] font-mono font-medium text-zinc-400 border border-zinc-700/60">Max 15MB Payload</span>
+                    <span class="rounded border border-zinc-800 bg-zinc-800/50 px-2 py-0.5 text-[10px] font-medium text-zinc-400">
+                      Max 15MB Payload
+                    </span>
                   </div>
 
-                  <input id="file-input" type="file" class="sr-only" accept=".pdf,.png,.jpg,.jpeg,.tiff,.tif" />
-
-                  <!-- Dropzone Area -->
-                  ${!state.selectedFile ? `
-                    <div id="dropzone" role="button" tabindex="0" aria-label="Click to upload or drag and drop document" class="relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-6 text-center transition-all cursor-pointer border-zinc-800 bg-zinc-900/30 hover:border-zinc-700 hover:bg-zinc-900/60 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none">
-                      <span class="text-zinc-400 mb-2">${ICONS.uploadCloud}</span>
-                      <p class="text-sm font-medium text-zinc-200">
-                        <span class="text-indigo-400 hover:underline">Click to upload</span> or drag and drop
-                      </p>
-                      <p class="mt-1 text-xs text-zinc-400 font-sans">PDF, PNG, TIFF, or JPEG (Max 15MB)</p>
+                  <!-- Accessible Drag-and-Drop Target with Hidden Native Input -->
+                  <div
+                    id="dropzone"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Upload document drag and drop area"
+                    class="group relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed py-8 px-4 text-center transition-all border-zinc-800 bg-zinc-950/40 hover:border-zinc-700 hover:bg-zinc-900/60 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+                  >
+                    <input
+                      id="document-upload-input"
+                      type="file"
+                      class="sr-only"
+                      accept=".pdf,.png,.tiff,.jpeg,.jpg"
+                    />
+                    <div class="mb-2 rounded-full border border-zinc-800 bg-zinc-900 p-2.5 text-zinc-400 transition-colors group-hover:border-zinc-700 group-hover:text-zinc-200">
+                      ${ICONS.upload}
                     </div>
-                  ` : `
-                    <div class="p-3.5 rounded-xl border border-zinc-700/80 bg-zinc-900/80 flex items-center justify-between gap-3">
-                      <div class="flex items-center gap-3 min-w-0 flex-1">
-                        <div class="w-9 h-9 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0">
-                          <span class="text-indigo-400">${ICONS.fileText}</span>
-                        </div>
-                        <div class="min-w-0 flex-1">
-                          <div class="text-xs font-semibold text-zinc-100 truncate" title="${state.selectedFile.name}">${state.selectedFile.name}</div>
-                          <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-400 mt-0.5">
-                            <span>${(state.selectedFile.size / (1024 * 1024)).toFixed(2)} MB</span>
-                            <span>•</span>
-                            <span class="text-emerald-400 font-medium">${state.validationResult?.mime || 'Binary Validated'}</span>
-                          </div>
-                        </div>
+                    <p class="text-xs font-medium text-zinc-200">
+                      <span class="text-indigo-400 group-hover:underline">Click to upload</span> or drag and drop
+                    </p>
+                    <p class="mt-1 text-[11px] text-zinc-500 font-sans">PDF, PNG, TIFF, or JPEG (Max 15MB)</p>
+                    ${state.selectedFile ? `
+                      <div class="mt-3 inline-flex items-center gap-1.5 rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1 text-xs text-indigo-300">
+                        ${ICONS.fileText}
+                        <span class="max-w-[180px] truncate font-mono">${state.selectedFile.name}</span>
+                        <span class="text-[10px] text-indigo-400 font-mono">(${(state.selectedFile.size / 1024 / 1024).toFixed(2)}MB)</span>
+                        <button id="btn-clear-file" class="ml-1 text-zinc-400 hover:text-white cursor-pointer" title="Remove file">${ICONS.x}</button>
                       </div>
-                      <button id="btn-clear-file" class="p-1.5 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none" aria-label="Remove staged document">
-                        ${ICONS.x}
-                      </button>
-                    </div>
-                  `}
+                    ` : ''}
+                  </div>
 
                   <!-- Validation Error Notice -->
                   ${state.validationResult && !state.validationResult.isValid ? `
                     <div class="p-3 rounded-lg border border-rose-800/50 bg-rose-950/30 text-rose-300 text-xs font-mono flex items-start gap-2.5">
                       <span class="text-rose-400 mt-0.5 shrink-0">${ICONS.alertTriangle}</span>
                       <div class="space-y-0.5 flex-1 min-w-0">
-                        <span class="font-semibold block text-rose-200">Magic Header Verification Failed</span>
+                        <span class="font-semibold block text-rose-200">Binary Header Verification Failed</span>
                         <p class="text-[11px] text-rose-300 leading-tight">${state.validationResult.error}</p>
                       </div>
                     </div>
@@ -492,36 +503,42 @@
 
                   <!-- Schema Taxonomy Selector -->
                   <div class="space-y-1.5">
-                    <label for="schema-select" class="text-xs font-medium text-zinc-300 flex items-center justify-between">
+                    <label for="dock-schema-select" class="text-xs font-medium text-zinc-300 flex items-center justify-between">
                       <span>Document Schema Taxonomy</span>
                       <span class="text-[10px] font-mono text-zinc-400">${currentSchema.badge}</span>
                     </label>
-                    <select id="schema-select" class="w-full bg-zinc-900 border border-zinc-700/80 rounded-lg px-3 py-2 text-xs text-zinc-200 font-medium focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none cursor-pointer">
+                    <select id="dock-schema-select" class="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-3 py-2 text-xs text-zinc-200 font-medium focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none cursor-pointer">
                       ${Object.entries(SCHEMA_CONFIG).map(([k, cfg]) => `
                         <option value="${k}" ${state.schemaType === k ? 'selected' : ''}>${cfg.label} (${cfg.badge})</option>
                       `).join('')}
                     </select>
-                    <p class="text-[11px] text-zinc-400 font-sans">${currentSchema.description}</p>
+                    <p class="text-[11px] text-zinc-500 font-sans">${currentSchema.description}</p>
                   </div>
 
-                  <!-- Queue Priority Policy -->
-                  <div class="space-y-1.5">
-                    <label class="text-xs font-medium text-zinc-300 block">Queue Priority Policy</label>
-                    <div role="radiogroup" aria-label="Queue Priority" class="grid grid-cols-3 gap-2">
+                  <!-- Queue Priority Toggle Group Accessibility (WCAG 2.2 AA) -->
+                  <div role="radiogroup" aria-label="Queue Priority Policy" class="mt-4">
+                    <label class="mb-1.5 block text-xs font-medium text-zinc-400">Queue Priority Policy</label>
+                    <div class="grid grid-cols-3 gap-2">
                       ${[
-                        { id: 'P0', label: 'P0 — Critical', desc: 'Realtime SLA (<1s)' },
-                        { id: 'P1', label: 'P1 — High', desc: 'Standard Queue' },
-                        { id: 'P2', label: 'P2 — Batch', desc: 'Background Idle' },
+                        { id: 'P0', label: 'P0 Realtime', desc: '<1s SLA' },
+                        { id: 'P1', label: 'P1 Standard', desc: 'Default' },
+                        { id: 'P2', label: 'P2 Batch', desc: 'Background' },
                       ].map(p => {
-                        const isActive = state.priority === p.id;
+                        const active = state.priority === p.id;
                         return `
-                          <button type="button" role="radio" aria-checked="${isActive}" data-priority="${p.id}" class="btn-priority flex flex-col items-center justify-center rounded-lg border px-3 py-2 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none ${
-                            isActive
-                              ? 'border-indigo-500/80 bg-indigo-500/10 text-indigo-300 ring-1 ring-indigo-500/50 shadow-sm font-medium'
-                              : 'border-zinc-800 bg-zinc-900/60 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/60 hover:text-white'
-                          }">
-                            <span class="text-xs font-semibold">${p.id}</span>
-                            <span class="text-[10px] text-zinc-400">${p.desc}</span>
+                          <button
+                            type="button"
+                            role="radio"
+                            aria-checked="${active}"
+                            data-priority="${p.id}"
+                            class="btn-priority flex flex-col items-center justify-center rounded-lg border py-2 px-1 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none ${
+                              active
+                                ? 'border-indigo-500 bg-indigo-500/15 text-indigo-200 ring-1 ring-indigo-500/50 font-medium'
+                                : 'border-zinc-800 bg-zinc-950/60 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-800/40 hover:text-zinc-200'
+                            }"
+                          >
+                            <span class="text-xs font-semibold">${p.label}</span>
+                            <span class="text-[10px] text-zinc-500">${p.desc}</span>
                           </button>
                         `;
                       }).join('')}
@@ -530,82 +547,147 @@
                 </div>
 
                 <!-- Dispatch Ingestion CTA -->
-                <div class="pt-2">
-                  <button id="btn-dispatch" ${!state.selectedFile || state.isUploading ? 'disabled' : ''} class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-indigo-500 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500 cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none">
-                    ${state.isUploading ? `
-                      ${ICONS.loader2}
-                      <span>Routing to Pipeline (${state.uploadProgress}%)...</span>
-                    ` : `
-                      <span>Dispatch Ingestion</span>
-                      ${ICONS.arrowRight}
-                    `}
-                  </button>
-                </div>
+                <button
+                  id="btn-dispatch"
+                  type="button"
+                  ${!state.selectedFile || state.isUploading ? 'disabled' : ''}
+                  class="mt-5 flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 py-2.5 px-4 text-xs font-semibold text-white shadow-sm transition-all hover:bg-indigo-500 disabled:cursor-not-allowed disabled:bg-zinc-800/60 disabled:text-zinc-600 cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+                >
+                  ${state.isUploading ? `
+                    ${ICONS.loader2}
+                    <span>Routing to Extraction Engine (${state.uploadProgress}%)...</span>
+                  ` : `
+                    <span>Dispatch Ingestion</span>
+                    ${ICONS.arrowRight}
+                  `}
+                </button>
               </div>
 
-              <!-- Right Column: Document Preview / Extraction Inspector (7 cols) -->
-              <div class="lg:col-span-7 flex flex-col h-full min-h-[420px]">
-                ${state.selectedTaskPreview ? `
-                  <div class="flex h-full flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 shadow-sm space-y-4">
-                    <div class="space-y-4">
-                      <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
-                        <div class="flex items-center gap-2">
+              <!-- Right Column: DocumentPreviewPanel -->
+              <div class="lg:col-span-7 xl:col-span-8 flex flex-col h-full min-h-[460px]">
+                ${state.selectedTask ? `
+                  <div class="flex h-full min-h-[460px] flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 shadow-sm space-y-4">
+                    <!-- Header -->
+                    <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                      <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-7 h-7 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0">
+                          <span class="text-indigo-400">${ICONS.fileText}</span>
+                        </div>
+                        <div class="min-w-0">
+                          <div class="flex items-center gap-2">
+                            <h3 class="text-xs font-semibold text-zinc-100 truncate font-mono">${state.selectedTask.filename}</h3>
+                            <span class="rounded bg-zinc-800 px-1.5 py-0.2 text-[10px] font-mono text-zinc-400 border border-zinc-700/60">
+                              ${SCHEMA_CONFIG[state.selectedTask.schemaType]?.badge || 'v2.1'}
+                            </span>
+                          </div>
+                          <p class="text-[11px] text-zinc-400 font-sans">
+                            Task ID: <span class="font-mono text-zinc-300">${state.selectedTask.taskId}</span> • Latency: <span class="font-mono tabular-nums text-zinc-300">${state.selectedTask.latencyMs}ms</span>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1 font-mono text-xs px-2.5 py-0.5 rounded-full border tabular-nums ${
+                          state.selectedTask.confidence >= 90
+                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                            : 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+                        }">
                           <span class="text-emerald-400">${ICONS.check}</span>
-                          <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-200 font-mono">Task Inspector Preview</h3>
-                        </div>
-                        <span class="font-mono text-xs text-zinc-400">${state.selectedTaskPreview.taskId}</span>
-                      </div>
-
-                      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                        <div class="rounded-lg border border-zinc-800 bg-zinc-900/80 p-3">
-                          <span class="text-[10px] uppercase font-mono text-zinc-400 block">File Name</span>
-                          <span class="text-xs font-semibold text-zinc-100 truncate block mt-0.5" title="${state.selectedTaskPreview.filename}">${state.selectedTaskPreview.filename}</span>
-                        </div>
-                        <div class="rounded-lg border border-zinc-800 bg-zinc-900/80 p-3">
-                          <span class="text-[10px] uppercase font-mono text-zinc-400 block">Schema</span>
-                          <span class="text-xs font-semibold text-zinc-100 block mt-0.5">${SCHEMA_CONFIG[state.selectedTaskPreview.schemaType]?.label || state.selectedTaskPreview.schemaType}</span>
-                        </div>
-                        <div class="rounded-lg border border-zinc-800 bg-zinc-900/80 p-3">
-                          <span class="text-[10px] uppercase font-mono text-zinc-400 block">Confidence</span>
-                          <span class="text-xs font-bold font-mono text-emerald-400 block mt-0.5 tabular-nums">${state.selectedTaskPreview.confidence.toFixed(1)}%</span>
-                        </div>
-                        <div class="rounded-lg border border-zinc-800 bg-zinc-900/80 p-3">
-                          <span class="text-[10px] uppercase font-mono text-zinc-400 block">Latency</span>
-                          <span class="text-xs font-bold font-mono text-zinc-300 block mt-0.5 tabular-nums">${state.selectedTaskPreview.latencyMs}ms</span>
-                        </div>
-                      </div>
-
-                      <div class="rounded-lg border border-zinc-800 bg-zinc-950 p-4 space-y-2">
-                        <span class="text-xs font-semibold text-zinc-300 block">Reasoning &amp; Extraction Telemetry</span>
-                        ${renderStatusBadge(state.selectedTaskPreview.status, state.selectedTaskPreview.reviewReason)}
+                          ${state.selectedTask.confidence.toFixed(1)}% Confidence
+                        </span>
+                        <button id="btn-close-inspection" class="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors cursor-pointer" aria-label="Close Inspection">
+                          ${ICONS.x}
+                        </button>
                       </div>
                     </div>
 
-                    <div class="pt-4 flex items-center justify-between border-t border-zinc-800">
-                      <button id="btn-clear-preview" class="px-3 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900 text-xs text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none">
-                        Clear Selection
-                      </button>
-                      <button data-doc-id="${state.selectedTaskPreview.documentId}" class="btn-inspect inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-500 transition-colors cursor-pointer shadow-sm focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none">
-                        ${ICONS.eye}
-                        <span>Open in HITL Reviewer Canvas</span>
-                      </button>
+                    <!-- Populated Body: Simulated Canvas (Left) + Key-Value Extractions (Right) -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 min-h-[300px]">
+                      <div class="md:col-span-6 rounded-lg border border-zinc-800 bg-zinc-950 p-3 flex items-center justify-center relative overflow-hidden">
+                        <div class="relative bg-white text-zinc-900 rounded p-4 shadow-md w-full max-w-[280px] h-[300px] text-[8px] font-mono leading-tight select-none">
+                          <div class="border-b border-zinc-200 pb-1 flex justify-between">
+                            <span class="font-bold text-zinc-800">ACME CLOUD CORP</span>
+                            <span class="font-bold text-zinc-700">INVOICE</span>
+                          </div>
+                          <div class="py-2 text-[7px] text-zinc-600 space-y-0.5">
+                            <div>Billed to: Enterprise Dynamics Inc.</div>
+                            <div>Issue Date: 2026-09-24</div>
+                          </div>
+                          <div class="border-t border-b border-zinc-200 py-1 my-2 text-[7px]">
+                            <div class="flex justify-between"><span>GPU Cluster x2</span><span>$8,500.00</span></div>
+                            <div class="flex justify-between"><span>DirectConnect 10G</span><span>$2,050.00</span></div>
+                          </div>
+                          <div class="absolute bottom-4 right-4 text-right text-[7px] space-y-0.5">
+                            <div>Subtotal: $10,550.00</div>
+                            <div class="text-amber-700 font-bold">Tax: $870.38</div>
+                            <div class="font-bold text-zinc-900 border-t border-zinc-300 pt-0.5">Total: $11,420.38</div>
+                          </div>
+
+                          <!-- Bounding Box Overlays -->
+                          ${sampleFields.map(f => `
+                            <div
+                              style="position: absolute; top: ${f.top}; left: ${f.left}; width: ${f.width}; height: ${f.height};"
+                              class="border-2 rounded transition-all cursor-pointer ${
+                                f.isWarning ? 'border-amber-500 bg-amber-500/15' : 'border-emerald-500 bg-emerald-500/10'
+                              }"
+                            >
+                              <span class="absolute -top-2.5 left-0 px-1 py-0.2 rounded text-[6px] font-bold text-white ${
+                                f.isWarning ? 'bg-amber-600' : 'bg-emerald-600'
+                              }">${f.label}</span>
+                            </div>
+                          `).join('')}
+                        </div>
+                      </div>
+
+                      <div class="md:col-span-6 flex flex-col justify-between space-y-2">
+                        <div class="space-y-1.5 overflow-y-auto max-h-[280px] pr-1">
+                          <span class="text-[10px] uppercase font-mono tracking-wider text-zinc-400 font-semibold block">
+                            Extracted Entities &amp; Proof Gates
+                          </span>
+                          ${sampleFields.map(f => `
+                            <div class="p-2 rounded-lg border border-zinc-800 bg-zinc-900/40 text-xs flex items-center justify-between">
+                              <div>
+                                <span class="text-[10px] text-zinc-400 block font-mono">${f.label}</span>
+                                <span class="text-zinc-100 font-medium">${f.value}</span>
+                              </div>
+                              <div class="text-right">
+                                <span class="text-[10px] font-mono tabular-nums font-semibold ${f.isWarning ? 'text-amber-400' : 'text-emerald-400'}">
+                                  ${(f.confidence * 100).toFixed(0)}%
+                                </span>
+                                ${f.isWarning ? `<span class="text-[9px] text-amber-400 block font-sans">Variance flag</span>` : ''}
+                              </div>
+                            </div>
+                          `).join('')}
+                        </div>
+
+                        <div class="pt-2 border-t border-zinc-800/80 flex items-center justify-between">
+                          <button id="btn-close-inspection-2" class="px-3 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900 text-xs text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer">
+                            Close Inspection
+                          </button>
+                          <button data-doc-id="${state.selectedTask.documentId}" class="btn-goto-full-hitl inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-indigo-500 transition-colors shadow-sm cursor-pointer">
+                            ${ICONS.eye}
+                            <span>Full HITL Canvas</span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ` : `
-                  <div class="flex h-full min-h-[420px] flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 p-8 text-center">
-                    <div class="rounded-full bg-zinc-800/60 p-4 text-zinc-400 mb-3">
-                      ${ICONS.search}
+                  <!-- Empty State -->
+                  <div class="flex h-full min-h-[460px] flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 p-8 text-center">
+                    <div class="mb-3 rounded-full border border-zinc-800 bg-zinc-900/80 p-3.5 text-zinc-500 shadow-inner">
+                      ${ICONS.fileSearch}
                     </div>
                     <h3 class="text-sm font-semibold text-zinc-200">No Document Selected</h3>
-                    <p class="mt-1 max-w-xs text-xs text-zinc-400 font-sans">
-                      Drop a document on the left or select an ingested task from the stream below to preview OCR bounding boxes and field extractions.
+                    <p class="mt-1.5 max-w-sm text-xs leading-relaxed text-zinc-500 font-sans">
+                      Drop a document on the left to initiate ingestion, or click <span class="text-zinc-400 font-medium">Inspect</span> on any task in the stream below to review bounding boxes and field validation layers.
                     </p>
                   </div>
                 `}
               </div>
             </div>
 
-            <!-- Live Ingestion Stream Table & Operational Toolbar -->
+            <!-- Live Ingestion Stream Table -->
             <div class="w-full max-w-full rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden shadow-sm">
               <!-- Stream Controls Toolbar -->
               <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 px-4 py-3 bg-zinc-900/50">
@@ -653,9 +735,9 @@
                       <th scope="col" class="py-3 px-4 font-semibold text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-zinc-800/60 text-zinc-300 text-xs">
-                    ${filteredQueue.map(row => `
-                      <tr data-doc-id="${row.documentId}" data-task-id="${row.taskId}" class="table-row-item hover:bg-zinc-800/40 cursor-pointer transition-colors">
+                  <tbody aria-live="polite" class="divide-y divide-zinc-800/60 text-zinc-300 text-xs">
+                    ${filteredTasks.map(row => `
+                      <tr data-task-id="${row.taskId}" class="table-row-item hover:bg-zinc-800/40 cursor-pointer transition-colors ${state.selectedTask?.taskId === row.taskId ? 'bg-zinc-800/30' : ''}">
                         <td class="py-3.5 px-4 font-mono font-semibold text-zinc-200">${row.taskId}</td>
                         <td class="py-3.5 px-4">
                           <div class="flex flex-col">
@@ -675,9 +757,18 @@
                           </div>
                         </td>
                         <td class="py-3.5 px-3 text-right font-mono tabular-nums text-zinc-300 font-medium">${row.latencyMs}ms</td>
-                        <td class="py-3.5 px-4">${renderStatusBadge(row.status, row.reviewReason)}</td>
+                        <td class="py-3.5 px-4">${renderStatusCell(row.status, row.reviewReason)}</td>
                         <td class="py-3.5 px-4 text-right">
-                          <button data-doc-id="${row.documentId}" class="btn-inspect inline-flex items-center gap-1.5 rounded-md border border-zinc-700/60 bg-zinc-800/60 px-2.5 py-1 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-700/70 hover:text-white cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none">
+                          <button
+                            type="button"
+                            aria-label="Inspect extraction for ${row.filename}"
+                            data-task-id="${row.taskId}"
+                            class="btn-inspect inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none ${
+                              state.selectedTask?.taskId === row.taskId
+                                ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
+                                : 'border-zinc-800 bg-zinc-800/40 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-700/60 hover:text-white'
+                            }"
+                          >
                             ${ICONS.eye}
                             <span>Inspect</span>
                           </button>
@@ -804,7 +895,7 @@
                 </div>
 
                 <div class="flex-1 overflow-auto p-4 flex items-center justify-center bg-zinc-950 relative min-h-0">
-                  <div class="relative bg-white text-zinc-900 rounded shadow-2xl p-6 transition-transform duration-200" style="width: 480px; min-height: 640px; transform: scale(${state.zoom / 100}) rotate(${state.rotation}deg);">
+                  <div class="relative bg-white text-zinc-900 rounded p-6 shadow-2xl transition-transform duration-200" style="width: 480px; min-height: 640px; transform: scale(${state.zoom / 100}) rotate(${state.rotation}deg);">
                     <!-- Simulated Invoice Document Content -->
                     <div class="border-b border-zinc-300 pb-3 flex justify-between items-start">
                       <div>
@@ -1152,7 +1243,7 @@
               ${state.dlqItems.length === 0 ? `
                 <div class="p-8 rounded-xl border border-dashed border-zinc-800/80 bg-zinc-900/20 text-center flex flex-col items-center justify-center gap-2.5">
                   <div class="w-10 h-10 rounded-full bg-emerald-950/40 border border-emerald-800/50 flex items-center justify-center">
-                    ${ICONS.shieldCheck}
+                    <span class="text-emerald-400">${ICONS.shieldCheck}</span>
                   </div>
                   <div>
                     <div class="text-xs font-semibold text-zinc-100 font-mono">Dead Letter Queue is Clear</div>
@@ -1330,7 +1421,7 @@
 
         // Dropzone & File Input
         const dropzone = document.getElementById('dropzone');
-        const fileInput = document.getElementById('file-input');
+        const fileInput = document.getElementById('document-upload-input');
         if (dropzone && fileInput) {
           dropzone.addEventListener('click', () => fileInput.click());
           dropzone.addEventListener('keydown', (e) => {
@@ -1386,7 +1477,7 @@
         });
 
         // Schema Select
-        const schemaSelect = document.getElementById('schema-select');
+        const schemaSelect = document.getElementById('dock-schema-select');
         if (schemaSelect) {
           schemaSelect.addEventListener('change', (e) => {
             state.schemaType = e.target.value;
@@ -1394,11 +1485,18 @@
           });
         }
 
-        // Clear Preview
-        const btnClearPreview = document.getElementById('btn-clear-preview');
-        if (btnClearPreview) {
-          btnClearPreview.addEventListener('click', () => {
-            state.selectedTaskPreview = null;
+        // Close Inspection
+        const btnCloseInspection = document.getElementById('btn-close-inspection');
+        if (btnCloseInspection) {
+          btnCloseInspection.addEventListener('click', () => {
+            state.selectedTask = null;
+            render();
+          });
+        }
+        const btnCloseInspection2 = document.getElementById('btn-close-inspection-2');
+        if (btnCloseInspection2) {
+          btnCloseInspection2.addEventListener('click', () => {
+            state.selectedTask = null;
             render();
           });
         }
@@ -1409,7 +1507,7 @@
           streamSearch.addEventListener('input', (e) => {
             state.searchQuery = e.target.value;
             // update table body directly without full rerender to maintain input focus
-            const tbody = document.querySelector('tbody');
+            const tbody = document.querySelector('tbody[aria-live="polite"]');
             if (tbody) {
               const filtered = state.queue.filter(row => {
                 const matchSearch = row.taskId.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
@@ -1417,12 +1515,12 @@
                   row.schemaType.toLowerCase().includes(state.searchQuery.toLowerCase());
                 if (!matchSearch) return false;
                 if (state.statusFilter === 'ALL') return true;
-                if (state.statusFilter === 'ANOMALIES') return row.status !== 'COMPLETED';
-                if (state.statusFilter === 'COMPLETED') return row.status === 'COMPLETED';
+                if (state.statusFilter === 'ANOMALIES') return row.status !== 'Completed';
+                if (state.statusFilter === 'COMPLETED') return row.status === 'Completed';
                 return true;
               });
               tbody.innerHTML = filtered.map(row => `
-                <tr data-doc-id="${row.documentId}" data-task-id="${row.taskId}" class="table-row-item hover:bg-zinc-800/40 cursor-pointer transition-colors">
+                <tr data-task-id="${row.taskId}" class="table-row-item hover:bg-zinc-800/40 cursor-pointer transition-colors ${state.selectedTask?.taskId === row.taskId ? 'bg-zinc-800/30' : ''}">
                   <td class="py-3.5 px-4 font-mono font-semibold text-zinc-200">${row.taskId}</td>
                   <td class="py-3.5 px-4">
                     <div class="flex flex-col">
@@ -1442,9 +1540,18 @@
                     </div>
                   </td>
                   <td class="py-3.5 px-3 text-right font-mono tabular-nums text-zinc-300 font-medium">${row.latencyMs}ms</td>
-                  <td class="py-3.5 px-4">${renderStatusBadge(row.status, row.reviewReason)}</td>
+                  <td class="py-3.5 px-4">${renderStatusCell(row.status, row.reviewReason)}</td>
                   <td class="py-3.5 px-4 text-right">
-                    <button data-doc-id="${row.documentId}" class="btn-inspect inline-flex items-center gap-1.5 rounded-md border border-zinc-700/60 bg-zinc-800/60 px-2.5 py-1 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-700/70 hover:text-white cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none">
+                    <button
+                      type="button"
+                      aria-label="Inspect extraction for ${row.filename}"
+                      data-task-id="${row.taskId}"
+                      class="btn-inspect inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none ${
+                        state.selectedTask?.taskId === row.taskId
+                          ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
+                          : 'border-zinc-800 bg-zinc-800/40 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-700/60 hover:text-white'
+                      }"
+                    >
                       ${ICONS.eye}
                       <span>Inspect</span>
                     </button>
@@ -1488,7 +1595,7 @@
               const newDocId = 'doc_' + Math.random().toString(36).substring(2, 9);
               state.activeJobId = newTaskId;
               state.activeDocId = newDocId;
-              const newRow = {
+              const newTask = {
                 taskId: newTaskId,
                 documentId: newDocId,
                 filename: state.selectedFile ? state.selectedFile.name : 'document.pdf',
@@ -1496,11 +1603,11 @@
                 priority: state.priority,
                 confidence: 94.2,
                 latencyMs: 640,
-                status: 'TAX_ANOMALY',
-                reviewReason: 'Calculated tax variance (68% vs 85% expected)'
+                status: 'Tax Discrepancy',
+                reviewReason: 'Calculated variance (68% vs 85% expected)'
               };
-              state.queue.unshift(newRow);
-              state.selectedTaskPreview = newRow;
+              state.queue.unshift(newTask);
+              state.selectedTask = newTask;
               showToast('success', 'Document Enqueued', `Job ${newTaskId} dispatched to pipeline.`);
               state.activeTab = 'pipeline';
               render();
@@ -1509,21 +1616,21 @@
         }
 
         function bindTableInspectEvents() {
-          document.querySelectorAll('.table-row-item').forEach(el => {
-            el.addEventListener('click', () => {
-              const taskId = el.getAttribute('data-task-id');
+          document.querySelectorAll('.table-row-item, .btn-inspect').forEach(el => {
+            el.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const taskId = el.getAttribute('data-task-id') || el.closest('tr')?.getAttribute('data-task-id');
               const found = state.queue.find(q => q.taskId === taskId);
               if (found) {
-                state.selectedTaskPreview = found;
+                state.selectedTask = found;
                 render();
               }
             });
           });
 
-          document.querySelectorAll('.btn-inspect').forEach(el => {
-            el.addEventListener('click', (e) => {
-              e.stopPropagation();
-              const docId = el.getAttribute('data-doc-id') || el.closest('tr')?.getAttribute('data-doc-id');
+          document.querySelectorAll('.btn-goto-full-hitl').forEach(el => {
+            el.addEventListener('click', () => {
+              const docId = el.getAttribute('data-doc-id');
               if (docId) {
                 state.activeDocId = docId;
                 state.activeTab = 'reviewer';
