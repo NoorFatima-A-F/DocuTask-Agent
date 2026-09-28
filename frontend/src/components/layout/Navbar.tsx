@@ -4,17 +4,24 @@ import { UserProfile } from '../../api/auth';
 import { useSystemHealth } from '../../hooks/useSystemHealth';
 
 interface NavbarProps {
-  user: UserProfile | null;
+  user?: UserProfile | null;
   activeTab: string;
   onOpenCommandPalette?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
+const TAB_TITLES: Record<string, string> = {
+  ingestion: 'Ingestion Studio',
+  pipeline: 'Pipeline Monitor',
+  reviewer: 'HITL Reviewer',
+  observability: 'DLQ & Telemetry',
+};
+
+export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenCommandPalette }) => {
   const { data: health } = useSystemHealth();
   const isOnline = health?.isOnline ?? true;
 
   return (
-    <div className="sticky top-0 z-30 select-none shrink-0">
+    <div className="sticky top-0 z-30 select-none shrink-0 w-full">
       {/* Offline Warning Banner with aria-live */}
       {!isOnline && (
         <div
@@ -31,16 +38,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
       )}
 
       {/* Main Header Bar */}
-      <header className="h-11 border-b border-[#27272a] bg-[#121215] px-4 flex items-center justify-between">
-        {/* Brand & Version Badge */}
+      <header className="h-12 border-b border-zinc-800 bg-[#121215] px-4 flex items-center justify-between">
+        {/* Left: Active Workspace Breadcrumb & Command Palette */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-zinc-100 flex items-center justify-center text-zinc-950 font-bold text-xs font-mono">
-              D
-            </div>
-            <span className="font-semibold text-sm text-zinc-100 tracking-tight">DocuTask</span>
-            <span className="font-mono text-[11px] text-zinc-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">
-              v1.0.0
+          <div className="flex items-center gap-2 text-xs font-mono">
+            <span className="text-zinc-500">DocuTask</span>
+            <span className="text-zinc-600">/</span>
+            <span className="text-zinc-100 font-semibold">
+              {TAB_TITLES[activeTab] || activeTab}
             </span>
           </div>
 
@@ -48,7 +53,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           {onOpenCommandPalette && (
             <button
               onClick={onOpenCommandPalette}
-              className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors ml-2 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+              className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors ml-2 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none cursor-pointer"
               title="Search workspaces and commands (Cmd+K / Ctrl+K)"
             >
               <Search className="w-3 h-3 text-zinc-400" />
@@ -61,10 +66,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
         </div>
 
         {/* Center Live Probes (Synchronized Single Source of Truth) */}
-        <div className="hidden md:flex items-center gap-4 text-xs font-mono text-zinc-400">
+        <div className="hidden lg:flex items-center gap-4 text-xs font-mono text-zinc-400">
           <div className="flex items-center gap-1.5" title="FastAPI Core Application Status">
             <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-400' : 'bg-rose-500 animate-pulse'}`} />
-            <span className="text-zinc-300">FastAPI</span>
+            <span className="text-zinc-400">FastAPI:</span>
             <span className={isOnline ? 'text-emerald-400 font-medium' : 'text-rose-400 font-medium'}>
               {isOnline ? 'ONLINE' : 'OFFLINE'}
             </span>
@@ -74,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
           <div className="flex items-center gap-1.5" title="Celery Redis Message Broker Status">
             <Database className="w-3.5 h-3.5 text-zinc-400" />
-            <span className="text-zinc-300">Redis:</span>
+            <span className="text-zinc-400">Redis:</span>
             <span className={isOnline ? 'text-emerald-400 font-medium' : 'text-rose-400 font-medium'}>
               {isOnline ? 'READY' : 'DISCONNECTED'}
             </span>
@@ -84,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
           <div className="flex items-center gap-1.5" title="Active Celery Worker Containers">
             <Activity className="w-3.5 h-3.5 text-zinc-400" />
-            <span className="text-zinc-300">Workers:</span>
+            <span className="text-zinc-400">Workers:</span>
             <span className="text-zinc-100 font-semibold tabular-nums">
               {isOnline ? `${health?.activeWorkers ?? 1} Active` : '0'}
             </span>
@@ -116,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             <div className="w-6 h-6 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono text-[11px] font-bold text-zinc-300">
               OP
             </div>
-            <span className="text-xs font-medium text-zinc-300 hidden lg:inline">
+            <span className="text-xs font-medium text-zinc-300 hidden sm:inline font-mono">
               lead.operator
             </span>
           </div>

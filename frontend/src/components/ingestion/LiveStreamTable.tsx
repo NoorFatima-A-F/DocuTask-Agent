@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, RefreshCw, Eye, CheckCircle2, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { Search, RefreshCw, Eye, CheckCircle2, AlertTriangle, ShieldAlert, ArrowUpDown, ChevronUp, ChevronDown } from 'lucide-react';
 import { IngestionTask } from '../../pages/IngestionStudio';
 
 export interface LiveStreamTableProps {
@@ -7,6 +7,9 @@ export interface LiveStreamTableProps {
   selectedTaskId?: string | null;
   onSelectTask: (task: IngestionTask) => void;
 }
+
+type SortField = 'id' | 'confidence' | 'latencyMs';
+type SortOrder = 'asc' | 'desc';
 
 export function StatusCell({ status, reason }: { status: string; reason?: string }) {
   if (status === 'Completed' || status === 'COMPLETED') {
@@ -54,43 +57,83 @@ export function LiveStreamTable({
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [isLive, setIsLive] = useState(true);
+  const [sortField, setSortField] = useState<SortField>('id');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
 
-  const filteredTasks = tasks.filter((task) => {
-    const matchSearch =
-      task.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      task.documentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      task.schema.toLowerCase().includes(searchQuery.toLowerCase());
-
-    if (!matchSearch) return false;
-
-    if (statusFilter === 'ALL') return true;
-    if (statusFilter === 'ANOMALIES') {
-      return task.status !== 'Completed';
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('desc');
     }
-    if (statusFilter === 'COMPLETED') {
-      return task.status === 'Completed';
-    }
-    return true;
-  });
+  };
+
+  const filteredTasks = tasks
+    .filter((task) => {
+      const matchSearch =
+        task.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        task.documentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        task.schema.toLowerCase().includes(searchQuery.toLowerCase());
+
+      if (!matchSearch) return false;
+
+      if (statusFilter === 'ALL') return true;
+      if (statusFilter === 'ANOMALIES') {
+        return task.status !== 'Completed';
+      }
+      if (statusFilter === 'COMPLETED') {
+        return task.status === 'Completed';
+      }
+      return true;
+    })
+    .sort((a, b) => {
+      let comparison = 0;
+      if (sortField === 'id') {
+        comparison = a.id.localeCompare(b.id);
+      } else if (sortField === 'confidence') {
+        comparison = a.confidence - b.confidence;
+      } else if (sortField === 'latencyMs') {
+        comparison = a.latencyMs - b.latencyMs;
+      }
+      return sortOrder === 'asc' ? comparison : -comparison;
+    });
 
   return (
     <div className="w-full max-w-full rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden shadow-sm">
       {/* Stream Controls Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 px-4 py-3 bg-zinc-900/50">
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <h2 className="text-sm font-semibold tracking-wide uppercase text-zinc-200">
-            Live Ingestion Stream
-          </h2>
-          <span className="rounded bg-zinc-800/80 px-1.5 py-0.5 text-[10px] font-medium text-zinc-400 border border-zinc-700/60">
-            WebSocket Connected
-          </span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <h2 className="text-xs font-semibold tracking-wide uppercase text-zinc-200 font-mono">
+              Live Ingestion Stream
+            </h2>
+            <span className="rounded bg-zinc-800/80 px-1.5 py-0.5 text-[10px] font-medium text-zinc-400 border border-zinc-700/60 font-mono">
+              WS Active
+            </span>
+          </div>
+
+          {/* Embedded Real-time Throughput Sparkline */}
+          <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-zinc-950/60 border border-zinc-800 text-[11px] font-mono text-zinc-400">
+            <span className="text-zinc-400">Throughput:</span>
+            <span className="text-zinc-200 font-semibold tabular-nums">38 docs/min</span>
+            <svg viewBox="0 0 60 16" className="w-14 h-4 text-emerald-400" fill="none">
+              <path
+                d="M 2 12 L 12 8 L 22 10 L 32 4 L 42 7 L 52 2 L 58 5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
           <div className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 focus-within:border-zinc-700">
             <Search className="h-3.5 w-3.5 text-zinc-400" />
             <input
@@ -98,14 +141,14 @@ export function LiveStreamTable({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search task ID or document..."
-              className="w-44 bg-transparent text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none font-sans"
+              className="w-40 bg-transparent text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none font-sans"
             />
           </div>
 
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs text-zinc-300 font-medium focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none cursor-pointer"
+            className="rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs text-zinc-300 font-medium focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none cursor-pointer font-sans"
           >
             <option value="ALL">All Statuses</option>
             <option value="ANOMALIES">Anomalies &amp; Review</option>
@@ -115,10 +158,10 @@ export function LiveStreamTable({
           <button
             type="button"
             onClick={() => setIsLive((prev) => !prev)}
-            className="flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs text-zinc-300 hover:bg-zinc-800 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+            className="flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs text-zinc-300 hover:bg-zinc-800 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none font-mono"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${isLive ? 'text-emerald-400 animate-spin-slow' : 'text-zinc-500'}`} />
-            <span>{isLive ? 'Streaming Live' : 'Paused'}</span>
+            <span>{isLive ? 'Live' : 'Paused'}</span>
           </button>
         </div>
       </div>
@@ -126,13 +169,52 @@ export function LiveStreamTable({
       {/* Constrained Table Scroll Container */}
       <div className="w-full overflow-x-auto rounded-b-lg border-t border-zinc-800/80">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-zinc-800 bg-zinc-900/80 text-[11px] font-mono uppercase tracking-wider text-zinc-400">
+          <thead className="border-b border-zinc-800 bg-zinc-900/80 text-[11px] font-mono uppercase tracking-wider text-zinc-400 select-none">
             <tr>
-              <th scope="col" className="py-3 px-4 font-semibold">Task ID</th>
+              <th
+                scope="col"
+                onClick={() => handleSort('id')}
+                className="py-3 px-4 font-semibold cursor-pointer hover:text-zinc-200 transition-colors"
+              >
+                <div className="flex items-center gap-1.5">
+                  <span>Task ID</span>
+                  {sortField === 'id' ? (
+                    sortOrder === 'asc' ? <ChevronUp className="w-3 h-3 text-indigo-400" /> : <ChevronDown className="w-3 h-3 text-indigo-400" />
+                  ) : (
+                    <ArrowUpDown className="w-3 h-3 text-zinc-600 opacity-60" />
+                  )}
+                </div>
+              </th>
               <th scope="col" className="py-3 px-4 font-semibold">Document / Schema</th>
               <th scope="col" className="py-3 px-3 font-semibold text-center">Priority</th>
-              <th scope="col" className="py-3 px-4 font-semibold">Confidence</th>
-              <th scope="col" className="py-3 px-3 font-semibold text-right">Latency</th>
+              <th
+                scope="col"
+                onClick={() => handleSort('confidence')}
+                className="py-3 px-4 font-semibold cursor-pointer hover:text-zinc-200 transition-colors"
+              >
+                <div className="flex items-center gap-1.5">
+                  <span>Confidence</span>
+                  {sortField === 'confidence' ? (
+                    sortOrder === 'asc' ? <ChevronUp className="w-3 h-3 text-indigo-400" /> : <ChevronDown className="w-3 h-3 text-indigo-400" />
+                  ) : (
+                    <ArrowUpDown className="w-3 h-3 text-zinc-600 opacity-60" />
+                  )}
+                </div>
+              </th>
+              <th
+                scope="col"
+                onClick={() => handleSort('latencyMs')}
+                className="py-3 px-3 font-semibold text-right cursor-pointer hover:text-zinc-200 transition-colors"
+              >
+                <div className="flex items-center justify-end gap-1.5">
+                  <span>Latency</span>
+                  {sortField === 'latencyMs' ? (
+                    sortOrder === 'asc' ? <ChevronUp className="w-3 h-3 text-indigo-400" /> : <ChevronDown className="w-3 h-3 text-indigo-400" />
+                  ) : (
+                    <ArrowUpDown className="w-3 h-3 text-zinc-600 opacity-60" />
+                  )}
+                </div>
+              </th>
               <th scope="col" className="py-3 px-4 font-semibold">Status &amp; Verification</th>
               <th scope="col" className="py-3 px-4 font-semibold text-right">Action</th>
             </tr>
@@ -208,7 +290,7 @@ export function LiveStreamTable({
                       e.stopPropagation();
                       onSelectTask(task);
                     }}
-                    className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-all focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none ${
+                    className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-all focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none cursor-pointer ${
                       selectedTaskId === task.id
                         ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
                         : 'border-zinc-800 bg-zinc-800/40 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-700/60 hover:text-white'

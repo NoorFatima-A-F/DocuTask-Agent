@@ -125,13 +125,16 @@ export function IngestionStudio({ onJobCreated, onNavigateToReview }: IngestionS
   };
 
   return (
-    <div className="w-full max-w-[1680px] mx-auto p-4 sm:p-6 flex flex-col gap-6 overflow-x-hidden">
+    <div className="w-full max-w-[1680px] mx-auto flex flex-col gap-6 min-h-0">
       {/* Dual-Pane Viewport Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        <div className="lg:col-span-5 xl:col-span-4 flex flex-col">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch min-h-[420px]">
+        {/* Left: Ingestion Dock (5 cols) */}
+        <div className="lg:col-span-5 xl:col-span-5 flex flex-col min-h-0">
           <IngestionDock isSubmitting={isSubmitting} onDispatch={handleDispatch} />
         </div>
-        <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
+
+        {/* Right: Document Preview & HITL Inspector (7 cols) */}
+        <div className="lg:col-span-7 xl:col-span-7 flex flex-col min-h-0">
           <DocumentPreviewPanel
             selectedTask={selectedTask}
             onClose={() => setSelectedTask(null)}
