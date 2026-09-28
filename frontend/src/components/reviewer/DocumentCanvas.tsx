@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ZoomIn, ZoomOut, RotateCw, Maximize2, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
+import { ZoomIn, ZoomOut, RotateCw, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 import { ExtractedField } from '../../types/extraction';
 import { BoundingBox } from './BoundingBox';
 

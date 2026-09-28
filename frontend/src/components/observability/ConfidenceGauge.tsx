@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Activity, BrainCircuit } from 'lucide-react';
+import { BrainCircuit } from 'lucide-react';
 
 interface ConfidenceGaugeProps {
   score: number; // 0.0 to 1.0

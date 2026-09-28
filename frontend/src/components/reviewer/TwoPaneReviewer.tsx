@@ -14,19 +14,19 @@ interface TwoPaneReviewerProps {
 
 const INITIAL_FIELDS: ExtractedField<string | number>[] = [
   // Document Metadata Group
-  { key: 'invoice_number', label: 'Invoice Number', value: 'INV-2026-8894', confidence: 0.98, validationRegex: '^INV-[0-9]{4}-[0-9]{4}$', box: { page: 1, x_min: 0.65, y_min: 0.05, x_max: 0.95, y_max: 0.12 } },
-  { key: 'invoice_date', label: 'Issue Date', value: '2026-09-24', confidence: 0.94, validationRegex: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', box: { page: 1, x_min: 0.65, y_min: 0.12, x_max: 0.95, y_max: 0.16 } },
-  { key: 'due_date', label: 'Payment Due Date', value: '2026-10-24', confidence: 0.92, box: { page: 1, x_min: 0.52, y_min: 0.22, x_max: 0.95, y_max: 0.26 } },
+  { key: 'invoice_number', label: 'Invoice Number', value: 'INV-2026-8894', confidence: 0.98, validationRegex: '^INV-[0-9]{4}-[0-9]{4}$', boundingBox: { page: 1, x_min: 0.65, y_min: 0.05, x_max: 0.95, y_max: 0.12 } },
+  { key: 'invoice_date', label: 'Issue Date', value: '2026-09-24', confidence: 0.94, validationRegex: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', boundingBox: { page: 1, x_min: 0.65, y_min: 0.12, x_max: 0.95, y_max: 0.16 } },
+  { key: 'due_date', label: 'Payment Due Date', value: '2026-10-24', confidence: 0.92, boundingBox: { page: 1, x_min: 0.52, y_min: 0.22, x_max: 0.95, y_max: 0.26 } },
 
   // Entity Extraction Group
-  { key: 'vendor_name', label: 'Vendor Name', value: 'ACME CLOUD CORP', confidence: 0.96, box: { page: 1, x_min: 0.05, y_min: 0.03, x_max: 0.50, y_max: 0.12 } },
-  { key: 'vendor_tax_id', label: 'Tax ID / VAT', value: 'US-948291048', confidence: 0.74, validationRegex: '^[A-Z]{2}-[0-9]{9}$', box: { page: 1, x_min: 0.05, y_min: 0.12, x_max: 0.35, y_max: 0.16 } }, // Amber (<0.90)
-  { key: 'billing_address', label: 'Billing Address', value: '742 Evergreen Terrace, Springfield', confidence: 0.91, box: { page: 1, x_min: 0.05, y_min: 0.20, x_max: 0.48, y_max: 0.26 } },
+  { key: 'vendor_name', label: 'Vendor Name', value: 'ACME CLOUD CORP', confidence: 0.96, boundingBox: { page: 1, x_min: 0.05, y_min: 0.03, x_max: 0.50, y_max: 0.12 } },
+  { key: 'vendor_tax_id', label: 'Tax ID / VAT', value: 'US-948291048', confidence: 0.74, validationRegex: '^[A-Z]{2}-[0-9]{9}$', boundingBox: { page: 1, x_min: 0.05, y_min: 0.12, x_max: 0.35, y_max: 0.16 } }, // Amber (<0.90)
+  { key: 'billing_address', label: 'Billing Address', value: '742 Evergreen Terrace, Springfield', confidence: 0.91, boundingBox: { page: 1, x_min: 0.05, y_min: 0.20, x_max: 0.48, y_max: 0.26 } },
 
   // Financial Totals Group
-  { key: 'subtotal', label: 'Subtotal Amount', value: 10550.0, confidence: 0.97, box: { page: 1, x_min: 0.65, y_min: 0.78, x_max: 0.95, y_max: 0.82 } },
-  { key: 'tax_amount', label: 'Tax Amount (8.25%)', value: 870.38, confidence: 0.68, box: { page: 1, x_min: 0.65, y_min: 0.82, x_max: 0.95, y_max: 0.86 } }, // Flagged review anomaly (<0.70)
-  { key: 'total_amount', label: 'Grand Total Amount', value: 11420.38, confidence: 0.99, box: { page: 1, x_min: 0.65, y_min: 0.86, x_max: 0.95, y_max: 0.92 } },
+  { key: 'subtotal', label: 'Subtotal Amount', value: 10550.0, confidence: 0.97, boundingBox: { page: 1, x_min: 0.65, y_min: 0.78, x_max: 0.95, y_max: 0.82 } },
+  { key: 'tax_amount', label: 'Tax Amount (8.25%)', value: 870.38, confidence: 0.68, boundingBox: { page: 1, x_min: 0.65, y_min: 0.82, x_max: 0.95, y_max: 0.86 } }, // Flagged review anomaly (<0.70)
+  { key: 'total_amount', label: 'Grand Total Amount', value: 11420.38, confidence: 0.99, boundingBox: { page: 1, x_min: 0.65, y_min: 0.86, x_max: 0.95, y_max: 0.92 } },
 ];
 
 const INITIAL_LINE_ITEMS: InvoiceLineItem[] = [

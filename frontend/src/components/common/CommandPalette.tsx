@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, UploadCloud, Workflow, CheckSquare, BarChart3, Terminal, Shield, RefreshCw, X } from 'lucide-react';
+import { Search, UploadCloud, Workflow, CheckSquare, BarChart3, Terminal, Shield } from 'lucide-react';
 import { ActiveTab } from '../layout/Sidebar';
 
 interface CommandPaletteProps {

@@ -3,7 +3,7 @@
  * Manages document submission, polling loops with exponential backoff, and state transitions.
  */
 
-import { DocumentJob, StructuredInvoiceData, JobStatus } from '../types/document';
+import { DocumentJob, StructuredInvoiceData } from '../types/document';
 
 const API_BASE = '/api/v1';
 
@@ -74,10 +74,7 @@ export class JobService {
     job: DocumentJob,
     onUpdate: (updatedJob: DocumentJob) => void
   ): Promise<DocumentJob> {
-    const isMockOrFallback = true; // Provides smooth client-side visualizer
-
     let currentProgress = job.progress;
-    let currentStatus: JobStatus = 'RUNNING';
 
     // Stage 1: OCR Pipeline
     await sleep(900);

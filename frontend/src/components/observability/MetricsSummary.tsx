@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Clock, ShieldCheck, FileCheck, Layers, Server, TrendingUp, TrendingDown, CheckCircle2, BarChart2 } from 'lucide-react';
+import { Clock, ShieldCheck, FileCheck, Server, TrendingUp, CheckCircle2, BarChart2 } from 'lucide-react';
 import { jobsApi } from '../../api/jobs';
 import { RuntimeObservabilityKPIs } from '../../types/job';
 import { DLQTable } from './DLQTable';

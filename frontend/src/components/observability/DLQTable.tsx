@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { RotateCcw, RefreshCw, Copy, Check, Terminal, AlertTriangle, ShieldCheck, CheckCircle2, X } from 'lucide-react';
+import { RotateCcw, RefreshCw, Copy, Check, Terminal, AlertTriangle, ShieldCheck, X } from 'lucide-react';
 import { DLQItem } from '../../types/job';
 import { jobsApi } from '../../api/jobs';
 import { useToast } from '../common/Toast';
@@ -10,7 +10,7 @@ export const DLQTable: React.FC = () => {
   const [replayingId, setReplayingId] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<DLQItem | null>(null);
-  const [filterQuery, setFilterQuery] = useState<string>('');
+  const [filterQuery] = useState<string>('');
   const { success, info } = useToast();
 
   const fetchDLQ = useCallback(async () => {

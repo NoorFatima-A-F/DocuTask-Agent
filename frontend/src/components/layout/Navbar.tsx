@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, ExternalLink, Activity, Database, AlertCircle, Search, ShieldCheck } from 'lucide-react';
+import { Terminal, ExternalLink, Activity, Database, AlertCircle, Search } from 'lucide-react';
 import { UserProfile } from '../../api/auth';
 import { useSystemHealth } from '../../hooks/useSystemHealth';
 

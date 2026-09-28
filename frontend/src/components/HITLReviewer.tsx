@@ -8,8 +8,6 @@ import {
   ZoomOut,
   RotateCw,
   Download,
-  Save,
-  RefreshCw,
   Eye,
   Code,
   Check,
@@ -44,7 +42,6 @@ export const HITLReviewer: React.FC<HITLReviewerProps> = ({ job, onBack, onSave 
   const [zoomLevel, setZoomLevel] = useState<number>(100);
   const [rotation, setRotation] = useState<number>(0);
   const [isSaved, setIsSaved] = useState<boolean>(false);
-  const [activeHighlight, setActiveHighlight] = useState<string | null>(null);
 
   const lowConfidenceCount = Object.entries(data).filter(([key, val]) => {
     if (key === 'line_items') {
@@ -54,7 +51,7 @@ export const HITLReviewer: React.FC<HITLReviewerProps> = ({ job, onBack, onSave 
   }).length;
 
   const handleFieldChange = (fieldKey: keyof StructuredInvoiceData, newValue: any) => {
-    setData((prev) => ({
+    setData((prev: StructuredInvoiceData) => ({
       ...prev,
       [fieldKey]: {
         ...(prev[fieldKey] as any),
@@ -67,9 +64,9 @@ export const HITLReviewer: React.FC<HITLReviewerProps> = ({ job, onBack, onSave 
   };
 
   const handleLineItemChange = (id: string, field: keyof LineItem, val: any) => {
-    setData((prev) => ({
+    setData((prev: StructuredInvoiceData) => ({
       ...prev,
-      line_items: prev.line_items.map((item) =>
+      line_items: prev.line_items.map((item: LineItem) =>
         item.id === id ? { ...item, [field]: val, confidence: 1.0 } : item
       ),
     }));
@@ -244,7 +241,7 @@ export const HITLReviewer: React.FC<HITLReviewerProps> = ({ job, onBack, onSave 
                 </div>
                 <div>
                   <span className="text-slate-400 block font-semibold">PAYMENT TERMS:</span>
-                  <span className="text-slate-800">{data.payment_terms.value}</span>
+                  <span className="text-slate-800">{data.payment_terms?.value || 'N/A'}</span>
                 </div>
                 <div>
                   <span className="text-slate-400 block font-semibold">CURRENCY:</span>
@@ -263,7 +260,7 @@ export const HITLReviewer: React.FC<HITLReviewerProps> = ({ job, onBack, onSave 
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {data.line_items.map((item) => (
+                  {data.line_items.map((item: LineItem) => (
                     <tr key={item.id} className="hover:bg-blue-50/50 transition">
                       <td className="py-2 text-slate-800 pr-2">{item.description}</td>
                       <td className="py-2 text-center font-mono text-slate-700">{item.quantity}</td>
@@ -449,7 +446,7 @@ export const HITLReviewer: React.FC<HITLReviewerProps> = ({ job, onBack, onSave 
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-800/60">
-                        {data.line_items.map((li) => (
+                        {data.line_items.map((li: LineItem) => (
                           <tr key={li.id} className="hover:bg-slate-800/30 transition">
                             <td className="p-2">
                               <input

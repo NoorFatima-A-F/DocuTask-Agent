@@ -1,5 +1,5 @@
 import React from 'react';
-import { Workflow, CheckCircle2, Clock, RotateCcw, ArrowRight } from 'lucide-react';
+import { Workflow, CheckCircle2, ArrowRight } from 'lucide-react';
 import { useJobPolling } from '../../hooks/useJobPolling';
 import { StatusBadge } from '../layout/StatusBadge';
 
@@ -14,10 +14,9 @@ export const AsyncStepper: React.FC<AsyncStepperProps> = ({
   documentId,
   onNavigateToReview,
 }) => {
-  const { jobStatus, replayJob, isReplaying } = useJobPolling(jobId);
+  const { jobStatus } = useJobPolling(jobId);
 
   const isCompleted = jobStatus?.status === 'COMPLETED';
-  const isFailed = jobStatus?.status === 'FAILED';
   const progressPct = jobStatus?.progress_percentage || 100;
   const milestones = jobStatus?.milestones || [];
 

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, RefreshCw, Eye, CheckCircle2, AlertTriangle, ShieldAlert } from 'lucide-react';
-import { IngestionQueueRow, SCHEMA_CONFIG } from './IngestionDock';
+import { IngestionTask } from '../../pages/IngestionStudio';
 
 export interface LiveStreamTableProps {
-  tasks: IngestionQueueRow[];
+  tasks: IngestionTask[];
   selectedTaskId?: string | null;
-  onInspectTask: (task: IngestionQueueRow) => void;
+  onSelectTask: (task: IngestionTask) => void;
 }
 
 export function StatusCell({ status, reason }: { status: string; reason?: string }) {
@@ -46,29 +46,29 @@ export function StatusCell({ status, reason }: { status: string; reason?: string
   return <span className="text-xs text-zinc-400">{status}</span>;
 }
 
-export const LiveStreamTable: React.FC<LiveStreamTableProps> = ({
+export function LiveStreamTable({
   tasks,
   selectedTaskId,
-  onInspectTask,
-}) => {
+  onSelectTask,
+}: LiveStreamTableProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [isLive, setIsLive] = useState(true);
 
   const filteredTasks = tasks.filter((task) => {
     const matchSearch =
-      task.taskId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      task.filename.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      task.schemaType.toLowerCase().includes(searchQuery.toLowerCase());
+      task.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      task.documentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      task.schema.toLowerCase().includes(searchQuery.toLowerCase());
 
     if (!matchSearch) return false;
 
     if (statusFilter === 'ALL') return true;
     if (statusFilter === 'ANOMALIES') {
-      return task.status !== 'COMPLETED' && task.status !== 'Completed';
+      return task.status !== 'Completed';
     }
     if (statusFilter === 'COMPLETED') {
-      return task.status === 'COMPLETED' || task.status === 'Completed';
+      return task.status === 'Completed';
     }
     return true;
   });
@@ -140,23 +140,23 @@ export const LiveStreamTable: React.FC<LiveStreamTableProps> = ({
           <tbody aria-live="polite" className="divide-y divide-zinc-800/60 text-zinc-300 text-xs">
             {filteredTasks.map((task) => (
               <tr
-                key={task.taskId}
-                onClick={() => onInspectTask(task)}
+                key={task.id}
+                onClick={() => onSelectTask(task)}
                 className={`hover:bg-zinc-800/40 cursor-pointer transition-colors ${
-                  selectedTaskId === task.taskId ? 'bg-zinc-800/30' : ''
+                  selectedTaskId === task.id ? 'bg-zinc-800/30' : ''
                 }`}
               >
                 {/* Task ID */}
                 <td className="py-3.5 px-4 font-mono font-semibold text-zinc-200">
-                  {task.taskId}
+                  {task.id}
                 </td>
 
                 {/* Document & Human-readable schema */}
                 <td className="py-3.5 px-4">
                   <div className="flex flex-col">
-                    <span className="font-medium text-zinc-100">{task.filename}</span>
+                    <span className="font-medium text-zinc-100">{task.documentName}</span>
                     <span className="text-[11px] text-zinc-400 font-sans">
-                      {SCHEMA_CONFIG[task.schemaType]?.label || task.schemaType}
+                      {task.schema} ({task.schemaBadge})
                     </span>
                   </div>
                 </td>
@@ -196,20 +196,20 @@ export const LiveStreamTable: React.FC<LiveStreamTableProps> = ({
 
                 {/* Status & Verification */}
                 <td className="py-3.5 px-4">
-                  <StatusCell status={task.status} reason={task.reviewReason} />
+                  <StatusCell status={task.status} reason={task.statusDetails} />
                 </td>
 
                 {/* Action Button */}
                 <td className="py-3.5 px-4 text-right">
                   <button
                     type="button"
-                    aria-label={`Inspect extraction for ${task.filename}`}
+                    aria-label={`Inspect extraction for ${task.documentName}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      onInspectTask(task);
+                      onSelectTask(task);
                     }}
                     className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-all focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none ${
-                      selectedTaskId === task.taskId
+                      selectedTaskId === task.id
                         ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
                         : 'border-zinc-800 bg-zinc-800/40 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-700/60 hover:text-white'
                     }`}
@@ -225,4 +225,4 @@ export const LiveStreamTable: React.FC<LiveStreamTableProps> = ({
       </div>
     </div>
   );
-};
+}
