@@ -26,8 +26,9 @@
     code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
-<body class="bg-[#09090b] text-zinc-100 antialiased min-h-screen selection:bg-zinc-800 selection:text-zinc-100">
-  <div id="app-root" class="min-h-screen flex flex-col"></div>
+<body class="min-h-screen lg:h-screen w-screen lg:overflow-hidden bg-[#09090b] text-zinc-100 antialiased selection:bg-zinc-800 selection:text-zinc-100 flex flex-col font-sans">
+  <div id="app-root" class="min-h-screen lg:h-screen w-screen lg:overflow-hidden flex flex-col"></div>
+  <div id="toast-container" aria-live="polite" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
   <script>
     (function() {
@@ -37,8 +38,8 @@
         activeJobId: 'job_e847c91a',
         activeDocId: 'doc_e847c910a2',
         selectedFile: null,
-        schemaType: 'Invoice',
-        priority: 'HIGH',
+        schemaType: 'InvoiceTaxonomy.v2',
+        priority: 'P0',
         validationResult: null,
         isUploading: false,
         uploadProgress: 0,
@@ -49,37 +50,64 @@
         isApproving: false,
         isApproved: false,
         isReplaying: false,
-        replayedMessage: null,
-        selectedTrace: null,
+        selectedTraceItem: null,
+        timeRange: '1h',
+        isSpotlightOpen: false,
+        serverOnline: true,
+        serverHealth: { activeWorkers: 1, queueDepth: 0 },
+        latencyDataIndex: null,
         fields: [
-          { key: 'invoice_number', label: 'Invoice Number', value: 'INV-2026-8894', confidence: 0.98, regex: '^INV-[0-9]{4}-[0-9]{4}$', box: { left: '65%', top: '5%', width: '30%', height: '7%' } },
-          { key: 'vendor_name', label: 'Vendor Name', value: 'ACME CLOUD CORP', confidence: 0.96, box: { left: '5%', top: '3%', width: '45%', height: '9%' } },
-          { key: 'vendor_tax_id', label: 'Vendor Tax ID', value: 'US-948291048', confidence: 0.74, regex: '^[A-Z]{2}-[0-9]{9}$', box: { left: '5%', top: '12%', width: '30%', height: '4%' } }, // Amber (<0.90)
-          { key: 'invoice_date', label: 'Invoice Date', value: '2026-09-24', confidence: 0.94, regex: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', box: { left: '65%', top: '12%', width: '30%', height: '4%' } },
-          { key: 'due_date', label: 'Payment Due Date', value: '2026-10-24', confidence: 0.92, box: { left: '52%', top: '22%', width: '43%', height: '4%' } },
-          { key: 'subtotal', label: 'Subtotal Amount', value: 10550.00, confidence: 0.97, box: { left: '65%', top: '78%', width: '30%', height: '4%' } },
-          { key: 'tax_amount', label: 'Tax Amount (8.25%)', value: 870.38, confidence: 0.68, box: { left: '65%', top: '82%', width: '30%', height: '4%' } }, // Red (<0.70)
-          { key: 'total_amount', label: 'Grand Total Amount', value: 11420.38, confidence: 0.99, box: { left: '65%', top: '86%', width: '30%', height: '6%' } },
+          { group: 'Document Metadata', key: 'invoice_number', label: 'Invoice Number', value: 'INV-2026-8894', confidence: 0.98, regex: '^INV-[0-9]{4}-[0-9]{4}$', box: { left: '65%', top: '5%', width: '30%', height: '7%' } },
+          { group: 'Document Metadata', key: 'invoice_date', label: 'Issue Date', value: '2026-09-24', confidence: 0.94, regex: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', box: { left: '65%', top: '12%', width: '30%', height: '4%' } },
+          { group: 'Document Metadata', key: 'due_date', label: 'Payment Due Date', value: '2026-10-24', confidence: 0.92, regex: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', box: { left: '52%', top: '22%', width: '43%', height: '4%' } },
+          { group: 'Entity Identification', key: 'vendor_name', label: 'Vendor Name', value: 'ACME CLOUD CORP', confidence: 0.96, box: { left: '5%', top: '3%', width: '45%', height: '9%' } },
+          { group: 'Entity Identification', key: 'vendor_tax_id', label: 'Tax ID / VAT', value: 'US-948291048', confidence: 0.74, regex: '^[A-Z]{2}-[0-9]{9}$', box: { left: '5%', top: '12%', width: '30%', height: '4%' } },
+          { group: 'Financial Reconciliation', key: 'subtotal', label: 'Subtotal Amount', value: 10550.00, confidence: 0.97, box: { left: '65%', top: '78%', width: '30%', height: '4%' } },
+          { group: 'Financial Reconciliation', key: 'tax_amount', label: 'Tax Amount (8.25%)', value: 870.38, confidence: 0.68, box: { left: '65%', top: '82%', width: '30%', height: '4%' } },
+          { group: 'Financial Reconciliation', key: 'total_amount', label: 'Grand Total Amount', value: 11420.38, confidence: 0.99, box: { left: '65%', top: '86%', width: '30%', height: '6%' } },
+        ],
+        lineItems: [
+          { description: 'GPU Compute Cluster (A100 x8)', qty: 2, unitPrice: 4250.00, total: 8500.00 },
+          { description: 'Managed High-Throughput NVMe Storage', qty: 1, unitPrice: 1200.00, total: 1200.00 },
+          { description: 'Enterprise Direct Connect 10G Dedicated Port', qty: 1, unitPrice: 850.00, total: 850.00 },
         ],
         queue: [
-          { taskId: 'task_e847c91a', documentId: 'doc_e847c910a2', filename: 'INV-2026-8894.pdf', schemaType: 'Invoice', priority: 'HIGH', confidence: 0.942, latencyMs: 640, status: 'REVIEW_REQ' },
-          { taskId: 'task_b921fa02', documentId: 'doc_b921fa0281', filename: 'Cloudflare_Subscription_Q3.pdf', schemaType: 'Invoice', priority: 'NORMAL', confidence: 0.985, latencyMs: 412, status: 'COMPLETED' },
-          { taskId: 'task_3821a99f', documentId: 'doc_3821a99fa4', filename: 'Uber_Business_Receipt_98.png', schemaType: 'Receipt', priority: 'LOW', confidence: 0.971, latencyMs: 380, status: 'COMPLETED' },
-          { taskId: 'task_1120aa44', documentId: 'doc_1120aa44bc', filename: 'Master_Services_Agmt_v4.pdf', schemaType: 'Contract', priority: 'HIGH', confidence: 0.912, latencyMs: 820, status: 'COMPLETED' },
+          { taskId: 'task_e847c91a', documentId: 'doc_e847c910a2', filename: 'INV-2026-8894.pdf', schemaType: 'InvoiceTaxonomy.v2', priority: 'P0', confidence: 0.942, latencyMs: 640, status: 'REVIEW_REQ', reviewReason: 'Tax Anomaly (Tax 68% < 85%)' },
+          { taskId: 'task_b921fa02', documentId: 'doc_b921fa0281', filename: 'Cloudflare_Subscription_Q3.pdf', schemaType: 'InvoiceTaxonomy.v2', priority: 'P1', confidence: 0.985, latencyMs: 412, status: 'COMPLETED', reviewReason: null },
+          { taskId: 'task_3821a99f', documentId: 'doc_3821a99fa4', filename: 'Uber_Business_Receipt_98.png', schemaType: 'CommercialReceipt.v1', priority: 'P2', confidence: 0.724, latencyMs: 380, status: 'REVIEW_REQ', reviewReason: 'Low Confidence (72.4% < 75%)' },
+          { taskId: 'task_1120aa44', documentId: 'doc_1120aa44bc', filename: 'Master_Services_Agmt_v4.pdf', schemaType: 'EnterpriseContract.v1', priority: 'P0', confidence: 0.912, latencyMs: 820, status: 'COMPLETED', reviewReason: null },
         ],
-        dlqItems: [
-          {
-            id: 'dlq_88a91b',
-            job_id: 'job_ocr_fail_091',
-            document_id: 'doc_corrupted_scan_8',
-            error_classification: 'TIMEOUT_OCR_RASTER',
-            error_message: 'PyMuPDF rasterization limit exceeded on 600DPI TIFF page 4',
-            stack_trace: 'Traceback (most recent call last):\n  File "app/jobs/worker.py", line 84, in execute_pipeline\n  File "app/services/ocr_service.py", line 42, in parse_layout\nRuntimeError: OCR parsing failed on corrupted raster stream',
-            retry_count: 3,
-            max_retries: 3
-          }
-        ]
+        dlqItems: []
       };
+
+      // --- Toast Notification System ---
+      function showToast(type, title, desc) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const toastId = 't_' + Math.random().toString(36).substring(2, 8);
+        const toast = document.createElement('div');
+        toast.id = toastId;
+        toast.className = 'pointer-events-auto p-3 rounded-lg border shadow-lg bg-[#121215] text-zinc-100 flex items-start gap-2.5 transition-all border-zinc-700 animate-slide-in';
+        
+        let iconSvg = `<svg class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        if (type === 'error') {
+          iconSvg = `<svg class="w-4 h-4 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+        } else if (type === 'info') {
+          iconSvg = `<svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+        }
+
+        toast.innerHTML = `
+          ${iconSvg}
+          <div class="flex-1 min-w-0">
+            <div class="text-xs font-semibold font-mono text-zinc-100">${title}</div>
+            ${desc ? `<div class="text-[11px] text-zinc-400 mt-0.5 font-sans leading-tight">${desc}</div>` : ''}
+          </div>
+        `;
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+        }, 3500);
+      }
 
       // --- SVG Icons ---
       const ICONS = {
@@ -87,12 +115,92 @@
         workflow: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
         checkSquare: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>`,
         barChart: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`,
-        check: `<svg class="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`,
-        alertTriangle: `<svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`,
+        check: `<svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`,
+        alertTriangle: `<svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`,
         terminal: `<svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`,
-        rotateCcw: `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
+        rotateCcw: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`,
         externalLink: `<svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>`,
+        arrowLeft: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>`,
+        fileText: `<svg class="w-4 h-4 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>`,
+        x: `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`,
+        eye: `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>`,
+        shieldCheck: `<svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`,
+        search: `<svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>`,
+        copy: `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>`,
       };
+
+      // --- Live Backend Health Probing ---
+      async function probeBackendHealth() {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 2500);
+          const res = await fetch('/api/v1/health', { signal: controller.signal });
+          clearTimeout(timeoutId);
+          if (res.ok) {
+            state.serverOnline = true;
+            state.serverHealth = { activeWorkers: 1, queueDepth: 0 };
+          } else {
+            state.serverOnline = false;
+          }
+        } catch(e) {
+          state.serverOnline = false;
+        }
+        updateHeaderTelemetry();
+      }
+
+      function updateHeaderTelemetry() {
+        const probeContainer = document.getElementById('header-probes');
+        const offlineBanner = document.getElementById('offline-banner');
+        if (!probeContainer) return;
+
+        if (state.serverOnline) {
+          if (offlineBanner) offlineBanner.classList.add('hidden');
+          probeContainer.innerHTML = `
+            <div class="flex items-center gap-1.5" title="FastAPI Core Application Status">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-zinc-300">FastAPI</span>
+              <span class="text-emerald-400 font-medium">ONLINE</span>
+            </div>
+            <div class="h-3 w-px bg-zinc-800"></div>
+            <div class="flex items-center gap-1.5" title="Celery Redis Message Broker Status">
+              <span class="text-zinc-300">Redis:</span>
+              <span class="text-emerald-400 font-medium">READY</span>
+            </div>
+            <div class="h-3 w-px bg-zinc-800"></div>
+            <div class="flex items-center gap-1.5" title="Active Celery Worker Containers">
+              <span class="text-zinc-300">Active Workers:</span>
+              <span class="text-zinc-100 font-semibold tabular-nums">1</span>
+            </div>
+            <div class="h-3 w-px bg-zinc-800"></div>
+            <div class="flex items-center gap-1.5" title="Current Ingestion Queue Backlog">
+              <span class="text-zinc-400">Queue Depth:</span>
+              <span class="text-zinc-100 font-semibold tabular-nums">0</span>
+            </div>
+          `;
+        } else {
+          if (offlineBanner) offlineBanner.classList.remove('hidden');
+          probeContainer.innerHTML = `
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              <span class="text-rose-400">FastAPI</span>
+              <span class="text-rose-600 font-bold">OFFLINE</span>
+            </div>
+            <div class="h-3 w-px bg-zinc-800"></div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-zinc-400">Redis:</span>
+              <span class="text-zinc-400">UNKNOWN</span>
+            </div>
+            <div class="h-3 w-px bg-zinc-800"></div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-zinc-400">Workers:</span>
+              <span class="text-zinc-400">0</span>
+            </div>
+          `;
+        }
+      }
+
+      probeBackendHealth();
+      setInterval(probeBackendHealth, 5000);
 
       // --- Magic Byte Sniffing ---
       async function validateFile(file) {
@@ -129,41 +237,40 @@
       function render() {
         const root = document.getElementById('app-root');
         root.innerHTML = `
+          <!-- Sticky Offline Warning Banner -->
+          <div id="offline-banner" role="alert" aria-live="polite" class="${state.serverOnline ? 'hidden' : ''} bg-rose-950/90 border-b border-rose-800/60 px-4 py-1.5 flex items-center justify-between text-xs font-mono text-rose-200 shrink-0 z-40">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+              <span><strong>Backend Offline</strong> — Cannot reach FastAPI at <code class="bg-rose-900/50 px-1 py-0.5 rounded text-rose-100">http://127.0.0.1:8000/api/v1/health</code>. Telemetry showing mock/cached stream.</span>
+            </div>
+            <button onclick="window.probeBackendHealth && window.probeBackendHealth()" class="underline hover:text-white text-[11px] cursor-pointer">Retry Probe</button>
+          </div>
+
           <!-- Header Bar (Solid Dark) -->
-          <header class="h-12 border-b border-[#27272a] bg-[#121215] px-4 flex items-center justify-between sticky top-0 z-30 select-none">
-            <div class="flex items-center gap-2.5">
-              <div class="w-5 h-5 rounded bg-zinc-100 flex items-center justify-center text-zinc-950 font-bold text-xs font-mono">D</div>
-              <span class="font-semibold text-sm text-zinc-100 tracking-tight">DocuTask</span>
-              <span class="font-mono text-[11px] text-zinc-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">v1.0.0</span>
+          <header class="h-11 border-b border-[#27272a] bg-[#121215] px-4 flex items-center justify-between shrink-0 z-30 select-none">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2">
+                <div class="w-5 h-5 rounded bg-zinc-100 flex items-center justify-center text-zinc-950 font-bold text-xs font-mono">D</div>
+                <span class="font-semibold text-sm text-zinc-100 tracking-tight">DocuTask</span>
+                <span class="font-mono text-[11px] text-zinc-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">v1.0.0</span>
+              </div>
+
+              <!-- Quick Command Spotlight Button -->
+              <button id="btn-spotlight" class="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors ml-2 cursor-pointer" title="Search workspaces and commands (Cmd+K / Ctrl+K)">
+                ${ICONS.search}
+                <span>Spotlight...</span>
+                <kbd class="px-1 rounded bg-zinc-950 border border-zinc-800 text-[10px] text-zinc-400">⌘K</kbd>
+              </button>
             </div>
 
-            <!-- Telemetry Probes -->
-            <div class="hidden md:flex items-center gap-5 text-xs font-mono text-zinc-400">
-              <div class="flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span class="text-zinc-300">FastAPI</span>
-                <span class="text-zinc-600">:8000</span>
-              </div>
-              <div class="h-3 w-px bg-zinc-800"></div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-zinc-400">Redis Broker:</span>
-                <span class="text-emerald-400 font-medium">READY</span>
-              </div>
-              <div class="h-3 w-px bg-zinc-800"></div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-zinc-400">Active Workers:</span>
-                <span class="text-zinc-200 font-semibold">1</span>
-              </div>
-              <div class="h-3 w-px bg-zinc-800"></div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-zinc-400">Queue Depth:</span>
-                <span class="text-zinc-200 font-semibold">0</span>
-              </div>
+            <!-- Center Telemetry Probes -->
+            <div id="header-probes" class="hidden md:flex items-center gap-5 text-xs font-mono text-zinc-400">
+              <!-- Populated by updateHeaderTelemetry -->
             </div>
 
             <!-- Actions & Profile -->
             <div class="flex items-center gap-3">
-              <a href="/api/v1/docs" target="_blank" class="flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-zinc-200 px-2.5 py-1 rounded border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 transition-colors">
+              <a href="/api/v1/docs" target="_blank" class="flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-zinc-100 px-2.5 py-1 rounded border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 transition-colors">
                 ${ICONS.terminal}
                 <span class="hidden sm:inline">OpenAPI Docs</span>
                 ${ICONS.externalLink}
@@ -175,15 +282,15 @@
             </div>
           </header>
 
-          <!-- Main Layout Container -->
-          <div class="flex-1 flex overflow-hidden">
+          <!-- Main Layout Container (Zero Page Scroll) -->
+          <div class="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
             <!-- Sidebar -->
-            <aside class="w-56 border-r border-[#27272a] bg-[#121215] p-2.5 flex flex-col justify-between shrink-0 select-none">
+            <aside aria-label="Workspaces navigation" class="w-full lg:w-56 border-r border-[#27272a] bg-[#121215] p-2.5 flex flex-col justify-between shrink-0 select-none">
               <div class="space-y-3">
                 <div class="px-2 pt-1">
-                  <span class="text-[10px] font-mono uppercase tracking-wider text-zinc-500 font-semibold">Workspaces</span>
+                  <span class="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">Workspaces</span>
                 </div>
-                <nav class="space-y-0.5">
+                <nav role="navigation" class="space-y-0.5">
                   ${renderNavItem('ingestion', 'Ingestion Studio', ICONS.uploadCloud, '15MB')}
                   ${renderNavItem('pipeline', 'Pipeline Monitor', ICONS.workflow, state.activeJobId ? 'Active' : null)}
                   ${renderNavItem('reviewer', 'HITL Reviewer', ICONS.checkSquare, 'Split View')}
@@ -191,32 +298,36 @@
                 </nav>
               </div>
 
-              <div class="p-2.5 rounded border border-zinc-800/80 bg-zinc-900/30 text-[11px] font-mono text-zinc-500 space-y-1">
-                <div class="flex items-center justify-between text-zinc-400">
-                  <span>Target Engine</span>
-                  <span class="text-zinc-200">Gemini 1.5</span>
+              <div class="p-2.5 rounded border border-zinc-800/80 bg-zinc-900/30 text-[11px] font-mono text-zinc-400 space-y-1 mt-3 lg:mt-0">
+                <div class="flex items-center justify-between">
+                  <span>Extraction Engine</span>
+                  <span class="text-zinc-200 font-medium">Multimodal v1.5</span>
                 </div>
                 <div class="flex items-center justify-between">
-                  <span>Schema Contract</span>
-                  <span class="text-zinc-300">Pydantic v2</span>
+                  <span>Schema Taxonomy</span>
+                  <span class="text-emerald-400 font-medium flex items-center gap-1">Validated</span>
                 </div>
               </div>
             </aside>
 
-            <!-- Screen Viewport -->
-            <main class="flex-1 overflow-y-auto bg-[#09090b] p-5 flex flex-col">
+            <!-- Screen Viewport (Zero Page Scroll) -->
+            <main role="main" class="flex-1 h-full overflow-y-auto lg:overflow-hidden bg-[#09090b] p-3.5 flex flex-col min-h-0 min-w-0">
               ${renderScreen()}
             </main>
           </div>
+
+          <!-- Command Spotlight Palette Modal -->
+          ${state.isSpotlightOpen ? renderSpotlightModal() : ''}
         `;
 
+        updateHeaderTelemetry();
         bindEvents();
       }
 
       function renderNavItem(id, label, icon, badge) {
         const isActive = state.activeTab === id;
         return `
-          <button data-tab="${id}" class="nav-btn w-full text-left px-2.5 py-2 rounded border text-xs font-medium transition-colors flex items-center justify-between ${
+          <button data-tab="${id}" class="nav-btn w-full text-left px-2.5 py-2 rounded border text-xs font-medium transition-colors flex items-center justify-between cursor-pointer ${
             isActive
               ? 'bg-zinc-800 border-zinc-700 text-zinc-100 shadow-sm'
               : 'bg-transparent border-transparent hover:bg-zinc-800/50 hover:text-zinc-200 text-zinc-400'
@@ -225,7 +336,7 @@
               <span class="${isActive ? 'text-zinc-100' : 'text-zinc-400'}">${icon}</span>
               <span>${label}</span>
             </div>
-            ${badge ? `<span class="text-[10px] font-mono px-1.5 py-0.2 rounded border ${isActive ? 'bg-zinc-900 text-zinc-300 border-zinc-700' : 'bg-zinc-900/50 text-zinc-500 border-zinc-800'}">${badge}</span>` : ''}
+            ${badge ? `<span class="text-[10px] font-mono px-1.5 py-0.2 rounded border ${isActive ? 'bg-zinc-900 text-zinc-200 border-zinc-700' : 'bg-zinc-900/50 text-zinc-400 border-zinc-800'}">${badge}</span>` : ''}
           </button>
         `;
       }
@@ -238,121 +349,157 @@
         return '';
       }
 
-      // --- 1. Ingestion Screen (Two-Column Layout) ---
+      // --- 1. Ingestion Screen (4 / 8 Split Grid, Full Height, Zero Window Scroll) ---
       function renderIngestion() {
         return `
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 w-full">
-            <!-- Left Column: Compact Studio (4 cols / 35%) -->
-            <div class="lg:col-span-4 flex flex-col gap-4">
-              <div class="border border-[#27272a] bg-[#121215] rounded p-4 space-y-4">
-                <div class="flex items-center justify-between border-b border-[#27272a] pb-3">
-                  <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono flex items-center gap-1.5">
-                    ${ICONS.uploadCloud}
-                    Ingestion Studio
-                  </span>
-                  <span class="text-[10px] font-mono text-zinc-500 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">MAX 15MB</span>
-                </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 w-full h-full overflow-hidden select-none min-h-0">
+            <!-- Left Column: Compact Ingestion Dock (4 cols / ~33%) -->
+            <div class="lg:col-span-4 flex flex-col h-full overflow-hidden min-h-0">
+              <div class="border border-[#27272a] bg-[#121215] rounded-lg p-3.5 flex flex-col justify-between h-full overflow-y-auto min-h-0 space-y-3">
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between border-b border-[#27272a] pb-2">
+                    <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                      ${ICONS.uploadCloud}
+                      Ingestion Dock
+                    </span>
+                    <span class="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">MAX 15MB</span>
+                  </div>
 
-                <div id="dropzone" class="border border-dashed border-zinc-700/80 hover:border-zinc-500 bg-zinc-900/30 hover:bg-zinc-900/60 rounded p-5 text-center cursor-pointer transition-colors">
                   <input id="file-input" type="file" class="hidden" accept=".pdf,.png,.jpg,.jpeg,.tiff,.tif" />
-                  <div class="flex flex-col items-center gap-2">
-                    <span class="text-zinc-400">${ICONS.uploadCloud}</span>
-                    <span class="text-xs font-medium text-zinc-200">${state.selectedFile ? state.selectedFile.name : 'Select or drop document'}</span>
-                    <div class="flex items-center gap-1 text-[10px] font-mono text-zinc-500">
-                      <span>PDF</span><span>•</span><span>PNG</span><span>•</span><span>TIFF</span><span>•</span><span>JPEG</span>
-                    </div>
-                  </div>
-                </div>
 
-                ${state.validationResult ? `
-                  <div class="p-2.5 rounded border text-xs font-mono flex items-start gap-2 ${
-                    state.validationResult.isValid ? 'bg-emerald-950/20 border-emerald-800/40 text-emerald-400' : 'bg-rose-950/20 border-rose-800/40 text-rose-400'
-                  }">
-                    <div class="space-y-0.5 flex-1 min-w-0">
-                      <div class="flex justify-between">
-                        <span class="font-semibold">${state.validationResult.mime || 'Binary'}</span>
-                        <span>${state.validationResult.sizeFormatted}</span>
+                  ${!state.selectedFile ? `
+                    <div id="dropzone" role="button" tabindex="0" aria-label="Dropzone for PDF and Image uploads" class="h-28 border border-dashed border-zinc-700/80 hover:border-zinc-500 bg-zinc-900/30 hover:bg-zinc-900/60 rounded-lg p-3 text-center cursor-pointer transition-colors flex flex-col items-center justify-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-zinc-400">
+                      <span class="text-zinc-400">${ICONS.uploadCloud}</span>
+                      <span class="text-xs font-medium text-zinc-200">Drop file here or click to browse</span>
+                      <div class="flex items-center gap-1 text-[10px] font-mono text-zinc-400">
+                        <span>PDF</span><span>•</span><span>PNG</span><span>•</span><span>TIFF</span><span>•</span><span>JPEG</span>
                       </div>
-                      ${state.validationResult.error ? `<p class="text-[11px] text-rose-300">${state.validationResult.error}</p>` : ''}
                     </div>
-                  </div>
-                ` : ''}
+                  ` : `
+                    <div class="p-3 rounded-lg border border-zinc-700/80 bg-zinc-900/60 flex items-center justify-between gap-2.5">
+                      <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                        <div class="w-7 h-7 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0">
+                          ${ICONS.fileText}
+                        </div>
+                        <div class="min-w-0 flex-1">
+                          <div class="text-xs font-medium text-zinc-100 truncate">${state.selectedFile.name}</div>
+                          <div class="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400">
+                            <span>${(state.selectedFile.size / (1024 * 1024)).toFixed(2)} MB</span>
+                            <span>•</span>
+                            <span class="text-emerald-400 font-semibold">${state.validationResult?.mime || 'Binary Validated'}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button id="btn-clear-file" class="p-1 rounded text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 transition-colors shrink-0 cursor-pointer" title="Remove file">
+                        ${ICONS.x}
+                      </button>
+                    </div>
+                  `}
 
-                <div class="space-y-3 pt-1">
-                  <div>
-                    <label class="text-[11px] font-mono text-zinc-400 uppercase block mb-1">Document Schema</label>
+                  ${state.validationResult && !state.validationResult.isValid ? `
+                    <div class="p-2.5 rounded border border-rose-800/40 bg-rose-950/20 text-rose-400 text-xs font-mono">
+                      <span class="font-semibold block">Validation Failed</span>
+                      <p class="text-[11px] text-rose-300 mt-0.5">${state.validationResult.error}</p>
+                    </div>
+                  ` : ''}
+
+                  <div class="space-y-1">
+                    <label class="text-[11px] font-mono text-zinc-400 uppercase block">Document Schema</label>
                     <select id="schema-select" class="w-full bg-zinc-900 border border-zinc-700/80 rounded px-2.5 py-1.5 text-xs text-zinc-200 font-mono focus:outline-none focus:border-zinc-500">
-                      <option value="Invoice" ${state.schemaType === 'Invoice' ? 'selected' : ''}>InvoiceTaxonomy.v2</option>
-                      <option value="Receipt" ${state.schemaType === 'Receipt' ? 'selected' : ''}>CommercialReceipt.v1</option>
-                      <option value="Contract" ${state.schemaType === 'Contract' ? 'selected' : ''}>EnterpriseContract.v1</option>
+                      <option value="InvoiceTaxonomy.v2" ${state.schemaType === 'InvoiceTaxonomy.v2' ? 'selected' : ''}>InvoiceTaxonomy.v2</option>
+                      <option value="CommercialReceipt.v1" ${state.schemaType === 'CommercialReceipt.v1' ? 'selected' : ''}>CommercialReceipt.v1</option>
+                      <option value="EnterpriseContract.v1" ${state.schemaType === 'EnterpriseContract.v1' ? 'selected' : ''}>EnterpriseContract.v1</option>
+                      <option value="IdentityCredential.v1" ${state.schemaType === 'IdentityCredential.v1' ? 'selected' : ''}>IdentityCredential.v1</option>
                     </select>
                   </div>
 
-                  <div>
-                    <label class="text-[11px] font-mono text-zinc-400 uppercase block mb-1">Queue Priority</label>
-                    <select id="priority-select" class="w-full bg-zinc-900 border border-zinc-700/80 rounded px-2.5 py-1.5 text-xs text-zinc-200 font-mono focus:outline-none focus:border-zinc-500">
-                      <option value="HIGH" ${state.priority === 'HIGH' ? 'selected' : ''}>High (P0 - Immediate Ingestion)</option>
-                      <option value="NORMAL" ${state.priority === 'NORMAL' ? 'selected' : ''}>Normal (P1 - Standard Queue)</option>
-                      <option value="LOW" ${state.priority === 'LOW' ? 'selected' : ''}>Low (P2 - Batch Processing)</option>
-                    </select>
+                  <div class="space-y-1">
+                    <label class="text-[11px] font-mono text-zinc-400 uppercase block">Queue Priority</label>
+                    <div class="grid grid-cols-3 gap-1.5">
+                      ${['P0', 'P1', 'P2'].map(p => `
+                        <button type="button" data-priority="${p}" class="btn-priority px-2 py-1.5 rounded border text-[11px] font-mono transition-colors text-center cursor-pointer ${
+                          state.priority === p ? 'bg-zinc-800 border-zinc-600 text-zinc-100 font-semibold' : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                        }">${p}</button>
+                      `).join('')}
+                    </div>
                   </div>
                 </div>
 
-                <button id="btn-dispatch" ${!state.selectedFile || state.isUploading ? 'disabled' : ''} class="w-full py-2 px-3 rounded bg-zinc-100 hover:bg-white disabled:bg-zinc-800 disabled:text-zinc-500 text-zinc-950 text-xs font-semibold font-mono flex items-center justify-center gap-1.5 transition-colors cursor-pointer disabled:cursor-not-allowed">
-                  <span>${state.isUploading ? `Enqueuing (${state.uploadProgress}%)...` : 'Dispatch Ingestion'}</span>
-                </button>
+                <div class="pt-2">
+                  <button id="btn-dispatch" ${!state.selectedFile || state.isUploading ? 'disabled' : ''} class="w-full py-2 px-3 rounded bg-zinc-100 hover:bg-white disabled:bg-zinc-800 disabled:text-zinc-500 text-zinc-950 text-xs font-semibold font-mono flex items-center justify-center gap-1.5 transition-colors cursor-pointer disabled:cursor-not-allowed shadow-sm">
+                    <span>${state.isUploading ? `Enqueuing (${state.uploadProgress}%)...` : 'Dispatch Ingestion ->'}</span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            <!-- Right Column: Live Queue Table (8 cols / 65%) -->
-            <div class="lg:col-span-8 flex flex-col gap-4">
-              <div class="border border-[#27272a] bg-[#121215] rounded p-4 flex flex-col flex-1">
-                <div class="flex items-center justify-between border-b border-[#27272a] pb-3 mb-3">
+            <!-- Right Column: Live Queue Table (8 cols / ~67%) -->
+            <div class="lg:col-span-8 flex flex-col h-full overflow-hidden min-h-0">
+              <div class="border border-[#27272a] bg-[#121215] rounded-lg flex flex-col h-full overflow-hidden min-h-0">
+                <div class="px-4 py-2.5 border-b border-zinc-800 flex items-center justify-between bg-[#121215] shrink-0">
                   <div>
-                    <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">Recent Ingestion Batches &amp; Telemetry</span>
-                    <p class="text-[11px] text-zinc-500 font-mono mt-0.5">Live asynchronous pipeline status (<code class="text-zinc-400">/api/v1/jobs</code>)</p>
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <h2 class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">Live Ingestion Stream</h2>
+                      <span class="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">Real-Time</span>
+                    </div>
+                    <p class="text-[10px] text-zinc-400 font-mono mt-0.5">Active asynchronous pipeline queue • Click any row to inspect in HITL Reviewer</p>
                   </div>
+                  <button class="p-1 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer" title="Refresh queue">
+                    ${ICONS.rotateCcw}
+                  </button>
                 </div>
 
-                <div class="overflow-x-auto flex-1">
-                  <table class="w-full text-left text-xs font-mono">
-                    <thead>
-                      <tr class="border-b border-zinc-800 text-zinc-500 text-[10px] uppercase">
-                        <th class="pb-2 font-medium">Task ID</th>
-                        <th class="pb-2 font-medium">Document / Schema</th>
-                        <th class="pb-2 font-medium text-center">Priority</th>
-                        <th class="pb-2 font-medium text-center">Confidence</th>
-                        <th class="pb-2 font-medium text-right">Latency</th>
-                        <th class="pb-2 font-medium text-center">Status</th>
-                        <th class="pb-2 font-medium text-right">Action</th>
+                <!-- Table Container (Fixed Layout, Zero Header Collisions, Independent Scroll) -->
+                <div class="flex-1 overflow-y-auto overflow-x-auto min-h-0">
+                  <table class="table-fixed w-full text-left text-xs font-mono">
+                    <thead class="sticky top-0 bg-[#121215] z-10 border-b border-zinc-800 text-zinc-400 text-[10px] uppercase">
+                      <tr>
+                        <th scope="col" class="w-28 py-2.5 px-3 font-medium">Task ID</th>
+                        <th scope="col" class="w-44 py-2.5 px-3 font-medium">Document / Schema</th>
+                        <th scope="col" class="w-16 py-2.5 px-2 font-medium text-center">Priority</th>
+                        <th scope="col" class="w-24 py-2.5 px-2 font-medium text-center">Confidence</th>
+                        <th scope="col" class="w-20 py-2.5 px-3 font-medium text-right">Latency</th>
+                        <th scope="col" class="w-56 py-2.5 px-3 font-medium">Status &amp; Reason</th>
+                        <th scope="col" class="w-20 py-2.5 px-3 font-medium text-right">Action</th>
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-zinc-800/60 text-zinc-300 text-[11px]">
                       ${state.queue.map(row => `
-                        <tr class="hover:bg-zinc-800/30 transition-colors">
-                          <td class="py-2.5 text-zinc-200 font-semibold truncate max-w-[110px]">${row.taskId}</td>
-                          <td class="py-2.5 max-w-[180px] truncate" title="${row.filename}">
-                            <div class="flex flex-col">
-                              <span class="text-zinc-200 truncate">${row.filename}</span>
-                              <span class="text-[10px] text-zinc-500">${row.schemaType}</span>
+                        <tr data-doc-id="${row.documentId}" class="table-row-item hover:bg-zinc-800/40 cursor-pointer transition-colors">
+                          <td class="py-2.5 px-3 text-zinc-200 font-semibold truncate">${row.taskId}</td>
+                          <td class="py-2.5 px-3 truncate" title="${row.filename}">
+                            <div class="flex flex-col truncate">
+                              <span class="text-zinc-200 truncate font-medium">${row.filename}</span>
+                              <span class="text-[10px] text-zinc-400 truncate">${row.schemaType}</span>
                             </div>
                           </td>
-                          <td class="py-2.5 text-center">
-                            <span class="text-[10px] font-mono px-1 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">${row.priority}</span>
+                          <td class="py-2.5 px-2 text-center">
+                            <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-300">${row.priority}</span>
                           </td>
-                          <td class="py-2.5 text-center">
-                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${
+                          <td class="py-2.5 px-2 text-center">
+                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border tabular-nums ${
                               row.confidence >= 0.90 ? 'bg-emerald-950/40 text-emerald-400 border-emerald-800/50' : 'bg-amber-950/40 text-amber-400 border-amber-800/50'
                             }">${(row.confidence * 100).toFixed(1)}%</span>
                           </td>
-                          <td class="py-2.5 text-right text-zinc-400">${row.latencyMs}ms</td>
-                          <td class="py-2.5 text-center">
-                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${
-                              row.status === 'COMPLETED' ? 'bg-emerald-950/40 text-emerald-400 border-emerald-800/50' : 'bg-amber-950/40 text-amber-400 border-amber-800/50'
-                            }">${row.status}</span>
+                          <td class="py-2.5 px-3 text-right text-zinc-400 tabular-nums">${row.latencyMs}ms</td>
+                          <td class="py-2.5 px-3">
+                            <div class="flex items-center gap-1.5 truncate">
+                              ${row.status === 'COMPLETED' ? `
+                                <span class="inline-flex items-center gap-1 font-mono text-[10px] px-1.5 py-0.2 rounded border bg-emerald-950/40 text-emerald-400 border-emerald-800/50">
+                                  ${ICONS.check} COMPLETED
+                                </span>
+                              ` : `
+                                <span class="inline-flex items-center gap-1 font-mono text-[10px] px-1.5 py-0.2 rounded border bg-amber-950/40 text-amber-400 border-amber-800/50 truncate" title="${row.reviewReason || 'Review Req'}">
+                                  ${ICONS.alertTriangle}
+                                  <span class="truncate">${row.reviewReason || 'Review Req'}</span>
+                                </span>
+                              `}
+                            </div>
                           </td>
-                          <td class="py-2.5 text-right">
-                            <button data-doc-id="${row.documentId}" class="btn-inspect px-2 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-[10px] font-mono inline-flex items-center gap-1 border border-zinc-700 transition-colors">
+                          <td class="py-2.5 px-3 text-right">
+                            <button data-doc-id="${row.documentId}" class="btn-inspect px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-[10px] font-mono inline-flex items-center gap-1 border border-zinc-700 transition-colors cursor-pointer">
+                              ${ICONS.eye}
                               <span>Inspect</span>
                             </button>
                           </td>
@@ -372,31 +519,31 @@
         const milestones = [
           { title: 'File Ingestion & Checksum', engine: 'Storage Gateway', desc: 'SHA-256 integrity check and duplicate binary gate validated', latency: '120ms' },
           { title: 'OCR & Layout Parsing', engine: 'OCR Core Engine', desc: 'PyMuPDF rasterization and Tesseract character layout stream', latency: '205ms' },
-          { title: 'Schema Contract Selection', engine: 'Schema Invariant Engine', desc: 'Pydantic v2 taxonomy matching and target JSON boundary binding', latency: '95ms' },
-          { title: 'Multimodal Entity Reasoning', engine: 'Gemini 1.5 Pro / Flash', desc: 'Gemini structured entity distillation with contextual grounding', latency: '140ms' },
-          { title: 'Confidence & Validation Gates', engine: 'Bayesian Auditor', desc: 'Bayesian evidence fusion, arithmetic reconciliation and HITL thresholding', latency: '80ms' },
+          { title: 'Schema Contract Selection', engine: 'Schema Invariant Engine', desc: 'Taxonomy matching and target JSON boundary binding', latency: '95ms' },
+          { title: 'Multimodal Entity Reasoning', engine: 'Multimodal Core v1.5', desc: 'Structured entity distillation with contextual grounding', latency: '140ms' },
+          { title: 'Confidence & Validation Gates', engine: 'Multi-Signal Auditor', desc: 'Evidence scoring, arithmetic reconciliation and HITL thresholding', latency: '80ms' },
         ];
 
         return `
-          <div class="space-y-4 max-w-4xl mx-auto w-full">
+          <div class="space-y-3.5 max-w-4xl mx-auto w-full h-full overflow-y-auto pr-1">
             <div class="flex items-center justify-between border-b border-[#27272a] pb-2.5">
               <div class="flex items-center gap-2.5">
                 <span class="text-zinc-400">${ICONS.workflow}</span>
                 <div>
                   <h2 class="text-xs font-semibold text-zinc-100 font-mono">Job #${state.activeJobId}</h2>
-                  <span class="text-[10px] text-zinc-500 font-mono">Doc ID: ${state.activeDocId}</span>
+                  <span class="text-[10px] text-zinc-400 font-mono">Doc ID: ${state.activeDocId}</span>
                 </div>
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-xs font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">Latency: <strong class="text-zinc-200">640ms</strong></span>
+                <span class="text-xs font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">Latency: <strong class="text-zinc-200 tabular-nums">640ms</strong></span>
                 <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-800/50">COMPLETED</span>
               </div>
             </div>
 
-            <div class="p-4 rounded border border-[#27272a] bg-[#121215] space-y-3">
+            <div class="p-4 rounded-lg border border-[#27272a] bg-[#121215] space-y-3 shadow-sm">
               <div class="flex justify-between items-center text-xs font-mono">
                 <span class="text-zinc-300 font-medium">Asynchronous Pipeline Execution</span>
-                <span class="text-zinc-100 font-bold">${state.pipelineProgress}%</span>
+                <span class="text-zinc-100 font-bold tabular-nums">${state.pipelineProgress}%</span>
               </div>
               <div class="w-full bg-zinc-950 rounded-full h-1.5 overflow-hidden border border-zinc-800">
                 <div class="h-full bg-zinc-300 rounded-full transition-all duration-300" style="width: ${state.pipelineProgress}%"></div>
@@ -410,7 +557,7 @@
                       <div>
                         <div class="flex items-center gap-2">
                           <span class="font-semibold text-zinc-200">${m.title}</span>
-                          <span class="text-[10px] text-zinc-500 bg-zinc-950 px-1 py-0.2 rounded border border-zinc-800">${m.engine}</span>
+                          <span class="text-[10px] text-zinc-400 bg-zinc-950 px-1.5 py-0.2 rounded border border-zinc-800">${m.engine}</span>
                         </div>
                         <p class="text-[11px] text-zinc-400 mt-0.5">${m.desc}</p>
                       </div>
@@ -423,9 +570,9 @@
               </div>
             </div>
 
-            <div class="p-3 rounded border border-zinc-800 bg-zinc-900/40 flex items-center justify-between">
-              <span class="text-xs font-mono text-zinc-300">Pipeline completed. Bayesian confidence scored: <strong>94.2%</strong></span>
-              <button id="btn-goto-review" class="px-3 py-1.5 rounded bg-zinc-100 hover:bg-white text-zinc-950 font-mono text-xs font-semibold transition-colors">
+            <div class="p-3 rounded-lg border border-zinc-800 bg-zinc-900/40 flex items-center justify-between">
+              <span class="text-xs font-mono text-zinc-300">Pipeline completed. Multi-signal confidence scored: <strong class="text-emerald-400">94.2%</strong></span>
+              <button id="btn-goto-review" class="px-3 py-1.5 rounded bg-zinc-100 hover:bg-white text-zinc-950 font-mono text-xs font-semibold transition-colors cursor-pointer shadow-sm">
                 Proceed to HITL Review →
               </button>
             </div>
@@ -433,43 +580,57 @@
         `;
       }
 
-      // --- 3. Two-Pane HITL Reviewer (50/50 Split View) ---
+      // --- 3. Two-Pane HITL Reviewer (50/50 Split View, Zero Page Scroll) ---
       function renderReviewer() {
+        const groups = [
+          'Document Metadata',
+          'Entity Identification',
+          'Financial Reconciliation',
+        ];
+
         return `
-          <div class="flex-1 flex flex-col gap-3">
-            <div class="flex items-center justify-between border-b border-[#27272a] pb-2.5">
-              <div>
-                <span class="text-xs font-semibold text-zinc-100 font-mono">HITL Reviewer • ${state.activeDocId}</span>
-                <span class="text-[11px] font-mono text-zinc-500 ml-2">Schema: <span class="text-zinc-300">InvoiceTaxonomy.v2</span></span>
+          <div class="flex-1 flex flex-col gap-3 h-full overflow-hidden select-none min-h-0">
+            {/* Header Bar */}
+            <div class="flex items-center justify-between border-b border-[#27272a] pb-2 shrink-0">
+              <div class="flex items-center gap-2.5">
+                <button id="btn-back-ingestion" class="px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-zinc-100 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer">
+                  ${ICONS.arrowLeft}
+                  <span>Back to Ingestion</span>
+                </button>
+                <div>
+                  <h2 class="text-xs font-semibold text-zinc-100 font-mono">HITL Reviewer • ${state.activeDocId}</h2>
+                  <span class="text-[11px] font-mono text-zinc-400 ml-2">Schema: <span class="text-zinc-200 font-semibold">InvoiceTaxonomy.v2</span></span>
+                </div>
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950/40 text-amber-400 border border-amber-800/50">
-                  2 fields require operator verification
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950/40 text-amber-400 border border-amber-800/50 flex items-center gap-1">
+                  ${ICONS.alertTriangle}
+                  Tax Anomaly Flagged (68% &lt; 85%)
                 </span>
               </div>
             </div>
 
-            <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 min-h-[640px]">
-              <!-- Left Pane (50% / 6 cols) -->
-              <div class="lg:col-span-6 flex flex-col rounded border border-[#27272a] bg-[#121215] overflow-hidden">
-                <div class="h-10 border-b border-[#27272a] bg-[#18181b]/60 px-3 flex items-center justify-between shrink-0 text-xs font-mono select-none">
+            <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3.5 overflow-hidden min-h-0">
+              <!-- Left Pane: Document Canvas (50% / 6 cols) -->
+              <div class="lg:col-span-6 flex flex-col rounded-lg border border-[#27272a] bg-[#121215] overflow-hidden h-full min-h-0">
+                <div class="h-9 border-b border-[#27272a] bg-[#18181b]/60 px-3 flex items-center justify-between shrink-0 text-xs font-mono select-none">
                   <span class="font-semibold text-zinc-300">INV-2026-8894.pdf</span>
                   <div class="flex items-center gap-1.5">
-                    <button id="btn-zoom-out" class="p-1 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded px-1.5">-</button>
-                    <span class="px-1 text-[11px] text-zinc-300 min-w-[36px] text-center">${state.zoom}%</span>
-                    <button id="btn-zoom-in" class="p-1 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded px-1.5">+</button>
-                    <button id="btn-fit" class="px-1.5 py-0.5 bg-zinc-950 hover:bg-zinc-800 rounded border border-zinc-800 text-zinc-400 hover:text-zinc-200 text-[10px]">Fit</button>
-                    <button id="btn-rotate" class="p-1 bg-zinc-950 hover:bg-zinc-800 rounded border border-zinc-800 text-zinc-400">↻</button>
+                    <button id="btn-zoom-out" class="p-0.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded px-1.5 cursor-pointer">-</button>
+                    <span class="px-1 text-[11px] text-zinc-300 min-w-[36px] text-center tabular-nums">${state.zoom}%</span>
+                    <button id="btn-zoom-in" class="p-0.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded px-1.5 cursor-pointer">+</button>
+                    <button id="btn-fit" class="px-1.5 py-0.5 bg-zinc-950 hover:bg-zinc-800 rounded border border-zinc-800 text-zinc-400 hover:text-zinc-200 text-[10px] cursor-pointer">Fit</button>
+                    <button id="btn-rotate" class="p-0.5 bg-zinc-950 hover:bg-zinc-800 rounded border border-zinc-800 text-zinc-400 cursor-pointer">↻</button>
                   </div>
                 </div>
 
-                <div class="flex-1 overflow-auto p-4 flex items-center justify-center bg-[#09090b] relative">
-                  <div style="transform: scale(${state.zoom / 100}) rotate(${state.rotation}deg); transform-origin: center center; transition: transform 0.12s ease-out;" class="relative w-[480px] min-h-[640px] bg-[#121215] border border-zinc-800 rounded p-6 shadow text-zinc-200 select-none">
+                <div class="flex-1 overflow-auto p-4 flex items-center justify-center bg-[#09090b] relative min-h-0">
+                  <div style="transform: scale(${state.zoom / 100}) rotate(${state.rotation}deg); transform-origin: center center; transition: transform 0.12s ease-out;" class="relative w-[480px] min-h-[620px] bg-[#121215] border border-zinc-800 rounded p-6 shadow text-zinc-200 select-none">
                     <div class="border-b border-zinc-700 pb-3 mb-4 flex justify-between items-start">
                       <div>
-                        <h1 class="text-base font-bold tracking-tight text-white font-mono">ACME CLOUD CORP</h1>
+                        <h3 class="text-base font-bold tracking-tight text-white font-mono">ACME CLOUD CORP</h3>
                         <p class="text-[10px] text-zinc-400">Enterprise Cloud Infrastructure</p>
-                        <p class="text-[10px] text-zinc-500 font-mono">Tax ID: US-948291048</p>
+                        <p class="text-[10px] text-zinc-400 font-mono">Tax ID: US-948291048</p>
                       </div>
                       <div class="text-right">
                         <span class="text-[10px] font-mono font-semibold px-1.5 py-0.5 bg-zinc-800 text-zinc-200 border border-zinc-700 rounded">COMMERCIAL INVOICE</span>
@@ -480,11 +641,11 @@
 
                     <div class="grid grid-cols-2 gap-2.5 mb-4 text-xs">
                       <div class="p-2 bg-zinc-950 rounded border border-zinc-800/80">
-                        <span class="text-[9px] text-zinc-500 uppercase font-mono block">Billed To</span>
+                        <span class="text-[9px] text-zinc-400 uppercase font-mono block">Billed To</span>
                         <p class="font-semibold text-zinc-200 text-[11px]">Global Logistics Corp</p>
                       </div>
                       <div class="p-2 bg-zinc-950 rounded border border-zinc-800/80">
-                        <span class="text-[9px] text-zinc-500 uppercase font-mono block">Terms</span>
+                        <span class="text-[9px] text-zinc-400 uppercase font-mono block">Terms</span>
                         <p class="text-zinc-200 font-mono text-[11px]">Net 30 Days (Due 2026-10-24)</p>
                       </div>
                     </div>
@@ -492,7 +653,7 @@
                     <div class="mb-4">
                       <table class="w-full text-left text-xs font-mono">
                         <thead>
-                          <tr class="border-b border-zinc-800 text-zinc-500 text-[9px] uppercase">
+                          <tr class="border-b border-zinc-800 text-zinc-400 text-[9px] uppercase">
                             <th class="pb-1">Description</th>
                             <th class="pb-1 text-center">Qty</th>
                             <th class="pb-1 text-right">Unit Price</th>
@@ -523,7 +684,7 @@
                       else if (f.confidence < 0.90) color = 'border-amber-500/80 bg-amber-500/15 text-amber-300';
 
                       return `
-                        <div style="position: absolute; left: ${f.box.left}; top: ${f.box.top}; width: ${f.box.width}; height: ${f.box.height};" class="border rounded-[2px] transition-all cursor-pointer ${color} ${isHov ? 'ring-1 ring-white z-20' : 'z-10'}">
+                        <div role="button" tabindex="0" aria-label="${f.label} field, extracted with ${(f.confidence * 100).toFixed(0)}% confidence" data-field-box="${f.key}" style="position: absolute; left: ${f.box.left}; top: ${f.box.top}; width: ${f.box.width}; height: ${f.box.height};" class="field-box border rounded-[2px] transition-all cursor-pointer ${color} ${isHov ? 'ring-2 ring-white z-20 shadow-lg' : 'z-10'} focus:outline-none focus:ring-2 focus:ring-zinc-100">
                           <div class="absolute -top-4 left-0 px-1 py-0.2 rounded bg-zinc-950 border border-zinc-700 text-[9px] font-mono whitespace-nowrap">${f.label}</div>
                         </div>
                       `;
@@ -533,56 +694,93 @@
               </div>
 
               <!-- Right Pane: Extracted Schema Form (50% / 6 cols) -->
-              <div class="lg:col-span-6 flex flex-col justify-between border border-[#27272a] bg-[#121215] rounded p-4 overflow-hidden">
-                <div class="overflow-y-auto space-y-2.5 pr-1 max-h-[580px]">
-                  <div class="border-b border-[#27272a] pb-2 flex items-center justify-between">
-                    <span class="text-xs font-mono font-semibold text-zinc-200">Extracted Schema Key-Values</span>
-                    <span class="text-[10px] font-mono text-zinc-500">>=90% (Checkmark) • &lt;90% (Review Req)</span>
-                  </div>
-
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    ${state.fields.map(f => {
-                      const isHigh = f.confidence >= 0.90;
-                      return `
-                        <div class="p-2.5 rounded border transition-colors ${
-                          !isHigh ? 'bg-amber-950/20 border-amber-800/40' : 'bg-zinc-900/40 border-zinc-800/80'
-                        } ${f.key === 'vendor_name' || f.key === 'total_amount' ? 'sm:col-span-2' : ''}">
-                          <div class="flex items-center justify-between gap-1 mb-1">
-                            <label class="text-xs font-medium text-zinc-300">${f.label}</label>
-                            ${isHigh ? `
-                              <span class="flex items-center gap-1 text-zinc-400 bg-zinc-900 px-1.5 py-0.2 rounded border border-zinc-800 text-[10px]">
-                                ${ICONS.check}
-                                ${(f.confidence * 100).toFixed(0)}%
-                              </span>
-                            ` : `
-                              <span class="flex items-center gap-1 text-amber-400 bg-amber-950/40 px-1.5 py-0.2 rounded border border-amber-800/50 text-[10px]">
-                                ${ICONS.alertTriangle}
-                                ${(f.confidence * 100).toFixed(0)}% Review Req
-                              </span>
-                            `}
-                          </div>
-                          <input
-                            data-key="${f.key}"
-                            type="${typeof f.value === 'number' ? 'number' : 'text'}"
-                            value="${f.value}"
-                            class="field-input w-full bg-zinc-950 rounded px-2 py-1 text-xs font-mono text-zinc-100 border ${
-                              !isHigh ? 'border-amber-700/60 focus:border-amber-500' : 'border-zinc-800 focus:border-zinc-500'
-                            } focus:outline-none"
-                          />
+              <div class="lg:col-span-6 flex flex-col justify-between border border-[#27272a] bg-[#121215] rounded-lg p-3.5 overflow-hidden h-full min-h-0">
+                <div class="overflow-y-auto space-y-3.5 pr-1 min-h-0 flex-1">
+                  
+                  ${groups.map(grp => {
+                    const grpFields = state.fields.filter(f => f.group === grp);
+                    return `
+                      <div class="space-y-1.5">
+                        <div class="text-[10px] font-mono font-semibold text-zinc-400 uppercase tracking-wider border-b border-zinc-800 pb-1">
+                          ${grp}
                         </div>
-                      `;
-                    }).join('')}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          ${grpFields.map(f => {
+                            const isHigh = f.confidence >= 0.90;
+                            const isHov = state.hoveredFieldKey === f.key;
+                            return `
+                              <div data-field-container="${f.key}" class="field-container p-2.5 rounded border transition-all ${
+                                isHov ? 'ring-1 ring-zinc-400 bg-zinc-800/60' : !isHigh ? 'bg-amber-950/20 border-amber-800/40' : 'bg-zinc-900/40 border-zinc-800/80'
+                              } ${f.key === 'vendor_name' || f.key === 'total_amount' ? 'sm:col-span-2' : ''}">
+                                <div class="flex items-center justify-between gap-1 mb-1">
+                                  <label class="text-xs font-medium text-zinc-300">${f.label}</label>
+                                  ${isHigh ? `
+                                    <span class="flex items-center gap-1 text-emerald-400 bg-emerald-950/40 px-1.5 py-0.2 rounded border border-emerald-800/50 text-[10px]">
+                                      ${ICONS.check}
+                                      ${(f.confidence * 100).toFixed(0)}%
+                                    </span>
+                                  ` : `
+                                    <span class="flex items-center gap-1 text-amber-400 bg-amber-950/40 px-1.5 py-0.2 rounded border border-amber-800/50 text-[10px]">
+                                      ${ICONS.alertTriangle}
+                                      ${(f.confidence * 100).toFixed(0)}% Review Req
+                                    </span>
+                                  `}
+                                </div>
+                                <input
+                                  data-key="${f.key}"
+                                  type="${typeof f.value === 'number' ? 'number' : 'text'}"
+                                  value="${f.value}"
+                                  class="field-input w-full bg-zinc-950 rounded px-2 py-1 text-xs font-mono text-zinc-100 border ${
+                                    !isHigh ? 'border-amber-700/60 focus:border-amber-500' : 'border-zinc-800 focus:border-zinc-500'
+                                  } focus:outline-none"
+                                />
+                              </div>
+                            `;
+                          }).join('')}
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
+
+                  <!-- 4th Group: Extracted Line Items -->
+                  <div class="space-y-1.5 border-t border-zinc-800 pt-2">
+                    <div class="text-[10px] font-mono font-semibold text-zinc-400 uppercase tracking-wider pb-1 flex items-center justify-between">
+                      <span>4. Line Items (3 Items Extracted)</span>
+                      <span class="text-[10px] text-emerald-400 font-normal">Reconciled</span>
+                    </div>
+                    <div class="border border-zinc-800 rounded overflow-hidden">
+                      <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-zinc-900/60 text-zinc-400 text-[10px] uppercase">
+                          <tr>
+                            <th class="p-2">Item Description</th>
+                            <th class="p-2 text-center">Qty</th>
+                            <th class="p-2 text-right">Unit Price</th>
+                            <th class="p-2 text-right">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-800/60 text-[11px] text-zinc-300">
+                          ${state.lineItems.map(item => `
+                            <tr class="hover:bg-zinc-800/30">
+                              <td class="p-2 text-zinc-200">${item.description}</td>
+                              <td class="p-2 text-center text-zinc-400 tabular-nums">${item.qty}</td>
+                              <td class="p-2 text-right text-zinc-400 tabular-nums">$${item.unitPrice.toFixed(2)}</td>
+                              <td class="p-2 text-right text-zinc-200 font-semibold tabular-nums">$${item.total.toFixed(2)}</td>
+                            </tr>
+                          `).join('')}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
 
                 <!-- Bottom Actions Bar -->
-                <div class="border-t border-[#27272a] pt-3 mt-3 flex items-center justify-between">
-                  <button id="btn-reject" class="px-3 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-rose-400 hover:text-rose-300 font-mono text-xs flex items-center gap-1.5 transition-colors">
-                    <span>Reject Batch</span>
+                <div class="border-t border-[#27272a] pt-3 mt-2 flex items-center justify-between shrink-0">
+                  <button id="btn-reject" class="px-3 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-rose-400 hover:text-rose-300 font-mono text-xs flex items-center gap-1.5 transition-colors cursor-pointer">
+                    <span>Reject &amp; Route to DLQ</span>
                   </button>
 
-                  <button id="btn-approve" ${state.isApproving || state.isApproved ? 'disabled' : ''} class="px-4 py-1.5 rounded font-mono text-xs font-semibold flex items-center gap-1.5 transition-colors ${
-                    state.isApproved ? 'bg-emerald-600 text-white' : 'bg-zinc-100 hover:bg-white text-zinc-950'
+                  <button id="btn-approve" ${state.isApproving || state.isApproved ? 'disabled' : ''} class="px-4 py-1.5 rounded font-mono text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+                    state.isApproved ? 'bg-emerald-600 text-white' : 'bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm'
                   }">
                     <span>${state.isApproving ? 'Persisting...' : state.isApproved ? 'Approved & Persisted' : 'Approve & Persist'}</span>
                   </button>
@@ -593,96 +791,368 @@
         `;
       }
 
-      // --- 4. Observability Screen ---
+      // --- 4. Observability Screen (With Real Time-Series Charts & Elevated Empty State) ---
       function renderObservability() {
+        const latencyPoints = [
+          { time: '10:00', p50: 180, p95: 390, p99: 580, throughput: 28 },
+          { time: '10:15', p50: 210, p95: 420, p99: 610, throughput: 34 },
+          { time: '10:30', p50: 195, p95: 405, p99: 590, throughput: 42 },
+          { time: '10:45', p50: 175, p95: 385, p99: 550, throughput: 39 },
+          { time: '11:00', p50: 220, p95: 440, p99: 630, throughput: 45 },
+          { time: '11:15', p50: 190, p95: 412, p99: 600, throughput: 38 },
+        ];
+
         return `
-          <div class="space-y-4 w-full">
-            <div class="flex items-center justify-between border-b border-[#27272a] pb-2.5">
+          <div class="space-y-4 w-full h-full overflow-y-auto pr-1 min-h-0">
+            {/* Header & Time Range Filter */}
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#27272a] pb-3 shrink-0">
               <div>
-                <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">System Observability &amp; Telemetry Hub</span>
-                <p class="text-[11px] text-zinc-500 font-mono mt-0.5">Real-time Celery worker load, Bayesian confidence scores, and Dead Letter Queue management.</p>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <h1 class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">
+                    System Observability &amp; Telemetry Hub
+                  </h1>
+                  <span class="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-1.5 py-0.2 rounded">
+                    REST Polling • 5s Cycle
+                  </span>
+                </div>
+                <p class="text-[11px] text-zinc-400 font-mono mt-0.5">
+                  Real-time worker telemetry, latency percentiles, and exception quarantine.
+                </p>
               </div>
-              <div class="flex items-center gap-1.5 font-mono text-[11px] text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 px-2 py-0.5 rounded">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                <span>Health: 99.8%</span>
+
+              <div class="flex items-center gap-3">
+                <div class="flex items-center bg-zinc-900/80 p-0.5 rounded-lg border border-zinc-800 text-[11px] font-mono">
+                  ${['15m', '1h', '24h', '7d'].map(r => `
+                    <button data-range="${r}" class="btn-timerange px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+                      state.timeRange === r ? 'bg-zinc-800 text-zinc-100 font-semibold shadow-sm' : 'text-zinc-500 hover:text-zinc-300'
+                    }">${r}</button>
+                  `).join('')}
+                </div>
+
+                <div class="flex items-center gap-1.5 font-mono text-[11px] text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 px-2.5 py-1 rounded-lg shrink-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Health: 99.8%</span>
+                </div>
               </div>
             </div>
 
+            {/* KPI Cards (Tabular Numerics & Pluralized Grammar) */}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              <div class="p-3.5 rounded border border-[#27272a] bg-[#121215] space-y-1">
-                <span class="text-[11px] font-mono text-zinc-500 uppercase font-medium">Active Workers</span>
-                <div class="text-xl font-bold font-mono text-zinc-100">1 Container</div>
-                <div class="text-[10px] font-mono text-zinc-500">Concurrency: 1 per worker</div>
+              <div class="p-3.5 rounded-lg border border-[#27272a] bg-[#121215] space-y-2 hover:border-zinc-700 transition-colors shadow-sm">
+                <div class="flex items-center justify-between text-zinc-400">
+                  <span class="text-[11px] font-mono uppercase font-medium">Active Workers</span>
+                  <span class="text-zinc-400">${ICONS.workflow}</span>
+                </div>
+                <div class="flex items-baseline justify-between gap-2">
+                  <div class="text-xl font-bold font-mono text-zinc-100 tabular-nums">1 Active Container</div>
+                  <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-800/40">100% Online</span>
+                </div>
+                <div class="text-[11px] font-mono text-zinc-400 border-t border-zinc-800/80 pt-1.5">
+                  <span>Concurrency: 1 per container</span>
+                </div>
               </div>
-              <div class="p-3.5 rounded border border-[#27272a] bg-[#121215] space-y-1">
-                <span class="text-[11px] font-mono text-zinc-500 uppercase font-medium">Ingested Documents</span>
-                <div class="text-xl font-bold font-mono text-zinc-100">1,284</div>
-                <div class="text-[10px] font-mono text-zinc-500">SHA-256 deduplicated</div>
+
+              <div class="p-3.5 rounded-lg border border-[#27272a] bg-[#121215] space-y-2 hover:border-zinc-700 transition-colors shadow-sm">
+                <div class="flex items-center justify-between text-zinc-400">
+                  <span class="text-[11px] font-mono uppercase font-medium">Ingested Documents</span>
+                  <span class="text-zinc-400">${ICONS.fileText}</span>
+                </div>
+                <div class="flex items-baseline justify-between gap-2">
+                  <div class="text-xl font-bold font-mono text-zinc-100 tabular-nums">1,284</div>
+                  <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-800/40">+14.2% /hr</span>
+                </div>
+                <div class="text-[11px] font-mono text-zinc-400 border-t border-zinc-800/80 pt-1.5">
+                  <span>SHA-256 deduplicated</span>
+                </div>
               </div>
-              <div class="p-3.5 rounded border border-[#27272a] bg-[#121215] space-y-1">
-                <span class="text-[11px] font-mono text-zinc-500 uppercase font-medium">Pipeline Latency (p95)</span>
-                <div class="text-xl font-bold font-mono text-zinc-100">412ms</div>
-                <div class="text-[10px] font-mono text-zinc-500">Target: &lt;1,000ms SLA</div>
+
+              <div class="p-3.5 rounded-lg border border-[#27272a] bg-[#121215] space-y-2 hover:border-zinc-700 transition-colors shadow-sm">
+                <div class="flex items-center justify-between text-zinc-400">
+                  <span class="text-[11px] font-mono uppercase font-medium">Pipeline Latency (p95)</span>
+                  <span class="text-zinc-400">${ICONS.barChart}</span>
+                </div>
+                <div class="flex items-baseline justify-between gap-2">
+                  <div class="text-xl font-bold font-mono text-zinc-100 tabular-nums">412ms</div>
+                  <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-800/40">-28ms SLA</span>
+                </div>
+                <div class="text-[11px] font-mono text-zinc-400 border-t border-zinc-800/80 pt-1.5">
+                  <span>Target: &lt;1,000ms SLA limit</span>
+                </div>
               </div>
-              <div class="p-3.5 rounded border border-[#27272a] bg-[#121215] space-y-1">
-                <span class="text-[11px] font-mono text-zinc-500 uppercase font-medium">Mean Confidence</span>
-                <div class="text-xl font-bold font-mono text-zinc-100">94.2%</div>
-                <div class="text-[10px] font-mono text-zinc-500">Bayesian evidence fusion</div>
+
+              <div class="p-3.5 rounded-lg border border-[#27272a] bg-[#121215] space-y-2 hover:border-zinc-700 transition-colors shadow-sm">
+                <div class="flex items-center justify-between text-zinc-400">
+                  <span class="text-[11px] font-mono uppercase font-medium">Mean Confidence</span>
+                  <span class="text-zinc-400">${ICONS.check}</span>
+                </div>
+                <div class="flex items-baseline justify-between gap-2">
+                  <div class="text-xl font-bold font-mono text-zinc-100 tabular-nums">94.2%</div>
+                  <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-800/40">+1.8%</span>
+                </div>
+                <div class="text-[11px] font-mono text-zinc-400 border-t border-zinc-800/80 pt-1.5">
+                  <span>Multi-signal weighted score</span>
+                </div>
               </div>
             </div>
 
-            <!-- DLQ Table -->
-            <div class="border border-[#27272a] bg-[#121215] rounded p-4 space-y-3">
-              <div class="flex items-center justify-between border-b border-[#27272a] pb-2.5">
-                <div>
-                  <span class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">Dead Letter Queue (DLQ) &amp; Exception Quarantine</span>
-                  <p class="text-[11px] text-zinc-500 font-mono mt-0.5">Quarantined Celery task executions (<code class="text-zinc-400">/api/v1/jobs/dlq/list</code>)</p>
-                </div>
-              </div>
-
-              ${state.replayedMessage ? `
-                <div class="p-2.5 rounded bg-emerald-950/20 border border-emerald-800/40 text-emerald-300 text-xs font-mono">
-                  ${state.replayedMessage}
-                </div>
-              ` : ''}
-
-              <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs font-mono">
-                  <thead>
-                    <tr class="border-b border-zinc-800 text-zinc-500 text-[10px] uppercase">
-                      <th class="pb-2 font-medium">Task ID</th>
-                      <th class="pb-2 font-medium">Classification</th>
-                      <th class="pb-2 font-medium">Error Message</th>
-                      <th class="pb-2 font-medium text-center">Retries</th>
-                      <th class="pb-2 font-medium text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-zinc-800/60 text-zinc-300 text-[11px]">
-                    ${state.dlqItems.map(item => `
-                      <tr class="hover:bg-zinc-800/30 transition-colors">
-                        <td class="py-2.5 font-semibold text-zinc-200">${item.job_id}</td>
-                        <td class="py-2.5"><span class="px-1.5 py-0.2 rounded bg-rose-950/40 text-rose-400 border border-rose-800/50 text-[10px]">${item.error_classification}</span></td>
-                        <td class="py-2.5 text-zinc-400 max-w-xs truncate" title="${item.error_message}">${item.error_message}</td>
-                        <td class="py-2.5 text-center text-zinc-400">${item.retry_count}/${item.max_retries}</td>
-                        <td class="py-2.5 text-right space-x-1.5">
-                          <button data-trace="${item.id}" class="btn-trace px-2 py-0.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 text-[10px]">Trace</button>
-                          <button data-job="${item.job_id}" class="btn-replay-dlq px-2 py-0.5 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-[10px] font-semibold">Replay</button>
-                        </td>
-                      </tr>
-                    `).join('')}
-                  </tbody>
-                </table>
-              </div>
-
-              ${state.selectedTrace ? `
-                <div class="p-3 rounded bg-zinc-950 border border-zinc-800 space-y-2 text-xs font-mono">
-                  <div class="flex items-center justify-between text-zinc-400">
-                    <span>Stack Trace Preview</span>
-                    <button id="btn-close-trace" class="text-zinc-500 hover:text-zinc-300">✕</button>
+            <!-- Time-Series Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5">
+              <!-- Latency Area Chart (8 cols) -->
+              <div class="lg:col-span-8 rounded-lg border border-[#27272a] bg-[#121215] p-4 flex flex-col justify-between space-y-3 shadow-sm">
+                <div class="flex items-center justify-between border-b border-zinc-800 pb-2.5">
+                  <h3 class="text-xs font-semibold text-zinc-200 font-mono">
+                    Pipeline Latency Distribution (P50 / P95 / P99)
+                  </h3>
+                  <div class="flex items-center gap-4 text-[10px] font-mono text-zinc-400">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> P50</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-400"></span> P95 (412ms)</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400"></span> P99</span>
                   </div>
-                  <pre class="text-rose-400 text-[11px] whitespace-pre-wrap">${state.selectedTrace}</pre>
                 </div>
-              ` : ''}
+
+                <div class="relative h-40 w-full flex items-end">
+                  <svg viewBox="0 0 500 120" class="w-full h-full overflow-visible">
+                    <defs>
+                      <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.25" />
+                        <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    <line x1="0" y1="20" x2="500" y2="20" stroke="#27272a" stroke-dasharray="3 3" />
+                    <line x1="0" y1="60" x2="500" y2="60" stroke="#27272a" stroke-dasharray="3 3" />
+                    <line x1="0" y1="100" x2="500" y2="100" stroke="#27272a" stroke-dasharray="3 3" />
+                    <line x1="0" y1="8" x2="500" y2="8" stroke="#f43f5e" stroke-dasharray="4 4" opacity="0.6" />
+                    <text x="440" y="6" fill="#f43f5e" font-size="8" font-family="monospace">SLA Limit (1s)</text>
+
+                    <path d="M 10,75 L 100,70 L 200,73 L 300,78 L 400,68 L 490,72 L 490,120 L 10,120 Z" fill="url(#chartGrad)" />
+                    <polyline fill="none" stroke="#fbbf24" stroke-width="1.5" points="10,45 100,40 200,42 300,50 400,38 490,42" />
+                    <polyline fill="none" stroke="#38bdf8" stroke-width="2" points="10,75 100,70 200,73 300,78 400,68 490,72" />
+                    <polyline fill="none" stroke="#34d399" stroke-width="1.5" points="10,95 100,90 200,92 300,96 400,88 490,92" />
+                  </svg>
+                </div>
+
+                <div class="flex justify-between text-[10px] font-mono text-zinc-400 border-t border-zinc-800/80 pt-1">
+                  ${latencyPoints.map(p => `<span>${p.time}</span>`).join('')}
+                </div>
+              </div>
+
+              <!-- Confidence Breakdown (4 cols) -->
+              <div class="lg:col-span-4 rounded-lg border border-[#27272a] bg-[#121215] p-4 flex flex-col justify-between space-y-3 shadow-sm">
+                <div class="border-b border-zinc-800 pb-2.5">
+                  <h3 class="text-xs font-semibold text-zinc-200 font-mono block">Confidence Score Breakdown</h3>
+                  <span class="text-[10px] text-zinc-400 font-mono">Multi-signal verified thresholds</span>
+                </div>
+
+                <div class="space-y-3 flex-1 flex flex-col justify-center">
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs font-mono">
+                      <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> &ge; 90% (Approved)</span>
+                      <span class="text-zinc-200 font-bold tabular-nums">88.4%</span>
+                    </div>
+                    <div class="w-full bg-zinc-950 rounded-full h-1.5 overflow-hidden border border-zinc-800">
+                      <div class="h-full bg-emerald-400 rounded-full" style="width: 88.4%"></div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs font-mono">
+                      <span class="text-amber-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span> 75% – 89% (Flagged)</span>
+                      <span class="text-zinc-200 font-bold tabular-nums">9.2%</span>
+                    </div>
+                    <div class="w-full bg-zinc-950 rounded-full h-1.5 overflow-hidden border border-zinc-800">
+                      <div class="h-full bg-amber-400 rounded-full" style="width: 9.2%"></div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs font-mono">
+                      <span class="text-rose-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-400"></span> &lt; 75% (Quarantined)</span>
+                      <span class="text-zinc-200 font-bold tabular-nums">2.4%</span>
+                    </div>
+                    <div class="w-full bg-zinc-950 rounded-full h-1.5 overflow-hidden border border-zinc-800">
+                      <div class="h-full bg-rose-400 rounded-full" style="width: 2.4%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-2 rounded bg-zinc-900/60 border border-zinc-800 text-[10px] font-mono text-zinc-400 flex items-center justify-between">
+                  <span>Threshold for HITL:</span>
+                  <strong class="text-zinc-200 font-semibold">85.0%</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dead Letter Queue (DLQ) Table Component -->
+            <div class="border border-[#27272a] bg-[#121215] rounded-lg p-4 space-y-3 shadow-sm">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#27272a] pb-3">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-amber-400">${ICONS.alertTriangle}</span>
+                    <h2 class="text-xs font-semibold text-zinc-100 uppercase tracking-wider font-mono">
+                      Dead Letter Queue (DLQ) &amp; Exception Quarantine
+                    </h2>
+                    <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                      ${state.dlqItems.length} Quarantined
+                    </span>
+                  </div>
+                  <p class="text-[11px] text-zinc-400 font-mono mt-0.5">
+                    Quarantined background tasks requiring operator triage, inspection, and replay.
+                  </p>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  ${state.dlqItems.length === 0 ? `
+                    <button id="btn-seed-failure" class="px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-mono transition-colors cursor-pointer">
+                      Simulate Failure
+                    </button>
+                  ` : ''}
+
+                  <button id="btn-refresh-dlq" class="px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-zinc-100 text-xs font-mono inline-flex items-center gap-1.5 transition-colors cursor-pointer">
+                    ${ICONS.rotateCcw}
+                    <span>Refresh</span>
+                  </button>
+                </div>
+              </div>
+
+              ${state.dlqItems.length === 0 ? `
+                <div class="p-8 rounded-lg border border-dashed border-zinc-800/80 bg-zinc-900/20 text-center flex flex-col items-center justify-center gap-2.5">
+                  <div class="w-10 h-10 rounded-full bg-emerald-950/40 border border-emerald-800/50 flex items-center justify-center">
+                    ${ICONS.shieldCheck}
+                  </div>
+                  <div>
+                    <div class="text-xs font-semibold text-zinc-100 font-mono">Dead Letter Queue is Clear</div>
+                    <p class="text-[11px] text-zinc-400 font-mono mt-0.5 max-w-sm">
+                      All asynchronous Celery workers and pipelines are operating within nominal SLA boundaries.
+                    </p>
+                  </div>
+                  <div class="text-[10px] font-mono text-zinc-500 pt-1">
+                    Last health sweep: <span class="text-zinc-400">Just now</span> • Auto-scan active
+                  </div>
+                </div>
+              ` : `
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left text-xs font-mono table-fixed">
+                    <thead class="border-b border-zinc-800 text-zinc-400 text-[10px] uppercase">
+                      <tr>
+                        <th scope="col" class="w-32 pb-2 font-medium">Task ID</th>
+                        <th scope="col" class="w-44 pb-2 font-medium">Classification</th>
+                        <th scope="col" class="w-auto pb-2 font-medium">Error Message</th>
+                        <th scope="col" class="w-20 pb-2 font-medium text-center">Retries</th>
+                        <th scope="col" class="w-28 pb-2 font-medium text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-zinc-800/60 text-zinc-300 text-[11px]">
+                      ${state.dlqItems.map(item => `
+                        <tr class="hover:bg-zinc-800/30 transition-colors">
+                          <td class="py-2.5 font-semibold text-zinc-200 truncate">${item.job_id}</td>
+                          <td class="py-2.5">
+                            <span class="px-1.5 py-0.2 rounded bg-rose-950/40 text-rose-400 border border-rose-800/50 text-[10px]">${item.error_classification}</span>
+                          </td>
+                          <td class="py-2.5 text-zinc-300 truncate" title="${item.error_message}">${item.error_message}</td>
+                          <td class="py-2.5 text-center text-zinc-300 tabular-nums">${item.retry_count}/${item.max_retries}</td>
+                          <td class="py-2.5 text-right space-x-1.5">
+                            <button data-trace-id="${item.id}" class="btn-inspect-trace px-2 py-0.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 text-[10px] cursor-pointer">Trace</button>
+                            <button data-replay-job="${item.job_id}" class="btn-replay-item px-2 py-0.5 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-[10px] font-semibold cursor-pointer">Replay</button>
+                          </td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              `}
+            </div>
+
+            <!-- Trace Modal -->
+            ${state.selectedTraceItem ? renderTraceModal(state.selectedTraceItem) : ''}
+          </div>
+        `;
+      }
+
+      function renderTraceModal(item) {
+        return `
+          <div role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="w-full max-w-2xl bg-[#121215] border border-zinc-700/80 rounded-xl shadow-2xl p-5 space-y-4 max-h-[85vh] flex flex-col">
+              <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-rose-400">${ICONS.alertTriangle}</span>
+                  <h3 class="text-xs font-semibold text-zinc-100 font-mono">Quarantine Trace: ${item.job_id}</h3>
+                </div>
+                <button id="btn-close-modal" class="text-zinc-400 hover:text-zinc-200 p-1 rounded cursor-pointer">${ICONS.x}</button>
+              </div>
+
+              <div class="overflow-y-auto space-y-3 flex-1 pr-1 text-xs font-mono">
+                <div class="p-2.5 rounded bg-zinc-950 border border-zinc-800 space-y-1">
+                  <div class="text-[10px] text-zinc-400 uppercase">Error Classification</div>
+                  <div class="text-rose-400 font-semibold">${item.error_classification}</div>
+                  <div class="text-zinc-300 text-[11px] pt-1">${item.error_message}</div>
+                </div>
+
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between text-[10px] text-zinc-400 uppercase">
+                    <span>Python Traceback</span>
+                    <button id="btn-copy-trace" class="text-zinc-300 hover:text-white inline-flex items-center gap-1 text-[10px] cursor-pointer">
+                      ${ICONS.copy} <span>Copy Trace</span>
+                    </button>
+                  </div>
+                  <pre class="p-3 rounded bg-zinc-950 border border-zinc-800 text-rose-300/90 text-[11px] whitespace-pre-wrap overflow-x-auto leading-relaxed">${item.stack_trace}</pre>
+                </div>
+              </div>
+
+              <div class="border-t border-zinc-800 pt-3 flex items-center justify-between">
+                <span class="text-[11px] font-mono text-zinc-400">Retries: ${item.retry_count}/${item.max_retries}</span>
+                <div class="flex items-center gap-2">
+                  <button id="btn-close-modal-2" class="px-3 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono cursor-pointer">Close</button>
+                  <button data-replay-job="${item.job_id}" class="btn-replay-item px-3.5 py-1.5 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold font-mono inline-flex items-center gap-1.5 shadow-sm cursor-pointer">
+                    ${ICONS.rotateCcw}
+                    <span>Replay Task Now</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderSpotlightModal() {
+        return `
+          <div role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-start justify-center pt-20 p-4">
+            <div class="w-full max-w-xl bg-[#121215] border border-zinc-700/80 rounded-xl shadow-2xl overflow-hidden flex flex-col">
+              <div class="flex items-center gap-3 px-4 py-3 border-b border-zinc-800">
+                ${ICONS.search}
+                <input id="spotlight-input" type="text" placeholder="Jump to workspace or run command (e.g. Ingestion, HITL, DLQ)..." class="w-full bg-transparent text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none font-mono" autofocus />
+                <kbd id="btn-close-spotlight" class="px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-zinc-400 cursor-pointer">ESC</kbd>
+              </div>
+              <div class="p-2 space-y-1 max-h-80 overflow-y-auto font-mono text-xs">
+                <button data-jump="ingestion" class="spotlight-btn w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors cursor-pointer">
+                  ${ICONS.uploadCloud}
+                  <div>
+                    <div class="font-semibold text-zinc-200">Go to Ingestion Studio</div>
+                    <div class="text-[10px] text-zinc-400">Upload documents and monitor active dispatch queue</div>
+                  </div>
+                </button>
+                <button data-jump="pipeline" class="spotlight-btn w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors cursor-pointer">
+                  ${ICONS.workflow}
+                  <div>
+                    <div class="font-semibold text-zinc-200">Go to Pipeline Monitor</div>
+                    <div class="text-[10px] text-zinc-400">Inspect live DAG stages, rasterization, and LLM reasoning</div>
+                  </div>
+                </button>
+                <button data-jump="reviewer" class="spotlight-btn w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors cursor-pointer">
+                  ${ICONS.checkSquare}
+                  <div>
+                    <div class="font-semibold text-zinc-200">Go to HITL Reviewer</div>
+                    <div class="text-[10px] text-zinc-400">Two-pane PDF canvas with interactive bounding box schema editor</div>
+                  </div>
+                </button>
+                <button data-jump="observability" class="spotlight-btn w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors cursor-pointer">
+                  ${ICONS.barChart}
+                  <div>
+                    <div class="font-semibold text-zinc-200">Go to DLQ &amp; Telemetry Hub</div>
+                    <div class="text-[10px] text-zinc-400">Worker health, latency P95 charts, and exception recovery</div>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         `;
@@ -698,11 +1168,43 @@
           });
         });
 
-        // Dropzone & File
+        // Spotlight trigger & shortcut
+        const btnSpotlight = document.getElementById('btn-spotlight');
+        if (btnSpotlight) {
+          btnSpotlight.addEventListener('click', () => {
+            state.isSpotlightOpen = true;
+            render();
+          });
+        }
+
+        const btnCloseSpotlight = document.getElementById('btn-close-spotlight');
+        if (btnCloseSpotlight) {
+          btnCloseSpotlight.addEventListener('click', () => {
+            state.isSpotlightOpen = false;
+            render();
+          });
+        }
+
+        document.querySelectorAll('.spotlight-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-jump');
+            state.activeTab = target;
+            state.isSpotlightOpen = false;
+            render();
+          });
+        });
+
+        // Dropzone & File Input
         const dropzone = document.getElementById('dropzone');
         const fileInput = document.getElementById('file-input');
         if (dropzone && fileInput) {
           dropzone.addEventListener('click', () => fileInput.click());
+          dropzone.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              fileInput.click();
+            }
+          });
           fileInput.addEventListener('change', async (e) => {
             if (e.target.files && e.target.files[0]) {
               const f = e.target.files[0];
@@ -710,6 +1212,33 @@
               state.validationResult = await validateFile(f);
               render();
             }
+          });
+        }
+
+        // Clear staged file
+        const btnClearFile = document.getElementById('btn-clear-file');
+        if (btnClearFile) {
+          btnClearFile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            state.selectedFile = null;
+            state.validationResult = null;
+            render();
+          });
+        }
+
+        // Priority Buttons
+        document.querySelectorAll('.btn-priority').forEach(btn => {
+          btn.addEventListener('click', () => {
+            state.priority = btn.getAttribute('data-priority');
+            render();
+          });
+        });
+
+        // Schema Select
+        const schemaSelect = document.getElementById('schema-select');
+        if (schemaSelect) {
+          schemaSelect.addEventListener('change', (e) => {
+            state.schemaType = e.target.value;
           });
         }
 
@@ -737,23 +1266,37 @@
                 priority: state.priority,
                 confidence: 0.942,
                 latencyMs: 640,
-                status: 'REVIEW_REQ'
+                status: 'REVIEW_REQ',
+                reviewReason: 'Tax Anomaly (Tax 68% < 85%)'
               });
+              showToast('success', 'Document Enqueued', `Job ${newTaskId} enqueued for processing.`);
               state.activeTab = 'pipeline';
               render();
             }, 500);
           });
         }
 
-        // Inspect row buttons
-        document.querySelectorAll('.btn-inspect').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const docId = btn.getAttribute('data-doc-id');
-            state.activeDocId = docId;
-            state.activeTab = 'reviewer';
-            render();
+        // Table Rows & Inspect Buttons
+        document.querySelectorAll('.table-row-item, .btn-inspect').forEach(el => {
+          el.addEventListener('click', (e) => {
+            const docId = el.getAttribute('data-doc-id') || el.closest('tr')?.getAttribute('data-doc-id');
+            if (docId) {
+              state.activeDocId = docId;
+              state.activeTab = 'reviewer';
+              showToast('info', 'HITL Workspace Loaded', `Reviewing document ${docId}`);
+              render();
+            }
           });
         });
+
+        // Back to Ingestion Button
+        const btnBackIngestion = document.getElementById('btn-back-ingestion');
+        if (btnBackIngestion) {
+          btnBackIngestion.addEventListener('click', () => {
+            state.activeTab = 'ingestion';
+            render();
+          });
+        }
 
         // Pipeline to review
         const btnGotoReview = document.getElementById('btn-goto-review');
@@ -764,7 +1307,78 @@
           });
         }
 
-        // Reviewer controls
+        // Time-Range buttons
+        document.querySelectorAll('.btn-timerange').forEach(btn => {
+          btn.addEventListener('click', () => {
+            state.timeRange = btn.getAttribute('data-range');
+            render();
+          });
+        });
+
+        // DLQ Seed & Refresh
+        const btnSeedFailure = document.getElementById('btn-seed-failure');
+        if (btnSeedFailure) {
+          btnSeedFailure.addEventListener('click', () => {
+            state.dlqItems = [{
+              id: 'dlq_88a91b',
+              job_id: 'job_ocr_fail_091',
+              document_id: 'doc_corrupted_scan_8',
+              error_classification: 'TIMEOUT_OCR_RASTER',
+              error_message: 'PyMuPDF rasterization limit exceeded on 600DPI TIFF page 4',
+              stack_trace: 'Traceback (most recent call last):\n  File "app/jobs/worker.py", line 84, in execute_pipeline\n  File "app/services/ocr_service.py", line 42, in parse_layout\nRuntimeError: OCR parsing failed on corrupted raster stream',
+              retry_count: 3,
+              max_retries: 3,
+              enqueued_at: new Date().toISOString()
+            }];
+            showToast('info', 'Diagnostic Failure Seeded', 'Simulated corrupted raster exception added to DLQ.');
+            render();
+          });
+        }
+
+        const btnRefreshDlq = document.getElementById('btn-refresh-dlq');
+        if (btnRefreshDlq) {
+          btnRefreshDlq.addEventListener('click', () => {
+            showToast('info', 'Queue Refreshed', 'Dead letter storage scanned.');
+            render();
+          });
+        }
+
+        // DLQ Inspect & Replay
+        document.querySelectorAll('.btn-inspect-trace').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const traceId = btn.getAttribute('data-trace-id');
+            const item = state.dlqItems.find(i => i.id === traceId);
+            state.selectedTraceItem = item || null;
+            render();
+          });
+        });
+
+        const btnCloseModal = document.getElementById('btn-close-modal');
+        if (btnCloseModal) btnCloseModal.addEventListener('click', () => { state.selectedTraceItem = null; render(); });
+        const btnCloseModal2 = document.getElementById('btn-close-modal-2');
+        if (btnCloseModal2) btnCloseModal2.addEventListener('click', () => { state.selectedTraceItem = null; render(); });
+
+        const btnCopyTrace = document.getElementById('btn-copy-trace');
+        if (btnCopyTrace) {
+          btnCopyTrace.addEventListener('click', () => {
+            if (state.selectedTraceItem?.stack_trace) {
+              navigator.clipboard.writeText(state.selectedTraceItem.stack_trace);
+              showToast('success', 'Trace Copied', 'Python traceback copied to clipboard.');
+            }
+          });
+        }
+
+        document.querySelectorAll('.btn-replay-item').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const jobId = btn.getAttribute('data-replay-job');
+            state.dlqItems = state.dlqItems.filter(i => i.job_id !== jobId);
+            state.selectedTraceItem = null;
+            showToast('success', 'Task Replayed', `Job ${jobId} re-enqueued for worker execution.`);
+            render();
+          });
+        });
+
+        // Reviewer Zoom/Rotate controls
         const btnZoomIn = document.getElementById('btn-zoom-in');
         const btnZoomOut = document.getElementById('btn-zoom-out');
         const btnFit = document.getElementById('btn-fit');
@@ -773,6 +1387,43 @@
         if (btnZoomOut) btnZoomOut.addEventListener('click', () => { state.zoom = Math.max(50, state.zoom - 25); render(); });
         if (btnFit) btnFit.addEventListener('click', () => { state.zoom = 100; render(); });
         if (btnRotate) btnRotate.addEventListener('click', () => { state.rotation = (state.rotation + 90) % 360; render(); });
+
+        // Synchronized Hover & Focus Listeners (Canvas Bounding Box <-> Schema Field)
+        document.querySelectorAll('.field-box').forEach(box => {
+          const key = box.getAttribute('data-field-box');
+          box.addEventListener('mouseenter', () => {
+            state.hoveredFieldKey = key;
+            const container = document.querySelector(`[data-field-container="${key}"]`);
+            if (container) container.classList.add('ring-1', 'ring-zinc-400', 'bg-zinc-800/60');
+          });
+          box.addEventListener('mouseleave', () => {
+            state.hoveredFieldKey = null;
+            const container = document.querySelector(`[data-field-container="${key}"]`);
+            if (container) container.classList.remove('ring-1', 'ring-zinc-400', 'bg-zinc-800/60');
+          });
+          box.addEventListener('focus', () => {
+            state.hoveredFieldKey = key;
+            const container = document.querySelector(`[data-field-container="${key}"]`);
+            if (container) container.classList.add('ring-1', 'ring-zinc-400', 'bg-zinc-800/60');
+          });
+          box.addEventListener('blur', () => {
+            state.hoveredFieldKey = null;
+            const container = document.querySelector(`[data-field-container="${key}"]`);
+            if (container) container.classList.remove('ring-1', 'ring-zinc-400', 'bg-zinc-800/60');
+          });
+        });
+
+        document.querySelectorAll('.field-container').forEach(container => {
+          const key = container.getAttribute('data-field-container');
+          container.addEventListener('mouseenter', () => {
+            const box = document.querySelector(`[data-field-box="${key}"]`);
+            if (box) box.classList.add('ring-2', 'ring-white', 'z-20', 'shadow-lg');
+          });
+          container.addEventListener('mouseleave', () => {
+            const box = document.querySelector(`[data-field-box="${key}"]`);
+            if (box) box.classList.remove('ring-2', 'ring-white', 'z-20', 'shadow-lg');
+          });
+        });
 
         // Input Field Change
         document.querySelectorAll('.field-input').forEach(input => {
@@ -790,6 +1441,18 @@
         const btnReject = document.getElementById('btn-reject');
         if (btnReject) {
           btnReject.addEventListener('click', () => {
+            state.dlqItems.unshift({
+              id: 'dlq_' + Math.random().toString(36).substring(2, 8),
+              job_id: state.activeJobId,
+              document_id: state.activeDocId,
+              error_classification: 'OPERATOR_REJECTED',
+              error_message: 'Rejected during Human-in-the-Loop review by lead.operator',
+              stack_trace: 'HITL Reviewer Quarantine: Operator rejected extracted entities due to tax validation mismatch.',
+              retry_count: 0,
+              max_retries: 3,
+              enqueued_at: new Date().toISOString()
+            });
+            showToast('error', 'Batch Quarantined', `Document ${state.activeDocId} moved to DLQ.`);
             state.activeTab = 'observability';
             render();
           });
@@ -814,6 +1477,7 @@
             }).catch(() => {});
             state.isApproving = false;
             state.isApproved = true;
+            showToast('success', 'Schema Persisted', `Feedback calibrated and saved for ${state.activeDocId}.`);
             render();
             setTimeout(() => {
               state.activeTab = 'observability';
@@ -821,29 +1485,21 @@
             }, 800);
           });
         }
-
-        // Trace and DLQ replay
-        document.querySelectorAll('.btn-trace').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const item = state.dlqItems[0];
-            state.selectedTrace = item ? item.stack_trace : null;
-            render();
-          });
-        });
-
-        const btnCloseTrace = document.getElementById('btn-close-trace');
-        if (btnCloseTrace) btnCloseTrace.addEventListener('click', () => { state.selectedTrace = null; render(); });
-
-        document.querySelectorAll('.btn-replay-dlq').forEach(btn => {
-          btn.addEventListener('click', async () => {
-            const jobId = btn.getAttribute('data-job');
-            await fetch(`/api/v1/jobs/dlq/replay/${jobId}`, { method: 'POST' }).catch(() => {});
-            state.dlqItems = state.dlqItems.filter(i => i.job_id !== jobId);
-            state.replayedMessage = `Job '${jobId}' successfully replayed back to active queue.`;
-            render();
-          });
-        });
       }
+
+      // Global keyboard listener for Cmd+K / Ctrl+K
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          state.isSpotlightOpen = !state.isSpotlightOpen;
+          render();
+        } else if (e.key === 'Escape' && state.isSpotlightOpen) {
+          state.isSpotlightOpen = false;
+          render();
+        }
+      });
+
+      window.probeBackendHealth = probeBackendHealth;
 
       document.addEventListener('DOMContentLoaded', render);
       if (document.readyState === 'complete' || document.readyState === 'interactive') render();

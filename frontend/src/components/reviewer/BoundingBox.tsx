@@ -28,18 +28,31 @@ export const BoundingBox: React.FC<BoundingBoxProps> = ({
     borderColor = 'border-amber-500/80 bg-amber-500/15 text-amber-300';
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onHover(!isHovered);
+    }
+  };
+
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-label={`${label} field, extracted with ${(confidence * 100).toFixed(0)}% confidence`}
+      onKeyDown={handleKeyDown}
       onMouseEnter={() => onHover(true)}
       onMouseLeave={() => onHover(false)}
+      onFocus={() => onHover(true)}
+      onBlur={() => onHover(false)}
       style={{ left, top, width, height }}
-      className={`absolute border rounded-[2px] transition-all cursor-pointer pointer-events-auto ${borderColor} ${
-        isHovered ? 'ring-1 ring-white z-20 shadow' : 'z-10'
+      className={`absolute border rounded-[2px] transition-all cursor-pointer pointer-events-auto focus:outline-none focus:ring-2 focus:ring-zinc-100 ${borderColor} ${
+        isHovered ? 'ring-2 ring-white z-20 shadow-lg' : 'z-10'
       }`}
     >
       <div className="absolute -top-4 left-0 px-1 py-0.2 rounded bg-zinc-950 border border-zinc-700 text-[9px] font-mono font-medium whitespace-nowrap shadow flex items-center gap-1">
         <span>{label}</span>
-        <span className="text-zinc-400">({(confidence * 100).toFixed(0)}%)</span>
+        <span className="text-zinc-300">({(confidence * 100).toFixed(0)}%)</span>
       </div>
     </div>
   );
