@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, ExternalLink, Activity, Database, AlertCircle, Search } from 'lucide-react';
+import { Terminal, ExternalLink, Activity, Database, AlertCircle, Search, HelpCircle, ShieldCheck } from 'lucide-react';
 import { UserProfile } from '../../api/auth';
 import { useSystemHealth } from '../../hooks/useSystemHealth';
 
@@ -7,6 +7,8 @@ interface NavbarProps {
   user?: UserProfile | null;
   activeTab: string;
   onOpenCommandPalette?: () => void;
+  onOpenShortcuts?: () => void;
+  onOpenSchemaRules?: () => void;
 }
 
 const TAB_TITLES: Record<string, string> = {
@@ -16,7 +18,12 @@ const TAB_TITLES: Record<string, string> = {
   observability: 'DLQ & Telemetry',
 };
 
-export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenCommandPalette }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  activeTab,
+  onOpenCommandPalette,
+  onOpenShortcuts,
+  onOpenSchemaRules,
+}) => {
   const { data: health } = useSystemHealth();
   const isOnline = health?.isOnline ?? true;
 
@@ -104,7 +111,29 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenCommandPalette 
         </div>
 
         {/* Right Controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
+          {onOpenSchemaRules && (
+            <button
+              onClick={onOpenSchemaRules}
+              className="hidden md:flex items-center gap-1.5 text-xs font-mono text-zinc-300 hover:text-zinc-100 px-2 py-1 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 transition-colors cursor-pointer"
+              title="Inspect Schema Invariants"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Invariants</span>
+            </button>
+          )}
+
+          {onOpenShortcuts && (
+            <button
+              onClick={onOpenShortcuts}
+              className="p-1.5 rounded-lg border border-zinc-800 hover:border-zinc-700 bg-zinc-900/60 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+              title="Keyboard Shortcuts (?)"
+              aria-label="Keyboard Shortcuts"
+            >
+              <HelpCircle className="w-4 h-4" />
+            </button>
+          )}
+
           <a
             href="/api/v1/docs"
             target="_blank"

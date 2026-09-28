@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IngestionDock } from '../components/ingestion/IngestionDock';
+import { IngestionDock, SCHEMAS } from '../components/ingestion/IngestionDock';
 import { DocumentPreviewPanel } from '../components/ingestion/DocumentPreviewPanel';
 import { LiveStreamTable } from '../components/ingestion/LiveStreamTable';
 
@@ -90,37 +90,43 @@ const INITIAL_TASKS: IngestionTask[] = [
 export interface IngestionStudioProps {
   onJobCreated?: (jobId: string, documentId: string) => void;
   onNavigateToReview?: (documentId: string) => void;
+  onOpenSchemaRules?: () => void;
 }
 
-export function IngestionStudio({ onJobCreated, onNavigateToReview }: IngestionStudioProps) {
+export function IngestionStudio({ onJobCreated, onNavigateToReview, onOpenSchemaRules }: IngestionStudioProps) {
   const [tasks, setTasks] = useState<IngestionTask[]>(INITIAL_TASKS);
   const [selectedTask, setSelectedTask] = useState<IngestionTask | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleDispatch = (payload: { file: File; schema: string; priority: 'P0' | 'P1' | 'P2' }) => {
+  const handleDispatch = (payload: { files: File[]; schema: string; priority: 'P0' | 'P1' | 'P2' }) => {
     setIsSubmitting(true);
     setTimeout(() => {
-      const newTaskId = `task_${Math.random().toString(16).slice(2, 10)}`;
-      const newDocId = `doc_${Math.random().toString(16).slice(2, 10)}`;
-      const newTask: IngestionTask = {
-        id: newTaskId,
-        documentName: payload.file.name,
-        schema: payload.schema,
-        schemaBadge: 'v2.1',
-        priority: payload.priority,
-        confidence: 96.4,
-        latencyMs: 480,
-        status: 'Completed',
-        timestamp: 'Just now',
-        extractedFields: [
-          { field: 'Document Title', value: payload.file.name.replace(/\.[^/.]+$/, ''), confidence: 97.2 },
-          { field: 'Extraction Engine', value: 'Multimodal v1.5', confidence: 99.0 }
-        ]
-      };
-      setTasks((prev) => [newTask, ...prev]);
-      setSelectedTask(newTask);
+      const activeSchemaObj = SCHEMAS.find((s) => s.id === payload.schema) || SCHEMAS[0];
+      const newTasks: IngestionTask[] = payload.files.map((file) => {
+        const newTaskId = `task_${Math.random().toString(16).slice(2, 10)}`;
+        return {
+          id: newTaskId,
+          documentName: file.name,
+          schema: payload.schema,
+          schemaBadge: activeSchemaObj.badge,
+          priority: payload.priority,
+          confidence: 96.4,
+          latencyMs: Math.floor(350 + Math.random() * 300),
+          status: 'Completed',
+          timestamp: 'Just now',
+          extractedFields: [
+            { field: 'Document Title', value: file.name.replace(/\.[^/.]+$/, ''), confidence: 97.2 },
+            { field: 'Extraction Engine', value: 'Multimodal v1.5', confidence: 99.0 },
+          ],
+        };
+      });
+
+      setTasks((prev) => [...newTasks, ...prev]);
+      if (newTasks.length > 0) {
+        setSelectedTask(newTasks[0]);
+        if (onJobCreated) onJobCreated(newTasks[0].id, `doc_${Math.random().toString(16).slice(2, 10)}`);
+      }
       setIsSubmitting(false);
-      if (onJobCreated) onJobCreated(newTaskId, newDocId);
     }, 750);
   };
 
@@ -130,7 +136,11 @@ export function IngestionStudio({ onJobCreated, onNavigateToReview }: IngestionS
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch min-h-[420px]">
         {/* Left: Ingestion Dock (5 cols) */}
         <div className="lg:col-span-5 xl:col-span-5 flex flex-col min-h-0">
-          <IngestionDock isSubmitting={isSubmitting} onDispatch={handleDispatch} />
+          <IngestionDock
+            isSubmitting={isSubmitting}
+            onDispatch={handleDispatch}
+            onOpenSchemaRules={onOpenSchemaRules}
+          />
         </div>
 
         {/* Right: Document Preview & HITL Inspector (7 cols) */}

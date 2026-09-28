@@ -1,20 +1,21 @@
 import React, { useState, useRef } from 'react';
-import { UploadCloud, FileText, ArrowRight, Loader2, Sparkles } from 'lucide-react';
+import { UploadCloud, FileText, ArrowRight, Loader2, Sparkles, X } from 'lucide-react';
 
 interface IngestionDockProps {
-  onDispatch: (data: { file: File; schema: string; priority: 'P0' | 'P1' | 'P2' }) => void;
+  onDispatch: (data: { files: File[]; schema: string; priority: 'P0' | 'P1' | 'P2' }) => void;
   isSubmitting: boolean;
+  onOpenSchemaRules?: () => void;
 }
 
-const SCHEMAS = [
+export const SCHEMAS = [
   { id: 'Commercial Invoices', badge: 'v2.1', description: 'Extracts line items, VAT/tax breakdowns, and vendor details' },
   { id: 'Point-of-Sale Receipts', badge: 'v1.0', description: 'Itemized totals, tip calculation, and payment tokens' },
   { id: 'Enterprise Contracts & MSAs', badge: 'v1.4', description: 'Indemnity clauses, effective dates, and governing law' },
   { id: 'Identity & Passports', badge: 'v1.2', description: 'MRZ validation, biometric fields, and expiration dates' }
 ];
 
-export function IngestionDock({ onDispatch, isSubmitting }: IngestionDockProps) {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+export function IngestionDock({ onDispatch, isSubmitting, onOpenSchemaRules }: IngestionDockProps) {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [schema, setSchema] = useState(SCHEMAS[0].id);
   const [priority, setPriority] = useState<'P0' | 'P1' | 'P2'>('P0');
   const [isDragging, setIsDragging] = useState(false);
@@ -22,27 +23,45 @@ export function IngestionDock({ onDispatch, isSubmitting }: IngestionDockProps) 
 
   const activeSchemaObj = SCHEMAS.find((s) => s.id === schema) || SCHEMAS[0];
 
-  const handleFile = (file: File) => {
-    if (file.size > 15 * 1024 * 1024) {
-      alert('File size exceeds 15MB limit.');
-      return;
+  const handleAddFiles = (fileList: FileList | File[]) => {
+    const validFiles: File[] = [];
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      if (file.size > 15 * 1024 * 1024) {
+        alert(`File ${file.name} exceeds 15MB limit.`);
+      } else {
+        validFiles.push(file);
+      }
     }
-    setSelectedFile(file);
+    setSelectedFiles((prev) => {
+      const existingNames = new Set(prev.map((f) => f.name));
+      const newUnique = validFiles.filter((f) => !existingNames.has(f.name));
+      return [...prev, ...newUnique];
+    });
+  };
+
+  const handleRemoveFile = (index: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFile(e.dataTransfer.files[0]);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleAddFiles(e.dataTransfer.files);
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedFile) return;
-    onDispatch({ file: selectedFile, schema, priority });
+    if (selectedFiles.length === 0) return;
+    onDispatch({ files: selectedFiles, schema, priority });
   };
+
+  const totalPayloadSizeMB = (
+    selectedFiles.reduce((acc, f) => acc + f.size, 0) / (1024 * 1024)
+  ).toFixed(2);
 
   return (
     <div className="flex flex-col h-full rounded-xl border border-zinc-800 bg-zinc-900/70 p-5 shadow-sm backdrop-blur-sm justify-between">
@@ -55,9 +74,16 @@ export function IngestionDock({ onDispatch, isSubmitting }: IngestionDockProps) 
               Ingestion Dock
             </h2>
           </div>
-          <span className="rounded border border-zinc-800 bg-zinc-950 px-2 py-0.5 text-[10px] font-mono text-zinc-400">
-            Max 15MB Payload
-          </span>
+          <div className="flex items-center gap-1.5">
+            {selectedFiles.length > 0 && (
+              <span className="rounded bg-indigo-950/60 border border-indigo-800/60 px-2 py-0.5 text-[10px] font-mono text-indigo-300">
+                {selectedFiles.length} staged ({totalPayloadSizeMB}MB)
+              </span>
+            )}
+            <span className="rounded border border-zinc-800 bg-zinc-950 px-2 py-0.5 text-[10px] font-mono text-zinc-400">
+              Max 15MB/file
+            </span>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
@@ -66,11 +92,12 @@ export function IngestionDock({ onDispatch, isSubmitting }: IngestionDockProps) 
             ref={fileInputRef}
             type="file"
             id="hidden-file-input"
+            multiple
             className="sr-only"
             tabIndex={-1}
             aria-hidden="true"
             accept=".pdf,.png,.tiff,.jpeg,.jpg"
-            onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
+            onChange={(e) => e.target.files && handleAddFiles(e.target.files)}
           />
 
           {/* Compact Dropzone Container */}
@@ -82,29 +109,41 @@ export function IngestionDock({ onDispatch, isSubmitting }: IngestionDockProps) 
             }}
             onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
-            className={`group relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed py-5 px-3 text-center transition-all ${
+            className={`group relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed py-4 px-3 text-center transition-all ${
               isDragging
                 ? 'border-indigo-500 bg-indigo-500/10'
                 : 'border-zinc-800 bg-zinc-950/50 hover:border-zinc-700 hover:bg-zinc-900/60'
             }`}
           >
-            <div className="mb-1.5 rounded-full border border-zinc-800 bg-zinc-900 p-2 text-zinc-400 group-hover:border-zinc-700 group-hover:text-zinc-200 transition-colors">
+            <div className="mb-1 rounded-full border border-zinc-800 bg-zinc-900 p-2 text-zinc-400 group-hover:border-zinc-700 group-hover:text-zinc-200 transition-colors">
               <UploadCloud className="h-4 w-4 stroke-[1.75]" />
             </div>
             <p className="text-xs font-medium text-zinc-200">
-              <span className="text-indigo-400 group-hover:underline">Click to upload</span> or drag and drop
+              <span className="text-indigo-400 group-hover:underline">Click to upload</span> or drag &amp; drop files
             </p>
             <p className="text-[10px] text-zinc-400 mt-0.5 font-sans">
-              PDF, PNG, TIFF, or JPEG (Max 15MB)
+              PDF, PNG, TIFF, or JPEG (Multi-file batch supported)
             </p>
 
-            {selectedFile && (
-              <div className="mt-2.5 inline-flex items-center gap-1.5 rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1 text-xs text-indigo-300">
-                <FileText className="h-3.5 w-3.5 shrink-0" />
-                <span className="max-w-[180px] truncate font-mono text-[11px]">{selectedFile.name}</span>
-                <span className="text-[10px] text-indigo-400 font-mono">
-                  ({(selectedFile.size / (1024 * 1024)).toFixed(2)}MB)
-                </span>
+            {/* Staged files chip preview */}
+            {selectedFiles.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-1.5 max-h-24 overflow-y-auto w-full justify-center">
+                {selectedFiles.map((file, idx) => (
+                  <div
+                    key={idx}
+                    className="inline-flex items-center gap-1.5 rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2 py-0.5 text-xs text-indigo-300 max-w-[200px]"
+                  >
+                    <FileText className="h-3 w-3 shrink-0" />
+                    <span className="truncate font-mono text-[10px]">{file.name}</span>
+                    <button
+                      type="button"
+                      onClick={(e) => handleRemoveFile(idx, e)}
+                      className="text-indigo-400 hover:text-white p-0.5 rounded cursor-pointer"
+                    >
+                      <X className="w-2.5 h-2.5" />
+                    </button>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -115,15 +154,26 @@ export function IngestionDock({ onDispatch, isSubmitting }: IngestionDockProps) 
               <label htmlFor="schema-select" className="text-xs font-medium text-zinc-300">
                 Document Schema Taxonomy
               </label>
-              <span className="text-[10px] font-mono text-zinc-400 bg-zinc-800 px-1.5 py-0.2 rounded border border-zinc-700/60">
-                {activeSchemaObj.badge}
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-mono text-zinc-400 bg-zinc-800 px-1.5 py-0.2 rounded border border-zinc-700/60">
+                  {activeSchemaObj.badge}
+                </span>
+                {onOpenSchemaRules && (
+                  <button
+                    type="button"
+                    onClick={onOpenSchemaRules}
+                    className="text-[10px] font-mono text-indigo-400 hover:text-indigo-300 underline underline-offset-2 cursor-pointer"
+                  >
+                    View Invariants
+                  </button>
+                )}
+              </div>
             </div>
             <select
               id="schema-select"
               value={schema}
               onChange={(e) => setSchema(e.target.value)}
-              className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs text-zinc-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs text-zinc-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-sans"
             >
               {SCHEMAS.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -174,18 +224,22 @@ export function IngestionDock({ onDispatch, isSubmitting }: IngestionDockProps) 
         <button
           type="button"
           onClick={handleSubmit}
-          disabled={!selectedFile || isSubmitting}
+          disabled={selectedFiles.length === 0 || isSubmitting}
           className="w-full flex items-center justify-center gap-2 rounded-lg bg-indigo-600 py-2.5 px-4 text-xs font-semibold text-white shadow-sm transition-all hover:bg-indigo-500 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 cursor-pointer"
         >
           {isSubmitting ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin text-zinc-300" />
-              <span>Routing to Ingestion Pipeline...</span>
+              <span>Routing Batch to Ingestion Pipeline...</span>
             </>
           ) : (
             <>
               <Sparkles className="h-3.5 w-3.5" />
-              <span>Dispatch Ingestion</span>
+              <span>
+                {selectedFiles.length > 1
+                  ? `Dispatch Batch (${selectedFiles.length} Documents)`
+                  : 'Dispatch Ingestion'}
+              </span>
               <ArrowRight className="h-3.5 w-3.5" />
             </>
           )}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, RefreshCw, Eye, CheckCircle2, AlertTriangle, ShieldAlert, ArrowUpDown, ChevronUp, ChevronDown } from 'lucide-react';
+import { Search, RefreshCw, Eye, CheckCircle2, AlertTriangle, ShieldAlert, ArrowUpDown, ChevronUp, ChevronDown, Download, CheckSquare, Square } from 'lucide-react';
 import { IngestionTask } from '../../pages/IngestionStudio';
 
 export interface LiveStreamTableProps {
@@ -27,7 +27,7 @@ export function StatusCell({ status, reason }: { status: string; reason?: string
           <AlertTriangle className="h-3 w-3" />
           Tax Discrepancy
         </span>
-        <span className="text-[11px] text-zinc-400">
+        <span className="text-[11px] text-zinc-400 font-sans">
           {reason || 'Calculated variance (68% vs 85% expected)'}
         </span>
       </div>
@@ -40,7 +40,7 @@ export function StatusCell({ status, reason }: { status: string; reason?: string
           <ShieldAlert className="h-3 w-3" />
           Needs Review
         </span>
-        <span className="text-[11px] text-zinc-400">
+        <span className="text-[11px] text-zinc-400 font-sans">
           {reason || 'Model confidence below 75% threshold'}
         </span>
       </div>
@@ -59,6 +59,7 @@ export function LiveStreamTable({
   const [isLive, setIsLive] = useState(true);
   const [sortField, setSortField] = useState<SortField>('id');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -99,6 +100,60 @@ export function LiveStreamTable({
       return sortOrder === 'asc' ? comparison : -comparison;
     });
 
+  const toggleSelectAll = () => {
+    if (selectedIds.length === filteredTasks.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredTasks.map((t) => t.id));
+    }
+  };
+
+  const toggleSelectRow = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+  };
+
+  const handleExportCSV = () => {
+    const exportData = filteredTasks.filter((t) =>
+      selectedIds.length > 0 ? selectedIds.includes(t.id) : true
+    );
+    const headers = ['Task ID', 'Document Name', 'Schema', 'Priority', 'Confidence', 'Latency (ms)', 'Status', 'Timestamp'];
+    const rows = exportData.map((t) => [
+      t.id,
+      t.documentName,
+      t.schema,
+      t.priority,
+      `${t.confidence.toFixed(1)}%`,
+      `${t.latencyMs}ms`,
+      t.status,
+      t.timestamp,
+    ]);
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map((e) => e.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `docutask_stream_export_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleExportJSON = () => {
+    const exportData = filteredTasks.filter((t) =>
+      selectedIds.length > 0 ? selectedIds.includes(t.id) : true
+    );
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `docutask_stream_export_${Date.now()}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="w-full max-w-full rounded-xl border border-zinc-800 bg-zinc-900/60 overflow-hidden shadow-sm">
       {/* Stream Controls Toolbar */}
@@ -133,7 +188,8 @@ export function LiveStreamTable({
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Quick Search Input */}
           <div className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 focus-within:border-zinc-700">
             <Search className="h-3.5 w-3.5 text-zinc-400" />
             <input
@@ -141,10 +197,11 @@ export function LiveStreamTable({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search task ID or document..."
-              className="w-40 bg-transparent text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none font-sans"
+              className="w-36 sm:w-44 bg-transparent text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none font-sans"
             />
           </div>
 
+          {/* Status Filter */}
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
@@ -155,6 +212,28 @@ export function LiveStreamTable({
             <option value="COMPLETED">Completed</option>
           </select>
 
+          {/* Export Dropdown Buttons */}
+          <button
+            type="button"
+            onClick={handleExportCSV}
+            className="flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer font-mono"
+            title="Export filtered records to CSV"
+          >
+            <Download className="h-3.5 w-3.5 text-zinc-400" />
+            <span>CSV</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleExportJSON}
+            className="flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer font-mono"
+            title="Export filtered records to JSON"
+          >
+            <Download className="h-3.5 w-3.5 text-zinc-400" />
+            <span>JSON</span>
+          </button>
+
+          {/* Live Stream Toggle */}
           <button
             type="button"
             onClick={() => setIsLive((prev) => !prev)}
@@ -166,11 +245,49 @@ export function LiveStreamTable({
         </div>
       </div>
 
+      {/* Bulk Action Notification Bar when items selected */}
+      {selectedIds.length > 0 && (
+        <div className="bg-indigo-950/60 border-b border-indigo-800/80 px-4 py-2 flex items-center justify-between text-xs font-mono text-indigo-200">
+          <div className="flex items-center gap-2">
+            <CheckSquare className="w-4 h-4 text-indigo-400" />
+            <span>{selectedIds.length} document tasks selected</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSelectedIds([])}
+              className="px-2 py-0.5 rounded bg-indigo-900/60 hover:bg-indigo-900 border border-indigo-700 text-indigo-200 cursor-pointer"
+            >
+              Deselect All
+            </button>
+            <button
+              onClick={handleExportCSV}
+              className="px-2.5 py-0.5 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold cursor-pointer shadow-sm"
+            >
+              Export Selected ({selectedIds.length})
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Constrained Table Scroll Container */}
       <div className="w-full overflow-x-auto rounded-b-lg border-t border-zinc-800/80">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-zinc-800 bg-zinc-900/80 text-[11px] font-mono uppercase tracking-wider text-zinc-400 select-none">
             <tr>
+              <th scope="col" className="py-3 px-3 w-10 text-center">
+                <button
+                  type="button"
+                  onClick={toggleSelectAll}
+                  aria-label="Select all rows"
+                  className="text-zinc-400 hover:text-zinc-200 cursor-pointer inline-flex items-center"
+                >
+                  {selectedIds.length === filteredTasks.length && filteredTasks.length > 0 ? (
+                    <CheckSquare className="w-4 h-4 text-indigo-400" />
+                  ) : (
+                    <Square className="w-4 h-4 text-zinc-500" />
+                  )}
+                </button>
+              </th>
               <th
                 scope="col"
                 onClick={() => handleSort('id')}
@@ -220,88 +337,108 @@ export function LiveStreamTable({
             </tr>
           </thead>
           <tbody aria-live="polite" className="divide-y divide-zinc-800/60 text-zinc-300 text-xs">
-            {filteredTasks.map((task) => (
-              <tr
-                key={task.id}
-                onClick={() => onSelectTask(task)}
-                className={`hover:bg-zinc-800/40 cursor-pointer transition-colors ${
-                  selectedTaskId === task.id ? 'bg-zinc-800/30' : ''
-                }`}
-              >
-                {/* Task ID */}
-                <td className="py-3.5 px-4 font-mono font-semibold text-zinc-200">
-                  {task.id}
-                </td>
+            {filteredTasks.map((task) => {
+              const isSelected = selectedIds.includes(task.id);
 
-                {/* Document & Human-readable schema */}
-                <td className="py-3.5 px-4">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-zinc-100">{task.documentName}</span>
-                    <span className="text-[11px] text-zinc-400 font-sans">
-                      {task.schema} ({task.schemaBadge})
-                    </span>
-                  </div>
-                </td>
+              return (
+                <tr
+                  key={task.id}
+                  onClick={() => onSelectTask(task)}
+                  className={`hover:bg-zinc-800/40 cursor-pointer transition-colors ${
+                    selectedTaskId === task.id ? 'bg-zinc-800/30' : ''
+                  } ${isSelected ? 'bg-indigo-950/20' : ''}`}
+                >
+                  {/* Row Checkbox */}
+                  <td className="py-3.5 px-3 text-center">
+                    <button
+                      type="button"
+                      onClick={(e) => toggleSelectRow(task.id, e)}
+                      aria-label={`Select row for ${task.id}`}
+                      className="text-zinc-400 hover:text-zinc-200 cursor-pointer inline-flex items-center"
+                    >
+                      {isSelected ? (
+                        <CheckSquare className="w-4 h-4 text-indigo-400" />
+                      ) : (
+                        <Square className="w-4 h-4 text-zinc-600" />
+                      )}
+                    </button>
+                  </td>
 
-                {/* Priority */}
-                <td className="py-3.5 px-3 text-center">
-                  <span className="rounded bg-zinc-800 px-2 py-0.5 text-[11px] font-mono font-medium text-zinc-300 border border-zinc-700/60">
-                    {task.priority}
-                  </span>
-                </td>
+                  {/* Task ID */}
+                  <td className="py-3.5 px-4 font-mono font-semibold text-zinc-200">
+                    {task.id}
+                  </td>
 
-                {/* Confidence with percentage and visual mini-bar */}
-                <td className="py-3.5 px-4">
-                  <div className="flex items-center gap-2.5">
-                    <span className="font-mono text-xs tabular-nums text-zinc-200 font-medium">
-                      {task.confidence.toFixed(1)}%
-                    </span>
-                    <div className="h-1.5 w-14 rounded-full bg-zinc-800 overflow-hidden shrink-0">
-                      <div
-                        className={`h-full ${
-                          task.confidence >= 90
-                            ? 'bg-emerald-500'
-                            : task.confidence >= 75
-                            ? 'bg-amber-500'
-                            : 'bg-rose-500'
-                        }`}
-                        style={{ width: `${Math.min(100, Math.max(0, task.confidence))}%` }}
-                      />
+                  {/* Document & Human-readable schema */}
+                  <td className="py-3.5 px-4">
+                    <div className="flex flex-col">
+                      <span className="font-medium text-zinc-100">{task.documentName}</span>
+                      <span className="text-[11px] text-zinc-400 font-sans">
+                        {task.schema} ({task.schemaBadge})
+                      </span>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                {/* Latency with monospace tabular nums and no space */}
-                <td className="py-3.5 px-3 text-right font-mono tabular-nums text-zinc-300 font-medium">
-                  {task.latencyMs}ms
-                </td>
+                  {/* Priority */}
+                  <td className="py-3.5 px-3 text-center">
+                    <span className="rounded bg-zinc-800 px-2 py-0.5 text-[11px] font-mono font-medium text-zinc-300 border border-zinc-700/60">
+                      {task.priority}
+                    </span>
+                  </td>
 
-                {/* Status & Verification */}
-                <td className="py-3.5 px-4">
-                  <StatusCell status={task.status} reason={task.statusDetails} />
-                </td>
+                  {/* Confidence with percentage and visual mini-bar */}
+                  <td className="py-3.5 px-4">
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-mono text-xs tabular-nums text-zinc-200 font-medium">
+                        {task.confidence.toFixed(1)}%
+                      </span>
+                      <div className="h-1.5 w-14 rounded-full bg-zinc-800 overflow-hidden shrink-0">
+                        <div
+                          className={`h-full ${
+                            task.confidence >= 90
+                              ? 'bg-emerald-500'
+                              : task.confidence >= 75
+                              ? 'bg-amber-500'
+                              : 'bg-rose-500'
+                          }`}
+                          style={{ width: `${Math.min(100, Math.max(0, task.confidence))}%` }}
+                        />
+                      </div>
+                    </div>
+                  </td>
 
-                {/* Action Button */}
-                <td className="py-3.5 px-4 text-right">
-                  <button
-                    type="button"
-                    aria-label={`Inspect extraction for ${task.documentName}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectTask(task);
-                    }}
-                    className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-all focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none cursor-pointer ${
-                      selectedTaskId === task.id
-                        ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
-                        : 'border-zinc-800 bg-zinc-800/40 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-700/60 hover:text-white'
-                    }`}
-                  >
-                    <Eye className="h-3.5 w-3.5 text-zinc-400" />
-                    <span>Inspect</span>
-                  </button>
-                </td>
-              </tr>
-            ))}
+                  {/* Latency with monospace tabular nums and no space */}
+                  <td className="py-3.5 px-3 text-right font-mono tabular-nums text-zinc-300 font-medium">
+                    {task.latencyMs}ms
+                  </td>
+
+                  {/* Status & Verification */}
+                  <td className="py-3.5 px-4">
+                    <StatusCell status={task.status} reason={task.statusDetails} />
+                  </td>
+
+                  {/* Action Button */}
+                  <td className="py-3.5 px-4 text-right">
+                    <button
+                      type="button"
+                      aria-label={`Inspect extraction for ${task.documentName}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectTask(task);
+                      }}
+                      className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-all focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none cursor-pointer ${
+                        selectedTaskId === task.id
+                          ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
+                          : 'border-zinc-800 bg-zinc-800/40 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-700/60 hover:text-white'
+                      }`}
+                    >
+                      <Eye className="h-3.5 w-3.5 text-zinc-400" />
+                      <span>Inspect</span>
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
