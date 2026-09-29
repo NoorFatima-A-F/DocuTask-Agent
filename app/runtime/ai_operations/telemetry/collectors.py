@@ -4,7 +4,10 @@ Real-time ingestion of agent invocations, tool latency, token consumption, and m
 """
 
 from __future__ import annotations
-import numpy as np
+try:
+    import numpy as np
+except ImportError:  # pragma: no cover
+    np = None  # type: ignore
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 from app.runtime.ai_operations.models.schemas import (
@@ -156,9 +159,27 @@ class MetricAggregator:
         error_rate = error_count / total_invocations
         success_rate = max(0.0, 1.0 - error_rate)
 
-        avg_latency = float(np.mean(durations))
-        p95_latency = float(np.percentile(durations, 95))
-        p99_latency = float(np.percentile(durations, 99))
+        if np is not None:
+            avg_latency = float(np.mean(durations))
+            p95_latency = float(np.percentile(durations, 95))
+            p99_latency = float(np.percentile(durations, 99))
+        else:
+            sorted_durations = sorted(durations)
+            n = len(sorted_durations)
+            avg_latency = float(sum(sorted_durations) / n)
+
+            def _percentile(data: List[float], p: float) -> float:
+                if not data:
+                    return 0.0
+                k = (len(data) - 1) * (p / 100.0)
+                f = int(k)
+                c = min(f + 1, len(data) - 1)
+                d0 = data[f] * (c - k)
+                d1 = data[c] * (k - f)
+                return float(d0 + d1)
+
+            p95_latency = _percentile(sorted_durations, 95)
+            p99_latency = _percentile(sorted_durations, 99)
 
         total_tokens = sum(t.total_prompt_tokens + t.total_completion_tokens for t in agent_traces)
         total_cost = sum(t.total_cost_usd for t in agent_traces)

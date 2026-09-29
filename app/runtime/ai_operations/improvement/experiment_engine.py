@@ -8,7 +8,10 @@ import math
 import random
 from datetime import datetime, timezone
 from typing import Dict, List
-import numpy as np
+try:
+    import numpy as np
+except ImportError:  # pragma: no cover
+    np = None  # type: ignore
 from app.runtime.ai_operations.models.schemas import (
     ExperimentRecord,
     ExperimentStatus,
@@ -53,17 +56,27 @@ class ExperimentEngine:
         sample_size: int = 100,
     ) -> ExperimentRecord:
         # Simulate randomized canary trial runs
-        # Control distribution: normal around 0.85 success
-        ctrl_samples = np.random.normal(0.85, 0.12, sample_size)
-        ctrl_samples = np.clip(ctrl_samples, 0.0, 1.0)
-        # Candidate distribution: normal around 0.94 success
-        cand_samples = np.random.normal(0.94, 0.08, sample_size)
-        cand_samples = np.clip(cand_samples, 0.0, 1.0)
+        if np is not None:
+            # Control distribution: normal around 0.85 success
+            ctrl_samples = np.random.normal(0.85, 0.12, sample_size)
+            ctrl_samples = np.clip(ctrl_samples, 0.0, 1.0)
+            # Candidate distribution: normal around 0.94 success
+            cand_samples = np.random.normal(0.94, 0.08, sample_size)
+            cand_samples = np.clip(cand_samples, 0.0, 1.0)
 
-        mean_ctrl = float(np.mean(ctrl_samples))
-        mean_cand = float(np.mean(cand_samples))
-        std_ctrl = float(np.std(ctrl_samples, ddof=1))
-        std_cand = float(np.std(cand_samples, ddof=1))
+            mean_ctrl = float(np.mean(ctrl_samples))
+            mean_cand = float(np.mean(cand_samples))
+            std_ctrl = float(np.std(ctrl_samples, ddof=1))
+            std_cand = float(np.std(cand_samples, ddof=1))
+        else:
+            ctrl_list = [min(1.0, max(0.0, random.gauss(0.85, 0.12))) for _ in range(sample_size)]
+            cand_list = [min(1.0, max(0.0, random.gauss(0.94, 0.08))) for _ in range(sample_size)]
+            mean_ctrl = float(sum(ctrl_list) / sample_size)
+            mean_cand = float(sum(cand_list) / sample_size)
+            var_ctrl = sum((x - mean_ctrl) ** 2 for x in ctrl_list) / max(1, sample_size - 1)
+            var_cand = sum((x - mean_cand) ** 2 for x in cand_list) / max(1, sample_size - 1)
+            std_ctrl = float(math.sqrt(var_ctrl))
+            std_cand = float(math.sqrt(var_cand))
 
         # Welch's t-test
         se_diff = math.sqrt((std_ctrl**2 / sample_size) + (std_cand**2 / sample_size))
