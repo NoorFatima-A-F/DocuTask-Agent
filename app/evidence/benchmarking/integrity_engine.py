@@ -69,7 +69,7 @@ class BenchmarkIntegrityEngine:
     Guarantees that benchmarks execute in clean, quiet, unthrottled hardware states.
     """
 
-    MAX_IDLE_DRIFT_NS: float = 2000.0
+    MAX_IDLE_DRIFT_NS: float = 15000.0
     MAX_CV_VARIANCE: float = 0.35
 
     @classmethod

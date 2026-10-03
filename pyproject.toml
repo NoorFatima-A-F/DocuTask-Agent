@@ -132,3 +132,23 @@ disable_error_code = [
     "truthy-bool"
 ]
 
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "app/platform_verification/*",
+    "tests/*",
+    "enterprise_audit_engine/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+
