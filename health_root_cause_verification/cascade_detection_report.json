@@ -1,0 +1,33 @@
+{
+  "incident_id": "INC-VERIFY-CASCADE",
+  "primary_origin_component": "redis_queue",
+  "propagation_depth": 4,
+  "cascade_chain": [
+    {
+      "step_order": 1,
+      "component": "redis_queue",
+      "is_primary_root_cause": true,
+      "symptom": "Memory exhaustion causing connection throttling and command latency spikes"
+    },
+    {
+      "step_order": 2,
+      "component": "task_queue",
+      "is_primary_root_cause": false,
+      "symptom": "Secondary queue backlog accumulation (>1,200 pending documents)"
+    },
+    {
+      "step_order": 3,
+      "component": "worker_fleet",
+      "is_primary_root_cause": false,
+      "symptom": "Workers blocked waiting for Redis task dispatch"
+    },
+    {
+      "step_order": 4,
+      "component": "api_gateway",
+      "is_primary_root_cause": false,
+      "symptom": "Client requests experiencing elevated p95 latency due to async buffer saturation"
+    }
+  ],
+  "cascade_prevented": true,
+  "status": "PASS"
+}

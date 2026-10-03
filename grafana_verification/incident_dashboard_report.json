@@ -1,0 +1,51 @@
+{
+  "dashboard_id": "docutask-incident",
+  "title": "Incident Response & Triaging",
+  "category": "incident_investigation",
+  "total_panels": 4,
+  "refresh_rate": "5s",
+  "panels": [
+    {
+      "panel_id": 1,
+      "title": "Active Firing Prometheus Alerts",
+      "panel_type": "table",
+      "promql_query": "ALERTS{alertstate=\"firing\"}",
+      "operational_question": "What active alerts are currently firing across the platform?",
+      "threshold_critical": null,
+      "threshold_warning": null,
+      "unit": "short"
+    },
+    {
+      "panel_id": 2,
+      "title": "Recent System Exceptions Rate",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_exceptions_total[5m])) by (exception_type)",
+      "operational_question": "What unhandled errors or crash loops have recently occurred?",
+      "threshold_critical": 5.0,
+      "threshold_warning": 1.0,
+      "unit": "err/s"
+    },
+    {
+      "panel_id": 3,
+      "title": "Dependency Degradation Timeline",
+      "panel_type": "status-history",
+      "promql_query": "docutask_health_status",
+      "operational_question": "When did component degradation start and which dependency triggered it?",
+      "threshold_critical": null,
+      "threshold_warning": null,
+      "unit": "short"
+    },
+    {
+      "panel_id": 4,
+      "title": "Mean Time To Recovery (MTTR)",
+      "panel_type": "gauge",
+      "promql_query": "docutask_mttr_seconds",
+      "operational_question": "How quickly is the platform self-healing or recovering from incidents?",
+      "threshold_critical": 900.0,
+      "threshold_warning": 300.0,
+      "unit": "s"
+    }
+  ],
+  "all_queries_valid": true,
+  "status": "PASS"
+}

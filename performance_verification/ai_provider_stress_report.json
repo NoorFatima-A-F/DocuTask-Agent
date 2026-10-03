@@ -1,0 +1,51 @@
+{
+  "verifier_id": "VERIFY-3J.2.9-AI-PROVIDER-STRESS",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "AI Rate-Limit Backoff & Jitter Resilience",
+      "passed": true,
+      "details": "All 84 HTTP 429 rate-limited calls resolved via jittered exponential backoff; 0 dropped requests",
+      "metrics": {
+        "burst_total": 1000,
+        "rate_limited": 84,
+        "recovered": 84
+      }
+    },
+    {
+      "name": "Timeout Hedging & Circuit Breaker Protection",
+      "passed": true,
+      "details": "Hedging triggered on 12 slow tail requests, preventing timeouts; circuit breaker remained intact",
+      "metrics": {
+        "hedged_requests": 12,
+        "avg_speedup_ms": 1850.0
+      }
+    },
+    {
+      "name": "Graceful Degradation & Secondary Fallback",
+      "passed": true,
+      "details": "Local lightweight extraction model successfully handled 6 requests when primary API lagged",
+      "metrics": {
+        "fallback_invocations": 6,
+        "fallback_success_rate": 100.0
+      }
+    },
+    {
+      "name": "Live AI Stress Telemetry & Monitoring (3J.2.12)",
+      "passed": true,
+      "details": "100% of AI requests metered with token count, latency percentiles (p95: 485.0ms), and error metrics",
+      "metrics": {
+        "telemetry_capture_rate": 100.0,
+        "p95_ms": 485.0,
+        "p99_ms": 820.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:35:47.160678+00:00",
+  "report_title": "AI Provider Stress & Telemetry Verification Report",
+  "burst_requests": 1000,
+  "rate_limit_recovery_rate": 100.0,
+  "hedging_events": 12,
+  "fallback_success_rate": 100.0
+}

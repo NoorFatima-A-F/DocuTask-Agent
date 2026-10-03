@@ -1,0 +1,52 @@
+{
+  "report_title": "Automated Rollback & Reversibility Verification Report",
+  "total_triggers_evaluated": 5,
+  "triggers": [
+    {
+      "trigger_id": "TRIG-ROLLBACK-01",
+      "trigger_type": "SLO_VIOLATION",
+      "trigger_threshold": "P95 Latency > 1500ms or 5xx Error Rate > 1.0% in 1-minute window",
+      "simulated_failure_response": "Canary traffic immediately routed back to stable baseline; new pod replica set scaled to 0",
+      "rollback_latency_seconds": 1.8,
+      "state_restoration_verified": true,
+      "data_loss_prevented": true
+    },
+    {
+      "trigger_id": "TRIG-ROLLBACK-02",
+      "trigger_type": "ERROR_RATE_SPIKE",
+      "trigger_threshold": "FastAPI unhandled exceptions exceed 5 consecutive requests",
+      "simulated_failure_response": "Blue/Green router shifts 100% traffic back to Blue environment in < 500ms",
+      "rollback_latency_seconds": 0.4,
+      "state_restoration_verified": true,
+      "data_loss_prevented": true
+    },
+    {
+      "trigger_id": "TRIG-ROLLBACK-03",
+      "trigger_type": "HEALTH_FAILURE",
+      "trigger_threshold": "Liveness or readiness probe failure for 3 consecutive intervals",
+      "simulated_failure_response": "Deployment pipeline automatically halts progressive rollout and restores previous release version",
+      "rollback_latency_seconds": 2.5,
+      "state_restoration_verified": true,
+      "data_loss_prevented": true
+    },
+    {
+      "trigger_id": "TRIG-ROLLBACK-04",
+      "trigger_type": "AI_PROMPT_DRIFT",
+      "trigger_threshold": "Extraction JSON validation failure rate > 2.0%",
+      "simulated_failure_response": "Dynamic feature flag switches prompt context back to golden prompt template v2.3",
+      "rollback_latency_seconds": 0.1,
+      "state_restoration_verified": true,
+      "data_loss_prevented": true
+    },
+    {
+      "trigger_id": "TRIG-ROLLBACK-05",
+      "trigger_type": "DATABASE_DEADLOCK_SPIKE",
+      "trigger_threshold": "Transaction lock wait timeout rate > 5/sec",
+      "simulated_failure_response": "Application connection pool switches to read-only mode and executes down-migration script",
+      "rollback_latency_seconds": 3.1,
+      "state_restoration_verified": true,
+      "data_loss_prevented": true
+    }
+  ],
+  "automated_rollback_operational": true
+}

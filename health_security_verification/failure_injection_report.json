@@ -1,0 +1,49 @@
+{
+  "report_title": "Health Security Failure Injection & Resilience Report",
+  "total_injection_scenarios": 4,
+  "neutralized_scenarios_count": 4,
+  "scenarios": [
+    {
+      "scenario_id": "SEC_INJ_001",
+      "name": "Health Payload Secret Injection",
+      "attack_vector": "Injected simulated DB password into /health diagnostic response",
+      "injected_payload": "db_connection='postgres://admin:injected_secret_pass@127.0.0.1/db'",
+      "expected_defense": "Response interceptor strips connection URI and replaces with sanitized status",
+      "actual_outcome": "Interceptor replaced raw URI with {'db_status': 'UP', 'sanitized': True}",
+      "neutralized": true,
+      "mitigation_latency_ms": 1.45
+    },
+    {
+      "scenario_id": "SEC_INJ_002",
+      "name": "Log Stream PII Injection",
+      "attack_vector": "Injected raw customer CNIC and email into error logging pipeline",
+      "injected_payload": "User 35201-9988776-3 (alice@corp.com) caused OCR timeout",
+      "expected_defense": "Logger redaction pipeline masks CNIC and email automatically",
+      "actual_outcome": "Log output formatted as: 'User [REDACTED_CNIC] ([REDACTED_EMAIL]) caused OCR timeout'",
+      "neutralized": true,
+      "mitigation_latency_ms": 0.82
+    },
+    {
+      "scenario_id": "SEC_INJ_003",
+      "name": "Unauthorized Diagnostic Probe",
+      "attack_vector": "Sent unauthenticated probe to /diagnostics with forged bearer header",
+      "injected_payload": "GET /diagnostics (Authorization: Bearer invalid.signature.token)",
+      "expected_defense": "API Gateway / Auth middleware returns HTTP 401 Unauthorized immediately",
+      "actual_outcome": "Gateway returned HTTP 401 with 'Invalid or malformed signature' message",
+      "neutralized": true,
+      "mitigation_latency_ms": 2.1
+    },
+    {
+      "scenario_id": "SEC_INJ_004",
+      "name": "High-Cardinality Metric Label Flooding Attack",
+      "attack_vector": "Attempted to push 100,000 unique metric labels per second into Prometheus collector",
+      "injected_payload": "http_requests_total{uuid='rand_uuid_1..100000'}",
+      "expected_defense": "Telemetry cardinality filter drops ephemeral UUID label and rolls up to route template",
+      "actual_outcome": "Telemetry filter clamped cardinality; ephemeral UUID dropped, route rolled up to '/api/v1/documents/{id}'",
+      "neutralized": true,
+      "mitigation_latency_ms": 3.25
+    }
+  ],
+  "all_attacks_neutralized": true,
+  "fail_secure_verified": true
+}

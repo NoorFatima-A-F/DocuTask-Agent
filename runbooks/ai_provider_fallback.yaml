@@ -1,0 +1,38 @@
+version: "1.0"
+runbook_id: "RB-AI-005"
+name: "Gemini AI Provider Fallback & Quota Throttling Activation"
+target_service: "gemini_ai_provider"
+risk_level: "MEDIUM"
+auto_execute: true
+approval_required: false
+timeout_seconds: 60
+
+pre_checks:
+  - name: "Verify Gemini latency drift or 429 quota exhaustion"
+    condition: "gemini_api_failure_rate_pct > 5.0 or gemini_request_latency_seconds > 2.5"
+
+steps:
+  - step: 1
+    action: "activate_secondary_model_fallback"
+    command: "curl -X POST http://api:8000/internal/ai-router/fallback?provider=secondary-gemini-endpoint"
+  - step: 2
+    action: "enable_request_batching_and_rate_limiting"
+    command: "curl -X POST http://api:8000/internal/ai-router/batching?enabled=true&batch_size=10"
+  - step: 3
+    action: "flush_inflight_retry_queue"
+    command: "python -m app.worker.scripts.drain_ai_retries --concurrency=4"
+  - step: 4
+    action: "test_synthetic_document_extraction"
+    command: "python -m app.worker.scripts.test_ai_inference --model=gemini-2.0-flash"
+    retry_count: 3
+    retry_interval_seconds: 5
+
+post_checks:
+  - name: "Validate extraction error rate"
+    condition: "gemini_api_failure_rate_pct < 1.0"
+  - name: "Validate P95 response latency"
+    condition: "gemini_request_latency_seconds < 1.2"
+
+rollback:
+  action: "revert_to_primary_provider"
+  command: "curl -X POST http://api:8000/internal/ai-router/revert-primary"

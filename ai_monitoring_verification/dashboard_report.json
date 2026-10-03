@@ -1,0 +1,173 @@
+{
+  "total_dashboards_verified": 4,
+  "dashboards": [
+    {
+      "dashboard_id": "DASH-AI-01",
+      "title": "AI Provider Health & Availability Overview",
+      "category": "Health",
+      "panel_count": 5,
+      "panels": [
+        {
+          "panel_id": "P1-01",
+          "title": "Provider Live Status",
+          "promql_or_query": "ai_provider_available",
+          "visualization_type": "Stat",
+          "operational_question_answered": "Is each AI provider currently healthy?"
+        },
+        {
+          "panel_id": "P1-02",
+          "title": "Availability Attainment (30d)",
+          "promql_or_query": "avg_over_time(ai_provider_available[30d]) * 100",
+          "visualization_type": "Gauge",
+          "operational_question_answered": "Are we meeting the 99.0% availability SLO?"
+        },
+        {
+          "panel_id": "P1-03",
+          "title": "5m Rolling Error Rate",
+          "promql_or_query": "ai_error_rate",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "Are error rates spiking above the 10% threshold?"
+        },
+        {
+          "panel_id": "P1-04",
+          "title": "Real-Time Request Latency",
+          "promql_or_query": "ai_request_latency_ms",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "What is the current latency of inference calls?"
+        },
+        {
+          "panel_id": "P1-05",
+          "title": "Quota Headroom Percentage",
+          "promql_or_query": "ai_quota_remaining_pct",
+          "visualization_type": "BarGauge",
+          "operational_question_answered": "Are we in danger of hitting rate limits?"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "dashboard_id": "DASH-AI-02",
+      "title": "AI Inference Performance & Latency Analytics",
+      "category": "Performance",
+      "panel_count": 5,
+      "panels": [
+        {
+          "panel_id": "P2-01",
+          "title": "P50 Latency Distribution",
+          "promql_or_query": "histogram_quantile(0.50, sum(rate(ai_request_latency_seconds_bucket[5m])) by (le, model))",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "What is median inference time?"
+        },
+        {
+          "panel_id": "P2-02",
+          "title": "P95 Latency Degradation Gate",
+          "promql_or_query": "histogram_quantile(0.95, sum(rate(ai_request_latency_seconds_bucket[5m])) by (le, model))",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "Is P95 staying under the 2.0s SLA target?"
+        },
+        {
+          "panel_id": "P2-03",
+          "title": "P99 Latency Tail",
+          "promql_or_query": "histogram_quantile(0.99, sum(rate(ai_request_latency_seconds_bucket[5m])) by (le, model))",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "How severe are tail latency outliers?"
+        },
+        {
+          "panel_id": "P2-04",
+          "title": "Throughput (Tokens/sec)",
+          "promql_or_query": "sum(rate(ai_token_output[5m]))",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "What is total token throughput generation?"
+        },
+        {
+          "panel_id": "P2-05",
+          "title": "Queue Task Wait Duration",
+          "promql_or_query": "avg(worker_task_queue_wait_duration_seconds)",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "Is AI latency causing queue backpressure?"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "dashboard_id": "DASH-AI-03",
+      "title": "AI Extraction Quality & Schema Conformance",
+      "category": "Quality",
+      "panel_count": 4,
+      "panels": [
+        {
+          "panel_id": "P3-01",
+          "title": "Extraction Accuracy Score",
+          "promql_or_query": "avg(ai_confidence_score) * 100",
+          "visualization_type": "Gauge",
+          "operational_question_answered": "What is average extraction confidence?"
+        },
+        {
+          "panel_id": "P3-02",
+          "title": "Schema Validation Failure Rate",
+          "promql_or_query": "ai_schema_failure_rate",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "Are LLM outputs violating structured schema rules?"
+        },
+        {
+          "panel_id": "P3-03",
+          "title": "Automatic Repair Success Count",
+          "promql_or_query": "sum(increase(ai_repair_attempts_success_total[1h]))",
+          "visualization_type": "Stat",
+          "operational_question_answered": "How many malformed outputs were auto-repaired?"
+        },
+        {
+          "panel_id": "P3-04",
+          "title": "Hallucination Anomaly Index",
+          "promql_or_query": "ai_hallucination_indicator",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "Are models hallucinating ungrounded data?"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "dashboard_id": "DASH-AI-04",
+      "title": "AI Token Consumption & Financial Cost Intelligence",
+      "category": "Cost",
+      "panel_count": 4,
+      "panels": [
+        {
+          "panel_id": "P4-01",
+          "title": "Total Tokens Consumed (24h)",
+          "promql_or_query": "sum(increase(ai_token_input[24h])) + sum(increase(ai_token_output[24h]))",
+          "visualization_type": "Stat",
+          "operational_question_answered": "How many tokens were processed today?"
+        },
+        {
+          "panel_id": "P4-02",
+          "title": "Estimated Daily Inference Spend",
+          "promql_or_query": "sum(ai_cost_estimate)",
+          "visualization_type": "Stat",
+          "operational_question_answered": "What is current daily cost?"
+        },
+        {
+          "panel_id": "P4-03",
+          "title": "Unit Cost per Document",
+          "promql_or_query": "ai_cost_per_document",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "Are complex multi-page docs driving up unit economics?"
+        },
+        {
+          "panel_id": "P4-04",
+          "title": "30-Day Cost Growth Trend",
+          "promql_or_query": "predict_linear(sum(ai_cost_estimate)[7d], 86400 * 30)",
+          "visualization_type": "TimeSeries",
+          "operational_question_answered": "What is the projected 30-day budget trajectory?"
+        }
+      ],
+      "verified": true
+    }
+  ],
+  "passed": true,
+  "details": {
+    "dashboard_platform": "Grafana v11.1 Enterprise",
+    "provisioning_method": "Declarative GitOps JSON/YAML Dashboards",
+    "refresh_interval": "10s auto-refresh"
+  }
+}

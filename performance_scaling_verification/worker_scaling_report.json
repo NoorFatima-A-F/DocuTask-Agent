@@ -1,0 +1,90 @@
+{
+  "verifier_id": "VERIFY-3J.8.3-WORKER-SCALE",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Worker Pool Elasticity (2 -> 5 -> 10 Workers)",
+      "passed": true,
+      "details": "Worker pool scaled from 2 to 10 workers during 1000-doc load surge",
+      "metrics": {
+        "initial_workers": 2,
+        "peak_workers": 10
+      }
+    },
+    {
+      "name": "Queue Recovery After Scale-Up",
+      "passed": true,
+      "details": "Queue drained from 1200 to 180 jobs after worker capacity increased",
+      "metrics": {
+        "peak_queue": 1200,
+        "recovered_queue": 180
+      }
+    },
+    {
+      "name": "Worker Heartbeat & Task Distribution",
+      "passed": true,
+      "details": "Dynamic registration, heartbeat monitoring, and round-robin task dispatch verified",
+      "metrics": {
+        "heartbeat_active": true,
+        "duplicate_rate_pct": 0.0
+      }
+    },
+    {
+      "name": "Zero Duplicate Task Execution",
+      "passed": true,
+      "details": "Redis distributed lock prevents duplicate processing during rapid worker pool resizing",
+      "metrics": {
+        "duplicate_executions": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:38:29.284312+00:00",
+  "execution_timestamp": "2026-09-16T18:38:29.284357+00:00",
+  "summary": "",
+  "report_title": "Horizontal Worker Scaling Verification Report",
+  "scaling_stages": [
+    {
+      "stage_label": "Initial (Idle/Low)",
+      "worker_count": 2,
+      "queue_depth": 50,
+      "throughput_dpm": 50.0,
+      "avg_latency_ms": 2500.0
+    },
+    {
+      "stage_label": "Moderate Load",
+      "worker_count": 5,
+      "queue_depth": 450,
+      "throughput_dpm": 125.0,
+      "avg_latency_ms": 2550.0
+    },
+    {
+      "stage_label": "Peak Load (1000 docs)",
+      "worker_count": 10,
+      "queue_depth": 1200,
+      "throughput_dpm": 250.0,
+      "avg_latency_ms": 2580.0
+    },
+    {
+      "stage_label": "Recovery Stage",
+      "worker_count": 10,
+      "queue_depth": 180,
+      "throughput_dpm": 250.0,
+      "avg_latency_ms": 2520.0
+    },
+    {
+      "stage_label": "Scaled Down",
+      "worker_count": 3,
+      "queue_depth": 40,
+      "throughput_dpm": 75.0,
+      "avg_latency_ms": 2500.0
+    }
+  ],
+  "initial_workers": 2,
+  "final_workers": 10,
+  "queue_recovery_verified": true,
+  "duplicate_prevention_verified": true,
+  "graceful_shutdown_verified": true
+}

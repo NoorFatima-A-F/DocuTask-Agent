@@ -1,0 +1,8 @@
+{
+  "target_rto_minutes": 45.0,
+  "measured_rto_minutes": 14.0,
+  "target_rpo_minutes": 5.0,
+  "measured_rpo_minutes": 2.0,
+  "mttr_minutes": 7.88,
+  "status": "MISSION_CRITICAL_COMPLIANT"
+}

@@ -1,0 +1,164 @@
+{
+  "total_metrics_tracked": 19,
+  "api_metrics_count": 4,
+  "agent_runtime_metrics_count": 4,
+  "queue_metrics_count": 4,
+  "worker_metrics_count": 3,
+  "ai_metrics_count": 4,
+  "metrics": [
+    {
+      "domain": "api",
+      "metric_name": "docutask_api_requests_total",
+      "metric_type": "counter",
+      "unit": "requests",
+      "sample_value": 12540.0,
+      "queryable": true
+    },
+    {
+      "domain": "api",
+      "metric_name": "docutask_api_error_rate_pct",
+      "metric_type": "gauge",
+      "unit": "percent",
+      "sample_value": 0.08,
+      "queryable": true
+    },
+    {
+      "domain": "api",
+      "metric_name": "docutask_api_latency_seconds",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "sample_value": 0.125,
+      "queryable": true
+    },
+    {
+      "domain": "api",
+      "metric_name": "docutask_api_active_connections",
+      "metric_type": "gauge",
+      "unit": "connections",
+      "sample_value": 42.0,
+      "queryable": true
+    },
+    {
+      "domain": "agent_runtime",
+      "metric_name": "docutask_agent_tasks_started_total",
+      "metric_type": "counter",
+      "unit": "tasks",
+      "sample_value": 8450.0,
+      "queryable": true
+    },
+    {
+      "domain": "agent_runtime",
+      "metric_name": "docutask_agent_tasks_completed_total",
+      "metric_type": "counter",
+      "unit": "tasks",
+      "sample_value": 8438.0,
+      "queryable": true
+    },
+    {
+      "domain": "agent_runtime",
+      "metric_name": "docutask_agent_failures_total",
+      "metric_type": "counter",
+      "unit": "failures",
+      "sample_value": 12.0,
+      "queryable": true
+    },
+    {
+      "domain": "agent_runtime",
+      "metric_name": "docutask_agent_execution_duration_seconds",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "sample_value": 1.85,
+      "queryable": true
+    },
+    {
+      "domain": "queue",
+      "metric_name": "docutask_queue_depth",
+      "metric_type": "gauge",
+      "unit": "messages",
+      "sample_value": 145.0,
+      "queryable": true
+    },
+    {
+      "domain": "queue",
+      "metric_name": "docutask_queue_wait_time_seconds",
+      "metric_type": "gauge",
+      "unit": "seconds",
+      "sample_value": 0.024,
+      "queryable": true
+    },
+    {
+      "domain": "queue",
+      "metric_name": "docutask_queue_failed_jobs_total",
+      "metric_type": "counter",
+      "unit": "jobs",
+      "sample_value": 5.0,
+      "queryable": true
+    },
+    {
+      "domain": "queue",
+      "metric_name": "docutask_queue_retry_count_total",
+      "metric_type": "counter",
+      "unit": "retries",
+      "sample_value": 18.0,
+      "queryable": true
+    },
+    {
+      "domain": "worker",
+      "metric_name": "docutask_worker_active_count",
+      "metric_type": "gauge",
+      "unit": "workers",
+      "sample_value": 4.0,
+      "queryable": true
+    },
+    {
+      "domain": "worker",
+      "metric_name": "docutask_worker_heartbeat_age_seconds",
+      "metric_type": "gauge",
+      "unit": "seconds",
+      "sample_value": 1.2,
+      "queryable": true
+    },
+    {
+      "domain": "worker",
+      "metric_name": "docutask_worker_failures_total",
+      "metric_type": "counter",
+      "unit": "failures",
+      "sample_value": 0.0,
+      "queryable": true
+    },
+    {
+      "domain": "ai",
+      "metric_name": "docutask_llm_requests_total",
+      "metric_type": "counter",
+      "unit": "requests",
+      "sample_value": 6890.0,
+      "queryable": true
+    },
+    {
+      "domain": "ai",
+      "metric_name": "docutask_llm_latency_seconds",
+      "metric_type": "histogram",
+      "unit": "seconds",
+      "sample_value": 0.34,
+      "queryable": true
+    },
+    {
+      "domain": "ai",
+      "metric_name": "docutask_llm_failures_total",
+      "metric_type": "counter",
+      "unit": "failures",
+      "sample_value": 2.0,
+      "queryable": true
+    },
+    {
+      "domain": "ai",
+      "metric_name": "docutask_llm_tokens_consumed_total",
+      "metric_type": "counter",
+      "unit": "tokens",
+      "sample_value": 1450200.0,
+      "queryable": true
+    }
+  ],
+  "historical_retention_days": 30,
+  "status": "PASS"
+}

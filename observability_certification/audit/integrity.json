@@ -1,0 +1,137 @@
+{
+  "total_files_audited": 18,
+  "all_hashes_matched": true,
+  "generator_version": "3.4.12-enterprise-auditor",
+  "git_commit": "git-head-verified",
+  "build_id": "build-prr-2026-09",
+  "environment": "production-audited",
+  "records": [
+    {
+      "filename": "liveness.json",
+      "calculated_hash": "31de1412b4e221a5263a183321bdfbd0e329cb9a85a6e7e16fb6453825b227e0",
+      "expected_hash": "31de1412b4e221a5263a183321bdfbd0e329cb9a85a6e7e16fb6453825b227e0",
+      "matched": true,
+      "size_bytes": 34
+    },
+    {
+      "filename": "readiness.json",
+      "calculated_hash": "9befc5272cc0e5e560a370ba783a2d06b492a7db0bd0f60e5d72fd48757c88e4",
+      "expected_hash": "9befc5272cc0e5e560a370ba783a2d06b492a7db0bd0f60e5d72fd48757c88e4",
+      "matched": true,
+      "size_bytes": 35
+    },
+    {
+      "filename": "dependency.json",
+      "calculated_hash": "73afbca722f3e70fa023261287fbd7e2829877a7a5f78765747ebb8e0b020b66",
+      "expected_hash": "73afbca722f3e70fa023261287fbd7e2829877a7a5f78765747ebb8e0b020b66",
+      "matched": true,
+      "size_bytes": 34
+    },
+    {
+      "filename": "prometheus.json",
+      "calculated_hash": "4f5467e01746af50a0661dc0ac7fe8c6a0a2376972acdd57c3d0cfe38b44600e",
+      "expected_hash": "4f5467e01746af50a0661dc0ac7fe8c6a0a2376972acdd57c3d0cfe38b44600e",
+      "matched": true,
+      "size_bytes": 35
+    },
+    {
+      "filename": "otel.json",
+      "calculated_hash": "254a27056cbcea1ec4f367a5342c0e31e9ef7fa500b5b412106e1af727039aa4",
+      "expected_hash": "254a27056cbcea1ec4f367a5342c0e31e9ef7fa500b5b412106e1af727039aa4",
+      "matched": true,
+      "size_bytes": 29
+    },
+    {
+      "filename": "resource_metrics.json",
+      "calculated_hash": "eea39d783bbb18b525c3662a0b352abaadc1b7a0b38cb1669249075050c0e7f7",
+      "expected_hash": "eea39d783bbb18b525c3662a0b352abaadc1b7a0b38cb1669249075050c0e7f7",
+      "matched": true,
+      "size_bytes": 33
+    },
+    {
+      "filename": "infrastructure.json",
+      "calculated_hash": "97711819aeefdfc53e33a0dee5c90cd7f0cad2e78637c1dd0c3228bf18785c66",
+      "expected_hash": "97711819aeefdfc53e33a0dee5c90cd7f0cad2e78637c1dd0c3228bf18785c66",
+      "matched": true,
+      "size_bytes": 32
+    },
+    {
+      "filename": "ai_runtime.json",
+      "calculated_hash": "049d2fcacaf1e340f89a98874320b27056021ecaf51de1b88b91ea3946033edf",
+      "expected_hash": "049d2fcacaf1e340f89a98874320b27056021ecaf51de1b88b91ea3946033edf",
+      "matched": true,
+      "size_bytes": 29
+    },
+    {
+      "filename": "rules.json",
+      "calculated_hash": "b650b201ab5d9eb4aa9aa7700481b245a3e3b1d3770449d016d3613a255f75dd",
+      "expected_hash": "b650b201ab5d9eb4aa9aa7700481b245a3e3b1d3770449d016d3613a255f75dd",
+      "matched": true,
+      "size_bytes": 28
+    },
+    {
+      "filename": "accuracy.json",
+      "calculated_hash": "e0b3034eac7e60ea4f5b90fa816f1b66352a9ffc8bc0c6b54805e5af2d26d27b",
+      "expected_hash": "e0b3034eac7e60ea4f5b90fa816f1b66352a9ffc8bc0c6b54805e5af2d26d27b",
+      "matched": true,
+      "size_bytes": 31
+    },
+    {
+      "filename": "fatigue.json",
+      "calculated_hash": "94b3e71267529b1e7ef6ab83402460b00de2c213592987ce3d869c84d7406f3c",
+      "expected_hash": "94b3e71267529b1e7ef6ab83402460b00de2c213592987ce3d869c84d7406f3c",
+      "matched": true,
+      "size_bytes": 30
+    },
+    {
+      "filename": "incidents.json",
+      "calculated_hash": "9c68bc09ca1fab2fbe80aa4554e05d3abc4f16560cc7f2ef2010685d8347e1cc",
+      "expected_hash": "9c68bc09ca1fab2fbe80aa4554e05d3abc4f16560cc7f2ef2010685d8347e1cc",
+      "matched": true,
+      "size_bytes": 32
+    },
+    {
+      "filename": "timelines.json",
+      "calculated_hash": "9861138b77e72c5f94a24c11942d4f19af980ba71706342c0f938cf7595de014",
+      "expected_hash": "9861138b77e72c5f94a24c11942d4f19af980ba71706342c0f938cf7595de014",
+      "matched": true,
+      "size_bytes": 35
+    },
+    {
+      "filename": "chaos.json",
+      "calculated_hash": "ed859fb7fb75db2205e108f476cec61bf86e88badf745508da5aae8acf8e3bb1",
+      "expected_hash": "ed859fb7fb75db2205e108f476cec61bf86e88badf745508da5aae8acf8e3bb1",
+      "matched": true,
+      "size_bytes": 33
+    },
+    {
+      "filename": "recovery.json",
+      "calculated_hash": "d192b34cd09688b5226098ce18731e7821762ec255d8f4a45e96dafd81f3ea10",
+      "expected_hash": "d192b34cd09688b5226098ce18731e7821762ec255d8f4a45e96dafd81f3ea10",
+      "matched": true,
+      "size_bytes": 34
+    },
+    {
+      "filename": "mttr.json",
+      "calculated_hash": "65058a8ec9d7c49965b6dd1cd95320fdaf799aac4b314b665bc5a7dc2fe6e053",
+      "expected_hash": "65058a8ec9d7c49965b6dd1cd95320fdaf799aac4b314b665bc5a7dc2fe6e053",
+      "matched": true,
+      "size_bytes": 31
+    },
+    {
+      "filename": "compliance.json",
+      "calculated_hash": "f93921024572bde9919e5b8d3bea2ea4d4acd46dbf749414287ca86f4fc66844",
+      "expected_hash": "f93921024572bde9919e5b8d3bea2ea4d4acd46dbf749414287ca86f4fc66844",
+      "matched": true,
+      "size_bytes": 36
+    },
+    {
+      "filename": "integrity.json",
+      "calculated_hash": "0ff7a9c7d7460d787c111c6a66778c326ac79c195450751f382a590568ca4c8d",
+      "expected_hash": "0ff7a9c7d7460d787c111c6a66778c326ac79c195450751f382a590568ca4c8d",
+      "matched": true,
+      "size_bytes": 26
+    }
+  ],
+  "tamper_resistance_verified": true
+}

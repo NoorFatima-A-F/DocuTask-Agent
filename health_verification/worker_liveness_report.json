@@ -1,0 +1,37 @@
+{
+  "total_workers_tracked": 3,
+  "active_workers_count": 3,
+  "zombie_workers_count": 0,
+  "stuck_workers_count": 0,
+  "all_workers_healthy": true,
+  "passed": true,
+  "workers": [
+    {
+      "worker_id": "worker-001",
+      "status": "alive",
+      "last_heartbeat_age_seconds": 2.0,
+      "current_task": "document_123",
+      "running_tasks": 1,
+      "pending_tasks": 4,
+      "failed_tasks": 0
+    },
+    {
+      "worker_id": "worker-002",
+      "status": "alive",
+      "last_heartbeat_age_seconds": 3.5,
+      "current_task": "ocr_extraction_page_4",
+      "running_tasks": 1,
+      "pending_tasks": 2,
+      "failed_tasks": 0
+    },
+    {
+      "worker_id": "worker-003",
+      "status": "alive",
+      "last_heartbeat_age_seconds": 1.0,
+      "current_task": "idle_waiting",
+      "running_tasks": 0,
+      "pending_tasks": 0,
+      "failed_tasks": 0
+    }
+  ]
+}

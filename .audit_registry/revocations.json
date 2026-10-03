@@ -1,0 +1,10 @@
+[
+  {
+    "certificate_id": "CERT-20260920193748",
+    "details": "Test revocation scenario",
+    "reason": "SECURITY_VULNERABILITY",
+    "revocation_timestamp": "2026-09-20T19:38:33.848662+00:00",
+    "revoked_by": "Enterprise-Audit-Certification-Authority",
+    "signature": "REVOKED-20260920193833"
+  }
+]

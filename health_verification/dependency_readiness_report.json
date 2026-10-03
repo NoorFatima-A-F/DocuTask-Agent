@@ -1,0 +1,51 @@
+{
+  "total_dependencies": 5,
+  "critical_dependencies_count": 4,
+  "non_critical_dependencies_count": 1,
+  "evaluated_dependencies": [
+    {
+      "name": "PostgreSQL",
+      "status": "READY",
+      "latency_ms": 14.2,
+      "criticality": "critical",
+      "message": "Transactions, schema, and connection pool verified",
+      "healthy": true
+    },
+    {
+      "name": "Redis Queue",
+      "status": "READY",
+      "latency_ms": 24.5,
+      "criticality": "critical",
+      "message": "Queue read/write operations verified",
+      "healthy": true
+    },
+    {
+      "name": "Document Storage",
+      "status": "READY",
+      "latency_ms": 18.0,
+      "criticality": "critical",
+      "message": "GCS/Local storage read, write, and permissions verified",
+      "healthy": true
+    },
+    {
+      "name": "Worker Fleet",
+      "status": "READY",
+      "latency_ms": 4.0,
+      "criticality": "critical",
+      "message": "Capacity verified (28 slots available)",
+      "healthy": true
+    },
+    {
+      "name": "Gemini AI Provider",
+      "status": "READY",
+      "latency_ms": 340.0,
+      "criticality": "non_critical",
+      "message": "API responsive and quota available",
+      "healthy": true
+    }
+  ],
+  "critical_dependencies_healthy": true,
+  "traffic_decision": "ALLOW_TRAFFIC",
+  "overall_readiness_state": "READY",
+  "status": "PASS"
+}

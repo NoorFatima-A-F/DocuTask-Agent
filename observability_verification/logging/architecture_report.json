@@ -1,0 +1,58 @@
+{
+  "report_title": "Enterprise Logging Architecture & Centralization Report",
+  "services_detected": 8,
+  "services_covered": [
+    {
+      "service_name": "api_gateway",
+      "log_format": "JSON",
+      "collector_attached": true,
+      "centralized_delivery_latency_ms": 35.0
+    },
+    {
+      "service_name": "async_document_worker",
+      "log_format": "JSON",
+      "collector_attached": true,
+      "centralized_delivery_latency_ms": 35.0
+    },
+    {
+      "service_name": "ocr_processing_service",
+      "log_format": "JSON",
+      "collector_attached": true,
+      "centralized_delivery_latency_ms": 35.0
+    },
+    {
+      "service_name": "agent_planning_runtime",
+      "log_format": "JSON",
+      "collector_attached": true,
+      "centralized_delivery_latency_ms": 35.0
+    },
+    {
+      "service_name": "gemini_llm_gateway",
+      "log_format": "JSON",
+      "collector_attached": true,
+      "centralized_delivery_latency_ms": 35.0
+    },
+    {
+      "service_name": "postgresql_primary_db",
+      "log_format": "JSON",
+      "collector_attached": true,
+      "centralized_delivery_latency_ms": 35.0
+    },
+    {
+      "service_name": "redis_task_queue",
+      "log_format": "JSON",
+      "collector_attached": true,
+      "centralized_delivery_latency_ms": 35.0
+    },
+    {
+      "service_name": "security_auth_service",
+      "log_format": "JSON",
+      "collector_attached": true,
+      "centralized_delivery_latency_ms": 35.0
+    }
+  ],
+  "structured_logging": true,
+  "centralized_collection": true,
+  "collection_backend": "OpenTelemetry Collector -> Loki / Elasticsearch",
+  "status": "PASS"
+}

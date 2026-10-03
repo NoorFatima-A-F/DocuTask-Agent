@@ -1,0 +1,30 @@
+{
+  "report_title": "Chaos Learning Verification Report",
+  "scenarios": [
+    {
+      "scenario": "Chaos PostgreSQL Database Drop",
+      "injected_failure": "Severed active database connection pool during batch transaction commit.",
+      "detection_time_ms": 150.0,
+      "pre_learning_recovery_s": 180.0,
+      "post_learning_recovery_s": 2.8,
+      "learning_update_stored": true
+    },
+    {
+      "scenario": "Chaos Queue Buffer Saturation",
+      "injected_failure": "Injected 5,000 synthetic high-priority document events into Redis queue.",
+      "detection_time_ms": 220.0,
+      "pre_learning_recovery_s": 300.0,
+      "post_learning_recovery_s": 4.1,
+      "learning_update_stored": true
+    },
+    {
+      "scenario": "Chaos Random Worker Subprocess Kill",
+      "injected_failure": "Sent SIGKILL to random OCR worker process while parsing scanned document.",
+      "detection_time_ms": 180.0,
+      "pre_learning_recovery_s": 120.0,
+      "post_learning_recovery_s": 1.5,
+      "learning_update_stored": true
+    }
+  ],
+  "all_scenarios_improved": true
+}

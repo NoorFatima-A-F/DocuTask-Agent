@@ -1,0 +1,8 @@
+{
+  "iac_format": "JSON",
+  "dashboards_path": "observability/grafana/dashboards",
+  "provisioned_dashboards_count": 5,
+  "tear_down_recovery_verified": true,
+  "auto_provisioning_active": true,
+  "status": "PASS"
+}

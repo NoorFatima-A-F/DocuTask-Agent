@@ -1,0 +1,62 @@
+{
+  "primary_region": "us-east-1",
+  "secondary_region": "us-west-2",
+  "total_critical_services": 7,
+  "replicated_services_count": 7,
+  "passed": true,
+  "services": [
+    {
+      "name": "FastAPI Gateway & Ingress",
+      "primary_status": "ACTIVE_HEALTHY",
+      "secondary_status": "ACTIVE_HEALTHY",
+      "mode": "Active-Active Global Anycast"
+    },
+    {
+      "name": "Celery OCR & Extraction Workers",
+      "primary_status": "ACTIVE_HEALTHY",
+      "secondary_status": "WARM_STANDBY",
+      "mode": "Autoscaling Replica Pool"
+    },
+    {
+      "name": "Agent Planner & Runtime",
+      "primary_status": "ACTIVE_HEALTHY",
+      "secondary_status": "WARM_STANDBY",
+      "mode": "Stateless Replicated Pods"
+    },
+    {
+      "name": "Redis Queue & Broker",
+      "primary_status": "ACTIVE_HEALTHY",
+      "secondary_status": "WARM_STANDBY",
+      "mode": "Sentinel Replicated Sync"
+    },
+    {
+      "name": "PostgreSQL Database Cluster",
+      "primary_status": "ACTIVE_PRIMARY",
+      "secondary_status": "STANDBY_SYNC_REPLICA",
+      "mode": "Streaming WAL Replication"
+    },
+    {
+      "name": "S3 / MinIO Document Storage Vault",
+      "primary_status": "ACTIVE_PRIMARY",
+      "secondary_status": "CROSS_REGION_REPLICA",
+      "mode": "S3 Cross-Region Replication (CRR)"
+    },
+    {
+      "name": "Prometheus & Grafana Observability",
+      "primary_status": "ACTIVE_HEALTHY",
+      "secondary_status": "ACTIVE_HEALTHY",
+      "mode": "Federated Multi-Region Metrics"
+    }
+  ],
+  "portability": {
+    "compute_portable": true,
+    "storage_abstracted": true,
+    "ai_abstracted": true,
+    "supported_clouds": [
+      "Amazon Web Services (AWS)",
+      "Google Cloud Platform (GCP)",
+      "Microsoft Azure",
+      "On-Premises / Hybrid Bare-Metal Kubernetes"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "part_id": "PART_11_FRESHNESS",
+  "title": "Part 11: Knowledge Freshness & Lifecycle Decay Verification",
+  "description": "Validates document age decay scoring, expired policy rank demotion, emergency policy hot-swaps, and stale retrieval rate minimization.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.02,
+  "metrics": {
+    "decay_score_active": 0.952,
+    "decay_score_stale": 0.333,
+    "expired_policies_demoted": 1,
+    "hot_swap_applied": true,
+    "stale_retrieval_rate_pct": 0.2
+  },
+  "assertions": [
+    {
+      "name": "Document_Age_Exponential_Decay_Scoring",
+      "passed": true,
+      "message": "Freshness decay scored 10-day document at 0.95 vs 400-day document at 0.33.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "active_score": 0.952,
+        "stale_score": 0.333
+      }
+    },
+    {
+      "name": "Expired_Policy_Ranking_Demotion",
+      "passed": true,
+      "message": "Expired corporate policy demoted below current active policy in retrieval ranking.",
+      "execution_time_ms": 0.004,
+      "details": {
+        "top_ranked": "policy_2026_current"
+      }
+    },
+    {
+      "name": "Emergency_Policy_HotSwap_Replacement",
+      "passed": true,
+      "message": "Emergency policy revision hot-swapped instantaneously without cache invalidation downtime.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "active_policy": "travel_rules_v2_emergency"
+      }
+    },
+    {
+      "name": "Stale_Retrieval_Rate_Minimization",
+      "passed": true,
+      "message": "Stale retrieval rate measured at 0.20% (Strict SLA <= 0.50%).",
+      "execution_time_ms": 0.001,
+      "details": {
+        "stale_rate_pct": 0.2
+      }
+    }
+  ]
+}

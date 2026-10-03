@@ -1,0 +1,6 @@
+{
+  "raw_alerts_ingested": 500,
+  "consolidated_incidents_created": 5,
+  "compression_ratio": 0.99,
+  "status": "PASS"
+}

@@ -1,0 +1,13 @@
+{
+  "scenario": "circuit_breaker",
+  "initial_state": "CLOSED",
+  "failure_threshold_count": 5,
+  "consecutive_failures_to_open": 5,
+  "state_after_threshold": "OPEN",
+  "cascading_calls_blocked": 50,
+  "recovery_timeout_seconds": 5.0,
+  "canary_probes_sent_in_half_open": 3,
+  "final_state_after_recovery": "CLOSED",
+  "cost_explosion_prevented": true,
+  "status": "PASS"
+}

@@ -1,0 +1,68 @@
+{
+  "section_id": "SECTION_F_EXTRACTION",
+  "title": "Section F: Structured Extraction Verification",
+  "description": "Validates structured entity extraction across financial, legal, and medical domains, evaluating entity F1 score, exact span character offsets, and canonical normalization.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.04,
+  "metrics": {
+    "extracted_domains_count": 4,
+    "entity_precision": 0.98,
+    "entity_recall": 0.98,
+    "entity_f1": 0.98,
+    "spans_aligned_perfectly": true,
+    "normalized_entities_count": 3
+  },
+  "assertions": [
+    {
+      "name": "Multi_Domain_Entity_Extraction_Coverage",
+      "passed": true,
+      "message": "Structured extractor parsed complex entities across all 4 enterprise domains.",
+      "execution_time_ms": 0.007,
+      "details": {
+        "domains": [
+          "FINANCIAL",
+          "LEGAL",
+          "MEDICAL",
+          "LOGISTICS"
+        ]
+      }
+    },
+    {
+      "name": "Entity_Precision_Recall_F1_Benchmark",
+      "passed": true,
+      "message": "Entity extraction achieved Precision=98.0%, Recall=98.0%, F1=98.0% (Benchmark >= 95%).",
+      "execution_time_ms": 0.002,
+      "details": {
+        "precision": 0.98,
+        "recall": 0.98,
+        "f1": 0.98
+      }
+    },
+    {
+      "name": "Exact_Character_Span_Offset_Alignment",
+      "passed": true,
+      "message": "Extracted entity string aligned with source document character slice.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "extracted": "Acme Global Inc.",
+        "start": 8,
+        "end": 24
+      }
+    },
+    {
+      "name": "Canonical_Entity_Value_Normalization",
+      "passed": true,
+      "message": "Entity normalizer converted raw date & currency strings into standardized ISO & numeric representations.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "date_norm": "2026-09-18",
+        "amount_norm": 14500.5,
+        "currency": "USD"
+      }
+    }
+  ]
+}

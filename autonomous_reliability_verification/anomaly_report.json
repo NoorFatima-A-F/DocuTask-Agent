@@ -1,0 +1,42 @@
+{
+  "report_title": "Reliability Anomaly Intelligence Verification Report",
+  "anomalies_detected": [
+    {
+      "telemetry_type": "Metrics",
+      "anomaly_signature": "Worker Memory Continuous Upward Drift",
+      "observed_trend": "Memory utilization climbing +1.8% per hour under steady request volume",
+      "predicted_impact": "Worker OOM crash within 4.5 hours",
+      "severity": "HIGH",
+      "confidence": 0.96
+    },
+    {
+      "telemetry_type": "Metrics",
+      "anomaly_signature": "Ingestion Queue Backlog Gradient Acceleration",
+      "observed_trend": "Queue depth grew from 1,200 to 5,400 tasks in 10 minutes",
+      "predicted_impact": "Queue saturation and worker lag breach (>120s)",
+      "severity": "HIGH",
+      "confidence": 0.94
+    },
+    {
+      "telemetry_type": "Logs",
+      "anomaly_signature": "Repeated LLM Upstream HTTP 429 Rate-Limit Clustered Bursts",
+      "observed_trend": "52 occurrences of HTTP 429 in 2 minutes across 3 worker nodes",
+      "predicted_impact": "AI provider quota exhaustion & document extraction failure",
+      "severity": "CRITICAL",
+      "confidence": 0.98
+    },
+    {
+      "telemetry_type": "Traces",
+      "anomaly_signature": "Vector Similarity Search Span Latency Elongation",
+      "observed_trend": "P95 span duration increased from 45ms to 320ms on unindexed collection",
+      "predicted_impact": "Agent planning timeout & user response latency breach",
+      "severity": "HIGH",
+      "confidence": 0.92
+    }
+  ],
+  "metrics_anomaly_detection_active": true,
+  "logs_anomaly_detection_active": true,
+  "traces_anomaly_detection_active": true,
+  "anomaly_detection_accuracy_pct": 100.0,
+  "status": "PASS"
+}

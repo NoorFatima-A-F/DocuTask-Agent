@@ -1,0 +1,52 @@
+{
+  "title": "AI Chaos Failure Injection Framework Report",
+  "scenario_count": 7,
+  "scenarios_tested": [
+    "provider_outage",
+    "latency_spike",
+    "invalid_response",
+    "authentication_failure",
+    "quota_exhaustion",
+    "network_failure",
+    "quality_degradation"
+  ],
+  "auth_failure": {
+    "scenario": "auth_failure",
+    "injected_auth_error": "401_INVALID_API_KEY",
+    "infinite_retries_prevented": true,
+    "max_retry_enforced": 1,
+    "operator_alert_triggered": true,
+    "alert_severity": "CRITICAL",
+    "degraded_mode_activated": true,
+    "credential_recovery_path_verified": true,
+    "status": "PASS"
+  },
+  "quota_exhaustion": {
+    "scenario": "quota_exhaustion",
+    "injected_http_status": 429,
+    "total_rate_limited_requests": 60,
+    "exponential_backoff_applied": true,
+    "full_jitter_applied": true,
+    "initial_backoff_ms": 500.0,
+    "max_backoff_ms": 8000.0,
+    "tasks_preserved_in_queue": 60,
+    "duplicate_executions": 0,
+    "successful_retries_after_backoff": 60,
+    "status": "PASS"
+  },
+  "network_failure": {
+    "scenario": "network_failure",
+    "failure_types_tested": [
+      "TCP_RESET",
+      "DNS_RESOLUTION_TIMEOUT",
+      "TLS_HANDSHAKE_DROP"
+    ],
+    "total_network_faults_injected": 45,
+    "faults_detected_cleanly": 45,
+    "connection_pool_cleaned": true,
+    "reconnection_recovery_ms": 240.0,
+    "zero_dropped_requests": true,
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

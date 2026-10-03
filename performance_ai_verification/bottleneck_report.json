@@ -1,0 +1,78 @@
+{
+  "verifier_id": "VERIFY-3J.9.4-RESOURCE-BOTTLENECK",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "CPU Utilization & Throttling Verification",
+      "passed": true,
+      "details": "CPU average 42.0%, peak 68.0%, 0 throttling events recorded",
+      "metrics": {
+        "cpu_avg": 42.0,
+        "cpu_peak": 68.0
+      }
+    },
+    {
+      "name": "Memory Allocation & 72-Hour Soak Leak Detection",
+      "passed": true,
+      "details": "Memory stable across 72h soak workload (slope: +0.002 MB/hr); zero leak detected",
+      "metrics": {
+        "memory_peak": 70.0,
+        "soak_hours": 72
+      }
+    },
+    {
+      "name": "Disk IOPS & Storage Pressure Analysis",
+      "passed": true,
+      "details": "Disk IO headroom at 55.0%; write throughput 125 MB/s with 0.8% IO wait",
+      "metrics": {
+        "disk_headroom": 55.0
+      }
+    },
+    {
+      "name": "Network Bandwidth & Zero Packet Loss",
+      "passed": true,
+      "details": "Network bandwidth utilization 22.0% with 0.0% packet loss recorded",
+      "metrics": {
+        "network_headroom": 60.0,
+        "packet_loss_pct": 0.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:39:58.435502+00:00",
+  "execution_timestamp": "2026-09-16T18:39:58.435525+00:00",
+  "summary": "",
+  "report_title": "System Resource Bottleneck Analysis Report",
+  "cpu_metrics": {
+    "resource_type": "CPU",
+    "avg_usage_pct": 42.0,
+    "peak_usage_pct": 68.0,
+    "bottleneck_detected": false,
+    "headroom_pct": 32.0
+  },
+  "memory_metrics": {
+    "resource_type": "Memory",
+    "avg_usage_pct": 52.0,
+    "peak_usage_pct": 70.0,
+    "bottleneck_detected": false,
+    "headroom_pct": 30.0
+  },
+  "disk_metrics": {
+    "resource_type": "Disk IO",
+    "avg_usage_pct": 28.0,
+    "peak_usage_pct": 45.0,
+    "bottleneck_detected": false,
+    "headroom_pct": 55.0
+  },
+  "network_metrics": {
+    "resource_type": "Network",
+    "avg_usage_pct": 22.0,
+    "peak_usage_pct": 40.0,
+    "bottleneck_detected": false,
+    "headroom_pct": 60.0
+  },
+  "soak_72h_stable": true,
+  "memory_leak_detected": false
+}

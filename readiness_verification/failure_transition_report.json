@@ -1,0 +1,72 @@
+{
+  "total_transitions_tested": 4,
+  "passed_transitions": 4,
+  "startup_to_ready_passed": true,
+  "db_failure_to_not_ready_passed": true,
+  "recovery_to_ready_passed": true,
+  "optional_dep_to_degraded_passed": true,
+  "passed": true,
+  "transitions": [
+    {
+      "test_name": "Test 1 \u2014 Fresh Startup Sequence",
+      "action": "Container initialization and dependency discovery",
+      "from_state": "INITIALIZING",
+      "to_state": "READY",
+      "signals": {
+        "database": "healthy",
+        "queue": "healthy",
+        "storage": "healthy",
+        "workers": "healthy",
+        "ai_provider": "healthy"
+      },
+      "expected_traffic_action": "ADMIT_TRAFFIC",
+      "passed": true
+    },
+    {
+      "test_name": "Test 2 \u2014 Database Critical Failure",
+      "action": "Simulate PostgreSQL connection pool exhaustion / failure",
+      "from_state": "READY",
+      "to_state": "NOT_READY",
+      "signals": {
+        "database": "failed",
+        "queue": "healthy",
+        "storage": "healthy",
+        "workers": "healthy",
+        "ai_provider": "healthy"
+      },
+      "expected_traffic_action": "WITHHOLD_TRAFFIC",
+      "passed": true
+    },
+    {
+      "test_name": "Test 3 \u2014 Database Recovery Sequence",
+      "action": "PostgreSQL service restored and validated",
+      "from_state": "NOT_READY",
+      "to_state": "READY",
+      "intermediate_state": "RECOVERING",
+      "signals": {
+        "database": "healthy",
+        "queue": "healthy",
+        "storage": "healthy",
+        "workers": "healthy",
+        "ai_provider": "healthy"
+      },
+      "expected_traffic_action": "ADMIT_TRAFFIC",
+      "passed": true
+    },
+    {
+      "test_name": "Test 4 \u2014 Optional Dependency Failure (Gemini AI)",
+      "action": "Simulate Gemini API rate limit or transient 503 outage",
+      "from_state": "READY",
+      "to_state": "DEGRADED",
+      "signals": {
+        "database": "healthy",
+        "queue": "healthy",
+        "storage": "healthy",
+        "workers": "healthy",
+        "ai_provider": "failed"
+      },
+      "expected_traffic_action": "THROTTLE_TRAFFIC",
+      "passed": true
+    }
+  ]
+}

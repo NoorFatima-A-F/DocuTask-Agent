@@ -1,0 +1,16 @@
+{
+  "storage_type": "filesystem_and_blob",
+  "status": "READY",
+  "reachable": true,
+  "write_permission": true,
+  "read_permission": true,
+  "integrity_verified": true,
+  "cleanup_verified": true,
+  "latency_ms": 14.2,
+  "passed": true,
+  "details": {
+    "test_file": "healthcheck_test_file",
+    "lifecycle": "Create -> Read -> Validate Hash -> Delete",
+    "residual_artifacts_count": 0
+  }
+}

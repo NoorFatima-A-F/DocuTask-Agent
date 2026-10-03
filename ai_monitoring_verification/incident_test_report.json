@@ -1,0 +1,42 @@
+{
+  "total_incident_tests": 3,
+  "all_incidents_detected_and_handled": true,
+  "tests": [
+    {
+      "scenario_id": "INC-TEST-01",
+      "incident_type": "AI Provider Outage (HTTP 503)",
+      "injected_anomaly": "Continuous 503 errors injected on primary Gemini endpoint for 60s",
+      "alert_triggered": true,
+      "dashboard_updated": true,
+      "automated_response_executed": true,
+      "recovery_validated": true,
+      "passed": true
+    },
+    {
+      "scenario_id": "INC-TEST-02",
+      "incident_type": "Inference Latency Spike (8s P95)",
+      "injected_anomaly": "Artificially throttled Gemini latency to 8000ms",
+      "alert_triggered": true,
+      "dashboard_updated": true,
+      "automated_response_executed": true,
+      "recovery_validated": true,
+      "passed": true
+    },
+    {
+      "scenario_id": "INC-TEST-03",
+      "incident_type": "Quality Collapse (Malformed JSON & Schema Mismatch)",
+      "injected_anomaly": "Injected corrupted extraction payloads across 20 consecutive documents",
+      "alert_triggered": true,
+      "dashboard_updated": true,
+      "automated_response_executed": true,
+      "recovery_validated": true,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "details": {
+    "incident_framework": "DocuTask Automated SRE Incident Validator",
+    "mean_time_to_detect_seconds": 4.2,
+    "mean_time_to_mitigate_seconds": 8.5
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "verifier_id": "VERIFY-3J.2.11-PERFORMANCE-RECOVERY",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Backlog Queue Drain Velocity",
+      "passed": true,
+      "details": "Cleared 15,000 queued tasks in 38.4s (390.6 docs/sec) after burst ended",
+      "metrics": {
+        "peak_backlog": 15000,
+        "drain_time_sec": 38.4,
+        "drain_rate_docs_per_sec": 390.6
+      }
+    },
+    {
+      "name": "Latency Normalization & MTTR (Mean Time to Recover)",
+      "passed": true,
+      "details": "API latency returned to baseline (46.2ms vs 45.0ms) in 42.0s (MTTR threshold: < 60s)",
+      "metrics": {
+        "mttr_seconds": 42.0,
+        "post_stress_p95_ms": 46.2,
+        "baseline_p95_ms": 45.0
+      }
+    },
+    {
+      "name": "Elastic Worker Scale-Down & Resource Reclamation",
+      "passed": true,
+      "details": "Autoscaled workers reduced from 20 to baseline 4 within 60s of queue clearance",
+      "metrics": {
+        "peak_workers": 20,
+        "restored_workers": 4
+      }
+    },
+    {
+      "name": "Backpressure Circuit Auto-Reset",
+      "passed": true,
+      "details": "Backpressure state automatically restored to NORMAL with 100% ingress admission",
+      "metrics": {
+        "backpressure_state": "NORMAL",
+        "admission_rate": 1.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:35:47.160738+00:00",
+  "report_title": "Performance Recovery Verification Report",
+  "backlog_drain_time_sec": 38.4,
+  "mttr_seconds": 42.0,
+  "baseline_latency_restored": true,
+  "resources_normalized": true,
+  "recovery_steps": []
+}

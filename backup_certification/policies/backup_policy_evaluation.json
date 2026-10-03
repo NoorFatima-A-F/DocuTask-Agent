@@ -1,0 +1,42 @@
+{
+  "database_frequency_compliant": true,
+  "database_retention_compliant": true,
+  "documents_frequency_compliant": true,
+  "documents_retention_compliant": true,
+  "restore_test_frequency_compliant": true,
+  "policy_compliance_score": 100.0,
+  "passed": true,
+  "details": {
+    "policy_specification": {
+      "database": {
+        "required_frequency": "HOURLY_CONTINUOUS_WAL",
+        "minimum_retention_days": 30,
+        "actual_retention_days": 2555
+      },
+      "documents": {
+        "required_frequency": "DAILY_CONTINUOUS_SYNC",
+        "minimum_retention_days": 365,
+        "actual_retention_days": 2555
+      },
+      "restore_test": {
+        "required_frequency": "MONTHLY_AUTOMATED",
+        "actual_execution_frequency": "CONTINUOUS_ON_DEPLOYMENT"
+      }
+    },
+    "database_policy": {
+      "frequency": "HOURLY + CONTINUOUS_WAL_ARCHIVING",
+      "retention_enforced": "7_YEARS_WORM_COMPLIANCE_MODE",
+      "compliant": true
+    },
+    "documents_policy": {
+      "frequency": "DAILY + EVENT_DRIVEN_REPLICATION",
+      "retention_enforced": "7_YEARS_WORM_COMPLIANCE_MODE",
+      "compliant": true
+    },
+    "restore_testing_policy": {
+      "frequency": "AUTOMATED_CI_CD_AND_MONTHLY_DR_CHAOS",
+      "compliant": true
+    },
+    "policy_verdict": "ENTERPRISE_POLICY_COMPLIANT"
+  }
+}

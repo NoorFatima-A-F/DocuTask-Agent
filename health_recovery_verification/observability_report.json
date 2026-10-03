@@ -1,0 +1,49 @@
+{
+  "report_title": "Recovery Observability & Telemetry Report",
+  "metrics": [
+    {
+      "metric_name": "recovery_attempts_total",
+      "metric_type": "Counter",
+      "current_value": 14.0,
+      "unit": "events",
+      "description": "Total count of automated recovery actions initiated by the recovery controller"
+    },
+    {
+      "metric_name": "recovery_success_total",
+      "metric_type": "Counter",
+      "current_value": 14.0,
+      "unit": "events",
+      "description": "Total count of successfully validated automated recovery actions"
+    },
+    {
+      "metric_name": "recovery_failure_total",
+      "metric_type": "Counter",
+      "current_value": 0.0,
+      "unit": "events",
+      "description": "Total count of failed recovery actions requiring operator escalation"
+    },
+    {
+      "metric_name": "recovery_duration_seconds",
+      "metric_type": "Histogram",
+      "current_value": 10.4,
+      "unit": "seconds",
+      "description": "Distribution of automated remediation execution times"
+    },
+    {
+      "metric_name": "mttr_seconds",
+      "metric_type": "Gauge",
+      "current_value": 11.8,
+      "unit": "seconds",
+      "description": "Mean time to recovery across all operational components"
+    },
+    {
+      "metric_name": "health_state_changes_total",
+      "metric_type": "Counter",
+      "current_value": 48.0,
+      "unit": "transitions",
+      "description": "Total number of state machine transitions evaluated"
+    }
+  ],
+  "dashboard_configured": true,
+  "realtime_telemetry_active": true
+}

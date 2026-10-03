@@ -1,0 +1,78 @@
+{
+  "artifact_paths": [],
+  "category": "SecurityAndCompliance",
+  "classification": "CRITICAL_FINDING",
+  "collector": "SecurityCollector",
+  "command": null,
+  "confidence": "HIGH",
+  "content_hash": "a6def3ea6d6eb821e9882ac08e6e20782eec0de0be076630e2ce94ade5ffb171",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-43BDD5FE",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "env_ignored_in_gitignore": true,
+    "secrets_detected": [
+      {
+        "file": "app/knowledge_platform_verification/security/security_verifier.py",
+        "line": 99,
+        "type": "aws_access_key"
+      },
+      {
+        "file": "app/knowledge_platform_verification/security/security_verifier.py",
+        "line": 110,
+        "type": "aws_access_key"
+      },
+      {
+        "file": "app/platform_verification/ai_provider_health/auth/ai_auth_verifier.py",
+        "line": 44,
+        "type": "gemini_api_key"
+      },
+      {
+        "file": "app/runtime/execution/credential/credential_engine.py",
+        "line": 91,
+        "type": "aws_access_key"
+      },
+      {
+        "file": "app/runtime/execution/credential/credential_engine.py",
+        "line": 111,
+        "type": "stripe_live_key"
+      },
+      {
+        "file": "app/security_verification/data_security/secret_leakage_tests.py",
+        "line": 20,
+        "type": "openai_api_key"
+      },
+      {
+        "file": "tests/platform_verification/test_ai_provider_health.py",
+        "line": 187,
+        "type": "gemini_api_key"
+      },
+      {
+        "file": "tests/safety/test_privacy_and_pii_redaction.py",
+        "line": 14,
+        "type": "openai_api_key"
+      },
+      {
+        "file": "tests/safety/test_privacy_and_pii_redaction.py",
+        "line": 14,
+        "type": "aws_access_key"
+      }
+    ],
+    "secrets_detected_count": 9,
+    "workflow_least_privilege": {
+      "audit.yml": true,
+      "certification.yml": false,
+      "chaos-test.yml": false,
+      "deployment-verification.yml": false,
+      "infrastructure-validation.yml": false,
+      "performance-test.yml": false,
+      "security-scan.yml": false,
+      "verification_pipeline.yml": false
+    }
+  },
+  "source_type": "STATIC_SOURCE_CODE",
+  "summary": "Scanned files for active secrets (found: 9). .env ignored: True. CI workflows least-privilege: False.",
+  "timestamp": "2026-09-20T18:19:20.636932+00:00"
+}

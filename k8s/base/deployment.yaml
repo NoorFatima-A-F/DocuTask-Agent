@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: verification-platform
+  labels:
+    app.kubernetes.io/name: verification-platform
+    app.kubernetes.io/part-of: docutask-agent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: verification-platform
+  template:
+    metadata:
+      labels:
+        app: verification-platform
+    spec:
+      containers:
+        - name: verification-engine
+          image: docutask/verification-platform:1.0.0
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "2000m"
+              memory: "2Gi"

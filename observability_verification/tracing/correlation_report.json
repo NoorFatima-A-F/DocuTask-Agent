@@ -1,0 +1,8 @@
+{
+  "report_title": "Trace, Log & Metric Bidirectional Correlation Report",
+  "trace_to_log_linking_verified": true,
+  "metric_to_trace_jump_verified": true,
+  "red_metrics_correlated": true,
+  "service_dependency_map_generated": true,
+  "correlation_score_pct": 100.0
+}

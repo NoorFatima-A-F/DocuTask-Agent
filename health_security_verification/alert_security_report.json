@@ -1,0 +1,45 @@
+{
+  "report_title": "Alert Notification Sanitization & Channel Security Report",
+  "total_channels_audited": 4,
+  "secure_channels_count": 4,
+  "channel_audits": [
+    {
+      "channel_name": "PagerDuty_Critical_Incidents",
+      "encryption_in_transit": "TLS_1_3",
+      "payload_sanitized": true,
+      "contains_runbook_link": true,
+      "contains_sensitive_data": false,
+      "sample_alert_title": "[CRITICAL] DocuTask Database Connection Pool Saturation (>90%)",
+      "sanitized_alert_body": "Service: docutask-backend | Severity: P1 | Runbook: https://ops.docutask.internal/runbooks/db-pool-scaling | Error Code: ERR_POOL_EXHAUSTION"
+    },
+    {
+      "channel_name": "Slack_Ops_Alerts",
+      "encryption_in_transit": "TLS_1_3",
+      "payload_sanitized": true,
+      "contains_runbook_link": true,
+      "contains_sensitive_data": false,
+      "sample_alert_title": "[WARNING] OCR Worker Queue Latency Spike",
+      "sanitized_alert_body": "Queue: ocr-processing-queue | Depth: 450 items | Auto-scaling triggered | Runbook: https://ops.docutask.internal/runbooks/queue-depth"
+    },
+    {
+      "channel_name": "Enterprise_SIEM_Webhook",
+      "encryption_in_transit": "mTLS_TLS_1_3",
+      "payload_sanitized": true,
+      "contains_runbook_link": true,
+      "contains_sensitive_data": false,
+      "sample_alert_title": "[SECURITY] Repeated Health Probe Unauthorized Access Attempt",
+      "sanitized_alert_body": "Source: Anonymized IP hash 7a8f... | Target: /diagnostics | Response: 401 Unauthorized | Event ID: EVT_SEC_PROBE_401"
+    },
+    {
+      "channel_name": "Email_OnCall_Escalation",
+      "encryption_in_transit": "STARTTLS_TLS_1_3",
+      "payload_sanitized": true,
+      "contains_runbook_link": true,
+      "contains_sensitive_data": false,
+      "sample_alert_title": "[INCIDENT ESCALATION] AI Inference Latency SLA Degraded",
+      "sanitized_alert_body": "Latency p99 exceeded 2500ms target. Impacted Subsystem: Inference Pipeline. Runbook: https://ops.docutask.internal/runbooks/llm-scaling"
+    }
+  ],
+  "alert_payload_privacy_enforced": true,
+  "runbook_safe_references_only": true
+}

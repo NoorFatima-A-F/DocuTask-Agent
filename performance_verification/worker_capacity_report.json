@@ -1,0 +1,59 @@
+{
+  "verifier_id": "VERIFY-3J.7.6-WORKER-CAPACITY",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Single Worker Throughput Validated (25 docs/min)",
+      "passed": true,
+      "details": "Single worker processes 25.0 documents/min",
+      "metrics": {
+        "throughput_dpm": 25.0
+      }
+    },
+    {
+      "name": "Required Workers Calculated (40 for 1000 docs/min)",
+      "passed": true,
+      "details": "Required: 40 workers for 1000.0 docs/min load",
+      "metrics": {
+        "required": 40,
+        "load_dpm": 1000.0
+      }
+    },
+    {
+      "name": "Worker Surplus Available (+10)",
+      "passed": true,
+      "details": "Current: 50 workers, surplus: 10 — capacity headroom available",
+      "metrics": {
+        "current": 50,
+        "surplus": 10
+      }
+    },
+    {
+      "name": "Horizontal Scaling Strategy Validated",
+      "passed": true,
+      "details": "Linear throughput scaling confirmed: doubling workers doubles throughput up to 80 workers",
+      "metrics": {
+        "max_effective_workers": 80,
+        "scaling_type": "horizontal"
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:37:02.167150+00:00",
+  "execution_timestamp": "2026-09-16T18:37:02.167158+00:00",
+  "summary": "",
+  "report_title": "Worker Capacity Modeling Report",
+  "capacity_model": {
+    "single_worker_throughput_dpm": 25.0,
+    "expected_load_dpm": 1000.0,
+    "required_workers": 40,
+    "current_workers": 50,
+    "surplus_deficit": 10,
+    "scaling_recommendation": "Current worker pool (50) exceeds required (40) by 10 workers — healthy surplus for burst absorption"
+  },
+  "horizontal_scaling_validated": true,
+  "optimal_worker_count": 40,
+  "max_effective_workers": 80
+}

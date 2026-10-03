@@ -1,0 +1,64 @@
+{
+  "report_title": "Chaos Testing Architecture & Controller Framework Design Report",
+  "controller_status": "INITIALIZED",
+  "isolation_mode": "STAGING_SANDBOX",
+  "components": [
+    {
+      "name": "ChaosController",
+      "subsystem": "chaos/controller",
+      "status": "READY",
+      "capabilities": [
+        "SCHEDULE_EXPERIMENT",
+        "INJECT_FAULT",
+        "MONITOR_SIGNALS",
+        "TRIGGER_ROLLBACK"
+      ]
+    },
+    {
+      "name": "FailureInjectorEngine",
+      "subsystem": "chaos/injectors",
+      "status": "READY",
+      "capabilities": [
+        "NETWORK_LATENCY",
+        "PROCESS_KILL",
+        "CONNECTION_DROP",
+        "RESOURCE_PRESSURE",
+        "API_ERROR_INJECTION"
+      ]
+    },
+    {
+      "name": "HealthSignalValidator",
+      "subsystem": "chaos/validators",
+      "status": "READY",
+      "capabilities": [
+        "LIVENESS_CHECK",
+        "READINESS_CHECK",
+        "SLO_EVALUATION",
+        "ALERT_TRIGGER_CHECK"
+      ]
+    },
+    {
+      "name": "AutomatedRollbackManager",
+      "subsystem": "chaos/recovery",
+      "status": "READY",
+      "capabilities": [
+        "CONTAINER_RESTART",
+        "STATE_RESTORE",
+        "DB_RECONNECT",
+        "QUEUE_DRAIN"
+      ]
+    },
+    {
+      "name": "ChaosEvidenceGenerator",
+      "subsystem": "chaos/evidence",
+      "status": "READY",
+      "capabilities": [
+        "JSON_MANIFEST_GENERATION",
+        "SHA256_HASHING",
+        "RELIABILITY_CERTIFICATION"
+      ]
+    }
+  ],
+  "hooks_registered": 12,
+  "architecture_valid": true
+}

@@ -1,0 +1,44 @@
+{
+  "total_workflows_evaluated": 3,
+  "workflows": [
+    {
+      "failure": "worker_crash",
+      "component": "Celery Document Worker",
+      "detection_mechanism": "Prometheus Worker Heartbeat Missed",
+      "detection_time_sec": 5.0,
+      "recovery_controller": "Kubernetes Replica Controller & Celery Supervisor",
+      "recovery_action": "Auto-spawn new worker pod & re-dispatch unacked Redis tasks",
+      "recovery_time_sec": 28.0,
+      "data_loss": false,
+      "status": "PASS"
+    },
+    {
+      "failure": "api_gateway_failure",
+      "component": "FastAPI Core Gateway",
+      "detection_mechanism": "Envoy Ingress TCP Liveness Failure",
+      "detection_time_sec": 2.0,
+      "recovery_controller": "Ingress Load Balancer Active Health Prober",
+      "recovery_action": "Drain active sessions & redirect 100% traffic to standby gateway pod",
+      "recovery_time_sec": 6.0,
+      "data_loss": false,
+      "status": "PASS"
+    },
+    {
+      "failure": "database_connection_block",
+      "component": "PostgreSQL Transaction Pool",
+      "detection_mechanism": "SQLAlchemy Pool Pre-Ping Timeout",
+      "detection_time_sec": 3.0,
+      "recovery_controller": "Resilience Circuit Breaker & PgBouncer Auto-Refresh",
+      "recovery_action": "Trip circuit breaker to fallback read replicas & reset write connection pool",
+      "recovery_time_sec": 18.0,
+      "data_loss": false,
+      "status": "PASS"
+    }
+  ],
+  "average_detection_seconds": 3.33,
+  "average_recovery_seconds": 17.33,
+  "zero_data_loss_verified": true,
+  "all_workflows_passed": true,
+  "automation_verdict": "FULL_AUTOMATION_PROVEN",
+  "timestamp_utc": "2026-09-15T08:10:57.894855+00:00"
+}

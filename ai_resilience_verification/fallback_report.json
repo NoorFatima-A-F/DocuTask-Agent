@@ -1,0 +1,14 @@
+{
+  "scenario": "fallback_verification",
+  "primary_provider": "gemini-2.5-flash",
+  "secondary_provider": "claude-3-5-sonnet",
+  "tertiary_provider": "vllm-llama-3-70b-local",
+  "total_failover_tests": 30,
+  "successful_failovers": 30,
+  "average_failover_latency_ms": 141.6,
+  "max_failover_latency_ms": 195.0,
+  "context_preservation_score": 100.0,
+  "output_schema_consistency_pct": 100.0,
+  "audit_event_logged": true,
+  "status": "PASS"
+}

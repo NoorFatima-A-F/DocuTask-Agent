@@ -1,0 +1,8 @@
+{
+  "ioc_ops_sec": 2101016.8759411997,
+  "dag_ops_sec": 2546.28380092244,
+  "scheduler_ops_sec": 35982.40604616662,
+  "audit_ops_sec": 23227.84331303029,
+  "context_ops_sec": 33731.2154952636,
+  "boot_duration_ms": 0.9957000147551298
+}

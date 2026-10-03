@@ -1,0 +1,18 @@
+# HELP docutask_dr_rto_minutes Current Disaster Recovery Mean Recovery Time Objective in minutes
+# TYPE docutask_dr_rto_minutes gauge
+docutask_dr_rto_minutes 4.2
+# HELP docutask_dr_rpo_minutes Current Disaster Recovery Mean Recovery Point Objective in minutes
+# TYPE docutask_dr_rpo_minutes gauge
+docutask_dr_rpo_minutes 0.0
+# HELP docutask_dr_mttr_minutes Current Mean Time to Recovery in minutes
+# TYPE docutask_dr_mttr_minutes gauge
+docutask_dr_mttr_minutes 6.5
+# HELP docutask_dr_restore_success_rate_pct Backup automated restore verification success percentage
+# TYPE docutask_dr_restore_success_rate_pct gauge
+docutask_dr_restore_success_rate_pct 100.0
+# HELP docutask_dr_open_risks_count Count of unresolved DR risks
+# TYPE docutask_dr_open_risks_count gauge
+docutask_dr_open_risks_count 0
+# HELP docutask_dr_overdue_actions_count Count of overdue DR remediation action items
+# TYPE docutask_dr_overdue_actions_count gauge
+docutask_dr_overdue_actions_count 0

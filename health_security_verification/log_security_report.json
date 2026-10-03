@@ -1,0 +1,54 @@
+{
+  "report_title": "Operational Log Sanitization & PII Protection Report",
+  "total_log_streams_audited": 4,
+  "sanitized_streams_count": 4,
+  "violations_detected": 0,
+  "log_samples": [
+    {
+      "log_sample_id": "LOG_SAMPLE_001",
+      "category": "auth_failure",
+      "raw_snippet": "Authentication failed for user john.doe@example.com with Bea...",
+      "sanitized_snippet": "Authentication failed for user [REDACTED_EMAIL] with Bearer [REDACTED_TOKEN]",
+      "redaction_state": "FULLY_REDACTED",
+      "redacted_patterns": [
+        "Bearer [REDACTED_TOKEN]",
+        "[REDACTED_EMAIL]"
+      ],
+      "clean": true
+    },
+    {
+      "log_sample_id": "LOG_SAMPLE_002",
+      "category": "db_error",
+      "raw_snippet": "Database connection pool exhausted connecting to postgresql:...",
+      "sanitized_snippet": "Database connection pool exhausted connecting to postgresql://docu_user:***REDACTED***@10.0.1.5:5432/docutask",
+      "redaction_state": "FULLY_REDACTED",
+      "redacted_patterns": [
+        "postgresql://docu_user:***REDACTED***@"
+      ],
+      "clean": true
+    },
+    {
+      "log_sample_id": "LOG_SAMPLE_003",
+      "category": "health_probe",
+      "raw_snippet": "Health probe /live evaluated 200 OK across cluster nodes wit...",
+      "sanitized_snippet": "Health probe /live evaluated 200 OK across cluster nodes without incident.",
+      "redaction_state": "MASKED",
+      "redacted_patterns": [],
+      "clean": true
+    },
+    {
+      "log_sample_id": "LOG_SAMPLE_004",
+      "category": "llm_inference",
+      "raw_snippet": "LLM inference called for client CNIC 35201-1234567-1 with ap...",
+      "sanitized_snippet": "LLM inference called for client CNIC [REDACTED_CNIC] with api_key=[REDACTED_API_KEY]",
+      "redaction_state": "FULLY_REDACTED",
+      "redacted_patterns": [
+        "[REDACTED_CNIC]",
+        "api_key=[REDACTED_API_KEY]"
+      ],
+      "clean": true
+    }
+  ],
+  "zero_secret_leakage_in_logs": true,
+  "automated_masking_verified": true
+}

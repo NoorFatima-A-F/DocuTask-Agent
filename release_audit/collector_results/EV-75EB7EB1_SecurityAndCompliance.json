@@ -1,0 +1,39 @@
+{
+  "artifact_paths": [],
+  "category": "SecurityAndCompliance",
+  "classification": "VERIFIED_BY_STATIC_ANALYSIS",
+  "collector": "SecurityCollector",
+  "command": null,
+  "confidence": "HIGH",
+  "content_hash": "46da22c2f7f14238c8050c33e09824e654d8aacf201fcaf47e5720b0caabeb60",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-75EB7EB1",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "env_ignored_in_gitignore": true,
+    "secrets_detected": [],
+    "secrets_detected_count": 0,
+    "workflow_least_privilege": {
+      "audit-authority.yml": false,
+      "audit.yml": true,
+      "certification.yml": true,
+      "chaos-test.yml": true,
+      "ci.yml": true,
+      "codeql.yml": true,
+      "dependency-review.yml": true,
+      "deployment-verification.yml": true,
+      "infrastructure-validation.yml": true,
+      "performance-test.yml": true,
+      "release.yml": true,
+      "security-scan.yml": true,
+      "security.yml": true,
+      "trust-monitor.yml": false,
+      "verification_pipeline.yml": true
+    }
+  },
+  "source_type": "STATIC_SOURCE_CODE",
+  "summary": "Scanned production codebase for active credentials (found: 0). .env ignored: True. CI workflows least-privilege: False.",
+  "timestamp": "2026-10-03T16:31:19.462586+00:00"
+}

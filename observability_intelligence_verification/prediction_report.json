@@ -1,0 +1,48 @@
+{
+  "report_title": "Early Failure Prediction Verification Report",
+  "predictions": [
+    {
+      "prediction_id": "PRED-FAIL-001",
+      "target_component": "async_document_worker_node_pool",
+      "predicted_failure_type": "Worker Pod OOM Exhaustion (Memory Leak)",
+      "confidence": 0.92,
+      "time_to_impact_minutes": 45,
+      "signals_observed": [
+        "Monotonic linear memory slope (+14.2 MB/min)",
+        "Garbage collector frequency doubled with declining reclamation efficiency",
+        "Unreclaimed PDF raster image byte arrays in worker heap"
+      ],
+      "preventive_action_recommended": "Trigger rolling container restart and scale memory limit to 2Gi",
+      "verified": true
+    },
+    {
+      "prediction_id": "PRED-FAIL-002",
+      "target_component": "redis_task_queue",
+      "predicted_failure_type": "Queue Buffer Saturation & Ingestion Drop",
+      "confidence": 0.89,
+      "time_to_impact_minutes": 60,
+      "signals_observed": [
+        "Queue enqueue rate (150 docs/s) exceeding dequeue processing rate (95 docs/s)",
+        "Projected queue depth threshold (10,000 items) breach in 58 minutes"
+      ],
+      "preventive_action_recommended": "Proactively scale async worker replicas from 2 to 6",
+      "verified": true
+    },
+    {
+      "prediction_id": "PRED-FAIL-003",
+      "target_component": "gemini_llm_gateway",
+      "predicted_failure_type": "Upstream Regional Quota Saturation",
+      "confidence": 0.93,
+      "time_to_impact_minutes": 30,
+      "signals_observed": [
+        "Tokens-per-minute consumption approaching 88% of regional quota limit",
+        "Gradual 429 retry backoff frequency climbing by 15% per 10m"
+      ],
+      "preventive_action_recommended": "Enable proactive multi-region load balancing with secondary GCP zone",
+      "verified": true
+    }
+  ],
+  "average_prediction_confidence": 0.91,
+  "early_warning_lead_time_min": 45,
+  "status": "PASS"
+}

@@ -1,0 +1,109 @@
+{
+  "report_title": "Enterprise Metric Catalog & Prometheus Exporter Inventory Report",
+  "total_metrics_registered": 17,
+  "metrics": [
+    {
+      "metric_name": "http_request_duration_seconds",
+      "metric_type": "HISTOGRAM",
+      "category": "GOLDEN_SIGNAL",
+      "description": "API latency distribution"
+    },
+    {
+      "metric_name": "http_requests_total",
+      "metric_type": "COUNTER",
+      "category": "GOLDEN_SIGNAL",
+      "description": "Total incoming HTTP requests"
+    },
+    {
+      "metric_name": "http_requests_failed_total",
+      "metric_type": "COUNTER",
+      "category": "GOLDEN_SIGNAL",
+      "description": "Total failed HTTP requests"
+    },
+    {
+      "metric_name": "system_cpu_usage_pct",
+      "metric_type": "GAUGE",
+      "category": "GOLDEN_SIGNAL",
+      "description": "Host/container CPU utilization"
+    },
+    {
+      "metric_name": "system_memory_usage_pct",
+      "metric_type": "GAUGE",
+      "category": "GOLDEN_SIGNAL",
+      "description": "Host/container Memory utilization"
+    },
+    {
+      "metric_name": "documents_received_total",
+      "metric_type": "COUNTER",
+      "category": "APPLICATION",
+      "description": "Total documents ingested"
+    },
+    {
+      "metric_name": "documents_completed_total",
+      "metric_type": "COUNTER",
+      "category": "APPLICATION",
+      "description": "Total documents processed"
+    },
+    {
+      "metric_name": "documents_failed_total",
+      "metric_type": "COUNTER",
+      "category": "APPLICATION",
+      "description": "Total document processing failures"
+    },
+    {
+      "metric_name": "ocr_duration_seconds",
+      "metric_type": "HISTOGRAM",
+      "category": "APPLICATION",
+      "description": "OCR processing latency"
+    },
+    {
+      "metric_name": "ocr_failure_total",
+      "metric_type": "COUNTER",
+      "category": "APPLICATION",
+      "description": "OCR extraction failures"
+    },
+    {
+      "metric_name": "llm_requests_total",
+      "metric_type": "COUNTER",
+      "category": "APPLICATION",
+      "description": "Total LLM model inferences"
+    },
+    {
+      "metric_name": "llm_latency_seconds",
+      "metric_type": "HISTOGRAM",
+      "category": "APPLICATION",
+      "description": "LLM provider latency"
+    },
+    {
+      "metric_name": "token_usage_total",
+      "metric_type": "COUNTER",
+      "category": "APPLICATION",
+      "description": "Total tokens consumed (prompt + completion)"
+    },
+    {
+      "metric_name": "queue_depth",
+      "metric_type": "GAUGE",
+      "category": "APPLICATION",
+      "description": "Current pending tasks in broker"
+    },
+    {
+      "metric_name": "job_wait_time_seconds",
+      "metric_type": "HISTOGRAM",
+      "category": "APPLICATION",
+      "description": "Task queue dwell duration"
+    },
+    {
+      "metric_name": "db_connections_active",
+      "metric_type": "GAUGE",
+      "category": "INFRASTRUCTURE",
+      "description": "PostgreSQL connection pool utilization"
+    },
+    {
+      "metric_name": "redis_memory_used_bytes",
+      "metric_type": "GAUGE",
+      "category": "INFRASTRUCTURE",
+      "description": "Redis memory footprint"
+    }
+  ],
+  "prometheus_scraping_active": true
+}

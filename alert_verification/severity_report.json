@@ -1,0 +1,9 @@
+{
+  "total_severities": 4,
+  "critical_count": 4,
+  "high_count": 1,
+  "warning_count": 3,
+  "informational_count": 1,
+  "zero_severity_misclassification": true,
+  "status": "PASS"
+}

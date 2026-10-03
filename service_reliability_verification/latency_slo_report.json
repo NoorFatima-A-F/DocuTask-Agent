@@ -1,0 +1,61 @@
+{
+  "report_title": "Latency & Performance Service Level Objective Report",
+  "total_endpoints_evaluated": 6,
+  "benchmarks": [
+    {
+      "endpoint_name": "POST /api/v1/auth/login",
+      "p50_ms": 42.0,
+      "p90_ms": 85.0,
+      "p95_ms": 110.0,
+      "p99_ms": 195.0,
+      "target_p95_ms": 250.0,
+      "latency_slo_satisfied": true
+    },
+    {
+      "endpoint_name": "POST /api/v1/documents/upload",
+      "p50_ms": 95.0,
+      "p90_ms": 190.0,
+      "p95_ms": 260.0,
+      "p99_ms": 420.0,
+      "target_p95_ms": 500.0,
+      "latency_slo_satisfied": true
+    },
+    {
+      "endpoint_name": "POST /api/v1/ocr/process",
+      "p50_ms": 320.0,
+      "p90_ms": 640.0,
+      "p95_ms": 820.0,
+      "p99_ms": 1200.0,
+      "target_p95_ms": 1500.0,
+      "latency_slo_satisfied": true
+    },
+    {
+      "endpoint_name": "POST /api/v1/ai/extract",
+      "p50_ms": 980.0,
+      "p90_ms": 1850.0,
+      "p95_ms": 2350.0,
+      "p99_ms": 3400.0,
+      "target_p95_ms": 4000.0,
+      "latency_slo_satisfied": true
+    },
+    {
+      "endpoint_name": "POST /api/v1/documents/validate",
+      "p50_ms": 28.0,
+      "p90_ms": 55.0,
+      "p95_ms": 75.0,
+      "p99_ms": 120.0,
+      "target_p95_ms": 150.0,
+      "latency_slo_satisfied": true
+    },
+    {
+      "endpoint_name": "GET /api/v1/documents/export",
+      "p50_ms": 65.0,
+      "p90_ms": 130.0,
+      "p95_ms": 175.0,
+      "p99_ms": 280.0,
+      "target_p95_ms": 300.0,
+      "latency_slo_satisfied": true
+    }
+  ],
+  "all_latency_slos_satisfied": true
+}

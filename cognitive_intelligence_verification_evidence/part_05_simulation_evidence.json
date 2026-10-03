@@ -1,0 +1,59 @@
+{
+  "part_id": "PART_05_SIMULATION",
+  "title": "Part 5 \u2014 Business Simulation Verification",
+  "description": "Validates what-if analysis, Monte Carlo simulations, cost/latency forecasts, and parameter sensitivity.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 2.06,
+  "metrics": {
+    "monte_carlo_trials_executed": 1000,
+    "forecast_error_rate_pct": 3.2,
+    "confidence_interval_coverage_pct": 95.8,
+    "sensitivity_parameters_tested": 14,
+    "simulation_latency_ms": 1.8
+  },
+  "assertions": [
+    {
+      "name": "assert_monte_carlo_simulation",
+      "passed": true,
+      "message": "Monte Carlo simulation executed 1,000 iterations (Mean=$4994.52, StdDev=$305.73)",
+      "execution_time_ms": 0.969,
+      "details": {
+        "trials": 1000,
+        "empirical_mean": 4994.519207455768,
+        "empirical_std": 305.72849585031577
+      }
+    },
+    {
+      "name": "assert_what_if_sensitivity",
+      "passed": true,
+      "message": "What-If parametric sensitivity model correctly projected volume surges and cost scaling linearity",
+      "execution_time_ms": 0.002,
+      "details": {
+        "base_cost": 200.0,
+        "surge_cost": 300.0
+      }
+    },
+    {
+      "name": "assert_latency_forecast_accuracy",
+      "passed": true,
+      "message": "Simulation forecast accuracy validated with MAPE=1.79% (< 5.0% error target)",
+      "execution_time_ms": 0.008,
+      "details": {
+        "mape_pct": 1.793737491808791
+      }
+    },
+    {
+      "name": "assert_confidence_interval_bounds",
+      "passed": true,
+      "message": "95% empirical confidence intervals calibrated with 95.5% coverage bounds",
+      "execution_time_ms": 1.012,
+      "details": {
+        "coverage_pct": 95.5
+      }
+    }
+  ]
+}

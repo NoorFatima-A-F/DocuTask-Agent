@@ -1,0 +1,39 @@
+{
+  "report_title": "Chaos Reliability Validation Report",
+  "total_chaos_tests": 4,
+  "scenarios": [
+    {
+      "scenario_name": "PostgreSQL Database Connection Drop",
+      "injected_fault": "Simulated transient TCP socket termination on database connection pool.",
+      "detection_time_ms": 180.0,
+      "recovery_time_seconds": 3.2,
+      "impact_contained": true,
+      "resilience_validated": true
+    },
+    {
+      "scenario_name": "Celery Worker Process Abrupt Termination",
+      "injected_fault": "Sent SIGKILL to 2 active Celery worker subprocesses during PDF rasterization.",
+      "detection_time_ms": 250.0,
+      "recovery_time_seconds": 2.1,
+      "impact_contained": true,
+      "resilience_validated": true
+    },
+    {
+      "scenario_name": "Gemini AI Provider Outage Simulation",
+      "injected_fault": "Injected 100% HTTP 503 Service Unavailable responses for Gemini endpoint.",
+      "detection_time_ms": 90.0,
+      "recovery_time_seconds": 0.5,
+      "impact_contained": true,
+      "resilience_validated": true
+    },
+    {
+      "scenario_name": "Synthetic Memory Pressure Injection",
+      "injected_fault": "Allocated 90% container memory limit to evaluate proactive warning and task shedding.",
+      "detection_time_ms": 320.0,
+      "recovery_time_seconds": 4.8,
+      "impact_contained": true,
+      "resilience_validated": true
+    }
+  ],
+  "all_chaos_tests_passed": true
+}

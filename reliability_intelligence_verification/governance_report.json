@@ -1,0 +1,31 @@
+{
+  "report_title": "Automated Reliability Governance Report",
+  "governance_rules": [
+    {
+      "rule_name": "CI/CD Production Deployment Gate",
+      "evaluated_condition": "health_score (99.0) >= 85.0 AND error_budget_exhausted == False",
+      "triggered": false,
+      "action": "allow_deployment",
+      "reason": "Reliability health score and error budgets meet enterprise deployment standards."
+    },
+    {
+      "rule_name": "Proactive Queue & Worker Autoscale Trigger",
+      "evaluated_condition": "queue_backlog_rate > 100 items/min OR p95_latency > 300ms",
+      "triggered": true,
+      "action": "trigger_autoscale",
+      "reason": "Auto-scaling policy calibrated for high-throughput batch bursts."
+    },
+    {
+      "rule_name": "Off-Peak Reliability Maintenance Schedule",
+      "evaluated_condition": "critical_unresolved_risks > 0 OR database_fragmentation > 30%",
+      "triggered": false,
+      "action": "allow_deployment",
+      "reason": "All critical risks mitigated; no emergency maintenance window required."
+    }
+  ],
+  "deployment_gate_approved": true,
+  "active_governance_actions": [
+    "allow_deployment",
+    "trigger_autoscale"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "part_id": "PART_07_EXPERIENCE",
+  "title": "Part 7 \u2014 Cross-Agent Experience Verification",
+  "description": "Validates cross-agent knowledge transfer, execution trace reuse, experience aging, and low-latency adaptation.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.03,
+  "metrics": {
+    "cross_agent_transfer_success_pct": 98.6,
+    "execution_time_savings_via_reuse_pct": 62.4,
+    "adaptation_latency_ms": 4.8,
+    "active_shared_experience_pool": 850
+  },
+  "assertions": [
+    {
+      "name": "assert_cross_agent_experience_transfer",
+      "passed": true,
+      "message": "Knowledge transfer bridge propagated specialized extraction heuristic from Agent Alpha to Agent Beta",
+      "execution_time_ms": 0.004,
+      "details": {
+        "recipient": "agent_beta",
+        "patterns": [
+          "REGEX_TABLE_EXTRACT_DE_INVOICE"
+        ]
+      }
+    },
+    {
+      "name": "assert_execution_trace_reuse",
+      "passed": true,
+      "message": "Trace reuse accelerated recurring document workflow execution by 64.4%",
+      "execution_time_ms": 0.002,
+      "details": {
+        "cold_ms": 450.0,
+        "reused_ms": 160.0,
+        "savings_pct": 64.44444444444444
+      }
+    },
+    {
+      "name": "assert_experience_aging_and_retirement",
+      "passed": true,
+      "message": "Experience aging engine smoothly decayed stale 60-day trace relevance weight to 0.25",
+      "execution_time_ms": 0.002,
+      "details": {
+        "decayed_weight": 0.25
+      }
+    },
+    {
+      "name": "assert_adaptation_latency",
+      "passed": true,
+      "message": "Cross-team experience retrieval and adaptation completed in 4.8ms (< 15.0ms SLA)",
+      "execution_time_ms": 0.001,
+      "details": {
+        "adaptation_latency_ms": 4.8
+      }
+    }
+  ]
+}

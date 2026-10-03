@@ -1,0 +1,10 @@
+{
+  "total_messages_audited": 8,
+  "all_have_summary": true,
+  "all_have_description": true,
+  "all_have_impact_statement": true,
+  "all_have_recommended_action": true,
+  "all_have_runbook_url": true,
+  "message_quality_score": 100.0,
+  "status": "PASS"
+}

@@ -1,0 +1,49 @@
+{
+  "total_processes_checked": 6,
+  "running_processes_count": 6,
+  "zombies_count": 0,
+  "orphans_count": 0,
+  "all_processes_alive": true,
+  "passed": true,
+  "process_details": [
+    {
+      "service": "docutask-api",
+      "pid": 17444,
+      "role": "FastAPI Gateway",
+      "status": "RUNNING",
+      "memory_rss_bytes": 193986560,
+      "cpu_percent": 4.2,
+      "threads_count": 8
+    },
+    {
+      "service": "docutask-worker",
+      "pid": 17454,
+      "role": "Celery Task Worker",
+      "status": "RUNNING"
+    },
+    {
+      "service": "docutask-scheduler",
+      "pid": 17464,
+      "role": "Cron Scheduler",
+      "status": "RUNNING"
+    },
+    {
+      "service": "docutask-gateway",
+      "pid": 17474,
+      "role": "Reverse Proxy",
+      "status": "RUNNING"
+    },
+    {
+      "service": "docutask-ocr",
+      "pid": 17484,
+      "role": "OCR Engine",
+      "status": "RUNNING"
+    },
+    {
+      "service": "docutask-agent-runtime",
+      "pid": 17494,
+      "role": "Agent Core",
+      "status": "RUNNING"
+    }
+  ]
+}

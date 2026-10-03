@@ -1,0 +1,69 @@
+{
+  "report_title": "Operational Approval Workflow & Policy Enforcement Report",
+  "total_workflows_evaluated": 4,
+  "workflows": [
+    {
+      "workflow_id": "WF-APP-001",
+      "change_id": "CHG-2026-0891",
+      "risk_level": "LOW",
+      "required_approvers": [
+        "automated_ci_preflight"
+      ],
+      "approvals_obtained": [
+        "automated_ci_preflight_passed"
+      ],
+      "policy_rule_enforced": "POLICY-AUTO-APPROVE-LOW-RISK",
+      "status": "APPROVED",
+      "post_incident_review_required": false
+    },
+    {
+      "workflow_id": "WF-APP-002",
+      "change_id": "CHG-2026-0892",
+      "risk_level": "MODERATE",
+      "required_approvers": [
+        "ml_peer_reviewer",
+        "mlops_tech_lead"
+      ],
+      "approvals_obtained": [
+        "ml_peer_reviewer",
+        "mlops_tech_lead"
+      ],
+      "policy_rule_enforced": "POLICY-DUAL-PEER-REVIEW-MODERATE",
+      "status": "APPROVED",
+      "post_incident_review_required": false
+    },
+    {
+      "workflow_id": "WF-APP-003",
+      "change_id": "CHG-2026-0893",
+      "risk_level": "HIGH",
+      "required_approvers": [
+        "lead_dba",
+        "lead_sre",
+        "security_architect"
+      ],
+      "approvals_obtained": [
+        "lead_dba",
+        "lead_sre",
+        "security_architect"
+      ],
+      "policy_rule_enforced": "POLICY-TRIPLE-STAKEHOLDER-HIGH-RISK",
+      "status": "APPROVED",
+      "post_incident_review_required": false
+    },
+    {
+      "workflow_id": "WF-APP-004",
+      "change_id": "CHG-2026-0894",
+      "risk_level": "EMERGENCY",
+      "required_approvers": [
+        "incident_commander"
+      ],
+      "approvals_obtained": [
+        "incident_commander_sre_primary"
+      ],
+      "policy_rule_enforced": "POLICY-EMERGENCY-EXPEDITED-WITH-PIR",
+      "status": "APPROVED",
+      "post_incident_review_required": true
+    }
+  ],
+  "policy_compliance_pct": 100.0
+}

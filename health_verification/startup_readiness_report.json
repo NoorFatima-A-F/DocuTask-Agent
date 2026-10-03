@@ -1,0 +1,17 @@
+{
+  "startup_steps_executed": 7,
+  "all_steps_successful": true,
+  "pre_initialization_traffic_blocked": true,
+  "time_to_ready_seconds": 2.35,
+  "ttr_threshold_seconds": 5.0,
+  "startup_sequence": [
+    "Container started",
+    "Application loaded",
+    "Configuration validated",
+    "Database connected",
+    "Queue connected",
+    "Workers discovered",
+    "AI dependencies checked & READY emitted"
+  ],
+  "status": "PASS"
+}

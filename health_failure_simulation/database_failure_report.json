@@ -1,0 +1,24 @@
+{
+  "report_title": "Database Severance & Connection Pool Fault Simulation Report",
+  "scenario_id": "DB_FAILURE_001",
+  "target_database": "PostgreSQL Primary (Aurora)",
+  "pre_injection_state": {
+    "database": "healthy",
+    "ready": true
+  },
+  "during_injection_state": {
+    "database": "failed",
+    "ready": false
+  },
+  "post_recovery_state": {
+    "database": "healthy",
+    "ready": true
+  },
+  "api_gateway_alive": true,
+  "readiness_transition_correct": true,
+  "data_corruption_detected": false,
+  "active_connections_drained": true,
+  "time_to_detect_ms": 420.0,
+  "time_to_recover_ms": 1250.0,
+  "simulation_passed": true
+}

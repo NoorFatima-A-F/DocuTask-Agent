@@ -1,0 +1,8 @@
+{
+  "mttd_seconds": 4.5,
+  "p95_detection_delay_seconds": 8.2,
+  "max_detection_delay_seconds": 12.0,
+  "target_detection_sla_seconds": 30.0,
+  "detection_sla_met": true,
+  "status": "PASS"
+}

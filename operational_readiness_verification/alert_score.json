@@ -1,0 +1,8 @@
+{
+  "precision_rate": 98.5,
+  "recall_rate": 100.0,
+  "auto_resolution_rate": 100.0,
+  "false_positive_rate": 1.5,
+  "score": 99.32,
+  "passed": true
+}

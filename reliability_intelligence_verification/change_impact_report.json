@@ -1,0 +1,48 @@
+{
+  "total_releases_analyzed": 3,
+  "regressions_detected": 0,
+  "releases": [
+    {
+      "release_version": "v2.3.0",
+      "deployment_timestamp": "2026-08-15T10:00:00Z",
+      "pre_deploy_availability_pct": 99.8,
+      "post_deploy_availability_pct": 99.88,
+      "pre_deploy_error_rate_pct": 0.08,
+      "post_deploy_error_rate_pct": 0.03,
+      "pre_deploy_p95_latency_ms": 340.0,
+      "post_deploy_p95_latency_ms": 310.0,
+      "regression_detected": false
+    },
+    {
+      "release_version": "v2.4.0",
+      "deployment_timestamp": "2026-09-01T14:30:00Z",
+      "pre_deploy_availability_pct": 99.88,
+      "post_deploy_availability_pct": 99.85,
+      "pre_deploy_error_rate_pct": 0.03,
+      "post_deploy_error_rate_pct": 0.04,
+      "pre_deploy_p95_latency_ms": 310.0,
+      "post_deploy_p95_latency_ms": 320.0,
+      "regression_detected": false
+    },
+    {
+      "release_version": "v2.5.0",
+      "deployment_timestamp": "2026-09-12T08:15:00Z",
+      "pre_deploy_availability_pct": 99.85,
+      "post_deploy_availability_pct": 99.92,
+      "pre_deploy_error_rate_pct": 0.04,
+      "post_deploy_error_rate_pct": 0.02,
+      "pre_deploy_p95_latency_ms": 320.0,
+      "post_deploy_p95_latency_ms": 295.0,
+      "regression_detected": false
+    }
+  ],
+  "passed": true,
+  "details": {
+    "regression_thresholds": {
+      "max_allowed_availability_drop_pct": 0.2,
+      "max_allowed_error_rate_increase_pct": 0.5,
+      "max_allowed_latency_increase_pct": 15.0
+    },
+    "canary_evaluation_active": true
+  }
+}

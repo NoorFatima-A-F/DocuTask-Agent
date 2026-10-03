@@ -1,0 +1,43 @@
+{
+  "report_title": "Operational Decision Support & Strategic Inquiries Report",
+  "total_inquiries_resolved": 3,
+  "inquiries": [
+    {
+      "inquiry_id": "DEC-2026-001",
+      "operational_question": "Is additional OCR worker infrastructure provisioning required for upcoming quarter?",
+      "evidence_telemetry": [
+        "OCR worker utilization averaged 50% over last 30 days.",
+        "90-day capacity forecast predicts max peak utilization of 72%.",
+        "P95 OCR queue dwell time remains under 45ms."
+      ],
+      "confidence_level_pct": 99.2,
+      "recommended_decision": "Maintain current worker provisioning; defer hardware expansion to next budget cycle.",
+      "projected_impact": "Avoid $12,000 in premature cloud compute spend while sustaining < 50ms queue dwell times."
+    },
+    {
+      "inquiry_id": "DEC-2026-002",
+      "operational_question": "Are the current 99.9% availability and 500ms P95 latency SLO targets sustainable under projected traffic growth?",
+      "evidence_telemetry": [
+        "Measured availability over rolling 30 days is 99.98% (target: 99.90%).",
+        "P95 Ingress latency averaged 240ms (target: < 500ms).",
+        "Remaining 30-day error budget is 83.2% with 0.45x burn rate."
+      ],
+      "confidence_level_pct": 98.6,
+      "recommended_decision": "Sustain existing SLO targets; tighten internal SLO alert threshold to 99.95% without customer SLA change.",
+      "projected_impact": "Provides early operational buffer for engineering teams during major feature rollouts."
+    },
+    {
+      "inquiry_id": "DEC-2026-003",
+      "operational_question": "Is Gemini AI provider degradation occurring or is document complexity increasing?",
+      "evidence_telemetry": [
+        "Raw API endpoint round-trip latency to Gemini is stable at 1950ms (+/- 3%).",
+        "Average token count per document increased by 14% due to new multi-page contract onboarding.",
+        "JSON schema extraction adherence remains rock-solid at 99.6%."
+      ],
+      "confidence_level_pct": 98.9,
+      "recommended_decision": "AI provider is fully healthy; document payload size increase is normal business expansion.",
+      "projected_impact": "Direct engineering focus to document chunking optimizations rather than vendor escalation."
+    }
+  ],
+  "decision_support_confidence_pct": 98.9
+}

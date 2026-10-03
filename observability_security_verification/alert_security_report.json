@@ -1,0 +1,47 @@
+{
+  "total_alert_templates_audited": 5,
+  "safe_templates_count": 5,
+  "audits": [
+    {
+      "alert_name": "DocuTaskDatabaseConnectionDown",
+      "contains_pii": false,
+      "contains_document_content": false,
+      "contains_credentials": false,
+      "has_diagnostic_context": true,
+      "is_safe": true
+    },
+    {
+      "alert_name": "DocuTaskWorkerPoolExhausted",
+      "contains_pii": false,
+      "contains_document_content": false,
+      "contains_credentials": false,
+      "has_diagnostic_context": true,
+      "is_safe": true
+    },
+    {
+      "alert_name": "DocuTaskDocumentExtractionFailed",
+      "contains_pii": false,
+      "contains_document_content": false,
+      "contains_credentials": false,
+      "has_diagnostic_context": true,
+      "is_safe": true
+    },
+    {
+      "alert_name": "DocuTaskGeminiProviderRateLimited",
+      "contains_pii": false,
+      "contains_document_content": false,
+      "contains_credentials": false,
+      "has_diagnostic_context": true,
+      "is_safe": true
+    },
+    {
+      "alert_name": "DocuTaskAPIServiceLatencySpike",
+      "contains_pii": false,
+      "contains_document_content": false,
+      "contains_credentials": false,
+      "has_diagnostic_context": true,
+      "is_safe": true
+    }
+  ],
+  "alert_privacy_passed": true
+}

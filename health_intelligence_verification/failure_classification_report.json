@@ -1,0 +1,57 @@
+{
+  "report_title": "Failure Classification Report",
+  "total_classified_events": 7,
+  "classifications": [
+    {
+      "event_id": "EVT-HEALTH-001",
+      "failure_type": "APPLICATION_FAILURE",
+      "component": "fastapi-core-gateway",
+      "confidence": 0.98,
+      "classified_correctly": true
+    },
+    {
+      "event_id": "EVT-HEALTH-002",
+      "failure_type": "DEPENDENCY_FAILURE",
+      "component": "postgres-database",
+      "confidence": 0.99,
+      "classified_correctly": true
+    },
+    {
+      "event_id": "EVT-HEALTH-003",
+      "failure_type": "APPLICATION_FAILURE",
+      "component": "ocr-raster-pipeline",
+      "confidence": 0.96,
+      "classified_correctly": true
+    },
+    {
+      "event_id": "EVT-HEALTH-004",
+      "failure_type": "INFRASTRUCTURE_FAILURE",
+      "component": "celery-worker-pool",
+      "confidence": 0.97,
+      "classified_correctly": true
+    },
+    {
+      "event_id": "EVT-HEALTH-005",
+      "failure_type": "INFRASTRUCTURE_FAILURE",
+      "component": "redis-task-queue",
+      "confidence": 0.95,
+      "classified_correctly": true
+    },
+    {
+      "event_id": "EVT-HEALTH-006",
+      "failure_type": "APPLICATION_FAILURE",
+      "component": "celery-worker-subprocess-3",
+      "confidence": 0.99,
+      "classified_correctly": true
+    },
+    {
+      "event_id": "EVT-HEALTH-007",
+      "failure_type": "AI_SYSTEM_FAILURE",
+      "component": "gemini-1.5-flash-client",
+      "confidence": 0.99,
+      "classified_correctly": true
+    }
+  ],
+  "classification_accuracy_pct": 100.0,
+  "classification_valid": true
+}

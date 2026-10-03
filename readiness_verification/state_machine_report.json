@@ -1,0 +1,51 @@
+{
+  "total_states": 6,
+  "states": [
+    "INITIALIZING",
+    "CHECKING_DEPENDENCIES",
+    "READY",
+    "DEGRADED",
+    "NOT_READY",
+    "RECOVERING"
+  ],
+  "transition_matrix_valid": true,
+  "all_states_deterministic": true,
+  "passed": true,
+  "details": {
+    "state_definitions": {
+      "INITIALIZING": "Service started, loading config and DB pool, traffic blocked",
+      "CHECKING_DEPENDENCIES": "Actively evaluating postgres, redis, storage, workers, ai",
+      "READY": "All critical and required capabilities healthy, traffic fully admitted",
+      "DEGRADED": "Optional dependency unavailable (e.g. Gemini AI), fallback mode active",
+      "NOT_READY": "Critical dependency down (e.g. postgres), traffic withheld",
+      "RECOVERING": "Dependencies returned, system validating warm pool stability"
+    },
+    "transitions": {
+      "INITIALIZING": [
+        "CHECKING_DEPENDENCIES"
+      ],
+      "CHECKING_DEPENDENCIES": [
+        "READY",
+        "DEGRADED",
+        "NOT_READY"
+      ],
+      "READY": [
+        "DEGRADED",
+        "NOT_READY"
+      ],
+      "DEGRADED": [
+        "READY",
+        "NOT_READY"
+      ],
+      "NOT_READY": [
+        "RECOVERING"
+      ],
+      "RECOVERING": [
+        "READY",
+        "DEGRADED",
+        "NOT_READY"
+      ]
+    },
+    "status": "STATE_MACHINE_VERIFIED"
+  }
+}

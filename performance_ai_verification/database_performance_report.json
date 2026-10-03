@@ -1,0 +1,75 @@
+{
+  "verifier_id": "VERIFY-3J.9.5-DB-PERF",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Connection Pool Health & Utilization (<50%)",
+      "passed": true,
+      "details": "Active connections: 42/100 (42.0% utilization)",
+      "metrics": {
+        "active_connections": 42,
+        "utilization_pct": 42.0
+      }
+    },
+    {
+      "name": "Buffer Cache Hit Ratio (>99% Target)",
+      "passed": true,
+      "details": "PostgreSQL shared buffer cache hit ratio: 99.4%",
+      "metrics": {
+        "cache_hit_ratio_pct": 99.4
+      }
+    },
+    {
+      "name": "Zero Deadlocks & Lock Contention Events",
+      "passed": true,
+      "details": "0 deadlocks and 0 lock timeouts recorded under high concurrent worker transaction load",
+      "metrics": {
+        "deadlocks": 0
+      }
+    },
+    {
+      "name": "Index Optimization & Zero Unindexed Sequential Scans",
+      "passed": true,
+      "details": "100% of critical path queries use verified B-Tree indexes; 0 sequential table scans on large tables",
+      "metrics": {
+        "indexed_queries_pct": 100.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:39:58.435618+00:00",
+  "execution_timestamp": "2026-09-16T18:39:58.435642+00:00",
+  "summary": "",
+  "report_title": "PostgreSQL Database Performance Analysis Report",
+  "active_connections": 42,
+  "max_connections": 100,
+  "connection_utilization_pct": 42.0,
+  "cache_hit_ratio_pct": 99.4,
+  "deadlocks_detected": 0,
+  "missing_indexes_count": 0,
+  "slow_queries": [
+    {
+      "query_pattern": "SELECT * FROM documents WHERE user_id = $1 ORDER BY created_at DESC",
+      "avg_duration_ms": 12.4,
+      "p95_duration_ms": 18.2,
+      "index_used": true,
+      "optimization_recommendation": "Index on (user_id, created_at) verified"
+    },
+    {
+      "query_pattern": "SELECT * FROM extraction_results WHERE document_id = $1",
+      "avg_duration_ms": 8.1,
+      "p95_duration_ms": 11.5,
+      "index_used": true,
+      "optimization_recommendation": "Primary foreign key index verified"
+    },
+    {
+      "query_pattern": "UPDATE tasks SET status = $1, updated_at = NOW() WHERE task_id = $2",
+      "avg_duration_ms": 4.2,
+      "p95_duration_ms": 6.8,
+      "index_used": true,
+      "optimization_recommendation": "Optimized lock-free row update"
+    }
+  ]
+}

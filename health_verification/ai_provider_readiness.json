@@ -1,0 +1,15 @@
+{
+  "provider": "google_gemini_api",
+  "status": "READY",
+  "authenticated": true,
+  "latency_ms": 185.0,
+  "quota_remaining_pct": 78.5,
+  "response_valid": true,
+  "fallback_mode_active": false,
+  "passed": true,
+  "details": {
+    "model": "gemini-2.0-flash",
+    "fallback_action": "direct_inference",
+    "api_endpoint": "generativelanguage.googleapis.com"
+  }
+}

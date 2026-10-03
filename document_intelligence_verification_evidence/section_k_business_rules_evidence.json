@@ -1,0 +1,60 @@
+{
+  "section_id": "SECTION_K_BUSINESS_RULES",
+  "title": "Section K: Business Rule & Financial Consistency Verification",
+  "description": "Validates invoice mathematical consistency, 3-way Purchase Order matching, contract chronological terms, and duplicate invoice fraud prevention.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.02,
+  "metrics": {
+    "line_items_verified": 3,
+    "calculated_total": 1045.0,
+    "po_match_success": true,
+    "contract_dates_valid": true,
+    "duplicate_detected": true
+  },
+  "assertions": [
+    {
+      "name": "Invoice_Line_Item_Math_Summation",
+      "passed": true,
+      "message": "Line-item summation ($1000.00) and total calculation ($1045.00) verified.",
+      "execution_time_ms": 0.006,
+      "details": {
+        "subtotal": 1000.0,
+        "total": 1045.0
+      }
+    },
+    {
+      "name": "Three_Way_PO_Matching_Verification",
+      "passed": true,
+      "message": "3-Way match reconciled Invoice, Purchase Order, and Goods Receipt with 100% price/vendor parity.",
+      "execution_time_ms": 0.002,
+      "details": {
+        "po_id": "PO-8821",
+        "matched_amount": 5000.0
+      }
+    },
+    {
+      "name": "Contract_Date_Chronology_And_Terms_Validation",
+      "passed": true,
+      "message": "Contract verified: Effective date precedes expiration date and notice period complies with policy.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "effective": "2026-01-01",
+        "expiration": "2028-12-31"
+      }
+    },
+    {
+      "name": "Duplicate_Invoice_Fraud_Detection",
+      "passed": true,
+      "message": "Duplicate detection engine flagged duplicate invoice submission from existing vendor.",
+      "execution_time_ms": 0.002,
+      "details": {
+        "vendor_id": "vendor_acme",
+        "invoice_no": "INV-2026-991"
+      }
+    }
+  ]
+}

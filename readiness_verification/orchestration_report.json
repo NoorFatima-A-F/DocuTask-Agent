@@ -1,0 +1,30 @@
+{
+  "kubernetes_readiness_probe_valid": true,
+  "docker_compose_compatible": true,
+  "cloud_runtimes_supported": [
+    "Kubernetes",
+    "Docker Compose",
+    "AWS ECS",
+    "Google Cloud Run",
+    "Azure Container Apps"
+  ],
+  "probe_frequency_seconds": 10,
+  "failure_threshold": 3,
+  "passed": true,
+  "details": {
+    "k8s_spec": {
+      "httpGet": {
+        "path": "/ready",
+        "port": 8000,
+        "scheme": "HTTP"
+      },
+      "initialDelaySeconds": 10,
+      "periodSeconds": 10,
+      "timeoutSeconds": 3,
+      "successThreshold": 1,
+      "failureThreshold": 3
+    },
+    "traffic_routing_effect": "Failure causes kube-proxy / ingress controller to stop routing traffic to pod endpoints without terminating container",
+    "status": "ORCHESTRATION_READY"
+  }
+}

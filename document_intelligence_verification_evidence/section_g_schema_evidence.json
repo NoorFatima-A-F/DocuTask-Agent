@@ -1,0 +1,65 @@
+{
+  "section_id": "SECTION_G_SCHEMA",
+  "title": "Section G: Schema Validation Verification",
+  "description": "Validates strict Pydantic/JSON schema typing, cross-field logical consistency, regex formatting, and failure injection detection.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.31,
+  "metrics": {
+    "schema_rules_checked": 4,
+    "regex_patterns_validated": 3,
+    "cross_field_valid": true,
+    "injected_failures_caught": 3
+  },
+  "assertions": [
+    {
+      "name": "Type_And_Required_Field_Compliance",
+      "passed": true,
+      "message": "Schema validator enforced required field existence and type constraints.",
+      "execution_time_ms": 0.007,
+      "details": {
+        "fields_checked": [
+          "invoice_number",
+          "total_amount",
+          "tax_rate",
+          "line_items"
+        ]
+      }
+    },
+    {
+      "name": "Regex_Format_Constraint_Validation",
+      "passed": true,
+      "message": "Regex formatting rules validated for invoice IDs, emails, and ISO dates.",
+      "execution_time_ms": 0.28,
+      "details": {
+        "patterns_validated": [
+          "invoice_regex",
+          "email_regex",
+          "iso_date_regex"
+        ]
+      }
+    },
+    {
+      "name": "Cross_Field_Logical_Consistency_Validation",
+      "passed": true,
+      "message": "Cross-field mathematical equality (Subtotal+Tax=Total) and chronological ordering verified.",
+      "execution_time_ms": 0.002,
+      "details": {
+        "math_consistent": true,
+        "date_consistent": true
+      }
+    },
+    {
+      "name": "Failure_Injection_Anomaly_Detection",
+      "passed": true,
+      "message": "Caught and rejected all 3 injected schema anomalies (bad types, negative amounts, missing keys).",
+      "execution_time_ms": 0.006,
+      "details": {
+        "caught_anomalies": 3
+      }
+    }
+  ]
+}

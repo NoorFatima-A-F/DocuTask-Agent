@@ -1,0 +1,12 @@
+{
+  "report_title": "Worker Self-Healing & Task Re-queueing Verification Report",
+  "worker_pool": "async-document-processors",
+  "missing_heartbeat_detected": true,
+  "dead_worker_reaped": true,
+  "replacement_worker_spawned": true,
+  "abandoned_tasks_requeued": 6,
+  "concurrency_capacity_restored": true,
+  "target_concurrency": 32,
+  "active_concurrency": 32,
+  "worker_self_healing_passed": true
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Dependency Criticality & Readiness Matrix",
+  "critical_dependencies": [
+    "PostgreSQL",
+    "Redis Queue",
+    "Document Storage",
+    "Worker Fleet"
+  ],
+  "non_critical_dependencies": [
+    "Gemini AI Provider"
+  ],
+  "traffic_action": "ALLOW_TRAFFIC",
+  "status": "READY"
+}

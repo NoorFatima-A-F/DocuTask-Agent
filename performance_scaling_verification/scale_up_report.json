@@ -1,0 +1,55 @@
+{
+  "verifier_id": "VERIFY-3J.8.7-SCALE-UP",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Scale-Up Reaction Time (<20s Target)",
+      "passed": true,
+      "details": "From surge detection to worker ready: 12.4s (SLA target: <20s)",
+      "metrics": {
+        "reaction_time_sec": 12.4,
+        "target_sec": 20.0
+      }
+    },
+    {
+      "name": "P95 Latency Recovery After Scaling",
+      "passed": true,
+      "details": "P95 latency dropped from 4500.0ms to 2550.0ms (-43.3%) once workers scaled",
+      "metrics": {
+        "p95_before_ms": 4500.0,
+        "p95_after_ms": 2550.0,
+        "reduction_pct": 43.3
+      }
+    },
+    {
+      "name": "Throughput Expansion Verified",
+      "passed": true,
+      "details": "Throughput expanded from 100 docs/min to 5000 docs/min sustained capacity",
+      "metrics": {
+        "throughput_growth_x": 50.0
+      }
+    },
+    {
+      "name": "Zero Job Drop During Surge",
+      "passed": true,
+      "details": "All documents queued during the 50x surge were retained and processed successfully",
+      "metrics": {
+        "drop_rate_pct": 0.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:38:29.285190+00:00",
+  "execution_timestamp": "2026-09-16T18:38:29.285215+00:00",
+  "summary": "",
+  "report_title": "Scale-Up Performance Verification Report",
+  "demand_before_dpm": 100.0,
+  "demand_after_dpm": 5000.0,
+  "reaction_time_sec": 12.4,
+  "p95_before_scaling_ms": 4500.0,
+  "p95_after_scaling_ms": 2550.0,
+  "latency_recovered": true,
+  "throughput_increased": true
+}

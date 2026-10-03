@@ -1,0 +1,83 @@
+{
+  "total_experiments": 7,
+  "passed_count": 7,
+  "experiments": [
+    {
+      "experiment_id": "EXP-INFRA-001",
+      "category": "INFRASTRUCTURE",
+      "target_component": "Celery OCR Worker Pod",
+      "failure_description": "Simulated SIGKILL container crash during active PDF parsing",
+      "detection_time_seconds": 4.5,
+      "recovery_action": "Kubelet pod restart & Celery broker re-dispatch",
+      "recovery_duration_seconds": 18.2,
+      "data_loss": false,
+      "status": "PASS"
+    },
+    {
+      "experiment_id": "EXP-INFRA-002",
+      "category": "INFRASTRUCTURE",
+      "target_component": "FastAPI Ingress Router",
+      "failure_description": "Gateway node crash with instant ingress healthcheck probe failure",
+      "detection_time_seconds": 2.1,
+      "recovery_action": "Ingress router rerouting to standby replica gateway",
+      "recovery_duration_seconds": 5.4,
+      "data_loss": false,
+      "status": "PASS"
+    },
+    {
+      "experiment_id": "EXP-DB-001",
+      "category": "DATABASE",
+      "target_component": "PostgreSQL Primary Node",
+      "failure_description": "Sudden TCP socket drop and connection exhaustion",
+      "detection_time_seconds": 3.8,
+      "recovery_action": "PgBouncer connection pool drain & Patroni standby promotion",
+      "recovery_duration_seconds": 24.5,
+      "data_loss": false,
+      "status": "PASS"
+    },
+    {
+      "experiment_id": "EXP-NET-001",
+      "category": "NETWORK",
+      "target_component": "Inter-AZ Microservice Mesh",
+      "failure_description": "Injected 1500ms network latency and 15% packet loss",
+      "detection_time_seconds": 6.2,
+      "recovery_action": "Envoy circuit breaker trip & exponential backoff jitter retry",
+      "recovery_duration_seconds": 12.0,
+      "data_loss": false,
+      "status": "PASS"
+    },
+    {
+      "experiment_id": "EXP-QUEUE-001",
+      "category": "QUEUE_WORKER",
+      "target_component": "Redis Queue Broker",
+      "failure_description": "Redis broker eviction & worker unresponsiveness",
+      "detection_time_seconds": 5.0,
+      "recovery_action": "Redis Sentinel master failover & dead-letter queue preservation",
+      "recovery_duration_seconds": 15.6,
+      "data_loss": false,
+      "status": "PASS"
+    },
+    {
+      "experiment_id": "EXP-STORAGE-001",
+      "category": "STORAGE",
+      "target_component": "S3 / MinIO Object Vault",
+      "failure_description": "Transient HTTP 503 SlowDown / Service Unavailable errors",
+      "detection_time_seconds": 1.5,
+      "recovery_action": "Local staging spool buffering & multi-region S3 retry",
+      "recovery_duration_seconds": 8.0,
+      "data_loss": false,
+      "status": "PASS"
+    },
+    {
+      "experiment_id": "EXP-AI-001",
+      "category": "AI_PROVIDER",
+      "target_component": "Gemini LLM API Endpoint",
+      "failure_description": "Simulated upstream 429 Quota Exceeded and 503 Outage",
+      "detection_time_seconds": 2.0,
+      "recovery_action": "Dynamic model fallback engine & local heuristic parser activation",
+      "recovery_duration_seconds": 4.1,
+      "data_loss": false,
+      "status": "PASS"
+    }
+  ]
+}

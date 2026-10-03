@@ -1,0 +1,43 @@
+{
+  "total_providers_tracked": 3,
+  "quota_exhaustion_detected": false,
+  "rate_limit_handling_verified": true,
+  "quotas": [
+    {
+      "provider": "gemini",
+      "requests_per_minute_limit": 2000,
+      "current_rpm_utilization_pct": 42.5,
+      "tokens_per_minute_limit": 4000000,
+      "current_tpm_utilization_pct": 38.0,
+      "rate_limit_429_count": 1,
+      "backoff_strategy_verified": true,
+      "queue_preserved_under_burst": true
+    },
+    {
+      "provider": "claude_fallback",
+      "requests_per_minute_limit": 1000,
+      "current_rpm_utilization_pct": 15.0,
+      "tokens_per_minute_limit": 2000000,
+      "current_tpm_utilization_pct": 12.5,
+      "rate_limit_429_count": 0,
+      "backoff_strategy_verified": true,
+      "queue_preserved_under_burst": true
+    },
+    {
+      "provider": "local_vllm",
+      "requests_per_minute_limit": 5000,
+      "current_rpm_utilization_pct": 22.0,
+      "tokens_per_minute_limit": 10000000,
+      "current_tpm_utilization_pct": 18.0,
+      "rate_limit_429_count": 0,
+      "backoff_strategy_verified": true,
+      "queue_preserved_under_burst": true
+    }
+  ],
+  "passed": true,
+  "details": {
+    "backoff_algorithm": "Full Jitter Exponential Backoff (base=1.0s, max=32.0s, retries=5)",
+    "queue_preservation_policy": "Tasks held in Redis durable pending queue with priority back-pressure",
+    "quota_warning_threshold_pct": 80.0
+  }
+}

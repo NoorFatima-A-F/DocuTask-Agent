@@ -1,0 +1,49 @@
+{
+  "report_title": "Autonomous Execution Safety & Blast-Radius Containment Report",
+  "actions_evaluated": 4,
+  "actions_cleared_for_autonomous_execution": 4,
+  "max_tolerated_blast_radius_pct": 5.0,
+  "safety_checks": [
+    {
+      "action_id": "act-exec-001",
+      "action_type": "SCALE_WORKERS",
+      "target_component": "srv-worker-pool",
+      "blast_radius_pct": 1.8,
+      "maintenance_window_approved": true,
+      "canary_strategy_defined": true,
+      "automated_rollback_verified": true,
+      "safety_status": "PASSED"
+    },
+    {
+      "action_id": "act-exec-002",
+      "action_type": "EXPAND_QUEUE_BUFFER",
+      "target_component": "srv-task-queue",
+      "blast_radius_pct": 0.5,
+      "maintenance_window_approved": true,
+      "canary_strategy_defined": true,
+      "automated_rollback_verified": true,
+      "safety_status": "PASSED"
+    },
+    {
+      "action_id": "act-exec-003",
+      "action_type": "PROACTIVE_CACHE_PURGE",
+      "target_component": "srv-cache-redis",
+      "blast_radius_pct": 2.2,
+      "maintenance_window_approved": true,
+      "canary_strategy_defined": true,
+      "automated_rollback_verified": true,
+      "safety_status": "PASSED"
+    },
+    {
+      "action_id": "act-exec-004",
+      "action_type": "LLM_FALLBACK_ROUTING",
+      "target_component": "srv-llm-router",
+      "blast_radius_pct": 4.1,
+      "maintenance_window_approved": true,
+      "canary_strategy_defined": true,
+      "automated_rollback_verified": true,
+      "safety_status": "PASSED"
+    }
+  ],
+  "execution_safety_index": 99.6
+}

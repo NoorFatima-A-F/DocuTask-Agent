@@ -1,0 +1,8 @@
+{
+  "baseline_throughput_docs_hr": 500,
+  "degraded_throughput_docs_hr": 20,
+  "anomaly_detected": true,
+  "false_anomaly_rate": 0.01,
+  "baseline_learning_active": true,
+  "status": "PASS"
+}

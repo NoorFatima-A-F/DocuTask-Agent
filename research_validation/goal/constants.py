@@ -1,0 +1,38 @@
+"""
+Autonomous Goal Intelligence Constants
+======================================
+Defines global constants, non-fabrication sentinel values, and default limits.
+"""
+
+from enum import Enum
+
+
+class NonFabricationState(str, Enum):
+    """Structured sentinel values for unavailable evidence or context."""
+    UNKNOWN = "UNKNOWN"
+    NOT_AVAILABLE = "NOT_AVAILABLE"
+    NOT_COLLECTED = "NOT_COLLECTED"
+    NOT_EXECUTED = "NOT_EXECUTED"
+    INSUFFICIENT_CONTEXT = "INSUFFICIENT_CONTEXT"
+    INSUFFICIENT_EVIDENCE = "INSUFFICIENT_EVIDENCE"
+    CAPABILITY_UNAVAILABLE = "CAPABILITY_UNAVAILABLE"
+    DATASET_UNAVAILABLE = "DATASET_UNAVAILABLE"
+    RESOURCE_UNAVAILABLE = "RESOURCE_UNAVAILABLE"
+    PENDING_DISCOVERY = "PENDING_DISCOVERY"
+
+
+# Default Quotas and Constraints
+DEFAULT_MAX_RUNTIME_HOURS = 24.0
+DEFAULT_MAX_GPU_HOURS = 8.0
+DEFAULT_MAX_CPU_HOURS = 64.0
+DEFAULT_MAX_RAM_GB = 32.0
+DEFAULT_MAX_STORAGE_GB = 100.0
+DEFAULT_MAX_COST_USD = 100.0
+DEFAULT_MAX_ITERATIONS = 50
+DEFAULT_MAX_CONCURRENCY = 4
+DEFAULT_MAX_RETRIES = 3
+
+# Minimum statistical power and sample size defaults
+DEFAULT_MIN_SAMPLE_SIZE = 30
+DEFAULT_TARGET_STATISTICAL_POWER = 0.80
+DEFAULT_SIGNIFICANCE_ALPHA = 0.05

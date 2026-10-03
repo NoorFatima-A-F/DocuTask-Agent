@@ -1,0 +1,47 @@
+{
+  "layer_name": "Layer 2 - Dependency Restoration Validation",
+  "total_dependencies": 5,
+  "all_restored": true,
+  "dependencies": [
+    {
+      "name": "PostgreSQL Database",
+      "connection_healthy": true,
+      "query_or_ping_healthy": true,
+      "transaction_or_job_healthy": true,
+      "latency_ms": 1.8,
+      "status": "HEALTHY"
+    },
+    {
+      "name": "Redis Queue Engine",
+      "connection_healthy": true,
+      "query_or_ping_healthy": true,
+      "transaction_or_job_healthy": true,
+      "latency_ms": 0.5,
+      "status": "HEALTHY"
+    },
+    {
+      "name": "Celery Worker Pool",
+      "connection_healthy": true,
+      "query_or_ping_healthy": true,
+      "transaction_or_job_healthy": true,
+      "latency_ms": 2.1,
+      "status": "HEALTHY"
+    },
+    {
+      "name": "MinIO Object Storage",
+      "connection_healthy": true,
+      "query_or_ping_healthy": true,
+      "transaction_or_job_healthy": true,
+      "latency_ms": 3.5,
+      "status": "HEALTHY"
+    },
+    {
+      "name": "Gemini AI Provider Client",
+      "connection_healthy": true,
+      "query_or_ping_healthy": true,
+      "transaction_or_job_healthy": true,
+      "latency_ms": 16.4,
+      "status": "HEALTHY"
+    }
+  ]
+}

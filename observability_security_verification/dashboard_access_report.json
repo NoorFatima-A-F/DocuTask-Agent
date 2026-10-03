@@ -1,0 +1,68 @@
+{
+  "roles_evaluated": [
+    "Viewer",
+    "Operator",
+    "Engineer",
+    "Administrator"
+  ],
+  "permission_checks": [
+    {
+      "role": "Viewer",
+      "action": "view_system_status_dashboard",
+      "resource": "grafana/dashboards/system-overview",
+      "allowed": true,
+      "test_result_status": 200,
+      "enforced_correctly": true
+    },
+    {
+      "role": "Viewer",
+      "action": "modify_alert_thresholds",
+      "resource": "grafana/alerts/docutask-p1-rules",
+      "allowed": false,
+      "test_result_status": 403,
+      "enforced_correctly": true
+    },
+    {
+      "role": "Operator",
+      "action": "view_incident_investigation_traces",
+      "resource": "grafana/explore/traces",
+      "allowed": true,
+      "test_result_status": 200,
+      "enforced_correctly": true
+    },
+    {
+      "role": "Operator",
+      "action": "modify_storage_retention_policy",
+      "resource": "observability/storage/retention",
+      "allowed": false,
+      "test_result_status": 403,
+      "enforced_correctly": true
+    },
+    {
+      "role": "Engineer",
+      "action": "edit_dashboard_queries",
+      "resource": "grafana/dashboards/worker-capacity",
+      "allowed": true,
+      "test_result_status": 200,
+      "enforced_correctly": true
+    },
+    {
+      "role": "Engineer",
+      "action": "rotate_root_tls_certificates",
+      "resource": "observability/security/tls-roots",
+      "allowed": false,
+      "test_result_status": 403,
+      "enforced_correctly": true
+    },
+    {
+      "role": "Administrator",
+      "action": "manage_monitoring_infrastructure_and_keys",
+      "resource": "observability/admin/all",
+      "allowed": true,
+      "test_result_status": 200,
+      "enforced_correctly": true
+    }
+  ],
+  "unauthorized_attempts_blocked": 3,
+  "rbac_enforcement_passed": true
+}

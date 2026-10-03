@@ -1,0 +1,46 @@
+{
+  "report_title": "Predictive Health Architecture Report",
+  "pipeline_stages": [
+    "Telemetry Aggregation Layer",
+    "Feature Extraction Engine",
+    "Anomaly Detection Engine",
+    "Prediction Engine",
+    "Risk Assessment Engine",
+    "Preventive Action Engine",
+    "Outcome Validation"
+  ],
+  "signal_sources": [
+    "CPU",
+    "Memory",
+    "Latency",
+    "Queue Depth",
+    "Error Rate",
+    "Task failures",
+    "Agent failures",
+    "Execution duration",
+    "Retry patterns",
+    "Database latency",
+    "Redis performance",
+    "AI provider response"
+  ],
+  "metric_categories": [
+    "CPU",
+    "Memory",
+    "Latency",
+    "Queue Depth",
+    "Error Rate"
+  ],
+  "application_signals": [
+    "Task failures",
+    "Agent failures",
+    "Execution duration",
+    "Retry patterns"
+  ],
+  "dependency_signals": [
+    "Database latency",
+    "Redis performance",
+    "AI provider response"
+  ],
+  "total_signal_sources": 12,
+  "architecture_valid": true
+}

@@ -1,0 +1,43 @@
+{
+  "algorithm": "Ed25519",
+  "audit_engine_version": "2.1.0",
+  "audit_execution_id": "RUN-20260920-193846",
+  "certificate_id": "CERT-20260920194026",
+  "classification_summary": {
+    "AIEngineeringAndSafety": "VERIFIED_BY_STATIC_ANALYSIS",
+    "APIDesignAndContracts": "VERIFIED_BY_STATIC_ANALYSIS",
+    "DatabaseArchitectureAndSafety": "PARTIALLY_VERIFIED",
+    "DependencyHygiene": "PARTIALLY_VERIFIED",
+    "GovernanceAndCompliance": "PARTIALLY_VERIFIED",
+    "RepositoryStructure": "VERIFIED_BY_STATIC_ANALYSIS",
+    "RuntimeAndContainerization": "VERIFIED_BY_CONFIGURATION",
+    "SecurityAndCompliance": "VERIFIED_BY_STATIC_ANALYSIS",
+    "SourceCodeAnalysis": "PARTIALLY_VERIFIED",
+    "TestingQuality": "VERIFIED_BY_STATIC_ANALYSIS"
+  },
+  "critical_findings": [],
+  "eqi_breakdown": {
+    "evidence_coverage_score": 25.0,
+    "freshness_score": 15.0,
+    "integrity_score": 15.0,
+    "rating": "ENTERPRISE_GRADE",
+    "reproducibility_score": 20.0,
+    "total_eqi": 99.38,
+    "verification_depth_score": 24.38
+  },
+  "eqi_score": 99.38,
+  "evidence_root_hash": "7d0cfac2ddd6a08cd3af75c74a288e7b18328fa27c43c35843b9b9fa5a35cb33",
+  "expiry_timestamp": "2027-03-19T19:40:26.059776+00:00",
+  "issued_timestamp": "2026-09-20T19:40:26.059776+00:00",
+  "issuer": "Enterprise Audit Certification Authority",
+  "merkle_root": "7d0cfac2ddd6a08cd3af75c74a288e7b18328fa27c43c35843b9b9fa5a35cb33",
+  "policy_compliance": true,
+  "policy_name": "enterprise_grade",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAJoy7LTKSRoK/s2XPauZ6PLS0ToeiBP4hlPhrjWyae7s=\n-----END PUBLIC KEY-----\n",
+  "release_version": "1.0.0",
+  "revocation_info": null,
+  "signature": "XBh7/jYl+pAEIOCRWHUonbpiZLPH2Y4D3ML39fIuSyzhw4fDU62a0sjYNsE5VIlAJASm1Oyoc+APYYrVdavyDQ==",
+  "status": "VALID",
+  "system_name": "DocuTask Agent",
+  "verification_depth": {}
+}

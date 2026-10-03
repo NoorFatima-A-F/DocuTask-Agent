@@ -1,0 +1,70 @@
+{
+  "total_risks_cataloged": 5,
+  "high_critical_risks_unmitigated": 0,
+  "passed": true,
+  "details": {
+    "category_distribution": {
+      "INFRASTRUCTURE_DEPENDENCY": 1,
+      "DATA_INTEGRITY_AND_CORRUPTION": 1,
+      "SECURITY_AND_SECRETS": 1,
+      "OPERATIONAL_AND_HUMAN": 1,
+      "COMPLIANCE_AND_AUDIT": 1
+    },
+    "total_risks": 5,
+    "unmitigated_risks_count": 0,
+    "risk_mitigation_percentage": 100.0,
+    "risk_assessment_framework": "ISO_31000_RESILIENCE_RISK_MODEL"
+  },
+  "risks": [
+    {
+      "risk_id": "RSK-DR-001",
+      "category": "INFRASTRUCTURE_DEPENDENCY",
+      "title": "Cloud Provider Multi-AZ Failure & Network Partition",
+      "inherent_level": "HIGH",
+      "residual_level": "LOW",
+      "mitigating_control": "Automated Patroni DCS quorum failover to secondary AZ with sync replication (RTO < 5m, RPO = 0s).",
+      "control_status": "VERIFIED_ACTIVE",
+      "owner": "Principal Database Reliability Engineer"
+    },
+    {
+      "risk_id": "RSK-DR-002",
+      "category": "DATA_INTEGRITY_AND_CORRUPTION",
+      "title": "Silent Database Data Corruption or Uncommitted WAL Gap",
+      "inherent_level": "MEDIUM",
+      "residual_level": "LOW",
+      "mitigating_control": "pg_checksums enabled on all blocks; continuous pgBackRest PITR verification with sha256 checksums.",
+      "control_status": "VERIFIED_ACTIVE",
+      "owner": "Principal Database Reliability Engineer"
+    },
+    {
+      "risk_id": "RSK-DR-003",
+      "category": "SECURITY_AND_SECRETS",
+      "title": "KMS Key Revocation / Secret Vault Unavailability During Restore",
+      "inherent_level": "MEDIUM",
+      "residual_level": "LOW",
+      "mitigating_control": "Multi-region replicated Vault clusters & backup key escrow with split-key Shamir recovery protocol.",
+      "control_status": "VERIFIED_ACTIVE",
+      "owner": "Principal Cloud Security Architect"
+    },
+    {
+      "risk_id": "RSK-DR-004",
+      "category": "OPERATIONAL_AND_HUMAN",
+      "title": "Runbook Drift & Operational Human Error during Outage",
+      "inherent_level": "HIGH",
+      "residual_level": "LOW",
+      "mitigating_control": "100% automated CI/CD documentation drift detection and self-executing runbook automation scripts.",
+      "control_status": "VERIFIED_ACTIVE",
+      "owner": "Platform SRE Lead"
+    },
+    {
+      "risk_id": "RSK-DR-005",
+      "category": "COMPLIANCE_AND_AUDIT",
+      "title": "Non-compliant Backup Retention & Missing Audit Trail",
+      "inherent_level": "MEDIUM",
+      "residual_level": "LOW",
+      "mitigating_control": "Automated WORM storage compliance policies, daily audit package generation, and immutable log signing.",
+      "control_status": "VERIFIED_ACTIVE",
+      "owner": "Enterprise Compliance Lead"
+    }
+  ]
+}

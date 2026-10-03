@@ -1,0 +1,67 @@
+{
+  "framework_phase": "Phase 3H.8 \u2014 Enterprise Operational Governance, Change Management & Safe Operations Verification",
+  "verification_id": "GOV-VERIF-848B6A7D",
+  "timestamp": "2026-09-16T07:11:34.757155+00:00",
+  "target_tier": "Enterprise Operational Governance Certified",
+  "certified_tier": "Enterprise Operational Governance Certified",
+  "overall_governance_score": 100.0,
+  "status": "PASSED",
+  "total_reports_exported": 11,
+  "manifest": {
+    "change_governance_report.json": {
+      "file_path": "operational_governance_verification/change_governance_report.json",
+      "size_bytes": 4043,
+      "sha256_checksum": "efb050c95c838d7e00f73c37332bcb14f116b9aa960f12816defb1f021ceec2d"
+    },
+    "configuration_change_report.json": {
+      "file_path": "operational_governance_verification/configuration_change_report.json",
+      "size_bytes": 2052,
+      "sha256_checksum": "ce059daee43992bc0b50464e8c1d497ae1c1f2c9f54902ccbb4685355ddbe653"
+    },
+    "deployment_safety_report.json": {
+      "file_path": "operational_governance_verification/deployment_safety_report.json",
+      "size_bytes": 2013,
+      "sha256_checksum": "6600acaa9e10e6c62d2c38e4715158d3aba0c729c678be8cfed2d302645fcd34"
+    },
+    "database_change_report.json": {
+      "file_path": "operational_governance_verification/database_change_report.json",
+      "size_bytes": 1783,
+      "sha256_checksum": "16976212ba365cd0fdbee7da14ef7fefe48cd73be5932e05823501ae0acc06e4"
+    },
+    "ai_model_change_report.json": {
+      "file_path": "operational_governance_verification/ai_model_change_report.json",
+      "size_bytes": 1306,
+      "sha256_checksum": "9b9ede2a1aa2beb7aa10e20eaa7ebf1a7639aa38d31ffef60f0b16a1bad4250c"
+    },
+    "approval_workflow_report.json": {
+      "file_path": "operational_governance_verification/approval_workflow_report.json",
+      "size_bytes": 1952,
+      "sha256_checksum": "2e0b2e6d56e1e4fe182bbf4c63b93c6ab81818a684ca94d0ce68c740545cdf8a"
+    },
+    "rollback_verification_report.json": {
+      "file_path": "operational_governance_verification/rollback_verification_report.json",
+      "size_bytes": 2332,
+      "sha256_checksum": "ab2ddd04a79c5a58a22e893207bee181630742b92f7b44e9d65dce209e3a1595"
+    },
+    "audit_trail_report.json": {
+      "file_path": "operational_governance_verification/audit_trail_report.json",
+      "size_bytes": 2751,
+      "sha256_checksum": "ae002c1f7dbdadab98f08f7a5003bdc9faed26ee616ca9d5e3391f3d9dea93cb"
+    },
+    "continuous_verification_report.json": {
+      "file_path": "operational_governance_verification/continuous_verification_report.json",
+      "size_bytes": 1615,
+      "sha256_checksum": "a100ddc85617f245478091b05421711800fbb3dd8619326a1f2f7bc02c0c00bd"
+    },
+    "governance_dashboard_report.json": {
+      "file_path": "operational_governance_verification/governance_dashboard_report.json",
+      "size_bytes": 1202,
+      "sha256_checksum": "340a4d0b51ada1017e04d39e6edf9d4bdc0b2ea6c38cf8014ee9b57b7ed9ca55"
+    },
+    "operational_governance_certification_report.json": {
+      "file_path": "operational_governance_verification/operational_governance_certification_report.json",
+      "size_bytes": 2649,
+      "sha256_checksum": "b072db1aab85239f4103651389429bdef993727624c86a86a279937c30488127"
+    }
+  }
+}

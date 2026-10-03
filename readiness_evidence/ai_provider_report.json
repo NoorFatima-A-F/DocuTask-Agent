@@ -1,0 +1,11 @@
+{
+  "title": "AI Provider Readiness & Fallback Report",
+  "gemini_api_reachable": true,
+  "latency_ms": 340.0,
+  "quota_headroom_pct": 88.5,
+  "fallback_models_ready": [
+    "claude-3-5-sonnet",
+    "vllm-llama-3-70b-local"
+  ],
+  "status": "READY"
+}

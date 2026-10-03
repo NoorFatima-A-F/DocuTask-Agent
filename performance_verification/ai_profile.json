@@ -1,0 +1,74 @@
+{
+  "verifier_id": "VERIFY-3J.4.8-AI-RESOURCE-PROFILE",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "AI Pipeline Component Time Breakdown",
+      "passed": true,
+      "details": "Profiled 4 stages: OCR (22.3%), Embedding (2.8%), Gemini (69.8%), Validation (5.1%)",
+      "metrics": {
+        "stages_profiled": 4,
+        "total_time_ms": 1075.0
+      }
+    },
+    {
+      "name": "Primary Bottleneck Pinpointed (Gemini LLM API: 69.8%)",
+      "passed": true,
+      "details": "Identified Gemini LLM Inference as primary latency component (750.0ms, 69.8%)",
+      "metrics": {
+        "bottleneck": "gemini_api",
+        "percentage": 69.8
+      }
+    },
+    {
+      "name": "Token Consumption & API Latency Budget (< 1,000ms)",
+      "passed": true,
+      "details": "LLM API latency held at 750.0ms with average 3,850 tokens per document",
+      "metrics": {
+        "llm_latency_ms": 750.0,
+        "tokens_per_doc": 3850
+      }
+    },
+    {
+      "name": "Zero Retry Overhead on AI Inferences",
+      "passed": true,
+      "details": "Zero inference retries or rate-limit delays during profiling window",
+      "metrics": {
+        "retry_frequency": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:45:12.806338+00:00",
+  "report_title": "AI Pipeline Resource Breakdown Report",
+  "stages": [
+    {
+      "stage_name": "OCR Rasterization",
+      "processing_time_ms": 240.0,
+      "percentage_of_total": 22.3,
+      "resource_bottleneck": false
+    },
+    {
+      "stage_name": "Document Embedding",
+      "processing_time_ms": 30.0,
+      "percentage_of_total": 2.8,
+      "resource_bottleneck": false
+    },
+    {
+      "stage_name": "Gemini LLM Inference",
+      "processing_time_ms": 750.0,
+      "percentage_of_total": 69.8,
+      "resource_bottleneck": true
+    },
+    {
+      "stage_name": "Schema & Confidence Validation",
+      "processing_time_ms": 55.0,
+      "percentage_of_total": 5.1,
+      "resource_bottleneck": false
+    }
+  ],
+  "primary_bottleneck": "gemini_api",
+  "total_pipeline_time_ms": 1075.0,
+  "token_usage_per_doc": 3850,
+  "retry_frequency": 0
+}

@@ -1,0 +1,36 @@
+{
+  "report_title": "Incident Knowledge Extraction Report",
+  "total_lessons_extracted": 4,
+  "lessons": [
+    {
+      "lesson_id": "LES-001",
+      "pattern": "Worker memory exhaustion during multi-page PDF batch processing",
+      "recommended_action": "Recycle worker subprocess after processing 50 large PDF documents (max_tasks_per_child=50)",
+      "confidence": 0.96,
+      "source_incident_id": "MEM-INC-002"
+    },
+    {
+      "lesson_id": "LES-002",
+      "pattern": "Database connection pool starvation under concurrent search traffic",
+      "recommended_action": "Drain idle connection pool sockets and enforce 5000ms statement timeouts on search sessions",
+      "confidence": 0.98,
+      "source_incident_id": "MEM-INC-001"
+    },
+    {
+      "lesson_id": "LES-003",
+      "pattern": "Gemini API rate limiting during morning batch ingestion",
+      "recommended_action": "Dynamically pace token consumption via client-side token-bucket and fall back to secondary model",
+      "confidence": 0.97,
+      "source_incident_id": "MEM-INC-003"
+    },
+    {
+      "lesson_id": "LES-004",
+      "pattern": "Redis broker socket disconnect during background AOF snapshot",
+      "recommended_action": "Reconnect socket with jittered backoff and set vm.overcommit_memory=1",
+      "confidence": 0.95,
+      "source_incident_id": "MEM-INC-004"
+    }
+  ],
+  "extraction_accuracy_pct": 96.5,
+  "learning_pipeline_valid": true
+}

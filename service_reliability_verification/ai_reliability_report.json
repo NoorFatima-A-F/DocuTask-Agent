@@ -1,0 +1,47 @@
+{
+  "report_title": "AI Workload Reliability & Extraction Consistency Report",
+  "total_workloads_verified": 5,
+  "workload_metrics": [
+    {
+      "workload_type": "OCR Document Tokenization",
+      "accuracy_or_success_rate_pct": 99.1,
+      "p95_latency_ms": 820.0,
+      "hallucination_recovery_rate_pct": 100.0,
+      "schema_adherence_pct": 100.0,
+      "reliable": true
+    },
+    {
+      "workload_type": "Gemini Structured Entity Extraction",
+      "accuracy_or_success_rate_pct": 99.35,
+      "p95_latency_ms": 2350.0,
+      "hallucination_recovery_rate_pct": 98.8,
+      "schema_adherence_pct": 99.8,
+      "reliable": true
+    },
+    {
+      "workload_type": "Pydantic v2 Schema Validation",
+      "accuracy_or_success_rate_pct": 100.0,
+      "p95_latency_ms": 45.0,
+      "hallucination_recovery_rate_pct": 100.0,
+      "schema_adherence_pct": 100.0,
+      "reliable": true
+    },
+    {
+      "workload_type": "Hallucination Detection & Retry",
+      "accuracy_or_success_rate_pct": 98.9,
+      "p95_latency_ms": 1200.0,
+      "hallucination_recovery_rate_pct": 99.2,
+      "schema_adherence_pct": 100.0,
+      "reliable": true
+    },
+    {
+      "workload_type": "Fallback Secondary Model Routing",
+      "accuracy_or_success_rate_pct": 99.5,
+      "p95_latency_ms": 850.0,
+      "hallucination_recovery_rate_pct": 98.5,
+      "schema_adherence_pct": 99.5,
+      "reliable": true
+    }
+  ],
+  "all_ai_workloads_reliable": true
+}

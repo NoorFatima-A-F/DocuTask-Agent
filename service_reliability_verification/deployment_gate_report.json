@@ -1,0 +1,39 @@
+{
+  "report_title": "SRE Reliability Deployment Gate Report",
+  "deployment_id": "deploy-rel-3h6",
+  "decision": "APPROVED",
+  "criteria": [
+    {
+      "criterion_name": "Availability SLO Objective",
+      "requirement": ">= 99.90% monthly availability",
+      "actual_state": "99.964%",
+      "passed": true
+    },
+    {
+      "criterion_name": "Latency & Responsiveness Objective",
+      "requirement": "All endpoint P95 latencies within budget",
+      "actual_state": "All 6 endpoints satisfied",
+      "passed": true
+    },
+    {
+      "criterion_name": "Error Budget Health",
+      "requirement": ">= 70.0% remaining budget",
+      "actual_state": "83.19% remaining",
+      "passed": true
+    },
+    {
+      "criterion_name": "Error Budget Burn Rate",
+      "requirement": "Status == SAFE (No 1h/6h/24h burn alerts)",
+      "actual_state": "Status: SAFE",
+      "passed": true
+    },
+    {
+      "criterion_name": "AI Workload Reliability",
+      "requirement": "Zero schema violations; extraction consistency >= 98%",
+      "actual_state": "All 5 AI pipelines reliable",
+      "passed": true
+    }
+  ],
+  "deployment_allowed": true,
+  "rationale": "All SLOs satisfied, error budget healthy, burn rate safe, and AI reliability validated."
+}

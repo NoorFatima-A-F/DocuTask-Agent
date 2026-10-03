@@ -1,0 +1,41 @@
+version: "1.0"
+runbook_id: "RB-DB-002"
+name: "PostgreSQL Connection Pool Recovery & Circuit Breaker Reset"
+target_service: "postgres_db"
+risk_level: "MEDIUM"
+auto_execute: true
+approval_required: false
+timeout_seconds: 90
+
+pre_checks:
+  - name: "Verify DB connection exhaustion"
+    condition: "postgres_connection_count > 45 or postgres_query_latency_seconds > 2.0"
+
+steps:
+  - step: 1
+    action: "activate_application_circuit_breaker"
+    command: "curl -X POST http://api:8000/internal/circuit-breaker/postgres/open"
+  - step: 2
+    action: "terminate_idle_connections"
+    command: "psql -U postgres -c \"SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE state = 'idle in transaction' AND state_change < current_timestamp - INTERVAL '30 seconds';\""
+  - step: 3
+    action: "reload_pgbouncer_pool"
+    command: "psql -p 6432 -U pgbouncer -c 'RELOAD;'"
+  - step: 4
+    action: "verify_database_readiness"
+    command: "curl -s -f http://api:8000/health/database"
+    retry_count: 5
+    retry_interval_seconds: 3
+  - step: 5
+    action: "close_circuit_breaker"
+    command: "curl -X POST http://api:8000/internal/circuit-breaker/postgres/close"
+
+post_checks:
+  - name: "Validate active connection count"
+    condition: "postgres_connection_count < 35"
+  - name: "Validate query latency"
+    condition: "postgres_query_latency_seconds < 0.050"
+
+rollback:
+  action: "switch_to_read_replica_and_alert_dba"
+  command: "curl -X POST http://api:8000/internal/datasource/switch-replica"

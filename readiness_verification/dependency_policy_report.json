@@ -1,0 +1,22 @@
+{
+  "critical_dependencies": [
+    "postgres",
+    "redis",
+    "storage",
+    "workers"
+  ],
+  "degraded_dependencies": [
+    "gemini",
+    "analytics",
+    "optional_monitoring"
+  ],
+  "policy_enforcement_valid": true,
+  "traffic_actions_mapped": true,
+  "passed": true,
+  "details": {
+    "critical_count": 4,
+    "degraded_count": 3,
+    "policy_source": "readiness_policy.yaml",
+    "status": "POLICY_VERIFIED"
+  }
+}

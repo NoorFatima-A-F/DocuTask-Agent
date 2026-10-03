@@ -1,0 +1,71 @@
+{
+  "docker_healthcheck_compatible": true,
+  "kubernetes_liveness_compatible": true,
+  "kubernetes_readiness_compatible": true,
+  "kubernetes_startup_compatible": true,
+  "cicd_predeployment_gating_supported": true,
+  "passed": true,
+  "details": {
+    "docker_config": {
+      "instruction": "HEALTHCHECK",
+      "interval_seconds": 15,
+      "timeout_seconds": 5,
+      "start_period_seconds": 20,
+      "retries": 3,
+      "command": "curl -f http://localhost:8000/live || exit 1",
+      "valid": true
+    },
+    "kubernetes_probes": {
+      "livenessProbe": {
+        "httpGet": {
+          "path": "/live",
+          "port": 8000
+        },
+        "initialDelaySeconds": 15,
+        "periodSeconds": 10,
+        "timeoutSeconds": 3,
+        "failureThreshold": 3,
+        "target_purpose": "Container restart on deadlocks / process crash"
+      },
+      "readinessProbe": {
+        "httpGet": {
+          "path": "/ready",
+          "port": 8000
+        },
+        "initialDelaySeconds": 5,
+        "periodSeconds": 5,
+        "timeoutSeconds": 3,
+        "failureThreshold": 2,
+        "target_purpose": "Traffic load balancer routing admission/withholding"
+      },
+      "startupProbe": {
+        "httpGet": {
+          "path": "/ready",
+          "port": 8000
+        },
+        "initialDelaySeconds": 2,
+        "periodSeconds": 2,
+        "timeoutSeconds": 2,
+        "failureThreshold": 30,
+        "target_purpose": "Prevents premature liveness kills during heavy model loading"
+      }
+    },
+    "cicd_gating": {
+      "pipeline_stage": "Post-Deployment Automated Verification",
+      "health_gating_enabled": true,
+      "canary_verification": {
+        "sample_traffic_percent": 10,
+        "evaluation_window_seconds": 60,
+        "required_endpoint": "/ready",
+        "max_allowed_error_rate_pct": 0.0
+      },
+      "rollback_trigger_rules": [
+        "Probe returns non-200 for 3 consecutive polls",
+        "Response latency exceeds 2500ms for 5 consecutive polls",
+        "Health payload state switches to UNHEALTHY or FAILED"
+      ],
+      "automatic_rollback_supported": true
+    },
+    "orchestration_tier": "ENTERPRISE_K8S_DOCKER_READY"
+  }
+}

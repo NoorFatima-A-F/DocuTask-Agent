@@ -1,0 +1,185 @@
+{
+  "system": "DocuTask Agent",
+  "version": "3.15.0",
+  "commit": "HEAD",
+  "environment": "Enterprise Cloud Readiness & Multi-Cloud Lab",
+  "timestamp": "2026-10-03T17:44:28.113959+00:00",
+  "overall_score": 100.0,
+  "certification_tier": "Cloud Native Ready",
+  "cloud_targets": [
+    "AWS",
+    "GCP",
+    "Azure",
+    "Kubernetes"
+  ],
+  "files": [
+    {
+      "filename": "architecture_report.json",
+      "report_title": "Architecture Report",
+      "sha256": "3b44380301be0a3bbfe0225f41671eb5a20b10b203132e9ebd9c54b8146c04eb",
+      "size_bytes": 3456
+    },
+    {
+      "filename": "autoscaling_report.json",
+      "report_title": "Autoscaling Report",
+      "sha256": "f13062a94d8729816ed861a04a41e854431653c3d1d6a45a15701a06d397535f",
+      "size_bytes": 2595
+    },
+    {
+      "filename": "cloud_architecture_assessment.json",
+      "report_title": "Cloud Architecture Assessment",
+      "sha256": "3b44380301be0a3bbfe0225f41671eb5a20b10b203132e9ebd9c54b8146c04eb",
+      "size_bytes": 3456
+    },
+    {
+      "filename": "cloud_certification.json",
+      "report_title": "Cloud Certification",
+      "sha256": "5b0d02a45dfa274958051963cbadc9428252a4045f29bf39d43505f2dd866301",
+      "size_bytes": 1910
+    },
+    {
+      "filename": "cloud_observability_report.json",
+      "report_title": "Cloud Observability Report",
+      "sha256": "6a8441aa85bcf9980fef3e093d11c0b353853c3398e855c9f250b6e8f98c0d9e",
+      "size_bytes": 2709
+    },
+    {
+      "filename": "cloud_portability_report.json",
+      "report_title": "Cloud Portability Report",
+      "sha256": "698c77d0df87df813869166f051a18bfa2336d26b063a00e7b5ac654fd4aae02",
+      "size_bytes": 2730
+    },
+    {
+      "filename": "cloud_readiness_scorecard.json",
+      "report_title": "Cloud Readiness Scorecard",
+      "sha256": "5b0d02a45dfa274958051963cbadc9428252a4045f29bf39d43505f2dd866301",
+      "size_bytes": 1910
+    },
+    {
+      "filename": "cloud_secret_report.json",
+      "report_title": "Cloud Secret Report",
+      "sha256": "a104ab6a21af58b2a6ff425ccab31856492a1966cf668df1303b3ef35632cd5b",
+      "size_bytes": 2658
+    },
+    {
+      "filename": "cloud_security_report.json",
+      "report_title": "Cloud Security Report",
+      "sha256": "c2799e6b7be4fe898c773c767a85fcd8ad7cc09b66a2aee7bcfa4578a90bee1d",
+      "size_bytes": 3007
+    },
+    {
+      "filename": "cloud_storage_report.json",
+      "report_title": "Cloud Storage Report",
+      "sha256": "30d666658c660fec66258815a59d78dcf3c767e05794b5aaa6d4b40c1d885fad",
+      "size_bytes": 2678
+    },
+    {
+      "filename": "compute_report.json",
+      "report_title": "Compute Report",
+      "sha256": "7613c5f8378ed04a58e600b0a71c947c80584a4b26ea2c26ce47bf50f5fcad71",
+      "size_bytes": 2486
+    },
+    {
+      "filename": "compute_resource_report.json",
+      "report_title": "Compute Resource Report",
+      "sha256": "7613c5f8378ed04a58e600b0a71c947c80584a4b26ea2c26ce47bf50f5fcad71",
+      "size_bytes": 2486
+    },
+    {
+      "filename": "container_cloud_report.json",
+      "report_title": "Container Cloud Report",
+      "sha256": "f9a3e882f7ec86756e4ab44997a76c0c2b6d0cc15b5c02b0fcd6006792eaba9a",
+      "size_bytes": 3195
+    },
+    {
+      "filename": "container_report.json",
+      "report_title": "Container Report",
+      "sha256": "f9a3e882f7ec86756e4ab44997a76c0c2b6d0cc15b5c02b0fcd6006792eaba9a",
+      "size_bytes": 3195
+    },
+    {
+      "filename": "database_report.json",
+      "report_title": "Database Report",
+      "sha256": "8d1b464d10dc758e937a9f2509b7ffc0e52c906154fc0905722787b0c11f5e91",
+      "size_bytes": 2543
+    },
+    {
+      "filename": "iac_verification_report.json",
+      "report_title": "Iac Verification Report",
+      "sha256": "f9d09774140ac1dde614dabb89307351c8f76f0e3f1b5275afeabdc6f78c5557",
+      "size_bytes": 2750
+    },
+    {
+      "filename": "kubernetes_readiness_report.json",
+      "report_title": "Kubernetes Readiness Report",
+      "sha256": "0ae9f5964c998e3548ff08cb32ef5e2d97f5010741391789bf9f91786f799422",
+      "size_bytes": 3306
+    },
+    {
+      "filename": "kubernetes_report.json",
+      "report_title": "Kubernetes Report",
+      "sha256": "0ae9f5964c998e3548ff08cb32ef5e2d97f5010741391789bf9f91786f799422",
+      "size_bytes": 3306
+    },
+    {
+      "filename": "managed_database_report.json",
+      "report_title": "Managed Database Report",
+      "sha256": "8d1b464d10dc758e937a9f2509b7ffc0e52c906154fc0905722787b0c11f5e91",
+      "size_bytes": 2543
+    },
+    {
+      "filename": "migration_report.json",
+      "report_title": "Migration Report",
+      "sha256": "650406ed71c62fadd5806fa57c62ff54916ec73cdb7ea4853de75fd4b1941533",
+      "size_bytes": 3639
+    },
+    {
+      "filename": "migration_simulation_report.json",
+      "report_title": "Migration Simulation Report",
+      "sha256": "650406ed71c62fadd5806fa57c62ff54916ec73cdb7ea4853de75fd4b1941533",
+      "size_bytes": 3639
+    },
+    {
+      "filename": "network_report.json",
+      "report_title": "Network Report",
+      "sha256": "9aae225382d9c8ddfa74a71a089045ce924783bf764fa4f73ab7606575529a5e",
+      "size_bytes": 2990
+    },
+    {
+      "filename": "network_security_report.json",
+      "report_title": "Network Security Report",
+      "sha256": "9aae225382d9c8ddfa74a71a089045ce924783bf764fa4f73ab7606575529a5e",
+      "size_bytes": 2990
+    },
+    {
+      "filename": "scaling_report.json",
+      "report_title": "Scaling Report",
+      "sha256": "f13062a94d8729816ed861a04a41e854431653c3d1d6a45a15701a06d397535f",
+      "size_bytes": 2595
+    },
+    {
+      "filename": "scorecard.json",
+      "report_title": "Scorecard",
+      "sha256": "5b0d02a45dfa274958051963cbadc9428252a4045f29bf39d43505f2dd866301",
+      "size_bytes": 1910
+    },
+    {
+      "filename": "security_report.json",
+      "report_title": "Security Report",
+      "sha256": "c2799e6b7be4fe898c773c767a85fcd8ad7cc09b66a2aee7bcfa4578a90bee1d",
+      "size_bytes": 3007
+    },
+    {
+      "filename": "storage_report.json",
+      "report_title": "Storage Report",
+      "sha256": "30d666658c660fec66258815a59d78dcf3c767e05794b5aaa6d4b40c1d885fad",
+      "size_bytes": 2678
+    },
+    {
+      "filename": "worker_scaling_report.json",
+      "report_title": "Worker Scaling Report",
+      "sha256": "dd28156682aeffff2e8817b262afa614909db2e4aeb4ba77a1783dfc32200e92",
+      "size_bytes": 2701
+    }
+  ]
+}

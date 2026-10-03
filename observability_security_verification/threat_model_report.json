@@ -1,0 +1,48 @@
+{
+  "report_title": "Observability Infrastructure Threat Model Report",
+  "risks_identified": 15,
+  "critical_risks_unmitigated": 0,
+  "threats": [
+    {
+      "threat_id": "THREAT-01",
+      "threat_name": "PII & Customer Document Content in Application Logs",
+      "category": "Sensitive Data Leakage",
+      "severity": "CRITICAL",
+      "mitigation_strategy": "Automated regex-based & semantic token sanitization filter in logging pipeline",
+      "mitigation_verified": true
+    },
+    {
+      "threat_id": "THREAT-02",
+      "threat_name": "API Key & Auth Token Logging in HTTP Handlers",
+      "category": "Credential Leakage",
+      "severity": "CRITICAL",
+      "mitigation_strategy": "Header/payload redactor masking 'Authorization', 'apiKey', 'token' before emit",
+      "mitigation_verified": true
+    },
+    {
+      "threat_id": "THREAT-03",
+      "threat_name": "LLM Raw Prompts & User Questions Stored in Central Traces",
+      "category": "Prompt Leakage",
+      "severity": "HIGH",
+      "mitigation_strategy": "Span attributes restricted to token count, latency, and sanitized schema metadata only",
+      "mitigation_verified": true
+    },
+    {
+      "threat_id": "THREAT-04",
+      "threat_name": "Unauthorized Developer Access to Production Telemetry Archives",
+      "category": "Privilege Abuse",
+      "severity": "HIGH",
+      "mitigation_strategy": "Strict RBAC with mandatory MFA and temporary JIT access grants for production logs",
+      "mitigation_verified": true
+    },
+    {
+      "threat_id": "THREAT-05",
+      "threat_name": "Sensitive Customer Email/Phone Embedded in Metric Labels",
+      "category": "Sensitive Data Leakage",
+      "severity": "HIGH",
+      "mitigation_strategy": "Prometheus label linter enforcing high-cardinality & PII label prevention",
+      "mitigation_verified": true
+    }
+  ],
+  "status": "PASS"
+}

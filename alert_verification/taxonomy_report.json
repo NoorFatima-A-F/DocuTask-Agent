@@ -1,0 +1,19 @@
+{
+  "total_categories": 5,
+  "categories_covered": [
+    "AVAILABILITY",
+    "PERFORMANCE",
+    "CAPACITY",
+    "DEPENDENCY",
+    "SECURITY"
+  ],
+  "rule_distribution": {
+    "AVAILABILITY": 3,
+    "PERFORMANCE": 1,
+    "CAPACITY": 2,
+    "DEPENDENCY": 1,
+    "SECURITY": 1
+  },
+  "taxonomy_compliance_score": 100.0,
+  "status": "PASS"
+}

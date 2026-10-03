@@ -1,0 +1,65 @@
+{
+  "report_title": "Anomaly Detection Report",
+  "total_anomalies_detected": 5,
+  "anomalies": [
+    {
+      "anomaly_id": "ANOM-001",
+      "metric": "api_response_latency_ms",
+      "component": "fastapi-core-gateway",
+      "observed_value": 1800.0,
+      "expected_range": "200-500ms",
+      "severity": "CRITICAL",
+      "confidence": 0.96,
+      "detection_method": "STANDARD_DEVIATION",
+      "pattern": "3.2 standard deviations above mean"
+    },
+    {
+      "anomaly_id": "ANOM-002",
+      "metric": "database_query_latency_ms",
+      "component": "postgres-database",
+      "observed_value": 450.0,
+      "expected_range": "10-80ms",
+      "severity": "WARNING",
+      "confidence": 0.93,
+      "detection_method": "BASELINE_DEVIATION",
+      "pattern": "5.6x baseline deviation"
+    },
+    {
+      "anomaly_id": "ANOM-003",
+      "metric": "redis_queue_depth",
+      "component": "redis-task-queue",
+      "observed_value": 800.0,
+      "expected_range": "50-200",
+      "severity": "CRITICAL",
+      "confidence": 0.97,
+      "detection_method": "TREND_ANALYSIS",
+      "pattern": "exponential growth: 100\u2192200\u2192400\u2192800"
+    },
+    {
+      "anomaly_id": "ANOM-004",
+      "metric": "worker_memory_rss_bytes",
+      "component": "celery-worker-pool",
+      "observed_value": 3800000000.0,
+      "expected_range": "1.0-2.5GB",
+      "severity": "WARNING",
+      "confidence": 0.94,
+      "detection_method": "MOVING_AVERAGE",
+      "pattern": "steady 12MB/min growth over 30 minutes"
+    },
+    {
+      "anomaly_id": "ANOM-005",
+      "metric": "document_processing_throughput",
+      "component": "ocr-raster-pipeline",
+      "observed_value": 10.0,
+      "expected_range": "80-120 documents/hour",
+      "severity": "CRITICAL",
+      "confidence": 0.98,
+      "detection_method": "BEHAVIORAL_ANALYSIS",
+      "pattern": "throughput dropped 90% from normal baseline"
+    }
+  ],
+  "statistical_detection_active": true,
+  "trend_detection_active": true,
+  "behavioral_detection_active": true,
+  "anomaly_detection_valid": true
+}

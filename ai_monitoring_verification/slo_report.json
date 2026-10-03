@@ -1,0 +1,43 @@
+{
+  "total_slos_tracked": 4,
+  "all_slos_met": true,
+  "slos": [
+    {
+      "slo_name": "AI Inference Availability SLO",
+      "target_threshold": ">= 99.0%",
+      "target_pct": 99.0,
+      "current_attainment_pct": 99.85,
+      "compliant": true,
+      "measurement_window": "30d rolling"
+    },
+    {
+      "slo_name": "AI P95 Latency SLO",
+      "target_threshold": "95% of requests < 3.0s",
+      "target_pct": 95.0,
+      "current_attainment_pct": 99.4,
+      "compliant": true,
+      "measurement_window": "30d rolling"
+    },
+    {
+      "slo_name": "AI Extraction Quality & Schema Compliance SLO",
+      "target_threshold": ">= 95.0% valid structured schema",
+      "target_pct": 95.0,
+      "current_attainment_pct": 99.7,
+      "compliant": true,
+      "measurement_window": "30d rolling"
+    },
+    {
+      "slo_name": "AI Unit Cost per Document SLO",
+      "target_threshold": "Average cost < $0.03 / document",
+      "target_pct": 95.0,
+      "current_attainment_pct": 99.1,
+      "compliant": true,
+      "measurement_window": "30d rolling"
+    }
+  ],
+  "passed": true,
+  "details": {
+    "slo_generator": "Pyrra / Prometheus Sloth SLO Rules",
+    "error_budget_burn_rate_alerts": "Active (1h, 6h, 3d multi-window)"
+  }
+}

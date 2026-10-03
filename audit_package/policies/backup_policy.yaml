@@ -1,0 +1,15 @@
+policy_name: DocuTask Enterprise Backup Policy
+version: '2.4'
+enforcement: MANDATORY_AUTOMATED
+database:
+  frequency: HOURLY
+  wal_archiving: CONTINUOUS_5_MINUTES
+  retention_days: 2555
+  encryption: AES-256-GCM
+  key_management: AWS_KMS_FIPS_140_2_LEVEL_3
+  immutability: WORM_OBJECT_LOCK_COMPLIANCE
+documents:
+  frequency: DAILY
+  replication: CROSS_REGION_US_WEST_2
+  retention_days: 2555
+  hash_verification: SHA-256_MANDATORY

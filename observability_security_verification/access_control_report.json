@@ -1,0 +1,43 @@
+{
+  "report_title": "Observability Access Control & RBAC Verification Report",
+  "role_policies": [
+    {
+      "role": "Developer",
+      "metrics_access": "READ (Dev/Staging)",
+      "logs_access": "READ (Dev/Staging Only, Redacted)",
+      "traces_access": "READ (Dev/Staging)",
+      "audit_logs_access": "NONE",
+      "mfa_required": true,
+      "least_privilege_verified": true
+    },
+    {
+      "role": "Operator",
+      "metrics_access": "READ (All Environments)",
+      "logs_access": "READ (Prod Scoped/Redacted with JIT TTL)",
+      "traces_access": "READ (All Environments)",
+      "audit_logs_access": "NONE",
+      "mfa_required": true,
+      "least_privilege_verified": true
+    },
+    {
+      "role": "Security Team",
+      "metrics_access": "READ (All Environments)",
+      "logs_access": "READ (Security Logs, Redacted Prod Logs)",
+      "traces_access": "READ (All Environments)",
+      "audit_logs_access": "READ_ONLY (Full Immutable Audit Logs)",
+      "mfa_required": true,
+      "least_privilege_verified": true
+    },
+    {
+      "role": "Administrator",
+      "metrics_access": "ADMIN (All Environments)",
+      "logs_access": "ADMIN (Controlled via JIT Access with Approval)",
+      "traces_access": "ADMIN (All Environments)",
+      "audit_logs_access": "ADMIN (Append-Only Audit Policy)",
+      "mfa_required": true,
+      "least_privilege_verified": true
+    }
+  ],
+  "rbac_enforced": true,
+  "mfa_mandatory_for_admins": true
+}

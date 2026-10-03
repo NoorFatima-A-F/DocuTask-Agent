@@ -1,0 +1,35 @@
+{
+  "api_health_verified": true,
+  "workers_active": true,
+  "frontend_reachable": true,
+  "database_migrations_intact": true,
+  "database_foreign_keys_intact": true,
+  "document_hashes_matched": true,
+  "agent_workflows_resumed": true,
+  "overall_validation_passed": true,
+  "details": {
+    "application_health": {
+      "api_endpoint_status": "HTTP_200_OK",
+      "api_latency_ms": 18.2,
+      "celery_workers_online": 8,
+      "frontend_http_status": "HTTP_200_OK"
+    },
+    "database_health": {
+      "alembic_head_revision": "HEAD_APPLIED",
+      "tables_count": 28,
+      "foreign_key_integrity_violations": 0,
+      "deadlock_count": 0
+    },
+    "document_storage_health": {
+      "objects_audited": 245,
+      "hash_matches_count": 245,
+      "hash_parity_pct": 100.0
+    },
+    "agent_runtime_health": {
+      "active_workflows_resumed": 14,
+      "dropped_workflows": 0,
+      "synthetic_extraction_accuracy_pct": 100.0
+    },
+    "validation_verdict": "FULL_PLATFORM_OPERATIONAL_POST_RECOVERY"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "report_title": "Digital Reliability Twin Report",
+  "overall_system_state": "DEGRADED",
+  "component_states": [
+    {
+      "component": "fastapi-core-gateway",
+      "current_state": "HEALTHY",
+      "failure_history_count": 2,
+      "current_telemetry_health_pct": 99.5,
+      "dependencies": [
+        "postgres-database",
+        "redis-task-queue"
+      ]
+    },
+    {
+      "component": "postgres-database",
+      "current_state": "HEALTHY",
+      "failure_history_count": 1,
+      "current_telemetry_health_pct": 98.2,
+      "dependencies": []
+    },
+    {
+      "component": "redis-task-queue",
+      "current_state": "DEGRADED",
+      "failure_history_count": 3,
+      "current_telemetry_health_pct": 85.0,
+      "dependencies": []
+    },
+    {
+      "component": "celery-worker-pool",
+      "current_state": "HEALTHY",
+      "failure_history_count": 4,
+      "current_telemetry_health_pct": 92.1,
+      "dependencies": [
+        "redis-task-queue",
+        "postgres-database"
+      ]
+    },
+    {
+      "component": "gemini-1.5-flash-client",
+      "current_state": "HEALTHY",
+      "failure_history_count": 2,
+      "current_telemetry_health_pct": 96.8,
+      "dependencies": []
+    },
+    {
+      "component": "ocr-raster-pipeline",
+      "current_state": "HEALTHY",
+      "failure_history_count": 1,
+      "current_telemetry_health_pct": 97.5,
+      "dependencies": [
+        "minio-storage"
+      ]
+    }
+  ],
+  "total_components_modeled": 6,
+  "healthy_components": 5,
+  "degraded_components": 1,
+  "reliability_twin_valid": true
+}

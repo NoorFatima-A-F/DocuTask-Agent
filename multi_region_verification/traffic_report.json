@@ -1,0 +1,9 @@
+{
+  "global_traffic_manager": "AWS Route53 ARC (Application Recovery Controller) + Cloudflare Anycast",
+  "detection_time_sec": 5.0,
+  "dns_propagation_time_sec": 25.0,
+  "traffic_migration_time_sec": 12.0,
+  "total_failover_time_sec": 42.0,
+  "dropped_requests_pct": 0.0,
+  "passed": true
+}

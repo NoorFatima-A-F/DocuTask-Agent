@@ -1,0 +1,79 @@
+{
+  "total_scenarios": 4,
+  "passed_scenarios": 4,
+  "all_scenarios_passed": true,
+  "scenarios": [
+    {
+      "scenario_id": "SCENARIO-01",
+      "scenario_name": "Database Shutdown Simulation",
+      "injected_failure": "Simulate PostgreSQL connection pool failure / database shutdown",
+      "expected_state": "NOT_READY",
+      "actual_state": "NOT_READY",
+      "expected_traffic_action": "REJECT_TRAFFIC",
+      "actual_traffic_action": "REJECT_TRAFFIC",
+      "passed": true,
+      "details": {
+        "service_ready": false,
+        "failed_dependencies": [
+          "postgres"
+        ],
+        "verdict": "BLOCKED_TRAFFIC_CORRECTLY"
+      }
+    },
+    {
+      "scenario_id": "SCENARIO-02",
+      "scenario_name": "Redis Broker Failure Simulation",
+      "injected_failure": "Simulate Redis broker timeout and queue unreachable",
+      "expected_state": "NOT_READY",
+      "actual_state": "NOT_READY",
+      "expected_traffic_action": "REJECT_TRAFFIC",
+      "actual_traffic_action": "REJECT_TRAFFIC",
+      "passed": true,
+      "details": {
+        "service_ready": false,
+        "failed_dependencies": [
+          "redis"
+        ],
+        "verdict": "QUEUE_READINESS_FAILED_CORRECTLY"
+      }
+    },
+    {
+      "scenario_id": "SCENARIO-03",
+      "scenario_name": "Gemini AI Timeout & Rate Limit Simulation",
+      "injected_failure": "Simulate Gemini API response timeout and 429 quota exhaustion",
+      "expected_state": "DEGRADED",
+      "actual_state": "DEGRADED",
+      "expected_traffic_action": "THROTTLE_TRAFFIC",
+      "actual_traffic_action": "THROTTLE_TRAFFIC",
+      "passed": true,
+      "details": {
+        "service_ready": true,
+        "degraded_dependencies": [
+          "gemini"
+        ],
+        "verdict": "DEGRADED_MODE_ACTIVATED_SAFELY"
+      }
+    },
+    {
+      "scenario_id": "SCENARIO-04",
+      "scenario_name": "Storage Permission Failure Simulation",
+      "injected_failure": "Simulate filesystem / S3 bucket write permission denial",
+      "expected_state": "NOT_READY",
+      "actual_state": "NOT_READY",
+      "expected_traffic_action": "REJECT_TRAFFIC",
+      "actual_traffic_action": "REJECT_TRAFFIC",
+      "passed": true,
+      "details": {
+        "service_ready": false,
+        "failed_dependencies": [
+          "storage"
+        ],
+        "verdict": "STORAGE_FAILURE_HANDLED_CORRECTLY"
+      }
+    }
+  ],
+  "details": {
+    "simulation_engine": "DocuTask Fault Injection Framework",
+    "isolation_guarantee": "Failure states isolated per dependency hierarchy"
+  }
+}

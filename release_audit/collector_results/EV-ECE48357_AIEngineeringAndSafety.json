@@ -1,0 +1,22 @@
+{
+  "artifact_paths": [],
+  "category": "AIEngineeringAndSafety",
+  "classification": "VERIFIED_BY_STATIC_ANALYSIS",
+  "collector": "AIPipelineCollector",
+  "command": null,
+  "confidence": "MEDIUM",
+  "content_hash": "45a7e283e10c3393cb4edd1aa7af1082ce2ba090d90d132d66133477d887c1a6",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-ECE48357",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "has_prompt_registry": true,
+    "has_safety_gateway": true,
+    "has_shadow_strategy": true
+  },
+  "source_type": "STATIC_SOURCE_CODE",
+  "summary": "AI pipeline inspection: prompt registry (True), safety gateway (True), shadow rollout strategy (True).",
+  "timestamp": "2026-09-20T19:31:30.012579+00:00"
+}

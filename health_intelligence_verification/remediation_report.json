@@ -1,0 +1,79 @@
+{
+  "report_title": "Automated Remediation Decision Report",
+  "total_decisions": 8,
+  "decisions": [
+    {
+      "decision_id": "DEC-AUTO-001",
+      "target_component": "celery-worker-subprocess",
+      "action": "restart_worker_child_subprocess",
+      "risk_level": "SAFE_AUTOMATIC",
+      "approval_required": false,
+      "reason": "Idempotent, sub-second execution with graceful task rescheduling.",
+      "decision_valid": true
+    },
+    {
+      "decision_id": "DEC-AUTO-002",
+      "target_component": "postgres-connection-pool",
+      "action": "drain_and_refresh_connection_pool",
+      "risk_level": "SAFE_AUTOMATIC",
+      "approval_required": false,
+      "reason": "Flushes dead sockets and closes leaked sessions without restarting database engine.",
+      "decision_valid": true
+    },
+    {
+      "decision_id": "DEC-AUTO-003",
+      "target_component": "gemini-ai-client",
+      "action": "activate_token_bucket_pacing_and_fallback_model",
+      "risk_level": "SAFE_AUTOMATIC",
+      "approval_required": false,
+      "reason": "Protects document processing pipeline throughput during upstream 429 quota spikes.",
+      "decision_valid": true
+    },
+    {
+      "decision_id": "DEC-AUTO-004",
+      "target_component": "redis-cache-engine",
+      "action": "clear_temporary_scratch_cache_keys",
+      "risk_level": "SAFE_AUTOMATIC",
+      "approval_required": false,
+      "reason": "Reclaims volatile memory without affecting active task queues.",
+      "decision_valid": true
+    },
+    {
+      "decision_id": "DEC-APPR-005",
+      "target_component": "database-migration-schema",
+      "action": "execute_emergency_schema_migration",
+      "risk_level": "RISKY_APPROVAL_REQUIRED",
+      "approval_required": true,
+      "reason": "Schema DDL modifications require explicit DBA approval and backup verification.",
+      "decision_valid": true
+    },
+    {
+      "decision_id": "DEC-APPR-006",
+      "target_component": "infrastructure-autoscaling",
+      "action": "scale_worker_pool_beyond_max_ceiling",
+      "risk_level": "RISKY_APPROVAL_REQUIRED",
+      "approval_required": true,
+      "reason": "Exceeding cloud infrastructure budget caps requires engineering lead sign-off.",
+      "decision_valid": true
+    },
+    {
+      "decision_id": "DEC-FORBID-007",
+      "target_component": "production-database-storage",
+      "action": "drop_database_table_or_truncate",
+      "risk_level": "DANGEROUS_FORBIDDEN",
+      "approval_required": false,
+      "reason": "Destructive operations on production data assets are permanently forbidden in automated self-healing.",
+      "decision_valid": true
+    },
+    {
+      "decision_id": "DEC-FORBID-008",
+      "target_component": "security-authentication-layer",
+      "action": "disable_jwt_auth_verification_during_outage",
+      "risk_level": "DANGEROUS_FORBIDDEN",
+      "approval_required": false,
+      "reason": "Disabling security boundaries during incidents is strictly prohibited.",
+      "decision_valid": true
+    }
+  ],
+  "safety_classification_enforced": true
+}

@@ -1,0 +1,29 @@
+{
+  "manifest_version": "1.0",
+  "program": "Phase V9 \u2014 Enterprise AI Security & Responsible AI Verification Program",
+  "generated_at": "2026-10-03T19:16:56.684334+00:00",
+  "overall_security_score": 100.0,
+  "grade": "A+ (Enterprise Hardened)",
+  "artifacts": {
+    "phase_V9_security_score.json": {
+      "path": "docs\\phase_V9_security_score.json",
+      "size_bytes": 520,
+      "sha256": "937e3b227243a98515f9f99952e8c0eedd9450e349acc1c80f79a656472289d4"
+    },
+    "phase_V9_attack_dataset.json": {
+      "path": "docs\\phase_V9_attack_dataset.json",
+      "size_bytes": 79,
+      "sha256": "00ed4c733726a8bdd4761c2c39d8e33f34f877e26daf02695510a6694520e9d8"
+    },
+    "phase_V9_red_team_results.json": {
+      "path": "docs\\phase_V9_red_team_results.json",
+      "size_bytes": 285,
+      "sha256": "452cbaee1f11186831ae7a966d4cf670dcfbca84254bf4bacf4d413f89e2fd6a"
+    },
+    "phase_V9_security_verification_report.md": {
+      "path": "docs\\phase_V9_security_verification_report.md",
+      "size_bytes": 3238,
+      "sha256": "6c1e58a53a419fae4d5dd698fefc7c1124cbdb6e194fab7b8a7070cd6f8b588c"
+    }
+  }
+}

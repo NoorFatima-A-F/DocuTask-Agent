@@ -1,0 +1,57 @@
+{
+  "total_checks": 6,
+  "unauthorized_commands_blocked": 3,
+  "secret_leaks_found": 0,
+  "rbac_enforced": true,
+  "checks": [
+    {
+      "check_name": "whitelisted_action_restart_worker",
+      "operation": "restart_worker_container",
+      "authorized": true,
+      "rbac_role_required": "reliability_engine_role",
+      "destructive_blocked": false,
+      "zero_secret_leak": true
+    },
+    {
+      "check_name": "whitelisted_action_refresh_pool",
+      "operation": "restart_connection_pool",
+      "authorized": true,
+      "rbac_role_required": "reliability_engine_role",
+      "destructive_blocked": false,
+      "zero_secret_leak": true
+    },
+    {
+      "check_name": "whitelisted_action_fallback_provider",
+      "operation": "activate_fallback_provider",
+      "authorized": true,
+      "rbac_role_required": "reliability_engine_role",
+      "destructive_blocked": false,
+      "zero_secret_leak": true
+    },
+    {
+      "check_name": "block_unauthorized_drop_database",
+      "operation": "DROP DATABASE docutask_production",
+      "authorized": false,
+      "rbac_role_required": "system_root_forbidden",
+      "destructive_blocked": true,
+      "zero_secret_leak": true
+    },
+    {
+      "check_name": "block_unauthorized_shell_execution",
+      "operation": "/bin/sh -c rm -rf /var/lib/data",
+      "authorized": false,
+      "rbac_role_required": "system_root_forbidden",
+      "destructive_blocked": true,
+      "zero_secret_leak": true
+    },
+    {
+      "check_name": "block_unauthorized_key_deletion",
+      "operation": "FLUSHALL ASYNC",
+      "authorized": false,
+      "rbac_role_required": "system_root_forbidden",
+      "destructive_blocked": true,
+      "zero_secret_leak": true
+    }
+  ],
+  "status": "PASS"
+}

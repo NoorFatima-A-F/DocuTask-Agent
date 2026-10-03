@@ -1,0 +1,9 @@
+{
+  "image_name": "docutask-api",
+  "version": "3.19.0",
+  "commit_hash": "9f8e7d6c5b4a",
+  "build_status": "PASSED",
+  "digest_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "build_duration_sec": 14.2,
+  "timestamp": "2026-10-03T17:44:33.618818+00:00"
+}

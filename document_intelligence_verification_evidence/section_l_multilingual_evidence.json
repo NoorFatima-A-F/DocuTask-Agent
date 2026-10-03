@@ -1,0 +1,69 @@
+{
+  "section_id": "SECTION_L_MULTILINGUAL",
+  "title": "Section L: Multilingual & Multi-Script Verification",
+  "description": "Validates extraction fidelity across 8 global languages (Urdu, Arabic, Chinese, French, German, Spanish), code-switching handling (Roman Urdu), and Unicode normalization (NFC/NFKC).",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.6,
+  "metrics": {
+    "languages_supported": 8,
+    "code_switching_accuracy": 1.0,
+    "unicode_nfkc_matched": true,
+    "cross_lingual_schema_aligned": true
+  },
+  "assertions": [
+    {
+      "name": "Global_Language_Corpus_Coverage",
+      "passed": true,
+      "message": "Verified multi-lingual processing across 8 target languages and scripts.",
+      "execution_time_ms": 0.002,
+      "details": {
+        "languages": [
+          "en",
+          "ur",
+          "ar",
+          "zh",
+          "fr",
+          "de",
+          "es",
+          "ur_roman"
+        ]
+      }
+    },
+    {
+      "name": "Roman_Urdu_And_Code_Switching_Extraction",
+      "passed": true,
+      "message": "Code-switching parser extracted entities from interleaved Roman Urdu & English text.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "extracted": {
+          "vendor": "ABC Corp",
+          "amount": 15000.0,
+          "currency": "PKR",
+          "invoice_no": "9918"
+        }
+      }
+    },
+    {
+      "name": "Unicode_NFKC_Canonical_Normalization",
+      "passed": true,
+      "message": "Unicode normalization reconciled decomposed diacritics and Arabic ligature forms.",
+      "execution_time_ms": 0.58,
+      "details": {
+        "nfkc_matched": true
+      }
+    },
+    {
+      "name": "Cross_Lingual_Schema_Field_Mapping",
+      "passed": true,
+      "message": "Cross-lingual dictionary mapped multi-language headers into unified canonical schema fields.",
+      "execution_time_ms": 0.004,
+      "details": {
+        "mapped_terms": 4
+      }
+    }
+  ]
+}

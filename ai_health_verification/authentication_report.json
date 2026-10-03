@@ -1,0 +1,39 @@
+{
+  "total_providers_checked": 3,
+  "all_authenticated": true,
+  "checks": [
+    {
+      "provider": "gemini",
+      "key_format_valid": true,
+      "permissions_sufficient": true,
+      "expiration_detected": false,
+      "authenticated": true,
+      "status": "AUTHENTICATED",
+      "details": "Credential syntax valid; scopes include generateContent, embedContent; token active."
+    },
+    {
+      "provider": "claude_fallback",
+      "key_format_valid": true,
+      "permissions_sufficient": true,
+      "expiration_detected": false,
+      "authenticated": true,
+      "status": "AUTHENTICATED",
+      "details": "Credential syntax valid; scopes include generateContent, embedContent; token active."
+    },
+    {
+      "provider": "local_vllm",
+      "key_format_valid": true,
+      "permissions_sufficient": true,
+      "expiration_detected": false,
+      "authenticated": true,
+      "status": "AUTHENTICATED",
+      "details": "Credential syntax valid; scopes include generateContent, embedContent; token active."
+    }
+  ],
+  "passed": true,
+  "details": {
+    "auth_protocol": "Bearer Token & TLS 1.3 Secure Key Exchange",
+    "credential_storage": "Encrypted HashiCorp Vault / Cloud Secret Manager",
+    "auto_pause_on_auth_failure": true
+  }
+}

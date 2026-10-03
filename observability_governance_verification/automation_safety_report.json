@@ -1,0 +1,63 @@
+{
+  "report_title": "Reliability Automation Safety Governance Verification Report",
+  "safety_rules": [
+    {
+      "action_type": "CacheFlushAndWarmup",
+      "risk_tier": "LOW",
+      "requires_human_approval": false,
+      "rollback_supported": true,
+      "guardrails": [
+        "Max rate: 1 flush/10min",
+        "Warmup key pre-population check"
+      ]
+    },
+    {
+      "action_type": "WorkerPodAutoscaling",
+      "risk_tier": "MEDIUM",
+      "requires_human_approval": false,
+      "rollback_supported": true,
+      "guardrails": [
+        "Scale ceiling: max 50 pods",
+        "Cooldown period: 180s",
+        "Cost threshold limit"
+      ]
+    },
+    {
+      "action_type": "PrimaryAIProviderSwitchover",
+      "risk_tier": "HIGH",
+      "requires_human_approval": true,
+      "rollback_supported": true,
+      "guardrails": [
+        "Human confirmation window: 300s timeout",
+        "Fallback SLA validation",
+        "Prompt schema compatibility verification"
+      ]
+    },
+    {
+      "action_type": "DatabasePrimaryFailover",
+      "risk_tier": "HIGH",
+      "requires_human_approval": true,
+      "rollback_supported": true,
+      "guardrails": [
+        "Replication lag < 100ms",
+        "Dual-write prevention lock",
+        "SRE on-call approval prompt"
+      ]
+    },
+    {
+      "action_type": "MultiRegionTrafficShift",
+      "risk_tier": "CRITICAL",
+      "requires_human_approval": true,
+      "rollback_supported": true,
+      "guardrails": [
+        "Multi-party dual approval",
+        "DNS propagation TTL < 30s",
+        "Regional capacity pre-flight check"
+      ]
+    }
+  ],
+  "human_approval_gate_enforced": true,
+  "automated_rollback_verified": true,
+  "safety_compliance_pct": 100.0,
+  "status": "PASS"
+}

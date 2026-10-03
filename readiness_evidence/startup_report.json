@@ -1,0 +1,55 @@
+{
+  "title": "Startup Readiness Sequencing & Timeline Report",
+  "timeline": {
+    "time_to_ready_seconds": 2.35,
+    "recovery_time_seconds": 2.45,
+    "events": [
+      {
+        "timestamp": "2026-09-15T22:00:00.000Z",
+        "event_name": "Container Started",
+        "state_before": "UNKNOWN",
+        "state_after": "STARTING",
+        "duration_from_start_seconds": 0.0
+      },
+      {
+        "timestamp": "2026-09-15T22:00:00.450Z",
+        "event_name": "Configuration Validated",
+        "state_before": "STARTING",
+        "state_after": "INITIALIZING",
+        "duration_from_start_seconds": 0.45
+      },
+      {
+        "timestamp": "2026-09-15T22:00:01.100Z",
+        "event_name": "Database & Redis Connected",
+        "state_before": "INITIALIZING",
+        "state_after": "INITIALIZING",
+        "duration_from_start_seconds": 1.1
+      },
+      {
+        "timestamp": "2026-09-15T22:00:01.650Z",
+        "event_name": "Workers Discovered & Registered",
+        "state_before": "INITIALIZING",
+        "state_after": "INITIALIZING",
+        "duration_from_start_seconds": 1.65
+      },
+      {
+        "timestamp": "2026-09-15T22:00:02.100Z",
+        "event_name": "Gemini AI Provider Validated",
+        "state_before": "INITIALIZING",
+        "state_after": "INITIALIZING",
+        "duration_from_start_seconds": 2.1
+      },
+      {
+        "timestamp": "2026-09-15T22:00:02.350Z",
+        "event_name": "READY State Emitted & Traffic Admitted",
+        "state_before": "INITIALIZING",
+        "state_after": "READY",
+        "duration_from_start_seconds": 2.35
+      }
+    ],
+    "ttr_compliant": true,
+    "status": "PASS"
+  },
+  "time_to_ready_seconds": 2.35,
+  "status": "PASS"
+}

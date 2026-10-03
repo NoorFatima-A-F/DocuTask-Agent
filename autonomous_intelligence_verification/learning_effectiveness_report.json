@@ -1,0 +1,35 @@
+{
+  "report_title": "Continuous Learning & Self-Optimization Effectiveness Report",
+  "learning_cycles_evaluated": 3,
+  "cycles": [
+    {
+      "cycle_id": "cycle-opt-001",
+      "model_version": "v2.4.0",
+      "recommendations_generated": 28,
+      "recommendations_executed": 27,
+      "positive_outcome_rate_pct": 96.4,
+      "false_optimization_rate_pct": 3.6,
+      "adaptation_speed_minutes": 4.2
+    },
+    {
+      "cycle_id": "cycle-opt-002",
+      "model_version": "v2.4.1",
+      "recommendations_generated": 34,
+      "recommendations_executed": 34,
+      "positive_outcome_rate_pct": 97.8,
+      "false_optimization_rate_pct": 2.2,
+      "adaptation_speed_minutes": 3.5
+    },
+    {
+      "cycle_id": "cycle-opt-003",
+      "model_version": "v2.4.2",
+      "recommendations_generated": 42,
+      "recommendations_executed": 42,
+      "positive_outcome_rate_pct": 99.2,
+      "false_optimization_rate_pct": 0.8,
+      "adaptation_speed_minutes": 2.8
+    }
+  ],
+  "cumulative_learning_gain_pct": 97.8,
+  "learning_effectiveness_score": 99.1
+}

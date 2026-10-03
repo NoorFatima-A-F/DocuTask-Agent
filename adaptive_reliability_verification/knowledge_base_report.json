@@ -1,0 +1,89 @@
+{
+  "report_title": "Reliability Memory Architecture Report",
+  "incident_memories": [
+    {
+      "id": "MEM-INC-001",
+      "failure_type": "Database Connection Pool Exhaustion",
+      "component": "PostgreSQL Database",
+      "root_cause": "SQLAlchemy async session leak during heavy search query spikes.",
+      "impact": "FastAPI status probe returned HTTP 500; document checkout paused.",
+      "resolution": "Reset connection pool and enforced pool_recycle=1800 with statement_timeout=5000ms.",
+      "success_rate": 100.0,
+      "timestamp": "2026-09-15T19:28:06.795597+00:00"
+    },
+    {
+      "id": "MEM-INC-002",
+      "failure_type": "Worker Heap Memory Saturation",
+      "component": "Celery Worker Pool",
+      "root_cause": "Native C++ memory accumulation in Tesseract OCR processes during multi-page PDF processing.",
+      "impact": "OS OOMKiller dispatched SIGKILL to worker subprocess.",
+      "resolution": "Configured max-tasks-per-child=50 and pre-warmed worker recycling.",
+      "success_rate": 98.5,
+      "timestamp": "2026-09-15T19:28:06.795597+00:00"
+    },
+    {
+      "id": "MEM-INC-003",
+      "failure_type": "AI Token Quota Rate Limiting",
+      "component": "Gemini AI Provider Client",
+      "root_cause": "Parallel batch document ingestion exceeded upstream 1M TPM tier limit.",
+      "impact": "Gemini API returned HTTP 429 Resource Exhausted.",
+      "resolution": "Activated client-side token bucket rate limiter and routed low-priority tasks to secondary flash model.",
+      "success_rate": 99.2,
+      "timestamp": "2026-09-15T19:28:06.795597+00:00"
+    }
+  ],
+  "recovery_memories": [
+    {
+      "action": "reset_connection_pool_and_drain",
+      "target_component": "PostgreSQL Database",
+      "success_count": 48,
+      "failure_count": 0,
+      "confidence": 0.98,
+      "mean_duration_ms": 280.0
+    },
+    {
+      "action": "recycle_worker_task_subprocess",
+      "target_component": "Celery Worker Pool",
+      "success_count": 62,
+      "failure_count": 1,
+      "confidence": 0.96,
+      "mean_duration_ms": 450.0
+    },
+    {
+      "action": "switch_to_semantic_cache_and_pacing",
+      "target_component": "Gemini AI Provider Client",
+      "success_count": 35,
+      "failure_count": 0,
+      "confidence": 0.99,
+      "mean_duration_ms": 120.0
+    }
+  ],
+  "dependency_memories": [
+    {
+      "primary_component": "PostgreSQL Database",
+      "affected_components": [
+        "API Gateway",
+        "Workers",
+        "Document Processing Pipeline"
+      ],
+      "cascade_risk_score": 0.88
+    },
+    {
+      "primary_component": "Redis Broker",
+      "affected_components": [
+        "Celery Workers",
+        "Task Queue Ingestion"
+      ],
+      "cascade_risk_score": 0.75
+    },
+    {
+      "primary_component": "Gemini AI Provider",
+      "affected_components": [
+        "Document Extraction Stage",
+        "Workflow Completion"
+      ],
+      "cascade_risk_score": 0.65
+    }
+  ],
+  "knowledge_store_healthy": true
+}

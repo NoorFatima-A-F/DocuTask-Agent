@@ -1,0 +1,103 @@
+{
+  "project": "DocuTask-Agent",
+  "framework": "Enterprise Infrastructure Quality & Certification Framework",
+  "version": "3.17.0",
+  "commit": "HEAD",
+  "environment": "Enterprise Production Readiness Lab",
+  "timestamp": "2026-10-03T17:44:52.491436+00:00",
+  "overall_score": 100.0,
+  "certification": "Enterprise Infrastructure Ready",
+  "deployment_approved": true,
+  "files": [
+    {
+      "filename": "Infrastructure_Readiness_Report.md",
+      "report_title": "Infrastructure Readiness Report",
+      "sha256": "f496ec23e6e9b632457f031edbe8f1f475006596c87cc61435bb8f8bffa02bb0",
+      "size_bytes": 2872
+    },
+    {
+      "filename": "evidence/normalized_results/normalized_evidence.json",
+      "report_title": "Normalized Evidence",
+      "sha256": "f481333b64291bcf17f670be91ae224f6bf8f6c2d486a28a61583e3aa669c739",
+      "size_bytes": 261489
+    },
+    {
+      "filename": "evidence/raw_results/raw_chaos_verification_4.json",
+      "report_title": "Raw Chaos Verification 4",
+      "sha256": "a0ed62641a89f34ab79c1d6e0448b46ff7e5979e11a14fabccebe69ba2b0ee5b",
+      "size_bytes": 55580
+    },
+    {
+      "filename": "evidence/raw_results/raw_cloud_readiness_verification_2.json",
+      "report_title": "Raw Cloud Readiness Verification 2",
+      "sha256": "eaf777051f983c7204f997ea4aa167f1e48ad6abff19b0dd2d9b622bf4aebef8",
+      "size_bytes": 89036
+    },
+    {
+      "filename": "evidence/raw_results/raw_disaster_recovery_verification_3.json",
+      "report_title": "Raw Disaster Recovery Verification 3",
+      "sha256": "13b1340b232c4c85d97b832b35c73308b96d071c64cb4ee1e749b5fb3bf7abe1",
+      "size_bytes": 85628
+    },
+    {
+      "filename": "evidence/raw_results/raw_observability_verification_6.json",
+      "report_title": "Raw Observability Verification 6",
+      "sha256": "981e1aba77ae7ba49fed867aafcdfd4a08a297f1d16315f8d885da37bb9d456a",
+      "size_bytes": 618
+    },
+    {
+      "filename": "evidence/raw_results/raw_performance_verification_5.json",
+      "report_title": "Raw Performance Verification 5",
+      "sha256": "e8e62b5dddd60cd17756740ba73e03e964995d3c53ad8e687f1571ac8743ab73",
+      "size_bytes": 151645
+    },
+    {
+      "filename": "evidence/raw_results/raw_security_verification_1.json",
+      "report_title": "Raw Security Verification 1",
+      "sha256": "7fac39f5caa0044f10c428895646537da2e209edf4697cd3e3093f349edd0f5a",
+      "size_bytes": 81304
+    },
+    {
+      "filename": "history/previous_scores.json",
+      "report_title": "Previous Scores",
+      "sha256": "281fe87ae1b690b5c3fda3356d0dc34ffed71ffdd8369063ec34930e266d53ec",
+      "size_bytes": 363
+    },
+    {
+      "filename": "reports/certification_report.json",
+      "report_title": "Certification Report",
+      "sha256": "e2a14ecc26fd3a07d4d9d3a611b9c42cce79f35e7b4aa662426421efffa3dec1",
+      "size_bytes": 658
+    },
+    {
+      "filename": "reports/readiness_report.md",
+      "report_title": "Readiness Report",
+      "sha256": "f496ec23e6e9b632457f031edbe8f1f475006596c87cc61435bb8f8bffa02bb0",
+      "size_bytes": 2872
+    },
+    {
+      "filename": "reports/regression_report.json",
+      "report_title": "Regression Report",
+      "sha256": "9c19303407030ccf6cec1de627ec90bfb0002ef97489a178ec4d76d3b6388412",
+      "size_bytes": 1690
+    },
+    {
+      "filename": "reports/risk_assessment.json",
+      "report_title": "Risk Assessment",
+      "sha256": "3cfffe8ace32bb330c8d44879b0dcf6b7e1c9e43bac8fed6e32bda55b93c2bcb",
+      "size_bytes": 271
+    },
+    {
+      "filename": "scoring/maturity_assessment.json",
+      "report_title": "Maturity Assessment",
+      "sha256": "c74401e5be2a89921814c8b3a362e0f3b5f851da9e1fff0b005f3eca8d932e94",
+      "size_bytes": 1070
+    },
+    {
+      "filename": "scoring/quality_score.json",
+      "report_title": "Quality Score",
+      "sha256": "b9d92f3cde11a383f4e1873a055e148b543e9788c447b3458a9d81ed79afe4f5",
+      "size_bytes": 1597
+    }
+  ]
+}

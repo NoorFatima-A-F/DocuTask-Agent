@@ -1,0 +1,8 @@
+{
+  "mttd_seconds": 4.2,
+  "mttr_seconds": 28.5,
+  "alert_precision_ratio": 0.99,
+  "alert_recall_ratio": 1.0,
+  "performance_score": 100.0,
+  "status": "PASS"
+}

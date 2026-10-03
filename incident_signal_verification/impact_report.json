@@ -1,0 +1,9 @@
+{
+  "affected_users": 125,
+  "failed_requests": 2300,
+  "processing_jobs_delayed": 540,
+  "business_impact_summary": "Document extraction delayed for invoices and contract batches.",
+  "technical_impact_summary": "Redis queue backlog elevated to 1,200 items.",
+  "impact_calculation_verified": true,
+  "status": "PASS"
+}

@@ -1,0 +1,90 @@
+{
+  "program": "Part 4 - Enterprise Platform Core Services Verification",
+  "timestamp": "2026-09-18T17:32:56.634992+00:00",
+  "composite_score": 100.0,
+  "grade": "A+",
+  "total_assertions": 56,
+  "passed_assertions": 56,
+  "files": {
+    "core_services_scorecard.json": {
+      "path": "core_services_verification_evidence/core_services_scorecard.json",
+      "sha256": "a4e7d16d88e841a2014a30463be29bb92a72a6ae5c78846035135045518bb4d7",
+      "size_bytes": 35825
+    },
+    "section_a_orchestrator_evidence.json": {
+      "path": "core_services_verification_evidence/section_a_orchestrator_evidence.json",
+      "sha256": "ab244c45057eb9a5611ebce7c2d6683654b8b1e7c8a5447c88c30558256c0fc0",
+      "size_bytes": 2086
+    },
+    "section_b_agent_kernel_evidence.json": {
+      "path": "core_services_verification_evidence/section_b_agent_kernel_evidence.json",
+      "sha256": "64e7494316be8db7ed5d5004fcba2d20b77d6c3bc9d90abce0ed7ee0fb5780cf",
+      "size_bytes": 2215
+    },
+    "section_c_workflow_engine_evidence.json": {
+      "path": "core_services_verification_evidence/section_c_workflow_engine_evidence.json",
+      "sha256": "c90ef5cd3940150119319dd171fe80e2be9de94a5ea68ea1d89714d30757b4ca",
+      "size_bytes": 2330
+    },
+    "section_d_scheduler_evidence.json": {
+      "path": "core_services_verification_evidence/section_d_scheduler_evidence.json",
+      "sha256": "422ed85260df8c0d1c5e193ec34b459e06122222fe463be8c0e228e82cbcf848",
+      "size_bytes": 2188
+    },
+    "section_e_queues_evidence.json": {
+      "path": "core_services_verification_evidence/section_e_queues_evidence.json",
+      "sha256": "b3159043c66f636a7b4f0cdc3068d6f95ebd403ce18ce34184ff69dbe98fbdb8",
+      "size_bytes": 2154
+    },
+    "section_f_storage_evidence.json": {
+      "path": "core_services_verification_evidence/section_f_storage_evidence.json",
+      "sha256": "5a9cd031d8028175de71be828d6ec8a6d80ac94624c745c511698c817af9336b",
+      "size_bytes": 1932
+    },
+    "section_g_api_gateway_evidence.json": {
+      "path": "core_services_verification_evidence/section_g_api_gateway_evidence.json",
+      "sha256": "3231107d02e26331b3ea56f5ceb8759ca298a397aea86228777d6811253266ec",
+      "size_bytes": 2349
+    },
+    "section_h_event_bus_evidence.json": {
+      "path": "core_services_verification_evidence/section_h_event_bus_evidence.json",
+      "sha256": "5173c28260fc90cc9543cad61a2acdaa8f9108a4af05c5c3abc8bb5e02bf7adc",
+      "size_bytes": 2189
+    },
+    "section_i_config_secrets_evidence.json": {
+      "path": "core_services_verification_evidence/section_i_config_secrets_evidence.json",
+      "sha256": "1ccdb779fb6d07b1c41809d98a836d25f1aee3f8e99eca7c169939a1bbee44a4",
+      "size_bytes": 2308
+    },
+    "section_j_caching_evidence.json": {
+      "path": "core_services_verification_evidence/section_j_caching_evidence.json",
+      "sha256": "389b5eef59cdecfdf1c401ab077c477cf6b499a18c23856e77bd6ef41eab4437",
+      "size_bytes": 1965
+    },
+    "section_k_identity_auth_evidence.json": {
+      "path": "core_services_verification_evidence/section_k_identity_auth_evidence.json",
+      "sha256": "bc4cd058107a9710e2b223b9e50c8778de700d88f843b67eb90732ea4c3263b8",
+      "size_bytes": 2103
+    },
+    "section_l_observability_evidence.json": {
+      "path": "core_services_verification_evidence/section_l_observability_evidence.json",
+      "sha256": "9d9479608595ad48bf39c57c675963a0a67c7987f87a245699b157b29a36e4dc",
+      "size_bytes": 2435
+    },
+    "section_m_resilience_evidence.json": {
+      "path": "core_services_verification_evidence/section_m_resilience_evidence.json",
+      "sha256": "7c8f8f075307d06a63e869bd8a6083354b38c667efb206f912243bec7ba86809",
+      "size_bytes": 2286
+    },
+    "section_n_cross_service_evidence.json": {
+      "path": "core_services_verification_evidence/section_n_cross_service_evidence.json",
+      "sha256": "ae7d15eca40cc18b995c0974416de5df3f774c90811ccc78d44932fb91a4fac3",
+      "size_bytes": 2630
+    },
+    "part_4_core_services_verification_report.md": {
+      "path": "docs/part_4_core_services_verification_report.md",
+      "sha256": "bec49195a61143d09e75aaa9ddf838394ab36f4410487de1f7a6c5d54f0b168d",
+      "size_bytes": 15935
+    }
+  }
+}

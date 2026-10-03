@@ -1,0 +1,34 @@
+{
+  "total_rules": 3,
+  "rules": [
+    {
+      "rule_name": "Planned Database Backup & Schema Migration",
+      "trigger_condition": "maintenance_window_active == true",
+      "suppressed_alert_types": [
+        "DocuTaskHighAPILatency",
+        "DatabaseSlowQueries"
+      ],
+      "safety_override_verified": true
+    },
+    {
+      "rule_name": "Rolling Microservice Deployment",
+      "trigger_condition": "deployment_in_progress == true",
+      "suppressed_alert_types": [
+        "WorkerRestartWarning",
+        "ConnectionReset"
+      ],
+      "safety_override_verified": true
+    },
+    {
+      "rule_name": "Scheduled Load Testing Window",
+      "trigger_condition": "load_test_active == true",
+      "suppressed_alert_types": [
+        "QueueDepthWarning",
+        "CPUUtilizationWarning"
+      ],
+      "safety_override_verified": true
+    }
+  ],
+  "safety_overrides_functional": true,
+  "status": "PASS"
+}

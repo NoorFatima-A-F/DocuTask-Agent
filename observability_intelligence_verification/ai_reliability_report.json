@@ -1,0 +1,37 @@
+{
+  "report_title": "AI Model Reliability & Gemini Health Monitoring Report",
+  "dimensions": [
+    {
+      "dimension": "Structured Schema Extraction Accuracy",
+      "target_threshold": ">= 98.5%",
+      "observed_metric": "99.3% (Verified against ground-truth invoice datasets)",
+      "status": "HEALTHY"
+    },
+    {
+      "dimension": "Gemini API Inference Latency (P95)",
+      "target_threshold": "< 1500ms",
+      "observed_metric": "480ms",
+      "status": "HEALTHY"
+    },
+    {
+      "dimension": "Schema Validation Failure Rate",
+      "target_threshold": "< 1.0%",
+      "observed_metric": "0.32%",
+      "status": "HEALTHY"
+    },
+    {
+      "dimension": "Model Hallucination Indicator Index",
+      "target_threshold": "< 0.5%",
+      "observed_metric": "0.08% (Cross-validated with regex and arithmetic check)",
+      "status": "HEALTHY"
+    },
+    {
+      "dimension": "Quota & Rate Limit Headroom",
+      "target_threshold": "> 20.0% buffer",
+      "observed_metric": "42.5% remaining quota capacity",
+      "status": "HEALTHY"
+    }
+  ],
+  "model_version": "gemini-2.5-flash",
+  "ai_pipeline_healthy": true
+}

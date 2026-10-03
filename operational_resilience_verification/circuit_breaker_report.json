@@ -1,0 +1,62 @@
+{
+  "report_title": "Enterprise Circuit Breaker Protection Report",
+  "total_circuit_breakers": 5,
+  "breakers": [
+    {
+      "subsystem": "Gemini_AI_Provider",
+      "state": "CLOSED",
+      "failure_rate_threshold_pct": 40.0,
+      "trip_consecutive_failures": 5,
+      "timeout_window_seconds": 30,
+      "half_open_probe_requests": 3,
+      "tripped_count": 0,
+      "auto_reset_verified": true,
+      "is_operational": true
+    },
+    {
+      "subsystem": "Tesseract_OCR_Engine",
+      "state": "CLOSED",
+      "failure_rate_threshold_pct": 50.0,
+      "trip_consecutive_failures": 4,
+      "timeout_window_seconds": 20,
+      "half_open_probe_requests": 2,
+      "tripped_count": 0,
+      "auto_reset_verified": true,
+      "is_operational": true
+    },
+    {
+      "subsystem": "PostgreSQL_Database",
+      "state": "CLOSED",
+      "failure_rate_threshold_pct": 30.0,
+      "trip_consecutive_failures": 3,
+      "timeout_window_seconds": 15,
+      "half_open_probe_requests": 3,
+      "tripped_count": 0,
+      "auto_reset_verified": true,
+      "is_operational": true
+    },
+    {
+      "subsystem": "Redis_Cache_and_Queue",
+      "state": "CLOSED",
+      "failure_rate_threshold_pct": 35.0,
+      "trip_consecutive_failures": 3,
+      "timeout_window_seconds": 10,
+      "half_open_probe_requests": 2,
+      "tripped_count": 0,
+      "auto_reset_verified": true,
+      "is_operational": true
+    },
+    {
+      "subsystem": "External_Customer_Webhooks",
+      "state": "CLOSED",
+      "failure_rate_threshold_pct": 50.0,
+      "trip_consecutive_failures": 5,
+      "timeout_window_seconds": 45,
+      "half_open_probe_requests": 3,
+      "tripped_count": 0,
+      "auto_reset_verified": true,
+      "is_operational": true
+    }
+  ],
+  "all_circuit_breakers_active": true
+}

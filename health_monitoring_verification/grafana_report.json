@@ -1,0 +1,180 @@
+{
+  "total_dashboards": 4,
+  "dashboards_validated": [
+    {
+      "uid": "docutask-platform-overview",
+      "title": "DocuTask Platform Overview",
+      "category": "Overview",
+      "refresh_rate": "10s",
+      "panels": [
+        {
+          "title": "System Health Status",
+          "panel_type": "stat",
+          "promql_query": "min(service_health_status)",
+          "thresholds": []
+        },
+        {
+          "title": "API Ingestion RPS & Error Rate",
+          "panel_type": "timeseries",
+          "promql_query": "sum(rate(http_requests_total[1m]))",
+          "thresholds": []
+        },
+        {
+          "title": "Active Worker Fleet Count",
+          "panel_type": "gauge",
+          "promql_query": "worker_active_count",
+          "thresholds": []
+        },
+        {
+          "title": "Redis Document Queue Depth",
+          "panel_type": "timeseries",
+          "promql_query": "redis_queue_depth",
+          "thresholds": []
+        },
+        {
+          "title": "PostgreSQL Pool Utilization",
+          "panel_type": "gauge",
+          "promql_query": "postgres_connection_count",
+          "thresholds": []
+        },
+        {
+          "title": "Gemini AI Provider P95 Latency",
+          "panel_type": "timeseries",
+          "promql_query": "gemini_request_latency_seconds",
+          "thresholds": []
+        }
+      ],
+      "valid": true
+    },
+    {
+      "uid": "docutask-agent-operations",
+      "title": "DocuTask Agent Runtime & AI Workflow Operations",
+      "category": "Agent Operations",
+      "refresh_rate": "10s",
+      "panels": [
+        {
+          "title": "Agent Executions Total",
+          "panel_type": "timeseries",
+          "promql_query": "sum(rate(agent_execution_total[5m]))",
+          "thresholds": []
+        },
+        {
+          "title": "Agent Task Success Rate",
+          "panel_type": "gauge",
+          "promql_query": "100.0 - agent_failure_rate_pct",
+          "thresholds": []
+        },
+        {
+          "title": "Agent Failure & Retry Distribution",
+          "panel_type": "timeseries",
+          "promql_query": "agent_retry_total",
+          "thresholds": []
+        },
+        {
+          "title": "Average Agent Processing Duration",
+          "panel_type": "timeseries",
+          "promql_query": "agent_task_duration_seconds",
+          "thresholds": []
+        },
+        {
+          "title": "Gemini Token Consumption Rate",
+          "panel_type": "timeseries",
+          "promql_query": "rate(gemini_token_consumption_total[5m])",
+          "thresholds": []
+        }
+      ],
+      "valid": true
+    },
+    {
+      "uid": "docutask-infrastructure",
+      "title": "DocuTask Infrastructure & Resource Telemetry",
+      "category": "Infrastructure",
+      "refresh_rate": "15s",
+      "panels": [
+        {
+          "title": "Node CPU Utilization (%)",
+          "panel_type": "timeseries",
+          "promql_query": "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)",
+          "thresholds": []
+        },
+        {
+          "title": "Node Memory Utilization (%)",
+          "panel_type": "timeseries",
+          "promql_query": "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
+          "thresholds": []
+        },
+        {
+          "title": "Storage Volume Disk Usage (%)",
+          "panel_type": "gauge",
+          "promql_query": "storage_disk_utilization_pct",
+          "thresholds": []
+        },
+        {
+          "title": "Storage IOPS Rate",
+          "panel_type": "timeseries",
+          "promql_query": "storage_read_write_iops",
+          "thresholds": []
+        },
+        {
+          "title": "Container Restart Counts",
+          "panel_type": "table",
+          "promql_query": "sum by (container) (container_restarts_total)",
+          "thresholds": []
+        }
+      ],
+      "valid": true
+    },
+    {
+      "uid": "docutask-incident-response",
+      "title": "DocuTask SRE Incident Response & Outage Triage",
+      "category": "Incident Response",
+      "refresh_rate": "5s",
+      "panels": [
+        {
+          "title": "Active Outage & Alert Count",
+          "panel_type": "stat",
+          "promql_query": "count(ALERTS{alertstate='firing'})",
+          "thresholds": []
+        },
+        {
+          "title": "Degraded Service Inventory",
+          "panel_type": "table",
+          "promql_query": "service_health_status == 0 or service_ready_status == 0",
+          "thresholds": []
+        },
+        {
+          "title": "Dead Letter Queue (DLQ) Spillage",
+          "panel_type": "timeseries",
+          "promql_query": "redis_failed_jobs_total",
+          "thresholds": []
+        },
+        {
+          "title": "Recovery Progress & Healing Status",
+          "panel_type": "stat",
+          "promql_query": "sum(service_ready_status) / count(service_ready_status) * 100",
+          "thresholds": []
+        }
+      ],
+      "valid": true
+    }
+  ],
+  "dashboard_names": [
+    "DocuTask Platform Overview",
+    "DocuTask Agent Runtime & AI Workflow Operations",
+    "DocuTask Infrastructure & Resource Telemetry",
+    "DocuTask SRE Incident Response & Outage Triage"
+  ],
+  "outage_tested": true,
+  "passed": true,
+  "details": {
+    "grafana_version": "10.4.0",
+    "dashboard_folder": "/etc/grafana/provisioning/dashboards/docutask",
+    "panel_count_total": 20,
+    "auto_refresh_supported": true,
+    "variable_templating": [
+      "env",
+      "service",
+      "instance"
+    ]
+  }
+}

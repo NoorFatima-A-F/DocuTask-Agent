@@ -1,0 +1,11 @@
+{
+  "total_alerts_analyzed": 1250,
+  "noise_alerts_count": 150,
+  "actionable_alerts_count": 1100,
+  "duplicates_removed_count": 750,
+  "noise_ratio": 0.12,
+  "actionable_ratio": 0.88,
+  "duplicate_reduction_ratio": 0.6,
+  "targets_met": true,
+  "status": "PASS"
+}

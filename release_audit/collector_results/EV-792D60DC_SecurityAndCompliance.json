@@ -1,0 +1,32 @@
+{
+  "artifact_paths": [],
+  "category": "SecurityAndCompliance",
+  "classification": "VERIFIED_BY_STATIC_ANALYSIS",
+  "collector": "SecurityCollector",
+  "command": null,
+  "confidence": "HIGH",
+  "content_hash": "1bbffed7752f619bbe192724210ab1ef9dcad9b3c88f96a5d8d685579796be79",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-792D60DC",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "env_ignored_in_gitignore": true,
+    "secrets_detected": [],
+    "secrets_detected_count": 0,
+    "workflow_least_privilege": {
+      "audit.yml": true,
+      "certification.yml": true,
+      "chaos-test.yml": true,
+      "deployment-verification.yml": true,
+      "infrastructure-validation.yml": true,
+      "performance-test.yml": true,
+      "security-scan.yml": true,
+      "verification_pipeline.yml": true
+    }
+  },
+  "source_type": "STATIC_SOURCE_CODE",
+  "summary": "Scanned production codebase for active credentials (found: 0). .env ignored: True. CI workflows least-privilege: True.",
+  "timestamp": "2026-09-20T18:47:11.635231+00:00"
+}

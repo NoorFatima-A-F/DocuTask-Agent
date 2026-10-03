@@ -1,0 +1,55 @@
+{
+  "verifier_id": "VERIFY-3J.8.4-QUEUE-AUTOSCALE",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Queue Growth Detection (<10s reaction)",
+      "passed": true,
+      "details": "Autoscaler triggered scale-up in 8.5s following 10k spike injection",
+      "metrics": {
+        "scale_up_delay_sec": 8.5,
+        "threshold_sec": 15.0
+      }
+    },
+    {
+      "name": "Worker Pool Scale-Up Execution",
+      "passed": true,
+      "details": "Worker capacity scaled up to 40 workers to absorb spike volume",
+      "metrics": {
+        "workers_scaled": 40
+      }
+    },
+    {
+      "name": "Queue Drain Completion (<5 min)",
+      "passed": true,
+      "details": "Queue fully drained in 240.0s (4.0 min)",
+      "metrics": {
+        "recovery_time_sec": 240.0
+      }
+    },
+    {
+      "name": "Zero Message Dropped Under Spike",
+      "passed": true,
+      "details": "100% of 10,000 enqueued document tasks processed without loss or corruption",
+      "metrics": {
+        "processed_pct": 100.0,
+        "messages_lost": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:38:29.284563+00:00",
+  "execution_timestamp": "2026-09-16T18:38:29.284609+00:00",
+  "summary": "",
+  "report_title": "Queue-Based Autoscaling Verification Report",
+  "initial_queue_depth": 100,
+  "spike_queue_depth": 10000,
+  "queue_growth_detected": true,
+  "workers_scaled_up": true,
+  "queue_drained": true,
+  "scale_up_delay_sec": 8.5,
+  "recovery_time_sec": 240.0,
+  "max_queue_size_observed": 10240
+}

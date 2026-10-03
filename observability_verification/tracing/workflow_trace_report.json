@@ -1,0 +1,128 @@
+{
+  "report_title": "End-to-End Document Processing Workflow Trace Report",
+  "workflow_name": "invoice_processing_pipeline",
+  "trace_id": "8f91abc2345ef01234567890abcdef12",
+  "total_trace_duration_ms": 4850.0,
+  "slowest_component": "gemini_structured_extraction",
+  "slowest_duration_ms": 2400.0,
+  "spans": [
+    {
+      "span_id": "span_root_001",
+      "parent_span_id": null,
+      "name": "POST /api/v1/documents/process",
+      "service": "api_gateway",
+      "kind": "SERVER",
+      "duration_ms": 4850.0,
+      "status": "OK",
+      "attributes": {
+        "http.method": "POST",
+        "http.status_code": 200,
+        "user.type": "enterprise"
+      }
+    },
+    {
+      "span_id": "span_auth_002",
+      "parent_span_id": "span_root_001",
+      "name": "authenticate_jwt_token",
+      "service": "security_auth_service",
+      "kind": "INTERNAL",
+      "duration_ms": 45.0,
+      "status": "OK",
+      "attributes": {
+        "auth.scheme": "Bearer",
+        "tenant.id": "tenant_corp_1"
+      }
+    },
+    {
+      "span_id": "span_validate_003",
+      "parent_span_id": "span_root_001",
+      "name": "validate_file_magic_bytes",
+      "service": "api_gateway",
+      "kind": "INTERNAL",
+      "duration_ms": 25.0,
+      "status": "OK",
+      "attributes": {
+        "file.format": "application/pdf",
+        "file.size_kb": 1240
+      }
+    },
+    {
+      "span_id": "span_enqueue_004",
+      "parent_span_id": "span_root_001",
+      "name": "redis_enqueue_task",
+      "service": "redis_task_queue",
+      "kind": "PRODUCER",
+      "duration_ms": 30.0,
+      "status": "OK",
+      "attributes": {
+        "queue.name": "document_processing_queue"
+      }
+    },
+    {
+      "span_id": "span_worker_proc_005",
+      "parent_span_id": "span_enqueue_004",
+      "name": "async_worker_process_document",
+      "service": "async_document_worker",
+      "kind": "CONSUMER",
+      "duration_ms": 4750.0,
+      "status": "OK",
+      "attributes": {
+        "worker.id": "worker_pool_03"
+      }
+    },
+    {
+      "span_id": "span_ocr_006",
+      "parent_span_id": "span_worker_proc_005",
+      "name": "tesseract_ocr_extraction",
+      "service": "ocr_processing_service",
+      "kind": "INTERNAL",
+      "duration_ms": 620.0,
+      "status": "OK",
+      "attributes": {
+        "ocr.engine": "Tesseract-v5",
+        "page.count": 2
+      }
+    },
+    {
+      "span_id": "span_gemini_007",
+      "parent_span_id": "span_worker_proc_005",
+      "name": "gemini_structured_extraction",
+      "service": "gemini_llm_gateway",
+      "kind": "CLIENT",
+      "duration_ms": 2400.0,
+      "status": "OK",
+      "attributes": {
+        "llm.model": "gemini-1.5-pro",
+        "llm.input_tokens": 3200,
+        "llm.output_tokens": 750
+      }
+    },
+    {
+      "span_id": "span_validation_008",
+      "parent_span_id": "span_worker_proc_005",
+      "name": "schema_and_business_rule_validation",
+      "service": "agent_planning_runtime",
+      "kind": "INTERNAL",
+      "duration_ms": 180.0,
+      "status": "OK",
+      "attributes": {
+        "validation.status": "PASSED",
+        "confidence.overall": 0.965
+      }
+    },
+    {
+      "span_id": "span_db_009",
+      "parent_span_id": "span_worker_proc_005",
+      "name": "postgres_persist_document_result",
+      "service": "postgresql_primary_db",
+      "kind": "CLIENT",
+      "duration_ms": 150.0,
+      "status": "OK",
+      "attributes": {
+        "db.system": "postgresql",
+        "db.statement": "INSERT INTO extraction_results ..."
+      }
+    }
+  ],
+  "workflow_trace_passed": true
+}

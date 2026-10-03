@@ -1,0 +1,11 @@
+{
+  "report_title": "System Resource Exhaustion (Memory, CPU, Disk) Simulation Report",
+  "memory_pressure_detected": true,
+  "memory_warning_alert_triggered": true,
+  "cpu_saturation_handled": true,
+  "cpu_latency_spike_detected": true,
+  "disk_full_protection_active": true,
+  "upload_ingestion_throttled": true,
+  "host_oom_prevented": true,
+  "simulation_passed": true
+}

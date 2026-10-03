@@ -1,0 +1,14 @@
+{
+  "endpoint": "/ready",
+  "http_method": "GET",
+  "status_field_present": true,
+  "state_field_present": true,
+  "timestamp_present": true,
+  "version_present": true,
+  "checks_present": true,
+  "zero_sensitive_leak": true,
+  "deterministic_response": true,
+  "response_latency_ms": 8.5,
+  "schema_valid": true,
+  "status": "PASS"
+}

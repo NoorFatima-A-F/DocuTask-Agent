@@ -1,0 +1,42 @@
+{
+  "total_scenarios_tested": 5,
+  "scenarios": [
+    {
+      "injected_failure": "PostgreSQL Service Outage (postgres_up == 0)",
+      "expected_alert": "DocuTaskDatabaseDown",
+      "alert_fired": true,
+      "recovery_detected": true,
+      "passed": true
+    },
+    {
+      "injected_failure": "Redis Broker Connection Drop",
+      "expected_alert": "DocuTaskQueueDepthBacklog",
+      "alert_fired": true,
+      "recovery_detected": true,
+      "passed": true
+    },
+    {
+      "injected_failure": "Worker Pool Crash (100% capacity saturated)",
+      "expected_alert": "DocuTaskWorkerPoolExhausted",
+      "alert_fired": true,
+      "recovery_detected": true,
+      "passed": true
+    },
+    {
+      "injected_failure": "Gemini AI Endpoint 503 Outage / Latency Spike",
+      "expected_alert": "DocuTaskGeminiProviderSlow",
+      "alert_fired": true,
+      "recovery_detected": true,
+      "passed": true
+    },
+    {
+      "injected_failure": "Memory Leak Simulation (>4GB allocated)",
+      "expected_alert": "DocuTaskMemoryPressure",
+      "alert_fired": true,
+      "recovery_detected": true,
+      "passed": true
+    }
+  ],
+  "all_scenarios_passed": true,
+  "status": "PASS"
+}

@@ -1,0 +1,47 @@
+{
+  "report_title": "Autonomous Operations Safety Controls & Guardrails Report",
+  "rules": [
+    {
+      "action_name": "restart_worker_container",
+      "category": "ALLOWLIST",
+      "allowed_autonomously": true,
+      "requires_human_approval": false,
+      "blast_radius_limit": "Single worker container replica",
+      "enforced": true
+    },
+    {
+      "action_name": "horizontal_pod_autoscale",
+      "category": "ALLOWLIST",
+      "allowed_autonomously": true,
+      "requires_human_approval": false,
+      "blast_radius_limit": "Capped at maximum 20 replicas",
+      "enforced": true
+    },
+    {
+      "action_name": "clear_redis_cache_namespace",
+      "category": "ALLOWLIST",
+      "allowed_autonomously": true,
+      "requires_human_approval": false,
+      "blast_radius_limit": "Ephemeral cache keys only",
+      "enforced": true
+    },
+    {
+      "action_name": "rollback_production_database_migration",
+      "category": "APPROVAL_REQUIRED",
+      "allowed_autonomously": false,
+      "requires_human_approval": true,
+      "blast_radius_limit": "Full database schema state",
+      "enforced": true
+    },
+    {
+      "action_name": "modify_production_secrets_or_kms_keys",
+      "category": "RESTRICTED",
+      "allowed_autonomously": false,
+      "requires_human_approval": true,
+      "blast_radius_limit": "Platform cryptographic security boundary",
+      "enforced": true
+    }
+  ],
+  "guardrails_enforced": true,
+  "zero_unauthorized_high_risk_actions": true
+}

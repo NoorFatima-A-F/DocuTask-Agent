@@ -1,0 +1,10 @@
+{
+  "report_title": "Distributed Tracing Overhead & Performance Benchmark Report",
+  "benchmark_traces_count": 100000,
+  "baseline_duration_ms": 120.0,
+  "with_tracing_duration_ms": 123.2,
+  "overhead_pct": 2.67,
+  "collector_cpu_pct": 1.1,
+  "collector_memory_mb": 38.0,
+  "latency_impact_acceptable": true
+}

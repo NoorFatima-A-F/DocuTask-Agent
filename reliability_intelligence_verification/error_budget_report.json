@@ -1,0 +1,67 @@
+{
+  "report_title": "Error Budget Management Report",
+  "service_budgets": [
+    {
+      "service_name": "Core API Service",
+      "target_availability_pct": 99.9,
+      "allowed_downtime_minutes_monthly": 43.2,
+      "consumed_downtime_minutes": 3.2,
+      "remaining_downtime_minutes": 40.0,
+      "budget_consumed_pct": 7.41,
+      "burn_rate_ratio": 0.45,
+      "status": "Healthy"
+    },
+    {
+      "service_name": "Document Ingestion & OCR",
+      "target_availability_pct": 99.9,
+      "allowed_downtime_minutes_monthly": 43.2,
+      "consumed_downtime_minutes": 6.8,
+      "remaining_downtime_minutes": 36.4,
+      "budget_consumed_pct": 15.74,
+      "burn_rate_ratio": 0.72,
+      "status": "Healthy"
+    },
+    {
+      "service_name": "Celery Worker Execution Pool",
+      "target_availability_pct": 99.9,
+      "allowed_downtime_minutes_monthly": 43.2,
+      "consumed_downtime_minutes": 5.1,
+      "remaining_downtime_minutes": 38.1,
+      "budget_consumed_pct": 11.81,
+      "burn_rate_ratio": 0.6,
+      "status": "Healthy"
+    },
+    {
+      "service_name": "PostgreSQL Storage Layer",
+      "target_availability_pct": 99.9,
+      "allowed_downtime_minutes_monthly": 43.2,
+      "consumed_downtime_minutes": 1.2,
+      "remaining_downtime_minutes": 42.0,
+      "budget_consumed_pct": 2.78,
+      "burn_rate_ratio": 0.2,
+      "status": "Healthy"
+    },
+    {
+      "service_name": "Redis Message Broker",
+      "target_availability_pct": 99.9,
+      "allowed_downtime_minutes_monthly": 43.2,
+      "consumed_downtime_minutes": 0.8,
+      "remaining_downtime_minutes": 42.4,
+      "budget_consumed_pct": 1.85,
+      "burn_rate_ratio": 0.15,
+      "status": "Healthy"
+    },
+    {
+      "service_name": "Gemini AI Gateway Service",
+      "target_availability_pct": 99.9,
+      "allowed_downtime_minutes_monthly": 43.2,
+      "consumed_downtime_minutes": 8.4,
+      "remaining_downtime_minutes": 34.8,
+      "budget_consumed_pct": 19.44,
+      "burn_rate_ratio": 0.88,
+      "status": "Healthy"
+    }
+  ],
+  "overall_budget_healthy": true,
+  "budget_exhaustion_detected": false
+}

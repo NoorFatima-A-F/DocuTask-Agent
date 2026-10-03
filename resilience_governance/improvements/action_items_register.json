@@ -1,0 +1,42 @@
+[
+  {
+    "action_id": "ACT-DR-001",
+    "incident_ref": "INC-2026-DR-001",
+    "description": "Enforce sub-second Patroni leader lease expiration validation in staging drills",
+    "owner": "Principal Database Reliability Engineer",
+    "priority": "P1",
+    "sla_days": 14,
+    "status": "COMPLETED",
+    "verified_in_pipeline": true
+  },
+  {
+    "action_id": "ACT-DR-002",
+    "incident_ref": "INC-2026-DR-002",
+    "description": "Configure Celery & Redis dead-letter queue circuit breaker with exponential backoff",
+    "owner": "Distributed Systems Engineer",
+    "priority": "P2",
+    "sla_days": 30,
+    "status": "COMPLETED",
+    "verified_in_pipeline": true
+  },
+  {
+    "action_id": "ACT-DR-003",
+    "incident_ref": "INC-2026-DR-003",
+    "description": "Set automated S3/MinIO bucket watermarking alert at 75% capacity",
+    "owner": "Storage & Infrastructure Lead",
+    "priority": "P1",
+    "sla_days": 14,
+    "status": "COMPLETED",
+    "verified_in_pipeline": true
+  },
+  {
+    "action_id": "ACT-DR-004",
+    "incident_ref": "INC-2026-DR-001",
+    "description": "Schedule quarterly automated split-brain partition chaos simulations",
+    "owner": "Platform SRE Lead",
+    "priority": "P2",
+    "sla_days": 60,
+    "status": "COMPLETED",
+    "verified_in_pipeline": true
+  }
+]

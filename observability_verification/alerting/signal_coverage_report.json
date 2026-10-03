@@ -1,0 +1,52 @@
+{
+  "report_title": "Multi-Source Alert Telemetry Coverage Report",
+  "signal_sources": [
+    {
+      "source_category": "Metrics",
+      "signals_monitored_count": 24,
+      "sample_signals": [
+        "container_cpu_usage_pct",
+        "container_memory_usage_bytes",
+        "http_request_duration_seconds",
+        "queue_depth",
+        "database_connections_active"
+      ],
+      "coverage_status": "COVERED"
+    },
+    {
+      "source_category": "Logs",
+      "signals_monitored_count": 18,
+      "sample_signals": [
+        "auth_failure_spike",
+        "unhandled_exception_count",
+        "worker_oom_kill",
+        "gemini_timeout_event"
+      ],
+      "coverage_status": "COVERED"
+    },
+    {
+      "source_category": "Traces",
+      "signals_monitored_count": 12,
+      "sample_signals": [
+        "slow_workflow_span",
+        "dependency_timeout_span",
+        "queue_wait_duration_p95",
+        "failed_span_count"
+      ],
+      "coverage_status": "COVERED"
+    },
+    {
+      "source_category": "Business Signals",
+      "signals_monitored_count": 8,
+      "sample_signals": [
+        "document_processing_failure_rate",
+        "extraction_validation_failures",
+        "ocr_confidence_degradation",
+        "sla_breach_rate"
+      ],
+      "coverage_status": "COVERED"
+    }
+  ],
+  "multi_signal_correlation_active": true,
+  "overall_signal_coverage_pct": 100.0
+}

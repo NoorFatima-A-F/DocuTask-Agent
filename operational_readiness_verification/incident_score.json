@@ -1,0 +1,7 @@
+{
+  "payload_completeness_rate": 100.0,
+  "diagnostic_value_rate": 100.0,
+  "runbook_attachment_rate": 100.0,
+  "score": 100.0,
+  "passed": true
+}

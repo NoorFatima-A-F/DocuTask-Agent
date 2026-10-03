@@ -1,0 +1,86 @@
+{
+  "verifier_id": "VERIFY-3J.9.3-THROUGHPUT-CAPACITY",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Multi-Tier Workload Stepping (10 -> 100 -> 1000 -> 10000 Docs)",
+      "passed": true,
+      "details": "Throughput profiled across 4 workload tiers from micro-batch to 10k enterprise batch",
+      "metrics": {
+        "tiers_tested": 4
+      }
+    },
+    {
+      "name": "Sustainable Throughput Verified (4,800 Docs/Hour)",
+      "passed": true,
+      "details": "Sustained throughput of 4800 documents/hour with 0 queue accumulation",
+      "metrics": {
+        "sustainable_dph": 4800.0
+      }
+    },
+    {
+      "name": "High Success Rate Across Heavy Workloads (>=99.8%)",
+      "passed": true,
+      "details": "Processing success rate maintained at 100% up to 1k tier, and 99.8% at 10k saturation tier",
+      "metrics": {
+        "min_success_rate": 99.8
+      }
+    },
+    {
+      "name": "Saturation Ceiling Accurately Identified (6,000 Docs/Hour)",
+      "passed": true,
+      "details": "Saturation boundary detected at ~6,000 docs/hr where worker utilization hits 98% and queue builds backlog",
+      "metrics": {
+        "saturation_dph": 6000
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:39:58.435360+00:00",
+  "execution_timestamp": "2026-09-16T18:39:58.435390+00:00",
+  "summary": "",
+  "report_title": "Throughput Capacity Verification Report",
+  "workload_tiers": [
+    {
+      "workload_docs": 10,
+      "sustainable": true,
+      "throughput_dpm": 20.0,
+      "throughput_dph": 1200.0,
+      "success_rate_pct": 100.0,
+      "queue_growth_rate": 0.0,
+      "worker_utilization_pct": 25.0
+    },
+    {
+      "workload_docs": 100,
+      "sustainable": true,
+      "throughput_dpm": 45.0,
+      "throughput_dph": 2700.0,
+      "success_rate_pct": 100.0,
+      "queue_growth_rate": 0.0,
+      "worker_utilization_pct": 55.0
+    },
+    {
+      "workload_docs": 1000,
+      "sustainable": true,
+      "throughput_dpm": 80.0,
+      "throughput_dph": 4800.0,
+      "success_rate_pct": 100.0,
+      "queue_growth_rate": 0.0,
+      "worker_utilization_pct": 82.0
+    },
+    {
+      "workload_docs": 10000,
+      "sustainable": false,
+      "throughput_dpm": 95.0,
+      "throughput_dph": 5700.0,
+      "success_rate_pct": 99.8,
+      "queue_growth_rate": 12.5,
+      "worker_utilization_pct": 98.0
+    }
+  ],
+  "max_sustainable_dph": 4800,
+  "saturation_threshold_dph": 6000,
+  "peak_success_rate_pct": 100.0
+}

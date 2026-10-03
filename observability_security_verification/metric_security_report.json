@@ -1,0 +1,61 @@
+{
+  "total_metrics_audited": 5,
+  "metrics_passed": 5,
+  "metrics_failed": 0,
+  "audits": [
+    {
+      "metric_name": "docutask_requests_total",
+      "labels_inspected": [
+        "service",
+        "endpoint",
+        "status_code"
+      ],
+      "contains_forbidden_labels": false,
+      "forbidden_labels_detected": [],
+      "cardinality_safe": true
+    },
+    {
+      "metric_name": "docutask_document_processing_latency_seconds",
+      "labels_inspected": [
+        "pipeline_stage",
+        "document_type",
+        "status"
+      ],
+      "contains_forbidden_labels": false,
+      "forbidden_labels_detected": [],
+      "cardinality_safe": true
+    },
+    {
+      "metric_name": "docutask_worker_active_tasks",
+      "labels_inspected": [
+        "worker_id",
+        "queue_name"
+      ],
+      "contains_forbidden_labels": false,
+      "forbidden_labels_detected": [],
+      "cardinality_safe": true
+    },
+    {
+      "metric_name": "docutask_ai_token_usage_total",
+      "labels_inspected": [
+        "provider",
+        "model",
+        "operation"
+      ],
+      "contains_forbidden_labels": false,
+      "forbidden_labels_detected": [],
+      "cardinality_safe": true
+    },
+    {
+      "metric_name": "docutask_queue_depth",
+      "labels_inspected": [
+        "queue_name",
+        "priority"
+      ],
+      "contains_forbidden_labels": false,
+      "forbidden_labels_detected": [],
+      "cardinality_safe": true
+    }
+  ],
+  "metric_privacy_passed": true
+}

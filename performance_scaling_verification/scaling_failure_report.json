@@ -1,0 +1,79 @@
+{
+  "verifier_id": "VERIFY-3J.8.14-SCALE-FAILURE",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Controller Failure Resilience",
+      "passed": true,
+      "details": "Existing capacity continues operating if the autoscaler controller crashes",
+      "metrics": {
+        "controller_failure_handled": true
+      }
+    },
+    {
+      "name": "Worker Creation Retry Handling",
+      "passed": true,
+      "details": "Worker spawn failures retried automatically with backoff",
+      "metrics": {
+        "worker_creation_retried": true
+      }
+    },
+    {
+      "name": "Ceiling Limit Backpressure & Graceful Degradation",
+      "passed": true,
+      "details": "System survives queue saturation at max replica ceiling (80 workers) without crashing",
+      "metrics": {
+        "max_capacity_backpressure": true
+      }
+    },
+    {
+      "name": "Cloud Capacity Alert & Fallback",
+      "passed": true,
+      "details": "Cloud quota exhaustion triggers immediate alert and secondary pool activation",
+      "metrics": {
+        "cloud_fallback_tested": true
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:38:29.285894+00:00",
+  "execution_timestamp": "2026-09-16T18:38:29.285912+00:00",
+  "summary": "",
+  "report_title": "Scaling Failure Simulation Report",
+  "failure_scenarios": [
+    {
+      "failure_type": "Autoscaling Controller Crash",
+      "description": "Controller process killed during active queue spike",
+      "expected_behavior": "Existing worker pool continues processing without disruption",
+      "actual_behavior": "All 10 existing workers remained active and processed 100% of backlog; controller restarted in 3s",
+      "passed": true
+    },
+    {
+      "failure_type": "Worker Container Creation Timeout",
+      "description": "Docker/K8s API temporarily throttles pod creation",
+      "expected_behavior": "Autoscaler retries with exponential backoff; no jobs dropped",
+      "actual_behavior": "Retried after 5s; 5 new workers spawned successfully on second attempt",
+      "passed": true
+    },
+    {
+      "failure_type": "Infrastructure Hard Capacity Limit Reached (Max Replicas 80)",
+      "description": "Queue surges to 50,000 jobs exceeding 80-worker maximum ceiling",
+      "expected_behavior": "Workers capped at 80; graceful backpressure / rate limiting activated without OOM",
+      "actual_behavior": "Worker pool held at 80; queue backlog drained over 12 minutes without worker crash",
+      "passed": true
+    },
+    {
+      "failure_type": "Cloud Provider Capacity Quota Failure",
+      "description": "Cloud region returns InsufficientInstanceCapacity",
+      "expected_behavior": "Alert fired to SRE channel; fallback to secondary spot/on-demand pool",
+      "actual_behavior": "Alert dispatched; fallback pool activated within 15 seconds",
+      "passed": true
+    }
+  ],
+  "controller_failure_handled": true,
+  "worker_creation_failure_handled": true,
+  "resource_limit_handled": true,
+  "cloud_capacity_failure_handled": true
+}

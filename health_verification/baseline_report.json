@@ -1,0 +1,88 @@
+{
+  "total_profiles": 9,
+  "profiles": [
+    {
+      "service": "worker",
+      "metric": "cpu_usage_pct",
+      "nominal_min": 20.0,
+      "nominal_max": 65.0,
+      "warning_threshold": 80.0,
+      "critical_threshold": 95.0
+    },
+    {
+      "service": "worker",
+      "metric": "memory_usage_pct",
+      "nominal_min": 30.0,
+      "nominal_max": 70.0,
+      "warning_threshold": 80.0,
+      "critical_threshold": 95.0
+    },
+    {
+      "service": "worker",
+      "metric": "queue_depth",
+      "nominal_min": 0.0,
+      "nominal_max": 500.0,
+      "warning_threshold": 2000.0,
+      "critical_threshold": 5000.0
+    },
+    {
+      "service": "database",
+      "metric": "connection_utilization_pct",
+      "nominal_min": 10.0,
+      "nominal_max": 60.0,
+      "warning_threshold": 75.0,
+      "critical_threshold": 90.0
+    },
+    {
+      "service": "database",
+      "metric": "query_latency_ms",
+      "nominal_min": 2.0,
+      "nominal_max": 30.0,
+      "warning_threshold": 80.0,
+      "critical_threshold": 200.0
+    },
+    {
+      "service": "ai_provider",
+      "metric": "model_latency_ms",
+      "nominal_min": 150.0,
+      "nominal_max": 800.0,
+      "warning_threshold": 1500.0,
+      "critical_threshold": 3000.0
+    },
+    {
+      "service": "ai_provider",
+      "metric": "error_rate_pct",
+      "nominal_min": 0.0,
+      "nominal_max": 1.0,
+      "warning_threshold": 5.0,
+      "critical_threshold": 15.0
+    },
+    {
+      "service": "storage",
+      "metric": "disk_utilization_pct",
+      "nominal_min": 20.0,
+      "nominal_max": 70.0,
+      "warning_threshold": 85.0,
+      "critical_threshold": 95.0
+    },
+    {
+      "service": "storage",
+      "metric": "read_write_latency_ms",
+      "nominal_min": 5.0,
+      "nominal_max": 40.0,
+      "warning_threshold": 100.0,
+      "critical_threshold": 250.0
+    }
+  ],
+  "baseline_loaded": true,
+  "passed": true,
+  "details": {
+    "source_file": "health_baseline.yaml",
+    "services_profiled": [
+      "worker",
+      "database",
+      "ai_provider",
+      "storage"
+    ]
+  }
+}

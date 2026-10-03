@@ -1,0 +1,62 @@
+{
+  "part_id": "PART_10_QUALITY",
+  "title": "Part 10: Knowledge Quality & Trust Verification",
+  "description": "Validates contradiction detection, conflicting policy identification, obsolete knowledge detection, and composite Knowledge Trust & Quality scoring.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.02,
+  "metrics": {
+    "contradictions_detected": 1,
+    "obsolete_assets_flagged": 1,
+    "knowledge_gaps_identified": 1,
+    "knowledge_quality_score": 98.5,
+    "knowledge_trust_score": 99.0
+  },
+  "assertions": [
+    {
+      "name": "Policy_Contradiction_And_Conflict_Detection",
+      "passed": true,
+      "message": "Contradiction analysis engine flagged diametrically opposed policy statements across corpus.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "contradiction_flagged": true
+      }
+    },
+    {
+      "name": "Obsolete_Knowledge_And_Dead_Source_Pruning",
+      "passed": true,
+      "message": "Identified deprecated technical guides and flagged them for archival or demotion.",
+      "execution_time_ms": 0.002,
+      "details": {
+        "obsolete_assets": [
+          "k2"
+        ]
+      }
+    },
+    {
+      "name": "Autonomous_Knowledge_Gap_Identification",
+      "passed": true,
+      "message": "Gap analysis engine detected missing documentation for 1 queried topic.",
+      "execution_time_ms": 0.0,
+      "details": {
+        "gaps": [
+          "Cybersecurity Incident Protocol v3"
+        ]
+      }
+    },
+    {
+      "name": "Composite_Knowledge_Quality_And_Trust_Scores",
+      "passed": true,
+      "message": "Knowledge base scored: Quality=98.5%, Trust=99.0%, Integrity=100.0%.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "quality": 98.5,
+        "trust": 99.0,
+        "integrity": 100.0
+      }
+    }
+  ]
+}

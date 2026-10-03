@@ -1,0 +1,75 @@
+{
+  "section_id": "SECTION_G_API_GATEWAY",
+  "title": "Section G: API Layer & Gateway Verification",
+  "description": "Validates REST schema validation, token bucket rate limiting (429), multipart stream ingestion, and RFC 7807 problem details error responses.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.03,
+  "metrics": {
+    "schema_validated_correctly": 1,
+    "malformed_rejected": 1,
+    "rate_limit_429_returned": true,
+    "chunks_reassembled": 4,
+    "stream_bytes_verified": 46,
+    "rfc7807_compliant": true
+  },
+  "assertions": [
+    {
+      "name": "API_Request_Response_Schema_Validation",
+      "passed": true,
+      "message": "API Gateway strict JSON schema validation accepted valid payload and rejected malformed types.",
+      "execution_time_ms": 0.005,
+      "details": {
+        "valid_payload_accepted": true,
+        "invalid_payload_rejected": true
+      }
+    },
+    {
+      "name": "Token_Bucket_Rate_Limiting_429",
+      "passed": true,
+      "message": "Rate limiter correctly throttled burst requests with HTTP 429 Too Many Requests.",
+      "execution_time_ms": 0.004,
+      "details": {
+        "status_codes": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          429,
+          429,
+          429
+        ]
+      }
+    },
+    {
+      "name": "Multipart_Chunk_Streaming_Reassembly",
+      "passed": true,
+      "message": "Multipart stream successfully reassembled 4 chunks (46 bytes).",
+      "execution_time_ms": 0.007,
+      "details": {
+        "chunk_count": 4,
+        "total_bytes": 46
+      }
+    },
+    {
+      "name": "RFC7807_Problem_Details_Error_Standard",
+      "passed": true,
+      "message": "API error responses conform strictly to RFC 7807 Problem Details specification.",
+      "execution_time_ms": 0.004,
+      "details": {
+        "problem_details": {
+          "type": "https://api.docutask.com/errors/document-not-found",
+          "title": "Document Not Found",
+          "status": 404,
+          "detail": "The requested document 'doc_9999' was not found in tenant repository.",
+          "instance": "/documents/doc_9999",
+          "code": "ERR_DOC_NOT_FOUND"
+        }
+      }
+    }
+  ]
+}

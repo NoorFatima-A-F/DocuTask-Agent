@@ -1,0 +1,62 @@
+{
+  "total_self_healing_tests": 4,
+  "successful_recoveries": 4,
+  "avg_mttr_seconds": 6.98,
+  "zero_task_loss_verified": true,
+  "test_results": [
+    {
+      "test_id": "HEAL-TEST-001",
+      "name": "Worker Node Crash & Auto-Recycle Test",
+      "target_service": "worker_fleet",
+      "failure_injected": "SIGKILL sent to 2 worker container instances",
+      "detected": true,
+      "remediation_executed": true,
+      "health_verified": true,
+      "mttr_seconds": 7.4,
+      "tasks_lost": 0,
+      "passed": true
+    },
+    {
+      "test_id": "HEAL-TEST-002",
+      "name": "PostgreSQL Pool Saturation & Circuit Breaker Reset Test",
+      "target_service": "postgres_db",
+      "failure_injected": "Max active connection leases reached (50/50)",
+      "detected": true,
+      "remediation_executed": true,
+      "health_verified": true,
+      "mttr_seconds": 8.8,
+      "tasks_lost": 0,
+      "passed": true
+    },
+    {
+      "test_id": "HEAL-TEST-003",
+      "name": "Redis Queue Broker Partition & Resumption Test",
+      "target_service": "redis_queue",
+      "failure_injected": "Simulated TCP socket refusal on port 6379 for 5 seconds",
+      "detected": true,
+      "remediation_executed": true,
+      "health_verified": true,
+      "mttr_seconds": 6.5,
+      "tasks_lost": 0,
+      "passed": true
+    },
+    {
+      "test_id": "HEAL-TEST-004",
+      "name": "Gemini API Provider 429 Throttle & Secondary Router Fallback Test",
+      "target_service": "gemini_ai_provider",
+      "failure_injected": "Simulated 429 quota exhaustion and 3000ms latency spike",
+      "detected": true,
+      "remediation_executed": true,
+      "health_verified": true,
+      "mttr_seconds": 5.2,
+      "tasks_lost": 0,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "details": {
+    "benchmark_max_mttr_seconds": 15.0,
+    "zero_task_loss_policy": "Enforced via Redis AOF persistence and Celery ack-late",
+    "circuit_breaker_type": "HalfOpenStatefulCircuitBreaker"
+  }
+}

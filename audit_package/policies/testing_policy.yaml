@@ -1,0 +1,8 @@
+policy_name: DocuTask Continuous Resilience Testing Policy
+version: '2.0'
+schedules:
+  weekly: Automated container crash & pod resurrection test
+  monthly: Automated database & document sandbox restore drill
+  quarterly: Multi-AZ chaos game day (network partition / DB lock stall)
+  annually: Complete bare-metal disaster recovery resurrection exercise
+evidence_collection: IMMUTABLE_JSON_MANIFESTS_STORED_IN_AUDIT_VAULT

@@ -1,0 +1,49 @@
+{
+  "program": "Phase V11 \u2014 Enterprise Business Value, ROI Intelligence & Operational Impact Verification Program (EBV-OIVP)",
+  "generated_at": "2026-09-18T17:01:00.916475+00:00",
+  "validation_status": "ENTERPRISE VALUE VALIDATED",
+  "overall_score": 100.0,
+  "grade": "A+",
+  "artifacts": {
+    "phase_V11_roi_analysis.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V11_roi_analysis.json",
+      "sha256": "ce62c9b835f160df691844bf72dcded6805b4607026b37041d39314a0b8b363d",
+      "size_bytes": 633
+    },
+    "phase_V11_automation_metrics.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V11_automation_metrics.json",
+      "sha256": "aa53c4a5b46df1b928806d34679550d0b8de79cfc10a4aeaa818cc8a229c5387",
+      "size_bytes": 1930
+    },
+    "phase_V11_workflow_comparison.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V11_workflow_comparison.json",
+      "sha256": "9bc3778b0bf310f5c20e5153071fcb97e2ca48313208fffbc7834c4e4acc71eb",
+      "size_bytes": 11666
+    },
+    "phase_V11_simulation_results.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V11_simulation_results.json",
+      "sha256": "6b7bf22330dffbf6da67c5024f4c10d3ce3dfe27694655e21dfd512961cbd259",
+      "size_bytes": 2137
+    },
+    "phase_V11_tco_report.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V11_tco_report.json",
+      "sha256": "443e2509fb7fa657cdca11b753acc3621499b2c888db7c4e4a1c41589b0780bb",
+      "size_bytes": 448
+    },
+    "phase_V11_case_studies.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V11_case_studies.json",
+      "sha256": "0ae413a4b1fdb7c3d97ec05aff47448f2f1725221dbf857b179c6be432c031b0",
+      "size_bytes": 3684
+    },
+    "phase_V11_business_score.json": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V11_business_score.json",
+      "sha256": "4379ee1865fefc182c665719c36f0a2ca5f89a4526b9d8436ecbc6fa596ea15b",
+      "size_bytes": 321
+    },
+    "phase_V11_business_value_report.md": {
+      "path": "C:\\Users\\User\\Desktop\\ai_document_processing_platform\\docs\\phase_V11_business_value_report.md",
+      "sha256": "00ac756e123a80631ac3489293d71bd20f67839fadc4424d57f9d50f5ed53013",
+      "size_bytes": 7199
+    }
+  }
+}

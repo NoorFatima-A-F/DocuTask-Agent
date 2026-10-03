@@ -1,0 +1,15 @@
+policy_name: DocuTask Disaster Incident Response Policy
+version: '3.1'
+severity_definitions:
+  SEV-1:
+    description: Total datacenter / DB outage
+    mttd_target_minutes: 5
+    rto_sla_minutes: 45
+  SEV-2:
+    description: Partial degradation / worker backlog
+    mttd_target_minutes: 15
+    rto_sla_minutes: 120
+war_room_protocol:
+  slack_channel: '#incident-disaster-recovery'
+  pagerduty_escalation_tier: SEV1_TIER1_SRE
+  executive_briefing_frequency_minutes: 15

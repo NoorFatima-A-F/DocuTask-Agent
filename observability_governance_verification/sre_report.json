@@ -1,0 +1,54 @@
+{
+  "report_title": "SRE Reliability Management Verification Report",
+  "slos": [
+    {
+      "service_name": "api-gateway",
+      "metric_name": "availability_99_9pct",
+      "target_pct": 99.9,
+      "current_pct": 99.98,
+      "error_budget_30d_pct": 80.0,
+      "burn_rate_1h": 0.15,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "document-processor",
+      "metric_name": "latency_p95_under_500ms",
+      "target_pct": 95.0,
+      "current_pct": 99.94,
+      "error_budget_30d_pct": 72.5,
+      "burn_rate_1h": 0.22,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "agent-task-planner",
+      "metric_name": "successful_plan_generation_99_5pct",
+      "target_pct": 99.5,
+      "current_pct": 99.92,
+      "error_budget_30d_pct": 84.0,
+      "burn_rate_1h": 0.1,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "ocr-pipeline",
+      "metric_name": "ocr_accuracy_and_completion_99_0pct",
+      "target_pct": 99.0,
+      "current_pct": 99.91,
+      "error_budget_30d_pct": 65.0,
+      "burn_rate_1h": 0.3,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "ai-model-inference",
+      "metric_name": "inference_error_rate_under_0_1pct",
+      "target_pct": 99.9,
+      "current_pct": 99.96,
+      "error_budget_30d_pct": 78.0,
+      "burn_rate_1h": 0.18,
+      "status": "HEALTHY"
+    }
+  ],
+  "avg_availability_pct": 99.94,
+  "budget_exhaustion_risk": "LOW",
+  "error_budget_policy_enforced": true,
+  "status": "PASS"
+}

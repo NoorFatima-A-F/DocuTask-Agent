@@ -1,0 +1,12 @@
+{
+  "report_title": "Database Connection Pool & Transaction Safety Recovery Report",
+  "database_type": "PostgreSQL Primary (Aurora)",
+  "connection_severed": true,
+  "connection_restored": true,
+  "connection_pool_recreated": true,
+  "failed_transactions_count": 0,
+  "recovered_transactions_count": 142,
+  "corrupted_state_detected": false,
+  "recovery_duration_seconds": 3.2,
+  "database_recovery_passed": true
+}

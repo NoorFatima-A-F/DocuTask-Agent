@@ -1,0 +1,38 @@
+{
+  "report_title": "Composite System Reliability Intelligence Score Report",
+  "system_health_score": 98.5,
+  "risk_level": "LOW",
+  "trend": "IMPROVING",
+  "factors": [
+    {
+      "factor_name": "Availability (30d Rolling)",
+      "weight_pct": 25.0,
+      "factor_score": 99.6,
+      "weighted_score": 24.9
+    },
+    {
+      "factor_name": "Latency & Performance P95 Compliance",
+      "weight_pct": 20.0,
+      "factor_score": 98.5,
+      "weighted_score": 19.7
+    },
+    {
+      "factor_name": "Low Error Rate & Zero Data Leakage",
+      "weight_pct": 20.0,
+      "factor_score": 99.9,
+      "weighted_score": 19.98
+    },
+    {
+      "factor_name": "Autonomous Self-Healing & Recovery Capability",
+      "weight_pct": 20.0,
+      "factor_score": 98.0,
+      "weighted_score": 19.6
+    },
+    {
+      "factor_name": "AIOps Prediction Confidence & Lead Time",
+      "weight_pct": 15.0,
+      "factor_score": 95.5,
+      "weighted_score": 14.32
+    }
+  ]
+}

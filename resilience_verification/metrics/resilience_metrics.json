@@ -1,0 +1,16 @@
+{
+  "mttd_average_seconds": 3.6,
+  "mttr_average_seconds": 14.8,
+  "recovery_success_rate_pct": 100.0,
+  "queue_preservation_pct": 100.0,
+  "scorecard": {
+    "overall_resilience_score": 100.0,
+    "tier": "Enterprise Resilient",
+    "detection_score": 100.0,
+    "recovery_automation_score": 100.0,
+    "data_integrity_score": 100.0,
+    "failure_containment_score": 100.0,
+    "operational_visibility_score": 100.0,
+    "documentation_score": 100.0
+  }
+}

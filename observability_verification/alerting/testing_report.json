@@ -1,0 +1,50 @@
+{
+  "report_title": "Alert Testing & Failure Simulation Chaos Report",
+  "scenarios": [
+    {
+      "test_id": "CHAOS-ALERT-001",
+      "name": "Worker Process Crash Simulation",
+      "injected_failure": "SIGKILL sent to async worker container",
+      "expected_alert": "WorkerPoolStarvation",
+      "expected_severity": "SEV-1",
+      "actual_alert_fired": "WorkerPoolStarvation",
+      "actual_severity": "SEV-1",
+      "remediation_triggered": true,
+      "passed": true
+    },
+    {
+      "test_id": "CHAOS-ALERT-002",
+      "name": "PostgreSQL Outage Simulation",
+      "injected_failure": "Simulated network partition dropping database connectivity",
+      "expected_alert": "DatabaseUnavailableCritical",
+      "expected_severity": "SEV-1",
+      "actual_alert_fired": "DatabaseUnavailableCritical",
+      "actual_severity": "SEV-1",
+      "remediation_triggered": true,
+      "passed": true
+    },
+    {
+      "test_id": "CHAOS-ALERT-003",
+      "name": "Queue Workload 10x Explosion Simulation",
+      "injected_failure": "Enqueued 15,000 synthetic document tasks within 60s",
+      "expected_alert": "QueueSaturationWarning",
+      "expected_severity": "SEV-2",
+      "actual_alert_fired": "QueueSaturationWarning",
+      "actual_severity": "SEV-2",
+      "remediation_triggered": true,
+      "passed": true
+    },
+    {
+      "test_id": "CHAOS-ALERT-004",
+      "name": "Gemini API Failure Simulation",
+      "injected_failure": "Injected 503 Service Unavailable responses from Gemini gateway",
+      "expected_alert": "GeminiProviderTimeoutSpike",
+      "expected_severity": "SEV-2",
+      "actual_alert_fired": "GeminiProviderTimeoutSpike",
+      "actual_severity": "SEV-2",
+      "remediation_triggered": true,
+      "passed": true
+    }
+  ],
+  "all_tests_passed": true
+}

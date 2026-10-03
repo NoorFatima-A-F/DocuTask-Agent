@@ -1,0 +1,54 @@
+{
+  "report_title": "Failure Prediction Report",
+  "total_predictions": 5,
+  "predictions": [
+    {
+      "prediction_id": "PRED-001",
+      "component": "celery-worker-pool",
+      "failure_type": "memory_exhaustion",
+      "time_window": "30_minutes",
+      "probability": 0.87,
+      "confidence": 0.91,
+      "risk_level": "HIGH"
+    },
+    {
+      "prediction_id": "PRED-002",
+      "component": "redis-task-queue",
+      "failure_type": "queue_overflow",
+      "time_window": "18_minutes",
+      "probability": 0.92,
+      "confidence": 0.95,
+      "risk_level": "CRITICAL"
+    },
+    {
+      "prediction_id": "PRED-003",
+      "component": "postgres-database",
+      "failure_type": "connection_pool_exhaustion",
+      "time_window": "45_minutes",
+      "probability": 0.73,
+      "confidence": 0.88,
+      "risk_level": "HIGH"
+    },
+    {
+      "prediction_id": "PRED-004",
+      "component": "gemini-1.5-flash-client",
+      "failure_type": "ai_provider_degradation",
+      "time_window": "10_minutes",
+      "probability": 0.65,
+      "confidence": 0.82,
+      "risk_level": "MEDIUM"
+    },
+    {
+      "prediction_id": "PRED-005",
+      "component": "ocr-raster-pipeline",
+      "failure_type": "processing_stall",
+      "time_window": "25_minutes",
+      "probability": 0.41,
+      "confidence": 0.85,
+      "risk_level": "MEDIUM"
+    }
+  ],
+  "high_risk_predictions": 3,
+  "mean_confidence": 0.882,
+  "failure_prediction_valid": true
+}

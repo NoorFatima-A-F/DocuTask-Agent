@@ -1,0 +1,16 @@
+{
+  "report_title": "AI Provider Latency, 429 Quota & Auth Fault Simulation Report",
+  "scenarios_tested": [
+    "GEMINI_TIMEOUT_001",
+    "LLM_RATE_LIMIT_429",
+    "AUTH_FAILURE_401"
+  ],
+  "circuit_breaker_tripped": true,
+  "fallback_model_activated": true,
+  "overall_platform_crashed": false,
+  "ai_processing_degraded_gracefully": true,
+  "retry_with_exponential_backoff_verified": true,
+  "time_to_detect_ms": 250.0,
+  "time_to_recover_ms": 850.0,
+  "simulation_passed": true
+}

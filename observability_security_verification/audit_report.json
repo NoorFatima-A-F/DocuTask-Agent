@@ -1,0 +1,39 @@
+{
+  "report_title": "Observability Audit Trail & Immutability Report",
+  "sample_audit_events": [
+    {
+      "event_id": "AUDIT-EVT-9001",
+      "user": "sre_lead_operator",
+      "resource": "production_document_worker_logs",
+      "action": "SEARCH_QUERY",
+      "timestamp": "2026-09-14T10:15:30Z",
+      "tamper_proof_verified": true
+    },
+    {
+      "event_id": "AUDIT-EVT-9002",
+      "user": "security_incident_responder",
+      "resource": "security_auth_audit_logs",
+      "action": "EXPORT_REPORT",
+      "timestamp": "2026-09-14T11:22:05Z",
+      "tamper_proof_verified": true
+    },
+    {
+      "event_id": "AUDIT-EVT-9003",
+      "user": "platform_admin",
+      "resource": "retention_lifecycle_policy",
+      "action": "UPDATE_CONFIG",
+      "timestamp": "2026-09-14T14:45:12Z",
+      "tamper_proof_verified": true
+    },
+    {
+      "event_id": "AUDIT-EVT-9004",
+      "user": "developer_readonly",
+      "resource": "staging_tracing_spans",
+      "action": "TRACE_INSPECT",
+      "timestamp": "2026-09-14T16:08:44Z",
+      "tamper_proof_verified": true
+    }
+  ],
+  "audit_logging_active": true,
+  "immutability_verified": true
+}

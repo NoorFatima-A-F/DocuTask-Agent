@@ -1,0 +1,15 @@
+{
+  "pipeline_stages": [
+    "Raw Signal Evaluation",
+    "Signal Processing & Filtering",
+    "Deduplication Engine",
+    "Correlation Engine",
+    "Severity Classifier",
+    "Notification Routing",
+    "Incident Platform"
+  ],
+  "signal_processing_active": true,
+  "deduplication_active": true,
+  "correlation_active": true,
+  "status": "PASS"
+}

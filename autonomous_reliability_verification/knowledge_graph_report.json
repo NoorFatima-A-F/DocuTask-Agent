@@ -1,0 +1,162 @@
+{
+  "report_title": "Reliability Knowledge Graph Verification Report",
+  "nodes_count": 15,
+  "edges_count": 12,
+  "nodes": [
+    {
+      "node_id": "FAIL_01",
+      "node_type": "Failure",
+      "label": "High Ingestion Queue Delay",
+      "attributes": {}
+    },
+    {
+      "node_id": "CAUSE_01",
+      "node_type": "Cause",
+      "label": "Worker Pod Compute Saturation",
+      "attributes": {}
+    },
+    {
+      "node_id": "COMP_01",
+      "node_type": "Component",
+      "label": "Document Processing Worker Cluster",
+      "attributes": {}
+    },
+    {
+      "node_id": "SOL_01",
+      "node_type": "Solution",
+      "label": "Predictive Horizontal Pod Autoscaling",
+      "attributes": {}
+    },
+    {
+      "node_id": "OUT_01",
+      "node_type": "Outcome",
+      "label": "Latency Reduced to Nominal < 5s",
+      "attributes": {}
+    },
+    {
+      "node_id": "FAIL_02",
+      "node_type": "Failure",
+      "label": "Database Connection Starvation",
+      "attributes": {}
+    },
+    {
+      "node_id": "CAUSE_02",
+      "node_type": "Cause",
+      "label": "Unclosed Inactive Client Connections",
+      "attributes": {}
+    },
+    {
+      "node_id": "COMP_02",
+      "node_type": "Component",
+      "label": "PgBouncer Connection Pooler",
+      "attributes": {}
+    },
+    {
+      "node_id": "SOL_02",
+      "node_type": "Solution",
+      "label": "Autonomous Idle Connection Pruning",
+      "attributes": {}
+    },
+    {
+      "node_id": "OUT_02",
+      "node_type": "Outcome",
+      "label": "Available Pool Capacity Restored > 50%",
+      "attributes": {}
+    },
+    {
+      "node_id": "FAIL_03",
+      "node_type": "Failure",
+      "label": "AI Provider Inference Latency Spike",
+      "attributes": {}
+    },
+    {
+      "node_id": "CAUSE_03",
+      "node_type": "Cause",
+      "label": "Upstream LLM Service Degradation",
+      "attributes": {}
+    },
+    {
+      "node_id": "COMP_03",
+      "node_type": "Component",
+      "label": "AI Provider Gateway",
+      "attributes": {}
+    },
+    {
+      "node_id": "SOL_03",
+      "node_type": "Solution",
+      "label": "Instantaneous Multi-Provider Fallback Shift",
+      "attributes": {}
+    },
+    {
+      "node_id": "OUT_03",
+      "node_type": "Outcome",
+      "label": "Zero User-Facing Timeout Errors",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "FAIL_01",
+      "target_id": "CAUSE_01",
+      "relation": "CAUSED_BY"
+    },
+    {
+      "source_id": "CAUSE_01",
+      "target_id": "COMP_01",
+      "relation": "AFFECTS"
+    },
+    {
+      "source_id": "COMP_01",
+      "target_id": "SOL_01",
+      "relation": "RESOLVED_BY"
+    },
+    {
+      "source_id": "SOL_01",
+      "target_id": "OUT_01",
+      "relation": "RESULTS_IN"
+    },
+    {
+      "source_id": "FAIL_02",
+      "target_id": "CAUSE_02",
+      "relation": "CAUSED_BY"
+    },
+    {
+      "source_id": "CAUSE_02",
+      "target_id": "COMP_02",
+      "relation": "AFFECTS"
+    },
+    {
+      "source_id": "COMP_02",
+      "target_id": "SOL_02",
+      "relation": "RESOLVED_BY"
+    },
+    {
+      "source_id": "SOL_02",
+      "target_id": "OUT_02",
+      "relation": "RESULTS_IN"
+    },
+    {
+      "source_id": "FAIL_03",
+      "target_id": "CAUSE_03",
+      "relation": "CAUSED_BY"
+    },
+    {
+      "source_id": "CAUSE_03",
+      "target_id": "COMP_03",
+      "relation": "AFFECTS"
+    },
+    {
+      "source_id": "COMP_03",
+      "target_id": "SOL_03",
+      "relation": "RESOLVED_BY"
+    },
+    {
+      "source_id": "SOL_03",
+      "target_id": "OUT_03",
+      "relation": "RESULTS_IN"
+    }
+  ],
+  "query_lookup_latency_ms": 3.2,
+  "graph_coverage_score_pct": 100.0,
+  "status": "PASS"
+}

@@ -1,0 +1,43 @@
+{
+  "report_title": "Service Level Objectives (SLO) Compliance Report",
+  "slos": [
+    {
+      "slo_id": "SLO-AVAIL-01",
+      "name": "Monthly Document Processing Availability >= 99.5%",
+      "sli_ref": "SLI-AVAIL-001",
+      "target_pct": 99.5,
+      "current_performance_pct": 99.5,
+      "compliant": true,
+      "owner": "Core Gateway Team"
+    },
+    {
+      "slo_id": "SLO-LAT-02",
+      "name": "95% of Documents Processed Under 10 Seconds",
+      "sli_ref": "SLI-LAT-002",
+      "target_pct": 95.0,
+      "current_performance_pct": 98.2,
+      "compliant": true,
+      "owner": "Worker Platform Team"
+    },
+    {
+      "slo_id": "SLO-AI-03",
+      "name": "98% Structured Extraction Validation Success",
+      "sli_ref": "SLI-AI-QUAL-003",
+      "target_pct": 98.0,
+      "current_performance_pct": 98.5,
+      "compliant": true,
+      "owner": "Agentic Systems Team"
+    },
+    {
+      "slo_id": "SLO-QUEUE-04",
+      "name": "99% Queue Jobs Completed Without Intervention",
+      "sli_ref": "SLI-QUEUE-004",
+      "target_pct": 99.0,
+      "current_performance_pct": 99.2,
+      "compliant": true,
+      "owner": "Messaging Team"
+    }
+  ],
+  "all_slos_compliant": true,
+  "overall_compliance_pct": 100.0
+}

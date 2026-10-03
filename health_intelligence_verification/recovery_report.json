@@ -1,0 +1,36 @@
+{
+  "report_title": "Recovery Execution Report",
+  "total_recovery_scenarios": 4,
+  "steps": [
+    {
+      "scenario": "Worker Crash & Process Panic",
+      "action_executed": "Restart Celery Worker Subprocess & Re-bind PID",
+      "duration_ms": 450.0,
+      "service_state_post_action": "HEALTHY (Heartbeat active, task processing resumed)",
+      "success": true
+    },
+    {
+      "scenario": "PostgreSQL Connection Exhaustion",
+      "action_executed": "Execute Pool Drain, Terminate Leaked Sockets & Reset Connection Pool",
+      "duration_ms": 280.0,
+      "service_state_post_action": "HEALTHY (Query execution latency 2.1ms, 100% checkouts succeed)",
+      "success": true
+    },
+    {
+      "scenario": "Redis Task Queue Overflow",
+      "action_executed": "Trigger Consumer Worker Autoscaling from 4 to 12 Replicas",
+      "duration_ms": 1200.0,
+      "service_state_post_action": "HEALTHY (Queue backlog drained from 1250 to < 10 tasks)",
+      "success": true
+    },
+    {
+      "scenario": "Gemini AI Provider Rate Limit (429)",
+      "action_executed": "Switch to Semantic Embedding Cache & Secondary Flash LLM Endpoint",
+      "duration_ms": 150.0,
+      "service_state_post_action": "HEALTHY (Document extraction pipeline restored without dropped requests)",
+      "success": true
+    }
+  ],
+  "recovery_success_rate_pct": 100.0,
+  "all_recoveries_successful": true
+}

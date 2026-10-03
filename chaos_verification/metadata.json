@@ -1,0 +1,125 @@
+{
+  "system": "DocuTask Agent",
+  "version": "3.13.0",
+  "commit": "HEAD",
+  "environment": "Enterprise Chaos Engineering Lab",
+  "timestamp": "2026-10-03T17:44:25.302792+00:00",
+  "overall_score": 100.0,
+  "certification_tier": "Chaos Resilient",
+  "files": [
+    {
+      "filename": "ai_provider_failure_report.json",
+      "report_title": "Ai Provider Failure Report",
+      "sha256": "2273a9b139edc1b8766a6726a0c155ed0bc2d344f882bbc297e4f00b339d7911",
+      "size_bytes": 2557
+    },
+    {
+      "filename": "cascading_failure_report.json",
+      "report_title": "Cascading Failure Report",
+      "sha256": "1b2940e49fd6dde4b5e6515fbb198cfa51dce39d5c98a169e529419f3c504caf",
+      "size_bytes": 3031
+    },
+    {
+      "filename": "chaos_observability_report.json",
+      "report_title": "Chaos Observability Report",
+      "sha256": "c2c859a0bd09bcb6a7f9b9eaa6daf3fe7b9a7ddff1a7220a9a3fadd1f3546e73",
+      "size_bytes": 2820
+    },
+    {
+      "filename": "chaos_pipeline_report.json",
+      "report_title": "Chaos Pipeline Report",
+      "sha256": "2c6b7a544ad45fe4482c7521debb022cf965290a7fe331ed3ac6fdc09f4c5f51",
+      "size_bytes": 3426
+    },
+    {
+      "filename": "chaos_readiness_report.json",
+      "report_title": "Chaos Readiness Report",
+      "sha256": "9f381d564beb4eaa120846f2a1f178f77731afedc964b0eabc9f7b587c51d2eb",
+      "size_bytes": 2815
+    },
+    {
+      "filename": "chaos_report.json",
+      "report_title": "Chaos Report",
+      "sha256": "8eaf38dc00ab88b06d6bc5ff11b88bf3350c6e9062d29f2e357c0a55be4e2970",
+      "size_bytes": 3119
+    },
+    {
+      "filename": "chaos_scorecard.json",
+      "report_title": "Chaos Scorecard",
+      "sha256": "e17c2636e47df5c645dd5a72f17cab7da63f8f05399b5945ddc416d4943c6532",
+      "size_bytes": 1654
+    },
+    {
+      "filename": "container_failure_report.json",
+      "report_title": "Container Failure Report",
+      "sha256": "3418da58aab4166042c4359ab5f3cd997f89cfb274f97fb6c99cd2878528cab5",
+      "size_bytes": 2522
+    },
+    {
+      "filename": "data_integrity_report.json",
+      "report_title": "Data Integrity Report",
+      "sha256": "c313908af6b2a481425cdc062c8d16f23f83f9d4d7e144aea776376ccb6159e2",
+      "size_bytes": 2488
+    },
+    {
+      "filename": "database_failure_report.json",
+      "report_title": "Database Failure Report",
+      "sha256": "c313908af6b2a481425cdc062c8d16f23f83f9d4d7e144aea776376ccb6159e2",
+      "size_bytes": 2488
+    },
+    {
+      "filename": "experiment_summary.json",
+      "report_title": "Experiment Summary",
+      "sha256": "8eaf38dc00ab88b06d6bc5ff11b88bf3350c6e9062d29f2e357c0a55be4e2970",
+      "size_bytes": 3119
+    },
+    {
+      "filename": "failure_injection_report.json",
+      "report_title": "Failure Injection Report",
+      "sha256": "2c6b7a544ad45fe4482c7521debb022cf965290a7fe331ed3ac6fdc09f4c5f51",
+      "size_bytes": 3426
+    },
+    {
+      "filename": "network_failure_report.json",
+      "report_title": "Network Failure Report",
+      "sha256": "3adaf86227ca7b05c2410cbaaeb9758359c3d0cae82fd6ac5549266c76d630ce",
+      "size_bytes": 2605
+    },
+    {
+      "filename": "queue_failure_report.json",
+      "report_title": "Queue Failure Report",
+      "sha256": "0a1f689ee7061b036576b86249949972ca6e4046b7b1cc8ab22cb30e7cb029c0",
+      "size_bytes": 1986
+    },
+    {
+      "filename": "recovery_metrics.json",
+      "report_title": "Recovery Metrics",
+      "sha256": "c2c859a0bd09bcb6a7f9b9eaa6daf3fe7b9a7ddff1a7220a9a3fadd1f3546e73",
+      "size_bytes": 2820
+    },
+    {
+      "filename": "resilience_score.json",
+      "report_title": "Resilience Score",
+      "sha256": "e17c2636e47df5c645dd5a72f17cab7da63f8f05399b5945ddc416d4943c6532",
+      "size_bytes": 1654
+    },
+    {
+      "filename": "resource_exhaustion_report.json",
+      "report_title": "Resource Exhaustion Report",
+      "sha256": "8521e6fbc62b28a32a726bd51c7ab047b2eeacb9d2a2a49bbe86ee631c0cc0d4",
+      "size_bytes": 2763
+    },
+    {
+      "filename": "scorecard.json",
+      "report_title": "Scorecard",
+      "sha256": "e17c2636e47df5c645dd5a72f17cab7da63f8f05399b5945ddc416d4943c6532",
+      "size_bytes": 1654
+    },
+    {
+      "filename": "worker_agent_failure_report.json",
+      "report_title": "Worker Agent Failure Report",
+      "sha256": "c2d61ab1415a81f032b87c8889418d7b4164364df6ad5ddd35dee14e39124d50",
+      "size_bytes": 2606
+    }
+  ]
+}

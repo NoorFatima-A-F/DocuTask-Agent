@@ -1,0 +1,66 @@
+{
+  "report_title": "Enterprise Reliability Governance Architecture Report",
+  "services_monitored": 8,
+  "slo_defined": true,
+  "ownership_mapping": true,
+  "user_journey_reliability_model_active": true,
+  "ownership_boundaries": [
+    {
+      "service_name": "api_gateway",
+      "owner_team": "Core Gateway Team",
+      "on_call_rotation": "SRE Primary",
+      "slos_assigned_count": 2,
+      "operational_status": "MANAGED"
+    },
+    {
+      "service_name": "async_document_worker",
+      "owner_team": "Worker Platform Team",
+      "on_call_rotation": "SRE Primary",
+      "slos_assigned_count": 2,
+      "operational_status": "MANAGED"
+    },
+    {
+      "service_name": "ocr_processing_service",
+      "owner_team": "Document Ingestion Team",
+      "on_call_rotation": "SRE Secondary",
+      "slos_assigned_count": 1,
+      "operational_status": "MANAGED"
+    },
+    {
+      "service_name": "agent_planning_runtime",
+      "owner_team": "Agentic Systems Team",
+      "on_call_rotation": "ML Platform",
+      "slos_assigned_count": 2,
+      "operational_status": "MANAGED"
+    },
+    {
+      "service_name": "gemini_llm_gateway",
+      "owner_team": "AI Infrastructure Team",
+      "on_call_rotation": "ML Platform",
+      "slos_assigned_count": 2,
+      "operational_status": "MANAGED"
+    },
+    {
+      "service_name": "postgresql_primary_db",
+      "owner_team": "Database Platform Team",
+      "on_call_rotation": "DBA On-Call",
+      "slos_assigned_count": 2,
+      "operational_status": "MANAGED"
+    },
+    {
+      "service_name": "redis_task_queue",
+      "owner_team": "Messaging Team",
+      "on_call_rotation": "SRE Primary",
+      "slos_assigned_count": 1,
+      "operational_status": "MANAGED"
+    },
+    {
+      "service_name": "security_auth_service",
+      "owner_team": "Security & IAM Team",
+      "on_call_rotation": "Security On-Call",
+      "slos_assigned_count": 1,
+      "operational_status": "MANAGED"
+    }
+  ],
+  "status": "PASS"
+}

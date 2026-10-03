@@ -1,0 +1,11 @@
+{
+  "gemini_auth_valid": true,
+  "gemini_reachable": true,
+  "gemini_latency_ms": 340.0,
+  "ocr_engine_ready": true,
+  "embedding_provider_ready": true,
+  "quota_headroom_pct": 88.5,
+  "graceful_degradation_active": false,
+  "fallback_provider_available": true,
+  "status": "READY"
+}

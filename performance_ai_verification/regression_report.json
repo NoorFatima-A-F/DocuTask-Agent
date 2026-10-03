@@ -1,0 +1,87 @@
+{
+  "verifier_id": "VERIFY-3J.9.9-REGRESSION-DETECT",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Zero Performance Regressions Between Releases (v1.0 vs v1.1)",
+      "passed": true,
+      "details": "All 5 core performance KPIs improved or held steady in v1.1 relative to v1.0 baseline",
+      "metrics": {
+        "regressions_found": 0,
+        "kpis_evaluated": 5
+      }
+    },
+    {
+      "name": "Latency Regression Gate (<10% increase allowed)",
+      "passed": true,
+      "details": "API latency improved by 6.7% in v1.1 (42.0ms vs 45.0ms)",
+      "metrics": {
+        "latency_delta_pct": -6.67
+      }
+    },
+    {
+      "name": "Throughput Expansion Verified (+14.3%)",
+      "passed": true,
+      "details": "Throughput increased from 4200 to 4800 docs/hour (+14.3%)",
+      "metrics": {
+        "throughput_growth_pct": 14.29
+      }
+    },
+    {
+      "name": "Automated Deployment Performance Gate Clearance",
+      "passed": true,
+      "details": "Automated quality gate approves build for staging/production deployment",
+      "metrics": {
+        "gate_decision": "APPROVED"
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:39:58.436134+00:00",
+  "execution_timestamp": "2026-09-16T18:39:58.436185+00:00",
+  "summary": "",
+  "report_title": "Performance Regression Detection Report",
+  "baseline_version": "v1.0",
+  "current_version": "v1.1",
+  "comparisons": [
+    {
+      "metric_name": "API P95 Latency (ms)",
+      "v1_0_baseline": 45.0,
+      "v1_1_current": 42.0,
+      "delta_pct": -6.67,
+      "within_tolerance": true
+    },
+    {
+      "metric_name": "Pipeline Throughput (docs/hr)",
+      "v1_0_baseline": 4200.0,
+      "v1_1_current": 4800.0,
+      "delta_pct": 14.29,
+      "within_tolerance": true
+    },
+    {
+      "metric_name": "Worker Memory Footprint (MB)",
+      "v1_0_baseline": 890.0,
+      "v1_1_current": 850.0,
+      "delta_pct": -4.49,
+      "within_tolerance": true
+    },
+    {
+      "metric_name": "CPU Consumption (%)",
+      "v1_0_baseline": 45.0,
+      "v1_1_current": 42.0,
+      "delta_pct": -6.67,
+      "within_tolerance": true
+    },
+    {
+      "metric_name": "Document Failure Rate (%)",
+      "v1_0_baseline": 0.05,
+      "v1_1_current": 0.0,
+      "delta_pct": -100.0,
+      "within_tolerance": true
+    }
+  ],
+  "regressions_detected": 0,
+  "deployment_approved": true
+}

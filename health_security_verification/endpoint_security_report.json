@@ -1,0 +1,111 @@
+{
+  "report_title": "Health Endpoint Security & Information Exposure Report",
+  "total_endpoints_audited": 6,
+  "secure_endpoints_count": 6,
+  "insecure_endpoints_count": 0,
+  "audited_endpoints": [
+    {
+      "endpoint_path": "/live",
+      "access_tier": "PUBLIC",
+      "status_code": 200,
+      "leaks_internal_ip": false,
+      "leaks_database_credentials": false,
+      "leaks_software_versions": false,
+      "leaks_stack_traces": false,
+      "leaks_hostnames": false,
+      "sanitized_response": {
+        "status": "ALIVE"
+      },
+      "is_secure": true,
+      "audit_notes": "Public liveness probe contains zero infrastructure metadata."
+    },
+    {
+      "endpoint_path": "/ready",
+      "access_tier": "INTERNAL",
+      "status_code": 200,
+      "leaks_internal_ip": false,
+      "leaks_database_credentials": false,
+      "leaks_software_versions": false,
+      "leaks_stack_traces": false,
+      "leaks_hostnames": false,
+      "sanitized_response": {
+        "status": "READY",
+        "dependencies": "OK"
+      },
+      "is_secure": true,
+      "audit_notes": "Readiness probe confirms dependency status without exposing connection strings."
+    },
+    {
+      "endpoint_path": "/health",
+      "access_tier": "INTERNAL",
+      "status_code": 200,
+      "leaks_internal_ip": false,
+      "leaks_database_credentials": false,
+      "leaks_software_versions": false,
+      "leaks_stack_traces": false,
+      "leaks_hostnames": false,
+      "sanitized_response": {
+        "status": "UP",
+        "subsystems": [
+          "db",
+          "cache",
+          "queue",
+          "inference"
+        ]
+      },
+      "is_secure": true,
+      "audit_notes": "Health endpoint exposes sanitized subsystem readiness without internal topology."
+    },
+    {
+      "endpoint_path": "/metrics",
+      "access_tier": "INTERNAL",
+      "status_code": 200,
+      "leaks_internal_ip": false,
+      "leaks_database_credentials": false,
+      "leaks_software_versions": false,
+      "leaks_stack_traces": false,
+      "leaks_hostnames": false,
+      "sanitized_response": {
+        "metrics_format": "openmetrics-telemetry",
+        "cardinality": "bounded"
+      },
+      "is_secure": true,
+      "audit_notes": "Metrics export strictly enforces metric label anonymization."
+    },
+    {
+      "endpoint_path": "/status",
+      "access_tier": "INTERNAL",
+      "status_code": 200,
+      "leaks_internal_ip": false,
+      "leaks_database_credentials": false,
+      "leaks_software_versions": false,
+      "leaks_stack_traces": false,
+      "leaks_hostnames": false,
+      "sanitized_response": {
+        "platform_status": "OPERATIONAL",
+        "sla_target": 0.999
+      },
+      "is_secure": true,
+      "audit_notes": "Status report does not expose underlying host IPs or kernel versions."
+    },
+    {
+      "endpoint_path": "/diagnostics",
+      "access_tier": "ADMIN_DIAGNOSTIC",
+      "status_code": 200,
+      "leaks_internal_ip": false,
+      "leaks_database_credentials": false,
+      "leaks_software_versions": false,
+      "leaks_stack_traces": false,
+      "leaks_hostnames": false,
+      "sanitized_response": {
+        "diagnostic_trace": "ENCRYPTED_SIGNATURE",
+        "pool_stats": "OK"
+      },
+      "is_secure": true,
+      "audit_notes": "Diagnostic endpoint redacts all secrets and requires mTLS / bearer auth."
+    }
+  ],
+  "information_exposure_prevented": true,
+  "public_tier_sanitized": true,
+  "internal_tier_controlled": true
+}

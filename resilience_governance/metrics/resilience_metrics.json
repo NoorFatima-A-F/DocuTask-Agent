@@ -1,0 +1,38 @@
+{
+  "rto_average_minutes": 4.2,
+  "rpo_average_minutes": 0.0,
+  "mttr_average_minutes": 6.5,
+  "restore_success_rate_pct": 100.0,
+  "open_risks_count": 0,
+  "overdue_actions_count": 0,
+  "verdict": "EXEMPLARY_OPERATIONAL_HEALTH",
+  "passed": true,
+  "details": {
+    "targets": {
+      "max_rto_minutes": 15.0,
+      "max_rpo_minutes": 5.0,
+      "max_mttr_minutes": 20.0,
+      "min_restore_success_rate_pct": 99.0,
+      "max_open_high_risks": 0,
+      "max_overdue_actions": 0
+    },
+    "measured": {
+      "rto_minutes": 4.2,
+      "rpo_minutes": 0.0,
+      "mttr_minutes": 6.5,
+      "restore_success_rate_pct": 100.0,
+      "open_risks": 0,
+      "overdue_actions": 0
+    },
+    "sla_compliance": {
+      "rto_sla_met": true,
+      "rpo_sla_met": true,
+      "mttr_sla_met": true,
+      "restore_rate_sla_met": true,
+      "risk_sla_met": true,
+      "action_sla_met": true
+    },
+    "backup_verification_cadence": "CONTINUOUS_AUTOMATED",
+    "chaos_drill_cadence": "MONTHLY_AUTOMATED"
+  }
+}

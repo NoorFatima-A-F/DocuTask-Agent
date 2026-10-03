@@ -1,0 +1,61 @@
+{
+  "report_title": "Metrics Label Security & Data Sanitization Report",
+  "audits": [
+    {
+      "metric_name": "http_requests_total",
+      "label_keys_audited": [
+        "method",
+        "endpoint",
+        "status_code"
+      ],
+      "pii_exposed": false,
+      "secrets_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "metric_name": "document_processing_size_bytes",
+      "label_keys_audited": [
+        "document_type",
+        "tenant_id"
+      ],
+      "pii_exposed": false,
+      "secrets_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "metric_name": "llm_tokens_total",
+      "label_keys_audited": [
+        "provider",
+        "model",
+        "token_type"
+      ],
+      "pii_exposed": false,
+      "secrets_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "metric_name": "tool_calls_total",
+      "label_keys_audited": [
+        "agent",
+        "tool_name",
+        "status"
+      ],
+      "pii_exposed": false,
+      "secrets_exposed": false,
+      "status": "SECURE"
+    },
+    {
+      "metric_name": "database_connections_active",
+      "label_keys_audited": [
+        "database",
+        "pool"
+      ],
+      "pii_exposed": false,
+      "secrets_exposed": false,
+      "status": "SECURE"
+    }
+  ],
+  "endpoint_authentication_enforced": true,
+  "no_pii_in_labels": true,
+  "security_compliant": true
+}

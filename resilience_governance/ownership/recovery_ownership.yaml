@@ -1,0 +1,298 @@
+version: '1.0'
+last_audit: '2026-09-15'
+total_components_cataloged: 42
+components:
+- component_name: FastAPI Gateway
+  owner_role: API Platform Lead
+  team_name: Platform Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: VP Eng
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: Traefik Ingress Router
+  owner_role: Network Architect
+  team_name: Cloud Infrastructure
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: Kubernetes Control Plane
+  owner_role: Platform SRE
+  team_name: Platform Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: Envoy Mesh Sidecars
+  owner_role: Service Mesh Lead
+  team_name: Platform Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Platform Lead
+  runbook_reference: runbooks/cascade_failure.md
+  status: OWNED
+- component_name: Prometheus Server
+  owner_role: Observability SRE
+  team_name: Site Reliability Engineering
+  escalation_tier_1: SRE Secondary
+  escalation_tier_2: Head of SRE
+  runbook_reference: runbooks/communication.md
+  status: OWNED
+- component_name: Grafana Dashboards
+  owner_role: Observability SRE
+  team_name: Site Reliability Engineering
+  escalation_tier_1: SRE Secondary
+  escalation_tier_2: Head of SRE
+  runbook_reference: runbooks/communication.md
+  status: OWNED
+- component_name: Alertmanager Router
+  owner_role: Observability SRE
+  team_name: Site Reliability Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Head of SRE
+  runbook_reference: runbooks/communication.md
+  status: OWNED
+- component_name: OpenTelemetry Collector
+  owner_role: Observability SRE
+  team_name: Site Reliability Engineering
+  escalation_tier_1: SRE Secondary
+  escalation_tier_2: Head of SRE
+  runbook_reference: runbooks/communication.md
+  status: OWNED
+- component_name: PostgreSQL Primary Node
+  owner_role: Database Reliability Engineer
+  team_name: DBRE Team
+  escalation_tier_1: DBRE Primary
+  escalation_tier_2: Head of Data Platform
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: PostgreSQL Multi-AZ Standby
+  owner_role: Database Reliability Engineer
+  team_name: DBRE Team
+  escalation_tier_1: DBRE Primary
+  escalation_tier_2: Head of Data Platform
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: PgBouncer Connection Pool
+  owner_role: Database Reliability Engineer
+  team_name: DBRE Team
+  escalation_tier_1: DBRE Primary
+  escalation_tier_2: Head of Data Platform
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: WAL Continuous Archiver
+  owner_role: Backup Storage Engineer
+  team_name: Storage & DBRE Team
+  escalation_tier_1: DBRE Primary
+  escalation_tier_2: Head of Data Platform
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: pgvector Vector Store
+  owner_role: AI Data Engineer
+  team_name: Data Platform Team
+  escalation_tier_1: DBRE Primary
+  escalation_tier_2: Head of AI
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: Alembic Migration Engine
+  owner_role: Database Reliability Engineer
+  team_name: DBRE Team
+  escalation_tier_1: DBRE Secondary
+  escalation_tier_2: Head of Data Platform
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: Database PITR Daemon
+  owner_role: Disaster Recovery Specialist
+  team_name: DBRE Team
+  escalation_tier_1: DBRE Primary
+  escalation_tier_2: Head of Data Platform
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: Database Scrubbing Engine
+  owner_role: Security & Data Lead
+  team_name: Data Governance
+  escalation_tier_1: DBRE Secondary
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: Database Replica Router
+  owner_role: Database Reliability Engineer
+  team_name: DBRE Team
+  escalation_tier_1: DBRE Secondary
+  escalation_tier_2: Head of Data Platform
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: Postgres Vacuum Daemon
+  owner_role: Database Reliability Engineer
+  team_name: DBRE Team
+  escalation_tier_1: DBRE Secondary
+  escalation_tier_2: Head of Data Platform
+  runbook_reference: runbooks/database_failure.md
+  status: OWNED
+- component_name: AWS S3 Document Vault
+  owner_role: Storage Architect
+  team_name: Storage Platform
+  escalation_tier_1: Storage SRE
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/storage_failure.md
+  status: OWNED
+- component_name: S3 Object Lock Engine
+  owner_role: Storage Architect
+  team_name: Storage Platform
+  escalation_tier_1: Security On-Call
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/storage_failure.md
+  status: OWNED
+- component_name: MinIO Local Vault Standby
+  owner_role: Storage SRE
+  team_name: Storage Platform
+  escalation_tier_1: Storage SRE
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/storage_failure.md
+  status: OWNED
+- component_name: Cross-Region Sync Daemon
+  owner_role: Cloud Infra Architect
+  team_name: Cloud Infrastructure
+  escalation_tier_1: Storage SRE
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/storage_failure.md
+  status: OWNED
+- component_name: Storage Hash Verifier
+  owner_role: Storage SRE
+  team_name: Storage Platform
+  escalation_tier_1: Storage SRE
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/storage_failure.md
+  status: OWNED
+- component_name: Document Thumbnail Store
+  owner_role: Storage SRE
+  team_name: Storage Platform
+  escalation_tier_1: Storage SRE
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/storage_failure.md
+  status: OWNED
+- component_name: OCR Artifact Storage
+  owner_role: AI Pipeline Lead
+  team_name: AI Platform Team
+  escalation_tier_1: Storage SRE
+  escalation_tier_2: Head of AI
+  runbook_reference: runbooks/storage_failure.md
+  status: OWNED
+- component_name: Extracted JSON Vault
+  owner_role: Storage Architect
+  team_name: Storage Platform
+  escalation_tier_1: Storage SRE
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/storage_failure.md
+  status: OWNED
+- component_name: Celery Worker Cluster
+  owner_role: Async Processing Lead
+  team_name: Backend Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Backend Lead
+  runbook_reference: runbooks/cascade_failure.md
+  status: OWNED
+- component_name: Redis Queue & Broker
+  owner_role: Cache Reliability Engineer
+  team_name: Platform Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/cascade_failure.md
+  status: OWNED
+- component_name: Redis AOF Persistence
+  owner_role: Cache Reliability Engineer
+  team_name: Platform Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Head of Infra
+  runbook_reference: runbooks/cascade_failure.md
+  status: OWNED
+- component_name: Celery Beat Scheduler
+  owner_role: Async Processing Lead
+  team_name: Backend Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Backend Lead
+  runbook_reference: runbooks/cascade_failure.md
+  status: OWNED
+- component_name: OCR Processing Engine
+  owner_role: AI Pipeline Engineer
+  team_name: AI Platform Team
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Head of AI
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: LLM Extraction Workers
+  owner_role: AI Pipeline Engineer
+  team_name: AI Platform Team
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Head of AI
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: Dead Letter Queue Handler
+  owner_role: Async Processing Lead
+  team_name: Backend Engineering
+  escalation_tier_1: SRE Secondary
+  escalation_tier_2: Backend Lead
+  runbook_reference: runbooks/cascade_failure.md
+  status: OWNED
+- component_name: Backpressure Limiter
+  owner_role: Platform SRE
+  team_name: Site Reliability Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: Head of SRE
+  runbook_reference: runbooks/cascade_failure.md
+  status: OWNED
+- component_name: HashiCorp Vault Service
+  owner_role: Security Engineer
+  team_name: Security Engineering
+  escalation_tier_1: Security On-Call
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: AWS KMS Master Keys
+  owner_role: Cryptography Lead
+  team_name: Security Engineering
+  escalation_tier_1: Security On-Call
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: TLS/PKI Cert Manager
+  owner_role: Security Engineer
+  team_name: Security Engineering
+  escalation_tier_1: Security On-Call
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: Sealed Secrets Controller
+  owner_role: Platform Security Lead
+  team_name: Security Engineering
+  escalation_tier_1: SRE Primary
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: OAuth / JWT Auth Provider
+  owner_role: Security Engineer
+  team_name: Security Engineering
+  escalation_tier_1: Security On-Call
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/complete_outage.md
+  status: OWNED
+- component_name: RBAC Policy Controller
+  owner_role: Security Compliance Lead
+  team_name: Governance & Security
+  escalation_tier_1: Security On-Call
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/communication.md
+  status: OWNED
+- component_name: Audit Merkle Log Store
+  owner_role: Compliance Engineer
+  team_name: Governance & Security
+  escalation_tier_1: Security On-Call
+  escalation_tier_2: CISO
+  runbook_reference: runbooks/communication.md
+  status: OWNED
+- component_name: Incident Command Center
+  owner_role: Incident Commander
+  team_name: Production Operations
+  escalation_tier_1: VP Eng
+  escalation_tier_2: CTO
+  runbook_reference: runbooks/communication.md
+  status: OWNED

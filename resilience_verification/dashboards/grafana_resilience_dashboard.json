@@ -1,0 +1,42 @@
+{
+  "title": "DocuTask Agent - Operational Resilience & Recovery Dashboard",
+  "schemaVersion": 38,
+  "panels": [
+    {
+      "title": "Resilience Score",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "docutask_resilience_score"
+        }
+      ]
+    },
+    {
+      "title": "MTTD (Seconds)",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "docutask_resilience_mttd_seconds"
+        }
+      ]
+    },
+    {
+      "title": "MTTR (Seconds)",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "docutask_resilience_mttr_seconds"
+        }
+      ]
+    },
+    {
+      "title": "Recovery Success Rate (%)",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "docutask_resilience_success_rate_pct"
+        }
+      ]
+    }
+  ]
+}

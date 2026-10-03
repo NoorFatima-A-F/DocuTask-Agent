@@ -1,0 +1,31 @@
+{
+  "total_workers_tracked": 3,
+  "active_workers_count": 3,
+  "stuck_workers_count": 0,
+  "zombie_workers_count": 0,
+  "all_workers_healthy": true,
+  "passed": true,
+  "workers": [
+    {
+      "worker_id": "worker-01",
+      "last_seen_seconds_ago": 2.0,
+      "current_task": "task_ocr_extraction_doc_101",
+      "tasks_completed": 420,
+      "status": "ALIVE"
+    },
+    {
+      "worker_id": "worker-02",
+      "last_seen_seconds_ago": 4.5,
+      "current_task": "task_embedding_generation_doc_102",
+      "tasks_completed": 315,
+      "status": "ALIVE"
+    },
+    {
+      "worker_id": "worker-03",
+      "last_seen_seconds_ago": 1.0,
+      "current_task": "idle_waiting_queue",
+      "tasks_completed": 512,
+      "status": "ALIVE"
+    }
+  ]
+}

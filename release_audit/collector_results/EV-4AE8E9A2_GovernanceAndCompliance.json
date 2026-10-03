@@ -1,0 +1,32 @@
+{
+  "artifact_paths": [],
+  "category": "GovernanceAndCompliance",
+  "classification": "PARTIALLY_VERIFIED",
+  "collector": "GovernanceCollector",
+  "command": null,
+  "confidence": "LOW",
+  "content_hash": "c70df4e562fbde656aefa5b655f15ce110d28b290e7aecd470f3e11074401334",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-4AE8E9A2",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "adr_count": 58,
+    "governance_complete": false,
+    "has_codeowners": true,
+    "has_issue_templates": false,
+    "required_docs": {
+      "CHANGELOG.md": false,
+      "CODE_OF_CONDUCT.md": false,
+      "CONTRIBUTING.md": true,
+      "LICENSE": false,
+      "README.md": true,
+      "ROADMAP.md": false,
+      "SECURITY.md": false
+    }
+  },
+  "source_type": "CONFIGURATION_FILE",
+  "summary": "Missing governance items: LICENSE, SECURITY.md, CODE_OF_CONDUCT.md, CHANGELOG.md, ROADMAP.md.",
+  "timestamp": "2026-09-20T19:01:11.050366+00:00"
+}

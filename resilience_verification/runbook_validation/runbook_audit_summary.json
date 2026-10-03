@@ -1,0 +1,49 @@
+{
+  "total_runbooks": 6,
+  "automated_runbooks_count": 6,
+  "passed": true,
+  "details": {
+    "total_runbooks_verified": 6,
+    "automated_coverage_pct": 100.0,
+    "cli_runner_supported": "Antigravity Runbook Automation CLI (v3G.5)",
+    "verdict": "ALL_RUNBOOKS_AUTOMATED_AND_VERIFIED"
+  },
+  "runbooks": [
+    {
+      "id": "RB-001",
+      "title": "PostgreSQL Database Cluster Failure & Failover Runbook",
+      "file_path": "runbooks/database_failure.md",
+      "automated_cli_supported": true
+    },
+    {
+      "id": "RB-002",
+      "title": "Celery OCR & Document Extraction Worker Crash Runbook",
+      "file_path": "runbooks/worker_failure.md",
+      "automated_cli_supported": true
+    },
+    {
+      "id": "RB-003",
+      "title": "Redis Queue Broker & Sentinel Outage Runbook",
+      "file_path": "runbooks/queue_failure.md",
+      "automated_cli_supported": true
+    },
+    {
+      "id": "RB-004",
+      "title": "AWS S3 / MinIO Document Storage Failure Runbook",
+      "file_path": "runbooks/storage_failure.md",
+      "automated_cli_supported": true
+    },
+    {
+      "id": "RB-005",
+      "title": "Gemini AI Provider 429 Quota & Outage Runbook",
+      "file_path": "runbooks/ai_provider_failure.md",
+      "automated_cli_supported": true
+    },
+    {
+      "id": "RB-006",
+      "title": "Canary Deployment & Bad Release Rollback Runbook",
+      "file_path": "runbooks/deployment_failure.md",
+      "automated_cli_supported": true
+    }
+  ]
+}

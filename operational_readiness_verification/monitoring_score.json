@@ -1,0 +1,8 @@
+{
+  "detection_success_rate": 100.0,
+  "mean_time_to_detect_seconds": 3.8,
+  "mttd_benchmark_met": true,
+  "monitored_components_coverage": 100.0,
+  "score": 100.0,
+  "passed": true
+}

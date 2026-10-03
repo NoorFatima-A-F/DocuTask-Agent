@@ -1,0 +1,39 @@
+{
+  "report_title": "Deployment Intelligence & Regression Impact Report",
+  "metrics_audited": [
+    {
+      "metric_name": "document_processing_p95_latency",
+      "pre_deploy_baseline": 1.85,
+      "post_deploy_observed": 1.8,
+      "variance_pct": -2.7,
+      "regression_detected": false,
+      "status": "CLEAN"
+    },
+    {
+      "metric_name": "api_gateway_5xx_error_rate",
+      "pre_deploy_baseline": 0.04,
+      "post_deploy_observed": 0.03,
+      "variance_pct": -25.0,
+      "regression_detected": false,
+      "status": "CLEAN"
+    },
+    {
+      "metric_name": "worker_memory_working_set_mb",
+      "pre_deploy_baseline": 512.0,
+      "post_deploy_observed": 518.0,
+      "variance_pct": 1.17,
+      "regression_detected": false,
+      "status": "CLEAN"
+    },
+    {
+      "metric_name": "ai_schema_extraction_accuracy",
+      "pre_deploy_baseline": 99.1,
+      "post_deploy_observed": 99.3,
+      "variance_pct": 0.2,
+      "regression_detected": false,
+      "status": "CLEAN"
+    }
+  ],
+  "deployment_safe_to_promote": true,
+  "zero_regression_verified": true
+}

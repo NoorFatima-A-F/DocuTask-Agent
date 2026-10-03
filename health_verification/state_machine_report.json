@@ -1,0 +1,39 @@
+{
+  "total_states": 5,
+  "states": [
+    "STARTING",
+    "READY",
+    "DEGRADED",
+    "NOT_READY",
+    "RECOVERING"
+  ],
+  "transition_matrix_valid": true,
+  "all_deterministic": true,
+  "total_transitions_logged": 5,
+  "passed": true,
+  "details": {
+    "allowed_transitions": {
+      "STARTING": [
+        "READY"
+      ],
+      "READY": [
+        "DEGRADED",
+        "NOT_READY"
+      ],
+      "DEGRADED": [
+        "READY",
+        "NOT_READY"
+      ],
+      "NOT_READY": [
+        "RECOVERING"
+      ],
+      "RECOVERING": [
+        "READY",
+        "NOT_READY",
+        "DEGRADED"
+      ]
+    },
+    "current_state": "READY",
+    "history_length": 5
+  }
+}

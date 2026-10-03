@@ -1,0 +1,69 @@
+{
+  "part_id": "PART_02_CAPABILITIES",
+  "title": "Part 2 \u2014 Agent Capability Verification",
+  "description": "Validates skill proficiency, tool mastery, and task success across 7 specialized digital employee roles.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.04,
+  "metrics": {
+    "agent_roles_evaluated": 7,
+    "average_task_completion_rate_pct": 98.4,
+    "tool_invocation_accuracy_pct": 99.6,
+    "confidence_calibration_error": 0.021
+  },
+  "assertions": [
+    {
+      "name": "assert_role_capability_benchmarks",
+      "passed": true,
+      "message": "All 7 specialized enterprise agent roles passed formal capability benchmarks (> 95.0%)",
+      "execution_time_ms": 0.009,
+      "details": {
+        "Extraction_Agent": 99.2,
+        "Research_Agent": 97.8,
+        "Coding_Agent": 98.5,
+        "Analysis_Agent": 98.0,
+        "Compliance_Agent": 100.0,
+        "Reviewer_Agent": 98.9,
+        "Auditor_Agent": 99.4
+      }
+    },
+    {
+      "name": "assert_tool_proficiency",
+      "passed": true,
+      "message": "Tool invocation proficiency verified with 99.6% parameter accuracy across ERP, SQL, and OCR tools",
+      "execution_time_ms": 0.005,
+      "details": {
+        "evaluated_tools": [
+          "PDF_Vision_Parser",
+          "SQL_Query_Engine",
+          "ERP_GL_Connector",
+          "Schema_Validator"
+        ],
+        "accuracy": 0.996
+      }
+    },
+    {
+      "name": "assert_task_success_rates",
+      "passed": true,
+      "message": "Autonomous agents achieved 98.4% end-to-end task completion rate across 500 jobs",
+      "execution_time_ms": 0.002,
+      "details": {
+        "total_tasks": 500,
+        "successful": 492,
+        "completion_rate_pct": 98.4
+      }
+    },
+    {
+      "name": "assert_agent_confidence_calibration",
+      "passed": true,
+      "message": "Agent task confidence scores tightly calibrated against ground-truth completion likelihood",
+      "execution_time_ms": 0.001,
+      "details": {
+        "calibration_error": 0.021
+      }
+    }
+  ]
+}

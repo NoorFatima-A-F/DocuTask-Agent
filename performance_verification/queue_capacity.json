@@ -1,0 +1,50 @@
+{
+  "verifier_id": "VERIFY-3J.4.6-QUEUE-CAPACITY",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Backlog Drain Rate Verification (Processing > Ingress)",
+      "passed": true,
+      "details": "Processing rate (1200 docs/min) exceeds burst ingress (1000 docs/min)",
+      "metrics": {
+        "processing_rate": 1200,
+        "ingress_rate": 1000
+      }
+    },
+    {
+      "name": "Queue Drain Time Calculation (< 60s at Peak Backlog)",
+      "passed": true,
+      "details": "Peak backlog of 480 jobs drained in 24.0s (queued_jobs / processing_rate)",
+      "metrics": {
+        "drain_time_secs": 24.0,
+        "peak_depth": 480
+      }
+    },
+    {
+      "name": "Queue Waiting Latency (< 25ms)",
+      "passed": true,
+      "details": "Average task queuing wait time bounded at 14.5ms",
+      "metrics": {
+        "waiting_time_ms": 14.5
+      }
+    },
+    {
+      "name": "Zero Job Eviction or Buffer Overflow",
+      "passed": true,
+      "details": "Redis memory and Celery task broker remained within safe operational bounds without drops",
+      "metrics": {
+        "dropped_jobs": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:45:12.806266+00:00",
+  "report_title": "Queue Capacity & Drain Velocity Report",
+  "input_rate_docs_min": 1000,
+  "processing_rate_docs_min": 1200,
+  "peak_queue_depth": 480,
+  "avg_waiting_time_ms": 14.5,
+  "drain_time_seconds": 24.0,
+  "backlog_detection_operational": true,
+  "zero_job_loss_verified": true
+}

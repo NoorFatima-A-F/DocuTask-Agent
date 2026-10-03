@@ -1,0 +1,35 @@
+{
+  "total_scenarios_tested": 3,
+  "passed_scenarios": 3,
+  "avg_identification_time_seconds": 16.23,
+  "scenarios": [
+    {
+      "scenario_id": "SCENARIO_01_HEALTH_OVERVIEW",
+      "operational_question": "Is the platform operating normally?",
+      "target_answer_time_seconds": 30.0,
+      "measured_time_seconds": 6.5,
+      "information_visible_immediately": true,
+      "diagnosis_revealed": "Green traffic light gauges on docutask-system-health confirm nominal operations.",
+      "passed": true
+    },
+    {
+      "scenario_id": "SCENARIO_02_FAILURE_DIAGNOSIS",
+      "operational_question": "Why did document processing throughput drop?",
+      "target_answer_time_seconds": 120.0,
+      "measured_time_seconds": 18.2,
+      "information_visible_immediately": true,
+      "diagnosis_revealed": "Gemini 503 error rate spike correlated with Redis queue buildup on docutask-ai-processing.",
+      "passed": true
+    },
+    {
+      "scenario_id": "SCENARIO_03_DEPLOYMENT_ATTRIBUTION",
+      "operational_question": "Did the recent release degrade system performance?",
+      "target_answer_time_seconds": 300.0,
+      "measured_time_seconds": 24.0,
+      "information_visible_immediately": true,
+      "diagnosis_revealed": "Planner latency improved by 18% with stable memory and zero error regression on docutask-agent-runtime.",
+      "passed": true
+    }
+  ],
+  "status": "PASS"
+}

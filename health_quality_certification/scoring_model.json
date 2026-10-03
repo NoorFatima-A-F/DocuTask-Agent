@@ -1,0 +1,28 @@
+{
+  "model_name": "DocuTask Enterprise Health Quality Scoring Model",
+  "version": "3H.5.11",
+  "weights": {
+    "liveness": 0.15,
+    "readiness": 0.15,
+    "dependencies": 0.15,
+    "failure_detection": 0.15,
+    "recovery": 0.15,
+    "monitoring": 0.1,
+    "security": 0.1,
+    "evidence": 0.05
+  },
+  "maturity_tiers": {
+    "Level 4 (95-100)": "Enterprise Health (Certified)",
+    "Level 3 (85-94.99)": "Production Health (Production Ready)",
+    "Level 2 (70-84.99)": "Operational Health (Internal Production)",
+    "Level 1 (50-69.99)": "Basic Health (Development Only)",
+    "Level 0 (0-49.99)": "Unknown / Failed"
+  },
+  "veto_conditions": [
+    "Critical dependency invisible",
+    "False-ready state detected",
+    "Recovery unverified",
+    "Security exposure exists",
+    "Evidence missing"
+  ]
+}

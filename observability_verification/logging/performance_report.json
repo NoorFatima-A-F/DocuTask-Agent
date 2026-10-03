@@ -1,0 +1,10 @@
+{
+  "report_title": "High-Volume Logging Performance & Non-Blocking Safety Report",
+  "total_requests_simulated": 10000,
+  "logging_overhead_pct": 0.42,
+  "log_throughput_msgs_sec": 24500.0,
+  "mean_processing_latency_ms": 0.18,
+  "non_blocking_async_sink_verified": true,
+  "backpressure_handling_verified": true,
+  "performance_passed": true
+}

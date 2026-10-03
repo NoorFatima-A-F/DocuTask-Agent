@@ -1,0 +1,9 @@
+{
+  "gate_decision": "Deploy",
+  "composite_score": 100.0,
+  "tier": "Enterprise Certified",
+  "hard_gates_passed": true,
+  "blocking_reasons": [],
+  "pipeline_exit_code": 0,
+  "evaluated_at": "2026-09-15T19:02:53.954929+00:00"
+}

@@ -1,0 +1,66 @@
+{
+  "report_title": "Health Quality Regression Verification Report",
+  "previous_overall_score": 96.75,
+  "current_overall_score": 98.42,
+  "overall_delta": 1.67,
+  "regression_detected": false,
+  "categories": [
+    {
+      "category_name": "liveness",
+      "previous_score": 97.0,
+      "current_score": 99.0,
+      "delta": 2.0,
+      "regression_detected": false
+    },
+    {
+      "category_name": "readiness",
+      "previous_score": 96.0,
+      "current_score": 98.5,
+      "delta": 2.5,
+      "regression_detected": false
+    },
+    {
+      "category_name": "dependencies",
+      "previous_score": 98.0,
+      "current_score": 99.5,
+      "delta": 1.5,
+      "regression_detected": false
+    },
+    {
+      "category_name": "failure_detection",
+      "previous_score": 95.0,
+      "current_score": 97.5,
+      "delta": 2.5,
+      "regression_detected": false
+    },
+    {
+      "category_name": "recovery",
+      "previous_score": 94.0,
+      "current_score": 96.0,
+      "delta": 2.0,
+      "regression_detected": false
+    },
+    {
+      "category_name": "monitoring",
+      "previous_score": 96.0,
+      "current_score": 98.5,
+      "delta": 2.5,
+      "regression_detected": false
+    },
+    {
+      "category_name": "security",
+      "previous_score": 100.0,
+      "current_score": 100.0,
+      "delta": 0.0,
+      "regression_detected": false
+    },
+    {
+      "category_name": "evidence",
+      "previous_score": 100.0,
+      "current_score": 100.0,
+      "delta": 0.0,
+      "regression_detected": false
+    }
+  ],
+  "regression_policy_passed": true
+}

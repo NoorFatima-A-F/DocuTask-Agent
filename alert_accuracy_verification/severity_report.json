@@ -1,0 +1,9 @@
+{
+  "total_evaluated_severities": 20,
+  "matched_severities": 20,
+  "critical_misclassifications": 0,
+  "high_misclassifications": 0,
+  "warning_misclassifications": 0,
+  "severity_accuracy_score": 100.0,
+  "status": "PASS"
+}

@@ -1,0 +1,65 @@
+{
+  "report_title": "Operational Runbook Automation Verification Report",
+  "runbooks": [
+    {
+      "runbook_id": "RB-SRV-REC-001",
+      "name": "Degraded Microservice Auto-Restart & Traffic Drain",
+      "target_subsystem": "Service Recovery",
+      "trigger_condition": "5xx error rate > 5% for 60s",
+      "execution_steps": [
+        "Mark instance unhealthy in Consul/Envoy service mesh",
+        "Drain active in-flight requests (grace period 15s)",
+        "Restart container and execute health check probe",
+        "Gradually re-introduce traffic (10% -> 50% -> 100%)"
+      ],
+      "is_automated": true,
+      "avg_remediation_secs": 24.5
+    },
+    {
+      "runbook_id": "RB-DB-REC-002",
+      "name": "PostgreSQL Connection Pool Exhaustion Self-Healing",
+      "target_subsystem": "Database Recovery",
+      "trigger_condition": "Pool utilization > 95% for 30s",
+      "execution_steps": [
+        "Identify and terminate idle-in-transaction connections > 60s",
+        "Scale PgBouncer replica connection ceiling dynamically",
+        "Shed non-critical background analytics read load to read-replica",
+        "Verify active pool utilization drops below 70%"
+      ],
+      "is_automated": true,
+      "avg_remediation_secs": 18.2
+    },
+    {
+      "runbook_id": "RB-QUE-REC-003",
+      "name": "Celery / Redis Queue Congestion & Poison Pill Quarantine",
+      "target_subsystem": "Queue Recovery",
+      "trigger_condition": "Queue backlog > 10,000 tasks and worker lag > 120s",
+      "execution_steps": [
+        "Scale worker consumer pool by 200%",
+        "Isolate repeated unparseable payload tasks to Dead-Letter Queue",
+        "Reprioritize high-priority synchronous user workflows",
+        "Drain backlogged asynchronous batch OCR tasks"
+      ],
+      "is_automated": true,
+      "avg_remediation_secs": 35.0
+    },
+    {
+      "runbook_id": "RB-AI-FLB-004",
+      "name": "AI Model Provider Outage Autonomous Fallback",
+      "target_subsystem": "AI Fallback",
+      "trigger_condition": "Primary LLM API timeout rate > 10% or HTTP 429/503 spikes",
+      "execution_steps": [
+        "Trip circuit breaker on primary AI model provider",
+        "Route live prompt workload to secondary backup model provider",
+        "Adjust prompt formatting/context window parameters for secondary model",
+        "Run automated response quality verification on sample inferences",
+        "Resume primary provider routing once health probe passes 5 consecutive times"
+      ],
+      "is_automated": true,
+      "avg_remediation_secs": 12.0
+    }
+  ],
+  "automated_runbooks_count": 4,
+  "success_rate_pct": 100.0,
+  "status": "PASS"
+}

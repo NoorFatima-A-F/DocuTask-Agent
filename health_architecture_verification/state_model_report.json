@@ -1,0 +1,82 @@
+{
+  "total_states": 7,
+  "states": [
+    "UNKNOWN",
+    "INITIALIZING",
+    "READY",
+    "DEGRADED",
+    "UNHEALTHY",
+    "RECOVERING",
+    "FAILED"
+  ],
+  "layers_evaluated": [
+    "Layer 1: Process Health",
+    "Layer 2: Dependency Health",
+    "Layer 3: Service Capability Health",
+    "Layer 4: Business Workflow Health"
+  ],
+  "state_machine_valid": true,
+  "transition_coverage_pct": 100.0,
+  "passed": true,
+  "details": {
+    "states_defined": [
+      "UNKNOWN",
+      "INITIALIZING",
+      "READY",
+      "DEGRADED",
+      "UNHEALTHY",
+      "RECOVERING",
+      "FAILED"
+    ],
+    "state_machine": "implemented",
+    "layers": [
+      "Layer 1: Process Health",
+      "Layer 2: Dependency Health",
+      "Layer 3: Service Capability Health",
+      "Layer 4: Business Workflow Health"
+    ],
+    "layer_evaluation_rules": {
+      "Layer 1 (Process)": "Heartbeat, Memory RSS, Thread Pool, Event Loop responsiveness",
+      "Layer 2 (Dependency)": "PostgreSQL socket, Redis ping, S3 bucket reachability, Gemini API quota",
+      "Layer 3 (Capability)": "Tesseract OCR binary ready, Embedding model loaded, Spool buffer writable",
+      "Layer 4 (Workflow)": "Queue lag < 500 tasks, Ingestion throughput >= 10 docs/min, Error rate < 1%"
+    },
+    "transition_graph": {
+      "UNKNOWN": [
+        "INITIALIZING",
+        "FAILED"
+      ],
+      "INITIALIZING": [
+        "READY",
+        "DEGRADED",
+        "UNHEALTHY",
+        "FAILED"
+      ],
+      "READY": [
+        "DEGRADED",
+        "UNHEALTHY",
+        "RECOVERING"
+      ],
+      "DEGRADED": [
+        "READY",
+        "UNHEALTHY",
+        "RECOVERING",
+        "FAILED"
+      ],
+      "UNHEALTHY": [
+        "RECOVERING",
+        "FAILED"
+      ],
+      "RECOVERING": [
+        "READY",
+        "DEGRADED",
+        "UNHEALTHY",
+        "FAILED"
+      ],
+      "FAILED": [
+        "INITIALIZING"
+      ]
+    },
+    "verdict": "ENTERPRISE_HEALTH_STATE_MODEL_PROVEN"
+  }
+}

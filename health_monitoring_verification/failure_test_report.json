@@ -1,0 +1,43 @@
+{
+  "total_tests": 4,
+  "passed_tests": 4,
+  "tests": [
+    {
+      "test_id": "CHAOS-MON-01",
+      "failure_injected": "PostgreSQL database process kill",
+      "metric_updated": true,
+      "alert_fired": true,
+      "incident_created": true,
+      "alert_cleared_on_recovery": true,
+      "passed": true
+    },
+    {
+      "test_id": "CHAOS-MON-02",
+      "failure_injected": "Redis queue network partition",
+      "metric_updated": true,
+      "alert_fired": true,
+      "incident_created": true,
+      "alert_cleared_on_recovery": true,
+      "passed": true
+    },
+    {
+      "test_id": "CHAOS-MON-03",
+      "failure_injected": "AI Worker fleet container termination",
+      "metric_updated": true,
+      "alert_fired": true,
+      "incident_created": true,
+      "alert_cleared_on_recovery": true,
+      "passed": true
+    },
+    {
+      "test_id": "CHAOS-MON-04",
+      "failure_injected": "Gemini AI external HTTP 503 response",
+      "metric_updated": true,
+      "alert_fired": true,
+      "incident_created": true,
+      "alert_cleared_on_recovery": true,
+      "passed": true
+    }
+  ],
+  "status": "PASS"
+}

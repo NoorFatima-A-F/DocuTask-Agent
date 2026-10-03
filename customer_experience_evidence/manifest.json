@@ -1,0 +1,30 @@
+{
+  "case_study_apex_global_financial___92_8.md": {
+    "sha256": "8eac5828284f4c65f5496eff31a7ba33d9a44efea98a60570b01ce5f63398c64",
+    "size_bytes": 1636
+  },
+  "case_study_biohealth_systems___clinical_p.md": {
+    "sha256": "bcdbcc3a7804b92cac89b5a7ee01def6702f77e5604e5f92aa8fb0e260af6486",
+    "size_bytes": 359
+  },
+  "customer_simulation_showcase.json": {
+    "sha256": "747244b2bf5ab5584b90f90caaf815380224ded98ff532e3d9f1050e27d7c49b",
+    "size_bytes": 28490
+  },
+  "demo_script_prospective_client___business.md": {
+    "sha256": "a4e494d3609ae027a35cbdca81ac48c36acaf7dd46b59f38a51d759ed8e0c267",
+    "size_bytes": 1349
+  },
+  "demo_script_recruiter___hiring_manager__5.md": {
+    "sha256": "6dd95675acf97076fd11bbc765f985defac04f7769ec5830f45e9c8c732b180b",
+    "size_bytes": 1927
+  },
+  "demo_script_technical_architect___system_d.md": {
+    "sha256": "580f72da67b9ca88d609d50e3ed21383e759c99760997d824f3641a11c3e5420",
+    "size_bytes": 1595
+  },
+  "platform_architecture.mermaid": {
+    "sha256": "1f479b9a403a875768862fa331d8b6d229c57466635bff8edfd9f1ce4769b062",
+    "size_bytes": 1545
+  }
+}

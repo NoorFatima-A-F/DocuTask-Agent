@@ -1,0 +1,73 @@
+{
+  "report_title": "Bounded Exponential Backoff & Retry Strategy Report",
+  "total_retry_policies": 6,
+  "policies": [
+    {
+      "operation_type": "PostgreSQL_Transient_Query",
+      "max_retries": 3,
+      "initial_backoff_ms": 100,
+      "max_backoff_ms": 2000,
+      "backoff_multiplier": 2.0,
+      "jitter_applied": true,
+      "retry_budget_enforced": true,
+      "dlq_routing_verified": true,
+      "is_idempotent": true
+    },
+    {
+      "operation_type": "Redis_Queue_Publish",
+      "max_retries": 3,
+      "initial_backoff_ms": 50,
+      "max_backoff_ms": 1000,
+      "backoff_multiplier": 2.0,
+      "jitter_applied": true,
+      "retry_budget_enforced": true,
+      "dlq_routing_verified": true,
+      "is_idempotent": true
+    },
+    {
+      "operation_type": "Gemini_LLM_Inference",
+      "max_retries": 4,
+      "initial_backoff_ms": 500,
+      "max_backoff_ms": 8000,
+      "backoff_multiplier": 2.5,
+      "jitter_applied": true,
+      "retry_budget_enforced": true,
+      "dlq_routing_verified": true,
+      "is_idempotent": true
+    },
+    {
+      "operation_type": "Tesseract_OCR_Page_Extraction",
+      "max_retries": 2,
+      "initial_backoff_ms": 200,
+      "max_backoff_ms": 2000,
+      "backoff_multiplier": 2.0,
+      "jitter_applied": true,
+      "retry_budget_enforced": true,
+      "dlq_routing_verified": true,
+      "is_idempotent": true
+    },
+    {
+      "operation_type": "Cloud_Storage_Upload",
+      "max_retries": 3,
+      "initial_backoff_ms": 250,
+      "max_backoff_ms": 4000,
+      "backoff_multiplier": 2.0,
+      "jitter_applied": true,
+      "retry_budget_enforced": true,
+      "dlq_routing_verified": true,
+      "is_idempotent": true
+    },
+    {
+      "operation_type": "Webhook_Event_Dispatch",
+      "max_retries": 5,
+      "initial_backoff_ms": 1000,
+      "max_backoff_ms": 30000,
+      "backoff_multiplier": 2.0,
+      "jitter_applied": true,
+      "retry_budget_enforced": true,
+      "dlq_routing_verified": true,
+      "is_idempotent": true
+    }
+  ],
+  "retry_governance_compliant": true
+}

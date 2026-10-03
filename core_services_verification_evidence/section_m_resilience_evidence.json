@@ -1,0 +1,78 @@
+{
+  "section_id": "SECTION_M_RESILIENCE",
+  "title": "Section M: Resilience & Fault Tolerance Verification",
+  "description": "Validates 3-state circuit breakers (CLOSED/OPEN/HALF-OPEN), bulkhead resource isolation, cascading timeout deadline propagation, and adaptive load shedding.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.02,
+  "metrics": {
+    "circuit_breaker_states": [
+      "CLOSED",
+      "OPEN",
+      "HALF-OPEN",
+      "CLOSED"
+    ],
+    "bulkhead_capacity": 4,
+    "bulkhead_overflow_isolated": true,
+    "deadline_ms_budget": 500.0,
+    "timeout_tripped_cleanly": true,
+    "load_shed_requests_dropped": 2,
+    "critical_traffic_preserved": true
+  },
+  "assertions": [
+    {
+      "name": "Circuit_Breaker_State_Machine_Transitions",
+      "passed": true,
+      "message": "Circuit breaker transitioned correctly: CLOSED -> OPEN -> HALF-OPEN -> CLOSED.",
+      "execution_time_ms": 0.003,
+      "details": {
+        "states_traversed": [
+          "CLOSED",
+          "OPEN",
+          "HALF-OPEN",
+          "CLOSED"
+        ]
+      }
+    },
+    {
+      "name": "Bulkhead_Resource_Partition_Isolation",
+      "passed": true,
+      "message": "Bulkhead partition isolated Service A flood without degrading Service B capacity.",
+      "execution_time_ms": 0.002,
+      "details": {
+        "active_a": 4,
+        "rejected_a": 6,
+        "active_b": 2
+      }
+    },
+    {
+      "name": "Cascading_Timeout_Deadline_Propagation",
+      "passed": true,
+      "message": "Timeout deadline propagated across downstream boundaries, cancelling over-budget operations.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "total_budget_ms": 500.0,
+        "remaining_budget_ms": 300.0
+      }
+    },
+    {
+      "name": "Adaptive_Load_Shedding_Under_Saturation",
+      "passed": true,
+      "message": "Adaptive load shedding dropped 2 non-critical requests during high CPU saturation.",
+      "execution_time_ms": 0.005,
+      "details": {
+        "accepted": [
+          "req_2",
+          "req_4"
+        ],
+        "dropped": [
+          "req_1",
+          "req_3"
+        ]
+      }
+    }
+  ]
+}

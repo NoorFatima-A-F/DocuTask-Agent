@@ -1,0 +1,64 @@
+{
+  "part_id": "PART_07_CONTEXT",
+  "title": "Part 7: Context Engineering & Token Budgeting Verification",
+  "description": "Validates dynamic token budgeting, context packing, semantic compression, policy/constraint injection, and citation preservation.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.02,
+  "metrics": {
+    "packed_tokens": 3100,
+    "budget_cap": 4000,
+    "compression_ratio": 0.27,
+    "policies_injected": 2,
+    "citations_preserved_pct": 100.0
+  },
+  "assertions": [
+    {
+      "name": "Dynamic_Token_Budget_Context_Packing",
+      "passed": true,
+      "message": "Context packer packed 3 top-ranked chunks into 3100 tokens (Budget: 4000).",
+      "execution_time_ms": 0.004,
+      "details": {
+        "packed_chunks": [
+          "c1",
+          "c2",
+          "c3"
+        ],
+        "total_tokens": 3100
+      }
+    },
+    {
+      "name": "Semantic_Compaction_And_Boilerplate_Pruning",
+      "passed": true,
+      "message": "Context compressor pruned boilerplate text by 72.6% while preserving critical financial entity.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "compression_ratio": 0.27
+      }
+    },
+    {
+      "name": "Safety_Policy_And_Constraint_Injection",
+      "passed": true,
+      "message": "Injected 2 enterprise governance constraints into prompt context preamble.",
+      "execution_time_ms": 0.003,
+      "details": {
+        "constraints": [
+          "Do not disclose confidential client names.",
+          "Always cite the source document reference ID."
+        ]
+      }
+    },
+    {
+      "name": "Evidence_Citation_And_Span_Preservation",
+      "passed": true,
+      "message": "Preserved explicit source document identifiers and page markers in assembled context block.",
+      "execution_time_ms": 0.001,
+      "details": {
+        "citations_verified": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "report_title": "Automated Recovery Architecture & Self-Healing Framework Report",
+  "controller_status": "OPERATIONAL",
+  "subsystems": [
+    {
+      "name": "RecoveryController",
+      "subsystem_path": "recovery/controller",
+      "status": "READY",
+      "responsibilities": [
+        "COORDINATE_REMEDIATION",
+        "MONITOR_SIGNALS",
+        "TRIGGER_PIPELINES"
+      ]
+    },
+    {
+      "name": "RecoveryPolicyEngine",
+      "subsystem_path": "recovery/policies",
+      "status": "READY",
+      "responsibilities": [
+        "EVALUATE_CONDITIONS",
+        "SELECT_RECOVERY_ACTION",
+        "ENFORCE_LIMITS"
+      ]
+    },
+    {
+      "name": "RemediationExecutors",
+      "subsystem_path": "recovery/actions",
+      "status": "READY",
+      "responsibilities": [
+        "CONTAINER_RESTART",
+        "DB_POOL_RESET",
+        "QUEUE_RECONNECT",
+        "AI_FALLBACK"
+      ]
+    },
+    {
+      "name": "RecoveryValidationEngine",
+      "subsystem_path": "recovery/validators",
+      "status": "READY",
+      "responsibilities": [
+        "SYNTHETIC_E2E_VERIFICATION",
+        "DEPENDENCY_HEALTH_CONFIRMATION"
+      ]
+    },
+    {
+      "name": "ReliabilityMetricsTracker",
+      "subsystem_path": "recovery/history",
+      "status": "READY",
+      "responsibilities": [
+        "MTTD_MEASUREMENT",
+        "MTTR_MEASUREMENT",
+        "MTBF_MEASUREMENT"
+      ]
+    },
+    {
+      "name": "RecoveryAuditLedger",
+      "subsystem_path": "recovery/reports",
+      "status": "READY",
+      "responsibilities": [
+        "IMMUTABLE_LOGGING",
+        "SHA256_HASHING",
+        "EVIDENCE_EXPORT"
+      ]
+    }
+  ],
+  "recovery_pipelines_count": 6,
+  "architecture_valid": true
+}

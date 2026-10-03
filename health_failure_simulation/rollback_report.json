@@ -1,0 +1,10 @@
+{
+  "report_title": "Automated Rollback & Environmental State Restoration Report",
+  "total_rollbacks_attempted": 12,
+  "successful_rollbacks": 12,
+  "containers_reconnected": true,
+  "queues_drained_and_resumed": true,
+  "database_locks_cleared": true,
+  "final_health_status": "ALL_GREEN",
+  "rollback_success_rate_pct": 100.0
+}

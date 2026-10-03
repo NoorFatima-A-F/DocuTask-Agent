@@ -1,0 +1,1 @@
+"""FAIR compliance module."""

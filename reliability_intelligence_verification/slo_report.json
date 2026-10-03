@@ -1,0 +1,40 @@
+{
+  "report_title": "SLO Compliance Report",
+  "total_slos_evaluated": 4,
+  "slos": [
+    {
+      "slo_type": "Availability",
+      "slo_name": "Monthly Service Availability",
+      "target_threshold": ">= 99.90%",
+      "actual_value": "99.96%",
+      "compliant": true,
+      "compliance_pct": 100.0
+    },
+    {
+      "slo_type": "Latency",
+      "slo_name": "API Request Latency (p95)",
+      "target_threshold": "95% requests < 500ms",
+      "actual_value": "p95 = 145ms (99.2% < 500ms)",
+      "compliant": true,
+      "compliance_pct": 99.2
+    },
+    {
+      "slo_type": "Processing",
+      "slo_name": "Document End-to-End Processing Duration",
+      "target_threshold": "95% documents completed within 60s",
+      "actual_value": "98.7% documents completed within 60s (mean: 14.2s)",
+      "compliant": true,
+      "compliance_pct": 98.7
+    },
+    {
+      "slo_type": "Recovery",
+      "slo_name": "Mean Time To Recovery (MTTR)",
+      "target_threshold": "MTTR < 5.0 minutes (300s)",
+      "actual_value": "mean MTTR = 12.4 seconds",
+      "compliant": true,
+      "compliance_pct": 100.0
+    }
+  ],
+  "overall_slo_compliance_pct": 99.47,
+  "all_slos_met": true
+}

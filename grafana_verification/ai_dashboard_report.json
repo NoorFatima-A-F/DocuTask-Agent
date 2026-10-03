@@ -1,0 +1,61 @@
+{
+  "dashboard_id": "docutask-ai-processing",
+  "title": "AI Processing Intelligence",
+  "category": "ai_processing",
+  "total_panels": 5,
+  "refresh_rate": "10s",
+  "panels": [
+    {
+      "panel_id": 1,
+      "title": "Document Throughput (Docs/min)",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_documents_processed_total[1m])) * 60",
+      "operational_question": "How many documents are being successfully ingested per minute?",
+      "threshold_critical": null,
+      "threshold_warning": null,
+      "unit": "doc/min"
+    },
+    {
+      "panel_id": 2,
+      "title": "Document Processing Latency (P50, P95, P99)",
+      "panel_type": "timeseries",
+      "promql_query": "histogram_quantile(0.95, sum(rate(docutask_document_processing_seconds_bucket[5m])) by (le))",
+      "operational_question": "What is the distribution of end-to-end document processing times?",
+      "threshold_critical": 15.0,
+      "threshold_warning": 5.0,
+      "unit": "s"
+    },
+    {
+      "panel_id": 3,
+      "title": "Extraction Quality & Validation Failures",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_validation_failures_total[5m]))",
+      "operational_question": "What percentage of extracted documents fail schema validation?",
+      "threshold_critical": 10.0,
+      "threshold_warning": 2.0,
+      "unit": "failures/s"
+    },
+    {
+      "panel_id": 4,
+      "title": "Gemini AI Requests & 503 Errors",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_gemini_failures_total[5m]))",
+      "operational_question": "Are we encountering model rate limits or external 503 provider errors?",
+      "threshold_critical": 5.0,
+      "threshold_warning": 1.0,
+      "unit": "err/s"
+    },
+    {
+      "panel_id": 5,
+      "title": "LLM Token Usage (Input / Output)",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_llm_tokens_consumed_total[5m])) by (type)",
+      "operational_question": "What is the current token consumption burn rate?",
+      "threshold_critical": null,
+      "threshold_warning": null,
+      "unit": "tokens/s"
+    }
+  ],
+  "all_queries_valid": true,
+  "status": "PASS"
+}

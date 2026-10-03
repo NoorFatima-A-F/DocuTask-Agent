@@ -1,0 +1,43 @@
+{
+  "report_title": "Continuous Post-Deployment Verification Report",
+  "checks_total": 5,
+  "checks_passed": 5,
+  "checks": [
+    {
+      "check_name": "Liveness & Readiness Health Probes",
+      "expected_standard": "HTTP 200 on /health/liveness and /health/readiness across 100% of replicas",
+      "measured_metric": "100% passing across 12 pods (0 restarts)",
+      "passed": true,
+      "audit_signoff": true
+    },
+    {
+      "check_name": "Subsystem SLI Availability",
+      "expected_standard": "Measured availability >= 99.90% over 15-minute verification window",
+      "measured_metric": "99.98% measured availability",
+      "passed": true,
+      "audit_signoff": true
+    },
+    {
+      "check_name": "Latency SLO Threshold (P95)",
+      "expected_standard": "P95 API Ingress Latency < 500ms; OCR Page Latency < 1500ms",
+      "measured_metric": "API P95 = 260ms; OCR P95 = 820ms",
+      "passed": true,
+      "audit_signoff": true
+    },
+    {
+      "check_name": "Error Budget Burn Rate",
+      "expected_standard": "1-hour burn rate < 1.0x (No accelerated budget depletion)",
+      "measured_metric": "0.45x 1-hour burn rate (SAFE)",
+      "passed": true,
+      "audit_signoff": true
+    },
+    {
+      "check_name": "End-to-End Document Ingestion Synthetic Probe",
+      "expected_standard": "Zero failures across 10 continuous synthetic invoice extractions",
+      "measured_metric": "10/10 synthetic document extractions successful (100% accuracy)",
+      "passed": true,
+      "audit_signoff": true
+    }
+  ],
+  "production_stability_confirmed": true
+}

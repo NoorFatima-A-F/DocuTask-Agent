@@ -1,0 +1,12 @@
+{
+  "simulations_executed": 5,
+  "chaos_experiments_executed": 3,
+  "pass_rate_pct": 100.0,
+  "scenarios": [
+    "PRIMARY_DATABASE_OUTAGE",
+    "ZONE_STORAGE_FAILURE",
+    "REDIS_CACHE_PARTITION",
+    "RAG_VECTOR_CORRUPTION",
+    "MULTI_SERVICE_CASCADING_FAILURE"
+  ]
+}

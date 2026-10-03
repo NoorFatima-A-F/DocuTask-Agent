@@ -1,0 +1,9 @@
+{
+  "report_title": "Log Retention, Rotation & Storage Compliance Report",
+  "application_log_retention_days": 30,
+  "security_log_retention_days": 180,
+  "audit_log_retention_days": 365,
+  "compression_enabled": true,
+  "automatic_rotation_verified": true,
+  "retention_policy_passed": true
+}

@@ -1,0 +1,86 @@
+{
+  "context_store": {
+    "save_throughput_ops": 941442.3,
+    "save_latencies_ms": {
+      "min": 0.001,
+      "mean": 0.001,
+      "p50": 0.001,
+      "p95": 0.001,
+      "p99": 0.002,
+      "max": 0.02
+    },
+    "checkpoint_throughput_ops": 50344.4,
+    "checkpoint_latencies_ms": {
+      "min": 0.01,
+      "mean": 0.02,
+      "p50": 0.018,
+      "p95": 0.029,
+      "p99": 0.04,
+      "max": 0.685
+    },
+    "load_throughput_ops": 958588.9,
+    "load_latencies_ms": {
+      "min": 0.001,
+      "mean": 0.001,
+      "p50": 0.001,
+      "p95": 0.001,
+      "p99": 0.002,
+      "max": 0.008
+    }
+  },
+  "scheduler": {
+    "enqueue_throughput_ops": 97957.6,
+    "enqueue_latencies_ms": {
+      "min": 0.008,
+      "mean": 0.01,
+      "p50": 0.009,
+      "p95": 0.013,
+      "p99": 0.021,
+      "max": 0.125
+    },
+    "dispatch_and_complete_throughput_ops": 4918.2,
+    "dispatch_latencies_ms": {
+      "min": 0.074,
+      "mean": 0.203,
+      "p50": 0.136,
+      "p95": 0.695,
+      "p99": 1.448,
+      "max": 1.919
+    }
+  },
+  "circuit_breaker": {
+    "throughput_ops": 471040.4,
+    "overhead_latencies_ms": {
+      "min": 0.001,
+      "mean": 0.002,
+      "p50": 0.002,
+      "p95": 0.003,
+      "p99": 0.004,
+      "max": 0.192
+    }
+  },
+  "audit_log": {
+    "append_throughput_ops": 60508.2,
+    "append_latencies_ms": {
+      "min": 0.011,
+      "mean": 0.016,
+      "p50": 0.013,
+      "p95": 0.021,
+      "p99": 0.03,
+      "max": 6.064
+    },
+    "verify_throughput_events_per_sec": 105609.3,
+    "chain_valid": true
+  },
+  "e2e_pipeline": {
+    "runs": 5,
+    "latencies_ms": {
+      "min": 239.899,
+      "mean": 243.485,
+      "p50": 240.261,
+      "p95": 244.232,
+      "p99": 244.232,
+      "max": 252.881
+    }
+  }
+}

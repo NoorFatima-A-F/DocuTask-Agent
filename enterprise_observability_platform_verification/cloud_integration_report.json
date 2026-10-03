@@ -1,0 +1,48 @@
+{
+  "report_title": "Cloud Provider Observability Integration Verification Report",
+  "integrations": [
+    {
+      "cloud_platform": "AWS",
+      "native_telemetry_services": [
+        "Amazon CloudWatch Metrics & Logs",
+        "AWS X-Ray Distributed Tracing",
+        "AWS Container Insights"
+      ],
+      "ingestion_status": "CONNECTED",
+      "unified_mapping_verified": true
+    },
+    {
+      "cloud_platform": "Google Cloud",
+      "native_telemetry_services": [
+        "Google Cloud Monitoring",
+        "Google Cloud Trace",
+        "Google Cloud Logging (Audit)"
+      ],
+      "ingestion_status": "CONNECTED",
+      "unified_mapping_verified": true
+    },
+    {
+      "cloud_platform": "Azure",
+      "native_telemetry_services": [
+        "Azure Monitor",
+        "Application Insights",
+        "Azure Log Analytics"
+      ],
+      "ingestion_status": "CONNECTED",
+      "unified_mapping_verified": true
+    },
+    {
+      "cloud_platform": "Kubernetes",
+      "native_telemetry_services": [
+        "Kube-State-Metrics",
+        "Prometheus Node Exporter",
+        "CoreDNS & Envoy Ingress Metrics"
+      ],
+      "ingestion_status": "CONNECTED",
+      "unified_mapping_verified": true
+    }
+  ],
+  "unified_reliability_view_verified": true,
+  "cross_cloud_portability_score_pct": 100.0,
+  "status": "PASS"
+}

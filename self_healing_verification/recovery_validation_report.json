@@ -1,0 +1,125 @@
+{
+  "validation_id": "val-sh-a8c03a95",
+  "layer1_health": {
+    "layer_name": "Layer 1 - Service Health Validation",
+    "liveness_status": "ALIVE",
+    "liveness_passed": true,
+    "readiness_status": "READY",
+    "readiness_passed": true,
+    "all_health_passed": true,
+    "validation_timestamp": "2026-09-15T19:10:46.772496+00:00"
+  },
+  "layer2_dependency": {
+    "layer_name": "Layer 2 - Dependency Restoration Validation",
+    "total_dependencies": 5,
+    "all_restored": true,
+    "dependencies": [
+      {
+        "name": "PostgreSQL Database",
+        "connection_healthy": true,
+        "query_or_ping_healthy": true,
+        "transaction_or_job_healthy": true,
+        "latency_ms": 1.8,
+        "status": "HEALTHY"
+      },
+      {
+        "name": "Redis Queue Engine",
+        "connection_healthy": true,
+        "query_or_ping_healthy": true,
+        "transaction_or_job_healthy": true,
+        "latency_ms": 0.5,
+        "status": "HEALTHY"
+      },
+      {
+        "name": "Celery Worker Pool",
+        "connection_healthy": true,
+        "query_or_ping_healthy": true,
+        "transaction_or_job_healthy": true,
+        "latency_ms": 2.1,
+        "status": "HEALTHY"
+      },
+      {
+        "name": "MinIO Object Storage",
+        "connection_healthy": true,
+        "query_or_ping_healthy": true,
+        "transaction_or_job_healthy": true,
+        "latency_ms": 3.5,
+        "status": "HEALTHY"
+      },
+      {
+        "name": "Gemini AI Provider Client",
+        "connection_healthy": true,
+        "query_or_ping_healthy": true,
+        "transaction_or_job_healthy": true,
+        "latency_ms": 16.4,
+        "status": "HEALTHY"
+      }
+    ]
+  },
+  "layer3_workflow": {
+    "layer_name": "Layer 3 - Functional Document Workflow Recovery",
+    "document_id": "canary-doc-808cc8d1",
+    "workflow_stages": [
+      {
+        "step_name": "Upload Document",
+        "duration_ms": 12.4,
+        "success": true
+      },
+      {
+        "step_name": "Create Processing Task",
+        "duration_ms": 5.1,
+        "success": true
+      },
+      {
+        "step_name": "Queue Celery Job",
+        "duration_ms": 4.2,
+        "success": true
+      },
+      {
+        "step_name": "Worker Processing & OCR",
+        "duration_ms": 35.0,
+        "success": true
+      },
+      {
+        "step_name": "AI Extraction (Gemini)",
+        "duration_ms": 42.0,
+        "success": true
+      },
+      {
+        "step_name": "Pydantic Schema Validation",
+        "duration_ms": 3.2,
+        "success": true
+      },
+      {
+        "step_name": "Database Storage & Commit",
+        "duration_ms": 6.5,
+        "success": true
+      }
+    ],
+    "total_duration_ms": 108.4,
+    "extraction_verified": true,
+    "database_saved": true,
+    "business_workflow_passed": true
+  },
+  "layer4_performance": {
+    "layer_name": "Layer 4 - Performance Recovery Test",
+    "baseline_latency_ms": 100.0,
+    "recovered_latency_ms": 108.4,
+    "recovery_performance_ratio": 1.08,
+    "acceptable_threshold_ratio": 1.2,
+    "performance_restored": true
+  },
+  "layer5_stability": {
+    "layer_name": "Layer 5 - Stability Window Monitoring",
+    "window_5m_stable": true,
+    "window_30m_stable": true,
+    "window_1h_stable": true,
+    "repeated_crashes_detected": 0,
+    "memory_leaks_detected": false,
+    "error_spikes_detected": false,
+    "queue_backlog_stable": true,
+    "overall_stability_passed": true
+  },
+  "all_5_layers_passed": true,
+  "recovery_accepted": true
+}

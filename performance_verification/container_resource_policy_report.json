@@ -1,0 +1,95 @@
+{
+  "verifier_id": "VERIFY-3J.4.2-CONTAINER-POLICY",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Strict Memory Limits Enforced (Zero Unlimited Containers)",
+      "passed": true,
+      "details": "All 5 containers enforce hard memory limits; 0 unbounded containers detected",
+      "metrics": {
+        "unlimited_containers": 0
+      }
+    },
+    {
+      "name": "CPU Quotas & Throttling Limits Configured",
+      "passed": true,
+      "details": "Strict CPU cgroup shares and limits assigned to prevent core starvation",
+      "metrics": {
+        "cpu_limits_enforced": true
+      }
+    },
+    {
+      "name": "Container Health Check & Auto-Restart Policies",
+      "passed": true,
+      "details": "All containers configured with active liveness probes and 'unless-stopped' restart policy",
+      "metrics": {
+        "health_checks_active": 5
+      }
+    },
+    {
+      "name": "Resource Reservation & Guaranteed Allocation",
+      "passed": true,
+      "details": "Minimum memory/CPU reservations prevent kernel OOM killer thrashing under burst workloads",
+      "metrics": {
+        "reservations_configured": 5
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:45:12.806107+00:00",
+  "report_title": "Container Resource Limit Policy Verification Report",
+  "containers": [
+    {
+      "container_name": "docutask-api-gateway",
+      "cpu_limit": "2.0",
+      "mem_limit": "2G",
+      "restart_policy": "unless-stopped",
+      "health_check_configured": true,
+      "resource_reservation": "1G",
+      "unlimited_memory_detected": false,
+      "compliant": true
+    },
+    {
+      "container_name": "docutask-worker-pool",
+      "cpu_limit": "4.0",
+      "mem_limit": "4G",
+      "restart_policy": "unless-stopped",
+      "health_check_configured": true,
+      "resource_reservation": "2G",
+      "unlimited_memory_detected": false,
+      "compliant": true
+    },
+    {
+      "container_name": "docutask-ocr-engine",
+      "cpu_limit": "4.0",
+      "mem_limit": "4G",
+      "restart_policy": "unless-stopped",
+      "health_check_configured": true,
+      "resource_reservation": "2G",
+      "unlimited_memory_detected": false,
+      "compliant": true
+    },
+    {
+      "container_name": "docutask-postgres",
+      "cpu_limit": "4.0",
+      "mem_limit": "8G",
+      "restart_policy": "unless-stopped",
+      "health_check_configured": true,
+      "resource_reservation": "4G",
+      "unlimited_memory_detected": false,
+      "compliant": true
+    },
+    {
+      "container_name": "docutask-redis",
+      "cpu_limit": "1.0",
+      "mem_limit": "2G",
+      "restart_policy": "unless-stopped",
+      "health_check_configured": true,
+      "resource_reservation": "512M",
+      "unlimited_memory_detected": false,
+      "compliant": true
+    }
+  ],
+  "unlimited_containers_detected": 0,
+  "all_limits_enforced": true
+}

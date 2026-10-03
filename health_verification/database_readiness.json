@@ -1,0 +1,24 @@
+{
+  "database": "postgresql",
+  "status": "READY",
+  "connected": true,
+  "authenticated": true,
+  "transaction_supported": true,
+  "schema_compatible": true,
+  "current_schema_version": "2026.09.15_v1",
+  "required_schema_version": "2026.09.15_v1",
+  "latency_ms": 11.8,
+  "connections_active": 5,
+  "connections_idle": 40,
+  "connections_waiting": 0,
+  "connections_available": 45,
+  "pool_exhausted": false,
+  "passed": true,
+  "details": {
+    "driver": "asyncpg",
+    "pool_size_max": 50,
+    "pool_size_min": 10,
+    "transaction_check": "BEGIN; SELECT 1; COMMIT; -> OK",
+    "migration_engine": "alembic"
+  }
+}

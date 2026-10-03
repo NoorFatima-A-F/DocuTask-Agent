@@ -1,0 +1,86 @@
+{
+  "total_policy_rules": 8,
+  "auto_executable_actions": 4,
+  "approval_gated_actions": 2,
+  "blocked_dangerous_actions": 2,
+  "rules": [
+    {
+      "action_name": "restart_worker_container",
+      "target_service": "worker_fleet",
+      "risk_level": "LOW",
+      "auto_execute": true,
+      "approval_required": false,
+      "blocked": false,
+      "rationale": "Non-destructive recycling of stateless Celery worker process"
+    },
+    {
+      "action_name": "reload_pgbouncer_pool",
+      "target_service": "postgres_db",
+      "risk_level": "LOW",
+      "auto_execute": true,
+      "approval_required": false,
+      "blocked": false,
+      "rationale": "Safe reset of connection multiplexer without data impact"
+    },
+    {
+      "action_name": "terminate_idle_db_transactions",
+      "target_service": "postgres_db",
+      "risk_level": "MEDIUM",
+      "auto_execute": true,
+      "approval_required": false,
+      "blocked": false,
+      "rationale": "Reclaims stalled connection leases idle for > 30s"
+    },
+    {
+      "action_name": "autoscale_worker_replicas",
+      "target_service": "worker_fleet",
+      "risk_level": "LOW",
+      "auto_execute": true,
+      "approval_required": false,
+      "blocked": false,
+      "rationale": "Dynamic horizontal scaling within pre-approved bounds (2-20 replicas)"
+    },
+    {
+      "action_name": "restore_database_from_backup",
+      "target_service": "postgres_db",
+      "risk_level": "HIGH",
+      "auto_execute": false,
+      "approval_required": true,
+      "blocked": false,
+      "rationale": "Disruptive database restore requires explicit Principal SRE sign-off"
+    },
+    {
+      "action_name": "purge_entire_document_queue",
+      "target_service": "redis_queue",
+      "risk_level": "HIGH",
+      "auto_execute": false,
+      "approval_required": true,
+      "blocked": false,
+      "rationale": "Mass queue purge risks customer task loss; requires manual review"
+    },
+    {
+      "action_name": "drop_database_tables",
+      "target_service": "postgres_db",
+      "risk_level": "CRITICAL",
+      "auto_execute": false,
+      "approval_required": false,
+      "blocked": true,
+      "rationale": "Destructive schema drops are strictly PROHIBITED in automated runbooks"
+    },
+    {
+      "action_name": "delete_storage_bucket",
+      "target_service": "storage_layer",
+      "risk_level": "CRITICAL",
+      "auto_execute": false,
+      "approval_required": false,
+      "blocked": true,
+      "rationale": "Raw storage deletion permanently prohibited by safety policy gatekeeper"
+    }
+  ],
+  "passed": true,
+  "details": {
+    "policy_enforcer": "OpenPolicyAgent / Rego SRE Safety Rules",
+    "privilege_verification": "Verified",
+    "two_man_rule_for_high_risk": true
+  }
+}

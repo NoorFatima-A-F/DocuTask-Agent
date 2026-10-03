@@ -1,0 +1,91 @@
+{
+  "dashboard_id": "docutask-system-health",
+  "title": "DocuTask System Health Overview",
+  "category": "system_health",
+  "total_panels": 8,
+  "refresh_rate": "5s",
+  "panels": [
+    {
+      "panel_id": 1,
+      "title": "Service Availability",
+      "panel_type": "stat",
+      "promql_query": "docutask_service_up",
+      "operational_question": "Is the core DocuTask API service process active?",
+      "threshold_critical": 0.0,
+      "threshold_warning": 0.0,
+      "unit": "short"
+    },
+    {
+      "panel_id": 2,
+      "title": "Readiness Status",
+      "panel_type": "stat",
+      "promql_query": "docutask_readiness_status",
+      "operational_question": "Can the platform safely receive customer traffic?",
+      "threshold_critical": 0.0,
+      "threshold_warning": 0.0,
+      "unit": "short"
+    },
+    {
+      "panel_id": 3,
+      "title": "Liveness Status",
+      "panel_type": "stat",
+      "promql_query": "docutask_liveness_status",
+      "operational_question": "Is the application loop running without deadlock?",
+      "threshold_critical": 0.0,
+      "threshold_warning": 0.0,
+      "unit": "short"
+    },
+    {
+      "panel_id": 4,
+      "title": "Request Latency (p95)",
+      "panel_type": "timeseries",
+      "promql_query": "histogram_quantile(0.95, sum(rate(docutask_http_request_duration_seconds_bucket[5m])) by (le))",
+      "operational_question": "Are API requests responding within acceptable latency thresholds?",
+      "threshold_critical": 2000.0,
+      "threshold_warning": 500.0,
+      "unit": "ms"
+    },
+    {
+      "panel_id": 5,
+      "title": "HTTP 4xx/5xx Error Rates",
+      "panel_type": "timeseries",
+      "promql_query": "sum(rate(docutask_http_requests_total{status=~\"[45]..\"}[5m])) by (status)",
+      "operational_question": "What is the proportion of failing client and server requests?",
+      "threshold_critical": 5.0,
+      "threshold_warning": 1.0,
+      "unit": "reqps"
+    },
+    {
+      "panel_id": 6,
+      "title": "PostgreSQL Dependency Status",
+      "panel_type": "stat",
+      "promql_query": "docutask_db_status",
+      "operational_question": "Is PostgreSQL database connectivity healthy?",
+      "threshold_critical": 0.0,
+      "threshold_warning": 0.0,
+      "unit": "short"
+    },
+    {
+      "panel_id": 7,
+      "title": "Redis Queue Status",
+      "panel_type": "stat",
+      "promql_query": "docutask_redis_status",
+      "operational_question": "Is Redis queue broker connection healthy?",
+      "threshold_critical": 0.0,
+      "threshold_warning": 0.0,
+      "unit": "short"
+    },
+    {
+      "panel_id": 8,
+      "title": "Gemini AI Provider Status",
+      "panel_type": "stat",
+      "promql_query": "docutask_ai_provider_status",
+      "operational_question": "Is external Gemini LLM endpoint reachable and responding?",
+      "threshold_critical": 0.0,
+      "threshold_warning": 0.0,
+      "unit": "short"
+    }
+  ],
+  "all_queries_valid": true,
+  "status": "PASS"
+}

@@ -1,0 +1,10 @@
+{
+  "database_transactions_consistent": true,
+  "partial_writes_detected": 0,
+  "queue_jobs_lost": 0,
+  "queue_duplicate_executions": 0,
+  "original_document_sha256": "80be3b3c9399d0c257346fcd21214c11bcc62f048c7ca51bf8f412f40e5a7f46",
+  "recovered_document_sha256": "80be3b3c9399d0c257346fcd21214c11bcc62f048c7ca51bf8f412f40e5a7f46",
+  "checksum_match": true,
+  "data_loss_prevented": true
+}

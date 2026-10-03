@@ -1,0 +1,60 @@
+{
+  "report_title": "Self-Healing Workflow Verification Report",
+  "total_workflows_tested": 3,
+  "successful_self_heals": 3,
+  "recovery_success_rate_pct": 100.0,
+  "mean_time_to_recovery_seconds": 10.23,
+  "workflows": [
+    {
+      "scenario_id": "SH_SCENARIO_001",
+      "workflow_name": "Autonomous OCR Worker Crash Remediation",
+      "steps_executed": [
+        "Worker process terminated unexpectedly",
+        "Heartbeat missing recorded after 15s window",
+        "Health state transitioned from READY to UNHEALTHY",
+        "Alert event emitted to AlertManager",
+        "Recovery controller invoked spawn_replacement_worker",
+        "Replacement worker initialized and passed health probe",
+        "Health state restored to READY",
+        "In-flight document queue resumed processing"
+      ],
+      "detection_latency_seconds": 1.8,
+      "recovery_latency_seconds": 10.4,
+      "mttr_seconds": 12.2,
+      "autonomous_restoration_verified": true
+    },
+    {
+      "scenario_id": "SH_SCENARIO_002",
+      "workflow_name": "Database Connection Pool Recycle Remediation",
+      "steps_executed": [
+        "Connection acquisition timeout detected",
+        "Health state transitioned from READY to DEGRADED",
+        "Recovery controller initiated pool connection drain and recycle",
+        "Stale database sockets closed and fresh connections established",
+        "Transactional ping query executed successfully (latency: 12ms)",
+        "Health state restored to READY"
+      ],
+      "detection_latency_seconds": 1.2,
+      "recovery_latency_seconds": 8.6,
+      "mttr_seconds": 9.8,
+      "autonomous_restoration_verified": true
+    },
+    {
+      "scenario_id": "SH_SCENARIO_003",
+      "workflow_name": "Queue Sentinel Master Failover Reconnect",
+      "steps_executed": [
+        "Queue write error captured by broker client",
+        "Health state transitioned to DEGRADED",
+        "Sentinel client queried for new master node",
+        "Connection re-routed to promoted Redis master replica",
+        "Queue depth probe validated enqueue/dequeue operations",
+        "Health state restored to READY"
+      ],
+      "detection_latency_seconds": 1.5,
+      "recovery_latency_seconds": 7.2,
+      "mttr_seconds": 8.7,
+      "autonomous_restoration_verified": true
+    }
+  ],
+  "zero_manual_intervention_verified": true
+}

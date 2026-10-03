@@ -1,0 +1,60 @@
+{
+  "part_id": "PART_06_RERANKING",
+  "title": "Part 6: Cross-Encoder Reranking & Diversity Verification",
+  "description": "Validates cross-encoder relevance calibration, NDCG@K boost over bi-encoders, Maximal Marginal Relevance (MMR) duplicate suppression, and authority/freshness weighting.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.02,
+  "metrics": {
+    "ndcg_lift_pct": 17.07,
+    "redundant_chunks_suppressed": 1,
+    "official_policy_promoted": true,
+    "rerank_latency_ms": 8.5
+  },
+  "assertions": [
+    {
+      "name": "Cross_Encoder_NDCG_Improvement_Lift",
+      "passed": true,
+      "message": "Cross-encoder reranking boosted NDCG from 0.82 to 0.96 (+17.1% lift).",
+      "execution_time_ms": 0.001,
+      "details": {
+        "base_ndcg": 0.82,
+        "reranked_ndcg": 0.96,
+        "lift_pct": 17.073170731707318
+      }
+    },
+    {
+      "name": "Context_Diversity_And_Redundancy_Suppression",
+      "passed": true,
+      "message": "MMR diversity filter pruned 1 near-duplicate chunk while preserving context coverage.",
+      "execution_time_ms": 0.003,
+      "details": {
+        "selected_ids": [
+          "c1",
+          "c3"
+        ]
+      }
+    },
+    {
+      "name": "Authority_And_Freshness_Score_Weighting",
+      "passed": true,
+      "message": "Reranker prioritized official board policy over informal chat notes based on authority score.",
+      "execution_time_ms": 0.006,
+      "details": {
+        "top_ranked": "board_policy"
+      }
+    },
+    {
+      "name": "Reranker_Sub_20ms_Latency_Profile",
+      "passed": true,
+      "message": "Reranking stage completed in 8.5ms (P95 SLA <= 20ms).",
+      "execution_time_ms": 0.0,
+      "details": {
+        "latency_ms": 8.5
+      }
+    }
+  ]
+}

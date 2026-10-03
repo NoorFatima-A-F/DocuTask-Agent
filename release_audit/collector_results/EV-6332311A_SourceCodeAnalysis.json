@@ -1,0 +1,50 @@
+{
+  "artifact_paths": [],
+  "category": "SourceCodeAnalysis",
+  "classification": "PARTIALLY_VERIFIED",
+  "collector": "SourceAnalyzer",
+  "command": null,
+  "confidence": "MEDIUM",
+  "content_hash": "66d619ca524423980ed68d0e404ca088fb8b6b5de0084dd27abe5a0bf5af15e5",
+  "duration_ms": 0.0,
+  "environment": {},
+  "exit_code": null,
+  "id": "EV-6332311A",
+  "parent_evidence_id": null,
+  "raw_payload": {
+    "packages": [
+      "app",
+      "app/__pycache__",
+      "app/agents",
+      "app/agents/__pycache__",
+      "app/agents/analytics",
+      "app/agents/analytics/__pycache__",
+      "app/agents/base",
+      "app/agents/base/__pycache__",
+      "app/agents/budgeting",
+      "app/agents/budgeting/__pycache__",
+      "app/agents/collaboration",
+      "app/agents/collaboration/__pycache__",
+      "app/agents/collaboration/messaging",
+      "app/agents/collaboration/messaging/__pycache__",
+      "app/agents/collaboration/reputation",
+      "app/agents/collaboration/reputation/__pycache__",
+      "app/agents/communication",
+      "app/agents/communication/__pycache__",
+      "app/agents/confidence",
+      "app/agents/confidence/__pycache__"
+    ],
+    "packages_count": 4372,
+    "syntax_errors": [
+      "manager.py: invalid syntax (manager.py, line 11)",
+      "__init__.py: invalid syntax (__init__.py, line 3)"
+    ],
+    "syntax_errors_count": 2,
+    "total_classes": 12685,
+    "total_functions": 18504,
+    "total_python_modules": 7057
+  },
+  "source_type": "STATIC_SOURCE_CODE",
+  "summary": "Parsed 7057 Python modules across 4372 packages (12685 classes, 18504 functions). Syntax errors: 2.",
+  "timestamp": "2026-09-20T19:31:10.325209+00:00"
+}

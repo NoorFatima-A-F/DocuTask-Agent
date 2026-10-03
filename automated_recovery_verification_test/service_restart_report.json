@@ -1,0 +1,11 @@
+{
+  "report_title": "Service Auto-Restart & Container Crash Recovery Report",
+  "service_name": "api-gateway",
+  "crash_detected": true,
+  "restart_triggered_automatically": true,
+  "restart_duration_seconds": 2.4,
+  "dependencies_reconnected": true,
+  "traffic_resumed_successfully": true,
+  "availability_impact_pct": 0.05,
+  "restart_verification_passed": true
+}

@@ -1,0 +1,49 @@
+{
+  "report_title": "AI Workflow Telemetry Privacy Verification Report",
+  "privacy_checks": [
+    {
+      "data_element": "raw_document_file_binary",
+      "is_sensitive": true,
+      "storage_allowed": false,
+      "actual_handling": "Stored only in ephemeral memory/encrypted S3; zero telemetry persistence",
+      "compliant": true
+    },
+    {
+      "data_element": "llm_prompt_raw_text",
+      "is_sensitive": true,
+      "storage_allowed": false,
+      "actual_handling": "Sanitized before inference; excluded from trace span attributes",
+      "compliant": true
+    },
+    {
+      "data_element": "gemini_raw_completion_payload",
+      "is_sensitive": true,
+      "storage_allowed": false,
+      "actual_handling": "Parsed into validated schema; raw payload discarded from central logs",
+      "compliant": true
+    },
+    {
+      "data_element": "document_id_and_tenant_id",
+      "is_sensitive": false,
+      "storage_allowed": true,
+      "actual_handling": "Logged for workflow correlation and distributed tracing",
+      "compliant": true
+    },
+    {
+      "data_element": "ai_token_counts_and_latency",
+      "is_sensitive": false,
+      "storage_allowed": true,
+      "actual_handling": "Recorded in Prometheus metrics (input_tokens, output_tokens, duration_ms)",
+      "compliant": true
+    },
+    {
+      "data_element": "model_version_and_schema_status",
+      "is_sensitive": false,
+      "storage_allowed": true,
+      "actual_handling": "Recorded in spans as 'model.version=gemini-2.5-flash', 'schema.valid=true'",
+      "compliant": true
+    }
+  ],
+  "prompts_and_responses_protected": true,
+  "metadata_only_logging_enforced": true
+}

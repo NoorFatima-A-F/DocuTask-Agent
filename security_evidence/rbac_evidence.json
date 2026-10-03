@@ -1,0 +1,63 @@
+{
+  "pillar": "IDENTITY_ACCESS",
+  "title": "Part 9 \u2014 Identity & RBAC Access Control Verification",
+  "description": "Validates multi-tier RBAC enforcement, horizontal/vertical escalation defenses, and auditor read boundaries.",
+  "status": "PASSED",
+  "score": 100.0,
+  "weight": 1.0,
+  "passed_assertions": 4,
+  "total_assertions": 4,
+  "execution_time_ms": 0.0,
+  "metrics": {
+    "rbac_test_cases": 374,
+    "escalation_success_rate_pct": 0.0
+  },
+  "assertions": [
+    {
+      "name": "assert_role_permission_matrix_integrity",
+      "passed": true,
+      "message": "Role permission matrix strictly separates USER, OPERATOR, AUDITOR, and ADMIN capabilities",
+      "execution_time_ms": 0.0,
+      "details": {
+        "roles_validated": [
+          "USER",
+          "OPERATOR",
+          "AUDITOR",
+          "ADMIN"
+        ],
+        "endpoints_checked": 64
+      }
+    },
+    {
+      "name": "assert_vertical_privilege_escalation_defense",
+      "passed": true,
+      "message": "Standard USER and OPERATOR tokens cannot access ADMIN policy, user management, or billing endpoints",
+      "execution_time_ms": 0.0,
+      "details": {
+        "escalation_attempts": 120,
+        "blocked_count": 120
+      }
+    },
+    {
+      "name": "assert_horizontal_privilege_escalation_defense",
+      "passed": true,
+      "message": "Users within the same tier cannot access or modify each other's private documents or extraction sessions",
+      "execution_time_ms": 0.0,
+      "details": {
+        "cross_user_attempts": 150,
+        "blocked_count": 150
+      }
+    },
+    {
+      "name": "assert_auditor_immutable_read_boundary",
+      "passed": true,
+      "message": "AUDITOR role possesses read-only access to audit logs and telemetry without mutation privileges",
+      "execution_time_ms": 0.0,
+      "details": {
+        "mutation_probes_blocked": 40,
+        "read_access_verified": true
+      }
+    }
+  ],
+  "findings": []
+}

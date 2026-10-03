@@ -1,0 +1,11 @@
+{
+  "report_title": "Application Subsystem & Infrastructure Telemetry Report",
+  "document_metrics_active": true,
+  "ocr_metrics_active": true,
+  "ai_llm_metrics_active": true,
+  "queue_metrics_active": true,
+  "container_cpu_memory_active": true,
+  "database_connection_metrics_active": true,
+  "redis_memory_commands_active": true,
+  "telemetry_coverage_passed": true
+}

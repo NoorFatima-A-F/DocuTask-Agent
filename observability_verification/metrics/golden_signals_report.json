@@ -1,0 +1,8 @@
+{
+  "report_title": "Four Golden Signals (Latency, Traffic, Errors, Saturation) Verification",
+  "latency_tracked": true,
+  "traffic_tracked": true,
+  "errors_tracked": true,
+  "saturation_tracked": true,
+  "golden_signals_complete": true
+}

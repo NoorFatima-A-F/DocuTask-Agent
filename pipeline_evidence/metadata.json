@@ -1,0 +1,73 @@
+{
+  "project": "DocuTask-Agent",
+  "framework": "Enterprise Continuous Infrastructure Verification & CI/CD Pipeline",
+  "version": "3.19.0",
+  "commit": "9f8e7d6c5b4a",
+  "environment": "CI/CD Ephemeral Production Assurance Environment",
+  "timestamp": "2026-10-03T17:44:33.867167+00:00",
+  "overall_score": 100.0,
+  "decision": "APPROVED",
+  "deployment_approved": true,
+  "files": [
+    {
+      "filename": "build/build_report.json",
+      "report_title": "Build Report",
+      "sha256": "feee5a3061b7cdaf69504eb1b3ee8f49be73517aa1b08043ce28df9825bbbe0f",
+      "size_bytes": 301
+    },
+    {
+      "filename": "certification/production_readiness_certificate.json",
+      "report_title": "Production Readiness Certificate",
+      "sha256": "943953519868fa320bb7a56efc006a0047e79a1df1b9464e61a245b8a0546bc5",
+      "size_bytes": 316
+    },
+    {
+      "filename": "certification/release_decision.json",
+      "report_title": "Release Decision",
+      "sha256": "6e3eba3efbd8f3cfc3c03f9d121b417b0237946db918b2ef43d9c53c61aab074",
+      "size_bytes": 453
+    },
+    {
+      "filename": "chaos/chaos_pipeline_report.json",
+      "report_title": "Chaos Pipeline Report",
+      "sha256": "852cd2c3b4a9d9f5b9eb30670b6f3bb4925fe07d96ba1a0e09d3068601c93081",
+      "size_bytes": 268
+    },
+    {
+      "filename": "deployment/disposable_env_report.json",
+      "report_title": "Disposable Env Report",
+      "sha256": "65478d82c9110bf468d45afdef42d46ff20cf0c0a8104fa5ea01a65979cdf4c3",
+      "size_bytes": 379
+    },
+    {
+      "filename": "deployment/integration_report.json",
+      "report_title": "Integration Report",
+      "sha256": "c5746c262d0f0e1d63a44b80c284e3408a32993df68e05f0b131540d773a589f",
+      "size_bytes": 309
+    },
+    {
+      "filename": "infrastructure/change_impact_report.json",
+      "report_title": "Change Impact Report",
+      "sha256": "1c25ea24f31947eb70ccf879fab1268b246e8e5ece3a4324b815ef1f5976d4fb",
+      "size_bytes": 762
+    },
+    {
+      "filename": "infrastructure/drift_report.json",
+      "report_title": "Drift Report",
+      "sha256": "c0ce5423de36b0d1affc641785091b8835716bc93c78530bf764597760fa90b4",
+      "size_bytes": 218
+    },
+    {
+      "filename": "performance/performance_regression_report.json",
+      "report_title": "Performance Regression Report",
+      "sha256": "fe9bd8bbb7008e9f56a4d2f225e63ac55d604e5433021085c8313ed7fd7ed992",
+      "size_bytes": 262
+    },
+    {
+      "filename": "security/security_gate_report.json",
+      "report_title": "Security Gate Report",
+      "sha256": "fa0da072295668d6cd0f7d79a586581d9c492135f37214dd8d90e1791626b135",
+      "size_bytes": 308
+    }
+  ]
+}

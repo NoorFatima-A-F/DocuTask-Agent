@@ -1,0 +1,9 @@
+{
+  "critical_rules_count": 4,
+  "database_failure_rule_verified": true,
+  "api_service_down_rule_verified": true,
+  "worker_pool_exhaustion_rule_verified": true,
+  "queue_data_loss_risk_rule_verified": true,
+  "all_critical_rules_actionable": true,
+  "status": "PASS"
+}

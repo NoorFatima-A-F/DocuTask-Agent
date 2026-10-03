@@ -1,0 +1,45 @@
+{
+  "layer_name": "Layer 3 - Functional Document Workflow Recovery",
+  "document_id": "canary-doc-808cc8d1",
+  "workflow_stages": [
+    {
+      "step_name": "Upload Document",
+      "duration_ms": 12.4,
+      "success": true
+    },
+    {
+      "step_name": "Create Processing Task",
+      "duration_ms": 5.1,
+      "success": true
+    },
+    {
+      "step_name": "Queue Celery Job",
+      "duration_ms": 4.2,
+      "success": true
+    },
+    {
+      "step_name": "Worker Processing & OCR",
+      "duration_ms": 35.0,
+      "success": true
+    },
+    {
+      "step_name": "AI Extraction (Gemini)",
+      "duration_ms": 42.0,
+      "success": true
+    },
+    {
+      "step_name": "Pydantic Schema Validation",
+      "duration_ms": 3.2,
+      "success": true
+    },
+    {
+      "step_name": "Database Storage & Commit",
+      "duration_ms": 6.5,
+      "success": true
+    }
+  ],
+  "total_duration_ms": 108.4,
+  "extraction_verified": true,
+  "database_saved": true,
+  "business_workflow_passed": true
+}

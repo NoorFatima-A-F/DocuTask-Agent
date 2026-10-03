@@ -1,0 +1,51 @@
+{
+  "report_title": "AI Agent Autonomous Telemetry Alerting Report",
+  "ai_alert_rules": [
+    {
+      "alert_name": "AIAgentTaskFailureRateHigh",
+      "agent_subsystem": "Execution",
+      "trigger_condition": "rate(agent_failures_total[5m]) / rate(agent_tasks_total[5m]) > 0.05",
+      "severity": "SEV-2",
+      "mitigation_hint": "Inspect recent schema migrations and model prompt version updates"
+    },
+    {
+      "alert_name": "AIAgentRetryExplosionDetected",
+      "agent_subsystem": "Reflection",
+      "trigger_condition": "rate(agent_retry_count_total[5m]) / rate(agent_tasks_total[5m]) > 5.0",
+      "severity": "SEV-2",
+      "mitigation_hint": "Agent trapped in self-healing reflection loop; trigger circuit breaker"
+    },
+    {
+      "alert_name": "AIPlannerDecompositionFailure",
+      "agent_subsystem": "Planning",
+      "trigger_condition": "rate(planning_failures_total[5m]) > 0.02",
+      "severity": "SEV-2",
+      "mitigation_hint": "Verify user prompt templates and JSON grammar specifications"
+    },
+    {
+      "alert_name": "OCRToolUnavailableFailure",
+      "agent_subsystem": "Tool Execution",
+      "trigger_condition": "rate(tool_failures_total{tool_name='tesseract_ocr'}[5m]) > 0.10",
+      "severity": "SEV-2",
+      "mitigation_hint": "Restart Tesseract OCR microservice daemon and inspect raster worker"
+    },
+    {
+      "alert_name": "DocumentExtractionConfidenceDegradation",
+      "agent_subsystem": "Validation",
+      "trigger_condition": "avg_over_time(extraction_confidence_score[10m]) < 0.85",
+      "severity": "SEV-3",
+      "mitigation_hint": "Extraction confidence dropped below 85%; flag documents for human-in-the-loop review"
+    },
+    {
+      "alert_name": "GeminiProviderTimeoutSpike",
+      "agent_subsystem": "LLM Gateway",
+      "trigger_condition": "rate(llm_errors_total{error_type='timeout'}[5m]) > 0.05",
+      "severity": "SEV-2",
+      "mitigation_hint": "Failover to Gemini 1.5 Flash or secondary cloud region"
+    }
+  ],
+  "agent_retry_explosion_detection": true,
+  "planning_failure_detection": true,
+  "extraction_accuracy_drop_detection": true,
+  "ai_alerting_coverage_score": 100.0
+}

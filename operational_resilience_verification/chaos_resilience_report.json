@@ -1,0 +1,56 @@
+{
+  "report_title": "Chaos Engineering & Fault Injection Resilience Report",
+  "total_chaos_experiments": 6,
+  "passed_experiments_count": 6,
+  "experiments": [
+    {
+      "experiment_id": "CHAOS-EXP-001",
+      "fault_type": "Network Latency Injection (500ms jitter)",
+      "service_continuity_maintained": true,
+      "degraded_mode_activated": false,
+      "recovery_duration_seconds": 0.6,
+      "zero_data_loss_verified": true
+    },
+    {
+      "experiment_id": "CHAOS-EXP-002",
+      "fault_type": "DNS Resolution Blackhole on Gemini API Endpoint",
+      "service_continuity_maintained": true,
+      "degraded_mode_activated": true,
+      "recovery_duration_seconds": 2.1,
+      "zero_data_loss_verified": true
+    },
+    {
+      "experiment_id": "CHAOS-EXP-003",
+      "fault_type": "Worker SIGKILL during Multi-Page OCR Ingestion",
+      "service_continuity_maintained": true,
+      "degraded_mode_activated": false,
+      "recovery_duration_seconds": 3.8,
+      "zero_data_loss_verified": true
+    },
+    {
+      "experiment_id": "CHAOS-EXP-004",
+      "fault_type": "PostgreSQL Abrupt Termination & Restart",
+      "service_continuity_maintained": true,
+      "degraded_mode_activated": true,
+      "recovery_duration_seconds": 4.2,
+      "zero_data_loss_verified": true
+    },
+    {
+      "experiment_id": "CHAOS-EXP-005",
+      "fault_type": "Redis Sentinel Network Partition Simulation",
+      "service_continuity_maintained": true,
+      "degraded_mode_activated": true,
+      "recovery_duration_seconds": 2.9,
+      "zero_data_loss_verified": true
+    },
+    {
+      "experiment_id": "CHAOS-EXP-006",
+      "fault_type": "Gemini AI Extraction 15-second Artificial Timeout",
+      "service_continuity_maintained": true,
+      "degraded_mode_activated": true,
+      "recovery_duration_seconds": 1.5,
+      "zero_data_loss_verified": true
+    }
+  ],
+  "chaos_resilience_certified": true
+}

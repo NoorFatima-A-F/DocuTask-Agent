@@ -1,0 +1,83 @@
+{
+  "verifier_id": "VERIFY-3J.8.8-SCALE-DOWN-SAFETY",
+  "phase_id": "",
+  "phase_name": "",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Graceful Worker Draining (Task Completion First)",
+      "passed": true,
+      "details": "SIGTERM sent -> worker completes active document processing -> sends ACK -> terminates",
+      "metrics": {
+        "uninterrupted_tasks_pct": 100.0
+      }
+    },
+    {
+      "name": "Zero Lost Documents During Scale-Down",
+      "passed": true,
+      "details": "0 documents dropped or orphaned across all scale-down transitions (50 -> 25 -> 10 -> 5)",
+      "metrics": {
+        "lost_documents": 0
+      }
+    },
+    {
+      "name": "Zero Partial Results in Database",
+      "passed": true,
+      "details": "Database transactions use ACID isolation; no half-written extraction records detected",
+      "metrics": {
+        "partial_results": 0
+      }
+    },
+    {
+      "name": "Zero Duplicate Task Re-Execution",
+      "passed": true,
+      "details": "Locks cleanly released upon task completion; no other worker re-processes finished jobs",
+      "metrics": {
+        "duplicate_processing": 0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T18:38:29.285302+00:00",
+  "execution_timestamp": "2026-09-16T18:38:29.285324+00:00",
+  "summary": "",
+  "report_title": "Scale-Down Safety Verification Report",
+  "stages": [
+    {
+      "stage_label": "Peak Operating Stage",
+      "worker_count": 50,
+      "active_tasks": 48,
+      "status": "ACTIVE"
+    },
+    {
+      "stage_label": "Traffic Decline Detected",
+      "worker_count": 50,
+      "active_tasks": 12,
+      "status": "DRAINING"
+    },
+    {
+      "stage_label": "Scale-Down Step 1 (50 -> 25)",
+      "worker_count": 25,
+      "active_tasks": 10,
+      "status": "DRAINED_SAFELY"
+    },
+    {
+      "stage_label": "Scale-Down Step 2 (25 -> 10)",
+      "worker_count": 10,
+      "active_tasks": 5,
+      "status": "DRAINED_SAFELY"
+    },
+    {
+      "stage_label": "Final Steady State (10 -> 5)",
+      "worker_count": 5,
+      "active_tasks": 2,
+      "status": "STEADY"
+    }
+  ],
+  "peak_workers": 50,
+  "final_workers": 5,
+  "lost_documents": 0,
+  "partial_results": 0,
+  "duplicate_processing": 0,
+  "graceful_drain_verified": true
+}

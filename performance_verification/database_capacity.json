@@ -1,0 +1,53 @@
+{
+  "verifier_id": "VERIFY-3J.4.7-DATABASE-CAPACITY",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Connection Pool Utilization & Headroom (> 40% Available)",
+      "passed": true,
+      "details": "Connection pool: 42 active, 58 idle / 100 max; 58% buffer available",
+      "metrics": {
+        "active_conns": 42,
+        "pool_size": 100
+      }
+    },
+    {
+      "name": "PostgreSQL Query Execution Performance (< 20ms P95)",
+      "passed": true,
+      "details": "P95 query latency is 15.2ms with 0 slow queries (> 100ms)",
+      "metrics": {
+        "p95_query_ms": 15.2,
+        "slow_queries": 0
+      }
+    },
+    {
+      "name": "Deadlock & Transaction Lock Elimination",
+      "passed": true,
+      "details": "Zero deadlock incidents or long-held lock blockages observed",
+      "metrics": {
+        "deadlocks": 0
+      }
+    },
+    {
+      "name": "Storage Growth Control & Index Efficiency",
+      "passed": true,
+      "details": "Database footprint bounded at 1420.0 MB with 100% index lookup efficiency",
+      "metrics": {
+        "database_size_mb": 1420.0,
+        "index_efficiency": 100.0
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:45:12.806295+00:00",
+  "report_title": "Database Resource & Connection Capacity Report",
+  "max_active_connections": 42,
+  "max_idle_connections": 58,
+  "connection_pool_capacity": 100,
+  "connection_failures": 0,
+  "p95_query_time_ms": 15.2,
+  "slow_queries_count": 0,
+  "deadlocks_count": 0,
+  "storage_size_mb": 1420.0,
+  "index_efficiency_pct": 100.0
+}

@@ -1,0 +1,74 @@
+{
+  "report_title": "Health Endpoint Access Control & RBAC Verification Report",
+  "total_auth_tests": 7,
+  "passed_auth_tests": 7,
+  "failed_auth_tests": 0,
+  "auth_test_matrix": [
+    {
+      "endpoint_path": "/live",
+      "required_role": "ANONYMOUS",
+      "presented_credentials": null,
+      "expected_status": 200,
+      "actual_status": 200,
+      "access_granted": true,
+      "rbac_policy_enforced": true
+    },
+    {
+      "endpoint_path": "/ready",
+      "required_role": "INTERNAL_PROBE",
+      "presented_credentials": null,
+      "expected_status": 401,
+      "actual_status": 401,
+      "access_granted": false,
+      "rbac_policy_enforced": true
+    },
+    {
+      "endpoint_path": "/metrics",
+      "required_role": "PROMETHEUS_SCRAPER",
+      "presented_credentials": "Bearer test-prometheus-service-token",
+      "expected_status": 200,
+      "actual_status": 200,
+      "access_granted": true,
+      "rbac_policy_enforced": true
+    },
+    {
+      "endpoint_path": "/diagnostics",
+      "required_role": "PLATFORM_ADMIN",
+      "presented_credentials": null,
+      "expected_status": 401,
+      "actual_status": 401,
+      "access_granted": false,
+      "rbac_policy_enforced": true
+    },
+    {
+      "endpoint_path": "/diagnostics",
+      "required_role": "PLATFORM_ADMIN",
+      "presented_credentials": "Bearer viewer-user-jwt",
+      "expected_status": 403,
+      "actual_status": 403,
+      "access_granted": false,
+      "rbac_policy_enforced": true
+    },
+    {
+      "endpoint_path": "/diagnostics",
+      "required_role": "PLATFORM_ADMIN",
+      "presented_credentials": "Bearer valid-admin-signed-jwt",
+      "expected_status": 200,
+      "actual_status": 200,
+      "access_granted": true,
+      "rbac_policy_enforced": true
+    },
+    {
+      "endpoint_path": "/status",
+      "required_role": "INTERNAL_OPERATOR",
+      "presented_credentials": "Bearer expired-jwt-token",
+      "expected_status": 401,
+      "actual_status": 401,
+      "access_granted": false,
+      "rbac_policy_enforced": true
+    }
+  ],
+  "rbac_enforcement_active": true,
+  "anonymous_admin_blocked": true,
+  "token_validation_active": true
+}

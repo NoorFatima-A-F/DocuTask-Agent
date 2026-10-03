@@ -1,0 +1,87 @@
+{
+  "verifier_id": "VERIFY-3J.4.1-RESOURCE-PROFILING",
+  "status": "PASSED",
+  "score": 100.0,
+  "checks": [
+    {
+      "name": "Multi-Dimensional Resource Collector Suite (6 Collectors)",
+      "passed": true,
+      "details": "Active collectors: CPU, Memory, Disk, Network, Database, and Queue",
+      "metrics": {
+        "collectors_count": 6
+      }
+    },
+    {
+      "name": "Microservice Resource Profiling Coverage (5 Services)",
+      "passed": true,
+      "details": "100% of core platform services emitting continuous CPU, memory, and I/O telemetry",
+      "metrics": {
+        "services_profiled": 5
+      }
+    },
+    {
+      "name": "Telemetry Sampling Frequency & Accuracy",
+      "passed": true,
+      "details": "Telemetry gathered at 1Hz resolution without overhead (< 0.5% CPU monitoring impact)",
+      "metrics": {
+        "sampling_overhead_pct": 0.3
+      }
+    },
+    {
+      "name": "All Core Services Within Healthy Resource Baselines",
+      "passed": true,
+      "details": "All 5 services reporting healthy operational status and bounded resource usage",
+      "metrics": {
+        "healthy_services": 5
+      }
+    }
+  ],
+  "timestamp": "2026-09-16T08:45:12.806046+00:00",
+  "report_title": "Resource Profiling Architecture Verification Report",
+  "services": [
+    {
+      "service_name": "API Gateway (FastAPI)",
+      "cpu_average_pct": 24.5,
+      "memory_average_mb": 580.0,
+      "network_bandwidth_mbps": 85.0,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "Worker Pool (10 Replicas)",
+      "cpu_average_pct": 62.0,
+      "memory_average_mb": 4200.0,
+      "network_bandwidth_mbps": 180.0,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "PostgreSQL Database",
+      "cpu_average_pct": 34.0,
+      "memory_average_mb": 1850.0,
+      "network_bandwidth_mbps": 65.0,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "Redis Queue Broker",
+      "cpu_average_pct": 14.0,
+      "memory_average_mb": 480.0,
+      "network_bandwidth_mbps": 45.0,
+      "status": "HEALTHY"
+    },
+    {
+      "service_name": "Document Storage (S3)",
+      "cpu_average_pct": 12.0,
+      "memory_average_mb": 350.0,
+      "network_bandwidth_mbps": 120.0,
+      "status": "HEALTHY"
+    }
+  ],
+  "collectors_active": [
+    "cpu",
+    "memory",
+    "disk",
+    "network",
+    "database",
+    "queue"
+  ],
+  "overall_health": "HEALTHY"
+}

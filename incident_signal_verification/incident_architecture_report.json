@@ -1,0 +1,15 @@
+{
+  "lifecycle_states_supported": [
+    "DETECTED",
+    "ACKNOWLEDGED",
+    "INVESTIGATING",
+    "MITIGATING",
+    "RECOVERING",
+    "RESOLVED",
+    "POSTMORTEM"
+  ],
+  "state_transitions_verified": true,
+  "ownership_assignment_enabled": true,
+  "timestamp_tracking_enabled": true,
+  "status": "PASS"
+}

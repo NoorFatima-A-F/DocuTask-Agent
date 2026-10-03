@@ -1,0 +1,29 @@
+{
+  "total_scenarios": 3,
+  "scenarios": [
+    {
+      "scenario_name": "Transient CPU Spike",
+      "transient_event": "CPU 90% for 5 seconds",
+      "alert_suppressed": true,
+      "false_alarm_triggered": false,
+      "passed": true
+    },
+    {
+      "scenario_name": "Brief Latency Fluctuation",
+      "transient_event": "P95 latency elevated for 15 seconds",
+      "alert_suppressed": true,
+      "false_alarm_triggered": false,
+      "passed": true
+    },
+    {
+      "scenario_name": "Rolling Pod Restart",
+      "transient_event": "Planned zero-downtime deployment restart",
+      "alert_suppressed": true,
+      "false_alarm_triggered": false,
+      "passed": true
+    }
+  ],
+  "false_positive_rate": 0.02,
+  "false_positive_control_passed": true,
+  "status": "PASS"
+}

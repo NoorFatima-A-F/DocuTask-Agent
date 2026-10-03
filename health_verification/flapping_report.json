@@ -1,0 +1,13 @@
+{
+  "service": "docutask-worker",
+  "flapping_detected": false,
+  "transition_count": 1,
+  "window_seconds": 600,
+  "dampening_active": false,
+  "suppressed_restart_count": 0,
+  "passed": true,
+  "details": {
+    "threshold": 5,
+    "mitigation_action": "Normal operation"
+  }
+}

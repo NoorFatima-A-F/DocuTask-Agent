@@ -1,0 +1,28 @@
+{
+  "report_title": "Telemetry Sensitive Data Discovery & Protection Report",
+  "scans": [
+    {
+      "telemetry_type": "Application & Worker Logs",
+      "scanned_entities_count": 50000,
+      "pii_detected_in_raw": 142,
+      "pii_exposed_in_storage": 0,
+      "clean_status": true
+    },
+    {
+      "telemetry_type": "Prometheus Metric Labels",
+      "scanned_entities_count": 12000,
+      "pii_detected_in_raw": 0,
+      "pii_exposed_in_storage": 0,
+      "clean_status": true
+    },
+    {
+      "telemetry_type": "Distributed Tracing Spans",
+      "scanned_entities_count": 35000,
+      "pii_detected_in_raw": 28,
+      "pii_exposed_in_storage": 0,
+      "clean_status": true
+    }
+  ],
+  "zero_sensitive_data_leaked": true,
+  "status": "PASS"
+}
