@@ -4,7 +4,14 @@ Injects execution_id, request_id, document_id, state, duration, agent_name, and 
 """
 
 from typing import Any, Dict
-from app.core.logging import logger
+try:
+    from app.core.logging import logger
+except ImportError:
+    try:
+        from core.logging import logger
+    except ImportError:
+        import logging
+        logger = logging.getLogger("ai_doc_platform")
 from app.agents.context import AgentContext
 from app.agents.state import AgentState
 
