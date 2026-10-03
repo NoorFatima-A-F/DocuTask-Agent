@@ -212,8 +212,10 @@ out/
 # Excludes runtime operational logs, SRE crash dumps, and CPU/memory profiles.
 ###############################################################################
 *.log
-logs/
-log/
+/logs/
+/log/
+!app/infrastructure/observability/logs/
+!app/infrastructure/observability/logs/**
 *.log.*
 *.prof
 *.pstats
