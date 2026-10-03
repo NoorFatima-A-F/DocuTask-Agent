@@ -2,21 +2,21 @@
 Asynchronous Worker & Queue Domain Exceptions.
 """
 
-from app.core.exceptions import BaseAppException
+from app.core.exceptions import BaseAppException, ResourceNotFoundException
 
 
 class JobException(BaseAppException):
     """Base exception for background job processing failures."""
 
-    def __init__(self, message: str = "Background job processing error", errors=None):
-        super().__init__(message=message, status_code=500, errors=errors)
+    def __init__(self, message: str = "Background job processing error", status_code: int = 500, errors=None):
+        super().__init__(message=message, status_code=status_code, errors=errors)
 
 
-class JobNotFoundException(JobException):
+class JobNotFoundException(ResourceNotFoundException):
     """Raised when background job is not found."""
 
     def __init__(self, message: str = "Job not found", errors=None):
-        super().__init__(message=message, status_code=404, errors=errors)
+        super().__init__(message=message, errors=errors)
 
 
 class JobExecutionException(JobException):

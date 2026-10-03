@@ -38,13 +38,13 @@ class OrganizationHierarchyEngine:
             "tenant_id": tenant_id,
             "root_nodes": tree,
             "total_headcount": len(employees),
-            "departments": [d.dict() for d in self.get_departments(tenant_id)]
+            "departments": [d.model_dump() for d in self.get_departments(tenant_id)]
         }
 
     def _build_sub_tree(self, employee: DigitalEmployee, all_employees: List[DigitalEmployee]) -> Dict[str, Any]:
         direct_reports = [e for e in all_employees if e.manager_id == employee.id]
         return {
-            "employee": employee.dict(),
+            "employee": employee.model_dump(),
             "direct_reports": [self._build_sub_tree(dr, all_employees) for dr in direct_reports]
         }
 

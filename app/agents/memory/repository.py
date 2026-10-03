@@ -30,7 +30,7 @@ class MemoryItem(BaseModel):
     statistics: MemoryStatistics = Field(default_factory=MemoryStatistics)
     embedding: Optional[VectorEmbedding] = Field(default=None)
 
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}
 
     def is_expired(self) -> bool:
         """Returns True if record has passed its expiration deadline."""

@@ -2,7 +2,7 @@
 Recovery Request, Context, and Result Domain Models.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.recovery.failure import Failure
@@ -23,7 +23,7 @@ class RecoveryContext(BaseModel):
 
 class RecoveryRequest(BaseModel):
     """Request payload asking RecoveryEngine to diagnose and remediate a failure."""
-    failure: Failure
+    failure: Optional[Failure] = Field(default=None)
     context: RecoveryContext = Field(default_factory=RecoveryContext)
     model_config = {"frozen": True}
 

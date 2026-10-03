@@ -15,6 +15,7 @@ class ExecutionStateMachine:
     ALLOWED_TRANSITIONS: Dict[ExecutionLifecycleState, Set[ExecutionLifecycleState]] = {
         ExecutionLifecycleState.CREATED: {
             ExecutionLifecycleState.READY,
+            ExecutionLifecycleState.SCHEDULED,
             ExecutionLifecycleState.WAITING,
             ExecutionLifecycleState.CANCELLED
         },
@@ -68,7 +69,10 @@ class ExecutionStateMachine:
             ExecutionLifecycleState.FAILED
         },
         ExecutionLifecycleState.ROLLED_BACK: set(),  # Terminal
-        ExecutionLifecycleState.COMPLETED: set(),    # Terminal
+        ExecutionLifecycleState.COMPLETED: {
+            ExecutionLifecycleState.ROLLING_BACK,
+            ExecutionLifecycleState.ROLLED_BACK
+        },
         ExecutionLifecycleState.FAILED: {
             ExecutionLifecycleState.ROLLING_BACK,
             ExecutionLifecycleState.RETRYING

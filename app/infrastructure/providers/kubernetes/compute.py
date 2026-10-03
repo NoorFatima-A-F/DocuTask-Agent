@@ -30,7 +30,7 @@ class KubernetesComputeProvider(ComputeProvider):
             "cpu": cpu,
             "memory_mb": memory_mb,
             "status": "Running",
-            "endpoint": f"http://{name}.{self.namespace}.svc.cluster.local:8000",
+            "endpoint": f"http://{name}.{self.namespace}.svc.cluster.local:8080",
         }
         self._pods[pod_id] = pod_record
         return ProviderInstanceResult(

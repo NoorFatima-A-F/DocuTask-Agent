@@ -3,7 +3,7 @@ Approval Workflow Engine.
 Coordinates human-in-the-loop tasks, routing approvals or rejections to resume workflows.
 """
 
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from uuid import UUID
 from app.agents.workflow.human_task import HumanTask, HumanTaskStatus
 
@@ -13,6 +13,44 @@ class ApprovalWorkflowEngine:
 
     def __init__(self):
         self._tasks: Dict[UUID, HumanTask] = {}
+
+    def create_human_task(
+        self,
+        workflow_id: UUID,
+        node_id: str,
+        title: str,
+        approvers: List[str],
+        description: str = ""
+    ) -> HumanTask:
+        task = HumanTask(
+            workflow_id=workflow_id,
+            workflow_instance_id=workflow_id,
+            node_id=node_id,
+            title=title,
+            approvers=approvers,
+            assigned_user_or_role=approvers[0] if approvers else "reviewer",
+            description=description
+        )
+        self._tasks[task.task_id] = task
+        return task
+
+    def decide_task(
+        self,
+        task_id: UUID,
+        decision: Any,
+        reviewer_id: str,
+        notes: str = ""
+    ) -> Optional[HumanTask]:
+        task = self._tasks.get(task_id)
+        if not task:
+            return None
+        from app.agents.workflow.human_task import HumanTaskDecision
+        is_approved = decision in (HumanTaskDecision.APPROVED, HumanTaskDecision.APPROVE, True, "APPROVED", "APPROVE")
+        updated = task.approve(reviewer_id, notes) if is_approved else task.reject(reviewer_id, notes)
+        updated.reviewer_id = reviewer_id
+        updated.notes = notes
+        self._tasks[task_id] = updated
+        return updated
 
     def create_approval_task(
         self,

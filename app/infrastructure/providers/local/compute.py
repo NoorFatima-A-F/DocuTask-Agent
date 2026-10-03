@@ -28,7 +28,7 @@ class LocalComputeProvider(ComputeProvider):
             "cpu": cpu,
             "memory_mb": memory_mb,
             "status": "RUNNING",
-            "endpoint": f"http://localhost:8000/{name}",
+            "endpoint": f"http://localhost:8080/{name}",
         }
         self._containers[cid] = record
         return ProviderInstanceResult(

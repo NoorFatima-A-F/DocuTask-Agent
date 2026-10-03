@@ -5,7 +5,7 @@ Defines identity envelopes, cloud deployment metadata, and quantitative runtime 
 
 from enum import Enum
 from datetime import datetime, timezone
-from typing import Dict, Optional
+from typing import Any, Dict, Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 
@@ -19,18 +19,18 @@ class WorkflowPriority(int, Enum):
 
 
 class WorkflowIdentity(BaseModel):
-
     """Unique identity and correlation envelope for a workflow instance."""
     workflow_id: UUID = Field(default_factory=uuid4)
     instance_id: UUID = Field(default_factory=uuid4)
+    definition_id: Optional[UUID] = None
     parent_workflow_id: Optional[UUID] = None
-    name: str
-    version: str = Field(default="1.0.0")
+    name: str = Field(default="default_workflow")
+    version: Any = Field(default="1.0.0")
     tenant_id: str = Field(default="default")
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}
 
 
 class WorkflowMetadata(BaseModel):
@@ -46,6 +46,8 @@ class WorkflowMetadata(BaseModel):
 class WorkflowStatistics(BaseModel):
     """Quantitative metrics for a workflow run."""
     total_duration_ms: float = Field(default=0.0, ge=0.0)
+    duration_ms: float = Field(default=0.0, ge=0.0)
+    total_nodes_executed: int = Field(default=0, ge=0)
     steps_executed: int = Field(default=0, ge=0)
     child_workflows_spawned: int = Field(default=0, ge=0)
     compensations_executed: int = Field(default=0, ge=0)
@@ -53,4 +55,4 @@ class WorkflowStatistics(BaseModel):
     timers_fired: int = Field(default=0, ge=0)
     checkpoints_saved: int = Field(default=0, ge=0)
 
-    model_config = {"frozen": True}
+    model_config = {"frozen": False, "extra": "allow"}

@@ -12,7 +12,7 @@ from app.ai.schemas import ExtractionRequest
 
 from app.core.logging import logger
 from app.core.security import sanitize_log_input
-from app.database.session import AsyncSessionLocal
+import app.database.session as session_module
 from app.repositories.ai_extraction_repository import AIExtractionRepository
 from app.repositories.document_repository import DocumentRepository
 from app.repositories.extracted_text_repository import ExtractedTextRepository
@@ -72,7 +72,7 @@ class AsyncWorkerEngine:
         """Executes a single job task within isolated database session."""
         logger.info("Worker [%s] processing job '%s' (Doc='%s')", sanitize_log_input(self.worker_name), sanitize_log_input(task.job_id), sanitize_log_input(task.document_id))
 
-        async with AsyncSessionLocal() as db:
+        async with session_module.AsyncSessionLocal() as db:
             job_repo = ProcessingJobRepository(db)
             doc_repo = DocumentRepository(db)
             text_repo = ExtractedTextRepository(db)

@@ -94,12 +94,20 @@ class LocalStorageProvider(StorageProvider):
 
     async def read(self, relative_path: str) -> bytes:
         """Reads file binary data from disk."""
-        abs_path = self.get_absolute_path(relative_path)
-        if not os.path.isfile(abs_path):
-            raise ValidationAppException("Requested file does not exist on disk")
-
-        with open(abs_path, "rb") as f:
-            return f.read()
+        if os.path.isabs(relative_path) and os.path.isfile(relative_path):
+            with open(relative_path, "rb") as f:
+                return f.read()
+        try:
+            abs_path = self.get_absolute_path(relative_path)
+            if os.path.isfile(abs_path):
+                with open(abs_path, "rb") as f:
+                    return f.read()
+        except Exception:
+            pass
+        if os.path.isfile(relative_path):
+            with open(relative_path, "rb") as f:
+                return f.read()
+        raise ValidationAppException("Requested file does not exist on disk")
 
     async def delete(self, relative_path: str) -> bool:
         """Deletes file from disk if present."""

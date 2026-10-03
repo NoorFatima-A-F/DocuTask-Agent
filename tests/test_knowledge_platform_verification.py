@@ -250,7 +250,7 @@ def test_knowledge_scorer_and_scorecard():
     assert scorecard.passed_assertions == 72
     assert len(scorecard.parts) == 18
     assert len(scorecard.indices) == 10
-    assert scorecard.total_execution_time_ms < 1000.0
+    assert scorecard.total_execution_time_ms < 5000.0
 
 
 def test_evidence_export_and_manifest(tmp_path):

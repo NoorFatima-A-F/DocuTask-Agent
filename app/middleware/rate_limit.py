@@ -41,12 +41,25 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
 
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint):
         path = request.url.path.rstrip("/")
-        
+
         # Check if route requires rate limiting
         if request.method == "POST" and path in self.ROUTE_LIMITS:
             max_requests, window_seconds = self.ROUTE_LIMITS[path]
             client_ip = self._get_client_ip(request)
-            key = f"{client_ip}:{path}"
+
+            account_id = ""
+            try:
+                body_bytes = await request.body()
+                async def receive():
+                    return {"type": "http.request", "body": body_bytes}
+                request = Request(request.scope, receive=receive)
+                import json
+                parsed = json.loads(body_bytes)
+                account_id = str(parsed.get("username_or_email") or parsed.get("username") or parsed.get("email") or "")
+            except Exception:
+                pass
+
+            key = f"{client_ip}:{account_id}:{path}" if account_id else f"{client_ip}:{path}"
             
             now = time.time()
             cutoff = now - window_seconds

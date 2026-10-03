@@ -23,6 +23,14 @@ class SignalManager:
     def __init__(self):
         self._pending_signals: Dict[UUID, List[WorkflowSignal]] = {}
 
+    def send_signal(self, instance_id: UUID, signal_name: str, payload: Optional[Dict[str, Any]] = None) -> WorkflowSignal:
+        sig = WorkflowSignal(signal_name=signal_name, instance_id=instance_id, payload=payload or {})
+        self.receive_signal(sig)
+        return sig
+
+    def has_signal(self, instance_id: UUID, signal_name: str) -> bool:
+        return any(s.signal_name == signal_name for s in self._pending_signals.get(instance_id, []))
+
     def receive_signal(self, signal: WorkflowSignal) -> None:
         """Buffers an incoming signal for the target instance."""
         if signal.instance_id not in self._pending_signals:

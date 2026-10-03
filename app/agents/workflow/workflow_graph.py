@@ -32,8 +32,11 @@ class WorkflowGraph(BaseModel):
         adj: Dict[str, List[str]] = {nid: [] for nid in self.nodes}
 
         for edge in self.edges:
-            adj[edge.source_node_id].append(edge.target_node_id)
-            in_degree[edge.target_node_id] += 1
+            src = edge.source_node_id
+            tgt = edge.target_node_id
+            if src in adj and tgt in in_degree:
+                adj[src].append(tgt)
+                in_degree[tgt] += 1
 
         queue = [nid for nid, deg in in_degree.items() if deg == 0]
         order: List[str] = []
@@ -50,6 +53,14 @@ class WorkflowGraph(BaseModel):
             raise CyclicWorkflowGraphError("Cycle detected in workflow graph.")
 
         return order
+
+    def has_cycles(self) -> bool:
+        """Returns True if the graph contains circular dependencies."""
+        try:
+            self.get_topological_order()
+            return False
+        except CyclicWorkflowGraphError:
+            return True
 
     def validate_acyclic(self) -> None:
         """Validates that the graph is free of cycles."""

@@ -20,7 +20,7 @@ class MemoryIdentity(BaseModel):
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     tenant_id: str = Field(default="default")
     owner: str = Field(default="system")
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}
 
 
 class MemoryStatistics(BaseModel):
@@ -30,7 +30,7 @@ class MemoryStatistics(BaseModel):
     retrieval_count: int = Field(default=0, ge=0)
     importance_score: float = Field(default=0.5, ge=0.0, le=1.0)
     confidence_score: float = Field(default=0.95, ge=0.0, le=1.0)
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}
 
 
 class MemoryMetadata(BaseModel):
@@ -43,4 +43,4 @@ class MemoryMetadata(BaseModel):
     labels: Dict[str, str] = Field(default_factory=dict)
     checksum: str = Field(default="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
     extra: Dict[str, Any] = Field(default_factory=dict)
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}

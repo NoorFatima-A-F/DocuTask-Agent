@@ -31,15 +31,22 @@ class HumanTaskDecision(str, Enum):
 class HumanTask(BaseModel):
     """Interactive human approval / review request."""
     task_id: UUID = Field(default_factory=uuid4)
-    workflow_instance_id: UUID
-    title: str
-    description: str
-    assigned_user_or_role: str
+    workflow_instance_id: Optional[UUID] = None
+    workflow_id: Optional[UUID] = None
+    node_id: Optional[str] = None
+    title: str = Field(default="")
+    description: str = Field(default="")
+    assigned_user_or_role: str = Field(default="")
+    approvers: list[str] = Field(default_factory=list)
     status: HumanTaskStatus = HumanTaskStatus.PENDING
     decision_reason: Optional[str] = None
     decided_by: Optional[str] = None
+    reviewer_id: Optional[str] = None
+    notes: Optional[str] = None
     timeout_seconds: float = Field(default=86400.0, gt=0.0)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+    model_config = {"frozen": False}
 
     def approve(self, user_id: str, reason: str = "") -> "HumanTask":
         return self.model_copy(update={

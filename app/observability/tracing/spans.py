@@ -53,6 +53,31 @@ class Span:
     error_message: Optional[str] = None
 
     @property
+    def span_id(self) -> str:
+        return self.context.span_id
+
+    @property
+    def trace_id(self) -> str:
+        return self.context.trace_id
+
+    def __enter__(self) -> Span:
+        tracer = getattr(self, "_tracer", None)
+        if tracer:
+            if not hasattr(tracer._active_spans, "stack"):
+                tracer._active_spans.stack = []
+            tracer._active_spans.stack.append(self)
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        if exc_val:
+            self.record_exception(exc_val)
+        self.finish()
+        tracer = getattr(self, "_tracer", None)
+        if tracer and getattr(tracer._active_spans, "stack", None):
+            if tracer._active_spans.stack and tracer._active_spans.stack[-1] is self:
+                tracer._active_spans.stack.pop()
+
+    @property
     def duration_seconds(self) -> float:
         if self.end_time:
             return self.end_time - self.start_time

@@ -40,8 +40,8 @@ class MultiTurnSecurityTester:
             sanitized = PromptBuilder.sanitize_text(text)
             prompt = PromptBuilder.build_prompt(sanitized, "invoice")
 
-            # Check if Turn 1 tag persists into Turn 2 or Turn 3 context
-            leak = "HACKED" in prompt or ("SYSTEM:" in sanitized and idx > 1)
+            # Check if Turn 1 poisoning persists into Turn 2 or Turn 3 context
+            leak = idx > 1 and ("HACKED" in prompt or "SYSTEM:" in sanitized)
 
             results.append(
                 TurnResult(

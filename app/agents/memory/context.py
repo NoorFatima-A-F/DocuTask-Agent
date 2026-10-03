@@ -11,9 +11,9 @@ from app.agents.memory.repository import MemoryItem
 class TokenBudget(BaseModel):
     """Token budget configuration."""
 
-    max_tokens: int = Field(default=4000, ge=100)
+    max_tokens: int = Field(default=4000, ge=0)
     allocated_tokens: int = Field(default=0, ge=0)
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}
 
     @property
     def remaining_tokens(self) -> int:
@@ -25,8 +25,8 @@ class ContextWindow(BaseModel):
 
     items: List[MemoryItem] = Field(default_factory=list)
     total_tokens: int = Field(default=0, ge=0)
-    token_limit: int = Field(default=4000, ge=100)
-    model_config = {"frozen": True}
+    token_limit: int = Field(default=4000, ge=0)
+    model_config = {"frozen": False}
 
 
 class ContextAssembler:

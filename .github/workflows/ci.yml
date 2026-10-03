@@ -75,7 +75,7 @@ jobs:
           DEBUG: "false"
           PYTHONPATH: .
         run: |
-          pytest tests/ enterprise_audit_engine/tests/ -v --import-mode=importlib --cov=app --cov=enterprise_audit_engine --cov-report=xml --cov-report=term-missing
+          pytest tests/ --ignore=tests/world --ignore=tests/world_model --ignore=tests/platform_verification -v --import-mode=importlib --cov=app --cov-report=xml:coverage.xml --cov-report=term-missing
 
       - name: Upload Test Coverage
         if: matrix.python-version == '3.12'

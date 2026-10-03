@@ -16,8 +16,10 @@ class LeaderElectionEngine(ILeaderElectionEngine):
         if not candidates:
             return None
 
-        # Filter to operational agents
+        # Filter to operational agents, or non-terminal agents if none in active operational state
         operational = [a for a in candidates if a.state.is_operational()]
+        if not operational:
+            operational = [a for a in candidates if not a.state.is_terminal()]
         if not operational:
             return None
 

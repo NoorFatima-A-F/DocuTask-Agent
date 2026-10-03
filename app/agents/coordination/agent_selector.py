@@ -25,8 +25,8 @@ class AgentMatcher:
         qualified_ids = {r.agent_id for r in match_results if r.is_fully_qualified}
 
         if not qualified_ids:
-            # Fall back to best non-qualified if no exact match
-            if match_results and match_results[0].match_score >= 0.5:
+            # Fall back to best non-qualified if no exact match only if some required skills/tools matched and score >= 0.7
+            if match_results and match_results[0].match_score >= 0.7 and (match_results[0].matched_skills or match_results[0].matched_tools):
                 qualified_ids = {match_results[0].agent_id}
             else:
                 raise MissingCapabilityError(

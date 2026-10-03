@@ -12,7 +12,12 @@ class WorkflowStateMachine:
     """State machine governing allowable transitions between workflow lifecycle states."""
 
     ALLOWED_TRANSITIONS: Dict[WorkflowLifecycleState, Set[WorkflowLifecycleState]] = {
-        WorkflowLifecycleState.CREATED: {WorkflowLifecycleState.REGISTERED, WorkflowLifecycleState.READY},
+        WorkflowLifecycleState.CREATED: {
+            WorkflowLifecycleState.REGISTERED,
+            WorkflowLifecycleState.READY,
+            WorkflowLifecycleState.SCHEDULED,
+            WorkflowLifecycleState.RUNNING
+        },
         WorkflowLifecycleState.REGISTERED: {WorkflowLifecycleState.READY, WorkflowLifecycleState.ARCHIVED},
         WorkflowLifecycleState.READY: {WorkflowLifecycleState.SCHEDULED, WorkflowLifecycleState.RUNNING, WorkflowLifecycleState.CANCELLED},
         WorkflowLifecycleState.SCHEDULED: {WorkflowLifecycleState.RUNNING, WorkflowLifecycleState.CANCELLED},

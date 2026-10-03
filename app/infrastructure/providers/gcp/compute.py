@@ -30,7 +30,7 @@ class GCPComputeProvider(ComputeProvider):
             "cpu": cpu,
             "memory_mb": memory_mb,
             "status": "READY",
-            "endpoint": f"https://{name}-{self.project_id}.a.run.app",
+            "endpoint": f"https://{name}.a.run.app",
         }
         self._services[service_id] = svc_record
         return ProviderInstanceResult(

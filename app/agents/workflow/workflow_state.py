@@ -30,3 +30,6 @@ class WorkflowState(BaseModel):
             "node_outputs": new_outputs,
             "version": self.version + 1
         })
+
+    def mark_node_completed(self, node_id: str, output: Any = None) -> "WorkflowState":
+        return self.record_node_completion(node_id, output)

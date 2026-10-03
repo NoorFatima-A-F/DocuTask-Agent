@@ -24,9 +24,9 @@ class GeminiProvider(LLMProvider):
         "gemini-1.5-flash": {"input": 0.000075, "output": 0.0003},
     }
 
-    def __init__(self, api_key: str = "", default_model_name: str = ""):
-        self.api_key = api_key or settings.GEMINI_API_KEY
-        self._default_model = default_model_name or settings.GEMINI_MODEL
+    def __init__(self, api_key: str = "", default_model_name: str = "gemini-1.5-flash"):
+        self.api_key = api_key or getattr(settings, "GEMINI_API_KEY", None)
+        self._default_model = default_model_name or "gemini-1.5-flash"
 
     @property
     def provider_name(self) -> str:
@@ -48,10 +48,10 @@ class GeminiProvider(LLMProvider):
             return 0
         return max(1, len(text) // 4)
 
-    def calculate_cost(self, input_tokens: int, output_tokens: int, model: str = "") -> float:
+    def calculate_cost(self, input_tokens: int, output_tokens: int, model: str = "", model_name: str = "") -> float:
         """Calculates estimated cost in USD based on Gemini pricing."""
-        target_model = model or self._default_model
-        rates = self.PRICING_PER_1K.get(target_model, self.PRICING_PER_1K["gemini-1.5-pro"])
+        target_model = model_name or model or self._default_model
+        rates = self.PRICING_PER_1K.get(target_model, self.PRICING_PER_1K.get("gemini-1.5-flash", {"input": 0.000075, "output": 0.0003}))
         
         in_cost = (input_tokens / 1000.0) * rates["input"]
         out_cost = (output_tokens / 1000.0) * rates["output"]
@@ -167,8 +167,27 @@ class GeminiProvider(LLMProvider):
         sample_dict = {}
 
         for key, prop in properties.items():
-            prop_type = prop.get("type", "string")
-            if prop_type == "string":
+            prop_types = []
+            if "type" in prop:
+                prop_types.append(prop["type"])
+            if "anyOf" in prop:
+                for item in prop["anyOf"]:
+                    if isinstance(item, dict) and "type" in item and item["type"] != "null":
+                        prop_types.append(item["type"])
+            if "oneOf" in prop:
+                for item in prop["oneOf"]:
+                    if isinstance(item, dict) and "type" in item and item["type"] != "null":
+                        prop_types.append(item["type"])
+
+            if "number" in prop_types or "integer" in prop_types or any(k in key.lower() for k in ["amount", "total", "tax", "price", "rate", "cost", "quantity"]):
+                sample_dict[key] = 1500.00 if any(k in key.lower() for k in ["amount", "total", "tax", "price", "cost"]) else 1
+            elif "array" in prop_types or "items" in prop:
+                sample_dict[key] = []
+            elif "object" in prop_types:
+                sample_dict[key] = {}
+            elif "boolean" in prop_types:
+                sample_dict[key] = True
+            else:
                 if "date" in key:
                     sample_dict[key] = "2026-08-17"
                 elif "name" in key:
@@ -179,13 +198,5 @@ class GeminiProvider(LLMProvider):
                     sample_dict[key] = "Document content successfully processed by AI extraction engine."
                 else:
                     sample_dict[key] = f"Extracted {key} value"
-            elif prop_type == "number" or prop_type == "integer":
-                sample_dict[key] = 1500.00 if "amount" in key or "total" in key or "cost" in key else 1
-            elif prop_type == "array":
-                sample_dict[key] = []
-            elif prop_type == "object":
-                sample_dict[key] = {}
-            else:
-                sample_dict[key] = None
 
         return json.dumps(sample_dict, indent=2)

@@ -92,6 +92,7 @@ class TracingEngine:
             kind=kind,
             attributes=span_attrs,
         )
+        span._tracer = self
 
         with self._lock:
             if trace_id not in self._traces:
@@ -128,6 +129,16 @@ class TracingEngine:
         """Retrieve all spans belonging to a trace ID."""
         with self._lock:
             return list(self._traces.get(trace_id, []))
+
+    def get_finished_spans(self) -> List[Span]:
+        """Retrieve all spans that have completed execution."""
+        with self._lock:
+            finished: List[Span] = []
+            for spans in self._traces.values():
+                for s in spans:
+                    if s.end_time is not None:
+                        finished.append(s)
+            return finished
 
     def clear(self) -> None:
         with self._lock:

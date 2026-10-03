@@ -25,6 +25,10 @@ class WaitManager:
     def register_wait(self, instance_id: UUID, conditions: List[str]) -> None:
         self._waiting_instances[instance_id] = set(conditions)
 
+    def is_satisfied(self, instance_id: UUID) -> bool:
+        """Returns True if no pending wait conditions exist for the instance."""
+        return len(self._waiting_instances.get(instance_id, set())) == 0
+
     def satisfy_condition(self, instance_id: UUID, condition: str) -> bool:
         """Removes condition. Returns True if all conditions are satisfied."""
         if instance_id not in self._waiting_instances:

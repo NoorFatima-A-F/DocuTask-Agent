@@ -3,7 +3,7 @@ Execution Runtime Context Models.
 Defines RuntimeContext, ExecutionRequest, and ExecutionResult.
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 from app.agents.execution.lifecycle import ExecutionLifecycleState
@@ -24,7 +24,7 @@ class RuntimeContext(BaseModel):
 
 class ExecutionRequest(BaseModel):
     """Request payload to initiate execution of a validated Plan."""
-    plan: Plan
+    plan: Optional[Plan] = Field(default=None)
     context: RuntimeContext = Field(default_factory=RuntimeContext)
     initial_inputs: Dict[str, Any] = Field(default_factory=dict)
     model_config = {"frozen": True}

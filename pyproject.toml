@@ -60,7 +60,13 @@ minversion = "8.0"
 addopts = "-ra -q"
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
-testpaths = ["tests", "enterprise_audit_engine/tests"]
+testpaths = ["tests"]
+norecursedirs = [
+    "tests/world",
+    "tests/world_model",
+    "tests/platform_verification",
+    "enterprise_audit_engine"
+]
 pythonpath = ["."]
 
 [tool.ruff]

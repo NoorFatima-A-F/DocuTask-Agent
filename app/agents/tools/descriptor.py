@@ -35,7 +35,7 @@ class ToolStatistics(BaseModel):
     avg_latency_ms: float = Field(default=0.0, ge=0.0)
     avg_cost_usd: float = Field(default=0.0, ge=0.0)
     confidence_score: float = Field(default=0.95, ge=0.0, le=1.0)
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}
 
 
 class ToolMetadata(BaseModel):
@@ -52,7 +52,7 @@ class ToolMetadata(BaseModel):
     supports_streaming: bool = Field(default=False)
     limitations: List[str] = Field(default_factory=list)
     extra_metadata: Dict[str, Any] = Field(default_factory=dict)
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}
 
 
 class ToolDescriptor(BaseModel):
@@ -62,4 +62,4 @@ class ToolDescriptor(BaseModel):
     metadata: ToolMetadata
     statistics: ToolStatistics = Field(default_factory=ToolStatistics)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    model_config = {"frozen": True}
+    model_config = {"frozen": False}

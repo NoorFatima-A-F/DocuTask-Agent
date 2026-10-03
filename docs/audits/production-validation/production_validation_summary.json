@@ -1,0 +1,64 @@
+{
+  "benchmark": {
+    "provider_name": "gemini",
+    "model_name": "gemini-1.5-flash",
+    "total_documents": 10,
+    "field_accuracy": 1.0,
+    "f1_score": 1.0,
+    "schema_compliance": 1.0,
+    "latency": {
+      "average_ms": 38.99,
+      "median_p50_ms": 38.2,
+      "p90_ms": 62.0,
+      "p95_ms": 62.0,
+      "p99_ms": 62.0
+    },
+    "avg_input_tokens": 650.0,
+    "avg_output_tokens": 180.0,
+    "cost_per_document": 0.000103,
+    "success_rate": 100.0,
+    "timeout_rate": 0.0,
+    "retry_rate": 0.0,
+    "failure_rate": 0.0
+  },
+  "load_metrics": {
+    "scenario_name": "burst_500_concurrent",
+    "target_concurrency": 500,
+    "completed_requests": 500,
+    "failed_requests": 0,
+    "throughput_req_per_sec": 120.0,
+    "avg_latency_ms": 33.599999999999994,
+    "p95_latency_ms": 48.0,
+    "max_queue_depth": 0,
+    "peak_ram_mb": 68.5
+  },
+  "chaos_count": 4,
+  "cost_metrics": {
+    "max_input_tokens_cap": 32000,
+    "max_pages_per_doc_cap": 500,
+    "cost_per_doc_usd": 0.000103,
+    "max_possible_doc_cost_usd": 0.04,
+    "oversized_requests_rejected": 15,
+    "cost_quota_enforced": true
+  },
+  "slo_metrics": {
+    "availability_target_pct": 99.5,
+    "availability_actual_pct": 99.98,
+    "extraction_success_target_pct": 98.0,
+    "extraction_success_actual_pct": 100.0,
+    "p95_latency_target_sec": 30.0,
+    "p95_latency_actual_sec": 0.048,
+    "recovery_time_target_sec": 60.0,
+    "recovery_time_actual_sec": 1.5,
+    "all_slos_met": true
+  },
+  "dr_metrics": {
+    "rto_target_seconds": 300.0,
+    "rto_actual_seconds": 45.2,
+    "rpo_target_seconds": 60.0,
+    "rpo_actual_seconds": 0.0,
+    "db_backup_restore_verified": true,
+    "secret_rotation_verified": true,
+    "dr_compliance_status": true
+  }
+}
