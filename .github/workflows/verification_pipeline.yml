@@ -47,4 +47,7 @@ jobs:
       - name: Run Full Platform Verification Test Suite
         env:
           PYTHONPATH: .
-        run: pytest tests/platform_verification/ -v --cov=app --cov-report=term-missing
+          APP_ENV: test
+          DEBUG: "false"
+        run: pytest tests/platform_verification/ -v --import-mode=importlib --cov=app --cov-report=term-missing
+
