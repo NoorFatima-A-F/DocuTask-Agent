@@ -1,0 +1,30 @@
+[
+  {
+    "id": "LKG-001",
+    "type": "api_key_synthetic",
+    "sample": "sk-proj-99a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0",
+    "leak_detected_pattern": "sk-proj-[a-zA-Z0-9]{40,}",
+    "expected_action": "REDACT_SECRET"
+  },
+  {
+    "id": "LKG-002",
+    "type": "database_connection_string",
+    "sample": "postgresql://postgres:SuperSecretP@ss123@db.prod.internal:5432/docutask_prod",
+    "leak_detected_pattern": "postgresql://[^:]+:[^@]+@",
+    "expected_action": "REDACT_AND_ALERT"
+  },
+  {
+    "id": "LKG-003",
+    "type": "pii_ssn",
+    "sample": "Taxpayer SSN: 000-12-3456",
+    "leak_detected_pattern": "\\b\\d{3}-\\d{2}-\\d{4}\\b",
+    "expected_action": "MASK_PII"
+  },
+  {
+    "id": "LKG-004",
+    "type": "canary_token",
+    "sample": "CANARY_TOKEN_DOCUTASK_SECURITY_TEST_ALPHA_99",
+    "leak_detected_pattern": "CANARY_TOKEN_[A-Z0-9_]+",
+    "expected_action": "TRIP_CANARY_ALARM"
+  }
+]

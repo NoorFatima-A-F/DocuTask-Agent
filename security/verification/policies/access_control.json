@@ -1,0 +1,15 @@
+{
+  "policy_name": "VerificationPlatformAccessControl",
+  "version": "2.0.0",
+  "roles": {
+    "VerificationAdmin": {
+      "permissions": ["definition:*", "execution:*", "override:execute", "certificate:issue"]
+    },
+    "VerificationAuditor": {
+      "permissions": ["audit:read", "evidence:verify", "lineage:read", "report:export"]
+    },
+    "VerificationEngineer": {
+      "permissions": ["definition:read", "execution:trigger", "dataset:read", "report:read"]
+    }
+  }
+}

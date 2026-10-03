@@ -1,0 +1,34 @@
+[
+  {
+    "failure_id": "FAIL-DB-01",
+    "target_component": "PostgreSQL Primary Database",
+    "fault_type": "PRIMARY_DATABASE_OUTAGE",
+    "expected_recovery_action": "AUTOMATIC_REPLICA_FAILOVER",
+    "max_allowed_rto_seconds": 15,
+    "max_allowed_rpo_seconds": 0
+  },
+  {
+    "failure_id": "FAIL-REDIS-02",
+    "target_component": "Redis Cache & Queue Cluster",
+    "fault_type": "CACHE_NODE_FAILURE",
+    "expected_recovery_action": "IN_MEMORY_FALLBACK_AND_SENTINEL_ELECTION",
+    "max_allowed_rto_seconds": 5,
+    "max_allowed_rpo_seconds": 0
+  },
+  {
+    "failure_id": "FAIL-LLM-03",
+    "target_component": "External LLM Provider API",
+    "fault_type": "PROVIDER_503_SERVICE_UNAVAILABLE",
+    "expected_recovery_action": "MULTI_REGION_FALLBACK_MODEL_ROUTING",
+    "max_allowed_rto_seconds": 2,
+    "max_allowed_rpo_seconds": 0
+  },
+  {
+    "failure_id": "FAIL-WORKER-04",
+    "target_component": "Background Celery Document Worker",
+    "fault_type": "SIGKILL_PROCESS_TERMINATION",
+    "expected_recovery_action": "TASK_REASSIGNMENT_VIA_DEAD_LETTER_EXCHANGE",
+    "max_allowed_rto_seconds": 10,
+    "max_allowed_rpo_seconds": 0
+  }
+]

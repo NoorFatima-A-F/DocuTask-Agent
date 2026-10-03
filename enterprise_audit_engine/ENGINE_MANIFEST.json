@@ -1,11 +1,11 @@
 {
   "attestation": {
-    "build_timestamp": "2026-10-02T19:20:43.731595+00:00",
-    "configuration_hash": "7bced9244742955269f1ab6648d003c96de7f402edf3f8f0c035412f68f36a3f",
-    "dependencies_hash": "f0acc0c1a9a7759e0ac9f0ec6babdbd877b2093eb8c0370bcb6deb26b1355c39",
+    "build_timestamp": "2026-10-03T16:31:03.670329+00:00",
+    "configuration_hash": "0146d5d3807203550473e2886ee8831258e127e2206a1e7fac8ee1103b1b7f83",
+    "dependencies_hash": "72018d65d5ae11ec00c2447c97da25bc384cfd27d366214edca8f682c653d80a",
     "engine_version": "2.1.0",
-    "git_commit": "dd769ac65dadda2a7a6049316291af705acd5ced",
-    "python_version": "3.14.4"
+    "git_commit": "a718ca60da6e93c0ccbc1cd89114ca2e8dfc5c17",
+    "python_version": "3.12.1"
   },
   "capabilities": [
     "deterministic_reproducibility",
@@ -16,6 +16,6 @@
     "release_evidence_packaging"
   ],
   "engine_name": "enterprise_audit_engine",
-  "manifest_hash": "f6202259226f9701adf9288d7c9f90d6ad22370931e8fcfbedacf5aeae037c51",
+  "manifest_hash": "02fd0f127d10af9fb163e6b653688c75e4e5ee4d45812f08b5992edc558b850e",
   "version": "2.1.0"
 }

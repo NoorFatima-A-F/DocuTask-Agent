@@ -1,0 +1,112 @@
+groups:
+  - name: docutask_availability_alerts
+    rules:
+      - alert: DocuTaskDatabaseDown
+        expr: docutask_db_status == 0
+        for: 30s
+        labels:
+          severity: critical
+          category: availability
+          team: database-infra
+        annotations:
+          summary: "PostgreSQL Database is down"
+          description: "PostgreSQL connectivity check returned 0 for >30s. Document processing is blocked."
+          runbook_url: "https://wiki.docutask.internal/runbooks/db-down"
+          action: "Check PostgreSQL container/cluster status and restore network connectivity."
+
+      - alert: DocuTaskAPIServiceDown
+        expr: docutask_service_up == 0
+        for: 30s
+        labels:
+          severity: critical
+          category: availability
+          team: sre-platform
+        annotations:
+          summary: "DocuTask API Service process is unavailable"
+          description: "Core FastAPI HTTP process is not reporting healthy or unreachable."
+          runbook_url: "https://wiki.docutask.internal/runbooks/api-down"
+          action: "Restart API service pod and inspect unhandled startup crash logs."
+
+      - alert: DocuTaskWorkerPoolExhausted
+        expr: docutask_agent_active_tasks > 500 and docutask_worker_capacity_ratio > 0.95
+        for: 1m
+        labels:
+          severity: critical
+          category: availability
+          team: agent-runtime
+        annotations:
+          summary: "Worker pool capacity completely exhausted"
+          description: "Active worker capacity is at 100% and incoming queue tasks are stalling."
+          runbook_url: "https://wiki.docutask.internal/runbooks/worker-exhausted"
+          action: "Autoscale worker replica count and verify task completion throughput."
+
+  - name: docutask_performance_alerts
+    rules:
+      - alert: DocuTaskHighAPILatency
+        expr: histogram_quantile(0.95, sum(rate(docutask_http_request_duration_seconds_bucket[5m])) by (le)) > 2.0
+        for: 2m
+        labels:
+          severity: warning
+          category: performance
+          team: sre-platform
+        annotations:
+          summary: "API P95 request latency exceeds 2 seconds"
+          description: "API response latency has degraded beyond the 2s SLO threshold for 2 minutes."
+          runbook_url: "https://wiki.docutask.internal/runbooks/high-latency"
+          action: "Inspect database slow query logs and thread pool utilization."
+
+      - alert: DocuTaskGeminiProviderSlow
+        expr: histogram_quantile(0.95, sum(rate(docutask_gemini_request_duration_seconds_bucket[5m])) by (le)) > 8.0
+        for: 2m
+        labels:
+          severity: warning
+          category: dependency
+          team: ai-platform
+        annotations:
+          summary: "Gemini AI LLM endpoint latency elevated"
+          description: "Upstream AI model inference duration P95 is exceeding 8.0s."
+          runbook_url: "https://wiki.docutask.internal/runbooks/ai-latency"
+          action: "Check Gemini provider status page and consider fallback model routing."
+
+  - name: docutask_capacity_alerts
+    rules:
+      - alert: DocuTaskQueueDepthBacklog
+        expr: docutask_redis_connected_clients > 1000
+        for: 3m
+        labels:
+          severity: critical
+          category: capacity
+          team: queue-infra
+        annotations:
+          summary: "Redis Queue Backlog approaching critical limit"
+          description: "Document processing queue length has exceeded 1,000 items for >3m."
+          runbook_url: "https://wiki.docutask.internal/runbooks/queue-overflow"
+          action: "Scale Celery/Agent background workers to clear document queue backlog."
+
+      - alert: DocuTaskMemoryPressure
+        expr: process_resident_memory_bytes / 1073741824 > 4.0
+        for: 5m
+        labels:
+          severity: warning
+          category: capacity
+          team: sre-platform
+        annotations:
+          summary: "Host memory consumption exceeds 4.0 GB"
+          description: "DocuTask process memory has sustained above 4GB indicating potential leak."
+          runbook_url: "https://wiki.docutask.internal/runbooks/memory-pressure"
+          action: "Inspect memory profile for uncollected document buffer memory."
+
+  - name: docutask_security_alerts
+    rules:
+      - alert: DocuTaskUnauthorizedAccessSpike
+        expr: sum(rate(docutask_http_requests_total{status="401"}[5m])) > 20
+        for: 1m
+        labels:
+          severity: critical
+          category: security
+          team: security-secops
+        annotations:
+          summary: "Spike in unauthorized HTTP 401 requests detected"
+          description: "Rate of 401 Unauthorized responses exceeded 20 req/s indicating potential brute-force."
+          runbook_url: "https://wiki.docutask.internal/runbooks/auth-spike"
+          action: "Inspect client IP origins, trigger rate-limiting WAF rules, and review auth audit logs."

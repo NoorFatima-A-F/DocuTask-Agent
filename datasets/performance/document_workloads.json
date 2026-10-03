@@ -1,0 +1,29 @@
+[
+  {
+    "workload_id": "DOC-LOW-001",
+    "tier": "LOW_COMPLEXITY",
+    "document_type": "standard_receipt",
+    "average_page_count": 1,
+    "daily_target_volume": 100,
+    "expected_p95_latency_ms": 120,
+    "target_accuracy_pct": 99.5
+  },
+  {
+    "workload_id": "DOC-MED-002",
+    "tier": "MEDIUM_COMPLEXITY",
+    "document_type": "commercial_contract",
+    "average_page_count": 12,
+    "daily_target_volume": 10000,
+    "expected_p95_latency_ms": 350,
+    "target_accuracy_pct": 98.8
+  },
+  {
+    "workload_id": "DOC-ENT-003",
+    "tier": "ENTERPRISE_COMPLEXITY",
+    "document_type": "cross_border_financial_filing",
+    "average_page_count": 85,
+    "daily_target_volume": 1000000,
+    "expected_p95_latency_ms": 780,
+    "target_accuracy_pct": 99.2
+  }
+]

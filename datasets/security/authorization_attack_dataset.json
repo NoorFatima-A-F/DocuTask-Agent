@@ -1,0 +1,34 @@
+[
+  {
+    "id": "AUTH-001",
+    "attack_type": "BOLA_IDOR",
+    "user_role": "USER",
+    "requested_endpoint": "GET /api/v1/documents/tenant_b_doc_8899/download",
+    "expected_http_status": 403,
+    "expected_defense": "OBJECT_LEVEL_ACCESS_DENIED"
+  },
+  {
+    "id": "AUTH-002",
+    "attack_type": "vertical_privilege_escalation",
+    "user_role": "OPERATOR",
+    "requested_endpoint": "POST /api/v1/admin/security/policies/override",
+    "expected_http_status": 403,
+    "expected_defense": "ROLE_BASED_ACCESS_DENIED"
+  },
+  {
+    "id": "AUTH-003",
+    "attack_type": "cross_tenant_vector_search",
+    "user_role": "USER",
+    "requested_endpoint": "POST /api/v1/knowledge/search?tenant_id=tenant_foreign",
+    "expected_http_status": 403,
+    "expected_defense": "TENANT_CONTEXT_MISMATCH"
+  },
+  {
+    "id": "AUTH-004",
+    "attack_type": "tampered_jwt_algorithm_none",
+    "user_role": "ANONYMOUS",
+    "requested_endpoint": "GET /api/v1/executive/reports",
+    "expected_http_status": 401,
+    "expected_defense": "INVALID_SIGNATURE_ALGORITHM"
+  }
+]

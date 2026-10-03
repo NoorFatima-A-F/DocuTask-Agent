@@ -1,0 +1,54 @@
+[
+  {
+    "scenario_id": "FIN-INV-001",
+    "industry": "FINANCE",
+    "workflow_type": "invoice_processing",
+    "sample_input": {
+      "supplier": "Acme Global Solutions Ltd",
+      "invoice_number": "INV-2026-9901",
+      "amount": 45000.0,
+      "currency": "USD",
+      "tax_id": "US-99887766",
+      "due_date": "2026-03-31"
+    },
+    "ground_truth": {
+      "supplier": "Acme Global Solutions Ltd",
+      "invoice_number": "INV-2026-9901",
+      "amount": 45000.0,
+      "currency": "USD",
+      "tax_id": "US-99887766",
+      "due_date": "2026-03-31"
+    },
+    "human_baseline_time_minutes": 8.0,
+    "human_error_rate_pct": 8.0,
+    "human_cost_per_doc": 0.80,
+    "ai_processing_time_seconds": 15.0,
+    "ai_cost_per_doc": 0.05,
+    "expected_accuracy_pct": 99.2
+  },
+  {
+    "scenario_id": "FIN-EXP-002",
+    "industry": "FINANCE",
+    "workflow_type": "expense_auditing",
+    "sample_input": {
+      "employee_id": "EMP-448",
+      "merchant": "Delta Airlines",
+      "expense_category": "TRAVEL",
+      "amount": 1250.50,
+      "policy_compliant": true
+    },
+    "ground_truth": {
+      "employee_id": "EMP-448",
+      "merchant": "Delta Airlines",
+      "expense_category": "TRAVEL",
+      "amount": 1250.50,
+      "policy_compliant": true
+    },
+    "human_baseline_time_minutes": 6.0,
+    "human_error_rate_pct": 6.5,
+    "human_cost_per_doc": 0.60,
+    "ai_processing_time_seconds": 12.0,
+    "ai_cost_per_doc": 0.03,
+    "expected_accuracy_pct": 99.5
+  }
+]

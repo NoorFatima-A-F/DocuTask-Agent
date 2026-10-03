@@ -1,0 +1,26 @@
+[
+  {
+    "scenario_id": "HLT-CLM-001",
+    "industry": "HEALTHCARE",
+    "workflow_type": "insurance_claim_diagnostic_coding",
+    "sample_input": {
+      "patient_id": "PT-9092",
+      "diagnosis_codes": ["ICD-10-CM:E11.9", "ICD-10-CM:I10"],
+      "procedure_code": "CPT:99214",
+      "claimed_amount": 350.0
+    },
+    "ground_truth": {
+      "patient_id": "PT-9092",
+      "diagnosis_codes": ["ICD-10-CM:E11.9", "ICD-10-CM:I10"],
+      "procedure_code": "CPT:99214",
+      "claimed_amount": 350.0,
+      "approved_amount": 350.0
+    },
+    "human_baseline_time_minutes": 20.0,
+    "human_error_rate_pct": 9.0,
+    "human_cost_per_doc": 2.00,
+    "ai_processing_time_seconds": 25.0,
+    "ai_cost_per_doc": 0.09,
+    "expected_accuracy_pct": 98.9
+  }
+]

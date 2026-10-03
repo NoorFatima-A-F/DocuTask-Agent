@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-09-14T12:00:00Z",
+  "catalogs": [
+    {
+      "id": "golden_invoices_v1",
+      "class": "HAPPY_PATH",
+      "samples": 100,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "adversarial_docs_v1",
+      "class": "ADVERSARIAL",
+      "samples": 60,
+      "sha256": "a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e"
+    },
+    {
+      "id": "benchmark_layoutlm_v1",
+      "class": "BENCHMARK",
+      "samples": 150,
+      "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4"
+    }
+  ]
+}

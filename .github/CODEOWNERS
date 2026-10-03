@@ -1,7 +1,8 @@
 # Default owners for all files in the repository
-* @NoorFatima-A-F
+* @NoorFatima-A-F @platform-architecture-board
 
 # Security and supply chain policies
-/.github/workflows/ @NoorFatima-A-F
-/SECURITY.md @NoorFatima-A-F
-/LICENSE @NoorFatima-A-F
+/.github/workflows/ @NoorFatima-A-F @platform-architecture-board
+/SECURITY.md @NoorFatima-A-F @platform-architecture-board
+/LICENSE @NoorFatima-A-F @platform-architecture-board
+

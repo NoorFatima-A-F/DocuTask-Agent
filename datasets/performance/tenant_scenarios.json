@@ -1,0 +1,23 @@
+[
+  {
+    "scenario_id": "SCEN-SMB-01",
+    "tier": "SMB",
+    "concurrent_tenants": 10,
+    "requests_per_second": 50,
+    "target_p95_latency_ms": 150
+  },
+  {
+    "scenario_id": "SCEN-DEPT-02",
+    "tier": "DEPARTMENT",
+    "concurrent_tenants": 100,
+    "requests_per_second": 500,
+    "target_p95_latency_ms": 320
+  },
+  {
+    "scenario_id": "SCEN-ENT-03",
+    "tier": "GLOBAL_ENTERPRISE",
+    "concurrent_tenants": 1000,
+    "requests_per_second": 5000,
+    "target_p95_latency_ms": 480
+  }
+]
