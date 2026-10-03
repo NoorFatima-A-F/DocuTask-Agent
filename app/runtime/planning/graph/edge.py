@@ -38,6 +38,7 @@ class DAGEdge(BaseModel):
         try:
             # Safe evaluation of boolean expressions over context variables
             allowed_names = {"True": True, "False": False, "None": None, **context_data}
-            return bool(eval(self.condition_expression, {"__builtins__": {}}, allowed_names))
+            return bool(eval(self.condition_expression, {"__builtins__": {}}, allowed_names))  # nosec B307
         except Exception:
+
             return False

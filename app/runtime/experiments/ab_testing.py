@@ -4,7 +4,7 @@ Performs Welch's t-test, Cohen's d effect size, and confidence interval estimati
 """
 
 import math
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
 from dataclasses import dataclass, asdict
 
 
@@ -29,7 +29,8 @@ class ABTestingEngine:
     """Rigorous frequentist A/B testing with Welch's t-test and effect sizes."""
 
     @staticmethod
-    def _mean_and_var(samples: List[float]) -> (float, float):
+    def _mean_and_var(samples: List[float]) -> Tuple[float, float]:
+
         if not samples:
             return 0.0, 0.0
         n = len(samples)

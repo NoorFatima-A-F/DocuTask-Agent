@@ -1,6 +1,8 @@
 """
 Configuration Schemas with Pydantic v2.
 """
+import os
+import tempfile
 from typing import Dict
 from pydantic import BaseModel, Field
 
@@ -22,9 +24,10 @@ class StatisticalEngineConfig(BaseModel):
 
 class EvidenceStorageConfig(BaseModel):
     storage_type: str = "IN_MEMORY_CAS"  # IN_MEMORY_CAS, GCS, S3, LOCAL_FS
-    cas_base_path: str = "/tmp/verification_cas"
+    cas_base_path: str = Field(default_factory=lambda: os.path.join(tempfile.gettempdir(), "verification_cas"))
     merkle_trees_enabled: bool = True
     sha256_canonical_hashing: bool = True
+
 
 
 class SecurityConfig(BaseModel):

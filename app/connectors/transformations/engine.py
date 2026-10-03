@@ -13,6 +13,11 @@ import logging
 from typing import Any, Dict, List, Optional, Union
 import xml.etree.ElementTree as ET
 
+try:
+    import defusedxml.ElementTree as defused_ET
+except ImportError:
+    defused_ET = None
+
 from app.connectors.core.exceptions import TransformationError
 
 logger = logging.getLogger(__name__)
@@ -40,10 +45,14 @@ class TransformationEngine:
     def xml_to_dict(self, xml_str: str) -> Dict[str, Any]:
         """Parses basic XML hierarchy into a nested Python dictionary."""
         try:
-            root = ET.fromstring(xml_str)
+            if defused_ET is not None:
+                root = defused_ET.fromstring(xml_str)
+            else:
+                root = ET.fromstring(xml_str)  # nosec B314
             return {root.tag: self._elem_to_dict(root)}
         except Exception as e:
             raise TransformationError(f"Failed to parse XML: {e}")
+
 
     def _elem_to_dict(self, elem: ET.Element) -> Union[Dict[str, Any], str]:
         children = list(elem)

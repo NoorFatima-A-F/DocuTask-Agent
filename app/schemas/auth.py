@@ -13,9 +13,9 @@ from app.core.config import settings
 class RegisterRequest(BaseModel):
     """Payload required to register a new user account."""
 
-    email: EmailStr = Field(..., description="User's valid email address", example="user@example.com")
-    username: str = Field(..., min_length=3, max_length=50, description="Unique username", example="johndoe")
-    password: str = Field(..., min_length=8, max_length=100, description="Account password", example="SecureP@ss123")
+    email: EmailStr = Field(..., description="User's valid email address", examples=["user@example.com"])
+    username: str = Field(..., min_length=3, max_length=50, description="Unique username", examples=["johndoe"])
+    password: str = Field(..., min_length=8, max_length=100, description="Account password", examples=["SecureP@ss123"])
 
     @field_validator("username")
     @classmethod
@@ -44,8 +44,9 @@ class RegisterRequest(BaseModel):
 class LoginRequest(BaseModel):
     """Payload required for user login."""
 
-    username_or_email: str = Field(..., description="Username or Email address", example="johndoe")
-    password: str = Field(..., description="Plaintext password", example="SecureP@ss123")
+    username_or_email: str = Field(..., description="Username or Email address", examples=["johndoe"])
+    password: str = Field(..., description="Plaintext password", examples=["SecureP@ss123"])
+
 
 
 class UserResponse(BaseModel):

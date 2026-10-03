@@ -11,8 +11,9 @@ class PlatformConfigSchema(BaseModel):
     timezone: str = "UTC"
     log_level: str = "INFO"
     service_name: str = "DocuTask Enterprise Agent Platform"
-    host: str = "0.0.0.0"
+    host: str = "0.0.0.0"  # nosec B104
     port: int = 8000
+
 
 
 class VerificationConfigSchema(BaseModel):

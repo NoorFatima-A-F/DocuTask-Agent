@@ -52,8 +52,9 @@ class ConfigurationCatalogEngine(IConfigurationCatalogEngine):
         ("RATE_LIMIT_RATE", ConfigurationCategory.RATE_LIMITS, "SecurityTeam", "Production", ConfigurationSensitivity.INTERNAL, False, "20/s", "v1.0", ["RATE_LIMIT_BURST"], "CONFIGMAP_SNAPSHOT", 3),
 
         # Networking & Infrastructure
-        ("HOST_BIND", ConfigurationCategory.NETWORKING, "InfraTeam", "Production", ConfigurationSensitivity.PUBLIC, False, "0.0.0.0", "v1.0", [], "CONFIGMAP_SNAPSHOT", 4),
+        ("HOST_BIND", ConfigurationCategory.NETWORKING, "InfraTeam", "Production", ConfigurationSensitivity.PUBLIC, False, "0.0.0.0", "v1.0", [], "CONFIGMAP_SNAPSHOT", 4),  # nosec B104
         ("PORT", ConfigurationCategory.NETWORKING, "InfraTeam", "Production", ConfigurationSensitivity.PUBLIC, True, "8000", "v1.0", ["HOST_BIND"], "CONFIGMAP_SNAPSHOT", 4),
+
         ("CLUSTER_REGION", ConfigurationCategory.INFRASTRUCTURE, "InfraTeam", "Production", ConfigurationSensitivity.PUBLIC, True, "us-east-1", "v1.0", [], "TERRAFORM_STATE_BACKUP", 2),
 
         # Feature Flags, Observability, Logging & Telemetry

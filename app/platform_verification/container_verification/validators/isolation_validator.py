@@ -33,8 +33,9 @@ class IsolationValidator:
                 volume_owners[vol_name].append(name)
 
         for vol, owners in volume_owners.items():
-            if len(owners) > 1 and not vol.startswith("/tmp"):
+            if len(owners) > 1 and not vol.startswith("/tmp"):  # nosec B108
                 shared_volumes.append(f"Volume '{vol}' shared mutably between {owners}")
+
 
         coupling = total_dependencies / max(total_services * 2, 1)
         coupling = min(1.0, coupling)

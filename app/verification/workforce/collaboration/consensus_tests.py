@@ -24,12 +24,12 @@ class CollaborationConsensusVerifier:
             {"agent_id": "emp-jun-03", "role": "Junior Parser", "classification": "Refund Notice", "confidence": 0.45, "trust": 0.75, "evidence": "Contains refund keyword in footnote"}
         ]
         
-        # Consensus Mechanism: Weighted Confidence Score = Confidence * Trust
         weighted_scores: Dict[str, float] = {}
         for op in opinions:
-            cls_name = op["classification"]
-            weight = op["confidence"] * op["trust"]
+            cls_name = str(op["classification"])
+            weight = float(op["confidence"]) * float(op["trust"])
             weighted_scores[cls_name] = weighted_scores.get(cls_name, 0.0) + weight
+
             
         winning_class = max(weighted_scores.items(), key=lambda x: x[1])[0]
         consensus_ok = winning_class == "Purchase Invoice"

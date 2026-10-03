@@ -326,10 +326,11 @@ async def get_organization_overview() -> Dict[str, Any]:
 # 2. Mission Understanding & Decomposition
 # ---------------------------------------------------------
 class DecomposeGoalRequest(BaseModel):
-    goal: str = Field(..., example="Reduce document processing cost by 40% while maintaining >=98% accuracy")
+    goal: str = Field(..., examples=["Reduce document processing cost by 40% while maintaining >=98% accuracy"])
     priority: MissionPriority = MissionPriority.HIGH
     timeline_days: int = 90
     custom_constraints: Optional[List[str]] = None
+
 
 
 @router.get("/missions", summary="List all active, planned, and completed enterprise missions")

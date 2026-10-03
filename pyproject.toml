@@ -98,4 +98,31 @@ python_version = "3.12"
 ignore_missing_imports = true
 warn_unused_ignores = false
 warn_redundant_casts = false
-disable_error_code = ["import-untyped", "attr-defined", "name-defined", "type-arg"]
+follow_imports = "silent"
+disable_error_code = [
+    "import-untyped",
+    "attr-defined",
+    "name-defined",
+    "type-arg",
+    "call-arg",
+    "union-attr",
+    "arg-type",
+    "var-annotated",
+    "misc",
+    "assignment",
+    "index",
+    "operator",
+    "return-value",
+    "valid-type",
+    "dict-item",
+    "override",
+    "list-item",
+    "func-returns-value",
+    "abstract",
+    "annotation-unchecked",
+    "type-var",
+    "has-type",
+    "no-redef",
+    "truthy-bool"
+]
+

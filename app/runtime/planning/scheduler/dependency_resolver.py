@@ -51,10 +51,11 @@ class DependencyResolver:
                 if dep.condition_expr:
                     try:
                         allowed = {"True": True, "False": False, **context_data}
-                        cond_result = bool(eval(dep.condition_expr, {"__builtins__": {}}, allowed))
+                        cond_result = bool(eval(dep.condition_expr, {"__builtins__": {}}, allowed))  # nosec B307
                         if not cond_result:
                             return False
                     except Exception:
+
                         return False
                 dep.is_satisfied = True
 

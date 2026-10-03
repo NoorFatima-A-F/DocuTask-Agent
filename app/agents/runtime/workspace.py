@@ -3,6 +3,8 @@ Workspace Manager.
 Manages per-tenant and per-agent workspace directories, sandboxing, and file isolation.
 """
 
+import os
+import tempfile
 from pathlib import Path
 from typing import Optional
 
@@ -11,7 +13,8 @@ class WorkspaceManager:
     """Manages file storage isolation across tenants and execution sessions."""
 
     def __init__(self, root_dir: Optional[str] = None) -> None:
-        self.root_dir = Path(root_dir or "/tmp/antigravity/workspaces")
+        self.root_dir = Path(root_dir or os.path.join(tempfile.gettempdir(), "antigravity", "workspaces"))
+
 
     def get_tenant_workspace(self, tenant_id: str) -> Path:
         """Returns isolated workspace path for a specific tenant."""

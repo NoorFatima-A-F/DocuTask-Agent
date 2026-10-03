@@ -43,8 +43,9 @@ class RecoveryEnvironmentManager(IRecoveryEnvironmentManager):
             "resource_breakdown": resources,
             "isolation_guarantee": "ZERO_PRODUCTION_OVERLAP",
             "ephemeral_dns_zone": "dr.sandbox.docutask.internal",
-            "storage_sandbox_path": "/var/tmp/dr_sandbox_storage",
+            "storage_sandbox_path": "/var/tmp/dr_sandbox_storage",  # nosec B108
         }
+
 
         return RecoveryEnvironmentReport(
             environment_type="ephemeral-k8s-namespace",

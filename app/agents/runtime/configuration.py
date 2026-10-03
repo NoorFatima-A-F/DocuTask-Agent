@@ -3,6 +3,8 @@ Platform Runtime Configuration.
 Structured Pydantic v2 configuration governing runtime timeouts, concurrency, environments, and feature flags.
 """
 
+import os
+import tempfile
 from typing import Any, Dict
 from pydantic import BaseModel, Field
 from app.agents.runtime.feature_flags import RuntimeFeatureFlags
@@ -15,8 +17,9 @@ class PlatformRuntimeConfig(BaseModel):
     startup_timeout_seconds: float = Field(default=60.0, gt=0.0)
     shutdown_drain_seconds: float = Field(default=30.0, gt=0.0)
     enable_supervisor: bool = True
-    workspace_root: str = Field(default="/tmp/antigravity/workspaces")
+    workspace_root: str = Field(default_factory=lambda: os.path.join(tempfile.gettempdir(), "antigravity", "workspaces"))
     feature_flags: RuntimeFeatureFlags = Field(default_factory=RuntimeFeatureFlags)
     extra_properties: Dict[str, Any] = Field(default_factory=dict)
+
 
     model_config = {"frozen": True}
