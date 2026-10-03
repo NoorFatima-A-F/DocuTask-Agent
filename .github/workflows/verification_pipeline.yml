@@ -1,0 +1,50 @@
+name: Enterprise Verification CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+
+  static-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate Shared Kernel Invariants
+        env:
+          PYTHONPATH: .
+        run: python tooling/governance/shared_kernel_validator.py
+      - name: Validate Repository Architecture Topology
+        env:
+          PYTHONPATH: .
+        run: python tooling/governance/repository_validator.py
+      - name: Validate Documentation As Code
+        env:
+          PYTHONPATH: .
+        run: python tooling/governance/documentation_validator.py
+
+  test-pyramid:
+    needs: static-governance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov pytest-asyncio httpx
+      - name: Run Full Platform Verification Test Suite
+        env:
+          PYTHONPATH: .
+        run: pytest tests/platform_verification/ -v --cov=app --cov-report=term-missing

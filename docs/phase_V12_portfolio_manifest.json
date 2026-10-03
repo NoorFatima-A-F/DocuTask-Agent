@@ -1,0 +1,76 @@
+{
+  "portfolio_documents": [
+    {
+      "filename": "README_ENTERPRISE_OVERVIEW.md",
+      "title": "Executive Overview",
+      "target_audience": "Recruiters, Hiring Managers, Technical Clients",
+      "summary": "Executive Overview tailored for Recruiters, Hiring Managers, Technical Clients",
+      "size_bytes": 1088,
+      "sha256_hash": "71cef26511ffb758ab5b5cc762757e168f9e211cd8dd1fbb5da653ec991170dc"
+    },
+    {
+      "filename": "ARCHITECTURE_OVERVIEW.md",
+      "title": "System Architecture Deep-Dive",
+      "target_audience": "Principal Architects, Lead Engineers, CTOs",
+      "summary": "System Architecture Deep-Dive tailored for Principal Architects, Lead Engineers, CTOs",
+      "size_bytes": 677,
+      "sha256_hash": "02c87766ae163cecd0986996547639563853bb54a26c6f509e4e1e2cdcd0017f"
+    },
+    {
+      "filename": "AI_CAPABILITIES.md",
+      "title": "AI & Cognitive Intelligence Capabilities",
+      "target_audience": "AI Engineers, ML Researchers, Product Leads",
+      "summary": "AI & Cognitive Intelligence Capabilities tailored for AI Engineers, ML Researchers, Product Leads",
+      "size_bytes": 462,
+      "sha256_hash": "87b3df92536cb899775cb5966a293e56e55dd983b606f900555b85048cae344a"
+    },
+    {
+      "filename": "SECURITY_REPORT.md",
+      "title": "Enterprise Security & Red Team Audit",
+      "target_audience": "CISOs, Security Engineers, Compliance Officers",
+      "summary": "Enterprise Security & Red Team Audit tailored for CISOs, Security Engineers, Compliance Officers",
+      "size_bytes": 511,
+      "sha256_hash": "9c02f15113b8e26bb09cde46af17210c74b4fced403d041bbccc6c44e49c1c7c"
+    },
+    {
+      "filename": "PERFORMANCE_REPORT.md",
+      "title": "Performance, Scalability & SRE Chaos Report",
+      "target_audience": "SRE Leads, Infrastructure Engineers, VP Engineering",
+      "summary": "Performance, Scalability & SRE Chaos Report tailored for SRE Leads, Infrastructure Engineers, VP Engineering",
+      "size_bytes": 456,
+      "sha256_hash": "01e1ed5bdfcf724b41461611e52f08820f864ddc264ca5c6fc829e1b78c69140"
+    },
+    {
+      "filename": "BUSINESS_IMPACT.md",
+      "title": "Financial ROI & Operational Value Realization",
+      "target_audience": "CFOs, Operations Executives, Business Stakeholders",
+      "summary": "Financial ROI & Operational Value Realization tailored for CFOs, Operations Executives, Business Stakeholders",
+      "size_bytes": 438,
+      "sha256_hash": "144c266313d2017be44a2a552ef2a500f6d11b0cc8901935d7a838baa9ed3be5"
+    },
+    {
+      "filename": "CASE_STUDIES.md",
+      "title": "Enterprise Industry Case Studies",
+      "target_audience": "Clients, Consultants, Enterprise Buyers",
+      "summary": "Enterprise Industry Case Studies tailored for Clients, Consultants, Enterprise Buyers",
+      "size_bytes": 686,
+      "sha256_hash": "33cc044bc081157b5a5148f22af54675fb00455a0cb5d39db8f35900e1dc07a3"
+    },
+    {
+      "filename": "DEMO_SCRIPT.md",
+      "title": "Multi-Tier Interactive Demo Scripts",
+      "target_audience": "Demo Presenters, Interviewers, Stakeholders",
+      "summary": "Multi-Tier Interactive Demo Scripts tailored for Demo Presenters, Interviewers, Stakeholders",
+      "size_bytes": 697,
+      "sha256_hash": "2a325f9a9e9ac17529adfa372640785bfc931b141e2393d22e456614541151f5"
+    },
+    {
+      "filename": "LINKEDIN_CONTENT.md",
+      "title": "LinkedIn Portfolio & Public Showcase Content",
+      "target_audience": "Public Audience, Recruiters, AI Automation Community",
+      "summary": "LinkedIn Portfolio & Public Showcase Content tailored for Public Audience, Recruiters, AI Automation Community",
+      "size_bytes": 1311,
+      "sha256_hash": "e9795e5d3169a006719b3e2c7e7ef422dd7af511abdc865421496f7c4be6dfca"
+    }
+  ]
+}

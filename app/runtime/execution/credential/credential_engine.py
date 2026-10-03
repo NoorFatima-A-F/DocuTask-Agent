@@ -57,7 +57,7 @@ class CredentialEngine:
                 target_system="api.github.com",
                 scopes=["repo", "workflow", "read:org", "admin:repo_hook"],
                 masked_value="ghp_••••••••••••x819",
-                _secret_encrypted="ghp_mockSecretTokenForGithubRepoAutomation12345",
+                _secret_encrypted="mock_encrypted_secret_github_token_seed_placeholder",
                 expires_at=expiry_future,
             ),
             CredentialRecord(

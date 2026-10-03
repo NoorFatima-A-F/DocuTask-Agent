@@ -1,0 +1,44 @@
+{
+  "test_id": "330f0108-9ff4-4c91-ba33-5b4f4d515fc1",
+  "timestamp": "2026-09-14T11:23:30.600694Z",
+  "environment": "production_audit",
+  "software_version": "1.0.0",
+  "model_version": "gemini-1.5-flash",
+  "input_artifact": "gold_pas_001",
+  "expected_behavior": {
+    "passport_number": "P987654321",
+    "surname": "SMITH",
+    "given_names": "JANE DOE",
+    "nationality": "USA",
+    "date_of_birth": "1990-05-14",
+    "expiry_date": "2030-05-14"
+  },
+  "actual_behavior": {
+    "passport_number": "P987654321",
+    "surname": "SMITH",
+    "given_names": "JANE DOE",
+    "nationality": "USA",
+    "date_of_birth": "1990-05-14",
+    "expiry_date": "2030-05-14"
+  },
+  "metrics": {
+    "total_fields": 6,
+    "correct_fields": 6,
+    "missing_fields": 0,
+    "hallucinated_fields": 0,
+    "field_accuracy": 1.0,
+    "exact_match_accuracy": 1.0,
+    "schema_compliance_rate": 1.0,
+    "missing_field_rate": 0.0,
+    "hallucination_rate": 0.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "average_confidence": 0.95,
+    "confidence_correctness": 0.95
+  },
+  "pass_fail": "PASS",
+  "evidence_location": "docs\\audits\\evidence\\val_6f_100acc.json",
+  "result_hash": "492d9cc554043345ee109bc102305b6d5a5c23628480cf6f43c48eb15aaf9087",
+  "previous_hash": "8488fc2002a9aec2ea4f0f0373dc4ae6ae318e32f1033d23f1d02ac63336e74e"
+}

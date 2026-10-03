@@ -10,6 +10,7 @@ from .spans import (
 from .tracer import (
     SamplingStrategy,
     TracingEngine,
+    Tracer,
 )
 from .propagation import (
     TraceContextPropagator,
@@ -23,5 +24,6 @@ __all__ = [
     "Span",
     "SamplingStrategy",
     "TracingEngine",
+    "Tracer",
     "TraceContextPropagator",
 ]

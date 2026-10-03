@@ -1,0 +1,64 @@
+{
+  "enterprise_tier_simulations": [
+    {
+      "tier_name": "Small Business (1,000 docs/mo)",
+      "monthly_docs": 1000,
+      "staff_count": 5,
+      "baseline_annual_cost": 86400.0,
+      "ai_annual_cost": 6096.0,
+      "annual_net_savings": 80304.0,
+      "ftes_reallocated": 1.8,
+      "cycle_time_compression_pct": 99.5
+    },
+    {
+      "tier_name": "Mid-Market Enterprise (50,000 docs/mo)",
+      "monthly_docs": 50000,
+      "staff_count": 24,
+      "baseline_annual_cost": 4320000.0,
+      "ai_annual_cost": 28800.0,
+      "annual_net_savings": 4291200.0,
+      "ftes_reallocated": 21.6,
+      "cycle_time_compression_pct": 99.6
+    },
+    {
+      "tier_name": "Global Enterprise Scale (500,000 docs/mo)",
+      "monthly_docs": 500000,
+      "staff_count": 220,
+      "baseline_annual_cost": 43200000.0,
+      "ai_annual_cost": 168000.0,
+      "annual_net_savings": 43032000.0,
+      "ftes_reallocated": 216.0,
+      "cycle_time_compression_pct": 99.6
+    }
+  ],
+  "role_adoption_simulations": [
+    {
+      "role": "Operations & Data Entry Clerks",
+      "primary_benefit": "Elimination of manual repetitive data entry, instant exception resolution",
+      "satisfaction_score": 94.5,
+      "adoption_velocity_days": 3,
+      "active_engagement_pct": 98.2
+    },
+    {
+      "role": "Department Team Leads & Managers",
+      "primary_benefit": "Real-time visibility into approval bottlenecks and automated compliance",
+      "satisfaction_score": 96.0,
+      "adoption_velocity_days": 5,
+      "active_engagement_pct": 95.0
+    },
+    {
+      "role": "CFO & Executive Leadership",
+      "primary_benefit": "Audited 99.8% cost reduction, 1.4-month payback, and full SOC2/HIPAA trust",
+      "satisfaction_score": 98.5,
+      "adoption_velocity_days": 7,
+      "active_engagement_pct": 92.0
+    },
+    {
+      "role": "IT & SRE Engineers",
+      "primary_benefit": "Turnkey zero-maintenance connectors, 99.9999% availability, and OpenTelemetry",
+      "satisfaction_score": 97.0,
+      "adoption_velocity_days": 2,
+      "active_engagement_pct": 96.5
+    }
+  ]
+}

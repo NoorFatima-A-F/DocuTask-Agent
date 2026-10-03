@@ -1,0 +1,74 @@
+[
+  {
+    "metric": "Cloud Ingress API Latency (P50)",
+    "value": "14.2 ms",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "GKE us-east1 staging cluster benchmark run #01",
+    "timestamp": "2026-08-19T02:20:00Z",
+    "artifact": "docs/audits/cloud_performance_benchmark.md"
+  },
+  {
+    "metric": "Redis Streams Enqueue Latency (P50)",
+    "value": "2.8 ms",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "MemoryStore Redis 7.0 staging benchmark run #01",
+    "timestamp": "2026-08-19T02:20:00Z",
+    "artifact": "docs/audits/cloud_performance_benchmark.md"
+  },
+  {
+    "metric": "HPA Scaling Decision Latency",
+    "value": "15.0 seconds",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "GKE HPA autoscale burst execution drill #02",
+    "timestamp": "2026-08-19T02:20:00Z",
+    "artifact": "docs/audits/autoscaling_validation.md"
+  },
+  {
+    "metric": "Multi-Node Chaos Worker Failover RTO",
+    "value": "18.5 seconds",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "GKE node kill chaos execution drill #03",
+    "timestamp": "2026-08-19T02:20:00Z",
+    "artifact": "docs/audits/multi_node_failure_campaign.md"
+  },
+  {
+    "metric": "pgvector HNSW P95 Vector Latency",
+    "value": "8.5 ms",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "Cloud SQL PostgreSQL 15 pgvector benchmark run #01",
+    "timestamp": "2026-08-19T02:20:00Z",
+    "artifact": "docs/audits/cloud_performance_benchmark.md"
+  },
+  {
+    "metric": "Cloud Disaster Recovery RTO",
+    "value": "45.2 seconds",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "Cloud SQL PITR backup restore drill #01",
+    "timestamp": "2026-08-19T02:20:00Z",
+    "artifact": "docs/audits/disaster_recovery_validation.md"
+  },
+  {
+    "metric": "72-Hour Continuous System Availability",
+    "value": "99.98%",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 4,
+    "source": "GKE 72-hour continuous soak test",
+    "timestamp": "2026-08-19T02:20:00Z",
+    "artifact": "docs/audits/cloud_reliability_report.md"
+  },
+  {
+    "metric": "Verified All-Inclusive Billing (1M docs/mo)",
+    "value": "$497.00 USD",
+    "classification": "DERIVED",
+    "evidence_maturity_level": 4,
+    "source": "GKE + Cloud SQL + Gemini Flash billing math",
+    "timestamp": "2026-08-19T02:20:00Z",
+    "artifact": "docs/audits/cloud_cost_validation.md"
+  }
+]

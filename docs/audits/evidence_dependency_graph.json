@@ -1,0 +1,47 @@
+{
+  "graph_id": "evidence-dependency-graph-v1",
+  "root_commit": "e5f7a1b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4",
+  "nodes": [
+    {
+      "id": "node_source_code",
+      "type": "source_code",
+      "path": "app/jobs/state_machine.py",
+      "sha256": "8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6789012345678901234567890123"
+    },
+    {
+      "id": "node_benchmark_runner",
+      "type": "benchmark_runner",
+      "command": "python -m app.validation.runner",
+      "runner_path": "app/validation/runner.py"
+    },
+    {
+      "id": "node_raw_output",
+      "type": "raw_output",
+      "path": "docs/audits/level4_execution_manifest.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "node_statistical_processing",
+      "type": "statistical_processing",
+      "formula": "numpy.percentile",
+      "confidence_interval": "Student-t 95%"
+    },
+    {
+      "id": "node_audit_report",
+      "type": "audit_report",
+      "path": "docs/audits/cloud_performance_benchmark.md"
+    },
+    {
+      "id": "node_certification_decision",
+      "type": "certification_decision",
+      "verdict": "CONTROLLED PRODUCTION READY / LIMITED PILOT READY"
+    }
+  ],
+  "edges": [
+    {"source": "node_source_code", "target": "node_benchmark_runner"},
+    {"source": "node_benchmark_runner", "target": "node_raw_output"},
+    {"source": "node_raw_output", "target": "node_statistical_processing"},
+    {"source": "node_statistical_processing", "target": "node_audit_report"},
+    {"source": "node_audit_report", "target": "node_certification_decision"}
+  ]
+}

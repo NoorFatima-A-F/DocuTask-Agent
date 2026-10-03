@@ -91,7 +91,7 @@ class LatencyOptimizer:
                     dep_task = task_map.get(dep_id)
                     if dep_task and ("ocr" in dep_task.action.lower() or "ingest" in dep_task.action.lower()):
                         pruned_deps.append(dep_id)
-                    elif dep_task and not ("extract" in dep_task.action.lower()):
+                    elif dep_task and "extract" not in dep_task.action.lower():
                         pruned_deps.append(dep_id)
                 task.dependencies = pruned_deps
 

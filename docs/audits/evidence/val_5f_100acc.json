@@ -1,0 +1,46 @@
+{
+  "test_id": "823aedd8-8803-44cc-ba57-494b09c000ae",
+  "timestamp": "2026-09-14T11:23:30.603313Z",
+  "environment": "production_audit",
+  "software_version": "1.0.0",
+  "model_version": "gemini-1.5-flash",
+  "input_artifact": "gold_med_001",
+  "expected_behavior": {
+    "patient_name": "Robert Johnson",
+    "doctor_name": "Dr. Sarah Jenkins",
+    "visit_date": "2026-08-10",
+    "diagnosis": "Acute Bronchitis",
+    "prescribed_medications": [
+      "Amoxicillin 500mg"
+    ]
+  },
+  "actual_behavior": {
+    "patient_name": "Robert Johnson",
+    "doctor_name": "Dr. Sarah Jenkins",
+    "visit_date": "2026-08-10",
+    "diagnosis": "Acute Bronchitis",
+    "prescribed_medications": [
+      "Amoxicillin 500mg"
+    ]
+  },
+  "metrics": {
+    "total_fields": 5,
+    "correct_fields": 5,
+    "missing_fields": 0,
+    "hallucinated_fields": 0,
+    "field_accuracy": 1.0,
+    "exact_match_accuracy": 1.0,
+    "schema_compliance_rate": 1.0,
+    "missing_field_rate": 0.0,
+    "hallucination_rate": 0.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "average_confidence": 0.95,
+    "confidence_correctness": 0.95
+  },
+  "pass_fail": "PASS",
+  "evidence_location": "docs\\audits\\evidence\\val_5f_100acc.json",
+  "result_hash": "7462da0e171353e1145041c2416c79d50cc97e53bac3d56dddfc8d1f8075c9fa",
+  "previous_hash": "492d9cc554043345ee109bc102305b6d5a5c23628480cf6f43c48eb15aaf9087"
+}

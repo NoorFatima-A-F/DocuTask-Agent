@@ -1,0 +1,352 @@
+{
+  "workflow_comparisons": [
+    {
+      "workflow_name": "Accounts Payable Invoice Processing",
+      "vertical": "FINANCE",
+      "baseline": {
+        "name": "Manual Accounts Payable Processing",
+        "vertical": "FINANCE",
+        "is_ai_system": false,
+        "steps": [
+          {
+            "name": "Email Ingestion & Download",
+            "step_type": "MANUAL",
+            "duration_seconds": 60.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 1.2,
+            "cost_usd": 0.4
+          },
+          {
+            "name": "Manual Field & Table Data Entry",
+            "step_type": "MANUAL",
+            "duration_seconds": 480.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 4.5,
+            "cost_usd": 3.2
+          },
+          {
+            "name": "PO & Line Item Verification",
+            "step_type": "MANUAL",
+            "duration_seconds": 240.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 2.8,
+            "cost_usd": 1.6
+          },
+          {
+            "name": "Manager Approval Queue Routing",
+            "step_type": "MANUAL",
+            "duration_seconds": 180.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 0.5,
+            "cost_usd": 1.2
+          },
+          {
+            "name": "ERP Entry (QuickBooks / NetSuite)",
+            "step_type": "MANUAL",
+            "duration_seconds": 120.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 1.5,
+            "cost_usd": 0.8
+          }
+        ],
+        "total_duration_minutes": 18.0,
+        "total_cost_usd": 7.2,
+        "accuracy_pct": 92.0,
+        "human_hours_per_1k_docs": 300.0
+      },
+      "ai_system": {
+        "name": "DocuTask Autonomous Invoice Platform",
+        "vertical": "FINANCE",
+        "is_ai_system": true,
+        "steps": [
+          {
+            "name": "Automated Ingestion & Webhook",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 0.5,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.01,
+            "cost_usd": 0.0005
+          },
+          {
+            "name": "Multimodal OCR & Layout Parsing",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 1.5,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.05,
+            "cost_usd": 0.002
+          },
+          {
+            "name": "LLM Extraction & Grounding",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 1.8,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.1,
+            "cost_usd": 0.004
+          },
+          {
+            "name": "Deterministic PO & Rule Matcher",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 0.4,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.02,
+            "cost_usd": 0.0005
+          },
+          {
+            "name": "Autonomous ERP Dispatch / HITL",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 0.3,
+            "human_involvement_pct": 5.0,
+            "error_probability_pct": 0.05,
+            "cost_usd": 0.001
+          }
+        ],
+        "total_duration_minutes": 0.07,
+        "total_cost_usd": 0.008,
+        "accuracy_pct": 99.4,
+        "human_hours_per_1k_docs": 2.5
+      },
+      "time_reduction_pct": 99.58,
+      "cost_reduction_pct": 99.89,
+      "human_effort_reduction_pct": 99.17,
+      "accuracy_improvement_pct": 8.04,
+      "speedup_multiplier": 240.0
+    },
+    {
+      "workflow_name": "Commercial Contract & NDA Risk Analysis",
+      "vertical": "LEGAL",
+      "baseline": {
+        "name": "Manual Legal Review & Redlining",
+        "vertical": "LEGAL",
+        "is_ai_system": false,
+        "steps": [
+          {
+            "name": "Contract Reading & Formatting",
+            "step_type": "MANUAL",
+            "duration_seconds": 600.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 2.0,
+            "cost_usd": 8.0
+          },
+          {
+            "name": "Clause Extraction & Risk Review",
+            "step_type": "MANUAL",
+            "duration_seconds": 1500.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 6.5,
+            "cost_usd": 20.0
+          },
+          {
+            "name": "Compliance Checklist Validation",
+            "step_type": "MANUAL",
+            "duration_seconds": 600.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 3.0,
+            "cost_usd": 7.0
+          }
+        ],
+        "total_duration_minutes": 45.0,
+        "total_cost_usd": 35.0,
+        "accuracy_pct": 89.0,
+        "human_hours_per_1k_docs": 750.0
+      },
+      "ai_system": {
+        "name": "DocuTask Legal Contract Analysis Agent",
+        "vertical": "LEGAL",
+        "is_ai_system": true,
+        "steps": [
+          {
+            "name": "Multi-page Layout Parsing",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 2.5,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.1,
+            "cost_usd": 0.006
+          },
+          {
+            "name": "Clause & Entity Extraction",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 3.5,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.1,
+            "cost_usd": 0.012
+          },
+          {
+            "name": "Risk Classification & Redline Agent",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 2.0,
+            "human_involvement_pct": 10.0,
+            "error_probability_pct": 0.2,
+            "cost_usd": 0.005
+          }
+        ],
+        "total_duration_minutes": 0.13,
+        "total_cost_usd": 0.023,
+        "accuracy_pct": 99.1,
+        "human_hours_per_1k_docs": 8.0
+      },
+      "time_reduction_pct": 99.7,
+      "cost_reduction_pct": 99.93,
+      "human_effort_reduction_pct": 98.93,
+      "accuracy_improvement_pct": 11.35,
+      "speedup_multiplier": 337.5
+    },
+    {
+      "workflow_name": "HR Candidate Resume Screening & Matching",
+      "vertical": "HR",
+      "baseline": {
+        "name": "Manual Recruiter Resume Screening",
+        "vertical": "HR",
+        "is_ai_system": false,
+        "steps": [
+          {
+            "name": "Resume Review & Formatting",
+            "step_type": "MANUAL",
+            "duration_seconds": 240.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 3.0,
+            "cost_usd": 3.0
+          },
+          {
+            "name": "Skills & Experience Evaluation",
+            "step_type": "MANUAL",
+            "duration_seconds": 360.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 5.0,
+            "cost_usd": 4.0
+          },
+          {
+            "name": "ATS Spreadsheet Logging",
+            "step_type": "MANUAL",
+            "duration_seconds": 120.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 1.5,
+            "cost_usd": 1.5
+          }
+        ],
+        "total_duration_minutes": 12.0,
+        "total_cost_usd": 8.5,
+        "accuracy_pct": 91.0,
+        "human_hours_per_1k_docs": 200.0
+      },
+      "ai_system": {
+        "name": "DocuTask TalentPulse Resume Screening Agent",
+        "vertical": "HR",
+        "is_ai_system": true,
+        "steps": [
+          {
+            "name": "Automated ATS Ingestion",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 0.5,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.05,
+            "cost_usd": 0.001
+          },
+          {
+            "name": "Semantic Skill & Experience Extraction",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 1.5,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.05,
+            "cost_usd": 0.0025
+          },
+          {
+            "name": "Job Fit Scoring & Shortlist Generation",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 0.5,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.05,
+            "cost_usd": 0.001
+          }
+        ],
+        "total_duration_minutes": 0.04,
+        "total_cost_usd": 0.0045,
+        "accuracy_pct": 99.6,
+        "human_hours_per_1k_docs": 1.5
+      },
+      "time_reduction_pct": 99.65,
+      "cost_reduction_pct": 99.95,
+      "human_effort_reduction_pct": 99.25,
+      "accuracy_improvement_pct": 9.45,
+      "speedup_multiplier": 288.0
+    },
+    {
+      "workflow_name": "Clinical Prior Authorization & Medical Records",
+      "vertical": "HEALTHCARE",
+      "baseline": {
+        "name": "Manual Prior Authorization Clinical Review",
+        "vertical": "HEALTHCARE",
+        "is_ai_system": false,
+        "steps": [
+          {
+            "name": "Medical Fax & EHR Ingestion",
+            "step_type": "MANUAL",
+            "duration_seconds": 300.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 2.0,
+            "cost_usd": 3.5
+          },
+          {
+            "name": "ICD-10 & Treatment Verification",
+            "step_type": "MANUAL",
+            "duration_seconds": 900.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 6.0,
+            "cost_usd": 10.5
+          },
+          {
+            "name": "Payer Policy & Formulary Match",
+            "step_type": "MANUAL",
+            "duration_seconds": 300.0,
+            "human_involvement_pct": 100.0,
+            "error_probability_pct": 3.0,
+            "cost_usd": 4.5
+          }
+        ],
+        "total_duration_minutes": 25.0,
+        "total_cost_usd": 18.5,
+        "accuracy_pct": 90.5,
+        "human_hours_per_1k_docs": 416.7
+      },
+      "ai_system": {
+        "name": "DocuTask BioHealth Prior Authorization Agent",
+        "vertical": "HEALTHCARE",
+        "is_ai_system": true,
+        "steps": [
+          {
+            "name": "Multimodal Clinical OCR",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 2.0,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.05,
+            "cost_usd": 0.004
+          },
+          {
+            "name": "Medical Entity & ICD-10 Extraction",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 2.5,
+            "human_involvement_pct": 0.0,
+            "error_probability_pct": 0.05,
+            "cost_usd": 0.008
+          },
+          {
+            "name": "Formulary & Clinical Policy Matcher",
+            "step_type": "AUTONOMOUS_AI",
+            "duration_seconds": 1.5,
+            "human_involvement_pct": 5.0,
+            "error_probability_pct": 0.05,
+            "cost_usd": 0.004
+          }
+        ],
+        "total_duration_minutes": 0.1,
+        "total_cost_usd": 0.016,
+        "accuracy_pct": 99.5,
+        "human_hours_per_1k_docs": 4.0
+      },
+      "time_reduction_pct": 99.6,
+      "cost_reduction_pct": 99.91,
+      "human_effort_reduction_pct": 99.04,
+      "accuracy_improvement_pct": 9.94,
+      "speedup_multiplier": 250.0
+    }
+  ]
+}

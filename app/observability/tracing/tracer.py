@@ -132,3 +132,7 @@ class TracingEngine:
     def clear(self) -> None:
         with self._lock:
             self._traces.clear()
+
+
+# Alias for backward compatibility
+Tracer = TracingEngine

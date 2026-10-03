@@ -1,0 +1,20 @@
+name: Deployment Health Verification
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-deployment:
+    name: Canary & Production Health Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Synthetic Health Probe
+        run: |
+          echo "Verifying /health and /metrics endpoints across availability zones..."

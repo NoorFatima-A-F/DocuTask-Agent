@@ -12,6 +12,8 @@ from app.platform.capability.capability_registry import (
 )
 from app.platform.workflow.workflow_graph import (
     WorkflowDefinition,
+    WorkflowEdge,
+    WorkflowNode,
 )
 
 

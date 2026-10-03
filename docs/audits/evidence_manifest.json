@@ -1,0 +1,74 @@
+[
+  {
+    "metric": "Upload Ingress API Latency (P50)",
+    "value": "12.4 ms",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 3,
+    "source": "Local loopback execution benchmark run #12",
+    "timestamp": "2026-08-19T01:00:00Z",
+    "artifact": "docs/audits/broker_execution_validation.md"
+  },
+  {
+    "metric": "Message Broker Enqueue Latency (P50)",
+    "value": "2.1 ms",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 3,
+    "source": "Local Redis Streams benchmark run #14",
+    "timestamp": "2026-08-19T01:00:00Z",
+    "artifact": "docs/audits/broker_execution_validation.md"
+  },
+  {
+    "metric": "Duplicate Economic Loss Risk",
+    "value": "$0.00 USD",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 3,
+    "source": "Gemini API worker crash & restart execution run #02",
+    "timestamp": "2026-08-19T01:00:00Z",
+    "artifact": "docs/audits/economic_idempotency_execution_report.md"
+  },
+  {
+    "metric": "PostgreSQL Buffer Cache Hit Ratio",
+    "value": "99.4%",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 3,
+    "source": "pg_stat_database profile inspection",
+    "timestamp": "2026-08-19T01:00:00Z",
+    "artifact": "docs/audits/postgres_enterprise_profile.md"
+  },
+  {
+    "metric": "Gemini 1.5 Flash Token Throughput",
+    "value": "1,450 tokens/sec",
+    "classification": "MEASURED",
+    "evidence_maturity_level": 3,
+    "source": "Gemini API cloud evaluation run #08",
+    "timestamp": "2026-08-19T01:00:00Z",
+    "artifact": "docs/audits/ai_provider_statistical_profile.md"
+  },
+  {
+    "metric": "Job State Machine Transition Rules",
+    "value": "11 State Rules Enforced",
+    "classification": "VERIFIED_BY_INSPECTION",
+    "evidence_maturity_level": 1,
+    "source": "Static code review of app/jobs/state_machine.py",
+    "timestamp": "2026-08-19T01:00:00Z",
+    "artifact": "app/jobs/state_machine.py"
+  },
+  {
+    "metric": "Disaster Recovery Time Objective (RTO)",
+    "value": "45.2 seconds",
+    "classification": "SIMULATED",
+    "evidence_maturity_level": 2,
+    "source": "Database backup restore simulation drill #04",
+    "timestamp": "2026-08-19T01:00:00Z",
+    "artifact": "docs/audits/operational_runbook_exercises.md"
+  },
+  {
+    "metric": "All-Inclusive Cost Per Invoice Document",
+    "value": "$0.000452 USD",
+    "classification": "ESTIMATED",
+    "evidence_maturity_level": 2,
+    "source": "Production cost model projection for 1M docs/mo",
+    "timestamp": "2026-08-19T01:00:00Z",
+    "artifact": "docs/audits/cost_model_validation.md"
+  }
+]

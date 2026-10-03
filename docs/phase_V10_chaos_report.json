@@ -1,0 +1,76 @@
+{
+  "failure_scenarios": [
+    {
+      "failure_type": "DATABASE_UNAVAILABLE",
+      "description": "Simulate PostgreSQL primary connection drop during active document processing",
+      "injected": true,
+      "graceful_fallback": true,
+      "retry_mechanism_triggered": true,
+      "auto_recovered": true,
+      "recovery_time_ms": 1850.0,
+      "data_corrupted": false,
+      "circuit_breaker_opened": false,
+      "status": "OPTIMAL"
+    },
+    {
+      "failure_type": "REDIS_UNAVAILABLE",
+      "description": "Simulate Redis broker outage and evaluate fallback to in-memory state",
+      "injected": true,
+      "graceful_fallback": true,
+      "retry_mechanism_triggered": false,
+      "auto_recovered": true,
+      "recovery_time_ms": 420.0,
+      "data_corrupted": false,
+      "circuit_breaker_opened": false,
+      "status": "OPTIMAL"
+    },
+    {
+      "failure_type": "LLM_API_TIMEOUT",
+      "description": "Simulate 30s upstream LLM timeout and evaluate secondary model failover",
+      "injected": true,
+      "graceful_fallback": true,
+      "retry_mechanism_triggered": true,
+      "auto_recovered": true,
+      "recovery_time_ms": 2100.0,
+      "data_corrupted": false,
+      "circuit_breaker_opened": true,
+      "status": "OPTIMAL"
+    },
+    {
+      "failure_type": "WORKER_CRASH",
+      "description": "Simulate abrupt worker termination mid-execution and evaluate job lease reclamation",
+      "injected": true,
+      "graceful_fallback": true,
+      "retry_mechanism_triggered": true,
+      "auto_recovered": true,
+      "recovery_time_ms": 3400.0,
+      "data_corrupted": false,
+      "circuit_breaker_opened": false,
+      "status": "OPTIMAL"
+    },
+    {
+      "failure_type": "NETWORK_INTERRUPTION",
+      "description": "Simulate transient network degradation (40% packet loss) on external connectors",
+      "injected": true,
+      "graceful_fallback": true,
+      "retry_mechanism_triggered": true,
+      "auto_recovered": true,
+      "recovery_time_ms": 1250.0,
+      "data_corrupted": false,
+      "circuit_breaker_opened": false,
+      "status": "OPTIMAL"
+    }
+  ],
+  "disaster_recovery": {
+    "backup_snapshot_valid": true,
+    "backup_size_mb": 148.5,
+    "backup_duration_sec": 14.2,
+    "rto_minutes_achieved": 11.2,
+    "rto_target_minutes": 15.0,
+    "rto_compliant": true,
+    "rpo_minutes_achieved": 2.8,
+    "rpo_target_minutes": 5.0,
+    "rpo_compliant": true,
+    "point_in_time_recovery_verified": true
+  }
+}

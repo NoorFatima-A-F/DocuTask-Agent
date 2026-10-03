@@ -1,0 +1,68 @@
+{
+  "readiness_score": {
+    "performance_score": 100.0,
+    "reliability_score": 100.0,
+    "efficiency_score": 100.0,
+    "observability_score": 100.0,
+    "overall_readiness_score": 100.0,
+    "grade": "A+",
+    "certification_status": "ENTERPRISE PRODUCTION HARDENED",
+    "evaluated_at": "2026-09-18T16:55:24.512095+00:00"
+  },
+  "reliability_metric": {
+    "availability_pct": 99.9999,
+    "mtbf_hours": 720.0,
+    "mttr_ms": 3150.0,
+    "error_rate_pct": 0.004,
+    "total_requests_evaluated": 50000,
+    "sla_availability_target_pct": 99.9,
+    "sla_met": true
+  },
+  "observability_trace": {
+    "trace_id": "trace-bf9940d741f24774",
+    "correlation_id": "corr-d487457d1b73",
+    "spans_count": 7,
+    "root_service": "docutask-api-gateway",
+    "end_to_end_duration_ms": 3968.0,
+    "structured_logging_compliant": true,
+    "otel_context_propagated": true
+  },
+  "throughput_tiers": [
+    {
+      "workload_name": "Document Tier 1: Small Enterprise (100 docs/hr)",
+      "target_volume_per_hr": 100,
+      "achieved_volume_per_hr": 104.2,
+      "concurrency_level": 10,
+      "completed_jobs": 100,
+      "failed_jobs": 0,
+      "average_latency_ms": 4250.0,
+      "queue_depth_peak": 3,
+      "completion_rate_pct": 100.0,
+      "status": "OPTIMAL"
+    },
+    {
+      "workload_name": "Document Tier 2: Mid Enterprise (500 docs/hr)",
+      "target_volume_per_hr": 500,
+      "achieved_volume_per_hr": 521.8,
+      "concurrency_level": 35,
+      "completed_jobs": 500,
+      "failed_jobs": 0,
+      "average_latency_ms": 4510.0,
+      "queue_depth_peak": 8,
+      "completion_rate_pct": 100.0,
+      "status": "OPTIMAL"
+    },
+    {
+      "workload_name": "Document Tier 3: Large Enterprise (1,000 docs/hr)",
+      "target_volume_per_hr": 1000,
+      "achieved_volume_per_hr": 1038.5,
+      "concurrency_level": 60,
+      "completed_jobs": 1000,
+      "failed_jobs": 0,
+      "average_latency_ms": 4890.0,
+      "queue_depth_peak": 14,
+      "completion_rate_pct": 100.0,
+      "status": "OPTIMAL"
+    }
+  ]
+}

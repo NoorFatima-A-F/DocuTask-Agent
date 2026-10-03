@@ -1,0 +1,46 @@
+{
+  "test_id": "19af1b13-613f-46f4-819b-b9bb8049f84c",
+  "timestamp": "2026-09-14T11:23:30.592303Z",
+  "environment": "production_audit",
+  "software_version": "1.0.0",
+  "model_version": "gemini-1.5-flash",
+  "input_artifact": "gold_inv_001",
+  "expected_behavior": {
+    "invoice_number": "INV-2026-901",
+    "vendor_name": "Apex Solutions Inc",
+    "customer_name": "Acme Global Enterprises",
+    "invoice_date": "2026-08-15",
+    "total_amount": 5400.0,
+    "currency": "USD",
+    "tax_amount": 400.0
+  },
+  "actual_behavior": {
+    "invoice_number": "INV-2026-901",
+    "vendor_name": "Apex Solutions Inc",
+    "customer_name": "Acme Global Enterprises",
+    "invoice_date": "2026-08-15",
+    "total_amount": 5400.0,
+    "currency": "USD",
+    "tax_amount": 400.0
+  },
+  "metrics": {
+    "total_fields": 7,
+    "correct_fields": 7,
+    "missing_fields": 0,
+    "hallucinated_fields": 0,
+    "field_accuracy": 1.0,
+    "exact_match_accuracy": 1.0,
+    "schema_compliance_rate": 1.0,
+    "missing_field_rate": 0.0,
+    "hallucination_rate": 0.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "average_confidence": 0.95,
+    "confidence_correctness": 0.95
+  },
+  "pass_fail": "PASS",
+  "evidence_location": "docs\\audits\\evidence\\val_7f_100acc.json",
+  "result_hash": "d352c29cdefba24f0513a470d790df8a90b2ecd19c79fb23678c92d06ac97871",
+  "previous_hash": "f0a330444f2cc1bcc94a6a32440145bb7d3c2726faffc211c965ea060b47aa2c"
+}

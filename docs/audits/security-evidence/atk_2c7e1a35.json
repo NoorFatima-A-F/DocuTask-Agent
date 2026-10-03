@@ -1,0 +1,11 @@
+{
+  "attack_id": "atk_2c7e1a35",
+  "category": "schema",
+  "payload": "{\"invoice_number\": {\"malicious\": \"payload_injection_nested\"}}",
+  "target_component": "AIValidator",
+  "expected_behavior": "Pydantic validation rejects nested type confusion; triggers retry or fails safely.",
+  "actual_behavior": "Pydantic schema validation correctly rejected malicious payload: LLM generated JSON failed schema validation: Field 'invoice_number': Input should be a valid string",
+  "severity": "CRITICAL",
+  "passed": true,
+  "evidence_reference": "docs/audits/security-evidence/atk_2c7e1a35.json"
+}
