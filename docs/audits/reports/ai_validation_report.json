@@ -4,7 +4,7 @@
   "average_field_accuracy": 1.0,
   "average_f1_score": 1.0,
   "regression_comparison": {
-    "run_id": "38c012ef-f53a-4bb5-99bc-9aa71c59b86f",
+    "run_id": "36cd5033-7d0b-43f5-b5ea-6fc43333f7a3",
     "baseline_version": "v1.0_baseline",
     "current_version": "v1.1_candidate",
     "baseline_accuracy": 0.95,
@@ -21,8 +21,8 @@
   },
   "evidence_records": [
     {
-      "test_id": "0a44caf8-dfa8-4709-b12d-d53260df1cd3",
-      "timestamp": "2026-10-04 09:44:54.117641+00:00",
+      "test_id": "0cc1af48-182f-42a7-bfc5-9631f50dbdea",
+      "timestamp": "2026-10-04 11:16:39.725706+00:00",
       "environment": "production_audit",
       "software_version": "1.0.0",
       "model_version": "gemini-1.5-flash",
@@ -67,8 +67,8 @@
       "previous_hash": "f0a330444f2cc1bcc94a6a32440145bb7d3c2726faffc211c965ea060b47aa2c"
     },
     {
-      "test_id": "28085b3d-f292-4fd5-a5eb-0d32df37f28d",
-      "timestamp": "2026-10-04 09:44:54.117641+00:00",
+      "test_id": "bb2c8339-1561-42d9-beb2-a30d61612eb8",
+      "timestamp": "2026-10-04 11:16:39.728135+00:00",
       "environment": "production_audit",
       "software_version": "1.0.0",
       "model_version": "gemini-1.5-flash",
@@ -111,8 +111,8 @@
       "previous_hash": "d352c29cdefba24f0513a470d790df8a90b2ecd19c79fb23678c92d06ac97871"
     },
     {
-      "test_id": "de64cc89-ae5a-42a5-b97a-50063299c464",
-      "timestamp": "2026-10-04 09:44:54.127497+00:00",
+      "test_id": "a4daf53b-1630-401b-8c5d-3f179b136db7",
+      "timestamp": "2026-10-04 11:16:39.730455+00:00",
       "environment": "production_audit",
       "software_version": "1.0.0",
       "model_version": "gemini-1.5-flash",
@@ -161,8 +161,8 @@
       "previous_hash": "d752428c4784308e5222ab658f5f23c7085a63dab582027159ab6a1236d2a037"
     },
     {
-      "test_id": "2a987d2a-bd1f-401e-b2c6-1c237dd3b5e4",
-      "timestamp": "2026-10-04 09:44:54.127497+00:00",
+      "test_id": "82780fe5-3335-4a30-ae34-7a41c4308fc9",
+      "timestamp": "2026-10-04 11:16:39.733134+00:00",
       "environment": "production_audit",
       "software_version": "1.0.0",
       "model_version": "gemini-1.5-flash",
@@ -205,8 +205,8 @@
       "previous_hash": "8488fc2002a9aec2ea4f0f0373dc4ae6ae318e32f1033d23f1d02ac63336e74e"
     },
     {
-      "test_id": "2dfe3a14-36c9-4c59-8fa1-e961c6f987ce",
-      "timestamp": "2026-10-04 09:44:54.133562+00:00",
+      "test_id": "658ca046-467d-42da-8ee1-010c10d8e0af",
+      "timestamp": "2026-10-04 11:16:39.736344+00:00",
       "environment": "production_audit",
       "software_version": "1.0.0",
       "model_version": "gemini-1.5-flash",

@@ -1,0 +1,50 @@
+[
+  {
+    "document_id": "gold_inv_101",
+    "filename": "acme_industrial_invoice.pdf",
+    "document_type": "invoice",
+    "expected_schema": {
+      "invoice_number": "INV-2026-9041",
+      "vendor_name": "Acme Industrial Logistics",
+      "total_amount": 4520.50,
+      "currency": "USD",
+      "due_date": "2026-11-15"
+    }
+  },
+  {
+    "document_id": "gold_inv_102",
+    "filename": "omnicorp_cloud_bill.pdf",
+    "document_type": "invoice",
+    "expected_schema": {
+      "invoice_number": "INV-2026-9042",
+      "vendor_name": "OmniCorp Global Dynamics",
+      "total_amount": 85000.00,
+      "currency": "USD",
+      "due_date": "2026-12-01"
+    }
+  },
+  {
+    "document_id": "gold_inv_103",
+    "filename": "hyperscale_hardware.pdf",
+    "document_type": "invoice",
+    "expected_schema": {
+      "invoice_number": "INV-2026-9043",
+      "vendor_name": "HyperScale Infrastructure Corp",
+      "total_amount": 14250.75,
+      "currency": "USD",
+      "due_date": "2026-11-30"
+    }
+  },
+  {
+    "document_id": "gold_inv_104",
+    "filename": "datacenter_cooling_contract.pdf",
+    "document_type": "contract",
+    "expected_schema": {
+      "invoice_number": "CTR-2026-0044",
+      "vendor_name": "Nordic Thermal Solutions",
+      "total_amount": 32100.00,
+      "currency": "USD",
+      "due_date": "2026-12-15"
+    }
+  }
+]

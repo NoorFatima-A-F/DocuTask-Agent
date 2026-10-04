@@ -2,21 +2,23 @@ name: CI Quality Gate
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
   lint-and-typecheck:
-    name: Code Quality & Static Typing
+    name: Code Quality (Ruff & Mypy)
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -24,18 +26,21 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Install Dependencies
+      - name: Install Linting & Typing Tools
         run: |
           python -m pip install --upgrade pip
-          pip install ruff mypy bandit pytest pytest-asyncio pytest-cov
-          pip install -r requirements.txt
+          pip install ruff mypy bandit
+          pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Run Ruff Linting
         env:
           PYTHONPATH: .
-        run: ruff check app/ tests/ cli/ evals/ tooling/
+        run: ruff check .
 
-      - name: Run MyPy Type Checking
+      - name: Run Ruff Formatting Check
+        run: ruff format --check .
+
+      - name: Run MyPy Static Type Check
         env:
           PYTHONPATH: .
         run: mypy app/ --ignore-missing-imports
@@ -45,8 +50,8 @@ jobs:
           PYTHONPATH: .
         run: bandit -r app/ -ll -q
 
-  test-suite:
-    name: Automated Tests & Coverage
+  test:
+    name: Unit & Integration Tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -54,8 +59,7 @@ jobs:
         python-version: ["3.11", "3.12"]
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -63,13 +67,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
 
-      - name: Install Dependencies
+      - name: Install Runtime & Test Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest pytest-asyncio pytest-cov
+          pip install -r requirements.txt -r requirements-dev.txt
 
-      - name: Execute Pytest Suite
+      - name: Run Pytest Suite with Coverage
         env:
           APP_ENV: test
           DEBUG: "false"
@@ -77,7 +80,7 @@ jobs:
         run: |
           pytest tests/ --ignore=tests/world --ignore=tests/world_model --ignore=tests/platform_verification -v --import-mode=importlib --cov=app --cov-report=xml:coverage.xml --cov-report=term-missing
 
-      - name: Upload Test Coverage
+      - name: Upload Test Coverage Artifact
         if: matrix.python-version == '3.12'
         uses: actions/upload-artifact@v4
         with:

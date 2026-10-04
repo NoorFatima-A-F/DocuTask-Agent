@@ -1,0 +1,26 @@
+[
+  {
+    "document_id": "smoke_inv_001",
+    "filename": "smoke_invoice_sample.pdf",
+    "document_type": "invoice",
+    "expected_schema": {
+      "invoice_number": "INV-2026-SMOKE-1",
+      "vendor_name": "Apex Cloud Systems",
+      "total_amount": 1250.00,
+      "currency": "USD",
+      "due_date": "2026-11-01"
+    }
+  },
+  {
+    "document_id": "smoke_inv_002",
+    "filename": "smoke_receipt_sample.pdf",
+    "document_type": "receipt",
+    "expected_schema": {
+      "invoice_number": "REC-2026-SMOKE-2",
+      "vendor_name": "Metro Logistics Terminal",
+      "total_amount": 420.75,
+      "currency": "USD",
+      "due_date": "2026-11-15"
+    }
+  }
+]

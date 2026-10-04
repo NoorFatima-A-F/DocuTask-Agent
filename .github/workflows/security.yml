@@ -1,12 +1,12 @@
-name: Security & Vulnerability Gate
+name: Security Analysis
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
-    - cron: '0 0 * * 0' # Every Sunday at midnight UTC
+    - cron: '0 2 * * 1' # Weekly Monday scan
   workflow_dispatch:
 
 permissions:
@@ -14,12 +14,13 @@ permissions:
   security-events: write
 
 jobs:
-  dependency-and-sast:
-    name: Dependency Audit & SAST
+  secret-scan-and-audit:
+    name: Secret Detection & Dependency Audit
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -30,11 +31,10 @@ jobs:
       - name: Install Security Scanners
         run: |
           python -m pip install --upgrade pip
-          pip install pip-audit bandit safety
+          pip install pip-audit bandit
 
       - name: 1. Execute pip-audit Dependency Vulnerability Scan
         run: pip-audit --desc on --ignore-vuln PYSEC-2026-1325 --ignore-vuln GHSA-wj6h-64fc-37mp -r requirements.txt
-
 
       - name: 2. Execute Bandit Static Security Analysis
         run: bandit -r app/ -ll -q
@@ -70,3 +70,20 @@ jobs:
           else:
               print('[+] Secret Scanner passed: 0 exposed credential patterns found.')
           "
+
+  codeql:
+    name: CodeQL SAST Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+          queries: security-extended
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3

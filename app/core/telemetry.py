@@ -33,6 +33,12 @@ class StructuredJsonFormatter(logging.Formatter):
         return json.dumps(log_payload)
 
 
+import os
+
+# OpenTelemetry Exporter Endpoint Config
+OTEL_EXPORTER_OTLP_ENDPOINT: Optional[str] = os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", None)
+
+
 def setup_telemetry(log_level: int = logging.INFO) -> logging.Logger:
     """Configures structured telemetry logger for the platform."""
     logger_instance = logging.getLogger("docutask")
@@ -43,6 +49,9 @@ def setup_telemetry(log_level: int = logging.INFO) -> logging.Logger:
         handler = logging.StreamHandler()
         handler.setFormatter(StructuredJsonFormatter())
         logger_instance.addHandler(handler)
+
+    if OTEL_EXPORTER_OTLP_ENDPOINT:
+        logger_instance.info(f"OpenTelemetry OTLP Exporter configured at: {OTEL_EXPORTER_OTLP_ENDPOINT}")
 
     return logger_instance
 
