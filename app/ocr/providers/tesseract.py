@@ -20,9 +20,7 @@ class TesseractOCRProvider(OCRProvider):
     """Concrete OCRProvider using Tesseract OCR engine."""
 
     SUPPORTED_EXTENSIONS: Set[str] = {".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".webp"}
-    SUPPORTED_MIMES: Set[str] = {
-        "image/png", "image/jpeg", "image/tiff", "image/bmp", "image/webp"
-    }
+    SUPPORTED_MIMES: Set[str] = {"image/png", "image/jpeg", "image/tiff", "image/bmp", "image/webp"}
 
     @property
     def provider_name(self) -> str:
@@ -30,7 +28,6 @@ class TesseractOCRProvider(OCRProvider):
         return "tesseract"
 
     def supports(self, file_extension_or_mime: str) -> bool:
-
         """Checks if format is supported by Tesseract engine."""
         val = file_extension_or_mime.lower().strip()
         return val in self.SUPPORTED_EXTENSIONS or val in self.SUPPORTED_MIMES
@@ -54,8 +51,10 @@ class TesseractOCRProvider(OCRProvider):
         Extracts text from binary image using Tesseract.
         Supports both direct string return and dict return when invoked via plugin interface.
         """
-        is_filename = isinstance(language, str) and ("." in language or language.endswith((".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".webp")))
-        
+        is_filename = isinstance(language, str) and (
+            "." in language or language.endswith((".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".webp"))
+        )
+
         try:
             image = self._open_and_preprocess_image(image_bytes)
             text = pytesseract.image_to_string(image, lang="eng" if is_filename else language).strip()
@@ -105,20 +104,10 @@ class TesseractOCRProvider(OCRProvider):
         except Exception:
             return True  # Graceful dev fallback
 
-    async def extract_page(
-        self,
-        image_bytes: bytes,
-        page_number: int = 1,
-        language: str = "eng"
-    ) -> PageContent:
+    async def extract_page(self, image_bytes: bytes, page_number: int = 1, language: str = "eng") -> PageContent:
         """Extracts text and confidence score for an image page."""
         raw_res = await self.extract_text(image_bytes, language=language)
         text = raw_res["text"] if isinstance(raw_res, dict) else raw_res
         confidence = await self.get_confidence(image_bytes, language=language)
-        
-        return PageContent(
-            page_number=page_number,
-            text=text,
-            confidence=confidence,
-            processing_method="ocr"
-        )
+
+        return PageContent(page_number=page_number, text=text, confidence=confidence, processing_method="ocr")

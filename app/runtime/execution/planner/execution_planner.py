@@ -70,7 +70,9 @@ class ExecutionPlan:
             "nodes": [n.to_dict() for n in self.nodes],
             "total_estimated_duration_ms": round(self.total_estimated_duration_ms, 2),
             "critical_path_steps": self.critical_path_steps,
-            "overall_risk": self.overall_risk.value if isinstance(self.overall_risk, RiskLevel) else str(self.overall_risk),
+            "overall_risk": self.overall_risk.value
+            if isinstance(self.overall_risk, RiskLevel)
+            else str(self.overall_risk),
             "created_at": self.created_at,
         }
 
@@ -81,7 +83,9 @@ class ExecutionPlanner:
     def __init__(self):
         self._plans: Dict[str, ExecutionPlan] = {}
 
-    def plan_mission(self, mission_goal: str, target_tools: Optional[List[str]] = None) -> tuple[WorkflowDefinition, ExecutionPlan]:
+    def plan_mission(
+        self, mission_goal: str, target_tools: Optional[List[str]] = None
+    ) -> tuple[WorkflowDefinition, ExecutionPlan]:
         plan_id = f"plan_{uuid.uuid4().hex[:10]}"
         workflow_id = f"wf_{uuid.uuid4().hex[:10]}"
 
@@ -95,14 +99,22 @@ class ExecutionPlanner:
                     step_id="step_log_inspection",
                     name="Query Warehouse Diagnostics",
                     tool_id="postgres_execute_query",
-                    inputs={"connection_id": "conn_postgres_warehouse", "query": "SELECT error_type, count(*) FROM logs GROUP BY error_type;"},
+                    inputs={
+                        "connection_id": "conn_postgres_warehouse",
+                        "query": "SELECT error_type, count(*) FROM logs GROUP BY error_type;",
+                    },
                     depends_on=[],
                 ),
                 WorkflowStep(
                     step_id="step_github_pr",
                     name="Open Patch Pull Request",
                     tool_id="github_create_pull_request",
-                    inputs={"repo": "enterprise-corp/core-api", "title": f"fix: auto-resolved {mission_goal[:40]}", "head": "bot/auto-fix", "base": "main"},
+                    inputs={
+                        "repo": "enterprise-corp/core-api",
+                        "title": f"fix: auto-resolved {mission_goal[:40]}",
+                        "head": "bot/auto-fix",
+                        "base": "main",
+                    },
                     depends_on=["step_log_inspection"],
                     is_compensable=True,
                     compensation_tool_id="github_close_pull_request",
@@ -131,14 +143,22 @@ class ExecutionPlanner:
                     step_id="step_fetch_customer",
                     name="Fetch Customer Record",
                     tool_id="postgres_execute_query",
-                    inputs={"connection_id": "conn_postgres_warehouse", "query": "SELECT * FROM customers WHERE status='active' LIMIT 1;"},
+                    inputs={
+                        "connection_id": "conn_postgres_warehouse",
+                        "query": "SELECT * FROM customers WHERE status='active' LIMIT 1;",
+                    },
                     depends_on=[],
                 ),
                 WorkflowStep(
                     step_id="step_generate_invoice",
                     name="Issue Stripe Customer Invoice",
                     tool_id="stripe_create_customer_invoice",
-                    inputs={"customer_id": "cus_N8xL9p2q1", "amount_cents": 45000, "currency": "usd", "description": "Autonomous AI SLA tier"},
+                    inputs={
+                        "customer_id": "cus_N8xL9p2q1",
+                        "amount_cents": 45000,
+                        "currency": "usd",
+                        "description": "Autonomous AI SLA tier",
+                    },
                     depends_on=["step_fetch_customer"],
                     is_compensable=True,
                 ),
@@ -146,7 +166,11 @@ class ExecutionPlanner:
                     step_id="step_archive_receipt",
                     name="Archive S3 Receipt",
                     tool_id="aws_s3_upload_artifact",
-                    inputs={"bucket": "enterprise-invoices-vault", "key": "invoices/inv_2026_09.json", "payload": "Invoice payload receipt"},
+                    inputs={
+                        "bucket": "enterprise-invoices-vault",
+                        "key": "invoices/inv_2026_09.json",
+                        "payload": "Invoice payload receipt",
+                    },
                     depends_on=["step_generate_invoice"],
                     is_compensable=True,
                     compensation_tool_id="aws_s3_delete_artifact",
@@ -165,14 +189,20 @@ class ExecutionPlanner:
                     step_id="step_browse_portal",
                     name="Extract Portal Web Content",
                     tool_id="playwright_web_scraper",
-                    inputs={"url": "https://portal.enterprise-vendor.com/invoices", "extract_selector": "div.invoice-table"},
+                    inputs={
+                        "url": "https://portal.enterprise-vendor.com/invoices",
+                        "extract_selector": "div.invoice-table",
+                    },
                     depends_on=[],
                 ),
                 WorkflowStep(
                     step_id="step_store_parsed_data",
                     name="Persist Web Data in Warehouse",
                     tool_id="postgres_execute_query",
-                    inputs={"connection_id": "conn_postgres_warehouse", "query": "INSERT INTO scraped_records (data) VALUES ('portal_data');"},
+                    inputs={
+                        "connection_id": "conn_postgres_warehouse",
+                        "query": "INSERT INTO scraped_records (data) VALUES ('portal_data');",
+                    },
                     depends_on=["step_browse_portal"],
                 ),
                 WorkflowStep(
@@ -265,7 +295,11 @@ class ExecutionPlanner:
             cur_node.is_critical_path = abs(cur_node.slack) < 0.01
 
         critical_steps = [n.step_id for n in nodes if n.is_critical_path]
-        overall_risk = max((n.risk_level for n in nodes), key=lambda r: ["minimal", "low", "medium", "high", "critical"].index(r.value), default=RiskLevel.LOW)
+        overall_risk = max(
+            (n.risk_level for n in nodes),
+            key=lambda r: ["minimal", "low", "medium", "high", "critical"].index(r.value),
+            default=RiskLevel.LOW,
+        )
 
         plan = ExecutionPlan(
             plan_id=plan_id,
@@ -282,7 +316,12 @@ class ExecutionPlanner:
             ExecutionEvent(
                 event_type=ExecutionEventType.PLAN_GENERATED,
                 source="execution_planner",
-                payload={"plan_id": plan_id, "workflow_id": workflow_id, "critical_path": critical_steps, "duration_ms": total_duration},
+                payload={
+                    "plan_id": plan_id,
+                    "workflow_id": workflow_id,
+                    "critical_path": critical_steps,
+                    "duration_ms": total_duration,
+                },
                 risk_level=overall_risk,
             )
         )

@@ -32,9 +32,7 @@ class ConcurrencyController:
         with self._lock:
             self._custom_tenant_limits[tenant_id] = limit
 
-    def can_admit_workload(
-        self, workload: WorkloadRequest, region_id: str, cluster_id: str
-    ) -> Tuple[bool, List[str]]:
+    def can_admit_workload(self, workload: WorkloadRequest, region_id: str, cluster_id: str) -> Tuple[bool, List[str]]:
         """Evaluate whether placing workload would breach any concurrency limit."""
         with self._lock:
             reasons = []

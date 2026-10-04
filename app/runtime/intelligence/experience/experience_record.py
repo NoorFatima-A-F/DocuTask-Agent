@@ -30,19 +30,20 @@ class ExperienceRecord:
     Immutable operational experience generated from a completed mission.
     Cryptographically links to Phase 8 Evidence Merkle roots.
     """
+
     experience_id: str
     mission_id: str
     document_type: str
     task_type: str
     timestamp: float = field(default_factory=time.time)
     status: str = "SUCCESS"  # SUCCESS, RECOVERED, FAILED
-    
+
     # Planner & Execution DAG
     planner_version: str = "v1.0.0"
     dag_depth: int = 3
     dag_node_count: int = 5
     dag_topology_hash: str = ""
-    
+
     # Operational Telemetry
     total_latency_ms: float = 1250.0
     total_cost_usd: float = 0.012
@@ -51,19 +52,21 @@ class ExperienceRecord:
     validation_failures_count: int = 0
     recovery_paths_used: List[str] = field(default_factory=list)
     human_corrections_count: int = 0
-    
+
     # Confidence & Quality
     initial_confidence: float = 0.88
     final_confidence: float = 0.96
     confidence_delta: float = 0.08
-    
+
     # Tool & Resource Usage
     tool_traces: List[ToolTraceRecord] = field(default_factory=list)
     memory_retrievals: int = 4
     memory_cache_hit_rate: float = 0.75
     organizational_department: str = "Financial Operations"
-    participating_agents: List[str] = field(default_factory=lambda: ["ChiefPlanner", "ExtractionWorker", "ValidatorWorker"])
-    
+    participating_agents: List[str] = field(
+        default_factory=lambda: ["ChiefPlanner", "ExtractionWorker", "ValidatorWorker"]
+    )
+
     # Cryptographic Evidence Linkage (Phase 8 Merkle Root)
     evidence_root_hash: str = ""
     signature: str = ""

@@ -1,6 +1,7 @@
 """
 3H.12.5: Queue Recovery Verifier
 """
+
 from ..domain.models import QueueRecoveryReport
 from ..domain.interfaces import IQueueRecoveryVerifier
 
@@ -22,5 +23,5 @@ class QueueRecoveryVerifier(IQueueRecoveryVerifier):
             duplicate_jobs_count=0,
             workers_reconnected=True,
             queue_recovery_duration_seconds=1.8,
-            queue_recovery_passed=True
+            queue_recovery_passed=True,
         )

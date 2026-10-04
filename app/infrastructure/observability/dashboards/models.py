@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class WidgetType(str, enum.Enum):
     """Supported dashboard visualization widgets."""
+
     TIMESERIES = "TIMESERIES"
     GAUGE = "GAUGE"
     SINGLESTAT = "SINGLESTAT"
@@ -24,6 +25,7 @@ class WidgetType(str, enum.Enum):
 
 class DashboardWidget(BaseModel):
     """Visual widget specification."""
+
     widget_id: str
     title: str
     widget_type: WidgetType
@@ -36,6 +38,7 @@ class DashboardWidget(BaseModel):
 
 class DashboardPanel(BaseModel):
     """Logical grouping of dashboard widgets."""
+
     panel_id: str
     title: str
     widgets: List[DashboardWidget] = Field(default_factory=list)
@@ -43,6 +46,7 @@ class DashboardPanel(BaseModel):
 
 class Dashboard(BaseModel):
     """Complete multi-panel dashboard definition."""
+
     dashboard_id: str
     title: str
     category: str = "OPERATIONS"  # EXECUTIVE, SRE, OPERATIONS, AI_RUNTIME, WORKFLOW, TENANT, INFRASTRUCTURE

@@ -11,7 +11,9 @@ from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional
 
 from research_validation.scientific_agents.agent_definitions import (
-    ScientificAgentRole, ScientificAgentMessage, ScientificAgentState
+    ScientificAgentRole,
+    ScientificAgentMessage,
+    ScientificAgentState,
 )
 from research_validation.provenance.hashing import hash_canonical_json
 
@@ -19,6 +21,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class ResearchDeliberationVerdict:
     """Consolidated outcome of multi-agent scientific deliberation."""
+
     cycle_id: str
     participating_agents: List[ScientificAgentRole]
     consensus_reached: bool
@@ -43,7 +46,9 @@ class ScientificAgentRuntime:
             )
             for role in ScientificAgentRole
         }
-        self.handlers: Dict[ScientificAgentRole, Callable[[ScientificAgentMessage], Optional[ScientificAgentMessage]]] = {}
+        self.handlers: Dict[
+            ScientificAgentRole, Callable[[ScientificAgentMessage], Optional[ScientificAgentMessage]]
+        ] = {}
 
     def register_handler(
         self,
@@ -104,7 +109,7 @@ class ScientificAgentRuntime:
             action="QUERY_PRIORS",
             payload={"topic": research_topic},
         )
-        
+
         # 2. Benchmark and Statistics collaborate
         self.send_message(
             ScientificAgentRole.PLANNER,

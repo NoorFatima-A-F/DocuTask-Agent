@@ -2,6 +2,7 @@
 Comprehensive Test Suite for Part 3G.6:
 Multi-Region & Cloud Failover Verification Framework.
 """
+
 import pytest
 
 from app.platform_verification.multi_region_failover.domain.models import (
@@ -55,7 +56,6 @@ def api_client():
 
 
 class TestEnterpriseMultiRegionFailover:
-
     def test_multi_region_architecture_7_services_replicated(self):
         validator = MultiRegionArchitectureValidator()
         report = validator.validate_architecture()

@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Rag.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.rag.domain.models import RagEntity
 from app.platform_verification.modules.rag.domain.interfaces import RagRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageRagUseCase:
     def __init__(self, repository: RagRepositoryInterface):

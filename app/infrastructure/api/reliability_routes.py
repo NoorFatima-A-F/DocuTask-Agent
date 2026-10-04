@@ -56,6 +56,7 @@ class IncidentTransitionRequest(BaseModel):
 
 # --- Health & Probing Endpoints ---
 
+
 @router.get("/health", response_model=Dict[str, Any])
 def get_system_health() -> Dict[str, Any]:
     matrix = reliability_sdk.get_system_health()
@@ -90,6 +91,7 @@ def execute_probe(probe_id: str) -> Dict[str, Any]:
 
 
 # --- Failover Endpoints ---
+
 
 @router.post("/failover/plan", response_model=Dict[str, Any], status_code=status.HTTP_201_CREATED)
 def plan_failover(req: FailoverPlanRequest) -> Dict[str, Any]:
@@ -128,6 +130,7 @@ def get_failover_status(plan_id: str) -> Dict[str, Any]:
 
 # --- Recovery Endpoints ---
 
+
 @router.post("/recovery/execute", response_model=Dict[str, Any])
 def execute_recovery(workflow: RecoveryWorkflow) -> Dict[str, Any]:
     report = reliability_sdk.execute_recovery_workflow(workflow)
@@ -135,6 +138,7 @@ def execute_recovery(workflow: RecoveryWorkflow) -> Dict[str, Any]:
 
 
 # --- Incident Endpoints ---
+
 
 @router.get("/incidents", response_model=List[Dict[str, Any]])
 def list_incidents() -> List[Dict[str, Any]]:
@@ -169,6 +173,7 @@ def transition_incident(incident_id: str, req: IncidentTransitionRequest) -> Dic
 
 
 # --- Replication Endpoints ---
+
 
 @router.get("/replication/lag", response_model=List[Dict[str, Any]])
 def get_replication_lag() -> List[Dict[str, Any]]:

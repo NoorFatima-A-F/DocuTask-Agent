@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class WorkflowNodeType(str, Enum):
     """Typology of workflow nodes."""
+
     TASK = "TASK"
     CHILD_WORKFLOW = "CHILD_WORKFLOW"
     HUMAN_APPROVAL = "HUMAN_APPROVAL"
@@ -23,6 +24,7 @@ class WorkflowNodeType(str, Enum):
 
 class WorkflowNode(BaseModel):
     """An individual node / stage in a workflow DAG."""
+
     node_id: str
     name: str
     node_type: WorkflowNodeType = WorkflowNodeType.TASK

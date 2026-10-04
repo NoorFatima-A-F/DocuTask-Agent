@@ -3,6 +3,7 @@ Version Compatibility and Migration Chain Verifier (Part 3G.2B).
 Validates cross-version PostgreSQL restoration (PG 15, 16, 17) and
 verifies Alembic migration ordering, idempotency, and rollback safety.
 """
+
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
     MigrationValidationReport,

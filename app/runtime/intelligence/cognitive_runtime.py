@@ -28,6 +28,7 @@ from app.runtime.intelligence.active_information import ActiveInformationEngine,
 
 class CognitiveStateSummary(BaseModel):
     """Unified snapshot of the agent's probabilistic mental state."""
+
     mission_id: str
     total_entropy_bits: float
     beliefs: Dict[str, Dict[str, Any]]
@@ -49,12 +50,14 @@ class ProbabilisticCognitiveRuntime:
         self.active_info_engine = ActiveInformationEngine()
 
         # Emit initialization event
-        self._publish(BeliefInitializedEvent(
-            mission_id=mission_id,
-            belief_version=self.belief_engine.version,
-            prior_entropy=self.belief_engine.compute_total_entropy(),
-            variable_count=len(self.belief_engine.list_beliefs()),
-        ))
+        self._publish(
+            BeliefInitializedEvent(
+                mission_id=mission_id,
+                belief_version=self.belief_engine.version,
+                prior_entropy=self.belief_engine.compute_total_entropy(),
+                variable_count=len(self.belief_engine.list_beliefs()),
+            )
+        )
 
     def update_evidence(
         self,
@@ -77,51 +80,61 @@ class ProbabilisticCognitiveRuntime:
         new_entropy = self.belief_engine.compute_total_entropy()
         entropy_delta = new_entropy - old_entropy
 
-        self._publish(BeliefUpdatedEvent(
-            mission_id=self.mission_id,
-            variable_name=variable_name,
-            prior_mean=report.prior_mean,
-            posterior_mean=report.posterior_mean,
-            entropy_delta=entropy_delta,
-        ))
-        self._publish(PosteriorComputedEvent(
-            mission_id=self.mission_id,
-            hypothesis=f"{variable_name}==True",
-            likelihood=report.likelihood,
-            posterior_probability=report.posterior_mean,
-            credible_interval=report.credible_interval_95,
-        ))
-        if entropy_delta < 0:
-            self._publish(EntropyReducedEvent(
+        self._publish(
+            BeliefUpdatedEvent(
                 mission_id=self.mission_id,
-                initial_entropy=old_entropy,
-                final_entropy=new_entropy,
-                information_gain_bits=abs(entropy_delta),
-            ))
+                variable_name=variable_name,
+                prior_mean=report.prior_mean,
+                posterior_mean=report.posterior_mean,
+                entropy_delta=entropy_delta,
+            )
+        )
+        self._publish(
+            PosteriorComputedEvent(
+                mission_id=self.mission_id,
+                hypothesis=f"{variable_name}==True",
+                likelihood=report.likelihood,
+                posterior_probability=report.posterior_mean,
+                credible_interval=report.credible_interval_95,
+            )
+        )
+        if entropy_delta < 0:
+            self._publish(
+                EntropyReducedEvent(
+                    mission_id=self.mission_id,
+                    initial_entropy=old_entropy,
+                    final_entropy=new_entropy,
+                    information_gain_bits=abs(entropy_delta),
+                )
+            )
 
         return report
 
     def forecast_world(self, load_factor: float = 1.0, concurrency: int = 4) -> List[WorldStateForecast]:
         forecasts = self.world_model.forecast_trajectory(load_factor, concurrency)
         for f in forecasts:
-            self._publish(WorldPredictionGeneratedEvent(
-                mission_id=self.mission_id,
-                horizon_minutes=f.horizon_minutes,
-                predicted_gpu_load=f.predicted_gpu_load_pct,
-                predicted_token_burn=int(f.predicted_token_burn_velocity * 60 * f.horizon_minutes),
-                predicted_queue_depth=f.predicted_queue_depth,
-            ))
+            self._publish(
+                WorldPredictionGeneratedEvent(
+                    mission_id=self.mission_id,
+                    horizon_minutes=f.horizon_minutes,
+                    predicted_gpu_load=f.predicted_gpu_load_pct,
+                    predicted_token_burn=int(f.predicted_token_burn_velocity * 60 * f.horizon_minutes),
+                    predicted_queue_depth=f.predicted_queue_depth,
+                )
+            )
         return forecasts
 
     def evaluate_evoi(self) -> List[InformationActionRecommendation]:
         recs = self.active_info_engine.evaluate_sensing_actions(self.belief_engine)
         for r in recs:
-            self._publish(ExpectedValueInformationComputedEvent(
-                mission_id=self.mission_id,
-                candidate_action=r.action_type.value,
-                expected_gain=r.expected_utility_gain,
-                net_evoi=r.net_evoi,
-            ))
+            self._publish(
+                ExpectedValueInformationComputedEvent(
+                    mission_id=self.mission_id,
+                    candidate_action=r.action_type.value,
+                    expected_gain=r.expected_utility_gain,
+                    net_evoi=r.net_evoi,
+                )
+            )
         return recs
 
     def get_cognitive_state(self) -> CognitiveStateSummary:
@@ -141,12 +154,14 @@ class ProbabilisticCognitiveRuntime:
         unc = self.uncertainty_engine.evaluate_uncertainty(self.mission_id, self.belief_engine)
         evoi = self.active_info_engine.evaluate_sensing_actions(self.belief_engine)
 
-        self._publish(PlannerConfidenceCalculatedEvent(
-            mission_id=self.mission_id,
-            epistemic_uncertainty=unc.epistemic_uncertainty,
-            aleatoric_uncertainty=unc.aleatoric_uncertainty,
-            composite_confidence=unc.composite_confidence,
-        ))
+        self._publish(
+            PlannerConfidenceCalculatedEvent(
+                mission_id=self.mission_id,
+                epistemic_uncertainty=unc.epistemic_uncertainty,
+                aleatoric_uncertainty=unc.aleatoric_uncertainty,
+                composite_confidence=unc.composite_confidence,
+            )
+        )
 
         return CognitiveStateSummary(
             mission_id=self.mission_id,

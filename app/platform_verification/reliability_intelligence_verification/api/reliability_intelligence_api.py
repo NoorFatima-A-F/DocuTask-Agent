@@ -1,10 +1,13 @@
 """
 Phase 3H.5.7: Reliability Intelligence API Router
 """
+
 from fastapi import APIRouter
 from ..runtime.reliability_intelligence_runtime import ReliabilityIntelligenceRuntime
 
-router = APIRouter(prefix="/reliability-intelligence", tags=["Phase 3H.5.7 - Reliability Intelligence & Health Scoring"])
+router = APIRouter(
+    prefix="/reliability-intelligence", tags=["Phase 3H.5.7 - Reliability Intelligence & Health Scoring"]
+)
 runtime = ReliabilityIntelligenceRuntime()
 
 

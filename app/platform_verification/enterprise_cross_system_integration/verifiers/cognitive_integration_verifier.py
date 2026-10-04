@@ -25,11 +25,36 @@ class CognitiveIntegrationVerifier(ICognitiveIntegrationVerifier):
 
     def verify(self) -> CognitiveIntegrationReport:
         steps = [
-            CognitiveStepVerification(step_name="FactGroundingRetrieval", evidence_backed=True, hallucination_rate_pct=0.0, counterfactual_check_passed=True),
-            CognitiveStepVerification(step_name="HypothesisGeneration", evidence_backed=True, hallucination_rate_pct=0.0, counterfactual_check_passed=True),
-            CognitiveStepVerification(step_name="DecisionIntelligenceSimulation", evidence_backed=True, hallucination_rate_pct=0.0, counterfactual_check_passed=True),
-            CognitiveStepVerification(step_name="CounterfactualValidation", evidence_backed=True, hallucination_rate_pct=0.0, counterfactual_check_passed=True),
-            CognitiveStepVerification(step_name="OrganizationalLearningFeedback", evidence_backed=True, hallucination_rate_pct=0.0, counterfactual_check_passed=True),
+            CognitiveStepVerification(
+                step_name="FactGroundingRetrieval",
+                evidence_backed=True,
+                hallucination_rate_pct=0.0,
+                counterfactual_check_passed=True,
+            ),
+            CognitiveStepVerification(
+                step_name="HypothesisGeneration",
+                evidence_backed=True,
+                hallucination_rate_pct=0.0,
+                counterfactual_check_passed=True,
+            ),
+            CognitiveStepVerification(
+                step_name="DecisionIntelligenceSimulation",
+                evidence_backed=True,
+                hallucination_rate_pct=0.0,
+                counterfactual_check_passed=True,
+            ),
+            CognitiveStepVerification(
+                step_name="CounterfactualValidation",
+                evidence_backed=True,
+                hallucination_rate_pct=0.0,
+                counterfactual_check_passed=True,
+            ),
+            CognitiveStepVerification(
+                step_name="OrganizationalLearningFeedback",
+                evidence_backed=True,
+                hallucination_rate_pct=0.0,
+                counterfactual_check_passed=True,
+            ),
         ]
 
         checks = [

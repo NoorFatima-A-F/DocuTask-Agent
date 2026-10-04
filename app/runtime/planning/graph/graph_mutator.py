@@ -18,6 +18,7 @@ from app.runtime.planning.graph.node import DAGNode
 
 class GraphMutationRecord(BaseModel):
     """Immutable audit record of a dynamic runtime graph mutation."""
+
     mutation_id: str = Field(default_factory=lambda: f"mut-{uuid.uuid4().hex[:8]}")
     mission_id: str
     mutation_type: str  # INSERT_NODE, REMOVE_NODE, REPLACE_SUBGRAPH, INJECT_RECOVERY

@@ -2,6 +2,7 @@
 Process State Verifier (Part 2).
 Monitors application process state (RUNNING -> BLOCKED -> ZOMBIE -> TERMINATED).
 """
+
 import os
 from app.platform_verification.liveness.domain.models import (
     ProcessStateReport,
@@ -24,10 +25,34 @@ class ProcessVerifier:
 
     def verify_processes(self) -> ProcessStateReport:
         services = [
-            {"service": "api", "pid": self.current_pid, "state": ProcessStatus.RUNNING.value, "uptime": "14h 22m", "status": "PASS"},
-            {"service": "worker", "pid": self.current_pid + 10, "state": ProcessStatus.RUNNING.value, "uptime": "14h 20m", "status": "PASS"},
-            {"service": "scheduler", "pid": self.current_pid + 20, "state": ProcessStatus.RUNNING.value, "uptime": "14h 20m", "status": "PASS"},
-            {"service": "gateway", "pid": self.current_pid + 30, "state": ProcessStatus.RUNNING.value, "uptime": "14h 22m", "status": "PASS"},
+            {
+                "service": "api",
+                "pid": self.current_pid,
+                "state": ProcessStatus.RUNNING.value,
+                "uptime": "14h 22m",
+                "status": "PASS",
+            },
+            {
+                "service": "worker",
+                "pid": self.current_pid + 10,
+                "state": ProcessStatus.RUNNING.value,
+                "uptime": "14h 20m",
+                "status": "PASS",
+            },
+            {
+                "service": "scheduler",
+                "pid": self.current_pid + 20,
+                "state": ProcessStatus.RUNNING.value,
+                "uptime": "14h 20m",
+                "status": "PASS",
+            },
+            {
+                "service": "gateway",
+                "pid": self.current_pid + 30,
+                "state": ProcessStatus.RUNNING.value,
+                "uptime": "14h 22m",
+                "status": "PASS",
+            },
         ]
 
         total = len(services)

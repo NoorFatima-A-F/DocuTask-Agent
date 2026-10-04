@@ -97,9 +97,7 @@ class ReflectionAgent:
                         defects.append(
                             f"Arithmetic mismatch: subtotal ({sub}) + tax ({tax}) = {calculated_total:.2f} != total ({tot})"
                         )
-                        recommendations.append(
-                            "Re-calculate totals or check for missing line items or shipping fees."
-                        )
+                        recommendations.append("Re-calculate totals or check for missing line items or shipping fees.")
             except (ValueError, TypeError):
                 arithmetic_score = 0.30
                 defects.append("Non-numeric values found in financial amount fields")
@@ -112,12 +110,7 @@ class ReflectionAgent:
             recommendations.append("Switch from local OCR to multimodal vision LLM for degraded document.")
 
         # Composite Score: Format (20%), Arithmetic (35%), Completeness (25%), Confidence (20%)
-        overall = (
-            0.20 * format_score
-            + 0.35 * arithmetic_score
-            + 0.25 * completeness_score
-            + 0.20 * confidence_score
-        )
+        overall = 0.20 * format_score + 0.35 * arithmetic_score + 0.25 * completeness_score + 0.20 * confidence_score
         overall = round(overall, 3)
 
         passed = (overall >= self.quality_threshold) and (len(defects) == 0)

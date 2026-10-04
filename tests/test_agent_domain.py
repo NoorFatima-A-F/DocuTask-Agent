@@ -90,14 +90,14 @@ def test_strongly_typed_results_serialization():
     artifact = ExecutionArtifact(
         artifact_type=ArtifactType.EXTRACTED_JSON,
         producer_component="DocumentAgent",
-        storage_location_uri="s3://bucket/invoice.json"
+        storage_location_uri="s3://bucket/invoice.json",
     )
 
     plan_res = PlanningResult(
         status=ResultStatus.SUCCESS,
         confidence=ConfidenceScore(value=0.99),
         duration=ExecutionDuration(duration_ms=45.0),
-        artifacts=[artifact]
+        artifacts=[artifact],
     )
 
     serialized = plan_res.model_dump_json()
@@ -139,7 +139,10 @@ def test_workflow_graph_builder_and_dag_cycle_detection():
 def test_capabilities_matching():
     """Verifies capability requirements matching."""
     req = CapabilityRequirement(required=[AgentCapability(capability_type=CapabilityType.OCR)])
-    agent_caps = [AgentCapability(capability_type=CapabilityType.OCR), AgentCapability(capability_type=CapabilityType.EXTRACTION)]
+    agent_caps = [
+        AgentCapability(capability_type=CapabilityType.OCR),
+        AgentCapability(capability_type=CapabilityType.EXTRACTION),
+    ]
 
     assert req.is_satisfied_by(agent_caps) is True
 

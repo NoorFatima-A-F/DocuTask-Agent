@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class PlanSnapshot(BaseModel):
     """Immutable point-in-time snapshot of plan graph and execution state."""
+
     snapshot_id: str
     plan_id: str
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

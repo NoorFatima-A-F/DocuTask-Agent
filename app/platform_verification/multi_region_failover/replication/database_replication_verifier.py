@@ -2,6 +2,7 @@
 Database Cross-Region Replication Verifier (Part 3G.6C).
 Validates PostgreSQL cross-region streaming replication, replication lag, and standby promotion.
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     ReplicationHealth,
     DatabaseReplicationReport,
@@ -20,13 +21,15 @@ class DatabaseReplicationVerifier(IDatabaseReplicationVerifier):
         # Measured metrics
         primary_lsn = "16/B374A080"
         replica_lsn = "16/B374A080"  # 0 byte lag at checkpoint
-        lag_seconds = 0.8           # < 5.0s SLA
+        lag_seconds = 0.8  # < 5.0s SLA
         wal_shipping = True
-        promotion_latency_sec = 12.4 # < 30.0s SLA
+        promotion_latency_sec = 12.4  # < 30.0s SLA
         data_loss_bytes = 0
 
-        health = ReplicationHealth.HEALTHY if lag_seconds < 5.0 else (
-            ReplicationHealth.DEGRADED if lag_seconds <= 30.0 else ReplicationHealth.CRITICAL
+        health = (
+            ReplicationHealth.HEALTHY
+            if lag_seconds < 5.0
+            else (ReplicationHealth.DEGRADED if lag_seconds <= 30.0 else ReplicationHealth.CRITICAL)
         )
 
         passed = (

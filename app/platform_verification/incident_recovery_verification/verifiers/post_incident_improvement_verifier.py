@@ -1,6 +1,7 @@
 """
 Phase 3H.4.9.10: Post Incident Improvement Verifier
 """
+
 from datetime import datetime, timedelta
 from ..domain.interfaces import IPostIncidentImprovementVerifier
 from ..domain.models import (
@@ -13,11 +14,23 @@ class PostIncidentImprovementVerifier(IPostIncidentImprovementVerifier):
     def generate_post_incident_review(self, incident_id: str) -> PostIncidentImprovementReport:
         now = datetime.utcnow()
         timeline = [
-            {"time": (now - timedelta(seconds=45)).isoformat(), "event": "Anomaly detected in PostgreSQL latency metric"},
-            {"time": (now - timedelta(seconds=40)).isoformat(), "event": "P1 Incident triggered and owner auto-assigned"},
+            {
+                "time": (now - timedelta(seconds=45)).isoformat(),
+                "event": "Anomaly detected in PostgreSQL latency metric",
+            },
+            {
+                "time": (now - timedelta(seconds=40)).isoformat(),
+                "event": "P1 Incident triggered and owner auto-assigned",
+            },
             {"time": (now - timedelta(seconds=35)).isoformat(), "event": "Automated recovery plan initiated"},
-            {"time": (now - timedelta(seconds=20)).isoformat(), "event": "PostgreSQL service restarted and pool refreshed"},
-            {"time": (now - timedelta(seconds=10)).isoformat(), "event": "Synthetic validation test passed (100% healthy)"},
+            {
+                "time": (now - timedelta(seconds=20)).isoformat(),
+                "event": "PostgreSQL service restarted and pool refreshed",
+            },
+            {
+                "time": (now - timedelta(seconds=10)).isoformat(),
+                "event": "Synthetic validation test passed (100% healthy)",
+            },
             {"time": now.isoformat(), "event": "Traffic restored and incident marked resolved"},
         ]
 

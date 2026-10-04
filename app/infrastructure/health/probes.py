@@ -20,6 +20,7 @@ logger = logging.getLogger("infrastructure.health.probes")
 
 class ProbeType(str, enum.Enum):
     """Six enterprise probe classifications."""
+
     STARTUP = "STARTUP"
     READINESS = "READINESS"
     LIVENESS = "LIVENESS"
@@ -30,6 +31,7 @@ class ProbeType(str, enum.Enum):
 
 class ProbeStatus(str, enum.Enum):
     """Probe execution evaluation status."""
+
     HEALTHY = "HEALTHY"
     DEGRADED = "DEGRADED"
     UNHEALTHY = "UNHEALTHY"
@@ -38,6 +40,7 @@ class ProbeStatus(str, enum.Enum):
 
 class ProbeResult(BaseModel):
     """Detailed result of a single probe evaluation."""
+
     probe_id: str
     component_id: str
     probe_type: ProbeType
@@ -51,6 +54,7 @@ class ProbeResult(BaseModel):
 
 class HealthProbe(BaseModel):
     """Configurable health probe definition."""
+
     probe_id: str
     component_id: str
     probe_type: ProbeType

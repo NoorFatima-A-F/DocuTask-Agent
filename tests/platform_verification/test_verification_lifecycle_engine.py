@@ -1,13 +1,23 @@
 import pytest
 from app.platform_verification.lifecycle import (
-    VerificationState, VerificationStateMachine, VerificationType, QualityGateRuleDefinition, VerificationSpecification,
-    VerificationPlanner, VerificationExecutionEngine, EvidenceLifecycleManager, MetricProcessingPipeline,
+    VerificationState,
+    VerificationStateMachine,
+    VerificationType,
+    QualityGateRuleDefinition,
+    VerificationSpecification,
+    VerificationPlanner,
+    VerificationExecutionEngine,
+    EvidenceLifecycleManager,
+    MetricProcessingPipeline,
     IndependentEvaluationEngine,
-    QualityGateDecision, QualityGateDecisionEngine,
-    CertificationAuthorityWorkflow, VerificationCertificate,
-    VerificationLifecycleEngineFacade
+    QualityGateDecision,
+    QualityGateDecisionEngine,
+    CertificationAuthorityWorkflow,
+    VerificationCertificate,
+    VerificationLifecycleEngineFacade,
 )
 from app.shared_kernel.exceptions import InvariantViolationError, EnvironmentNotReadyError
+
 
 class TestVerificationLifecycleStateMachine:
     def test_valid_sequential_lifecycle_transitions(self):
@@ -72,7 +82,7 @@ class TestVerificationPlanningAndReadiness:
             verification_type=VerificationType.AI_QUALITY,
             objective="Validate invoice extraction precision >= 98%",
             target_subsystem="ai_extraction",
-            target_version="2.1.0"
+            target_version="2.1.0",
         )
         plan = VerificationPlanner.plan_verification(spec)
         assert len(plan.steps) == 4
@@ -91,7 +101,7 @@ class TestExecutionEngineAndEvidence:
             verification_type=VerificationType.PERFORMANCE,
             objective="Ensure P99 latency <= 50ms",
             target_subsystem="ocr_pipeline",
-            target_version="1.0.0"
+            target_version="1.0.0",
         )
         plan = VerificationPlanner.plan_verification(spec)
         engine = VerificationExecutionEngine()
@@ -101,19 +111,14 @@ class TestExecutionEngineAndEvidence:
         assert len(session.task_results) == 4
 
         evidence_mgr = EvidenceLifecycleManager()
-        artifact = evidence_mgr.collect_and_seal(
-            session.execution_id, "step_1", "BENCHMARK_LOG", {"p99_ms": 32.5}
-        )
+        artifact = evidence_mgr.collect_and_seal(session.execution_id, "step_1", "BENCHMARK_LOG", {"p99_ms": 32.5})
         assert len(artifact.sha256_checksum) == 64
         assert evidence_mgr.verify_artifact_integrity(artifact) is True
 
 
 class TestEvaluationAndQualityGates:
     def test_metric_processing_and_gate_decisions(self):
-        samples = {
-            "accuracy": [0.98, 0.99, 0.97, 0.98, 0.98],
-            "p99_latency_ms": [40.0, 42.0, 39.0, 41.0, 40.0]
-        }
+        samples = {"accuracy": [0.98, 0.99, 0.97, 0.98, 0.98], "p99_latency_ms": [40.0, 42.0, 39.0, 41.0, 40.0]}
         metrics = MetricProcessingPipeline.process_metrics(samples)
         assert "accuracy" in metrics
         assert metrics["accuracy"].value > 0.95
@@ -126,8 +131,8 @@ class TestEvaluationAndQualityGates:
             target_version="1.0.0",
             quality_gate_rules=[
                 QualityGateRuleDefinition("accuracy", ">=", 0.95, is_hard_blocker=True),
-                QualityGateRuleDefinition("p99_latency_ms", "<=", 50.0, is_hard_blocker=True)
-            ]
+                QualityGateRuleDefinition("p99_latency_ms", "<=", 50.0, is_hard_blocker=True),
+            ],
         )
         evaluation = IndependentEvaluationEngine.evaluate(spec, metrics)
         assert evaluation.overall_passed is True
@@ -145,7 +150,7 @@ class TestCertificationAndTamperProofSignatures:
             execution_id="exec_456",
             target_subsystem="document_ocr",
             target_version="1.5.0",
-            level="ENTERPRISE_CERTIFIED"
+            level="ENTERPRISE_CERTIFIED",
         )
         assert ca.verify_certificate(cert) is True
 
@@ -158,7 +163,7 @@ class TestCertificationAndTamperProofSignatures:
             digital_signature=cert.digital_signature,
             issued_at=cert.issued_at,
             expires_at=cert.expires_at,
-            certification_level=cert.certification_level
+            certification_level=cert.certification_level,
         )
         assert ca.verify_certificate(tampered_cert) is False
 
@@ -171,7 +176,7 @@ class TestEndToEndLifecycleFacade:
             verification_type=VerificationType.AI_QUALITY,
             objective="Certify AI extraction fidelity",
             target_subsystem="ai_extraction",
-            target_version="3.0.0"
+            target_version="3.0.0",
         )
         result = facade.run_full_lifecycle(spec)
 

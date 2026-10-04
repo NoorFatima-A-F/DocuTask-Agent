@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class CertificationExecutionEnvironment(BaseModel):
     """Immutable environmental snapshot captured during certification execution."""
+
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     python_version: str
     python_executable: str
@@ -38,13 +39,23 @@ class CertificationExecutionEnvironment(BaseModel):
         branch = "main"
         is_dirty = False
         try:
-            r1 = subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(repo_root), capture_output=True, text=True, timeout=5)
+            r1 = subprocess.run(
+                ["git", "rev-parse", "HEAD"], cwd=str(repo_root), capture_output=True, text=True, timeout=5
+            )
             if r1.returncode == 0 and r1.stdout.strip():
                 commit = r1.stdout.strip()
-            r2 = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=str(repo_root), capture_output=True, text=True, timeout=5)
+            r2 = subprocess.run(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                cwd=str(repo_root),
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
             if r2.returncode == 0 and r2.stdout.strip():
                 branch = r2.stdout.strip()
-            r3 = subprocess.run(["git", "status", "--porcelain"], cwd=str(repo_root), capture_output=True, text=True, timeout=5)
+            r3 = subprocess.run(
+                ["git", "status", "--porcelain"], cwd=str(repo_root), capture_output=True, text=True, timeout=5
+            )
             if r3.returncode == 0:
                 is_dirty = len(r3.stdout.strip()) > 0
         except Exception:
@@ -54,16 +65,19 @@ class CertificationExecutionEnvironment(BaseModel):
         deps = {}
         try:
             import pydantic
+
             deps["pydantic"] = pydantic.__version__
         except Exception:
             pass
         try:
             import cryptography
+
             deps["cryptography"] = cryptography.__version__
         except Exception:
             pass
         try:
             import pytest
+
             deps["pytest"] = pytest.__version__
         except Exception:
             pass
@@ -71,7 +85,7 @@ class CertificationExecutionEnvironment(BaseModel):
         node = platform.node()
         host_hash = hashlib.sha256(node.encode("utf-8")).hexdigest()[:16]
         now_iso = datetime.now(timezone.utc).isoformat()
-        
+
         env_raw = f"{platform.python_version()}:{platform.system()}:{platform.release()}:{platform.machine()}:{commit}"
         env_hash = hashlib.sha256(env_raw.encode("utf-8")).hexdigest()
 

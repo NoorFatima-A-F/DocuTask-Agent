@@ -104,7 +104,7 @@ class ClassificationVerifier:
     def _verify_unknown_doc_detection(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
         confidence_threshold = 0.65
-        
+
         # Classifier gives low confidence to unknown text
         predicted_confidence = 0.22
         is_unknown = predicted_confidence < confidence_threshold
@@ -153,7 +153,12 @@ class ClassificationVerifier:
         if curr_pages:
             subdocs.append({"type": curr_type, "pages": curr_pages})
 
-        passed = len(subdocs) == 3 and subdocs[0]["pages"] == [1, 2, 3] and subdocs[1]["pages"] == [4] and subdocs[2]["pages"] == [5, 6, 7]
+        passed = (
+            len(subdocs) == 3
+            and subdocs[0]["pages"] == [1, 2, 3]
+            and subdocs[1]["pages"] == [4]
+            and subdocs[2]["pages"] == [5, 6, 7]
+        )
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 
         return {

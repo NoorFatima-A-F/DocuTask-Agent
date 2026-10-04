@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11.11: Certification Decision Engine
 """
+
 from typing import List
 from ..domain.interfaces import ICertificationDecisionEngine
 from ..domain.models import (

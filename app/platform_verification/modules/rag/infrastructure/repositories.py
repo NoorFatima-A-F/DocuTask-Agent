@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Rag.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.rag.domain.models import RagEntity
 from app.platform_verification.modules.rag.domain.interfaces import RagRepositoryInterface
+
 
 class InMemoryRagRepository(RagRepositoryInterface):
     def __init__(self):

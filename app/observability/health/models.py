@@ -22,6 +22,7 @@ class HealthLevel(str, Enum):
 @dataclass
 class HealthCheckResult:
     """Result of an individual subsystem health check."""
+
     name: str
     level: HealthLevel = HealthLevel.SERVICE
     status: HealthStatus = HealthStatus.HEALTHY
@@ -45,6 +46,7 @@ class HealthCheckResult:
 @dataclass
 class PlatformHealthReport:
     """Aggregate platform health report with live/ready/startup evaluation."""
+
     status: HealthStatus
     uptime_seconds: float
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))

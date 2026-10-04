@@ -2,6 +2,7 @@
 Integrity Analyzer for Backup Certification Framework (Part 3G.2G).
 Validates cryptographic checksums, zero bit-rot corruption, and digital signature authenticity.
 """
+
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     IntegrityEvaluation,
@@ -28,12 +29,7 @@ class IntegrityAnalyzer(IIntegrityAnalyzer):
         bit_flip_resilience = integ.get("one_byte_bit_flip_detected", True)
         sig_valid = integ.get("passed", True)
 
-        passed = (
-            checksum_val == "PASS"
-            and not corruption
-            and bit_flip_resilience
-            and sig_valid
-        )
+        passed = checksum_val == "PASS" and not corruption and bit_flip_resilience and sig_valid
 
         integrity_score = 100.0 if passed else 40.0
 

@@ -166,10 +166,7 @@ class CrossServiceVerifier:
         except Exception:
             pipeline_status["core_flow"] = "FAILED"
 
-        passed = (
-            pipeline_status["core_flow"] == "SUCCESS"
-            and pipeline_status["analytics_hook"] == "DEGRADED_ISOLATED"
-        )
+        passed = pipeline_status["core_flow"] == "SUCCESS" and pipeline_status["analytics_hook"] == "DEGRADED_ISOLATED"
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 
         return {

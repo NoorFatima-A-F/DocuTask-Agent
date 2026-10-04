@@ -54,7 +54,7 @@ class ResourceUtilizationVerifier(IResourceUtilizationVerifier):
             CheckResult(
                 name="Memory Usage Under 80% of Allocation",
                 passed=memory_mb < 2048.0 * 0.8,
-                details=f"Memory consumption: {memory_mb}MB of 2048MB allocation ({memory_mb/2048*100:.1f}%)",
+                details=f"Memory consumption: {memory_mb}MB of 2048MB allocation ({memory_mb / 2048 * 100:.1f}%)",
                 metrics={"memory_mb": memory_mb, "allocation_mb": 2048.0},
             ),
             CheckResult(

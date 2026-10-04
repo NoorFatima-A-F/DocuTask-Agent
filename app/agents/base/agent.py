@@ -40,7 +40,7 @@ class BaseAgent(ABC):
         event_bus: AgentEventBus | None = None,
         metrics_collector: AgentMetricsCollector | None = None,
         observability_hook: AgentObservabilityHook | None = None,
-        agent_name: str = "BaseAgent"
+        agent_name: str = "BaseAgent",
     ):
         self.config = config
         self.event_bus = event_bus
@@ -69,7 +69,7 @@ class BaseAgent(ABC):
                 GoalReceivedEvent(
                     execution_id=str(context.metadata.execution_id),
                     document_id=str(context.document_id),
-                    payload={"goal": goal_statement}
+                    payload={"goal": goal_statement},
                 )
             )
         return context.with_history_entry("GOAL_RECEIVED", {"goal": goal_statement})
@@ -83,7 +83,7 @@ class BaseAgent(ABC):
                 PlanningStartedEvent(
                     execution_id=str(context.metadata.execution_id),
                     document_id=str(context.document_id),
-                    payload={"goal": goal_statement}
+                    payload={"goal": goal_statement},
                 )
             )
         plan_result = await self._do_plan(goal_statement, context)
@@ -92,7 +92,7 @@ class BaseAgent(ABC):
                 PlanningCompletedEvent(
                     execution_id=str(context.metadata.execution_id),
                     document_id=str(context.document_id),
-                    payload=plan_result
+                    payload=plan_result,
                 )
             )
         return plan_result
@@ -104,9 +104,7 @@ class BaseAgent(ABC):
         if self.event_bus:
             await self.event_bus.publish(
                 ExecutionStartedEvent(
-                    execution_id=str(context.metadata.execution_id),
-                    document_id=str(context.document_id),
-                    payload=plan
+                    execution_id=str(context.metadata.execution_id), document_id=str(context.document_id), payload=plan
                 )
             )
         exec_result = await self._do_execute(plan, context)
@@ -115,7 +113,7 @@ class BaseAgent(ABC):
                 ExecutionCompletedEvent(
                     execution_id=str(context.metadata.execution_id),
                     document_id=str(context.document_id),
-                    payload=exec_result
+                    payload=exec_result,
                 )
             )
         return exec_result
@@ -130,7 +128,7 @@ class BaseAgent(ABC):
                 ObservationCompletedEvent(
                     execution_id=str(context.metadata.execution_id),
                     document_id=str(context.document_id),
-                    payload=obs_result
+                    payload=obs_result,
                 )
             )
         return obs_result
@@ -144,7 +142,7 @@ class BaseAgent(ABC):
                 ReflectionStartedEvent(
                     execution_id=str(context.metadata.execution_id),
                     document_id=str(context.document_id),
-                    payload=observation
+                    payload=observation,
                 )
             )
         return await self._do_reflect(observation, context)
@@ -157,8 +155,7 @@ class BaseAgent(ABC):
         if self.event_bus:
             await self.event_bus.publish(
                 AgentCompletedEvent(
-                    execution_id=str(context.metadata.execution_id),
-                    document_id=str(context.document_id)
+                    execution_id=str(context.metadata.execution_id), document_id=str(context.document_id)
                 )
             )
         return context.with_history_entry("COMPLETED", {"status": "SUCCESS"})
@@ -188,7 +185,7 @@ class BaseAgent(ABC):
                 "plan": plan_res,
                 "execution": exec_res,
                 "observation": obs_res,
-                "reflection": refl_res
+                "reflection": refl_res,
             }
         except Exception as exc:
             self.metrics.increment_failures(self.agent_name, str(exc))
@@ -199,7 +196,7 @@ class BaseAgent(ABC):
                     AgentFailedEvent(
                         execution_id=str(context.metadata.execution_id),
                         document_id=str(context.document_id),
-                        payload={"error": str(exc)}
+                        payload={"error": str(exc)},
                     )
                 )
             raise AgentException(f"Agent execution failed: {str(exc)}") from exc

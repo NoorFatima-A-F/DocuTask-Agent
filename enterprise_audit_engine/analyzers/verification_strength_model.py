@@ -82,15 +82,21 @@ class VerificationStrengthModel:
         if total_score >= 90.0:
             classification = EvidenceClassification.VERIFIED_BY_EXECUTION
             confidence = EvidenceConfidence.VERY_HIGH
-            justification = "Subsystem fully proven through static analysis, automated testing, and live runtime execution."
+            justification = (
+                "Subsystem fully proven through static analysis, automated testing, and live runtime execution."
+            )
         elif total_score >= 70.0:
             classification = EvidenceClassification.VERIFIED
             confidence = EvidenceConfidence.HIGH
-            justification = "Subsystem verified through static source analysis, automated test execution, and configuration."
+            justification = (
+                "Subsystem verified through static source analysis, automated test execution, and configuration."
+            )
         elif total_score >= 40.0:
             classification = EvidenceClassification.PARTIALLY_VERIFIED
             confidence = EvidenceConfidence.MEDIUM
-            justification = "Subsystem has static evidence and configuration, but lacks complete test or runtime execution proof."
+            justification = (
+                "Subsystem has static evidence and configuration, but lacks complete test or runtime execution proof."
+            )
         else:
             classification = EvidenceClassification.EVIDENCE_INSUFFICIENT
             confidence = EvidenceConfidence.LOW

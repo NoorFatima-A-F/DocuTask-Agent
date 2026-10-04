@@ -33,12 +33,14 @@ class RootCauseAnalyzer:
         path = []
         curr = fault_ev
         while curr:
-            path.append({
-                "event_id": curr.get("event_id"),
-                "event_type": curr.get("event_type"),
-                "timestamp": curr.get("timestamp"),
-                "payload": curr.get("payload", {}),
-            })
+            path.append(
+                {
+                    "event_id": curr.get("event_id"),
+                    "event_type": curr.get("event_type"),
+                    "timestamp": curr.get("timestamp"),
+                    "payload": curr.get("payload", {}),
+                }
+            )
             parent_id = curr.get("causation_id")
             curr = event_map.get(parent_id) if parent_id else None
 

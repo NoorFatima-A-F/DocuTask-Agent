@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class WorkflowState(BaseModel):
     """Dynamic state container updated as workflow progresses."""
+
     variables: Dict[str, Any] = Field(default_factory=dict)
     completed_nodes: List[str] = Field(default_factory=list)
     failed_nodes: List[str] = Field(default_factory=list)
@@ -25,11 +26,9 @@ class WorkflowState(BaseModel):
         new_outputs = dict(self.node_outputs)
         if output is not None:
             new_outputs[node_id] = output
-        return self.model_copy(update={
-            "completed_nodes": new_comp,
-            "node_outputs": new_outputs,
-            "version": self.version + 1
-        })
+        return self.model_copy(
+            update={"completed_nodes": new_comp, "node_outputs": new_outputs, "version": self.version + 1}
+        )
 
     def mark_node_completed(self, node_id: str, output: Any = None) -> "WorkflowState":
         return self.record_node_completion(node_id, output)

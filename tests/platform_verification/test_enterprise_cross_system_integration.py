@@ -61,6 +61,7 @@ def api_client():
 
 # --- 1. Verifier Unit Tests (Parts A to V) ---
 
+
 def test_part_a_dependency_mapping():
     verifier = DependencyMappingVerifier()
     report = verifier.verify()
@@ -285,6 +286,7 @@ def test_part_v_evidence_generation():
 
 # --- 2. Scoring & Certification Tests ---
 
+
 def test_integration_quality_scorer():
     runtime = CrossSystemIntegrationVerificationRuntime()
     reports = {k: v.verify() for k, v in runtime.verifiers.items()}
@@ -302,6 +304,7 @@ def test_integration_quality_scorer():
 
 
 # --- 3. Exporter & SHA-256 Manifest Tests ---
+
 
 def test_integration_quality_exporter(tmp_output_dir):
     runtime = CrossSystemIntegrationVerificationRuntime()
@@ -325,6 +328,7 @@ def test_integration_quality_exporter(tmp_output_dir):
 
 # --- 4. Master Synchronous Runtime Tests ---
 
+
 def test_runtime_execution(tmp_output_dir):
     runtime = CrossSystemIntegrationVerificationRuntime()
     report = runtime.execute_all(output_dir=tmp_output_dir)
@@ -336,6 +340,7 @@ def test_runtime_execution(tmp_output_dir):
 
 
 # --- 5. FastAPI REST API Endpoint Tests ---
+
 
 def test_api_health(api_client):
     res = api_client.get("/api/v1/verification/cross-system-integration/health")

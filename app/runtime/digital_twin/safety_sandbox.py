@@ -68,14 +68,18 @@ class SafetySandbox:
 
             if is_mutation:
                 # Intercept destructive operations
-                record.intercepted_mutations.append({
-                    "action_type": action_type,
-                    "target": action.get("target", "DB/FILE"),
-                    "payload_preview": str(action.get("payload", {}))[:100],
-                    "blocked_at": time.time(),
-                })
+                record.intercepted_mutations.append(
+                    {
+                        "action_type": action_type,
+                        "target": action.get("target", "DB/FILE"),
+                        "payload_preview": str(action.get("payload", {}))[:100],
+                        "blocked_at": time.time(),
+                    }
+                )
                 # Apply strictly to virtual state
-                record.virtual_state[action.get("key", f"var_{len(record.virtual_state)}")] = action.get("value", "mocked_value")
+                record.virtual_state[action.get("key", f"var_{len(record.virtual_state)}")] = action.get(
+                    "value", "mocked_value"
+                )
             else:
                 record.virtual_state[action.get("key", f"read_{len(record.virtual_state)}")] = "read_success"
 

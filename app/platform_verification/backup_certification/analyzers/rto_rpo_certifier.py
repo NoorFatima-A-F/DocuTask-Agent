@@ -2,6 +2,7 @@
 RTO and RPO Certification Engine for Backup Certification Framework (Part 3G.2G).
 Validates Recovery Time Objective (RTO) and Recovery Point Objective (RPO) thresholds.
 """
+
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
     RTORPOCertification,
@@ -29,10 +30,20 @@ class RTORPOCertifier(IRTORPOCertifier):
         measured_rto = float(restore_info.get("measured_rto_minutes", 7.0))
         measured_rpo = float(restore_info.get("measured_rpo_minutes", 2.5))
 
-        rto_status = "OPTIMAL_WITHIN_TARGET" if measured_rto <= self.TARGET_RTO_MINUTES else ("ACCEPTABLE" if measured_rto <= self.MAX_ALLOWED_RTO_MINUTES else "BREACHED")
-        rpo_status = "OPTIMAL_WITHIN_TARGET" if measured_rpo <= self.TARGET_RPO_MINUTES else ("ACCEPTABLE" if measured_rpo <= self.MAX_ALLOWED_RPO_MINUTES else "BREACHED")
+        rto_status = (
+            "OPTIMAL_WITHIN_TARGET"
+            if measured_rto <= self.TARGET_RTO_MINUTES
+            else ("ACCEPTABLE" if measured_rto <= self.MAX_ALLOWED_RTO_MINUTES else "BREACHED")
+        )
+        rpo_status = (
+            "OPTIMAL_WITHIN_TARGET"
+            if measured_rpo <= self.TARGET_RPO_MINUTES
+            else ("ACCEPTABLE" if measured_rpo <= self.MAX_ALLOWED_RPO_MINUTES else "BREACHED")
+        )
 
-        passed = (rto_status in ["OPTIMAL_WITHIN_TARGET", "ACCEPTABLE"]) and (rpo_status in ["OPTIMAL_WITHIN_TARGET", "ACCEPTABLE"])
+        passed = (rto_status in ["OPTIMAL_WITHIN_TARGET", "ACCEPTABLE"]) and (
+            rpo_status in ["OPTIMAL_WITHIN_TARGET", "ACCEPTABLE"]
+        )
 
         details = {
             "measured_rto_minutes": measured_rto,

@@ -97,7 +97,12 @@ class UATFrameworkVerifier:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"operator_uat_score": operator_score, "manager_uat_score": manager_score, "executive_uat_score": exec_score, "overall_uat_pct": aggregate_uat_score},
+            metrics={
+                "operator_uat_score": operator_score,
+                "manager_uat_score": manager_score,
+                "executive_uat_score": exec_score,
+                "overall_uat_pct": aggregate_uat_score,
+            },
             execution_time_ms=elapsed_ms,
         )
 

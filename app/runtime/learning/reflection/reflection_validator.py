@@ -24,7 +24,7 @@ class ReflectionValidator:
         errors = []
         if not getattr(report, "mission_id", None):
             errors.append("Missing mission_id in reflection report")
-        
+
         kpis = getattr(report, "macro_kpis", None)
         if kpis and getattr(kpis, "throughput_tasks_per_sec", 0) <= 0:
             errors.append("Invalid throughput metric in reflection report")

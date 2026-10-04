@@ -21,13 +21,34 @@ class TaskDecompositionEngine:
         nodes_def = [
             ("node_ocr_01", "OCR Document Ingestion", TaskNodeType.PARALLEL, "worker-ocr-01", 120.0, 0.0006),
             ("node_ocr_02", "OCR Table Segmentation", TaskNodeType.PARALLEL, "worker-ocr-02", 140.0, 0.0006),
-            ("node_extract_fields", "Extract Invoice Fields", TaskNodeType.SEQUENTIAL, "worker-extract-01", 200.0, 0.0010),
+            (
+                "node_extract_fields",
+                "Extract Invoice Fields",
+                TaskNodeType.SEQUENTIAL,
+                "worker-extract-01",
+                200.0,
+                0.0010,
+            ),
             ("node_normalize_schema", "Normalize Schema", TaskNodeType.SEQUENTIAL, "worker-extract-01", 80.0, 0.0003),
             ("node_cross_validation", "Cross Validation", TaskNodeType.PARALLEL, "worker-validate-01", 110.0, 0.0004),
-            ("node_evidence_verification", "Evidence Verification", TaskNodeType.PARALLEL, "worker-validate-01", 90.0, 0.0003),
+            (
+                "node_evidence_verification",
+                "Evidence Verification",
+                TaskNodeType.PARALLEL,
+                "worker-validate-01",
+                90.0,
+                0.0003,
+            ),
             ("node_memory_lookup", "Memory Retrieval", TaskNodeType.SEQUENTIAL, "worker-memory-01", 60.0, 0.0002),
             ("node_trust_update", "Trust Ledger Update", TaskNodeType.JOIN, "worker-trust-01", 70.0, 0.0002),
-            ("node_persistence", "Final Output Persistence", TaskNodeType.SEQUENTIAL, "worker-storage-01", 50.0, 0.0001),
+            (
+                "node_persistence",
+                "Final Output Persistence",
+                TaskNodeType.SEQUENTIAL,
+                "worker-storage-01",
+                50.0,
+                0.0001,
+            ),
         ]
 
         nodes: List[PlannerDAGNode] = []

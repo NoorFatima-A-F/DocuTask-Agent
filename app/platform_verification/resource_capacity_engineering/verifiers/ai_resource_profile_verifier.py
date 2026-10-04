@@ -34,10 +34,30 @@ class AIResourceProfileVerifier(IAIResourceProfileVerifier):
 
     def verify(self) -> AIResourceProfileReport:
         stages = [
-            AIPipelineStageCost(stage_name="OCR Rasterization", processing_time_ms=240.0, percentage_of_total=22.3, resource_bottleneck=False),
-            AIPipelineStageCost(stage_name="Document Embedding", processing_time_ms=30.0, percentage_of_total=2.8, resource_bottleneck=False),
-            AIPipelineStageCost(stage_name="Gemini LLM Inference", processing_time_ms=750.0, percentage_of_total=69.8, resource_bottleneck=True),
-            AIPipelineStageCost(stage_name="Schema & Confidence Validation", processing_time_ms=55.0, percentage_of_total=5.1, resource_bottleneck=False),
+            AIPipelineStageCost(
+                stage_name="OCR Rasterization",
+                processing_time_ms=240.0,
+                percentage_of_total=22.3,
+                resource_bottleneck=False,
+            ),
+            AIPipelineStageCost(
+                stage_name="Document Embedding",
+                processing_time_ms=30.0,
+                percentage_of_total=2.8,
+                resource_bottleneck=False,
+            ),
+            AIPipelineStageCost(
+                stage_name="Gemini LLM Inference",
+                processing_time_ms=750.0,
+                percentage_of_total=69.8,
+                resource_bottleneck=True,
+            ),
+            AIPipelineStageCost(
+                stage_name="Schema & Confidence Validation",
+                processing_time_ms=55.0,
+                percentage_of_total=5.1,
+                resource_bottleneck=False,
+            ),
         ]
 
         total_time = sum(s.processing_time_ms for s in stages)
@@ -52,7 +72,8 @@ class AIResourceProfileVerifier(IAIResourceProfileVerifier):
             ),
             CheckResult(
                 name="Primary Bottleneck Pinpointed (Gemini LLM API: 69.8%)",
-                passed=bottleneck_stage.stage_name == "Gemini LLM Inference" and bottleneck_stage.percentage_of_total > 50.0,
+                passed=bottleneck_stage.stage_name == "Gemini LLM Inference"
+                and bottleneck_stage.percentage_of_total > 50.0,
                 details=f"Identified {bottleneck_stage.stage_name} as primary latency component ({bottleneck_stage.processing_time_ms}ms, {bottleneck_stage.percentage_of_total}%)",
                 metrics={"bottleneck": "gemini_api", "percentage": bottleneck_stage.percentage_of_total},
             ),

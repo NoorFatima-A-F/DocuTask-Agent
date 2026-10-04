@@ -84,11 +84,19 @@ class ConnectorRegistry:
 
         if category:
             cat_val = category.value if isinstance(category, ConnectorCategory) else str(category)
-            results = [c for c in results if (c.category.value if isinstance(c.category, ConnectorCategory) else str(c.category)) == cat_val]
+            results = [
+                c
+                for c in results
+                if (c.category.value if isinstance(c.category, ConnectorCategory) else str(c.category)) == cat_val
+            ]
 
         if status:
             stat_val = status.value if isinstance(status, ConnectorStatus) else str(status)
-            results = [c for c in results if (c.status.value if isinstance(c.status, ConnectorStatus) else str(c.status)) == stat_val]
+            results = [
+                c
+                for c in results
+                if (c.status.value if isinstance(c.status, ConnectorStatus) else str(c.status)) == stat_val
+            ]
 
         if healthy_only:
             results = [c for c in results if c.health == ConnectorHealth.HEALTHY]

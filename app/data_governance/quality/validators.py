@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 class QualityValidationResult(BaseModel):
     """Result from a specific quality check."""
+
     dimension: str  # COMPLETENESS, ACCURACY, CONSISTENCY, FRESHNESS, VALIDITY
     is_passed: bool
     score: float  # 0.0 to 1.0
@@ -40,10 +41,14 @@ class DataQualityValidators:
         age_days = (now - record_timestamp).total_seconds() / 86400.0
         if age_days <= max_age_days:
             score = 1.0 - (age_days / max_age_days * 0.3)  # Score between 0.7 and 1.0
-            return QualityValidationResult(dimension="FRESHNESS", is_passed=True, score=score, details=f"Age: {age_days:.1f} days")
+            return QualityValidationResult(
+                dimension="FRESHNESS", is_passed=True, score=score, details=f"Age: {age_days:.1f} days"
+            )
         else:
             score = max(0.0, 1.0 - (age_days / (max_age_days * 3)))
-            return QualityValidationResult(dimension="FRESHNESS", is_passed=False, score=score, details=f"Data is stale: {age_days:.1f} days old")
+            return QualityValidationResult(
+                dimension="FRESHNESS", is_passed=False, score=score, details=f"Data is stale: {age_days:.1f} days old"
+            )
 
     @staticmethod
     def validate_validity(record: Dict[str, Any], schema_types: Dict[str, type]) -> QualityValidationResult:

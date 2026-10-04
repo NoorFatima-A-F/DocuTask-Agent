@@ -7,6 +7,7 @@ Automates the 4 governance review cadences:
 - Annual Executive Certification
 And provides the CI/CD Deployment Resilience Gate.
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, Any, List
@@ -171,7 +172,9 @@ class ScheduledReviewEngine:
 
         # 2. Policy check
         if not policy_report.passed or not policy_report.all_policies_enforced:
-            blocking_reasons.append("CI/CD Gate Blocked: One or more disaster recovery policies are not fully enforced.")
+            blocking_reasons.append(
+                "CI/CD Gate Blocked: One or more disaster recovery policies are not fully enforced."
+            )
 
         # 3. Change impact check
         if not change_impact_report.passed or change_impact_report.uncovered_dependencies_count > 0:

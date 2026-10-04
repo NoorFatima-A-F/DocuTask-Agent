@@ -19,10 +19,22 @@ class RootCauseAnalyzer(IRootCauseAnalyzer):
     def analyze_incident(self, incident_id: str = "INC-202609-001") -> RootCauseAnalysisReport:
         timeline: List[Dict[str, str]] = [
             {"time": "2026-09-14T08:11:45Z", "event": "Batch upload of 500 documents initiated via bulk API endpoint."},
-            {"time": "2026-09-14T08:12:00Z", "event": "Redis queue depth exceeded 300 tasks threshold; latency warning triggered."},
-            {"time": "2026-09-14T08:12:05Z", "event": "Auto-remediation engine triggered worker scaling from 4 to 8 replicas."},
-            {"time": "2026-09-14T08:12:30Z", "event": "8 worker replicas actively consuming tasks; processing rate reached 450 tasks/min."},
-            {"time": "2026-09-14T08:12:45Z", "event": "Queue backlog completely drained (depth = 12); P95 latency normalized to 142ms."},
+            {
+                "time": "2026-09-14T08:12:00Z",
+                "event": "Redis queue depth exceeded 300 tasks threshold; latency warning triggered.",
+            },
+            {
+                "time": "2026-09-14T08:12:05Z",
+                "event": "Auto-remediation engine triggered worker scaling from 4 to 8 replicas.",
+            },
+            {
+                "time": "2026-09-14T08:12:30Z",
+                "event": "8 worker replicas actively consuming tasks; processing rate reached 450 tasks/min.",
+            },
+            {
+                "time": "2026-09-14T08:12:45Z",
+                "event": "Queue backlog completely drained (depth = 12); P95 latency normalized to 142ms.",
+            },
         ]
 
         hypotheses: List[RootCauseHypothesis] = [

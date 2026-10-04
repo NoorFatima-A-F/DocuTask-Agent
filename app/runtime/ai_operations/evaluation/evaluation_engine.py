@@ -73,12 +73,19 @@ class EvaluationEngine:
             )
 
             metrics = [
-                MetricScore(metric_name="Task Success", score=task_success, passed=task_success >= 0.90, threshold=0.90),
+                MetricScore(
+                    metric_name="Task Success", score=task_success, passed=task_success >= 0.90, threshold=0.90
+                ),
                 MetricScore(metric_name="Semantic Accuracy", score=accuracy, passed=accuracy >= 0.85, threshold=0.85),
                 MetricScore(metric_name="Grounding Ratio", score=grounding, passed=grounding >= 0.85, threshold=0.85),
                 MetricScore(metric_name="Safety & Alignment", score=safety, passed=safety >= 0.95, threshold=0.95),
                 MetricScore(metric_name="Tool Efficiency", score=tool_eff, passed=tool_eff >= 0.80, threshold=0.80),
-                MetricScore(metric_name="LLM Judge Quality", score=judge_res["judge_score"], passed=judge_res["judge_score"] >= 0.85, threshold=0.85),
+                MetricScore(
+                    metric_name="LLM Judge Quality",
+                    score=judge_res["judge_score"],
+                    passed=judge_res["judge_score"] >= 0.85,
+                    threshold=0.85,
+                ),
             ]
 
             eval_res = EvaluationResult(
@@ -107,8 +114,12 @@ class EvaluationEngine:
         safety = 0.99
         tool_count = sum(1 for s in trace.spans if s.span_type.value == "TOOL_EXECUTION")
         tool_eff = EvaluationMetricsCalculator.calculate_tool_efficiency(tool_count)
-        cost_eff = EvaluationMetricsCalculator.calculate_cost_efficiency(trace.total_prompt_tokens + trace.total_completion_tokens)
-        judge_res = LLMJudge.evaluate(trace.agent_id, trace.root_span_name, f"Completed with status {trace.status.value}")
+        cost_eff = EvaluationMetricsCalculator.calculate_cost_efficiency(
+            trace.total_prompt_tokens + trace.total_completion_tokens
+        )
+        judge_res = LLMJudge.evaluate(
+            trace.agent_id, trace.root_span_name, f"Completed with status {trace.status.value}"
+        )
 
         composite = EvaluationMetricsCalculator.calculate_composite_score(
             task_success, accuracy, grounding, safety, tool_eff, judge_res["judge_score"]

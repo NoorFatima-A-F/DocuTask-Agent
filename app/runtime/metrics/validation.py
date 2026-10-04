@@ -94,13 +94,13 @@ class MetricValidator:
         empirical_ci_coverage = float(ci_coverage_hits) / float(trials)
 
         mean_bias = abs(empirical_mean_of_means - true_mean)
-        var_bias = abs(empirical_mean_of_vars - (true_stdev ** 2))
+        var_bias = abs(empirical_mean_of_vars - (true_stdev**2))
 
         return {
             "trials": trials,
             "sample_size": sample_size,
             "true_mean": true_mean,
-            "true_variance": true_stdev ** 2,
+            "true_variance": true_stdev**2,
             "empirical_mean": empirical_mean_of_means,
             "empirical_variance": empirical_mean_of_vars,
             "mean_bias": mean_bias,

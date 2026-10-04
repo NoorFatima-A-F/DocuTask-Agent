@@ -12,6 +12,7 @@ from ..control_plane.registry import NetworkPolicyType, ZeroTrustAction
 @dataclass
 class NetworkPolicyRule:
     """Ingress or Egress rule definition."""
+
     rule_id: str
     direction: NetworkPolicyType = NetworkPolicyType.INGRESS
     allowed_namespaces: List[str] = field(default_factory=lambda: ["*"])
@@ -25,11 +26,14 @@ class NetworkPolicyRule:
 @dataclass
 class NetworkPolicy:
     """A scoped Network Policy document."""
+
     policy_id: str
     name: str
     target_service: str  # or "*"
     namespace: str = "default"
-    policy_types: List[NetworkPolicyType] = field(default_factory=lambda: [NetworkPolicyType.INGRESS, NetworkPolicyType.EGRESS])
+    policy_types: List[NetworkPolicyType] = field(
+        default_factory=lambda: [NetworkPolicyType.INGRESS, NetworkPolicyType.EGRESS]
+    )
     ingress_rules: List[NetworkPolicyRule] = field(default_factory=list)
     egress_rules: List[NetworkPolicyRule] = field(default_factory=list)
     is_active: bool = True
@@ -71,7 +75,8 @@ class NetworkPolicyEngine:
         """Evaluate whether traffic is allowed by network policies."""
         with self._lock:
             applicable = [
-                p for p in self._policies.values()
+                p
+                for p in self._policies.values()
                 if p.is_active and (p.target_service in ("*", dest_service)) and p.namespace in ("*", dest_namespace)
             ]
 

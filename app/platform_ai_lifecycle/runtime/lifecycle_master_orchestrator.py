@@ -45,8 +45,17 @@ class LifecycleMasterOrchestrator:
     def get_overview(self) -> LifecycleOverview:
         agents = self.registry.list_agents()
         deployed = len([a for a in agents if a.lifecycle_state == AgentLifecycleState.DEPLOYED])
-        in_review = len([a for a in agents if a.lifecycle_state in (AgentLifecycleState.TESTING, AgentLifecycleState.SECURITY_REVIEW, AgentLifecycleState.DEVELOPMENT)])
-        retired = len([a for a in agents if a.lifecycle_state in (AgentLifecycleState.DEPRECATED, AgentLifecycleState.RETIRED)])
+        in_review = len(
+            [
+                a
+                for a in agents
+                if a.lifecycle_state
+                in (AgentLifecycleState.TESTING, AgentLifecycleState.SECURITY_REVIEW, AgentLifecycleState.DEVELOPMENT)
+            ]
+        )
+        retired = len(
+            [a for a in agents if a.lifecycle_state in (AgentLifecycleState.DEPRECATED, AgentLifecycleState.RETIRED)]
+        )
         return self.analytics.compute_overview(
             total_agents=len(agents),
             deployed_agents=deployed,
@@ -81,7 +90,7 @@ class LifecycleMasterOrchestrator:
             owner_email=owner_email,
             description=f"Automated release for {name}",
         )
-        
+
         # 2. Commit Version v1.0.0
         version = self.versioning.create_version(
             agent_id=agent.agent_id,
@@ -91,15 +100,15 @@ class LifecycleMasterOrchestrator:
             connectors=connectors,
             changelog="Automated production release pipeline",
         )
-        
+
         # 3. Run Testing Harness
         self.registry.update_lifecycle_state(agent.agent_id, AgentLifecycleState.TESTING)
         test_res = self.testing.run_comprehensive_test_suite(agent.agent_id, version.version_tag)
-        
+
         # 4. Security Scan
         self.registry.update_lifecycle_state(agent.agent_id, AgentLifecycleState.SECURITY_REVIEW)
         sec_res = self.security.scan_agent_version(agent.agent_id, version.version_tag, system_prompt, tools)
-        
+
         # 5. Submit and auto-approve if test & security pass
         appr = self.approvals.submit_for_approval(agent.agent_id, version.version_tag, owner_id, owner_email)
         if test_res.status == "PASSED" and sec_res.security_score >= 80:
@@ -112,7 +121,7 @@ class LifecycleMasterOrchestrator:
                 comments="Automated CI/CD security and quality thresholds satisfied.",
             )
             self.registry.update_lifecycle_state(agent.agent_id, AgentLifecycleState.APPROVED)
-        
+
         # 6. Deploy to Production
         deploy_res = self.deployment.deploy_agent_version(
             agent_id=agent.agent_id,
@@ -122,7 +131,7 @@ class LifecycleMasterOrchestrator:
             traffic_weight_pct=100,
         )
         self.registry.update_lifecycle_state(agent.agent_id, AgentLifecycleState.DEPLOYED)
-        
+
         # 7. Audit log
         self.governance.log_lifecycle_audit_event(
             tenant_id=tenant_id,

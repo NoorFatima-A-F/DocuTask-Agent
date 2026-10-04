@@ -20,6 +20,7 @@ class ResourceType(str, Enum):
 @dataclass
 class ResourceQuota:
     """Resource quota for a tenant or workspace."""
+
     tenant_id: str
     resource_type: ResourceType
     limit: float
@@ -31,6 +32,7 @@ class ResourceQuota:
 @dataclass
 class ResourceUsage:
     """Current resource consumption."""
+
     tenant_id: str
     resource_type: ResourceType
     current_usage: float = 0.0

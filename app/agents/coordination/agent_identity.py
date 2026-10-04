@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class AgentIdentity(BaseModel):
     """Immutable identity identifying an autonomous agent instance, role, and version."""
+
     agent_id: UUID = Field(default_factory=uuid4)
     name: str
     role: str = Field(default="worker")  # supervisor, planner, worker, critic, specialist

@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class CommunicationPattern(str, Enum):
     """Message delivery patterns."""
+
     REQUEST_REPLY = "REQUEST_REPLY"
     BROADCAST = "BROADCAST"
     PUBLISH_SUBSCRIBE = "PUBLISH_SUBSCRIBE"
@@ -21,6 +22,7 @@ class CommunicationPattern(str, Enum):
 
 class MessagePerformative(str, Enum):
     """FIPA-ACL compliant communicative acts."""
+
     INFORM = "INFORM"
     REQUEST = "REQUEST"
     PROPOSE = "PROPOSE"
@@ -34,6 +36,7 @@ class MessagePerformative(str, Enum):
 
 class AgentMessage(BaseModel):
     """Structured message exchanged between autonomous agents."""
+
     message_id: UUID = Field(default_factory=uuid4)
     sender_id: UUID
     recipient_id: Optional[UUID] = None  # None indicates broadcast

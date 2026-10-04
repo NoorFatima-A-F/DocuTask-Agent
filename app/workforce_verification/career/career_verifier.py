@@ -86,7 +86,9 @@ class CareerVerifier:
         t0 = time.perf_counter()
         # Criteria for promotion from WORKER to SPECIALIST: > 1,000 tasks completed, > 98% accuracy, 0 security flags
         candidate = {"tasks_completed": 1250, "accuracy": 0.992, "security_flags": 0}
-        eligible = candidate["tasks_completed"] >= 1000 and candidate["accuracy"] >= 0.98 and candidate["security_flags"] == 0
+        eligible = (
+            candidate["tasks_completed"] >= 1000 and candidate["accuracy"] >= 0.98 and candidate["security_flags"] == 0
+        )
 
         passed = eligible
         t_ms = (time.perf_counter() - t0) * 1000.0

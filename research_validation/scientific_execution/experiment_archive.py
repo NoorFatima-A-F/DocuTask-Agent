@@ -50,13 +50,16 @@ class ExperimentArchiver:
             "MANIFEST.json": json.dumps(manifest.to_canonical_dict(), indent=2),
         }
         if run_result:
-            files["RUN_RESULT.json"] = json.dumps({
-                "run_id": run_result.run_id,
-                "status": run_result.status.value,
-                "metrics": run_result.metrics,
-                "duration_ms": run_result.duration_ms,
-                "final_digest": run_result.final_output_digest,
-            }, indent=2)
+            files["RUN_RESULT.json"] = json.dumps(
+                {
+                    "run_id": run_result.run_id,
+                    "status": run_result.status.value,
+                    "metrics": run_result.metrics,
+                    "duration_ms": run_result.duration_ms,
+                    "final_digest": run_result.final_output_digest,
+                },
+                indent=2,
+            )
 
         if additional_files:
             files.update(additional_files)

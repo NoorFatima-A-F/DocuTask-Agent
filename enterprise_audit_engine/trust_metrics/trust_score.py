@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class TrustScoreBreakdown(BaseModel):
     """Component breakdown of overall Trust Score."""
+
     evidence_integrity: float  # 0-100
     runtime_validation: float  # 0-100
     security_validation: float  # 0-100
@@ -19,6 +20,7 @@ class TrustScoreBreakdown(BaseModel):
 
 class EvidenceTrustScore(BaseModel):
     """Full Trust Score entity for a release."""
+
     target_system: str
     target_version: str
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -63,13 +65,7 @@ class TrustScoreCalculator:
         ext_ver = auditor_consensus_score
 
         # Weighted calculation
-        overall = (
-            0.20 * ev_integ +
-            0.25 * runtime_val +
-            0.25 * sec_val +
-            0.15 * repro +
-            0.15 * ext_ver
-        )
+        overall = 0.20 * ev_integ + 0.25 * runtime_val + 0.25 * sec_val + 0.15 * repro + 0.15 * ext_ver
         overall = round(overall, 1)
 
         # Critical constraint: If contradictions exist, force rejection
@@ -80,7 +76,9 @@ class TrustScoreCalculator:
         elif overall >= 90.0:
             trust_lvl = "ENTERPRISE_VERIFIED"
             is_cert = True
-            rationale = "System achieved high empirical trust across integrity, runtime, security, and auditor consensus."
+            rationale = (
+                "System achieved high empirical trust across integrity, runtime, security, and auditor consensus."
+            )
         elif overall >= 75.0:
             trust_lvl = "COMMERCIALLY_VERIFIED"
             is_cert = True

@@ -1,6 +1,7 @@
 """
 Part 3G.6 — Multi-Region / Cloud Failover Verification Framework.
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     CloudRegion,
     FailoverMode,

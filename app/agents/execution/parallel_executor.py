@@ -18,12 +18,10 @@ class ParallelExecutor:
         self.semaphore = asyncio.Semaphore(max_concurrency)
 
     async def execute_batch(
-        self,
-        node_ids: List[str],
-        graph: ExecutionGraph,
-        execution_id: Any
+        self, node_ids: List[str], graph: ExecutionGraph, execution_id: Any
     ) -> List[Dict[str, Any]]:
         """Executes the given batch of runnable node IDs concurrently."""
+
         async def _run_single(nid: str) -> Dict[str, Any]:
             async with self.semaphore:
                 exec_node = graph.get_node(nid)
@@ -33,7 +31,7 @@ class ParallelExecutor:
                     execution_id=execution_id,
                     node_id=nid,
                     capability_requirement=exec_node.node.capability_requirement,
-                    parameters=exec_node.node.parameters
+                    parameters=exec_node.node.parameters,
                 )
                 return await self.node_executor.execute_node(exec_node, ctx)
 

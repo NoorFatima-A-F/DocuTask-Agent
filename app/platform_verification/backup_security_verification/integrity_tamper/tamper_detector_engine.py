@@ -1,6 +1,7 @@
 """
 Tamper Detector Engine for Backup Security Verification Framework (Part 3G.2F).
 """
+
 import hashlib
 
 from app.platform_verification.backup_security_verification.domain.models import (
@@ -29,7 +30,7 @@ class TamperDetectorEngine(ITamperDetectorEngine):
         tampered_payload[10] ^= 0x01
         tampered_hash = hashlib.sha512(tampered_payload).hexdigest()
 
-        detected = (orig_hash != tampered_hash)
+        detected = orig_hash != tampered_hash
 
         details = {
             "checksum_algorithm": "SHA-512 + HMAC-SHA256",

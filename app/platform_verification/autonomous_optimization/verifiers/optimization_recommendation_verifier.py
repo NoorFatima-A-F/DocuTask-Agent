@@ -1,6 +1,7 @@
 """
 3H.10.5: Optimization Recommendation Engine Verifier
 """
+
 from typing import List
 from ..domain.models import (
     RiskTier,
@@ -29,7 +30,7 @@ class OptimizationRecommendationVerifier(IOptimizationRecommendationVerifier):
                 risk_tier=RiskTier.LOW,
                 complexity="LOW",
                 recommended_mode=ExecutionMode.AUTONOMOUS,
-                rollback_plan="Issue worker pool scale-down signal back to 32 if queue depth drops below 5 for 10 minutes."
+                rollback_plan="Issue worker pool scale-down signal back to 32 if queue depth drops below 5 for 10 minutes.",
             ),
             OptimizationRecommendation(
                 recommendation_id="rec-opt-002",
@@ -41,7 +42,7 @@ class OptimizationRecommendationVerifier(IOptimizationRecommendationVerifier):
                 risk_tier=RiskTier.LOW,
                 complexity="LOW",
                 recommended_mode=ExecutionMode.AUTONOMOUS,
-                rollback_plan="Revert prefetch count configuration to default 50 via AMQP channel QoS parameter."
+                rollback_plan="Revert prefetch count configuration to default 50 via AMQP channel QoS parameter.",
             ),
             OptimizationRecommendation(
                 recommendation_id="rec-opt-003",
@@ -53,7 +54,7 @@ class OptimizationRecommendationVerifier(IOptimizationRecommendationVerifier):
                 risk_tier=RiskTier.LOW,
                 complexity="LOW",
                 recommended_mode=ExecutionMode.AUTONOMOUS,
-                rollback_plan="Re-hydrate cached hot keys from Aurora read replica on cache miss."
+                rollback_plan="Re-hydrate cached hot keys from Aurora read replica on cache miss.",
             ),
             OptimizationRecommendation(
                 recommendation_id="rec-opt-004",
@@ -65,13 +66,13 @@ class OptimizationRecommendationVerifier(IOptimizationRecommendationVerifier):
                 risk_tier=RiskTier.MEDIUM,
                 complexity="MEDIUM",
                 recommended_mode=ExecutionMode.SUPERVISED_CANARY,
-                rollback_plan="Route 100% of traffic back to primary provider once health checks confirm P95 < 600ms for 5 consecutive minutes."
-            )
+                rollback_plan="Route 100% of traffic back to primary provider once health checks confirm P95 < 600ms for 5 consecutive minutes.",
+            ),
         ]
 
         return OptimizationRecommendationsReport(
             report_title="Autonomous Self-Optimization Recommendations & Impact Report",
             total_recommendations=len(recs),
             recommendations=recs,
-            recommendation_quality_score=99.4
+            recommendation_quality_score=99.4,
         )

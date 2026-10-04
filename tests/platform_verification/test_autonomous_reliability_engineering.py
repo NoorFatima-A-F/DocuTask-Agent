@@ -1,6 +1,7 @@
 """
 Test Suite: Phase 3I.12 Autonomous Reliability Engineering, Continuous Optimization & Operational Intelligence
 """
+
 import json
 import pytest
 from fastapi.testclient import TestClient
@@ -52,6 +53,7 @@ def api_client():
 
 
 # ─── 1. Verifier Unit Tests ───────────────────────────────────────────────────
+
 
 def test_autonomous_architecture_verifier():
     verifier = AutonomousArchitectureVerifier()
@@ -184,6 +186,7 @@ def test_continuous_improvement_loop_verifier():
 
 # ─── 2. Scorer Unit Tests ─────────────────────────────────────────────────────
 
+
 def test_autonomous_reliability_scorer():
     runtime = AutonomousReliabilityRuntime()
     verification_results = runtime.execute_all_verifications()
@@ -203,6 +206,7 @@ def test_autonomous_reliability_scorer():
 
 # ─── 3. Exporter Unit Tests ───────────────────────────────────────────────────
 
+
 def test_autonomous_reliability_exporter(tmp_path):
     output_dir = tmp_path / "auto_rel_test"
     runtime = AutonomousReliabilityRuntime(output_dir=str(output_dir))
@@ -220,6 +224,7 @@ def test_autonomous_reliability_exporter(tmp_path):
 
 
 # ─── 4. REST API Integration Tests ────────────────────────────────────────────
+
 
 def test_api_status_endpoint(api_client):
     response = api_client.get("/api/v1/autonomous-reliability/status")

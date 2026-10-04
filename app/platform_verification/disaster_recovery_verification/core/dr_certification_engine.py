@@ -1,6 +1,7 @@
 """
 Disaster Recovery Certification & Scorecard Engine.
 """
+
 from typing import List
 from app.platform_verification.disaster_recovery_verification.domain.models import (
     DRTestScenarioResult,

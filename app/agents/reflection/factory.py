@@ -23,10 +23,7 @@ class ReflectionFactory:
     """Factory creating fully wired reflection engines with default or customized dependencies."""
 
     @staticmethod
-    def create_engine(
-        cache_capacity: int = 1000,
-        enable_metrics: bool = True
-    ) -> ReflectionEngine:
+    def create_engine(cache_capacity: int = 1000, enable_metrics: bool = True) -> ReflectionEngine:
         """Instantiates fully wired ReflectionEngine with all default analyzers and evaluators."""
         evaluation_pipeline = EvaluationPipeline()
         critique_engine = CritiqueEngine()
@@ -41,7 +38,7 @@ class ReflectionFactory:
             knowledge_extractor=knowledge_extractor,
             recommendation_engine=recommendation_engine,
             adaptation_engine=adaptation_engine,
-            feedback_generator=feedback_generator
+            feedback_generator=feedback_generator,
         )
 
         repository = InMemoryReflectionRepository()
@@ -49,11 +46,7 @@ class ReflectionFactory:
         manager = ReflectionManager(repository=repository, cache=cache)
         metrics = ReflectionMetricsCollector() if enable_metrics else None
 
-        return ReflectionEngine(
-            orchestrator=orchestrator,
-            manager=manager,
-            metrics_collector=metrics
-        )
+        return ReflectionEngine(orchestrator=orchestrator, manager=manager, metrics_collector=metrics)
 
     @staticmethod
     def create_runtime() -> ReflectionRuntime:

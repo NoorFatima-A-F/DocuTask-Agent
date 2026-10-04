@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field
 
 class ApiEndpointCheck(BaseModel):
     """Specific reality assertion against an API route."""
+
     endpoint: str
     method: str
     scenario: str
@@ -31,6 +32,7 @@ class ApiEndpointCheck(BaseModel):
 
 class ApiRealityValidationResult(BaseModel):
     """Holistic API reality verification report."""
+
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     total_checks: int
     passed_checks: int
@@ -59,17 +61,19 @@ class ApiRealityValidator:
         # Simulated robust deterministic check for isolated verification
         actual_status_no_auth = 401
         lat1 = (time.time() - t0) * 1000 + 4.2
-        p1 = (actual_status_no_auth == 401)
-        checks.append(ApiEndpointCheck(
-            endpoint="/api/upload",
-            method="POST",
-            scenario="Unauthenticated upload request",
-            expected_status=401,
-            actual_status=actual_status_no_auth,
-            passed=p1,
-            latency_ms=round(lat1, 2),
-            response_summary="401 Unauthorized - Missing Authorization header",
-        ))
+        p1 = actual_status_no_auth == 401
+        checks.append(
+            ApiEndpointCheck(
+                endpoint="/api/upload",
+                method="POST",
+                scenario="Unauthenticated upload request",
+                expected_status=401,
+                actual_status=actual_status_no_auth,
+                passed=p1,
+                latency_ms=round(lat1, 2),
+                response_summary="401 Unauthorized - Missing Authorization header",
+            )
+        )
         if not p1:
             contradictions.append(f"/api/upload allowed unauthenticated POST (Status {actual_status_no_auth} != 401)")
 
@@ -77,17 +81,19 @@ class ApiRealityValidator:
         t0 = time.time()
         actual_status_bad_token = 401
         lat2 = (time.time() - t0) * 1000 + 3.8
-        p2 = (actual_status_bad_token == 401)
-        checks.append(ApiEndpointCheck(
-            endpoint="/api/documents",
-            method="GET",
-            scenario="Malformed Bearer token",
-            expected_status=401,
-            actual_status=actual_status_bad_token,
-            passed=p2,
-            latency_ms=round(lat2, 2),
-            response_summary="401 Unauthorized - Invalid signature",
-        ))
+        p2 = actual_status_bad_token == 401
+        checks.append(
+            ApiEndpointCheck(
+                endpoint="/api/documents",
+                method="GET",
+                scenario="Malformed Bearer token",
+                expected_status=401,
+                actual_status=actual_status_bad_token,
+                passed=p2,
+                latency_ms=round(lat2, 2),
+                response_summary="401 Unauthorized - Invalid signature",
+            )
+        )
         if not p2:
             contradictions.append(f"/api/documents accepted malformed token (Status {actual_status_bad_token} != 401)")
 
@@ -95,17 +101,19 @@ class ApiRealityValidator:
         t0 = time.time()
         actual_status_bad_schema = 422
         lat3 = (time.time() - t0) * 1000 + 5.1
-        p3 = (actual_status_bad_schema in {400, 422})
-        checks.append(ApiEndpointCheck(
-            endpoint="/api/process",
-            method="POST",
-            scenario="Invalid schema payload",
-            expected_status=422,
-            actual_status=actual_status_bad_schema,
-            passed=p3,
-            latency_ms=round(lat3, 2),
-            response_summary="422 Unprocessable Entity - Validation Error",
-        ))
+        p3 = actual_status_bad_schema in {400, 422}
+        checks.append(
+            ApiEndpointCheck(
+                endpoint="/api/process",
+                method="POST",
+                scenario="Invalid schema payload",
+                expected_status=422,
+                actual_status=actual_status_bad_schema,
+                passed=p3,
+                latency_ms=round(lat3, 2),
+                response_summary="422 Unprocessable Entity - Validation Error",
+            )
+        )
         if not p3:
             contradictions.append(f"/api/process failed schema validation check (Status {actual_status_bad_schema})")
 
@@ -113,17 +121,19 @@ class ApiRealityValidator:
         t0 = time.time()
         actual_status_rate_limit = 429
         lat4 = (time.time() - t0) * 1000 + 2.1
-        p4 = (actual_status_rate_limit == 429)
-        checks.append(ApiEndpointCheck(
-            endpoint="/api/search",
-            method="POST",
-            scenario="Burst rate limit exceeded (100 req/s)",
-            expected_status=429,
-            actual_status=actual_status_rate_limit,
-            passed=p4,
-            latency_ms=round(lat4, 2),
-            response_summary="429 Too Many Requests - Rate limit exceeded",
-        ))
+        p4 = actual_status_rate_limit == 429
+        checks.append(
+            ApiEndpointCheck(
+                endpoint="/api/search",
+                method="POST",
+                scenario="Burst rate limit exceeded (100 req/s)",
+                expected_status=429,
+                actual_status=actual_status_rate_limit,
+                passed=p4,
+                latency_ms=round(lat4, 2),
+                response_summary="429 Too Many Requests - Rate limit exceeded",
+            )
+        )
         if not p4:
             contradictions.append(f"/api/search rate limiter failed to throttle burst traffic")
 
@@ -131,24 +141,26 @@ class ApiRealityValidator:
         t0 = time.time()
         actual_status_health = 200
         lat5 = (time.time() - t0) * 1000 + 1.5
-        p5 = (actual_status_health == 200 and lat5 < 200.0)
-        checks.append(ApiEndpointCheck(
-            endpoint="/health",
-            method="GET",
-            scenario="Liveness and readiness health probe",
-            expected_status=200,
-            actual_status=actual_status_health,
-            passed=p5,
-            latency_ms=round(lat5, 2),
-            response_summary="200 OK - System healthy",
-        ))
+        p5 = actual_status_health == 200 and lat5 < 200.0
+        checks.append(
+            ApiEndpointCheck(
+                endpoint="/health",
+                method="GET",
+                scenario="Liveness and readiness health probe",
+                expected_status=200,
+                actual_status=actual_status_health,
+                passed=p5,
+                latency_ms=round(lat5, 2),
+                response_summary="200 OK - System healthy",
+            )
+        )
         if not p5:
             contradictions.append("/health probe failed or exceeded latency SLA (>200ms)")
 
         passed_count = sum(1 for c in checks if c.passed)
         failed_count = len(checks) - passed_count
         avg_lat = sum(c.latency_ms for c in checks) / len(checks) if checks else 0.0
-        is_valid = (failed_count == 0 and len(contradictions) == 0)
+        is_valid = failed_count == 0 and len(contradictions) == 0
 
         return ApiRealityValidationResult(
             total_checks=len(checks),

@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 
 class PlannerGeneration(BaseModel):
     """Archival record of an evolved planner generation."""
+
     generation_id: str = Field(default_factory=lambda: f"gen_{uuid.uuid4().hex[:8]}")
     version_tag: str  # 'v1.0.0', 'v2.0.0', 'v3.1.0'
     parent_version: Optional[str] = None
@@ -87,7 +88,7 @@ class PlannerVersionRegistry:
     def promote_to_production(self, version_tag: str) -> bool:
         if version_tag in self._generations:
             for g in self._generations.values():
-                g.is_promoted_production = (g.version_tag == version_tag)
+                g.is_promoted_production = g.version_tag == version_tag
             self._active_version = version_tag
             return True
         return False

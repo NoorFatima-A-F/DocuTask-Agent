@@ -17,17 +17,19 @@ logger = logging.getLogger(__name__)
 
 class ConnectorFailureCategory(str, Enum):
     """Categorization of connector and external API failures."""
-    TEMPORARY = "TEMPORARY"          # 503, 504, connection reset -> Retryable
-    NETWORK = "NETWORK"              # DNS resolution, socket timeout -> Retryable
-    RATE_LIMIT = "RATE_LIMIT"        # 429 Too Many Requests -> Retryable with backoff
-    AUTHENTICATION = "AUTHENTICATION"# 401, 403, expired token -> Refresh auth / Non-retryable
-    VALIDATION = "VALIDATION"        # 400 Bad Request, schema error -> Non-retryable
-    PERMANENT = "PERMANENT"          # 404 Not Found, 410 Gone -> Non-retryable
-    EXTERNAL_FAILURE = "EXTERNAL_FAILURE" # 500 Internal Error -> Conditionally retryable
+
+    TEMPORARY = "TEMPORARY"  # 503, 504, connection reset -> Retryable
+    NETWORK = "NETWORK"  # DNS resolution, socket timeout -> Retryable
+    RATE_LIMIT = "RATE_LIMIT"  # 429 Too Many Requests -> Retryable with backoff
+    AUTHENTICATION = "AUTHENTICATION"  # 401, 403, expired token -> Refresh auth / Non-retryable
+    VALIDATION = "VALIDATION"  # 400 Bad Request, schema error -> Non-retryable
+    PERMANENT = "PERMANENT"  # 404 Not Found, 410 Gone -> Non-retryable
+    EXTERNAL_FAILURE = "EXTERNAL_FAILURE"  # 500 Internal Error -> Conditionally retryable
 
 
 class RetryPolicy(BaseModel):
     """Configuration governing retry behavior for an action or connector."""
+
     max_attempts: int = 3
     initial_interval_seconds: float = 0.5
     backoff_multiplier: float = 2.0
@@ -79,7 +81,9 @@ class ConnectorRetryEngine:
 
         return delay
 
-    def should_retry(self, category: ConnectorFailureCategory, attempt: int, policy: Optional[RetryPolicy] = None) -> bool:
+    def should_retry(
+        self, category: ConnectorFailureCategory, attempt: int, policy: Optional[RetryPolicy] = None
+    ) -> bool:
         """Determines whether a retry should be attempted."""
         pol = policy or self._default_policy
         if attempt >= pol.max_attempts:
@@ -105,7 +109,9 @@ class ConnectorRetryEngine:
                     raise
 
                 delay = self.calculate_delay(attempt, pol)
-                logger.warning(f"Connector failure (attempt {attempt}/{pol.max_attempts}, category={cat.value}). Retrying in {delay:.2f}s...")
+                logger.warning(
+                    f"Connector failure (attempt {attempt}/{pol.max_attempts}, category={cat.value}). Retrying in {delay:.2f}s..."
+                )
 
                 if on_retry:
                     on_retry(attempt, e, delay)

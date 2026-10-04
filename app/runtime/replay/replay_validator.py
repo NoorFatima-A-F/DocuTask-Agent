@@ -21,7 +21,9 @@ class ReplayValidator:
     """Verifies that Replay(Log_1) == Replay(Log_1) deterministically."""
 
     @staticmethod
-    def validate_determinism(mission_id: str, events: List[RuntimeEvent], repetitions: int = 3) -> DeterminismValidationReport:
+    def validate_determinism(
+        mission_id: str, events: List[RuntimeEvent], repetitions: int = 3
+    ) -> DeterminismValidationReport:
         if repetitions < 2:
             repetitions = 2
 
@@ -42,6 +44,7 @@ class ReplayValidator:
                 diffs_count += 1
 
         import hashlib
+
         state_hash = hashlib.sha256(base_dump.encode("utf-8")).hexdigest()
 
         return DeterminismValidationReport(

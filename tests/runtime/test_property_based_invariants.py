@@ -53,7 +53,9 @@ def test_property_dag_topological_sort_invariants():
         # INVARIANT: For every dependency (mod depends on prereq), prereq MUST precede mod
         pos = {node: idx for idx, node in enumerate(order)}
         for mod, prereq in edges:
-            assert pos[prereq] < pos[mod], f"Violation in run {run_idx}: {prereq} at {pos[prereq]} >= {mod} at {pos[mod]}"
+            assert pos[prereq] < pos[mod], (
+                f"Violation in run {run_idx}: {prereq} at {pos[prereq]} >= {mod} at {pos[mod]}"
+            )
 
 
 def test_property_dag_cycle_injection_invariants():

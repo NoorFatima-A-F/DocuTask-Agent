@@ -2,9 +2,11 @@
 Stage 6: Resource Allocation.
 Reserves execution capacity: workers, queues, GPU quota, memory, and token rate limits.
 """
+
 from app.platform_verification.lifecycle.stages.base_stage import BaseLifecycleStage
 from app.platform_verification.lifecycle.context import VerificationExecutionContext, StageResult
 from app.platform_verification.lifecycle.states import LifecycleState
+
 
 class ResourceAllocationStage(BaseLifecycleStage):
     @property
@@ -28,14 +30,11 @@ class ResourceAllocationStage(BaseLifecycleStage):
             "queue_name": "verification.priority.high",
             "memory_reserved_mb": 4096,
             "token_quota_tpm": 100000,
-            "status": "RESERVED"
+            "status": "RESERVED",
         }
         context.allocated_resources = allocated
         return StageResult(
-            stage_number=self.stage_number,
-            stage_name=self.stage_name,
-            status="PASSED",
-            produced_artifacts=allocated
+            stage_number=self.stage_number, stage_name=self.stage_name, status="PASSED", produced_artifacts=allocated
         )
 
     def validate_exit_criteria(self, context: VerificationExecutionContext, result: StageResult) -> bool:

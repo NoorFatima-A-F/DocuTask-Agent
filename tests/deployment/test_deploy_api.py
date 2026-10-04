@@ -1,4 +1,5 @@
 """Unit tests for Deployment REST API endpoints."""
+
 from app.deployment.api.routes import (
     approve_promotion,
     create_deployment,

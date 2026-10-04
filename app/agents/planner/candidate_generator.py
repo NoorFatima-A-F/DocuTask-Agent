@@ -46,7 +46,7 @@ class CandidatePlanGenerator:
             rank_score=0.92,
             estimated_cost_usd=0.55,
             estimated_duration_seconds=17.0,
-            confidence=0.95
+            confidence=0.95,
         )
 
         # Candidate 2: Fast Parallel Plan
@@ -73,7 +73,7 @@ class CandidatePlanGenerator:
             rank_score=0.88,
             estimated_cost_usd=0.60,
             estimated_duration_seconds=12.0,
-            confidence=0.90
+            confidence=0.90,
         )
 
         return [cand1, cand2]

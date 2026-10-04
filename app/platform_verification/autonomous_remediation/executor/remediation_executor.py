@@ -46,12 +46,16 @@ class RemediationExecutor(IRemediationExecutor):
         elif action == "scale_queue_workers":
             stdout = f"[REMEDIATION] Scaled worker replica count from 4 to 8 on target '{target}'. Queue drain active."
         elif action == "restore_database_from_backup":
-            stdout = f"[REMEDIATION] Point-in-time restore initiated for database cluster '{target}' with approved snapshot."
+            stdout = (
+                f"[REMEDIATION] Point-in-time restore initiated for database cluster '{target}' with approved snapshot."
+            )
             after_state = "RESTORE_IN_PROGRESS"
         else:
             stdout = f"[REMEDIATION] Executed custom recovery action '{action}' on target '{target}'."
 
-        duration_ms = (time.time() - start_time) * 1000 + (12.5 if decision.action_level == ActionLevel.LEVEL_1 else 45.0)
+        duration_ms = (time.time() - start_time) * 1000 + (
+            12.5 if decision.action_level == ActionLevel.LEVEL_1 else 45.0
+        )
 
         entry = ExecutionLogEntry(
             execution_id=exec_id,

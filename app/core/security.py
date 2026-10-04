@@ -10,17 +10,21 @@ from pathlib import Path
 import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional, Set, Union
+
 try:
     from jose import JWTError, jwt
 except ImportError:
     try:
         import jwt
+
         class JWTError(Exception):
             pass
     except ImportError:
         jwt = None
+
         class JWTError(Exception):
             pass
+
 
 from app.core.config import settings
 from app.core.exceptions import TokenException
@@ -42,11 +46,13 @@ def validate_secret_key_strength(secret_key: str) -> bool:
 
 class UnsafePathError(ValueError):
     """Raised when a path traversal, directory escape, or malicious segment attempt is detected."""
+
     pass
 
 
 class UnsafeUrlError(ValueError):
     """Raised when an untrusted, malformed, or SSRF-prone URL is detected."""
+
     pass
 
 
@@ -73,7 +79,9 @@ def validate_safe_url(
     parsed = urllib.parse.urlparse(url.strip())
 
     if not parsed.scheme or parsed.scheme.lower() not in schemes:
-        raise UnsafeUrlError(f"Security violation: Scheme '{parsed.scheme}' is not permitted (allowed: {sorted(schemes)}).")
+        raise UnsafeUrlError(
+            f"Security violation: Scheme '{parsed.scheme}' is not permitted (allowed: {sorted(schemes)})."
+        )
 
     hostname = (parsed.hostname or "").lower().strip()
     if not hostname:
@@ -83,7 +91,9 @@ def validate_safe_url(
         for disallowed in disallowed_domains:
             dis_d = disallowed.lower().strip()
             if hostname == dis_d or hostname.endswith("." + dis_d):
-                raise UnsafeUrlError(f"Security violation: Hostname '{hostname}' matches disallowed domain '{disallowed}'.")
+                raise UnsafeUrlError(
+                    f"Security violation: Hostname '{hostname}' matches disallowed domain '{disallowed}'."
+                )
 
     if allowed_domains is not None:
         matched = False
@@ -93,7 +103,9 @@ def validate_safe_url(
                 matched = True
                 break
         if not matched:
-            raise UnsafeUrlError(f"Security violation: Hostname '{hostname}' is not in allowed domains {allowed_domains}.")
+            raise UnsafeUrlError(
+                f"Security violation: Hostname '{hostname}' is not in allowed domains {allowed_domains}."
+            )
 
     return url
 
@@ -106,7 +118,9 @@ def validate_safe_filename_segment(value: str) -> str:
     if not value or not isinstance(value, str):
         raise UnsafePathError("Filename segment cannot be empty or non-string.")
     if "\x00" in value or "/" in value or "\\" in value or ".." in value:
-        raise UnsafePathError(f"Security violation: Filename segment contains illegal path traversal characters: '{value}'")
+        raise UnsafePathError(
+            f"Security violation: Filename segment contains illegal path traversal characters: '{value}'"
+        )
     sanitized = re.sub(r"[^a-zA-Z0-9_.\-]", "_", value.strip())
     if not sanitized or sanitized in (".", ".."):
         raise UnsafePathError(f"Security violation: Invalid filename segment '{value}'")
@@ -134,24 +148,34 @@ def resolve_safe_path(
         raise UnsafePathError("Null byte detected in path expression")
 
     # 1. Reject Windows-style drive letters (e.g., C:\..., D:/...)
-    if re.match(r"^[a-zA-Z]:", untrusted_str) or (len(untrusted_str) >= 2 and untrusted_str[1] == ":" and untrusted_str[0].isalpha()):
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+    if re.match(r"^[a-zA-Z]:", untrusted_str) or (
+        len(untrusted_str) >= 2 and untrusted_str[1] == ":" and untrusted_str[0].isalpha()
+    ):
+        raise UnsafePathError(
+            f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'"
+        )
 
     # 2. Reject UNC paths (e.g., \\server\share or //server/share)
     if untrusted_str.startswith(("\\\\", "//")):
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+        raise UnsafePathError(
+            f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'"
+        )
 
     # 3. Normalize backslashes to forward slashes to defend against Windows-style traversal on POSIX
     normalized = untrusted_str.replace("\\", "/")
 
     # 4. Check for raw absolute paths
     if normalized.startswith("/") or Path(normalized).is_absolute() or Path(untrusted_str).is_absolute():
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+        raise UnsafePathError(
+            f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'"
+        )
 
     # 5. Check for traversal tokens
     parts = [p for p in normalized.split("/") if p]
     if ".." in parts:
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+        raise UnsafePathError(
+            f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'"
+        )
 
     if normalized == ".":
         if allow_base:
@@ -164,13 +188,19 @@ def resolve_safe_path(
     try:
         common = os.path.commonpath([base, target])
     except ValueError:
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+        raise UnsafePathError(
+            f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'"
+        )
 
     if common != base:
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+        raise UnsafePathError(
+            f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'"
+        )
 
     if target == base and not allow_base:
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+        raise UnsafePathError(
+            f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'"
+        )
 
     return Path(target)
 
@@ -204,8 +234,6 @@ def sanitize_log_input(value: Any) -> str:
     if len(clean) > 256:
         return clean[:253] + "..."
     return clean
-
-
 
 
 try:
@@ -242,7 +270,7 @@ def create_access_token(subject: str, expires_delta: Optional[timedelta] = None)
     """
     Creates JWT Access Token signed with application secret key.
     Includes unique JWT ID (jti) for collision-resistant token identification.
-    
+
     :param subject: User ID or subject identifier
     :param expires_delta: Optional custom duration override
     :return: Encoded JWT string
@@ -252,13 +280,13 @@ def create_access_token(subject: str, expires_delta: Optional[timedelta] = None)
         expire = now + expires_delta
     else:
         expire = now + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    
+
     to_encode: Dict[str, Any] = {
         "sub": str(subject),
         "jti": str(uuid.uuid4()),
         "exp": expire,
         "iat": now,
-        "type": "access"
+        "type": "access",
     }
     encoded_jwt = jwt.encode(to_encode, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
     return encoded_jwt
@@ -267,7 +295,7 @@ def create_access_token(subject: str, expires_delta: Optional[timedelta] = None)
 def create_refresh_token(subject: str, expires_delta: Optional[timedelta] = None) -> tuple[str, datetime]:
     """
     Creates JWT Refresh Token with unique JWT ID (jti).
-    
+
     :param subject: User ID or subject identifier
     :param expires_delta: Optional custom duration override
     :return: Tuple of (raw_refresh_token, expiration_datetime)
@@ -277,13 +305,13 @@ def create_refresh_token(subject: str, expires_delta: Optional[timedelta] = None
         expire = now + expires_delta
     else:
         expire = now + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
-    
+
     to_encode: Dict[str, Any] = {
         "sub": str(subject),
         "jti": str(uuid.uuid4()),
         "exp": expire,
         "iat": now,
-        "type": "refresh"
+        "type": "refresh",
     }
     encoded_jwt = jwt.encode(to_encode, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
     return encoded_jwt, expire
@@ -300,7 +328,7 @@ def hash_token(raw_token: str) -> str:
 def decode_token(token: str, expected_type: str = "access") -> Dict[str, Any]:
     """
     Decodes and validates a JWT token.
-    
+
     :param token: Raw JWT string
     :param expected_type: 'access' or 'refresh'
     :return: Payload dictionary if valid
@@ -311,11 +339,11 @@ def decode_token(token: str, expected_type: str = "access") -> Dict[str, Any]:
         token_type: str = payload.get("type", "")
         if token_type != expected_type:
             raise TokenException(f"Invalid token type. Expected {expected_type}, got {token_type}")
-        
+
         subject: Optional[str] = payload.get("sub")
         if not subject:
             raise TokenException("Token missing subject identifier")
-            
+
         return payload
     except JWTError as e:
         raise TokenException(f"Could not validate token: {str(e)}")

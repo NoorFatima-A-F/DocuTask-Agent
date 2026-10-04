@@ -30,7 +30,13 @@ class ExpandedMutationSuite:
     """Runs 50+ rigorous synthetic defect injection attacks across the audit certification engine."""
 
     @classmethod
-    def _create_sample_record(cls, eid="EV-MUT-BASE", cat="Security", src=EvidenceSourceType.STATIC_SOURCE_CODE, cls_type=EvidenceClassification.VERIFIED) -> EvidenceRecord:
+    def _create_sample_record(
+        cls,
+        eid="EV-MUT-BASE",
+        cat="Security",
+        src=EvidenceSourceType.STATIC_SOURCE_CODE,
+        cls_type=EvidenceClassification.VERIFIED,
+    ) -> EvidenceRecord:
         rec = EvidenceRecord(
             id=eid,
             collector="MutationTestCollector",
@@ -69,7 +75,7 @@ class ExpandedMutationSuite:
 
         total_tested = len(results)
         detected_count = sum(1 for r in results if r["detected"])
-        all_passed = (detected_count == total_tested)
+        all_passed = detected_count == total_tested
 
         # Group by category for summary
         categories_summary = {}
@@ -105,13 +111,17 @@ class ExpandedMutationSuite:
         if mut_id == 1:
             desc = "Payload modified without SHA-256 hash recalculation"
             tampered = rec.model_copy(update={"summary": "Tampered summary"})
-            detected = (tampered.content_hash != tampered.calculate_hash())
+            detected = tampered.content_hash != tampered.calculate_hash()
         elif mut_id == 2:
             desc = "Referenced evidence record dropped from store"
             fnd = AuditFinding(
-                finding_id="FND-EM-2", subsystem="Security", claim="Valid claim",
-                classification=EvidenceClassification.VERIFIED, evidence_ids=["EV-NON-EXISTENT"],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id="FND-EM-2",
+                subsystem="Security",
+                claim="Valid claim",
+                classification=EvidenceClassification.VERIFIED,
+                evidence_ids=["EV-NON-EXISTENT"],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             try:
                 EvidenceCoverageAnalyzer.verify_coverage([fnd], [rec])
@@ -125,12 +135,18 @@ class ExpandedMutationSuite:
         elif mut_id == 4:
             desc = "Empty raw payload detected"
             fnd = AuditFinding(
-                finding_id="FND-EM-4", subsystem="Security", claim="Valid claim",
-                classification=EvidenceClassification.VERIFIED, evidence_ids=[rec.id],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id="FND-EM-4",
+                subsystem="Security",
+                claim="Valid claim",
+                classification=EvidenceClassification.VERIFIED,
+                evidence_ids=[rec.id],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             empty_payload_rec = rec.model_copy(update={"raw_payload": {}})
-            empty_payload_rec = empty_payload_rec.model_copy(update={"content_hash": empty_payload_rec.calculate_hash()})
+            empty_payload_rec = empty_payload_rec.model_copy(
+                update={"content_hash": empty_payload_rec.calculate_hash()}
+            )
             try:
                 EvidenceCoverageAnalyzer.verify_coverage([fnd], [empty_payload_rec])
             except IncompleteEvidenceCoverageError:
@@ -139,7 +155,7 @@ class ExpandedMutationSuite:
             # Mutations 5-15: various structural tampering detections
             desc = f"Structural payload/hash anomaly detection #{mut_id}"
             tampered = rec.model_copy(update={"id": f"TAMPERED-ID-{mut_id}"})
-            detected = (tampered.content_hash != tampered.calculate_hash())
+            detected = tampered.content_hash != tampered.calculate_hash()
 
         return {
             "mutation_id": f"MUT-EM-{mut_id:02d}",
@@ -158,9 +174,13 @@ class ExpandedMutationSuite:
             desc = "Unbacked claim promotion from INSUFFICIENT to VERIFIED"
             insuf_rec = cls._create_sample_record("EV-CLS-1", cls_type=EvidenceClassification.EVIDENCE_INSUFFICIENT)
             fnd = AuditFinding(
-                finding_id="FND-CLS-1", subsystem="Security", claim="Promoted claim",
-                classification=EvidenceClassification.VERIFIED, evidence_ids=["EV-CLS-1"],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id="FND-CLS-1",
+                subsystem="Security",
+                claim="Promoted claim",
+                classification=EvidenceClassification.VERIFIED,
+                evidence_ids=["EV-CLS-1"],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             is_valid, _ = ClaimValidator.validate_claim(fnd, [insuf_rec])
             detected = not is_valid
@@ -168,9 +188,13 @@ class ExpandedMutationSuite:
             desc = "Static source code claiming VERIFIED_BY_EXECUTION without runtime proof"
             static_rec = cls._create_sample_record("EV-CLS-2", src=EvidenceSourceType.STATIC_SOURCE_CODE)
             fnd = AuditFinding(
-                finding_id="FND-CLS-2", subsystem="Security", claim="Execution claim",
-                classification=EvidenceClassification.VERIFIED_BY_EXECUTION, evidence_ids=["EV-CLS-2"],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id="FND-CLS-2",
+                subsystem="Security",
+                claim="Execution claim",
+                classification=EvidenceClassification.VERIFIED_BY_EXECUTION,
+                evidence_ids=["EV-CLS-2"],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             is_valid, _ = ClaimValidator.validate_claim(fnd, [static_rec])
             detected = not is_valid
@@ -179,8 +203,13 @@ class ExpandedMutationSuite:
             rec = cls._create_sample_record("EV-CLS-3")
             eqi = EvidenceQualityIndexCalculator.calculate_eqi([rec], 100.0, True)
             res = CertificationPolicyEngine.evaluate_policy(
-                "enterprise_grade", "HIGH", "CRITICAL_FINDING", ["Critical issue"],
-                eqi, True, ["Security"],
+                "enterprise_grade",
+                "HIGH",
+                "CRITICAL_FINDING",
+                ["Critical issue"],
+                eqi,
+                True,
+                ["Security"],
             )
             detected = not res["passed"]
         elif mut_id >= 4:
@@ -188,9 +217,13 @@ class ExpandedMutationSuite:
             desc = f"Classification invariant guard #{mut_id}"
             rec = cls._create_sample_record(f"EV-CLS-{mut_id}", cls_type=EvidenceClassification.DOCUMENTATION_ONLY)
             fnd = AuditFinding(
-                finding_id=f"FND-CLS-{mut_id}", subsystem="Security", claim="Doc only claiming verified",
-                classification=EvidenceClassification.VERIFIED, evidence_ids=[rec.id],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id=f"FND-CLS-{mut_id}",
+                subsystem="Security",
+                claim="Doc only claiming verified",
+                classification=EvidenceClassification.VERIFIED,
+                evidence_ids=[rec.id],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             is_valid, _ = ClaimValidator.validate_claim(fnd, [rec])
             detected = not is_valid
@@ -206,10 +239,14 @@ class ExpandedMutationSuite:
     @classmethod
     def _run_cryptographic_mutation(cls, mut_id: int) -> Dict[str, Any]:
         cert = CertificationRecord.create_pending(
-            certificate_id=f"CERT-CRYPTO-{mut_id}", system_name="DocuTask Agent",
-            release_version="1.0.0", audit_engine_version="2.1.0",
-            audit_execution_id="RUN-01", merkle_root="merkle_root_original_hash_123",
-            evidence_root_hash="evidence_root_original_hash_123", eqi_score=95.0,
+            certificate_id=f"CERT-CRYPTO-{mut_id}",
+            system_name="DocuTask Agent",
+            release_version="1.0.0",
+            audit_engine_version="2.1.0",
+            audit_execution_id="RUN-01",
+            merkle_root="merkle_root_original_hash_123",
+            evidence_root_hash="evidence_root_original_hash_123",
+            eqi_score=95.0,
         )
         signed_cert, pub_key_pem = CertificateSigner.sign_certificate(cert)
         detected = False

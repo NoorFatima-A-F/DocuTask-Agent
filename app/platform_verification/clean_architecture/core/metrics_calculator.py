@@ -1,6 +1,7 @@
 """
 Robert C. Martin Package Coupling, Instability (I), Abstractness (A), and Distance (D) Calculator.
 """
+
 from __future__ import annotations
 from typing import Dict, List, Optional, Tuple
 from app.platform_verification.clean_architecture.domain.interfaces import IDependencyMetricsCalculator

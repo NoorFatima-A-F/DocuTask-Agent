@@ -46,11 +46,18 @@ class LeaseManager:
         )
         self.leases[l1.resource_name] = l1
 
-    def acquire_lease(self, resource_name: str, department_id: str, ttl_seconds: float = 60.0) -> Optional[ResourceLease]:
+    def acquire_lease(
+        self, resource_name: str, department_id: str, ttl_seconds: float = 60.0
+    ) -> Optional[ResourceLease]:
         now = time.time()
         existing = self.leases.get(resource_name)
 
-        if existing and existing.is_active and now < existing.expires_at and existing.holder_department_id != department_id:
+        if (
+            existing
+            and existing.is_active
+            and now < existing.expires_at
+            and existing.holder_department_id != department_id
+        ):
             # Lease is already held by another department
             return None
 

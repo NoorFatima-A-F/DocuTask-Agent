@@ -66,7 +66,4 @@ class ServiceHealthMonitor:
         )
 
     def list_unhealthy_services(self) -> List[ServiceHealth]:
-        return [
-            h for h in self._health_records.values()
-            if h.status in [HealthStatus.DEGRADED, HealthStatus.UNHEALTHY]
-        ]
+        return [h for h in self._health_records.values() if h.status in [HealthStatus.DEGRADED, HealthStatus.UNHEALTHY]]

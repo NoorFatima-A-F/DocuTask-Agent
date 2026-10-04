@@ -12,6 +12,7 @@ from app.agents.reflection.exceptions import InvalidEvaluationGraphError
 
 class ReflectionNode(BaseModel):
     """An individual stage or analyzer node within the reflection workflow."""
+
     node_id: str
     name: str
     stage_type: str  # analysis, evaluation, critique, extraction, recommendation, feedback
@@ -24,6 +25,7 @@ class ReflectionNode(BaseModel):
 
 class ReflectionEdge(BaseModel):
     """Directed dependency between two reflection nodes."""
+
     source_node_id: str
     target_node_id: str
 
@@ -32,6 +34,7 @@ class ReflectionEdge(BaseModel):
 
 class ReflectionGraph(BaseModel):
     """Directed Acyclic Graph representing dependency-aware execution of reflection stages."""
+
     graph_id: UUID = Field(default_factory=uuid4)
     nodes: Dict[str, ReflectionNode] = Field(default_factory=dict)
     edges: List[ReflectionEdge] = Field(default_factory=list)

@@ -13,6 +13,7 @@ import uuid
 @dataclass
 class SPIFFEIdentity:
     """Represents a validated SPIFFE Workload Identity."""
+
     trust_domain: str
     namespace: str
     service_account: str
@@ -45,6 +46,7 @@ class SPIFFEIdentity:
 @dataclass
 class WorkloadSVID:
     """SPIFFE Verifiable Identity Document (SVID) cryptographic credential."""
+
     spiffe_id: SPIFFEIdentity
     token: str
     issued_at: datetime
@@ -60,11 +62,15 @@ class WorkloadSVID:
 class WorkloadIdentityManager:
     """Issues, parses, and cryptographically signs/validates Workload SVIDs."""
 
-    def __init__(self, trust_domain: str = "docutask.internal", signing_secret: str = "secret-spiffe-signing-key-9f") -> None:
+    def __init__(
+        self, trust_domain: str = "docutask.internal", signing_secret: str = "secret-spiffe-signing-key-9f"
+    ) -> None:
         self.trust_domain = trust_domain
         self.signing_secret = signing_secret.encode("utf-8")
 
-    def create_identity(self, namespace: str, service_account: str, cluster_id: str = "cluster-alpha", region: str = "us-east-1") -> SPIFFEIdentity:
+    def create_identity(
+        self, namespace: str, service_account: str, cluster_id: str = "cluster-alpha", region: str = "us-east-1"
+    ) -> SPIFFEIdentity:
         """Construct a SPIFFE identity."""
         return SPIFFEIdentity(
             trust_domain=self.trust_domain,
@@ -75,7 +81,9 @@ class WorkloadIdentityManager:
             region=region,
         )
 
-    def issue_svid(self, identity: SPIFFEIdentity, ttl_seconds: int = 3600, custom_claims: Optional[Dict[str, Any]] = None) -> WorkloadSVID:
+    def issue_svid(
+        self, identity: SPIFFEIdentity, ttl_seconds: int = 3600, custom_claims: Optional[Dict[str, Any]] = None
+    ) -> WorkloadSVID:
         """Generate and cryptographically sign an SVID."""
         now = datetime.now(timezone.utc)
         expires = now + timedelta(seconds=ttl_seconds)

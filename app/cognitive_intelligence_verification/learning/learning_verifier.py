@@ -106,7 +106,12 @@ class LearningVerifier:
         t0 = time.perf_counter()
         # Evaluate baseline capabilities before and after continuous learning cycle
         baseline_skills = {"skill_ocr": 0.99, "skill_tax_math": 1.0, "skill_schema_val": 0.98}
-        post_learning_skills = {"skill_ocr": 0.99, "skill_tax_math": 1.0, "skill_schema_val": 0.98, "new_skill_custom_gl": 0.96}
+        post_learning_skills = {
+            "skill_ocr": 0.99,
+            "skill_tax_math": 1.0,
+            "skill_schema_val": 0.98,
+            "new_skill_custom_gl": 0.96,
+        }
 
         # Verify no degradation in prior skills
         no_degradation = all(post_learning_skills[k] >= baseline_skills[k] for k in baseline_skills)

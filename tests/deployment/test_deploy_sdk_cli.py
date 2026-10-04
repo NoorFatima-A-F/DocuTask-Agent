@@ -1,4 +1,5 @@
 """Unit tests for Infrastructure SDK and doctaskctl CLI."""
+
 from app.deployment.cli.commands import run_cli
 from app.deployment.core.deployment import DeploymentStrategyType
 from app.deployment.sdk.client import InfrastructureSDK
@@ -49,24 +50,39 @@ def test_doctaskctl_cli_execution():
     sdk = InfrastructureSDK()
 
     # 1. Release create via CLI
-    rel_out = run_cli([
-        "release", "create",
-        "--version", "1.8.0",
-        "--name", "CLI Release",
-        "--commit", "cli12345",
-        "--artifacts", "art-cli",
-    ], sdk=sdk)
+    rel_out = run_cli(
+        [
+            "release",
+            "create",
+            "--version",
+            "1.8.0",
+            "--name",
+            "CLI Release",
+            "--commit",
+            "cli12345",
+            "--artifacts",
+            "art-cli",
+        ],
+        sdk=sdk,
+    )
     assert rel_out["status"] == "SUCCESS"
     rel_id = rel_out["release"]["release_id"]
 
     # 2. Deploy via CLI
-    dep_out = run_cli([
-        "deploy",
-        "--release", rel_id,
-        "--env", "dev",
-        "--strategy", "ROLLING",
-        "--replicas", "2",
-    ], sdk=sdk)
+    dep_out = run_cli(
+        [
+            "deploy",
+            "--release",
+            rel_id,
+            "--env",
+            "dev",
+            "--strategy",
+            "ROLLING",
+            "--replicas",
+            "2",
+        ],
+        sdk=sdk,
+    )
     assert dep_out["status"] == "SUCCESS"
 
     # 3. Flag eval via CLI

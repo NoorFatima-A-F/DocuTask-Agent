@@ -12,6 +12,6 @@ from app.infrastructure.deployment.strategies import CanaryDeploymentStrategy, C
 
 strategy = CanaryDeploymentStrategy(
     steps=[CanaryStep(1.0), CanaryStep(5.0), CanaryStep(25.0), CanaryStep(50.0), CanaryStep(100.0)],
-    max_error_rate=0.01  # 1% error rate threshold triggers immediate rollback
+    max_error_rate=0.01,  # 1% error rate threshold triggers immediate rollback
 )
 ```

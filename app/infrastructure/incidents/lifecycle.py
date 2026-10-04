@@ -23,6 +23,7 @@ logger = logging.getLogger("infrastructure.incidents.lifecycle")
 
 class InvalidIncidentTransitionError(Exception):
     """Raised when an illegal incident transition is requested."""
+
     pass
 
 

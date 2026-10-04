@@ -52,7 +52,12 @@ class EngineeringAuditGenerator(IEngineeringAuditGenerator):
             "opentelemetry_tracing": "W3C TraceContext Propagated (100% trace coverage)",
             "prometheus_metrics_count": 64,
             "structured_logging": "JSON RFC-5424 with automated PII & secret scrubbing",
-            "active_dashboards": ["API Latency & Throughput", "Worker Utilization", "Queue Dynamics", "Database Health"],
+            "active_dashboards": [
+                "API Latency & Throughput",
+                "Worker Utilization",
+                "Queue Dynamics",
+                "Database Health",
+            ],
         }
 
         return EngineeringAuditReport(

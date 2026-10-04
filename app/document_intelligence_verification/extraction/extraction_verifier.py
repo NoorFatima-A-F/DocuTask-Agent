@@ -107,7 +107,7 @@ class ExtractionVerifier:
             "assertion": AssertionResult(
                 name="Entity_Precision_Recall_F1_Benchmark",
                 passed=passed,
-                message=f"Entity extraction achieved Precision={precision*100:.1f}%, Recall={recall*100:.1f}%, F1={f1*100:.1f}% (Benchmark >= 95%).",
+                message=f"Entity extraction achieved Precision={precision * 100:.1f}%, Recall={recall * 100:.1f}%, F1={f1 * 100:.1f}% (Benchmark >= 95%).",
                 execution_time_ms=t_elapsed,
                 details={"precision": precision, "recall": recall, "f1": f1},
             ),
@@ -119,7 +119,7 @@ class ExtractionVerifier:
     def _verify_span_offsets(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
         source_doc = "Vendor: Acme Global Inc. Invoice: #INV-2026-99 Total: $12,450.00"
-        
+
         # Entity with span [8:24]
         span_start = 8
         span_end = 24

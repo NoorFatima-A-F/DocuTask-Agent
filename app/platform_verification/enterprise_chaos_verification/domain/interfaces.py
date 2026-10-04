@@ -24,7 +24,8 @@ from .models import (
 class IChaosVerifier(ABC):
     @property
     @abstractmethod
-    def verifier_id(self) -> str: pass
+    def verifier_id(self) -> str:
+        pass
 
     @property
     def phase_id(self) -> str:
@@ -36,67 +37,81 @@ class IChaosVerifier(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str: pass
+    def name(self) -> str:
+        pass
 
     @abstractmethod
-    def verify(self) -> Any: pass
+    def verify(self) -> Any:
+        pass
 
 
 class IChaosReadinessVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> ChaosReadinessReport: pass
+    def verify(self) -> ChaosReadinessReport:
+        pass
 
 
 class IContainerFailureVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> ContainerFailureReport: pass
+    def verify(self) -> ContainerFailureReport:
+        pass
 
 
 class IDatabaseFailureVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> DatabaseFailureReport: pass
+    def verify(self) -> DatabaseFailureReport:
+        pass
 
 
 class IQueueFailureVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> QueueFailureReport: pass
+    def verify(self) -> QueueFailureReport:
+        pass
 
 
 class INetworkFailureVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> NetworkFailureReport: pass
+    def verify(self) -> NetworkFailureReport:
+        pass
 
 
 class IAIProviderFailureVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> AIProviderFailureReport: pass
+    def verify(self) -> AIProviderFailureReport:
+        pass
 
 
 class IResourceExhaustionVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> ResourceExhaustionReport: pass
+    def verify(self) -> ResourceExhaustionReport:
+        pass
 
 
 class IWorkerAgentFailureVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> WorkerAgentFailureReport: pass
+    def verify(self) -> WorkerAgentFailureReport:
+        pass
 
 
 class ICascadingFailureVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> CascadingFailureReport: pass
+    def verify(self) -> CascadingFailureReport:
+        pass
 
 
 class IChaosAutomationPipelineVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> ChaosPipelineReport: pass
+    def verify(self) -> ChaosPipelineReport:
+        pass
 
 
 class IChaosObservabilityVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> ChaosObservabilityReport: pass
+    def verify(self) -> ChaosObservabilityReport:
+        pass
 
 
 class IChaosReportGenerationVerifier(IChaosVerifier):
     @abstractmethod
-    def verify(self) -> ChaosReportGenerationReport: pass
+    def verify(self) -> ChaosReportGenerationReport:
+        pass

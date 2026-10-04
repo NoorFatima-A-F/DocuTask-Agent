@@ -60,7 +60,9 @@ class TestingCollector(BaseCollector):
                             content = fp.read()
                             tree = ast.parse(content, filename=str(file_path))
                             for node in ast.walk(tree):
-                                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_"):
+                                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith(
+                                    "test_"
+                                ):
                                     test_functions_count += 1
                                 elif isinstance(node, ast.Assert):
                                     assert_statements_count += 1

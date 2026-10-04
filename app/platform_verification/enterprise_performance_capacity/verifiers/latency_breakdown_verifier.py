@@ -32,13 +32,62 @@ class LatencyBreakdownVerifier(ILatencyBreakdownVerifier):
 
     def verify(self) -> LatencyBreakdownReport:
         components = [
-            ComponentLatencySpec(component_name="API Gateway Ingress", latency_ms=28.0, percentage_of_total=2.58, p50_ms=24.0, p95_ms=42.0, p99_ms=64.0),
-            ComponentLatencySpec(component_name="Queue Dispatch & Waiting", latency_ms=14.5, percentage_of_total=1.34, p50_ms=10.2, p95_ms=18.5, p99_ms=26.0),
-            ComponentLatencySpec(component_name="Worker Lifecycle Exec", latency_ms=25.0, percentage_of_total=2.30, p50_ms=20.0, p95_ms=35.0, p99_ms=48.0),
-            ComponentLatencySpec(component_name="OCR Rasterization Pipeline", latency_ms=240.0, percentage_of_total=22.12, p50_ms=210.0, p95_ms=280.0, p99_ms=360.0),
-            ComponentLatencySpec(component_name="Gemini AI LLM Inference", latency_ms=750.0, percentage_of_total=69.12, p50_ms=680.0, p95_ms=850.0, p99_ms=1050.0),
-            ComponentLatencySpec(component_name="PostgreSQL DB Persistence", latency_ms=15.2, percentage_of_total=1.40, p50_ms=11.0, p95_ms=22.0, p99_ms=34.0),
-            ComponentLatencySpec(component_name="S3/MinIO Document Storage", latency_ms=12.3, percentage_of_total=1.14, p50_ms=9.5, p95_ms=18.0, p99_ms=28.0),
+            ComponentLatencySpec(
+                component_name="API Gateway Ingress",
+                latency_ms=28.0,
+                percentage_of_total=2.58,
+                p50_ms=24.0,
+                p95_ms=42.0,
+                p99_ms=64.0,
+            ),
+            ComponentLatencySpec(
+                component_name="Queue Dispatch & Waiting",
+                latency_ms=14.5,
+                percentage_of_total=1.34,
+                p50_ms=10.2,
+                p95_ms=18.5,
+                p99_ms=26.0,
+            ),
+            ComponentLatencySpec(
+                component_name="Worker Lifecycle Exec",
+                latency_ms=25.0,
+                percentage_of_total=2.30,
+                p50_ms=20.0,
+                p95_ms=35.0,
+                p99_ms=48.0,
+            ),
+            ComponentLatencySpec(
+                component_name="OCR Rasterization Pipeline",
+                latency_ms=240.0,
+                percentage_of_total=22.12,
+                p50_ms=210.0,
+                p95_ms=280.0,
+                p99_ms=360.0,
+            ),
+            ComponentLatencySpec(
+                component_name="Gemini AI LLM Inference",
+                latency_ms=750.0,
+                percentage_of_total=69.12,
+                p50_ms=680.0,
+                p95_ms=850.0,
+                p99_ms=1050.0,
+            ),
+            ComponentLatencySpec(
+                component_name="PostgreSQL DB Persistence",
+                latency_ms=15.2,
+                percentage_of_total=1.40,
+                p50_ms=11.0,
+                p95_ms=22.0,
+                p99_ms=34.0,
+            ),
+            ComponentLatencySpec(
+                component_name="S3/MinIO Document Storage",
+                latency_ms=12.3,
+                percentage_of_total=1.14,
+                p50_ms=9.5,
+                p95_ms=18.0,
+                p99_ms=28.0,
+            ),
         ]
 
         total_ms = sum(c.latency_ms for c in components)

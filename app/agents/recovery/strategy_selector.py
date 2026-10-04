@@ -34,5 +34,5 @@ class RecoveryStrategySelector:
             strategy=selected,
             parameters={"failure_id": str(failure.identity.failure_id), "cause": failure.probable_cause},
             estimated_cost_usd=0.05,
-            requires_human_gate=(failure.severity == FailureSeverity.CRITICAL)
+            requires_human_gate=(failure.severity == FailureSeverity.CRITICAL),
         )

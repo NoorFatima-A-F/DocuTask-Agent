@@ -79,7 +79,11 @@ def list_deployments(service_name: Optional[str] = None, environment: Optional[s
 def trigger_deployment(req: DeploymentCreateRequest) -> Dict[str, Any]:
     """Trigger a new deployment."""
     sdk = get_deployment_sdk()
-    strat = DeploymentStrategyType(req.strategy.lower()) if req.strategy.lower() in [s.value for s in DeploymentStrategyType] else DeploymentStrategyType.ROLLING
+    strat = (
+        DeploymentStrategyType(req.strategy.lower())
+        if req.strategy.lower() in [s.value for s in DeploymentStrategyType]
+        else DeploymentStrategyType.ROLLING
+    )
 
     try:
         record = sdk.deploy(
@@ -108,7 +112,11 @@ def get_deployment(deployment_id: str) -> Dict[str, Any]:
 def rollback_deployment(deployment_id: str, req: RollbackTriggerRequest) -> Dict[str, Any]:
     """Trigger rollback for a deployment."""
     sdk = get_deployment_sdk()
-    tt = RollbackTriggerType(req.trigger_type.lower()) if req.trigger_type.lower() in [t.value for t in RollbackTriggerType] else RollbackTriggerType.MANUAL
+    tt = (
+        RollbackTriggerType(req.trigger_type.lower())
+        if req.trigger_type.lower() in [t.value for t in RollbackTriggerType]
+        else RollbackTriggerType.MANUAL
+    )
     try:
         rca = sdk.rollback(deployment_id=deployment_id, reason=req.reason, trigger_type=tt)
         return asdict(rca)

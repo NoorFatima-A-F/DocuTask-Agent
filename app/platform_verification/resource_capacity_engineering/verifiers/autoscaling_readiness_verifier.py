@@ -32,9 +32,27 @@ class AutoscalingReadinessVerifier(IAutoscalingReadinessVerifier):
 
     def verify(self) -> AutoscalingReadinessReport:
         signals = [
-            ScalingTriggerSignal(signal_name="CPU Saturation Trigger", threshold="> 80% for 60s", current_value="82.4%", trigger_action="Scale Worker Pool +2 Replicas", verified=True),
-            ScalingTriggerSignal(signal_name="Queue Backlog Trigger", threshold="> 5,000 pending jobs", current_value="5,240 jobs", trigger_action="Scale Worker Pool +5 Replicas", verified=True),
-            ScalingTriggerSignal(signal_name="P95 Latency Degradation Trigger", threshold="P95 > 100ms for 30s", current_value="112.0ms", trigger_action="Scale Ingress Workers +2 Replicas", verified=True),
+            ScalingTriggerSignal(
+                signal_name="CPU Saturation Trigger",
+                threshold="> 80% for 60s",
+                current_value="82.4%",
+                trigger_action="Scale Worker Pool +2 Replicas",
+                verified=True,
+            ),
+            ScalingTriggerSignal(
+                signal_name="Queue Backlog Trigger",
+                threshold="> 5,000 pending jobs",
+                current_value="5,240 jobs",
+                trigger_action="Scale Worker Pool +5 Replicas",
+                verified=True,
+            ),
+            ScalingTriggerSignal(
+                signal_name="P95 Latency Degradation Trigger",
+                threshold="P95 > 100ms for 30s",
+                current_value="112.0ms",
+                trigger_action="Scale Ingress Workers +2 Replicas",
+                verified=True,
+            ),
         ]
 
         reaction_time = 18.0  # seconds to launch and register new workers

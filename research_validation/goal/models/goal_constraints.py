@@ -7,15 +7,21 @@ Specifies resource budgets, execution limits, privacy rules, and governance rest
 from dataclasses import dataclass, field
 from typing import Any, Dict, List
 from research_validation.goal.constants import (
-    DEFAULT_MAX_RUNTIME_HOURS, DEFAULT_MAX_GPU_HOURS, DEFAULT_MAX_CPU_HOURS,
-    DEFAULT_MAX_RAM_GB, DEFAULT_MAX_STORAGE_GB, DEFAULT_MAX_COST_USD,
-    DEFAULT_MAX_CONCURRENCY, DEFAULT_MAX_RETRIES
+    DEFAULT_MAX_RUNTIME_HOURS,
+    DEFAULT_MAX_GPU_HOURS,
+    DEFAULT_MAX_CPU_HOURS,
+    DEFAULT_MAX_RAM_GB,
+    DEFAULT_MAX_STORAGE_GB,
+    DEFAULT_MAX_COST_USD,
+    DEFAULT_MAX_CONCURRENCY,
+    DEFAULT_MAX_RETRIES,
 )
 
 
 @dataclass(frozen=True)
 class GoalConstraints:
     """Immutable resource and policy constraints bounding an autonomous goal."""
+
     max_runtime_hours: float = DEFAULT_MAX_RUNTIME_HOURS
     max_gpu_hours: float = DEFAULT_MAX_GPU_HOURS
     max_cpu_hours: float = DEFAULT_MAX_CPU_HOURS

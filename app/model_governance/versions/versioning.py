@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class ModelDeploymentVersion(BaseModel):
     """Specific pinned deployment version of a model."""
+
     deployment_id: str
     model_id: str
     model_family: str  # e.g. Gemini, Claude, GPT, Mistral
@@ -56,7 +57,9 @@ class ModelVersioningManager:
         self._versions[model_id].append(ver)
         return ver
 
-    def get_active_version(self, model_id: str, environment_label: str = "production") -> Optional[ModelDeploymentVersion]:
+    def get_active_version(
+        self, model_id: str, environment_label: str = "production"
+    ) -> Optional[ModelDeploymentVersion]:
         """Get currently active deployment version for environment."""
         versions = self._versions.get(model_id, [])
         for v in reversed(versions):

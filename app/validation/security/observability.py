@@ -16,7 +16,7 @@ class SecurityMetricsCollector:
         "hallucination_events_total": 0,
         "confidence_errors_total": 0,
         "provider_failures_total": 0,
-        "security_regressions_total": 0
+        "security_regressions_total": 0,
     }
 
     @classmethod

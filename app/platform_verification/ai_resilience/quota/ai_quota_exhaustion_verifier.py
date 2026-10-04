@@ -14,7 +14,7 @@ class AIQuotaExhaustionVerifier(IQuotaExhaustionVerifier):
         successful_retries = 0
 
         for i in range(rate_limited_count):
-            req = {"document_id": f"DOC-QUOTA-{i+1:04d}", "provider": "gemini-2.5-flash"}
+            req = {"document_id": f"DOC-QUOTA-{i + 1:04d}", "provider": "gemini-2.5-flash"}
             res = QuotaExhaustionScenario.execute(req, retry_after_seconds=5)
 
             if res["status_code"] == 429:

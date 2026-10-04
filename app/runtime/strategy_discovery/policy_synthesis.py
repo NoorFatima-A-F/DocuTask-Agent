@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class SynthesizedRecoveryPolicy(BaseModel):
     """Synthesized failure recovery policy rule with preconditions and actions."""
+
     policy_id: str = Field(default_factory=lambda: f"pol_syn_{uuid.uuid4().hex[:8]}")
     target_error_type: str
     trigger_condition: str

@@ -43,7 +43,9 @@ class CheckpointEngine:
         chk = WorkflowCheckpoint(
             workflow_id=workflow.workflow_id,
             step_index=step_index,
-            completed_steps=[*getattr(workflow.checkpoints[-1], "completed_steps", []), step_state] if workflow.checkpoints else [step_state],
+            completed_steps=[*getattr(workflow.checkpoints[-1], "completed_steps", []), step_state]
+            if workflow.checkpoints
+            else [step_state],
             variables=variables,
             memory_context=memory,
             fencing_token=fencing_token,

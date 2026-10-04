@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Performance.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.performance.domain.models import PerformanceEntity
+
 
 class PerformanceRepositoryInterface(ABC):
     @abstractmethod

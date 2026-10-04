@@ -12,6 +12,7 @@ from app.agents.runtime.exceptions import ConfigurationValidationError
 
 class RuntimeValidationReport(BaseModel):
     """Report detailing results of pre-flight kernel and subsystem validation checks."""
+
     is_valid: bool = True
     errors: List[str] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)

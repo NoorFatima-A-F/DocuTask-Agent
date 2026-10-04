@@ -35,7 +35,7 @@ class PostgresContextStore(ContextStore):
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (runtime_id, version)
         );
-        """
+        """,
     ]
 
     def __init__(self, db_executor: Any) -> None:
@@ -91,9 +91,7 @@ class PostgresContextStore(ContextStore):
         current_ver = (row[0] if isinstance(row, (list, tuple)) else (row.get("max") if row else None)) or 0
 
         if expected_version is not None and current_ver != expected_version:
-            raise ValueError(
-                f"Concurrency conflict: expected version {expected_version} but current is {current_ver}"
-            )
+            raise ValueError(f"Concurrency conflict: expected version {expected_version} but current is {current_ver}")
 
         next_ver = current_ver + 1
         ctx = await self.load_context(runtime_id)

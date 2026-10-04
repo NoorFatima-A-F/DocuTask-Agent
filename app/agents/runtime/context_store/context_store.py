@@ -12,6 +12,7 @@ from app.agents.runtime.runtime_context import RuntimeContext
 
 class CheckpointRecord(BaseModel):
     """Metadata and state representation for a single context checkpoint."""
+
     runtime_id: str
     version: int
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

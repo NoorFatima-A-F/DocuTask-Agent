@@ -2,6 +2,7 @@
 3J.1.2: Baseline Performance Verifier
 Measures baseline API latency percentiles, throughput, and resource consumption before applying load.
 """
+
 from typing import List
 from app.platform_verification.performance_capacity_engineering.domain.models import (
     BaselinePerformanceReport,

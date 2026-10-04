@@ -159,32 +159,42 @@ class VertexAIGeminiGateway:
         """Deterministic fallback synthesizer conforming to Vertex AI responses."""
         p_lower = prompt.lower()
         if "replan" in p_lower or "mutation" in p_lower or "repair" in p_lower:
-            return json.dumps({
-                "strategy": "inject_validation_and_retry",
-                "mutations": [
-                    {"action": "REPLACE_TOOL", "target_node": "ocr_extraction", "new_tool": "advanced_vision_ocr"},
-                    {"action": "INSERT_GATE", "after_node": "advanced_vision_ocr", "new_node": "cross_field_validator"},
-                ],
-                "confidence": 0.98,
-                "rationale": "High OCR error rate detected in reflection; substituting multi-modal vision extractor.",
-            })
+            return json.dumps(
+                {
+                    "strategy": "inject_validation_and_retry",
+                    "mutations": [
+                        {"action": "REPLACE_TOOL", "target_node": "ocr_extraction", "new_tool": "advanced_vision_ocr"},
+                        {
+                            "action": "INSERT_GATE",
+                            "after_node": "advanced_vision_ocr",
+                            "new_node": "cross_field_validator",
+                        },
+                    ],
+                    "confidence": 0.98,
+                    "rationale": "High OCR error rate detected in reflection; substituting multi-modal vision extractor.",
+                }
+            )
         elif "goal" in p_lower or "intent" in p_lower:
-            return json.dumps({
-                "primary_intent": "document_processing",
-                "document_type": "invoice",
-                "confidence": 0.97,
-                "key_entities": ["invoice_number", "total_amount", "vendor_name", "line_items"],
-                "constraints": {"max_latency_ms": 500, "min_accuracy": 0.99},
-                "recommended_strategy": "pareto_balanced",
-                "rationale": "Gemini 1.5 Pro parsed enterprise document processing objective with strict accuracy constraints.",
-            })
+            return json.dumps(
+                {
+                    "primary_intent": "document_processing",
+                    "document_type": "invoice",
+                    "confidence": 0.97,
+                    "key_entities": ["invoice_number", "total_amount", "vendor_name", "line_items"],
+                    "constraints": {"max_latency_ms": 500, "min_accuracy": 0.99},
+                    "recommended_strategy": "pareto_balanced",
+                    "rationale": "Gemini 1.5 Pro parsed enterprise document processing objective with strict accuracy constraints.",
+                }
+            )
         else:
-            return json.dumps({
-                "status": "ANALYZED",
-                "score": 0.95,
-                "findings": ["Valid document structure", "High entity consistency"],
-                "recommendation": "PROCEED",
-            })
+            return json.dumps(
+                {
+                    "status": "ANALYZED",
+                    "score": 0.95,
+                    "findings": ["Valid document structure", "High entity consistency"],
+                    "recommendation": "PROCEED",
+                }
+            )
 
 
 class GCPCloudEventBridge:

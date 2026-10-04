@@ -1,6 +1,7 @@
 """
 Phase 3H.5.10: Enterprise Health Security, Privacy & Information Exposure Verification — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, Field
@@ -44,6 +45,7 @@ class HealthSecurityCertificationTier(str, Enum):
 
 # ─── 3H.5.10.1: Health Endpoint Security & Information Exposure ─────────────
 
+
 class EndpointAuditItem(BaseModel):
     endpoint_path: str
     access_tier: SecurityTier
@@ -71,6 +73,7 @@ class EndpointSecurityReport(BaseModel):
 
 # ─── 3H.5.10.2: Health Access Control & RBAC Verification ───────────────────
 
+
 class AuthTestItem(BaseModel):
     endpoint_path: str
     required_role: str
@@ -93,6 +96,7 @@ class HealthAuthorizationReport(BaseModel):
 
 
 # ─── 3H.5.10.3: Metrics Privacy & Label Sanitization ────────────────────────
+
 
 class MetricLabelAuditItem(BaseModel):
     metric_name: str
@@ -117,6 +121,7 @@ class MetricsPrivacyReport(BaseModel):
 
 # ─── 3H.5.10.4: Operational Log Sanitization Verification ────────────────────
 
+
 class LogSanitizationItem(BaseModel):
     log_sample_id: str
     category: str  # db_error, auth_failure, health_probe, llm_inference
@@ -139,6 +144,7 @@ class LogSecurityReport(BaseModel):
 
 # ─── 3H.5.10.5: Alert Notification Sanitization & Channel Security ───────────
 
+
 class AlertChannelAuditItem(BaseModel):
     channel_name: str  # Slack, PagerDuty, Webhook, Email
     encryption_in_transit: str = "TLS_1_3"
@@ -159,6 +165,7 @@ class AlertSecurityReport(BaseModel):
 
 
 # ─── 3H.5.10.6: Distributed Tracing Privacy & Payload Protection ────────────
+
 
 class TraceSpanAuditItem(BaseModel):
     span_name: str
@@ -181,6 +188,7 @@ class TraceSecurityReport(BaseModel):
 
 # ─── 3H.5.10.7: Secret Exposure Scanning Across Health & Observability ───────
 
+
 class SecretScanFinding(BaseModel):
     surface: str  # health_api, prometheus_metrics, system_logs, alert_stream, otel_traces
     detector_pattern: str  # API_KEY, JWT_SECRET, DB_PASSWORD, CLOUD_CREDS
@@ -201,6 +209,7 @@ class SecretScanReport(BaseModel):
 
 
 # ─── 3H.5.10.8: Operational Dashboard & Telemetry Storage Security ───────────
+
 
 class DashboardSecurityItem(BaseModel):
     component: str  # Grafana, Prometheus_TSDB, OpenSearch_Logs, Jaeger_Traces
@@ -223,6 +232,7 @@ class DashboardSecurityReport(BaseModel):
 
 # ─── 3H.5.10.9: Security Failure Injection & Resilience Testing ──────────────
 
+
 class SecurityInjectionScenario(BaseModel):
     scenario_id: str
     name: str
@@ -244,6 +254,7 @@ class SecurityFailureInjectionReport(BaseModel):
 
 
 # ─── 3H.5.10.10: Compliance & Standards Certification ────────────────────────
+
 
 class ComplianceCheckItem(BaseModel):
     framework: ComplianceFramework
@@ -268,6 +279,7 @@ class ComplianceSecurityReport(BaseModel):
 
 
 # ─── Master Scorecard & Certification ────────────────────────────────────────
+
 
 class HealthSecurityCategoryScore(BaseModel):
     category_name: str

@@ -18,7 +18,9 @@ class ReplayCursor(BaseModel):
     progress_percentage: float = Field(default=0.0, ge=0.0, le=100.0, description="Progress (0.0 to 100.0)")
     last_seek_time: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
-    def update_position(self, index: int, total: int, event_id: Optional[str] = None, timestamp: Optional[str] = None) -> None:
+    def update_position(
+        self, index: int, total: int, event_id: Optional[str] = None, timestamp: Optional[str] = None
+    ) -> None:
         """Updates cursor metrics safely bounded by [0, max(0, total - 1)]."""
         self.total_events = total
         if total == 0:
@@ -34,7 +36,7 @@ class ReplayCursor(BaseModel):
         self.current_index = clamped
         self.current_event_id = str(event_id) if event_id is not None else None
         self.current_timestamp = str(timestamp) if timestamp is not None else None
-        self.is_at_start = (clamped == 0)
-        self.is_at_end = (clamped >= total - 1)
+        self.is_at_start = clamped == 0
+        self.is_at_end = clamped >= total - 1
         self.progress_percentage = round((clamped / max(1, total - 1)) * 100.0, 2)
         self.last_seek_time = datetime.now(timezone.utc).isoformat()

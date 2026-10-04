@@ -13,9 +13,15 @@ class TimelineRenderer:
         cat_str = event.category.value if hasattr(event.category, "value") else str(event.category)
         type_str = event.event_type.value if hasattr(event.event_type, "value") else str(event.event_type)
 
-        summary = event.payload.get("summary", event.payload.get("message", f"Event '{type_str}' in stage '{event.stage}'"))
+        summary = event.payload.get(
+            "summary", event.payload.get("message", f"Event '{type_str}' in stage '{event.stage}'")
+        )
         dur = float(event.payload["duration_ms"]) if "duration_ms" in event.payload else None
-        cost = float(event.payload.get("cost_usd", event.payload.get("amount", 0.0))) if ("cost_usd" in event.payload or "amount" in event.payload) else None
+        cost = (
+            float(event.payload.get("cost_usd", event.payload.get("amount", 0.0)))
+            if ("cost_usd" in event.payload or "amount" in event.payload)
+            else None
+        )
 
         is_milestone = (
             event.category == EventCategory.MISSION

@@ -1,6 +1,7 @@
 """
 Abstract interfaces for Part 2G: Enterprise Test Architecture Verification Framework.
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional
 from app.platform_verification.test_architecture_verification.domain.models import (
@@ -59,6 +60,7 @@ class IEnvironmentValidator(ABC):
 
 class ITestScoringEngine(ABC):
     __test__ = False
+
     @abstractmethod
     def calculate_scorecard(
         self,
@@ -75,6 +77,7 @@ class ITestScoringEngine(ABC):
 
 class ITestEvidenceStore(ABC):
     __test__ = False
+
     @abstractmethod
     def seal_and_store_evidence(self, package: TestArchitectureEvidencePackage) -> str:
         """Persists and seals test architecture verification evidence with SHA-256."""

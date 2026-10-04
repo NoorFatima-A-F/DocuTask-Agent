@@ -40,7 +40,11 @@ class AlternatePlanner:
         cf_pro_acc = min(0.998, factual_accuracy + 0.015)
         cf_pro_lat = factual_latency_ms * 2.8
         cf_pro_cost = factual_cost_usd * 8.5
-        cf_pro_u = (cf_pro_acc * 0.45) + max(0.0, 1.0 - (cf_pro_lat / 3000.0)) * 0.25 + max(0.0, 1.0 - (cf_pro_cost / 0.05)) * 0.30
+        cf_pro_u = (
+            (cf_pro_acc * 0.45)
+            + max(0.0, 1.0 - (cf_pro_lat / 3000.0)) * 0.25
+            + max(0.0, 1.0 - (cf_pro_cost / 0.05)) * 0.30
+        )
         alternatives.append(
             CounterfactualCandidate(
                 branch_id="CF-PRO-001",
@@ -58,7 +62,11 @@ class AlternatePlanner:
         cf_lite_acc = max(0.88, factual_accuracy - 0.045)
         cf_lite_lat = max(180.0, factual_latency_ms * 0.45)
         cf_lite_cost = max(0.0003, factual_cost_usd * 0.25)
-        cf_lite_u = (cf_lite_acc * 0.45) + max(0.0, 1.0 - (cf_lite_lat / 3000.0)) * 0.25 + max(0.0, 1.0 - (cf_lite_cost / 0.05)) * 0.30
+        cf_lite_u = (
+            (cf_lite_acc * 0.45)
+            + max(0.0, 1.0 - (cf_lite_lat / 3000.0)) * 0.25
+            + max(0.0, 1.0 - (cf_lite_cost / 0.05)) * 0.30
+        )
         alternatives.append(
             CounterfactualCandidate(
                 branch_id="CF-LITE-002",
@@ -76,7 +84,11 @@ class AlternatePlanner:
         cf_noretry_acc = max(0.85, factual_accuracy - 0.08)
         cf_noretry_lat = max(300.0, factual_latency_ms * 0.70)
         cf_noretry_cost = factual_cost_usd * 0.80
-        cf_noretry_u = (cf_noretry_acc * 0.45) + max(0.0, 1.0 - (cf_noretry_lat / 3000.0)) * 0.25 + max(0.0, 1.0 - (cf_noretry_cost / 0.05)) * 0.30
+        cf_noretry_u = (
+            (cf_noretry_acc * 0.45)
+            + max(0.0, 1.0 - (cf_noretry_lat / 3000.0)) * 0.25
+            + max(0.0, 1.0 - (cf_noretry_cost / 0.05)) * 0.30
+        )
         alternatives.append(
             CounterfactualCandidate(
                 branch_id="CF-NORETRY-003",

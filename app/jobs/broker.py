@@ -1,4 +1,5 @@
 from app.core.security import sanitize_log_input
+
 """
 Priority Message Broker Subsystem.
 Implements HIGH, MEDIUM, and LOW priority queues with starvation prevention.
@@ -30,7 +31,9 @@ class PriorityMessageBroker:
         else:
             await self.medium_queue.put(payload)
 
-        logger.info("Enqueued job '%s' with priority '%s'", sanitize_log_input(payload.get('job_id')), sanitize_log_input(prio))
+        logger.info(
+            "Enqueued job '%s' with priority '%s'", sanitize_log_input(payload.get("job_id")), sanitize_log_input(prio)
+        )
         return True
 
     async def dequeue(self) -> Optional[Dict[str, Any]]:
@@ -60,7 +63,7 @@ class PriorityMessageBroker:
             "high_queue_depth": self.high_queue.qsize(),
             "medium_queue_depth": self.medium_queue.qsize(),
             "low_queue_depth": self.low_queue.qsize(),
-            "total_waiting_jobs": self.high_queue.qsize() + self.medium_queue.qsize() + self.low_queue.qsize()
+            "total_waiting_jobs": self.high_queue.qsize() + self.medium_queue.qsize() + self.low_queue.qsize(),
         }
 
 

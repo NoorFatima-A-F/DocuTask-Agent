@@ -133,12 +133,54 @@ class FMEARiskEngine:
     def _build_standard_stride(self) -> List[STRIDEThreat]:
         """Builds standard STRIDE threat model."""
         return [
-            STRIDEThreat("STRIDE-01", "Spoofing", "AgentRegistry", "Impersonation of trusted agent ID", "HMAC cryptographic signing of agent capability declarations", "LOW"),
-            STRIDEThreat("STRIDE-02", "Tampering", "TaskGraphSnapshot", "Modification of persisted execution state", "SHA-256 state hashing and integrity verification on load", "LOW"),
-            STRIDEThreat("STRIDE-03", "Repudiation", "EnterpriseEventBus", "Denial of tool action execution", "Append-only immutable event store with SHA-256 hash chaining", "LOW"),
-            STRIDEThreat("STRIDE-04", "Information Disclosure", "ToolExecutionController", "Leakage of patient PHI / PII", "Real-time tokenized masking and HIPAA statutory compliance gate", "LOW"),
-            STRIDEThreat("STRIDE-05", "Denial of Service", "DecisionLoop", "Infinite cognitive execution loop", "Strict max_iterations limit (default 10) and budget caps", "LOW"),
-            STRIDEThreat("STRIDE-06", "Elevation of Privilege", "SecurityGuardian", "Unauthorized agent invoking administrative tools", "Role-based action policies and permission boundary checking", "LOW"),
+            STRIDEThreat(
+                "STRIDE-01",
+                "Spoofing",
+                "AgentRegistry",
+                "Impersonation of trusted agent ID",
+                "HMAC cryptographic signing of agent capability declarations",
+                "LOW",
+            ),
+            STRIDEThreat(
+                "STRIDE-02",
+                "Tampering",
+                "TaskGraphSnapshot",
+                "Modification of persisted execution state",
+                "SHA-256 state hashing and integrity verification on load",
+                "LOW",
+            ),
+            STRIDEThreat(
+                "STRIDE-03",
+                "Repudiation",
+                "EnterpriseEventBus",
+                "Denial of tool action execution",
+                "Append-only immutable event store with SHA-256 hash chaining",
+                "LOW",
+            ),
+            STRIDEThreat(
+                "STRIDE-04",
+                "Information Disclosure",
+                "ToolExecutionController",
+                "Leakage of patient PHI / PII",
+                "Real-time tokenized masking and HIPAA statutory compliance gate",
+                "LOW",
+            ),
+            STRIDEThreat(
+                "STRIDE-05",
+                "Denial of Service",
+                "DecisionLoop",
+                "Infinite cognitive execution loop",
+                "Strict max_iterations limit (default 10) and budget caps",
+                "LOW",
+            ),
+            STRIDEThreat(
+                "STRIDE-06",
+                "Elevation of Privilege",
+                "SecurityGuardian",
+                "Unauthorized agent invoking administrative tools",
+                "Role-based action policies and permission boundary checking",
+                "LOW",
+            ),
         ]
 
     def generate_fmea_evidence(self) -> EvidenceItem:

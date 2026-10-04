@@ -83,9 +83,7 @@ class DiagnosticEngine:
             )
             self.diagnoses[diag_id] = diag
             diagnosed.append(diag)
-            self.event_bus.publish(
-                ArchitectureWeaknessDetected(payload=diag.to_dict())
-            )
+            self.event_bus.publish(ArchitectureWeaknessDetected(payload=diag.to_dict()))
 
         if snapshot and snapshot.latency_p95_ms > 150.0:
             diag_id = f"diag_{uuid.uuid4().hex[:8]}"
@@ -100,9 +98,7 @@ class DiagnosticEngine:
             )
             self.diagnoses[diag_id] = diag
             diagnosed.append(diag)
-            self.event_bus.publish(
-                PerformanceRegressionDetected(payload=diag.to_dict())
-            )
+            self.event_bus.publish(PerformanceRegressionDetected(payload=diag.to_dict()))
 
         return list(self.diagnoses.values())
 

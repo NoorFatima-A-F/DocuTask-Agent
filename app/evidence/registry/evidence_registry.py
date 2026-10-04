@@ -43,7 +43,9 @@ class EvidenceRegistry:
         expected_hash = item.compute_hash()
         if item.item_hash != expected_hash:
             item.verification_status = VerificationStatus.HASH_MISMATCH
-            logger.warning("Hash mismatch for EvidenceItem %s: %s != %s", item.evidence_id, item.item_hash, expected_hash)
+            logger.warning(
+                "Hash mismatch for EvidenceItem %s: %s != %s", item.evidence_id, item.item_hash, expected_hash
+            )
 
         self._items[item.evidence_id] = item
 
@@ -84,7 +86,9 @@ class EvidenceRegistry:
         catalog = {
             "total_evidence_items": len(self._items),
             "by_type": {t.value: len(ids) for t, ids in self._type_index.items()},
-            "verified_items_count": sum(1 for item in self._items.values() if item.verification_status == VerificationStatus.VERIFIED),
+            "verified_items_count": sum(
+                1 for item in self._items.values() if item.verification_status == VerificationStatus.VERIFIED
+            ),
             "items": [item.to_dict() for item in self._items.values()],
         }
         target = output_file or self.persistence_path

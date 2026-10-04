@@ -1,6 +1,7 @@
 """
 Architecture Evidence Store for saving and retrieving immutable scan artifacts.
 """
+
 from __future__ import annotations
 from typing import Dict, Optional
 from app.platform_verification.architecture_verification.domain.interfaces import IArchitectureEvidenceStore

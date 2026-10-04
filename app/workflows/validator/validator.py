@@ -45,16 +45,34 @@ class WorkflowValidator:
         task_ids = set()
         for task in definition.tasks:
             if task.id in task_ids:
-                issues.append(ValidationIssue(IssueSeverity.ERROR, "ERR_DUPLICATE_TASK_ID", f"Duplicate task ID: {task.id}", task.id))
+                issues.append(
+                    ValidationIssue(
+                        IssueSeverity.ERROR, "ERR_DUPLICATE_TASK_ID", f"Duplicate task ID: {task.id}", task.id
+                    )
+                )
             task_ids.add(task.id)
 
             if task.timeout_seconds <= 0:
-                issues.append(ValidationIssue(IssueSeverity.WARNING, "WARN_INVALID_TIMEOUT", f"Task {task.id} has invalid timeout <= 0", task.id))
+                issues.append(
+                    ValidationIssue(
+                        IssueSeverity.WARNING,
+                        "WARN_INVALID_TIMEOUT",
+                        f"Task {task.id} has invalid timeout <= 0",
+                        task.id,
+                    )
+                )
 
             # Validate dependencies reference real task IDs
             for dep in task.dependencies:
                 if dep not in [t.id for t in definition.tasks]:
-                    issues.append(ValidationIssue(IssueSeverity.ERROR, "ERR_UNKNOWN_DEP", f"Task {task.id} depends on unknown task {dep}", task.id))
+                    issues.append(
+                        ValidationIssue(
+                            IssueSeverity.ERROR,
+                            "ERR_UNKNOWN_DEP",
+                            f"Task {task.id} depends on unknown task {dep}",
+                            task.id,
+                        )
+                    )
 
         return issues
 
@@ -67,12 +85,24 @@ class WorkflowValidator:
         cycles = graph.detect_cycles()
         if cycles:
             for c in cycles:
-                issues.append(ValidationIssue(IssueSeverity.ERROR, "ERR_CYCLE_DETECTED", f"Cycle detected in execution graph: {' -> '.join(c)}"))
+                issues.append(
+                    ValidationIssue(
+                        IssueSeverity.ERROR,
+                        "ERR_CYCLE_DETECTED",
+                        f"Cycle detected in execution graph: {' -> '.join(c)}",
+                    )
+                )
 
         # 2. Reachability check from root nodes
         roots = graph.get_root_nodes()
         if not roots and graph.list_nodes():
-            issues.append(ValidationIssue(IssueSeverity.ERROR, "ERR_NO_ENTRY_POINT", "Graph has no entry root node (all nodes have dependencies)"))
+            issues.append(
+                ValidationIssue(
+                    IssueSeverity.ERROR,
+                    "ERR_NO_ENTRY_POINT",
+                    "Graph has no entry root node (all nodes have dependencies)",
+                )
+            )
 
         # 3. Linter: Dead / Unreachable nodes
         reachable = set()
@@ -88,7 +118,14 @@ class WorkflowValidator:
         all_node_ids = {n.node_id for n in graph.list_nodes()}
         unreachable = all_node_ids - reachable
         for unreach_id in unreachable:
-            issues.append(ValidationIssue(IssueSeverity.WARNING, "WARN_UNREACHABLE_NODE", f"Node '{unreach_id}' is unreachable from root entry points", unreach_id))
+            issues.append(
+                ValidationIssue(
+                    IssueSeverity.WARNING,
+                    "WARN_UNREACHABLE_NODE",
+                    f"Node '{unreach_id}' is unreachable from root entry points",
+                    unreach_id,
+                )
+            )
 
         return issues
 

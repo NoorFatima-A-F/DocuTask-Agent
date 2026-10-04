@@ -20,6 +20,7 @@ logger = logging.getLogger("infrastructure.recovery.checkpoints")
 
 class CheckpointType(str, enum.Enum):
     """Type of state checkpoint."""
+
     STATE_SNAPSHOT = "STATE_SNAPSHOT"
     DATABASE_DUMP = "DATABASE_DUMP"
     TRANSACTION_LOG = "TRANSACTION_LOG"
@@ -29,6 +30,7 @@ class CheckpointType(str, enum.Enum):
 
 class CheckpointStatus(str, enum.Enum):
     """Lifecycle status of a checkpoint."""
+
     CREATED = "CREATED"
     VERIFIED = "VERIFIED"
     RESTORING = "RESTORING"
@@ -39,6 +41,7 @@ class CheckpointStatus(str, enum.Enum):
 
 class Checkpoint(BaseModel):
     """Immutable state snapshot metadata."""
+
     checkpoint_id: str
     checkpoint_type: CheckpointType
     entity_id: str

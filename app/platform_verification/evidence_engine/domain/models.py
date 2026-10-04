@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Verification Evidence Collection, Traceability & Audit Architecture (PART 4).
 """
+
 from __future__ import annotations
 import hashlib
 import uuid
@@ -85,11 +86,11 @@ class EvidenceContext(BaseModel):
 
 
 class AiDecisionEvidence(BaseModel):
-    model_info: Dict[str, Any] = Field(default_factory=dict)       # provider, name, version, params
-    prompt_info: Dict[str, Any] = Field(default_factory=dict)      # system, user, template_ver
-    context_info: Dict[str, Any] = Field(default_factory=dict)     # retrieved_docs, embeddings, ranking
-    tool_calls: List[Dict[str, Any]] = Field(default_factory=list) # tool name, params, outputs
-    permitted_reasoning: Dict[str, Any] = Field(default_factory=dict) # decision summaries, confidence
+    model_info: Dict[str, Any] = Field(default_factory=dict)  # provider, name, version, params
+    prompt_info: Dict[str, Any] = Field(default_factory=dict)  # system, user, template_ver
+    context_info: Dict[str, Any] = Field(default_factory=dict)  # retrieved_docs, embeddings, ranking
+    tool_calls: List[Dict[str, Any]] = Field(default_factory=list)  # tool name, params, outputs
+    permitted_reasoning: Dict[str, Any] = Field(default_factory=dict)  # decision summaries, confidence
 
 
 class ValidationReport(BaseModel):

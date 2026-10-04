@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Disaster Recovery Architecture Verification (Part 3G.1).
 """
+
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List
@@ -16,7 +17,9 @@ class DRMaturityLevel(str, Enum):
 
 
 class ComponentTier(str, Enum):
-    TIER_0_MISSION_CRITICAL = "TIER_0_MISSION_CRITICAL"  # Complete business outage (Postgres, Storage, Auth, Agent State)
+    TIER_0_MISSION_CRITICAL = (
+        "TIER_0_MISSION_CRITICAL"  # Complete business outage (Postgres, Storage, Auth, Agent State)
+    )
     TIER_1_CRITICAL = "TIER_1_CRITICAL"  # Major degradation (Queue, Workers, Knowledge)
     TIER_2_IMPORTANT = "TIER_2_IMPORTANT"  # Analytics, Dashboards
     TIER_3_NON_CRITICAL = "TIER_3_NON_CRITICAL"  # Caches, Temp files
@@ -117,11 +120,11 @@ class DRSecurityValidationReport:
 @dataclass
 class DRCertificationScorecard:
     recovery_capability_score: float  # 30%
-    backup_reliability_score: float   # 20%
-    data_integrity_score: float       # 20%
-    automation_score: float           # 15%
-    security_score: float             # 10%
-    documentation_score: float        # 5%
+    backup_reliability_score: float  # 20%
+    data_integrity_score: float  # 20%
+    automation_score: float  # 15%
+    security_score: float  # 10%
+    documentation_score: float  # 5%
     composite_score: float
     maturity_level: DRMaturityLevel
     certification_tier: DRCertificationTier

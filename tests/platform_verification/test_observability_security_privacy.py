@@ -1,6 +1,7 @@
 """
 Test Suite: Phase 3I.7 Observability Security, Privacy & Compliance Verification Framework
 """
+
 import os
 import json
 import pytest
@@ -69,6 +70,7 @@ from app.platform_verification.observability_security.api.observability_security
 
 
 # ─── 1. Individual Verifier Tests ─────────────────────────────────────────────
+
 
 def test_threat_model_verifier():
     verifier = ThreatModelVerifier()
@@ -195,6 +197,7 @@ def test_continuous_security_verifier():
 
 # ─── 2. Scorer Tests ──────────────────────────────────────────────────────────
 
+
 def test_observability_security_scorer():
     runtime = ObservabilitySecurityRuntime()
     scorer = runtime.scorer
@@ -225,6 +228,7 @@ def test_observability_security_scorer():
 
 
 # ─── 3. Exporter & Artifact Verification ──────────────────────────────────────
+
 
 def test_observability_security_evidence_exporter(tmp_path):
     output_dir = str(tmp_path / "security_test_export")
@@ -260,6 +264,7 @@ def test_observability_security_evidence_exporter(tmp_path):
 
 
 # ─── 4. REST API Endpoints ───────────────────────────────────────────────────
+
 
 @pytest.fixture
 def api_client():

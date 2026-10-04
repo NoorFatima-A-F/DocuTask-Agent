@@ -28,12 +28,14 @@ class ExperienceRanker:
             succ = float(exp.get("success_rate", 0.9))
             conf = float(exp.get("confidence", 0.9))
             utility = round(0.6 * succ + 0.4 * conf, 4)
-            scored.append({
-                "experience_id": exp_id,
-                "utility": utility,
-                "confidence": conf,
-                "success_rate": succ,
-            })
+            scored.append(
+                {
+                    "experience_id": exp_id,
+                    "utility": utility,
+                    "confidence": conf,
+                    "success_rate": succ,
+                }
+            )
 
         # Sort descending by utility
         scored.sort(key=lambda x: x["utility"], reverse=True)

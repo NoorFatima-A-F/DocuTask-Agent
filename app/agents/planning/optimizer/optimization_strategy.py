@@ -12,6 +12,7 @@ from typing import Dict
 
 class OptimizationStrategy(str, Enum):
     """Supported strategic optimization targets."""
+
     BALANCED = "balanced"
     COST_OPTIMIZED = "cost_optimized"
     LATENCY_OPTIMIZED = "latency_optimized"
@@ -22,6 +23,7 @@ class OptimizationStrategy(str, Enum):
 @dataclass(frozen=True)
 class StrategyWeights:
     """Normalized weights across the 5 Pareto dimensions."""
+
     weight_quality: float = 0.30
     weight_cost: float = 0.20
     weight_latency: float = 0.20
@@ -29,7 +31,9 @@ class StrategyWeights:
     weight_risk: float = 0.10
 
     def validate(self) -> bool:
-        total = self.weight_quality + self.weight_cost + self.weight_latency + self.weight_reliability + self.weight_risk
+        total = (
+            self.weight_quality + self.weight_cost + self.weight_latency + self.weight_reliability + self.weight_risk
+        )
         return abs(total - 1.0) < 1e-4
 
 

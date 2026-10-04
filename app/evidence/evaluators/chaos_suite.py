@@ -109,13 +109,17 @@ class ChaosEngineeringPlatform:
             recovered_successfully=recovered,
             data_loss_detected=False,
             rollback_successful=True,
-            details={"crashed_worker": "worker_dead", "survivor_worker": "worker_survivor", "lease_token": lease2.lease_token if lease2 else ""},
+            details={
+                "crashed_worker": "worker_dead",
+                "survivor_worker": "worker_survivor",
+                "lease_token": lease2.lease_token if lease2 else "",
+            },
         )
 
     async def experiment_poison_message_dlq(self) -> ChaosFaultExperimentResult:
         """Injects unparseable/poison messages and verifies quarantine in DeadLetterQueue."""
         dlq = DeadLetterQueue(max_capacity=50)
-        evt = GoalReceivedEvent(execution_id="exec_poison", payload={"corrupt_binary": b"\x00\xFF\xFE".hex()})
+        evt = GoalReceivedEvent(execution_id="exec_poison", payload={"corrupt_binary": b"\x00\xff\xfe".hex()})
 
         t0 = time.perf_counter()
         dlq.enqueue(evt, topic="AgentEvent", error=ValueError("Deserialization failure: invalid binary payload"))
@@ -201,7 +205,9 @@ class ChaosEngineeringPlatform:
             evidence_type=EvidenceType.CHAOS_TEST,
             source="app.evidence.evaluators.chaos_suite",
             generated_by="chaos_engineering_platform",
-            verification_status=VerificationStatus.VERIFIED if res.recovered_successfully else VerificationStatus.FAILED_VERIFICATION,
+            verification_status=VerificationStatus.VERIFIED
+            if res.recovered_successfully
+            else VerificationStatus.FAILED_VERIFICATION,
             confidence=1.0,
             reproducibility="DETERMINISTIC",
             raw_payload={

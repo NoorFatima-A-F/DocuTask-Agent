@@ -29,12 +29,42 @@ class CICDSecurityGateVerifier(ICICDSecurityGateVerifier):
 
     def verify(self) -> CICDSecurityReport:
         gates = [
-            PipelineSecurityGate(stage_name="1. Secret Detection Gate", scan_type="Gitleaks / TruffleHog Pre-Commit & PR Scan", blocking_enabled=True, gate_status="PASSED"),
-            PipelineSecurityGate(stage_name="2. Software Dependency Scan", scan_type="pip-audit / Safety / npm audit", blocking_enabled=True, gate_status="PASSED"),
-            PipelineSecurityGate(stage_name="3. Static Application Security Testing (SAST)", scan_type="Bandit / Semgrep AST Rules", blocking_enabled=True, gate_status="PASSED"),
-            PipelineSecurityGate(stage_name="4. Container Image Vulnerability Scan", scan_type="Trivy / Grype CVE Gate", blocking_enabled=True, gate_status="PASSED"),
-            PipelineSecurityGate(stage_name="5. Infrastructure as Code (IaC) Scan", scan_type="tfsec / Checkov / KubeLinter", blocking_enabled=True, gate_status="PASSED"),
-            PipelineSecurityGate(stage_name="6. Image Cryptographic Signature Verification", scan_type="Cosign Signature Admission Gate", blocking_enabled=True, gate_status="PASSED"),
+            PipelineSecurityGate(
+                stage_name="1. Secret Detection Gate",
+                scan_type="Gitleaks / TruffleHog Pre-Commit & PR Scan",
+                blocking_enabled=True,
+                gate_status="PASSED",
+            ),
+            PipelineSecurityGate(
+                stage_name="2. Software Dependency Scan",
+                scan_type="pip-audit / Safety / npm audit",
+                blocking_enabled=True,
+                gate_status="PASSED",
+            ),
+            PipelineSecurityGate(
+                stage_name="3. Static Application Security Testing (SAST)",
+                scan_type="Bandit / Semgrep AST Rules",
+                blocking_enabled=True,
+                gate_status="PASSED",
+            ),
+            PipelineSecurityGate(
+                stage_name="4. Container Image Vulnerability Scan",
+                scan_type="Trivy / Grype CVE Gate",
+                blocking_enabled=True,
+                gate_status="PASSED",
+            ),
+            PipelineSecurityGate(
+                stage_name="5. Infrastructure as Code (IaC) Scan",
+                scan_type="tfsec / Checkov / KubeLinter",
+                blocking_enabled=True,
+                gate_status="PASSED",
+            ),
+            PipelineSecurityGate(
+                stage_name="6. Image Cryptographic Signature Verification",
+                scan_type="Cosign Signature Admission Gate",
+                blocking_enabled=True,
+                gate_status="PASSED",
+            ),
         ]
 
         checks = [

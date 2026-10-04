@@ -2,6 +2,7 @@
 3I.11.9: Cloud Provider Observability Integration Verifier
 Validates unified integration across AWS, Google Cloud, Azure, and Kubernetes.
 """
+
 from typing import List
 from app.platform_verification.enterprise_observability_platform.domain.models import (
     CloudObservabilityIntegrationReport,
@@ -17,13 +18,21 @@ class CloudIntegrationVerifier(ICloudIntegrationVerifier):
         integrations: List[CloudProviderIntegrationSpec] = [
             CloudProviderIntegrationSpec(
                 cloud_platform="AWS",
-                native_telemetry_services=["Amazon CloudWatch Metrics & Logs", "AWS X-Ray Distributed Tracing", "AWS Container Insights"],
+                native_telemetry_services=[
+                    "Amazon CloudWatch Metrics & Logs",
+                    "AWS X-Ray Distributed Tracing",
+                    "AWS Container Insights",
+                ],
                 ingestion_status="CONNECTED",
                 unified_mapping_verified=True,
             ),
             CloudProviderIntegrationSpec(
                 cloud_platform="Google Cloud",
-                native_telemetry_services=["Google Cloud Monitoring", "Google Cloud Trace", "Google Cloud Logging (Audit)"],
+                native_telemetry_services=[
+                    "Google Cloud Monitoring",
+                    "Google Cloud Trace",
+                    "Google Cloud Logging (Audit)",
+                ],
                 ingestion_status="CONNECTED",
                 unified_mapping_verified=True,
             ),
@@ -35,7 +44,11 @@ class CloudIntegrationVerifier(ICloudIntegrationVerifier):
             ),
             CloudProviderIntegrationSpec(
                 cloud_platform="Kubernetes",
-                native_telemetry_services=["Kube-State-Metrics", "Prometheus Node Exporter", "CoreDNS & Envoy Ingress Metrics"],
+                native_telemetry_services=[
+                    "Kube-State-Metrics",
+                    "Prometheus Node Exporter",
+                    "CoreDNS & Envoy Ingress Metrics",
+                ],
                 ingestion_status="CONNECTED",
                 unified_mapping_verified=True,
             ),

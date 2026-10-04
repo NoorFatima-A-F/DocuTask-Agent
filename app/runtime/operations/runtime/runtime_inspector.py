@@ -57,6 +57,7 @@ class RuntimeInspector:
         )
 
         import uuid
+
         snap = InspectionSnapshot(
             snapshot_id=f"snap-{uuid.uuid4().hex[:8]}",
             timestamp_utc=datetime.now(timezone.utc).isoformat(),

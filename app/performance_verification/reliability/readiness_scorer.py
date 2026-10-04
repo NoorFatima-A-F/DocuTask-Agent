@@ -38,11 +38,7 @@ class ReadinessScorer:
         elif composite < 95.0:
             grade = "A"
 
-        cert_status = (
-            "ENTERPRISE PRODUCTION HARDENED"
-            if composite >= 95.0
-            else "PROVISIONAL DEPLOYMENT"
-        )
+        cert_status = "ENTERPRISE PRODUCTION HARDENED" if composite >= 95.0 else "PROVISIONAL DEPLOYMENT"
 
         return EnterpriseReadinessScore(
             performance_score=perf_score,

@@ -1,6 +1,7 @@
 """
 Phase 3H.5.7.3: System Reliability Health Score Engine
 """
+
 from ..domain.interfaces import ISystemHealthScoreEngine
 from ..domain.models import (
     ComponentReliabilityScoreReport,
@@ -11,9 +12,7 @@ from ..domain.models import (
 
 
 class SystemHealthScoreEngine(ISystemHealthScoreEngine):
-    def calculate_system_health(
-        self, comp_report: ComponentReliabilityScoreReport
-    ) -> SystemReliabilityHealthReport:
+    def calculate_system_health(self, comp_report: ComponentReliabilityScoreReport) -> SystemReliabilityHealthReport:
 
         # Category scores
         avail_raw = 99.5

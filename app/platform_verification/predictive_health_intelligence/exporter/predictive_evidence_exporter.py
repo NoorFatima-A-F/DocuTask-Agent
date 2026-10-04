@@ -96,7 +96,9 @@ class PredictiveEvidenceExporter:
             "platform": "DocuTask Agent",
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "overall_score": scorecard.overall_score,
-            "certification_tier": scorecard.certification_tier.value if isinstance(scorecard.certification_tier, PredictiveHealthTier) else str(scorecard.certification_tier),
+            "certification_tier": scorecard.certification_tier.value
+            if isinstance(scorecard.certification_tier, PredictiveHealthTier)
+            else str(scorecard.certification_tier),
             "certification_verdict": scorecard.certification_verdict,
             "passed": scorecard.passed,
             "dimension_scores": {

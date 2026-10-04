@@ -1,6 +1,7 @@
 """
 Certification Domain: 5 Certification Levels, Digital Sealing, and Expiration Lifecycles.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Optional
@@ -10,10 +11,10 @@ import uuid
 
 class CertificationLevel(str, Enum):
     ENTERPRISE_CERTIFIED = "ENTERPRISE_CERTIFIED"  # Highest (Zero defect, 99.99% fidelity)
-    PRODUCTION_READY = "PRODUCTION_READY"          # Production compliant
-    CONDITIONALLY_READY = "CONDITIONALLY_READY"    # Canary / Controlled rollout
-    DEVELOPMENT_QUALITY = "DEVELOPMENT_QUALITY"    # Non-production build
-    REJECTED = "REJECTED"                          # Hard failure
+    PRODUCTION_READY = "PRODUCTION_READY"  # Production compliant
+    CONDITIONALLY_READY = "CONDITIONALLY_READY"  # Canary / Controlled rollout
+    DEVELOPMENT_QUALITY = "DEVELOPMENT_QUALITY"  # Non-production build
+    REJECTED = "REJECTED"  # Hard failure
 
 
 class Certification(BaseModel):

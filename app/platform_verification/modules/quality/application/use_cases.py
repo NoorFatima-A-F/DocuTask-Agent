@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Quality.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.quality.domain.models import QualityEntity
 from app.platform_verification.modules.quality.domain.interfaces import QualityRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageQualityUseCase:
     def __init__(self, repository: QualityRepositoryInterface):

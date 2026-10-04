@@ -102,12 +102,7 @@ class RecoveryPolicyEngine(IRecoveryPolicyEngine):
         approval_count = len([r for r in rules if r.approval_required and not r.blocked])
         blocked_count = len([r for r in rules if r.blocked])
 
-        passed = (
-            len(rules) >= 6
-            and auto_count >= 3
-            and approval_count >= 2
-            and blocked_count >= 2
-        )
+        passed = len(rules) >= 6 and auto_count >= 3 and approval_count >= 2 and blocked_count >= 2
 
         return RecoveryPolicyReport(
             total_policy_rules=len(rules),

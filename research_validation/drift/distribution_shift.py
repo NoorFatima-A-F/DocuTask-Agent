@@ -20,6 +20,7 @@ from typing import Any, Dict, List, Tuple
 @dataclass
 class DistributionDriftReport:
     """Comprehensive statistical drift quantification report."""
+
     feature_name: str
     psi: float
     wasserstein_distance: float
@@ -39,10 +40,7 @@ class DistributionShiftDetector:
 
     @staticmethod
     def _create_histograms(
-        ref: List[float],
-        target: List[float],
-        num_bins: int = 10,
-        eps: float = 1e-6
+        ref: List[float], target: List[float], num_bins: int = 10, eps: float = 1e-6
     ) -> Tuple[List[float], List[float], List[float]]:
         """
         Create aligned probability histograms across reference and target data.
@@ -159,7 +157,7 @@ class DistributionShiftDetector:
         baseline_samples: List[float],
         production_samples: List[float],
         psi_threshold_moderate: float = 0.1,
-        psi_threshold_severe: float = 0.25
+        psi_threshold_severe: float = 0.25,
     ) -> DistributionDriftReport:
         """
         Comprehensive drift assessment across all divergence metrics.
@@ -174,7 +172,7 @@ class DistributionShiftDetector:
                 mmd_estimate=0.0,
                 drift_detected=False,
                 drift_severity="NONE",
-                interpretation="Insufficient samples for drift evaluation."
+                interpretation="Insufficient samples for drift evaluation.",
             )
 
         psi = cls.calculate_psi(baseline_samples, production_samples)
@@ -210,5 +208,5 @@ class DistributionShiftDetector:
             details={
                 "n_baseline": len(baseline_samples),
                 "n_production": len(production_samples),
-            }
+            },
         )

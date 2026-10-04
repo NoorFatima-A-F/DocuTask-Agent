@@ -1,6 +1,7 @@
 """
 Domain Package for Enterprise Document Storage Backup Verification (Part 3G.2C).
 """
+
 from app.platform_verification.document_storage_verification.domain.models import (
     StorageArtifactCategory,
     StorageProviderType,

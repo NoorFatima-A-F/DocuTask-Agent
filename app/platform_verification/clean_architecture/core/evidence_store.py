@@ -1,6 +1,7 @@
 """
 Clean Architecture Evidence Store for saving and querying verification runs.
 """
+
 from __future__ import annotations
 from typing import Dict, Optional
 from app.platform_verification.clean_architecture.domain.interfaces import ICleanArchEvidenceStore

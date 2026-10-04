@@ -25,11 +25,41 @@ class AuditTrailValidationVerifier(IAuditTrailValidationVerifier):
 
     def verify(self) -> AuditTrailValidationReport:
         entries = [
-            AuditLogEntry(audit_id="AUD-001", action="DocumentIngestion", actor="UserGateway", tamper_proof_hash="9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", reconstructable=True),
-            AuditLogEntry(audit_id="AUD-002", action="ModelInferenceExtraction", actor="OCRExtractorAgent", tamper_proof_hash="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", reconstructable=True),
-            AuditLogEntry(audit_id="AUD-003", action="PolicyValidationCheck", actor="ValidationAgent", tamper_proof_hash="4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a", reconstructable=True),
-            AuditLogEntry(audit_id="AUD-004", action="HumanApprovalSignoff", actor="FinanceDirector", tamper_proof_hash="ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d", reconstructable=True),
-            AuditLogEntry(audit_id="AUD-005", action="DatabaseCommitAndClose", actor="PersistenceService", tamper_proof_hash="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", reconstructable=True),
+            AuditLogEntry(
+                audit_id="AUD-001",
+                action="DocumentIngestion",
+                actor="UserGateway",
+                tamper_proof_hash="9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+                reconstructable=True,
+            ),
+            AuditLogEntry(
+                audit_id="AUD-002",
+                action="ModelInferenceExtraction",
+                actor="OCRExtractorAgent",
+                tamper_proof_hash="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+                reconstructable=True,
+            ),
+            AuditLogEntry(
+                audit_id="AUD-003",
+                action="PolicyValidationCheck",
+                actor="ValidationAgent",
+                tamper_proof_hash="4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+                reconstructable=True,
+            ),
+            AuditLogEntry(
+                audit_id="AUD-004",
+                action="HumanApprovalSignoff",
+                actor="FinanceDirector",
+                tamper_proof_hash="ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+                reconstructable=True,
+            ),
+            AuditLogEntry(
+                audit_id="AUD-005",
+                action="DatabaseCommitAndClose",
+                actor="PersistenceService",
+                tamper_proof_hash="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+                reconstructable=True,
+            ),
         ]
 
         checks = [

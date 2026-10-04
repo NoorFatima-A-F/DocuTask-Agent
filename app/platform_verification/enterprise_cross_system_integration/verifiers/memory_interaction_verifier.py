@@ -25,12 +25,54 @@ class MemoryInteractionVerifier(IMemoryInteractionVerifier):
 
     def verify(self) -> MemoryInteractionReport:
         tiers = [
-            MemoryTierStatus(tier_name="ShortTermContextMemory", capacity_items=5000, current_occupancy=1200, eviction_policy="LRU", ttl_enforced=True, tenant_isolation_verified=True),
-            MemoryTierStatus(tier_name="LongTermEpisodicMemory", capacity_items=500000, current_occupancy=45000, eviction_policy="LFUWithSemanticDecay", ttl_enforced=True, tenant_isolation_verified=True),
-            MemoryTierStatus(tier_name="OrganizationalKnowledgeMemory", capacity_items=1000000, current_occupancy=120000, eviction_policy="VersionPruned", ttl_enforced=False, tenant_isolation_verified=True),
-            MemoryTierStatus(tier_name="ProceduralAgentMemory", capacity_items=50000, current_occupancy=3200, eviction_policy="StaticValidated", ttl_enforced=False, tenant_isolation_verified=True),
-            MemoryTierStatus(tier_name="ReflectionFeedbackMemory", capacity_items=100000, current_occupancy=15400, eviction_policy="RollingWindow", ttl_enforced=True, tenant_isolation_verified=True),
-            MemoryTierStatus(tier_name="ContextCacheMemory", capacity_items=20000, current_occupancy=4800, eviction_policy="SlidingTTL", ttl_enforced=True, tenant_isolation_verified=True),
+            MemoryTierStatus(
+                tier_name="ShortTermContextMemory",
+                capacity_items=5000,
+                current_occupancy=1200,
+                eviction_policy="LRU",
+                ttl_enforced=True,
+                tenant_isolation_verified=True,
+            ),
+            MemoryTierStatus(
+                tier_name="LongTermEpisodicMemory",
+                capacity_items=500000,
+                current_occupancy=45000,
+                eviction_policy="LFUWithSemanticDecay",
+                ttl_enforced=True,
+                tenant_isolation_verified=True,
+            ),
+            MemoryTierStatus(
+                tier_name="OrganizationalKnowledgeMemory",
+                capacity_items=1000000,
+                current_occupancy=120000,
+                eviction_policy="VersionPruned",
+                ttl_enforced=False,
+                tenant_isolation_verified=True,
+            ),
+            MemoryTierStatus(
+                tier_name="ProceduralAgentMemory",
+                capacity_items=50000,
+                current_occupancy=3200,
+                eviction_policy="StaticValidated",
+                ttl_enforced=False,
+                tenant_isolation_verified=True,
+            ),
+            MemoryTierStatus(
+                tier_name="ReflectionFeedbackMemory",
+                capacity_items=100000,
+                current_occupancy=15400,
+                eviction_policy="RollingWindow",
+                ttl_enforced=True,
+                tenant_isolation_verified=True,
+            ),
+            MemoryTierStatus(
+                tier_name="ContextCacheMemory",
+                capacity_items=20000,
+                current_occupancy=4800,
+                eviction_policy="SlidingTTL",
+                ttl_enforced=True,
+                tenant_isolation_verified=True,
+            ),
         ]
 
         checks = [

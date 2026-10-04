@@ -13,7 +13,9 @@ import uuid
 class ExecutiveDecision:
     decision_id: str
     mission_id: str
-    decision_type: str  # MISSION_INTAKE | PRIORITY_OVERRIDE | RESOURCE_REALLOCATION | CROSS_DEPT_ARBITRATION | EMERGENCY_HALT
+    decision_type: (
+        str  # MISSION_INTAKE | PRIORITY_OVERRIDE | RESOURCE_REALLOCATION | CROSS_DEPT_ARBITRATION | EMERGENCY_HALT
+    )
     decision_title: str
     rationale: str
     affected_departments: List[str]
@@ -39,7 +41,13 @@ class ExecutiveController:
             decision_type="MISSION_INTAKE",
             decision_title="Authorize Q3 Enterprise Invoices Multi-Department Processing",
             rationale="Approved high-priority invoice corpus execution with target SLA < 1000ms and budget ceiling $0.05.",
-            affected_departments=["dept_executive", "dept_ocr", "dept_extraction", "dept_validation", "dept_governance"],
+            affected_departments=[
+                "dept_executive",
+                "dept_ocr",
+                "dept_extraction",
+                "dept_validation",
+                "dept_governance",
+            ],
             authorized_by="Chief Executive Agent",
             approval_hash="sha256_exec_88a91f4c",
         )

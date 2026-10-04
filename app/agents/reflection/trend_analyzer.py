@@ -10,6 +10,7 @@ from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 class TrendReport(BaseModel):
     """Longitudinal metrics trend summary."""
+
     latency_trend: str  # DECREASING, STABLE, INCREASING
     cost_trend: str  # DECREASING, STABLE, INCREASING
     token_trend: str  # DECREASING, STABLE, INCREASING
@@ -24,9 +25,7 @@ class TrendAnalyzer:
     """Calculates temporal trajectories of agent execution parameters."""
 
     def analyze_trends(
-        self,
-        current_trace: ExecutionTraceEnvelope,
-        historical_traces: List[ExecutionTraceEnvelope]
+        self, current_trace: ExecutionTraceEnvelope, historical_traces: List[ExecutionTraceEnvelope]
     ) -> TrendReport:
         """Determines if cost, latency, or tokens are drifting or improving."""
         all_traces = [*historical_traces, current_trace]
@@ -38,7 +37,7 @@ class TrendAnalyzer:
                 token_trend="STABLE",
                 sample_size=count,
                 average_duration_ms=current_trace.total_duration_ms,
-                average_cost_usd=current_trace.cost_usd
+                average_cost_usd=current_trace.cost_usd,
             )
 
         durations = [t.total_duration_ms for t in all_traces]
@@ -59,5 +58,5 @@ class TrendAnalyzer:
             token_trend=_trend([float(v) for v in tokens]),
             sample_size=count,
             average_duration_ms=sum(durations) / count,
-            average_cost_usd=sum(costs) / count
+            average_cost_usd=sum(costs) / count,
         )

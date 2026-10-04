@@ -61,7 +61,7 @@ class DecisionEvaluator:
         self,
         rule_evaluator: RuleEvaluator,
         policy_evaluator: PolicyEvaluator,
-        constraint_evaluator: ConstraintEvaluator
+        constraint_evaluator: ConstraintEvaluator,
     ):
         self.rule_evaluator = rule_evaluator
         self.policy_evaluator = policy_evaluator

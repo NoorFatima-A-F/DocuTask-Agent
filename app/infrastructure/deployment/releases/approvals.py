@@ -9,6 +9,7 @@ import threading
 
 class ApprovalDecision(str, Enum):
     """Release approval decision."""
+
     PENDING = "pending"
     APPROVED = "approved"
     REJECTED = "rejected"
@@ -17,6 +18,7 @@ class ApprovalDecision(str, Enum):
 @dataclass
 class ReleaseApproval:
     """An individual stakeholder approval sign-off."""
+
     approver: str
     role: str  # governance, security, sre, qa, lead
     decision: ApprovalDecision = ApprovalDecision.PENDING
@@ -33,7 +35,9 @@ class ReleaseApprovalGate:
         self._approvals: Dict[str, List[ReleaseApproval]] = {}  # release_id -> [ReleaseApproval]
         self._lock = threading.RLock()
 
-    def record_decision(self, release_id: str, approver: str, role: str, decision: ApprovalDecision, comments: Optional[str] = None) -> ReleaseApproval:
+    def record_decision(
+        self, release_id: str, approver: str, role: str, decision: ApprovalDecision, comments: Optional[str] = None
+    ) -> ReleaseApproval:
         """Record an approval or rejection decision."""
         with self._lock:
             app = ReleaseApproval(

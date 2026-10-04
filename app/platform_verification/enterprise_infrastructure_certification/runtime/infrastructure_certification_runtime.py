@@ -96,9 +96,7 @@ class InfrastructureCertificationRuntime:
         self._latest_regression = regression
 
         # 8. Generate Human-Readable Markdown Report
-        markdown_content = self.report_generator.generate_report(
-            decision, scorecard, risk_report, maturity, regression
-        )
+        markdown_content = self.report_generator.generate_report(decision, scorecard, risk_report, maturity, regression)
 
         # 9. Export All Structured Artifacts & Manifest
         self.exporter.set_base_dir(export_dir)

@@ -36,6 +36,7 @@ class ProvenanceValidationVerdict(str, Enum):
 @dataclass
 class ProvenanceAuditReport:
     """Comprehensive scientific provenance validation audit report."""
+
     verdict: ProvenanceValidationVerdict
     is_valid: bool
     total_nodes_audited: int
@@ -54,9 +55,7 @@ class ProvenanceValidator:
 
     @classmethod
     def audit_graph(
-        cls,
-        graph: EvidenceGraph,
-        expected_secret_or_pubkey: Optional[str] = None
+        cls, graph: EvidenceGraph, expected_secret_or_pubkey: Optional[str] = None
     ) -> ProvenanceAuditReport:
         """
         Execute comprehensive zero-trust audit across an Evidence Graph.
@@ -85,7 +84,11 @@ class ProvenanceValidator:
         # Orphan nodes (nodes that have no parents and are never referenced by any child, except single-node graphs)
         if len(all_ids) > 1:
             for node_id, node in graph.merkle_dag.nodes.items():
-                if len(node.parent_node_ids) == 0 and node_id not in all_referenced_parents and node.stage != LineageStage.RAW_OBSERVATION:
+                if (
+                    len(node.parent_node_ids) == 0
+                    and node_id not in all_referenced_parents
+                    and node.stage != LineageStage.RAW_OBSERVATION
+                ):
                     orphan_nodes.append(node_id)
                     diagnostics.append(f"Orphan node '{node_id}' is unattached to any lineage chain.")
 
@@ -106,26 +109,32 @@ class ProvenanceValidator:
                             payload_digest_sha256=signed_dig,
                             signed_at_epoch=node.created_at_epoch,
                             expires_at_epoch=exp_at,
-                            signer_identity=node.environment.author
+                            signer_identity=node.environment.author,
                         )
                         # Verify against parent node (which is the scientific report)
                         parent_digests = node.parent_hashes
                         if not parent_digests or signed_dig not in parent_digests:
                             broken_signatures.append(node_id)
-                            diagnostics.append(f"Digital signature node '{node_id}' signed digest does not match parent report digest.")
+                            diagnostics.append(
+                                f"Digital signature node '{node_id}' signed digest does not match parent report digest."
+                            )
                         else:
                             is_ok, reason = ProvenanceSigner.verify_signature(
-                                sig_obj,
-                                expected_digest_hex=signed_dig,
-                                secret_or_public_key=expected_secret_or_pubkey
+                                sig_obj, expected_digest_hex=signed_dig, secret_or_public_key=expected_secret_or_pubkey
                             )
                             if not is_ok:
                                 broken_signatures.append(node_id)
-                                diagnostics.append(f"Digital signature node '{node_id}' failed cryptographic verification: {reason}")
+                                diagnostics.append(
+                                    f"Digital signature node '{node_id}' failed cryptographic verification: {reason}"
+                                )
 
         # Determine verdict
         if not merkle_res.is_valid:
-            verdict = ProvenanceValidationVerdict.TAMPERING_DETECTED if "altered" in " ".join(diagnostics) else ProvenanceValidationVerdict.CYCLE_DETECTED
+            verdict = (
+                ProvenanceValidationVerdict.TAMPERING_DETECTED
+                if "altered" in " ".join(diagnostics)
+                else ProvenanceValidationVerdict.CYCLE_DETECTED
+            )
         elif missing_parents:
             verdict = ProvenanceValidationVerdict.BROKEN_LINEAGE
         elif broken_signatures:
@@ -135,7 +144,7 @@ class ProvenanceValidator:
         else:
             verdict = ProvenanceValidationVerdict.VALIDATION_PASSED
 
-        is_valid = (verdict == ProvenanceValidationVerdict.VALIDATION_PASSED)
+        is_valid = verdict == ProvenanceValidationVerdict.VALIDATION_PASSED
 
         # Graph quality score
         weights = [n.quality_level.numeric_weight for n in graph.merkle_dag.nodes.values()]
@@ -150,5 +159,5 @@ class ProvenanceValidator:
             missing_parent_ids=missing_parents,
             broken_signature_node_ids=broken_signatures,
             diagnostics=diagnostics,
-            quality_score=score
+            quality_score=score,
         )

@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class PrimitiveOperatorNode(BaseModel):
     """Atomic primitive operator node in an executable DAG."""
+
     node_id: str = Field(default_factory=lambda: f"op_{uuid.uuid4().hex[:8]}")
     name: str
     operator_type: str  # 'OCR_SCAN', 'TABLE_PARSE', 'SCHEMA_VALIDATE', 'NER_EXTRACT', 'DB_RECONCILE', 'VERIFIER'
@@ -27,6 +28,7 @@ class PrimitiveOperatorNode(BaseModel):
 
 class HTNTask(BaseModel):
     """Compound or primitive HTN task."""
+
     task_id: str = Field(default_factory=lambda: f"task_{uuid.uuid4().hex[:8]}")
     name: str
     is_compound: bool = True
@@ -36,6 +38,7 @@ class HTNTask(BaseModel):
 
 class SynthesizedDAG(BaseModel):
     """Topologically sorted synthesized DAG ready for kernel execution."""
+
     dag_id: str = Field(default_factory=lambda: f"dag_syn_{uuid.uuid4().hex[:8]}")
     goal_intent: str
     nodes: Dict[str, PrimitiveOperatorNode] = Field(default_factory=dict)
@@ -78,11 +81,13 @@ class HTNGraphSynthesizer:
     def synthesize_dag(self, goal_intent: str = "extract_financial_invoice", branch_index: int = 0) -> SynthesizedDAG:
         """Deconstructs goal intent into an executable primitive DAG."""
         dag = SynthesizedDAG(goal_intent=goal_intent)
-        
+
         # 1. Expand HTN hierarchy
-        top_tasks = self._decomposition_rules.get(goal_intent, [["preprocess_document", "extract_tabular_line_items", "verify_compliance"]])
+        top_tasks = self._decomposition_rules.get(
+            goal_intent, [["preprocess_document", "extract_tabular_line_items", "verify_compliance"]]
+        )
         selected_sequence = top_tasks[branch_index % len(top_tasks)]
-        
+
         expanded_primitive_names: List[str] = []
         for task_name in selected_sequence:
             if task_name in self._decomposition_rules:
@@ -103,14 +108,14 @@ class HTNGraphSynthesizer:
                 estimated_latency_ms=100.0 + (idx * 25.0),
                 estimated_cost_usd=0.0002 + (idx * 0.0001),
                 inputs=[f"artifact_{idx}"] if idx > 0 else ["raw_document_input"],
-                outputs=[f"artifact_{idx+1}"],
+                outputs=[f"artifact_{idx + 1}"],
             )
             dag.nodes[op.node_id] = op
             dag.adjacency[op.node_id] = []
-            
+
             if prev_node_id:
                 dag.adjacency[prev_node_id].append(op.node_id)
-            
+
             total_latency += op.estimated_latency_ms
             total_cost += op.estimated_cost_usd
             prev_node_id = op.node_id

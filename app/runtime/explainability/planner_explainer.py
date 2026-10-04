@@ -90,12 +90,7 @@ class PlannerExplainer:
             # Scaled utility calculation
             norm_cost = cost / (max_cost or 1.0)
             norm_lat = lat / (max_lat or 1.0)
-            utility = (
-                (w_acc * acc)
-                - (w_cost * norm_cost)
-                - (w_lat * norm_lat)
-                - (w_risk * risk)
-            )
+            utility = (w_acc * acc) - (w_cost * norm_cost) - (w_lat * norm_lat) - (w_risk * risk)
 
             scored_candidates.append(
                 CandidateExplanation(
@@ -117,7 +112,9 @@ class PlannerExplainer:
         for i, c in enumerate(scored_candidates):
             if i > 0:
                 diff = round(selected.computed_utility - c.computed_utility, 4)
-                c.rejection_reason = f"Lower net expected utility (ΔU = -{diff}) due to higher relative cost/latency trade-off."
+                c.rejection_reason = (
+                    f"Lower net expected utility (ΔU = -{diff}) due to higher relative cost/latency trade-off."
+                )
 
         feature_importance = {
             "document_complexity": 0.38,
@@ -129,7 +126,7 @@ class PlannerExplainer:
         formula = "U(c) = w_acc*Acc(c) - w_cost*(Cost(c)/MaxCost) - w_lat*(Lat(c)/MaxLat) - w_risk*Risk(c)"
         explanation_text = (
             f"Candidate '{selected.candidate_id}' using model '{selected.model_name}' was selected with top utility score "
-            f"{selected.computed_utility}. It satisfies SLA bounds with predicted accuracy {selected.predicted_accuracy*100:.1f}% "
+            f"{selected.computed_utility}. It satisfies SLA bounds with predicted accuracy {selected.predicted_accuracy * 100:.1f}% "
             f"at ${selected.predicted_cost_usd:.4f} cost."
         )
 

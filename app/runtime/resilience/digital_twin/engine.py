@@ -31,33 +31,119 @@ class DigitalTwinEngine:
     def _initialize_default_topology(self) -> None:
         """Initializes the baseline high-availability DocuTask architecture graph."""
         default_nodes = [
-            DigitalTwinNode("node-planner", "Autonomous Planner Engine", ComponentCategory.PLANNER, NodeHealthStatus.HEALTHY, latency_ms=18.2, cpu_usage_pct=14.5, replicas=2),
-            DigitalTwinNode("node-workers", "DAG Dynamic Worker Pool", ComponentCategory.WORKER, NodeHealthStatus.HEALTHY, latency_ms=32.4, cpu_usage_pct=28.1, replicas=4),
-            DigitalTwinNode("node-memory", "Episodic & Causal Memory Graph", ComponentCategory.MEMORY, NodeHealthStatus.HEALTHY, latency_ms=12.1, cpu_usage_pct=8.4, replicas=3),
-            DigitalTwinNode("node-truth", "Runtime Truth & Proof Ledger", ComponentCategory.TRUTH_LEDGER, NodeHealthStatus.HEALTHY, latency_ms=8.5, cpu_usage_pct=6.2, replicas=3),
-            DigitalTwinNode("node-evidence", "Cryptographic Evidence Store", ComponentCategory.EVIDENCE, NodeHealthStatus.HEALTHY, latency_ms=9.1, cpu_usage_pct=5.5, replicas=3),
-            DigitalTwinNode("node-policy", "Dynamic Policy & Sandbox Engine", ComponentCategory.POLICY, NodeHealthStatus.HEALTHY, latency_ms=11.0, cpu_usage_pct=7.0, replicas=2),
-            DigitalTwinNode("node-storage", "Redis State & Fast KV Cache", ComponentCategory.STORAGE, NodeHealthStatus.HEALTHY, latency_ms=4.2, cpu_usage_pct=11.0, replicas=3),
-            DigitalTwinNode("node-gemini", "Google Cloud Gemini 1.5 Pro/Flash", ComponentCategory.PROVIDER, NodeHealthStatus.HEALTHY, latency_ms=145.0, cpu_usage_pct=0.0, replicas=1),
-            DigitalTwinNode("node-commander", "Autonomous Incident Commander", ComponentCategory.INCIDENT_COMMANDER, NodeHealthStatus.HEALTHY, latency_ms=6.8, cpu_usage_pct=3.2, replicas=2),
+            DigitalTwinNode(
+                "node-planner",
+                "Autonomous Planner Engine",
+                ComponentCategory.PLANNER,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=18.2,
+                cpu_usage_pct=14.5,
+                replicas=2,
+            ),
+            DigitalTwinNode(
+                "node-workers",
+                "DAG Dynamic Worker Pool",
+                ComponentCategory.WORKER,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=32.4,
+                cpu_usage_pct=28.1,
+                replicas=4,
+            ),
+            DigitalTwinNode(
+                "node-memory",
+                "Episodic & Causal Memory Graph",
+                ComponentCategory.MEMORY,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=12.1,
+                cpu_usage_pct=8.4,
+                replicas=3,
+            ),
+            DigitalTwinNode(
+                "node-truth",
+                "Runtime Truth & Proof Ledger",
+                ComponentCategory.TRUTH_LEDGER,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=8.5,
+                cpu_usage_pct=6.2,
+                replicas=3,
+            ),
+            DigitalTwinNode(
+                "node-evidence",
+                "Cryptographic Evidence Store",
+                ComponentCategory.EVIDENCE,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=9.1,
+                cpu_usage_pct=5.5,
+                replicas=3,
+            ),
+            DigitalTwinNode(
+                "node-policy",
+                "Dynamic Policy & Sandbox Engine",
+                ComponentCategory.POLICY,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=11.0,
+                cpu_usage_pct=7.0,
+                replicas=2,
+            ),
+            DigitalTwinNode(
+                "node-storage",
+                "Redis State & Fast KV Cache",
+                ComponentCategory.STORAGE,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=4.2,
+                cpu_usage_pct=11.0,
+                replicas=3,
+            ),
+            DigitalTwinNode(
+                "node-gemini",
+                "Google Cloud Gemini 1.5 Pro/Flash",
+                ComponentCategory.PROVIDER,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=145.0,
+                cpu_usage_pct=0.0,
+                replicas=1,
+            ),
+            DigitalTwinNode(
+                "node-commander",
+                "Autonomous Incident Commander",
+                ComponentCategory.INCIDENT_COMMANDER,
+                NodeHealthStatus.HEALTHY,
+                latency_ms=6.8,
+                cpu_usage_pct=3.2,
+                replicas=2,
+            ),
         ]
 
         for n in default_nodes:
             self.nodes[n.node_id] = n
 
         self.edges = [
-            DigitalTwinEdge("node-planner", "node-workers", "DISPATCHES_TASKS", latency_p95_ms=22.0, throughput_rps=85.0),
+            DigitalTwinEdge(
+                "node-planner", "node-workers", "DISPATCHES_TASKS", latency_p95_ms=22.0, throughput_rps=85.0
+            ),
             DigitalTwinEdge("node-workers", "node-gemini", "INVOKES_MODELS", latency_p95_ms=160.0, throughput_rps=45.0),
-            DigitalTwinEdge("node-workers", "node-memory", "QUERIES_EXPERIENCES", latency_p95_ms=15.0, throughput_rps=120.0),
+            DigitalTwinEdge(
+                "node-workers", "node-memory", "QUERIES_EXPERIENCES", latency_p95_ms=15.0, throughput_rps=120.0
+            ),
             DigitalTwinEdge("node-planner", "node-truth", "COMMITS_PROOFS", latency_p95_ms=10.0, throughput_rps=60.0),
-            DigitalTwinEdge("node-workers", "node-evidence", "RECORDS_EVIDENCE", latency_p95_ms=12.0, throughput_rps=110.0),
-            DigitalTwinEdge("node-workers", "node-storage", "SYNCS_EXECUTION_STATE", latency_p95_ms=5.0, throughput_rps=250.0),
+            DigitalTwinEdge(
+                "node-workers", "node-evidence", "RECORDS_EVIDENCE", latency_p95_ms=12.0, throughput_rps=110.0
+            ),
+            DigitalTwinEdge(
+                "node-workers", "node-storage", "SYNCS_EXECUTION_STATE", latency_p95_ms=5.0, throughput_rps=250.0
+            ),
             DigitalTwinEdge("node-policy", "node-workers", "GOVERNS_SANDBOX", latency_p95_ms=8.0, throughput_rps=90.0),
-            DigitalTwinEdge("node-commander", "node-planner", "SUPERVISES_RESILIENCE", latency_p95_ms=7.0, throughput_rps=30.0),
-            DigitalTwinEdge("node-commander", "node-workers", "ISOLATES_FAILURES", latency_p95_ms=7.5, throughput_rps=30.0),
+            DigitalTwinEdge(
+                "node-commander", "node-planner", "SUPERVISES_RESILIENCE", latency_p95_ms=7.0, throughput_rps=30.0
+            ),
+            DigitalTwinEdge(
+                "node-commander", "node-workers", "ISOLATES_FAILURES", latency_p95_ms=7.5, throughput_rps=30.0
+            ),
         ]
 
-    def register_heartbeat(self, node_id: str, latency_ms: float, error_rate: float, cpu_pct: float) -> Optional[DigitalTwinNode]:
+    def register_heartbeat(
+        self, node_id: str, latency_ms: float, error_rate: float, cpu_pct: float
+    ) -> Optional[DigitalTwinNode]:
         """Registers a live heartbeat from a physical or logical runtime component."""
         if node_id not in self.nodes:
             return None
@@ -77,7 +163,13 @@ class DigitalTwinEngine:
 
         return node
 
-    def mutate_node_health(self, node_id: str, status: NodeHealthStatus, latency_ms: Optional[float] = None, error_rate: Optional[float] = None) -> bool:
+    def mutate_node_health(
+        self,
+        node_id: str,
+        status: NodeHealthStatus,
+        latency_ms: Optional[float] = None,
+        error_rate: Optional[float] = None,
+    ) -> bool:
         """Explicitly mutates node status during chaos injections or incident isolations."""
         if node_id not in self.nodes:
             return False
@@ -139,8 +231,14 @@ class DigitalTwinEngine:
             nodes={k: DigitalTwinNode(**v.__dict__) for k, v in self.nodes.items()},
             edges=[DigitalTwinEdge(**e.__dict__) for e in self.edges],
             overall_health_score=self.compute_overall_health(),
-            active_incidents_count=sum(1 for n in self.nodes.values() if n.health in [NodeHealthStatus.FAILING, NodeHealthStatus.DEGRADED, NodeHealthStatus.ISOLATED]),
-            active_chaos_injections_count=sum(1 for n in self.nodes.values() if "chaos_injected" in n.metadata and n.metadata["chaos_injected"]),
+            active_incidents_count=sum(
+                1
+                for n in self.nodes.values()
+                if n.health in [NodeHealthStatus.FAILING, NodeHealthStatus.DEGRADED, NodeHealthStatus.ISOLATED]
+            ),
+            active_chaos_injections_count=sum(
+                1 for n in self.nodes.values() if "chaos_injected" in n.metadata and n.metadata["chaos_injected"]
+            ),
             sync_parity_pct=99.98,
         )
         self._history.append(snapshot)

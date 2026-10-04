@@ -34,7 +34,10 @@ async def list_governance_domains() -> List[Dict[str, str]]:
         {"domain": "1. SLO & Error Budget Management", "metric": "99.5% Uptime, Error Budget: 216 mins/mo"},
         {"domain": "2. Production Health Intelligence", "metric": "Centralized Application, Workers, DB, Queue, Infra"},
         {"domain": "3. Incident Management & Lifecycle", "metric": "SEV1/SEV2/SEV3 Workflows, MTTR Tracking"},
-        {"domain": "4. Automated Multi-Channel Alerting", "metric": "Silent Failure Prevention, PagerDuty / Slack / SIEM"},
+        {
+            "domain": "4. Automated Multi-Channel Alerting",
+            "metric": "Silent Failure Prevention, PagerDuty / Slack / SIEM",
+        },
         {"domain": "5. Runbook Automation & Procedures", "metric": "6 Validated Production Runbooks"},
         {"domain": "6. Self-Healing Automated Remediation", "metric": "Worker Restart, Queue Scale, DB Pool Reconnect"},
         {"domain": "7. Root Cause Analysis (RCA) Engine", "metric": "Telemetry Timeline & Ranked Hypotheses"},

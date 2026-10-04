@@ -1,6 +1,7 @@
 """
 Module Boundary & Plugin Architecture Verification Package (PART 2D).
 """
+
 from app.platform_verification.module_boundary.core.plugin_verifier import PluginInterface
 from app.platform_verification.module_boundary.domain.models import (
     BoundaryViolationSeverity,

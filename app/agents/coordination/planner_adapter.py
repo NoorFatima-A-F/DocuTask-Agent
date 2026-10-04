@@ -13,7 +13,9 @@ class CoordinationPlannerAdapter:
     def __init__(self, planner: Optional[Any] = None):
         self._planner = planner
 
-    async def request_plan_decomposition(self, goal: str, context: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+    async def request_plan_decomposition(
+        self, goal: str, context: Optional[Dict[str, Any]] = None
+    ) -> List[Dict[str, Any]]:
         """Requests goal decomposition into subtasks."""
         if self._planner and hasattr(self._planner, "plan"):
             res = await self._planner.plan(goal)

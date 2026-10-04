@@ -1,6 +1,7 @@
 """
 3H.12.3: Service Auto-Restart Verifier
 """
+
 from ..domain.models import ServiceRestartReport
 from ..domain.interfaces import IServiceRestartVerifier
 
@@ -20,5 +21,5 @@ class ServiceRestartVerifier(IServiceRestartVerifier):
             dependencies_reconnected=True,
             traffic_resumed_successfully=True,
             availability_impact_pct=0.05,
-            restart_verification_passed=True
+            restart_verification_passed=True,
         )

@@ -154,7 +154,8 @@ class KnowledgeRegistry:
         if query:
             q = query.lower()
             results = [
-                o for o in results
+                o
+                for o in results
                 if q in o.name.lower() or q in o.description.lower() or any(q in t.lower() for t in o.tags)
             ]
 

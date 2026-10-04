@@ -16,6 +16,7 @@ class Reflection(BaseModel):
     Encapsulates evaluation metrics, self-critique, synthesized learning artifacts,
     recommendations, and feedback for an executed goal.
     """
+
     identity: ReflectionIdentity
     metadata: ReflectionMetadata = Field(default_factory=ReflectionMetadata)
     state: ReflectionLifecycleState = Field(default=ReflectionLifecycleState.PENDING)
@@ -52,7 +53,4 @@ class Reflection(BaseModel):
 
     def mark_failed(self, error: str) -> "Reflection":
         """Marks reflection as failed with error."""
-        return self.model_copy(update={
-            "state": ReflectionLifecycleState.FAILED,
-            "errors": [*self.errors, error]
-        })
+        return self.model_copy(update={"state": ReflectionLifecycleState.FAILED, "errors": [*self.errors, error]})

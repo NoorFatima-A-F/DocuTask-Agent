@@ -1,6 +1,7 @@
 """
 Enterprise Architecture Verification Framework Package (PART 2A).
 """
+
 from app.platform_verification.architecture_verification.domain.models import (
     ArchitectureCertificationBand,
     ArchitectureDependency,

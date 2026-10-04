@@ -26,7 +26,7 @@ class OCRService:
         document_repo: DocumentRepository,
         extracted_text_repo: ExtractedTextRepository,
         storage_provider: StorageProvider,
-        ocr_pipeline: OCRPipeline
+        ocr_pipeline: OCRPipeline,
     ):
         self.doc_repo = document_repo
         self.text_repo = extracted_text_repo
@@ -34,11 +34,7 @@ class OCRService:
         self.pipeline = ocr_pipeline
 
     async def extract_text_for_document(
-        self,
-        document_id: UUID,
-        owner: User,
-        force_reextract: bool = False,
-        language: str = "eng"
+        self, document_id: UUID, owner: User, force_reextract: bool = False, language: str = "eng"
     ) -> DocumentContent:
         """
         Extracts text from document. Utilizes caching unless force_reextract is True.
@@ -50,7 +46,11 @@ class OCRService:
 
         # Multi-tenant isolation check
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning("Unauthorized OCR extraction attempt: User '%s' on Document '%s'", sanitize_log_input(owner.id), sanitize_log_input(document_id))
+            logger.warning(
+                "Unauthorized OCR extraction attempt: User '%s' on Document '%s'",
+                sanitize_log_input(owner.id),
+                sanitize_log_input(document_id),
+            )
             raise ResourceNotFoundException("Document not found")
 
         # Caching check
@@ -63,8 +63,9 @@ class OCRService:
                         page_number=p.page_number,
                         text=p.text,
                         confidence=p.confidence,
-                        processing_method=p.processing_method
-                    ) for p in existing_pages
+                        processing_method=p.processing_method,
+                    )
+                    for p in existing_pages
                 ]
                 total_conf = sum(p.confidence for p in page_contents)
                 avg_conf = round(total_conf / len(page_contents), 4)
@@ -75,7 +76,7 @@ class OCRService:
                     page_count=len(page_contents),
                     text=full_text,
                     pages=page_contents,
-                    average_confidence=avg_conf
+                    average_confidence=avg_conf,
                 )
 
         # Update status to OCR_RUNNING
@@ -98,7 +99,7 @@ class OCRService:
                 file_content=file_bytes,
                 file_extension=doc.file_extension,
                 mime_type=doc.mime_type,
-                language=language
+                language=language,
             )
 
             # Clear existing records if re-extracting
@@ -113,19 +114,28 @@ class OCRService:
                     "page_number": page.page_number,
                     "text": page.text,
                     "confidence": page.confidence,
-                    "processing_method": page.processing_method
-                } for page in doc_content.pages
+                    "processing_method": page.processing_method,
+                }
+                for page in doc_content.pages
             ]
             await self.text_repo.bulk_create(pages_to_create)
 
             # Update status to OCR_COMPLETED
             await self.doc_repo.update_status(doc, "OCR_COMPLETED")
 
-            logger.info("Persisted text extraction for document '%s': %d pages", sanitize_log_input(document_id), len(pages_to_create))
+            logger.info(
+                "Persisted text extraction for document '%s': %d pages",
+                sanitize_log_input(document_id),
+                len(pages_to_create),
+            )
             return doc_content
 
         except Exception as exc:
-            logger.error("OCR text extraction failed for document '%s': %s", sanitize_log_input(document_id), sanitize_log_input(exc))
+            logger.error(
+                "OCR text extraction failed for document '%s': %s",
+                sanitize_log_input(document_id),
+                sanitize_log_input(exc),
+            )
             await self.doc_repo.update_status(doc, "OCR_FAILED")
             raise exc
 
@@ -140,15 +150,15 @@ class OCRService:
 
         extracted_pages = await self.text_repo.get_document_text(document_id)
         if not extracted_pages:
-            raise ResourceNotFoundException("No extracted text found for this document. Please trigger extraction first.")
+            raise ResourceNotFoundException(
+                "No extracted text found for this document. Please trigger extraction first."
+            )
 
         page_contents = [
             PageContent(
-                page_number=p.page_number,
-                text=p.text,
-                confidence=p.confidence,
-                processing_method=p.processing_method
-            ) for p in extracted_pages
+                page_number=p.page_number, text=p.text, confidence=p.confidence, processing_method=p.processing_method
+            )
+            for p in extracted_pages
         ]
         total_conf = sum(p.confidence for p in page_contents)
         avg_conf = round(total_conf / len(page_contents), 4)
@@ -159,7 +169,7 @@ class OCRService:
             page_count=len(page_contents),
             text=full_text,
             pages=page_contents,
-            average_confidence=avg_conf
+            average_confidence=avg_conf,
         )
 
     async def get_extracted_pages(self, document_id: UUID, owner: User) -> List[PageContent]:
@@ -178,16 +188,12 @@ class OCRService:
 
         extracted_pages = await self.text_repo.get_document_text(document_id)
         page_count = len(extracted_pages)
-        avg_conf = (
-            round(sum(p.confidence for p in extracted_pages) / page_count, 4)
-            if page_count > 0
-            else 0.0
-        )
+        avg_conf = round(sum(p.confidence for p in extracted_pages) / page_count, 4) if page_count > 0 else 0.0
 
         return {
             "document_id": document_id,
             "status": doc.upload_status,
             "page_count": page_count,
             "average_confidence": avg_conf,
-            "has_extracted_text": page_count > 0
+            "has_extracted_text": page_count > 0,
         }

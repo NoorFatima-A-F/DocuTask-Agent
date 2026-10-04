@@ -2,6 +2,7 @@
 3I.10.7: Operational Change Management Verifier
 Verifies Pre/Post Deployment Validation, Canary Gating, Blast Radius Controls, and Auto-Rollback.
 """
+
 from typing import List
 from app.platform_verification.observability_operations_governance.domain.models import (
     ChangeManagementReport,

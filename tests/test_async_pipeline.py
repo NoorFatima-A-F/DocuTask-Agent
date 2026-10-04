@@ -83,7 +83,7 @@ async def test_dlq_and_manual_replay():
         document_id="doc_001",
         failure_reason="AI Provider Outage 500",
         attempt_count=3,
-        original_payload=payload
+        original_payload=payload,
     )
     assert dlq_item.job_id == "job_failed_001"
 
@@ -111,10 +111,7 @@ def test_worker_lease_and_chunking():
 async def test_pipeline_orchestrator():
     """Verifies end-to-end multi-stage pipeline orchestration."""
     result = await PipelineOrchestrator.execute_pipeline(
-        job_id="job_orch_001",
-        document_id="doc_orch_001",
-        raw_ocr_text="Invoice # 1001",
-        document_type="invoice"
+        job_id="job_orch_001", document_id="doc_orch_001", raw_ocr_text="Invoice # 1001", document_type="invoice"
     )
     assert result["status"] == JobState.COMPLETED
     assert "extracted_data" in result

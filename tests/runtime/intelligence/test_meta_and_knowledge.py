@@ -14,7 +14,7 @@ def test_regret_engine_computation():
         strategy_utilities={"strat_alpha": 0.35, "strat_beta": 0.42, "strat_delta": 0.44},
         strategy_costs={"strat_alpha": 0.001, "strat_beta": 0.003, "strat_delta": 0.002},
     )
-    
+
     assert analysis.chosen_strategy_id == "strat_beta"
     assert analysis.optimal_strategy_id == "strat_delta"
     assert analysis.expected_regret == 0.02
@@ -23,15 +23,15 @@ def test_regret_engine_computation():
 
 def test_exploration_engine_ucb1_and_thompson():
     bandit = ExplorationEngine()
-    
+
     # Update some rewards
     bandit.update_arm_reward("strat_delta", reward=0.92)
     bandit.update_arm_reward("strat_beta", reward=0.88)
-    
+
     selected_ucb1 = bandit.select_arm_ucb1()
     assert selected_ucb1.selected_arm_id in ["strat_alpha", "strat_beta", "strat_gamma", "strat_delta"]
     assert selected_ucb1.algorithm == "UCB1"
-    
+
     selected_thompson = bandit.select_arm_thompson_sampling()
     assert selected_thompson.selected_arm_id in ["strat_alpha", "strat_beta", "strat_gamma", "strat_delta"]
     assert selected_thompson.algorithm == "ThompsonSampling"
@@ -39,7 +39,7 @@ def test_exploration_engine_ucb1_and_thompson():
 
 def test_planner_critic_and_meta_planner():
     meta_planner = MetaPlanner()
-    
+
     review = meta_planner.evaluate_and_supervise(
         mission_id="mission_complex_ocr_001",
         chosen_strategy_id="strat_delta",
@@ -49,7 +49,7 @@ def test_planner_critic_and_meta_planner():
         confidence=0.98,
         document_complexity=1.2,
     )
-    
+
     assert review.mission_id == "mission_complex_ocr_001"
     assert review.critique.critique_score >= 0.0
     assert review.regret.expected_regret >= 0.0
@@ -67,7 +67,7 @@ def test_experience_graph_and_knowledge_distillation():
         observed_accuracy=0.988,
         success=True,
     )
-    
+
     policy_lib = PolicyLibrary()
     distiller = KnowledgeDistillationEngine(policy_library=policy_lib)
     report = distiller.distill_policy_from_graph(experience_graph=exp_graph)

@@ -1,6 +1,7 @@
 """
 API Architecture Evidence Store.
 """
+
 from __future__ import annotations
 from typing import Dict, Optional
 from app.platform_verification.api_verification.domain.interfaces import IApiEvidenceStore

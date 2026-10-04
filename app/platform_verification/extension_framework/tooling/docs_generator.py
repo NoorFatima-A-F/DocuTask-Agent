@@ -1,6 +1,7 @@
 """
 Automated Markdown Documentation Generator for Verification Plugins.
 """
+
 from app.platform_verification.extension_framework.domain.interfaces import VerificationPluginInterface
 
 
@@ -10,7 +11,7 @@ class PluginDocumentationGenerator:
         meta = plugin.metadata
         caps = "\n".join([f"- `{c}`" for c in meta.capabilities])
         perms = "\n".join([f"- `{p.value}`" for p in meta.granted_permissions])
-        
+
         return f"""# {meta.name} (v{meta.version})
 
 **Plugin ID**: `{meta.plugin_id}`  

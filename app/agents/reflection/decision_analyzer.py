@@ -19,7 +19,7 @@ class DecisionAnalyzer:
                 "allowed_count": 0,
                 "denied_count": 0,
                 "average_risk_score": 0.0,
-                "policy_compliance_rate": 1.0
+                "policy_compliance_rate": 1.0,
             }
 
         allowed = sum(1 for d in decisions if d.outcome == "ALLOWED")
@@ -32,5 +32,5 @@ class DecisionAnalyzer:
             "allowed_count": allowed,
             "denied_count": denied,
             "average_risk_score": avg_risk,
-            "policy_compliance_rate": allowed / total
+            "policy_compliance_rate": allowed / total,
         }

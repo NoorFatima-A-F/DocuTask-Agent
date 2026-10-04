@@ -1,6 +1,7 @@
 """
 Phase 3H.10: Runtime Orchestrator for Autonomous Operational Intelligence & Self-Optimization
 """
+
 from typing import Dict, Any
 from ..domain.models import (
     OperationalGraphReport,
@@ -50,7 +51,9 @@ class AutonomousOptimizationRuntime:
         correlation_report: SignalCorrelationReport = self.correlation_verifier.verify_signal_correlation()
         trend_report: TrendAnalysisReport = self.trend_verifier.verify_trend_analysis()
         predictive_report: PredictiveReliabilityReport = self.predictive_verifier.verify_predictive_reliability()
-        recommendations_report: OptimizationRecommendationsReport = self.recommendations_verifier.verify_optimization_recommendations()
+        recommendations_report: OptimizationRecommendationsReport = (
+            self.recommendations_verifier.verify_optimization_recommendations()
+        )
         execution_report: AutonomousExecutionReport = self.execution_verifier.verify_autonomous_execution()
         explainability_report: ExplainabilityReport = self.explainability_verifier.verify_explainability()
         learning_report: LearningEffectivenessReport = self.learning_verifier.verify_learning_effectiveness()

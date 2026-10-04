@@ -1,4 +1,5 @@
 """Argo CD GitOps Provider Adapter."""
+
 from .base import GitOpsProvider, GitOpsSyncResult
 
 

@@ -1,6 +1,7 @@
 """
 Phase 3I.2: Enterprise Logging Infrastructure Verification Framework
 """
+
 from .domain.models import (
     LogLevel,
     LoggingCertificationTier,

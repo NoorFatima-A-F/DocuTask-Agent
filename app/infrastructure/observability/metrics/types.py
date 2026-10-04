@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class MetricType(str, enum.Enum):
     """Eight core enterprise metric types."""
+
     COUNTER = "COUNTER"
     GAUGE = "GAUGE"
     HISTOGRAM = "HISTOGRAM"
@@ -27,6 +28,7 @@ class MetricType(str, enum.Enum):
 
 class MetricPoint(BaseModel):
     """Single measured time-series sample."""
+
     timestamp: float = Field(default_factory=lambda: datetime.now(timezone.utc).timestamp())
     value: float
     labels: Dict[str, str] = Field(default_factory=dict)
@@ -34,6 +36,7 @@ class MetricPoint(BaseModel):
 
 class MetricSeries(BaseModel):
     """Time-series stream for a specific metric and label set."""
+
     name: str
     metric_type: MetricType
     description: str = ""
@@ -44,6 +47,7 @@ class MetricSeries(BaseModel):
 
 class AggregatedMetricSummary(BaseModel):
     """Statistical summary of a metric over a time window."""
+
     name: str
     count: int
     sum: float

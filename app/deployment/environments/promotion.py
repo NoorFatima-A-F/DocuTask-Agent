@@ -1,4 +1,5 @@
 """Environment Promotion Orchestrator."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -13,6 +14,7 @@ from .validation import EnvironmentValidator
 
 class PromotionStatus(str, Enum):
     """Lifecycle states of a promotion request."""
+
     PENDING_APPROVAL = "PENDING_APPROVAL"
     APPROVED = "APPROVED"
     EXECUTED = "EXECUTED"
@@ -22,6 +24,7 @@ class PromotionStatus(str, Enum):
 @dataclass
 class PromotionRecord:
     """Audit log entry for an environment promotion."""
+
     promotion_id: str
     release_id: str
     source_env: Optional[str]
@@ -92,11 +95,13 @@ class PromotionManager:
 
         if role not in record.approved_roles:
             record.approved_roles.append(role)
-            record.approver_details.append({
-                "role": role,
-                "approver": approver_identity,
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            })
+            record.approver_details.append(
+                {
+                    "role": role,
+                    "approver": approver_identity,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }
+            )
 
         return record
 

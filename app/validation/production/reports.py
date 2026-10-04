@@ -29,7 +29,7 @@ class ProductionReportGenerator:
         chaos_results: list[ChaosExperimentResult],
         cost_metrics: CostControlMetrics,
         slo_metrics: SLOMetrics,
-        dr_metrics: DisasterRecoveryMetrics
+        dr_metrics: DisasterRecoveryMetrics,
     ) -> str:
         """
         Persists production evidence artifacts and compiles Markdown report.
@@ -44,7 +44,7 @@ class ProductionReportGenerator:
             "chaos_count": len(chaos_results),
             "cost_metrics": cost_metrics.model_dump(),
             "slo_metrics": slo_metrics.model_dump(),
-            "dr_metrics": dr_metrics.model_dump()
+            "dr_metrics": dr_metrics.model_dump(),
         }
         with open(ev_file, "w", encoding="utf-8") as f:
             json.dump(summary_payload, f, indent=2)
@@ -97,7 +97,7 @@ class ProductionReportGenerator:
 |---------------|------------------|----------------|----------------------------|--------|
 """
         for c in chaos_results:
-            md_content += f"| `{c.experiment_id}` | `{c.target_subsystem}` | `{c.injected_fault}` | {c.observed_behavior} | `{ '✓ PASS' if c.recovered_successfully else '❌ FAIL' }` |\n"
+            md_content += f"| `{c.experiment_id}` | `{c.target_subsystem}` | `{c.injected_fault}` | {c.observed_behavior} | `{'✓ PASS' if c.recovered_successfully else '❌ FAIL'}` |\n"
 
         md_content += f"""
 ---

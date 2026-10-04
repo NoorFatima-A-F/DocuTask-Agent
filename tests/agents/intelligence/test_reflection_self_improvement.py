@@ -148,7 +148,9 @@ class TestSelfCorrectionTriggerFormulation:
             detected_defects=["Missing mandatory fields: vendor_name"],
             recommendations=["Re-extract focusing on vendor_name"],
         )
-        trigger = agent.formulate_correction("t_extract", eval_fail, current_agent_id="ag_ext", current_tool_id="tl_regex")
+        trigger = agent.formulate_correction(
+            "t_extract", eval_fail, current_agent_id="ag_ext", current_tool_id="tl_regex"
+        )
         assert trigger.action == CorrectionAction.REEXECUTE_WITH_FEEDBACK
         assert trigger.suggested_alternative_agent == "ag_ext"
         assert trigger.suggested_alternative_tool == "tl_regex"
@@ -188,14 +190,17 @@ class TestApplySelfCorrection:
 
 
 class TestExpandedReflectionScenarios:
-    @pytest.mark.parametrize("action", [
-        CorrectionAction.NO_ACTION,
-        CorrectionAction.REEXECUTE_WITH_FEEDBACK,
-        CorrectionAction.SWITCH_AGENT,
-        CorrectionAction.SWITCH_TOOL,
-        CorrectionAction.INJECT_REPAIR_NODE,
-        CorrectionAction.ESCALATE_HUMAN,
-    ])
+    @pytest.mark.parametrize(
+        "action",
+        [
+            CorrectionAction.NO_ACTION,
+            CorrectionAction.REEXECUTE_WITH_FEEDBACK,
+            CorrectionAction.SWITCH_AGENT,
+            CorrectionAction.SWITCH_TOOL,
+            CorrectionAction.INJECT_REPAIR_NODE,
+            CorrectionAction.ESCALATE_HUMAN,
+        ],
+    )
     def test_all_correction_actions(self, action):
         trigger = SelfCorrectionTrigger(action=action)
         assert trigger.action == action
@@ -224,7 +229,13 @@ class TestExpandedReflectionScenarios:
 
     def test_subtotal_zero_does_not_fail_arithmetic(self):
         agent = ReflectionAgent()
-        data = {"vendor_name": "ACME", "invoice_number": "INV-1", "total_amount": 0.0, "subtotal": 0.0, "tax_amount": 0.0}
+        data = {
+            "vendor_name": "ACME",
+            "invoice_number": "INV-1",
+            "total_amount": 0.0,
+            "subtotal": 0.0,
+            "tax_amount": 0.0,
+        }
         res = agent.evaluate_output("validation", data)
         assert res.arithmetic_score == 1.0
 
@@ -445,4 +456,3 @@ class TestExpandedReflectionScenarios:
     def test_reflection_agent_default_threshold_is_ninety_percent(self):
         agent = ReflectionAgent()
         assert agent.quality_threshold == 0.90
-

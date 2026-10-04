@@ -111,7 +111,12 @@ class RollbackEngine:
             ExecutionEvent(
                 event_type=ExecutionEventType.ROLLBACK_TRIGGERED,
                 source="rollback_engine",
-                payload={"rollback_id": rollback_id, "mission_id": mission_id, "steps_count": len(steps_to_comp), "reason": trigger_reason},
+                payload={
+                    "rollback_id": rollback_id,
+                    "mission_id": mission_id,
+                    "steps_count": len(steps_to_comp),
+                    "reason": trigger_reason,
+                },
                 risk_level=RiskLevel.HIGH,
             )
         )
@@ -121,7 +126,11 @@ class RollbackEngine:
             comp_rec.status = StepStatus.COMPENSATING
             try:
                 # Simulated compensation action
-                comp_rec.output = {"compensated": True, "undone_target": comp_rec.original_step_id, "action": f"Executed inverse for {comp_rec.compensation_tool_id}"}
+                comp_rec.output = {
+                    "compensated": True,
+                    "undone_target": comp_rec.original_step_id,
+                    "action": f"Executed inverse for {comp_rec.compensation_tool_id}",
+                }
                 comp_rec.status = StepStatus.COMPENSATED
                 comp_rec.executed_at = datetime.now(timezone.utc).isoformat()
                 session.completed_compensations += 1
@@ -130,7 +139,10 @@ class RollbackEngine:
                     ExecutionEvent(
                         event_type=ExecutionEventType.STEP_COMPENSATED,
                         source="rollback_engine",
-                        payload={"compensation_id": comp_rec.compensation_id, "original_step_id": comp_rec.original_step_id},
+                        payload={
+                            "compensation_id": comp_rec.compensation_id,
+                            "original_step_id": comp_rec.original_step_id,
+                        },
                     )
                 )
             except Exception as e:
@@ -143,9 +155,15 @@ class RollbackEngine:
 
         execution_event_bus.publish(
             ExecutionEvent(
-                event_type=ExecutionEventType.ROLLBACK_COMPLETED if session.status == "completed" else ExecutionEventType.ROLLBACK_FAILED,
+                event_type=ExecutionEventType.ROLLBACK_COMPLETED
+                if session.status == "completed"
+                else ExecutionEventType.ROLLBACK_FAILED,
                 source="rollback_engine",
-                payload={"rollback_id": rollback_id, "status": session.status, "completed_count": session.completed_compensations},
+                payload={
+                    "rollback_id": rollback_id,
+                    "status": session.status,
+                    "completed_count": session.completed_compensations,
+                },
             )
         )
 

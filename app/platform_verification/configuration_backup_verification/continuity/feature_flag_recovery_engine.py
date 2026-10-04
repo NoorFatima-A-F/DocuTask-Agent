@@ -1,6 +1,7 @@
 """
 Feature Flag Recovery Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
+
 from typing import List
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
@@ -19,11 +20,43 @@ class FeatureFlagRecoveryEngine(IFeatureFlagRecoveryEngine):
     """
 
     FEATURE_FLAGS_SPEC = [
-        ("FF_ADVANCED_OCR_ROUTING", "Routes complex multi-column scans to hybrid neural engine", True, True, True, True, True),
-        ("FF_GEMINI_2_5_FLASH_PRIMARY", "Enables Gemini 2.5 Flash as default AI extraction engine", True, True, True, True, True),
-        ("FF_VECTOR_SEARCH_HYBRID", "Activates Qdrant / pgvector hybrid embeddings indexing", True, True, True, True, True),
+        (
+            "FF_ADVANCED_OCR_ROUTING",
+            "Routes complex multi-column scans to hybrid neural engine",
+            True,
+            True,
+            True,
+            True,
+            True,
+        ),
+        (
+            "FF_GEMINI_2_5_FLASH_PRIMARY",
+            "Enables Gemini 2.5 Flash as default AI extraction engine",
+            True,
+            True,
+            True,
+            True,
+            True,
+        ),
+        (
+            "FF_VECTOR_SEARCH_HYBRID",
+            "Activates Qdrant / pgvector hybrid embeddings indexing",
+            True,
+            True,
+            True,
+            True,
+            True,
+        ),
         ("FF_DYNAMIC_RATE_LIMITING", "Enforces tenant-scoped token bucket rate limits", True, True, True, True, True),
-        ("FF_STREAMING_AI_EXTRACTIONS", "Enables SSE streaming for realtime document chunking", True, True, True, True, True),
+        (
+            "FF_STREAMING_AI_EXTRACTIONS",
+            "Enables SSE streaming for realtime document chunking",
+            True,
+            True,
+            True,
+            True,
+            True,
+        ),
         ("FF_ZERO_TRUST_MTLS", "Enforces strict mTLS for inter-pod worker communication", True, True, True, True, True),
     ]
 
@@ -50,12 +83,7 @@ class FeatureFlagRecoveryEngine(IFeatureFlagRecoveryEngine):
         deps_ok = all(f.dependencies_preserved for f in flags)
         rollback_ok = all(f.rollback_supported for f in flags)
 
-        passed = (
-            total == preserved_count
-            and deps_ok
-            and rollback_ok
-            and all(f.version_compatible for f in flags)
-        )
+        passed = total == preserved_count and deps_ok and rollback_ok and all(f.version_compatible for f in flags)
 
         return FeatureFlagRestoreReport(
             total_flags_tested=total,

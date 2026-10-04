@@ -1,6 +1,7 @@
 """
 Domain models for Part 2G: Enterprise Test Architecture Verification Framework.
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import List
@@ -34,9 +35,9 @@ TestArchitectureLayer.__test__ = False
 
 
 class FlakinessClass(str, Enum):
-    RELIABLE = "RELIABLE"          # < 1% failure
-    FLAKY = "FLAKY"                # 1 - 5% failure
-    UNSTABLE = "UNSTABLE"          # > 5% failure
+    RELIABLE = "RELIABLE"  # < 1% failure
+    FLAKY = "FLAKY"  # 1 - 5% failure
+    UNSTABLE = "UNSTABLE"  # > 5% failure
 
 
 @dataclass

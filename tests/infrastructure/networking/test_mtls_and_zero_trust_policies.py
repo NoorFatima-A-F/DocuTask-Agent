@@ -56,16 +56,18 @@ def test_zero_trust_policy_engine_default_deny_and_matching() -> None:
     assert res_deny.is_allowed is False
 
     # Add specific allow rule
-    zt.add_rule(ZeroTrustRule(
-        rule_id="r1",
-        name="Allow Frontend to Backend",
-        action=ZeroTrustAction.ALLOW,
-        source_spiffe_pattern=caller,
-        target_spiffe_pattern=target,
-        allowed_methods=["GET", "POST"],
-        allowed_paths=["/api/v1/documents/*"],
-        tenant_scope=["tenant-01"],
-    ))
+    zt.add_rule(
+        ZeroTrustRule(
+            rule_id="r1",
+            name="Allow Frontend to Backend",
+            action=ZeroTrustAction.ALLOW,
+            source_spiffe_pattern=caller,
+            target_spiffe_pattern=target,
+            allowed_methods=["GET", "POST"],
+            allowed_paths=["/api/v1/documents/*"],
+            tenant_scope=["tenant-01"],
+        )
+    )
 
     # Test allowed call matching tenant
     res_allow = zt.evaluate(caller, target, method="GET", path="/api/v1/documents/123", tenant_id="tenant-01")

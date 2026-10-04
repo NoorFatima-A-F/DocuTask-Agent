@@ -10,7 +10,6 @@ from dataclasses import dataclass
 from enum import Enum
 
 
-
 class DriftDimension(str, Enum):
     METRIC_ACCURACY = "METRIC_ACCURACY"
     LATENCY_PERFORMANCE = "LATENCY_PERFORMANCE"
@@ -29,6 +28,7 @@ class DriftSeverity(str, Enum):
 @dataclass(frozen=True)
 class DimensionDriftResult:
     """Drift evaluation result for a single scientific dimension."""
+
     dimension: DriftDimension
     metric_name: str
     baseline_value: float
@@ -71,7 +71,9 @@ class MultiDimensionalDriftDetector:
             sev = DriftSeverity.NONE
 
         return DimensionDriftResult(
-            dimension=DriftDimension.METRIC_ACCURACY if "lat" not in metric_name else DriftDimension.LATENCY_PERFORMANCE,
+            dimension=DriftDimension.METRIC_ACCURACY
+            if "lat" not in metric_name
+            else DriftDimension.LATENCY_PERFORMANCE,
             metric_name=metric_name,
             baseline_value=baseline,
             current_value=current,

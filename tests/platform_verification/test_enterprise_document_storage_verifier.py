@@ -1,6 +1,7 @@
 """
 Comprehensive Test Suite for Enterprise Document Storage Backup & Recovery Verification Platform (Part 3G.2C).
 """
+
 import os
 import json
 import pytest
@@ -61,6 +62,7 @@ from app.platform_verification.document_storage_verification.api.storage_backup_
 @pytest.fixture
 def test_client():
     from fastapi import FastAPI
+
     app = FastAPI()
     app.include_router(router)
     return TestClient(app)

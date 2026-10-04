@@ -30,10 +30,7 @@ class AgentRegistry(IAgentRegistry):
 
     async def list_available(self) -> List[Agent]:
         """Returns all agents currently in the AVAILABLE lifecycle state."""
-        return [
-            a for a in self._agents.values()
-            if a.state == AgentLifecycleState.AVAILABLE
-        ]
+        return [a for a in self._agents.values() if a.state == AgentLifecycleState.AVAILABLE]
 
     async def update_agent(self, agent: Agent) -> None:
         """Updates agent record in registry."""

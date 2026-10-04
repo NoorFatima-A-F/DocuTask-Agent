@@ -22,7 +22,7 @@ class PlanManager(IPlanManager):
         self,
         repository: Optional[IPlanRepository] = None,
         validator: Optional[IPlanValidator] = None,
-        cache: Optional[PlanCache] = None
+        cache: Optional[PlanCache] = None,
     ):
         self.repository = repository or PlanRepository()
         self.validator = validator or PlanValidator()

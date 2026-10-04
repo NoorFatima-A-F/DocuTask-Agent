@@ -8,6 +8,7 @@ from enum import Enum
 
 class AgentLifecycleState(str, Enum):
     """12-state deterministic lifecycle for distributed agents."""
+
     CREATED = "CREATED"
     REGISTERED = "REGISTERED"
     AVAILABLE = "AVAILABLE"
@@ -38,6 +39,7 @@ class AgentLifecycleState(str, Enum):
 
 class CoordinationLifecycleState(str, Enum):
     """Lifecycle state of a coordinated multi-agent workflow."""
+
     PENDING = "PENDING"
     DISCOVERING = "DISCOVERING"
     DELEGATING = "DELEGATING"

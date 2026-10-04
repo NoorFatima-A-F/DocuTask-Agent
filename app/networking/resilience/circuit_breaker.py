@@ -92,7 +92,10 @@ class CircuitBreaker:
                 failure_rate = (failures / total) * 100.0
                 slow_rate = (slow_calls / total) * 100.0
 
-                if failure_rate >= self.config.failure_rate_threshold_pct or slow_rate >= self.config.slow_call_rate_threshold_pct:
+                if (
+                    failure_rate >= self.config.failure_rate_threshold_pct
+                    or slow_rate >= self.config.slow_call_rate_threshold_pct
+                ):
                     self.state = CircuitState.OPEN
                     self._last_state_change = now
 

@@ -51,6 +51,7 @@ def test_certification_authority_issue_and_verify(tmp_path):
     # Save to disk
     cert_path = tmp_path / "certificate.json"
     import json
+
     with open(cert_path, "w", encoding="utf-8") as fp:
         json.dump(signed_record.model_dump(), fp)
 
@@ -78,6 +79,7 @@ def test_certification_authority_revocation_flow(tmp_path):
 
     cert_path = tmp_path / "certificate.json"
     import json
+
     with open(cert_path, "w", encoding="utf-8") as fp:
         json.dump(signed_record.model_dump(), fp)
 

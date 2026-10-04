@@ -1,6 +1,7 @@
 """
 Domain Package for Liveness Verification.
 """
+
 from app.platform_verification.liveness.domain.models import (
     LivenessState,
     LivenessTier,

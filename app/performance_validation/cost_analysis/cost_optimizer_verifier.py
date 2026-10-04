@@ -96,7 +96,11 @@ class CostOptimizerVerifier:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"overall_cost_reduction_pct": routing_savings_pct, "cache_hit_rate_pct": cache_hit_rate_pct, "roi_multiplier": roi_multiplier},
+            metrics={
+                "overall_cost_reduction_pct": routing_savings_pct,
+                "cache_hit_rate_pct": cache_hit_rate_pct,
+                "roi_multiplier": roi_multiplier,
+            },
             execution_time_ms=elapsed_ms,
         )
 

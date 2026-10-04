@@ -12,6 +12,7 @@ from app.agents.workflow.metadata import WorkflowIdentity, WorkflowStatistics
 
 class WorkflowContext(BaseModel):
     """Operational limits and execution parameters for a workflow instance."""
+
     tenant_id: str = Field(default="default")
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     max_duration_seconds: float = Field(default=86400.0, gt=0.0)  # 24 hours default
@@ -24,6 +25,7 @@ class WorkflowContext(BaseModel):
 
 class WorkflowRequest(BaseModel):
     """Request payload to instantiate and execute a workflow."""
+
     definition_id: UUID
     input_data: Dict[str, Any] = Field(default_factory=dict)
     context: WorkflowContext = Field(default_factory=WorkflowContext)
@@ -34,6 +36,7 @@ class WorkflowRequest(BaseModel):
 
 class WorkflowResult(BaseModel):
     """Execution outcome produced upon workflow termination."""
+
     identity: WorkflowIdentity
     lifecycle_state: WorkflowLifecycleState = Field(default=WorkflowLifecycleState.COMPLETED)
     outputs: Dict[str, Any] = Field(default_factory=dict)

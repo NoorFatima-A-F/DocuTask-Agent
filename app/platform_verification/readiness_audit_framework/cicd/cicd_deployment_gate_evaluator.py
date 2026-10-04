@@ -15,8 +15,8 @@ class CICDDeploymentGateEvaluator:
 
     def evaluate_gate(self, scorecard: AuditQualityScorecard, manifests_count: int) -> Dict[str, Any]:
         has_critical_failure = not scorecard.passed
-        evidence_complete = (manifests_count >= 13)
-        score_meets_threshold = (scorecard.overall_score >= 95.0)
+        evidence_complete = manifests_count >= 13
+        score_meets_threshold = scorecard.overall_score >= 95.0
 
         gate_approved = (not has_critical_failure) and evidence_complete and score_meets_threshold
 

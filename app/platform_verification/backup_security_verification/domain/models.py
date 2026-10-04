@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Backup Security Verification Framework (Part 3G.2F).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any
@@ -29,9 +30,9 @@ class KeyProviderType(str, Enum):
 
 class SecurityCertificationTier(str, Enum):
     ENTERPRISE_BACKUP_SECURITY_CERTIFIED = "Enterprise Backup Security Certified"  # 95 - 100
-    SECURE_PRODUCTION_READY = "Secure Production Ready"                          # 90 - 94
-    SECURITY_IMPROVEMENTS_REQUIRED = "Security Improvements Required"              # 80 - 89
-    FAILED = "Failed"                                                              # < 80
+    SECURE_PRODUCTION_READY = "Secure Production Ready"  # 90 - 94
+    SECURITY_IMPROVEMENTS_REQUIRED = "Security Improvements Required"  # 80 - 89
+    FAILED = "Failed"  # < 80
 
 
 @dataclass
@@ -215,13 +216,13 @@ class BackupSecurityComplianceReport:
 
 @dataclass
 class BackupSecurityQualityScorecard:
-    encryption_score: float             # Weight 25%
-    access_control_score: float         # Weight 20%
-    integrity_protection_score: float   # Weight 20%
-    key_management_score: float         # Weight 15%
-    auditability_score: float           # Weight 10%
-    compliance_score: float             # Weight 10%
-    composite_score: float              # 0 - 100
+    encryption_score: float  # Weight 25%
+    access_control_score: float  # Weight 20%
+    integrity_protection_score: float  # Weight 20%
+    key_management_score: float  # Weight 15%
+    auditability_score: float  # Weight 10%
+    compliance_score: float  # Weight 10%
+    composite_score: float  # 0 - 100
     certification_tier: SecurityCertificationTier
     passed: bool
     execution_duration_ms: float

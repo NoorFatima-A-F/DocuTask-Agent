@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Core.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.core.domain.models import CoreEntity
 from app.platform_verification.modules.core.domain.interfaces import CoreRepositoryInterface
+
 
 class InMemoryCoreRepository(CoreRepositoryInterface):
     def __init__(self):

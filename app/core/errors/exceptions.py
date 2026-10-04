@@ -86,12 +86,21 @@ class PlatformException(Exception):
 
 class DatabasePlatformException(PlatformException):
     def __init__(self, message: str, **kwargs):
-        super().__init__(message, category=ErrorCategory.DATABASE, error_code="DATABASE_ERROR", http_status=500, **kwargs)
+        super().__init__(
+            message, category=ErrorCategory.DATABASE, error_code="DATABASE_ERROR", http_status=500, **kwargs
+        )
 
 
 class NetworkPlatformException(PlatformException):
     def __init__(self, message: str, **kwargs):
-        super().__init__(message, category=ErrorCategory.NETWORK, retryable=True, error_code="NETWORK_ERROR", http_status=502, **kwargs)
+        super().__init__(
+            message,
+            category=ErrorCategory.NETWORK,
+            retryable=True,
+            error_code="NETWORK_ERROR",
+            http_status=502,
+            **kwargs,
+        )
 
 
 class AIPlatformException(PlatformException):
@@ -101,29 +110,51 @@ class AIPlatformException(PlatformException):
 
 class AgentPlatformException(PlatformException):
     def __init__(self, message: str, **kwargs):
-        super().__init__(message, category=ErrorCategory.AGENT, error_code="AGENT_EXECUTION_ERROR", http_status=500, **kwargs)
+        super().__init__(
+            message, category=ErrorCategory.AGENT, error_code="AGENT_EXECUTION_ERROR", http_status=500, **kwargs
+        )
 
 
 class WorkflowPlatformException(PlatformException):
     def __init__(self, message: str, **kwargs):
-        super().__init__(message, category=ErrorCategory.WORKFLOW, error_code="WORKFLOW_ERROR", http_status=500, **kwargs)
+        super().__init__(
+            message, category=ErrorCategory.WORKFLOW, error_code="WORKFLOW_ERROR", http_status=500, **kwargs
+        )
 
 
 class ConnectorPlatformException(PlatformException):
     def __init__(self, message: str, **kwargs):
-        super().__init__(message, category=ErrorCategory.CONNECTOR, error_code="CONNECTOR_ERROR", http_status=502, **kwargs)
+        super().__init__(
+            message, category=ErrorCategory.CONNECTOR, error_code="CONNECTOR_ERROR", http_status=502, **kwargs
+        )
 
 
 class SecurityPlatformException(PlatformException):
     def __init__(self, message: str, **kwargs):
-        super().__init__(message, category=ErrorCategory.SECURITY, severity=ErrorSeverity.HIGH, error_code="SECURITY_VIOLATION", http_status=403, **kwargs)
+        super().__init__(
+            message,
+            category=ErrorCategory.SECURITY,
+            severity=ErrorSeverity.HIGH,
+            error_code="SECURITY_VIOLATION",
+            http_status=403,
+            **kwargs,
+        )
 
 
 class ValidationPlatformException(PlatformException):
     def __init__(self, message: str, **kwargs):
-        super().__init__(message, category=ErrorCategory.VALIDATION, error_code="VALIDATION_FAILED", http_status=422, **kwargs)
+        super().__init__(
+            message, category=ErrorCategory.VALIDATION, error_code="VALIDATION_FAILED", http_status=422, **kwargs
+        )
 
 
 class TimeoutPlatformException(PlatformException):
     def __init__(self, message: str, **kwargs):
-        super().__init__(message, category=ErrorCategory.TIMEOUT, retryable=True, error_code="EXECUTION_TIMEOUT", http_status=504, **kwargs)
+        super().__init__(
+            message,
+            category=ErrorCategory.TIMEOUT,
+            retryable=True,
+            error_code="EXECUTION_TIMEOUT",
+            http_status=504,
+            **kwargs,
+        )

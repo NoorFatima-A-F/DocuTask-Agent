@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class LeakageScanResult(BaseModel):
     """Result of static prompt data leakage analysis."""
+
     is_safe: bool
     detected_secret_types: List[str] = Field(default_factory=list)
     risk_score: float = 0.0

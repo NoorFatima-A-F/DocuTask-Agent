@@ -1,4 +1,5 @@
 """Versioned Configuration Management (Req 48, 49)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict
@@ -9,6 +10,7 @@ import uuid
 @dataclass
 class VersionedConfiguration:
     """Immutable, versioned configuration release artifact (Req 48)."""
+
     config_id: str
     version: str
     environment: str

@@ -35,10 +35,28 @@ class HealthManager:
 
     def _register_default_checks(self) -> None:
         """Register baseline platform subsystem checks."""
-        self.register_check("database", HealthLevel.SERVICE, lambda: HealthCheckResult(name="database", status=HealthStatus.HEALTHY, message="Pool connected"))
-        self.register_check("cache", HealthLevel.SERVICE, lambda: HealthCheckResult(name="cache", status=HealthStatus.HEALTHY, message="Cache responsive"))
-        self.register_check("queue", HealthLevel.SERVICE, lambda: HealthCheckResult(name="queue", status=HealthStatus.HEALTHY, message="Queue broker active"))
-        self.register_check("ai_provider", HealthLevel.SERVICE, lambda: HealthCheckResult(name="ai_provider", status=HealthStatus.HEALTHY, message="Provider circuit closed"))
+        self.register_check(
+            "database",
+            HealthLevel.SERVICE,
+            lambda: HealthCheckResult(name="database", status=HealthStatus.HEALTHY, message="Pool connected"),
+        )
+        self.register_check(
+            "cache",
+            HealthLevel.SERVICE,
+            lambda: HealthCheckResult(name="cache", status=HealthStatus.HEALTHY, message="Cache responsive"),
+        )
+        self.register_check(
+            "queue",
+            HealthLevel.SERVICE,
+            lambda: HealthCheckResult(name="queue", status=HealthStatus.HEALTHY, message="Queue broker active"),
+        )
+        self.register_check(
+            "ai_provider",
+            HealthLevel.SERVICE,
+            lambda: HealthCheckResult(
+                name="ai_provider", status=HealthStatus.HEALTHY, message="Provider circuit closed"
+            ),
+        )
 
     async def check_health(self) -> PlatformHealthReport:
         """Execute all health checks and generate aggregate health report."""

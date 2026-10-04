@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class PromptBenchmarkCase(BaseModel):
     """Single test case within a prompt evaluation dataset."""
+
     case_id: str = Field(default_factory=lambda: f"tc_{uuid.uuid4().hex[:6]}")
     variables: Dict[str, Any] = Field(default_factory=dict)
     expected_output: Optional[Any] = None
@@ -19,6 +20,7 @@ class PromptBenchmarkCase(BaseModel):
 
 class PromptEvaluationDataset(BaseModel):
     """Governed evaluation dataset containing ground-truth test cases."""
+
     dataset_id: str
     name: str
     purpose: str = "Regression and quality evaluation"

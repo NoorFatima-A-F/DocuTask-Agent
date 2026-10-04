@@ -1,6 +1,7 @@
 """
 Phase 3H.5.6.6: Self-Healing Policy Improvement Verifier
 """
+
 from ..domain.interfaces import IPolicyImprovementVerifier
 from ..domain.models import PolicyImprovementReport, PolicyComparisonItem
 

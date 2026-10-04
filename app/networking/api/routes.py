@@ -191,10 +191,7 @@ def configure_traffic_split(
     req: TrafficSplitRequest,
     client: MeshClient = Depends(get_mesh_client),
 ):
-    splits = [
-        VersionSplit(version=s.get("version", "v1"), weight=int(s.get("weight", 100)))
-        for s in req.splits
-    ]
+    splits = [VersionSplit(version=s.get("version", "v1"), weight=int(s.get("weight", 100))) for s in req.splits]
     cfg = TrafficSplitConfig(
         split_id=req.split_id,
         service_name=req.service_name,

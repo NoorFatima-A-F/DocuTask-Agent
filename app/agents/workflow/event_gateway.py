@@ -10,6 +10,7 @@ from pydantic import BaseModel
 
 class GatewaySubscription(BaseModel):
     """Event gateway subscription binding an event topic to a workflow instance."""
+
     subscription_id: str
     instance_id: UUID
     topic: str

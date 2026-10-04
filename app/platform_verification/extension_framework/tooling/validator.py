@@ -1,6 +1,7 @@
 """
 Static & Contract Validator for Verification Plugins.
 """
+
 from typing import Any, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import VerificationPluginInterface
 
@@ -15,8 +16,14 @@ class PluginContractValidator:
 
         # Check required methods
         required_methods = [
-            "initialize", "validate", "configure", "execute",
-            "collect_evidence", "calculate_metrics", "cleanup", "health_check"
+            "initialize",
+            "validate",
+            "configure",
+            "execute",
+            "collect_evidence",
+            "calculate_metrics",
+            "cleanup",
+            "health_check",
         ]
         for m in required_methods:
             if not hasattr(plugin, m) or not callable(getattr(plugin, m)):

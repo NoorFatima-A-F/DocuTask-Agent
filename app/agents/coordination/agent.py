@@ -15,6 +15,7 @@ class Agent(BaseModel):
     Agent Domain Entity / Aggregate.
     Represents an active, registered, or assigned agent in the multi-agent cluster.
     """
+
     profile: AgentProfile
     state: AgentLifecycleState = Field(default=AgentLifecycleState.CREATED)
     current_tasks: List[str] = Field(default_factory=list)
@@ -39,10 +40,7 @@ class Agent(BaseModel):
     def assign_task(self, task_id: str) -> "Agent":
         """Assigns a task and transitions to ASSIGNED or EXECUTING."""
         new_tasks = [*self.current_tasks, task_id]
-        return self.model_copy(update={
-            "current_tasks": new_tasks,
-            "state": AgentLifecycleState.ASSIGNED
-        })
+        return self.model_copy(update={"current_tasks": new_tasks, "state": AgentLifecycleState.ASSIGNED})
 
     def complete_task(self, task_id: str, success: bool = True) -> "Agent":
         """Removes task and updates task counts and state."""
@@ -53,10 +51,12 @@ class Agent(BaseModel):
         total = new_comp + new_fail
         rep = (new_comp / total) if total > 0 else 1.0
 
-        return self.model_copy(update={
-            "current_tasks": new_tasks,
-            "state": new_state,
-            "completed_task_count": new_comp,
-            "failed_task_count": new_fail,
-            "reputation_score": rep
-        })
+        return self.model_copy(
+            update={
+                "current_tasks": new_tasks,
+                "state": new_state,
+                "completed_task_count": new_comp,
+                "failed_task_count": new_fail,
+                "reputation_score": rep,
+            }
+        )

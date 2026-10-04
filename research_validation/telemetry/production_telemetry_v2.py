@@ -27,6 +27,7 @@ class TelemetryOrigin(str, Enum):
 @dataclass
 class ServiceOperationalTelemetry:
     """Telemetry capture for a specific distributed service component."""
+
     service_name: str
     origin: TelemetryOrigin
     is_simulated: bool
@@ -47,6 +48,7 @@ class ServiceOperationalTelemetry:
 @dataclass
 class ProductionTelemetryValidationReport:
     """Consolidated production telemetry audit report."""
+
     total_services_monitored: int
     real_telemetry_services_count: int
     simulated_services_count: int
@@ -69,7 +71,7 @@ class ProductionTelemetryValidatorV2:
         cls,
         telemetries: List[ServiceOperationalTelemetry],
         target_error_rate_max: float = 0.50,  # 0.5% max
-        target_latency_p99_max_ms: float = 5000.0
+        target_latency_p99_max_ms: float = 5000.0,
     ) -> ProductionTelemetryValidationReport:
         """Audit telemetry metrics against production SLO thresholds."""
         if not telemetries:
@@ -82,7 +84,7 @@ class ProductionTelemetryValidatorV2:
                 assumptions=["Distributed services operational"],
                 limitations=["No telemetry streams connected"],
                 reproducibility_instructions="Connect OpenTelemetry collector endpoint or emit structured traces",
-                audit_status="SIMULATION_ONLY"
+                audit_status="SIMULATION_ONLY",
             )
 
         n = len(telemetries)
@@ -104,12 +106,10 @@ class ProductionTelemetryValidatorV2:
             service_telemetries=telemetries,
             assumptions=[
                 "Metrics polled from OpenTelemetry / Cloud Monitoring API at 60s sampling frequency",
-                "Percentiles estimated using T-Digest or exact reservoir sampling"
+                "Percentiles estimated using T-Digest or exact reservoir sampling",
             ],
             methodology="Real vs simulated telemetry tagging with automated SLO compliance checking against Google SRE error budget standards.",
-            limitations=[
-                "High-frequency millisecond burst queues may be smoothed over 60s reporting intervals"
-            ],
+            limitations=["High-frequency millisecond burst queues may be smoothed over 60s reporting intervals"],
             reproducibility_instructions="Deploy Cloud Run service with OTel exporter enabled and execute load generator.",
-            audit_status=status
+            audit_status=status,
         )

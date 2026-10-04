@@ -2,6 +2,7 @@
 Transaction Consistency and ACID MVCC Engine (Part 3G.2B Phase 7).
 Stress-tests concurrent writers, rollbacks, savepoints, and proves snapshot isolation.
 """
+
 from typing import Dict, Any
 from app.platform_verification.database_backup_verification.domain.models import (
     TransactionConsistencyReport,

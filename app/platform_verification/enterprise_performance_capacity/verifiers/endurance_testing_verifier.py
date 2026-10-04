@@ -34,14 +34,40 @@ class EnduranceTestingVerifier(IEnduranceTestingVerifier):
 
     def verify(self) -> EnduranceTestReport:
         checkpoints = [
-            EnduranceCheckpoint(checkpoint_hour=0, memory_rss_mb=145.0, cpu_average_pct=38.0, db_active_conns=40, worker_throughput_dph=1200),
-            EnduranceCheckpoint(checkpoint_hour=6, memory_rss_mb=146.2, cpu_average_pct=38.5, db_active_conns=42, worker_throughput_dph=1200),
-            EnduranceCheckpoint(checkpoint_hour=24, memory_rss_mb=146.5, cpu_average_pct=38.2, db_active_conns=41, worker_throughput_dph=1200),
-            EnduranceCheckpoint(checkpoint_hour=72, memory_rss_mb=147.2, cpu_average_pct=38.4, db_active_conns=42, worker_throughput_dph=1200),
+            EnduranceCheckpoint(
+                checkpoint_hour=0,
+                memory_rss_mb=145.0,
+                cpu_average_pct=38.0,
+                db_active_conns=40,
+                worker_throughput_dph=1200,
+            ),
+            EnduranceCheckpoint(
+                checkpoint_hour=6,
+                memory_rss_mb=146.2,
+                cpu_average_pct=38.5,
+                db_active_conns=42,
+                worker_throughput_dph=1200,
+            ),
+            EnduranceCheckpoint(
+                checkpoint_hour=24,
+                memory_rss_mb=146.5,
+                cpu_average_pct=38.2,
+                db_active_conns=41,
+                worker_throughput_dph=1200,
+            ),
+            EnduranceCheckpoint(
+                checkpoint_hour=72,
+                memory_rss_mb=147.2,
+                cpu_average_pct=38.4,
+                db_active_conns=42,
+                worker_throughput_dph=1200,
+            ),
         ]
 
         total_hours = checkpoints[-1].checkpoint_hour
-        rss_slope = (checkpoints[-1].memory_rss_mb - checkpoints[0].memory_rss_mb) / total_hours if total_hours > 0 else 0.0
+        rss_slope = (
+            (checkpoints[-1].memory_rss_mb - checkpoints[0].memory_rss_mb) / total_hours if total_hours > 0 else 0.0
+        )
 
         checks: List[CheckResult] = [
             CheckResult(

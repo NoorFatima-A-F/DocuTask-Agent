@@ -1,6 +1,7 @@
 """
 Runtime Coordinator for Enterprise Service Communication Verification.
 """
+
 import uuid
 from typing import Dict, List, Any, Optional
 from app.platform_verification.service_communication.domain.models import (
@@ -19,15 +20,20 @@ from app.platform_verification.service_communication.core.contract_validator imp
 from app.platform_verification.service_communication.core.timeout_retry_engine import TimeoutRetryEngine
 from app.platform_verification.service_communication.core.circuit_breaker_tester import CircuitBreakerTester
 from app.platform_verification.service_communication.core.network_failure_simulator import NetworkFailureSimulator
-from app.platform_verification.service_communication.core.distributed_consistency_verifier import DistributedConsistencyVerifier
+from app.platform_verification.service_communication.core.distributed_consistency_verifier import (
+    DistributedConsistencyVerifier,
+)
 from app.platform_verification.service_communication.core.traceability_validator import TraceabilityValidator
-from app.platform_verification.service_communication.core.distributed_scoring_engine import DistributedSystemScoringEngine
+from app.platform_verification.service_communication.core.distributed_scoring_engine import (
+    DistributedSystemScoringEngine,
+)
 from app.platform_verification.service_communication.core.evidence_store import ServiceCommunicationEvidenceStore
 from app.platform_verification.service_communication.api.service_communication_api import ServiceCommunicationApi
 
 
 class ServiceCommunicationRuntime:
     """High-level facade orchestrating distributed system verification."""
+
     __test__ = False
 
     def __init__(self):
@@ -60,8 +66,20 @@ class ServiceCommunicationRuntime:
             contracts = self._default_contracts()
         if service_timeouts is None:
             service_timeouts = [
-                {"name": "api", "timeout_seconds": 10.0, "backoff_strategy": "exponential", "jitter_enabled": True, "max_retries": 3},
-                {"name": "worker", "timeout_seconds": 30.0, "backoff_strategy": "exponential", "jitter_enabled": True, "max_retries": 3},
+                {
+                    "name": "api",
+                    "timeout_seconds": 10.0,
+                    "backoff_strategy": "exponential",
+                    "jitter_enabled": True,
+                    "max_retries": 3,
+                },
+                {
+                    "name": "worker",
+                    "timeout_seconds": 30.0,
+                    "backoff_strategy": "exponential",
+                    "jitter_enabled": True,
+                    "max_retries": 3,
+                },
             ]
         if network_scenarios is None:
             network_scenarios = [
@@ -70,7 +88,13 @@ class ServiceCommunicationRuntime:
             ]
         if workflows is None:
             workflows = [
-                {"name": "doc_extraction_wf", "uses_idempotency_key": True, "orphan_records_created_on_crash": False, "duplicate_queue_task_on_retry": False, "has_compensation_rollback": True}
+                {
+                    "name": "doc_extraction_wf",
+                    "uses_idempotency_key": True,
+                    "orphan_records_created_on_crash": False,
+                    "duplicate_queue_task_on_retry": False,
+                    "has_compensation_rollback": True,
+                }
             ]
         if trace_spans is None:
             trace_spans = [
@@ -94,10 +118,19 @@ class ServiceCommunicationRuntime:
 
         # 4. Standard simulated subsystem checks
         api_rep = ApiCommunicationReport(success_rate_pct=99.8, average_latency_ms=24.5)
-        db_rep = DatabaseCommunicationReport(pool_exhaustion_handled=True, automatic_reconnect_verified=True, transaction_rollback_on_disconnect=True)
+        db_rep = DatabaseCommunicationReport(
+            pool_exhaustion_handled=True, automatic_reconnect_verified=True, transaction_rollback_on_disconnect=True
+        )
         store_rep = StorageCommunicationReport(integrity_checksum_verified=True, unavailability_graceful_rejection=True)
-        ai_rep = AiProviderCommunicationReport(provider_name="gemini-1.5-pro", timeout_fallback_verified=True, rate_limit_backoff_verified=True, malformed_response_handled=True)
-        perf_rep = CommunicationPerformanceReport(load_req_per_sec=1000, p50_latency_ms=18.0, p95_latency_ms=45.0, p99_latency_ms=85.0, error_rate_pct=0.01)
+        ai_rep = AiProviderCommunicationReport(
+            provider_name="gemini-1.5-pro",
+            timeout_fallback_verified=True,
+            rate_limit_backoff_verified=True,
+            malformed_response_handled=True,
+        )
+        perf_rep = CommunicationPerformanceReport(
+            load_req_per_sec=1000, p50_latency_ms=18.0, p95_latency_ms=45.0, p99_latency_ms=85.0, error_rate_pct=0.01
+        )
 
         # 5. Scorecard & Evidence
         scorecard = self.scoring_engine.calculate_scorecard(
@@ -135,12 +168,24 @@ class ServiceCommunicationRuntime:
 
     def _default_graph(self) -> ServiceDependencyGraph:
         nodes = {
-            "gateway": ServiceDependencyNode(name="gateway", protocol=CommunicationProtocol.HTTP_REST, depends_on=["api"]),
-            "api": ServiceDependencyNode(name="api", protocol=CommunicationProtocol.HTTP_REST, depends_on=["database", "queue"]),
+            "gateway": ServiceDependencyNode(
+                name="gateway", protocol=CommunicationProtocol.HTTP_REST, depends_on=["api"]
+            ),
+            "api": ServiceDependencyNode(
+                name="api", protocol=CommunicationProtocol.HTTP_REST, depends_on=["database", "queue"]
+            ),
             "queue": ServiceDependencyNode(name="queue", protocol=CommunicationProtocol.REDIS_QUEUE, depends_on=[]),
-            "worker": ServiceDependencyNode(name="worker", protocol=CommunicationProtocol.REDIS_QUEUE, depends_on=["queue", "database", "ai_provider"]),
-            "database": ServiceDependencyNode(name="database", protocol=CommunicationProtocol.SQL_CONNECTION, depends_on=[]),
-            "ai_provider": ServiceDependencyNode(name="ai_provider", protocol=CommunicationProtocol.HTTP_REST, depends_on=[]),
+            "worker": ServiceDependencyNode(
+                name="worker",
+                protocol=CommunicationProtocol.REDIS_QUEUE,
+                depends_on=["queue", "database", "ai_provider"],
+            ),
+            "database": ServiceDependencyNode(
+                name="database", protocol=CommunicationProtocol.SQL_CONNECTION, depends_on=[]
+            ),
+            "ai_provider": ServiceDependencyNode(
+                name="ai_provider", protocol=CommunicationProtocol.HTTP_REST, depends_on=[]
+            ),
         }
         return ServiceDependencyGraph(nodes=nodes)
 

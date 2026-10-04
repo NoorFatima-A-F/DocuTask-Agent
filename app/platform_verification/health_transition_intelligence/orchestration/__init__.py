@@ -1,3 +1,5 @@
-from app.platform_verification.health_transition_intelligence.orchestration.k8s_transition_verifier import KubernetesTransitionVerifier
+from app.platform_verification.health_transition_intelligence.orchestration.k8s_transition_verifier import (
+    KubernetesTransitionVerifier,
+)
 
 __all__ = ["KubernetesTransitionVerifier"]

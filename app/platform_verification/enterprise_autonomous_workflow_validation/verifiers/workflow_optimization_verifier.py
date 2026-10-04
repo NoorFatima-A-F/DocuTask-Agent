@@ -25,11 +25,36 @@ class WorkflowOptimizationVerifier(IWorkflowOptimizationVerifier):
 
     def verify(self) -> WorkflowOptimizationReport:
         metrics = [
-            OptimizationMetric(target_area="PromptTokenCompression", pre_optimization_value=4200.0, post_optimization_value=1450.0, gain_pct=65.5),
-            OptimizationMetric(target_area="OCRProcessingLatency", pre_optimization_value=120.0, post_optimization_value=45.0, gain_pct=62.5),
-            OptimizationMetric(target_area="VectorSearchQueryTime", pre_optimization_value=85.0, post_optimization_value=18.0, gain_pct=78.8),
-            OptimizationMetric(target_area="MemoryCacheHitRate", pre_optimization_value=45.0, post_optimization_value=88.5, gain_pct=96.7),
-            OptimizationMetric(target_area="WorkerCPUFootprint", pre_optimization_value=1.4, post_optimization_value=0.55, gain_pct=60.7),
+            OptimizationMetric(
+                target_area="PromptTokenCompression",
+                pre_optimization_value=4200.0,
+                post_optimization_value=1450.0,
+                gain_pct=65.5,
+            ),
+            OptimizationMetric(
+                target_area="OCRProcessingLatency",
+                pre_optimization_value=120.0,
+                post_optimization_value=45.0,
+                gain_pct=62.5,
+            ),
+            OptimizationMetric(
+                target_area="VectorSearchQueryTime",
+                pre_optimization_value=85.0,
+                post_optimization_value=18.0,
+                gain_pct=78.8,
+            ),
+            OptimizationMetric(
+                target_area="MemoryCacheHitRate",
+                pre_optimization_value=45.0,
+                post_optimization_value=88.5,
+                gain_pct=96.7,
+            ),
+            OptimizationMetric(
+                target_area="WorkerCPUFootprint",
+                pre_optimization_value=1.4,
+                post_optimization_value=0.55,
+                gain_pct=60.7,
+            ),
         ]
 
         avg_gain = sum(m.gain_pct for m in metrics) / len(metrics)

@@ -1,9 +1,11 @@
 """
 Configuration Registry with SemVer Indexing and Retrieval.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.config_versioning.domain.models import ConfigurationSnapshot
 from app.platform_verification.config_versioning.domain.interfaces import ConfigurationRegistryInterface
+
 
 class ConfigurationRegistry(ConfigurationRegistryInterface):
     def __init__(self):
@@ -18,5 +20,6 @@ class ConfigurationRegistry(ConfigurationRegistryInterface):
 
     def list_snapshots(self, tenant_id: str = "default-tenant") -> List[ConfigurationSnapshot]:
         return [s for s in self._snapshots.values() if s.tenant_id == tenant_id]
+
 
 configuration_registry = ConfigurationRegistry()

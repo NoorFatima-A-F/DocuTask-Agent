@@ -1,6 +1,7 @@
 """
 Weighted Distributed System Quality Scoring and Certification Engine.
 """
+
 from app.platform_verification.service_communication.domain.models import (
     DependencyAnalysisReport,
     CommunicationContractReport,
@@ -39,7 +40,9 @@ class DistributedSystemScoringEngine(IDistributedSystemScoringEngine):
         trace_rep: TraceabilityReport,
     ) -> DistributedSystemCertificationReport:
         rel_s = (dep_rep.dependency_complexity_score * 0.5) + (100.0 if contract_rep.status == "PASS" else 60.0) * 0.5
-        fail_s = (100.0 if cb_rep.status == "PASS" and retry_rep.status == "PASS" and timeout_rep.status == "PASS" else 70.0)
+        fail_s = (
+            100.0 if cb_rep.status == "PASS" and retry_rep.status == "PASS" and timeout_rep.status == "PASS" else 70.0
+        )
         cons_s = 100.0 if cons_rep.status == "PASS" else 50.0
         scale_s = 100.0 if net_rep.status == "PASS" else 70.0
         obs_s = trace_rep.reconstructability_score

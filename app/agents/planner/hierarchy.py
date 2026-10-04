@@ -19,6 +19,7 @@ class AbstractionLevel(str, Enum):
 
 class DecompositionNode(BaseModel):
     """Node within a hierarchical task decomposition tree."""
+
     node_id: str
     name: str
     level: AbstractionLevel = Field(default=AbstractionLevel.TASK)
@@ -29,6 +30,7 @@ class DecompositionNode(BaseModel):
 
 class DecompositionTree(BaseModel):
     """Hierarchical tree mapping root goal down to atomic tasks."""
+
     root_goal: PlanGoal
     nodes: Dict[str, DecompositionNode] = Field(default_factory=dict)
     atomic_tasks: List[PlanningTask] = Field(default_factory=list)

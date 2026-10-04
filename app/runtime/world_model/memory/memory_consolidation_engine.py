@@ -69,7 +69,10 @@ class MemoryConsolidationEngine:
                 tier="procedural",
                 title="Procedural Knowledge: Autonomous Canary Hotfix Protocol",
                 summary="Standard procedure for spinning 4 replicas, testing health probes, verifying invariants and updating Slack channels.",
-                key_facts=["Always verify P99 < 50ms before routing 100% traffic", "Execute Saga rollback if error rate > 0.5%"],
+                key_facts=[
+                    "Always verify P99 < 50ms before routing 100% traffic",
+                    "Execute Saga rollback if error rate > 0.5%",
+                ],
                 importance_score=0.96,
                 stability_factor=720.0,
                 replay_count=14,

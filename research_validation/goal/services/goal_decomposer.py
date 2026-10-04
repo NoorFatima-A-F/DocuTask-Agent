@@ -7,9 +7,7 @@ Objective -> Milestone -> Subgoal -> Task -> Action.
 
 from typing import Tuple
 from research_validation.goal.models.goal import Goal
-from research_validation.goal.models.mission import (
-    ObjectiveNode, MilestoneNode, SubgoalNode, TaskNode, ActionNode
-)
+from research_validation.goal.models.mission import ObjectiveNode, MilestoneNode, SubgoalNode, TaskNode, ActionNode
 
 
 class GoalDecomposer:

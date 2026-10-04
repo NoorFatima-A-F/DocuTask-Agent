@@ -77,6 +77,7 @@ class ExperimentStatus(str, Enum):
 # Telemetry & Distributed Tracing
 # ---------------------------------------------------------
 
+
 class Span(BaseModel):
     span_id: str = Field(default_factory=lambda: f"span_{uuid.uuid4().hex[:10]}")
     trace_id: str
@@ -91,7 +92,9 @@ class Span(BaseModel):
     inputs: Dict[str, Any] = Field(default_factory=dict)
     outputs: Dict[str, Any] = Field(default_factory=dict)
     metadata: Dict[str, Any] = Field(default_factory=dict)
-    token_usage: Dict[str, int] = Field(default_factory=lambda: {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0})
+    token_usage: Dict[str, int] = Field(
+        default_factory=lambda: {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+    )
     cost_usd: float = 0.0
     error_message: Optional[str] = None
 
@@ -136,6 +139,7 @@ class AgentTelemetry(BaseModel):
 # Evaluation Models
 # ---------------------------------------------------------
 
+
 class MetricScore(BaseModel):
     metric_name: str
     score: float  # 0.0 - 1.0
@@ -168,6 +172,7 @@ class EvaluationResult(BaseModel):
 # Root Cause & Failure Analysis
 # ---------------------------------------------------------
 
+
 class FailureAnalysisResult(BaseModel):
     analysis_id: str = Field(default_factory=lambda: f"fail_{uuid.uuid4().hex[:10]}")
     trace_id: str
@@ -184,6 +189,7 @@ class FailureAnalysisResult(BaseModel):
 # ---------------------------------------------------------
 # Optimization & Model Routing
 # ---------------------------------------------------------
+
 
 class ModelRouteDecision(BaseModel):
     decision_id: str = Field(default_factory=lambda: f"route_{uuid.uuid4().hex[:10]}")
@@ -215,6 +221,7 @@ class PromptVersion(BaseModel):
 # ---------------------------------------------------------
 # Improvement & A/B Canary Experiments
 # ---------------------------------------------------------
+
 
 class ImprovementProposal(BaseModel):
     proposal_id: str = Field(default_factory=lambda: f"prop_{uuid.uuid4().hex[:10]}")
@@ -259,6 +266,7 @@ class ExperimentRecord(BaseModel):
 # ---------------------------------------------------------
 # Governance, Compliance & Auditing
 # ---------------------------------------------------------
+
 
 class GovernanceAuditRecord(BaseModel):
     audit_id: str = Field(default_factory=lambda: f"audit_{uuid.uuid4().hex[:10]}")

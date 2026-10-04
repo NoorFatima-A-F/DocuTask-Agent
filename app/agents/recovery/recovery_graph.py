@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class RecoveryNode(BaseModel):
     """Action step in a recovery workflow (e.g., ReleaseLease, RestoreCheckpoint, ReplayTask)."""
+
     node_id: str
     action: str
     target_id: Optional[str] = None
@@ -20,6 +21,7 @@ class RecoveryNode(BaseModel):
 
 class RecoveryEdge(BaseModel):
     """Directed prerequisite relationship between recovery nodes."""
+
     source_id: str
     target_id: str
     model_config = {"frozen": True}
@@ -27,6 +29,7 @@ class RecoveryEdge(BaseModel):
 
 class RecoveryGraph(BaseModel):
     """Directed Acyclic Graph orchestrating autonomous recovery steps."""
+
     graph_id: UUID = Field(default_factory=uuid4)
     nodes: Dict[str, RecoveryNode] = Field(default_factory=dict)
     edges: List[RecoveryEdge] = Field(default_factory=list)

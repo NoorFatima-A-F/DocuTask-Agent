@@ -64,30 +64,14 @@ class AIMonitoringEvidenceExporter:
         """Exports the 9 required manifests to disk."""
         exported_files = {}
 
-        exported_files["telemetry_report.json"] = self._write_json(
-            "telemetry_report.json", arch_report
-        )
-        exported_files["metrics_report.json"] = self._write_json(
-            "metrics_report.json", metrics_report
-        )
-        exported_files["dashboard_report.json"] = self._write_json(
-            "dashboard_report.json", dashboard_report
-        )
-        exported_files["logging_report.json"] = self._write_json(
-            "logging_report.json", logging_report
-        )
-        exported_files["tracing_report.json"] = self._write_json(
-            "tracing_report.json", tracing_report
-        )
-        exported_files["alerting_report.json"] = self._write_json(
-            "alerting_report.json", alerting_report
-        )
-        exported_files["slo_report.json"] = self._write_json(
-            "slo_report.json", slo_report
-        )
-        exported_files["incident_test_report.json"] = self._write_json(
-            "incident_test_report.json", incident_report
-        )
+        exported_files["telemetry_report.json"] = self._write_json("telemetry_report.json", arch_report)
+        exported_files["metrics_report.json"] = self._write_json("metrics_report.json", metrics_report)
+        exported_files["dashboard_report.json"] = self._write_json("dashboard_report.json", dashboard_report)
+        exported_files["logging_report.json"] = self._write_json("logging_report.json", logging_report)
+        exported_files["tracing_report.json"] = self._write_json("tracing_report.json", tracing_report)
+        exported_files["alerting_report.json"] = self._write_json("alerting_report.json", alerting_report)
+        exported_files["slo_report.json"] = self._write_json("slo_report.json", slo_report)
+        exported_files["incident_test_report.json"] = self._write_json("incident_test_report.json", incident_report)
 
         metadata = {
             "platform": "DocuTask Agent Enterprise",
@@ -98,8 +82,6 @@ class AIMonitoringEvidenceExporter:
             "scorecard_summary": dataclasses.asdict(scorecard) if scorecard else None,
         }
 
-        exported_files["metadata.json"] = self._write_json(
-            "metadata.json", metadata
-        )
+        exported_files["metadata.json"] = self._write_json("metadata.json", metadata)
 
         return exported_files

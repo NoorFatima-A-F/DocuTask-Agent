@@ -13,6 +13,7 @@ Certification Tiers:
 - 80-89: Needs Improvement
 - <80: Failed
 """
+
 from app.platform_verification.liveness.domain.models import (
     LivenessContractReport,
     ProcessStateReport,

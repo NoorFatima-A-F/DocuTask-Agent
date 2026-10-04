@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10: Enterprise Observability Security Verification Framework - Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field

@@ -15,8 +15,12 @@ from enterprise_audit_engine.certification_authority.metrics.eqi_calculator impo
 from enterprise_audit_engine.certification_authority.registry.audit_registry import AuditRegistry
 from enterprise_audit_engine.certification_authority.registry.revocation_registry import CertificationRevocationRegistry
 from enterprise_audit_engine.certification_authority.registry.regression_detector import AuditRegressionDetector
-from enterprise_audit_engine.certification_authority.verification.independent_verifier import IndependentCertificateVerifier
-from enterprise_audit_engine.certification_authority.exporter.review_package_exporter import ExternalReviewPackageExporter
+from enterprise_audit_engine.certification_authority.verification.independent_verifier import (
+    IndependentCertificateVerifier,
+)
+from enterprise_audit_engine.certification_authority.exporter.review_package_exporter import (
+    ExternalReviewPackageExporter,
+)
 from enterprise_audit_engine.domain.evidence.models import EvidenceRecord
 
 
@@ -42,7 +46,7 @@ class CertificationAuthority:
         validity_days: int = 180,
     ) -> Dict[str, Any]:
         """Evaluates policy, computes EQI, issues and signs an Ed25519 CertificationRecord."""
-        
+
         # 1. Compute EQI Breakdown
         active_domains = list({r.category for r in records})
         eqi_breakdown = EvidenceQualityIndexCalculator.calculate_eqi(
@@ -82,7 +86,7 @@ class CertificationAuthority:
 
         # 3. Digital Signing with Ed25519
         signed_record, pub_key_pem = CertificateSigner.sign_certificate(pending_record)
-        
+
         # Set status based on policy pass
         if not policy_eval["passed"]:
             signed_record = signed_record.model_copy(update={"status": CertificationStatus.FAILED_VERIFICATION})

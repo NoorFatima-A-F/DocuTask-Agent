@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Core.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.core.domain.models import CoreEntity
+
 
 class CoreRepositoryInterface(ABC):
     @abstractmethod

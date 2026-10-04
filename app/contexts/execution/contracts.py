@@ -2,4 +2,10 @@ from .domain.execution_domain import ExecutionAggregate, ExecutionStarted, Execu
 from .application.execution_service import ExecutionService
 from .infrastructure.execution_repo import InMemoryExecutionRepository
 
-__all__ = ["ExecutionAggregate", "ExecutionStarted", "ExecutionCompleted", "ExecutionService", "InMemoryExecutionRepository"]
+__all__ = [
+    "ExecutionAggregate",
+    "ExecutionStarted",
+    "ExecutionCompleted",
+    "ExecutionService",
+    "InMemoryExecutionRepository",
+]

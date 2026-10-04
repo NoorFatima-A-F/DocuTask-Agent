@@ -1,6 +1,7 @@
 from typing import Dict, Optional
 from ..domain.datasets_domain import DatasetAggregate
 
+
 class InMemoryDatasetRepository:
     def __init__(self):
         self._store: Dict[str, DatasetAggregate] = {}

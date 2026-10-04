@@ -1,6 +1,7 @@
 """
 Declarative Verification Test Specification Parser and Validator.
 """
+
 from __future__ import annotations
 from typing import Any, Dict
 from app.platform_verification.test_harness.domain.models import (
@@ -13,6 +14,7 @@ from app.platform_verification.test_harness.domain.models import (
 
 class TestSpecParser:
     """Parses and validates declarative verification test specifications."""
+
     __test__ = False
 
     @staticmethod
@@ -24,7 +26,11 @@ class TestSpecParser:
         level_str = data.get("level", "component").lower()
 
         category = TestCategory(cat_str) if cat_str in [c.value for c in TestCategory] else TestCategory.FUNCTIONAL
-        level = TestHarnessLevel(level_str) if level_str in [l.value for l in TestHarnessLevel] else TestHarnessLevel.COMPONENT
+        level = (
+            TestHarnessLevel(level_str)
+            if level_str in [l.value for l in TestHarnessLevel]
+            else TestHarnessLevel.COMPONENT
+        )
 
         retry_dict = data.get("retry_policy", {})
         retry_policy = RetryPolicy(

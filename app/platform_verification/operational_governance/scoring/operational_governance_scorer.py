@@ -1,6 +1,7 @@
 """
 Phase 3H.8.11: 8-Pillar Enterprise Operational Governance Scorer
 """
+
 import uuid
 from datetime import datetime, timezone
 from typing import List
@@ -65,7 +66,9 @@ class OperationalGovernanceScorer(IOperationalGovernanceScorer):
         )
 
         # 2. Deployment Safety (15%)
-        deploy_raw = 100.0 if deploy_report.progressive_delivery_enforced and len(deploy_report.deployments) >= 4 else 80.0
+        deploy_raw = (
+            100.0 if deploy_report.progressive_delivery_enforced and len(deploy_report.deployments) >= 4 else 80.0
+        )
         deploy_weight = 0.15
         pillars.append(
             OperationalGovernancePillarScore(
@@ -79,7 +82,11 @@ class OperationalGovernanceScorer(IOperationalGovernanceScorer):
         )
 
         # 3. Configuration Integrity (15%)
-        config_raw = 100.0 if config_report.immutable_configuration_enforced and config_report.zero_unvalidated_overrides else 85.0
+        config_raw = (
+            100.0
+            if config_report.immutable_configuration_enforced and config_report.zero_unvalidated_overrides
+            else 85.0
+        )
         config_weight = 0.15
         pillars.append(
             OperationalGovernancePillarScore(
@@ -121,7 +128,9 @@ class OperationalGovernanceScorer(IOperationalGovernanceScorer):
         )
 
         # 6. Rollback Readiness (15%)
-        rollback_raw = 100.0 if rollback_report.automated_rollback_operational and len(rollback_report.triggers) >= 4 else 80.0
+        rollback_raw = (
+            100.0 if rollback_report.automated_rollback_operational and len(rollback_report.triggers) >= 4 else 80.0
+        )
         rollback_weight = 0.15
         pillars.append(
             OperationalGovernancePillarScore(

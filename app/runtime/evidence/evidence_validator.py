@@ -40,9 +40,7 @@ class EvidenceValidator:
         # 1. Verify computed SHA-256 matches recorded hash_digest
         computed = node.compute_hash()
         if computed != node.hash_digest:
-            errors.append(
-                f"Hash mismatch for {node.evidence_id}: expected {node.hash_digest}, got {computed}"
-            )
+            errors.append(f"Hash mismatch for {node.evidence_id}: expected {node.hash_digest}, got {computed}")
 
         # 2. Verify crypto proof
         if not node.crypto_proof:
@@ -80,9 +78,7 @@ class EvidenceValidator:
             # Check parent references exist in the graph
             for ph in node.parent_hashes:
                 if not graph.get_by_hash(ph):
-                    errors.append(
-                        f"Dangling parent hash {ph} in evidence node {node.evidence_id}"
-                    )
+                    errors.append(f"Dangling parent hash {ph} in evidence node {node.evidence_id}")
 
         # Check for cycles
         visited = set()

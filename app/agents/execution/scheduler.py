@@ -33,12 +33,16 @@ class RuntimeScheduler:
         if self.strategy == SchedulingStrategy.FIFO:
             return list(runnable_node_ids)
 
-        if self.strategy in (SchedulingStrategy.PRIORITY, SchedulingStrategy.CRITICAL_PATH, SchedulingStrategy.ADAPTIVE):
+        if self.strategy in (
+            SchedulingStrategy.PRIORITY,
+            SchedulingStrategy.CRITICAL_PATH,
+            SchedulingStrategy.ADAPTIVE,
+        ):
             # Sort by node timeout or priority weight
             return sorted(
                 runnable_node_ids,
-                key=lambda nid: (graph.nodes[nid].node.timeout_seconds if nid in graph.nodes else 0.0),
-                reverse=True
+                key=lambda nid: graph.nodes[nid].node.timeout_seconds if nid in graph.nodes else 0.0,
+                reverse=True,
             )
 
         return list(runnable_node_ids)

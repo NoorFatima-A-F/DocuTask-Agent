@@ -73,9 +73,7 @@ class ApprovalStateMachine:
     def __init__(self):
         self._history: Dict[str, List[StateTransitionEvent]] = {}
 
-    def can_transition(
-        self, current_state: ApprovalLifecycleState, target_state: ApprovalLifecycleState
-    ) -> bool:
+    def can_transition(self, current_state: ApprovalLifecycleState, target_state: ApprovalLifecycleState) -> bool:
         allowed = self.VALID_TRANSITIONS.get(current_state, set())
         return target_state in allowed
 

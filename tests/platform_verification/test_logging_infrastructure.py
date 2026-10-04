@@ -1,6 +1,7 @@
 """
 Phase 3I.2: Enterprise Logging Infrastructure Verification - Unit and Integration Tests
 """
+
 import os
 import json
 import hashlib
@@ -18,27 +19,40 @@ from app.platform_verification.logging_infrastructure.domain.models import (
     CorrelationReport,
     CertificationReport,
 )
-from app.platform_verification.logging_infrastructure.verifiers.logging_architecture_verifier import LoggingArchitectureVerifier
-from app.platform_verification.logging_infrastructure.verifiers.structured_logging_verifier import StructuredLoggingVerifier
+from app.platform_verification.logging_infrastructure.verifiers.logging_architecture_verifier import (
+    LoggingArchitectureVerifier,
+)
+from app.platform_verification.logging_infrastructure.verifiers.structured_logging_verifier import (
+    StructuredLoggingVerifier,
+)
 from app.platform_verification.logging_infrastructure.verifiers.correlation_verifier import CorrelationVerifier
-from app.platform_verification.logging_infrastructure.verifiers.agent_execution_logging_verifier import AgentExecutionLoggingVerifier
+from app.platform_verification.logging_infrastructure.verifiers.agent_execution_logging_verifier import (
+    AgentExecutionLoggingVerifier,
+)
 from app.platform_verification.logging_infrastructure.verifiers.logging_security_verifier import LoggingSecurityVerifier
-from app.platform_verification.logging_infrastructure.verifiers.logging_performance_verifier import LoggingPerformanceVerifier
-from app.platform_verification.logging_infrastructure.verifiers.failure_simulation_logging_verifier import FailureSimulationLoggingVerifier
+from app.platform_verification.logging_infrastructure.verifiers.logging_performance_verifier import (
+    LoggingPerformanceVerifier,
+)
+from app.platform_verification.logging_infrastructure.verifiers.failure_simulation_logging_verifier import (
+    FailureSimulationLoggingVerifier,
+)
 from app.platform_verification.logging_infrastructure.scoring.logging_quality_scorer import LoggingQualityScorer
 from app.platform_verification.logging_infrastructure.exporter.logging_evidence_exporter import LoggingEvidenceExporter
-from app.platform_verification.logging_infrastructure.runtime.logging_verification_runtime import LoggingVerificationRuntime
+from app.platform_verification.logging_infrastructure.runtime.logging_verification_runtime import (
+    LoggingVerificationRuntime,
+)
 from app.platform_verification.logging_infrastructure.api.logging_verification_api import router as logging_api_router
 
 
 # ─── 1. Domain Models Tests ───────────────────────────────────────────────────
+
 
 def test_domain_models_instantiation():
     arch = ArchitectureReport(
         services_detected=8,
         services_covered=[
             LoggingServiceCoverage(service_name="api_gateway", log_format="JSON", centralized_delivery_latency_ms=25.0)
-        ]
+        ],
     )
     assert arch.services_detected == 8
     assert len(arch.services_covered) == 1
@@ -54,7 +68,7 @@ def test_domain_models_instantiation():
         trace_id="trace-456",
         task_id="task-789",
         duration_ms=1200.0,
-        status="success"
+        status="success",
     )
     assert sample.level == LogLevel.INFO
     assert sample.request_id == "REQ-123"
@@ -64,22 +78,20 @@ def test_domain_models_instantiation():
     assert struct_rep.schema_compliance_pct == 100.0
 
     corr_rep = CorrelationReport(
-        trace_hops=[
-            CorrelationTraceHop(hop_order=1, service="api-gateway", event="request_received")
-        ]
+        trace_hops=[CorrelationTraceHop(hop_order=1, service="api-gateway", event="request_received")]
     )
     assert corr_rep.end_to_end_correlated is True
     assert len(corr_rep.trace_hops) == 1
 
     cert_rep = CertificationReport(
-        certification_tier=LoggingCertificationTier.ENTERPRISE_LOGGING_READY,
-        overall_score_pct=98.5
+        certification_tier=LoggingCertificationTier.ENTERPRISE_LOGGING_READY, overall_score_pct=98.5
     )
     assert cert_rep.certification_granted is True
     assert cert_rep.certification_tier == LoggingCertificationTier.ENTERPRISE_LOGGING_READY
 
 
 # ─── 2. Architecture Verifier Tests ───────────────────────────────────────────
+
 
 def test_logging_architecture_verifier():
     verifier = LoggingArchitectureVerifier()
@@ -103,6 +115,7 @@ def test_logging_architecture_verifier():
 
 # ─── 3. Structured Logging Verifier Tests ─────────────────────────────────────
 
+
 def test_structured_logging_verifier_compliance():
     verifier = StructuredLoggingVerifier()
     report = verifier.verify_structured_logging()
@@ -118,6 +131,7 @@ def test_structured_logging_verifier_compliance():
 
 
 # ─── 4. Correlation Verifier Tests ────────────────────────────────────────────
+
 
 def test_correlation_verifier():
     verifier = CorrelationVerifier()
@@ -135,7 +149,7 @@ def test_correlation_verifier():
         "async-worker",
         "ocr-engine",
         "gemini-llm-gateway",
-        "postgresql-db"
+        "postgresql-db",
     ]
 
     for hop in report.trace_hops:
@@ -145,6 +159,7 @@ def test_correlation_verifier():
 
 
 # ─── 5. Agent Execution Logging Verifier Tests ────────────────────────────────
+
 
 def test_agent_execution_logging_verifier():
     verifier = AgentExecutionLoggingVerifier()
@@ -170,6 +185,7 @@ def test_agent_execution_logging_verifier():
 
 # ─── 6. Logging Security Verifier Tests ───────────────────────────────────────
 
+
 def test_logging_security_verifier():
     verifier = LoggingSecurityVerifier()
     report = verifier.verify_security()
@@ -191,6 +207,7 @@ def test_logging_security_verifier():
 
 # ─── 7. Logging Performance Verifier Tests ────────────────────────────────────
 
+
 def test_logging_performance_verifier():
     verifier = LoggingPerformanceVerifier()
     report = verifier.verify_performance()
@@ -209,6 +226,7 @@ def test_logging_performance_verifier():
 
 
 # ─── 8. Failure Simulation Verifier Tests ─────────────────────────────────────
+
 
 def test_failure_simulation_logging_verifier():
     verifier = FailureSimulationLoggingVerifier()
@@ -229,6 +247,7 @@ def test_failure_simulation_logging_verifier():
 
 
 # ─── 9. Scorer Tests ──────────────────────────────────────────────────────────
+
 
 def test_logging_quality_scorer():
     arch = LoggingArchitectureVerifier().verify_logging_architecture()
@@ -262,6 +281,7 @@ def test_logging_quality_scorer():
 
 # ─── 10. Evidence Exporter Tests ──────────────────────────────────────────────
 
+
 def test_logging_evidence_exporter(tmp_path):
     out_dir = str(tmp_path / "observability_verification" / "logging")
     LoggingEvidenceExporter()
@@ -291,6 +311,7 @@ def test_logging_evidence_exporter(tmp_path):
 
 
 # ─── 11. Verification Runtime & API Tests ─────────────────────────────────────
+
 
 def test_logging_verification_runtime(tmp_path):
     out_dir = str(tmp_path / "obs_test")

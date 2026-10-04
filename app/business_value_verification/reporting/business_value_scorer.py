@@ -38,11 +38,7 @@ class BusinessValueScorer:
         elif composite < 95.0:
             grade = "A"
 
-        status = (
-            "ENTERPRISE VALUE VALIDATED"
-            if composite >= 95.0
-            else "PROVISIONAL VALUE"
-        )
+        status = "ENTERPRISE VALUE VALIDATED" if composite >= 95.0 else "PROVISIONAL VALUE"
 
         return MasterBusinessValueScore(
             automation_score=automation_score,

@@ -35,6 +35,7 @@ class ChaosFailureType(str, Enum):
 @dataclass
 class LatencyDistribution:
     """Percentile latency distribution in milliseconds."""
+
     p50_ms: float
     p90_ms: float
     p95_ms: float
@@ -64,6 +65,7 @@ class LatencyDistribution:
 @dataclass
 class StageLatency:
     """Latency contribution of a single pipeline stage."""
+
     stage_name: str
     latency_ms: float
     percentage_of_total: float
@@ -83,6 +85,7 @@ class StageLatency:
 @dataclass
 class PipelineLatencyBreakdown:
     """Granular breakdown of document intelligence pipeline latency."""
+
     pipeline_name: str
     total_latency_ms: float
     stages: List[StageLatency]
@@ -102,6 +105,7 @@ class PipelineLatencyBreakdown:
 @dataclass
 class ThroughputResult:
     """Throughput capacity benchmark result."""
+
     workload_name: str
     target_volume_per_hr: int
     achieved_volume_per_hr: float
@@ -131,6 +135,7 @@ class ThroughputResult:
 @dataclass
 class LoadTestResult:
     """Load test scenario outcome."""
+
     scenario_name: str
     concurrent_users: int
     duration_simulated_hrs: float
@@ -158,6 +163,7 @@ class LoadTestResult:
 @dataclass
 class CapacityBoundary:
     """Stress test capacity threshold."""
+
     user_level: int
     document_volume: int
     p95_latency_ms: float
@@ -181,6 +187,7 @@ class CapacityBoundary:
 @dataclass
 class SpikeTestResult:
     """Spike test burst resilience result."""
+
     baseline_rate_per_min: int
     spike_rate_per_min: int
     surge_multiplier: float
@@ -208,6 +215,7 @@ class SpikeTestResult:
 @dataclass
 class EnduranceTestResult:
     """Long-term soak test stability result."""
+
     duration_simulated_hrs: int
     initial_p95_ms: float
     final_p95_ms: float
@@ -237,6 +245,7 @@ class EnduranceTestResult:
 @dataclass
 class ResourceEfficiencyProfile:
     """Resource consumption and efficiency analysis."""
+
     cpu_average_pct: float
     cpu_peak_pct: float
     cpu_returns_to_baseline: bool
@@ -266,6 +275,7 @@ class ResourceEfficiencyProfile:
 @dataclass
 class AICostProfile:
     """AI cost performance and ROI evaluation."""
+
     workflow_name: str
     ocr_cost_per_doc: float
     llm_cost_per_doc: float
@@ -297,6 +307,7 @@ class AICostProfile:
 @dataclass
 class ChaosRecoveryResult:
     """Chaos engineering injection and self-healing result."""
+
     failure_type: ChaosFailureType
     description: str
     injected: bool
@@ -326,6 +337,7 @@ class ChaosRecoveryResult:
 @dataclass
 class DisasterRecoveryMetric:
     """Disaster recovery and business continuity verification."""
+
     backup_snapshot_valid: bool
     backup_size_mb: float
     backup_duration_sec: float
@@ -355,6 +367,7 @@ class DisasterRecoveryMetric:
 @dataclass
 class ReliabilityMetric:
     """Platform availability and reliability calculation."""
+
     availability_pct: float
     mtbf_hours: float
     mttr_ms: float
@@ -378,6 +391,7 @@ class ReliabilityMetric:
 @dataclass
 class ObservabilityTrace:
     """Distributed tracing and telemetry validation."""
+
     trace_id: str
     correlation_id: str
     spans_count: int
@@ -401,10 +415,11 @@ class ObservabilityTrace:
 @dataclass
 class EnterpriseReadinessScore:
     """Composite Enterprise Performance, Reliability & Readiness Score."""
-    performance_score: float      # Weight: 30%
-    reliability_score: float      # Weight: 35%
-    efficiency_score: float       # Weight: 20%
-    observability_score: float    # Weight: 15%
+
+    performance_score: float  # Weight: 30%
+    reliability_score: float  # Weight: 35%
+    efficiency_score: float  # Weight: 20%
+    observability_score: float  # Weight: 15%
     overall_readiness_score: float
     grade: str
     certification_status: str

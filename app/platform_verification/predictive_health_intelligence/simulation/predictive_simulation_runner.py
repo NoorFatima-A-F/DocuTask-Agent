@@ -5,6 +5,7 @@ Executes 3 progressive failure simulations to verify proactive detection and rem
 - Scenario 2: Queue backlog surge -> Capacity warning -> Auto-Scale Workers
 - Scenario 3: AI provider latency drift -> AI dependency risk -> Fallback provider switch
 """
+
 from typing import Dict, Any
 
 
@@ -45,7 +46,7 @@ class PredictiveSimulationRunner:
         ]
 
         passed_count = sum(1 for s in scenarios if s["passed"])
-        all_passed = (passed_count == len(scenarios))
+        all_passed = passed_count == len(scenarios)
 
         return {
             "total_scenarios": len(scenarios),

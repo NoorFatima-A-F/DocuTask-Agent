@@ -1,3 +1,5 @@
-from app.platform_verification.health_transition_intelligence.runtime.health_intelligence_runtime import HealthIntelligenceRuntime
+from app.platform_verification.health_transition_intelligence.runtime.health_intelligence_runtime import (
+    HealthIntelligenceRuntime,
+)
 
 __all__ = ["HealthIntelligenceRuntime"]

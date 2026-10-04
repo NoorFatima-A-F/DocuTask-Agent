@@ -1,6 +1,7 @@
 """
 Verification Plugin Framework and Registry.
 """
+
 from __future__ import annotations
 from typing import Dict, List, Optional
 from app.platform_verification.test_harness.domain.interfaces import IVerificationPlugin

@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class TenantLifecycleState(str, enum.Enum):
     """Organization 7-state lifecycle state machine."""
+
     REGISTERED = "REGISTERED"
     PROVISIONING = "PROVISIONING"
     INITIALIZED = "INITIALIZED"
@@ -26,6 +27,7 @@ class TenantLifecycleState(str, enum.Enum):
 
 class EnvironmentType(str, enum.Enum):
     """Execution environment types."""
+
     DEVELOPMENT = "DEVELOPMENT"
     TESTING = "TESTING"
     QA = "QA"
@@ -36,6 +38,7 @@ class EnvironmentType(str, enum.Enum):
 
 class MembershipRole(str, enum.Enum):
     """RBAC roles for workspace and organization membership."""
+
     OWNER = "OWNER"
     ADMIN = "ADMIN"
     MEMBER = "MEMBER"
@@ -46,6 +49,7 @@ class MembershipRole(str, enum.Enum):
 
 class InvitationState(str, enum.Enum):
     """5-state invitation lifecycle."""
+
     CREATED = "CREATED"
     SENT = "SENT"
     ACCEPTED = "ACCEPTED"
@@ -55,6 +59,7 @@ class InvitationState(str, enum.Enum):
 
 class QuotaState(str, enum.Enum):
     """Resource quota states."""
+
     NORMAL = "NORMAL"
     WARNING = "WARNING"
     LIMITED = "LIMITED"
@@ -64,6 +69,7 @@ class QuotaState(str, enum.Enum):
 
 class SubscriptionTier(str, enum.Enum):
     """SaaS commercial subscription tiers."""
+
     FREE = "FREE"
     DEVELOPER = "DEVELOPER"
     PROFESSIONAL = "PROFESSIONAL"
@@ -74,6 +80,7 @@ class SubscriptionTier(str, enum.Enum):
 
 class ComplianceProfileType(str, enum.Enum):
     """Compliance framework profiles."""
+
     STANDARD = "STANDARD"
     SOC2 = "SOC2"
     ISO27001 = "ISO27001"
@@ -84,6 +91,7 @@ class ComplianceProfileType(str, enum.Enum):
 
 class Region(str, enum.Enum):
     """Supported geographical deployment and data residency regions."""
+
     US_EAST = "us-east-1"
     US_WEST = "us-west-2"
     EU_WEST = "eu-west-1"
@@ -95,6 +103,7 @@ class Region(str, enum.Enum):
 
 class ResourceType(str, enum.Enum):
     """Platform resource types governed by tenant ownership."""
+
     WORKFLOW = "WORKFLOW"
     AGENT = "AGENT"
     KNOWLEDGE = "KNOWLEDGE"
@@ -109,6 +118,7 @@ class ResourceType(str, enum.Enum):
 
 class ResourceIdentity(BaseModel):
     """Canonical ownership metadata stamped on all platform entities."""
+
     resource_id: str
     resource_type: ResourceType
     organization_id: str
@@ -124,6 +134,7 @@ class ResourceIdentity(BaseModel):
 
 class TenantContext(BaseModel):
     """Unified tenant context passed with all requests and worker jobs."""
+
     organization_id: str
     workspace_id: str
     environment_id: str = "default"
@@ -143,6 +154,7 @@ class TenantContext(BaseModel):
 
 class Organization(BaseModel):
     """Tenant organization entity."""
+
     id: str
     name: str
     slug: str
@@ -162,6 +174,7 @@ class Organization(BaseModel):
 
 class Workspace(BaseModel):
     """Workspace boundary within an organization."""
+
     workspace_id: str
     organization_id: str
     name: str
@@ -177,6 +190,7 @@ class Workspace(BaseModel):
 
 class Environment(BaseModel):
     """Execution environment partition within a workspace."""
+
     environment_id: str
     workspace_id: str
     organization_id: str
@@ -195,6 +209,7 @@ class Environment(BaseModel):
 
 class Project(BaseModel):
     """Project deployment boundary within a workspace."""
+
     project_id: str
     workspace_id: str
     organization_id: str
@@ -212,6 +227,7 @@ class Project(BaseModel):
 
 class Team(BaseModel):
     """Team grouping within an organization."""
+
     team_id: str
     organization_id: str
     name: str
@@ -223,6 +239,7 @@ class Team(BaseModel):
 
 class Membership(BaseModel):
     """User membership in an organization or workspace."""
+
     membership_id: str
     user_id: str
     organization_id: str
@@ -236,6 +253,7 @@ class Membership(BaseModel):
 
 class Invitation(BaseModel):
     """User invitation to join organization or workspace."""
+
     invitation_id: str
     email: str
     organization_id: str
@@ -250,6 +268,7 @@ class Invitation(BaseModel):
 
 class QuotaLimit(BaseModel):
     """Quota limit and current usage for a single resource."""
+
     resource_name: str
     limit_value: int
     current_usage: int = 0
@@ -260,6 +279,7 @@ class QuotaLimit(BaseModel):
 
 class MeteringEvent(BaseModel):
     """Granular usage metering event for billing and analytics."""
+
     event_id: str
     organization_id: str
     workspace_id: str
@@ -273,6 +293,7 @@ class MeteringEvent(BaseModel):
 
 class Subscription(BaseModel):
     """Subscription configuration and entitlement contract."""
+
     subscription_id: str
     organization_id: str
     tier: SubscriptionTier
@@ -287,6 +308,7 @@ class Subscription(BaseModel):
 
 class BrandingProfile(BaseModel):
     """White-label organization visual branding."""
+
     branding_id: str
     organization_id: str
     logo_url: str = ""
@@ -301,6 +323,7 @@ class BrandingProfile(BaseModel):
 
 class CustomDomain(BaseModel):
     """Custom domain routing and SSL metadata."""
+
     domain_id: str
     organization_id: str
     domain_name: str
@@ -312,6 +335,7 @@ class CustomDomain(BaseModel):
 
 class BackupSnapshot(BaseModel):
     """Tenant backup archive representation."""
+
     snapshot_id: str
     organization_id: str
     workspace_id: Optional[str] = None

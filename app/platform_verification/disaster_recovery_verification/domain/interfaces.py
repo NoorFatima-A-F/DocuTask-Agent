@@ -1,6 +1,7 @@
 """
 Domain interfaces for Disaster Recovery Architecture Verification (Part 3G.1).
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 from app.platform_verification.disaster_recovery_verification.domain.models import (
@@ -61,6 +62,7 @@ class IDRSecurityValidator(ABC):
 
 class IDRTestHarness(ABC):
     __test__ = False
+
     @abstractmethod
     def execute_scenario(self, scenario: DRScenarioType) -> DRTestScenarioResult:
         pass

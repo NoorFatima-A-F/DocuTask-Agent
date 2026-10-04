@@ -15,7 +15,7 @@ from app.safety.gateway.decision import SafetyStatus, ViolationSeverity, SafetyV
 
 def test_composite_risk_scorer_multi_factor():
     scorer = CompositeRiskScorer()
-    
+
     # Low risk context
     low_ctx = SafetyContext(
         tenant_id="tenant_1",
@@ -34,7 +34,9 @@ def test_composite_risk_scorer_multi_factor():
         source_trust=SourceTrustLevel.UNKNOWN,
         model_context=ModelContext(model_id="unvetted_model", risk_tier="CRITICAL"),
         data_context=DataContext(data_classification="RESTRICTED", pii_types_detected=["SSN", "PASSWORD"]),
-        tool_contexts=[ToolContext(tool_name="delete_database_table", danger_level="DESTRUCTIVE_HIGH_RISK", is_dry_run=False)],
+        tool_contexts=[
+            ToolContext(tool_name="delete_database_table", danger_level="DESTRUCTIVE_HIGH_RISK", is_dry_run=False)
+        ],
     )
     high_scores = scorer.score_context(high_ctx, input_risk=0.9, output_risk=0.8)
     assert high_scores.composite_risk >= 0.70
@@ -51,7 +53,9 @@ def test_risk_assessment_threshold_mapping():
 
     # Critical violation forces BLOCK
     critical_viols = [
-        SafetyViolation(category=SafetyCategory.PROMPT_INJECTION, severity=ViolationSeverity.CRITICAL, message="Critical exploit")
+        SafetyViolation(
+            category=SafetyCategory.PROMPT_INJECTION, severity=ViolationSeverity.CRITICAL, message="Critical exploit"
+        )
     ]
     res_block = assessor.assess(scores, critical_viols)
     assert res_block.recommended_status == SafetyStatus.BLOCK

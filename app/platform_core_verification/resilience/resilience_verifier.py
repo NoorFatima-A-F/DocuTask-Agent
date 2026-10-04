@@ -147,7 +147,7 @@ class ResilienceVerifier:
         t0 = time.perf_counter()
         # Client specifies 500ms total budget
         total_budget_ms = 500.0
-        
+
         # Step 1 took 200ms
         spent_step1 = 200.0
         remaining_budget = total_budget_ms - spent_step1  # 300ms

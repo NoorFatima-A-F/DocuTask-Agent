@@ -8,6 +8,7 @@ Computes weighted composite resilience score across 6 core categories:
 5. Operational Visibility (10%)
 6. Documentation (10%)
 """
+
 from typing import List
 
 from app.platform_verification.operational_resilience.domain.models import (
@@ -52,8 +53,7 @@ class ResilienceScoreEngine(IResilienceScoreEngine):
     ) -> OperationalResilienceScorecard:
         # 1. Detection Score (20%): All experiments detected with MTTD < 30s
         detection_rate = (
-            sum(1 for e in experiments if e.detected and e.detection_time_seconds <= 30.0)
-            / len(experiments)
+            sum(1 for e in experiments if e.detected and e.detection_time_seconds <= 30.0) / len(experiments)
             if experiments
             else 1.0
         )
@@ -61,8 +61,7 @@ class ResilienceScoreEngine(IResilienceScoreEngine):
 
         # 2. Recovery Automation (25%): Automated recovery success & self-healing
         rec_rate = (
-            sum(1 for e in experiments if e.recovered and e.recovery_duration_seconds <= 300.0)
-            / len(experiments)
+            sum(1 for e in experiments if e.recovered and e.recovery_duration_seconds <= 300.0) / len(experiments)
             if experiments
             else 1.0
         )

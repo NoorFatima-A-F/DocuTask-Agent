@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class AgentHeartbeat(BaseModel):
     """Heartbeat signal sent periodically by agents."""
+
     agent_id: UUID
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     active_task_count: int = Field(default=0, ge=0)

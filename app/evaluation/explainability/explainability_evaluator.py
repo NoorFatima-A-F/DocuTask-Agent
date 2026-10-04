@@ -25,10 +25,38 @@ class ExplainabilityEvaluator(IExplainabilityEvaluator):
 
     def evaluate(self) -> ExplainabilityReport:
         traces = [
-            DecisionTraceEntry(trace_id="TR-001", document_type="Invoice", decision_summary="Approved line items under PO threshold $10,000", bounding_box_citations_count=8, policy_reference="AP-Policy-2.1", confidence=0.99),
-            DecisionTraceEntry(trace_id="TR-002", document_type="Resume", decision_summary="Shortlisted candidate based on 9yr PyTorch/SRE experience", bounding_box_citations_count=12, policy_reference="HR-Req-AI-Principal", confidence=0.98),
-            DecisionTraceEntry(trace_id="TR-003", document_type="Contract", decision_summary="Flagged missing limitation of liability clause for legal review", bounding_box_citations_count=4, policy_reference="Legal-Risk-Standard-4.0", confidence=0.99),
-            DecisionTraceEntry(trace_id="TR-004", document_type="HealthcareClaim", decision_summary="Verified prior auth criteria matching diagnosis M54.5", bounding_box_citations_count=6, policy_reference="Clinical-Criteria-72148", confidence=0.99),
+            DecisionTraceEntry(
+                trace_id="TR-001",
+                document_type="Invoice",
+                decision_summary="Approved line items under PO threshold $10,000",
+                bounding_box_citations_count=8,
+                policy_reference="AP-Policy-2.1",
+                confidence=0.99,
+            ),
+            DecisionTraceEntry(
+                trace_id="TR-002",
+                document_type="Resume",
+                decision_summary="Shortlisted candidate based on 9yr PyTorch/SRE experience",
+                bounding_box_citations_count=12,
+                policy_reference="HR-Req-AI-Principal",
+                confidence=0.98,
+            ),
+            DecisionTraceEntry(
+                trace_id="TR-003",
+                document_type="Contract",
+                decision_summary="Flagged missing limitation of liability clause for legal review",
+                bounding_box_citations_count=4,
+                policy_reference="Legal-Risk-Standard-4.0",
+                confidence=0.99,
+            ),
+            DecisionTraceEntry(
+                trace_id="TR-004",
+                document_type="HealthcareClaim",
+                decision_summary="Verified prior auth criteria matching diagnosis M54.5",
+                bounding_box_citations_count=6,
+                policy_reference="Clinical-Criteria-72148",
+                confidence=0.99,
+            ),
         ]
 
         checks = [

@@ -72,9 +72,7 @@ def test_cluster_registry_and_persistence():
         assert us_clusters[0].cluster_id == "cls-reg-1"
 
         # Lifecycle transition
-        updated = registry.transition_state(
-            "cls-reg-1", ClusterStatus.VALIDATING, reason="System check"
-        )
+        updated = registry.transition_state("cls-reg-1", ClusterStatus.VALIDATING, reason="System check")
         assert updated is not None
         assert updated.status == ClusterStatus.VALIDATING
 

@@ -1,6 +1,7 @@
 """
 Enterprise Certification Engine managing formal certification records, levels, and cryptographic signatures.
 """
+
 from __future__ import annotations
 from datetime import datetime, timezone, timedelta
 from typing import Any, Dict, List, Optional

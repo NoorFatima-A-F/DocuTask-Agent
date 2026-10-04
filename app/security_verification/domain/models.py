@@ -2,12 +2,14 @@
 Phase V9 — Enterprise AI Security & Responsible AI Verification Program
 Domain Models & Verification Schemas
 """
+
 from __future__ import annotations
 from enum import Enum
 from typing import Dict, List, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid
+
 
 class SecurityCategory(str, Enum):
     AUTHENTICATION = "AUTHENTICATION"
@@ -22,11 +24,13 @@ class SecurityCategory(str, Enum):
     RED_TEAM = "RED_TEAM"
     OBSERVABILITY = "OBSERVABILITY"
 
+
 class SecurityStatus(str, Enum):
     PASSED = "PASSED"
     FAILED = "FAILED"
     WARNING = "WARNING"
     DEFENDED = "DEFENDED"
+
 
 class SeverityLevel(str, Enum):
     CRITICAL = "CRITICAL"
@@ -34,6 +38,7 @@ class SeverityLevel(str, Enum):
     MEDIUM = "MEDIUM"
     LOW = "LOW"
     INFORMATIONAL = "INFORMATIONAL"
+
 
 class SecurityVerificationRun(BaseModel):
     id: str = Field(default_factory=lambda: f"srun-{uuid.uuid4().hex[:10]}")
@@ -48,6 +53,7 @@ class SecurityVerificationRun(BaseModel):
     evidence_location: str = "security_verification_evidence/"
     details: Dict[str, Any] = Field(default_factory=dict)
 
+
 class AttackVector(BaseModel):
     id: str = Field(default_factory=lambda: f"atk-{uuid.uuid4().hex[:8]}")
     category: SecurityCategory
@@ -60,6 +66,7 @@ class AttackVector(BaseModel):
     is_blocked: bool = True
     detection_latency_ms: float = 0.5
     confidence_score: float = 0.99
+
 
 class SecuritySectionResult(BaseModel):
     section_id: str
@@ -76,6 +83,7 @@ class SecuritySectionResult(BaseModel):
     metrics: Dict[str, Any] = Field(default_factory=dict)
     summary: str = ""
     executed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class MasterSecurityScore(BaseModel):
     tenant_id: str = "enterprise-v9-security"

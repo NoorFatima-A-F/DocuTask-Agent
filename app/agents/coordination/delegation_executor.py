@@ -50,20 +50,14 @@ class DelegationExecutor(IDelegationEngine):
             completed_agent = updated_agent.complete_task(task.task_id, success=True)
             await self.registry.update_agent(completed_agent)
 
-            results[task.task_id] = {
-                "status": "COMPLETED",
-                "executed_by": str(target_id),
-                "task_name": task.task_name
-            }
+            results[task.task_id] = {"status": "COMPLETED", "executed_by": str(target_id), "task_name": task.task_name}
 
-        status = DelegationStatus.COMPLETED if not errors else (
-            DelegationStatus.FAILED if len(results) == 0 else DelegationStatus.FALLBACK_TRIGGERED
+        status = (
+            DelegationStatus.COMPLETED
+            if not errors
+            else (DelegationStatus.FAILED if len(results) == 0 else DelegationStatus.FALLBACK_TRIGGERED)
         )
 
         return DelegationResult(
-            delegation_id=request.delegation_id,
-            status=status,
-            results=results,
-            errors=errors,
-            delegation_chain=chain
+            delegation_id=request.delegation_id, status=status, results=results, errors=errors, delegation_chain=chain
         )

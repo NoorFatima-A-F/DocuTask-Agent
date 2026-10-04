@@ -1,6 +1,7 @@
 """
 Abstract Interfaces for Enterprise Configuration, Secret & Cryptographic Material Backup Verification (Part 3G.2D).
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 
@@ -31,17 +32,13 @@ class IConfigurationInventoryEngine(ABC):
 
 class IConfigurationCatalogEngine(ABC):
     @abstractmethod
-    def build_configuration_catalog(
-        self, inventory: ConfigurationInventoryReport
-    ) -> ConfigurationCatalogReport:
+    def build_configuration_catalog(self, inventory: ConfigurationInventoryReport) -> ConfigurationCatalogReport:
         pass
 
 
 class IConfigurationValidationEngine(ABC):
     @abstractmethod
-    def validate_required_configurations(
-        self, catalog: ConfigurationCatalogReport
-    ) -> ConfigurationValidationReport:
+    def validate_required_configurations(self, catalog: ConfigurationCatalogReport) -> ConfigurationValidationReport:
         pass
 
 
@@ -53,9 +50,7 @@ class ISecretDiscoveryEngine(ABC):
 
 class ISecretBackupEngine(ABC):
     @abstractmethod
-    def verify_secret_backup_strategies(
-        self, secret_inventory: SecretInventoryReport
-    ) -> SecretBackupReport:
+    def verify_secret_backup_strategies(self, secret_inventory: SecretInventoryReport) -> SecretBackupReport:
         pass
 
 

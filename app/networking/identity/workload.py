@@ -56,9 +56,7 @@ class WorkloadAttestationManager:
         self.cert_manager = cert_manager or CertificateManager()
         self.signing_secret = signing_secret
         self.trust_domain = trust_domain
-        self._trust_bundles: Dict[str, List[str]] = {
-            self.trust_domain: [self.cert_manager.root_ca.serial_number]
-        }
+        self._trust_bundles: Dict[str, List[str]] = {self.trust_domain: [self.cert_manager.root_ca.serial_number]}
         self._svids: Dict[str, WorkloadSVID] = {}
 
     def attest_workload(

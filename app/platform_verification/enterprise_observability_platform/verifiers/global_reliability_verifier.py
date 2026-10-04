@@ -2,6 +2,7 @@
 3I.11.5: Global Reliability Intelligence Verifier
 Aggregates health across all environments to compute the global platform reliability score.
 """
+
 from typing import List
 from app.platform_verification.enterprise_observability_platform.domain.models import (
     GlobalReliabilityReport,

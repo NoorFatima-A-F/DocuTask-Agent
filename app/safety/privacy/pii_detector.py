@@ -49,7 +49,9 @@ class PIIDetector:
         ],
         PIIType.API_KEY: [
             re.compile(r"\b(sk-[A-Za-z0-9_-]{20,}|ghp_[A-Za-z0-9]{20,}|xox[baprs]-[A-Za-z0-9-]{20,})\b"),
-            re.compile(r"(?i)\b(?:api[_-]?key|secret[_-]?key|auth[_-]?token)\s*[:=]\s*['\"]?([A-Za-z0-9_-]{16,})['\"]?"),
+            re.compile(
+                r"(?i)\b(?:api[_-]?key|secret[_-]?key|auth[_-]?token)\s*[:=]\s*['\"]?([A-Za-z0-9_-]{16,})['\"]?"
+            ),
         ],
         PIIType.AWS_KEY: [
             re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
@@ -61,7 +63,9 @@ class PIIDetector:
             re.compile(r"(?i)\b(?:password|passwd|pwd)\s*[:=]\s*['\"]?([^\s'\"]{6,})['\"]?"),
         ],
         PIIType.IP_ADDRESS: [
-            re.compile(r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"),
+            re.compile(
+                r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"
+            ),
         ],
         PIIType.IBAN: [
             re.compile(r"\b[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}\b"),

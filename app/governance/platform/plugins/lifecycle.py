@@ -34,7 +34,5 @@ class PluginLifecycleStateMachine:
     def transition(cls, current_state: PluginState, target_state: PluginState) -> PluginState:
         """Execute state transition or raise error."""
         if not cls.can_transition(current_state, target_state):
-            raise ValueError(
-                f"Invalid plugin lifecycle transition from {current_state.value} to {target_state.value}."
-            )
+            raise ValueError(f"Invalid plugin lifecycle transition from {current_state.value} to {target_state.value}.")
         return target_state

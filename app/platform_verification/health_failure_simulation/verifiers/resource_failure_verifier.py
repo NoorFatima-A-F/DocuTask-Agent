@@ -1,6 +1,7 @@
 """
 3H.11.7: Resource Exhaustion Testing Verifier
 """
+
 from ..domain.models import ResourceFailureReport
 from ..domain.interfaces import IResourceFailureVerifier
 
@@ -20,5 +21,5 @@ class ResourceFailureVerifier(IResourceFailureVerifier):
             disk_full_protection_active=True,
             upload_ingestion_throttled=True,
             host_oom_prevented=True,
-            simulation_passed=True
+            simulation_passed=True,
         )

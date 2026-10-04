@@ -53,9 +53,12 @@ class PlacementScoringEngine:
         resource_score = (cpu_headroom * 2.0) + (mem_headroom * 0.5)
 
         # 2. Capability score
-        cap_score = self.capability_registry.calculate_capability_match_score(
-            worker.worker_id, workload.required_capabilities, workload.optional_capabilities
-        ) * 10.0
+        cap_score = (
+            self.capability_registry.calculate_capability_match_score(
+                worker.worker_id, workload.required_capabilities, workload.optional_capabilities
+            )
+            * 10.0
+        )
 
         # 3. Affinity & Locality score
         aff_score = self.affinity_engine.calculate_affinity_score(worker, workload)
@@ -84,9 +87,7 @@ class PlacementScoringEngine:
             fairness_penalty=fairness_pen,
         )
 
-    def rank_candidates(
-        self, workers: List[Worker], workload: WorkloadRequest
-    ) -> List[ScoreBreakdown]:
+    def rank_candidates(self, workers: List[Worker], workload: WorkloadRequest) -> List[ScoreBreakdown]:
         """Score and sort worker candidates descending by total score."""
         scored = [self.score_candidate(w, workload) for w in workers]
         return sorted(scored, key=lambda s: s.total_score, reverse=True)

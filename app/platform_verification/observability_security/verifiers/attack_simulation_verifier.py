@@ -2,6 +2,7 @@
 Phase 3I.7.10: Observability Attack Simulation Verifier
 Simulates hostile security vectors including secret injection, prompt leakage, unauthorized cross-tenant log query, and log tampering attempts.
 """
+
 from typing import List
 from ..domain.interfaces import IAttackSimulationVerifier
 from ..domain.models import SecurityAttackSimulationSpec, AttackSimulationReport

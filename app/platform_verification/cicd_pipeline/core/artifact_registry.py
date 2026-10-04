@@ -1,6 +1,7 @@
 """
 Enterprise Artifact Registry for tracking builds, models, datasets, and SHA-256 hashes.
 """
+
 from __future__ import annotations
 from datetime import datetime, timezone
 import hashlib

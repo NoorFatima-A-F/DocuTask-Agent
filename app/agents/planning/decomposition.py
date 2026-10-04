@@ -19,6 +19,7 @@ class DecompositionStrategy(str, Enum):
 
 class GoalDecomposition(BaseModel):
     """Decomposition result mapping a Goal into subgoals and executable PlanningTasks."""
+
     goal: PlanGoal
     subgoals: List[PlanGoal] = Field(default_factory=list)
     tasks: List[PlanningTask] = Field(default_factory=list)

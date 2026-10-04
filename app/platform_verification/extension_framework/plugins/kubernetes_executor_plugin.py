@@ -1,11 +1,18 @@
 """
 Reference Execution Backend Plugin: Kubernetes Job Executor.
 """
+
 from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import ExecutionBackendPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
-    PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,
-    PluginHealthMetrics, PluginHealthState, PluginPermission, SecurityClassification
+    PluginMetadata,
+    PluginCategory,
+    PluginExecutionContext,
+    PluginExecutionResult,
+    PluginHealthMetrics,
+    PluginHealthState,
+    PluginPermission,
+    SecurityClassification,
 )
 
 
@@ -25,7 +32,7 @@ class KubernetesExecutorPlugin(ExecutionBackendPluginInterface):
             description="Executes verification container workloads on Kubernetes clusters",
             capabilities=["k8s_job_execution", "isolated_pod_sandboxing", "gpu_acceleration"],
             granted_permissions=[PluginPermission.EXECUTE_CODE, PluginPermission.ACCESS_STORAGE],
-            security_classification=SecurityClassification.ENTERPRISE_CERTIFIED
+            security_classification=SecurityClassification.ENTERPRISE_CERTIFIED,
         )
 
     def initialize(self, context: Dict[str, Any]) -> bool:
@@ -44,7 +51,7 @@ class KubernetesExecutorPlugin(ExecutionBackendPluginInterface):
             plugin_id="k8s_executor_plugin",
             is_success=True,
             metrics=[{"metric": "pod_startup_latency_ms", "value": 120.0}],
-            raw_evidence={"job_id": task_id, "status": "COMPLETED"}
+            raw_evidence={"job_id": task_id, "status": "COMPLETED"},
         )
 
     def schedule_task(self, task_spec: Dict[str, Any]) -> str:
@@ -63,5 +70,5 @@ class KubernetesExecutorPlugin(ExecutionBackendPluginInterface):
             plugin_id="k8s_executor_plugin",
             state=PluginHealthState.HEALTHY,
             total_executions=1,
-            successful_executions=1
+            successful_executions=1,
         )

@@ -6,7 +6,6 @@ Bayesian Optimization, Regression Detection, Observatory, Decision, Publication,
 Governance, Scientific Agents, and Master Intelligence Engine.
 """
 
-
 # 83C Knowledge Graph
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
 from research_validation.knowledge_graph.knowledge_graph import ScientificKnowledgeGraph
@@ -113,7 +112,9 @@ def test_scientific_memory_engine_and_consolidation():
     assert len(pareto) >= 1
 
     # Long term memory retention decay
-    lt_item = lt_mem.store_invariant("CONV_LAW", "Attention scales quadratically", evidence_weight=1.0, half_life_days=10.0)
+    lt_item = lt_mem.store_invariant(
+        "CONV_LAW", "Attention scales quadratically", evidence_weight=1.0, half_life_days=10.0
+    )
     # Immediate retention
     assert lt_item.current_retention_strength(lt_item.created_timestamp) == 1.0
     # Decayed retention after 30 days
@@ -128,7 +129,9 @@ def test_scientific_memory_engine_and_consolidation():
 
 def test_experiment_recommendation_engine():
     calc = ExperimentROICalculator()
-    roi = calc.calculate_roi("Bench_SROIE", prior_uncertainty_std=0.10, target_sample_size=100, estimated_runtime_sec=10.0)
+    roi = calc.calculate_roi(
+        "Bench_SROIE", prior_uncertainty_std=0.10, target_sample_size=100, estimated_runtime_sec=10.0
+    )
     assert roi.expected_information_gain_bits > 0.0
     assert roi.net_roi_score > 0.0
 
@@ -199,7 +202,7 @@ def test_bayesian_research_optimizer():
 def test_scientific_regression_detector():
     detector = ScientificRegressionDetector()
     baseline = {"f1": 0.95, "latency_p50_ms": 10.0}
-    
+
     # Degraded run
     eval_degraded = {"f1": 0.88, "latency_p50_ms": 25.0}
     rep_deg = detector.evaluate_experiment_regression("exp_reg", "run_base", "run_eval", baseline, eval_degraded)
@@ -233,12 +236,22 @@ def test_living_benchmark_observatory_and_leaderboard():
 
 def test_research_decision_engine():
     engine = ResearchDecisionEngine(max_acceptable_risk=0.80)
-    
+
     # Normal hypothesis
     h_ok = ScientificHypothesis(
-        hypothesis_id="h1", title="T1", statement="S1", premise="P1", proposed_mechanism="M1", expected_outcome="E1",
-        confidence_level=0.85, risk_score=0.20, impact_score=0.90, required_datasets=["funsd"],
-        required_benchmarks=[], estimated_runtime_sec=20.0, supporting_evidence_nodes=[],
+        hypothesis_id="h1",
+        title="T1",
+        statement="S1",
+        premise="P1",
+        proposed_mechanism="M1",
+        expected_outcome="E1",
+        confidence_level=0.85,
+        risk_score=0.20,
+        impact_score=0.90,
+        required_datasets=["funsd"],
+        required_benchmarks=[],
+        estimated_runtime_sec=20.0,
+        supporting_evidence_nodes=[],
     )
     d_ok = engine.evaluate_hypothesis(h_ok, available_datasets=["funsd"])
     assert d_ok.action == ResearchAction.RUN_EXPERIMENT
@@ -280,7 +293,7 @@ def test_publication_evolution_engine():
 
 def test_research_governance_engine():
     gov = ResearchGovernanceEngine()
-    
+
     # Compliant plan
     v_ok = gov.audit_experiment_plan("plan_01", has_provenance_digest=True, has_confidence_intervals=True)
     assert v_ok.is_fully_compliant is True
@@ -296,7 +309,7 @@ def test_research_governance_engine():
 def test_scientific_agent_runtime():
     runtime = ScientificAgentRuntime()
     assert len(runtime.agent_states) == 10
-    
+
     verdict = runtime.run_collaborative_cycle("DocVQA multi-lingual generalization")
     assert verdict.consensus_reached is True
     assert len(verdict.participating_agents) == 10
@@ -306,7 +319,7 @@ def test_scientific_agent_runtime():
 def test_master_scientific_intelligence_engine():
     engine = ScientificIntelligenceEngine()
     mock_samples = [{"ground_truth_label": "total", "pred": {"label": "total"}}]
-    
+
     result = engine.run_autonomous_cycle(cycle_number=1, mock_samples=mock_samples)
     assert result.cycle_id.startswith("research_cycle_1")
     assert result.selected_hypothesis is not None

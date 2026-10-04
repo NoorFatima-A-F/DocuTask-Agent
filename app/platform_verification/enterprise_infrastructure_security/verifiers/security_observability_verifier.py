@@ -29,11 +29,30 @@ class SecurityObservabilityVerifier(ISecurityObservabilityVerifier):
 
     def verify(self) -> SecurityMonitoringReport:
         events = [
-            SecurityAuditEventSpec(event_type="AUTH_FAILED_EXCESSIVE", severity="HIGH", siem_forwarded=True, alert_triggered=True),
-            SecurityAuditEventSpec(event_type="PRIVILEGE_ESCALATION_ATTEMPT", severity="CRITICAL", siem_forwarded=True, alert_triggered=True),
-            SecurityAuditEventSpec(event_type="UNAUTHORIZED_TENANT_DOCUMENT_ACCESS", severity="HIGH", siem_forwarded=True, alert_triggered=True),
-            SecurityAuditEventSpec(event_type="SUSPICIOUS_PROMPT_INJECTION_DETECTED", severity="MEDIUM", siem_forwarded=True, alert_triggered=True),
-            SecurityAuditEventSpec(event_type="SECRET_ROTATION_TRIGGERED", severity="LOW", siem_forwarded=True, alert_triggered=False),
+            SecurityAuditEventSpec(
+                event_type="AUTH_FAILED_EXCESSIVE", severity="HIGH", siem_forwarded=True, alert_triggered=True
+            ),
+            SecurityAuditEventSpec(
+                event_type="PRIVILEGE_ESCALATION_ATTEMPT",
+                severity="CRITICAL",
+                siem_forwarded=True,
+                alert_triggered=True,
+            ),
+            SecurityAuditEventSpec(
+                event_type="UNAUTHORIZED_TENANT_DOCUMENT_ACCESS",
+                severity="HIGH",
+                siem_forwarded=True,
+                alert_triggered=True,
+            ),
+            SecurityAuditEventSpec(
+                event_type="SUSPICIOUS_PROMPT_INJECTION_DETECTED",
+                severity="MEDIUM",
+                siem_forwarded=True,
+                alert_triggered=True,
+            ),
+            SecurityAuditEventSpec(
+                event_type="SECRET_ROTATION_TRIGGERED", severity="LOW", siem_forwarded=True, alert_triggered=False
+            ),
         ]
 
         checks = [

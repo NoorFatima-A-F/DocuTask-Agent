@@ -10,6 +10,7 @@ from ..overrides.service import HumanOverrideRecord
 
 class OversightAnalyticsSummary(BaseModel):
     """Aggregated governance analytics and telemetry summary."""
+
     tenant_id: str
     total_reviews: int = 0
     approved_count: int = 0

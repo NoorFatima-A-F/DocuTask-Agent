@@ -2,6 +2,7 @@
 Continuous Verification and Cadence Engine (Part 3G.2B Phase 17).
 Monitors continuous backup verification cadences and proactively detects stale or unverified backups.
 """
+
 from typing import Dict, Any
 from app.platform_verification.database_backup_verification.domain.models import (
     ContinuousVerificationScheduleReport,
@@ -35,11 +36,7 @@ class ContinuousVerificationEngine(IContinuousVerificationEngine):
         }
 
         passed = (
-            daily_logical
-            and weekly_physical
-            and monthly_disaster
-            and quarterly_recert
-            and not stale_backup_detected
+            daily_logical and weekly_physical and monthly_disaster and quarterly_recert and not stale_backup_detected
         )
 
         return ContinuousVerificationScheduleReport(
@@ -52,9 +49,7 @@ class ContinuousVerificationEngine(IContinuousVerificationEngine):
             passed=passed,
         )
 
-    def export_continuous_json(
-        self, report: ContinuousVerificationScheduleReport
-    ) -> Dict[str, Any]:
+    def export_continuous_json(self, report: ContinuousVerificationScheduleReport) -> Dict[str, Any]:
         return {
             "daily_logical_verification_active": report.daily_logical_verification_active,
             "weekly_physical_restore_active": report.weekly_physical_restore_active,
@@ -66,8 +61,5 @@ class ContinuousVerificationEngine(IContinuousVerificationEngine):
             "cadence_sla": "Max backup age <= 24 hours; Max verification lag <= 60 minutes",
         }
 
-    def export_continuous_schedule_json(
-        self, report: ContinuousVerificationScheduleReport
-    ) -> Dict[str, Any]:
+    def export_continuous_schedule_json(self, report: ContinuousVerificationScheduleReport) -> Dict[str, Any]:
         return self.export_continuous_json(report)
-

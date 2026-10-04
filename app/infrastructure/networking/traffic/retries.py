@@ -10,6 +10,7 @@ T = TypeVar("T")
 @dataclass
 class RetryPolicy:
     """Configurable retry policy."""
+
     max_attempts: int = 3
     base_delay_ms: float = 100.0
     max_delay_ms: float = 2000.0
@@ -41,7 +42,9 @@ class RetryEngine:
 
         return delay_ms / 1000.0
 
-    def should_retry(self, attempt: int, status_code: Optional[int] = None, policy: Optional[RetryPolicy] = None) -> bool:
+    def should_retry(
+        self, attempt: int, status_code: Optional[int] = None, policy: Optional[RetryPolicy] = None
+    ) -> bool:
         """Evaluate if another retry attempt is permitted."""
         pol = policy or self.policy
         if attempt >= pol.max_attempts:

@@ -1,6 +1,7 @@
 """
 Evidence Manifest Engine for Backup Security Verification Framework (Part 3G.2F).
 """
+
 import json
 from pathlib import Path
 from app.core.security import resolve_safe_path, validate_safe_filename_segment
@@ -66,11 +67,21 @@ class BackupSecurityEvidenceEngine(IBackupSecurityEvidenceEngine):
                 "composite_score": getattr(verification_data.get("scorecard"), "composite_score", 0.0),
                 "certification_tier": getattr(verification_data.get("scorecard"), "certification_tier", "UNKNOWN"),
                 "total_backup_assets": getattr(verification_data.get("backup_security_inventory"), "backup_assets", 0),
-                "encrypted_backup_assets": getattr(verification_data.get("backup_security_inventory"), "encrypted_assets", 0),
-                "unencrypted_backup_assets": getattr(verification_data.get("backup_security_inventory"), "unencrypted_assets", 0),
-                "tamper_detection_active": getattr(verification_data.get("tamper_detection_report"), "one_byte_modification_detected", False),
-                "poisoning_protection_active": getattr(verification_data.get("poisoning_protection_report"), "untrusted_sources_rejected", False),
-                "immutability_active": getattr(verification_data.get("immutability_report"), "object_lock_compliance_mode_active", False),
+                "encrypted_backup_assets": getattr(
+                    verification_data.get("backup_security_inventory"), "encrypted_assets", 0
+                ),
+                "unencrypted_backup_assets": getattr(
+                    verification_data.get("backup_security_inventory"), "unencrypted_assets", 0
+                ),
+                "tamper_detection_active": getattr(
+                    verification_data.get("tamper_detection_report"), "one_byte_modification_detected", False
+                ),
+                "poisoning_protection_active": getattr(
+                    verification_data.get("poisoning_protection_report"), "untrusted_sources_rejected", False
+                ),
+                "immutability_active": getattr(
+                    verification_data.get("immutability_report"), "object_lock_compliance_mode_active", False
+                ),
                 "gate_passed": getattr(verification_data.get("scorecard"), "passed", False),
             },
         }

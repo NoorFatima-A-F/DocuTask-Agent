@@ -2,24 +2,27 @@
 Comprehensive Verification Test Suite for Part 1.1C.5:
 Enterprise Testing, Tooling, Documentation & Deployment Architecture.
 """
+
 import pytest
 import os
 
 from app.platform_verification.testing import (
-    TestingPyramidRunner, TestTier, TestTierResult,
+    TestingPyramidRunner,
+    TestTier,
+    TestTierResult,
     PerformanceBenchmarkEngine,
-    ChaosFaultInjector, ChaosFaultType, FaultInjectionConfig,
+    ChaosFaultInjector,
+    ChaosFaultType,
+    FaultInjectionConfig,
     MutationTestingHarness,
-    TestEvidenceReporter
+    TestEvidenceReporter,
 )
 from tooling.datasets.dataset_generator import DatasetGenerator
 from tooling.benchmarks.benchmark_runner import BenchmarkRunner
 from tooling.migrations.migration_runner import MigrationRunner
 from tooling.governance.documentation_validator import validate_docs
 from app.infrastructure.deployment.rollback_manager import DeploymentRollbackManager
-from app.infrastructure.observability import (
-    HealthChecker, ProbeStatus, DeploymentMetadataProfiler, TelemetryCollector
-)
+from app.infrastructure.observability import HealthChecker, ProbeStatus, DeploymentMetadataProfiler, TelemetryCollector
 
 
 class TestTestingArchitecture:
@@ -40,8 +43,8 @@ class TestTestingArchitecture:
                 passed_tests=4,
                 failed_tests=1,
                 duration_ms=10.0,
-                errors=["Vulnerability detected"]
-            )
+                errors=["Vulnerability detected"],
+            ),
         )
         report_fail = runner.execute_all_tiers(stop_on_failure=True)
         assert report_fail.overall_passed is False

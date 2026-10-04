@@ -35,14 +35,14 @@ from app.platform_verification.enterprise_performance_bottleneck.verifiers.optim
 def get_all_verifiers():
     """Return ordered list of all 10 Phase 3J.7 verifier instances."""
     return [
-        PerformanceArchitectureVerifier(),     # 3J.7.1
-        ResourceSaturationVerifier(),          # 3J.7.2
-        ApplicationBottleneckVerifier(),       # 3J.7.3
-        DatabaseBottleneckVerifier(),          # 3J.7.4
-        QueueBottleneckVerifier(),             # 3J.7.5
-        WorkerCapacityVerifier(),              # 3J.7.6
-        AIProviderPerformanceVerifier(),       # 3J.7.7
-        PerformanceRegressionVerifier(),       # 3J.7.8
-        CapacityBoundaryVerifier(),            # 3J.7.9
-        OptimizationRecommendationsVerifier(), # 3J.7.10
+        PerformanceArchitectureVerifier(),  # 3J.7.1
+        ResourceSaturationVerifier(),  # 3J.7.2
+        ApplicationBottleneckVerifier(),  # 3J.7.3
+        DatabaseBottleneckVerifier(),  # 3J.7.4
+        QueueBottleneckVerifier(),  # 3J.7.5
+        WorkerCapacityVerifier(),  # 3J.7.6
+        AIProviderPerformanceVerifier(),  # 3J.7.7
+        PerformanceRegressionVerifier(),  # 3J.7.8
+        CapacityBoundaryVerifier(),  # 3J.7.9
+        OptimizationRecommendationsVerifier(),  # 3J.7.10
     ]

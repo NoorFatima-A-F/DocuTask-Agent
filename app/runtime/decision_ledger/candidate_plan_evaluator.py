@@ -116,7 +116,9 @@ class RegretCalculator:
         realized_cost = realized_metrics.get("actual_cost_usd", selected_candidate.predicted_cost_usd)
         realized_lat = realized_metrics.get("actual_latency_ms", selected_candidate.predicted_latency_ms)
 
-        realized_utility = round((realized_acc * 0.5) - (realized_cost / 0.05 * 0.25) - (realized_lat / 3000.0 * 0.25), 4)
+        realized_utility = round(
+            (realized_acc * 0.5) - (realized_cost / 0.05 * 0.25) - (realized_lat / 3000.0 * 0.25), 4
+        )
         best_candidate = max(all_candidates, key=lambda c: c.estimated_utility)
 
         regret = max(0.0, round(best_candidate.estimated_utility - realized_utility, 4))

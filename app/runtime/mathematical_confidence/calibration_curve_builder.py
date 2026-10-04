@@ -25,11 +25,21 @@ class CalibrationCurveBuilder:
     @classmethod
     def get_canonical_calibration_curve(cls) -> Dict[str, Any]:
         bins_data = [
-            CalibrationBinPoint(bin_index=0, confidence_midpoint=0.55, empirical_accuracy=0.54, sample_count=45, calibration_gap=-0.01),
-            CalibrationBinPoint(bin_index=1, confidence_midpoint=0.65, empirical_accuracy=0.66, sample_count=80, calibration_gap=+0.01),
-            CalibrationBinPoint(bin_index=2, confidence_midpoint=0.75, empirical_accuracy=0.74, sample_count=160, calibration_gap=-0.01),
-            CalibrationBinPoint(bin_index=3, confidence_midpoint=0.85, empirical_accuracy=0.86, sample_count=420, calibration_gap=+0.01),
-            CalibrationBinPoint(bin_index=4, confidence_midpoint=0.95, empirical_accuracy=0.96, sample_count=1795, calibration_gap=+0.01),
+            CalibrationBinPoint(
+                bin_index=0, confidence_midpoint=0.55, empirical_accuracy=0.54, sample_count=45, calibration_gap=-0.01
+            ),
+            CalibrationBinPoint(
+                bin_index=1, confidence_midpoint=0.65, empirical_accuracy=0.66, sample_count=80, calibration_gap=+0.01
+            ),
+            CalibrationBinPoint(
+                bin_index=2, confidence_midpoint=0.75, empirical_accuracy=0.74, sample_count=160, calibration_gap=-0.01
+            ),
+            CalibrationBinPoint(
+                bin_index=3, confidence_midpoint=0.85, empirical_accuracy=0.86, sample_count=420, calibration_gap=+0.01
+            ),
+            CalibrationBinPoint(
+                bin_index=4, confidence_midpoint=0.95, empirical_accuracy=0.96, sample_count=1795, calibration_gap=+0.01
+            ),
         ]
 
         ece = 0.0102

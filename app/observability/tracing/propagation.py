@@ -12,7 +12,9 @@ class TraceContextPropagator:
     """Injects and extracts distributed trace headers across HTTP/gRPC boundaries."""
 
     @staticmethod
-    def inject(context: SpanContext, carrier: Dict[str, str], baggage: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+    def inject(
+        context: SpanContext, carrier: Dict[str, str], baggage: Optional[Dict[str, str]] = None
+    ) -> Dict[str, str]:
         """Inject W3C traceparent and B3 headers into carrier dict."""
         flags = context.trace_flags or "01"
         carrier["traceparent"] = f"00-{context.trace_id}-{context.span_id}-{flags}"
@@ -53,7 +55,7 @@ class TraceContextPropagator:
         b3_span = carrier.get("x-b3-spanid") or carrier.get("X-B3-SpanId")
         if b3_trace and b3_span:
             sampled_str = carrier.get("x-b3-sampled") or carrier.get("X-B3-Sampled") or "1"
-            is_sampled = (sampled_str == "1")
+            is_sampled = sampled_str == "1"
             return SpanContext(
                 trace_id=b3_trace.lower(),
                 span_id=b3_span.lower(),

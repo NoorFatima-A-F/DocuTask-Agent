@@ -21,8 +21,12 @@ from typing import Any, Dict, List, Optional, Set
 from research_validation.provenance.hashing import HashAlgorithm, ProvenanceHasher
 from research_validation.provenance.merkle_dag import MerkleDAG, MerkleVerificationResult
 from research_validation.provenance.provenance_models import (
-    EnvironmentFingerprint, EvidenceNode, EvidenceQualityLevel, LineageStage,
-    ProvEntity, ProvRelationType
+    EnvironmentFingerprint,
+    EvidenceNode,
+    EvidenceQualityLevel,
+    LineageStage,
+    ProvEntity,
+    ProvRelationType,
 )
 from research_validation.provenance.provenance_schema import ProvDocument, ProvRelation
 
@@ -30,6 +34,7 @@ from research_validation.provenance.provenance_schema import ProvDocument, ProvR
 @dataclass
 class LineageAncestryTrace:
     """An unbroken path tracing a scientific metric back to its root observations."""
+
     target_metric_node_id: str
     target_metric_name: str
     ancestry_path_node_ids: List[str]
@@ -57,7 +62,6 @@ class EvidenceGraph:
         """Return nodes dictionary from underlying Merkle DAG."""
         return self.merkle_dag.nodes
 
-
     @classmethod
     def capture_current_environment(
         cls,
@@ -68,7 +72,7 @@ class EvidenceGraph:
         random_seed: Optional[int] = 42,
         dataset_version: Optional[str] = "1.0.0",
         model_version: Optional[str] = "2.0.0",
-        config_hash: Optional[str] = None
+        config_hash: Optional[str] = None,
     ) -> EnvironmentFingerprint:
         """Capture live runtime environment metadata."""
         return EnvironmentFingerprint(
@@ -93,7 +97,7 @@ class EvidenceGraph:
             random_seed=random_seed,
             dataset_version=dataset_version,
             model_version=model_version,
-            config_hash=config_hash or ProvenanceHasher.hash_string("default_config", algorithm=HashAlgorithm.SHA256)
+            config_hash=config_hash or ProvenanceHasher.hash_string("default_config", algorithm=HashAlgorithm.SHA256),
         )
 
     def record_node(
@@ -106,7 +110,7 @@ class EvidenceGraph:
         parent_node_ids: List[str],
         quality_level: EvidenceQualityLevel,
         environment: Optional[EnvironmentFingerprint] = None,
-        created_at_epoch: Optional[float] = None
+        created_at_epoch: Optional[float] = None,
     ) -> EvidenceNode:
         """Record an immutable evidence node and link its W3C PROV entities."""
         env = environment or self.capture_current_environment()
@@ -130,7 +134,7 @@ class EvidenceGraph:
             environment=env,
             quality_level=quality_level,
             algorithm=self.algorithm,
-            created_at_epoch=created_at_epoch or time.time()
+            created_at_epoch=created_at_epoch or time.time(),
         )
 
         self.merkle_dag.add_node(node)
@@ -143,19 +147,17 @@ class EvidenceGraph:
                 "node_hash": node.node_hash,
                 "stage": stage.value,
                 "quality_level": quality_level.value,
-                "author": env.author
+                "author": env.author,
             },
             generated_at_time=node.created_at_epoch,
-            was_derived_from_ids=parent_node_ids
+            was_derived_from_ids=parent_node_ids,
         )
         self.prov_doc.add_entity(entity)
 
         for pid in parent_node_ids:
-            self.prov_doc.add_relation(ProvRelation(
-                relation_type=ProvRelationType.WAS_DERIVED_FROM,
-                source_id=node_id,
-                target_id=pid
-            ))
+            self.prov_doc.add_relation(
+                ProvRelation(relation_type=ProvRelationType.WAS_DERIVED_FROM, source_id=node_id, target_id=pid)
+            )
 
         return node
 
@@ -181,7 +183,9 @@ class EvidenceGraph:
                     path_nodes.append(node)
                     queue.extend(node.parent_node_ids)
 
-        root_obs = [n.node_id for n in path_nodes if len(n.parent_node_ids) == 0 or n.stage == LineageStage.RAW_OBSERVATION]
+        root_obs = [
+            n.node_id for n in path_nodes if len(n.parent_node_ids) == 0 or n.stage == LineageStage.RAW_OBSERVATION
+        ]
 
         # Calculate weighted quality score
         weights = [n.quality_level.numeric_weight for n in path_nodes]
@@ -212,7 +216,7 @@ class EvidenceGraph:
             is_unbroken_merkle_chain=True,
             evidence_quality_score=quality_score,
             overall_quality_level=overall_level,
-            merkle_subgraph_digest=sub_digest
+            merkle_subgraph_digest=sub_digest,
         )
 
     def verify_graph_integrity(self) -> MerkleVerificationResult:

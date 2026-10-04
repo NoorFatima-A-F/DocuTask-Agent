@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Verification Reporting, Audit Intelligence & Governance Dashboards (PART 8).
 """
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -51,6 +52,7 @@ class ControlStatus(str, Enum):
 @dataclass
 class VerificationSummary:
     """Consolidated summary of a verification run for reporting."""
+
     execution_id: str
     system_version: str
     model_version: str
@@ -69,6 +71,7 @@ class VerificationSummary:
 @dataclass
 class QualityTrend:
     """Historical data point for a metric trend."""
+
     metric_name: str
     timestamp: str
     value: float
@@ -80,6 +83,7 @@ class QualityTrend:
 @dataclass
 class ComplianceControlMapping:
     """Mapping of verification evidence to formal governance standards (NIST AI RMF, ISO 42001, SOC 2)."""
+
     control_id: str
     framework: str  # e.g. "NIST_AI_RMF", "ISO_42001", "SOC_2", "ISO_27001"
     control_name: str
@@ -92,6 +96,7 @@ class ComplianceControlMapping:
 @dataclass
 class AuditReportRecord:
     """Formally compiled, hashed audit report."""
+
     report_id: str
     report_type: ReportType
     title: str
@@ -114,6 +119,7 @@ class AuditReportRecord:
 @dataclass
 class AuditPackage:
     """Complete multi-artifact audit package export."""
+
     package_id: str
     system_version: str
     generated_at: str
@@ -128,6 +134,7 @@ class AuditPackage:
 @dataclass
 class NotificationAlert:
     """System notification dispatched to stakeholders."""
+
     alert_id: str
     event_type: NotificationEventType
     severity: str
@@ -142,6 +149,7 @@ class NotificationAlert:
 @dataclass
 class ExecutiveDashboardView:
     """Executive-level bird's-eye governance view."""
+
     system_name: str = "DocuTask Agent"
     production_readiness_pct: float = 96.4
     current_certification_level: str = "LEVEL_7_ENTERPRISE_CERTIFIED"
@@ -154,6 +162,7 @@ class ExecutiveDashboardView:
 @dataclass
 class EngineeringDashboardView:
     """Technical dashboard for software and ML engineers."""
+
     recent_runs: List[VerificationSummary]
     failed_test_breakdown: List[Dict[str, Any]]
     performance_p95_trend: List[Dict[str, Any]]
@@ -164,6 +173,7 @@ class EngineeringDashboardView:
 @dataclass
 class SecurityComplianceDashboardView:
     """Dashboard for security and compliance officers."""
+
     vulnerability_counts: Dict[str, int]
     prompt_injection_resistance_pct: float
     pii_leakage_rate_pct: float
@@ -174,6 +184,7 @@ class SecurityComplianceDashboardView:
 @dataclass
 class AiGovernanceDashboardView:
     """Specialized AI lifecycle and prompt governance dashboard."""
+
     active_model_version: str
     active_prompt_version: str
     hallucination_rate: float

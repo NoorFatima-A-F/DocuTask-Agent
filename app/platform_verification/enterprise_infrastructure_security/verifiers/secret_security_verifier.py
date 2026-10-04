@@ -29,10 +29,34 @@ class SecretSecurityVerifier(ISecretSecurityVerifier):
 
     def verify(self) -> SecretSecurityReport:
         targets = [
-            SecretScanTarget(scan_scope="Git Repository Commit History", tool_used="Gitleaks / TruffleHog", secrets_detected=0, rotation_capable=True, status="CLEAN"),
-            SecretScanTarget(scan_scope="Docker Container Layers & Metadata", tool_used="SecretScanner / Dive", secrets_detected=0, rotation_capable=True, status="CLEAN"),
-            SecretScanTarget(scan_scope="Application & Telemetry Logs", tool_used="LogSanitizer Regex Filter", secrets_detected=0, rotation_capable=True, status="CLEAN"),
-            SecretScanTarget(scan_scope="CI/CD Pipeline Configurations", tool_used="Gitleaks CI Action", secrets_detected=0, rotation_capable=True, status="CLEAN"),
+            SecretScanTarget(
+                scan_scope="Git Repository Commit History",
+                tool_used="Gitleaks / TruffleHog",
+                secrets_detected=0,
+                rotation_capable=True,
+                status="CLEAN",
+            ),
+            SecretScanTarget(
+                scan_scope="Docker Container Layers & Metadata",
+                tool_used="SecretScanner / Dive",
+                secrets_detected=0,
+                rotation_capable=True,
+                status="CLEAN",
+            ),
+            SecretScanTarget(
+                scan_scope="Application & Telemetry Logs",
+                tool_used="LogSanitizer Regex Filter",
+                secrets_detected=0,
+                rotation_capable=True,
+                status="CLEAN",
+            ),
+            SecretScanTarget(
+                scan_scope="CI/CD Pipeline Configurations",
+                tool_used="Gitleaks CI Action",
+                secrets_detected=0,
+                rotation_capable=True,
+                status="CLEAN",
+            ),
         ]
 
         sum(t.secrets_detected for t in targets)

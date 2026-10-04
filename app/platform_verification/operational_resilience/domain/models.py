@@ -1,6 +1,7 @@
 """
 Phase 3H.7: Enterprise Operational Resilience, Fault Tolerance & Self-Healing — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -23,13 +24,14 @@ class DegradationMode(str, Enum):
 
 class OperationalResilienceTier(str, Enum):
     ENTERPRISE_AUTONOMOUS_RESILIENCE = "Enterprise Autonomous Resilience"  # 98 - 100
-    ENTERPRISE_RESILIENT = "Enterprise Resilient"                          # 95 - 97.99
-    PRODUCTION_RESILIENT = "Production Resilient"                          # 90 - 94.99
-    NEEDS_IMPROVEMENT = "Needs Improvement"                                # 80 - 89.99
-    FAILED = "Failed"                                                      # < 80
+    ENTERPRISE_RESILIENT = "Enterprise Resilient"  # 95 - 97.99
+    PRODUCTION_RESILIENT = "Production Resilient"  # 90 - 94.99
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3H.7.1: Resilience Architecture Models ─────────────────────────────────
+
 
 class ResilienceStrategyDefinition(BaseModel):
     strategy_id: str
@@ -53,6 +55,7 @@ class ResilienceArchitectureReport(BaseModel):
 
 # ─── 3H.7.2: Circuit Breaker Models ─────────────────────────────────────────
 
+
 class CircuitBreakerEvaluation(BaseModel):
     subsystem: str  # Gemini_AI, OCR_Engine, PostgreSQL, Redis, External_Webhooks
     state: CircuitBreakerState = CircuitBreakerState.CLOSED
@@ -73,6 +76,7 @@ class CircuitBreakerReport(BaseModel):
 
 
 # ─── 3H.7.3: Retry & Backoff Strategy Models ────────────────────────────────
+
 
 class RetryPolicyEvaluation(BaseModel):
     operation_type: str  # DB_Query, Redis_Enqueue, LLM_Inference, OCR_Page, Storage_Upload
@@ -95,6 +99,7 @@ class RetryStrategyReport(BaseModel):
 
 # ─── 3H.7.4: Graceful Degradation Models ─────────────────────────────────────
 
+
 class DegradationScenario(BaseModel):
     subsystem_failure: str
     degraded_mode: DegradationMode
@@ -114,6 +119,7 @@ class GracefulDegradationReport(BaseModel):
 
 # ─── 3H.7.5: Bulkhead Isolation Models ──────────────────────────────────────
 
+
 class BulkheadIsolationPool(BaseModel):
     pool_name: str  # Ingress_Pool, OCR_Pool, AI_Inference_Pool, Validation_Pool, Export_Pool
     max_threads_or_workers: int
@@ -131,8 +137,11 @@ class BulkheadReport(BaseModel):
 
 # ─── 3H.7.6: Adaptive Load Shedding Models ───────────────────────────────────
 
+
 class LoadSheddingDecision(BaseModel):
-    traffic_priority_level: str  # Critical Document Ingestion, Interactive Status Probe, Background Batch OCR, Telemetry Export
+    traffic_priority_level: (
+        str  # Critical Document Ingestion, Interactive Status Probe, Background Batch OCR, Telemetry Export
+    )
     decision_under_stress: str  # ACCEPTED, THROTTLED, DROPPED_GRACEFULLY
     admission_control_active: bool = True
     critical_path_preserved: bool = True
@@ -148,8 +157,11 @@ class LoadSheddingReport(BaseModel):
 
 # ─── 3H.7.7: Self-Healing & Stale Lock Models ────────────────────────────────
 
+
 class SelfHealingScenarioItem(BaseModel):
-    recovery_type: str  # Worker Restart, Redis Sentinel Reconnect, DB Pool Recycle, Stale Lock Eviction, Orphan Task Recovery
+    recovery_type: (
+        str  # Worker Restart, Redis Sentinel Reconnect, DB Pool Recycle, Stale Lock Eviction, Orphan Task Recovery
+    )
     trigger_event: str
     automated_resolution: str
     resolution_latency_seconds: float
@@ -167,9 +179,12 @@ class SelfHealingReport(BaseModel):
 
 # ─── 3H.7.8: Chaos Resilience Models ─────────────────────────────────────────
 
+
 class ChaosFaultExperiment(BaseModel):
     experiment_id: str
-    fault_type: str  # Network Latency (500ms), DNS Failure, Worker SIGKILL, DB Abrupt Reset, Redis Partition, AI Timeout (10s)
+    fault_type: (
+        str  # Network Latency (500ms), DNS Failure, Worker SIGKILL, DB Abrupt Reset, Redis Partition, AI Timeout (10s)
+    )
     service_continuity_maintained: bool = True
     degraded_mode_activated: bool = True
     recovery_duration_seconds: float
@@ -185,6 +200,7 @@ class ChaosResilienceReport(BaseModel):
 
 
 # ─── 3H.7.9: Business Continuity Models ─────────────────────────────────────
+
 
 class BusinessContinuityCheck(BaseModel):
     workflow_stage: str  # Document Ingestion, Queue Buffering, Async Extraction, Final Artifact Storage
@@ -203,6 +219,7 @@ class BusinessContinuityReport(BaseModel):
 
 # ─── 3H.7.10: Resilience Metrics Models ──────────────────────────────────────
 
+
 class ResilienceMetricItem(BaseModel):
     metric_name: str
     metric_type: str
@@ -218,6 +235,7 @@ class ResilienceMetricsReport(BaseModel):
 
 
 # ─── 3H.7.11: Master Certification Scorecard Models ─────────────────────────
+
 
 class OperationalResiliencePillarScore(BaseModel):
     pillar_name: str

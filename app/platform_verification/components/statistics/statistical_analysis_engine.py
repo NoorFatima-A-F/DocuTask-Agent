@@ -2,12 +2,14 @@
 Statistical Analysis Engine: Bootstrap CI, variance, stddev, hypothesis testing, anomaly detection.
 Supports both synchronous domain analysis and async interface invocations.
 """
+
 from typing import Any, Optional
 import statistics
 import math
 from pydantic import BaseModel
 from ..interfaces import StatisticalAnalysisEngineInterface
 from ...crosscutting.observability import ComponentObservability
+
 
 class StatisticalSummary(BaseModel):
     metric_name: str = "metric"
@@ -37,12 +39,13 @@ class StatisticalSummary(BaseModel):
     def __await__(self):
         async def _inner():
             return self
+
         return _inner().__await__()
 
 
 class StatisticalAnalysisEngine(StatisticalAnalysisEngineInterface):
     """Computes statistical confidence intervals and distribution metrics."""
-    
+
     def __init__(self):
         self.observability = ComponentObservability("StatisticalAnalysisEngine")
 
@@ -74,7 +77,7 @@ class StatisticalAnalysisEngine(StatisticalAnalysisEngineInterface):
                 ci_upper_95=0.0,
                 ci_95_lower=0.0,
                 ci_95_upper=0.0,
-                p_value_against_baseline=1.0
+                p_value_against_baseline=1.0,
             )
 
         mean = statistics.mean(samples)
@@ -96,5 +99,5 @@ class StatisticalAnalysisEngine(StatisticalAnalysisEngineInterface):
             ci_95_lower=ci_lower,
             ci_95_upper=ci_upper,
             confidence_reliable=n >= 5,
-            p_value_against_baseline=p_val
+            p_value_against_baseline=p_val,
         )

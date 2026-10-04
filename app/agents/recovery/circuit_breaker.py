@@ -17,12 +17,7 @@ class CircuitState(str, Enum):
 class CircuitBreaker:
     """Protects external tools, workers, and providers from catastrophic cascading failures."""
 
-    def __init__(
-        self,
-        name: str,
-        failure_threshold: int = 5,
-        recovery_timeout_seconds: float = 30.0
-    ):
+    def __init__(self, name: str, failure_threshold: int = 5, recovery_timeout_seconds: float = 30.0):
         self.name = name
         self.failure_threshold = failure_threshold
         self.recovery_timeout_seconds = recovery_timeout_seconds

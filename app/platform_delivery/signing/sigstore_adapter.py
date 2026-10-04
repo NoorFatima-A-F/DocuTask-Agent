@@ -1,4 +1,5 @@
 """Sigstore / Cosign Cryptographic Signing & Attestation Adapter (Req 22)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -10,6 +11,7 @@ import uuid
 
 class SigningMechanism(str, Enum):
     """Supported signing mechanisms."""
+
     SIGSTORE_KEYLESS_OIDC = "SIGSTORE_KEYLESS_OIDC"
     KMS_BACKED = "KMS_BACKED"
     PRIVATE_KEY = "PRIVATE_KEY"
@@ -18,12 +20,13 @@ class SigningMechanism(str, Enum):
 @dataclass
 class CosignSignatureBundle:
     """Cosign-compatible cryptographic signature bundle."""
+
     signature_id: str
     artifact_digest: str
     mechanism: SigningMechanism
     signature_b64: str
     signer_identity: str  # e.g. "https://github.com/docutask/actions@v1"
-    issuer: str          # e.g. "https://token.actions.githubusercontent.com"
+    issuer: str  # e.g. "https://token.actions.githubusercontent.com"
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     rekor_log_index: Optional[int] = None
     certificate_chain: Optional[str] = None

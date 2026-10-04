@@ -5,9 +5,7 @@ Primary application service providing CRUD, validation, revisioning, and lifecyc
 """
 
 from typing import List, Optional
-from research_validation.goal.models.goal import (
-    Goal, GoalType, PriorityLevel, GoalStatus
-)
+from research_validation.goal.models.goal import Goal, GoalType, PriorityLevel, GoalStatus
 from research_validation.goal.models.confidence_threshold import ConfidenceThreshold, ConfidenceLevel
 from research_validation.goal.models.goal_constraints import GoalConstraints
 from research_validation.goal.models.success_criteria import SuccessCriterion
@@ -19,9 +17,7 @@ from research_validation.goal.interfaces.event_bus import IEventBus
 from research_validation.goal.interfaces.id_generator import IIdGenerator
 from research_validation.goal.interfaces.clock import IClock
 from research_validation.goal.services.goal_validator import GoalValidator
-from research_validation.goal.events.goal_events import (
-    GoalCreatedEvent, GoalValidatedEvent, GoalRejectedEvent
-)
+from research_validation.goal.events.goal_events import GoalCreatedEvent, GoalValidatedEvent, GoalRejectedEvent
 from research_validation.goal.exceptions import GoalValidationError, EntityNotFoundError
 
 
@@ -121,13 +117,15 @@ class GoalManager:
         )
 
         self.repo.save_goal(sealed_goal)
-        self.event_bus.publish(GoalCreatedEvent(
-            event_id=self.id_gen.generate_id("evt"),
-            event_type="GoalCreated",
-            aggregate_id=goal_id,
-            timestamp_utc=now_str,
-            payload={"goal_id": goal_id, "title": title, "digest": digest},
-        ))
+        self.event_bus.publish(
+            GoalCreatedEvent(
+                event_id=self.id_gen.generate_id("evt"),
+                event_type="GoalCreated",
+                aggregate_id=goal_id,
+                timestamp_utc=now_str,
+                payload={"goal_id": goal_id, "title": title, "digest": digest},
+            )
+        )
 
         return sealed_goal
 
@@ -141,13 +139,15 @@ class GoalManager:
         now_str = self.clock.now_utc_iso()
 
         if not val_res.is_valid:
-            self.event_bus.publish(GoalRejectedEvent(
-                event_id=self.id_gen.generate_id("evt"),
-                event_type="GoalRejected",
-                aggregate_id=goal_id,
-                timestamp_utc=now_str,
-                payload={"goal_id": goal_id, "errors": val_res.errors},
-            ))
+            self.event_bus.publish(
+                GoalRejectedEvent(
+                    event_id=self.id_gen.generate_id("evt"),
+                    event_type="GoalRejected",
+                    aggregate_id=goal_id,
+                    timestamp_utc=now_str,
+                    payload={"goal_id": goal_id, "errors": val_res.errors},
+                )
+            )
             raise GoalValidationError(f"Goal {goal_id} failed validation.", validation_errors=val_res.errors)
 
         updated_goal = Goal(
@@ -177,13 +177,15 @@ class GoalManager:
         )
 
         self.repo.save_goal(updated_goal)
-        self.event_bus.publish(GoalValidatedEvent(
-            event_id=self.id_gen.generate_id("evt"),
-            event_type="GoalValidated",
-            aggregate_id=goal_id,
-            timestamp_utc=now_str,
-            payload={"goal_id": goal_id, "status": updated_goal.status.value},
-        ))
+        self.event_bus.publish(
+            GoalValidatedEvent(
+                event_id=self.id_gen.generate_id("evt"),
+                event_type="GoalValidated",
+                aggregate_id=goal_id,
+                timestamp_utc=now_str,
+                payload={"goal_id": goal_id, "status": updated_goal.status.value},
+            )
+        )
 
         return updated_goal
 

@@ -23,9 +23,14 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
         request.state.request_id = request_id
 
         start_time = time.perf_counter()
-        
+
         # Log request start
-        logger.info("HTTP Request Started: %s %s | RequestID=%s", request.method, sanitize_log_input(request.url.path), sanitize_log_input(request_id))
+        logger.info(
+            "HTTP Request Started: %s %s | RequestID=%s",
+            request.method,
+            sanitize_log_input(request.url.path),
+            sanitize_log_input(request_id),
+        )
 
         try:
             response = await call_next(request)
@@ -52,7 +57,7 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
         response.headers["X-XSS-Protection"] = "1; mode=block"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         response.headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()"
-        
+
         # Relax CSP on Swagger / ReDoc docs endpoints to allow Swagger UI CDN resources
         if any(request.url.path.endswith(ext) for ext in ["/docs", "/redoc", "/openapi.json"]):
             response.headers["Content-Security-Policy"] = (
@@ -62,9 +67,8 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
             )
         else:
             response.headers["Content-Security-Policy"] = "default-src 'self'; frame-ancestors 'none';"
-            
-        response.headers["Cache-Control"] = "no-store, max-age=0"
 
+        response.headers["Cache-Control"] = "no-store, max-age=0"
 
         logger.info(
             f"HTTP Response Completed: {request.method} {request.url.path} | Status={response.status_code} | Duration={duration_ms}ms | RequestID={request_id}"

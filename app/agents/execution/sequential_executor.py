@@ -16,10 +16,7 @@ class SequentialExecutor:
         self.node_executor = node_executor
 
     async def execute_sequence(
-        self,
-        node_ids: List[str],
-        graph: ExecutionGraph,
-        execution_id: Any
+        self, node_ids: List[str], graph: ExecutionGraph, execution_id: Any
     ) -> List[Dict[str, Any]]:
         results = []
         for nid in node_ids:
@@ -29,7 +26,7 @@ class SequentialExecutor:
                     execution_id=execution_id,
                     node_id=nid,
                     capability_requirement=exec_node.node.capability_requirement,
-                    parameters=exec_node.node.parameters
+                    parameters=exec_node.node.parameters,
                 )
                 res = await self.node_executor.execute_node(exec_node, ctx)
                 results.append(res)

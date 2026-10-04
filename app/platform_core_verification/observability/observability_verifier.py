@@ -104,7 +104,7 @@ class ObservabilityVerifier:
 
         trace_id = parts[1]
         parent_span_id = parts[2]
-        
+
         # Child span generated under same trace_id
         child_span = {
             "trace_id": trace_id,
@@ -114,9 +114,7 @@ class ObservabilityVerifier:
         }
 
         passed = (
-            len(parts) == 4
-            and child_span["trace_id"] == trace_id
-            and child_span["parent_span_id"] == parent_span_id
+            len(parts) == 4 and child_span["trace_id"] == trace_id and child_span["parent_span_id"] == parent_span_id
         )
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 

@@ -143,15 +143,10 @@ class TaskDecomposer:
                 "cost": 0.01,
                 "timeout": 30,
             },
-        ]
+        ],
     }
 
-    def decompose(
-        self,
-        goal: GoalModel,
-        strategy: str = "HYBRID",
-        template_name: Optional[str] = None
-    ) -> AgentPlan:
+    def decompose(self, goal: GoalModel, strategy: str = "HYBRID", template_name: Optional[str] = None) -> AgentPlan:
         """
         Decomposes a goal into an AgentPlan containing ordered PlanSteps with dependencies.
         """

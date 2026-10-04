@@ -8,6 +8,7 @@ from enum import Enum
 
 class BackpressureState(str, Enum):
     """Platform saturation level."""
+
     NORMAL = "NORMAL"
     THROTTLED = "THROTTLED"
     SHEDDING = "SHEDDING"

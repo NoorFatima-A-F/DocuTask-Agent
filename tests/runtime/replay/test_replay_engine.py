@@ -12,7 +12,7 @@ def _create_sample_events(mission_id: str, count: int = 20) -> list[RuntimeEvent
     prev_hash = "0" * 64
     for i in range(count):
         ev = RuntimeEvent(
-            event_id=f"ev_{mission_id}_{i+1:03d}",
+            event_id=f"ev_{mission_id}_{i + 1:03d}",
             mission_id=mission_id,
             sequence_number=i + 1,
             category=EventCategory.EXECUTION if i % 2 == 0 else EventCategory.PLANNER,
@@ -23,6 +23,7 @@ def _create_sample_events(mission_id: str, count: int = 20) -> list[RuntimeEvent
             previous_hash=prev_hash,
         )
         from app.runtime.observability.event_serializer import EventSerializer
+
         ev.hash = EventSerializer.compute_event_hash(ev, prev_hash)
         prev_hash = ev.hash
         events.append(ev)

@@ -26,10 +26,38 @@ class AutoscalingArchitectureVerifier(IAutoscalingArchitectureVerifier):
 
     def verify(self) -> AutoscalingArchitectureReport:
         components = [
-            ScalableComponent(component_name="API Gateway / Service", scaling_type="horizontal", min_replicas=2, max_replicas=20, current_replicas=4, status="READY"),
-            ScalableComponent(component_name="Worker Pool", scaling_type="horizontal", min_replicas=3, max_replicas=80, current_replicas=10, status="READY"),
-            ScalableComponent(component_name="Redis Task Queue", scaling_type="vertical/cluster", min_replicas=1, max_replicas=3, current_replicas=1, status="READY"),
-            ScalableComponent(component_name="PostgreSQL Database", scaling_type="connection_pool/replica", min_replicas=1, max_replicas=5, current_replicas=1, status="READY"),
+            ScalableComponent(
+                component_name="API Gateway / Service",
+                scaling_type="horizontal",
+                min_replicas=2,
+                max_replicas=20,
+                current_replicas=4,
+                status="READY",
+            ),
+            ScalableComponent(
+                component_name="Worker Pool",
+                scaling_type="horizontal",
+                min_replicas=3,
+                max_replicas=80,
+                current_replicas=10,
+                status="READY",
+            ),
+            ScalableComponent(
+                component_name="Redis Task Queue",
+                scaling_type="vertical/cluster",
+                min_replicas=1,
+                max_replicas=3,
+                current_replicas=1,
+                status="READY",
+            ),
+            ScalableComponent(
+                component_name="PostgreSQL Database",
+                scaling_type="connection_pool/replica",
+                min_replicas=1,
+                max_replicas=5,
+                current_replicas=1,
+                status="READY",
+            ),
         ]
 
         checks: List[CheckResult] = [
@@ -41,7 +69,11 @@ class AutoscalingArchitectureVerifier(IAutoscalingArchitectureVerifier):
             ),
             CheckResult(
                 name="Horizontal Strategy Defined for Workers and API",
-                passed=all(c.scaling_type == "horizontal" for c in components if c.component_name in ("Worker Pool", "API Gateway / Service")),
+                passed=all(
+                    c.scaling_type == "horizontal"
+                    for c in components
+                    if c.component_name in ("Worker Pool", "API Gateway / Service")
+                ),
                 details="Worker pool and API gateway configure horizontal elastic replication",
                 metrics={"horizontal_components": 2},
             ),

@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Performance.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.performance.domain.models import PerformanceEntity
 from app.platform_verification.modules.performance.domain.interfaces import PerformanceRepositoryInterface
+
 
 class InMemoryPerformanceRepository(PerformanceRepositoryInterface):
     def __init__(self):

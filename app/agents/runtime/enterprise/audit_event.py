@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class AuditEventType(str, Enum):
     """Categorization of audit events."""
+
     RUNTIME_LIFECYCLE = "RUNTIME_LIFECYCLE"
     PLUGIN_MODIFICATION = "PLUGIN_MODIFICATION"
     TENANT_ACTION = "TENANT_ACTION"
@@ -21,6 +22,7 @@ class AuditEventType(str, Enum):
 
 class RuntimeAuditEvent(BaseModel):
     """An individual immutable audit event with cryptographic hash chaining support."""
+
     event_id: UUID = Field(default_factory=uuid4)
     event_type: AuditEventType
     actor: str

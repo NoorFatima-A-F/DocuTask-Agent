@@ -2,6 +2,7 @@
 3I.10.2: Observability Policy Management Verifier
 Verifies Alert Policies, Automation Permissions, and Escalation Policies.
 """
+
 from typing import List
 from app.platform_verification.observability_operations_governance.domain.models import (
     ObservabilityPolicyReport,

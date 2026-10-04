@@ -2,6 +2,7 @@
 Availability Engineering Metrics Engine (Part 3G.6J).
 Computes enterprise availability SLA models (99.99%), regional RTO, and regional RPO.
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     AvailabilityTier,
     AvailabilityMetricsReport,
@@ -19,14 +20,14 @@ class AvailabilityMetricsEngine(IAvailabilityMetricsEngine):
     TARGETS = {
         "annual_uptime_pct": 99.99,
         "max_rto_seconds": 300.0,  # 5 minutes
-        "max_rpo_seconds": 30.0,   # 30 seconds
+        "max_rpo_seconds": 30.0,  # 30 seconds
     }
 
     def calculate_availability_metrics(self) -> AvailabilityMetricsReport:
         uptime_pct = 99.99
         tier = AvailabilityTier.FOUR_NINES
         rto_sec = 42.0  # Measured regional failover time
-        rpo_sec = 0.0   # 0 byte transaction loss via sync commit
+        rpo_sec = 0.0  # 0 byte transaction loss via sync commit
 
         rto_ok = rto_sec <= self.TARGETS["max_rto_seconds"]
         rpo_ok = rpo_sec <= self.TARGETS["max_rpo_seconds"]

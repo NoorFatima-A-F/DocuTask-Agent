@@ -25,11 +25,36 @@ class ReliabilityEvaluator(IReliabilityEvaluator):
 
     def evaluate(self) -> ReliabilityEvaluationReport:
         scenarios = [
-            ReliabilityMetric(scenario="PrimaryLLMProviderOutage", injected_fault="HTTP503ServiceUnavailable", recovery_time_sec=2.4, recovered_successfully=True),
-            ReliabilityMetric(scenario="WorkerProcessCrash", injected_fault="ProcessSIGKILL", recovery_time_sec=1.8, recovered_successfully=True),
-            ReliabilityMetric(scenario="DatabaseConnectionReset", injected_fault="PostgreSQLNetworkDrop", recovery_time_sec=2.1, recovered_successfully=True),
-            ReliabilityMetric(scenario="RedisQueuePartition", injected_fault="BrokerPartitionDisconnect", recovery_time_sec=2.8, recovered_successfully=True),
-            ReliabilityMetric(scenario="CorruptedDocumentPayload", injected_fault="InvalidBinaryPayload", recovery_time_sec=0.5, recovered_successfully=True),
+            ReliabilityMetric(
+                scenario="PrimaryLLMProviderOutage",
+                injected_fault="HTTP503ServiceUnavailable",
+                recovery_time_sec=2.4,
+                recovered_successfully=True,
+            ),
+            ReliabilityMetric(
+                scenario="WorkerProcessCrash",
+                injected_fault="ProcessSIGKILL",
+                recovery_time_sec=1.8,
+                recovered_successfully=True,
+            ),
+            ReliabilityMetric(
+                scenario="DatabaseConnectionReset",
+                injected_fault="PostgreSQLNetworkDrop",
+                recovery_time_sec=2.1,
+                recovered_successfully=True,
+            ),
+            ReliabilityMetric(
+                scenario="RedisQueuePartition",
+                injected_fault="BrokerPartitionDisconnect",
+                recovery_time_sec=2.8,
+                recovered_successfully=True,
+            ),
+            ReliabilityMetric(
+                scenario="CorruptedDocumentPayload",
+                injected_fault="InvalidBinaryPayload",
+                recovery_time_sec=0.5,
+                recovered_successfully=True,
+            ),
         ]
 
         checks = [

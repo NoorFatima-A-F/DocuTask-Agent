@@ -1,4 +1,5 @@
 """Environment Hierarchy and Promotion Governance Rules (Req 32)."""
+
 from typing import Dict, Optional
 from .models import DeploymentEnvironmentType, EnvironmentConfiguration
 

@@ -19,9 +19,9 @@ class RiskLevel(str, Enum):
 
 
 class HorizonScope(str, Enum):
-    SHORT_TERM = "SHORT_TERM"      # Next 5-30 minutes / Next task
-    MEDIUM_TERM = "MEDIUM_TERM"    # Next 1-24 hours / Next mission batch
-    LONG_TERM = "LONG_TERM"        # Next 1-7 days / Cross-mission roadmap
+    SHORT_TERM = "SHORT_TERM"  # Next 5-30 minutes / Next task
+    MEDIUM_TERM = "MEDIUM_TERM"  # Next 1-24 hours / Next mission batch
+    LONG_TERM = "LONG_TERM"  # Next 1-7 days / Cross-mission roadmap
 
 
 class ScenarioType(str, Enum):

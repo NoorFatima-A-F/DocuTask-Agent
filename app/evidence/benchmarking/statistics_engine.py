@@ -159,9 +159,9 @@ class AdvancedStatisticsEngine:
 
         # 4. Skewness & Kurtosis (Higher moments)
         if n >= 3 and std_val > 0:
-            skew_val = (sum((x - mean_val) ** 3 for x in samples) / n) / (std_val ** 3)
+            skew_val = (sum((x - mean_val) ** 3 for x in samples) / n) / (std_val**3)
             # Excess kurtosis (normal distribution = 0)
-            kurt_val = ((sum((x - mean_val) ** 4 for x in samples) / n) / (std_val ** 4)) - 3.0
+            kurt_val = ((sum((x - mean_val) ** 4 for x in samples) / n) / (std_val**4)) - 3.0
         else:
             skew_val = 0.0
             kurt_val = 0.0
@@ -201,9 +201,7 @@ class AdvancedStatisticsEngine:
         zscore_outliers = [x for x in samples if std_val > 0 and abs((x - mean_val) / std_val) > 3.0]
 
         # Modified Z-Score (using MAD): M_i = 0.6745 * (x_i - median) / MAD
-        mod_z_outliers = [
-            x for x in samples if mad_val > 0 and abs(0.6745 * (x - median_val) / mad_val) > 3.5
-        ]
+        mod_z_outliers = [x for x in samples if mad_val > 0 and abs(0.6745 * (x - median_val) / mad_val) > 3.5]
 
         # Grubbs test for single extreme outlier
         grubbs_outlier = None

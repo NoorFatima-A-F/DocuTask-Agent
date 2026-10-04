@@ -51,18 +51,22 @@ class BayesianObservationRequest(BaseModel):
 class MetaCritiqueRequest(BaseModel):
     mission_id: str
     chosen_strategy_id: str = "strat_delta_pareto"
-    strategy_utilities: Dict[str, float] = Field(default_factory=lambda: {
-        "strat_delta_pareto": 0.4392,
-        "strat_alpha_fast": 0.3850,
-        "strat_beta_accurate": 0.3120,
-        "strat_gamma_cost": 0.2980,
-    })
-    strategy_costs: Dict[str, float] = Field(default_factory=lambda: {
-        "strat_delta_pareto": 0.0022,
-        "strat_alpha_fast": 0.0008,
-        "strat_beta_accurate": 0.0165,
-        "strat_gamma_cost": 0.0005,
-    })
+    strategy_utilities: Dict[str, float] = Field(
+        default_factory=lambda: {
+            "strat_delta_pareto": 0.4392,
+            "strat_alpha_fast": 0.3850,
+            "strat_beta_accurate": 0.3120,
+            "strat_gamma_cost": 0.2980,
+        }
+    )
+    strategy_costs: Dict[str, float] = Field(
+        default_factory=lambda: {
+            "strat_delta_pareto": 0.0022,
+            "strat_alpha_fast": 0.0008,
+            "strat_beta_accurate": 0.0165,
+            "strat_gamma_cost": 0.0005,
+        }
+    )
     estimated_risk: float = 0.06
     confidence: float = 0.96
     document_complexity: float = 1.0
@@ -107,7 +111,9 @@ async def get_world_forecast() -> List[WorldStateForecast]:
     return _cognitive_runtime.forecast_world()
 
 
-@router.get("/evoi/evaluate", response_model=List[InformationActionRecommendation], summary="Evaluate Active Information EVOI")
+@router.get(
+    "/evoi/evaluate", response_model=List[InformationActionRecommendation], summary="Evaluate Active Information EVOI"
+)
 async def get_evoi_recommendations() -> List[InformationActionRecommendation]:
     """Calculates Expected Value of Information for candidate sensing actions."""
     return _cognitive_runtime.evaluate_evoi()
@@ -150,15 +156,23 @@ async def formally_verify_strategy(req: SMTVerificationRequest) -> FormalVerific
     return proof
 
 
-@router.get("/governance/provenance/{mission_id}", response_model=DecisionProvenanceTree, summary="Get Decision Provenance Tree")
+@router.get(
+    "/governance/provenance/{mission_id}", response_model=DecisionProvenanceTree, summary="Get Decision Provenance Tree"
+)
 async def get_decision_provenance(mission_id: str) -> DecisionProvenanceTree:
     """Retrieves full cryptographic Merkle decision provenance trail."""
     tree = _provenance_engine.get_or_create_tree(mission_id)
     if not tree.nodes:
-        _provenance_engine.record_step(mission_id, "GOAL", "Mission Intent Registered", {"intent": "Extract invoice fields"})
+        _provenance_engine.record_step(
+            mission_id, "GOAL", "Mission Intent Registered", {"intent": "Extract invoice fields"}
+        )
         _provenance_engine.record_step(mission_id, "BELIEFS", "Initial Cognitive Prior Formed", {"entropy_bits": 3.86})
-        _provenance_engine.record_step(mission_id, "SMT_VERIFICATION", "Formal Invariants Satisfied", {"solver": "Z3_SMT"})
-        _provenance_engine.record_step(mission_id, "DECISION", "Selected Strategy Delta (Adaptive Pareto)", {"utility": 0.4392})
+        _provenance_engine.record_step(
+            mission_id, "SMT_VERIFICATION", "Formal Invariants Satisfied", {"solver": "Z3_SMT"}
+        )
+        _provenance_engine.record_step(
+            mission_id, "DECISION", "Selected Strategy Delta (Adaptive Pareto)", {"utility": 0.4392}
+        )
     return tree
 
 

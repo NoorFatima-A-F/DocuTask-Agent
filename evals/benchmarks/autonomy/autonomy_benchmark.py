@@ -107,7 +107,7 @@ def benchmark_recovery_intelligence() -> float:
     # 2. Verify graph is acyclic and downstream task dependencies rerouted
     downstream = graph.get_downstream_dependents(t0_id)
     t1_task = plan.tasks[1]
-    rerouted = (fb.task_id in graph.get_task(t1_task.task_id).dependencies)
+    rerouted = fb.task_id in graph.get_task(t1_task.task_id).dependencies
     acyclic = False
     try:
         graph._validate_acyclic()
@@ -144,8 +144,12 @@ def benchmark_reflection_improvement() -> float:
 
 def benchmark_memory_recall() -> float:
     mem = AgentMemorySystem(session_id="bench_mem")
-    mem.semantic.store_fact(SemanticFact(subject="TargetCorp", predicate="tax_id", fact_value="XX-123", tags=["targetcorp", "tax"]))
-    mem.semantic.store_fact(SemanticFact(subject="OtherCorp", predicate="tax_id", fact_value="YY-456", tags=["othercorp"]))
+    mem.semantic.store_fact(
+        SemanticFact(subject="TargetCorp", predicate="tax_id", fact_value="XX-123", tags=["targetcorp", "tax"])
+    )
+    mem.semantic.store_fact(
+        SemanticFact(subject="OtherCorp", predicate="tax_id", fact_value="YY-456", tags=["othercorp"])
+    )
 
     facts = mem.semantic.retrieve_relevant_facts("TargetCorp tax", task_tags=["targetcorp"], top_k=1)
     if facts and facts[0][0].subject == "TargetCorp":

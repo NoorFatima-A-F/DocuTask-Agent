@@ -23,6 +23,7 @@ from typing import Callable, List, Optional, Tuple
 @dataclass(frozen=True)
 class PrecisionInterval:
     """Rigorous real interval arithmetic enclosure [low, high]."""
+
     low: float
     high: float
 
@@ -50,6 +51,7 @@ class PrecisionInterval:
 @dataclass
 class ShadowExecutionResult:
     """Output from parallel dual-precision execution (Float32 vs Float64)."""
+
     expression_name: str
     f64_result: float
     f32_result: float
@@ -61,6 +63,7 @@ class ShadowExecutionResult:
 @dataclass
 class MonteCarloErrorDistribution:
     """Statistical distribution of output variance under random mantissa bitflips."""
+
     mean_value: float
     std_deviation: float
     min_value: float
@@ -72,6 +75,7 @@ class MonteCarloErrorDistribution:
 @dataclass
 class ErrorBudgetReport:
     """Comprehensive floating point error propagation audit."""
+
     algorithm_name: str
     worst_case_error_bound: float
     expected_error: float
@@ -104,7 +108,7 @@ class FloatErrorPropagationFramework:
         input_val: float,
         trials: int = 100,
         noise_scale: float = 1e-14,
-        seed: int = 42
+        seed: int = 42,
     ) -> MonteCarloErrorDistribution:
         """Evaluate sensitivity to lower mantissa perturbations over multiple trials."""
         rnd = random.Random(seed)
@@ -133,20 +137,15 @@ class FloatErrorPropagationFramework:
             min_value=min(outputs),
             max_value=max(outputs),
             empirical_ci_95=ci_95,
-            bits_of_precision=max(0.0, min(53.0, bits_lost))
+            bits_of_precision=max(0.0, min(53.0, bits_lost)),
         )
 
     @classmethod
-    def execute_shadow_tracking(
-        cls,
-        expression_name: str,
-        f64_calc: float,
-        f32_calc: float
-    ) -> ShadowExecutionResult:
+    def execute_shadow_tracking(cls, expression_name: str, f64_calc: float, f32_calc: float) -> ShadowExecutionResult:
         """Compares high-precision float64 baseline with float32 shadow execution."""
         abs_div = abs(f64_calc - f32_calc)
         rel_div = abs_div / max(abs(f64_calc), 1e-12)
-        bits_lost = math.log2(max(1.0, rel_div / (2.0 ** -52))) if rel_div > 0 else 0.0
+        bits_lost = math.log2(max(1.0, rel_div / (2.0**-52))) if rel_div > 0 else 0.0
 
         return ShadowExecutionResult(
             expression_name=expression_name,
@@ -154,16 +153,12 @@ class FloatErrorPropagationFramework:
             f32_result=f32_calc,
             absolute_divergence=abs_div,
             relative_divergence=rel_div,
-            significant_bits_lost=bits_lost
+            significant_bits_lost=bits_lost,
         )
 
     @classmethod
     def evaluate_error_budget(
-        cls,
-        algorithm_name: str,
-        func: Callable[[float], float],
-        test_x: float,
-        error_budget: float = 1e-5
+        cls, algorithm_name: str, func: Callable[[float], float], test_x: float, error_budget: float = 1e-5
     ) -> ErrorBudgetReport:
         """Run complete error propagation budget analysis."""
         # Monte Carlo
@@ -172,9 +167,9 @@ class FloatErrorPropagationFramework:
         # Shadow execution simulation
         f64_val = func(test_x)
         # Simulate single-precision float32 input & calculation
-        f32_x = struct.unpack('>f', struct.pack('>f', test_x))[0]
+        f32_x = struct.unpack(">f", struct.pack(">f", test_x))[0]
         f32_raw = func(f32_x)
-        f32_val = struct.unpack('>f', struct.pack('>f', f32_raw))[0]
+        f32_val = struct.unpack(">f", struct.pack(">f", f32_raw))[0]
 
         shadow_res = cls.execute_shadow_tracking(f"{algorithm_name}({test_x})", f64_val, f32_val)
 
@@ -183,7 +178,7 @@ class FloatErrorPropagationFramework:
         f_plus = func(test_x + h)
         f_minus = func(test_x - h)
         df_dx = (f_plus - f_minus) / (2.0 * h)
-        cond = abs((test_x * df_dx) / f64_val) if abs(f64_val) > 1e-14 else float('inf')
+        cond = abs((test_x * df_dx) / f64_val) if abs(f64_val) > 1e-14 else float("inf")
 
         worst_case = (mc_dist.max_value - mc_dist.min_value) / 2.0
         expected_err = mc_dist.std_deviation
@@ -205,5 +200,5 @@ class FloatErrorPropagationFramework:
             monte_carlo_distribution=mc_dist,
             error_budget_allocated=error_budget,
             within_error_budget=within_budget,
-            status=status
+            status=status,
         )

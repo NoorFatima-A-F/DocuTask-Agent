@@ -1,6 +1,7 @@
 """
 Secret & Credential Deployment Auditor.
 """
+
 import re
 from typing import List
 from app.platform_verification.deployment_verification.domain.models import SecretDeploymentReport

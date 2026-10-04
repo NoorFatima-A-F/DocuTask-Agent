@@ -54,11 +54,7 @@ class KnowledgeBuilder:
         return self
 
     def build(self) -> KnowledgeItem:
-        return KnowledgeItem(
-            topic=self._topic,
-            category=self._category,
-            content=self._content
-        )
+        return KnowledgeItem(topic=self._topic, category=self._category, content=self._content)
 
 
 class QueryBuilder:

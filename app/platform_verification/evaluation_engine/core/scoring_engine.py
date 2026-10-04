@@ -1,6 +1,7 @@
 """
 Weighted Scoring Engine and Certification Band Classifier.
 """
+
 from __future__ import annotations
 from typing import Dict, List, Optional
 from app.platform_verification.evaluation_engine.domain.models import (
@@ -66,11 +67,7 @@ class ScoringEngine(IScoringEngine):
                 passed=dim_passed,
             )
 
-        final_score = (
-            round(total_weighted_sum / total_weight_applied, 2)
-            if total_weight_applied > 0
-            else 0.0
-        )
+        final_score = round(total_weighted_sum / total_weight_applied, 2) if total_weight_applied > 0 else 0.0
 
         band = self._classify_band(final_score)
         total_m = len(metric_results)

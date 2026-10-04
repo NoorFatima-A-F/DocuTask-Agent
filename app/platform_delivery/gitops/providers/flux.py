@@ -1,4 +1,5 @@
 """Flux v2 GitOps Provider Adapter."""
+
 from .base import GitOpsProvider, GitOpsSyncResult
 
 
@@ -25,7 +26,12 @@ class FluxProvider(GitOpsProvider):
     def get_sync_status(self, app_name: str) -> GitOpsSyncResult:
         state = self._app_states.get(
             app_name,
-            {"sync_status": "Synced", "health_status": "Healthy", "revision": "main", "message": "Reconciliation active"},
+            {
+                "sync_status": "Synced",
+                "health_status": "Healthy",
+                "revision": "main",
+                "message": "Reconciliation active",
+            },
         )
         return GitOpsSyncResult(
             sync_status=state["sync_status"],

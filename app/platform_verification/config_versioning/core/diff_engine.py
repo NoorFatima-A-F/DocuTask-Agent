@@ -2,9 +2,11 @@
 Configuration Diff & Comparison Engine.
 Identifies value changes, structure alterations, AI model drifts, and dependency mutations.
 """
+
 from typing import Any, Dict, List, Union
 from app.platform_verification.config_versioning.domain.models import ConfigurationDiff, ConfigurationSnapshot
 from app.platform_verification.config_versioning.core.registry import configuration_registry
+
 
 class ConfigurationDiffEngine:
     @staticmethod
@@ -57,10 +59,12 @@ class ConfigurationDiffEngine:
             added_keys=added,
             removed_keys=removed,
             ai_model_drift=ai_drift,
-            human_readable_summary=human_summary
+            human_readable_summary=human_summary,
         )
 
-    def compare(self, source: Union[str, ConfigurationSnapshot], target: Union[str, ConfigurationSnapshot]) -> ConfigurationDiff:
+    def compare(
+        self, source: Union[str, ConfigurationSnapshot], target: Union[str, ConfigurationSnapshot]
+    ) -> ConfigurationDiff:
         s = source if isinstance(source, ConfigurationSnapshot) else configuration_registry.get_snapshot(source)
         t = target if isinstance(target, ConfigurationSnapshot) else configuration_registry.get_snapshot(target)
         if not s:
@@ -68,5 +72,6 @@ class ConfigurationDiffEngine:
         if not t:
             raise ValueError(f"Target snapshot '{target}' not found.")
         return self.compare_snapshots(s, t)
+
 
 configuration_diff_engine = ConfigurationDiffEngine()

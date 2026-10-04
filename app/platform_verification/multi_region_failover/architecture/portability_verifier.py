@@ -2,6 +2,7 @@
 Cloud Deployment Portability Verifier (Part 3G.6B).
 Verifies that DocuTask Agent code is decoupled from proprietary cloud APIs through clean interfaces.
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     CloudPortabilityReport,
 )

@@ -1,6 +1,7 @@
 """
 Enterprise CI/CD Platform Runtime facade.
 """
+
 from __future__ import annotations
 from app.platform_verification.cicd_pipeline.core.artifact_registry import EnterpriseArtifactRegistry
 from app.platform_verification.cicd_pipeline.core.change_detector import EnterpriseChangeDetector

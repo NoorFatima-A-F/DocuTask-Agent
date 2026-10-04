@@ -17,9 +17,7 @@ class PlannerFactory:
     """Factory container wiring intelligent planner subsystem components."""
 
     @staticmethod
-    def create_planner_subsystem(
-        pipeline: Optional[PlanningPipeline] = None
-    ):
+    def create_planner_subsystem(pipeline: Optional[PlanningPipeline] = None):
         pipe = pipeline or PlanningPipeline()
         engine = PlanningEngine(pipeline=pipe)
         planner = IntelligentPlanner(engine=engine)

@@ -73,7 +73,7 @@ def test_strategic_observation_layer():
 def test_meta_reasoning_engine():
     """Verify bottleneck detection, counterfactual synthesis, and reasoning graph creation."""
     engine = MetaReasoningEngine()
-    
+
     graph = engine.analyze_goal_and_synthesize(
         goal_description="Process 1000 High-Complexity Invoices with Zero Error and Under 25s Latency",
         execution_context={"historical_success_rate": 0.992},
@@ -305,10 +305,13 @@ def test_meta_runtime_and_rest_endpoints(client):
     assert "bottlenecks" in res_data
 
     # Test POST /api/v1/meta/reason
-    resp = client.post("/api/v1/meta/reason", json={
-        "goal_description": "Process 500 Enterprise Financial Reports within 20s SLA",
-        "execution_context": {"high_priority": True},
-    })
+    resp = client.post(
+        "/api/v1/meta/reason",
+        json={
+            "goal_description": "Process 500 Enterprise Financial Reports within 20s SLA",
+            "execution_context": {"high_priority": True},
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "REASONING_COMPLETED"
 
@@ -318,10 +321,13 @@ def test_meta_runtime_and_rest_endpoints(client):
     assert isinstance(resp.json(), list)
 
     # Test POST /api/v1/meta/reflect
-    resp = client.post("/api/v1/meta/reflect", json={
-        "subject": "TEST_SUBJECT",
-        "max_depth": 7,
-    })
+    resp = client.post(
+        "/api/v1/meta/reflect",
+        json={
+            "subject": "TEST_SUBJECT",
+            "max_depth": 7,
+        },
+    )
     assert resp.status_code == 200
     refl_res = resp.json()
     assert refl_res["status"] == "REFLECTION_COMPLETED"
@@ -338,16 +344,19 @@ def test_meta_runtime_and_rest_endpoints(client):
     assert len(resp.json()) >= 1
 
     # Test POST /api/v1/meta/experiment
-    resp = client.post("/api/v1/meta/experiment", json={
-        "name": "Speculative Token Cache vs Cold Embedding",
-        "control_strategy": "COLD_EMBEDDING",
-        "treatment_strategy": "SPECULATIVE_TOKEN_CACHE",
-        "historical_sample_size": 60,
-        "control_latency": 320.0,
-        "treatment_latency": 180.0,
-        "control_cost": 0.04,
-        "treatment_cost": 0.025,
-    })
+    resp = client.post(
+        "/api/v1/meta/experiment",
+        json={
+            "name": "Speculative Token Cache vs Cold Embedding",
+            "control_strategy": "COLD_EMBEDDING",
+            "treatment_strategy": "SPECULATIVE_TOKEN_CACHE",
+            "historical_sample_size": 60,
+            "control_latency": 320.0,
+            "treatment_latency": 180.0,
+            "control_cost": 0.04,
+            "treatment_cost": 0.025,
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "EXPERIMENT_CONCLUDED"
 
@@ -362,15 +371,18 @@ def test_meta_runtime_and_rest_endpoints(client):
     assert len(resp.json()) >= 1
 
     # Test POST /api/v1/meta/evolve-policy
-    resp = client.post("/api/v1/meta/evolve-policy", json={
-        "policy_name": "Adaptive Batch Sizing",
-        "category": "PLANNER_CONCURRENCY",
-        "current_rule": "batch_size = 5",
-        "proposed_rule": "batch_size = 20",
-        "rationale": "High throughput mode for bulk PDF uploads",
-        "evidence_backing": ["exp-batch-test"],
-        "predicted_impact": {"latency_reduction_pct": 28.0},
-    })
+    resp = client.post(
+        "/api/v1/meta/evolve-policy",
+        json={
+            "policy_name": "Adaptive Batch Sizing",
+            "category": "PLANNER_CONCURRENCY",
+            "current_rule": "batch_size = 5",
+            "proposed_rule": "batch_size = 20",
+            "rationale": "High throughput mode for bulk PDF uploads",
+            "evidence_backing": ["exp-batch-test"],
+            "predicted_impact": {"latency_reduction_pct": 28.0},
+        },
+    )
     assert resp.status_code == 200
     pol_id = resp.json()["proposal"]["proposal_id"]
 
@@ -380,14 +392,17 @@ def test_meta_runtime_and_rest_endpoints(client):
     assert len(resp.json()) >= 1
 
     # Test POST /api/v1/meta/propose-architecture
-    resp = client.post("/api/v1/meta/propose-architecture", json={
-        "target_subsystem": "MEMORY_CACHE",
-        "optimization_type": "LOCK_FREE_READ",
-        "description": "Lock-free concurrent memory hash table",
-        "latency_saving_ms": 75.0,
-        "memory_delta_mb": -5.0,
-        "confidence_score": 0.99,
-    })
+    resp = client.post(
+        "/api/v1/meta/propose-architecture",
+        json={
+            "target_subsystem": "MEMORY_CACHE",
+            "optimization_type": "LOCK_FREE_READ",
+            "description": "Lock-free concurrent memory hash table",
+            "latency_saving_ms": 75.0,
+            "memory_delta_mb": -5.0,
+            "confidence_score": 0.99,
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "PROPOSED"
 
@@ -404,20 +419,26 @@ def test_meta_runtime_and_rest_endpoints(client):
     assert "governance_audit" in resp.json()
 
     # Test POST /api/v1/meta/approve
-    resp = client.post("/api/v1/meta/approve", json={
-        "target_proposal_id": pol_id,
-        "proposal_type": "POLICY_UPGRADE",
-        "approver_role": "EXECUTIVE_DIRECTOR",
-        "decision": "APPROVED",
-        "rationale": "Approved after comprehensive empirical verification.",
-    })
+    resp = client.post(
+        "/api/v1/meta/approve",
+        json={
+            "target_proposal_id": pol_id,
+            "proposal_type": "POLICY_UPGRADE",
+            "approver_role": "EXECUTIVE_DIRECTOR",
+            "decision": "APPROVED",
+            "rationale": "Approved after comprehensive empirical verification.",
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "APPROVED"
 
     # Test POST /api/v1/meta/rollback
-    resp = client.post("/api/v1/meta/rollback", json={
-        "cycle_id": cycle_id,
-        "reason": "Test endpoint rollback",
-    })
+    resp = client.post(
+        "/api/v1/meta/rollback",
+        json={
+            "cycle_id": cycle_id,
+            "reason": "Test endpoint rollback",
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "ROLLED_BACK"

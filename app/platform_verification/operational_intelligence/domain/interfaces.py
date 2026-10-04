@@ -1,6 +1,7 @@
 """
 Phase 3H.9: Domain Interfaces for Operational Intelligence Verification
 """
+
 from abc import ABC, abstractmethod
 from .models import (
     TelemetryCorrelationReport,

@@ -15,9 +15,7 @@ class PlannerExecutionStream:
     """Manages real-time visual state push to subscribers."""
 
     @classmethod
-    def create_state_payload(
-        cls, dag: ExecutionDAG, active_worker_count: int = 4
-    ) -> Dict[str, Any]:
+    def create_state_payload(cls, dag: ExecutionDAG, active_worker_count: int = 4) -> Dict[str, Any]:
         """Creates complete visual packet for WebSocket transmission."""
         snapshot = VisualGraphSnapshot.generate_snapshot(dag)
         return {

@@ -35,7 +35,6 @@ from ..domain.models import (
 
 
 class AIPerformanceScorer(IAIPerformanceScorer):
-
     def _find_report(self, reports: Dict[str, Any], key_patterns: List[str], expected_type: type) -> Optional[Any]:
         for k, v in reports.items():
             if isinstance(v, expected_type):
@@ -92,12 +91,48 @@ class AIPerformanceScorer(IAIPerformanceScorer):
         c6_score = sum(c6_scores) / len(c6_scores) if c6_scores else 100.0
 
         category_scores: List[CategoryScore] = [
-            CategoryScore(category="Latency Optimization", weight=0.20, score=round(c1_score, 2), weighted_score=round(c1_score * 0.20, 2), description="E2E latency breakdown and Gemini token/inference latency management"),
-            CategoryScore(category="Throughput Capacity", weight=0.20, score=round(c2_score, 2), weighted_score=round(c2_score * 0.20, 2), description="4800 dph sustainable throughput and queue drain speed under burst"),
-            CategoryScore(category="Resource Efficiency", weight=0.20, score=round(c3_score, 2), weighted_score=round(c3_score * 0.20, 2), description="CPU/RAM 72h soak stability and PostgreSQL connection pool optimization"),
-            CategoryScore(category="Scaling Behavior", weight=0.15, score=round(c4_score, 2), weighted_score=round(c4_score * 0.15, 2), description="Worker scaling linearity, architecture modeling, and predictive sizing"),
-            CategoryScore(category="Failure Handling", weight=0.15, score=round(c5_score, 2), weighted_score=round(c5_score * 0.15, 2), description="Controlled overload response under worker, DB, AI, and memory pressure"),
-            CategoryScore(category="Regression Protection", weight=0.10, score=round(c6_score, 2), weighted_score=round(c6_score * 0.10, 2), description="Automated regression quality gate and SRE golden signals observability"),
+            CategoryScore(
+                category="Latency Optimization",
+                weight=0.20,
+                score=round(c1_score, 2),
+                weighted_score=round(c1_score * 0.20, 2),
+                description="E2E latency breakdown and Gemini token/inference latency management",
+            ),
+            CategoryScore(
+                category="Throughput Capacity",
+                weight=0.20,
+                score=round(c2_score, 2),
+                weighted_score=round(c2_score * 0.20, 2),
+                description="4800 dph sustainable throughput and queue drain speed under burst",
+            ),
+            CategoryScore(
+                category="Resource Efficiency",
+                weight=0.20,
+                score=round(c3_score, 2),
+                weighted_score=round(c3_score * 0.20, 2),
+                description="CPU/RAM 72h soak stability and PostgreSQL connection pool optimization",
+            ),
+            CategoryScore(
+                category="Scaling Behavior",
+                weight=0.15,
+                score=round(c4_score, 2),
+                weighted_score=round(c4_score * 0.15, 2),
+                description="Worker scaling linearity, architecture modeling, and predictive sizing",
+            ),
+            CategoryScore(
+                category="Failure Handling",
+                weight=0.15,
+                score=round(c5_score, 2),
+                weighted_score=round(c5_score * 0.15, 2),
+                description="Controlled overload response under worker, DB, AI, and memory pressure",
+            ),
+            CategoryScore(
+                category="Regression Protection",
+                weight=0.10,
+                score=round(c6_score, 2),
+                weighted_score=round(c6_score * 0.10, 2),
+                description="Automated regression quality gate and SRE golden signals observability",
+            ),
         ]
 
         overall_score = round(sum(cat.weighted_score for cat in category_scores), 2)
@@ -122,7 +157,7 @@ class AIPerformanceScorer(IAIPerformanceScorer):
 
         checks: List[CheckResult] = [
             CheckResult(
-                name=f"Quality Dimension: {cat.category} (Weight: {cat.weight*100:.0f}%)",
+                name=f"Quality Dimension: {cat.category} (Weight: {cat.weight * 100:.0f}%)",
                 passed=cat.score >= 80.0,
                 details=f"Dimension score {cat.score:.1f}% contributing {cat.weighted_score:.2f}% to total",
                 metrics={"score": cat.score, "weighted": cat.weighted_score},

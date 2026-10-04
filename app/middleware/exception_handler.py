@@ -26,39 +26,31 @@ def register_exception_handlers(app: FastAPI) -> None:
             sanitize_log_input(request.url.path),
             sanitize_log_input(exc.message),
         )
-        response_body = APIResponse.error_response(
-            message=exc.message,
-            errors=exc.errors
-        ).model_dump()
-        return JSONResponse(
-            status_code=exc.status_code,
-            content=response_body
-        )
+        response_body = APIResponse.error_response(message=exc.message, errors=exc.errors).model_dump()
+        return JSONResponse(status_code=exc.status_code, content=response_body)
 
     @app.exception_handler(RequestValidationError)
     async def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
         """Handles Pydantic request payload/query validation errors."""
         formatted_errors = []
         for error in exc.errors():
-            formatted_errors.append({
-                "field": " -> ".join([str(loc) for loc in error.get("loc", [])]),
-                "message": error.get("msg", ""),
-                "type": error.get("type", "")
-            })
-        
+            formatted_errors.append(
+                {
+                    "field": " -> ".join([str(loc) for loc in error.get("loc", [])]),
+                    "message": error.get("msg", ""),
+                    "type": error.get("type", ""),
+                }
+            )
+
         logger.info(
             "Validation Error [422]: Path=%s | Errors=%s",
             sanitize_log_input(request.url.path),
             sanitize_log_input(formatted_errors),
         )
         response_body = APIResponse.error_response(
-            message="Request validation failed",
-            errors=formatted_errors
+            message="Request validation failed", errors=formatted_errors
         ).model_dump()
-        return JSONResponse(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            content=response_body
-        )
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content=response_body)
 
     @app.exception_handler(HTTPException)
     async def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
@@ -69,14 +61,8 @@ def register_exception_handlers(app: FastAPI) -> None:
             sanitize_log_input(request.url.path),
             sanitize_log_input(exc.detail),
         )
-        response_body = APIResponse.error_response(
-            message=str(exc.detail),
-            errors=None
-        ).model_dump()
-        return JSONResponse(
-            status_code=exc.status_code,
-            content=response_body
-        )
+        response_body = APIResponse.error_response(message=str(exc.detail), errors=None).model_dump()
+        return JSONResponse(status_code=exc.status_code, content=response_body)
 
     @app.exception_handler(Exception)
     async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
@@ -86,13 +72,9 @@ def register_exception_handlers(app: FastAPI) -> None:
             sanitize_log_input(request.url.path),
             type(exc).__name__,
             sanitize_log_input(exc),
-            exc_info=True
+            exc_info=True,
         )
         response_body = APIResponse.error_response(
-            message="An internal server error occurred",
-            errors=None
+            message="An internal server error occurred", errors=None
         ).model_dump()
-        return JSONResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            content=response_body
-        )
+        return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=response_body)

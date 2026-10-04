@@ -26,7 +26,7 @@ from app.middleware.rate_limit import RateLimitMiddleware
 async def lifespan(app: FastAPI):
     """Lifespan context manager for application startup and shutdown events."""
     logger.info(f"Starting {settings.PROJECT_NAME} in [{settings.ENVIRONMENT}] mode...")
-    
+
     # Auto-create tables for development mode if SQLite / local
     if "sqlite" in settings.DATABASE_URL:
         async with engine.begin() as conn:
@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):
     # Start Background Worker Engine
     worker_engine = get_worker_engine()
     await worker_engine.start()
-            
+
     yield
 
     # Shutdown Background Worker Engine
@@ -68,7 +68,7 @@ def create_application() -> FastAPI:
         openapi_url=f"{settings.API_V1_STR}/openapi.json",
         docs_url=f"{settings.API_V1_STR}/docs",
         redoc_url=f"{settings.API_V1_STR}/redoc",
-        lifespan=lifespan
+        lifespan=lifespan,
     )
 
     # Request Context & Security Headers Middleware

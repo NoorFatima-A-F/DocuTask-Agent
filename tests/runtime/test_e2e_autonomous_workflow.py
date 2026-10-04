@@ -21,9 +21,7 @@ async def test_end_to_end_autonomous_invoice_workflow():
         "vendor": "OmniCorp Global Dynamics",
         "amount": "85000.00",
         "tax": "8500.00",
-        "items": [
-            {"description": "AI Cluster Hardware", "qty": 1, "price": "85000.00"}
-        ],
+        "items": [{"description": "AI Cluster Hardware", "qty": 1, "price": "85000.00"}],
     }
 
     pipeline = AutonomousInvoicePipeline()

@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class EvaluationMetrics:
     """Comprehensive performance and cognitive metrics for an agent execution."""
+
     evaluation_id: str = field(default_factory=lambda: f"eval-{uuid.uuid4().hex[:10]}")
     accuracy_score: float = 1.0
     latency_ms: float = 0.0

@@ -86,14 +86,22 @@ class GoldenDatasetRepository:
                 sample_id="gold_inv_02",
                 domain=DocumentDomain.RETAIL_RECEIPT,
                 raw_text="Acme Supplies Ltd. Invoice #INV-9921. Subtotal: $100.00. Tax: $10.00. Total: $110.00.",
-                ground_truth_entities={"vendor": "Acme Supplies Ltd", "invoice_number": "INV-9921", "total_amount": 110.00},
+                ground_truth_entities={
+                    "vendor": "Acme Supplies Ltd",
+                    "invoice_number": "INV-9921",
+                    "total_amount": 110.00,
+                },
                 difficulty="EASY",
             ),
             GoldenDocumentSample(
                 sample_id="gold_leg_03",
                 domain=DocumentDomain.LEGAL_CONTRACT,
                 raw_text="Master Services Agreement between Alpha Tech Inc and Beta Global LLC. Effective Date: 2026-01-01. Liability Cap: $500,000.",
-                ground_truth_entities={"party_a": "Alpha Tech Inc", "party_b": "Beta Global LLC", "liability_cap": 500000.00},
+                ground_truth_entities={
+                    "party_a": "Alpha Tech Inc",
+                    "party_b": "Beta Global LLC",
+                    "liability_cap": 500000.00,
+                },
                 difficulty="MEDIUM",
             ),
             GoldenDocumentSample(
@@ -188,7 +196,9 @@ class GoldenDatasetEvaluationHarness:
             evidence_type=EvidenceType.EVALUATION_RESULT,
             source="app.evidence.evaluators.golden_dataset",
             generated_by="evaluation_harness",
-            verification_status=VerificationStatus.VERIFIED if metrics.f1_score >= 0.95 else VerificationStatus.FAILED_VERIFICATION,
+            verification_status=VerificationStatus.VERIFIED
+            if metrics.f1_score >= 0.95
+            else VerificationStatus.FAILED_VERIFICATION,
             confidence=1.0,
             reproducibility="DETERMINISTIC",
             raw_payload=metrics.to_dict(),

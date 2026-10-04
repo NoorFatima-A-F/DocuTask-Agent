@@ -31,7 +31,7 @@ class GraphSerializer:
     def to_mermaid(cls, dag: ExecutionDAG) -> str:
         """Renders DAG as Mermaid graph definition."""
         lines = ["graph TD"]
-        
+
         # Nodes
         for nid, node in dag.nodes.items():
             status_style = f"[{node.name}<br/>({node.status.value})]"
@@ -40,7 +40,9 @@ class GraphSerializer:
         # Edges
         for edge in dag.edges.values():
             if edge.edge_type.value == "CONDITIONAL_BRANCH":
-                lines.append(f"    {edge.source_node_id} -.->|{edge.condition_expression or 'cond'}| {edge.target_node_id}")
+                lines.append(
+                    f"    {edge.source_node_id} -.->|{edge.condition_expression or 'cond'}| {edge.target_node_id}"
+                )
             else:
                 lines.append(f"    {edge.source_node_id} --> {edge.target_node_id}")
 

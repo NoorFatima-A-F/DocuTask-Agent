@@ -71,7 +71,9 @@ class InfrastructureEventPublisher:
         self._audit_log.append(audit_event)
         return audit_event
 
-    def get_events(self, service_name: Optional[str] = None, event_type: Optional[str] = None) -> List[InfrastructureEvent]:
+    def get_events(
+        self, service_name: Optional[str] = None, event_type: Optional[str] = None
+    ) -> List[InfrastructureEvent]:
         events = list(self._event_log)
         if service_name:
             events = [e for e in events if e.service_name == service_name]

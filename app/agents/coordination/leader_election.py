@@ -25,12 +25,8 @@ class LeaderElectionEngine(ILeaderElectionEngine):
 
         sorted_candidates = sorted(
             operational,
-            key=lambda a: (
-                a.profile.priority_level,
-                a.reputation_score,
-                a.completed_task_count
-            ),
-            reverse=True
+            key=lambda a: (a.profile.priority_level, a.reputation_score, a.completed_task_count),
+            reverse=True,
         )
 
         return sorted_candidates[0]

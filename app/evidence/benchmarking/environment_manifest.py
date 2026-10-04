@@ -195,6 +195,7 @@ class EnvironmentManifestGenerator:
         if platform.system() == "Windows":
             try:
                 import ctypes
+
                 class MEMORYSTATUSEX(ctypes.Structure):
                     _fields_ = [
                         ("dwLength", ctypes.c_ulong),
@@ -207,10 +208,11 @@ class EnvironmentManifestGenerator:
                         ("ullAvailVirtual", ctypes.c_ulonglong),
                         ("sullAvailExtendedVirtual", ctypes.c_ulonglong),
                     ]
+
                 stat = MEMORYSTATUSEX()
                 stat.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
                 ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat))  # type: ignore
-                return round(stat.ullTotalPhys / (1024.0 ** 3), 2)
+                return round(stat.ullTotalPhys / (1024.0**3), 2)
             except Exception:
                 return 16.0
         return 16.0
@@ -230,7 +232,9 @@ class EnvironmentManifestGenerator:
             r_sha = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=2)
             if r_sha.returncode == 0 and r_sha.stdout.strip():
                 sha = r_sha.stdout.strip()
-            r_br = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True, timeout=2)
+            r_br = subprocess.run(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True, timeout=2
+            )
             if r_br.returncode == 0 and r_br.stdout.strip():
                 branch = r_br.stdout.strip()
         except Exception:

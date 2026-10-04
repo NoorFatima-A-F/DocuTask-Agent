@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Backup Architecture Verification Framework (Part 3G.2A).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any, Optional
@@ -47,10 +48,10 @@ class LifecycleStage(str, Enum):
 
 class CertificationTier(str, Enum):
     ENTERPRISE_CERTIFIED = "Enterprise Backup Architecture Certified"  # 95 - 100
-    PRODUCTION_READY = "Production Ready"                              # 90 - 94
-    CONDITIONALLY_READY = "Conditionally Ready"                        # 80 - 89
-    DEVELOPMENT_QUALITY = "Development Quality"                        # 70 - 79
-    NOT_READY = "Not Ready"                                            # < 70
+    PRODUCTION_READY = "Production Ready"  # 90 - 94
+    CONDITIONALLY_READY = "Conditionally Ready"  # 80 - 89
+    DEVELOPMENT_QUALITY = "Development Quality"  # 70 - 79
+    NOT_READY = "Not Ready"  # < 70
 
 
 class VerificationStatus(str, Enum):
@@ -287,16 +288,16 @@ class BackupMetricsReport:
 
 @dataclass
 class BackupReadinessScorecard:
-    asset_discovery_score: float         # Weight 10%
-    classification_score: float          # Weight 10%
-    strategy_quality_score: float        # Weight 20%
-    coverage_score: float                # Weight 20%
-    retention_score: float               # Weight 10%
-    lifecycle_score: float               # Weight 10%
-    metadata_score: float                # Weight 10%
-    observability_score: float           # Weight 5%
-    policy_validation_score: float       # Weight 5%
-    readiness_composite_score: float     # 0 - 100
+    asset_discovery_score: float  # Weight 10%
+    classification_score: float  # Weight 10%
+    strategy_quality_score: float  # Weight 20%
+    coverage_score: float  # Weight 20%
+    retention_score: float  # Weight 10%
+    lifecycle_score: float  # Weight 10%
+    metadata_score: float  # Weight 10%
+    observability_score: float  # Weight 5%
+    policy_validation_score: float  # Weight 5%
+    readiness_composite_score: float  # 0 - 100
     certification_tier: CertificationTier
     passed: bool
     execution_duration_ms: float

@@ -20,7 +20,7 @@ class ReportGenerator:
         cls,
         evidence_records: List[EvidenceRecord],
         regression: RegressionComparison,
-        report_title: str = "Enterprise AI Validation & Metric Report"
+        report_title: str = "Enterprise AI Validation & Metric Report",
     ) -> Dict[str, str]:
         """
         Generates JSON, Markdown, and HTML report files.
@@ -33,7 +33,9 @@ class ReportGenerator:
         html_path = cls.REPORT_DIR / "ai_validation_report.html"
 
         # Calculate aggregated metrics
-        avg_acc = sum(r.metrics.field_accuracy for r in evidence_records) / len(evidence_records) if evidence_records else 1.0
+        avg_acc = (
+            sum(r.metrics.field_accuracy for r in evidence_records) / len(evidence_records) if evidence_records else 1.0
+        )
         avg_f1 = sum(r.metrics.f1_score for r in evidence_records) / len(evidence_records) if evidence_records else 1.0
 
         # 1. JSON Report
@@ -43,7 +45,7 @@ class ReportGenerator:
             "average_field_accuracy": round(avg_acc, 4),
             "average_f1_score": round(avg_f1, 4),
             "regression_comparison": regression.model_dump(),
-            "evidence_records": [r.model_dump() for r in evidence_records]
+            "evidence_records": [r.model_dump() for r in evidence_records],
         }
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(report_dict, f, indent=2, default=str)
@@ -60,20 +62,11 @@ class ReportGenerator:
 
         logger.info(f"Generated evaluation reports: JSON='{json_path}', MD='{md_path}', HTML='{html_path}'")
 
-        return {
-            "json": str(json_path),
-            "markdown": str(md_path),
-            "html": str(html_path)
-        }
+        return {"json": str(json_path), "markdown": str(md_path), "html": str(html_path)}
 
     @classmethod
     def _build_markdown(
-        cls,
-        title: str,
-        records: List[EvidenceRecord],
-        regression: RegressionComparison,
-        avg_acc: float,
-        avg_f1: float
+        cls, title: str, records: List[EvidenceRecord], regression: RegressionComparison, avg_acc: float, avg_f1: float
     ) -> str:
         lines = [
             f"# {title}",
@@ -87,7 +80,7 @@ class ReportGenerator:
             "## Evidence Records Matrix",
             "",
             "| Artifact ID | Model / Provider | Total Fields | Correct | Accuracy | F1 Score | Status | Evidence Path |",
-            "|-------------|------------------|--------------|---------|----------|----------|--------|---------------|"
+            "|-------------|------------------|--------------|---------|----------|----------|--------|---------------|",
         ]
 
         for r in records:
@@ -96,24 +89,21 @@ class ReportGenerator:
                 f"**{r.metrics.field_accuracy * 100:.1f}%** | {r.metrics.f1_score * 100:.1f}% | `{r.pass_fail}` | [`{Path(r.evidence_location).name}`]({r.evidence_location}) |"
             )
 
-        lines.extend([
-            "",
-            "## Regression Baseline Comparison",
-            f"- **Baseline Version**: `{regression.baseline_version}` ({regression.baseline_accuracy * 100:.1f}%)",
-            f"- **Current Version**: `{regression.current_version}` ({regression.current_accuracy * 100:.1f}%)",
-            f"- **Quality Severity**: `{regression.regression_severity}`",
-            ""
-        ])
+        lines.extend(
+            [
+                "",
+                "## Regression Baseline Comparison",
+                f"- **Baseline Version**: `{regression.baseline_version}` ({regression.baseline_accuracy * 100:.1f}%)",
+                f"- **Current Version**: `{regression.current_version}` ({regression.current_accuracy * 100:.1f}%)",
+                f"- **Quality Severity**: `{regression.regression_severity}`",
+                "",
+            ]
+        )
         return "\n".join(lines)
 
     @classmethod
     def _build_html(
-        cls,
-        title: str,
-        records: List[EvidenceRecord],
-        regression: RegressionComparison,
-        avg_acc: float,
-        avg_f1: float
+        cls, title: str, records: List[EvidenceRecord], regression: RegressionComparison, avg_acc: float, avg_f1: float
     ) -> str:
         rows = ""
         for r in records:
@@ -125,7 +115,7 @@ class ReportGenerator:
                 <td>{r.metrics.correct_fields}</td>
                 <td><b>{r.metrics.field_accuracy * 100:.1f}%</b></td>
                 <td>{r.metrics.f1_score * 100:.1f}%</td>
-                <td><span style="color: {'green' if r.pass_fail == 'PASS' else 'red'};">{r.pass_fail}</span></td>
+                <td><span style="color: {"green" if r.pass_fail == "PASS" else "red"};">{r.pass_fail}</span></td>
             </tr>
             """
 

@@ -50,7 +50,9 @@ class CertificationPolicyEngine:
         violations: List[str] = []
 
         # 1. Critical findings check
-        if policy.get("forbidden_critical_findings", True) and (len(critical_findings) > 0 or overall_classification == "CRITICAL_FINDING"):
+        if policy.get("forbidden_critical_findings", True) and (
+            len(critical_findings) > 0 or overall_classification == "CRITICAL_FINDING"
+        ):
             violations.append(f"Forbidden critical findings detected ({len(critical_findings)} findings).")
 
         # 2. Minimum EQI check
@@ -72,7 +74,9 @@ class CertificationPolicyEngine:
         # 5. Unsupported claims check
         max_unsupported = policy.get("max_unsupported_claims", 0)
         if unsupported_claims_count > max_unsupported:
-            violations.append(f"Found {unsupported_claims_count} unsupported claims (policy max allowed: {max_unsupported}).")
+            violations.append(
+                f"Found {unsupported_claims_count} unsupported claims (policy max allowed: {max_unsupported})."
+            )
 
         passed = len(violations) == 0
         return {

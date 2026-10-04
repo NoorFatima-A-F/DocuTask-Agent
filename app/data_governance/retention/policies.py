@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 class RetentionAction(str, enum.Enum):
     """Action to execute when retention period expires."""
+
     ARCHIVE = "ARCHIVE"
     DELETE = "DELETE"
     REQUIRE_APPROVAL = "REQUIRE_APPROVAL"
@@ -16,6 +17,7 @@ class RetentionAction(str, enum.Enum):
 
 class RetentionPolicy(BaseModel):
     """Governed retention schedule for a class of data assets."""
+
     policy_id: str
     name: str
     retention_days: int

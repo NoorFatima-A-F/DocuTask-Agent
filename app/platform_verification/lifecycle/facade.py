@@ -14,6 +14,7 @@ from .certification_flow import CertificationAuthorityWorkflow, VerificationCert
 from .observability import LifecycleTimelineTracker
 from app.shared_kernel.events import get_event_bus
 
+
 @dataclass(frozen=True)
 class EndToEndVerificationJourneyResult:
     specification: VerificationSpecification
@@ -26,6 +27,7 @@ class EndToEndVerificationJourneyResult:
     certificate: Optional[VerificationCertificate]
     final_lifecycle_state: VerificationState
     total_journey_duration_ms: float
+
 
 class VerificationLifecycleEngineFacade:
     def __init__(self, ca_secret: str = "lifecycle_secret_key"):
@@ -42,7 +44,7 @@ class VerificationLifecycleEngineFacade:
         self,
         spec: VerificationSpecification,
         raw_samples: Optional[Dict[str, List[float]]] = None,
-        custom_workload: Optional[Callable[[Dict[str, Any]], Dict[str, Any]]] = None
+        custom_workload: Optional[Callable[[Dict[str, Any]], Dict[str, Any]]] = None,
     ) -> EndToEndVerificationJourneyResult:
         t0 = time.monotonic()
         LifecycleTimelineTracker()
@@ -70,7 +72,7 @@ class VerificationLifecycleEngineFacade:
         sm.transition_to(VerificationState.ANALYZING, reason="Computing metrics")
         samples = raw_samples or {
             "accuracy": [0.96, 0.97, 0.98, 0.95, 0.97],
-            "p99_latency_ms": [42.0, 45.0, 41.0, 43.0, 44.0]
+            "p99_latency_ms": [42.0, 45.0, 41.0, 43.0, 44.0],
         }
         computed_metrics = self.metric_pipeline.process_metrics(samples)
 
@@ -82,13 +84,15 @@ class VerificationLifecycleEngineFacade:
         certificate = None
         if gate_summary.decision in (QualityGateDecision.PASSED, QualityGateDecision.CONDITIONAL):
             sm.transition_to(VerificationState.CERTIFICATION_PENDING, reason="Quality gates approved")
-            cert_level = "ENTERPRISE_CERTIFIED" if gate_summary.decision == QualityGateDecision.PASSED else "CONDITIONALLY_READY"
+            cert_level = (
+                "ENTERPRISE_CERTIFIED" if gate_summary.decision == QualityGateDecision.PASSED else "CONDITIONALLY_READY"
+            )
             certificate = self.ca.issue_certificate(
                 specification_id=spec.specification_id,
                 execution_id=session.execution_id,
                 target_subsystem=spec.target_subsystem,
                 target_version=spec.target_version,
-                level=cert_level
+                level=cert_level,
             )
             sm.transition_to(VerificationState.CERTIFIED, reason="Cryptographic certificate issued")
         else:
@@ -108,5 +112,5 @@ class VerificationLifecycleEngineFacade:
             gate_decision=gate_summary,
             certificate=certificate,
             final_lifecycle_state=sm.current_state,
-            total_journey_duration_ms=total_ms
+            total_journey_duration_ms=total_ms,
         )

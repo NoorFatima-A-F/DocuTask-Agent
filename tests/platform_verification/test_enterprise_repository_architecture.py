@@ -1,10 +1,9 @@
 """
 Unit and Integration Tests for Enterprise Verification Repository Architecture & Shared Kernel.
 """
+
 from app.platform_verification.shared_kernel.result import Success, Failure, Some, Empty
-from app.platform_verification.shared_kernel.identifiers import (
-    CorrelationId, ExecutionId, TenantId, RunId
-)
+from app.platform_verification.shared_kernel.identifiers import CorrelationId, ExecutionId, TenantId, RunId
 from app.platform_verification.shared_kernel.clock import VirtualClock
 from app.platform_verification.shared_kernel.pagination import PaginationQuery
 from app.platform_verification.shared_kernel.filtering import FilterCriteria, SearchQuery, SortOrder
@@ -43,13 +42,13 @@ def test_shared_kernel_result_and_option_patterns():
 def test_shared_kernel_strongly_typed_identifiers():
     corr = CorrelationId.generate()
     assert corr.value.startswith("corr_")
-    
+
     exec_id = ExecutionId.generate()
     assert exec_id.value.startswith("exec_")
-    
+
     run_id = RunId.generate()
     assert run_id.value.startswith("vrun_")
-    
+
     tenant = TenantId.default()
     assert tenant.value == "default-tenant"
 
@@ -70,7 +69,7 @@ def test_shared_kernel_pagination_and_filtering():
         query_text="invoice_ocr",
         filters=[FilterCriteria(field="status", operator="eq", value="PASSED")],
         sort_by="created_at",
-        sort_order=SortOrder.DESC
+        sort_order=SortOrder.DESC,
     )
     assert len(sq.filters) == 1
     assert sq.filters[0].field == "status"
@@ -80,11 +79,11 @@ def test_shared_kernel_security_and_merkle_tree():
     leaves = [
         CanonicalHasher.hash_payload({"batch": 1}),
         CanonicalHasher.hash_payload({"batch": 2}),
-        CanonicalHasher.hash_payload({"batch": 3})
+        CanonicalHasher.hash_payload({"batch": 3}),
     ]
     merkle_root = CanonicalHasher.calculate_merkle_root(leaves)
     assert len(merkle_root) == 64
-    
+
     # Tamper check
     tampered_leaves = list(leaves)
     tampered_leaves[0] = CanonicalHasher.hash_payload({"batch": 999})
@@ -94,10 +93,9 @@ def test_shared_kernel_security_and_merkle_tree():
 
 def test_scoped_configuration_resolution_and_freeze():
     verification_config_manager.set_scoped_config(ConfigScope.ENVIRONMENT, "max_workers", 16)
-    
+
     resolved = verification_config_manager.resolve_effective_config(
-        module_name="ocr_verification",
-        overrides={"custom_timeout": 600}
+        module_name="ocr_verification", overrides={"custom_timeout": 600}
     )
     assert resolved["max_workers"] == 16
     assert resolved["custom_timeout"] == 600

@@ -4,11 +4,14 @@ import json
 from ..domain.configuration_domain import ConfigurationAggregate, ConfigurationSnapshotCreated
 from app.shared_kernel import Result, Ok, get_event_bus
 
+
 class ConfigurationService:
     def __init__(self, repo):
         self.repo = repo
 
-    async def resolve_snapshot(self, config_id: str, tier: str, overrides: Optional[Dict[str, Any]] = None) -> Result[ConfigurationAggregate, str]:
+    async def resolve_snapshot(
+        self, config_id: str, tier: str, overrides: Optional[Dict[str, Any]] = None
+    ) -> Result[ConfigurationAggregate, str]:
         params = {"timeout_seconds": 300, "precision": "float32", "tier": tier}
         if overrides:
             params.update(overrides)

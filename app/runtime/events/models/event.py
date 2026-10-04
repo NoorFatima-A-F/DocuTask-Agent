@@ -46,7 +46,9 @@ class DomainEvent:
         # Auto-compute evidence hash if not provided
         if not self.evidence_hash:
             canonical_payload = json.dumps(self.payload, sort_keys=True, default=str)
-            raw_data = f"{self.event_id}:{self.mission_id}:{self.event_type.value}:{self.timestamp_utc}:{canonical_payload}"
+            raw_data = (
+                f"{self.event_id}:{self.mission_id}:{self.event_type.value}:{self.timestamp_utc}:{canonical_payload}"
+            )
             self.evidence_hash = hashlib.sha256(raw_data.encode("utf-8")).hexdigest()
 
     def to_dict(self) -> Dict[str, Any]:
@@ -66,7 +68,9 @@ class DomainEvent:
             },
             "subsystem": self.subsystem.value if isinstance(self.subsystem, EventSubsystem) else str(self.subsystem),
             "component": self.component,
-            "event_type": self.event_type.value if isinstance(self.event_type, DomainEventType) else str(self.event_type),
+            "event_type": self.event_type.value
+            if isinstance(self.event_type, DomainEventType)
+            else str(self.event_type),
             "version": self.version,
             "payload": self.payload,
             "evidence_hash": self.evidence_hash,
@@ -84,7 +88,7 @@ class DomainEvent:
             role=actor_data.get("role"),
             session_id=actor_data.get("session_id"),
         )
-        
+
         event_type_str = data.get("event_type", "MissionCreated")
         try:
             event_type = DomainEventType(event_type_str)

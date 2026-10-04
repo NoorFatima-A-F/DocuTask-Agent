@@ -51,6 +51,7 @@ class FrozenClock(IClock):
 
     def advance_seconds(self, seconds: float) -> None:
         from datetime import timedelta
+
         self._dt += timedelta(seconds=seconds)
 
     def now_utc(self) -> datetime:

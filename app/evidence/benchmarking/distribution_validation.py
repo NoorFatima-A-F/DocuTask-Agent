@@ -103,7 +103,9 @@ class DistributionValidationEngine:
     ) -> Dict[CandidateDistribution, DistributionEvaluationReport]:
         """Runs validation tests across all candidate distributions."""
         if len(samples) < 5:
-            raise ValueError(f"Sample size {len(samples)} is insufficient for distribution testing (minimum 5 required)")
+            raise ValueError(
+                f"Sample size {len(samples)} is insufficient for distribution testing (minimum 5 required)"
+            )
 
         results: Dict[CandidateDistribution, DistributionEvaluationReport] = {}
 
@@ -126,10 +128,7 @@ class DistributionValidationEngine:
         evals = cls.evaluate_all(samples, evidence_id, alpha)
 
         # Filter candidates that were accepted
-        accepted = [
-            rep for rep in evals.values()
-            if rep.overall_decision == TestDecision.ACCEPT
-        ]
+        accepted = [rep for rep in evals.values() if rep.overall_decision == TestDecision.ACCEPT]
 
         if not accepted:
             # Fallback to candidate with highest confidence
@@ -183,7 +182,7 @@ class DistributionValidationEngine:
         skew = cls._skewness(samples, mean_val, std_val)
         kurt = cls._excess_kurtosis(samples, mean_val, std_val)
         # Omnibus statistic approximation
-        k2_stat = (n / 6.0) * (skew ** 2) + (n / 24.0) * (kurt ** 2)
+        k2_stat = (n / 6.0) * (skew**2) + (n / 24.0) * (kurt**2)
         p_k2 = math.exp(-0.5 * k2_stat)  # Chi-squared 2-df approx
         p_k2 = min(1.0, max(0.0, p_k2))
         dec_k2 = TestDecision.ACCEPT if p_k2 >= alpha else TestDecision.REJECT
@@ -382,10 +381,7 @@ class DistributionValidationEngine:
         if threshold_val <= 0:
             threshold_val = 1e-9
 
-        log_diffs = [
-            math.log(sorted_s[n - i]) - math.log(threshold_val)
-            for i in range(1, k + 1)
-        ]
+        log_diffs = [math.log(sorted_s[n - i]) - math.log(threshold_val) for i in range(1, k + 1)]
         gamma_hat = sum(log_diffs) / k
         tail_index_alpha = 1.0 / gamma_hat if gamma_hat > 0 else 999.0
 
@@ -491,7 +487,7 @@ class DistributionValidationEngine:
         if n < 3 or std <= 0:
             return 0.0
         m3 = sum((x - mean) ** 3 for x in samples) / n
-        return m3 / (std ** 3)
+        return m3 / (std**3)
 
     @classmethod
     def _excess_kurtosis(cls, samples: List[float], mean: float, std: float) -> float:
@@ -499,7 +495,7 @@ class DistributionValidationEngine:
         if n < 4 or std <= 0:
             return 0.0
         m4 = sum((x - mean) ** 4 for x in samples) / n
-        return (m4 / (std ** 4)) - 3.0
+        return (m4 / (std**4)) - 3.0
 
     @classmethod
     def _normal_cdf(cls, x: float, mean: float, std: float) -> float:
@@ -535,7 +531,7 @@ class DistributionValidationEngine:
         # Kolmogorov series: P(K > lambda) = 2 * sum_{j=1}^inf (-1)^{j-1} exp(-2 j^2 lambda^2)
         p = 0.0
         for j in range(1, 10):
-            term = ((-1) ** (j - 1)) * math.exp(-2.0 * (j ** 2) * (lambda_val ** 2))
+            term = ((-1) ** (j - 1)) * math.exp(-2.0 * (j**2) * (lambda_val**2))
             p += term
         return max(0.0, min(1.0, 2.0 * p))
 
@@ -557,7 +553,7 @@ class DistributionValidationEngine:
 
         ad_stat = -float(n) - (s / n)
         # Small sample size correction
-        ad_stat_corr = ad_stat * (1.0 + 0.75 / n + 2.25 / (n ** 2))
+        ad_stat_corr = ad_stat * (1.0 + 0.75 / n + 2.25 / (n**2))
         return max(0.0, ad_stat_corr)
 
     @classmethod
@@ -595,8 +591,7 @@ class DistributionValidationEngine:
 
         # 1-Component Gaussian BIC: k=2 (mean, var), logL
         logl_1 = sum(
-            -0.5 * math.log(2.0 * math.pi * max(1e-9, var_all))
-            - ((x - mean_all) ** 2) / (2.0 * max(1e-9, var_all))
+            -0.5 * math.log(2.0 * math.pi * max(1e-9, var_all)) - ((x - mean_all) ** 2) / (2.0 * max(1e-9, var_all))
             for x in samples
         )
         bic_1 = 2 * math.log(n) - 2 * logl_1
@@ -615,8 +610,16 @@ class DistributionValidationEngine:
 
         logl_2 = 0.0
         for x in samples:
-            p1 = w1 * (1.0 / math.sqrt(2.0 * math.pi * max(1e-9, v1))) * math.exp(-((x - m1) ** 2) / (2.0 * max(1e-9, v1)))
-            p2 = w2 * (1.0 / math.sqrt(2.0 * math.pi * max(1e-9, v2))) * math.exp(-((x - m2) ** 2) / (2.0 * max(1e-9, v2)))
+            p1 = (
+                w1
+                * (1.0 / math.sqrt(2.0 * math.pi * max(1e-9, v1)))
+                * math.exp(-((x - m1) ** 2) / (2.0 * max(1e-9, v1)))
+            )
+            p2 = (
+                w2
+                * (1.0 / math.sqrt(2.0 * math.pi * max(1e-9, v2)))
+                * math.exp(-((x - m2) ** 2) / (2.0 * max(1e-9, v2)))
+            )
             p_total = max(1e-15, p1 + p2)
             logl_2 += math.log(p_total)
 

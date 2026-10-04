@@ -1,6 +1,7 @@
 from typing import Dict, List, Optional
 from ..domain.plugins_domain import PluginRegistryAggregate
 
+
 class InMemoryPluginRepository:
     def __init__(self):
         self._store: Dict[str, PluginRegistryAggregate] = {}

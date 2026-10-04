@@ -1,6 +1,7 @@
 """
 Disaster Recovery Security and Encryption Validator.
 """
+
 from app.platform_verification.disaster_recovery_verification.domain.models import (
     DRSecurityValidationReport,
 )

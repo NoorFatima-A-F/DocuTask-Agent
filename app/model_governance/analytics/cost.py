@@ -14,6 +14,7 @@ from app.model_governance.analytics.usage import UsageEvent
 
 class CostAttribution(BaseModel):
     """Cost breakdown for a specific execution or aggregated scope."""
+
     organization_id: str
     model_id: str
     input_cost: float = 0.0

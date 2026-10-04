@@ -6,6 +6,7 @@ Test 2: Event Loop Freeze (inject blocking operation -> heartbeat failure detect
 Test 3: Memory Exhaustion (inject memory pressure -> health failure detected)
 Test 4: Worker Deadlock (freeze worker -> worker unhealthy detected)
 """
+
 from app.platform_verification.liveness.domain.models import FailureSimulationReport
 
 
@@ -57,7 +58,7 @@ class LivenessFailureInjector:
         mem_exh_handled = simulations[2]["passed"]
         worker_dl_handled = simulations[3]["passed"]
 
-        all_passed = (passed_count == total)
+        all_passed = passed_count == total
 
         return FailureSimulationReport(
             total_simulations=total,

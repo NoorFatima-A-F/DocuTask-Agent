@@ -1,6 +1,7 @@
 """
 Interfaces and Abstract Protocols for Disaster Recovery Governance Framework (Part 3G.4).
 """
+
 from abc import ABC, abstractmethod
 from app.platform_verification.resilience_governance.domain.models import (
     OwnershipValidationReport,

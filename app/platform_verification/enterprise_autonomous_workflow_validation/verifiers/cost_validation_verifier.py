@@ -25,11 +25,30 @@ class CostValidationVerifier(ICostValidationVerifier):
 
     def verify(self) -> CostValidationReport:
         breakdown = [
-            WorkflowCostBreakdown(cost_category="LLMInferenceTokens", cost_per_unit_usd=0.000002, total_cost_usd=0.012, pct_of_total=48.0),
-            WorkflowCostBreakdown(cost_category="MultimodalOCRCompute", cost_per_unit_usd=0.005, total_cost_usd=0.005, pct_of_total=20.0),
-            WorkflowCostBreakdown(cost_category="VectorEmbeddingAndRAG", cost_per_unit_usd=0.000001, total_cost_usd=0.003, pct_of_total=12.0),
-            WorkflowCostBreakdown(cost_category="PostgreSQLAndRedisStorage", cost_per_unit_usd=0.002, total_cost_usd=0.002, pct_of_total=8.0),
-            WorkflowCostBreakdown(cost_category="NetworkAndGatewayEgress", cost_per_unit_usd=0.003, total_cost_usd=0.003, pct_of_total=12.0),
+            WorkflowCostBreakdown(
+                cost_category="LLMInferenceTokens", cost_per_unit_usd=0.000002, total_cost_usd=0.012, pct_of_total=48.0
+            ),
+            WorkflowCostBreakdown(
+                cost_category="MultimodalOCRCompute", cost_per_unit_usd=0.005, total_cost_usd=0.005, pct_of_total=20.0
+            ),
+            WorkflowCostBreakdown(
+                cost_category="VectorEmbeddingAndRAG",
+                cost_per_unit_usd=0.000001,
+                total_cost_usd=0.003,
+                pct_of_total=12.0,
+            ),
+            WorkflowCostBreakdown(
+                cost_category="PostgreSQLAndRedisStorage",
+                cost_per_unit_usd=0.002,
+                total_cost_usd=0.002,
+                pct_of_total=8.0,
+            ),
+            WorkflowCostBreakdown(
+                cost_category="NetworkAndGatewayEgress",
+                cost_per_unit_usd=0.003,
+                total_cost_usd=0.003,
+                pct_of_total=12.0,
+            ),
         ]
 
         total_cost = sum(b.total_cost_usd for b in breakdown)

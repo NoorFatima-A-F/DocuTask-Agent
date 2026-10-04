@@ -1,6 +1,7 @@
 """
 Storage Inventory & Backup Coverage Discovery Engine for Enterprise Document Storage (Part 3G.2C).
 """
+
 import hashlib
 from typing import Dict, List, Optional
 
@@ -210,9 +211,7 @@ class StorageInventoryEngine(IStorageInventoryEngine):
             passed=total_objects > 0,
         )
 
-    def verify_backup_coverage(
-        self, inventory: StorageInventoryReport
-    ) -> StorageBackupCoverageReport:
+    def verify_backup_coverage(self, inventory: StorageInventoryReport) -> StorageBackupCoverageReport:
         """
         Verifies backup coverage across all storage items and categories.
         """

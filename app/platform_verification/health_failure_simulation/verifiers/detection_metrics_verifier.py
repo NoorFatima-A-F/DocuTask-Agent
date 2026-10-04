@@ -1,6 +1,7 @@
 """
 3H.11.8: Failure Detection Metrics Verifier
 """
+
 from ..domain.models import FailureDetectionMetricsReport
 from ..domain.interfaces import IFailureDetectionMetricsVerifier
 
@@ -22,5 +23,5 @@ class FailureDetectionMetricsVerifier(IFailureDetectionMetricsVerifier):
             false_negatives_count=0,
             sla_mttd_threshold_ms=3000.0,
             sla_mttr_threshold_ms=10000.0,
-            metrics_compliant=True
+            metrics_compliant=True,
         )

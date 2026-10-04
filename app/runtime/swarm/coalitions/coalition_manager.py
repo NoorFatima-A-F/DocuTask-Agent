@@ -52,7 +52,7 @@ class TeamOptimizer:
                     break
 
         if not selected and all_agents:
-            selected = all_agents[:min(3, len(all_agents))]
+            selected = all_agents[: min(3, len(all_agents))]
 
         return selected
 

@@ -31,8 +31,8 @@ Every database table, object storage path, event envelope, and log record in Doc
 ```python
 class TenantScopedResource:
     organization_id: str  # e.g., "org-acme-corp"
-    workspace_id: str     # e.g., "wrk-finance-accounts-payable"
-    environment_id: str   # e.g., "production" | "staging" | "dev"
+    workspace_id: str  # e.g., "wrk-finance-accounts-payable"
+    environment_id: str  # e.g., "production" | "staging" | "dev"
 ```
 
 Any query, mutation, or API request missing these three parameters is rejected at the API Gateway before reaching business logic.

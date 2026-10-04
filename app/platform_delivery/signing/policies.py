@@ -1,4 +1,5 @@
 """Software Supply Chain Signature Policy Engine (Req 23, 70, 71)."""
+
 from dataclasses import dataclass, field
 from typing import List, Optional, Set
 from .sigstore_adapter import SigstoreCosignAdapter
@@ -7,6 +8,7 @@ from .sigstore_adapter import SigstoreCosignAdapter
 @dataclass
 class SupplyChainVerificationReport:
     """Detailed audit report of supply chain verification gates."""
+
     artifact_digest: str
     digest_valid: bool
     signature_valid: bool
@@ -55,7 +57,9 @@ class SupplyChainPolicyEnforcer:
         # 3. Signer trust
         signer_trusted = sig_bundle.signer_identity in self.trusted_identities if sig_bundle else False
         if not signer_trusted:
-            denial_reasons.append(f"Signer identity '{sig_bundle.signer_identity if sig_bundle else 'none'}' is not trusted")
+            denial_reasons.append(
+                f"Signer identity '{sig_bundle.signer_identity if sig_bundle else 'none'}' is not trusted"
+            )
 
         # 4. SBOM presence
         if not has_sbom:

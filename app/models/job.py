@@ -18,10 +18,7 @@ class DocumentJob(Base, UUIDMixin):
     __tablename__ = "jobs"
 
     document_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True),
-        ForeignKey("documents.id", ondelete="CASCADE"),
-        index=True,
-        nullable=False
+        Uuid(as_uuid=True), ForeignKey("documents.id", ondelete="CASCADE"), index=True, nullable=False
     )
     status: Mapped[str] = mapped_column(String(50), index=True, nullable=False, default="CREATED")
     priority: Mapped[str] = mapped_column(String(20), index=True, nullable=False, default="MEDIUM")  # HIGH, MEDIUM, LOW
@@ -31,25 +28,22 @@ class DocumentJob(Base, UUIDMixin):
     idempotency_key: Mapped[str] = mapped_column(String(128), unique=True, index=True, nullable=False)
     checkpoint_page: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     total_pages: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
-    
+
     started_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     completed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     lease_expires_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), index=True, nullable=True)
-    
+
     error_code: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
     error_message: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    
+
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        index=True,
-        nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True, nullable=False
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc),
-        nullable=False
+        nullable=False,
     )
 
     # Relationships
@@ -62,10 +56,7 @@ class JobEvent(Base, UUIDMixin):
     __tablename__ = "job_events"
 
     job_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True),
-        ForeignKey("jobs.id", ondelete="CASCADE"),
-        index=True,
-        nullable=False
+        Uuid(as_uuid=True), ForeignKey("jobs.id", ondelete="CASCADE"), index=True, nullable=False
     )
     from_state: Mapped[str] = mapped_column(String(50), nullable=False)
     to_state: Mapped[str] = mapped_column(String(50), nullable=False)
@@ -73,10 +64,7 @@ class JobEvent(Base, UUIDMixin):
     event_type: Mapped[str] = mapped_column(String(50), nullable=False)
     payload: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     timestamp: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        index=True,
-        nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True, nullable=False
     )
 
     # Relationship

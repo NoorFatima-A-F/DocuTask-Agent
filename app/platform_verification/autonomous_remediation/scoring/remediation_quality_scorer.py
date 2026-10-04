@@ -45,7 +45,9 @@ class AutonomousRemediationScorer(IAutonomousRemediationScorer):
     ) -> AutonomousRemediationScorecard:
         # 1. Recovery Accuracy (Weight: 25%)
         # Based on policy coverage, scenario success rate, and automation success rate
-        scen_pass_rate = (scen_rep.passed_scenarios / scen_rep.total_scenarios * 100.0) if scen_rep.total_scenarios > 0 else 100.0
+        scen_pass_rate = (
+            (scen_rep.passed_scenarios / scen_rep.total_scenarios * 100.0) if scen_rep.total_scenarios > 0 else 100.0
+        )
         acc_score = (scen_pass_rate * 0.6) + (metrics_rep.automation_success_rate_pct * 0.4)
         acc_score = min(100.0, max(0.0, acc_score))
 

@@ -186,9 +186,19 @@ class ConnectorEngine:
     def list_connectors(self, category: Optional[str] = None, status: Optional[str] = None) -> List[ConnectorConfig]:
         items = list(self._connectors.values())
         if category:
-            items = [c for c in items if (c.category.value if isinstance(c.category, ConnectorCategory) else str(c.category)).lower() == category.lower()]
+            items = [
+                c
+                for c in items
+                if (c.category.value if isinstance(c.category, ConnectorCategory) else str(c.category)).lower()
+                == category.lower()
+            ]
         if status:
-            items = [c for c in items if (c.status.value if isinstance(c.status, ConnectorStatus) else str(c.status)).lower() == status.lower()]
+            items = [
+                c
+                for c in items
+                if (c.status.value if isinstance(c.status, ConnectorStatus) else str(c.status)).lower()
+                == status.lower()
+            ]
         return items
 
     def test_connection(self, connector_id: str) -> Dict[str, Any]:

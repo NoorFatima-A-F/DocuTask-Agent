@@ -25,10 +25,34 @@ class HumanExperienceEvaluator(IHumanExperienceEvaluator):
 
     def evaluate(self) -> HumanExperienceReport:
         comparisons = [
-            ApproachComparison(approach_name="TraditionalRulesAndScripts", accuracy_pct=68.5, automation_capability="Low (Brittle templates)", reliability="Fragile on layout changes", business_roi="1.2x (High maintenance)"),
-            ApproachComparison(approach_name="BasicLLMChatbot", accuracy_pct=74.0, automation_capability="Low (Chat-only, no tools)", reliability="Prone to hallucinations", business_roi="1.5x (No workflow integration)"),
-            ApproachComparison(approach_name="StandardRAGPipeline", accuracy_pct=84.5, automation_capability="Medium (Q&A over docs)", reliability="Lacks agent planning/retry", business_roi="2.4x (Informational only)"),
-            ApproachComparison(approach_name="DocuTaskAutonomousAgentPlatform", accuracy_pct=99.2, automation_capability="High (Full Autonomous Execution)", reliability="Self-healing & SRE resilient", business_roi="4.2x ($2.28M annual value)"),
+            ApproachComparison(
+                approach_name="TraditionalRulesAndScripts",
+                accuracy_pct=68.5,
+                automation_capability="Low (Brittle templates)",
+                reliability="Fragile on layout changes",
+                business_roi="1.2x (High maintenance)",
+            ),
+            ApproachComparison(
+                approach_name="BasicLLMChatbot",
+                accuracy_pct=74.0,
+                automation_capability="Low (Chat-only, no tools)",
+                reliability="Prone to hallucinations",
+                business_roi="1.5x (No workflow integration)",
+            ),
+            ApproachComparison(
+                approach_name="StandardRAGPipeline",
+                accuracy_pct=84.5,
+                automation_capability="Medium (Q&A over docs)",
+                reliability="Lacks agent planning/retry",
+                business_roi="2.4x (Informational only)",
+            ),
+            ApproachComparison(
+                approach_name="DocuTaskAutonomousAgentPlatform",
+                accuracy_pct=99.2,
+                automation_capability="High (Full Autonomous Execution)",
+                reliability="Self-healing & SRE resilient",
+                business_roi="4.2x ($2.28M annual value)",
+            ),
         ]
 
         checks = [

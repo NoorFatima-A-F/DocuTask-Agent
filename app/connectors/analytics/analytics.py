@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 class FleetAnalyticsReport(BaseModel):
     """Platform-wide analytical snapshot of all connector activity."""
+
     total_calls: int = 0
     total_successful_calls: int = 0
     total_failed_calls: int = 0
@@ -68,7 +69,11 @@ class ConnectorAnalytics:
 
         # Hotspots (connectors with failed calls)
         hotspots = sorted(
-            [{"connector_id": s.connector_id, "failed_calls": s.failed_calls, "errors": s.error_counts} for s in summaries.values() if s.failed_calls > 0],
+            [
+                {"connector_id": s.connector_id, "failed_calls": s.failed_calls, "errors": s.error_counts}
+                for s in summaries.values()
+                if s.failed_calls > 0
+            ],
             key=lambda x: x["failed_calls"],
             reverse=True,
         )

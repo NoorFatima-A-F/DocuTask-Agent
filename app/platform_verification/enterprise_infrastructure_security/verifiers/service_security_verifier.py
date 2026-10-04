@@ -29,10 +29,34 @@ class ServiceToServiceSecurityVerifier(IServiceToServiceSecurityVerifier):
 
     def verify(self) -> ServiceSecurityReport:
         channels = [
-            ServiceAuthChannel(source_service="FastAPI Gateway", target_service="Redis Queue", auth_mechanism="Redis AUTH Token + TLS", mtls_enabled=True, unauthenticated_rejected=True),
-            ServiceAuthChannel(source_service="FastAPI Gateway", target_service="PostgreSQL DB", auth_mechanism="SCRAM-SHA-256 + SSL verify-full", mtls_enabled=True, unauthenticated_rejected=True),
-            ServiceAuthChannel(source_service="Celery Worker", target_service="Redis Queue", auth_mechanism="Mutual Worker Certificate + Token", mtls_enabled=True, unauthenticated_rejected=True),
-            ServiceAuthChannel(source_service="Celery Worker", target_service="Object Storage", auth_mechanism="IAM SigV4 / Service Account OAuth", mtls_enabled=True, unauthenticated_rejected=True),
+            ServiceAuthChannel(
+                source_service="FastAPI Gateway",
+                target_service="Redis Queue",
+                auth_mechanism="Redis AUTH Token + TLS",
+                mtls_enabled=True,
+                unauthenticated_rejected=True,
+            ),
+            ServiceAuthChannel(
+                source_service="FastAPI Gateway",
+                target_service="PostgreSQL DB",
+                auth_mechanism="SCRAM-SHA-256 + SSL verify-full",
+                mtls_enabled=True,
+                unauthenticated_rejected=True,
+            ),
+            ServiceAuthChannel(
+                source_service="Celery Worker",
+                target_service="Redis Queue",
+                auth_mechanism="Mutual Worker Certificate + Token",
+                mtls_enabled=True,
+                unauthenticated_rejected=True,
+            ),
+            ServiceAuthChannel(
+                source_service="Celery Worker",
+                target_service="Object Storage",
+                auth_mechanism="IAM SigV4 / Service Account OAuth",
+                mtls_enabled=True,
+                unauthenticated_rejected=True,
+            ),
         ]
 
         checks = [

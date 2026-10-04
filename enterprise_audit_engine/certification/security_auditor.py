@@ -27,22 +27,28 @@ class EngineSecurityValidator:
                             content = fp.read()
                             # Check for pickle (unsafe deserialization)
                             if "import pickle" in content or "pickle.load" in content:
-                                unsafe_patterns.append({
-                                    "file": rel_path,
-                                    "vulnerability": "UNSAFE_DESERIALIZATION_PICKLE",
-                                })
+                                unsafe_patterns.append(
+                                    {
+                                        "file": rel_path,
+                                        "vulnerability": "UNSAFE_DESERIALIZATION_PICKLE",
+                                    }
+                                )
                             # Check for shell=True in subprocess
                             if "shell=True" in content:
-                                unsafe_patterns.append({
-                                    "file": rel_path,
-                                    "vulnerability": "UNSAFE_SHELL_EXECUTION",
-                                })
+                                unsafe_patterns.append(
+                                    {
+                                        "file": rel_path,
+                                        "vulnerability": "UNSAFE_SHELL_EXECUTION",
+                                    }
+                                )
                             # Check for eval()
                             if "eval(" in content and "json" not in content:
-                                unsafe_patterns.append({
-                                    "file": rel_path,
-                                    "vulnerability": "UNSAFE_EVAL_USAGE",
-                                })
+                                unsafe_patterns.append(
+                                    {
+                                        "file": rel_path,
+                                        "vulnerability": "UNSAFE_EVAL_USAGE",
+                                    }
+                                )
                     except Exception:
                         pass
 

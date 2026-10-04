@@ -22,8 +22,10 @@ class DAGDiffEngine:
         added_nodes = [nid for nid in upd_nodes if nid not in orig_nodes]
         removed_nodes = [nid for nid in orig_nodes if nid not in upd_nodes]
         mutated_nodes = [
-            nid for nid in orig_nodes
-            if nid in upd_nodes and (
+            nid
+            for nid in orig_nodes
+            if nid in upd_nodes
+            and (
                 orig_nodes[nid].state != upd_nodes[nid].state
                 or orig_nodes[nid].assigned_worker != upd_nodes[nid].assigned_worker
             )

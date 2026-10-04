@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Plugins.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.plugins.domain.models import PluginsEntity
 from app.platform_verification.modules.plugins.domain.interfaces import PluginsRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManagePluginsUseCase:
     def __init__(self, repository: PluginsRepositoryInterface):

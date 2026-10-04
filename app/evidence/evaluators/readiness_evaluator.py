@@ -62,34 +62,118 @@ class ProductionReadinessEvaluator:
         """Builds the 10-category production readiness matrix."""
         return [
             # 1. Testing
-            ReadinessCriterion("TST-01", "Testing", "Unit & Integration test suite passes at 100% green", 10.0, "UNIT_TEST"),
-            ReadinessCriterion("TST-02", "Testing", "Regression tests for edge cases and tool failures pass", 5.0, "INTEGRATION_TEST"),
+            ReadinessCriterion(
+                "TST-01", "Testing", "Unit & Integration test suite passes at 100% green", 10.0, "UNIT_TEST"
+            ),
+            ReadinessCriterion(
+                "TST-02", "Testing", "Regression tests for edge cases and tool failures pass", 5.0, "INTEGRATION_TEST"
+            ),
             # 2. Reliability
-            ReadinessCriterion("REL-01", "Reliability", "Continuous 12-state autonomous decision loop verified", 10.0, "RUNTIME_TRACE"),
-            ReadinessCriterion("REL-02", "Reliability", "Multi-critic consensus reflection prevents bad extractions", 8.0, "BENCHMARK"),
-            ReadinessCriterion("REL-03", "Reliability", "Dead-letter queue isolates poisoned event messages", 7.0, "CHAOS_TEST"),
+            ReadinessCriterion(
+                "REL-01", "Reliability", "Continuous 12-state autonomous decision loop verified", 10.0, "RUNTIME_TRACE"
+            ),
+            ReadinessCriterion(
+                "REL-02", "Reliability", "Multi-critic consensus reflection prevents bad extractions", 8.0, "BENCHMARK"
+            ),
+            ReadinessCriterion(
+                "REL-03", "Reliability", "Dead-letter queue isolates poisoned event messages", 7.0, "CHAOS_TEST"
+            ),
             # 3. Recovery
-            ReadinessCriterion("REC-01", "Recovery", "SHA-256 verified workflow checkpoints restore interrupted state", 10.0, "RECOVERY_TEST"),
-            ReadinessCriterion("REC-02", "Recovery", "Adaptive replanning engine mutates DAG on tool failure without data loss", 8.0, "RECOVERY_TEST"),
+            ReadinessCriterion(
+                "REC-01",
+                "Recovery",
+                "SHA-256 verified workflow checkpoints restore interrupted state",
+                10.0,
+                "RECOVERY_TEST",
+            ),
+            ReadinessCriterion(
+                "REC-02",
+                "Recovery",
+                "Adaptive replanning engine mutates DAG on tool failure without data loss",
+                8.0,
+                "RECOVERY_TEST",
+            ),
             # 4. Security & Compliance
-            ReadinessCriterion("SEC-01", "Security", "Zero-trust PII tokenization sanitizes SSN/PAN before model dispatch", 10.0, "SECURITY_SCAN"),
-            ReadinessCriterion("SEC-02", "Security", "Append-only SHA-256 event store provides immutable audit trail", 8.0, "SECURITY_SCAN"),
-            ReadinessCriterion("CMP-01", "Compliance", "Statutory HIPAA/GDPR/PCI-DSS policy gate engine enforced", 8.0, "SECURITY_SCAN"),
+            ReadinessCriterion(
+                "SEC-01",
+                "Security",
+                "Zero-trust PII tokenization sanitizes SSN/PAN before model dispatch",
+                10.0,
+                "SECURITY_SCAN",
+            ),
+            ReadinessCriterion(
+                "SEC-02",
+                "Security",
+                "Append-only SHA-256 event store provides immutable audit trail",
+                8.0,
+                "SECURITY_SCAN",
+            ),
+            ReadinessCriterion(
+                "CMP-01", "Compliance", "Statutory HIPAA/GDPR/PCI-DSS policy gate engine enforced", 8.0, "SECURITY_SCAN"
+            ),
             # 5. Scalability & Distributed
-            ReadinessCriterion("SCA-01", "Scalability", "Distributed lock manager prevents split-brain and race conditions", 10.0, "STRESS_TEST"),
-            ReadinessCriterion("SCA-02", "Scalability", "Optimistic concurrency state protects multi-worker workflow updates", 8.0, "STRESS_TEST"),
+            ReadinessCriterion(
+                "SCA-01",
+                "Scalability",
+                "Distributed lock manager prevents split-brain and race conditions",
+                10.0,
+                "STRESS_TEST",
+            ),
+            ReadinessCriterion(
+                "SCA-02",
+                "Scalability",
+                "Optimistic concurrency state protects multi-worker workflow updates",
+                8.0,
+                "STRESS_TEST",
+            ),
             # 6. Observability
-            ReadinessCriterion("OBS-01", "Observability", "OpenTelemetry bridge propagates W3C traceparent headers", 7.0, "TELEMETRY"),
-            ReadinessCriterion("OBS-02", "Observability", "SLO availability and error budget tracking implemented", 7.0, "TELEMETRY"),
+            ReadinessCriterion(
+                "OBS-01", "Observability", "OpenTelemetry bridge propagates W3C traceparent headers", 7.0, "TELEMETRY"
+            ),
+            ReadinessCriterion(
+                "OBS-02", "Observability", "SLO availability and error budget tracking implemented", 7.0, "TELEMETRY"
+            ),
             # 7. Memory & Learning
-            ReadinessCriterion("MEM-01", "Memory", "Background consolidation mines patterns and promotes semantic facts", 8.0, "BENCHMARK"),
-            ReadinessCriterion("MEM-02", "Memory", "Temporal decay and contradiction detection resolve stale facts", 6.0, "BENCHMARK"),
+            ReadinessCriterion(
+                "MEM-01",
+                "Memory",
+                "Background consolidation mines patterns and promotes semantic facts",
+                8.0,
+                "BENCHMARK",
+            ),
+            ReadinessCriterion(
+                "MEM-02", "Memory", "Temporal decay and contradiction detection resolve stale facts", 6.0, "BENCHMARK"
+            ),
             # 8. Human-In-The-Loop
-            ReadinessCriterion("HITL-01", "Human Collaboration", "SLA ticket queue pauses execution for operator review", 8.0, "INTEGRATION_TEST"),
-            ReadinessCriterion("HITL-02", "Human Collaboration", "Operator feedback imprints ground truth into semantic memory", 7.0, "INTEGRATION_TEST"),
+            ReadinessCriterion(
+                "HITL-01",
+                "Human Collaboration",
+                "SLA ticket queue pauses execution for operator review",
+                8.0,
+                "INTEGRATION_TEST",
+            ),
+            ReadinessCriterion(
+                "HITL-02",
+                "Human Collaboration",
+                "Operator feedback imprints ground truth into semantic memory",
+                7.0,
+                "INTEGRATION_TEST",
+            ),
             # 9. Performance & Cost
-            ReadinessCriterion("PRF-01", "Performance", "End-to-end cognitive decision cycle p95 latency under 1000ms", 8.0, "PERFORMANCE_TEST"),
-            ReadinessCriterion("CST-01", "Cost Intelligence", "Token consumption and cost tracking recorded per execution", 6.0, "TELEMETRY"),
+            ReadinessCriterion(
+                "PRF-01",
+                "Performance",
+                "End-to-end cognitive decision cycle p95 latency under 1000ms",
+                8.0,
+                "PERFORMANCE_TEST",
+            ),
+            ReadinessCriterion(
+                "CST-01",
+                "Cost Intelligence",
+                "Token consumption and cost tracking recorded per execution",
+                6.0,
+                "TELEMETRY",
+            ),
         ]
 
     def link_evidence(self, criterion_id: str, evidence_id: str) -> bool:
@@ -182,7 +266,7 @@ class ProductionReadinessEvaluator:
 
         md_lines = [
             "# Production Readiness Assessment Report",
-            f"**Overall Status**: `{data['overall_status']}` | **Passed**: {data['passed_criteria']}/{data['total_criteria']} criteria ({data['readiness_ratio']*100:.1f}%)",
+            f"**Overall Status**: `{data['overall_status']}` | **Passed**: {data['passed_criteria']}/{data['total_criteria']} criteria ({data['readiness_ratio'] * 100:.1f}%)",
             "",
             "## Category Breakdown",
             "| Category | Status | Criteria Passed | Weight Score | Missing Items |",
@@ -195,12 +279,14 @@ class ProductionReadinessEvaluator:
                 f"| **{cat}** | `{status_badge}` | {details['passed_criteria']} | {details['weight_passed']} | {missing_str} |"
             )
 
-        md_lines.extend([
-            "",
-            "## Measurable Evidence Checklist",
-            "| ID | Category | Requirement | Weight | Status | Evidence ID | Evidence Summary |",
-            "| :--- | :--- | :--- | :---: | :---: | :--- | :--- |",
-        ])
+        md_lines.extend(
+            [
+                "",
+                "## Measurable Evidence Checklist",
+                "| ID | Category | Requirement | Weight | Status | Evidence ID | Evidence Summary |",
+                "| :--- | :--- | :--- | :---: | :---: | :--- | :--- |",
+            ]
+        )
         for item in data["checklist"]:
             status_badge = "PASS" if item["passed"] else "FAIL"
             evi_id = item["linked_evidence_id"] or "None"

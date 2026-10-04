@@ -37,7 +37,11 @@ class OWASPLLMVerifier:
                 passed=injection_defended,
                 message="Direct override, indirect document injection, and delimiter smuggling intercepted (< 0.1% bypass rate)",
                 execution_time_ms=t_ms,
-                details={"direct_injections_blocked": 250, "indirect_doc_injections_blocked": 180, "bypass_rate_pct": 0.0},
+                details={
+                    "direct_injections_blocked": 250,
+                    "indirect_doc_injections_blocked": 180,
+                    "bypass_rate_pct": 0.0,
+                },
             )
         )
 
@@ -79,7 +83,11 @@ class OWASPLLMVerifier:
                 passed=agency_bounded,
                 message="Generated SQL/code executes in isolated sandboxes; unauthorized tool calls and recursive token loops bounded",
                 execution_time_ms=t_ms,
-                details={"unauthorized_actions_intercepted": 64, "recursion_depth_limit": 10, "max_token_ceiling_enforced": True},
+                details={
+                    "unauthorized_actions_intercepted": 64,
+                    "recursion_depth_limit": 10,
+                    "max_token_ceiling_enforced": True,
+                },
             )
         )
 

@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class ProviderStatus(str, Enum):
     """Provider health lifecycle status."""
+
     HEALTHY = "HEALTHY"
     DEGRADED = "DEGRADED"
     UNAVAILABLE = "UNAVAILABLE"
@@ -20,6 +21,7 @@ class ProviderStatus(str, Enum):
 
 class ProviderHealth(BaseModel):
     """Health metrics reported by a provider."""
+
     status: ProviderStatus = Field(default=ProviderStatus.HEALTHY)
     consecutive_failures: int = Field(default=0, ge=0)
     avg_response_latency_ms: float = Field(default=100.0, ge=0.0)
@@ -29,6 +31,7 @@ class ProviderHealth(BaseModel):
 
 class ProviderMetadata(BaseModel):
     """Metadata specification for a tool provider."""
+
     provider_name: str
     display_name: str
     vendor: str = Field(default="Google Cloud")

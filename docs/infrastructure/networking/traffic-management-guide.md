@@ -24,9 +24,7 @@ active = router.get_blue_green_version("ingestion-service")
 ```python
 from app.infrastructure.networking.traffic import TrafficFailoverManager, CircuitBreakerConfig, CircuitState
 
-cb_mgr = TrafficFailoverManager(CircuitBreakerConfig(
-    consecutive_errors_threshold=5,
-    recovery_time_seconds=30.0,
-    half_open_success_threshold=3
-))
+cb_mgr = TrafficFailoverManager(
+    CircuitBreakerConfig(consecutive_errors_threshold=5, recovery_time_seconds=30.0, half_open_success_threshold=3)
+)
 ```

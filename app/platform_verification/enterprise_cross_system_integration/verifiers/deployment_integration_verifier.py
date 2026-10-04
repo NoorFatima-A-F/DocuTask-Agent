@@ -25,9 +25,24 @@ class DeploymentIntegrationVerifier(IDeploymentIntegrationVerifier):
 
     def verify(self) -> DeploymentIntegrationReport:
         strategies = [
-            DeploymentStrategyVerification(strategy_type="BlueGreenDeployment", rollback_supported=True, zero_downtime_verified=True, traffic_split_accuracy_pct=100.0),
-            DeploymentStrategyVerification(strategy_type="CanaryDeployment", rollback_supported=True, zero_downtime_verified=True, traffic_split_accuracy_pct=100.0),
-            DeploymentStrategyVerification(strategy_type="AutomatedRollback", rollback_supported=True, zero_downtime_verified=True, traffic_split_accuracy_pct=100.0),
+            DeploymentStrategyVerification(
+                strategy_type="BlueGreenDeployment",
+                rollback_supported=True,
+                zero_downtime_verified=True,
+                traffic_split_accuracy_pct=100.0,
+            ),
+            DeploymentStrategyVerification(
+                strategy_type="CanaryDeployment",
+                rollback_supported=True,
+                zero_downtime_verified=True,
+                traffic_split_accuracy_pct=100.0,
+            ),
+            DeploymentStrategyVerification(
+                strategy_type="AutomatedRollback",
+                rollback_supported=True,
+                zero_downtime_verified=True,
+                traffic_split_accuracy_pct=100.0,
+            ),
         ]
 
         checks = [

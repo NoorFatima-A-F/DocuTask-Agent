@@ -83,8 +83,7 @@ class SchemaVerifier:
         }
 
         valid = all(
-            k in valid_doc and isinstance(valid_doc[k], expected_type)
-            for k, expected_type in schema_def.items()
+            k in valid_doc and isinstance(valid_doc[k], expected_type) for k, expected_type in schema_def.items()
         )
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 

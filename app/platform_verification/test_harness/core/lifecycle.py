@@ -1,6 +1,7 @@
 """
 Test Lifecycle State Machine enforcing deterministic transitions.
 """
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -29,6 +30,7 @@ class LifecycleTransitionRecord:
 
 class TestLifecycleManager:
     """Enforces valid state machine transitions for test executions."""
+
     __test__ = False
 
     def __init__(self, initial_state: TestLifecycleState = TestLifecycleState.CREATED) -> None:

@@ -106,6 +106,8 @@ class ReliabilityRiskScorer(IReliabilityRiskScorer):
             },
         )
 
-    def compute_risk_scores(self, slo_report: Any = None, budget_report: Any = None, pattern_report: Any = None) -> ReliabilityRiskReport:
+    def compute_risk_scores(
+        self, slo_report: Any = None, budget_report: Any = None, pattern_report: Any = None
+    ) -> ReliabilityRiskReport:
         """Alias for score_reliability_risks."""
         return self.score_reliability_risks()

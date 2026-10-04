@@ -10,6 +10,7 @@ from app.agents.runtime.exceptions import InvalidRuntimeStateTransitionError
 
 class RuntimeLifecycleState(str, Enum):
     """Canonical lifecycle states of the Platform Runtime Kernel."""
+
     OFFLINE = "OFFLINE"
     BOOTING = "BOOTING"
     INITIALIZING = "INITIALIZING"

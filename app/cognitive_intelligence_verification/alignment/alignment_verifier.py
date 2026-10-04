@@ -118,7 +118,7 @@ class AlignmentVerifier:
         return AssertionResult(
             name="assert_alignment_score_calibration",
             passed=passed,
-            message=f"Systemic organizational goal alignment calibrated at {alignment_score*100:.1f}% across active workforce",
+            message=f"Systemic organizational goal alignment calibrated at {alignment_score * 100:.1f}% across active workforce",
             execution_time_ms=t_ms,
             details={"alignment_score": alignment_score},
         )

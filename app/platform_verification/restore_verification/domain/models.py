@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Automated Restore Verification System (Part 3G.2E).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any
@@ -29,9 +30,9 @@ class RestoreComponentType(str, Enum):
 
 class RestoreCertificationTier(str, Enum):
     DISASTER_RECOVERY_CERTIFIED = "Disaster Recovery Certified"  # 95 - 100
-    RECOVERY_READY = "Recovery Ready"                          # 90 - 94
-    IMPROVEMENT_REQUIRED = "Improvement Required"              # 80 - 89
-    FAILED = "Failed"                                          # < 80
+    RECOVERY_READY = "Recovery Ready"  # 90 - 94
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89
+    FAILED = "Failed"  # < 80
 
 
 @dataclass
@@ -227,12 +228,12 @@ class FailureSimulationReport:
 @dataclass
 class RestoreQualityScorecard:
     backup_recovery_success_score: float  # Weight 25%
-    data_integrity_score: float           # Weight 20%
-    service_recovery_score: float         # Weight 20%
-    functional_validation_score: float    # Weight 15%
-    security_validation_score: float      # Weight 10%
-    recovery_speed_score: float           # Weight 10%
-    composite_score: float                # 0 - 100
+    data_integrity_score: float  # Weight 20%
+    service_recovery_score: float  # Weight 20%
+    functional_validation_score: float  # Weight 15%
+    security_validation_score: float  # Weight 10%
+    recovery_speed_score: float  # Weight 10%
+    composite_score: float  # 0 - 100
     certification_tier: RestoreCertificationTier
     passed: bool
     execution_duration_ms: float

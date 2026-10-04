@@ -103,7 +103,11 @@ class HumanReviewAnalyzer:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"review_reduction_pct": effort_metric.review_reduction_pct, "capacity_multiplier": capacity_mult, "stp_rate_pct": stp_rate_pct},
+            metrics={
+                "review_reduction_pct": effort_metric.review_reduction_pct,
+                "capacity_multiplier": capacity_mult,
+                "stp_rate_pct": stp_rate_pct,
+            },
             execution_time_ms=elapsed_ms,
         )
 

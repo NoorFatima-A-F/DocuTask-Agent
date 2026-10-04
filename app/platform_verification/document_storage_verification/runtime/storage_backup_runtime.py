@@ -1,6 +1,7 @@
 """
 Verification Runtime Orchestrator for Enterprise Document Storage (Part 3G.2C).
 """
+
 import time
 from typing import Dict, Any, Optional
 
@@ -86,9 +87,7 @@ class StorageBackupVerificationRuntime:
         self.scoring_engine = scoring_engine or StorageQualityScoringEngine()
         self.evidence_engine = evidence_engine or StorageEvidenceManifestEngine()
 
-    def execute_full_verification(
-        self, output_dir: Optional[str] = None
-    ) -> Dict[str, Any]:
+    def execute_full_verification(self, output_dir: Optional[str] = None) -> Dict[str, Any]:
         """
         Executes end-to-end document storage verification suite across all 9 phases.
         """
@@ -166,9 +165,7 @@ class StorageBackupVerificationRuntime:
         }
 
         # Phase 9: Evidence Serialization & Manifest Export
-        manifest_paths = self.evidence_engine.export_all_evidence_artifacts(
-            verification_data, output_dir=output_dir
-        )
+        manifest_paths = self.evidence_engine.export_all_evidence_artifacts(verification_data, output_dir=output_dir)
 
         verification_data["exported_manifest_paths"] = manifest_paths
         verification_data["passed"] = scorecard.passed

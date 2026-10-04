@@ -32,7 +32,7 @@ class ModelEvaluationScorer:
     def get_leaderboard(self) -> List[Dict[str, Any]]:
         """Rank all evaluated models by composite quality score descending."""
         latest = [evals[-1] for evals in self._evaluations.values() if evals]
-        sorted_evals = sorted(latest, key=lambda m: (m.composite_quality_score or m.composite_score), reverse=True)
+        sorted_evals = sorted(latest, key=lambda m: m.composite_quality_score or m.composite_score, reverse=True)
         return [
             {
                 "model_id": m.model_id,

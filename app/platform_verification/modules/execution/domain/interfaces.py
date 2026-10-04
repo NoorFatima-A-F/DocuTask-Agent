@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Execution.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.execution.domain.models import ExecutionEntity
+
 
 class ExecutionRepositoryInterface(ABC):
     @abstractmethod

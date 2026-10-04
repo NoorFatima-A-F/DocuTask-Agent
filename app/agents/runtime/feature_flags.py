@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class RuntimeFeatureFlags(BaseModel):
     """Dynamic operational toggles for platform runtime capabilities."""
+
     enable_reflection: bool = True
     enable_recovery: bool = True
     enable_multi_agent: bool = True

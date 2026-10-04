@@ -19,7 +19,6 @@ from ..verifiers import get_all_verifiers
 
 
 class AIPerformanceRuntime(IAIPerformanceRuntime):
-
     def __init__(
         self,
         verifiers: Optional[List[IPerformanceVerifier]] = None,

@@ -1,6 +1,7 @@
 """
 Module Boundary Validator enforcing explicit dependencies and forbidding hidden leaks.
 """
+
 from __future__ import annotations
 from typing import List, Optional
 import uuid
@@ -36,7 +37,9 @@ class EnterpriseModuleBoundaryValidator(IModuleBoundaryValidator):
             if dep.target_module in src_manifest.forbidden_dependencies:
                 dep.is_allowed = False
                 dep.severity = BoundaryViolationSeverity.CRITICAL
-                dep.violation_reason = f"Module '{dep.source_module}' is explicitly forbidden from depending on '{dep.target_module}'."
+                dep.violation_reason = (
+                    f"Module '{dep.source_module}' is explicitly forbidden from depending on '{dep.target_module}'."
+                )
                 violations.append(
                     ModuleBoundaryViolation(
                         violation_id=f"MOD-VIOL-{uuid.uuid4().hex[:6].upper()}",

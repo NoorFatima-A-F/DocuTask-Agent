@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 """
 Regional Failover Planner.
 
@@ -19,6 +20,7 @@ logger = logging.getLogger("infrastructure.failover.planner")
 
 class FailoverType(str, enum.Enum):
     """Type of failover operation."""
+
     AUTOMATIC = "AUTOMATIC"
     MANUAL = "MANUAL"
     DRILL = "DRILL"
@@ -27,6 +29,7 @@ class FailoverType(str, enum.Enum):
 
 class FailoverScope(str, enum.Enum):
     """Scope of failure domain to fail over."""
+
     COMPONENT = "COMPONENT"
     CLUSTER = "CLUSTER"
     ZONE = "ZONE"
@@ -35,6 +38,7 @@ class FailoverScope(str, enum.Enum):
 
 class FailoverStatus(str, enum.Enum):
     """Lifecycle status of a failover operation."""
+
     PROPOSED = "PROPOSED"
     VALIDATING = "VALIDATING"
     APPROVED = "APPROVED"
@@ -48,6 +52,7 @@ class FailoverStatus(str, enum.Enum):
 
 class PreflightCheckResult(BaseModel):
     """Result of pre-flight validation check."""
+
     check_name: str
     passed: bool
     details: str
@@ -56,6 +61,7 @@ class PreflightCheckResult(BaseModel):
 
 class FailoverPlan(BaseModel):
     """Detailed migration and failover plan."""
+
     plan_id: str
     failover_type: FailoverType
     scope: FailoverScope

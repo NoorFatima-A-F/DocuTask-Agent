@@ -87,10 +87,7 @@ class ConfidenceCalibrationEngine:
             raise ValueError("Confidences and correctness labels must be non-empty and of equal length.")
 
         # 1. Compute Brier Score: (1/N) * sum((prob - label)^2)
-        brier_sum = sum(
-            ((confidences[i] - (1.0 if correctness_labels[i] else 0.0)) ** 2)
-            for i in range(n)
-        )
+        brier_sum = sum(((confidences[i] - (1.0 if correctness_labels[i] else 0.0)) ** 2) for i in range(n))
         brier_score = brier_sum / n
 
         # 2. Partition into equal-width confidence bins [0, 0.1), [0.1, 0.2) ... [0.9, 1.0]

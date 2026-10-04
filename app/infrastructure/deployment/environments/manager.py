@@ -9,6 +9,7 @@ import threading
 
 class EnvironmentType(str, Enum):
     """Target deployment environment classifications."""
+
     DEV = "dev"
     TEST = "test"
     STAGING = "staging"
@@ -20,6 +21,7 @@ class EnvironmentType(str, Enum):
 @dataclass
 class EnvironmentConfig:
     """Configuration and topology for a deployment environment."""
+
     env_id: str
     name: str
     env_type: EnvironmentType
@@ -48,10 +50,36 @@ class EnvironmentManager:
         defaults = [
             EnvironmentConfig("dev", "Development", EnvironmentType.DEV, ["cluster-dev"], ["us-east-1"]),
             EnvironmentConfig("test", "Testing / QA", EnvironmentType.TEST, ["cluster-test"], ["us-east-1"]),
-            EnvironmentConfig("staging", "Staging", EnvironmentType.STAGING, ["cluster-stage"], ["us-east-1"], is_production_like=True),
-            EnvironmentConfig("prod", "Enterprise Production", EnvironmentType.PROD, ["cluster-prod-alpha", "cluster-prod-beta"], ["us-east-1", "us-west-2"], is_production_like=True, requires_approval=True),
-            EnvironmentConfig("customer_managed", "Customer VPC Dedicated", EnvironmentType.CUSTOMER_MANAGED, ["cluster-cust-01"], ["eu-west-1"], is_production_like=True, requires_approval=True),
-            EnvironmentConfig("air_gapped", "Air-Gapped Sovereign", EnvironmentType.AIR_GAPPED, ["cluster-gov-01"], ["us-gov-west-1"], is_production_like=True, requires_approval=True),
+            EnvironmentConfig(
+                "staging", "Staging", EnvironmentType.STAGING, ["cluster-stage"], ["us-east-1"], is_production_like=True
+            ),
+            EnvironmentConfig(
+                "prod",
+                "Enterprise Production",
+                EnvironmentType.PROD,
+                ["cluster-prod-alpha", "cluster-prod-beta"],
+                ["us-east-1", "us-west-2"],
+                is_production_like=True,
+                requires_approval=True,
+            ),
+            EnvironmentConfig(
+                "customer_managed",
+                "Customer VPC Dedicated",
+                EnvironmentType.CUSTOMER_MANAGED,
+                ["cluster-cust-01"],
+                ["eu-west-1"],
+                is_production_like=True,
+                requires_approval=True,
+            ),
+            EnvironmentConfig(
+                "air_gapped",
+                "Air-Gapped Sovereign",
+                EnvironmentType.AIR_GAPPED,
+                ["cluster-gov-01"],
+                ["us-gov-west-1"],
+                is_production_like=True,
+                requires_approval=True,
+            ),
         ]
         for env in defaults:
             self._environments[env.env_id] = env

@@ -12,6 +12,7 @@ from app.agents.coordination.exceptions import StaleLeaseError
 
 class TaskLease(BaseModel):
     """Time-bounded lease granting exclusive execution rights for a task."""
+
     lease_id: UUID = Field(default_factory=uuid4)
     task_id: str
     holder_agent_id: UUID
@@ -36,15 +37,10 @@ class LeaseManager:
 
         if existing and not existing.is_expired() and existing.holder_agent_id != agent_id:
             raise StaleLeaseError(
-                f"Task '{task_id}' is actively leased to agent {existing.holder_agent_id}.",
-                existing.holder_agent_id
+                f"Task '{task_id}' is actively leased to agent {existing.holder_agent_id}.", existing.holder_agent_id
             )
 
-        lease = TaskLease(
-            task_id=task_id,
-            holder_agent_id=agent_id,
-            expires_at_timestamp=now + self.default_ttl
-        )
+        lease = TaskLease(task_id=task_id, holder_agent_id=agent_id, expires_at_timestamp=now + self.default_ttl)
         self._leases[task_id] = lease
         return lease
 

@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for AiExtraction.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.ai_extraction.domain.models import AiExtractionEntity
+
 
 class AiExtractionRepositoryInterface(ABC):
     @abstractmethod

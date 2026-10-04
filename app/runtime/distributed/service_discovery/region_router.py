@@ -52,9 +52,34 @@ class RegionRouter:
     @classmethod
     def get_region_topology(cls) -> List[Dict[str, Any]]:
         return [
-            {"region": RegionName.US_EAST.value, "location": "N. Virginia (GCP us-east4 / AWS us-east-1)", "status": "ONLINE", "avg_latency_ms": 8.5},
-            {"region": RegionName.US_WEST.value, "location": "Oregon (GCP us-west1 / AWS us-west-2)", "status": "ONLINE", "avg_latency_ms": 65.0},
-            {"region": RegionName.EU_CENTRAL.value, "location": "Frankfurt (GCP europe-west3 / AWS eu-central-1)", "status": "ONLINE", "avg_latency_ms": 10.2},
-            {"region": RegionName.ASIA_EAST.value, "location": "Tokyo (GCP asia-northeast1 / AWS ap-northeast-1)", "status": "ONLINE", "avg_latency_ms": 12.0},
-            {"region": RegionName.PK_SOUTH.value, "location": "Karachi Edge (Hybrid Node Cluster)", "status": "ONLINE", "avg_latency_ms": 6.0},
+            {
+                "region": RegionName.US_EAST.value,
+                "location": "N. Virginia (GCP us-east4 / AWS us-east-1)",
+                "status": "ONLINE",
+                "avg_latency_ms": 8.5,
+            },
+            {
+                "region": RegionName.US_WEST.value,
+                "location": "Oregon (GCP us-west1 / AWS us-west-2)",
+                "status": "ONLINE",
+                "avg_latency_ms": 65.0,
+            },
+            {
+                "region": RegionName.EU_CENTRAL.value,
+                "location": "Frankfurt (GCP europe-west3 / AWS eu-central-1)",
+                "status": "ONLINE",
+                "avg_latency_ms": 10.2,
+            },
+            {
+                "region": RegionName.ASIA_EAST.value,
+                "location": "Tokyo (GCP asia-northeast1 / AWS ap-northeast-1)",
+                "status": "ONLINE",
+                "avg_latency_ms": 12.0,
+            },
+            {
+                "region": RegionName.PK_SOUTH.value,
+                "location": "Karachi Edge (Hybrid Node Cluster)",
+                "status": "ONLINE",
+                "avg_latency_ms": 6.0,
+            },
         ]

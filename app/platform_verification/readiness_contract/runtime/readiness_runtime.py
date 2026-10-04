@@ -2,6 +2,7 @@
 Enterprise Readiness Contract Runtime Coordinator
 Executes full verification workflow across all 13 subsystems.
 """
+
 from typing import Dict, Any
 
 from app.platform_verification.readiness_contract.state_machine.readiness_state_machine import ReadinessStateMachine
@@ -10,9 +11,13 @@ from app.platform_verification.readiness_contract.decision.readiness_decision_en
 from app.platform_verification.readiness_contract.policy.readiness_policy_engine import ReadinessPolicyEngine
 from app.platform_verification.readiness_contract.startup.startup_readiness_validator import StartupReadinessValidator
 from app.platform_verification.readiness_contract.transitions.failure_transition_tester import FailureTransitionTester
-from app.platform_verification.readiness_contract.orchestration.readiness_orchestration_verifier import ReadinessOrchestrationVerifier
+from app.platform_verification.readiness_contract.orchestration.readiness_orchestration_verifier import (
+    ReadinessOrchestrationVerifier,
+)
 from app.platform_verification.readiness_contract.security.readiness_security_verifier import ReadinessSecurityVerifier
-from app.platform_verification.readiness_contract.observability.readiness_metrics_exporter import ReadinessMetricsExporter
+from app.platform_verification.readiness_contract.observability.readiness_metrics_exporter import (
+    ReadinessMetricsExporter,
+)
 from app.platform_verification.readiness_contract.scoring.readiness_score_engine import ReadinessScoreEngine
 from app.platform_verification.readiness_contract.exporter.readiness_evidence_exporter import ReadinessEvidenceExporter
 

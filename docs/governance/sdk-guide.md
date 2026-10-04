@@ -23,7 +23,7 @@ decision = client.evaluate(
     action="model.invoke",
     resource="gemini-1.5-pro",
     context={"prompt_tokens": 1200, "contains_pii": False},
-    raise_on_deny=True
+    raise_on_deny=True,
 )
 
 if decision.allowed:

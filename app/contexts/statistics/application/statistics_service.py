@@ -4,11 +4,14 @@ import math
 from ..domain.statistics_domain import StatisticalAggregate, StatisticalAnalysisCompleted
 from app.shared_kernel import Result, Ok, Err, get_event_bus
 
+
 class StatisticsService:
     def __init__(self, repo):
         self.repo = repo
 
-    async def analyze_samples(self, analysis_id: str, metric_name: str, samples: List[float]) -> Result[StatisticalAggregate, str]:
+    async def analyze_samples(
+        self, analysis_id: str, metric_name: str, samples: List[float]
+    ) -> Result[StatisticalAggregate, str]:
         n = len(samples)
         if n == 0:
             return Err("Cannot analyze empty sample set")
@@ -26,8 +29,10 @@ class StatisticsService:
             mean=mean_val,
             std_dev=std_val,
             ci_lower_95=ci_lower,
-            ci_upper_95=ci_upper
+            ci_upper_95=ci_upper,
         )
         self.repo.save(agg)
-        await get_event_bus().publish(StatisticalAnalysisCompleted(analysis_id=analysis_id, metric_name=metric_name, mean=mean_val))
+        await get_event_bus().publish(
+            StatisticalAnalysisCompleted(analysis_id=analysis_id, metric_name=metric_name, mean=mean_val)
+        )
         return Ok(agg)

@@ -45,14 +45,14 @@ class ImprovementPipelineRecord:
     stage: ImprovementStage = ImprovementStage.OBSERVATION
     created_at: float = field(default_factory=time.time)
     updated_at: float = field(default_factory=time.time)
-    
+
     # Linked Artifacts
     experience_ids: List[str] = field(default_factory=list)
     hypothesis_id: Optional[str] = None
     candidate_strategy_id: Optional[str] = None
     experiment_id: Optional[str] = None
     deployed_version_id: Optional[str] = None
-    
+
     # Outcome & Metrics
     measured_improvement_pct: float = 0.0
     p_value: Optional[float] = None
@@ -137,7 +137,7 @@ class ContinuousImprovementEngine:
         candidate_strat.cost_profile.mean *= 0.80
         candidate_strat.confidence_profile.mean = min(0.99, candidate_strat.confidence_profile.mean + 0.02)
         candidate_strat.retry_frequency *= 0.5
-        
+
         self.strategy_library.register_strategy(candidate_strat)
         record.candidate_strategy_id = candidate_strat.strategy_id
 
@@ -152,7 +152,7 @@ class ContinuousImprovementEngine:
         # Stage 4: Experimentation & Statistical Comparison
         effective_control = control_strat or candidate_strat
         record.stage = ImprovementStage.EXPERIMENT_RUNNING
-        
+
         exp_run = self.ab_validator.run_experiment(
             title=f"A/B Validation: {domain.title()} Optimization",
             hypothesis_id=record.hypothesis_id or "hyp_default",
@@ -184,7 +184,9 @@ class ContinuousImprovementEngine:
                 )
                 record.deployed_version_id = new_planner_ver.version_id
                 record.stage = ImprovementStage.DEPLOYED
-                record.audit_notes = f"Successfully deployed version {new_planner_ver.version_id} backed by p={record.p_value:.4f}."
+                record.audit_notes = (
+                    f"Successfully deployed version {new_planner_ver.version_id} backed by p={record.p_value:.4f}."
+                )
             else:
                 record.stage = ImprovementStage.APPROVAL_PENDING
                 record.audit_notes = "Statistically validated (p < 0.05). Awaiting human / governance approval."

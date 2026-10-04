@@ -56,6 +56,7 @@ class GoalStatus(str, Enum):
 @dataclass(frozen=True)
 class Goal:
     """Authoritative, immutable Goal entity representing a complete user scientific objective."""
+
     goal_id: str
     mission_id: str
     title: str

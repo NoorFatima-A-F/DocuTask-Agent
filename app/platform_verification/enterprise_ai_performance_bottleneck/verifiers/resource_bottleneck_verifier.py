@@ -25,10 +25,30 @@ class ResourceBottleneckVerifier(IResourceBottleneckVerifier):
         return "Resource Bottleneck Analysis Verifier"
 
     def verify(self) -> ResourceBottleneckReport:
-        cpu = ResourceMetricAnalysis(resource_type="CPU", avg_usage_pct=42.0, peak_usage_pct=68.0, bottleneck_detected=False, headroom_pct=32.0)
-        memory = ResourceMetricAnalysis(resource_type="Memory", avg_usage_pct=52.0, peak_usage_pct=70.0, bottleneck_detected=False, headroom_pct=30.0)
-        disk = ResourceMetricAnalysis(resource_type="Disk IO", avg_usage_pct=28.0, peak_usage_pct=45.0, bottleneck_detected=False, headroom_pct=55.0)
-        network = ResourceMetricAnalysis(resource_type="Network", avg_usage_pct=22.0, peak_usage_pct=40.0, bottleneck_detected=False, headroom_pct=60.0)
+        cpu = ResourceMetricAnalysis(
+            resource_type="CPU", avg_usage_pct=42.0, peak_usage_pct=68.0, bottleneck_detected=False, headroom_pct=32.0
+        )
+        memory = ResourceMetricAnalysis(
+            resource_type="Memory",
+            avg_usage_pct=52.0,
+            peak_usage_pct=70.0,
+            bottleneck_detected=False,
+            headroom_pct=30.0,
+        )
+        disk = ResourceMetricAnalysis(
+            resource_type="Disk IO",
+            avg_usage_pct=28.0,
+            peak_usage_pct=45.0,
+            bottleneck_detected=False,
+            headroom_pct=55.0,
+        )
+        network = ResourceMetricAnalysis(
+            resource_type="Network",
+            avg_usage_pct=22.0,
+            peak_usage_pct=40.0,
+            bottleneck_detected=False,
+            headroom_pct=60.0,
+        )
 
         checks: List[CheckResult] = [
             CheckResult(

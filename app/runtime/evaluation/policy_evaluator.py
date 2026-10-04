@@ -26,13 +26,9 @@ class PolicyEvaluator:
 
         # Baseline baseline comparison (e.g. Heuristic Greedy vs Multi-Objective Optimizer)
         greedy_metrics = [
-            {"utility": u - random.uniform(0.08, 0.15), "latency_ms": 1400.0, "cost_usd": 0.025}
-            for u in selected_u
+            {"utility": u - random.uniform(0.08, 0.15), "latency_ms": 1400.0, "cost_usd": 0.025} for u in selected_u
         ]
-        current_metrics = [
-            {"utility": u, "latency_ms": 950.0, "cost_usd": 0.018}
-            for u in selected_u
-        ]
+        current_metrics = [{"utility": u, "latency_ms": 950.0, "cost_usd": 0.018} for u in selected_u]
         comparison = PolicyComparator.compare_policies(greedy_metrics, current_metrics)
 
         # Sensitivity

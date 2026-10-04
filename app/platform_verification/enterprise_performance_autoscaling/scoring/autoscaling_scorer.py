@@ -37,7 +37,6 @@ from ..domain.models import (
 
 
 class AutoscalingScorer(IAutoscalingScorer):
-
     def _find_report(self, reports: Dict[str, Any], key_patterns: List[str], expected_type: type) -> Optional[Any]:
         for k, v in reports.items():
             if isinstance(v, expected_type):
@@ -95,12 +94,48 @@ class AutoscalingScorer(IAutoscalingScorer):
         c6_score = sum(c6_scores) / len(c6_scores) if c6_scores else 100.0
 
         category_scores: List[CategoryScore] = [
-            CategoryScore(category="Scaling Correctness", weight=0.25, score=round(c1_score, 2), weighted_score=round(c1_score * 0.25, 2), description="Worker elasticity, stateless API scaling, and decision policy accuracy"),
-            CategoryScore(category="Performance Preservation", weight=0.20, score=round(c2_score, 2), weighted_score=round(c2_score * 0.20, 2), description="Queue drain rate, scale-up latency recovery, and AI concurrency management"),
-            CategoryScore(category="Failure Safety", weight=0.20, score=round(c3_score, 2), weighted_score=round(c3_score * 0.20, 2), description="Scale-down zero-loss safety, DB limit protection, and controller crash recovery"),
-            CategoryScore(category="Cost Efficiency", weight=0.15, score=round(c4_score, 2), weighted_score=round(c4_score * 0.15, 2), description="Dynamic compute spend reduction and low per-document processing cost"),
-            CategoryScore(category="Cloud Readiness", weight=0.10, score=round(c5_score, 2), weighted_score=round(c5_score * 0.10, 2), description="Kubernetes HPA and multi-cloud (AWS, GCP, Azure) autoscaling compatibility"),
-            CategoryScore(category="Evidence Quality", weight=0.10, score=round(c6_score, 2), weighted_score=round(c6_score * 0.10, 2), description="Scaling metric telemetry coverage and architecture evidence completeness"),
+            CategoryScore(
+                category="Scaling Correctness",
+                weight=0.25,
+                score=round(c1_score, 2),
+                weighted_score=round(c1_score * 0.25, 2),
+                description="Worker elasticity, stateless API scaling, and decision policy accuracy",
+            ),
+            CategoryScore(
+                category="Performance Preservation",
+                weight=0.20,
+                score=round(c2_score, 2),
+                weighted_score=round(c2_score * 0.20, 2),
+                description="Queue drain rate, scale-up latency recovery, and AI concurrency management",
+            ),
+            CategoryScore(
+                category="Failure Safety",
+                weight=0.20,
+                score=round(c3_score, 2),
+                weighted_score=round(c3_score * 0.20, 2),
+                description="Scale-down zero-loss safety, DB limit protection, and controller crash recovery",
+            ),
+            CategoryScore(
+                category="Cost Efficiency",
+                weight=0.15,
+                score=round(c4_score, 2),
+                weighted_score=round(c4_score * 0.15, 2),
+                description="Dynamic compute spend reduction and low per-document processing cost",
+            ),
+            CategoryScore(
+                category="Cloud Readiness",
+                weight=0.10,
+                score=round(c5_score, 2),
+                weighted_score=round(c5_score * 0.10, 2),
+                description="Kubernetes HPA and multi-cloud (AWS, GCP, Azure) autoscaling compatibility",
+            ),
+            CategoryScore(
+                category="Evidence Quality",
+                weight=0.10,
+                score=round(c6_score, 2),
+                weighted_score=round(c6_score * 0.10, 2),
+                description="Scaling metric telemetry coverage and architecture evidence completeness",
+            ),
         ]
 
         overall_score = round(sum(cat.weighted_score for cat in category_scores), 2)
@@ -125,7 +160,7 @@ class AutoscalingScorer(IAutoscalingScorer):
 
         checks: List[CheckResult] = [
             CheckResult(
-                name=f"Quality Dimension: {cat.category} (Weight: {cat.weight*100:.0f}%)",
+                name=f"Quality Dimension: {cat.category} (Weight: {cat.weight * 100:.0f}%)",
                 passed=cat.score >= 80.0,
                 details=f"Dimension score {cat.score:.1f}% contributing {cat.weighted_score:.2f}% to total",
                 metrics={"score": cat.score, "weighted": cat.weighted_score},

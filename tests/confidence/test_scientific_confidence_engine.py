@@ -99,10 +99,14 @@ def test_governance_policy_and_lineage():
 
 
 def test_statistical_validation_and_stability():
-    is_valid, msg = ConfidenceStatisticalValidator.validate_confidence_consistency(0.98, evidence_count=10, invariant_failures=0)
+    is_valid, msg = ConfidenceStatisticalValidator.validate_confidence_consistency(
+        0.98, evidence_count=10, invariant_failures=0
+    )
     assert is_valid
 
-    is_invalid, msg = ConfidenceStatisticalValidator.validate_confidence_consistency(0.995, evidence_count=0, invariant_failures=0)
+    is_invalid, msg = ConfidenceStatisticalValidator.validate_confidence_consistency(
+        0.995, evidence_count=0, invariant_failures=0
+    )
     assert not is_invalid
 
     dist = DistributionAnalysisService.analyze_distribution([0.98, 0.99, 0.97, 0.985, 0.992])

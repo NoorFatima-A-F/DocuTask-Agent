@@ -19,13 +19,25 @@ class AIMonitoringBridge(IAIMonitoringBridge):
     """Bridges AI provider telemetry into enterprise observability pipelines."""
 
     METRICS_CATALOG: List[Dict[str, str]] = [
-        {"name": "ai_provider_status", "type": "gauge", "help": "Current health status of AI provider (1=Healthy, 0=Degraded/Down)"},
-        {"name": "ai_request_latency_seconds", "type": "histogram", "help": "Latency of inference requests to AI providers"},
+        {
+            "name": "ai_provider_status",
+            "type": "gauge",
+            "help": "Current health status of AI provider (1=Healthy, 0=Degraded/Down)",
+        },
+        {
+            "name": "ai_request_latency_seconds",
+            "type": "histogram",
+            "help": "Latency of inference requests to AI providers",
+        },
         {"name": "ai_error_rate_5m", "type": "gauge", "help": "5-minute rolling error rate percentage"},
         {"name": "ai_token_usage_total", "type": "counter", "help": "Total prompt and completion tokens consumed"},
         {"name": "ai_quota_remaining_pct", "type": "gauge", "help": "Remaining RPM/TPM quota headroom percentage"},
         {"name": "ai_fallback_events_total", "type": "counter", "help": "Total multi-provider failover routing events"},
-        {"name": "ai_response_quality_score", "type": "gauge", "help": "Rolling schema compliance and confidence score"},
+        {
+            "name": "ai_response_quality_score",
+            "type": "gauge",
+            "help": "Rolling schema compliance and confidence score",
+        },
     ]
 
     ALERT_RULES: List[Dict[str, str]] = [

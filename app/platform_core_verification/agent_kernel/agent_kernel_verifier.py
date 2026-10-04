@@ -164,7 +164,7 @@ class AgentKernelVerifier:
 
         loop_threshold = 3
         action_signatures = [f"{a['action']}:{a.get('query') or a.get('target')}" for a in action_stream]
-        
+
         counts: Dict[str, int] = {}
         breaker_tripped = False
         detected_loops = 0

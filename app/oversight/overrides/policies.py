@@ -7,6 +7,7 @@ import uuid
 
 class OverridePolicy(BaseModel):
     """Governs when and under what constraints a human can override an AI decision or safety gate."""
+
     policy_id: str = Field(default_factory=lambda: f"ovr_pol_{uuid.uuid4().hex[:8]}")
     tenant_id: str = "*"
     name: str

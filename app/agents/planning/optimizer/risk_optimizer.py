@@ -34,7 +34,9 @@ class RiskOptimizer:
             if task.is_critical and not task.fallback_agent and not task.fallback_tools:
                 risk_points += 1.0
             # 2. Critical tasks without verification steps
-            if task.is_critical and not any("validate" in t.action.lower() for t in plan.tasks if task.task_id in t.dependencies):
+            if task.is_critical and not any(
+                "validate" in t.action.lower() for t in plan.tasks if task.task_id in t.dependencies
+            ):
                 risk_points += 1.0
             # 3. High-risk actions (e.g. payout, delete, external transmit) without human gate
             if any(term in task.action.lower() for term in ["payout", "wire", "delete", "export_phi"]):
@@ -56,7 +58,7 @@ class RiskOptimizer:
 
         for task in hardened.tasks:
             new_tasks.append(task)
-            
+
             # Ensure fallback strategy exists for all critical tasks
             if task.is_critical and not task.fallback_agent:
                 task.fallback_agent = "SecondaryRecoveryAgent"
@@ -87,5 +89,7 @@ class RiskOptimizer:
         hardened.tasks = new_tasks
         final_risk = self.estimate_plan_risk(hardened)
         reduction = (initial_risk - final_risk) / initial_risk if initial_risk > 0 else 0.0
-        logger.info("RiskOptimizer: Injected %d validation gates. Risk reduced by %.1f%%", injected_count, reduction * 100)
+        logger.info(
+            "RiskOptimizer: Injected %d validation gates. Risk reduced by %.1f%%", injected_count, reduction * 100
+        )
         return hardened, max(0.0, reduction)

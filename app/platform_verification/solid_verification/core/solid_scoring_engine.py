@@ -1,6 +1,7 @@
 """
 Weighted SOLID Scoring & Certification Engine.
 """
+
 from __future__ import annotations
 from typing import Dict, List
 from app.platform_verification.solid_verification.domain.interfaces import ISolidScoringEngine

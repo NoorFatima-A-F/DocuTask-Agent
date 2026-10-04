@@ -14,6 +14,7 @@ from app.prompts.evaluation.runner import PromptEvaluationRunner
 
 class RegressionTestReport(BaseModel):
     """Detailed comparison between baseline and candidate prompt versions."""
+
     prompt_id: str
     baseline_version_id: str
     candidate_version_id: str

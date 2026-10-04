@@ -27,6 +27,7 @@ class DriftModality(str, Enum):
 @dataclass
 class DriftMetricRecord:
     """Quantitative divergence measurement for a feature or label."""
+
     feature_or_label_name: str
     modality: DriftModality
     psi: float
@@ -42,6 +43,7 @@ class DriftMetricRecord:
 @dataclass
 class DatasetDriftObservatoryReport:
     """Comprehensive dataset drift observatory report."""
+
     total_monitored_entities: int
     drifted_entities_count: int
     modality_breakdown: Dict[str, int]
@@ -60,10 +62,7 @@ class DatasetDriftObservatory:
 
     @staticmethod
     def _create_histograms(
-        ref: List[float],
-        target: List[float],
-        num_bins: Optional[int] = None,
-        eps: float = 1e-3
+        ref: List[float], target: List[float], num_bins: Optional[int] = None, eps: float = 1e-3
     ) -> Tuple[List[float], List[float]]:
         if not ref or not target:
             return [1.0], [1.0]
@@ -123,7 +122,7 @@ class DatasetDriftObservatory:
         reference_data: List[float],
         production_data: List[float],
         psi_threshold_watch: float = 0.10,
-        psi_threshold_critical: float = 0.25
+        psi_threshold_critical: float = 0.25,
     ) -> DriftMetricRecord:
         """Evaluate divergence metrics and trigger alarms."""
         if len(reference_data) < 5 or len(production_data) < 5:
@@ -137,7 +136,7 @@ class DatasetDriftObservatory:
                 mmd=0.0,
                 is_drifted=False,
                 alarm_level="NOMINAL",
-                recommended_action="Accumulate more production telemetry samples."
+                recommended_action="Accumulate more production telemetry samples.",
             )
 
         psi = cls.compute_psi(reference_data, production_data)
@@ -145,7 +144,9 @@ class DatasetDriftObservatory:
         p_r, p_t = cls._create_histograms(reference_data, production_data)
         kl = sum(r * math.log(r / t) for r, t in zip(p_r, p_t) if r > 0)
         m = [0.5 * (r + t) for r, t in zip(p_r, p_t)]
-        js = 0.5 * sum(r * math.log(r / mi) for r, mi in zip(p_r, m) if r > 0) + 0.5 * sum(t * math.log(t / mi) for t, mi in zip(p_t, m) if t > 0)
+        js = 0.5 * sum(r * math.log(r / mi) for r, mi in zip(p_r, m) if r > 0) + 0.5 * sum(
+            t * math.log(t / mi) for t, mi in zip(p_t, m) if t > 0
+        )
 
         if psi >= psi_threshold_critical:
             alarm = "CRITICAL"
@@ -170,13 +171,12 @@ class DatasetDriftObservatory:
             mmd=w1 * 0.1,  # approximate MMD bound
             is_drifted=drifted,
             alarm_level=alarm,
-            recommended_action=action
+            recommended_action=action,
         )
 
     @classmethod
     def run_drift_observatory_audit(
-        cls,
-        evaluations: List[Tuple[str, DriftModality, List[float], List[float]]]
+        cls, evaluations: List[Tuple[str, DriftModality, List[float], List[float]]]
     ) -> DatasetDriftObservatoryReport:
         """Run full multi-entity drift observatory evaluation."""
         records = [cls.evaluate_drift_record(name, mod, ref, prod) for name, mod, ref, prod in evaluations]
@@ -198,12 +198,12 @@ class DatasetDriftObservatory:
             metric_records=records,
             assumptions=[
                 "Reference data represents stationary gold standard validation distributions",
-                "Continuous binning partitions domain into 10 equiprobable or equidistant intervals"
+                "Continuous binning partitions domain into 10 equiprobable or equidistant intervals",
             ],
             methodology="Continuous empirical distribution divergence estimation via PSI and 1D Wasserstein distance.",
             limitations=[
                 "Binned histogram approximation may underestimate high-frequency local distribution oscillations"
             ],
             reproducibility_instructions="Execute DatasetDriftObservatory.run_drift_observatory_audit() with paired reference and test vectors.",
-            observatory_status=status
+            observatory_status=status,
         )

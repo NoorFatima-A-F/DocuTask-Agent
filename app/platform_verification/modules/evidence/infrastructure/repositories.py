@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Evidence.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.evidence.domain.models import EvidenceEntity
 from app.platform_verification.modules.evidence.domain.interfaces import EvidenceRepositoryInterface
+
 
 class InMemoryEvidenceRepository(EvidenceRepositoryInterface):
     def __init__(self):

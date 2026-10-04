@@ -2,6 +2,7 @@
 Application State & Workflow Checkpoint Recovery Verifier (Part 3G.6F).
 Verifies that mid-flight document processing jobs survive regional failover without data loss or duplicate execution.
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     WorkflowCheckpointReport,
 )
@@ -24,10 +25,7 @@ class WorkflowCheckpointVerifier(IWorkflowCheckpointVerifier):
         accuracy_pct = 100.0
 
         passed = (
-            resumed_successfully == midflight_crashes
-            and duplicates == 0
-            and corrupted == 0
-            and accuracy_pct == 100.0
+            resumed_successfully == midflight_crashes and duplicates == 0 and corrupted == 0 and accuracy_pct == 100.0
         )
 
         details = {

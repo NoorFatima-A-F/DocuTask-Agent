@@ -31,18 +31,42 @@ class PerformanceArchitectureVerifier(IPerformanceArchitectureVerifier):
 
     def verify(self) -> PerformanceArchitectureReport:
         dependencies = [
-            ServiceDependency(source="User", target="API Gateway", protocol="HTTPS", avg_latency_ms=5.0, is_critical_path=True),
-            ServiceDependency(source="API Gateway", target="Agent Runtime", protocol="HTTP", avg_latency_ms=2.0, is_critical_path=True),
-            ServiceDependency(source="Agent Runtime", target="Redis Queue", protocol="TCP", avg_latency_ms=1.5, is_critical_path=True),
-            ServiceDependency(source="Redis Queue", target="Workers", protocol="TCP", avg_latency_ms=1.0, is_critical_path=True),
-            ServiceDependency(source="Workers", target="AI Providers", protocol="HTTPS", avg_latency_ms=1200.0, is_critical_path=True),
-            ServiceDependency(source="Workers", target="PostgreSQL", protocol="TCP", avg_latency_ms=8.0, is_critical_path=False),
-            ServiceDependency(source="Workers", target="Object Storage", protocol="HTTPS", avg_latency_ms=25.0, is_critical_path=False),
-            ServiceDependency(source="Agent Runtime", target="PostgreSQL", protocol="TCP", avg_latency_ms=8.0, is_critical_path=False),
-            ServiceDependency(source="API Gateway", target="Redis Cache", protocol="TCP", avg_latency_ms=0.5, is_critical_path=False),
-            ServiceDependency(source="Workers", target="OCR Engine", protocol="HTTP", avg_latency_ms=850.0, is_critical_path=True),
-            ServiceDependency(source="Agent Runtime", target="Monitoring", protocol="HTTP", avg_latency_ms=3.0, is_critical_path=False),
-            ServiceDependency(source="Workers", target="Evidence Store", protocol="HTTPS", avg_latency_ms=15.0, is_critical_path=False),
+            ServiceDependency(
+                source="User", target="API Gateway", protocol="HTTPS", avg_latency_ms=5.0, is_critical_path=True
+            ),
+            ServiceDependency(
+                source="API Gateway", target="Agent Runtime", protocol="HTTP", avg_latency_ms=2.0, is_critical_path=True
+            ),
+            ServiceDependency(
+                source="Agent Runtime", target="Redis Queue", protocol="TCP", avg_latency_ms=1.5, is_critical_path=True
+            ),
+            ServiceDependency(
+                source="Redis Queue", target="Workers", protocol="TCP", avg_latency_ms=1.0, is_critical_path=True
+            ),
+            ServiceDependency(
+                source="Workers", target="AI Providers", protocol="HTTPS", avg_latency_ms=1200.0, is_critical_path=True
+            ),
+            ServiceDependency(
+                source="Workers", target="PostgreSQL", protocol="TCP", avg_latency_ms=8.0, is_critical_path=False
+            ),
+            ServiceDependency(
+                source="Workers", target="Object Storage", protocol="HTTPS", avg_latency_ms=25.0, is_critical_path=False
+            ),
+            ServiceDependency(
+                source="Agent Runtime", target="PostgreSQL", protocol="TCP", avg_latency_ms=8.0, is_critical_path=False
+            ),
+            ServiceDependency(
+                source="API Gateway", target="Redis Cache", protocol="TCP", avg_latency_ms=0.5, is_critical_path=False
+            ),
+            ServiceDependency(
+                source="Workers", target="OCR Engine", protocol="HTTP", avg_latency_ms=850.0, is_critical_path=True
+            ),
+            ServiceDependency(
+                source="Agent Runtime", target="Monitoring", protocol="HTTP", avg_latency_ms=3.0, is_critical_path=False
+            ),
+            ServiceDependency(
+                source="Workers", target="Evidence Store", protocol="HTTPS", avg_latency_ms=15.0, is_critical_path=False
+            ),
         ]
 
         critical_path = ["API Gateway", "Agent Runtime", "Redis Queue", "Workers", "AI Providers"]

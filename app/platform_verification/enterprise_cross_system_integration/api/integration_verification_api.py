@@ -5,7 +5,9 @@ from fastapi import APIRouter, HTTPException
 from ..domain.models import CrossSystemIntegrationQualityReport, CrossSystemIntegrationQualityScore
 from ..runtime.integration_verification_runtime import CrossSystemIntegrationVerificationRuntime
 
-router = APIRouter(prefix="/api/v1/verification/cross-system-integration", tags=["Cross-System Integration Verification"])
+router = APIRouter(
+    prefix="/api/v1/verification/cross-system-integration", tags=["Cross-System Integration Verification"]
+)
 
 # Singleton runtime instance
 _runtime = CrossSystemIntegrationVerificationRuntime()
@@ -21,14 +23,20 @@ def get_health() -> Dict[str, Any]:
     }
 
 
-@router.post("/run", response_model=CrossSystemIntegrationQualityReport, summary="Execute complete integration verification suite")
+@router.post(
+    "/run",
+    response_model=CrossSystemIntegrationQualityReport,
+    summary="Execute complete integration verification suite",
+)
 def run_verification() -> CrossSystemIntegrationQualityReport:
     global _latest_report
     _latest_report = _runtime.execute_all()
     return _latest_report
 
 
-@router.get("/score", response_model=CrossSystemIntegrationQualityScore, summary="Get latest integration certification score")
+@router.get(
+    "/score", response_model=CrossSystemIntegrationQualityScore, summary="Get latest integration certification score"
+)
 def get_latest_score() -> CrossSystemIntegrationQualityScore:
     global _latest_report
     if not _latest_report:
@@ -36,7 +44,9 @@ def get_latest_score() -> CrossSystemIntegrationQualityScore:
     return _latest_report.score
 
 
-@router.get("/report", response_model=CrossSystemIntegrationQualityReport, summary="Get latest full integration quality report")
+@router.get(
+    "/report", response_model=CrossSystemIntegrationQualityReport, summary="Get latest full integration quality report"
+)
 def get_latest_report() -> CrossSystemIntegrationQualityReport:
     global _latest_report
     if not _latest_report:

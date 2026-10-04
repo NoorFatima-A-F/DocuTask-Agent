@@ -15,6 +15,7 @@ from .attachments import EvidenceAttachment
 
 class EvidenceBundle(BaseModel):
     """Complete, self-contained, signed compliance evidence package."""
+
     bundle_id: str = Field(default_factory=lambda: f"bnd_{uuid.uuid4().hex[:12]}")
     tenant_id: str
     title: str

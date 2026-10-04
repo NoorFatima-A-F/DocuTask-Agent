@@ -23,8 +23,8 @@ class ReliabilityMathematicsReport:
     composite_reliability_score: float  # 0.0 - 100.0
     operational_availability_pct: float  # 99.99%
     mean_time_between_failures_hours: float  # MTBF
-    mean_time_to_recovery_seconds: float   # MTTR
-    failure_rate_lambda: float             # failures / hr
+    mean_time_to_recovery_seconds: float  # MTTR
+    failure_rate_lambda: float  # failures / hr
     dimensions: List[ReliabilityDimension]
     formulation_latex: str
     timestamp_utc: float = field(default_factory=time.time)

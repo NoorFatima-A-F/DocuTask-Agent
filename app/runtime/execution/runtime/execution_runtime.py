@@ -63,7 +63,9 @@ class ExecutionRuntime:
         return {
             "mission_id": executed_mission.mission_id,
             "goal": goal,
-            "status": executed_mission.status.value if isinstance(executed_mission.status, MissionStatus) else str(executed_mission.status),
+            "status": executed_mission.status.value
+            if isinstance(executed_mission.status, MissionStatus)
+            else str(executed_mission.status),
             "plan_id": plan.plan_id,
             "simulation_id": sim_report.simulation_id,
             "critical_path_steps": plan.critical_path_steps,
@@ -95,7 +97,9 @@ class ExecutionRuntime:
             "connected_count": conn_stats["connected_count"],
             "total_missions": len(missions),
             "completed_missions": sum(1 for m in missions if m.status == MissionStatus.COMPLETED),
-            "failed_missions": sum(1 for m in missions if m.status in [MissionStatus.FAILED, MissionStatus.ROLLED_BACK]),
+            "failed_missions": sum(
+                1 for m in missions if m.status in [MissionStatus.FAILED, MissionStatus.ROLLED_BACK]
+            ),
             "active_browser_sessions": len(browser_sessions),
             "total_plans": len(plans),
             "active_policy_rules": len(rules),

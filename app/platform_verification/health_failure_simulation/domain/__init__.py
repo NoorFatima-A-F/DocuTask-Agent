@@ -1,6 +1,7 @@
 """
 Domain module for Enterprise Health Failure Simulation & Chaos Verification
 """
+
 from .models import (
     FailureSeverity,
     ExperimentState,

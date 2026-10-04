@@ -19,6 +19,7 @@ def cmd_verify(args: argparse.Namespace) -> int:
     print(f"======================================================================")
 
     import pytest
+
     pytest_args: List[str] = ["-ra", "-q"]
 
     if suite in ("platform", "all"):
@@ -36,6 +37,7 @@ def cmd_verify(args: argparse.Namespace) -> int:
         from tooling.governance.shared_kernel_validator import validate_shared_kernel
         from tooling.governance.repository_validator import RepositoryTopologyValidator
         from pathlib import Path
+
         repo_root = Path.cwd()
         sk_ret = validate_shared_kernel()
         rep_val = RepositoryTopologyValidator(repo_root)
@@ -65,17 +67,21 @@ def cmd_simulate(args: argparse.Namespace) -> int:
 
     if sim_type == "failover":
         from app.runtime.distributed import DisasterRecoveryEngine, RegionName
+
         dr = DisasterRecoveryEngine()
         src = getattr(RegionName, args.source_region.upper().replace("-", "_"), RegionName.US_EAST)
         tgt = getattr(RegionName, args.target_region.upper().replace("-", "_"), RegionName.EU_CENTRAL)
         print(f"[*] Executing cross-region failover drill: {src.value} -> {tgt.value}")
         res = dr.execute_failover_drill(failed_region=src, target_failover_region=tgt)
         print(f"[+] Failover Status: {res.get('status', 'COMPLETED')}")
-        print(f"[+] RPO Achieved: {res.get('rpo_achieved_sec', 0.0)}s | Data Loss: {res.get('data_loss_detected', False)}")
+        print(
+            f"[+] RPO Achieved: {res.get('rpo_achieved_sec', 0.0)}s | Data Loss: {res.get('data_loss_detected', False)}"
+        )
         return 0
 
     elif sim_type == "chaos":
         from app.runtime.distributed import WorkerFleetManager, AutoscalingEngine
+
         fleet = WorkerFleetManager()
         print(f"[*] Simulating chaos injection on worker fleet (fault rate: {args.fault_rate})...")
         crashed = fleet.check_heartbeats()
@@ -100,16 +106,20 @@ def cmd_eval(args: argparse.Namespace) -> int:
     print(f"  DocuTask-Agent Multimodal AI Evaluation Harness [Benchmark: {benchmark.upper()}]")
     print(f"======================================================================")
     from evals.runners.eval_runner import EvaluationRunner
+
     runner = EvaluationRunner()
     res = runner.run_benchmark(benchmark)
     print(f"[+] Evaluation Status: {res['status']}")
-    print(f"[+] Accuracy Score: {res['accuracy_score'] * 100:.1f}% | Hallucination Rate: {res['hallucination_rate'] * 100:.2f}% | F1-Score: {res['f1_score']}")
+    print(
+        f"[+] Accuracy Score: {res['accuracy_score'] * 100:.1f}% | Hallucination Rate: {res['hallucination_rate'] * 100:.2f}% | F1-Score: {res['f1_score']}"
+    )
     return 0
 
 
 def cmd_serve(args: argparse.Namespace) -> int:
     """Launch the DocuTask-Agent FastAPI production server."""
     import uvicorn
+
     print(f"[*] Starting DocuTask-Agent API Server on {args.host}:{args.port} (Workers: {args.workers})...")
     uvicorn.run(
         "app.main:app",

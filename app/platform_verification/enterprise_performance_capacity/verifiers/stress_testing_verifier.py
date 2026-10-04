@@ -32,10 +32,38 @@ class StressTestingVerifier(IStressTestingVerifier):
 
     def verify(self) -> StressTestReport:
         levels = [
-            StressLevelResult(users=100, throughput_rps=160.0, p95_latency_ms=28.0, error_rate_pct=0.0, cpu_utilization_pct=42.0, breaking_point_reached=False),
-            StressLevelResult(users=500, throughput_rps=230.0, p95_latency_ms=44.0, error_rate_pct=0.0, cpu_utilization_pct=64.0, breaking_point_reached=False),
-            StressLevelResult(users=1000, throughput_rps=285.0, p95_latency_ms=56.0, error_rate_pct=0.0, cpu_utilization_pct=78.0, breaking_point_reached=False),
-            StressLevelResult(users=2000, throughput_rps=320.0, p95_latency_ms=88.0, error_rate_pct=0.0, cpu_utilization_pct=86.0, breaking_point_reached=False),
+            StressLevelResult(
+                users=100,
+                throughput_rps=160.0,
+                p95_latency_ms=28.0,
+                error_rate_pct=0.0,
+                cpu_utilization_pct=42.0,
+                breaking_point_reached=False,
+            ),
+            StressLevelResult(
+                users=500,
+                throughput_rps=230.0,
+                p95_latency_ms=44.0,
+                error_rate_pct=0.0,
+                cpu_utilization_pct=64.0,
+                breaking_point_reached=False,
+            ),
+            StressLevelResult(
+                users=1000,
+                throughput_rps=285.0,
+                p95_latency_ms=56.0,
+                error_rate_pct=0.0,
+                cpu_utilization_pct=78.0,
+                breaking_point_reached=False,
+            ),
+            StressLevelResult(
+                users=2000,
+                throughput_rps=320.0,
+                p95_latency_ms=88.0,
+                error_rate_pct=0.0,
+                cpu_utilization_pct=86.0,
+                breaking_point_reached=False,
+            ),
         ]
 
         checks: List[CheckResult] = [

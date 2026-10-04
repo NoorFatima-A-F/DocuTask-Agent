@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class TransparencyLogEntry(BaseModel):
     """Immutable entry in the Certification Transparency Log."""
+
     entry_id: int
     certificate_id: str
     release_version: str
@@ -95,17 +96,21 @@ class CertificationTransparencyLog:
         for entry in entries:
             # 1. Check prev hash
             if entry.prev_entry_hash != expected_prev:
-                tampered_entries.append({
-                    "entry_id": entry.entry_id,
-                    "error": f"Invalid prev_entry_hash (expected {expected_prev}, got {entry.prev_entry_hash})",
-                })
+                tampered_entries.append(
+                    {
+                        "entry_id": entry.entry_id,
+                        "error": f"Invalid prev_entry_hash (expected {expected_prev}, got {entry.prev_entry_hash})",
+                    }
+                )
             # 2. Check entry hash computation
             calc_hash = entry.calculate_hash()
             if entry.entry_hash != calc_hash:
-                tampered_entries.append({
-                    "entry_id": entry.entry_id,
-                    "error": f"Tampered entry_hash (expected {calc_hash}, got {entry.entry_hash})",
-                })
+                tampered_entries.append(
+                    {
+                        "entry_id": entry.entry_id,
+                        "error": f"Tampered entry_hash (expected {calc_hash}, got {entry.entry_hash})",
+                    }
+                )
             expected_prev = entry.entry_hash
 
         is_valid = len(tampered_entries) == 0

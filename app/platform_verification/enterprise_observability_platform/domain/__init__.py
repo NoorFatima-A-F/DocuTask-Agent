@@ -1,6 +1,7 @@
 """
 Domain Models and Interfaces for Phase 3I.11 Enterprise Observability Platform Integration.
 """
+
 from app.platform_verification.enterprise_observability_platform.domain.models import (
     GlobalCertificationTier,
     EnvironmentType,

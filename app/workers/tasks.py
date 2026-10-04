@@ -12,13 +12,16 @@ from app.core.telemetry import logger, AgentSpan
 try:
     from app.workers.celery_app import celery_app
 except ImportError:
+
     class DummyCelery:
         def task(self, *args: Any, **kwargs: Any) -> Any:
             def decorator(f: Any) -> Any:
                 @functools.wraps(f)
                 def wrapper(*a: Any, **kw: Any) -> Any:
                     return f(*a, **kw)
+
                 return wrapper
+
             return decorator
 
     celery_app = DummyCelery()  # type: ignore
@@ -49,9 +52,7 @@ def process_document_pipeline(self: Any, document_id: str, file_path: str) -> Di
             retries = getattr(getattr(self, "request", None), "retries", 0)
             max_retries = getattr(self, "max_retries", 3)
             if retries >= max_retries:
-                logger.critical(
-                    f"Task exceeded max retries. Routing {document_id} to dead-letter queue (DLQ)."
-                )
+                logger.critical(f"Task exceeded max retries. Routing {document_id} to dead-letter queue (DLQ).")
                 # Route payload to DLQ topic / table
                 return {
                     "document_id": document_id,

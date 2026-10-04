@@ -7,6 +7,7 @@ import enum
 
 class ModelCapability(str, enum.Enum):
     """Supported model capabilities."""
+
     TEXT_GENERATION = "TEXT_GENERATION"
     REASONING = "REASONING"
     DOCUMENT_EXTRACTION = "DOCUMENT_EXTRACTION"

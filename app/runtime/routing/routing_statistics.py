@@ -22,12 +22,9 @@ class ModelRoutingStatistics:
         return {
             "total_routed_requests": total_routes,
             "distribution_percentages": {
-                m: round((count / total_routes) * 100, 2)
-                for m, count in self._counts.items()
+                m: round((count / total_routes) * 100, 2) for m, count in self._counts.items()
             },
-            "cumulative_cost_by_model": {
-                m: round(c, 4) for m, c in self._cost_totals.items()
-            },
+            "cumulative_cost_by_model": {m: round(c, 4) for m, c in self._cost_totals.items()},
         }
 
 

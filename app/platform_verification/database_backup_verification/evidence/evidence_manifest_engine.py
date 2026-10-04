@@ -3,6 +3,7 @@ Evidence Generation and Manifest Engine (Part 3G.2B Advanced).
 Emits all 17 machine-readable audit artifacts into evidence/database_backup_verification/
 with standardized verification headers, SHA256 checksums, and audit manifests.
 """
+
 import os
 import json
 import hashlib
@@ -52,13 +53,13 @@ class DatabaseEvidenceManifestEngine(IEvidenceManifestEngine):
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
         if not output_dir:
-            output_dir = os.path.join(
-                os.getcwd(), "evidence", "database_backup_verification"
-            )
+            output_dir = os.path.join(os.getcwd(), "evidence", "database_backup_verification")
 
         os.makedirs(output_dir, exist_ok=True)
         exec_duration = verification_data.get("execution_duration_ms", 350.0)
-        verification_id = "DBRE-VERIF-" + hashlib.sha256(f"{self.git_commit_sha}:{exec_duration}".encode()).hexdigest()[:12].upper()
+        verification_id = (
+            "DBRE-VERIF-" + hashlib.sha256(f"{self.git_commit_sha}:{exec_duration}".encode()).hexdigest()[:12].upper()
+        )
         header = self._build_header(verification_id, exec_duration)
 
         # Map all 17 artifacts

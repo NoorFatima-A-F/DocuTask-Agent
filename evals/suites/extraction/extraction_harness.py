@@ -5,6 +5,7 @@ Evaluates extraction precision against golden datasets and Pydantic schemas.
 
 from typing import Dict, Any
 
+
 class ExtractionHarness:
     """Evaluates extraction accuracy and schema adherence."""
 

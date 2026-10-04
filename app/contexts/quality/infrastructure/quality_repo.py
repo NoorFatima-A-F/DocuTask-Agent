@@ -1,6 +1,7 @@
 from typing import Dict, Optional
 from ..domain.quality_domain import QualityGateAggregate
 
+
 class InMemoryQualityGateRepository:
     def __init__(self):
         self._store: Dict[str, QualityGateAggregate] = {}

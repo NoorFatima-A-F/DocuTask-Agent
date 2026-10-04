@@ -99,6 +99,7 @@ class RuntimeMonitor:
     def get_mission_timeline(self, mission_id: str) -> List[Dict[str, Any]]:
         """Reconstructs mission timeline strictly from event store logs."""
         from app.runtime.observability.mission_snapshot import MissionSnapshotGenerator
+
         events = self.event_store.get_events_for_mission(mission_id)
         snapshot = MissionSnapshotGenerator.generate_snapshot(mission_id, events)
         return [item.model_dump() for item in snapshot.timeline]

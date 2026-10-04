@@ -3,6 +3,7 @@ FastAPI REST API Router for Multi-Region & Cloud Failover Framework (Part 3G.6).
 Exposes endpoints for querying multi-region architecture status, cross-region replication,
 traffic failover metrics, chaos simulations, and CI/CD quality gate evaluations.
 """
+
 from typing import Dict, Any
 from fastapi import APIRouter
 

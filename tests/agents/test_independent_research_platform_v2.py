@@ -4,51 +4,49 @@ Unit and Integration Tests for Research Validation & Scientific Lineage v2
 """
 
 import json
-from research_validation.provenance.independent_verifier import (
-    IndependentProvenanceVerifier, VerificationStatus
-)
+from research_validation.provenance.independent_verifier import IndependentProvenanceVerifier, VerificationStatus
 from research_validation.provenance.evidence_graph import EvidenceGraph
-from research_validation.provenance.provenance_models import (
-    LineageStage, EvidenceQualityLevel
-)
+from research_validation.provenance.provenance_models import LineageStage, EvidenceQualityLevel
 from research_validation.datasets.public_benchmarks import DatasetType
 from research_validation.datasets.benchmark_executor import (
-    PublicBenchmarkExecutor, BenchmarkExecutionStatus, compute_wilson_ci, compute_anls
+    PublicBenchmarkExecutor,
+    BenchmarkExecutionStatus,
+    compute_wilson_ci,
+    compute_anls,
 )
-from research_validation.endurance.experiment_scheduler import (
-    AsynchronousExperimentScheduler, ExperimentStatus
-)
+from research_validation.endurance.experiment_scheduler import AsynchronousExperimentScheduler, ExperimentStatus
 from research_validation.telemetry.production_evidence_collector import (
-    ProductionEvidenceCollector, TelemetryCollectionStatus
+    ProductionEvidenceCollector,
+    TelemetryCollectionStatus,
 )
-from research_validation.claims.claim_verifier import (
-    ScientificClaimVerifier
-)
-from research_validation.reproducibility.reproduce_all import (
-    MasterReproducibilityOrchestrator, ReproducibilityVerdict
-)
-from research_validation.meta_validation.validator_benchmark import (
-    ValidatorMetaBenchmarkRunner
-)
-from research_validation.threats.threats_to_validity_generator import (
-    ThreatsToValidityGenerator, ValidityDimension
-)
+from research_validation.claims.claim_verifier import ScientificClaimVerifier
+from research_validation.reproducibility.reproduce_all import MasterReproducibilityOrchestrator, ReproducibilityVerdict
+from research_validation.meta_validation.validator_benchmark import ValidatorMetaBenchmarkRunner
+from research_validation.threats.threats_to_validity_generator import ThreatsToValidityGenerator, ValidityDimension
 from research_validation.workspace.reviewer_workspace import ReviewerWorkspaceBuilder
 from research_validation.confidence.scientific_confidence_engine import (
-    ScientificConfidenceEngine, ScientificReadinessBadge
+    ScientificConfidenceEngine,
+    ScientificReadinessBadge,
 )
 
 
 # 1. Phase 72A: Independent Provenance Verification Engine
 def test_independent_provenance_verifier_jsonld_valid():
-    valid_jsonld = json.dumps({
-        "@context": {"prov": "http://www.w3.org/ns/prov#"},
-        "@graph": [
-            {"@id": "ent:1", "@type": "prov:Entity", "prov:generatedAtTime": "2026-09-08T00:00:00Z"},
-            {"@id": "act:1", "@type": "prov:Activity", "prov:startedAtTime": "2026-09-08T00:00:00Z", "prov:endedAtTime": "2026-09-08T00:01:00Z"},
-            {"@id": "ag:1", "@type": "prov:Agent"}
-        ]
-    })
+    valid_jsonld = json.dumps(
+        {
+            "@context": {"prov": "http://www.w3.org/ns/prov#"},
+            "@graph": [
+                {"@id": "ent:1", "@type": "prov:Entity", "prov:generatedAtTime": "2026-09-08T00:00:00Z"},
+                {
+                    "@id": "act:1",
+                    "@type": "prov:Activity",
+                    "prov:startedAtTime": "2026-09-08T00:00:00Z",
+                    "prov:endedAtTime": "2026-09-08T00:01:00Z",
+                },
+                {"@id": "ag:1", "@type": "prov:Agent"},
+            ],
+        }
+    )
     res = IndependentProvenanceVerifier.verify_w3c_prov_jsonld(valid_jsonld)
     assert res.is_valid is True
     assert res.status == VerificationStatus.CONSISTENT
@@ -59,14 +57,12 @@ def test_independent_provenance_verifier_jsonld_valid():
 
 def test_independent_provenance_verifier_conflict_detection():
     graph = EvidenceGraph("audit_graph")
-    valid_jsonld = json.dumps({
-        "@context": {"prov": "http://www.w3.org/ns/prov#"},
-        "@graph": [{"@id": "e1", "@type": "prov:Entity"}]
-    })
+    valid_jsonld = json.dumps(
+        {"@context": {"prov": "http://www.w3.org/ns/prov#"}, "@graph": [{"@id": "e1", "@type": "prov:Entity"}]}
+    )
     bad_xml = "<invalid xml"
     consensus = IndependentProvenanceVerifier.multi_strategy_consensus(
-        graph,
-        serializations={"jsonld": valid_jsonld, "prov_xml": bad_xml}
+        graph, serializations={"jsonld": valid_jsonld, "prov_xml": bad_xml}
     )
     assert consensus.consensus_status == VerificationStatus.VALIDATION_CONFLICT
     assert consensus.agreement_ratio == 0.5
@@ -74,13 +70,20 @@ def test_independent_provenance_verifier_conflict_detection():
 
 def test_independent_provenance_dag_replay():
     graph = EvidenceGraph("replay_test")
-    graph.record_node("n1", LineageStage.RAW_OBSERVATION, "Input", "Input observation", {"data": 123}, [], EvidenceQualityLevel.LEVEL_C)
+    graph.record_node(
+        "n1",
+        LineageStage.RAW_OBSERVATION,
+        "Input",
+        "Input observation",
+        {"data": 123},
+        [],
+        EvidenceQualityLevel.LEVEL_C,
+    )
 
     steps = [{"id": "n1", "content": {"entity_name": "Input"}, "parent_ids": []}]
     comparison = IndependentProvenanceVerifier.replay_and_compare(graph, steps)
     assert comparison.matched_nodes == 1
     assert comparison.status == VerificationStatus.CONSISTENT
-
 
 
 # 2. Phase 73A: Public Benchmark Execution Framework
@@ -147,8 +150,7 @@ def test_production_evidence_collector():
     collector = ProductionEvidenceCollector(gcp_project_id="test-project")
     # Live measured telemetry
     cr_snap = collector.collect_cloud_run_metrics(
-        service_name="doc-processor-api",
-        live_telemetry_dict={"cpu_throttling_seconds": 0.02, "cold_start_count": 1.0}
+        service_name="doc-processor-api", live_telemetry_dict={"cpu_throttling_seconds": 0.02, "cold_start_count": 1.0}
     )
     assert cr_snap.is_measured is True
     assert cr_snap.status == TelemetryCollectionStatus.MEASURED_LIVE
@@ -168,7 +170,15 @@ def test_production_evidence_collector():
 # 5. Phase 76A: Scientific Claim Verification Engine
 def test_claim_verification_engine():
     graph = EvidenceGraph("claim_graph")
-    graph.record_node("n1", LineageStage.RAW_OBSERVATION, "Benchmark F1 Measurement", "Empirical measurement", {"precision": 0.985}, [], EvidenceQualityLevel.LEVEL_A)
+    graph.record_node(
+        "n1",
+        LineageStage.RAW_OBSERVATION,
+        "Benchmark F1 Measurement",
+        "Empirical measurement",
+        {"precision": 0.985},
+        [],
+        EvidenceQualityLevel.LEVEL_A,
+    )
 
     verifier = ScientificClaimVerifier(graph)
     text = (
@@ -181,7 +191,6 @@ def test_claim_verification_engine():
     assert audit.claim_groundedness_index >= 0.33
     assert len(audit.unsupported_claims) >= 1
     assert len(audit.merkle_claim_root) == 64
-
 
 
 # 6. Phase 77A: One-Command Reproducibility Platform
@@ -245,7 +254,7 @@ def test_scientific_confidence_engine():
         quality_level_counts={
             EvidenceQualityLevel.LEVEL_A: 10,
             EvidenceQualityLevel.LEVEL_B: 5,
-        }
+        },
     )
     assert report.arithmetic_mean_score >= 0.85
     assert report.geometric_mean_score >= 0.85

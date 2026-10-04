@@ -2,6 +2,7 @@
 Readiness Contract Manager (Part 1).
 Exposes and validates the standardized GET /ready schema and component checks.
 """
+
 from typing import Dict, Any
 from datetime import datetime, timezone
 from app.platform_verification.readiness_contract.domain.models import (
@@ -31,7 +32,7 @@ class ReadinessContractManager(IReadinessContractManager):
             and storage_status == "healthy"
             and workers_status == "healthy"
         )
-        ai_ok = (ai_status == "healthy")
+        ai_ok = ai_status == "healthy"
 
         if not critical_ok:
             status = "not_ready"
@@ -66,14 +67,7 @@ class ReadinessContractManager(IReadinessContractManager):
         required_checks = ["database", "queue", "storage", "workers", "ai_provider"]
         all_checks_present = all(c in sample.get("checks", {}) for c in required_checks)
 
-        passed = (
-            has_status
-            and has_service
-            and has_version
-            and has_timestamp
-            and has_checks
-            and all_checks_present
-        )
+        passed = has_status and has_service and has_version and has_timestamp and has_checks and all_checks_present
 
         return ReadinessContractReport(
             endpoint="/ready",

@@ -29,16 +29,19 @@ T = TypeVar("T")
 
 class CircuitBreakerOpenError(Exception):
     """Raised when an operation is attempted while circuit breaker is OPEN."""
+
     pass
 
 
 class BulkheadFullError(Exception):
     """Raised when bulkhead concurrent capacity and wait queue are saturated."""
+
     pass
 
 
 class ReliabilityTimeoutError(Exception):
     """Raised when an operation exceeds its configured timeout budget."""
+
     pass
 
 
@@ -190,10 +193,10 @@ class RetryEngine:
             delay = config.initial_interval_seconds * (attempt + 1)
 
         elif config.strategy == RetryStrategy.EXPONENTIAL:
-            delay = config.initial_interval_seconds * (config.backoff_multiplier ** attempt)
+            delay = config.initial_interval_seconds * (config.backoff_multiplier**attempt)
 
         elif config.strategy == RetryStrategy.RANDOMIZED_JITTER:
-            base_delay = config.initial_interval_seconds * (config.backoff_multiplier ** attempt)
+            base_delay = config.initial_interval_seconds * (config.backoff_multiplier**attempt)
             jitter_range = base_delay * config.jitter_factor
             jitter = random.uniform(-jitter_range, jitter_range)
             delay = max(0.01, base_delay + jitter)
@@ -201,7 +204,7 @@ class RetryEngine:
         elif config.strategy == RetryStrategy.ADAPTIVE:
             # Adaptive scales aggressively under high consecutive error count
             scale_factor = 1.0 + (consecutive_errors * 0.2)
-            base_delay = config.initial_interval_seconds * (config.backoff_multiplier ** attempt) * scale_factor
+            base_delay = config.initial_interval_seconds * (config.backoff_multiplier**attempt) * scale_factor
             jitter = random.uniform(0, base_delay * config.jitter_factor)
             delay = base_delay + jitter
 
@@ -282,9 +285,13 @@ class ReliabilityPolicyEngine:
             for attempt in range(retry_cfg.max_retries + 1):
                 if time.time() - start_time > timeout_budget:
                     if policy and policy.fallback_enabled and fallback_fn:
-                        logger.warning(f"Operation '{target_name}' exceeded timeout budget {timeout_budget}s, running fallback")
+                        logger.warning(
+                            f"Operation '{target_name}' exceeded timeout budget {timeout_budget}s, running fallback"
+                        )
                         return fallback_fn(*args, **kwargs)
-                    raise ReliabilityTimeoutError(f"Operation on '{target_name}' exceeded timeout budget {timeout_budget}s")
+                    raise ReliabilityTimeoutError(
+                        f"Operation on '{target_name}' exceeded timeout budget {timeout_budget}s"
+                    )
 
                 try:
                     res = operation(*args, **kwargs)
@@ -302,7 +309,9 @@ class ReliabilityPolicyEngine:
                     time.sleep(delay)
 
             if policy and policy.fallback_enabled and fallback_fn:
-                logger.warning(f"Operation '{target_name}' failed after {retry_cfg.max_retries} retries, running fallback")
+                logger.warning(
+                    f"Operation '{target_name}' failed after {retry_cfg.max_retries} retries, running fallback"
+                )
                 return fallback_fn(*args, **kwargs)
 
             if last_exc:
@@ -347,15 +356,23 @@ class ReliabilityPolicyEngine:
                 elapsed = time.time() - start_time
                 if elapsed >= timeout_budget:
                     if policy and policy.fallback_enabled and fallback_fn:
-                        logger.warning(f"Operation '{target_name}' exceeded timeout budget {timeout_budget}s, running fallback")
+                        logger.warning(
+                            f"Operation '{target_name}' exceeded timeout budget {timeout_budget}s, running fallback"
+                        )
                         if asyncio.iscoroutinefunction(fallback_fn):
                             return await fallback_fn(*args, **kwargs)
                         return fallback_fn(*args, **kwargs)
-                    raise ReliabilityTimeoutError(f"Operation on '{target_name}' exceeded timeout budget {timeout_budget}s")
+                    raise ReliabilityTimeoutError(
+                        f"Operation on '{target_name}' exceeded timeout budget {timeout_budget}s"
+                    )
 
                 remaining_budget = max(0.01, timeout_budget - elapsed)
                 try:
-                    coro = operation(*args, **kwargs) if asyncio.iscoroutinefunction(operation) else asyncio.to_thread(operation, *args, **kwargs)
+                    coro = (
+                        operation(*args, **kwargs)
+                        if asyncio.iscoroutinefunction(operation)
+                        else asyncio.to_thread(operation, *args, **kwargs)
+                    )
                     res = await asyncio.wait_for(coro, timeout=remaining_budget)
                     cb.on_success()
                     return res

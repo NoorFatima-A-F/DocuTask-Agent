@@ -83,7 +83,7 @@ class RecommendationsVerifier:
             {"id": "r2", "roi_ratio": 2.8, "cost": 2000, "benefit": 5600},
             {"id": "r3", "roi_ratio": 1.2, "cost": 5000, "benefit": 6000},
         ]
-        is_sorted = all(recs[i]["roi_ratio"] >= recs[i+1]["roi_ratio"] for i in range(len(recs)-1))
+        is_sorted = all(recs[i]["roi_ratio"] >= recs[i + 1]["roi_ratio"] for i in range(len(recs) - 1))
         passed = is_sorted and recs[0]["id"] == "r1"
         t_ms = (time.perf_counter() - t0) * 1000.0
         return AssertionResult(
@@ -120,7 +120,7 @@ class RecommendationsVerifier:
         return AssertionResult(
             name="assert_precision_and_acceptance",
             passed=passed,
-            message=f"Recommendation quality confirmed with {precision*100:.1f}% precision and {acceptance_rate*100:.1f}% executive acceptance",
+            message=f"Recommendation quality confirmed with {precision * 100:.1f}% precision and {acceptance_rate * 100:.1f}% executive acceptance",
             execution_time_ms=t_ms,
             details={"precision": precision, "acceptance_rate": acceptance_rate},
         )

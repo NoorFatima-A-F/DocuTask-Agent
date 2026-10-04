@@ -92,6 +92,6 @@ class EvaluationRuntime(IEvaluationRuntime):
         ]
         for cat in score.categories:
             lines.append(
-                f"| {cat.name} | {cat.weight*100:.0f}% | {cat.score:.1f}% | {cat.weighted_score:.2f} | {cat.checks_passed}/{cat.checks_total} |"
+                f"| {cat.name} | {cat.weight * 100:.0f}% | {cat.score:.1f}% | {cat.weighted_score:.2f} | {cat.checks_passed}/{cat.checks_total} |"
             )
         return "\n".join(lines)

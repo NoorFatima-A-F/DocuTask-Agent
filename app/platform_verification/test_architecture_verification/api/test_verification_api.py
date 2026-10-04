@@ -1,11 +1,13 @@
 """
 In-process REST API Router for Test Architecture Verification.
 """
+
 from typing import Dict, Any, Optional
 
 
 class TestVerificationApi:
     """In-process mockable REST API for test verification platform."""
+
     __test__ = False
 
     def __init__(self, runtime):
@@ -52,7 +54,17 @@ class TestVerificationApi:
         """GET /architecture/tests/metrics"""
         return {
             "framework": "Part 2G - Enterprise Test Architecture Verifier",
-            "supported_layers": ["unit", "component", "integration", "api", "e2e", "performance", "security", "ai_evaluation", "regression"],
+            "supported_layers": [
+                "unit",
+                "component",
+                "integration",
+                "api",
+                "e2e",
+                "performance",
+                "security",
+                "ai_evaluation",
+                "regression",
+            ],
             "checks_enabled": [
                 "test_pyramid_distribution",
                 "unit_mock_isolation",

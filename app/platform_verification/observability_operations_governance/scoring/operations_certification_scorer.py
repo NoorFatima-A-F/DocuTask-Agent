@@ -8,6 +8,7 @@ Evaluates weighted scores across:
   - Incident management: 10%
   - Continuous improvement: 20%
 """
+
 from typing import Dict, Any, List
 from datetime import datetime, timezone
 from app.platform_verification.observability_operations_governance.domain.models import (
@@ -147,7 +148,7 @@ class OperationsCertificationScorer(IOperationsCertificationScorer):
         else:
             cert_tier = OperationsCertificationTier.NON_COMPLIANT
 
-        is_certified = (cert_tier == OperationsCertificationTier.ENTERPRISE_AUTONOMOUS_CERTIFIED)
+        is_certified = cert_tier == OperationsCertificationTier.ENTERPRISE_AUTONOMOUS_CERTIFIED
 
         return EnterpriseOperationsCertificationReport(
             report_title="Enterprise Observability Governance & Autonomous Operations Certification",

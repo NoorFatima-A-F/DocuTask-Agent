@@ -82,7 +82,10 @@ class ReasoningVerifier:
         t0 = time.perf_counter()
         # Modus Ponens validation: P -> Q, P |- Q
         # Inductive generalization: sample observations -> calibrated confidence prior
-        premises = ["All verified enterprise invoices must match a Purchase Order.", "Invoice #INV-882 is a verified enterprise invoice."]
+        premises = [
+            "All verified enterprise invoices must match a Purchase Order.",
+            "Invoice #INV-882 is a verified enterprise invoice.",
+        ]
         valid_deduction = "Invoice #INV-882 matches a Purchase Order."
 
         passed = len(premises) == 2 and "Invoice #INV-882 matches a Purchase Order" in valid_deduction

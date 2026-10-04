@@ -1,6 +1,7 @@
 """
 Enterprise Continuous Verification CI/CD Pipeline Package.
 """
+
 from app.platform_verification.cicd_pipeline.domain.models import (
     ChangeRiskLevel,
     EnvironmentPromotionRecord,

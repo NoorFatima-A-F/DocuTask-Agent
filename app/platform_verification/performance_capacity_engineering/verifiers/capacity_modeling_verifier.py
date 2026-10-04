@@ -2,6 +2,7 @@
 3J.1.5 & 3J.1.11: Capacity Modeling & Automation Pipeline Verifier
 Validates performance SLIs/SLOs and automated multi-stage performance test pipeline execution.
 """
+
 from typing import List
 from app.platform_verification.performance_capacity_engineering.domain.models import (
     CapacityReport,
@@ -43,13 +44,25 @@ class CapacityModelingVerifier(ICapacityModelingVerifier):
         ]
 
         pipeline_stages: List[PerformancePipelineStageSpec] = [
-            PerformancePipelineStageSpec(stage_name="Stage 1: Deploy Isolated Test Environment", automated=True, passed=True),
+            PerformancePipelineStageSpec(
+                stage_name="Stage 1: Deploy Isolated Test Environment", automated=True, passed=True
+            ),
             PerformancePipelineStageSpec(stage_name="Stage 2: Run Baseline Measurement", automated=True, passed=True),
-            PerformancePipelineStageSpec(stage_name="Stage 3: Execute Controlled Progressive Load", automated=True, passed=True),
-            PerformancePipelineStageSpec(stage_name="Stage 4: Collect Prometheus & Container Metrics", automated=True, passed=True),
-            PerformancePipelineStageSpec(stage_name="Stage 5: Automated Bottleneck & Regression Analysis", automated=True, passed=True),
-            PerformancePipelineStageSpec(stage_name="Stage 6: Generate Cryptographic Verification Manifests", automated=True, passed=True),
-            PerformancePipelineStageSpec(stage_name="Stage 7: Production Release Performance Approval Gate", automated=True, passed=True),
+            PerformancePipelineStageSpec(
+                stage_name="Stage 3: Execute Controlled Progressive Load", automated=True, passed=True
+            ),
+            PerformancePipelineStageSpec(
+                stage_name="Stage 4: Collect Prometheus & Container Metrics", automated=True, passed=True
+            ),
+            PerformancePipelineStageSpec(
+                stage_name="Stage 5: Automated Bottleneck & Regression Analysis", automated=True, passed=True
+            ),
+            PerformancePipelineStageSpec(
+                stage_name="Stage 6: Generate Cryptographic Verification Manifests", automated=True, passed=True
+            ),
+            PerformancePipelineStageSpec(
+                stage_name="Stage 7: Production Release Performance Approval Gate", automated=True, passed=True
+            ),
         ]
 
         all_slos_compliant = all(s.compliant for s in sli_validations)

@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 class PlanObjective(BaseModel):
     """Specific measurable target associated with a plan goal."""
+
     objective_id: str
     target_metric: str
     target_value: float

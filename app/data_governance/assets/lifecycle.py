@@ -14,6 +14,7 @@ from app.data_governance.registry.models import DataAsset, AssetLifecycleState
 
 class AssetLifecycleEvent(BaseModel):
     """Immutable audit record of asset lifecycle transition."""
+
     asset_id: str
     organization_id: str
     from_state: AssetLifecycleState
@@ -28,11 +29,33 @@ class AssetLifecycleManager:
 
     VALID_TRANSITIONS: Dict[AssetLifecycleState, Set[AssetLifecycleState]] = {
         AssetLifecycleState.DISCOVERED: {AssetLifecycleState.REGISTERED, AssetLifecycleState.DELETED},
-        AssetLifecycleState.REGISTERED: {AssetLifecycleState.CLASSIFIED, AssetLifecycleState.ACTIVE, AssetLifecycleState.DELETED},
-        AssetLifecycleState.CLASSIFIED: {AssetLifecycleState.ACTIVE, AssetLifecycleState.ARCHIVED, AssetLifecycleState.DELETED},
-        AssetLifecycleState.ACTIVE: {AssetLifecycleState.UPDATED, AssetLifecycleState.SUPERSEDED, AssetLifecycleState.ARCHIVED, AssetLifecycleState.DELETED},
-        AssetLifecycleState.UPDATED: {AssetLifecycleState.ACTIVE, AssetLifecycleState.SUPERSEDED, AssetLifecycleState.ARCHIVED, AssetLifecycleState.DELETED},
-        AssetLifecycleState.SUPERSEDED: {AssetLifecycleState.ACTIVE, AssetLifecycleState.ARCHIVED, AssetLifecycleState.DELETED},
+        AssetLifecycleState.REGISTERED: {
+            AssetLifecycleState.CLASSIFIED,
+            AssetLifecycleState.ACTIVE,
+            AssetLifecycleState.DELETED,
+        },
+        AssetLifecycleState.CLASSIFIED: {
+            AssetLifecycleState.ACTIVE,
+            AssetLifecycleState.ARCHIVED,
+            AssetLifecycleState.DELETED,
+        },
+        AssetLifecycleState.ACTIVE: {
+            AssetLifecycleState.UPDATED,
+            AssetLifecycleState.SUPERSEDED,
+            AssetLifecycleState.ARCHIVED,
+            AssetLifecycleState.DELETED,
+        },
+        AssetLifecycleState.UPDATED: {
+            AssetLifecycleState.ACTIVE,
+            AssetLifecycleState.SUPERSEDED,
+            AssetLifecycleState.ARCHIVED,
+            AssetLifecycleState.DELETED,
+        },
+        AssetLifecycleState.SUPERSEDED: {
+            AssetLifecycleState.ACTIVE,
+            AssetLifecycleState.ARCHIVED,
+            AssetLifecycleState.DELETED,
+        },
         AssetLifecycleState.ARCHIVED: {AssetLifecycleState.ACTIVE, AssetLifecycleState.DELETED},
         AssetLifecycleState.DELETED: set(),  # Terminal state
     }
@@ -53,10 +76,14 @@ class AssetLifecycleManager:
     ) -> DataAsset:
         """Execute state transition with validation and audit logging."""
         if asset.is_legal_hold and target_state in (AssetLifecycleState.ARCHIVED, AssetLifecycleState.DELETED):
-            raise ValueError(f"Cannot transition asset '{asset.asset_id}' to '{target_state.value}': Active Legal Hold in effect")
+            raise ValueError(
+                f"Cannot transition asset '{asset.asset_id}' to '{target_state.value}': Active Legal Hold in effect"
+            )
 
         if not self.can_transition(asset.status, target_state):
-            raise ValueError(f"Invalid transition from '{asset.status.value}' to '{target_state.value}' for asset '{asset.asset_id}'")
+            raise ValueError(
+                f"Invalid transition from '{asset.status.value}' to '{target_state.value}' for asset '{asset.asset_id}'"
+            )
 
         event = AssetLifecycleEvent(
             asset_id=asset.asset_id,

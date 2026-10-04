@@ -2,6 +2,7 @@
 3I.11.10: Enterprise Dashboard Federation Verifier
 Verifies federated Executive, SRE, AI Operations, and Infrastructure operational views.
 """
+
 from typing import List
 from app.platform_verification.enterprise_observability_platform.domain.models import (
     DashboardFederationReport,

@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Liveness Verification Framework (Part 3H.2).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, Any, List
@@ -15,10 +16,10 @@ class LivenessState(str, Enum):
 
 
 class LivenessTier(str, Enum):
-    FAILED = "Failed"                                      # < 80
-    NEEDS_IMPROVEMENT = "Needs Improvement"                # 80 - 89
-    PRODUCTION_READY = "Production Ready"                  # 90 - 94
-    ENTERPRISE_READY = "Enterprise Liveness Ready"         # 95 - 100
+    FAILED = "Failed"  # < 80
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80 - 89
+    PRODUCTION_READY = "Production Ready"  # 90 - 94
+    ENTERPRISE_READY = "Enterprise Liveness Ready"  # 95 - 100
 
 
 class ProcessStatus(str, Enum):
@@ -180,14 +181,14 @@ class SecurityReport:
 @dataclass
 class LivenessScorecard:
     runtime_detection_accuracy_score: float  # Weight 25%
-    event_loop_monitoring_score: float       # Weight 20%
-    deadlock_detection_score: float          # Weight 15%
-    resource_monitoring_score: float         # Weight 15%
-    recovery_integration_score: float        # Weight 15%
-    security_score: float                    # Weight 10%
-    overall_liveness_score: float            # Composite 0 - 100
+    event_loop_monitoring_score: float  # Weight 20%
+    deadlock_detection_score: float  # Weight 15%
+    resource_monitoring_score: float  # Weight 15%
+    recovery_integration_score: float  # Weight 15%
+    security_score: float  # Weight 10%
+    overall_liveness_score: float  # Composite 0 - 100
     certification_tier: LivenessTier
-    certification_verdict: str               # CERTIFIED / REJECTED
+    certification_verdict: str  # CERTIFIED / REJECTED
     auto_recovery_validated: bool
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

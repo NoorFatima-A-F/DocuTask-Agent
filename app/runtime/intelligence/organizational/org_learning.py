@@ -103,7 +103,7 @@ class OrgLearningEngine:
         # Rolling exponential moving average
         alpha = 0.05
         dept.historical_success_rate = round((1 - alpha) * dept.historical_success_rate + alpha * is_success, 4)
-        
+
         # Bottleneck score increases if latency is high or retries occurred
         b_sample = min(1.0, (experience.total_latency_ms / 3000.0) * 0.5 + experience.retries_count * 0.25)
         dept.bottleneck_score = round((1 - alpha) * dept.bottleneck_score + alpha * b_sample, 4)

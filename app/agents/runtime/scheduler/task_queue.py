@@ -13,6 +13,7 @@ from app.agents.runtime.enterprise.scheduler_state import ScheduledJob
 
 class TaskLease(BaseModel):
     """Represents a time-bounded distributed lease granted to a worker."""
+
     job_id: UUID
     worker_id: str
     acquired_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

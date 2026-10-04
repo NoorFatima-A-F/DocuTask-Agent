@@ -13,6 +13,7 @@ from app.agents.reflection.learning_artifact import LearningArtifact
 
 class MemoryUpdateRequest(BaseModel):
     """Explicit request payload for Memory Subsystem to promote an artifact to long-term memory."""
+
     request_id: UUID = Field(default_factory=uuid4)
     target_tier: str = "REFLECTION"  # WORKING, EPISODIC, SEMANTIC, PROCEDURAL, REFLECTION
     artifact: LearningArtifact
@@ -24,6 +25,7 @@ class MemoryUpdateRequest(BaseModel):
 
 class MemoryFeedback(BaseModel):
     """Structured feedback directed to Memory Manager regarding consolidation and retention."""
+
     feedback_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     update_requests: List[MemoryUpdateRequest] = Field(default_factory=list)

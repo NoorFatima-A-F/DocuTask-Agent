@@ -74,6 +74,7 @@ class EnvironmentFingerprintEngine:
             try:
                 # Windows memory retrieval via ctypes or system info
                 import ctypes
+
                 class MEMORYSTATUSEX(ctypes.Structure):
                     _fields_ = [
                         ("dwLength", ctypes.c_ulong),
@@ -86,10 +87,11 @@ class EnvironmentFingerprintEngine:
                         ("ullAvailVirtual", ctypes.c_ulonglong),
                         ("sullAvailExtendedVirtual", ctypes.c_ulonglong),
                     ]
+
                 stat = MEMORYSTATUSEX()
                 stat.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
                 ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat))  # type: ignore
-                ram_gb = round(stat.ullTotalPhys / (1024.0 ** 3), 2)
+                ram_gb = round(stat.ullTotalPhys / (1024.0**3), 2)
             except Exception:
                 pass
 
@@ -122,7 +124,8 @@ class EnvironmentFingerprintEngine:
             git_commit_hash=git_hash,
             hostname=platform.node(),
             timezone=time.tzname[0] if time.tzname else "UTC",
-            extra_metadata=extra_metadata or {
+            extra_metadata=extra_metadata
+            or {
                 "redis_engine": "Redis 7.2-compatible / In-Memory Mock",
                 "vertex_model": "gemini-1.5-pro",
                 "cloud_provider": "Google Cloud Platform (GCP)",

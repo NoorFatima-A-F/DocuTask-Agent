@@ -48,16 +48,16 @@ class WorkflowSimulator:
             # Baseline estimation heuristics
             if task.type == TaskType.AI:
                 task_dur = 1200.0  # ~1.2s
-                task_cost = 0.15   # ~15 cents
+                task_cost = 0.15  # ~15 cents
             elif task.type == TaskType.HUMAN or task.type == TaskType.APPROVAL:
                 task_dur = 3600000.0  # ~1 hour SLA
                 task_cost = 0.0
                 bottlenecks.append(f"Human gate '{task.id}' introduces external wait time")
             elif task.type == TaskType.CONNECTOR:
-                task_dur = 250.0   # ~250ms
+                task_dur = 250.0  # ~250ms
                 task_cost = 0.01
             else:
-                task_dur = 50.0    # ~50ms
+                task_dur = 50.0  # ~50ms
                 task_cost = 0.0
 
             total_duration += task_dur

@@ -2,6 +2,7 @@
 Startup Readiness Validator (Part 6).
 Validates the deterministic startup sequence and guarantees prevention of false readiness.
 """
+
 from app.platform_verification.readiness_contract.domain.models import (
     StartupValidationReport,
 )
@@ -17,13 +18,55 @@ class StartupReadinessValidator(IStartupReadinessValidator):
 
     def validate_startup_sequence(self) -> StartupValidationReport:
         steps = [
-            {"step_number": 1, "action": "Container Process Spawns", "state": "INITIALIZING", "traffic": "BLOCKED", "verified": True},
-            {"step_number": 2, "action": "Load Configuration & Secrets", "state": "INITIALIZING", "traffic": "BLOCKED", "verified": True},
-            {"step_number": 3, "action": "Initialize Internal Framework Services", "state": "INITIALIZING", "traffic": "BLOCKED", "verified": True},
-            {"step_number": 4, "action": "Establish PostgreSQL Connection Pool", "state": "INITIALIZING", "traffic": "BLOCKED", "verified": True},
-            {"step_number": 5, "action": "Initialize Celery / Task Worker Channels", "state": "INITIALIZING", "traffic": "BLOCKED", "verified": True},
-            {"step_number": 6, "action": "Validate Dependencies & Capabilities", "state": "CHECKING_DEPENDENCIES", "traffic": "BLOCKED", "verified": True},
-            {"step_number": 7, "action": "Expose HTTP 200 /ready with status: ready", "state": "READY", "traffic": "ADMITTED", "verified": True},
+            {
+                "step_number": 1,
+                "action": "Container Process Spawns",
+                "state": "INITIALIZING",
+                "traffic": "BLOCKED",
+                "verified": True,
+            },
+            {
+                "step_number": 2,
+                "action": "Load Configuration & Secrets",
+                "state": "INITIALIZING",
+                "traffic": "BLOCKED",
+                "verified": True,
+            },
+            {
+                "step_number": 3,
+                "action": "Initialize Internal Framework Services",
+                "state": "INITIALIZING",
+                "traffic": "BLOCKED",
+                "verified": True,
+            },
+            {
+                "step_number": 4,
+                "action": "Establish PostgreSQL Connection Pool",
+                "state": "INITIALIZING",
+                "traffic": "BLOCKED",
+                "verified": True,
+            },
+            {
+                "step_number": 5,
+                "action": "Initialize Celery / Task Worker Channels",
+                "state": "INITIALIZING",
+                "traffic": "BLOCKED",
+                "verified": True,
+            },
+            {
+                "step_number": 6,
+                "action": "Validate Dependencies & Capabilities",
+                "state": "CHECKING_DEPENDENCIES",
+                "traffic": "BLOCKED",
+                "verified": True,
+            },
+            {
+                "step_number": 7,
+                "action": "Expose HTTP 200 /ready with status: ready",
+                "state": "READY",
+                "traffic": "ADMITTED",
+                "verified": True,
+            },
         ]
 
         all_verified = all(s["verified"] for s in steps)

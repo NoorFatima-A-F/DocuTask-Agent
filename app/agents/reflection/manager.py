@@ -16,11 +16,7 @@ from app.agents.reflection.repository import InMemoryReflectionRepository, IRefl
 class ReflectionManager:
     """Manages reflection lifecycle, caching, and repository operations."""
 
-    def __init__(
-        self,
-        repository: Optional[IReflectionRepository] = None,
-        cache: Optional[ReflectionCache] = None
-    ):
+    def __init__(self, repository: Optional[IReflectionRepository] = None, cache: Optional[ReflectionCache] = None):
         self.repository = repository or InMemoryReflectionRepository()
         self.cache = cache or ReflectionCache()
         self._active_sessions: Dict[UUID, ReflectionSession] = {}
@@ -28,9 +24,7 @@ class ReflectionManager:
     def create_session(self, trace: ExecutionTraceEnvelope) -> ReflectionSession:
         """Creates and tracks a new reflection session for a trace."""
         session = ReflectionSession(
-            session_id=uuid4(),
-            identity=ReflectionIdentity(execution_id=trace.execution_id),
-            trace=trace
+            session_id=uuid4(), identity=ReflectionIdentity(execution_id=trace.execution_id), trace=trace
         )
         self._active_sessions[session.session_id] = session
         return session

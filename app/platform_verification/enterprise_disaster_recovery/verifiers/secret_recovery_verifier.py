@@ -29,12 +29,48 @@ class SecretRecoveryVerifier(ISecretRecoveryVerifier):
 
     def verify(self) -> SecretRecoveryReport:
         secrets = [
-            SecretRestorationItem(secret_name="POSTGRES_PASSWORD", encryption_algorithm="AES-256-GCM", access_policy_enforced=True, decrypted_successfully=True, rotation_enabled=True),
-            SecretRestorationItem(secret_name="JWT_SECRET_KEY", encryption_algorithm="AES-256-GCM", access_policy_enforced=True, decrypted_successfully=True, rotation_enabled=True),
-            SecretRestorationItem(secret_name="GEMINI_API_KEY", encryption_algorithm="AES-256-GCM", access_policy_enforced=True, decrypted_successfully=True, rotation_enabled=True),
-            SecretRestorationItem(secret_name="REDIS_PASSWORD", encryption_algorithm="AES-256-GCM", access_policy_enforced=True, decrypted_successfully=True, rotation_enabled=True),
-            SecretRestorationItem(secret_name="OBJECT_STORAGE_SECRET_KEY", encryption_algorithm="AES-256-GCM", access_policy_enforced=True, decrypted_successfully=True, rotation_enabled=True),
-            SecretRestorationItem(secret_name="MASTER_SIGNING_KEY", encryption_algorithm="AES-256-GCM", access_policy_enforced=True, decrypted_successfully=True, rotation_enabled=True),
+            SecretRestorationItem(
+                secret_name="POSTGRES_PASSWORD",
+                encryption_algorithm="AES-256-GCM",
+                access_policy_enforced=True,
+                decrypted_successfully=True,
+                rotation_enabled=True,
+            ),
+            SecretRestorationItem(
+                secret_name="JWT_SECRET_KEY",
+                encryption_algorithm="AES-256-GCM",
+                access_policy_enforced=True,
+                decrypted_successfully=True,
+                rotation_enabled=True,
+            ),
+            SecretRestorationItem(
+                secret_name="GEMINI_API_KEY",
+                encryption_algorithm="AES-256-GCM",
+                access_policy_enforced=True,
+                decrypted_successfully=True,
+                rotation_enabled=True,
+            ),
+            SecretRestorationItem(
+                secret_name="REDIS_PASSWORD",
+                encryption_algorithm="AES-256-GCM",
+                access_policy_enforced=True,
+                decrypted_successfully=True,
+                rotation_enabled=True,
+            ),
+            SecretRestorationItem(
+                secret_name="OBJECT_STORAGE_SECRET_KEY",
+                encryption_algorithm="AES-256-GCM",
+                access_policy_enforced=True,
+                decrypted_successfully=True,
+                rotation_enabled=True,
+            ),
+            SecretRestorationItem(
+                secret_name="MASTER_SIGNING_KEY",
+                encryption_algorithm="AES-256-GCM",
+                access_policy_enforced=True,
+                decrypted_successfully=True,
+                rotation_enabled=True,
+            ),
         ]
 
         checks = [

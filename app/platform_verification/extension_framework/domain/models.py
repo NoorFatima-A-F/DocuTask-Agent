@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Verification Extension Framework & Plugin Architecture.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 import hashlib
@@ -80,7 +81,9 @@ class PluginMetadata(BaseModel):
     owner: str = "Enterprise Architecture"
     description: str
     capabilities: List[str] = Field(default_factory=list)
-    supported_verification_levels: List[str] = Field(default_factory=lambda: ["UNIT", "INTEGRATION", "E2E", "CANARY", "CHAOS"])
+    supported_verification_levels: List[str] = Field(
+        default_factory=lambda: ["UNIT", "INTEGRATION", "E2E", "CANARY", "CHAOS"]
+    )
     dependencies: List[PluginDependencyDeclaration] = Field(default_factory=list)
     min_platform_version: str = "2.0.0"
     config_schema: Dict[str, Any] = Field(default_factory=dict)

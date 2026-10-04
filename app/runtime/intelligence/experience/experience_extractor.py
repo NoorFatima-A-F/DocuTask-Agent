@@ -56,7 +56,7 @@ class ExperienceExtractor:
             )
 
         experience_id = f"exp_{uuid.uuid4().hex[:12]}"
-        
+
         # Calculate DAG topology hash if available
         dag_nodes = dag.get("nodes", ["plan", "execute", "validate"])
         dag_topology_hash = hashlib.sha256(str(dag_nodes).encode("utf-8")).hexdigest()

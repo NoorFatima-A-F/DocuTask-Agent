@@ -11,9 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from research_validation.observatory.observatory_models import (
-    BenchmarkStatus, BenchmarkDatasetRecord
-)
+from research_validation.observatory.observatory_models import BenchmarkStatus, BenchmarkDatasetRecord
 
 
 class LivingBenchmarkTracker:
@@ -76,17 +74,19 @@ class LivingBenchmarkTracker:
                 status = BenchmarkStatus.DATASET_UNAVAILABLE
                 note = f"Dataset path {target_path} not found. Non-fabricated fallback emitted."
 
-            records.append(BenchmarkDatasetRecord(
-                benchmark_id=b_id,
-                benchmark_name=meta["name"],
-                version=meta["version"],
-                expected_sample_count=meta["samples"],
-                expected_sha256="",
-                status=status,
-                last_verified_utc=now_str,
-                primary_metric=meta["metric"],
-                sota_reference_score=meta["sota"],
-                notes=note,
-            ))
+            records.append(
+                BenchmarkDatasetRecord(
+                    benchmark_id=b_id,
+                    benchmark_name=meta["name"],
+                    version=meta["version"],
+                    expected_sample_count=meta["samples"],
+                    expected_sha256="",
+                    status=status,
+                    last_verified_utc=now_str,
+                    primary_metric=meta["metric"],
+                    sota_reference_score=meta["sota"],
+                    notes=note,
+                )
+            )
 
         return records

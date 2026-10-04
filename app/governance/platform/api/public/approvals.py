@@ -51,10 +51,7 @@ class ApprovalApiService:
         page_size: int = 50,
     ) -> Dict[str, Any]:
         """List review queue items scoped to tenant."""
-        results = [
-            a for a in self._approvals.values()
-            if a["tenant_id"] == ctx.tenant_id
-        ]
+        results = [a for a in self._approvals.values() if a["tenant_id"] == ctx.tenant_id]
         if status:
             results = [a for a in results if a.get("status") == status.upper()]
         if risk_level:
@@ -106,7 +103,9 @@ def handle_list_approvals(ctx: APIRequestContext, query_params: Optional[Dict[st
     )
 
 
-def handle_approve_request(ctx: APIRequestContext, path_params: Dict[str, Any], body: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def handle_approve_request(
+    ctx: APIRequestContext, path_params: Dict[str, Any], body: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
     appr_id = path_params["id"]
     req = ApprovalDecisionRequest(**(body or {"reviewer_id": ctx.user_id or ctx.client_id}))
     res = approval_api_service.resolve_approval(
@@ -117,11 +116,19 @@ def handle_approve_request(ctx: APIRequestContext, path_params: Dict[str, Any], 
         comments=req.comments,
     )
     if not res:
-        return {"error": {"code": "NOT_FOUND", "message": f"Approval request {appr_id} not found", "request_id": ctx.request_id}}
+        return {
+            "error": {
+                "code": "NOT_FOUND",
+                "message": f"Approval request {appr_id} not found",
+                "request_id": ctx.request_id,
+            }
+        }
     return res
 
 
-def handle_reject_request(ctx: APIRequestContext, path_params: Dict[str, Any], body: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def handle_reject_request(
+    ctx: APIRequestContext, path_params: Dict[str, Any], body: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
     appr_id = path_params["id"]
     req = ApprovalDecisionRequest(**(body or {"reviewer_id": ctx.user_id or ctx.client_id, "decision": "REJECTED"}))
     res = approval_api_service.resolve_approval(
@@ -132,5 +139,11 @@ def handle_reject_request(ctx: APIRequestContext, path_params: Dict[str, Any], b
         comments=req.comments,
     )
     if not res:
-        return {"error": {"code": "NOT_FOUND", "message": f"Approval request {appr_id} not found", "request_id": ctx.request_id}}
+        return {
+            "error": {
+                "code": "NOT_FOUND",
+                "message": f"Approval request {appr_id} not found",
+                "request_id": ctx.request_id,
+            }
+        }
     return res

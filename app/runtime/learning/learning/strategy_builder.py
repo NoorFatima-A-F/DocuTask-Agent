@@ -15,11 +15,13 @@ class ExecutionStrategy(BaseModel):
     strategy_name: str = "Parallel Wavefront Execution Strategy"
     goal_type: str = "DYNAMIC_EXTRACTION"
     expected_gain_pct: float = 24.5
-    prescribed_tactics: List[str] = Field(default_factory=lambda: [
-        "Concurrent OCR sharding (4 workers)",
-        "Pre-verification schema invariance checks",
-        "Exponential retry with 250ms base backoff",
-    ])
+    prescribed_tactics: List[str] = Field(
+        default_factory=lambda: [
+            "Concurrent OCR sharding (4 workers)",
+            "Pre-verification schema invariance checks",
+            "Exponential retry with 250ms base backoff",
+        ]
+    )
     supported_goal_types: List[str] = Field(default_factory=lambda: ["EXTRACTION", "REASONING", "VALIDATION"])
     version: str = "1.0.0"
 

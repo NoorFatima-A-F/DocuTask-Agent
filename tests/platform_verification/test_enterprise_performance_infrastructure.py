@@ -86,6 +86,7 @@ from app.platform_verification.enterprise_performance_infrastructure.verifiers.m
 
 # ─── 1. Domain Models Tests ───────────────────────────────────────────────────
 
+
 def test_domain_models_instantiation():
     base = BaseVerificationReport(
         verifier_id="VERIFY-TEST",
@@ -114,13 +115,25 @@ def test_domain_models_instantiation():
 
 # ─── 2. All 13 Verifiers Individual Tests ─────────────────────────────────────
 
+
 def test_all_verifiers_registered():
     verifiers = get_all_verifiers()
     assert len(verifiers) == 13
     phase_ids = [v.phase_id for v in verifiers]
     expected_ids = [
-        "3J.6.1", "3J.6.2", "3J.6.3", "3J.6.4", "3J.6.5", "3J.6.6", "3J.6.7",
-        "3J.6.8", "3J.6.9", "3J.6.10", "3J.6.11", "3J.6.12", "3J.6.13",
+        "3J.6.1",
+        "3J.6.2",
+        "3J.6.3",
+        "3J.6.4",
+        "3J.6.5",
+        "3J.6.6",
+        "3J.6.7",
+        "3J.6.8",
+        "3J.6.9",
+        "3J.6.10",
+        "3J.6.11",
+        "3J.6.12",
+        "3J.6.13",
     ]
     assert phase_ids == expected_ids
 
@@ -278,6 +291,7 @@ def test_3j_6_13_monitoring_integration_verifier():
 
 # ─── 3. Scorer Tests ─────────────────────────────────────────────────────────
 
+
 def test_scorer_calculation():
     verifiers = get_all_verifiers()
     reports = {}
@@ -297,6 +311,7 @@ def test_scorer_calculation():
 
 
 # ─── 4. Exporter Tests ───────────────────────────────────────────────────────
+
 
 def test_exporter_manifest_and_files():
     temp_dir = tempfile.mkdtemp()
@@ -342,6 +357,7 @@ def test_exporter_manifest_and_files():
 
 # ─── 5. Runtime Orchestrator Tests ───────────────────────────────────────────
 
+
 def test_runtime_orchestrator():
     temp_dir = tempfile.mkdtemp()
     try:
@@ -358,6 +374,7 @@ def test_runtime_orchestrator():
 
 
 # ─── 6. REST API Tests ───────────────────────────────────────────────────────
+
 
 def test_rest_api_endpoints():
     app = FastAPI()

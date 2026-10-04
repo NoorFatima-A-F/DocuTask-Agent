@@ -12,6 +12,7 @@ from app.agents.workflow.workflow_instance import WorkflowInstance
 
 class WorkflowSnapshot(BaseModel):
     """Complete serialized point-in-time snapshot for cold storage or Cloud Storage backup."""
+
     snapshot_id: UUID = Field(default_factory=uuid4)
     instance_id: UUID
     instance_data: Dict[str, Any]
@@ -25,5 +26,5 @@ class WorkflowSnapshot(BaseModel):
         return cls(
             instance_id=instance.instance_id,
             instance_data=instance.model_dump(mode="json"),
-            definition_id=instance.definition_id
+            definition_id=instance.definition_id,
         )

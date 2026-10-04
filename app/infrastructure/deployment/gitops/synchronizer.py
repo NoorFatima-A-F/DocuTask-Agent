@@ -9,6 +9,7 @@ import threading
 @dataclass
 class GitOpsManifest:
     """A versioned declarative resource manifest."""
+
     resource_id: str
     kind: str
     name: str

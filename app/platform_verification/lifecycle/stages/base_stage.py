@@ -2,11 +2,13 @@
 Base Lifecycle Stage Contract.
 Enforces explicit entry criteria, exit criteria, retries, timeouts, and compensation.
 """
+
 from abc import ABC, abstractmethod
 import time
 from datetime import datetime, timezone
 from app.platform_verification.lifecycle.context import VerificationExecutionContext, StageResult
 from app.platform_verification.lifecycle.states import LifecycleState
+
 
 class BaseLifecycleStage(ABC):
     @property
@@ -53,7 +55,7 @@ class BaseLifecycleStage(ABC):
 
     def run(self, context: VerificationExecutionContext) -> StageResult:
         t0 = time.perf_counter()
-        
+
         # 1. Entry Criteria Check
         if not self.validate_entry_criteria(context):
             raise ValueError(f"Stage {self.stage_number} ({self.stage_name}) Entry Criteria failed.")
@@ -76,7 +78,7 @@ class BaseLifecycleStage(ABC):
                         status="FAILED",
                         error_message=str(e),
                         duration_ms=round((time.perf_counter() - t0) * 1000, 2),
-                        completed_at=datetime.now(timezone.utc).isoformat()
+                        completed_at=datetime.now(timezone.utc).isoformat(),
                     )
                     context.stage_results.append(result)
                     return result

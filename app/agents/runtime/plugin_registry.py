@@ -11,6 +11,7 @@ from app.agents.runtime.plugin_loader import PluginManifest, PluginState
 
 class PluginRegistration(BaseModel):
     """Runtime registration record of an installed plugin."""
+
     manifest: PluginManifest
     state: PluginState = PluginState.DISCOVERED
     instance: Optional[Any] = None
@@ -64,7 +65,8 @@ class PluginRegistry:
     def list_active(self) -> List[PluginRegistration]:
         """Returns all currently active or running plugins."""
         return [
-            p for p in self._plugins.values()
+            p
+            for p in self._plugins.values()
             if p.state in (PluginState.ACTIVATED, PluginState.RUNNING) and p.manifest.enabled
         ]
 

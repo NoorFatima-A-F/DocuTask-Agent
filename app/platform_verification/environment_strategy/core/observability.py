@@ -1,6 +1,7 @@
 """
 Environment Observability and Health Monitoring.
 """
+
 from typing import Any, Dict
 from app.platform_verification.environment_strategy.domain.models import EnvironmentHealthState
 from app.platform_verification.environment_strategy.domain.interfaces import EnvironmentObservabilityInterface
@@ -23,7 +24,7 @@ class EnvironmentObservabilityService(EnvironmentObservabilityInterface):
             "avg_latency_ms": 32.1,
             "p95_latency_ms": 78.4,
             "error_rate_pct": 0.01,
-            "health_state": "HEALTHY"
+            "health_state": "HEALTHY",
         }
 
 

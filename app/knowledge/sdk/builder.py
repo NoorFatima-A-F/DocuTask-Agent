@@ -123,9 +123,7 @@ class KnowledgeSDK:
         # Step 2: Permission-Aware Governance Filter
         if user_context:
             objects_map = {obj.id: obj for obj in self.registry.search()}
-            candidates = self.governance_engine.filter_retrieval_results(
-                candidates, user_context, objects_map
-            )
+            candidates = self.governance_engine.filter_retrieval_results(candidates, user_context, objects_map)
 
         # Step 3: Multi-factor Reranking
         ranked_candidates = self.ranking_engine.rank(candidates)

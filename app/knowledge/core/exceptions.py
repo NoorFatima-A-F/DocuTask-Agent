@@ -27,49 +27,59 @@ class KnowledgeError(Exception):
 
 class KnowledgeNotFoundError(KnowledgeError):
     """Raised when a requested knowledge object or document is not found."""
+
     pass
 
 
 class InvalidKnowledgeStateError(KnowledgeError):
     """Raised when an illegal lifecycle transition is attempted on a knowledge object."""
+
     pass
 
 
 class PermissionDeniedError(KnowledgeError):
     """Raised when user or agent lacks ACL permissions to access a knowledge resource."""
+
     pass
 
 
 class ClassificationViolationError(KnowledgeError):
     """Raised when a knowledge request violates organizational security classification rules."""
+
     pass
 
 
 class ChunkingError(KnowledgeError):
     """Raised when document parsing or chunk segmentation fails."""
+
     pass
 
 
 class EmbeddingError(KnowledgeError):
     """Raised when text embedding computation fails on a provider backend."""
+
     pass
 
 
 class VectorStoreError(KnowledgeError):
     """Raised when vector indexing, upserting, or similarity search fails."""
+
     pass
 
 
 class RetrievalError(KnowledgeError):
     """Raised when hybrid retrieval or ranking fails."""
+
     pass
 
 
 class IngestionError(KnowledgeError):
     """Raised when knowledge source ingestion or connector syncing fails."""
+
     pass
 
 
 class KnowledgeGraphError(KnowledgeError):
     """Raised when entity extraction or relationship graph query fails."""
+
     pass

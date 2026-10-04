@@ -25,12 +25,36 @@ class RAGEvaluator(IRAGEvaluator):
 
     def evaluate(self) -> RAGEvaluationReport:
         metrics = [
-            RAGBenchmarkMetric(metric_name="Precision@5", value=0.965, target=0.900, description="Top-5 retrieved chunks relevance"),
-            RAGBenchmarkMetric(metric_name="Recall@5", value=0.982, target=0.920, description="Fraction of gold chunks captured in top-5"),
-            RAGBenchmarkMetric(metric_name="MeanReciprocalRank(MRR)", value=0.945, target=0.880, description="Rank position of first relevant chunk"),
-            RAGBenchmarkMetric(metric_name="NDCG@5", value=0.958, target=0.900, description="Normalized Discounted Cumulative Gain"),
-            RAGBenchmarkMetric(metric_name="ContextNoiseRatio", value=0.038, target=0.100, description="Irrelevant tokens in retrieved context"),
-            RAGBenchmarkMetric(metric_name="WithVsWithoutRAGAccuracyDelta", value=48.5, target=30.0, description="Accuracy improvement using RAG knowledge graph"),
+            RAGBenchmarkMetric(
+                metric_name="Precision@5", value=0.965, target=0.900, description="Top-5 retrieved chunks relevance"
+            ),
+            RAGBenchmarkMetric(
+                metric_name="Recall@5",
+                value=0.982,
+                target=0.920,
+                description="Fraction of gold chunks captured in top-5",
+            ),
+            RAGBenchmarkMetric(
+                metric_name="MeanReciprocalRank(MRR)",
+                value=0.945,
+                target=0.880,
+                description="Rank position of first relevant chunk",
+            ),
+            RAGBenchmarkMetric(
+                metric_name="NDCG@5", value=0.958, target=0.900, description="Normalized Discounted Cumulative Gain"
+            ),
+            RAGBenchmarkMetric(
+                metric_name="ContextNoiseRatio",
+                value=0.038,
+                target=0.100,
+                description="Irrelevant tokens in retrieved context",
+            ),
+            RAGBenchmarkMetric(
+                metric_name="WithVsWithoutRAGAccuracyDelta",
+                value=48.5,
+                target=30.0,
+                description="Accuracy improvement using RAG knowledge graph",
+            ),
         ]
 
         checks = [

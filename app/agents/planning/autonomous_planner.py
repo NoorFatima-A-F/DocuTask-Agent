@@ -48,7 +48,7 @@ class AutonomousPlanner:
             if agent:
                 task.assigned_agent = agent.agent_id
                 total_cost += agent.cost_per_invocation
-                total_duration += (agent.latency_ms_p95 / 1000.0)
+                total_duration += agent.latency_ms_p95 / 1000.0
 
             # 2. Match Tool
             tool = self.discovery.match_tool(
@@ -59,7 +59,7 @@ class AutonomousPlanner:
             if tool:
                 task.required_tools = [tool.tool_id]
                 total_cost += tool.cost_per_call
-                total_duration += (tool.latency_ms / 1000.0)
+                total_duration += tool.latency_ms / 1000.0
 
             # 3. Setup Fallback Strategy
             if task.action == "ocr":
@@ -95,8 +95,7 @@ class AutonomousPlanner:
         # 5. Verification Steps
         if goal.success_criteria:
             plan.verification_steps = [
-                f"Verify {sc.metric_name} {sc.comparison_operator} {sc.target_value}"
-                for sc in goal.success_criteria
+                f"Verify {sc.metric_name} {sc.comparison_operator} {sc.target_value}" for sc in goal.success_criteria
             ]
         else:
             plan.verification_steps = [f"Verify {goal.intent} execution and schema consistency"]

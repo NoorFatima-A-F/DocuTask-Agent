@@ -2,12 +2,14 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import List
 
+
 @dataclass(frozen=True)
 class RecoveryActionRecord:
     action_type: str
     target_id: str
     initiated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     status: str = "COMPLETED"
+
 
 class LifecycleRecoveryManager:
     def __init__(self):

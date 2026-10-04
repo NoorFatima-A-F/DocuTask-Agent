@@ -12,6 +12,7 @@ from app.core.logging import logger
 
 class LatencyPercentiles(BaseModel):
     """Latency distribution breakdown in milliseconds."""
+
     average_ms: float
     median_p50_ms: float
     p90_ms: float
@@ -21,6 +22,7 @@ class LatencyPercentiles(BaseModel):
 
 class ProviderBenchmarkResult(BaseModel):
     """Comprehensive benchmark result for an AI provider."""
+
     provider_name: str
     model_name: str
     total_documents: int
@@ -42,10 +44,7 @@ class ProductionBenchmarker:
 
     @classmethod
     async def benchmark_provider(
-        cls,
-        provider_name: str = "gemini",
-        model_name: str = "gemini-1.5-flash",
-        sample_count: int = 10
+        cls, provider_name: str = "gemini", model_name: str = "gemini-1.5-flash", sample_count: int = 10
     ) -> ProviderBenchmarkResult:
         """
         Executes benchmark evaluations over target provider.
@@ -65,12 +64,14 @@ class ProductionBenchmarker:
             median_p50_ms=round(p50, 2),
             p90_ms=round(p90, 2),
             p95_ms=round(p95, 2),
-            p99_ms=round(p99, 2)
+            p99_ms=round(p99, 2),
         )
 
         cost_per_doc = provider.calculate_cost(input_tokens=650, output_tokens=180, model_name=model_name)
 
-        logger.info(f"Completed Provider Production Benchmark: Provider='{provider_name}', Model='{model_name}', P95={p95}ms")
+        logger.info(
+            f"Completed Provider Production Benchmark: Provider='{provider_name}', Model='{model_name}', P95={p95}ms"
+        )
 
         return ProviderBenchmarkResult(
             provider_name=provider_name,
@@ -86,5 +87,5 @@ class ProductionBenchmarker:
             success_rate=100.0,
             timeout_rate=0.0,
             retry_rate=0.0,
-            failure_rate=0.0
+            failure_rate=0.0,
         )

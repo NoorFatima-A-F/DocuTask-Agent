@@ -1,6 +1,7 @@
 """
 Pyramid Verification Dashboard generating maturity distribution, coverage, and risk metrics.
 """
+
 from __future__ import annotations
 from typing import Dict, List
 from app.platform_verification.pyramid_engine.domain.models import (
@@ -56,7 +57,7 @@ class PyramidDashboard(IPyramidDashboard):
         crit_count = open_defects[FailureSeverity.CRITICAL.value]
         high_count = open_defects[FailureSeverity.HIGH.value]
         med_count = open_defects[FailureSeverity.MEDIUM.value]
-        unverified_ratio = (unverified_comp / max(1, total_comp))
+        unverified_ratio = unverified_comp / max(1, total_comp)
 
         raw_risk = (crit_count * 30.0) + (high_count * 15.0) + (med_count * 5.0) + (unverified_ratio * 40.0)
         risk_index = round(min(100.0, raw_risk), 2)

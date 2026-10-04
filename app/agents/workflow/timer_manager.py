@@ -12,6 +12,7 @@ from app.agents.workflow.exceptions import InvalidTimerConfigurationError
 
 class WorkflowTimer(BaseModel):
     """A durable timer set by a workflow."""
+
     timer_id: UUID = Field(default_factory=uuid4)
     instance_id: UUID
     node_id: str
@@ -51,7 +52,7 @@ class TimerManager:
             node_id=node_id,
             duration_seconds=duration_seconds,
             delay_seconds=duration_seconds,
-            expires_at_timestamp=now + duration_seconds
+            expires_at_timestamp=now + duration_seconds,
         )
         self._timers[timer.timer_id] = timer
         return timer

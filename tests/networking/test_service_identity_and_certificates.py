@@ -63,7 +63,10 @@ def test_certificate_issuance_and_rotation():
         validity_seconds=3600.0,
     )
     assert leaf.is_active is True
-    assert cert_mgr.verify_certificate(leaf.serial_number, expected_san="spiffe://docutask.internal/ns/default/sa/worker") is True
+    assert (
+        cert_mgr.verify_certificate(leaf.serial_number, expected_san="spiffe://docutask.internal/ns/default/sa/worker")
+        is True
+    )
 
     # Rotate
     rotated = cert_mgr.rotate_certificate(leaf.serial_number)

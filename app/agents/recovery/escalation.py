@@ -33,7 +33,7 @@ class EscalationEngine:
             self.incident_manager.create_incident(
                 failure,
                 title=f"Unrecoverable failure on execution {failure.identity.execution_id}",
-                description=failure.evidence.error_message
+                description=failure.evidence.error_message,
             )
             return EscalationLevel.INCIDENT
         return EscalationLevel.PERMANENT_FAILURE

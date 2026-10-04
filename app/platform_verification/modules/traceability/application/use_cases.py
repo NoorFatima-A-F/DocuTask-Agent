@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Traceability.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.traceability.domain.models import TraceabilityEntity
 from app.platform_verification.modules.traceability.domain.interfaces import TraceabilityRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageTraceabilityUseCase:
     def __init__(self, repository: TraceabilityRepositoryInterface):

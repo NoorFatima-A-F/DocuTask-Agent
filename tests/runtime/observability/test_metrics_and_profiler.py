@@ -22,9 +22,32 @@ def test_metrics_engine_computation():
 
     # Emit mission lifecycle
     engine.handle_event(MissionEvent(category=EventCategory.MISSION, event_type="MISSION_CREATED", mission_id="m1"))
-    engine.handle_event(ExecutionEvent(category=EventCategory.EXECUTION, event_type="NODE_EXEC", mission_id="m1", duration_ms=120.0, status="SUCCESS"))
-    engine.handle_event(ExecutionEvent(category=EventCategory.EXECUTION, event_type="NODE_EXEC", mission_id="m1", duration_ms=250.0, status="FAILED"))
-    engine.handle_event(CostEvent(category=EventCategory.COST, event_type="COST_RECORDED", mission_id="m1", payload={"cost_usd": 0.0042, "total_tokens": 1500}))
+    engine.handle_event(
+        ExecutionEvent(
+            category=EventCategory.EXECUTION,
+            event_type="NODE_EXEC",
+            mission_id="m1",
+            duration_ms=120.0,
+            status="SUCCESS",
+        )
+    )
+    engine.handle_event(
+        ExecutionEvent(
+            category=EventCategory.EXECUTION,
+            event_type="NODE_EXEC",
+            mission_id="m1",
+            duration_ms=250.0,
+            status="FAILED",
+        )
+    )
+    engine.handle_event(
+        CostEvent(
+            category=EventCategory.COST,
+            event_type="COST_RECORDED",
+            mission_id="m1",
+            payload={"cost_usd": 0.0042, "total_tokens": 1500},
+        )
+    )
     engine.handle_event(MissionEvent(category=EventCategory.MISSION, event_type="MISSION_COMPLETED", mission_id="m1"))
 
     summary = engine.get_summary()
@@ -56,7 +79,9 @@ def test_execution_profiler_flame_graph():
             event_type="CHILD_B",
             mission_id="m1",
             duration_ms=300.0,
-            trace_context=TraceContext(span_id="s_b", parent_span_id="s_root", operation="llm_extract", component="worker"),
+            trace_context=TraceContext(
+                span_id="s_b", parent_span_id="s_root", operation="llm_extract", component="worker"
+            ),
         ),
     ]
 

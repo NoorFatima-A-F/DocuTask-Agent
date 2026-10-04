@@ -24,6 +24,7 @@ class ResearchAction(str, Enum):
 @dataclass(frozen=True)
 class ResearchDecision:
     """Outcome of an automated research deliberation."""
+
     action: ResearchAction
     target_id: str
     confidence_score: float

@@ -1,6 +1,7 @@
 """
 Health Failure Policy Manager for Health Check Architecture Verification (Part 3H.1).
 """
+
 from typing import Dict, Any, List
 from app.platform_verification.health_architecture.domain.models import (
     FailurePolicyReport,
@@ -79,7 +80,9 @@ class HealthFailurePolicyManager(IFailurePolicyManager):
 
     def verify_failure_policies(self) -> FailurePolicyReport:
         policies_count = len(self._policies)
-        detection_verified = all("detection_mechanism" in p and len(p["detection_mechanism"]) > 0 for p in self._policies)
+        detection_verified = all(
+            "detection_mechanism" in p and len(p["detection_mechanism"]) > 0 for p in self._policies
+        )
         classification_enforced = all("classification" in p and "target_health_state" in p for p in self._policies)
         response_automated = all("automated_response" in p and len(p["automated_response"]) > 0 for p in self._policies)
         recovery_documented = all("recovery_action" in p and len(p["recovery_action"]) > 0 for p in self._policies)

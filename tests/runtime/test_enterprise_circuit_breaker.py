@@ -165,4 +165,3 @@ async def test_distributed_redis_circuit_breaker_shared_across_workers():
     assert worker1_cb.state == CircuitState.OPEN
     with pytest.raises(CircuitBreakerOpenError):
         await worker1_cb.execute(lambda: "should not be called")
-

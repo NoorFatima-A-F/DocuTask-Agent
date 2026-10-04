@@ -113,7 +113,7 @@ class ContinuousLearningVerifier:
         t0 = time.perf_counter()
         # Golden benchmark accuracy over 10 consecutive training epochs
         accuracies = [98.2, 98.4, 98.4, 98.5, 98.6, 98.6, 98.7, 98.7, 98.8, 98.8]
-        no_regression = all(accuracies[i] <= accuracies[i+1] for i in range(len(accuracies)-1))
+        no_regression = all(accuracies[i] <= accuracies[i + 1] for i in range(len(accuracies) - 1))
         passed = no_regression and accuracies[-1] >= 98.0
         t_ms = (time.perf_counter() - t0) * 1000.0
         return AssertionResult(

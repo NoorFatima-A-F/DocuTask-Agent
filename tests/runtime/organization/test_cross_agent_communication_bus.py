@@ -2,6 +2,7 @@
 Test Suite: Cross-Agent Communication Bus & Cryptographic Messaging
 Validates pub/sub message publishing, channel routing, ACLs, signature verification, and conversation history.
 """
+
 from app.runtime.communication.communication_bus import CommunicationBus
 from app.runtime.communication.message_router import MessageRouter
 from app.runtime.communication.channel_manager import ChannelManager
@@ -10,7 +11,7 @@ from app.runtime.communication.conversation_history import ConversationHistory
 
 def test_communication_bus_publishing_and_signatures():
     bus = CommunicationBus()
-    
+
     msg = bus.publish_message(
         channel_name="#validation-alerts",
         sender_dept_id="dept_extraction",
@@ -34,7 +35,7 @@ def test_communication_bus_publishing_and_signatures():
 def test_message_router_subscriptions():
     router = MessageRouter()
     channels = router.list_channels_with_subscribers()
-    
+
     assert "#executive-dispatch" in channels
     assert "dept_executive" in channels["#executive-dispatch"]
     assert "dept_ocr" in channels["#ocr-extraction-handoff"]

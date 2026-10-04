@@ -35,5 +35,7 @@ def test_autonomous_research_engine():
     assert "selected_arm" in sample
     assert len(sample["arm_statistics"]) == 4
 
-    val_res = engine.validate_candidate("CAND-01", predicted_accuracy=0.95, predicted_latency_ms=600.0, predicted_cost_usd=0.002)
+    val_res = engine.validate_candidate(
+        "CAND-01", predicted_accuracy=0.95, predicted_latency_ms=600.0, predicted_cost_usd=0.002
+    )
     assert val_res["is_safe_for_canary"] is True

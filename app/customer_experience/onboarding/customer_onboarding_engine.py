@@ -17,12 +17,32 @@ class CustomerOnboardingEngine(IOnboardingEngine):
 
     STEP_DEFINITIONS = [
         (1, "Create Organization Profile", "Set up enterprise tenant, primary domain, and admin credentials"),
-        (2, "Select Industry & Department", "Tailor regulatory compliance frameworks and baseline departmental taxonomy"),
+        (
+            2,
+            "Select Industry & Department",
+            "Tailor regulatory compliance frameworks and baseline departmental taxonomy",
+        ),
         (3, "Choose Automation Template", "Select turnkey pre-configured workflow from AI Automation Marketplace"),
-        (4, "Connect Data Sources & Storage", "Authenticate Gmail/Outlook, Slack, and cloud storage providers (S3/Drive)"),
-        (5, "Configure AI Agents & Guardrails", "Set hallucination thresholds, prompt versions, and model tier allocation"),
-        (6, "Set Approval & Escalation Rules", "Establish confidence thresholds for human-in-the-loop exception routing"),
-        (7, "Run Test Workflow & Live Activation", "Execute synthetic dry-run verification and enable production queue processing"),
+        (
+            4,
+            "Connect Data Sources & Storage",
+            "Authenticate Gmail/Outlook, Slack, and cloud storage providers (S3/Drive)",
+        ),
+        (
+            5,
+            "Configure AI Agents & Guardrails",
+            "Set hallucination thresholds, prompt versions, and model tier allocation",
+        ),
+        (
+            6,
+            "Set Approval & Escalation Rules",
+            "Establish confidence thresholds for human-in-the-loop exception routing",
+        ),
+        (
+            7,
+            "Run Test Workflow & Live Activation",
+            "Execute synthetic dry-run verification and enable production queue processing",
+        ),
     ]
 
     def __init__(self):

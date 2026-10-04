@@ -32,9 +32,7 @@ class PluginDependencyResolver:
                 missing.append(dep_id)
 
         if missing:
-            raise PluginValidationError(
-                f"Plugin '{target.name}' missing active dependencies: {missing}"
-            )
+            raise PluginValidationError(f"Plugin '{target.name}' missing active dependencies: {missing}")
         return target.dependencies
 
 
@@ -54,9 +52,7 @@ class PluginSandbox:
         """Ensures plugin does not request unauthorized platform permissions."""
         unauthorized = [p for p in manifest.permissions if p not in self.allowed_permissions]
         if unauthorized:
-            raise PluginValidationError(
-                f"Plugin '{manifest.name}' requested unauthorized permissions: {unauthorized}"
-            )
+            raise PluginValidationError(f"Plugin '{manifest.name}' requested unauthorized permissions: {unauthorized}")
 
 
 class PluginRollbackManager:

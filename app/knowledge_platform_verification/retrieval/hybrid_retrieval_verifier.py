@@ -145,7 +145,7 @@ class HybridRetrievalVerifier:
             "assertion": AssertionResult(
                 name="Information_Retrieval_Benchmark_Metrics",
                 passed=passed,
-                message=f"Retrieval evaluation achieved Recall@5={recall_5*100:.1f}%, NDCG@10={ndcg_10*100:.1f}%, MRR={mrr*100:.1f}%.",
+                message=f"Retrieval evaluation achieved Recall@5={recall_5 * 100:.1f}%, NDCG@10={ndcg_10 * 100:.1f}%, MRR={mrr * 100:.1f}%.",
                 execution_time_ms=t_elapsed,
                 details={"recall_at_5": recall_5, "ndcg_at_10": ndcg_10, "mrr": mrr},
             ),

@@ -1,6 +1,7 @@
 """
 Audit Domain: Immutable, Tamper-Evident Hash-Chained Audit Records.
 """
+
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field

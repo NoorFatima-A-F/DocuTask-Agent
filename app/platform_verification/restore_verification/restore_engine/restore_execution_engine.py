@@ -1,6 +1,7 @@
 """
 Restore Execution Engine for Automated Restore Verification System (Part 3G.2E).
 """
+
 from typing import Dict, Any, List
 
 from app.platform_verification.restore_verification.domain.models import (
@@ -31,9 +32,7 @@ class RestoreExecutionEngine(IRestoreExecutionEngine):
         ("monitoring", 0.8, "Prometheus metrics & OTel collectors connected"),
     ]
 
-    def execute_ordered_restore(
-        self, plan: RestoreExecutionPlan
-    ) -> Dict[str, Any]:
+    def execute_ordered_restore(self, plan: RestoreExecutionPlan) -> Dict[str, Any]:
         """
         Executes sequential, dependency-checked component restoration.
         """

@@ -49,7 +49,8 @@ class CapabilityDiscoveryEngine:
             description=description,
             synthesized_from=synthesized_from,
             input_contract=input_contract or {"type": "object", "properties": {"document_pages": {"type": "array"}}},
-            output_contract=output_contract or {"type": "object", "properties": {"extracted_tables": {"type": "array"}}},
+            output_contract=output_contract
+            or {"type": "object", "properties": {"extracted_tables": {"type": "array"}}},
             reusability_score=reusability_score,
         )
         self._capabilities[cid] = cap

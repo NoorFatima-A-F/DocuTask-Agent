@@ -275,7 +275,17 @@ class TestTaskGraphMutationEngine:
 
 
 class TestTaskGraphInvariantsAndEdgeCases:
-    @pytest.mark.parametrize("state", [NodeState.READY, NodeState.RUNNING, NodeState.COMPLETED, NodeState.FAILED, NodeState.SKIPPED, NodeState.MUTATED])
+    @pytest.mark.parametrize(
+        "state",
+        [
+            NodeState.READY,
+            NodeState.RUNNING,
+            NodeState.COMPLETED,
+            NodeState.FAILED,
+            NodeState.SKIPPED,
+            NodeState.MUTATED,
+        ],
+    )
     def test_all_node_states_valid(self, state):
         graph = DynamicTaskGraph()
         task = PlannedTask("t_state", "Task", "act")
@@ -530,6 +540,3 @@ class TestExpandedTaskGraphScenarios:
     def test_mutation_event_timestamp_present(self):
         event = GraphMutationEvent("MUT", "n1")
         assert event.timestamp is not None
-
-
-

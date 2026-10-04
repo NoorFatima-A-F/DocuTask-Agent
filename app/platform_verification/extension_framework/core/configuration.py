@@ -1,15 +1,13 @@
 """
 Plugin Configuration Engine with Schema Validation, Defaults Injection, and Secret Masking.
 """
+
 from typing import Any, Dict, List, Tuple
 
 
 class PluginConfigurationEngine:
     @staticmethod
-    def validate_and_apply_defaults(
-        config: Dict[str, Any],
-        schema: Dict[str, Any]
-    ) -> Tuple[Dict[str, Any], List[str]]:
+    def validate_and_apply_defaults(config: Dict[str, Any], schema: Dict[str, Any]) -> Tuple[Dict[str, Any], List[str]]:
         errors: List[str] = []
         resolved = dict(config)
 

@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, List
 import math
 
+
 @dataclass(frozen=True)
 class ComputedMetric:
     metric_name: str
@@ -10,6 +11,7 @@ class ComputedMetric:
     sample_size: int
     confidence_interval_95: tuple[float, float]
     dimension: str
+
 
 class MetricProcessingPipeline:
     @staticmethod
@@ -33,6 +35,6 @@ class MetricProcessingPipeline:
                 unit=unit,
                 sample_size=n,
                 confidence_interval_95=(max(0.0, mean - margin), mean + margin),
-                dimension=dim
+                dimension=dim,
             )
         return results

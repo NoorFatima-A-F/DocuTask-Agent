@@ -1,6 +1,7 @@
 """
 3I.4.15: Failure Simulation & Chaos Trace Reaction Verifier
 """
+
 from typing import List
 from ..domain.models import ChaosTraceScenarioSpec, ChaosTraceReport
 from ..domain.interfaces import IFailureSimulationTraceVerifier
@@ -21,16 +22,16 @@ class FailureSimulationTraceVerifier(IFailureSimulationTraceVerifier):
                     "agent_invoke_gemini_extraction (START)",
                     "gemini_api_client_call (ERROR: TimeoutException)",
                     "agent_reflection_trigger (RECOVERY)",
-                    "gemini_flash_fallback_call (SUCCESS)"
+                    "gemini_flash_fallback_call (SUCCESS)",
                 ],
                 actual_span_sequence=[
                     "agent_invoke_gemini_extraction (START)",
                     "gemini_api_client_call (ERROR: TimeoutException)",
                     "agent_reflection_trigger (RECOVERY)",
-                    "gemini_flash_fallback_call (SUCCESS)"
+                    "gemini_flash_fallback_call (SUCCESS)",
                 ],
                 root_cause_isolated=True,
-                recovery_span_recorded=True
+                recovery_span_recorded=True,
             ),
             ChaosTraceScenarioSpec(
                 scenario_id="CHAOS-TRACE-002",
@@ -41,17 +42,17 @@ class FailureSimulationTraceVerifier(IFailureSimulationTraceVerifier):
                     "worker_processing_start",
                     "worker_abrupt_disconnect (ERROR)",
                     "queue_task_requeue (RECOVERY)",
-                    "replacement_worker_execution (SUCCESS)"
+                    "replacement_worker_execution (SUCCESS)",
                 ],
                 actual_span_sequence=[
                     "queue_task_assigned",
                     "worker_processing_start",
                     "worker_abrupt_disconnect (ERROR)",
                     "queue_task_requeue (RECOVERY)",
-                    "replacement_worker_execution (SUCCESS)"
+                    "replacement_worker_execution (SUCCESS)",
                 ],
                 root_cause_isolated=True,
-                recovery_span_recorded=True
+                recovery_span_recorded=True,
             ),
             ChaosTraceScenarioSpec(
                 scenario_id="CHAOS-TRACE-003",
@@ -62,22 +63,22 @@ class FailureSimulationTraceVerifier(IFailureSimulationTraceVerifier):
                     "postgres_insert_result (ERROR: SerializationFailure)",
                     "postgres_transaction_rollback",
                     "db_client_retry_with_backoff (RECOVERY)",
-                    "postgres_transaction_commit (SUCCESS)"
+                    "postgres_transaction_commit (SUCCESS)",
                 ],
                 actual_span_sequence=[
                     "postgres_transaction_begin",
                     "postgres_insert_result (ERROR: SerializationFailure)",
                     "postgres_transaction_rollback",
                     "db_client_retry_with_backoff (RECOVERY)",
-                    "postgres_transaction_commit (SUCCESS)"
+                    "postgres_transaction_commit (SUCCESS)",
                 ],
                 root_cause_isolated=True,
-                recovery_span_recorded=True
+                recovery_span_recorded=True,
             ),
         ]
 
         return ChaosTraceReport(
             report_title="Failure Simulation & Chaos Trace Verification Report",
             scenarios=scenarios,
-            all_scenarios_verified=True
+            all_scenarios_verified=True,
         )

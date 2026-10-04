@@ -57,7 +57,7 @@ class GoalBuilder:
             priority=self._priority,
             owner=self._owner,
             metadata=meta,
-            sub_goals=self._sub_goals
+            sub_goals=self._sub_goals,
         )
         DomainValidator.validate_goal(goal)
         return goal
@@ -81,28 +81,15 @@ class TaskBuilder:
         return self
 
     def build_ocr_task(self, language: str = "eng") -> OCRTask:
-        return OCRTask(
-            name=self._name,
-            priority=self._priority,
-            inputs=self._inputs,
-            language=language
-        )
+        return OCRTask(name=self._name, priority=self._priority, inputs=self._inputs, language=language)
 
     def build_extraction_task(self, document_type: str = "generic") -> ExtractionTask:
         return ExtractionTask(
-            name=self._name,
-            priority=self._priority,
-            inputs=self._inputs,
-            document_type=document_type
+            name=self._name, priority=self._priority, inputs=self._inputs, document_type=document_type
         )
 
     def build(self) -> AgentTask:
-        return AgentTask(
-            name=self._name,
-            task_type=self._task_type,
-            priority=self._priority,
-            inputs=self._inputs
-        )
+        return AgentTask(name=self._name, task_type=self._task_type, priority=self._priority, inputs=self._inputs)
 
 
 class WorkflowBuilder:
@@ -120,18 +107,14 @@ class WorkflowBuilder:
 
     def connect(self, source_id: str, target_id: str, condition: Optional[str] = None) -> "WorkflowBuilder":
         edge_id = f"{source_id}->{target_id}"
-        edge = WorkflowEdge(edge_id=edge_id, source_node_id=source_id, target_node_id=target_id, condition_expression=condition)
+        edge = WorkflowEdge(
+            edge_id=edge_id, source_node_id=source_id, target_node_id=target_id, condition_expression=condition
+        )
         self._edges.append(edge)
         return self
 
     def build(self) -> WorkflowGraph:
-        graph = WorkflowGraph(
-
-            name=self._name,
-            workflow_type=WorkflowType.DAG,
-            nodes=self._nodes,
-            edges=self._edges
-        )
+        graph = WorkflowGraph(name=self._name, workflow_type=WorkflowType.DAG, nodes=self._nodes, edges=self._edges)
         DomainValidator.validate_workflow_graph(graph)
         return graph
 
@@ -154,5 +137,5 @@ class PolicyBuilder:
     def build(self) -> ExecutionPolicy:
         return ExecutionPolicy(
             retry=RetryPolicy(max_retries=self._max_retries),
-            timeout=TimeoutPolicy(timeout_seconds=self._timeout_seconds)
+            timeout=TimeoutPolicy(timeout_seconds=self._timeout_seconds),
         )

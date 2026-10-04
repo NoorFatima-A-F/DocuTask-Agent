@@ -1,11 +1,13 @@
 """
 Content-Addressable Append-Only Cryptographic Evidence Store
 """
+
 import json
 import hashlib
 from typing import Dict, Any, Optional
 from app.platform_verification.domain.models import ImmutableEvidenceRecord
 from app.platform_verification.domain.interfaces import EvidenceStoreInterface
+
 
 class ContentAddressableEvidenceStore(EvidenceStoreInterface):
     def __init__(self):
@@ -22,7 +24,7 @@ class ContentAddressableEvidenceStore(EvidenceStoreInterface):
             content_type="application/json",
             byte_size=byte_size,
             storage_uri=f"evidence://sha256/{sha256_hash}",
-            tamper_verified=True
+            tamper_verified=True,
         )
         self._store[record.evidence_id] = evidence_data
         self._records[record.evidence_id] = record
@@ -39,5 +41,6 @@ class ContentAddressableEvidenceStore(EvidenceStoreInterface):
         serialized = json.dumps(data, sort_keys=True)
         current_hash = hashlib.sha256(serialized.encode("utf-8")).hexdigest()
         return current_hash == record.sha256_hash
+
 
 evidence_store = ContentAddressableEvidenceStore()

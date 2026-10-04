@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class ExecutionIdentity(BaseModel):
     """Immutable identity identifying an execution session across distributed workers."""
+
     execution_id: UUID = Field(default_factory=uuid4)
     plan_id: UUID
     session_id: Optional[str] = Field(default=None)
@@ -22,6 +23,7 @@ class ExecutionIdentity(BaseModel):
 
 class ExecutionStatistics(BaseModel):
     """Runtime execution statistics and resource consumption telemetry."""
+
     total_nodes_count: int = Field(default=0, ge=0)
     completed_nodes_count: int = Field(default=0, ge=0)
     failed_nodes_count: int = Field(default=0, ge=0)
@@ -36,6 +38,7 @@ class ExecutionStatistics(BaseModel):
 
 class ExecutionMetadata(BaseModel):
     """Runtime execution metadata and auditing headers."""
+
     started_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     completed_at: Optional[datetime] = Field(default=None)
     environment: str = Field(default="PRODUCTION")

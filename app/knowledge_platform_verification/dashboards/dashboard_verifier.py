@@ -98,9 +98,9 @@ class DashboardVerifier:
         }
 
         passed = (
-            dashboard_metrics["total_knowledge_assets"] > 100000 and
-            dashboard_metrics["p95_retrieval_latency_ms"] < 20.0 and
-            dashboard_metrics["zero_trust_security_score"] == 100.0
+            dashboard_metrics["total_knowledge_assets"] > 100000
+            and dashboard_metrics["p95_retrieval_latency_ms"] < 20.0
+            and dashboard_metrics["zero_trust_security_score"] == 100.0
         )
         t_ms = (time.perf_counter() - t0) * 1000.0
         return AssertionResult(

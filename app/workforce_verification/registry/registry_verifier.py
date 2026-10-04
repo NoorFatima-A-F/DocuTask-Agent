@@ -73,7 +73,9 @@ class WorkforceRegistryVerifier:
             skills=["OCR_PARSING", "TABLE_EXTRACTION", "TAX_MATH"],
             cost_per_task=0.005,
         )
-        passed = agent.agent_id == "agt_extract_01" and len(agent.skills) == 3 and agent.state == AgentLifecycleState.ACTIVE
+        passed = (
+            agent.agent_id == "agt_extract_01" and len(agent.skills) == 3 and agent.state == AgentLifecycleState.ACTIVE
+        )
         t_ms = (time.perf_counter() - t0) * 1000.0
         return AssertionResult(
             name="assert_valid_agent_registration",
@@ -88,7 +90,12 @@ class WorkforceRegistryVerifier:
         # Test invalid cases: Empty skills, impossible clearance combinations, duplicate ID
         invalid_candidates = [
             {"agent_id": "agt_bad_1", "role": "WORKER", "skills": [], "clearance": 1},  # missing skills
-            {"agent_id": "agt_bad_2", "role": "WORKER", "skills": ["DATA_ENTRY"], "clearance": 5},  # excessive clearance for basic worker
+            {
+                "agent_id": "agt_bad_2",
+                "role": "WORKER",
+                "skills": ["DATA_ENTRY"],
+                "clearance": 5,
+            },  # excessive clearance for basic worker
         ]
         rejected_count = 0
         for cand in invalid_candidates:

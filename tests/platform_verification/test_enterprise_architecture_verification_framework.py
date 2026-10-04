@@ -1,6 +1,7 @@
 """
 Unit and Integration tests for Enterprise Architecture Verification Framework (PART 2A).
 """
+
 import pytest
 from app.platform_verification.architecture_verification import (
     ArchitectureCertificationBand,
@@ -76,6 +77,7 @@ def test_architecture_scoring_and_certification_bands(runtime):
 
     # 2. Severely degraded architecture with critical violations
     from app.platform_verification.architecture_verification.domain.models import ArchitectureViolation
+
     bad_violations = [
         ArchitectureViolation(
             violation_id="V1",
@@ -123,7 +125,9 @@ def test_architecture_regression_detection(runtime):
 
     degraded_score = runtime.scoring_engine.calculate_score(
         violations=[
-            ArchitectureViolation("V1", "R1", "Domain Isolation", RuleCategory.DEPENDENCY, RuleSeverity.CRITICAL, "file.py", 1, "msg")
+            ArchitectureViolation(
+                "V1", "R1", "Domain Isolation", RuleCategory.DEPENDENCY, RuleSeverity.CRITICAL, "file.py", 1, "msg"
+            )
         ],
         circular_cycles=[],
         total_files=10,
@@ -133,7 +137,11 @@ def test_architecture_regression_detection(runtime):
         scan_id="SCAN-DEGRADED",
         metadata=ScanMetadata("SCAN-DEGRADED", "app", "commit2"),
         dependency_graph={},
-        violations=[ArchitectureViolation("V1", "R1", "Domain Isolation", RuleCategory.DEPENDENCY, RuleSeverity.CRITICAL, "file.py", 1, "msg")],
+        violations=[
+            ArchitectureViolation(
+                "V1", "R1", "Domain Isolation", RuleCategory.DEPENDENCY, RuleSeverity.CRITICAL, "file.py", 1, "msg"
+            )
+        ],
         circular_cycles=[],
         score_report=degraded_score,
     )
@@ -151,6 +159,7 @@ def test_architecture_regression_detection(runtime):
 def test_ast_scanner_and_evidence_generation(runtime):
     """Test executing actual AST analysis against app/shared_kernel/ directory."""
     import os
+
     app_dir = os.path.join(runtime.base_repo_dir, "app", "shared_kernel")
     if os.path.exists(app_dir):
         deps, file_metrics, total_files, total_lines = runtime.scanner.scan_directory(app_dir)

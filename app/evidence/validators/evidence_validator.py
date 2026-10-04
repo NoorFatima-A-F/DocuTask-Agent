@@ -52,7 +52,9 @@ class EvidenceValidator:
             p = Path(item.artifact_location)
             if not p.exists():
                 item.verification_status = VerificationStatus.SOURCE_UNAVAILABLE
-                logger.error("Validation failed: Artifact not found at %s for %s", item.artifact_location, item.evidence_id)
+                logger.error(
+                    "Validation failed: Artifact not found at %s for %s", item.artifact_location, item.evidence_id
+                )
                 return False
 
         # 3. Check timestamp validity (cannot be in the future beyond 60s clock skew)
@@ -74,7 +76,9 @@ class EvidenceValidator:
                 "evidence_id": item.evidence_id,
                 "status": item.verification_status.value,
                 "hash_valid": item.item_hash == item.compute_hash(),
-                "artifact_exists": bool(item.artifact_location and Path(item.artifact_location).exists()) if item.artifact_location else True,
+                "artifact_exists": bool(item.artifact_location and Path(item.artifact_location).exists())
+                if item.artifact_location
+                else True,
             }
             report.validation_details[item.evidence_id] = detail
 

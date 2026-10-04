@@ -74,7 +74,9 @@ class WorkerFleetManager:
         self._workers[node.worker_id] = node
         return node
 
-    def record_heartbeat(self, worker_id: str, cpu_pct: Optional[float] = None, memory_pct: Optional[float] = None) -> bool:
+    def record_heartbeat(
+        self, worker_id: str, cpu_pct: Optional[float] = None, memory_pct: Optional[float] = None
+    ) -> bool:
         worker = self._workers.get(worker_id)
         if not worker:
             return False

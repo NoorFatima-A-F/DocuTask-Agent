@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Quality.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.quality.domain.models import QualityEntity
 from app.platform_verification.modules.quality.domain.interfaces import QualityRepositoryInterface
+
 
 class InMemoryQualityRepository(QualityRepositoryInterface):
     def __init__(self):

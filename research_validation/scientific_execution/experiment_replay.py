@@ -11,9 +11,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from research_validation.scientific_execution.experiment_manifest import ExperimentManifest
-from research_validation.scientific_execution.experiment_runner import (
-    ScientificExperimentRunner, ExperimentRunResult
-)
+from research_validation.scientific_execution.experiment_runner import ScientificExperimentRunner, ExperimentRunResult
 
 
 @dataclass(frozen=True)
@@ -67,7 +65,7 @@ class ExperimentReplayEngine:
             rep_val = replayed_res.metrics.get(m_name, 0.0)
             abs_diff = abs(orig_val - rep_val)
             rel_diff = abs_diff / abs(orig_val) if abs(orig_val) > 0 else 0.0
-            
+
             # Latency and duration measurements undergo non-deterministic wall-clock jitter
             if "latency" in m_name or m_name.endswith("_ms") or "duration" in m_name:
                 within_tol = abs_diff <= self.latency_tolerance_ms or rel_diff <= 10.0
@@ -87,12 +85,9 @@ class ExperimentReplayEngine:
                 within_tolerance=within_tol,
             )
 
-        hash_match = (original_result.final_output_digest == replayed_res.final_output_digest)
+        hash_match = original_result.final_output_digest == replayed_res.final_output_digest
         is_reproduced = all_within_tol and (original_result.status == replayed_res.status)
-        dur_ratio = (
-            replayed_res.duration_ms / original_result.duration_ms
-            if original_result.duration_ms > 0 else 1.0
-        )
+        dur_ratio = replayed_res.duration_ms / original_result.duration_ms if original_result.duration_ms > 0 else 1.0
 
         return ExperimentReplayReport(
             experiment_id=manifest.experiment_id,

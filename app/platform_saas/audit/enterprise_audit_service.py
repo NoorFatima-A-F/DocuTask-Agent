@@ -60,7 +60,7 @@ class EnterpriseAuditService:
         audit_id = f"aud_{uuid.uuid4().hex[:8]}"
         prev_hash = self._last_hash_by_tenant.get(tenant_id, "00000000000000000000000000000000")
         ts = datetime.now(timezone.utc).isoformat()
-        
+
         payload = f"{audit_id}:{tenant_id}:{actor_id}:{action}:{resource_type}:{resource_id}:{prev_hash}:{ts}"
         event_hash = hashlib.sha256(payload.encode("utf-8")).hexdigest()
 

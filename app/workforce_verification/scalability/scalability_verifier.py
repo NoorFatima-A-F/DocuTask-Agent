@@ -114,7 +114,7 @@ class ScalabilityVerifier:
         return AssertionResult(
             name="assert_cluster_scaling_efficiency",
             passed=passed,
-            message=f"Distributed worker cluster demonstrated {efficiency*100:.1f}% linear throughput scaling",
+            message=f"Distributed worker cluster demonstrated {efficiency * 100:.1f}% linear throughput scaling",
             execution_time_ms=t_ms,
             details={"efficiency": efficiency},
         )

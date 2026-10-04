@@ -68,7 +68,7 @@ class CapabilityResolver(ICapabilityResolver):
                 confidence_score=round(confidence, 4),
                 cost_score=round(cost_score, 4),
                 latency_score=round(latency_score, 4),
-                health_score=1.0
+                health_score=1.0,
             )
 
             match = CapabilityMatch(
@@ -76,7 +76,9 @@ class CapabilityResolver(ICapabilityResolver):
                 tool_name=desc.identity.name,
                 provider_name=desc.identity.provider_name,
                 score=score,
-                reasons=[f"Matched capability '{requirement.capability_name}' with overall score {score.overall_score}"]
+                reasons=[
+                    f"Matched capability '{requirement.capability_name}' with overall score {score.overall_score}"
+                ],
             )
             matches.append(match)
 

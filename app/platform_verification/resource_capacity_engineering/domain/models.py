@@ -16,10 +16,10 @@ class VerificationStatus(str, Enum):
 
 
 class ResourceCertificationTier(str, Enum):
-    ENTERPRISE_CAPACITY_READY = "Enterprise Capacity Ready"          # 95.0 - 100.0%
-    PRODUCTION_READY = "Production Ready"                            # 90.0 - 94.99%
-    OPTIMIZATION_REQUIRED = "Optimization Required"                  # 80.0 - 89.99%
-    FAILED = "Failed"                                                # < 80.0%
+    ENTERPRISE_CAPACITY_READY = "Enterprise Capacity Ready"  # 95.0 - 100.0%
+    PRODUCTION_READY = "Production Ready"  # 90.0 - 94.99%
+    OPTIMIZATION_REQUIRED = "Optimization Required"  # 80.0 - 89.99%
+    FAILED = "Failed"  # < 80.0%
 
 
 CertificationTier = ResourceCertificationTier
@@ -42,6 +42,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3J.4.1: Resource Profiling Architecture Models ───────────────────────────
 
+
 class ServiceResourceProfile(BaseModel):
     service_name: str
     cpu_average_pct: float
@@ -53,11 +54,14 @@ class ServiceResourceProfile(BaseModel):
 class ResourceProfileReport(BaseVerificationReport):
     report_title: str = "Resource Profiling Architecture Verification Report"
     services: List[ServiceResourceProfile] = Field(default_factory=list)
-    collectors_active: List[str] = Field(default_factory=lambda: ["cpu", "memory", "disk", "network", "database", "queue"])
+    collectors_active: List[str] = Field(
+        default_factory=lambda: ["cpu", "memory", "disk", "network", "database", "queue"]
+    )
     overall_health: str = "HEALTHY"
 
 
 # ─── 3J.4.2: Container Resource Limits Models ─────────────────────────────────
+
 
 class ContainerLimitSpec(BaseModel):
     container_name: str
@@ -79,6 +83,7 @@ class ContainerResourcePolicyReport(BaseVerificationReport):
 
 # ─── 3J.4.3: CPU Utilization Models ───────────────────────────────────────────
 
+
 class CPUWorkloadBenchmark(BaseModel):
     workload_tier: str
     document_volume: int
@@ -98,6 +103,7 @@ class CPUCapacityReport(BaseVerificationReport):
 
 # ─── 3J.4.4: Memory Leak Detection Models ─────────────────────────────────────
 
+
 class MemoryTimelinePoint(BaseModel):
     time_label: str  # t0, t6, t24, t72
     elapsed_hours: int
@@ -115,6 +121,7 @@ class MemoryLeakReport(BaseVerificationReport):
 
 
 # ─── 3J.4.5: Worker Capacity Models ───────────────────────────────────────────
+
 
 class WorkerScalingCurvePoint(BaseModel):
     worker_count: int
@@ -134,6 +141,7 @@ class WorkerCapacityReport(BaseVerificationReport):
 
 # ─── 3J.4.6: Queue Capacity Models ────────────────────────────────────────────
 
+
 class QueueCapacityReport(BaseVerificationReport):
     report_title: str = "Queue Capacity & Drain Velocity Report"
     input_rate_docs_min: int = 1000
@@ -146,6 +154,7 @@ class QueueCapacityReport(BaseVerificationReport):
 
 
 # ─── 3J.4.7: Database Resource Models ─────────────────────────────────────────
+
 
 class DatabaseCapacityReport(BaseVerificationReport):
     report_title: str = "Database Resource & Connection Capacity Report"
@@ -161,6 +170,7 @@ class DatabaseCapacityReport(BaseVerificationReport):
 
 
 # ─── 3J.4.8: AI Pipeline Resource Breakdown Models ────────────────────────────
+
 
 class AIPipelineStageCost(BaseModel):
     stage_name: str
@@ -180,6 +190,7 @@ class AIResourceProfileReport(BaseVerificationReport):
 
 # ─── 3J.4.9: Capacity Modeling ────────────────────────────────────────────────
 
+
 class ResourceBottleneckComponent(BaseModel):
     component: str
     max_sustainable_docs_hour: int
@@ -195,6 +206,7 @@ class CapacityModelReport(BaseVerificationReport):
 
 
 # ─── 3J.4.10: Auto-Scaling Readiness Models ───────────────────────────────────
+
 
 class ScalingTriggerSignal(BaseModel):
     signal_name: str
@@ -214,6 +226,7 @@ class AutoscalingReadinessReport(BaseVerificationReport):
 
 # ─── 3J.4.11: Resource Alerting Models ────────────────────────────────────────
 
+
 class AlertRuleVerification(BaseModel):
     alert_name: str
     metric_condition: str
@@ -230,6 +243,7 @@ class ResourceAlertReport(BaseVerificationReport):
 
 
 # ─── 3J.4.13: 6-Category Resource Quality Scoring & Certification ──────────────
+
 
 class CategoryScore(BaseModel):
     category: str

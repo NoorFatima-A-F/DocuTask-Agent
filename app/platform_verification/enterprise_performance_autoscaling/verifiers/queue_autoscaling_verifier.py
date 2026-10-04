@@ -46,7 +46,7 @@ class QueueAutoscalingVerifier(IQueueAutoscalingVerifier):
             CheckResult(
                 name="Queue Drain Completion (<5 min)",
                 passed=recovery_time_sec < 300.0,
-                details=f"Queue fully drained in {recovery_time_sec}s ({recovery_time_sec/60:.1f} min)",
+                details=f"Queue fully drained in {recovery_time_sec}s ({recovery_time_sec / 60:.1f} min)",
                 metrics={"recovery_time_sec": recovery_time_sec},
             ),
             CheckResult(

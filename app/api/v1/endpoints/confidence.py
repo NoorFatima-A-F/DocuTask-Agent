@@ -11,7 +11,7 @@ from app.runtime.confidence.api.confidence_api_service import ConfidenceAPIServi
 router = APIRouter()
 
 
-@router.get('/mission/{mission_id}')
+@router.get("/mission/{mission_id}")
 async def get_mission_confidence(mission_id: str):
     """
     Returns full 13-dimension scientific confidence report for the mission.
@@ -19,7 +19,7 @@ async def get_mission_confidence(mission_id: str):
     return ConfidenceAPIService.get_instance(mission_id).compute_mission_confidence().model_dump()
 
 
-@router.get('/features')
+@router.get("/features")
 async def get_registered_features():
     """
     Returns all registered confidence features and schemas.
@@ -27,7 +27,7 @@ async def get_registered_features():
     return ConfidenceAPIService.get_instance().get_features()
 
 
-@router.get('/formulas')
+@router.get("/formulas")
 async def get_registered_formulas():
     """
     Returns mathematical confidence formulas and versions.
@@ -35,17 +35,18 @@ async def get_registered_formulas():
     return ConfidenceAPIService.get_instance().get_formulas()
 
 
-@router.get('/history')
+@router.get("/history")
 async def get_confidence_history(mission_id: str = Query("mission-001")):
     """
     Returns historical confidence snapshots.
     """
     from app.runtime.confidence.versioning.confidence_versioning import ConfidenceVersioningRegistry
+
     reports = ConfidenceVersioningRegistry.get_all(mission_id)
     return [r.model_dump() for r in reports]
 
 
-@router.get('/explanation')
+@router.get("/explanation")
 async def get_confidence_explanation(
     mission_id: str = Query("mission-001"),
     dimension: str = Query("OVERALL"),
@@ -56,7 +57,7 @@ async def get_confidence_explanation(
     return ConfidenceAPIService.get_instance(mission_id).get_explanation(dimension)
 
 
-@router.get('/weights')
+@router.get("/weights")
 async def get_confidence_weights():
     """
     Returns policy-derived dynamic weight matrices.
@@ -64,7 +65,7 @@ async def get_confidence_weights():
     return ConfidenceAPIService.get_instance().get_weights()
 
 
-@router.get('/lineage')
+@router.get("/lineage")
 async def get_confidence_lineage(mission_id: str = Query("mission-001")):
     """
     Returns cryptographic provenance and Merkle evidence links.
@@ -72,7 +73,7 @@ async def get_confidence_lineage(mission_id: str = Query("mission-001")):
     return ConfidenceAPIService.get_instance(mission_id).get_lineage()
 
 
-@router.get('/calibration')
+@router.get("/calibration")
 async def get_calibration_metrics():
     """
     Returns Expected Calibration Error (ECE), MCE, and reliability diagram data.
@@ -80,7 +81,7 @@ async def get_calibration_metrics():
     return ConfidenceAPIService.get_instance().get_calibration()
 
 
-@router.get('/uncertainty')
+@router.get("/uncertainty")
 async def get_uncertainty_metrics(mission_id: str = Query("mission-001")):
     """
     Returns aleatoric vs epistemic uncertainty decomposition and 95% intervals.
@@ -88,7 +89,7 @@ async def get_uncertainty_metrics(mission_id: str = Query("mission-001")):
     return ConfidenceAPIService.get_instance(mission_id).get_uncertainty()
 
 
-@router.get('/governance')
+@router.get("/governance")
 async def get_confidence_governance(mission_id: str = Query("mission-001")):
     """
     Returns governance policy evaluation and auditor certification verdict.
@@ -96,7 +97,7 @@ async def get_confidence_governance(mission_id: str = Query("mission-001")):
     return ConfidenceAPIService.get_instance(mission_id).get_governance()
 
 
-@router.get('/trends')
+@router.get("/trends")
 async def get_confidence_trends():
     """
     Returns drift analysis and stability indices.
@@ -104,7 +105,7 @@ async def get_confidence_trends():
     return ConfidenceAPIService.get_instance().get_trends()
 
 
-@router.get('/statistics')
+@router.get("/statistics")
 async def get_confidence_statistics():
     """
     Returns distribution statistics across historical missions.
@@ -112,7 +113,7 @@ async def get_confidence_statistics():
     return ConfidenceAPIService.get_instance().get_statistics()
 
 
-@router.get('/replay')
+@router.get("/replay")
 async def get_confidence_replay(mission_id: str = Query("mission-001")):
     """
     Reconstructs confidence progression from Event Store.

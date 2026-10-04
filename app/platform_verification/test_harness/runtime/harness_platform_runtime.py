@@ -1,6 +1,7 @@
 """
 Unified Enterprise Verification Test Harness Platform Runtime Facade.
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from app.platform_verification.test_harness.domain.models import (
@@ -18,6 +19,7 @@ from app.platform_verification.test_harness.api.harness_api import HarnessAPI
 
 class TestHarnessPlatformRuntime:
     """Top-level facade coordinating the Test Harness execution engine, workers, scheduler, CLI, and API."""
+
     __test__ = False
 
     def __init__(self) -> None:

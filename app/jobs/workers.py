@@ -12,6 +12,7 @@ from app.core.logging import logger
 
 class WorkerRegistration(BaseModel):
     """Schema representing an active worker node."""
+
     worker_id: str
     worker_type: str  # OCR, AI, VALIDATION, POST_PROCESSING
     status: str = "IDLE"  # IDLE, BUSY, OFFLINE

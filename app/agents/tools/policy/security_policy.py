@@ -65,7 +65,18 @@ class SecurityPolicy:
             )
 
         # 3. Dangerous input command injection inspection
-        dangerous_patterns = ["; rm ", "&& rm", "| cat", "| rm", "; drop table", "__import__", "eval(", "`whoami`", "$(whoami)", "; rm -rf"]
+        dangerous_patterns = [
+            "; rm ",
+            "&& rm",
+            "| cat",
+            "| rm",
+            "; drop table",
+            "__import__",
+            "eval(",
+            "`whoami`",
+            "$(whoami)",
+            "; rm -rf",
+        ]
         for k, v in input_payload.items():
             val_str = str(v).lower()
             if any(cmd.lower() in val_str for cmd in dangerous_patterns):

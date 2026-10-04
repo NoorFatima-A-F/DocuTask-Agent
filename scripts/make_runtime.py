@@ -1,1 +1,1 @@
-print('generator ready')
+print("generator ready")

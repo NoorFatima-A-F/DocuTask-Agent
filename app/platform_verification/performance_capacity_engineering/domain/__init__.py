@@ -1,6 +1,7 @@
 """
 Domain Models and Interfaces for Phase 3J.1 Performance Infrastructure Verification.
 """
+
 from app.platform_verification.performance_capacity_engineering.domain.models import (
     PerformanceCertificationTier,
     WorkloadClass,

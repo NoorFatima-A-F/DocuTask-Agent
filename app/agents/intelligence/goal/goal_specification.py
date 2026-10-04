@@ -91,14 +91,14 @@ class GoalSpecification:
             return True
         return False
 
-    def add_criterion(self, metric: str, target: float, op: str = ">=", weight: float = 1.0, mandatory: bool = True) -> None:
-        self.success_criteria.append(SuccessCriteria(
-            metric_name=metric,
-            target_value=target,
-            comparison_operator=op,
-            weight=weight,
-            is_mandatory=mandatory
-        ))
+    def add_criterion(
+        self, metric: str, target: float, op: str = ">=", weight: float = 1.0, mandatory: bool = True
+    ) -> None:
+        self.success_criteria.append(
+            SuccessCriteria(
+                metric_name=metric, target_value=target, comparison_operator=op, weight=weight, is_mandatory=mandatory
+            )
+        )
 
     def evaluate_success(self, metrics: Dict[str, float]) -> tuple[bool, float]:
         """Evaluates metrics against success criteria, returns (passed, overall_score)."""

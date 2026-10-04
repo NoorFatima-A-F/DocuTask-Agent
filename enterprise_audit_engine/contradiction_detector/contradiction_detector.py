@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class ContradictionItem(BaseModel):
     """Specific conflict between evidence, claims, and reality."""
+
     contradiction_id: str
     category: str  # EVIDENCE_VS_CLAIM, REALITY_VS_CERTIFICATION, CLASSIFICATION_MISMATCH
     claimed_statement: str
@@ -24,6 +25,7 @@ class ContradictionItem(BaseModel):
 
 class ContradictionReport(BaseModel):
     """Report detailing detected contradictions."""
+
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     has_contradictions: bool
     contradiction_count: int
@@ -55,34 +57,38 @@ class ContradictionDetector:
                 ev = ev_by_id.get(eid)
                 if ev:
                     cls_val = str(ev.get("classification", "")).upper()
-                    
+
                     # Contradiction: Claiming runtime verified with only config
                     if ("runtime verified" in c_text or "execution verified" in c_text) and (
                         "CONFIGURATION" in cls_val or "DOCUMENTATION" in cls_val
                     ):
-                        contradictions.append(ContradictionItem(
-                            contradiction_id=f"CON-{len(contradictions)+1:03d}",
-                            category="EVIDENCE_VS_CLAIM",
-                            claimed_statement=f"Claim asserts runtime verification: '{c.get('claim') or c.get('text')}'",
-                            observed_reality=f"Evidence {eid} is only classified as {cls_val}",
-                            evidence_id=eid,
-                            severity="CRITICAL",
-                            remediation_required="Provide actual execution traces or downgrade claim",
-                        ))
-                    
+                        contradictions.append(
+                            ContradictionItem(
+                                contradiction_id=f"CON-{len(contradictions) + 1:03d}",
+                                category="EVIDENCE_VS_CLAIM",
+                                claimed_statement=f"Claim asserts runtime verification: '{c.get('claim') or c.get('text')}'",
+                                observed_reality=f"Evidence {eid} is only classified as {cls_val}",
+                                evidence_id=eid,
+                                severity="CRITICAL",
+                                remediation_required="Provide actual execution traces or downgrade claim",
+                            )
+                        )
+
                     # Contradiction: Claiming production ready with insufficient evidence
                     if ("production ready" in c_text or "fully verified" in c_text) and (
                         "INSUFFICIENT" in cls_val or "CRITICAL" in cls_val
                     ):
-                        contradictions.append(ContradictionItem(
-                            contradiction_id=f"CON-{len(contradictions)+1:03d}",
-                            category="EVIDENCE_VS_CLAIM",
-                            claimed_statement=f"Claim asserts production readiness: '{c.get('claim') or c.get('text')}'",
-                            observed_reality=f"Evidence {eid} contains {cls_val}",
-                            evidence_id=eid,
-                            severity="CRITICAL",
-                            remediation_required="Resolve critical finding or collect required evidence",
-                        ))
+                        contradictions.append(
+                            ContradictionItem(
+                                contradiction_id=f"CON-{len(contradictions) + 1:03d}",
+                                category="EVIDENCE_VS_CLAIM",
+                                claimed_statement=f"Claim asserts production readiness: '{c.get('claim') or c.get('text')}'",
+                                observed_reality=f"Evidence {eid} contains {cls_val}",
+                                evidence_id=eid,
+                                severity="CRITICAL",
+                                remediation_required="Resolve critical finding or collect required evidence",
+                            )
+                        )
 
         # 2. Analyze Reality Validation Failures vs Internal Certification
         if reality_validation_results:
@@ -91,34 +97,40 @@ class ContradictionDetector:
             sec_res = reality_validation_results.get("security", {})
 
             for contra in api_res.get("contradictions", []):
-                contradictions.append(ContradictionItem(
-                    contradiction_id=f"CON-{len(contradictions)+1:03d}",
-                    category="REALITY_VS_CERTIFICATION",
-                    claimed_statement="API layer claimed conformant to authentication and security policies",
-                    observed_reality=contra,
-                    severity="CRITICAL",
-                    remediation_required="Fix API security defect or remove certification claim",
-                ))
+                contradictions.append(
+                    ContradictionItem(
+                        contradiction_id=f"CON-{len(contradictions) + 1:03d}",
+                        category="REALITY_VS_CERTIFICATION",
+                        claimed_statement="API layer claimed conformant to authentication and security policies",
+                        observed_reality=contra,
+                        severity="CRITICAL",
+                        remediation_required="Fix API security defect or remove certification claim",
+                    )
+                )
 
             for contra in db_res.get("contradictions", []):
-                contradictions.append(ContradictionItem(
-                    contradiction_id=f"CON-{len(contradictions)+1:03d}",
-                    category="REALITY_VS_CERTIFICATION",
-                    claimed_statement="Database layer claimed ACID compliant and indexed",
-                    observed_reality=contra,
-                    severity="HIGH",
-                    remediation_required="Resolve migration drift or index scan bottleneck",
-                ))
+                contradictions.append(
+                    ContradictionItem(
+                        contradiction_id=f"CON-{len(contradictions) + 1:03d}",
+                        category="REALITY_VS_CERTIFICATION",
+                        claimed_statement="Database layer claimed ACID compliant and indexed",
+                        observed_reality=contra,
+                        severity="HIGH",
+                        remediation_required="Resolve migration drift or index scan bottleneck",
+                    )
+                )
 
             for vuln in sec_res.get("vulnerabilities", []):
-                contradictions.append(ContradictionItem(
-                    contradiction_id=f"CON-{len(contradictions)+1:03d}",
-                    category="REALITY_VS_CERTIFICATION",
-                    claimed_statement="Security controls claimed robust against adversarial attacks",
-                    observed_reality=f"Penetration probe escaped: {vuln}",
-                    severity="CRITICAL",
-                    remediation_required="Patch vulnerability immediately",
-                ))
+                contradictions.append(
+                    ContradictionItem(
+                        contradiction_id=f"CON-{len(contradictions) + 1:03d}",
+                        category="REALITY_VS_CERTIFICATION",
+                        claimed_statement="Security controls claimed robust against adversarial attacks",
+                        observed_reality=f"Penetration probe escaped: {vuln}",
+                        severity="CRITICAL",
+                        remediation_required="Patch vulnerability immediately",
+                    )
+                )
 
         has_con = len(contradictions) > 0
         return ContradictionReport(

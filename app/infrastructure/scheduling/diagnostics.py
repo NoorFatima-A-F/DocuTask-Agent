@@ -19,7 +19,7 @@ class SchedulingDecision(BaseModel):
     selected_worker: Optional[str] = None
     candidate_count: int = 0
     rejected_candidates: Dict[str, List[str]] = Field(default_factory=dict)  # worker_id -> rejection reasons
-    rejection_reasons: List[str] = Field(default_factory=list)               # high-level rejection reasons
+    rejection_reasons: List[str] = Field(default_factory=list)  # high-level rejection reasons
     score_breakdown: Optional[ScoreBreakdown] = None
     reservation_id: Optional[str] = None
     execution_lease_id: Optional[str] = None

@@ -1,6 +1,7 @@
 """
 Abstract Interfaces for Enterprise Backup Security Verification Framework (Part 3G.2F).
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 
@@ -30,9 +31,7 @@ class IBackupSecurityInventoryEngine(ABC):
 
 class IDataClassificationEngine(ABC):
     @abstractmethod
-    def verify_data_classification_controls(
-        self, inventory: BackupSecurityInventoryReport
-    ) -> DataClassificationReport:
+    def verify_data_classification_controls(self, inventory: BackupSecurityInventoryReport) -> DataClassificationReport:
         pass
 
 

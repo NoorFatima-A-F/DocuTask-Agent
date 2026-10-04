@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class Capability(BaseModel):
     """Specific capability specification."""
+
     name: str
     category: str = Field(default="GENERAL")
     level: str = Field(default="STANDARD")
@@ -18,6 +19,7 @@ class Capability(BaseModel):
 
 class CapabilityRequirement(BaseModel):
     """Planner capability requirement query."""
+
     capability_name: str
     document_type: Optional[str] = Field(default=None)
     mime_type: Optional[str] = Field(default=None)
@@ -30,6 +32,7 @@ class CapabilityRequirement(BaseModel):
 
 class CapabilityScore(BaseModel):
     """Calculated fitness score for a capability match."""
+
     overall_score: float = Field(default=1.0, ge=0.0, le=1.0)
     confidence_score: float = Field(default=1.0, ge=0.0, le=1.0)
     cost_score: float = Field(default=1.0, ge=0.0, le=1.0)
@@ -40,6 +43,7 @@ class CapabilityScore(BaseModel):
 
 class CapabilityMatch(BaseModel):
     """Ranked tool candidate matching a capability requirement."""
+
     tool_id: str
     tool_name: str
     provider_name: str

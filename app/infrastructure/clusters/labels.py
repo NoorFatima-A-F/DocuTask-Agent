@@ -54,14 +54,9 @@ class ClusterLabelingSystem:
         errors: List[str] = []
         for k, v in selector.items():
             if cluster_labels.get(k) != str(v):
-                errors.append(
-                    f"Label mismatch: expected '{k}={v}', found '{cluster_labels.get(k)}'"
-                )
+                errors.append(f"Label mismatch: expected '{k}={v}', found '{cluster_labels.get(k)}'")
 
         return len(errors) == 0, errors
 
     def find_clusters_by_labels(self, match_labels: Dict[str, str]) -> List[str]:
-        return [
-            cid for cid in self._labels.keys()
-            if self.matches_selector(cid, match_labels)[0]
-        ]
+        return [cid for cid in self._labels.keys() if self.matches_selector(cid, match_labels)[0]]

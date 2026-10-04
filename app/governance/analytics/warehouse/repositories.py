@@ -56,23 +56,33 @@ class GovernanceDataWarehouseRepository:
             self.dim_users[event.user_id] = DimUser(user_id=event.user_id, tenant_id=event.tenant_id)
 
         if event.agent_id and event.agent_id not in self.dim_agents:
-            self.dim_agents[event.agent_id] = DimAgent(agent_id=event.agent_id, tenant_id=event.tenant_id, agent_name=event.agent_id)
+            self.dim_agents[event.agent_id] = DimAgent(
+                agent_id=event.agent_id, tenant_id=event.tenant_id, agent_name=event.agent_id
+            )
 
         if event.model_id and event.model_id not in self.dim_models:
             self.dim_models[event.model_id] = DimModel(model_id=event.model_id)
 
         if event.policy_id and event.policy_id not in self.dim_policies:
-            self.dim_policies[event.policy_id] = DimPolicy(policy_id=event.policy_id, tenant_id=event.tenant_id, policy_name=event.policy_id)
+            self.dim_policies[event.policy_id] = DimPolicy(
+                policy_id=event.policy_id, tenant_id=event.tenant_id, policy_name=event.policy_id
+            )
 
         if event.workflow_id and event.workflow_id not in self.dim_workflows:
-            self.dim_workflows[event.workflow_id] = DimWorkflow(workflow_id=event.workflow_id, tenant_id=event.tenant_id, workflow_name=event.workflow_id)
+            self.dim_workflows[event.workflow_id] = DimWorkflow(
+                workflow_id=event.workflow_id, tenant_id=event.tenant_id, workflow_name=event.workflow_id
+            )
 
         # Route to Fact Tables based on event type
         if event.event_type in {
             AnalyticsEventType.GOVERNANCE_DECISION_CREATED,
             AnalyticsEventType.ACCESS_DENIED,
         }:
-            outcome = "DENIED" if event.event_type == AnalyticsEventType.ACCESS_DENIED else ("ALLOWED" if event.is_success else "BLOCKED")
+            outcome = (
+                "DENIED"
+                if event.event_type == AnalyticsEventType.ACCESS_DENIED
+                else ("ALLOWED" if event.is_success else "BLOCKED")
+            )
             self.fact_decisions.append(
                 FactGovernanceDecision(
                     tenant_id=event.tenant_id,

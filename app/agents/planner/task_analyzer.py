@@ -9,6 +9,7 @@ from app.agents.planning.tasks import PlanningTask
 
 class TaskAnalysisResult(BaseModel):
     """Analysis result of an individual planning task."""
+
     task_id: str
     required_capabilities: List[str] = Field(default_factory=list)
     estimated_complexity: float = Field(default=0.5, ge=0.0, le=1.0)
@@ -25,5 +26,5 @@ class TaskAnalyzer:
             task_id=task.task_id,
             required_capabilities=caps,
             estimated_complexity=0.3 if task.estimated_duration_seconds < 10 else 0.8,
-            is_parallelizable=len(task.dependencies) == 0
+            is_parallelizable=len(task.dependencies) == 0,
         )

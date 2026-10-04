@@ -33,8 +33,20 @@ class FlameGraphGenerator:
                 "value_ms": 35.0,
                 "percentage": round(35.0 / total_ms * 100, 1),
                 "children": [
-                    {"name": "Feature Extraction", "category": "PLANNER", "value_ms": 10.0, "percentage": 1.2, "children": []},
-                    {"name": "Pareto Constraint Solver", "category": "PLANNER", "value_ms": 25.0, "percentage": 3.0, "children": []},
+                    {
+                        "name": "Feature Extraction",
+                        "category": "PLANNER",
+                        "value_ms": 10.0,
+                        "percentage": 1.2,
+                        "children": [],
+                    },
+                    {
+                        "name": "Pareto Constraint Solver",
+                        "category": "PLANNER",
+                        "value_ms": 25.0,
+                        "percentage": 3.0,
+                        "children": [],
+                    },
                 ],
             },
             {
@@ -43,8 +55,20 @@ class FlameGraphGenerator:
                 "value_ms": 180.0,
                 "percentage": round(180.0 / total_ms * 100, 1),
                 "children": [
-                    {"name": "De-skew & Bilateral Filter", "category": "OCR", "value_ms": 40.0, "percentage": 4.8, "children": []},
-                    {"name": "LayoutLM Token Bounding Boxes", "category": "OCR", "value_ms": 140.0, "percentage": 16.8, "children": []},
+                    {
+                        "name": "De-skew & Bilateral Filter",
+                        "category": "OCR",
+                        "value_ms": 40.0,
+                        "percentage": 4.8,
+                        "children": [],
+                    },
+                    {
+                        "name": "LayoutLM Token Bounding Boxes",
+                        "category": "OCR",
+                        "value_ms": 140.0,
+                        "percentage": 16.8,
+                        "children": [],
+                    },
                 ],
             },
             {
@@ -53,8 +77,20 @@ class FlameGraphGenerator:
                 "value_ms": 450.0,
                 "percentage": round(450.0 / total_ms * 100, 1),
                 "children": [
-                    {"name": "Gemini 2.5 Flash API Call", "category": "LLM_INFERENCE", "value_ms": 420.0, "percentage": 50.3, "children": []},
-                    {"name": "JSON Stream Validation", "category": "LLM_INFERENCE", "value_ms": 30.0, "percentage": 3.6, "children": []},
+                    {
+                        "name": "Gemini 2.5 Flash API Call",
+                        "category": "LLM_INFERENCE",
+                        "value_ms": 420.0,
+                        "percentage": 50.3,
+                        "children": [],
+                    },
+                    {
+                        "name": "JSON Stream Validation",
+                        "category": "LLM_INFERENCE",
+                        "value_ms": 30.0,
+                        "percentage": 3.6,
+                        "children": [],
+                    },
                 ],
             },
             {
@@ -63,8 +99,20 @@ class FlameGraphGenerator:
                 "value_ms": 95.0,
                 "percentage": round(95.0 / total_ms * 100, 1),
                 "children": [
-                    {"name": "Tax / Total Balance Check", "category": "VALIDATION", "value_ms": 45.0, "percentage": 5.4, "children": []},
-                    {"name": "Zero-Fabrication Sentinel Check", "category": "VALIDATION", "value_ms": 50.0, "percentage": 6.0, "children": []},
+                    {
+                        "name": "Tax / Total Balance Check",
+                        "category": "VALIDATION",
+                        "value_ms": 45.0,
+                        "percentage": 5.4,
+                        "children": [],
+                    },
+                    {
+                        "name": "Zero-Fabrication Sentinel Check",
+                        "category": "VALIDATION",
+                        "value_ms": 50.0,
+                        "percentage": 6.0,
+                        "children": [],
+                    },
                 ],
             },
             {

@@ -82,10 +82,7 @@ class SecurityScorer:
         )
 
         # 2. AI Security (30%): OWASP LLM, Guardrails
-        ai_score = (
-            pillar_results["owasp_llm"].score * 0.6
-            + pillar_results["guardrails"].score * 0.4
-        )
+        ai_score = pillar_results["owasp_llm"].score * 0.6 + pillar_results["guardrails"].score * 0.4
 
         # 3. Agent Security (20%): MITRE ATLAS, Agent Boundary, Adversarial
         agent_score = (
@@ -101,10 +98,7 @@ class SecurityScorer:
         tenant_score = pillar_results["tenant_isolation"].score
 
         # 6. Compliance (5%): Compliance Mapper & Dashboards
-        compliance_score = (
-            pillar_results["compliance"].score * 0.7
-            + pillar_results["dashboards"].score * 0.3
-        )
+        compliance_score = pillar_results["compliance"].score * 0.7 + pillar_results["dashboards"].score * 0.3
 
         weighted_scores = {
             "application_security": app_score,
@@ -115,9 +109,7 @@ class SecurityScorer:
             "compliance": compliance_score,
         }
 
-        composite_score = sum(
-            weighted_scores[cat] * weight for cat, weight in self.CATEGORY_WEIGHTS.items()
-        )
+        composite_score = sum(weighted_scores[cat] * weight for cat, weight in self.CATEGORY_WEIGHTS.items())
 
         grade = "A+" if composite_score >= 98.0 else "A" if composite_score >= 90.0 else "B"
         elapsed_ms = (time.perf_counter() - start_t) * 1000.0

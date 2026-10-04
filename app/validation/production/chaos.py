@@ -10,6 +10,7 @@ from app.core.logging import logger
 
 class ChaosExperimentResult(BaseModel):
     """Result of a Chaos Engineering fault injection experiment."""
+
     experiment_id: str
     target_subsystem: str
     injected_fault: str
@@ -36,9 +37,8 @@ class ChaosEngineeringEngine:
                 expected_recovery="Exponential backoff retry with jitter",
                 observed_behavior="Retried 3 times with backoff; succeeded on 3rd try.",
                 recovered_successfully=True,
-                recovery_time_seconds=1.5
+                recovery_time_seconds=1.5,
             ),
-
             # 2. Provider Chaos (500 Server Error)
             ChaosExperimentResult(
                 experiment_id="chaos_prv_500",
@@ -47,9 +47,8 @@ class ChaosEngineeringEngine:
                 expected_recovery="Retry up to 3 times before failing cleanly",
                 observed_behavior="Retried cleanly; returned transactional error log.",
                 recovered_successfully=True,
-                recovery_time_seconds=2.1
+                recovery_time_seconds=2.1,
             ),
-
             # 3. Database Chaos (Connection Drop)
             ChaosExperimentResult(
                 experiment_id="chaos_db_drop",
@@ -58,9 +57,8 @@ class ChaosEngineeringEngine:
                 expected_recovery="DB connection pool reconnect & transaction rollback",
                 observed_behavior="Rolled back uncommitted transaction; re-established pool connection.",
                 recovered_successfully=True,
-                recovery_time_seconds=0.8
+                recovery_time_seconds=0.8,
             ),
-
             # 4. Storage Chaos (Missing File)
             ChaosExperimentResult(
                 experiment_id="chaos_str_missing",
@@ -69,9 +67,11 @@ class ChaosEngineeringEngine:
                 expected_recovery="Catch exception; record EXTRACTION_FAILED status cleanly",
                 observed_behavior="Caught error; set status to EXTRACTION_FAILED cleanly.",
                 recovered_successfully=True,
-                recovery_time_seconds=0.1
-            )
+                recovery_time_seconds=0.1,
+            ),
         ]
 
-        logger.info(f"Executed Chaos Engineering Experiments: Total={len(experiments)}, Recovered={len(experiments)}/4 (100%)")
+        logger.info(
+            f"Executed Chaos Engineering Experiments: Total={len(experiments)}, Recovered={len(experiments)}/4 (100%)"
+        )
         return experiments

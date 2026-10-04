@@ -12,7 +12,7 @@ def test_integrity_verifier_clean_stream():
     prev_hash = "0" * 64
     for i in range(5):
         ev = RuntimeEvent(
-            event_id=f"ev_int_{i+1}",
+            event_id=f"ev_int_{i + 1}",
             mission_id="m_int_01",
             sequence_number=i + 1,
             category=EventCategory.EXECUTION,
@@ -37,7 +37,7 @@ def test_integrity_verifier_detects_hash_tamper():
     prev_hash = "0" * 64
     for i in range(4):
         ev = RuntimeEvent(
-            event_id=f"ev_tamper_{i+1}",
+            event_id=f"ev_tamper_{i + 1}",
             mission_id="m_tamper_02",
             sequence_number=i + 1,
             category=EventCategory.EXECUTION,

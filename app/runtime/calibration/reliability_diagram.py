@@ -43,13 +43,15 @@ class ReliabilityDiagramGenerator:
             empirical_accuracy = (sum(bin_labels) / count) if count > 0 else 0.0
             calibration_gap = abs(empirical_accuracy - avg_confidence) if count > 0 else 0.0
 
-            bins_data.append({
-                "bin_index": b,
-                "bin_range": f"{bin_lower:.1f}-{bin_upper:.1f}",
-                "sample_count": count,
-                "average_confidence": round(avg_confidence, 4),
-                "empirical_accuracy": round(empirical_accuracy, 4),
-                "calibration_gap": round(calibration_gap, 4),
-            })
+            bins_data.append(
+                {
+                    "bin_index": b,
+                    "bin_range": f"{bin_lower:.1f}-{bin_upper:.1f}",
+                    "sample_count": count,
+                    "average_confidence": round(avg_confidence, 4),
+                    "empirical_accuracy": round(empirical_accuracy, 4),
+                    "calibration_gap": round(calibration_gap, 4),
+                }
+            )
 
         return bins_data

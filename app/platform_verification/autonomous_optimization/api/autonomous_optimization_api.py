@@ -1,6 +1,7 @@
 """
 Phase 3H.10: FastAPI Router for Autonomous Operational Intelligence & Self-Optimization
 """
+
 from fastapi import APIRouter
 from typing import Dict, Any
 from ..runtime.autonomous_optimization_runtime import AutonomousOptimizationRuntime
@@ -86,5 +87,5 @@ def get_health() -> Dict[str, Any]:
         "status": "HEALTHY",
         "subsystem": "autonomous_optimization",
         "engine": "DocuTask Autonomous Reliability Engine",
-        "phase": "3H.10"
+        "phase": "3H.10",
     }

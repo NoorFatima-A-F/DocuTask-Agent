@@ -1,6 +1,7 @@
 """
 Enterprise Certification Platform Runtime facade.
 """
+
 from __future__ import annotations
 from typing import Dict, Optional
 from app.platform_verification.certification_engine.core.approval_workflow import EnterpriseApprovalWorkflow

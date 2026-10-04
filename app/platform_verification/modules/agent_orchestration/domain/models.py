@@ -1,10 +1,12 @@
 """
 Domain Models & Value Objects for AgentOrchestration.
 """
+
 from datetime import datetime, timezone
 from typing import Any, Dict
 from pydantic import BaseModel, Field as PydField
 import uuid
+
 
 class AgentOrchestrationEntity(BaseModel):
     id: str = PydField(default_factory=lambda: f"agen_{uuid.uuid4().hex[:8]}")

@@ -37,14 +37,16 @@ async def benchmark_ioc_container(iterations: int = 10_000) -> float:
         _ = container.resolve(BenchmarkService)
     duration = time.perf_counter() - start
     ops_per_sec = iterations / duration
-    print(f"[BENCHMARK] IoC Container Resolution: {ops_per_sec:,.0f} ops/sec ({duration * 1000 / iterations:.4f} ms/op)")
+    print(
+        f"[BENCHMARK] IoC Container Resolution: {ops_per_sec:,.0f} ops/sec ({duration * 1000 / iterations:.4f} ms/op)"
+    )
     return ops_per_sec
 
 
 async def benchmark_dag_resolution(depth: int = 100) -> float:
     graph = DependencyGraph()
     for i in range(1, depth):
-        graph.add_dependency(f"node_{i}", f"node_{i-1}")
+        graph.add_dependency(f"node_{i}", f"node_{i - 1}")
 
     start = time.perf_counter()
     iterations = 500
@@ -52,7 +54,9 @@ async def benchmark_dag_resolution(depth: int = 100) -> float:
         _ = graph.get_resolution_order()
     duration = time.perf_counter() - start
     ops_per_sec = iterations / duration
-    print(f"[BENCHMARK] DAG 100-Node Kahn Resolution: {ops_per_sec:,.0f} ops/sec ({duration * 1000 / iterations:.4f} ms/op)")
+    print(
+        f"[BENCHMARK] DAG 100-Node Kahn Resolution: {ops_per_sec:,.0f} ops/sec ({duration * 1000 / iterations:.4f} ms/op)"
+    )
     return ops_per_sec
 
 

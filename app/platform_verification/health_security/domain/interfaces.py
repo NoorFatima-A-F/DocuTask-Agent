@@ -1,6 +1,7 @@
 """
 Phase 3H.5.10: Domain Interfaces for Health Security Verification Framework
 """
+
 from abc import ABC, abstractmethod
 from .models import (
     EndpointSecurityReport,

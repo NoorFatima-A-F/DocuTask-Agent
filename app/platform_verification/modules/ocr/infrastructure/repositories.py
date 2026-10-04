@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Ocr.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.ocr.domain.models import OcrEntity
 from app.platform_verification.modules.ocr.domain.interfaces import OcrRepositoryInterface
+
 
 class InMemoryOcrRepository(OcrRepositoryInterface):
     def __init__(self):

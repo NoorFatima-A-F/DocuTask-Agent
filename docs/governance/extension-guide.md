@@ -15,6 +15,7 @@ Extensions allow organizations to register custom rule engines, specialized risk
 ```python
 from app.governance.platform.extensions.contracts import CustomRiskEvaluatorContract
 
+
 class FinancialDataRiskScorer(CustomRiskEvaluatorContract):
     def calculate_risk(self, action: str, resource: str, context: dict) -> float:
         if "financial" in resource.lower() and context.get("amount", 0) > 100_000:

@@ -25,13 +25,55 @@ class LifecycleIntegrationVerifier(ILifecycleIntegrationVerifier):
 
     def verify(self) -> LifecycleIntegrationReport:
         transitions = [
-            LifecycleTransitionStep(from_state="Draft", to_state="Testing", validation_gate="AutomatedUnitTestsGate", audit_logged=True, connected_systems_notified=True),
-            LifecycleTransitionStep(from_state="Testing", to_state="SecurityReview", validation_gate="SASTAndDependencyScanGate", audit_logged=True, connected_systems_notified=True),
-            LifecycleTransitionStep(from_state="SecurityReview", to_state="Approved", validation_gate="ExecutiveCouncilSignoffGate", audit_logged=True, connected_systems_notified=True),
-            LifecycleTransitionStep(from_state="Approved", to_state="Deployed", validation_gate="CanaryHealthVerificationGate", audit_logged=True, connected_systems_notified=True),
-            LifecycleTransitionStep(from_state="Deployed", to_state="RuntimeActive", validation_gate="LiveTrafficRoutingGate", audit_logged=True, connected_systems_notified=True),
-            LifecycleTransitionStep(from_state="RuntimeActive", to_state="Optimized", validation_gate="ContinuousLearningFeedbackGate", audit_logged=True, connected_systems_notified=True),
-            LifecycleTransitionStep(from_state="Optimized", to_state="Retired", validation_gate="GracefulDrainAndArchiveGate", audit_logged=True, connected_systems_notified=True),
+            LifecycleTransitionStep(
+                from_state="Draft",
+                to_state="Testing",
+                validation_gate="AutomatedUnitTestsGate",
+                audit_logged=True,
+                connected_systems_notified=True,
+            ),
+            LifecycleTransitionStep(
+                from_state="Testing",
+                to_state="SecurityReview",
+                validation_gate="SASTAndDependencyScanGate",
+                audit_logged=True,
+                connected_systems_notified=True,
+            ),
+            LifecycleTransitionStep(
+                from_state="SecurityReview",
+                to_state="Approved",
+                validation_gate="ExecutiveCouncilSignoffGate",
+                audit_logged=True,
+                connected_systems_notified=True,
+            ),
+            LifecycleTransitionStep(
+                from_state="Approved",
+                to_state="Deployed",
+                validation_gate="CanaryHealthVerificationGate",
+                audit_logged=True,
+                connected_systems_notified=True,
+            ),
+            LifecycleTransitionStep(
+                from_state="Deployed",
+                to_state="RuntimeActive",
+                validation_gate="LiveTrafficRoutingGate",
+                audit_logged=True,
+                connected_systems_notified=True,
+            ),
+            LifecycleTransitionStep(
+                from_state="RuntimeActive",
+                to_state="Optimized",
+                validation_gate="ContinuousLearningFeedbackGate",
+                audit_logged=True,
+                connected_systems_notified=True,
+            ),
+            LifecycleTransitionStep(
+                from_state="Optimized",
+                to_state="Retired",
+                validation_gate="GracefulDrainAndArchiveGate",
+                audit_logged=True,
+                connected_systems_notified=True,
+            ),
         ]
 
         checks = [

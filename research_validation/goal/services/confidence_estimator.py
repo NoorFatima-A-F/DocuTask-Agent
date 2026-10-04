@@ -23,11 +23,11 @@ class ConfidenceEstimatorService:
         if priority_level == "CRITICAL":
             return ConfidenceThreshold(ConfidenceLevel.VERY_HIGH)  # 0.99
         elif priority_level == "HIGH":
-            return ConfidenceThreshold(ConfidenceLevel.HIGH)       # 0.90
+            return ConfidenceThreshold(ConfidenceLevel.HIGH)  # 0.90
         elif priority_level == "NORMAL":
-            return ConfidenceThreshold(ConfidenceLevel.MEDIUM)     # 0.70
+            return ConfidenceThreshold(ConfidenceLevel.MEDIUM)  # 0.70
         else:
-            return ConfidenceThreshold(ConfidenceLevel.LOW)        # 0.50
+            return ConfidenceThreshold(ConfidenceLevel.LOW)  # 0.50
 
     @classmethod
     def estimate_required_sample_size(

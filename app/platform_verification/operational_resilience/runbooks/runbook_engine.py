@@ -8,6 +8,7 @@ Generates, validates, and audits 6 standard recovery runbooks:
 5. ai_provider_failure.md
 6. deployment_failure.md
 """
+
 from typing import Dict, List
 from datetime import datetime, timezone
 import os
@@ -122,7 +123,7 @@ class RunbookEngine(IRunbookEngine):
 
             content = f"""# {title}
 
-**Runbook ID**: {rb['id']}
+**Runbook ID**: {rb["id"]}
 **Target Component**: {comp}
 **Automated CLI Command**: `{cmd}`
 **Review Cadence**: Monthly Verified
@@ -130,7 +131,7 @@ class RunbookEngine(IRunbookEngine):
 ---
 
 ## 1. Detection
-- **Prometheus Alert**: `Alert: {comp.replace(' ', '')}Degraded`
+- **Prometheus Alert**: `Alert: {comp.replace(" ", "")}Degraded`
 - **Threshold**: Heartbeat missing for > 15 seconds or HTTP 5xx rate > 2%.
 - **Notification Channels**: `#incident-disaster-recovery`, PagerDuty Tier-1 SRE.
 
@@ -146,8 +147,8 @@ class RunbookEngine(IRunbookEngine):
 ## 3. Diagnosis
 1. Check component status:
    ```bash
-   kubectl get pods -l app={fname.split('_')[0]} -n docutask
-   kubectl logs --tail=100 -l app={fname.split('_')[0]} -n docutask
+   kubectl get pods -l app={fname.split("_")[0]} -n docutask
+   kubectl logs --tail=100 -l app={fname.split("_")[0]} -n docutask
    ```
 2. Verify network connectivity and health endpoints:
    ```bash
@@ -171,7 +172,7 @@ Run the automated recovery CLI:
    ```
 2. Trigger standby promotion / pod restart:
    ```bash
-   kubectl rollout restart deployment/{fname.split('_')[0]} -n docutask
+   kubectl rollout restart deployment/{fname.split("_")[0]} -n docutask
    ```
 3. Verify new instance reaches Ready state.
 
@@ -180,7 +181,7 @@ Run the automated recovery CLI:
 ## 5. Validation
 - Run health validation probe:
   ```bash
-  python -m pytest tests/platform_verification/test_enterprise_operational_resilience.py -k "{fname.split('_')[0]}"
+  python -m pytest tests/platform_verification/test_enterprise_operational_resilience.py -k "{fname.split("_")[0]}"
   ```
 - Confirm queue processing resumes and latency returns to baseline.
 
@@ -189,7 +190,7 @@ Run the automated recovery CLI:
 ## 6. Rollback
 If recovery fails or induces unintended side-effects:
 ```bash
-agy runbook rollback --runbook-id {rb['id']} --restore-snapshot
+agy runbook rollback --runbook-id {rb["id"]} --restore-snapshot
 ```
 """
             runbooks_md[fname] = content

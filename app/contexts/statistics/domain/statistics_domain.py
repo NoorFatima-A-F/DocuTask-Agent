@@ -1,11 +1,13 @@
 from dataclasses import dataclass
 from app.shared_kernel import BaseEntity, DomainEvent
 
+
 @dataclass
 class StatisticalAnalysisCompleted(DomainEvent):
     analysis_id: str = ""
     metric_name: str = ""
     mean: float = 0.0
+
 
 @dataclass
 class StatisticalAggregate(BaseEntity):

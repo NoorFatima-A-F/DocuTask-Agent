@@ -1,13 +1,15 @@
 """
 Quality Gate Engine: Hard/Soft blockers, threshold evaluation, composite scoring.
 """
+
 from typing import Dict, Any, List
 from ..interfaces import QualityGateEngineInterface
 from ...crosscutting.observability import ComponentObservability
 
+
 class QualityGateEngine(QualityGateEngineInterface):
     """Evaluates verification outcomes against strict quality policies."""
-    
+
     def __init__(self):
         self.observability = ComponentObservability("QualityGateEngine")
 
@@ -35,13 +37,9 @@ class QualityGateEngine(QualityGateEngineInterface):
                 rule_pass = val > thresh
             elif op == "<":
                 rule_pass = val < thresh
-            
+
             if not rule_pass:
                 passed = False
                 blockers.append(f"{m_name} failed rule: {val} {op} {thresh}")
-                
-        return {
-            "passed": passed,
-            "composite_score": 1.0 if passed else 0.0,
-            "blockers": blockers
-        }
+
+        return {"passed": passed, "composite_score": 1.0 if passed else 0.0, "blockers": blockers}

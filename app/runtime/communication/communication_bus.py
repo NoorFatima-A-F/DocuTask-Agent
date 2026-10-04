@@ -131,7 +131,13 @@ class CommunicationBus:
         if channel_name:
             results = [m for m in results if m.channel_name == channel_name]
         if department_id:
-            results = [m for m in results if m.sender_department_id == department_id or m.receiver_department_id == department_id or m.receiver_department_id is None]
+            results = [
+                m
+                for m in results
+                if m.sender_department_id == department_id
+                or m.receiver_department_id == department_id
+                or m.receiver_department_id is None
+            ]
         return [m.to_dict() for m in results[:limit]]
 
 

@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class PlanningError(Exception):
     """Raised when plan generation or validation fails."""
+
     pass
 
 
@@ -27,11 +28,7 @@ class PlanningEngine:
     agent assignment, constraint validation, and fallback planning.
     """
 
-    def __init__(
-        self,
-        registry: Optional[AgentRegistry] = None,
-        decomposer: Optional[TaskDecomposer] = None
-    ):
+    def __init__(self, registry: Optional[AgentRegistry] = None, decomposer: Optional[TaskDecomposer] = None):
         self.registry = registry or AgentRegistry()
         self.decomposer = decomposer or TaskDecomposer()
 
@@ -73,8 +70,7 @@ class PlanningEngine:
         self._verify_plan_dag(plan)
 
         logger.info(
-            f"PlanningEngine generated plan {plan.plan_id} with {len(plan.steps)} steps "
-            f"for goal '{goal.description}'"
+            f"PlanningEngine generated plan {plan.plan_id} with {len(plan.steps)} steps for goal '{goal.description}'"
         )
         return plan
 

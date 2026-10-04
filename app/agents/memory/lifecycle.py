@@ -8,6 +8,7 @@ from enum import Enum
 
 class MemoryLifecycleState(str, Enum):
     """Memory record lifecycle states."""
+
     NEW = "NEW"
     ACTIVE = "ACTIVE"
     SUMMARIZED = "SUMMARIZED"

@@ -1,4 +1,5 @@
 """SBOM Security and License Compliance Policies."""
+
 from typing import Optional, Set
 from .generator import SBOMDocument
 

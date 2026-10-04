@@ -7,7 +7,12 @@ Policies define bidirectional traffic rules:
 
 ## 2. Defining Declarative Ingress Rules
 ```python
-from app.infrastructure.networking.policies import NetworkPolicy, NetworkPolicyRule, NetworkPolicyEngine, NetworkPolicyType
+from app.infrastructure.networking.policies import (
+    NetworkPolicy,
+    NetworkPolicyRule,
+    NetworkPolicyEngine,
+    NetworkPolicyType,
+)
 from app.infrastructure.networking.control_plane import ZeroTrustAction
 
 engine = NetworkPolicyEngine()
@@ -26,7 +31,7 @@ policy = NetworkPolicy(
             allowed_protocols=["https", "grpc"],
             action=ZeroTrustAction.ALLOW,
         )
-    ]
+    ],
 )
 engine.add_policy(policy)
 ```

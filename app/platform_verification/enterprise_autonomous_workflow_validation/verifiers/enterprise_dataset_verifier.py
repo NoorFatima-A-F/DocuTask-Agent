@@ -25,12 +25,48 @@ class EnterpriseDatasetVerifier(IEnterpriseDatasetVerifier):
 
     def verify(self) -> EnterpriseDatasetReport:
         datasets = [
-            DatasetVerificationDetail(dataset_name="MultiVendorInvoices", sample_count=1200, formats=["PDF", "TIFF", "PNG"], extraction_accuracy_pct=99.8, verified=True),
-            DatasetVerificationDetail(dataset_name="ComplexLegalContracts", sample_count=450, formats=["PDF", "DOCX"], extraction_accuracy_pct=99.4, verified=True),
-            DatasetVerificationDetail(dataset_name="TechnicalResumesAndCVs", sample_count=800, formats=["PDF", "DOCX", "RTF"], extraction_accuracy_pct=99.7, verified=True),
-            DatasetVerificationDetail(dataset_name="HealthcareClaimsAndEHR", sample_count=650, formats=["Scanned_PDF", "TIFF"], extraction_accuracy_pct=99.9, verified=True),
-            DatasetVerificationDetail(dataset_name="FinancialSpreadsheetsAndPOs", sample_count=500, formats=["XLSX", "CSV", "PDF"], extraction_accuracy_pct=100.0, verified=True),
-            DatasetVerificationDetail(dataset_name="MultilingualGlobalReceipts", sample_count=600, formats=["JPEG", "PNG", "PDF"], extraction_accuracy_pct=99.5, verified=True),
+            DatasetVerificationDetail(
+                dataset_name="MultiVendorInvoices",
+                sample_count=1200,
+                formats=["PDF", "TIFF", "PNG"],
+                extraction_accuracy_pct=99.8,
+                verified=True,
+            ),
+            DatasetVerificationDetail(
+                dataset_name="ComplexLegalContracts",
+                sample_count=450,
+                formats=["PDF", "DOCX"],
+                extraction_accuracy_pct=99.4,
+                verified=True,
+            ),
+            DatasetVerificationDetail(
+                dataset_name="TechnicalResumesAndCVs",
+                sample_count=800,
+                formats=["PDF", "DOCX", "RTF"],
+                extraction_accuracy_pct=99.7,
+                verified=True,
+            ),
+            DatasetVerificationDetail(
+                dataset_name="HealthcareClaimsAndEHR",
+                sample_count=650,
+                formats=["Scanned_PDF", "TIFF"],
+                extraction_accuracy_pct=99.9,
+                verified=True,
+            ),
+            DatasetVerificationDetail(
+                dataset_name="FinancialSpreadsheetsAndPOs",
+                sample_count=500,
+                formats=["XLSX", "CSV", "PDF"],
+                extraction_accuracy_pct=100.0,
+                verified=True,
+            ),
+            DatasetVerificationDetail(
+                dataset_name="MultilingualGlobalReceipts",
+                sample_count=600,
+                formats=["JPEG", "PNG", "PDF"],
+                extraction_accuracy_pct=99.5,
+                verified=True,
+            ),
         ]
 
         total_samples = sum(d.sample_count for d in datasets)

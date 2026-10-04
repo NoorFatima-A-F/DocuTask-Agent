@@ -17,6 +17,7 @@ from app.runtime.planning.risk_engine import StrategyRiskProfile
 
 class UtilityWeights(BaseModel):
     """Normalized weights for multi-objective optimization (sum = 1.0)."""
+
     w_accuracy: float = 0.40
     w_latency: float = 0.20
     w_cost: float = 0.20
@@ -27,6 +28,7 @@ class UtilityWeights(BaseModel):
 
 class UtilityScore(BaseModel):
     """Detailed utility calculation with full term breakdown and algebraic provenance."""
+
     strategy_id: str
     total_utility: float
     accuracy_term: float

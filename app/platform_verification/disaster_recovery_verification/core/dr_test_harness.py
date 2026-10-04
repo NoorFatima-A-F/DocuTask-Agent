@@ -1,6 +1,7 @@
 """
 Disaster Recovery Simulation Test Harness.
 """
+
 from typing import List
 from app.platform_verification.disaster_recovery_verification.domain.models import (
     DRTestScenarioResult,
@@ -13,6 +14,7 @@ from app.platform_verification.disaster_recovery_verification.domain.interfaces 
 
 class DRTestHarness(IDRTestHarness):
     """Executes automated failure simulations across all 5 disaster scenarios."""
+
     __test__ = False
 
     def execute_scenario(self, scenario: DRScenarioType) -> DRTestScenarioResult:

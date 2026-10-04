@@ -12,6 +12,7 @@ import uuid
 @dataclass
 class ProblemDetails:
     """RFC 9457 Compliant Problem Details Structure."""
+
     type: str = "about:blank"
     title: str = "An error occurred"
     status: int = 500

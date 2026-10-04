@@ -77,8 +77,14 @@ class ExplainabilityVerifier:
         }
 
         required_factors = [
-            "conclusion", "evidence", "reasoning_steps", "assumptions",
-            "applied_constraints", "rejected_hypotheses", "alternative_decisions", "confidence_factors"
+            "conclusion",
+            "evidence",
+            "reasoning_steps",
+            "assumptions",
+            "applied_constraints",
+            "rejected_hypotheses",
+            "alternative_decisions",
+            "confidence_factors",
         ]
         has_all_8 = all(f in trace for f in required_factors)
         passed = has_all_8

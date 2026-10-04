@@ -3,6 +3,7 @@ Master Runtime Orchestrator for Backup Certification Framework (Part 3G.2G).
 Coordinates evidence collection, analyzers, scoring, policy validation, risk generation,
 and report export.
 """
+
 import time
 from typing import Dict, Any, Optional
 
@@ -79,9 +80,7 @@ class BackupCertificationRuntime:
         self.dashboard_engine = dashboard_engine or BackupDashboardEngine()
         self.report_engine = report_engine or CertificationReportEngine()
 
-    def execute_full_certification(
-        self, output_dir: str = "backup_certification"
-    ) -> Dict[str, Any]:
+    def execute_full_certification(self, output_dir: str = "backup_certification") -> Dict[str, Any]:
         """
         Executes complete end-to-end backup certification pipeline.
         """
@@ -98,14 +97,10 @@ class BackupCertificationRuntime:
         rto_rpo = self.rto_rpo_certifier.certify_rto_rpo(evidence)
         policy = self.policy_validator.validate_policies(evidence)
         schedule = self.continuous_engine.generate_verification_schedule()
-        risks = self.risk_generator.generate_risk_register(
-            completeness, integrity, restore, policy, operational
-        )
+        risks = self.risk_generator.generate_risk_register(completeness, integrity, restore, policy, operational)
 
         # 3. Security score from collected evidence
-        security_score = float(
-            evidence.security_validation.get("compliance_score_percent", 100.0)
-        )
+        security_score = float(evidence.security_validation.get("compliance_score_percent", 100.0))
 
         # 4. Weighted Scoring & Tier Assignment
         scorecard = self.scoring_engine.compute_certification_score(

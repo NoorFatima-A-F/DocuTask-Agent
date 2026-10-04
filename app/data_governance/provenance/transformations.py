@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class ProvenanceTransformationRecord(BaseModel):
     """Detailed audit record of an AI or pipeline transformation step."""
+
     transformation_id: str
     asset_id: str
     step_name: str

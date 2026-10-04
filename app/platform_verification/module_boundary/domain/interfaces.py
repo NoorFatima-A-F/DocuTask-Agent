@@ -1,6 +1,7 @@
 """
 Abstract interfaces for Module Boundary & Plugin Architecture Verification.
 """
+
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Tuple
@@ -49,7 +50,9 @@ class IPluginVerifier(ABC):
     """Verifies plugin interface contracts, dynamic discovery, and failure isolation."""
 
     @abstractmethod
-    def verify_plugin_contract(self, plugin_cls: Any, plugin_manifest: Optional[Dict[str, Any]] = None) -> PluginContractReport:
+    def verify_plugin_contract(
+        self, plugin_cls: Any, plugin_manifest: Optional[Dict[str, Any]] = None
+    ) -> PluginContractReport:
         """Verifies that a plugin class satisfies lifecycle and execution contracts."""
         pass
 

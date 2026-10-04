@@ -1,6 +1,7 @@
 """
 Test Pyramid and Directory Structure Analyzer.
 """
+
 from typing import Dict, List
 from app.platform_verification.test_architecture_verification.domain.models import (
     TestPyramidReport,
@@ -75,7 +76,7 @@ class PyramidAnalyzer(IPyramidAnalyzer):
             score -= 15.0
             issues.append(f"Unit test ratio ({unit_ratio:.1%}) below target (60-70%)")
 
-        score -= (len(missing_layers) * 10.0)
+        score -= len(missing_layers) * 10.0
         score = max(0.0, min(100.0, score))
         status = "PASS" if score >= 80.0 else "FAIL"
 

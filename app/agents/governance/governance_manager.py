@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class AgentGovernanceRecord:
     """Immutable provenance and versioning snapshot for an agent execution."""
+
     snapshot_id: str = field(default_factory=lambda: f"gov-{uuid.uuid4().hex[:12]}")
     agent_id: str = ""
     agent_version: str = "1.0.0"

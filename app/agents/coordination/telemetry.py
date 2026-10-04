@@ -16,7 +16,4 @@ class CoordinationTelemetry:
         corr = correlation_id or str(uuid4())
         trace_id = uuid4().hex
         span_id = uuid4().hex[:16]
-        return {
-            "traceparent": f"00-{trace_id}-{span_id}-01",
-            "correlation-id": corr
-        }
+        return {"traceparent": f"00-{trace_id}-{span_id}-01", "correlation-id": corr}

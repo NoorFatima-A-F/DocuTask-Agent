@@ -1,14 +1,16 @@
 """
 Reporting Engine: 7 report formats (Engineering, Executive, Compliance, Security, AI, Perf, Cert).
 """
+
 from typing import Dict, Any
 from datetime import datetime, timezone
 from ..interfaces import ReportingEngineInterface
 from ...crosscutting.observability import ComponentObservability
 
+
 class ReportingEngine(ReportingEngineInterface):
     """Renders structured reports across multiple stakeholders."""
-    
+
     def __init__(self):
         self.observability = ComponentObservability("ReportingEngine")
 
@@ -21,5 +23,5 @@ class ReportingEngine(ReportingEngineInterface):
             "run_id": run_id,
             "format": report_format,
             "content": content,
-            "rendered_at": datetime.now(timezone.utc).isoformat()
+            "rendered_at": datetime.now(timezone.utc).isoformat(),
         }

@@ -88,7 +88,7 @@ class ConsensusEngine:
             )
 
         cid = consensus_id or f"cons_{int(time.time())}"
-        
+
         # Weighted evidence aggregation by recommendation option
         rec_scores: Dict[str, float] = {}
         rec_weights: Dict[str, float] = {}
@@ -98,7 +98,7 @@ class ConsensusEngine:
             # Effective weight = confidence * (1.0 - 0.5 * risk_score) * weight_multiplier * (1 + 0.2 * len(evidence))
             evidence_boost = 1.0 + 0.2 * min(len(c.supporting_evidence_hashes), 3)
             effective_weight = c.confidence * (1.0 - 0.4 * c.risk_score) * c.weight_multiplier * evidence_boost
-            
+
             rec = c.recommendation.upper()
             rec_scores[rec] = rec_scores.get(rec, 0.0) + (effective_weight * c.confidence)
             rec_weights[rec] = rec_weights.get(rec, 0.0) + effective_weight
@@ -113,7 +113,7 @@ class ConsensusEngine:
 
         # Agreement score: fraction of total weight backing winner
         agreement_score = round(winning_weight / max(total_weight, 1e-9), 4)
-        
+
         # Composite confidence: weighted mean confidence for winning option
         composite_conf = round(rec_scores[winning_rec] / max(winning_weight, 1e-9), 4)
 

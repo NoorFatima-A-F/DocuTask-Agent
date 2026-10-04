@@ -2,6 +2,7 @@
 Phase 3I.7.1: Observability Threat Model Verifier
 Identifies and models risks across sensitive data leakage, credential exposure, prompt/response leakage, and privilege abuse.
 """
+
 from typing import List
 from ..domain.interfaces import IThreatModelVerifier
 from ..domain.models import ThreatSeverity, SecurityThreatSpec, ObservabilityThreatModelReport

@@ -1,6 +1,7 @@
 """
 3I.1.8: Log Retention & Storage Verifier
 """
+
 from ..domain.models import RetentionReport
 from ..domain.interfaces import ILogRetentionVerifier
 
@@ -18,5 +19,5 @@ class LogRetentionVerifier(ILogRetentionVerifier):
             audit_log_retention_days=365,
             compression_enabled=True,
             automatic_rotation_verified=True,
-            retention_policy_passed=True
+            retention_policy_passed=True,
         )

@@ -15,6 +15,7 @@ from research_validation.goal.services.dependency_analyzer import DependencyAnal
 @dataclass(frozen=True)
 class GoalValidationResult:
     """Detailed machine-readable validation report."""
+
     is_valid: bool
     goal_id: str
     errors: List[str] = field(default_factory=list)
@@ -41,9 +42,8 @@ class GoalValidator:
 
         # 3. Confidence Threshold validity
         if goal.confidence_threshold.level == ConfidenceLevel.CUSTOM:
-            if (
-                goal.confidence_threshold.custom_numeric_value is None
-                or not (0.0 < goal.confidence_threshold.custom_numeric_value <= 1.0)
+            if goal.confidence_threshold.custom_numeric_value is None or not (
+                0.0 < goal.confidence_threshold.custom_numeric_value <= 1.0
             ):
                 errors.append("Custom confidence threshold must be a float between 0.0 (exclusive) and 1.0.")
 

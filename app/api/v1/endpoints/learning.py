@@ -30,6 +30,7 @@ router = APIRouter()
 # Request Schemas
 # ---------------------------------------------------------------------------
 
+
 class MineLearningRequest(BaseModel):
     mission_id: str = Field(default="mission-001", description="Mission ID to reflect and learn from")
 
@@ -47,13 +48,15 @@ class IngestKnowledgeRequest(BaseModel):
 class ProposePolicyRequest(BaseModel):
     target_component: str = Field(default="planner")
     policy_name: str = Field(default="Adaptive DAG Optimization Policy")
-    parameters: Dict[str, Any] = Field(default_factory=lambda: {
-        "max_retries": 3,
-        "concurrency_limit": 6,
-        "timeout_seconds": 45,
-        "confidence_threshold": 0.85,
-        "replanning_sensitivity": 0.35,
-    })
+    parameters: Dict[str, Any] = Field(
+        default_factory=lambda: {
+            "max_retries": 3,
+            "concurrency_limit": 6,
+            "timeout_seconds": 45,
+            "confidence_threshold": 0.85,
+            "replanning_sensitivity": 0.35,
+        }
+    )
     evidence_lessons: List[str] = Field(default_factory=lambda: ["lesson-001", "lesson-002"])
 
 
@@ -83,6 +86,7 @@ class RollbackPolicyRequest(BaseModel):
 # Reflection Endpoints
 # ---------------------------------------------------------------------------
 
+
 @router.get("/reflection/mission/{mission_id}", response_model=Dict[str, Any])
 async def get_mission_reflection(mission_id: str):
     """
@@ -104,6 +108,7 @@ async def list_reflection_history():
 # ---------------------------------------------------------------------------
 # Learning & Pattern Mining Endpoints
 # ---------------------------------------------------------------------------
+
 
 @router.post("/learning/mine", response_model=Dict[str, Any])
 async def run_learning_pipeline(req: MineLearningRequest):
@@ -153,6 +158,7 @@ async def list_execution_strategies():
 # ---------------------------------------------------------------------------
 # Knowledge Registry & Graph Endpoints
 # ---------------------------------------------------------------------------
+
 
 @router.get("/knowledge/records", response_model=List[Dict[str, Any]])
 async def list_knowledge_records(category: Optional[str] = Query(None)):
@@ -229,6 +235,7 @@ async def get_knowledge_lineage(record_id: str):
 # Policy Evolution Endpoints
 # ---------------------------------------------------------------------------
 
+
 @router.get("/policy/candidates", response_model=List[Dict[str, Any]])
 async def list_candidate_policies():
     """
@@ -282,6 +289,7 @@ async def list_policy_versions():
 # ---------------------------------------------------------------------------
 # Governance & Safety Gatekeeper Endpoints
 # ---------------------------------------------------------------------------
+
 
 @router.get("/governance/evaluations", response_model=List[Dict[str, Any]])
 async def list_governance_evaluations():
@@ -352,6 +360,7 @@ async def get_guardrail_bounds():
 # Analytics & KPI Overview Endpoints
 # ---------------------------------------------------------------------------
 
+
 @router.get("/analytics/summary", response_model=Dict[str, Any])
 async def get_learning_analytics_summary():
     """
@@ -363,19 +372,15 @@ async def get_learning_analytics_summary():
     candidates = policy_engine.list_candidates()
     evals = learning_governance_gatekeeper.list_evaluations()
 
-    avg_lesson_confidence = (
-        sum(l.confidence_score for l in lessons) / len(lessons) if lessons else 0.88
-    )
-    
+    avg_lesson_confidence = sum(l.confidence_score for l in lessons) / len(lessons) if lessons else 0.88
+
     return {
         "total_reflections": len(reflection_engine.list_reports()),
         "total_mined_lessons": len(lessons),
         "total_knowledge_records": len(records),
         "total_candidate_policies": len(candidates),
         "total_active_policies": len(active_policies),
-        "governance_approval_rate": (
-            sum(1 for e in evals if e.decision == "APPROVED") / len(evals) if evals else 1.0
-        ),
+        "governance_approval_rate": (sum(1 for e in evals if e.decision == "APPROVED") / len(evals) if evals else 1.0),
         "avg_confidence_score": round(avg_lesson_confidence, 3),
         "risk_level": "LOW",
         "knowledge_graph_density": round(knowledge_graph.get_density(), 4),
@@ -444,12 +449,14 @@ async def get_all_recommendations():
     recs = []
     for rep in reports:
         for r in rep.recommendations:
-            recs.append({
-                "mission_id": rep.mission_id,
-                "recommendation": r,
-                "confidence": rep.confidence_metrics.avg_confidence,
-                "status": "PROPOSED",
-            })
+            recs.append(
+                {
+                    "mission_id": rep.mission_id,
+                    "recommendation": r,
+                    "confidence": rep.confidence_metrics.avg_confidence,
+                    "status": "PROPOSED",
+                }
+            )
     return recs
 
 
@@ -472,4 +479,3 @@ async def reject_policy(req: GovernanceReviewActionRequest):
 @router.post("/rollback", response_model=Dict[str, Any])
 async def rollback_policy(req: RollbackPolicyRequest):
     return await rollback_active_policy(req)
-

@@ -44,7 +44,10 @@ class TelemetryProjection:
             self.total_cost_usd += float(event.payload["total_cost_usd"])
 
         # Track errors
-        if event.severity in [EventSeverity.ERROR, EventSeverity.CRITICAL] or "failed" in event.event_type.value.lower():
+        if (
+            event.severity in [EventSeverity.ERROR, EventSeverity.CRITICAL]
+            or "failed" in event.event_type.value.lower()
+        ):
             self.error_events_count += 1
         elif event.severity == EventSeverity.WARNING:
             self.warning_events_count += 1
@@ -63,9 +66,7 @@ class TelemetryProjection:
         p95 = sorted_lat[int(len(sorted_lat) * 0.95)] if len(sorted_lat) >= 20 else sorted_lat[-1]
         p99 = sorted_lat[int(len(sorted_lat) * 0.99)] if len(sorted_lat) >= 100 else sorted_lat[-1]
 
-        error_rate = (
-            round((self.error_events_count / max(1, self.total_events_processed)) * 100.0, 3)
-        )
+        error_rate = round((self.error_events_count / max(1, self.total_events_processed)) * 100.0, 3)
 
         return {
             "throughput_rps": rps or 8.4,

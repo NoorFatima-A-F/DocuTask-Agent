@@ -9,6 +9,7 @@ from app.prompts.registry.models import PromptLifecycleState
 
 class PromptLifecycleAuditEvent(BaseModel):
     """Audit log record for prompt state transitions."""
+
     prompt_id: str
     organization_id: str
     from_state: PromptLifecycleState

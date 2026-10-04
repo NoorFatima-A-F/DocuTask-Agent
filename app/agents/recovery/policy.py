@@ -10,6 +10,7 @@ from app.agents.recovery.recovery_strategy import RecoveryStrategy
 
 class RecoveryPolicy(BaseModel):
     """Enterprise policy governing autonomous recovery behavior."""
+
     policy_id: str = Field(default="DEFAULT_RECOVERY_POLICY")
     allowed_strategies: List[RecoveryStrategy] = Field(
         default_factory=lambda: [
@@ -18,7 +19,7 @@ class RecoveryPolicy(BaseModel):
             RecoveryStrategy.ALTERNATE_WORKER,
             RecoveryStrategy.RESTORE_CHECKPOINT,
             RecoveryStrategy.ROLLBACK,
-            RecoveryStrategy.PLANNER_RE_ENTRY
+            RecoveryStrategy.PLANNER_RE_ENTRY,
         ]
     )
     max_total_retries: int = Field(default=3, ge=0)

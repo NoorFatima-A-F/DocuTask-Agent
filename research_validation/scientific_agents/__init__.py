@@ -4,10 +4,13 @@ Scientific Agents Package (Phase 94C)
 """
 
 from research_validation.scientific_agents.agent_definitions import (
-    ScientificAgentRole, ScientificAgentMessage, ScientificAgentState
+    ScientificAgentRole,
+    ScientificAgentMessage,
+    ScientificAgentState,
 )
 from research_validation.scientific_agents.scientific_agent_runtime import (
-    ResearchDeliberationVerdict, ScientificAgentRuntime
+    ResearchDeliberationVerdict,
+    ScientificAgentRuntime,
 )
 
 __all__ = [

@@ -38,7 +38,11 @@ class QueueBottleneckVerifier(IQueueBottleneckVerifier):
                 name="Processing Rate Exceeds Enqueue Rate",
                 passed=processing_rate >= enqueue_rate,
                 details=f"Processing: {processing_rate} jobs/min ≥ Enqueue: {enqueue_rate} jobs/min — queue drains successfully",
-                metrics={"processing_rate": processing_rate, "enqueue_rate": enqueue_rate, "ratio": round(processing_rate / enqueue_rate, 2)},
+                metrics={
+                    "processing_rate": processing_rate,
+                    "enqueue_rate": enqueue_rate,
+                    "ratio": round(processing_rate / enqueue_rate, 2),
+                },
             ),
             CheckResult(
                 name="Consumer Lag Within Threshold",

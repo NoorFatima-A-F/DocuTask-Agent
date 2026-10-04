@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11.3: Metrics Completeness Evaluator
 """
+
 from ..domain.interfaces import IMetricsCompletenessEvaluator
 from ..domain.models import MetricsCompletenessScore
 

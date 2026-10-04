@@ -143,6 +143,7 @@ def generate_report(
         title=payload.title,
     )
     from ..reporting.exporters import ReportExporter
+
     content = ReportExporter.export(rep, format=payload.export_format)
     return GenerateReportResponse(
         report_id=rep.report_id,

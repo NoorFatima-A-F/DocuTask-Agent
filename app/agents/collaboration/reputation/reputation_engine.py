@@ -49,12 +49,7 @@ class ReputationEngine:
         penalty_rate = metrics.total_reflection_penalties / metrics.total_invocations
         reliability = max(0.0, 1.0 - (override_rate * 0.5 + penalty_rate * 0.3))
 
-        raw_score = (
-            0.40 * success_rate
-            + 0.25 * accuracy
-            + 0.20 * efficiency
-            + 0.15 * reliability
-        )
+        raw_score = 0.40 * success_rate + 0.25 * accuracy + 0.20 * efficiency + 0.15 * reliability
 
         score = max(0.0, min(1.0, raw_score))
         return round(score, 4)

@@ -18,7 +18,7 @@ result = gw.inspect_request(
     client_ip="192.168.1.50",
     path="/api/v1/documents/upload",
     headers={"x-api-key": "secret-api-key-cust-01"},
-    body='{"filename": "contract.pdf"}'
+    body='{"filename": "contract.pdf"}',
 )
 if not result.passed:
     # Reject request

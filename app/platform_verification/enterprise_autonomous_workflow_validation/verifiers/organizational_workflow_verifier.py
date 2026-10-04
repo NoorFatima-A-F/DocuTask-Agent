@@ -25,12 +25,48 @@ class OrganizationalWorkflowVerifier(IOrganizationalWorkflowVerifier):
 
     def verify(self) -> OrganizationalWorkflowReport:
         transitions = [
-            DepartmentalTransition(from_department="Procurement", to_department="Finance", artifact_passed="PurchaseOrderAndInvoicePair", handshake_latency_ms=14.2, context_preserved=True),
-            DepartmentalTransition(from_department="Finance", to_department="Legal", artifact_passed="NonStandardPaymentTermsClause", handshake_latency_ms=18.5, context_preserved=True),
-            DepartmentalTransition(from_department="Legal", to_department="Compliance", artifact_passed="RiskAssessmentSummary", handshake_latency_ms=12.1, context_preserved=True),
-            DepartmentalTransition(from_department="Compliance", to_department="Security", artifact_passed="DataResidencyAttestation", handshake_latency_ms=15.8, context_preserved=True),
-            DepartmentalTransition(from_department="Security", to_department="ExecutiveCouncil", artifact_passed="ConsolidatedApprovalPackage", handshake_latency_ms=22.0, context_preserved=True),
-            DepartmentalTransition(from_department="ExecutiveCouncil", to_department="Operations", artifact_passed="SignedExecutionDirective", handshake_latency_ms=9.4, context_preserved=True),
+            DepartmentalTransition(
+                from_department="Procurement",
+                to_department="Finance",
+                artifact_passed="PurchaseOrderAndInvoicePair",
+                handshake_latency_ms=14.2,
+                context_preserved=True,
+            ),
+            DepartmentalTransition(
+                from_department="Finance",
+                to_department="Legal",
+                artifact_passed="NonStandardPaymentTermsClause",
+                handshake_latency_ms=18.5,
+                context_preserved=True,
+            ),
+            DepartmentalTransition(
+                from_department="Legal",
+                to_department="Compliance",
+                artifact_passed="RiskAssessmentSummary",
+                handshake_latency_ms=12.1,
+                context_preserved=True,
+            ),
+            DepartmentalTransition(
+                from_department="Compliance",
+                to_department="Security",
+                artifact_passed="DataResidencyAttestation",
+                handshake_latency_ms=15.8,
+                context_preserved=True,
+            ),
+            DepartmentalTransition(
+                from_department="Security",
+                to_department="ExecutiveCouncil",
+                artifact_passed="ConsolidatedApprovalPackage",
+                handshake_latency_ms=22.0,
+                context_preserved=True,
+            ),
+            DepartmentalTransition(
+                from_department="ExecutiveCouncil",
+                to_department="Operations",
+                artifact_passed="SignedExecutionDirective",
+                handshake_latency_ms=9.4,
+                context_preserved=True,
+            ),
         ]
 
         checks = [

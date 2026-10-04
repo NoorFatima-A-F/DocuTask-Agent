@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Verification Test Harness Framework (PART 3).
 """
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -59,6 +60,7 @@ class WorkerStatus(str, Enum):
 @dataclass(frozen=True)
 class RetryPolicy:
     """Configures retry attempts and exponential backoff."""
+
     max_retries: int = 3
     initial_delay_ms: float = 50.0
     backoff_factor: float = 2.0
@@ -68,6 +70,7 @@ class RetryPolicy:
 @dataclass
 class VerificationTestSpec:
     """Declarative specification for a verification test case."""
+
     __test__ = False
     id: str
     name: str
@@ -88,6 +91,7 @@ class VerificationTestSpec:
 @dataclass
 class VerificationContext:
     """Hermetic execution context with isolated filesystem sandboxes."""
+
     execution_id: str
     test_id: str
     environment: str
@@ -108,6 +112,7 @@ class VerificationContext:
 @dataclass
 class WorkerNode:
     """Registered execution worker node in distributed worker pool."""
+
     worker_id: str
     hostname: str
     capabilities: List[TestCategory]
@@ -119,6 +124,7 @@ class WorkerNode:
 @dataclass
 class ExecutionJob:
     """Represents a scheduled unit of verification work."""
+
     job_id: str
     test_spec: VerificationTestSpec
     context: VerificationContext
@@ -133,6 +139,7 @@ class ExecutionJob:
 @dataclass
 class HarnessExecutionResult:
     """Detailed outcome of a single test specification execution."""
+
     job_id: str
     test_id: str
     state: TestLifecycleState
@@ -149,6 +156,7 @@ class HarnessExecutionResult:
 @dataclass
 class HarnessExecutionReport:
     """Composite report summarizing an execution batch or DAG."""
+
     report_id: str
     execution_mode: ExecutionMode
     total_jobs: int

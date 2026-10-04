@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11.10: Operational Risk Analyzer Engine
 """
+
 from typing import List
 from ..domain.interfaces import IOperationalRiskAnalyzer
 from ..domain.models import (

@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class WorkflowHistoryEvent(BaseModel):
     """An individual historical event in the workflow execution timeline."""
+
     event_id: UUID = Field(default_factory=uuid4)
     instance_id: UUID
     event_type: str  # NODE_STARTED, NODE_COMPLETED, SIGNAL_RECEIVED, STATE_TRANSITION
@@ -23,14 +24,14 @@ class WorkflowHistoryEvent(BaseModel):
 
 class WorkflowHistory(BaseModel):
     """Sequence of historical execution events for an instance."""
+
     instance_id: UUID
     events: List[WorkflowHistoryEvent] = Field(default_factory=list)
 
-    def append_event(self, event_type: str, node_id: Optional[str] = None, payload: Dict[str, Any] = None) -> "WorkflowHistory":
+    def append_event(
+        self, event_type: str, node_id: Optional[str] = None, payload: Dict[str, Any] = None
+    ) -> "WorkflowHistory":
         event = WorkflowHistoryEvent(
-            instance_id=self.instance_id,
-            event_type=event_type,
-            node_id=node_id,
-            payload=payload or {}
+            instance_id=self.instance_id, event_type=event_type, node_id=node_id, payload=payload or {}
         )
         return self.model_copy(update={"events": [*self.events, event]})

@@ -14,6 +14,7 @@ from app.prompts.registry.models import PromptVersion
 
 class PromptDiffReport(BaseModel):
     """Structured report detailing differences between two prompt versions."""
+
     base_version_id: str
     target_version_id: str
     text_diff: str
@@ -34,24 +35,18 @@ class PromptDiffEngine:
         base_lines = base.prompt_template.splitlines(keepends=True)
         target_lines = target.prompt_template.splitlines(keepends=True)
 
-        diff = list(difflib.unified_diff(
-            base_lines,
-            target_lines,
-            fromfile=f"version_{base.version_number}",
-            tofile=f"version_{target.version_number}",
-        ))
+        diff = list(
+            difflib.unified_diff(
+                base_lines,
+                target_lines,
+                fromfile=f"version_{base.version_number}",
+                tofile=f"version_{target.version_number}",
+            )
+        )
         text_diff = "".join(diff)
 
-        added_lines = [
-            line[1:].strip()
-            for line in diff
-            if line.startswith("+") and not line.startswith("+++")
-        ]
-        removed_lines = [
-            line[1:].strip()
-            for line in diff
-            if line.startswith("-") and not line.startswith("---")
-        ]
+        added_lines = [line[1:].strip() for line in diff if line.startswith("+") and not line.startswith("+++")]
+        removed_lines = [line[1:].strip() for line in diff if line.startswith("-") and not line.startswith("---")]
 
         base_vars = set(base.variables)
         target_vars = set(target.variables)

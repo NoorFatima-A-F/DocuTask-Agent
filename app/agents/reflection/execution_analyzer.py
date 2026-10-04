@@ -23,7 +23,7 @@ class ExecutionAnalyzer(IExecutionAnalyzer):
                 "retry_count": 0,
                 "success_rate": 1.0 if trace.final_state == "COMPLETED" else 0.0,
                 "average_task_duration_ms": 0.0,
-                "bottleneck_task": None
+                "bottleneck_task": None,
             }
 
         completed = sum(1 for t in tasks if t.status == "COMPLETED")
@@ -42,5 +42,5 @@ class ExecutionAnalyzer(IExecutionAnalyzer):
             "success_rate": completed / total_tasks,
             "average_task_duration_ms": avg_dur,
             "bottleneck_task": slowest_task.task_name if slowest_task else None,
-            "total_duration_ms": trace.total_duration_ms
+            "total_duration_ms": trace.total_duration_ms,
         }

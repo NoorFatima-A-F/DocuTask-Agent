@@ -1,6 +1,7 @@
 """
 Phase 3H.4.9.3: Automated Recovery Workflow Verifier
 """
+
 import time
 import uuid
 from typing import Dict, Any
@@ -54,15 +55,17 @@ class AutomatedRecoveryVerifier(IAutomatedRecoveryVerifier):
         for inc_type in simulated_types:
             plan = self.mapping_verifier.generate_plan(inc_type, f"inc-{inc_type.value.lower()}")
             res = self.execute_recovery(plan)
-            executions.append({
-                "incident_type": inc_type.value,
-                "plan_id": plan.plan_id,
-                "steps_total": res.total_steps,
-                "steps_succeeded": res.steps_executed,
-                "duration_ms": res.total_duration_ms,
-                "final_state": res.state.value,
-                "success": res.all_steps_succeeded,
-            })
+            executions.append(
+                {
+                    "incident_type": inc_type.value,
+                    "plan_id": plan.plan_id,
+                    "steps_total": res.total_steps,
+                    "steps_succeeded": res.steps_executed,
+                    "duration_ms": res.total_duration_ms,
+                    "final_state": res.state.value,
+                    "success": res.all_steps_succeeded,
+                }
+            )
 
         success_count = sum(1 for e in executions if e["success"])
         success_rate = (success_count / len(executions)) * 100.0 if executions else 0.0

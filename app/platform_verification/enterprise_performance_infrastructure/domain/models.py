@@ -17,10 +17,10 @@ PerformanceVerificationStatus = VerificationStatus
 
 
 class EnterprisePerformanceTier(str, Enum):
-    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"          # 95.0 - 100.0%
-    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"          # 90.0 - 94.99%
-    OPTIMIZATION_REQUIRED = "Optimization Required"                        # 80.0 - 89.99%
-    FAILED = "Failed"                                                      # < 80.0%
+    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"  # 95.0 - 100.0%
+    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"  # 90.0 - 94.99%
+    OPTIMIZATION_REQUIRED = "Optimization Required"  # 80.0 - 89.99%
+    FAILED = "Failed"  # < 80.0%
 
 
 CertificationTier = EnterprisePerformanceTier
@@ -47,6 +47,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3J.6.1: Performance Test Architecture Models ─────────────────────────────
 
+
 class TestArchitectureComponent(BaseModel):
     component_name: str
     component_type: str
@@ -63,6 +64,7 @@ class PerformanceTestArchitectureReport(BaseVerificationReport):
 
 
 # ─── 3J.6.2: Workload Modeling Models ─────────────────────────────────────────
+
 
 class WorkloadProfile(BaseModel):
     profile_id: str
@@ -81,6 +83,7 @@ class WorkloadModelReport(BaseVerificationReport):
 
 
 # ─── 3J.6.3: API Performance Models ───────────────────────────────────────────
+
 
 class EndpointLatencyBenchmark(BaseModel):
     endpoint: str
@@ -104,6 +107,7 @@ class APILatencyReport(BaseVerificationReport):
 
 # ─── 3J.6.4: End-to-End Workflow Performance Models ───────────────────────────
 
+
 class WorkflowStageTiming(BaseModel):
     stage_name: str
     duration_ms: float
@@ -123,6 +127,7 @@ class E2EWorkflowReport(BaseVerificationReport):
 
 # ─── 3J.6.5: Throughput Scaling Models ────────────────────────────────────────
 
+
 class WorkerScalingPoint(BaseModel):
     worker_count: int
     throughput_dpm: float
@@ -140,6 +145,7 @@ class ThroughputScalingReport(BaseVerificationReport):
 
 # ─── 3J.6.6: Database Performance Models ─────────────────────────────────────
 
+
 class DatabasePerformanceReport(BaseVerificationReport):
     report_title: str = "PostgreSQL Database Performance & Concurrency Report"
     active_connections: int = 42
@@ -156,6 +162,7 @@ class DatabasePerformanceReport(BaseVerificationReport):
 
 # ─── 3J.6.7: Queue Capacity Models ───────────────────────────────────────────
 
+
 class QueueCapacityReport(BaseVerificationReport):
     report_title: str = "Redis Queue Capacity & Ingestion Dynamics Report"
     queue_depth_peak: int = 480
@@ -168,6 +175,7 @@ class QueueCapacityReport(BaseVerificationReport):
 
 
 # ─── 3J.6.8: Worker Performance Models ───────────────────────────────────────
+
 
 class WorkerEfficiencyTier(BaseModel):
     worker_tier_label: str
@@ -188,6 +196,7 @@ class WorkerEfficiencyReport(BaseVerificationReport):
 
 # ─── 3J.6.9: Resource Utilization Models ─────────────────────────────────────
 
+
 class ResourceUtilizationReport(BaseVerificationReport):
     report_title: str = "System Resource Utilization Verification Report"
     cpu_usage_avg_pct: float = 38.5
@@ -201,6 +210,7 @@ class ResourceUtilizationReport(BaseVerificationReport):
 
 
 # ─── 3J.6.10: Memory Stability Models ────────────────────────────────────────
+
 
 class MemoryStabilityCheckpoint(BaseModel):
     elapsed_hours: int
@@ -220,6 +230,7 @@ class MemoryStabilityReport(BaseVerificationReport):
 
 # ─── 3J.6.11: Degradation Analysis Models ────────────────────────────────────
 
+
 class DegradationStage(BaseModel):
     load_jobs: int
     p95_latency_ms: float
@@ -237,6 +248,7 @@ class DegradationAnalysisReport(BaseVerificationReport):
 
 # ─── 3J.6.12: Capacity Boundary Models ───────────────────────────────────────
 
+
 class CapacityBoundaryReport(BaseVerificationReport):
     report_title: str = "Capacity Limit Discovery & Boundary Specification Report"
     max_sustainable_dph: int = 3200
@@ -248,6 +260,7 @@ class CapacityBoundaryReport(BaseVerificationReport):
 
 
 # ─── 3J.6.13: Monitoring Integration Models ──────────────────────────────────
+
 
 class TelemetryDashboardSpec(BaseModel):
     dashboard_id: str
@@ -265,6 +278,7 @@ class MonitoringIntegrationReport(BaseVerificationReport):
 
 
 # ─── 3J.6.15: 5-Category Quality Scoring & Certification Models ───────────────
+
 
 class CategoryScore(BaseModel):
     category: str
@@ -290,6 +304,7 @@ class EnterprisePerformanceCertificationReport(BaseVerificationReport):
 
 
 # ─── 3J.6.14: Manifest Models ────────────────────────────────────────────────
+
 
 class PerformanceVerificationManifest(BaseModel):
     system: str = "DocuTask Agent"

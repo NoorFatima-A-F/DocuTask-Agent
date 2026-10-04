@@ -112,7 +112,8 @@ class ServiceMeshController:
             del self._topology.services[key]
             # Also clean up nodes belonging to this service
             nodes_to_remove = [
-                node_id for node_id, node in self._topology.nodes.items()
+                node_id
+                for node_id, node in self._topology.nodes.items()
                 if node.service_name == service_name and node.namespace == namespace
             ]
             for n_id in nodes_to_remove:

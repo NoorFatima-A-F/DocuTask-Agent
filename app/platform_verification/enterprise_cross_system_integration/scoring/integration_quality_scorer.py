@@ -25,13 +25,32 @@ class CrossSystemIntegrationQualityScorer(ICrossSystemIntegrationQualityScorer):
     }
 
     PILLAR_REPORT_MAPPINGS = {
-        "Architectural Decoupling & Dependencies": ["dependency_mapping", "interface_contract", "marketplace_validation"],
+        "Architectural Decoupling & Dependencies": [
+            "dependency_mapping",
+            "interface_contract",
+            "marketplace_validation",
+        ],
         "End-to-End Request & Workflow Chains": ["api_chain", "planning_pipeline", "enterprise_workflows"],
-        "State, Data & Knowledge Flow Integrity": ["state_propagation", "knowledge_flow", "memory_interaction", "cognitive_integration", "data_integrity"],
+        "State, Data & Knowledge Flow Integrity": [
+            "state_propagation",
+            "knowledge_flow",
+            "memory_interaction",
+            "cognitive_integration",
+            "data_integrity",
+        ],
         "Security, Isolation & Tenant Boundaries": ["security_boundary"],
         "Multi-Agent, Eventing & Scheduling": ["agent_collaboration", "event_bus", "scheduler"],
-        "Lifecycle, Deployment & Operational Reliability": ["lifecycle_integration", "deployment_integration", "observability_integration", "failure_propagation"],
-        "Cross-System Performance & Evidence Assurance": ["cross_system_performance", "integration_regression", "evidence_generation"],
+        "Lifecycle, Deployment & Operational Reliability": [
+            "lifecycle_integration",
+            "deployment_integration",
+            "observability_integration",
+            "failure_propagation",
+        ],
+        "Cross-System Performance & Evidence Assurance": [
+            "cross_system_performance",
+            "integration_regression",
+            "evidence_generation",
+        ],
     }
 
     def calculate_score(self, reports: Dict[str, Any]) -> CrossSystemIntegrationQualityScore:
@@ -50,7 +69,7 @@ class CrossSystemIntegrationQualityScorer(ICrossSystemIntegrationQualityScorer):
                     # rep can be model or dict
                     score_val = getattr(rep, "score", None) if hasattr(rep, "score") else rep.get("score", 0.0)
                     pillar_scores.append(float(score_val))
-                    
+
                     checks = getattr(rep, "checks", None) if hasattr(rep, "checks") else rep.get("checks", [])
                     for chk in checks:
                         total_checks += 1

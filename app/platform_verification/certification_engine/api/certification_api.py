@@ -1,6 +1,7 @@
 """
 REST API Router for Enterprise Verification Quality Gates & Certification (PART 6).
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, status

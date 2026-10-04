@@ -12,63 +12,40 @@ threat modeling, and external review readiness dossiers.
 import math
 from pathlib import Path
 
-from research_validation.reference_validation.reference_equivalence import (
-    ReferenceEquivalenceLab
-)
-from research_validation.numerical.numerical_stress_lab import (
-    NumericalStressLab
-)
-from research_validation.numerical.float_error_propagation import (
-    FloatErrorPropagationFramework, PrecisionInterval
-)
-from research_validation.datasets.public_benchmark_suite_v2 import (
-    PublicBenchmarkSuiteV2, CanonicalDataset
-)
-from research_validation.replication.reproduction_matrix import (
-    IndependentReproductionMatrixLab, EvaluatorRole
-)
+from research_validation.reference_validation.reference_equivalence import ReferenceEquivalenceLab
+from research_validation.numerical.numerical_stress_lab import NumericalStressLab
+from research_validation.numerical.float_error_propagation import FloatErrorPropagationFramework, PrecisionInterval
+from research_validation.datasets.public_benchmark_suite_v2 import PublicBenchmarkSuiteV2, CanonicalDataset
+from research_validation.replication.reproduction_matrix import IndependentReproductionMatrixLab, EvaluatorRole
 from research_validation.observatory.continuous_observatory import (
-    ContinuousBenchmarkObservatory, HistoricalBenchmarkSnapshot, CadenceType
+    ContinuousBenchmarkObservatory,
+    HistoricalBenchmarkSnapshot,
+    CadenceType,
 )
-from research_validation.uncertainty.advanced_uncertainty import (
-    AdvancedUncertaintyQuantificationLab
-)
-from research_validation.drift.drift_observatory import (
-    DatasetDriftObservatory, DriftModality
-)
-from research_validation.adversarial.adversarial_stress_lab import (
-    AdversarialStressLab
-)
-from research_validation.explainability.explainability_verification import (
-    ExplainabilityVerificationLab
-)
-from research_validation.usability.human_factors_platform import (
-    HumanFactorsPlatform, AnonymizedParticipantTelemetry
-)
+from research_validation.uncertainty.advanced_uncertainty import AdvancedUncertaintyQuantificationLab
+from research_validation.drift.drift_observatory import DatasetDriftObservatory, DriftModality
+from research_validation.adversarial.adversarial_stress_lab import AdversarialStressLab
+from research_validation.explainability.explainability_verification import ExplainabilityVerificationLab
+from research_validation.usability.human_factors_platform import HumanFactorsPlatform, AnonymizedParticipantTelemetry
 from research_validation.telemetry.production_telemetry_v2 import (
-    ProductionTelemetryValidatorV2, ServiceOperationalTelemetry, TelemetryOrigin
+    ProductionTelemetryValidatorV2,
+    ServiceOperationalTelemetry,
+    TelemetryOrigin,
 )
-from research_validation.security.security_fuzzing_lab import (
-    SecurityFuzzingLab
-)
-from research_validation.differential.differential_intelligence import (
-    DifferentialIntelligenceLab
-)
+from research_validation.security.security_fuzzing_lab import SecurityFuzzingLab
+from research_validation.differential.differential_intelligence import DifferentialIntelligenceLab
 from research_validation.endurance.long_duration_lab import (
-    LongDurationReliabilityLab, SoakTargetWindow, SoakSnapshotTelemetry
+    LongDurationReliabilityLab,
+    SoakTargetWindow,
+    SoakSnapshotTelemetry,
 )
 from research_validation.sustainability.sustainability_observatory import (
-    SustainabilityObservatory, MeasurementSourceType
+    SustainabilityObservatory,
+    MeasurementSourceType,
 )
-from research_validation.fair.fair_packaging import (
-    FAIRPackagingLab, IdentifierScope
-)
-from research_validation.threats.formal_threat_modeling import (
-    FormalThreatModelingPlatform
-)
-from research_validation.readiness.external_review_readiness import (
-    ExternalReviewReadinessPlatform, ReadinessVerdict
-)
+from research_validation.fair.fair_packaging import FAIRPackagingLab, IdentifierScope
+from research_validation.threats.formal_threat_modeling import FormalThreatModelingPlatform
+from research_validation.readiness.external_review_readiness import ExternalReviewReadinessPlatform, ReadinessVerdict
 
 
 def test_phase_52_reference_equivalence():
@@ -101,10 +78,7 @@ def test_phase_54_float_error_propagation():
 
     # Error budget analysis
     budget_report = FloatErrorPropagationFramework.evaluate_error_budget(
-        "exp_test",
-        lambda x: math.exp(x),
-        test_x=1.0,
-        error_budget=1e-4
+        "exp_test", lambda x: math.exp(x), test_x=1.0, error_budget=1e-4
     )
     assert budget_report.within_error_budget is True
     assert budget_report.status == "PASS"
@@ -116,12 +90,7 @@ def test_phase_55_public_benchmark_suite_v2():
     truth = ["Total: $100.00", "Vendor: Acme Inc"]
     latencies = [42.0, 45.0]
 
-    metric = PublicBenchmarkSuiteV2.evaluate_dataset_benchmark(
-        CanonicalDataset.CORD,
-        preds,
-        truth,
-        latencies
-    )
+    metric = PublicBenchmarkSuiteV2.evaluate_dataset_benchmark(CanonicalDataset.CORD, preds, truth, latencies)
     assert metric.dataset == CanonicalDataset.CORD
     assert metric.accuracy == 1.0
     assert metric.f1_score == 1.0
@@ -140,11 +109,7 @@ def test_phase_56_reproduction_matrix():
     ]
 
     report = IndependentReproductionMatrixLab.build_reproduction_study(
-        "Document Parsing Accuracy",
-        "Macro F1",
-        0.95,
-        evaluator_data,
-        tolerance_rel=0.02
+        "Document Parsing Accuracy", "Macro F1", 0.95, evaluator_data, tolerance_rel=0.02
     )
     assert report.total_evaluators == 4
     assert report.reproducibility_rate == 1.0
@@ -155,9 +120,21 @@ def test_phase_56_reproduction_matrix():
 def test_phase_57_continuous_observatory():
     obs = ContinuousBenchmarkObservatory()
     # Add historical points
-    obs.record_snapshot(HistoricalBenchmarkSnapshot("s1", "latency_bench", CadenceType.DAILY, 1000.0, "latency_p99_ms", 45.0, 100, "sha1"))
-    obs.record_snapshot(HistoricalBenchmarkSnapshot("s2", "latency_bench", CadenceType.DAILY, 1000.0 + 86400.0, "latency_p99_ms", 44.8, 100, "sha2"))
-    obs.record_snapshot(HistoricalBenchmarkSnapshot("s3", "latency_bench", CadenceType.DAILY, 1000.0 + 172800.0, "latency_p99_ms", 44.5, 100, "sha3"))
+    obs.record_snapshot(
+        HistoricalBenchmarkSnapshot(
+            "s1", "latency_bench", CadenceType.DAILY, 1000.0, "latency_p99_ms", 45.0, 100, "sha1"
+        )
+    )
+    obs.record_snapshot(
+        HistoricalBenchmarkSnapshot(
+            "s2", "latency_bench", CadenceType.DAILY, 1000.0 + 86400.0, "latency_p99_ms", 44.8, 100, "sha2"
+        )
+    )
+    obs.record_snapshot(
+        HistoricalBenchmarkSnapshot(
+            "s3", "latency_bench", CadenceType.DAILY, 1000.0 + 172800.0, "latency_p99_ms", 44.5, 100, "sha3"
+        )
+    )
 
     rep = obs.generate_observatory_report()
     assert rep.total_archived_snapshots == 3
@@ -171,14 +148,15 @@ def test_phase_58_advanced_uncertainty():
     residuals = [0.05, 0.10, 0.12, 0.15, 0.20, 0.25, 0.30]
 
     report = AdvancedUncertaintyQuantificationLab.run_advanced_uncertainty_audit(
-        "sample-001",
-        ensemble,
-        residuals,
-        ood_divergence_penalty=0.0
+        "sample-001", ensemble, residuals, ood_divergence_penalty=0.0
     )
     assert report.point_prediction > 10.0
     assert report.tri_component_uncertainty.aleatoric_pct > 0.0
-    assert report.conformal_prediction_set.lower_bound < report.point_prediction < report.conformal_prediction_set.upper_bound
+    assert (
+        report.conformal_prediction_set.lower_bound
+        < report.point_prediction
+        < report.conformal_prediction_set.upper_bound
+    )
     assert report.status == "PASS"
 
 
@@ -186,9 +164,9 @@ def test_phase_59_drift_observatory():
     ref = [10.0 + 0.1 * i for i in range(20)]
     prod = [10.0 + 0.1 * i + (0.01 if i % 2 == 0 else -0.01) for i in range(20)]
 
-    report = DatasetDriftObservatory.run_drift_observatory_audit([
-        ("amount_due", DriftModality.COVARIATE_DRIFT, ref, prod)
-    ])
+    report = DatasetDriftObservatory.run_drift_observatory_audit(
+        [("amount_due", DriftModality.COVARIATE_DRIFT, ref, prod)]
+    )
     assert report.total_monitored_entities == 1
     assert report.drifted_entities_count == 0
     assert report.observatory_status == "STABLE"
@@ -214,10 +192,7 @@ def test_phase_61_explainability_verification():
             score += 0.4
         return score
 
-    report = ExplainabilityVerificationLab.run_verification_battery(
-        [("doc1", text, attrs)],
-        scorer
-    )
+    report = ExplainabilityVerificationLab.run_verification_battery([("doc1", text, attrs)], scorer)
     assert report.total_samples_evaluated == 1
     assert report.faithful_samples_count == 1
     assert report.overall_status == "VERIFIED_FAITHFUL"
@@ -252,7 +227,7 @@ def test_phase_63_production_telemetry_v2():
             cold_starts_count=2,
             cold_start_duration_p99_ms=450.0,
             active_replicas=4,
-            queue_backlog_depth=0
+            queue_backlog_depth=0,
         )
     ]
     report = ProductionTelemetryValidatorV2.evaluate_service_telemetry(telemetries)
@@ -266,6 +241,7 @@ def test_phase_63_production_telemetry_v2():
 def test_phase_64_security_fuzzing_lab():
     def mock_parser(payload: str):
         import json
+
         return json.loads(payload)
 
     report = SecurityFuzzingLab.run_security_fuzzing_audit(mock_parser, {"doc_id": "test_101"})
@@ -303,10 +279,7 @@ def test_phase_66_long_duration_lab():
 def test_phase_67_sustainability_observatory():
     records = [
         SustainabilityObservatory.record_measurement(
-            "wf-1",
-            duration_sec=10.0,
-            num_docs=1000,
-            source=MeasurementSourceType.ESTIMATED_TDP_MODEL
+            "wf-1", duration_sec=10.0, num_docs=1000, source=MeasurementSourceType.ESTIMATED_TDP_MODEL
         )
     ]
     report = SustainabilityObservatory.generate_observatory_report(records)

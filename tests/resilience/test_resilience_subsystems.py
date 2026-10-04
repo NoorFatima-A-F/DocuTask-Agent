@@ -35,6 +35,7 @@ def client():
 
 # --- 1. Digital Twin Tests ---
 
+
 def test_digital_twin_topology_and_health():
     state = digital_twin_engine.get_topology_dict()
     assert state["overall_health_score"] >= 0.0
@@ -49,7 +50,9 @@ def test_digital_twin_heartbeat_and_mutation():
     assert node.health == NodeHealthStatus.HEALTHY
 
     # Mutate to failing
-    mutated = digital_twin_engine.mutate_node_health("node-planner", NodeHealthStatus.FAILING, latency_ms=3000.0, error_rate=0.9)
+    mutated = digital_twin_engine.mutate_node_health(
+        "node-planner", NodeHealthStatus.FAILING, latency_ms=3000.0, error_rate=0.9
+    )
     assert mutated is True
     assert digital_twin_engine.nodes["node-planner"].health == NodeHealthStatus.FAILING
 
@@ -67,6 +70,7 @@ def test_digital_twin_snapshot():
 
 
 # --- 2. Chaos Orchestrator Tests ---
+
 
 def test_chaos_scenarios_listing():
     scenarios = chaos_orchestrator.list_scenarios()
@@ -95,6 +99,7 @@ def test_chaos_summary():
 
 # --- 3. Recovery Marketplace Tests ---
 
+
 def test_recovery_marketplace_strategies():
     summary = recovery_marketplace.get_marketplace_summary()
     assert summary["total_strategies"] >= 5
@@ -111,6 +116,7 @@ def test_recovery_execution():
 
 
 # --- 4. Incident Commander Tests ---
+
 
 def test_incident_declaration_and_lifecycle():
     inc = incident_commander.declare_incident(
@@ -136,6 +142,7 @@ def test_incident_declaration_and_lifecycle():
 
 # --- 5. Dynamic Dependency Graph & Blast Radius Tests ---
 
+
 def test_dependency_topology():
     nodes = dependency_graph.list_nodes()
     assert len(nodes) >= 8
@@ -155,6 +162,7 @@ def test_blast_radius_analysis():
 
 # --- 6. Reliability Mathematics Tests ---
 
+
 def test_reliability_math_computation():
     report = reliability_math_engine.compute_reliability_report(
         completion_rate=0.999,
@@ -173,6 +181,7 @@ def test_reliability_math_computation():
 
 # --- 7. Invariants Monitor Tests ---
 
+
 def test_invariant_monitor_evaluation():
     inv_eval = invariant_monitor.evaluate_all_invariants()
     assert inv_eval["total_invariants"] >= 6
@@ -181,6 +190,7 @@ def test_invariant_monitor_evaluation():
 
 
 # --- 8. Production Readiness Tests ---
+
 
 def test_production_readiness_evaluation():
     report = production_readiness_engine.evaluate_readiness()
@@ -191,6 +201,7 @@ def test_production_readiness_evaluation():
 
 
 # --- 9. Time Machine Tests ---
+
 
 def test_time_machine_timeline_and_rewind():
     timeline = time_travel_engine.get_mission_timeline("mission-fin-audit-001")
@@ -208,6 +219,7 @@ def test_time_machine_timeline_and_rewind():
 
 # --- 10. Stress Arena Tests ---
 
+
 def test_stress_arena_execution():
     run = stress_arena_engine.run_stress_test(concurrency=20, total_missions=50)
     assert run.completed_missions == 50
@@ -217,6 +229,7 @@ def test_stress_arena_execution():
 
 
 # --- 11. Certification Dossier Tests ---
+
 
 def test_certification_dossier_generation():
     dossier = certification_dossier_engine.generate_dossier()
@@ -228,17 +241,21 @@ def test_certification_dossier_generation():
 
 # --- 12. REST API Integration Tests ---
 
+
 def test_api_digital_twin_endpoints(client):
     res = client.get("/api/v1/resilience/digital-twin/state")
     assert res.status_code == 200
     assert "nodes" in res.json()
 
-    res_hb = client.post("/api/v1/resilience/digital-twin/heartbeat", json={
-        "node_id": "node-workers",
-        "latency_ms": 25.0,
-        "error_rate": 0.01,
-        "cpu_usage_pct": 30.0,
-    })
+    res_hb = client.post(
+        "/api/v1/resilience/digital-twin/heartbeat",
+        json={
+            "node_id": "node-workers",
+            "latency_ms": 25.0,
+            "error_rate": 0.01,
+            "cpu_usage_pct": 30.0,
+        },
+    )
     assert res_hb.status_code == 200
 
 
@@ -265,11 +282,14 @@ def test_api_recovery_endpoints(client):
 
 
 def test_api_incident_endpoints(client):
-    res_dec = client.post("/api/v1/resilience/incident/declare", json={
-        "title": "API Gateway Flapping",
-        "severity": "SEV3_MEDIUM",
-        "root_cause_node_id": "node-gemini",
-    })
+    res_dec = client.post(
+        "/api/v1/resilience/incident/declare",
+        json={
+            "title": "API Gateway Flapping",
+            "severity": "SEV3_MEDIUM",
+            "root_cause_node_id": "node-gemini",
+        },
+    )
     assert res_dec.status_code == 200
     inc_id = res_dec.json()["incident"]["incident_id"]
 
@@ -309,10 +329,13 @@ def test_api_time_machine_and_stress(client):
     res_tm = client.get("/api/v1/resilience/time-machine/timeline?mission_id=mission-fin-audit-001")
     assert res_tm.status_code == 200
 
-    res_rewind = client.post("/api/v1/resilience/time-machine/rewind", json={
-        "mission_id": "mission-fin-audit-001",
-        "checkpoint_id": "chk-03",
-    })
+    res_rewind = client.post(
+        "/api/v1/resilience/time-machine/rewind",
+        json={
+            "mission_id": "mission-fin-audit-001",
+            "checkpoint_id": "chk-03",
+        },
+    )
     assert res_rewind.status_code == 200
 
     res_stress = client.post("/api/v1/resilience/stress/run", json={"concurrency": 15, "total_missions": 40})

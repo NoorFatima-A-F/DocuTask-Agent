@@ -11,6 +11,7 @@ from app.agents.coordination.exceptions import CircularDelegationError
 
 class CoordinationNode(BaseModel):
     """An agent node within the coordination topology."""
+
     node_id: str
     agent_id: UUID
     role: str
@@ -21,6 +22,7 @@ class CoordinationNode(BaseModel):
 
 class CoordinationEdge(BaseModel):
     """Directed delegation or supervision link from one agent node to another."""
+
     source_node_id: str
     target_node_id: str
     relation: str = "DELEGATES_TO"  # SUPERVISES, DELEGATES_TO, COLLABORATES_WITH
@@ -30,6 +32,7 @@ class CoordinationEdge(BaseModel):
 
 class CoordinationGraph(BaseModel):
     """Directed graph representing multi-agent relationships and delegation flows."""
+
     graph_id: UUID = Field(default_factory=uuid4)
     nodes: Dict[str, CoordinationNode] = Field(default_factory=dict)
     edges: List[CoordinationEdge] = Field(default_factory=list)
@@ -40,11 +43,7 @@ class CoordinationGraph(BaseModel):
 
     def add_edge(self, source_id: str, target_id: str, relation: str = "DELEGATES_TO") -> None:
         """Adds a directed link and validates acyclicity."""
-        self.edges.append(CoordinationEdge(
-            source_node_id=source_id,
-            target_node_id=target_id,
-            relation=relation
-        ))
+        self.edges.append(CoordinationEdge(source_node_id=source_id, target_node_id=target_id, relation=relation))
         self.validate_acyclic()
 
     def validate_acyclic(self) -> None:

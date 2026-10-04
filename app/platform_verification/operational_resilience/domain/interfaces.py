@@ -1,6 +1,7 @@
 """
 Phase 3H.7: Domain Interfaces for Operational Resilience Verification
 """
+
 from abc import ABC, abstractmethod
 from .models import (
     ResilienceArchitectureReport,

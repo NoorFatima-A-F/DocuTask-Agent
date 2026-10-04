@@ -1,3 +1,5 @@
-from app.platform_verification.health_transition_intelligence.incident.incident_reconstruction_engine import IncidentReconstructionEngine
+from app.platform_verification.health_transition_intelligence.incident.incident_reconstruction_engine import (
+    IncidentReconstructionEngine,
+)
 
 __all__ = ["IncidentReconstructionEngine"]

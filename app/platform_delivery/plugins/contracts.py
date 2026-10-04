@@ -1,4 +1,5 @@
 """Platform Plugin Base Contract and Interface (Req 59, 60)."""
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Any, Dict, List

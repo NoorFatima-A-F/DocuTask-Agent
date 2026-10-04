@@ -30,19 +30,25 @@ def test_configuration_precedence_hierarchy():
     assert provider.get("database.pool_size", org_overrides={"database.pool_size": 40}) == 40
 
     # 5. Workspace overrides Organization
-    assert provider.get(
-        "database.pool_size",
-        org_overrides={"database.pool_size": 40},
-        workspace_overrides={"database.pool_size": 50},
-    ) == 50
+    assert (
+        provider.get(
+            "database.pool_size",
+            org_overrides={"database.pool_size": 40},
+            workspace_overrides={"database.pool_size": 50},
+        )
+        == 50
+    )
 
     # 6. Execution override wins over all
-    assert provider.get(
-        "database.pool_size",
-        org_overrides={"database.pool_size": 40},
-        workspace_overrides={"database.pool_size": 50},
-        execution_overrides={"database.pool_size": 100},
-    ) == 100
+    assert (
+        provider.get(
+            "database.pool_size",
+            org_overrides={"database.pool_size": 40},
+            workspace_overrides={"database.pool_size": 50},
+            execution_overrides={"database.pool_size": 100},
+        )
+        == 100
+    )
 
 
 def test_configuration_source_attribution():

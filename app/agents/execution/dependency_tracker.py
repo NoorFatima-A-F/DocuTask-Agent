@@ -53,7 +53,7 @@ class DependencyTracker:
                 ExecutionLifecycleState.READY,
                 ExecutionLifecycleState.SCHEDULED,
                 ExecutionLifecycleState.RUNNING,
-                ExecutionLifecycleState.RETRYING
+                ExecutionLifecycleState.RETRYING,
             ):
                 return True
         return False
@@ -64,6 +64,6 @@ class DependencyTracker:
             ExecutionLifecycleState.COMPLETED,
             ExecutionLifecycleState.FAILED,
             ExecutionLifecycleState.CANCELLED,
-            ExecutionLifecycleState.ROLLED_BACK
+            ExecutionLifecycleState.ROLLED_BACK,
         }
         return all(node.state in terminal_states for node in self.graph.nodes.values())

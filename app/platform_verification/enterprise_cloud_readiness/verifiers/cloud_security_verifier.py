@@ -29,11 +29,36 @@ class CloudSecurityVerifier(ICloudSecurityVerifier):
 
     def verify(self) -> CloudSecurityReport:
         pillars = [
-            SecurityPillarValidation(pillar_name="Identity & Access Management (IAM)", control="Least privilege service accounts (IRSA / Workload Identity)", compliance_standard="CIS Cloud Benchmark v3.0", status="COMPLIANT"),
-            SecurityPillarValidation(pillar_name="Network Security", control="Private VPC, security group ingress rules, WAF perimeter", compliance_standard="SOC 2 Type II / ISO 27001", status="COMPLIANT"),
-            SecurityPillarValidation(pillar_name="Data Protection", control="AES-256 KMS encryption at rest, TLS 1.3 in transit", compliance_standard="NIST SP 800-53", status="COMPLIANT"),
-            SecurityPillarValidation(pillar_name="Runtime Container Security", control="Non-root user (UID 10001), read-only rootfs, drop all capabilities", compliance_standard="CIS Docker / K8s Benchmark", status="COMPLIANT"),
-            SecurityPillarValidation(pillar_name="Vulnerability Scanning", control="Trivy / Clair automated CVE scanning on build", compliance_standard="Zero Critical / High CVEs", status="COMPLIANT"),
+            SecurityPillarValidation(
+                pillar_name="Identity & Access Management (IAM)",
+                control="Least privilege service accounts (IRSA / Workload Identity)",
+                compliance_standard="CIS Cloud Benchmark v3.0",
+                status="COMPLIANT",
+            ),
+            SecurityPillarValidation(
+                pillar_name="Network Security",
+                control="Private VPC, security group ingress rules, WAF perimeter",
+                compliance_standard="SOC 2 Type II / ISO 27001",
+                status="COMPLIANT",
+            ),
+            SecurityPillarValidation(
+                pillar_name="Data Protection",
+                control="AES-256 KMS encryption at rest, TLS 1.3 in transit",
+                compliance_standard="NIST SP 800-53",
+                status="COMPLIANT",
+            ),
+            SecurityPillarValidation(
+                pillar_name="Runtime Container Security",
+                control="Non-root user (UID 10001), read-only rootfs, drop all capabilities",
+                compliance_standard="CIS Docker / K8s Benchmark",
+                status="COMPLIANT",
+            ),
+            SecurityPillarValidation(
+                pillar_name="Vulnerability Scanning",
+                control="Trivy / Clair automated CVE scanning on build",
+                compliance_standard="Zero Critical / High CVEs",
+                status="COMPLIANT",
+            ),
         ]
 
         checks = [

@@ -1,6 +1,7 @@
 """
 Enterprise Reporting Platform Runtime facade.
 """
+
 from __future__ import annotations
 from datetime import datetime, timezone
 from app.platform_verification.reporting_audit.core.audit_export_manager import EnterpriseAuditExportManager

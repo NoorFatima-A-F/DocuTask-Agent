@@ -58,7 +58,9 @@ class CloudReadinessExporter:
         target_filenames: List[str] = []
 
         for pattern, filenames in self.PHASE_FILENAME_MAP.items():
-            if re.search(pattern, report.phase_id, re.IGNORECASE) or re.search(pattern, report.verifier_id, re.IGNORECASE):
+            if re.search(pattern, report.phase_id, re.IGNORECASE) or re.search(
+                pattern, report.verifier_id, re.IGNORECASE
+            ):
                 target_filenames.extend(filenames)
                 break
 

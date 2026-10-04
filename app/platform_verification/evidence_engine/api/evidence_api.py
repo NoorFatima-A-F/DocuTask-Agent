@@ -1,6 +1,7 @@
 """
 Evidence Query and Management REST API Router.
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from app.platform_verification.evidence_engine.domain.models import (
@@ -27,7 +28,9 @@ class EvidenceAPI:
         self.packager = packager
         self.search_index = search_index
 
-    def post_evidence(self, execution_id: str, category: str, data: Dict[str, Any], metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def post_evidence(
+        self, execution_id: str, category: str, data: Dict[str, Any], metadata: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """POST /evidence"""
         cat = EvidenceCategory(category)
         art = self.collector.collect(execution_id=execution_id, category=cat, data=data, metadata=metadata)
@@ -51,7 +54,9 @@ class EvidenceAPI:
         rec = self.store.verify_integrity(artifact_id)
         return rec.model_dump() if hasattr(rec, "model_dump") else rec.dict()
 
-    def generate_package(self, execution_id: str, verification_def_id: str, metrics: Dict[str, Any], decision: Dict[str, Any]) -> Dict[str, Any]:
+    def generate_package(
+        self, execution_id: str, verification_def_id: str, metrics: Dict[str, Any], decision: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """POST /evidence/package"""
         pkg = self.packager.compile_package(
             execution_id=execution_id,

@@ -12,6 +12,7 @@ from typing import Any, Dict, Optional
 @dataclass
 class ObservabilityContext:
     """Carries complete multidimensional execution and identity context."""
+
     request_id: str = field(default_factory=lambda: f"req-{uuid.uuid4().hex[:10]}")
     trace_id: str = field(default_factory=lambda: f"trace-{uuid.uuid4().hex[:12]}")
     span_id: str = field(default_factory=lambda: f"span-{uuid.uuid4().hex[:8]}")

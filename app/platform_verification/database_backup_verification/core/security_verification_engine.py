@@ -3,6 +3,7 @@ Database Security and Access Control Verifier (Part 3G.2B).
 Validates AES-256-GCM encryption, KMS envelope security, TLS 1.3 transfer,
 WORM immutability, role-based restore authorizations, and unauthorized access rejection.
 """
+
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
     DatabaseSecurityReport,
@@ -73,5 +74,9 @@ class DatabaseSecurityEngine(IDatabaseSecurityEngine):
             "unauthorized_restore_blocked": report.unauthorized_restore_blocked,
             "passed": report.passed,
             "security_events": report.security_events,
-            "compliance_standards": ["NIST SP 800-34", "ISO/IEC 27001:2022 A.8.13", "SOC 2 Type II Security & Confidentiality"],
+            "compliance_standards": [
+                "NIST SP 800-34",
+                "ISO/IEC 27001:2022 A.8.13",
+                "SOC 2 Type II Security & Confidentiality",
+            ],
         }

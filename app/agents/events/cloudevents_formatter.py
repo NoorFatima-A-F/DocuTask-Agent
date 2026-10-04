@@ -77,9 +77,7 @@ class CloudEventsFormatter:
         """Encapsulates an internal AgentEvent into standard CloudEvents 1.0."""
         evt_id = str(event.event_id)
         # Generate W3C traceparent if not provided: 00-{trace_id}-{parent_id}-01
-        w3c_trace = traceparent or (
-            f"00-{event.trace_id or uuid.uuid4().hex}-{uuid.uuid4().hex[:16]}-01"
-        )
+        w3c_trace = traceparent or (f"00-{event.trace_id or uuid.uuid4().hex}-{uuid.uuid4().hex[:16]}-01")
 
         return CloudEventV1(
             id=evt_id,

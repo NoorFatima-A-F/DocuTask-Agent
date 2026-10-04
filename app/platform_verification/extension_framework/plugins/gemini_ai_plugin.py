@@ -1,11 +1,18 @@
 """
 Reference AI Provider Plugin: Gemini AI Model Provider.
 """
+
 from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import AIProviderPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
-    PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,
-    PluginHealthMetrics, PluginHealthState, PluginPermission, SecurityClassification
+    PluginMetadata,
+    PluginCategory,
+    PluginExecutionContext,
+    PluginExecutionResult,
+    PluginHealthMetrics,
+    PluginHealthState,
+    PluginPermission,
+    SecurityClassification,
 )
 
 
@@ -24,7 +31,7 @@ class GeminiAIProviderPlugin(AIProviderPluginInterface):
             description="Provides access to Gemini 2.5 Flash / Pro models for evaluation and inference",
             capabilities=["text_generation", "multimodal_ocr", "vector_embeddings"],
             granted_permissions=[PluginPermission.ACCESS_MODEL, PluginPermission.ACCESS_NETWORK],
-            security_classification=SecurityClassification.ENTERPRISE_CERTIFIED
+            security_classification=SecurityClassification.ENTERPRISE_CERTIFIED,
         )
 
     def initialize(self, context: Dict[str, Any]) -> bool:
@@ -43,7 +50,7 @@ class GeminiAIProviderPlugin(AIProviderPluginInterface):
             plugin_id="gemini_ai_provider_plugin",
             is_success=True,
             metrics=[{"metric": "tokens_generated", "value": len(resp.split())}],
-            raw_evidence={"response_text": resp}
+            raw_evidence={"response_text": resp},
         )
 
     def generate_completion(self, prompt: str, parameters: Dict[str, Any]) -> str:
@@ -60,5 +67,5 @@ class GeminiAIProviderPlugin(AIProviderPluginInterface):
             plugin_id="gemini_ai_provider_plugin",
             state=PluginHealthState.HEALTHY,
             total_executions=1,
-            successful_executions=1
+            successful_executions=1,
         )

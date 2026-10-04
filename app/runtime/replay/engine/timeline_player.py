@@ -19,13 +19,17 @@ class TimelinePlayer:
         frames = []
         for idx, ev in enumerate(events):
             evt_type = ev.get("event_type", "")
-            frames.append({
-                "frame_index": idx,
-                "event_id": ev.get("event_id"),
-                "event_type": evt_type,
-                "subsystem": evt_type.split(".")[0] if "." in evt_type else "core",
-                "timestamp": ev.get("timestamp"),
-                "summary": ev.get("payload", {}).get("goal") or ev.get("payload", {}).get("selected_strategy") or evt_type,
-                "confidence": ev.get("payload", {}).get("overall_score") or ev.get("payload", {}).get("confidence"),
-            })
+            frames.append(
+                {
+                    "frame_index": idx,
+                    "event_id": ev.get("event_id"),
+                    "event_type": evt_type,
+                    "subsystem": evt_type.split(".")[0] if "." in evt_type else "core",
+                    "timestamp": ev.get("timestamp"),
+                    "summary": ev.get("payload", {}).get("goal")
+                    or ev.get("payload", {}).get("selected_strategy")
+                    or evt_type,
+                    "confidence": ev.get("payload", {}).get("overall_score") or ev.get("payload", {}).get("confidence"),
+                }
+            )
         return frames

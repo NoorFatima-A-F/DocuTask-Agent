@@ -93,11 +93,7 @@ def test_agent_config_validation():
 
 def test_domain_events_serialization():
     """Verifies AgentEvent domain event creation and JSON serialization."""
-    event = GoalReceivedEvent(
-        execution_id="exec-123",
-        document_id="doc-456",
-        payload={"goal": "Process Invoice"}
-    )
+    event = GoalReceivedEvent(execution_id="exec-123", document_id="doc-456", payload={"goal": "Process Invoice"})
     serialized = event.to_dict()
     assert serialized["event_type"] == "GoalReceived"
     assert serialized["execution_id"] == "exec-123"

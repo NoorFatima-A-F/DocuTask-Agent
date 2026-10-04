@@ -1,6 +1,7 @@
 """
 Phase 3H.12: Enterprise Automated Recovery & Self-Healing — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -23,13 +24,14 @@ class RecoveryActionType(str, Enum):
 
 
 class RecoveryCertificationTier(str, Enum):
-    AUTONOMOUS_RECOVERY_READY = "Autonomous Recovery Ready"         # 95 - 100
-    PRODUCTION_RECOVERY_READY = "Production Recovery Ready"         # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                   # 80 - 89.99
-    FAILED = "Failed"                                               # < 80
+    AUTONOMOUS_RECOVERY_READY = "Autonomous Recovery Ready"  # 95 - 100
+    PRODUCTION_RECOVERY_READY = "Production Recovery Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3H.12.1: Recovery Architecture Models ────────────────────────────────
+
 
 class RecoverySubsystemSpec(BaseModel):
     name: str
@@ -47,6 +49,7 @@ class RecoveryArchitectureReport(BaseModel):
 
 
 # ─── 3H.12.2: Recovery Policy Engine Models ───────────────────────────────
+
 
 class RecoveryPolicyRule(BaseModel):
     policy_id: str
@@ -67,6 +70,7 @@ class RecoveryPolicyReport(BaseModel):
 
 # ─── 3H.12.3: Service Auto-Restart Models ─────────────────────────────────
 
+
 class ServiceRestartReport(BaseModel):
     report_title: str = "Service Auto-Restart & Container Crash Recovery Report"
     service_name: str = "api-gateway"
@@ -80,6 +84,7 @@ class ServiceRestartReport(BaseModel):
 
 
 # ─── 3H.12.4: Database Recovery Models ────────────────────────────────────
+
 
 class DatabaseRecoveryReport(BaseModel):
     report_title: str = "Database Connection Pool & Transaction Safety Recovery Report"
@@ -95,6 +100,7 @@ class DatabaseRecoveryReport(BaseModel):
 
 
 # ─── 3H.12.5: Queue Recovery Models ───────────────────────────────────────
+
 
 class QueueRecoveryReport(BaseModel):
     report_title: str = "Message Queue Restoration & Task Preservation Report"
@@ -112,6 +118,7 @@ class QueueRecoveryReport(BaseModel):
 
 # ─── 3H.12.6: Worker Self-Healing Models ──────────────────────────────────
 
+
 class WorkerRecoveryReport(BaseModel):
     report_title: str = "Worker Self-Healing & Task Re-queueing Verification Report"
     worker_pool: str = "async-document-processors"
@@ -127,6 +134,7 @@ class WorkerRecoveryReport(BaseModel):
 
 # ─── 3H.12.7: AI Provider Fallback Models ─────────────────────────────────
 
+
 class AIRecoveryReport(BaseModel):
     report_title: str = "AI Provider Fallback & Degraded Mode Continuity Report"
     primary_provider: str = "Gemini-1.5-Pro"
@@ -141,11 +149,14 @@ class AIRecoveryReport(BaseModel):
 
 # ─── 3H.12.8: Circuit Breaker Models ──────────────────────────────────────
 
+
 class CircuitBreakerReport(BaseModel):
     report_title: str = "Cascading Failure Prevention & Circuit Breaker Verification Report"
     component: str = "llm-provider-gateway"
     failure_threshold_reached: bool = True
-    state_transitions: List[str] = Field(default_factory=lambda: ["CLOSED -> OPEN", "OPEN -> HALF_OPEN", "HALF_OPEN -> CLOSED"])
+    state_transitions: List[str] = Field(
+        default_factory=lambda: ["CLOSED -> OPEN", "OPEN -> HALF_OPEN", "HALF_OPEN -> CLOSED"]
+    )
     current_state: CircuitBreakerState = CircuitBreakerState.CLOSED
     cascading_failures_prevented: bool = True
     automatic_reset_verified: bool = True
@@ -153,6 +164,7 @@ class CircuitBreakerReport(BaseModel):
 
 
 # ─── 3H.12.9: Recovery Validation Engine Models ───────────────────────────
+
 
 class ValidationStepResult(BaseModel):
     step_name: str  # Upload, OCR, AI_Extraction, Validation, Storage, Response
@@ -170,6 +182,7 @@ class RecoveryValidationReport(BaseModel):
 
 # ─── 3H.12.10: Reliability Metrics Models ─────────────────────────────────
 
+
 class ReliabilityMetricsReport(BaseModel):
     report_title: str = "SRE Reliability Metrics (MTTD, MTTR, MTBF) Verification Report"
     mean_time_to_detect_seconds: float = 5.0
@@ -182,6 +195,7 @@ class ReliabilityMetricsReport(BaseModel):
 
 # ─── 3H.12.11: Recovery Safety Models ─────────────────────────────────────
 
+
 class RecoverySafetyReport(BaseModel):
     report_title: str = "Recovery Safety Guardrails & Destructive Action Prevention Report"
     max_restart_attempts_limit: int = 5
@@ -193,6 +207,7 @@ class RecoverySafetyReport(BaseModel):
 
 
 # ─── 3H.12.12: Recovery Audit Models ──────────────────────────────────────
+
 
 class RecoveryAuditEvent(BaseModel):
     event_id: str
@@ -213,6 +228,7 @@ class RecoveryAuditReport(BaseModel):
 
 
 # ─── 3H.12.13 & 3H.12.14: Scoring & Certification Models ─────────────────
+
 
 class RecoveryPillarScore(BaseModel):
     pillar_name: str

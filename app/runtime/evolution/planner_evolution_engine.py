@@ -20,6 +20,7 @@ from app.runtime.evolution.planner_version_registry import PlannerVersionRegistr
 
 class EvolutionCycleReport(BaseModel):
     """Report detailing a completed planner self-evolution cycle."""
+
     cycle_id: str = Field(default_factory=lambda: f"cycle_{uuid.uuid4().hex[:8]}")
     detected_weakness: str
     previous_version: str
@@ -49,7 +50,7 @@ class PlannerSelfEvolutionEngine:
     ) -> EvolutionCycleReport:
         """Executes one generation of autonomous planner evolution."""
         current_active = self.registry.get_active_generation()
-        
+
         # 1. Evolve hyperparameter chromosome
         best_chrom = self.genetic_optimizer.evolve_generation()
         next_weights = self.bayesian_optimizer.suggest_next_parameters()

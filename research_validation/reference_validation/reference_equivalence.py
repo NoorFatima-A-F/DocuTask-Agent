@@ -35,6 +35,7 @@ class EquivalenceStatus(str, Enum):
 @dataclass
 class ScientificClaimContext:
     """Scientific rigor metadata required for every mathematical claim."""
+
     assumptions: List[str]
     methodology: str
     confidence_level: float  # e.g., 0.99
@@ -46,6 +47,7 @@ class ScientificClaimContext:
 @dataclass
 class ReferenceComparisonEntry:
     """Detailed numerical comparison against an external reference library."""
+
     algorithm_name: str
     reference_library: str
     reference_version: str
@@ -65,6 +67,7 @@ class ReferenceComparisonEntry:
 @dataclass
 class ReferenceEquivalenceReport:
     """Consolidated report and comparison tables for mathematical equivalence."""
+
     total_comparisons: int
     passed_comparisons: int
     failed_comparisons: int
@@ -109,7 +112,7 @@ class ReferenceEquivalenceLab:
         tol_abs: float = 1e-6,
         tol_rel: float = 1e-4,
         claim_context: Optional[ScientificClaimContext] = None,
-        notes: str = ""
+        notes: str = "",
     ) -> ReferenceComparisonEntry:
         """
         Execute single comparison against reference baseline.
@@ -128,15 +131,16 @@ class ReferenceEquivalenceLab:
                 tolerance_absolute=tol_abs,
                 tolerance_relative=tol_rel,
                 status=EquivalenceStatus.NOT_VERIFIED,
-                claim_context=claim_context or ScientificClaimContext(
+                claim_context=claim_context
+                or ScientificClaimContext(
                     assumptions=["Standard IEEE 754 float arithmetic"],
                     methodology="Direct float comparison",
                     confidence_level=0.99,
                     uncertainty_margin=tol_abs,
                     limitations=["NaN input detected"],
-                    reproducibility_instructions="Run ReferenceEquivalenceLab with valid float arrays"
+                    reproducibility_instructions="Run ReferenceEquivalenceLab with valid float arrays",
                 ),
-                notes="NaN detected in values."
+                notes="NaN detected in values.",
             )
 
         abs_err = abs(our_output - reference_output)
@@ -152,7 +156,7 @@ class ReferenceEquivalenceLab:
             confidence_level=0.999,
             uncertainty_margin=abs_err,
             limitations=["Precision bounded by 64-bit mantissa (53 bits)"],
-            reproducibility_instructions=f"Execute ReferenceEquivalenceLab.run_standard_equivalence_battery()"
+            reproducibility_instructions=f"Execute ReferenceEquivalenceLab.run_standard_equivalence_battery()",
         )
 
         return ReferenceComparisonEntry(
@@ -169,7 +173,7 @@ class ReferenceEquivalenceLab:
             tolerance_relative=tol_rel,
             status=status,
             claim_context=context,
-            notes=notes
+            notes=notes,
         )
 
     @classmethod
@@ -177,7 +181,7 @@ class ReferenceEquivalenceLab:
         """Generate full comparison table without omitting numerical details."""
         lines = [
             "| Algorithm | Reference Lib | Ref Ver | Our Output | Ref Output | Abs Error | Rel Error | ULP Diff | Status |",
-            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |"
+            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
         ]
         for e in entries:
             lines.append(
@@ -198,72 +202,82 @@ class ReferenceEquivalenceLab:
         # Using analytical Abramowitz & Stegun erf formula
         z_ref = 1.959963984540054
         our_p = 0.5 * (1.0 + math.erf(z_ref / math.sqrt(2.0)))
-        entries.append(cls.compare_scalar(
-            algorithm_name="Normal_CDF_p975",
-            reference_library="SciPy stats.norm.cdf",
-            reference_version="1.12.0",
-            input_dataset_summary="z = 1.95996398454",
-            our_output=our_p,
-            reference_output=0.975000000000000,
-            tol_abs=1e-8,
-            tol_rel=1e-8
-        ))
+        entries.append(
+            cls.compare_scalar(
+                algorithm_name="Normal_CDF_p975",
+                reference_library="SciPy stats.norm.cdf",
+                reference_version="1.12.0",
+                input_dataset_summary="z = 1.95996398454",
+                our_output=our_p,
+                reference_output=0.975000000000000,
+                tol_abs=1e-8,
+                tol_rel=1e-8,
+            )
+        )
 
         # 2. Sample Variance (NumPy np.var(ddof=1) on [10.0, 20.0, 30.0, 40.0, 50.0] = 250.0)
         sample = [10.0, 20.0, 30.0, 40.0, 50.0]
         mean_s = sum(sample) / len(sample)
         our_var = sum((x - mean_s) ** 2 for x in sample) / (len(sample) - 1)
-        entries.append(cls.compare_scalar(
-            algorithm_name="Sample_Variance_Welford",
-            reference_library="NumPy np.var(ddof=1)",
-            reference_version="1.26.4",
-            input_dataset_summary="N=5 arithmetic series [10..50]",
-            our_output=our_var,
-            reference_output=250.0,
-            tol_abs=1e-12,
-            tol_rel=1e-12
-        ))
+        entries.append(
+            cls.compare_scalar(
+                algorithm_name="Sample_Variance_Welford",
+                reference_library="NumPy np.var(ddof=1)",
+                reference_version="1.26.4",
+                input_dataset_summary="N=5 arithmetic series [10..50]",
+                our_output=our_var,
+                reference_output=250.0,
+                tol_abs=1e-12,
+                tol_rel=1e-12,
+            )
+        )
 
         # 3. Cohen's Kappa (R psych::cohen.kappa on standard 2x2 agreement matrix)
         # Matrix: [[8, 1], [1, 8]] -> Po = 16/18 = 0.8888889, Pe = (9*9 + 9*9)/(18*18) = 0.5, Kappa = 0.7777778
         po = 16.0 / 18.0
         pe = 0.5
         our_kappa = (po - pe) / (1.0 - pe)
-        entries.append(cls.compare_scalar(
-            algorithm_name="Cohens_Kappa_InterRater",
-            reference_library="R psych::cohen.kappa",
-            reference_version="2.4.3",
-            input_dataset_summary="2x2 agreement table N=18",
-            our_output=our_kappa,
-            reference_output=0.777777777777778,
-            tol_abs=1e-7,
-            tol_rel=1e-7
-        ))
+        entries.append(
+            cls.compare_scalar(
+                algorithm_name="Cohens_Kappa_InterRater",
+                reference_library="R psych::cohen.kappa",
+                reference_version="2.4.3",
+                input_dataset_summary="2x2 agreement table N=18",
+                our_output=our_kappa,
+                reference_output=0.777777777777778,
+                tol_abs=1e-7,
+                tol_rel=1e-7,
+            )
+        )
 
         # 4. Levenshtein Distance (Julia StringDistances.jl Levenshtein() on ("PARSER", "PASSER") = 1)
-        entries.append(cls.compare_scalar(
-            algorithm_name="Levenshtein_Distance",
-            reference_library="Julia StringDistances.jl",
-            reference_version="0.10.2",
-            input_dataset_summary="('PARSER', 'PASSER')",
-            our_output=1.0,
-            reference_output=1.0,
-            tol_abs=0.0,
-            tol_rel=0.0
-        ))
+        entries.append(
+            cls.compare_scalar(
+                algorithm_name="Levenshtein_Distance",
+                reference_library="Julia StringDistances.jl",
+                reference_version="0.10.2",
+                input_dataset_summary="('PARSER', 'PASSER')",
+                our_output=1.0,
+                reference_output=1.0,
+                tol_abs=0.0,
+                tol_rel=0.0,
+            )
+        )
 
         # 5. Shannon Entropy (scipy.stats.entropy on uniform [0.25, 0.25, 0.25, 0.25] = ln(4) = 1.38629436112)
         our_ent = -sum(0.25 * math.log(0.25) for _ in range(4))
-        entries.append(cls.compare_scalar(
-            algorithm_name="Shannon_Entropy_Nats",
-            reference_library="SciPy stats.entropy",
-            reference_version="1.12.0",
-            input_dataset_summary="Uniform 4-state distribution",
-            our_output=our_ent,
-            reference_output=1.3862943611198906,
-            tol_abs=1e-9,
-            tol_rel=1e-9
-        ))
+        entries.append(
+            cls.compare_scalar(
+                algorithm_name="Shannon_Entropy_Nats",
+                reference_library="SciPy stats.entropy",
+                reference_version="1.12.0",
+                input_dataset_summary="Uniform 4-state distribution",
+                our_output=our_ent,
+                reference_output=1.3862943611198906,
+                tol_abs=1e-9,
+                tol_rel=1e-9,
+            )
+        )
 
         total = len(entries)
         passed = sum(1 for e in entries if e.status == EquivalenceStatus.PASS)
@@ -275,7 +289,9 @@ class ReferenceEquivalenceLab:
         max_ulp = max(e.ulp_difference for e in entries) if entries else 0
 
         table_md = cls.generate_markdown_table(entries)
-        status_verdict = "PASS" if failed == 0 and unverified == 0 else "DEVIATION_DETECTED" if failed > 0 else "INCOMPLETE"
+        status_verdict = (
+            "PASS" if failed == 0 and unverified == 0 else "DEVIATION_DETECTED" if failed > 0 else "INCOMPLETE"
+        )
 
         return ReferenceEquivalenceReport(
             total_comparisons=total,
@@ -286,5 +302,5 @@ class ReferenceEquivalenceLab:
             max_ulp_difference=max_ulp,
             comparison_entries=entries,
             summary_table_markdown=table_md,
-            status=status_verdict
+            status=status_verdict,
         )

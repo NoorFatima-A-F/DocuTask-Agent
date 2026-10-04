@@ -21,12 +21,13 @@ class TruthLedgerEntry:
     Immutable entry in the Runtime Truth Ledger.
     Hash-chained to the previous entry to prevent retroactive tampering.
     """
+
     event_id: str
     mission_id: str
     event_type: str  # e.g., PLANNER_DECISION, TOOL_EXECUTION, EVIDENCE_SIGNED, OPTIMIZATION_PROMOTED
     timestamp: float = field(default_factory=time.time)
     parent_event_hash: str = ""
-    
+
     # Execution & Model Lineage
     planner_version: str = "v2.1.0"
     strategy_version: str = "1.0.0"
@@ -34,13 +35,13 @@ class TruthLedgerEntry:
     tool_name: Optional[str] = None
     tool_version: Optional[str] = None
     model_version: str = "gemini-1.5-pro"
-    
+
     # Cryptographic & Reproducibility Proofs
     document_fingerprint: str = ""
     evidence_root_hash: str = ""
     runtime_metadata: Dict[str, Any] = field(default_factory=dict)
     reproducibility_metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     # Computed Cryptographic Hash
     entry_hash: str = ""
 
@@ -94,7 +95,7 @@ class TruthLedger:
         reproducibility_metadata: Optional[Dict[str, Any]] = None,
     ) -> TruthLedgerEntry:
         event_id = f"tle_{uuid.uuid4().hex[:12]}"
-        
+
         entry = TruthLedgerEntry(
             event_id=event_id,
             mission_id=mission_id,

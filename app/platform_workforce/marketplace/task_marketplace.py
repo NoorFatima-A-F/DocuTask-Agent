@@ -1,10 +1,12 @@
 """
 4. Task Marketplace & Internal Economy Subsystem
 """
+
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from app.platform_workforce.models.schemas import TaskMarketplaceListing, EmployeeStatus
 from app.platform_workforce.registry.workforce_registry import workforce_registry
+
 
 class TaskMarketplace:
     def __init__(self):
@@ -29,9 +31,9 @@ class TaskMarketplace:
                         "bid_cost_usd": 12.50,
                         "estimated_duration_minutes": 15.0,
                         "confidence_score": 0.98,
-                        "proposed_solution_outline": "Streamed parallel table parsing with bounding box verification."
+                        "proposed_solution_outline": "Streamed parallel table parsing with bounding box verification.",
                     }
-                ]
+                ],
             ),
             TaskMarketplaceListing(
                 id="task-audit-guard-12",
@@ -40,18 +42,28 @@ class TaskMarketplace:
                 required_skills=["Compliance Guardrails", "Automated Validation"],
                 priority="CRITICAL",
                 budget_max_usd=40.0,
-                status="OPEN"
-            )
+                status="OPEN",
+            ),
         ]
         self._tasks[tenant] = {t.id: t for t in tasks}
 
-    def get_tasks(self, tenant_id: str = "default-tenant", status: Optional[str] = None) -> List[TaskMarketplaceListing]:
+    def get_tasks(
+        self, tenant_id: str = "default-tenant", status: Optional[str] = None
+    ) -> List[TaskMarketplaceListing]:
         listings = list(self._tasks.get(tenant_id, {}).values())
         if status:
             listings = [t for t in listings if t.status == status]
         return listings
 
-    def post_task(self, title: str, description: str, required_skills: List[str], budget_max_usd: float = 30.0, priority: str = "MEDIUM", tenant_id: str = "default-tenant") -> TaskMarketplaceListing:
+    def post_task(
+        self,
+        title: str,
+        description: str,
+        required_skills: List[str],
+        budget_max_usd: float = 30.0,
+        priority: str = "MEDIUM",
+        tenant_id: str = "default-tenant",
+    ) -> TaskMarketplaceListing:
         task = TaskMarketplaceListing(
             tenant_id=tenant_id,
             title=title,
@@ -59,14 +71,22 @@ class TaskMarketplace:
             required_skills=required_skills,
             budget_max_usd=budget_max_usd,
             priority=priority,
-            status="OPEN"
+            status="OPEN",
         )
         if tenant_id not in self._tasks:
             self._tasks[tenant_id] = {}
         self._tasks[tenant_id][task.id] = task
         return task
 
-    def submit_bid(self, task_id: str, employee_id: str, bid_cost_usd: float, estimated_duration_minutes: float, solution_outline: str = "", tenant_id: str = "default-tenant") -> Optional[TaskMarketplaceListing]:
+    def submit_bid(
+        self,
+        task_id: str,
+        employee_id: str,
+        bid_cost_usd: float,
+        estimated_duration_minutes: float,
+        solution_outline: str = "",
+        tenant_id: str = "default-tenant",
+    ) -> Optional[TaskMarketplaceListing]:
         task = self._tasks.get(tenant_id, {}).get(task_id)
         if not task:
             return None
@@ -76,7 +96,7 @@ class TaskMarketplace:
             "bid_cost_usd": bid_cost_usd,
             "estimated_duration_minutes": estimated_duration_minutes,
             "confidence_score": 0.96,
-            "proposed_solution_outline": solution_outline
+            "proposed_solution_outline": solution_outline,
         }
         task.bids.append(bid_entry)
         task.status = "BIDDING"
@@ -91,9 +111,10 @@ class TaskMarketplace:
         winner = sorted_bids[0]
         task.assigned_employee_id = winner["employee_id"]
         task.status = "ASSIGNED"
-        
+
         # Mark employee as busy
         workforce_registry.update_employee_status(winner["employee_id"], EmployeeStatus.BUSY, tenant_id)
         return task
+
 
 task_marketplace = TaskMarketplace()

@@ -2,8 +2,10 @@
 Autonomous Process Discovery Engine
 Reconstructs workflows automatically from execution logs (Process Mining), detecting bottlenecks and automation opportunities.
 """
+
 from typing import Dict, List, Any
 from ..models.schemas import DiscoveredProcess
+
 
 class ProcessDiscoveryEngine:
     def __init__(self):
@@ -19,15 +21,15 @@ class ProcessDiscoveryEngine:
                 "Vendor Verification in SAP ERP",
                 "Dual VP Approval Gate (Manual Bottleneck)",
                 "Payment Batch Scheduling",
-                "Audit Ledger Logging"
+                "Audit Ledger Logging",
             ],
             observed_executions_count=len(log_stream) or 4820,
             avg_cycle_time_seconds=142.5,
             bottlenecks=[
                 "Step 4: Dual VP Approval average wait time = 36.4 hours (94% of total cycle delay)",
-                "Step 3: SAP ERP query retry backoff on rate limit"
+                "Step 3: SAP ERP query retry backoff on rate limit",
             ],
-            automation_opportunity_score=0.92
+            automation_opportunity_score=0.92,
         )
         self._processes[proc.id] = proc
         return proc

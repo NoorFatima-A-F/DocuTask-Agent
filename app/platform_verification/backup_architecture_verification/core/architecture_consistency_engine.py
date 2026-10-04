@@ -7,6 +7,7 @@ Proves referential integrity and consistency across the backup architecture:
 - No cyclic backup dependency.
 - No circular restore chain.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     AssetInventoryItem,
@@ -44,7 +45,9 @@ class ArchitectureConsistencyEngine(IArchitectureConsistencyEngine):
         # Check 1: No backup references nonexistent assets
         orphan_strategies = strategy_asset_names - asset_names
         if orphan_strategies:
-            inconsistencies.append(f"Orphan backup strategies found referencing non-existent assets: {orphan_strategies}")
+            inconsistencies.append(
+                f"Orphan backup strategies found referencing non-existent assets: {orphan_strategies}"
+            )
             no_nonexistent_assets = False
         else:
             no_nonexistent_assets = True
@@ -52,7 +55,9 @@ class ArchitectureConsistencyEngine(IArchitectureConsistencyEngine):
         # Check 2: No asset references nonexistent policy
         orphan_retentions = retention_asset_names - asset_names
         if orphan_retentions:
-            inconsistencies.append(f"Orphan retention policies found referencing non-existent assets: {orphan_retentions}")
+            inconsistencies.append(
+                f"Orphan retention policies found referencing non-existent assets: {orphan_retentions}"
+            )
             no_nonexistent_policies = False
         else:
             no_nonexistent_policies = True
@@ -96,9 +101,7 @@ class ArchitectureConsistencyEngine(IArchitectureConsistencyEngine):
             inconsistencies=inconsistencies,
         )
 
-    def export_architecture_consistency_json(
-        self, report: ArchitectureConsistencyReport
-    ) -> Dict[str, Any]:
+    def export_architecture_consistency_json(self, report: ArchitectureConsistencyReport) -> Dict[str, Any]:
         """Formats the architecture consistency report to JSON dictionary."""
         return {
             "passed": report.passed,

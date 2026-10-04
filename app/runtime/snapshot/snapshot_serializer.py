@@ -32,7 +32,9 @@ class SnapshotSerializer:
         return payload, checksum, uncompressed_size
 
     @staticmethod
-    def deserialize_state(payload: bytes, compressed: bool = True, expected_checksum: str = None) -> ReconstructedMissionState:
+    def deserialize_state(
+        payload: bytes, compressed: bool = True, expected_checksum: str = None
+    ) -> ReconstructedMissionState:
         """Decompresses and parses state from payload bytes."""
         if compressed:
             raw_bytes = zlib.decompress(payload)
@@ -42,7 +44,9 @@ class SnapshotSerializer:
         if expected_checksum:
             actual_checksum = hashlib.sha256(raw_bytes).hexdigest()
             if actual_checksum != expected_checksum:
-                raise ValueError(f"Snapshot checksum mismatch: expected {expected_checksum[:8]}..., got {actual_checksum[:8]}...")
+                raise ValueError(
+                    f"Snapshot checksum mismatch: expected {expected_checksum[:8]}..., got {actual_checksum[:8]}..."
+                )
 
         json_dict = json.loads(raw_bytes.decode("utf-8"))
         return ReconstructedMissionState.model_validate(json_dict)

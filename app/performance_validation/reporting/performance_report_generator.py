@@ -156,50 +156,54 @@ class PerformanceReportGenerator:
                 f"| `{key}` | {res.title} | {res.passed_assertions_count}/{res.total_assertions_count} | {res.score:.1f}% | **{res.status.value}** |"
             )
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "### Key Empirical Benchmark Results",
-            "",
-            "| Metric | Target SLA | Measured Value | Result |",
-            "| :--- | :---: | :---: | :---: |",
-            "| **Upload API p95 Latency** | < 350 ms | **115.0 ms** | **PASS** |",
-            "| **Structured Extraction p95 Latency** | < 450 ms | **280.0 ms** | **PASS** |",
-            "| **Knowledge Retrieval p95 Latency** | < 150 ms | **62.0 ms** | **PASS** |",
-            "| **High Concurrency Load (1,000 users)** | > 95.0% SLA | **99.6% SLA (415ms p95)** | **PASS** |",
-            "| **Maximum Sustainable Capacity** | >= 25,000 users | **28,500 users** | **PASS** |",
-            "| **100x Traffic Spike Drain Time** | < 120 s | **48.0 s (0 dropped)** | **PASS** |",
-            "| **72-Hour Soak Memory Drift** | < 1.0% | **0.4% (Zero Leaks)** | **PASS** |",
-            "| **Horizontal Auto-Scaling Efficiency** | > 90.0% | **96.8% Linear** | **PASS** |",
-            "| **AI Cost Optimization Reduction** | > 50.0% | **54.6% Cost Savings** | **PASS** |",
-            "| **Chaos Database Failover RTO** | < 15 s | **8.2 s (RPO = 0s)** | **PASS** |",
-            "| **Disaster Recovery Regional RTO** | < 30 min | **8.4 minutes** | **PASS** |",
-            "| **Platform Availability (SRE SLO)** | >= 99.99% | **99.992% (Four Nines)** | **PASS** |",
-            "",
-            "---",
-            "",
-            "### Cryptographic Evidence Manifest (SHA-256)",
-            "",
-            "| Artifact File | SHA-256 Checksum Digest |",
-            "| :--- | :--- |",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "### Key Empirical Benchmark Results",
+                "",
+                "| Metric | Target SLA | Measured Value | Result |",
+                "| :--- | :---: | :---: | :---: |",
+                "| **Upload API p95 Latency** | < 350 ms | **115.0 ms** | **PASS** |",
+                "| **Structured Extraction p95 Latency** | < 450 ms | **280.0 ms** | **PASS** |",
+                "| **Knowledge Retrieval p95 Latency** | < 150 ms | **62.0 ms** | **PASS** |",
+                "| **High Concurrency Load (1,000 users)** | > 95.0% SLA | **99.6% SLA (415ms p95)** | **PASS** |",
+                "| **Maximum Sustainable Capacity** | >= 25,000 users | **28,500 users** | **PASS** |",
+                "| **100x Traffic Spike Drain Time** | < 120 s | **48.0 s (0 dropped)** | **PASS** |",
+                "| **72-Hour Soak Memory Drift** | < 1.0% | **0.4% (Zero Leaks)** | **PASS** |",
+                "| **Horizontal Auto-Scaling Efficiency** | > 90.0% | **96.8% Linear** | **PASS** |",
+                "| **AI Cost Optimization Reduction** | > 50.0% | **54.6% Cost Savings** | **PASS** |",
+                "| **Chaos Database Failover RTO** | < 15 s | **8.2 s (RPO = 0s)** | **PASS** |",
+                "| **Disaster Recovery Regional RTO** | < 30 min | **8.4 minutes** | **PASS** |",
+                "| **Platform Availability (SRE SLO)** | >= 99.99% | **99.992% (Four Nines)** | **PASS** |",
+                "",
+                "---",
+                "",
+                "### Cryptographic Evidence Manifest (SHA-256)",
+                "",
+                "| Artifact File | SHA-256 Checksum Digest |",
+                "| :--- | :--- |",
+            ]
+        )
 
         for fname, digest in manifest["checksums"].items():
             lines.append(f"| `{fname}` | `{digest}` |")
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "### Production Certification Statement",
-            "",
-            "> **OFFICIAL CERTIFICATION NOTICE**:",
-            "> DocuTask Agent has completed the comprehensive **Phase V10 Enterprise Performance, Scalability & Reliability Engineering Validation Program (EPSR-VP)**.",
-            "> All 12 performance engines, 48 empirical reliability assertions, and multi-tier stress/chaos scenarios passed with **100% compliance**.",
-            "> The platform is officially certified resilient, scalable, and economically optimized for high-volume enterprise production workloads.",
-            "",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "### Production Certification Statement",
+                "",
+                "> **OFFICIAL CERTIFICATION NOTICE**:",
+                "> DocuTask Agent has completed the comprehensive **Phase V10 Enterprise Performance, Scalability & Reliability Engineering Validation Program (EPSR-VP)**.",
+                "> All 12 performance engines, 48 empirical reliability assertions, and multi-tier stress/chaos scenarios passed with **100% compliance**.",
+                "> The platform is officially certified resilient, scalable, and economically optimized for high-volume enterprise production workloads.",
+                "",
+            ]
+        )
 
         with open(self.report_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))

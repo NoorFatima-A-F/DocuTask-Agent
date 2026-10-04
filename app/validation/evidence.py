@@ -32,7 +32,7 @@ class EvidenceLogger:
         actual_behavior: Dict[str, Any],
         metrics: MetricEvaluationResult,
         model_version: str = "gemini-1.5-flash",
-        test_id_prefix: str = "val"
+        test_id_prefix: str = "val",
     ) -> EvidenceRecord:
         """
         Creates and persists a structured evidence record to disk with SHA-256 hash chaining.
@@ -49,7 +49,7 @@ class EvidenceLogger:
             "actual_behavior": actual_behavior,
             "metrics": metrics.model_dump(),
             "pass_fail": pass_fail,
-            "model_version": model_version
+            "model_version": model_version,
         }
 
         # Compute SHA-256 Hash Chain
@@ -64,7 +64,7 @@ class EvidenceLogger:
             pass_fail=pass_fail,
             evidence_location=str(evidence_path),
             result_hash=curr_hash,
-            previous_hash=cls._last_hash
+            previous_hash=cls._last_hash,
         )
 
         cls._last_hash = curr_hash

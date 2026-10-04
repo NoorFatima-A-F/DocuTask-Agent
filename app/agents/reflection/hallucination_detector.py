@@ -33,12 +33,14 @@ class HallucinationDetector:
         for step in trace.reasoning_steps:
             for ev in step.evidence:
                 if ev.startswith("phantom_") or "fabricated" in ev.lower():
-                    findings.append(CritiqueFinding(
-                        category="HALLUCINATION",
-                        severity="CRITICAL",
-                        description=f"Hallucination detected in reasoning step '{step.step_id}': ungrounded claim '{ev}'.",
-                        evidence=[f"Asserted: {ev}", f"Rationale: {step.rationale}"],
-                        suggested_correction="Verify claims against tool outputs prior to inferencing."
-                    ))
+                    findings.append(
+                        CritiqueFinding(
+                            category="HALLUCINATION",
+                            severity="CRITICAL",
+                            description=f"Hallucination detected in reasoning step '{step.step_id}': ungrounded claim '{ev}'.",
+                            evidence=[f"Asserted: {ev}", f"Rationale: {step.rationale}"],
+                            suggested_correction="Verify claims against tool outputs prior to inferencing.",
+                        )
+                    )
 
         return findings

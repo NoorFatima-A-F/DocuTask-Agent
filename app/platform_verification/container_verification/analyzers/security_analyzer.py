@@ -1,6 +1,7 @@
 """
 Container Security & Hardening Configuration Analyzer.
 """
+
 from typing import Dict, List
 from app.platform_verification.container_verification.models.verification_models import (
     ServiceDefinition,

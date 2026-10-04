@@ -31,7 +31,7 @@ def test_kalman_belief_filtering():
         measurement_noise_r=50.0,
     )
     assert kalman.state_mean == 250.0
-    
+
     # Update with new measurement
     updated = kalman.update_measurement(300.0)
     assert 250.0 < updated < 300.0
@@ -43,7 +43,7 @@ def test_belief_state_engine_registration_and_queries():
     beliefs = engine.list_beliefs()
     assert len(beliefs) >= 10
     assert engine.compute_total_entropy() > 0
-    
+
     # Query specific belief
     b = engine.get_belief("ocr_success")
     assert b is not None
@@ -53,9 +53,9 @@ def test_belief_state_engine_registration_and_queries():
 def test_bayesian_update_engine_conjugate_update():
     belief_engine = BeliefStateEngine(mission_id="m_test_002")
     update_engine = BayesianUpdateEngine(belief_engine=belief_engine)
-    
+
     initial_mean = belief_engine.get_belief("ocr_success").mean
-    
+
     # Observe 5 successes and 0 failures
     report = update_engine.submit_observation(
         variable_name="ocr_success",
@@ -65,7 +65,7 @@ def test_bayesian_update_engine_conjugate_update():
         likelihood=0.98,
         worker_id="worker_ocr_node_1",
     )
-    
+
     updated_mean = belief_engine.get_belief("ocr_success").mean
     assert updated_mean > initial_mean
     assert report.posterior_mean == updated_mean

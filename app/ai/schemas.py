@@ -12,6 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class DocumentTypeEnum(str, Enum):
     """Supported document types for structured AI extraction."""
+
     INVOICE = "invoice"
     RECEIPT = "receipt"
     RESUME = "resume"
@@ -32,6 +33,7 @@ class DocumentTypeEnum(str, Enum):
 # Target Document Extraction Pydantic Models
 # ---------------------------------------------------------------------------
 
+
 class InvoiceLineItem(BaseModel):
     description: str = Field(..., description="Line item description")
     quantity: float = Field(1.0, description="Quantity ordered")
@@ -41,6 +43,7 @@ class InvoiceLineItem(BaseModel):
 
 class InvoiceExtraction(BaseModel):
     """Structured output model for Invoice documents."""
+
     invoice_number: Optional[str] = Field(None, description="Invoice reference identifier")
     vendor_name: Optional[str] = Field(None, description="Vendor or issuing company name")
     customer_name: Optional[str] = Field(None, description="Billed customer name")
@@ -62,6 +65,7 @@ class ResumeExperience(BaseModel):
 
 class ResumeExtraction(BaseModel):
     """Structured output model for Resume documents."""
+
     full_name: Optional[str] = Field(None, description="Candidate's full name")
     email: Optional[str] = Field(None, description="Contact email address")
     phone: Optional[str] = Field(None, description="Contact phone number")
@@ -74,6 +78,7 @@ class ResumeExtraction(BaseModel):
 
 class ContractExtraction(BaseModel):
     """Structured output model for Contract documents."""
+
     contract_title: Optional[str] = Field(None, description="Name or title of agreement")
     parties_involved: List[str] = Field(default_factory=list, description="Named contracting parties")
     effective_date: Optional[str] = Field(None, description="Agreement effective start date")
@@ -85,6 +90,7 @@ class ContractExtraction(BaseModel):
 
 class MedicalReportExtraction(BaseModel):
     """Structured output model for Medical Report documents."""
+
     patient_name: Optional[str] = Field(None, description="Patient full name")
     patient_dob: Optional[str] = Field(None, description="Patient date of birth")
     doctor_name: Optional[str] = Field(None, description="Attending physician or specialist")
@@ -97,6 +103,7 @@ class MedicalReportExtraction(BaseModel):
 
 class ReceiptExtraction(BaseModel):
     """Structured output model for Receipt documents."""
+
     store_name: Optional[str] = Field(None, description="Store or merchant name")
     transaction_date: Optional[str] = Field(None, description="Date of transaction")
     subtotal: Optional[float] = Field(None, description="Subtotal amount before tax")
@@ -108,6 +115,7 @@ class ReceiptExtraction(BaseModel):
 
 class PassportExtraction(BaseModel):
     """Structured output model for Passport identity documents."""
+
     passport_number: Optional[str] = Field(None, description="Passport number")
     surname: Optional[str] = Field(None, description="Surname/Last name")
     given_names: Optional[str] = Field(None, description="Given names/First name")
@@ -121,6 +129,7 @@ class PassportExtraction(BaseModel):
 
 class DriverLicenseExtraction(BaseModel):
     """Structured output model for Driver License documents."""
+
     license_number: Optional[str] = Field(None, description="Driver license number")
     full_name: Optional[str] = Field(None, description="Driver full name")
     address: Optional[str] = Field(None, description="Residential address")
@@ -132,6 +141,7 @@ class DriverLicenseExtraction(BaseModel):
 
 class NationalIDExtraction(BaseModel):
     """Structured output model for National ID documents."""
+
     id_number: Optional[str] = Field(None, description="National identification number")
     full_name: Optional[str] = Field(None, description="Individual full name")
     date_of_birth: Optional[str] = Field(None, description="Date of birth")
@@ -142,6 +152,7 @@ class NationalIDExtraction(BaseModel):
 
 class InsuranceFormExtraction(BaseModel):
     """Structured output model for Insurance Form documents."""
+
     policy_number: Optional[str] = Field(None, description="Insurance policy number")
     policyholder_name: Optional[str] = Field(None, description="Name of policyholder")
     insurer_name: Optional[str] = Field(None, description="Insurance company name")
@@ -153,6 +164,7 @@ class InsuranceFormExtraction(BaseModel):
 
 class BankStatementExtraction(BaseModel):
     """Structured output model for Bank Statement documents."""
+
     bank_name: Optional[str] = Field(None, description="Financial institution name")
     account_number: Optional[str] = Field(None, description="Bank account number (masked)")
     account_holder: Optional[str] = Field(None, description="Account holder name")
@@ -164,6 +176,7 @@ class BankStatementExtraction(BaseModel):
 
 class UtilityBillExtraction(BaseModel):
     """Structured output model for Utility Bill documents."""
+
     utility_company: Optional[str] = Field(None, description="Utility provider company name")
     account_number: Optional[str] = Field(None, description="Customer utility account number")
     service_address: Optional[str] = Field(None, description="Service installation address")
@@ -175,6 +188,7 @@ class UtilityBillExtraction(BaseModel):
 
 class ResearchPaperExtraction(BaseModel):
     """Structured output model for Research Paper documents."""
+
     title: Optional[str] = Field(None, description="Paper title")
     authors: List[str] = Field(default_factory=list, description="Paper authors")
     abstract: Optional[str] = Field(None, description="Executive research abstract")
@@ -186,6 +200,7 @@ class ResearchPaperExtraction(BaseModel):
 
 class PurchaseOrderExtraction(BaseModel):
     """Structured output model for Purchase Order documents."""
+
     po_number: Optional[str] = Field(None, description="Purchase order reference number")
     vendor_name: Optional[str] = Field(None, description="Target vendor name")
     order_date: Optional[str] = Field(None, description="Order issuance date")
@@ -196,6 +211,7 @@ class PurchaseOrderExtraction(BaseModel):
 
 class GenericExtraction(BaseModel):
     """Structured output model for Generic documents."""
+
     summary: str = Field(..., description="Executive summary of document contents")
     key_entities: List[str] = Field(default_factory=list, description="Key people, organizations, or products")
     main_topics: List[str] = Field(default_factory=list, description="Main topics covered")
@@ -206,8 +222,10 @@ class GenericExtraction(BaseModel):
 # API Payload Schemas
 # ---------------------------------------------------------------------------
 
+
 class ExtractionRequest(BaseModel):
     """Payload to trigger AI structured extraction."""
+
     document_type: str = Field("generic", description="Target document schema type (invoice, resume, contract, etc.)")
     force_reextract: bool = Field(False, description="Bypass cache and force fresh LLM extraction")
     provider: Optional[str] = Field(None, description="LLM provider override (e.g. 'gemini')")
@@ -216,6 +234,7 @@ class ExtractionRequest(BaseModel):
 
 class ExtractionMetadata(BaseModel):
     """Extraction operational metadata."""
+
     document_id: UUID
     document_type: str
     provider: str
@@ -226,6 +245,7 @@ class ExtractionMetadata(BaseModel):
 
 class ExtractionStatistics(BaseModel):
     """Cost, token usage, and latency statistics."""
+
     processing_time_ms: int
     input_tokens: int
     output_tokens: int
@@ -235,6 +255,7 @@ class ExtractionStatistics(BaseModel):
 
 class ExtractionResult(BaseModel):
     """Extracted data payload."""
+
     raw_response: str
     structured_json: Dict[str, Any]
     confidence: float = 1.0
@@ -242,6 +263,7 @@ class ExtractionResult(BaseModel):
 
 class ExtractionResponse(BaseModel):
     """Top-level response payload for AI structured extraction."""
+
     model_config = ConfigDict(from_attributes=True)
 
     id: UUID
@@ -252,6 +274,7 @@ class ExtractionResponse(BaseModel):
 
 class ValidationErrorResponse(BaseModel):
     """Schema validation error details."""
+
     error_message: str
     raw_output: str
     retry_count: int

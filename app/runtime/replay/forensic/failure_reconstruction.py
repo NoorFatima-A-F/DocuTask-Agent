@@ -32,20 +32,24 @@ class FailureReconstruction:
             payload = ev.get("payload", {})
 
             if "fail" in evt_type or "error" in evt_type or payload.get("status") == "FAILED":
-                failures.append({
-                    "event_id": ev.get("event_id"),
-                    "timestamp": ev.get("timestamp"),
-                    "type": evt_type,
-                    "payload": payload,
-                })
+                failures.append(
+                    {
+                        "event_id": ev.get("event_id"),
+                        "timestamp": ev.get("timestamp"),
+                        "type": evt_type,
+                        "payload": payload,
+                    }
+                )
 
             if "recovery" in evt_type or "retry" in evt_type or "resilience" in evt_type:
-                recoveries.append({
-                    "event_id": ev.get("event_id"),
-                    "timestamp": ev.get("timestamp"),
-                    "action": payload.get("recovery_strategy", "CIRCUIT_BREAKER_RETRY"),
-                    "success": payload.get("success", True),
-                })
+                recoveries.append(
+                    {
+                        "event_id": ev.get("event_id"),
+                        "timestamp": ev.get("timestamp"),
+                        "action": payload.get("recovery_strategy", "CIRCUIT_BREAKER_RETRY"),
+                        "success": payload.get("success", True),
+                    }
+                )
 
         success_rate = 1.0
         if recoveries:

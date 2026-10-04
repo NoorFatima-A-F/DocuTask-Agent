@@ -8,6 +8,7 @@ from enum import Enum
 
 class MessageLifecycleState(str, Enum):
     """Message processing lifecycle states."""
+
     CREATED = "CREATED"
     PUBLISHED = "PUBLISHED"
     ROUTED = "ROUTED"

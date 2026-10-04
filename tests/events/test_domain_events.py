@@ -36,6 +36,7 @@ def client():
 
 # --- 1. Universal Domain Event Model Tests ---
 
+
 def test_domain_event_creation_and_hash():
     event = DomainEvent(
         mission_id="mission-test-001",
@@ -69,6 +70,7 @@ def test_event_serialization():
 
 # --- 2. Event Bus Pub/Sub Tests ---
 
+
 @pytest.mark.asyncio
 async def test_async_event_bus_pub_sub():
     bus = AsyncDomainEventBus()
@@ -97,6 +99,7 @@ async def test_async_event_bus_pub_sub():
 
 
 # --- 3. Event Store & Append Log Tests ---
+
 
 @pytest.mark.asyncio
 async def test_append_only_log_and_hash_chain():
@@ -145,10 +148,13 @@ async def test_domain_event_store_queries():
 
 # --- 4. Projections Tests ---
 
+
 def test_planner_projection():
     proj = planner_projection
     ev_start = PlannerEventFactory.started("m-proj", "Analyze document")
-    ev_finish = PlannerEventFactory.finished("m-proj", task_count=5, estimated_cost_usd=0.0025, critical_path_latency_ms=120.0)
+    ev_finish = PlannerEventFactory.finished(
+        "m-proj", task_count=5, estimated_cost_usd=0.0025, critical_path_latency_ms=120.0
+    )
     ev_replan = PlannerEventFactory.replanned("m-proj", reason="Worker timeout", mutated_nodes=["node-2"])
 
     proj.apply_event(ev_start)
@@ -172,7 +178,9 @@ def test_mission_and_worker_projections():
 
     ev_m_created = MissionEventFactory.created("m-w-test", "OCR Mission")
     ev_t_assigned = WorkerEventFactory.task_assigned("m-w-test", "task-10", "worker-alpha", "OCR")
-    ev_t_done = WorkerEventFactory.task_completed("m-w-test", "task-10", "worker-alpha", duration_ms=85.0, tokens_used=150)
+    ev_t_done = WorkerEventFactory.task_completed(
+        "m-w-test", "task-10", "worker-alpha", duration_ms=85.0, tokens_used=150
+    )
     ev_m_done = MissionEventFactory.completed("m-w-test", total_tasks=1, duration_seconds=1.2, cost_usd=0.001)
 
     m_proj.apply_event(ev_m_created)
@@ -208,6 +216,7 @@ def test_telemetry_and_dashboard_projections():
 
 # --- 5. Correlation & Causation Tests ---
 
+
 def test_causation_dag_builder():
     ev_root = MissionEventFactory.created("m-corr", "Root")
     ev_child1 = PlannerEventFactory.started("m-corr", "Plan", parent_event_id=ev_root.event_id)
@@ -221,6 +230,7 @@ def test_causation_dag_builder():
 
 
 # --- 6. Filtering & Indexing Tests ---
+
 
 def test_event_filtering_and_indexing():
     ev1 = MissionEventFactory.created("m-filter", "Goal")
@@ -242,17 +252,21 @@ def test_event_filtering_and_indexing():
 
 # --- 7. REST API Endpoints Tests ---
 
+
 def test_api_publish_and_query_events(client):
     # Publish event
-    res_pub = client.post("/api/v1/events/publish", json={
-        "mission_id": "mission-api-test-001",
-        "event_type": "MissionCreated",
-        "subsystem": "MISSION_CONTROL",
-        "component": "APIController",
-        "actor_id": "test-admin",
-        "actor_type": "HUMAN",
-        "payload": {"goal": "Audit 2026 Invoices"},
-    })
+    res_pub = client.post(
+        "/api/v1/events/publish",
+        json={
+            "mission_id": "mission-api-test-001",
+            "event_type": "MissionCreated",
+            "subsystem": "MISSION_CONTROL",
+            "component": "APIController",
+            "actor_id": "test-admin",
+            "actor_type": "HUMAN",
+            "payload": {"goal": "Audit 2026 Invoices"},
+        },
+    )
     assert res_pub.status_code == 200
     pub_event = res_pub.json()["event"]
     assert pub_event["mission_id"] == "mission-api-test-001"
@@ -273,10 +287,13 @@ def test_api_publish_and_query_events(client):
     assert res_tl.status_code == 200
 
     # Filter endpoint
-    res_flt = client.post("/api/v1/events/filter", json={
-        "mission_id": "mission-api-test-001",
-        "event_types": ["MissionCreated"],
-    })
+    res_flt = client.post(
+        "/api/v1/events/filter",
+        json={
+            "mission_id": "mission-api-test-001",
+            "event_types": ["MissionCreated"],
+        },
+    )
     assert res_flt.status_code == 200
     assert res_flt.json()["total_matched"] >= 1
 

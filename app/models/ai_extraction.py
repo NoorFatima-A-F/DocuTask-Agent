@@ -21,10 +21,7 @@ class AIExtraction(Base, UUIDMixin):
     __tablename__ = "ai_extractions"
 
     document_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True),
-        ForeignKey("documents.id", ondelete="CASCADE"),
-        index=True,
-        nullable=False
+        Uuid(as_uuid=True), ForeignKey("documents.id", ondelete="CASCADE"), index=True, nullable=False
     )
     document_type: Mapped[str] = mapped_column(String(50), nullable=False)
     provider: Mapped[str] = mapped_column(String(50), nullable=False)
@@ -38,9 +35,7 @@ class AIExtraction(Base, UUIDMixin):
     estimated_cost: Mapped[float] = mapped_column(Float, nullable=False)
     confidence: Mapped[float] = mapped_column(Float, default=1.0, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False
     )
 
     # Relationship

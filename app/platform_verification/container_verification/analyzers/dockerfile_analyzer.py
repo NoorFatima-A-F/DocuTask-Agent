@@ -1,6 +1,7 @@
 """
 Dockerfile Quality and Security Analyzer.
 """
+
 from pathlib import Path
 from typing import List
 from app.platform_verification.container_verification.models.verification_models import DockerfileQualityReport
@@ -50,7 +51,9 @@ class DockerfileAnalyzer:
         if not runs_as_non_root:
             issues.append("Container runs as root; non-root user required")
 
-        opt_score = 100.0 - (len(dev_deps) * 15.0) - (0.0 if base_pinned else 30.0) - (0.0 if runs_as_non_root else 25.0)
+        opt_score = (
+            100.0 - (len(dev_deps) * 15.0) - (0.0 if base_pinned else 30.0) - (0.0 if runs_as_non_root else 25.0)
+        )
         opt_score = max(0.0, min(100.0, opt_score))
 
         status = "PASS" if len(issues) == 0 else "FAIL"

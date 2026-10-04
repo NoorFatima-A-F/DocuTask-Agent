@@ -23,13 +23,12 @@ class DelegationRequestBuilder:
         self._mode = mode
         return self
 
-    def add_task(self, task_id: str, task_name: str, skills: List[str], payload: Dict[str, Any] = None) -> "DelegationRequestBuilder":
-        self._tasks.append(DelegationTask(
-            task_id=task_id,
-            task_name=task_name,
-            required_skills=skills,
-            payload=payload or {}
-        ))
+    def add_task(
+        self, task_id: str, task_name: str, skills: List[str], payload: Dict[str, Any] = None
+    ) -> "DelegationRequestBuilder":
+        self._tasks.append(
+            DelegationTask(task_id=task_id, task_name=task_name, required_skills=skills, payload=payload or {})
+        )
         return self
 
     def with_timeout(self, timeout_sec: float) -> "DelegationRequestBuilder":
@@ -43,7 +42,7 @@ class DelegationRequestBuilder:
             mode=self._mode,
             tasks=self._tasks,
             max_recursion_depth=self._max_depth,
-            timeout_seconds=self._timeout
+            timeout_seconds=self._timeout,
         )
 
 
@@ -75,5 +74,5 @@ class TeamBuilder:
             name=self._name,
             team_type=self._team_type,
             leader_id=self._leader_id or (self._members[0].agent_id if self._members else None),
-            members=self._members
+            members=self._members,
         )

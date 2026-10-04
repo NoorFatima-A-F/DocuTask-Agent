@@ -1,6 +1,7 @@
 """
 3I.1.7: Security Logging & Sensitive Data Masking Verifier
 """
+
 from ..domain.models import SecurityScanReport
 from ..domain.interfaces import ISecurityScanVerifier
 
@@ -18,5 +19,5 @@ class SecurityScanVerifier(ISecurityScanVerifier):
             forbidden_tokens_checked=["password", "API keys", "JWT tokens", "documents content", "PII"],
             leakage_incidents_detected=0,
             masking_compliance_pct=100.0,
-            security_logging_passed=True
+            security_logging_passed=True,
         )

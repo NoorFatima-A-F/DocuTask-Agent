@@ -3,6 +3,7 @@ Readiness Decision Engine (Part 3).
 Evaluates incoming dependency health signals and computes deterministic readiness states
 and automated load balancer traffic routing actions.
 """
+
 from typing import Dict, Tuple
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessState,
@@ -25,7 +26,9 @@ class ReadinessDecisionEngine:
             return ReadinessState.NOT_READY, TrafficAction.WITHHOLD_TRAFFIC
 
         # Check non-critical dependencies
-        non_critical_failed = any(signals.get(dep) in ["failed", "unhealthy", "degraded", "down"] for dep in self.NON_CRITICAL_DEPENDENCIES)
+        non_critical_failed = any(
+            signals.get(dep) in ["failed", "unhealthy", "degraded", "down"] for dep in self.NON_CRITICAL_DEPENDENCIES
+        )
         if non_critical_failed:
             return ReadinessState.DEGRADED, TrafficAction.THROTTLE_TRAFFIC
 

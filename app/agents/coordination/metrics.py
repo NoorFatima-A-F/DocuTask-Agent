@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 class CoordinationMetricsSnapshot(BaseModel):
     """Snapshot of multi-agent coordination metrics."""
+
     total_delegations_started: int = 0
     total_delegations_completed: int = 0
     total_delegations_failed: int = 0
@@ -33,9 +34,7 @@ class CoordinationMetricsCollector:
     def record_delegation_completed(self, duration_ms: float) -> None:
         self._metrics.total_delegations_completed += 1
         self._delegation_durations.append(duration_ms)
-        self._metrics.average_delegation_latency_ms = (
-            sum(self._delegation_durations) / len(self._delegation_durations)
-        )
+        self._metrics.average_delegation_latency_ms = sum(self._delegation_durations) / len(self._delegation_durations)
 
     def record_delegation_failed(self) -> None:
         self._metrics.total_delegations_failed += 1
@@ -65,5 +64,5 @@ class CoordinationMetricsCollector:
             "custom.googleapis.com/agent/coordination/delegations_failed": self._metrics.total_delegations_failed,
             "custom.googleapis.com/agent/coordination/messages_routed": self._metrics.total_messages_routed,
             "custom.googleapis.com/agent/coordination/avg_delegation_latency_ms": self._metrics.average_delegation_latency_ms,
-            "custom.googleapis.com/agent/coordination/active_teams": self._metrics.total_active_teams
+            "custom.googleapis.com/agent/coordination/active_teams": self._metrics.total_active_teams,
         }

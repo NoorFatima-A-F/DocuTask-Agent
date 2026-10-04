@@ -11,13 +11,35 @@ class DataLeakageDetector:
 
     LEAKAGE_PATTERNS: List[Tuple[re.Pattern, str, ViolationSeverity]] = [
         # Database URIs
-        (re.compile(r"\b(postgres(?:ql)?|mongodb(?:\+srv)?|mysql|redis)://[^\s:]+:[^\s@]+@[^\s/]+/[^\s]+", re.IGNORECASE), "Database connection URI with credentials leaked", ViolationSeverity.CRITICAL),
+        (
+            re.compile(
+                r"\b(postgres(?:ql)?|mongodb(?:\+srv)?|mysql|redis)://[^\s:]+:[^\s@]+@[^\s/]+/[^\s]+", re.IGNORECASE
+            ),
+            "Database connection URI with credentials leaked",
+            ViolationSeverity.CRITICAL,
+        ),
         # Cloud Private Keys & Certs
-        (re.compile(r"-----BEGIN (?:RSA |EC )?PRIVATE KEY-----"), "Cryptographic private key leaked", ViolationSeverity.CRITICAL),
+        (
+            re.compile(r"-----BEGIN (?:RSA |EC )?PRIVATE KEY-----"),
+            "Cryptographic private key leaked",
+            ViolationSeverity.CRITICAL,
+        ),
         # Internal IP / Endpoint
-        (re.compile(r"\b(https?://)?(?:10\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01])|192\.168)\.\d{1,3}\.\d{1,3}(?::\d+)?\b"), "Internal RFC-1918 private IP address leaked", ViolationSeverity.HIGH),
+        (
+            re.compile(
+                r"\b(https?://)?(?:10\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01])|192\.168)\.\d{1,3}\.\d{1,3}(?::\d+)?\b"
+            ),
+            "Internal RFC-1918 private IP address leaked",
+            ViolationSeverity.HIGH,
+        ),
         # System Prompt Leakage signatures
-        (re.compile(r"(?i)\b(my\s+system\s+instructions\s+are|I\s+was\s+instructed\s+to\s+always|the\s+hidden\s+prompt\s+is)\s*:"), "System prompt leakage statement", ViolationSeverity.HIGH),
+        (
+            re.compile(
+                r"(?i)\b(my\s+system\s+instructions\s+are|I\s+was\s+instructed\s+to\s+always|the\s+hidden\s+prompt\s+is)\s*:"
+            ),
+            "System prompt leakage statement",
+            ViolationSeverity.HIGH,
+        ),
     ]
 
     def __init__(self, pii_detector: PIIDetector = None):

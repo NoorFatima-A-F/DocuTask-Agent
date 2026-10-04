@@ -9,21 +9,23 @@ from typing import Any, Dict, Optional
 
 class ConfigSource(str, Enum):
     """11-tier hierarchical configuration sources in ascending precedence order."""
-    DEFAULTS = "DEFAULTS"                      # Priority 1 (Lowest)
-    YAML_FILE = "YAML_FILE"                    # Priority 2
-    ENVIRONMENT = "ENVIRONMENT"                # Priority 3
-    CLOUD_CONFIG = "CLOUD_CONFIG"              # Priority 4
-    SECRETS_MANAGER = "SECRETS_MANAGER"        # Priority 5
-    RUNTIME_OVERRIDE = "RUNTIME_OVERRIDE"      # Priority 6
-    FEATURE_FLAG = "FEATURE_FLAG"              # Priority 7
-    ORGANIZATION = "ORGANIZATION"              # Priority 8
-    WORKSPACE = "WORKSPACE"                    # Priority 9
-    WORKFLOW = "WORKFLOW"                      # Priority 10
+
+    DEFAULTS = "DEFAULTS"  # Priority 1 (Lowest)
+    YAML_FILE = "YAML_FILE"  # Priority 2
+    ENVIRONMENT = "ENVIRONMENT"  # Priority 3
+    CLOUD_CONFIG = "CLOUD_CONFIG"  # Priority 4
+    SECRETS_MANAGER = "SECRETS_MANAGER"  # Priority 5
+    RUNTIME_OVERRIDE = "RUNTIME_OVERRIDE"  # Priority 6
+    FEATURE_FLAG = "FEATURE_FLAG"  # Priority 7
+    ORGANIZATION = "ORGANIZATION"  # Priority 8
+    WORKSPACE = "WORKSPACE"  # Priority 9
+    WORKFLOW = "WORKFLOW"  # Priority 10
     EXECUTION_OVERRIDE = "EXECUTION_OVERRIDE"  # Priority 11 (Highest)
 
 
 class ConfigDomain(str, Enum):
     """16 standard enterprise platform configuration domains."""
+
     DATABASE = "database"
     STORAGE = "storage"
     QUEUE = "queue"
@@ -45,6 +47,7 @@ class ConfigDomain(str, Enum):
 @dataclass(frozen=True)
 class ConfigEntrySchema:
     """Definition of a single configuration setting."""
+
     name: str
     data_type: str = "string"  # string, int, float, bool, list, dict
     default_value: Any = None
@@ -74,6 +77,7 @@ class ConfigEntrySchema:
 @dataclass
 class ResolvedConfigValue:
     """A resolved configuration value with origin attribution."""
+
     key: str
     value: Any
     source: ConfigSource

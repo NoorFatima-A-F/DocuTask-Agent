@@ -15,7 +15,7 @@ class AlertSeverity(str, Enum):
 
 class AlertCondition(BaseModel):
     metric_name: str
-    operator: str   # ">", ">=", "<", "<=", "=="
+    operator: str  # ">", ">=", "<", "<=", "=="
     threshold: float
 
 

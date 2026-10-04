@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class Bid(BaseModel):
     """Bid submitted by an agent for a task."""
+
     bid_id: UUID = Field(default_factory=uuid4)
     bidder_agent_id: UUID
     task_id: str
@@ -24,6 +25,7 @@ class Bid(BaseModel):
 
 class NegotiationSession(BaseModel):
     """Negotiation interaction between coordinator and candidate agents."""
+
     negotiation_id: UUID = Field(default_factory=uuid4)
     task_id: str
     initiator_id: UUID
@@ -37,7 +39,4 @@ class NegotiationSession(BaseModel):
 
     def award(self, winning_bid: Bid) -> "NegotiationSession":
         """Closes negotiation and selects winning bid."""
-        return self.model_copy(update={
-            "winning_bid": winning_bid,
-            "is_closed": True
-        })
+        return self.model_copy(update={"winning_bid": winning_bid, "is_closed": True})

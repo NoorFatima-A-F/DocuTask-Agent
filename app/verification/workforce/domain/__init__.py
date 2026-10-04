@@ -1,4 +1,5 @@
 """Domain models for workforce verification."""
+
 from .models import (
     VerificationCategory,
     VerificationStatus,

@@ -27,20 +27,20 @@ class StrategyMiner:
     def _calc_distribution(values: List[float]) -> MetricDistribution:
         if not values:
             return MetricDistribution(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-        
+
         sorted_vals = sorted(values)
         n = len(sorted_vals)
         mean_val = sum(sorted_vals) / n
-        
+
         if n > 1:
             variance = sum((x - mean_val) ** 2 for x in sorted_vals) / (n - 1)
             std_dev = math.sqrt(variance)
         else:
             std_dev = 0.0
-            
+
         p50_idx = int(n * 0.5)
         p95_idx = min(int(n * 0.95), n - 1)
-        
+
         return MetricDistribution(
             mean=round(mean_val, 4),
             std_dev=round(std_dev, 4),
@@ -65,14 +65,14 @@ class StrategyMiner:
         sample_exp = experiences[0]
         domain = sample_exp.document_type
         task = sample_exp.task_type
-        
+
         latencies = [e.total_latency_ms for e in experiences]
         costs = [e.total_cost_usd for e in experiences]
         confidences = [e.final_confidence for e in experiences]
-        
+
         successes = sum(1 for e in experiences if e.status == "SUCCESS")
         success_rate = round(successes / len(experiences), 4)
-        
+
         total_retries = sum(e.retries_count for e in experiences)
         retry_frequency = round(total_retries / len(experiences), 4)
 

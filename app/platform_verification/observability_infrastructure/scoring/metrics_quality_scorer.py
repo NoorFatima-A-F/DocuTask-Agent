@@ -1,6 +1,7 @@
 """
 Part 3I.2: Enterprise Metrics Quality & Compliance Scorer
 """
+
 from typing import List
 from datetime import datetime, timezone
 from ..domain.models import (
@@ -44,12 +45,29 @@ class MetricsQualityScorer(IMetricsScorer):
         golden_weighted = (golden_score * golden_weight) / 100.0
 
         # 2. Application Metrics (20%)
-        app_score = 100.0 if (app_infra_report.document_metrics_active and app_infra_report.ocr_metrics_active and app_infra_report.ai_llm_metrics_active and app_infra_report.queue_metrics_active) else 0.0
+        app_score = (
+            100.0
+            if (
+                app_infra_report.document_metrics_active
+                and app_infra_report.ocr_metrics_active
+                and app_infra_report.ai_llm_metrics_active
+                and app_infra_report.queue_metrics_active
+            )
+            else 0.0
+        )
         app_weight = 20.0
         app_weighted = (app_score * app_weight) / 100.0
 
         # 3. Infrastructure Metrics (20%)
-        infra_score = 100.0 if (app_infra_report.container_cpu_memory_active and app_infra_report.database_connection_metrics_active and app_infra_report.redis_memory_commands_active) else 0.0
+        infra_score = (
+            100.0
+            if (
+                app_infra_report.container_cpu_memory_active
+                and app_infra_report.database_connection_metrics_active
+                and app_infra_report.redis_memory_commands_active
+            )
+            else 0.0
+        )
         infra_weight = 20.0
         infra_weighted = (infra_score * infra_weight) / 100.0
 
@@ -72,15 +90,55 @@ class MetricsQualityScorer(IMetricsScorer):
         total_score = round(total_score, 2)
 
         pillar_scores: List[MetricsPillarScore] = [
-            MetricsPillarScore(pillar_name="Four Golden Signals (Latency, Traffic, Errors, Saturation)", weight_pct=golden_weight, achieved_score_pct=round(golden_score, 2), weighted_score_pct=round(golden_weighted, 2), status="PASSED"),
-            MetricsPillarScore(pillar_name="Application & Subsystem Telemetry Coverage", weight_pct=app_weight, achieved_score_pct=round(app_score, 2), weighted_score_pct=round(app_weighted, 2), status="PASSED"),
-            MetricsPillarScore(pillar_name="Infrastructure & Container Resource Metrics", weight_pct=infra_weight, achieved_score_pct=round(infra_score, 2), weighted_score_pct=round(infra_weighted, 2), status="PASSED"),
-            MetricsPillarScore(pillar_name="Alerting Quality, Severity Routing & Runbooks", weight_pct=alert_weight, achieved_score_pct=round(alert_score, 2), weighted_score_pct=round(alert_weighted, 2), status="PASSED"),
-            MetricsPillarScore(pillar_name="Grafana Observability Dashboard Visualizations", weight_pct=dash_weight, achieved_score_pct=round(dash_score, 2), weighted_score_pct=round(dash_weighted, 2), status="PASSED"),
-            MetricsPillarScore(pillar_name="Service Level Indicators (SLI) & SLO Compliance", weight_pct=slo_weight, achieved_score_pct=round(slo_score, 2), weighted_score_pct=round(slo_weighted, 2), status="PASSED"),
+            MetricsPillarScore(
+                pillar_name="Four Golden Signals (Latency, Traffic, Errors, Saturation)",
+                weight_pct=golden_weight,
+                achieved_score_pct=round(golden_score, 2),
+                weighted_score_pct=round(golden_weighted, 2),
+                status="PASSED",
+            ),
+            MetricsPillarScore(
+                pillar_name="Application & Subsystem Telemetry Coverage",
+                weight_pct=app_weight,
+                achieved_score_pct=round(app_score, 2),
+                weighted_score_pct=round(app_weighted, 2),
+                status="PASSED",
+            ),
+            MetricsPillarScore(
+                pillar_name="Infrastructure & Container Resource Metrics",
+                weight_pct=infra_weight,
+                achieved_score_pct=round(infra_score, 2),
+                weighted_score_pct=round(infra_weighted, 2),
+                status="PASSED",
+            ),
+            MetricsPillarScore(
+                pillar_name="Alerting Quality, Severity Routing & Runbooks",
+                weight_pct=alert_weight,
+                achieved_score_pct=round(alert_score, 2),
+                weighted_score_pct=round(alert_weighted, 2),
+                status="PASSED",
+            ),
+            MetricsPillarScore(
+                pillar_name="Grafana Observability Dashboard Visualizations",
+                weight_pct=dash_weight,
+                achieved_score_pct=round(dash_score, 2),
+                weighted_score_pct=round(dash_weighted, 2),
+                status="PASSED",
+            ),
+            MetricsPillarScore(
+                pillar_name="Service Level Indicators (SLI) & SLO Compliance",
+                weight_pct=slo_weight,
+                achieved_score_pct=round(slo_score, 2),
+                weighted_score_pct=round(slo_weighted, 2),
+                status="PASSED",
+            ),
         ]
 
-        tier = "Enterprise Metrics Ready" if total_score >= 95.0 else ("Production Ready" if total_score >= 90.0 else "Improvement Required")
+        tier = (
+            "Enterprise Metrics Ready"
+            if total_score >= 95.0
+            else ("Production Ready" if total_score >= 90.0 else "Improvement Required")
+        )
 
         return MetricsCertificationReport(
             report_title="Part 3I.2 Enterprise Metrics Infrastructure Certification",
@@ -89,5 +147,5 @@ class MetricsQualityScorer(IMetricsScorer):
             overall_score_pct=total_score,
             minimum_passing_threshold_pct=95.0,
             pillar_scores=pillar_scores,
-            certification_granted=total_score >= 95.0
+            certification_granted=total_score >= 95.0,
         )

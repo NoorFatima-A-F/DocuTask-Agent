@@ -44,12 +44,7 @@ class StateConsistencyVerifier(IStateConsistencyVerifier):
         # 1. Zero duplicate document UUIDs
         # 2. No state is simultaneously (PROCESSING and COMPLETED)
         # 3. All crashed jobs safely transitioned to RECOVERED -> COMPLETED
-        passed = (
-            duplicates_detected == 0
-            and corrupted_states == 0
-            and idempotency_verified
-            and rollback_verified
-        )
+        passed = duplicates_detected == 0 and corrupted_states == 0 and idempotency_verified and rollback_verified
 
         details = {
             "workflow_state_machine": {

@@ -24,7 +24,9 @@ class DeliberationVoteTally(BaseModel):
 class DeliberationVotingEngine:
     """Aggregates multi-agent votes using axiomatic Borda Count social choice theory."""
 
-    def tally_borda_count(self, votes: List[CouncilAgentVote], candidate_strategies: List[str]) -> DeliberationVoteTally:
+    def tally_borda_count(
+        self, votes: List[CouncilAgentVote], candidate_strategies: List[str]
+    ) -> DeliberationVoteTally:
         borda_points: Dict[str, int] = {sid: 0 for sid in candidate_strategies}
         first_choice_counts: Dict[str, int] = {sid: 0 for sid in candidate_strategies}
 
@@ -40,7 +42,7 @@ class DeliberationVotingEngine:
                     borda_points[strat_id] += max(0, points)
 
         # Winner with maximum Borda points
-        winner = max(borda_points, key=borda_points.get) if borda_points else candidate_strategies[0] # type: ignore
+        winner = max(borda_points, key=borda_points.get) if borda_points else candidate_strategies[0]  # type: ignore
 
         # Consensus Shannon entropy across first choice distribution
         total_votes = len(votes)

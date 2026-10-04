@@ -27,6 +27,12 @@ class ConfidenceGovernancePolicy:
             return ConfidenceStatus.UNVERIFIED, "Unverified: Cryptographic truth ledger hash mismatch."
 
         if confidence_score < minimum_threshold:
-            return ConfidenceStatus.DEGRADED, f"Degraded: Confidence score {confidence_score} below threshold {minimum_threshold}."
+            return (
+                ConfidenceStatus.DEGRADED,
+                f"Degraded: Confidence score {confidence_score} below threshold {minimum_threshold}.",
+            )
 
-        return ConfidenceStatus.VERIFIED, "Governance Policy Satisfied: All cryptographic and evidence invariants verified."
+        return (
+            ConfidenceStatus.VERIFIED,
+            "Governance Policy Satisfied: All cryptographic and evidence invariants verified.",
+        )

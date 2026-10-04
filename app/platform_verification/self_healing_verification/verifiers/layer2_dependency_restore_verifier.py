@@ -1,6 +1,7 @@
 """
 Phase 3H.5.5: Layer 2 - Dependency Restoration Verifier
 """
+
 from ..domain.interfaces import ILayer2DependencyRestoreVerifier
 from ..domain.models import DependencyRestoreReport, DependencyItemHealth
 
@@ -51,8 +52,7 @@ class Layer2DependencyRestoreVerifier(ILayer2DependencyRestoreVerifier):
         ]
 
         all_ok = all(
-            d.connection_healthy and d.query_or_ping_healthy and d.transaction_or_job_healthy
-            for d in dependencies
+            d.connection_healthy and d.query_or_ping_healthy and d.transaction_or_job_healthy for d in dependencies
         )
 
         return DependencyRestoreReport(

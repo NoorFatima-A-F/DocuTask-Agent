@@ -11,6 +11,7 @@ import uuid
 
 class RuntimeState(str, Enum):
     """The 17 formal runtime operating states of the DocuTask Platform Kernel."""
+
     CREATED = "CREATED"
     CONFIG_LOADING = "CONFIG_LOADING"
     CONFIG_VALIDATED = "CONFIG_VALIDATED"
@@ -55,6 +56,7 @@ VALID_STATE_TRANSITIONS = {
 @dataclass
 class RuntimeStateEvent:
     """Event emitted on runtime state transition."""
+
     event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     from_state: RuntimeState = RuntimeState.CREATED
     to_state: RuntimeState = RuntimeState.CREATED

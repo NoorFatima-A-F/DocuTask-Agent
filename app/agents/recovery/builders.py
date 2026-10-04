@@ -53,21 +53,9 @@ class FailureBuilder:
         return self
 
     def build(self) -> Failure:
-        identity = FailureIdentity(
-            execution_id=self._execution_id,
-            node_id=self._node_id,
-            tool_name=self._tool_name
-        )
-        evidence = FailureEvidence(
-            error_type=self._error_type,
-            error_message=self._error_msg
-        )
-        return Failure(
-            identity=identity,
-            category=self._category,
-            severity=self._severity,
-            evidence=evidence
-        )
+        identity = FailureIdentity(execution_id=self._execution_id, node_id=self._node_id, tool_name=self._tool_name)
+        evidence = FailureEvidence(error_type=self._error_type, error_message=self._error_msg)
+        return Failure(identity=identity, category=self._category, severity=self._severity, evidence=evidence)
 
 
 class RecoveryRequestBuilder:
@@ -111,7 +99,7 @@ class RecoveryStrategyBuilder:
             strategy=self._strategy,
             parameters=self._params,
             estimated_cost_usd=self._cost,
-            requires_human_gate=self._human_gate
+            requires_human_gate=self._human_gate,
         )
 
 
@@ -139,7 +127,7 @@ class IncidentBuilder:
             failure_id=self._failure_id,
             title=self._title,
             description=self._description,
-            severity=self._severity
+            severity=self._severity,
         )
 
 
@@ -160,5 +148,5 @@ class ReplayBuilder:
             replay_id=f"replay_{uuid4().hex[:8]}",
             execution_id=self._execution_id,
             node_ids=self._node_ids,
-            inputs=self._inputs
+            inputs=self._inputs,
         )

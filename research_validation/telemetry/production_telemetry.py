@@ -15,6 +15,7 @@ from typing import Any, Dict, List, Optional, Tuple
 @dataclass
 class TelemetrySpan:
     """A distributed trace span conforming to OpenTelemetry specifications."""
+
     trace_id: str
     span_id: str
     parent_span_id: Optional[str]
@@ -33,6 +34,7 @@ class TelemetrySpan:
 @dataclass
 class ServiceSLOStatus:
     """SLO evaluation for a specific service component."""
+
     service_name: str
     sli_type: str  # "LATENCY_P99", "AVAILABILITY", "ERROR_RATE", "THROUGHPUT"
     target_threshold: float
@@ -43,6 +45,7 @@ class ServiceSLOStatus:
 @dataclass
 class TelemetryAuditReport:
     """Comprehensive production telemetry audit report."""
+
     total_spans_analyzed: int
     total_traces_analyzed: int
     orphaned_spans_count: int
@@ -99,10 +102,7 @@ class ProductionTelemetryValidator:
 
     @classmethod
     def evaluate_service_slos(
-        cls,
-        spans: List[TelemetrySpan],
-        error_rate_threshold: float = 0.01,
-        latency_p99_threshold_ms: float = 5000.0
+        cls, spans: List[TelemetrySpan], error_rate_threshold: float = 0.01, latency_p99_threshold_ms: float = 5000.0
     ) -> List[ServiceSLOStatus]:
         """
         Evaluate SLOs per service component from span data.
@@ -122,34 +122,35 @@ class ProductionTelemetryValidator:
             # Error rate SLI
             error_count = sum(1 for s in svc_spans if s.status_code == "ERROR")
             err_rate = error_count / n
-            slo_results.append(ServiceSLOStatus(
-                service_name=svc_name,
-                sli_type="ERROR_RATE",
-                target_threshold=error_rate_threshold,
-                observed_value=err_rate,
-                is_compliant=err_rate <= error_rate_threshold
-            ))
+            slo_results.append(
+                ServiceSLOStatus(
+                    service_name=svc_name,
+                    sli_type="ERROR_RATE",
+                    target_threshold=error_rate_threshold,
+                    observed_value=err_rate,
+                    is_compliant=err_rate <= error_rate_threshold,
+                )
+            )
 
             # Latency P99 SLI
             durations = sorted(s.duration_ms for s in svc_spans)
             p99_idx = min(int(0.99 * n), n - 1)
             p99_latency = durations[p99_idx]
-            slo_results.append(ServiceSLOStatus(
-                service_name=svc_name,
-                sli_type="LATENCY_P99",
-                target_threshold=latency_p99_threshold_ms,
-                observed_value=p99_latency,
-                is_compliant=p99_latency <= latency_p99_threshold_ms
-            ))
+            slo_results.append(
+                ServiceSLOStatus(
+                    service_name=svc_name,
+                    sli_type="LATENCY_P99",
+                    target_threshold=latency_p99_threshold_ms,
+                    observed_value=p99_latency,
+                    is_compliant=p99_latency <= latency_p99_threshold_ms,
+                )
+            )
 
         return slo_results
 
     @classmethod
     def run_telemetry_audit(
-        cls,
-        spans: List[TelemetrySpan],
-        error_rate_threshold: float = 0.01,
-        latency_p99_threshold_ms: float = 5000.0
+        cls, spans: List[TelemetrySpan], error_rate_threshold: float = 0.01, latency_p99_threshold_ms: float = 5000.0
     ) -> TelemetryAuditReport:
         """Run end-to-end telemetry and observability audit."""
         if not spans:
@@ -161,15 +162,13 @@ class ProductionTelemetryValidator:
                 span_completeness_ratio=0.0,
                 slo_evaluations=[],
                 all_slos_met=False,
-                status="INSUFFICIENT_EVIDENCE"
+                status="INSUFFICIENT_EVIDENCE",
             )
 
         unique_traces = len(set(s.trace_id for s in spans))
         orphaned, broken, completeness = cls.validate_trace_graph(spans)
         slos = cls.evaluate_service_slos(
-            spans,
-            error_rate_threshold=error_rate_threshold,
-            latency_p99_threshold_ms=latency_p99_threshold_ms
+            spans, error_rate_threshold=error_rate_threshold, latency_p99_threshold_ms=latency_p99_threshold_ms
         )
 
         all_slos_met = all(s.is_compliant for s in slos) if slos else False
@@ -185,5 +184,5 @@ class ProductionTelemetryValidator:
             slo_evaluations=slos,
             all_slos_met=all_slos_met,
             status=status,
-            details={"cloud_services_observed": list(set(s.attributes.get("service.name", "") for s in spans))}
+            details={"cloud_services_observed": list(set(s.attributes.get("service.name", "") for s in spans))},
         )

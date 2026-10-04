@@ -65,7 +65,16 @@ class MultiRegionScoreEngine(IMultiRegionScoreEngine):
         composite = round(composite, 2)
 
         passed = (composite >= 95.0) and all(
-            [arch.passed, portability.passed, db_rep.passed, storage_rep.passed, traffic.passed, workflow.passed, chaos.passed, avail.passed]
+            [
+                arch.passed,
+                portability.passed,
+                db_rep.passed,
+                storage_rep.passed,
+                traffic.passed,
+                workflow.passed,
+                chaos.passed,
+                avail.passed,
+            ]
         )
 
         verdict = "ENTERPRISE_CLOUD_RESILIENT" if passed else "MULTI_REGION_FAILOVER_REJECTED"

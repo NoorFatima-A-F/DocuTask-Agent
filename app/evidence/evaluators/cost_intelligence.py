@@ -114,8 +114,12 @@ class CostIntelligencePlatform:
         """Computes aggregate unit economics and produces certified EvidenceItem."""
         if not self.ledgers:
             # Seed standard representative sample
-            self.record_workflow_cost("exec_std_inv", "invoice", prompt_tokens=250, completion_tokens=120, use_pro=False)
-            self.record_workflow_cost("exec_med_tax", "medical_invoice", prompt_tokens=650, completion_tokens=300, use_pro=True)
+            self.record_workflow_cost(
+                "exec_std_inv", "invoice", prompt_tokens=250, completion_tokens=120, use_pro=False
+            )
+            self.record_workflow_cost(
+                "exec_med_tax", "medical_invoice", prompt_tokens=650, completion_tokens=300, use_pro=True
+            )
 
         avg_cost = sum(l.total_cost_usd for l in self.ledgers) / len(self.ledgers)
         projected_monthly_usd = avg_cost * monthly_volume_projection
@@ -126,10 +130,14 @@ class CostIntelligencePlatform:
             "projected_monthly_volume": monthly_volume_projection,
             "projected_monthly_cost_usd": round(projected_monthly_usd, 2),
             "cost_breakdown_by_service": {
-                "vertex_gemini": round(sum(l.gemini_flash_cost_usd + l.gemini_pro_cost_usd for l in self.ledgers) / len(self.ledgers), 5),
+                "vertex_gemini": round(
+                    sum(l.gemini_flash_cost_usd + l.gemini_pro_cost_usd for l in self.ledgers) / len(self.ledgers), 5
+                ),
                 "ocr_processing": round(sum(l.ocr_cost_usd for l in self.ledgers) / len(self.ledgers), 5),
                 "cloud_run_compute": round(sum(l.compute_cost_usd for l in self.ledgers) / len(self.ledgers), 5),
-                "storage_and_redis": round(sum(l.storage_cost_usd + l.redis_cost_usd for l in self.ledgers) / len(self.ledgers), 6),
+                "storage_and_redis": round(
+                    sum(l.storage_cost_usd + l.redis_cost_usd for l in self.ledgers) / len(self.ledgers), 6
+                ),
             },
         }
 

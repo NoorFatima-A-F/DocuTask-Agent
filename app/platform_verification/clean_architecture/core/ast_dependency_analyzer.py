@@ -1,6 +1,7 @@
 """
 AST Dependency Analyzer extracting direct, relative, and dynamic imports.
 """
+
 from __future__ import annotations
 import ast
 import os

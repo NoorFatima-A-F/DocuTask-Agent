@@ -8,10 +8,14 @@ PAST_TENSE_EVENT_REGEX = re.compile(
 )
 FORBIDDEN_DIR_NAMES = {"misc", "helpers", "stuff", "common2", "temp", "new_code"}
 
+
 def validate_naming(base_dir: str = ".") -> list[str]:
     violations = []
     for root, dirs, _ in os.walk(base_dir):
-        if any(ignored in root for ignored in [".git", "__pycache__", ".pytest_cache", "venv", "node_modules", "dist", "build"]):
+        if any(
+            ignored in root
+            for ignored in [".git", "__pycache__", ".pytest_cache", "venv", "node_modules", "dist", "build"]
+        ):
             continue
         for d in dirs:
             if d in FORBIDDEN_DIR_NAMES:
@@ -29,12 +33,23 @@ def validate_naming(base_dir: str = ".") -> list[str]:
                         for node in ast.walk(tree):
                             if isinstance(node, ast.ClassDef):
                                 for base in node.bases:
-                                    if isinstance(base, ast.Name) and base.id in {"DomainEvent", "IntegrationEvent", "ApplicationEvent", "SystemEvent", "BaseEvent"}:
-                                        if not PAST_TENSE_EVENT_REGEX.match(node.name) and not node.name.startswith("Test"):
-                                            violations.append(f"Domain Event '{node.name}' in {f}:{node.lineno} does not follow past-tense naming standard.")
+                                    if isinstance(base, ast.Name) and base.id in {
+                                        "DomainEvent",
+                                        "IntegrationEvent",
+                                        "ApplicationEvent",
+                                        "SystemEvent",
+                                        "BaseEvent",
+                                    }:
+                                        if not PAST_TENSE_EVENT_REGEX.match(node.name) and not node.name.startswith(
+                                            "Test"
+                                        ):
+                                            violations.append(
+                                                f"Domain Event '{node.name}' in {f}:{node.lineno} does not follow past-tense naming standard."
+                                            )
                     except SyntaxError:
                         pass
     return violations
+
 
 def run_naming_validation(base_dir: str = ".") -> int:
     print("Validating Platform Naming Standards...")
@@ -46,6 +61,7 @@ def run_naming_validation(base_dir: str = ".") -> int:
         return 1
     print("SUCCESS: All naming standards fully satisfied (0 violations)!")
     return 0
+
 
 if __name__ == "__main__":
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))

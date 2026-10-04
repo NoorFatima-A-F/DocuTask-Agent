@@ -3,6 +3,7 @@ Master Readiness Engine Runtime Coordinator (Part 3H.3.2).
 Orchestrates dependency evaluation, checkers, policy matrix, failure simulations,
 Kubernetes probe verification, security audit, metrics export, and evidence generation.
 """
+
 from typing import Dict, Any
 
 from app.platform_verification.readiness_engine.policy.dependency_policy_engine import DependencyPolicyEngine
@@ -95,7 +96,9 @@ class ReadinessEngineRuntime:
         self.metrics_exporter.set_readiness_state(eval_result.state)
         self.metrics_exporter.update_dependency_metric("postgres", db_report.passed, db_report.latency_ms / 1000.0)
         self.metrics_exporter.update_dependency_metric("redis", queue_report.passed, queue_report.latency_ms / 1000.0)
-        self.metrics_exporter.update_dependency_metric("storage", storage_report.passed, storage_report.latency_ms / 1000.0)
+        self.metrics_exporter.update_dependency_metric(
+            "storage", storage_report.passed, storage_report.latency_ms / 1000.0
+        )
         self.metrics_exporter.update_dependency_metric("gemini", ai_report.passed, ai_report.latency_ms / 1000.0)
         self.metrics_exporter.update_dependency_metric("workers", worker_report.passed, 0.002)
 

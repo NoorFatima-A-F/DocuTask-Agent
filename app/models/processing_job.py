@@ -21,10 +21,7 @@ class ProcessingJob(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "processing_jobs"
 
     document_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True),
-        ForeignKey("documents.id", ondelete="CASCADE"),
-        index=True,
-        nullable=False
+        Uuid(as_uuid=True), ForeignKey("documents.id", ondelete="CASCADE"), index=True, nullable=False
     )
     job_type: Mapped[str] = mapped_column(String(50), default="DOCUMENT_PIPELINE", nullable=False)
     status: Mapped[str] = mapped_column(String(50), default="QUEUED", index=True, nullable=False)

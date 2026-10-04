@@ -11,6 +11,7 @@ from app.agents.planning.goals import PlanGoal
 
 class PlannerContext(BaseModel):
     """Contextual environment parameters supplied to the planner."""
+
     document_id: Optional[UUID] = Field(default=None)
     user_id: Optional[UUID] = Field(default=None)
     session_id: Optional[str] = Field(default=None)
@@ -23,6 +24,7 @@ class PlannerContext(BaseModel):
 
 class PlannerRequest(BaseModel):
     """Initial request asking planner to synthesize a plan for a goal."""
+
     goal: PlanGoal
     context: PlannerContext = Field(default_factory=PlannerContext)
     constraints: List[PlanConstraint] = Field(default_factory=list)

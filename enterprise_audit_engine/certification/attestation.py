@@ -45,7 +45,7 @@ class EngineAttestation:
     def generate_build_info(cls, repo_root: Path) -> Dict[str, Any]:
         commit = cls.get_git_commit(repo_root)
         deps_hash = cls.compute_dependencies_hash(repo_root)
-        
+
         info = {
             "engine_version": cls.ENGINE_VERSION,
             "git_commit": commit,
@@ -59,7 +59,7 @@ class EngineAttestation:
     @classmethod
     def save_attestation_files(cls, engine_dir: Path, repo_root: Path) -> Dict[str, Path]:
         build_info = cls.generate_build_info(repo_root)
-        
+
         build_info_path = engine_dir / "BUILD_INFO.json"
         manifest_path = engine_dir / "ENGINE_MANIFEST.json"
         version_path = engine_dir / "VERSION"

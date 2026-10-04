@@ -56,14 +56,16 @@ class StrategicGovernanceEngine:
         )
 
         self._approvals[aid] = record
-        self._audit_log.append({
-            "action": "GOVERNANCE_REVIEW",
-            "approval_id": aid,
-            "target": target_proposal_id,
-            "decision": decision,
-            "signature": sig,
-            "timestamp": record.approved_at,
-        })
+        self._audit_log.append(
+            {
+                "action": "GOVERNANCE_REVIEW",
+                "approval_id": aid,
+                "target": target_proposal_id,
+                "decision": decision,
+                "signature": sig,
+                "timestamp": record.approved_at,
+            }
+        )
 
         return True, record, "Strategic proposal approved and signed."
 

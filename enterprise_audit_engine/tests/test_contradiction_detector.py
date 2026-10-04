@@ -7,12 +7,8 @@ from enterprise_audit_engine.contradiction_detector.contradiction_detector impor
 
 
 def test_no_contradiction_clean():
-    evidence = [
-        {"id": "EV-1", "classification": "VERIFIED_BY_EXECUTION", "category": "Runtime"}
-    ]
-    claims = [
-        {"claim": "System has basic runtime verification", "evidence_ids": ["EV-1"]}
-    ]
+    evidence = [{"id": "EV-1", "classification": "VERIFIED_BY_EXECUTION", "category": "Runtime"}]
+    claims = [{"claim": "System has basic runtime verification", "evidence_ids": ["EV-1"]}]
     rep = ContradictionDetector.analyze_contradictions(evidence, claims)
     assert isinstance(rep, ContradictionReport)
     assert rep.has_contradictions is False
@@ -21,12 +17,8 @@ def test_no_contradiction_clean():
 
 
 def test_detects_config_masquerading_as_runtime():
-    evidence = [
-        {"id": "EV-CFG-1", "classification": "CONFIGURATION_PRESENT", "category": "Config"}
-    ]
-    claims = [
-        {"claim": "Database connection is runtime verified under load", "evidence_ids": ["EV-CFG-1"]}
-    ]
+    evidence = [{"id": "EV-CFG-1", "classification": "CONFIGURATION_PRESENT", "category": "Config"}]
+    claims = [{"claim": "Database connection is runtime verified under load", "evidence_ids": ["EV-CFG-1"]}]
     rep = ContradictionDetector.analyze_contradictions(evidence, claims)
     assert rep.has_contradictions is True
     assert rep.status == "CERTIFICATION_CONTRADICTION_FOUND"
@@ -35,9 +27,7 @@ def test_detects_config_masquerading_as_runtime():
 
 
 def test_detects_insufficient_evidence_production_claim():
-    evidence = [
-        {"id": "EV-INSUF-1", "classification": "EVIDENCE_INSUFFICIENT", "category": "Security"}
-    ]
+    evidence = [{"id": "EV-INSUF-1", "classification": "EVIDENCE_INSUFFICIENT", "category": "Security"}]
     claims = [
         {"claim": "Application is production ready for high-security environments", "evidence_ids": ["EV-INSUF-1"]}
     ]

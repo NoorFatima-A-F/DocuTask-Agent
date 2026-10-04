@@ -2,6 +2,7 @@
 Phase 3I.7.9: Compliance & Regulatory Mapping Verifier
 Maps observability security mechanisms against OWASP Logging Cheat Sheet, OWASP ASVS v4.0, OWASP LLM Top 10, GDPR, and SOC 2 Type II controls.
 """
+
 from typing import List
 from ..domain.interfaces import IComplianceMappingVerifier
 from ..domain.models import ComplianceStandardSpec, ComplianceMappingReport

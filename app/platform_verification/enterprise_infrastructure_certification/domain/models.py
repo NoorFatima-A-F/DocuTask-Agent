@@ -25,10 +25,10 @@ class RiskLevel(str, Enum):
 
 class CertificationLevel(str, Enum):
     ENTERPRISE_READY = "Enterprise Infrastructure Ready"  # Level 4: 95-100%
-    PRODUCTION_READY = "Production Ready"                  # Level 3: 90-94.99%
-    TESTING_READY = "Testing Ready"                        # Level 2: 80-89.99%
-    DEVELOPMENT_READY = "Development Ready"                # Level 1: 60-79.99%
-    BLOCKED = "Blocked / Not Production Ready"             # Critical Failure / <60%
+    PRODUCTION_READY = "Production Ready"  # Level 3: 90-94.99%
+    TESTING_READY = "Testing Ready"  # Level 2: 80-89.99%
+    DEVELOPMENT_READY = "Development Ready"  # Level 1: 60-79.99%
+    BLOCKED = "Blocked / Not Production Ready"  # Critical Failure / <60%
 
 
 class MaturityLevel(str, Enum):
@@ -41,6 +41,7 @@ class MaturityLevel(str, Enum):
 
 
 # ─── 1. Evidence Models ────────────────────────────────────────────────────────
+
 
 class NormalizedEvidenceItem(BaseModel):
     category: str
@@ -64,6 +65,7 @@ class RawEvidenceBundle(BaseModel):
 
 # ─── 2. Quality Scoring Models ────────────────────────────────────────────────
 
+
 class CategoryQualityScore(BaseModel):
     category: str
     weight: float
@@ -85,6 +87,7 @@ class QualityScorecard(BaseModel):
 
 
 # ─── 3. Risk Assessment Models ────────────────────────────────────────────────
+
 
 class RiskFinding(BaseModel):
     risk_level: RiskLevel
@@ -110,6 +113,7 @@ class RiskAssessmentReport(BaseModel):
 
 # ─── 4. Certification & Decision Models ───────────────────────────────────────
 
+
 class CertificationDecision(BaseModel):
     project: str = "DocuTask Agent"
     overall_score: float = 100.0
@@ -125,6 +129,7 @@ class CertificationDecision(BaseModel):
 
 # ─── 5. Maturity Assessment Models ────────────────────────────────────────────
 
+
 class MaturityAssessment(BaseModel):
     maturity_level: MaturityLevel = MaturityLevel.LEVEL_5
     maturity_score: float = 100.0
@@ -135,6 +140,7 @@ class MaturityAssessment(BaseModel):
 
 
 # ─── 6. Regression Models ─────────────────────────────────────────────────────
+
 
 class RegressionFinding(BaseModel):
     category: str
@@ -158,6 +164,7 @@ class QualityRegressionReport(BaseModel):
 
 
 # ─── 7. Manifest Models ───────────────────────────────────────────────────────
+
 
 class ManifestEntry(BaseModel):
     filename: str

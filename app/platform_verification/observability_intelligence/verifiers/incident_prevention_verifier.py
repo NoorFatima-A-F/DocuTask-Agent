@@ -2,6 +2,7 @@
 Phase 3I.9.8: Incident Prevention Verifier
 Verifies proactive mitigation actions that intercept and prevent outages before service-level agreements are breached.
 """
+
 from typing import List
 from ..domain.interfaces import IIncidentPreventionVerifier
 from ..domain.models import IncidentPreventionScenarioSpec, IncidentPreventionReport

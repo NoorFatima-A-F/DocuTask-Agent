@@ -27,6 +27,7 @@ class FailureCategory(str, Enum):
 @dataclass(frozen=True)
 class FailureMemoryEntry:
     """Historical record of an experimental failure."""
+
     failure_id: str
     experiment_id: str
     category: FailureCategory
@@ -76,10 +77,14 @@ class FailureMemoryStore:
         self.failures[failure_id] = entry
         return entry
 
-    def is_known_failure_configuration(self, candidate_parameters: Dict[str, Any]) -> Tuple[bool, Optional[FailureMemoryEntry]]:
+    def is_known_failure_configuration(
+        self, candidate_parameters: Dict[str, Any]
+    ) -> Tuple[bool, Optional[FailureMemoryEntry]]:
         """Checks if a set of candidate parameters matches a known failure pattern."""
         for f in self.failures.values():
             # Check for exact parameter match or subset collision
-            if f.parameters and all(candidate_parameters.get(k) == v for k, v in f.parameters.items() if k in candidate_parameters):
+            if f.parameters and all(
+                candidate_parameters.get(k) == v for k, v in f.parameters.items() if k in candidate_parameters
+            ):
                 return True, f
         return False, None

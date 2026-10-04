@@ -1,6 +1,7 @@
 """
 Layer Classification Mapping for DocuTask Agent codebase.
 """
+
 from __future__ import annotations
 from app.platform_verification.clean_architecture.domain.models import ArchitectureLayer
 

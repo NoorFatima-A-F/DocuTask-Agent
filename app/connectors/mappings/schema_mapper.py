@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class FieldMappingRule(BaseModel):
     """Specification for mapping a source path to a target field."""
+
     target_field: str
     source_path: Optional[str] = None  # Dot-separated path, e.g. "customer.contact.email"
     default_value: Optional[Any] = None
@@ -27,6 +28,7 @@ class FieldMappingRule(BaseModel):
 
 class SchemaMappingPlan(BaseModel):
     """Declarative collection of mapping rules for transforming one schema to another."""
+
     id: str = "default_mapping"
     version: str = "1.0.0"
     source_schema_name: str = "external"

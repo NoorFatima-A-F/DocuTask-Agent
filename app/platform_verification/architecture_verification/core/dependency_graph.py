@@ -1,6 +1,7 @@
 """
 Dependency Graph Engine with Tarjan cycle detection.
 """
+
 from __future__ import annotations
 from typing import Dict, List, Set
 from app.platform_verification.architecture_verification.domain.interfaces import IDependencyGraphEngine

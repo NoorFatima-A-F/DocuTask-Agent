@@ -11,26 +11,49 @@ import tempfile
 from pathlib import Path
 
 from research_validation.goal.models import (
-    Goal, GoalType, PriorityLevel, GoalStatus, GoalConstraints,
-    ConfidenceLevel, ConfidenceThreshold, StoppingConditionType, StoppingCondition,
-    Comparator, SuccessCriterion, CapabilityCriticality, CapabilityRequirement, DependencyType, GoalDependency,
-    RiskSeverity, MissionState, MissionStateMachine
+    Goal,
+    GoalType,
+    PriorityLevel,
+    GoalStatus,
+    GoalConstraints,
+    ConfidenceLevel,
+    ConfidenceThreshold,
+    StoppingConditionType,
+    StoppingCondition,
+    Comparator,
+    SuccessCriterion,
+    CapabilityCriticality,
+    CapabilityRequirement,
+    DependencyType,
+    GoalDependency,
+    RiskSeverity,
+    MissionState,
+    MissionStateMachine,
 )
 from research_validation.goal.interfaces import (
-    SystemClock, DeterministicIdGenerator,
-    InMemoryEventBus, DefaultSystemCapabilityProvider
+    SystemClock,
+    DeterministicIdGenerator,
+    InMemoryEventBus,
+    DefaultSystemCapabilityProvider,
 )
 from research_validation.goal.repositories import (
-    InMemoryGoalRepository, InMemoryMissionRepository, SqliteGoalRepository
+    InMemoryGoalRepository,
+    InMemoryMissionRepository,
+    SqliteGoalRepository,
 )
 from research_validation.goal.services import (
-    MissionSerializer, ConstraintEngine,
-    CapabilityAnalyzer, DependencyAnalyzer, RiskAssessor, BudgetEstimator,
-    GoalValidator, MissionBuilder, GoalManager, MissionScheduler
+    MissionSerializer,
+    ConstraintEngine,
+    CapabilityAnalyzer,
+    DependencyAnalyzer,
+    RiskAssessor,
+    BudgetEstimator,
+    GoalValidator,
+    MissionBuilder,
+    GoalManager,
+    MissionScheduler,
 )
-from research_validation.goal.exceptions import (
-    InvalidStateTransitionError
-)
+from research_validation.goal.exceptions import InvalidStateTransitionError
 
 
 @pytest.fixture
@@ -73,8 +96,12 @@ def sample_goal() -> Goal:
         required_models=("layoutlm_v3",),
         capability_requirements=(
             CapabilityRequirement(capability_name="OCR", category="MODEL", criticality=CapabilityCriticality.MANDATORY),
-            CapabilityRequirement(capability_name="BENCHMARK", category="BENCHMARK", criticality=CapabilityCriticality.MANDATORY),
-            CapabilityRequirement(capability_name="STORAGE", category="STORAGE", criticality=CapabilityCriticality.MANDATORY),
+            CapabilityRequirement(
+                capability_name="BENCHMARK", category="BENCHMARK", criticality=CapabilityCriticality.MANDATORY
+            ),
+            CapabilityRequirement(
+                capability_name="STORAGE", category="STORAGE", criticality=CapabilityCriticality.MANDATORY
+            ),
         ),
         constraints=GoalConstraints(
             max_runtime_hours=12.0,
@@ -88,7 +115,7 @@ def test_goal_creation_and_cryptographic_digest(sample_goal):
     digest = sample_goal.compute_digest()
     assert len(digest) == 64
     assert isinstance(digest, str)
-    
+
     # Verify canonical dict contains required attributes
     cd = sample_goal.canonical_dict()
     assert cd["goal_id"] == "goal_ocr_eval_01"
@@ -101,7 +128,12 @@ def test_mission_fsm_lifecycle_transitions():
     assert MissionStateMachine.validate_transition(MissionState.CREATED, MissionState.VALIDATING) is True
     assert MissionStateMachine.validate_transition(MissionState.VALIDATING, MissionState.VALIDATED) is True
     assert MissionStateMachine.validate_transition(MissionState.VALIDATED, MissionState.ANALYZING_CAPABILITIES) is True
-    assert MissionStateMachine.validate_transition(MissionState.GENERATING_SUCCESS_CRITERIA, MissionState.READY_FOR_OBSERVATION) is True
+    assert (
+        MissionStateMachine.validate_transition(
+            MissionState.GENERATING_SUCCESS_CRITERIA, MissionState.READY_FOR_OBSERVATION
+        )
+        is True
+    )
     assert MissionStateMachine.validate_transition(MissionState.READY_FOR_OBSERVATION, MissionState.ACTIVE) is True
 
     # Invalid illegal transition raises exception
@@ -115,9 +147,16 @@ def test_mission_fsm_lifecycle_transitions():
 def test_goal_validator_rejection_rules():
     # 1. Goal lacking success criteria
     bad_goal_no_metrics = Goal(
-        goal_id="g_bad_1", mission_id="m_1", title="Bad Goal", description="", objective="Do research",
-        problem_statement="Unknown", goal_type=GoalType.RESEARCH, priority=PriorityLevel.NORMAL,
-        owner="USER", creation_timestamp_utc="2026-09-08T00:00:00Z",
+        goal_id="g_bad_1",
+        mission_id="m_1",
+        title="Bad Goal",
+        description="",
+        objective="Do research",
+        problem_statement="Unknown",
+        goal_type=GoalType.RESEARCH,
+        priority=PriorityLevel.NORMAL,
+        owner="USER",
+        creation_timestamp_utc="2026-09-08T00:00:00Z",
         success_metrics=(),  # EMPTY
         stopping_conditions=(StoppingCondition(StoppingConditionType.MAX_ITERATIONS, "Halt at 10"),),
     )
@@ -127,9 +166,16 @@ def test_goal_validator_rejection_rules():
 
     # 2. Goal lacking stopping conditions
     bad_goal_no_stopping = Goal(
-        goal_id="g_bad_2", mission_id="m_2", title="Bad Goal 2", description="", objective="Do research",
-        problem_statement="Unknown", goal_type=GoalType.RESEARCH, priority=PriorityLevel.NORMAL,
-        owner="USER", creation_timestamp_utc="2026-09-08T00:00:00Z",
+        goal_id="g_bad_2",
+        mission_id="m_2",
+        title="Bad Goal 2",
+        description="",
+        objective="Do research",
+        problem_statement="Unknown",
+        goal_type=GoalType.RESEARCH,
+        priority=PriorityLevel.NORMAL,
+        owner="USER",
+        creation_timestamp_utc="2026-09-08T00:00:00Z",
         success_metrics=(SuccessCriterion("f1", Comparator.GREATER_THAN, 0.9),),
         stopping_conditions=(),  # EMPTY
     )
@@ -185,7 +231,13 @@ def test_dependency_analyzer_cycle_detection():
 def test_risk_assessor_multi_dimensional(sample_goal):
     profile = RiskAssessor.assess_goal_risk(sample_goal)
     assert 0.0 <= profile.overall_risk_score <= 1.0
-    assert profile.severity in (RiskSeverity.NEGLIGIBLE, RiskSeverity.LOW, RiskSeverity.MEDIUM, RiskSeverity.HIGH, RiskSeverity.CRITICAL)
+    assert profile.severity in (
+        RiskSeverity.NEGLIGIBLE,
+        RiskSeverity.LOW,
+        RiskSeverity.MEDIUM,
+        RiskSeverity.HIGH,
+        RiskSeverity.CRITICAL,
+    )
     assert len(profile.risk_items) >= 1
     assert profile.has_blocking_risks is False
 
@@ -214,7 +266,7 @@ def test_in_memory_and_sqlite_repositories(sample_goal):
         db_file = str(Path(tmpdir) / "test_goals.db")
         sqlite_repo = SqliteGoalRepository(db_path=db_file)
         sqlite_repo.save_goal(sample_goal)
-        
+
         sq_retrieved = sqlite_repo.get_goal_by_id(sample_goal.goal_id)
         assert sq_retrieved is not None
         assert sq_retrieved.goal_id == sample_goal.goal_id

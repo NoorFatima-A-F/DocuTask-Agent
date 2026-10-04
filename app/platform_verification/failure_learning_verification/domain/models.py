@@ -1,6 +1,7 @@
 """
 Phase 3H.5.6: Enterprise Failure Learning, Root Cause Analysis & Recovery Optimization - Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Any
 from pydantic import BaseModel, Field

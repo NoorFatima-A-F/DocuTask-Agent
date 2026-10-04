@@ -53,14 +53,30 @@ class ABValidator:
         # Simulate or replay trials using strategy distribution profiles
         for i in range(sample_size):
             # Control trial
-            c_lat = max(100.0, random.gauss(control_strategy.latency_profile.mean, max(10.0, control_strategy.latency_profile.std_dev)))
-            c_cost = max(0.001, random.gauss(control_strategy.cost_profile.mean, max(0.0005, control_strategy.cost_profile.std_dev)))
-            c_conf = min(0.99, max(0.70, random.gauss(control_strategy.confidence_profile.mean, max(0.01, control_strategy.confidence_profile.std_dev))))
+            c_lat = max(
+                100.0,
+                random.gauss(
+                    control_strategy.latency_profile.mean, max(10.0, control_strategy.latency_profile.std_dev)
+                ),
+            )
+            c_cost = max(
+                0.001,
+                random.gauss(control_strategy.cost_profile.mean, max(0.0005, control_strategy.cost_profile.std_dev)),
+            )
+            c_conf = min(
+                0.99,
+                max(
+                    0.70,
+                    random.gauss(
+                        control_strategy.confidence_profile.mean, max(0.01, control_strategy.confidence_profile.std_dev)
+                    ),
+                ),
+            )
             c_retries = 1 if random.random() < control_strategy.retry_frequency else 0
-            
+
             control_trials.append(
                 TrialResult(
-                    trial_id=f"ctrl_{i+1}",
+                    trial_id=f"ctrl_{i + 1}",
                     variant="CONTROL",
                     latency_ms=round(c_lat, 2),
                     cost_usd=round(c_cost, 6),
@@ -72,14 +88,33 @@ class ABValidator:
             )
 
             # Candidate trial
-            cand_lat = max(100.0, random.gauss(candidate_strategy.latency_profile.mean, max(10.0, candidate_strategy.latency_profile.std_dev)))
-            cand_cost = max(0.001, random.gauss(candidate_strategy.cost_profile.mean, max(0.0005, candidate_strategy.cost_profile.std_dev)))
-            cand_conf = min(0.99, max(0.70, random.gauss(candidate_strategy.confidence_profile.mean, max(0.01, candidate_strategy.confidence_profile.std_dev))))
+            cand_lat = max(
+                100.0,
+                random.gauss(
+                    candidate_strategy.latency_profile.mean, max(10.0, candidate_strategy.latency_profile.std_dev)
+                ),
+            )
+            cand_cost = max(
+                0.001,
+                random.gauss(
+                    candidate_strategy.cost_profile.mean, max(0.0005, candidate_strategy.cost_profile.std_dev)
+                ),
+            )
+            cand_conf = min(
+                0.99,
+                max(
+                    0.70,
+                    random.gauss(
+                        candidate_strategy.confidence_profile.mean,
+                        max(0.01, candidate_strategy.confidence_profile.std_dev),
+                    ),
+                ),
+            )
             cand_retries = 1 if random.random() < candidate_strategy.retry_frequency else 0
 
             candidate_trials.append(
                 TrialResult(
-                    trial_id=f"cand_{i+1}",
+                    trial_id=f"cand_{i + 1}",
                     variant="CANDIDATE",
                     latency_ms=round(cand_lat, 2),
                     cost_usd=round(cand_cost, 6),
@@ -125,13 +160,19 @@ class ABValidator:
 
         if lat_comp.is_significant and lat_comp.delta_pct < -5.0:
             promotes = True
-            reasons.append(f"Statistically significant latency reduction of {abs(lat_comp.delta_pct):.1f}% (p={lat_comp.p_value:.4f})")
+            reasons.append(
+                f"Statistically significant latency reduction of {abs(lat_comp.delta_pct):.1f}% (p={lat_comp.p_value:.4f})"
+            )
         if cost_comp.is_significant and cost_comp.delta_pct < -5.0:
             promotes = True
-            reasons.append(f"Statistically significant cost savings of {abs(cost_comp.delta_pct):.1f}% (p={cost_comp.p_value:.4f})")
+            reasons.append(
+                f"Statistically significant cost savings of {abs(cost_comp.delta_pct):.1f}% (p={cost_comp.p_value:.4f})"
+            )
         if conf_comp.is_significant and conf_comp.delta_pct > 2.0:
             promotes = True
-            reasons.append(f"Statistically significant confidence improvement of {conf_comp.delta_pct:.1f}% (p={conf_comp.p_value:.4f})")
+            reasons.append(
+                f"Statistically significant confidence improvement of {conf_comp.delta_pct:.1f}% (p={conf_comp.p_value:.4f})"
+            )
         if ret_comp.is_significant and ret_comp.delta_abs < 0:
             promotes = True
             reasons.append(f"Statistically significant retry reduction (p={ret_comp.p_value:.4f})")
@@ -141,7 +182,11 @@ class ABValidator:
             promotes = False
             reasons = ["Rejected: Candidate confidence fell below safe enterprise floor (0.85)."]
 
-        verdict = "; ".join(reasons) if promotes else "Candidate did not demonstrate statistically significant improvement (p >= 0.05) over baseline."
+        verdict = (
+            "; ".join(reasons)
+            if promotes
+            else "Candidate did not demonstrate statistically significant improvement (p >= 0.05) over baseline."
+        )
 
         run = ExperimentRun(
             experiment_id=experiment_id,

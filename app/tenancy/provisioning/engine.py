@@ -30,6 +30,7 @@ from app.tenancy.teams.membership_manager import MembershipManager
 
 class ProvisioningResult(BaseModel):
     """Output artifact from automated tenant provisioning."""
+
     organization: Organization
     default_workspace: Workspace
     default_environment: Environment

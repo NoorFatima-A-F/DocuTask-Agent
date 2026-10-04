@@ -1,10 +1,12 @@
 """
 Base DDD Entity and ValueObject abstractions for the Enterprise Verification Platform.
 """
+
 from abc import ABC
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any
+
 
 @dataclass
 class BaseEntity(ABC):
@@ -19,6 +21,7 @@ class BaseEntity(ABC):
 
     def __hash__(self) -> int:
         return hash((self.__class__, self.id))
+
 
 @dataclass(frozen=True)
 class ValueObject(ABC):

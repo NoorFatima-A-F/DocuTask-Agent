@@ -1,6 +1,7 @@
 """
 3H.12.11: Recovery Safety Verifier
 """
+
 from ..domain.models import RecoverySafetyReport
 from ..domain.interfaces import IRecoverySafetyVerifier
 
@@ -18,5 +19,5 @@ class RecoverySafetyVerifier(IRecoverySafetyVerifier):
             rollback_on_persistent_failure_enabled=True,
             duplicate_processing_prevented=True,
             zero_data_corruption_guarantee=True,
-            safety_guardrails_passed=True
+            safety_guardrails_passed=True,
         )

@@ -29,7 +29,11 @@ from app.runtime.learning.events.learning_events import (
 )
 
 # Phase 13.5 Reflection Subsystem
-from app.runtime.learning.reflection.reflection_engine import ReflectionEngine, reflection_engine, MissionReflectionReport
+from app.runtime.learning.reflection.reflection_engine import (
+    ReflectionEngine,
+    reflection_engine,
+    MissionReflectionReport,
+)
 from app.runtime.learning.reflection.mission_reflector import MissionReflector, MacroKPIs
 from app.runtime.learning.reflection.planner_reflector import PlannerReflector, PlannerReflectionMetrics
 from app.runtime.learning.reflection.worker_reflector import WorkerReflector, WorkerReflectionMetrics
@@ -53,7 +57,11 @@ from app.runtime.learning.knowledge.knowledge_graph import KnowledgeGraph, knowl
 from app.runtime.learning.knowledge.knowledge_index import KnowledgeIndex, knowledge_index, SearchIndexEntry
 from app.runtime.learning.knowledge.knowledge_search import KnowledgeSearchEngine, knowledge_search_engine, SearchMatch
 from app.runtime.learning.knowledge.knowledge_versioning import KnowledgeVersioning, KnowledgeVersionRecord
-from app.runtime.learning.knowledge.knowledge_lineage import KnowledgeLineageTracker, knowledge_lineage_tracker, LineageRecord
+from app.runtime.learning.knowledge.knowledge_lineage import (
+    KnowledgeLineageTracker,
+    knowledge_lineage_tracker,
+    LineageRecord,
+)
 from app.runtime.learning.knowledge.knowledge_validator import KnowledgeValidator, KnowledgeValidationResult
 
 # Phase 13.5 Policy Subsystem
@@ -62,13 +70,29 @@ from app.runtime.learning.policy.policy_generator import PolicyGenerator, Policy
 from app.runtime.learning.policy.policy_evaluator import PolicyEvaluator, PolicySimulationResult
 from app.runtime.learning.policy.policy_comparator import PolicyComparator, PolicyComparisonReport
 from app.runtime.learning.policy.policy_validator import PolicyValidator, PolicyValidationResult
-from app.runtime.learning.policy.policy_registry import EvolutionPolicyRegistry, evolution_policy_registry, ActivePolicyEntry
+from app.runtime.learning.policy.policy_registry import (
+    EvolutionPolicyRegistry,
+    evolution_policy_registry,
+    ActivePolicyEntry,
+)
 from app.runtime.learning.policy.policy_versioning import PolicyBranchVersioner, PolicyVersionEntry
 
 # Phase 13.5 Governance Subsystem
-from app.runtime.learning.governance.learning_governance import LearningGovernanceGatekeeper, learning_governance_gatekeeper, GovernanceEvaluation
-from app.runtime.learning.governance.approval_workflow import ApprovalWorkflowManager, approval_workflow_manager, ReviewRecord
-from app.runtime.learning.governance.promotion_pipeline import PromotionPipelineManager, promotion_pipeline_manager, PromotionRecord
+from app.runtime.learning.governance.learning_governance import (
+    LearningGovernanceGatekeeper,
+    learning_governance_gatekeeper,
+    GovernanceEvaluation,
+)
+from app.runtime.learning.governance.approval_workflow import (
+    ApprovalWorkflowManager,
+    approval_workflow_manager,
+    ReviewRecord,
+)
+from app.runtime.learning.governance.promotion_pipeline import (
+    PromotionPipelineManager,
+    promotion_pipeline_manager,
+    PromotionRecord,
+)
 from app.runtime.learning.governance.rollback_manager import RollbackManager, rollback_manager, RollbackRecord
 from app.runtime.learning.governance.policy_guardrails import PolicyGuardrailsValidator, GuardrailEnforcement
 from app.runtime.learning.governance.risk_assessment import RiskAssessmentEngine, RiskScoreResult

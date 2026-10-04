@@ -34,14 +34,54 @@ class DeliberationCouncilCoordinator:
         self.voting_engine = DeliberationVotingEngine()
         self.auctioneer = VickreyTaskAuctioneer()
         self.agents: List[CouncilAgent] = [
-            CouncilAgent(agent_id="agt_exec", role_name="EXECUTIVE_AGENT", domain_objective="Global policy synthesis", voting_weight=1.5),
-            CouncilAgent(agent_id="agt_plan", role_name="PLANNING_AGENT", domain_objective="Topological search depth", voting_weight=1.0),
-            CouncilAgent(agent_id="agt_risk", role_name="RISK_AGENT", domain_objective="Zero-trust safety margins", voting_weight=1.2),
-            CouncilAgent(agent_id="agt_econ", role_name="ECONOMIC_AGENT", domain_objective="Token ROI optimization", voting_weight=1.0),
-            CouncilAgent(agent_id="agt_gov", role_name="GOVERNANCE_AGENT", domain_objective="Regulatory compliance", voting_weight=1.2),
-            CouncilAgent(agent_id="agt_learn", role_name="LEARNING_AGENT", domain_objective="Heuristic knowledge distillation", voting_weight=1.0),
-            CouncilAgent(agent_id="agt_mem", role_name="MEMORY_AGENT", domain_objective="Cross-domain transfer", voting_weight=1.0),
-            CouncilAgent(agent_id="agt_wkrs", role_name="EXECUTION_AGENT", domain_objective="Physical worker lease capacity", voting_weight=1.0),
+            CouncilAgent(
+                agent_id="agt_exec",
+                role_name="EXECUTIVE_AGENT",
+                domain_objective="Global policy synthesis",
+                voting_weight=1.5,
+            ),
+            CouncilAgent(
+                agent_id="agt_plan",
+                role_name="PLANNING_AGENT",
+                domain_objective="Topological search depth",
+                voting_weight=1.0,
+            ),
+            CouncilAgent(
+                agent_id="agt_risk",
+                role_name="RISK_AGENT",
+                domain_objective="Zero-trust safety margins",
+                voting_weight=1.2,
+            ),
+            CouncilAgent(
+                agent_id="agt_econ",
+                role_name="ECONOMIC_AGENT",
+                domain_objective="Token ROI optimization",
+                voting_weight=1.0,
+            ),
+            CouncilAgent(
+                agent_id="agt_gov",
+                role_name="GOVERNANCE_AGENT",
+                domain_objective="Regulatory compliance",
+                voting_weight=1.2,
+            ),
+            CouncilAgent(
+                agent_id="agt_learn",
+                role_name="LEARNING_AGENT",
+                domain_objective="Heuristic knowledge distillation",
+                voting_weight=1.0,
+            ),
+            CouncilAgent(
+                agent_id="agt_mem",
+                role_name="MEMORY_AGENT",
+                domain_objective="Cross-domain transfer",
+                voting_weight=1.0,
+            ),
+            CouncilAgent(
+                agent_id="agt_wkrs",
+                role_name="EXECUTION_AGENT",
+                domain_objective="Physical worker lease capacity",
+                voting_weight=1.0,
+            ),
         ]
 
     def convene_deliberation_session(

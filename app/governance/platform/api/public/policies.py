@@ -44,10 +44,7 @@ class PolicyService:
         page_size: int = 50,
     ) -> Dict[str, Any]:
         """List policies scoped to tenant."""
-        results = [
-            p for p in self._policies.values()
-            if p["tenant_id"] == ctx.tenant_id
-        ]
+        results = [p for p in self._policies.values() if p["tenant_id"] == ctx.tenant_id]
         if policy_type:
             results = [p for p in results if p.get("policy_type") == policy_type]
         if status:
@@ -71,7 +68,9 @@ class PolicyService:
             return None
         return policy
 
-    def publish_policy(self, ctx: APIRequestContext, policy_id: str, request: PolicyPublishRequest) -> Optional[Dict[str, Any]]:
+    def publish_policy(
+        self, ctx: APIRequestContext, policy_id: str, request: PolicyPublishRequest
+    ) -> Optional[Dict[str, Any]]:
         """Publish a policy, making it active."""
         policy = self.get_policy(ctx, policy_id)
         if not policy:
@@ -107,14 +106,20 @@ def handle_get_policy(ctx: APIRequestContext, path_params: Dict[str, Any]) -> Di
     policy_id = path_params["id"]
     res = policy_service.get_policy(ctx, policy_id)
     if not res:
-        return {"error": {"code": "NOT_FOUND", "message": f"Policy {policy_id} not found", "request_id": ctx.request_id}}
+        return {
+            "error": {"code": "NOT_FOUND", "message": f"Policy {policy_id} not found", "request_id": ctx.request_id}
+        }
     return res
 
 
-def handle_publish_policy(ctx: APIRequestContext, path_params: Dict[str, Any], body: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def handle_publish_policy(
+    ctx: APIRequestContext, path_params: Dict[str, Any], body: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
     policy_id = path_params["id"]
     req = PolicyPublishRequest(**(body or {}))
     res = policy_service.publish_policy(ctx, policy_id, req)
     if not res:
-        return {"error": {"code": "NOT_FOUND", "message": f"Policy {policy_id} not found", "request_id": ctx.request_id}}
+        return {
+            "error": {"code": "NOT_FOUND", "message": f"Policy {policy_id} not found", "request_id": ctx.request_id}
+        }
     return res

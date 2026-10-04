@@ -87,10 +87,7 @@ class BusinessRulesVerifier:
             "total_amount": 1045.0,
         }
 
-        passed = (
-            invoice_doc["subtotal"] == calculated_subtotal
-            and invoice_doc["total_amount"] == calculated_total
-        )
+        passed = invoice_doc["subtotal"] == calculated_subtotal and invoice_doc["total_amount"] == calculated_total
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 
         return {
@@ -158,9 +155,7 @@ class BusinessRulesVerifier:
 
     def _verify_duplicate_invoice_detection(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
-        existing_invoices = {
-            ("vendor_acme", "INV-2026-991"): {"date": "2026-09-10", "total": 1200.0}
-        }
+        existing_invoices = {("vendor_acme", "INV-2026-991"): {"date": "2026-09-10", "total": 1200.0}}
 
         # Attempt to ingest duplicate invoice from same vendor
         new_incoming = {"vendor_id": "vendor_acme", "invoice_no": "INV-2026-991", "total": 1200.0}

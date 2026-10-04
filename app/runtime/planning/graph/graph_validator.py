@@ -51,5 +51,5 @@ class GraphValidator:
                 if not parents and not children:
                     errors.append(f"Isolated disconnected node: {node.node_id} has no incoming or outgoing edges.")
 
-        is_valid = (len(errors) == 0)
+        is_valid = len(errors) == 0
         return is_valid, errors

@@ -24,7 +24,8 @@ from .models import (
 class IContinuousPerformanceVerifier(ABC):
     @property
     @abstractmethod
-    def verifier_id(self) -> str: pass
+    def verifier_id(self) -> str:
+        pass
 
     @property
     def phase_id(self) -> str:
@@ -36,67 +37,81 @@ class IContinuousPerformanceVerifier(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str: pass
+    def name(self) -> str:
+        pass
 
     @abstractmethod
-    def verify(self) -> Any: pass
+    def verify(self) -> Any:
+        pass
 
 
 class IContinuousPerformanceArchitectureVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ContinuousPerformanceArchitectureReport: pass
+    def verify(self) -> ContinuousPerformanceArchitectureReport:
+        pass
 
 
 class IPerformanceBaselineVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceBaselineReport: pass
+    def verify(self) -> PerformanceBaselineReport:
+        pass
 
 
 class IBenchmarkExecutionVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> BenchmarkExecutionReport: pass
+    def verify(self) -> BenchmarkExecutionReport:
+        pass
 
 
 class IPerformanceRegressionEngineVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceRegressionReport: pass
+    def verify(self) -> PerformanceRegressionReport:
+        pass
 
 
 class IChangeImpactAnalysisVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ChangeImpactAnalysisReport: pass
+    def verify(self) -> ChangeImpactAnalysisReport:
+        pass
 
 
 class IPerformanceQualityGatesVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceGateReport: pass
+    def verify(self) -> PerformanceGateReport:
+        pass
 
 
 class IMultiEnvironmentComparisonVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> MultiEnvironmentComparisonReport: pass
+    def verify(self) -> MultiEnvironmentComparisonReport:
+        pass
 
 
 class IPerformanceKnowledgeRepositoryVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceKnowledgeReport: pass
+    def verify(self) -> PerformanceKnowledgeReport:
+        pass
 
 
 class IPerformanceTrendAnalysisVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceTrendReport: pass
+    def verify(self) -> PerformanceTrendReport:
+        pass
 
 
 class IContinuousPerformanceDashboardVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceDashboardReport: pass
+    def verify(self) -> PerformanceDashboardReport:
+        pass
 
 
 class ICICDPerformanceIntegrationVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> CICDPerformancePipelineReport: pass
+    def verify(self) -> CICDPerformancePipelineReport:
+        pass
 
 
 class IPerformanceExperimentTrackingVerifier(IContinuousPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceExperimentReport: pass
+    def verify(self) -> PerformanceExperimentReport:
+        pass

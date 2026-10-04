@@ -99,7 +99,9 @@ async def get_plan(mission_id: str) -> MissionPlanResult:
     return plan
 
 
-@router.get("/strategies/{mission_id}", response_model=StrategyComparisonMatrix, summary="Get Strategy Comparison Matrix")
+@router.get(
+    "/strategies/{mission_id}", response_model=StrategyComparisonMatrix, summary="Get Strategy Comparison Matrix"
+)
 async def get_strategy_matrix(mission_id: str) -> StrategyComparisonMatrix:
     plan = _planning_runtime.get_plan(mission_id)
     if not plan:
@@ -107,11 +109,15 @@ async def get_strategy_matrix(mission_id: str) -> StrategyComparisonMatrix:
     return plan.selection_record.comparison_matrix
 
 
-@router.post("/counterfactuals/query", response_model=CounterfactualExplanation, summary="Evaluate Counterfactual Hypothesis")
+@router.post(
+    "/counterfactuals/query", response_model=CounterfactualExplanation, summary="Evaluate Counterfactual Hypothesis"
+)
 async def evaluate_counterfactual(req: CounterfactualQueryRequest) -> CounterfactualExplanation:
     plan = _planning_runtime.get_plan(req.mission_id)
     if not plan:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Plan for mission {req.mission_id} not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Plan for mission {req.mission_id} not found."
+        )
 
     if req.query_type == "WHAT_IF_WEIGHT_CHANGED" and req.weight_overrides:
         return _planning_runtime.counterfactual_engine.evaluate_what_if_weights(
@@ -146,7 +152,9 @@ async def evaluate_counterfactual(req: CounterfactualQueryRequest) -> Counterfac
 async def get_dag(mission_id: str) -> MutableExecutionDAG:
     dag = _planning_runtime.get_dag(mission_id)
     if not dag:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Active DAG for mission {mission_id} not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Active DAG for mission {mission_id} not found."
+        )
     return dag
 
 
@@ -154,15 +162,22 @@ async def get_dag(mission_id: str) -> MutableExecutionDAG:
 async def mutate_dag(mission_id: str, req: DAGMutateRequest) -> MutableExecutionDAG:
     dag = _planning_runtime.get_dag(mission_id)
     if not dag:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Active DAG for mission {mission_id} not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Active DAG for mission {mission_id} not found."
+        )
 
     try:
         if req.mutation_type == DAGMutationType.NODE_SPLIT:
             _planning_runtime.mutate_dag_split(mission_id, req.target_node_id, req.split_count or 2, req.rationale)
         elif req.mutation_type == DAGMutationType.NODE_REPLACE:
             if not req.new_capability_id or not req.new_provider:
-                raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="new_capability_id and new_provider required for replace.")
-            _planning_runtime.mutate_dag_replace(mission_id, req.target_node_id, req.new_capability_id, req.new_provider, req.rationale)
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="new_capability_id and new_provider required for replace.",
+                )
+            _planning_runtime.mutate_dag_replace(
+                mission_id, req.target_node_id, req.new_capability_id, req.new_provider, req.rationale
+            )
         elif req.mutation_type == DAGMutationType.NODE_CLONE:
             dag.clone_node(req.target_node_id, req.rationale)
         elif req.mutation_type == DAGMutationType.NODE_MERGE and req.merged_node_ids:
@@ -172,7 +187,9 @@ async def mutate_dag(mission_id: str, req: DAGMutateRequest) -> MutableExecution
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
-@router.post("/replan/{mission_id}", response_model=SubGraphReplanningResult, summary="Trigger Adaptive Sub-Graph Replanning")
+@router.post(
+    "/replan/{mission_id}", response_model=SubGraphReplanningResult, summary="Trigger Adaptive Sub-Graph Replanning"
+)
 async def trigger_replan(mission_id: str, req: AdaptiveReplanRequest) -> SubGraphReplanningResult:
     try:
         trigger = ReplanningTrigger(
@@ -203,7 +220,9 @@ async def acquire_lease(req: LeaseWorkerRequest) -> Optional[WorkerLease]:
         required_gpu=req.required_gpu,
     )
     if not lease:
-        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="No worker capacity available for lease.")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="No worker capacity available for lease."
+        )
     return lease
 
 
@@ -215,7 +234,9 @@ async def release_lease(lease_id: str) -> Dict[str, bool]:
     return {"released": True}
 
 
-@router.post("/evaluate/{mission_id}", response_model=PlanCalibrationMetric, summary="Evaluate Mission Outcome & Self-Calibrate")
+@router.post(
+    "/evaluate/{mission_id}", response_model=PlanCalibrationMetric, summary="Evaluate Mission Outcome & Self-Calibrate"
+)
 async def evaluate_mission(mission_id: str, req: EvaluateMissionRequest) -> PlanCalibrationMetric:
     try:
         return _planning_runtime.evaluate_mission_outcome(

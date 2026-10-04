@@ -97,7 +97,9 @@ class AIOperationsRuntime:
             proposal_type="PROMPT_REFINEMENT",
             changes={"prompt_id": candidate_prompt.prompt_id, "version": candidate_prompt.version},
             diff_summary=f"+ Optimized system prompt for {agent_id}\n+ Integrated safety and grounding reinforcement",
-            expected_quality_delta=round(experiment_record.candidate_success_rate - experiment_record.control_success_rate, 3),
+            expected_quality_delta=round(
+                experiment_record.candidate_success_rate - experiment_record.control_success_rate, 3
+            ),
         )
         proposal.experiment_id = experiment_record.experiment_id
 

@@ -54,12 +54,21 @@ class ExpectedUtilityEngine:
         w = (weights or UtilityWeights()).normalize()
 
         # Extract normalized attributes (all assumed in [0, 1])
-        acc_raw = normalized_features.get("ocr_confidence", 0.85) * 0.5 + normalized_features.get("schema_validation_score", 1.0) * 0.5
+        acc_raw = (
+            normalized_features.get("ocr_confidence", 0.85) * 0.5
+            + normalized_features.get("schema_validation_score", 1.0) * 0.5
+        )
         lat_norm = normalized_features.get("latency_p95_ms", 0.2)  # cost metric
-        cost_norm = normalized_features.get("api_cost_usd", 0.1)   # cost metric
+        cost_norm = normalized_features.get("api_cost_usd", 0.1)  # cost metric
         comp_norm = 1.0 - (normalized_features.get("compliance_flags", 0.0))
-        rel_norm = normalized_features.get("historical_success_rate", 0.95) * 0.5 + normalized_features.get("worker_reliability", 0.98) * 0.5
-        risk_norm = normalized_features.get("anomaly_score", 0.05) * 0.5 + normalized_features.get("epistemic_uncertainty", 0.1) * 0.5
+        rel_norm = (
+            normalized_features.get("historical_success_rate", 0.95) * 0.5
+            + normalized_features.get("worker_reliability", 0.98) * 0.5
+        )
+        risk_norm = (
+            normalized_features.get("anomaly_score", 0.05) * 0.5
+            + normalized_features.get("epistemic_uncertainty", 0.1) * 0.5
+        )
 
         # Transform using chosen risk profile
         lambda_param = 3.0 if risk_profile in (RiskProfile.RISK_AVERSE, RiskProfile.STRICT_ENTERPRISE) else 0.0
@@ -72,11 +81,11 @@ class ExpectedUtilityEngine:
 
         # Multi-attribute expected utility
         eu_base = (
-            w.accuracy * u_acc +
-            w.latency * u_lat +
-            w.cost * u_cost +
-            w.safety_compliance * u_safe +
-            w.reliability * u_rel
+            w.accuracy * u_acc
+            + w.latency * u_lat
+            + w.cost * u_cost
+            + w.safety_compliance * u_safe
+            + w.reliability * u_rel
         )
 
         risk_penalty = 0.2 * risk_norm if risk_profile == RiskProfile.STRICT_ENTERPRISE else 0.1 * risk_norm

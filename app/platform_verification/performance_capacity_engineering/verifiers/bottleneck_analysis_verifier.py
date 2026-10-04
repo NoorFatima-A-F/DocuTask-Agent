@@ -2,6 +2,7 @@
 3J.1.6: Bottleneck Identification & Analysis Verifier
 Analyzes symptoms, root causes, and remediation across API, Database, Queue, Worker, and AI Provider layers.
 """
+
 from typing import List
 from app.platform_verification.performance_capacity_engineering.domain.models import (
     BottleneckAnalysisReport,
@@ -25,7 +26,10 @@ class BottleneckAnalysisVerifier(IBottleneckAnalysisVerifier):
             ),
             BottleneckDiagnosticSpec(
                 subsystem="Database Layer",
-                symptoms=["Connection wait queue spikes during batch document queries", "P99 transaction latency > 180ms"],
+                symptoms=[
+                    "Connection wait queue spikes during batch document queries",
+                    "P99 transaction latency > 180ms",
+                ],
                 root_cause="Missing composite index on tasks(tenant_id, status, created_at)",
                 severity=BottleneckSeverity.HIGH,
                 remediation_recommendation="Deploy composite B-tree index and configure PgBouncer statement pooling",

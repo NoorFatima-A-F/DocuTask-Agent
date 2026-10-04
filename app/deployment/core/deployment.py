@@ -1,4 +1,5 @@
 """Deployment Domain Model."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -9,6 +10,7 @@ from .lifecycle import DeploymentStateEngine, DeploymentStatus
 
 class DeploymentStrategyType(str, Enum):
     """Supported progressive deployment strategies."""
+
     ROLLING = "ROLLING"
     BLUE_GREEN = "BLUE_GREEN"
     CANARY = "CANARY"
@@ -18,6 +20,7 @@ class DeploymentStrategyType(str, Enum):
 @dataclass
 class Deployment:
     """Represents an active or historic deployment execution."""
+
     release_id: str
     target_environment: str
     strategy: DeploymentStrategyType = DeploymentStrategyType.ROLLING
@@ -44,7 +47,12 @@ class Deployment:
     ) -> None:
         """Transitions the deployment through the lifecycle state machine."""
         self.state_engine.transition_to(target_status, reason=reason, triggered_by=triggered_by)
-        if target_status in {DeploymentStatus.ACTIVE, DeploymentStatus.FAILED, DeploymentStatus.ROLLED_BACK, DeploymentStatus.DECOMMISSIONED}:
+        if target_status in {
+            DeploymentStatus.ACTIVE,
+            DeploymentStatus.FAILED,
+            DeploymentStatus.ROLLED_BACK,
+            DeploymentStatus.DECOMMISSIONED,
+        }:
             self.completed_at = datetime.now(timezone.utc)
 
     def mark_failed(self, error: str, triggered_by: Optional[str] = "system") -> None:

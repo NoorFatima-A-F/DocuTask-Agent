@@ -82,10 +82,12 @@ def test_process_discovery_mining():
     assert procs[0].frequency > 0
 
     # Ingest synthetic logs
-    mined = disc_engine.mine_processes_from_logs([
-        {"activity": "OCR", "timestamp": "2026-09-13T10:00:00Z"},
-        {"activity": "Validation", "timestamp": "2026-09-13T10:01:00Z"},
-    ])
+    mined = disc_engine.mine_processes_from_logs(
+        [
+            {"activity": "OCR", "timestamp": "2026-09-13T10:00:00Z"},
+            {"activity": "Validation", "timestamp": "2026-09-13T10:01:00Z"},
+        ]
+    )
     assert len(mined) >= 3
 
 

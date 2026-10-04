@@ -110,7 +110,7 @@ class BoundingBox:
         inter_y_min = max(self.y_min, other.y_min)
         inter_x_max = min(self.x_max, other.x_max)
         inter_y_max = min(self.y_max, other.y_max)
-        
+
         inter_width = max(0.0, inter_x_max - inter_x_min)
         inter_height = max(0.0, inter_y_max - inter_y_min)
         inter_area = inter_width * inter_height

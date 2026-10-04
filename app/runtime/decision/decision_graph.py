@@ -57,21 +57,25 @@ class DecisionGraphBuilder:
             nodes.append(node)
 
             if d.parent_decision_id:
-                edges.append(DecisionGraphEdge(
-                    id=f"edge_{d.parent_decision_id}_{d.decision_id}",
-                    source=d.parent_decision_id,
-                    target=d.decision_id,
-                    causal_relation="INFORMS",
-                ))
+                edges.append(
+                    DecisionGraphEdge(
+                        id=f"edge_{d.parent_decision_id}_{d.decision_id}",
+                        source=d.parent_decision_id,
+                        target=d.decision_id,
+                        causal_relation="INFORMS",
+                    )
+                )
             elif idx > 0:
                 # Link sequential decisions if no explicit parent is set
                 prev_d = sorted_decisions[idx - 1]
-                edges.append(DecisionGraphEdge(
-                    id=f"edge_{prev_d.decision_id}_{d.decision_id}",
-                    source=prev_d.decision_id,
-                    target=d.decision_id,
-                    causal_relation="INFORMS",
-                ))
+                edges.append(
+                    DecisionGraphEdge(
+                        id=f"edge_{prev_d.decision_id}_{d.decision_id}",
+                        source=prev_d.decision_id,
+                        target=d.decision_id,
+                        causal_relation="INFORMS",
+                    )
+                )
             else:
                 root_id = d.decision_id
 

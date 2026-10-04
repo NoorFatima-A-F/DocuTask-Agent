@@ -8,8 +8,8 @@ from typing import Any, Dict, List, Optional
 
 
 class ObservabilityTier(str, Enum):
-    FAILED = "Failed"                                         # < 80
-    NEEDS_IMPROVEMENT = "Improvement Required"               # 80 - 89
+    FAILED = "Failed"  # < 80
+    NEEDS_IMPROVEMENT = "Improvement Required"  # 80 - 89
     PRODUCTION_MONITORING_READY = "Production Monitoring Ready"  # 90 - 94
     ENTERPRISE_OBSERVABILITY_READY = "Enterprise Observability Ready"  # 95 - 100
 
@@ -280,14 +280,14 @@ class MonitoringSecurityReport:
 
 @dataclass
 class MonitoringQualityScorecard:
-    metric_coverage_score: float       # Weight 20%
-    alert_accuracy_score: float        # Weight 20%
-    dashboard_quality_score: float     # Weight 15%
-    trace_visibility_score: float      # Weight 15%
-    incident_diagnosis_score: float    # Weight 15%
-    security_score: float              # Weight 15%
-    overall_score: float               # Composite 0 - 100
+    metric_coverage_score: float  # Weight 20%
+    alert_accuracy_score: float  # Weight 20%
+    dashboard_quality_score: float  # Weight 15%
+    trace_visibility_score: float  # Weight 15%
+    incident_diagnosis_score: float  # Weight 15%
+    security_score: float  # Weight 15%
+    overall_score: float  # Composite 0 - 100
     certification_tier: ObservabilityTier
-    certification_verdict: str         # CERTIFIED / REJECTED
+    certification_verdict: str  # CERTIFIED / REJECTED
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

@@ -1,6 +1,7 @@
 """
 3H.12.8: Circuit Breaker Verifier
 """
+
 from ..domain.models import CircuitBreakerState, CircuitBreakerReport
 from ..domain.interfaces import ICircuitBreakerVerifier
 
@@ -19,5 +20,5 @@ class CircuitBreakerVerifier(ICircuitBreakerVerifier):
             current_state=CircuitBreakerState.CLOSED,
             cascading_failures_prevented=True,
             automatic_reset_verified=True,
-            circuit_breaker_passed=True
+            circuit_breaker_passed=True,
         )

@@ -1,6 +1,7 @@
 """
 OpenAPI Schema Backward Compatibility Engine.
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List
 from app.platform_verification.api_verification.domain.interfaces import IApiCompatibilityEngine

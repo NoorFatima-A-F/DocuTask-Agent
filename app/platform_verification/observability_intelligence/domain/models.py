@@ -1,6 +1,7 @@
 """
 Phase 3I.9: Observability Intelligence, Predictive Reliability & AIOps Maturity — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -8,10 +9,10 @@ from datetime import datetime, timezone
 
 
 class PredictiveCertificationTier(str, Enum):
-    PREDICTIVE_RELIABILITY_READY = "Predictive Reliability Ready"          # 95 - 100%
-    ADVANCED_AIOPS_CAPABILITY = "Advanced AIOps Capability"                # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                          # 80 - 89.99%
-    FAILED = "Failed"                                                      # < 80%
+    PREDICTIVE_RELIABILITY_READY = "Predictive Reliability Ready"  # 95 - 100%
+    ADVANCED_AIOPS_CAPABILITY = "Advanced AIOps Capability"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 class RiskLevel(str, Enum):
@@ -28,6 +29,7 @@ class TrendDirection(str, Enum):
 
 
 # ─── 3I.9.1: AIOps Architecture Models ────────────────────────────────────────
+
 
 class AIOpsComponentSpec(BaseModel):
     layer_name: str
@@ -49,6 +51,7 @@ class AIOpsArchitectureReport(BaseModel):
 
 # ─── 3I.9.2: Operational Data Quality Models ──────────────────────────────────
 
+
 class DataQualityDimensionSpec(BaseModel):
     dimension: str  # Completeness, Accuracy, Consistency, Timeliness
     evaluated_entity: str
@@ -65,6 +68,7 @@ class OperationalDataQualityReport(BaseModel):
 
 
 # ─── 3I.9.3: Failure Prediction Models ────────────────────────────────────────
+
 
 class FailurePredictionSpec(BaseModel):
     prediction_id: str
@@ -87,6 +91,7 @@ class FailurePredictionReport(BaseModel):
 
 # ─── 3I.9.4: Capacity Forecasting Models ──────────────────────────────────────
 
+
 class CapacityForecastSpec(BaseModel):
     resource_type: str  # CPU, Memory, Worker Count, DB Storage, Queue Bandwidth
     current_utilization: str
@@ -105,6 +110,7 @@ class CapacityForecastingReport(BaseModel):
 
 # ─── 3I.9.5: Intelligent Baseline Learning Models ─────────────────────────────
 
+
 class BaselinePatternSpec(BaseModel):
     metric_name: str
     time_window: str  # Morning Peak, Afternoon Batch, Nightly Maintenance
@@ -121,6 +127,7 @@ class BehaviorBaselineReport(BaseModel):
 
 # ─── 3I.9.6: Predictive Anomaly Detection Models ──────────────────────────────
 
+
 class PredictiveAnomalySpec(BaseModel):
     signal_name: str
     observed_drift_rate: str
@@ -136,6 +143,7 @@ class PredictiveAnomalyReport(BaseModel):
 
 
 # ─── 3I.9.7: Reliability Intelligence Score Models ────────────────────────────
+
 
 class ReliabilityScoreFactorSpec(BaseModel):
     factor_name: str
@@ -154,6 +162,7 @@ class ReliabilityIntelligenceReport(BaseModel):
 
 # ─── 3I.9.8: Incident Prevention Models ────────────────────────────────────────
 
+
 class IncidentPreventionScenarioSpec(BaseModel):
     scenario_id: str
     risk_trigger: str
@@ -170,6 +179,7 @@ class IncidentPreventionReport(BaseModel):
 
 
 # ─── 3I.9.9: Deployment Intelligence Models ───────────────────────────────────
+
 
 class DeploymentRegressionMetricSpec(BaseModel):
     metric_name: str
@@ -189,6 +199,7 @@ class DeploymentIntelligenceReport(BaseModel):
 
 # ─── 3I.9.10: AI Model Reliability Monitoring Models ──────────────────────────
 
+
 class ModelReliabilityDimensionSpec(BaseModel):
     dimension: str  # Extraction Accuracy, Latency, Timeout Rate, Schema Integrity
     target_threshold: str
@@ -204,6 +215,7 @@ class AIReliabilityMonitoringReport(BaseModel):
 
 
 # ─── 3I.9.11: Continuous Optimization Models ──────────────────────────────────
+
 
 class OptimizationRecommendationSpec(BaseModel):
     optimization_id: str
@@ -222,6 +234,7 @@ class ContinuousOptimizationReport(BaseModel):
 
 # ─── 3I.9.12: AIOps Explainability Models ─────────────────────────────────────
 
+
 class ExplainableDecisionSpec(BaseModel):
     decision_id: str
     prediction: str
@@ -239,6 +252,7 @@ class AIOpsExplainabilityReport(BaseModel):
 
 # ─── 3I.9.13: AIOps Evaluation Testing Models ─────────────────────────────────
 
+
 class AIOpsValidationTestSpec(BaseModel):
     test_id: str
     scenario_injected: str
@@ -254,6 +268,7 @@ class AIOpsValidationReport(BaseModel):
 
 
 # ─── 3I.9.14 & 3I.9.15: Scoring & Certification Models ────────────────────────
+
 
 class PredictivePillarScore(BaseModel):
     pillar_name: str

@@ -64,7 +64,7 @@ class SteadyStateDetector:
         if mean_val == 0:
             return True
         variance = sum((x - mean_val) ** 2 for x in recent_samples_ns) / len(recent_samples_ns)
-        std_dev = variance ** 0.5
+        std_dev = variance**0.5
         cv = std_dev / mean_val
         return cv <= max_cv_threshold
 

@@ -11,6 +11,7 @@ from uuid import UUID
 
 class JobState(str, Enum):
     """Possible background job processing states."""
+
     QUEUED = "QUEUED"
     RUNNING = "RUNNING"
     COMPLETED = "COMPLETED"
@@ -21,6 +22,7 @@ class JobState(str, Enum):
 
 class JobType(str, Enum):
     """Types of background jobs."""
+
     DOCUMENT_PIPELINE = "DOCUMENT_PIPELINE"
     OCR_EXTRACTION = "OCR_EXTRACTION"
     AI_EXTRACTION = "AI_EXTRACTION"
@@ -29,6 +31,7 @@ class JobType(str, Enum):
 @dataclass
 class JobTask:
     """Internal memory representation of a background job task."""
+
     job_id: UUID
     document_id: UUID
     job_type: str = JobType.DOCUMENT_PIPELINE.value

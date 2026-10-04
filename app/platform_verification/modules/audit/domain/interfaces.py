@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Audit.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.audit.domain.models import AuditEntity
+
 
 class AuditRepositoryInterface(ABC):
     @abstractmethod

@@ -21,18 +21,14 @@ class ExecutionFactory:
 
     @staticmethod
     def create_execution_subsystem(
-        max_workers: int = 4,
-        scheduling_strategy: SchedulingStrategy = SchedulingStrategy.PRIORITY
+        max_workers: int = 4, scheduling_strategy: SchedulingStrategy = SchedulingStrategy.PRIORITY
     ):
         worker_pool = WorkerPool(max_workers=max_workers)
         checkpoint_mgr = CheckpointManager()
         scheduler = RuntimeScheduler(strategy=scheduling_strategy)
         tool_adapter = ExecutionToolAdapter()
         engine = ExecutionEngine(
-            worker_pool=worker_pool,
-            tool_adapter=tool_adapter,
-            checkpoint_manager=checkpoint_mgr,
-            scheduler=scheduler
+            worker_pool=worker_pool, tool_adapter=tool_adapter, checkpoint_manager=checkpoint_mgr, scheduler=scheduler
         )
         runtime = ExecutionRuntime(engine=engine)
         manager = ExecutionManager(engine=engine)

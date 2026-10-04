@@ -1,6 +1,7 @@
 """
 Tests for Async Event Loop Health (Part 3).
 """
+
 from app.platform_verification.liveness.event_loop.event_loop_monitor import (
     EventLoopMonitor,
 )

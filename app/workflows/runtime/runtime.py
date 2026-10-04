@@ -94,7 +94,11 @@ class WorkflowRuntime:
             for node in ordered_nodes:
                 # Check if paused/cancelled
                 current_rec = self.state_manager.get_execution(exec_id)
-                if current_rec and current_rec.status in (ExecutionState.PAUSED, ExecutionState.SUSPENDED, ExecutionState.CANCELLED):
+                if current_rec and current_rec.status in (
+                    ExecutionState.PAUSED,
+                    ExecutionState.SUSPENDED,
+                    ExecutionState.CANCELLED,
+                ):
                     return current_rec
 
                 # Resolve task definition
@@ -116,7 +120,9 @@ class WorkflowRuntime:
                     cond_result = DecisionEngine.evaluate_condition(cond_expr, ctx.variables)
                     self.state_manager.record_task_start(exec_id, task_def.id, task_def.name, {"condition": cond_expr})
                     self.state_manager.record_task_complete(exec_id, task_def.id, {"condition_met": cond_result})
-                    self.auditor.record_event(exec_id, "task.decision_evaluated", details={"task_id": task_def.id, "result": cond_result})
+                    self.auditor.record_event(
+                        exec_id, "task.decision_evaluated", details={"task_id": task_def.id, "result": cond_result}
+                    )
                     continue
 
                 # Handle Human Approval gates
@@ -131,11 +137,17 @@ class WorkflowRuntime:
                     if not matching_req:
                         # Check if already approved in engine
                         all_req_ids = self.approval_engine._execution_requests.get(exec_id, [])
-                        all_matching = [self.approval_engine._requests[rid] for rid in all_req_ids if self.approval_engine._requests[rid].task_id == task_def.id]
+                        all_matching = [
+                            self.approval_engine._requests[rid]
+                            for rid in all_req_ids
+                            if self.approval_engine._requests[rid].task_id == task_def.id
+                        ]
                         if all_matching and all_matching[0].status == ApprovalStatus.APPROVED:
                             req = all_matching[0]
                             self.state_manager.record_task_start(exec_id, task_def.id, task_def.name, task_def.inputs)
-                            self.state_manager.record_task_complete(exec_id, task_def.id, {"approved": True, "votes": len(req.votes)})
+                            self.state_manager.record_task_complete(
+                                exec_id, task_def.id, {"approved": True, "votes": len(req.votes)}
+                            )
                             continue
 
                         # Create approval request and suspend workflow
@@ -145,7 +157,11 @@ class WorkflowRuntime:
                             required_role=task_def.metadata.get("role", "manager"),
                         )
                         self.state_manager.update_execution_state(exec_id, ExecutionState.SUSPENDED)
-                        self.auditor.record_event(exec_id, "workflow.suspended_for_approval", details={"request_id": req.request_id, "task_id": task_def.id})
+                        self.auditor.record_event(
+                            exec_id,
+                            "workflow.suspended_for_approval",
+                            details={"request_id": req.request_id, "task_id": task_def.id},
+                        )
                         return self.state_manager.get_execution(exec_id)
                     else:
                         req = matching_req[0]
@@ -154,7 +170,9 @@ class WorkflowRuntime:
                             return self.state_manager.get_execution(exec_id)
                         elif req.status == ApprovalStatus.APPROVED:
                             self.state_manager.record_task_start(exec_id, task_def.id, task_def.name, task_def.inputs)
-                            self.state_manager.record_task_complete(exec_id, task_def.id, {"approved": True, "votes": len(req.votes)})
+                            self.state_manager.record_task_complete(
+                                exec_id, task_def.id, {"approved": True, "votes": len(req.votes)}
+                            )
                             continue
 
                 # Standard Task Execution with Retry and Timeout
@@ -211,7 +229,9 @@ class WorkflowRuntime:
 
                 # Record task complete
                 task_rec = self.state_manager.record_task_complete(execution_id, task_def.id, outputs)
-                self.auditor.record_event(execution_id, "task.completed", details={"task_id": task_def.id, "outputs": outputs})
+                self.auditor.record_event(
+                    execution_id, "task.completed", details={"task_id": task_def.id, "outputs": outputs}
+                )
 
                 # Register Saga compensation action if present
                 if task_def.compensation_action:
@@ -224,11 +244,17 @@ class WorkflowRuntime:
                 last_err = e
                 if not RetryEngine.is_retryable(e) or attempt == max_attempts:
                     self.state_manager.record_task_failure(execution_id, task_def.id, str(e))
-                    self.auditor.record_event(execution_id, "task.failed", details={"task_id": task_def.id, "error": str(e), "attempts": attempt})
+                    self.auditor.record_event(
+                        execution_id,
+                        "task.failed",
+                        details={"task_id": task_def.id, "error": str(e), "attempts": attempt},
+                    )
                     raise e
 
                 delay = RetryEngine.calculate_delay(attempt, task_def.retry_policy)
-                self.auditor.record_event(execution_id, "task.retrying", details={"task_id": task_def.id, "attempt": attempt, "delay": delay})
+                self.auditor.record_event(
+                    execution_id, "task.retrying", details={"task_id": task_def.id, "attempt": attempt, "delay": delay}
+                )
                 await asyncio.sleep(min(0.05, delay))
 
         raise last_err

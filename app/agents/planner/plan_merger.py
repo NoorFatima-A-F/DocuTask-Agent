@@ -31,7 +31,7 @@ class PlanMerger:
             nodes=combined_nodes,
             edges=combined_edges,
             entry_node_ids=base.graph.entry_node_ids,
-            exit_node_ids=plans[-1].graph.exit_node_ids
+            exit_node_ids=plans[-1].graph.exit_node_ids,
         )
 
         return Plan(
@@ -39,5 +39,5 @@ class PlanMerger:
             name="MergedPlan",
             graph=merged_graph,
             metadata=base.metadata,
-            statistics=base.statistics
+            statistics=base.statistics,
         )

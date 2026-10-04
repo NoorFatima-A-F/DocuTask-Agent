@@ -53,12 +53,14 @@ class WorkingMemory:
         return dict(self.state.accumulated_findings)
 
     def record_error(self, task_id: str, error_message: str, details: Optional[Dict[str, Any]] = None) -> None:
-        self.state.errors_encountered.append({
-            "task_id": task_id,
-            "error": error_message,
-            "details": details or {},
-            "timestamp": time.time(),
-        })
+        self.state.errors_encountered.append(
+            {
+                "task_id": task_id,
+                "error": error_message,
+                "details": details or {},
+                "timestamp": time.time(),
+            }
+        )
         self.state.last_updated = time.time()
 
     def get_errors(self) -> List[Dict[str, Any]]:

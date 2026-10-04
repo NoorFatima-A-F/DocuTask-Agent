@@ -19,6 +19,7 @@ from .models import (
 
 class IHealthSignalArchitectureVerifier(ABC):
     """Interface for verifying health signals (3H.4.1)."""
+
     @abstractmethod
     def verify_signal_architecture(self) -> HealthSignalArchitectureReport:
         pass
@@ -26,6 +27,7 @@ class IHealthSignalArchitectureVerifier(ABC):
 
 class IOperationalMetricsVerifier(ABC):
     """Interface for verifying metrics collection (3H.4.2)."""
+
     @abstractmethod
     def verify_metrics_collection(self) -> MetricsCollectionReport:
         pass
@@ -33,6 +35,7 @@ class IOperationalMetricsVerifier(ABC):
 
 class IPrometheusScrapingVerifier(ABC):
     """Interface for verifying Prometheus scraping (3H.4.3)."""
+
     @abstractmethod
     def verify_prometheus_scraping(self) -> PrometheusVerificationReport:
         pass
@@ -40,6 +43,7 @@ class IPrometheusScrapingVerifier(ABC):
 
 class IGrafanaDashboardVerifier(ABC):
     """Interface for verifying Grafana dashboards (3H.4.4)."""
+
     @abstractmethod
     def verify_dashboards(self) -> DashboardValidationReport:
         pass
@@ -47,6 +51,7 @@ class IGrafanaDashboardVerifier(ABC):
 
 class IAlertRuleVerifier(ABC):
     """Interface for verifying alert rules (3H.4.5)."""
+
     @abstractmethod
     def verify_alert_rules(self) -> AlertRuleReport:
         pass
@@ -54,6 +59,7 @@ class IAlertRuleVerifier(ABC):
 
 class IAlertAccuracyVerifier(ABC):
     """Interface for verifying alert precision and recall (3H.4.6)."""
+
     @abstractmethod
     def verify_alert_accuracy(self) -> AlertAccuracyReport:
         pass
@@ -61,6 +67,7 @@ class IAlertAccuracyVerifier(ABC):
 
 class IIncidentSignalVerifier(ABC):
     """Interface for verifying incident signal payloads (3H.4.7)."""
+
     @abstractmethod
     def verify_incident_signals(self) -> IncidentSignalReport:
         pass
@@ -68,6 +75,7 @@ class IIncidentSignalVerifier(ABC):
 
 class IAlertFatiguePreventionVerifier(ABC):
     """Interface for verifying deduplication and fatigue prevention (3H.4.8)."""
+
     @abstractmethod
     def verify_fatigue_prevention(self) -> AlertFatigueReport:
         pass
@@ -75,6 +83,7 @@ class IAlertFatiguePreventionVerifier(ABC):
 
 class IMonitoringFailureSimulator(ABC):
     """Interface for failure injection monitoring tests (3H.4.9)."""
+
     @abstractmethod
     def run_monitoring_failure_tests(self) -> MonitoringFailureTestReport:
         pass
@@ -82,6 +91,7 @@ class IMonitoringFailureSimulator(ABC):
 
 class IObservabilitySecurityAuditor(ABC):
     """Interface for observability zero-leak security audit (3H.4.10)."""
+
     @abstractmethod
     def audit_security(self) -> ObservabilitySecurityReport:
         pass
@@ -89,6 +99,7 @@ class IObservabilitySecurityAuditor(ABC):
 
 class IHealthMonitoringScorer(ABC):
     """Interface for 6-dimension weighted scoring (3H.4.11)."""
+
     @abstractmethod
     def score_observability(
         self,
@@ -108,6 +119,7 @@ class IHealthMonitoringScorer(ABC):
 
 class IHealthMonitoringEvidenceExporter(ABC):
     """Interface for exporting 10 JSON manifests to health_monitoring_verification/ (3H.4.12)."""
+
     @abstractmethod
     def export_all(
         self,

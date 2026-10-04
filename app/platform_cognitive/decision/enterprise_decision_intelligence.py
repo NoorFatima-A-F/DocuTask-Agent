@@ -2,9 +2,11 @@
 Enterprise Decision Intelligence
 Records and tracks decision objects (reasoning, alternatives, risk, confidence, expected vs. actual outcomes).
 """
+
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 from ..models.schemas import DecisionRecord
+
 
 class EnterpriseDecisionIntelligence:
     def __init__(self):
@@ -18,7 +20,7 @@ class EnterpriseDecisionIntelligence:
         alternatives: List[str],
         rationale: str,
         confidence: float,
-        expected_outcome: Dict[str, Any]
+        expected_outcome: Dict[str, Any],
     ) -> DecisionRecord:
         rec = DecisionRecord(
             tenant_id=tenant_id,
@@ -27,17 +29,13 @@ class EnterpriseDecisionIntelligence:
             alternatives_considered=alternatives,
             reasoning_rationale=rationale,
             confidence_score=confidence,
-            expected_outcome=expected_outcome
+            expected_outcome=expected_outcome,
         )
         self._decisions[rec.id] = rec
         return rec
 
     def resolve_actual_outcome(
-        self,
-        decision_id: str,
-        tenant_id: str,
-        actual_outcome: Dict[str, Any],
-        matched: bool
+        self, decision_id: str, tenant_id: str, actual_outcome: Dict[str, Any], matched: bool
     ) -> Optional[DecisionRecord]:
         rec = self._decisions.get(decision_id)
         if rec and rec.tenant_id == tenant_id:

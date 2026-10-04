@@ -125,7 +125,9 @@ class ConstraintExtractor:
             if "cost_budget_usd" in context:
                 constraints.cost_budget_usd = float(context["cost_budget_usd"])
             if "compliance_frameworks" in context:
-                constraints.compliance_frameworks = list(set(constraints.compliance_frameworks + context["compliance_frameworks"]))
+                constraints.compliance_frameworks = list(
+                    set(constraints.compliance_frameworks + context["compliance_frameworks"])
+                )
             if "require_human_review" in context:
                 constraints.require_human_review = bool(context["require_human_review"])
             if "output_format" in context:

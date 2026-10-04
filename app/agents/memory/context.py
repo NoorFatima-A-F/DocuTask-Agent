@@ -54,8 +54,4 @@ class ContextAssembler:
             else:
                 break
 
-        return ContextWindow(
-            items=selected,
-            total_tokens=accumulated_tokens,
-            token_limit=self.max_tokens
-        )
+        return ContextWindow(items=selected, total_tokens=accumulated_tokens, token_limit=self.max_tokens)

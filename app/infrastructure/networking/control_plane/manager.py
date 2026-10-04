@@ -37,7 +37,9 @@ class NetworkControlPlaneManager:
         """Check if control plane is active."""
         return self._active
 
-    def register_cluster(self, cluster_id: str, region: str, mesh_type: str = "native", metadata: Optional[Dict[str, Any]] = None) -> None:
+    def register_cluster(
+        self, cluster_id: str, region: str, mesh_type: str = "native", metadata: Optional[Dict[str, Any]] = None
+    ) -> None:
         """Register a participating cluster in the global network topology."""
         with self._lock:
             self._clusters[cluster_id] = {
@@ -62,7 +64,12 @@ class NetworkControlPlaneManager:
         with self._lock:
             return list(self._clusters.values())
 
-    def reconcile_routes(self, service_name: str, endpoints: List[NetworkEndpoint], strategy: RoutingStrategy = RoutingStrategy.ROUND_ROBIN) -> RouteRule:
+    def reconcile_routes(
+        self,
+        service_name: str,
+        endpoints: List[NetworkEndpoint],
+        strategy: RoutingStrategy = RoutingStrategy.ROUND_ROBIN,
+    ) -> RouteRule:
         """Reconcile and update routing configuration for a service."""
         with self._lock:
             existing = self.registry.get_route(service_name)

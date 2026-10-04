@@ -61,8 +61,16 @@ class ReplayPlayer:
                 self.checkpoint_manager.add_checkpoint(cp)
 
     def _update_cursor(self) -> None:
-        event_id = self.events[self._current_index].event_id if self.events and 0 <= self._current_index < len(self.events) else None
-        ts = self.events[self._current_index].timestamp if self.events and 0 <= self._current_index < len(self.events) else None
+        event_id = (
+            self.events[self._current_index].event_id
+            if self.events and 0 <= self._current_index < len(self.events)
+            else None
+        )
+        ts = (
+            self.events[self._current_index].timestamp
+            if self.events and 0 <= self._current_index < len(self.events)
+            else None
+        )
         self.cursor.update_position(self._current_index, len(self.events), event_id, ts)
 
     @property

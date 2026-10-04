@@ -18,6 +18,7 @@ from app.tenancy.core.exceptions import ComplianceViolationError
 
 class ComplianceRuleset(BaseModel):
     """Specific enforcement constraints required by a compliance profile."""
+
     profile_type: ComplianceProfileType
     require_encryption_at_rest: bool = True
     require_immutable_audit_logs: bool = True

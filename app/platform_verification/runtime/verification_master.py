@@ -2,6 +2,7 @@
 Verification Master Coordinator Singleton
 Registers standard plugins and configures default definitions.
 """
+
 from typing import List
 from app.platform_verification.core.plugin_registry import plugin_registry
 from app.platform_verification.core.lifecycle_orchestrator import lifecycle_orchestrator
@@ -12,6 +13,7 @@ from app.platform_verification.plugins.rag_eval_plugin import RAGEvaluationPlugi
 from app.platform_verification.plugins.agent_orchestration_plugin import AgentOrchestrationVerificationPlugin
 from app.platform_verification.plugins.security_compliance_plugin import SecurityCompliancePlugin
 from app.platform_verification.plugins.chaos_resilience_plugin import ChaosResiliencePlugin
+
 
 class VerificationMasterCoordinator:
     def __init__(self):
@@ -36,10 +38,14 @@ class VerificationMasterCoordinator:
                 plugin_name="ocr_verification_plugin",
                 target_subsystem="OCR_ENGINE",
                 quality_gates=[
-                    QualityGateRule(rule_id="qg-cer", metric_name="character_error_rate", operator="<=", threshold=0.02),
+                    QualityGateRule(
+                        rule_id="qg-cer", metric_name="character_error_rate", operator="<=", threshold=0.02
+                    ),
                     QualityGateRule(rule_id="qg-wer", metric_name="word_error_rate", operator="<=", threshold=0.03),
-                    QualityGateRule(rule_id="qg-iou", metric_name="table_bounding_box_iou", operator=">=", threshold=0.95)
-                ]
+                    QualityGateRule(
+                        rule_id="qg-iou", metric_name="table_bounding_box_iou", operator=">=", threshold=0.95
+                    ),
+                ],
             ),
             VerificationDefinition(
                 id="vdef-ai-ext",
@@ -49,8 +55,10 @@ class VerificationMasterCoordinator:
                 target_subsystem="AI_EXTRACTION",
                 quality_gates=[
                     QualityGateRule(rule_id="qg-f1", metric_name="field_extraction_f1", operator=">=", threshold=0.95),
-                    QualityGateRule(rule_id="qg-sentinel", metric_name="zero_fabrication_sentinel", operator="==", threshold=1.0)
-                ]
+                    QualityGateRule(
+                        rule_id="qg-sentinel", metric_name="zero_fabrication_sentinel", operator="==", threshold=1.0
+                    ),
+                ],
             ),
             VerificationDefinition(
                 id="vdef-sec-audit",
@@ -59,10 +67,14 @@ class VerificationMasterCoordinator:
                 plugin_name="security_compliance_plugin",
                 target_subsystem="SECURITY_GOVERNANCE",
                 quality_gates=[
-                    QualityGateRule(rule_id="qg-inj", metric_name="prompt_injection_resistance_rate", operator=">=", threshold=0.99),
-                    QualityGateRule(rule_id="qg-pii", metric_name="pii_redaction_accuracy", operator=">=", threshold=0.995)
-                ]
-            )
+                    QualityGateRule(
+                        rule_id="qg-inj", metric_name="prompt_injection_resistance_rate", operator=">=", threshold=0.99
+                    ),
+                    QualityGateRule(
+                        rule_id="qg-pii", metric_name="pii_redaction_accuracy", operator=">=", threshold=0.995
+                    ),
+                ],
+            ),
         ]
 
     def get_definitions(self) -> List[VerificationDefinition]:
@@ -73,5 +85,6 @@ class VerificationMasterCoordinator:
         if not definition:
             definition = self.default_definitions[0]
         return lifecycle_orchestrator.execute_verification_run(definition)
+
 
 verification_master = VerificationMasterCoordinator()

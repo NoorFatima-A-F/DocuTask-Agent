@@ -132,4 +132,3 @@ class IRuntimeLifecycle(ABC):
     @abstractmethod
     async def shutdown(self) -> None:
         raise NotImplementedError
-

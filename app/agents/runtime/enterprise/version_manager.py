@@ -11,6 +11,7 @@ from app.agents.runtime.exceptions import RuntimeKernelException
 
 class IncompatibleVersionError(RuntimeKernelException):
     """Raised when a subsystem or plugin version violates runtime compatibility rules."""
+
     pass
 
 

@@ -1,6 +1,7 @@
 """
 Phase 3H.5.6.9: Failure Learning Simulator
 """
+
 from ..domain.interfaces import IFailureLearningSimulator
 from ..domain.models import SimulationReport, ScenarioSimulationResult
 

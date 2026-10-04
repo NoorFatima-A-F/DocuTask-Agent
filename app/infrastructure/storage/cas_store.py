@@ -1,9 +1,11 @@
 """
 Content-Addressable Storage (CAS) Adapter.
 """
+
 import hashlib
 from typing import Optional, Dict
 from pathlib import Path
+
 
 class ContentAddressableStore:
     def __init__(self, base_path: Optional[Path] = None):

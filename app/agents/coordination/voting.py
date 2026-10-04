@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class AgentVote(BaseModel):
     """Vote cast by an individual agent."""
+
     voter_agent_id: UUID
     choice: str
     weight: float = Field(default=1.0, ge=0.0)
@@ -19,6 +20,7 @@ class AgentVote(BaseModel):
 
 class VotingResult(BaseModel):
     """Outcome of a voting round."""
+
     winning_choice: Optional[str]
     vote_counts: Dict[str, float]
     total_votes: int
@@ -47,8 +49,5 @@ class VotingEngine:
         has_majority = (winner_weight / total_weight) > 0.5 if total_weight > 0 else False
 
         return VotingResult(
-            winning_choice=winning_choice,
-            vote_counts=counts,
-            total_votes=len(votes),
-            has_majority=has_majority
+            winning_choice=winning_choice, vote_counts=counts, total_votes=len(votes), has_majority=has_majority
         )

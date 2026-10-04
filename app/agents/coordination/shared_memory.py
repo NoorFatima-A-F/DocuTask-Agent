@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class MemoryReference(BaseModel):
     """Pointer to a shared memory record in the Memory subsystem."""
+
     reference_id: str
     tier: str  # EPISODIC, SEMANTIC, PROCEDURAL, REFLECTION
     owner_agent_id: UUID

@@ -18,6 +18,7 @@ class RetryStrategy(str, Enum):
 
 class RetryPolicy(BaseModel):
     """Configuration for node execution retries."""
+
     strategy: RetryStrategy = Field(default=RetryStrategy.EXPONENTIAL_BACKOFF)
     max_retries: int = Field(default=3, ge=0)
     initial_delay_seconds: float = Field(default=1.0, ge=0.0)
@@ -42,10 +43,7 @@ class RetryManager:
             delay = policy.initial_delay_seconds
         else:
             # Exponential Backoff
-            delay = min(
-                policy.initial_delay_seconds * (policy.backoff_factor ** attempt),
-                policy.max_delay_seconds
-            )
+            delay = min(policy.initial_delay_seconds * (policy.backoff_factor**attempt), policy.max_delay_seconds)
 
         if policy.jitter:
             delay += random.uniform(0.0, 0.5)

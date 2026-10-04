@@ -51,64 +51,40 @@ class AlertEvidenceExporter(IAlertEvidenceExporter):
         exported_files: Dict[str, str] = {}
 
         # 1. architecture_report.json
-        exported_files["architecture_report.json"] = self._write_json(
-            "architecture_report.json", asdict(arch_rep)
-        )
+        exported_files["architecture_report.json"] = self._write_json("architecture_report.json", asdict(arch_rep))
 
         # 2. taxonomy_report.json
-        exported_files["taxonomy_report.json"] = self._write_json(
-            "taxonomy_report.json", asdict(tax_rep)
-        )
+        exported_files["taxonomy_report.json"] = self._write_json("taxonomy_report.json", asdict(tax_rep))
 
         # 3. critical_alert_report.json
-        exported_files["critical_alert_report.json"] = self._write_json(
-            "critical_alert_report.json", asdict(crit_rep)
-        )
+        exported_files["critical_alert_report.json"] = self._write_json("critical_alert_report.json", asdict(crit_rep))
 
         # 4. warning_alert_report.json
-        exported_files["warning_alert_report.json"] = self._write_json(
-            "warning_alert_report.json", asdict(warn_rep)
-        )
+        exported_files["warning_alert_report.json"] = self._write_json("warning_alert_report.json", asdict(warn_rep))
 
         # 5. condition_test_report.json
-        exported_files["condition_test_report.json"] = self._write_json(
-            "condition_test_report.json", asdict(cond_rep)
-        )
+        exported_files["condition_test_report.json"] = self._write_json("condition_test_report.json", asdict(cond_rep))
 
         # 6. severity_report.json
-        exported_files["severity_report.json"] = self._write_json(
-            "severity_report.json", asdict(sev_rep)
-        )
+        exported_files["severity_report.json"] = self._write_json("severity_report.json", asdict(sev_rep))
 
         # 7. message_quality_report.json
-        exported_files["message_quality_report.json"] = self._write_json(
-            "message_quality_report.json", asdict(msg_rep)
-        )
+        exported_files["message_quality_report.json"] = self._write_json("message_quality_report.json", asdict(msg_rep))
 
         # 8. routing_report.json
-        exported_files["routing_report.json"] = self._write_json(
-            "routing_report.json", asdict(route_rep)
-        )
+        exported_files["routing_report.json"] = self._write_json("routing_report.json", asdict(route_rep))
 
         # 9. fatigue_report.json
-        exported_files["fatigue_report.json"] = self._write_json(
-            "fatigue_report.json", asdict(fatigue_rep)
-        )
+        exported_files["fatigue_report.json"] = self._write_json("fatigue_report.json", asdict(fatigue_rep))
 
         # 10. failure_test_report.json
-        exported_files["failure_test_report.json"] = self._write_json(
-            "failure_test_report.json", asdict(fail_rep)
-        )
+        exported_files["failure_test_report.json"] = self._write_json("failure_test_report.json", asdict(fail_rep))
 
         # 11. performance_report.json
-        exported_files["performance_report.json"] = self._write_json(
-            "performance_report.json", asdict(perf_rep)
-        )
+        exported_files["performance_report.json"] = self._write_json("performance_report.json", asdict(perf_rep))
 
         # 12. certification_report.json
-        exported_files["certification_report.json"] = self._write_json(
-            "certification_report.json", asdict(scorecard)
-        )
+        exported_files["certification_report.json"] = self._write_json("certification_report.json", asdict(scorecard))
 
         # 13. metadata.json
         metadata = {

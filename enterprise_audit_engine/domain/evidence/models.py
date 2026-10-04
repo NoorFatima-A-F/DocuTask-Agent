@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field, ConfigDict
 
 class EvidenceClassification(str, Enum):
     """Strictly controlled ontology of evidence-based classifications."""
+
     VERIFIED = "VERIFIED"
     VERIFIED_BY_EXECUTION = "VERIFIED_BY_EXECUTION"
     VERIFIED_BY_STATIC_ANALYSIS = "VERIFIED_BY_STATIC_ANALYSIS"
@@ -30,15 +31,17 @@ class EvidenceClassification(str, Enum):
 
 class EvidenceConfidence(str, Enum):
     """Deterministic confidence levels based on evidence depth."""
+
     NONE = "NONE"
-    LOW = "LOW"            # Configuration only
-    MEDIUM = "MEDIUM"      # Static code analysis only
-    HIGH = "HIGH"          # Static code + automated test execution
+    LOW = "LOW"  # Configuration only
+    MEDIUM = "MEDIUM"  # Static code analysis only
+    HIGH = "HIGH"  # Static code + automated test execution
     VERY_HIGH = "VERY_HIGH"  # Runtime execution + benchmarks + telemetry logs
 
 
 class EvidenceSourceType(str, Enum):
     """The four strictly distinct sources of audit evidence."""
+
     STATIC_SOURCE_CODE = "STATIC_SOURCE_CODE"
     CONFIGURATION_FILE = "CONFIGURATION_FILE"
     RUNTIME_EXECUTION = "RUNTIME_EXECUTION"
@@ -47,6 +50,7 @@ class EvidenceSourceType(str, Enum):
 
 class EvidenceRecord(BaseModel):
     """Immutable evidence record with cryptographic fingerprint and chain of custody."""
+
     model_config = ConfigDict(frozen=True)
 
     id: str = Field(default_factory=lambda: f"EV-{uuid4().hex[:8].upper()}")
@@ -94,6 +98,7 @@ class EvidenceRecord(BaseModel):
 
 class CollectorHealthStatus(BaseModel):
     """Health and execution verification for an individual collector."""
+
     collector_name: str
     execution_attempted: bool = True
     execution_completed: bool = False
@@ -109,6 +114,7 @@ class CollectorHealthStatus(BaseModel):
 
 class AuditRunMetadata(BaseModel):
     """Audit run execution provenance and environmental fingerprint."""
+
     run_id: str = Field(default_factory=lambda: f"RUN-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}")
     timestamp_start: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     timestamp_end: Optional[str] = None
@@ -125,6 +131,7 @@ class AuditRunMetadata(BaseModel):
 
 class CollectorExecutionManifest(BaseModel):
     """Manifest of all executed collectors during an audit run."""
+
     run_id: str
     collectors: List[CollectorHealthStatus] = Field(default_factory=list)
     total_duration_ms: float = 0.0
@@ -133,24 +140,26 @@ class CollectorExecutionManifest(BaseModel):
 
 class VerificationDimension(str, Enum):
     """The 6 dimensions of the Verification Strength Model."""
-    SOURCE_INSPECTION = "SOURCE_INSPECTION"          # Weight: 20
-    AUTOMATED_TEST_EXECUTION = "AUTOMATED_TESTS"     # Weight: 20
-    RUNTIME_EXECUTION = "RUNTIME_EXECUTION"          # Weight: 25
-    SECURITY_VALIDATION = "SECURITY_VALIDATION"      # Weight: 15
-    BENCHMARK_EVIDENCE = "BENCHMARK_EVIDENCE"        # Weight: 10
-    REPRODUCIBILITY = "REPRODUCIBILITY"              # Weight: 10
+
+    SOURCE_INSPECTION = "SOURCE_INSPECTION"  # Weight: 20
+    AUTOMATED_TEST_EXECUTION = "AUTOMATED_TESTS"  # Weight: 20
+    RUNTIME_EXECUTION = "RUNTIME_EXECUTION"  # Weight: 25
+    SECURITY_VALIDATION = "SECURITY_VALIDATION"  # Weight: 15
+    BENCHMARK_EVIDENCE = "BENCHMARK_EVIDENCE"  # Weight: 10
+    REPRODUCIBILITY = "REPRODUCIBILITY"  # Weight: 10
 
 
 class VerificationScorecard(BaseModel):
     """Weighted verification strength evaluation."""
+
     subsystem: str
-    source_inspection_score: float = 0.0      # max 20
-    automated_tests_score: float = 0.0        # max 20
-    runtime_execution_score: float = 0.0      # max 25
-    security_validation_score: float = 0.0    # max 15
-    benchmark_evidence_score: float = 0.0     # max 10
-    reproducibility_score: float = 0.0        # max 10
-    total_score: float = 0.0                  # max 100
+    source_inspection_score: float = 0.0  # max 20
+    automated_tests_score: float = 0.0  # max 20
+    runtime_execution_score: float = 0.0  # max 25
+    security_validation_score: float = 0.0  # max 15
+    benchmark_evidence_score: float = 0.0  # max 10
+    reproducibility_score: float = 0.0  # max 10
+    total_score: float = 0.0  # max 100
     classification: EvidenceClassification
     confidence: EvidenceConfidence
     justification: str
@@ -158,6 +167,7 @@ class VerificationScorecard(BaseModel):
 
 class AuditFinding(BaseModel):
     """An audited finding derived strictly from verified evidence records."""
+
     finding_id: str = Field(default_factory=lambda: f"FND-{uuid4().hex[:6].upper()}")
     subsystem: str
     claim: str
@@ -172,6 +182,7 @@ class AuditFinding(BaseModel):
 
 class AuditReportManifest(BaseModel):
     """Immutable manifest of an executed evidence audit run."""
+
     run_id: str
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     metadata: Optional[AuditRunMetadata] = None

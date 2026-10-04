@@ -2,11 +2,14 @@ from typing import Dict, List, Any
 from ..domain.quality_domain import QualityGateAggregate, QualityGateEvaluated
 from app.shared_kernel import Result, Ok, get_event_bus
 
+
 class QualityGateService:
     def __init__(self, repo):
         self.repo = repo
 
-    async def evaluate_metrics(self, gate_id: str, run_id: str, metrics: Dict[str, float], rules: List[Dict[str, Any]]) -> Result[QualityGateAggregate, str]:
+    async def evaluate_metrics(
+        self, gate_id: str, run_id: str, metrics: Dict[str, float], rules: List[Dict[str, Any]]
+    ) -> Result[QualityGateAggregate, str]:
         passed = True
         blockers = []
         for r in rules:

@@ -5,6 +5,7 @@ Executes controlled regional failure simulations:
 2. Inter-Region Network Partition
 3. Cloud Provider Dependency Outage
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     ChaosOutageReport,
 )

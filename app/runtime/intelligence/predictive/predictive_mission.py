@@ -22,7 +22,7 @@ class MissionPrediction:
     mission_id: str
     document_type: str
     predicted_at: float = field(default_factory=time.time)
-    
+
     # Pre-execution Forecasts
     predicted_latency_ms: float = 1200.0
     predicted_cost_usd: float = 0.012
@@ -31,14 +31,14 @@ class MissionPrediction:
     escalation_risk_prob: float = 0.05  # [0.0, 1.0]
     expected_dag_depth: int = 3
     expected_memory_reuse_rate: float = 0.75
-    
+
     # Actual Post-execution Telemetry (populated when mission finishes)
     actual_latency_ms: Optional[float] = None
     actual_cost_usd: Optional[float] = None
     actual_confidence: Optional[float] = None
     actual_retries: Optional[int] = None
     actual_escalated: Optional[bool] = None
-    
+
     # Prediction Error Evaluation
     latency_abs_error_ms: Optional[float] = None
     cost_abs_error_usd: Optional[float] = None
@@ -87,7 +87,7 @@ class PredictiveMissionEngine:
         Calculates pre-execution predictions based on historical distributions and document heuristics.
         """
         exps = [e for e in (historical_experiences or []) if e.document_type.lower() == document_type.lower()]
-        
+
         if exps:
             base_lat = sum(e.total_latency_ms for e in exps) / len(exps)
             base_cost = sum(e.total_cost_usd for e in exps) / len(exps)

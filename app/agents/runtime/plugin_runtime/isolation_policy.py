@@ -10,16 +10,19 @@ from app.agents.runtime.exceptions import PluginValidationError
 
 class NetworkOriginDeniedError(PluginValidationError):
     """Raised when plugin attempts network access to an unauthorized origin."""
+
     pass
 
 
 class PathAccessDeniedError(PluginValidationError):
     """Raised when plugin attempts filesystem access to an unauthorized path."""
+
     pass
 
 
 class PluginIsolationPolicy(BaseModel):
     """Enforces fine-grained path and network egress boundaries."""
+
     allowed_read_paths: List[str] = Field(default_factory=list)
     allowed_write_paths: List[str] = Field(default_factory=list)
     allowed_network_hosts: List[str] = Field(default_factory=list)
@@ -54,9 +57,7 @@ class PluginIsolationPolicy(BaseModel):
         if self.allow_unrestricted_network:
             return
         if host not in self.allowed_network_hosts and host not in self.allowed_network_origins:
-            raise PluginValidationError(
-                f"Network egress violation: Host '{host}' is not in allowed_network_hosts."
-            )
+            raise PluginValidationError(f"Network egress violation: Host '{host}' is not in allowed_network_hosts.")
 
     def assert_network_origin(self, origin: str) -> None:
         if self.allow_unrestricted_network:

@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Chaos.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.chaos.domain.models import ChaosEntity
 from app.platform_verification.modules.chaos.domain.interfaces import ChaosRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageChaosUseCase:
     def __init__(self, repository: ChaosRepositoryInterface):

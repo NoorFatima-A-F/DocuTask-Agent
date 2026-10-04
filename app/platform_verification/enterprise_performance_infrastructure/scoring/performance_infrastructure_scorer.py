@@ -147,7 +147,7 @@ class PerformanceInfrastructureScorer(IPerformanceInfrastructureScorer):
 
         checks: List[CheckResult] = [
             CheckResult(
-                name=f"Quality Category: {cat.category} (Weight: {cat.weight*100:.0f}%)",
+                name=f"Quality Category: {cat.category} (Weight: {cat.weight * 100:.0f}%)",
                 passed=cat.score >= 80.0,
                 details=f"Category score {cat.score:.1f}% contributing {cat.weighted_score:.2f}% to total",
                 metrics={"score": cat.score, "weighted": cat.weighted_score},

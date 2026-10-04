@@ -12,6 +12,7 @@ import uuid
 
 class LifecyclePhase(str, Enum):
     """High-level phases in the platform lifecycle."""
+
     BOOTSTRAP = "BOOTSTRAP"
     INITIALIZATION = "INITIALIZATION"
     STARTUP = "STARTUP"
@@ -24,6 +25,7 @@ class LifecyclePhase(str, Enum):
 
 class LifecycleState(str, Enum):
     """Granular states of a managed platform component or subsystem."""
+
     UNINITIALIZED = "UNINITIALIZED"
     INITIALIZING = "INITIALIZING"
     INITIALIZED = "INITIALIZED"
@@ -38,6 +40,7 @@ class LifecycleState(str, Enum):
 @dataclass(frozen=True)
 class LifecycleTransition:
     """Record of a state transition in a component or the runtime."""
+
     transition_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     component_id: str = "runtime"
     from_state: str = "UNKNOWN"

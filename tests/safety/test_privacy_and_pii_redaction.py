@@ -14,7 +14,7 @@ def test_pii_detection_types():
     )
     matches = detector.detect(sample)
     types_found = {m.pii_type for m in matches}
-    
+
     assert PIIType.EMAIL in types_found
     assert PIIType.PHONE in types_found
     assert PIIType.SSN in types_found
@@ -27,7 +27,7 @@ def test_pii_masking():
     masker = DataMasker()
     text = "User SSN is 123-45-6789 and email is alice@corp.com"
     masked = masker.mask_text(text)
-    
+
     assert "123-45-6789" not in masked
     assert "***-**-6789" in masked
     assert "alice@corp.com" not in masked
@@ -37,7 +37,7 @@ def test_pii_masking():
 def test_pii_redaction_and_unredact():
     redactor = DataRedactor()
     text = "Please invoice bob@company.com with card 4111-2222-3333-4444"
-    
+
     # 1. Static redaction
     static_res = redactor.redact(text, pseudonymize=False)
     assert "[REDACTED_EMAIL]" in static_res.redacted_text

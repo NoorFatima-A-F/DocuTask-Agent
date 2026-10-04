@@ -1,6 +1,7 @@
 """
 Phase 3H.8: Enterprise Operational Governance, Change Management & Safe Operations — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Any
 from pydantic import BaseModel, Field
@@ -33,13 +34,14 @@ class DeploymentStrategyType(str, Enum):
 
 class GovernanceCertificationTier(str, Enum):
     ENTERPRISE_OPERATIONAL_GOVERNANCE_CERTIFIED = "Enterprise Operational Governance Certified"  # 98 - 100
-    ENTERPRISE_PRODUCTION_GOVERNANCE = "Enterprise Production Governance"                        # 95 - 97.99
-    PRODUCTION_GOVERNANCE_READY = "Production Governance Ready"                                  # 90 - 94.99
-    NEEDS_IMPROVEMENT = "Needs Improvement"                                                      # 80 - 89.99
-    FAILED = "Failed"                                                                            # < 80
+    ENTERPRISE_PRODUCTION_GOVERNANCE = "Enterprise Production Governance"  # 95 - 97.99
+    PRODUCTION_GOVERNANCE_READY = "Production Governance Ready"  # 90 - 94.99
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3H.8.1: Change Governance Models ───────────────────────────────────────
+
 
 class ChangeRequestRecord(BaseModel):
     change_id: str
@@ -66,6 +68,7 @@ class ChangeGovernanceReport(BaseModel):
 
 # ─── 3H.8.2: Configuration Change Models ────────────────────────────────────
 
+
 class ConfigurationChangeItem(BaseModel):
     config_key: str
     environment: str
@@ -88,6 +91,7 @@ class ConfigurationChangeReport(BaseModel):
 
 # ─── 3H.8.3: Deployment Safety Models ───────────────────────────────────────
 
+
 class DeploymentSafetyGate(BaseModel):
     deployment_id: str
     target_service: str
@@ -108,6 +112,7 @@ class DeploymentSafetyReport(BaseModel):
 
 
 # ─── 3H.8.4: Database Change Governance Models ──────────────────────────────
+
 
 class DatabaseMigrationRecord(BaseModel):
     migration_id: str
@@ -130,6 +135,7 @@ class DatabaseChangeReport(BaseModel):
 
 # ─── 3H.8.5: AI Model & Prompt Change Models ────────────────────────────────
 
+
 class AIModelChangeBenchmark(BaseModel):
     model_identifier: str
     prompt_version: str
@@ -149,6 +155,7 @@ class AIModelChangeReport(BaseModel):
 
 
 # ─── 3H.8.6: Operational Approval Workflow Models ───────────────────────────
+
 
 class ApprovalWorkflowRecord(BaseModel):
     workflow_id: str
@@ -170,6 +177,7 @@ class ApprovalWorkflowReport(BaseModel):
 
 # ─── 3H.8.7: Automated Rollback Verification Models ─────────────────────────
 
+
 class RollbackTriggerEvaluation(BaseModel):
     trigger_id: str
     trigger_type: str  # SLO_VIOLATION, LATENCY_SPIKE, ERROR_RATE_SPIKE, DEPENDENCY_FAILURE, HEALTH_FAILURE
@@ -188,6 +196,7 @@ class RollbackVerificationReport(BaseModel):
 
 
 # ─── 3H.8.8: Immutable Operational Audit Trail Models ───────────────────────
+
 
 class AuditLogRecord(BaseModel):
     audit_id: str
@@ -209,6 +218,7 @@ class AuditTrailReport(BaseModel):
 
 # ─── 3H.8.9: Continuous Change Verification Models ──────────────────────────
 
+
 class PostDeploymentCheck(BaseModel):
     check_name: str
     expected_standard: str
@@ -226,6 +236,7 @@ class ContinuousVerificationReport(BaseModel):
 
 
 # ─── 3H.8.10: Governance Dashboard Models ───────────────────────────────────
+
 
 class GovernanceMetricGauge(BaseModel):
     name: str
@@ -246,6 +257,7 @@ class GovernanceDashboardReport(BaseModel):
 
 
 # ─── 3H.8.11: Master Certification Scorecard Models ─────────────────────────
+
 
 class OperationalGovernancePillarScore(BaseModel):
     pillar_name: str

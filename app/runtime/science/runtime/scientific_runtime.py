@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 """
 Scientific Runtime Master Coordinator for Phase 13.12 ASD-HGCKEP.
 Unites Hypothesis Generation, Experimentation, Empirical Evidence, Statistical Validation,
@@ -35,6 +36,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class DiscoveryCycleResult:
     """Outcome report for an autonomous scientific discovery cycle."""
+
     cycle_id: str
     started_at: datetime
     completed_at: datetime
@@ -226,7 +228,10 @@ class ScientificRuntime:
                 governing_equation="Accuracy_gain = 1.0 - exp(-k * Pruning_ratio)",
                 domain=domain,
                 supporting_fact_ids=[fact.fact_id],
-                variables={"k": "Attention sensitivity coefficient", "Pruning_ratio": "Fraction of redundant tokens stripped"},
+                variables={
+                    "k": "Attention sensitivity coefficient",
+                    "Pruning_ratio": "Fraction of redundant tokens stripped",
+                },
                 confidence=0.92,
             )
             laws_created += 1
@@ -293,7 +298,11 @@ class ScientificRuntime:
                 payload=cycle_result.to_dict(),
             )
         )
-        logger.info("Scientific Discovery Cycle %s completed for domain %s", sanitize_log_input(cycle_id), sanitize_log_input(domain))
+        logger.info(
+            "Scientific Discovery Cycle %s completed for domain %s",
+            sanitize_log_input(cycle_id),
+            sanitize_log_input(domain),
+        )
         return cycle_result
 
     def get_overview(self) -> Dict[str, Any]:
@@ -337,14 +346,8 @@ class ScientificRuntime:
         publications = self.publication_engine.list_publications()
 
         validated_count = sum(1 for v in validations if v.is_statistically_significant)
-        avg_effect_size = (
-            sum(v.effect_size_cohens_d for v in validations) / len(validations)
-            if validations
-            else 0.0
-        )
-        avg_fact_conf = (
-            sum(f.confidence for f in facts) / len(facts) if facts else 0.0
-        )
+        avg_effect_size = sum(v.effect_size_cohens_d for v in validations) / len(validations) if validations else 0.0
+        avg_fact_conf = sum(f.confidence for f in facts) / len(facts) if facts else 0.0
 
         return {
             "scientific_maturity_score": 0.94,
@@ -354,5 +357,7 @@ class ScientificRuntime:
             "peer_reviewed_publications": len(publications),
             "mean_effect_size_cohens_d": round(avg_effect_size, 3),
             "average_knowledge_confidence": round(avg_fact_conf, 3),
-            "total_active_hypotheses": sum(1 for h in hypotheses if h.status.value in ["proposed", "testing", "refining"]),
+            "total_active_hypotheses": sum(
+                1 for h in hypotheses if h.status.value in ["proposed", "testing", "refining"]
+            ),
         }

@@ -25,12 +25,48 @@ class ObservabilityIntegrationVerifier(IObservabilityIntegrationVerifier):
 
     def verify(self) -> ObservabilityIntegrationReport:
         links = [
-            ObservabilityTelemetryLink(subsystem="APIGateway", logs_correlated=True, metrics_emitted=True, traces_propagated=True, context_loss_detected=False),
-            ObservabilityTelemetryLink(subsystem="AgentRuntime", logs_correlated=True, metrics_emitted=True, traces_propagated=True, context_loss_detected=False),
-            ObservabilityTelemetryLink(subsystem="AsyncWorkerPool", logs_correlated=True, metrics_emitted=True, traces_propagated=True, context_loss_detected=False),
-            ObservabilityTelemetryLink(subsystem="KnowledgeVectorStore", logs_correlated=True, metrics_emitted=True, traces_propagated=True, context_loss_detected=False),
-            ObservabilityTelemetryLink(subsystem="MemorySystem", logs_correlated=True, metrics_emitted=True, traces_propagated=True, context_loss_detected=False),
-            ObservabilityTelemetryLink(subsystem="PostgreSQLDatabase", logs_correlated=True, metrics_emitted=True, traces_propagated=True, context_loss_detected=False),
+            ObservabilityTelemetryLink(
+                subsystem="APIGateway",
+                logs_correlated=True,
+                metrics_emitted=True,
+                traces_propagated=True,
+                context_loss_detected=False,
+            ),
+            ObservabilityTelemetryLink(
+                subsystem="AgentRuntime",
+                logs_correlated=True,
+                metrics_emitted=True,
+                traces_propagated=True,
+                context_loss_detected=False,
+            ),
+            ObservabilityTelemetryLink(
+                subsystem="AsyncWorkerPool",
+                logs_correlated=True,
+                metrics_emitted=True,
+                traces_propagated=True,
+                context_loss_detected=False,
+            ),
+            ObservabilityTelemetryLink(
+                subsystem="KnowledgeVectorStore",
+                logs_correlated=True,
+                metrics_emitted=True,
+                traces_propagated=True,
+                context_loss_detected=False,
+            ),
+            ObservabilityTelemetryLink(
+                subsystem="MemorySystem",
+                logs_correlated=True,
+                metrics_emitted=True,
+                traces_propagated=True,
+                context_loss_detected=False,
+            ),
+            ObservabilityTelemetryLink(
+                subsystem="PostgreSQLDatabase",
+                logs_correlated=True,
+                metrics_emitted=True,
+                traces_propagated=True,
+                context_loss_detected=False,
+            ),
         ]
 
         checks = [

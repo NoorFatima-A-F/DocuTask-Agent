@@ -87,7 +87,11 @@ class ExecutionSimulationEngine:
             ExecutionEvent(
                 event_type=ExecutionEventType.SIMULATION_STARTED,
                 source="simulation_engine",
-                payload={"simulation_id": sim_id, "workflow_id": workflow.workflow_id, "steps_count": len(workflow.steps)},
+                payload={
+                    "simulation_id": sim_id,
+                    "workflow_id": workflow.workflow_id,
+                    "steps_count": len(workflow.steps),
+                },
             )
         )
 
@@ -104,25 +108,47 @@ class ExecutionSimulationEngine:
             sim_output = {}
 
             if "github" in step.tool_id:
-                mutations.append(f"Create PR branch and draft pull request in {step.inputs.get('repo', 'enterprise-corp/core-api')}")
-                sim_output = {"pr_number": 1042, "pr_url": f"https://github.com/{step.inputs.get('repo', 'enterprise-corp/core-api')}/pull/1042", "state": "open"}
+                mutations.append(
+                    f"Create PR branch and draft pull request in {step.inputs.get('repo', 'enterprise-corp/core-api')}"
+                )
+                sim_output = {
+                    "pr_number": 1042,
+                    "pr_url": f"https://github.com/{step.inputs.get('repo', 'enterprise-corp/core-api')}/pull/1042",
+                    "state": "open",
+                }
                 cost = 0.0005
             elif "k8s" in step.tool_id:
-                mutations.append(f"Modify Kubernetes deployment {step.inputs.get('deployment_name', 'app')} replicas to {step.inputs.get('replicas', 1)}")
-                sim_output = {"namespace": step.inputs.get("namespace", "production"), "deployment": step.inputs.get("deployment_name", "app"), "new_replicas": step.inputs.get("replicas", 2)}
+                mutations.append(
+                    f"Modify Kubernetes deployment {step.inputs.get('deployment_name', 'app')} replicas to {step.inputs.get('replicas', 1)}"
+                )
+                sim_output = {
+                    "namespace": step.inputs.get("namespace", "production"),
+                    "deployment": step.inputs.get("deployment_name", "app"),
+                    "new_replicas": step.inputs.get("replicas", 2),
+                }
                 cost = 0.005
             elif "postgres" in step.tool_id or "database" in step.tool_id:
                 mutations.append(f"Execute query against shadow database schema: {step.inputs.get('query', '')[:60]}")
-                sim_output = {"rows_affected": 3, "data": [{"id": 1, "status": "simulated_row"}], "execution_time_ms": 14.2}
+                sim_output = {
+                    "rows_affected": 3,
+                    "data": [{"id": 1, "status": "simulated_row"}],
+                    "execution_time_ms": 14.2,
+                }
                 cost = 0.002
             elif "stripe" in step.tool_id:
                 amount = step.inputs.get("amount_cents", 1000)
-                mutations.append(f"Create test invoice for customer {step.inputs.get('customer_id')} for ${amount/100:.2f}")
+                mutations.append(
+                    f"Create test invoice for customer {step.inputs.get('customer_id')} for ${amount / 100:.2f}"
+                )
                 sim_output = {"invoice_id": f"in_test_{uuid.uuid4().hex[:8]}", "status": "draft", "total_cents": amount}
                 cost = 0.01
             elif "browser" in step.tool_id or "playwright" in step.tool_id:
                 mutations.append(f"Headless sandbox navigation to {step.inputs.get('url')}")
-                sim_output = {"status_code": 200, "page_title": "Simulated Web View", "extracted_text": "Sample verified DOM payload"}
+                sim_output = {
+                    "status_code": 200,
+                    "page_title": "Simulated Web View",
+                    "extracted_text": "Sample verified DOM payload",
+                }
                 cost = 0.003
             else:
                 mutations.append(f"Universal tool call {step.tool_id}")
@@ -173,7 +199,12 @@ class ExecutionSimulationEngine:
             ExecutionEvent(
                 event_type=ExecutionEventType.SIMULATION_CONCLUDED,
                 source="simulation_engine",
-                payload={"simulation_id": sim_id, "blast_scope": blast_scope, "cost_usd": total_cost, "passed": report.simulation_passed},
+                payload={
+                    "simulation_id": sim_id,
+                    "blast_scope": blast_scope,
+                    "cost_usd": total_cost,
+                    "passed": report.simulation_passed,
+                },
             )
         )
 

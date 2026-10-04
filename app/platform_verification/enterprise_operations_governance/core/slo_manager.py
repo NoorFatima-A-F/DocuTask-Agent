@@ -81,7 +81,11 @@ class SLOManager(ISLOManager, IErrorBudgetManager):
         recommendation = (
             "Deployments permitted (Healthy Error Budget: > 90% remaining)"
             if remaining_pct > 50.0
-            else ("Deployments under scrutiny: Freeze risky non-critical migrations" if not exhausted else "DEPLOYMENT FREEZE ACTIVE: Budget Exhausted")
+            else (
+                "Deployments under scrutiny: Freeze risky non-critical migrations"
+                if not exhausted
+                else "DEPLOYMENT FREEZE ACTIVE: Budget Exhausted"
+            )
         )
 
         return ErrorBudgetReport(

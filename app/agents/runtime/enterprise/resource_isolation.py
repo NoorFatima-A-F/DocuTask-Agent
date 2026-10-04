@@ -10,6 +10,7 @@ from app.agents.runtime.exceptions import RuntimeKernelException
 
 class BulkheadCapacityExceededError(RuntimeKernelException):
     """Raised when a bulkhead compartment's concurrency limit is reached."""
+
     pass
 
 

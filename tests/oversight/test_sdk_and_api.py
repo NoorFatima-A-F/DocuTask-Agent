@@ -39,7 +39,9 @@ def test_oversight_sdk_flow():
         email="comp@example.com",
         department="Audit",
         roles=["compliance_officer"],
-        authority=ReviewerAuthority(max_financial_limit=100000.0, authorized_risk_levels=["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
+        authority=ReviewerAuthority(
+            max_financial_limit=100000.0, authorized_risk_levels=["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+        ),
     )
     reviewer2 = Reviewer(
         user_id="usr_secops",
@@ -47,7 +49,9 @@ def test_oversight_sdk_flow():
         email="secops@example.com",
         department="Security",
         roles=["secops_lead"],
-        authority=ReviewerAuthority(max_financial_limit=100000.0, authorized_risk_levels=["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
+        authority=ReviewerAuthority(
+            max_financial_limit=100000.0, authorized_risk_levels=["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+        ),
     )
     engine.assignment_engine.register_reviewer(reviewer1)
     engine.assignment_engine.register_reviewer(reviewer2)

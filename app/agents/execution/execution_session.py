@@ -16,6 +16,7 @@ class ExecutionSession(BaseModel):
     Stateful Execution Session Aggregate Root.
     Tracks execution identity, lifecycle state, plan reference, metadata, and final outputs.
     """
+
     identity: ExecutionIdentity
     plan: Plan
     context: RuntimeContext = Field(default_factory=RuntimeContext)

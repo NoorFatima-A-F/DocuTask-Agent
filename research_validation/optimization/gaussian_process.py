@@ -29,7 +29,7 @@ class GaussianProcessRegressor:
 
     def _kernel(self, x1: float, x2: float) -> float:
         sq_dist = (x1 - x2) ** 2
-        return (self.sigma_f ** 2) * math.exp(-sq_dist / (2.0 * (self.length_scale ** 2)))
+        return (self.sigma_f**2) * math.exp(-sq_dist / (2.0 * (self.length_scale**2)))
 
     def fit(self, X: List[float], y: List[float]) -> None:
         """Fit training data points."""
@@ -42,7 +42,7 @@ class GaussianProcessRegressor:
         """
         n = len(self.X_train)
         if n == 0:
-            return 0.0, self.sigma_f ** 2
+            return 0.0, self.sigma_f**2
 
         # 1. Compute kernel vector k_star between x and training points
         [self._kernel(x, xi) for xi in self.X_train]
@@ -59,11 +59,14 @@ class GaussianProcessRegressor:
 
         if tot_w < 1e-8:
             mu = sum(self.y_train) / n
-            var = self.sigma_f ** 2
+            var = self.sigma_f**2
         else:
             mu = sum(w * y for w, y in zip(weights, self.y_train)) / tot_w
             # Variance decreases near observed points
             closest_dist = min(abs(x - xi) for xi in self.X_train)
-            var = min(self.sigma_f ** 2, self.noise_var + (1.0 - math.exp(-closest_dist / self.length_scale)) * (self.sigma_f ** 2))
+            var = min(
+                self.sigma_f**2,
+                self.noise_var + (1.0 - math.exp(-closest_dist / self.length_scale)) * (self.sigma_f**2),
+            )
 
         return mu, max(1e-6, var)

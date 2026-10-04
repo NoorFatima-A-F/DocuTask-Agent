@@ -11,6 +11,7 @@ from app.data_governance.catalog.indexing import CatalogIndex
 
 class CatalogSearchResult(BaseModel):
     """Catalog search response item."""
+
     asset_id: str
     name: str
     asset_type: AssetType

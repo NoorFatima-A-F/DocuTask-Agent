@@ -62,7 +62,11 @@ def test_goal_hierarchy_and_htn_decomposition():
 
     # HTN decomposition
     subtasks = [
-        {"title": "Implement Zero-Copy Ring Buffers", "estimated_cost_usd": 2000.0, "expected_latency_reduction_pct": 14.0},
+        {
+            "title": "Implement Zero-Copy Ring Buffers",
+            "estimated_cost_usd": 2000.0,
+            "expected_latency_reduction_pct": 14.0,
+        },
         {"title": "Pre-Warm GPU Tensor Cache", "estimated_cost_usd": 3000.0, "expected_latency_reduction_pct": 20.0},
     ]
     subgoals = engine.decompose_goal(root.goal_id, subtasks)
@@ -76,8 +80,12 @@ def test_goal_evolution_reprioritization_and_conflicts():
     # Create conflicting goals
     g1 = engine.create_goal(title="Goal 1 Lock Pipeline", description="Hold global lock")
     g2 = engine.create_goal(title="Goal 2 Lock Pipeline", description="Hold global lock")
-    g1.dependencies.append(GoalDependency(source_goal_id=g1.goal_id, target_goal_id=g2.goal_id, dependency_type="BLOCKING"))
-    g2.dependencies.append(GoalDependency(source_goal_id=g2.goal_id, target_goal_id=g1.goal_id, dependency_type="BLOCKING"))
+    g1.dependencies.append(
+        GoalDependency(source_goal_id=g1.goal_id, target_goal_id=g2.goal_id, dependency_type="BLOCKING")
+    )
+    g2.dependencies.append(
+        GoalDependency(source_goal_id=g2.goal_id, target_goal_id=g1.goal_id, dependency_type="BLOCKING")
+    )
 
     conflicts = engine.detect_conflicts()
     assert len(conflicts) >= 1
@@ -112,7 +120,12 @@ def test_mission_portfolio_pareto_ranking():
 
 def test_strategic_roadmap_generation_all_horizons():
     engine = RoadmapEngine()
-    for horizon in [StrategicHorizon.DAYS_30, StrategicHorizon.DAYS_90, StrategicHorizon.DAYS_180, StrategicHorizon.DAYS_365]:
+    for horizon in [
+        StrategicHorizon.DAYS_30,
+        StrategicHorizon.DAYS_90,
+        StrategicHorizon.DAYS_180,
+        StrategicHorizon.DAYS_365,
+    ]:
         r = engine.get_roadmap(horizon)
         assert r is not None
         assert r["milestone_count"] >= 1
@@ -125,7 +138,12 @@ def test_strategic_roadmap_generation_all_horizons():
         theme="Multi-Region Swarm Federation",
         milestones_spec=[
             {"title": "Deploy EU Cluster", "target_day_offset": 30, "duration_days": 10},
-            {"title": "Federate Memory Ledgers", "target_day_offset": 60, "duration_days": 15, "dependency_ids": ["ms-1"]},
+            {
+                "title": "Federate Memory Ledgers",
+                "target_day_offset": 60,
+                "duration_days": 15,
+                "dependency_ids": ["ms-1"],
+            },
         ],
     )
     assert custom.roadmap_id is not None
@@ -165,7 +183,12 @@ def test_multi_swarm_resource_negotiation_nash_equilibrium():
     engine = ResourceNegotiationEngine()
     proposals = [
         {"swarm_id": "swarm-extraction", "quantity_requested": 30.0, "bid_utility": 0.95, "disagreement_point": 0.2},
-        {"swarm_id": "swarm-classification", "quantity_requested": 25.0, "bid_utility": 0.90, "disagreement_point": 0.2},
+        {
+            "swarm_id": "swarm-classification",
+            "quantity_requested": 25.0,
+            "bid_utility": 0.90,
+            "disagreement_point": 0.2,
+        },
         {"swarm_id": "swarm-governance", "quantity_requested": 15.0, "bid_utility": 0.92, "disagreement_point": 0.3},
     ]
     session = engine.negotiate_resources(
@@ -229,11 +252,23 @@ def test_decision_engine_mcda_ranking():
     candidates = [
         {
             "name": "Candidate A: Distributed Speculative Caching",
-            "criteria_scores": {"roi_multiplier": 4.0, "latency_reduction_pct": 30.0, "governance_compliance": 0.99, "cost_efficiency": 0.90, "risk_safety": 0.95},
+            "criteria_scores": {
+                "roi_multiplier": 4.0,
+                "latency_reduction_pct": 30.0,
+                "governance_compliance": 0.99,
+                "cost_efficiency": 0.90,
+                "risk_safety": 0.95,
+            },
         },
         {
             "name": "Candidate B: Over-Provision Compute Nodes",
-            "criteria_scores": {"roi_multiplier": 2.0, "latency_reduction_pct": 18.0, "governance_compliance": 0.90, "cost_efficiency": 0.50, "risk_safety": 0.85},
+            "criteria_scores": {
+                "roi_multiplier": 2.0,
+                "latency_reduction_pct": 18.0,
+                "governance_compliance": 0.90,
+                "cost_efficiency": 0.50,
+                "risk_safety": 0.85,
+            },
         },
     ]
     ranking = engine.rank_candidates(
@@ -272,25 +307,31 @@ def test_rest_api_strategy_endpoints(client):
     assert isinstance(res.json(), list)
 
     # 3. Create Goal
-    res = client.post("/api/v1/strategy/create-goal", json={
-        "title": "API Test Strategic Goal",
-        "description": "Created via automated test",
-        "priority": "HIGH",
-        "horizon": "DAYS_90",
-        "value_type": "EFFICIENCY_GAIN",
-        "estimated_cost_usd": 1500.0,
-        "expected_latency_reduction_pct": 15.0,
-        "tags": ["test", "api"],
-    })
+    res = client.post(
+        "/api/v1/strategy/create-goal",
+        json={
+            "title": "API Test Strategic Goal",
+            "description": "Created via automated test",
+            "priority": "HIGH",
+            "horizon": "DAYS_90",
+            "value_type": "EFFICIENCY_GAIN",
+            "estimated_cost_usd": 1500.0,
+            "expected_latency_reduction_pct": 15.0,
+            "tags": ["test", "api"],
+        },
+    )
     assert res.status_code == 200
     created_goal = res.json()
     assert created_goal["title"] == "API Test Strategic Goal"
 
     # 4. Decompose Goal
-    res = client.post("/api/v1/strategy/decompose-goal", json={
-        "goal_id": created_goal["goal_id"],
-        "subtasks": [{"title": "Subtask 1", "estimated_cost_usd": 750.0}],
-    })
+    res = client.post(
+        "/api/v1/strategy/decompose-goal",
+        json={
+            "goal_id": created_goal["goal_id"],
+            "subtasks": [{"title": "Subtask 1", "estimated_cost_usd": 750.0}],
+        },
+    )
     assert res.status_code == 200
     assert len(res.json()) == 1
 
@@ -341,35 +382,44 @@ def test_rest_api_strategy_endpoints(client):
     assert res.status_code == 200
 
     # 14. Simulate
-    res = client.post("/api/v1/strategy/simulate", json={
-        "name": "API Test Scenario",
-        "horizon": "DAYS_90",
-        "budget_delta_usd": 2000.0,
-        "worker_scale_delta": 4,
-        "cache_hit_rate_pct": 85.0,
-        "traffic_growth_pct": 100.0,
-    })
+    res = client.post(
+        "/api/v1/strategy/simulate",
+        json={
+            "name": "API Test Scenario",
+            "horizon": "DAYS_90",
+            "budget_delta_usd": 2000.0,
+            "worker_scale_delta": 4,
+            "cache_hit_rate_pct": 85.0,
+            "traffic_growth_pct": 100.0,
+        },
+    )
     assert res.status_code == 200
     assert "expected_roi_multiplier" in res.json()
 
     # 15. Negotiate
-    res = client.post("/api/v1/strategy/negotiate", json={
-        "resource_type": "GPU_VRAM_GB",
-        "total_capacity": 48.0,
-        "proposals": [
-            {"swarm_id": "swarm-a", "quantity_requested": 24.0, "bid_utility": 0.9},
-            {"swarm_id": "swarm-b", "quantity_requested": 24.0, "bid_utility": 0.85},
-        ],
-    })
+    res = client.post(
+        "/api/v1/strategy/negotiate",
+        json={
+            "resource_type": "GPU_VRAM_GB",
+            "total_capacity": 48.0,
+            "proposals": [
+                {"swarm_id": "swarm-a", "quantity_requested": 24.0, "bid_utility": 0.9},
+                {"swarm_id": "swarm-b", "quantity_requested": 24.0, "bid_utility": 0.85},
+            ],
+        },
+    )
     assert res.status_code == 200
     assert res.json()["converged"] is True
 
     # 16. Approve Decision
     dec_id = exec_data["decisions"][0]["decision_id"]
-    res = client.post("/api/v1/strategy/approve", json={
-        "decision_id": dec_id,
-        "approver_key": "cso_test_key",
-    })
+    res = client.post(
+        "/api/v1/strategy/approve",
+        json={
+            "decision_id": dec_id,
+            "approver_key": "cso_test_key",
+        },
+    )
     assert res.status_code == 200
     assert res.json()["status"] == "APPROVED"
 
@@ -379,23 +429,32 @@ def test_rest_api_strategy_endpoints(client):
     assert "execution_id" in res.json()
 
     # 18. Archive Goal
-    res = client.post("/api/v1/strategy/archive-goal", json={
-        "goal_id": created_goal["goal_id"],
-        "reason": "Test completion",
-    })
+    res = client.post(
+        "/api/v1/strategy/archive-goal",
+        json={
+            "goal_id": created_goal["goal_id"],
+            "reason": "Test completion",
+        },
+    )
     assert res.status_code == 200
     assert res.json()["status"] == "ARCHIVED"
 
 
 def test_strategy_error_handling_and_not_found(client):
-    res = client.post("/api/v1/strategy/archive-goal", json={
-        "goal_id": "goal-non-existent-999",
-        "reason": "Invalid",
-    })
+    res = client.post(
+        "/api/v1/strategy/archive-goal",
+        json={
+            "goal_id": "goal-non-existent-999",
+            "reason": "Invalid",
+        },
+    )
     assert res.status_code == 404
 
-    res = client.post("/api/v1/strategy/approve", json={
-        "decision_id": "dec-non-existent-999",
-        "approver_key": "test",
-    })
+    res = client.post(
+        "/api/v1/strategy/approve",
+        json={
+            "decision_id": "dec-non-existent-999",
+            "approver_key": "test",
+        },
+    )
     assert res.status_code == 404

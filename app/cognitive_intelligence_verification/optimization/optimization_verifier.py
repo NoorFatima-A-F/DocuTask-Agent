@@ -110,7 +110,11 @@ class OptimizationVerifier:
             passed=passed,
             message=f"Multi-tier intelligent model routing reduced aggregate compute costs by {savings_pct:.1f}%",
             execution_time_ms=t_ms,
-            details={"baseline_cost": baseline_cost_per_1000, "routed_cost": routed_cost_per_1000, "savings_pct": savings_pct},
+            details={
+                "baseline_cost": baseline_cost_per_1000,
+                "routed_cost": routed_cost_per_1000,
+                "savings_pct": savings_pct,
+            },
         )
 
     def _verify_latency_reduction(self) -> AssertionResult:

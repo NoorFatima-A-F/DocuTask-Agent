@@ -18,9 +18,9 @@ PerformanceVerificationStatus = VerificationStatus
 
 class EnterprisePerformanceTier(str, Enum):
     ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Engineering Ready"  # 95-100
-    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"              # 90-94.99
-    OPTIMIZATION_REQUIRED = "Optimization Required"                            # 80-89.99
-    FAILED = "Failed"                                                          # <80
+    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"  # 90-94.99
+    OPTIMIZATION_REQUIRED = "Optimization Required"  # 80-89.99
+    FAILED = "Failed"  # <80
 
 
 CertificationTier = EnterprisePerformanceTier
@@ -47,6 +47,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3J.7.1: Performance Architecture Profiling Models ──────────────────────
 
+
 class ServiceDependency(BaseModel):
     source: str
     target: str
@@ -65,8 +66,9 @@ class PerformanceArchitectureReport(BaseVerificationReport):
 
 # ─── 3J.7.2: Resource Saturation Analysis Models ────────────────────────────
 
+
 class ResourceSaturationMetric(BaseModel):
-    resource_type: str          # CPU, Memory, Disk, Network
+    resource_type: str  # CPU, Memory, Disk, Network
     current_utilization_pct: float
     saturation_threshold_pct: float
     headroom_pct: float
@@ -85,8 +87,9 @@ class ResourceSaturationReport(BaseVerificationReport):
 
 # ─── 3J.7.3: Application-Level Bottleneck Models ────────────────────────────
 
+
 class ApplicationBottleneck(BaseModel):
-    layer: str                  # API, Agent Runtime, Worker
+    layer: str  # API, Agent Runtime, Worker
     metric_name: str
     observed_value: float
     threshold: float
@@ -103,6 +106,7 @@ class ApplicationBottleneckReport(BaseVerificationReport):
 
 
 # ─── 3J.7.4: Database Bottleneck Models ─────────────────────────────────────
+
 
 class SlowQuery(BaseModel):
     query_id: str
@@ -125,6 +129,7 @@ class DatabaseBottleneckReport(BaseVerificationReport):
 
 # ─── 3J.7.5: Queue Bottleneck Models ────────────────────────────────────────
 
+
 class QueueBottleneckReport(BaseVerificationReport):
     report_title: str = "Queue Bottleneck Analysis Report"
     queue_depth_current: int = 0
@@ -136,6 +141,7 @@ class QueueBottleneckReport(BaseVerificationReport):
 
 
 # ─── 3J.7.6: Worker Capacity Modeling Models ────────────────────────────────
+
 
 class WorkerCapacityModel(BaseModel):
     single_worker_throughput_dpm: float
@@ -155,6 +161,7 @@ class WorkerCapacityReport(BaseVerificationReport):
 
 
 # ─── 3J.7.7: AI Provider Performance Models ─────────────────────────────────
+
 
 class AIProviderMetric(BaseModel):
     provider_name: str
@@ -176,6 +183,7 @@ class AIProviderPerformanceReport(BaseVerificationReport):
 
 # ─── 3J.7.8: Performance Regression Detection Models ────────────────────────
 
+
 class RegressionComparison(BaseModel):
     metric_name: str
     baseline_value: float
@@ -196,6 +204,7 @@ class PerformanceRegressionReport(BaseVerificationReport):
 
 # ─── 3J.7.9: Capacity Boundary Discovery Models ─────────────────────────────
 
+
 class CapacityBoundaryStage(BaseModel):
     concurrent_users: int
     p95_latency_ms: float
@@ -203,7 +212,7 @@ class CapacityBoundaryStage(BaseModel):
     cpu_pct: float
     memory_pct: float
     queue_size: int
-    zone: str            # Normal, Warning, Failure
+    zone: str  # Normal, Warning, Failure
 
 
 class CapacityBoundaryReport(BaseVerificationReport):
@@ -217,11 +226,12 @@ class CapacityBoundaryReport(BaseVerificationReport):
 
 # ─── 3J.7.10: Performance Optimization Recommendations Models ───────────────
 
+
 class OptimizationRecommendation(BaseModel):
     issue: str
     evidence: str
     recommendation: str
-    category: str        # architecture, infrastructure, database, caching, ai
+    category: str  # architecture, infrastructure, database, caching, ai
     priority: str = "HIGH"
 
 
@@ -238,6 +248,7 @@ class OptimizationRecommendationsReport(BaseVerificationReport):
 
 
 # ─── Quality Scoring & Certification Models ──────────────────────────────────
+
 
 class CategoryScore(BaseModel):
     category: str
@@ -263,6 +274,7 @@ class EnterpriseBottleneckCertificationReport(BaseVerificationReport):
 
 
 # ─── Manifest Model ─────────────────────────────────────────────────────────
+
 
 class BottleneckVerificationManifest(BaseModel):
     system: str = "DocuTask Agent"

@@ -44,14 +44,20 @@ class TimelineBuilder:
         # Sort chronologically by timestamp
         sorted_events = sorted(
             raw_events,
-            key=lambda e: float(e.get("timestamp", e.get("timestamp_utc", 0.0)) if isinstance(e.get("timestamp", 0.0), (int, float)) else 0.0)
+            key=lambda e: float(
+                e.get("timestamp", e.get("timestamp_utc", 0.0))
+                if isinstance(e.get("timestamp", 0.0), (int, float))
+                else 0.0
+            ),
         )
 
         base_time = float(sorted_events[0].get("timestamp", time.time())) if sorted_events else time.time()
         timeline: List[TimelineEntry] = []
 
         for idx, ev in enumerate(sorted_events):
-            t_val = float(ev.get("timestamp", base_time)) if isinstance(ev.get("timestamp"), (int, float)) else base_time
+            t_val = (
+                float(ev.get("timestamp", base_time)) if isinstance(ev.get("timestamp"), (int, float)) else base_time
+            )
             rel_ms = max(0.0, round((t_val - base_time) * 1000.0, 2))
 
             ev_type = ev.get("event_type", ev.get("type", "RUNTIME_EVENT"))

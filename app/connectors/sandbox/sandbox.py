@@ -17,9 +17,10 @@ logger = logging.getLogger(__name__)
 
 class SandboxConfig(BaseModel):
     """Resource boundaries for connector plugin sandboxes."""
+
     max_execution_time_seconds: float = 30.0
     max_payload_size_bytes: int = 10 * 1024 * 1024  # 10 MB
-    allowed_domains: Optional[List[str]] = None      # None = any
+    allowed_domains: Optional[List[str]] = None  # None = any
     disallowed_domains: List[str] = Field(default_factory=list)
     enforce_isolation: bool = True
 
@@ -36,6 +37,7 @@ class ConnectorSandbox:
     def validate_payload_size(self, payload: Any) -> None:
         """Verifies that the serialized payload stays within memory limits."""
         import json
+
         try:
             size = len(json.dumps(payload, default=str).encode("utf-8"))
             if size > self.config.max_payload_size_bytes:
@@ -54,6 +56,7 @@ class ConnectorSandbox:
             return
 
         from urllib.parse import urlparse
+
         if "://" in url_or_host:
             parsed = urlparse(url_or_host)
             hostname = (parsed.hostname or "").lower().strip()

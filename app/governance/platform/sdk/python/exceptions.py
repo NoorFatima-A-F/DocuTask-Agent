@@ -16,7 +16,9 @@ class GovernanceSDKError(Exception):
 class AuthenticationError(GovernanceSDKError):
     """Raised when authentication credentials (API key or Bearer token) are missing, invalid, or expired."""
 
-    def __init__(self, message: str = "Invalid or expired credentials", details: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(
+        self, message: str = "Invalid or expired credentials", details: Optional[Dict[str, Any]] = None
+    ) -> None:
         super().__init__(message, code="AUTHENTICATION_FAILED", details=details)
 
 
@@ -30,14 +32,18 @@ class PermissionDeniedError(GovernanceSDKError):
 class PolicyDeniedError(GovernanceSDKError):
     """Raised when an evaluation fails active governance policy rules."""
 
-    def __init__(self, message: str = "Action blocked by governance policy", details: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(
+        self, message: str = "Action blocked by governance policy", details: Optional[Dict[str, Any]] = None
+    ) -> None:
         super().__init__(message, code="POLICY_DENIED", details=details)
 
 
 class RateLimitExceededError(GovernanceSDKError):
     """Raised when client exceeds rate limits."""
 
-    def __init__(self, message: str = "Rate limit exceeded", retry_after: float = 1.0, details: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(
+        self, message: str = "Rate limit exceeded", retry_after: float = 1.0, details: Optional[Dict[str, Any]] = None
+    ) -> None:
         det = details or {}
         det["retry_after"] = retry_after
         super().__init__(message, code="RATE_LIMIT_EXCEEDED", details=det)

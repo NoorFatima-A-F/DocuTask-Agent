@@ -1,6 +1,7 @@
 """
 Content-Addressable Storage (CAS) Engine for Immutable Verification Artifacts.
 """
+
 from __future__ import annotations
 import hashlib
 from typing import Any, Dict, Optional
@@ -61,7 +62,7 @@ class ContentAddressableStore(IEvidenceStore):
         art = self._artifacts[artifact_id]
         content = self.retrieve_artifact(art.storage_uri)
         actual_hash = hashlib.sha256(content).hexdigest()
-        is_valid = (actual_hash == art.checksum_sha256)
+        is_valid = actual_hash == art.checksum_sha256
         return IntegrityRecord(
             artifact_id=artifact_id,
             hash=actual_hash,

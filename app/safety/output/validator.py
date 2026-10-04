@@ -61,7 +61,8 @@ class OutputSafetyValidator:
 
         # Safe if no remaining critical / high severity violations
         unmitigated_high_or_critical = [
-            v for v in violations
+            v
+            for v in violations
             if v.severity in [ViolationSeverity.CRITICAL, ViolationSeverity.HIGH]
             and not v.details.get("mitigated_by_redaction", False)
         ]

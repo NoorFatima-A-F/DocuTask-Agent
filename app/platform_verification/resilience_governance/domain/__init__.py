@@ -1,6 +1,7 @@
 """
 Domain module for Disaster Recovery Governance Framework.
 """
+
 from app.platform_verification.resilience_governance.domain.models import (
     ResilienceMaturityTier,
     GovernanceRiskSeverity,

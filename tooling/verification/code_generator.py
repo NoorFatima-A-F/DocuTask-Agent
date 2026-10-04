@@ -2,6 +2,7 @@
 CLI Code Generator for New Verification Modules and Plugins.
 Enforces Clean Architecture and SOLID principles automatically.
 """
+
 import sys
 
 TEMPLATE_MODELS = """\"\""
@@ -57,17 +58,19 @@ class Manage{pascal}UseCase:
             return Failure(str(e))
 """
 
+
 def scaffold_module(name: str):
     import re
     from pathlib import Path
-    sanitized_name = re.sub(r'[^a-zA-Z0-9_]', '_', name.lower())
+
+    sanitized_name = re.sub(r"[^a-zA-Z0-9_]", "_", name.lower())
     prefix = sanitized_name[:4].lower()
     pascal = "".join(w.capitalize() for w in sanitized_name.split("_"))
     root = Path("app/platform_verification/modules").resolve()
     base = (root / sanitized_name).resolve()
     if not (base == root or base.is_relative_to(root)):
         raise ValueError(f"Invalid module name: '{name}'")
-    
+
     dirs = ["domain", "application", "infrastructure", "interfaces"]
     for d in dirs:
         sub_dir = (base / d).resolve()
@@ -86,6 +89,7 @@ def scaffold_module(name: str):
         f.write(TEMPLATE_USE_CASES.format(name=sanitized_name, pascal=pascal))
 
     print(f"Scaffolded module '{sanitized_name}' at '{base}'.")
+
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

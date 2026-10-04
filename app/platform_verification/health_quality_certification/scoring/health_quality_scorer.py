@@ -1,6 +1,7 @@
 """
 Phase 3H.5.11: Health Quality & Certification Scorer
 """
+
 from uuid import uuid4
 from typing import List
 from datetime import datetime, timezone

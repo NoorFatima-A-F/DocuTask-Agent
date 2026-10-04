@@ -23,10 +23,7 @@ class Document(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "documents"
 
     owner_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True),
-        ForeignKey("users.id", ondelete="CASCADE"),
-        index=True,
-        nullable=False
+        Uuid(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=False
     )
     original_filename: Mapped[str] = mapped_column(String(255), nullable=False)
     stored_filename: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -45,21 +42,21 @@ class Document(Base, UUIDMixin, TimestampMixin):
         back_populates="document",
         cascade="all, delete-orphan",
         order_by="ExtractedText.page_number",
-        lazy="selectin"
+        lazy="selectin",
     )
     ai_extractions: Mapped[List["AIExtraction"]] = relationship(
         "AIExtraction",
         back_populates="document",
         cascade="all, delete-orphan",
         order_by="AIExtraction.created_at.desc()",
-        lazy="selectin"
+        lazy="selectin",
     )
     processing_jobs: Mapped[List["ProcessingJob"]] = relationship(
         "ProcessingJob",
         back_populates="document",
         cascade="all, delete-orphan",
         order_by="ProcessingJob.created_at.desc()",
-        lazy="selectin"
+        lazy="selectin",
     )
 
     def __repr__(self) -> str:

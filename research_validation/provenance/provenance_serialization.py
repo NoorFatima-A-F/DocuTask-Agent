@@ -15,9 +15,7 @@ import json
 from typing import Any, Dict, List
 import xml.etree.ElementTree as ET
 
-from research_validation.provenance.provenance_schema import (
-    OpenLineageRunEvent, ProvDocument
-)
+from research_validation.provenance.provenance_schema import OpenLineageRunEvent, ProvDocument
 
 
 class ProvenanceSerializer:
@@ -51,7 +49,7 @@ class ProvenanceSerializer:
                 "@type": "prov:Entity",
                 "prov:label": e.label,
                 "prov:generatedAtTime": e.generated_at_time,
-                "attributes": e.attributes
+                "attributes": e.attributes,
             }
             if e.was_derived_from_ids:
                 node["prov:wasDerivedFrom"] = [f"rvisf:{pid}" for pid in e.was_derived_from_ids]
@@ -69,7 +67,7 @@ class ProvenanceSerializer:
                 "prov:label": a.label,
                 "prov:startedAtTime": a.start_time,
                 "prov:endedAtTime": a.end_time,
-                "attributes": a.attributes
+                "attributes": a.attributes,
             }
             if a.used_entity_ids:
                 node["prov:used"] = [f"rvisf:{uid}" for uid in a.used_entity_ids]
@@ -83,17 +81,13 @@ class ProvenanceSerializer:
                 "@id": f"rvisf:{ag.agent_id}",
                 "@type": f"prov:{ag.agent_type}",
                 "prov:label": ag.name,
-                "attributes": ag.attributes
+                "attributes": ag.attributes,
             }
             if ag.acted_on_behalf_of_id:
                 node["prov:actedOnBehalfOf"] = f"rvisf:{ag.acted_on_behalf_of_id}"
             graph.append(node)
 
-        payload = {
-            "@context": context,
-            "@id": f"rvisf:{doc.document_id}",
-            "@graph": graph
-        }
+        payload = {"@context": context, "@id": f"rvisf:{doc.document_id}", "@graph": graph}
 
         return json.dumps(payload, indent=2, sort_keys=True)
 
@@ -109,15 +103,15 @@ class ProvenanceSerializer:
 
         # Entities
         for e in doc.entities.values():
-            lines.append(f"  entity(rvisf:{e.entity_id}, [prov:label=\"{e.label}\"])")
+            lines.append(f'  entity(rvisf:{e.entity_id}, [prov:label="{e.label}"])')
 
         # Activities
         for a in doc.activities.values():
-            lines.append(f"  activity(rvisf:{a.activity_id}, {a.start_time}, {a.end_time}, [prov:label=\"{a.label}\"])")
+            lines.append(f'  activity(rvisf:{a.activity_id}, {a.start_time}, {a.end_time}, [prov:label="{a.label}"])')
 
         # Agents
         for ag in doc.agents.values():
-            lines.append(f"  agent(rvisf:{ag.agent_id}, [prov:label=\"{ag.name}\", prov:type=\"{ag.agent_type}\"])")
+            lines.append(f'  agent(rvisf:{ag.agent_id}, [prov:label="{ag.name}", prov:type="{ag.agent_type}"])')
 
         # Relations
         for r in doc.relations:

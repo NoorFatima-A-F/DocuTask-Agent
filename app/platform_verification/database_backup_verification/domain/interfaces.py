@@ -1,6 +1,7 @@
 """
 Interfaces and Abstract Base Classes for Database Backup & Recovery Platform (Part 3G.2B Advanced).
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional
 
@@ -31,9 +32,7 @@ class IDatabaseInventoryEngine(ABC):
         pass
 
     @abstractmethod
-    def verify_backup_coverage(
-        self, inventory: DatabaseInventoryReport
-    ) -> BackupCoverageReport:
+    def verify_backup_coverage(self, inventory: DatabaseInventoryReport) -> BackupCoverageReport:
         pass
 
 
@@ -227,4 +226,3 @@ class IDatabaseEvidenceManifestEngine(ABC):
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
         pass
-

@@ -289,10 +289,10 @@ class TestDynamicAgentReputation:
     @pytest.mark.parametrize(
         "raw_bid,rep_score,expected_direction",
         [
-            (0.80, 0.95, 1),   # Boosted
-            (0.80, 0.80, 0),   # Neutral / minor
+            (0.80, 0.95, 1),  # Boosted
+            (0.80, 0.80, 0),  # Neutral / minor
             (0.80, 0.30, -1),  # Penalized
-            (0.50, 0.98, 1),   # Boosted
+            (0.50, 0.98, 1),  # Boosted
             (0.90, 0.20, -1),  # Penalized
         ],
     )
@@ -323,9 +323,30 @@ class TestDynamicAgentReputation:
     def test_knowledge_extractor_domain_mapping(self):
         extractor = KnowledgeExtractor()
         patterns = [
-            MinedPattern(pattern_id="p1", pattern_type="VENDOR_HEURISTIC", description="Vendor X uses OCR template Y", frequency=3, confidence=0.88, attributes={"vendor": "VendorX"}),
-            MinedPattern(pattern_id="p2", pattern_type="TOOL_INEFFICIENCY", description="Tool T slow on large PDFs", frequency=4, confidence=0.91, attributes={"tool": "ToolT"}),
-            MinedPattern(pattern_id="p3", pattern_type="FAILURE_CORRELATION", description="Failure when DPI < 100", frequency=2, confidence=0.80, attributes={"cause": "low_dpi"}),
+            MinedPattern(
+                pattern_id="p1",
+                pattern_type="VENDOR_HEURISTIC",
+                description="Vendor X uses OCR template Y",
+                frequency=3,
+                confidence=0.88,
+                attributes={"vendor": "VendorX"},
+            ),
+            MinedPattern(
+                pattern_id="p2",
+                pattern_type="TOOL_INEFFICIENCY",
+                description="Tool T slow on large PDFs",
+                frequency=4,
+                confidence=0.91,
+                attributes={"tool": "ToolT"},
+            ),
+            MinedPattern(
+                pattern_id="p3",
+                pattern_type="FAILURE_CORRELATION",
+                description="Failure when DPI < 100",
+                frequency=2,
+                confidence=0.80,
+                attributes={"cause": "low_dpi"},
+            ),
         ]
         rules = extractor.extract_rules(patterns)
         assert len(rules) == 3
@@ -345,8 +366,12 @@ class TestDynamicAgentReputation:
     def test_memory_promoter_deduplication(self):
         sem_mem = SemanticMemory()
         promoter = MemoryPromoter(semantic_memory=sem_mem, min_promotion_confidence=0.60)
-        rule1 = ExtractedKnowledgeRule(rule_id="r1", subject="VendorA", predicate="tax_code", rule_value="VAT_STANDARD", confidence=0.9)
-        rule2 = ExtractedKnowledgeRule(rule_id="r2", subject="VendorA", predicate="tax_code", rule_value="VAT_STANDARD", confidence=0.95)
+        rule1 = ExtractedKnowledgeRule(
+            rule_id="r1", subject="VendorA", predicate="tax_code", rule_value="VAT_STANDARD", confidence=0.9
+        )
+        rule2 = ExtractedKnowledgeRule(
+            rule_id="r2", subject="VendorA", predicate="tax_code", rule_value="VAT_STANDARD", confidence=0.95
+        )
 
         promoted1 = promoter.promote_rules([rule1])
         assert len(promoted1) == 1
@@ -354,4 +379,3 @@ class TestDynamicAgentReputation:
         # Verify persistence and retrieval
         facts = sem_mem.retrieve_relevant_facts("VendorA")
         assert len(facts) >= 1
-

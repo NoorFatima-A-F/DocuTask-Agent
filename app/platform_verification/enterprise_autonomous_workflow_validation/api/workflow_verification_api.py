@@ -20,14 +20,20 @@ def get_health() -> Dict[str, Any]:
     }
 
 
-@router.post("/run", response_model=AutonomousWorkflowQualityReport, summary="Execute complete autonomous workflow verification suite")
+@router.post(
+    "/run",
+    response_model=AutonomousWorkflowQualityReport,
+    summary="Execute complete autonomous workflow verification suite",
+)
 def run_verification() -> AutonomousWorkflowQualityReport:
     global _latest_report
     _latest_report = _runtime.execute_all()
     return _latest_report
 
 
-@router.get("/score", response_model=AutonomousWorkflowQualityScore, summary="Get latest business workflow certification score")
+@router.get(
+    "/score", response_model=AutonomousWorkflowQualityScore, summary="Get latest business workflow certification score"
+)
 def get_latest_score() -> AutonomousWorkflowQualityScore:
     global _latest_report
     if not _latest_report:
@@ -35,7 +41,9 @@ def get_latest_score() -> AutonomousWorkflowQualityScore:
     return _latest_report.score
 
 
-@router.get("/report", response_model=AutonomousWorkflowQualityReport, summary="Get latest full workflow quality report")
+@router.get(
+    "/report", response_model=AutonomousWorkflowQualityReport, summary="Get latest full workflow quality report"
+)
 def get_latest_report() -> AutonomousWorkflowQualityReport:
     global _latest_report
     if not _latest_report:

@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 class ReflectionMetrics(BaseModel):
     """Snapshot of aggregated reflection system metrics."""
+
     total_reflections_started: int = 0
     total_reflections_completed: int = 0
     total_reflections_failed: int = 0
@@ -34,9 +35,7 @@ class ReflectionMetricsCollector:
     def record_reflection_completed(self, duration_ms: float) -> None:
         self._metrics.total_reflections_completed += 1
         self._durations.append(duration_ms)
-        self._metrics.average_reflection_duration_ms = (
-            sum(self._durations) / len(self._durations)
-        )
+        self._metrics.average_reflection_duration_ms = sum(self._durations) / len(self._durations)
 
     def record_reflection_failed(self) -> None:
         self._metrics.total_reflections_failed += 1

@@ -1,9 +1,11 @@
 """
 Security & Compliance Verification Plugin (Prompt Injection, PII Redaction)
 """
+
 from typing import Dict, Any
 from app.platform_verification.domain.models import VerificationDefinition, MetricResult, RuntimeEnvironmentProfile
 from app.platform_verification.domain.interfaces import VerificationPlugin
+
 
 class SecurityCompliancePlugin(VerificationPlugin):
     @property
@@ -18,7 +20,7 @@ class SecurityCompliancePlugin(VerificationPlugin):
         self,
         definition: VerificationDefinition,
         env_profile: RuntimeEnvironmentProfile,
-        dataset_payload: Dict[str, Any]
+        dataset_payload: Dict[str, Any],
     ) -> Dict[str, Any]:
         metrics = [
             MetricResult(
@@ -26,14 +28,14 @@ class SecurityCompliancePlugin(VerificationPlugin):
                 category="SECURITY",
                 value=1.0,
                 target_threshold=0.99,
-                passed=True
+                passed=True,
             ),
             MetricResult(
                 metric_name="pii_redaction_accuracy",
                 category="SECURITY",
                 value=0.998,
                 target_threshold=0.995,
-                passed=True
-            )
+                passed=True,
+            ),
         ]
         return {"metrics": metrics, "raw_evidence": {"injection_attacks_tested": 150, "bypasses": 0}}

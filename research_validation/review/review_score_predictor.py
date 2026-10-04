@@ -58,11 +58,21 @@ class ReviewScorePredictor:
         s_threat = 1.0 + 4.0 * threats_mitigated_ratio
 
         dimensions = {
-            "completeness": ScoreBreakdown("Artifact Completeness", s_comp, 0.25, "All mandatory disclosures verified."),
-            "provenance": ScoreBreakdown("Evidence Provenance", s_prov, 0.25, "Cryptographic Merkle ancestry verified."),
-            "reproducibility": ScoreBreakdown("Empirical Reproducibility", s_repro, 0.25, "Deterministic execution verified."),
-            "statistical_rigor": ScoreBreakdown("Statistical Rigor", s_stat, 0.15, "Power and confidence intervals verified."),
-            "threats_mitigation": ScoreBreakdown("Threats to Validity", s_threat, 0.10, "Empirical confounders disclosed and mitigated."),
+            "completeness": ScoreBreakdown(
+                "Artifact Completeness", s_comp, 0.25, "All mandatory disclosures verified."
+            ),
+            "provenance": ScoreBreakdown(
+                "Evidence Provenance", s_prov, 0.25, "Cryptographic Merkle ancestry verified."
+            ),
+            "reproducibility": ScoreBreakdown(
+                "Empirical Reproducibility", s_repro, 0.25, "Deterministic execution verified."
+            ),
+            "statistical_rigor": ScoreBreakdown(
+                "Statistical Rigor", s_stat, 0.15, "Power and confidence intervals verified."
+            ),
+            "threats_mitigation": ScoreBreakdown(
+                "Threats to Validity", s_threat, 0.10, "Empirical confounders disclosed and mitigated."
+            ),
         }
 
         weighted_score = sum(d.predicted_score * d.weight for d in dimensions.values())

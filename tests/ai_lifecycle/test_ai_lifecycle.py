@@ -57,7 +57,7 @@ def test_agent_registry_lifecycle():
 def test_agent_version_control_and_rollback():
     vcs = AgentVersionControlService()
     agent_id = "agt_test_vcs"
-    
+
     v1 = vcs.create_version(
         agent_id=agent_id,
         version_tag="1.0.0",
@@ -174,7 +174,7 @@ def test_dependency_manager_and_breaking_changes():
 
     dep_mgr.add_dependency(agent_id, "TOOL", "tool_sap_po", "SAP Purchase Order Tool")
     dep_mgr.add_dependency(agent_id, "MODEL", "gemini-pro", "Gemini Pro 1.5")
-    
+
     val_clean = dep_mgr.validate_dependency_graph(agent_id)
     assert val_clean["healthy"] is True
     assert val_clean["breaking_changes_count"] == 0

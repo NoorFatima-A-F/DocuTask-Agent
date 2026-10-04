@@ -1,4 +1,5 @@
 """Evidence Domain Package Init."""
+
 from .models import (
     EvidenceClassification,
     EvidenceConfidence,

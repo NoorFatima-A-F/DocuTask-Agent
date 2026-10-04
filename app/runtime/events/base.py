@@ -18,6 +18,7 @@ class RuntimeEvent:
     Immutable base class for all execution runtime events in DocuTask Agent.
     Every event emitted in the system inherits from this class.
     """
+
     event_id: str = field(default_factory=lambda: str(uuid4()))
     mission_id: str = ""
     parent_event_id: Optional[str] = None

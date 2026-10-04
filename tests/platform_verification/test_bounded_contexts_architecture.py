@@ -2,6 +2,7 @@
 Unit and Integration Test Suite for Enterprise Bounded Contexts and Hexagonal Architecture.
 Validates independent execution, CQRS application services, Domain Event Bus, and Anti-Corruption Layers.
 """
+
 import pytest
 from typing import List
 
@@ -40,7 +41,7 @@ async def test_all_12_bounded_contexts_integration(runtime):
         spec_id="spec_invoice_val_01",
         name="Invoice Verification Spec",
         invariants=["accuracy >= 0.95"],
-        parameters={"format": "pdf"}
+        parameters={"format": "pdf"},
     )
     assert v_res.is_ok is True
     assert v_res.unwrap().name == "Invoice Verification Spec"
@@ -50,26 +51,21 @@ async def test_all_12_bounded_contexts_integration(runtime):
         dataset_id="ds_golden_inv",
         name="Golden Invoice Dataset",
         category="GOLDEN",
-        content=b"Sample PDF invoice binary payload"
+        content=b"Sample PDF invoice binary payload",
     )
     assert ds_res.is_ok is True
     assert len(ds_res.unwrap().sha256_checksum) == 64
 
     # 3. Environments Context
     env_res = await runtime.environments.register_and_validate(
-        env_id="env_staging_worker",
-        name="Staging OCR Worker Cluster",
-        tier="STAGING",
-        profile={"cpu": 16, "gpu": True}
+        env_id="env_staging_worker", name="Staging OCR Worker Cluster", tier="STAGING", profile={"cpu": 16, "gpu": True}
     )
     assert env_res.is_ok is True
     assert env_res.unwrap().is_ready is True
 
     # 4. Configuration Context
     cfg_res = await runtime.configuration.resolve_snapshot(
-        config_id="cfg_run_101",
-        tier="STAGING",
-        overrides={"timeout_seconds": 120}
+        config_id="cfg_run_101", tier="STAGING", overrides={"timeout_seconds": 120}
     )
     assert cfg_res.is_ok is True
     assert cfg_res.unwrap().parameters["timeout_seconds"] == 120
@@ -78,39 +74,28 @@ async def test_all_12_bounded_contexts_integration(runtime):
     exec_res = await runtime.execution.execute_task(
         task_id="task_run_101",
         spec_id=v_res.unwrap().id,
-        workload=lambda: {"processed": 100, "accuracy_scores": [0.98, 0.99, 0.97, 0.98, 0.99]}
+        workload=lambda: {"processed": 100, "accuracy_scores": [0.98, 0.99, 0.97, 0.98, 0.99]},
     )
     assert exec_res.is_ok is True
     assert exec_res.unwrap()["processed"] == 100
 
     # 6. Evidence Context
     ev_res = await runtime.evidence.record_evidence(
-        evidence_id="ev_raw_output_01",
-        run_id="task_run_101",
-        payload=b'{"items": 100, "status": "OK"}',
-        tier="WARM"
+        evidence_id="ev_raw_output_01", run_id="task_run_101", payload=b'{"items": 100, "status": "OK"}', tier="WARM"
     )
     assert ev_res.is_ok is True
     assert len(ev_res.unwrap().cas_hash) == 64
 
     # 7. Metrics Context
     m_res = await runtime.metrics.record_metric(
-        metric_id="m_acc_01",
-        run_id="task_run_101",
-        name="accuracy",
-        value=0.982,
-        category="AI_QUALITY"
+        metric_id="m_acc_01", run_id="task_run_101", name="accuracy", value=0.982, category="AI_QUALITY"
     )
     assert m_res.is_ok is True
     assert m_res.unwrap().value == 0.982
 
     # 8. Statistics Context
     scores = exec_res.unwrap()["accuracy_scores"]
-    stat_res = await runtime.statistics.analyze_samples(
-        analysis_id="stat_01",
-        metric_name="accuracy",
-        samples=scores
-    )
+    stat_res = await runtime.statistics.analyze_samples(analysis_id="stat_01", metric_name="accuracy", samples=scores)
     assert stat_res.is_ok is True
     stat_agg = stat_res.unwrap()
     assert stat_agg.sample_size == 5
@@ -122,7 +107,7 @@ async def test_all_12_bounded_contexts_integration(runtime):
         gate_id="gate_01",
         run_id="task_run_101",
         metrics={"accuracy": stat_agg.mean},
-        rules=[{"metric": "accuracy", "threshold": 0.95}]
+        rules=[{"metric": "accuracy", "threshold": 0.95}],
     )
     assert q_res.is_ok is True
     assert q_res.unwrap().is_passed is True
@@ -132,7 +117,7 @@ async def test_all_12_bounded_contexts_integration(runtime):
         cert_id="cert_prod_01",
         run_id="task_run_101",
         level="ENTERPRISE_CERTIFIED",
-        metadata={"approver": "lead_architect", "score": stat_agg.mean}
+        metadata={"approver": "lead_architect", "score": stat_agg.mean},
     )
     assert cert_res.is_ok is True
     assert len(cert_res.unwrap().digital_signature_hash) == 64
@@ -146,9 +131,7 @@ async def test_all_12_bounded_contexts_integration(runtime):
 
     # 12. Plugins Context
     p_res = await runtime.plugins.register_plugin(
-        plugin_id="plugin_layout_eval",
-        name="LayoutLM Evaluator",
-        capabilities=["bbox_overlap", "key_value_extraction"]
+        plugin_id="plugin_layout_eval", name="LayoutLM Evaluator", capabilities=["bbox_overlap", "key_value_extraction"]
     )
     assert p_res.is_ok is True
     assert p_res.unwrap().status == "ACTIVE"
@@ -167,9 +150,7 @@ def test_anti_corruption_layers():
     # 1. Gemini AI ACL
     gemini_acl = GeminiAiAntiCorruptionLayer(model_name="gemini-2.5-flash")
     gemini_res = gemini_acl.evaluate_response_faithfulness(
-        prompt="Extract total amount",
-        generated_text="Total amount is $450.00",
-        context="$450.00"
+        prompt="Extract total amount", generated_text="Total amount is $450.00", context="$450.00"
     )
     assert gemini_res.is_ok is True
     payload = gemini_res.unwrap()

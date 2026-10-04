@@ -1,6 +1,7 @@
 """
 3I.1.9 & 3I.1.10: Log Performance & Failure Simulation Verifier
 """
+
 from ..domain.models import LogPerformanceReport
 from ..domain.interfaces import ILogPerformanceVerifier
 
@@ -19,5 +20,5 @@ class LogPerformanceVerifier(ILogPerformanceVerifier):
             mean_processing_latency_ms=0.18,
             non_blocking_async_sink_verified=True,
             backpressure_handling_verified=True,
-            performance_passed=True
+            performance_passed=True,
         )

@@ -16,7 +16,11 @@ class DependencyHealthGraph:
         # downstream -> upstream dependencies
         self._adjacency: Dict[str, List[str]] = {
             SubsystemType.API.value: [SubsystemType.PLANNER.value, SubsystemType.DATABASE.value],
-            SubsystemType.PLANNER.value: [SubsystemType.WORKERS.value, SubsystemType.OPTIMIZATION.value, SubsystemType.MEMORY.value],
+            SubsystemType.PLANNER.value: [
+                SubsystemType.WORKERS.value,
+                SubsystemType.OPTIMIZATION.value,
+                SubsystemType.MEMORY.value,
+            ],
             SubsystemType.WORKERS.value: [SubsystemType.DATABASE.value, SubsystemType.TELEMETRY.value],
             SubsystemType.OPTIMIZATION.value: [SubsystemType.TELEMETRY.value, SubsystemType.LEARNING.value],
             SubsystemType.REPLAY.value: [SubsystemType.TRUTH.value, SubsystemType.TELEMETRY.value],

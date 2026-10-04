@@ -1,12 +1,14 @@
 """
 Unit and Integration Tests for Canonical 16-Stage Enterprise Verification Lifecycle.
 """
+
 import pytest
 from app.platform_verification.lifecycle.states import LifecycleState, LifecycleStateMachine
 from app.platform_verification.lifecycle.context import VerificationExecutionContext
 from app.platform_verification.lifecycle.pipeline import verification_pipeline
 from app.platform_verification.lifecycle.orchestrator import canonical_lifecycle_orchestrator
 from app.platform_verification.lifecycle.hooks import lifecycle_hooks
+
 
 def test_formal_state_machine_valid_and_invalid_transitions():
     # Valid transition
@@ -22,9 +24,7 @@ def test_formal_state_machine_valid_and_invalid_transitions():
 
 def test_complete_15_stage_execution_pipeline():
     context = VerificationExecutionContext(
-        definition_id="def_ocr_enterprise_suite",
-        tenant_id="tenant-gold-master",
-        initiator="Principal QA Architect"
+        definition_id="def_ocr_enterprise_suite", tenant_id="tenant-gold-master", initiator="Principal QA Architect"
     )
 
     # Execute full pipeline (Stages 1 through 15)
@@ -42,9 +42,7 @@ def test_complete_15_stage_execution_pipeline():
 
 def test_stage_16_reproduction():
     context = VerificationExecutionContext(
-        definition_id="def_rag_evaluation_suite",
-        tenant_id="tenant-repro-test",
-        initiator="Compliance Auditor"
+        definition_id="def_rag_evaluation_suite", tenant_id="tenant-repro-test", initiator="Compliance Auditor"
     )
     # Execute through archival
     archived_context = verification_pipeline.execute_lifecycle(context)
@@ -70,10 +68,7 @@ def test_lifecycle_hooks_interception():
     lifecycle_hooks.register_hook("before_planning", custom_pre_plan_hook)
     lifecycle_hooks.register_hook("after_certification", custom_post_cert_hook)
 
-    context = VerificationExecutionContext(
-        definition_id="def_hook_test_suite",
-        tenant_id="tenant-hook"
-    )
+    context = VerificationExecutionContext(definition_id="def_hook_test_suite", tenant_id="tenant-hook")
     verification_pipeline.execute_lifecycle(context)
 
     assert "before_planning" in triggered_hooks
@@ -82,8 +77,7 @@ def test_lifecycle_hooks_interception():
 
 def test_canonical_orchestrator_facade():
     run_ctx = canonical_lifecycle_orchestrator.start_verification(
-        definition_id="def_e2e_canonical_test",
-        tenant_id="tenant-enterprise"
+        definition_id="def_e2e_canonical_test", tenant_id="tenant-enterprise"
     )
     assert run_ctx.current_state == LifecycleState.ARCHIVED
     assert canonical_lifecycle_orchestrator.get_execution(run_ctx.execution_id) is not None

@@ -2,10 +2,13 @@
 Deterministic Reproducibility Engine.
 Captures full execution snapshots and verifies exact replay fidelity.
 """
+
 from dataclasses import dataclass
 from typing import Any, Dict, Optional, Tuple
 from app.platform_verification.config_versioning.domain.models import (
-    ExecutionSnapshot, EnvironmentTier, ConfigurationSnapshot
+    ExecutionSnapshot,
+    EnvironmentTier,
+    ConfigurationSnapshot,
 )
 from app.platform_verification.config_versioning.core.snapshot_manager import snapshot_manager
 from app.platform_verification.config_versioning.core.fingerprint import environment_fingerprinter
@@ -41,7 +44,7 @@ class ReproducibilityEngine:
         sbom_manifest_id: str,
         environment_tier: EnvironmentTier,
         infrastructure_version: str,
-        feature_flags_state: Optional[Dict[str, bool]] = None
+        feature_flags_state: Optional[Dict[str, bool]] = None,
     ) -> ExecutionSnapshot:
         fp = environment_fingerprinter.capture_fingerprint(tier=environment_tier)
         snap = ExecutionSnapshot(
@@ -62,7 +65,7 @@ class ReproducibilityEngine:
             environment_tier=environment_tier,
             environment_fingerprint_id=fp.fingerprint_id,
             infrastructure_version=infrastructure_version,
-            feature_flags_state=feature_flags_state or {}
+            feature_flags_state=feature_flags_state or {},
         )
         self._execution_snapshots[verification_id] = snap
         return snap
@@ -71,15 +74,14 @@ class ReproducibilityEngine:
         return self._execution_snapshots.get(verification_id)
 
     def verify_reproducibility_fidelity(
-        self,
-        baseline: ExecutionSnapshot,
-        candidate: ExecutionSnapshot
+        self, baseline: ExecutionSnapshot, candidate: ExecutionSnapshot
     ) -> ReproducibilityFidelityReport:
         vectors = {
             "code_commit": baseline.code_commit_sha == candidate.code_commit_sha,
             "configuration": baseline.configuration_hash == candidate.configuration_hash,
             "dataset": baseline.dataset_hash == candidate.dataset_hash,
-            "model": (baseline.model_identifier, baseline.model_version) == (candidate.model_identifier, candidate.model_version),
+            "model": (baseline.model_identifier, baseline.model_version)
+            == (candidate.model_identifier, candidate.model_version),
             "prompt": baseline.prompt_hash == candidate.prompt_hash,
             "dependencies": baseline.dependency_lock_hash == candidate.dependency_lock_hash,
             "environment_tier": baseline.environment_tier == candidate.environment_tier,
@@ -95,14 +97,11 @@ class ReproducibilityEngine:
             if not v:
                 discrepancies[k] = {
                     "baseline": getattr(baseline, k, None) or getattr(baseline, f"{k}_hash", None),
-                    "candidate": getattr(candidate, k, None) or getattr(candidate, f"{k}_hash", None)
+                    "candidate": getattr(candidate, k, None) or getattr(candidate, f"{k}_hash", None),
                 }
 
         return ReproducibilityFidelityReport(
-            is_exact_match=is_exact,
-            fidelity_score=score,
-            matched_vectors=vectors,
-            discrepancies=discrepancies
+            is_exact_match=is_exact, fidelity_score=score, matched_vectors=vectors, discrepancies=discrepancies
         )
 
 

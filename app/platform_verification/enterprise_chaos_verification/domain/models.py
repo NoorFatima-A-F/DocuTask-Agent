@@ -19,10 +19,10 @@ ChaosVerificationStatus = VerificationStatus
 
 
 class ChaosResilienceTier(str, Enum):
-    CHAOS_RESILIENT = "Chaos Resilient"              # 95-100
-    PRODUCTION_RESILIENT = "Production Resilient"    # 90-94.99
-    NEEDS_IMPROVEMENT = "Needs Improvement"          # 80-89.99
-    FAILED = "Failed"                                # <80
+    CHAOS_RESILIENT = "Chaos Resilient"  # 95-100
+    PRODUCTION_RESILIENT = "Production Resilient"  # 90-94.99
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80-89.99
+    FAILED = "Failed"  # <80
 
 
 CertificationTier = ChaosResilienceTier
@@ -49,6 +49,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3K.1: Chaos Readiness Validation ────────────────────────────────────────
 
+
 class PreflightCheckItem(BaseModel):
     check_name: str
     subsystem: str
@@ -67,6 +68,7 @@ class ChaosReadinessReport(BaseVerificationReport):
 
 
 # ─── 3K.2: Container Failure Experiments ─────────────────────────────────────
+
 
 class ContainerChaosScenario(BaseModel):
     target_container: str
@@ -90,6 +92,7 @@ class ContainerFailureReport(BaseVerificationReport):
 
 # ─── 3K.3: Database Failure Chaos Testing ────────────────────────────────────
 
+
 class DatabaseStateTransition(BaseModel):
     document_id: str
     state_before_failure: str
@@ -109,6 +112,7 @@ class DatabaseFailureReport(BaseVerificationReport):
 
 
 # ─── 3K.4: Redis Queue Failure Chaos Testing ─────────────────────────────────
+
 
 class QueueFailureMetrics(BaseModel):
     messages_in_flight: int
@@ -130,6 +134,7 @@ class QueueFailureReport(BaseVerificationReport):
 
 # ─── 3K.5: Network Failure Simulation ────────────────────────────────────────
 
+
 class NetworkChaosTest(BaseModel):
     failure_type: str
     injected_condition: str
@@ -148,6 +153,7 @@ class NetworkFailureReport(BaseVerificationReport):
 
 
 # ─── 3K.6: AI Provider Failure Chaos Testing ─────────────────────────────────
+
 
 class AIProviderFailureScenario(BaseModel):
     provider_target: str
@@ -170,6 +176,7 @@ class AIProviderFailureReport(BaseVerificationReport):
 
 # ─── 3K.7: Resource Exhaustion Testing ───────────────────────────────────────
 
+
 class ResourcePressureScenario(BaseModel):
     resource_type: str
     pressure_level: str
@@ -188,6 +195,7 @@ class ResourceExhaustionReport(BaseVerificationReport):
 
 
 # ─── 3K.8: Worker Agent Failure Testing ──────────────────────────────────────
+
 
 class WorkerAnomalyScenario(BaseModel):
     anomaly_type: str
@@ -209,6 +217,7 @@ class WorkerAgentFailureReport(BaseVerificationReport):
 
 # ─── 3K.9: Cascading Failure Testing ─────────────────────────────────────────
 
+
 class CascadeContainmentStage(BaseModel):
     stage_name: str
     fault_origin: str
@@ -228,6 +237,7 @@ class CascadingFailureReport(BaseVerificationReport):
 
 # ─── 3K.10: Chaos Automation Pipeline ────────────────────────────────────────
 
+
 class ChaosPipelineStage(BaseModel):
     sequence: int
     stage_name: str
@@ -244,6 +254,7 @@ class ChaosPipelineReport(BaseVerificationReport):
 
 
 # ─── 3K.11: Chaos Observability Validation ───────────────────────────────────
+
 
 class ChaosTelemetryReconstruction(BaseModel):
     document_id: str
@@ -262,6 +273,7 @@ class ChaosObservabilityReport(BaseVerificationReport):
 
 # ─── 3K.12: Chaos Report Generation ──────────────────────────────────────────
 
+
 class ExperimentSummaryEntry(BaseModel):
     experiment: str
     failure_injected: bool
@@ -278,6 +290,7 @@ class ChaosReportGenerationReport(BaseVerificationReport):
 
 
 # ─── Scoring, Certification & Manifest Models ────────────────────────────────
+
 
 class CategoryScore(BaseModel):
     name: str

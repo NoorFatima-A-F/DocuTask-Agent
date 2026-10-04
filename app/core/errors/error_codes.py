@@ -7,6 +7,7 @@ from enum import Enum
 
 class ErrorCategory(str, Enum):
     """12 standard platform error categories."""
+
     PLATFORM = "PLATFORM"
     DATABASE = "DATABASE"
     NETWORK = "NETWORK"
@@ -23,6 +24,7 @@ class ErrorCategory(str, Enum):
 
 class ErrorSeverity(str, Enum):
     """Severity classification for error handling and alerting."""
+
     LOW = "LOW"
     MEDIUM = "MEDIUM"
     HIGH = "HIGH"
@@ -32,6 +34,7 @@ class ErrorSeverity(str, Enum):
 
 class RecoveryPolicy(str, Enum):
     """Policy-driven recovery strategy."""
+
     RETRY = "RETRY"
     ROLLBACK = "ROLLBACK"
     COMPENSATION = "COMPENSATION"

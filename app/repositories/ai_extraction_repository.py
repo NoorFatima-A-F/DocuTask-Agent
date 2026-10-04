@@ -28,10 +28,7 @@ class AIExtractionRepository(BaseRepository[AIExtraction]):
 
     async def get_latest(self, document_id: uuid.UUID, document_type: Optional[str] = None) -> Optional[AIExtraction]:
         """Retrieves most recent extraction record for document."""
-        query = (
-            select(AIExtraction)
-            .where(AIExtraction.document_id == document_id)
-        )
+        query = select(AIExtraction).where(AIExtraction.document_id == document_id)
         if document_type:
             query = query.where(AIExtraction.document_type == document_type)
         query = query.order_by(AIExtraction.created_at.desc()).limit(1)
@@ -42,16 +39,12 @@ class AIExtractionRepository(BaseRepository[AIExtraction]):
     async def get_history(self, document_id: uuid.UUID) -> List[AIExtraction]:
         """Retrieves all past extraction history records for document."""
         query = (
-            select(AIExtraction)
-            .where(AIExtraction.document_id == document_id)
-            .order_by(AIExtraction.created_at.desc())
+            select(AIExtraction).where(AIExtraction.document_id == document_id).order_by(AIExtraction.created_at.desc())
         )
         result = await self.db.execute(query)
         return list(result.scalars().all())
 
     async def delete(self, extraction_id: uuid.UUID) -> None:
         """Deletes extraction record from persistence."""
-        await self.db.execute(
-            delete(AIExtraction).where(AIExtraction.id == extraction_id)
-        )
+        await self.db.execute(delete(AIExtraction).where(AIExtraction.id == extraction_id))
         await self.db.flush()

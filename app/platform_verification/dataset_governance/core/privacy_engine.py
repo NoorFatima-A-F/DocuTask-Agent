@@ -2,6 +2,7 @@
 Data Privacy Preservation Engine.
 Applies anonymization, PII masking, token redaction, and synthetic replacement.
 """
+
 import re
 from app.platform_verification.dataset_governance.domain.models import DatasetSample
 from app.platform_verification.dataset_governance.domain.interfaces import DatasetPrivacyEngineInterface
@@ -24,7 +25,7 @@ class DatasetPrivacyEngine(DatasetPrivacyEngineInterface):
             content=text,
             metadata={**sample.metadata, "is_anonymized": True},
             language=sample.language,
-            partition=sample.partition
+            partition=sample.partition,
         )
 
 

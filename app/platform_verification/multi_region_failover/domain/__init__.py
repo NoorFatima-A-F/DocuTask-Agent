@@ -1,6 +1,7 @@
 """
 Multi-Region Failover Domain Subsystem.
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     CloudRegion,
     FailoverMode,

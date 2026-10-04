@@ -1,6 +1,7 @@
 """
 Phase 3H.8.7: Automated Rollback & Reversibility Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_governance.domain.interfaces import IRollbackVerificationVerifier

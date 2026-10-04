@@ -42,7 +42,7 @@ class WorkflowGraph(BaseModel):
     name: str = Field(default="WorkflowGraph")
     workflow_type: WorkflowType = Field(default=WorkflowType.DAG)
     version: str = Field(default="v1.0")
-    
+
     nodes: Dict[str, WorkflowNode] = Field(default_factory=dict)
     edges: List[WorkflowEdge] = Field(default_factory=list)
     execution_policy: ExecutionPolicy = Field(default_factory=ExecutionPolicy)
@@ -62,7 +62,7 @@ class WorkflowGraph(BaseModel):
             nodes=new_nodes,
             edges=self.edges,
             execution_policy=self.execution_policy,
-            metadata=self.metadata
+            metadata=self.metadata,
         )
 
     def add_edge(self, edge: WorkflowEdge) -> "WorkflowGraph":
@@ -77,7 +77,7 @@ class WorkflowGraph(BaseModel):
             nodes=self.nodes,
             edges=new_edges,
             execution_policy=self.execution_policy,
-            metadata=self.metadata
+            metadata=self.metadata,
         )
 
 

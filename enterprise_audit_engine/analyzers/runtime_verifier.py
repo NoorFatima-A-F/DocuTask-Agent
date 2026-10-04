@@ -12,8 +12,12 @@ class RuntimeVerifier:
     def verify_runtime_environment(repo_root: Path) -> Dict[str, Any]:
         has_dockerfile = (repo_root / "Dockerfile").exists() or (repo_root / "docker" / "Dockerfile").exists()
         has_docker_compose = (repo_root / "docker-compose.yml").exists() or (repo_root / "docker-compose.yaml").exists()
-        has_k8s = (repo_root / "k8s").exists() or (repo_root / "kubernetes").exists() or (repo_root / "deploy" / "k8s").exists()
-        
+        has_k8s = (
+            (repo_root / "k8s").exists()
+            or (repo_root / "kubernetes").exists()
+            or (repo_root / "deploy" / "k8s").exists()
+        )
+
         # Check healthcheck probe existence in app
         has_health_endpoint = False
         app_dir = repo_root / "app"
@@ -36,7 +40,11 @@ class RuntimeVerifier:
         has_gunicorn_uvicorn = False
         if has_dockerfile:
             try:
-                df_path = repo_root / "Dockerfile" if (repo_root / "Dockerfile").exists() else repo_root / "docker" / "Dockerfile"
+                df_path = (
+                    repo_root / "Dockerfile"
+                    if (repo_root / "Dockerfile").exists()
+                    else repo_root / "docker" / "Dockerfile"
+                )
                 with open(df_path, "r", encoding="utf-8", errors="ignore") as fp:
                     df_content = fp.read().lower()
                     if "uvicorn" in df_content or "gunicorn" in df_content:

@@ -15,7 +15,7 @@ class LLMFactory:
     def get_provider(provider_name: Optional[str] = None) -> LLMProvider:
         """
         Instantiates and returns an LLMProvider instance.
-        
+
         :param provider_name: Target provider name (default: 'gemini')
         :return: LLMProvider concrete instance
         """

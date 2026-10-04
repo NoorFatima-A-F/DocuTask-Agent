@@ -14,6 +14,7 @@ class FormulaSpec:
     """
     Specification of a deterministic mathematical formula.
     """
+
     formula_id: str
     name: str
     expression: str

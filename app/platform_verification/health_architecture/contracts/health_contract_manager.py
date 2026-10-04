@@ -2,6 +2,7 @@
 Universal Health Contract Manager (Part 3H.1B).
 Enforces and validates the strict contract separation between /live, /ready, and /health endpoints.
 """
+
 from typing import Dict, Any
 from app.platform_verification.health_architecture.domain.models import (
     HealthContractReport,
@@ -100,7 +101,9 @@ class HealthContractManager(IHealthContractManager):
     def execute_liveness(self, uptime_seconds: float = 5000.0) -> Dict[str, Any]:
         return self.execute_live_check(uptime_seconds=uptime_seconds)
 
-    def execute_ready_check(self, db_healthy: bool = True, redis_healthy: bool = True, storage_healthy: bool = True) -> Dict[str, Any]:
+    def execute_ready_check(
+        self, db_healthy: bool = True, redis_healthy: bool = True, storage_healthy: bool = True
+    ) -> Dict[str, Any]:
         """
         Readiness check: evaluates critical dependencies.
         """
@@ -116,8 +119,12 @@ class HealthContractManager(IHealthContractManager):
             },
         }
 
-    def execute_readiness(self, db_healthy: bool = True, redis_healthy: bool = True, storage_healthy: bool = True) -> Dict[str, Any]:
-        return self.execute_ready_check(db_healthy=db_healthy, redis_healthy=redis_healthy, storage_healthy=storage_healthy)
+    def execute_readiness(
+        self, db_healthy: bool = True, redis_healthy: bool = True, storage_healthy: bool = True
+    ) -> Dict[str, Any]:
+        return self.execute_ready_check(
+            db_healthy=db_healthy, redis_healthy=redis_healthy, storage_healthy=storage_healthy
+        )
 
     def execute_full_health_check(
         self,

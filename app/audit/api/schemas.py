@@ -15,20 +15,20 @@ class CreateEventRequest(BaseModel):
     organization_id: Optional[str] = None
     workspace_id: Optional[str] = None
     environment: str = "production"
-    
+
     actor_id: str
     actor_type: ActorType = ActorType.USER
     actor_name: Optional[str] = None
-    
+
     action: str
     resource_type: str
     resource_id: str
-    
+
     correlation_id: Optional[str] = None
     request_id: Optional[str] = None
     workflow_id: Optional[str] = None
     agent_id: Optional[str] = None
-    
+
     severity: AuditSeverity = AuditSeverity.INFO
     outcome: OutcomeType = OutcomeType.SUCCESS
     risk_score: float = 0.0

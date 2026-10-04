@@ -29,18 +29,46 @@ class RecoveryObservabilityVerifier(IRecoveryObservabilityVerifier):
 
     def verify(self) -> RecoveryObservabilityReport:
         metrics = [
-            RecoveryMetricItem(metric_name="backup_success_rate", value=100.0, unit="%", threshold=">=99.9%", status="NORMAL"),
-            RecoveryMetricItem(metric_name="restore_duration_seconds", value=1104.0, unit="seconds", threshold="<3600s", status="NORMAL"),
-            RecoveryMetricItem(metric_name="restore_failures_count", value=0.0, unit="count", threshold="==0", status="NORMAL"),
-            RecoveryMetricItem(metric_name="data_integrity_score", value=100.0, unit="%", threshold="==100%", status="NORMAL"),
-            RecoveryMetricItem(metric_name="rto_actual_minutes", value=42.0, unit="minutes", threshold="<60m", status="NORMAL"),
-            RecoveryMetricItem(metric_name="rpo_actual_minutes", value=8.0, unit="minutes", threshold="<15m", status="NORMAL"),
-            RecoveryMetricItem(metric_name="data_loss_records", value=0.0, unit="records", threshold="==0", status="NORMAL"),
-            RecoveryMetricItem(metric_name="backup_storage_usage_mb", value=1420.0, unit="MB", threshold="<5000MB", status="NORMAL"),
-            RecoveryMetricItem(metric_name="wal_archive_lag_seconds", value=4.5, unit="seconds", threshold="<30s", status="NORMAL"),
-            RecoveryMetricItem(metric_name="sha256_parity_rate", value=100.0, unit="%", threshold="==100%", status="NORMAL"),
-            RecoveryMetricItem(metric_name="audit_events_recorded", value=48.0, unit="events", threshold=">=20", status="NORMAL"),
-            RecoveryMetricItem(metric_name="trace_spans_correlated", value=100.0, unit="%", threshold="==100%", status="NORMAL"),
+            RecoveryMetricItem(
+                metric_name="backup_success_rate", value=100.0, unit="%", threshold=">=99.9%", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="restore_duration_seconds",
+                value=1104.0,
+                unit="seconds",
+                threshold="<3600s",
+                status="NORMAL",
+            ),
+            RecoveryMetricItem(
+                metric_name="restore_failures_count", value=0.0, unit="count", threshold="==0", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="data_integrity_score", value=100.0, unit="%", threshold="==100%", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="rto_actual_minutes", value=42.0, unit="minutes", threshold="<60m", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="rpo_actual_minutes", value=8.0, unit="minutes", threshold="<15m", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="data_loss_records", value=0.0, unit="records", threshold="==0", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="backup_storage_usage_mb", value=1420.0, unit="MB", threshold="<5000MB", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="wal_archive_lag_seconds", value=4.5, unit="seconds", threshold="<30s", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="sha256_parity_rate", value=100.0, unit="%", threshold="==100%", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="audit_events_recorded", value=48.0, unit="events", threshold=">=20", status="NORMAL"
+            ),
+            RecoveryMetricItem(
+                metric_name="trace_spans_correlated", value=100.0, unit="%", threshold="==100%", status="NORMAL"
+            ),
         ]
 
         checks = [

@@ -24,9 +24,7 @@ def test_auditor_simulation_full_pass():
 
 
 def test_auditor_simulation_blocks_on_missing_security():
-    evidence = [
-        {"id": "EV-TEST-1", "category": "AutomatedTesting", "classification": "VERIFIED"}
-    ]
+    evidence = [{"id": "EV-TEST-1", "category": "AutomatedTesting", "classification": "VERIFIED"}]
     rep = AuditorSimulator.run_simulation(evidence, {}, target_system="DocuTask Agent", target_version="v1.0.0")
 
     assert rep.consensus_passed is False

@@ -29,9 +29,30 @@ class AutoScalingReadinessVerifier(IAutoScalingReadinessVerifier):
 
     def verify(self) -> AutoScalingReport:
         dimensions = [
-            AutoScalingDimension(tier_name="FastAPI Gateway Tier", min_instances=2, max_instances=20, scale_out_metric="CPU Utilization & HTTP RPS", scale_out_threshold="70% CPU / 150 RPS per pod", cooldown_seconds=60),
-            AutoScalingDimension(tier_name="Celery Worker Tier", min_instances=2, max_instances=50, scale_out_metric="Queue Depth & Task Backlog", scale_out_threshold="Queue Depth > 50 tasks", cooldown_seconds=90),
-            AutoScalingDimension(tier_name="Autonomous Agent Tier", min_instances=1, max_instances=10, scale_out_metric="Active Agent Workflow Count", scale_out_threshold="Workflows > 5 per instance", cooldown_seconds=60),
+            AutoScalingDimension(
+                tier_name="FastAPI Gateway Tier",
+                min_instances=2,
+                max_instances=20,
+                scale_out_metric="CPU Utilization & HTTP RPS",
+                scale_out_threshold="70% CPU / 150 RPS per pod",
+                cooldown_seconds=60,
+            ),
+            AutoScalingDimension(
+                tier_name="Celery Worker Tier",
+                min_instances=2,
+                max_instances=50,
+                scale_out_metric="Queue Depth & Task Backlog",
+                scale_out_threshold="Queue Depth > 50 tasks",
+                cooldown_seconds=90,
+            ),
+            AutoScalingDimension(
+                tier_name="Autonomous Agent Tier",
+                min_instances=1,
+                max_instances=10,
+                scale_out_metric="Active Agent Workflow Count",
+                scale_out_threshold="Workflows > 5 per instance",
+                cooldown_seconds=60,
+            ),
         ]
 
         checks = [

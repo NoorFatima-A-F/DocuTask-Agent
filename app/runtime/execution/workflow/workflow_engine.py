@@ -166,14 +166,22 @@ class WorkflowEngine:
                     step_id="step_gather_telemetry",
                     name="Extract Warehouse Error Logs",
                     tool_id="postgres_execute_query",
-                    inputs={"connection_id": "conn_postgres_warehouse", "query": "SELECT * FROM system_error_logs WHERE severity='CRITICAL' LIMIT 5;"},
+                    inputs={
+                        "connection_id": "conn_postgres_warehouse",
+                        "query": "SELECT * FROM system_error_logs WHERE severity='CRITICAL' LIMIT 5;",
+                    },
                     depends_on=[],
                 ),
                 WorkflowStep(
                     step_id="step_create_github_pr",
                     name="Create Automated Patch Pull Request",
                     tool_id="github_create_pull_request",
-                    inputs={"repo": "enterprise-corp/core-api", "title": "fix(core): autonomous memory leak patch", "head": "bot/patch-v1.4.2", "base": "main"},
+                    inputs={
+                        "repo": "enterprise-corp/core-api",
+                        "title": "fix(core): autonomous memory leak patch",
+                        "head": "bot/patch-v1.4.2",
+                        "base": "main",
+                    },
                     depends_on=["step_gather_telemetry"],
                     is_compensable=True,
                     compensation_tool_id="github_close_pull_request",
@@ -191,7 +199,11 @@ class WorkflowEngine:
                     step_id="step_notify_ops",
                     name="Broadcast War Room Notification",
                     tool_id="slack_send_channel_message",
-                    inputs={"channel": "#autonomous-ops-feed", "message": "🚀 Autonomous Hotfix Canary deployed and verified successfully.", "priority": "high"},
+                    inputs={
+                        "channel": "#autonomous-ops-feed",
+                        "message": "🚀 Autonomous Hotfix Canary deployed and verified successfully.",
+                        "priority": "high",
+                    },
                     depends_on=["step_scale_canary"],
                     is_compensable=False,
                 ),
@@ -214,6 +226,7 @@ class WorkflowEngine:
 
     def interpolate_inputs(self, raw_inputs: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
         """Substitutes variables formatted as `${steps.step_1.output.key}` or `${vars.key}`."""
+
         def _resolve_val(val: Any) -> Any:
             if isinstance(val, str):
                 # Check for exact variable replacement
@@ -221,7 +234,7 @@ class WorkflowEngine:
                 matches = re.findall(pattern, val)
                 if not matches:
                     return val
-                
+
                 # If entire string is one variable
                 if len(matches) == 1 and val.strip() == f"${{{matches[0]}}}":
                     path = matches[0].split(".")
@@ -232,7 +245,7 @@ class WorkflowEngine:
                         else:
                             return val
                     return cur if cur is not None else val
-                
+
                 # Replace inline tokens
                 result = val
                 for m in matches:

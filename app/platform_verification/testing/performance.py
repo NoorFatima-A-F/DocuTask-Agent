@@ -2,10 +2,12 @@
 Performance Benchmark and Latency Distribution Engine.
 Computes P50, P95, P99 percentiles, throughput, and detects latency regressions.
 """
+
 from dataclasses import dataclass
 from typing import List, Any, Callable
 import time
 import math
+
 
 @dataclass(frozen=True)
 class LatencyDistribution:
@@ -18,6 +20,7 @@ class LatencyDistribution:
     mean_ms: float
     sample_count: int
 
+
 @dataclass(frozen=True)
 class BenchmarkResult:
     benchmark_name: str
@@ -27,8 +30,10 @@ class BenchmarkResult:
     passed_slo: bool
     slo_p99_threshold_ms: float
 
+
 class PerformanceBenchmarkEngine:
     """Runs micro-benchmarks and load simulations for verification operations."""
+
     @staticmethod
     def calculate_distribution(latencies_ms: List[float]) -> LatencyDistribution:
         if not latencies_ms:
@@ -48,15 +53,11 @@ class PerformanceBenchmarkEngine:
             min_ms=sorted_lat[0],
             max_ms=sorted_lat[-1],
             mean_ms=sum(sorted_lat) / n,
-            sample_count=n
+            sample_count=n,
         )
 
     def run_benchmark(
-        self,
-        name: str,
-        operation: Callable[[], Any],
-        iterations: int = 100,
-        slo_p99_ms: float = 50.0
+        self, name: str, operation: Callable[[], Any], iterations: int = 100, slo_p99_ms: float = 50.0
     ) -> BenchmarkResult:
         latencies = []
         start_total = time.monotonic()
@@ -76,5 +77,5 @@ class PerformanceBenchmarkEngine:
             latency=dist,
             memory_peak_mb=12.5,
             passed_slo=passed,
-            slo_p99_threshold_ms=slo_p99_ms
+            slo_p99_threshold_ms=slo_p99_ms,
         )

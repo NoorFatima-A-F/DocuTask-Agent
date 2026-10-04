@@ -22,7 +22,7 @@ class DatasetManager:
                     page_count=1,
                     language="eng",
                     source="synthetic_gold_standard",
-                    difficulty_level="medium"
+                    difficulty_level="medium",
                 ),
                 ocr_text=(
                     "INVOICE # INV-2026-901\n"
@@ -40,15 +40,20 @@ class DatasetManager:
                     "invoice_date": "2026-08-15",
                     "total_amount": 5400.00,
                     "currency": "USD",
-                    "tax_amount": 400.00
+                    "tax_amount": 400.00,
                 },
                 annotations=[
-                    FieldAnnotation(field_name="invoice_number", expected_value="INV-2026-901", data_type="string", required=True),
-                    FieldAnnotation(field_name="vendor_name", expected_value="Apex Solutions Inc", data_type="string", required=True),
-                    FieldAnnotation(field_name="total_amount", expected_value=5400.00, data_type="number", required=True)
-                ]
+                    FieldAnnotation(
+                        field_name="invoice_number", expected_value="INV-2026-901", data_type="string", required=True
+                    ),
+                    FieldAnnotation(
+                        field_name="vendor_name", expected_value="Apex Solutions Inc", data_type="string", required=True
+                    ),
+                    FieldAnnotation(
+                        field_name="total_amount", expected_value=5400.00, data_type="number", required=True
+                    ),
+                ],
             ),
-
             # 2. Receipt Gold Standard
             GoldDatasetItem(
                 metadata=DatasetMetadata(
@@ -57,7 +62,7 @@ class DatasetManager:
                     page_count=1,
                     language="eng",
                     source="synthetic_gold_standard",
-                    difficulty_level="easy"
+                    difficulty_level="easy",
                 ),
                 ocr_text=(
                     "METRO RETAIL STORE #402\n"
@@ -73,14 +78,18 @@ class DatasetManager:
                     "subtotal": 45.00,
                     "tax": 3.60,
                     "total_amount": 48.60,
-                    "payment_method": "Credit Card"
+                    "payment_method": "Credit Card",
                 },
                 annotations=[
-                    FieldAnnotation(field_name="store_name", expected_value="METRO RETAIL STORE #402", data_type="string", required=True),
-                    FieldAnnotation(field_name="total_amount", expected_value=48.60, data_type="number", required=True)
-                ]
+                    FieldAnnotation(
+                        field_name="store_name",
+                        expected_value="METRO RETAIL STORE #402",
+                        data_type="string",
+                        required=True,
+                    ),
+                    FieldAnnotation(field_name="total_amount", expected_value=48.60, data_type="number", required=True),
+                ],
             ),
-
             # 3. Contract Gold Standard
             GoldDatasetItem(
                 metadata=DatasetMetadata(
@@ -89,7 +98,7 @@ class DatasetManager:
                     page_count=2,
                     language="eng",
                     source="synthetic_gold_standard",
-                    difficulty_level="hard"
+                    difficulty_level="hard",
                 ),
                 ocr_text=(
                     "SOFTWARE SERVICES AGREEMENT\n"
@@ -105,14 +114,23 @@ class DatasetManager:
                     "effective_date": "2026-01-01",
                     "expiration_date": "2028-01-01",
                     "governing_law": "State of California",
-                    "total_value": "$120,000"
+                    "total_value": "$120,000",
                 },
                 annotations=[
-                    FieldAnnotation(field_name="contract_title", expected_value="SOFTWARE SERVICES AGREEMENT", data_type="string", required=True),
-                    FieldAnnotation(field_name="governing_law", expected_value="State of California", data_type="string", required=True)
-                ]
+                    FieldAnnotation(
+                        field_name="contract_title",
+                        expected_value="SOFTWARE SERVICES AGREEMENT",
+                        data_type="string",
+                        required=True,
+                    ),
+                    FieldAnnotation(
+                        field_name="governing_law",
+                        expected_value="State of California",
+                        data_type="string",
+                        required=True,
+                    ),
+                ],
             ),
-
             # 4. Identity / Passport Gold Standard
             GoldDatasetItem(
                 metadata=DatasetMetadata(
@@ -121,7 +139,7 @@ class DatasetManager:
                     page_count=1,
                     language="eng",
                     source="synthetic_gold_standard",
-                    difficulty_level="easy"
+                    difficulty_level="easy",
                 ),
                 ocr_text=(
                     "PASSPORT / PASSEPORT\n"
@@ -138,13 +156,14 @@ class DatasetManager:
                     "given_names": "JANE DOE",
                     "nationality": "USA",
                     "date_of_birth": "1990-05-14",
-                    "expiry_date": "2030-05-14"
+                    "expiry_date": "2030-05-14",
                 },
                 annotations=[
-                    FieldAnnotation(field_name="passport_number", expected_value="P987654321", data_type="string", required=True)
-                ]
+                    FieldAnnotation(
+                        field_name="passport_number", expected_value="P987654321", data_type="string", required=True
+                    )
+                ],
             ),
-
             # 5. Medical Report Gold Standard
             GoldDatasetItem(
                 metadata=DatasetMetadata(
@@ -153,7 +172,7 @@ class DatasetManager:
                     page_count=1,
                     language="eng",
                     source="synthetic_gold_standard",
-                    difficulty_level="medium"
+                    difficulty_level="medium",
                 ),
                 ocr_text=(
                     "CLINICAL HEALTH CENTER\n"
@@ -168,13 +187,17 @@ class DatasetManager:
                     "doctor_name": "Dr. Sarah Jenkins",
                     "visit_date": "2026-08-10",
                     "diagnosis": "Acute Bronchitis",
-                    "prescribed_medications": ["Amoxicillin 500mg"]
+                    "prescribed_medications": ["Amoxicillin 500mg"],
                 },
                 annotations=[
-                    FieldAnnotation(field_name="patient_name", expected_value="Robert Johnson", data_type="string", required=True),
-                    FieldAnnotation(field_name="diagnosis", expected_value="Acute Bronchitis", data_type="string", required=True)
-                ]
-            )
+                    FieldAnnotation(
+                        field_name="patient_name", expected_value="Robert Johnson", data_type="string", required=True
+                    ),
+                    FieldAnnotation(
+                        field_name="diagnosis", expected_value="Acute Bronchitis", data_type="string", required=True
+                    ),
+                ],
+            ),
         ]
 
     @classmethod

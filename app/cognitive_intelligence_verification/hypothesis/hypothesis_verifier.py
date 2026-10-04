@@ -86,7 +86,9 @@ class HypothesisVerifier:
             {"id": "h3", "plausibility": 0.45, "evidence": 1},
         ]
         # Verify monotonically non-increasing ranking
-        is_sorted = all(hypotheses[i]["plausibility"] >= hypotheses[i+1]["plausibility"] for i in range(len(hypotheses)-1))
+        is_sorted = all(
+            hypotheses[i]["plausibility"] >= hypotheses[i + 1]["plausibility"] for i in range(len(hypotheses) - 1)
+        )
         passed = is_sorted and hypotheses[0]["id"] == "h1"
         t_ms = (time.perf_counter() - t0) * 1000.0
         return AssertionResult(
@@ -101,7 +103,10 @@ class HypothesisVerifier:
         t0 = time.perf_counter()
         hyp = {
             "statement": "Batch processing latency spike caused by downstream OCR node CPU saturation",
-            "supporting_spans": ["Telemetry log: OCR node CPU at 98.4% at 14:02 UTC", "Queue depth increased to 450 items"],
+            "supporting_spans": [
+                "Telemetry log: OCR node CPU at 98.4% at 14:02 UTC",
+                "Queue depth increased to 450 items",
+            ],
             "contradiction_spans": [],
         }
         passed = len(hyp["supporting_spans"]) == 2 and len(hyp["contradiction_spans"]) == 0

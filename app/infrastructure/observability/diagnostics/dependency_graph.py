@@ -18,6 +18,7 @@ logger = logging.getLogger("infrastructure.observability.diagnostics.dependency_
 
 class DependencyEdge(BaseModel):
     """Directed dependency connection from caller service to callee service."""
+
     caller_service: str
     callee_service: str
     call_count: int = 0

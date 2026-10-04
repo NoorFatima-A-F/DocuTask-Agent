@@ -1,6 +1,7 @@
 """
 Phase 3H.5: Domain Interfaces for Enterprise Health Intelligence
 """
+
 from abc import ABC, abstractmethod
 from .models import (
     HealthEventArchitectureReport,

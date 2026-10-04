@@ -85,11 +85,13 @@ class RedisTaskQueue(TaskQueueBackend):
             return None
 
         expires_at = now + timedelta(seconds=lease_duration_seconds)
-        lease_data = json.dumps({
-            "worker_id": worker_id,
-            "expires_at": expires_at.isoformat(),
-            "acquired_at": now.isoformat(),
-        })
+        lease_data = json.dumps(
+            {
+                "worker_id": worker_id,
+                "expires_at": expires_at.isoformat(),
+                "acquired_at": now.isoformat(),
+            }
+        )
         await self.client.hset(self._leases_hash(), str(selected_job.job_id), lease_data)
 
         running_job = selected_job.mark_scheduled(worker_id).mark_running()

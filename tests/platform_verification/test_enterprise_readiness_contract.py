@@ -1,6 +1,7 @@
 """
 Pytest Test Suite for Part 3H.3.1: Enterprise Readiness Contract Architecture Verification Framework
 """
+
 import json
 import pytest
 
@@ -15,9 +16,13 @@ from app.platform_verification.readiness_contract.decision.readiness_decision_en
 from app.platform_verification.readiness_contract.policy.readiness_policy_engine import ReadinessPolicyEngine
 from app.platform_verification.readiness_contract.startup.startup_readiness_validator import StartupReadinessValidator
 from app.platform_verification.readiness_contract.transitions.failure_transition_tester import FailureTransitionTester
-from app.platform_verification.readiness_contract.orchestration.readiness_orchestration_verifier import ReadinessOrchestrationVerifier
+from app.platform_verification.readiness_contract.orchestration.readiness_orchestration_verifier import (
+    ReadinessOrchestrationVerifier,
+)
 from app.platform_verification.readiness_contract.security.readiness_security_verifier import ReadinessSecurityVerifier
-from app.platform_verification.readiness_contract.observability.readiness_metrics_exporter import ReadinessMetricsExporter
+from app.platform_verification.readiness_contract.observability.readiness_metrics_exporter import (
+    ReadinessMetricsExporter,
+)
 from app.platform_verification.readiness_contract.runtime.readiness_runtime import ReadinessRuntime
 
 
@@ -78,19 +83,37 @@ def test_readiness_decision_engine():
     de = ReadinessDecisionEngine()
 
     # All healthy -> READY, ADMIT_TRAFFIC
-    signals_ok = {"database": "healthy", "queue": "healthy", "storage": "healthy", "workers": "healthy", "ai_provider": "healthy"}
+    signals_ok = {
+        "database": "healthy",
+        "queue": "healthy",
+        "storage": "healthy",
+        "workers": "healthy",
+        "ai_provider": "healthy",
+    }
     state, action = de.evaluate_signals(signals_ok)
     assert state == ReadinessState.READY
     assert action == TrafficAction.ADMIT_TRAFFIC
 
     # Critical down -> NOT_READY, WITHHOLD_TRAFFIC
-    signals_crit = {"database": "failed", "queue": "healthy", "storage": "healthy", "workers": "healthy", "ai_provider": "healthy"}
+    signals_crit = {
+        "database": "failed",
+        "queue": "healthy",
+        "storage": "healthy",
+        "workers": "healthy",
+        "ai_provider": "healthy",
+    }
     state_crit, action_crit = de.evaluate_signals(signals_crit)
     assert state_crit == ReadinessState.NOT_READY
     assert action_crit == TrafficAction.WITHHOLD_TRAFFIC
 
     # Non-critical down -> DEGRADED, THROTTLE_TRAFFIC
-    signals_deg = {"database": "healthy", "queue": "healthy", "storage": "healthy", "workers": "healthy", "ai_provider": "degraded"}
+    signals_deg = {
+        "database": "healthy",
+        "queue": "healthy",
+        "storage": "healthy",
+        "workers": "healthy",
+        "ai_provider": "degraded",
+    }
     state_deg, action_deg = de.evaluate_signals(signals_deg)
     assert state_deg == ReadinessState.DEGRADED
     assert action_deg == TrafficAction.THROTTLE_TRAFFIC

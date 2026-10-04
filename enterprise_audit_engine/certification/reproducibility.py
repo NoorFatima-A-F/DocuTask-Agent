@@ -49,10 +49,14 @@ class AuditReproducibilityVerifier:
 
         # 4. Compare overall classification and confidence
         if result_a["overall_classification"] != result_b["overall_classification"]:
-            differences.append(f"Overall classification mismatch: Run A={result_a['overall_classification']} vs Run B={result_b['overall_classification']}")
+            differences.append(
+                f"Overall classification mismatch: Run A={result_a['overall_classification']} vs Run B={result_b['overall_classification']}"
+            )
 
         if result_a["overall_confidence"] != result_b["overall_confidence"]:
-            differences.append(f"Overall confidence mismatch: Run A={result_a['overall_confidence']} vs Run B={result_b['overall_confidence']}")
+            differences.append(
+                f"Overall confidence mismatch: Run A={result_a['overall_confidence']} vs Run B={result_b['overall_confidence']}"
+            )
 
         is_deterministic = len(differences) == 0
 

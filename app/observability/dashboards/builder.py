@@ -45,9 +45,13 @@ class DashboardEngine:
             name="Global Platform Operations & Infrastructure",
             dashboard_type=DashboardType.GLOBAL_PLATFORM,
             widgets=[
-                DashboardWidget("w-node-health", "Cluster Node Health Status", WidgetType.GAUGE, ["node_health_status"]),
+                DashboardWidget(
+                    "w-node-health", "Cluster Node Health Status", WidgetType.GAUGE, ["node_health_status"]
+                ),
                 DashboardWidget("w-node-cpu", "Cluster CPU Usage %", WidgetType.TIMESERIES, ["node_cpu_usage_percent"]),
-                DashboardWidget("w-node-mem", "Cluster Memory Usage %", WidgetType.TIMESERIES, ["node_memory_usage_percent"]),
+                DashboardWidget(
+                    "w-node-mem", "Cluster Memory Usage %", WidgetType.TIMESERIES, ["node_memory_usage_percent"]
+                ),
                 DashboardWidget("w-active-workers", "Runtime Worker Count", WidgetType.GAUGE, ["runtime_worker_count"]),
             ],
             tags=["global", "sre", "infrastructure"],
@@ -60,10 +64,16 @@ class DashboardEngine:
             name="SRE Golden Signals & Reliability",
             dashboard_type=DashboardType.SRE_GOLDEN_SIGNALS,
             widgets=[
-                DashboardWidget("w-traffic-rate", "Throughput (Docs/Min)", WidgetType.TIMESERIES, ["runtime_execution_rate_dpm"]),
+                DashboardWidget(
+                    "w-traffic-rate", "Throughput (Docs/Min)", WidgetType.TIMESERIES, ["runtime_execution_rate_dpm"]
+                ),
                 DashboardWidget("w-queue-depth", "Queue Backlog Depth", WidgetType.TIMESERIES, ["runtime_queue_depth"]),
-                DashboardWidget("w-task-failures", "Task Failure Count", WidgetType.TIMESERIES, ["runtime_tasks_failed_total"]),
-                DashboardWidget("w-slo-status", "API SLO Compliance Heatmap", WidgetType.SLO_HEATMAP, ["slo_compliance_percent"]),
+                DashboardWidget(
+                    "w-task-failures", "Task Failure Count", WidgetType.TIMESERIES, ["runtime_tasks_failed_total"]
+                ),
+                DashboardWidget(
+                    "w-slo-status", "API SLO Compliance Heatmap", WidgetType.SLO_HEATMAP, ["slo_compliance_percent"]
+                ),
             ],
             tags=["sre", "golden-signals", "reliability"],
         )
@@ -75,10 +85,21 @@ class DashboardEngine:
             name="AI System Performance & Model Operations",
             dashboard_type=DashboardType.AI_OPERATIONS,
             widgets=[
-                DashboardWidget("w-ai-requests", "AI Model Invocations", WidgetType.TIMESERIES, ["ai_model_requests_total"]),
-                DashboardWidget("w-ai-tokens", "Token Usage (Prompt & Completion)", WidgetType.TIMESERIES, ["ai_prompt_tokens_total", "ai_completion_tokens_total"]),
-                DashboardWidget("w-ai-latency", "Model Inference Latency (p95)", WidgetType.TIMESERIES, ["ai_model_latency_seconds"]),
-                DashboardWidget("w-ai-hallucinations", "Hallucination Events", WidgetType.TIMESERIES, ["ai_hallucinations_total"]),
+                DashboardWidget(
+                    "w-ai-requests", "AI Model Invocations", WidgetType.TIMESERIES, ["ai_model_requests_total"]
+                ),
+                DashboardWidget(
+                    "w-ai-tokens",
+                    "Token Usage (Prompt & Completion)",
+                    WidgetType.TIMESERIES,
+                    ["ai_prompt_tokens_total", "ai_completion_tokens_total"],
+                ),
+                DashboardWidget(
+                    "w-ai-latency", "Model Inference Latency (p95)", WidgetType.TIMESERIES, ["ai_model_latency_seconds"]
+                ),
+                DashboardWidget(
+                    "w-ai-hallucinations", "Hallucination Events", WidgetType.TIMESERIES, ["ai_hallucinations_total"]
+                ),
             ],
             tags=["ai", "agents", "llm-ops"],
         )
@@ -90,8 +111,12 @@ class DashboardEngine:
             name="Tenant Workflow & Usage Dashboard",
             dashboard_type=DashboardType.TENANT_OPERATIONS,
             widgets=[
-                DashboardWidget("w-tenant-wf-started", "Workflows Started", WidgetType.TIMESERIES, ["workflow_started_total"]),
-                DashboardWidget("w-tenant-wf-failed", "Workflows Failed", WidgetType.TIMESERIES, ["workflow_failed_total"]),
+                DashboardWidget(
+                    "w-tenant-wf-started", "Workflows Started", WidgetType.TIMESERIES, ["workflow_started_total"]
+                ),
+                DashboardWidget(
+                    "w-tenant-wf-failed", "Workflows Failed", WidgetType.TIMESERIES, ["workflow_failed_total"]
+                ),
                 DashboardWidget("w-tenant-cost", "Cumulative AI Cost ($)", WidgetType.GAUGE, ["agent_cost_usd_total"]),
             ],
             tags=["tenant", "usage", "billing"],
@@ -133,12 +158,14 @@ class DashboardEngine:
                     if q in h_key:
                         w_values[h_key] = h_val
 
-            widgets_data.append({
-                "widget_id": w.widget_id,
-                "title": w.title,
-                "widget_type": w.widget_type.value,
-                "data": w_values,
-            })
+            widgets_data.append(
+                {
+                    "widget_id": w.widget_id,
+                    "title": w.title,
+                    "widget_type": w.widget_type.value,
+                    "data": w_values,
+                }
+            )
 
         return {
             "dashboard_id": db.dashboard_id,

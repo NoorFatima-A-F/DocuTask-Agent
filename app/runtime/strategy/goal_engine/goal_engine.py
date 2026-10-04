@@ -338,16 +338,22 @@ class GoalEvolutionEngine:
                     continue
                 # Check for reciprocal blocking
                 for target_dep in target.dependencies:
-                    if target_dep.target_goal_id == goal.goal_id and dep.dependency_type == "BLOCKING" and target_dep.dependency_type == "BLOCKING":
+                    if (
+                        target_dep.target_goal_id == goal.goal_id
+                        and dep.dependency_type == "BLOCKING"
+                        and target_dep.dependency_type == "BLOCKING"
+                    ):
                         conflict_id = f"conflict-{goal.goal_id}-{target.goal_id}"
                         if conflict_id not in visited:
                             visited.add(conflict_id)
-                            conflicts.append({
-                                "conflict_id": conflict_id,
-                                "goals": [goal.goal_id, target.goal_id],
-                                "reason": "Mutual deadlocking dependency detected",
-                                "severity": "CRITICAL",
-                            })
+                            conflicts.append(
+                                {
+                                    "conflict_id": conflict_id,
+                                    "goals": [goal.goal_id, target.goal_id],
+                                    "reason": "Mutual deadlocking dependency detected",
+                                    "severity": "CRITICAL",
+                                }
+                            )
                             self.event_log.append(
                                 StrategicConflictDetected(
                                     conflict_id=conflict_id,

@@ -57,7 +57,7 @@ def test_ai_validator_schema_matching():
         "vendor_name": "Acme Corp",
         "customer_name": "Tech Corp",
         "total_amount": 2500.50,
-        "currency": "USD"
+        "currency": "USD",
     }
     validated_dict, conf = AIValidator.validate(sample_invoice, "invoice")
     assert validated_dict["invoice_number"] == "INV-100200"
@@ -90,22 +90,16 @@ async def test_ai_extraction_service_workflow_and_caching(db_session: AsyncSessi
     doc_service = DocumentService(document_repo=doc_repo, storage_provider=storage)
     ocr_pipeline = OCRPipeline(ocr_provider=TesseractOCRProvider())
     ocr_service = OCRService(
-        document_repo=doc_repo,
-        extracted_text_repo=text_repo,
-        storage_provider=storage,
-        ocr_pipeline=ocr_pipeline
+        document_repo=doc_repo, extracted_text_repo=text_repo, storage_provider=storage, ocr_pipeline=ocr_pipeline
     )
-    ai_service = AIExtractionService(
-        document_repo=doc_repo,
-        ai_extraction_repo=ai_repo,
-        ocr_service=ocr_service
-    )
+    ai_service = AIExtractionService(document_repo=doc_repo, ai_extraction_repo=ai_repo, ocr_service=ocr_service)
 
     user = await user_repo.create({"email": "ai_user@example.com", "username": "aiuser", "hashed_password": "p"})
 
     # Upload document
     from PIL import Image
     import io
+
     img = Image.new("RGB", (100, 50), color="white")
     buf = io.BytesIO()
     img.save(buf, format="PNG")
@@ -144,7 +138,12 @@ async def test_ai_extraction_ownership_isolation(db_session: AsyncSession, temp_
     storage = LocalStorageProvider(base_directory=temp_storage_dir)
 
     doc_service = DocumentService(document_repo=doc_repo, storage_provider=storage)
-    ocr_service = OCRService(document_repo=doc_repo, extracted_text_repo=text_repo, storage_provider=storage, ocr_pipeline=OCRPipeline(ocr_provider=TesseractOCRProvider()))
+    ocr_service = OCRService(
+        document_repo=doc_repo,
+        extracted_text_repo=text_repo,
+        storage_provider=storage,
+        ocr_pipeline=OCRPipeline(ocr_provider=TesseractOCRProvider()),
+    )
     ai_service = AIExtractionService(document_repo=doc_repo, ai_extraction_repo=ai_repo, ocr_service=ocr_service)
 
     u1 = await user_repo.create({"email": "ai1@example.com", "username": "ai1", "hashed_password": "p"})
@@ -152,6 +151,7 @@ async def test_ai_extraction_ownership_isolation(db_session: AsyncSession, temp_
 
     from PIL import Image
     import io
+
     img = Image.new("RGB", (50, 50), color="white")
     buf = io.BytesIO()
     img.save(buf, format="PNG")
@@ -173,23 +173,20 @@ async def test_ai_api_full_workflow(client: AsyncClient):
     """Verifies AI HTTP endpoints via AsyncClient."""
 
     # 1. Register & Login User
-    reg = await client.post("/api/v1/auth/register", json={
-        "email": "ai_api_user@example.com",
-        "username": "aiapiuser",
-        "password": "Password123!"
-    })
+    reg = await client.post(
+        "/api/v1/auth/register",
+        json={"email": "ai_api_user@example.com", "username": "aiapiuser", "password": "Password123!"},
+    )
     assert reg.status_code == 201
 
-    login = await client.post("/api/v1/auth/login", json={
-        "username_or_email": "aiapiuser",
-        "password": "Password123!"
-    })
+    login = await client.post("/api/v1/auth/login", json={"username_or_email": "aiapiuser", "password": "Password123!"})
     token = login.json()["data"]["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
     # 2. Upload Document
     from PIL import Image
     import io
+
     img = Image.new("RGB", (100, 50), color="white")
     buf = io.BytesIO()
     img.save(buf, format="PNG")

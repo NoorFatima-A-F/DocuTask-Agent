@@ -21,9 +21,18 @@ class AccessControlEngine(IAccessControlEngine):
         Audits IAM permission policies against the enterprise least-privilege matrix.
         """
         role_matrix = {
-            "BackupWriterService": {"allowed_actions": ["s3:PutObject", "kms:GenerateDataKey"], "denied_actions": ["s3:GetObject", "s3:DeleteObject"]},
-            "DisasterRecoveryService": {"allowed_actions": ["s3:GetObject", "kms:Decrypt"], "denied_actions": ["s3:PutObject", "s3:DeleteObject"]},
-            "ComplianceAuditor": {"allowed_actions": ["s3:ListBucket", "kms:DescribeKey"], "denied_actions": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]},
+            "BackupWriterService": {
+                "allowed_actions": ["s3:PutObject", "kms:GenerateDataKey"],
+                "denied_actions": ["s3:GetObject", "s3:DeleteObject"],
+            },
+            "DisasterRecoveryService": {
+                "allowed_actions": ["s3:GetObject", "kms:Decrypt"],
+                "denied_actions": ["s3:PutObject", "s3:DeleteObject"],
+            },
+            "ComplianceAuditor": {
+                "allowed_actions": ["s3:ListBucket", "kms:DescribeKey"],
+                "denied_actions": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+            },
             "GeneralDevelopers": {"allowed_actions": [], "denied_actions": ["s3:*", "kms:*"]},
         }
 

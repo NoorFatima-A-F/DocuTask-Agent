@@ -137,9 +137,7 @@ class AuditRunner:
         # Build domain findings and scorecards
         subsystems = {r.category for r in collected_records}
         scorecards = {
-            sub: VerificationStrengthModel.evaluate_subsystem(
-                sub, [r for r in collected_records if r.category == sub]
-            )
+            sub: VerificationStrengthModel.evaluate_subsystem(sub, [r for r in collected_records if r.category == sub])
             for sub in subsystems
         }
 
@@ -179,9 +177,7 @@ class AuditRunner:
             execution_manifest=exec_manifest,
             total_evidence_collected=len(collected_records),
             findings_count=len(findings),
-            maturity_scorecard={
-                sub: card.classification.value for sub, card in scorecards.items()
-            },
+            maturity_scorecard={sub: card.classification.value for sub, card in scorecards.items()},
             evidence_hashes=[r.content_hash for r in collected_records],
         )
         self.store.save_manifest(manifest)

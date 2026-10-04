@@ -2,6 +2,7 @@
 Database Loss Simulation Scenario (Scenario 1) for Part 3G.3.
 Simulates catastrophic PostgreSQL crash, automated failover, snapshot restore, and WAL replay.
 """
+
 import datetime
 from typing import List
 from app.platform_verification.disaster_recovery_simulation.domain.models import (

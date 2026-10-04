@@ -48,7 +48,6 @@ class LoginRequest(BaseModel):
     password: str = Field(..., description="Plaintext password", examples=["SecureP@ss123"])
 
 
-
 class UserResponse(BaseModel):
     """Public user response model."""
 

@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 class TokenBudget(BaseModel):
     """Budget constraints for tokens."""
+
     max_tokens: int = Field(default=50000, ge=0)
     consumed_tokens: int = Field(default=0, ge=0)
 

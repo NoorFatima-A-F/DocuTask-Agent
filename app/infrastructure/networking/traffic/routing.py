@@ -12,6 +12,7 @@ from ..control_plane.registry import NetworkEndpoint, RouteRule
 @dataclass
 class RoutingDecision:
     """Detailed record of a traffic routing decision."""
+
     target_endpoint: NetworkEndpoint
     is_canary: bool = False
     is_blue_green: bool = False

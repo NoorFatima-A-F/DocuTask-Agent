@@ -26,11 +26,12 @@ client = TestClient(app)
 # Unit Tests for Phase 13.13 Subsystems
 # ==========================================
 
+
 def test_profiler_engine():
     event_bus = EvolutionEventBus()
     profiler = ProfilerEngine(event_bus)
     snapshot = profiler.collect_snapshot()
-    
+
     assert snapshot.snapshot_id is not None
     assert 0.0 <= snapshot.composite_health_score <= 1.0
     assert snapshot.cpu_utilization_pct >= 0.0
@@ -42,7 +43,7 @@ def test_profiler_engine():
 def test_diagnostic_engine():
     event_bus = EvolutionEventBus()
     diagnostic = DiagnosticEngine(event_bus)
-    
+
     mock_snapshot = PlatformHealthSnapshot(
         token_waste_rate=0.08,
         latency_p95_ms=180.0,
@@ -56,10 +57,10 @@ def test_diagnostic_engine():
 def test_capability_engine():
     event_bus = EvolutionEventBus()
     capability = CapabilityEngine(event_bus)
-    
+
     gaps = capability.discover_capability_gaps()
     assert len(gaps) >= 1
-    
+
     new_cap = capability.register_capability(
         name="Adaptive Zero-Shot OCR Rectifier",
         domain="document_intelligence",
@@ -73,11 +74,11 @@ def test_architecture_engine():
     event_bus = EvolutionEventBus()
     arch = ArchitectureEngine(event_bus)
     topology = arch.get_topology()
-    
+
     assert topology["node_count"] >= 5
     assert topology["edge_count"] >= 5
     assert topology["average_complexity"] > 0.0
-    
+
     plan = arch.generate_improvement_plan(
         title="Decouple Cache Invalidation from Dispatch Bus",
         target_subsystems=["query_cache", "event_bus"],
@@ -90,7 +91,7 @@ def test_architecture_engine():
 def test_optimizer_engine_pareto():
     event_bus = EvolutionEventBus()
     optimizer = OptimizerEngine(event_bus)
-    
+
     candidate = optimizer.generate_candidate(
         target_subsystem="llm_cognition",
         objective=OptimizationObjective.TOKEN_EFFICIENCY.value,
@@ -98,7 +99,7 @@ def test_optimizer_engine_pareto():
     )
     assert candidate.candidate_id is not None
     assert candidate.fitness_score > 0.0
-    
+
     pareto_frontier = optimizer.compute_pareto_frontier()
     assert len(pareto_frontier) >= 1
     for p in pareto_frontier:
@@ -108,7 +109,7 @@ def test_optimizer_engine_pareto():
 def test_mutation_engine_and_diff():
     event_bus = EvolutionEventBus()
     mutation_eng = MutationEngine(event_bus)
-    
+
     proposal = mutation_eng.propose_mutation(
         title="Lock-Free Async Ring Buffer Dispatch",
         mutation_type="ROUTING_REFACTOR",
@@ -119,7 +120,7 @@ def test_mutation_engine_and_diff():
     assert proposal.mutation_id is not None
     assert proposal.sha256_hash != ""
     assert proposal.status == "PROPOSED"
-    
+
     mutation_eng.update_mutation_status(proposal.mutation_id, "APPROVED")
     assert mutation_eng.get_proposal(proposal.mutation_id).status == "APPROVED"
 
@@ -127,7 +128,7 @@ def test_mutation_engine_and_diff():
 def test_benchmark_engine():
     event_bus = EvolutionEventBus()
     bench = BenchmarkEngine(event_bus)
-    
+
     comp = bench.run_benchmark(
         baseline_version="v13.12-prod",
         candidate_version="v13.13-eval-test",
@@ -141,7 +142,7 @@ def test_benchmark_engine():
 def test_simulation_engine():
     event_bus = EvolutionEventBus()
     sim = SimulationEngine(event_bus)
-    
+
     report = sim.run_simulation(
         simulation_mode="SHADOW_REPLAY",
         traces_count=500,
@@ -154,18 +155,18 @@ def test_simulation_engine():
 def test_governance_engine_and_rollback_snapshot():
     event_bus = EvolutionEventBus()
     gov = GovernanceEngine(event_bus)
-    
+
     snapshot = gov.create_rollback_snapshot(platform_version="v13.12.0")
     assert snapshot.snapshot_id is not None
     assert snapshot.sha256_seal != ""
-    
+
     review = gov.submit_for_review(
         mutation_id="mut_unit_test",
         risk_level="LOW",
     )
     assert review.approval_status == "APPROVED"
     assert review.cryptographic_signature != ""
-    
+
     # High risk review requires override
     high_review = gov.submit_for_review(
         mutation_id="mut_unit_high_risk",
@@ -173,7 +174,7 @@ def test_governance_engine_and_rollback_snapshot():
     )
     assert high_review.approval_status == "PENDING"
     assert high_review.human_override_required is True
-    
+
     approved = gov.approve_review(high_review.review_id, reviewer_agent_id="agent_human_lead")
     assert approved.approval_status == "APPROVED"
 
@@ -181,7 +182,7 @@ def test_governance_engine_and_rollback_snapshot():
 def test_deployment_engine_progressive_canary():
     event_bus = EvolutionEventBus()
     deploy = DeploymentEngine(event_bus)
-    
+
     record = deploy.launch_deployment(
         mutation_id="mut_deploy_test",
         target_version="v13.13.1",
@@ -189,11 +190,11 @@ def test_deployment_engine_progressive_canary():
     )
     assert record.canary_traffic_pct == 15.0
     assert record.deployment_state == "CANARY"
-    
+
     advanced = deploy.advance_canary(record.deployment_id, 100.0)
     assert advanced.deployment_state == "PROMOTED"
     assert deploy.current_platform_version == "v13.13.1"
-    
+
     # Test rollback
     rolled_back = deploy.trigger_rollback(record.deployment_id, reason="SLA breach")
     assert rolled_back.deployment_state == "ROLLED_BACK"
@@ -211,7 +212,7 @@ def test_full_evolution_cycle_runtime():
     assert result.stage in ["DEPLOYED", "GOVERNANCE_REVIEW"]
     assert result.health_score_after >= result.health_score_before
     assert len(runtime.cycle_history) == 1
-    
+
     summary = runtime.get_executive_summary()
     assert summary["completed_evolution_cycles"] == 1
     assert summary["composite_health_score"] > 0.0
@@ -220,6 +221,7 @@ def test_full_evolution_cycle_runtime():
 # ==========================================
 # REST API Integration Tests for Phase 13.13
 # ==========================================
+
 
 def test_api_executive_summary():
     response = client.get("/api/v1/evolution/executive-summary")
@@ -240,11 +242,14 @@ def test_api_genome():
 
 
 def test_api_evolution_cycle_run():
-    response = client.post("/api/v1/evolution/cycle/run", json={
-        "target_subsystem": "memory_layer",
-        "objective": "LATENCY_REDUCTION",
-        "auto_deploy": True,
-    })
+    response = client.post(
+        "/api/v1/evolution/cycle/run",
+        json={
+            "target_subsystem": "memory_layer",
+            "objective": "LATENCY_REDUCTION",
+            "auto_deploy": True,
+        },
+    )
     assert response.status_code == 200
     data = response.json()
     assert "cycle_id" in data
@@ -266,11 +271,14 @@ def test_api_capabilities():
     assert res_disc.status_code == 200
     assert isinstance(res_disc.json(), list)
 
-    res_reg = client.post("/api/v1/evolution/capabilities/register", json={
-        "name": "Transformer Layout Tokenizer",
-        "domain": "document_ai",
-        "description": "High throughput OCR layout tokenizer",
-    })
+    res_reg = client.post(
+        "/api/v1/evolution/capabilities/register",
+        json={
+            "name": "Transformer Layout Tokenizer",
+            "domain": "document_ai",
+            "description": "High throughput OCR layout tokenizer",
+        },
+    )
     assert res_reg.status_code == 200
     assert res_reg.json()["name"] == "Transformer Layout Tokenizer"
 
@@ -280,56 +288,74 @@ def test_api_architecture_and_optimizer():
     assert res_topo.status_code == 200
     assert "node_count" in res_topo.json()
 
-    res_opt = client.post("/api/v1/evolution/optimizer/candidates", json={
-        "target_subsystem": "llm_cognition",
-        "objective": "TOKEN_EFFICIENCY",
-    })
+    res_opt = client.post(
+        "/api/v1/evolution/optimizer/candidates",
+        json={
+            "target_subsystem": "llm_cognition",
+            "objective": "TOKEN_EFFICIENCY",
+        },
+    )
     assert res_opt.status_code == 200
     assert res_opt.json()["fitness_score"] > 0.0
 
 
 def test_api_mutations_and_benchmarks():
-    res_mut = client.post("/api/v1/evolution/mutations/propose", json={
-        "title": "Async Task Group Validator",
-        "mutation_type": "PLANNER_REDESIGN",
-        "target_components": ["planner"],
-        "code_diff_spec": "--- a/p.py\n+++ b/p.py\n-pass\n+await validate()",
-        "rationale": "Parallel execution speedup",
-    })
+    res_mut = client.post(
+        "/api/v1/evolution/mutations/propose",
+        json={
+            "title": "Async Task Group Validator",
+            "mutation_type": "PLANNER_REDESIGN",
+            "target_components": ["planner"],
+            "code_diff_spec": "--- a/p.py\n+++ b/p.py\n-pass\n+await validate()",
+            "rationale": "Parallel execution speedup",
+        },
+    )
     assert res_mut.status_code == 200
     mut_id = res_mut.json()["mutation_id"]
 
-    res_bench = client.post("/api/v1/evolution/benchmarks/run", json={
-        "baseline_version": "v13.12-prod",
-        "mutation_id": mut_id,
-        "test_case_count": 50,
-    })
+    res_bench = client.post(
+        "/api/v1/evolution/benchmarks/run",
+        json={
+            "baseline_version": "v13.12-prod",
+            "mutation_id": mut_id,
+            "test_case_count": 50,
+        },
+    )
     assert res_bench.status_code == 200
     assert res_bench.json()["status"] in ["PASSED", "FAILED"]
 
 
 def test_api_governance_and_deployment():
     # Submit review
-    res_gov = client.post("/api/v1/evolution/governance/reviews", json={
-        "mutation_id": "mut_api_test",
-        "risk_level": "LOW",
-    })
+    res_gov = client.post(
+        "/api/v1/evolution/governance/reviews",
+        json={
+            "mutation_id": "mut_api_test",
+            "risk_level": "LOW",
+        },
+    )
     assert res_gov.status_code == 200
     res_gov.json()["review_id"]
 
     # Launch Canary
-    res_dep = client.post("/api/v1/evolution/deployments/launch", json={
-        "mutation_id": "mut_api_test",
-        "target_version": "v13.13.2",
-        "initial_traffic_pct": 20.0,
-    })
+    res_dep = client.post(
+        "/api/v1/evolution/deployments/launch",
+        json={
+            "mutation_id": "mut_api_test",
+            "target_version": "v13.13.2",
+            "initial_traffic_pct": 20.0,
+        },
+    )
     assert res_dep.status_code == 200
     dep_id = res_dep.json()["deployment_id"]
 
     # Advance Canary
-    res_adv = client.post("/api/v1/evolution/deployments/advance", json={
-        "deployment_id": dep_id,
-        "target_traffic_pct": 100.0,
-    })
+    res_adv = client.post(
+        "/api/v1/evolution/deployments/advance",
+        json={
+            "deployment_id": dep_id,
+            "target_traffic_pct": 100.0,
+        },
+    )
     assert res_adv.status_code == 200
     assert res_adv.json()["deployment_state"] == "PROMOTED"

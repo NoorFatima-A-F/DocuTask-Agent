@@ -83,7 +83,10 @@ class DelegationValidator:
         rec_level = list(AuthorityTier).index(rec_tier)
 
         if rec_level < del_level and not policy.allow_cross_tier_escalation:
-            return False, f"Anti-usurpation violation: {delegator_role} cannot delegate to superior tier {delegatee_role}."
+            return (
+                False,
+                f"Anti-usurpation violation: {delegator_role} cannot delegate to superior tier {delegatee_role}.",
+            )
 
         return True, "Delegation authorization verified."
 
@@ -118,13 +121,15 @@ class SwarmGovernanceEngine:
     ) -> Tuple[bool, Optional[DelegationGrant], str]:
         valid, msg = self.validator.validate_delegation(delegator_role, delegatee_role, self.policy, depth)
         if not valid:
-            self._audit_log.append({
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-                "action": "DELEGATION_REJECTED",
-                "reason": msg,
-                "delegator": delegator_id,
-                "delegatee": delegatee_id,
-            })
+            self._audit_log.append(
+                {
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "action": "DELEGATION_REJECTED",
+                    "reason": msg,
+                    "delegator": delegator_id,
+                    "delegatee": delegatee_id,
+                }
+            )
             return False, None, msg
 
         gid = f"grant_{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')[:18]}"
@@ -140,14 +145,16 @@ class SwarmGovernanceEngine:
         grant.grant_signature = grant.compute_signature()
         self._grants[gid] = grant
 
-        self._audit_log.append({
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "action": "DELEGATION_GRANTED",
-            "grant_id": gid,
-            "delegator": delegator_id,
-            "delegatee": delegatee_id,
-            "signature": grant.grant_signature,
-        })
+        self._audit_log.append(
+            {
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "action": "DELEGATION_GRANTED",
+                "grant_id": gid,
+                "delegator": delegator_id,
+                "delegatee": delegatee_id,
+                "signature": grant.grant_signature,
+            }
+        )
         return True, grant, "Delegation granted successfully."
 
     def list_grants(self) -> List[DelegationGrant]:

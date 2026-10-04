@@ -1,6 +1,7 @@
 """
 Phase 3H.5.6: Failure Learning & RCA API Router
 """
+
 from fastapi import APIRouter
 from ..runtime.failure_learning_runtime import FailureLearningRuntime
 

@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class DeliveryMode(str, Enum):
     """Messaging delivery guarantee modes."""
+
     AT_MOST_ONCE = "AT_MOST_ONCE"
     AT_LEAST_ONCE = "AT_LEAST_ONCE"
     EXACTLY_ONCE = "EXACTLY_ONCE"

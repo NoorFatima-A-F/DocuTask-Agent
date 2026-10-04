@@ -21,6 +21,7 @@ class SUSSurveyResponse:
     Odd items (1, 3, 5, 7, 9) are positive statements.
     Even items (2, 4, 6, 8, 10) are negative statements.
     """
+
     respondent_id: str
     scores: List[int]  # Exactly 10 integers in range 1..5
 
@@ -41,9 +42,9 @@ class SUSSurveyResponse:
         total = 0
         for i, s in enumerate(self.scores):
             if i % 2 == 0:  # Odd numbered question (0-indexed: 0, 2, 4, 6, 8)
-                total += (s - 1)
+                total += s - 1
             else:  # Even numbered question (0-indexed: 1, 3, 5, 7, 9)
-                total += (5 - s)
+                total += 5 - s
         return total * 2.5
 
 
@@ -53,6 +54,7 @@ class NASATLXResponse:
     NASA-TLX 6-dimensional workload assessment (each dimension 0 to 100).
     Dimensions: Mental, Physical, Temporal, Performance, Effort, Frustration.
     """
+
     respondent_id: str
     mental_demand: float
     physical_demand: float
@@ -69,7 +71,7 @@ class NASATLXResponse:
             self.temporal_demand,
             (100.0 - self.performance),  # Invert so higher means higher workload
             self.effort,
-            self.frustration
+            self.frustration,
         ]
         return sum(dims) / 6.0
 
@@ -77,6 +79,7 @@ class NASATLXResponse:
 @dataclass
 class HumanFactorsAuditReport:
     """Comprehensive Usability & Human Workload Audit."""
+
     total_participants: int
     mean_sus_score: float
     sus_grade: str  # "A+", "A", "B", "C", "D", "F"
@@ -115,7 +118,7 @@ class HumanFactorsLab:
         sus_responses: List[SUSSurveyResponse],
         tlx_responses: List[NASATLXResponse],
         completion_results: List[bool],
-        task_durations_sec: List[float]
+        task_durations_sec: List[float],
     ) -> HumanFactorsAuditReport:
         """
         Evaluate full human factors empirical dataset.
@@ -129,7 +132,7 @@ class HumanFactorsLab:
                 task_completion_rate=0.0,
                 mean_time_on_task_sec=0.0,
                 meets_usability_standards=False,
-                status="INSUFFICIENT_EVIDENCE"
+                status="INSUFFICIENT_EVIDENCE",
             )
 
         n = len(sus_responses)
@@ -157,8 +160,5 @@ class HumanFactorsLab:
             mean_time_on_task_sec=mean_time,
             meets_usability_standards=meets_standards,
             status=status,
-            details={
-                "sus_scores": sus_scores,
-                "nasa_tlx_scores": tlx_scores
-            }
+            details={"sus_scores": sus_scores, "nasa_tlx_scores": tlx_scores},
         )

@@ -23,7 +23,7 @@ class ConfigurationDistributor:
     def __init__(self):
         self._bundles: Dict[str, ConfigBundle] = {}
         self._applied_cluster_configs: Dict[str, str] = {}  # cluster_id -> bundle_id
-        self._applied_region_configs: Dict[str, str] = {}   # region_id -> bundle_id
+        self._applied_region_configs: Dict[str, str] = {}  # region_id -> bundle_id
         self._history: List[Dict[str, Any]] = []
         self._lock = threading.RLock()
 
@@ -54,12 +54,14 @@ class ConfigurationDistributor:
                 return False
 
             self._applied_cluster_configs[cluster_id] = bundle_id
-            self._history.append({
-                "target_type": "CLUSTER",
-                "target_id": cluster_id,
-                "bundle_id": bundle_id,
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            })
+            self._history.append(
+                {
+                    "target_type": "CLUSTER",
+                    "target_id": cluster_id,
+                    "bundle_id": bundle_id,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }
+            )
             return True
 
     def distribute_to_region(self, bundle_id: str, region_id: str) -> bool:
@@ -70,12 +72,14 @@ class ConfigurationDistributor:
                 return False
 
             self._applied_region_configs[region_id] = bundle_id
-            self._history.append({
-                "target_type": "REGION",
-                "target_id": region_id,
-                "bundle_id": bundle_id,
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            })
+            self._history.append(
+                {
+                    "target_type": "REGION",
+                    "target_id": region_id,
+                    "bundle_id": bundle_id,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }
+            )
             return True
 
     def rollback_cluster(self, cluster_id: str, target_bundle_id: str) -> bool:

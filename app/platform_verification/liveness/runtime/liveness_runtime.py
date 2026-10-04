@@ -2,6 +2,7 @@
 Enterprise Liveness Verification Runtime Coordinator.
 Orchestrates all 16 parts of the Enterprise Liveness Verification Framework.
 """
+
 from typing import Dict, Any
 from app.platform_verification.liveness.contract.liveness_contract_manager import (
     LivenessContractManager,

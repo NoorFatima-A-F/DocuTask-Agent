@@ -81,18 +81,20 @@ class BayesianBeliefEngine:
         belief.last_updated = datetime.now(timezone.utc).isoformat()
 
         # Update confidence interval based on sample count
-        margin = max(0.005, 0.20 / (belief.evidence_count ** 0.5))
+        margin = max(0.005, 0.20 / (belief.evidence_count**0.5))
         belief.confidence_interval = [
             round(max(0.0, posterior - margin), 4),
             round(min(1.0, posterior + margin), 4),
         ]
 
-        belief.evidence_history.append({
-            "source": evidence_source,
-            "supports": supports_hypothesis,
-            "weight": evidence_weight,
-            "timestamp": belief.last_updated,
-        })
+        belief.evidence_history.append(
+            {
+                "source": evidence_source,
+                "supports": supports_hypothesis,
+                "weight": evidence_weight,
+                "timestamp": belief.last_updated,
+            }
+        )
 
         return belief
 

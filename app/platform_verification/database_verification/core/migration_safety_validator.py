@@ -1,6 +1,7 @@
 """
 Migration Safety and Rollback Validator for Enterprise Database Verification.
 """
+
 from typing import List
 from app.platform_verification.database_verification.domain.models import (
     MigrationStep,
@@ -27,13 +28,17 @@ class MigrationSafetyValidator(IMigrationSafetyValidator):
 
             if step.is_destructive:
                 destructive_ops.append(f"{step.version}: {step.description}")
-                issues.append(f"Migration {step.version} contains destructive operation (e.g. drop column/table without deprecation)")
+                issues.append(
+                    f"Migration {step.version} contains destructive operation (e.g. drop column/table without deprecation)"
+                )
 
             if step.unindexed_foreign_keys_added:
                 for fk in step.unindexed_foreign_keys_added:
-                    issues.append(f"Migration {step.version} adds foreign key '{fk}' without creating a supporting index")
+                    issues.append(
+                        f"Migration {step.version} adds foreign key '{fk}' without creating a supporting index"
+                    )
 
-        all_rollbacks_tested = (irreversible_count == 0)
+        all_rollbacks_tested = irreversible_count == 0
         status = "PASS" if all_rollbacks_tested and len(destructive_ops) == 0 else "FAIL"
 
         return MigrationSafetyReport(

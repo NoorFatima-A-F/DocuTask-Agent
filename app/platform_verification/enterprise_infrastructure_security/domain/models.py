@@ -17,9 +17,9 @@ class VerificationStatus(str, Enum):
 
 class SecurityCertificationTier(str, Enum):
     ENTERPRISE_SECURITY_READY = "Enterprise Security Ready"  # 95-100%
-    PRODUCTION_SECURE = "Production Secure"                  # 90-94.99%
+    PRODUCTION_SECURE = "Production Secure"  # 90-94.99%
     IMPROVEMENTS_REQUIRED = "Security Improvements Required"  # 80-89.99%
-    FAILED = "Failed"                                        # <80%
+    FAILED = "Failed"  # <80%
 
 
 class CheckResult(BaseModel):
@@ -43,6 +43,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3N.1: Security Architecture Assessment ──────────────────────────────────
 
+
 class SecurityAssetEntry(BaseModel):
     asset_name: str
     asset_type: str
@@ -62,6 +63,7 @@ class SecurityArchitectureReport(BaseVerificationReport):
 
 # ─── 3N.2: Threat Modeling Verification (STRIDE) ─────────────────────────────
 
+
 class STRIDEThreatItem(BaseModel):
     threat_category: str
     potential_risk: str
@@ -79,6 +81,7 @@ class ThreatModelReport(BaseVerificationReport):
 
 
 # ─── 3N.3: Container Security Verification ───────────────────────────────────
+
 
 class ContainerSecuritySpec(BaseModel):
     container_name: str
@@ -99,6 +102,7 @@ class ContainerSecurityReport(BaseVerificationReport):
 
 # ─── 3N.4: Container Image Supply Chain Security ─────────────────────────────
 
+
 class SupplyChainArtifact(BaseModel):
     image_name: str
     sbom_format: str = "SPDX / CycloneDX"
@@ -116,6 +120,7 @@ class ImageSupplyChainReport(BaseVerificationReport):
 
 
 # ─── 3N.5: Vulnerability Management Verification ─────────────────────────────
+
 
 class VulnerabilityScanSummary(BaseModel):
     target: str
@@ -137,6 +142,7 @@ class VulnerabilityReport(BaseVerificationReport):
 
 # ─── 3N.6: Secret Security Verification ──────────────────────────────────────
 
+
 class SecretScanTarget(BaseModel):
     scan_scope: str
     tool_used: str
@@ -156,6 +162,7 @@ class SecretSecurityReport(BaseVerificationReport):
 
 # ─── 3N.7: Identity & Access Management (IAM) Verification ───────────────────
 
+
 class IAMRolePermissionSpec(BaseModel):
     role_name: str
     assigned_permissions: List[str]
@@ -173,6 +180,7 @@ class IAMSecurityReport(BaseVerificationReport):
 
 
 # ─── 3N.8: Network Security Verification ─────────────────────────────────────
+
 
 class NetworkIsolationRule(BaseModel):
     service_name: str
@@ -192,6 +200,7 @@ class NetworkSecurityReport(BaseVerificationReport):
 
 # ─── 3N.9: Service-to-Service Security Verification ──────────────────────────
 
+
 class ServiceAuthChannel(BaseModel):
     source_service: str
     target_service: str
@@ -209,6 +218,7 @@ class ServiceSecurityReport(BaseVerificationReport):
 
 
 # ─── 3N.10: API Infrastructure Security Verification ─────────────────────────
+
 
 class APISecurityDefenseCheck(BaseModel):
     attack_vector: str
@@ -229,6 +239,7 @@ class APISecurityReport(BaseVerificationReport):
 
 # ─── 3N.11: Database Security Verification ───────────────────────────────────
 
+
 class DatabaseSecurityPillar(BaseModel):
     security_control: str
     applied_policy: str
@@ -245,6 +256,7 @@ class DatabaseSecurityReport(BaseVerificationReport):
 
 
 # ─── 3N.12: Storage Security Verification ────────────────────────────────────
+
 
 class StorageBucketSecuritySpec(BaseModel):
     bucket_name: str
@@ -265,6 +277,7 @@ class StorageSecurityReport(BaseVerificationReport):
 
 # ─── 3N.13: AI Infrastructure Security Verification ──────────────────────────
 
+
 class AISecurityDefenseSpec(BaseModel):
     threat_scenario: str
     injected_attack: str
@@ -283,6 +296,7 @@ class AISecurityReport(BaseVerificationReport):
 
 # ─── 3N.14: CI/CD Security Verification ──────────────────────────────────────
 
+
 class PipelineSecurityGate(BaseModel):
     stage_name: str
     scan_type: str
@@ -300,6 +314,7 @@ class CICDSecurityReport(BaseVerificationReport):
 
 
 # ─── 3N.15: Security Failure Simulation ──────────────────────────────────────
+
 
 class AttackSimulationScenario(BaseModel):
     scenario_id: int
@@ -324,6 +339,7 @@ class SecurityAttackSimulationReport(BaseVerificationReport):
 
 # ─── 3N.16: Security Observability Verification ──────────────────────────────
 
+
 class SecurityAuditEventSpec(BaseModel):
     event_type: str
     severity: str
@@ -341,6 +357,7 @@ class SecurityMonitoringReport(BaseVerificationReport):
 
 
 # ─── Scoring, Certification & Manifest Models ────────────────────────────────
+
 
 class CategoryScore(BaseModel):
     name: str

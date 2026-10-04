@@ -2,6 +2,7 @@
 3J.1.1: Performance Testing Architecture Verifier
 Verifies performance environment isolation and integration of k6, Prometheus, cAdvisor, and Grafana.
 """
+
 from typing import List
 from app.platform_verification.performance_capacity_engineering.domain.models import (
     PerformanceArchitectureReport,

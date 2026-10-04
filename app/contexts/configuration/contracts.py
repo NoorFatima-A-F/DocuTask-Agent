@@ -2,4 +2,9 @@ from .domain.configuration_domain import ConfigurationAggregate, ConfigurationSn
 from .application.configuration_service import ConfigurationService
 from .infrastructure.configuration_repo import InMemoryConfigurationRepository
 
-__all__ = ["ConfigurationAggregate", "ConfigurationSnapshotCreated", "ConfigurationService", "InMemoryConfigurationRepository"]
+__all__ = [
+    "ConfigurationAggregate",
+    "ConfigurationSnapshotCreated",
+    "ConfigurationService",
+    "InMemoryConfigurationRepository",
+]

@@ -15,6 +15,7 @@ from app.runtime.strategy_discovery.graph_synthesis import SynthesizedDAG
 
 class StrategyEvaluationReport(BaseModel):
     """Evaluation score card for a newly synthesized or mutated strategy."""
+
     dag_id: str
     novelty_score: float = Field(ge=0.0, le=1.0, description="k-NN distance in behavioral feature space")
     structural_similarity_pct: float = Field(ge=0.0, le=100.0)

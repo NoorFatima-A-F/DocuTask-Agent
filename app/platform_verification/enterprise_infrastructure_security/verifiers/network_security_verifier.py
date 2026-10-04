@@ -29,10 +29,24 @@ class NetworkSecurityVerifier(INetworkSecurityVerifier):
 
     def verify(self) -> NetworkSecurityReport:
         rules = [
-            NetworkIsolationRule(service_name="PostgreSQL Database", internal_port=5432, public_exposure=False, security_group_bound=True),
-            NetworkIsolationRule(service_name="Redis Broker/Cache", internal_port=6379, public_exposure=False, security_group_bound=True),
-            NetworkIsolationRule(service_name="Celery Internal Worker Mesh", internal_port=0, public_exposure=False, security_group_bound=True),
-            NetworkIsolationRule(service_name="FastAPI Ingress Gateway", internal_port=8000, public_exposure=True, security_group_bound=True),
+            NetworkIsolationRule(
+                service_name="PostgreSQL Database", internal_port=5432, public_exposure=False, security_group_bound=True
+            ),
+            NetworkIsolationRule(
+                service_name="Redis Broker/Cache", internal_port=6379, public_exposure=False, security_group_bound=True
+            ),
+            NetworkIsolationRule(
+                service_name="Celery Internal Worker Mesh",
+                internal_port=0,
+                public_exposure=False,
+                security_group_bound=True,
+            ),
+            NetworkIsolationRule(
+                service_name="FastAPI Ingress Gateway",
+                internal_port=8000,
+                public_exposure=True,
+                security_group_bound=True,
+            ),
         ]
 
         checks = [

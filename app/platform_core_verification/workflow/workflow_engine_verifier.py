@@ -181,10 +181,11 @@ class WorkflowEngineVerifier:
             for forward, comp in reversed(executed_forward):
                 executed_compensations.append(comp)
 
-        passed = (
-            len(executed_forward) == 3
-            and executed_compensations == ["delete_search_record", "refund_credits", "release_storage"]
-        )
+        passed = len(executed_forward) == 3 and executed_compensations == [
+            "delete_search_record",
+            "refund_credits",
+            "release_storage",
+        ]
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 
         return {

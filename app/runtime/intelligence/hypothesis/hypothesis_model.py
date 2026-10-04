@@ -35,23 +35,24 @@ class Hypothesis:
     """
     Structured scientific hypothesis proposed for runtime optimization.
     """
+
     hypothesis_id: str
     title: str
     category: HypothesisCategory
     premise: str
     proposed_action: str
     target_metric: str  # e.g., latency_ms, cost_usd, retries_count, confidence
-    
+
     # Baseline vs Expected
     baseline_value: float
     expected_value: float
     expected_improvement_pct: float
-    
+
     # Status & Lifecycle
     status: HypothesisStatus = HypothesisStatus.PROPOSED
     created_at: float = field(default_factory=time.time)
     updated_at: float = field(default_factory=time.time)
-    
+
     # Associated Artifacts & Lineage
     source_domain: str = "general"
     supporting_experience_ids: List[str] = field(default_factory=list)

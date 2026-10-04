@@ -1,6 +1,7 @@
 """
 Immutable Evidence Store for Service Communication Verification.
 """
+
 import hashlib
 from typing import Dict, Optional
 from app.platform_verification.service_communication.domain.models import ServiceCommunicationEvidencePackage

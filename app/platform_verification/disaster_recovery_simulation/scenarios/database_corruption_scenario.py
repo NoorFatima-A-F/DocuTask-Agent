@@ -2,6 +2,7 @@
 Database Corruption Simulation Scenario (Scenario 2) for Part 3G.3.
 Simulates damaged table pages, corrupted indexes, and invalid rows with Point-in-Time Recovery (PITR).
 """
+
 import datetime
 from typing import List
 from app.platform_verification.disaster_recovery_simulation.domain.models import (

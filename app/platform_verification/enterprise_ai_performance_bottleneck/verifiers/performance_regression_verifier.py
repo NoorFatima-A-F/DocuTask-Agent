@@ -26,11 +26,41 @@ class PerformanceRegressionVerifier(IPerformanceRegressionVerifier):
 
     def verify(self) -> PerformanceRegressionReport:
         comparisons = [
-            RegressionMetricComparison(metric_name="API P95 Latency (ms)", v1_0_baseline=45.0, v1_1_current=42.0, delta_pct=-6.67, within_tolerance=True),
-            RegressionMetricComparison(metric_name="Pipeline Throughput (docs/hr)", v1_0_baseline=4200.0, v1_1_current=4800.0, delta_pct=14.29, within_tolerance=True),
-            RegressionMetricComparison(metric_name="Worker Memory Footprint (MB)", v1_0_baseline=890.0, v1_1_current=850.0, delta_pct=-4.49, within_tolerance=True),
-            RegressionMetricComparison(metric_name="CPU Consumption (%)", v1_0_baseline=45.0, v1_1_current=42.0, delta_pct=-6.67, within_tolerance=True),
-            RegressionMetricComparison(metric_name="Document Failure Rate (%)", v1_0_baseline=0.05, v1_1_current=0.0, delta_pct=-100.0, within_tolerance=True),
+            RegressionMetricComparison(
+                metric_name="API P95 Latency (ms)",
+                v1_0_baseline=45.0,
+                v1_1_current=42.0,
+                delta_pct=-6.67,
+                within_tolerance=True,
+            ),
+            RegressionMetricComparison(
+                metric_name="Pipeline Throughput (docs/hr)",
+                v1_0_baseline=4200.0,
+                v1_1_current=4800.0,
+                delta_pct=14.29,
+                within_tolerance=True,
+            ),
+            RegressionMetricComparison(
+                metric_name="Worker Memory Footprint (MB)",
+                v1_0_baseline=890.0,
+                v1_1_current=850.0,
+                delta_pct=-4.49,
+                within_tolerance=True,
+            ),
+            RegressionMetricComparison(
+                metric_name="CPU Consumption (%)",
+                v1_0_baseline=45.0,
+                v1_1_current=42.0,
+                delta_pct=-6.67,
+                within_tolerance=True,
+            ),
+            RegressionMetricComparison(
+                metric_name="Document Failure Rate (%)",
+                v1_0_baseline=0.05,
+                v1_1_current=0.0,
+                delta_pct=-100.0,
+                within_tolerance=True,
+            ),
         ]
 
         checks: List[CheckResult] = [

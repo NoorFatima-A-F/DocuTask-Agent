@@ -15,6 +15,7 @@ from app.prompts.registry.repository import PromptRegistryRepository
 
 class DeploymentEnvironment(str, Enum):
     """Target runtime environments."""
+
     DEVELOPMENT = "Development"
     TESTING = "Testing"
     STAGING = "Staging"
@@ -23,6 +24,7 @@ class DeploymentEnvironment(str, Enum):
 
 class PromptDeploymentRecord(BaseModel):
     """Immutable record of prompt deployment to an environment."""
+
     deployment_id: str
     prompt_id: str
     version_id: str

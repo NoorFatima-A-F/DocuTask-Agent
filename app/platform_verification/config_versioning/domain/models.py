@@ -2,6 +2,7 @@
 Enterprise Configuration, Versioning & Dependency Management Domain Models.
 Strict Pydantic v2 validation, Semantic Versioning, and Immutable Snapshots.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 import hashlib
@@ -80,7 +81,12 @@ class SemanticVersion(BaseModel):
             other = SemanticVersion.parse(other)
         if not isinstance(other, SemanticVersion):
             return False
-        return (self.major, self.minor, self.patch, self.prerelease) == (other.major, other.minor, other.patch, other.prerelease)
+        return (self.major, self.minor, self.patch, self.prerelease) == (
+            other.major,
+            other.minor,
+            other.patch,
+            other.prerelease,
+        )
 
     def __lt__(self, other: Any) -> bool:
         if isinstance(other, str):

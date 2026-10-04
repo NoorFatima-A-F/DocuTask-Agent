@@ -29,9 +29,27 @@ class StorageRecoveryVerifier(IStorageRecoveryVerifier):
 
     def verify(self) -> StorageRecoveryReport:
         categories = [
-            DocumentStorageValidationItem(category="Original Ingested PDFs", original_files_count=500, restored_files_count=500, byte_parity_pct=100.0, sha256_verified=True),
-            DocumentStorageValidationItem(category="OCR Preprocessed Images & Text", original_files_count=500, restored_files_count=500, byte_parity_pct=100.0, sha256_verified=True),
-            DocumentStorageValidationItem(category="AI Extracted JSON Schemas", original_files_count=500, restored_files_count=500, byte_parity_pct=100.0, sha256_verified=True),
+            DocumentStorageValidationItem(
+                category="Original Ingested PDFs",
+                original_files_count=500,
+                restored_files_count=500,
+                byte_parity_pct=100.0,
+                sha256_verified=True,
+            ),
+            DocumentStorageValidationItem(
+                category="OCR Preprocessed Images & Text",
+                original_files_count=500,
+                restored_files_count=500,
+                byte_parity_pct=100.0,
+                sha256_verified=True,
+            ),
+            DocumentStorageValidationItem(
+                category="AI Extracted JSON Schemas",
+                original_files_count=500,
+                restored_files_count=500,
+                byte_parity_pct=100.0,
+                sha256_verified=True,
+            ),
         ]
 
         total_orig = sum(c.original_files_count for c in categories)

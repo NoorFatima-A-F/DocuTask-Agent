@@ -2,6 +2,7 @@
 Liveness Contract Manager (Part 1).
 Validates the standardized GET /live health contract format and ensures strict isolation from dependencies.
 """
+
 from typing import Dict, Any
 from datetime import datetime, timezone
 from app.platform_verification.liveness.domain.models import (

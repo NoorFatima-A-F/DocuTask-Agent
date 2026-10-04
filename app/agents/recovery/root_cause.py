@@ -11,6 +11,7 @@ from app.agents.recovery.failure import Failure
 
 class CausalLink(BaseModel):
     """Link in a causal chain of events leading to failure."""
+
     step: int
     component: str
     action: str
@@ -20,6 +21,7 @@ class CausalLink(BaseModel):
 
 class RootCauseReport(BaseModel):
     """Comprehensive diagnostic report on the root cause of an execution failure."""
+
     report_id: UUID = Field(default_factory=uuid4)
     failure_id: UUID
     primary_cause: str
@@ -50,7 +52,7 @@ class RootCauseAnalyzer:
                 step=1,
                 component=components[0] if components else "ExecutionEngine",
                 action="Execute task node",
-                outcome=failure.evidence.error_message
+                outcome=failure.evidence.error_message,
             )
         ]
 
@@ -65,5 +67,5 @@ class RootCauseAnalyzer:
             affected_components=components,
             causal_chain=chain,
             confidence=failure.confidence,
-            remediation_recommendation=rec
+            remediation_recommendation=rec,
         )

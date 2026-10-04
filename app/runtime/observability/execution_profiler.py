@@ -117,12 +117,14 @@ class ExecutionProfiler:
 
         bottlenecks = []
         for e in timed_events[:top_k]:
-            bottlenecks.append({
-                "event_id": e.event_id,
-                "stage": e.stage,
-                "event_type": e.event_type,
-                "duration_ms": round(e.duration_ms, 2),
-                "worker_id": e.worker_id,
-                "component": e.trace_context.component if e.trace_context else e.stage,
-            })
+            bottlenecks.append(
+                {
+                    "event_id": e.event_id,
+                    "stage": e.stage,
+                    "event_type": e.event_type,
+                    "duration_ms": round(e.duration_ms, 2),
+                    "worker_id": e.worker_id,
+                    "component": e.trace_context.component if e.trace_context else e.stage,
+                }
+            )
         return bottlenecks

@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 class AckStatus(str, Enum):
     """Acknowledgement status enum."""
+
     ACK = "ACK"
     NACK = "NACK"
     REJECT = "REJECT"

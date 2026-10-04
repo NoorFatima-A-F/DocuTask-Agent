@@ -23,19 +23,59 @@ class WorkflowBuilderEngine(IWorkflowBuilderEngine):
 
     def _seed_default_workflows(self):
         nodes = [
-            WorkflowNode(node_id="node-1", label="Email Inbound Trigger", node_type=WorkflowNodeType.TRIGGER, config={"source": "ap_inbox@apexfinancial.com"}, position={"x": 50, "y": 100}),
-            WorkflowNode(node_id="node-2", label="Multimodal OCR & Extraction Agent", node_type=WorkflowNodeType.AGENT, config={"model": "claude-3-5-sonnet", "confidence_target": 0.98}, position={"x": 250, "y": 100}),
-            WorkflowNode(node_id="node-3", label="3-Way PO Matching Tool", node_type=WorkflowNodeType.TOOL, config={"system": "NetSuite_ERP"}, position={"x": 450, "y": 100}),
-            WorkflowNode(node_id="node-4", label="Confidence > 95% & PO Matched?", node_type=WorkflowNodeType.CONDITION, config={"threshold": 0.95}, position={"x": 650, "y": 100}),
-            WorkflowNode(node_id="node-5", label="Manager Approval Step", node_type=WorkflowNodeType.APPROVAL, config={"escalate_after_hours": 24}, position={"x": 650, "y": 250}),
-            WorkflowNode(node_id="node-6", label="Post to QuickBooks & Notify Slack", node_type=WorkflowNodeType.ACTION, config={"channel": "#finance-ops"}, position={"x": 900, "y": 100}),
+            WorkflowNode(
+                node_id="node-1",
+                label="Email Inbound Trigger",
+                node_type=WorkflowNodeType.TRIGGER,
+                config={"source": "ap_inbox@apexfinancial.com"},
+                position={"x": 50, "y": 100},
+            ),
+            WorkflowNode(
+                node_id="node-2",
+                label="Multimodal OCR & Extraction Agent",
+                node_type=WorkflowNodeType.AGENT,
+                config={"model": "claude-3-5-sonnet", "confidence_target": 0.98},
+                position={"x": 250, "y": 100},
+            ),
+            WorkflowNode(
+                node_id="node-3",
+                label="3-Way PO Matching Tool",
+                node_type=WorkflowNodeType.TOOL,
+                config={"system": "NetSuite_ERP"},
+                position={"x": 450, "y": 100},
+            ),
+            WorkflowNode(
+                node_id="node-4",
+                label="Confidence > 95% & PO Matched?",
+                node_type=WorkflowNodeType.CONDITION,
+                config={"threshold": 0.95},
+                position={"x": 650, "y": 100},
+            ),
+            WorkflowNode(
+                node_id="node-5",
+                label="Manager Approval Step",
+                node_type=WorkflowNodeType.APPROVAL,
+                config={"escalate_after_hours": 24},
+                position={"x": 650, "y": 250},
+            ),
+            WorkflowNode(
+                node_id="node-6",
+                label="Post to QuickBooks & Notify Slack",
+                node_type=WorkflowNodeType.ACTION,
+                config={"channel": "#finance-ops"},
+                position={"x": 900, "y": 100},
+            ),
         ]
         edges = [
             WorkflowEdge(edge_id="e1", source_node_id="node-1", target_node_id="node-2"),
             WorkflowEdge(edge_id="e2", source_node_id="node-2", target_node_id="node-3"),
             WorkflowEdge(edge_id="e3", source_node_id="node-3", target_node_id="node-4"),
-            WorkflowEdge(edge_id="e4", source_node_id="node-4", target_node_id="node-6", condition_label="Yes (Auto-Approve)"),
-            WorkflowEdge(edge_id="e5", source_node_id="node-4", target_node_id="node-5", condition_label="No (Exception Routing)"),
+            WorkflowEdge(
+                edge_id="e4", source_node_id="node-4", target_node_id="node-6", condition_label="Yes (Auto-Approve)"
+            ),
+            WorkflowEdge(
+                edge_id="e5", source_node_id="node-4", target_node_id="node-5", condition_label="No (Exception Routing)"
+            ),
             WorkflowEdge(edge_id="e6", source_node_id="node-5", target_node_id="node-6", condition_label="Approved"),
         ]
         wf = WorkflowDefinition(

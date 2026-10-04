@@ -49,7 +49,7 @@ class AgentSecurityScanner:
         """Runs static & dynamic analysis against prompt and tool definitions."""
         scan_id = f"scn_{uuid.uuid4().hex[:8]}"
         vulns: List[SecurityVulnerability] = []
-        
+
         # 1. Prompt Injection resistance check
         injection_score = 98.8
         if "ignore previous instructions" in system_prompt.lower() or "override" in system_prompt.lower():

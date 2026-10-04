@@ -1,11 +1,14 @@
 """
 Enterprise Plugin Marketplace & Digital Certification Manager.
 """
+
 from datetime import datetime, timezone
 import hashlib
 from typing import Dict, List, Optional
 from app.platform_verification.extension_framework.domain.models import (
-    PluginMarketplaceEntry, PluginCategory, SecurityClassification
+    PluginMarketplaceEntry,
+    PluginCategory,
+    SecurityClassification,
 )
 
 
@@ -19,7 +22,7 @@ class PluginMarketplaceManager:
         version: str,
         category: PluginCategory,
         author: str,
-        certification_level: SecurityClassification = SecurityClassification.COMMUNITY
+        certification_level: SecurityClassification = SecurityClassification.COMMUNITY,
     ) -> PluginMarketplaceEntry:
         # Generate signature
         sig = hashlib.sha256(f"{plugin_id}:{version}:{author}:{certification_level.value}".encode("utf-8")).hexdigest()
@@ -30,7 +33,7 @@ class PluginMarketplaceManager:
             author=author,
             certification_level=certification_level,
             digital_signature=sig,
-            is_published=True
+            is_published=True,
         )
         self._entries[plugin_id] = entry
         return entry
@@ -48,7 +51,9 @@ class PluginMarketplaceManager:
         entry = self.get_entry(plugin_id)
         if not entry:
             return False
-        expected_sig = hashlib.sha256(f"{entry.plugin_id}:{entry.version}:{entry.author}:{entry.certification_level.value}".encode("utf-8")).hexdigest()
+        expected_sig = hashlib.sha256(
+            f"{entry.plugin_id}:{entry.version}:{entry.author}:{entry.certification_level.value}".encode("utf-8")
+        ).hexdigest()
         return entry.digital_signature == expected_sig
 
 

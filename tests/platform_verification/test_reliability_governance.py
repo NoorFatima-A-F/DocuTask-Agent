@@ -1,6 +1,7 @@
 """
 Test Suite: Phase 3I.6 Observability Governance, SLO Engineering & Reliability Certification
 """
+
 import os
 import json
 import pytest
@@ -66,6 +67,7 @@ from app.platform_verification.reliability_governance.api.reliability_governance
 
 
 # ─── 1. Verifier Tests ────────────────────────────────────────────────────────
+
 
 def test_governance_architecture_verifier():
     verifier = GovernanceArchitectureVerifier()
@@ -192,6 +194,7 @@ def test_reliability_automation_verifier():
 
 # ─── 2. Scorer Tests ─────────────────────────────────────────────────────────
 
+
 def test_reliability_quality_scorer():
     gov_verifier = GovernanceArchitectureVerifier()
     sli_verifier = SLIDefinitionVerifier()
@@ -231,6 +234,7 @@ def test_reliability_quality_scorer():
 
 # ─── 3. Exporter & Artifact Verification ─────────────────────────────────────
 
+
 def test_reliability_evidence_exporter(tmp_path):
     output_dir = str(tmp_path / "reliability_test_export")
     runtime = ReliabilityGovernanceRuntime(output_dir=output_dir)
@@ -263,6 +267,7 @@ def test_reliability_evidence_exporter(tmp_path):
 
 
 # ─── 4. API Router Tests ─────────────────────────────────────────────────────
+
 
 @pytest.fixture
 def api_client():

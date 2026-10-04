@@ -1,4 +1,5 @@
 from app.core.security import sanitize_log_input
+
 """
 Dead Letter Queue (DLQ) & Manual Replay Engine.
 Stores failed jobs exceeding max attempts and provides manual replay capabilities.
@@ -13,6 +14,7 @@ from app.jobs.broker import job_broker
 
 class DLQItem(BaseModel):
     """Schema representing a Dead Letter Queue item."""
+
     job_id: str
     document_id: str
     failure_reason: str
@@ -35,7 +37,7 @@ class DeadLetterQueueEngine:
         failure_reason: str,
         attempt_count: int,
         original_payload: Dict[str, Any],
-        stack_trace: Optional[str] = None
+        stack_trace: Optional[str] = None,
     ) -> DLQItem:
         """
         Moves a permanently failed job into the DLQ.
@@ -46,10 +48,14 @@ class DeadLetterQueueEngine:
             failure_reason=failure_reason,
             attempt_count=attempt_count,
             stack_trace=stack_trace,
-            original_payload=original_payload
+            original_payload=original_payload,
         )
         cls._dlq_store[job_id] = item
-        logger.error("Moved permanently failed job '%s' to DLQ: Reason='%s'", sanitize_log_input(job_id), sanitize_log_input(failure_reason))
+        logger.error(
+            "Moved permanently failed job '%s' to DLQ: Reason='%s'",
+            sanitize_log_input(job_id),
+            sanitize_log_input(failure_reason),
+        )
         return item
 
     @classmethod

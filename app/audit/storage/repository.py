@@ -43,7 +43,9 @@ class AuditRepository:
                 results.append(event)
         return results
 
-    def find_by_resource(self, resource_type: str, resource_id: str, tenant_id: Optional[str] = None) -> List[AuditEvent]:
+    def find_by_resource(
+        self, resource_type: str, resource_id: str, tenant_id: Optional[str] = None
+    ) -> List[AuditEvent]:
         results: List[AuditEvent] = []
         for event in self.store._event_index.values():
             if tenant_id and event.tenant_id != tenant_id:

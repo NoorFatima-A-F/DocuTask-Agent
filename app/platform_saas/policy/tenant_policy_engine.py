@@ -94,7 +94,11 @@ class TenantPolicyEngine:
         # 1. Explicit Deny check
         for p in tenant_policies:
             if p.effect == "DENY":
-                if p.subject_role in ("*", user_role) and p.resource_type in ("*", resource_type) and p.action in ("*", action):
+                if (
+                    p.subject_role in ("*", user_role)
+                    and p.resource_type in ("*", resource_type)
+                    and p.action in ("*", action)
+                ):
                     return {"decision": "DENY", "matched_policy": p.policy_id, "reason": "Explicit DENY rule matched"}
 
         # 2. Super Admin bypass
@@ -104,7 +108,11 @@ class TenantPolicyEngine:
         # 3. Explicit Allow check
         for p in tenant_policies:
             if p.effect == "ALLOW":
-                if p.subject_role in ("*", user_role) and p.resource_type in ("*", resource_type) and p.action in ("*", action):
+                if (
+                    p.subject_role in ("*", user_role)
+                    and p.resource_type in ("*", resource_type)
+                    and p.action in ("*", action)
+                ):
                     return {"decision": "ALLOW", "matched_policy": p.policy_id, "reason": "Explicit ALLOW rule matched"}
 
         # 4. Default Allow for Viewer reading

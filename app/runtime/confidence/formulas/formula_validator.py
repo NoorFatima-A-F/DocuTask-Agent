@@ -4,7 +4,6 @@ Verifies formula mathematical soundness, boundary conditions, and monotonicity.
 """
 
 
-
 class FormulaValidator:
     """
     Validates formula outputs and ensures mathematical invariance.

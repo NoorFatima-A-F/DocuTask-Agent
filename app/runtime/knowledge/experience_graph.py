@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 
 class ExperienceNode(BaseModel):
     """Causal node in the global experience graph."""
+
     node_id: str = Field(default_factory=lambda: f"exp_{uuid.uuid4().hex[:8]}")
     mission_id: str
     document_signature: str

@@ -1,6 +1,7 @@
 """
 Part 3I: Enterprise Observability Infrastructure — Interfaces
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 from .models import (
@@ -25,6 +26,7 @@ from .models import (
 
 
 # ─── 3I.1 Logging Interfaces ──────────────────────────────────────────────
+
 
 class ILoggingArchitectureVerifier(ABC):
     @abstractmethod
@@ -85,6 +87,7 @@ class ILoggingScorer(ABC):
 
 # ─── 3I.2 Metrics Interfaces ──────────────────────────────────────────────
 
+
 class IMetricsArchitectureVerifier(ABC):
     @abstractmethod
     def verify_metrics_architecture(self) -> MetricInventoryReport:
@@ -143,6 +146,7 @@ class IMetricsScorer(ABC):
 
 
 # ─── Composite Exporter Interface ─────────────────────────────────────────
+
 
 class IObservabilityExporter(ABC):
     @abstractmethod

@@ -44,12 +44,22 @@ class AlertFatigueScorer(IAlertFatigueScorer):
         ml_rep: MachinePrioritizationReport,
     ) -> AlertFatigueScorecard:
         # Category scores (0-100)
-        dedup_score = 100.0 if (dedup_rep.status == "PASS" and dedup_rep.deduplication_accuracy_percentage >= 95.0) else 50.0
+        dedup_score = (
+            100.0 if (dedup_rep.status == "PASS" and dedup_rep.deduplication_accuracy_percentage >= 95.0) else 50.0
+        )
         corr_score = 100.0 if (corr_rep.status == "PASS" and corr_rep.root_cause_accuracy_percentage >= 95.0) else 50.0
         sev_score = 100.0 if (sev_rep.status == "PASS" and sev_rep.misclassification_count == 0) else 50.0
         noise_score = 100.0 if (noise_rep.status == "PASS" and noise_rep.targets_met) else 50.0
         route_score = 100.0 if (route_rep.status == "PASS" and route_rep.routing_accuracy_percentage >= 95.0) else 50.0
-        safety_score = 100.0 if (supp_rep.status == "PASS" and supp_rep.safety_overrides_functional and storm_rep.critical_signals_preserved) else 50.0
+        safety_score = (
+            100.0
+            if (
+                supp_rep.status == "PASS"
+                and supp_rep.safety_overrides_functional
+                and storm_rep.critical_signals_preserved
+            )
+            else 50.0
+        )
 
         # Weighted calculation
         overall = (

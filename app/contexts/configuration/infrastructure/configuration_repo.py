@@ -1,6 +1,7 @@
 from typing import Dict, Optional
 from ..domain.configuration_domain import ConfigurationAggregate
 
+
 class InMemoryConfigurationRepository:
     def __init__(self):
         self._store: Dict[str, ConfigurationAggregate] = {}

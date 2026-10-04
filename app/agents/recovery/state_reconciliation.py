@@ -9,6 +9,7 @@ from app.agents.recovery.consistency_checker import ConsistencyChecker, Inconsis
 
 class ReconciliationReport:
     """Report detailing reconciliation actions taken."""
+
     def __init__(self, remediated_count: int, issues_detected: List[InconsistencyRecord]):
         self.remediated_count = remediated_count
         self.issues_detected = issues_detected
@@ -22,10 +23,7 @@ class StateReconciliationEngine:
         self.checker = consistency_checker or ConsistencyChecker()
 
     def reconcile(
-        self,
-        active_worker_ids: List[str],
-        active_lease_ids: List[str],
-        running_node_ids: List[str]
+        self, active_worker_ids: List[str], active_lease_ids: List[str], running_node_ids: List[str]
     ) -> ReconciliationReport:
         issues = self.checker.check_consistency(active_worker_ids, active_lease_ids, running_node_ids)
         remediated = 0

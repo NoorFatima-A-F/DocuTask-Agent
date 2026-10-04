@@ -1,6 +1,7 @@
 """
 AST Class & Method Analyzer extracting CK metrics and SOLID indicators.
 """
+
 from __future__ import annotations
 import ast
 import os

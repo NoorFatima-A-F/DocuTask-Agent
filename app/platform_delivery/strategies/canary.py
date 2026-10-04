@@ -1,4 +1,5 @@
 """Argo-Rollouts aligned Stepwise Canary Strategy (Req 36)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import List, Optional
@@ -42,7 +43,7 @@ class CanaryStrategy:
         details = (
             "SLO verified"
             if passed
-            else f"SLO breached: error_rate={observed_error_rate*100:.2f}%, p95={observed_p95_ms:.1f}ms"
+            else f"SLO breached: error_rate={observed_error_rate * 100:.2f}%, p95={observed_p95_ms:.1f}ms"
         )
         step = CanaryStepEvaluation(
             step_index=step_index,

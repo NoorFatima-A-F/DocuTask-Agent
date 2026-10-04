@@ -110,7 +110,9 @@ class ExecutionGraph:
 
         in_degree = {node_id: 0 for node_id in self._nodes}
         for node_id in self._nodes:
-            in_degree[node_id] = len([e for e in self._incoming.get(node_id, []) if e.edge_type in (EdgeType.SUCCESS, EdgeType.CONDITIONAL)])
+            in_degree[node_id] = len(
+                [e for e in self._incoming.get(node_id, []) if e.edge_type in (EdgeType.SUCCESS, EdgeType.CONDITIONAL)]
+            )
 
         queue = deque([node_id for node_id, deg in in_degree.items() if deg == 0])
         ordered: List[GraphNode] = []

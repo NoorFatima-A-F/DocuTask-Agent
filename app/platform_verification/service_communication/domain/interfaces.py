@@ -1,6 +1,7 @@
 """
 Abstract interfaces for Part 3B: Enterprise Service Communication & Distributed System Verification Framework.
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional, Tuple
 from app.platform_verification.service_communication.domain.models import (
@@ -34,14 +35,16 @@ class IContractValidator(ABC):
 
 class ITimeoutRetryEvaluator(ABC):
     @abstractmethod
-    def evaluate_timeouts_and_retries(self, services: List[Dict[str, Any]]) -> Tuple[TimeoutValidationReport, RetryBehaviorReport]:
+    def evaluate_timeouts_and_retries(
+        self, services: List[Dict[str, Any]]
+    ) -> Tuple[TimeoutValidationReport, RetryBehaviorReport]:
         """Evaluates timeout thresholds, exponential backoff, and retry storm prevention."""
         pass
 
 
-
 class ICircuitBreakerTester(ABC):
     __test__ = False
+
     @abstractmethod
     def test_circuit_breaker(self, service_name: str, simulated_failures: int) -> CircuitBreakerReport:
         """Validates 3-state transitions (CLOSED -> OPEN -> HALF_OPEN) and fast-fail behavior."""

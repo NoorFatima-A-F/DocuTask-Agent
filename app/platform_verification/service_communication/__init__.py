@@ -1,7 +1,10 @@
 """
 Part 3B: Enterprise Service Communication & Distributed System Verification Framework Package.
 """
-from app.platform_verification.service_communication.runtime.service_communication_runtime import ServiceCommunicationRuntime
+
+from app.platform_verification.service_communication.runtime.service_communication_runtime import (
+    ServiceCommunicationRuntime,
+)
 from app.platform_verification.service_communication.domain.models import (
     DistributedCertificationTier,
     CircuitBreakerState,

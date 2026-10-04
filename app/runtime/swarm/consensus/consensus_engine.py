@@ -167,7 +167,11 @@ class DecisionFinalizer:
         sig_content = f"{consensus_id}:{topic}:{winning_outcome}:{consensus_ratio}:{len(votes)}"
         sig_hash = hashlib.sha256(sig_content.encode("utf-8")).hexdigest()
 
-        verdict = "APPROVED" if winning_outcome == "APPROVE" else ("REJECTED" if winning_outcome == "REJECT" else winning_outcome)
+        verdict = (
+            "APPROVED"
+            if winning_outcome == "APPROVE"
+            else ("REJECTED" if winning_outcome == "REJECT" else winning_outcome)
+        )
 
         return ConsensusDecision(
             consensus_id=consensus_id,
@@ -268,9 +272,27 @@ class ConsensusEngine:
         cid = f"cns-{uuid.uuid4().hex[:8]}"
 
         default_voters = voters_with_votes or [
-            {"agent_id": "agent-spec-ocr", "vote": "APPROVE_EXTRACTION", "weight": 1.0, "confidence": 0.98, "reason": "OCR table match 99%"},
-            {"agent_id": "agent-val-sec", "vote": "APPROVE_EXTRACTION", "weight": 1.2, "confidence": 0.99, "reason": "Balance invariant holds"},
-            {"agent_id": "agent-res-opt", "vote": "APPROVE_EXTRACTION", "weight": 0.9, "confidence": 0.95, "reason": "Zero fabrication confirmed"},
+            {
+                "agent_id": "agent-spec-ocr",
+                "vote": "APPROVE_EXTRACTION",
+                "weight": 1.0,
+                "confidence": 0.98,
+                "reason": "OCR table match 99%",
+            },
+            {
+                "agent_id": "agent-val-sec",
+                "vote": "APPROVE_EXTRACTION",
+                "weight": 1.2,
+                "confidence": 0.99,
+                "reason": "Balance invariant holds",
+            },
+            {
+                "agent_id": "agent-res-opt",
+                "vote": "APPROVE_EXTRACTION",
+                "weight": 0.9,
+                "confidence": 0.95,
+                "reason": "Zero fabrication confirmed",
+            },
         ]
 
         for v in default_voters:

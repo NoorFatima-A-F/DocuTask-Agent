@@ -89,7 +89,9 @@ class ArtifactRegistry:
             art.promotion_tier = target_tier
             return True
 
-    def list_artifacts(self, name: Optional[str] = None, promotion_tier: Optional[str] = None) -> List[ArtifactMetadata]:
+    def list_artifacts(
+        self, name: Optional[str] = None, promotion_tier: Optional[str] = None
+    ) -> List[ArtifactMetadata]:
         """Query artifacts."""
         with self._lock:
             res = list(self._artifacts.values())

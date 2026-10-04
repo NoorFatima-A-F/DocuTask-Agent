@@ -1,6 +1,7 @@
 """
 Phase 3H.5.12: Operational Readiness Health Recovery Scorer
 """
+
 from uuid import uuid4
 from typing import List
 from datetime import datetime, timezone
@@ -68,8 +69,16 @@ class HealthRecoveryScorer(IHealthRecoveryScorer):
 
         # 2. Recovery Correctness (25%)
         # Blend state transitions, policy operationality, and component restoration
-        t_rate = (transition_report.valid_transitions_count / transition_report.total_transitions_evaluated) * 100.0 if transition_report.total_transitions_evaluated > 0 else 100.0
-        c_rate = (component_report.successful_recoveries_count / component_report.total_components_verified) * 100.0 if component_report.total_components_verified > 0 else 100.0
+        t_rate = (
+            (transition_report.valid_transitions_count / transition_report.total_transitions_evaluated) * 100.0
+            if transition_report.total_transitions_evaluated > 0
+            else 100.0
+        )
+        c_rate = (
+            (component_report.successful_recoveries_count / component_report.total_components_verified) * 100.0
+            if component_report.total_components_verified > 0
+            else 100.0
+        )
         sh_rate = self_healing_report.recovery_success_rate_pct
         corr_raw = (t_rate * 0.3) + (c_rate * 0.4) + (sh_rate * 0.3)
         corr_weighted = corr_raw * 0.25
@@ -104,8 +113,16 @@ class HealthRecoveryScorer(IHealthRecoveryScorer):
 
         # 4. Validation Quality (15%)
         # Blend validation probes and chaos pass rate
-        v_rate = (validation_report.passed_probes_count / validation_report.total_probes_executed) * 100.0 if validation_report.total_probes_executed > 0 else 100.0
-        ch_rate = (chaos_report.passed_experiments_count / chaos_report.total_chaos_experiments) * 100.0 if chaos_report.total_chaos_experiments > 0 else 100.0
+        v_rate = (
+            (validation_report.passed_probes_count / validation_report.total_probes_executed) * 100.0
+            if validation_report.total_probes_executed > 0
+            else 100.0
+        )
+        ch_rate = (
+            (chaos_report.passed_experiments_count / chaos_report.total_chaos_experiments) * 100.0
+            if chaos_report.total_chaos_experiments > 0
+            else 100.0
+        )
         val_raw = (v_rate * 0.5) + (ch_rate * 0.5)
         val_weighted = val_raw * 0.15
         pillar_scores.append(
@@ -120,7 +137,11 @@ class HealthRecoveryScorer(IHealthRecoveryScorer):
         )
 
         # 5. Observability (10%)
-        obs_raw = 100.0 if (observability_report.dashboard_configured and observability_report.realtime_telemetry_active) else 80.0
+        obs_raw = (
+            100.0
+            if (observability_report.dashboard_configured and observability_report.realtime_telemetry_active)
+            else 80.0
+        )
         obs_weighted = obs_raw * 0.10
         pillar_scores.append(
             PillarScore(

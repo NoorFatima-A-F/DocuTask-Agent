@@ -12,11 +12,15 @@ def test_waf_inspector_attack_detection() -> None:
     waf = WAFInspector()
 
     # Clean request
-    clean_res = waf.inspect(path="/api/v1/documents", headers={"content-type": "application/json"}, body='{"doc_id": "123"}')
+    clean_res = waf.inspect(
+        path="/api/v1/documents", headers={"content-type": "application/json"}, body='{"doc_id": "123"}'
+    )
     assert clean_res.passed is True
 
     # SQL Injection detection
-    sqli_res = waf.inspect(path="/api/v1/documents", headers={}, body="SELECT * FROM users UNION SELECT null, password FROM admin")
+    sqli_res = waf.inspect(
+        path="/api/v1/documents", headers={}, body="SELECT * FROM users UNION SELECT null, password FROM admin"
+    )
     assert sqli_res.passed is False
     assert sqli_res.status_code == 403
     assert "SQL injection" in sqli_res.error_message

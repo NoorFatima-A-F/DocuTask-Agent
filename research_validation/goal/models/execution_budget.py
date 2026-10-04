@@ -11,6 +11,7 @@ from research_validation.goal.models.resource_budget import ResourceBudget
 @dataclass(frozen=True)
 class ExecutionBudget:
     """Full execution budget encompassing runtime limits, iterations, and hardware allocations."""
+
     expected_runtime_hours: float
     maximum_runtime_hours: float
     expected_iterations: int

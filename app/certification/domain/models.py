@@ -83,13 +83,13 @@ class MaturityAssessment:
 
 @dataclass
 class MasterReadinessScore:
-    architecture_quality: float   # Weight: 15%
-    ai_capability: float          # Weight: 20%
-    security_posture: float       # Weight: 20%
-    reliability_resilience: float # Weight: 15%
-    operational_excellence: float # Weight: 10%
-    business_value: float         # Weight: 15%
-    governance_ethics: float      # Weight: 5%
+    architecture_quality: float  # Weight: 15%
+    ai_capability: float  # Weight: 20%
+    security_posture: float  # Weight: 20%
+    reliability_resilience: float  # Weight: 15%
+    operational_excellence: float  # Weight: 10%
+    business_value: float  # Weight: 15%
+    governance_ethics: float  # Weight: 5%
     overall_readiness_score: float
     grade: str
     readiness_statement: str
@@ -137,11 +137,11 @@ class RiskEntry:
     category: RiskCategory
     description: str
     probability: str  # LOW, MEDIUM, HIGH
-    impact: str       # LOW, MEDIUM, HIGH
+    impact: str  # LOW, MEDIUM, HIGH
     severity: RiskSeverity
     mitigation_control: str
     residual_risk: str
-    status: str       # MITIGATED, CONTROLLED, MONITORED
+    status: str  # MITIGATED, CONTROLLED, MONITORED
 
     def to_dict(self) -> Dict[str, Any]:
         return {

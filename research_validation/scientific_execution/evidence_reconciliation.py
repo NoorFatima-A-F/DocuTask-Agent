@@ -19,10 +19,10 @@ from research_validation.provenance.hashing import hash_canonical_json
 
 class ConflictSeverity(str, Enum):
     NONE = "NONE"
-    NEGLIGIBLE = "NEGLIGIBLE"       # < 1% relative divergence
-    MODERATE = "MODERATE"           # 1% - 5% divergence
-    SEVERE = "SEVERE"               # > 5% divergence
-    CONTRADICTORY = "CONTRADICTORY" # Opposite trends or binary status disagreement
+    NEGLIGIBLE = "NEGLIGIBLE"  # < 1% relative divergence
+    MODERATE = "MODERATE"  # 1% - 5% divergence
+    SEVERE = "SEVERE"  # > 5% divergence
+    CONTRADICTORY = "CONTRADICTORY"  # Opposite trends or binary status disagreement
 
 
 @dataclass(frozen=True)
@@ -114,7 +114,7 @@ class EvidenceReconciliationEngine:
                     sev = ConflictSeverity.SEVERE
                     cause = "Substantial run divergence: Check random seed isolation or dataset split differences."
                     max_severity = ConflictSeverity.SEVERE
-                    root_causes.append(f"Severe divergence in '{m}': relative spread is {max_rel*100:.2f}%.")
+                    root_causes.append(f"Severe divergence in '{m}': relative spread is {max_rel * 100:.2f}%.")
 
             # Consensus metric uses trimmed mean or arithmetic mean
             reconciled_metrics[m] = mean_v

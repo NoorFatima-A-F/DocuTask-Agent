@@ -25,11 +25,21 @@ class SecurityEvaluator(ISecurityEvaluator):
 
     def evaluate(self) -> SecurityEvaluationReport:
         audits = [
-            SecurityAuditMetric(vector_name="PromptInjectionDefense", test_count=250, prevented_count=250, success_rate_pct=100.0),
-            SecurityAuditMetric(vector_name="TenantDataLeakagePrevention", test_count=500, prevented_count=500, success_rate_pct=100.0),
-            SecurityAuditMetric(vector_name="RBACPrivilegeEscalation", test_count=120, prevented_count=120, success_rate_pct=100.0),
-            SecurityAuditMetric(vector_name="PIIPHIMaskingRedaction", test_count=300, prevented_count=300, success_rate_pct=100.0),
-            SecurityAuditMetric(vector_name="ToolExecutionSandboxing", test_count=180, prevented_count=180, success_rate_pct=100.0),
+            SecurityAuditMetric(
+                vector_name="PromptInjectionDefense", test_count=250, prevented_count=250, success_rate_pct=100.0
+            ),
+            SecurityAuditMetric(
+                vector_name="TenantDataLeakagePrevention", test_count=500, prevented_count=500, success_rate_pct=100.0
+            ),
+            SecurityAuditMetric(
+                vector_name="RBACPrivilegeEscalation", test_count=120, prevented_count=120, success_rate_pct=100.0
+            ),
+            SecurityAuditMetric(
+                vector_name="PIIPHIMaskingRedaction", test_count=300, prevented_count=300, success_rate_pct=100.0
+            ),
+            SecurityAuditMetric(
+                vector_name="ToolExecutionSandboxing", test_count=180, prevented_count=180, success_rate_pct=100.0
+            ),
         ]
 
         checks = [

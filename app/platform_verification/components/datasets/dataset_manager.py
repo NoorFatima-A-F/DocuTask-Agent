@@ -1,15 +1,17 @@
 """
 Dataset Manager: Dataset versioning, CAS integrity, 11 categories, lineage.
 """
+
 from typing import Dict, Any, Optional, List, Union
 import hashlib
 from ..interfaces import DatasetManagerInterface
 from ...crosscutting.observability import ComponentObservability
 from ...domain.models import DatasetRecord, DatasetClass
 
+
 class DatasetManager(DatasetManagerInterface):
     """Manages immutable, content-addressed verification datasets across 11 classes."""
-    
+
     def __init__(self):
         self._datasets: Dict[str, Dict[str, Any]] = {}
         self._domain_datasets: Dict[str, DatasetRecord] = {}
@@ -40,17 +42,23 @@ class DatasetManager(DatasetManagerInterface):
                 dataset_class=cls_enum,
                 sample_count=count,
                 sha256_checksum=h,
-                tags=["verification", cls_enum.value.lower()]
+                tags=["verification", cls_enum.value.lower()],
             )
             self._domain_datasets[ds_id] = ds_rec
             self._datasets[ds_id] = {
                 "dataset_id": ds_id,
                 "category": cls_enum.value.lower(),
                 "hash": h,
-                "metadata": {"name": name, "sample_count": count}
+                "metadata": {"name": name, "sample_count": count},
             }
 
-    async def register_dataset(self, dataset_id: str, category: str, content_or_uri: Union[bytes, str], metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def register_dataset(
+        self,
+        dataset_id: str,
+        category: str,
+        content_or_uri: Union[bytes, str],
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
         self.observability.record_operation(1.5)
         raw_bytes = content_or_uri if isinstance(content_or_uri, bytes) else content_or_uri.encode("utf-8")
         h = hashlib.sha256(raw_bytes).hexdigest()
@@ -59,7 +67,7 @@ class DatasetManager(DatasetManagerInterface):
             "category": category,
             "hash": h,
             "size_bytes": len(raw_bytes),
-            "metadata": metadata or {}
+            "metadata": metadata or {},
         }
         self._datasets[dataset_id] = record
         return record

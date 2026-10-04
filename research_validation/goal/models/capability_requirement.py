@@ -18,6 +18,7 @@ class CapabilityCriticality(str, Enum):
 @dataclass(frozen=True)
 class CapabilityRequirement:
     """A specific capability requirement for an autonomous goal."""
+
     capability_name: str
     category: str  # "MODEL", "TOOL", "BENCHMARK", "HARDWARE", "AGENT", "STORAGE"
     criticality: CapabilityCriticality = CapabilityCriticality.MANDATORY

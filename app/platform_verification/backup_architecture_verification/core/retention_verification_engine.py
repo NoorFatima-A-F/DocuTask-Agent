@@ -3,6 +3,7 @@ Part 6: Retention Policy Verification Engine.
 Validates retention policies, Grandfather-Father-Son (GFS) schemes, legal holds,
 and detects infinite retention, missing retention, and accidental purge risks.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     CriticalityTier,
@@ -365,15 +366,12 @@ class RetentionVerificationEngine(IRetentionVerificationEngine):
 
             # Detect infinite retention without legal hold justification
             if not policy.auto_expiration_enabled and not policy.legal_hold_supported:
-                details.append("WARNING: Auto-expiration is disabled without legal hold justification (infinite retention).")
+                details.append(
+                    "WARNING: Auto-expiration is disabled without legal hold justification (infinite retention)."
+                )
                 has_infinite = True
 
-            is_valid = (
-                not has_purge_risk
-                and not has_infinite
-                and legal_hold_ok
-                and immutability_ok
-            )
+            is_valid = not has_purge_risk and not has_infinite and legal_hold_ok and immutability_ok
 
             if is_valid:
                 details.append(
@@ -397,9 +395,7 @@ class RetentionVerificationEngine(IRetentionVerificationEngine):
 
         return results
 
-    def export_retention_report_json(
-        self, results: List[RetentionValidationResult]
-    ) -> Dict[str, Any]:
+    def export_retention_report_json(self, results: List[RetentionValidationResult]) -> Dict[str, Any]:
         """Formats the retention verification results to JSON dictionary."""
         passed_count = len([r for r in results if r.is_valid])
         return {

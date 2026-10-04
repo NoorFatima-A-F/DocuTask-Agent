@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Ocr.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.ocr.domain.models import OcrEntity
+
 
 class OcrRepositoryInterface(ABC):
     @abstractmethod

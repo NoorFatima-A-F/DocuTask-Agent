@@ -29,11 +29,41 @@ class InfrastructureAsCodeVerifier(IInfrastructureAsCodeVerifier):
 
     def verify(self) -> IaCVerificationReport:
         modules = [
-            IaCModuleSpec(module_name="terraform/modules/vpc_networking", tool="Terraform", resources_count=8, plan_verified=True, idempotent_reapply=True),
-            IaCModuleSpec(module_name="terraform/modules/managed_postgres", tool="Terraform", resources_count=4, plan_verified=True, idempotent_reapply=True),
-            IaCModuleSpec(module_name="terraform/modules/managed_redis", tool="Terraform", resources_count=3, plan_verified=True, idempotent_reapply=True),
-            IaCModuleSpec(module_name="terraform/modules/object_storage", tool="Terraform", resources_count=3, plan_verified=True, idempotent_reapply=True),
-            IaCModuleSpec(module_name="helm/charts/docutask-agent", tool="Helm / K8s", resources_count=10, plan_verified=True, idempotent_reapply=True),
+            IaCModuleSpec(
+                module_name="terraform/modules/vpc_networking",
+                tool="Terraform",
+                resources_count=8,
+                plan_verified=True,
+                idempotent_reapply=True,
+            ),
+            IaCModuleSpec(
+                module_name="terraform/modules/managed_postgres",
+                tool="Terraform",
+                resources_count=4,
+                plan_verified=True,
+                idempotent_reapply=True,
+            ),
+            IaCModuleSpec(
+                module_name="terraform/modules/managed_redis",
+                tool="Terraform",
+                resources_count=3,
+                plan_verified=True,
+                idempotent_reapply=True,
+            ),
+            IaCModuleSpec(
+                module_name="terraform/modules/object_storage",
+                tool="Terraform",
+                resources_count=3,
+                plan_verified=True,
+                idempotent_reapply=True,
+            ),
+            IaCModuleSpec(
+                module_name="helm/charts/docutask-agent",
+                tool="Helm / K8s",
+                resources_count=10,
+                plan_verified=True,
+                idempotent_reapply=True,
+            ),
         ]
 
         total_resources = sum(m.resources_count for m in modules)

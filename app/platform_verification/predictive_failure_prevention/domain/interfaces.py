@@ -1,6 +1,7 @@
 """
 Phase 3H.5.9: Domain Interfaces for Predictive Health Intelligence & Proactive Failure Prevention
 """
+
 from abc import ABC, abstractmethod
 from .models import (
     PredictiveArchitectureReport,

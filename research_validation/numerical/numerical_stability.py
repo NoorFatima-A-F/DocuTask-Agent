@@ -100,7 +100,12 @@ class NumericalStabilityLab:
         t_zero_var = cls._test_zero_variance()
         results.append(t_zero_var)
 
-        robust = sum(1 for r in results if r.classification in (StabilityClassification.ROBUST_STABLE, StabilityClassification.CONTROLLED_EXCEPTION_HANDLED))
+        robust = sum(
+            1
+            for r in results
+            if r.classification
+            in (StabilityClassification.ROBUST_STABLE, StabilityClassification.CONTROLLED_EXCEPTION_HANDLED)
+        )
         unstable = sum(1 for r in results if r.classification == StabilityClassification.UNSTABLE_CATASTROPHIC_FAILURE)
         total = len(results)
         score = (robust / total) * 100.0 if total > 0 else 0.0
@@ -108,7 +113,9 @@ class NumericalStabilityLab:
         return NumericalStabilityReport(
             total_stress_tests=total,
             robust_tests_count=robust,
-            handled_exceptions_count=sum(1 for r in results if r.classification == StabilityClassification.CONTROLLED_EXCEPTION_HANDLED),
+            handled_exceptions_count=sum(
+                1 for r in results if r.classification == StabilityClassification.CONTROLLED_EXCEPTION_HANDLED
+            ),
             unstable_failures_count=unstable,
             stability_score_pct=score,
             recommended_numeric_type="IEEE 754 Float64 (Double Precision) with Welford Accumulators",
@@ -182,9 +189,9 @@ class NumericalStabilityLab:
         var_welford = sum((x - mean_s) ** 2 for x in samples) / (3 - 1)
 
         # Naive formula: (sum(x^2) - sum(x)^2/3)/2
-        sum_x2 = sum(x ** 2 for x in samples)
+        sum_x2 = sum(x**2 for x in samples)
         sum_x = sum(samples)
-        var_naive = (sum_x2 - (sum_x ** 2) / 3.0) / 2.0
+        var_naive = (sum_x2 - (sum_x**2) / 3.0) / 2.0
 
         diff = abs(var_welford - 1.0)
         is_stable = diff < 1e-6
@@ -194,7 +201,9 @@ class NumericalStabilityLab:
             stress_condition="CATASTROPHIC_CANCELLATION",
             input_representation="FLOAT64",
             produced_output=f"welford_var={var_welford:.6f}, naive_var={var_naive:.6f}",
-            classification=StabilityClassification.ROBUST_STABLE if is_stable else StabilityClassification.DEGRADED_PRECISION,
+            classification=StabilityClassification.ROBUST_STABLE
+            if is_stable
+            else StabilityClassification.DEGRADED_PRECISION,
             recovered_gracefully=is_stable,
             details=f"Welford variance accurately preserved variance=1.0 at offset 1e9 (error={diff:.2e}).",
         )
@@ -202,7 +211,7 @@ class NumericalStabilityLab:
     @classmethod
     def _test_subnormal_floats(cls) -> ExtremeBoundaryTestCase:
         subnormal = 1e-315
-        p = math.exp(-0.5 * (subnormal ** 2))
+        p = math.exp(-0.5 * (subnormal**2))
         return ExtremeBoundaryTestCase(
             test_case_name="Subnormal_Denormalized_Float",
             stress_condition="SUBNORMAL_DENORM",

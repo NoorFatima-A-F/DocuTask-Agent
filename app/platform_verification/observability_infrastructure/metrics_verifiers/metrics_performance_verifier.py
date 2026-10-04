@@ -1,6 +1,7 @@
 """
 3I.2.8: Metrics Performance & Load Verifier
 """
+
 from ..domain.models import MetricsPerformanceReport
 from ..domain.interfaces import IMetricsPerformanceVerifier
 
@@ -17,5 +18,5 @@ class MetricsPerformanceVerifier(IMetricsPerformanceVerifier):
             scrape_duration_ms=8.5,
             high_load_rps_simulated=10000,
             metrics_data_integrity_pct=100.0,
-            metrics_resilience_passed=True
+            metrics_resilience_passed=True,
         )

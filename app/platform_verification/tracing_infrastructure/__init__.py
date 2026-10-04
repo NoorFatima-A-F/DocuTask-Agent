@@ -1,6 +1,7 @@
 """
 Phase 3I.4: Enterprise Distributed Tracing Infrastructure Verification Framework
 """
+
 from .domain.models import (
     SpanKind,
     TracingCertificationTier,

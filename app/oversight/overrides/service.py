@@ -13,18 +13,19 @@ from ..core.exceptions import InvalidOverrideError
 
 class HumanOverrideRecord(BaseModel):
     """Immutable audit record of a manual human intervention/override."""
+
     override_id: str = Field(default_factory=lambda: f"ovr_{uuid.uuid4().hex[:10]}")
     review_id: str
     tenant_id: str
     reviewer_id: str
     reviewer_role: str
-    
+
     # Intervention Details
     original_ai_decision: Any
     overridden_human_decision: Any
     justification: str
     policy_id: Optional[str] = None
-    
+
     # Metadata & Signatures
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     dual_signoff_by: Optional[str] = None

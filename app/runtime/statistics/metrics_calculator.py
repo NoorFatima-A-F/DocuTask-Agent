@@ -35,11 +35,11 @@ class MetricsCalculator:
 
         # Skewness
         m3 = sum((x - mean_v) ** 3 for x in values) / n
-        skew = m3 / (std_v ** 3 + 1e-9)
+        skew = m3 / (std_v**3 + 1e-9)
 
         # Kurtosis
         m4 = sum((x - mean_v) ** 4 for x in values) / n
-        kurt = (m4 / (std_v ** 4 + 1e-9)) - 3.0
+        kurt = (m4 / (std_v**4 + 1e-9)) - 3.0
 
         return {
             "count": n,

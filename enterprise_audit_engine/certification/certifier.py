@@ -104,7 +104,7 @@ class EnterpriseCertifier:
                     analysis=card_dict.get("justification", ""),
                 )
             )
-        
+
         coverage_result = EvidenceCoverageAnalyzer.verify_coverage(
             findings=all_findings,
             records=evidence_records,

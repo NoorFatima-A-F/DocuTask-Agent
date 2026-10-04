@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class SubsystemHealthStatus(str, Enum):
     """Health classification for a platform subsystem."""
+
     HEALTHY = "HEALTHY"
     DEGRADED = "DEGRADED"
     UNHEALTHY = "UNHEALTHY"
@@ -19,6 +20,7 @@ class SubsystemHealthStatus(str, Enum):
 
 class SubsystemHealthReport(BaseModel):
     """Health evaluation of an individual platform subsystem."""
+
     subsystem_name: str
     status: SubsystemHealthStatus = SubsystemHealthStatus.HEALTHY
     latency_ms: float = 0.0
@@ -29,6 +31,7 @@ class SubsystemHealthReport(BaseModel):
 
 class PlatformHealthReport(BaseModel):
     """Unified health report for the entire agent platform."""
+
     overall_status: SubsystemHealthStatus = SubsystemHealthStatus.HEALTHY
     healthy_count: int = 0
     degraded_count: int = 0

@@ -35,10 +35,7 @@ class CoordinationCache:
         elif len(self._cache) >= self._capacity:
             self._cache.popitem(last=False)
 
-        self._cache[key] = {
-            "value": value,
-            "timestamp": datetime.now(timezone.utc).timestamp()
-        }
+        self._cache[key] = {"value": value, "timestamp": datetime.now(timezone.utc).timestamp()}
 
     def invalidate(self, key: str) -> None:
         if key in self._cache:

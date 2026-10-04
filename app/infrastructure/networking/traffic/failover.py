@@ -11,14 +11,16 @@ from ..control_plane.registry import NetworkEndpoint
 
 class CircuitState(str, Enum):
     """Circuit breaker states."""
-    CLOSED = "closed"      # Normal operation
-    OPEN = "open"          # Failing, fast reject
+
+    CLOSED = "closed"  # Normal operation
+    OPEN = "open"  # Failing, fast reject
     HALF_OPEN = "half_open"  # Testing recovery
 
 
 @dataclass
 class CircuitBreakerConfig:
     """Circuit breaker thresholds."""
+
     consecutive_errors_threshold: int = 5
     recovery_time_seconds: float = 15.0
     half_open_success_threshold: int = 2
@@ -42,7 +44,9 @@ class TrafficFailoverManager:
             state = self._circuits.get(addr, CircuitState.CLOSED)
             if state == CircuitState.OPEN:
                 opened_time = self._opened_at.get(addr)
-                if opened_time and datetime.now(timezone.utc) - opened_time > timedelta(seconds=self.config.recovery_time_seconds):
+                if opened_time and datetime.now(timezone.utc) - opened_time > timedelta(
+                    seconds=self.config.recovery_time_seconds
+                ):
                     self._circuits[addr] = CircuitState.HALF_OPEN
                     return CircuitState.HALF_OPEN
             return state

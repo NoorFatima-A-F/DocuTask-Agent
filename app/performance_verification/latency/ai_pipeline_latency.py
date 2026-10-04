@@ -22,13 +22,7 @@ class AIPipelineLatencyAnalyzer:
         sla_target_total_ms: float = 6000.0,
     ) -> PipelineLatencyBreakdown:
         """Measures the complete 5-stage document intelligence pipeline."""
-        total_ms = (
-            ocr_ms
-            + extraction_llm_ms
-            + validation_rules_ms
-            + agent_reasoning_ms
-            + db_persistence_ms
-        )
+        total_ms = ocr_ms + extraction_llm_ms + validation_rules_ms + agent_reasoning_ms + db_persistence_ms
 
         stages_raw = [
             ("Multimodal OCR & Layout Parsing", ocr_ms, 2000.0),

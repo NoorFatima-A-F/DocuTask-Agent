@@ -21,13 +21,16 @@ from app.agents.runtime.plugin_runtime.isolation_policy import (
 )
 
 
-@pytest.mark.parametrize("permission", [
-    PluginPermission.FILESYSTEM_READ,
-    PluginPermission.FILESYSTEM_WRITE,
-    PluginPermission.NETWORK_ACCESS,
-    PluginPermission.DATABASE_ACCESS,
-    PluginPermission.SECRET_ACCESS,
-])
+@pytest.mark.parametrize(
+    "permission",
+    [
+        PluginPermission.FILESYSTEM_READ,
+        PluginPermission.FILESYSTEM_WRITE,
+        PluginPermission.NETWORK_ACCESS,
+        PluginPermission.DATABASE_ACCESS,
+        PluginPermission.SECRET_ACCESS,
+    ],
+)
 def test_permission_granularity_matrix(permission):
     mgr = PluginPermissionManager()
     plugin_id = f"plugin_{permission.value}"
@@ -47,12 +50,15 @@ def test_permission_granularity_matrix(permission):
     assert not mgr.has_permission(plugin_id, permission)
 
 
-@pytest.mark.parametrize("max_cpu_time,simulated_time,should_fail", [
-    (0.05, 0.01, False),
-    (0.10, 0.02, False),
-    (0.05, 0.10, True),
-    (0.02, 0.06, True),
-])
+@pytest.mark.parametrize(
+    "max_cpu_time,simulated_time,should_fail",
+    [
+        (0.05, 0.01, False),
+        (0.10, 0.02, False),
+        (0.05, 0.10, True),
+        (0.02, 0.06, True),
+    ],
+)
 @pytest.mark.asyncio
 async def test_resource_limiter_cpu_timeout_matrix(max_cpu_time, simulated_time, should_fail):
     limiter = PluginResourceLimiter(max_cpu_time_seconds=max_cpu_time)
@@ -69,12 +75,15 @@ async def test_resource_limiter_cpu_timeout_matrix(max_cpu_time, simulated_time,
         assert res == "done"
 
 
-@pytest.mark.parametrize("origin,allowed_origins,expected_allowed", [
-    ("https://api.google.com", ["https://api.google.com", "https://api.aws.com"], True),
-    ("https://api.aws.com", ["https://api.google.com", "https://api.aws.com"], True),
-    ("https://malicious.evil.com", ["https://api.google.com"], False),
-    ("http://insecure.internal", ["https://api.google.com"], False),
-])
+@pytest.mark.parametrize(
+    "origin,allowed_origins,expected_allowed",
+    [
+        ("https://api.google.com", ["https://api.google.com", "https://api.aws.com"], True),
+        ("https://api.aws.com", ["https://api.google.com", "https://api.aws.com"], True),
+        ("https://malicious.evil.com", ["https://api.google.com"], False),
+        ("http://insecure.internal", ["https://api.google.com"], False),
+    ],
+)
 def test_isolation_policy_network_origins(origin, allowed_origins, expected_allowed):
     policy = PluginIsolationPolicy(allowed_network_origins=allowed_origins)
 
@@ -85,12 +94,15 @@ def test_isolation_policy_network_origins(origin, allowed_origins, expected_allo
             policy.assert_network_origin(origin)
 
 
-@pytest.mark.parametrize("path,allowed_paths,expected_allowed", [
-    ("/app/data/doc.pdf", ["/app/data"], True),
-    ("/app/data/sub/report.json", ["/app/data"], True),
-    ("/etc/passwd", ["/app/data"], False),
-    ("C:\\Windows\\System32\\cmd.exe", ["C:\\app\\data"], False),
-])
+@pytest.mark.parametrize(
+    "path,allowed_paths,expected_allowed",
+    [
+        ("/app/data/doc.pdf", ["/app/data"], True),
+        ("/app/data/sub/report.json", ["/app/data"], True),
+        ("/etc/passwd", ["/app/data"], False),
+        ("C:\\Windows\\System32\\cmd.exe", ["C:\\app\\data"], False),
+    ],
+)
 def test_isolation_policy_path_boundaries(path, allowed_paths, expected_allowed):
     policy = PluginIsolationPolicy(allowed_filesystem_paths=allowed_paths)
 

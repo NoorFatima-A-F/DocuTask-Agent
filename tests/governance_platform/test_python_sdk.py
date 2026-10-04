@@ -61,6 +61,7 @@ def test_sdk_report_generation_and_events():
     client.subscribe_events("SDK_EVENT", lambda e: events_caught.append(e))
     # Emit internal event to verify
     from app.governance.platform.api.internal.events import internal_event_bridge
+
     internal_event_bridge.publish("SDK_EVENT", "tenant_default", {"msg": "sdk test"})
     assert len(events_caught) == 1
 

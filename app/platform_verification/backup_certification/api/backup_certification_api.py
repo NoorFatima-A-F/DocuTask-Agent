@@ -1,6 +1,7 @@
 """
 FastAPI router for Enterprise Backup Certification Framework (Part 3G.2G).
 """
+
 from typing import Dict, Any
 from dataclasses import asdict
 from fastapi import APIRouter, HTTPException

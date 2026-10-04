@@ -21,9 +21,7 @@ class MissionSnapshotGenerator:
     """Deterministic state snapshot builder from event logs."""
 
     @classmethod
-    def generate_snapshot(
-        cls, mission_id: str, events: List[BaseRuntimeEvent]
-    ) -> MissionSnapshotPayload:
+    def generate_snapshot(cls, mission_id: str, events: List[BaseRuntimeEvent]) -> MissionSnapshotPayload:
         """Processes event log sequentially to construct point-in-time mission snapshot."""
         if not events:
             now = time.time()
@@ -85,9 +83,13 @@ class MissionSnapshotGenerator:
             if evt.node_id:
                 if evt.event_type in ("NODE_SCHEDULED", "NODE_ASSIGNED", "NODE_STARTED"):
                     nodes_state[evt.node_id] = "RUNNING"
-                elif evt.event_type == "NODE_COMPLETED" or (evt.category == EventCategory.EXECUTION and evt.status == "SUCCESS"):
+                elif evt.event_type == "NODE_COMPLETED" or (
+                    evt.category == EventCategory.EXECUTION and evt.status == "SUCCESS"
+                ):
                     nodes_state[evt.node_id] = "COMPLETED"
-                elif evt.event_type == "NODE_FAILED" or (evt.category == EventCategory.EXECUTION and evt.status == "FAILED"):
+                elif evt.event_type == "NODE_FAILED" or (
+                    evt.category == EventCategory.EXECUTION and evt.status == "FAILED"
+                ):
                     nodes_state[evt.node_id] = "FAILED"
 
             # 4. Economics & Failures

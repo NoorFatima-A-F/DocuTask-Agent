@@ -72,7 +72,7 @@ class PolicyEngine:
         if not cand:
             # Create a placeholder if not found
             cand = self.propose_candidate("planner", "Dynamic Policy", {"max_retries": 3, "concurrency_limit": 6})
-        
+
         sim = PolicyEvaluator.evaluate(cand.candidate_id, cand.parameters)
         comp = PolicyComparator.compare(
             cand.candidate_id,

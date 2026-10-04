@@ -2,6 +2,7 @@
 Test Suite: Mathematical Confidence Formulation & Calibration Curve
 Validates composite confidence derivation, 95% confidence interval propagation, and calibration metrics.
 """
+
 from app.runtime.mathematical_confidence.confidence_formulation import MathematicalConfidenceEngine
 from app.runtime.mathematical_confidence.calibration_curve_builder import CalibrationCurveBuilder
 
@@ -28,7 +29,7 @@ def test_confidence_derivation_mathematical_guarantees():
 
 def test_calibration_curve_and_ece():
     curve = CalibrationCurveBuilder.get_canonical_calibration_curve()
-    
+
     assert curve["expected_calibration_error"] < 0.05
     assert curve["is_calibrated"] is True
     assert curve["total_calibration_trials"] > 1000

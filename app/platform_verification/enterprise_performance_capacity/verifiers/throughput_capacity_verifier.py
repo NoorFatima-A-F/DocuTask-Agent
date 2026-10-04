@@ -32,9 +32,30 @@ class ThroughputCapacityVerifier(IThroughputCapacityVerifier):
 
     def verify(self) -> ThroughputCapacityReport:
         benchmarks = [
-            DocumentClassBenchmark(document_class="Financial Invoices", volume_tested=1000, completed_jobs=1000, failed_jobs=0, avg_processing_time_sec=0.95, throughput_docs_per_min=63.1),
-            DocumentClassBenchmark(document_class="Candidate Resumes", volume_tested=500, completed_jobs=500, failed_jobs=0, avg_processing_time_sec=1.12, throughput_docs_per_min=53.5),
-            DocumentClassBenchmark(document_class="Legal Contracts", volume_tested=500, completed_jobs=500, failed_jobs=0, avg_processing_time_sec=1.28, throughput_docs_per_min=46.8),
+            DocumentClassBenchmark(
+                document_class="Financial Invoices",
+                volume_tested=1000,
+                completed_jobs=1000,
+                failed_jobs=0,
+                avg_processing_time_sec=0.95,
+                throughput_docs_per_min=63.1,
+            ),
+            DocumentClassBenchmark(
+                document_class="Candidate Resumes",
+                volume_tested=500,
+                completed_jobs=500,
+                failed_jobs=0,
+                avg_processing_time_sec=1.12,
+                throughput_docs_per_min=53.5,
+            ),
+            DocumentClassBenchmark(
+                document_class="Legal Contracts",
+                volume_tested=500,
+                completed_jobs=500,
+                failed_jobs=0,
+                avg_processing_time_sec=1.28,
+                throughput_docs_per_min=46.8,
+            ),
         ]
 
         total_completed = sum(b.completed_jobs for b in benchmarks)

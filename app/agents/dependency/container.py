@@ -109,5 +109,5 @@ class AgentContainer:
             state_manager=self._state_manager,
             event_bus=self._event_bus,
             metrics_collector=self._metrics_collector,
-            observability_hook=self._observability_hook
+            observability_hook=self._observability_hook,
         )

@@ -2,7 +2,6 @@
 Tests for Recovery Workflows, Checkpoint Manager, and Integrity Verification.
 """
 
-
 from app.infrastructure.recovery.checkpoints import (
     CheckpointManager,
     CheckpointStatus,
@@ -53,6 +52,7 @@ def test_recovery_verifier():
     verifier = RecoveryVerifier()
     sample_data = {"record_1": "abc", "record_2": "def", "schema_version": "v1.0"}
     import json, hashlib
+
     expected_hash = hashlib.sha256(json.dumps(sample_data, sort_keys=True, default=str).encode("utf-8")).hexdigest()
 
     # Successful verification

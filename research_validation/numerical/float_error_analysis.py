@@ -18,6 +18,7 @@ from typing import Any, Callable, Dict, List
 @dataclass(frozen=True)
 class Interval:
     """Rigorous interval arithmetic interval [low, high]."""
+
     low: float
     high: float
 
@@ -48,29 +49,20 @@ class Interval:
         return Interval(self.low - other.high, self.high - other.low)
 
     def mul(self, other: Interval) -> Interval:
-        products = [
-            self.low * other.low,
-            self.low * other.high,
-            self.high * other.low,
-            self.high * other.high
-        ]
+        products = [self.low * other.low, self.low * other.high, self.high * other.low, self.high * other.high]
         return Interval(min(products), max(products))
 
     def div(self, other: Interval) -> Interval:
         if other.low <= 0.0 <= other.high:
             raise ZeroDivisionError("Interval division by an interval containing zero.")
-        quotients = [
-            self.low / other.low,
-            self.low / other.high,
-            self.high / other.low,
-            self.high / other.high
-        ]
+        quotients = [self.low / other.low, self.low / other.high, self.high / other.low, self.high / other.high]
         return Interval(min(quotients), max(quotients))
 
 
 @dataclass
 class ULPMeasurement:
     """Measurement of Unit in the Last Place (ULP) distance between two floating point numbers."""
+
     val_a: float
     val_b: float
     ulp_distance: int
@@ -82,6 +74,7 @@ class ULPMeasurement:
 @dataclass
 class ConditionNumberReport:
     """Report on matrix/function condition number estimation."""
+
     condition_number: float
     well_conditioned: bool
     stability_grade: str  # "EXCELLENT", "ADEQUATE", "ILL_CONDITIONED", "SINGULAR"
@@ -92,6 +85,7 @@ class ConditionNumberReport:
 @dataclass
 class FloatingPointAuditReport:
     """Comprehensive floating point error analysis report."""
+
     machine_epsilon_f64: float
     machine_epsilon_f32: float
     ulp_evaluations: List[ULPMeasurement]
@@ -112,8 +106,8 @@ class FloatingPointErrorLab:
     def get_machine_epsilon(precision: str = "float64") -> float:
         """Calculate the empirical machine epsilon (distance between 1.0 and next representable number)."""
         if precision == "float32":
-            return 2.0 ** -23
-        return 2.0 ** -52
+            return 2.0**-23
+        return 2.0**-52
 
     @staticmethod
     def calculate_ulp_distance(a: float, b: float) -> ULPMeasurement:
@@ -122,20 +116,26 @@ class FloatingPointErrorLab:
         """
         if math.isnan(a) or math.isnan(b):
             return ULPMeasurement(
-                val_a=a, val_b=b, ulp_distance=-1, is_exact=False,
-                absolute_difference=float('nan'), relative_difference=float('nan')
+                val_a=a,
+                val_b=b,
+                ulp_distance=-1,
+                is_exact=False,
+                absolute_difference=float("nan"),
+                relative_difference=float("nan"),
             )
         if math.isinf(a) or math.isinf(b):
-            is_same = (a == b)
+            is_same = a == b
             return ULPMeasurement(
-                val_a=a, val_b=b, ulp_distance=0 if is_same else 2**63,
+                val_a=a,
+                val_b=b,
+                ulp_distance=0 if is_same else 2**63,
                 is_exact=is_same,
-                absolute_difference=0.0 if is_same else float('inf'),
-                relative_difference=0.0 if is_same else float('inf')
+                absolute_difference=0.0 if is_same else float("inf"),
+                relative_difference=0.0 if is_same else float("inf"),
             )
 
-        a_int = struct.unpack('>q', struct.pack('>d', a))[0]
-        b_int = struct.unpack('>q', struct.pack('>d', b))[0]
+        a_int = struct.unpack(">q", struct.pack(">d", a))[0]
+        b_int = struct.unpack(">q", struct.pack(">d", b))[0]
 
         if a_int < 0:
             a_int = 0x8000000000000000 - a_int
@@ -152,15 +152,12 @@ class FloatingPointErrorLab:
             ulp_distance=diff,
             is_exact=(diff == 0),
             absolute_difference=abs_diff,
-            relative_difference=rel_diff
+            relative_difference=rel_diff,
         )
 
     @classmethod
     def estimate_function_condition_number(
-        cls,
-        func: Callable[[float], float],
-        x: float,
-        h: float = 1e-7
+        cls, func: Callable[[float], float], x: float, h: float = 1e-7
     ) -> ConditionNumberReport:
         """
         Estimate the relative condition number of a scalar function f(x):
@@ -169,18 +166,18 @@ class FloatingPointErrorLab:
         fx = func(x)
         if abs(fx) < 1e-15:
             return ConditionNumberReport(
-                condition_number=float('inf'),
+                condition_number=float("inf"),
                 well_conditioned=False,
                 stability_grade="SINGULAR",
                 estimated_precision_loss_bits=53.0,
-                notes="f(x) near zero; relative condition number approaches infinity."
+                notes="f(x) near zero; relative condition number approaches infinity.",
             )
 
         f_plus = func(x + h)
         f_minus = func(x - h)
         df_dx = (f_plus - f_minus) / (2.0 * h)
 
-        cond = abs((x * df_dx) / fx) if fx != 0 else float('inf')
+        cond = abs((x * df_dx) / fx) if fx != 0 else float("inf")
         loss_bits = math.log2(cond) if cond > 1.0 else 0.0
 
         if cond < 10.0:
@@ -201,7 +198,7 @@ class FloatingPointErrorLab:
             well_conditioned=well_cond,
             stability_grade=grade,
             estimated_precision_loss_bits=loss_bits,
-            notes=f"Condition number: {cond:.4e}, estimated precision loss: {loss_bits:.2f} bits."
+            notes=f"Condition number: {cond:.4e}, estimated precision loss: {loss_bits:.2f} bits.",
         )
 
     @classmethod
@@ -223,7 +220,7 @@ class FloatingPointErrorLab:
             return False
 
         i_div = i1.div(i2)
-        if i_div.low != 0.25 or not math.isclose(i_div.high, 2.0/3.0):
+        if i_div.low != 0.25 or not math.isclose(i_div.high, 2.0 / 3.0):
             return False
 
         return True
@@ -264,5 +261,5 @@ class FloatingPointErrorLab:
             forward_error_bound=fwd_error,
             backward_error_bound=bwd_error,
             status=status,
-            metadata={"standard": "IEEE 754-2019", "precision_bits": 64}
+            metadata={"standard": "IEEE 754-2019", "precision_bits": 64},
         )

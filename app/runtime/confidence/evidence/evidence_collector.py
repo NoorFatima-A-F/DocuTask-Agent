@@ -37,7 +37,9 @@ class EvidenceCollector:
         }
 
         event_ids = [e.event_id for e in events] if events else ["evt-default-01"]
-        last_hash = events[-1].truth_ledger_hash if events and events[-1].truth_ledger_hash else "hash-truth-verified-c8a1"
+        last_hash = (
+            events[-1].truth_ledger_hash if events and events[-1].truth_ledger_hash else "hash-truth-verified-c8a1"
+        )
 
         return RuntimeEvidenceSnapshot(
             mission_id=self.mission_id,

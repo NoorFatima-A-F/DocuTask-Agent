@@ -1,4 +1,5 @@
 """Immutable Environment Promotion Manager (Req 32, 33)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
@@ -13,6 +14,7 @@ from .policies import EnvironmentHierarchyPolicy
 @dataclass
 class PromotionRecord:
     """Audit record for a release promotion across environment tiers."""
+
     promotion_id: str
     release_id: str
     artifact_digest: str  # Must remain 100% identical between environments!

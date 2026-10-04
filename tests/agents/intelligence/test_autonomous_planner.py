@@ -357,7 +357,7 @@ class TestPlanningInvariantsAndEdgeCases:
     def test_large_dag_topological_ordering(self):
         plan = ExecutionPlan(goal_id="g_large")
         for i in range(20):
-            deps = [f"t{i-1}"] if i > 0 else []
+            deps = [f"t{i - 1}"] if i > 0 else []
             plan.add_task(PlannedTask(task_id=f"t{i}", name=f"Task {i}", action="step", dependencies=deps))
         order = plan.get_topological_order()
         assert len(order) == 20
@@ -368,7 +368,9 @@ class TestPlanningInvariantsAndEdgeCases:
         plan.add_task(PlannedTask(task_id="start", name="Start", action="init"))
         for i in range(5):
             plan.add_task(PlannedTask(task_id=f"branch_{i}", name=f"Branch {i}", action="work", dependencies=["start"]))
-        plan.add_task(PlannedTask(task_id="join", name="Join", action="reduce", dependencies=[f"branch_{i}" for i in range(5)]))
+        plan.add_task(
+            PlannedTask(task_id="join", name="Join", action="reduce", dependencies=[f"branch_{i}" for i in range(5)])
+        )
         order = plan.get_topological_order()
         ids = [t.task_id for t in order]
         assert ids[0] == "start"
@@ -453,7 +455,9 @@ class TestPlanningInvariantsAndEdgeCases:
         assert tasks[0].input_parameters["document_path"] == "/path/to/invoice.pdf"
         assert tasks[2].input_parameters["expected_currency"] == "EUR"
 
-    @pytest.mark.parametrize("priority", [GoalPriority.LOW, GoalPriority.MEDIUM, GoalPriority.HIGH, GoalPriority.CRITICAL])
+    @pytest.mark.parametrize(
+        "priority", [GoalPriority.LOW, GoalPriority.MEDIUM, GoalPriority.HIGH, GoalPriority.CRITICAL]
+    )
     def test_planner_handles_all_priorities(self, priority):
         planner = AutonomousPlanner()
         goal = GoalSpecification(objective="Task", priority=priority)
@@ -470,5 +474,3 @@ class TestPlanningInvariantsAndEdgeCases:
         assert task.is_critical is True
         assert task.timeout_seconds == 30.0
         assert task.max_retries == 2
-
-

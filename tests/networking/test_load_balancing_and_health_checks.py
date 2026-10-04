@@ -31,10 +31,16 @@ def test_health_outlier_ejection():
     health_engine = HealthCheckEngine(registry=registry)
 
     # Record 3 consecutive errors
-    health_engine.record_call_result("ep-flaky", is_error=True, consecutive_error_threshold=3, ejection_duration_seconds=5.0)
-    health_engine.record_call_result("ep-flaky", is_error=True, consecutive_error_threshold=3, ejection_duration_seconds=5.0)
+    health_engine.record_call_result(
+        "ep-flaky", is_error=True, consecutive_error_threshold=3, ejection_duration_seconds=5.0
+    )
+    health_engine.record_call_result(
+        "ep-flaky", is_error=True, consecutive_error_threshold=3, ejection_duration_seconds=5.0
+    )
     assert health_engine.is_ejected("ep-flaky") is False
 
-    health_engine.record_call_result("ep-flaky", is_error=True, consecutive_error_threshold=3, ejection_duration_seconds=5.0)
+    health_engine.record_call_result(
+        "ep-flaky", is_error=True, consecutive_error_threshold=3, ejection_duration_seconds=5.0
+    )
     assert health_engine.is_ejected("ep-flaky") is True
     assert registry.get_endpoint("ep-flaky").health == EndpointHealth.UNHEALTHY

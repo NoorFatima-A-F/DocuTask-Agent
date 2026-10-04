@@ -25,7 +25,9 @@ class OrgHealthAggregator:
 
         return {
             "organization_health_score": round(avg_health, 1),
-            "organization_health_tier": "OPTIMAL_RESILIENT" if avg_health >= 95.0 else ("STABLE" if avg_health >= 85.0 else "AT_RISK"),
+            "organization_health_tier": "OPTIMAL_RESILIENT"
+            if avg_health >= 95.0
+            else ("STABLE" if avg_health >= 85.0 else "AT_RISK"),
             "primary_bottleneck_department": bottleneck.department_id,
             "primary_bottleneck_name": bottleneck.department_name,
             "departments_with_elevated_burnout": elevated_burnout,

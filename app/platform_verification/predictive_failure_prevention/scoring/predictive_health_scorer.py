@@ -1,6 +1,7 @@
 """
 Phase 3H.5.9: Predictive Health Intelligence Scorer
 """
+
 from ..domain.interfaces import IPredictiveHealthScorer
 from ..domain.models import (
     PredictiveArchitectureReport,
@@ -35,55 +36,76 @@ class PredictiveHealthScorer(IPredictiveHealthScorer):
         dashboard_report: PredictiveDashboardReport,
     ) -> PredictiveHealthScorecard:
         # 1. Prediction accuracy (25%)
-        pred_accuracy_score = 100.0 if (
-            accuracy_report.prediction_accuracy_valid
-            and accuracy_report.accuracy_threshold_met
-            and accuracy_report.metrics.precision >= 0.90
-            and accuracy_report.metrics.recall >= 0.90
-            and prediction_report.failure_prediction_valid
-            and prediction_report.mean_confidence >= 0.80
-        ) else 80.0
+        pred_accuracy_score = (
+            100.0
+            if (
+                accuracy_report.prediction_accuracy_valid
+                and accuracy_report.accuracy_threshold_met
+                and accuracy_report.metrics.precision >= 0.90
+                and accuracy_report.metrics.recall >= 0.90
+                and prediction_report.failure_prediction_valid
+                and prediction_report.mean_confidence >= 0.80
+            )
+            else 80.0
+        )
 
         # 2. Anomaly detection (20%)
-        anomaly_score = 100.0 if (
-            anomaly_report.anomaly_detection_valid
-            and anomaly_report.statistical_detection_active
-            and anomaly_report.trend_detection_active
-            and anomaly_report.behavioral_detection_active
-            and anomaly_report.total_anomalies_detected >= 3
-        ) else 80.0
+        anomaly_score = (
+            100.0
+            if (
+                anomaly_report.anomaly_detection_valid
+                and anomaly_report.statistical_detection_active
+                and anomaly_report.trend_detection_active
+                and anomaly_report.behavioral_detection_active
+                and anomaly_report.total_anomalies_detected >= 3
+            )
+            else 80.0
+        )
 
         # 3. Preventive actions (20%)
-        preventive_score = 100.0 if (
-            remediation_report.proactive_remediation_valid
-            and remediation_report.all_actions_successful
-            and remediation_report.total_preventive_actions >= 4
-            and incident_report.predictive_incident_valid
-            and incident_report.all_incidents_actionable
-        ) else 80.0
+        preventive_score = (
+            100.0
+            if (
+                remediation_report.proactive_remediation_valid
+                and remediation_report.all_actions_successful
+                and remediation_report.total_preventive_actions >= 4
+                and incident_report.predictive_incident_valid
+                and incident_report.all_incidents_actionable
+            )
+            else 80.0
+        )
 
         # 4. False alarm control (15%)
-        false_alarm_score = 100.0 if (
-            accuracy_report.false_alarm_rate_pct <= 10.0
-            and accuracy_report.metrics.false_positive_rate <= 0.10
-        ) else 80.0
+        false_alarm_score = (
+            100.0
+            if (accuracy_report.false_alarm_rate_pct <= 10.0 and accuracy_report.metrics.false_positive_rate <= 0.10)
+            else 80.0
+        )
 
         # 5. Reliability improvement (10%)
-        reliability_score = 100.0 if (
-            twin_report.reliability_twin_valid
-            and twin_report.total_components_modeled >= 5
-            and chaos_report.chaos_prediction_valid
-            and chaos_report.all_chaos_predictions_passed
-            and capacity_report.capacity_prediction_valid
-        ) else 80.0
+        reliability_score = (
+            100.0
+            if (
+                twin_report.reliability_twin_valid
+                and twin_report.total_components_modeled >= 5
+                and chaos_report.chaos_prediction_valid
+                and chaos_report.all_chaos_predictions_passed
+                and capacity_report.capacity_prediction_valid
+            )
+            else 80.0
+        )
 
         # 6. Security (10%)
-        security_score = 100.0 if (
-            arch_report.architecture_valid
-            and feature_report.feature_engineering_valid
-            and dashboard_report.dashboard_valid
-            and dashboard_report.all_dashboards_active
-        ) else 80.0
+        security_score = (
+            100.0
+            if (
+                arch_report.architecture_valid
+                and feature_report.feature_engineering_valid
+                and dashboard_report.dashboard_valid
+                and dashboard_report.all_dashboards_active
+            )
+            else 80.0
+        )
 
         composite = (
             pred_accuracy_score * 0.25

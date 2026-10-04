@@ -154,8 +154,11 @@ class TestToolExecutionPolicy:
     async def test_execute_all_fail_returns_failure(self, setup_policy):
         reg, policy = setup_policy
 
-        async def fail1(args): raise RuntimeError("Primary failed")
-        async def fail2(args): raise RuntimeError("Fallback failed")
+        async def fail1(args):
+            raise RuntimeError("Primary failed")
+
+        async def fail2(args):
+            raise RuntimeError("Fallback failed")
 
         reg.register(ToolDefinition("fail_prim", "FP", "TEST", executor=fail1))
         reg.register(ToolDefinition("fail_fall", "FF", "TEST", executor=fail2))
@@ -179,7 +182,9 @@ class TestToolExecutionPolicy:
 
 
 class TestExpandedToolScenarios:
-    @pytest.mark.parametrize("modality", [Modality.TEXT, Modality.IMAGE, Modality.PDF, Modality.HANDWRITING, Modality.TABLE, Modality.JSON])
+    @pytest.mark.parametrize(
+        "modality", [Modality.TEXT, Modality.IMAGE, Modality.PDF, Modality.HANDWRITING, Modality.TABLE, Modality.JSON]
+    )
     def test_all_modalities_valid(self, modality):
         assert isinstance(modality.value, str)
 
@@ -303,4 +308,3 @@ class TestExpandedToolScenarios:
         tool = ToolDefinition(tool_id="t_repr", name="Repr Tool", category="TEST")
         assert tool.tool_id == "t_repr"
         assert tool.name == "Repr Tool"
-

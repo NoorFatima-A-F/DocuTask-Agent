@@ -1,6 +1,7 @@
 """
 Verification Runtime Orchestrator for Enterprise Configuration & Secret Backup Verification (Part 3G.2D).
 """
+
 import time
 from typing import Dict, Any, Optional
 
@@ -96,9 +97,7 @@ class ConfigurationBackupVerificationRuntime:
         self.scoring_engine = scoring_engine or ConfigurationQualityScoringEngine()
         self.evidence_engine = evidence_engine or ConfigurationEvidenceManifestEngine()
 
-    def execute_full_verification(
-        self, output_dir: Optional[str] = None
-    ) -> Dict[str, Any]:
+    def execute_full_verification(self, output_dir: Optional[str] = None) -> Dict[str, Any]:
         """
         Executes end-to-end configuration and secret verification across all 14 sub-phases.
         """
@@ -171,9 +170,7 @@ class ConfigurationBackupVerificationRuntime:
         }
 
         # 7. Evidence Export
-        manifest_paths = self.evidence_engine.export_all_evidence_artifacts(
-            verification_data, output_dir=output_dir
-        )
+        manifest_paths = self.evidence_engine.export_all_evidence_artifacts(verification_data, output_dir=output_dir)
 
         verification_data["exported_manifest_paths"] = manifest_paths
         verification_data["passed"] = scorecard.passed

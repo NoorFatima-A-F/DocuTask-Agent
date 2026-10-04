@@ -21,6 +21,7 @@ from app.tenancy.quotas.manager import QuotaManager
 
 class SupportDelegationSession(BaseModel):
     """Time-limited, audited administrator delegation session."""
+
     session_id: str
     admin_user_id: str
     target_organization_id: str
@@ -51,14 +52,16 @@ class SaaSAdminConsole:
         results = []
         for org in self.org_manager.list_organizations():
             if q in org.name.lower() or q in org.slug.lower() or q in org.id.lower():
-                results.append({
-                    "id": org.id,
-                    "name": org.name,
-                    "slug": org.slug,
-                    "status": org.status.value,
-                    "region": org.region.value,
-                    "plan": org.subscription_plan.value,
-                })
+                results.append(
+                    {
+                        "id": org.id,
+                        "name": org.name,
+                        "slug": org.slug,
+                        "status": org.status.value,
+                        "region": org.region.value,
+                        "plan": org.subscription_plan.value,
+                    }
+                )
         return results
 
     def get_tenant_diagnostic(self, organization_id: str) -> Dict[str, Any]:

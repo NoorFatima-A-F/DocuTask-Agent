@@ -17,6 +17,7 @@ from app.runtime.strategy_discovery.graph_synthesis import SynthesizedDAG, Primi
 
 class MutationResult(BaseModel):
     """Result of an evolutionary mutation applied to a strategy DAG."""
+
     mutation_id: str = Field(default_factory=lambda: f"mut_{uuid.uuid4().hex[:8]}")
     original_dag_id: str
     mutated_dag: SynthesizedDAG

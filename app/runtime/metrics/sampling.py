@@ -36,8 +36,7 @@ class EventSampler:
         # 2. Filter by agent ID if specified
         if rule.filter_agent_ids:
             filtered = [
-                e for e in filtered
-                if e.agent_id in rule.filter_agent_ids or e.worker_id in rule.filter_agent_ids
+                e for e in filtered if e.agent_id in rule.filter_agent_ids or e.worker_id in rule.filter_agent_ids
             ]
 
         if not filtered:
@@ -48,12 +47,10 @@ class EventSampler:
 
         # 3. Apply windowing
         if rule.window_type == "SLIDING_COUNT":
-            return sorted_events[-rule.window_size:]
+            return sorted_events[-rule.window_size :]
 
         elif rule.window_type == "SLIDING_TIME":
-            now = reference_time or (
-                sorted_events[-1].timestamp if sorted_events else datetime.now(timezone.utc)
-            )
+            now = reference_time or (sorted_events[-1].timestamp if sorted_events else datetime.now(timezone.utc))
             cutoff = now - timedelta(seconds=rule.window_size)
             return [e for e in sorted_events if e.timestamp >= cutoff]
 

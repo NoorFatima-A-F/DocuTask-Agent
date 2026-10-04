@@ -13,6 +13,7 @@ from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 class ReflectionSession(BaseModel):
     """Encapsulates active state and staged artifacts for a running reflection job."""
+
     session_id: UUID = Field(default_factory=uuid4)
     identity: ReflectionIdentity
     trace: ExecutionTraceEnvelope

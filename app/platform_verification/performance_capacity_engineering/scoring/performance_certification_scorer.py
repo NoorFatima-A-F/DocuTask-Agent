@@ -8,6 +8,7 @@ Evaluates weighted scores across:
   - Regression detection: 10%
   - Reporting quality: 10%
 """
+
 from typing import Dict, Any, List
 from datetime import datetime, timezone
 from app.platform_verification.performance_capacity_engineering.domain.models import (
@@ -115,7 +116,11 @@ class PerformanceCertificationScorer(IPerformanceCertificationScorer):
             weight_pct=weight_rep,
             raw_score_pct=round(raw_rep, 2),
             weighted_score_pct=round(weighted_rep, 2),
-            evaluated_verifiers=["database_performance_verifier", "queue_performance_verifier", "performance_architecture_verifier"],
+            evaluated_verifiers=[
+                "database_performance_verifier",
+                "queue_performance_verifier",
+                "performance_architecture_verifier",
+            ],
             status="PASS" if raw_rep >= 90.0 else "FAIL",
         )
 
@@ -139,7 +144,7 @@ class PerformanceCertificationScorer(IPerformanceCertificationScorer):
         else:
             cert_tier = PerformanceCertificationTier.FAILED
 
-        is_certified = (cert_tier == PerformanceCertificationTier.ENTERPRISE_PERFORMANCE_READY)
+        is_certified = cert_tier == PerformanceCertificationTier.ENTERPRISE_PERFORMANCE_READY
 
         return PerformanceCertificationReport(
             report_title="Enterprise Performance & Baseline Capacity Certification",

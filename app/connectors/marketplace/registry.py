@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class ConnectorPackageManifest(BaseModel):
     """Manifest describing an installable connector package in the marketplace."""
+
     package_id: str
     name: str
     vendor: str
@@ -125,8 +126,12 @@ class MarketplaceRegistry:
         if search_query:
             q = search_query.lower()
             results = [
-                p for p in results
-                if q in p.name.lower() or q in p.vendor.lower() or q in p.description.lower() or any(q in c.lower() for c in p.capabilities)
+                p
+                for p in results
+                if q in p.name.lower()
+                or q in p.vendor.lower()
+                or q in p.description.lower()
+                or any(q in c.lower() for c in p.capabilities)
             ]
 
         return results

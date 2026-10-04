@@ -33,7 +33,15 @@ def test_knowledge_graph_and_queries():
     kg = AdaptiveKnowledgeGraph()
     kg.add_node(GraphNode(node_id="doc_inv", node_type="ENTITY", label="Invoice"))
     kg.add_node(GraphNode(node_id="strat_1", node_type="STRATEGY", label="Invoice Fast Route"))
-    kg.add_edge(GraphEdge(edge_id="e1", source_id="doc_inv", target_id="strat_1", relationship="APPLIES_STRATEGY", evidence_hash="0x123"))
+    kg.add_edge(
+        GraphEdge(
+            edge_id="e1",
+            source_id="doc_inv",
+            target_id="strat_1",
+            relationship="APPLIES_STRATEGY",
+            evidence_hash="0x123",
+        )
+    )
 
     query = GraphQueryEngine(kg)
     strats = query.find_strategies_for_domain("Invoice")

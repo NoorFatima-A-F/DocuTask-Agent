@@ -23,12 +23,14 @@ class ResourceReplayTracker:
             elif "worker.completed" in evt_type or "task.completed" in evt_type:
                 active_workers = max(0, active_workers - 1)
 
-            curve.append({
-                "cursor": idx,
-                "timestamp": ev.get("timestamp"),
-                "active_workers": active_workers,
-                "cpu_utilization_pct": min(95.0, 15.0 + active_workers * 18.5),
-                "gpu_vram_mb": 1024 + active_workers * 450,
-            })
+            curve.append(
+                {
+                    "cursor": idx,
+                    "timestamp": ev.get("timestamp"),
+                    "active_workers": active_workers,
+                    "cpu_utilization_pct": min(95.0, 15.0 + active_workers * 18.5),
+                    "gpu_vram_mb": 1024 + active_workers * 450,
+                }
+            )
 
         return curve

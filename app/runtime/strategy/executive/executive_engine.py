@@ -118,9 +118,7 @@ class ExecutiveReasoningEngine:
             expected_roi_multiplier=3.20,
             organizational_impact="Eliminates GPU starvation by dynamically reallocating idle tokens across departments.",
             tradeoffs="Requires 5% latency buffer during auction convergence cycles.",
-            supporting_evidence_hashes=[
-                hashlib.sha256(b"simulation:nash_auction_convergence").hexdigest()
-            ],
+            supporting_evidence_hashes=[hashlib.sha256(b"simulation:nash_auction_convergence").hexdigest()],
             confidence=0.975,
             approver_signature="secp256k1:cso_oracle_key_beta",
         )
@@ -136,9 +134,7 @@ class ExecutiveReasoningEngine:
             expected_roi_multiplier=2.40,
             organizational_impact="Guarantees 100% compliance audit readiness with instant rollback capability.",
             tradeoffs="Adds 1.5ms overhead per strategic state mutation.",
-            supporting_evidence_hashes=[
-                hashlib.sha256(b"audit:soc2_governance_invariant").hexdigest()
-            ],
+            supporting_evidence_hashes=[hashlib.sha256(b"audit:soc2_governance_invariant").hexdigest()],
             confidence=0.995,
             approver_signature="secp256k1:gov_oracle_key_gamma",
         )
@@ -178,8 +174,7 @@ class ExecutiveReasoningEngine:
         evidence_keys: Optional[List[str]] = None,
     ) -> ExecutiveDecision:
         evidence_hashes = [
-            hashlib.sha256(k.encode("utf-8")).hexdigest()
-            for k in (evidence_keys or [f"evidence:{title}"])
+            hashlib.sha256(k.encode("utf-8")).hexdigest() for k in (evidence_keys or [f"evidence:{title}"])
         ]
         decision = ExecutiveDecision(
             title=title,

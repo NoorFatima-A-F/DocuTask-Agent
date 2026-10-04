@@ -29,10 +29,34 @@ class CloudObservabilityCompatibilityVerifier(ICloudObservabilityCompatibilityVe
 
     def verify(self) -> CloudObservabilityReport:
         sinks = [
-            CloudObservabilitySink(platform="AWS", telemetry_service="Amazon CloudWatch & AWS X-Ray", metrics_exported=True, logs_streamed=True, distributed_tracing=True),
-            CloudObservabilitySink(platform="GCP", telemetry_service="Google Cloud Monitoring & Cloud Trace", metrics_exported=True, logs_streamed=True, distributed_tracing=True),
-            CloudObservabilitySink(platform="Azure", telemetry_service="Azure Monitor & Application Insights", metrics_exported=True, logs_streamed=True, distributed_tracing=True),
-            CloudObservabilitySink(platform="Generic", telemetry_service="Prometheus / Grafana / Jaeger", metrics_exported=True, logs_streamed=True, distributed_tracing=True),
+            CloudObservabilitySink(
+                platform="AWS",
+                telemetry_service="Amazon CloudWatch & AWS X-Ray",
+                metrics_exported=True,
+                logs_streamed=True,
+                distributed_tracing=True,
+            ),
+            CloudObservabilitySink(
+                platform="GCP",
+                telemetry_service="Google Cloud Monitoring & Cloud Trace",
+                metrics_exported=True,
+                logs_streamed=True,
+                distributed_tracing=True,
+            ),
+            CloudObservabilitySink(
+                platform="Azure",
+                telemetry_service="Azure Monitor & Application Insights",
+                metrics_exported=True,
+                logs_streamed=True,
+                distributed_tracing=True,
+            ),
+            CloudObservabilitySink(
+                platform="Generic",
+                telemetry_service="Prometheus / Grafana / Jaeger",
+                metrics_exported=True,
+                logs_streamed=True,
+                distributed_tracing=True,
+            ),
         ]
 
         checks = [

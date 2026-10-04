@@ -19,7 +19,7 @@ class DistributionAnalysisService:
         n = len(scores)
         mean = sum(scores) / n
         variance = sum((x - mean) ** 2 for x in scores) / max(1, n - 1)
-        std_dev = variance ** 0.5
+        std_dev = variance**0.5
 
         return {
             "sample_count": n,

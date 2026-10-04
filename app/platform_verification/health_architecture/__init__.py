@@ -1,6 +1,7 @@
 """
 Health Check Architecture Verification Framework (Part 3H.1).
 """
+
 from app.platform_verification.health_architecture.domain.models import (
     HealthState,
     HealthLayer,

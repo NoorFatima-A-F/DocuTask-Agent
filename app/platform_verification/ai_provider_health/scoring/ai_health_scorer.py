@@ -66,7 +66,9 @@ class AIHealthScorer(IAIHealthScorer):
         # 1. Availability Detection (20%)
         # Evaluates provider health report and connectivity report
         avail_sub1 = 100.0 if health_report.passed else 50.0
-        avail_sub2 = min(100.0, connectivity_report.avg_connection_success_rate_pct) if connectivity_report.passed else 60.0
+        avail_sub2 = (
+            min(100.0, connectivity_report.avg_connection_success_rate_pct) if connectivity_report.passed else 60.0
+        )
         avail_score = round(0.5 * avail_sub1 + 0.5 * avail_sub2, 2)
 
         # 2. Authentication Verification (15%)

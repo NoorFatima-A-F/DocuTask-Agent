@@ -33,6 +33,7 @@ class CapabilityHealth(str, Enum):
 
 class CapabilityProfile(BaseModel):
     """Detailed operational and mathematical profile of an executable capability."""
+
     capability_id: str = Field(default_factory=lambda: f"cap_{uuid.uuid4().hex[:8]}")
     name: str
     capability_type: CapabilityType
@@ -217,7 +218,8 @@ class CapabilityDiscoveryEngine:
 
     def discover_for_type(self, capability_type: CapabilityType) -> List[CapabilityProfile]:
         return [
-            c for c in self._capabilities.values()
+            c
+            for c in self._capabilities.values()
             if c.capability_type == capability_type and c.health != CapabilityHealth.UNAVAILABLE
         ]
 

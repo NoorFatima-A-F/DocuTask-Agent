@@ -38,7 +38,9 @@ class FailureClassifier:
             return FailureCategory.PERFORMANCE_DEGRADATION
         return self._category_map.get(component, FailureCategory.APPLICATION)
 
-    def classify_severity(self, component: str, category: FailureCategory, is_cascade: bool = False) -> IncidentSeverity:
+    def classify_severity(
+        self, component: str, category: FailureCategory, is_cascade: bool = False
+    ) -> IncidentSeverity:
         """Determines incident severity level based on failure blast radius."""
         if component in ["postgresql", "document_storage"] and category == FailureCategory.DEPENDENCY:
             return IncidentSeverity.SEV_1_CRITICAL

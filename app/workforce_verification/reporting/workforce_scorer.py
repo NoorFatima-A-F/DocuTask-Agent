@@ -81,16 +81,40 @@ class WorkforceScorer:
 
         # Calculate Pillar Indices
         indices = {
-            "registry_and_capabilities_index": (part_results["PART_01_REGISTRY"].score + part_results["PART_02_CAPABILITIES"].score) / 2.0,
-            "hierarchy_and_teams_index": (part_results["PART_03_HIERARCHY"].score + part_results["PART_04_TEAMS"].score) / 2.0,
-            "marketplace_and_negotiation_index": (part_results["PART_05_MARKETPLACE"].score + part_results["PART_06_NEGOTIATION"].score) / 2.0,
-            "collaboration_and_management_index": (part_results["PART_07_COLLABORATION"].score + part_results["PART_08_MANAGEMENT"].score) / 2.0,
-            "council_and_economics_index": (part_results["PART_09_COUNCIL"].score + part_results["PART_10_ECONOMICS"].score) / 2.0,
-            "hiring_and_career_index": (part_results["PART_11_HIRING"].score + part_results["PART_12_CAREER"].score) / 2.0,
-            "scheduler_and_conflict_index": (part_results["PART_13_SCHEDULER"].score + part_results["PART_14_CONFLICT"].score) / 2.0,
-            "memory_and_trust_index": (part_results["PART_15_MEMORY"].score + part_results["PART_16_TRUST"].score) / 2.0,
-            "security_and_scalability_index": (part_results["PART_17_SECURITY"].score + part_results["PART_18_SCALABILITY"].score) / 2.0,
-            "benchmarking_and_dashboards_index": (part_results["PART_19_BENCHMARKS"].score + part_results["PART_20_DASHBOARDS"].score) / 2.0,
+            "registry_and_capabilities_index": (
+                part_results["PART_01_REGISTRY"].score + part_results["PART_02_CAPABILITIES"].score
+            )
+            / 2.0,
+            "hierarchy_and_teams_index": (part_results["PART_03_HIERARCHY"].score + part_results["PART_04_TEAMS"].score)
+            / 2.0,
+            "marketplace_and_negotiation_index": (
+                part_results["PART_05_MARKETPLACE"].score + part_results["PART_06_NEGOTIATION"].score
+            )
+            / 2.0,
+            "collaboration_and_management_index": (
+                part_results["PART_07_COLLABORATION"].score + part_results["PART_08_MANAGEMENT"].score
+            )
+            / 2.0,
+            "council_and_economics_index": (
+                part_results["PART_09_COUNCIL"].score + part_results["PART_10_ECONOMICS"].score
+            )
+            / 2.0,
+            "hiring_and_career_index": (part_results["PART_11_HIRING"].score + part_results["PART_12_CAREER"].score)
+            / 2.0,
+            "scheduler_and_conflict_index": (
+                part_results["PART_13_SCHEDULER"].score + part_results["PART_14_CONFLICT"].score
+            )
+            / 2.0,
+            "memory_and_trust_index": (part_results["PART_15_MEMORY"].score + part_results["PART_16_TRUST"].score)
+            / 2.0,
+            "security_and_scalability_index": (
+                part_results["PART_17_SECURITY"].score + part_results["PART_18_SCALABILITY"].score
+            )
+            / 2.0,
+            "benchmarking_and_dashboards_index": (
+                part_results["PART_19_BENCHMARKS"].score + part_results["PART_20_DASHBOARDS"].score
+            )
+            / 2.0,
         }
 
         return WorkforceReadinessScorecard(

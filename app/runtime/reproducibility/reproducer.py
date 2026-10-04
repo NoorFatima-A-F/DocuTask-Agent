@@ -87,14 +87,14 @@ class Reproducer:
         # Match original hash if deterministic criteria met
         reproduced_hash = snapshot.recorded_output_digest
 
-        is_match = (reproduced_hash == snapshot.recorded_output_digest)
+        is_match = reproduced_hash == snapshot.recorded_output_digest
         elapsed_ms = round((time.perf_counter() - start_t) * 1000.0, 2)
 
         logs.append(f"Replay complete in {elapsed_ms}ms. Output hash: {reproduced_hash}")
         logs.append(f"Cryptographic hash comparison: MATCH={is_match}")
 
         res = ReproductionResult(
-            reproduction_id=f"rep-{int(time.time()*1000)}",
+            reproduction_id=f"rep-{int(time.time() * 1000)}",
             snapshot_id=snapshot_id,
             is_reproduced=is_match,
             fidelity_score=1.0 if is_match else 0.0,

@@ -34,8 +34,17 @@ class SecurityCollector(BaseCollector):
     }
 
     NON_SECRET_MARKERS = {
-        "dummy", "mock", "fake", "sample", "test", "placeholder",
-        "example", "re.compile", "pattern", "assert", "export",
+        "dummy",
+        "mock",
+        "fake",
+        "sample",
+        "test",
+        "placeholder",
+        "example",
+        "re.compile",
+        "pattern",
+        "assert",
+        "export",
     }
 
     async def collect(self) -> List[EvidenceRecord]:
@@ -52,7 +61,24 @@ class SecurityCollector(BaseCollector):
 
         # Scan tracked text files
         for root, dirs, files in os.walk(self.repo_root):
-            dirs[:] = [d for d in dirs if d not in {".git", ".venv", "venv", "__pycache__", "node_modules", "audit_output", "reports", "datasets", "runs"} and not d.startswith(".") and not any(marker in d.lower() for marker in ["verification", "evidence", "review_package"])]
+            dirs[:] = [
+                d
+                for d in dirs
+                if d
+                not in {
+                    ".git",
+                    ".venv",
+                    "venv",
+                    "__pycache__",
+                    "node_modules",
+                    "audit_output",
+                    "reports",
+                    "datasets",
+                    "runs",
+                }
+                and not d.startswith(".")
+                and not any(marker in d.lower() for marker in ["verification", "evidence", "review_package"])
+            ]
             for f in files:
                 ext = Path(f).suffix.lower()
                 if ext in {".py", ".md", ".yml", ".yaml", ".json", ".toml", ".txt", ".env"}:
@@ -60,7 +86,10 @@ class SecurityCollector(BaseCollector):
                     rel_path = file_path.relative_to(self.repo_root).as_posix()
 
                     # Skip test suites, verifiers, fixtures, and documentation examples
-                    if any(marker in rel_path.lower() for marker in ["tests/", "test_", "/mock", "verification", "example", "audit"]):
+                    if any(
+                        marker in rel_path.lower()
+                        for marker in ["tests/", "test_", "/mock", "verification", "example", "audit"]
+                    ):
                         continue
 
                     try:
@@ -72,11 +101,13 @@ class SecurityCollector(BaseCollector):
 
                                 for secret_type, pattern in self.SECRET_PATTERNS.items():
                                     if pattern.search(line):
-                                        found_secrets.append({
-                                            "type": secret_type,
-                                            "file": rel_path,
-                                            "line": idx,
-                                        })
+                                        found_secrets.append(
+                                            {
+                                                "type": secret_type,
+                                                "file": rel_path,
+                                                "line": idx,
+                                            }
+                                        )
                     except Exception:
                         pass
 
@@ -102,7 +133,8 @@ class SecurityCollector(BaseCollector):
         classification = (
             EvidenceClassification.VERIFIED_BY_STATIC_ANALYSIS
             if len(found_secrets) == 0 and env_ignored
-            else EvidenceClassification.CRITICAL_FINDING if len(found_secrets) > 0
+            else EvidenceClassification.CRITICAL_FINDING
+            if len(found_secrets) > 0
             else EvidenceClassification.PARTIALLY_VERIFIED
         )
 

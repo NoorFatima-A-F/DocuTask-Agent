@@ -25,11 +25,41 @@ class LLMEvaluator(ILLMEvaluator):
 
     def evaluate(self) -> LLMEvaluationReport:
         metrics = [
-            LLMEvalMetric(metric_name="FaithfulnessScore", score=0.994, threshold=0.950, status="PASSED", details="Output strictly supported by retrieved context"),
-            LLMEvalMetric(metric_name="ContextGroundingScore", score=0.991, threshold=0.950, status="PASSED", details="Direct citations and page offsets mapped"),
-            LLMEvalMetric(metric_name="HallucinationRate", score=0.002, threshold=0.010, status="PASSED", details="Near-zero hallucinated entities across test prompts"),
-            LLMEvalMetric(metric_name="SemanticSimilarity", score=0.988, threshold=0.920, status="PASSED", details="Cosine similarity against gold-standard responses"),
-            LLMEvalMetric(metric_name="ContradictionResistance", score=1.000, threshold=0.980, status="PASSED", details="Detected and flagged contradictory document claims"),
+            LLMEvalMetric(
+                metric_name="FaithfulnessScore",
+                score=0.994,
+                threshold=0.950,
+                status="PASSED",
+                details="Output strictly supported by retrieved context",
+            ),
+            LLMEvalMetric(
+                metric_name="ContextGroundingScore",
+                score=0.991,
+                threshold=0.950,
+                status="PASSED",
+                details="Direct citations and page offsets mapped",
+            ),
+            LLMEvalMetric(
+                metric_name="HallucinationRate",
+                score=0.002,
+                threshold=0.010,
+                status="PASSED",
+                details="Near-zero hallucinated entities across test prompts",
+            ),
+            LLMEvalMetric(
+                metric_name="SemanticSimilarity",
+                score=0.988,
+                threshold=0.920,
+                status="PASSED",
+                details="Cosine similarity against gold-standard responses",
+            ),
+            LLMEvalMetric(
+                metric_name="ContradictionResistance",
+                score=1.000,
+                threshold=0.980,
+                status="PASSED",
+                details="Detected and flagged contradictory document claims",
+            ),
         ]
 
         checks = [

@@ -1,6 +1,7 @@
 """
 Interfaces and Abstract Protocols for Disaster Recovery Simulation Framework (Part 3G.3).
 """
+
 from abc import ABC, abstractmethod
 from typing import List
 from app.platform_verification.disaster_recovery_simulation.domain.models import (

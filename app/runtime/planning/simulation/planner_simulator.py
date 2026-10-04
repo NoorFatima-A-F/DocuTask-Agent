@@ -30,9 +30,7 @@ class PlannerSimulator:
     """Simulates execution variations using Monte Carlo sampling."""
 
     @classmethod
-    def simulate_dag(
-        cls, dag: ExecutionDAG, num_trials: int = 100
-    ) -> SimulationResult:
+    def simulate_dag(cls, dag: ExecutionDAG, num_trials: int = 100) -> SimulationResult:
         """Simulates stochastic node execution runtimes and failure rates."""
         crit_nodes, base_dur = dag.compute_critical_path()
         durations: List[float] = []

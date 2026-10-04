@@ -42,7 +42,9 @@ class PlannerLifecycleEngine:
         self.history: List[Dict[str, Any]] = []
         self._record_transition(None, self.current_state, "Lifecycle initialized.")
 
-    def transition_to(self, new_state: PlannerStateEnum, reason: str = "", metadata: Optional[Dict[str, Any]] = None) -> bool:
+    def transition_to(
+        self, new_state: PlannerStateEnum, reason: str = "", metadata: Optional[Dict[str, Any]] = None
+    ) -> bool:
         allowed = self.VALID_TRANSITIONS.get(self.current_state, [])
         if new_state not in allowed and self.current_state != new_state:
             # Allow permissive transitions for live replanning if valid
@@ -86,14 +88,22 @@ class PlannerLifecycleEngine:
         get_global_event_bus().publish_sync(event)
         return True
 
-    def _record_transition(self, old_state: Optional[PlannerStateEnum], new_state: PlannerStateEnum, reason: str, metadata: Optional[Dict[str, Any]] = None):
-        self.history.append({
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "from_state": old_state.value if old_state else None,
-            "to_state": new_state.value,
-            "reason": reason,
-            "metadata": metadata or {},
-        })
+    def _record_transition(
+        self,
+        old_state: Optional[PlannerStateEnum],
+        new_state: PlannerStateEnum,
+        reason: str,
+        metadata: Optional[Dict[str, Any]] = None,
+    ):
+        self.history.append(
+            {
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "from_state": old_state.value if old_state else None,
+                "to_state": new_state.value,
+                "reason": reason,
+                "metadata": metadata or {},
+            }
+        )
 
     def get_state(self) -> Dict[str, Any]:
         return {

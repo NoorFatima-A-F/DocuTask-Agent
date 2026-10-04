@@ -15,6 +15,7 @@ from app.runtime.knowledge.experience_graph import CausalExperienceGraph
 
 class MinedHeuristic(BaseModel):
     """Extracted empirical decision rule."""
+
     heuristic_id: str = Field(default_factory=lambda: f"heur_{uuid.uuid4().hex[:8]}")
     condition_predicate: str
     recommended_action: str

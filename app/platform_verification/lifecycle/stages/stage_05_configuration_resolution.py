@@ -2,11 +2,13 @@
 Stage 5: Configuration Resolution.
 Resolves scoped configuration hierarchy and creates immutable SHA-256 fingerprint snapshot.
 """
+
 from app.platform_verification.lifecycle.stages.base_stage import BaseLifecycleStage
 from app.platform_verification.lifecycle.context import VerificationExecutionContext, StageResult
 from app.platform_verification.lifecycle.states import LifecycleState
 import hashlib
 import json
+
 
 class ConfigurationResolutionStage(BaseLifecycleStage):
     @property
@@ -30,7 +32,7 @@ class ConfigurationResolutionStage(BaseLifecycleStage):
             "timeout_sec": 300,
             "bootstrap_iterations": 1000,
             "confidence_level": 0.95,
-            "enforce_tamper_detection": True
+            "enforce_tamper_detection": True,
         }
         cfg_hash = hashlib.sha256(json.dumps(cfg, sort_keys=True).encode("utf-8")).hexdigest()
         context.resolved_config = cfg
@@ -39,7 +41,7 @@ class ConfigurationResolutionStage(BaseLifecycleStage):
             stage_number=self.stage_number,
             stage_name=self.stage_name,
             status="PASSED",
-            produced_artifacts={"config": cfg, "fingerprint": cfg_hash}
+            produced_artifacts={"config": cfg, "fingerprint": cfg_hash},
         )
 
     def validate_exit_criteria(self, context: VerificationExecutionContext, result: StageResult) -> bool:

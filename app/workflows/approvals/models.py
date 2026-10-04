@@ -37,6 +37,7 @@ class ApprovalVote:
 @dataclass
 class ApprovalRequest:
     """Human-in-the-loop approval request."""
+
     request_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     execution_id: str = ""
     task_id: str = ""

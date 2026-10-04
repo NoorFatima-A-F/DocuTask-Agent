@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class ReflectionIdentity(BaseModel):
     """Unique identification and correlation envelope for reflection sessions."""
+
     reflection_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     plan_id: Optional[UUID] = None
@@ -24,6 +25,7 @@ class ReflectionIdentity(BaseModel):
 
 class ReflectionMetadata(BaseModel):
     """Runtime execution environment metadata for reflection audit trails."""
+
     engine_version: str = Field(default="20.0.0")
     source_component: str = Field(default="ReflectionEngine")
     environment: str = Field(default="production")
@@ -35,6 +37,7 @@ class ReflectionMetadata(BaseModel):
 
 class ReflectionStatistics(BaseModel):
     """Quantitative runtime statistics for a reflection execution."""
+
     evaluation_duration_ms: float = Field(default=0.0, ge=0.0)
     critique_duration_ms: float = Field(default=0.0, ge=0.0)
     learning_duration_ms: float = Field(default=0.0, ge=0.0)

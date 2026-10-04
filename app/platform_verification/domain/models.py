@@ -2,6 +2,7 @@
 Enterprise Verification Core Domain Models.
 Defines types and data models for all 15 core architectural components.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional
@@ -248,7 +249,6 @@ class ImmutableEvidenceRecord(BaseModel):
         elif "payload_hash" in data and "sha256_hash" not in data:
             data["sha256_hash"] = data["payload_hash"]
         super().__init__(**data)
-
 
 
 # 1. Definition Manager Models

@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class SyncStatusRecord(BaseModel):
     """Synchronization telemetry and freshness status for a knowledge source."""
+
     source_id: str
     last_sync: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     source_version: str = "1.0.0"

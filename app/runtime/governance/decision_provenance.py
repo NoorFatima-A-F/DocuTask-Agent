@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 
 class ProvenanceNode(BaseModel):
     """Immutable audit node in the decision Merkle tree."""
+
     node_id: str = Field(default_factory=lambda: f"prov_{uuid.uuid4().hex[:8]}")
     phase: str  # 'GOAL', 'EVIDENCE', 'BELIEF', 'FORECAST', 'SMT_VERIFICATION', 'DECISION', 'EXECUTION'
     summary: str
@@ -32,6 +33,7 @@ class ProvenanceNode(BaseModel):
 
 class DecisionProvenanceTree(BaseModel):
     """Complete traceable decision audit trail for a mission."""
+
     mission_id: str
     nodes: List[ProvenanceNode] = Field(default_factory=list)
     merkle_root: str = ""
@@ -80,7 +82,9 @@ class DecisionProvenanceEngine:
         current_parent_hash = "genesis_root_00000000"
         for node in tree.nodes:
             expected = hashlib.sha256(
-                f"{node.node_id}:{node.phase}:{node.summary}:{json.dumps(node.details, sort_keys=True)}:{current_parent_hash}".encode("utf-8")
+                f"{node.node_id}:{node.phase}:{node.summary}:{json.dumps(node.details, sort_keys=True)}:{current_parent_hash}".encode(
+                    "utf-8"
+                )
             ).hexdigest()
             if node.node_hash != expected:
                 return False

@@ -1,6 +1,7 @@
 """
 Cross-Region Replication Subsystem.
 """
+
 from app.platform_verification.multi_region_failover.replication.database_replication_verifier import (
     DatabaseReplicationVerifier,
 )

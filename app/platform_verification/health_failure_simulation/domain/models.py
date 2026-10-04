@@ -1,6 +1,7 @@
 """
 Phase 3H.11: Enterprise Health Failure Simulation & Chaos Verification — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Any
 from pydantic import BaseModel, Field
@@ -24,13 +25,14 @@ class ExperimentState(str, Enum):
 
 
 class ChaosCertificationTier(str, Enum):
-    CHAOS_VERIFIED_RELIABLE = "Chaos Verified Reliable"           # 95 - 100
-    PRODUCTION_RELIABILITY_READY = "Production Reliability Ready" # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                 # 80 - 89.99
-    FAILED = "Failed"                                             # < 80
+    CHAOS_VERIFIED_RELIABLE = "Chaos Verified Reliable"  # 95 - 100
+    PRODUCTION_RELIABILITY_READY = "Production Reliability Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3H.11.1: Chaos Testing Architecture Models ───────────────────────────
+
 
 class ChaosComponentSpec(BaseModel):
     name: str
@@ -49,6 +51,7 @@ class ChaosArchitectureReport(BaseModel):
 
 
 # ─── 3H.11.2: Scenario Registry Models ────────────────────────────────────
+
 
 class FailureScenario(BaseModel):
     scenario_id: str
@@ -73,6 +76,7 @@ class ScenarioRegistryReport(BaseModel):
 
 # ─── 3H.11.3: Database Failure Models ─────────────────────────────────────
 
+
 class DatabaseFailureReport(BaseModel):
     report_title: str = "Database Severance & Connection Pool Fault Simulation Report"
     scenario_id: str = "DB_FAILURE_001"
@@ -91,6 +95,7 @@ class DatabaseFailureReport(BaseModel):
 
 # ─── 3H.11.4: Queue Failure Models ────────────────────────────────────────
 
+
 class QueueFailureReport(BaseModel):
     report_title: str = "Redis / Task Queue Outage & Backlog Resilience Report"
     scenario_id: str = "QUEUE_FAILURE_001"
@@ -107,6 +112,7 @@ class QueueFailureReport(BaseModel):
 
 
 # ─── 3H.11.5: Worker Failure Models ───────────────────────────────────────
+
 
 class WorkerFailureReport(BaseModel):
     report_title: str = "Worker Crash & Heartbeat Loss Simulation Report"
@@ -126,9 +132,12 @@ class WorkerFailureReport(BaseModel):
 
 # ─── 3H.11.6: AI Provider Failure Models ──────────────────────────────────
 
+
 class AIProviderFailureReport(BaseModel):
     report_title: str = "AI Provider Latency, 429 Quota & Auth Fault Simulation Report"
-    scenarios_tested: List[str] = Field(default_factory=lambda: ["GEMINI_TIMEOUT_001", "LLM_RATE_LIMIT_429", "AUTH_FAILURE_401"])
+    scenarios_tested: List[str] = Field(
+        default_factory=lambda: ["GEMINI_TIMEOUT_001", "LLM_RATE_LIMIT_429", "AUTH_FAILURE_401"]
+    )
     circuit_breaker_tripped: bool = True
     fallback_model_activated: bool = True
     overall_platform_crashed: bool = False
@@ -140,6 +149,7 @@ class AIProviderFailureReport(BaseModel):
 
 
 # ─── 3H.11.7: Resource Failure Models ─────────────────────────────────────
+
 
 class ResourceFailureReport(BaseModel):
     report_title: str = "System Resource Exhaustion (Memory, CPU, Disk) Simulation Report"
@@ -154,6 +164,7 @@ class ResourceFailureReport(BaseModel):
 
 
 # ─── 3H.11.8: Detection Metrics Models ────────────────────────────────────
+
 
 class FailureDetectionMetricsReport(BaseModel):
     report_title: str = "Failure Detection Accuracy & MTTD/MTTR Verification Report"
@@ -171,6 +182,7 @@ class FailureDetectionMetricsReport(BaseModel):
 
 # ─── 3H.11.9: Rollback Validation Models ──────────────────────────────────
 
+
 class RollbackValidationReport(BaseModel):
     report_title: str = "Automated Rollback & Environmental State Restoration Report"
     total_rollbacks_attempted: int = 12
@@ -183,6 +195,7 @@ class RollbackValidationReport(BaseModel):
 
 
 # ─── 3H.11.10: Chaos Safety Controls Models ───────────────────────────────
+
 
 class ChaosSafetyReport(BaseModel):
     report_title: str = "Chaos Blast-Radius Safety & Auto-Abort Controls Report"
@@ -199,6 +212,7 @@ class ChaosSafetyReport(BaseModel):
 
 
 # ─── 3H.11.11 & 3H.11.12: Scoring & Certification Models ─────────────────
+
 
 class ChaosPillarScore(BaseModel):
     pillar_name: str

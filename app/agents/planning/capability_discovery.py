@@ -166,7 +166,8 @@ class CapabilityDiscovery:
 
     def find_agents_for_capability(self, capability: str) -> List[AgentCapabilityRecord]:
         matches = [
-            a for a in self._agents.values()
+            a
+            for a in self._agents.values()
             if a.is_available and (capability in a.capabilities or capability.lower() in a.role.lower())
         ]
         return sorted(matches, key=lambda a: a.accuracy_rating, reverse=True)
@@ -188,10 +189,11 @@ class CapabilityDiscovery:
 
         return max(candidates, key=score)
 
-    def match_tool(self, action_type: str, modality: str = "IMAGE", high_accuracy: bool = False) -> Optional[ToolCapabilityRecord]:
+    def match_tool(
+        self, action_type: str, modality: str = "IMAGE", high_accuracy: bool = False
+    ) -> Optional[ToolCapabilityRecord]:
         candidates = [
-            t for t in self._tools.values()
-            if t.action_type == action_type and modality in t.supported_modalities
+            t for t in self._tools.values() if t.action_type == action_type and modality in t.supported_modalities
         ]
         if not candidates:
             candidates = [t for t in self._tools.values() if t.action_type == action_type]

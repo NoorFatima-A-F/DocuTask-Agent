@@ -1,6 +1,7 @@
 """
 Phase 3H.5.12.1: Health State Transition Verification
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     HealthState,

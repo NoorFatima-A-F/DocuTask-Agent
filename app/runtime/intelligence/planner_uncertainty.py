@@ -14,6 +14,7 @@ from app.runtime.intelligence.belief_state import BeliefStateEngine
 
 class UncertaintyDecomposition(BaseModel):
     """Detailed decomposition of uncertainty sources."""
+
     mission_id: str
     epistemic_uncertainty: float = Field(ge=0.0, le=1.0, description="Reducible uncertainty from lack of observations")
     aleatoric_uncertainty: float = Field(ge=0.0, le=1.0, description="Irreducible noise in models/APIs")
@@ -43,7 +44,9 @@ class PlannerUncertaintyEngine:
         # 2. Aleatoric Uncertainty: Based on inherent failure probabilities of APIs
         api_belief = belief_engine.get_belief("api_failure")
         doc_belief = belief_engine.get_belief("document_damaged")
-        aleatoric = min(1.0, ((api_belief.mean if api_belief else 0.05) + (doc_belief.mean if doc_belief else 0.15)) / 2.0)
+        aleatoric = min(
+            1.0, ((api_belief.mean if api_belief else 0.05) + (doc_belief.mean if doc_belief else 0.15)) / 2.0
+        )
 
         # 3. Model & Capability Uncertainty
         model_unc = min(1.0, math.sqrt(simulation_variance) * 5.0)
@@ -60,8 +63,8 @@ class PlannerUncertaintyEngine:
         composite_conf = round(max(0.0, min(1.0, 1.0 - avg_uncertainty)), 4)
 
         summary = (
-            f"Composite Planner Confidence: {composite_conf*100:.1f}%. "
-            f"Epistemic: {epistemic*100:.1f}%, Aleatoric: {aleatoric*100:.1f}%, "
+            f"Composite Planner Confidence: {composite_conf * 100:.1f}%. "
+            f"Epistemic: {epistemic * 100:.1f}%, Aleatoric: {aleatoric * 100:.1f}%, "
             f"Stability Ratio: {stability_ratio} (Decision {'STABLE' if is_stable else 'UNSTABLE'})."
         )
 

@@ -22,14 +22,16 @@ from app.infrastructure.networking.security import ZeroTrustPolicyEngine, ZeroTr
 from app.infrastructure.networking.control_plane import ZeroTrustAction
 
 engine = ZeroTrustPolicyEngine()
-engine.add_rule(ZeroTrustRule(
-    rule_id="rule-worker-access",
-    name="Allow Workflow Coordinator to OCR Worker",
-    action=ZeroTrustAction.ALLOW,
-    source_spiffe_pattern="spiffe://docutask.internal/ns/workflows/sa/coordinator",
-    target_spiffe_pattern="spiffe://docutask.internal/ns/workers/sa/ocr-processor",
-    allowed_methods=["POST"],
-    allowed_paths=["/v1/ocr/*"],
-    tenant_scope=["*"],
-))
+engine.add_rule(
+    ZeroTrustRule(
+        rule_id="rule-worker-access",
+        name="Allow Workflow Coordinator to OCR Worker",
+        action=ZeroTrustAction.ALLOW,
+        source_spiffe_pattern="spiffe://docutask.internal/ns/workflows/sa/coordinator",
+        target_spiffe_pattern="spiffe://docutask.internal/ns/workers/sa/ocr-processor",
+        allowed_methods=["POST"],
+        allowed_paths=["/v1/ocr/*"],
+        tenant_scope=["*"],
+    )
+)
 ```

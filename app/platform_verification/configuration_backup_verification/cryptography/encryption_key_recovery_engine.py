@@ -1,6 +1,7 @@
 """
 Encryption Key Recovery Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
+
 from typing import List
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
@@ -21,12 +22,66 @@ class EncryptionKeyRecoveryEngine(IEncryptionKeyRecoveryEngine):
     """
 
     KEYS_SPEC = [
-        ("KEY-01-AES-KEK", KeyAlgorithm.AES_256_GCM, 256, "2025-12-01T00:00:00Z", "ACTIVE_ROTATED_90D", "BACKED_UP_MULTI_REGION", "RECOVERED_VERIFIED", True),
-        ("KEY-02-RSA-DOCSIGN", KeyAlgorithm.RSA_4096, 4096, "2025-06-01T00:00:00Z", "ACTIVE_ANNUAL", "BACKED_UP_HSM_QUORUM", "RECOVERED_VERIFIED", True),
-        ("KEY-03-ECC-JWT", KeyAlgorithm.ECC_SECP256R1, 256, "2026-01-15T00:00:00Z", "ACTIVE_ROTATED_90D", "BACKED_UP_SEALED_VAULT", "RECOVERED_VERIFIED", True),
-        ("KEY-04-ED25519-SEAL", KeyAlgorithm.ED25519, 256, "2026-02-01T00:00:00Z", "ACTIVE_ROTATED_90D", "BACKED_UP_SEALED_VAULT", "RECOVERED_VERIFIED", True),
-        ("KEY-05-HMAC-WEBHOOK", KeyAlgorithm.HMAC_SHA256, 256, "2026-01-01T00:00:00Z", "ACTIVE_ROTATED_90D", "BACKED_UP_KMS_REPLICA", "RECOVERED_VERIFIED", True),
-        ("KEY-06-AES-DEK", KeyAlgorithm.AES_256_GCM, 256, "2026-03-01T00:00:00Z", "ACTIVE_EPHEMERAL_WRAPPED", "BACKED_UP_ENVELOPE_STORE", "RECOVERED_VERIFIED", True),
+        (
+            "KEY-01-AES-KEK",
+            KeyAlgorithm.AES_256_GCM,
+            256,
+            "2025-12-01T00:00:00Z",
+            "ACTIVE_ROTATED_90D",
+            "BACKED_UP_MULTI_REGION",
+            "RECOVERED_VERIFIED",
+            True,
+        ),
+        (
+            "KEY-02-RSA-DOCSIGN",
+            KeyAlgorithm.RSA_4096,
+            4096,
+            "2025-06-01T00:00:00Z",
+            "ACTIVE_ANNUAL",
+            "BACKED_UP_HSM_QUORUM",
+            "RECOVERED_VERIFIED",
+            True,
+        ),
+        (
+            "KEY-03-ECC-JWT",
+            KeyAlgorithm.ECC_SECP256R1,
+            256,
+            "2026-01-15T00:00:00Z",
+            "ACTIVE_ROTATED_90D",
+            "BACKED_UP_SEALED_VAULT",
+            "RECOVERED_VERIFIED",
+            True,
+        ),
+        (
+            "KEY-04-ED25519-SEAL",
+            KeyAlgorithm.ED25519,
+            256,
+            "2026-02-01T00:00:00Z",
+            "ACTIVE_ROTATED_90D",
+            "BACKED_UP_SEALED_VAULT",
+            "RECOVERED_VERIFIED",
+            True,
+        ),
+        (
+            "KEY-05-HMAC-WEBHOOK",
+            KeyAlgorithm.HMAC_SHA256,
+            256,
+            "2026-01-01T00:00:00Z",
+            "ACTIVE_ROTATED_90D",
+            "BACKED_UP_KMS_REPLICA",
+            "RECOVERED_VERIFIED",
+            True,
+        ),
+        (
+            "KEY-06-AES-DEK",
+            KeyAlgorithm.AES_256_GCM,
+            256,
+            "2026-03-01T00:00:00Z",
+            "ACTIVE_EPHEMERAL_WRAPPED",
+            "BACKED_UP_ENVELOPE_STORE",
+            "RECOVERED_VERIFIED",
+            True,
+        ),
     ]
 
     def verify_encryption_key_recovery(self) -> EncryptionKeyRecoveryReport:
@@ -50,7 +105,7 @@ class EncryptionKeyRecoveryEngine(IEncryptionKeyRecoveryEngine):
 
         total = len(recovered_items)
         success_count = sum(1 for k in recovered_items if k.roundtrip_decryption_match)
-        all_identical = (total == success_count)
+        all_identical = total == success_count
 
         details = {
             "test_payload": "DocuTask_Enterprise_Cryptographic_Continuity_Payload_v2026",

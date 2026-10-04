@@ -1,6 +1,7 @@
 """
 Runtime Coordinator for Enterprise Test Architecture Verification.
 """
+
 import uuid
 from typing import Dict, List, Any, Optional
 from app.platform_verification.test_architecture_verification.domain.models import TestArchitectureEvidencePackage
@@ -17,6 +18,7 @@ from app.platform_verification.test_architecture_verification.api.test_verificat
 
 class TestVerificationRuntime:
     """High-level facade orchestrating the test architecture verification program."""
+
     __test__ = False
 
     def __init__(self):

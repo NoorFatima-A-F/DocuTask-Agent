@@ -4,7 +4,6 @@ Computes statistical confidence scores for inferred root-cause hypotheses.
 """
 
 
-
 class DiagnosisConfidenceCalculator:
     """
     Evaluates evidence corroboration across telemetry, event store logs, and replay traces to score diagnostic certainty.

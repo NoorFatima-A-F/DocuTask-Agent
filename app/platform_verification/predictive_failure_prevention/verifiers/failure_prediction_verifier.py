@@ -1,6 +1,7 @@
 """
 Phase 3H.5.9.4: Failure Probability Prediction Engine
 """
+
 from ..domain.interfaces import IFailurePredictionVerifier
 from ..domain.models import FailurePredictionReport, FailurePredictionItem, PredictionRiskLevel
 
@@ -56,8 +57,7 @@ class FailurePredictionVerifier(IFailurePredictionVerifier):
         ]
 
         high_risk = sum(
-            1 for p in predictions
-            if p.risk_level in (PredictionRiskLevel.HIGH, PredictionRiskLevel.CRITICAL)
+            1 for p in predictions if p.risk_level in (PredictionRiskLevel.HIGH, PredictionRiskLevel.CRITICAL)
         )
         mean_conf = sum(p.confidence for p in predictions) / len(predictions) if predictions else 0.0
 

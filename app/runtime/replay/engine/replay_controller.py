@@ -59,6 +59,7 @@ class ReplayController:
 
     def add_bookmark(self, session_id: str, label: str, note: Optional[str] = None) -> ReplayBookmark:
         import uuid
+
         s = self._get_required(session_id)
         bm = ReplayBookmark(
             bookmark_id=f"bm_{uuid.uuid4().hex[:8]}",

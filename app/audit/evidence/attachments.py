@@ -8,6 +8,7 @@ import uuid
 
 class EvidenceAttachment(BaseModel):
     """Raw payload snapshot or binary evidence attachment."""
+
     attachment_id: str = Field(default_factory=lambda: f"att_{uuid.uuid4().hex[:10]}")
     evidence_id: str
     filename: str

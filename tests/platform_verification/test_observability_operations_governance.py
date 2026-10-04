@@ -1,6 +1,7 @@
 """
 Test Suite: Phase 3I.10 Observability Intelligence Governance, Reliability Automation Maturity & Enterprise Operations Certification
 """
+
 import json
 import pytest
 from fastapi.testclient import TestClient
@@ -51,6 +52,7 @@ def api_client():
 
 
 # ─── 1. Verifier Unit Tests ───────────────────────────────────────────────────
+
 
 def test_governance_architecture_verifier():
     verifier = GovernanceArchitectureVerifier()
@@ -165,6 +167,7 @@ def test_operations_dashboard_verifier():
 
 # ─── 2. Scorer Unit Tests ─────────────────────────────────────────────────────
 
+
 def test_operations_certification_scorer():
     runtime = ObservabilityOperationsRuntime()
     verification_results = runtime.execute_all_verifications()
@@ -184,6 +187,7 @@ def test_operations_certification_scorer():
 
 # ─── 3. Exporter Unit Tests ───────────────────────────────────────────────────
 
+
 def test_observability_governance_exporter(tmp_path):
     output_dir = tmp_path / "obs_gov_test"
     runtime = ObservabilityOperationsRuntime(output_dir=str(output_dir))
@@ -201,6 +205,7 @@ def test_observability_governance_exporter(tmp_path):
 
 
 # ─── 4. REST API Integration Tests ────────────────────────────────────────────
+
 
 def test_api_status_endpoint(api_client):
     response = api_client.get("/api/v1/observability-governance/status")

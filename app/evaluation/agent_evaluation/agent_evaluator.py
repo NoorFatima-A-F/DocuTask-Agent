@@ -25,10 +25,34 @@ class AgentEvaluator(IAgentEvaluator):
 
     def evaluate(self) -> AgentEvaluationReport:
         scorecards = [
-            AgentPerformanceScorecard(agent_name="PlannerAgent", task_decomposition_efficiency=98.8, goal_achievement_rate_pct=99.5, tool_invocation_accuracy_pct=100.0, error_recovery_rate_pct=98.5),
-            AgentPerformanceScorecard(agent_name="ExtractionWorkerAgent", task_decomposition_efficiency=99.2, goal_achievement_rate_pct=99.8, tool_invocation_accuracy_pct=99.6, error_recovery_rate_pct=100.0),
-            AgentPerformanceScorecard(agent_name="ValidationAgent", task_decomposition_efficiency=99.5, goal_achievement_rate_pct=100.0, tool_invocation_accuracy_pct=100.0, error_recovery_rate_pct=100.0),
-            AgentPerformanceScorecard(agent_name="ReflectionFeedbackAgent", task_decomposition_efficiency=97.5, goal_achievement_rate_pct=99.0, tool_invocation_accuracy_pct=99.0, error_recovery_rate_pct=99.5),
+            AgentPerformanceScorecard(
+                agent_name="PlannerAgent",
+                task_decomposition_efficiency=98.8,
+                goal_achievement_rate_pct=99.5,
+                tool_invocation_accuracy_pct=100.0,
+                error_recovery_rate_pct=98.5,
+            ),
+            AgentPerformanceScorecard(
+                agent_name="ExtractionWorkerAgent",
+                task_decomposition_efficiency=99.2,
+                goal_achievement_rate_pct=99.8,
+                tool_invocation_accuracy_pct=99.6,
+                error_recovery_rate_pct=100.0,
+            ),
+            AgentPerformanceScorecard(
+                agent_name="ValidationAgent",
+                task_decomposition_efficiency=99.5,
+                goal_achievement_rate_pct=100.0,
+                tool_invocation_accuracy_pct=100.0,
+                error_recovery_rate_pct=100.0,
+            ),
+            AgentPerformanceScorecard(
+                agent_name="ReflectionFeedbackAgent",
+                task_decomposition_efficiency=97.5,
+                goal_achievement_rate_pct=99.0,
+                tool_invocation_accuracy_pct=99.0,
+                error_recovery_rate_pct=99.5,
+            ),
         ]
 
         checks = [

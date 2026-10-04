@@ -19,7 +19,7 @@ class PlanOptimizer:
             estimated_cost_usd=round(plan.statistics.estimated_cost_usd * 0.95, 2),
             estimated_tokens=plan.statistics.estimated_tokens,
             confidence_score=plan.statistics.confidence_score,
-            risk_score=plan.statistics.risk_score
+            risk_score=plan.statistics.risk_score,
         )
 
         return Plan(
@@ -33,5 +33,5 @@ class PlanOptimizer:
             constraints=plan.constraints,
             resource_requirements=plan.resource_requirements,
             risk_assessment=plan.risk_assessment,
-            snapshot=plan.snapshot
+            snapshot=plan.snapshot,
         )

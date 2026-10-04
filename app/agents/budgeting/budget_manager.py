@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class BudgetAction(str, Enum):
     """Enforcement actions triggered by budget threshold breaches."""
+
     CONTINUE = "CONTINUE"
     WARN = "WARN"
     REDUCE_CAPABILITY = "REDUCE_CAPABILITY"
@@ -27,6 +28,7 @@ class BudgetAction(str, Enum):
 @dataclass
 class AgentResourceUsage:
     """Tracks cumulative resource usage for an agent or execution."""
+
     agent_id: str
     total_tokens: int = 0
     total_cost_usd: float = 0.0
@@ -79,11 +81,7 @@ class BudgetManager:
         u.last_updated = datetime.now(timezone.utc)
         return u
 
-    def evaluate_budget(
-        self,
-        agent_id: str,
-        budget_spec: Optional[Dict[str, Any]] = None
-    ) -> BudgetAction:
+    def evaluate_budget(self, agent_id: str, budget_spec: Optional[Dict[str, Any]] = None) -> BudgetAction:
         """
         Evaluates current consumption against budget constraints and returns the
         mandated BudgetAction.

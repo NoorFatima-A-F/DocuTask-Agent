@@ -16,7 +16,9 @@ class BusinessRule(BaseModel):
 
     rule_id: str
     name: str
-    rule_type: str = Field(default="BUSINESS")  # BUSINESS, SECURITY, COMPLIANCE, COST, VALIDATION, ROUTING, WORKFLOW, PLANNER, TOOL, EXECUTION
+    rule_type: str = Field(
+        default="BUSINESS"
+    )  # BUSINESS, SECURITY, COMPLIANCE, COST, VALIDATION, ROUTING, WORKFLOW, PLANNER, TOOL, EXECUTION
     priority: int = Field(default=100, ge=1)
     is_active: bool = Field(default=True)
     version: str = Field(default="v1.0")
@@ -33,51 +35,61 @@ class BusinessRule(BaseModel):
 
 class DecisionRule(BusinessRule):
     """Decision Evaluation Rule."""
+
     rule_type: str = Field(default="DECISION")
 
 
 class ValidationRule(BusinessRule):
     """Data and Context Validation Rule."""
+
     rule_type: str = Field(default="VALIDATION")
 
 
 class SecurityRule(BusinessRule):
     """Access Control and Zero-Trust Security Rule."""
+
     rule_type: str = Field(default="SECURITY")
 
 
 class ComplianceRule(BusinessRule):
     """Regulatory and Data Residency Compliance Rule."""
+
     rule_type: str = Field(default="COMPLIANCE")
 
 
 class CostRule(BusinessRule):
     """Financial and Budget Enforcement Rule."""
+
     rule_type: str = Field(default="COST")
 
 
 class RoutingRule(BusinessRule):
     """Agent and Task Routing Rule."""
+
     rule_type: str = Field(default="ROUTING")
 
 
 class WorkflowRule(BusinessRule):
     """DAG and Orchestration Workflow Rule."""
+
     rule_type: str = Field(default="WORKFLOW")
 
 
 class PlannerRule(BusinessRule):
     """Planning Constraint and Decomposition Rule."""
+
     rule_type: str = Field(default="PLANNER")
 
 
 class ToolRule(BusinessRule):
     """Tool Selection and Execution Quota Rule."""
+
     rule_type: str = Field(default="TOOL")
 
 
 class ExecutionRule(BusinessRule):
     """Task Dispatch and Execution Safety Rule."""
+
     rule_type: str = Field(default="EXECUTION")
 
 

@@ -29,10 +29,30 @@ class MultiCloudPortabilityVerifier(IMultiCloudPortabilityVerifier):
 
     def verify(self) -> MultiCloudPortabilityReport:
         benchmarks = [
-            MultiCloudParityBenchmark(cloud_provider="AWS", stack="ECS Fargate + RDS Postgres + S3 + Secrets Manager", code_modifications_required=0, parity_score_pct=100.0),
-            MultiCloudParityBenchmark(cloud_provider="GCP", stack="Cloud Run + Cloud SQL + GCS + Secret Manager", code_modifications_required=0, parity_score_pct=100.0),
-            MultiCloudParityBenchmark(cloud_provider="Azure", stack="Container Apps + Azure Postgres + Blob + Key Vault", code_modifications_required=0, parity_score_pct=100.0),
-            MultiCloudParityBenchmark(cloud_provider="Kubernetes (Cloud Agnostic)", stack="EKS / GKE / AKS + Helm + CSI Drivers", code_modifications_required=0, parity_score_pct=100.0),
+            MultiCloudParityBenchmark(
+                cloud_provider="AWS",
+                stack="ECS Fargate + RDS Postgres + S3 + Secrets Manager",
+                code_modifications_required=0,
+                parity_score_pct=100.0,
+            ),
+            MultiCloudParityBenchmark(
+                cloud_provider="GCP",
+                stack="Cloud Run + Cloud SQL + GCS + Secret Manager",
+                code_modifications_required=0,
+                parity_score_pct=100.0,
+            ),
+            MultiCloudParityBenchmark(
+                cloud_provider="Azure",
+                stack="Container Apps + Azure Postgres + Blob + Key Vault",
+                code_modifications_required=0,
+                parity_score_pct=100.0,
+            ),
+            MultiCloudParityBenchmark(
+                cloud_provider="Kubernetes (Cloud Agnostic)",
+                stack="EKS / GKE / AKS + Helm + CSI Drivers",
+                code_modifications_required=0,
+                parity_score_pct=100.0,
+            ),
         ]
 
         checks = [

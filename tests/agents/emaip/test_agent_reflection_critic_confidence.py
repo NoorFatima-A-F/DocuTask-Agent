@@ -75,7 +75,11 @@ def test_confidence_engine_and_human_escalation():
         risk_score=conf_report.risk_score,
         financial_amount=15000.0,
     )
-    assert reason in [EscalationReason.HIGH_FINANCIAL_IMPACT, EscalationReason.LOW_CONFIDENCE, EscalationReason.SECURITY_RISK]
+    assert reason in [
+        EscalationReason.HIGH_FINANCIAL_IMPACT,
+        EscalationReason.LOW_CONFIDENCE,
+        EscalationReason.SECURITY_RISK,
+    ]
 
     ticket = esc_engine.create_escalation(
         agent_id="agent-finance",

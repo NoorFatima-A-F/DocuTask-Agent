@@ -9,10 +9,10 @@ from typing import Dict, List, Any
 
 
 class CertificationLevel(str, Enum):
-    LEVEL_1_EXPERIMENTAL = "LEVEL_1_EXPERIMENTAL"          # < 60%
+    LEVEL_1_EXPERIMENTAL = "LEVEL_1_EXPERIMENTAL"  # < 60%
     LEVEL_2_INTERNAL_PRODUCTION = "LEVEL_2_INTERNAL_PROD"  # 60 - 75%
     LEVEL_3_ENTERPRISE_READY = "LEVEL_3_ENTERPRISE_READY"  # 75 - 90%
-    LEVEL_4_ENTERPRISE_CERTIFIED = "LEVEL_4_CERTIFIED"     # 90%+
+    LEVEL_4_ENTERPRISE_CERTIFIED = "LEVEL_4_CERTIFIED"  # 90%+
 
 
 class CertificationDecisionStatus(str, Enum):
@@ -68,7 +68,7 @@ class VerificationEvidence:
     metrics: Dict[str, Any]
     artifacts: List[str]
     confidence_score: float  # 0.0 - 1.0
-    reviewer_status: str     # APPROVED / VERIFIED
+    reviewer_status: str  # APPROVED / VERIFIED
     sha256_checksum: str = ""
 
     def to_dict(self) -> Dict[str, Any]:

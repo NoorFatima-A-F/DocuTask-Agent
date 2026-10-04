@@ -47,7 +47,7 @@ class ProcessDiscoveryEngine:
             activity_counts[act] = activity_counts.get(act, 0) + 1
 
         discovered = DiscoveredProcess(
-            discovered_id=f"disc_mined_{len(self._discovered_processes)+1}",
+            discovered_id=f"disc_mined_{len(self._discovered_processes) + 1}",
             name=f"Mined Workflow ({len(activity_counts)} activities)",
             frequency=len(event_logs),
             mean_duration_sec=1800.0,

@@ -32,7 +32,7 @@ class PolicyEvaluator:
     def evaluate(cls, candidate_id: str, parameters: Dict[str, Any]) -> PolicySimulationResult:
         retries = parameters.get("max_retries", 3)
         concurrency = parameters.get("concurrency_limit", 6)
-        
+
         # Calculate simulated gain
         gain = round(8.0 + (concurrency * 1.2) - (retries * 0.4), 2)
         risk = round(0.05 + (concurrency * 0.015), 3)

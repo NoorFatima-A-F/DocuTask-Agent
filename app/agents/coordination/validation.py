@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class CoordinationValidationReport(BaseModel):
     """Validation outcome report."""
+
     is_valid: bool = True
     errors: List[str] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)

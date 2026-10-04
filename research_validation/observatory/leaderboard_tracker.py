@@ -38,7 +38,7 @@ class LivingLeaderboardTracker:
             submission_date_utc=submission_date_utc,
         )
         entries.append(new_entry)
-        
+
         # Sort descending by score and update ranks
         entries.sort(key=lambda e: e.score, reverse=True)
         ranked = [

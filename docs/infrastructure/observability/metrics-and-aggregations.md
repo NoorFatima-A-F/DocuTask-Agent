@@ -20,7 +20,7 @@ registry.record(
     name="document.processing.latency_ms",
     metric_type=MetricType.TIMER,
     value=45.2,
-    labels={"tenant_id": "tenant-01", "stage": "ocr", "status": "success"}
+    labels={"tenant_id": "tenant-01", "stage": "ocr", "status": "success"},
 )
 ```
 
@@ -31,9 +31,7 @@ from app.infrastructure.observability.metrics import TimeWindowAggregator
 
 aggregator = TimeWindowAggregator(registry)
 summary = aggregator.aggregate(
-    metric_name="document.processing.latency_ms",
-    window_seconds=300,
-    labels={"stage": "ocr"}
+    metric_name="document.processing.latency_ms", window_seconds=300, labels={"stage": "ocr"}
 )
 # Returns: p50, p90, p95, p99, p99.9, mean, min, max, count, sum, rate_per_second
 ```

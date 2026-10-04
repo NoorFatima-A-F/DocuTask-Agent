@@ -16,29 +16,29 @@ from typing import Any, Dict, List
 class PredictionErrorRecord:
     mission_id: str
     timestamp: float = field(default_factory=time.time)
-    
+
     # Latency Error
     predicted_latency_ms: float = 1200.0
     actual_latency_ms: float = 1250.0
     latency_error_ms: float = 50.0
     latency_rel_error: float = 0.0417
-    
+
     # Cost Error
     predicted_cost_usd: float = 0.010
     actual_cost_usd: float = 0.012
     cost_error_usd: float = 0.002
     cost_rel_error: float = 0.20
-    
+
     # Confidence Error
     predicted_confidence: float = 0.95
     actual_confidence: float = 0.96
     confidence_error: float = 0.01
-    
+
     # Retries / Depth Error
     predicted_retries: int = 0
     actual_retries: int = 0
     retry_error: int = 0
-    
+
     predicted_dag_depth: int = 3
     actual_dag_depth: int = 3
     depth_error: int = 0

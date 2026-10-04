@@ -25,6 +25,7 @@ class EvidenceQualityLevel(str, Enum):
     - LEVEL_D: Simulated, synthetic, or model-estimated.
     - LEVEL_E: Unsupported, unverified, or missing lineage.
     """
+
     LEVEL_A = "LEVEL_A"
     LEVEL_B = "LEVEL_B"
     LEVEL_C = "LEVEL_C"
@@ -56,6 +57,7 @@ class EvidenceQualityLevel(str, Enum):
 
 class LineageStage(str, Enum):
     """Canonical lineage progression stages."""
+
     RAW_OBSERVATION = "RAW_OBSERVATION"
     TRANSFORMATION = "TRANSFORMATION"
     INTERMEDIATE_ARTIFACT = "INTERMEDIATE_ARTIFACT"
@@ -67,6 +69,7 @@ class LineageStage(str, Enum):
 
 class ProvRelationType(str, Enum):
     """Standard W3C PROV relationship types."""
+
     USED = "used"
     WAS_GENERATED_BY = "wasGeneratedBy"
     WAS_DERIVED_FROM = "wasDerivedFrom"
@@ -79,6 +82,7 @@ class ProvRelationType(str, Enum):
 @dataclass
 class EnvironmentFingerprint:
     """Rigorous hardware and runtime execution environment snapshot."""
+
     machine_id: str
     os_name: str
     os_version: str
@@ -124,6 +128,7 @@ class EnvironmentFingerprint:
 @dataclass
 class ProvEntity:
     """W3C PROV Entity representation."""
+
     entity_id: str
     label: str
     attributes: Dict[str, Any]
@@ -136,6 +141,7 @@ class ProvEntity:
 @dataclass
 class ProvActivity:
     """W3C PROV Activity representation."""
+
     activity_id: str
     label: str
     start_time: float
@@ -148,6 +154,7 @@ class ProvActivity:
 @dataclass
 class ProvAgent:
     """W3C PROV Agent representation."""
+
     agent_id: str
     name: str
     agent_type: str  # "Person", "SoftwareAgent", "Organization"
@@ -161,6 +168,7 @@ class EvidenceNode:
     Immutable node in the scientific evidence lineage graph.
     Every node is a Merkle vertex containing its payload hash and parent hashes.
     """
+
     node_id: str
     stage: LineageStage
     name: str

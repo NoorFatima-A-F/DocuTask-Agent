@@ -19,23 +19,24 @@ class MetricLineage:
     """
     Complete scientific provenance of a measured metric.
     """
+
     metric_name: str
     display_value: str
     numeric_value: float
     unit: str
-    
+
     # Methodology & Formula
     mathematical_formula: str
     evaluation_methodology: str
     dataset_name: str
     dataset_fingerprint: str
     sample_size_n: int
-    
+
     # Statistical Rigor
     confidence_interval_95: str
     p_value: Optional[float] = None
     standard_error: float = 0.0
-    
+
     # Cryptographic Evidence Links
     supporting_evidence_hashes: List[str] = field(default_factory=list)
     last_verified_at: float = field(default_factory=time.time)

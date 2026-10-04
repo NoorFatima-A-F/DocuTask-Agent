@@ -10,6 +10,7 @@ import pytest
 
 try:
     import pytest_asyncio
+
     async_fixture = pytest_asyncio.fixture
 except ImportError:
     async_fixture = pytest.fixture
@@ -48,13 +49,10 @@ async def db_session() -> AsyncGenerator[Any, None]:
         connect_args={"check_same_thread": False},
         poolclass=StaticPool,
         echo=False,
-        future=True
+        future=True,
     )
     test_session_maker = async_sessionmaker(
-        bind=test_engine,
-        class_=AsyncSession,
-        expire_on_commit=False,
-        autoflush=False
+        bind=test_engine, class_=AsyncSession, expire_on_commit=False, autoflush=False
     )
 
     old_engine = app_session.engine if app_session else None

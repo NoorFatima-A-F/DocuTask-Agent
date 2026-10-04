@@ -16,7 +16,6 @@ from ..domain.models import (
 
 
 class BottleneckDiscoveryExporter(IBottleneckDiscoveryExporter):
-
     PHASE_TO_FILENAME_MAP: Dict[str, str] = {
         "3j.7.1": "architecture_profile.json",
         "3j.7.2": "resource_report.json",

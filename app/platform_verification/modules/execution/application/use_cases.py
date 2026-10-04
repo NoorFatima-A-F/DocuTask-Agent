@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Execution.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.execution.domain.models import ExecutionEntity
 from app.platform_verification.modules.execution.domain.interfaces import ExecutionRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageExecutionUseCase:
     def __init__(self, repository: ExecutionRepositoryInterface):

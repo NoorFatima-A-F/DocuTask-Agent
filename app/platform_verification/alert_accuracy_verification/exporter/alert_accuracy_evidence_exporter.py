@@ -53,69 +53,43 @@ class AlertAccuracyEvidenceExporter(IAlertAccuracyEvidenceExporter):
         exported_files: Dict[str, str] = {}
 
         # 1. ground_truth_report.json
-        exported_files["ground_truth_report.json"] = self._write_json(
-            "ground_truth_report.json", asdict(gt_rep)
-        )
+        exported_files["ground_truth_report.json"] = self._write_json("ground_truth_report.json", asdict(gt_rep))
 
         # 2. true_positive_report.json
-        exported_files["true_positive_report.json"] = self._write_json(
-            "true_positive_report.json", asdict(tp_rep)
-        )
+        exported_files["true_positive_report.json"] = self._write_json("true_positive_report.json", asdict(tp_rep))
 
         # 3. false_positive_report.json
-        exported_files["false_positive_report.json"] = self._write_json(
-            "false_positive_report.json", asdict(fp_rep)
-        )
+        exported_files["false_positive_report.json"] = self._write_json("false_positive_report.json", asdict(fp_rep))
 
         # 4. false_negative_report.json
-        exported_files["false_negative_report.json"] = self._write_json(
-            "false_negative_report.json", asdict(fn_rep)
-        )
+        exported_files["false_negative_report.json"] = self._write_json("false_negative_report.json", asdict(fn_rep))
 
         # 5. precision_report.json
-        exported_files["precision_report.json"] = self._write_json(
-            "precision_report.json", asdict(prec_rep)
-        )
+        exported_files["precision_report.json"] = self._write_json("precision_report.json", asdict(prec_rep))
 
         # 6. recall_report.json
-        exported_files["recall_report.json"] = self._write_json(
-            "recall_report.json", asdict(rec_rep)
-        )
+        exported_files["recall_report.json"] = self._write_json("recall_report.json", asdict(rec_rep))
 
         # 7. severity_report.json
-        exported_files["severity_report.json"] = self._write_json(
-            "severity_report.json", asdict(sev_rep)
-        )
+        exported_files["severity_report.json"] = self._write_json("severity_report.json", asdict(sev_rep))
 
         # 8. timing_report.json
-        exported_files["timing_report.json"] = self._write_json(
-            "timing_report.json", asdict(time_rep)
-        )
+        exported_files["timing_report.json"] = self._write_json("timing_report.json", asdict(time_rep))
 
         # 9. correlation_report.json
-        exported_files["correlation_report.json"] = self._write_json(
-            "correlation_report.json", asdict(corr_rep)
-        )
+        exported_files["correlation_report.json"] = self._write_json("correlation_report.json", asdict(corr_rep))
 
         # 10. noise_report.json
-        exported_files["noise_report.json"] = self._write_json(
-            "noise_report.json", asdict(noise_rep)
-        )
+        exported_files["noise_report.json"] = self._write_json("noise_report.json", asdict(noise_rep))
 
         # 11. anomaly_report.json
-        exported_files["anomaly_report.json"] = self._write_json(
-            "anomaly_report.json", asdict(anom_rep)
-        )
+        exported_files["anomaly_report.json"] = self._write_json("anomaly_report.json", asdict(anom_rep))
 
         # 12. recovery_report.json
-        exported_files["recovery_report.json"] = self._write_json(
-            "recovery_report.json", asdict(recov_rep)
-        )
+        exported_files["recovery_report.json"] = self._write_json("recovery_report.json", asdict(recov_rep))
 
         # 13. certification_report.json
-        exported_files["certification_report.json"] = self._write_json(
-            "certification_report.json", asdict(scorecard)
-        )
+        exported_files["certification_report.json"] = self._write_json("certification_report.json", asdict(scorecard))
 
         # 14. metadata.json
         metadata = {

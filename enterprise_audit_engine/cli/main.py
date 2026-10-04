@@ -32,97 +32,152 @@ def parse_args():
     subparsers = parser.add_subparsers(dest="subcommand", help="Audit, Certification & Reality Validation subcommands")
 
     # Command: enterprise-certify-full
-    cert_full_parser = subparsers.add_parser("enterprise-certify-full", help="Execute master certification, digital signing, reality checks, and packaging")
+    cert_full_parser = subparsers.add_parser(
+        "enterprise-certify-full", help="Execute master certification, digital signing, reality checks, and packaging"
+    )
     cert_full_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
-    cert_full_parser.add_argument("--output-dir", type=str, default="audit_output", help="Directory for output evidence and reports")
+    cert_full_parser.add_argument(
+        "--output-dir", type=str, default="audit_output", help="Directory for output evidence and reports"
+    )
     cert_full_parser.add_argument("--policy", type=str, default="enterprise_grade", help="Certification policy name")
     cert_full_parser.add_argument("--release-version", type=str, default="1.0.0", help="Release version string")
 
     # Command: validate-reality
-    val_real_parser = subparsers.add_parser("validate-reality", help="Execute API, Database, and Security Reality Validators")
+    val_real_parser = subparsers.add_parser(
+        "validate-reality", help="Execute API, Database, and Security Reality Validators"
+    )
     val_real_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
 
     # Command: detect-contradictions
-    con_parser = subparsers.add_parser("detect-contradictions", help="Detect contradictions between evidence, claims, and reality checks")
+    con_parser = subparsers.add_parser(
+        "detect-contradictions", help="Detect contradictions between evidence, claims, and reality checks"
+    )
     con_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
-    con_parser.add_argument("--evidence-dir", type=str, default="audit_output/audit-evidence", help="Path to evidence directory")
+    con_parser.add_argument(
+        "--evidence-dir", type=str, default="audit_output/audit-evidence", help="Path to evidence directory"
+    )
 
     # Command: simulate-auditors
-    sim_parser = subparsers.add_parser("simulate-auditors", help="Run multi-persona auditor simulation (Principal, Security, CTO, Due Diligence)")
+    sim_parser = subparsers.add_parser(
+        "simulate-auditors", help="Run multi-persona auditor simulation (Principal, Security, CTO, Due Diligence)"
+    )
     sim_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
 
     # Command: detect-drift
-    drift_parser = subparsers.add_parser("detect-drift", help="Check for Code, Dependency, and Infrastructure drift against certified state")
+    drift_parser = subparsers.add_parser(
+        "detect-drift", help="Check for Code, Dependency, and Infrastructure drift against certified state"
+    )
     drift_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
     drift_parser.add_argument("--certified-commit", type=str, default="HEAD", help="Certified Git commit SHA")
 
     # Command: run-benchmarks
-    subparsers.add_parser("run-benchmarks", help="Run external benchmark calibration suite across Good, Vulnerable, and Misleading systems")
+    subparsers.add_parser(
+        "run-benchmarks",
+        help="Run external benchmark calibration suite across Good, Vulnerable, and Misleading systems",
+    )
 
     # Command: run-250-mutations
     subparsers.add_parser("run-250-mutations", help="Run 250+ adversarial mutation and penetration attack vectors")
 
     # Command: export-auditor-package-v2
-    exp_v2_parser = subparsers.add_parser("export-auditor-package-v2", help="Export standalone Zero-Dependency Auditor Review Package v2")
+    exp_v2_parser = subparsers.add_parser(
+        "export-auditor-package-v2", help="Export standalone Zero-Dependency Auditor Review Package v2"
+    )
     exp_v2_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
-    exp_v2_parser.add_argument("--output-dir", type=str, default="external_review_package_v2", help="Target output directory")
+    exp_v2_parser.add_argument(
+        "--output-dir", type=str, default="external_review_package_v2", help="Target output directory"
+    )
 
     # Command: run-trust-assurance
-    trust_parser = subparsers.add_parser("run-trust-assurance", help="Run independent meta-assurance verification of the audit engine itself")
+    trust_parser = subparsers.add_parser(
+        "run-trust-assurance", help="Run independent meta-assurance verification of the audit engine itself"
+    )
     trust_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
-    trust_parser.add_argument("--output-dir", type=str, default="assurance_output", help="Directory for assurance results")
+    trust_parser.add_argument(
+        "--output-dir", type=str, default="assurance_output", help="Directory for assurance results"
+    )
 
     # Command: compare-baseline
-    base_parser = subparsers.add_parser("compare-baseline", help="Compare current audit results against established golden baseline")
+    base_parser = subparsers.add_parser(
+        "compare-baseline", help="Compare current audit results against established golden baseline"
+    )
     base_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
-    base_parser.add_argument("--current-report", type=str, required=True, help="Path to current audit manifest or certificate")
+    base_parser.add_argument(
+        "--current-report", type=str, required=True, help="Path to current audit manifest or certificate"
+    )
 
     # Command: verify-transparency-log
-    trans_parser = subparsers.add_parser("verify-transparency-log", help="Verify cryptographic hash chain of transparency ledger")
+    trans_parser = subparsers.add_parser(
+        "verify-transparency-log", help="Verify cryptographic hash chain of transparency ledger"
+    )
     trans_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
 
     # Command: verify-certificate
-    ver_cert_parser = subparsers.add_parser("verify-certificate", help="Independently verify a digital certificate without repo access")
+    ver_cert_parser = subparsers.add_parser(
+        "verify-certificate", help="Independently verify a digital certificate without repo access"
+    )
     ver_cert_parser.add_argument("--certificate", type=str, required=True, help="Path to verification_certificate.json")
     ver_cert_parser.add_argument("--public-key", type=str, default=None, help="Optional path to public_key.pem")
-    ver_cert_parser.add_argument("--merkle-manifest", type=str, default=None, help="Optional path to audit_merkle_root.json")
-    ver_cert_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root (for registry lookup)")
+    ver_cert_parser.add_argument(
+        "--merkle-manifest", type=str, default=None, help="Optional path to audit_merkle_root.json"
+    )
+    ver_cert_parser.add_argument(
+        "--repo-root", type=str, default=".", help="Path to repository root (for registry lookup)"
+    )
 
     # Command: compare-audits
-    comp_parser = subparsers.add_parser("compare-audits", help="Compare two historical release audits for quality/security regressions")
+    comp_parser = subparsers.add_parser(
+        "compare-audits", help="Compare two historical release audits for quality/security regressions"
+    )
     comp_parser.add_argument("--v1", type=str, required=True, help="Previous release version (e.g. 1.0.0)")
     comp_parser.add_argument("--v2", type=str, required=True, help="Current release version (e.g. 1.1.0)")
     comp_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
 
     # Command: revoke-certificate
-    rev_parser = subparsers.add_parser("revoke-certificate", help="Revoke an issued certificate in the Certification Revocation Registry")
+    rev_parser = subparsers.add_parser(
+        "revoke-certificate", help="Revoke an issued certificate in the Certification Revocation Registry"
+    )
     rev_parser.add_argument("--certificate-id", type=str, required=True, help="Certificate ID to revoke")
     rev_parser.add_argument("--reason", type=str, default="EVIDENCE_TAMPERING", help="Revocation reason")
     rev_parser.add_argument("--details", type=str, default="Revoked by administrator", help="Explanation details")
     rev_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
 
     # Command: run-mutations
-    subparsers.add_parser("run-mutations", help="Run synthetic mutation defect injection tests to verify engine guardrails")
-    
+    subparsers.add_parser(
+        "run-mutations", help="Run synthetic mutation defect injection tests to verify engine guardrails"
+    )
+
     # Command: run-expanded-mutations
     subparsers.add_parser("run-expanded-mutations", help="Run 50+ expanded mutation adversarial attack scenarios")
 
     # Command: run-all
     run_parser = subparsers.add_parser("run-all", help="Execute all evidence collectors and generate reports")
     run_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
-    run_parser.add_argument("--output-dir", type=str, default="audit_output", help="Directory for output evidence and reports")
+    run_parser.add_argument(
+        "--output-dir", type=str, default="audit_output", help="Directory for output evidence and reports"
+    )
 
     # Command: verify-enterprise
-    ent_parser = subparsers.add_parser("verify-enterprise", help="Run full enterprise due diligence verification and gate audit")
+    ent_parser = subparsers.add_parser(
+        "verify-enterprise", help="Run full enterprise due diligence verification and gate audit"
+    )
     ent_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
-    ent_parser.add_argument("--output-dir", type=str, default="audit_output", help="Directory for output evidence and reports")
+    ent_parser.add_argument(
+        "--output-dir", type=str, default="audit_output", help="Directory for output evidence and reports"
+    )
 
     # Command: verify-integrity
-    integ_parser = subparsers.add_parser("verify-integrity", help="Verify evidence store cryptographic hashes against manifest")
-    integ_parser.add_argument("--output-dir", type=str, default="audit_output", help="Directory containing evidence and manifest")
+    integ_parser = subparsers.add_parser(
+        "verify-integrity", help="Verify evidence store cryptographic hashes against manifest"
+    )
+    integ_parser.add_argument(
+        "--output-dir", type=str, default="audit_output", help="Directory containing evidence and manifest"
+    )
 
     # Command: reproduce-test
-    repro_parser = subparsers.add_parser("reproduce-test", help="Execute independent twin audit runs and verify deterministic reproducibility")
+    repro_parser = subparsers.add_parser(
+        "reproduce-test", help="Execute independent twin audit runs and verify deterministic reproducibility"
+    )
     repro_parser.add_argument("--repo-root", type=str, default=".", help="Path to repository root")
 
     return parser.parse_args()
@@ -163,7 +218,9 @@ def main():
             {"id": "EV-TEST-1", "category": "AutomatedTesting", "classification": "VERIFIED"},
             {"id": "EV-SEC-1", "category": "SecurityAndCompliance", "classification": "VERIFIED"},
         ]
-        auditor_sim = AuditorSimulator.run_simulation(sim_evidence, {}, target_system="DocuTask Agent", target_version=version)
+        auditor_sim = AuditorSimulator.run_simulation(
+            sim_evidence, {}, target_system="DocuTask Agent", target_version=version
+        )
 
         # 5. Composite Trust Score calculation
         trust_score_rep = TrustScoreCalculator.calculate_trust_score(
@@ -202,12 +259,16 @@ def main():
         print(f" Evidence Trust Score: {trust_score_rep.overall_trust_score} / 100")
         print(f" Trust Level:          {trust_score_rep.trust_level}")
         print(f" ERI Score:            {eri_rep.eri_score} / 100 ({eri_rep.classification})")
-        print(f" Reality Validation:   {'CONFIRMED (API + DB + Security)' if (api_val.is_valid and db_val.is_valid and sec_val.is_secure) else 'CONTRADICTIONS FOUND'}")
+        print(
+            f" Reality Validation:   {'CONFIRMED (API + DB + Security)' if (api_val.is_valid and db_val.is_valid and sec_val.is_secure) else 'CONTRADICTIONS FOUND'}"
+        )
         print(f" Auditor Consensus:    {auditor_sim.consensus_score} / 100 ({auditor_sim.status})")
         print(f" Contradictions:       {con_rep.contradiction_count} conflicts detected")
         print(f" Transparency Log ID:  Entry #{log_entry.entry_id}")
         print("-------------------------------------------------------")
-        print(f" Breakdown: Evidence Integrity={trust_score_rep.breakdown.evidence_integrity}, Runtime={trust_score_rep.breakdown.runtime_validation}, Security={trust_score_rep.breakdown.security_validation}, Repro={trust_score_rep.breakdown.reproducibility}")
+        print(
+            f" Breakdown: Evidence Integrity={trust_score_rep.breakdown.evidence_integrity}, Runtime={trust_score_rep.breakdown.runtime_validation}, Security={trust_score_rep.breakdown.security_validation}, Repro={trust_score_rep.breakdown.reproducibility}"
+        )
         print("=======================================================")
 
         if con_rep.has_contradictions or not trust_score_rep.is_certified:
@@ -226,9 +287,15 @@ def main():
         print("\n=======================================================")
         print("             INDEPENDENT REALITY VALIDATION            ")
         print("=======================================================")
-        print(f" API Reality Check:      {'PASS' if api_res.is_valid else 'FAIL'} ({api_res.passed_checks}/{api_res.total_checks} checks, Latency: {api_res.average_latency_ms}ms)")
-        print(f" Database Reality Check: {'PASS' if db_res.is_valid else 'FAIL'} ({db_res.passed_checks}/{db_res.total_checks} checks)")
-        print(f" Security Reality Check: {'PASS' if sec_res.is_secure else 'FAIL'} ({sec_res.attacks_blocked}/{sec_res.total_attacks_executed} attacks blocked, Defense: {sec_res.defense_rate_percentage}%)")
+        print(
+            f" API Reality Check:      {'PASS' if api_res.is_valid else 'FAIL'} ({api_res.passed_checks}/{api_res.total_checks} checks, Latency: {api_res.average_latency_ms}ms)"
+        )
+        print(
+            f" Database Reality Check: {'PASS' if db_res.is_valid else 'FAIL'} ({db_res.passed_checks}/{db_res.total_checks} checks)"
+        )
+        print(
+            f" Security Reality Check: {'PASS' if sec_res.is_secure else 'FAIL'} ({sec_res.attacks_blocked}/{sec_res.total_attacks_executed} attacks blocked, Defense: {sec_res.defense_rate_percentage}%)"
+        )
         print("=======================================================")
 
         all_ok = api_res.is_valid and db_res.is_valid and sec_res.is_secure
@@ -286,12 +353,32 @@ def main():
 
         if not any("test" in str(e.get("category", "")).lower() for e in evidence_items):
             if (repo_root / "tests").exists() or (repo_root / "enterprise_audit_engine" / "tests").exists():
-                evidence_items.append({"id": "EV-TEST-1", "category": "AutomatedTesting", "classification": "VERIFIED", "summary": "Automated test pyramid suite verified"})
+                evidence_items.append(
+                    {
+                        "id": "EV-TEST-1",
+                        "category": "AutomatedTesting",
+                        "classification": "VERIFIED",
+                        "summary": "Automated test pyramid suite verified",
+                    }
+                )
         if not any("security" in str(e.get("category", "")).lower() for e in evidence_items):
-            if (repo_root / "security").exists() or (repo_root / "security_evidence").exists() or (repo_root / ".github" / "workflows" / "security.yml").exists():
-                evidence_items.append({"id": "EV-SEC-1", "category": "SecurityAndCompliance", "classification": "VERIFIED", "summary": "Zero-trust security and AST analysis verified"})
+            if (
+                (repo_root / "security").exists()
+                or (repo_root / "security_evidence").exists()
+                or (repo_root / ".github" / "workflows" / "security.yml").exists()
+            ):
+                evidence_items.append(
+                    {
+                        "id": "EV-SEC-1",
+                        "category": "SecurityAndCompliance",
+                        "classification": "VERIFIED",
+                        "summary": "Zero-trust security and AST analysis verified",
+                    }
+                )
 
-        rep = AuditorSimulator.run_simulation(evidence_items, {}, target_system="DocuTask Agent", target_version="v1.0.0")
+        rep = AuditorSimulator.run_simulation(
+            evidence_items, {}, target_system="DocuTask Agent", target_version="v1.0.0"
+        )
 
         print("\n=======================================================")
         print("             AUDITOR SIMULATION REPORT                 ")
@@ -301,7 +388,7 @@ def main():
         print(f" Consensus Passed: {rep.consensus_passed}")
         print("-------------------------------------------------------")
         for name, p in rep.persona_reviews.items():
-            print(f" [{ 'PASS' if p.passed else 'FAIL' }] {p.persona_title:<45} Score: {p.review_score}/100")
+            print(f" [{'PASS' if p.passed else 'FAIL'}] {p.persona_title:<45} Score: {p.review_score}/100")
         print("=======================================================")
 
         if not rep.consensus_passed:
@@ -326,7 +413,9 @@ def main():
 
         if rep.has_drift:
             for d in rep.drifts:
-                print(f" [-] {d.drift_type}: {d.description} (Certified: {d.certified_state} vs Current: {d.current_state})")
+                print(
+                    f" [-] {d.drift_type}: {d.description} (Certified: {d.certified_state} vs Current: {d.current_state})"
+                )
             sys.exit(1)
         else:
             print("[+] Zero Drift: Active environment is compliant with certification baseline.")
@@ -345,7 +434,9 @@ def main():
         print("-------------------------------------------------------")
         for r in rep.results:
             status_str = "PASS" if r.matched else "FAIL"
-            print(f" [{status_str}] {r.archetype_name:<42} (Expected: {r.expected_outcome}, Actual: {r.actual_outcome})")
+            print(
+                f" [{status_str}] {r.archetype_name:<42} (Expected: {r.expected_outcome}, Actual: {r.actual_outcome})"
+            )
         print("=======================================================")
 
         if rep.overall_calibration_accuracy < 100.0:
@@ -383,7 +474,13 @@ def main():
         print(f"[*] Exporting Portable Zero-Dependency Auditor Review Package v2 to: {out_pkg}")
         res = ExternalReviewPackageExporterV2.export_package_v2(
             output_dir=out_pkg,
-            certificate_data={"certificate_id": "CERT-2026-V2", "system_name": "DocuTask Agent", "release_version": "1.0.0", "status": "VALID", "expiry_timestamp": "2028-01-01T00:00:00+00:00"},
+            certificate_data={
+                "certificate_id": "CERT-2026-V2",
+                "system_name": "DocuTask Agent",
+                "release_version": "1.0.0",
+                "status": "VALID",
+                "expiry_timestamp": "2028-01-01T00:00:00+00:00",
+            },
             public_key_pem="-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA9K6yI...sample\n-----END PUBLIC KEY-----\n",
             merkle_manifest_data={"merkle_root": "merkle_root_sealed_hash_123"},
         )
@@ -412,7 +509,9 @@ def main():
 
     elif args.subcommand == "reproduce-test":
         with tempfile.TemporaryDirectory() as temp_dir:
-            res = asyncio.run(AuditReproducibilityVerifier.verify_reproducibility(repo_root=repo_root, temp_base_dir=Path(temp_dir)))
+            res = asyncio.run(
+                AuditReproducibilityVerifier.verify_reproducibility(repo_root=repo_root, temp_base_dir=Path(temp_dir))
+            )
         print(f"[+] Reproducibility Deterministic: {res['is_deterministic']}")
         sys.exit(0 if res["is_deterministic"] else 1)
 

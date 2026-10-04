@@ -33,31 +33,32 @@ class DecisionProof:
     """
     Formal, independently verifiable proof justifying a planner decision.
     """
+
     proof_id: str
     mission_id: str
     decision_timestamp: float = field(default_factory=time.time)
-    
+
     # Planner & Domain Context
     document_type: str = "invoice"
     planner_version: str = "v2.1.0"
-    
+
     # Mathematical Utility Objective: U(s) = w_a * A(s) - w_l * (L(s)/1000) - w_c * (C(s)/0.01)
     utility_formula: str = "U(s) = 0.50 * Acc(s) - 0.30 * (Lat(s)/1000) - 0.20 * (Cost(s)/0.01)"
     accuracy_weight: float = 0.50
     latency_weight: float = 0.30
     cost_weight: float = 0.20
-    
+
     # Candidates Evaluated & Selected Strategy
     candidates_evaluated: List[CandidateStrategyEval] = field(default_factory=list)
     selected_strategy_id: str = ""
     selected_strategy_name: str = ""
     winning_utility_score: float = 0.0
-    
+
     # Constraints & Bounds
     max_latency_budget_ms: float = 3000.0
     max_cost_budget_usd: float = 0.050
     min_confidence_floor: float = 0.90
-    
+
     # Supporting Proof References
     supporting_evidence_hash: str = ""
     proof_hash: str = ""

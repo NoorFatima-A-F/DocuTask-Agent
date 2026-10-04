@@ -252,7 +252,10 @@ class TimerValidationLab:
         suitability = TimerSuitability.OPTIMAL
 
         # Process time does not advance during sleep/I/O wait
-        if clock_source == ClockSource.PROCESS_TIME_NS and workload in (WorkloadType.SLEEP, WorkloadType.NETWORK_IO_SIM):
+        if clock_source == ClockSource.PROCESS_TIME_NS and workload in (
+            WorkloadType.SLEEP,
+            WorkloadType.NETWORK_IO_SIM,
+        ):
             suitability = TimerSuitability.REJECTED
             rejection_reason = "process_time_ns does not measure elapsed wall time during I/O blocking or thread sleep."
 

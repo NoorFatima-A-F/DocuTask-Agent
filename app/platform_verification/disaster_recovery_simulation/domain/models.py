@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Disaster Recovery Simulation Framework (Part 3G.3).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any
@@ -22,9 +23,9 @@ class ChaosExperimentType(str, Enum):
 
 class ResilienceCertificationLevel(str, Enum):
     LEVEL_4_MISSION_CRITICAL = "Level 4 — Mission Critical Ready"  # 95 - 100
-    LEVEL_3_ENTERPRISE_READY = "Level 3 — Enterprise Ready"        # 90 - 94
-    LEVEL_2_PRODUCTION_READY = "Level 2 — Production Ready"        # 80 - 89
-    LEVEL_1_NEEDS_IMPROVEMENT = "Level 1 — Needs Improvement"      # < 80
+    LEVEL_3_ENTERPRISE_READY = "Level 3 — Enterprise Ready"  # 90 - 94
+    LEVEL_2_PRODUCTION_READY = "Level 2 — Production Ready"  # 80 - 89
+    LEVEL_1_NEEDS_IMPROVEMENT = "Level 1 — Needs Improvement"  # < 80
 
 
 @dataclass
@@ -71,7 +72,7 @@ class IncidentDetectionResult:
     target_mttd_seconds: float
     mttd_met: bool
     monitoring_source: str  # Prometheus, Blackbox, CloudWatch
-    alert_channel: str      # PagerDuty, Slack
+    alert_channel: str  # PagerDuty, Slack
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)
 
@@ -113,13 +114,13 @@ class ContinuousDRTestingSchedule:
 
 @dataclass
 class ResilienceScorecard:
-    recovery_success_score: float     # Weight 30%
-    rto_performance_score: float      # Weight 20%
-    rpo_compliance_score: float       # Weight 20%
-    automation_score: float           # Weight 15%
-    detection_score: float            # Weight 10%
-    documentation_score: float        # Weight 5%
-    composite_score: float            # 0 - 100
+    recovery_success_score: float  # Weight 30%
+    rto_performance_score: float  # Weight 20%
+    rpo_compliance_score: float  # Weight 20%
+    automation_score: float  # Weight 15%
+    detection_score: float  # Weight 10%
+    documentation_score: float  # Weight 5%
+    composite_score: float  # 0 - 100
     certification_level: ResilienceCertificationLevel
     passed: bool
     ci_cd_deployment_approved: bool

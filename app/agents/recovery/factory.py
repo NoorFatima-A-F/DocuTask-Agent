@@ -34,16 +34,12 @@ class RecoveryFactory:
             root_cause_analyzer=root_cause_analyzer,
             strategy_selector=strategy_selector,
             planner=planner,
-            executor=executor
+            executor=executor,
         )
 
         dead_letter = DeadLetterQueue()
         incident_mgr = IncidentManager()
-        manager = RecoveryManager(
-            engine=engine,
-            dead_letter_queue=dead_letter,
-            incident_manager=incident_mgr
-        )
+        manager = RecoveryManager(engine=engine, dead_letter_queue=dead_letter, incident_manager=incident_mgr)
         runtime = RecoveryRuntime(engine=engine)
         metrics = RecoveryMetricsCollector()
         repo = RecoveryRepository()

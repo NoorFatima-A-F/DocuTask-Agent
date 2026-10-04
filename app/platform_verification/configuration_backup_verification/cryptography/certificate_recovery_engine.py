@@ -1,6 +1,7 @@
 """
 Certificate Recovery Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
+
 from typing import List
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
@@ -19,10 +20,50 @@ class CertificateRecoveryEngine(ICertificateRecoveryEngine):
     """
 
     CERTS_SPEC = [
-        ("CERT-01-INGRESS", "TLS Ingress Gateway", "Let's Encrypt Authority X3", "CN=api.docutask.internal", "2026-06-15T00:00:00Z", False, True, True, True),
-        ("CERT-02-MTLS-WORKER", "mTLS Service-to-Service", "DocuTask Internal CA v2", "CN=worker-pool.docutask.internal", "2026-12-01T00:00:00Z", False, True, True, True),
-        ("CERT-03-INTERNAL-CA", "Internal Root CA", "DocuTask Root PKI", "CN=DocuTask Root CA", "2031-01-01T00:00:00Z", False, True, True, True),
-        ("CERT-04-CLIENT-AGENT", "Client Authentication Cert", "DocuTask Internal CA v2", "CN=agent-client-01", "2026-10-01T00:00:00Z", False, True, True, True),
+        (
+            "CERT-01-INGRESS",
+            "TLS Ingress Gateway",
+            "Let's Encrypt Authority X3",
+            "CN=api.docutask.internal",
+            "2026-06-15T00:00:00Z",
+            False,
+            True,
+            True,
+            True,
+        ),
+        (
+            "CERT-02-MTLS-WORKER",
+            "mTLS Service-to-Service",
+            "DocuTask Internal CA v2",
+            "CN=worker-pool.docutask.internal",
+            "2026-12-01T00:00:00Z",
+            False,
+            True,
+            True,
+            True,
+        ),
+        (
+            "CERT-03-INTERNAL-CA",
+            "Internal Root CA",
+            "DocuTask Root PKI",
+            "CN=DocuTask Root CA",
+            "2031-01-01T00:00:00Z",
+            False,
+            True,
+            True,
+            True,
+        ),
+        (
+            "CERT-04-CLIENT-AGENT",
+            "Client Authentication Cert",
+            "DocuTask Internal CA v2",
+            "CN=agent-client-01",
+            "2026-10-01T00:00:00Z",
+            False,
+            True,
+            True,
+            True,
+        ),
     ]
 
     def verify_certificate_recovery_and_handshakes(

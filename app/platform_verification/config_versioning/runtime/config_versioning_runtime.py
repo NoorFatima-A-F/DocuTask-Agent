@@ -1,9 +1,14 @@
 """
 Master Unified Runtime Facade for Enterprise Configuration, Versioning & Dependency Management.
 """
+
 from typing import Any, Dict, Optional
 from app.platform_verification.config_versioning.domain.models import (
-    ConfigurationSnapshot, ExecutionSnapshot, EnvironmentTier, SBOMManifest, PromptTemplateVersion
+    ConfigurationSnapshot,
+    ExecutionSnapshot,
+    EnvironmentTier,
+    SBOMManifest,
+    PromptTemplateVersion,
 )
 from app.platform_verification.config_versioning.core.resolver import configuration_resolver
 from app.platform_verification.config_versioning.core.snapshot_manager import snapshot_manager
@@ -22,25 +27,20 @@ class EnterpriseConfigVersioningRuntime:
         environment: EnvironmentTier = EnvironmentTier.INTEGRATION,
         module_name: Optional[str] = None,
         overrides: Optional[Dict[str, Any]] = None,
-        creator: str = "Enterprise Configuration Resolver"
+        creator: str = "Enterprise Configuration Resolver",
     ) -> ConfigurationSnapshot:
         resolved = configuration_resolver.resolve(
-            environment=environment,
-            module_name=module_name,
-            experiment_override=overrides
+            environment=environment, module_name=module_name, experiment_override=overrides
         )
         fp = environment_fingerprinter.capture_fingerprint(tier=environment)
         snapshot = snapshot_manager.create_snapshot(
-            resolved_config=resolved,
-            environment=environment,
-            environment_fingerprint=fp,
-            creator=creator
+            resolved_config=resolved, environment=environment, environment_fingerprint=fp, creator=creator
         )
         config_observability.record_event(
             event_type="CONFIG_SNAPSHOT_CREATED",
             actor=creator,
             environment=environment.value,
-            details={"snapshot_id": snapshot.snapshot_id, "hash": snapshot.configuration_hash}
+            details={"snapshot_id": snapshot.snapshot_id, "hash": snapshot.configuration_hash},
         )
         return snapshot
 
@@ -55,7 +55,7 @@ class EnterpriseConfigVersioningRuntime:
         model_identifier: str,
         model_version: str,
         prompt_version: PromptTemplateVersion,
-        infrastructure_version: str = "k8s-cluster-v2"
+        infrastructure_version: str = "k8s-cluster-v2",
     ) -> ExecutionSnapshot:
         sbom = sbom_generator.generate_cyclonedx_sbom()
         exec_snap = reproducibility_engine.capture_execution_snapshot(
@@ -74,15 +74,12 @@ class EnterpriseConfigVersioningRuntime:
             dependency_lock_hash=sbom.sha256_bom_hash,
             sbom_manifest_id=sbom.sbom_id,
             environment_tier=config_snapshot.environment,
-            infrastructure_version=infrastructure_version
+            infrastructure_version=infrastructure_version,
         )
         return exec_snap
 
     def evaluate_feature_flag(
-        self,
-        flag_key: str,
-        environment: EnvironmentTier = EnvironmentTier.PRODUCTION,
-        tenant_id: Optional[str] = None
+        self, flag_key: str, environment: EnvironmentTier = EnvironmentTier.PRODUCTION, tenant_id: Optional[str] = None
     ) -> bool:
         return feature_flag_manager.is_flag_active(flag_key=flag_key, environment=environment, tenant_id=tenant_id)
 

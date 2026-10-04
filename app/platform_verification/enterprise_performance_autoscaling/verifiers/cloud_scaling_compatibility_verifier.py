@@ -26,9 +26,21 @@ class CloudScalingCompatibilityVerifier(ICloudScalingVerifier):
 
     def verify(self) -> CloudScalingReport:
         platforms = [
-            CloudPlatformScaling(platform_name="AWS ECS (Fargate) / EKS", compatible=True, notes="Stateless task definitions scale via Application Auto Scaling / Target Tracking"),
-            CloudPlatformScaling(platform_name="Google Cloud Run / GKE", compatible=True, notes="Concurrency-based autoscaling for API; HPA with Cloud Monitoring for Workers"),
-            CloudPlatformScaling(platform_name="Azure Container Apps / AKS", compatible=True, notes="KEDA-based Redis queue scaling supported out of the box"),
+            CloudPlatformScaling(
+                platform_name="AWS ECS (Fargate) / EKS",
+                compatible=True,
+                notes="Stateless task definitions scale via Application Auto Scaling / Target Tracking",
+            ),
+            CloudPlatformScaling(
+                platform_name="Google Cloud Run / GKE",
+                compatible=True,
+                notes="Concurrency-based autoscaling for API; HPA with Cloud Monitoring for Workers",
+            ),
+            CloudPlatformScaling(
+                platform_name="Azure Container Apps / AKS",
+                compatible=True,
+                notes="KEDA-based Redis queue scaling supported out of the box",
+            ),
         ]
 
         checks: List[CheckResult] = [

@@ -6,6 +6,7 @@ from enterprise_audit_engine.domain.evidence.models import EvidenceRecord, Audit
 
 class IncompleteEvidenceCoverageError(Exception):
     """Raised when an audit report or finding lacks 100% verified evidence coverage."""
+
     pass
 
 
@@ -38,11 +39,13 @@ class EvidenceCoverageAnalyzer:
                             finding_issues.append(f"Evidence '{eid}' has empty raw payload.")
 
             if finding_issues:
-                unsupported_findings.append({
-                    "finding_id": finding.finding_id,
-                    "claim": finding.claim,
-                    "issues": finding_issues,
-                })
+                unsupported_findings.append(
+                    {
+                        "finding_id": finding.finding_id,
+                        "claim": finding.claim,
+                        "issues": finding_issues,
+                    }
+                )
             else:
                 covered_findings.append(finding.finding_id)
 

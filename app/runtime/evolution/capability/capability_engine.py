@@ -117,9 +117,7 @@ class CapabilityEngine:
                 )
                 self.capabilities[gap_id] = gap
                 gaps.append(gap)
-                self.event_bus.publish(
-                    CapabilityGapDetected(payload=gap.to_dict())
-                )
+                self.event_bus.publish(CapabilityGapDetected(payload=gap.to_dict()))
 
         return [c for c in self.capabilities.values() if c.is_gap]
 
@@ -155,9 +153,7 @@ class CapabilityEngine:
         )
         self.capabilities[cap_id] = cap
 
-        self.event_bus.publish(
-            CapabilityExpanded(payload=cap.to_dict())
-        )
+        self.event_bus.publish(CapabilityExpanded(payload=cap.to_dict()))
         return cap
 
     def get_capability(self, capability_id: str) -> Optional[CapabilityDescriptor]:
@@ -171,9 +167,7 @@ class CapabilityEngine:
         cap.state = CapabilityState.DEPRECATED
         cap.gap_rationale = rationale
 
-        self.event_bus.publish(
-            CapabilityDeprecated(payload=cap.to_dict())
-        )
+        self.event_bus.publish(CapabilityDeprecated(payload=cap.to_dict()))
         return cap
 
     def list_capabilities(self, state: Optional[CapabilityState] = None) -> List[CapabilityDescriptor]:

@@ -121,6 +121,7 @@ class VerificationRecordRequest(BaseModel):
 
 # Endpoints
 
+
 @router.get("/status")
 def get_world_model_status():
     """Get executive overview and status of the Autonomous World Model Platform."""

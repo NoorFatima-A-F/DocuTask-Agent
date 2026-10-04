@@ -12,6 +12,7 @@ import threading
 @dataclass
 class GatewayFilterResult:
     """Outcome of an API gateway security filter check."""
+
     passed: bool
     status_code: int = 200
     error_message: Optional[str] = None
@@ -131,7 +132,9 @@ class HMACSignatureValidator:
         msg = f"{timestamp}:{method.upper()}:{path}:{body}".encode("utf-8")
         return hmac.new(self.secret, msg, hashlib.sha256).hexdigest()
 
-    def verify_signature(self, signature: str, timestamp: str, method: str, path: str, body: str = "") -> GatewayFilterResult:
+    def verify_signature(
+        self, signature: str, timestamp: str, method: str, path: str, body: str = ""
+    ) -> GatewayFilterResult:
         """Verify signature match."""
         expected = self.sign_request(timestamp, method, path, body)
         if not hmac.compare_digest(signature, expected):

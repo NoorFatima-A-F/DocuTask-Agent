@@ -62,6 +62,7 @@ def client():
 # 1. Domain Event Model Tests
 # ---------------------------------------------------------------------------
 
+
 def test_learning_domain_events_instantiation():
     e1 = ReflectionStarted(mission_id="mission-001")
     assert e1.event_type == "learning.reflection.started"
@@ -105,15 +106,15 @@ def test_learning_domain_events_instantiation():
     assert e13.total_lessons == 3
 
 
-
 # ---------------------------------------------------------------------------
 # 2. Reflection Subsystem Tests
 # ---------------------------------------------------------------------------
 
+
 def test_reflection_engine_generate_report():
     engine = ReflectionEngine()
     report = engine.reflect_on_mission("mission-test-01")
-    
+
     assert report.mission_id == "mission-test-01"
     assert report.macro_kpis.throughput_tasks_per_sec > 0
     assert report.macro_kpis.sla_adherence_rate >= 0.0
@@ -158,6 +159,7 @@ def test_reflection_validator():
 # 3. Learning & Pattern Mining Subsystem Tests
 # ---------------------------------------------------------------------------
 
+
 def test_learning_engine_mine_lessons():
     r_engine = ReflectionEngine()
     report = r_engine.reflect_on_mission("mission-learn-01")
@@ -189,10 +191,12 @@ def test_pattern_miner_and_lesson_extractor():
     bundle = KnowledgeCompiler.compile_bundle(lesson_id="ls-001", rules=rules, strategy=strategy)
     assert bundle.bundle_hash != ""
 
-    ranked = ExperienceRanker.rank_experiences([
-        {"id": "exp-1", "success_rate": 0.95, "confidence": 0.9},
-        {"id": "exp-2", "success_rate": 0.70, "confidence": 0.6},
-    ])
+    ranked = ExperienceRanker.rank_experiences(
+        [
+            {"id": "exp-1", "success_rate": 0.95, "confidence": 0.9},
+            {"id": "exp-2", "success_rate": 0.70, "confidence": 0.6},
+        ]
+    )
     assert ranked[0].experience_id == "exp-1"
 
     val = LearningValidator.validate_lesson(lesson_id="ls-001", rules=rules, confidence=0.88)
@@ -202,6 +206,7 @@ def test_pattern_miner_and_lesson_extractor():
 # ---------------------------------------------------------------------------
 # 4. Knowledge Registry, Graph & Lineage Tests
 # ---------------------------------------------------------------------------
+
 
 def test_knowledge_registry_crud_and_search():
     reg = KnowledgeRegistry()
@@ -251,6 +256,7 @@ def test_knowledge_graph_and_lineage():
 # 5. Policy Engine, Simulation & Evolution Tests
 # ---------------------------------------------------------------------------
 
+
 def test_policy_engine_proposal_and_evaluation():
     p_engine = PolicyEngine()
     candidate = p_engine.propose_candidate(
@@ -262,7 +268,6 @@ def test_policy_engine_proposal_and_evaluation():
 
     assert candidate.candidate_id.startswith("cand_")
     assert candidate.status == "PROPOSED"
-
 
     evaluation = p_engine.evaluate_candidate(candidate.candidate_id)
     assert evaluation.simulation_id is not None
@@ -283,6 +288,7 @@ def test_policy_registry_and_versioning():
 # ---------------------------------------------------------------------------
 # 6. Governance, Guardrails & Rollback Tests
 # ---------------------------------------------------------------------------
+
 
 def test_governance_gatekeeper_and_approval():
     gatekeeper = LearningGovernanceGatekeeper()
@@ -308,26 +314,33 @@ def test_rollback_and_guardrails():
     assert "max_retries" in guardrails_spec
     assert "confidence_threshold" in guardrails_spec
 
-    is_safe = PolicyGuardrailsValidator.validate_parameters({
-        "max_retries": 3,
-        "concurrency_limit": 10,
-        "confidence_threshold": 0.85,
-    })
+    is_safe = PolicyGuardrailsValidator.validate_parameters(
+        {
+            "max_retries": 3,
+            "concurrency_limit": 10,
+            "confidence_threshold": 0.85,
+        }
+    )
     assert is_safe.is_compliant is True
 
-    unsafe = PolicyGuardrailsValidator.validate_parameters({
-        "max_retries": 100,  # Exceeds max 10
-        "confidence_threshold": 0.10,  # Below min 0.50
-    })
+    unsafe = PolicyGuardrailsValidator.validate_parameters(
+        {
+            "max_retries": 100,  # Exceeds max 10
+            "confidence_threshold": 0.10,  # Below min 0.50
+        }
+    )
     assert unsafe.is_compliant is False
 
-    rb_res = rollback_manager.rollback("pol-baseline-planner", operator_id="admin-01", reason="Testing rollback mechanism")
+    rb_res = rollback_manager.rollback(
+        "pol-baseline-planner", operator_id="admin-01", reason="Testing rollback mechanism"
+    )
     assert rb_res.status == "ROLLED_BACK"
 
 
 # ---------------------------------------------------------------------------
 # 7. FastAPI Endpoints Integration Tests
 # ---------------------------------------------------------------------------
+
 
 def test_api_reflection_endpoints(client: TestClient):
     resp = client.get("/api/v1/learning/reflection/mission/mission-001")
@@ -359,14 +372,17 @@ def test_api_learning_and_knowledge_endpoints(client: TestClient):
     assert resp_strategies.status_code == 200
     assert isinstance(resp_strategies.json(), list)
 
-    resp_ingest = client.post("/api/v1/learning/knowledge/records", json={
-        "title": "Adaptive Resiliency Buffer",
-        "category": "RESILIENCE_STRATEGY",
-        "source_mission_id": "mission-001",
-        "confidence_score": 0.92,
-        "content": {"buffer_size": 64},
-        "tags": ["resilience", "buffer"],
-    })
+    resp_ingest = client.post(
+        "/api/v1/learning/knowledge/records",
+        json={
+            "title": "Adaptive Resiliency Buffer",
+            "category": "RESILIENCE_STRATEGY",
+            "source_mission_id": "mission-001",
+            "confidence_score": 0.92,
+            "content": {"buffer_size": 64},
+            "tags": ["resilience", "buffer"],
+        },
+    )
     assert resp_ingest.status_code == 201
     rec_data = resp_ingest.json()
     assert rec_data["title"] == "Adaptive Resiliency Buffer"
@@ -385,12 +401,15 @@ def test_api_learning_and_knowledge_endpoints(client: TestClient):
 
 
 def test_api_policy_and_governance_endpoints(client: TestClient):
-    resp_prop = client.post("/api/v1/learning/policy/propose", json={
-        "target_component": "planner",
-        "policy_name": "API Proposed Policy",
-        "parameters": {"max_retries": 4, "concurrency_limit": 6, "confidence_threshold": 0.85},
-        "evidence_lessons": ["ls-001"],
-    })
+    resp_prop = client.post(
+        "/api/v1/learning/policy/propose",
+        json={
+            "target_component": "planner",
+            "policy_name": "API Proposed Policy",
+            "parameters": {"max_retries": 4, "concurrency_limit": 6, "confidence_threshold": 0.85},
+            "evidence_lessons": ["ls-001"],
+        },
+    )
     assert resp_prop.status_code == 200
     candidate = resp_prop.json()
     cand_id = candidate["candidate_id"]
@@ -402,15 +421,20 @@ def test_api_policy_and_governance_endpoints(client: TestClient):
     assert resp_active.status_code == 200
     assert len(resp_active.json()) >= 1
 
-    resp_rev = client.post("/api/v1/learning/governance/review", json={
-        "candidate_id": cand_id,
-        "reviewer_id": "admin-reviewer",
-        "decision": "APPROVED",
-        "comments": "Meets performance requirements.",
-    })
+    resp_rev = client.post(
+        "/api/v1/learning/governance/review",
+        json={
+            "candidate_id": cand_id,
+            "reviewer_id": "admin-reviewer",
+            "decision": "APPROVED",
+            "comments": "Meets performance requirements.",
+        },
+    )
     assert resp_rev.status_code == 200
 
-    resp_prom = client.post("/api/v1/learning/governance/promote", json={"candidate_id": cand_id, "promoter_id": "api-deployer"})
+    resp_prom = client.post(
+        "/api/v1/learning/governance/promote", json={"candidate_id": cand_id, "promoter_id": "api-deployer"}
+    )
     assert resp_prom.status_code == 200
 
     resp_guard = client.get("/api/v1/learning/governance/guardrails")

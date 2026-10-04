@@ -232,7 +232,9 @@ def trigger_failover(req: FailoverTriggerRequest) -> Dict[str, Any]:
     """Trigger regional traffic failover."""
     sdk = get_network_sdk()
     sdk.flow_logger.emit_security_event(
-        event_type=sdk.flow_logger.get_recent_events()[0].event_type.TRAFFIC_SHIFTED if sdk.flow_logger.get_recent_events() else "TrafficShifted",
+        event_type=sdk.flow_logger.get_recent_events()[0].event_type.TRAFFIC_SHIFTED
+        if sdk.flow_logger.get_recent_events()
+        else "TrafficShifted",
         source="TrafficFailoverManager",
         details={"service": req.service_name, "target_region": req.target_region},
         severity="WARN",

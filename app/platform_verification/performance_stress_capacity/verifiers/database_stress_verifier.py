@@ -39,9 +39,27 @@ class DatabaseStressVerifier(IPerformanceVerifier):
 
         # 1. Connection Pool Stress Test (100, 500, 1000 connections)
         conn_pool_tests = [
-            {"concurrency": 100, "active_conns": 98, "waiting_conns": 0, "pool_exhausted": False, "p95_acquire_ms": 1.2},
-            {"concurrency": 500, "active_conns": 490, "waiting_conns": 10, "pool_exhausted": False, "p95_acquire_ms": 3.8},
-            {"concurrency": 1000, "active_conns": 950, "waiting_conns": 50, "pool_exhausted": False, "p95_acquire_ms": 8.5},
+            {
+                "concurrency": 100,
+                "active_conns": 98,
+                "waiting_conns": 0,
+                "pool_exhausted": False,
+                "p95_acquire_ms": 1.2,
+            },
+            {
+                "concurrency": 500,
+                "active_conns": 490,
+                "waiting_conns": 10,
+                "pool_exhausted": False,
+                "p95_acquire_ms": 3.8,
+            },
+            {
+                "concurrency": 1000,
+                "active_conns": 950,
+                "waiting_conns": 50,
+                "pool_exhausted": False,
+                "p95_acquire_ms": 8.5,
+            },
         ]
         pool_stable = all(not t["pool_exhausted"] and t["p95_acquire_ms"] < 15.0 for t in conn_pool_tests)
         checks.append(

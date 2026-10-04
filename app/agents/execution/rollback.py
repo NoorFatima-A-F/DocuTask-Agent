@@ -46,7 +46,7 @@ class RollbackEngine:
             if node.state in (
                 ExecutionLifecycleState.COMPLETED,
                 ExecutionLifecycleState.FAILED,
-                ExecutionLifecycleState.RUNNING
+                ExecutionLifecycleState.RUNNING,
             ):
                 res = await self.rollback_node(node_id)
                 if res.success:

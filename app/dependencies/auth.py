@@ -14,19 +14,15 @@ from app.models.user import User
 from app.repositories.user_repository import UserRepository
 from app.dependencies.db import get_user_repository
 
-oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="/api/v1/auth/login",
-    auto_error=True
-)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login", auto_error=True)
 
 
 async def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    user_repo: UserRepository = Depends(get_user_repository)
+    token: str = Depends(oauth2_scheme), user_repo: UserRepository = Depends(get_user_repository)
 ) -> User:
     """
     Decodes Bearer access token and fetches current user entity.
-    
+
     :raises TokenException: If token is invalid or user does not exist
     """
     payload = decode_token(token, expected_type="access")
@@ -46,12 +42,10 @@ async def get_current_user(
     return user
 
 
-async def get_current_active_user(
-    current_user: User = Depends(get_current_user)
-) -> User:
+async def get_current_active_user(current_user: User = Depends(get_current_user)) -> User:
     """
     Ensures current authenticated user is active.
-    
+
     :raises AccessDeniedException: If user account is disabled/inactive
     """
     if not current_user.is_active:
@@ -59,12 +53,10 @@ async def get_current_active_user(
     return current_user
 
 
-async def get_current_superuser(
-    current_user: User = Depends(get_current_active_user)
-) -> User:
+async def get_current_superuser(current_user: User = Depends(get_current_active_user)) -> User:
     """
     Ensures current active user possesses administrative superuser privileges.
-    
+
     :raises AccessDeniedException: If user lacks superuser permissions
     """
     if not current_user.is_superuser:
@@ -81,16 +73,14 @@ class RoleChecker:
     def __call__(self, current_user: User = Depends(get_current_active_user)) -> User:
         """
         Validates user role against allowed_roles.
-        
+
         :raises AccessDeniedException: If user lacks permission
         """
         if current_user.is_superuser or current_user.role.lower() == "admin":
             return current_user
 
         if current_user.role.lower() not in self.allowed_roles:
-            raise AccessDeniedException(
-                f"User role '{current_user.role}' is not authorized to perform this operation"
-            )
+            raise AccessDeniedException(f"User role '{current_user.role}' is not authorized to perform this operation")
         return current_user
 
 

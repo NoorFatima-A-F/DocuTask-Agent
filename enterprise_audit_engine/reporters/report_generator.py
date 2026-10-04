@@ -28,20 +28,12 @@ class ReportGenerator:
     ) -> Dict[str, Path]:
         """Generates the full suite of Markdown due diligence reports."""
         generated: Dict[str, Path] = {}
-        generated["executive_summary"] = self._generate_executive_summary(
-            records, scorecards, metadata, exec_manifest
-        )
-        generated["technical_due_diligence"] = self._generate_technical_due_diligence(
-            records, scorecards, metadata
-        )
+        generated["executive_summary"] = self._generate_executive_summary(records, scorecards, metadata, exec_manifest)
+        generated["technical_due_diligence"] = self._generate_technical_due_diligence(records, scorecards, metadata)
         generated["security_report"] = self._generate_security_report(records, metadata)
-        generated["production_readiness_matrix"] = self._generate_production_readiness_matrix(
-            records, scorecards
-        )
+        generated["production_readiness_matrix"] = self._generate_production_readiness_matrix(records, scorecards)
         if provenance_data:
-            generated["provenance_manifest"] = self._generate_provenance_manifest(
-                provenance_data
-            )
+            generated["provenance_manifest"] = self._generate_provenance_manifest(provenance_data)
         return generated
 
     def _generate_executive_summary(
@@ -80,13 +72,15 @@ class ReportGenerator:
                     f"| **{sub}** | {card.source_inspection_score:.0f} | {card.automated_tests_score:.0f} | {card.runtime_execution_score:.0f} | {card.security_validation_score:.0f} | {card.benchmark_evidence_score:.0f} | {card.reproducibility_score:.0f} | **{card.total_score:.0f}** | `{card.classification.value}` | `{card.confidence.value}` |"
                 )
 
-        content.extend([
-            "",
-            "## 3. Collector Execution Health & Verifier Integrity",
-            "",
-            "| Collector Name | Attempted | Completed | Evidence Count | Duration (ms) | Status |",
-            "| :--- | :--- | :--- | :--- | :--- | :--- |",
-        ])
+        content.extend(
+            [
+                "",
+                "## 3. Collector Execution Health & Verifier Integrity",
+                "",
+                "| Collector Name | Attempted | Completed | Evidence Count | Duration (ms) | Status |",
+                "| :--- | :--- | :--- | :--- | :--- | :--- |",
+            ]
+        )
 
         if exec_manifest:
             for col in exec_manifest.collectors:
@@ -95,13 +89,15 @@ class ReportGenerator:
                     f"| `{col.collector_name}` | {col.execution_attempted} | {col.execution_completed} | {col.evidence_generated_count} | {col.duration_ms:.1f} | `{status}` |"
                 )
 
-        content.extend([
-            "",
-            "## 4. Evidence Registry & Cryptographic Hashes",
-            "",
-            "| Evidence ID | Category | Source Type | Classification | Confidence | SHA-256 Fingerprint | Summary |",
-            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
-        ])
+        content.extend(
+            [
+                "",
+                "## 4. Evidence Registry & Cryptographic Hashes",
+                "",
+                "| Evidence ID | Category | Source Type | Classification | Confidence | SHA-256 Fingerprint | Summary |",
+                "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
+            ]
+        )
 
         for r in records:
             short_hash = f"`{r.content_hash[:12]}...`" if r.content_hash else "None"
@@ -109,11 +105,13 @@ class ReportGenerator:
                 f"| `{r.id}` | {r.category} | `{r.source_type.value}` | `{r.classification.value}` | `{r.confidence.value}` | {short_hash} | {r.summary} |"
             )
 
-        content.extend([
-            "",
-            "---",
-            "*Report generated automatically by Enterprise Evidence Verification Engine (enterprise_audit_engine).* - Every claim is cryptographically linked to verifiable artifacts.",
-        ])
+        content.extend(
+            [
+                "",
+                "---",
+                "*Report generated automatically by Enterprise Evidence Verification Engine (enterprise_audit_engine).* - Every claim is cryptographically linked to verifiable artifacts.",
+            ]
+        )
 
         with open(target, "w", encoding="utf-8") as fp:
             fp.write("\n".join(content))
@@ -137,15 +135,17 @@ class ReportGenerator:
         ]
 
         for r in records:
-            content.extend([
-                f"### Evidence Item: `{r.id}` — {r.category}",
-                f"- **Collector**: `{r.collector}`",
-                f"- **Source Type**: `{r.source_type.value}`",
-                f"- **Classification**: `{r.classification.value}`",
-                f"- **Confidence Level**: `{r.confidence.value}`",
-                f"- **SHA-256 Fingerprint**: `{r.content_hash}`",
-                f"- **Summary**: {r.summary}",
-            ])
+            content.extend(
+                [
+                    f"### Evidence Item: `{r.id}` — {r.category}",
+                    f"- **Collector**: `{r.collector}`",
+                    f"- **Source Type**: `{r.source_type.value}`",
+                    f"- **Classification**: `{r.classification.value}`",
+                    f"- **Confidence Level**: `{r.confidence.value}`",
+                    f"- **SHA-256 Fingerprint**: `{r.content_hash}`",
+                    f"- **Summary**: {r.summary}",
+                ]
+            )
             if r.command:
                 content.append(f"- **Reproduction Command**: `{r.command}`")
             if r.artifact_paths:
@@ -156,9 +156,7 @@ class ReportGenerator:
             fp.write("\n".join(content))
         return target
 
-    def _generate_security_report(
-        self, records: List[EvidenceRecord], metadata: Optional[AuditRunMetadata]
-    ) -> Path:
+    def _generate_security_report(self, records: List[EvidenceRecord], metadata: Optional[AuditRunMetadata]) -> Path:
         target = self.reports_dir / "security_report.md"
         sec_records = [r for r in records if r.category in {"SecurityAndCompliance", "Security"}]
 
@@ -174,14 +172,16 @@ class ReportGenerator:
 
         if sec_records:
             for r in sec_records:
-                content.extend([
-                    f"### Security Finding: `{r.id}`",
-                    f"- **Classification**: `{r.classification.value}`",
-                    f"- **Confidence**: `{r.confidence.value}`",
-                    f"- **Summary**: {r.summary}",
-                    f"- **Cryptographic Hash**: `{r.content_hash}`",
-                    "",
-                ])
+                content.extend(
+                    [
+                        f"### Security Finding: `{r.id}`",
+                        f"- **Classification**: `{r.classification.value}`",
+                        f"- **Confidence**: `{r.confidence.value}`",
+                        f"- **Summary**: {r.summary}",
+                        f"- **Cryptographic Hash**: `{r.content_hash}`",
+                        "",
+                    ]
+                )
         else:
             content.append("No dedicated security records generated.")
 

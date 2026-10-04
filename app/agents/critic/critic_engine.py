@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class CriticReport:
     """Evaluation verdict produced by the CriticEngine."""
+
     id: str = field(default_factory=lambda: f"crit-{uuid.uuid4().hex[:10]}")
     score: float = 1.0  # 0.0 to 1.0
     is_approved: bool = True
@@ -91,8 +92,7 @@ class CriticEngine:
 
         # 4. Overall score
         overall_score = round(
-            (completeness * 0.3) + (evidence_score * 0.3) + (policy_score * 0.4) - (hallucination_risk * 0.2),
-            3
+            (completeness * 0.3) + (evidence_score * 0.3) + (policy_score * 0.4) - (hallucination_risk * 0.2), 3
         )
         overall_score = max(0.0, min(1.0, overall_score))
         is_approved = overall_score >= 0.70 and len(issues) == 0

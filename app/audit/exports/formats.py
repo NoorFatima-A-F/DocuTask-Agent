@@ -74,21 +74,23 @@ class AuditExporter:
 
         for ev in bundle.audit_events[:50]:  # Cap first 50 in preview
             actor_str = f"{ev.actor_id} ({ev.actor_type.value if hasattr(ev.actor_type, 'value') else ev.actor_type})"
-            outcome_str = ev.outcome.value if hasattr(ev.outcome, 'value') else str(ev.outcome)
-            sev_str = ev.severity.value if hasattr(ev.severity, 'value') else str(ev.severity)
+            outcome_str = ev.outcome.value if hasattr(ev.outcome, "value") else str(ev.outcome)
+            sev_str = ev.severity.value if hasattr(ev.severity, "value") else str(ev.severity)
             lines.append(
                 f"| {ev.timestamp.strftime('%Y-%m-%d %H:%M:%S')} | `{ev.event_id}` | {actor_str} | {ev.action} | {ev.resource_type}:{ev.resource_id} | {outcome_str} | {sev_str} |"
             )
 
-        lines.extend([
-            "",
-            "## 3. Evidence Artifacts",
-            "| Evidence ID | Name | Type | Source | SHA-256 Hash |",
-            "| :--- | :--- | :--- | :--- | :--- |",
-        ])
+        lines.extend(
+            [
+                "",
+                "## 3. Evidence Artifacts",
+                "| Evidence ID | Name | Type | Source | SHA-256 Hash |",
+                "| :--- | :--- | :--- | :--- | :--- |",
+            ]
+        )
 
         for art in bundle.artifacts:
-            type_str = art.evidence_type.value if hasattr(art.evidence_type, 'value') else str(art.evidence_type)
+            type_str = art.evidence_type.value if hasattr(art.evidence_type, "value") else str(art.evidence_type)
             lines.append(
                 f"| `{art.evidence_id}` | {art.name} | {type_str} | {art.source} | `{art.content_hash[:24]}...` |"
             )

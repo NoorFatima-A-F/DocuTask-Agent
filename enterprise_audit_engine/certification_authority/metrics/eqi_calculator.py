@@ -18,7 +18,7 @@ class EvidenceQualityIndexCalculator:
         verification_depth_map: Dict[str, float] = None,
     ) -> EQIBreakdown:
         total_records = len(records)
-        
+
         # 1. Evidence Coverage Score (max 25)
         coverage_score = (min(max(coverage_pct, 0.0), 100.0) / 100.0) * 25.0
 
@@ -29,7 +29,7 @@ class EvidenceQualityIndexCalculator:
         runtime_weight = depth_map.get("runtime", 0.9)
         test_weight = depth_map.get("testing", 1.0)
         security_weight = depth_map.get("security", 1.0)
-        
+
         avg_depth = (static_weight + runtime_weight + test_weight + security_weight) / 4.0
         depth_score = min(max(avg_depth, 0.0), 1.0) * 25.0
 

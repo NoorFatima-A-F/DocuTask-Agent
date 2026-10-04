@@ -1,6 +1,7 @@
 """
 Domain Layer for Automated Restore Verification (Part 3G.2E).
 """
+
 from app.platform_verification.restore_verification.domain.models import (
     RestoreExecutionMode,
     RestoreComponentType,

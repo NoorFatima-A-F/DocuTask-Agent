@@ -42,8 +42,8 @@ class ActionRiskLevel(str, Enum):
 
 
 class IncidentAutomationTier(str, Enum):
-    FAILED = "Failed"                                               # < 80
-    NEEDS_IMPROVEMENT = "Improvement Required"                     # 80 - 89
+    FAILED = "Failed"  # < 80
+    NEEDS_IMPROVEMENT = "Improvement Required"  # 80 - 89
     PRODUCTION_AUTOMATION_READY = "Production Incident Automation Ready"  # 90 - 94
     AUTONOMOUS_INCIDENT_RESPONSE_READY = "Autonomous Incident Response Ready"  # 95 - 100
 
@@ -275,14 +275,14 @@ class CICDPipelineReport:
 
 @dataclass
 class IncidentQualityScorecard:
-    detection_accuracy_score: float       # Weight 20%
-    recovery_automation_score: float      # Weight 20%
-    safety_controls_score: float          # Weight 20%
-    incident_diagnosis_score: float       # Weight 15%
-    operational_learning_score: float     # Weight 15%
-    security_score: float                 # Weight 10%
-    overall_score: float                  # Composite 0 - 100
+    detection_accuracy_score: float  # Weight 20%
+    recovery_automation_score: float  # Weight 20%
+    safety_controls_score: float  # Weight 20%
+    incident_diagnosis_score: float  # Weight 15%
+    operational_learning_score: float  # Weight 15%
+    security_score: float  # Weight 10%
+    overall_score: float  # Composite 0 - 100
     certification_tier: IncidentAutomationTier
-    certification_verdict: str            # CERTIFIED / REJECTED
+    certification_verdict: str  # CERTIFIED / REJECTED
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

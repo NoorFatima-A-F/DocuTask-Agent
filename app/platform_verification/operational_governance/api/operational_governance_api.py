@@ -1,10 +1,13 @@
 """
 Phase 3H.8: Operational Governance Verification FastAPI Endpoints
 """
+
 from fastapi import APIRouter, Query
 from typing import Dict, Any
 
-from app.platform_verification.operational_governance.runtime.operational_governance_runtime import OperationalGovernanceRuntime
+from app.platform_verification.operational_governance.runtime.operational_governance_runtime import (
+    OperationalGovernanceRuntime,
+)
 
 router = APIRouter(
     prefix="/api/v1/platform-verification/operational-governance",
@@ -15,7 +18,9 @@ _runtime = OperationalGovernanceRuntime()
 
 
 @router.post("/verify", summary="Execute Full Operational Governance Verification")
-async def run_governance_verification(export_evidence: bool = Query(True, description="Whether to export verification reports to disk")) -> Dict[str, Any]:
+async def run_governance_verification(
+    export_evidence: bool = Query(True, description="Whether to export verification reports to disk"),
+) -> Dict[str, Any]:
     result = _runtime.run_full_verification(export_evidence=export_evidence)
     return {
         "status": "SUCCESS",

@@ -2,6 +2,7 @@
 Physical Backup Verifier for PostgreSQL (Part 3G.2B).
 Verifies physical database backups (pg_basebackup, filesystem snapshots, CSI volumes).
 """
+
 import time
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
@@ -32,12 +33,7 @@ class PhysicalBackupVerifier(IPhysicalBackupVerifier):
         checkpoint_redo_lsn = "0/18A2B3C8"
         tablespaces = ["pg_default", "pg_global", "fast_ssd_index_tablespace"]
 
-        passed = (
-            data_directory_complete
-            and control_file_valid
-            and wal_segments_consistent
-            and timeline_history_valid
-        )
+        passed = data_directory_complete and control_file_valid and wal_segments_consistent and timeline_history_valid
 
         duration = round(time.perf_counter() - start_time + 0.15, 4)
 

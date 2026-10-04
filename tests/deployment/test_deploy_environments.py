@@ -1,4 +1,5 @@
 """Unit tests for Environment Promotion and Validation."""
+
 import pytest
 from app.deployment.core.controller import DeploymentController
 from app.deployment.core.exceptions import PromotionBlockedException
@@ -53,7 +54,7 @@ def test_promotion_manager_flow():
 
     # Approve
     prom_mgr.approve_promotion(record.promotion_id, role="qa_lead", approver_identity="qa_lead_user")
-    
+
     dep = prom_mgr.execute_promotion(
         promotion_id=record.promotion_id,
         controller=controller,

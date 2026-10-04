@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class JobStatusEnum(str, Enum):
     """Job processing lifecycle states."""
+
     QUEUED = "QUEUED"
     RUNNING = "RUNNING"
     COMPLETED = "COMPLETED"
@@ -21,6 +22,7 @@ class JobStatusEnum(str, Enum):
 
 class JobTypeEnum(str, Enum):
     """Types of asynchronous jobs."""
+
     DOCUMENT_PIPELINE = "DOCUMENT_PIPELINE"
     OCR_EXTRACTION = "OCR_EXTRACTION"
     AI_EXTRACTION = "AI_EXTRACTION"

@@ -1,6 +1,5 @@
 """Tests for Mesh SDK, Decorators, and FastAPI REST Endpoints."""
 
-
 from app.networking.api.routes import (
     register_service,
     list_services,

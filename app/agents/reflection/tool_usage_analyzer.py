@@ -21,7 +21,7 @@ class ToolUsageAnalyzer(IToolUsageAnalyzer):
                 "failed_calls": 0,
                 "reliability_rate": 1.0,
                 "tool_breakdown": {},
-                "slowest_tool": None
+                "slowest_tool": None,
             }
 
         successful = sum(1 for c in tool_events if c.get("success", True))
@@ -54,5 +54,5 @@ class ToolUsageAnalyzer(IToolUsageAnalyzer):
             "failed_calls": failed,
             "reliability_rate": successful / total_calls,
             "tool_breakdown": breakdown,
-            "slowest_tool": slowest_tool
+            "slowest_tool": slowest_tool,
         }

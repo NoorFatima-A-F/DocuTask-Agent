@@ -3,13 +3,16 @@ Service Recovery Orchestrator & Validator (Parts 3H.3.3.6 & 3H.3.3.9).
 Orchestrates automated recovery decisions (e.g. worker recycling, pool reconnection, fallback mode),
 validates all prerequisite conditions in the RECOVERING state, and promotes healthy services back to READY.
 """
+
 import time
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
     RecoveryActionType,
     RecoveryValidationReport,
 )
-from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import HealthStateMachine
+from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import (
+    HealthStateMachine,
+)
 
 
 class ServiceRecoveryOrchestrator:

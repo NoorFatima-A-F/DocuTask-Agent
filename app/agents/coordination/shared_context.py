@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class SharedContextRecord(BaseModel):
     """Immutable data record in shared multi-agent context."""
+
     key: str
     value: Any
     producer_agent_id: UUID
@@ -37,10 +38,7 @@ class SharedContext:
         """Publishes or updates a key in shared context with incremented version."""
         current_version = self._entries[key].version if key in self._entries else 0
         self._entries[key] = SharedContextRecord(
-            key=key,
-            value=value,
-            producer_agent_id=producer_id,
-            version=current_version + 1
+            key=key, value=value, producer_agent_id=producer_id, version=current_version + 1
         )
 
     def list_keys(self) -> List[str]:

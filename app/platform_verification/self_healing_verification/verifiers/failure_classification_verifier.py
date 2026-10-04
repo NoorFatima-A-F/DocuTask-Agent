@@ -1,6 +1,7 @@
 """
 Phase 3H.5.2: Failure Classification Verifier
 """
+
 from ..domain.interfaces import IFailureClassificationVerifier
 from ..domain.models import (
     FailureClassificationReport,

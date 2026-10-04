@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class KnowledgeLifecycleEvent(BaseModel):
     """Immutable audit record emitted during a knowledge object lifecycle state transition."""
+
     event_id: str
     knowledge_id: str
     from_state: KnowledgeLifecycleState
@@ -65,11 +66,11 @@ class KnowledgeLifecycleManager:
             KnowledgeLifecycleState.ARCHIVED,
         },
         KnowledgeLifecycleState.SUPERSEDED: {
-            KnowledgeLifecycleState.ACTIVE,   # Rollback
+            KnowledgeLifecycleState.ACTIVE,  # Rollback
             KnowledgeLifecycleState.ARCHIVED,
         },
         KnowledgeLifecycleState.ARCHIVED: {
-            KnowledgeLifecycleState.ACTIVE,   # Restoration
+            KnowledgeLifecycleState.ACTIVE,  # Restoration
             KnowledgeLifecycleState.CREATED,
         },
     }
@@ -79,7 +80,9 @@ class KnowledgeLifecycleManager:
         self._listener = event_listener
         self._metrics: Dict[str, int] = {status.value: 0 for status in KnowledgeLifecycleState}
 
-    def can_transition(self, from_state: KnowledgeLifecycleState | str, to_state: KnowledgeLifecycleState | str) -> bool:
+    def can_transition(
+        self, from_state: KnowledgeLifecycleState | str, to_state: KnowledgeLifecycleState | str
+    ) -> bool:
         """Checks if a transition between two lifecycle states is valid."""
         f_state = from_state if isinstance(from_state, KnowledgeLifecycleState) else KnowledgeLifecycleState(from_state)
         t_state = to_state if isinstance(to_state, KnowledgeLifecycleState) else KnowledgeLifecycleState(to_state)
@@ -97,8 +100,14 @@ class KnowledgeLifecycleManager:
         Executes a validated state transition on a KnowledgeObject, updates timestamps,
         appends to audit history, and emits lifecycle notifications.
         """
-        current_state = knowledge_object.status if isinstance(knowledge_object.status, KnowledgeLifecycleState) else KnowledgeLifecycleState(knowledge_object.status)
-        to_state = target_state if isinstance(target_state, KnowledgeLifecycleState) else KnowledgeLifecycleState(target_state)
+        current_state = (
+            knowledge_object.status
+            if isinstance(knowledge_object.status, KnowledgeLifecycleState)
+            else KnowledgeLifecycleState(knowledge_object.status)
+        )
+        to_state = (
+            target_state if isinstance(target_state, KnowledgeLifecycleState) else KnowledgeLifecycleState(target_state)
+        )
 
         if not self.can_transition(current_state, to_state):
             msg = f"Illegal transition for knowledge object '{knowledge_object.id}' from {current_state.value} to {to_state.value}"
@@ -106,6 +115,7 @@ class KnowledgeLifecycleManager:
             raise InvalidKnowledgeStateError(msg, knowledge_id=knowledge_object.id)
 
         import uuid
+
         event = KnowledgeLifecycleEvent(
             event_id=f"klevt-{uuid.uuid4().hex[:10]}",
             knowledge_id=knowledge_object.id,
@@ -131,7 +141,9 @@ class KnowledgeLifecycleManager:
             except Exception as e:
                 logger.warning(f"Error in knowledge lifecycle listener: {e}")
 
-        logger.info(f"Knowledge object '{knowledge_object.id}' transitioned {current_state.value} -> {to_state.value}: {reason}")
+        logger.info(
+            f"Knowledge object '{knowledge_object.id}' transitioned {current_state.value} -> {to_state.value}: {reason}"
+        )
         return event
 
     def get_history(self, knowledge_id: str) -> List[KnowledgeLifecycleEvent]:

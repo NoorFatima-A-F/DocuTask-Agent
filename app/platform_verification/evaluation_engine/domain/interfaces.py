@@ -1,6 +1,7 @@
 """
 Standardized interfaces for Enterprise Verification Metrics, Evaluation & Scoring Framework.
 """
+
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
@@ -72,7 +73,11 @@ class ISampleSizeValidator(ABC):
 class IBenchmarkComparator(ABC):
     @abstractmethod
     def compare(
-        self, candidate_results: List[MetricResult], baseline_results: List[MetricResult], system_version: str, baseline_version: str
+        self,
+        candidate_results: List[MetricResult],
+        baseline_results: List[MetricResult],
+        system_version: str,
+        baseline_version: str,
     ) -> List[BenchmarkRecord]:
         pass
 
@@ -87,9 +92,7 @@ class IScoringEngine(ABC):
 
 class IQualityGateEngine(ABC):
     @abstractmethod
-    def evaluate_gate(
-        self, metric_results: List[MetricResult], rules: List[QualityGateRule]
-    ) -> QualityGateDecision:
+    def evaluate_gate(self, metric_results: List[MetricResult], rules: List[QualityGateRule]) -> QualityGateDecision:
         pass
 
 

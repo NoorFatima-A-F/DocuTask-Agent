@@ -1,6 +1,7 @@
 """
 Phase 3H.5.6 Domain Module
 """
+
 from .models import (
     FailureSeverity,
     AutonomyLevel,

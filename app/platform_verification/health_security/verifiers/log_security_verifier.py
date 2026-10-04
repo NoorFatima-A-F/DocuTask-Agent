@@ -1,6 +1,7 @@
 """
 Phase 3H.5.10.4: Operational Log Sanitization & PII Protection Verification
 """
+
 import re
 from typing import List, Dict, Any
 from ..domain.models import (
@@ -68,7 +69,12 @@ class LogSecurityVerifier(ILogSecurityVerifier):
         for item in test_inputs:
             sanitized = self.sanitize_log_text(item["raw"])
             clean = True
-            for sensitive in ["SuperSecretPass123!", "35201-1234567-1", "john.doe@example.com", "sk-proj-998877665544332211"]:
+            for sensitive in [
+                "SuperSecretPass123!",
+                "35201-1234567-1",
+                "john.doe@example.com",
+                "sk-proj-998877665544332211",
+            ]:
                 if sensitive in sanitized:
                     clean = False
 
@@ -78,7 +84,9 @@ class LogSecurityVerifier(ILogSecurityVerifier):
                     category=item["cat"],
                     raw_snippet=item["raw"][:60] + "...",
                     sanitized_snippet=sanitized,
-                    redaction_state=RedactionState.FULLY_REDACTED if item["expected_redacted"] else RedactionState.MASKED,
+                    redaction_state=RedactionState.FULLY_REDACTED
+                    if item["expected_redacted"]
+                    else RedactionState.MASKED,
                     redacted_patterns=item["expected_redacted"],
                     clean=clean,
                 )

@@ -269,10 +269,10 @@ class CaseStudyResult:
 
 @dataclass
 class MasterBusinessValueScore:
-    automation_score: float      # Weight: 25%
-    roi_score: float             # Weight: 30%
-    efficiency_score: float      # Weight: 25%
-    adoption_score: float        # Weight: 20%
+    automation_score: float  # Weight: 25%
+    roi_score: float  # Weight: 30%
+    efficiency_score: float  # Weight: 25%
+    adoption_score: float  # Weight: 20%
     overall_business_score: float
     grade: str
     validation_status: str

@@ -8,6 +8,7 @@ import uuid
 
 class ReviewComment(BaseModel):
     """Comment or deliberation note attached to a human review request."""
+
     comment_id: str = Field(default_factory=lambda: f"cmt_{uuid.uuid4().hex[:8]}")
     review_id: str
     tenant_id: str

@@ -13,7 +13,7 @@ from app.runtime.operations.events.operation_events import SubsystemType
 class SubsystemHealthReport:
     subsystem: SubsystemType
     score: float  # 0.0 - 100.0
-    status: str   # HEALTHY, DEGRADED, CRITICAL, FAILING
+    status: str  # HEALTHY, DEGRADED, CRITICAL, FAILING
     metrics: Dict[str, float] = field(default_factory=dict)
     active_issues: List[str] = field(default_factory=list)
     evaluated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -47,7 +47,12 @@ class SubsystemHealthEvaluator:
         unresponsive_tasks: int = 0,
     ) -> SubsystemHealthReport:
         # Score calculation: base 100 minus penalties
-        penalty = (error_rate * 50.0) + (max(0.0, latency_p95_ms - 500.0) / 50.0) + (max(0.0, saturation_pct - 75.0) * 0.8) + (unresponsive_tasks * 15.0)
+        penalty = (
+            (error_rate * 50.0)
+            + (max(0.0, latency_p95_ms - 500.0) / 50.0)
+            + (max(0.0, saturation_pct - 75.0) * 0.8)
+            + (unresponsive_tasks * 15.0)
+        )
         score = max(0.0, min(100.0, 100.0 - penalty))
 
         if score >= 90.0:

@@ -15,7 +15,9 @@ class AccuracyComparator:
         human_missed_anomalies_pct: float = 14.5,
         ai_caught_anomalies_pct: float = 98.8,
     ) -> AccuracyComparison:
-        quality_improvement = ((human_error_pct - ai_error_pct) / human_error_pct * 100.0) if human_error_pct > 0 else 0.0
+        quality_improvement = (
+            ((human_error_pct - ai_error_pct) / human_error_pct * 100.0) if human_error_pct > 0 else 0.0
+        )
 
         return AccuracyComparison(
             human_field_error_rate_pct=human_error_pct,

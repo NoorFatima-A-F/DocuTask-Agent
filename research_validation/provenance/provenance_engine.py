@@ -20,9 +20,7 @@ from research_validation.provenance.evidence_graph import EvidenceGraph
 from research_validation.provenance.evidence_store import EvidenceStore
 from research_validation.provenance.lineage_tracker import CompleteLineageChain, LineageTracker
 from research_validation.provenance.provenance_api import ProvenanceAPI
-from research_validation.provenance.provenance_models import (
-    EvidenceQualityLevel
-)
+from research_validation.provenance.provenance_models import EvidenceQualityLevel
 
 
 class ProvenanceEngine:
@@ -46,14 +44,13 @@ class ProvenanceEngine:
         metric_name: str,
         report_title: str,
         quality_level: EvidenceQualityLevel = EvidenceQualityLevel.LEVEL_B,
-        signer_key: Optional[str] = None
+        signer_key: Optional[str] = None,
     ) -> CompleteLineageChain:
         """
         Record a full 7-stage verifiable lineage pipeline and store each node immutably.
         """
         signer = ProvenanceSigner(
-            key_id="KEY-PROV-MASTER",
-            secret_or_private_key=signer_key or "rvisf_internal_verification_key_sec256"
+            key_id="KEY-PROV-MASTER", secret_or_private_key=signer_key or "rvisf_internal_verification_key_sec256"
         )
         chain = self.tracker.create_canonical_lineage_chain(
             chain_name=chain_name,
@@ -63,7 +60,7 @@ class ProvenanceEngine:
             metric_name=metric_name,
             report_title=report_title,
             quality_level=quality_level,
-            signer=signer
+            signer=signer,
         )
 
         # Append all nodes to the immutable evidence store
@@ -74,7 +71,7 @@ class ProvenanceEngine:
             chain.aggregation_node,
             chain.final_metric_node,
             chain.scientific_report_node,
-            chain.digital_signature_node
+            chain.digital_signature_node,
         ]:
             self.store.store_evidence_node(node)
 
@@ -93,7 +90,7 @@ class ProvenanceEngine:
                 "weighted_readiness_score": 0.0,
                 "overall_quality_grade": EvidenceQualityLevel.LEVEL_E.value,
                 "quality_distribution": {},
-                "is_ready_for_external_review": False
+                "is_ready_for_external_review": False,
             }
 
         counts: Dict[str, int] = {}
@@ -105,10 +102,14 @@ class ProvenanceEngine:
 
         mean_weight = total_weight / len(nodes)
         grade = (
-            EvidenceQualityLevel.LEVEL_A if mean_weight >= 0.95
-            else EvidenceQualityLevel.LEVEL_B if mean_weight >= 0.80
-            else EvidenceQualityLevel.LEVEL_C if mean_weight >= 0.65
-            else EvidenceQualityLevel.LEVEL_D if mean_weight >= 0.35
+            EvidenceQualityLevel.LEVEL_A
+            if mean_weight >= 0.95
+            else EvidenceQualityLevel.LEVEL_B
+            if mean_weight >= 0.80
+            else EvidenceQualityLevel.LEVEL_C
+            if mean_weight >= 0.65
+            else EvidenceQualityLevel.LEVEL_D
+            if mean_weight >= 0.35
             else EvidenceQualityLevel.LEVEL_E
         )
 
@@ -121,5 +122,5 @@ class ProvenanceEngine:
             "overall_quality_grade": grade.value,
             "quality_distribution": counts,
             "merkle_dag_integrity": audit.is_valid,
-            "is_ready_for_external_review": audit.is_valid and mean_weight >= 0.65
+            "is_ready_for_external_review": audit.is_valid and mean_weight >= 0.65,
         }

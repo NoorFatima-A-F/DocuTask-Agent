@@ -55,7 +55,9 @@ class IncidentManager(IIncidentManager):
             ),
         ]
 
-        active_count = sum(1 for i in incidents if i.status not in [IncidentStatus.RESOLVED, IncidentStatus.POSTMORTEM_COMPLETED])
+        active_count = sum(
+            1 for i in incidents if i.status not in [IncidentStatus.RESOLVED, IncidentStatus.POSTMORTEM_COMPLETED]
+        )
         resolved_count = len(incidents) - active_count
         sev1 = sum(1 for i in incidents if i.severity == IncidentSeverity.SEV1_CRITICAL)
         sev2 = sum(1 for i in incidents if i.severity == IncidentSeverity.SEV2_MAJOR)

@@ -19,7 +19,9 @@ class HazardRateModel:
         return baseline_hazard * covariate_factor * time_acceleration
 
     @staticmethod
-    def survival_curve(max_time_ms: float = 10000.0, steps: int = 10, covariate_factor: float = 1.0) -> List[Dict[str, float]]:
+    def survival_curve(
+        max_time_ms: float = 10000.0, steps: int = 10, covariate_factor: float = 1.0
+    ) -> List[Dict[str, float]]:
         """Generates survival curve S(t) points over execution horizon."""
         curve = []
         dt = max_time_ms / float(steps)
@@ -30,10 +32,12 @@ class HazardRateModel:
             h = HazardRateModel.hazard_rate(t, covariate_factor=covariate_factor)
             cum_hazard += h * (dt / 1000.0)
             survival = math.exp(-cum_hazard)
-            curve.append({
-                "time_ms": round(t, 1),
-                "hazard_rate": round(h, 6),
-                "survival_probability": round(max(0.0, min(1.0, survival)), 4),
-            })
+            curve.append(
+                {
+                    "time_ms": round(t, 1),
+                    "hazard_rate": round(h, 6),
+                    "survival_probability": round(max(0.0, min(1.0, survival)), 4),
+                }
+            )
 
         return curve

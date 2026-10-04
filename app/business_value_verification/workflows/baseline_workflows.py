@@ -98,7 +98,9 @@ class WorkflowModelFactory:
             steps=[
                 WorkflowStep("Multi-page Layout Parsing", ProcessStepType.AUTONOMOUS_AI, 2.5, 0.0, 0.1, 0.006),
                 WorkflowStep("Clause & Entity Extraction", ProcessStepType.AUTONOMOUS_AI, 3.5, 0.0, 0.1, 0.012),
-                WorkflowStep("Risk Classification & Redline Agent", ProcessStepType.AUTONOMOUS_AI, 2.0, 10.0, 0.2, 0.005),
+                WorkflowStep(
+                    "Risk Classification & Redline Agent", ProcessStepType.AUTONOMOUS_AI, 2.0, 10.0, 0.2, 0.005
+                ),
             ],
             total_duration_minutes=0.133,  # 8.0 seconds
             total_cost_usd=0.0230,
@@ -141,8 +143,12 @@ class WorkflowModelFactory:
             is_ai_system=True,
             steps=[
                 WorkflowStep("Automated ATS Ingestion", ProcessStepType.AUTONOMOUS_AI, 0.5, 0.0, 0.05, 0.0010),
-                WorkflowStep("Semantic Skill & Experience Extraction", ProcessStepType.AUTONOMOUS_AI, 1.5, 0.0, 0.05, 0.0025),
-                WorkflowStep("Job Fit Scoring & Shortlist Generation", ProcessStepType.AUTONOMOUS_AI, 0.5, 0.0, 0.05, 0.0010),
+                WorkflowStep(
+                    "Semantic Skill & Experience Extraction", ProcessStepType.AUTONOMOUS_AI, 1.5, 0.0, 0.05, 0.0025
+                ),
+                WorkflowStep(
+                    "Job Fit Scoring & Shortlist Generation", ProcessStepType.AUTONOMOUS_AI, 0.5, 0.0, 0.05, 0.0010
+                ),
             ],
             total_duration_minutes=0.042,  # 2.5 seconds
             total_cost_usd=0.0045,
@@ -185,8 +191,12 @@ class WorkflowModelFactory:
             is_ai_system=True,
             steps=[
                 WorkflowStep("Multimodal Clinical OCR", ProcessStepType.AUTONOMOUS_AI, 2.0, 0.0, 0.05, 0.0040),
-                WorkflowStep("Medical Entity & ICD-10 Extraction", ProcessStepType.AUTONOMOUS_AI, 2.5, 0.0, 0.05, 0.0080),
-                WorkflowStep("Formulary & Clinical Policy Matcher", ProcessStepType.AUTONOMOUS_AI, 1.5, 5.0, 0.05, 0.0040),
+                WorkflowStep(
+                    "Medical Entity & ICD-10 Extraction", ProcessStepType.AUTONOMOUS_AI, 2.5, 0.0, 0.05, 0.0080
+                ),
+                WorkflowStep(
+                    "Formulary & Clinical Policy Matcher", ProcessStepType.AUTONOMOUS_AI, 1.5, 5.0, 0.05, 0.0040
+                ),
             ],
             total_duration_minutes=0.10,  # 6.0 seconds
             total_cost_usd=0.0160,

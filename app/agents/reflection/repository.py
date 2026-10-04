@@ -95,10 +95,7 @@ class InMemoryRecommendationRepository(RecommendationRepository):
         self._recommendations[rec.recommendation_id] = rec
 
     async def get_by_subsystem(self, subsystem: str) -> List[Recommendation]:
-        return [
-            r for r in self._recommendations.values()
-            if r.target_subsystem.value == subsystem
-        ]
+        return [r for r in self._recommendations.values() if r.target_subsystem.value == subsystem]
 
 
 class InMemoryEvaluationRepository(EvaluationRepository):

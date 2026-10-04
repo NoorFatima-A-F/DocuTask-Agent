@@ -1,11 +1,13 @@
 """
 Software Bill of Materials (SBOM) Generator (CycloneDX 1.5 and SPDX 2.3).
 """
+
 import hashlib
 import json
 from typing import Dict, Any
 from app.platform_verification.config_versioning.domain.models import SBOMManifest
 from app.platform_verification.config_versioning.core.dependency_registry import dependency_registry
+
 
 class SBOMGenerator:
     @staticmethod
@@ -24,7 +26,7 @@ class SBOMGenerator:
             direct_dependencies_count=direct_count,
             transitive_dependencies_count=transitive_count,
             components=deps,
-            sha256_bom_hash=bom_hash
+            sha256_bom_hash=bom_hash,
         )
 
     @staticmethod
@@ -43,7 +45,7 @@ class SBOMGenerator:
             direct_dependencies_count=direct_count,
             transitive_dependencies_count=transitive_count,
             components=deps,
-            sha256_bom_hash=bom_hash
+            sha256_bom_hash=bom_hash,
         )
 
     @staticmethod
@@ -57,11 +59,7 @@ class SBOMGenerator:
             "metadata": {
                 "timestamp": manifest.timestamp,
                 "tools": [{"name": "DocuTask Enterprise SBOM Generator", "version": "2.0.0"}],
-                "component": {
-                    "name": "DocuTask Agent Enterprise Platform",
-                    "version": "2.0.0",
-                    "type": "application"
-                }
+                "component": {"name": "DocuTask Agent Enterprise Platform", "version": "2.0.0", "type": "application"},
             },
             "components": [
                 {
@@ -69,10 +67,11 @@ class SBOMGenerator:
                     "version": c.version,
                     "type": "library" if c.category.value == "PYTHON_PACKAGE" else "application",
                     "purl": f"pkg:pypi/{c.name}@{c.version}",
-                    "licenses": [{"license": {"id": c.license}}]
+                    "licenses": [{"license": {"id": c.license}}],
                 }
                 for c in manifest.components
-            ]
+            ],
         }
+
 
 sbom_generator = SBOMGenerator()

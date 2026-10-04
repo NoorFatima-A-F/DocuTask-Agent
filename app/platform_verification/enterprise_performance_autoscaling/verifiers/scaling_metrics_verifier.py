@@ -26,22 +26,92 @@ class ScalingMetricsVerifier(IScalingMetricsVerifier):
 
     def verify(self) -> ScalingMetricsReport:
         worker_metrics = [
-            ScalingMetric(metric_name="queue_depth", target_component="Worker Pool", current_value=320.0, scale_up_threshold=1000.0, scale_down_threshold=100.0, unit="jobs"),
-            ScalingMetric(metric_name="job_wait_time_sec", target_component="Worker Pool", current_value=2.4, scale_up_threshold=15.0, scale_down_threshold=1.0, unit="seconds"),
-            ScalingMetric(metric_name="worker_utilization_pct", target_component="Worker Pool", current_value=62.0, scale_up_threshold=80.0, scale_down_threshold=30.0, unit="%"),
-            ScalingMetric(metric_name="processing_latency_sec", target_component="Worker Pool", current_value=2.56, scale_up_threshold=5.0, scale_down_threshold=1.5, unit="seconds"),
+            ScalingMetric(
+                metric_name="queue_depth",
+                target_component="Worker Pool",
+                current_value=320.0,
+                scale_up_threshold=1000.0,
+                scale_down_threshold=100.0,
+                unit="jobs",
+            ),
+            ScalingMetric(
+                metric_name="job_wait_time_sec",
+                target_component="Worker Pool",
+                current_value=2.4,
+                scale_up_threshold=15.0,
+                scale_down_threshold=1.0,
+                unit="seconds",
+            ),
+            ScalingMetric(
+                metric_name="worker_utilization_pct",
+                target_component="Worker Pool",
+                current_value=62.0,
+                scale_up_threshold=80.0,
+                scale_down_threshold=30.0,
+                unit="%",
+            ),
+            ScalingMetric(
+                metric_name="processing_latency_sec",
+                target_component="Worker Pool",
+                current_value=2.56,
+                scale_up_threshold=5.0,
+                scale_down_threshold=1.5,
+                unit="seconds",
+            ),
         ]
 
         api_metrics = [
-            ScalingMetric(metric_name="requests_per_sec", target_component="API Gateway", current_value=450.0, scale_up_threshold=1200.0, scale_down_threshold=200.0, unit="req/s"),
-            ScalingMetric(metric_name="p95_latency_ms", target_component="API Gateway", current_value=42.0, scale_up_threshold=200.0, scale_down_threshold=50.0, unit="ms"),
-            ScalingMetric(metric_name="cpu_usage_pct", target_component="API Gateway", current_value=38.5, scale_up_threshold=75.0, scale_down_threshold=25.0, unit="%"),
+            ScalingMetric(
+                metric_name="requests_per_sec",
+                target_component="API Gateway",
+                current_value=450.0,
+                scale_up_threshold=1200.0,
+                scale_down_threshold=200.0,
+                unit="req/s",
+            ),
+            ScalingMetric(
+                metric_name="p95_latency_ms",
+                target_component="API Gateway",
+                current_value=42.0,
+                scale_up_threshold=200.0,
+                scale_down_threshold=50.0,
+                unit="ms",
+            ),
+            ScalingMetric(
+                metric_name="cpu_usage_pct",
+                target_component="API Gateway",
+                current_value=38.5,
+                scale_up_threshold=75.0,
+                scale_down_threshold=25.0,
+                unit="%",
+            ),
         ]
 
         database_metrics = [
-            ScalingMetric(metric_name="active_connections", target_component="PostgreSQL", current_value=42.0, scale_up_threshold=80.0, scale_down_threshold=15.0, unit="conns"),
-            ScalingMetric(metric_name="query_p95_latency_ms", target_component="PostgreSQL", current_value=15.2, scale_up_threshold=50.0, scale_down_threshold=10.0, unit="ms"),
-            ScalingMetric(metric_name="deadlocks_per_min", target_component="PostgreSQL", current_value=0.0, scale_up_threshold=1.0, scale_down_threshold=0.0, unit="events"),
+            ScalingMetric(
+                metric_name="active_connections",
+                target_component="PostgreSQL",
+                current_value=42.0,
+                scale_up_threshold=80.0,
+                scale_down_threshold=15.0,
+                unit="conns",
+            ),
+            ScalingMetric(
+                metric_name="query_p95_latency_ms",
+                target_component="PostgreSQL",
+                current_value=15.2,
+                scale_up_threshold=50.0,
+                scale_down_threshold=10.0,
+                unit="ms",
+            ),
+            ScalingMetric(
+                metric_name="deadlocks_per_min",
+                target_component="PostgreSQL",
+                current_value=0.0,
+                scale_up_threshold=1.0,
+                scale_down_threshold=0.0,
+                unit="events",
+            ),
         ]
 
         checks: List[CheckResult] = [

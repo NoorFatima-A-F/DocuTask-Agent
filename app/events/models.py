@@ -11,6 +11,7 @@ import uuid
 @dataclass(frozen=True)
 class CloudEventEnvelope:
     """Standardized CloudEvents 1.0 compliant message envelope."""
+
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     type: str = "platform.event"
     source: str = "/docutask/platform"

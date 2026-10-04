@@ -21,6 +21,7 @@ class Comparator(str, Enum):
 @dataclass(frozen=True)
 class SuccessCriterion:
     """A single measurable criterion required for goal fulfillment."""
+
     metric_name: str
     comparator: Comparator
     target_value: float

@@ -3,7 +3,6 @@ AI System Card Generator for DocuTask Agent.
 """
 
 
-
 class SystemCardGenerator:
     """Generates the official AI System Card specification markdown."""
 

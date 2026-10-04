@@ -1,6 +1,7 @@
 """
 Phase 3H.5.10.6: Distributed Tracing Privacy & Payload Protection Verification
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     TraceSecurityReport,

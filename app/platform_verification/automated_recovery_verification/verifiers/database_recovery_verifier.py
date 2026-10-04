@@ -1,6 +1,7 @@
 """
 3H.12.4: Database Recovery Verifier
 """
+
 from ..domain.models import DatabaseRecoveryReport
 from ..domain.interfaces import IDatabaseRecoveryVerifier
 
@@ -21,5 +22,5 @@ class DatabaseRecoveryVerifier(IDatabaseRecoveryVerifier):
             recovered_transactions_count=142,
             corrupted_state_detected=False,
             recovery_duration_seconds=3.2,
-            database_recovery_passed=True
+            database_recovery_passed=True,
         )

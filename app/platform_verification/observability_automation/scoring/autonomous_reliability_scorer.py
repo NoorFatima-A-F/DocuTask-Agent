@@ -8,6 +8,7 @@ Calculates weighted scores across the 6 enterprise autonomous operations pillars
 5. Human Control (10%)
 6. Learning Capability (15%)
 """
+
 from typing import List
 from ..domain.interfaces import IAutonomousReliabilityScorer
 from ..domain.models import (
@@ -48,11 +49,15 @@ class AutonomousReliabilityScorer(IAutonomousReliabilityScorer):
         pillar_scores: List[AutonomousPillarScore] = []
 
         # Pillar 1: Detection Accuracy (20%)
-        p1_achieved = 100.0 if (
-            anomaly_report.detection_accuracy_pct >= 95.0
-            and arch_report.status == "PASS"
-            and len(arch_report.components) == 8
-        ) else 85.0
+        p1_achieved = (
+            100.0
+            if (
+                anomaly_report.detection_accuracy_pct >= 95.0
+                and arch_report.status == "PASS"
+                and len(arch_report.components) == 8
+            )
+            else 85.0
+        )
         p1_weighted = round((p1_achieved * 20.0) / 100.0, 2)
         pillar_scores.append(
             AutonomousPillarScore(
@@ -65,11 +70,15 @@ class AutonomousReliabilityScorer(IAutonomousReliabilityScorer):
         )
 
         # Pillar 2: Root Cause Analysis (20%)
-        p2_achieved = 100.0 if (
-            corr_report.correlation_verified
-            and rca_report.status == "PASS"
-            and any(h.confidence >= 0.90 for h in rca_report.hypotheses)
-        ) else 85.0
+        p2_achieved = (
+            100.0
+            if (
+                corr_report.correlation_verified
+                and rca_report.status == "PASS"
+                and any(h.confidence >= 0.90 for h in rca_report.hypotheses)
+            )
+            else 85.0
+        )
         p2_weighted = round((p2_achieved * 20.0) / 100.0, 2)
         pillar_scores.append(
             AutonomousPillarScore(
@@ -82,11 +91,15 @@ class AutonomousReliabilityScorer(IAutonomousReliabilityScorer):
         )
 
         # Pillar 3: Safe Remediation (20%)
-        p3_achieved = 100.0 if (
-            remediation_report.all_actions_verified
-            and safety_report.guardrails_enforced
-            and safety_report.zero_unauthorized_high_risk_actions
-        ) else 88.0
+        p3_achieved = (
+            100.0
+            if (
+                remediation_report.all_actions_verified
+                and safety_report.guardrails_enforced
+                and safety_report.zero_unauthorized_high_risk_actions
+            )
+            else 88.0
+        )
         p3_weighted = round((p3_achieved * 20.0) / 100.0, 2)
         pillar_scores.append(
             AutonomousPillarScore(
@@ -99,11 +112,15 @@ class AutonomousReliabilityScorer(IAutonomousReliabilityScorer):
         )
 
         # Pillar 4: Recovery Automation (15%)
-        p4_achieved = 100.0 if (
-            healing_report.all_healing_loops_verified
-            and incident_report.lifecycle_automated
-            and incident_report.postmortem_automation_verified
-        ) else 80.0
+        p4_achieved = (
+            100.0
+            if (
+                healing_report.all_healing_loops_verified
+                and incident_report.lifecycle_automated
+                and incident_report.postmortem_automation_verified
+            )
+            else 80.0
+        )
         p4_weighted = round((p4_achieved * 15.0) / 100.0, 2)
         pillar_scores.append(
             AutonomousPillarScore(
@@ -116,10 +133,7 @@ class AutonomousReliabilityScorer(IAutonomousReliabilityScorer):
         )
 
         # Pillar 5: Human Control (10%)
-        p5_achieved = 100.0 if (
-            human_report.human_oversight_enforced
-            and dash_report.dashboards_active
-        ) else 85.0
+        p5_achieved = 100.0 if (human_report.human_oversight_enforced and dash_report.dashboards_active) else 85.0
         p5_weighted = round((p5_achieved * 10.0) / 100.0, 2)
         pillar_scores.append(
             AutonomousPillarScore(
@@ -132,11 +146,15 @@ class AutonomousReliabilityScorer(IAutonomousReliabilityScorer):
         )
 
         # Pillar 6: Learning Capability (15%)
-        p6_achieved = 100.0 if (
-            learning_report.knowledge_base_active
-            and learning_report.recurrence_prevention_score_pct >= 95.0
-            and testing_report.all_simulations_passed
-        ) else 80.0
+        p6_achieved = (
+            100.0
+            if (
+                learning_report.knowledge_base_active
+                and learning_report.recurrence_prevention_score_pct >= 95.0
+                and testing_report.all_simulations_passed
+            )
+            else 80.0
+        )
         p6_weighted = round((p6_achieved * 15.0) / 100.0, 2)
         pillar_scores.append(
             AutonomousPillarScore(

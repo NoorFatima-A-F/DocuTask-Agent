@@ -26,12 +26,7 @@ class CertificationGate:
         critical_risks: int = 0,
     ) -> CertificationDecisionStatus:
         """Evaluates formal enterprise gate boolean criteria."""
-        if (
-            enterprise_score >= 90.0
-            and security_score >= 90.0
-            and reliability_score >= 85.0
-            and critical_risks == 0
-        ):
+        if enterprise_score >= 90.0 and security_score >= 90.0 and reliability_score >= 85.0 and critical_risks == 0:
             return CertificationDecisionStatus.APPROVED_FOR_PRODUCTION
         elif enterprise_score >= 75.0 and critical_risks == 0:
             return CertificationDecisionStatus.APPROVED_WITH_CONDITIONS

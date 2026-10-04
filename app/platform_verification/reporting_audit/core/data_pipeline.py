@@ -1,6 +1,7 @@
 """
 Reporting Data Pipeline extracting, normalizing, and aggregating metrics and evidence.
 """
+
 from __future__ import annotations
 from typing import Dict, List
 from app.platform_verification.reporting_audit.domain.interfaces import IReportingDataPipeline
@@ -46,7 +47,11 @@ class EnterpriseReportingDataPipeline(IReportingDataPipeline):
 
         dev = round(((value - baseline) / baseline) * 100.0, 2)
         # For latency/hallucination, higher value is regression; for accuracy, lower is regression
-        is_regression = (value > baseline * 1.1) if "latency" in metric_name or "hallucination" in metric_name else (value < baseline * 0.9)
+        is_regression = (
+            (value > baseline * 1.1)
+            if "latency" in metric_name or "hallucination" in metric_name
+            else (value < baseline * 0.9)
+        )
 
         self._trends[metric_name].append(
             QualityTrend(

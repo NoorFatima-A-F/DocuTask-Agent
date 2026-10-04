@@ -114,7 +114,7 @@ class OcrVerifier:
         t0 = time.perf_counter()
         hw_sample = "Approved by Dr. Alex Mercer on 18/09/2026"
         hw_ocr = "Approved by Dr. Alex Mercer on 18/09/2026"
-        
+
         accuracy = 100.0 if hw_sample == hw_ocr else 85.0
         passed = accuracy >= 95.0
         t_elapsed = (time.perf_counter() - t0) * 1000.0

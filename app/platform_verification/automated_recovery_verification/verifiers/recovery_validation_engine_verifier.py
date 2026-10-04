@@ -1,6 +1,7 @@
 """
 3H.12.9: Recovery Validation Engine Verifier
 """
+
 from typing import List
 from ..domain.models import ValidationStepResult, RecoveryValidationReport
 from ..domain.interfaces import IRecoveryValidationEngineVerifier
@@ -26,5 +27,5 @@ class RecoveryValidationEngineVerifier(IRecoveryValidationEngineVerifier):
             synthetic_test_executed=True,
             pipeline_steps=steps,
             overall_pipeline_passed=True,
-            all_dependencies_operational=True
+            all_dependencies_operational=True,
         )

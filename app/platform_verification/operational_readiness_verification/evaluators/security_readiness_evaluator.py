@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11.8: Security Readiness Evaluator
 """
+
 from ..domain.interfaces import ISecurityReadinessEvaluator
 from ..domain.models import SecurityReadinessScore
 

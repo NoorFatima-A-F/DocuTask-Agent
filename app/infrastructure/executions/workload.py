@@ -76,7 +76,7 @@ class WorkloadRequest(BaseModel):
 
     region_preferences: List[str] = Field(default_factory=list)
     region_constraints: List[str] = Field(default_factory=list)  # Hard allowed region IDs
-    required_jurisdiction: Optional[str] = None                   # e.g., "US", "EU", "GLOBAL"
+    required_jurisdiction: Optional[str] = None  # e.g., "US", "EU", "GLOBAL"
     cluster_constraints: List[str] = Field(default_factory=list)
     worker_constraints: List[str] = Field(default_factory=list)
 

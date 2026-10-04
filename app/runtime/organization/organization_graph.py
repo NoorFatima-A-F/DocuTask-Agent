@@ -63,7 +63,6 @@ class OrganizationGraphBuilder:
             OrgEdge("dept_executive", "dept_research", "DELEGATES_TO"),
             OrgEdge("dept_executive", "dept_governance", "SUPERVISES"),
             OrgEdge("dept_executive", "dept_qa", "SUPERVISES"),
-            
             # Operational Pipelines & Data Flows
             OrgEdge("dept_ocr", "dept_extraction", "FEEDS_DATA_TO"),
             OrgEdge("dept_extraction", "dept_validation", "FEEDS_DATA_TO"),

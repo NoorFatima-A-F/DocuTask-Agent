@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 """
 Ontology Engine for Phase 13.12 Autonomous Scientific Discovery.
 Manages dynamic semantic ontology expansion, concept taxonomy, and relationship graph.
@@ -24,6 +25,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class OntologyConcept:
     """Represents a discovered or foundational semantic concept."""
+
     concept_id: str
     name: str
     domain: str
@@ -51,6 +53,7 @@ class OntologyConcept:
 @dataclass
 class OntologyRelation:
     """Represents a semantic or causal relation between two concepts."""
+
     relation_id: str
     source_concept_id: str
     target_concept_id: str
@@ -88,12 +91,42 @@ class OntologyEngine:
     def _initialize_foundational_ontology(self) -> None:
         """Seeds standard core enterprise & system cognition concepts."""
         seeds = [
-            ("concept_agent_latency", "Agent Latency", "performance", "Turnaround response time of agent reasoning cycles"),
-            ("concept_memory_footprint", "Memory Footprint", "resource", "RAM and context memory consumed by agent swarms"),
-            ("concept_swarm_throughput", "Swarm Throughput", "throughput", "Completed autonomous operations per unit time"),
-            ("concept_accuracy_rate", "Verification Accuracy", "quality", "Precision of verification checks across truth ledgers"),
-            ("concept_governance_compliance", "Governance Compliance", "safety", "Adherence score against autonomous policy constraints"),
-            ("concept_context_entropy", "Context Entropy", "cognition", "Information disorder and token drift in cognitive memory"),
+            (
+                "concept_agent_latency",
+                "Agent Latency",
+                "performance",
+                "Turnaround response time of agent reasoning cycles",
+            ),
+            (
+                "concept_memory_footprint",
+                "Memory Footprint",
+                "resource",
+                "RAM and context memory consumed by agent swarms",
+            ),
+            (
+                "concept_swarm_throughput",
+                "Swarm Throughput",
+                "throughput",
+                "Completed autonomous operations per unit time",
+            ),
+            (
+                "concept_accuracy_rate",
+                "Verification Accuracy",
+                "quality",
+                "Precision of verification checks across truth ledgers",
+            ),
+            (
+                "concept_governance_compliance",
+                "Governance Compliance",
+                "safety",
+                "Adherence score against autonomous policy constraints",
+            ),
+            (
+                "concept_context_entropy",
+                "Context Entropy",
+                "cognition",
+                "Information disorder and token drift in cognitive memory",
+            ),
         ]
         for cid, name, domain, definition in seeds:
             self.concepts[cid] = OntologyConcept(

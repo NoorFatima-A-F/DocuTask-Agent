@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class JobPriority(int, Enum):
     """Job execution priority order (lower value = higher priority)."""
+
     CRITICAL = 1
     HIGH = 2
     NORMAL = 3
@@ -20,6 +21,7 @@ class JobPriority(int, Enum):
 
 class JobStatus(str, Enum):
     """Lifecycle status of a scheduled job."""
+
     PENDING = "PENDING"
     SCHEDULED = "SCHEDULED"
     RUNNING = "RUNNING"
@@ -30,6 +32,7 @@ class JobStatus(str, Enum):
 
 class ScheduledJob(BaseModel):
     """Persistent job definition managed by the Distributed Scheduler."""
+
     job_id: UUID = Field(default_factory=uuid4)
     name: str
     tenant_id: str = "default"
@@ -44,9 +47,7 @@ class ScheduledJob(BaseModel):
     completed_at: Optional[datetime] = None
 
     def mark_scheduled(self, worker_id: str) -> "ScheduledJob":
-        return self.model_copy(
-            update={"status": JobStatus.SCHEDULED, "assigned_worker": worker_id}
-        )
+        return self.model_copy(update={"status": JobStatus.SCHEDULED, "assigned_worker": worker_id})
 
     def mark_running(self) -> "ScheduledJob":
         return self.model_copy(update={"status": JobStatus.RUNNING})
@@ -62,8 +63,6 @@ class ScheduledJob(BaseModel):
     def mark_failed(self) -> "ScheduledJob":
         new_retries = self.retry_count + 1
         new_status = JobStatus.FAILED if new_retries >= self.max_retries else JobStatus.PENDING
-        return self.model_copy(
-            update={"status": new_status, "retry_count": new_retries}
-        )
+        return self.model_copy(update={"status": new_status, "retry_count": new_retries})
 
     model_config = {"frozen": True}

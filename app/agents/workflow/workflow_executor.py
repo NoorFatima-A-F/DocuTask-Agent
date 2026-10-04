@@ -16,11 +16,7 @@ class WorkflowExecutor:
     def __init__(self, dispatcher: Optional[WorkflowDispatcher] = None):
         self.dispatcher = dispatcher or WorkflowDispatcher()
 
-    async def execute_instance(
-        self,
-        definition: WorkflowDefinition,
-        instance: WorkflowInstance
-    ) -> WorkflowInstance:
+    async def execute_instance(self, definition: WorkflowDefinition, instance: WorkflowInstance) -> WorkflowInstance:
         """Executes nodes in topological sequence."""
         current_instance = instance.transition_to(WorkflowLifecycleState.RUNNING)
         order = definition.graph.get_topological_order()

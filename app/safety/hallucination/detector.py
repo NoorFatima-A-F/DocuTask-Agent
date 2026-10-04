@@ -25,7 +25,7 @@ class HallucinationDetector:
             return violations
 
         combined_chunk_text = " ".join([c.content for c in knowledge_chunks])
-        
+
         # Extract currency amounts and distinct numbers
         output_numbers = re.findall(r"\$?\b\d+(?:,\d{3})*(?:\.\d+)?\b", output_text)
         chunk_numbers = set(re.findall(r"\$?\b\d+(?:,\d{3})*(?:\.\d+)?\b", combined_chunk_text))
@@ -57,7 +57,11 @@ class HallucinationDetector:
 
         if not knowledge_chunks:
             # Nothing to ground against
-            return False, violations, GroundingReport(is_grounded=True, grounding_score=1.0, total_claims=0, grounded_claims=0)
+            return (
+                False,
+                violations,
+                GroundingReport(is_grounded=True, grounding_score=1.0, total_claims=0, grounded_claims=0),
+            )
 
         # 1. Check numeric hallucinations
         num_violations = self.check_numeric_hallucinations(output_text, knowledge_chunks)
@@ -73,7 +77,10 @@ class HallucinationDetector:
                     message=f"Output grounding failure: score {report.grounding_score:.2f} is below 0.70 threshold ({report.grounded_claims}/{report.total_claims} claims grounded)",
                     location="output",
                     rule_id="HAL-GRND-001",
-                    details={"grounding_score": report.grounding_score, "ungrounded_claims": [c.claim_text for c in report.ungrounded_claims]},
+                    details={
+                        "grounding_score": report.grounding_score,
+                        "ungrounded_claims": [c.claim_text for c in report.ungrounded_claims],
+                    },
                 )
             )
 

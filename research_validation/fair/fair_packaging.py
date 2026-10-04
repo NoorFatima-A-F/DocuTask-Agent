@@ -27,6 +27,7 @@ class IdentifierScope(str, Enum):
 @dataclass
 class ResearchArtifactDescriptor:
     """Descriptor for an individual file or dataset in the research package."""
+
     identifier: str
     identifier_scope: IdentifierScope  # Strictly distinguishes local from external!
     relative_path: str
@@ -39,6 +40,7 @@ class ResearchArtifactDescriptor:
 @dataclass
 class FAIRResearchBundle:
     """Master research reproducibility package conforming to FAIR and RO-Crate specifications."""
+
     bundle_name: str
     version: str
     root_identifier: str
@@ -82,7 +84,7 @@ keywords:
         bundle_name: str = "Enterprise Autonomous Agent Intelligence OS",
         version: str = "2.0.0",
         author: str = "Research Engineering Team",
-        external_doi: Optional[str] = None
+        external_doi: Optional[str] = None,
     ) -> FAIRResearchBundle:
         """Construct full research bundle with metadata."""
         local_hash = hashlib.sha256(f"{bundle_name}:{version}".encode("utf-8")).hexdigest()
@@ -99,7 +101,7 @@ keywords:
             "license": "https://spdx.org/licenses/Apache-2.0",
             "identifier": root_id,
             "identifierScope": root_scope.value,
-            "programmingLanguage": "Python 3.10+"
+            "programmingLanguage": "Python 3.10+",
         }
 
         ro_crate = {
@@ -109,7 +111,7 @@ keywords:
                     "@id": "ro-crate-metadata.json",
                     "@type": "CreativeWork",
                     "conformsTo": {"@id": "https://w3id.org/ro/crate/1.1"},
-                    "about": {"@id": "./"}
+                    "about": {"@id": "./"},
                 },
                 {
                     "@id": "./",
@@ -117,9 +119,9 @@ keywords:
                     "name": bundle_name,
                     "version": version,
                     "datePublished": "2026-09-08",
-                    "license": "Apache-2.0"
-                }
-            ]
+                    "license": "Apache-2.0",
+                },
+            ],
         }
 
         sbom = [
@@ -137,7 +139,7 @@ keywords:
                 content_sha256=local_hash,
                 mime_type="application/json",
                 description="Consolidated zero-trust production readiness evidence ledger",
-                license_spdx="Apache-2.0"
+                license_spdx="Apache-2.0",
             )
         ]
 
@@ -154,10 +156,10 @@ keywords:
             artifacts=artifacts,
             assumptions=[
                 "Identifiers without 'doi.org' prefix represent locally generated SHA-256 digests",
-                "RO-Crate manifests comply with Research Object Crate Specification v1.1"
+                "RO-Crate manifests comply with Research Object Crate Specification v1.1",
             ],
             limitations=[
                 "External DOI registration requires formal deposit into Zenodo, Figshare, or Datacite registries"
             ],
-            reproducibility_instructions="Unpack RO-Crate research bundle and verify artifact SHA-256 digests against manifest."
+            reproducibility_instructions="Unpack RO-Crate research bundle and verify artifact SHA-256 digests against manifest.",
         )

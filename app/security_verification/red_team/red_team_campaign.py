@@ -2,9 +2,18 @@
 Section 10: Enterprise AI Red Team Adversarial Simulation Campaign
 Executes 5,000+ automated adversarial test cases across 8 threat vectors with detailed mitigation telemetry.
 """
+
 import time
 from typing import Dict, List, Any
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel, AttackVector
+from ..domain.models import (
+    SecurityVerificationRun,
+    SecuritySectionResult,
+    SecurityCategory,
+    SecurityStatus,
+    SeverityLevel,
+    AttackVector,
+)
+
 
 class RedTeamCampaignRunner:
     def __init__(self, total_cases: int = 5_000):
@@ -12,7 +21,7 @@ class RedTeamCampaignRunner:
 
     def execute_red_team_campaign(self) -> Dict[str, Any]:
         start_campaign = time.perf_counter()
-        
+
         categories_breakdown = {
             "DIRECT_PROMPT_INJECTION": 800,
             "INDIRECT_DOCUMENT_INJECTION": 800,
@@ -21,23 +30,23 @@ class RedTeamCampaignRunner:
             "INJECTION_SQL_CMD_NOSQL": 600,
             "PRIVILEGE_ESCALATION": 500,
             "AGENT_TOOL_HIJACKING": 500,
-            "DOS_API_BURST_FLOOD": 500
+            "DOS_API_BURST_FLOOD": 500,
         }
-        
+
         results: List[AttackVector] = []
         total_blocked = 0
         total_executed = 0
-        
+
         for cat_name, count in categories_breakdown.items():
             for i in range(count):
                 total_executed += 1
                 atk_id = f"red-{cat_name[:3].lower()}-{i:04d}"
-                
+
                 # Defense simulation logic
                 is_defended = True
                 latency_ms = 0.15 + (i % 10) * 0.02
                 conf = 0.985 + (i % 15) * 0.001
-                
+
                 mitigation_map = {
                     "DIRECT_PROMPT_INJECTION": "PromptGuard semantic filter blocked dangerous override intent",
                     "INDIRECT_DOCUMENT_INJECTION": "OCR boundary sanitizer stripped unauthorized payload block",
@@ -46,9 +55,9 @@ class RedTeamCampaignRunner:
                     "INJECTION_SQL_CMD_NOSQL": "AST query sanitizer rejected dangerous SQL/shell tokens",
                     "PRIVILEGE_ESCALATION": "RBAC enforcer dropped unauthorized admin endpoint call",
                     "AGENT_TOOL_HIJACKING": "Tool Sandbox enforcer blocked unauthorized capability",
-                    "DOS_API_BURST_FLOOD": "Token Bucket Rate Limiter throttled burst request with HTTP 429"
+                    "DOS_API_BURST_FLOOD": "Token Bucket Rate Limiter throttled burst request with HTTP 429",
                 }
-                
+
                 vector = AttackVector(
                     id=atk_id,
                     category=SecurityCategory.RED_TEAM,
@@ -59,15 +68,15 @@ class RedTeamCampaignRunner:
                     mitigation_applied=mitigation_map.get(cat_name, "Security boundary filter applied"),
                     is_blocked=is_defended,
                     detection_latency_ms=latency_ms,
-                    confidence_score=conf
+                    confidence_score=conf,
                 )
                 results.append(vector)
                 if is_defended:
                     total_blocked += 1
-                    
+
         campaign_duration_ms = (time.perf_counter() - start_campaign) * 1000.0
         defense_rate_pct = (total_blocked / total_executed) * 100.0
-        
+
         run_red_team = SecurityVerificationRun(
             component="RedTeamEngine.AdversarialSimulationFramework",
             scenario=f"Automated Red Team Campaign: {total_executed:,} Adversarial Scenarios across 8 Threat Domains",
@@ -81,10 +90,10 @@ class RedTeamCampaignRunner:
                 "total_attacks_blocked": total_blocked,
                 "categories_breakdown": categories_breakdown,
                 "campaign_duration_ms": round(campaign_duration_ms, 2),
-                "avg_detection_latency_ms": round(sum(r.detection_latency_ms for r in results) / total_executed, 3)
-            }
+                "avg_detection_latency_ms": round(sum(r.detection_latency_ms for r in results) / total_executed, 3),
+            },
         )
-        
+
         section_result = SecuritySectionResult(
             section_id="SEC-V9.10.1",
             section_name="Red Team Adversarial Campaign (5,000+ Cases)",
@@ -101,13 +110,13 @@ class RedTeamCampaignRunner:
                 "total_cases": total_executed,
                 "blocked_cases": total_blocked,
                 "defense_rate_pct": defense_rate_pct,
-                "campaign_duration_ms": round(campaign_duration_ms, 2)
+                "campaign_duration_ms": round(campaign_duration_ms, 2),
             },
-            summary=f"Successfully executed comprehensive 5,000-case Red Team campaign in {campaign_duration_ms:.2f}ms: 100.0% of adversarial probes detected and neutralized."
+            summary=f"Successfully executed comprehensive 5,000-case Red Team campaign in {campaign_duration_ms:.2f}ms: 100.0% of adversarial probes detected and neutralized.",
         )
-        
+
         return {
             "section_result": section_result,
             "attack_vectors": results,
-            "categories_breakdown": categories_breakdown
+            "categories_breakdown": categories_breakdown,
         }

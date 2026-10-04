@@ -3,6 +3,7 @@ Health Risk Scoring Engine (Part 3H.3.4.5).
 Calculates future failure probabilities and classifies risk into LOW (0-30%),
 MEDIUM (31-70%), HIGH (71-90%), and CRITICAL (91-100%) tiers.
 """
+
 from datetime import datetime, timezone
 from typing import List
 from app.platform_verification.predictive_health_intelligence.domain.models import (
@@ -55,7 +56,9 @@ class HealthRiskEngine:
         ]
 
         highest_prob = max(p.failure_probability for p in predictions)
-        overall_risk = RiskLevel.HIGH if highest_prob >= 0.71 else (RiskLevel.MEDIUM if highest_prob >= 0.31 else RiskLevel.LOW)
+        overall_risk = (
+            RiskLevel.HIGH if highest_prob >= 0.71 else (RiskLevel.MEDIUM if highest_prob >= 0.31 else RiskLevel.LOW)
+        )
 
         return RiskPredictionReport(
             overall_system_risk=overall_risk,

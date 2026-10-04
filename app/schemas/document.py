@@ -4,7 +4,7 @@ Document Request and Response Pydantic Schemas.
 
 from datetime import datetime
 from enum import Enum
-from typing import List, Optional, TypeVar
+from typing import Any, Dict, List, Optional, TypeVar
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -13,6 +13,7 @@ T = TypeVar("T")
 
 class UploadStatusEnum(str, Enum):
     """Possible document processing states."""
+
     UPLOADING = "UPLOADING"
     QUEUED = "QUEUED"
     OCR_RUNNING = "OCR_RUNNING"

@@ -4,6 +4,7 @@ from enum import Enum
 from typing import Dict, Optional, Any, Callable
 import time
 
+
 class TaskState(str, Enum):
     PENDING = "PENDING"
     QUEUED = "QUEUED"
@@ -13,6 +14,7 @@ class TaskState(str, Enum):
     RETRYING = "RETRYING"
     CANCELLED = "CANCELLED"
     TIMEOUT = "TIMEOUT"
+
 
 @dataclass
 class VerificationTask:

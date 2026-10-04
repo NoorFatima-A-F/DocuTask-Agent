@@ -34,12 +34,38 @@ class LoadTestingVerifier(ILoadTestingVerifier):
 
     def verify(self) -> ControlledLoadTestReport:
         profiles = [
-            UserConcurrencyProfile(profile_name="Small Organization", concurrent_users=10, duration_minutes=30, p95_latency_ms=22.0, failure_rate_pct=0.0, resource_leak_detected=False, status="PASS"),
-            UserConcurrencyProfile(profile_name="Medium Organization", concurrent_users=100, duration_minutes=30, p95_latency_ms=31.0, failure_rate_pct=0.0, resource_leak_detected=False, status="PASS"),
-            UserConcurrencyProfile(profile_name="Enterprise Scale", concurrent_users=1000, duration_minutes=30, p95_latency_ms=48.5, failure_rate_pct=0.0, resource_leak_detected=False, status="PASS"),
+            UserConcurrencyProfile(
+                profile_name="Small Organization",
+                concurrent_users=10,
+                duration_minutes=30,
+                p95_latency_ms=22.0,
+                failure_rate_pct=0.0,
+                resource_leak_detected=False,
+                status="PASS",
+            ),
+            UserConcurrencyProfile(
+                profile_name="Medium Organization",
+                concurrent_users=100,
+                duration_minutes=30,
+                p95_latency_ms=31.0,
+                failure_rate_pct=0.0,
+                resource_leak_detected=False,
+                status="PASS",
+            ),
+            UserConcurrencyProfile(
+                profile_name="Enterprise Scale",
+                concurrent_users=1000,
+                duration_minutes=30,
+                p95_latency_ms=48.5,
+                failure_rate_pct=0.0,
+                resource_leak_detected=False,
+                status="PASS",
+            ),
         ]
 
-        all_passed = all(p.status == "PASS" and not p.resource_leak_detected and p.failure_rate_pct == 0.0 for p in profiles)
+        all_passed = all(
+            p.status == "PASS" and not p.resource_leak_detected and p.failure_rate_pct == 0.0 for p in profiles
+        )
 
         checks: List[CheckResult] = [
             CheckResult(

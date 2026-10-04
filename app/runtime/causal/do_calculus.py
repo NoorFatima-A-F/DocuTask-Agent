@@ -16,6 +16,7 @@ from app.runtime.causal.structural_causal_model import StructuralCausalModel
 
 class InterventionResult(BaseModel):
     """Result of evaluating a Pearl Do-Calculus intervention query P(Y | do(X=x))."""
+
     intervention_query: str
     treatment_variable: str
     treatment_value: float
@@ -30,6 +31,7 @@ class InterventionResult(BaseModel):
 
 class CounterfactualResult(BaseModel):
     """Result of a 3-step counterfactual query (Abduction -> Action -> Prediction)."""
+
     factual_world: Dict[str, float]
     counterfactual_intervention: Dict[str, float]
     counterfactual_outcomes: Dict[str, float]
@@ -52,7 +54,7 @@ class DoCalculusEngine:
         """Evaluates P(Y | do(X = x)) by backdoor adjustment over confounder Document Complexity."""
         # Baseline observational values
         obs_e_y = 850.0 if outcome_var == "total_latency_ms" else 0.0022
-        
+
         # Interventional simulation under graph surgery:
         # In do(worker_concurrency = 8.0), concurrency is clamped to 8.0 regardless of doc_complexity
         if outcome_var == "total_latency_ms":

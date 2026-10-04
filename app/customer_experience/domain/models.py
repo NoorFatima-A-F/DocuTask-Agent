@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 # Enums
 # ============================================================================
 
+
 class IndustrySector(str, Enum):
     FINANCE = "Finance & Banking"
     HEALTHCARE = "Healthcare & Life Sciences"
@@ -74,6 +75,7 @@ class SimulationRunStatus(str, Enum):
 # Part A: Enterprise Tenant Simulation Models
 # ============================================================================
 
+
 class TenantDepartment(BaseModel):
     department_id: str
     name: str
@@ -116,6 +118,7 @@ class EnterpriseTenant(BaseModel):
 # Part B: Customer Onboarding Models
 # ============================================================================
 
+
 class OnboardingStep(BaseModel):
     step_number: int
     title: str
@@ -142,6 +145,7 @@ class OnboardingJourney(BaseModel):
 # Part C: AI Automation Template Marketplace Models
 # ============================================================================
 
+
 class TemplateKPI(BaseModel):
     metric_name: str
     baseline_value: str
@@ -167,6 +171,7 @@ class AutomationTemplate(BaseModel):
 # ============================================================================
 # Part D: Visual AI Workflow Builder Models
 # ============================================================================
+
 
 class WorkflowNode(BaseModel):
     node_id: str
@@ -212,6 +217,7 @@ class WorkflowExecutionResult(BaseModel):
 # Part E: Enterprise Connector Simulation Models
 # ============================================================================
 
+
 class ConnectorAuth(BaseModel):
     auth_type: str  # OAuth2, API_KEY, WEBHOOK, MTLS
     is_authenticated: bool = True
@@ -235,6 +241,7 @@ class EnterpriseConnector(BaseModel):
 # ============================================================================
 # Part F: Human-in-the-Loop Collaboration Models
 # ============================================================================
+
 
 class BoundingBoxCitation(BaseModel):
     page_number: int
@@ -274,6 +281,7 @@ class ExceptionItem(BaseModel):
 # Part G: Customer Analytics & ROI Models
 # ============================================================================
 
+
 class AutomationMetric(BaseModel):
     metric_key: str
     label: str
@@ -311,6 +319,7 @@ class CustomerAnalyticsReport(BaseModel):
 # Part H: AI Trust Center Models
 # ============================================================================
 
+
 class SecurityBoundarySpec(BaseModel):
     boundary_name: str
     status: str
@@ -343,6 +352,7 @@ class TrustCenterReport(BaseModel):
 # Part I: Interactive Demo Engine Models
 # ============================================================================
 
+
 class DemoStepEvent(BaseModel):
     step_id: str
     stage_name: str
@@ -369,6 +379,7 @@ class DemoRunResult(BaseModel):
 # ============================================================================
 # Part J-M: Portfolio Presentation Models
 # ============================================================================
+
 
 class CaseStudyDocument(BaseModel):
     title: str

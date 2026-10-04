@@ -20,7 +20,7 @@ class PlannerVersionConfig:
     created_at: float = field(default_factory=time.time)
     parent_version_id: Optional[str] = None
     status: str = "ACTIVE"  # ACTIVE, CANDIDATE, ARCHIVED, ROLLED_BACK
-    
+
     # Planner Hyperparameters & Coefficients
     exploration_weight: float = 0.20
     latency_penalty_factor: float = 0.40
@@ -29,12 +29,12 @@ class PlannerVersionConfig:
     max_dag_depth: int = 5
     max_retries: int = 3
     parallel_fanout_limit: int = 4
-    
+
     # Tool Selection & Routing Preferences
     default_ocr_engine: str = "tesseract_v2"
     high_precision_model: str = "gemini-1.5-pro"
     fast_tier_model: str = "gemini-1.5-flash"
-    
+
     # Scientific Justification & Lineage
     justification: str = "Baseline production configuration"
     supporting_experiment_id: Optional[str] = None
@@ -71,7 +71,7 @@ class PlannerVersionManager:
     def __init__(self):
         self._versions: Dict[str, PlannerVersionConfig] = {}
         self._active_version_id: str = "v1.0.0"
-        
+
         # Initialize default baseline v1.0.0
         baseline = PlannerVersionConfig(
             version_id="v1.0.0",
@@ -102,10 +102,10 @@ class PlannerVersionManager:
         """Roll back active configuration to target historical version."""
         if target_version_id not in self._versions:
             return None
-            
+
         current = self.get_active()
         current.status = "ROLLED_BACK"
-        
+
         target = self._versions[target_version_id]
         target.status = "ACTIVE"
         self._active_version_id = target_version_id

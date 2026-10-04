@@ -1,6 +1,7 @@
 """
 Structured Logging and PII / Secret Leak Validator.
 """
+
 import re
 import json
 from typing import List, Dict, Any
@@ -40,7 +41,7 @@ class LoggingSecurityValidator(ILoggingSecurityValidator):
         if missing_fields:
             score -= 30.0
         if leaks:
-            score -= (len(leaks) * 25.0)
+            score -= len(leaks) * 25.0
 
         score = max(0.0, min(100.0, score))
         status = "PASS" if not missing_fields and len(leaks) == 0 else "FAIL"

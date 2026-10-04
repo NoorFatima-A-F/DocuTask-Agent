@@ -26,6 +26,7 @@ class FAIRCategory(str, Enum):
 @dataclass
 class FAIRPrincipleCheck:
     """Individual check of a specific FAIR principle requirement."""
+
     principle_id: str
     category: FAIRCategory
     name: str
@@ -37,6 +38,7 @@ class FAIRPrincipleCheck:
 @dataclass
 class FAIRComplianceReport:
     """Comprehensive FAIR compliance audit report."""
+
     total_principles_checked: int
     passed_principles_count: int
     compliance_percentage: float
@@ -53,32 +55,117 @@ class FAIRComplianceAuditor:
 
     DEFAULT_FAIR_CHECKS = [
         # Findability
-        FAIRPrincipleCheck("F1", FAIRCategory.FINDABILITY, "Globally Unique & Persistent ID", "Artifacts assigned unique SHA-256 and UUID identifiers.", True, "Evidence digests generated via cryptographic hasher."),
-        FAIRPrincipleCheck("F2", FAIRCategory.FINDABILITY, "Rich Metadata", "Artifacts described with rich structured metadata.", True, "Dataset cards and DSSE manifests contain schemas, authors, and timestamps."),
-        FAIRPrincipleCheck("F3", FAIRCategory.FINDABILITY, "Identifier in Metadata", "Metadata explicitly includes the unique identifier of the data.", True, "Manifest metadata embeds root payload digest."),
-        FAIRPrincipleCheck("F4", FAIRCategory.FINDABILITY, "Indexed in Searchable Resource", "Artifacts are registered in a queryable evidence registry.", True, "EvidenceRegistry indexes all evidence items by ID and type."),
-
+        FAIRPrincipleCheck(
+            "F1",
+            FAIRCategory.FINDABILITY,
+            "Globally Unique & Persistent ID",
+            "Artifacts assigned unique SHA-256 and UUID identifiers.",
+            True,
+            "Evidence digests generated via cryptographic hasher.",
+        ),
+        FAIRPrincipleCheck(
+            "F2",
+            FAIRCategory.FINDABILITY,
+            "Rich Metadata",
+            "Artifacts described with rich structured metadata.",
+            True,
+            "Dataset cards and DSSE manifests contain schemas, authors, and timestamps.",
+        ),
+        FAIRPrincipleCheck(
+            "F3",
+            FAIRCategory.FINDABILITY,
+            "Identifier in Metadata",
+            "Metadata explicitly includes the unique identifier of the data.",
+            True,
+            "Manifest metadata embeds root payload digest.",
+        ),
+        FAIRPrincipleCheck(
+            "F4",
+            FAIRCategory.FINDABILITY,
+            "Indexed in Searchable Resource",
+            "Artifacts are registered in a queryable evidence registry.",
+            True,
+            "EvidenceRegistry indexes all evidence items by ID and type.",
+        ),
         # Accessibility
-        FAIRPrincipleCheck("A1", FAIRCategory.ACCESSIBILITY, "Open Retrievable Protocol", "Artifacts retrievable via open, free standard protocols (HTTPS/JSON).", True, "RESTful JSON and file URI specifications."),
-        FAIRPrincipleCheck("A2", FAIRCategory.ACCESSIBILITY, "Metadata Persists", "Metadata remains accessible even when data is archived.", True, "Independent provenance logs persisted immutably."),
-
+        FAIRPrincipleCheck(
+            "A1",
+            FAIRCategory.ACCESSIBILITY,
+            "Open Retrievable Protocol",
+            "Artifacts retrievable via open, free standard protocols (HTTPS/JSON).",
+            True,
+            "RESTful JSON and file URI specifications.",
+        ),
+        FAIRPrincipleCheck(
+            "A2",
+            FAIRCategory.ACCESSIBILITY,
+            "Metadata Persists",
+            "Metadata remains accessible even when data is archived.",
+            True,
+            "Independent provenance logs persisted immutably.",
+        ),
         # Interoperability
-        FAIRPrincipleCheck("I1", FAIRCategory.INTEROPERABILITY, "Formal Knowledge Representation", "Uses standard formats (JSON, OpenTelemetry, W3C PROV).", True, "Compliant with JSON-LD, OTel, and W3C PROV-DM standards."),
-        FAIRPrincipleCheck("I2", FAIRCategory.INTEROPERABILITY, "Vocabularies Following FAIR", "Uses formal domain ontologies for document entities.", True, "Standardized taxonomy (INVOICE, RECEIPT, FORM, ID, MEDICAL)."),
-        FAIRPrincipleCheck("I3", FAIRCategory.INTEROPERABILITY, "Qualified References", "Artifacts include qualified references to other data.", True, "Parent span IDs, dataset lineage hashes, and commit SHAs."),
-
+        FAIRPrincipleCheck(
+            "I1",
+            FAIRCategory.INTEROPERABILITY,
+            "Formal Knowledge Representation",
+            "Uses standard formats (JSON, OpenTelemetry, W3C PROV).",
+            True,
+            "Compliant with JSON-LD, OTel, and W3C PROV-DM standards.",
+        ),
+        FAIRPrincipleCheck(
+            "I2",
+            FAIRCategory.INTEROPERABILITY,
+            "Vocabularies Following FAIR",
+            "Uses formal domain ontologies for document entities.",
+            True,
+            "Standardized taxonomy (INVOICE, RECEIPT, FORM, ID, MEDICAL).",
+        ),
+        FAIRPrincipleCheck(
+            "I3",
+            FAIRCategory.INTEROPERABILITY,
+            "Qualified References",
+            "Artifacts include qualified references to other data.",
+            True,
+            "Parent span IDs, dataset lineage hashes, and commit SHAs.",
+        ),
         # Reusability
-        FAIRPrincipleCheck("R1", FAIRCategory.REUSABILITY, "Rich Contextual Attributes", "Described with accurate and relevant attributes.", True, "Full benchmark environment and hardware manifests recorded."),
-        FAIRPrincipleCheck("R1.1", FAIRCategory.REUSABILITY, "Clear Usage License", "Artifacts released with unambiguous machine-readable license.", True, "Explicit Apache 2.0 / MIT license declarations."),
-        FAIRPrincipleCheck("R1.2", FAIRCategory.REUSABILITY, "Detailed Provenance", "Detailed provenance recorded from source to output.", True, "W3C PROV lineage graph with cryptographic attestations."),
-        FAIRPrincipleCheck("R1.3", FAIRCategory.REUSABILITY, "Domain Standards", "Meets domain-relevant community standards.", True, "Complies with MLCommons, IEEE, and ACM Artifact guidelines.")
+        FAIRPrincipleCheck(
+            "R1",
+            FAIRCategory.REUSABILITY,
+            "Rich Contextual Attributes",
+            "Described with accurate and relevant attributes.",
+            True,
+            "Full benchmark environment and hardware manifests recorded.",
+        ),
+        FAIRPrincipleCheck(
+            "R1.1",
+            FAIRCategory.REUSABILITY,
+            "Clear Usage License",
+            "Artifacts released with unambiguous machine-readable license.",
+            True,
+            "Explicit Apache 2.0 / MIT license declarations.",
+        ),
+        FAIRPrincipleCheck(
+            "R1.2",
+            FAIRCategory.REUSABILITY,
+            "Detailed Provenance",
+            "Detailed provenance recorded from source to output.",
+            True,
+            "W3C PROV lineage graph with cryptographic attestations.",
+        ),
+        FAIRPrincipleCheck(
+            "R1.3",
+            FAIRCategory.REUSABILITY,
+            "Domain Standards",
+            "Meets domain-relevant community standards.",
+            True,
+            "Complies with MLCommons, IEEE, and ACM Artifact guidelines.",
+        ),
     ]
 
     @classmethod
-    def audit_artifacts(
-        cls,
-        custom_checks: Optional[List[FAIRPrincipleCheck]] = None
-    ) -> FAIRComplianceReport:
+    def audit_artifacts(cls, custom_checks: Optional[List[FAIRPrincipleCheck]] = None) -> FAIRComplianceReport:
         """
         Run FAIR principles audit against platform artifacts.
         """
@@ -104,5 +191,5 @@ class FAIRComplianceAuditor:
             category_scores=cat_scores,
             fully_compliant=is_full,
             status=status,
-            details={"checks": [c.principle_id for c in checks if c.passed]}
+            details={"checks": [c.principle_id for c in checks if c.passed]},
         )

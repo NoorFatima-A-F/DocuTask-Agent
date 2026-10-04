@@ -30,11 +30,20 @@ class SensitiveDataDetector:
             ("patient_id", re.compile(r"\bpatient\s+(?:id|name|record)[:\s]+[A-Za-z0-9\s]+\b", re.IGNORECASE)),
         ],
         SensitivityCategory.CREDENTIALS: [
-            ("api_key", re.compile(r"\b(?:api[_-]?key|secret|token)[:\s=]+['\"]?[A-Za-z0-9_-]{16,}['\"]?\b", re.IGNORECASE)),
+            (
+                "api_key",
+                re.compile(r"\b(?:api[_-]?key|secret|token)[:\s=]+['\"]?[A-Za-z0-9_-]{16,}['\"]?\b", re.IGNORECASE),
+            ),
             ("password", re.compile(r"\bpassword[:\s=]+['\"]?[^\s'\"]{6,}['\"]?\b", re.IGNORECASE)),
         ],
         SensitivityCategory.LEGAL: [
-            ("contract", re.compile(r"\b(?:non-disclosure\s+agreement|confidentiality\s+agreement|settlement\s+agreement|master\s+services\s+agreement)\b", re.IGNORECASE)),
+            (
+                "contract",
+                re.compile(
+                    r"\b(?:non-disclosure\s+agreement|confidentiality\s+agreement|settlement\s+agreement|master\s+services\s+agreement)\b",
+                    re.IGNORECASE,
+                ),
+            ),
         ],
     }
 

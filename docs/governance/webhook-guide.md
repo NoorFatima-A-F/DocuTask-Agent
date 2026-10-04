@@ -21,6 +21,7 @@ Every webhook delivery contains header `X-Governance-Signature` with HMAC-SHA256
 import hmac
 import hashlib
 
+
 def verify_signature(payload_bytes: bytes, secret: str, header_sig: str) -> bool:
     mac = hmac.new(secret.encode("utf-8"), payload_bytes, hashlib.sha256)
     expected = f"sha256={mac.hexdigest()}"

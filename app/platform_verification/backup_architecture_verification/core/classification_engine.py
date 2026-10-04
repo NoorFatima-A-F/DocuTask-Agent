@@ -3,6 +3,7 @@ Part 2: Backup Classification Engine.
 Classifies assets into Tier 0 (Mission Critical), Tier 1 (Business Critical),
 Tier 2 (Operational), and Tier 3 (Rebuildable) with RPO/RTO metrics.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     CriticalityTier,
@@ -68,10 +69,18 @@ class ClassificationEngine(IClassificationEngine):
         return {
             "total_classified_assets": len(classification_matrix),
             "tier_summary": {
-                "Tier0_Mission_Critical": len([c for c in classification_matrix.values() if c.criticality == CriticalityTier.TIER_0]),
-                "Tier1_Business_Critical": len([c for c in classification_matrix.values() if c.criticality == CriticalityTier.TIER_1]),
-                "Tier2_Operational": len([c for c in classification_matrix.values() if c.criticality == CriticalityTier.TIER_2]),
-                "Tier3_Rebuildable": len([c for c in classification_matrix.values() if c.criticality == CriticalityTier.TIER_3]),
+                "Tier0_Mission_Critical": len(
+                    [c for c in classification_matrix.values() if c.criticality == CriticalityTier.TIER_0]
+                ),
+                "Tier1_Business_Critical": len(
+                    [c for c in classification_matrix.values() if c.criticality == CriticalityTier.TIER_1]
+                ),
+                "Tier2_Operational": len(
+                    [c for c in classification_matrix.values() if c.criticality == CriticalityTier.TIER_2]
+                ),
+                "Tier3_Rebuildable": len(
+                    [c for c in classification_matrix.values() if c.criticality == CriticalityTier.TIER_3]
+                ),
             },
             "classification_matrix": [
                 {

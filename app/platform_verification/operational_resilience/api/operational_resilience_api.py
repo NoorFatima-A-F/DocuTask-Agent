@@ -1,10 +1,13 @@
 """
 Phase 3H.7: Operational Resilience Verification FastAPI Endpoints
 """
+
 from fastapi import APIRouter, Query
 from typing import Dict, Any
 
-from app.platform_verification.operational_resilience.runtime.operational_resilience_runtime import OperationalResilienceRuntime
+from app.platform_verification.operational_resilience.runtime.operational_resilience_runtime import (
+    OperationalResilienceRuntime,
+)
 
 router = APIRouter(
     prefix="/api/v1/platform-verification/operational-resilience",
@@ -15,7 +18,9 @@ _runtime = OperationalResilienceRuntime()
 
 
 @router.post("/verify", summary="Execute Full Operational Resilience Verification")
-async def run_resilience_verification(export_evidence: bool = Query(True, description="Whether to export verification reports to disk")) -> Dict[str, Any]:
+async def run_resilience_verification(
+    export_evidence: bool = Query(True, description="Whether to export verification reports to disk"),
+) -> Dict[str, Any]:
     result = _runtime.run_full_verification(export_evidence=export_evidence)
     return {
         "status": "SUCCESS",

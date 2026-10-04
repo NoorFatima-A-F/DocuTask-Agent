@@ -18,12 +18,14 @@ logger = logging.getLogger(__name__)
 
 class InvalidAgentStateTransitionError(Exception):
     """Raised when an illegal agent lifecycle state transition is attempted."""
+
     pass
 
 
 @dataclass
 class AgentLifecycleEvent:
     """Audit and event record for agent state transitions."""
+
     agent_id: str
     from_state: AgentLifecycleState
     to_state: AgentLifecycleState
@@ -151,7 +153,6 @@ class AgentLifecycleManager:
             AgentLifecycleState.INITIALIZED,  # Reuse/reset for new goal
         },
         AgentLifecycleState.ARCHIVED: set(),
-
         # Failure / Interrupted States
         AgentLifecycleState.FAILED: {
             AgentLifecycleState.RECOVERING,
@@ -202,17 +203,21 @@ class AgentLifecycleManager:
         agent: Agent,
         target_state: AgentLifecycleState | str,
         reason: str = "",
-        metadata: Optional[Dict[str, Any]] = None
+        metadata: Optional[Dict[str, Any]] = None,
     ) -> AgentLifecycleEvent:
         """
         Executes a validated state transition on an Agent entity, updates timestamps,
         appends to audit history, and emits lifecycle notifications.
         """
-        current_state = agent.status if isinstance(agent.status, AgentLifecycleState) else AgentLifecycleState(agent.status)
+        current_state = (
+            agent.status if isinstance(agent.status, AgentLifecycleState) else AgentLifecycleState(agent.status)
+        )
         to_state = target_state if isinstance(target_state, AgentLifecycleState) else AgentLifecycleState(target_state)
 
         if not self.can_transition(current_state, to_state):
-            msg = f"Illegal transition for agent {agent.id} ({agent.name}) from {current_state.value} to {to_state.value}"
+            msg = (
+                f"Illegal transition for agent {agent.id} ({agent.name}) from {current_state.value} to {to_state.value}"
+            )
             logger.error(msg)
             raise InvalidAgentStateTransitionError(msg)
 

@@ -1,6 +1,7 @@
 """
 3H.11.9: Automated Rollback Validation Verifier
 """
+
 from ..domain.models import RollbackValidationReport
 from ..domain.interfaces import IRollbackValidationVerifier
 
@@ -19,5 +20,5 @@ class RollbackValidationVerifier(IRollbackValidationVerifier):
             queues_drained_and_resumed=True,
             database_locks_cleared=True,
             final_health_status="ALL_GREEN",
-            rollback_success_rate_pct=100.0
+            rollback_success_rate_pct=100.0,
         )

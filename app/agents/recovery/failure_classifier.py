@@ -68,5 +68,5 @@ class FailureClassifier:
             confidence=0.95,
             recoverability_score=score,
             probable_cause=cause,
-            evidence=evidence
+            evidence=evidence,
         )

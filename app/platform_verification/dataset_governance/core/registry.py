@@ -2,11 +2,17 @@
 Central Dataset Metadata Registry & Catalogue.
 Stores datasets, samples, annotations, and enforces immutability on published versions.
 """
+
 import hashlib
 from typing import Dict, List, Optional
 from app.platform_verification.dataset_governance.domain.models import (
-    DatasetMetadata, DatasetSample, GroundTruthAnnotation, DatasetCategory,
-    DatasetLifecycleState, DataSensitivityLevel, DatasetSnapshot
+    DatasetMetadata,
+    DatasetSample,
+    GroundTruthAnnotation,
+    DatasetCategory,
+    DatasetLifecycleState,
+    DataSensitivityLevel,
+    DatasetSnapshot,
 )
 from app.platform_verification.dataset_governance.domain.interfaces import DatasetRegistryInterface
 
@@ -33,7 +39,7 @@ class DatasetRegistry(DatasetRegistryInterface):
                 lifecycle_state=DatasetLifecycleState.PUBLISHED,
                 sample_count=20,
                 ground_truth_count=20,
-                manifest_hash=hashlib.sha256(b"ds_happy_path_invoices_v1").hexdigest()
+                manifest_hash=hashlib.sha256(b"ds_happy_path_invoices_v1").hexdigest(),
             ),
             DatasetMetadata(
                 dataset_id="ds_boundary_scale",
@@ -46,7 +52,7 @@ class DatasetRegistry(DatasetRegistryInterface):
                 lifecycle_state=DatasetLifecycleState.PUBLISHED,
                 sample_count=10,
                 ground_truth_count=10,
-                manifest_hash=hashlib.sha256(b"ds_boundary_scale_v1").hexdigest()
+                manifest_hash=hashlib.sha256(b"ds_boundary_scale_v1").hexdigest(),
             ),
             DatasetMetadata(
                 dataset_id="ds_negative_rejection",
@@ -59,7 +65,7 @@ class DatasetRegistry(DatasetRegistryInterface):
                 lifecycle_state=DatasetLifecycleState.PUBLISHED,
                 sample_count=15,
                 ground_truth_count=15,
-                manifest_hash=hashlib.sha256(b"ds_negative_rejection_v1").hexdigest()
+                manifest_hash=hashlib.sha256(b"ds_negative_rejection_v1").hexdigest(),
             ),
             DatasetMetadata(
                 dataset_id="ds_adversarial_injection",
@@ -72,7 +78,7 @@ class DatasetRegistry(DatasetRegistryInterface):
                 lifecycle_state=DatasetLifecycleState.PUBLISHED,
                 sample_count=25,
                 ground_truth_count=25,
-                manifest_hash=hashlib.sha256(b"ds_adversarial_injection_v1").hexdigest()
+                manifest_hash=hashlib.sha256(b"ds_adversarial_injection_v1").hexdigest(),
             ),
             DatasetMetadata(
                 dataset_id="ds_multilingual_ocr",
@@ -85,7 +91,7 @@ class DatasetRegistry(DatasetRegistryInterface):
                 lifecycle_state=DatasetLifecycleState.PUBLISHED,
                 sample_count=30,
                 ground_truth_count=30,
-                manifest_hash=hashlib.sha256(b"ds_multilingual_ocr_v1").hexdigest()
+                manifest_hash=hashlib.sha256(b"ds_multilingual_ocr_v1").hexdigest(),
             ),
             DatasetMetadata(
                 dataset_id="ds_regression_defects",
@@ -98,24 +104,32 @@ class DatasetRegistry(DatasetRegistryInterface):
                 lifecycle_state=DatasetLifecycleState.PUBLISHED,
                 sample_count=12,
                 ground_truth_count=12,
-                manifest_hash=hashlib.sha256(b"ds_regression_defects_v1").hexdigest()
-            )
+                manifest_hash=hashlib.sha256(b"ds_regression_defects_v1").hexdigest(),
+            ),
         ]
         for ds in canonical:
             samples = [
-                DatasetSample(sample_id=f"{ds.dataset_id}_smp_{i}", content=f"Sample document content for {ds.name} item {i}")
+                DatasetSample(
+                    sample_id=f"{ds.dataset_id}_smp_{i}", content=f"Sample document content for {ds.name} item {i}"
+                )
                 for i in range(ds.sample_count)
             ]
             annotations = [
-                GroundTruthAnnotation(sample_id=s.sample_id, expected_output={"status": "EXPECTED_VALID", "item_index": i})
+                GroundTruthAnnotation(
+                    sample_id=s.sample_id, expected_output={"status": "EXPECTED_VALID", "item_index": i}
+                )
                 for i, s in enumerate(samples)
             ]
             self.register_dataset(ds, samples, annotations)
 
-    def register_dataset(self, metadata: DatasetMetadata, samples: List[DatasetSample], annotations: List[GroundTruthAnnotation]) -> None:
+    def register_dataset(
+        self, metadata: DatasetMetadata, samples: List[DatasetSample], annotations: List[GroundTruthAnnotation]
+    ) -> None:
         key = f"{metadata.dataset_id}:{metadata.version}"
         if key in self._datasets and self._datasets[key].lifecycle_state == DatasetLifecycleState.PUBLISHED:
-            raise ValueError(f"Dataset '{key}' is PUBLISHED and immutable. Create a new semantic version to apply changes.")
+            raise ValueError(
+                f"Dataset '{key}' is PUBLISHED and immutable. Create a new semantic version to apply changes."
+            )
 
         metadata.sample_count = len(samples)
         metadata.ground_truth_count = len(annotations)
@@ -157,7 +171,7 @@ class DatasetRegistry(DatasetRegistryInterface):
             manifest_hash=meta.manifest_hash,
             sample_count=meta.sample_count,
             schema_version=meta.schema_version,
-            ground_truth_hash=gt_hash
+            ground_truth_hash=gt_hash,
         )
         self._snapshots[f"{dataset_id}:{version}"] = snap
         return snap

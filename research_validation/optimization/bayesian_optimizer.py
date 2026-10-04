@@ -14,7 +14,9 @@ from typing import Callable, List, Optional, Tuple
 
 from research_validation.optimization.gaussian_process import GaussianProcessRegressor
 from research_validation.optimization.acquisition_functions import (
-    expected_improvement, upper_confidence_bound, thompson_sampling
+    expected_improvement,
+    upper_confidence_bound,
+    thompson_sampling,
 )
 from research_validation.provenance.hashing import hash_canonical_json
 
@@ -28,6 +30,7 @@ class AcquisitionStrategy(str, Enum):
 @dataclass(frozen=True)
 class OptimizationStep:
     """A single evaluation step in the Bayesian search loop."""
+
     step_number: int
     candidate_x: float
     observed_y: float
@@ -40,6 +43,7 @@ class OptimizationStep:
 @dataclass(frozen=True)
 class OptimizationResult:
     """Final output of Bayesian Optimization."""
+
     best_x: float
     best_y: float
     total_steps: int
@@ -78,7 +82,7 @@ class BayesianResearchOptimizer:
         """Executes the closed-loop optimization search."""
         low, high = self.bounds
         init_x = initial_points or [low + (high - low) * 0.2, low + (high - low) * 0.8]
-        
+
         X: List[float] = []
         y: List[float] = []
         history: List[OptimizationStep] = []
@@ -135,15 +139,17 @@ class BayesianResearchOptimizer:
             else:
                 improvement = 0.0
 
-            history.append(OptimizationStep(
-                step_number=step,
-                candidate_x=next_x,
-                observed_y=obs_y,
-                predicted_mu=pred_mu_next,
-                predicted_sigma=pred_sig_next,
-                acquisition_score=best_acq,
-                current_best_y=best_y,
-            ))
+            history.append(
+                OptimizationStep(
+                    step_number=step,
+                    candidate_x=next_x,
+                    observed_y=obs_y,
+                    predicted_mu=pred_mu_next,
+                    predicted_sigma=pred_sig_next,
+                    acquisition_score=best_acq,
+                    current_best_y=best_y,
+                )
+            )
 
             # Check convergence
             if step >= 5 and improvement < self.tol and best_acq < self.tol:

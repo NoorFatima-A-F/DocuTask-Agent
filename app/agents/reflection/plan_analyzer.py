@@ -20,8 +20,7 @@ class PlanAnalyzer(IPlanAnalyzer):
 
         # Detect redundant/zero-effect tasks (tasks with duration < 1ms and no outputs)
         redundant_tasks = [
-            t.task_name for t in trace.tasks
-            if t.duration_ms < 1.0 and (not t.output_result or t.output_result == {})
+            t.task_name for t in trace.tasks if t.duration_ms < 1.0 and (not t.output_result or t.output_result == {})
         ]
 
         decomposition_score = 1.0
@@ -37,5 +36,5 @@ class PlanAnalyzer(IPlanAnalyzer):
             "duplicated_task_count": duplicated_count,
             "redundant_tasks": redundant_tasks,
             "decomposition_efficiency_score": decomposition_score,
-            "has_excessive_branching": len(trace.tasks) > 20
+            "has_excessive_branching": len(trace.tasks) > 20,
         }

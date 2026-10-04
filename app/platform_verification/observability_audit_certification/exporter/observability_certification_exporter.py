@@ -1,6 +1,7 @@
 """
 Phase 3H.4.12.8 & 3H.4.12.9: Observability Certification Repository Exporter
 """
+
 import os
 import json
 from datetime import datetime, timezone
@@ -86,12 +87,23 @@ class ObservabilityCertificationExporter(IObservabilityCertificationExporter):
             # Subdirectory manifests
             "health/liveness.json": {"status": "ALIVE", "http_status": 200, "verified_at": now_str},
             "health/readiness.json": {"status": "READY", "http_status": 200, "all_dependencies_ready": True},
-            "health/dependency.json": {"dependencies_checked": ["PostgreSQL", "Redis", "Storage", "WorkerPool", "GeminiLLM"], "status": "HEALTHY"},
+            "health/dependency.json": {
+                "dependencies_checked": ["PostgreSQL", "Redis", "Storage", "WorkerPool", "GeminiLLM"],
+                "status": "HEALTHY",
+            },
             "metrics/prometheus.json": {"scraped_endpoints": 5, "metrics_count": 48, "naming_compliant": True},
             "metrics/otel.json": {"spans_traced": 120, "trace_scrubbing_compliant": True},
             "metrics/resource_metrics.json": {"cpu_utilization": 22.4, "memory_utilization": 38.1, "status": "NORMAL"},
-            "dashboards/infrastructure.json": {"dashboard_title": "DocuTask Infrastructure Overview", "panels_count": 12, "active": True},
-            "dashboards/ai_runtime.json": {"dashboard_title": "DocuTask Agent AI Processing", "panels_count": 8, "active": True},
+            "dashboards/infrastructure.json": {
+                "dashboard_title": "DocuTask Infrastructure Overview",
+                "panels_count": 12,
+                "active": True,
+            },
+            "dashboards/ai_runtime.json": {
+                "dashboard_title": "DocuTask Agent AI Processing",
+                "panels_count": 8,
+                "active": True,
+            },
             "alerts/rules.json": {"total_rules": 18, "active_rules": 18, "runbooks_linked": True},
             "alerts/accuracy.json": {"precision": 98.5, "recall": 100.0, "accuracy_score": 100.0},
             "alerts/fatigue.json": {"deduplication_rate": 90.0, "noise_compression_rate": 96.0, "storm_tested": True},
@@ -134,7 +146,9 @@ class ObservabilityCertificationExporter(IObservabilityCertificationExporter):
 | :--- | :--- | :--- | :--- | :--- |
 """
         for cs in certification_report.category_scores:
-            summary_md += f"| {cs.category} | {cs.weight * 100:.0f}% | {cs.score:.2f}% | {cs.weighted_score:.2f}% | PASS |\n"
+            summary_md += (
+                f"| {cs.category} | {cs.weight * 100:.0f}% | {cs.score:.2f}% | {cs.weighted_score:.2f}% | PASS |\n"
+            )
 
         summary_md += f"""
 ---
@@ -142,7 +156,7 @@ class ObservabilityCertificationExporter(IObservabilityCertificationExporter):
 ## Production Readiness Review (PRR) Signoff
 - **Overall PRR Score:** {prr_report.overall_prr_score:.2f}%
 - **PRR Status:** {prr_report.prr_status}
-- **Hard Gates Passed:** {'YES' if cicd_gate_report.hard_gates_passed else 'NO'}
+- **Hard Gates Passed:** {"YES" if cicd_gate_report.hard_gates_passed else "NO"}
 - **Tamper Resistance & SHA-256 Hashes:** Verified and sealed across all manifests.
 
 ---

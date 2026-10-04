@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Verification Dataset Architecture & Test Data Governance.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 import hashlib
@@ -105,11 +106,11 @@ class DatasetQualityReport(BaseModel):
     report_id: str = Field(default_factory=lambda: f"dqr_{uuid.uuid4().hex[:8]}")
     dataset_id: str
     version: str
-    accuracy_score: float = 1.0       # Weight: 30%
-    completeness_score: float = 1.0   # Weight: 20%
-    diversity_score: float = 1.0      # Weight: 20%
-    consistency_score: float = 1.0    # Weight: 15%
-    freshness_score: float = 1.0      # Weight: 15%
+    accuracy_score: float = 1.0  # Weight: 30%
+    completeness_score: float = 1.0  # Weight: 20%
+    diversity_score: float = 1.0  # Weight: 20%
+    consistency_score: float = 1.0  # Weight: 15%
+    freshness_score: float = 1.0  # Weight: 15%
     composite_quality_score: float = 1.0
     is_acceptable: bool = True
     issues_detected: List[str] = Field(default_factory=list)

@@ -12,7 +12,11 @@ class SafetyIncidentManager:
     # Valid transitions
     VALID_TRANSITIONS: Dict[IncidentLifecycleState, List[IncidentLifecycleState]] = {
         IncidentLifecycleState.DETECTED: [IncidentLifecycleState.CLASSIFIED, IncidentLifecycleState.CLOSED],
-        IncidentLifecycleState.CLASSIFIED: [IncidentLifecycleState.INVESTIGATING, IncidentLifecycleState.MITIGATED, IncidentLifecycleState.CLOSED],
+        IncidentLifecycleState.CLASSIFIED: [
+            IncidentLifecycleState.INVESTIGATING,
+            IncidentLifecycleState.MITIGATED,
+            IncidentLifecycleState.CLOSED,
+        ],
         IncidentLifecycleState.INVESTIGATING: [IncidentLifecycleState.MITIGATED, IncidentLifecycleState.CLOSED],
         IncidentLifecycleState.MITIGATED: [IncidentLifecycleState.RESOLVED, IncidentLifecycleState.INVESTIGATING],
         IncidentLifecycleState.RESOLVED: [IncidentLifecycleState.CLOSED, IncidentLifecycleState.INVESTIGATING],

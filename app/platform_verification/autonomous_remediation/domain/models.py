@@ -12,14 +12,16 @@ from datetime import datetime, timezone
 
 class ActionLevel(str, Enum):
     """Classification levels for remediation actions (3H.4.3.3)."""
-    LEVEL_0 = "Level 0 - Informational"        # No action, monitor only
-    LEVEL_1 = "Level 1 - Auto Safe Action"      # Automatic execution without approval (e.g. refresh pool)
-    LEVEL_2 = "Level 2 - Controlled Recovery"   # Automatic execution with safety constraints (e.g. restart worker)
+
+    LEVEL_0 = "Level 0 - Informational"  # No action, monitor only
+    LEVEL_1 = "Level 1 - Auto Safe Action"  # Automatic execution without approval (e.g. refresh pool)
+    LEVEL_2 = "Level 2 - Controlled Recovery"  # Automatic execution with safety constraints (e.g. restart worker)
     LEVEL_3 = "Level 3 - Human Approval Required"  # High risk, human approval mandatory (e.g. db restore)
 
 
 class RemediationRisk(str, Enum):
     """Risk rating of remediation actions."""
+
     LOW = "low"
     MEDIUM = "medium"
     HIGH = "high"
@@ -28,6 +30,7 @@ class RemediationRisk(str, Enum):
 
 class ExecutionApproval(str, Enum):
     """Approval status for remediation execution."""
+
     AUTOMATIC = "automatic"
     APPROVED = "approved"
     PENDING_HUMAN = "pending_human"
@@ -37,6 +40,7 @@ class ExecutionApproval(str, Enum):
 
 class RemediationStatus(str, Enum):
     """Execution status of a remediation action."""
+
     PENDING = "pending"
     RUNNING = "running"
     SUCCESS = "success"
@@ -47,10 +51,11 @@ class RemediationStatus(str, Enum):
 
 class SelfHealingTier(str, Enum):
     """Certification tiers for autonomous self-healing readiness (3H.4.3.14)."""
+
     ENTERPRISE_SELF_HEALING_READY = "Enterprise Self-Healing Ready"  # 95 - 100%
-    PRODUCTION_READY = "Production Ready"                            # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                    # 80 - 89.99%
-    FAILED = "Failed"                                                # < 80%
+    PRODUCTION_READY = "Production Ready"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 # ---------------------------------------------------------------------------
@@ -59,6 +64,7 @@ class SelfHealingTier(str, Enum):
 @dataclass
 class RemediationPolicyItem:
     """Mapping of failure condition to approved recovery action."""
+
     condition: str
     target_component: str
     action: str
@@ -74,6 +80,7 @@ class RemediationPolicyItem:
 @dataclass
 class RemediationPolicyReport:
     """Report of registered remediation policies."""
+
     total_policies: int
     level_0_count: int
     level_1_count: int
@@ -89,6 +96,7 @@ class RemediationPolicyReport:
 @dataclass
 class FailureContext:
     """Input context for automated recovery decision."""
+
     failure_id: str
     root_cause: str
     severity: str
@@ -101,6 +109,7 @@ class FailureContext:
 @dataclass
 class RemediationDecision:
     """Output plan from recovery decision engine."""
+
     decision_id: str
     failure_id: str
     selected_action: str
@@ -118,6 +127,7 @@ class RemediationDecision:
 @dataclass
 class SafetyCheckResult:
     """Safety guard validation result."""
+
     safe_to_execute: bool
     preconditions_passed: bool
     rate_limit_passed: bool
@@ -133,6 +143,7 @@ class SafetyCheckResult:
 @dataclass
 class ExecutionLogEntry:
     """Detailed record of executed remediation."""
+
     execution_id: str
     decision_id: str
     action: str
@@ -148,6 +159,7 @@ class ExecutionLogEntry:
 @dataclass
 class ActionExecutionReport:
     """Summary of executed remediation actions."""
+
     total_actions_executed: int
     successful_actions: int
     failed_actions: int
@@ -162,6 +174,7 @@ class ActionExecutionReport:
 @dataclass
 class RecoveryValidationResult:
     """Validation proof of post-remediation health restoration."""
+
     validation_id: str
     execution_id: str
     target: str
@@ -176,6 +189,7 @@ class RecoveryValidationResult:
 @dataclass
 class RecoveryValidationReport:
     """Aggregate recovery validation report."""
+
     total_validations: int
     successful_recoveries: int
     failed_recoveries: int
@@ -190,6 +204,7 @@ class RecoveryValidationReport:
 @dataclass
 class RollbackRecord:
     """Record of rollback execution upon remediation failure."""
+
     rollback_id: str
     execution_id: str
     action_reverted: str
@@ -204,6 +219,7 @@ class RollbackRecord:
 @dataclass
 class RollbackReport:
     """Aggregate rollback report."""
+
     total_rollbacks_triggered: int
     successful_rollbacks: int
     escalated_incidents_count: int
@@ -218,6 +234,7 @@ class RollbackReport:
 @dataclass
 class SelfHealingScenarioResult:
     """Result of a real-world self-healing simulation test."""
+
     scenario_id: str
     name: str
     injected_failure: str
@@ -234,6 +251,7 @@ class SelfHealingScenarioResult:
 @dataclass
 class SelfHealingTestReport:
     """Report of all 5 self-healing chaos scenarios."""
+
     total_scenarios: int = 5
     passed_scenarios: int = 5
     scenarios: List[SelfHealingScenarioResult] = field(default_factory=list)
@@ -246,6 +264,7 @@ class SelfHealingTestReport:
 @dataclass
 class RemediationMetricsReport:
     """Reliability intelligence and MTTR metrics."""
+
     total_incidents_detected: int = 25
     successful_remediations: int = 24
     failed_remediations: int = 1
@@ -263,6 +282,7 @@ class RemediationMetricsReport:
 @dataclass
 class RemediationSecurityCheck:
     """Security and RBAC permission check."""
+
     check_name: str
     operation: str
     authorized: bool
@@ -274,6 +294,7 @@ class RemediationSecurityCheck:
 @dataclass
 class RemediationSecurityReport:
     """Observability & security compliance audit report."""
+
     total_checks: int = 6
     unauthorized_commands_blocked: int = 3
     secret_leaks_found: int = 0
@@ -288,12 +309,13 @@ class RemediationSecurityReport:
 @dataclass
 class AutonomousRemediationScorecard:
     """6-Dimension Weighted Autonomous Remediation Scorecard."""
-    recovery_accuracy_score: float = 100.0       # Weight: 25%
-    safety_controls_score: float = 100.0         # Weight: 20%
+
+    recovery_accuracy_score: float = 100.0  # Weight: 25%
+    safety_controls_score: float = 100.0  # Weight: 20%
     validation_correctness_score: float = 100.0  # Weight: 20%
-    rollback_capability_score: float = 100.0     # Weight: 15%
-    observability_score: float = 100.0           # Weight: 10%
-    security_score: float = 100.0                # Weight: 10%
+    rollback_capability_score: float = 100.0  # Weight: 15%
+    observability_score: float = 100.0  # Weight: 10%
+    security_score: float = 100.0  # Weight: 10%
     overall_score: float = 100.0
     certification_tier: SelfHealingTier = SelfHealingTier.ENTERPRISE_SELF_HEALING_READY
     certification_verdict: str = "CERTIFIED"

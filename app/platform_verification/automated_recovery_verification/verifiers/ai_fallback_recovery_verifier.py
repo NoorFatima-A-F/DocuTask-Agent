@@ -1,6 +1,7 @@
 """
 3H.12.7: AI Provider Fallback Recovery Verifier
 """
+
 from ..domain.models import AIRecoveryReport
 from ..domain.interfaces import IAIRecoveryVerifier
 
@@ -20,5 +21,5 @@ class AIFallbackRecoveryVerifier(IAIRecoveryVerifier):
             core_platform_operational=True,
             document_extraction_continued=True,
             degradation_graceful=True,
-            ai_recovery_passed=True
+            ai_recovery_passed=True,
         )

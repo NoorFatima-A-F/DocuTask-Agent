@@ -25,11 +25,46 @@ class AgentCollaborationVerifier(IAgentCollaborationVerifier):
 
     def verify(self) -> AgentCollaborationReport:
         interactions = [
-            AgentCollaborationInteraction(interaction_type="TaskDelegation", participating_agents=["SupervisorAgent", "OCRExtractorAgent"], consensus_protocol="DirectDelegation", resolution_time_ms=12.0, escalation_triggered=False, success=True),
-            AgentCollaborationInteraction(interaction_type="PeerReviewVerification", participating_agents=["DataValidatorAgent", "ComplianceAuditAgent"], consensus_protocol="MajorityVote", resolution_time_ms=28.5, escalation_triggered=False, success=True),
-            AgentCollaborationInteraction(interaction_type="ConflictResolution", participating_agents=["FinancialAnalystAgent", "RiskAssessorAgent"], consensus_protocol="WeightedConfidenceConsensus", resolution_time_ms=45.0, escalation_triggered=False, success=True),
-            AgentCollaborationInteraction(interaction_type="ExecutiveEscalation", participating_agents=["RiskAssessorAgent", "ExecutiveCouncilAgent"], consensus_protocol="HierarchicalApproval", resolution_time_ms=62.0, escalation_triggered=True, success=True),
-            AgentCollaborationInteraction(interaction_type="SharedMemorySynchronization", participating_agents=["PlannerAgent", "WorkerPoolAgents"], consensus_protocol="DistributedStateSync", resolution_time_ms=15.2, escalation_triggered=False, success=True),
+            AgentCollaborationInteraction(
+                interaction_type="TaskDelegation",
+                participating_agents=["SupervisorAgent", "OCRExtractorAgent"],
+                consensus_protocol="DirectDelegation",
+                resolution_time_ms=12.0,
+                escalation_triggered=False,
+                success=True,
+            ),
+            AgentCollaborationInteraction(
+                interaction_type="PeerReviewVerification",
+                participating_agents=["DataValidatorAgent", "ComplianceAuditAgent"],
+                consensus_protocol="MajorityVote",
+                resolution_time_ms=28.5,
+                escalation_triggered=False,
+                success=True,
+            ),
+            AgentCollaborationInteraction(
+                interaction_type="ConflictResolution",
+                participating_agents=["FinancialAnalystAgent", "RiskAssessorAgent"],
+                consensus_protocol="WeightedConfidenceConsensus",
+                resolution_time_ms=45.0,
+                escalation_triggered=False,
+                success=True,
+            ),
+            AgentCollaborationInteraction(
+                interaction_type="ExecutiveEscalation",
+                participating_agents=["RiskAssessorAgent", "ExecutiveCouncilAgent"],
+                consensus_protocol="HierarchicalApproval",
+                resolution_time_ms=62.0,
+                escalation_triggered=True,
+                success=True,
+            ),
+            AgentCollaborationInteraction(
+                interaction_type="SharedMemorySynchronization",
+                participating_agents=["PlannerAgent", "WorkerPoolAgents"],
+                consensus_protocol="DistributedStateSync",
+                resolution_time_ms=15.2,
+                escalation_triggered=False,
+                success=True,
+            ),
         ]
 
         checks = [

@@ -44,12 +44,11 @@ class SafetyGuard(ISafetyGuard):
 
         # 1. Rate Limit & Cooldown Check
         now = time.time()
-        recent_attempts = [
-            t for t in self._execution_history.get(target, [])
-            if now - t < cooldown_sec
-        ]
+        recent_attempts = [t for t in self._execution_history.get(target, []) if now - t < cooldown_sec]
         rate_limit_passed = len(recent_attempts) < max_att
-        cooldown_remaining = int(cooldown_sec - (now - recent_attempts[-1])) if recent_attempts and not rate_limit_passed else 0
+        cooldown_remaining = (
+            int(cooldown_sec - (now - recent_attempts[-1])) if recent_attempts and not rate_limit_passed else 0
+        )
 
         # 2. Preconditions Check
         # Example: Verify we do not restart if fleet blast radius is triggered without Level 3 approval
@@ -72,7 +71,9 @@ class SafetyGuard(ISafetyGuard):
         )
 
         if not rate_limit_passed:
-            rejection_reason = f"Rate limit exceeded: {len(recent_attempts)} attempts in {cooldown_sec}s window. Cooldown active."
+            rejection_reason = (
+                f"Rate limit exceeded: {len(recent_attempts)} attempts in {cooldown_sec}s window. Cooldown active."
+            )
 
         return SafetyCheckResult(
             safe_to_execute=safe_to_execute,

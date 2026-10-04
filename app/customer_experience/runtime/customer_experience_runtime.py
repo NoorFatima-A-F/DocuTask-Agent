@@ -111,7 +111,9 @@ class CustomerExperienceRuntime(ICustomerExperienceRuntime):
             "customer_analytics": analytics.model_dump(),
             "trust_center": trust_report.model_dump(),
             "interactive_demo_result": demo_run.model_dump(),
-            "portfolio_artifacts_count": len(portfolio_artifacts.case_studies) + len(portfolio_artifacts.demo_scripts) + 1,
+            "portfolio_artifacts_count": len(portfolio_artifacts.case_studies)
+            + len(portfolio_artifacts.demo_scripts)
+            + 1,
         }
 
         # Export JSON files

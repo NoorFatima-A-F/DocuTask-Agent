@@ -1,4 +1,5 @@
 """Plugin Lifecycle States & State Machine (Req 61)."""
+
 from enum import Enum
 
 

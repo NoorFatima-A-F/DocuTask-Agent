@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Performance, Scaling & Chaos Verification (Part 3F).
 """
+
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List

@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 
 class DriftItem(BaseModel):
     """Specific drift observation."""
+
     drift_type: str  # CODE_DRIFT, DEPENDENCY_DRIFT, INFRASTRUCTURE_DRIFT
     description: str
     certified_state: str
@@ -25,6 +26,7 @@ class DriftItem(BaseModel):
 
 class CertificationDriftReport(BaseModel):
     """Overall certification drift report."""
+
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     target_release: str
     certified_commit: str
@@ -53,45 +55,63 @@ class DriftDetector:
         # 1. Check Code Drift
         current_commit = "HEAD"
         try:
-            r = subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(self.repo_root), capture_output=True, text=True, timeout=5)
+            r = subprocess.run(
+                ["git", "rev-parse", "HEAD"], cwd=str(self.repo_root), capture_output=True, text=True, timeout=5
+            )
             if r.returncode == 0 and r.stdout.strip():
                 current_commit = r.stdout.strip()
         except Exception:
             pass
 
-        if certified_commit and certified_commit != "HEAD" and current_commit != "HEAD" and certified_commit != current_commit:
-            drifts.append(DriftItem(
-                drift_type="CODE_DRIFT",
-                description="Repository HEAD has advanced beyond the certified commit SHA",
-                certified_state=certified_commit[:12],
-                current_state=current_commit[:12],
-                severity="HIGH",
-            ))
+        if (
+            certified_commit
+            and certified_commit != "HEAD"
+            and current_commit != "HEAD"
+            and certified_commit != current_commit
+        ):
+            drifts.append(
+                DriftItem(
+                    drift_type="CODE_DRIFT",
+                    description="Repository HEAD has advanced beyond the certified commit SHA",
+                    certified_state=certified_commit[:12],
+                    current_state=current_commit[:12],
+                    severity="HIGH",
+                )
+            )
 
         # 2. Check Python Runtime Drift
         curr_py = platform.python_version()
-        if certified_python_version and not curr_py.startswith("3.") and not curr_py.startswith(certified_python_version[:3]):
-            drifts.append(DriftItem(
-                drift_type="INFRASTRUCTURE_DRIFT",
-                description="Host Python runtime environment differs from certification baseline",
-                certified_state=certified_python_version,
-                current_state=curr_py,
-                severity="MEDIUM",
-            ))
+        if (
+            certified_python_version
+            and not curr_py.startswith("3.")
+            and not curr_py.startswith(certified_python_version[:3])
+        ):
+            drifts.append(
+                DriftItem(
+                    drift_type="INFRASTRUCTURE_DRIFT",
+                    description="Host Python runtime environment differs from certification baseline",
+                    certified_state=certified_python_version,
+                    current_state=curr_py,
+                    severity="MEDIUM",
+                )
+            )
 
         # 3. Check Dependency Manifest Drift
         req_file = self.repo_root / "requirements.txt"
         if req_file.exists():
             import hashlib
+
             curr_dep_hash = hashlib.sha256(req_file.read_bytes()).hexdigest()
             if certified_dependencies_hash and curr_dep_hash != certified_dependencies_hash:
-                drifts.append(DriftItem(
-                    drift_type="DEPENDENCY_DRIFT",
-                    description="requirements.txt dependencies hash differs from certified manifest",
-                    certified_state=certified_dependencies_hash[:16],
-                    current_state=curr_dep_hash[:16],
-                    severity="CRITICAL",
-                ))
+                drifts.append(
+                    DriftItem(
+                        drift_type="DEPENDENCY_DRIFT",
+                        description="requirements.txt dependencies hash differs from certified manifest",
+                        certified_state=certified_dependencies_hash[:16],
+                        current_state=curr_dep_hash[:16],
+                        severity="CRITICAL",
+                    )
+                )
 
         has_drift = len(drifts) > 0
         return CertificationDriftReport(

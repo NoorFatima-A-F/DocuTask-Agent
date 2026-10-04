@@ -18,9 +18,10 @@ from app.runtime.planning.risk_engine import StrategyRiskProfile
 
 class CounterfactualQuery(BaseModel):
     """Specific counterfactual hypothesis to evaluate."""
+
     query_type: str = Field(
         default="WHY_STRATEGY_SELECTED",
-        description="'WHY_STRATEGY_SELECTED', 'WHY_STRATEGY_REJECTED', 'WHAT_IF_WEIGHT_CHANGED', 'WHAT_IF_BUDGET_HALVED', 'TIPPING_POINT'"
+        description="'WHY_STRATEGY_SELECTED', 'WHY_STRATEGY_REJECTED', 'WHAT_IF_WEIGHT_CHANGED', 'WHAT_IF_BUDGET_HALVED', 'TIPPING_POINT'",
     )
     target_strategy_id: Optional[str] = None
     weight_overrides: Optional[Dict[str, float]] = None
@@ -29,6 +30,7 @@ class CounterfactualQuery(BaseModel):
 
 class CounterfactualExplanation(BaseModel):
     """Structured mathematical explanation with tipping points and proof."""
+
     query_type: str
     target_strategy_id: Optional[str] = None
     summary_explanation: str
@@ -64,7 +66,7 @@ class CounterfactualEngine:
         u_sel = utility_scores[selected_strategy_id].total_utility
         proof_lines = [
             f"Selected {selected.name} (Utility U = {u_sel:.4f})",
-            f"Accuracy: {selected.estimated_accuracy*100:.1f}%, Latency: {latency_predictions[selected_strategy_id].critical_path_ms:.1f}ms, Cost: ${cost_predictions[selected_strategy_id].total_cost_usd:.4f}",
+            f"Accuracy: {selected.estimated_accuracy * 100:.1f}%, Latency: {latency_predictions[selected_strategy_id].critical_path_ms:.1f}ms, Cost: ${cost_predictions[selected_strategy_id].total_cost_usd:.4f}",
             "Utility equation: U = 0.40*Acc - 0.20*(Lat/10000) - 0.20*(Cost/0.10) - 0.10*Risk + 0.05*Mem + 0.05*Sat",
         ]
 
@@ -109,7 +111,7 @@ class CounterfactualEngine:
             f"U({sel.name}) = {u_sel:.4f} > U({rej.name}) = {u_rej:.4f} (\\Delta U = +{delta_u:.4f})\n"
             f"Latency Difference: {latency_predictions[rej.strategy_id].critical_path_ms - latency_predictions[sel.strategy_id].critical_path_ms:+.1f}ms\n"
             f"Cost Difference: ${cost_predictions[rej.strategy_id].total_cost_usd - cost_predictions[sel.strategy_id].total_cost_usd:+.4f}\n"
-            f"Accuracy Difference: {(rej.estimated_accuracy - sel.estimated_accuracy)*100:+.1f}%"
+            f"Accuracy Difference: {(rej.estimated_accuracy - sel.estimated_accuracy) * 100:+.1f}%"
         )
 
         return CounterfactualExplanation(
@@ -139,12 +141,14 @@ class CounterfactualEngine:
             l = latency_predictions[s.strategy_id]
             r = risk_profiles[s.strategy_id]
             u = custom_engine.calculate_utility(s, c, l, r)
-            new_rankings.append({
-                "strategy_id": s.strategy_id,
-                "name": s.name,
-                "archetype": s.archetype.value,
-                "new_utility": u.total_utility,
-            })
+            new_rankings.append(
+                {
+                    "strategy_id": s.strategy_id,
+                    "name": s.name,
+                    "archetype": s.archetype.value,
+                    "new_utility": u.total_utility,
+                }
+            )
 
         new_rankings.sort(key=lambda x: x["new_utility"], reverse=True)
         winner = new_rankings[0]

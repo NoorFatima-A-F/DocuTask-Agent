@@ -1,6 +1,7 @@
 """
 3H.12.6: Worker Self-Healing Verifier
 """
+
 from ..domain.models import WorkerRecoveryReport
 from ..domain.interfaces import IWorkerSelfHealingVerifier
 
@@ -21,5 +22,5 @@ class WorkerSelfHealingVerifier(IWorkerSelfHealingVerifier):
             concurrency_capacity_restored=True,
             target_concurrency=32,
             active_concurrency=32,
-            worker_self_healing_passed=True
+            worker_self_healing_passed=True,
         )

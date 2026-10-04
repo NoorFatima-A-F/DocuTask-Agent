@@ -3,6 +3,7 @@ Incident Reconstruction Engine (Part 3H.3.3.12).
 Reconstructs chronological incident timelines from health transitions, root causes,
 and remediation actions to aid SRE post-mortem analysis.
 """
+
 import uuid
 from datetime import datetime, timezone
 from typing import List, Optional
@@ -30,7 +31,15 @@ class IncidentReconstructionEngine:
 
         if events and len(events) > 0:
             for idx, e in enumerate(events):
-                phase = "Detection" if idx == 0 else ("Mitigation" if e.new_state.value == "RECOVERING" else ("Resolution" if e.new_state.value == "READY" else "Escalation"))
+                phase = (
+                    "Detection"
+                    if idx == 0
+                    else (
+                        "Mitigation"
+                        if e.new_state.value == "RECOVERING"
+                        else ("Resolution" if e.new_state.value == "READY" else "Escalation")
+                    )
+                )
                 entries.append(
                     IncidentTimelineEntry(
                         timestamp=e.timestamp,

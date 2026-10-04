@@ -28,16 +28,10 @@ class User(Base, UUIDMixin, TimestampMixin):
 
     # Relationships
     refresh_tokens: Mapped[List["RefreshToken"]] = relationship(
-        "RefreshToken",
-        back_populates="user",
-        cascade="all, delete-orphan",
-        lazy="selectin"
+        "RefreshToken", back_populates="user", cascade="all, delete-orphan", lazy="selectin"
     )
     documents: Mapped[List["Document"]] = relationship(
-        "Document",
-        back_populates="owner",
-        cascade="all, delete-orphan",
-        lazy="selectin"
+        "Document", back_populates="owner", cascade="all, delete-orphan", lazy="selectin"
     )
 
     def __repr__(self) -> str:

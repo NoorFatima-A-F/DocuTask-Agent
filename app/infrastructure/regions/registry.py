@@ -43,7 +43,8 @@ class RegionRegistry:
                 results = [r for r in results if r.status == status]
             if jurisdiction:
                 results = [
-                    r for r in results
+                    r
+                    for r in results
                     if r.data_residency_jurisdiction.upper() == jurisdiction.upper()
                     or r.geography.jurisdiction.upper() == jurisdiction.upper()
                 ]

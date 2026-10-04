@@ -12,6 +12,7 @@ from app.agents.coordination.voting import AgentVote, VotingEngine, VotingResult
 
 class ConsensusOutcome(BaseModel):
     """Formal consensus verification outcome."""
+
     topic: str
     agreed_decision: str
     quorum_met: bool
@@ -29,11 +30,7 @@ class ConsensusEngine(IConsensusEngine):
         self.voting_engine = voting_engine or VotingEngine()
 
     async def reach_consensus(
-        self,
-        topic: str,
-        votes: List[AgentVote],
-        total_cluster_size: Optional[int] = None,
-        quorum_fraction: float = 0.5
+        self, topic: str, votes: List[AgentVote], total_cluster_size: Optional[int] = None, quorum_fraction: float = 0.5
     ) -> ConsensusOutcome:
         """Evaluates whether quorum is present and a majority decision is formed."""
         cluster_size = total_cluster_size or len(votes)
@@ -59,5 +56,5 @@ class ConsensusEngine(IConsensusEngine):
             quorum_met=True,
             majority_met=True,
             total_participants=cluster_size,
-            participating_voters=voter_count
+            participating_voters=voter_count,
         )

@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class TaskAssignment(BaseModel):
     """Assignment of a task to a specific agent with timestamp and lease parameters."""
+
     assignment_id: UUID = Field(default_factory=uuid4)
     task_id: str
     assigned_agent_id: UUID
@@ -22,6 +23,7 @@ class TaskAssignment(BaseModel):
 
 class AssignmentMatrix(BaseModel):
     """Current matrix of all task-to-agent assignments."""
+
     assignments: Dict[str, TaskAssignment] = Field(default_factory=dict)
 
     def assign(self, task_id: str, agent_id: UUID) -> TaskAssignment:

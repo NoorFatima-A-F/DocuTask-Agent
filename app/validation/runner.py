@@ -22,9 +22,7 @@ class ValidationRunner:
 
     @classmethod
     async def run_full_validation(
-        cls,
-        baseline_accuracy: float = 0.95,
-        model_name: str = "gemini-1.5-flash"
+        cls, baseline_accuracy: float = 0.95, model_name: str = "gemini-1.5-flash"
     ) -> List[EvidenceRecord]:
         """
         Executes evaluation across all gold standard datasets.
@@ -44,7 +42,7 @@ class ValidationRunner:
             parsed_json, raw_text, _, _ = await provider.generate_json(
                 prompt=ocr_text,
                 json_schema={"properties": {k: {"type": "string"} for k in ground_truth.keys()}},
-                system_instruction=f"Extract data for document type '{doc_type}'"
+                system_instruction=f"Extract data for document type '{doc_type}'",
             )
 
             # Map raw mock output to match ground truth keys accurately for evaluation
@@ -52,10 +50,7 @@ class ValidationRunner:
 
             # Calculate objective metrics
             metrics: MetricEvaluationResult = EvaluationMetricsEngine.evaluate(
-                actual_json=actual_json,
-                ground_truth_json=ground_truth,
-                schema_valid=True,
-                confidence=0.95
+                actual_json=actual_json, ground_truth_json=ground_truth, schema_valid=True, confidence=0.95
             )
 
             # Log evidence
@@ -64,25 +59,36 @@ class ValidationRunner:
                 expected_behavior=ground_truth,
                 actual_behavior=actual_json,
                 metrics=metrics,
-                model_version=model_name
+                model_version=model_name,
             )
             evidence_records.append(record)
 
         # Calculate average accuracy across run
         avg_acc = (
-            sum(r.metrics.field_accuracy for r in evidence_records) / len(evidence_records)
-            if evidence_records else 1.0
+            sum(r.metrics.field_accuracy for r in evidence_records) / len(evidence_records) if evidence_records else 1.0
         )
 
         # Run regression comparison
         regression: RegressionComparison = RegressionEngine.compare(
-            current_metrics=evidence_records[0].metrics if evidence_records else MetricEvaluationResult(
-                total_fields=1, correct_fields=1, missing_fields=0, hallucinated_fields=0,
-                field_accuracy=avg_acc, exact_match_accuracy=1.0, schema_compliance_rate=1.0,
-                missing_field_rate=0.0, hallucination_rate=0.0, precision=1.0, recall=1.0,
-                f1_score=1.0, average_confidence=0.95, confidence_correctness=1.0
+            current_metrics=evidence_records[0].metrics
+            if evidence_records
+            else MetricEvaluationResult(
+                total_fields=1,
+                correct_fields=1,
+                missing_fields=0,
+                hallucinated_fields=0,
+                field_accuracy=avg_acc,
+                exact_match_accuracy=1.0,
+                schema_compliance_rate=1.0,
+                missing_field_rate=0.0,
+                hallucination_rate=0.0,
+                precision=1.0,
+                recall=1.0,
+                f1_score=1.0,
+                average_confidence=0.95,
+                confidence_correctness=1.0,
             ),
-            baseline_accuracy=baseline_accuracy
+            baseline_accuracy=baseline_accuracy,
         )
 
         # Generate reports

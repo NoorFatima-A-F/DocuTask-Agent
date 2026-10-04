@@ -26,8 +26,22 @@ class AIModelPerformanceVerifier(IAIModelPerformanceVerifier):
 
     def verify(self) -> AIModelPerformanceReport:
         models = [
-            AIModelMetric(model_name="Gemini 1.5 Pro", avg_latency_ms=1200.0, tokens_per_doc=1850, timeout_rate_pct=0.0, retry_frequency_pct=0.2, cost_per_doc_usd=0.0025),
-            AIModelMetric(model_name="Gemini 1.5 Flash", avg_latency_ms=450.0, tokens_per_doc=1850, timeout_rate_pct=0.0, retry_frequency_pct=0.1, cost_per_doc_usd=0.0006),
+            AIModelMetric(
+                model_name="Gemini 1.5 Pro",
+                avg_latency_ms=1200.0,
+                tokens_per_doc=1850,
+                timeout_rate_pct=0.0,
+                retry_frequency_pct=0.2,
+                cost_per_doc_usd=0.0025,
+            ),
+            AIModelMetric(
+                model_name="Gemini 1.5 Flash",
+                avg_latency_ms=450.0,
+                tokens_per_doc=1850,
+                timeout_rate_pct=0.0,
+                retry_frequency_pct=0.1,
+                cost_per_doc_usd=0.0006,
+            ),
         ]
 
         ai_pct = 55.0

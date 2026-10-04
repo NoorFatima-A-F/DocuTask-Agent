@@ -11,16 +11,17 @@ from datetime import datetime, timezone
 from typing import List, Optional
 
 from research_validation.governance.governance_policy import (
-    PolicyCategory, PolicyEnforcementAction, GovernancePolicyRule
+    PolicyCategory,
+    PolicyEnforcementAction,
+    GovernancePolicyRule,
 )
-from research_validation.governance.governance_audit import (
-    GovernanceAuditRecord, GovernanceAuditLog
-)
+from research_validation.governance.governance_audit import GovernanceAuditRecord, GovernanceAuditLog
 
 
 @dataclass(frozen=True)
 class GovernanceVerificationVerdict:
     """Overall compliance verdict across all evaluated governance rules."""
+
     target_id: str
     is_fully_compliant: bool
     is_blocked: bool

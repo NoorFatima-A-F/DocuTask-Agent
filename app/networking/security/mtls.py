@@ -100,7 +100,9 @@ class MTLSManager:
                     server_spiffe_uri=server_cert.san_uris[0] if server_cert.san_uris else "",
                 )
                 return MTLSHandshakeResult(success=True, session=session)
-            return MTLSHandshakeResult(success=False, error_reason="Client certificate verification failed under STRICT mTLS")
+            return MTLSHandshakeResult(
+                success=False, error_reason="Client certificate verification failed under STRICT mTLS"
+            )
 
         # Establish verified session
         session_id = f"session-mtls-{uuid.uuid4().hex[:10]}"

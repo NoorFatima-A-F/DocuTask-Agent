@@ -58,8 +58,12 @@ class ScientificPublication:
             "experiment_ids": self.experiment_ids,
             "evidence_ids": self.evidence_ids,
             "conclusion": self.conclusion,
-            "publication_state": self.publication_state.value if hasattr(self.publication_state, "value") else str(self.publication_state),
-            "state": self.publication_state.value if hasattr(self.publication_state, "value") else str(self.publication_state),
+            "publication_state": self.publication_state.value
+            if hasattr(self.publication_state, "value")
+            else str(self.publication_state),
+            "state": self.publication_state.value
+            if hasattr(self.publication_state, "value")
+            else str(self.publication_state),
             "doi": self.doi,
             "doi_signature": self.doi,
             "cryptographic_signature": self.cryptographic_signature,

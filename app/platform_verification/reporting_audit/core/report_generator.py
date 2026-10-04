@@ -1,6 +1,7 @@
 """
 Audit Report Generator with SHA-256 integrity digest generation.
 """
+
 from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -54,6 +55,7 @@ class EnterpriseAuditReportGenerator(IAuditReportGenerator):
     def search_reports(self, query: str) -> List[AuditReportRecord]:
         q = query.lower()
         return [
-            r for r in self._reports.values()
+            r
+            for r in self._reports.values()
             if q in r.title.lower() or q in r.scope.lower() or q in r.report_type.value.lower()
         ]

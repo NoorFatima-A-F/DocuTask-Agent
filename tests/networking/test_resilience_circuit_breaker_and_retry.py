@@ -61,6 +61,7 @@ def test_circuit_breaker_state_transitions():
 
     # Wait for wait duration to expire
     import time
+
     time.sleep(0.15)
 
     # Should transition to HALF_OPEN upon next can_execute call

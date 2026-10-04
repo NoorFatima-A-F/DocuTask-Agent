@@ -17,10 +17,7 @@ from app.agents.runtime.context_store import (
 async def test_in_memory_context_store_save_load():
     store = InMemoryContextStore()
     ctx = RuntimeContext(
-        tenant_id="tenant-alpha",
-        workspace_id="ws-123",
-        workflow_id="wf-456",
-        attributes={"plan_id": "p-1"}
+        tenant_id="tenant-alpha", workspace_id="ws-123", workflow_id="wf-456", attributes={"plan_id": "p-1"}
     )
     await store.save_context(ctx)
 

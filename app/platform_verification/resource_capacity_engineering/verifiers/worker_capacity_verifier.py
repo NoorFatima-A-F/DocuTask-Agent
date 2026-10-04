@@ -34,10 +34,34 @@ class WorkerCapacityVerifier(IWorkerCapacityVerifier):
 
     def verify(self) -> WorkerCapacityReport:
         curve = [
-            WorkerScalingCurvePoint(worker_count=1, throughput_docs_per_hour=120, cpu_usage_pct=12.0, memory_usage_mb=450.0, queue_delay_ms=85.0),
-            WorkerScalingCurvePoint(worker_count=5, throughput_docs_per_hour=580, cpu_usage_pct=38.0, memory_usage_mb=1850.0, queue_delay_ms=32.0),
-            WorkerScalingCurvePoint(worker_count=10, throughput_docs_per_hour=1200, cpu_usage_pct=62.0, memory_usage_mb=3800.0, queue_delay_ms=14.5),
-            WorkerScalingCurvePoint(worker_count=20, throughput_docs_per_hour=1250, cpu_usage_pct=88.0, memory_usage_mb=7400.0, queue_delay_ms=14.0),
+            WorkerScalingCurvePoint(
+                worker_count=1,
+                throughput_docs_per_hour=120,
+                cpu_usage_pct=12.0,
+                memory_usage_mb=450.0,
+                queue_delay_ms=85.0,
+            ),
+            WorkerScalingCurvePoint(
+                worker_count=5,
+                throughput_docs_per_hour=580,
+                cpu_usage_pct=38.0,
+                memory_usage_mb=1850.0,
+                queue_delay_ms=32.0,
+            ),
+            WorkerScalingCurvePoint(
+                worker_count=10,
+                throughput_docs_per_hour=1200,
+                cpu_usage_pct=62.0,
+                memory_usage_mb=3800.0,
+                queue_delay_ms=14.5,
+            ),
+            WorkerScalingCurvePoint(
+                worker_count=20,
+                throughput_docs_per_hour=1250,
+                cpu_usage_pct=88.0,
+                memory_usage_mb=7400.0,
+                queue_delay_ms=14.0,
+            ),
         ]
 
         optimal_count = 10

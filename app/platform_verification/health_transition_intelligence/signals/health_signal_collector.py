@@ -2,6 +2,7 @@
 Health Signal Collection Engine (Part 3H.3.3.2).
 Collects continuous host, runtime, dependency, and application telemetry indicators.
 """
+
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 from app.platform_verification.health_transition_intelligence.domain.models import HealthSignal
@@ -55,11 +56,16 @@ class HealthSignalCollector:
                 "cpu_usage_pct": self.record_signal("host", "cpu_usage", cpu_pct, "%").value,
                 "memory_usage_pct": self.record_signal("host", "memory_usage", memory_pct, "%").value,
                 "thread_count": self.record_signal("runtime", "thread_count", float(thread_count), "count").value,
-                "event_loop_latency_ms": self.record_signal("runtime", "event_loop_latency", event_loop_latency_ms, "ms").value,
+                "event_loop_latency_ms": self.record_signal(
+                    "runtime", "event_loop_latency", event_loop_latency_ms, "ms"
+                ).value,
             },
             "dependencies": {
                 "postgres_latency_ms": self.record_signal("postgres", "db_latency", db_latency_ms, "ms").value,
-                "redis_available": self.record_signal("redis", "availability", 1.0 if redis_available else 0.0, "bool").value == 1.0,
+                "redis_available": self.record_signal(
+                    "redis", "availability", 1.0 if redis_available else 0.0, "bool"
+                ).value
+                == 1.0,
                 "storage_latency_ms": self.record_signal("storage", "storage_latency", storage_latency_ms, "ms").value,
                 "ai_latency_ms": self.record_signal("gemini", "ai_latency", ai_latency_ms, "ms").value,
             },

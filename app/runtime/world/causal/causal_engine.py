@@ -98,13 +98,15 @@ class CausalReasoningEngine:
                 tgt = self._nodes.get(e.target_node_id)
                 if tgt:
                     shift = (intervention_value - src.baseline_value) * e.causal_strength
-                    downstream_impacts.append({
-                        "target_variable": tgt.variable_name,
-                        "relation": e.relation_type.value,
-                        "causal_strength": e.causal_strength,
-                        "predicted_delta": round(shift, 3),
-                        "confidence": e.confidence,
-                    })
+                    downstream_impacts.append(
+                        {
+                            "target_variable": tgt.variable_name,
+                            "relation": e.relation_type.value,
+                            "causal_strength": e.causal_strength,
+                            "predicted_delta": round(shift, 3),
+                            "confidence": e.confidence,
+                        }
+                    )
 
         return {
             "intervention": f"do({target_variable} = {intervention_value})",
@@ -127,10 +129,24 @@ class CausalReasoningEngine:
         return list(self._edges.values())
 
     def _seed_default_causal_graph(self):
-        n1 = self.add_variable("DAG_CHUNK_PARTITIONING", "SCHEDULER", "Splits multi-page documents into parallel sub-tasks", baseline_value=1.0)
-        n2 = self.add_variable("OCR_EXTRACTION_LATENCY", "METRIC", "Mean page extraction latency in milliseconds", baseline_value=180.0)
-        n3 = self.add_variable("TOKEN_EMBEDDING_CACHE_HIT_RATE", "MEMORY", "Percentage of cached table schema embeddings", baseline_value=0.82)
-        n4 = self.add_variable("TOTAL_COMPUTE_COST_USD", "FINANCIAL", "End-to-end dollar compute cost per document", baseline_value=0.024)
+        n1 = self.add_variable(
+            "DAG_CHUNK_PARTITIONING",
+            "SCHEDULER",
+            "Splits multi-page documents into parallel sub-tasks",
+            baseline_value=1.0,
+        )
+        n2 = self.add_variable(
+            "OCR_EXTRACTION_LATENCY", "METRIC", "Mean page extraction latency in milliseconds", baseline_value=180.0
+        )
+        n3 = self.add_variable(
+            "TOKEN_EMBEDDING_CACHE_HIT_RATE",
+            "MEMORY",
+            "Percentage of cached table schema embeddings",
+            baseline_value=0.82,
+        )
+        n4 = self.add_variable(
+            "TOTAL_COMPUTE_COST_USD", "FINANCIAL", "End-to-end dollar compute cost per document", baseline_value=0.024
+        )
 
         self.link_causality(n1.node_id, n2.node_id, CausalRelationType.DIRECT_CAUSE, -0.425, confidence=0.992)
         self.link_causality(n3.node_id, n4.node_id, CausalRelationType.DIRECT_CAUSE, -0.220, confidence=0.985)

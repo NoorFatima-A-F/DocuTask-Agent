@@ -34,7 +34,10 @@ class DataProtectionVerifier:
                 passed=tiers_ok,
                 message="4-tier data classification (Public, Internal, Confidential, Restricted) tags enforced across pipeline",
                 execution_time_ms=t_ms,
-                details={"tiers_verified": ["PUBLIC", "INTERNAL", "CONFIDENTIAL", "RESTRICTED"], "compliance_pct": 100.0},
+                details={
+                    "tiers_verified": ["PUBLIC", "INTERNAL", "CONFIDENTIAL", "RESTRICTED"],
+                    "compliance_pct": 100.0,
+                },
             )
         )
 

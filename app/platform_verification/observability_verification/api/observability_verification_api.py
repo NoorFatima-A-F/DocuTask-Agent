@@ -1,6 +1,7 @@
 """
 In-process REST API Router for Observability Verification.
 """
+
 from typing import Dict, Any, Optional
 
 

@@ -143,8 +143,7 @@ class ScientificMetricCalculator:
 
         if metric_id == "worker_utilization":
             active_ms = sum(
-                float(e.duration_ms or e.payload.get("duration_ms", 0.0))
-                for e in events if "Worker" in e.event_type
+                float(e.duration_ms or e.payload.get("duration_ms", 0.0)) for e in events if "Worker" in e.event_type
             )
             # Allocated window = duration_sec * 1000 * max(1, worker_count)
             worker_ids = set(e.worker_id or e.agent_id for e in events if e.worker_id or e.agent_id)
@@ -171,7 +170,8 @@ class ScientificMetricCalculator:
 
         elif metric_id == "memory_hit_rate":
             hits = sum(
-                1 for e in events
+                1
+                for e in events
                 if "Memory" in e.event_type and (e.payload.get("hit", True) or "Retrieved" in e.event_type)
             )
             queries = sum(1 for e in events if "Memory" in e.event_type)

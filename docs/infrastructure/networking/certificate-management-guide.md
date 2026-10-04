@@ -11,11 +11,7 @@ from app.infrastructure.networking.security import CertificateAuthorityManager
 ca_mgr = CertificateAuthorityManager(trust_domain="docutask.internal")
 
 # Issue workload certificate
-cert = ca_mgr.issue_workload_certificate(
-    service_name="document-ocr-worker",
-    namespace="default",
-    validity_days=30
-)
+cert = ca_mgr.issue_workload_certificate(service_name="document-ocr-worker", namespace="default", validity_days=30)
 
 # Rotate certificate
 new_cert = ca_mgr.rotate_certificate(cert.serial_number)

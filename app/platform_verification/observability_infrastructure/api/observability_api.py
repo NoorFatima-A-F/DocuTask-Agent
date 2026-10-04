@@ -1,6 +1,7 @@
 """
 FastAPI Router for Part 3I: Enterprise Observability Infrastructure (Logging & Metrics)
 """
+
 from fastapi import APIRouter
 from typing import Dict, Any
 from ..runtime.observability_runtime import ObservabilityRuntime
@@ -20,7 +21,9 @@ def run_full_verification() -> Dict[str, Any]:
         "overall_score_pct": results["unified_certification"].overall_score_pct,
         "certification_tier": results["unified_certification"].certification_tier.value,
         "certification_granted": results["unified_certification"].certification_granted,
-        "total_artifacts_exported": results["metadata"]["logging_artifacts"] + results["metadata"]["metrics_artifacts"] + 1,
+        "total_artifacts_exported": results["metadata"]["logging_artifacts"]
+        + results["metadata"]["metrics_artifacts"]
+        + 1,
     }
 
 
@@ -82,5 +85,5 @@ def get_health() -> Dict[str, Any]:
         "subsystem": "observability_infrastructure",
         "tracks": ["3I.1 Logging", "3I.2 Metrics"],
         "engine": "DocuTask Observability Verification Engine",
-        "phase": "3I"
+        "phase": "3I",
     }

@@ -3,6 +3,7 @@ Readiness Security Auditor (Part 3H.3.2.11).
 Audits readiness payloads to guarantee zero leakage of internal database hostnames,
 credentials, connection strings, stack traces, and internal IP addresses.
 """
+
 import re
 from typing import Dict, Any
 from app.platform_verification.readiness_engine.domain.models import (
@@ -24,9 +25,7 @@ class ReadinessSecurityAuditor:
     }
 
     def __init__(self):
-        self._compiled = {
-            k: re.compile(v, re.IGNORECASE) for k, v in self.FORBIDDEN_PATTERNS.items()
-        }
+        self._compiled = {k: re.compile(v, re.IGNORECASE) for k, v in self.FORBIDDEN_PATTERNS.items()}
 
     def audit_security(self, payload: Dict[str, Any]) -> ReadinessSecurityReport:
         payload_str = str(payload)
@@ -38,13 +37,18 @@ class ReadinessSecurityAuditor:
         no_internal_ip = not bool(self._compiled["internal_ip"].search(payload_str))
 
         leaks = 0
-        if not no_db_host: leaks += 1
-        if not no_password: leaks += 1
-        if not no_conn_str: leaks += 1
-        if not no_stack_trace: leaks += 1
-        if not no_internal_ip: leaks += 1
+        if not no_db_host:
+            leaks += 1
+        if not no_password:
+            leaks += 1
+        if not no_conn_str:
+            leaks += 1
+        if not no_stack_trace:
+            leaks += 1
+        if not no_internal_ip:
+            leaks += 1
 
-        passed = (leaks == 0)
+        passed = leaks == 0
 
         return ReadinessSecurityReport(
             no_database_host_leak=no_db_host,

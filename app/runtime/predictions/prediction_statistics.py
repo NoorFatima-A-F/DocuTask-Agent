@@ -15,6 +15,7 @@ class PredictionStatisticsAggregator:
         # Representative synthetic historical prediction pairs across dimensions
         sample_size = 150
         import random
+
         random.seed(42)
 
         # 1. Latency (ms): predicted ~ 650-1200ms

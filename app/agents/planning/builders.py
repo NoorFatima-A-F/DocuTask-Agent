@@ -29,17 +29,16 @@ class GraphBuilder:
         self._entry_node_ids: List[str] = []
         self._exit_node_ids: List[str] = []
 
-    def add_node(self, node_id: str, name: str, node_type: NodeType = NodeType.TASK, timeout_seconds: float = 300.0) -> "GraphBuilder":
+    def add_node(
+        self, node_id: str, name: str, node_type: NodeType = NodeType.TASK, timeout_seconds: float = 300.0
+    ) -> "GraphBuilder":
         node = PlanNode(node_id=node_id, name=name, node_type=node_type, timeout_seconds=timeout_seconds)
         self._nodes[node_id] = node
         return self
 
     def add_edge(self, source_id: str, target_id: str, edge_type: EdgeType = EdgeType.SEQUENTIAL) -> "GraphBuilder":
         edge = PlanEdge(
-            edge_id=f"{source_id}->{target_id}",
-            source_node_id=source_id,
-            target_node_id=target_id,
-            edge_type=edge_type
+            edge_id=f"{source_id}->{target_id}", source_node_id=source_id, target_node_id=target_id, edge_type=edge_type
         )
         self._edges.append(edge)
         return self
@@ -58,7 +57,7 @@ class GraphBuilder:
             nodes=self._nodes,
             edges=self._edges,
             entry_node_ids=self._entry_node_ids,
-            exit_node_ids=self._exit_node_ids
+            exit_node_ids=self._exit_node_ids,
         )
 
 
@@ -100,7 +99,7 @@ class PlanBuilder:
             total_nodes_count=len(graph.nodes),
             total_edges_count=len(graph.edges),
             estimated_cost_usd=self._cost_usd,
-            estimated_duration_seconds=self._duration_seconds
+            estimated_duration_seconds=self._duration_seconds,
         )
         identity = PlanIdentity(goal_id=self._goal_id)
         plan = Plan(
@@ -109,7 +108,7 @@ class PlanBuilder:
             graph=graph,
             statistics=stats,
             constraints=self._constraints,
-            dependencies=self._dependencies
+            dependencies=self._dependencies,
         )
         PlanStructuralValidator.validate_plan_structure(plan)
         return plan
@@ -130,10 +129,7 @@ class WorkflowBuilder:
 
     def build(self) -> WorkflowDefinition:
         return WorkflowDefinition(
-            workflow_id=self._workflow_id,
-            name=self._name,
-            graph=self._graph,
-            timeout_seconds=self._timeout_seconds
+            workflow_id=self._workflow_id, name=self._name, graph=self._graph, timeout_seconds=self._timeout_seconds
         )
 
 
@@ -159,7 +155,7 @@ class TaskBuilder:
             task_id=self._task_id,
             name=self._name,
             capability_requirement=self._capability,
-            estimated_duration_seconds=self._duration
+            estimated_duration_seconds=self._duration,
         )
 
 
@@ -176,11 +172,7 @@ class GoalBuilder:
         return self
 
     def build(self) -> PlanGoal:
-        return PlanGoal(
-            goal_id=self._goal_id,
-            name=self._name,
-            success_criteria=self._criteria
-        )
+        return PlanGoal(goal_id=self._goal_id, name=self._name, success_criteria=self._criteria)
 
 
 class DependencyBuilder:
@@ -196,11 +188,7 @@ class DependencyBuilder:
         return self
 
     def build(self) -> Dependency:
-        return Dependency(
-            source_id=self._source_id,
-            target_id=self._target_id,
-            dependency_type=self._type
-        )
+        return Dependency(source_id=self._source_id, target_id=self._target_id, dependency_type=self._type)
 
 
 class ConstraintBuilder:
@@ -216,8 +204,4 @@ class ConstraintBuilder:
         return self
 
     def build(self) -> PlanConstraint:
-        return PlanConstraint(
-            constraint_id=self._constraint_id,
-            constraint_type=self._type,
-            limit_value=self._limit
-        )
+        return PlanConstraint(constraint_id=self._constraint_id, constraint_type=self._type, limit_value=self._limit)

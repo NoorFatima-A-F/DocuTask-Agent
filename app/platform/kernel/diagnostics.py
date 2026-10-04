@@ -11,6 +11,7 @@ from typing import Any, Dict, List
 @dataclass(frozen=True)
 class DiagnosticReport:
     """Comprehensive platform diagnostic report structure."""
+
     platform_version: str
     build_version: str
     git_commit: str

@@ -124,4 +124,3 @@ def test_secret_expiration_and_revocation():
 
     with pytest.raises(SecretRevokedError):
         sm.get_secret("REVOKABLE_KEY")
-

@@ -9,15 +9,14 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import List
 
-from research_validation.governance.governance_policy import (
-    PolicyCategory, PolicyEnforcementAction
-)
+from research_validation.governance.governance_policy import PolicyCategory, PolicyEnforcementAction
 from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)
 class GovernanceAuditRecord:
     """A sealed record of a single policy evaluation event."""
+
     audit_id: str
     target_id: str
     rule_id: str

@@ -70,13 +70,13 @@ class RetryOptimizer:
         # P_rec = P_0 * (decay ^ retries)
         decay = 0.65
         p0 = 0.85 if failure_type.lower() in ("timeout", "rate_limit", "transient_network") else 0.50
-        p_recovery = p0 * (decay ** current_retry_count)
+        p_recovery = p0 * (decay**current_retry_count)
 
         # 3. Expected improvement in utility: delta_U ~ 0.8 (rescuing failed task)
         expected_delta_u = 0.85
 
         # 4. Retry cost & delay scaling with exponential backoff
-        backoff = pol.backoff_multiplier ** current_retry_count
+        backoff = pol.backoff_multiplier**current_retry_count
         retry_cost = base_cost_usd * 1.0
         expected_delay = base_latency_ms * backoff
 
@@ -90,14 +90,14 @@ class RetryOptimizer:
             decision = "RETRY"
             reason = (
                 f"Positive marginal benefit ({marginal_benefit:.3f} >= {pol.min_marginal_benefit:.3f}) "
-                f"with {p_recovery*100:.1f}% recovery probability."
+                f"with {p_recovery * 100:.1f}% recovery probability."
             )
         elif failure_type.lower() in ("schema_violation", "low_confidence", "ocr_degradation"):
             decision = "FALLBACK"
             reason = f"Marginal benefit too low for raw retry; fallback to multi-modal reasoning recommended."
         else:
             decision = "ESCALATE"
-            reason = f"Recovery probability {p_recovery*100:.1f}% below minimum viable threshold."
+            reason = f"Recovery probability {p_recovery * 100:.1f}% below minimum viable threshold."
 
         retry_statistics.record(decision)
 

@@ -1,6 +1,7 @@
 """
 Phase 3H.4.12.3: Observability Audit Trail Verifier
 """
+
 import uuid
 from datetime import datetime, timezone, timedelta
 from typing import List
@@ -16,9 +17,30 @@ class ObservabilityAuditTrailVerifier(IObservabilityAuditTrailVerifier):
             ("Health Checks Executed", "Health Evaluator", "Liveness & Readiness", "3H.2-3H.3", "PASSED", 45.2),
             ("Prometheus Telemetry Scraped", "Metrics Engine", "OpenTelemetry Collector", "3H.4.3", "PASSED", 28.6),
             ("Alert Storm Simulation Injected", "Chaos Engine", "AlertManager", "3H.4.8", "PASSED", 120.4),
-            ("Incident Payload & Runbook Audited", "Incident Engine", "PagerDuty / SRE Platform", "3H.4.7", "PASSED", 64.1),
-            ("Security & PII Sanitizer Verified", "Security Scanner", "Log & Trace Pipeline", "3H.4.10", "PASSED", 82.5),
-            ("Self-Healing Recovery Evaluated", "Recovery Executor", "PostgreSQL / Celery Replicas", "3H.4.9", "PASSED", 95.0),
+            (
+                "Incident Payload & Runbook Audited",
+                "Incident Engine",
+                "PagerDuty / SRE Platform",
+                "3H.4.7",
+                "PASSED",
+                64.1,
+            ),
+            (
+                "Security & PII Sanitizer Verified",
+                "Security Scanner",
+                "Log & Trace Pipeline",
+                "3H.4.10",
+                "PASSED",
+                82.5,
+            ),
+            (
+                "Self-Healing Recovery Evaluated",
+                "Recovery Executor",
+                "PostgreSQL / Celery Replicas",
+                "3H.4.9",
+                "PASSED",
+                95.0,
+            ),
             ("Readiness Score Calculated", "Scoring Engine", "Certification Authority", "3H.4.11", "PASSED", 18.2),
             ("Cryptographic Manifests Sealed", "Audit Subsystem", "Evidence Vault", "3H.4.12", "SEALED", 14.5),
         ]

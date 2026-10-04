@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11: Enterprise Operational Readiness Scoring Package
 """
+
 from .domain import (
     MaturityLevel,
     CertificationStatus,

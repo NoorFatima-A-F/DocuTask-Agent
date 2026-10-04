@@ -4,6 +4,7 @@ Exports Prometheus metrics and OpenTelemetry signals for runtime liveness:
 service_liveness_status, event_loop_latency, heartbeat_age_seconds,
 process_uptime_seconds, restart_count, memory_usage, cpu_usage.
 """
+
 from typing import Dict, Any
 
 

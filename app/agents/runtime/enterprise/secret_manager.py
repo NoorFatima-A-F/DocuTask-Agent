@@ -18,16 +18,19 @@ logger = logging.getLogger(__name__)
 
 class SecretExpiredError(RuntimeKernelException):
     """Raised when a secret's validity timestamp has expired."""
+
     pass
 
 
 class SecretRevokedError(RuntimeKernelException):
     """Raised when accessing a secret marked as revoked."""
+
     pass
 
 
 class SecretVersionRecord(BaseModel):
     """Represents a versioned secret entry."""
+
     key: str
     value: str
     version: int = 1
@@ -43,6 +46,7 @@ class SecretVersionRecord(BaseModel):
 
 class SecretAccessAudit(BaseModel):
     """Audit record for a secret read or rotation event."""
+
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     key: str
     version: Optional[int] = None

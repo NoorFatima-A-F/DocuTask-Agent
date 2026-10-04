@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ReflectionReport:
     """Structured output of agent self-reflection."""
+
     id: str = field(default_factory=lambda: f"refl-{uuid.uuid4().hex[:10]}")
     agent_id: str = ""
     task_id: str = ""
@@ -69,25 +70,31 @@ class ReflectionEngine:
         if is_success:
             success_factors.append("Completed all assigned task skills within deadline")
             quality_score = 0.95
-            memory_updates.append({
-                "key": f"proc_{task_id}",
-                "tier": "PROCEDURAL",
-                "value": f"Successful execution pattern for task {task_id}",
-                "importance": 0.7,
-            })
+            memory_updates.append(
+                {
+                    "key": f"proc_{task_id}",
+                    "tier": "PROCEDURAL",
+                    "value": f"Successful execution pattern for task {task_id}",
+                    "importance": 0.7,
+                }
+            )
         else:
             failure_factors.append(str(execution_outcome.get("error", "Unknown execution error")))
             suggestions.append("Apply retry strategy with exponential backoff")
             suggestions.append("Verify tool input schema parameters before dispatch")
             quality_score = 0.40
-            memory_updates.append({
-                "key": f"incident_{task_id}",
-                "tier": "EPISODIC",
-                "value": f"Failure encounter in task {task_id}: {execution_outcome.get('error')}",
-                "importance": 0.8,
-            })
+            memory_updates.append(
+                {
+                    "key": f"incident_{task_id}",
+                    "tier": "EPISODIC",
+                    "value": f"Failure encounter in task {task_id}: {execution_outcome.get('error')}",
+                    "importance": 0.8,
+                }
+            )
 
-        summary = f"Execution of task '{task_id}' by agent '{agent_id}' yielded status '{execution_outcome.get('status')}'."
+        summary = (
+            f"Execution of task '{task_id}' by agent '{agent_id}' yielded status '{execution_outcome.get('status')}'."
+        )
 
         report = ReflectionReport(
             agent_id=agent_id,

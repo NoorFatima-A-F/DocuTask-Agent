@@ -2,6 +2,7 @@
 Abstract Base Classes & Interfaces for the 15 Core Architectural Components.
 Enforces SOLID compliance, dependency inversion, and strict ownership boundaries.
 """
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 from .models import (
@@ -67,13 +68,9 @@ class VerificationPlugin(ABC):
 
     @abstractmethod
     def execute_verification(
-        self,
-        definition: Any,
-        env_profile: Any,
-        dataset_payload: Dict[str, Any]
+        self, definition: Any, env_profile: Any, dataset_payload: Dict[str, Any]
     ) -> Dict[str, Any]:
         pass
-
 
 
 class IVerificationOrchestrator(ABC):
@@ -180,25 +177,37 @@ class IMetricsEngine(ABC):
 
 class IStatisticalAnalysisEngine(ABC):
     @abstractmethod
-    def analyze_distribution(self, metric_name: str, samples: List[float], baseline_samples: Optional[List[float]] = None) -> StatisticalSummary:
+    def analyze_distribution(
+        self, metric_name: str, samples: List[float], baseline_samples: Optional[List[float]] = None
+    ) -> StatisticalSummary:
         pass
 
 
 class IQualityGateEngine(ABC):
     @abstractmethod
-    def evaluate_gate(self, run_id: str, metrics: List[MetricValue], policy: QualityGatePolicy) -> QualityGateEvaluation:
+    def evaluate_gate(
+        self, run_id: str, metrics: List[MetricValue], policy: QualityGatePolicy
+    ) -> QualityGateEvaluation:
         pass
 
 
 class IReportingEngine(ABC):
     @abstractmethod
-    def generate_report(self, run: VerificationRun, metrics: List[MetricValue], stats: List[StatisticalSummary], certificate: Optional[ComplianceCertificate]) -> VerificationReport:
+    def generate_report(
+        self,
+        run: VerificationRun,
+        metrics: List[MetricValue],
+        stats: List[StatisticalSummary],
+        certificate: Optional[ComplianceCertificate],
+    ) -> VerificationReport:
         pass
 
 
 class IAuditManager(ABC):
     @abstractmethod
-    def record_event(self, event_type: str, entity_id: str, details: Dict[str, Any], actor: str = "SYSTEM") -> AuditEntry:
+    def record_event(
+        self, event_type: str, entity_id: str, details: Dict[str, Any], actor: str = "SYSTEM"
+    ) -> AuditEntry:
         pass
 
     @abstractmethod

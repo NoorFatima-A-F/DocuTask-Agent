@@ -1,12 +1,12 @@
 """
 Centralized Plugin Registry with Dynamic Indexing, SemVer Tracking, and Capability Discovery.
 """
+
 from typing import Dict, List, Optional
-from app.platform_verification.extension_framework.domain.models import (
-    PluginMetadata, PluginLifecycleState
-)
+from app.platform_verification.extension_framework.domain.models import PluginMetadata, PluginLifecycleState
 from app.platform_verification.extension_framework.domain.interfaces import (
-    VerificationPluginInterface, PluginRegistryInterface
+    VerificationPluginInterface,
+    PluginRegistryInterface,
 )
 
 

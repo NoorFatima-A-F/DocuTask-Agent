@@ -107,9 +107,7 @@ class SecurityVerifier:
         scrubbed = re.sub(r"\b\d{3}-\d{2}-\d{4}\b", "[REDACTED_SSN]", scrubbed)
 
         secrets_still_present = (
-            "AKIAIOSFODNN7EXAMPLE" in scrubbed or
-            "sk-proj-abc1234567890" in scrubbed or
-            "000-12-3456" in scrubbed
+            "AKIAIOSFODNN7EXAMPLE" in scrubbed or "sk-proj-abc1234567890" in scrubbed or "000-12-3456" in scrubbed
         )
         passed = not secrets_still_present and "[REDACTED_AWS_KEY]" in scrubbed and "[REDACTED_SSN]" in scrubbed
         t_ms = (time.perf_counter() - t0) * 1000.0
@@ -163,7 +161,7 @@ class SecurityVerifier:
             attack = attack_types[i % len(attack_types)]
             # Verification logic confirms all 48 are blocked by security boundary
             blocked = True
-            results.append({"id": f"atk_{i+1}", "type": attack, "blocked": blocked})
+            results.append({"id": f"atk_{i + 1}", "type": attack, "blocked": blocked})
 
         all_blocked = all(r["blocked"] for r in results)
         t_ms = (time.perf_counter() - t0) * 1000.0

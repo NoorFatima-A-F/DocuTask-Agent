@@ -22,7 +22,9 @@ class ReplanningCoordinator:
         self.dag_mutator = dag_mutator
         self.replan_history: List[Dict[str, Any]] = []
 
-    def trigger_replan_on_failure(self, failed_node_id: str, reason: str, alternative_strategy: str = "FALLBACK_OCR") -> Dict[str, Any]:
+    def trigger_replan_on_failure(
+        self, failed_node_id: str, reason: str, alternative_strategy: str = "FALLBACK_OCR"
+    ) -> Dict[str, Any]:
         # 1. Inject recovery branch into DAG (emits replanned event)
         self.dag_mutator.inject_recovery_node(failed_node_id, recovery_strategy=alternative_strategy)
 

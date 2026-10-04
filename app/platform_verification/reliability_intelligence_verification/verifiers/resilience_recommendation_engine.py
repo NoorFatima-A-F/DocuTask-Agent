@@ -1,6 +1,7 @@
 """
 Phase 3H.5.7.7: Resilience Recommendation Engine
 """
+
 from ..domain.interfaces import IResilienceRecommendationEngine
 from ..domain.models import (
     ReliabilityRiskReport,
@@ -11,9 +12,7 @@ from ..domain.models import (
 
 
 class ResilienceRecommendationEngine(IResilienceRecommendationEngine):
-    def generate_recommendations(
-        self, risk_report: ReliabilityRiskReport
-    ) -> ResilienceRecommendationReport:
+    def generate_recommendations(self, risk_report: ReliabilityRiskReport) -> ResilienceRecommendationReport:
         recommendations = [
             ResilienceRecommendationItem(
                 recommendation_id="REC-RES-001",
@@ -53,7 +52,11 @@ class ResilienceRecommendationEngine(IResilienceRecommendationEngine):
             ),
         ]
 
-        high_count = sum(1 for r in recommendations if r.priority in [RecommendationPriority.P1_CRITICAL, RecommendationPriority.P2_HIGH])
+        high_count = sum(
+            1
+            for r in recommendations
+            if r.priority in [RecommendationPriority.P1_CRITICAL, RecommendationPriority.P2_HIGH]
+        )
 
         return ResilienceRecommendationReport(
             report_title="Resilience Recommendation Report",

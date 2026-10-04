@@ -52,7 +52,7 @@ class PrivacyPolicy:
                         token_map[val] = token
                     else:
                         token = token_map[val]
-                    sanitized = sanitized[:m.start()] + token + sanitized[m.end():]
+                    sanitized = sanitized[: m.start()] + token + sanitized[m.end() :]
 
         return PIIMaskResult(
             sanitized_text=sanitized,

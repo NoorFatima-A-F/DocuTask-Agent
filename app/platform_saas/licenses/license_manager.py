@@ -47,7 +47,7 @@ class LicenseManager:
         lic_id = f"lic_{uuid.uuid4().hex[:8]}"
         now = datetime.now(timezone.utc)
         expires = now + timedelta(days=valid_days)
-        
+
         payload = f"{lic_id}:{tenant_id}:{tier.value}:{max_seats}:{expires.isoformat()}"
         signature = hmac.new(self.SECRET_KEY, payload.encode("utf-8"), hashlib.sha256).hexdigest()
 
@@ -69,13 +69,13 @@ class LicenseManager:
         lic = self._licenses.get(license_id)
         if not lic:
             return {"valid": False, "reason": "License not found"}
-        
+
         now = datetime.now(timezone.utc)
         expires = datetime.fromisoformat(lic.expires_at)
         if now > expires:
             lic.valid = False
             return {"valid": False, "reason": "License expired"}
-        
+
         return {
             "valid": True,
             "license_id": lic.license_id,

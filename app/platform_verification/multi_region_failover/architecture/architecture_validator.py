@@ -2,6 +2,7 @@
 Multi-Region Architecture Validator (Part 3G.6A).
 Validates that 100% of critical platform services have redundant deployments in the secondary cloud region.
 """
+
 from typing import List
 from app.platform_verification.multi_region_failover.domain.models import (
     CloudRegion,
@@ -24,8 +25,20 @@ class MultiRegionArchitectureValidator(IMultiRegionArchitectureValidator):
         ("Agent Planner & Runtime", "ACTIVE_HEALTHY", "WARM_STANDBY", "Stateless Replicated Pods", True),
         ("Redis Queue & Broker", "ACTIVE_HEALTHY", "WARM_STANDBY", "Sentinel Replicated Sync", True),
         ("PostgreSQL Database Cluster", "ACTIVE_PRIMARY", "STANDBY_SYNC_REPLICA", "Streaming WAL Replication", True),
-        ("S3 / MinIO Document Storage Vault", "ACTIVE_PRIMARY", "CROSS_REGION_REPLICA", "S3 Cross-Region Replication (CRR)", True),
-        ("Prometheus & Grafana Observability", "ACTIVE_HEALTHY", "ACTIVE_HEALTHY", "Federated Multi-Region Metrics", True),
+        (
+            "S3 / MinIO Document Storage Vault",
+            "ACTIVE_PRIMARY",
+            "CROSS_REGION_REPLICA",
+            "S3 Cross-Region Replication (CRR)",
+            True,
+        ),
+        (
+            "Prometheus & Grafana Observability",
+            "ACTIVE_HEALTHY",
+            "ACTIVE_HEALTHY",
+            "Federated Multi-Region Metrics",
+            True,
+        ),
     ]
 
     def validate_architecture(self) -> MultiRegionArchitectureReport:

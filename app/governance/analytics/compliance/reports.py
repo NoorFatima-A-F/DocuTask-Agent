@@ -18,7 +18,7 @@ class ComplianceGap(BaseModel):
 class AuditReadinessReport(BaseModel):
     tenant_id: str
     overall_readiness_score: float = 100.0  # 0.0 to 100.0
-    audit_readiness_status: str = "AUDIT_READY" # AUDIT_READY, MINOR_GAPS, AT_RISK, NON_COMPLIANT
+    audit_readiness_status: str = "AUDIT_READY"  # AUDIT_READY, MINOR_GAPS, AT_RISK, NON_COMPLIANT
     framework_scores: Dict[str, FrameworkComplianceScore] = Field(default_factory=dict)
     identified_gaps: List[ComplianceGap] = Field(default_factory=list)
     generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

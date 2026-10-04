@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class AgentSkill(BaseModel):
     """Specific skill or competency advertised by an agent."""
+
     name: str
     description: str = ""
     domain: str = "general"  # financial, legal, technical, extraction, summarization
@@ -20,6 +21,7 @@ class AgentSkill(BaseModel):
 
 class CapabilityProfile(BaseModel):
     """Aggregate capability specification advertised by an agent."""
+
     skills: List[AgentSkill] = Field(default_factory=list)
     supported_tools: List[str] = Field(default_factory=list)
     supported_plans: List[str] = Field(default_factory=list)

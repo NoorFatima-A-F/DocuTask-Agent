@@ -60,9 +60,7 @@ class QuotaManager:
 
         if ratio >= 1.0 and quota.hard_limit:
             quota.quota_state = QuotaState.EXCEEDED
-            raise QuotaExceededError(
-                f"Resource quota for '{resource_name}' exceeded: {new_usage}/{quota.limit_value}"
-            )
+            raise QuotaExceededError(f"Resource quota for '{resource_name}' exceeded: {new_usage}/{quota.limit_value}")
         elif ratio >= 1.0:
             quota.quota_state = QuotaState.LIMITED
         elif ratio >= quota.warning_threshold:

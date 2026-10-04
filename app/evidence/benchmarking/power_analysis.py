@@ -117,7 +117,7 @@ class StatisticalPowerEngine:
             mean_b = statistics.mean(samples_baseline)
             std_b = statistics.stdev(samples_baseline)
             n_b = len(samples_baseline)
-            pooled_std = math.sqrt(((n - 1) * (std_t ** 2) + (n_b - 1) * (std_b ** 2)) / max(1, (n + n_b - 2)))
+            pooled_std = math.sqrt(((n - 1) * (std_t**2) + (n_b - 1) * (std_b**2)) / max(1, (n + n_b - 2)))
             d_obs = abs(mean_t - mean_b) / max(1e-9, pooled_std)
         else:
             ref_val = hypothesized_mean if hypothesized_mean is not None else (mean_t * 0.95)
@@ -188,6 +188,6 @@ class StatisticalPowerEngine:
         d1 = 1.432788
         d2 = 0.189269
         d3 = 0.001308
-        numerator = c0 + c1 * t + c2 * (t ** 2)
-        denominator = 1.0 + d1 * t + d2 * (t ** 2) + d3 * (t ** 3)
+        numerator = c0 + c1 * t + c2 * (t**2)
+        denominator = 1.0 + d1 * t + d2 * (t**2) + d3 * (t**3)
         return t - (numerator / denominator)

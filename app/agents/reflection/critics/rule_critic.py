@@ -54,7 +54,7 @@ class RuleCritic:
                 t_val = float(str(total_amt).replace("$", "").replace(",", "").strip())
                 s_val = float(str(subtotal).replace("$", "").replace(",", "").strip())
                 tax_val = float(str(tax).replace("$", "").replace(",", "").strip()) if tax else 0.0
-                
+
                 expected_total = s_val + tax_val
                 if abs(t_val - expected_total) < 0.02:
                     passed_checks += 1

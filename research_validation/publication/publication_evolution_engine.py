@@ -10,15 +10,14 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Dict, List, Tuple
 
-from research_validation.publication.publication_diff import (
-    PublicationDiffItem, PublicationEvolutionReport
-)
+from research_validation.publication.publication_diff import PublicationDiffItem, PublicationEvolutionReport
 from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)
 class PublicationDraft:
     """Complete publication state with embedded cryptographic evidence bindings."""
+
     version: str
     title: str
     claims: Dict[str, str]
@@ -95,11 +94,13 @@ class PublicationEvolutionEngine:
             o = vals.get("observed", 0.0)
             d = o - b
             latex_lines.append(f"{row_key} & {b:.4f} & {o:.4f} & {d:+.4f} \\\\")
-        latex_lines.extend([
-            r"\bottomrule",
-            r"\end{tabular}",
-            r"\end{table}",
-        ])
+        latex_lines.extend(
+            [
+                r"\bottomrule",
+                r"\end{tabular}",
+                r"\end{table}",
+            ]
+        )
         latex_text = "\n".join(latex_lines)
 
         payload = {
@@ -150,14 +151,16 @@ class PublicationEvolutionEngine:
             for k, new_v in updated_claims.items():
                 old_v = prev_draft.claims.get(k, "")
                 if old_v != new_v:
-                    changes.append(PublicationDiffItem(
-                        section="Claims",
-                        item_key=k,
-                        old_value=old_v,
-                        new_value=new_v,
-                        change_type="ADDED" if not old_v else "UPDATED",
-                        evidence_citation_sha256=evidence_digests.get(k, ""),
-                    ))
+                    changes.append(
+                        PublicationDiffItem(
+                            section="Claims",
+                            item_key=k,
+                            old_value=old_v,
+                            new_value=new_v,
+                            change_type="ADDED" if not old_v else "UPDATED",
+                            evidence_citation_sha256=evidence_digests.get(k, ""),
+                        )
+                    )
 
         report = PublicationEvolutionReport(
             from_version=prev_draft.version if prev_draft else "0.0.0",

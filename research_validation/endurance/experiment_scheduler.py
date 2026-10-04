@@ -116,12 +116,14 @@ class AsynchronousExperimentScheduler:
         job.last_heartbeat_utc = now_str
         job.checkpoint_count += 1
 
-        state_hash = hash_canonical_json({
-            "job_id": job_id,
-            "step": job.checkpoint_count,
-            "elapsed": job.actual_elapsed_seconds,
-            "metrics": metrics,
-        })
+        state_hash = hash_canonical_json(
+            {
+                "job_id": job_id,
+                "step": job.checkpoint_count,
+                "elapsed": job.actual_elapsed_seconds,
+                "metrics": metrics,
+            }
+        )
 
         ckpt = ExperimentCheckpoint(
             checkpoint_id=f"ckpt_{job_id}_{job.checkpoint_count:05d}",
@@ -207,10 +209,7 @@ class AsynchronousExperimentScheduler:
                 "config": job.config,
                 "tags": job.tags,
             }
-        ckpts_data = {
-            jid: [asdict(c) for c in ckpts]
-            for jid, ckpts in self._checkpoints.items()
-        }
+        ckpts_data = {jid: [asdict(c) for c in ckpts] for jid, ckpts in self._checkpoints.items()}
         return json.dumps({"jobs": jobs_data, "checkpoints": ckpts_data}, indent=2)
 
     def _get_job(self, job_id: str) -> ExperimentJob:

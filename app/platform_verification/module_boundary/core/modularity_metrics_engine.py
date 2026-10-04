@@ -1,6 +1,7 @@
 """
 Modularity & Independence Quality Metrics Engine.
 """
+
 from __future__ import annotations
 from typing import Dict, List
 from app.platform_verification.module_boundary.domain.interfaces import IModularityMetricsEngine

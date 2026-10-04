@@ -1,12 +1,14 @@
 """
 Phase 13.21 - Enterprise AI Knowledge & Context Intelligence Platform (EAKCIP) Schemas
 """
+
 from __future__ import annotations
 from enum import Enum
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid
+
 
 class KnowledgeLifecycleState(str, Enum):
     DISCOVERED = "DISCOVERED"
@@ -17,12 +19,14 @@ class KnowledgeLifecycleState(str, Enum):
     UPDATED = "UPDATED"
     ARCHIVED = "ARCHIVED"
 
+
 class SecurityClassification(str, Enum):
     PUBLIC = "PUBLIC"
     INTERNAL = "INTERNAL"
     CONFIDENTIAL = "CONFIDENTIAL"
     RESTRICTED = "RESTRICTED"
     STRICT_SECRET = "STRICT_SECRET"
+
 
 class KnowledgeSourceType(str, Enum):
     LOCAL_DOCUMENT = "LOCAL_DOCUMENT"
@@ -36,6 +40,7 @@ class KnowledgeSourceType(str, Enum):
     CONFLUENCE = "CONFLUENCE"
     DATABASE = "DATABASE"
 
+
 class EntityType(str, Enum):
     EMPLOYEE = "EMPLOYEE"
     DEPARTMENT = "DEPARTMENT"
@@ -48,11 +53,13 @@ class EntityType(str, Enum):
     VENDOR = "VENDOR"
     CONCEPT = "CONCEPT"
 
+
 class MemoryTier(str, Enum):
-    SHORT_TERM = "SHORT_TERM"       # Working / in-task memory
-    LONG_TERM = "LONG_TERM"         # Historical episodic memory
-    ORGANIZATIONAL = "ORGANIZATIONAL"# Enterprise wide knowledge
-    PROCEDURAL = "PROCEDURAL"       # SOPs and workflow execution patterns
+    SHORT_TERM = "SHORT_TERM"  # Working / in-task memory
+    LONG_TERM = "LONG_TERM"  # Historical episodic memory
+    ORGANIZATIONAL = "ORGANIZATIONAL"  # Enterprise wide knowledge
+    PROCEDURAL = "PROCEDURAL"  # SOPs and workflow execution patterns
+
 
 class AccessPolicy(BaseModel):
     allowed_roles: List[str] = Field(default_factory=lambda: ["admin", "member"])
@@ -60,6 +67,7 @@ class AccessPolicy(BaseModel):
     denied_roles: List[str] = Field(default_factory=list)
     require_mfa: bool = False
     max_security_clearance: SecurityClassification = SecurityClassification.CONFIDENTIAL
+
 
 class KnowledgeMetadata(BaseModel):
     author: Optional[str] = None
@@ -71,6 +79,7 @@ class KnowledgeMetadata(BaseModel):
     custom_tags: List[str] = Field(default_factory=list)
     extracted_entities: List[str] = Field(default_factory=list)
     source_url: Optional[str] = None
+
 
 class KnowledgeAsset(BaseModel):
     id: str = Field(default_factory=lambda: f"asset-{uuid.uuid4().hex[:8]}")
@@ -95,6 +104,7 @@ class KnowledgeAsset(BaseModel):
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class KnowledgeSource(BaseModel):
     id: str = Field(default_factory=lambda: f"src-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -110,6 +120,7 @@ class KnowledgeSource(BaseModel):
     health_status: str = "HEALTHY"
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class GraphNode(BaseModel):
     id: str = Field(default_factory=lambda: f"node-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -118,6 +129,7 @@ class GraphNode(BaseModel):
     properties: Dict[str, Any] = Field(default_factory=dict)
     confidence_score: float = 1.0
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class GraphEdge(BaseModel):
     id: str = Field(default_factory=lambda: f"edge-{uuid.uuid4().hex[:8]}")
@@ -128,6 +140,7 @@ class GraphEdge(BaseModel):
     properties: Dict[str, Any] = Field(default_factory=dict)
     weight: float = 1.0
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class ContextRetrievalRequest(BaseModel):
     tenant_id: str = "default-tenant"
@@ -143,6 +156,7 @@ class ContextRetrievalRequest(BaseModel):
     top_k: int = 5
     filter_tags: List[str] = Field(default_factory=list)
 
+
 class RetrievedSnippet(BaseModel):
     asset_id: str
     title: str
@@ -151,6 +165,7 @@ class RetrievedSnippet(BaseModel):
     source_type: KnowledgeSourceType
     security_classification: SecurityClassification
     matched_via: str = "HYBRID_SEMANTIC"  # "SEMANTIC", "KEYWORD", "GRAPH", "MEMORY"
+
 
 class ContextRetrievalResponse(BaseModel):
     query: str
@@ -161,6 +176,7 @@ class ContextRetrievalResponse(BaseModel):
     total_tokens_estimated: int
     compression_ratio: float = 1.0
     retrieval_latency_ms: float = 0.0
+
 
 class MemoryEntry(BaseModel):
     id: str = Field(default_factory=lambda: f"mem-{uuid.uuid4().hex[:8]}")
@@ -175,6 +191,7 @@ class MemoryEntry(BaseModel):
     expires_at: Optional[datetime] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class KnowledgeConflict(BaseModel):
     id: str = Field(default_factory=lambda: f"conf-{uuid.uuid4().hex[:8]}")
     tenant_id: str
@@ -187,6 +204,7 @@ class KnowledgeConflict(BaseModel):
     detected_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     status: str = "OPEN"  # "OPEN", "RESOLVED", "IGNORED"
     recommended_resolution: str = ""
+
 
 class KnowledgeQualityReport(BaseModel):
     tenant_id: str

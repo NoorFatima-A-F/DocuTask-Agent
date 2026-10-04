@@ -2,6 +2,7 @@
 3J.1.9: Database Performance Verifier
 Verifies PostgreSQL connection pool scalability (10, 100, 500 connections), query latency, and throughput.
 """
+
 from typing import List
 from app.platform_verification.performance_capacity_engineering.domain.models import (
     DatabasePerformanceReport,

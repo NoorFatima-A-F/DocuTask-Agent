@@ -126,9 +126,7 @@ class SchedulingSDK:
 
         self._workloads: Dict[str, WorkloadRequest] = {}
 
-    def submit(
-        self, workload: WorkloadRequest
-    ) -> Tuple[bool, Optional[WorkloadAssignment], SchedulingDecision]:
+    def submit(self, workload: WorkloadRequest) -> Tuple[bool, Optional[WorkloadAssignment], SchedulingDecision]:
         """Submit and place a workload request across the multi-region topology."""
         self._workloads[workload.workload_id] = workload
         success, assignment, decision = self.placement_engine.place_workload(workload)
@@ -156,9 +154,7 @@ class SchedulingSDK:
 
         return True
 
-    def reschedule(
-        self, workload_id: str
-    ) -> Tuple[bool, Optional[WorkloadAssignment], Optional[SchedulingDecision]]:
+    def reschedule(self, workload_id: str) -> Tuple[bool, Optional[WorkloadAssignment], Optional[SchedulingDecision]]:
         """Attempt rescheduling of a waiting or failed workload."""
         workload = self._workloads.get(workload_id)
         if not workload:

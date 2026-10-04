@@ -12,6 +12,7 @@ from app.data_governance.classification.detectors import SensitiveDataDetector
 
 class ClassificationResult(BaseModel):
     """Result from automated data classification."""
+
     classification: ClassificationLevel
     confidence_score: float
     detected_sensitivities: Set[SensitivityCategory]

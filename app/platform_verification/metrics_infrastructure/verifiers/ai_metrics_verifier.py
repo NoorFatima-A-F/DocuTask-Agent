@@ -1,6 +1,7 @@
 """
 3I.3.4 & 3I.3.5: AI Agent & LLM Provider Metrics Verifier
 """
+
 from typing import List
 from ..domain.models import AgentExecutionMetricSpec, LLMProviderMetricSpec, AIMetricsReport
 from ..domain.interfaces import IAIMetricsVerifier
@@ -22,7 +23,7 @@ class AIMetricsVerifier(IAIMetricsVerifier):
                 tool_failure_rate_pct=0.4,
                 reflection_cycles_total=420,
                 successful_recovery_rate_pct=98.8,
-                success_rate_pct=98.0
+                success_rate_pct=98.0,
             ),
             AgentExecutionMetricSpec(
                 agent_name="document_validator",
@@ -33,8 +34,8 @@ class AIMetricsVerifier(IAIMetricsVerifier):
                 tool_failure_rate_pct=0.2,
                 reflection_cycles_total=110,
                 successful_recovery_rate_pct=99.1,
-                success_rate_pct=99.2
-            )
+                success_rate_pct=99.2,
+            ),
         ]
 
         llm_metrics: List[LLMProviderMetricSpec] = [
@@ -47,7 +48,7 @@ class AIMetricsVerifier(IAIMetricsVerifier):
                 total_input_tokens=16640000,
                 total_output_tokens=3640000,
                 total_estimated_cost_usd=18.25,
-                cost_per_document_usd=0.0035
+                cost_per_document_usd=0.0035,
             ),
             LLMProviderMetricSpec(
                 provider="Google Gemini 1.5 Flash",
@@ -58,13 +59,13 @@ class AIMetricsVerifier(IAIMetricsVerifier):
                 total_input_tokens=7520000,
                 total_output_tokens=1410000,
                 total_estimated_cost_usd=2.68,
-                cost_per_document_usd=0.00057
-            )
+                cost_per_document_usd=0.00057,
+            ),
         ]
 
         return AIMetricsReport(
             report_title="AI Agent Autonomous Telemetry & LLM Provider Efficiency Report",
             agent_metrics=agent_metrics,
             llm_metrics=llm_metrics,
-            ai_observability_score=100.0
+            ai_observability_score=100.0,
         )

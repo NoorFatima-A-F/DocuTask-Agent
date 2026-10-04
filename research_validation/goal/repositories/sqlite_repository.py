@@ -56,29 +56,32 @@ class SqliteGoalRepository(IGoalRepository):
 
     def save_goal(self, goal: Goal) -> None:
         with self.conn:
-            self.conn.execute("""
+            self.conn.execute(
+                """
                 INSERT OR REPLACE INTO goals (
                     goal_id, mission_id, version, status, owner, title, description,
                     objective, problem_statement, goal_type, priority, confidence_level,
                     creation_timestamp_utc, serialized_json, digest_sha256
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (
-                goal.goal_id,
-                goal.mission_id,
-                goal.version,
-                goal.status.value,
-                goal.owner,
-                goal.title,
-                goal.description,
-                goal.objective,
-                goal.problem_statement,
-                goal.goal_type.value,
-                goal.priority.value,
-                goal.confidence_threshold.level.value,
-                goal.creation_timestamp_utc,
-                json.dumps(goal.canonical_dict()),
-                goal.cryptographic_digest_sha256 or goal.compute_digest(),
-            ))
+            """,
+                (
+                    goal.goal_id,
+                    goal.mission_id,
+                    goal.version,
+                    goal.status.value,
+                    goal.owner,
+                    goal.title,
+                    goal.description,
+                    goal.objective,
+                    goal.problem_statement,
+                    goal.goal_type.value,
+                    goal.priority.value,
+                    goal.confidence_threshold.level.value,
+                    goal.creation_timestamp_utc,
+                    json.dumps(goal.canonical_dict()),
+                    goal.cryptographic_digest_sha256 or goal.compute_digest(),
+                ),
+            )
 
     def _row_to_goal(self, row: sqlite3.Row) -> Goal:
         # Reconstruct Goal from row
@@ -101,12 +104,15 @@ class SqliteGoalRepository(IGoalRepository):
 
     def get_goal_by_id(self, goal_id: str) -> Optional[Goal]:
         cur = self.conn.cursor()
-        cur.execute("""
+        cur.execute(
+            """
             SELECT id, goal_id, mission_id, version, status, owner, title, description,
                    objective, problem_statement, goal_type, priority, confidence_level,
                    creation_timestamp_utc, serialized_json, digest_sha256
             FROM goals WHERE goal_id = ? ORDER BY id DESC LIMIT 1
-        """, (goal_id,))
+        """,
+            (goal_id,),
+        )
         row = cur.fetchone()
         if not row:
             return None
@@ -114,12 +120,15 @@ class SqliteGoalRepository(IGoalRepository):
 
     def get_goal_version(self, goal_id: str, version: str) -> Optional[Goal]:
         cur = self.conn.cursor()
-        cur.execute("""
+        cur.execute(
+            """
             SELECT id, goal_id, mission_id, version, status, owner, title, description,
                    objective, problem_statement, goal_type, priority, confidence_level,
                    creation_timestamp_utc, serialized_json, digest_sha256
             FROM goals WHERE goal_id = ? AND version = ? LIMIT 1
-        """, (goal_id, version))
+        """,
+            (goal_id, version),
+        )
         row = cur.fetchone()
         if not row:
             return None
@@ -150,12 +159,15 @@ class SqliteGoalRepository(IGoalRepository):
 
     def get_version_history(self, goal_id: str) -> List[Goal]:
         cur = self.conn.cursor()
-        cur.execute("""
+        cur.execute(
+            """
             SELECT id, goal_id, mission_id, version, status, owner, title, description,
                    objective, problem_statement, goal_type, priority, confidence_level,
                    creation_timestamp_utc, serialized_json, digest_sha256
             FROM goals WHERE goal_id = ? ORDER BY id ASC
-        """, (goal_id,))
+        """,
+            (goal_id,),
+        )
         return [self._row_to_goal(r) for r in cur.fetchall()]
 
 
@@ -194,25 +206,28 @@ class SqliteMissionRepository(IMissionRepository):
 
     def save_mission(self, mission: Mission) -> None:
         with self.conn:
-            self.conn.execute("""
+            self.conn.execute(
+                """
                 INSERT OR REPLACE INTO missions (
                     mission_id, goal_id, title, description, version, state, author,
                     created_at_utc, updated_at_utc, previous_version_hash, serialized_json, digest_sha256
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (
-                mission.mission_id,
-                mission.goal_id,
-                mission.title,
-                mission.description,
-                mission.version,
-                mission.state.value,
-                mission.author,
-                mission.created_at_utc,
-                mission.updated_at_utc,
-                mission.previous_version_hash,
-                json.dumps(mission.canonical_dict()),
-                mission.mission_digest_sha256 or mission.compute_digest(),
-            ))
+            """,
+                (
+                    mission.mission_id,
+                    mission.goal_id,
+                    mission.title,
+                    mission.description,
+                    mission.version,
+                    mission.state.value,
+                    mission.author,
+                    mission.created_at_utc,
+                    mission.updated_at_utc,
+                    mission.previous_version_hash,
+                    json.dumps(mission.canonical_dict()),
+                    mission.mission_digest_sha256 or mission.compute_digest(),
+                ),
+            )
 
     def _row_to_mission(self, row: sqlite3.Row) -> Mission:
         # Construct minimum valid Mission from stored row
@@ -248,10 +263,14 @@ class SqliteMissionRepository(IMissionRepository):
             ),
             risk_profile=RiskProfile(overall_risk_score=0.2, severity=RiskSeverity.LOW),
             metrics=MissionMetrics(
-                total_objectives_count=0, total_milestones_count=0,
-                total_tasks_count=0, total_actions_count=0,
-                graph_depth=1, estimated_complexity_score=0.3,
-                feasibility_score=0.9, readiness_score=1.0,
+                total_objectives_count=0,
+                total_milestones_count=0,
+                total_tasks_count=0,
+                total_actions_count=0,
+                graph_depth=1,
+                estimated_complexity_score=0.3,
+                feasibility_score=0.9,
+                readiness_score=1.0,
             ),
             state_history=(),
             created_at_utc=row[8],
@@ -263,11 +282,14 @@ class SqliteMissionRepository(IMissionRepository):
 
     def get_mission_by_id(self, mission_id: str) -> Optional[Mission]:
         cur = self.conn.cursor()
-        cur.execute("""
+        cur.execute(
+            """
             SELECT id, mission_id, goal_id, title, description, version, state, author,
                    created_at_utc, updated_at_utc, previous_version_hash, serialized_json, digest_sha256
             FROM missions WHERE mission_id = ? ORDER BY id DESC LIMIT 1
-        """, (mission_id,))
+        """,
+            (mission_id,),
+        )
         row = cur.fetchone()
         if not row:
             return None
@@ -275,11 +297,14 @@ class SqliteMissionRepository(IMissionRepository):
 
     def get_mission_by_goal_id(self, goal_id: str) -> Optional[Mission]:
         cur = self.conn.cursor()
-        cur.execute("""
+        cur.execute(
+            """
             SELECT id, mission_id, goal_id, title, description, version, state, author,
                    created_at_utc, updated_at_utc, previous_version_hash, serialized_json, digest_sha256
             FROM missions WHERE goal_id = ? ORDER BY id DESC LIMIT 1
-        """, (goal_id,))
+        """,
+            (goal_id,),
+        )
         row = cur.fetchone()
         if not row:
             return None
@@ -306,9 +331,12 @@ class SqliteMissionRepository(IMissionRepository):
 
     def get_version_history(self, mission_id: str) -> List[Mission]:
         cur = self.conn.cursor()
-        cur.execute("""
+        cur.execute(
+            """
             SELECT id, mission_id, goal_id, title, description, version, state, author,
                    created_at_utc, updated_at_utc, previous_version_hash, serialized_json, digest_sha256
             FROM missions WHERE mission_id = ? ORDER BY id ASC
-        """, (mission_id,))
+        """,
+            (mission_id,),
+        )
         return [self._row_to_mission(r) for r in cur.fetchall()]

@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class CertificationReport(BaseModel):
     """Formal audit report evaluating a connector against enterprise certification requirements."""
+
     package_id: str
     certified: bool
     score: float  # 0.0 to 100.0
@@ -83,7 +84,7 @@ class ConnectorCertification:
             findings.append("Documentation warning: Description is too sparse.")
             remediations.append("Provide comprehensive setup and API usage documentation.")
 
-        certified = (score >= 70.0 and security_passed and schema_passed)
+        certified = score >= 70.0 and security_passed and schema_passed
 
         report = CertificationReport(
             package_id=manifest.package_id,

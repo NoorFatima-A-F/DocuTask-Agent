@@ -44,7 +44,9 @@ class IntentClassifier:
         self._intent_patterns: Dict[IntentType, List[Pattern[str]]] = {
             IntentType.INVOICE_PROCESSING: [
                 re.compile(r"\b(invoices?|bills?|billing|accounts payable|ap invoice|vendor invoice)\b", re.IGNORECASE),
-                re.compile(r"\b(line items?|subtotals?|tax amount|taxes|due date|po number|arithmetic)\b", re.IGNORECASE),
+                re.compile(
+                    r"\b(line items?|subtotals?|tax amount|taxes|due date|po number|arithmetic)\b", re.IGNORECASE
+                ),
             ],
             IntentType.RECEIPT_ANALYSIS: [
                 re.compile(r"\b(receipt|expense|reimbursement|till slip|merchant receipt)\b", re.IGNORECASE),
@@ -128,6 +130,8 @@ class IntentClassifier:
             confidence=round(top_score, 2),
             secondary_intents=secondaries,
             matched_keywords=matched_words.get(primary, []),
-            domain="FINANCIAL_DOCUMENTS" if primary in (IntentType.INVOICE_PROCESSING, IntentType.RECONCILIATION) else "DOCUMENT_PROCESSING",
+            domain="FINANCIAL_DOCUMENTS"
+            if primary in (IntentType.INVOICE_PROCESSING, IntentType.RECONCILIATION)
+            else "DOCUMENT_PROCESSING",
             attributes={"score_breakdown": scores},
         )

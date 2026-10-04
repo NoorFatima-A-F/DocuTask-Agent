@@ -25,6 +25,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class SupervisorExecutionReport:
     """Summary of execution orchestrated by the SupervisorAgent."""
+
     plan_id: str
     goal_id: str
     status: str = "COMPLETED"
@@ -75,9 +76,7 @@ class SupervisorAgent:
         tracking results, and respecting dependencies.
         """
         self.lifecycle_manager.transition(
-            self.agent_entity,
-            AgentLifecycleState.EXECUTING,
-            reason=f"Starting execution of Plan {plan.plan_id}"
+            self.agent_entity, AgentLifecycleState.EXECUTING, reason=f"Starting execution of Plan {plan.plan_id}"
         )
 
         report = SupervisorExecutionReport(
@@ -175,15 +174,11 @@ class SupervisorAgent:
         if report.status not in ["BUDGET_EXCEEDED", "FAILED", "TERMINATED_RUNAWAY"]:
             report.status = "COMPLETED"
             self.lifecycle_manager.transition(
-                self.agent_entity,
-                AgentLifecycleState.COMPLETED,
-                reason="Plan execution successfully completed"
+                self.agent_entity, AgentLifecycleState.COMPLETED, reason="Plan execution successfully completed"
             )
         else:
             self.lifecycle_manager.transition(
-                self.agent_entity,
-                AgentLifecycleState.FAILED,
-                reason=f"Plan execution failed: {report.status}"
+                self.agent_entity, AgentLifecycleState.FAILED, reason=f"Plan execution failed: {report.status}"
             )
 
         return report

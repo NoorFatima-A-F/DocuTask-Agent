@@ -59,7 +59,10 @@ class PerformanceRegressionGateVerifier(IPerformanceVerifier):
                 name="Latency Regression Tolerance Gate",
                 passed=len(latency_regressions) == 0,
                 details=f"All latency metrics showed improvement or remained well within the {max_allowed_degradation_pct}% degradation limit (max delta: -5.3% to -7.5% faster)",
-                metrics={"regressions_detected": len(latency_regressions), "threshold_pct": max_allowed_degradation_pct},
+                metrics={
+                    "regressions_detected": len(latency_regressions),
+                    "threshold_pct": max_allowed_degradation_pct,
+                },
             )
         )
 

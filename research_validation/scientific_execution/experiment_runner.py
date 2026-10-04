@@ -12,9 +12,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional
 
-from research_validation.scientific_execution.experiment_manifest import (
-    ExperimentManifest, ExperimentStatus
-)
+from research_validation.scientific_execution.experiment_manifest import ExperimentManifest, ExperimentStatus
 from research_validation.provenance.hashing import hash_canonical_json, compute_sha256
 
 
@@ -123,8 +121,7 @@ class ScientificExperimentRunner:
 
         # 3. Final aggregation digest (derived deterministically from scientific outputs)
         scientific_metrics = {
-            k: v for k, v in stage_metrics.items()
-            if not ("latency" in k or k.endswith("_ms") or "duration" in k)
+            k: v for k, v in stage_metrics.items() if not ("latency" in k or k.endswith("_ms") or "duration" in k)
         }
         agg_payload = {
             "experiment_id": manifest.experiment_id,

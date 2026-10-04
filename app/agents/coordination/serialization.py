@@ -19,11 +19,7 @@ class CoordinationSerializer:
     def serialize_to_json(cls, model: BaseModel) -> str:
         """Serializes a model to JSON string with schema version envelope."""
         data = model.model_dump(mode="json")
-        envelope = {
-            "schema_version": cls.SCHEMA_VERSION,
-            "model_class": model.__class__.__name__,
-            "payload": data
-        }
+        envelope = {"schema_version": cls.SCHEMA_VERSION, "model_class": model.__class__.__name__, "payload": data}
         return json.dumps(envelope, default=str)
 
     @classmethod
@@ -37,9 +33,6 @@ class CoordinationSerializer:
     def to_pubsub_message(cls, model: BaseModel) -> Dict[str, Any]:
         """Encodes model for Cloud Pub/Sub message payload."""
         return {
-            "attributes": {
-                "schema_version": cls.SCHEMA_VERSION,
-                "model_type": model.__class__.__name__
-            },
-            "data": cls.serialize_to_json(model).encode("utf-8")
+            "attributes": {"schema_version": cls.SCHEMA_VERSION, "model_type": model.__class__.__name__},
+            "data": cls.serialize_to_json(model).encode("utf-8"),
         }

@@ -35,7 +35,7 @@ class TimeWindowAggregator:
         self._evict_expired()
         durations = [e.duration_ms for e in self._events if e.duration_ms > 0]
         stats = ObservabilityStats.calculate_percentiles(durations)
-        
+
         errors_count = sum(1 for e in self._events if e.status == "FAILED" or e.severity.value in ("ERROR", "CRITICAL"))
         total_count = len(self._events)
         error_rate = (errors_count / total_count) if total_count > 0 else 0.0

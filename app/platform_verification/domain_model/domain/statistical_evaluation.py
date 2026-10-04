@@ -1,6 +1,7 @@
 """
 Statistical Evaluation Domain: Confidence Intervals, Hypothesis Testing, Variance, and Anomaly Detection.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional
@@ -37,17 +38,13 @@ class StatisticalAnalysis(BaseModel):
 
     @classmethod
     def from_samples(
-        cls,
-        execution_id: str,
-        metric_name: str,
-        samples: List[float],
-        confidence_level: float = 0.95
+        cls, execution_id: str, metric_name: str, samples: List[float], confidence_level: float = 0.95
     ) -> "StatisticalAnalysis":
         arr = np.array(samples, dtype=float)
         mean_val = float(np.mean(arr))
         var_val = float(np.var(arr, ddof=1)) if len(arr) > 1 else 0.0
         std_val = float(np.std(arr, ddof=1)) if len(arr) > 1 else 0.0
-        
+
         # Simple normal approximation for CI
         margin = 1.96 * (std_val / np.sqrt(len(arr))) if len(arr) > 1 else 0.0
         return cls(
@@ -59,5 +56,5 @@ class StatisticalAnalysis(BaseModel):
             variance=round(var_val, 4),
             standard_deviation=round(std_val, 4),
             ci_lower=round(mean_val - margin, 4),
-            ci_upper=round(mean_val + margin, 4)
+            ci_upper=round(mean_val + margin, 4),
         )

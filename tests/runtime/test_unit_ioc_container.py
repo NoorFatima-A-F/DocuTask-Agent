@@ -232,6 +232,7 @@ class GlobalDatabaseService:
 
 def test_interface_contract_validation():
     from app.agents.runtime.exceptions import InvalidBindingError
+
     container = DependencyContainer()
 
     # Valid binding succeeds
@@ -245,6 +246,7 @@ def test_interface_contract_validation():
 
 def test_invalid_lifetime_dependency():
     from app.agents.runtime.exceptions import InvalidLifetimeDependencyError
+
     container = DependencyContainer()
     container.register_scoped(TenantContext, TenantContext)
     container.register_singleton(GlobalDatabaseService, GlobalDatabaseService)
@@ -259,6 +261,7 @@ def test_invalid_lifetime_dependency():
 
 def test_dependency_graph_lifetime_analysis():
     from app.agents.runtime.exceptions import InvalidLifetimeDependencyError
+
     container = DependencyContainer()
     container.register_scoped(TenantContext, TenantContext)
     container.register_singleton(GlobalDatabaseService, GlobalDatabaseService)
@@ -267,4 +270,3 @@ def test_dependency_graph_lifetime_analysis():
     with pytest.raises(InvalidLifetimeDependencyError) as exc_info:
         container.validate_dependency_graph()
     assert "Lifetime safety violation" in str(exc_info.value)
-

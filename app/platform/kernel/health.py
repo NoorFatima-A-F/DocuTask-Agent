@@ -11,6 +11,7 @@ from typing import Any, Dict
 
 class HealthStatus(str, Enum):
     """Health classification status for any platform component or service."""
+
     HEALTHY = "HEALTHY"
     DEGRADED = "DEGRADED"
     UNHEALTHY = "UNHEALTHY"
@@ -20,6 +21,7 @@ class HealthStatus(str, Enum):
 @dataclass(frozen=True)
 class ComponentHealth:
     """Standard health evaluation report for a single platform component."""
+
     component_name: str
     status: HealthStatus = HealthStatus.HEALTHY
     latency_ms: float = 0.0

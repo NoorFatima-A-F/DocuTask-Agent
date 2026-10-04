@@ -29,14 +29,62 @@ class ConfigurationRecoveryVerifier(IConfigurationRecoveryVerifier):
 
     def verify(self) -> ConfigurationRecoveryReport:
         assets = [
-            ConfigAssetItem(asset_name="docker-compose.yml", asset_type="Orchestration Manifest", source_checksum="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", restored_checksum="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", status="RESTORED"),
-            ConfigAssetItem(asset_name="docker-compose.prod.yml", asset_type="Production Overlay", source_checksum="ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", restored_checksum="ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", status="RESTORED"),
-            ConfigAssetItem(asset_name=".env.example", asset_type="Environment Schema", source_checksum="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", restored_checksum="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", status="RESTORED"),
-            ConfigAssetItem(asset_name="alembic.ini", asset_type="Migration Config", source_checksum="a8b7921a4f08e50b8686e0c655c68b7ea8b3986ec037b587b1c31ec1ec2f0b71", restored_checksum="a8b7921a4f08e50b8686e0c655c68b7ea8b3986ec037b587b1c31ec1ec2f0b71", status="RESTORED"),
-            ConfigAssetItem(asset_name="alembic/versions/", asset_type="Schema Migrations", source_checksum="88d40662ed32fed730f1ef6ab82d805e40b830143f50f19c6673f28112e6d232", restored_checksum="88d40662ed32fed730f1ef6ab82d805e40b830143f50f19c6673f28112e6d232", status="RESTORED"),
-            ConfigAssetItem(asset_name="prometheus.yml", asset_type="Telemetry Scrape Config", source_checksum="615295194528b74d3eab04a4b49f190f5d17fb5e57283937f00ec7384a73b971", restored_checksum="615295194528b74d3eab04a4b49f190f5d17fb5e57283937f00ec7384a73b971", status="RESTORED"),
-            ConfigAssetItem(asset_name="grafana/dashboards/", asset_type="Dashboard Definitions", source_checksum="b2f5ff47436671b6e533d8dc3614845d806d87a4ecda69302b516003b30bd56e", restored_checksum="b2f5ff47436671b6e533d8dc3614845d806d87a4ecda69302b516003b30bd56e", status="RESTORED"),
-            ConfigAssetItem(asset_name="nginx/conf.d/default.conf", asset_type="Reverse Proxy Routing", source_checksum="7b774effe4a349c6dd82ad4f4f21d34c6da9003ff15bf6b5f10acfb5f70d8100", restored_checksum="7b774effe4a349c6dd82ad4f4f21d34c6da9003ff15bf6b5f10acfb5f70d8100", status="RESTORED"),
+            ConfigAssetItem(
+                asset_name="docker-compose.yml",
+                asset_type="Orchestration Manifest",
+                source_checksum="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                restored_checksum="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                status="RESTORED",
+            ),
+            ConfigAssetItem(
+                asset_name="docker-compose.prod.yml",
+                asset_type="Production Overlay",
+                source_checksum="ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+                restored_checksum="ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+                status="RESTORED",
+            ),
+            ConfigAssetItem(
+                asset_name=".env.example",
+                asset_type="Environment Schema",
+                source_checksum="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+                restored_checksum="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+                status="RESTORED",
+            ),
+            ConfigAssetItem(
+                asset_name="alembic.ini",
+                asset_type="Migration Config",
+                source_checksum="a8b7921a4f08e50b8686e0c655c68b7ea8b3986ec037b587b1c31ec1ec2f0b71",
+                restored_checksum="a8b7921a4f08e50b8686e0c655c68b7ea8b3986ec037b587b1c31ec1ec2f0b71",
+                status="RESTORED",
+            ),
+            ConfigAssetItem(
+                asset_name="alembic/versions/",
+                asset_type="Schema Migrations",
+                source_checksum="88d40662ed32fed730f1ef6ab82d805e40b830143f50f19c6673f28112e6d232",
+                restored_checksum="88d40662ed32fed730f1ef6ab82d805e40b830143f50f19c6673f28112e6d232",
+                status="RESTORED",
+            ),
+            ConfigAssetItem(
+                asset_name="prometheus.yml",
+                asset_type="Telemetry Scrape Config",
+                source_checksum="615295194528b74d3eab04a4b49f190f5d17fb5e57283937f00ec7384a73b971",
+                restored_checksum="615295194528b74d3eab04a4b49f190f5d17fb5e57283937f00ec7384a73b971",
+                status="RESTORED",
+            ),
+            ConfigAssetItem(
+                asset_name="grafana/dashboards/",
+                asset_type="Dashboard Definitions",
+                source_checksum="b2f5ff47436671b6e533d8dc3614845d806d87a4ecda69302b516003b30bd56e",
+                restored_checksum="b2f5ff47436671b6e533d8dc3614845d806d87a4ecda69302b516003b30bd56e",
+                status="RESTORED",
+            ),
+            ConfigAssetItem(
+                asset_name="nginx/conf.d/default.conf",
+                asset_type="Reverse Proxy Routing",
+                source_checksum="7b774effe4a349c6dd82ad4f4f21d34c6da9003ff15bf6b5f10acfb5f70d8100",
+                restored_checksum="7b774effe4a349c6dd82ad4f4f21d34c6da9003ff15bf6b5f10acfb5f70d8100",
+                status="RESTORED",
+            ),
         ]
 
         checks = [

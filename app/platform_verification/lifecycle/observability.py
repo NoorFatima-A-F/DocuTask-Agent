@@ -2,12 +2,14 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import List, Dict, Any
 
+
 @dataclass(frozen=True)
 class LifecycleTimelineEntry:
     phase_name: str
     timestamp: str
     duration_ms: float
     details: Dict[str, Any] = field(default_factory=dict)
+
 
 class LifecycleTimelineTracker:
     def __init__(self):
@@ -18,7 +20,7 @@ class LifecycleTimelineTracker:
             phase_name=phase_name,
             timestamp=datetime.now(timezone.utc).isoformat(),
             duration_ms=duration_ms,
-            details=details
+            details=details,
         )
         self._entries.append(entry)
 

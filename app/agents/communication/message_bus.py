@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class AgentMessageType(str, Enum):
     """Classification of messages exchanged across the agent communication bus."""
+
     COMMAND = "COMMAND"
     REQUEST = "REQUEST"
     RESPONSE = "RESPONSE"
@@ -34,6 +35,7 @@ class AgentMessageType(str, Enum):
 @dataclass
 class AgentMessage:
     """Standardized schema for all multi-agent communication."""
+
     id: str = field(default_factory=lambda: f"msg-{uuid.uuid4().hex[:12]}")
     sender: str = ""
     receiver: str = ""  # Specific agent ID, or "*" for broadcast
@@ -101,10 +103,7 @@ class AgentMessageBus:
                 except Exception as e:
                     logger.warning(f"Error in message subscriber callback: {e}")
 
-        logger.info(
-            f"Message {message.id} routed: '{message.sender}' -> '{message.receiver}' "
-            f"[{message.type}]"
-        )
+        logger.info(f"Message {message.id} routed: '{message.sender}' -> '{message.receiver}' [{message.type}]")
 
     def receive(self, agent_id: str) -> Optional[AgentMessage]:
         """Retrieves and removes the next pending message for an agent."""

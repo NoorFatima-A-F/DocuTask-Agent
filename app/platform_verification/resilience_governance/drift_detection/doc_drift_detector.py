@@ -2,6 +2,7 @@
 Documentation Drift Detector for Disaster Recovery Governance Framework (Part 3G.4).
 Compares actual infrastructure manifests against disaster recovery runbooks to prevent documentation rot.
 """
+
 from typing import List
 from app.platform_verification.resilience_governance.domain.models import (
     DocumentationDriftItem,
@@ -22,11 +23,46 @@ class DocumentationDriftDetector(IDocumentationDriftDetector):
     """
 
     AUDITED_DOCUMENTS = [
-        ("runbooks/database_failure.md", "DATABASE_CLUSTER_TOPOLOGY", "PostgreSQL 16 Multi-AZ with PgBouncer", "PostgreSQL 16 Multi-AZ with PgBouncer", False, "Synchronized"),
-        ("runbooks/storage_failure.md", "OBJECT_STORAGE_ENDPOINTS", "AWS S3 Multi-AZ (us-east-1) -> us-west-2", "AWS S3 Multi-AZ (us-east-1) -> us-west-2", False, "Synchronized"),
-        ("runbooks/complete_outage.md", "TERRAFORM_DR_MODULE", "terraform/environments/dr-us-west-2", "terraform/environments/dr-us-west-2", False, "Synchronized"),
-        ("runbooks/rollback.md", "WEIGHTED_DNS_ROUTE53", "Route53 100/0 weighted failover records", "Route53 100/0 weighted failover records", False, "Synchronized"),
-        ("runbooks/communication.md", "PAGERDUTY_ESCALATION_TIER", "PAGERDUTY_SEV1_TIER1_SRE", "PAGERDUTY_SEV1_TIER1_SRE", False, "Synchronized"),
+        (
+            "runbooks/database_failure.md",
+            "DATABASE_CLUSTER_TOPOLOGY",
+            "PostgreSQL 16 Multi-AZ with PgBouncer",
+            "PostgreSQL 16 Multi-AZ with PgBouncer",
+            False,
+            "Synchronized",
+        ),
+        (
+            "runbooks/storage_failure.md",
+            "OBJECT_STORAGE_ENDPOINTS",
+            "AWS S3 Multi-AZ (us-east-1) -> us-west-2",
+            "AWS S3 Multi-AZ (us-east-1) -> us-west-2",
+            False,
+            "Synchronized",
+        ),
+        (
+            "runbooks/complete_outage.md",
+            "TERRAFORM_DR_MODULE",
+            "terraform/environments/dr-us-west-2",
+            "terraform/environments/dr-us-west-2",
+            False,
+            "Synchronized",
+        ),
+        (
+            "runbooks/rollback.md",
+            "WEIGHTED_DNS_ROUTE53",
+            "Route53 100/0 weighted failover records",
+            "Route53 100/0 weighted failover records",
+            False,
+            "Synchronized",
+        ),
+        (
+            "runbooks/communication.md",
+            "PAGERDUTY_ESCALATION_TIER",
+            "PAGERDUTY_SEV1_TIER1_SRE",
+            "PAGERDUTY_SEV1_TIER1_SRE",
+            False,
+            "Synchronized",
+        ),
     ]
 
     def detect_documentation_drift(self) -> DocumentationDriftReport:
@@ -45,7 +81,7 @@ class DocumentationDriftDetector(IDocumentationDriftDetector):
 
         total = len(items)
         drifts = sum(1 for i in items if i.drift_detected)
-        passed = (drifts == 0)
+        passed = drifts == 0
 
         details = {
             "total_documents_audited": total,

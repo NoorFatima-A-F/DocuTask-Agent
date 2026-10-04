@@ -59,6 +59,7 @@ def api_client():
 
 # --- 1. Verifier Unit Tests (Parts A to T) ---
 
+
 def test_part_a_scenario_library():
     verifier = ScenarioLibraryVerifier()
     report = verifier.verify()
@@ -245,6 +246,7 @@ def test_part_t_executive_readiness():
 
 # --- 2. Scoring & Certification Tests ---
 
+
 def test_workflow_quality_scorer():
     runtime = AutonomousWorkflowVerificationRuntime()
     reports = {k: v.verify() for k, v in runtime.verifiers.items()}
@@ -262,6 +264,7 @@ def test_workflow_quality_scorer():
 
 
 # --- 3. Exporter & SHA-256 Manifest Tests ---
+
 
 def test_workflow_quality_exporter(tmp_output_dir):
     runtime = AutonomousWorkflowVerificationRuntime()
@@ -284,6 +287,7 @@ def test_workflow_quality_exporter(tmp_output_dir):
 
 # --- 4. Master Synchronous Runtime Tests ---
 
+
 def test_workflow_runtime_execution(tmp_output_dir):
     runtime = AutonomousWorkflowVerificationRuntime()
     report = runtime.execute_all(output_dir=tmp_output_dir)
@@ -295,6 +299,7 @@ def test_workflow_runtime_execution(tmp_output_dir):
 
 
 # --- 5. FastAPI REST API Endpoint Tests ---
+
 
 def test_workflow_api_health(api_client):
     res = api_client.get("/api/v1/verification/autonomous-workflows/health")

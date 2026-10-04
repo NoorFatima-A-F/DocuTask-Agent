@@ -29,15 +29,16 @@ class IndependentVerificationReport:
     """
     Independent 3rd-party verification audit report.
     """
+
     verification_id: str
     bundle_id: str
     verified_at: float = field(default_factory=time.time)
-    
+
     # Audit Battery Results
     total_checks_run: int = 6
     total_checks_passed: int = 6
     checks: List[VerificationCheckResult] = field(default_factory=list)
-    
+
     all_passed: bool = True
     independent_attestation_status: str = "CRYPTOGRAPHICALLY_VERIFIED"
     verifier_notes: str = ""
@@ -80,7 +81,7 @@ class IndependentVerifier:
                 hash_continuity = False
                 break
             curr_parent = entry.get("entry_hash", "")
-        
+
         checks.append(
             VerificationCheckResult(
                 check_name="Truth Ledger Hash Continuity",
@@ -119,7 +120,7 @@ class IndependentVerifier:
             VerificationCheckResult(
                 check_name="Replay State Determinism Check",
                 passed=bool(replay_state_match >= 0.99),
-                details=f"Deterministic replay verified bitwise state match rate of {replay_state_match*100:.2f}%.",
+                details=f"Deterministic replay verified bitwise state match rate of {replay_state_match * 100:.2f}%.",
                 evidence_hash_checked=bundle.get("replay_hash", "0x12345678"),
             )
         )

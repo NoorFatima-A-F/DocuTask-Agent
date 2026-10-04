@@ -22,10 +22,10 @@ class PlanRepairEngine:
             for i in range(len(node_ids) - 1):
                 new_edges.append(
                     PlanEdge(
-                        edge_id=f"repair_{node_ids[i]}->{node_ids[i+1]}",
+                        edge_id=f"repair_{node_ids[i]}->{node_ids[i + 1]}",
                         source_node_id=node_ids[i],
-                        target_node_id=node_ids[i+1],
-                        edge_type=EdgeType.SEQUENTIAL
+                        target_node_id=node_ids[i + 1],
+                        edge_type=EdgeType.SEQUENTIAL,
                     )
                 )
 

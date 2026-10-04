@@ -1,6 +1,7 @@
 """
 Phase 3I.10: Observability Intelligence Governance, Reliability Automation Maturity & Enterprise Operations Certification — Domain Interfaces
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 
@@ -98,6 +99,8 @@ class IOperationsCertificationScorer(ABC):
 
 class IObservabilityGovernanceExporter(ABC):
     @abstractmethod
-    def export(self, verification_results: Dict[str, Any], certification_report: EnterpriseOperationsCertificationReport) -> Dict[str, str]:
+    def export(
+        self, verification_results: Dict[str, Any], certification_report: EnterpriseOperationsCertificationReport
+    ) -> Dict[str, str]:
         """Export all verification manifests and signed metadata.json."""
         pass

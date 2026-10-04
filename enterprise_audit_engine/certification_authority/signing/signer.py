@@ -9,6 +9,7 @@ from typing import Tuple, Optional, Any
 try:
     from cryptography.hazmat.primitives.asymmetric import ed25519
     from cryptography.hazmat.primitives import serialization
+
     HAS_CRYPTOGRAPHY = True
 except ImportError:
     HAS_CRYPTOGRAPHY = False
@@ -43,7 +44,9 @@ class CertificateSigner:
             )
             return pem_bytes.decode("utf-8")
         else:
-            b64_pub = base64.b64encode(public_key if isinstance(public_key, bytes) else str(public_key).encode()).decode()
+            b64_pub = base64.b64encode(
+                public_key if isinstance(public_key, bytes) else str(public_key).encode()
+            ).decode()
             return f"-----BEGIN PUBLIC KEY-----\n{b64_pub}\n-----END PUBLIC KEY-----\n"
 
     @classmethod
@@ -57,7 +60,9 @@ class CertificateSigner:
             )
             return pem_bytes.decode("utf-8")
         else:
-            b64_priv = base64.b64encode(private_key if isinstance(private_key, bytes) else str(private_key).encode()).decode()
+            b64_priv = base64.b64encode(
+                private_key if isinstance(private_key, bytes) else str(private_key).encode()
+            ).decode()
             return f"-----BEGIN PRIVATE KEY-----\n{b64_priv}\n-----END PRIVATE KEY-----\n"
 
     @classmethod
@@ -79,7 +84,13 @@ class CertificateSigner:
         if private_key is None:
             private_key, public_key = cls.generate_keypair()
         else:
-            public_key = private_key.public_key() if hasattr(private_key, "public_key") else hashlib.sha256(b"PUB_DERIVE:" + (private_key if isinstance(private_key, bytes) else str(private_key).encode())).digest()
+            public_key = (
+                private_key.public_key()
+                if hasattr(private_key, "public_key")
+                else hashlib.sha256(
+                    b"PUB_DERIVE:" + (private_key if isinstance(private_key, bytes) else str(private_key).encode())
+                ).digest()
+            )
 
         public_key_pem = cls.export_public_key_pem(public_key)
         canonical_bytes = record.canonical_payload_for_signing().encode("utf-8")

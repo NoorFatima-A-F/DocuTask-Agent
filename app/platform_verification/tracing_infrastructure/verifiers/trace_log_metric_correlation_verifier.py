@@ -1,6 +1,7 @@
 """
 3I.4.10 & 3I.4.11: Trace, Log & Metric Correlation Verifier
 """
+
 from ..domain.models import TraceCorrelationReport
 from ..domain.interfaces import ITraceCorrelationVerifier
 
@@ -17,5 +18,5 @@ class TraceCorrelationVerifier(ITraceCorrelationVerifier):
             metric_to_trace_jump_verified=True,
             red_metrics_correlated=True,
             service_dependency_map_generated=True,
-            correlation_score_pct=100.0
+            correlation_score_pct=100.0,
         )

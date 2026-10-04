@@ -18,6 +18,7 @@ logger = logging.getLogger("infrastructure.health.heartbeat")
 
 class HeartbeatSignal(BaseModel):
     """Heartbeat signal sent by a distributed entity."""
+
     entity_id: str
     entity_type: str = Field(default="service", description="node, cluster, worker, service, etc.")
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -30,6 +31,7 @@ class HeartbeatSignal(BaseModel):
 
 class HeartbeatStatus(BaseModel):
     """Evaluation of an entity's heartbeat state."""
+
     entity_id: str
     entity_type: str
     last_seen: datetime

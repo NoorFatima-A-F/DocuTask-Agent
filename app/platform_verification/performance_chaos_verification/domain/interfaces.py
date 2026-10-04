@@ -1,6 +1,7 @@
 """
 Domain interfaces for Enterprise Performance, Scaling & Chaos Verification.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Dict
 from app.platform_verification.performance_chaos_verification.domain.models import (
@@ -29,6 +30,7 @@ class IPerformanceBaselineEngine(ABC):
 
 class ILoadStressGenerator(ABC):
     __test__ = False
+
     @abstractmethod
     def execute_load_tests(self) -> List[LoadTestReport]:
         pass
@@ -40,6 +42,7 @@ class ILoadStressGenerator(ABC):
 
 class ISpikeEnduranceTester(ABC):
     __test__ = False
+
     @abstractmethod
     def execute_spike_test(self) -> SpikeTestReport:
         pass

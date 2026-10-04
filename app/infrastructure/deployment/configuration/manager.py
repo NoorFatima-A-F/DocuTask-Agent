@@ -6,10 +6,10 @@ from typing import Any, Dict, List, Optional
 import threading
 
 
-
 @dataclass
 class ConfigurationBundle:
     """A versioned set of configuration key-values."""
+
     config_id: str
     service_name: str
     environment: str

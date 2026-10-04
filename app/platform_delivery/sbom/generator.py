@@ -1,4 +1,5 @@
 """Software Bill of Materials (SBOM) Generator & Formatter (SPDX & CycloneDX)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -8,6 +9,7 @@ import uuid
 
 class SBOMFormat(str, Enum):
     """Supported standard SBOM formats (Req 20)."""
+
     CYCLONEDX_1_5 = "CycloneDX-1.5"
     SPDX_2_3 = "SPDX-2.3"
 
@@ -15,6 +17,7 @@ class SBOMFormat(str, Enum):
 @dataclass
 class SBOMComponent:
     """Individual software dependency record."""
+
     name: str
     version: str
     purl: str
@@ -26,6 +29,7 @@ class SBOMComponent:
 @dataclass
 class SBOMDocument:
     """Standardized SBOM document."""
+
     sbom_id: str
     artifact_digest: str
     format: SBOMFormat
@@ -73,8 +77,12 @@ class SBOMManager:
         default_comps = components or [
             SBOMComponent(name="fastapi", version="0.110.0", purl="pkg:pypi/fastapi@0.110.0", license_concluded="MIT"),
             SBOMComponent(name="pydantic", version="2.6.4", purl="pkg:pypi/pydantic@2.6.4", license_concluded="MIT"),
-            SBOMComponent(name="sqlalchemy", version="2.0.28", purl="pkg:pypi/sqlalchemy@2.0.28", license_concluded="MIT"),
-            SBOMComponent(name="google-genai", version="0.1.1", purl="pkg:pypi/google-genai@0.1.1", license_concluded="Apache-2.0"),
+            SBOMComponent(
+                name="sqlalchemy", version="2.0.28", purl="pkg:pypi/sqlalchemy@2.0.28", license_concluded="MIT"
+            ),
+            SBOMComponent(
+                name="google-genai", version="0.1.1", purl="pkg:pypi/google-genai@0.1.1", license_concluded="Apache-2.0"
+            ),
         ]
 
         doc = SBOMDocument(

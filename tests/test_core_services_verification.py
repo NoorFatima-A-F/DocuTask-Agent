@@ -171,7 +171,7 @@ def test_core_services_scorer_and_scorecard():
         CrossServiceVerifier(),
     ]
     results = {v.verify_all().section_id.value: v.verify_all() for v in verifiers}
-    
+
     scorer = CoreServicesScorer()
     scorecard = scorer.calculate_scorecard(results)
 
@@ -188,7 +188,7 @@ def test_evidence_export_and_manifest(tmp_path):
 
     verifiers = [OrchestratorVerifier(), AgentKernelVerifier(), StorageVerifier()]
     results = {v.verify_all().section_id.value: v.verify_all() for v in verifiers}
-    
+
     scorer = CoreServicesScorer()
     scorecard = scorer.calculate_scorecard(results)
 
@@ -197,7 +197,7 @@ def test_evidence_export_and_manifest(tmp_path):
 
     assert os.path.exists(summary["manifest_path"])
     assert os.path.exists(summary["report_path"])
-    
+
     with open(summary["manifest_path"], "r", encoding="utf-8") as f:
         manifest = json.load(f)
     assert manifest["composite_score"] == 100.0

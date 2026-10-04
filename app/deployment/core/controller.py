@@ -1,4 +1,5 @@
 """Deployment Controller Control Plane."""
+
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from .deployment import Deployment, DeploymentStrategyType
@@ -141,12 +142,14 @@ class DeploymentController:
         try:
             # 1. Validating
             deployment.transition_to(DeploymentStatus.VALIDATING, reason="Validating pre-deployment criteria")
-            
+
             # 2. Preparing
             deployment.transition_to(DeploymentStatus.PREPARING, reason="Allocating target cluster resources")
-            
+
             # 3. Deploying
-            deployment.transition_to(DeploymentStatus.DEPLOYING, reason=f"Rolling out with strategy {deployment.strategy.value}")
+            deployment.transition_to(
+                DeploymentStatus.DEPLOYING, reason=f"Rolling out with strategy {deployment.strategy.value}"
+            )
             deployment.traffic_weight = 1.0
 
             # 4. Verifying
@@ -195,8 +198,10 @@ class DeploymentController:
         if not target_rel_id:
             # Find the most recent active deployment before this one
             past_deployments = [
-                d for d in self.list_deployments(environment=env)
-                if d.deployment_id != deployment_id and d.status in {DeploymentStatus.ACTIVE, DeploymentStatus.DECOMMISSIONED}
+                d
+                for d in self.list_deployments(environment=env)
+                if d.deployment_id != deployment_id
+                and d.status in {DeploymentStatus.ACTIVE, DeploymentStatus.DECOMMISSIONED}
             ]
             if past_deployments:
                 target_rel_id = past_deployments[0].release_id
@@ -204,7 +209,7 @@ class DeploymentController:
                 target_rel_id = "rel-baseline"
 
         deployment.mark_rolled_back(target_release_id=target_rel_id, reason=reason)
-        
+
         # Remove from active if it was active
         if self._active_deployments.get(env) == deployment_id:
             del self._active_deployments[env]

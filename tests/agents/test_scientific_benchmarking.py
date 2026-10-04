@@ -246,7 +246,7 @@ class TestScientificBenchmarkRunner:
             nonlocal counter
             counter += 1
             # Some trivial computation
-            _ = [x ** 2 for x in range(100)]
+            _ = [x**2 for x in range(100)]
 
         result, evidence = runner.run_benchmark(
             name="micro_math_loop",

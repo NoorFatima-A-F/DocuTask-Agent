@@ -60,7 +60,9 @@ class ReliabilitySecurityAuditor:
                 sanitization_verified=secret_sanitization_ok,
                 rbac_enforced=True,
                 passed=secret_sanitization_ok,
-                details="Verified 0 unmasked API keys, tokens, or credentials in SRE telemetry payloads." if secret_sanitization_ok else f"Found exposed credentials: {exposed_secrets}",
+                details="Verified 0 unmasked API keys, tokens, or credentials in SRE telemetry payloads."
+                if secret_sanitization_ok
+                else f"Found exposed credentials: {exposed_secrets}",
             )
         )
 

@@ -2,6 +2,7 @@
 REST API Router for Enterprise Database Backup & Recovery Verification Platform (Part 3G.2B Advanced).
 Exposes all 17 verification phases, quality scorecard, and CI/CD release gate.
 """
+
 from typing import Dict, Any
 from fastapi import APIRouter, HTTPException, Query
 from app.platform_verification.database_backup_verification.runtime.database_backup_runtime import (
@@ -18,7 +19,7 @@ runtime_instance = DatabaseBackupVerificationRuntime()
 
 @router.post("/run", response_model=Dict[str, Any])
 def run_full_database_verification_pipeline(
-    export_evidence: bool = Query(default=True, description="Whether to export evidence JSON artifacts to disk")
+    export_evidence: bool = Query(default=True, description="Whether to export evidence JSON artifacts to disk"),
 ) -> Dict[str, Any]:
     """Triggers the full enterprise 17-phase database backup verification pipeline."""
     try:

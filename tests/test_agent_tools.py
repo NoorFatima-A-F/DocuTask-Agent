@@ -27,7 +27,9 @@ from app.agents.tools import (
 class DummyOCRTool(BaseTool):
     """Dummy OCR Tool implementation for unit testing."""
 
-    def __init__(self, tool_id: str = "ocr_tesseract", cost: float = 0.0, latency: float = 100.0, confidence: float = 0.95):
+    def __init__(
+        self, tool_id: str = "ocr_tesseract", cost: float = 0.0, latency: float = 100.0, confidence: float = 0.95
+    ):
         desc = ToolDescriptor(
             identity=ToolIdentity(tool_id=tool_id, name="Tesseract OCR", provider_name="Tesseract", category="OCR"),
             metadata=ToolMetadata(
@@ -35,8 +37,8 @@ class DummyOCRTool(BaseTool):
                 supported_capabilities=["OCR", "TEXT_EXTRACTION"],
                 supported_document_types=["invoice", "pdf"],
                 cost_profile=CostProfile(cost_per_call_usd=cost),
-                latency_profile=LatencyProfile(p50_latency_ms=latency)
-            )
+                latency_profile=LatencyProfile(p50_latency_ms=latency),
+            ),
         )
         desc.statistics.confidence_score = confidence
         super().__init__(desc)
@@ -115,7 +117,7 @@ def test_tool_descriptor_validation():
     """Verifies ToolValidator fail-fast checks."""
     bad_desc = ToolDescriptor(
         identity=ToolIdentity(tool_id="", name="", provider_name="", category=""),
-        metadata=ToolMetadata(description="", supported_capabilities=[])
+        metadata=ToolMetadata(description="", supported_capabilities=[]),
     )
     with pytest.raises(ToolValidationException):
         ToolValidator.validate_descriptor(bad_desc)

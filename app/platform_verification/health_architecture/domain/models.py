@@ -1,6 +1,7 @@
 """
 Domain Models for Health Check Architecture Verification Framework (Part 3H.1).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, Any, List
@@ -24,22 +25,22 @@ class HealthLayer(str, Enum):
 
 
 class DependencyPriority(str, Enum):
-    CRITICAL = "CRITICAL"    # Failure blocks service readiness
+    CRITICAL = "CRITICAL"  # Failure blocks service readiness
     IMPORTANT = "IMPORTANT"  # Failure degrades service into fallback mode
-    OPTIONAL = "OPTIONAL"    # Failure causes zero operational impact
+    OPTIONAL = "OPTIONAL"  # Failure causes zero operational impact
 
 
 class HealthVisibilityLevel(str, Enum):
-    PUBLIC = "PUBLIC"                    # Minimal liveness/readiness, 0 details
-    INTERNAL = "INTERNAL"                # Dependency statuses, latency
-    ADMIN_DIAGNOSTIC = "ADMIN_DIAGNOSTIC"# Detailed telemetry with auth
+    PUBLIC = "PUBLIC"  # Minimal liveness/readiness, 0 details
+    INTERNAL = "INTERNAL"  # Dependency statuses, latency
+    ADMIN_DIAGNOSTIC = "ADMIN_DIAGNOSTIC"  # Detailed telemetry with auth
 
 
 class HealthArchitectureTier(str, Enum):
-    FAILED = "Failed"                                         # < 80
-    NEEDS_IMPROVEMENT = "Needs Improvement"                   # 80 - 89
-    PRODUCTION_READY = "Production Ready"                     # 90 - 94
-    ENTERPRISE_READY = "Enterprise Health Architecture Ready" # 95 - 100
+    FAILED = "Failed"  # < 80
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80 - 89
+    PRODUCTION_READY = "Production Ready"  # 90 - 94
+    ENTERPRISE_READY = "Enterprise Health Architecture Ready"  # 95 - 100
 
 
 @dataclass
@@ -124,15 +125,15 @@ class AutomationIntegrationReport:
 
 @dataclass
 class HealthScorecard:
-    health_model_score: float         # Weight 20%
-    contract_implementation_score: float # Weight 20%
+    health_model_score: float  # Weight 20%
+    contract_implementation_score: float  # Weight 20%
     dependency_modeling_score: float  # Weight 20%
-    failure_classification_score: float # Weight 15%
-    security_design_score: float      # Weight 10%
-    automation_readiness_score: float # Weight 15%
-    overall_health_score: float       # Composite 0 - 100
+    failure_classification_score: float  # Weight 15%
+    security_design_score: float  # Weight 10%
+    automation_readiness_score: float  # Weight 15%
+    overall_health_score: float  # Composite 0 - 100
     certification_tier: HealthArchitectureTier
-    certification_verdict: str        # CERTIFIED / REJECTED
+    certification_verdict: str  # CERTIFIED / REJECTED
     ci_cd_deployment_approved: bool
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

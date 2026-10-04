@@ -108,6 +108,7 @@ class TopologyGraph:
                 return [start_id], 0.0
 
             import heapq
+
             distances = {n: float("inf") for n in self._nodes}
             previous = {n: None for n in self._nodes}
             distances[start_id] = 0.0

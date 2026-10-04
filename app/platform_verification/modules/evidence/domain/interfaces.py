@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Evidence.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.evidence.domain.models import EvidenceEntity
+
 
 class EvidenceRepositoryInterface(ABC):
     @abstractmethod

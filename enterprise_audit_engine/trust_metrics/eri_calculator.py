@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class EriDimensionScores(BaseModel):
     """Breakdown of individual ERI dimensions."""
+
     execution_reality_score: float  # Weight: 30%
     independent_confirmation_score: float  # Weight: 25%
     artifact_completeness_score: float  # Weight: 20%
@@ -24,6 +25,7 @@ class EriDimensionScores(BaseModel):
 
 class EvidenceReliabilityReport(BaseModel):
     """Full Evidence Reliability Index report."""
+
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     eri_score: float  # 0.0 - 100.0
     classification: str  # HIGH_TRUST_EVIDENCE, COMMERCIAL_TRUST_EVIDENCE, EVIDENCE_UNTRUSTED
@@ -59,7 +61,11 @@ class EvidenceReliabilityIndexCalculator:
             )
 
         # 1. Execution Reality (30%): Proportion of runtime execution evidence vs static/config
-        exec_count = sum(1 for e in evidence_items if "runtime" in str(e.get("category", "")).lower() or "exec" in str(e.get("classification", "")).lower())
+        exec_count = sum(
+            1
+            for e in evidence_items
+            if "runtime" in str(e.get("category", "")).lower() or "exec" in str(e.get("classification", "")).lower()
+        )
         exec_reality = min(100.0, max(50.0, (exec_count / total_items) * 150.0)) if reality_checks_passed else 20.0
 
         # 2. Independent Confirmation (25%): AST / Test / Cryptographic validation
@@ -77,13 +83,7 @@ class EvidenceReliabilityIndexCalculator:
         reproducibility = 100.0 if reproducibility_passed else 0.0
 
         # Composite ERI calculation
-        eri = (
-            0.30 * exec_reality +
-            0.25 * indep_conf +
-            0.20 * completeness +
-            0.15 * stability +
-            0.10 * reproducibility
-        )
+        eri = 0.30 * exec_reality + 0.25 * indep_conf + 0.20 * completeness + 0.15 * stability + 0.10 * reproducibility
         eri = round(eri, 2)
 
         if eri >= 90.0:

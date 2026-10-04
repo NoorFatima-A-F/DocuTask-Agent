@@ -16,10 +16,10 @@ class VerificationStatus(str, Enum):
 
 
 class BaselineCertificationTier(str, Enum):
-    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"          # 95.0 - 100.0%
-    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"          # 90.0 - 94.99%
-    OPTIMIZATION_REQUIRED = "Optimization Required"                        # 80.0 - 89.99%
-    FAILED = "Failed"                                                      # < 80.0%
+    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"  # 95.0 - 100.0%
+    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"  # 90.0 - 94.99%
+    OPTIMIZATION_REQUIRED = "Optimization Required"  # 80.0 - 89.99%
+    FAILED = "Failed"  # < 80.0%
 
 
 # Backward/general alias
@@ -43,6 +43,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3J.3.1: Performance Testing Architecture Models ───────────────────────────
 
+
 class LoadGeneratorSpec(BaseModel):
     tool_name: str = "k6 + Python Custom Scenarios"
     distributed_mode: bool = True
@@ -64,6 +65,7 @@ class PerformanceArchitectureReport(BaseVerificationReport):
 
 
 # ─── 3J.3.2: Baseline Performance Models ───────────────────────────────────────
+
 
 class APILatencyMetric(BaseModel):
     endpoint: str
@@ -93,6 +95,7 @@ class BaselinePerformanceReport(BaseVerificationReport):
 
 
 # ─── 3J.3.3: AI Workflow Performance Profiling Models ─────────────────────────
+
 
 class OCRPerformanceMetric(BaseModel):
     processing_time_ms: float = 240.0
@@ -124,6 +127,7 @@ class AIPipelinePerformanceReport(BaseVerificationReport):
 
 # ─── 3J.3.4: Concurrent User Load Models ──────────────────────────────────────
 
+
 class LoadLevelResult(BaseModel):
     level_name: str
     concurrent_users: int
@@ -142,6 +146,7 @@ class ConcurrentLoadReport(BaseVerificationReport):
 
 
 # ─── 3J.3.5: Throughput Capacity Models ───────────────────────────────────────
+
 
 class CapacityScalingStep(BaseModel):
     worker_count: int
@@ -162,6 +167,7 @@ class CapacityModelReport(BaseVerificationReport):
 
 # ─── 3J.3.6: Latency Distribution Models ──────────────────────────────────────
 
+
 class PercentileDistribution(BaseModel):
     percentile: str
     measured_latency_ms: float
@@ -177,6 +183,7 @@ class LatencyDistributionReport(BaseVerificationReport):
 
 
 # ─── 3J.3.7: Resource Utilization Models ──────────────────────────────────────
+
 
 class CPUUtilizationMetric(BaseModel):
     avg_usage_pct: float = 38.5
@@ -212,6 +219,7 @@ class ResourceUtilizationReport(BaseVerificationReport):
 
 # ─── 3J.3.8: Database Performance Models ──────────────────────────────────────
 
+
 class DBQueryLatencyMetric(BaseModel):
     query_type: str
     p50_ms: float
@@ -240,6 +248,7 @@ class DatabasePerformanceReport(BaseVerificationReport):
 
 # ─── 3J.3.9: Queue Performance Models ─────────────────────────────────────────
 
+
 class QueueLatencyMetric(BaseModel):
     task_creation_to_worker_receive_ms: float = 14.5
     queue_depth_peak: int = 450
@@ -258,6 +267,7 @@ class QueueCapacityReport(BaseVerificationReport):
 
 # ─── 3J.3.10: Worker Scaling Models ───────────────────────────────────────────
 
+
 class WorkerScalingPoint(BaseModel):
     workers: int
     measured_throughput_docs_hr: int
@@ -274,6 +284,7 @@ class WorkerScalingReport(BaseVerificationReport):
 
 
 # ─── 3J.3.11: Performance Failure Models ──────────────────────────────────────
+
 
 class FailureStressScenario(BaseModel):
     scenario_name: str
@@ -292,6 +303,7 @@ class PerformanceFailureReport(BaseVerificationReport):
 
 
 # ─── 3J.3.12: Performance Regression Gate Models ──────────────────────────────
+
 
 class RegressionMetricComparison(BaseModel):
     metric_name: str
@@ -312,6 +324,7 @@ class PerformanceRegressionReport(BaseVerificationReport):
 
 
 # ─── 3J.3.14: 6-Category Quality Scoring & Certification Models ────────────────
+
 
 class CategoryScore(BaseModel):
     category: str

@@ -23,15 +23,55 @@ class BackupSecurityComplianceEngine(IBackupSecurityComplianceEngine):
         Runs formal security compliance evaluation.
         """
         frameworks = {
-            "NIST_SP_800_53": {"controls": ["CP-9 Backup Security", "SC-13 Cryptography", "SC-28 Protection at Rest"], "status": "COMPLIANT", "score": 100.0},
-            "NIST_SP_800_57": {"controls": ["Key Lifecycle", "Key Storage Isolation", "Rotation Interval"], "status": "COMPLIANT", "score": 100.0},
-            "NIST_CSF_v2": {"controls": ["PR.DS-1 Data at Rest Protected", "PR.DS-2 Data in Transit Protected", "RC.RP-1 Recovery Executed"], "status": "COMPLIANT", "score": 100.0},
-            "OWASP_ASVS_v4": {"controls": ["V6 Cryptography", "V8 Data Protection", "V14 Configuration"], "status": "COMPLIANT", "score": 100.0},
-            "OWASP_SECRETS_MGMT": {"controls": ["Zero Plaintext", "Automated Rotation", "KMS Integration"], "status": "COMPLIANT", "score": 100.0},
-            "CIS_BENCHMARKS": {"controls": ["Storage Bucket Encryption", "Access Logging", "MFA Delete"], "status": "COMPLIANT", "score": 100.0},
-            "ISO_IEC_27001": {"controls": ["A.8.24 Use of Cryptography", "A.8.13 Information Backup", "A.8.14 Redundancy"], "status": "COMPLIANT", "score": 100.0},
-            "SOC_2_TYPE_II": {"controls": ["CC6.1 Logical Access", "CC6.6 Encryption", "CC6.7 Transmission Security"], "status": "COMPLIANT", "score": 100.0},
-            "GDPR_ARTICLE_32": {"controls": ["Pseudonymisation & Encryption", "Confidentiality & Integrity", "Timely Recovery"], "status": "COMPLIANT", "score": 100.0},
+            "NIST_SP_800_53": {
+                "controls": ["CP-9 Backup Security", "SC-13 Cryptography", "SC-28 Protection at Rest"],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
+            "NIST_SP_800_57": {
+                "controls": ["Key Lifecycle", "Key Storage Isolation", "Rotation Interval"],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
+            "NIST_CSF_v2": {
+                "controls": [
+                    "PR.DS-1 Data at Rest Protected",
+                    "PR.DS-2 Data in Transit Protected",
+                    "RC.RP-1 Recovery Executed",
+                ],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
+            "OWASP_ASVS_v4": {
+                "controls": ["V6 Cryptography", "V8 Data Protection", "V14 Configuration"],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
+            "OWASP_SECRETS_MGMT": {
+                "controls": ["Zero Plaintext", "Automated Rotation", "KMS Integration"],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
+            "CIS_BENCHMARKS": {
+                "controls": ["Storage Bucket Encryption", "Access Logging", "MFA Delete"],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
+            "ISO_IEC_27001": {
+                "controls": ["A.8.24 Use of Cryptography", "A.8.13 Information Backup", "A.8.14 Redundancy"],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
+            "SOC_2_TYPE_II": {
+                "controls": ["CC6.1 Logical Access", "CC6.6 Encryption", "CC6.7 Transmission Security"],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
+            "GDPR_ARTICLE_32": {
+                "controls": ["Pseudonymisation & Encryption", "Confidentiality & Integrity", "Timely Recovery"],
+                "status": "COMPLIANT",
+                "score": 100.0,
+            },
         }
 
         return BackupSecurityComplianceReport(

@@ -28,7 +28,7 @@ def test_counterfactual_reasoning():
     engine = DoCalculusEngine()
     factual = {"worker_concurrency": 2.0, "total_latency_ms": 1200.0}
     action = {"worker_concurrency": 8.0}
-    
+
     cf_res = engine.evaluate_counterfactual(factual, action)
     assert "total_latency_ms" in cf_res.counterfactual_outcomes
     assert cf_res.counterfactual_outcomes["total_latency_ms"] < 1200.0

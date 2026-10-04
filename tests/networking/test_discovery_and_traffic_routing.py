@@ -68,12 +68,8 @@ def test_traffic_router_matching():
     rule = RouteRule(
         rule_id="route-v2-canary",
         name="Canary for v2 API",
-        matches=[
-            MatchCondition(path="/v2/documents", path_type="prefix", method="POST")
-        ],
-        destinations=[
-            RouteDestination(service_name="doc-service", version="v2", weight=100)
-        ],
+        matches=[MatchCondition(path="/v2/documents", path_type="prefix", method="POST")],
+        destinations=[RouteDestination(service_name="doc-service", version="v2", weight=100)],
         priority=10,
     )
     router.add_rule(rule)

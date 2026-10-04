@@ -30,6 +30,7 @@ CONFIDENCE_NUMERIC_MAP = {
 @dataclass(frozen=True)
 class ConfidenceThreshold:
     """Immutable confidence threshold specification."""
+
     level: ConfidenceLevel
     custom_numeric_value: Optional[float] = None
 

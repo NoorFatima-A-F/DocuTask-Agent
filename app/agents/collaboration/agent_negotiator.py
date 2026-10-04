@@ -104,7 +104,8 @@ class AgentNegotiator:
 
         # Filter out bids exceeding budget or deadline
         valid_bids = [
-            b for b in session.bids
+            b
+            for b in session.bids
             if b.cost_bid <= session.max_budget and b.estimated_latency_ms <= session.deadline_ms
         ]
         if not valid_bids:

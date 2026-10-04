@@ -3,6 +3,7 @@ Evidence Generation and Manifest Service for Database Backup Verification (Part 
 Emits all 14 machine-readable audit artifacts to evidence/database_backup_verification/
 with standardized verification metadata, SHA256 integrity digests, and audit manifests.
 """
+
 import os
 import json
 import hashlib
@@ -52,13 +53,13 @@ class DatabaseEvidenceManifestEngine(IDatabaseEvidenceManifestEngine):
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
         if not output_dir:
-            output_dir = os.path.join(
-                os.getcwd(), "evidence", "database_backup_verification"
-            )
+            output_dir = os.path.join(os.getcwd(), "evidence", "database_backup_verification")
 
         os.makedirs(output_dir, exist_ok=True)
         exec_duration = verification_data.get("execution_duration_ms", 320.0)
-        verification_id = "DB-VERIF-" + hashlib.sha256(f"{self.git_commit_sha}:{exec_duration}".encode()).hexdigest()[:12]
+        verification_id = (
+            "DB-VERIF-" + hashlib.sha256(f"{self.git_commit_sha}:{exec_duration}".encode()).hexdigest()[:12]
+        )
         header = self._build_header(verification_id, exec_duration)
 
         payloads: Dict[str, Any] = {

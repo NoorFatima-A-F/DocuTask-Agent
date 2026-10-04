@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class ContextPackage(BaseModel):
     """Structured context artifact delivered to AI agents."""
+
     context_text: str
     chunks: List[KnowledgeChunk] = Field(default_factory=list)
     sources: List[str] = Field(default_factory=list)

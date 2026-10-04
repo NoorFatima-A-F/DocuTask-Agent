@@ -2,6 +2,7 @@
 Database Inventory Discovery and Backup Coverage Engine (Part 3G.2B Phase 1 & 2).
 Inventories every PostgreSQL object and verifies 100% backup coverage.
 """
+
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
     DatabaseInventoryItem,
@@ -107,9 +108,7 @@ class DatabaseInventoryEngine(IDatabaseInventoryEngine):
             passed=True,
         )
 
-    def verify_backup_coverage(
-        self, inventory: DatabaseInventoryReport
-    ) -> BackupCoverageReport:
+    def verify_backup_coverage(self, inventory: DatabaseInventoryReport) -> BackupCoverageReport:
         discovered = inventory.total_objects_discovered
         backed_up = discovered
         coverage = (backed_up / discovered * 100.0) if discovered > 0 else 100.0

@@ -23,7 +23,7 @@ class PDFProcessor:
     async def process_pdf(self, pdf_bytes: bytes) -> List[PageContent]:
         """
         Processes PDF binary content page by page.
-        
+
         :param pdf_bytes: Binary PDF content
         :return: List of PageContent objects
         :raises CorruptedDocumentException: If PDF byte stream is corrupted
@@ -41,7 +41,7 @@ class PDFProcessor:
                 for page_idx, page in enumerate(pdf.pages, start=1):
                     # Attempt native text extraction
                     native_text = page.extract_text()
-                    
+
                     if native_text and len(native_text.strip()) > 10:
                         logger.info(f"PDF Page {page_idx}: Selectable native text detected ({len(native_text)} chars)")
                         pages_content.append(
@@ -49,7 +49,7 @@ class PDFProcessor:
                                 page_number=page_idx,
                                 text=native_text.strip(),
                                 confidence=1.0,
-                                processing_method="native_pdf"
+                                processing_method="native_pdf",
                             )
                         )
                     else:

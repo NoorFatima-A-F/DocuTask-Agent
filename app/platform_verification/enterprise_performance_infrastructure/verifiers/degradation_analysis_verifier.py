@@ -32,11 +32,41 @@ class DegradationAnalysisVerifier(IDegradationAnalysisVerifier):
 
     def verify(self) -> DegradationAnalysisReport:
         stages = [
-            DegradationStage(load_jobs=100, p95_latency_ms=42.0, queue_growth_items=0, failure_rate_pct=0.0, degradation_behavior="Normal Operation"),
-            DegradationStage(load_jobs=500, p95_latency_ms=85.0, queue_growth_items=50, failure_rate_pct=0.0, degradation_behavior="Increased Latency"),
-            DegradationStage(load_jobs=1000, p95_latency_ms=220.0, queue_growth_items=300, failure_rate_pct=0.1, degradation_behavior="Graceful Backpressure"),
-            DegradationStage(load_jobs=2000, p95_latency_ms=450.0, queue_growth_items=800, failure_rate_pct=0.5, degradation_behavior="Controlled Degradation"),
-            DegradationStage(load_jobs=5000, p95_latency_ms=1200.0, queue_growth_items=3500, failure_rate_pct=2.0, degradation_behavior="Rate Limiting Active"),
+            DegradationStage(
+                load_jobs=100,
+                p95_latency_ms=42.0,
+                queue_growth_items=0,
+                failure_rate_pct=0.0,
+                degradation_behavior="Normal Operation",
+            ),
+            DegradationStage(
+                load_jobs=500,
+                p95_latency_ms=85.0,
+                queue_growth_items=50,
+                failure_rate_pct=0.0,
+                degradation_behavior="Increased Latency",
+            ),
+            DegradationStage(
+                load_jobs=1000,
+                p95_latency_ms=220.0,
+                queue_growth_items=300,
+                failure_rate_pct=0.1,
+                degradation_behavior="Graceful Backpressure",
+            ),
+            DegradationStage(
+                load_jobs=2000,
+                p95_latency_ms=450.0,
+                queue_growth_items=800,
+                failure_rate_pct=0.5,
+                degradation_behavior="Controlled Degradation",
+            ),
+            DegradationStage(
+                load_jobs=5000,
+                p95_latency_ms=1200.0,
+                queue_growth_items=3500,
+                failure_rate_pct=2.0,
+                degradation_behavior="Rate Limiting Active",
+            ),
         ]
 
         max_failure_rate = max(s.failure_rate_pct for s in stages)
@@ -50,7 +80,7 @@ class DegradationAnalysisVerifier(IDegradationAnalysisVerifier):
             ),
             CheckResult(
                 name="Controlled Degradation Pattern",
-                passed=all(stages[i].p95_latency_ms <= stages[i+1].p95_latency_ms for i in range(len(stages)-1)),
+                passed=all(stages[i].p95_latency_ms <= stages[i + 1].p95_latency_ms for i in range(len(stages) - 1)),
                 details="Latency increases monotonically with load — no erratic behavior spikes",
                 metrics={"latency_progression": [s.p95_latency_ms for s in stages]},
             ),

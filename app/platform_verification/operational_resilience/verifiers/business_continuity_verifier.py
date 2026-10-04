@@ -1,6 +1,7 @@
 """
 Phase 3H.7.9: Business Continuity & Workflow Preservation Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_resilience.domain.interfaces import IBusinessContinuityVerifier

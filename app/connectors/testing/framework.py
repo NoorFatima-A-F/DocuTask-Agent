@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 class TestReport(BaseModel):
     """Result of automated connector contract and conformance testing."""
+
     connector_id: str
     passed: bool
     total_tests: int = 0
@@ -38,29 +39,35 @@ class ConnectorTestFramework:
 
         # Test 1: Metadata compliance
         t1_passed = bool(meta.id and meta.name and meta.vendor and meta.version)
-        results.append({
-            "test": "metadata_compliance",
-            "passed": t1_passed,
-            "details": f"id='{meta.id}', name='{meta.name}', vendor='{meta.vendor}'",
-        })
+        results.append(
+            {
+                "test": "metadata_compliance",
+                "passed": t1_passed,
+                "details": f"id='{meta.id}', name='{meta.name}', vendor='{meta.vendor}'",
+            }
+        )
 
         # Test 2: Capabilities exposure
         caps = connector.capabilities()
         t2_passed = isinstance(caps, list)
-        results.append({
-            "test": "capabilities_exposed",
-            "passed": t2_passed,
-            "details": f"Exposed {len(caps)} capabilities",
-        })
+        results.append(
+            {
+                "test": "capabilities_exposed",
+                "passed": t2_passed,
+                "details": f"Exposed {len(caps)} capabilities",
+            }
+        )
 
         # Test 3: Actions validation
         actions = connector.actions()
         t3_passed = isinstance(actions, list)
-        results.append({
-            "test": "actions_exposed",
-            "passed": t3_passed,
-            "details": f"Exposed {len(actions)} actions",
-        })
+        results.append(
+            {
+                "test": "actions_exposed",
+                "passed": t3_passed,
+                "details": f"Exposed {len(actions)} actions",
+            }
+        )
 
         # Test 4: Health check callable
         try:
@@ -69,11 +76,13 @@ class ConnectorTestFramework:
         except Exception as e:
             t4_passed = False
             health = str(e)
-        results.append({
-            "test": "health_check_operational",
-            "passed": t4_passed,
-            "details": f"Health status: {health}",
-        })
+        results.append(
+            {
+                "test": "health_check_operational",
+                "passed": t4_passed,
+                "details": f"Health status: {health}",
+            }
+        )
 
         # Aggregate report
         total = len(results)

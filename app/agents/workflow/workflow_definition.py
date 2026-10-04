@@ -13,6 +13,7 @@ from app.agents.workflow.workflow_version import WorkflowVersion
 
 class WorkflowDefinition(BaseModel):
     """Immutable specification defining a reusable workflow DAG and its metadata."""
+
     definition_id: UUID = Field(default_factory=uuid4)
     name: str
     description: str = ""

@@ -1,6 +1,7 @@
 """
 Comprehensive test suite for Enterprise Verification Pyramid Architecture (PART 2).
 """
+
 from app.platform_verification.pyramid_engine import (
     VerificationLevel,
     TestClassification,
@@ -97,13 +98,62 @@ def test_full_release_pyramid_and_certification():
 
     # Clean release execution where all levels pass
     tests = [
-        TestDefinition(id="u1", name="Unit_Logic", level=VerificationLevel.L1_UNIT, classification=TestClassification.FUNCTIONAL, description="Unit test", target_component="ocr_preprocessing_engine"),
-        TestDefinition(id="c1", name="Comp_Pipeline", level=VerificationLevel.L2_COMPONENT, classification=TestClassification.FUNCTIONAL, description="Comp test", target_component="ocr_preprocessing_engine"),
-        TestDefinition(id="i1", name="Integ_API", level=VerificationLevel.L3_INTEGRATION, classification=TestClassification.FUNCTIONAL, description="Integ test", target_component="ocr_preprocessing_engine"),
-        TestDefinition(id="s1", name="Sys_E2E", level=VerificationLevel.L4_SYSTEM, classification=TestClassification.FUNCTIONAL, description="System test", target_component="ocr_preprocessing_engine"),
-        TestDefinition(id="p1", name="Prod_Perf", level=VerificationLevel.L5_PRODUCTION, classification=TestClassification.PERFORMANCE, description="Prod test", target_component="ocr_preprocessing_engine"),
-        TestDefinition(id="a1", name="Adv_Security", level=VerificationLevel.L6_ADVERSARIAL, classification=TestClassification.SECURITY, description="Adversarial test", target_component="ocr_preprocessing_engine"),
-        TestDefinition(id="cert1", name="Cert_Enterprise", level=VerificationLevel.L7_ENTERPRISE_CERTIFICATION, classification=TestClassification.COMPLIANCE, description="Cert test", target_component="ocr_preprocessing_engine"),
+        TestDefinition(
+            id="u1",
+            name="Unit_Logic",
+            level=VerificationLevel.L1_UNIT,
+            classification=TestClassification.FUNCTIONAL,
+            description="Unit test",
+            target_component="ocr_preprocessing_engine",
+        ),
+        TestDefinition(
+            id="c1",
+            name="Comp_Pipeline",
+            level=VerificationLevel.L2_COMPONENT,
+            classification=TestClassification.FUNCTIONAL,
+            description="Comp test",
+            target_component="ocr_preprocessing_engine",
+        ),
+        TestDefinition(
+            id="i1",
+            name="Integ_API",
+            level=VerificationLevel.L3_INTEGRATION,
+            classification=TestClassification.FUNCTIONAL,
+            description="Integ test",
+            target_component="ocr_preprocessing_engine",
+        ),
+        TestDefinition(
+            id="s1",
+            name="Sys_E2E",
+            level=VerificationLevel.L4_SYSTEM,
+            classification=TestClassification.FUNCTIONAL,
+            description="System test",
+            target_component="ocr_preprocessing_engine",
+        ),
+        TestDefinition(
+            id="p1",
+            name="Prod_Perf",
+            level=VerificationLevel.L5_PRODUCTION,
+            classification=TestClassification.PERFORMANCE,
+            description="Prod test",
+            target_component="ocr_preprocessing_engine",
+        ),
+        TestDefinition(
+            id="a1",
+            name="Adv_Security",
+            level=VerificationLevel.L6_ADVERSARIAL,
+            classification=TestClassification.SECURITY,
+            description="Adversarial test",
+            target_component="ocr_preprocessing_engine",
+        ),
+        TestDefinition(
+            id="cert1",
+            name="Cert_Enterprise",
+            level=VerificationLevel.L7_ENTERPRISE_CERTIFICATION,
+            classification=TestClassification.COMPLIANCE,
+            description="Cert test",
+            target_component="ocr_preprocessing_engine",
+        ),
     ]
 
     report = runtime.run_pyramid_verification(

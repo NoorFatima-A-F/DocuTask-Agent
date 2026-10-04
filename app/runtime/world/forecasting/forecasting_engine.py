@@ -42,7 +42,9 @@ class ForecastingEngine:
         fid = f"fcst-{uuid.uuid4().hex[:8]}"
 
         # Multi-horizon trend simulation
-        multiplier = 1.05 if horizon == HorizonScope.SHORT_TERM else 1.12 if horizon == HorizonScope.MEDIUM_TERM else 1.25
+        multiplier = (
+            1.05 if horizon == HorizonScope.SHORT_TERM else 1.12 if horizon == HorizonScope.MEDIUM_TERM else 1.25
+        )
         pred_mean = round(baseline_value * multiplier, 2)
         ci_spread = historical_variance * (1.5 if horizon == HorizonScope.LONG_TERM else 1.0)
         ci_95 = [round(max(0.0, pred_mean - ci_spread), 2), round(pred_mean + ci_spread, 2)]
@@ -53,13 +55,15 @@ class ForecastingEngine:
         for step in range(1, steps + 1):
             factor = 1.0 + ((step / steps) * (multiplier - 1.0))
             val = round(baseline_value * factor, 2)
-            points.append({
-                "step": step,
-                "label": f"T+{step}h",
-                "predicted_value": val,
-                "lower_bound": round(max(0.0, val - (ci_spread * 0.8)), 2),
-                "upper_bound": round(val + (ci_spread * 0.8), 2),
-            })
+            points.append(
+                {
+                    "step": step,
+                    "label": f"T+{step}h",
+                    "predicted_value": val,
+                    "lower_bound": round(max(0.0, val - (ci_spread * 0.8)), 2),
+                    "upper_bound": round(val + (ci_spread * 0.8), 2),
+                }
+            )
 
         forecast = ResourceForecast(
             forecast_id=fid,

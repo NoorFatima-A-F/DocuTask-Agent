@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Dependency-Aware Readiness Decision Engine (Part 3H.3.2).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, Any, List
@@ -35,10 +36,10 @@ class WorkerState(str, Enum):
 
 
 class ReadinessTier(str, Enum):
-    FAILED = "Failed"                                         # < 80
-    NEEDS_IMPROVEMENT = "Improvement Required"               # 80 - 89
-    PRODUCTION_READY = "Production Ready"                     # 90 - 94
-    ENTERPRISE_READY = "Enterprise Readiness Certified"       # 95 - 100
+    FAILED = "Failed"  # < 80
+    NEEDS_IMPROVEMENT = "Improvement Required"  # 80 - 89
+    PRODUCTION_READY = "Production Ready"  # 90 - 94
+    ENTERPRISE_READY = "Enterprise Readiness Certified"  # 95 - 100
 
 
 @dataclass
@@ -205,15 +206,15 @@ class ReadinessSecurityReport:
 
 @dataclass
 class ReadinessScorecard:
-    dependency_detection_score: float   # Weight 25%
-    failure_accuracy_score: float       # Weight 20%
-    policy_correctness_score: float     # Weight 20%
-    kubernetes_compatibility_score: float # Weight 15%
-    security_score: float               # Weight 10%
-    observability_score: float          # Weight 10%
-    overall_readiness_score: float      # Composite 0 - 100
+    dependency_detection_score: float  # Weight 25%
+    failure_accuracy_score: float  # Weight 20%
+    policy_correctness_score: float  # Weight 20%
+    kubernetes_compatibility_score: float  # Weight 15%
+    security_score: float  # Weight 10%
+    observability_score: float  # Weight 10%
+    overall_readiness_score: float  # Composite 0 - 100
     certification_tier: ReadinessTier
-    certification_verdict: str          # CERTIFIED / REJECTED
+    certification_verdict: str  # CERTIFIED / REJECTED
     traffic_admission_safe: bool
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

@@ -25,12 +25,14 @@ class CostReplayEngine:
             cum_cost += cost
             cum_tokens += tokens
 
-            trajectory.append({
-                "cursor": idx,
-                "event_id": ev.get("event_id"),
-                "incremental_cost_usd": round(cost, 6),
-                "cumulative_cost_usd": round(cum_cost, 6),
-                "cumulative_tokens": cum_tokens,
-            })
+            trajectory.append(
+                {
+                    "cursor": idx,
+                    "event_id": ev.get("event_id"),
+                    "incremental_cost_usd": round(cost, 6),
+                    "cumulative_cost_usd": round(cum_cost, 6),
+                    "cumulative_tokens": cum_tokens,
+                }
+            )
 
         return trajectory

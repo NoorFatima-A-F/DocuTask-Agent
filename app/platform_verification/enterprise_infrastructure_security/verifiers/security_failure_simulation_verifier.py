@@ -29,11 +29,46 @@ class SecurityFailureSimulationVerifier(ISecurityFailureSimulationVerifier):
 
     def verify(self) -> SecurityAttackSimulationReport:
         scenarios = [
-            AttackSimulationScenario(scenario_id=1, attack_name="Leaked API Key Simulation", simulated_threat="Injected leaked Gemini API key token into simulated public request", expected_response="SIEM alert triggered, automated key revocation and rotation initiated", observed_response="Key quarantined and rotated in 2.4s", passed=True),
-            AttackSimulationScenario(scenario_id=2, attack_name="Unauthorized Database Access Simulation", simulated_threat="Direct raw socket connection from unprivileged container IP to port 5432", expected_response="TCP connection dropped by security group + SIEM auth violation logged", observed_response="Connection refused by firewall rule", passed=True),
-            AttackSimulationScenario(scenario_id=3, attack_name="Container Privilege Escalation Simulation", simulated_threat="Execution of CVE-2024-containerd exploit attempting host root breakout", expected_response="Blocked by non-root UID 10001 + dropped ALL capabilities + read-only rootfs", observed_response="Operation not permitted (EPERM)", passed=True),
-            AttackSimulationScenario(scenario_id=4, attack_name="Malicious Document Upload Simulation", simulated_threat="PDF uploaded containing polyglot shellcode and XXE entity injection", expected_response="Sanitized by parser; XXE entity resolution disabled; no code execution", observed_response="Document parsed cleanly with entities stripped", passed=True),
-            AttackSimulationScenario(scenario_id=5, attack_name="Credential Exposure In Logs Simulation", simulated_threat="Deliberate exception passing database password string into logger", expected_response="Logger regex interceptor redacts password to [REDACTED_SECRET]", observed_response="Log output: 'connection_string: [REDACTED_SECRET]'", passed=True),
+            AttackSimulationScenario(
+                scenario_id=1,
+                attack_name="Leaked API Key Simulation",
+                simulated_threat="Injected leaked Gemini API key token into simulated public request",
+                expected_response="SIEM alert triggered, automated key revocation and rotation initiated",
+                observed_response="Key quarantined and rotated in 2.4s",
+                passed=True,
+            ),
+            AttackSimulationScenario(
+                scenario_id=2,
+                attack_name="Unauthorized Database Access Simulation",
+                simulated_threat="Direct raw socket connection from unprivileged container IP to port 5432",
+                expected_response="TCP connection dropped by security group + SIEM auth violation logged",
+                observed_response="Connection refused by firewall rule",
+                passed=True,
+            ),
+            AttackSimulationScenario(
+                scenario_id=3,
+                attack_name="Container Privilege Escalation Simulation",
+                simulated_threat="Execution of CVE-2024-containerd exploit attempting host root breakout",
+                expected_response="Blocked by non-root UID 10001 + dropped ALL capabilities + read-only rootfs",
+                observed_response="Operation not permitted (EPERM)",
+                passed=True,
+            ),
+            AttackSimulationScenario(
+                scenario_id=4,
+                attack_name="Malicious Document Upload Simulation",
+                simulated_threat="PDF uploaded containing polyglot shellcode and XXE entity injection",
+                expected_response="Sanitized by parser; XXE entity resolution disabled; no code execution",
+                observed_response="Document parsed cleanly with entities stripped",
+                passed=True,
+            ),
+            AttackSimulationScenario(
+                scenario_id=5,
+                attack_name="Credential Exposure In Logs Simulation",
+                simulated_threat="Deliberate exception passing database password string into logger",
+                expected_response="Logger regex interceptor redacts password to [REDACTED_SECRET]",
+                observed_response="Log output: 'connection_string: [REDACTED_SECRET]'",
+                passed=True,
+            ),
         ]
 
         checks = [

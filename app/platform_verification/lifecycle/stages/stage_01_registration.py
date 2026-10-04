@@ -2,9 +2,11 @@
 Stage 1: Verification Registration.
 Validates identity, ownership, permissions, assigns immutable IDs, and establishes traceability.
 """
+
 from app.platform_verification.lifecycle.stages.base_stage import BaseLifecycleStage
 from app.platform_verification.lifecycle.context import VerificationExecutionContext, StageResult
 from app.platform_verification.lifecycle.states import LifecycleState
+
 
 class VerificationRegistrationStage(BaseLifecycleStage):
     @property
@@ -28,13 +30,10 @@ class VerificationRegistrationStage(BaseLifecycleStage):
             "initiator": context.initiator,
             "intent": context.intent,
             "tenant_id": context.tenant_id,
-            "trace_id": f"trace_{context.execution_id[:8]}"
+            "trace_id": f"trace_{context.execution_id[:8]}",
         }
         return StageResult(
-            stage_number=self.stage_number,
-            stage_name=self.stage_name,
-            status="PASSED",
-            produced_artifacts=artifacts
+            stage_number=self.stage_number, stage_name=self.stage_name, status="PASSED", produced_artifacts=artifacts
         )
 
     def validate_exit_criteria(self, context: VerificationExecutionContext, result: StageResult) -> bool:

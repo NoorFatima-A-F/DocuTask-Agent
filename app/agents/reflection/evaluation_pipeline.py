@@ -111,5 +111,5 @@ class EvaluationPipeline:
             dimensions=dimensions,
             summary=summary,
             key_strengths=strengths,
-            key_weaknesses=weaknesses
+            key_weaknesses=weaknesses,
         )

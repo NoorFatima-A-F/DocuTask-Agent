@@ -29,12 +29,54 @@ class PerformanceRegressionVerifier(IPerformanceRegressionVerifier):
 
     def verify(self) -> PerformanceRegressionReport:
         comparisons = [
-            RegressionComparison(metric_name="P95 API Latency (ms)", baseline_value=48.0, current_value=45.0, change_pct=-6.25, tolerance_pct=15.0, regression_detected=False),
-            RegressionComparison(metric_name="Throughput (docs/min)", baseline_value=24.0, current_value=25.0, change_pct=4.17, tolerance_pct=10.0, regression_detected=False),
-            RegressionComparison(metric_name="Memory Usage (MB)", baseline_value=820.0, current_value=850.0, change_pct=3.66, tolerance_pct=10.0, regression_detected=False),
-            RegressionComparison(metric_name="CPU Usage (%)", baseline_value=40.0, current_value=38.5, change_pct=-3.75, tolerance_pct=10.0, regression_detected=False),
-            RegressionComparison(metric_name="E2E Processing Time (ms)", baseline_value=2600.0, current_value=2560.0, change_pct=-1.54, tolerance_pct=15.0, regression_detected=False),
-            RegressionComparison(metric_name="DB Query P95 (ms)", baseline_value=16.0, current_value=15.2, change_pct=-5.0, tolerance_pct=20.0, regression_detected=False),
+            RegressionComparison(
+                metric_name="P95 API Latency (ms)",
+                baseline_value=48.0,
+                current_value=45.0,
+                change_pct=-6.25,
+                tolerance_pct=15.0,
+                regression_detected=False,
+            ),
+            RegressionComparison(
+                metric_name="Throughput (docs/min)",
+                baseline_value=24.0,
+                current_value=25.0,
+                change_pct=4.17,
+                tolerance_pct=10.0,
+                regression_detected=False,
+            ),
+            RegressionComparison(
+                metric_name="Memory Usage (MB)",
+                baseline_value=820.0,
+                current_value=850.0,
+                change_pct=3.66,
+                tolerance_pct=10.0,
+                regression_detected=False,
+            ),
+            RegressionComparison(
+                metric_name="CPU Usage (%)",
+                baseline_value=40.0,
+                current_value=38.5,
+                change_pct=-3.75,
+                tolerance_pct=10.0,
+                regression_detected=False,
+            ),
+            RegressionComparison(
+                metric_name="E2E Processing Time (ms)",
+                baseline_value=2600.0,
+                current_value=2560.0,
+                change_pct=-1.54,
+                tolerance_pct=15.0,
+                regression_detected=False,
+            ),
+            RegressionComparison(
+                metric_name="DB Query P95 (ms)",
+                baseline_value=16.0,
+                current_value=15.2,
+                change_pct=-5.0,
+                tolerance_pct=20.0,
+                regression_detected=False,
+            ),
         ]
 
         regressions_found = sum(1 for c in comparisons if c.regression_detected)
@@ -42,7 +84,11 @@ class PerformanceRegressionVerifier(IPerformanceRegressionVerifier):
         checks: List[CheckResult] = [
             CheckResult(
                 name="Latency Regression Check",
-                passed=not any(c.regression_detected for c in comparisons if "Latency" in c.metric_name or "Processing" in c.metric_name),
+                passed=not any(
+                    c.regression_detected
+                    for c in comparisons
+                    if "Latency" in c.metric_name or "Processing" in c.metric_name
+                ),
                 details="API latency improved 6.25%, E2E processing improved 1.54% — no latency regression",
                 metrics={"latency_regressions": 0},
             ),
@@ -54,7 +100,9 @@ class PerformanceRegressionVerifier(IPerformanceRegressionVerifier):
             ),
             CheckResult(
                 name="Resource Usage Regression Check",
-                passed=not any(c.regression_detected for c in comparisons if "Memory" in c.metric_name or "CPU" in c.metric_name),
+                passed=not any(
+                    c.regression_detected for c in comparisons if "Memory" in c.metric_name or "CPU" in c.metric_name
+                ),
                 details="Memory +3.66% (within 10% tolerance), CPU improved 3.75%",
                 metrics={"memory_change_pct": 3.66, "cpu_change_pct": -3.75},
             ),

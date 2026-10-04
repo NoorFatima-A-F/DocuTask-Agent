@@ -1,6 +1,7 @@
 """
 Disaster Recovery Evidence Store and Persistence Engine.
 """
+
 import json
 from dataclasses import asdict
 from typing import Dict, List, Any, Optional
@@ -41,11 +42,14 @@ class DREvidenceStore(IDREvidenceStore):
         self._store["failure_scenarios.json"] = json.dumps([asdict(s) for s in scenarios], indent=2)
         self._store["recovery_dependency_graph.json"] = json.dumps(asdict(dep_graph), indent=2)
         self._store["backup_validation_report.json"] = json.dumps(backup_report, indent=2)
-        self._store["restore_test_report.json"] = json.dumps({
-            "restore_success_rate": 1.0,
-            "automated_executions": len(scenarios),
-            "status": "ALL_RESTORES_PASSED",
-        }, indent=2)
+        self._store["restore_test_report.json"] = json.dumps(
+            {
+                "restore_success_rate": 1.0,
+                "automated_executions": len(scenarios),
+                "status": "ALL_RESTORES_PASSED",
+            },
+            indent=2,
+        )
         self._store["rto_rpo_report.json"] = json.dumps(rto_rpo_report, indent=2)
         self._store["integrity_report.json"] = json.dumps(asdict(integrity_report), indent=2)
         self._store["security_report.json"] = json.dumps(asdict(security_report), indent=2)

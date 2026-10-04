@@ -1,6 +1,7 @@
 """
 Domain module for Backup Certification Framework.
 """
+
 from app.platform_verification.backup_certification.domain.models import (
     BackupCertificationTier,
     RiskSeverity,

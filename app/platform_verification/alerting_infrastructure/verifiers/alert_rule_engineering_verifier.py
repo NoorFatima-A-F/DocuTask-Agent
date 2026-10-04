@@ -1,6 +1,7 @@
 """
 3I.5.3, 3I.5.4 & 3I.5.6: SRE Golden Signals & Alert Rules Engineering Verifier
 """
+
 from typing import List
 from ..domain.models import IncidentSeverity, AlertRuleSpec, AlertRulesReport
 from ..domain.interfaces import IAlertRuleEngineeringVerifier
@@ -22,7 +23,7 @@ class AlertRuleEngineeringVerifier(IAlertRuleEngineeringVerifier):
                 duration_window="for: 5m",
                 severity=IncidentSeverity.SEV_2,
                 false_positive_protection=True,
-                description="P95 API request latency exceeds 2.0 seconds for over 5 minutes"
+                description="P95 API request latency exceeds 2.0 seconds for over 5 minutes",
             ),
             # Golden Signal: Traffic
             AlertRuleSpec(
@@ -33,7 +34,7 @@ class AlertRuleEngineeringVerifier(IAlertRuleEngineeringVerifier):
                 duration_window="for: 3m",
                 severity=IncidentSeverity.SEV_3,
                 false_positive_protection=True,
-                description="Inbound HTTP traffic exceeds 500 req/sec indicating sudden workload surge"
+                description="Inbound HTTP traffic exceeds 500 req/sec indicating sudden workload surge",
             ),
             # Golden Signal: Errors
             AlertRuleSpec(
@@ -44,7 +45,7 @@ class AlertRuleEngineeringVerifier(IAlertRuleEngineeringVerifier):
                 duration_window="for: 2m",
                 severity=IncidentSeverity.SEV_1,
                 false_positive_protection=True,
-                description="HTTP 5xx error rate exceeds 5% for 2 minutes"
+                description="HTTP 5xx error rate exceeds 5% for 2 minutes",
             ),
             # Golden Signal: Saturation
             AlertRuleSpec(
@@ -55,7 +56,7 @@ class AlertRuleEngineeringVerifier(IAlertRuleEngineeringVerifier):
                 duration_window="for: 5m",
                 severity=IncidentSeverity.SEV_1,
                 false_positive_protection=True,
-                description="Worker container memory consumption exceeds 90% of allocated limits"
+                description="Worker container memory consumption exceeds 90% of allocated limits",
             ),
             # Infrastructure: Database
             AlertRuleSpec(
@@ -66,7 +67,7 @@ class AlertRuleEngineeringVerifier(IAlertRuleEngineeringVerifier):
                 duration_window="for: 1m",
                 severity=IncidentSeverity.SEV_1,
                 false_positive_protection=True,
-                description="PostgreSQL primary database is unreachable"
+                description="PostgreSQL primary database is unreachable",
             ),
             # Infrastructure: Queue
             AlertRuleSpec(
@@ -77,7 +78,7 @@ class AlertRuleEngineeringVerifier(IAlertRuleEngineeringVerifier):
                 duration_window="for: 5m",
                 severity=IncidentSeverity.SEV_2,
                 false_positive_protection=True,
-                description="Redis document queue backlog exceeds 10,000 tasks for 5 minutes"
+                description="Redis document queue backlog exceeds 10,000 tasks for 5 minutes",
             ),
             # Infrastructure: Worker
             AlertRuleSpec(
@@ -88,7 +89,7 @@ class AlertRuleEngineeringVerifier(IAlertRuleEngineeringVerifier):
                 duration_window="for: 2m",
                 severity=IncidentSeverity.SEV_1,
                 false_positive_protection=True,
-                description="Active document worker pool count dropped below minimum threshold (2)"
+                description="Active document worker pool count dropped below minimum threshold (2)",
             ),
         ]
 
@@ -97,5 +98,5 @@ class AlertRuleEngineeringVerifier(IAlertRuleEngineeringVerifier):
             golden_signals_covered=["Latency", "Traffic", "Errors", "Saturation"],
             rules=rules,
             duration_window_enforced=True,
-            alert_rules_compliant=True
+            alert_rules_compliant=True,
         )

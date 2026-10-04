@@ -22,24 +22,18 @@ class EventSerializer:
         return json.dumps(data, sort_keys=True, separators=(",", ":"), default=str)
 
     @classmethod
-    def compute_event_hash(
-        cls, event: BaseRuntimeEvent, prev_event_hash: str = "GENESIS"
-    ) -> str:
+    def compute_event_hash(cls, event: BaseRuntimeEvent, prev_event_hash: str = "GENESIS") -> str:
         """
         Computes SHA-256 hash for an event chained to the previous event hash.
         Hash = SHA256(prev_hash + ":" + canonical_json(event_payload_and_metadata))
         """
-        event_dict = event.model_dump(
-            exclude={"event_hash", "prev_event_hash"}
-        )
+        event_dict = event.model_dump(exclude={"event_hash", "prev_event_hash"})
         canonical = cls.to_canonical_json(event_dict)
         payload = f"{prev_event_hash}:{canonical}".encode("utf-8")
         return hashlib.sha256(payload).hexdigest()
 
     @classmethod
-    def sign_and_chain_event(
-        cls, event: BaseRuntimeEvent, prev_event_hash: str = "GENESIS"
-    ) -> BaseRuntimeEvent:
+    def sign_and_chain_event(cls, event: BaseRuntimeEvent, prev_event_hash: str = "GENESIS") -> BaseRuntimeEvent:
         """Attaches prev_event_hash and calculates event_hash."""
         event.prev_event_hash = prev_event_hash
         event.event_hash = cls.compute_event_hash(event, prev_event_hash)
@@ -66,7 +60,11 @@ class EventSerializer:
         prev_hash = "GENESIS"
         for idx, event in enumerate(events):
             if event.prev_event_hash != prev_hash:
-                return False, idx, f"Broken chain link at index {idx}: expected prev {prev_hash}, got {event.prev_event_hash}"
+                return (
+                    False,
+                    idx,
+                    f"Broken chain link at index {idx}: expected prev {prev_hash}, got {event.prev_event_hash}",
+                )
             expected_hash = cls.compute_event_hash(event, prev_hash)
             if event.event_hash != expected_hash:
                 return False, idx, f"Corrupted event content at index {idx}: hash mismatch"

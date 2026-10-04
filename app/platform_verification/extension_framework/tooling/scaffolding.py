@@ -2,6 +2,7 @@
 Plugin Template & Scaffolding Generator.
 Generates production-grade boilerplate for new verification plugins.
 """
+
 from typing import Dict, List, Optional
 import json
 
@@ -9,13 +10,10 @@ import json
 class PluginScaffolder:
     @staticmethod
     def generate_plugin_scaffold(
-        plugin_name: str,
-        plugin_id: str,
-        author: str = "Enterprise Squad",
-        capabilities: Optional[List[str]] = None
+        plugin_name: str, plugin_id: str, author: str = "Enterprise Squad", capabilities: Optional[List[str]] = None
     ) -> Dict[str, str]:
         caps = capabilities or ["sample_verification"]
-        
+
         py_code = f"""# {plugin_name} - Verification Plugin
 from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.models import (
@@ -85,10 +83,7 @@ permissions:
   - "READ_DATASET"
   - "WRITE_EVIDENCE"
 """
-        return {
-            "plugin.py": py_code.strip(),
-            "metadata.yaml": yaml_metadata.strip()
-        }
+        return {"plugin.py": py_code.strip(), "metadata.yaml": yaml_metadata.strip()}
 
 
 plugin_scaffolder = PluginScaffolder()

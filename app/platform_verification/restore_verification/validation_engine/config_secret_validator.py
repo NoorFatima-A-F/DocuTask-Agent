@@ -1,6 +1,7 @@
 """
 Configuration & Secret Restore Validator for Automated Restore Verification System (Part 3G.2E).
 """
+
 from typing import Tuple
 
 from app.platform_verification.restore_verification.domain.models import (

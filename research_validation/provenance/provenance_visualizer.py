@@ -23,13 +23,13 @@ class ProvenanceVisualizer:
     """
 
     STAGE_COLORS = {
-        LineageStage.RAW_OBSERVATION: "#7aa2f7",      # Blue
-        LineageStage.TRANSFORMATION: "#bb9af7",        # Purple
-        LineageStage.INTERMEDIATE_ARTIFACT: "#7dcfff", # Cyan
-        LineageStage.AGGREGATION: "#e0af68",          # Orange
-        LineageStage.FINAL_METRIC: "#9ece6a",         # Green
-        LineageStage.SCIENTIFIC_REPORT: "#2ac3de",    # Teal
-        LineageStage.DIGITAL_SIGNATURE: "#f7768e",    # Red/Gold
+        LineageStage.RAW_OBSERVATION: "#7aa2f7",  # Blue
+        LineageStage.TRANSFORMATION: "#bb9af7",  # Purple
+        LineageStage.INTERMEDIATE_ARTIFACT: "#7dcfff",  # Cyan
+        LineageStage.AGGREGATION: "#e0af68",  # Orange
+        LineageStage.FINAL_METRIC: "#9ece6a",  # Green
+        LineageStage.SCIENTIFIC_REPORT: "#2ac3de",  # Teal
+        LineageStage.DIGITAL_SIGNATURE: "#f7768e",  # Red/Gold
     }
 
     @classmethod
@@ -41,7 +41,7 @@ class ProvenanceVisualizer:
             color = cls.STAGE_COLORS.get(node.stage, "#c0caf5")
             label = f"<b>{node.stage.value}</b><br/>{clean_name}<br/><code>{node.node_hash[:8]}</code>"
             lines.append(f'    {node_id}["{label}"]')
-            lines.append(f'    style {node_id} fill:{color}22,stroke:{color},stroke-width:2px')
+            lines.append(f"    style {node_id} fill:{color}22,stroke:{color},stroke-width:2px")
 
         for parent_id, children in graph.merkle_dag.children_map.items():
             for child_id in children:
@@ -56,7 +56,7 @@ class ProvenanceVisualizer:
             "digraph ProvenanceLineage {",
             '  rankdir="TB";',
             '  node [shape=box, style="filled,rounded", fontname="Helvetica", fontsize=10];',
-            '  edge [color="#565f89", arrowsize=0.8];'
+            '  edge [color="#565f89", arrowsize=0.8];',
         ]
 
         for node_id, node in graph.merkle_dag.nodes.items():
@@ -83,7 +83,7 @@ class ProvenanceVisualizer:
             '  <rect width="100%" height="100%" fill="#1a1b26" rx="8"/>',
             '  <text x="25" y="35" fill="#7aa2f7" font-family="sans-serif" font-size="16" font-weight="bold">Scientific Lineage Merkle DAG</text>',
             f'  <text x="25" y="55" fill="#a9b1d6" font-family="sans-serif" font-size="12">Root Digest: {graph.merkle_dag.compute_root_digest()[:16]}... | Total Nodes: {len(nodes)}</text>',
-            '  <line x1="25" y1="65" x2="775" y2="65" stroke="#414868" stroke-width="1"/>'
+            '  <line x1="25" y1="65" x2="775" y2="65" stroke="#414868" stroke-width="1"/>',
         ]
 
         # Layout nodes horizontally or vertically
@@ -91,13 +91,21 @@ class ProvenanceVisualizer:
         y = 90
         for idx, node in enumerate(nodes):
             color = cls.STAGE_COLORS.get(node.stage, "#7aa2f7")
-            svg_parts.append(f'  <rect x="25" y="{y}" width="180" height="28" fill="{color}22" stroke="{color}" rx="4" stroke-width="1.5"/>')
-            svg_parts.append(f'  <text x="35" y="{y+18}" fill="#c0caf5" font-family="sans-serif" font-size="11" font-weight="bold">{node.stage.value[:14]}</text>')
-            svg_parts.append(f'  <text x="220" y="{y+18}" fill="#a9b1d6" font-family="monospace" font-size="11">{node.name[:35]} [{node.node_hash[:8]}]</text>')
-            svg_parts.append(f'  <text x="650" y="{y+18}" fill="{color}" font-family="sans-serif" font-size="11" font-weight="bold">{node.quality_level.value}</text>')
+            svg_parts.append(
+                f'  <rect x="25" y="{y}" width="180" height="28" fill="{color}22" stroke="{color}" rx="4" stroke-width="1.5"/>'
+            )
+            svg_parts.append(
+                f'  <text x="35" y="{y + 18}" fill="#c0caf5" font-family="sans-serif" font-size="11" font-weight="bold">{node.stage.value[:14]}</text>'
+            )
+            svg_parts.append(
+                f'  <text x="220" y="{y + 18}" fill="#a9b1d6" font-family="monospace" font-size="11">{node.name[:35]} [{node.node_hash[:8]}]</text>'
+            )
+            svg_parts.append(
+                f'  <text x="650" y="{y + 18}" fill="{color}" font-family="sans-serif" font-size="11" font-weight="bold">{node.quality_level.value}</text>'
+            )
             y += y_step
 
-        svg_parts.append('</svg>')
+        svg_parts.append("</svg>")
         return "\n".join(svg_parts)
 
     @classmethod

@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class AssetLifecycleState(str, enum.Enum):
     """8-state Asset Lifecycle FSM."""
+
     DISCOVERED = "DISCOVERED"
     REGISTERED = "REGISTERED"
     CLASSIFIED = "CLASSIFIED"
@@ -22,6 +23,7 @@ class AssetLifecycleState(str, enum.Enum):
 
 class AssetType(str, enum.Enum):
     """Supported governed data asset types."""
+
     DOCUMENT = "DOCUMENT"
     PROMPT = "PROMPT"
     EMBEDDING = "EMBEDDING"
@@ -37,6 +39,7 @@ class AssetType(str, enum.Enum):
 
 class ClassificationLevel(str, enum.Enum):
     """Data sensitivity classification levels."""
+
     PUBLIC = "PUBLIC"
     INTERNAL = "INTERNAL"
     CONFIDENTIAL = "CONFIDENTIAL"
@@ -46,6 +49,7 @@ class ClassificationLevel(str, enum.Enum):
 
 class SensitivityCategory(str, enum.Enum):
     """Specific categories of sensitive information."""
+
     PII = "PII"
     FINANCIAL = "FINANCIAL"
     HEALTHCARE = "HEALTHCARE"
@@ -57,6 +61,7 @@ class SensitivityCategory(str, enum.Enum):
 
 class DataOwnership(BaseModel):
     """Explicit data ownership and stewardship metadata."""
+
     owner_user_id: str
     responsible_team: str = "General"
     department: str = "General"
@@ -67,6 +72,7 @@ class DataOwnership(BaseModel):
 
 class DataAsset(BaseModel):
     """Canonical Governed Data Asset Entity."""
+
     asset_id: str
     organization_id: str
     workspace_id: str

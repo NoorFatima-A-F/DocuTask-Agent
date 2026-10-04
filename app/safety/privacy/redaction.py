@@ -53,7 +53,7 @@ class DataRedactor:
             else:
                 replacement = f"[REDACTED_{match.pii_type.value}]"
 
-            result = result[:match.start] + replacement + result[match.end:]
+            result = result[: match.start] + replacement + result[match.end :]
 
         return RedactionResult(
             redacted_text=result,

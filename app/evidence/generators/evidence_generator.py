@@ -120,7 +120,11 @@ class MasterEvidenceGenerator:
             claim_id="CLM-03",
             claim_text="Distributed Lock Manager provides crash-safe TTL leases and prevents split-brain execution",
             subsystem="Distributed Runtime",
-            supporting_evidence_ids=[bench_items[7].evidence_id, chaos_items[0].evidence_id, scale_items[2].evidence_id],
+            supporting_evidence_ids=[
+                bench_items[7].evidence_id,
+                chaos_items[0].evidence_id,
+                scale_items[2].evidence_id,
+            ],
             source_files=["app/agents/runtime/distributed/distributed_lock.py"],
             test_files=["tests/agents/test_enterprise_championship.py"],
         )
@@ -141,7 +145,11 @@ class MasterEvidenceGenerator:
         self.readiness.export_reports(readiness_json, readiness_md)
 
         total_duration = time.perf_counter() - t0
-        logger.info("Master Evidence Pipeline concluded successfully in %.2fs (%d items generated)", total_duration, len(all_items))
+        logger.info(
+            "Master Evidence Pipeline concluded successfully in %.2fs (%d items generated)",
+            total_duration,
+            len(all_items),
+        )
 
         return {
             "total_evidence_generated": len(all_items),

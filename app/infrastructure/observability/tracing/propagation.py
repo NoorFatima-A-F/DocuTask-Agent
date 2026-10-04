@@ -43,11 +43,13 @@ class TraceContextPropagator:
 
         trace_id = parts[1]
         span_id = parts[2]
-        sampled = (parts[3] == "01")
+        sampled = parts[3] == "01"
         return trace_id, span_id, sampled
 
     @staticmethod
-    def inject_b3(trace_id: str, span_id: str, parent_span_id: Optional[str] = None, sampled: bool = True) -> Dict[str, str]:
+    def inject_b3(
+        trace_id: str, span_id: str, parent_span_id: Optional[str] = None, sampled: bool = True
+    ) -> Dict[str, str]:
         """Generate Zipkin/B3 compatible headers."""
         headers = {
             "x-b3-traceid": trace_id,
@@ -68,5 +70,5 @@ class TraceContextPropagator:
             return None
 
         parent_span_id = lower.get("x-b3-parentspanid")
-        sampled = (lower.get("x-b3-sampled", "1") == "1")
+        sampled = lower.get("x-b3-sampled", "1") == "1"
         return trace_id, span_id, parent_span_id, sampled

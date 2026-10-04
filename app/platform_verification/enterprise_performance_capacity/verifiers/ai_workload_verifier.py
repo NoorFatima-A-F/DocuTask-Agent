@@ -34,16 +34,36 @@ class AIWorkloadVerifier(IAIWorkloadVerifier):
 
     def verify(self) -> AIWorkloadReport:
         samples = [
-            AIExecutionVarianceSample(execution_index=1, latency_ms=770.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=2, latency_ms=785.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=3, latency_ms=760.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=4, latency_ms=795.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=5, latency_ms=775.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=6, latency_ms=810.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=7, latency_ms=765.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=8, latency_ms=790.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=9, latency_ms=770.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
-            AIExecutionVarianceSample(execution_index=10, latency_ms=780.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012),
+            AIExecutionVarianceSample(
+                execution_index=1, latency_ms=770.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=2, latency_ms=785.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=3, latency_ms=760.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=4, latency_ms=795.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=5, latency_ms=775.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=6, latency_ms=810.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=7, latency_ms=765.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=8, latency_ms=790.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=9, latency_ms=770.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
+            AIExecutionVarianceSample(
+                execution_index=10, latency_ms=780.0, tokens_input=3200, tokens_output=650, cost_usd=0.0012
+            ),
         ]
 
         mean_lat = sum(s.latency_ms for s in samples) / len(samples)

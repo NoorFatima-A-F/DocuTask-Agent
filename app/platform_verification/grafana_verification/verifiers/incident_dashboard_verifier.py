@@ -26,7 +26,7 @@ class IncidentDashboardVerifier(IDashboardSpecVerifier):
                 panel_id=1,
                 title="Active Firing Prometheus Alerts",
                 panel_type=PanelVisualizationType.TABLE,
-                promql_query="ALERTS{alertstate=\"firing\"}",
+                promql_query='ALERTS{alertstate="firing"}',
                 operational_question="What active alerts are currently firing across the platform?",
             ),
             DashboardPanelSpec(

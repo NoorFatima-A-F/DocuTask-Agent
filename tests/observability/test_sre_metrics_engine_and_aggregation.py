@@ -35,8 +35,19 @@ def test_platform_metrics_collector():
     collector.record_infrastructure("node-1", cpu_usage_pct=45.0, memory_usage_pct=60.0, disk_usage_pct=50.0)
     collector.record_runtime("cluster-1", worker_count=8, queue_depth=12, execution_rate_dpm=240.0)
     collector.record_workflow_execution("invoice_approval", "tenant-acme", duration_seconds=1.2, success=True)
-    collector.record_agent_execution("doc_classifier", "tenant-acme", latency_seconds=0.8, tool_calls=2, reasoning_steps=3, token_usage=450, cost_usd=0.002, success=True)
-    collector.record_ai_inference("gemini-1.5-flash", "google", latency_seconds=0.45, prompt_tokens=200, completion_tokens=100)
+    collector.record_agent_execution(
+        "doc_classifier",
+        "tenant-acme",
+        latency_seconds=0.8,
+        tool_calls=2,
+        reasoning_steps=3,
+        token_usage=450,
+        cost_usd=0.002,
+        success=True,
+    )
+    collector.record_ai_inference(
+        "gemini-1.5-flash", "google", latency_seconds=0.45, prompt_tokens=200, completion_tokens=100
+    )
 
     snapshot = registry.dump_snapshot()
     assert len(snapshot["gauges"]) >= 4

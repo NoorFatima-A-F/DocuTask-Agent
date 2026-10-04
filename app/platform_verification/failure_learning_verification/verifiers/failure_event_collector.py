@@ -1,6 +1,7 @@
 """
 Phase 3H.5.6.1: Failure Event Collection Architecture
 """
+
 from datetime import datetime, timezone
 from ..domain.interfaces import IFailureEventCollector
 from ..domain.models import FailureEventReport, FailureEvent, FailureSeverity

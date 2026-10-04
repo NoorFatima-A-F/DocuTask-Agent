@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 
 class DataActionType(str, enum.Enum):
     """Governed actions performed against data assets."""
+
     READ = "READ"
     WRITE = "WRITE"
     UPDATE = "UPDATE"
@@ -25,6 +26,7 @@ class DataActionType(str, enum.Enum):
 
 class DataAccessEvent(BaseModel):
     """Immutable record of an access or processing event."""
+
     event_id: str
     asset_id: str
     organization_id: str

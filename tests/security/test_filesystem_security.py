@@ -61,7 +61,7 @@ class TestPathContainmentAndResolution:
         base.mkdir()
         attacker_dir = tmp_path / "safe_dir_attacker"
         attacker_dir.mkdir()
-        
+
         with pytest.raises(UnsafePathError):
             resolve_safe_path(base, "../safe_dir_attacker/payload.sh")
 

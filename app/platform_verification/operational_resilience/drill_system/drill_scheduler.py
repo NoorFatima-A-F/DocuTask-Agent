@@ -2,6 +2,7 @@
 Automated Disaster Recovery Drill System (Part 3G.5H).
 Orchestrates scheduled and randomized recovery drills to prove live operational resilience.
 """
+
 from typing import Dict, Any
 from datetime import datetime, timezone
 import json
@@ -56,11 +57,7 @@ class DrillScheduler(IDrillScheduler):
         """
         scen = self.DRILL_SCENARIOS[scenario_index % len(self.DRILL_SCENARIOS)]
 
-        passed = (
-            scen["rto_sec"] <= 300.0
-            and scen["data_loss_bytes"] == 0
-            and scen["score"] >= 95.0
-        )
+        passed = scen["rto_sec"] <= 300.0 and scen["data_loss_bytes"] == 0 and scen["score"] >= 95.0
 
         details = {
             "drill_execution_timestamp_utc": datetime.now(timezone.utc).isoformat(),
@@ -85,7 +82,9 @@ class DrillScheduler(IDrillScheduler):
             details=details,
         )
 
-    def export_drill_report(self, output_file: str = "resilience_verification/recovery_reports/drill_report.json") -> Dict[str, Any]:
+    def export_drill_report(
+        self, output_file: str = "resilience_verification/recovery_reports/drill_report.json"
+    ) -> Dict[str, Any]:
         """
         Exports drill report JSON as defined in Part 3G.5H.
         """

@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class CoordinationIdentity(BaseModel):
     """Unique identity envelope for a coordinated multi-agent workflow."""
+
     coordination_id: UUID = Field(default_factory=uuid4)
     goal_id: Optional[UUID] = None
     supervisor_id: Optional[UUID] = None
@@ -23,6 +24,7 @@ class CoordinationIdentity(BaseModel):
 
 class CoordinationMetadata(BaseModel):
     """Execution context and cloud deployment metadata."""
+
     engine_version: str = Field(default="21.0.0")
     cloud_region: str = Field(default="us-central1")
     environment: str = Field(default="production")
@@ -33,6 +35,7 @@ class CoordinationMetadata(BaseModel):
 
 class CoordinationStatistics(BaseModel):
     """Quantitative runtime statistics for a multi-agent coordination execution."""
+
     discovery_duration_ms: float = Field(default=0.0, ge=0.0)
     delegation_duration_ms: float = Field(default=0.0, ge=0.0)
     coordination_duration_ms: float = Field(default=0.0, ge=0.0)

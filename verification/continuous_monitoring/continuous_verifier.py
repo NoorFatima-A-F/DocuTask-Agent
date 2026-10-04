@@ -32,7 +32,17 @@ class ContinuousVerifier:
                 passed=pipeline_active,
                 message="Automated CI/CD pipeline triggers full EVVP test suite (220+ tests) with zero-tolerance regression gating",
                 execution_time_ms=t_ms,
-                details={"pipeline_stages": ["Unit", "Architecture", "Security", "AI Eval", "Performance", "Business", "Cert Score"]},
+                details={
+                    "pipeline_stages": [
+                        "Unit",
+                        "Architecture",
+                        "Security",
+                        "AI Eval",
+                        "Performance",
+                        "Business",
+                        "Cert Score",
+                    ]
+                },
             )
         )
 

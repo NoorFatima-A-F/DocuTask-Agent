@@ -195,7 +195,6 @@ class EvidenceCollected(ScientificDomainEvent):
 EmpiricalEvidenceRecorded = EvidenceCollected
 
 
-
 @dataclass
 class EvidenceValidated(ScientificDomainEvent):
     event_type: Any = ScientificEventType.VALIDATION_COMPLETED
@@ -208,7 +207,6 @@ class EvidenceValidated(ScientificDomainEvent):
 
 
 HypothesisValidated = EvidenceValidated
-
 
 
 @dataclass

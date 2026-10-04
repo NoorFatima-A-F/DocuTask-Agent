@@ -1,4 +1,5 @@
 """Pipeline Approval Gates and Security Governance."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import List, Optional
@@ -9,6 +10,7 @@ from ..core.exceptions import ApprovalGateException
 @dataclass
 class GateApproval:
     """Individual sign-off for an approval gate."""
+
     approver: str
     role: str
     comment: str = ""
@@ -55,7 +57,7 @@ class ApprovalGate:
         """Records an approval from an authorized role."""
         if self.is_timed_out:
             raise ApprovalGateException(f"Approval gate '{self.name}' has timed out")
-        
+
         appr = GateApproval(approver=approver, role=role, comment=comment)
         self.approvals.append(appr)
         return appr

@@ -2,6 +2,7 @@
 3J.1.7: Performance Regression Verifier
 Compares current vs previous release performance metrics and enforces automated regression gates.
 """
+
 from typing import List
 from app.platform_verification.performance_capacity_engineering.domain.models import (
     PerformanceRegressionReport,

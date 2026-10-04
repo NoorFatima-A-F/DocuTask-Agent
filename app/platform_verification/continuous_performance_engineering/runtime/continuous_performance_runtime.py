@@ -68,7 +68,9 @@ class ContinuousPerformanceRuntime:
             self.exporter.export_report(report)
 
         execution_time = time.time() - start_time
-        scorecard: ContinuousPerformanceScorecard = self.scorer.score(reports, execution_time_seconds=round(execution_time, 3))
+        scorecard: ContinuousPerformanceScorecard = self.scorer.score(
+            reports, execution_time_seconds=round(execution_time, 3)
+        )
         self.exporter.export_scorecard(scorecard)
 
         manifest: VerificationManifest = self.exporter.generate_manifest(scorecard, reports)
@@ -86,10 +88,7 @@ class ContinuousPerformanceRuntime:
 
     def run_verifier(self, verifier_id: str) -> Optional[BaseVerificationReport]:
         for verifier in self.verifiers:
-            if (
-                verifier.verifier_id.lower() == verifier_id.lower()
-                or verifier.phase_id.lower() == verifier_id.lower()
-            ):
+            if verifier.verifier_id.lower() == verifier_id.lower() or verifier.phase_id.lower() == verifier_id.lower():
                 report = verifier.verify()
                 self.exporter.export_report(report)
                 return report

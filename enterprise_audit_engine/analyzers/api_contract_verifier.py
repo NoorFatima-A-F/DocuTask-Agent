@@ -11,7 +11,9 @@ class APIContractVerifier:
         endpoints = api_routes_payload.get("endpoints", [])
         total_endpoints = len(endpoints)
 
-        auth_protected = [ep for ep in endpoints if "approve" in ep.get("function", "") or "deploy" in ep.get("function", "")]
+        auth_protected = [
+            ep for ep in endpoints if "approve" in ep.get("function", "") or "deploy" in ep.get("function", "")
+        ]
         public_probes = [ep for ep in endpoints if "health" in ep.get("file", "") or "live" in ep.get("function", "")]
 
         return {

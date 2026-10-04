@@ -33,16 +33,29 @@ class RepositoryCollector(BaseCollector):
         root_items: List[str] = []
 
         ignored_dirs = {
-            ".git", ".venv", "venv", "__pycache__", ".pytest_cache",
-            ".mypy_cache", "node_modules", "audit_output", "release_audit",
-            "runs", ".tmp", "dist", "build", ".idea", ".vscode", "reports", "datasets"
+            ".git",
+            ".venv",
+            "venv",
+            "__pycache__",
+            ".pytest_cache",
+            ".mypy_cache",
+            "node_modules",
+            "audit_output",
+            "release_audit",
+            "runs",
+            ".tmp",
+            "dist",
+            "build",
+            ".idea",
+            ".vscode",
+            "reports",
+            "datasets",
         }
 
         # Inspect root directory items
         try:
             root_items = [
-                p.name for p in self.repo_root.iterdir()
-                if p.name not in ignored_dirs and not p.name.startswith(".")
+                p.name for p in self.repo_root.iterdir() if p.name not in ignored_dirs and not p.name.startswith(".")
             ]
         except Exception:
             root_items = []
@@ -50,9 +63,13 @@ class RepositoryCollector(BaseCollector):
         # Traverse repository tree ignoring typical caches and output directories
         for root, dirs, files in os.walk(self.repo_root):
             dirs[:] = [
-                d for d in dirs
-                if d not in ignored_dirs and not d.startswith(".")
-                and not any(kw in d.lower() for kw in ["evidence", "verification", "simulation", "certification", "package"])
+                d
+                for d in dirs
+                if d not in ignored_dirs
+                and not d.startswith(".")
+                and not any(
+                    kw in d.lower() for kw in ["evidence", "verification", "simulation", "certification", "package"]
+                )
             ]
             total_dirs += len(dirs)
 
@@ -80,7 +97,9 @@ class RepositoryCollector(BaseCollector):
         }
 
         # Check root cleanliness (should not contain test dumps)
-        has_cluttered_root = any(item.startswith("test_") or "dump" in item for item in root_items if os.path.isdir(self.repo_root / item))
+        has_cluttered_root = any(
+            item.startswith("test_") or "dump" in item for item in root_items if os.path.isdir(self.repo_root / item)
+        )
 
         classification = (
             EvidenceClassification.VERIFIED_BY_STATIC_ANALYSIS

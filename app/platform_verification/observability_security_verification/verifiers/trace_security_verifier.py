@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10.5: Trace Security & Attribute Sanitization Verifier
 """
+
 from ..domain.interfaces import ITraceSecurityVerifier
 from ..domain.models import TraceSecurityReport, TraceAttributeAudit
 
@@ -11,7 +12,11 @@ class TraceSecurityVerifier(ITraceSecurityVerifier):
             TraceAttributeAudit(
                 span_name="HTTP POST /api/v1/documents/upload",
                 retained_attributes=["http.method", "http.status_code", "http.route", "http.user_agent", "duration_ms"],
-                scrubbed_attributes=["http.request.header.authorization", "http.request.body", "multipart.file.content"],
+                scrubbed_attributes=[
+                    "http.request.header.authorization",
+                    "http.request.body",
+                    "multipart.file.content",
+                ],
                 no_auth_headers=True,
                 no_raw_prompts=True,
                 is_compliant=True,

@@ -1,6 +1,7 @@
 """
 3I.2.2: Four Golden Signals Verifier
 """
+
 from ..domain.models import GoldenSignalsReport
 from ..domain.interfaces import IGoldenSignalsVerifier
 
@@ -17,5 +18,5 @@ class GoldenSignalsVerifier(IGoldenSignalsVerifier):
             traffic_tracked=True,
             errors_tracked=True,
             saturation_tracked=True,
-            golden_signals_complete=True
+            golden_signals_complete=True,
         )

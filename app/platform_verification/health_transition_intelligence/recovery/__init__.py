@@ -1,3 +1,5 @@
-from app.platform_verification.health_transition_intelligence.recovery.recovery_orchestrator import ServiceRecoveryOrchestrator
+from app.platform_verification.health_transition_intelligence.recovery.recovery_orchestrator import (
+    ServiceRecoveryOrchestrator,
+)
 
 __all__ = ["ServiceRecoveryOrchestrator"]

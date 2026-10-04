@@ -1,4 +1,5 @@
 """Automated Rollback Controller and Incident Evidence Generator (Req 42, 43, 44)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
@@ -12,6 +13,7 @@ from .policies import RollbackTriggerType
 @dataclass
 class RollbackIncidentReport:
     """Forensic incident record created upon rollback execution (Req 43)."""
+
     incident_id: str
     deployment_id: str
     failed_version: str

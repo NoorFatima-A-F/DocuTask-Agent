@@ -39,9 +39,7 @@ class WorkflowValidator:
                     )
             elif node.node_type == WorkflowNodeType.SAGA_TRANSACTION:
                 if not node.compensating_handler:
-                    raise MissingCompensationPathError(
-                        f"Saga node '{node_id}' must specify a compensating_handler."
-                    )
+                    raise MissingCompensationPathError(f"Saga node '{node_id}' must specify a compensating_handler.")
 
     @staticmethod
     def validate_nodes_exist(node_ids: List[str], graph: WorkflowGraph) -> None:

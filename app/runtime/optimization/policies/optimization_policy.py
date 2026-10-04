@@ -16,7 +16,9 @@ class OptimizationPolicySpec(BaseModel):
     max_concurrency_workers: int = 16
     max_retries: int = 4
     default_priority_tier: str = "BALANCED_STANDARD"
-    allowed_models: List[str] = Field(default_factory=lambda: ["gemini-1.5-flash", "gemini-1.5-pro", "claude-3-5-sonnet"])
+    allowed_models: List[str] = Field(
+        default_factory=lambda: ["gemini-1.5-flash", "gemini-1.5-pro", "claude-3-5-sonnet"]
+    )
 
 
 class PolicyValidator:
@@ -25,7 +27,9 @@ class PolicyValidator:
     """
 
     @classmethod
-    def validate_against_policy(cls, config: Dict[str, Any], policy: Optional[OptimizationPolicySpec] = None) -> Dict[str, Any]:
+    def validate_against_policy(
+        cls, config: Dict[str, Any], policy: Optional[OptimizationPolicySpec] = None
+    ) -> Dict[str, Any]:
         p = policy or OptimizationPolicySpec()
         errors = []
 

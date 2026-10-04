@@ -1,6 +1,7 @@
 """
 Test Suite: Phase 3J.1 Performance Infrastructure Verification: Load Testing & Baseline Capacity Engineering
 """
+
 import json
 import pytest
 from fastapi.testclient import TestClient
@@ -50,6 +51,7 @@ def api_client():
 
 
 # ─── 1. Verifier Unit Tests ───────────────────────────────────────────────────
+
 
 def test_performance_architecture_verifier():
     verifier = PerformanceArchitectureVerifier()
@@ -171,6 +173,7 @@ def test_queue_performance_verifier():
 
 # ─── 2. Scorer Unit Tests ─────────────────────────────────────────────────────
 
+
 def test_performance_certification_scorer():
     runtime = PerformanceVerificationRuntime()
     verification_results = runtime.execute_all_verifications()
@@ -190,6 +193,7 @@ def test_performance_certification_scorer():
 
 # ─── 3. Exporter Unit Tests ───────────────────────────────────────────────────
 
+
 def test_performance_verification_exporter(tmp_path):
     output_dir = tmp_path / "perf_verif_test"
     runtime = PerformanceVerificationRuntime(output_dir=str(output_dir))
@@ -207,6 +211,7 @@ def test_performance_verification_exporter(tmp_path):
 
 
 # ─── 4. REST API Integration Tests ────────────────────────────────────────────
+
 
 def test_api_status_endpoint(api_client):
     response = api_client.get("/api/v1/performance-verification/status")

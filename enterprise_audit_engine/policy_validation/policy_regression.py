@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 
 class PolicyRegressionReport(BaseModel):
     """Report detailing detected policy weakening or certification threshold relaxations."""
+
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     has_regression: bool
     regressions_count: int
@@ -40,7 +41,9 @@ class PolicyRegressionDetector:
             regressions.append(f"Minimum EQI score lowered from {base_eqi} to {prop_eqi}.")
 
         # 3. Forbidden Critical Findings Bypass
-        if base_policy.get("forbidden_critical_findings", True) and not proposed_policy.get("forbidden_critical_findings", True):
+        if base_policy.get("forbidden_critical_findings", True) and not proposed_policy.get(
+            "forbidden_critical_findings", True
+        ):
             regressions.append("Forbidden critical findings constraint was disabled.")
 
         # 4. Required Domains Omission

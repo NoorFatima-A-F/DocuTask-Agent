@@ -57,7 +57,11 @@ class SwarmKnowledgeGraph:
     def add_edge(self, edge: SwarmKnowledgeEdge):
         # Update if already exists, else append
         for existing in self._edges:
-            if existing.source_id == edge.source_id and existing.target_id == edge.target_id and existing.relationship == edge.relationship:
+            if (
+                existing.source_id == edge.source_id
+                and existing.target_id == edge.target_id
+                and existing.relationship == edge.relationship
+            ):
                 existing.weight = edge.weight
                 existing.metadata.update(edge.metadata)
                 return
@@ -213,7 +217,7 @@ class CollectiveLearningEngine:
     ):
         # Update knowledge graph edges
         for i, a1 in enumerate(agents_involved):
-            for a2 in agents_involved[i + 1:]:
+            for a2 in agents_involved[i + 1 :]:
                 delta = 0.02 if success else -0.05
                 current_weight = 0.85
                 for e in self.knowledge_graph._edges:
@@ -232,15 +236,17 @@ class CollectiveLearningEngine:
                 )
 
         if success and efficiency_score > 0.90:
-            self._learned_insights.append({
-                "insight_id": f"ins_{datetime.now(timezone.utc).strftime('%H%M%S%f')[:10]}",
-                "task_type": task_type,
-                "agents": agents_involved,
-                "efficiency_score": efficiency_score,
-                "duration_ms": duration_ms,
-                "discovered_at": datetime.now(timezone.utc).isoformat(),
-                "recommendation": f"Pair {agents_involved[0]} with {agents_involved[-1]} for {task_type} missions.",
-            })
+            self._learned_insights.append(
+                {
+                    "insight_id": f"ins_{datetime.now(timezone.utc).strftime('%H%M%S%f')[:10]}",
+                    "task_type": task_type,
+                    "agents": agents_involved,
+                    "efficiency_score": efficiency_score,
+                    "duration_ms": duration_ms,
+                    "discovered_at": datetime.now(timezone.utc).isoformat(),
+                    "recommendation": f"Pair {agents_involved[0]} with {agents_involved[-1]} for {task_type} missions.",
+                }
+            )
 
     def get_collective_learning_summary(self) -> Dict[str, Any]:
         return {

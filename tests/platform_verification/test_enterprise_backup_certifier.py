@@ -2,6 +2,7 @@
 Comprehensive Unit and Integration Test Suite for Enterprise Backup Certification Framework.
 Part 3G.2G — Backup Readiness Certification System for DocuTask Agent.
 """
+
 import pytest
 import os
 import tempfile
@@ -285,9 +286,7 @@ def test_certification_report_engine():
         rto_rpo = RTORPOCertifier().certify_rto_rpo(evidence)
         policy = BackupPolicyValidator().validate_policies(evidence)
         schedule = ContinuousValidationEngine().generate_verification_schedule()
-        risks = RiskRegisterGenerator().generate_risk_register(
-            completeness, integrity, restore, policy, operational
-        )
+        risks = RiskRegisterGenerator().generate_risk_register(completeness, integrity, restore, policy, operational)
         scorecard = BackupReadinessScoringEngine().compute_certification_score(
             100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0
         )

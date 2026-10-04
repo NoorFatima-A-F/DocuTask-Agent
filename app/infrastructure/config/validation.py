@@ -22,7 +22,10 @@ class ManifestValidator:
                 errors.append(
                     f"Min replicas ({manifest.scaling.min_replicas}) cannot exceed max replicas ({manifest.scaling.max_replicas})."
                 )
-            if manifest.runtime.replicas < manifest.scaling.min_replicas or manifest.runtime.replicas > manifest.scaling.max_replicas:
+            if (
+                manifest.runtime.replicas < manifest.scaling.min_replicas
+                or manifest.runtime.replicas > manifest.scaling.max_replicas
+            ):
                 errors.append(
                     f"Initial replicas ({manifest.runtime.replicas}) must be between {manifest.scaling.min_replicas} and {manifest.scaling.max_replicas}."
                 )

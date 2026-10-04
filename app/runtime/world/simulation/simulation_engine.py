@@ -85,7 +85,7 @@ class PredictiveSimulationEngine:
         if scen.scenario_type == ScenarioType.BURST_TRAFFIC:
             factor = scen.parameters.get("traffic_multiplier", 3.0)
             base_latency *= 1.25
-            base_cost *= (factor * 0.9)
+            base_cost *= factor * 0.9
             failure_prob = 0.015
         elif scen.scenario_type == ScenarioType.SWARM_SCALING:
             agents = scen.parameters.get("swarm_size", 12)

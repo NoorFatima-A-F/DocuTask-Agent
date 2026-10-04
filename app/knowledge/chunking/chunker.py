@@ -139,16 +139,18 @@ class HeadingChunker(BaseChunker):
                 if current_lines:
                     chunk_content = "\n".join(current_lines).strip()
                     if chunk_content:
-                        chunks.append(KnowledgeChunk(
-                            chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
-                            document_id=document.id,
-                            knowledge_id=document.knowledge_id,
-                            position=pos,
-                            content=chunk_content,
-                            token_count=int(len(chunk_content.split()) * 1.3),
-                            heading_hierarchy=[current_heading],
-                            metadata={"strategy": "HEADING", "heading": current_heading},
-                        ))
+                        chunks.append(
+                            KnowledgeChunk(
+                                chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
+                                document_id=document.id,
+                                knowledge_id=document.knowledge_id,
+                                position=pos,
+                                content=chunk_content,
+                                token_count=int(len(chunk_content.split()) * 1.3),
+                                heading_hierarchy=[current_heading],
+                                metadata={"strategy": "HEADING", "heading": current_heading},
+                            )
+                        )
                         pos += 1
                     current_lines = []
                 current_heading = trimmed.lstrip("#").strip()
@@ -158,16 +160,18 @@ class HeadingChunker(BaseChunker):
         if current_lines:
             chunk_content = "\n".join(current_lines).strip()
             if chunk_content:
-                chunks.append(KnowledgeChunk(
-                    chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
-                    document_id=document.id,
-                    knowledge_id=document.knowledge_id,
-                    position=pos,
-                    content=chunk_content,
-                    token_count=int(len(chunk_content.split()) * 1.3),
-                    heading_hierarchy=[current_heading],
-                    metadata={"strategy": "HEADING", "heading": current_heading},
-                ))
+                chunks.append(
+                    KnowledgeChunk(
+                        chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
+                        document_id=document.id,
+                        knowledge_id=document.knowledge_id,
+                        position=pos,
+                        content=chunk_content,
+                        token_count=int(len(chunk_content.split()) * 1.3),
+                        heading_hierarchy=[current_heading],
+                        metadata={"strategy": "HEADING", "heading": current_heading},
+                    )
+                )
 
         return chunks if chunks else FixedChunker().chunk(document)
 
@@ -206,15 +210,17 @@ class CodeChunker(BaseChunker):
                 if current_block:
                     code_content = "\n".join(current_block).strip()
                     if code_content:
-                        chunks.append(KnowledgeChunk(
-                            chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
-                            document_id=document.id,
-                            knowledge_id=document.knowledge_id,
-                            position=pos,
-                            content=code_content,
-                            token_count=int(len(code_content.split()) * 1.3),
-                            metadata={"strategy": "CODE"},
-                        ))
+                        chunks.append(
+                            KnowledgeChunk(
+                                chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
+                                document_id=document.id,
+                                knowledge_id=document.knowledge_id,
+                                position=pos,
+                                content=code_content,
+                                token_count=int(len(code_content.split()) * 1.3),
+                                metadata={"strategy": "CODE"},
+                            )
+                        )
                         pos += 1
                     current_block = []
             current_block.append(line)
@@ -222,15 +228,17 @@ class CodeChunker(BaseChunker):
         if current_block:
             code_content = "\n".join(current_block).strip()
             if code_content:
-                chunks.append(KnowledgeChunk(
-                    chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
-                    document_id=document.id,
-                    knowledge_id=document.knowledge_id,
-                    position=pos,
-                    content=code_content,
-                    token_count=int(len(code_content.split()) * 1.3),
-                    metadata={"strategy": "CODE"},
-                ))
+                chunks.append(
+                    KnowledgeChunk(
+                        chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
+                        document_id=document.id,
+                        knowledge_id=document.knowledge_id,
+                        position=pos,
+                        content=code_content,
+                        token_count=int(len(code_content.split()) * 1.3),
+                        metadata={"strategy": "CODE"},
+                    )
+                )
 
         return chunks if chunks else FixedChunker().chunk(document)
 
@@ -247,15 +255,17 @@ class ConversationChunker(BaseChunker):
         for line in lines:
             trimmed = line.strip()
             if trimmed:
-                chunks.append(KnowledgeChunk(
-                    chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
-                    document_id=document.id,
-                    knowledge_id=document.knowledge_id,
-                    position=pos,
-                    content=trimmed,
-                    token_count=int(len(trimmed.split()) * 1.3),
-                    metadata={"strategy": "CONVERSATION"},
-                ))
+                chunks.append(
+                    KnowledgeChunk(
+                        chunk_id=f"kchk-{uuid.uuid4().hex[:10]}",
+                        document_id=document.id,
+                        knowledge_id=document.knowledge_id,
+                        position=pos,
+                        content=trimmed,
+                        token_count=int(len(trimmed.split()) * 1.3),
+                        metadata={"strategy": "CONVERSATION"},
+                    )
+                )
                 pos += 1
 
         return chunks if chunks else FixedChunker().chunk(document)

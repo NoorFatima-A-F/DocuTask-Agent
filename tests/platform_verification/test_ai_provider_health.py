@@ -8,12 +8,16 @@ import json
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
-from app.platform_verification.ai_provider_health.contract.ai_provider_health_contract import AIProviderHealthContractVerifier
+from app.platform_verification.ai_provider_health.contract.ai_provider_health_contract import (
+    AIProviderHealthContractVerifier,
+)
 from app.platform_verification.ai_provider_health.auth.ai_auth_verifier import AIAuthVerifier
 from app.platform_verification.ai_provider_health.connectivity.ai_connectivity_verifier import AIConnectivityVerifier
 from app.platform_verification.ai_provider_health.latency.ai_latency_verifier import AILatencyVerifier
 from app.platform_verification.ai_provider_health.quota.ai_quota_verifier import AIQuotaVerifier
-from app.platform_verification.ai_provider_health.integrity.ai_response_integrity_verifier import AIResponseIntegrityVerifier
+from app.platform_verification.ai_provider_health.integrity.ai_response_integrity_verifier import (
+    AIResponseIntegrityVerifier,
+)
 from app.platform_verification.ai_provider_health.timeout.ai_timeout_verifier import AITimeoutVerifier
 from app.platform_verification.ai_provider_health.taxonomy.ai_failure_classifier import AIFailureClassifier
 from app.platform_verification.ai_provider_health.degraded.ai_degraded_mode_verifier import AIDegradedModeVerifier
@@ -51,9 +55,16 @@ def test_part_3h_3_8_2_auth_verifier():
     assert report.total_providers_checked >= 2
 
     # Test invalid token handling
-    fail_report = verifier.verify_authentication(mock_auth_data=[
-        {"provider": "gemini", "key_token": "invalid_short_token", "permissions_sufficient": False, "expiration_detected": True}
-    ])
+    fail_report = verifier.verify_authentication(
+        mock_auth_data=[
+            {
+                "provider": "gemini",
+                "key_token": "invalid_short_token",
+                "permissions_sufficient": False,
+                "expiration_detected": True,
+            }
+        ]
+    )
     assert fail_report.all_authenticated is False
     assert fail_report.checks[0].authenticated is False
     assert fail_report.checks[0].status == "UNAVAILABLE_AUTH_FAILED"
@@ -105,7 +116,9 @@ def test_part_3h_3_8_6_response_integrity_verifier():
     assert report.invalid_response_rate_pct <= 5.0
 
     # Test payload validator helper
-    valid_res = verifier.validate_raw_ai_payload('{"invoice_number": "INV-101", "total": 450.0}', ["invoice_number", "total"])
+    valid_res = verifier.validate_raw_ai_payload(
+        '{"invoice_number": "INV-101", "total": 450.0}', ["invoice_number", "total"]
+    )
     assert valid_res["valid"] is True
 
     invalid_res = verifier.validate_raw_ai_payload('{"invoice_number": null}', ["invoice_number", "total"])

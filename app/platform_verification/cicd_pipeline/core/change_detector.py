@@ -1,6 +1,7 @@
 """
 Intelligent Change Classification and Risk Impact Engine.
 """
+
 from __future__ import annotations
 from typing import List
 from app.platform_verification.cicd_pipeline.domain.interfaces import IChangeDetector

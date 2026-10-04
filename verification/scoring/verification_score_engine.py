@@ -38,7 +38,11 @@ class VerificationScoreEngine:
                 raw_score=98.0,
                 weight=self.WEIGHTS["architecture"],
                 weighted_score=98.0 * self.WEIGHTS["architecture"],
-                subsystems_evaluated=["Clean Architecture Boundaries", "Modular Microservices", "Technical Debt Analysis"],
+                subsystems_evaluated=[
+                    "Clean Architecture Boundaries",
+                    "Modular Microservices",
+                    "Technical Debt Analysis",
+                ],
                 details={"coupling_index": 0.12, "modularity_score": 98.0},
             ),
             "ai_capability": ScoringDimensionResult(
@@ -46,7 +50,12 @@ class VerificationScoreEngine:
                 raw_score=98.8,
                 weight=self.WEIGHTS["ai_capability"],
                 weighted_score=98.8 * self.WEIGHTS["ai_capability"],
-                subsystems_evaluated=["Document Intelligence (OCR)", "Hybrid RAG Grounding", "Causal Reasoning OS", "Multi-Agent Workforce"],
+                subsystems_evaluated=[
+                    "Document Intelligence (OCR)",
+                    "Hybrid RAG Grounding",
+                    "Causal Reasoning OS",
+                    "Multi-Agent Workforce",
+                ],
                 details={"field_accuracy_pct": 99.4, "citation_grounding_pct": 98.6, "consensus_rate_pct": 99.8},
             ),
             "security": ScoringDimensionResult(
@@ -54,7 +63,12 @@ class VerificationScoreEngine:
                 raw_score=99.2,
                 weight=self.WEIGHTS["security"],
                 weighted_score=99.2 * self.WEIGHTS["security"],
-                subsystems_evaluated=["OWASP ASVS L3", "OWASP LLM Top 10", "MITRE ATLAS Jailbreak Defense", "Zero Trust Isolation"],
+                subsystems_evaluated=[
+                    "OWASP ASVS L3",
+                    "OWASP LLM Top 10",
+                    "MITRE ATLAS Jailbreak Defense",
+                    "Zero Trust Isolation",
+                ],
                 details={"adversarial_defense_pct": 99.9, "asvs_compliance_pct": 100.0},
             ),
             "reliability": ScoringDimensionResult(
@@ -168,7 +182,10 @@ class VerificationScoreEngine:
                 passed=passed_4,
                 message=f"Security ({dims['security'].raw_score:.1f}%) and Reliability ({dims['reliability'].raw_score:.1f}%) pass mandatory enterprise minimums",
                 execution_time_ms=t_ms,
-                details={"security_score": dims["security"].raw_score, "reliability_score": dims["reliability"].raw_score},
+                details={
+                    "security_score": dims["security"].raw_score,
+                    "reliability_score": dims["reliability"].raw_score,
+                },
             )
         )
 

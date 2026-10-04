@@ -1,6 +1,7 @@
 """
 Enterprise Liveness Verification Framework Package (Part 3H.2).
 """
+
 from app.platform_verification.liveness.domain.models import (
     LivenessState,
     LivenessTier,

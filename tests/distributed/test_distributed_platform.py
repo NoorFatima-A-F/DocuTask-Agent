@@ -45,6 +45,7 @@ def runtime():
 # 1. Distributed Queue & DLQ Tests
 # -----------------------------------------------------------------------------
 
+
 def test_distributed_queue_priorities_and_dlq():
     channel = DistributedQueueChannel("test_channel")
     from app.runtime.distributed.models.schemas import ScheduledJob
@@ -81,6 +82,7 @@ def test_distributed_queue_priorities_and_dlq():
 # 2. Distributed Scheduler & Fairness Allocator Tests
 # -----------------------------------------------------------------------------
 
+
 def test_fairness_allocator_quotas():
     alloc = FairnessAllocator(tenant_max_concurrent=2)
     assert alloc.can_tenant_execute("tenant_a") is True
@@ -116,6 +118,7 @@ def test_distributed_scheduler_submit_and_schedule():
 # 3. Worker Fleet Manager & Crash Detection Tests
 # -----------------------------------------------------------------------------
 
+
 def test_worker_fleet_registration_and_heartbeats():
     fleet = WorkerFleetManager()
     node = fleet.register_worker(hostname="worker-test-01.internal", region=RegionName.US_EAST)
@@ -141,12 +144,14 @@ def test_heartbeat_timeout_crash_detection():
 # 4. Load Balancer & Execution Fabric Tests
 # -----------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_load_balancer_and_fabric_dispatch():
     fleet = WorkerFleetManager()
     fabric = ExecutionFabric(fleet_manager=fleet)
 
     from app.runtime.distributed.models.schemas import ScheduledJob
+
     job = ScheduledJob(
         workflow_id="wf_disp_01",
         agent_id="agent_scientist",
@@ -162,6 +167,7 @@ async def test_load_balancer_and_fabric_dispatch():
 # -----------------------------------------------------------------------------
 # 5. Durable Workflow Engine & Checkpointing Tests
 # -----------------------------------------------------------------------------
+
 
 def test_durable_workflow_lifecycle_and_migration():
     engine = DurableWorkflowEngine()
@@ -204,6 +210,7 @@ def test_durable_workflow_lifecycle_and_migration():
 # 6. Distributed Lock Manager Tests
 # -----------------------------------------------------------------------------
 
+
 def test_distributed_lock_acquisition_and_fencing():
     dlm = DistributedLockManager()
     lease1 = dlm.acquire_lock("resource_agent_dag", holder_id="worker_01", lease_duration_sec=10)
@@ -230,6 +237,7 @@ def test_distributed_lock_acquisition_and_fencing():
 # 7. Autoscaling Engine Tests
 # -----------------------------------------------------------------------------
 
+
 def test_autoscaling_evaluation():
     fleet = WorkerFleetManager()
     queue = QueueManager()
@@ -241,10 +249,9 @@ def test_autoscaling_evaluation():
 
     # Pressure evaluation: enqueue 20 jobs
     from app.runtime.distributed.models.schemas import ScheduledJob
+
     for i in range(20):
-        queue.get_channel("agent_tasks").enqueue(
-            ScheduledJob(workflow_id=f"wf_{i}", agent_id="a", task_name="t")
-        )
+        queue.get_channel("agent_tasks").enqueue(ScheduledJob(workflow_id=f"wf_{i}", agent_id="a", task_name="t"))
     decision_pressure = autoscaler.evaluate_scaling()
     assert decision_pressure["action"] == ScalingAction.SCALE_UP.value
     assert decision_pressure["desired_workers"] >= decision_pressure["current_workers"]
@@ -253,6 +260,7 @@ def test_autoscaling_evaluation():
 # -----------------------------------------------------------------------------
 # 8. Region Router & Latency Matrix Tests
 # -----------------------------------------------------------------------------
+
 
 def test_region_router_latencies():
     lat_intra = RegionRouter.get_latency(RegionName.US_EAST, RegionName.US_EAST)
@@ -267,6 +275,7 @@ def test_region_router_latencies():
 # -----------------------------------------------------------------------------
 # 9. Model Gateway & Distributed Cache Tests
 # -----------------------------------------------------------------------------
+
 
 def test_model_gateway_and_cache():
     cache = DistributedCache()
@@ -288,6 +297,7 @@ def test_model_gateway_and_cache():
 # 10. Disaster Recovery Engine Tests
 # -----------------------------------------------------------------------------
 
+
 def test_disaster_recovery_snapshots_and_drills():
     dr = DisasterRecoveryEngine()
     snap = dr.create_snapshot(source_region=RegionName.US_EAST, workflow_count=30, checkpoint_count=120)
@@ -307,6 +317,7 @@ def test_disaster_recovery_snapshots_and_drills():
 # 11. End-to-End Distributed Runtime Cycle Test
 # -----------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_full_distributed_runtime_cycle(runtime):
     cycle = await runtime.execute_distributed_cycle()
@@ -321,6 +332,7 @@ async def test_full_distributed_runtime_cycle(runtime):
 # -----------------------------------------------------------------------------
 # 12. FastAPI Endpoints Integration Tests
 # -----------------------------------------------------------------------------
+
 
 def test_api_cluster_overview_and_workers(client):
     res_ov = client.get("/api/v1/distributed/cluster/overview")

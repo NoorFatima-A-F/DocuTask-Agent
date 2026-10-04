@@ -55,7 +55,9 @@ class FeatureNormalizer:
         return clamped
 
     @classmethod
-    def normalize_vector(cls, raw_features: Dict[str, float], definitions: Dict[str, FeatureDefinition]) -> Dict[str, float]:
+    def normalize_vector(
+        cls, raw_features: Dict[str, float], definitions: Dict[str, FeatureDefinition]
+    ) -> Dict[str, float]:
         """Normalizes an entire dictionary of features."""
         normalized: Dict[str, float] = {}
         for name, defn in definitions.items():

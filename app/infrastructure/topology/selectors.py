@@ -42,12 +42,8 @@ class ClusterSelector:
     def __init__(self, cluster_registry: ClusterRegistry):
         self.cluster_registry = cluster_registry
 
-    def select_eligible_clusters(
-        self, workload: WorkloadRequest, region_id: str
-    ) -> List[Cluster]:
-        clusters = self.cluster_registry.list_clusters(
-            region_id=region_id, status=ClusterStatus.ACTIVE
-        )
+    def select_eligible_clusters(self, workload: WorkloadRequest, region_id: str) -> List[Cluster]:
+        clusters = self.cluster_registry.list_clusters(region_id=region_id, status=ClusterStatus.ACTIVE)
 
         eligible = []
         for cluster in clusters:
@@ -64,7 +60,9 @@ class ClusterSelector:
             # Workload type support
             if workload.workload_type.value.lower() not in [w.lower() for w in cluster.supported_workloads]:
                 # Generic fallback if custom
-                if "custom" not in [w.lower() for w in cluster.supported_workloads] and "workflow" not in [w.lower() for w in cluster.supported_workloads]:
+                if "custom" not in [w.lower() for w in cluster.supported_workloads] and "workflow" not in [
+                    w.lower() for w in cluster.supported_workloads
+                ]:
                     continue
 
             eligible.append(cluster)

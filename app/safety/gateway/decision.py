@@ -9,6 +9,7 @@ import uuid
 
 class SafetyStatus(str, Enum):
     """Enforcement decision status."""
+
     ALLOW = "ALLOW"
     ALLOW_WITH_AUDIT = "ALLOW_WITH_AUDIT"
     MODIFY = "MODIFY"
@@ -20,6 +21,7 @@ class SafetyStatus(str, Enum):
 
 class ViolationSeverity(str, Enum):
     """Severity classification for safety violations."""
+
     LOW = "LOW"
     MEDIUM = "MEDIUM"
     HIGH = "HIGH"
@@ -28,6 +30,7 @@ class ViolationSeverity(str, Enum):
 
 class SafetyCategory(str, Enum):
     """Categories of AI safety violations."""
+
     PROMPT_INJECTION = "PROMPT_INJECTION"
     INDIRECT_INJECTION = "INDIRECT_INJECTION"
     JAILBREAK = "JAILBREAK"
@@ -45,6 +48,7 @@ class SafetyCategory(str, Enum):
 
 class SafetyViolation(BaseModel):
     """Specific safety rule or boundary violation."""
+
     violation_id: str = Field(default_factory=lambda: f"viol_{uuid.uuid4().hex[:8]}")
     category: SafetyCategory
     severity: ViolationSeverity
@@ -58,6 +62,7 @@ class SafetyViolation(BaseModel):
 
 class SafetyDecision(BaseModel):
     """Complete evaluation decision returned by the AI Safety Gateway."""
+
     decision_id: str = Field(default_factory=lambda: f"dec_{uuid.uuid4().hex[:10]}")
     status: SafetyStatus = SafetyStatus.ALLOW
     is_allowed: bool = True

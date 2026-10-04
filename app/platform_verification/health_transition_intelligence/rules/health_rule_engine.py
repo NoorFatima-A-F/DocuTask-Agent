@@ -3,6 +3,7 @@ Health Transition Rule Engine (Part 3H.3.3.3).
 Evaluates metric signals against health_rules.yaml threshold definitions
 to determine appropriate health state transitions.
 """
+
 import os
 import yaml
 from typing import Dict, Any, Tuple
@@ -18,7 +19,12 @@ class HealthRuleEngine:
         "rules": {
             "memory": {"warning_threshold_pct": 80.0, "critical_threshold_pct": 95.0, "action_on_critical": "DEGRADED"},
             "cpu": {"warning_threshold_pct": 85.0, "critical_threshold_pct": 98.0, "action_on_critical": "DEGRADED"},
-            "latency": {"degraded_threshold_ms": 500.0, "critical_threshold_ms": 2000.0, "action_on_degraded": "DEGRADED", "action_on_critical": "NOT_READY"},
+            "latency": {
+                "degraded_threshold_ms": 500.0,
+                "critical_threshold_ms": 2000.0,
+                "action_on_degraded": "DEGRADED",
+                "action_on_critical": "NOT_READY",
+            },
             "queue": {"warning_depth": 500, "critical_depth": 1000, "action_on_critical": "DEGRADED"},
             "database": {"unavailable_action": "NOT_READY"},
             "ai_provider": {"timeout_action": "DEGRADED"},

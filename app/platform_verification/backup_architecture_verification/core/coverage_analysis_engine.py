@@ -3,6 +3,7 @@ Part 5: Backup Coverage Analysis Engine.
 Calculates and enforces tier-specific coverage targets across all platform assets.
 Tier 0: 100%, Tier 1: 100%, Tier 2: >=95%, Tier 3: Optional.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     CriticalityTier,
@@ -63,15 +64,15 @@ class CoverageAnalysisEngine(ICoverageAnalysisEngine):
             has_strat = strat is not None
             has_sched = strat is not None and bool(strat.frequency_cron)
             has_ret = ret is not None and (
-                ret.daily_retention_days > 0 or ret.retention_days_total > 0 if hasattr(ret, "retention_days_total") else True
+                ret.daily_retention_days > 0 or ret.retention_days_total > 0
+                if hasattr(ret, "retention_days_total")
+                else True
             )
             # Simulated verification status (in production backed by automated checksum test)
             backup_verified = has_strat and has_sched and has_ret
             can_restore = backup_verified
 
-            is_fully_covered = (
-                has_strat and has_sched and has_ret and backup_verified and can_restore
-            )
+            is_fully_covered = has_strat and has_sched and has_ret and backup_verified and can_restore
 
             if is_fully_covered:
                 status = "COMPLIANT_PROTECTED"

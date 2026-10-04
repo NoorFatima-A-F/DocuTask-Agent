@@ -1,6 +1,7 @@
 """
 Evidence Lineage Engine building directed provenance DAGs.
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from app.platform_verification.evidence_engine.domain.models import (
@@ -53,12 +54,14 @@ class EvidenceLineageEngine(ILineageEngine):
             visited.add(curr_id)
             node = self._nodes[curr_id]
             for p_id in node.parents:
-                ancestors.append({
-                    "parent_id": p_id,
-                    "child_id": curr_id,
-                    "relation": node.relations.get(p_id, "derived_from"),
-                    "parent_type": self._nodes[p_id].node_type,
-                })
+                ancestors.append(
+                    {
+                        "parent_id": p_id,
+                        "child_id": curr_id,
+                        "relation": node.relations.get(p_id, "derived_from"),
+                        "parent_type": self._nodes[p_id].node_type,
+                    }
+                )
                 _traverse_up(p_id)
 
         _traverse_up(node_id)

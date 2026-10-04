@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class DocumentSection(BaseModel):
     """Structural layout section within a parsed document."""
+
     heading: str = ""
     level: int = 1
     content: str
@@ -26,6 +27,7 @@ class DocumentSection(BaseModel):
 
 class ProcessedDocument(BaseModel):
     """Enriched document representation after passing through the intelligence pipeline."""
+
     document_id: str
     title: str
     clean_text: str
@@ -105,31 +107,37 @@ class DocumentIntelligencePipeline:
             # Heading detection: Markdown # or all caps short line
             if trimmed.startswith("#"):
                 if current_buffer:
-                    sections.append(DocumentSection(
-                        heading=current_heading,
-                        content="\n".join(current_buffer),
-                        section_type="paragraph",
-                    ))
+                    sections.append(
+                        DocumentSection(
+                            heading=current_heading,
+                            content="\n".join(current_buffer),
+                            section_type="paragraph",
+                        )
+                    )
                     current_buffer = []
                 current_heading = trimmed.lstrip("#").strip()
             elif len(trimmed) < 60 and (trimmed.isupper() or trimmed.endswith(":")):
                 if current_buffer:
-                    sections.append(DocumentSection(
-                        heading=current_heading,
-                        content="\n".join(current_buffer),
-                        section_type="paragraph",
-                    ))
+                    sections.append(
+                        DocumentSection(
+                            heading=current_heading,
+                            content="\n".join(current_buffer),
+                            section_type="paragraph",
+                        )
+                    )
                     current_buffer = []
                 current_heading = trimmed.rstrip(":")
             else:
                 current_buffer.append(trimmed)
 
         if current_buffer:
-            sections.append(DocumentSection(
-                heading=current_heading,
-                content="\n".join(current_buffer),
-                section_type="paragraph",
-            ))
+            sections.append(
+                DocumentSection(
+                    heading=current_heading,
+                    content="\n".join(current_buffer),
+                    section_type="paragraph",
+                )
+            )
 
         return sections if sections else [DocumentSection(heading="Body", content=text, section_type="paragraph")]
 

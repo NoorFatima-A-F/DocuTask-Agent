@@ -23,6 +23,7 @@ class DependencyType(str, Enum):
 @dataclass(frozen=True)
 class GoalDependency:
     """A directed dependency required before a goal or mission step can commence."""
+
     source_id: str
     target_id: str
     dependency_type: DependencyType

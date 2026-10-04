@@ -37,12 +37,7 @@ class MultiObjectiveUtilityCalculator:
         cost_norm = max(0.0, min(1.0, 1.0 - (cost_usd / 0.05)))
         risk_norm = max(0.0, min(1.0, 1.0 - risk))
 
-        composite = (
-            w["accuracy"] * acc_norm
-            + w["latency"] * lat_norm
-            + w["cost"] * cost_norm
-            + w["risk"] * risk_norm
-        )
+        composite = w["accuracy"] * acc_norm + w["latency"] * lat_norm + w["cost"] * cost_norm + w["risk"] * risk_norm
 
         return {
             "composite": round(composite, 4),

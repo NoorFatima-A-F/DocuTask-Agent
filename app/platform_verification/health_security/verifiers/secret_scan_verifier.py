@@ -1,6 +1,7 @@
 """
 Phase 3H.5.10.7: Secret Exposure Scanning Across Health & Observability Surfaces
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     SecretScanReport,

@@ -84,7 +84,9 @@ class MemoryTaskQueue(TaskQueueBackend):
 
             running_job = selected_job.mark_scheduled(worker_id).mark_running()
             self._jobs[selected_job.job_id] = running_job
-            logger.info(f"MemoryTaskQueue: Leased job {selected_job.job_id} to worker {worker_id} until {expires_at.isoformat()}")
+            logger.info(
+                f"MemoryTaskQueue: Leased job {selected_job.job_id} to worker {worker_id} until {expires_at.isoformat()}"
+            )
             return running_job
 
     async def renew_lease(
@@ -154,16 +156,15 @@ class MemoryTaskQueue(TaskQueueBackend):
             else:
                 # Exhausted: Move to DLQ
                 self._dlq.append(failed_job)
-                logger.error(f"MemoryTaskQueue: Job {job_id} permanently failed; routed to DLQ. Reason: {error_message}")
+                logger.error(
+                    f"MemoryTaskQueue: Job {job_id} permanently failed; routed to DLQ. Reason: {error_message}"
+                )
             return True
 
     async def reclaim_expired_leases(self) -> int:
         async with self._lock:
             now = datetime.now(timezone.utc)
-            expired_ids = [
-                jid for jid, lease in self._active_leases.items()
-                if now > lease.expires_at
-            ]
+            expired_ids = [jid for jid, lease in self._active_leases.items() if now > lease.expires_at]
 
             reclaimed_count = 0
             for jid in expired_ids:

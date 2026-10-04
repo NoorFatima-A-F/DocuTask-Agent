@@ -18,6 +18,7 @@ class WorkerStatus(str, Enum):
 
 class Worker(BaseModel):
     """Execution Worker running atomic tasks."""
+
     worker_id: str
     capabilities: List[str] = Field(default_factory=lambda: ["DEFAULT"])
     status: WorkerStatus = Field(default=WorkerStatus.IDLE)

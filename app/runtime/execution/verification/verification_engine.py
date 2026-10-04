@@ -164,7 +164,9 @@ class VerificationEngine:
         self._certificates[cert_id] = cert
         execution_event_bus.publish(
             ExecutionEvent(
-                event_type=ExecutionEventType.VERIFICATION_PASSED if all_passed else ExecutionEventType.VERIFICATION_FAILED,
+                event_type=ExecutionEventType.VERIFICATION_PASSED
+                if all_passed
+                else ExecutionEventType.VERIFICATION_FAILED,
                 source="verification_engine",
                 payload={"certificate_id": cert_id, "mission_id": mission_id, "passed": all_passed, "sha256": sig},
             )

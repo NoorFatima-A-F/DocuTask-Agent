@@ -22,12 +22,8 @@ from app.infrastructure.workers.registry import WorkerRegistry
 
 def test_worker_capability_registry():
     cap_reg = WorkerCapabilityRegistry()
-    cap_reg.register_capabilities(
-        "wrk-1", {"workflow.execute", "gpu.cuda", "gpu.a100", "compliance.hipaa"}
-    )
-    cap_reg.register_capabilities(
-        "wrk-2", {"document.ocr", "gpu.cuda", "gpu.t4"}
-    )
+    cap_reg.register_capabilities("wrk-1", {"workflow.execute", "gpu.cuda", "gpu.a100", "compliance.hipaa"})
+    cap_reg.register_capabilities("wrk-2", {"document.ocr", "gpu.cuda", "gpu.t4"})
 
     assert cap_reg.satisfies_capabilities("wrk-1", {"workflow.execute", "gpu.cuda"}) is True
     assert cap_reg.satisfies_capabilities("wrk-2", {"gpu.a100"}) is False

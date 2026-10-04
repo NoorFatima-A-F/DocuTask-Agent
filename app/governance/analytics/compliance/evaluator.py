@@ -21,15 +21,15 @@ class ComplianceFramework(str, Enum):
 class ControlStatus(BaseModel):
     control_id: str
     control_name: str
-    status: str             # COMPLIANT, NON_COMPLIANT, AT_RISK
+    status: str  # COMPLIANT, NON_COMPLIANT, AT_RISK
     evidence_count: int = 0
     last_verified: Optional[datetime] = None
 
 
 class FrameworkComplianceScore(BaseModel):
     framework: ComplianceFramework
-    score: float = 100.0                # 0.0 to 100.0
-    control_coverage_pct: float = 100.0 # 0.0 to 100.0
+    score: float = 100.0  # 0.0 to 100.0
+    control_coverage_pct: float = 100.0  # 0.0 to 100.0
     evidence_availability_pct: float = 100.0
     compliant_controls_count: int = 0
     total_controls_count: int = 0
@@ -73,9 +73,7 @@ class ComplianceEvaluator:
     def __init__(self, repository: Optional[GovernanceDataWarehouseRepository] = None):
         self.repo = repository or GovernanceDataWarehouseRepository()
 
-    def evaluate_framework(
-        self, framework: ComplianceFramework, tenant_id: str = "*"
-    ) -> FrameworkComplianceScore:
+    def evaluate_framework(self, framework: ComplianceFramework, tenant_id: str = "*") -> FrameworkComplianceScore:
         q = WarehouseQueryFilter(tenant_id=tenant_id, framework=framework.value)
         compliance_events = self.repo.query_compliance_events(q)
 
@@ -132,7 +130,4 @@ class ComplianceEvaluator:
         )
 
     def evaluate_all_frameworks(self, tenant_id: str = "*") -> Dict[str, FrameworkComplianceScore]:
-        return {
-            f.value: self.evaluate_framework(f, tenant_id=tenant_id)
-            for f in ComplianceFramework
-        }
+        return {f.value: self.evaluate_framework(f, tenant_id=tenant_id) for f in ComplianceFramework}

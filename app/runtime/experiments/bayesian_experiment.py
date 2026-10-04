@@ -73,7 +73,7 @@ class BayesianExperimentEngine:
             if sample_trt > sample_ctrl:
                 trt_wins += 1
             else:
-                loss_sum += (sample_ctrl - sample_trt)
+                loss_sum += sample_ctrl - sample_trt
 
         prob_superior = trt_wins / num_simulations
         expected_loss = loss_sum / num_simulations

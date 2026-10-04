@@ -103,6 +103,7 @@ class WorkflowRegistry:
         """Search workflows by name, category, or tags."""
         q = query.lower()
         return [
-            d for d in self._definitions.values()
+            d
+            for d in self._definitions.values()
             if q in d.name.lower() or q in d.category.lower() or any(q in t.lower() for t in d.tags)
         ]

@@ -45,17 +45,9 @@ async def test_gemini_dev_mode_generation():
     assert isinstance(text, str)
     assert len(text) > 0
 
-    schema = {
-        "type": "object",
-        "properties": {
-            "vendor_name": {"type": "string"},
-            "total_amount": {"type": "number"}
-        }
-    }
+    schema = {"type": "object", "properties": {"vendor_name": {"type": "string"}, "total_amount": {"type": "number"}}}
     parsed, raw, in_tok, out_tok = await provider.generate_json(
-        prompt="Document text",
-        json_schema=schema,
-        system_instruction="System instruction"
+        prompt="Document text", json_schema=schema, system_instruction="System instruction"
     )
 
     assert isinstance(parsed, dict)

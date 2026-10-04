@@ -11,6 +11,7 @@ from app.model_governance.registry.models import RiskLevel
 
 class ModelRiskProfile(BaseModel):
     """Risk evaluation profile for an AI model."""
+
     assessment_id: str = Field(default_factory=lambda: f"risk_{uuid.uuid4().hex[:8]}")
     model_id: str = "default_model"
     security_score: Optional[float] = None
@@ -46,7 +47,7 @@ class ModelRiskProfile(BaseModel):
                 provider = 1.0 - comp
                 explain = 1.0 - (rob or 0.8)
                 data_sens = 1.0 - (fair or 0.8)
-                composite = (provider * 0.30 + data_sens * 0.25 + jailbreak * 0.25 + explain * 0.20)
+                composite = provider * 0.30 + data_sens * 0.25 + jailbreak * 0.25 + explain * 0.20
                 values["jailbreak_vulnerability_risk"] = jailbreak
                 values["provider_trust_risk"] = provider
                 values["explainability_limitation_risk"] = explain

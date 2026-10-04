@@ -1,6 +1,7 @@
 """
 Orchestration and Automation Verifier for Health Check Architecture Verification (Part 3H.1).
 """
+
 from typing import Dict, Any
 from app.platform_verification.health_architecture.domain.models import AutomationIntegrationReport
 from app.platform_verification.health_architecture.domain.interfaces import IAutomationIntegrationVerifier
@@ -102,13 +103,7 @@ class OrchestrationAutomationVerifier(IAutomationIntegrationVerifier):
             and len(self._cicd_spec.get("rollback_trigger_rules", [])) >= 3
         )
 
-        passed = (
-            docker_valid
-            and k8s_live_valid
-            and k8s_ready_valid
-            and k8s_startup_valid
-            and cicd_gating_valid
-        )
+        passed = docker_valid and k8s_live_valid and k8s_ready_valid and k8s_startup_valid and cicd_gating_valid
 
         return AutomationIntegrationReport(
             docker_healthcheck_compatible=docker_valid,

@@ -64,7 +64,12 @@ class HackathonDemoEngine:
                 step_name="Cryptographic Certification & Audit Sign",
                 narration="Generates ED25519 cryptographic certification manifest and commits verified records to database.",
                 active_worker="Worker-Sec-1",
-                telemetry_snapshot={"latency_ms": 30.0, "tokens": 0, "cost_usd": 0.0000, "signature": "ED25519_SIG_8F3A"},
+                telemetry_snapshot={
+                    "latency_ms": 30.0,
+                    "tokens": 0,
+                    "cost_usd": 0.0000,
+                    "signature": "ED25519_SIG_8F3A",
+                },
                 emitted_at=time.time() + 0.80,
             ),
         ]

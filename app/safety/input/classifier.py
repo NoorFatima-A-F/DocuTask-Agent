@@ -47,8 +47,12 @@ class InputIntentClassifier:
 
         # Probing heuristics
         probing_terms = [
-            "system prompt", "reveal your instructions", "what are your guidelines",
-            "show internal configuration", "who programmed you", "ignore restrictions"
+            "system prompt",
+            "reveal your instructions",
+            "what are your guidelines",
+            "show internal configuration",
+            "who programmed you",
+            "ignore restrictions",
         ]
         text_lower = text.lower()
         probing_hits = [term for term in probing_terms if term in text_lower]
@@ -62,7 +66,9 @@ class InputIntentClassifier:
             )
 
         # Default benign classification
-        if any(w in text_lower for w in ["extract", "summarize", "analyze", "parse", "process", "find", "get", "calculate"]):
+        if any(
+            w in text_lower for w in ["extract", "summarize", "analyze", "parse", "process", "find", "get", "calculate"]
+        ):
             return IntentClassificationResult(
                 intent=InputIntent.BENIGN_INSTRUCTION,
                 confidence=0.90,

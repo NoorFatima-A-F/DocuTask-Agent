@@ -12,6 +12,7 @@ from app.agents.execution.metadata import ExecutionStatistics
 
 class RuntimeState(BaseModel):
     """Point-in-time runtime state of an active execution session."""
+
     execution_id: UUID
     state: ExecutionLifecycleState = Field(default=ExecutionLifecycleState.CREATED)
     active_node_ids: List[str] = Field(default_factory=list)

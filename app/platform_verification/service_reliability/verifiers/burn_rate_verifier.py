@@ -1,6 +1,7 @@
 """
 Phase 3H.6.6: Multi-Window Error Budget Burn Rate Analysis Verification
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     BurnRateWindow,
@@ -76,7 +77,11 @@ class BurnRateVerifier(IBurnRateVerifier):
         fast_burn = any(w.severity == BurnRateSeverity.CRITICAL for w in windows)
         slow_burn = any(w.severity == BurnRateSeverity.WARNING for w in windows)
 
-        overall_severity = BurnRateSeverity.CRITICAL if fast_burn else (BurnRateSeverity.WARNING if slow_burn else BurnRateSeverity.SAFE)
+        overall_severity = (
+            BurnRateSeverity.CRITICAL
+            if fast_burn
+            else (BurnRateSeverity.WARNING if slow_burn else BurnRateSeverity.SAFE)
+        )
 
         return BurnRateReport(
             report_title="Multi-Window Error Budget Burn Rate Analysis Report",

@@ -3,6 +3,7 @@ Health Flapping Detector (Part 3H.3.3.7).
 Identifies rapid oscillatory transitions between healthy and failed states
 and activates dampening to prevent destructive container restart storms.
 """
+
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional
 from app.platform_verification.health_transition_intelligence.domain.models import (
@@ -57,6 +58,8 @@ class HealthFlappingDetector:
             passed=True,
             details={
                 "threshold": self.max_allowed_transitions,
-                "mitigation_action": "Dampen probe oscillation and prevent container restart loop" if flapping_detected else "Normal operation",
+                "mitigation_action": "Dampen probe oscillation and prevent container restart loop"
+                if flapping_detected
+                else "Normal operation",
             },
         )

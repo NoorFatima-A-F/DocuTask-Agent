@@ -1,6 +1,7 @@
 """
 Enterprise Architecture Verification Platform Runtime facade.
 """
+
 from __future__ import annotations
 import os
 from pathlib import Path
@@ -9,7 +10,9 @@ import uuid
 from app.platform_verification.architecture_verification.core.ast_scanner import EnterpriseASTScanner
 from app.platform_verification.architecture_verification.core.dependency_graph import EnterpriseDependencyGraphEngine
 from app.platform_verification.architecture_verification.core.evidence_store import EnterpriseArchitectureEvidenceStore
-from app.platform_verification.architecture_verification.core.regression_engine import EnterpriseArchitectureRegressionEngine
+from app.platform_verification.architecture_verification.core.regression_engine import (
+    EnterpriseArchitectureRegressionEngine,
+)
 from app.platform_verification.architecture_verification.core.rule_engine import EnterpriseArchitectureRuleEngine
 from app.platform_verification.architecture_verification.core.scoring_engine import EnterpriseArchitectureScoringEngine
 from app.platform_verification.architecture_verification.domain.models import (

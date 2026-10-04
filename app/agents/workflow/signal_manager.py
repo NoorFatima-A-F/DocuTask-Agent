@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class WorkflowSignal(BaseModel):
     """External signal sent to a workflow instance."""
+
     signal_name: str
     instance_id: UUID
     payload: Dict[str, Any] = Field(default_factory=dict)
@@ -23,7 +24,9 @@ class SignalManager:
     def __init__(self):
         self._pending_signals: Dict[UUID, List[WorkflowSignal]] = {}
 
-    def send_signal(self, instance_id: UUID, signal_name: str, payload: Optional[Dict[str, Any]] = None) -> WorkflowSignal:
+    def send_signal(
+        self, instance_id: UUID, signal_name: str, payload: Optional[Dict[str, Any]] = None
+    ) -> WorkflowSignal:
         sig = WorkflowSignal(signal_name=signal_name, instance_id=instance_id, payload=payload or {})
         self.receive_signal(sig)
         return sig

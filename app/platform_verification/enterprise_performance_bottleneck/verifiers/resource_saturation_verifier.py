@@ -68,25 +68,37 @@ class ResourceSaturationVerifier(IResourceSaturationVerifier):
                 name="CPU Saturation Analysis",
                 passed=not metrics[0].bottleneck_detected,
                 details=f"CPU: {metrics[0].current_utilization_pct}% used, {metrics[0].headroom_pct}% headroom (threshold: {metrics[0].saturation_threshold_pct}%)",
-                metrics={"utilization_pct": metrics[0].current_utilization_pct, "headroom_pct": metrics[0].headroom_pct},
+                metrics={
+                    "utilization_pct": metrics[0].current_utilization_pct,
+                    "headroom_pct": metrics[0].headroom_pct,
+                },
             ),
             CheckResult(
                 name="Memory Saturation Analysis",
                 passed=not metrics[1].bottleneck_detected,
                 details=f"Memory: {metrics[1].current_utilization_pct}% used, {metrics[1].headroom_pct}% headroom",
-                metrics={"utilization_pct": metrics[1].current_utilization_pct, "headroom_pct": metrics[1].headroom_pct},
+                metrics={
+                    "utilization_pct": metrics[1].current_utilization_pct,
+                    "headroom_pct": metrics[1].headroom_pct,
+                },
             ),
             CheckResult(
                 name="Disk I/O Saturation Analysis",
                 passed=not metrics[2].bottleneck_detected,
                 details=f"Disk: {metrics[2].current_utilization_pct}% IOPS utilized, {metrics[2].headroom_pct}% headroom",
-                metrics={"utilization_pct": metrics[2].current_utilization_pct, "headroom_pct": metrics[2].headroom_pct},
+                metrics={
+                    "utilization_pct": metrics[2].current_utilization_pct,
+                    "headroom_pct": metrics[2].headroom_pct,
+                },
             ),
             CheckResult(
                 name="Network Saturation Analysis",
                 passed=not metrics[3].bottleneck_detected,
                 details=f"Network: {metrics[3].current_utilization_pct}% bandwidth used, {metrics[3].headroom_pct}% headroom",
-                metrics={"utilization_pct": metrics[3].current_utilization_pct, "headroom_pct": metrics[3].headroom_pct},
+                metrics={
+                    "utilization_pct": metrics[3].current_utilization_pct,
+                    "headroom_pct": metrics[3].headroom_pct,
+                },
             ),
         ]
 

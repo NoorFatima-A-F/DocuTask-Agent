@@ -1,13 +1,20 @@
 """
 Interfaces and Contracts for Enterprise Verification Environment Infrastructure.
 """
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 from app.platform_verification.environment_strategy.domain.models import (
-    EnvironmentDefinition, EnvironmentProvisioningRequest, EnvironmentProvisioningResult,
-    ChaosExperimentSpec, ChaosExperimentResult, SecurityLabExperimentSpec,
-    SecurityLabExperimentResult, DeploymentPromotionRecord,
-    EnvironmentHealthState, EnvironmentClassification
+    EnvironmentDefinition,
+    EnvironmentProvisioningRequest,
+    EnvironmentProvisioningResult,
+    ChaosExperimentSpec,
+    ChaosExperimentResult,
+    SecurityLabExperimentSpec,
+    SecurityLabExperimentResult,
+    DeploymentPromotionRecord,
+    EnvironmentHealthState,
+    EnvironmentClassification,
 )
 
 
@@ -25,7 +32,9 @@ class EnvironmentProvisionerInterface(ABC):
         pass
 
     @abstractmethod
-    def clone_environment(self, source_id: str, target_classification: EnvironmentClassification) -> EnvironmentProvisioningResult:
+    def clone_environment(
+        self, source_id: str, target_classification: EnvironmentClassification
+    ) -> EnvironmentProvisioningResult:
         pass
 
 
@@ -39,7 +48,9 @@ class EnvironmentRegistryInterface(ABC):
         pass
 
     @abstractmethod
-    def list_environments(self, classification: Optional[EnvironmentClassification] = None) -> List[EnvironmentDefinition]:
+    def list_environments(
+        self, classification: Optional[EnvironmentClassification] = None
+    ) -> List[EnvironmentDefinition]:
         pass
 
 
@@ -58,10 +69,7 @@ class SecurityLabRunnerInterface(ABC):
 class DeploymentOrchestratorInterface(ABC):
     @abstractmethod
     def promote_deployment(
-        self,
-        version: str,
-        from_env: EnvironmentClassification,
-        to_env: EnvironmentClassification
+        self, version: str, from_env: EnvironmentClassification, to_env: EnvironmentClassification
     ) -> DeploymentPromotionRecord:
         pass
 

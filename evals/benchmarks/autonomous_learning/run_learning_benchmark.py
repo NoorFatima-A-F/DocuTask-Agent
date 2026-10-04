@@ -72,18 +72,20 @@ class AutonomousLearningBenchmark:
             subtotal = round(random.uniform(100.0, 5000.0), 2)
             tax = round(subtotal * vendor["tax_rate"], 2)
             total = round(subtotal + tax, 2)
-            
+
             # 15% noise rate initially
             has_noise = random.random() < 0.15
-            batch.append({
-                "doc_id": f"inv_{i+1:04d}",
-                "vendor_name": vendor["name"],
-                "subtotal": subtotal,
-                "tax_amount": tax,
-                "total_amount": total,
-                "iban": f"{vendor['iban_prefix']}{random.randint(100000, 999999)}",
-                "has_noise": has_noise,
-            })
+            batch.append(
+                {
+                    "doc_id": f"inv_{i + 1:04d}",
+                    "vendor_name": vendor["name"],
+                    "subtotal": subtotal,
+                    "tax_amount": tax,
+                    "total_amount": total,
+                    "iban": f"{vendor['iban_prefix']}{random.randint(100000, 999999)}",
+                    "has_noise": has_noise,
+                }
+            )
         return batch
 
     async def run(self) -> BenchmarkResults:
@@ -97,7 +99,7 @@ class AutonomousLearningBenchmark:
 
         for idx, doc in enumerate(documents, 1):
             goal_text = f"Process invoice for {doc['vendor_name']} with total ${doc['total_amount']:.2f}"
-            
+
             # Check learned semantic memory for vendor priors
             vendor_facts = self.semantic_memory.retrieve_relevant_facts(doc["vendor_name"])
             has_prior = len(vendor_facts) > 0
@@ -112,7 +114,9 @@ class AutonomousLearningBenchmark:
                     goal_description=goal_text,
                     task_name="extract_and_validate",
                     outcome="SUCCESS" if is_accurate else "FAILURE",
-                    reflection_notes=f"Vendor {doc['vendor_name']} tax rate={doc['tax_amount']/doc['subtotal']:.2f}" if is_accurate else "Tax calculation anomaly",
+                    reflection_notes=f"Vendor {doc['vendor_name']} tax rate={doc['tax_amount'] / doc['subtotal']:.2f}"
+                    if is_accurate
+                    else "Tax calculation anomaly",
                     metadata={"vendor_name": doc["vendor_name"]},
                 )
             )
@@ -121,7 +125,9 @@ class AutonomousLearningBenchmark:
 
             # Trigger periodic memory consolidation
             if idx % self.consolidation_interval == 0:
-                report = self.consolidation_agent.run_consolidation(cycle_id=f"bench_cycle_{idx//self.consolidation_interval}")
+                report = self.consolidation_agent.run_consolidation(
+                    cycle_id=f"bench_cycle_{idx // self.consolidation_interval}"
+                )
                 total_patterns += report.patterns_mined
                 total_promoted += report.facts_promoted
                 logger.info(
@@ -133,7 +139,7 @@ class AutonomousLearningBenchmark:
                 )
 
         duration = time.time() - start_time
-        
+
         # Calculate initial (first 25%) vs final (last 25%) accuracy
         quarter = max(1, self.sample_size // 4)
         initial_accuracy = sum(accuracies[:quarter]) / quarter

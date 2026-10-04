@@ -32,8 +32,8 @@ class PerformanceRegressionVerifier(IPerformanceRegressionVerifier):
     def verify(self) -> PerformanceRegressionReport:
         prev_ver = "v3.1.0"
         new_ver = "v3.5.0-rc1"
-        latency_delta = -13.2      # 13.2% faster
-        throughput_delta = 9.1     # 9.1% higher throughput
+        latency_delta = -13.2  # 13.2% faster
+        throughput_delta = 9.1  # 9.1% higher throughput
 
         # Regression defined as latency > +20% or throughput < -15%
         regression = latency_delta > 20.0 or throughput_delta < -15.0

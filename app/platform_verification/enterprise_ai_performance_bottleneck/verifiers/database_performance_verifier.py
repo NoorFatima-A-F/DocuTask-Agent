@@ -26,9 +26,27 @@ class DatabasePerformanceVerifier(IDatabasePerformanceVerifier):
 
     def verify(self) -> DatabasePerformanceReport:
         queries = [
-            SlowQueryAnalysis(query_pattern="SELECT * FROM documents WHERE user_id = $1 ORDER BY created_at DESC", avg_duration_ms=12.4, p95_duration_ms=18.2, index_used=True, optimization_recommendation="Index on (user_id, created_at) verified"),
-            SlowQueryAnalysis(query_pattern="SELECT * FROM extraction_results WHERE document_id = $1", avg_duration_ms=8.1, p95_duration_ms=11.5, index_used=True, optimization_recommendation="Primary foreign key index verified"),
-            SlowQueryAnalysis(query_pattern="UPDATE tasks SET status = $1, updated_at = NOW() WHERE task_id = $2", avg_duration_ms=4.2, p95_duration_ms=6.8, index_used=True, optimization_recommendation="Optimized lock-free row update"),
+            SlowQueryAnalysis(
+                query_pattern="SELECT * FROM documents WHERE user_id = $1 ORDER BY created_at DESC",
+                avg_duration_ms=12.4,
+                p95_duration_ms=18.2,
+                index_used=True,
+                optimization_recommendation="Index on (user_id, created_at) verified",
+            ),
+            SlowQueryAnalysis(
+                query_pattern="SELECT * FROM extraction_results WHERE document_id = $1",
+                avg_duration_ms=8.1,
+                p95_duration_ms=11.5,
+                index_used=True,
+                optimization_recommendation="Primary foreign key index verified",
+            ),
+            SlowQueryAnalysis(
+                query_pattern="UPDATE tasks SET status = $1, updated_at = NOW() WHERE task_id = $2",
+                avg_duration_ms=4.2,
+                p95_duration_ms=6.8,
+                index_used=True,
+                optimization_recommendation="Optimized lock-free row update",
+            ),
         ]
 
         active_conns = 42
@@ -40,8 +58,8 @@ class DatabasePerformanceVerifier(IDatabasePerformanceVerifier):
             CheckResult(
                 name="Connection Pool Health & Utilization (<50%)",
                 passed=active_conns < 60,
-                details=f"Active connections: {active_conns}/{max_conns} ({active_conns/max_conns*100:.1f}% utilization)",
-                metrics={"active_connections": active_conns, "utilization_pct": active_conns/max_conns*100},
+                details=f"Active connections: {active_conns}/{max_conns} ({active_conns / max_conns * 100:.1f}% utilization)",
+                metrics={"active_connections": active_conns, "utilization_pct": active_conns / max_conns * 100},
             ),
             CheckResult(
                 name="Buffer Cache Hit Ratio (>99% Target)",

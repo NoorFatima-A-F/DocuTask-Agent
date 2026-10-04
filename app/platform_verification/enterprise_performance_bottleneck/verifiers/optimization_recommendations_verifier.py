@@ -30,12 +30,48 @@ class OptimizationRecommendationsVerifier(IOptimizationRecommendationsVerifier):
 
     def verify(self) -> OptimizationRecommendationsReport:
         recommendations = [
-            OptimizationRecommendation(issue="AI Provider Latency Dominates E2E Pipeline", evidence="AI inference accounts for 47% of total processing time", recommendation="Implement response caching for repeated document patterns; use Flash for classification", category="ai", priority="HIGH"),
-            OptimizationRecommendation(issue="Database Connection Pool Approaching Threshold", evidence="Connection utilization at 82% (warning at 90%)", recommendation="Increase connection pool size from 50 to 80; add connection pooler (PgBouncer)", category="database", priority="HIGH"),
-            OptimizationRecommendation(issue="4 Slow Queries Identified", evidence="Max query duration 450ms on unpartitioned metrics table", recommendation="Add GIN index, composite indexes, and partition processing_metrics by date", category="database", priority="MEDIUM"),
-            OptimizationRecommendation(issue="Worker Surplus Could Be Reduced", evidence="50 workers running but only 40 required for current load", recommendation="Implement autoscaling with min=35, max=60 based on queue depth", category="infrastructure", priority="MEDIUM"),
-            OptimizationRecommendation(issue="OCR Stage Is Secondary Bottleneck", evidence="OCR processing accounts for 33% of pipeline time", recommendation="Enable parallel OCR processing for multi-page documents", category="architecture", priority="MEDIUM"),
-            OptimizationRecommendation(issue="Cache Hit Rate Opportunity", evidence="Repeated document pattern analysis shows 15% duplicate content", recommendation="Implement Redis-based extraction result cache with 24h TTL", category="caching", priority="LOW"),
+            OptimizationRecommendation(
+                issue="AI Provider Latency Dominates E2E Pipeline",
+                evidence="AI inference accounts for 47% of total processing time",
+                recommendation="Implement response caching for repeated document patterns; use Flash for classification",
+                category="ai",
+                priority="HIGH",
+            ),
+            OptimizationRecommendation(
+                issue="Database Connection Pool Approaching Threshold",
+                evidence="Connection utilization at 82% (warning at 90%)",
+                recommendation="Increase connection pool size from 50 to 80; add connection pooler (PgBouncer)",
+                category="database",
+                priority="HIGH",
+            ),
+            OptimizationRecommendation(
+                issue="4 Slow Queries Identified",
+                evidence="Max query duration 450ms on unpartitioned metrics table",
+                recommendation="Add GIN index, composite indexes, and partition processing_metrics by date",
+                category="database",
+                priority="MEDIUM",
+            ),
+            OptimizationRecommendation(
+                issue="Worker Surplus Could Be Reduced",
+                evidence="50 workers running but only 40 required for current load",
+                recommendation="Implement autoscaling with min=35, max=60 based on queue depth",
+                category="infrastructure",
+                priority="MEDIUM",
+            ),
+            OptimizationRecommendation(
+                issue="OCR Stage Is Secondary Bottleneck",
+                evidence="OCR processing accounts for 33% of pipeline time",
+                recommendation="Enable parallel OCR processing for multi-page documents",
+                category="architecture",
+                priority="MEDIUM",
+            ),
+            OptimizationRecommendation(
+                issue="Cache Hit Rate Opportunity",
+                evidence="Repeated document pattern analysis shows 15% duplicate content",
+                recommendation="Implement Redis-based extraction result cache with 24h TTL",
+                category="caching",
+                priority="LOW",
+            ),
         ]
 
         high_count = sum(1 for r in recommendations if r.priority == "HIGH")

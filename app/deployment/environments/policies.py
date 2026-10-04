@@ -1,4 +1,5 @@
 """Environment Promotion Policies and Governance Rules."""
+
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 from ..core.exceptions import PromotionBlockedException
@@ -7,6 +8,7 @@ from ..core.exceptions import PromotionBlockedException
 @dataclass
 class EnvironmentTierConfig:
     """Policy requirements for promoting into a specific environment tier."""
+
     tier_name: str
     allowed_source_tiers: List[str]
     min_soak_time_seconds: int = 0
@@ -92,7 +94,7 @@ class PromotionPolicy:
         # 3. Test pass rate validation
         if test_pass_rate < target_cfg.min_test_pass_rate:
             raise PromotionBlockedException(
-                f"Test pass rate {test_pass_rate*100:.1f}% does not meet required {target_cfg.min_test_pass_rate*100:.1f}% for '{target_env}'"
+                f"Test pass rate {test_pass_rate * 100:.1f}% does not meet required {target_cfg.min_test_pass_rate * 100:.1f}% for '{target_env}'"
             )
 
         # 4. Security vulnerability policy

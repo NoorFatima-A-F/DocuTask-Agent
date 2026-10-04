@@ -27,7 +27,8 @@ from .models import (
 class ICloudReadinessVerifier(ABC):
     @property
     @abstractmethod
-    def verifier_id(self) -> str: pass
+    def verifier_id(self) -> str:
+        pass
 
     @property
     def phase_id(self) -> str:
@@ -39,82 +40,99 @@ class ICloudReadinessVerifier(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str: pass
+    def name(self) -> str:
+        pass
 
     @abstractmethod
-    def verify(self) -> Any: pass
+    def verify(self) -> Any:
+        pass
 
 
 class ICloudArchitectureAssessmentVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudArchitectureAssessmentReport: pass
+    def verify(self) -> CloudArchitectureAssessmentReport:
+        pass
 
 
 class IContainerCloudCompatibilityVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> ContainerCloudCompatibilityReport: pass
+    def verify(self) -> ContainerCloudCompatibilityReport:
+        pass
 
 
 class ICloudComputeResourceVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudComputeResourceReport: pass
+    def verify(self) -> CloudComputeResourceReport:
+        pass
 
 
 class ICloudNetworkingVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudNetworkingReport: pass
+    def verify(self) -> CloudNetworkingReport:
+        pass
 
 
 class ICloudStorageCompatibilityVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudStorageReport: pass
+    def verify(self) -> CloudStorageReport:
+        pass
 
 
 class IManagedDatabaseReadinessVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> ManagedDatabaseReport: pass
+    def verify(self) -> ManagedDatabaseReport:
+        pass
 
 
 class ICloudQueueWorkerScalabilityVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudQueueWorkerReport: pass
+    def verify(self) -> CloudQueueWorkerReport:
+        pass
 
 
 class IAutoScalingReadinessVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> AutoScalingReport: pass
+    def verify(self) -> AutoScalingReport:
+        pass
 
 
 class ICloudSecretManagementVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudSecretReport: pass
+    def verify(self) -> CloudSecretReport:
+        pass
 
 
 class ICloudObservabilityCompatibilityVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudObservabilityReport: pass
+    def verify(self) -> CloudObservabilityReport:
+        pass
 
 
 class IInfrastructureAsCodeVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> IaCVerificationReport: pass
+    def verify(self) -> IaCVerificationReport:
+        pass
 
 
 class IKubernetesReadinessVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> KubernetesReadinessReport: pass
+    def verify(self) -> KubernetesReadinessReport:
+        pass
 
 
 class ICloudSecurityVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudSecurityReport: pass
+    def verify(self) -> CloudSecurityReport:
+        pass
 
 
 class IMultiCloudPortabilityVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> MultiCloudPortabilityReport: pass
+    def verify(self) -> MultiCloudPortabilityReport:
+        pass
 
 
 class ICloudMigrationSimulationVerifier(ICloudReadinessVerifier):
     @abstractmethod
-    def verify(self) -> CloudMigrationSimulationReport: pass
+    def verify(self) -> CloudMigrationSimulationReport:
+        pass

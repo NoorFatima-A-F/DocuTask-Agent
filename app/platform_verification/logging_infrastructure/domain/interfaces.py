@@ -1,6 +1,7 @@
 """
 Phase 3I.2: Enterprise Logging Infrastructure Verification — Interfaces
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 from .models import (

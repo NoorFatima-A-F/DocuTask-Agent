@@ -45,14 +45,14 @@ class DocumentAgent(BaseAgent):
         state_manager: AgentStateManager | None = None,
         event_bus: AgentEventBus | None = None,
         metrics_collector: AgentMetricsCollector | None = None,
-        observability_hook: AgentObservabilityHook | None = None
+        observability_hook: AgentObservabilityHook | None = None,
     ):
         super().__init__(
             config=config,
             event_bus=event_bus,
             metrics_collector=metrics_collector,
             observability_hook=observability_hook,
-            agent_name="DocumentAgent"
+            agent_name="DocumentAgent",
         )
         self.planner = planner
         self.executor = executor
@@ -72,7 +72,7 @@ class DocumentAgent(BaseAgent):
             return {"goal": goal_statement, "steps": steps}
         return {
             "goal": goal_statement,
-            "steps": [{"step_id": 1, "action": "OCR_EXTRACTION"}, {"step_id": 2, "action": "STRUCTURED_AI_EXTRACTION"}]
+            "steps": [{"step_id": 1, "action": "OCR_EXTRACTION"}, {"step_id": 2, "action": "STRUCTURED_AI_EXTRACTION"}],
         }
 
     async def _do_execute(self, plan: Dict[str, Any], context: AgentContext) -> Dict[str, Any]:
@@ -82,7 +82,7 @@ class DocumentAgent(BaseAgent):
         return {
             "plan_status": "EXECUTED",
             "executed_steps": len(plan.get("steps", [])),
-            "document_id": str(context.document_id)
+            "document_id": str(context.document_id),
         }
 
     async def _do_observe(self, execution_output: Dict[str, Any], context: AgentContext) -> Dict[str, Any]:
@@ -92,18 +92,14 @@ class DocumentAgent(BaseAgent):
         return {
             "observation_status": "VALIDATED",
             "confidence_score": 0.98,
-            "feedback": "Execution metrics within normal bounds"
+            "feedback": "Execution metrics within normal bounds",
         }
 
     async def _do_reflect(self, observation: Dict[str, Any], context: AgentContext) -> Dict[str, Any]:
         """Reflects on observations using registered AgentReflector component if available."""
         if self.reflector:
             return await self.reflector.reflect(observation, context)
-        return {
-            "reflection_status": "SATISFIED",
-            "next_action": "NONE",
-            "quality_rating": "HIGH"
-        }
+        return {"reflection_status": "SATISFIED", "next_action": "NONE", "quality_rating": "HIGH"}
 
     async def _do_cleanup(self, context: AgentContext) -> None:
         """Releases transient document agent resources."""

@@ -12,36 +12,20 @@ from research_validation.mathematics.math_verification_lab import MathVerificati
 from research_validation.numerical.numerical_stability import NumericalStabilityLab
 from research_validation.numerical.float_error_analysis import FloatingPointErrorLab, Interval
 from research_validation.datasets.public_benchmarks import PublicBenchmarkSuite, DatasetType
-from research_validation.replication.independent_replication import (
-    IndependentReplicationEngine, ReplicationRun
-)
+from research_validation.replication.independent_replication import IndependentReplicationEngine, ReplicationRun
 from research_validation.uncertainty.uncertainty_quant import UncertaintyQuantificationLab
 from research_validation.drift.distribution_shift import DistributionShiftDetector
 from research_validation.adversarial.adversarial_robustness import AdversarialRobustnessLab
-from research_validation.explainability.explainability_fidelity import (
-    ExplainabilityFidelityLab, TokenAttribution
-)
-from research_validation.usability.human_factors import (
-    HumanFactorsLab, SUSSurveyResponse, NASATLXResponse
-)
-from research_validation.telemetry.production_telemetry import (
-    ProductionTelemetryValidator, TelemetrySpan
-)
+from research_validation.explainability.explainability_fidelity import ExplainabilityFidelityLab, TokenAttribution
+from research_validation.usability.human_factors import HumanFactorsLab, SUSSurveyResponse, NASATLXResponse
+from research_validation.telemetry.production_telemetry import ProductionTelemetryValidator, TelemetrySpan
 from research_validation.security.security_validation import SecurityValidationLab
-from research_validation.differential.differential_testing import (
-    DifferentialTestingEngine
-)
-from research_validation.endurance.soak_testing import (
-    LongDurationSoakLab, SoakDataPoint
-)
-from research_validation.sustainability.green_sustainability import (
-    GreenSustainabilityLab, CloudRegionGridIntensity
-)
+from research_validation.differential.differential_testing import DifferentialTestingEngine
+from research_validation.endurance.soak_testing import LongDurationSoakLab, SoakDataPoint
+from research_validation.sustainability.green_sustainability import GreenSustainabilityLab, CloudRegionGridIntensity
 from research_validation.fair.fair_compliance import FAIRComplianceAuditor
 from research_validation.threats.advanced_threat_model import AdvancedThreatModelLab
-from research_validation.certification.external_certification import (
-    ThirdPartyCertificationLab
-)
+from research_validation.certification.external_certification import ThirdPartyCertificationLab
 
 
 def test_phase_33_math_verification_lab():
@@ -69,7 +53,7 @@ def test_phase_35_floating_point_error_analysis():
 
     # Machine epsilon
     eps64 = FloatingPointErrorLab.get_machine_epsilon("float64")
-    assert math.isclose(eps64, 2.0 ** -52)
+    assert math.isclose(eps64, 2.0**-52)
 
     # ULP distance
     ulp = FloatingPointErrorLab.calculate_ulp_distance(1.0, 1.0 + eps64)
@@ -112,7 +96,7 @@ def test_phase_37_independent_replication_framework():
         environment_info={"os": "Windows"},
         metric_values={"latency_ms": 45.2, "f1_score": 0.96},
         execution_duration_ms=100.0,
-        timestamp_ns=1000
+        timestamp_ns=1000,
     )
     rep1 = ReplicationRun(
         run_id="run-002",
@@ -120,7 +104,7 @@ def test_phase_37_independent_replication_framework():
         environment_info={"os": "Linux"},
         metric_values={"latency_ms": 46.1, "f1_score": 0.958},
         execution_duration_ms=102.0,
-        timestamp_ns=2000
+        timestamp_ns=2000,
     )
     rep2 = ReplicationRun(
         run_id="run-003",
@@ -128,14 +112,14 @@ def test_phase_37_independent_replication_framework():
         environment_info={"os": "macOS"},
         metric_values={"latency_ms": 44.8, "f1_score": 0.961},
         execution_duration_ms=99.0,
-        timestamp_ns=3000
+        timestamp_ns=3000,
     )
 
     pkg = IndependentReplicationEngine.evaluate_replication_package(
         study_name="Document Parser Reproduction",
         baseline_run=baseline,
         independent_runs=[rep1, rep2],
-        tolerance_ratio=0.05
+        tolerance_ratio=0.05,
     )
     assert pkg.overall_reproducibility_score == 1.0
     assert pkg.acm_badge_eligibility == "RESULTS_REPLICATED"
@@ -163,9 +147,7 @@ def test_phase_39_uncertainty_quantification_lab():
     assert interval.lower_bound < 10.0 < interval.upper_bound
 
     audit = UncertaintyQuantificationLab.run_uncertainty_audit(
-        ensemble_batch=[ensemble, ensemble],
-        calibration_residuals=residuals,
-        test_points=[(10.0, 10.02), (5.0, 5.03)]
+        ensemble_batch=[ensemble, ensemble], calibration_residuals=residuals, test_points=[(10.0, 10.02), (5.0, 5.03)]
     )
     assert audit.status == "PASS"
     assert audit.empirical_coverage == 1.0
@@ -249,7 +231,7 @@ def test_phase_43_human_factors_lab():
         sus_responses=[perfect_sus],
         tlx_responses=[tlx],
         completion_results=[True, True, True],
-        task_durations_sec=[12.0, 15.0, 11.0]
+        task_durations_sec=[12.0, 15.0, 11.0],
     )
     assert report.mean_sus_score == 100.0
     assert report.sus_grade == "A+"
@@ -268,7 +250,7 @@ def test_phase_44_production_telemetry_validator():
             start_time_ns=1000000,
             end_time_ns=5000000,
             status_code="OK",
-            attributes={"service.name": "api_gateway"}
+            attributes={"service.name": "api_gateway"},
         ),
         TelemetrySpan(
             trace_id="tr-1",
@@ -278,7 +260,7 @@ def test_phase_44_production_telemetry_validator():
             start_time_ns=1500000,
             end_time_ns=4500000,
             status_code="OK",
-            attributes={"service.name": "parser_worker"}
+            attributes={"service.name": "parser_worker"},
         ),
     ]
 
@@ -293,6 +275,7 @@ def test_phase_44_production_telemetry_validator():
 def test_phase_45_security_validation_lab():
     def mock_parser(raw_json: str):
         import json
+
         data = json.loads(raw_json)
         if not isinstance(data, dict):
             raise ValueError("Payload must be a JSON object")
@@ -327,7 +310,7 @@ def test_phase_47_long_duration_soak_lab():
             active_threads=4,
             throughput_req_per_sec=100.0,
             error_count=0,
-            p99_latency_ms=25.0
+            p99_latency_ms=25.0,
         )
         for i in range(10)
     ]
@@ -344,7 +327,7 @@ def test_phase_48_green_sustainability_lab():
         execution_time_sec=10.0,
         num_documents=1000,
         cpu_utilization_ratio=0.40,
-        grid_intensity=CloudRegionGridIntensity.EUROPE_NORTH1_FINLAND
+        grid_intensity=CloudRegionGridIntensity.EUROPE_NORTH1_FINLAND,
     )
     assert report.total_energy_joules > 0.0
     assert report.total_energy_kwh > 0.0

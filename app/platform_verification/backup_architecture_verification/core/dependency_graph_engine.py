@@ -3,6 +3,7 @@ Part 4: Backup Dependency Graph Engine.
 Constructs and validates the recovery dependency Directed Acyclic Graph (DAG),
 ensuring no impossible recovery sequences or circular restore dependencies exist.
 """
+
 from typing import List, Dict, Any, Set
 from collections import defaultdict, deque
 from app.platform_verification.backup_architecture_verification.domain.models import (
@@ -61,10 +62,7 @@ class DependencyGraphEngine(IDependencyGraphEngine):
 
         # Populate nodes
         for asset in assets:
-            deps = [
-                dep for dep in self._default_dependency_rules.get(asset.name, [])
-                if dep in asset_names
-            ]
+            deps = [dep for dep in self._default_dependency_rules.get(asset.name, []) if dep in asset_names]
             nodes[asset.name] = DependencyGraphNode(
                 name=asset.name,
                 category=asset.category,
@@ -110,7 +108,9 @@ class DependencyGraphEngine(IDependencyGraphEngine):
         # e.g., Database before Secrets
         if "postgres_primary" in topological_order and "enterprise_secrets_vault" in topological_order:
             if topological_order.index("postgres_primary") < topological_order.index("enterprise_secrets_vault"):
-                validation_errors.append("Invalid sequence: postgres_primary scheduled before enterprise_secrets_vault.")
+                validation_errors.append(
+                    "Invalid sequence: postgres_primary scheduled before enterprise_secrets_vault."
+                )
 
         return BackupDependencyGraph(
             nodes=nodes,
@@ -120,9 +120,7 @@ class DependencyGraphEngine(IDependencyGraphEngine):
             validation_errors=validation_errors,
         )
 
-    def validate_custom_recovery_sequence(
-        self, graph: BackupDependencyGraph, proposed_sequence: List[str]
-    ) -> bool:
+    def validate_custom_recovery_sequence(self, graph: BackupDependencyGraph, proposed_sequence: List[str]) -> bool:
         """Validates if an arbitrary proposed recovery sequence satisfies all dependency constraints."""
         seen: Set[str] = set()
         for item in proposed_sequence:
@@ -142,10 +140,6 @@ class DependencyGraphEngine(IDependencyGraphEngine):
             "validation_errors": graph.validation_errors,
             "total_nodes": len(graph.nodes),
             "topological_recovery_order": graph.topological_recovery_order,
-            "dependency_adjacency": {
-                name: node.dependencies for name, node in graph.nodes.items()
-            },
-            "recovery_stages": {
-                name: node.recovery_stage_order for name, node in graph.nodes.items()
-            },
+            "dependency_adjacency": {name: node.dependencies for name, node in graph.nodes.items()},
+            "recovery_stages": {name: node.recovery_stage_order for name, node in graph.nodes.items()},
         }

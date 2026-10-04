@@ -134,7 +134,9 @@ class AuditEngine:
                     "tool_id": entry.tool_id,
                     "action_type": entry.action_type,
                     "actor": entry.actor,
-                    "risk_level": entry.risk_level.value if isinstance(entry.risk_level, RiskLevel) else str(entry.risk_level),
+                    "risk_level": entry.risk_level.value
+                    if isinstance(entry.risk_level, RiskLevel)
+                    else str(entry.risk_level),
                     "payload": entry.payload_summary,
                     "prev_hash": entry.prev_hash,
                     "timestamp": entry.timestamp,

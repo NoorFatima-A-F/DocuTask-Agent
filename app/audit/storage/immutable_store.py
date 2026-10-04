@@ -23,7 +23,9 @@ class ImmutableAuditStore:
     def append(self, event: AuditEvent) -> AuditEvent:
         """Appends an event to the immutable store, chaining its cryptographic hash."""
         if event.event_id in self._event_index:
-            raise ValueError(f"Immutability violation: Event '{event.event_id}' already exists and cannot be overwritten")
+            raise ValueError(
+                f"Immutability violation: Event '{event.event_id}' already exists and cannot be overwritten"
+            )
 
         tenant_id = event.tenant_id
         previous_hash = self._tenant_last_hash.get(tenant_id, HashChainCalculator.GENESIS_HASH)

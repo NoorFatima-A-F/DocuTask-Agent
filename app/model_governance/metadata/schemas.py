@@ -12,6 +12,7 @@ from app.model_governance.registry.models import RiskLevel
 
 class ModelTechnicalMetadata(BaseModel):
     """Technical performance and limits."""
+
     architecture: str = "Transformer"
     parameter_count_billion: float = 70.0
     context_window: int = 128000
@@ -28,6 +29,7 @@ class ModelTechnicalMetadata(BaseModel):
 
 class ModelBusinessMetadata(BaseModel):
     """Business alignment, ownership, approved/restricted use cases."""
+
     owner_user_id: str = "system"
     owner_email: Optional[str] = None
     business_unit: str = "Enterprise AI"
@@ -41,6 +43,7 @@ class ModelBusinessMetadata(BaseModel):
 
 class ModelGovernanceMetadata(BaseModel):
     """Governance restrictions, allowed tenants/workflows, human-in-the-loop requirements."""
+
     allowed_tenants: Set[str] = Field(default_factory=lambda: {"*"})
     allowed_workflows: Set[str] = Field(default_factory=lambda: {"*"})
     allowed_agents: Set[str] = Field(default_factory=lambda: {"*"})
@@ -54,6 +57,7 @@ class ModelGovernanceMetadata(BaseModel):
 
 class ComprehensiveModelMetadata(BaseModel):
     """Unified 3D model metadata container."""
+
     model_id: str = "default_model"
     technical: ModelTechnicalMetadata = Field(default_factory=ModelTechnicalMetadata)
     business: ModelBusinessMetadata = Field(default_factory=ModelBusinessMetadata)

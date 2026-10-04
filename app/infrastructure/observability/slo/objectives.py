@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class SLIType(str, enum.Enum):
     """Supported SLI metric classifications."""
+
     AVAILABILITY = "AVAILABILITY"
     LATENCY = "LATENCY"
     ERROR_RATE = "ERROR_RATE"
@@ -22,6 +23,7 @@ class SLIType(str, enum.Enum):
 
 class SLIIndicator(BaseModel):
     """Measured good events versus total valid events."""
+
     sli_type: SLIType
     good_events: int = 0
     total_events: int = 0
@@ -35,6 +37,7 @@ class SLIIndicator(BaseModel):
 
 class SLOObjective(BaseModel):
     """Formal Service Level Objective specification."""
+
     slo_id: str
     name: str
     description: str = ""

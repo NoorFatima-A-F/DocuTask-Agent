@@ -1,11 +1,18 @@
 """
 Reference Notification Plugin: Webhook and Alert Dispatcher.
 """
+
 from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import NotificationPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
-    PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,
-    PluginHealthMetrics, PluginHealthState, PluginPermission, SecurityClassification
+    PluginMetadata,
+    PluginCategory,
+    PluginExecutionContext,
+    PluginExecutionResult,
+    PluginHealthMetrics,
+    PluginHealthState,
+    PluginPermission,
+    SecurityClassification,
 )
 
 
@@ -25,7 +32,7 @@ class WebhookNotificationPlugin(NotificationPluginInterface):
             description="Dispatches verification completion and quality gate alerts via HTTP Webhooks",
             capabilities=["webhook_dispatch", "slack_notification_forwarding"],
             granted_permissions=[PluginPermission.ACCESS_NETWORK],
-            security_classification=SecurityClassification.INTERNAL
+            security_classification=SecurityClassification.INTERNAL,
         )
 
     def initialize(self, context: Dict[str, Any]) -> bool:
@@ -44,7 +51,7 @@ class WebhookNotificationPlugin(NotificationPluginInterface):
             plugin_id="webhook_notification_plugin",
             is_success=success,
             metrics=[{"metric": "alerts_dispatched", "value": 1}],
-            raw_evidence={"status": "SENT"}
+            raw_evidence={"status": "SENT"},
         )
 
     def send_alert(self, title: str, message: str, level: str = "INFO") -> bool:
@@ -59,5 +66,5 @@ class WebhookNotificationPlugin(NotificationPluginInterface):
             plugin_id="webhook_notification_plugin",
             state=PluginHealthState.HEALTHY,
             total_executions=1,
-            successful_executions=1
+            successful_executions=1,
         )

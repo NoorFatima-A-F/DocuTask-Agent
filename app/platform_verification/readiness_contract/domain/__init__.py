@@ -1,6 +1,7 @@
 """
 Domain Package for Readiness Contract Verification.
 """
+
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessState,
     TrafficAction,

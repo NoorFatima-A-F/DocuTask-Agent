@@ -46,7 +46,7 @@ class DatabasePerformanceVerifier(IDatabasePerformanceVerifier):
             CheckResult(
                 name="Connection Pool Headroom & Sizing (< 80% Utilization)",
                 passed=active_conns / max_conns < 0.8,
-                details=f"Connection pool held at {active_conns}/{max_conns} ({active_conns/max_conns*100:.1f}%) during peak concurrency",
+                details=f"Connection pool held at {active_conns}/{max_conns} ({active_conns / max_conns * 100:.1f}%) during peak concurrency",
                 metrics={"active_conns": active_conns, "max_conns": max_conns},
             ),
             CheckResult(

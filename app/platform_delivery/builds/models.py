@@ -1,4 +1,5 @@
 """Declarative Build Definitions and Structured Test Evidence Models."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -8,6 +9,7 @@ import uuid
 
 class PipelineStageType(str, Enum):
     """Supported pipeline execution stages (Req 16 & 17)."""
+
     LINT = "LINT"
     TYPECHECK = "TYPECHECK"
     UNIT_TEST = "UNIT_TEST"
@@ -26,6 +28,7 @@ class PipelineStageType(str, Enum):
 @dataclass
 class TestEvidence:
     """Structured, verifiable test execution evidence (Req 18)."""
+
     test_run_id: str = field(default_factory=lambda: f"test-{uuid.uuid4().hex[:8]}")
     suite: str = "core-test-suite"
     tests_collected: int = 0
@@ -64,6 +67,7 @@ class TestEvidence:
 @dataclass
 class BuildStageResult:
     """Outcome of a single build pipeline stage."""
+
     stage_type: PipelineStageType
     passed: bool
     duration_ms: float
@@ -75,6 +79,7 @@ class BuildStageResult:
 @dataclass
 class BuildResult:
     """Consolidated build execution record with reproducibility metadata (Req 19)."""
+
     build_id: str
     source_commit: str
     build_tool_version: str

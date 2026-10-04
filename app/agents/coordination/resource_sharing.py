@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class SharedResourceQuota(BaseModel):
     """Resource quotas shared across a team."""
+
     max_total_concurrency: int = Field(default=8, ge=1)
     allocated_concurrency: int = Field(default=0, ge=0)
     token_budget: int = Field(default=50000, ge=0)

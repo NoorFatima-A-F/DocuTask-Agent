@@ -9,6 +9,7 @@ from app.runtime.events.subscriptions import EventSubscription
 logger = logging.getLogger(__name__)
 HandlerFunc = Callable[[RuntimeEvent], Coroutine[Any, Any, None]]
 
+
 class EventDispatcher:
     def __init__(self):
         self._handlers: Dict[str, tuple[EventSubscription, HandlerFunc]] = {}
@@ -34,4 +35,4 @@ class EventDispatcher:
         try:
             await handler(event)
         except Exception as e:
-            logger.error(f'Error in subscriber {sub_id}: {e}')
+            logger.error(f"Error in subscriber {sub_id}: {e}")

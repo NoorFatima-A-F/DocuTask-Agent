@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class SelfHealingAction(BaseModel):
     """Self-healing action record."""
+
     action_type: str  # RESTART_WORKER, PURGE_STALE_LEASE, RECREATE_RESERVATION, REBUILD_STATE
     target_id: str
     is_successful: bool = Field(default=True)
@@ -25,18 +26,12 @@ class SelfHealingEngine:
         for lid in stale_lease_ids:
             actions.append(
                 SelfHealingAction(
-                    action_type="PURGE_STALE_LEASE",
-                    target_id=lid,
-                    is_successful=True,
-                    details={"status": "PURGED"}
+                    action_type="PURGE_STALE_LEASE", target_id=lid, is_successful=True, details={"status": "PURGED"}
                 )
             )
         return actions
 
     def heal_unresponsive_worker(self, worker_id: str) -> SelfHealingAction:
         return SelfHealingAction(
-            action_type="RESTART_WORKER",
-            target_id=worker_id,
-            is_successful=True,
-            details={"status": "RESTARTED"}
+            action_type="RESTART_WORKER", target_id=worker_id, is_successful=True, details={"status": "RESTARTED"}
         )

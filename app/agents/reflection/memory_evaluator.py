@@ -27,7 +27,7 @@ class MemoryEvaluator(IEvaluator):
             name="memory_checkpoint_efficiency",
             dimension=EvaluationDimension.MEMORY_UTILIZATION,
             score=score,
-            evidence=[f"{checkpoint_count} checkpoints recorded during execution."]
+            evidence=[f"{checkpoint_count} checkpoints recorded during execution."],
         )
 
         return DimensionEvaluation(
@@ -36,5 +36,5 @@ class MemoryEvaluator(IEvaluator):
             status=status,
             metrics=[metric],
             findings=[f"Memory footprint clean with {checkpoint_count} checkpoints."],
-            recommendation_hints=[]
+            recommendation_hints=[],
         )

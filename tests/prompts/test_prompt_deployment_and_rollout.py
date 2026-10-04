@@ -54,10 +54,7 @@ def test_prompt_deployment_and_canary_routing():
         canary_traffic_pct=0.20,
     )
 
-    resolved_versions = [
-        rollout_mgr.resolve_version_for_execution("sentiment_agent", "org_test")
-        for _ in range(100)
-    ]
+    resolved_versions = [rollout_mgr.resolve_version_for_execution("sentiment_agent", "org_test") for _ in range(100)]
     assert v1.version_id in resolved_versions
     assert v2.version_id in resolved_versions
 

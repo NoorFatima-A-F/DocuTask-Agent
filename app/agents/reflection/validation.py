@@ -11,6 +11,7 @@ from app.agents.reflection.validators import ReflectionValidator
 
 class ReflectionValidationReport(BaseModel):
     """Validation report summarizing integrity checks on a reflection request."""
+
     is_valid: bool = True
     errors: List[str] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)
@@ -38,8 +39,4 @@ class ReflectionRequestValidator:
         if request.context.max_evaluation_timeout_sec <= 0:
             errors.append("max_evaluation_timeout_sec must be greater than zero.")
 
-        return ReflectionValidationReport(
-            is_valid=len(errors) == 0,
-            errors=errors,
-            warnings=warnings
-        )
+        return ReflectionValidationReport(is_valid=len(errors) == 0, errors=errors, warnings=warnings)

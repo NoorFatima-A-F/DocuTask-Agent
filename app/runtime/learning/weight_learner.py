@@ -29,8 +29,12 @@ class AdaptiveWeightLearner:
     ) -> WeightProposal:
         """Calculates regret gradient and suggests normalized weight adjustments."""
         avg_acc_error = sum(1.0 - o.get("accuracy", 0.95) for o in observed_outcomes) / (len(observed_outcomes) or 1)
-        avg_lat_excess = sum(max(0.0, o.get("latency_ms", 1000) - 1200) / 1200.0 for o in observed_outcomes) / (len(observed_outcomes) or 1)
-        avg_cost_excess = sum(max(0.0, o.get("cost_usd", 0.01) - 0.02) / 0.02 for o in observed_outcomes) / (len(observed_outcomes) or 1)
+        avg_lat_excess = sum(max(0.0, o.get("latency_ms", 1000) - 1200) / 1200.0 for o in observed_outcomes) / (
+            len(observed_outcomes) or 1
+        )
+        avg_cost_excess = sum(max(0.0, o.get("cost_usd", 0.01) - 0.02) / 0.02 for o in observed_outcomes) / (
+            len(observed_outcomes) or 1
+        )
 
         new_weights = dict(current_weights)
 
@@ -49,10 +53,11 @@ class AdaptiveWeightLearner:
         norm_weights = {k: round(v / total, 4) for k, v in new_weights.items()}
 
         import uuid
+
         proposal_id = f"wt_prop_{uuid.uuid4().hex[:8]}"
 
         rationale = (
-            f"Observed average accuracy error of {avg_acc_error*100:.1f}% and latency excess of {avg_lat_excess*100:.1f}%. "
+            f"Observed average accuracy error of {avg_acc_error * 100:.1f}% and latency excess of {avg_lat_excess * 100:.1f}%. "
             f"Proposing rebalancing accuracy ({current_weights.get('accuracy', 0.35):.2f} -> {norm_weights.get('accuracy', 0.35):.2f}) "
             f"and latency ({current_weights.get('latency', 0.20):.2f} -> {norm_weights.get('latency', 0.20):.2f})."
         )

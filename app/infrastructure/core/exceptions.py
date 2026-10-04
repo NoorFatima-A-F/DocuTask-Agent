@@ -6,7 +6,9 @@ from typing import Any, Dict, Optional
 class InfrastructureError(Exception):
     """Base exception for all infrastructure runtime errors."""
 
-    def __init__(self, message: str, code: str = "INFRASTRUCTURE_ERROR", details: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(
+        self, message: str, code: str = "INFRASTRUCTURE_ERROR", details: Optional[Dict[str, Any]] = None
+    ) -> None:
         super().__init__(message)
         self.message = message
         self.code = code
@@ -30,7 +32,9 @@ class ProviderTimeoutError(InfrastructureError):
 class ConfigurationInvalidError(InfrastructureError):
     """Raised when declarative infrastructure configuration fails validation."""
 
-    def __init__(self, message: str = "Invalid infrastructure configuration", details: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(
+        self, message: str = "Invalid infrastructure configuration", details: Optional[Dict[str, Any]] = None
+    ) -> None:
         super().__init__(message, code="INVALID_CONFIGURATION", details=details)
 
 
@@ -44,5 +48,7 @@ class ServiceHealthError(InfrastructureError):
 class InvalidStateTransitionError(InfrastructureError):
     """Raised when an invalid lifecycle state transition is attempted."""
 
-    def __init__(self, message: str = "Invalid lifecycle state transition", details: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(
+        self, message: str = "Invalid lifecycle state transition", details: Optional[Dict[str, Any]] = None
+    ) -> None:
         super().__init__(message, code="INVALID_STATE_TRANSITION", details=details)

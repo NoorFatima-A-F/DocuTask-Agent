@@ -21,6 +21,7 @@ class IdempotentConsumer:
 
     def wrap(self, handler: Callable[[CloudEventEnvelope], Any]) -> Callable[[CloudEventEnvelope], Any]:
         """Decorator for making event handlers idempotent."""
+
         @wraps(handler)
         async def async_wrapper(event: CloudEventEnvelope) -> Any:
             if self.is_processed(event.id):
@@ -38,6 +39,7 @@ class IdempotentConsumer:
             return result
 
         import asyncio
+
         if asyncio.iscoroutinefunction(handler):
             return async_wrapper
         return sync_wrapper

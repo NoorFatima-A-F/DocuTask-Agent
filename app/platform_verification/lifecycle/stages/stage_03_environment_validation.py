@@ -2,9 +2,11 @@
 Stage 3: Environment Validation.
 Validates target environment readiness, dependency health, secrets, and observability pipeline.
 """
+
 from app.platform_verification.lifecycle.stages.base_stage import BaseLifecycleStage
 from app.platform_verification.lifecycle.context import VerificationExecutionContext, StageResult
 from app.platform_verification.lifecycle.states import LifecycleState
+
 
 class EnvironmentValidationStage(BaseLifecycleStage):
     @property
@@ -30,14 +32,11 @@ class EnvironmentValidationStage(BaseLifecycleStage):
             "gcs_cas_ready": True,
             "observability_ready": True,
             "cpu_utilization_pct": 22.4,
-            "memory_available_mb": 16384
+            "memory_available_mb": 16384,
         }
         context.environment_snapshot = env_snapshot
         return StageResult(
-            stage_number=self.stage_number,
-            stage_name=self.stage_name,
-            status="PASSED",
-            produced_artifacts=env_snapshot
+            stage_number=self.stage_number, stage_name=self.stage_name, status="PASSED", produced_artifacts=env_snapshot
         )
 
     def validate_exit_criteria(self, context: VerificationExecutionContext, result: StageResult) -> bool:

@@ -64,12 +64,16 @@ class TelemetryEngine:
             self.collector.end_span(
                 span_id=s1.span_id,
                 status=SpanStatus.OK,
-                token_usage={"prompt_tokens": tokens_prompt, "completion_tokens": tokens_comp, "total_tokens": tokens_prompt + tokens_comp},
+                token_usage={
+                    "prompt_tokens": tokens_prompt,
+                    "completion_tokens": tokens_comp,
+                    "total_tokens": tokens_prompt + tokens_comp,
+                },
                 cost_usd=cost,
             )
 
             # Tool Span
-            is_err = (i == 17)
+            is_err = i == 17
             s2 = self.collector.start_span(
                 trace_id=trace.trace_id,
                 name="External API Tool Call",
@@ -116,7 +120,11 @@ class TelemetryEngine:
         self.collector.end_span(
             span_id=span.span_id,
             status=SpanStatus.OK if success else SpanStatus.ERROR,
-            token_usage={"prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens, "total_tokens": prompt_tokens + completion_tokens},
+            token_usage={
+                "prompt_tokens": prompt_tokens,
+                "completion_tokens": completion_tokens,
+                "total_tokens": prompt_tokens + completion_tokens,
+            },
             cost_usd=cost_usd,
             error_message=error_msg,
         )

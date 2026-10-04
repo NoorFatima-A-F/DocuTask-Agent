@@ -1,6 +1,7 @@
 """
 Domain models for Part 3B: Enterprise Service Communication & Distributed System Verification Framework.
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List

@@ -54,7 +54,6 @@ class AIMetricsCollectorVerifier(IAIMetricsCollectorVerifier):
             unit="count",
             collected_successfully=True,
         ),
-
         # 2. Performance Metrics
         AIMetricDefinition(
             metric_name="ai_request_latency_ms",
@@ -86,7 +85,6 @@ class AIMetricsCollectorVerifier(IAIMetricsCollectorVerifier):
             unit="milliseconds",
             collected_successfully=True,
         ),
-
         # 3. Reliability Metrics
         AIMetricDefinition(
             metric_name="ai_error_rate",
@@ -128,7 +126,6 @@ class AIMetricsCollectorVerifier(IAIMetricsCollectorVerifier):
             unit="count",
             collected_successfully=True,
         ),
-
         # 4. Quality Metrics
         AIMetricDefinition(
             metric_name="ai_schema_failure_rate",
@@ -170,7 +167,6 @@ class AIMetricsCollectorVerifier(IAIMetricsCollectorVerifier):
             unit="score",
             collected_successfully=True,
         ),
-
         # 5. Cost Metrics
         AIMetricDefinition(
             metric_name="ai_token_input",

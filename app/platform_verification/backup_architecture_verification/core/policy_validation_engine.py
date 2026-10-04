@@ -4,6 +4,7 @@ Verifies enterprise backup policies, syntax, encryption enforcement,
 retention requirements, restore testing schedules, and notification hooks.
 Detects conflicting, duplicate, or invalid policies.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     PolicyValidationResult,
@@ -100,7 +101,9 @@ class PolicyValidationEngine(IPolicyValidationEngine):
 
             # Check required fields
             sched_valid = bool(pol.get("schedule") and pol.get("frequency_cron"))
-            dest_valid = bool(pol.get("destination") and ("://" in pol.get("destination", "") or "s3" in pol.get("destination", "")))
+            dest_valid = bool(
+                pol.get("destination") and ("://" in pol.get("destination", "") or "s3" in pol.get("destination", ""))
+            )
             enc_valid = bool(pol.get("encryption") and "AES-256" in pol.get("encryption", ""))
             ret_valid = bool(pol.get("retention"))
             val_valid = bool(pol.get("validation"))
@@ -158,9 +161,7 @@ class PolicyValidationEngine(IPolicyValidationEngine):
 
         return results
 
-    def export_policy_validation_json(
-        self, results: List[PolicyValidationResult]
-    ) -> Dict[str, Any]:
+    def export_policy_validation_json(self, results: List[PolicyValidationResult]) -> Dict[str, Any]:
         """Formats the policy validation report to JSON dictionary."""
         passed_count = len([r for r in results if r.is_valid])
         return {

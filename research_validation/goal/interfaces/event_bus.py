@@ -14,6 +14,7 @@ from typing import Any, Callable, Dict, List, TypeVar
 @dataclass(frozen=True)
 class GoalIntelligenceDomainEvent:
     """Base immutable domain event for goal and mission lifecycle changes."""
+
     event_id: str
     event_type: str
     aggregate_id: str

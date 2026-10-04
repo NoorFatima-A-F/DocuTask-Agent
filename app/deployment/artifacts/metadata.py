@@ -1,4 +1,5 @@
 """Artifact Metadata & Provenance Data Model."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -9,6 +10,7 @@ import hmac
 @dataclass
 class ArtifactMetadata:
     """Provenance, cryptographic signature, and SBOM metadata for build artifacts."""
+
     artifact_id: str
     name: str
     version: str
@@ -17,7 +19,9 @@ class ArtifactMetadata:
     signature: Optional[str] = None
     signed_by: Optional[str] = None
     sbom_components: List[Dict[str, str]] = field(default_factory=list)
-    vulnerability_scan: Dict[str, Any] = field(default_factory=lambda: {"critical": 0, "high": 0, "medium": 0, "passed": True})
+    vulnerability_scan: Dict[str, Any] = field(
+        default_factory=lambda: {"critical": 0, "high": 0, "medium": 0, "passed": True}
+    )
     license_info: str = "Apache-2.0"
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     created_by: str = "ci-pipeline"

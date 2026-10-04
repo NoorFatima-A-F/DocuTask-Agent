@@ -1,6 +1,7 @@
 """
 Analyzers module for Backup Certification Framework.
 """
+
 from app.platform_verification.backup_certification.analyzers.completeness_analyzer import (
     CompletenessAnalyzer,
 )

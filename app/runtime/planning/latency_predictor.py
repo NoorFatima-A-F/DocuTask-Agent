@@ -13,6 +13,7 @@ from app.runtime.planning.strategy_generator import CandidateStrategy
 
 class LatencyPredictionResult(BaseModel):
     """Rigorous latency breakdown with critical path and quantile distribution."""
+
     strategy_id: str
     critical_path_ms: float
     total_sequential_ms: float
@@ -60,7 +61,7 @@ class LatencyPredictionEngine:
         # Concurrency pipelining speedup factor
         parallel_slots = max(1, min(concurrency_limit, strategy.concurrency_level))
         pipeline_efficiency = 0.85
-        pipelined_p50 = max(max_step_ms, (total_sequential / (parallel_slots ** 0.5)) * pipeline_efficiency)
+        pipelined_p50 = max(max_step_ms, (total_sequential / (parallel_slots**0.5)) * pipeline_efficiency)
 
         crit_path = round(pipelined_p50, 2)
         p90_total = round(crit_path * 1.3, 2)

@@ -20,6 +20,7 @@ logger = logging.getLogger("infrastructure.observability.diagnostics.root_cause"
 
 class RCAEvidence(BaseModel):
     """Correlated evidence piece supporting the root cause finding."""
+
     evidence_type: str  # TRACE_SPAN, ERROR_LOG, METRIC_ANOMALY
     source: str
     description: str
@@ -28,6 +29,7 @@ class RCAEvidence(BaseModel):
 
 class RCAReport(BaseModel):
     """Structured Root Cause Analysis conclusion."""
+
     report_id: str
     incident_title: str
     root_cause_service: str
@@ -66,12 +68,14 @@ class RootCauseAnalyzer:
             deepest_failed = failed_spans[-1]
             root_service = deepest_failed.service_name
             root_summary = f"Operation '{deepest_failed.operation_name}' in service '{root_service}' failed: {deepest_failed.status_message or 'Error status'}"
-            evidence.append(RCAEvidence(
-                evidence_type="TRACE_SPAN",
-                source=f"{deepest_failed.service_name}:{deepest_failed.operation_name}",
-                description="Deepest failed span in distributed trace tree",
-                details={"span_id": deepest_failed.span_id, "error": deepest_failed.status_message},
-            ))
+            evidence.append(
+                RCAEvidence(
+                    evidence_type="TRACE_SPAN",
+                    source=f"{deepest_failed.service_name}:{deepest_failed.operation_name}",
+                    description="Deepest failed span in distributed trace tree",
+                    details={"span_id": deepest_failed.span_id, "error": deepest_failed.status_message},
+                )
+            )
 
         # 2. Inspect error logs
         error_logs = [l for l in logs_list if l.level.value in ("ERROR", "CRITICAL", "FATAL")]
@@ -81,12 +85,14 @@ class RootCauseAnalyzer:
                 root_service = primary_log.service_name
                 root_summary = f"Exception in '{primary_log.service_name}': {primary_log.message}"
 
-            evidence.append(RCAEvidence(
-                evidence_type="ERROR_LOG",
-                source=primary_log.service_name,
-                description=f"High severity log ({primary_log.level.value}): {primary_log.message}",
-                details={"log_id": primary_log.log_id, "exception": primary_log.exception},
-            ))
+            evidence.append(
+                RCAEvidence(
+                    evidence_type="ERROR_LOG",
+                    source=primary_log.service_name,
+                    description=f"High severity log ({primary_log.level.value}): {primary_log.message}",
+                    details={"log_id": primary_log.log_id, "exception": primary_log.exception},
+                )
+            )
 
         if "timeout" in root_summary.lower() or "connection" in root_summary.lower():
             mitigation = "Check network connectivity, downstream dependency health, and retry configuration."

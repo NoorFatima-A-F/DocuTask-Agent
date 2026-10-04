@@ -9,18 +9,21 @@ from app.agents.runtime.runtime_context import RuntimeContext
 from app.agents.runtime.context_store import InMemoryContextStore
 
 
-@pytest.mark.parametrize("tenant_id,workspace_id,attributes", [
-    ("tenant-1", "ws-1", {"key": "val"}),
-    ("tenant-2", "ws-2", {"nested": {"a": [1, 2, 3]}}),
-    ("tenant-3", "ws-3", {"float": 3.14159, "flag": True}),
-    ("tenant-4", "ws-4", {"empty_dict": {}, "empty_list": []}),
-    ("tenant-enterprise", "ws-finance", {"doc_type": "invoice", "vendor": "Acme"}),
-    ("tenant-gov", "ws-security", {"classification": "top-secret", "tokens": 1000}),
-    ("tenant-health", "ws-hipaa", {"phi_scrubbed": True}),
-    ("tenant-retail", "ws-pos", {"store_id": 9928, "register": 4}),
-    ("tenant-logistics", "ws-fleet", {"truck_id": "T-800", "coordinates": (40.71, -74.00)}),
-    ("tenant-telecom", "ws-network", {"latency_ms": 12.5, "bandwidth_mbps": 1000}),
-])
+@pytest.mark.parametrize(
+    "tenant_id,workspace_id,attributes",
+    [
+        ("tenant-1", "ws-1", {"key": "val"}),
+        ("tenant-2", "ws-2", {"nested": {"a": [1, 2, 3]}}),
+        ("tenant-3", "ws-3", {"float": 3.14159, "flag": True}),
+        ("tenant-4", "ws-4", {"empty_dict": {}, "empty_list": []}),
+        ("tenant-enterprise", "ws-finance", {"doc_type": "invoice", "vendor": "Acme"}),
+        ("tenant-gov", "ws-security", {"classification": "top-secret", "tokens": 1000}),
+        ("tenant-health", "ws-hipaa", {"phi_scrubbed": True}),
+        ("tenant-retail", "ws-pos", {"store_id": 9928, "register": 4}),
+        ("tenant-logistics", "ws-fleet", {"truck_id": "T-800", "coordinates": (40.71, -74.00)}),
+        ("tenant-telecom", "ws-network", {"latency_ms": 12.5, "bandwidth_mbps": 1000}),
+    ],
+)
 @pytest.mark.asyncio
 async def test_context_store_parametrized_persistence(tenant_id, workspace_id, attributes):
     store = InMemoryContextStore()
@@ -97,10 +100,7 @@ async def test_context_store_concurrent_readers(concurrency_workers):
 @pytest.mark.asyncio
 async def test_context_store_batch_creation_and_deletion(batch_size):
     store = InMemoryContextStore()
-    contexts = [
-        RuntimeContext(tenant_id=f"t-{i}", workspace_id=f"ws-{i}")
-        for i in range(batch_size)
-    ]
+    contexts = [RuntimeContext(tenant_id=f"t-{i}", workspace_id=f"ws-{i}") for i in range(batch_size)]
 
     for c in contexts:
         await store.save_context(c)

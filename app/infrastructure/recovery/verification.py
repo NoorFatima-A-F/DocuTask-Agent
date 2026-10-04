@@ -19,6 +19,7 @@ logger = logging.getLogger("infrastructure.recovery.verification")
 
 class VerificationStatus(str, enum.Enum):
     """Integrity verification status."""
+
     VALID = "VALID"
     CORRUPTED = "CORRUPTED"
     INCOMPLETE = "INCOMPLETE"
@@ -27,6 +28,7 @@ class VerificationStatus(str, enum.Enum):
 
 class EntityVerificationResult(BaseModel):
     """Result of post-recovery verification."""
+
     entity_id: str
     status: VerificationStatus
     checksum_match: bool
@@ -56,7 +58,7 @@ class RecoveryVerifier:
         serialized = json.dumps(restored_data, sort_keys=True, default=str)
         actual_hash = hashlib.sha256(serialized.encode("utf-8")).hexdigest()
 
-        checksum_match = (actual_hash == expected_hash)
+        checksum_match = actual_hash == expected_hash
         checks_passed: List[str] = []
         errors: List[str] = []
 

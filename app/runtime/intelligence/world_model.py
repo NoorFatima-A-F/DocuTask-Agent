@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class WorldStateForecast(BaseModel):
     """Predictive snapshot of cluster and execution state at a future time horizon."""
+
     horizon_minutes: int
     predicted_gpu_load_pct: float
     predicted_token_burn_velocity: float = Field(description="Tokens consumed per second")
@@ -52,7 +53,9 @@ class WorldModel:
         for h in horizons:
             # Non-linear growth and decay models
             time_decay = math.exp(-0.02 * h)
-            load_factor = current_mission_load_factor * (1.0 + 0.05 * (cluster_concurrency / max(1, self.active_workers)))
+            load_factor = current_mission_load_factor * (
+                1.0 + 0.05 * (cluster_concurrency / max(1, self.active_workers))
+            )
 
             # GPU load: dampens toward baseline
             gpu_load = min(98.0, max(5.0, (self.base_gpu_load_pct * load_factor) + (10.0 * (1.0 - time_decay))))
@@ -61,7 +64,7 @@ class WorldModel:
             arrival_rate = 1.2 * load_factor
             service_rate = 1.5
             utilization = min(0.95, arrival_rate / service_rate)
-            queue_est = int(max(0, math.ceil((utilization ** 2) / (1.0 - utilization))))
+            queue_est = int(max(0, math.ceil((utilization**2) / (1.0 - utilization))))
 
             # Token burn & cost
             token_velocity = self.base_token_rate * load_factor

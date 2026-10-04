@@ -1,8 +1,11 @@
 """
 Comprehensive Test Suite for Part 2G: Enterprise Test Architecture Verification Framework.
 """
+
 import pytest
-from app.platform_verification.test_architecture_verification.runtime.test_verification_runtime import TestVerificationRuntime
+from app.platform_verification.test_architecture_verification.runtime.test_verification_runtime import (
+    TestVerificationRuntime,
+)
 from app.platform_verification.test_architecture_verification.domain.models import (
     TestCertificationTier,
 )
@@ -133,7 +136,10 @@ def test_end_to_end_test_architecture_verification_and_api(test_runtime):
     """Verifies full execution pipeline, evidence package sealing, and in-process REST API."""
     package = test_runtime.run_full_verification(commit_sha="commit-abc-987")
     assert package.scorecard.composite_score >= 85.0
-    assert package.scorecard.tier in [TestCertificationTier.ENTERPRISE_TEST_READY, TestCertificationTier.PRODUCTION_READY]
+    assert package.scorecard.tier in [
+        TestCertificationTier.ENTERPRISE_TEST_READY,
+        TestCertificationTier.PRODUCTION_READY,
+    ]
     assert package.package_sha256 != ""
 
     api = test_runtime.api

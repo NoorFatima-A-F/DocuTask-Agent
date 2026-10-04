@@ -105,7 +105,9 @@ class FrameworkValidationSuite:
         certified = passed_count == total_count
 
         if certified:
-            verdict = f"Framework self-validation passed 100% ({passed_count}/{total_count} reference workloads verified)."
+            verdict = (
+                f"Framework self-validation passed 100% ({passed_count}/{total_count} reference workloads verified)."
+            )
         else:
             verdict = f"Self-validation warning: {total_count - passed_count} workloads exceeded theoretical tolerance."
 
@@ -135,7 +137,11 @@ class FrameworkValidationSuite:
         expected_growth = 1.0  # O(1) scaling
         rel_error = abs(growth - expected_growth) * 100.0
 
-        verdict = ComplexityVerificationVerdict.VERIFIED_THEORETICAL_MATCH if rel_error <= 50.0 else ComplexityVerificationVerdict.ACCEPTABLE_SCALING
+        verdict = (
+            ComplexityVerificationVerdict.VERIFIED_THEORETICAL_MATCH
+            if rel_error <= 50.0
+            else ComplexityVerificationVerdict.ACCEPTABLE_SCALING
+        )
 
         return ReferenceAlgorithmTest(
             algorithm_name="HashLookup_O1",
@@ -161,7 +167,11 @@ class FrameworkValidationSuite:
         expected_growth = 10.0  # 10x bytes -> 10x time
         rel_error = (abs(growth - expected_growth) / expected_growth) * 100.0
 
-        verdict = ComplexityVerificationVerdict.VERIFIED_THEORETICAL_MATCH if rel_error <= cls.MAX_ALLOWED_ERROR_PCT else ComplexityVerificationVerdict.ACCEPTABLE_SCALING
+        verdict = (
+            ComplexityVerificationVerdict.VERIFIED_THEORETICAL_MATCH
+            if rel_error <= cls.MAX_ALLOWED_ERROR_PCT
+            else ComplexityVerificationVerdict.ACCEPTABLE_SCALING
+        )
 
         return ReferenceAlgorithmTest(
             algorithm_name="SHA256_ON",
@@ -187,7 +197,11 @@ class FrameworkValidationSuite:
         expected_growth = 10.0
         rel_error = (abs(growth - expected_growth) / expected_growth) * 100.0
 
-        verdict = ComplexityVerificationVerdict.VERIFIED_THEORETICAL_MATCH if rel_error <= cls.MAX_ALLOWED_ERROR_PCT else ComplexityVerificationVerdict.ACCEPTABLE_SCALING
+        verdict = (
+            ComplexityVerificationVerdict.VERIFIED_THEORETICAL_MATCH
+            if rel_error <= cls.MAX_ALLOWED_ERROR_PCT
+            else ComplexityVerificationVerdict.ACCEPTABLE_SCALING
+        )
 
         return ReferenceAlgorithmTest(
             algorithm_name="JSONSerialization_ON",
@@ -207,6 +221,7 @@ class FrameworkValidationSuite:
         n2 = 2000
         # Deterministic pseudo-random sequence
         import random
+
         rng1 = random.Random(42)
         arr1 = [rng1.random() for _ in range(n1)]
         rng2 = random.Random(42)
@@ -220,7 +235,11 @@ class FrameworkValidationSuite:
         expected_growth = (n2 * math.log2(n2)) / (n1 * math.log2(n1))
         rel_error = (abs(growth - expected_growth) / expected_growth) * 100.0
 
-        verdict = ComplexityVerificationVerdict.VERIFIED_THEORETICAL_MATCH if rel_error <= cls.MAX_ALLOWED_ERROR_PCT else ComplexityVerificationVerdict.ACCEPTABLE_SCALING
+        verdict = (
+            ComplexityVerificationVerdict.VERIFIED_THEORETICAL_MATCH
+            if rel_error <= cls.MAX_ALLOWED_ERROR_PCT
+            else ComplexityVerificationVerdict.ACCEPTABLE_SCALING
+        )
 
         return ReferenceAlgorithmTest(
             algorithm_name="Timsort_ONlogN",

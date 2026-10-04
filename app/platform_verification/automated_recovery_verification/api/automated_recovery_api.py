@@ -1,6 +1,7 @@
 """
 Phase 3H.12: FastAPI Router for Enterprise Automated Recovery & Self-Healing Verification
 """
+
 from fastapi import APIRouter
 from typing import Dict, Any
 from ..runtime.automated_recovery_runtime import AutomatedRecoveryRuntime
@@ -86,5 +87,5 @@ def get_health() -> Dict[str, Any]:
         "status": "HEALTHY",
         "subsystem": "automated_recovery_verification",
         "engine": "DocuTask Self-Healing Engine",
-        "phase": "3H.12"
+        "phase": "3H.12",
     }

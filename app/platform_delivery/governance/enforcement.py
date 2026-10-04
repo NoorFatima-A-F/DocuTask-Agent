@@ -1,4 +1,5 @@
 """Governance Gate Enforcement Engine (Req 51, 52)."""
+
 from typing import Optional, Tuple
 from .policies import ReleaseFreezeManager
 from .risk import RiskLevel
@@ -26,6 +27,9 @@ class DeploymentGovernanceEnforcer:
         # 2. Critical/High risk in production requires explicit multi-party sign-off
         if environment.lower() == "production":
             if risk_level in {RiskLevel.HIGH, RiskLevel.CRITICAL} and not approved_by:
-                return False, f"Production deployment of {risk_level.value} risk change requires explicit executive sign-off"
+                return (
+                    False,
+                    f"Production deployment of {risk_level.value} risk change requires explicit executive sign-off",
+                )
 
         return True, "Governance policy check passed"

@@ -35,7 +35,7 @@ class TokenEvaluator(IEvaluator):
             dimension=EvaluationDimension.TOKEN_UTILIZATION,
             score=score,
             evidence=[f"{total} tokens consumed ({prompt} prompt / {completion} completion)"],
-            details={"prompt_tokens": prompt, "completion_tokens": completion, "total_tokens": total}
+            details={"prompt_tokens": prompt, "completion_tokens": completion, "total_tokens": total},
         )
 
         return DimensionEvaluation(
@@ -44,5 +44,5 @@ class TokenEvaluator(IEvaluator):
             status=status,
             metrics=[metric],
             findings=[f"Total token footprint: {total} ({status})."],
-            recommendation_hints=["Trim conversational history or inject summary contexts."] if score < 0.7 else []
+            recommendation_hints=["Trim conversational history or inject summary contexts."] if score < 0.7 else [],
         )

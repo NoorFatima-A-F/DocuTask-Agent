@@ -15,6 +15,7 @@ from app.runtime.knowledge.policy_library import PlanningPolicy, PolicyLibrary
 
 class DistillationReport(BaseModel):
     """Report summarizing the knowledge distillation lifecycle."""
+
     distillation_id: str = Field(default_factory=lambda: f"dist_{uuid.uuid4().hex[:8]}")
     traces_analyzed: int
     mined_heuristics_count: int

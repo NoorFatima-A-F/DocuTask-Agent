@@ -53,7 +53,15 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
         head_agent="Chief Executive Agent",
         role_description="Enterprise mission intake, strategic prioritization, cross-department conflict resolution and governance alignment.",
         parent_department_id=None,
-        sub_departments=["dept_ocr", "dept_extraction", "dept_validation", "dept_memory", "dept_research", "dept_governance", "dept_qa"],
+        sub_departments=[
+            "dept_ocr",
+            "dept_extraction",
+            "dept_validation",
+            "dept_memory",
+            "dept_research",
+            "dept_governance",
+            "dept_qa",
+        ],
         active_workers=2,
         concurrency_limit=8,
         queue_depth=1,
@@ -73,7 +81,7 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
             "Mission intake and portfolio arbitration",
             "Organization-wide resource budgeting",
             "Executive sign-off and strategic alignment",
-            "Emergency escalation handling"
+            "Emergency escalation handling",
         ],
         owned_resources=["Executive Decision Authority", "Strategic Budget Pool", "Root Escalation Bus"],
     ),
@@ -103,7 +111,7 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
             "Multi-format document ingestion (PDF, TIFF, JPEG)",
             "Resolution enhancement and contrast normalization",
             "LayoutLM bounding box tokenization",
-            "Specialized OCR routing (Tesseract, Cloud Vision, LayoutLM)"
+            "Specialized OCR routing (Tesseract, Cloud Vision, LayoutLM)",
         ],
         owned_resources=["GPU Ingestion Cluster", "OCR Model Pool", "Bilateral Filter Cache"],
     ),
@@ -133,7 +141,7 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
             "Key-value entity resolution",
             "Nested line-item table parsing",
             "Multi-modal prompt synthesis",
-            "Pareto model selection (Flash vs Pro)"
+            "Pareto model selection (Flash vs Pro)",
         ],
         owned_resources=["Gemini LLM Quota", "Context Window Optimizer", "Extraction Prompt Library"],
     ),
@@ -163,7 +171,7 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
             "Arithmetic balance validation (Subtotal + Tax == Total)",
             "Cross-document entity consistency checks",
             "Zero-Fabrication bounding-box anchor validation",
-            "Confidence interval verification"
+            "Confidence interval verification",
         ],
         owned_resources=["Invariant Solver Engine", "Zero-Fabrication Sentinel", "Z3 SMT Theorem Prover"],
     ),
@@ -193,7 +201,7 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
             "Vector embedding storage and similarity indexing",
             "Vendor layout memory lookup",
             "Episodic mission context retrieval",
-            "Knowledge graph updates and deduplication"
+            "Knowledge graph updates and deduplication",
         ],
         owned_resources=["Vector Memory Store", "Vendor Historical Graph", "Fast HNSW Index"],
     ),
@@ -223,7 +231,7 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
             "Counterfactual replay simulations",
             "Causal effect estimation (Do-calculus)",
             "Dynamic policy synthesis and benchmarking",
-            "Prompt refinement hypotheses generation"
+            "Prompt refinement hypotheses generation",
         ],
         owned_resources=["Digital Twin Simulation Engine", "Causal Discovery Graph", "Policy Evolution Arena"],
     ),
@@ -253,7 +261,7 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
             "Dual-key cryptographic sign-off",
             "Data residency and privacy compliance",
             "Audit trail provenance signing (ED25519)",
-            "Policy exception authorization"
+            "Policy exception authorization",
         ],
         owned_resources=["ED25519 Signing HSM", "Compliance Rule Matrix", "Enterprise Audit Vault"],
     ),
@@ -283,7 +291,7 @@ CANONICAL_DEPARTMENTS: Dict[str, Department] = {
             "Regression and invariant test suite execution",
             "Confidence calibration & ECE verification",
             "Data distribution drift detection",
-            "Corpus-wide benchmark scoring"
+            "Corpus-wide benchmark scoring",
         ],
         owned_resources=["Benchmark Corpus Runner", "Drift Detection Engine", "Calibration Curve Evaluator"],
     ),

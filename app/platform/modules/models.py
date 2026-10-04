@@ -12,6 +12,7 @@ from ..kernel.versioning import SemanticVersion
 
 class ModuleState(str, Enum):
     """9-state formal lifecycle of a platform module."""
+
     DISCOVERED = "DISCOVERED"
     VALIDATED = "VALIDATED"
     REGISTERED = "REGISTERED"
@@ -26,6 +27,7 @@ class ModuleState(str, Enum):
 @dataclass
 class ModuleRecord:
     """Runtime tracking record for a managed module."""
+
     name: str
     version: SemanticVersion
     metadata: ModuleMetadata

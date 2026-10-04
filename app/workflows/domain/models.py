@@ -13,6 +13,7 @@ from ...platform.kernel.versioning import SemanticVersion
 
 class WorkflowLifecycleState(str, Enum):
     """15 formal lifecycle states of a workflow definition."""
+
     CREATED = "CREATED"
     VALIDATING = "VALIDATING"
     VALIDATED = "VALIDATED"
@@ -32,6 +33,7 @@ class WorkflowLifecycleState(str, Enum):
 
 class ExecutionState(str, Enum):
     """Execution lifecycle of a specific workflow instance."""
+
     CREATED = "CREATED"
     READY = "READY"
     RUNNING = "RUNNING"
@@ -47,6 +49,7 @@ class ExecutionState(str, Enum):
 
 class TaskType(str, Enum):
     """17 generic platform task types."""
+
     SYSTEM = "SYSTEM"
     AI = "AI"
     CONNECTOR = "CONNECTOR"
@@ -77,6 +80,7 @@ class TaskPriority(str, Enum):
 @dataclass
 class TaskDefinition:
     """Declarative task specification within a workflow."""
+
     id: str
     name: str
     type: TaskType = TaskType.SYSTEM
@@ -112,6 +116,7 @@ class TaskDefinition:
 @dataclass
 class WorkflowDefinition:
     """Declarative definition of an enterprise workflow."""
+
     id: str
     name: str
     version: SemanticVersion = field(default_factory=lambda: SemanticVersion(1, 0, 0))
@@ -161,6 +166,7 @@ class WorkflowDefinition:
 @dataclass
 class WorkflowContext:
     """Execution context and boundary envelope for a running workflow."""
+
     execution_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     workflow_id: str = ""
     workflow_version: str = "1.0.0"
@@ -196,6 +202,7 @@ class WorkflowContext:
 @dataclass
 class TaskExecutionRecord:
     """Runtime execution record of a single task."""
+
     task_id: str
     task_name: str
     status: ExecutionState = ExecutionState.READY
@@ -227,6 +234,7 @@ class TaskExecutionRecord:
 @dataclass
 class Checkpoint:
     """Immutable checkpoint of a running workflow for crash recovery."""
+
     checkpoint_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     execution_id: str = ""
     execution_state: ExecutionState = ExecutionState.RUNNING
@@ -250,6 +258,7 @@ class Checkpoint:
 @dataclass
 class ExecutionRecord:
     """Durable state record of a workflow execution instance."""
+
     execution_id: str
     workflow_id: str
     workflow_version: str

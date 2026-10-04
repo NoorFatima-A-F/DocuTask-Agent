@@ -68,7 +68,9 @@ class ImprovementEngine:
         self._proposals[proposal.proposal_id] = proposal
         return proposal
 
-    def approve_proposal(self, proposal_id: str, approved_by: str = "Enterprise Administrator") -> Optional[ImprovementProposal]:
+    def approve_proposal(
+        self, proposal_id: str, approved_by: str = "Enterprise Administrator"
+    ) -> Optional[ImprovementProposal]:
         prop = self._proposals.get(proposal_id)
         if not prop:
             return None

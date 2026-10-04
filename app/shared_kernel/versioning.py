@@ -2,6 +2,7 @@
 Semantic Versioning and Version Models.
 Standardizes version management across artifacts, schemas, configurations, datasets, and plugins.
 """
+
 from dataclasses import dataclass
 from typing import Optional, Tuple
 import re
@@ -12,9 +13,11 @@ SEMVER_REGEX = re.compile(
     r"(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$"
 )
 
+
 @dataclass(frozen=True)
 class SemanticVersion:
     """Immutable Semantic Versioning (SemVer 2.0.0) implementation."""
+
     major: int
     minor: int
     patch: int
@@ -43,7 +46,7 @@ class SemanticVersion:
             minor=int(groups["minor"]),
             patch=int(groups["patch"]),
             prerelease=groups.get("prerelease"),
-            build=groups.get("buildmetadata")
+            build=groups.get("buildmetadata"),
         )
 
     def _sort_key(self) -> Tuple[int, int, int, int, str]:
@@ -70,7 +73,12 @@ class SemanticVersion:
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, SemanticVersion):
             return False
-        return (self.major, self.minor, self.patch, self.prerelease) == (other.major, other.minor, other.patch, other.prerelease)
+        return (self.major, self.minor, self.patch, self.prerelease) == (
+            other.major,
+            other.minor,
+            other.patch,
+            other.prerelease,
+        )
 
     def is_compatible_with(self, other: "SemanticVersion") -> bool:
         """Major version breaking rule."""
@@ -87,34 +95,42 @@ class SemanticVersion:
     def bump_major(self) -> "SemanticVersion":
         return SemanticVersion(self.major + 1, 0, 0)
 
+
 @dataclass(frozen=True)
 class VersionModel:
     semver: SemanticVersion
     label: Optional[str] = None
 
+
 @dataclass(frozen=True)
 class SchemaVersion(VersionModel):
     pass
+
 
 @dataclass(frozen=True)
 class ArtifactVersion(VersionModel):
     pass
 
+
 @dataclass(frozen=True)
 class ModelVersion(VersionModel):
     pass
+
 
 @dataclass(frozen=True)
 class ConfigurationVersion(VersionModel):
     pass
 
+
 @dataclass(frozen=True)
 class DatasetVersion(VersionModel):
     pass
 
+
 @dataclass(frozen=True)
 class PluginVersion(VersionModel):
     pass
+
 
 @dataclass(frozen=True)
 class EnvironmentVersion(VersionModel):

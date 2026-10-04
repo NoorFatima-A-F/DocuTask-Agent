@@ -24,9 +24,7 @@ def test_planner_monte_carlo_simulator():
 def test_execution_predictor():
     """Verifies prediction vs actual comparison and accuracy score calculation."""
     dag = ExecutionGraphBuilder.build_financial_invoice_audit_dag(mission_id="m-pred")
-    comp = ExecutionPredictor.compare_prediction_vs_actual(
-        dag=dag, actual_runtime_ms=750.0, actual_cost_usd=0.0028
-    )
+    comp = ExecutionPredictor.compare_prediction_vs_actual(dag=dag, actual_runtime_ms=750.0, actual_cost_usd=0.0028)
 
     assert comp.predicted_runtime_ms > 0
     assert 0.0 <= comp.accuracy_score <= 1.0
@@ -36,7 +34,7 @@ def test_completion_estimator():
     """Verifies progress percentage and remaining ETA calculation."""
     dag = ExecutionGraphBuilder.build_financial_invoice_audit_dag(mission_id="m-eta")
     completed = {"node_ocr_01", "node_extract_items"}
-    
+
     eta_info = CompletionEstimator.estimate_remaining(dag, completed)
     assert eta_info["progress_pct"] == 40.0
     assert eta_info["remaining_ms"] > 0

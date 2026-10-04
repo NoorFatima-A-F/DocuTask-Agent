@@ -25,10 +25,38 @@ class EventBusVerifier(IEventBusVerifier):
 
     def verify(self) -> EventBusReport:
         metrics = [
-            EventBusMetric(topic_name="docutask.document.ingested", messages_dispatched=5000, duplicate_count=0, retry_success_pct=100.0, dlq_forwarded_count=0, ordering_guaranteed=True),
-            EventBusMetric(topic_name="docutask.ocr.completed", messages_dispatched=5000, duplicate_count=0, retry_success_pct=100.0, dlq_forwarded_count=0, ordering_guaranteed=True),
-            EventBusMetric(topic_name="docutask.agent.delegation", messages_dispatched=2500, duplicate_count=0, retry_success_pct=100.0, dlq_forwarded_count=0, ordering_guaranteed=True),
-            EventBusMetric(topic_name="docutask.workflow.state_change", messages_dispatched=12000, duplicate_count=0, retry_success_pct=100.0, dlq_forwarded_count=0, ordering_guaranteed=True),
+            EventBusMetric(
+                topic_name="docutask.document.ingested",
+                messages_dispatched=5000,
+                duplicate_count=0,
+                retry_success_pct=100.0,
+                dlq_forwarded_count=0,
+                ordering_guaranteed=True,
+            ),
+            EventBusMetric(
+                topic_name="docutask.ocr.completed",
+                messages_dispatched=5000,
+                duplicate_count=0,
+                retry_success_pct=100.0,
+                dlq_forwarded_count=0,
+                ordering_guaranteed=True,
+            ),
+            EventBusMetric(
+                topic_name="docutask.agent.delegation",
+                messages_dispatched=2500,
+                duplicate_count=0,
+                retry_success_pct=100.0,
+                dlq_forwarded_count=0,
+                ordering_guaranteed=True,
+            ),
+            EventBusMetric(
+                topic_name="docutask.workflow.state_change",
+                messages_dispatched=12000,
+                duplicate_count=0,
+                retry_success_pct=100.0,
+                dlq_forwarded_count=0,
+                ordering_guaranteed=True,
+            ),
         ]
 
         checks = [

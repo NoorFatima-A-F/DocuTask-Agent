@@ -2,6 +2,7 @@
 Part 1: Backup Architecture Discovery Engine.
 Inventories all recoverable platform assets across DocuTask Agent.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     AssetCategory,

@@ -19,6 +19,7 @@ logger = logging.getLogger("infrastructure.observability.logs.retention")
 
 class LogRetentionPolicy(BaseModel):
     """Retention rule configuration per tenant or environment."""
+
     policy_id: str
     tenant_id: str = "global"
     hot_retention_days: int = Field(default=7, ge=1)

@@ -43,6 +43,7 @@ from ..telemetry.flow_logs import NetworkFlowLogger, NetworkSecurityEventType
 @dataclass
 class NetworkCallResult:
     """Outcome of a secure network call through the Network SDK."""
+
     success: bool
     status_code: int
     data: Optional[Any] = None
@@ -112,16 +113,18 @@ class NetworkSDK:
 
     def _init_defaults(self) -> None:
         """Initialize default allow policies for system namespace."""
-        self.zero_trust_engine.add_rule(ZeroTrustRule(
-            rule_id="default-allow-internal",
-            name="Allow Internal DocuTask Services",
-            action=ZeroTrustAction.ALLOW,
-            source_spiffe_pattern=f"spiffe://{self.trust_domain}/*",
-            target_spiffe_pattern=f"spiffe://{self.trust_domain}/*",
-            allowed_methods=["*"],
-            allowed_paths=["/*"],
-            priority=1000,
-        ))
+        self.zero_trust_engine.add_rule(
+            ZeroTrustRule(
+                rule_id="default-allow-internal",
+                name="Allow Internal DocuTask Services",
+                action=ZeroTrustAction.ALLOW,
+                source_spiffe_pattern=f"spiffe://{self.trust_domain}/*",
+                target_spiffe_pattern=f"spiffe://{self.trust_domain}/*",
+                allowed_methods=["*"],
+                allowed_paths=["/*"],
+                priority=1000,
+            )
+        )
 
     # --- Service Discovery API ---
     def register_service(
@@ -167,11 +170,13 @@ class NetworkSDK:
             if ep not in existing_route.endpoints:
                 existing_route.endpoints.append(ep)
         else:
-            self.control_plane_registry.register_route(RouteRule(
-                rule_id=f"rule-{service_name}",
-                service_name=service_name,
-                endpoints=[ep],
-            ))
+            self.control_plane_registry.register_route(
+                RouteRule(
+                    rule_id=f"rule-{service_name}",
+                    service_name=service_name,
+                    endpoints=[ep],
+                )
+            )
 
         self.flow_logger.emit_security_event(
             event_type=NetworkSecurityEventType.SERVICE_REGISTERED,
@@ -274,7 +279,9 @@ class NetworkSDK:
         # 3. Simulated mTLS Handshake Validation
         caller_cert = self.ca_manager.issue_workload_certificate(caller_service, namespace=ns)
         server_cert = self.ca_manager.issue_workload_certificate(target_service, namespace=self.default_namespace)
-        mtls_res = self.mtls_engine.validate_connection(caller_cert, server_cert, expected_destination_spiffe=target_spiffe)
+        mtls_res = self.mtls_engine.validate_connection(
+            caller_cert, server_cert, expected_destination_spiffe=target_spiffe
+        )
         if not mtls_res.is_valid:
             self.telemetry_collector.record_tls_failure()
             self.flow_logger.emit_security_event(

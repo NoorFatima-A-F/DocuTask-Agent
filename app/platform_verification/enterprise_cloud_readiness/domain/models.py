@@ -16,10 +16,10 @@ class VerificationStatus(str, Enum):
 
 
 class CloudReadinessTier(str, Enum):
-    CLOUD_NATIVE_READY = "Cloud Native Ready"        # 95-100%
-    CLOUD_PRODUCTION_READY = "Cloud Production Ready" # 90-94.99%
-    MIGRATION_REQUIRED = "Migration Required"        # 80-89.99%
-    NOT_READY = "Not Ready"                          # <80%
+    CLOUD_NATIVE_READY = "Cloud Native Ready"  # 95-100%
+    CLOUD_PRODUCTION_READY = "Cloud Production Ready"  # 90-94.99%
+    MIGRATION_REQUIRED = "Migration Required"  # 80-89.99%
+    NOT_READY = "Not Ready"  # <80%
 
 
 class CheckResult(BaseModel):
@@ -43,6 +43,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3M.1: Cloud Architecture Assessment ─────────────────────────────────────
 
+
 class CloudLayerAssessment(BaseModel):
     layer_name: str
     current_state: str
@@ -60,6 +61,7 @@ class CloudArchitectureAssessmentReport(BaseVerificationReport):
 
 
 # ─── 3M.2: Container Cloud Compatibility ─────────────────────────────────────
+
 
 class TargetCloudRuntimeSpec(BaseModel):
     cloud_provider: str
@@ -80,6 +82,7 @@ class ContainerCloudCompatibilityReport(BaseVerificationReport):
 
 
 # ─── 3M.3: Cloud Compute Resource Allocation ─────────────────────────────────
+
 
 class ResourceAllocationSpec(BaseModel):
     service_name: str
@@ -102,6 +105,7 @@ class CloudComputeResourceReport(BaseVerificationReport):
 
 # ─── 3M.4: Cloud Networking & Boundary Security ──────────────────────────────
 
+
 class NetworkSegmentRule(BaseModel):
     segment_name: str
     access_type: str
@@ -120,6 +124,7 @@ class CloudNetworkingReport(BaseVerificationReport):
 
 
 # ─── 3M.5: Cloud Storage Compatibility ───────────────────────────────────────
+
 
 class StorageBackendCompatibility(BaseModel):
     provider_name: str
@@ -141,6 +146,7 @@ class CloudStorageReport(BaseVerificationReport):
 
 # ─── 3M.6: Managed Database Readiness ────────────────────────────────────────
 
+
 class ManagedDBTarget(BaseModel):
     platform: str
     service: str
@@ -160,6 +166,7 @@ class ManagedDatabaseReport(BaseVerificationReport):
 
 
 # ─── 3M.7: Cloud Queue & Worker Scalability ──────────────────────────────────
+
 
 class QueueScalingProfile(BaseModel):
     workload_size_docs: int
@@ -181,6 +188,7 @@ class CloudQueueWorkerReport(BaseVerificationReport):
 
 # ─── 3M.8: Auto Scaling Readiness ────────────────────────────────────────────
 
+
 class AutoScalingDimension(BaseModel):
     tier_name: str
     min_instances: int
@@ -200,6 +208,7 @@ class AutoScalingReport(BaseVerificationReport):
 
 
 # ─── 3M.9: Cloud Secret Management ───────────────────────────────────────────
+
 
 class SecretVaultTarget(BaseModel):
     vault_name: str
@@ -221,6 +230,7 @@ class CloudSecretReport(BaseVerificationReport):
 
 # ─── 3M.10: Cloud Observability Compatibility ────────────────────────────────
 
+
 class CloudObservabilitySink(BaseModel):
     platform: str
     telemetry_service: str
@@ -241,6 +251,7 @@ class CloudObservabilityReport(BaseVerificationReport):
 
 # ─── 3M.11: Infrastructure as Code Verification ──────────────────────────────
 
+
 class IaCModuleSpec(BaseModel):
     module_name: str
     tool: str
@@ -259,6 +270,7 @@ class IaCVerificationReport(BaseVerificationReport):
 
 
 # ─── 3M.12: Kubernetes Readiness Verification ────────────────────────────────
+
 
 class K8sResourceValidation(BaseModel):
     kind: str
@@ -281,6 +293,7 @@ class KubernetesReadinessReport(BaseVerificationReport):
 
 # ─── 3M.13: Cloud Security Verification ──────────────────────────────────────
 
+
 class SecurityPillarValidation(BaseModel):
     pillar_name: str
     control: str
@@ -298,6 +311,7 @@ class CloudSecurityReport(BaseVerificationReport):
 
 
 # ─── 3M.14: Multi-Cloud Portability Verification ─────────────────────────────
+
 
 class MultiCloudParityBenchmark(BaseModel):
     cloud_provider: str
@@ -318,6 +332,7 @@ class MultiCloudPortabilityReport(BaseVerificationReport):
 
 # ─── 3M.15: Cloud Migration Simulation ───────────────────────────────────────
 
+
 class MigrationStepExecution(BaseModel):
     step_sequence: int
     step_name: str
@@ -336,6 +351,7 @@ class CloudMigrationSimulationReport(BaseVerificationReport):
 
 
 # ─── Scoring, Certification & Manifest Models ────────────────────────────────
+
 
 class CategoryScore(BaseModel):
     name: str

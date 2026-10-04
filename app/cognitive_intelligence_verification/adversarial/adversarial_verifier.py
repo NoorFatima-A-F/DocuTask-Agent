@@ -67,6 +67,7 @@ class AdversarialVerifier:
         t0 = time.perf_counter()
         # Contradiction: Doc A says Total=$1,000; Doc B says Total=$2,000 for same invoice ID
         conflict = {"doc_a_total": 1000, "doc_b_total": 2000}
+
         def resolve(c):
             if c["doc_a_total"] != c["doc_b_total"]:
                 return "FLAG_CONTRADICTION"

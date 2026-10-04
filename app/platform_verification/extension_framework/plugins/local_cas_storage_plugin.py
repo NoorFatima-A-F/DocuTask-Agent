@@ -1,12 +1,19 @@
 """
 Reference Storage Provider Plugin: Local CAS Storage Provider.
 """
+
 import hashlib
 from typing import Any, Dict, List, Optional, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import StorageProviderPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
-    PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,
-    PluginHealthMetrics, PluginHealthState, PluginPermission, SecurityClassification
+    PluginMetadata,
+    PluginCategory,
+    PluginExecutionContext,
+    PluginExecutionResult,
+    PluginHealthMetrics,
+    PluginHealthState,
+    PluginPermission,
+    SecurityClassification,
 )
 
 
@@ -26,7 +33,7 @@ class LocalCASStoragePlugin(StorageProviderPluginInterface):
             description="Provides SHA-256 CAS persistence for evidence artifacts",
             capabilities=["cas_blob_storage", "integrity_verification"],
             granted_permissions=[PluginPermission.ACCESS_STORAGE, PluginPermission.WRITE_EVIDENCE],
-            security_classification=SecurityClassification.ENTERPRISE_CERTIFIED
+            security_classification=SecurityClassification.ENTERPRISE_CERTIFIED,
         )
 
     def initialize(self, context: Dict[str, Any]) -> bool:
@@ -45,7 +52,7 @@ class LocalCASStoragePlugin(StorageProviderPluginInterface):
             plugin_id="local_cas_storage_plugin",
             is_success=True,
             metrics=[{"metric": "bytes_stored", "value": len(b"test_payload_evidence")}],
-            raw_evidence={"storage_uri": uri}
+            raw_evidence={"storage_uri": uri},
         )
 
     def put_artifact(self, key: str, data: bytes) -> str:
@@ -65,5 +72,5 @@ class LocalCASStoragePlugin(StorageProviderPluginInterface):
             plugin_id="local_cas_storage_plugin",
             state=PluginHealthState.HEALTHY,
             total_executions=1,
-            successful_executions=1
+            successful_executions=1,
         )

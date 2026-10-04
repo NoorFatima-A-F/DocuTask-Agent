@@ -1,6 +1,7 @@
 """
 Chaos Incident Simulator & MTTD / MTTR Tracker.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.observability_verification.domain.models import IncidentResponseReport
 from app.platform_verification.observability_verification.domain.interfaces import IIncidentRecoverySimulator

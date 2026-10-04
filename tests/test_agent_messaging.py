@@ -57,7 +57,9 @@ async def test_command_bus_dispatch():
 
     class ProcessInvoiceCommandHandler(CommandHandler):
         async def handle_command(self, command: AgentCommand) -> CommandResult:
-            return CommandResult(command_id=str(command.metadata.message_id), success=True, result_data={"status": "PROCESSED"})
+            return CommandResult(
+                command_id=str(command.metadata.message_id), success=True, result_data={"status": "PROCESSED"}
+            )
 
     await bus.registry.register_command_handler("ProcessInvoice", ProcessInvoiceCommandHandler())
 

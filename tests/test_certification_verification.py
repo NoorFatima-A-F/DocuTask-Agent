@@ -102,9 +102,7 @@ class TestPortfolioAndReporting:
         gov = AIGovernanceEvaluator.evaluate_governance()
         docs = []
 
-        report = FinalReportGenerator.generate_report_markdown(
-            phases, maturity, readiness, graph, risks, gov, docs
-        )
+        report = FinalReportGenerator.generate_report_markdown(phases, maturity, readiness, graph, risks, gov, docs)
         assert "# Master Enterprise AI Platform Verification" in report
         assert "Enterprise AI Maturity Model" in report
         assert "Enterprise AI Risk Register" in report

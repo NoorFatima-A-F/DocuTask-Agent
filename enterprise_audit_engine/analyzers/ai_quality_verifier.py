@@ -47,16 +47,38 @@ class AIQualityVerifier:
 
                                 if "prompt" in lower_content or "system_message" in lower_content:
                                     has_prompt_templates = True
-                                if "fallback" in lower_content or "except" in lower_content and ("openai" in lower_content or "gemini" in lower_content or "llm" in lower_content):
+                                if (
+                                    "fallback" in lower_content
+                                    or "except" in lower_content
+                                    and (
+                                        "openai" in lower_content or "gemini" in lower_content or "llm" in lower_content
+                                    )
+                                ):
                                     has_fallback_handling = True
                                 if "token" in lower_content or "usage" in lower_content:
                                     has_token_tracking = True
-                                if "response_format" in lower_content or "pydantic" in lower_content or "schema" in lower_content:
+                                if (
+                                    "response_format" in lower_content
+                                    or "pydantic" in lower_content
+                                    or "schema" in lower_content
+                                ):
                                     has_structured_output = True
-                                if "retry" in lower_content or "tenacity" in lower_content or "backoff" in lower_content:
+                                if (
+                                    "retry" in lower_content
+                                    or "tenacity" in lower_content
+                                    or "backoff" in lower_content
+                                ):
                                     has_retry_logic = True
 
-                                for model_name in ["gpt-4", "gpt-3.5", "gemini-1.5", "gemini-2.0", "claude-3", "tesseract", "easyocr"]:
+                                for model_name in [
+                                    "gpt-4",
+                                    "gpt-3.5",
+                                    "gemini-1.5",
+                                    "gemini-2.0",
+                                    "claude-3",
+                                    "tesseract",
+                                    "easyocr",
+                                ]:
                                     if model_name in lower_content and model_name not in detected_models:
                                         detected_models.append(model_name)
                         except Exception:

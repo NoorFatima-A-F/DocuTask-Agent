@@ -2,6 +2,7 @@
 Phase 3I.6.7: Reliability Trend Analysis Verifier
 Verifies long-term performance shifts, memory growth patterns, model accuracy drift, and queue latency trends.
 """
+
 from typing import List
 from ..domain.interfaces import IReliabilityTrendVerifier
 from ..domain.models import TrendIndicatorSpec, ReliabilityTrendReport

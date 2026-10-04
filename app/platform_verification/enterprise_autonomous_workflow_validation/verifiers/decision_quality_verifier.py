@@ -25,11 +25,41 @@ class DecisionQualityVerifier(IDecisionQualityVerifier):
 
     def verify(self) -> DecisionQualityReport:
         metrics = [
-            DecisionQualityMetric(decision_type="InvoiceLineItemApproval", confidence_score=0.99, evidence_backed=True, policy_compliant=True, stability_verified=True),
-            DecisionQualityMetric(decision_type="ContractRiskClassification", confidence_score=0.98, evidence_backed=True, policy_compliant=True, stability_verified=True),
-            DecisionQualityMetric(decision_type="MedicalClaimApproval", confidence_score=0.99, evidence_backed=True, policy_compliant=True, stability_verified=True),
-            DecisionQualityMetric(decision_type="ResumeCandidateShortlisting", confidence_score=0.97, evidence_backed=True, policy_compliant=True, stability_verified=True),
-            DecisionQualityMetric(decision_type="FraudDetectionEscalation", confidence_score=0.99, evidence_backed=True, policy_compliant=True, stability_verified=True),
+            DecisionQualityMetric(
+                decision_type="InvoiceLineItemApproval",
+                confidence_score=0.99,
+                evidence_backed=True,
+                policy_compliant=True,
+                stability_verified=True,
+            ),
+            DecisionQualityMetric(
+                decision_type="ContractRiskClassification",
+                confidence_score=0.98,
+                evidence_backed=True,
+                policy_compliant=True,
+                stability_verified=True,
+            ),
+            DecisionQualityMetric(
+                decision_type="MedicalClaimApproval",
+                confidence_score=0.99,
+                evidence_backed=True,
+                policy_compliant=True,
+                stability_verified=True,
+            ),
+            DecisionQualityMetric(
+                decision_type="ResumeCandidateShortlisting",
+                confidence_score=0.97,
+                evidence_backed=True,
+                policy_compliant=True,
+                stability_verified=True,
+            ),
+            DecisionQualityMetric(
+                decision_type="FraudDetectionEscalation",
+                confidence_score=0.99,
+                evidence_backed=True,
+                policy_compliant=True,
+                stability_verified=True,
+            ),
         ]
 
         checks = [

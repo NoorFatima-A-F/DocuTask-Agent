@@ -15,6 +15,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class SuccessMemoryEntry:
     """Historical record of an exemplary, high-performing scientific run."""
+
     success_id: str
     experiment_id: str
     optimal_parameters: Dict[str, Any]
@@ -67,7 +68,8 @@ class SuccessMemoryStore:
     def get_pareto_front(self, objective_a: str, objective_b: str) -> List[SuccessMemoryEntry]:
         """Calculates 2D Pareto-optimal configurations from stored successes."""
         candidates = [
-            e for e in self.successes.values()
+            e
+            for e in self.successes.values()
             if objective_a in e.verified_metrics and objective_b in e.verified_metrics
         ]
         pareto: List[SuccessMemoryEntry] = []

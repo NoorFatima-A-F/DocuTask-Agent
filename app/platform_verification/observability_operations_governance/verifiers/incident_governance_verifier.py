@@ -2,6 +2,7 @@
 3I.10.8: Incident Governance Verifier
 Verifies End-to-End Incident Lifecycle, MTTR/MTTD Metrics, and Automated Postmortem Generation.
 """
+
 from typing import List
 from app.platform_verification.observability_operations_governance.domain.models import (
     IncidentGovernanceReport,
@@ -48,9 +49,7 @@ class IncidentGovernanceVerifier(IIncidentGovernanceVerifier):
         avg_mttd = sum(i.detection_to_page_secs for i in incidents) / len(incidents) if incidents else 0.0
         avg_mttr = sum(i.resolution_secs for i in incidents) / len(incidents) if incidents else 0.0
         postmortem_cov = (
-            sum(1 for i in incidents if i.automated_postmortem_generated) / len(incidents) * 100.0
-            if incidents
-            else 0.0
+            sum(1 for i in incidents if i.automated_postmortem_generated) / len(incidents) * 100.0 if incidents else 0.0
         )
 
         all_postmortems = all(i.automated_postmortem_generated for i in incidents)

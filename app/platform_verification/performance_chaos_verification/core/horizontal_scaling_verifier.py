@@ -1,6 +1,7 @@
 """
 Horizontal Scaling Verification Engine.
 """
+
 from app.platform_verification.performance_chaos_verification.domain.models import (
     HorizontalScalingReport,
 )

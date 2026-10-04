@@ -1,4 +1,5 @@
 """Unit tests for Feature Flag Platform."""
+
 from app.deployment.flags.evaluation import FlagEvaluationContext, FlagEvaluator
 from app.deployment.flags.manager import FeatureFlagManager
 

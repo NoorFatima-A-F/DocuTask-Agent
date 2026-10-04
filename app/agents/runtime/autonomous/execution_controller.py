@@ -62,7 +62,11 @@ class ExecutionController:
         graph.set_state(task.task_id, NodeState.RUNNING)
         start_time = time.perf_counter()
         agent_id = task.assigned_agent or "DefaultExtractorAgent"
-        role = AgentRole.EXTRACTOR if any(k in task.action.lower() for k in ["extract", "ocr", "ingest", "read"]) else AgentRole.VALIDATOR
+        role = (
+            AgentRole.EXTRACTOR
+            if any(k in task.action.lower() for k in ["extract", "ocr", "ingest", "read"])
+            else AgentRole.VALIDATOR
+        )
 
         # 1. Security Authorization Check
         auth = self.security.verify_action(

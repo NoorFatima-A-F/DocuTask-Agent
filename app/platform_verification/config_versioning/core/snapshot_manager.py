@@ -1,13 +1,17 @@
 """
 Immutable Snapshot Manager with Canonical Hashing and Lineage Sealing.
 """
+
 import hashlib
 import json
 from typing import Any, Dict, Optional
 from app.platform_verification.config_versioning.domain.models import (
-    ConfigurationSnapshot, EnvironmentTier, EnvironmentFingerprint
+    ConfigurationSnapshot,
+    EnvironmentTier,
+    EnvironmentFingerprint,
 )
 from app.platform_verification.config_versioning.core.registry import configuration_registry
+
 
 class SnapshotManager:
     @staticmethod
@@ -17,7 +21,7 @@ class SnapshotManager:
         environment_fingerprint: Optional[EnvironmentFingerprint] = None,
         tenant_id: str = "default-tenant",
         semantic_version: str = "1.0.0",
-        creator: str = "Enterprise Platform Engineer"
+        creator: str = "Enterprise Platform Engineer",
     ) -> ConfigurationSnapshot:
         # Canonical SHA-256 Hashing
         config_bytes = json.dumps(resolved_config, sort_keys=True, default=str).encode("utf-8")
@@ -37,10 +41,11 @@ class SnapshotManager:
             dependency_manifest_hash=dep_hash,
             environment_fingerprint=fp,
             creator=creator,
-            is_frozen=True
+            is_frozen=True,
         )
 
         configuration_registry.store_snapshot(snapshot)
         return snapshot
+
 
 snapshot_manager = SnapshotManager()

@@ -9,6 +9,7 @@ from enum import Enum
 
 class NonFabricationState(str, Enum):
     """Structured sentinel values for unavailable evidence or context."""
+
     UNKNOWN = "UNKNOWN"
     NOT_AVAILABLE = "NOT_AVAILABLE"
     NOT_COLLECTED = "NOT_COLLECTED"

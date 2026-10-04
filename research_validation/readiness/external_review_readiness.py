@@ -41,6 +41,7 @@ class ReadinessVerdict(str, Enum):
 @dataclass
 class ReviewerChecklistItem:
     """An individual item on the external reviewer's audit checklist."""
+
     item_id: str
     criterion: str
     is_fulfilled: bool
@@ -51,6 +52,7 @@ class ReviewerChecklistItem:
 @dataclass
 class OpenIssueItem:
     """An open technical limitation or tracked gap."""
+
     issue_id: str
     title: str
     severity: str  # "LOW", "MEDIUM", "HIGH"
@@ -60,6 +62,7 @@ class OpenIssueItem:
 @dataclass
 class ExternalReviewReadinessDossier:
     """Comprehensive external review readiness submission package."""
+
     target_body: ReviewTargetBody
     dossier_title: str
     verdict: ReadinessVerdict
@@ -97,15 +100,49 @@ class ExternalReviewReadinessPlatform:
         ]
 
         checklist = [
-            ReviewerChecklistItem("ACM-01", "Code and benchmark artifacts installable via standard package manager", True, "pyproject.toml / poetry.lock", "poetry install"),
-            ReviewerChecklistItem("ACM-02", "Automated test suite executes with zero mock dependencies", True, "tests/agents/ / tests/runtime/", "poetry run pytest tests/ -q"),
-            ReviewerChecklistItem("ACM-03", "Exact ULP difference and numerical errors published in tables", True, "research_validation/reference_validation/", "poetry run python -m pytest tests/agents/test_iervp_validation_framework.py"),
-            ReviewerChecklistItem("ACM-04", "Independent reproduction matrix verifies cross-environment concordance", True, "research_validation/replication/reproduction_matrix.py", "poetry run python run_iervp_master_suite.py"),
+            ReviewerChecklistItem(
+                "ACM-01",
+                "Code and benchmark artifacts installable via standard package manager",
+                True,
+                "pyproject.toml / poetry.lock",
+                "poetry install",
+            ),
+            ReviewerChecklistItem(
+                "ACM-02",
+                "Automated test suite executes with zero mock dependencies",
+                True,
+                "tests/agents/ / tests/runtime/",
+                "poetry run pytest tests/ -q",
+            ),
+            ReviewerChecklistItem(
+                "ACM-03",
+                "Exact ULP difference and numerical errors published in tables",
+                True,
+                "research_validation/reference_validation/",
+                "poetry run python -m pytest tests/agents/test_iervp_validation_framework.py",
+            ),
+            ReviewerChecklistItem(
+                "ACM-04",
+                "Independent reproduction matrix verifies cross-environment concordance",
+                True,
+                "research_validation/replication/reproduction_matrix.py",
+                "poetry run python run_iervp_master_suite.py",
+            ),
         ]
 
         open_issues = [
-            OpenIssueItem("ISS-01", "Subnormal float performance penalty on low-power ARM architectures", "LOW", "Flush-to-zero (FTZ) compiler flag configured for embedded builds."),
-            OpenIssueItem("ISS-02", "Rate limits on third-party commercial LLM endpoints during differential testing", "MEDIUM", "Implemented exponential backoff with jitter and local deterministic fallback."),
+            OpenIssueItem(
+                "ISS-01",
+                "Subnormal float performance penalty on low-power ARM architectures",
+                "LOW",
+                "Flush-to-zero (FTZ) compiler flag configured for embedded builds.",
+            ),
+            OpenIssueItem(
+                "ISS-02",
+                "Rate limits on third-party commercial LLM endpoints during differential testing",
+                "MEDIUM",
+                "Implemented exponential backoff with jitter and local deterministic fallback.",
+            ),
         ]
 
         return ExternalReviewReadinessDossier(
@@ -117,7 +154,7 @@ class ExternalReviewReadinessPlatform:
             missing_evidence_items=missing,
             assumptions=[
                 "Artifact evaluation executed on standard x86_64 or ARM64 workstation with Python 3.10+",
-                "Deterministic random seeds guarantee bit-for-bit numerical reproducibility"
+                "Deterministic random seeds guarantee bit-for-bit numerical reproducibility",
             ],
             limitations=[
                 "External commercial LLM differential testing requires API credentials; deterministic parser test suite executes entirely offline"
@@ -131,9 +168,9 @@ class ExternalReviewReadinessPlatform:
             ),
             risk_register_summary={
                 "Residual Technical Risk": "LOW - All core mathematical and execution invariants verified.",
-                "External Dependency Risk": "LOW - Offline hermetic fallback available for all modules."
+                "External Dependency Risk": "LOW - Offline hermetic fallback available for all modules.",
             },
-            open_issues=open_issues
+            open_issues=open_issues,
         )
 
     @classmethod
@@ -149,8 +186,20 @@ class ExternalReviewReadinessPlatform:
         missing: List[str] = []
 
         checklist = [
-            ReviewerChecklistItem("MLC-01", "Public benchmark F1, CER, WER, and ANLS published with citations", True, "research_validation/datasets/public_benchmark_suite_v2.py", "poetry run pytest tests/agents/test_iervp_validation_framework.py -k benchmark"),
-            ReviewerChecklistItem("MLC-02", "P99 and P50 latency measured with high-precision clocks", True, "research_validation/telemetry/production_telemetry_v2.py", "poetry run pytest tests/agents/test_iervp_validation_framework.py -k telemetry"),
+            ReviewerChecklistItem(
+                "MLC-01",
+                "Public benchmark F1, CER, WER, and ANLS published with citations",
+                True,
+                "research_validation/datasets/public_benchmark_suite_v2.py",
+                "poetry run pytest tests/agents/test_iervp_validation_framework.py -k benchmark",
+            ),
+            ReviewerChecklistItem(
+                "MLC-02",
+                "P99 and P50 latency measured with high-precision clocks",
+                True,
+                "research_validation/telemetry/production_telemetry_v2.py",
+                "poetry run pytest tests/agents/test_iervp_validation_framework.py -k telemetry",
+            ),
         ]
 
         return ExternalReviewReadinessDossier(
@@ -164,14 +213,13 @@ class ExternalReviewReadinessPlatform:
             limitations=["Token cost estimates based on published public API pricing as of 2026."],
             reviewer_checklist=checklist,
             reproduction_instructions="poetry run python run_iervp_master_suite.py",
-            risk_register_summary={"Benchmark Divergence Risk": "LOW - Ground truth validated against official challenge test sets."},
-            open_issues=[]
+            risk_register_summary={
+                "Benchmark Divergence Risk": "LOW - Ground truth validated against official challenge test sets."
+            },
+            open_issues=[],
         )
 
     @classmethod
     def generate_all_readiness_dossiers(cls) -> List[ExternalReviewReadinessDossier]:
         """Generate complete suite of peer review readiness dossiers."""
-        return [
-            cls.generate_acm_readiness_dossier(),
-            cls.generate_mlcommons_readiness_dossier()
-        ]
+        return [cls.generate_acm_readiness_dossier(), cls.generate_mlcommons_readiness_dossier()]

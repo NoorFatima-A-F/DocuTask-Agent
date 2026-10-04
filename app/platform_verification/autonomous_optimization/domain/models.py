@@ -1,6 +1,7 @@
 """
 Phase 3H.10: Autonomous Operational Intelligence & Self-Optimization — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Any
 from pydantic import BaseModel, Field
@@ -31,14 +32,15 @@ class OptimizationActionType(str, Enum):
 
 
 class AutonomousCertificationTier(str, Enum):
-    AUTONOMOUS_OPERATIONS_CERTIFIED = "Autonomous Operations Certified"   # 98 - 100
-    ADVANCED_AUTONOMOUS_READY = "Advanced Autonomous Ready"               # 95 - 97.99
-    SUPERVISED_OPERATIONS_ONLY = "Supervised Operations Only"             # 90 - 94.99
-    NEEDS_REFINEMENT = "Needs Refinement"                                 # 80 - 89.99
-    FAILED = "Failed"                                                     # < 80
+    AUTONOMOUS_OPERATIONS_CERTIFIED = "Autonomous Operations Certified"  # 98 - 100
+    ADVANCED_AUTONOMOUS_READY = "Advanced Autonomous Ready"  # 95 - 97.99
+    SUPERVISED_OPERATIONS_ONLY = "Supervised Operations Only"  # 90 - 94.99
+    NEEDS_REFINEMENT = "Needs Refinement"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3H.10.1: Operational Knowledge Graph Models ───────────────────────────
+
 
 class GraphNode(BaseModel):
     node_id: str
@@ -69,6 +71,7 @@ class OperationalGraphReport(BaseModel):
 
 # ─── 3H.10.2: Cross-Signal Correlation Models ──────────────────────────────
 
+
 class CorrelatedSignalCluster(BaseModel):
     cluster_id: str
     primary_event: str
@@ -89,6 +92,7 @@ class SignalCorrelationReport(BaseModel):
 
 
 # ─── 3H.10.3: Trend Analysis Models ────────────────────────────────────────
+
 
 class MetricTrendTrajectory(BaseModel):
     metric_name: str
@@ -111,6 +115,7 @@ class TrendAnalysisReport(BaseModel):
 
 # ─── 3H.10.4: Predictive Reliability Models ────────────────────────────────
 
+
 class PredictiveRiskForecast(BaseModel):
     forecast_id: str
     target_component: str
@@ -131,6 +136,7 @@ class PredictiveReliabilityReport(BaseModel):
 
 
 # ─── 3H.10.5: Optimization Recommendations Models ──────────────────────────
+
 
 class OptimizationRecommendation(BaseModel):
     recommendation_id: str
@@ -154,6 +160,7 @@ class OptimizationRecommendationsReport(BaseModel):
 
 # ─── 3H.10.6: Autonomous Execution Safety Models ───────────────────────────
 
+
 class SafetyGateVerification(BaseModel):
     action_id: str
     action_type: OptimizationActionType
@@ -176,6 +183,7 @@ class AutonomousExecutionReport(BaseModel):
 
 # ─── 3H.10.7: Explainability Models ────────────────────────────────────────
 
+
 class ExplainabilityTrace(BaseModel):
     trace_id: str
     decision_type: str
@@ -194,6 +202,7 @@ class ExplainabilityReport(BaseModel):
 
 
 # ─── 3H.10.8: Continuous Learning Models ───────────────────────────────────
+
 
 class LearningCycleMetric(BaseModel):
     cycle_id: str
@@ -215,6 +224,7 @@ class LearningEffectivenessReport(BaseModel):
 
 # ─── 3H.10.9: Governance & Compliance Models ───────────────────────────────
 
+
 class GovernanceAuditCheck(BaseModel):
     check_id: str
     governance_domain: str  # AUDIT_LOG_IMMUTABILITY, RBAC_AUTHORIZATION, REGULATORY_COMPLIANCE, DATA_PRIVACY
@@ -234,6 +244,7 @@ class GovernanceReport(BaseModel):
 
 
 # ─── 3H.10.10: 7-Pillar Scoring & Certification Models ─────────────────────
+
 
 class PillarScore(BaseModel):
     pillar_name: str

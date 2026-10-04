@@ -81,10 +81,10 @@ class EventBus:
         """
         self._published_events_count += 1
         queue = self._queues.get(event.priority, self._queues[EventPriority.NORMAL])
-        
+
         # Immediate synchronous subscriber dispatch
         self._dispatch_sync_subscribers(event)
-        
+
         try:
             queue.put_nowait(event)
             return True
@@ -123,9 +123,7 @@ class EventBus:
         if self._is_running:
             return
         self._is_running = True
-        self._dispatch_tasks = [
-            asyncio.create_task(self._worker_loop(), name="event-bus-dispatcher")
-        ]
+        self._dispatch_tasks = [asyncio.create_task(self._worker_loop(), name="event-bus-dispatcher")]
 
     async def stop(self) -> None:
         """Stops background dispatch workers."""
@@ -142,7 +140,7 @@ class EventBus:
         """Dispatches events strictly prioritizing CRITICAL -> HIGH -> NORMAL -> LOW."""
         while self._is_running:
             event: Optional[BaseRuntimeEvent] = None
-            
+
             # Check queues in priority order
             for priority in [
                 EventPriority.CRITICAL,
@@ -177,9 +175,7 @@ class EventBus:
         tasks = [self._safe_invoke_async(cb, event) for cb in callbacks]
         await asyncio.gather(*tasks, return_exceptions=True)
 
-    async def _safe_invoke_async(
-        self, cb: AsyncSubscriber, event: BaseRuntimeEvent
-    ) -> None:
+    async def _safe_invoke_async(self, cb: AsyncSubscriber, event: BaseRuntimeEvent) -> None:
         try:
             await cb(event)
             self._delivered_events_count += 1
@@ -195,9 +191,7 @@ class EventBus:
             "delivered_events_count": self._delivered_events_count,
             "dropped_events_count": self._dropped_events_count,
             "dlq_size": len(self._dlq),
-            "queue_sizes": {
-                p.value: self._queues[p].qsize() for p in EventPriority
-            },
+            "queue_sizes": {p.value: self._queues[p].qsize() for p in EventPriority},
         }
 
     def get_dlq(self) -> List[Tuple[BaseRuntimeEvent, str, str]]:

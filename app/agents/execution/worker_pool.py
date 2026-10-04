@@ -26,9 +26,9 @@ class WorkerPool:
         # Initialize default workers
         for i in range(max_workers):
             worker = Worker(
-                worker_id=f"worker_{i+1}",
+                worker_id=f"worker_{i + 1}",
                 capabilities=["DEFAULT", "OCR", "LLM", "DECISION", "TOOL", "ALL"],
-                status=WorkerStatus.IDLE
+                status=WorkerStatus.IDLE,
             )
             self.registry.register(worker)
 
@@ -41,9 +41,7 @@ class WorkerPool:
                 raise WorkerExhaustionException(f"No worker available to execute node '{node_id}'.")
 
             # Mark busy
-            busy_worker = selected.model_copy(
-                update={"status": WorkerStatus.BUSY, "assigned_node_id": node_id}
-            )
+            busy_worker = selected.model_copy(update={"status": WorkerStatus.BUSY, "assigned_node_id": node_id})
             self.registry.register(busy_worker)
 
             lease_id = f"lease_{uuid4().hex[:8]}"
@@ -56,7 +54,5 @@ class WorkerPool:
             self.lease_manager.release_lease(lease.lease_id)
             worker = self.registry.get(lease.worker_id)
             if worker:
-                idle_worker = worker.model_copy(
-                    update={"status": WorkerStatus.IDLE, "assigned_node_id": None}
-                )
+                idle_worker = worker.model_copy(update={"status": WorkerStatus.IDLE, "assigned_node_id": None})
                 self.registry.register(idle_worker)

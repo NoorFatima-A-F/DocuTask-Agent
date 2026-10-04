@@ -1,6 +1,7 @@
 """
 Metrics Domain: 5 High-Impact Metric Categories (Correctness, Performance, Reliability, AI Quality, Cost).
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 from pydantic import BaseModel, Field
@@ -8,11 +9,11 @@ import uuid
 
 
 class MetricCategory(str, Enum):
-    CORRECTNESS = "CORRECTNESS"    # Accuracy, Precision, Recall, F1, Exact Match
-    PERFORMANCE = "PERFORMANCE"    # Latency, Throughput, P95, P99
-    RELIABILITY = "RELIABILITY"    # Failure Rate, MTBF, MTTR, Resilience
-    AI_QUALITY = "AI_QUALITY"      # Grounding, Faithfulness, Hallucination, Citation Accuracy
-    COST = "COST"                  # Token Usage, Compute Cost, Storage Cost
+    CORRECTNESS = "CORRECTNESS"  # Accuracy, Precision, Recall, F1, Exact Match
+    PERFORMANCE = "PERFORMANCE"  # Latency, Throughput, P95, P99
+    RELIABILITY = "RELIABILITY"  # Failure Rate, MTBF, MTTR, Resilience
+    AI_QUALITY = "AI_QUALITY"  # Grounding, Faithfulness, Hallucination, Citation Accuracy
+    COST = "COST"  # Token Usage, Compute Cost, Storage Cost
 
 
 class MetricDefinition(BaseModel):

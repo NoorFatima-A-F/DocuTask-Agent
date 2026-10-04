@@ -87,7 +87,9 @@ class ResourceRecoveryActuator:
             details={"pool_id": pool_id, "concurrency": new_concurrency},
         )
 
-    def engage_fallback_model(self, current_model: str, fallback_model: str = "gemini-1.5-flash") -> HealingExecutionResult:
+    def engage_fallback_model(
+        self, current_model: str, fallback_model: str = "gemini-1.5-flash"
+    ) -> HealingExecutionResult:
         return HealingExecutionResult(
             action_id=f"act-res-fb-{uuid.uuid4().hex[:8]}",
             target=current_model,

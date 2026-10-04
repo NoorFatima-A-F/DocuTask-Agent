@@ -1,6 +1,7 @@
 """
 Certification Dashboard Engine generating real-time governance overviews.
 """
+
 from __future__ import annotations
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional
@@ -30,13 +31,11 @@ class EnterpriseCertificationDashboardEngine(ICertificationDashboardEngine):
     def build_dashboard_view(self) -> CertificationDashboardView:
         all_certs = getattr(self.cert_engine, "list_certifications", lambda: [])()
         active_certs = [c for c in all_certs if c.status == CertificationStatus.ACTIVE]
-        
+
         # Expiring soon (within 14 days)
         now_dt = datetime.now(timezone.utc)
         threshold_dt = now_dt + timedelta(days=14)
-        expiring_soon = [
-            c for c in active_certs if now_dt <= datetime.fromisoformat(c.expires_at) <= threshold_dt
-        ]
+        expiring_soon = [c for c in active_certs if now_dt <= datetime.fromisoformat(c.expires_at) <= threshold_dt]
 
         # Gate summary counts
         gate_summary = {"passed": 0, "failed": 0, "waived": 0}

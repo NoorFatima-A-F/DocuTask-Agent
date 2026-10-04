@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Audit.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.audit.domain.models import AuditEntity
 from app.platform_verification.modules.audit.domain.interfaces import AuditRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageAuditUseCase:
     def __init__(self, repository: AuditRepositoryInterface):

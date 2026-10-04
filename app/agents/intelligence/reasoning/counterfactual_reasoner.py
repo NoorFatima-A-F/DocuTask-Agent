@@ -146,6 +146,6 @@ class TreeOfThoughtExplorer:
             decision_confidence=winning.utility_score,
             rationale=(
                 f"Selected '{winning.name}' based on superior utility ({winning.utility_score:.3f}) "
-                f"balancing accuracy ({winning.predicted_accuracy*100:.1f}%) and risk ({winning.predicted_risk*100:.1f}%)."
+                f"balancing accuracy ({winning.predicted_accuracy * 100:.1f}%) and risk ({winning.predicted_risk * 100:.1f}%)."
             ),
         )

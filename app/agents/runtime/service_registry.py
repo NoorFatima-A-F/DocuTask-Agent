@@ -51,10 +51,7 @@ class ServiceRegistry(IServiceRegistry):
 
     def list_registered_services(self) -> List[str]:
         """Returns string representation of all registered services."""
-        return [
-            f"{itype.__name__}" + (f" ({name})" if name else "")
-            for (itype, name) in self._registry.keys()
-        ]
+        return [f"{itype.__name__}" + (f" ({name})" if name else "") for (itype, name) in self._registry.keys()]
 
     def count(self) -> int:
         """Returns total number of registered services."""

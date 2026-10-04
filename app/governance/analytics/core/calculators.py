@@ -165,7 +165,9 @@ class PromptMetricsCalculator:
 
         total = len(executions)
         failed = sum(1 for e in executions if not e.is_success)
-        safety_viol = sum(1 for r in risk_events if "prompt" in r.category.lower() or "injection" in str(r.metadata).lower())
+        safety_viol = sum(
+            1 for r in risk_events if "prompt" in r.category.lower() or "injection" in str(r.metadata).lower()
+        )
         prompt_drift = sum(1 for e in executions if e.risk_score > 0.8)
 
         usage = collections.Counter(e.prompt_id for e in executions if e.prompt_id)

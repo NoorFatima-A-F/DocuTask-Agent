@@ -99,7 +99,7 @@ def test_data_plane_inbound_outbound_pipeline():
 
 def test_service_proxy_stats():
     proxy = ServiceProxy(service_name="payment-service")
-    
+
     # Send request
     res = proxy.send(
         target_service="fraud-check",

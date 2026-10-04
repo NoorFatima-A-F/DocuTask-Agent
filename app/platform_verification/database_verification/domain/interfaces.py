@@ -1,6 +1,7 @@
 """
 Abstract interfaces for Part 2F: Enterprise Database Architecture Verification Framework.
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional
 from app.platform_verification.database_verification.domain.models import (
@@ -49,7 +50,9 @@ class ITransactionSafetyEngine(ABC):
 
 class IQueryPerformanceAnalyzer(ABC):
     @abstractmethod
-    def analyze_queries(self, queries: List[Dict[str, Any]], schemas: Dict[str, TableSchemaDefinition]) -> QueryPerformanceReport:
+    def analyze_queries(
+        self, queries: List[Dict[str, Any]], schemas: Dict[str, TableSchemaDefinition]
+    ) -> QueryPerformanceReport:
         """Evaluates query execution plans, missing indexes, and sequential scan hazards."""
         pass
 

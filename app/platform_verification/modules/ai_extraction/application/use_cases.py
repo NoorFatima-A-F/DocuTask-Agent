@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for AiExtraction.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.ai_extraction.domain.models import AiExtractionEntity
 from app.platform_verification.modules.ai_extraction.domain.interfaces import AiExtractionRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageAiExtractionUseCase:
     def __init__(self, repository: AiExtractionRepositoryInterface):

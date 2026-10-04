@@ -52,8 +52,28 @@ class CitationEngine:
             return 0.0
 
         stopwords = {
-            "the", "a", "an", "in", "on", "of", "and", "or", "is", "are", "was",
-            "were", "at", "by", "for", "with", "about", "to", "from", "it", "this", "that"
+            "the",
+            "a",
+            "an",
+            "in",
+            "on",
+            "of",
+            "and",
+            "or",
+            "is",
+            "are",
+            "was",
+            "were",
+            "at",
+            "by",
+            "for",
+            "with",
+            "about",
+            "to",
+            "from",
+            "it",
+            "this",
+            "that",
         }
         gen_words = {w.strip(".,!?;:\"'") for w in generated_text.lower().split()} - stopwords
         if not gen_words:

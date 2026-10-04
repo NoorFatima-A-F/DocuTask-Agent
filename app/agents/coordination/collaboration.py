@@ -12,6 +12,7 @@ from app.agents.coordination.collaboration_session import CollaborationSession
 
 class CollaborationPattern(str, Enum):
     """Architectural patterns for multi-agent collaboration."""
+
     SUPERVISOR_WORKER = "SUPERVISOR_WORKER"
     PEER_TO_PEER = "PEER_TO_PEER"
     SEQUENTIAL_PIPELINE = "SEQUENTIAL_PIPELINE"
@@ -25,12 +26,7 @@ class CollaborationManager:
     def __init__(self):
         self._sessions: Dict[UUID, CollaborationSession] = {}
 
-    def create_session(
-        self,
-        goal: str,
-        initiator_id: UUID,
-        participants: List[UUID]
-    ) -> CollaborationSession:
+    def create_session(self, goal: str, initiator_id: UUID, participants: List[UUID]) -> CollaborationSession:
         """Initializes a new collaboration session."""
         session_id = uuid4()
         context = CollaborationContext(session_id=session_id)
@@ -39,7 +35,7 @@ class CollaborationManager:
             goal=goal,
             initiator_agent_id=initiator_id,
             participating_agent_ids=participants,
-            context=context
+            context=context,
         )
         self._sessions[session_id] = session
         return session

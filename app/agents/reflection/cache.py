@@ -37,10 +37,7 @@ class ReflectionCache:
         elif len(self._cache) >= self._capacity:
             self._cache.popitem(last=False)  # Pop oldest (LRU)
 
-        self._cache[key] = {
-            "value": value,
-            "timestamp": datetime.now(timezone.utc).timestamp()
-        }
+        self._cache[key] = {"value": value, "timestamp": datetime.now(timezone.utc).timestamp()}
 
     def invalidate(self, key: str) -> None:
         """Removes a specific key from the cache."""

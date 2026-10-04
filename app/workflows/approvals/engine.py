@@ -54,7 +54,9 @@ class ApprovalEngine:
             raise WorkflowExecutionException(f"Approval request '{request_id}' not found")
 
         if req.status != ApprovalStatus.PENDING:
-            raise WorkflowExecutionException(f"Approval request '{request_id}' is already finalized with status: {req.status.value}")
+            raise WorkflowExecutionException(
+                f"Approval request '{request_id}' is already finalized with status: {req.status.value}"
+            )
 
         vote = ApprovalVote(approver=approver, decision=decision, comment=comment)
         req.votes.append(vote)

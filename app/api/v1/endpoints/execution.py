@@ -338,9 +338,14 @@ def run_existing_mission(mission_id: str, dry_run: bool = False) -> Dict[str, An
 # Verification & Rollback
 @router.get("/verifications")
 def list_verifications(mission_id: Optional[str] = None) -> Dict[str, Any]:
-    certs = execution_runtime.verification_engine.list_certificates(mission_id) if hasattr(execution_runtime, 'verification_engine') and execution_runtime.verification_engine else []
+    certs = (
+        execution_runtime.verification_engine.list_certificates(mission_id)
+        if hasattr(execution_runtime, "verification_engine") and execution_runtime.verification_engine
+        else []
+    )
     if not certs:
         from app.runtime.execution.verification.verification_engine import verification_engine
+
         certs = verification_engine.list_certificates(mission_id)
     return {"certificates": [c.to_dict() for c in certs], "total": len(certs)}
 

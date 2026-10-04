@@ -11,6 +11,7 @@ from app.agents.domain.workflows import WorkflowGraph
 
 class DomainValidationException(AgentException):
     """Raised when domain validation rules are violated."""
+
     pass
 
 
@@ -34,9 +35,13 @@ class DomainValidator:
         # Check edge endpoints exist in graph nodes
         for edge in graph.edges:
             if edge.source_node_id not in node_ids:
-                raise DomainValidationException(f"Edge source node '{edge.source_node_id}' not found in workflow graph.")
+                raise DomainValidationException(
+                    f"Edge source node '{edge.source_node_id}' not found in workflow graph."
+                )
             if edge.target_node_id not in node_ids:
-                raise DomainValidationException(f"Edge target node '{edge.target_node_id}' not found in workflow graph.")
+                raise DomainValidationException(
+                    f"Edge target node '{edge.target_node_id}' not found in workflow graph."
+                )
 
         # Cycle Detection via Depth-First Search (DFS)
         adjacency: Dict[str, List[str]] = {node_id: [] for node_id in node_ids}
@@ -63,4 +68,6 @@ class DomainValidator:
         for node_id in node_ids:
             if node_id not in visited:
                 if dfs(node_id):
-                    raise DomainValidationException("Circular dependency cycle detected in workflow graph DAG topology.")
+                    raise DomainValidationException(
+                        "Circular dependency cycle detected in workflow graph DAG topology."
+                    )

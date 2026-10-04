@@ -77,11 +77,46 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
 
     agent_registry = AgentRegistry()
     # Register agents into Collaboration Registry
-    agent_registry.register(AgentProfile("agent_ocr_vision", "VISION_EXTRACTION_AGENT", ["ocr"], cost_per_call=0.002, latency_p95_ms=350.0))
-    agent_registry.register(AgentProfile("agent_extraction_nlp", "STRUCTURED_EXTRACTION_AGENT", ["entity_extraction"], cost_per_call=0.0015, latency_p95_ms=200.0))
-    agent_registry.register(AgentProfile("agent_validation_math", "FINANCIAL_VALIDATION_AGENT", ["arithmetic_verification"], cost_per_call=0.0002, latency_p95_ms=50.0))
-    agent_registry.register(AgentProfile("agent_compliance_sox", "COMPLIANCE_AUDIT_AGENT", ["regulatory_audit"], cost_per_call=0.001, latency_p95_ms=150.0))
-    agent_registry.register(AgentProfile("agent_correction_gemini", "CORRECTION_AGENT", ["reflection_repair"], cost_per_call=0.005, latency_p95_ms=400.0, confidence_rating=0.99))
+    agent_registry.register(
+        AgentProfile("agent_ocr_vision", "VISION_EXTRACTION_AGENT", ["ocr"], cost_per_call=0.002, latency_p95_ms=350.0)
+    )
+    agent_registry.register(
+        AgentProfile(
+            "agent_extraction_nlp",
+            "STRUCTURED_EXTRACTION_AGENT",
+            ["entity_extraction"],
+            cost_per_call=0.0015,
+            latency_p95_ms=200.0,
+        )
+    )
+    agent_registry.register(
+        AgentProfile(
+            "agent_validation_math",
+            "FINANCIAL_VALIDATION_AGENT",
+            ["arithmetic_verification"],
+            cost_per_call=0.0002,
+            latency_p95_ms=50.0,
+        )
+    )
+    agent_registry.register(
+        AgentProfile(
+            "agent_compliance_sox",
+            "COMPLIANCE_AUDIT_AGENT",
+            ["regulatory_audit"],
+            cost_per_call=0.001,
+            latency_p95_ms=150.0,
+        )
+    )
+    agent_registry.register(
+        AgentProfile(
+            "agent_correction_gemini",
+            "CORRECTION_AGENT",
+            ["reflection_repair"],
+            cost_per_call=0.005,
+            latency_p95_ms=400.0,
+            confidence_rating=0.99,
+        )
+    )
 
     AgentDiscoveryService(agent_registry)
     agent_negotiator = AgentNegotiator(agent_registry)
@@ -133,7 +168,15 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
         execution_plan.estimated_duration_seconds,
     )
     for idx, t in enumerate(execution_plan.tasks, 1):
-        logger.info("   Task %d: [%s] Action=%s -> Assigned=%s (Tools: %s, Deps: %s)", idx, t.task_id, t.action, t.assigned_agent, t.required_tools, t.dependencies)
+        logger.info(
+            "   Task %d: [%s] Action=%s -> Assigned=%s (Tools: %s, Deps: %s)",
+            idx,
+            t.task_id,
+            t.action,
+            t.assigned_agent,
+            t.required_tools,
+            t.dependencies,
+        )
 
     # ---------------------------------------------------------
     # 4. Multi-Agent Negotiation for Critical Task
@@ -147,7 +190,11 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
         deadline_ms=1000.0,
     )
     awarded_agent = agent_negotiator.evaluate_and_award(neg_session.session_id)
-    logger.info("[Step 3] Negotiation Concluded: Awarded to Agent '%s' with %d bids evaluated.", awarded_agent, len(neg_session.bids))
+    logger.info(
+        "[Step 3] Negotiation Concluded: Awarded to Agent '%s' with %d bids evaluated.",
+        awarded_agent,
+        len(neg_session.bids),
+    )
 
     # ---------------------------------------------------------
     # 5. Live Dynamic Task Graph Creation
@@ -183,16 +230,27 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
             graph.set_state(current_task.task_id, NodeState.RUNNING)
             memory_system.working.set_current_task(current_task.task_id)
 
-            logger.info("Executing Task [%s: %s] via %s...", current_task.task_id, current_task.name, current_task.assigned_agent)
+            logger.info(
+                "Executing Task [%s: %s] via %s...",
+                current_task.task_id,
+                current_task.name,
+                current_task.assigned_agent,
+            )
 
             # A. Tool Reasoning
             modality = Modality.HANDWRITING if current_task.action == "ocr" else Modality.JSON
             tool_selection = tool_selector.select_tool(
-                category="OCR" if current_task.action == "ocr" else "VALIDATION" if "validate" in current_task.task_id else "EXTRACTION",
+                category="OCR"
+                if current_task.action == "ocr"
+                else "VALIDATION"
+                if "validate" in current_task.task_id
+                else "EXTRACTION",
                 document_modality=modality,
                 has_handwriting=(current_task.action == "ocr"),
             )
-            logger.info("   Tool Selected: %s (Reason: %s)", tool_selection.selected_tool.name, tool_selection.reasoning[:80])
+            logger.info(
+                "   Tool Selected: %s (Reason: %s)", tool_selection.selected_tool.name, tool_selection.reasoning[:80]
+            )
 
             # B. Execute Tool Policy
             await tool_execution_policy.execute_with_policy(
@@ -246,12 +304,21 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
                     output_data=step_data,
                     expected_schema=["vendor_name", "invoice_number", "total_amount", "subtotal", "tax_amount"],
                 )
-                logger.info("   Reflection Evaluation: Score=%.3f, Passed=%s, Defects=%s", evaluation.overall_score, evaluation.passed_threshold, evaluation.detected_defects)
+                logger.info(
+                    "   Reflection Evaluation: Score=%.3f, Passed=%s, Defects=%s",
+                    evaluation.overall_score,
+                    evaluation.passed_threshold,
+                    evaluation.detected_defects,
+                )
 
                 if not evaluation.passed_threshold:
                     # SELF-CORRECTION LOOP TRIGGERED!
                     trigger = reflection_agent.formulate_correction(current_task.task_id, evaluation)
-                    logger.warning("   [CRITIQUE] Defect detected! Triggering Action: %s. Diagnosis: %s", trigger.action.value, trigger.diagnosis)
+                    logger.warning(
+                        "   [CRITIQUE] Defect detected! Triggering Action: %s. Diagnosis: %s",
+                        trigger.action.value,
+                        trigger.diagnosis,
+                    )
 
                     # Dynamic Task Graph Mutation: Inject Repair Node
                     if trigger.action == CorrectionAction.INJECT_REPAIR_NODE:
@@ -263,7 +330,9 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
                             original_output=step_data,
                         )
 
-                        logger.info("   [GRAPH MUTATION] Injected Dynamic Correction Task: [%s]", correction_node.task_id)
+                        logger.info(
+                            "   [GRAPH MUTATION] Injected Dynamic Correction Task: [%s]", correction_node.task_id
+                        )
                         memory_system.working.record_error(current_task.task_id, trigger.diagnosis)
 
             # Complete task
@@ -298,11 +367,13 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
     # 8. Goal Evaluation & Benchmark Summary
     # ---------------------------------------------------------
     total_benchmark_time = time.perf_counter() - start_benchmark_time
-    passed, final_score = goal_spec.evaluate_success({
-        "accuracy": 0.99,
-        "schema_validation": 1.0,
-        "execution_latency_seconds": total_benchmark_time,
-    })
+    passed, final_score = goal_spec.evaluate_success(
+        {
+            "accuracy": 0.99,
+            "schema_validation": 1.0,
+            "execution_latency_seconds": total_benchmark_time,
+        }
+    )
     goal_spec.status = GoalStatus.COMPLETED if passed else GoalStatus.FAILED
 
     print("\n" + "=" * 80)
@@ -317,7 +388,9 @@ async def run_autonomous_benchmark() -> Dict[str, Any]:
     for m in graph.get_mutation_history():
         print(f"   * Mutation [{m.mutation_type}] on node {m.node_id}")
     graph.get_all_outputs()
-    corrected_data = execution_context.get("corrected_extracted_entities") or execution_context.get("extracted_entities") or {}
+    corrected_data = (
+        execution_context.get("corrected_extracted_entities") or execution_context.get("extracted_entities") or {}
+    )
     total_val = corrected_data.get("total_amount", 0.0)
     print(f"Corrected Total Amount: ${total_val:.2f}")
     print(f"SOX Compliance Status : {execution_context.get('compliance_report', {}).get('audit_status', 'APPROVED')}")

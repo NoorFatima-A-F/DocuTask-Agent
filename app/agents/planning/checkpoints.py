@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 class PlanCheckpoint(BaseModel):
     """Execution state checkpoint enabling deterministic rollback or replay."""
+
     checkpoint_id: str
     node_id: str
     captured_state: Dict[str, Any] = Field(default_factory=dict)

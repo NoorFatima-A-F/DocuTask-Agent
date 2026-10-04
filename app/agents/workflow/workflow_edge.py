@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class WorkflowEdge(BaseModel):
     """Directed edge connecting source and target nodes with optional condition."""
+
     edge_id: str = Field(default_factory=lambda: f"edge_{uuid4().hex[:8]}")
     source_node_id: str = Field(default="")
     target_node_id: str = Field(default="")

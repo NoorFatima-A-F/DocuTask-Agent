@@ -1,6 +1,7 @@
 """
 3I.6.5: SRE Error Budget & Burn Rate Governance Verifier
 """
+
 from typing import List
 from ..domain.models import ErrorBudgetAction, ErrorBudgetSpec, ErrorBudgetReport
 from ..domain.interfaces import IErrorBudgetVerifier
@@ -23,7 +24,7 @@ class ErrorBudgetVerifier(IErrorBudgetVerifier):
                 burn_rate_1h=0.45,
                 burn_rate_6h=0.50,
                 burn_rate_24h=0.48,
-                recommended_action=ErrorBudgetAction.NORMAL_VELOCITY
+                recommended_action=ErrorBudgetAction.NORMAL_VELOCITY,
             ),
             ErrorBudgetSpec(
                 slo_id="SLO-LAT-02",
@@ -35,7 +36,7 @@ class ErrorBudgetVerifier(IErrorBudgetVerifier):
                 burn_rate_1h=0.85,
                 burn_rate_6h=0.90,
                 burn_rate_24h=0.72,
-                recommended_action=ErrorBudgetAction.INCREASE_MONITORING
+                recommended_action=ErrorBudgetAction.INCREASE_MONITORING,
             ),
             ErrorBudgetSpec(
                 slo_id="SLO-AI-03",
@@ -47,7 +48,7 @@ class ErrorBudgetVerifier(IErrorBudgetVerifier):
                 burn_rate_1h=0.35,
                 burn_rate_6h=0.40,
                 burn_rate_24h=0.38,
-                recommended_action=ErrorBudgetAction.NORMAL_VELOCITY
+                recommended_action=ErrorBudgetAction.NORMAL_VELOCITY,
             ),
             ErrorBudgetSpec(
                 slo_id="SLO-QUEUE-04",
@@ -59,7 +60,7 @@ class ErrorBudgetVerifier(IErrorBudgetVerifier):
                 burn_rate_1h=0.20,
                 burn_rate_6h=0.22,
                 burn_rate_24h=0.25,
-                recommended_action=ErrorBudgetAction.NORMAL_VELOCITY
+                recommended_action=ErrorBudgetAction.NORMAL_VELOCITY,
             ),
         ]
 
@@ -69,5 +70,5 @@ class ErrorBudgetVerifier(IErrorBudgetVerifier):
             report_title="SRE Error Budget & Burn Rate Governance Report",
             budgets=budgets,
             deployment_freeze_required=False,
-            average_remaining_budget_pct=avg_remaining
+            average_remaining_budget_pct=avg_remaining,
         )

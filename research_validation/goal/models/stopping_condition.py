@@ -27,6 +27,7 @@ class StoppingConditionType(str, Enum):
 @dataclass(frozen=True)
 class StoppingCondition:
     """Immutable stopping condition definition."""
+
     condition_type: StoppingConditionType
     description: str
     is_terminal: bool = True

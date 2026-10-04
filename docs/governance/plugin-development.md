@@ -12,6 +12,7 @@ All plugins must implement the `GovernancePlugin` abstract class:
 from typing import Any, Dict
 from app.governance.platform.plugins.sandbox import GovernancePlugin
 
+
 class CustomDataLossPreventionPlugin(GovernancePlugin):
     def __init__(self):
         super().__init__(name="DLP_Scanner", version="1.0.0", description="Scans payload for SSN and credit cards")

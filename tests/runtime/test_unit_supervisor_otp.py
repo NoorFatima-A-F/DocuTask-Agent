@@ -352,4 +352,3 @@ async def test_supervisor_process_isolation():
     assert container_w.is_alive()
     await container_w.stop()
     assert not container_w.is_alive()
-

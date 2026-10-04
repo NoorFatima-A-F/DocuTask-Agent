@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class DelegationMode(str, Enum):
     """Supported delegation topologies."""
+
     SINGLE = "SINGLE"
     MULTI_AGENT = "MULTI_AGENT"
     HIERARCHICAL = "HIERARCHICAL"
@@ -22,6 +23,7 @@ class DelegationMode(str, Enum):
 
 class DelegationStatus(str, Enum):
     """Lifecycle of a delegation job."""
+
     PENDING = "PENDING"
     DISPATCHED = "DISPATCHED"
     EXECUTING = "EXECUTING"
@@ -32,6 +34,7 @@ class DelegationStatus(str, Enum):
 
 class DelegationTask(BaseModel):
     """Specification of an individual task to delegate."""
+
     task_id: str
     task_name: str
     required_skills: List[str] = Field(default_factory=list)
@@ -45,6 +48,7 @@ class DelegationTask(BaseModel):
 
 class DelegationRequest(BaseModel):
     """Request envelope initiating task delegation across agents."""
+
     delegation_id: UUID = Field(default_factory=uuid4)
     delegator_agent_id: UUID
     mode: DelegationMode = Field(default=DelegationMode.SINGLE)
@@ -57,6 +61,7 @@ class DelegationRequest(BaseModel):
 
 class DelegationResult(BaseModel):
     """Outcome payload of completed or failed task delegation."""
+
     delegation_id: UUID
     status: DelegationStatus = Field(default=DelegationStatus.COMPLETED)
     results: Dict[str, Any] = Field(default_factory=dict)

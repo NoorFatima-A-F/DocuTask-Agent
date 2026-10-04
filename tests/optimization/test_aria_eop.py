@@ -53,6 +53,7 @@ def client():
 # 1. Domain Events Tests
 # ---------------------------------------------------------------------------
 
+
 def test_optimization_domain_events():
     e1 = OptimizationStarted(objective="MINIMIZE_COST", budget_limit_usd=0.25)
     assert e1.event_type == "optimization.started"
@@ -96,6 +97,7 @@ def test_optimization_domain_events():
 # ---------------------------------------------------------------------------
 # 2. Optimization Core Tests
 # ---------------------------------------------------------------------------
+
 
 def test_strategy_selector_and_pareto():
     cands = [
@@ -174,6 +176,7 @@ def test_optimization_engine_and_pipeline():
 # 3. Economic Intelligence Tests
 # ---------------------------------------------------------------------------
 
+
 def test_cost_model_and_roi():
     costs = CostModel.calculate_cost("gemini-1.5-flash", input_tokens=4000, output_tokens=800, pages=4)
     assert costs.total_cost_usd > 0.0
@@ -195,6 +198,7 @@ def test_cost_model_and_roi():
 # ---------------------------------------------------------------------------
 # 4. Resource & Routing Tests
 # ---------------------------------------------------------------------------
+
 
 def test_resource_registry_and_allocation():
     reg = ResourceRegistry()
@@ -227,6 +231,7 @@ def test_routing_engines():
 # 5. Simulation, Scheduling, Prediction & Policies Tests
 # ---------------------------------------------------------------------------
 
+
 def test_simulation_and_what_if():
     scenarios = ExecutionSimulator.simulate_scenarios(page_count=4)
     assert len(scenarios) == 3
@@ -252,6 +257,7 @@ def test_scheduling_prediction_policies():
 # ---------------------------------------------------------------------------
 # 6. FastAPI REST Endpoints Integration Tests
 # ---------------------------------------------------------------------------
+
 
 def test_api_optimization_endpoints(client: TestClient):
     resp_miss = client.get("/api/v1/optimization/mission/mission-001")
@@ -298,20 +304,26 @@ def test_api_optimization_endpoints(client: TestClient):
     assert resp_hist.status_code == 200
     assert isinstance(resp_hist.json(), list)
 
-    resp_sim_post = client.post("/api/v1/optimization/simulate", json={
-        "page_count": 4,
-        "target_budget_usd": 0.05,
-        "target_latency_ms": 3000.0,
-    })
+    resp_sim_post = client.post(
+        "/api/v1/optimization/simulate",
+        json={
+            "page_count": 4,
+            "target_budget_usd": 0.05,
+            "target_latency_ms": 3000.0,
+        },
+    )
     assert resp_sim_post.status_code == 200
     assert resp_sim_post.json()["is_feasible"] is True
 
-    resp_reopt = client.post("/api/v1/optimization/reoptimize", json={
-        "mission_id": "mission-001",
-        "objective": "MINIMIZE_COST",
-        "max_budget_usd": 0.20,
-        "max_latency_ms": 4000.0,
-        "min_confidence": 0.88,
-    })
+    resp_reopt = client.post(
+        "/api/v1/optimization/reoptimize",
+        json={
+            "mission_id": "mission-001",
+            "objective": "MINIMIZE_COST",
+            "max_budget_usd": 0.20,
+            "max_latency_ms": 4000.0,
+            "min_confidence": 0.88,
+        },
+    )
     assert resp_reopt.status_code == 200
     assert resp_reopt.json()["objective"] == "MINIMIZE_COST"

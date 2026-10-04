@@ -25,10 +25,18 @@ class LongRunningWorkflowVerifier(ILongRunningWorkflowVerifier):
 
     def verify(self) -> LongRunningWorkflowReport:
         checkpoints = [
-            LongRunningCheckpoint(checkpoint_id="CP-1-HOUR", elapsed_time_simulated="1 Hour", state_valid=True, resumed_cleanly=True),
-            LongRunningCheckpoint(checkpoint_id="CP-24-HOURS", elapsed_time_simulated="24 Hours", state_valid=True, resumed_cleanly=True),
-            LongRunningCheckpoint(checkpoint_id="CP-7-DAYS", elapsed_time_simulated="7 Days", state_valid=True, resumed_cleanly=True),
-            LongRunningCheckpoint(checkpoint_id="CP-30-DAYS", elapsed_time_simulated="30 Days", state_valid=True, resumed_cleanly=True),
+            LongRunningCheckpoint(
+                checkpoint_id="CP-1-HOUR", elapsed_time_simulated="1 Hour", state_valid=True, resumed_cleanly=True
+            ),
+            LongRunningCheckpoint(
+                checkpoint_id="CP-24-HOURS", elapsed_time_simulated="24 Hours", state_valid=True, resumed_cleanly=True
+            ),
+            LongRunningCheckpoint(
+                checkpoint_id="CP-7-DAYS", elapsed_time_simulated="7 Days", state_valid=True, resumed_cleanly=True
+            ),
+            LongRunningCheckpoint(
+                checkpoint_id="CP-30-DAYS", elapsed_time_simulated="30 Days", state_valid=True, resumed_cleanly=True
+            ),
         ]
 
         checks = [

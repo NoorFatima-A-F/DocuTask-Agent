@@ -2,6 +2,7 @@
 Test Suite: Enterprise Incident Command & Blameless Postmortems
 Validates incident declaration, automated triage, resolution, blast radius assessment, and postmortems.
 """
+
 from app.runtime.incident.incident_commander import IncidentCommander
 from app.runtime.incident.incident_manager import IncidentManager
 from app.runtime.incident.postmortem_generator import PostmortemGenerator
@@ -9,7 +10,7 @@ from app.runtime.incident.postmortem_generator import PostmortemGenerator
 
 def test_incident_lifecycle():
     commander = IncidentCommander()
-    
+
     inc = commander.declare_incident(
         title="Test Invariant Failure Anomaly",
         severity="SEV2_HIGH",

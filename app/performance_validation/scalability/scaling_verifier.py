@@ -65,7 +65,12 @@ class EnduranceScalingVerifier:
                 passed=passed_3,
                 message=f"Horizontal auto-scaling expanded from 2 to 20 worker replicas in {scale_out_seconds}s with {scaling_efficiency_pct}% linear throughput scaling",
                 execution_time_ms=t_ms,
-                details={"min_replicas": 2, "max_replicas": 20, "scaling_efficiency_pct": scaling_efficiency_pct, "scale_time_s": scale_out_seconds},
+                details={
+                    "min_replicas": 2,
+                    "max_replicas": 20,
+                    "scaling_efficiency_pct": scaling_efficiency_pct,
+                    "scale_time_s": scale_out_seconds,
+                },
             )
         )
 

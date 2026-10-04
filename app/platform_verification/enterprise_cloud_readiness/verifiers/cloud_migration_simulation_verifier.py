@@ -29,14 +29,62 @@ class CloudMigrationSimulationVerifier(ICloudMigrationSimulationVerifier):
 
     def verify(self) -> CloudMigrationSimulationReport:
         steps = [
-            MigrationStepExecution(step_sequence=1, step_name="1. Container Image Build & Push", action="Build multi-arch image and push to container registry (ECR/GCR/ACR)", duration_seconds=110.0, passed=True),
-            MigrationStepExecution(step_sequence=2, step_name="2. IaC Cloud Infrastructure Provisioning", action="Terraform provision VPC, RDS, S3/GCS, KMS, and Cloud Run/EKS", duration_seconds=180.0, passed=True),
-            MigrationStepExecution(step_sequence=3, step_name="3. Cloud Secret Injection", action="Inject API keys and database credentials into Cloud Secret Manager", duration_seconds=12.0, passed=True),
-            MigrationStepExecution(step_sequence=4, step_name="4. Database Migration Execution", action="Run Alembic upgrade head against managed cloud database", duration_seconds=24.0, passed=True),
-            MigrationStepExecution(step_sequence=5, step_name="5. Microservice Deployment", action="Deploy API and Celery workers to cloud container runtime", duration_seconds=95.0, passed=True),
-            MigrationStepExecution(step_sequence=6, step_name="6. Health Probe Verification", action="Validate /health/liveness and /health/readiness across all instances", duration_seconds=15.0, passed=True),
-            MigrationStepExecution(step_sequence=7, step_name="7. Test Document Ingestion", action="Upload multi-page invoice via Cloud Load Balancer / API Gateway", duration_seconds=8.5, passed=True),
-            MigrationStepExecution(step_sequence=8, step_name="8. End-to-End AI Extraction & Validation", action="Validate OCR, Gemini inference, and audit trail in cloud environment", duration_seconds=16.0, passed=True),
+            MigrationStepExecution(
+                step_sequence=1,
+                step_name="1. Container Image Build & Push",
+                action="Build multi-arch image and push to container registry (ECR/GCR/ACR)",
+                duration_seconds=110.0,
+                passed=True,
+            ),
+            MigrationStepExecution(
+                step_sequence=2,
+                step_name="2. IaC Cloud Infrastructure Provisioning",
+                action="Terraform provision VPC, RDS, S3/GCS, KMS, and Cloud Run/EKS",
+                duration_seconds=180.0,
+                passed=True,
+            ),
+            MigrationStepExecution(
+                step_sequence=3,
+                step_name="3. Cloud Secret Injection",
+                action="Inject API keys and database credentials into Cloud Secret Manager",
+                duration_seconds=12.0,
+                passed=True,
+            ),
+            MigrationStepExecution(
+                step_sequence=4,
+                step_name="4. Database Migration Execution",
+                action="Run Alembic upgrade head against managed cloud database",
+                duration_seconds=24.0,
+                passed=True,
+            ),
+            MigrationStepExecution(
+                step_sequence=5,
+                step_name="5. Microservice Deployment",
+                action="Deploy API and Celery workers to cloud container runtime",
+                duration_seconds=95.0,
+                passed=True,
+            ),
+            MigrationStepExecution(
+                step_sequence=6,
+                step_name="6. Health Probe Verification",
+                action="Validate /health/liveness and /health/readiness across all instances",
+                duration_seconds=15.0,
+                passed=True,
+            ),
+            MigrationStepExecution(
+                step_sequence=7,
+                step_name="7. Test Document Ingestion",
+                action="Upload multi-page invoice via Cloud Load Balancer / API Gateway",
+                duration_seconds=8.5,
+                passed=True,
+            ),
+            MigrationStepExecution(
+                step_sequence=8,
+                step_name="8. End-to-End AI Extraction & Validation",
+                action="Validate OCR, Gemini inference, and audit trail in cloud environment",
+                duration_seconds=16.0,
+                passed=True,
+            ),
         ]
 
         total_time_mins = sum(s.duration_seconds for s in steps) / 60.0

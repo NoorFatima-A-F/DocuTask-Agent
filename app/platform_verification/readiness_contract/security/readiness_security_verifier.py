@@ -3,6 +3,7 @@ Readiness Security Verifier (Part 7).
 Ensures that GET /ready endpoints filter out internal infrastructure details, connection strings,
 and secrets, preventing information disclosure to unauthorized parties.
 """
+
 import re
 from typing import Dict, Any
 
@@ -47,7 +48,7 @@ class ReadinessSecurityVerifier:
             if regex.search(payload_str):
                 leaks += 1
 
-        clean = (leaks == 0)
+        clean = leaks == 0
         auth_enforced = True
         rate_limiting = True
         passed = clean and auth_enforced and rate_limiting

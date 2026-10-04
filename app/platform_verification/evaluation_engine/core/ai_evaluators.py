@@ -1,6 +1,7 @@
 """
 Independent AI & LLM Evaluation Pipeline assessing grounding, hallucination, reasoning, and safety.
 """
+
 from __future__ import annotations
 import re
 from typing import Any, Dict, List, Optional
@@ -26,7 +27,7 @@ class IndependentAiEvaluator(IIAIQualityEvaluator):
                 grounded_count += 1
             elif not context:
                 # If no context provided, grounding is measured against prompt/ground_truth
-                ref = (ground_truth or prompt)
+                ref = ground_truth or prompt
                 if claim.lower() in ref.lower() or self._word_overlap_ratio(claim, ref) >= 0.25:
                     grounded_count += 1
 

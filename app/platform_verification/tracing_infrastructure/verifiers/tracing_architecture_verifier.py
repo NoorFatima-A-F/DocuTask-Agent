@@ -1,6 +1,7 @@
 """
 3I.4.1: Distributed Tracing Architecture Verifier
 """
+
 from typing import List
 from ..domain.models import TracingServiceInstrumentation, TracingArchitectureReport
 from ..domain.interfaces import ITracingArchitectureVerifier
@@ -30,7 +31,7 @@ class TracingArchitectureVerifier(ITracingArchitectureVerifier):
                 exporter="OTLP gRPC Exporter",
                 collector_endpoint="otel-collector:4317",
                 backend="Grafana Tempo",
-                status="ACTIVE"
+                status="ACTIVE",
             )
             for s in services
         ]
@@ -42,5 +43,5 @@ class TracingArchitectureVerifier(ITracingArchitectureVerifier):
             visualizer="Grafana",
             services_instrumented=len(instrumentations),
             services=instrumentations,
-            status="PASS"
+            status="PASS",
         )

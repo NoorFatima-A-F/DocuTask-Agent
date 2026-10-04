@@ -24,5 +24,5 @@ class RetryOrchestrator:
         return BackoffCalculator.calculate_exponential_backoff(
             attempt=current_attempt,
             initial_seconds=self.policy.initial_delay_seconds,
-            max_seconds=self.policy.max_delay_seconds
+            max_seconds=self.policy.max_delay_seconds,
         )

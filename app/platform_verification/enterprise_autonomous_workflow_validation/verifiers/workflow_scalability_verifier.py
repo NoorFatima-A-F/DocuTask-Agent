@@ -25,10 +25,34 @@ class WorkflowScalabilityVerifier(IWorkflowScalabilityVerifier):
 
     def verify(self) -> WorkflowScalabilityReport:
         tiers = [
-            ScalabilityTierTest(concurrency_level=10, p95_latency_sec=0.45, queue_backlog_peak=0, resource_starvation_events=0, throughput_wps=22.2),
-            ScalabilityTierTest(concurrency_level=100, p95_latency_sec=0.62, queue_backlog_peak=12, resource_starvation_events=0, throughput_wps=161.2),
-            ScalabilityTierTest(concurrency_level=1000, p95_latency_sec=1.15, queue_backlog_peak=85, resource_starvation_events=0, throughput_wps=869.5),
-            ScalabilityTierTest(concurrency_level=10000, p95_latency_sec=2.85, queue_backlog_peak=450, resource_starvation_events=0, throughput_wps=3508.7),
+            ScalabilityTierTest(
+                concurrency_level=10,
+                p95_latency_sec=0.45,
+                queue_backlog_peak=0,
+                resource_starvation_events=0,
+                throughput_wps=22.2,
+            ),
+            ScalabilityTierTest(
+                concurrency_level=100,
+                p95_latency_sec=0.62,
+                queue_backlog_peak=12,
+                resource_starvation_events=0,
+                throughput_wps=161.2,
+            ),
+            ScalabilityTierTest(
+                concurrency_level=1000,
+                p95_latency_sec=1.15,
+                queue_backlog_peak=85,
+                resource_starvation_events=0,
+                throughput_wps=869.5,
+            ),
+            ScalabilityTierTest(
+                concurrency_level=10000,
+                p95_latency_sec=2.85,
+                queue_backlog_peak=450,
+                resource_starvation_events=0,
+                throughput_wps=3508.7,
+            ),
         ]
 
         checks = [

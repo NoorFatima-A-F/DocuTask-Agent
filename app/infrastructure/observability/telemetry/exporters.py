@@ -18,6 +18,7 @@ logger = logging.getLogger("infrastructure.observability.telemetry.exporters")
 
 class TelemetryBatch(BaseModel):
     """Container for batch telemetry export."""
+
     batch_id: str
     metrics: List[Dict[str, Any]] = []
     logs: List[Dict[str, Any]] = []
@@ -60,15 +61,15 @@ class InMemoryExporter(TelemetryExporter):
 
         # Trim buffers
         if len(self.metrics) > self.max_items_per_category:
-            self.metrics = self.metrics[-self.max_items_per_category:]
+            self.metrics = self.metrics[-self.max_items_per_category :]
         if len(self.logs) > self.max_items_per_category:
-            self.logs = self.logs[-self.max_items_per_category:]
+            self.logs = self.logs[-self.max_items_per_category :]
         if len(self.traces) > self.max_items_per_category:
-            self.traces = self.traces[-self.max_items_per_category:]
+            self.traces = self.traces[-self.max_items_per_category :]
         if len(self.profiles) > self.max_items_per_category:
-            self.profiles = self.profiles[-self.max_items_per_category:]
+            self.profiles = self.profiles[-self.max_items_per_category :]
         if len(self.events) > self.max_items_per_category:
-            self.events = self.events[-self.max_items_per_category:]
+            self.events = self.events[-self.max_items_per_category :]
 
         return True
 

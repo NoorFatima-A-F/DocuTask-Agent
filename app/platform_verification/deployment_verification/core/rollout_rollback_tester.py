@@ -1,6 +1,7 @@
 """
 Rollout Strategies & Automated Rollback Tester.
 """
+
 from typing import Dict, Any, Tuple
 from app.platform_verification.deployment_verification.domain.models import (
     ReleaseStrategyReport,
@@ -14,9 +15,12 @@ from app.platform_verification.deployment_verification.domain.interfaces import 
 
 class RolloutRollbackTester(IRolloutRollbackTester):
     """Simulates rolling / blue-green / canary rollouts and automated rollback triggers."""
+
     __test__ = False
 
-    def test_rollout_and_rollback(self, rollout_config: Dict[str, Any]) -> Tuple[ReleaseStrategyReport, RollbackVerificationReport, ZeroDowntimeReport]:
+    def test_rollout_and_rollback(
+        self, rollout_config: Dict[str, Any]
+    ) -> Tuple[ReleaseStrategyReport, RollbackVerificationReport, ZeroDowntimeReport]:
         strat_str = rollout_config.get("strategy", "ROLLING").upper()
         strat = getattr(DeploymentStrategy, strat_str, DeploymentStrategy.ROLLING)
 

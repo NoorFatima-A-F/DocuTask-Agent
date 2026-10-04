@@ -12,6 +12,7 @@ from app.agents.planning.goals import PlanGoal
 
 class GoalAnalysisReport(BaseModel):
     """Structured report produced by GoalAnalyzer."""
+
     goal_id: str
     inferred_objectives: List[str] = Field(default_factory=list)
     identified_constraints: List[str] = Field(default_factory=list)
@@ -40,5 +41,5 @@ class GoalAnalyzer:
             assumptions=["Document files are accessible in storage"],
             success_criteria=criteria,
             is_actionable=True,
-            confidence=0.95
+            confidence=0.95,
         )

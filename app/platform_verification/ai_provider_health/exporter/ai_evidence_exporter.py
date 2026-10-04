@@ -62,41 +62,31 @@ class AIEvidenceExporter:
         """Exports the 8 required manifests to disk."""
         exported_files = {}
 
-        exported_files["provider_health_report.json"] = self._write_json(
-            "provider_health_report.json", health_report
-        )
-        exported_files["authentication_report.json"] = self._write_json(
-            "authentication_report.json", auth_report
-        )
-        exported_files["latency_report.json"] = self._write_json(
-            "latency_report.json", latency_report
-        )
-        exported_files["quota_report.json"] = self._write_json(
-            "quota_report.json", quota_report
-        )
+        exported_files["provider_health_report.json"] = self._write_json("provider_health_report.json", health_report)
+        exported_files["authentication_report.json"] = self._write_json("authentication_report.json", auth_report)
+        exported_files["latency_report.json"] = self._write_json("latency_report.json", latency_report)
+        exported_files["quota_report.json"] = self._write_json("quota_report.json", quota_report)
         exported_files["response_quality_report.json"] = self._write_json(
             "response_quality_report.json", response_quality_report
         )
         exported_files["failure_simulation_report.json"] = self._write_json(
             "failure_simulation_report.json", failure_simulation_report
         )
-        exported_files["failover_report.json"] = self._write_json(
-            "failover_report.json", failover_report
-        )
+        exported_files["failover_report.json"] = self._write_json("failover_report.json", failover_report)
 
         metadata = {
             "platform": "DocuTask Agent Enterprise",
             "phase": "PART 3H.3.8 - AI Provider Health Verification Framework",
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "primary_provider": health_report.primary_provider,
-            "primary_status": health_report.primary_status.value if isinstance(health_report.primary_status, Enum) else health_report.primary_status,
+            "primary_status": health_report.primary_status.value
+            if isinstance(health_report.primary_status, Enum)
+            else health_report.primary_status,
             "manifest_files_count": 8,
             "overall_status": "CERTIFIED" if (scorecard and scorecard.passed) else "COMPLETED",
             "scorecard_summary": dataclasses.asdict(scorecard) if scorecard else None,
         }
 
-        exported_files["metadata.json"] = self._write_json(
-            "metadata.json", metadata
-        )
+        exported_files["metadata.json"] = self._write_json("metadata.json", metadata)
 
         return exported_files

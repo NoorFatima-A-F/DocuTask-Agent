@@ -8,20 +8,34 @@ import json
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
 
-from app.platform_verification.reliability_intelligence.sli_slo.reliability_model_verifier import ReliabilityModelVerifier
+from app.platform_verification.reliability_intelligence.sli_slo.reliability_model_verifier import (
+    ReliabilityModelVerifier,
+)
 from app.platform_verification.reliability_intelligence.sli_slo.slo_verifier import SLOVerifier
 from app.platform_verification.reliability_intelligence.sli_slo.error_budget_manager import ErrorBudgetManager
 from app.platform_verification.reliability_intelligence.analytics.failure_pattern_analyzer import FailurePatternAnalyzer
 from app.platform_verification.reliability_intelligence.analytics.root_cause_engine import RootCauseEngine
 from app.platform_verification.reliability_intelligence.analytics.reliability_risk_scorer import ReliabilityRiskScorer
-from app.platform_verification.reliability_intelligence.capacity.capacity_intelligence_engine import CapacityIntelligenceEngine
+from app.platform_verification.reliability_intelligence.capacity.capacity_intelligence_engine import (
+    CapacityIntelligenceEngine,
+)
 from app.platform_verification.reliability_intelligence.change_chaos.change_impact_analyzer import ChangeImpactAnalyzer
 from app.platform_verification.reliability_intelligence.change_chaos.chaos_learning_tracker import ChaosLearningTracker
-from app.platform_verification.reliability_intelligence.improvement.reliability_recommender import ReliabilityRecommender
-from app.platform_verification.reliability_intelligence.improvement.continuous_improvement_loop import ContinuousImprovementLoop
-from app.platform_verification.reliability_intelligence.security.reliability_security_auditor import ReliabilitySecurityAuditor
-from app.platform_verification.reliability_intelligence.runtime.reliability_intelligence_runtime import ReliabilityIntelligenceRuntime
-from app.platform_verification.reliability_intelligence.api.reliability_intelligence_api import router as reliability_router
+from app.platform_verification.reliability_intelligence.improvement.reliability_recommender import (
+    ReliabilityRecommender,
+)
+from app.platform_verification.reliability_intelligence.improvement.continuous_improvement_loop import (
+    ContinuousImprovementLoop,
+)
+from app.platform_verification.reliability_intelligence.security.reliability_security_auditor import (
+    ReliabilitySecurityAuditor,
+)
+from app.platform_verification.reliability_intelligence.runtime.reliability_intelligence_runtime import (
+    ReliabilityIntelligenceRuntime,
+)
+from app.platform_verification.reliability_intelligence.api.reliability_intelligence_api import (
+    router as reliability_router,
+)
 from app.platform_verification.reliability_intelligence.domain.models import (
     ReliabilityMaturityTier,
     RecommendationPriority,

@@ -14,6 +14,7 @@ logger = logging.getLogger("app.infrastructure.deployment.rollback")
 
 class RollbackTriggerType(str, Enum):
     """Reason for triggering automated or manual rollback."""
+
     MANUAL = "manual"
     METRIC_ANOMALY = "metric_anomaly"
     HEALTH_FAILURE = "health_failure"
@@ -24,6 +25,7 @@ class RollbackTriggerType(str, Enum):
 @dataclass
 class RollbackRequest:
     """Request payload to initiate a rollback."""
+
     deployment_id: str
     trigger_type: RollbackTriggerType
     reason: str
@@ -34,6 +36,7 @@ class RollbackRequest:
 @dataclass
 class RollbackResult:
     """Outcome of a rollback execution."""
+
     success: bool
     rollback_id: str
     deployment_id: str

@@ -10,7 +10,6 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 
 
-
 @dataclass(frozen=True)
 class PackageVersionDelta:
     package_name: str
@@ -48,14 +47,14 @@ class EnvironmentDiffEngine:
         # 1. OS comparison
         base_os = str(base_env.get("os_name", base_env.get("os", "")))
         target_os = str(target_env.get("os_name", target_env.get("os", "")))
-        os_match = (base_os == target_os)
+        os_match = base_os == target_os
         if not os_match:
             sys_deltas["os"] = {"base": base_os, "target": target_os}
 
         # 2. Python runtime comparison
         base_py = str(base_env.get("python_version", base_env.get("python", "")))
         target_py = str(target_env.get("python_version", target_env.get("python", "")))
-        py_match = (base_py == target_py)
+        py_match = base_py == target_py
         if not py_match:
             sys_deltas["python"] = {"base": base_py, "target": target_py}
 
@@ -80,19 +79,21 @@ class EnvironmentDiffEngine:
                     # Check major version
                     p1 = v1.split(".")[0]
                     p2 = v2.split(".")[0]
-                    is_major = (p1 != p2)
-                pkg_deltas.append(PackageVersionDelta(
-                    package_name=pkg,
-                    base_version=v1,
-                    target_version=v2,
-                    is_major_shift=is_major,
-                ))
+                    is_major = p1 != p2
+                pkg_deltas.append(
+                    PackageVersionDelta(
+                        package_name=pkg,
+                        base_version=v1,
+                        target_version=v2,
+                        is_major_shift=is_major,
+                    )
+                )
 
         identical = os_match and py_match and mismatches == 0
         summary = (
             "Environments are bit-for-bit identical."
-            if identical else
-            f"Detected {mismatches} package mismatch(es) and {len(sys_deltas)} system delta(s)."
+            if identical
+            else f"Detected {mismatches} package mismatch(es) and {len(sys_deltas)} system delta(s)."
         )
 
         return EnvironmentDiffReport(

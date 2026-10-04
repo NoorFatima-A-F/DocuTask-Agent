@@ -1,6 +1,7 @@
 """
 3I.5.1: Enterprise Alerting Architecture & Notification Dispatch Verifier
 """
+
 from typing import List
 from ..domain.models import NotificationChannelSpec, AlertingArchitectureReport
 from ..domain.interfaces import IAlertingArchitectureVerifier
@@ -18,28 +19,28 @@ class AlertingArchitectureVerifier(IAlertingArchitectureVerifier):
                 channel_type="PagerDuty",
                 target_destination="https://events.pagerduty.com/v2/enqueue",
                 enabled=True,
-                delivery_latency_ms=95.0
+                delivery_latency_ms=95.0,
             ),
             NotificationChannelSpec(
                 channel_name="Slack-Incident-Room",
                 channel_type="Slack",
                 target_destination="https://hooks.slack.com/services/T00/B00/X00",
                 enabled=True,
-                delivery_latency_ms=110.0
+                delivery_latency_ms=110.0,
             ),
             NotificationChannelSpec(
                 channel_name="Email-SRE-Escalation",
                 channel_type="Email",
                 target_destination="sre-team@docutask-agent.internal",
                 enabled=True,
-                delivery_latency_ms=250.0
+                delivery_latency_ms=250.0,
             ),
             NotificationChannelSpec(
                 channel_name="Automated-Remediation-Webhook",
                 channel_type="Webhook",
                 target_destination="http://auto-healer.internal/api/v1/remediate",
                 enabled=True,
-                delivery_latency_ms=45.0
+                delivery_latency_ms=45.0,
             ),
         ]
 
@@ -50,5 +51,5 @@ class AlertingArchitectureVerifier(IAlertingArchitectureVerifier):
             rules_configured_count=124,
             notification_channels=channels,
             monitored_services=8,
-            status="PASS"
+            status="PASS",
         )

@@ -2,6 +2,7 @@
 Evidence Collector for Backup Certification Framework (Part 3G.2G).
 Aggregates verification outputs across 3G.2A through 3G.2F.
 """
+
 import os
 import json
 import datetime
@@ -42,7 +43,9 @@ class EvidenceCollector(IEvidenceCollector):
         now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
         # 1. Backup Inventory Evidence (3G.2A & 3G.2B & 3G.2C & 3G.2F)
-        inv_path = os.path.join(self.evidence_root_dir, "backup_security_verification", "backup_security_inventory.json")
+        inv_path = os.path.join(
+            self.evidence_root_dir, "backup_security_verification", "backup_security_inventory.json"
+        )
         default_inventory = {
             "backup_assets_count": 245,
             "backup_assets": 245,
@@ -84,7 +87,9 @@ class EvidenceCollector(IEvidenceCollector):
         restore_test_report = self._read_json_safe(restore_path, default_restore)
 
         # 3. Integrity Evidence (3G.2B & 3G.2C & 3G.2F)
-        integ_path = os.path.join(self.evidence_root_dir, "backup_security_verification", "tamper_detection_report.json")
+        integ_path = os.path.join(
+            self.evidence_root_dir, "backup_security_verification", "tamper_detection_report.json"
+        )
         default_integrity = {
             "checksum_validation": "PASS",
             "checksum_algorithm": "SHA-512 + HMAC-SHA256",
@@ -98,7 +103,9 @@ class EvidenceCollector(IEvidenceCollector):
         integrity_report = dict(default_integrity)
         integrity_report.update(loaded_integ)
         if "checksum_validation" not in integrity_report:
-            integrity_report["checksum_validation"] = "PASS" if integrity_report.get("sha512_hash_comparison_verified", True) else "FAIL"
+            integrity_report["checksum_validation"] = (
+                "PASS" if integrity_report.get("sha512_hash_comparison_verified", True) else "FAIL"
+            )
 
         # 4. Security Evidence (3G.2F)
         sec_path = os.path.join(self.evidence_root_dir, "backup_security_verification", "compliance_report.json")

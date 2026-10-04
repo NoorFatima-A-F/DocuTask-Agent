@@ -1,6 +1,7 @@
 """
 3H.10.2: Cross-Signal Correlation Verifier
 """
+
 from typing import List
 from ..domain.models import CorrelatedSignalCluster, SignalCorrelationReport
 from ..domain.interfaces import ISignalCorrelationVerifier
@@ -20,7 +21,7 @@ class SignalCorrelationVerifier(ISignalCorrelationVerifier):
                 correlated_signals_count=4,
                 signal_sources=["METRICS", "LOGS", "TRACES", "ALERTS"],
                 narrative_summary="Provider rate throttling triggered 429 backoff in LLM router, manifesting as worker task stall and synthetic trace span delay.",
-                correlation_confidence_pct=99.6
+                correlation_confidence_pct=99.6,
             ),
             CorrelatedSignalCluster(
                 cluster_id="cluster-sig-002",
@@ -29,7 +30,7 @@ class SignalCorrelationVerifier(ISignalCorrelationVerifier):
                 correlated_signals_count=5,
                 signal_sources=["METRICS", "LOGS", "TRACES", "ALERTS", "DEPLOYMENTS"],
                 narrative_summary="Batch upload job generated sudden queue depth jump, triggering auto-scale worker provisioning signal across container cluster.",
-                correlation_confidence_pct=99.4
+                correlation_confidence_pct=99.4,
             ),
             CorrelatedSignalCluster(
                 cluster_id="cluster-sig-003",
@@ -38,8 +39,8 @@ class SignalCorrelationVerifier(ISignalCorrelationVerifier):
                 correlated_signals_count=3,
                 signal_sources=["METRICS", "LOGS", "TRACES"],
                 narrative_summary="Cache memory reached 85% limit, leading to volatile key eviction and increased read queries directed at Aurora primary DB.",
-                correlation_confidence_pct=99.5
-            )
+                correlation_confidence_pct=99.5,
+            ),
         ]
 
         mean_conf = sum(c.correlation_confidence_pct for c in clusters) / len(clusters) if clusters else 100.0
@@ -49,5 +50,5 @@ class SignalCorrelationVerifier(ISignalCorrelationVerifier):
             total_clusters_formed=len(clusters),
             mean_correlation_confidence=round(mean_conf, 2),
             clusters=clusters,
-            correlation_accuracy_pct=99.5
+            correlation_accuracy_pct=99.5,
         )

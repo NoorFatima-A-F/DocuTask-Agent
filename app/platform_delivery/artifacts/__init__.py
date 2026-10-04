@@ -1,4 +1,5 @@
 """Platform Artifacts and OCI Layer Package."""
+
 from .digests import DigestCalculator
 from .metadata import OCIManifest, OCIReferrerDescriptor
 from .models import ArtifactIdentity, ArtifactQuarantineStatus, ArtifactType

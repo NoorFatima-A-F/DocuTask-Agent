@@ -2,8 +2,10 @@
 Enterprise Goal Alignment Engine
 Hierarchy mapping connecting Task -> Agent -> Department Goal -> Business Goal -> Corporate KPI.
 """
+
 from typing import Dict, List
 from ..models.schemas import GoalAlignmentNode
+
 
 class GoalAlignmentEngine:
     def __init__(self):
@@ -19,7 +21,7 @@ class GoalAlignmentEngine:
                 department_goal="Finance: 98% Same-Day Invoice Processing",
                 assigned_agents=["InvoiceReconciliationAgent", "POSyncAgent"],
                 current_progress_pct=88.4,
-                alignment_health="HEALTHY"
+                alignment_health="HEALTHY",
             )
             g2 = GoalAlignmentNode(
                 tenant_id=tenant_id,
@@ -28,7 +30,7 @@ class GoalAlignmentEngine:
                 department_goal="Customer Ops: Zero SLA Breaches on Enterprise Claims",
                 assigned_agents=["ClaimsValidationAgent", "AuditEvidenceAgent"],
                 current_progress_pct=94.2,
-                alignment_health="HEALTHY"
+                alignment_health="HEALTHY",
             )
             self._alignments[g1.id] = g1
             self._alignments[g2.id] = g2

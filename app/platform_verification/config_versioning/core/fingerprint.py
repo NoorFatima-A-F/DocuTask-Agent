@@ -2,11 +2,13 @@
 Deterministic Environment Fingerprinting.
 Captures hardware, software, containers, and environment variable hashes.
 """
+
 import hashlib
 import os
 import platform
 import sys
 from app.platform_verification.config_versioning.domain.models import EnvironmentFingerprint, EnvironmentTier
+
 
 class EnvironmentFingerprinter:
     @staticmethod
@@ -21,7 +23,8 @@ class EnvironmentFingerprinter:
             cpu_count=os.cpu_count() or 4,
             memory_total_gb=32.0,
             git_commit_sha=os.getenv("GIT_COMMIT_SHA", "main-e7f8c92a-verified"),
-            environment_variables_hash=env_hash
+            environment_variables_hash=env_hash,
         )
+
 
 environment_fingerprinter = EnvironmentFingerprinter()

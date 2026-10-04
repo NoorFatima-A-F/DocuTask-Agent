@@ -197,7 +197,11 @@ class AdaptiveReplanningEngine:
                 if any(k in issue.lower() for k in ["total", "sum", "math", "arithmetic", "mismatch"]):
                     # Find extraction task to insert validation gate after
                     for tid, node in graph._nodes.items():
-                        has_extract = any("extract" in t.lower() for t in node.required_tools) or "extract" in tid.lower() or "extract" in node.action.lower()
+                        has_extract = (
+                            any("extract" in t.lower() for t in node.required_tools)
+                            or "extract" in tid.lower()
+                            or "extract" in node.action.lower()
+                        )
                         if has_extract:
                             directives.append(
                                 DynamicMutationDirective(

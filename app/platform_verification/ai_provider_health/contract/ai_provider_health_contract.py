@@ -78,8 +78,7 @@ class AIProviderHealthContractVerifier(IAIProviderHealthContractVerifier):
         primary_status = primary.status if primary else AIProviderHealthState.UNKNOWN
 
         all_valid_contracts = all(
-            p.provider and p.status and p.latency_ms > 0 and p.authentication and p.model
-            for p in providers
+            p.provider and p.status and p.latency_ms > 0 and p.authentication and p.model for p in providers
         )
         passed = len(providers) >= 2 and primary_status == AIProviderHealthState.AVAILABLE and all_valid_contracts
 

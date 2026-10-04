@@ -137,7 +137,9 @@ class EvidenceEngine:
         ev = self.evidence_store.get(evidence_id)
         if not ev:
             return False
-        content = f"{ev.hypothesis_id}:{ev.experiment_id}:{json.dumps(ev.data_payload, sort_keys=True)}:{ev.confidence_score}"
+        content = (
+            f"{ev.hypothesis_id}:{ev.experiment_id}:{json.dumps(ev.data_payload, sort_keys=True)}:{ev.confidence_score}"
+        )
         computed = hashlib.sha256(content.encode()).hexdigest()
         return computed == ev.sha256_provenance_hash
 

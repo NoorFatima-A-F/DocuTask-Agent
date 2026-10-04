@@ -11,6 +11,7 @@ from app.ai.validator import AIValidator
 
 class OWASPCheckResult(BaseModel):
     """Result of an OWASP LLM security category check."""
+
     owasp_id: str
     category_name: str
     passed: bool
@@ -33,7 +34,7 @@ class OWASPSecuritySuite:
             cls.check_llm07_insecure_plugins(),
             cls.check_llm08_excessive_agency(),
             cls.check_llm09_overreliance(),
-            cls.check_llm10_model_theft()
+            cls.check_llm10_model_theft(),
         ]
         return results
 
@@ -47,7 +48,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM01",
             category_name="Prompt Injection",
             passed=passed,
-            details="System override tags stripped from user text context."
+            details="System override tags stripped from user text context.",
         )
 
     @classmethod
@@ -60,7 +61,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM02",
             category_name="Insecure Output Handling",
             passed=passed,
-            details="Output strictly parsed through Pydantic type schema validation."
+            details="Output strictly parsed through Pydantic type schema validation.",
         )
 
     @classmethod
@@ -74,7 +75,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM03",
             category_name="Training Data / Context Poisoning",
             passed=passed,
-            details="Poisoned document text isolated inside untrusted context envelope."
+            details="Poisoned document text isolated inside untrusted context envelope.",
         )
 
     @classmethod
@@ -87,7 +88,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM04",
             category_name="Model Denial of Service",
             passed=passed,
-            details="Large payload sanitized cleanly without memory spikes or crashing."
+            details="Large payload sanitized cleanly without memory spikes or crashing.",
         )
 
     @classmethod
@@ -99,7 +100,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM05",
             category_name="Supply Chain Risks",
             passed=passed,
-            details="Model name, provider, prompt version, and dataset versions tracked."
+            details="Model name, provider, prompt version, and dataset versions tracked.",
         )
 
     @classmethod
@@ -111,7 +112,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM06",
             category_name="Sensitive Information Disclosure",
             passed=passed,
-            details="Zero cross-request memory state; stateless prompt compilation."
+            details="Zero cross-request memory state; stateless prompt compilation.",
         )
 
     @classmethod
@@ -123,7 +124,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM07",
             category_name="Insecure Plugin Interaction",
             passed=passed,
-            details="Zero unvetted plugin integrations; extraction pipeline strictly isolated."
+            details="Zero unvetted plugin integrations; extraction pipeline strictly isolated.",
         )
 
     @classmethod
@@ -135,7 +136,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM08",
             category_name="Excessive Agency",
             passed=passed,
-            details="AI output restricted to JSON data payloads; zero file/command execution."
+            details="AI output restricted to JSON data payloads; zero file/command execution.",
         )
 
     @classmethod
@@ -147,7 +148,7 @@ class OWASPSecuritySuite:
             owasp_id="LLM09",
             category_name="Overreliance",
             passed=passed,
-            details="Confidence scores computed per field; missing fields return null."
+            details="Confidence scores computed per field; missing fields return null.",
         )
 
     @classmethod
@@ -158,5 +159,5 @@ class OWASPSecuritySuite:
             owasp_id="LLM10",
             category_name="Model Theft",
             passed=passed,
-            details="API rate limiting and authentication middleware protect endpoints."
+            details="API rate limiting and authentication middleware protect endpoints.",
         )

@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class AgentHealthStatus:
     """Tracks operational health and telemetry for registered agents."""
+
     agent_id: str
     is_healthy: bool = True
     last_heartbeat: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
@@ -42,7 +43,7 @@ class AgentRegistry:
     def register(self, agent: Agent) -> Agent:
         """Registers a new agent or updates an existing registered agent."""
         self._agents[agent.id] = agent
-        
+
         if agent.name not in self._versions:
             self._versions[agent.name] = {}
         self._versions[agent.name][agent.version] = agent
@@ -144,10 +145,7 @@ class AgentRegistry:
         return candidates[0]
 
     def validate_compatibility(
-        self,
-        agent: Agent,
-        required_capabilities: List[str],
-        required_skills: List[str]
+        self, agent: Agent, required_capabilities: List[str], required_skills: List[str]
     ) -> bool:
         """Validates whether an agent satisfies a set of required capabilities and skills."""
         agent_caps = {c.lower() for c in agent.capabilities}

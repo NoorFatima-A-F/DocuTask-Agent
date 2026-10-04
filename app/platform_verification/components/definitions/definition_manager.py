@@ -1,15 +1,17 @@
 """
 Verification Definition Manager: Specifications, requirement linking, invariants, and authoring.
 """
+
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
 from ..interfaces import VerificationDefinitionManagerInterface
 from ...crosscutting.observability import ComponentObservability
 from ...domain.models import VerificationDefinition
 
+
 class VerificationDefinitionManager(VerificationDefinitionManagerInterface):
     """Manages formal verification specifications and invariant validation."""
-    
+
     def __init__(self):
         self._definitions: Dict[str, Dict[str, Any]] = {}
         self._domain_defs: Dict[str, VerificationDefinition] = {}
@@ -22,7 +24,7 @@ class VerificationDefinitionManager(VerificationDefinitionManagerInterface):
             name="Production OCR Accuracy & CER Invariant Test",
             description="Verifies CER <= 0.02 and WER <= 0.05 across standard golden invoice datasets.",
             required_invariants=["accuracy > 0.95"],
-            owner="lead_qa_architect"
+            owner="lead_qa_architect",
         )
         self._domain_defs[d1.definition_id] = d1
         self._definitions[d1.definition_id] = {
@@ -30,17 +32,19 @@ class VerificationDefinitionManager(VerificationDefinitionManagerInterface):
             "name": d1.name,
             "invariants": d1.required_invariants,
             "parameters": {},
-            "created_at": d1.created_at
+            "created_at": d1.created_at,
         }
 
-    async def create_definition(self, spec_id: str, name: str, invariants: List[str], parameters: Dict[str, Any]) -> Dict[str, Any]:
+    async def create_definition(
+        self, spec_id: str, name: str, invariants: List[str], parameters: Dict[str, Any]
+    ) -> Dict[str, Any]:
         self.observability.record_operation(1.2)
         spec = {
             "spec_id": spec_id,
             "name": name,
             "invariants": invariants,
             "parameters": parameters,
-            "created_at": datetime.now(timezone.utc).isoformat()
+            "created_at": datetime.now(timezone.utc).isoformat(),
         }
         self._definitions[spec_id] = spec
         return spec
@@ -51,7 +55,11 @@ class VerificationDefinitionManager(VerificationDefinitionManagerInterface):
             return {"valid": False, "error": "Spec not found"}
         spec = self._definitions[spec_id]
         has_invariants = len(spec.get("invariants", [])) > 0
-        return {"valid": has_invariants, "spec_id": spec_id, "issues": [] if has_invariants else ["No invariants defined"]}
+        return {
+            "valid": has_invariants,
+            "spec_id": spec_id,
+            "issues": [] if has_invariants else ["No invariants defined"],
+        }
 
     async def get_definition(self, spec_id: str) -> Optional[Dict[str, Any]]:
         self.observability.record_operation(0.6)

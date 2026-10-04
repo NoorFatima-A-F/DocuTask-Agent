@@ -28,15 +28,17 @@ class PlannerTimelineService:
 
         timeline = []
         for evt in events:
-            timeline.append({
-                "event_id": evt.event_id,
-                "timestamp": str(evt.timestamp_utc),
-                "event_type": evt.event_type.value if hasattr(evt.event_type, 'value') else str(evt.event_type),
-                "actor": evt.actor.actor_id if hasattr(evt, 'actor') and evt.actor else "ChiefPlanner",
-                "payload": evt.payload,
-                "truth_ledger_hash": evt.truth_ledger_hash,
-                "replay_offset": evt.replay_offset,
-            })
+            timeline.append(
+                {
+                    "event_id": evt.event_id,
+                    "timestamp": str(evt.timestamp_utc),
+                    "event_type": evt.event_type.value if hasattr(evt.event_type, "value") else str(evt.event_type),
+                    "actor": evt.actor.actor_id if hasattr(evt, "actor") and evt.actor else "ChiefPlanner",
+                    "payload": evt.payload,
+                    "truth_ledger_hash": evt.truth_ledger_hash,
+                    "replay_offset": evt.replay_offset,
+                }
+            )
 
         # Provide default structured timeline if event store is empty
         if not timeline:

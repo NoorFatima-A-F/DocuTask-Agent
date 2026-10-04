@@ -8,6 +8,7 @@ from enum import Enum
 
 class ReflectionLifecycleState(str, Enum):
     """Lifecycle states for a reflection session."""
+
     PENDING = "PENDING"
     EVALUATING = "EVALUATING"
     CRITIQUING = "CRITIQUING"

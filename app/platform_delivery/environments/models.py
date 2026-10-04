@@ -1,4 +1,5 @@
 """Environment Models and Tier Specifications (Req 30, 31)."""
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import List
@@ -6,6 +7,7 @@ from typing import List
 
 class DeploymentEnvironmentType(str, Enum):
     """Supported deployment target environments (Req 30)."""
+
     LOCAL = "LOCAL"
     DEVELOPMENT = "DEVELOPMENT"
     TESTING = "TESTING"
@@ -21,6 +23,7 @@ class DeploymentEnvironmentType(str, Enum):
 @dataclass
 class EnvironmentConfiguration:
     """Security, capacity, and governance constraints for an environment tier (Req 31)."""
+
     environment_type: DeploymentEnvironmentType
     allowed_regions: List[str] = field(default_factory=lambda: ["us-east-1", "us-west-2"])
     requires_approval: bool = False

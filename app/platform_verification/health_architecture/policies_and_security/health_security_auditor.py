@@ -1,6 +1,7 @@
 """
 Health Security Auditor for Health Check Architecture Verification (Part 3H.1).
 """
+
 import re
 from typing import Any
 from app.platform_verification.health_architecture.domain.models import (
@@ -84,7 +85,7 @@ class HealthSecurityAuditor(ISecurityAuditor):
                 url_leak_count += 1
 
         public_clean = (public_leaks == 0) and (url_leak_count == 0)
-        internal_clean = (internal_leaks == 0)
+        internal_clean = internal_leaks == 0
         admin_auth_enforced = True
 
         passed = public_clean and internal_clean and admin_auth_enforced and (_total_leaked := total_leaks) == 0

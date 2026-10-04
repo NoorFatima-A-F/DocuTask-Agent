@@ -50,5 +50,9 @@ class BenchmarkRunnerVerifier:
             "benchmark_files_count": benchmark_files_count,
             "has_load_testing": has_load_testing,
             "has_latency_targets": has_latency_targets,
-            "benchmark_maturity": "HIGH" if (has_benchmark_suite and has_load_testing and has_latency_targets) else "MEDIUM" if has_benchmark_suite else "LOW",
+            "benchmark_maturity": "HIGH"
+            if (has_benchmark_suite and has_load_testing and has_latency_targets)
+            else "MEDIUM"
+            if has_benchmark_suite
+            else "LOW",
         }

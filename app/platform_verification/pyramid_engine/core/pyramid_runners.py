@@ -1,6 +1,7 @@
 """
 Dedicated Level Runners for L1 (Unit) through L7 (Enterprise Certification).
 """
+
 from __future__ import annotations
 import time
 from typing import Any, Dict, List
@@ -15,9 +16,7 @@ from app.platform_verification.pyramid_engine.domain.interfaces import IVerifica
 
 
 class BaseLevelRunner(IVerificationLevelRunner):
-    def _execute_test_list(
-        self, tests: List[TestDefinition], context: Dict[str, Any]
-    ) -> LevelExecutionSummary:
+    def _execute_test_list(self, tests: List[TestDefinition], context: Dict[str, Any]) -> LevelExecutionSummary:
         records: List[TestExecutionRecord] = []
         start_time = time.time()
 

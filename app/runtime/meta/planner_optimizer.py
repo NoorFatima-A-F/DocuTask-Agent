@@ -11,6 +11,7 @@ from pydantic import BaseModel
 
 class PlannerHyperparameters(BaseModel):
     """Dynamic operational parameters governing the autonomous planner."""
+
     beam_width: int = 4
     candidate_strategy_count: int = 4
     simulation_iterations: int = 300

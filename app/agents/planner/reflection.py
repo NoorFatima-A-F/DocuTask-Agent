@@ -12,6 +12,7 @@ from app.agents.planning.exceptions import PlanningException
 
 class ReflectionCritique(BaseModel):
     """Critique assessment result produced by reflection engine."""
+
     has_flaws: bool = Field(default=False)
     issues_detected: List[str] = Field(default_factory=list)
     suggested_repairs: List[str] = Field(default_factory=list)
@@ -42,8 +43,4 @@ class PlannerReflectionEngine:
             issues.append("Nodes are disconnected (isolated).")
             repairs.append("LINK_SEQUENTIAL_EDGES")
 
-        return ReflectionCritique(
-            has_flaws=len(issues) > 0,
-            issues_detected=issues,
-            suggested_repairs=repairs
-        )
+        return ReflectionCritique(has_flaws=len(issues) > 0, issues_detected=issues, suggested_repairs=repairs)

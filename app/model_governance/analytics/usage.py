@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class UsageEvent(BaseModel):
     """Single model invocation usage record."""
+
     event_id: str
     organization_id: str
     model_id: str
@@ -30,6 +31,7 @@ class UsageEvent(BaseModel):
 
 class ModelUsageSummary(BaseModel):
     """Aggregated usage metrics for a model."""
+
     model_id: str
     organization_id: str
     total_requests: int = 0
@@ -55,7 +57,8 @@ class ModelUsageTracker:
     ) -> ModelUsageSummary:
         """Compute aggregated usage for an organization and optional model filter."""
         filtered = [
-            e for e in self._events
+            e
+            for e in self._events
             if e.organization_id == organization_id and (model_id is None or e.model_id == model_id)
         ]
 

@@ -18,10 +18,10 @@ from typing import Any, Dict, List, Optional
 
 class CertificationTier(str, Enum):
     ENTERPRISE_HIGHEST_ASSURANCE = "ENTERPRISE_HIGHEST_ASSURANCE"  # Trust >= 98, Replay >= 99.8%, Invariants 100%
-    SCIENTIFIC_REPRODUCIBLE = "SCIENTIFIC_REPRODUCIBLE"           # Trust >= 95, Replay >= 99.0%
-    GOLD_STANDARD = "GOLD_STANDARD"                               # Trust >= 90
-    SILVER_COMPLIANT = "SILVER_COMPLIANT"                         # Trust >= 80
-    BRONZE_BASIC = "BRONZE_BASIC"                                 # Trust >= 70
+    SCIENTIFIC_REPRODUCIBLE = "SCIENTIFIC_REPRODUCIBLE"  # Trust >= 95, Replay >= 99.0%
+    GOLD_STANDARD = "GOLD_STANDARD"  # Trust >= 90
+    SILVER_COMPLIANT = "SILVER_COMPLIANT"  # Trust >= 80
+    BRONZE_BASIC = "BRONZE_BASIC"  # Trust >= 70
     UNQUALIFIED = "UNQUALIFIED"
 
 
@@ -30,18 +30,19 @@ class MissionCertificate:
     """
     Formal certificate of execution validity issued for an autonomous mission.
     """
+
     certificate_id: str
     mission_id: str
     document_type: str
     tier: CertificationTier = CertificationTier.GOLD_STANDARD
     composite_trust_score: float = 98.4
-    
+
     # Audit Findings
     evidence_completeness_pct: float = 100.0
     replay_state_fidelity_pct: float = 99.98
     validation_invariants_passed_pct: float = 100.0
     drift_deviation_pct: float = 0.25
-    
+
     issued_at: float = field(default_factory=time.time)
     expires_at: float = field(default_factory=lambda: time.time() + 365 * 86400)
     issuer_authority: str = "DocuTask Autonomous Certification Authority (DACA)"

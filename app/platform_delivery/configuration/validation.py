@@ -1,4 +1,5 @@
 """External Secret Reference Resolver (Req 49)."""
+
 import re
 from typing import Any, Dict
 

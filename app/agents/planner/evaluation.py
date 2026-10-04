@@ -28,7 +28,7 @@ class CandidateEvaluator:
                         rank_score=round(score, 3),
                         estimated_cost_usd=cand.estimated_cost_usd,
                         estimated_duration_seconds=cand.estimated_duration_seconds,
-                        confidence=cand.confidence
+                        confidence=cand.confidence,
                     )
                 )
         return evaluated

@@ -7,7 +7,7 @@ from app.runtime.truth.ledger import TruthLedger
 
 def test_truth_ledger_append_and_hash_chain():
     ledger = TruthLedger()
-    
+
     e1 = ledger.append_event(
         mission_id="msn_1001",
         event_type="PLANNER_DECISION",

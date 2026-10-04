@@ -16,6 +16,7 @@ logger = logging.getLogger("infrastructure.observability.diagnostics.health_anal
 
 class LayerHealthStatus(BaseModel):
     """Health score and anomaly status for a single operational layer."""
+
     layer_name: str  # INFRASTRUCTURE, WORKFLOWS, AI_RUNTIME, DATABASE, NETWORK
     score: float = Field(default=100.0, ge=0.0, le=100.0)
     is_healthy: bool = True
@@ -25,6 +26,7 @@ class LayerHealthStatus(BaseModel):
 
 class PlatformHealthReport(BaseModel):
     """Holistic cross-layer operational health assessment."""
+
     overall_health_score: float
     layers: Dict[str, LayerHealthStatus]
     summary_message: str
@@ -112,7 +114,11 @@ class CrossLayerHealthAnalyzer:
         avg_score = sum(l.score for l in layers.values()) / len(layers)
         all_anomalies = [a for l in layers.values() for a in l.active_anomalies]
 
-        summary = "All platform layers operating optimally." if not all_anomalies else f"{len(all_anomalies)} operational anomalies detected."
+        summary = (
+            "All platform layers operating optimally."
+            if not all_anomalies
+            else f"{len(all_anomalies)} operational anomalies detected."
+        )
 
         return PlatformHealthReport(
             overall_health_score=round(avg_score, 2),

@@ -1,6 +1,7 @@
 """
 3I.4.3 & 3I.4.5: API & End-to-End Workflow Trace Verifier
 """
+
 from typing import List
 from ..domain.models import SpanKind, SpanDetail, WorkflowTraceReport
 from ..domain.interfaces import IWorkflowTraceVerifier
@@ -20,7 +21,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="api_gateway",
                 kind=SpanKind.SERVER,
                 duration_ms=4850.0,
-                attributes={"http.method": "POST", "http.status_code": 200, "user.type": "enterprise"}
+                attributes={"http.method": "POST", "http.status_code": 200, "user.type": "enterprise"},
             ),
             SpanDetail(
                 span_id="span_auth_002",
@@ -29,7 +30,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="security_auth_service",
                 kind=SpanKind.INTERNAL,
                 duration_ms=45.0,
-                attributes={"auth.scheme": "Bearer", "tenant.id": "tenant_corp_1"}
+                attributes={"auth.scheme": "Bearer", "tenant.id": "tenant_corp_1"},
             ),
             SpanDetail(
                 span_id="span_validate_003",
@@ -38,7 +39,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="api_gateway",
                 kind=SpanKind.INTERNAL,
                 duration_ms=25.0,
-                attributes={"file.format": "application/pdf", "file.size_kb": 1240}
+                attributes={"file.format": "application/pdf", "file.size_kb": 1240},
             ),
             SpanDetail(
                 span_id="span_enqueue_004",
@@ -47,7 +48,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="redis_task_queue",
                 kind=SpanKind.PRODUCER,
                 duration_ms=30.0,
-                attributes={"queue.name": "document_processing_queue"}
+                attributes={"queue.name": "document_processing_queue"},
             ),
             SpanDetail(
                 span_id="span_worker_proc_005",
@@ -56,7 +57,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="async_document_worker",
                 kind=SpanKind.CONSUMER,
                 duration_ms=4750.0,
-                attributes={"worker.id": "worker_pool_03"}
+                attributes={"worker.id": "worker_pool_03"},
             ),
             SpanDetail(
                 span_id="span_ocr_006",
@@ -65,7 +66,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="ocr_processing_service",
                 kind=SpanKind.INTERNAL,
                 duration_ms=620.0,
-                attributes={"ocr.engine": "Tesseract-v5", "page.count": 2}
+                attributes={"ocr.engine": "Tesseract-v5", "page.count": 2},
             ),
             SpanDetail(
                 span_id="span_gemini_007",
@@ -74,7 +75,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="gemini_llm_gateway",
                 kind=SpanKind.CLIENT,
                 duration_ms=2400.0,
-                attributes={"llm.model": "gemini-1.5-pro", "llm.input_tokens": 3200, "llm.output_tokens": 750}
+                attributes={"llm.model": "gemini-1.5-pro", "llm.input_tokens": 3200, "llm.output_tokens": 750},
             ),
             SpanDetail(
                 span_id="span_validation_008",
@@ -83,7 +84,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="agent_planning_runtime",
                 kind=SpanKind.INTERNAL,
                 duration_ms=180.0,
-                attributes={"validation.status": "PASSED", "confidence.overall": 0.965}
+                attributes={"validation.status": "PASSED", "confidence.overall": 0.965},
             ),
             SpanDetail(
                 span_id="span_db_009",
@@ -92,7 +93,7 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
                 service="postgresql_primary_db",
                 kind=SpanKind.CLIENT,
                 duration_ms=150.0,
-                attributes={"db.system": "postgresql", "db.statement": "INSERT INTO extraction_results ..."}
+                attributes={"db.system": "postgresql", "db.statement": "INSERT INTO extraction_results ..."},
             ),
         ]
 
@@ -104,5 +105,5 @@ class WorkflowTraceVerifier(IWorkflowTraceVerifier):
             slowest_component="gemini_structured_extraction",
             slowest_duration_ms=2400.0,
             spans=spans,
-            workflow_trace_passed=True
+            workflow_trace_passed=True,
         )

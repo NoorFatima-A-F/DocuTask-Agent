@@ -31,6 +31,7 @@ class LogEmitRequest(BaseModel):
 
 # --- Metrics ---
 
+
 @router.get("/metrics", response_model=List[Dict[str, Any]])
 def get_metrics(prefix: Optional[str] = None) -> List[Dict[str, Any]]:
     series = observability_sdk.get_metrics(prefix=prefix)
@@ -49,6 +50,7 @@ def record_metric(req: MetricRecordRequest) -> Dict[str, Any]:
 
 
 # --- Logs ---
+
 
 @router.get("/logs", response_model=List[Dict[str, Any]])
 def search_logs(
@@ -78,6 +80,7 @@ def emit_log(req: LogEmitRequest) -> Dict[str, Any]:
 
 # --- Traces ---
 
+
 @router.get("/traces/{trace_id}", response_model=Dict[str, Any])
 def get_trace_analysis(trace_id: str) -> Dict[str, Any]:
     report = observability_sdk.analyze_trace(trace_id)
@@ -87,6 +90,7 @@ def get_trace_analysis(trace_id: str) -> Dict[str, Any]:
 
 
 # --- Alerts ---
+
 
 @router.get("/alerts", response_model=List[Dict[str, Any]])
 def list_alerts() -> List[Dict[str, Any]]:
@@ -102,6 +106,7 @@ def create_alert_rule(rule: AlertRule) -> Dict[str, Any]:
 
 # --- SLOs ---
 
+
 @router.get("/slo", response_model=List[Dict[str, Any]])
 def list_slos() -> List[Dict[str, Any]]:
     statuses = observability_sdk.error_budget_tracker.list_all_statuses()
@@ -110,6 +115,7 @@ def list_slos() -> List[Dict[str, Any]]:
 
 # --- Service Dependencies ---
 
+
 @router.get("/dependencies", response_model=List[Dict[str, Any]])
 def get_dependencies() -> List[Dict[str, Any]]:
     edges = observability_sdk.get_service_dependencies()
@@ -117,6 +123,7 @@ def get_dependencies() -> List[Dict[str, Any]]:
 
 
 # --- Diagnostics & RCA ---
+
 
 @router.get("/diagnostics/rca", response_model=Dict[str, Any])
 def run_rca(trace_id: Optional[str] = None) -> Dict[str, Any]:

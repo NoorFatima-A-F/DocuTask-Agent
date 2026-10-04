@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 
 class AlertSeverity(str, enum.Enum):
     """Five enterprise alert severity tiers."""
+
     INFO = "INFO"
     MINOR = "MINOR"
     MAJOR = "MAJOR"
@@ -25,6 +26,7 @@ class AlertSeverity(str, enum.Enum):
 
 class AlertStatus(str, enum.Enum):
     """Lifecycle status of an alert instance."""
+
     FIRING = "FIRING"
     ACKNOWLEDGED = "ACKNOWLEDGED"
     RESOLVED = "RESOLVED"
@@ -33,6 +35,7 @@ class AlertStatus(str, enum.Enum):
 
 class RuleType(str, enum.Enum):
     """Type of alert condition logic."""
+
     THRESHOLD = "THRESHOLD"
     RATE_OF_CHANGE = "RATE_OF_CHANGE"
     ANOMALY = "ANOMALY"
@@ -42,6 +45,7 @@ class RuleType(str, enum.Enum):
 
 class AlertRule(BaseModel):
     """Configurable alert rule specification."""
+
     rule_id: str
     name: str
     description: str = ""
@@ -58,6 +62,7 @@ class AlertRule(BaseModel):
 
 class AlertInstance(BaseModel):
     """Instantiated active or historical alert event."""
+
     alert_id: str = Field(default_factory=lambda: f"alt-{uuid.uuid4().hex[:12]}")
     rule_id: str
     rule_name: str

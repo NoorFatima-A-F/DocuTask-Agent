@@ -15,7 +15,7 @@ class WorkerCapacityVerifier(IWorkerCapacityVerifier):
         if force_all_stopped:
             workers = [
                 WorkerHeartbeatItem(
-                    worker_id=f"worker-{i+1}",
+                    worker_id=f"worker-{i + 1}",
                     status=WorkerState.STOPPED,
                     last_seen_seconds_ago=120.0,
                     current_task="none",

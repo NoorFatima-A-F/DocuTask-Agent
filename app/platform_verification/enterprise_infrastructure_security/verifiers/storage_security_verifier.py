@@ -29,10 +29,34 @@ class StorageSecurityVerifier(IStorageSecurityVerifier):
 
     def verify(self) -> StorageSecurityReport:
         buckets = [
-            StorageBucketSecuritySpec(bucket_name="docutask-raw-documents", encryption_at_rest="AES-256-KMS", public_access_blocked=True, signed_url_enforced=True, tenant_isolation_verified=True),
-            StorageBucketSecuritySpec(bucket_name="docutask-ocr-artifacts", encryption_at_rest="AES-256-KMS", public_access_blocked=True, signed_url_enforced=True, tenant_isolation_verified=True),
-            StorageBucketSecuritySpec(bucket_name="docutask-extracted-json", encryption_at_rest="AES-256-KMS", public_access_blocked=True, signed_url_enforced=True, tenant_isolation_verified=True),
-            StorageBucketSecuritySpec(bucket_name="docutask-audit-evidence", encryption_at_rest="AES-256-KMS", public_access_blocked=True, signed_url_enforced=True, tenant_isolation_verified=True),
+            StorageBucketSecuritySpec(
+                bucket_name="docutask-raw-documents",
+                encryption_at_rest="AES-256-KMS",
+                public_access_blocked=True,
+                signed_url_enforced=True,
+                tenant_isolation_verified=True,
+            ),
+            StorageBucketSecuritySpec(
+                bucket_name="docutask-ocr-artifacts",
+                encryption_at_rest="AES-256-KMS",
+                public_access_blocked=True,
+                signed_url_enforced=True,
+                tenant_isolation_verified=True,
+            ),
+            StorageBucketSecuritySpec(
+                bucket_name="docutask-extracted-json",
+                encryption_at_rest="AES-256-KMS",
+                public_access_blocked=True,
+                signed_url_enforced=True,
+                tenant_isolation_verified=True,
+            ),
+            StorageBucketSecuritySpec(
+                bucket_name="docutask-audit-evidence",
+                encryption_at_rest="AES-256-KMS",
+                public_access_blocked=True,
+                signed_url_enforced=True,
+                tenant_isolation_verified=True,
+            ),
         ]
 
         checks = [

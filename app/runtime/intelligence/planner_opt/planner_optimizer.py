@@ -42,15 +42,15 @@ class PlannerOptimizer:
         """
         active_config = self.version_manager.get_active()
         summary = self.error_analyzer.compute_summary()
-        
+
         # Determine adjustments
         new_version_id = f"v{int(active_config.version_id.split('.')[0].replace('v', '')) + 1}.0.0"
-        
+
         # Adaptive tuning based on error summary
         new_exploration = max(0.05, active_config.exploration_weight * 0.9)
         new_latency_factor = min(0.60, active_config.latency_penalty_factor + 0.05)
         new_cost_factor = active_config.cost_penalty_factor
-        
+
         if target_metric == "cost_usd":
             new_cost_factor = min(0.60, active_config.cost_penalty_factor + 0.10)
             new_latency_factor = max(0.20, active_config.latency_penalty_factor - 0.05)
@@ -85,7 +85,7 @@ class PlannerOptimizer:
         candidate.supporting_experiment_id = experiment_id
         candidate.statistical_p_value = p_value
         candidate.status = "ACTIVE"
-        
+
         # Re-register to activate and archive previous
         self.version_manager.register_version(candidate)
         return True

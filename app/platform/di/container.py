@@ -12,13 +12,13 @@ from typing import Any, Callable, Dict, Type
 class DIContainer:
     def __init__(self):
         self._singletons: Dict[str, Any] = {}
-        self._factories: Dict[str, Callable[['DIContainer'], Any]] = {}
+        self._factories: Dict[str, Callable[["DIContainer"], Any]] = {}
         self._types: Dict[Type[Any], Any] = {}
 
     def register_instance(self, key: str, instance: Any) -> None:
         self._singletons[key] = instance
 
-    def register_factory(self, key: str, factory: Callable[['DIContainer'], Any]) -> None:
+    def register_factory(self, key: str, factory: Callable[["DIContainer"], Any]) -> None:
         self._factories[key] = factory
 
     def register_type(self, interface_cls: Type[Any], implementation: Any) -> None:
@@ -38,7 +38,7 @@ class DIContainer:
             return self._types[interface_cls]
         raise KeyError(f"Interface '{interface_cls.__name__}' not registered in DI container")
 
-    def create_child_scope(self) -> 'DIContainer':
+    def create_child_scope(self) -> "DIContainer":
         child = DIContainer()
         child._singletons.update(self._singletons)
         child._factories.update(self._factories)

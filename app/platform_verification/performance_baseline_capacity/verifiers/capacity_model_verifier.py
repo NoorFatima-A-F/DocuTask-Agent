@@ -35,17 +35,30 @@ class CapacityModelVerifier(ICapacityModelVerifier):
         unit_worker_throughput_per_hour = 120  # 2 docs/minute per worker
 
         scaling_steps = [
-            CapacityScalingStep(worker_count=1, throughput_docs_per_hour=120, worker_throughput_per_hour=120, formula_verified=True),
-            CapacityScalingStep(worker_count=2, throughput_docs_per_hour=240, worker_throughput_per_hour=120, formula_verified=True),
-            CapacityScalingStep(worker_count=4, throughput_docs_per_hour=480, worker_throughput_per_hour=120, formula_verified=True),
-            CapacityScalingStep(worker_count=8, throughput_docs_per_hour=960, worker_throughput_per_hour=120, formula_verified=True),
-            CapacityScalingStep(worker_count=10, throughput_docs_per_hour=1200, worker_throughput_per_hour=120, formula_verified=True),
+            CapacityScalingStep(
+                worker_count=1, throughput_docs_per_hour=120, worker_throughput_per_hour=120, formula_verified=True
+            ),
+            CapacityScalingStep(
+                worker_count=2, throughput_docs_per_hour=240, worker_throughput_per_hour=120, formula_verified=True
+            ),
+            CapacityScalingStep(
+                worker_count=4, throughput_docs_per_hour=480, worker_throughput_per_hour=120, formula_verified=True
+            ),
+            CapacityScalingStep(
+                worker_count=8, throughput_docs_per_hour=960, worker_throughput_per_hour=120, formula_verified=True
+            ),
+            CapacityScalingStep(
+                worker_count=10, throughput_docs_per_hour=1200, worker_throughput_per_hour=120, formula_verified=True
+            ),
         ]
 
         checks: List[CheckResult] = [
             CheckResult(
                 name="Capacity Model Formula Compliance (Capacity = Worker Throughput x Worker Count)",
-                passed=all(s.throughput_docs_per_hour == s.worker_count * unit_worker_throughput_per_hour for s in scaling_steps),
+                passed=all(
+                    s.throughput_docs_per_hour == s.worker_count * unit_worker_throughput_per_hour
+                    for s in scaling_steps
+                ),
                 details=f"Empirical throughput matched mathematical model exactly across 1 to 10 worker nodes ({unit_worker_throughput_per_hour} docs/hr/worker)",
                 metrics={"unit_rate": unit_worker_throughput_per_hour, "model_accuracy": 1.0},
             ),

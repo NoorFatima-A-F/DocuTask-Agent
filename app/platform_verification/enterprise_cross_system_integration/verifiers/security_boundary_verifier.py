@@ -25,12 +25,48 @@ class SecurityBoundaryVerifier(ISecurityBoundaryVerifier):
 
     def verify(self) -> SecurityBoundaryReport:
         boundaries = [
-            SecurityBoundaryCheck(boundary_name="TenantDataPartitioning", model="RowLevelSecurityAndSchemaIsolation", privilege_escalation_attempted=True, blocked=True, isolation_maintained=True),
-            SecurityBoundaryCheck(boundary_name="RoleBasedAccessControl", model="RBACWithFineGrainedScopes", privilege_escalation_attempted=True, blocked=True, isolation_maintained=True),
-            SecurityBoundaryCheck(boundary_name="AttributeBasedAccessControl", model="ABACTimeAndOrgPolicy", privilege_escalation_attempted=True, blocked=True, isolation_maintained=True),
-            SecurityBoundaryCheck(boundary_name="PromptInjectionIsolation", model="StrictLLMSandbox", privilege_escalation_attempted=True, blocked=True, isolation_maintained=True),
-            SecurityBoundaryCheck(boundary_name="AgentToolExecutionPermissions", model="LeastPrivilegeCapabilityTokens", privilege_escalation_attempted=True, blocked=True, isolation_maintained=True),
-            SecurityBoundaryCheck(boundary_name="SecretsAndKMSAccessBoundary", model="EnvelopeEncryptionWithIAM", privilege_escalation_attempted=True, blocked=True, isolation_maintained=True),
+            SecurityBoundaryCheck(
+                boundary_name="TenantDataPartitioning",
+                model="RowLevelSecurityAndSchemaIsolation",
+                privilege_escalation_attempted=True,
+                blocked=True,
+                isolation_maintained=True,
+            ),
+            SecurityBoundaryCheck(
+                boundary_name="RoleBasedAccessControl",
+                model="RBACWithFineGrainedScopes",
+                privilege_escalation_attempted=True,
+                blocked=True,
+                isolation_maintained=True,
+            ),
+            SecurityBoundaryCheck(
+                boundary_name="AttributeBasedAccessControl",
+                model="ABACTimeAndOrgPolicy",
+                privilege_escalation_attempted=True,
+                blocked=True,
+                isolation_maintained=True,
+            ),
+            SecurityBoundaryCheck(
+                boundary_name="PromptInjectionIsolation",
+                model="StrictLLMSandbox",
+                privilege_escalation_attempted=True,
+                blocked=True,
+                isolation_maintained=True,
+            ),
+            SecurityBoundaryCheck(
+                boundary_name="AgentToolExecutionPermissions",
+                model="LeastPrivilegeCapabilityTokens",
+                privilege_escalation_attempted=True,
+                blocked=True,
+                isolation_maintained=True,
+            ),
+            SecurityBoundaryCheck(
+                boundary_name="SecretsAndKMSAccessBoundary",
+                model="EnvelopeEncryptionWithIAM",
+                privilege_escalation_attempted=True,
+                blocked=True,
+                isolation_maintained=True,
+            ),
         ]
 
         checks = [

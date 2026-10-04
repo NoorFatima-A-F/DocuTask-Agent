@@ -1,11 +1,13 @@
 """
 Strongly-Typed Domain Identifiers.
 """
+
 from dataclasses import dataclass
 import uuid
 from typing import TypeVar, Generic
 
 T = TypeVar("T", bound=str)
+
 
 @dataclass(frozen=True)
 class StronglyTypedId(Generic[T]):

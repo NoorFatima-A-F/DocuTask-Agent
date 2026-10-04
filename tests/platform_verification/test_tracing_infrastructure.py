@@ -1,6 +1,7 @@
 """
 Phase 3I.4: Enterprise Distributed Tracing Infrastructure Verification - Unit and Integration Tests
 """
+
 import os
 import json
 import hashlib
@@ -15,30 +16,47 @@ from app.platform_verification.tracing_infrastructure.domain.models import (
     SpanDetail,
     TracingCertificationReport,
 )
-from app.platform_verification.tracing_infrastructure.verifiers.tracing_architecture_verifier import TracingArchitectureVerifier
-from app.platform_verification.tracing_infrastructure.verifiers.context_propagation_verifier import ContextPropagationVerifier
+from app.platform_verification.tracing_infrastructure.verifiers.tracing_architecture_verifier import (
+    TracingArchitectureVerifier,
+)
+from app.platform_verification.tracing_infrastructure.verifiers.context_propagation_verifier import (
+    ContextPropagationVerifier,
+)
 from app.platform_verification.tracing_infrastructure.verifiers.api_workflow_trace_verifier import WorkflowTraceVerifier
 from app.platform_verification.tracing_infrastructure.verifiers.ai_agent_trace_verifier import AgentTraceVerifier
-from app.platform_verification.tracing_infrastructure.verifiers.external_dependency_trace_verifier import ExternalDependencyTraceVerifier
-from app.platform_verification.tracing_infrastructure.verifiers.error_diagnostic_trace_verifier import ErrorDiagnosticTraceVerifier
-from app.platform_verification.tracing_infrastructure.verifiers.trace_log_metric_correlation_verifier import TraceCorrelationVerifier
-from app.platform_verification.tracing_infrastructure.verifiers.sampling_strategy_verifier import SamplingStrategyVerifier
+from app.platform_verification.tracing_infrastructure.verifiers.external_dependency_trace_verifier import (
+    ExternalDependencyTraceVerifier,
+)
+from app.platform_verification.tracing_infrastructure.verifiers.error_diagnostic_trace_verifier import (
+    ErrorDiagnosticTraceVerifier,
+)
+from app.platform_verification.tracing_infrastructure.verifiers.trace_log_metric_correlation_verifier import (
+    TraceCorrelationVerifier,
+)
+from app.platform_verification.tracing_infrastructure.verifiers.sampling_strategy_verifier import (
+    SamplingStrategyVerifier,
+)
 from app.platform_verification.tracing_infrastructure.verifiers.trace_security_verifier import TraceSecurityVerifier
-from app.platform_verification.tracing_infrastructure.verifiers.trace_performance_verifier import TracePerformanceVerifier
-from app.platform_verification.tracing_infrastructure.verifiers.failure_simulation_trace_verifier import FailureSimulationTraceVerifier
+from app.platform_verification.tracing_infrastructure.verifiers.trace_performance_verifier import (
+    TracePerformanceVerifier,
+)
+from app.platform_verification.tracing_infrastructure.verifiers.failure_simulation_trace_verifier import (
+    FailureSimulationTraceVerifier,
+)
 from app.platform_verification.tracing_infrastructure.scoring.tracing_quality_scorer import TracingQualityScorer
-from app.platform_verification.tracing_infrastructure.runtime.tracing_verification_runtime import TracingVerificationRuntime
+from app.platform_verification.tracing_infrastructure.runtime.tracing_verification_runtime import (
+    TracingVerificationRuntime,
+)
 from app.platform_verification.tracing_infrastructure.api.tracing_verification_api import router as tracing_api_router
 
 
 # ─── 1. Domain Models Tests ───────────────────────────────────────────────────
 
+
 def test_domain_models_instantiation():
     arch = TracingArchitectureReport(
         services_instrumented=8,
-        services=[
-            TracingServiceInstrumentation(service_name="api_gateway", sdk="OTel Python", backend="Tempo")
-        ]
+        services=[TracingServiceInstrumentation(service_name="api_gateway", sdk="OTel Python", backend="Tempo")],
     )
     assert arch.services_instrumented == 8
     assert arch.collector == "OpenTelemetry"
@@ -50,19 +68,19 @@ def test_domain_models_instantiation():
         name="test_span",
         service="api_gateway",
         kind=SpanKind.SERVER,
-        duration_ms=45.0
+        duration_ms=45.0,
     )
     assert span.kind == SpanKind.SERVER
 
     cert_rep = TracingCertificationReport(
-        certification_tier=TracingCertificationTier.ENTERPRISE_TRACING_READY,
-        overall_score_pct=98.5
+        certification_tier=TracingCertificationTier.ENTERPRISE_TRACING_READY, overall_score_pct=98.5
     )
     assert cert_rep.certification_granted is True
     assert cert_rep.certification_tier == TracingCertificationTier.ENTERPRISE_TRACING_READY
 
 
 # ─── 2. Architecture Verifier Tests ───────────────────────────────────────────
+
 
 def test_tracing_architecture_verifier():
     verifier = TracingArchitectureVerifier()
@@ -82,6 +100,7 @@ def test_tracing_architecture_verifier():
 
 # ─── 3. Context Propagation Verifier Tests ────────────────────────────────────
 
+
 def test_context_propagation_verifier():
     verifier = ContextPropagationVerifier()
     report = verifier.verify_context_propagation()
@@ -97,6 +116,7 @@ def test_context_propagation_verifier():
 
 
 # ─── 4. Workflow Trace Verifier Tests ─────────────────────────────────────────
+
 
 def test_workflow_trace_verifier():
     verifier = WorkflowTraceVerifier()
@@ -119,6 +139,7 @@ def test_workflow_trace_verifier():
 
 # ─── 5. AI Agent Trace Verifier Tests ─────────────────────────────────────────
 
+
 def test_ai_agent_trace_verifier():
     verifier = AgentTraceVerifier()
     report = verifier.verify_agent_trace()
@@ -139,6 +160,7 @@ def test_ai_agent_trace_verifier():
 
 # ─── 6. External Dependency Trace Verifier Tests ──────────────────────────────
 
+
 def test_external_dependency_trace_verifier():
     verifier = ExternalDependencyTraceVerifier()
     report = verifier.verify_dependency_trace()
@@ -154,6 +176,7 @@ def test_external_dependency_trace_verifier():
 
 
 # ─── 7. Error Diagnostic Trace Verifier Tests ─────────────────────────────────
+
 
 def test_error_diagnostic_trace_verifier():
     verifier = ErrorDiagnosticTraceVerifier()
@@ -171,6 +194,7 @@ def test_error_diagnostic_trace_verifier():
 
 
 # ─── 8. Correlation & Sampling Verifier Tests ─────────────────────────────────
+
 
 def test_trace_correlation_verifier():
     verifier = TraceCorrelationVerifier()
@@ -198,6 +222,7 @@ def test_sampling_strategy_verifier():
 
 # ─── 9. Security & Performance Verifier Tests ─────────────────────────────────
 
+
 def test_trace_security_verifier():
     verifier = TraceSecurityVerifier()
     report = verifier.verify_trace_security()
@@ -223,6 +248,7 @@ def test_trace_performance_verifier():
 
 # ─── 10. Failure Simulation Verifier Tests ────────────────────────────────────
 
+
 def test_failure_simulation_trace_verifier():
     verifier = FailureSimulationTraceVerifier()
     report = verifier.verify_failure_simulation_traces()
@@ -241,6 +267,7 @@ def test_failure_simulation_trace_verifier():
 
 
 # ─── 11. Quality Scorer Tests ─────────────────────────────────────────────────
+
 
 def test_tracing_quality_scorer():
     runtime = TracingVerificationRuntime()
@@ -282,6 +309,7 @@ def test_tracing_quality_scorer():
 
 # ─── 12. Exporter & Runtime Tests ─────────────────────────────────────────────
 
+
 def test_tracing_evidence_exporter(tmp_path):
     out_dir = str(tmp_path / "observability_verification" / "tracing")
     runtime = TracingVerificationRuntime()
@@ -308,6 +336,7 @@ def test_tracing_evidence_exporter(tmp_path):
 
 
 # ─── 13. FastAPI Router Tests ─────────────────────────────────────────────────
+
 
 def test_tracing_verification_api_endpoints():
     app = FastAPI()

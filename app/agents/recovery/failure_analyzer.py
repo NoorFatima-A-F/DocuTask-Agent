@@ -14,6 +14,6 @@ class FailureAnalyzer:
         transient_categories = {
             FailureCategory.TIMEOUT_FAILURE,
             FailureCategory.TOOL_FAILURE,
-            FailureCategory.PROVIDER_FAILURE
+            FailureCategory.PROVIDER_FAILURE,
         }
         return failure.category in transient_categories and failure.recoverability_score >= 0.7

@@ -13,17 +13,18 @@ def _create_events(mission_id: str, count: int = 10) -> list[RuntimeEvent]:
     prev_hash = "0" * 64
     for i in range(count):
         ev = RuntimeEvent(
-            event_id=f"ev_{mission_id}_{i+1:03d}",
+            event_id=f"ev_{mission_id}_{i + 1:03d}",
             mission_id=mission_id,
             sequence_number=i + 1,
             category=EventCategory.EXECUTION,
             event_type=EventType.EXECUTION_TASK_STARTED if i % 2 == 0 else EventType.EXECUTION_TASK_COMPLETED,
             severity=EventSeverity.INFO,
             stage="EXTRACTION",
-            payload={"task_id": f"node_{i//2}", "duration_ms": 100.0, "cost_usd": 0.0005},
+            payload={"task_id": f"node_{i // 2}", "duration_ms": 100.0, "cost_usd": 0.0005},
             previous_hash=prev_hash,
         )
         from app.runtime.observability.event_serializer import EventSerializer
+
         ev.hash = EventSerializer.compute_event_hash(ev, prev_hash)
         prev_hash = ev.hash
         events.append(ev)

@@ -26,14 +26,36 @@ class PostmortemGenerator(IPostmortemGenerator):
         datetime.now(timezone.utc).isoformat()
 
         timeline: List[PostmortemTimelineItem] = [
-            PostmortemTimelineItem("10:14:00 UTC", "Anomaly Inception", "Batch client initiates 500 parallel document upload requests"),
-            PostmortemTimelineItem("10:14:15 UTC", "Degradation Begins", "PostgreSQL connection pool saturation reaches 92% (46/50 leases)"),
-            PostmortemTimelineItem("10:14:18 UTC", "Detection Triggered", "Prometheus alert PostgresConnectionSaturation fires (MTTD=3.2s)"),
-            PostmortemTimelineItem("10:14:20 UTC", "Runbook Dispatched", "Runbook RB-DB-002 activated by automated Incident Decision Engine"),
-            PostmortemTimelineItem("10:14:22 UTC", "Circuit Breaker Activated", "Application circuit breaker opened to shed non-critical query load"),
-            PostmortemTimelineItem("10:14:24 UTC", "Remediation Executed", "Terminated 12 idle connections and reloaded PgBouncer pool"),
-            PostmortemTimelineItem("10:14:27 UTC", "Recovery Verified", "Health checks confirmed active connections reduced to 24/50; circuit breaker closed (MTTR=8.8s)"),
-            PostmortemTimelineItem("10:14:30 UTC", "Incident Closed", "Postmortem generated and knowledge base resolution updated"),
+            PostmortemTimelineItem(
+                "10:14:00 UTC", "Anomaly Inception", "Batch client initiates 500 parallel document upload requests"
+            ),
+            PostmortemTimelineItem(
+                "10:14:15 UTC", "Degradation Begins", "PostgreSQL connection pool saturation reaches 92% (46/50 leases)"
+            ),
+            PostmortemTimelineItem(
+                "10:14:18 UTC", "Detection Triggered", "Prometheus alert PostgresConnectionSaturation fires (MTTD=3.2s)"
+            ),
+            PostmortemTimelineItem(
+                "10:14:20 UTC",
+                "Runbook Dispatched",
+                "Runbook RB-DB-002 activated by automated Incident Decision Engine",
+            ),
+            PostmortemTimelineItem(
+                "10:14:22 UTC",
+                "Circuit Breaker Activated",
+                "Application circuit breaker opened to shed non-critical query load",
+            ),
+            PostmortemTimelineItem(
+                "10:14:24 UTC", "Remediation Executed", "Terminated 12 idle connections and reloaded PgBouncer pool"
+            ),
+            PostmortemTimelineItem(
+                "10:14:27 UTC",
+                "Recovery Verified",
+                "Health checks confirmed active connections reduced to 24/50; circuit breaker closed (MTTR=8.8s)",
+            ),
+            PostmortemTimelineItem(
+                "10:14:30 UTC", "Incident Closed", "Postmortem generated and knowledge base resolution updated"
+            ),
         ]
 
         passed = len(timeline) >= 6

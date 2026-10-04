@@ -10,12 +10,36 @@ class MaliciousPatternDetector:
 
     # Shell commands, destructive instructions & binary exploits embedded in text
     DANGEROUS_PATTERNS = [
-        (r"(?i)\b(rm\s+-rf\s+[/~]|del\s+/[fF]\s+/[sS]|format\s+[c-z]:)", "System file destruction attempt", ViolationSeverity.CRITICAL),
-        (r"(?i)\b(drop\s+database\b|drop\s+table\b|truncate\s+table\b|delete\s+from\s+\w+\s*;)", "Unconstrained SQL destruction", ViolationSeverity.CRITICAL),
-        (r"(?i)(<\s*script\b[^>]*>.*?</\s*script\s*>|javascript:\s*alert)", "Cross-site scripting payload", ViolationSeverity.HIGH),
-        (r"(?i)(exec\s*\(\s*compile|eval\s*\(\s*|__import__\s*\(\s*['\"]os['\"]\)|subprocess\.Popen)", "Arbitrary code execution primitive", ViolationSeverity.CRITICAL),
-        (r"(?i)(/bin/(sh|bash|zsh|dash)|cmd\.exe|powershell(\.exe)?\s+-enc)", "Direct shell invocation payload", ViolationSeverity.HIGH),
-        (r"(?i)\b(curl|wget)\s+https?://[^\s]+\s*\|\s*(sh|bash)", "Remote script execution pipeline", ViolationSeverity.CRITICAL),
+        (
+            r"(?i)\b(rm\s+-rf\s+[/~]|del\s+/[fF]\s+/[sS]|format\s+[c-z]:)",
+            "System file destruction attempt",
+            ViolationSeverity.CRITICAL,
+        ),
+        (
+            r"(?i)\b(drop\s+database\b|drop\s+table\b|truncate\s+table\b|delete\s+from\s+\w+\s*;)",
+            "Unconstrained SQL destruction",
+            ViolationSeverity.CRITICAL,
+        ),
+        (
+            r"(?i)(<\s*script\b[^>]*>.*?</\s*script\s*>|javascript:\s*alert)",
+            "Cross-site scripting payload",
+            ViolationSeverity.HIGH,
+        ),
+        (
+            r"(?i)(exec\s*\(\s*compile|eval\s*\(\s*|__import__\s*\(\s*['\"]os['\"]\)|subprocess\.Popen)",
+            "Arbitrary code execution primitive",
+            ViolationSeverity.CRITICAL,
+        ),
+        (
+            r"(?i)(/bin/(sh|bash|zsh|dash)|cmd\.exe|powershell(\.exe)?\s+-enc)",
+            "Direct shell invocation payload",
+            ViolationSeverity.HIGH,
+        ),
+        (
+            r"(?i)\b(curl|wget)\s+https?://[^\s]+\s*\|\s*(sh|bash)",
+            "Remote script execution pipeline",
+            ViolationSeverity.CRITICAL,
+        ),
     ]
 
     def scan(self, text: str) -> List[SafetyViolation]:

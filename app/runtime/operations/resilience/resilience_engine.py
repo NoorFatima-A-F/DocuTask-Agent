@@ -14,7 +14,7 @@ class EnterpriseResilienceProfile:
     availability_percentage: float  # e.g. 99.99%
     reliability_index: float  # 0.0 - 1.0
     mttr_seconds: float  # Mean Time To Recovery
-    mtbf_hours: float   # Mean Time Between Failures
+    mtbf_hours: float  # Mean Time Between Failures
     mttd_seconds: float  # Mean Time To Detect
     recovery_success_rate_pct: float
     healing_success_rate_pct: float

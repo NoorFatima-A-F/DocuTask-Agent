@@ -77,15 +77,35 @@ class KnowledgePlatformScorer:
 
         # Calculate Pillar Indices
         indices = {
-            "ingestion_and_registry_index": (part_results["PART_01_INGESTION"].score + part_results["PART_02_REGISTRY"].score) / 2.0,
-            "vector_and_embedding_index": (part_results["PART_03_EMBEDDINGS"].score + part_results["PART_04_VECTORDB"].score) / 2.0,
-            "retrieval_and_reranking_index": (part_results["PART_05_RETRIEVAL"].score + part_results["PART_06_RERANKING"].score) / 2.0,
-            "context_and_graph_index": (part_results["PART_07_CONTEXT"].score + part_results["PART_08_GRAPH"].score) / 2.0,
-            "memory_and_freshness_index": (part_results["PART_09_MEMORY"].score + part_results["PART_11_FRESHNESS"].score) / 2.0,
-            "quality_and_drift_index": (part_results["PART_10_QUALITY"].score + part_results["PART_12_DRIFT"].score) / 2.0,
+            "ingestion_and_registry_index": (
+                part_results["PART_01_INGESTION"].score + part_results["PART_02_REGISTRY"].score
+            )
+            / 2.0,
+            "vector_and_embedding_index": (
+                part_results["PART_03_EMBEDDINGS"].score + part_results["PART_04_VECTORDB"].score
+            )
+            / 2.0,
+            "retrieval_and_reranking_index": (
+                part_results["PART_05_RETRIEVAL"].score + part_results["PART_06_RERANKING"].score
+            )
+            / 2.0,
+            "context_and_graph_index": (part_results["PART_07_CONTEXT"].score + part_results["PART_08_GRAPH"].score)
+            / 2.0,
+            "memory_and_freshness_index": (
+                part_results["PART_09_MEMORY"].score + part_results["PART_11_FRESHNESS"].score
+            )
+            / 2.0,
+            "quality_and_drift_index": (part_results["PART_10_QUALITY"].score + part_results["PART_12_DRIFT"].score)
+            / 2.0,
             "security_and_governance_index": part_results["PART_13_SECURITY"].score,
-            "optimization_and_scalability_index": (part_results["PART_14_OPTIMIZATION"].score + part_results["PART_16_SCALABILITY"].score) / 2.0,
-            "explainability_and_benchmarking_index": (part_results["PART_15_EXPLAINABILITY"].score + part_results["PART_17_BENCHMARKING"].score) / 2.0,
+            "optimization_and_scalability_index": (
+                part_results["PART_14_OPTIMIZATION"].score + part_results["PART_16_SCALABILITY"].score
+            )
+            / 2.0,
+            "explainability_and_benchmarking_index": (
+                part_results["PART_15_EXPLAINABILITY"].score + part_results["PART_17_BENCHMARKING"].score
+            )
+            / 2.0,
             "executive_dashboard_index": part_results["PART_18_DASHBOARDS"].score,
         }
 

@@ -30,12 +30,10 @@ class AnomalyDetector:
         )
         self._detected_anomalies: collections.deque[AnomalyReport] = collections.deque(maxlen=500)
 
-    def observe(
-        self, metric_name: str, value: float, anomaly_type: str = "GENERIC_OUTLIER"
-    ) -> Optional[AnomalyReport]:
+    def observe(self, metric_name: str, value: float, anomaly_type: str = "GENERIC_OUTLIER") -> Optional[AnomalyReport]:
         """Observes a metric value and returns an AnomalyReport if it deviates significantly."""
         history = self._metric_history[metric_name]
-        
+
         if len(history) < self.min_history:
             history.append(value)
             return None

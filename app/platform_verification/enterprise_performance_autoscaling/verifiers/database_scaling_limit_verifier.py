@@ -26,11 +26,26 @@ class DatabaseScalingImpactVerifier(IDatabaseScalingImpactVerifier):
 
     def verify(self) -> DatabaseScalingImpactReport:
         snapshots = [
-            DatabaseScalingSnapshot(worker_count=5, db_connections=12, query_latency_ms=12.5, lock_events=0, cpu_pct=15.0, status="HEALTHY"),
-            DatabaseScalingSnapshot(worker_count=20, db_connections=35, query_latency_ms=14.0, lock_events=0, cpu_pct=32.0, status="HEALTHY"),
-            DatabaseScalingSnapshot(worker_count=50, db_connections=65, query_latency_ms=18.5, lock_events=0, cpu_pct=58.0, status="HEALTHY"),
-            DatabaseScalingSnapshot(worker_count=80, db_connections=90, query_latency_ms=28.0, lock_events=1, cpu_pct=76.0, status="HEALTHY"),
-            DatabaseScalingSnapshot(worker_count=120, db_connections=100, query_latency_ms=120.0, lock_events=15, cpu_pct=95.0, status="SATURATED"),
+            DatabaseScalingSnapshot(
+                worker_count=5, db_connections=12, query_latency_ms=12.5, lock_events=0, cpu_pct=15.0, status="HEALTHY"
+            ),
+            DatabaseScalingSnapshot(
+                worker_count=20, db_connections=35, query_latency_ms=14.0, lock_events=0, cpu_pct=32.0, status="HEALTHY"
+            ),
+            DatabaseScalingSnapshot(
+                worker_count=50, db_connections=65, query_latency_ms=18.5, lock_events=0, cpu_pct=58.0, status="HEALTHY"
+            ),
+            DatabaseScalingSnapshot(
+                worker_count=80, db_connections=90, query_latency_ms=28.0, lock_events=1, cpu_pct=76.0, status="HEALTHY"
+            ),
+            DatabaseScalingSnapshot(
+                worker_count=120,
+                db_connections=100,
+                query_latency_ms=120.0,
+                lock_events=15,
+                cpu_pct=95.0,
+                status="SATURATED",
+            ),
         ]
 
         safe_max_workers = 80
@@ -40,7 +55,10 @@ class DatabaseScalingImpactVerifier(IDatabaseScalingImpactVerifier):
                 name="Database Connection Pool Capacity Up to 80 Workers",
                 passed=snapshots[3].status == "HEALTHY",
                 details=f"Database connection pool comfortably supports up to {safe_max_workers} active workers",
-                metrics={"max_safe_workers": safe_max_workers, "connections_at_80_workers": snapshots[3].db_connections},
+                metrics={
+                    "max_safe_workers": safe_max_workers,
+                    "connections_at_80_workers": snapshots[3].db_connections,
+                },
             ),
             CheckResult(
                 name="Query Latency Stability Under Scaling",

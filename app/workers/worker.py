@@ -70,7 +70,12 @@ class AsyncWorkerEngine:
 
     async def _execute_task(self, task: JobTask) -> None:
         """Executes a single job task within isolated database session."""
-        logger.info("Worker [%s] processing job '%s' (Doc='%s')", sanitize_log_input(self.worker_name), sanitize_log_input(task.job_id), sanitize_log_input(task.document_id))
+        logger.info(
+            "Worker [%s] processing job '%s' (Doc='%s')",
+            sanitize_log_input(self.worker_name),
+            sanitize_log_input(task.job_id),
+            sanitize_log_input(task.document_id),
+        )
 
         async with session_module.AsyncSessionLocal() as db:
             job_repo = ProcessingJobRepository(db)
@@ -84,12 +89,10 @@ class AsyncWorkerEngine:
                 document_repo=doc_repo,
                 extracted_text_repo=text_repo,
                 storage_provider=storage,
-                ocr_pipeline=OCRPipeline(ocr_provider=TesseractOCRProvider())
+                ocr_pipeline=OCRPipeline(ocr_provider=TesseractOCRProvider()),
             )
             ai_service = AIExtractionService(
-                document_repo=doc_repo,
-                ai_extraction_repo=ai_repo,
-                ocr_service=ocr_service
+                document_repo=doc_repo, ai_extraction_repo=ai_repo, ocr_service=ocr_service
             )
 
             job = await job_repo.get_by_id(task.job_id)
@@ -128,7 +131,11 @@ class AsyncWorkerEngine:
                 await job_repo.update_status(job, status=JobState.RUNNING.value, progress=40.0)
 
                 # Step 2: AI Structured Extraction (Progress 80%)
-                logger.info("Job '%s': Running AI structured extraction for type '%s'...", sanitize_log_input(task.job_id), sanitize_log_input(doc_type))
+                logger.info(
+                    "Job '%s': Running AI structured extraction for type '%s'...",
+                    sanitize_log_input(task.job_id),
+                    sanitize_log_input(doc_type),
+                )
                 req = ExtractionRequest(document_type=doc_type, force_reextract=force)
                 await ai_service.extract_structured_data(task.document_id, owner, req)
                 await job_repo.update_status(job, status=JobState.RUNNING.value, progress=80.0)
@@ -141,17 +148,25 @@ class AsyncWorkerEngine:
             except Exception as exc:
                 await db.rollback()
                 err_msg = str(exc)
-                logger.error("Job '%s' execution failed: %s", sanitize_log_input(task.job_id), sanitize_log_input(err_msg))
+                logger.error(
+                    "Job '%s' execution failed: %s", sanitize_log_input(task.job_id), sanitize_log_input(err_msg)
+                )
 
                 # Retry Policy with Exponential Backoff
                 if job.attempts < job.max_attempts:
                     backoff_delay = 2 * (2 ** (job.attempts - 1))  # 2s, 4s, 8s
-                    logger.info("Scheduling retry %d/%d for job '%s' in %ds", job.attempts, job.max_attempts, sanitize_log_input(task.job_id), backoff_delay)
+                    logger.info(
+                        "Scheduling retry %d/%d for job '%s' in %ds",
+                        job.attempts,
+                        job.max_attempts,
+                        sanitize_log_input(task.job_id),
+                        backoff_delay,
+                    )
                     await job_repo.update_status(
                         job,
                         status=JobState.RETRYING.value,
                         progress=0.0,
-                        last_error=f"Attempt {job.attempts} failed: {err_msg}"
+                        last_error=f"Attempt {job.attempts} failed: {err_msg}",
                     )
                     await db.commit()
 
@@ -159,12 +174,16 @@ class AsyncWorkerEngine:
                     await asyncio.sleep(backoff_delay)
                     await self.queue.enqueue(task)
                 else:
-                    logger.error("Job '%s' exhausted max attempts (%d). Marking FAILED.", sanitize_log_input(task.job_id), job.max_attempts)
+                    logger.error(
+                        "Job '%s' exhausted max attempts (%d). Marking FAILED.",
+                        sanitize_log_input(task.job_id),
+                        job.max_attempts,
+                    )
                     await job_repo.update_status(
                         job,
                         status=JobState.FAILED.value,
                         progress=0.0,
-                        last_error=f"Exhausted max retries ({job.max_attempts}): {err_msg}"
+                        last_error=f"Exhausted max retries ({job.max_attempts}): {err_msg}",
                     )
                     doc = await doc_repo.get_by_id(task.document_id)
                     if doc:

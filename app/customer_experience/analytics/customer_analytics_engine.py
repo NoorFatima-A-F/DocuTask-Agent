@@ -26,12 +26,32 @@ class CustomerAnalyticsEngine(ICustomerAnalyticsEngine):
         )
 
         metrics = [
-            AutomationMetric(metric_key="TOTAL_DOCS_MTH", label="Documents Processed (30 Days)", value=125400.0, unit="docs", trend_pct=+14.2),
-            AutomationMetric(metric_key="STP_RATE", label="Straight-Through Processing (STP)", value=91.5, unit="%", trend_pct=+8.5),
-            AutomationMetric(metric_key="AVG_LATENCY", label="Average Processing Duration", value=4.2, unit="sec", trend_pct=-42.0),
-            AutomationMetric(metric_key="EXTRACTION_ACCURACY", label="Model Extraction Accuracy", value=99.1, unit="%", trend_pct=+1.2),
-            AutomationMetric(metric_key="HOURS_SAVED", label="Human Labor Liberated", value=4790.0, unit="hrs/mth", trend_pct=+18.0),
-            AutomationMetric(metric_key="COST_PER_DOC", label="Effective Unit Cost", value=0.025, unit="USD", trend_pct=-92.8),
+            AutomationMetric(
+                metric_key="TOTAL_DOCS_MTH",
+                label="Documents Processed (30 Days)",
+                value=125400.0,
+                unit="docs",
+                trend_pct=+14.2,
+            ),
+            AutomationMetric(
+                metric_key="STP_RATE", label="Straight-Through Processing (STP)", value=91.5, unit="%", trend_pct=+8.5
+            ),
+            AutomationMetric(
+                metric_key="AVG_LATENCY", label="Average Processing Duration", value=4.2, unit="sec", trend_pct=-42.0
+            ),
+            AutomationMetric(
+                metric_key="EXTRACTION_ACCURACY",
+                label="Model Extraction Accuracy",
+                value=99.1,
+                unit="%",
+                trend_pct=+1.2,
+            ),
+            AutomationMetric(
+                metric_key="HOURS_SAVED", label="Human Labor Liberated", value=4790.0, unit="hrs/mth", trend_pct=+18.0
+            ),
+            AutomationMetric(
+                metric_key="COST_PER_DOC", label="Effective Unit Cost", value=0.025, unit="USD", trend_pct=-92.8
+            ),
         ]
 
         return CustomerAnalyticsReport(

@@ -1,6 +1,7 @@
 """
 Phase 3H.5.5: Domain Package Init
 """
+
 from .models import (
     FailureCategory,
     RecoveryStrategyType,

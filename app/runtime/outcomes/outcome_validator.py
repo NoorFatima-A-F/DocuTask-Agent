@@ -10,6 +10,7 @@ from app.runtime.outcomes.outcome_collector import MissionOutcomeRecord
 
 class OutcomeValidationError(ValueError):
     """Raised when an observed outcome vector contains invalid or corrupted metrics."""
+
     pass
 
 

@@ -1,6 +1,7 @@
 """
 FastAPI Router for Phase 3I.5 Enterprise Alerting & Incident Detection Verification
 """
+
 from fastapi import APIRouter
 from typing import Dict, Any
 from ..runtime.alerting_verification_runtime import AlertingVerificationRuntime
@@ -100,5 +101,5 @@ def get_health() -> Dict[str, Any]:
         "status": "HEALTHY",
         "subsystem": "alerting_infrastructure",
         "engine": "DocuTask Enterprise Incident Engine",
-        "phase": "3I.5"
+        "phase": "3I.5",
     }

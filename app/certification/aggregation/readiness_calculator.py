@@ -47,9 +47,7 @@ class ReadinessCalculator:
         elif composite < 95.0:
             grade = "A"
 
-        statement = (
-            "DocuTask Agent has completed all 12 EVVP verification phases, achieving enterprise-grade maturity across architecture, AI precision, security defenses, chaos resilience, and business ROI."
-        )
+        statement = "DocuTask Agent has completed all 12 EVVP verification phases, achieving enterprise-grade maturity across architecture, AI precision, security defenses, chaos resilience, and business ROI."
 
         return MasterReadinessScore(
             architecture_quality=arch_score,

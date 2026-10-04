@@ -100,7 +100,7 @@ class BenchmarkWorkloadLibrary:
     @classmethod
     def memory_intensive_workload(cls) -> WorkloadSpecification:
         def run():
-            data = [f"token_chunk_{i}_{'x'*32}" for i in range(2000)]
+            data = [f"token_chunk_{i}_{'x' * 32}" for i in range(2000)]
             mapping = {item: idx for idx, item in enumerate(data)}
             return len(mapping)
 
@@ -274,12 +274,15 @@ class BenchmarkWorkloadLibrary:
     # 11. Legal Contract Audit
     @classmethod
     def legal_contract_workload(cls) -> WorkloadSpecification:
-        contract_text = """
+        contract_text = (
+            """
         MASTER SERVICES AGREEMENT (MSA). This Agreement is entered into by and between Enterprise AG and Vendor LLC.
         Section 4.1: Indemnification shall be capped at 2x annual contract value.
         Section 8.2: Governing law shall be the State of Delaware.
         Section 12.3: Data confidentiality SLA guarantees 99.99% privacy compliance.
-        """ * 10
+        """
+            * 10
+        )
 
         def run():
             clauses = contract_text.split("Section")

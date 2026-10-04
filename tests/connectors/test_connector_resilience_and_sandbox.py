@@ -131,8 +131,12 @@ def test_connector_policy_engine():
         category=ConnectorCategory.COMMUNICATION,
     )
 
-    cheap_action = ActionDescriptor(name="send", connector_id="conn-authorized-email", capability="email.send", cost_usd=0.01)
-    expensive_action = ActionDescriptor(name="bulk_send", connector_id="conn-authorized-email", capability="email.send", cost_usd=0.08)
+    cheap_action = ActionDescriptor(
+        name="send", connector_id="conn-authorized-email", capability="email.send", cost_usd=0.01
+    )
+    expensive_action = ActionDescriptor(
+        name="bulk_send", connector_id="conn-authorized-email", capability="email.send", cost_usd=0.08
+    )
 
     # 1. Valid execution
     res1 = policy_engine.evaluate(allowed_conn, cheap_action, {}, region="us-east-1")

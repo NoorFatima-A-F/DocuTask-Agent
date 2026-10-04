@@ -144,7 +144,10 @@ class SafetyGateway:
                 )
 
         # Create incident if critical or multiple high violations
-        if decision.has_critical_violations or len([v for v in decision.violations if v.severity == ViolationSeverity.HIGH]) >= 2:
+        if (
+            decision.has_critical_violations
+            or len([v for v in decision.violations if v.severity == ViolationSeverity.HIGH]) >= 2
+        ):
             incident = self.incident_manager.create_incident(
                 tenant_id=context.tenant_id,
                 title=f"AI Safety Violation in {stage} Phase",

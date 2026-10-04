@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 
 class FrameworkControl(BaseModel):
     """Specific control within a regulatory or security framework."""
+
     control_id: str
     name: str
     description: str
@@ -28,6 +29,7 @@ class FrameworkControl(BaseModel):
 
 class ComplianceFrameworkReport(BaseModel):
     """Compliance assessment results for a single framework."""
+
     framework_name: str
     framework_version: str
     total_controls: int
@@ -40,6 +42,7 @@ class ComplianceFrameworkReport(BaseModel):
 
 class EnterpriseComplianceReport(BaseModel):
     """Holistic enterprise multi-framework compliance report."""
+
     assessment_id: str
     generated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     target_release: str
@@ -62,30 +65,30 @@ class ComplianceMappingEngine:
                     "name": "Architecture, Design and Threat Modeling",
                     "domain": "Architecture",
                     "required_evidence_types": ["code_hygiene", "runtime_execution", "configuration"],
-                    "description": "Verify architecture documentation, threat models, and dependency trust boundaries."
+                    "description": "Verify architecture documentation, threat models, and dependency trust boundaries.",
                 },
                 {
                     "control_id": "V2.1",
                     "name": "Authentication and Credential Hygiene",
                     "domain": "Authentication",
                     "required_evidence_types": ["security_compliance", "configuration"],
-                    "description": "Verify absence of hardcoded credentials and adherence to secret management."
+                    "description": "Verify absence of hardcoded credentials and adherence to secret management.",
                 },
                 {
                     "control_id": "V5.1",
                     "name": "Validation, Sanitization and Encoding",
                     "domain": "Input Validation",
                     "required_evidence_types": ["automated_testing", "security_compliance"],
-                    "description": "Verify schema validation, parameter constraints, and boundary sanitization."
+                    "description": "Verify schema validation, parameter constraints, and boundary sanitization.",
                 },
                 {
                     "control_id": "V14.2",
                     "name": "Dependency and Third-Party Component Integrity",
                     "domain": "Supply Chain",
                     "required_evidence_types": ["dependency_hygiene", "security_compliance"],
-                    "description": "Verify all dependencies are scanned for known CVEs and pinnings are immutable."
-                }
-            ]
+                    "description": "Verify all dependencies are scanned for known CVEs and pinnings are immutable.",
+                },
+            ],
         },
         "SLSA_LEVEL_3": {
             "name": "Supply-chain Levels for Software Artifacts",
@@ -96,23 +99,23 @@ class ComplianceMappingEngine:
                     "name": "Cryptographically Sealed Provenance",
                     "domain": "Build Provenance",
                     "required_evidence_types": ["git_provenance", "cryptographic_seal", "build_attestation"],
-                    "description": "Verify build provenance contains verifiable commit SHA and cryptographic signatures."
+                    "description": "Verify build provenance contains verifiable commit SHA and cryptographic signatures.",
                 },
                 {
                     "control_id": "SLSA_ENV_02",
                     "name": "Isolated and Ephemeral Build Environment",
                     "domain": "Build Isolation",
                     "required_evidence_types": ["environment_telemetry", "reproducibility"],
-                    "description": "Verify build execution environment parameters and immutable host configuration."
+                    "description": "Verify build execution environment parameters and immutable host configuration.",
                 },
                 {
                     "control_id": "SLSA_DEP_03",
                     "name": "Complete Dependency Manifest & SBOM",
                     "domain": "Dependencies",
                     "required_evidence_types": ["dependency_hygiene", "sbom_manifest"],
-                    "description": "Verify complete lockfile declaration and transitive dependency checksums."
-                }
-            ]
+                    "description": "Verify complete lockfile declaration and transitive dependency checksums.",
+                },
+            ],
         },
         "CYCLONEDX_SBOM": {
             "name": "CycloneDX Software Bill of Materials Standard",
@@ -123,16 +126,16 @@ class ComplianceMappingEngine:
                     "name": "Component Inventory & Coordinates",
                     "domain": "Inventory",
                     "required_evidence_types": ["dependency_hygiene", "build_attestation"],
-                    "description": "Verify all packages declare precise version, namespace, and purl identifiers."
+                    "description": "Verify all packages declare precise version, namespace, and purl identifiers.",
                 },
                 {
                     "control_id": "CDX_VULN_02",
                     "name": "Vulnerability Disclosure & Advisory Matching",
                     "domain": "Vulnerability Analysis",
                     "required_evidence_types": ["security_compliance", "dependency_hygiene"],
-                    "description": "Verify zero unmitigated high/critical CVEs in the dependency graph."
-                }
-            ]
+                    "description": "Verify zero unmitigated high/critical CVEs in the dependency graph.",
+                },
+            ],
         },
         "ISO_IEC_25010": {
             "name": "Systems and Software Quality Requirements and Evaluation",
@@ -143,23 +146,23 @@ class ComplianceMappingEngine:
                     "name": "Reliability & Fault Tolerance",
                     "domain": "Reliability",
                     "required_evidence_types": ["automated_testing", "runtime_execution"],
-                    "description": "Verify platform resilience, exception recovery, and test passing rates (>99%)."
+                    "description": "Verify platform resilience, exception recovery, and test passing rates (>99%).",
                 },
                 {
                     "control_id": "ISO_SEC_02",
                     "name": "Security & Non-Repudiation",
                     "domain": "Security",
                     "required_evidence_types": ["security_compliance", "cryptographic_seal", "git_provenance"],
-                    "description": "Verify authenticity, audit logging, and cryptographic non-repudiation."
+                    "description": "Verify authenticity, audit logging, and cryptographic non-repudiation.",
                 },
                 {
                     "control_id": "ISO_MAIN_03",
                     "name": "Maintainability & Modularity",
                     "domain": "Maintainability",
                     "required_evidence_types": ["code_hygiene", "automated_testing"],
-                    "description": "Verify test coverage, clean modular boundaries, and code formatting."
-                }
-            ]
+                    "description": "Verify test coverage, clean modular boundaries, and code formatting.",
+                },
+            ],
         },
         "SOC_2_TYPE_II": {
             "name": "AICPA SOC 2 Trust Services Criteria",
@@ -170,24 +173,24 @@ class ComplianceMappingEngine:
                     "name": "Logical Access Controls & Boundary Protection",
                     "domain": "Security",
                     "required_evidence_types": ["security_compliance", "configuration"],
-                    "description": "Verify access authorization rules, policy engines, and security posture."
+                    "description": "Verify access authorization rules, policy engines, and security posture.",
                 },
                 {
                     "control_id": "CC7.1",
                     "name": "Vulnerability Detection & System Monitoring",
                     "domain": "Monitoring",
                     "required_evidence_types": ["security_compliance", "runtime_execution", "transparency_log"],
-                    "description": "Verify vulnerability detection, audit evidence tracking, and continuous monitoring."
+                    "description": "Verify vulnerability detection, audit evidence tracking, and continuous monitoring.",
                 },
                 {
                     "control_id": "CC8.1",
                     "name": "Change Management & Release Verification",
                     "domain": "Change Management",
                     "required_evidence_types": ["git_provenance", "cryptographic_seal", "baseline_verification"],
-                    "description": "Verify authorized code changes, reproducible baseline comparisons, and sign-offs."
-                }
-            ]
-        }
+                    "description": "Verify authorized code changes, reproducible baseline comparisons, and sign-offs.",
+                },
+            ],
+        },
     }
 
     def evaluate_compliance(
@@ -203,7 +206,7 @@ class ComplianceMappingEngine:
             ev_id = ev.get("evidence_id") or ev.get("id") or str(id(ev))
             ev_type = str(ev.get("category", "")).lower()
             ev_name = str(ev.get("name", "")).lower()
-            
+
             # Map into general classification buckets
             buckets = self._classify_evidence_buckets(ev_type, ev_name, ev)
             for b in buckets:
@@ -223,7 +226,7 @@ class ComplianceMappingEngine:
             for c_def in fw_data["controls"]:
                 required = c_def["required_evidence_types"]
                 satisfied_by: Set[str] = set()
-                
+
                 # Check how many required types are satisfied
                 matched_reqs = 0
                 for req_type in required:
@@ -237,7 +240,9 @@ class ComplianceMappingEngine:
                     fw_satisfied += 1
                 elif matched_reqs > 0:
                     status = "PARTIALLY_SATISFIED"
-                    fw_gaps.append(f"Control {c_def['control_id']} partially satisfied ({matched_reqs}/{len(required)} evidence criteria)")
+                    fw_gaps.append(
+                        f"Control {c_def['control_id']} partially satisfied ({matched_reqs}/{len(required)} evidence criteria)"
+                    )
                 else:
                     fw_gaps.append(f"Control {c_def['control_id']} missing all required evidence ({required})")
 
@@ -256,7 +261,9 @@ class ComplianceMappingEngine:
 
             total_controls_count = len(fw_controls)
             cov_pct = round((fw_satisfied / total_controls_count) * 100.0, 2) if total_controls_count > 0 else 100.0
-            fw_status = "COMPLIANT" if cov_pct >= 100.0 else ("PARTIALLY_COMPLIANT" if cov_pct >= 50.0 else "NON_COMPLIANT")
+            fw_status = (
+                "COMPLIANT" if cov_pct >= 100.0 else ("PARTIALLY_COMPLIANT" if cov_pct >= 50.0 else "NON_COMPLIANT")
+            )
 
             framework_reports[fw_key] = ComplianceFrameworkReport(
                 framework_name=fw_data["name"],
@@ -272,7 +279,9 @@ class ComplianceMappingEngine:
             total_satisfied_controls += fw_satisfied
             total_all_controls += total_controls_count
 
-        overall_score = round((total_satisfied_controls / total_all_controls) * 100.0, 2) if total_all_controls > 0 else 100.0
+        overall_score = (
+            round((total_satisfied_controls / total_all_controls) * 100.0, 2) if total_all_controls > 0 else 100.0
+        )
 
         return EnterpriseComplianceReport(
             assessment_id=assessment_id,
@@ -288,17 +297,44 @@ class ComplianceMappingEngine:
         buckets = []
         combined = f"{ev_type} {ev_name}".lower()
 
-        if "git" in combined or "commit" in combined or "provenance" in combined or "repo" in combined or "identity" in combined:
+        if (
+            "git" in combined
+            or "commit" in combined
+            or "provenance" in combined
+            or "repo" in combined
+            or "identity" in combined
+        ):
             buckets.extend(["git_provenance", "build_attestation", "baseline_verification"])
         if "test" in combined or "pytest" in combined or "coverage" in combined or "quality" in combined:
             buckets.extend(["automated_testing", "code_hygiene", "reproducibility"])
-        if "security" in combined or "vulnerability" in combined or "cve" in combined or "bandit" in combined or "compliance" in combined:
+        if (
+            "security" in combined
+            or "vulnerability" in combined
+            or "cve" in combined
+            or "bandit" in combined
+            or "compliance" in combined
+        ):
             buckets.extend(["security_compliance", "configuration", "code_hygiene"])
-        if "dep" in combined or "requirement" in combined or "pyproject" in combined or "package" in combined or "sbom" in combined or "cyclonedx" in combined or "pipfile" in combined:
+        if (
+            "dep" in combined
+            or "requirement" in combined
+            or "pyproject" in combined
+            or "package" in combined
+            or "sbom" in combined
+            or "cyclonedx" in combined
+            or "pipfile" in combined
+        ):
             buckets.extend(["dependency_hygiene", "sbom_manifest", "build_attestation"])
         if "runtime" in combined or "health" in combined or "execution" in combined:
             buckets.extend(["runtime_execution", "environment_telemetry", "transparency_log"])
-        if "seal" in combined or "hash" in combined or "merkle" in combined or "signature" in combined or "ed25519" in combined or "cryptographic" in combined:
+        if (
+            "seal" in combined
+            or "hash" in combined
+            or "merkle" in combined
+            or "signature" in combined
+            or "ed25519" in combined
+            or "cryptographic" in combined
+        ):
             buckets.extend(["cryptographic_seal", "baseline_verification", "reproducibility"])
         if "config" in combined or "env" in combined:
             buckets.extend(["configuration", "environment_telemetry"])

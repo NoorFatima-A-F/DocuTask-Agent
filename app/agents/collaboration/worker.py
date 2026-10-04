@@ -48,9 +48,7 @@ class WorkerAgent:
         and applying appropriate skills.
         """
         self.lifecycle_manager.transition(
-            self.agent_entity,
-            AgentLifecycleState.EXECUTING,
-            reason=f"Executing step {step.id} ({step.name})"
+            self.agent_entity, AgentLifecycleState.EXECUTING, reason=f"Executing step {step.id} ({step.name})"
         )
 
         outputs: Dict[str, Any] = {}
@@ -74,13 +72,11 @@ class WorkerAgent:
         }
 
         self.lifecycle_manager.transition(
-            self.agent_entity,
-            AgentLifecycleState.COMPLETED,
-            reason=f"Completed step {step.id}"
+            self.agent_entity, AgentLifecycleState.COMPLETED, reason=f"Completed step {step.id}"
         )
         self.lifecycle_manager.transition(
             self.agent_entity,
             AgentLifecycleState.INITIALIZED,  # Ready for next task
-            reason="Ready for next task"
+            reason="Ready for next task",
         )
         return result

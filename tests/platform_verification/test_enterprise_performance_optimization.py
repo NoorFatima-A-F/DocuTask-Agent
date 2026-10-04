@@ -227,10 +227,7 @@ class TestEnterprisePerformanceOptimization:
         reports = [v.verify() for v in runtime.verifiers]
         scorecard = scorer.score(reports)
         assert scorecard.overall_score == 100.0
-        assert (
-            scorecard.certification_tier
-            == AutonomousPerformanceTier.AUTONOMOUS_PERFORMANCE_READY
-        )
+        assert scorecard.certification_tier == AutonomousPerformanceTier.AUTONOMOUS_PERFORMANCE_READY
         assert scorecard.status == VerificationStatus.PASSED
         assert len(scorecard.categories) == 6
 

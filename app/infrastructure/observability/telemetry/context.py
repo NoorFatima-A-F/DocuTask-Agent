@@ -16,7 +16,12 @@ from pydantic import BaseModel, Field
 
 # Sensitive data masking patterns (PII, tokens, keys)
 REDACTION_PATTERNS = [
-    (re.compile(r"(api[_-]?key|secret|password|auth[_-]?token|bearer)\s*[:=]\s*['\"]?([^'\"\s,]+)['\"]?", re.IGNORECASE), r"\1=***REDACTED***"),
+    (
+        re.compile(
+            r"(api[_-]?key|secret|password|auth[_-]?token|bearer)\s*[:=]\s*['\"]?([^'\"\s,]+)['\"]?", re.IGNORECASE
+        ),
+        r"\1=***REDACTED***",
+    ),
     (re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"), "***@***.***"),
     (re.compile(r"\b(?:\d{4}[ -]?){3}\d{4}\b"), "****-****-****-****"),
 ]
@@ -36,6 +41,7 @@ class TelemetryContext(BaseModel):
     """
     Standardized correlation context attached to all telemetry records.
     """
+
     trace_id: str = Field(default_factory=lambda: uuid.uuid4().hex)
     span_id: str = Field(default_factory=lambda: uuid.uuid4().hex[:16])
     parent_span_id: Optional[str] = None

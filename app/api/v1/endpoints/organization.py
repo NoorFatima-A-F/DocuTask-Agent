@@ -314,6 +314,7 @@ async def get_resilience_report() -> Dict[str, Any]:
 # Phase 13.14 - Autonomous AI Organization Platform (AAO-MAGEMEP) Endpoints
 # ===========================================================================
 
+
 # ---------------------------------------------------------
 # 1. Overview & Health Cockpit
 # ---------------------------------------------------------
@@ -330,7 +331,6 @@ class DecomposeGoalRequest(BaseModel):
     priority: MissionPriority = MissionPriority.HIGH
     timeline_days: int = 90
     custom_constraints: Optional[List[str]] = None
-
 
 
 @router.get("/missions", summary="List all active, planned, and completed enterprise missions")
@@ -577,7 +577,9 @@ async def approve_governance(review_id: str = Query(...), human_override: bool =
 
 
 @router.post("/governance/reject", summary="Reject governance decision")
-async def reject_governance(review_id: str = Query(...), reason: str = Query("Violates budget ceiling")) -> Dict[str, Any]:
+async def reject_governance(
+    review_id: str = Query(...), reason: str = Query("Violates budget ceiling")
+) -> Dict[str, Any]:
     return governance_engine.reject_decision(review_id, reason=reason).model_dump()
 
 

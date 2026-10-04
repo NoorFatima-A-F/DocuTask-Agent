@@ -18,9 +18,9 @@ class RiskCategory(str, Enum):
 
 class RiskScoreBreakdown(BaseModel):
     category: RiskCategory
-    impact: float = 0.5          # 0.0 to 1.0
-    probability: float = 0.5     # 0.0 to 1.0
-    exposure: float = 1.0        # 0.0 to 1.0
+    impact: float = 0.5  # 0.0 to 1.0
+    probability: float = 0.5  # 0.0 to 1.0
+    exposure: float = 1.0  # 0.0 to 1.0
     calculated_score: float = 0.25
     severity_level: str = "LOW"  # LOW, MEDIUM, HIGH, CRITICAL
 

@@ -1,6 +1,7 @@
 """
 Immutable Evidence Store for Database Architecture Verification.
 """
+
 import hashlib
 import json
 from typing import Dict, Optional

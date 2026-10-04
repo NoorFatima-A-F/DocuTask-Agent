@@ -20,7 +20,7 @@ class AIMalformedResponseVerifier(IMalformedResponseVerifier):
 
         for i in range(test_count):
             ctype = corruption_types[i % len(corruption_types)]
-            req = {"document_id": f"DOC-MALFORMED-{i+1:04d}"}
+            req = {"document_id": f"DOC-MALFORMED-{i + 1:04d}"}
             InvalidResponseScenario.execute(req, corruption_type=ctype)
 
             validation_failures += 1

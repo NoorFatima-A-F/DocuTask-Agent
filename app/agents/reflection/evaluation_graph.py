@@ -11,6 +11,7 @@ from app.agents.reflection.exceptions import InvalidEvaluationGraphError
 
 class EvaluationStageNode(BaseModel):
     """An individual evaluation stage in the evaluation DAG."""
+
     stage_id: str
     evaluator_name: str
     dimension: str
@@ -21,6 +22,7 @@ class EvaluationStageNode(BaseModel):
 
 class EvaluationGraph(BaseModel):
     """Directed graph of evaluation stages ensuring ordered evaluation and metric readiness."""
+
     graph_id: UUID = Field(default_factory=uuid4)
     nodes: Dict[str, EvaluationStageNode] = Field(default_factory=dict)
 

@@ -2,6 +2,7 @@
 Enterprise Result[T, E] pattern and Error Model.
 Railway-oriented programming primitives for rock-solid error handling without unhandled exceptions.
 """
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -11,12 +12,14 @@ T = TypeVar("T")
 E = TypeVar("E")
 U = TypeVar("U")
 
+
 class ErrorSeverity(str, Enum):
     DEBUG = "DEBUG"
     INFO = "INFO"
     WARNING = "WARNING"
     ERROR = "ERROR"
     CRITICAL = "CRITICAL"
+
 
 class ErrorCategory(str, Enum):
     VALIDATION = "VALIDATION"
@@ -31,9 +34,11 @@ class ErrorCategory(str, Enum):
     SERIALIZATION = "SERIALIZATION"
     UNEXPECTED = "UNEXPECTED"
 
+
 @dataclass(frozen=True)
 class ErrorModel:
     """Rich structured error representation."""
+
     code: str
     message: str
     category: ErrorCategory = ErrorCategory.UNEXPECTED
@@ -43,28 +48,75 @@ class ErrorModel:
     timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
     @classmethod
-    def validation(cls, message: str, code: str = "ERR_VALIDATION", details: Optional[Dict[str, Any]] = None) -> "ErrorModel":
-        return cls(code=code, message=message, category=ErrorCategory.VALIDATION, severity=ErrorSeverity.WARNING, details=details or {})
+    def validation(
+        cls, message: str, code: str = "ERR_VALIDATION", details: Optional[Dict[str, Any]] = None
+    ) -> "ErrorModel":
+        return cls(
+            code=code,
+            message=message,
+            category=ErrorCategory.VALIDATION,
+            severity=ErrorSeverity.WARNING,
+            details=details or {},
+        )
 
     @classmethod
-    def authorization(cls, message: str, code: str = "ERR_UNAUTHORIZED", details: Optional[Dict[str, Any]] = None) -> "ErrorModel":
-        return cls(code=code, message=message, category=ErrorCategory.AUTHORIZATION, severity=ErrorSeverity.ERROR, details=details or {})
+    def authorization(
+        cls, message: str, code: str = "ERR_UNAUTHORIZED", details: Optional[Dict[str, Any]] = None
+    ) -> "ErrorModel":
+        return cls(
+            code=code,
+            message=message,
+            category=ErrorCategory.AUTHORIZATION,
+            severity=ErrorSeverity.ERROR,
+            details=details or {},
+        )
 
     @classmethod
-    def infrastructure(cls, message: str, code: str = "ERR_INFRASTRUCTURE", retryable: bool = True, details: Optional[Dict[str, Any]] = None) -> "ErrorModel":
-        return cls(code=code, message=message, category=ErrorCategory.INFRASTRUCTURE, severity=ErrorSeverity.ERROR, retryable=retryable, details=details or {})
+    def infrastructure(
+        cls,
+        message: str,
+        code: str = "ERR_INFRASTRUCTURE",
+        retryable: bool = True,
+        details: Optional[Dict[str, Any]] = None,
+    ) -> "ErrorModel":
+        return cls(
+            code=code,
+            message=message,
+            category=ErrorCategory.INFRASTRUCTURE,
+            severity=ErrorSeverity.ERROR,
+            retryable=retryable,
+            details=details or {},
+        )
 
     @classmethod
-    def business_rule(cls, message: str, code: str = "ERR_BUSINESS_RULE", details: Optional[Dict[str, Any]] = None) -> "ErrorModel":
-        return cls(code=code, message=message, category=ErrorCategory.BUSINESS_RULE, severity=ErrorSeverity.ERROR, details=details or {})
+    def business_rule(
+        cls, message: str, code: str = "ERR_BUSINESS_RULE", details: Optional[Dict[str, Any]] = None
+    ) -> "ErrorModel":
+        return cls(
+            code=code,
+            message=message,
+            category=ErrorCategory.BUSINESS_RULE,
+            severity=ErrorSeverity.ERROR,
+            details=details or {},
+        )
 
     @classmethod
-    def unexpected(cls, message: str, code: str = "ERR_UNEXPECTED", details: Optional[Dict[str, Any]] = None) -> "ErrorModel":
-        return cls(code=code, message=message, category=ErrorCategory.UNEXPECTED, severity=ErrorSeverity.CRITICAL, details=details or {})
+    def unexpected(
+        cls, message: str, code: str = "ERR_UNEXPECTED", details: Optional[Dict[str, Any]] = None
+    ) -> "ErrorModel":
+        return cls(
+            code=code,
+            message=message,
+            category=ErrorCategory.UNEXPECTED,
+            severity=ErrorSeverity.CRITICAL,
+            details=details or {},
+        )
+
 
 @dataclass(frozen=True)
 class Ok(Generic[T]):
     """Successful computation outcome."""
+
     value: T
     is_ok: bool = True
     is_err: bool = False
@@ -94,9 +146,11 @@ class Ok(Generic[T]):
     def match(self, on_ok: Callable[[T], U], on_err: Callable[[Any], U]) -> U:
         return on_ok(self.value)
 
+
 @dataclass(frozen=True)
 class Err(Generic[E]):
     """Failed computation outcome."""
+
     error: E
     is_ok: bool = False
     is_err: bool = True
@@ -125,26 +179,36 @@ class Err(Generic[E]):
     def match(self, on_ok: Callable[[Any], U], on_err: Callable[[E], U]) -> U:
         return on_err(self.error)
 
+
 Result = Union[Ok[T], Err[E]]
+
 
 # Helper factory functions
 def Success(value: T, warnings: Optional[List[str]] = None) -> Ok[T]:
     return Ok(value=value, warnings=warnings or [])
 
+
 def Failure(error: E) -> Err[E]:
     return Err(error=error)
+
 
 def ValidationFailure(message: str, details: Optional[Dict[str, Any]] = None) -> Err[ErrorModel]:
     return Err(ErrorModel.validation(message=message, details=details))
 
+
 def AuthorizationFailure(message: str, details: Optional[Dict[str, Any]] = None) -> Err[ErrorModel]:
     return Err(ErrorModel.authorization(message=message, details=details))
 
-def InfrastructureFailure(message: str, retryable: bool = True, details: Optional[Dict[str, Any]] = None) -> Err[ErrorModel]:
+
+def InfrastructureFailure(
+    message: str, retryable: bool = True, details: Optional[Dict[str, Any]] = None
+) -> Err[ErrorModel]:
     return Err(ErrorModel.infrastructure(message=message, retryable=retryable, details=details))
+
 
 def BusinessRuleFailure(message: str, details: Optional[Dict[str, Any]] = None) -> Err[ErrorModel]:
     return Err(ErrorModel.business_rule(message=message, details=details))
+
 
 def UnexpectedFailure(message: str, details: Optional[Dict[str, Any]] = None) -> Err[ErrorModel]:
     return Err(ErrorModel.unexpected(message=message, details=details))

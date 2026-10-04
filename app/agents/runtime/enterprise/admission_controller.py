@@ -11,6 +11,7 @@ from app.agents.runtime.exceptions import RuntimeKernelException
 
 class RequestSheddedError(RuntimeKernelException):
     """Raised when an intake request is rejected due to load shedding."""
+
     pass
 
 

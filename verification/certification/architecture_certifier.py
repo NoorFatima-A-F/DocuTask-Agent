@@ -33,7 +33,10 @@ class ArchitectureCertifier:
                 passed=passed_1,
                 message=f"Clean Architecture boundaries verified with coupling index {coupling_index:.2f} (< 0.20 target)",
                 execution_time_ms=t_ms,
-                details={"coupling_index": coupling_index, "modular_layers": ["Domain", "Application", "Infrastructure", "API"]},
+                details={
+                    "coupling_index": coupling_index,
+                    "modular_layers": ["Domain", "Application", "Infrastructure", "API"],
+                },
             )
         )
 

@@ -183,7 +183,12 @@ class NegotiationEngine:
             latency=offer.latency_ms,
             confidence=offer.confidence_floor,
             rounds=offer.round_number,
-            settled_terms={"conceded": True, "topic": offer.topic, "demands": offer.demands, "concessions": offer.concessions},
+            settled_terms={
+                "conceded": True,
+                "topic": offer.topic,
+                "demands": offer.demands,
+                "concessions": offer.concessions,
+            },
         )
 
     def conduct_negotiation(

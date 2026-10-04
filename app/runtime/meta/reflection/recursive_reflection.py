@@ -51,13 +51,48 @@ class RecursiveReflectionEngine:
         tid = f"rrt-{uuid.uuid4().hex[:8]}"
 
         tier_definitions = [
-            (ReflectionTier.LEVEL_1_MISSION, "Mission Execution Fidelity", "Mission 9482 executed with 0 errors but incurred 450ms queue serialization overhead.", ["Enable parallel page chunking in DAG"]),
-            (ReflectionTier.LEVEL_2_PLANNER, "Planner Decomposition Heuristics", "DAG scheduler relied on greedy critical path heuristics without token cost lookahead.", ["Integrate multi-objective Pareto scheduler into APDLE"]),
-            (ReflectionTier.LEVEL_3_SWARM, "Swarm Coordination & Bargaining", "Bargaining rounds converged in 2 steps; specialist auction bidding was highly liquid.", ["Cache winner profiles to reduce auction latency by 25ms"]),
-            (ReflectionTier.LEVEL_4_LEARNING, "Organizational Memory Synthesis", "Knowledge graph mined Triadic Verification pattern with 99.8% empirical success.", ["Promote Triadic pattern to default enterprise execution template"]),
-            (ReflectionTier.LEVEL_5_ARCHITECTURE, "Architectural Topology & Concurrency", "EventBus throughput saturated at 12,000 events/sec without dropped frames.", ["Deploy worker threadpool batching to handle 25,000 events/sec bursts"]),
-            (ReflectionTier.LEVEL_6_POLICY, "Policy Bounds & SLA Governance", "Budget governance policy capped token expenditure at $0.05 per invoice document.", ["Safely relax threshold to $0.065 for high-complexity legal contracts"]),
-            (ReflectionTier.LEVEL_7_SELF, "Self-Cognition & Meta-Reasoning", "The platform successfully recognized its own serialization bottlenecks and generated valid self-improvement hypotheses.", ["Schedule automated A/B replay experiment to empirically prove DAG fan-out speedup"]),
+            (
+                ReflectionTier.LEVEL_1_MISSION,
+                "Mission Execution Fidelity",
+                "Mission 9482 executed with 0 errors but incurred 450ms queue serialization overhead.",
+                ["Enable parallel page chunking in DAG"],
+            ),
+            (
+                ReflectionTier.LEVEL_2_PLANNER,
+                "Planner Decomposition Heuristics",
+                "DAG scheduler relied on greedy critical path heuristics without token cost lookahead.",
+                ["Integrate multi-objective Pareto scheduler into APDLE"],
+            ),
+            (
+                ReflectionTier.LEVEL_3_SWARM,
+                "Swarm Coordination & Bargaining",
+                "Bargaining rounds converged in 2 steps; specialist auction bidding was highly liquid.",
+                ["Cache winner profiles to reduce auction latency by 25ms"],
+            ),
+            (
+                ReflectionTier.LEVEL_4_LEARNING,
+                "Organizational Memory Synthesis",
+                "Knowledge graph mined Triadic Verification pattern with 99.8% empirical success.",
+                ["Promote Triadic pattern to default enterprise execution template"],
+            ),
+            (
+                ReflectionTier.LEVEL_5_ARCHITECTURE,
+                "Architectural Topology & Concurrency",
+                "EventBus throughput saturated at 12,000 events/sec without dropped frames.",
+                ["Deploy worker threadpool batching to handle 25,000 events/sec bursts"],
+            ),
+            (
+                ReflectionTier.LEVEL_6_POLICY,
+                "Policy Bounds & SLA Governance",
+                "Budget governance policy capped token expenditure at $0.05 per invoice document.",
+                ["Safely relax threshold to $0.065 for high-complexity legal contracts"],
+            ),
+            (
+                ReflectionTier.LEVEL_7_SELF,
+                "Self-Cognition & Meta-Reasoning",
+                "The platform successfully recognized its own serialization bottlenecks and generated valid self-improvement hypotheses.",
+                ["Schedule automated A/B replay experiment to empirically prove DAG fan-out speedup"],
+            ),
         ]
 
         nodes: Dict[str, ReflectionNode] = {}

@@ -35,9 +35,19 @@ def test_log_record_creation_and_redaction():
 def test_log_index_multi_field_search():
     index = LogIndex()
 
-    r1 = LogRecord(level=LogLevel.INFO, message="Task started", service_name="worker-srv", tenant_id="tenant-1", trace_id="tr-1")
-    r2 = LogRecord(level=LogLevel.ERROR, message="Task failed with timeout", service_name="worker-srv", tenant_id="tenant-1", trace_id="tr-1")
-    r3 = LogRecord(level=LogLevel.DEBUG, message="Cache hit", service_name="cache-srv", tenant_id="tenant-2", trace_id="tr-2")
+    r1 = LogRecord(
+        level=LogLevel.INFO, message="Task started", service_name="worker-srv", tenant_id="tenant-1", trace_id="tr-1"
+    )
+    r2 = LogRecord(
+        level=LogLevel.ERROR,
+        message="Task failed with timeout",
+        service_name="worker-srv",
+        tenant_id="tenant-1",
+        trace_id="tr-1",
+    )
+    r3 = LogRecord(
+        level=LogLevel.DEBUG, message="Cache hit", service_name="cache-srv", tenant_id="tenant-2", trace_id="tr-2"
+    )
 
     index.index_batch([r1, r2, r3])
 

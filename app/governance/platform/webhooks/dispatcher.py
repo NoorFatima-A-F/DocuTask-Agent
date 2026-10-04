@@ -62,10 +62,7 @@ class WebhookDispatcher:
     ) -> List[WebhookDeliveryAttempt]:
         """Deliver event to all matching webhook subscriptions for tenant."""
         endpoints = self.subscription_mgr.list_by_tenant(tenant_id)
-        matching = [
-            ep for ep in endpoints
-            if ep.is_active and ("*" in ep.events or event_type in ep.events)
-        ]
+        matching = [ep for ep in endpoints if ep.is_active and ("*" in ep.events or event_type in ep.events)]
 
         results: List[WebhookDeliveryAttempt] = []
         payload_data = {

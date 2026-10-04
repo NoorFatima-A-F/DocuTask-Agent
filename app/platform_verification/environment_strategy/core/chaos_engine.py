@@ -3,10 +3,13 @@ Chaos Engineering Experimentation Engine.
 Executes controlled failure injections (Process kills, Latency, CPU pressure, Outages)
 and measures blast radius containment and recovery time.
 """
+
 import hashlib
 import time
 from app.platform_verification.environment_strategy.domain.models import (
-    ChaosExperimentSpec, ChaosExperimentResult, ChaosFailureType
+    ChaosExperimentSpec,
+    ChaosExperimentResult,
+    ChaosFailureType,
 )
 from app.platform_verification.environment_strategy.domain.interfaces import ChaosInjectionEngineInterface
 
@@ -25,7 +28,9 @@ class ChaosEngineeringEngine(ChaosInjectionEngineInterface):
             recovery_ms = 120.0
             is_resilient = True
         elif spec.failure_type in (ChaosFailureType.CPU_PRESSURE, ChaosFailureType.MEMORY_PRESSURE):
-            observed = f"Simulated {spec.intensity_percentage}% resource exhaustion. Autoscaler scaled out replica pool."
+            observed = (
+                f"Simulated {spec.intensity_percentage}% resource exhaustion. Autoscaler scaled out replica pool."
+            )
             recovery_ms = 350.0
             is_resilient = True
         else:
@@ -44,7 +49,7 @@ class ChaosEngineeringEngine(ChaosInjectionEngineInterface):
             recovery_time_ms=recovery_ms,
             blast_radius_contained=True,
             observed_behavior=observed,
-            evidence_package_hash=evidence_hash
+            evidence_package_hash=evidence_hash,
         )
 
 

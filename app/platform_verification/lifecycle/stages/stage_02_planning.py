@@ -2,9 +2,11 @@
 Stage 2: Verification Planning.
 Transforms request into an immutable verification plan, execution strategy, dependencies, and gates.
 """
+
 from app.platform_verification.lifecycle.stages.base_stage import BaseLifecycleStage
 from app.platform_verification.lifecycle.context import VerificationExecutionContext, StageResult
 from app.platform_verification.lifecycle.states import LifecycleState
+
 
 class VerificationPlanningStage(BaseLifecycleStage):
     @property
@@ -29,13 +31,13 @@ class VerificationPlanningStage(BaseLifecycleStage):
             "concurrency_limit": 4,
             "repetition_count": 5,
             "timeout_seconds": 300,
-            "tasks": ["TASK_MODEL_INFERENCE", "TASK_OCR_RECOGNITION", "TASK_SCHEMA_VALIDATION"]
+            "tasks": ["TASK_MODEL_INFERENCE", "TASK_OCR_RECOGNITION", "TASK_SCHEMA_VALIDATION"],
         }
         return StageResult(
             stage_number=self.stage_number,
             stage_name=self.stage_name,
             status="PASSED",
-            produced_artifacts={"plan": plan}
+            produced_artifacts={"plan": plan},
         )
 
     def validate_exit_criteria(self, context: VerificationExecutionContext, result: StageResult) -> bool:

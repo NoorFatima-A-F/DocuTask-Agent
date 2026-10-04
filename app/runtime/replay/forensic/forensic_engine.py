@@ -46,13 +46,15 @@ class ForensicEngine:
 
             # Detect failures/anomalies
             if "fail" in evt_type or "error" in evt_type or payload.get("status") == "FAILED":
-                report.anomalies_detected.append({
-                    "event_id": ev.get("event_id"),
-                    "index": idx,
-                    "type": "EXECUTION_FAILURE",
-                    "details": payload,
-                    "timestamp": ev.get("timestamp"),
-                })
+                report.anomalies_detected.append(
+                    {
+                        "event_id": ev.get("event_id"),
+                        "index": idx,
+                        "type": "EXECUTION_FAILURE",
+                        "details": payload,
+                        "timestamp": ev.get("timestamp"),
+                    }
+                )
                 if not report.root_cause_summary:
                     report.root_cause_summary = {
                         "primary_fault_event_id": ev.get("event_id"),
@@ -63,23 +65,27 @@ class ForensicEngine:
             # Detect confidence drops
             conf = payload.get("overall_score") or payload.get("confidence")
             if conf is not None and conf < prev_conf - 0.05:
-                report.confidence_decay_points.append({
-                    "event_id": ev.get("event_id"),
-                    "score_before": prev_conf,
-                    "score_after": conf,
-                    "delta": round(conf - prev_conf, 4),
-                    "reason": payload.get("reason", "Feature degradation"),
-                })
+                report.confidence_decay_points.append(
+                    {
+                        "event_id": ev.get("event_id"),
+                        "score_before": prev_conf,
+                        "score_after": conf,
+                        "delta": round(conf - prev_conf, 4),
+                        "reason": payload.get("reason", "Feature degradation"),
+                    }
+                )
             if conf is not None:
                 prev_conf = conf
 
             # Trace causal links
             if ev.get("causation_id") or ev.get("correlation_id"):
-                report.causal_chain.append({
-                    "event_id": ev.get("event_id"),
-                    "parent_id": ev.get("causation_id"),
-                    "type": evt_type,
-                })
+                report.causal_chain.append(
+                    {
+                        "event_id": ev.get("event_id"),
+                        "parent_id": ev.get("causation_id"),
+                        "type": evt_type,
+                    }
+                )
 
         report.findings_count = len(report.anomalies_detected) + len(report.confidence_decay_points)
         if not report.anomalies_detected:

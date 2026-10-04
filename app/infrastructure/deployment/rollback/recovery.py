@@ -12,6 +12,7 @@ from ..control_plane.state import DeploymentRecord
 @dataclass
 class PostRollbackRCAReport:
     """Post-incident Root Cause Analysis report for a rolled back deployment."""
+
     report_id: str
     deployment_id: str
     service_name: str

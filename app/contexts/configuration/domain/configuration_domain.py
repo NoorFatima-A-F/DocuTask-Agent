@@ -2,10 +2,12 @@ from dataclasses import dataclass, field
 from typing import Dict, Any
 from app.shared_kernel import BaseEntity, DomainEvent
 
+
 @dataclass
 class ConfigurationSnapshotCreated(DomainEvent):
     config_id: str = ""
     snapshot_hash: str = ""
+
 
 @dataclass
 class ConfigurationAggregate(BaseEntity):

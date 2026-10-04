@@ -34,6 +34,7 @@ class WorkerStatus(str, Enum):
 
 class WorkerNode(BaseModel):
     """Execution worker instance in the cluster."""
+
     worker_id: str
     hostname: str = "worker-node-1"
     capabilities: List[str] = Field(default_factory=list)
@@ -47,6 +48,7 @@ class WorkerNode(BaseModel):
 
 class WorkerLease(BaseModel):
     """Time-bounded lease granting exclusive execution rights on a worker node."""
+
     lease_id: str = Field(default_factory=lambda: f"lease_{uuid.uuid4().hex[:8]}")
     worker_id: str
     mission_id: str
@@ -61,6 +63,7 @@ class WorkerLease(BaseModel):
 
 class ScheduledTaskItem(BaseModel):
     """Priority queue task item."""
+
     task_id: str
     mission_id: str
     step_id: str
@@ -90,10 +93,10 @@ class EnterpriseResourceScheduler:
     def _initialize_workers(self, count: int) -> None:
         all_caps = [c.capability_id for c in self.capability_discovery.list_all()]
         for i in range(count):
-            wid = f"worker-node-{i+1}"
+            wid = f"worker-node-{i + 1}"
             self._workers[wid] = WorkerNode(
                 worker_id=wid,
-                hostname=f"runner-{i+1}.cluster.internal",
+                hostname=f"runner-{i + 1}.cluster.internal",
                 capabilities=all_caps,
                 has_gpu=(i % 4 == 0),
             )
@@ -149,7 +152,9 @@ class EnterpriseResourceScheduler:
             if worker.status == WorkerStatus.IDLE:
                 if capability_id in worker.capabilities:
                     if not required_gpu or worker.has_gpu:
-                        return self._create_lease(worker, mission_id, step_id, capability_id, duration_seconds, priority)
+                        return self._create_lease(
+                            worker, mission_id, step_id, capability_id, duration_seconds, priority
+                        )
 
         # 2. Check if preemption is possible for CRITICAL tasks
         if priority == QueuePriority.CRITICAL:

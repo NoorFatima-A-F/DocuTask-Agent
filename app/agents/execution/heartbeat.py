@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class HeartbeatRecord(BaseModel):
     """Heartbeat timestamp for an active entity."""
+
     entity_id: str
     last_seen: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     model_config = {"frozen": True}

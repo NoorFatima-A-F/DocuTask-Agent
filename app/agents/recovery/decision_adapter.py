@@ -14,8 +14,5 @@ class RecoveryDecisionAdapter:
         self.decision_engine = decision_engine or DecisionEngine()
 
     async def evaluate_recovery_authorization(self, strategy_name: str, estimated_cost_usd: float) -> DecisionResult:
-        ctx = DecisionContext(
-            action_type="RECOVERY_EVALUATION",
-            estimated_cost_usd=estimated_cost_usd
-        )
+        ctx = DecisionContext(action_type="RECOVERY_EVALUATION", estimated_cost_usd=estimated_cost_usd)
         return await self.decision_engine.evaluate(ctx)

@@ -76,17 +76,21 @@ class DecisionLedger:
         realized_metrics: Optional[Dict[str, float]] = None,
     ) -> PlannerDecisionEntry:
         evaluated_candidates = CandidatePlanEvaluator.evaluate_candidates(candidates_raw)
-        selected = evaluated_candidates[0] if evaluated_candidates else CandidatePlan(
-            candidate_id="default-fallback",
-            model="gemini-2.5-flash",
-            dag_depth=1,
-            parallelism=1,
-            predicted_cost_usd=0.001,
-            predicted_latency_ms=200.0,
-            predicted_accuracy=0.95,
-            estimated_utility=0.8,
-            constraints_satisfied=True,
-            selection_score=0.8,
+        selected = (
+            evaluated_candidates[0]
+            if evaluated_candidates
+            else CandidatePlan(
+                candidate_id="default-fallback",
+                model="gemini-2.5-flash",
+                dag_depth=1,
+                parallelism=1,
+                predicted_cost_usd=0.001,
+                predicted_latency_ms=200.0,
+                predicted_accuracy=0.95,
+                estimated_utility=0.8,
+                constraints_satisfied=True,
+                selection_score=0.8,
+            )
         )
 
         regret = None

@@ -1,6 +1,7 @@
 """
 Entry point for python -m app.cli
 """
+
 import sys
 from app.cli.main import main
 

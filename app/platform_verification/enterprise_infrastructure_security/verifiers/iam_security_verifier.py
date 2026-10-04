@@ -29,10 +29,34 @@ class IAMSecurityVerifier(IIAMSecurityVerifier):
 
     def verify(self) -> IAMSecurityReport:
         roles = [
-            IAMRolePermissionSpec(role_name="Admin", assigned_permissions=["users:manage", "documents:manage", "system:configure", "audit:view"], privilege_level="High", escalation_tested=True, escalation_blocked=True),
-            IAMRolePermissionSpec(role_name="StandardUser", assigned_permissions=["documents:upload", "documents:read_own", "tasks:view_own"], privilege_level="Standard", escalation_tested=True, escalation_blocked=True),
-            IAMRolePermissionSpec(role_name="WorkerServiceAccount", assigned_permissions=["tasks:fetch", "tasks:update_status", "ocr:process", "storage:read_write_task"], privilege_level="Service-Scoped", escalation_tested=True, escalation_blocked=True),
-            IAMRolePermissionSpec(role_name="AuditorReadOnly", assigned_permissions=["audit:view", "reports:read"], privilege_level="Read-Only", escalation_tested=True, escalation_blocked=True),
+            IAMRolePermissionSpec(
+                role_name="Admin",
+                assigned_permissions=["users:manage", "documents:manage", "system:configure", "audit:view"],
+                privilege_level="High",
+                escalation_tested=True,
+                escalation_blocked=True,
+            ),
+            IAMRolePermissionSpec(
+                role_name="StandardUser",
+                assigned_permissions=["documents:upload", "documents:read_own", "tasks:view_own"],
+                privilege_level="Standard",
+                escalation_tested=True,
+                escalation_blocked=True,
+            ),
+            IAMRolePermissionSpec(
+                role_name="WorkerServiceAccount",
+                assigned_permissions=["tasks:fetch", "tasks:update_status", "ocr:process", "storage:read_write_task"],
+                privilege_level="Service-Scoped",
+                escalation_tested=True,
+                escalation_blocked=True,
+            ),
+            IAMRolePermissionSpec(
+                role_name="AuditorReadOnly",
+                assigned_permissions=["audit:view", "reports:read"],
+                privilege_level="Read-Only",
+                escalation_tested=True,
+                escalation_blocked=True,
+            ),
         ]
 
         checks = [

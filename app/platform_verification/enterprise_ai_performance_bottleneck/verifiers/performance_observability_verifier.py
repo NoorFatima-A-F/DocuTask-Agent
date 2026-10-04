@@ -26,16 +26,48 @@ class PerformanceObservabilityVerifier(IPerformanceObservabilityVerifier):
 
     def verify(self) -> PerformanceObservabilityReport:
         signals = [
-            ObservabilitySignal(signal_type="Golden: Latency", metric_name="http_request_duration_seconds", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="Golden: Traffic", metric_name="http_requests_total", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="Golden: Errors", metric_name="http_errors_total", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="Golden: Saturation", metric_name="system_cpu_usage_pct", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="AI: Throughput", metric_name="documents_processed_total", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="AI: Token Usage", metric_name="tokens_used_total", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="AI: LLM Latency", metric_name="llm_latency_seconds", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="AI: OCR Latency", metric_name="ocr_latency_seconds", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="AI: Queue Lag", metric_name="queue_delay_seconds", collected=True, dashboard_mapped=True),
-            ObservabilitySignal(signal_type="AI: Worker Utilization", metric_name="worker_utilization_ratio", collected=True, dashboard_mapped=True),
+            ObservabilitySignal(
+                signal_type="Golden: Latency",
+                metric_name="http_request_duration_seconds",
+                collected=True,
+                dashboard_mapped=True,
+            ),
+            ObservabilitySignal(
+                signal_type="Golden: Traffic", metric_name="http_requests_total", collected=True, dashboard_mapped=True
+            ),
+            ObservabilitySignal(
+                signal_type="Golden: Errors", metric_name="http_errors_total", collected=True, dashboard_mapped=True
+            ),
+            ObservabilitySignal(
+                signal_type="Golden: Saturation",
+                metric_name="system_cpu_usage_pct",
+                collected=True,
+                dashboard_mapped=True,
+            ),
+            ObservabilitySignal(
+                signal_type="AI: Throughput",
+                metric_name="documents_processed_total",
+                collected=True,
+                dashboard_mapped=True,
+            ),
+            ObservabilitySignal(
+                signal_type="AI: Token Usage", metric_name="tokens_used_total", collected=True, dashboard_mapped=True
+            ),
+            ObservabilitySignal(
+                signal_type="AI: LLM Latency", metric_name="llm_latency_seconds", collected=True, dashboard_mapped=True
+            ),
+            ObservabilitySignal(
+                signal_type="AI: OCR Latency", metric_name="ocr_latency_seconds", collected=True, dashboard_mapped=True
+            ),
+            ObservabilitySignal(
+                signal_type="AI: Queue Lag", metric_name="queue_delay_seconds", collected=True, dashboard_mapped=True
+            ),
+            ObservabilitySignal(
+                signal_type="AI: Worker Utilization",
+                metric_name="worker_utilization_ratio",
+                collected=True,
+                dashboard_mapped=True,
+            ),
         ]
 
         checks: List[CheckResult] = [

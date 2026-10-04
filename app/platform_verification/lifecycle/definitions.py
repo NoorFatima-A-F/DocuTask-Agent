@@ -4,6 +4,7 @@ from enum import Enum
 from typing import List, Optional
 import uuid
 
+
 class VerificationType(str, Enum):
     FUNCTIONAL = "FUNCTIONAL"
     PERFORMANCE = "PERFORMANCE"
@@ -15,12 +16,14 @@ class VerificationType(str, Enum):
     REGRESSION = "REGRESSION"
     BUSINESS_ACCEPTANCE = "BUSINESS_ACCEPTANCE"
 
+
 @dataclass(frozen=True)
 class QualityGateRuleDefinition:
     metric_name: str
     operator: str
     threshold: float
     is_hard_blocker: bool = True
+
 
 @dataclass(frozen=True)
 class VerificationSpecification:
@@ -49,7 +52,7 @@ class VerificationSpecification:
         environment_tier: str = "staging",
         required_metrics: Optional[List[str]] = None,
         quality_gate_rules: Optional[List[QualityGateRuleDefinition]] = None,
-        owner: str = "verification-squad"
+        owner: str = "verification-squad",
     ) -> "VerificationSpecification":
         return cls(
             specification_id=f"vspec_{uuid.uuid4().hex[:12]}",
@@ -61,9 +64,10 @@ class VerificationSpecification:
             dataset_class=dataset_class,
             environment_tier=environment_tier,
             required_metrics=required_metrics or ["accuracy", "p99_latency_ms"],
-            quality_gate_rules=quality_gate_rules or [
+            quality_gate_rules=quality_gate_rules
+            or [
                 QualityGateRuleDefinition("accuracy", ">=", 0.95, is_hard_blocker=True),
-                QualityGateRuleDefinition("p99_latency_ms", "<=", 100.0, is_hard_blocker=False)
+                QualityGateRuleDefinition("p99_latency_ms", "<=", 100.0, is_hard_blocker=False),
             ],
-            owner=owner
+            owner=owner,
         )

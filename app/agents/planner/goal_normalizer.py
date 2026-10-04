@@ -17,5 +17,5 @@ class GoalNormalizer:
             goal_id=gid,
             name=clean_text,
             description=clean_text,
-            success_criteria=["Complete task execution without unhandled exceptions"]
+            success_criteria=["Complete task execution without unhandled exceptions"],
         )

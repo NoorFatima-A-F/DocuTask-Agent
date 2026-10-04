@@ -3,6 +3,7 @@ from ..domain.execution_domain import ExecutionAggregate, ExecutionStarted, Exec
 from app.shared_kernel import Result, Ok, Err, get_event_bus
 import inspect
 
+
 class ExecutionService:
     def __init__(self, repo):
         self.repo = repo

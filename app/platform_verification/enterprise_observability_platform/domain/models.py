@@ -1,6 +1,7 @@
 """
 Phase 3I.11: Enterprise Observability Intelligence Platform Integration, Multi-Environment Operations & Global Reliability Control — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -8,10 +9,10 @@ from datetime import datetime, timezone
 
 
 class GlobalCertificationTier(str, Enum):
-    ENTERPRISE_GLOBAL_OPERATIONS_READY = "Enterprise Global Operations Ready"          # 95 - 100%
-    ADVANCED_MULTI_ENV_RELIABILITY = "Advanced Multi-Environment Reliability"          # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                                      # 80 - 89.99%
-    FAILED = "Failed"                                                                  # < 80%
+    ENTERPRISE_GLOBAL_OPERATIONS_READY = "Enterprise Global Operations Ready"  # 95 - 100%
+    ADVANCED_MULTI_ENV_RELIABILITY = "Advanced Multi-Environment Reliability"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 class EnvironmentType(str, Enum):
@@ -37,6 +38,7 @@ class GlobalTrend(str, Enum):
 
 # ─── 3I.11.1: Control Plane Architecture Models ─────────────────────────────────
 
+
 class ControlPlaneComponentSpec(BaseModel):
     layer_name: str
     component_name: str
@@ -57,6 +59,7 @@ class ControlPlaneArchitectureReport(BaseModel):
 
 
 # ─── 3I.11.2: Telemetry Federation Models ─────────────────────────────────────
+
 
 class EnvironmentTelemetryFeedSpec(BaseModel):
     environment: EnvironmentType
@@ -79,6 +82,7 @@ class TelemetryFederationReport(BaseModel):
 
 
 # ─── 3I.11.3: Observability Standardization Models ────────────────────────────
+
 
 class StandardizedMetricSpec(BaseModel):
     metric_name: str
@@ -109,6 +113,7 @@ class ObservabilityStandardizationReport(BaseModel):
 
 # ─── 3I.11.4: Environment Drift Detection Models ──────────────────────────────
 
+
 class DriftCheckResult(BaseModel):
     drift_category: str  # Infrastructure, Configuration, Observability
     target_entity: str
@@ -131,6 +136,7 @@ class EnvironmentDriftReport(BaseModel):
 
 # ─── 3I.11.5: Global Reliability Intelligence Models ──────────────────────────
 
+
 class GlobalReliabilityDimension(BaseModel):
     dimension_name: str
     score_pct: float
@@ -152,6 +158,7 @@ class GlobalReliabilityReport(BaseModel):
 
 # ─── 3I.11.6: Cross-Environment Incident Intelligence Models ──────────────────
 
+
 class CrossEnvIncidentCorrelation(BaseModel):
     correlation_id: str
     detected_in_env: EnvironmentType
@@ -171,6 +178,7 @@ class CrossEnvironmentIncidentReport(BaseModel):
 
 
 # ─── 3I.11.7: Production Readiness Gate Models ────────────────────────────────
+
 
 class ReadinessGateStage(BaseModel):
     stage_name: str
@@ -193,6 +201,7 @@ class ProductionReadinessGateReport(BaseModel):
 
 
 # ─── 3I.11.8: Multi-Region Reliability Models ─────────────────────────────────
+
 
 class RegionHealthStatus(BaseModel):
     region_id: str
@@ -217,6 +226,7 @@ class MultiRegionReliabilityReport(BaseModel):
 
 # ─── 3I.11.9: Cloud Provider Observability Integration Models ─────────────────
 
+
 class CloudProviderIntegrationSpec(BaseModel):
     cloud_platform: str  # AWS, Google Cloud, Azure, Kubernetes
     native_telemetry_services: List[str]
@@ -233,6 +243,7 @@ class CloudObservabilityIntegrationReport(BaseModel):
 
 
 # ─── 3I.11.10: Enterprise Dashboard Federation Models ─────────────────────────
+
 
 class FederatedDashboardTier(BaseModel):
     tier_name: str
@@ -251,6 +262,7 @@ class DashboardFederationReport(BaseModel):
 
 
 # ─── 3I.11.11: Reliability Control Automation Models ──────────────────────────
+
 
 class GlobalAutomationActionSpec(BaseModel):
     action_type: str  # Scaling, Deployment Protection, Regional Recovery
@@ -272,6 +284,7 @@ class GlobalAutomationControlReport(BaseModel):
 
 
 # ─── 3I.11.12 & 13: 7-Category Scoring & Certification Models ─────────────────
+
 
 class GlobalCategoryScore(BaseModel):
     category_name: str

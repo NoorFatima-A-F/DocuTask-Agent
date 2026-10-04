@@ -1,8 +1,10 @@
 """
 Versioned Dataset Catalog with Integrity Checksums
 """
+
 import hashlib
 from typing import Dict, Any, List
+
 
 class DatasetCatalog:
     def __init__(self):
@@ -20,8 +22,8 @@ class DatasetCatalog:
                 "test_cases": [
                     {"doc_id": "inv-001", "ground_truth_total": 12500.50, "vendor": "Acme Corp"},
                     {"doc_id": "inv-002", "ground_truth_total": 450.00, "vendor": "Global Logistics"},
-                    {"doc_id": "inv-003", "ground_truth_total": 8920.00, "vendor": "TechSupply Inc"}
-                ]
+                    {"doc_id": "inv-003", "ground_truth_total": 8920.00, "vendor": "TechSupply Inc"},
+                ],
             }
         }
         self._datasets = default_ds
@@ -31,5 +33,6 @@ class DatasetCatalog:
 
     def list_datasets(self) -> List[Dict[str, Any]]:
         return list(self._datasets.values())
+
 
 dataset_catalog = DatasetCatalog()

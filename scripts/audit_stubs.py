@@ -1,6 +1,7 @@
 """
 Audit Stub Report Generator.
 """
+
 import os
 import re
 import json
@@ -30,17 +31,28 @@ for root, dirs, files in os.walk(RUNTIME_DIR):
             for idx, line in enumerate(lines, start=1):
                 for pat in STUB_PATTERNS:
                     if re.search(pat, line, re.IGNORECASE):
-                        is_abstract = "raise NotImplementedError" in line and ("abstractmethod" in "".join(lines[max(0, idx-4):idx]))
-                        is_exc_pass = "pass" in line and ("class " in "".join(lines[max(0, idx-3):idx])) and ("Error" in "".join(lines[max(0, idx-3):idx]) or "Exception" in "".join(lines[max(0, idx-3):idx]))
+                        is_abstract = "raise NotImplementedError" in line and (
+                            "abstractmethod" in "".join(lines[max(0, idx - 4) : idx])
+                        )
+                        is_exc_pass = (
+                            "pass" in line
+                            and ("class " in "".join(lines[max(0, idx - 3) : idx]))
+                            and (
+                                "Error" in "".join(lines[max(0, idx - 3) : idx])
+                                or "Exception" in "".join(lines[max(0, idx - 3) : idx])
+                            )
+                        )
                         severity = "critical" if not (is_abstract or is_exc_pass) else "low"
-                        findings.append({
-                            "module": os.path.relpath(path, RUNTIME_DIR).replace("\\", "/"),
-                            "line": idx,
-                            "code": line.strip(),
-                            "pattern": pat,
-                            "severity": severity,
-                            "is_exception_or_abstract": is_abstract or is_exc_pass
-                        })
+                        findings.append(
+                            {
+                                "module": os.path.relpath(path, RUNTIME_DIR).replace("\\", "/"),
+                                "line": idx,
+                                "code": line.strip(),
+                                "pattern": pat,
+                                "severity": severity,
+                                "is_exception_or_abstract": is_abstract or is_exc_pass,
+                            }
+                        )
 
 print(f"Total findings: {len(findings)}")
 critical_findings = [f for f in findings if f["severity"] == "critical"]

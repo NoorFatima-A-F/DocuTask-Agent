@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 class GraphEntity(BaseModel):
     """Node entity in the enterprise knowledge graph."""
+
     id: str
     entity_type: str  # Person, Company, Contract, Invoice, Policy, Project, Department
     name: str
@@ -32,7 +33,7 @@ class KnowledgeGraphEngine:
         self._entities: Dict[str, GraphEntity] = {}
         self._relations: Dict[str, KnowledgeRelationship] = {}
         self._adjacency: Dict[str, List[str]] = {}  # source_id -> [relation_id, ...]
-        self._reverse_adj: Dict[str, List[str]] = {} # target_id -> [relation_id, ...]
+        self._reverse_adj: Dict[str, List[str]] = {}  # target_id -> [relation_id, ...]
 
     def add_entity(
         self,
@@ -65,6 +66,7 @@ class KnowledgeGraphEngine:
     ) -> KnowledgeRelationship:
         """Adds a directed relationship edge between two entities."""
         import uuid
+
         rel_id = f"krel-{uuid.uuid4().hex[:8]}"
         rel = KnowledgeRelationship(
             id=rel_id,

@@ -1,9 +1,11 @@
 """
 In-Memory Domain Event Bus with Audit Dispatching
 """
+
 from typing import Dict, List, Callable, Optional
 from app.platform_verification.domain.events import VerificationDomainEvent
 from app.platform_verification.domain.interfaces import EventBusInterface
+
 
 class VerificationEventBus(EventBusInterface):
     def __init__(self):
@@ -33,5 +35,6 @@ class VerificationEventBus(EventBusInterface):
         if run_id:
             return [e for e in self._event_log if e.run_id == run_id]
         return list(self._event_log)
+
 
 verification_event_bus = VerificationEventBus()

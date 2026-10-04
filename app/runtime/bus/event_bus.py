@@ -10,6 +10,7 @@ from app.runtime.events.subscriptions import EventSubscription
 logger = logging.getLogger(__name__)
 AsyncSubscriber = Callable[[RuntimeEvent], Coroutine[Any, Any, None]]
 
+
 class RuntimeEventBus:
     def __init__(self, store: Optional[EventStore] = None):
         self.store = store or EventStore()
@@ -40,7 +41,7 @@ class RuntimeEventBus:
         try:
             await callback(event)
         except Exception as e:
-            logger.error(f'Error in subscriber {sub_id}: {e}')
+            logger.error(f"Error in subscriber {sub_id}: {e}")
 
     async def subscribe(self, sub: EventSubscription, callback: AsyncSubscriber):
         async with self._lock:
@@ -61,7 +62,9 @@ class RuntimeEventBus:
         async with self._lock:
             self._queues.pop(queue_id, None)
 
+
 _GLOBAL_EVENT_BUS: Optional[RuntimeEventBus] = None
+
 
 def get_global_event_bus():
     global _GLOBAL_EVENT_BUS

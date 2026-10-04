@@ -25,10 +25,42 @@ class AICapabilityBenchmarker(IAICapabilityBenchmarker):
 
     def evaluate(self) -> AICapabilityBenchmarkReport:
         benchmarks = [
-            BenchmarkMetric(category="Invoices", dataset_name="InvoiceGroundTruthCorpus", sample_count=1200, precision=0.992, recall=0.988, f1_score=0.990, accuracy_pct=99.1),
-            BenchmarkMetric(category="Resumes", dataset_name="ResumeCandidateCorpus", sample_count=800, precision=0.985, recall=0.982, f1_score=0.983, accuracy_pct=98.6),
-            BenchmarkMetric(category="Contracts", dataset_name="LegalClauseExtractionCorpus", sample_count=650, precision=0.990, recall=0.985, f1_score=0.987, accuracy_pct=98.9),
-            BenchmarkMetric(category="Healthcare", dataset_name="MedicalPriorAuthCorpus", sample_count=550, precision=0.995, recall=0.991, f1_score=0.993, accuracy_pct=99.4),
+            BenchmarkMetric(
+                category="Invoices",
+                dataset_name="InvoiceGroundTruthCorpus",
+                sample_count=1200,
+                precision=0.992,
+                recall=0.988,
+                f1_score=0.990,
+                accuracy_pct=99.1,
+            ),
+            BenchmarkMetric(
+                category="Resumes",
+                dataset_name="ResumeCandidateCorpus",
+                sample_count=800,
+                precision=0.985,
+                recall=0.982,
+                f1_score=0.983,
+                accuracy_pct=98.6,
+            ),
+            BenchmarkMetric(
+                category="Contracts",
+                dataset_name="LegalClauseExtractionCorpus",
+                sample_count=650,
+                precision=0.990,
+                recall=0.985,
+                f1_score=0.987,
+                accuracy_pct=98.9,
+            ),
+            BenchmarkMetric(
+                category="Healthcare",
+                dataset_name="MedicalPriorAuthCorpus",
+                sample_count=550,
+                precision=0.995,
+                recall=0.991,
+                f1_score=0.993,
+                accuracy_pct=99.4,
+            ),
         ]
 
         overall_acc = sum(b.accuracy_pct for b in benchmarks) / len(benchmarks)

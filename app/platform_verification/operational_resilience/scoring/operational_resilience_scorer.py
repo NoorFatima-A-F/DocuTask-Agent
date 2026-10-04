@@ -1,6 +1,7 @@
 """
 Phase 3H.7.11: 7-Pillar Enterprise Operational Resilience Scorer
 """
+
 import uuid
 from datetime import datetime, timezone
 from typing import List
@@ -78,7 +79,9 @@ class OperationalResilienceScorer(IOperationalResilienceScorer):
         )
 
         # 3. Graceful Degradation & Fallbacks (20%)
-        degrade_raw = 100.0 if degrade_report.graceful_degradation_verified and len(degrade_report.scenarios) >= 4 else 80.0
+        degrade_raw = (
+            100.0 if degrade_report.graceful_degradation_verified and len(degrade_report.scenarios) >= 4 else 80.0
+        )
         degrade_weight = 0.20
         pillars.append(
             OperationalResiliencePillarScore(
@@ -106,7 +109,11 @@ class OperationalResilienceScorer(IOperationalResilienceScorer):
         )
 
         # 5. Automated Self-Healing & Stale Locks (20%)
-        healing_raw = 100.0 if self_healing_report.zero_manual_intervention_required and len(self_healing_report.scenarios) >= 5 else 85.0
+        healing_raw = (
+            100.0
+            if self_healing_report.zero_manual_intervention_required and len(self_healing_report.scenarios) >= 5
+            else 85.0
+        )
         healing_weight = 0.20
         pillars.append(
             OperationalResiliencePillarScore(
@@ -138,7 +145,9 @@ class OperationalResilienceScorer(IOperationalResilienceScorer):
         )
 
         # 7. Business Continuity (10%)
-        continuity_raw = 100.0 if continuity_report.zero_document_loss_guaranteed and len(continuity_report.checks) >= 4 else 85.0
+        continuity_raw = (
+            100.0 if continuity_report.zero_document_loss_guaranteed and len(continuity_report.checks) >= 4 else 85.0
+        )
         continuity_weight = 0.10
         pillars.append(
             OperationalResiliencePillarScore(

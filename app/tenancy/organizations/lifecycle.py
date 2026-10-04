@@ -15,6 +15,7 @@ from app.tenancy.core.exceptions import InvalidTenantStateError
 
 class LifecycleAuditEvent(BaseModel):
     """Audit log entry for organization lifecycle transitions."""
+
     organization_id: str
     from_state: TenantLifecycleState
     to_state: TenantLifecycleState
@@ -30,10 +31,26 @@ class OrganizationLifecycleManager:
     # Explicit allowed transitions
     VALID_TRANSITIONS: Dict[TenantLifecycleState, Set[TenantLifecycleState]] = {
         TenantLifecycleState.REGISTERED: {TenantLifecycleState.PROVISIONING, TenantLifecycleState.DELETED},
-        TenantLifecycleState.PROVISIONING: {TenantLifecycleState.INITIALIZED, TenantLifecycleState.REGISTERED, TenantLifecycleState.DELETED},
-        TenantLifecycleState.INITIALIZED: {TenantLifecycleState.ACTIVE, TenantLifecycleState.SUSPENDED, TenantLifecycleState.DELETED},
-        TenantLifecycleState.ACTIVE: {TenantLifecycleState.SUSPENDED, TenantLifecycleState.ARCHIVED, TenantLifecycleState.DELETED},
-        TenantLifecycleState.SUSPENDED: {TenantLifecycleState.ACTIVE, TenantLifecycleState.ARCHIVED, TenantLifecycleState.DELETED},
+        TenantLifecycleState.PROVISIONING: {
+            TenantLifecycleState.INITIALIZED,
+            TenantLifecycleState.REGISTERED,
+            TenantLifecycleState.DELETED,
+        },
+        TenantLifecycleState.INITIALIZED: {
+            TenantLifecycleState.ACTIVE,
+            TenantLifecycleState.SUSPENDED,
+            TenantLifecycleState.DELETED,
+        },
+        TenantLifecycleState.ACTIVE: {
+            TenantLifecycleState.SUSPENDED,
+            TenantLifecycleState.ARCHIVED,
+            TenantLifecycleState.DELETED,
+        },
+        TenantLifecycleState.SUSPENDED: {
+            TenantLifecycleState.ACTIVE,
+            TenantLifecycleState.ARCHIVED,
+            TenantLifecycleState.DELETED,
+        },
         TenantLifecycleState.ARCHIVED: {TenantLifecycleState.ACTIVE, TenantLifecycleState.DELETED},
         TenantLifecycleState.DELETED: set(),  # Terminal state
     }

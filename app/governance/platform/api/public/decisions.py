@@ -87,10 +87,7 @@ class DecisionService:
         page_size: int = 50,
     ) -> Dict[str, Any]:
         """Query decision history for tenant."""
-        results = [
-            d for d in self._decision_history
-            if d["tenant_id"] == ctx.tenant_id
-        ]
+        results = [d for d in self._decision_history if d["tenant_id"] == ctx.tenant_id]
         if decision_type:
             results = [d for d in results if d.get("decision") == decision_type.upper()]
         if risk_level:

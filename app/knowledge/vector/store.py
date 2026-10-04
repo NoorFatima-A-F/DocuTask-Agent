@@ -64,7 +64,7 @@ class InMemoryVectorStore(VectorStoreInterface):
 
     def __init__(self):
         self._embeddings: Dict[str, KnowledgeEmbedding] = {}  # chunk_id -> embedding
-        self._chunks: Dict[str, KnowledgeChunk] = {}          # chunk_id -> chunk
+        self._chunks: Dict[str, KnowledgeChunk] = {}  # chunk_id -> chunk
 
     def insert(self, embedding: KnowledgeEmbedding, chunk: KnowledgeChunk) -> None:
         self._embeddings[chunk.chunk_id] = embedding
@@ -122,9 +122,11 @@ class InMemoryVectorStore(VectorStoreInterface):
 
 class PgVectorStoreAdapter(InMemoryVectorStore):
     """PostgreSQL pgvector database adapter."""
+
     pass
 
 
 class QdrantStoreAdapter(InMemoryVectorStore):
     """Qdrant vector search engine adapter."""
+
     pass

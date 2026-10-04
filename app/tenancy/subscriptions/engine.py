@@ -33,7 +33,13 @@ class SubscriptionEngine:
         },
         SubscriptionTier.ENTERPRISE: {
             "amount_usd": 999.0,
-            "quotas": {"users": 1000, "workspaces": 100, "workflows": 5000, "agents": 1000, "tokens_monthly": 100_000_000},
+            "quotas": {
+                "users": 1000,
+                "workspaces": 100,
+                "workflows": 5000,
+                "agents": 1000,
+                "tokens_monthly": 100_000_000,
+            },
             "features": {"custom_domains": True, "white_label": True, "sso": True, "audit_export": True},
         },
     }

@@ -11,6 +11,7 @@ from ...core.errors.error_codes import ErrorCategory
 
 class QuotaExceededException(PlatformException):
     """Raised when tenant exceeds resource quota."""
+
     def __init__(self, tenant_id: str, resource_type: ResourceType, limit: float, requested: float):
         super().__init__(
             f"Quota exceeded for tenant '{tenant_id}' on resource '{resource_type.value}': limit={limit}, requested={requested}",

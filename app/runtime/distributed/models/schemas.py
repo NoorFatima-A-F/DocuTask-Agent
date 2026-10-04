@@ -55,6 +55,7 @@ class ScalingAction(str, Enum):
 # Worker Fleet & Node Metadata
 # ---------------------------------------------------------
 
+
 class WorkerCapacity(BaseModel):
     max_concurrent_jobs: int = 8
     allocated_jobs: int = 0
@@ -83,6 +84,7 @@ class WorkerNode(BaseModel):
 # Distributed Scheduling & Priority Queues
 # ---------------------------------------------------------
 
+
 class ScheduledJob(BaseModel):
     job_id: str = Field(default_factory=lambda: f"job_{uuid.uuid4().hex[:10]}")
     workflow_id: str
@@ -106,6 +108,7 @@ class ScheduledJob(BaseModel):
 # ---------------------------------------------------------
 # Durable Workflow & Checkpointing
 # ---------------------------------------------------------
+
 
 class WorkflowStepState(BaseModel):
     step_index: int
@@ -146,6 +149,7 @@ class DurableWorkflow(BaseModel):
 # Distributed Locks & Concurrency
 # ---------------------------------------------------------
 
+
 class LockLease(BaseModel):
     lock_key: str
     holder_id: str
@@ -158,6 +162,7 @@ class LockLease(BaseModel):
 # ---------------------------------------------------------
 # Autoscaling & Cloud Metrics
 # ---------------------------------------------------------
+
 
 class AutoscalingPolicy(BaseModel):
     policy_id: str = "default_policy"
@@ -192,6 +197,7 @@ class ClusterOverview(BaseModel):
 # ---------------------------------------------------------
 # Disaster Recovery & Backups
 # ---------------------------------------------------------
+
 
 class DisasterRecoverySnapshot(BaseModel):
     snapshot_id: str = Field(default_factory=lambda: f"snap_{uuid.uuid4().hex[:10]}")

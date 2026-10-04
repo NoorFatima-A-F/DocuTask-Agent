@@ -43,7 +43,9 @@ class ReleaseGatekeeper(IReleaseGatekeeper):
         # 3. Check Performance Regression
         perf_report = gate_reports.get("performance")
         if perf_report and getattr(perf_report, "threshold_exceeded", False):
-            blockers.append(f"Performance Regression Failure: P95 latency increased by {perf_report.latency_increase_pct}%.")
+            blockers.append(
+                f"Performance Regression Failure: P95 latency increased by {perf_report.latency_increase_pct}%."
+            )
             evaluations["Performance Gate"] = "FAILED (Regression Exceeded 50% Threshold)"
         else:
             evaluations["Performance Gate"] = "PASSED (Within Latency SLA Target)"
@@ -59,7 +61,9 @@ class ReleaseGatekeeper(IReleaseGatekeeper):
         # 5. Check Drift Status
         drift_report = gate_reports.get("drift")
         if drift_report and getattr(drift_report, "drift_detected", False) and drift_report.drift_severity == "HIGH":
-            blockers.append(f"Infrastructure Drift Failure: {drift_report.drifted_resources} unmanaged resources detected.")
+            blockers.append(
+                f"Infrastructure Drift Failure: {drift_report.drifted_resources} unmanaged resources detected."
+            )
             evaluations["Drift Gate"] = "FAILED (High Severity Drift)"
         else:
             evaluations["Drift Gate"] = "PASSED (Zero Infrastructure Drift)"
@@ -77,7 +81,9 @@ class ReleaseGatekeeper(IReleaseGatekeeper):
             timestamp=datetime.now(timezone.utc).isoformat(),
         )
 
-    def issue_certificate(self, decision: ReleaseDecision, gate_reports: Dict[str, Any]) -> ProductionReadinessCertificate:
+    def issue_certificate(
+        self, decision: ReleaseDecision, gate_reports: Dict[str, Any]
+    ) -> ProductionReadinessCertificate:
         status_flag = "PASS" if decision.decision == GateDecision.APPROVED else "BLOCK"
         return ProductionReadinessCertificate(
             application="DocuTask Agent",

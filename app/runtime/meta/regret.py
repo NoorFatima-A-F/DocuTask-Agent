@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class RegretAnalysisResult(BaseModel):
     """Mathematical regret evaluation for a chosen strategy."""
+
     mission_id: str
     chosen_strategy_id: str
     optimal_strategy_id: str
@@ -44,7 +45,7 @@ class RegretEngine:
                 verdict="Zero regret.",
             )
 
-        best_id = max(strategy_utilities, key=strategy_utilities.get) # type: ignore
+        best_id = max(strategy_utilities, key=strategy_utilities.get)  # type: ignore
         max_u = strategy_utilities[best_id]
         chosen_u = strategy_utilities.get(chosen_strategy_id, 0.0)
 

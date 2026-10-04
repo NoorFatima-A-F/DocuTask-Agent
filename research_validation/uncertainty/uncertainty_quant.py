@@ -19,6 +19,7 @@ from typing import Any, Dict, List, Optional, Tuple
 @dataclass
 class UncertaintyDecomposition:
     """Decomposition of prediction uncertainty for a single input or batch."""
+
     total_entropy: float
     aleatoric_uncertainty: float  # Expected entropy of conditional distributions
     epistemic_uncertainty: float  # Mutual Information I(Y; W | X) = Total - Aleatoric
@@ -30,6 +31,7 @@ class UncertaintyDecomposition:
 @dataclass
 class ConformalPredictionInterval:
     """Conformal prediction interval with rigorous finite-sample coverage guarantee."""
+
     point_prediction: float
     lower_bound: float
     upper_bound: float
@@ -41,6 +43,7 @@ class ConformalPredictionInterval:
 @dataclass
 class UncertaintyAuditReport:
     """Audit report for uncertainty quantification and risk scoring."""
+
     sample_size: int
     mean_total_entropy: float
     mean_aleatoric: float
@@ -64,9 +67,7 @@ class UncertaintyQuantificationLab:
 
     @classmethod
     def decompose_ensemble_uncertainty(
-        cls,
-        ensemble_probabilities: List[List[float]],
-        ood_threshold_ratio: float = 0.5
+        cls, ensemble_probabilities: List[List[float]], ood_threshold_ratio: float = 0.5
     ) -> UncertaintyDecomposition:
         """
         Decompose uncertainty given an ensemble of M models / MC Dropout passes.
@@ -104,7 +105,7 @@ class UncertaintyQuantificationLab:
             epistemic_uncertainty=epistemic,
             epistemic_ratio=epistemic_ratio,
             prediction_confidence=confidence,
-            is_out_of_distribution=is_ood
+            is_out_of_distribution=is_ood,
         )
 
     @staticmethod
@@ -123,10 +124,7 @@ class UncertaintyQuantificationLab:
 
     @classmethod
     def construct_conformal_interval(
-        cls,
-        point_prediction: float,
-        calibration_residuals: List[float],
-        alpha: float = 0.1
+        cls, point_prediction: float, calibration_residuals: List[float], alpha: float = 0.1
     ) -> ConformalPredictionInterval:
         """
         Construct a split-conformal prediction interval guaranteeing (1 - alpha) coverage.
@@ -140,7 +138,7 @@ class UncertaintyQuantificationLab:
             upper_bound=high,
             significance_level_alpha=alpha,
             target_coverage=1.0 - alpha,
-            interval_width=high - low
+            interval_width=high - low,
         )
 
     @classmethod
@@ -148,7 +146,7 @@ class UncertaintyQuantificationLab:
         cls,
         ensemble_batch: List[List[List[float]]],
         calibration_residuals: Optional[List[float]] = None,
-        test_points: Optional[List[Tuple[float, float]]] = None
+        test_points: Optional[List[Tuple[float, float]]] = None,
     ) -> UncertaintyAuditReport:
         """
         Run comprehensive uncertainty quantification across a batch of sample predictions.
@@ -161,7 +159,7 @@ class UncertaintyQuantificationLab:
                 mean_epistemic=0.0,
                 mean_interval_width=0.0,
                 ood_detection_count=0,
-                status="INSUFFICIENT_EVIDENCE"
+                status="INSUFFICIENT_EVIDENCE",
             )
 
         decomps = [cls.decompose_ensemble_uncertainty(ens) for ens in ensemble_batch]
@@ -177,8 +175,11 @@ class UncertaintyQuantificationLab:
         if calibration_residuals and test_points:
             intervals = [cls.construct_conformal_interval(pred, calibration_residuals) for pred, _ in test_points]
             mean_width = sum(i.interval_width for i in intervals) / len(intervals)
-            covered = sum(1 for (pred, actual), interval in zip(test_points, intervals)
-                          if interval.lower_bound <= actual <= interval.upper_bound)
+            covered = sum(
+                1
+                for (pred, actual), interval in zip(test_points, intervals)
+                if interval.lower_bound <= actual <= interval.upper_bound
+            )
             emp_coverage = covered / len(test_points)
 
         return UncertaintyAuditReport(
@@ -189,5 +190,5 @@ class UncertaintyQuantificationLab:
             mean_interval_width=mean_width,
             ood_detection_count=ood_count,
             empirical_coverage=emp_coverage,
-            status="PASS" if mean_epis >= 0.0 and mean_alea >= 0.0 else "VALIDATION_FAILED"
+            status="PASS" if mean_epis >= 0.0 and mean_alea >= 0.0 else "VALIDATION_FAILED",
         )

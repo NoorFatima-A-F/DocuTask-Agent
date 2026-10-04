@@ -87,16 +87,76 @@ class BenchmarkCertificationEngine:
     ) -> BenchmarkCertificationReport:
         """Evaluates all 10 scientific validation criteria."""
         criteria: List[SingleCertificationCriterion] = [
-            SingleCertificationCriterion("CERT-01", "Hardware Timer Calibration", timer_calibrated, "Resolution < 100ns", "Timer resolution measured and invocation overhead deducted."),
-            SingleCertificationCriterion("CERT-02", "Framework Reference Self-Validation", framework_self_validated, "Growth Error < 35%", "Algorithmic scaling verified against theoretical O(1), O(N), O(N log N)."),
-            SingleCertificationCriterion("CERT-03", "Multi-Run Campaign Repeatability", repeatability_passed, "R >= 0.85, Drift <= 30%", "Multi-run drift tested with pre-run thermal stabilization."),
-            SingleCertificationCriterion("CERT-04", "Cross-Platform Scalability", True, "Divergence < 3.5x", "Relative throughput ratios verified across Cloud Run and GKE."),
-            SingleCertificationCriterion("CERT-05", "Statistical Power Analysis", power_adequate, "Power >= 0.80", "Cohen's d calculated and sample size guaranteed against Type II error."),
-            SingleCertificationCriterion("CERT-06", "Distribution Hypothesis Testing", distribution_tested, "p >= 0.05", "Shapiro-Wilk, Anderson-Darling, and KS goodness-of-fit evaluated."),
-            SingleCertificationCriterion("CERT-07", "Bootstrap CI Convergence", bootstrap_converged, "CI drift < 2.0%", "BCa resamples verified for interval boundary stabilization."),
-            SingleCertificationCriterion("CERT-08", "Environmental Pre-Flight Integrity", integrity_passed, "Jitter < 2000ns", "Pre-flight CPU, memory, and timer jitter audited."),
-            SingleCertificationCriterion("CERT-09", "Enterprise Dataset Integrity", True, "IAA Kappa = 0.942", "Standardized Dataset Cards and physical noise models validated."),
-            SingleCertificationCriterion("CERT-10", "SLSA Level 3 Provenance & Signing", provenance_verified, "DSSE HMAC-SHA256 Valid", "Tamper-evident in-toto statement signed and verified."),
+            SingleCertificationCriterion(
+                "CERT-01",
+                "Hardware Timer Calibration",
+                timer_calibrated,
+                "Resolution < 100ns",
+                "Timer resolution measured and invocation overhead deducted.",
+            ),
+            SingleCertificationCriterion(
+                "CERT-02",
+                "Framework Reference Self-Validation",
+                framework_self_validated,
+                "Growth Error < 35%",
+                "Algorithmic scaling verified against theoretical O(1), O(N), O(N log N).",
+            ),
+            SingleCertificationCriterion(
+                "CERT-03",
+                "Multi-Run Campaign Repeatability",
+                repeatability_passed,
+                "R >= 0.85, Drift <= 30%",
+                "Multi-run drift tested with pre-run thermal stabilization.",
+            ),
+            SingleCertificationCriterion(
+                "CERT-04",
+                "Cross-Platform Scalability",
+                True,
+                "Divergence < 3.5x",
+                "Relative throughput ratios verified across Cloud Run and GKE.",
+            ),
+            SingleCertificationCriterion(
+                "CERT-05",
+                "Statistical Power Analysis",
+                power_adequate,
+                "Power >= 0.80",
+                "Cohen's d calculated and sample size guaranteed against Type II error.",
+            ),
+            SingleCertificationCriterion(
+                "CERT-06",
+                "Distribution Hypothesis Testing",
+                distribution_tested,
+                "p >= 0.05",
+                "Shapiro-Wilk, Anderson-Darling, and KS goodness-of-fit evaluated.",
+            ),
+            SingleCertificationCriterion(
+                "CERT-07",
+                "Bootstrap CI Convergence",
+                bootstrap_converged,
+                "CI drift < 2.0%",
+                "BCa resamples verified for interval boundary stabilization.",
+            ),
+            SingleCertificationCriterion(
+                "CERT-08",
+                "Environmental Pre-Flight Integrity",
+                integrity_passed,
+                "Jitter < 2000ns",
+                "Pre-flight CPU, memory, and timer jitter audited.",
+            ),
+            SingleCertificationCriterion(
+                "CERT-09",
+                "Enterprise Dataset Integrity",
+                True,
+                "IAA Kappa = 0.942",
+                "Standardized Dataset Cards and physical noise models validated.",
+            ),
+            SingleCertificationCriterion(
+                "CERT-10",
+                "SLSA Level 3 Provenance & Signing",
+                provenance_verified,
+                "DSSE HMAC-SHA256 Valid",
+                "Tamper-evident in-toto statement signed and verified.",
+            ),
         ]
 
         passed_count = sum(1 for c in criteria if c.is_passed)

@@ -5,7 +5,9 @@ client = TestClient(app)
 
 
 def test_api_strategy_synthesize():
-    response = client.post("/api/v1/evolution/strategy/synthesize", json={"goal_intent": "extract_financial_invoice", "branch_index": 0})
+    response = client.post(
+        "/api/v1/evolution/strategy/synthesize", json={"goal_intent": "extract_financial_invoice", "branch_index": 0}
+    )
     assert response.status_code == 200
     data = response.json()
     assert "strategy_id" in data
@@ -23,7 +25,9 @@ def test_api_strategy_mutate():
 
 
 def test_api_planner_evolve():
-    response = client.post("/api/v1/evolution/planner/evolve", json={"weakness_diagnosis": "Tail latency spike", "simulated_trials": 100})
+    response = client.post(
+        "/api/v1/evolution/planner/evolve", json={"weakness_diagnosis": "Tail latency spike", "simulated_trials": 100}
+    )
     assert response.status_code == 200
     data = response.json()
     assert data["is_promoted"] is True
@@ -39,7 +43,10 @@ def test_api_planner_generations():
 
 
 def test_api_simulation_run():
-    response = client.post("/api/v1/evolution/simulation/run", json={"mission_count": 20, "arrival_rate_per_sec": 5.0, "chaos_fault_rate": 0.01})
+    response = client.post(
+        "/api/v1/evolution/simulation/run",
+        json={"mission_count": 20, "arrival_rate_per_sec": 5.0, "chaos_fault_rate": 0.01},
+    )
     assert response.status_code == 200
     data = response.json()
     assert data["processed_missions_count"] == 20
@@ -47,7 +54,14 @@ def test_api_simulation_run():
 
 
 def test_api_causal_intervene():
-    response = client.post("/api/v1/evolution/causal/intervene", json={"treatment_variable": "worker_concurrency", "treatment_value": 8.0, "outcome_variable": "total_latency_ms"})
+    response = client.post(
+        "/api/v1/evolution/causal/intervene",
+        json={
+            "treatment_variable": "worker_concurrency",
+            "treatment_value": 8.0,
+            "outcome_variable": "total_latency_ms",
+        },
+    )
     assert response.status_code == 200
     data = response.json()
     assert "causal_effect_ate" in data

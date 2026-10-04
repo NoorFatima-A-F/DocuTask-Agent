@@ -26,6 +26,7 @@ class SignatureAlgorithm(str, Enum):
 @dataclass
 class CertificateInfo:
     """X.509 / In-toto style certificate descriptor in a trust chain."""
+
     key_id: str
     issuer: str
     subject: str
@@ -42,6 +43,7 @@ class CertificateInfo:
 @dataclass
 class DetachedSignature:
     """Cryptographic detached signature envelope."""
+
     key_id: str
     algorithm: SignatureAlgorithm
     signature_base64: str
@@ -61,7 +63,9 @@ class ProvenanceSigner:
     Signs evidence digests and verifies detached signatures against trust certificates.
     """
 
-    def __init__(self, key_id: str, secret_or_private_key: str, algorithm: SignatureAlgorithm = SignatureAlgorithm.HMAC_SHA256):
+    def __init__(
+        self, key_id: str, secret_or_private_key: str, algorithm: SignatureAlgorithm = SignatureAlgorithm.HMAC_SHA256
+    ):
         self.key_id = key_id
         self.secret_or_private_key = secret_or_private_key
         self.algorithm = algorithm
@@ -70,7 +74,7 @@ class ProvenanceSigner:
         self,
         digest_hex: str,
         signer_identity: str,
-        validity_duration_seconds: float = 31536000.0  # 1 year default
+        validity_duration_seconds: float = 31536000.0,  # 1 year default
     ) -> DetachedSignature:
         """Create a detached signature over an artifact/node digest."""
         now = time.time()
@@ -87,7 +91,7 @@ class ProvenanceSigner:
             payload_digest_sha256=digest_hex,
             signed_at_epoch=now,
             expires_at_epoch=expires,
-            signer_identity=signer_identity
+            signer_identity=signer_identity,
         )
 
     @classmethod
@@ -97,7 +101,7 @@ class ProvenanceSigner:
         expected_digest_hex: str,
         secret_or_public_key: str,
         certificate: Optional[CertificateInfo] = None,
-        check_time: Optional[float] = None
+        check_time: Optional[float] = None,
     ) -> Tuple[bool, str]:
         """
         Verify detached signature against payload digest and trust certificate.
@@ -118,10 +122,15 @@ class ProvenanceSigner:
 
         # 3. Digest integrity check
         if signature.payload_digest_sha256.lower() != expected_digest_hex.lower():
-            return False, f"Digest mismatch: signed '{signature.payload_digest_sha256}', expected '{expected_digest_hex}'"
+            return (
+                False,
+                f"Digest mismatch: signed '{signature.payload_digest_sha256}', expected '{expected_digest_hex}'",
+            )
 
         # 4. Cryptographic signature check
-        msg = f"{signature.key_id}:{signature.algorithm.value}:{expected_digest_hex}:{signature.signed_at_epoch}:{signature.expires_at_epoch}:{signature.signer_identity}".encode("utf-8")
+        msg = f"{signature.key_id}:{signature.algorithm.value}:{expected_digest_hex}:{signature.signed_at_epoch}:{signature.expires_at_epoch}:{signature.signer_identity}".encode(
+            "utf-8"
+        )
         expected_sig = hmac.new(secret_or_public_key.encode("utf-8"), msg, hashlib.sha256).digest()
         actual_sig = base64.b64decode(signature.signature_base64.encode("ascii"))
 

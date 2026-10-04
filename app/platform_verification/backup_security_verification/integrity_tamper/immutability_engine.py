@@ -21,9 +21,21 @@ class ImmutabilityEngine(IImmutabilityEngine):
         Executes active deletion and overwrite attack probes against locked backup buckets.
         """
         probes = [
-            {"probe": "ROOT_IAM_DELETE_OBJECT", "target": "s3://docutask-dr-vault/postgres/full_20260315.dump", "result": "ACCESS_DENIED_WORM_OBJECT_LOCKED"},
-            {"probe": "OVERWRITE_OBJECT_PUT", "target": "s3://docutask-dr-vault/documents/snap_20260315.tar", "result": "VERSION_BRANCHED_IMMUTABLE_PARENT_PRESERVED"},
-            {"probe": "BYPASS_GOVERNANCE_DELETE", "target": "s3://docutask-dr-vault/config/config_20260315.pkg", "result": "ACCESS_DENIED_COMPLIANCE_MODE_ENFORCED"},
+            {
+                "probe": "ROOT_IAM_DELETE_OBJECT",
+                "target": "s3://docutask-dr-vault/postgres/full_20260315.dump",
+                "result": "ACCESS_DENIED_WORM_OBJECT_LOCKED",
+            },
+            {
+                "probe": "OVERWRITE_OBJECT_PUT",
+                "target": "s3://docutask-dr-vault/documents/snap_20260315.tar",
+                "result": "VERSION_BRANCHED_IMMUTABLE_PARENT_PRESERVED",
+            },
+            {
+                "probe": "BYPASS_GOVERNANCE_DELETE",
+                "target": "s3://docutask-dr-vault/config/config_20260315.pkg",
+                "result": "ACCESS_DENIED_COMPLIANCE_MODE_ENFORCED",
+            },
         ]
 
         details = {

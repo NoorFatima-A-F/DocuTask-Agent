@@ -2,6 +2,7 @@
 Comprehensive Unit & Integration Test Suite for Part 1.1E:
 Enterprise Verification Configuration, Versioning & Dependency Management Architecture.
 """
+
 from app.platform_verification.config_versioning.domain.models import (
     SemanticVersion,
     DependencyItem,
@@ -51,23 +52,15 @@ def test_semantic_version_comparison_and_bump():
 def test_7_tier_configuration_resolution_precedence():
     # 1. Base resolution for integration environment
     configuration_resolver.set_module_config("ocr_verification", {"confidence_threshold": 0.95})
-    resolved = configuration_resolver.resolve(
-        environment=EnvironmentTier.INTEGRATION,
-        module_name="ocr_verification"
-    )
+    resolved = configuration_resolver.resolve(environment=EnvironmentTier.INTEGRATION, module_name="ocr_verification")
     assert resolved["platform_name"] == "DocuTask Enterprise Agent Platform"
     assert resolved["timeout_seconds"] == 180  # from INTEGRATION env
     assert resolved["confidence_threshold"] == 0.95  # from module config
 
     # 2. Experiment override taking highest precedence
-    override_config = {
-        "timeout_seconds": 600,
-        "confidence_threshold": 0.99
-    }
+    override_config = {"timeout_seconds": 600, "confidence_threshold": 0.99}
     resolved_with_overrides = configuration_resolver.resolve(
-        environment=EnvironmentTier.INTEGRATION,
-        module_name="ocr_verification",
-        experiment_override=override_config
+        environment=EnvironmentTier.INTEGRATION, module_name="ocr_verification", experiment_override=override_config
     )
     assert resolved_with_overrides["timeout_seconds"] == 600
     assert resolved_with_overrides["confidence_threshold"] == 0.99
@@ -75,13 +68,7 @@ def test_7_tier_configuration_resolution_precedence():
 
 def test_configuration_validator():
     # Valid config
-    valid_cfg = {
-        "timeout_seconds": 120,
-        "ai": {
-            "temperature": 0.2,
-            "max_tokens": 4096
-        }
-    }
+    valid_cfg = {"timeout_seconds": 120, "ai": {"temperature": 0.2, "max_tokens": 4096}}
     is_valid, errors = configuration_validator.validate_resolved_config(valid_cfg)
     assert is_valid is True
     assert len(errors) == 0
@@ -91,8 +78,8 @@ def test_configuration_validator():
         "timeout_seconds": -5,
         "ai": {
             "temperature": 3.5,  # Exceeds 2.0
-            "max_tokens": -50
-        }
+            "max_tokens": -50,
+        },
     }
     is_valid, errors = configuration_validator.validate_resolved_config(invalid_cfg)
     assert is_valid is False
@@ -109,7 +96,7 @@ def test_immutable_snapshot_and_canonical_fingerprinting():
         resolved_config=resolved,
         environment=EnvironmentTier.STAGING,
         environment_fingerprint=fp,
-        creator="Senior Verification Architect"
+        creator="Senior Verification Architect",
     )
 
     assert snapshot.snapshot_id.startswith("cfg_snap_")
@@ -127,23 +114,15 @@ def test_immutable_snapshot_and_canonical_fingerprinting():
 def test_configuration_diff_engine():
     resolved_a = configuration_resolver.resolve(environment=EnvironmentTier.INTEGRATION)
     snap_a = snapshot_manager.create_snapshot(
-        resolved_config=resolved_a,
-        environment=EnvironmentTier.INTEGRATION,
-        creator="Engineer A"
+        resolved_config=resolved_a, environment=EnvironmentTier.INTEGRATION, creator="Engineer A"
     )
 
     # Mutate configuration for snapshot B
     resolved_b = dict(resolved_a)
     resolved_b["timeout_seconds"] = 900
-    resolved_b["ai"] = {
-        "default_model": "gemini-1.5-pro",
-        "temperature": 0.7,
-        "max_tokens": 8192
-    }
+    resolved_b["ai"] = {"default_model": "gemini-1.5-pro", "temperature": 0.7, "max_tokens": 8192}
     snap_b = snapshot_manager.create_snapshot(
-        resolved_config=resolved_b,
-        environment=EnvironmentTier.INTEGRATION,
-        creator="Engineer B"
+        resolved_config=resolved_b, environment=EnvironmentTier.INTEGRATION, creator="Engineer B"
     )
 
     diff = configuration_diff_engine.compare(snap_a.snapshot_id, snap_b.snapshot_id)
@@ -171,10 +150,7 @@ def test_dependency_registry_and_inventory():
 
     # Add custom dynamic dependency
     new_dep = DependencyItem(
-        name="custom_eval_tool",
-        category=DependencyCategory.CLOUD_SERVICE,
-        version="2.4.1",
-        license="Apache-2.0"
+        name="custom_eval_tool", category=DependencyCategory.CLOUD_SERVICE, version="2.4.1", license="Apache-2.0"
     )
     dependency_registry.register_dependency(new_dep)
     assert dependency_registry.get_dependency("custom_eval_tool") is not None
@@ -206,7 +182,7 @@ def test_ai_artifact_version_manager():
         name="ocr_extraction_system",
         semantic_version="1.0.0",
         raw_prompt="Extract key value pairs: {text}",
-        author="AI Team"
+        author="AI Team",
     )
     registered_prompt = ai_artifact_manager.register_prompt(prompt_v1)
     assert registered_prompt.template_id.startswith("pmt_")
@@ -218,11 +194,7 @@ def test_ai_artifact_version_manager():
 
     # 2. RAG Config Versioning
     rag_cfg = RAGRetrievalConfigVersion(
-        version="1.1.0",
-        embedding_model="text-embedding-004",
-        chunk_size=1024,
-        chunk_overlap=128,
-        top_k=10
+        version="1.1.0", embedding_model="text-embedding-004", chunk_size=1024, chunk_overlap=128, top_k=10
     )
     reg_rag = ai_artifact_manager.register_rag_config(rag_cfg)
     assert reg_rag.config_id.startswith("rag_cfg_")
@@ -231,7 +203,7 @@ def test_ai_artifact_version_manager():
     agent_cfg = AgentConfigVersion(
         version="2.0.0",
         model=AIModelMetadata(model_name="gemini-2.5-flash"),
-        allowed_tools=["ocr_reader", "table_parser"]
+        allowed_tools=["ocr_reader", "table_parser"],
     )
     reg_agent = ai_artifact_manager.register_agent_config(agent_cfg)
     assert reg_agent.agent_id.startswith("agt_cfg_")
@@ -250,9 +222,7 @@ def test_drift_detector():
     # Baseline snapshot
     baseline_cfg = configuration_resolver.resolve(environment=EnvironmentTier.INTEGRATION)
     baseline_snap = snapshot_manager.create_snapshot(
-        resolved_config=baseline_cfg,
-        environment=EnvironmentTier.INTEGRATION,
-        creator="Baseline Architect"
+        resolved_config=baseline_cfg, environment=EnvironmentTier.INTEGRATION, creator="Baseline Architect"
     )
 
     # 1. No drift
@@ -286,7 +256,7 @@ def test_change_tracker_and_automated_rollback():
         author="DevOps Lead",
         reason="Extended timeout for intensive verification batches",
         proposed_changes={"timeout_seconds": 1200},
-        rollback_plan=f"Revert to baseline snapshot {snap_a.snapshot_id}"
+        rollback_plan=f"Revert to baseline snapshot {snap_a.snapshot_id}",
     )
     assert change_req.status == ChangeApprovalStatus.SUBMITTED
 
@@ -300,7 +270,7 @@ def test_change_tracker_and_automated_rollback():
         change_id=change_req.change_id,
         to_snapshot_id=snap_a.snapshot_id,
         reason="Elevated downstream latency detected",
-        executed_by="SRE OnCall"
+        executed_by="SRE OnCall",
     )
     assert rollback_record.rollback_id.startswith("rbk_")
     assert rollback_record.is_successful is True
@@ -310,9 +280,7 @@ def test_change_tracker_and_automated_rollback():
 
 def test_config_versioning_runtime_facade():
     snapshot = config_versioning_runtime.resolve_and_snapshot(
-        environment=EnvironmentTier.INTEGRATION,
-        module_name="rag_verification",
-        overrides={"timeout_seconds": 450}
+        environment=EnvironmentTier.INTEGRATION, module_name="rag_verification", overrides={"timeout_seconds": 450}
     )
     assert snapshot.environment == EnvironmentTier.INTEGRATION
     assert snapshot.resolved_configuration["timeout_seconds"] == 450

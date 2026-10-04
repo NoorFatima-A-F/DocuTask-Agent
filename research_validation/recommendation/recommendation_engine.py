@@ -10,12 +10,8 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
-from research_validation.recommendation.roi_calculator import (
-    ExperimentROICalculator, ExperimentROIEstimate
-)
-from research_validation.recommendation.uncertainty_sampler import (
-    UncertaintySampler
-)
+from research_validation.recommendation.roi_calculator import ExperimentROICalculator, ExperimentROIEstimate
+from research_validation.recommendation.uncertainty_sampler import UncertaintySampler
 from research_validation.provenance.hashing import hash_canonical_json
 
 
@@ -31,6 +27,7 @@ class RecommendationType(str, Enum):
 @dataclass(frozen=True)
 class ExperimentRecommendation:
     """Actionable scientific experiment recommendation."""
+
     recommendation_id: str
     recommendation_type: RecommendationType
     title: str
@@ -73,17 +70,19 @@ class ExperimentRecommendationEngine:
             payload = {"rec_id": rec_id, "type": RecommendationType.NEXT_BENCHMARK.value, "target": target.target_name}
             digest = hash_canonical_json(payload)
 
-            recommendations.append(ExperimentRecommendation(
-                recommendation_id=rec_id,
-                recommendation_type=RecommendationType.NEXT_BENCHMARK,
-                title=f"Augment empirical observations for {target.target_name}",
-                rationale=f"Current sample count is {target.current_sample_count} with standard error {target.current_uncertainty_std:.4f}. Epistemic gap: {target.epistemic_gap:.2f}.",
-                target_benchmark_or_param=target.target_name,
-                roi_estimate=roi,
-                priority_score=roi.net_roi_score * 1.2,
-                required_resources={"target_samples": target.required_sample_count},
-                recommendation_digest_sha256=digest,
-            ))
+            recommendations.append(
+                ExperimentRecommendation(
+                    recommendation_id=rec_id,
+                    recommendation_type=RecommendationType.NEXT_BENCHMARK,
+                    title=f"Augment empirical observations for {target.target_name}",
+                    rationale=f"Current sample count is {target.current_sample_count} with standard error {target.current_uncertainty_std:.4f}. Epistemic gap: {target.epistemic_gap:.2f}.",
+                    target_benchmark_or_param=target.target_name,
+                    roi_estimate=roi,
+                    priority_score=roi.net_roi_score * 1.2,
+                    required_resources={"target_samples": target.required_sample_count},
+                    recommendation_digest_sha256=digest,
+                )
+            )
 
         # 2. Hyperparameter explorations
         for p in untested_params:
@@ -98,17 +97,19 @@ class ExperimentRecommendationEngine:
             payload = {"rec_id": rec_id, "type": RecommendationType.HYPERPARAMETER_SEARCH.value, "param": p}
             digest = hash_canonical_json(payload)
 
-            recommendations.append(ExperimentRecommendation(
-                recommendation_id=rec_id,
-                recommendation_type=RecommendationType.HYPERPARAMETER_SEARCH,
-                title=f"Explore hyperparameter dimension: {p}",
-                rationale=f"Parameter {p} has zero empirical evaluations in memory.",
-                target_benchmark_or_param=p,
-                roi_estimate=roi,
-                priority_score=roi.net_roi_score,
-                required_resources={"trials": 20},
-                recommendation_digest_sha256=digest,
-            ))
+            recommendations.append(
+                ExperimentRecommendation(
+                    recommendation_id=rec_id,
+                    recommendation_type=RecommendationType.HYPERPARAMETER_SEARCH,
+                    title=f"Explore hyperparameter dimension: {p}",
+                    rationale=f"Parameter {p} has zero empirical evaluations in memory.",
+                    target_benchmark_or_param=p,
+                    roi_estimate=roi,
+                    priority_score=roi.net_roi_score,
+                    required_resources={"trials": 20},
+                    recommendation_digest_sha256=digest,
+                )
+            )
 
         # Sort by priority score descending
         return sorted(recommendations, key=lambda r: r.priority_score, reverse=True)

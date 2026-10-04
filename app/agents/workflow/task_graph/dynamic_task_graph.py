@@ -79,7 +79,9 @@ class DynamicTaskGraph:
         node_state = state if isinstance(state, NodeState) else NodeState(str(state).upper())
         old_state = self._states[task_id]
         self._states[task_id] = node_state
-        self._nodes[task_id].status = TaskStatus(node_state.value) if node_state.value in TaskStatus.__members__ else TaskStatus.PENDING
+        self._nodes[task_id].status = (
+            TaskStatus(node_state.value) if node_state.value in TaskStatus.__members__ else TaskStatus.PENDING
+        )
         logger.debug("Task %s transitioned: %s -> %s", task_id, old_state, node_state)
         self.refresh_states()
 

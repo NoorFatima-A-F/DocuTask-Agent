@@ -14,6 +14,7 @@ from app.agents.workflow.workflow_state_machine import WorkflowStateMachine
 
 class WorkflowInstance(BaseModel):
     """An active running or paused instance of a workflow."""
+
     identity: WorkflowIdentity
     definition_id: UUID
     state: WorkflowLifecycleState = Field(default=WorkflowLifecycleState.CREATED)

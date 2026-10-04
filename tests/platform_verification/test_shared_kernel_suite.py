@@ -4,31 +4,81 @@ Verifies 100% of the shared domain primitives, typed identities, Result pattern,
 validation framework, time abstractions, correlation propagation, pagination,
 SemVer, security, resilience, and event bus.
 """
+
 import pytest
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import List
 
 from app.shared_kernel import (
-    BaseEntity, AggregateRoot, ValueObject, Specification,
-    ExecutionId, DatasetId, VerificationId, EvidenceId,
-    MetricId, PluginId, ConfigurationId, EnvironmentId, AuditId,
-    CertificationId, TenantId, CorrelationId, TraceId,
-    RequestId, SessionId, CausationId,
-    Result, ErrorSeverity, ErrorCategory,
-    Success, Failure, ValidationFailure, AuthorizationFailure,
-    InfrastructureFailure, BusinessRuleFailure, UnexpectedFailure,
-    PlatformException, DomainException,
-    InvariantViolationError, SecurityException,
-    TamperDetectionError, DependencyException,
-    EnvironmentNotReadyError, ValidationResult, RequiredRule, LengthRule, RangeRule, RegexRule, EnumRule, PredicateRule,
-    SystemClock, VirtualClock, CorrelationContext, get_current_correlation, set_current_correlation,
+    BaseEntity,
+    AggregateRoot,
+    ValueObject,
+    Specification,
+    ExecutionId,
+    DatasetId,
+    VerificationId,
+    EvidenceId,
+    MetricId,
+    PluginId,
+    ConfigurationId,
+    EnvironmentId,
+    AuditId,
+    CertificationId,
+    TenantId,
+    CorrelationId,
+    TraceId,
+    RequestId,
+    SessionId,
+    CausationId,
+    Result,
+    ErrorSeverity,
+    ErrorCategory,
+    Success,
+    Failure,
+    ValidationFailure,
+    AuthorizationFailure,
+    InfrastructureFailure,
+    BusinessRuleFailure,
+    UnexpectedFailure,
+    PlatformException,
+    DomainException,
+    InvariantViolationError,
+    SecurityException,
+    TamperDetectionError,
+    DependencyException,
+    EnvironmentNotReadyError,
+    ValidationResult,
+    RequiredRule,
+    LengthRule,
+    RangeRule,
+    RegexRule,
+    EnumRule,
+    PredicateRule,
+    SystemClock,
+    VirtualClock,
+    CorrelationContext,
+    get_current_correlation,
+    set_current_correlation,
     correlation_scope,
-    PaginationQuery, PaginatedResult, SortOrder, SortCriteria, FilterOperator,
+    PaginationQuery,
+    PaginatedResult,
+    SortOrder,
+    SortCriteria,
+    FilterOperator,
     FilterCriteria,
-    SemanticVersion, SensitiveDataMasker, DomainEvent, EventBus, PermissionContract, PrincipalContract, SecurityContext,
-    Hasher, HmacSigner,
-    RetryStrategy, RetryPolicy, SharedKernelGovernancePolicy
+    SemanticVersion,
+    SensitiveDataMasker,
+    DomainEvent,
+    EventBus,
+    PermissionContract,
+    PrincipalContract,
+    SecurityContext,
+    Hasher,
+    HmacSigner,
+    RetryStrategy,
+    RetryPolicy,
+    SharedKernelGovernancePolicy,
 )
 
 
@@ -272,12 +322,7 @@ class TestPaginationAndCollections:
         assert q.offset == 20
         assert q.limit == 10
 
-        res: PaginatedResult[str] = PaginatedResult(
-            items=["item1", "item2"],
-            total_count=35,
-            page=3,
-            page_size=10
-        )
+        res: PaginatedResult[str] = PaginatedResult(items=["item1", "item2"], total_count=35, page=3, page_size=10)
         assert res.total_pages == 4
         assert res.has_next is True
         assert res.has_previous is True
@@ -349,7 +394,7 @@ class TestResilienceContracts:
             initial_delay_seconds=0.1,
             max_delay_seconds=2.0,
             backoff_multiplier=2.0,
-            strategy=RetryStrategy.EXPONENTIAL_BACKOFF
+            strategy=RetryStrategy.EXPONENTIAL_BACKOFF,
         )
         assert policy.compute_delay(1) == 0.1
         assert policy.compute_delay(2) == 0.2

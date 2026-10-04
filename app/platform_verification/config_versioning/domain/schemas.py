@@ -1,6 +1,7 @@
 """
 Configuration Schemas and Validators for 7 Enterprise Configuration Domains.
 """
+
 from typing import Any, Dict, List, Tuple
 from pydantic import BaseModel, Field
 from app.platform_verification.config_versioning.domain.models import ConfigDomain, EnvironmentTier
@@ -13,7 +14,6 @@ class PlatformConfigSchema(BaseModel):
     service_name: str = "DocuTask Enterprise Agent Platform"
     host: str = "0.0.0.0"  # nosec B104
     port: int = 8000
-
 
 
 class VerificationConfigSchema(BaseModel):

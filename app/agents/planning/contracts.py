@@ -21,6 +21,7 @@ class Plan(BaseModel):
     Canonical strongly typed Plan Aggregate Domain Model.
     Consumed by Executors, Workflow Engines, Observers, Reflection Engines, and Multi-Agent Coordinators.
     """
+
     identity: PlanIdentity = Field(default_factory=PlanIdentity)
     name: str = Field(default="ExecutionPlan")
     lifecycle_state: PlanLifecycleState = Field(default=PlanLifecycleState.DRAFT)
@@ -38,6 +39,7 @@ class Plan(BaseModel):
 
 class PlanReference(BaseModel):
     """Lightweight pointer reference to a Plan aggregate."""
+
     plan_id: UUID
     version: str = Field(default="v1.0")
     lifecycle_state: PlanLifecycleState = Field(default=PlanLifecycleState.DRAFT)
@@ -46,6 +48,7 @@ class PlanReference(BaseModel):
 
 class PlanningRequest(BaseModel):
     """Request payload to generate, optimize, or evaluate a plan."""
+
     goal_description: str
     context: PlanContext = Field(default_factory=PlanContext)
     constraints: List[PlanConstraint] = Field(default_factory=list)
@@ -54,6 +57,7 @@ class PlanningRequest(BaseModel):
 
 class PlanningResult(BaseModel):
     """Result payload emitted upon plan generation or validation."""
+
     success: bool = Field(default=True)
     plan: Optional[Plan] = Field(default=None)
     errors: List[str] = Field(default_factory=list)
@@ -63,6 +67,7 @@ class PlanningResult(BaseModel):
 
 class PlanningSession(BaseModel):
     """Interactive planning session boundary object."""
+
     session_id: UUID = Field(default_factory=uuid4)
     active_plan_id: Optional[UUID] = Field(default=None)
     plan_history: List[PlanReference] = Field(default_factory=list)

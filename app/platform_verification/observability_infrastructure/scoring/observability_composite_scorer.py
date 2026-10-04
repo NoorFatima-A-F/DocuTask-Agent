@@ -1,6 +1,7 @@
 """
 Composite Scorer for Part 3I: Enterprise Observability Infrastructure (Logging + Metrics)
 """
+
 from datetime import datetime, timezone
 from ..domain.models import (
     LoggingCertificationReport,
@@ -45,5 +46,5 @@ class ObservabilityCompositeScorer:
             overall_score_pct=composite_score,
             certification_tier=tier,
             certification_granted=granted,
-            auditor="DocuTask Enterprise Observability & SRE Certification Engine"
+            auditor="DocuTask Enterprise Observability & SRE Certification Engine",
         )

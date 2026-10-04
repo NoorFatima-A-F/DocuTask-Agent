@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class ExecutionCritiqueItem(BaseModel):
     """Specific critique item targeting execution runtime, worker pools, or scheduling."""
+
     code: str  # BOTTLENECK, STARVATION, WORKER_WASTE, RETRY_EXCESS, IDLE_TIME, SEQUENTIAL_BOTTLENECK
     description: str
     affected_nodes: List[str] = Field(default_factory=list)
@@ -25,6 +26,7 @@ class ExecutionFeedback(BaseModel):
     Structured feedback delivered to the Execution Runtime.
     Provides guidance on worker pool scaling, scheduling policies, and timeout tuning.
     """
+
     feedback_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     critique_items: List[ExecutionCritiqueItem] = Field(default_factory=list)

@@ -24,5 +24,5 @@ class SuccessAnalyzer:
             "has_outputs": has_outputs,
             "zero_retries": zero_retries,
             "flawless_execution": flawless,
-            "success_factor_count": sum([is_success, has_outputs, zero_retries, zero_recoveries])
+            "success_factor_count": sum([is_success, has_outputs, zero_retries, zero_recoveries]),
         }

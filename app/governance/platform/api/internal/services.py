@@ -29,7 +29,9 @@ class InternalGovernanceService:
             "enforced_policies": ["agent_execution_safety", "budget_guardrail"],
         }
 
-    def sync_workflow_checkpoint(self, ctx: APIRequestContext, workflow_id: str, checkpoint: Dict[str, Any]) -> Dict[str, Any]:
+    def sync_workflow_checkpoint(
+        self, ctx: APIRequestContext, workflow_id: str, checkpoint: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Record workflow state transition directly from Workflow Engine."""
         return {
             "workflow_id": workflow_id,

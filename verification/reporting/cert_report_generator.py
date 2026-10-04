@@ -138,56 +138,60 @@ class CertificationReportGenerator:
                 f"| **{dim.dimension_name}** | {dim.weight * 100:.0f}% | {dim.raw_score:.1f}% | **{dim.weighted_score:.2f}%** | {', '.join(dim.subsystems_evaluated[:2])} |"
             )
 
-        lines.extend([
-            f"| **COMPOSITE TOTAL** | **100%** | **—** | **{scorecard.overall_readiness_score:.2f}%** | **Level 4: Enterprise Certified** |",
-            "",
-            "---",
-            "",
-            "### Production Readiness Review (PRR) Audit Summary",
-            "",
-            "| PRR Pillar | Items Audited | Pass Rate | Key Verification Proof |",
-            "| :--- | :---: | :---: | :--- |",
-            "| **Engineering Readiness** | 2 / 2 | **100.0%** | Automated GitOps blue/green pipeline + sub-5s regression gating |",
-            "| **Operations Readiness** | 2 / 2 | **100.0%** | Real-time Prometheus/Grafana alerts + documented DR runbooks |",
-            "| **Security Readiness** | 2 / 2 | **100.0%** | 0 open CVEs + tamper-evident W3C distributed trace logging |",
-            "| **Business Readiness** | 2 / 2 | **100.0%** | +788.9% ROI verified + 96.8% multi-persona UAT sign-off |",
-            "",
-            "---",
-            "",
-            "### Enterprise Risk Register & Mitigation Posture",
-            "",
-            "| Risk ID | Category | Severity | Mitigation Control Summary | Residual Score | Status |",
-            "| :--- | :--- | :---: | :--- | :---: | :---: |",
-            "| `RISK-01` | `AI_HALLUCINATION` | HIGH | Dual-model consensus + <0.85 HITL routing | **12.0 / 100** | **MITIGATED** |",
-            "| `RISK-02` | `SECURITY` | CRITICAL | Multi-layer sanitization + AST AST sandboxing | **8.0 / 100** | **CONTROLLED** |",
-            "| `RISK-03` | `OPERATIONAL` | MEDIUM | Distributed Redis queue + Pod horizontal auto-scaling | **14.0 / 100** | **CONTROLLED** |",
-            "| `RISK-04` | `FINANCIAL` | MEDIUM | Semantic caching (86% hit) + dynamic model routing | **10.0 / 100** | **MITIGATED** |",
-            "| `RISK-05` | `COMPLIANCE` | HIGH | In-memory PII redaction pipeline + encrypted vaults | **6.0 / 100** | **CONTROLLED** |",
-            "| `RISK-06` | `SCALABILITY` | MEDIUM | HNSW vector indexing + read replica sharding | **11.0 / 100** | **MONITORED** |",
-            "",
-            "---",
-            "",
-            "### Cryptographic Evidence Manifest (SHA-256)",
-            "",
-            "| Artifact File | SHA-256 Checksum Digest |",
-            "| :--- | :--- |",
-        ])
+        lines.extend(
+            [
+                f"| **COMPOSITE TOTAL** | **100%** | **—** | **{scorecard.overall_readiness_score:.2f}%** | **Level 4: Enterprise Certified** |",
+                "",
+                "---",
+                "",
+                "### Production Readiness Review (PRR) Audit Summary",
+                "",
+                "| PRR Pillar | Items Audited | Pass Rate | Key Verification Proof |",
+                "| :--- | :---: | :---: | :--- |",
+                "| **Engineering Readiness** | 2 / 2 | **100.0%** | Automated GitOps blue/green pipeline + sub-5s regression gating |",
+                "| **Operations Readiness** | 2 / 2 | **100.0%** | Real-time Prometheus/Grafana alerts + documented DR runbooks |",
+                "| **Security Readiness** | 2 / 2 | **100.0%** | 0 open CVEs + tamper-evident W3C distributed trace logging |",
+                "| **Business Readiness** | 2 / 2 | **100.0%** | +788.9% ROI verified + 96.8% multi-persona UAT sign-off |",
+                "",
+                "---",
+                "",
+                "### Enterprise Risk Register & Mitigation Posture",
+                "",
+                "| Risk ID | Category | Severity | Mitigation Control Summary | Residual Score | Status |",
+                "| :--- | :--- | :---: | :--- | :---: | :---: |",
+                "| `RISK-01` | `AI_HALLUCINATION` | HIGH | Dual-model consensus + <0.85 HITL routing | **12.0 / 100** | **MITIGATED** |",
+                "| `RISK-02` | `SECURITY` | CRITICAL | Multi-layer sanitization + AST AST sandboxing | **8.0 / 100** | **CONTROLLED** |",
+                "| `RISK-03` | `OPERATIONAL` | MEDIUM | Distributed Redis queue + Pod horizontal auto-scaling | **14.0 / 100** | **CONTROLLED** |",
+                "| `RISK-04` | `FINANCIAL` | MEDIUM | Semantic caching (86% hit) + dynamic model routing | **10.0 / 100** | **MITIGATED** |",
+                "| `RISK-05` | `COMPLIANCE` | HIGH | In-memory PII redaction pipeline + encrypted vaults | **6.0 / 100** | **CONTROLLED** |",
+                "| `RISK-06` | `SCALABILITY` | MEDIUM | HNSW vector indexing + read replica sharding | **11.0 / 100** | **MONITORED** |",
+                "",
+                "---",
+                "",
+                "### Cryptographic Evidence Manifest (SHA-256)",
+                "",
+                "| Artifact File | SHA-256 Checksum Digest |",
+                "| :--- | :--- |",
+            ]
+        )
 
         for fname, digest in manifest["checksums"].items():
             lines.append(f"| `{fname}` | `{digest}` |")
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "### Final Commercial Go-Live Certification Statement",
-            "",
-            "> **OFFICIAL ENTERPRISE AI PLATFORM CERTIFICATION NOTICE**:",
-            "> DocuTask Agent has successfully concluded the entire **Enterprise Verification & Validation Program (EVVP Phases V1 – V12)**.",
-            "> Every architectural layer, AI runtime engine, document intelligence pipeline, hybrid RAG store, autonomous agent workforce, security boundary, SRE reliability benchmark, and business ROI model has been comprehensively verified with **100% compliance** and **zero defects**.",
-            "> **DocuTask Agent is officially CERTIFIED ENTERPRISE-GRADE (LEVEL 4) and APPROVED FOR PRODUCTION DEPLOYMENT.**",
-            "",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "### Final Commercial Go-Live Certification Statement",
+                "",
+                "> **OFFICIAL ENTERPRISE AI PLATFORM CERTIFICATION NOTICE**:",
+                "> DocuTask Agent has successfully concluded the entire **Enterprise Verification & Validation Program (EVVP Phases V1 – V12)**.",
+                "> Every architectural layer, AI runtime engine, document intelligence pipeline, hybrid RAG store, autonomous agent workforce, security boundary, SRE reliability benchmark, and business ROI model has been comprehensively verified with **100% compliance** and **zero defects**.",
+                "> **DocuTask Agent is officially CERTIFIED ENTERPRISE-GRADE (LEVEL 4) and APPROVED FOR PRODUCTION DEPLOYMENT.**",
+                "",
+            ]
+        )
 
         with open(self.report_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))

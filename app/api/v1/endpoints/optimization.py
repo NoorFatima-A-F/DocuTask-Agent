@@ -25,7 +25,9 @@ router = APIRouter()
 
 class OptimizeRequest(BaseModel):
     candidates: List[Dict[str, Any]] = Field(..., description="List of candidate execution plans")
-    constraints: Optional[Dict[str, float]] = Field(default=None, description="Operational constraints (budget, latency, accuracy)")
+    constraints: Optional[Dict[str, float]] = Field(
+        default=None, description="Operational constraints (budget, latency, accuracy)"
+    )
     weights: Optional[Dict[str, float]] = Field(default=None, description="Multi-objective scalarization weights")
     context_id: str = Field(default="default_mission", description="Context or mission ID")
 
@@ -180,9 +182,30 @@ async def get_risk_assessment():
 async def get_constraints_info():
     """Returns constraint graph structure, binding identifiers, and feasibility metrics."""
     default_candidates = [
-        {"id": "cand_1", "plan_name": "Pro Tier Plan", "cost_usd": 0.045, "latency_ms": 2200.0, "accuracy": 0.99, "overall_risk": 0.02},
-        {"id": "cand_2", "plan_name": "Standard Plan", "cost_usd": 0.015, "latency_ms": 950.0, "accuracy": 0.95, "overall_risk": 0.05},
-        {"id": "cand_3", "plan_name": "Budget Fast Plan", "cost_usd": 0.003, "latency_ms": 320.0, "accuracy": 0.90, "overall_risk": 0.12},
+        {
+            "id": "cand_1",
+            "plan_name": "Pro Tier Plan",
+            "cost_usd": 0.045,
+            "latency_ms": 2200.0,
+            "accuracy": 0.99,
+            "overall_risk": 0.02,
+        },
+        {
+            "id": "cand_2",
+            "plan_name": "Standard Plan",
+            "cost_usd": 0.015,
+            "latency_ms": 950.0,
+            "accuracy": 0.95,
+            "overall_risk": 0.05,
+        },
+        {
+            "id": "cand_3",
+            "plan_name": "Budget Fast Plan",
+            "cost_usd": 0.003,
+            "latency_ms": 320.0,
+            "accuracy": 0.90,
+            "overall_risk": 0.12,
+        },
     ]
     constraints = {"max_budget_usd": 0.03, "max_latency_ms": 1500.0, "min_accuracy": 0.92, "max_risk": 0.10}
     solver_res = ConstraintSolver.solve(default_candidates, constraints)
@@ -349,4 +372,3 @@ async def reoptimize(req: ReoptimizeRequest):
         min_confidence=req.min_confidence,
     )
     return report.model_dump()
-

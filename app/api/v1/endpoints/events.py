@@ -24,6 +24,7 @@ router = APIRouter()
 
 # --- Event Queries ---
 
+
 @router.get("/missions/{mission_id}")
 async def get_mission_events(
     mission_id: str,
@@ -91,6 +92,7 @@ async def get_correlation_trace(correlation_id: str) -> Dict[str, Any]:
 
 # --- Projections (Read Models) ---
 
+
 @router.get("/planner")
 async def get_planner_projection() -> Dict[str, Any]:
     """Returns the live Planner read projection."""
@@ -122,6 +124,7 @@ async def get_event_platform_metrics() -> Dict[str, Any]:
 
 
 # --- Event Ingestion & Filtering ---
+
 
 class PublishEventPayload(BaseModel):
     mission_id: str = "global-mission"
@@ -192,6 +195,7 @@ async def filter_events(payload: FilterEventsPayload) -> Dict[str, Any]:
 
 
 # --- SSE Live Event Streaming ---
+
 
 @router.get("/streams")
 async def stream_live_events():

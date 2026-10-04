@@ -2,6 +2,7 @@
 Database Certification and Readiness Scoring Engine (Part 3G.2B).
 Applies exact enterprise weights across the 7 evaluation categories and awards certification.
 """
+
 from typing import Dict, Any
 from app.platform_verification.database_backup_verification.domain.models import (
     DBCertificationTier,

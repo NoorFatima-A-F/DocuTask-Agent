@@ -1,6 +1,7 @@
 """
 Abstract Interfaces for Health Check Architecture Framework (Part 3H.1).
 """
+
 from abc import ABC, abstractmethod
 from app.platform_verification.health_architecture.domain.models import (
     HealthStateModelReport,

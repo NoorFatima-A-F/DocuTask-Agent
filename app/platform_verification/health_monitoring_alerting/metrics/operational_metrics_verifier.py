@@ -27,7 +27,9 @@ class OperationalMetricsVerifier(IOperationalMetricsVerifier):
             MetricDefinitionItem("agent_runtime", "docutask_agent_tasks_started_total", "counter", "tasks", 8450.0),
             MetricDefinitionItem("agent_runtime", "docutask_agent_tasks_completed_total", "counter", "tasks", 8438.0),
             MetricDefinitionItem("agent_runtime", "docutask_agent_failures_total", "counter", "failures", 12.0),
-            MetricDefinitionItem("agent_runtime", "docutask_agent_execution_duration_seconds", "histogram", "seconds", 1.85),
+            MetricDefinitionItem(
+                "agent_runtime", "docutask_agent_execution_duration_seconds", "histogram", "seconds", 1.85
+            ),
             # 3. Queue Metrics (4)
             MetricDefinitionItem("queue", "docutask_queue_depth", "gauge", "messages", 145.0),
             MetricDefinitionItem("queue", "docutask_queue_wait_time_seconds", "gauge", "seconds", 0.024),

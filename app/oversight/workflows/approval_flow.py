@@ -26,9 +26,7 @@ class ApprovalWorkflowEngine:
             for step in chain.steps:
                 step.status = StepExecutionStatus.IN_PROGRESS
 
-    def process_decision(
-        self, chain: ApprovalChain, decision: HumanDecision
-    ) -> Tuple[bool, Optional[DecisionOutcome]]:
+    def process_decision(self, chain: ApprovalChain, decision: HumanDecision) -> Tuple[bool, Optional[DecisionOutcome]]:
         """
         Applies a reviewer decision to the active chain.
         Returns: (is_chain_complete, final_outcome)

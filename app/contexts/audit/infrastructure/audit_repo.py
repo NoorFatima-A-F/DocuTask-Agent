@@ -1,6 +1,7 @@
 from typing import List, Optional
 from ..domain.audit_domain import AuditRecordAggregate
 
+
 class InMemoryAuditRepository:
     def __init__(self):
         self._chain: List[AuditRecordAggregate] = []

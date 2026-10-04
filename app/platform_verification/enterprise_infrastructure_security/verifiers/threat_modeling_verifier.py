@@ -29,12 +29,48 @@ class ThreatModelingVerifier(IThreatModelingVerifier):
 
     def verify(self) -> ThreatModelReport:
         threats = [
-            STRIDEThreatItem(threat_category="Spoofing", potential_risk="Forged user identity or JWT signature bypass", target_component="FastAPI Gateway", mitigation_mechanism="Strict asymmetric RS256 JWT validation + short expiry + token revocation list", residual_risk="LOW"),
-            STRIDEThreatItem(threat_category="Tampering", potential_risk="Unauthorized document modification in transit or storage", target_component="Document Object Storage", mitigation_mechanism="Immutable SHA-256 integrity hashing + S3 WORM Object Lock", residual_risk="LOW"),
-            STRIDEThreatItem(threat_category="Repudiation", potential_risk="User or worker denying performed action", target_component="Audit Log Stream", mitigation_mechanism="Cryptographically chained append-only audit ledger with UTC timestamps", residual_risk="LOW"),
-            STRIDEThreatItem(threat_category="Information Disclosure", potential_risk="Sensitive document leakage or secret exposure in logs", target_component="Application & Worker Logging", mitigation_mechanism="Automated regex secret scrubbing + AES-256 KMS envelope encryption at rest", residual_risk="LOW"),
-            STRIDEThreatItem(threat_category="Denial of Service", potential_risk="Resource exhaustion via 10k RPS flood or massive PDFs", target_component="API Rate Limiter & Admission Control", mitigation_mechanism="Token-bucket rate limiting + max upload payload size ceiling (25MB)", residual_risk="LOW"),
-            STRIDEThreatItem(threat_category="Elevation of Privilege", potential_risk="Container escape or user accessing admin APIs", target_component="Container Runtime & IAM Engine", mitigation_mechanism="Non-root execution (UID 10001) + read-only rootfs + strict RBAC role gates", residual_risk="LOW"),
+            STRIDEThreatItem(
+                threat_category="Spoofing",
+                potential_risk="Forged user identity or JWT signature bypass",
+                target_component="FastAPI Gateway",
+                mitigation_mechanism="Strict asymmetric RS256 JWT validation + short expiry + token revocation list",
+                residual_risk="LOW",
+            ),
+            STRIDEThreatItem(
+                threat_category="Tampering",
+                potential_risk="Unauthorized document modification in transit or storage",
+                target_component="Document Object Storage",
+                mitigation_mechanism="Immutable SHA-256 integrity hashing + S3 WORM Object Lock",
+                residual_risk="LOW",
+            ),
+            STRIDEThreatItem(
+                threat_category="Repudiation",
+                potential_risk="User or worker denying performed action",
+                target_component="Audit Log Stream",
+                mitigation_mechanism="Cryptographically chained append-only audit ledger with UTC timestamps",
+                residual_risk="LOW",
+            ),
+            STRIDEThreatItem(
+                threat_category="Information Disclosure",
+                potential_risk="Sensitive document leakage or secret exposure in logs",
+                target_component="Application & Worker Logging",
+                mitigation_mechanism="Automated regex secret scrubbing + AES-256 KMS envelope encryption at rest",
+                residual_risk="LOW",
+            ),
+            STRIDEThreatItem(
+                threat_category="Denial of Service",
+                potential_risk="Resource exhaustion via 10k RPS flood or massive PDFs",
+                target_component="API Rate Limiter & Admission Control",
+                mitigation_mechanism="Token-bucket rate limiting + max upload payload size ceiling (25MB)",
+                residual_risk="LOW",
+            ),
+            STRIDEThreatItem(
+                threat_category="Elevation of Privilege",
+                potential_risk="Container escape or user accessing admin APIs",
+                target_component="Container Runtime & IAM Engine",
+                mitigation_mechanism="Non-root execution (UID 10001) + read-only rootfs + strict RBAC role gates",
+                residual_risk="LOW",
+            ),
         ]
 
         checks = [

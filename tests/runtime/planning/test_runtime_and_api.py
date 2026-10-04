@@ -42,11 +42,14 @@ def test_autonomous_planning_runtime_e2e():
 
 def test_fastapi_planning_endpoints(client):
     # 1. Plan Mission via API
-    plan_resp = client.post("/api/v1/planning/plan", json={
-        "mission_id": "api_mission_001",
-        "intent": "Extract bill of lading and customs clearance entities",
-        "user_constraints": {"budget_usd": 0.50, "max_latency_ms": 4000.0},
-    })
+    plan_resp = client.post(
+        "/api/v1/planning/plan",
+        json={
+            "mission_id": "api_mission_001",
+            "intent": "Extract bill of lading and customs clearance entities",
+            "user_constraints": {"budget_usd": 0.50, "max_latency_ms": 4000.0},
+        },
+    )
     assert plan_resp.status_code == 200
     plan_data = plan_resp.json()
     assert plan_data["mission_id"] == "api_mission_001"
@@ -59,13 +62,19 @@ def test_fastapi_planning_endpoints(client):
     assert len(matrix_data["entries"]) == 4
 
     # 3. Query Counterfactuals
-    cf_resp = client.post("/api/v1/planning/counterfactuals/query", json={
-        "mission_id": "api_mission_001",
-        "query_type": "WHAT_IF_WEIGHT_CHANGED",
-        "weight_overrides": {"w_accuracy": 0.8, "w_latency": 0.1, "w_cost": 0.05, "w_risk": 0.05},
-    })
+    cf_resp = client.post(
+        "/api/v1/planning/counterfactuals/query",
+        json={
+            "mission_id": "api_mission_001",
+            "query_type": "WHAT_IF_WEIGHT_CHANGED",
+            "weight_overrides": {"w_accuracy": 0.8, "w_latency": 0.1, "w_cost": 0.05, "w_risk": 0.05},
+        },
+    )
     assert cf_resp.status_code == 200
-    assert "winner" in cf_resp.json()["summary_explanation"].lower() or "winning" in cf_resp.json()["summary_explanation"].lower()
+    assert (
+        "winner" in cf_resp.json()["summary_explanation"].lower()
+        or "winning" in cf_resp.json()["summary_explanation"].lower()
+    )
 
     # 4. Get Active Mutable DAG
     dag_resp = client.get("/api/v1/planning/dag/api_mission_001")
@@ -74,29 +83,38 @@ def test_fastapi_planning_endpoints(client):
     first_node_id = list(dag_data["nodes"].keys())[0]
 
     # 5. Mutate Active DAG (Split node)
-    mutate_resp = client.post("/api/v1/planning/dag/api_mission_001/mutate", json={
-        "mutation_type": "NODE_SPLIT",
-        "target_node_id": first_node_id,
-        "split_count": 2,
-        "rationale": "Parallel page chunking",
-    })
+    mutate_resp = client.post(
+        "/api/v1/planning/dag/api_mission_001/mutate",
+        json={
+            "mutation_type": "NODE_SPLIT",
+            "target_node_id": first_node_id,
+            "split_count": 2,
+            "rationale": "Parallel page chunking",
+        },
+    )
     assert mutate_resp.status_code == 200
     assert mutate_resp.json()["version"] > 1
 
     # 6. Adaptive Replan
-    replan_resp = client.post("/api/v1/planning/replan/api_mission_001", json={
-        "trigger_type": "LATENCY_DRIFT",
-        "rationale": "Upstream latency spike detected",
-    })
+    replan_resp = client.post(
+        "/api/v1/planning/replan/api_mission_001",
+        json={
+            "trigger_type": "LATENCY_DRIFT",
+            "rationale": "Upstream latency spike detected",
+        },
+    )
     assert replan_resp.status_code == 200
 
     # 7. Evaluate Mission Outcome
-    eval_resp = client.post("/api/v1/planning/evaluate/api_mission_001", json={
-        "mission_id": "api_mission_001",
-        "actual_latency_ms": 1950.0,
-        "actual_cost_usd": 0.0045,
-        "actual_accuracy": 0.99,
-    })
+    eval_resp = client.post(
+        "/api/v1/planning/evaluate/api_mission_001",
+        json={
+            "mission_id": "api_mission_001",
+            "actual_latency_ms": 1950.0,
+            "actual_cost_usd": 0.0045,
+            "actual_accuracy": 0.99,
+        },
+    )
     assert eval_resp.status_code == 200
     assert eval_resp.json()["overall_calibration_score"] > 0
 

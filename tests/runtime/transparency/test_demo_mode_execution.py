@@ -2,12 +2,13 @@
 Test Suite: Hackathon Demo Engine Execution
 Validates 1-click end-to-end hackathon demo step sequences, live telemetry snapshots, and mission summaries.
 """
+
 from app.runtime.demo_engine.demo_engine import HackathonDemoEngine
 
 
 def test_demo_engine_step_generation():
     steps = HackathonDemoEngine.get_canonical_demo_steps()
-    
+
     assert len(steps) == 5
     # Verify all 5 steps have proper sequencing and telemetry
     for i, step in enumerate(steps, start=1):

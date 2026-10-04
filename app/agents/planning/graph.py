@@ -11,6 +11,7 @@ from app.agents.planning.nodes import PlanNode
 
 class PlanGraph(BaseModel):
     """Directed Acyclic Graph container for planning task execution."""
+
     graph_id: str
     nodes: Dict[str, PlanNode] = Field(default_factory=dict)
     edges: List[PlanEdge] = Field(default_factory=list)

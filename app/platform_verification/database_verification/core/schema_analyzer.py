@@ -1,6 +1,7 @@
 """
 Schema and Normalization Analyzer for Enterprise Database Verification.
 """
+
 import re
 from typing import Dict, List
 from app.platform_verification.database_verification.domain.models import (
@@ -46,10 +47,7 @@ class SchemaAnalyzer(ISchemaAnalyzer):
         )
 
     def _analyze_table(
-        self,
-        name: str,
-        table: TableSchemaDefinition,
-        all_tables: Dict[str, TableSchemaDefinition]
+        self, name: str, table: TableSchemaDefinition, all_tables: Dict[str, TableSchemaDefinition]
     ) -> TableQualityReport:
         issues: List[str] = []
         score = 100.0
@@ -61,7 +59,11 @@ class SchemaAnalyzer(ISchemaAnalyzer):
             score -= 30.0
 
         # 2. Naming standard
-        naming_passed = bool(self.VALID_TABLE_NAME_PATTERN.match(name)) and not name.startswith("tbl_") and not name.startswith("data")
+        naming_passed = (
+            bool(self.VALID_TABLE_NAME_PATTERN.match(name))
+            and not name.startswith("tbl_")
+            and not name.startswith("data")
+        )
         if not naming_passed:
             issues.append(f"Table name '{name}' violates snake_case convention or uses forbidden prefixes")
             score -= 10.0

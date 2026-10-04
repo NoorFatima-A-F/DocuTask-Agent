@@ -2,11 +2,14 @@ from typing import Dict, Optional
 from app.platform_verification.lifecycle.context import VerificationExecutionContext
 from app.platform_verification.lifecycle.pipeline import verification_pipeline
 
+
 class CanonicalLifecycleOrchestrator:
     def __init__(self):
         self._executions: Dict[str, VerificationExecutionContext] = {}
 
-    def start_verification(self, definition_id: str, tenant_id: str, initiator: str = "Automated System") -> VerificationExecutionContext:
+    def start_verification(
+        self, definition_id: str, tenant_id: str, initiator: str = "Automated System"
+    ) -> VerificationExecutionContext:
         ctx = VerificationExecutionContext(definition_id=definition_id, tenant_id=tenant_id, initiator=initiator)
         final_ctx = verification_pipeline.execute_lifecycle(ctx)
         self._executions[final_ctx.execution_id] = final_ctx
@@ -22,5 +25,6 @@ class CanonicalLifecycleOrchestrator:
         repro_ctx = verification_pipeline.reproduce_lifecycle(source)
         self._executions[repro_ctx.execution_id] = repro_ctx
         return repro_ctx
+
 
 canonical_lifecycle_orchestrator = CanonicalLifecycleOrchestrator()

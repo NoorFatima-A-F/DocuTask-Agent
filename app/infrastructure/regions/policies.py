@@ -7,9 +7,7 @@ from app.infrastructure.regions.models import Region, RegionStatus
 class RegionPolicyEngine:
     """Evaluates regional compliance, data residency, and boundary governance."""
 
-    def evaluate_data_residency(
-        self, region: Region, required_jurisdiction: str
-    ) -> Tuple[bool, List[str]]:
+    def evaluate_data_residency(self, region: Region, required_jurisdiction: str) -> Tuple[bool, List[str]]:
         """Validate whether a region satisfies data residency jurisdiction constraints."""
         violations = []
         if required_jurisdiction.upper() == "GLOBAL":
@@ -26,24 +24,18 @@ class RegionPolicyEngine:
 
         return len(violations) == 0, violations
 
-    def validate_compliance(
-        self, region: Region, required_certifications: List[str]
-    ) -> Tuple[bool, List[str]]:
+    def validate_compliance(self, region: Region, required_certifications: List[str]) -> Tuple[bool, List[str]]:
         """Validate if region holds all required compliance certifications."""
         violations = []
         region_certs = set(c.upper() for c in region.compliance_certifications)
 
         for cert in required_certifications:
             if cert.upper() not in region_certs:
-                violations.append(
-                    f"Compliance violation: region '{region.region_id}' lacks certification '{cert}'."
-                )
+                violations.append(f"Compliance violation: region '{region.region_id}' lacks certification '{cert}'.")
 
         return len(violations) == 0, violations
 
-    def validate_egress_policy(
-        self, source_region: Region, target_region: Region
-    ) -> Tuple[bool, List[str]]:
+    def validate_egress_policy(self, source_region: Region, target_region: Region) -> Tuple[bool, List[str]]:
         """Validate whether data transmission between source and target region is legally permitted."""
         violations = []
         # Strictest rule: EU data cannot freely egress to non-adequate jurisdiction without gateway
@@ -59,11 +51,7 @@ class RegionPolicyEngine:
 
         return len(violations) == 0, violations
 
-    def check_regional_quorum(
-        self, active_regions: List[Region], min_quorum_count: int = 2
-    ) -> bool:
+    def check_regional_quorum(self, active_regions: List[Region], min_quorum_count: int = 2) -> bool:
         """Check if minimum quorum of ACTIVE regions is maintained for distributed consensus."""
-        healthy_active = [
-            r for r in active_regions if r.status == RegionStatus.ACTIVE
-        ]
+        healthy_active = [r for r in active_regions if r.status == RegionStatus.ACTIVE]
         return len(healthy_active) >= min_quorum_count

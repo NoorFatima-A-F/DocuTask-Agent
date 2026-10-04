@@ -54,7 +54,9 @@ class InMemoryTaskGraphRepository(TaskGraphRepository):
 
     def save(self, snapshot: TaskGraphSnapshot) -> None:
         self._store[snapshot.snapshot_id] = snapshot
-        logger.debug("Saved snapshot %s for plan %s (step %d)", snapshot.snapshot_id, snapshot.plan_id, snapshot.step_index)
+        logger.debug(
+            "Saved snapshot %s for plan %s (step %d)", snapshot.snapshot_id, snapshot.plan_id, snapshot.step_index
+        )
 
     def get_by_id(self, snapshot_id: UUID) -> Optional[TaskGraphSnapshot]:
         return self._store.get(snapshot_id)

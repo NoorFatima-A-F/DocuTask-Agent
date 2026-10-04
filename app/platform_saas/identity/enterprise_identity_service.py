@@ -147,7 +147,7 @@ class EnterpriseIdentityService:
         configs = self.list_sso_configs(tenant_id)
         if not configs:
             return {"authenticated": False, "error": "No SSO provider configured for tenant"}
-        
+
         simulated_hash = hashlib.sha256(saml_response_xml.encode("utf-8")).hexdigest()
         return {
             "authenticated": True,

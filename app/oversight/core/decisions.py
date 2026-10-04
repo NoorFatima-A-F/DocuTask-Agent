@@ -27,6 +27,7 @@ class FeedbackAssessment(str, Enum):
 
 class HumanDecision(BaseModel):
     """Permanent recorded human decision with full accountability and feedback loop."""
+
     decision_id: str = Field(default_factory=lambda: f"hdec_{uuid.uuid4().hex[:10]}")
     review_id: str
     tenant_id: str

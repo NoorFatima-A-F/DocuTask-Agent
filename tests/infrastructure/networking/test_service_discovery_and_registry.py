@@ -80,6 +80,7 @@ def test_service_heartbeat_and_stale_eviction() -> None:
 
     # Simulate stale eviction with 0 grace period after manual timestamp backdating
     from datetime import datetime, timezone, timedelta
+
     updated_inst.last_heartbeat_at = datetime.now(timezone.utc) - timedelta(seconds=10)
 
     evicted = heartbeat_mgr.evict_stale_instances(grace_period_seconds=0)

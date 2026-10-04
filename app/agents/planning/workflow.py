@@ -11,6 +11,7 @@ from app.agents.planning.graph import PlanGraph
 
 class WorkflowDefinition(BaseModel):
     """Workflow specification orchestrating plan graph execution flow."""
+
     workflow_id: str
     name: str
     graph: PlanGraph

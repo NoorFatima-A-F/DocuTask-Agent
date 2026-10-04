@@ -63,6 +63,11 @@ class RootCauseEngine(IRootCauseEngine):
             passed=passed,
             details={
                 "causal_inference_method": "Bayesian Network Multi-Signal Path Analysis",
-                "evidence_sources_evaluated": ["OpenTelemetry Traces", "Prometheus Metrics", "Loki Logs", "Git Releases"],
+                "evidence_sources_evaluated": [
+                    "OpenTelemetry Traces",
+                    "Prometheus Metrics",
+                    "Loki Logs",
+                    "Git Releases",
+                ],
             },
         )

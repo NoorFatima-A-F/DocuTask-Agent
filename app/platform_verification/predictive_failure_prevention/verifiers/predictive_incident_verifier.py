@@ -1,6 +1,7 @@
 """
 Phase 3H.5.9.8: Predictive Incident Creation Verifier
 """
+
 from ..domain.interfaces import IPredictiveIncidentVerifier
 from ..domain.models import PredictiveIncidentReport, PredictiveIncidentItem, PredictionRiskLevel
 

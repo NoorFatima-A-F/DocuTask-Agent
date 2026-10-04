@@ -26,10 +26,34 @@ class WorkerScalingVerifier(IWorkerScalingVerifier):
 
     def verify(self) -> WorkerScalingReport:
         points = [
-            WorkerScalingPoint(worker_count=1, throughput_dpm=25.0, scaling_efficiency_factor=1.0, cpu_usage_pct=25.0, memory_usage_mb=256.0),
-            WorkerScalingPoint(worker_count=5, throughput_dpm=120.0, scaling_efficiency_factor=0.96, cpu_usage_pct=38.0, memory_usage_mb=512.0),
-            WorkerScalingPoint(worker_count=10, throughput_dpm=235.0, scaling_efficiency_factor=0.94, cpu_usage_pct=52.0, memory_usage_mb=850.0),
-            WorkerScalingPoint(worker_count=50, throughput_dpm=1050.0, scaling_efficiency_factor=0.84, cpu_usage_pct=72.0, memory_usage_mb=3200.0),
+            WorkerScalingPoint(
+                worker_count=1,
+                throughput_dpm=25.0,
+                scaling_efficiency_factor=1.0,
+                cpu_usage_pct=25.0,
+                memory_usage_mb=256.0,
+            ),
+            WorkerScalingPoint(
+                worker_count=5,
+                throughput_dpm=120.0,
+                scaling_efficiency_factor=0.96,
+                cpu_usage_pct=38.0,
+                memory_usage_mb=512.0,
+            ),
+            WorkerScalingPoint(
+                worker_count=10,
+                throughput_dpm=235.0,
+                scaling_efficiency_factor=0.94,
+                cpu_usage_pct=52.0,
+                memory_usage_mb=850.0,
+            ),
+            WorkerScalingPoint(
+                worker_count=50,
+                throughput_dpm=1050.0,
+                scaling_efficiency_factor=0.84,
+                cpu_usage_pct=72.0,
+                memory_usage_mb=3200.0,
+            ),
         ]
 
         scaling_linearity = 91.5

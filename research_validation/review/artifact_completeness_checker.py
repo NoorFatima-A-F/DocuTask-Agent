@@ -93,12 +93,17 @@ class ArtifactCompletenessChecker:
                     snippet = str(val)
 
             if not is_present:
-                sev = "CRITICAL" if field_enum in (
-                    MandatoryField.RAW_EVIDENCE,
-                    MandatoryField.PROVENANCE_CHAIN,
-                    MandatoryField.REPRODUCTION_COMMAND,
-                    MandatoryField.ENVIRONMENT_MANIFEST
-                ) else "MINOR"
+                sev = (
+                    "CRITICAL"
+                    if field_enum
+                    in (
+                        MandatoryField.RAW_EVIDENCE,
+                        MandatoryField.PROVENANCE_CHAIN,
+                        MandatoryField.REPRODUCTION_COMMAND,
+                        MandatoryField.ENVIRONMENT_MANIFEST,
+                    )
+                    else "MINOR"
+                )
                 if sev == "CRITICAL":
                     critical_omissions.append(f"Missing mandatory field: '{key}'")
             else:

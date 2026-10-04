@@ -18,9 +18,27 @@ class IAMPolicyTester(IIAMPolicyTester):
 
     TESTS_SPEC = [
         ("TEST-01-UNAUTH-USER", "Standard End User", "s3:GetObject on backup vault", "ACCESS_DENIED_HTTP_403", True),
-        ("TEST-02-PRIVESC-DEV", "Developer Principal", "s3:DeleteObject on recovery points", "ACCESS_DENIED_HTTP_403", True),
-        ("TEST-03-ANONYMOUS", "Unauthenticated Public", "s3:ListBucket on backup vault", "ACCESS_DENIED_HTTP_403", True),
-        ("TEST-04-AUTH-RECOVERY", "DisasterRecoveryService Principal", "s3:GetObject + kms:Decrypt", "ALLOWED_HTTP_200", True),
+        (
+            "TEST-02-PRIVESC-DEV",
+            "Developer Principal",
+            "s3:DeleteObject on recovery points",
+            "ACCESS_DENIED_HTTP_403",
+            True,
+        ),
+        (
+            "TEST-03-ANONYMOUS",
+            "Unauthenticated Public",
+            "s3:ListBucket on backup vault",
+            "ACCESS_DENIED_HTTP_403",
+            True,
+        ),
+        (
+            "TEST-04-AUTH-RECOVERY",
+            "DisasterRecoveryService Principal",
+            "s3:GetObject + kms:Decrypt",
+            "ALLOWED_HTTP_200",
+            True,
+        ),
     ]
 
     def execute_iam_penetration_tests(self) -> IAMTestReport:

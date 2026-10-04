@@ -2,6 +2,7 @@
 Global Traffic Failover Engine (Part 3G.6E).
 Simulates and measures global traffic migration between cloud regions.
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     TrafficFailoverReport,
 )
@@ -19,7 +20,7 @@ class TrafficFailoverEngine(ITrafficFailoverEngine):
         detection_time_sec = 5.0
         dns_prop_time_sec = 25.0
         migration_time_sec = 12.0
-        total_time_sec = detection_time_sec + dns_prop_time_sec + migration_time_sec # 42.0s
+        total_time_sec = detection_time_sec + dns_prop_time_sec + migration_time_sec  # 42.0s
         dropped_pct = 0.0
         gtm = "AWS Route53 ARC (Application Recovery Controller) + Cloudflare Anycast"
 

@@ -17,6 +17,7 @@ logger = logging.getLogger("infrastructure.observability.profiling.cpu")
 
 class StackFrame(BaseModel):
     """Single execution frame in a call stack."""
+
     function_name: str
     file_name: str
     line_number: int
@@ -24,6 +25,7 @@ class StackFrame(BaseModel):
 
 class CPUProfileSample(BaseModel):
     """CPU execution sample containing stack trace and execution weight."""
+
     sample_id: str
     thread_id: str
     frames: List[StackFrame] = Field(default_factory=list)
@@ -33,6 +35,7 @@ class CPUProfileSample(BaseModel):
 
 class CPUHotspot(BaseModel):
     """Detected function consuming significant CPU runtime."""
+
     function_name: str
     file_name: str
     total_time_ms: float
@@ -90,13 +93,15 @@ class CPUProfiler:
         for fn_key, t_ms in fn_times.items():
             fn_name = fn_key.split(":")[-1]
             pct = (t_ms / total_cpu_time * 100.0) if total_cpu_time > 0 else 0.0
-            hotspots.append(CPUHotspot(
-                function_name=fn_name,
-                file_name=fn_files[fn_key],
-                total_time_ms=round(t_ms, 2),
-                percentage_of_total=round(pct, 2),
-                sample_count=fn_counts[fn_key],
-            ))
+            hotspots.append(
+                CPUHotspot(
+                    function_name=fn_name,
+                    file_name=fn_files[fn_key],
+                    total_time_ms=round(t_ms, 2),
+                    percentage_of_total=round(pct, 2),
+                    sample_count=fn_counts[fn_key],
+                )
+            )
 
         hotspots.sort(key=lambda h: h.total_time_ms, reverse=True)
         return hotspots[:top_n]

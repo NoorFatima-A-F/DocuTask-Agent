@@ -6,6 +6,7 @@ to their target folders:
 - audit_package/
 - resilience_certification/
 """
+
 import json
 from pathlib import Path
 from typing import Dict, Any
@@ -218,12 +219,12 @@ class GovernanceExporter:
 ## Dimension Breakdown
 | Dimension | Score (0-100) | Weight | Weighted Score |
 |---|---|---|---|
-| Governance & Ownership | {maturity_score.dimension_scores.get('governance_and_ownership', 0.0)} | 20% | {round(maturity_score.dimension_scores.get('governance_and_ownership', 0.0) * 0.20, 2)} |
-| Policy Formalization | {maturity_score.dimension_scores.get('policy_formalization', 0.0)} | 20% | {round(maturity_score.dimension_scores.get('policy_formalization', 0.0) * 0.20, 2)} |
-| Continuous Automation | {maturity_score.dimension_scores.get('continuous_automation', 0.0)} | 20% | {round(maturity_score.dimension_scores.get('continuous_automation', 0.0) * 0.20, 2)} |
-| Chaos & Resilience Testing | {maturity_score.dimension_scores.get('chaos_and_testing', 0.0)} | 20% | {round(maturity_score.dimension_scores.get('chaos_and_testing', 0.0) * 0.20, 2)} |
-| Incident Learning & Postmortem | {maturity_score.dimension_scores.get('incident_learning', 0.0)} | 10% | {round(maturity_score.dimension_scores.get('incident_learning', 0.0) * 0.10, 2)} |
-| Drift Prevention & Runbooks | {maturity_score.dimension_scores.get('drift_prevention', 0.0)} | 10% | {round(maturity_score.dimension_scores.get('drift_prevention', 0.0) * 0.10, 2)} |
+| Governance & Ownership | {maturity_score.dimension_scores.get("governance_and_ownership", 0.0)} | 20% | {round(maturity_score.dimension_scores.get("governance_and_ownership", 0.0) * 0.20, 2)} |
+| Policy Formalization | {maturity_score.dimension_scores.get("policy_formalization", 0.0)} | 20% | {round(maturity_score.dimension_scores.get("policy_formalization", 0.0) * 0.20, 2)} |
+| Continuous Automation | {maturity_score.dimension_scores.get("continuous_automation", 0.0)} | 20% | {round(maturity_score.dimension_scores.get("continuous_automation", 0.0) * 0.20, 2)} |
+| Chaos & Resilience Testing | {maturity_score.dimension_scores.get("chaos_and_testing", 0.0)} | 20% | {round(maturity_score.dimension_scores.get("chaos_and_testing", 0.0) * 0.20, 2)} |
+| Incident Learning & Postmortem | {maturity_score.dimension_scores.get("incident_learning", 0.0)} | 10% | {round(maturity_score.dimension_scores.get("incident_learning", 0.0) * 0.10, 2)} |
+| Drift Prevention & Runbooks | {maturity_score.dimension_scores.get("drift_prevention", 0.0)} | 10% | {round(maturity_score.dimension_scores.get("drift_prevention", 0.0) * 0.10, 2)} |
 
 ## Executive Summary
 DocuTask Agent has achieved the highest enterprise tier of operational resilience maturity: **{maturity_score.maturity_level.value}**.

@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class WorkflowPriority(int, Enum):
     """Execution priority levels for workflows."""
+
     CRITICAL = 1
     HIGH = 2
     NORMAL = 3
@@ -20,6 +21,7 @@ class WorkflowPriority(int, Enum):
 
 class WorkflowIdentity(BaseModel):
     """Unique identity and correlation envelope for a workflow instance."""
+
     workflow_id: UUID = Field(default_factory=uuid4)
     instance_id: UUID = Field(default_factory=uuid4)
     definition_id: Optional[UUID] = None
@@ -35,6 +37,7 @@ class WorkflowIdentity(BaseModel):
 
 class WorkflowMetadata(BaseModel):
     """Execution environment and version metadata."""
+
     engine_version: str = Field(default="22.0.0")
     cloud_region: str = Field(default="us-central1")
     environment: str = Field(default="production")
@@ -45,6 +48,7 @@ class WorkflowMetadata(BaseModel):
 
 class WorkflowStatistics(BaseModel):
     """Quantitative metrics for a workflow run."""
+
     total_duration_ms: float = Field(default=0.0, ge=0.0)
     duration_ms: float = Field(default=0.0, ge=0.0)
     total_nodes_executed: int = Field(default=0, ge=0)

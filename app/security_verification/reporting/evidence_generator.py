@@ -2,12 +2,14 @@
 Section 12.2: Master Security Evidence & Artifact Generator
 Exports reports, metrics JSON, red team attack datasets, and SHA-256 manifests.
 """
+
 import os
 import json
 import hashlib
 from datetime import datetime, timezone
 from typing import Dict, List, Any
 from ..domain.models import MasterSecurityScore, AttackVector
+
 
 class SecurityEvidenceGenerator:
     def __init__(self, output_dir: str = "security_verification_evidence", docs_dir: str = "docs"):
@@ -16,9 +18,11 @@ class SecurityEvidenceGenerator:
         os.makedirs(self.output_dir, exist_ok=True)
         os.makedirs(self.docs_dir, exist_ok=True)
 
-    def export_all_evidence(self, master_score: MasterSecurityScore, attack_vectors: List[AttackVector]) -> Dict[str, str]:
+    def export_all_evidence(
+        self, master_score: MasterSecurityScore, attack_vectors: List[AttackVector]
+    ) -> Dict[str, str]:
         exported_files: Dict[str, str] = {}
-        
+
         # 1. Export docs/phase_V9_security_score.json
         score_data = {
             "tenant_id": master_score.tenant_id,
@@ -31,13 +35,13 @@ class SecurityEvidenceGenerator:
             "total_attacks_tested": master_score.total_attacks_tested,
             "total_attacks_blocked": master_score.total_attacks_blocked,
             "verification_duration_ms": master_score.verification_duration_ms,
-            "generated_at": master_score.generated_at.isoformat()
+            "generated_at": master_score.generated_at.isoformat(),
         }
         score_path = os.path.join(self.docs_dir, "phase_V9_security_score.json")
         with open(score_path, "w", encoding="utf-8") as f:
             json.dump(score_data, f, indent=2)
         exported_files["security_score_json"] = score_path
-        
+
         # 2. Export docs/phase_V9_attack_dataset.json (Sample 100 representative attacks)
         attack_samples = [
             {
@@ -48,17 +52,19 @@ class SecurityEvidenceGenerator:
                 "payload": a.payload,
                 "is_blocked": a.is_blocked,
                 "mitigation_applied": a.mitigation_applied,
-                "confidence_score": a.confidence_score
-            } for a in attack_vectors[:100]
+                "confidence_score": a.confidence_score,
+            }
+            for a in attack_vectors[:100]
         ]
         dataset_path = os.path.join(self.docs_dir, "phase_V9_attack_dataset.json")
         with open(dataset_path, "w", encoding="utf-8") as f:
-            json.dump({
-                "total_synthetic_attacks_generated": len(attack_vectors),
-                "sample_dataset_entries": attack_samples
-            }, f, indent=2)
+            json.dump(
+                {"total_synthetic_attacks_generated": len(attack_vectors), "sample_dataset_entries": attack_samples},
+                f,
+                indent=2,
+            )
         exported_files["attack_dataset_json"] = dataset_path
-        
+
         # 3. Export docs/phase_V9_red_team_results.json
         red_team_summary = {
             "campaign_status": "COMPLETED",
@@ -67,20 +73,20 @@ class SecurityEvidenceGenerator:
             "breached_vectors_count": sum(1 for a in attack_vectors if not a.is_blocked),
             "overall_neutralization_rate_pct": master_score.defense_rate_pct,
             "avg_detection_latency_ms": 0.24,
-            "executed_at": master_score.generated_at.isoformat()
+            "executed_at": master_score.generated_at.isoformat(),
         }
         red_team_path = os.path.join(self.docs_dir, "phase_V9_red_team_results.json")
         with open(red_team_path, "w", encoding="utf-8") as f:
             json.dump(red_team_summary, f, indent=2)
         exported_files["red_team_results_json"] = red_team_path
-        
+
         # 4. Export docs/phase_V9_security_verification_report.md
         report_path = os.path.join(self.docs_dir, "phase_V9_security_verification_report.md")
         report_md = self._generate_markdown_report(master_score, red_team_summary)
         with open(report_path, "w", encoding="utf-8") as f:
             f.write(report_md)
         exported_files["security_report_md"] = report_path
-        
+
         # 5. Export Manifest with SHA-256 Hashes
         manifest_entries = {}
         for key, filepath in exported_files.items():
@@ -89,21 +95,25 @@ class SecurityEvidenceGenerator:
                 manifest_entries[os.path.basename(filepath)] = {
                     "path": filepath,
                     "size_bytes": len(content),
-                    "sha256": hashlib.sha256(content).hexdigest()
+                    "sha256": hashlib.sha256(content).hexdigest(),
                 }
-                
+
         manifest_path = os.path.join(self.output_dir, "manifest.json")
         with open(manifest_path, "w", encoding="utf-8") as f:
-            json.dump({
-                "manifest_version": "1.0",
-                "program": "Phase V9 — Enterprise AI Security & Responsible AI Verification Program",
-                "generated_at": datetime.now(timezone.utc).isoformat(),
-                "overall_security_score": master_score.overall_score,
-                "grade": master_score.grade,
-                "artifacts": manifest_entries
-            }, f, indent=2)
+            json.dump(
+                {
+                    "manifest_version": "1.0",
+                    "program": "Phase V9 — Enterprise AI Security & Responsible AI Verification Program",
+                    "generated_at": datetime.now(timezone.utc).isoformat(),
+                    "overall_security_score": master_score.overall_score,
+                    "grade": master_score.grade,
+                    "artifacts": manifest_entries,
+                },
+                f,
+                indent=2,
+            )
         exported_files["manifest_json"] = manifest_path
-        
+
         return exported_files
 
     def _generate_markdown_report(self, score: MasterSecurityScore, red_team: Dict[str, Any]) -> str:
@@ -114,7 +124,7 @@ class SecurityEvidenceGenerator:
 - **Security Score**: **{score.overall_score} / 100** ({score.grade})
 - **Adversarial Red Team Probes**: **{score.total_attacks_tested:,}** Tested | **{score.total_attacks_blocked:,}** Neutralized ({score.defense_rate_pct}% Defense Rate)
 - **Total Verification Checks**: **{score.total_checks}** Checks Evaluated (**{score.passed_checks}** Passed, **{score.failed_checks}** Failed)
-- **Audit Date**: {score.generated_at.strftime('%Y-%m-%d %H:%M:%S UTC')}
+- **Audit Date**: {score.generated_at.strftime("%Y-%m-%d %H:%M:%S UTC")}
 
 ---
 
@@ -122,14 +132,14 @@ class SecurityEvidenceGenerator:
 
 | Security Domain | Weight | Verified Score | Status | Key Mitigation Applied |
 |---|---|---|---|---|
-| **Authentication & Tokens** | 10% | {score.category_scores.get('AUTHENTICATION', 100.0)}/100 | PASSED | JWT Alg-Confusion Defense & Single-Use Refresh Rotation |
-| **Authorization & RBAC** | 15% | {score.category_scores.get('AUTHORIZATION', 100.0)}/100 | PASSED | 5-Role Least Privilege Matrix & Zero Privilege Escalation |
-| **Multi-Tenant Isolation** | 15% | {score.category_scores.get('TENANT_ISOLATION', 100.0)}/100 | PASSED | Strict Partitioning & 0 Cross-Tenant Data Leaks |
-| **API & Injection Defense** | 10% | {score.category_scores.get('API_SECURITY', 100.0)}/100 | PASSED | BOLA/IDOR Defense & 100% SQLi/Command Injection Barrier |
-| **OWASP LLM & ATLAS** | 20% | {score.category_scores.get('LLM_SECURITY', 100.0)}/100 | PASSED | Multi-Lingual Jailbreak & 1,000+ Prompt Injection Filters |
-| **Autonomous Agent Safety** | 15% | {score.category_scores.get('AGENT_SECURITY', 100.0)}/100 | PASSED | Tool Capability Sandboxing & Goal Hijacking Neutralizer |
-| **Data Protection & PII** | 10% | {score.category_scores.get('DATA_PROTECTION', 100.0)}/100 | PASSED | Regex/NLP Redaction (CNIC, Cards, Email) & Secret Scanner |
-| **Responsible AI & Safety** | 5% | {score.category_scores.get('RESPONSIBLE_AI', 100.0)}/100 | PASSED | Multi-Demographic Fairness, Provenance & Mandatory HITL |
+| **Authentication & Tokens** | 10% | {score.category_scores.get("AUTHENTICATION", 100.0)}/100 | PASSED | JWT Alg-Confusion Defense & Single-Use Refresh Rotation |
+| **Authorization & RBAC** | 15% | {score.category_scores.get("AUTHORIZATION", 100.0)}/100 | PASSED | 5-Role Least Privilege Matrix & Zero Privilege Escalation |
+| **Multi-Tenant Isolation** | 15% | {score.category_scores.get("TENANT_ISOLATION", 100.0)}/100 | PASSED | Strict Partitioning & 0 Cross-Tenant Data Leaks |
+| **API & Injection Defense** | 10% | {score.category_scores.get("API_SECURITY", 100.0)}/100 | PASSED | BOLA/IDOR Defense & 100% SQLi/Command Injection Barrier |
+| **OWASP LLM & ATLAS** | 20% | {score.category_scores.get("LLM_SECURITY", 100.0)}/100 | PASSED | Multi-Lingual Jailbreak & 1,000+ Prompt Injection Filters |
+| **Autonomous Agent Safety** | 15% | {score.category_scores.get("AGENT_SECURITY", 100.0)}/100 | PASSED | Tool Capability Sandboxing & Goal Hijacking Neutralizer |
+| **Data Protection & PII** | 10% | {score.category_scores.get("DATA_PROTECTION", 100.0)}/100 | PASSED | Regex/NLP Redaction (CNIC, Cards, Email) & Secret Scanner |
+| **Responsible AI & Safety** | 5% | {score.category_scores.get("RESPONSIBLE_AI", 100.0)}/100 | PASSED | Multi-Demographic Fairness, Provenance & Mandatory HITL |
 
 ---
 

@@ -1,6 +1,7 @@
 """
 AST-based static analysis scanner for Python codebases.
 """
+
 from __future__ import annotations
 import ast
 import os

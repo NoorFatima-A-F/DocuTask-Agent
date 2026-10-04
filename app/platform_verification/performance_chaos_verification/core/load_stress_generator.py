@@ -1,6 +1,7 @@
 """
 Load and Stress Test Generator.
 """
+
 from typing import List
 from app.platform_verification.performance_chaos_verification.domain.models import (
     LoadTestReport,
@@ -13,6 +14,7 @@ from app.platform_verification.performance_chaos_verification.domain.interfaces 
 
 class LoadStressGenerator(ILoadStressGenerator):
     """Simulates multi-tier load and stepped stress testing."""
+
     __test__ = False
 
     def execute_load_tests(self) -> List[LoadTestReport]:

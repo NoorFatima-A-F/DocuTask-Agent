@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class AgentSkill:
     """A discrete cognitive or operational skill exposed to autonomous agents."""
+
     name: str
     version: str = "1.0.0"
     capability: str = "general"
@@ -45,15 +46,51 @@ class SkillRegistry:
     """
 
     DEFAULT_SKILLS = [
-        ("extraction", "document.extraction", 0.005, ["data:read"], "Extract structured data from unstructured text/documents"),
-        ("classification", "document.classification", 0.002, ["data:read"], "Categorize documents or text into tax/legal/financial classes"),
-        ("summarization", "text.summarization", 0.003, ["data:read"], "Generate concise summaries of documents and reasoning traces"),
+        (
+            "extraction",
+            "document.extraction",
+            0.005,
+            ["data:read"],
+            "Extract structured data from unstructured text/documents",
+        ),
+        (
+            "classification",
+            "document.classification",
+            0.002,
+            ["data:read"],
+            "Categorize documents or text into tax/legal/financial classes",
+        ),
+        (
+            "summarization",
+            "text.summarization",
+            0.003,
+            ["data:read"],
+            "Generate concise summaries of documents and reasoning traces",
+        ),
         ("translation", "language.translation", 0.002, ["data:read"], "Translate multi-lingual content"),
         ("search", "knowledge.search", 0.001, ["data:read"], "Retrieve relevant context from organizational knowledge"),
-        ("validation", "data.validation", 0.001, ["data:read"], "Validate schemas, mathematical constraints, and data integrity"),
-        ("planning", "agent.planning", 0.005, ["agent:plan"], "Decompose complex business goals into dependency graphs"),
+        (
+            "validation",
+            "data.validation",
+            0.001,
+            ["data:read"],
+            "Validate schemas, mathematical constraints, and data integrity",
+        ),
+        (
+            "planning",
+            "agent.planning",
+            0.005,
+            ["agent:plan"],
+            "Decompose complex business goals into dependency graphs",
+        ),
         ("analysis", "document.analysis", 0.004, ["data:read"], "Deep cognitive analysis of clauses, risks, and terms"),
-        ("compliance", "governance.compliance", 0.003, ["governance:read"], "Verify regulatory, policy, and tax compliance rules"),
+        (
+            "compliance",
+            "governance.compliance",
+            0.003,
+            ["governance:read"],
+            "Verify regulatory, policy, and tax compliance rules",
+        ),
         ("ocr", "document.ocr", 0.010, ["data:read"], "Optical character recognition and layout analysis"),
         ("scheduling", "platform.scheduling", 0.001, ["schedule:write"], "Schedule delayed tasks and deadline timers"),
     ]
@@ -62,13 +99,15 @@ class SkillRegistry:
         self._skills: Dict[str, AgentSkill] = {}
         if load_defaults:
             for name, cap, cost, perms, desc in self.DEFAULT_SKILLS:
-                self.register(AgentSkill(
-                    name=name,
-                    capability=cap,
-                    cost_per_call_usd=cost,
-                    required_permissions=perms,
-                    description=desc,
-                ))
+                self.register(
+                    AgentSkill(
+                        name=name,
+                        capability=cap,
+                        cost_per_call_usd=cost,
+                        required_permissions=perms,
+                        description=desc,
+                    )
+                )
 
     def register(self, skill: AgentSkill) -> AgentSkill:
         """Registers a cognitive skill in the platform registry."""

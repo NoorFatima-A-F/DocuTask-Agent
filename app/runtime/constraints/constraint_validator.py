@@ -9,6 +9,7 @@ from app.runtime.constraints.feasibility_engine import FeasibilityEngine
 
 class ConstraintViolationError(ValueError):
     """Raised when a selected plan violates hard operational boundaries."""
+
     pass
 
 

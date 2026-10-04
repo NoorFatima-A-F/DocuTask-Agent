@@ -88,9 +88,7 @@ class ClusterSDK:
         status: Optional[ClusterStatus] = None,
         environment: Optional[str] = None,
     ) -> List[Cluster]:
-        return self.cluster_registry.list_clusters(
-            region_id=region_id, status=status, environment=environment
-        )
+        return self.cluster_registry.list_clusters(region_id=region_id, status=status, environment=environment)
 
     def transition_cluster_state(
         self, cluster_id: str, target_state: ClusterStatus, reason: Optional[str] = None
@@ -148,9 +146,7 @@ class ClusterSDK:
         jurisdiction: Optional[str] = None,
         provider: Optional[str] = None,
     ) -> List[Region]:
-        return self.region_registry.list_regions(
-            status=status, jurisdiction=jurisdiction, provider=provider
-        )
+        return self.region_registry.list_regions(status=status, jurisdiction=jurisdiction, provider=provider)
 
     def set_tenant_affinity(self, rule: TenantAffinityRule) -> TenantAffinityRule:
         return self.affinity_manager.set_tenant_affinity(rule)

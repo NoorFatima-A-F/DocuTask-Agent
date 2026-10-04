@@ -38,7 +38,9 @@ class ArchitectureMutationProposal:
 +    validation_results = [t.result() for t in validation_tasks]
 """
     rationale: str = "Converts sequential O(N) plan validation into parallel O(1) asyncio concurrent coroutines, reducing P99 latency by 45%."
-    safety_analysis: str = "Thread-safe. Zero shared state mutation across validation routines. Invariant checks guaranteed."
+    safety_analysis: str = (
+        "Thread-safe. Zero shared state mutation across validation routines. Invariant checks guaranteed."
+    )
     confidence_score: float = 0.94
     status: str = "PROPOSED"  # PROPOSED, SIMULATING, BENCHMARKING, GOVERNANCE_PENDING, APPROVED, DEPLOYED, ROLLED_BACK
     sha256_hash: str = ""
@@ -138,9 +140,7 @@ class MutationEngine:
         )
         self.proposals[mutation_id] = mutation
 
-        self.event_bus.publish(
-            MutationProposed(payload=mutation.to_dict())
-        )
+        self.event_bus.publish(MutationProposed(payload=mutation.to_dict()))
         return mutation
 
     def update_mutation_status(self, mutation_id: str, new_status: str) -> Optional[ArchitectureMutationProposal]:

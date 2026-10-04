@@ -15,6 +15,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class RegressionMemoryEntry:
     """Historical record of a detected scientific or performance regression."""
+
     regression_id: str
     experiment_id: str
     metric_name: str
@@ -42,10 +43,7 @@ class RegressionMemoryStore:
         root_cause_hypothesis: str = "",
         resolution_status: str = "ACTIVE",
     ) -> RegressionMemoryEntry:
-        rel_deg = (
-            ((baseline_value - regressed_value) / abs(baseline_value)) * 100.0
-            if baseline_value != 0 else 0.0
-        )
+        rel_deg = ((baseline_value - regressed_value) / abs(baseline_value)) * 100.0 if baseline_value != 0 else 0.0
         regression_id = f"reg_{experiment_id}_{metric_name}_{len(self.regressions)}"
         payload = {
             "regression_id": regression_id,

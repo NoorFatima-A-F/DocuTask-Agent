@@ -1,6 +1,7 @@
 """
 Domain package for Phase 3I.4 Distributed Tracing Infrastructure Verification
 """
+
 from .models import (
     SpanKind,
     TracingCertificationTier,

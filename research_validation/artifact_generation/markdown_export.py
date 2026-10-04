@@ -52,7 +52,9 @@ class MarkdownExporter:
             lines.append("| " + " | ".join(vals) + " |")
 
         lines.append("")
-        lines.append(f"> **Originating Experiments**: `{', '.join(table.originating_experiment_ids)}` | **SHA-256**: `{table.table_digest_sha256[:16]}...`")
+        lines.append(
+            f"> **Originating Experiments**: `{', '.join(table.originating_experiment_ids)}` | **SHA-256**: `{table.table_digest_sha256[:16]}...`"
+        )
         return "\n".join(lines)
 
     @classmethod
@@ -82,10 +84,12 @@ class MarkdownExporter:
             lines.append(cls.export_table(tbl))
             lines.append("")
 
-        lines.extend([
-            "## Limitations & Threats to Validity",
-            "",
-        ])
+        lines.extend(
+            [
+                "## Limitations & Threats to Validity",
+                "",
+            ]
+        )
         for lim in limitations:
             lines.append(f"- {lim}")
 

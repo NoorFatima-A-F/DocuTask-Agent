@@ -30,9 +30,21 @@ class PostmortemGenerator:
                 "Why 5: Proactive prompt caching was not pre-warmed for this vendor template.",
             ],
             "corrective_action_items": [
-                {"action": "Enable proactive token rate-smoothing on Extraction Department queue", "owner": "dept_extraction", "status": "COMPLETED"},
-                {"action": "Pre-warm prompt caches on vendor batch ingestion", "owner": "dept_ocr", "status": "IN_PROGRESS"},
-                {"action": "Add automatic Fallback-to-Flash-Lite circuit breaker rule", "owner": "dept_governance", "status": "COMPLETED"},
+                {
+                    "action": "Enable proactive token rate-smoothing on Extraction Department queue",
+                    "owner": "dept_extraction",
+                    "status": "COMPLETED",
+                },
+                {
+                    "action": "Pre-warm prompt caches on vendor batch ingestion",
+                    "owner": "dept_ocr",
+                    "status": "IN_PROGRESS",
+                },
+                {
+                    "action": "Add automatic Fallback-to-Flash-Lite circuit breaker rule",
+                    "owner": "dept_governance",
+                    "status": "COMPLETED",
+                },
             ],
             "lessons_learned": "Autonomous fallback mechanisms prevented any data corruption or user-visible mission failure.",
             "sla_impact": "None (resolved in 12 seconds; well within 60s SLA threshold).",

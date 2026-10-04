@@ -2,6 +2,7 @@
 Phase 3I.7.8: Observability Audit Trail & Immutability Verifier
 Verifies that all telemetry read, query, export, and administrative actions generate tamper-proof audit trail records.
 """
+
 from typing import List
 from ..domain.interfaces import IAuditTrailVerifier
 from ..domain.models import AuditTrailEventSpec, ObservabilityAuditReport

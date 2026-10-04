@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 
 class SignalCategory(str, Enum):
     """Categories of platform health signals."""
+
     AVAILABILITY = "availability"
     PERFORMANCE = "performance"
     RESOURCE = "resource"
@@ -20,6 +21,7 @@ class SignalCategory(str, Enum):
 
 class AlertSeverity(str, Enum):
     """Severity levels for AlertManager alert rules."""
+
     CRITICAL = "critical"
     WARNING = "warning"
     INFO = "info"
@@ -27,6 +29,7 @@ class AlertSeverity(str, Enum):
 
 class IncidentState(str, Enum):
     """Lifecycle states of operational incidents."""
+
     FIRING = "FIRING"
     ACKNOWLEDGED = "ACKNOWLEDGED"
     RESOLVED = "RESOLVED"
@@ -35,15 +38,17 @@ class IncidentState(str, Enum):
 
 class ObservabilityTier(str, Enum):
     """Certification tiers for operational observability."""
+
     ENTERPRISE_OBSERVABILITY_READY = "Enterprise Observability Ready"  # 95 - 100%
-    PRODUCTION_READY = "Production Ready"                              # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                      # 80 - 89.99%
-    FAILED = "Failed"                                                  # < 80%
+    PRODUCTION_READY = "Production Ready"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 @dataclass
 class HealthSignalItem:
     """Individual health signal definition (3H.4.1)."""
+
     signal_name: str
     category: SignalCategory
     metric_source: str
@@ -56,6 +61,7 @@ class HealthSignalItem:
 @dataclass
 class HealthSignalArchitectureReport:
     """Results of Health Signal Architecture Verification (3H.4.1)."""
+
     total_signals: int = 12
     availability_signals_count: int = 3
     performance_signals_count: int = 3
@@ -69,6 +75,7 @@ class HealthSignalArchitectureReport:
 @dataclass
 class MetricDefinitionItem:
     """Operational metric item across 5 domains (3H.4.2)."""
+
     domain: str  # api, agent_runtime, queue, worker, ai
     metric_name: str
     metric_type: str  # counter, gauge, histogram
@@ -80,6 +87,7 @@ class MetricDefinitionItem:
 @dataclass
 class MetricsCollectionReport:
     """Results of Operational Metrics Collection Verification (3H.4.2)."""
+
     total_metrics_tracked: int = 19
     api_metrics_count: int = 4
     agent_runtime_metrics_count: int = 4
@@ -94,6 +102,7 @@ class MetricsCollectionReport:
 @dataclass
 class PrometheusVerificationReport:
     """Results of Prometheus /metrics Scrape Verification (3H.4.3)."""
+
     endpoint: str = "/metrics"
     http_status: int = 200
     scrape_duration_ms: float = 12.4
@@ -106,6 +115,7 @@ class PrometheusVerificationReport:
 @dataclass
 class DashboardItem:
     """Grafana dashboard metadata (3H.4.4)."""
+
     dashboard_id: str
     title: str
     panels_count: int
@@ -116,6 +126,7 @@ class DashboardItem:
 @dataclass
 class DashboardValidationReport:
     """Results of Grafana Operational Dashboard Verification (3H.4.4)."""
+
     total_dashboards: int = 4
     dashboards: List[DashboardItem] = field(default_factory=list)
     all_panels_queryable: bool = True
@@ -125,6 +136,7 @@ class DashboardValidationReport:
 @dataclass
 class AlertRuleItem:
     """AlertManager rule specification (3H.4.5)."""
+
     alert_name: str
     severity: AlertSeverity
     condition: str
@@ -137,6 +149,7 @@ class AlertRuleItem:
 @dataclass
 class AlertRuleReport:
     """Results of Alert Rule Configuration Verification (3H.4.5)."""
+
     total_rules_defined: int = 6
     critical_rules_count: int = 3
     warning_rules_count: int = 3
@@ -147,6 +160,7 @@ class AlertRuleReport:
 @dataclass
 class AlertAccuracyReport:
     """Results of Alert Precision & Recall Verification (3H.4.6)."""
+
     true_positives: int = 4
     false_positives: int = 0
     true_negatives: int = 20
@@ -160,6 +174,7 @@ class AlertAccuracyReport:
 @dataclass
 class IncidentSignalItem:
     """Actionable incident payload (3H.4.7)."""
+
     incident_id: str
     title: str
     severity: AlertSeverity
@@ -175,6 +190,7 @@ class IncidentSignalItem:
 @dataclass
 class IncidentSignalReport:
     """Results of Incident Signal Payload Verification (3H.4.7)."""
+
     incidents_generated: int = 4
     all_payloads_actionable: bool = True
     dependency_chain_included: bool = True
@@ -186,6 +202,7 @@ class IncidentSignalReport:
 @dataclass
 class AlertFatigueReport:
     """Results of Alert Fatigue Prevention & Deduplication Verification (3H.4.8)."""
+
     raw_alerts_received: int = 45
     deduplicated_alerts_grouped: int = 4
     compression_ratio_pct: float = 91.1
@@ -197,6 +214,7 @@ class AlertFatigueReport:
 @dataclass
 class MonitoringFailureTestResult:
     """Result of an individual failure injection monitoring test (3H.4.9)."""
+
     test_id: str
     failure_injected: str
     metric_updated: bool
@@ -209,6 +227,7 @@ class MonitoringFailureTestResult:
 @dataclass
 class MonitoringFailureTestReport:
     """Results of Failure Injection Monitoring Tests (3H.4.9)."""
+
     total_tests: int = 4
     passed_tests: int = 4
     tests: List[MonitoringFailureTestResult] = field(default_factory=list)
@@ -218,6 +237,7 @@ class MonitoringFailureTestReport:
 @dataclass
 class ObservabilitySecurityReport:
     """Results of Observability Zero-Leak Security Audit (3H.4.10)."""
+
     metrics_scanned_count: int = 24
     logs_scanned_count: int = 50
     alerts_scanned_count: int = 6
@@ -231,12 +251,13 @@ class ObservabilitySecurityReport:
 @dataclass
 class HealthMonitoringScorecard:
     """Composite Weighted Observability Quality Scorecard (3H.4.11)."""
+
     metrics_completeness_score: float = 100.0  # Weight: 20%
-    monitoring_accuracy_score: float = 100.0   # Weight: 20%
-    alert_reliability_score: float = 100.0     # Weight: 20%
-    incident_quality_score: float = 100.0      # Weight: 15%
-    dashboard_usability_score: float = 100.0   # Weight: 15%
-    security_score: float = 100.0              # Weight: 10%
+    monitoring_accuracy_score: float = 100.0  # Weight: 20%
+    alert_reliability_score: float = 100.0  # Weight: 20%
+    incident_quality_score: float = 100.0  # Weight: 15%
+    dashboard_usability_score: float = 100.0  # Weight: 15%
+    security_score: float = 100.0  # Weight: 10%
     overall_score: float = 100.0
     certification_tier: ObservabilityTier = ObservabilityTier.ENTERPRISE_OBSERVABILITY_READY
     certification_verdict: str = "CERTIFIED"

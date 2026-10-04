@@ -1,6 +1,7 @@
 """
 Evidence Manifest & Serialization Engine for Enterprise Document Storage (Part 3G.2C).
 """
+
 import os
 import json
 from dataclasses import asdict, is_dataclass
@@ -61,12 +62,17 @@ class StorageEvidenceManifestEngine(IStorageEvidenceManifestEngine):
             "storage_performance_report.json": verification_data.get("storage_performance"),
             "large_file_benchmark_report.json": {
                 "datasets": verification_data.get("storage_performance").datasets_tested
-                if verification_data.get("storage_performance") and hasattr(verification_data.get("storage_performance"), "datasets_tested")
+                if verification_data.get("storage_performance")
+                and hasattr(verification_data.get("storage_performance"), "datasets_tested")
                 else [],
                 "throughput_summary": {
-                    "avg_backup_mb_s": getattr(verification_data.get("storage_performance"), "avg_backup_throughput_mb_s", 0.0),
-                    "avg_restore_mb_s": getattr(verification_data.get("storage_performance"), "avg_restore_throughput_mb_s", 0.0),
-                }
+                    "avg_backup_mb_s": getattr(
+                        verification_data.get("storage_performance"), "avg_backup_throughput_mb_s", 0.0
+                    ),
+                    "avg_restore_mb_s": getattr(
+                        verification_data.get("storage_performance"), "avg_restore_throughput_mb_s", 0.0
+                    ),
+                },
             },
             "restore_simulation_report.json": verification_data.get("restore_simulation"),
             "cross_system_validation_report.json": verification_data.get("cross_system_validation"),
@@ -75,16 +81,20 @@ class StorageEvidenceManifestEngine(IStorageEvidenceManifestEngine):
                 "verification_status": "COMPLETED_SUCCESSFULLY",
                 "framework_version": "3G.2C_ENTERPRISE_DOCUMENT_STORAGE_VERIFIER",
                 "composite_score": getattr(verification_data.get("storage_quality_scorecard"), "composite_score", 0.0),
-                "certification_tier": getattr(verification_data.get("storage_quality_scorecard"), "certification_tier", "UNKNOWN"),
-                "total_artifacts_verified": getattr(verification_data.get("storage_inventory"), "total_objects_discovered", 0),
+                "certification_tier": getattr(
+                    verification_data.get("storage_quality_scorecard"), "certification_tier", "UNKNOWN"
+                ),
+                "total_artifacts_verified": getattr(
+                    verification_data.get("storage_inventory"), "total_objects_discovered", 0
+                ),
                 "rto_seconds": getattr(verification_data.get("storage_performance"), "rto_seconds", 0.0),
                 "rpo_seconds": getattr(verification_data.get("storage_performance"), "rpo_seconds", 0.0),
                 "tenant_isolation_passed": getattr(verification_data.get("tenant_isolation"), "passed", False),
-                "corruption_detection_rate": getattr(verification_data.get("storage_corruption"), "detection_rate_percent", 0.0),
+                "corruption_detection_rate": getattr(
+                    verification_data.get("storage_corruption"), "detection_rate_percent", 0.0
+                ),
                 "all_phases_passed": all(
-                    getattr(v, "passed", True)
-                    for k, v in verification_data.items()
-                    if hasattr(v, "passed")
+                    getattr(v, "passed", True) for k, v in verification_data.items() if hasattr(v, "passed")
                 ),
             },
         }

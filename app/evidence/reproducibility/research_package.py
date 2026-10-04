@@ -25,7 +25,9 @@ class ACMArtifactMetadata:
     """Metadata conforming to ACM Artifact Evaluation badges."""
 
     title: str
-    acm_badges_claimed: List[str]  # "Artifacts Evaluated - Functional", "Artifacts Evaluated - Reusable", "Results Reproduced"
+    acm_badges_claimed: List[
+        str
+    ]  # "Artifacts Evaluated - Functional", "Artifacts Evaluated - Reusable", "Results Reproduced"
     docker_image_uri: str
     entrypoint_script: str
     hardware_requirements: str
@@ -82,9 +84,18 @@ class ResearchReproducibilityPackageGenerator:
             {"path": "Dockerfile", "sha256": "3a7b9c1d2e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b"},
             {"path": "pyproject.toml", "sha256": "4b8c0d2e3f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c"},
             {"path": "poetry.lock", "sha256": "5c9d1e3f4a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d"},
-            {"path": "run_evidence_suite.py", "sha256": "6d0e2f4a5b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e"},
-            {"path": "evidence/evidence_catalog.json", "sha256": "7e1f3a5b6c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f"},
-            {"path": "evidence/sbom_spdx.json", "sha256": "8f2a4b6c7d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a"},
+            {
+                "path": "run_evidence_suite.py",
+                "sha256": "6d0e2f4a5b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e",
+            },
+            {
+                "path": "evidence/evidence_catalog.json",
+                "sha256": "7e1f3a5b6c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f",
+            },
+            {
+                "path": "evidence/sbom_spdx.json",
+                "sha256": "8f2a4b6c7d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a",
+            },
         ]
 
         metadata = ACMArtifactMetadata(

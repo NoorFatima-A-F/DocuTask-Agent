@@ -1,6 +1,7 @@
 """
 Test Suite: Phase 3I.11 Enterprise Observability Intelligence Platform Integration & Global Reliability Control
 """
+
 import json
 import pytest
 from fastapi.testclient import TestClient
@@ -54,6 +55,7 @@ def api_client():
 
 
 # ─── 1. Verifier Unit Tests ───────────────────────────────────────────────────
+
 
 def test_control_plane_verifier():
     verifier = ControlPlaneVerifier()
@@ -181,6 +183,7 @@ def test_automation_control_verifier():
 
 # ─── 2. Scorer Unit Tests ─────────────────────────────────────────────────────
 
+
 def test_global_operations_scorer():
     runtime = EnterpriseObservabilityRuntime()
     verification_results = runtime.execute_all_verifications()
@@ -200,6 +203,7 @@ def test_global_operations_scorer():
 
 # ─── 3. Exporter Unit Tests ───────────────────────────────────────────────────
 
+
 def test_enterprise_observability_exporter(tmp_path):
     output_dir = tmp_path / "enterprise_obs_test"
     runtime = EnterpriseObservabilityRuntime(output_dir=str(output_dir))
@@ -217,6 +221,7 @@ def test_enterprise_observability_exporter(tmp_path):
 
 
 # ─── 4. REST API Integration Tests ────────────────────────────────────────────
+
 
 def test_api_status_endpoint(api_client):
     response = api_client.get("/api/v1/enterprise-observability/status")

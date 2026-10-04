@@ -8,6 +8,7 @@ from enum import Enum
 
 class EnvironmentType(str, Enum):
     """Runtime execution environment tier."""
+
     DEV = "DEV"
     STAGING = "STAGING"
     PROD = "PROD"

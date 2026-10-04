@@ -16,6 +16,7 @@ from app.agents.reflection.recommendation_engine import Recommendation, Subsyste
 
 class AdaptationType(str, Enum):
     """Supported adaptation domains."""
+
     PLANNER_ADAPTATION = "PLANNER_ADAPTATION"
     EXECUTION_ADAPTATION = "EXECUTION_ADAPTATION"
     SCHEDULING_ADAPTATION = "SCHEDULING_ADAPTATION"
@@ -25,6 +26,7 @@ class AdaptationType(str, Enum):
 
 class AdaptationStatus(str, Enum):
     """Approval lifecycle for adaptation proposals."""
+
     PROPOSED = "PROPOSED"
     APPROVED = "APPROVED"
     REJECTED = "REJECTED"
@@ -33,6 +35,7 @@ class AdaptationStatus(str, Enum):
 
 class AdaptationProposal(BaseModel):
     """Formal proposal to alter planner heuristics, runtime parameters, or tool mappings."""
+
     proposal_id: UUID = Field(default_factory=uuid4)
     adaptation_type: AdaptationType
     target_subsystem: SubsystemTarget
@@ -46,10 +49,7 @@ class AdaptationProposal(BaseModel):
 
     def approve(self, approver_id: str) -> "AdaptationProposal":
         """Approves proposal for activation."""
-        return self.model_copy(update={
-            "status": AdaptationStatus.APPROVED,
-            "approved_by": approver_id
-        })
+        return self.model_copy(update={"status": AdaptationStatus.APPROVED, "approved_by": approver_id})
 
     def activate(self) -> "AdaptationProposal":
         """Activates an approved adaptation."""
@@ -72,44 +72,52 @@ class AdaptationEngine(IAdaptationEngine):
                 continue
 
             if rec.target_subsystem == SubsystemTarget.PLANNER:
-                proposals.append(AdaptationProposal(
-                    proposal_id=uuid4(),
-                    adaptation_type=AdaptationType.PLANNER_ADAPTATION,
-                    target_subsystem=rec.target_subsystem,
-                    title=f"Plan Heuristic Update: {rec.title}",
-                    rationale=rec.rationale,
-                    suggested_configuration={"constraint_check": True, "action": rec.action_type},
-                    risk_assessment="LOW"
-                ))
+                proposals.append(
+                    AdaptationProposal(
+                        proposal_id=uuid4(),
+                        adaptation_type=AdaptationType.PLANNER_ADAPTATION,
+                        target_subsystem=rec.target_subsystem,
+                        title=f"Plan Heuristic Update: {rec.title}",
+                        rationale=rec.rationale,
+                        suggested_configuration={"constraint_check": True, "action": rec.action_type},
+                        risk_assessment="LOW",
+                    )
+                )
             elif rec.target_subsystem == SubsystemTarget.EXECUTION:
-                proposals.append(AdaptationProposal(
-                    proposal_id=uuid4(),
-                    adaptation_type=AdaptationType.EXECUTION_ADAPTATION,
-                    target_subsystem=rec.target_subsystem,
-                    title=f"Runtime Optimization: {rec.title}",
-                    rationale=rec.rationale,
-                    suggested_configuration={"concurrency_target": 6},
-                    risk_assessment="LOW"
-                ))
+                proposals.append(
+                    AdaptationProposal(
+                        proposal_id=uuid4(),
+                        adaptation_type=AdaptationType.EXECUTION_ADAPTATION,
+                        target_subsystem=rec.target_subsystem,
+                        title=f"Runtime Optimization: {rec.title}",
+                        rationale=rec.rationale,
+                        suggested_configuration={"concurrency_target": 6},
+                        risk_assessment="LOW",
+                    )
+                )
             elif rec.target_subsystem == SubsystemTarget.TOOL_REGISTRY:
-                proposals.append(AdaptationProposal(
-                    proposal_id=uuid4(),
-                    adaptation_type=AdaptationType.TOOL_ADAPTATION,
-                    target_subsystem=rec.target_subsystem,
-                    title=f"Tool Registry Adjustment: {rec.title}",
-                    rationale=rec.rationale,
-                    suggested_configuration={"prefer_validated_tools": True},
-                    risk_assessment="LOW"
-                ))
+                proposals.append(
+                    AdaptationProposal(
+                        proposal_id=uuid4(),
+                        adaptation_type=AdaptationType.TOOL_ADAPTATION,
+                        target_subsystem=rec.target_subsystem,
+                        title=f"Tool Registry Adjustment: {rec.title}",
+                        rationale=rec.rationale,
+                        suggested_configuration={"prefer_validated_tools": True},
+                        risk_assessment="LOW",
+                    )
+                )
             elif rec.target_subsystem == SubsystemTarget.RECOVERY:
-                proposals.append(AdaptationProposal(
-                    proposal_id=uuid4(),
-                    adaptation_type=AdaptationType.RECOVERY_ADAPTATION,
-                    target_subsystem=rec.target_subsystem,
-                    title=f"Recovery Tuning: {rec.title}",
-                    rationale=rec.rationale,
-                    suggested_configuration={"backoff_mode": "EXPONENTIAL_JITTER"},
-                    risk_assessment="LOW"
-                ))
+                proposals.append(
+                    AdaptationProposal(
+                        proposal_id=uuid4(),
+                        adaptation_type=AdaptationType.RECOVERY_ADAPTATION,
+                        target_subsystem=rec.target_subsystem,
+                        title=f"Recovery Tuning: {rec.title}",
+                        rationale=rec.rationale,
+                        suggested_configuration={"backoff_mode": "EXPONENTIAL_JITTER"},
+                        risk_assessment="LOW",
+                    )
+                )
 
         return proposals

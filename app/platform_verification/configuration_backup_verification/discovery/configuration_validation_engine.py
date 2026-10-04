@@ -1,6 +1,7 @@
 """
 Configuration Validation Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
+
 from typing import List
 
 from app.platform_verification.configuration_backup_verification.domain.models import (
@@ -33,9 +34,7 @@ class ConfigurationValidationEngine(IConfigurationValidationEngine):
         "ENABLE_VECTOR_SEARCH",
     ]
 
-    def validate_required_configurations(
-        self, catalog: ConfigurationCatalogReport
-    ) -> ConfigurationValidationReport:
+    def validate_required_configurations(self, catalog: ConfigurationCatalogReport) -> ConfigurationValidationReport:
         """
         Executes strict semantic validation against the configuration catalog.
         """

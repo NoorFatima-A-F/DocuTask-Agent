@@ -1,4 +1,5 @@
 """GitOps Drift Detection and Policy Enforcement (Req 28, 29)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -7,6 +8,7 @@ from typing import Any, Dict
 
 class DriftClassification(str, Enum):
     """Types of infrastructure state drift (Req 28)."""
+
     EXPECTED_DRIFT = "EXPECTED_DRIFT"
     UNAUTHORIZED_DRIFT = "UNAUTHORIZED_DRIFT"
     EMERGENCY_CHANGE = "EMERGENCY_CHANGE"
@@ -15,6 +17,7 @@ class DriftClassification(str, Enum):
 
 class DriftPolicyAction(str, Enum):
     """Remediation actions triggered by detected drift (Req 29)."""
+
     REPORT = "REPORT"
     RECONCILE = "RECONCILE"
     REQUIRE_APPROVAL = "REQUIRE_APPROVAL"
@@ -25,6 +28,7 @@ class DriftPolicyAction(str, Enum):
 @dataclass
 class DriftReport:
     """Detailed drift detection analysis."""
+
     environment: str
     component: str
     has_drift: bool

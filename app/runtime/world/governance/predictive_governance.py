@@ -56,14 +56,16 @@ class PredictiveGovernanceEngine:
         )
 
         self._approvals[aid] = record
-        self._audit_log.append({
-            "action": "PREDICTIVE_GOVERNANCE_REVIEW",
-            "approval_id": aid,
-            "target": target_prediction_id,
-            "decision": decision,
-            "signature": sig,
-            "timestamp": record.timestamp,
-        })
+        self._audit_log.append(
+            {
+                "action": "PREDICTIVE_GOVERNANCE_REVIEW",
+                "approval_id": aid,
+                "target": target_prediction_id,
+                "decision": decision,
+                "signature": sig,
+                "timestamp": record.timestamp,
+            }
+        )
 
         return True, record, "Prediction successfully authorized with cryptographic signature."
 

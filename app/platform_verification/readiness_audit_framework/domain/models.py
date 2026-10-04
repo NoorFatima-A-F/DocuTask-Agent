@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 
 class EvidenceStatus(str, Enum):
     """Standardized verification execution statuses."""
+
     PASS = "PASS"
     WARNING = "WARNING"
     FAILED = "FAILED"
@@ -21,6 +22,7 @@ class EvidenceStatus(str, Enum):
 
 class EvidenceSeverity(str, Enum):
     """Severity levels for evidence records and issues."""
+
     INFO = "INFO"
     LOW = "LOW"
     MEDIUM = "MEDIUM"
@@ -30,15 +32,17 @@ class EvidenceSeverity(str, Enum):
 
 class AuditCertificationTier(str, Enum):
     """Audit quality certification tiers."""
+
     ENTERPRISE_EVIDENCE_CERTIFIED = "Enterprise Evidence Certified"  # 95 - 100%
-    PRODUCTION_ACCEPTABLE = "Production Acceptable"                  # 90 - 94.99%
-    NEEDS_IMPROVEMENT = "Needs Improvement"                          # 80 - 89.99%
-    REJECTED = "Rejected"                                            # < 80%
+    PRODUCTION_ACCEPTABLE = "Production Acceptable"  # 90 - 94.99%
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80 - 89.99%
+    REJECTED = "Rejected"  # < 80%
 
 
 @dataclass
 class StandardizedEvidenceRecord:
     """Universal schema-standardized verification record (3H.3.12.2)."""
+
     verification_id: str
     phase: str = "3H.3"
     category: str = "readiness"
@@ -57,6 +61,7 @@ class StandardizedEvidenceRecord:
 @dataclass
 class EvidenceMetadata:
     """Automated runtime and application metadata (3H.3.12.4)."""
+
     project: str = "DocuTask-Agent"
     phase: str = "3H.3.12"
     environment: str = "production-simulation"
@@ -74,6 +79,7 @@ class EvidenceMetadata:
 @dataclass
 class ArtifactIntegrityRecord:
     """SHA-256 cryptographic integrity hash for an evidence artifact (3H.3.12.5)."""
+
     file_name: str
     relative_path: str
     sha256_hash: str
@@ -84,6 +90,7 @@ class ArtifactIntegrityRecord:
 @dataclass
 class EvidenceIntegrityReport:
     """Results of Evidence Integrity Verification (3H.3.12.5)."""
+
     total_artifacts_hashed: int = 13
     all_hashes_verified: bool = True
     tampering_detected: bool = False
@@ -94,6 +101,7 @@ class EvidenceIntegrityReport:
 @dataclass
 class TimelineEvent:
     """Chronological event in readiness lifecycle (3H.3.12.6)."""
+
     timestamp: str
     event_name: str
     state_before: str
@@ -104,6 +112,7 @@ class TimelineEvent:
 @dataclass
 class ReadinessTimelineReport:
     """Timeline reconstruction report measuring TTR and recovery (3H.3.12.6)."""
+
     time_to_ready_seconds: float = 2.35
     recovery_time_seconds: float = 2.45
     events: List[TimelineEvent] = field(default_factory=list)
@@ -114,6 +123,7 @@ class ReadinessTimelineReport:
 @dataclass
 class FailureEvidenceRecord:
     """Documented failure experiment and recovery lifecycle (3H.3.12.7)."""
+
     failure_id: str
     failure_name: str
     detection_time_seconds: float
@@ -126,6 +136,7 @@ class FailureEvidenceRecord:
 @dataclass
 class FailureEvidenceReport:
     """First-class documentation of failure simulations (3H.3.12.7)."""
+
     total_failures_tested: int = 4
     all_recoveries_validated: bool = True
     failure_records: List[FailureEvidenceRecord] = field(default_factory=list)
@@ -135,6 +146,7 @@ class FailureEvidenceReport:
 @dataclass
 class RegressionComparison:
     """Comparison between historical baseline and current version (3H.3.12.8)."""
+
     metric_name: str
     baseline_value: float
     current_value: float
@@ -146,6 +158,7 @@ class RegressionComparison:
 @dataclass
 class ReadinessRegressionReport:
     """Historical comparison and regression analysis report (3H.3.12.8)."""
+
     baseline_version: str = "1.0.0"
     current_version: str = "1.1.0"
     comparisons: List[RegressionComparison] = field(default_factory=list)
@@ -156,12 +169,13 @@ class ReadinessRegressionReport:
 @dataclass
 class AuditQualityScorecard:
     """Composite Weighted Evidence Quality Scorecard (3H.3.12.11)."""
-    evidence_completeness_score: float = 100.0   # Weight: 25%
-    metadata_accuracy_score: float = 100.0       # Weight: 15%
-    reproducibility_score: float = 100.0         # Weight: 20%
+
+    evidence_completeness_score: float = 100.0  # Weight: 25%
+    metadata_accuracy_score: float = 100.0  # Weight: 15%
+    reproducibility_score: float = 100.0  # Weight: 20%
     integrity_verification_score: float = 100.0  # Weight: 15%
-    historical_comparison_score: float = 100.0   # Weight: 10%
-    audit_usability_score: float = 100.0         # Weight: 15%
+    historical_comparison_score: float = 100.0  # Weight: 10%
+    audit_usability_score: float = 100.0  # Weight: 15%
     overall_score: float = 100.0
     certification_tier: AuditCertificationTier = AuditCertificationTier.ENTERPRISE_EVIDENCE_CERTIFIED
     certification_verdict: str = "CERTIFIED"

@@ -2,11 +2,13 @@
 Standard Testing Pyramid Orchestrator.
 Sequences all 10 verification test layers and generates structured execution evidence.
 """
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Dict, List, Callable, Any
 import time
+
 
 class TestTier(str, Enum):
     __test__ = False
@@ -22,6 +24,7 @@ class TestTier(str, Enum):
     REGRESSION = "REGRESSION"
     BUSINESS_ACCEPTANCE = "BUSINESS_ACCEPTANCE"
 
+
 @dataclass
 class TestTierResult:
     __test__ = False
@@ -33,6 +36,7 @@ class TestTierResult:
     duration_ms: float
     evidence_payload: Dict[str, Any] = field(default_factory=dict)
     errors: List[str] = field(default_factory=list)
+
 
 @dataclass
 class TestSuiteReport:
@@ -53,9 +57,11 @@ class TestSuiteReport:
         passed = sum(r.passed_tests for r in self.tier_results)
         return passed / total
 
+
 class TestingPyramidRunner:
     __test__ = False
     """Executes the standard verification testing hierarchy for a target bounded context."""
+
     def __init__(self, target_module: str = "core"):
         self.target_module = target_module
         self._tier_handlers: Dict[TestTier, Callable[[], TestTierResult]] = {}
@@ -65,6 +71,7 @@ class TestingPyramidRunner:
 
     def execute_all_tiers(self, stop_on_failure: bool = True) -> TestSuiteReport:
         import uuid
+
         started_at = datetime.now(timezone.utc).isoformat()
         start_mono = time.monotonic()
         results: List[TestTierResult] = []
@@ -80,7 +87,7 @@ class TestingPyramidRunner:
             TestTier.PERFORMANCE,
             TestTier.SECURITY,
             TestTier.CHAOS,
-            TestTier.REGRESSION
+            TestTier.REGRESSION,
         ]
 
         for tier in tiers_in_order:
@@ -96,7 +103,7 @@ class TestingPyramidRunner:
                     passed_tests=1,
                     failed_tests=0,
                     duration_ms=1.0,
-                    evidence_payload={"status": "auto_verified", "tier": tier.value}
+                    evidence_payload={"status": "auto_verified", "tier": tier.value},
                 )
             results.append(res)
             if not res.passed:
@@ -114,5 +121,5 @@ class TestingPyramidRunner:
             started_at=started_at,
             completed_at=completed_at,
             tier_results=results,
-            total_duration_ms=total_duration_ms
+            total_duration_ms=total_duration_ms,
         )

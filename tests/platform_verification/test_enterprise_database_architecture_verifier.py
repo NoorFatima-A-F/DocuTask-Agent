@@ -1,8 +1,11 @@
 """
 Comprehensive Test Suite for Part 2F: Enterprise Database Architecture Verification Framework.
 """
+
 import pytest
-from app.platform_verification.database_verification.runtime.database_verification_runtime import DatabaseVerificationRuntime
+from app.platform_verification.database_verification.runtime.database_verification_runtime import (
+    DatabaseVerificationRuntime,
+)
 from app.platform_verification.database_verification.domain.models import (
     DatabaseCertificationTier,
     TableSchemaDefinition,
@@ -24,7 +27,13 @@ def test_schema_analyzer_and_normalization(db_runtime):
             table_name="valid_table",
             columns={
                 "id": ColumnDefinition(name="id", data_type="uuid", is_primary_key=True),
-                "tenant_id": ColumnDefinition(name="tenant_id", data_type="uuid", is_foreign_key=True, foreign_target="tenants.id", is_indexed=True),
+                "tenant_id": ColumnDefinition(
+                    name="tenant_id",
+                    data_type="uuid",
+                    is_foreign_key=True,
+                    foreign_target="tenants.id",
+                    is_indexed=True,
+                ),
                 "status": ColumnDefinition(name="status", data_type="varchar", is_nullable=False),
             },
             primary_key_columns=["id"],
@@ -61,7 +70,9 @@ def test_migration_safety_and_rollback(db_runtime):
     assert safe_rep.all_rollbacks_tested
 
     unsafe_migrations = [
-        MigrationStep(version="003", description="Drop legacy columns", has_upgrade=True, has_downgrade=False, is_destructive=True),
+        MigrationStep(
+            version="003", description="Drop legacy columns", has_upgrade=True, has_downgrade=False, is_destructive=True
+        ),
     ]
     unsafe_rep = db_runtime.migration_validator.validate_migrations(unsafe_migrations)
     assert unsafe_rep.status == "FAIL"
@@ -107,7 +118,12 @@ def test_query_performance_and_sequential_scan_detection(db_runtime):
         )
     }
     queries = [
-        {"table": "documents", "filter_columns": ["status", "created_at"], "join_in_loop": True, "simulated_latency_ms": 25.0}
+        {
+            "table": "documents",
+            "filter_columns": ["status", "created_at"],
+            "join_in_loop": True,
+            "simulated_latency_ms": 25.0,
+        }
     ]
 
     report = db_runtime.query_analyzer.analyze_queries(queries, schemas)
@@ -119,14 +135,25 @@ def test_query_performance_and_sequential_scan_detection(db_runtime):
 def test_tenant_isolation_and_cross_leak_detection(db_runtime):
     """Verifies that missing tenant_id filters and cross-tenant data leaks are caught."""
     clean_queries = [
-        {"name": "q1", "filters": {"tenant_id": "tenant_1"}, "target_tenant": "tenant_1", "authenticated_tenant": "tenant_1"}
+        {
+            "name": "q1",
+            "filters": {"tenant_id": "tenant_1"},
+            "target_tenant": "tenant_1",
+            "authenticated_tenant": "tenant_1",
+        }
     ]
     clean_rep = db_runtime.isolation_validator.validate_isolation(clean_queries)
     assert clean_rep.status == "PASS"
     assert not clean_rep.cross_tenant_leak_detected
 
     leaky_queries = [
-        {"name": "leaky_q", "filters": {}, "target_tenant": "tenant_2", "authenticated_tenant": "tenant_1", "returned_record_count": 3}
+        {
+            "name": "leaky_q",
+            "filters": {},
+            "target_tenant": "tenant_2",
+            "authenticated_tenant": "tenant_1",
+            "returned_record_count": 3,
+        }
     ]
     leaky_rep = db_runtime.isolation_validator.validate_isolation(leaky_queries)
     assert leaky_rep.status == "FAIL"

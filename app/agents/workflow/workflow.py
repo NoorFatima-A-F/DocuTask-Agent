@@ -16,6 +16,7 @@ class Workflow(BaseModel):
     Workflow Aggregate Root.
     Encapsulates definition, runtime instance, and execution metadata.
     """
+
     definition: WorkflowDefinition
     instance: WorkflowInstance
     statistics: WorkflowStatistics = Field(default_factory=WorkflowStatistics)

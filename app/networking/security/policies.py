@@ -75,8 +75,7 @@ class NetworkPolicyEngine:
         """Evaluate traffic against active policies, sorted by rule priority."""
         # Collect applicable active policies for the target namespace
         matching_policies = [
-            p for p in self._policies.values()
-            if p.enabled and (p.namespace == target_namespace or p.namespace == "*")
+            p for p in self._policies.values() if p.enabled and (p.namespace == target_namespace or p.namespace == "*")
         ]
 
         if not matching_policies:
@@ -91,7 +90,9 @@ class NetworkPolicyEngine:
         all_rules.sort(key=lambda r: r.priority)
 
         for rule in all_rules:
-            if self._rule_matches(rule, source_service, source_namespace, target_service, target_namespace, method, path):
+            if self._rule_matches(
+                rule, source_service, source_namespace, target_service, target_namespace, method, path
+            ):
                 return rule.action
 
         return self.default_action

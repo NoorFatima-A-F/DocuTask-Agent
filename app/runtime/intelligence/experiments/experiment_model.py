@@ -53,6 +53,7 @@ class ExperimentRun:
     """
     Formal experimental verification comparing Control vs Candidate strategies.
     """
+
     experiment_id: str
     title: str
     hypothesis_id: str
@@ -62,17 +63,17 @@ class ExperimentRun:
     status: ExperimentStatus = ExperimentStatus.PENDING
     created_at: float = field(default_factory=time.time)
     concluded_at: Optional[float] = None
-    
+
     # Raw Trial Results
     control_trials: List[TrialResult] = field(default_factory=list)
     candidate_trials: List[TrialResult] = field(default_factory=list)
-    
+
     # Statistical Metrics
     latency_comparison: Optional[StatisticalComparisonResult] = None
     cost_comparison: Optional[StatisticalComparisonResult] = None
     confidence_comparison: Optional[StatisticalComparisonResult] = None
     retry_comparison: Optional[StatisticalComparisonResult] = None
-    
+
     # Overall Outcome & Promotion Justification
     promotes_candidate: bool = False
     verdict_summary: str = ""

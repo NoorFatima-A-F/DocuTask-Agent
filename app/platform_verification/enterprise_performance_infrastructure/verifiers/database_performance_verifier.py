@@ -63,7 +63,11 @@ class DatabasePerformanceVerifier(IDatabasePerformanceVerifier):
                 name="Index Optimization Complete",
                 passed=missing_indexes_count == 0 and sequential_scans_count == 0 and slow_queries_count == 0,
                 details="Zero missing indexes, zero sequential scans, zero slow queries — fully optimized",
-                metrics={"missing_indexes": missing_indexes_count, "seq_scans": sequential_scans_count, "slow_queries": slow_queries_count},
+                metrics={
+                    "missing_indexes": missing_indexes_count,
+                    "seq_scans": sequential_scans_count,
+                    "slow_queries": slow_queries_count,
+                },
             ),
         ]
 

@@ -14,7 +14,7 @@ class ReadinessPillar:
     name: str
     weight: float
     score: float  # 0.0 - 100.0
-    status: str   # "OPTIMAL", "ACCEPTABLE", "NEEDS_ATTENTION"
+    status: str  # "OPTIMAL", "ACCEPTABLE", "NEEDS_ATTENTION"
     metrics_summary: str
     audit_findings: List[str] = field(default_factory=list)
 
@@ -22,7 +22,7 @@ class ReadinessPillar:
 @dataclass
 class ProductionReadinessReport:
     composite_readiness_score: float  # 0.0 - 100.0
-    readiness_grade: str              # "GRADE_A_ENTERPRISE", "GRADE_B", "GRADE_C"
+    readiness_grade: str  # "GRADE_A_ENTERPRISE", "GRADE_B", "GRADE_C"
     pillars: List[ReadinessPillar]
     is_launch_certified: bool = True
     certification_timestamp_utc: float = field(default_factory=time.time)

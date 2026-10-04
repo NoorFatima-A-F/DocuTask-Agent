@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class FleetAnalyticsSummary:
     """Consolidated telemetry across all agent executions."""
+
     total_agents_registered: int = 0
     total_goals_created: int = 0
     total_tasks_completed: int = 0

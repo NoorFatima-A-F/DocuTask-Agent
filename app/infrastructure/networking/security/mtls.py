@@ -13,6 +13,7 @@ logger = logging.getLogger("app.infrastructure.networking.security.mtls")
 @dataclass
 class MTLSValidationResult:
     """Outcome of mutual TLS verification."""
+
     is_valid: bool
     caller_spiffe_id: str = ""
     destination_spiffe_id: str = ""

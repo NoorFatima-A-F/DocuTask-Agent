@@ -1,6 +1,7 @@
 """
 Discovery package for Document Storage Verification.
 """
+
 from app.platform_verification.document_storage_verification.discovery.storage_inventory_engine import (
     StorageInventoryEngine,
 )

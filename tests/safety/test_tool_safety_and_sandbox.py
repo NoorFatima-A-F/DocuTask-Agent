@@ -7,10 +7,10 @@ from app.safety.tools.sandbox import ToolSandboxEngine
 
 def test_tool_permission_manager():
     mgr = ToolPermissionManager()
-    
+
     # Safe read allowed for standard user
     assert mgr.can_invoke("view_file", user_role="user") is True
-    
+
     # Destructive high risk blocked for standard user
     assert mgr.can_invoke("delete_database_table", user_role="user") is False
     assert mgr.can_invoke("delete_database_table", user_role="admin") is True
@@ -18,7 +18,7 @@ def test_tool_permission_manager():
 
 def test_tool_safety_validator_dangerous_parameters():
     validator = ToolSafetyValidator()
-    
+
     # Path traversal attempt
     is_safe, violations = validator.validate_tool_invocation(
         tool_name="view_file",
@@ -40,7 +40,7 @@ def test_tool_safety_validator_dangerous_parameters():
 
 def test_tool_sandbox_execution_and_dry_run():
     sandbox = ToolSandboxEngine()
-    
+
     # Dry run should pass without performing live mutations
     res_dry = sandbox.execute_in_sandbox(
         tool_name="write_to_file",

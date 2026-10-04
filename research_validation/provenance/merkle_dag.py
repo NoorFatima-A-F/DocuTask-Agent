@@ -18,6 +18,7 @@ from research_validation.provenance.provenance_models import EvidenceNode
 @dataclass
 class MerkleVerificationResult:
     """Detailed verification outcome for a Merkle DAG."""
+
     is_valid: bool
     total_nodes: int
     verified_nodes: int
@@ -36,7 +37,7 @@ class MerkleDAG:
         self.algorithm = algorithm
         self.nodes: Dict[str, EvidenceNode] = {}
         self.children_map: Dict[str, Set[str]] = {}  # parent_id -> set of child_ids
-        self.parents_map: Dict[str, Set[str]] = {}   # child_id -> set of parent_ids
+        self.parents_map: Dict[str, Set[str]] = {}  # child_id -> set of parent_ids
 
     def add_node(self, node: EvidenceNode) -> None:
         """Add an immutable evidence node to the Merkle DAG."""
@@ -95,7 +96,7 @@ class MerkleDAG:
                 corrupted_nodes=[],
                 broken_edges=[],
                 root_merkle_digest="",
-                diagnostics=diagnostics
+                diagnostics=diagnostics,
             )
 
         for node_id, node in self.nodes.items():
@@ -123,11 +124,13 @@ class MerkleDAG:
             recomputed_hash = ProvenanceHasher.hash_canonical_json(content_to_hash, algorithm=node.algorithm)
             if recomputed_hash != node.node_hash:
                 corrupted_nodes.append(node_id)
-                diagnostics.append(f"Node '{node_id}' payload/metadata altered. Recorded: {node.node_hash[:12]}..., Computed: {recomputed_hash[:12]}...")
+                diagnostics.append(
+                    f"Node '{node_id}' payload/metadata altered. Recorded: {node.node_hash[:12]}..., Computed: {recomputed_hash[:12]}..."
+                )
             else:
                 verified_count += 1
 
-        is_valid = (len(corrupted_nodes) == 0 and len(broken_edges) == 0)
+        is_valid = len(corrupted_nodes) == 0 and len(broken_edges) == 0
         root_digest = self.compute_root_digest() if is_valid else ""
 
         return MerkleVerificationResult(
@@ -137,7 +140,7 @@ class MerkleDAG:
             corrupted_nodes=corrupted_nodes,
             broken_edges=broken_edges,
             root_merkle_digest=root_digest,
-            diagnostics=diagnostics
+            diagnostics=diagnostics,
         )
 
     def get_descendant_node_ids(self, node_id: str) -> Set[str]:

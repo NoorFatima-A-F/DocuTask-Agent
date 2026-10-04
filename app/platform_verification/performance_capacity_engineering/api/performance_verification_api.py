@@ -2,6 +2,7 @@
 Phase 3J.1: Performance Verification REST API Router
 Provides endpoints for baseline metrics, load testing results, bottleneck diagnostics, and performance certification.
 """
+
 from fastapi import APIRouter, HTTPException
 from typing import Dict, Any
 

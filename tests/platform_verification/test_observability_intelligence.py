@@ -1,6 +1,7 @@
 """
 Test Suite: Phase 3I.9 Observability Intelligence, Predictive Reliability & AIOps Maturity
 """
+
 import os
 import json
 import pytest
@@ -75,6 +76,7 @@ from app.platform_verification.observability_intelligence.api.observability_inte
 
 
 # ─── 1. Individual Verifier Tests ─────────────────────────────────────────────
+
 
 def test_aiops_architecture_verifier():
     verifier = AIOpsArchitectureVerifier()
@@ -207,6 +209,7 @@ def test_aiops_validation_verifier():
 
 # ─── 2. Scorer Tests ──────────────────────────────────────────────────────────
 
+
 def test_predictive_reliability_scorer():
     runtime = ObservabilityIntelligenceRuntime()
     scorer = runtime.scorer
@@ -238,6 +241,7 @@ def test_predictive_reliability_scorer():
 
 
 # ─── 3. Exporter & Artifact Verification ──────────────────────────────────────
+
 
 def test_observability_intelligence_evidence_exporter(tmp_path):
     output_dir = str(tmp_path / "intelligence_test_export")
@@ -274,6 +278,7 @@ def test_observability_intelligence_evidence_exporter(tmp_path):
 
 
 # ─── 4. REST API Endpoints ───────────────────────────────────────────────────
+
 
 @pytest.fixture
 def api_client():

@@ -1,4 +1,5 @@
 """Enterprise Feature Flag Management Platform."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -9,6 +10,7 @@ from .evaluation import FlagEvaluationContext, FlagEvaluator
 @dataclass
 class FeatureFlag:
     """Feature flag definition and rollout rule set."""
+
     key: str
     name: str
     description: str = ""

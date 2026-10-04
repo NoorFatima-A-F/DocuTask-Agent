@@ -29,10 +29,26 @@ class DatabaseSecurityVerifier(IDatabaseSecurityVerifier):
 
     def verify(self) -> DatabaseSecurityReport:
         pillars = [
-            DatabaseSecurityPillar(security_control="Transport Encryption", applied_policy="sslmode=verify-full with TLS 1.3", enforced=True),
-            DatabaseSecurityPillar(security_control="Least Privilege Database User", applied_policy="docutask_app user granted only SELECT, INSERT, UPDATE on application tables", enforced=True),
-            DatabaseSecurityPillar(security_control="DDL Destruction Prevention", applied_policy="DROP DATABASE, DROP TABLE, TRUNCATE revoked from app runtime user", enforced=True),
-            DatabaseSecurityPillar(security_control="Database Audit Logging (pgaudit)", applied_policy="All DDL, authentication failures, and privilege escalations logged", enforced=True),
+            DatabaseSecurityPillar(
+                security_control="Transport Encryption",
+                applied_policy="sslmode=verify-full with TLS 1.3",
+                enforced=True,
+            ),
+            DatabaseSecurityPillar(
+                security_control="Least Privilege Database User",
+                applied_policy="docutask_app user granted only SELECT, INSERT, UPDATE on application tables",
+                enforced=True,
+            ),
+            DatabaseSecurityPillar(
+                security_control="DDL Destruction Prevention",
+                applied_policy="DROP DATABASE, DROP TABLE, TRUNCATE revoked from app runtime user",
+                enforced=True,
+            ),
+            DatabaseSecurityPillar(
+                security_control="Database Audit Logging (pgaudit)",
+                applied_policy="All DDL, authentication failures, and privilege escalations logged",
+                enforced=True,
+            ),
         ]
 
         checks = [

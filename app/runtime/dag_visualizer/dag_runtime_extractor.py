@@ -136,12 +136,30 @@ class DAGRuntimeExtractor:
         ]
 
         edges = [
-            DAGVisualizerEdge(source="task_ingest", target="task_ocr_tess", edge_type="HARD_DEPENDENCY", is_critical=True),
-            DAGVisualizerEdge(source="task_ocr_tess", target="task_entity_extract", edge_type="HARD_DEPENDENCY", is_critical=True),
-            DAGVisualizerEdge(source="task_ocr_tess", target="task_memory_recall", edge_type="HARD_DEPENDENCY", is_critical=False),
-            DAGVisualizerEdge(source="task_entity_extract", target="task_cross_validation", edge_type="HARD_DEPENDENCY", is_critical=True),
-            DAGVisualizerEdge(source="task_memory_recall", target="task_cross_validation", edge_type="HARD_DEPENDENCY", is_critical=False),
-            DAGVisualizerEdge(source="task_cross_validation", target="task_db_commit", edge_type="HARD_DEPENDENCY", is_critical=True),
+            DAGVisualizerEdge(
+                source="task_ingest", target="task_ocr_tess", edge_type="HARD_DEPENDENCY", is_critical=True
+            ),
+            DAGVisualizerEdge(
+                source="task_ocr_tess", target="task_entity_extract", edge_type="HARD_DEPENDENCY", is_critical=True
+            ),
+            DAGVisualizerEdge(
+                source="task_ocr_tess", target="task_memory_recall", edge_type="HARD_DEPENDENCY", is_critical=False
+            ),
+            DAGVisualizerEdge(
+                source="task_entity_extract",
+                target="task_cross_validation",
+                edge_type="HARD_DEPENDENCY",
+                is_critical=True,
+            ),
+            DAGVisualizerEdge(
+                source="task_memory_recall",
+                target="task_cross_validation",
+                edge_type="HARD_DEPENDENCY",
+                is_critical=False,
+            ),
+            DAGVisualizerEdge(
+                source="task_cross_validation", target="task_db_commit", edge_type="HARD_DEPENDENCY", is_critical=True
+            ),
         ]
 
         critical_nodes = [n.id for n in nodes if n.is_on_critical_path]

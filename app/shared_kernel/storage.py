@@ -2,10 +2,12 @@
 Neutral File and Storage Contracts.
 Standardizes storage abstractions for Evidence, Datasets, Artifacts, and Snapshots without cloud SDK coupling.
 """
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional, Dict, Any
+
 
 class StorageType(str, Enum):
     ARTIFACT = "ARTIFACT"
@@ -14,6 +16,7 @@ class StorageType(str, Enum):
     SNAPSHOT = "SNAPSHOT"
     TEMPORARY = "TEMPORARY"
 
+
 @dataclass(frozen=True)
 class FileMetadata:
     storage_key: str
@@ -21,6 +24,7 @@ class FileMetadata:
     sha256_hash: str
     media_type: str = "application/octet-stream"
     metadata: Dict[str, Any] = field(default_factory=dict)
+
 
 class FileStorageContract(ABC):
     @abstractmethod
@@ -39,14 +43,18 @@ class FileStorageContract(ABC):
     async def delete(self, key: str) -> bool:
         pass
 
+
 class ArtifactStorageContract(FileStorageContract):
     pass
+
 
 class EvidenceStorageContract(FileStorageContract):
     pass
 
+
 class DatasetStorageContract(FileStorageContract):
     pass
+
 
 class TemporaryStorageContract(FileStorageContract):
     pass

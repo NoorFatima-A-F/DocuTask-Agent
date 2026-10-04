@@ -79,7 +79,13 @@ class ObservabilitySDK:
         self.widget_evaluator = WidgetQueryEvaluator(self.metric_registry)
 
     # --- Metrics ---
-    def record_metric(self, name: str, value: float, metric_type: MetricType = MetricType.GAUGE, labels: Optional[Dict[str, str]] = None) -> None:
+    def record_metric(
+        self,
+        name: str,
+        value: float,
+        metric_type: MetricType = MetricType.GAUGE,
+        labels: Optional[Dict[str, str]] = None,
+    ) -> None:
         self.metric_registry.record(name, value, metric_type, labels)
         self.telemetry.gauge(name, value, labels)
 
@@ -101,7 +107,9 @@ class ObservabilitySDK:
         return self.log_index.search(**kwargs)
 
     # --- Distributed Tracing ---
-    def trace_span(self, operation_name: str, span_kind: SpanKind = SpanKind.INTERNAL, attributes: Optional[Dict] = None):
+    def trace_span(
+        self, operation_name: str, span_kind: SpanKind = SpanKind.INTERNAL, attributes: Optional[Dict] = None
+    ):
         return self.tracer.trace(operation_name, span_kind=span_kind, attributes=attributes)
 
     def analyze_trace(self, trace_id: str) -> Optional[TraceAnalysisReport]:

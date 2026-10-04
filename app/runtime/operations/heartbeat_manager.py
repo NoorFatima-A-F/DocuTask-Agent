@@ -29,7 +29,16 @@ class HeartbeatManager:
         self._seed_heartbeats()
 
     def _seed_heartbeats(self):
-        depts = ["dept_executive", "dept_ocr", "dept_extraction", "dept_validation", "dept_memory", "dept_research", "dept_governance", "dept_qa"]
+        depts = [
+            "dept_executive",
+            "dept_ocr",
+            "dept_extraction",
+            "dept_validation",
+            "dept_memory",
+            "dept_research",
+            "dept_governance",
+            "dept_qa",
+        ]
         for d in depts:
             self.heartbeats[d] = DepartmentHeartbeat(
                 department_id=d,

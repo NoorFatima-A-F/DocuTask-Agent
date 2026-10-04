@@ -1,6 +1,7 @@
 """
 Phase 3H.5.10: Health Security Verification API Router
 """
+
 from fastapi import APIRouter
 from ..runtime.health_security_runtime import HealthSecurityRuntime
 

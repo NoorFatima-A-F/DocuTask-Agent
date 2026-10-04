@@ -1,6 +1,7 @@
 """
 3H.10.6: Autonomous Execution Safety Verifier
 """
+
 from typing import List
 from ..domain.models import (
     OptimizationActionType,
@@ -25,7 +26,7 @@ class AutonomousExecutionVerifier(IAutonomousExecutionVerifier):
                 maintenance_window_approved=True,
                 canary_strategy_defined=True,
                 automated_rollback_verified=True,
-                safety_status="PASSED"
+                safety_status="PASSED",
             ),
             SafetyGateVerification(
                 action_id="act-exec-002",
@@ -35,7 +36,7 @@ class AutonomousExecutionVerifier(IAutonomousExecutionVerifier):
                 maintenance_window_approved=True,
                 canary_strategy_defined=True,
                 automated_rollback_verified=True,
-                safety_status="PASSED"
+                safety_status="PASSED",
             ),
             SafetyGateVerification(
                 action_id="act-exec-003",
@@ -45,7 +46,7 @@ class AutonomousExecutionVerifier(IAutonomousExecutionVerifier):
                 maintenance_window_approved=True,
                 canary_strategy_defined=True,
                 automated_rollback_verified=True,
-                safety_status="PASSED"
+                safety_status="PASSED",
             ),
             SafetyGateVerification(
                 action_id="act-exec-004",
@@ -55,8 +56,8 @@ class AutonomousExecutionVerifier(IAutonomousExecutionVerifier):
                 maintenance_window_approved=True,
                 canary_strategy_defined=True,
                 automated_rollback_verified=True,
-                safety_status="PASSED"
-            )
+                safety_status="PASSED",
+            ),
         ]
 
         cleared = [c for c in checks if c.safety_status == "PASSED" and c.blast_radius_pct <= 5.0]
@@ -67,5 +68,5 @@ class AutonomousExecutionVerifier(IAutonomousExecutionVerifier):
             actions_cleared_for_autonomous_execution=len(cleared),
             max_tolerated_blast_radius_pct=5.0,
             safety_checks=checks,
-            execution_safety_index=99.6
+            execution_safety_index=99.6,
         )

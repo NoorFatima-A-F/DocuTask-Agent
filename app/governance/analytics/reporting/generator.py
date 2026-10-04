@@ -25,7 +25,9 @@ class ReportGenerator:
         self.compliance = compliance_engine or ComplianceReportingEngine()
         self.policy = policy_engine or PolicyEffectivenessEngine(self.metrics.repo)
 
-    def generate_report(self, report_type: ReportType, tenant_id: str = "*", title: Optional[str] = None) -> GovernanceReport:
+    def generate_report(
+        self, report_type: ReportType, tenant_id: str = "*", title: Optional[str] = None
+    ) -> GovernanceReport:
         gov_score = self.metrics.calculate_governance_score(tenant_id=tenant_id)
         dec_metrics = self.metrics.get_decision_metrics(tenant_id=tenant_id)
         risk_summary = self.risk.analyze_risk_posture(tenant_id=tenant_id)
@@ -35,15 +37,17 @@ class ReportGenerator:
         sections: List[GovernanceReportSection] = []
 
         if report_type == ReportType.DAILY_OPERATIONAL:
-            rep_title = title or f"Daily Governance Operations Report ({datetime.now(timezone.utc).strftime('%Y-%m-%d')})"
-            exec_summary = f"Total Decisions: {dec_metrics.total_decisions}, Allow Rate: {dec_metrics.allow_rate*100:.1f}%, Active Policies: {self.metrics.get_policy_metrics(tenant_id).active_policies_count}."
+            rep_title = (
+                title or f"Daily Governance Operations Report ({datetime.now(timezone.utc).strftime('%Y-%m-%d')})"
+            )
+            exec_summary = f"Total Decisions: {dec_metrics.total_decisions}, Allow Rate: {dec_metrics.allow_rate * 100:.1f}%, Active Policies: {self.metrics.get_policy_metrics(tenant_id).active_policies_count}."
             sections.append(
                 GovernanceReportSection(
                     title="Operational Decisions & Controls",
                     summary_text="Overview of runtime controls, authorizations, and manual review volume.",
                     metrics=dec_metrics.model_dump(),
                     key_findings=[
-                        f"Autonomous execution rate maintained at {dec_metrics.allow_rate*100:.1f}%.",
+                        f"Autonomous execution rate maintained at {dec_metrics.allow_rate * 100:.1f}%.",
                         f"{dec_metrics.approval_required_count} reviews submitted for human oversight.",
                     ],
                 )
@@ -70,8 +74,12 @@ class ReportGenerator:
                     title="Framework Adherence & Controls",
                     summary_text="Control coverage and evidence preservation metrics.",
                     metrics={fw: fs.score for fw, fs in comp_summary.framework_scores.items()},
-                    key_findings=[f"{len(comp_summary.identified_gaps)} compliance control gaps identified."] if comp_summary.identified_gaps else ["All evaluated regulatory controls are in compliance."],
-                    recommendations=[g.remediation_step for g in comp_summary.identified_gaps] if comp_summary.identified_gaps else ["Maintain continuous evidence preservation."],
+                    key_findings=[f"{len(comp_summary.identified_gaps)} compliance control gaps identified."]
+                    if comp_summary.identified_gaps
+                    else ["All evaluated regulatory controls are in compliance."],
+                    recommendations=[g.remediation_step for g in comp_summary.identified_gaps]
+                    if comp_summary.identified_gaps
+                    else ["Maintain continuous evidence preservation."],
                 )
             )
 
@@ -90,7 +98,10 @@ class ReportGenerator:
                 GovernanceReportSection(
                     title="Policy Effectiveness & Friction",
                     summary_text="Evaluation of policy trigger frequency and human intervention rates.",
-                    metrics={"effectiveness_score": pol_summary.overall_effectiveness_score, "false_positive_rate": pol_summary.false_positive_estimate_rate},
+                    metrics={
+                        "effectiveness_score": pol_summary.overall_effectiveness_score,
+                        "false_positive_rate": pol_summary.false_positive_estimate_rate,
+                    },
                     recommendations=[r.suggested_action for r in pol_summary.recommendations],
                 )
             )

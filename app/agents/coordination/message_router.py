@@ -31,8 +31,7 @@ class MessageRouter(IMessageRouter):
         else:
             if message.recipient_id not in self._inboxes:
                 raise InvalidCommunicationRouteError(
-                    f"Recipient agent {message.recipient_id} has no registered inbox.",
-                    message.recipient_id
+                    f"Recipient agent {message.recipient_id} has no registered inbox.", message.recipient_id
                 )
             self._inboxes[message.recipient_id].append(message)
 

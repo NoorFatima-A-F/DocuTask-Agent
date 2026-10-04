@@ -1,6 +1,7 @@
 """
 Part 3I: Enterprise Observability Infrastructure (Logging & Metrics) — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Any
 from pydantic import BaseModel, Field
@@ -29,13 +30,14 @@ class AlertSeverity(str, Enum):
 
 
 class ObservabilityCertificationTier(str, Enum):
-    ENTERPRISE_OBSERVABILITY_CERTIFIED = "Enterprise Observability Certified" # 95 - 100
-    PRODUCTION_OBSERVABILITY_READY = "Production Observability Ready"         # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                             # 80 - 89.99
-    FAILED = "Failed"                                                         # < 80
+    ENTERPRISE_OBSERVABILITY_CERTIFIED = "Enterprise Observability Certified"  # 95 - 100
+    PRODUCTION_OBSERVABILITY_READY = "Production Observability Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3I.1: Logging Domain Models ──────────────────────────────────────────
+
 
 class LogCollectorSpec(BaseModel):
     name: str
@@ -61,15 +63,24 @@ class StructuredLogSample(BaseModel):
     trace_id: str = "trace-4f9b8c"
     event_name: str = "document_processed"
     message: str = "Document processed successfully by OCR and Gemini extraction."
-    metadata: Dict[str, Any] = Field(default_factory=lambda: {"document_id": "abc123", "duration_ms": 4200, "status": "success"})
+    metadata: Dict[str, Any] = Field(
+        default_factory=lambda: {"document_id": "abc123", "duration_ms": 4200, "status": "success"}
+    )
 
 
 class StructuredLoggingReport(BaseModel):
     report_title: str = "Structured Event Schema & Field Compliance Report"
     mandatory_fields_verified: List[str] = Field(
         default_factory=lambda: [
-            "timestamp", "severity", "service_name", "environment",
-            "request_id", "trace_id", "event_name", "message", "metadata"
+            "timestamp",
+            "severity",
+            "service_name",
+            "environment",
+            "request_id",
+            "trace_id",
+            "event_name",
+            "message",
+            "metadata",
         ]
     )
     schema_compliance_pct: float = 100.0
@@ -101,9 +112,7 @@ class AIWorkflowLoggingReport(BaseModel):
     agent_lifecycle_events_logged: List[str] = Field(
         default_factory=lambda: ["agent_started", "goal_created", "plan_generated", "tool_selected", "task_completed"]
     )
-    ocr_events_logged: List[str] = Field(
-        default_factory=lambda: ["ocr_started", "ocr_completed", "ocr_failed"]
-    )
+    ocr_events_logged: List[str] = Field(default_factory=lambda: ["ocr_started", "ocr_completed", "ocr_failed"])
     llm_telemetry_tracked: List[str] = Field(
         default_factory=lambda: ["model_name", "provider", "latency", "token_usage", "retry_count", "failure_reason"]
     )
@@ -164,10 +173,11 @@ class LoggingCertificationReport(BaseModel):
 
 # ─── 3I.2: Metrics Domain Models ──────────────────────────────────────────
 
+
 class MetricDefinition(BaseModel):
     metric_name: str
     metric_type: str  # COUNTER, GAUGE, HISTOGRAM
-    category: str     # GOLDEN_SIGNAL, APPLICATION, INFRASTRUCTURE
+    category: str  # GOLDEN_SIGNAL, APPLICATION, INFRASTRUCTURE
     description: str
 
 
@@ -269,12 +279,15 @@ class MetricsCertificationReport(BaseModel):
 
 # ─── Combined Certification ───────────────────────────────────────────────
 
+
 class UnifiedObservabilityCertification(BaseModel):
     report_title: str = "Part 3I Unified Enterprise Observability Infrastructure Certification"
     evaluated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     logging_score_pct: float = 100.0
     metrics_score_pct: float = 100.0
     overall_score_pct: float = 100.0
-    certification_tier: ObservabilityCertificationTier = ObservabilityCertificationTier.ENTERPRISE_OBSERVABILITY_CERTIFIED
+    certification_tier: ObservabilityCertificationTier = (
+        ObservabilityCertificationTier.ENTERPRISE_OBSERVABILITY_CERTIFIED
+    )
     certification_granted: bool = True
     auditor: str = "DocuTask Enterprise Observability & SRE Certification Engine"

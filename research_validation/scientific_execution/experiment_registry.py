@@ -14,9 +14,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 
-from research_validation.scientific_execution.experiment_manifest import (
-    ExperimentManifest, ExperimentStatus
-)
+from research_validation.scientific_execution.experiment_manifest import ExperimentManifest, ExperimentStatus
 
 
 @dataclass(frozen=True)

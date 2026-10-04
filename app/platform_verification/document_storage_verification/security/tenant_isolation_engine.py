@@ -1,6 +1,7 @@
 """
 Tenant Isolation Engine for Enterprise Document Storage (Part 3G.2C).
 """
+
 from typing import List
 
 from app.platform_verification.document_storage_verification.domain.models import (
@@ -47,10 +48,7 @@ class TenantIsolationEngine(ITenantIsolationEngine):
         ]
 
         total_attacks = (
-            path_traversal_blocked
-            + metadata_manipulation_blocked
-            + enumeration_blocked
-            + identifier_guessing_blocked
+            path_traversal_blocked + metadata_manipulation_blocked + enumeration_blocked + identifier_guessing_blocked
         )
         # All 100 attacks blocked
         isolation_score = 100.0 if total_attacks > 0 else 100.0

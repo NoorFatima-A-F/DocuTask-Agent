@@ -53,7 +53,6 @@ class TransformationEngine:
         except Exception as e:
             raise TransformationError(f"Failed to parse XML: {e}")
 
-
     def _elem_to_dict(self, elem: ET.Element) -> Union[Dict[str, Any], str]:
         children = list(elem)
         if not children:

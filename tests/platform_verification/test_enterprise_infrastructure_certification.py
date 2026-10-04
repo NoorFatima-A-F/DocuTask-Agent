@@ -117,8 +117,12 @@ class TestEnterpriseInfrastructureCertification:
     def test_quality_scorer_weighted_calculation(self):
         scorer = InfrastructureQualityScorer()
         custom_items = [
-            NormalizedEvidenceItem(category="Reliability", test_id="REL-1", name="Rel 1", score=100.0, status=VerificationStatus.PASSED),
-            NormalizedEvidenceItem(category="Security", test_id="SEC-1", name="Sec 1", score=50.0, status=VerificationStatus.FAILED),
+            NormalizedEvidenceItem(
+                category="Reliability", test_id="REL-1", name="Rel 1", score=100.0, status=VerificationStatus.PASSED
+            ),
+            NormalizedEvidenceItem(
+                category="Security", test_id="SEC-1", name="Sec 1", score=50.0, status=VerificationStatus.FAILED
+            ),
         ]
         scorecard = scorer.calculate_score(custom_items)
         # Reliability: 100 * 0.25 = 25.0
@@ -230,7 +234,9 @@ class TestEnterpriseInfrastructureCertification:
         scorecard = QualityScorecard(
             overall_score=100.0,
             categories={
-                "Reliability": CategoryQualityScore(category="Reliability", weight=0.25, score=100.0, contribution=25.0, passed_items=10, total_items=10),
+                "Reliability": CategoryQualityScore(
+                    category="Reliability", weight=0.25, score=100.0, contribution=25.0, passed_items=10, total_items=10
+                ),
             },
         )
         detector = QualityRegressionDetector()
@@ -243,7 +249,9 @@ class TestEnterpriseInfrastructureCertification:
         scorecard = QualityScorecard(
             overall_score=85.0,
             categories={
-                "Reliability": CategoryQualityScore(category="Reliability", weight=0.25, score=80.0, contribution=20.0, passed_items=8, total_items=10),
+                "Reliability": CategoryQualityScore(
+                    category="Reliability", weight=0.25, score=80.0, contribution=20.0, passed_items=8, total_items=10
+                ),
             },
         )
         detector = QualityRegressionDetector()

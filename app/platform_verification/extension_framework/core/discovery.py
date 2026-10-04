@@ -1,6 +1,7 @@
 """
 Multi-Mechanism Plugin Discovery Engine (Static, Entrypoints, Package Scanning, YAML Config).
 """
+
 import importlib
 import inspect
 from typing import List, Type
@@ -14,8 +15,12 @@ class PluginDiscoveryEngine:
     def register_static_plugin(self, plugin: VerificationPluginInterface) -> str:
         meta = plugin_registry.register_plugin(plugin)
         plugin_lifecycle_manager.set_initial_state(meta.plugin_id, PluginLifecycleState.DISCOVERED)
-        plugin_lifecycle_manager.transition_state(meta.plugin_id, PluginLifecycleState.VALIDATED, "Static validation passed")
-        plugin_lifecycle_manager.transition_state(meta.plugin_id, PluginLifecycleState.REGISTERED, "Static registration passed")
+        plugin_lifecycle_manager.transition_state(
+            meta.plugin_id, PluginLifecycleState.VALIDATED, "Static validation passed"
+        )
+        plugin_lifecycle_manager.transition_state(
+            meta.plugin_id, PluginLifecycleState.REGISTERED, "Static registration passed"
+        )
         plugin_lifecycle_manager.transition_state(meta.plugin_id, PluginLifecycleState.INITIALIZED, "Initialized")
         plugin_lifecycle_manager.transition_state(meta.plugin_id, PluginLifecycleState.READY, "Ready for execution")
         return meta.plugin_id

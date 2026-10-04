@@ -16,10 +16,12 @@ def test_reproducibility_verifier(tmp_path):
     temp_base = tmp_path / "runs"
     temp_base.mkdir()
 
-    result = asyncio.run(AuditReproducibilityVerifier.verify_reproducibility(
-        repo_root=repo_dir,
-        temp_base_dir=temp_base,
-    ))
+    result = asyncio.run(
+        AuditReproducibilityVerifier.verify_reproducibility(
+            repo_root=repo_dir,
+            temp_base_dir=temp_base,
+        )
+    )
 
     assert result["is_deterministic"] is True
     assert result["status"] == "DETERMINISTIC_REPRODUCIBLE"

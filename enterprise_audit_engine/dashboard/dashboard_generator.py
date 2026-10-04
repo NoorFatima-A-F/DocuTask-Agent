@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class DashboardSummary(BaseModel):
     """Top-level executive summary metrics."""
+
     target_release: str
     engine_version: str
     overall_certification_status: str  # CERTIFIED, CONDITIONALLY_CERTIFIED, REJECTED
@@ -21,6 +22,7 @@ class DashboardSummary(BaseModel):
 
 class AuditDashboard(BaseModel):
     """Consolidated enterprise assurance and audit dashboard."""
+
     summary: DashboardSummary
     integrity_verification: Dict[str, Any]
     baseline_comparison: Dict[str, Any]
@@ -50,7 +52,7 @@ class DashboardGenerator:
         output_filename: str = "audit_dashboard.json",
     ) -> AuditDashboard:
         """Constructs and persists the full audit dashboard."""
-        
+
         mutation_blocked = mutation_data.get("mutations_blocked_count", 0)
         mutation_total = mutation_data.get("total_mutations_executed", 0)
         mutation_rate = (mutation_blocked / mutation_total * 100.0) if mutation_total > 0 else 100.0

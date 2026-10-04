@@ -1,11 +1,10 @@
 """
 Evidence Retention & Archival Manager.
 """
+
 from datetime import datetime, timezone
 from typing import List
-from app.platform_verification.evidence_engine.domain.models import (
-    EvidenceArtifact, EvidenceLifecycleState
-)
+from app.platform_verification.evidence_engine.domain.models import EvidenceArtifact, EvidenceLifecycleState
 
 
 class EvidenceRetentionManager:

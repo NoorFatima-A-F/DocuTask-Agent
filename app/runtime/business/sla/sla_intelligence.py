@@ -26,7 +26,9 @@ class SLAIntelligenceEngine:
         )
         self._contracts[sla1.sla_id] = sla1
 
-    def assess_step_sla_risk(self, process_id: str, step_id: str, elapsed_sec: float, target_sec: float) -> SLABreachRisk:
+    def assess_step_sla_risk(
+        self, process_id: str, step_id: str, elapsed_sec: float, target_sec: float
+    ) -> SLABreachRisk:
         """Calculates probabilistic hazard and breach state."""
         ratio = elapsed_sec / max(1.0, target_sec)
         is_breached = elapsed_sec > target_sec

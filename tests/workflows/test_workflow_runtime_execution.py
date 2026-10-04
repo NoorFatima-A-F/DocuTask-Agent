@@ -25,7 +25,9 @@ def test_runtime_executes_sequential_tasks():
         name="Tax Calculator Workflow",
         tasks=[
             TaskDefinition(id="extract_data", name="Extract Data", type=TaskType.SYSTEM),
-            TaskDefinition(id="calculate_tax", name="Calculate Tax", type=TaskType.SYSTEM, dependencies=["extract_data"]),
+            TaskDefinition(
+                id="calculate_tax", name="Calculate Tax", type=TaskType.SYSTEM, dependencies=["extract_data"]
+            ),
         ],
     )
 

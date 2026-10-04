@@ -2,6 +2,7 @@
 Evidence and Certification Exporter for Part 3G.3.
 Exports full evidence packages to disaster_recovery_evidence/ and certification packages to disaster_recovery_certification/.
 """
+
 import json
 import datetime
 from pathlib import Path
@@ -52,8 +53,8 @@ class DREvidenceExporter:
         return f"""# DocuTask Agent -- Disaster Recovery & Operational Resilience Certification Report
 **Standard**: DOCUTASK_DISASTER_RECOVERY_v3G.3  
 **Evaluation Date**: {now_str}  
-**Certification Verdict**: {'PASSED (APPROVED)' if scorecard.passed else 'FAILED'}  
-**CI/CD Deployment Gate**: {'APPROVED' if scorecard.ci_cd_deployment_approved else 'BLOCKED'}
+**Certification Verdict**: {"PASSED (APPROVED)" if scorecard.passed else "FAILED"}  
+**CI/CD Deployment Gate**: {"APPROVED" if scorecard.ci_cd_deployment_approved else "BLOCKED"}
 
 ---
 
@@ -113,9 +114,7 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
         manifests: Dict[str, str] = {}
         now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
-        md_content = self.generate_markdown_report(
-            scorecard, scenarios, chaos, detection, validation, tabletop
-        )
+        md_content = self.generate_markdown_report(scorecard, scenarios, chaos, detection, validation, tabletop)
 
         # 1. Certification Directory Export
         safe_cert_dir = Path(cert_dir) if cert_dir else Path.cwd() / "dr_certification"
@@ -139,12 +138,8 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
                 "validated_at": now_iso,
             },
         )
-        manifests["resilience_score.json"] = self._write_json(
-            safe_cert_dir, "resilience_score.json", asdict(scorecard)
-        )
-        manifests["recovery_report.md"] = self._write_text(
-            safe_cert_dir, "recovery_report.md", md_content
-        )
+        manifests["resilience_score.json"] = self._write_json(safe_cert_dir, "resilience_score.json", asdict(scorecard))
+        manifests["recovery_report.md"] = self._write_text(safe_cert_dir, "recovery_report.md", md_content)
         manifests["scenario_results.json"] = self._write_json(
             safe_cert_dir, "scenario_results.json", [asdict(s) for s in scenarios]
         )
@@ -228,8 +223,6 @@ DocuTask Agent has been subjected to 5 severe multi-vector disaster simulations 
             "timeline.json",
             [asdict(event) for s in scenarios for event in s.timeline],
         )
-        manifests["final_report.md"] = self._write_text(
-            safe_evidence_dir, "final_report.md", md_content
-        )
+        manifests["final_report.md"] = self._write_text(safe_evidence_dir, "final_report.md", md_content)
 
         return manifests

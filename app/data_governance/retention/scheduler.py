@@ -15,6 +15,7 @@ from app.data_governance.retention.policies import RetentionPolicy, DEFAULT_RETE
 
 class LegalHold(BaseModel):
     """Legal preservation order preventing modification or deletion."""
+
     hold_id: str
     organization_id: str
     reason: str

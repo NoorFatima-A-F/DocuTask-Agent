@@ -84,7 +84,7 @@ class ReflectionRequestBuilder:
             cost_usd=self._cost_usd,
             tasks=self._tasks,
             final_outputs=self._final_outputs,
-            errors=self._errors
+            errors=self._errors,
         )
         ReflectionValidator.validate_execution_trace(envelope)
         return ReflectionRequest(trace=envelope, context=self._context)
@@ -132,7 +132,7 @@ class LearningArtifactBuilder:
             heuristic_content=self._heuristic,
             conditions=self._conditions,
             confidence_score=self._confidence,
-            source_execution_id=self._source_execution_id
+            source_execution_id=self._source_execution_id,
         )
 
 
@@ -176,7 +176,7 @@ class RecommendationBuilder:
             rationale=self._rationale,
             expected_impact=self._expected_impact,
             confidence=self._confidence,
-            evidence=self._evidence
+            evidence=self._evidence,
         )
         ReflectionValidator.validate_recommendation(rec)
         return rec
@@ -216,7 +216,7 @@ class CritiqueBuilder:
             weaknesses=self._weaknesses,
             findings=self._findings,
             improvement_opportunities=self._opportunities,
-            overall_critique_score=1.0 if not self._findings else 0.8
+            overall_critique_score=1.0 if not self._findings else 0.8,
         )
         ReflectionValidator.validate_critique(critique)
         return critique
@@ -248,7 +248,7 @@ class EvaluationBuilder:
             overall_score=self._overall_score,
             dimensions=self._dimensions,
             key_strengths=self._strengths,
-            key_weaknesses=self._weaknesses
+            key_weaknesses=self._weaknesses,
         )
 
 
@@ -275,7 +275,7 @@ class FeedbackBuilder:
             planner_feedback=self._planner,
             execution_feedback=self._execution,
             memory_feedback=self._memory,
-            tool_feedback=self._tool
+            tool_feedback=self._tool,
         )
 
 
@@ -287,8 +287,4 @@ class ReflectionSessionBuilder:
         self._identity = ReflectionIdentity(execution_id=trace.execution_id)
 
     def build(self) -> ReflectionSession:
-        return ReflectionSession(
-            session_id=uuid4(),
-            identity=self._identity,
-            trace=self._trace
-        )
+        return ReflectionSession(session_id=uuid4(), identity=self._identity, trace=self._trace)

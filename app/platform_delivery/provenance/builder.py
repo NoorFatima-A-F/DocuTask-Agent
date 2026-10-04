@@ -1,4 +1,5 @@
 """SLSA v1.0 and in-toto Software Provenance Builder (Req 21)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -8,6 +9,7 @@ import uuid
 @dataclass
 class SLSAProvenanceStatement:
     """Standardized SLSA v1.0 Provenance Attestation."""
+
     statement_id: str
     artifact_name: str
     artifact_digest: str

@@ -102,7 +102,6 @@ class EventBusVerifier:
         subscribers = ["audit_logger", "search_indexer", "webhook_dispatcher", "analytics_pipeline"]
         received_by = []
 
-
         for sub in subscribers:
             received_by.append(sub)
 

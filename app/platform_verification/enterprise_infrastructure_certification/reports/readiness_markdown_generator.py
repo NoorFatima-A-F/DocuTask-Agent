@@ -62,40 +62,46 @@ class ReadinessMarkdownGenerator:
                 f"| **{cat_name}** | {int(cat.weight * 100)}% | **{cat.score:.2f}%** | {cat.contribution:.2f}% | {cat.status.value} |"
             )
 
-        lines.extend([
-            f"",
-            f"---",
-            f"",
-            f"## 3. Operational Maturity Assessment",
-            f"",
-            f"**Evaluated Maturity:** `{maturity.maturity_level.value}` (Maturity Index: `{maturity.maturity_score:.1f}%`)",
-            f"",
-            f"### Verified Enterprise Capabilities",
-        ])
+        lines.extend(
+            [
+                f"",
+                f"---",
+                f"",
+                f"## 3. Operational Maturity Assessment",
+                f"",
+                f"**Evaluated Maturity:** `{maturity.maturity_level.value}` (Maturity Index: `{maturity.maturity_score:.1f}%`)",
+                f"",
+                f"### Verified Enterprise Capabilities",
+            ]
+        )
 
         for cap in maturity.capabilities_achieved:
             lines.append(f"- [x] {cap}")
 
-        lines.extend([
-            f"",
-            f"### Next-Level Roadmap Requirements",
-        ])
+        lines.extend(
+            [
+                f"",
+                f"### Next-Level Roadmap Requirements",
+            ]
+        )
         for req in maturity.next_level_requirements:
             lines.append(f"- [ ] {req}")
 
-        lines.extend([
-            f"",
-            f"---",
-            f"",
-            f"## 4. Risk Analysis & Failure Conditions",
-            f"",
-            f"- **Highest Detected Risk:** `{risk_report.highest_risk.value}`",
-            f"- **Critical Risks:** `{risk_report.critical_risks_count}`",
-            f"- **High Risks:** `{risk_report.high_risks_count}`",
-            f"- **Medium / Low Risks:** `{risk_report.medium_risks_count + risk_report.low_risks_count}`",
-            f"- **Production Blockers:** `{'YES - IMMEDIATE REMEDIATION REQUIRED' if risk_report.production_blocker_present else 'NONE - Zero Blocking Vulnerabilities'}`",
-            f"",
-        ])
+        lines.extend(
+            [
+                f"",
+                f"---",
+                f"",
+                f"## 4. Risk Analysis & Failure Conditions",
+                f"",
+                f"- **Highest Detected Risk:** `{risk_report.highest_risk.value}`",
+                f"- **Critical Risks:** `{risk_report.critical_risks_count}`",
+                f"- **High Risks:** `{risk_report.high_risks_count}`",
+                f"- **Medium / Low Risks:** `{risk_report.medium_risks_count + risk_report.low_risks_count}`",
+                f"- **Production Blockers:** `{'YES - IMMEDIATE REMEDIATION REQUIRED' if risk_report.production_blocker_present else 'NONE - Zero Blocking Vulnerabilities'}`",
+                f"",
+            ]
+        )
 
         if risk_report.risks:
             lines.append(f"### Active Risk Findings")
@@ -106,30 +112,34 @@ class ReadinessMarkdownGenerator:
         else:
             lines.append(f"*(No active high or critical risks identified across the verification suite.)*")
 
-        lines.extend([
-            f"",
-            f"---",
-            f"",
-            f"## 5. Quality Regression Analysis",
-            f"",
-            f"- **Previous Baseline Version:** `{regression.previous_version}` (`{regression.previous_overall_score:.2f}%`)",
-            f"- **Current Build Version:** `{regression.current_version}` (`{regression.current_overall_score:.2f}%`)",
-            f"- **Score Delta:** `{'+' if regression.score_delta >= 0 else ''}{regression.score_delta:.2f}%`",
-            f"- **Regression Alert:** `{'REGRESSION DETECTED' if regression.regression_detected else 'CLEAN - No Quality Degradation'}`",
-            f"",
-            f"---",
-            f"",
-            f"## 6. Recommendations & SRE Action Plan",
-            f"",
-        ])
+        lines.extend(
+            [
+                f"",
+                f"---",
+                f"",
+                f"## 5. Quality Regression Analysis",
+                f"",
+                f"- **Previous Baseline Version:** `{regression.previous_version}` (`{regression.previous_overall_score:.2f}%`)",
+                f"- **Current Build Version:** `{regression.current_version}` (`{regression.current_overall_score:.2f}%`)",
+                f"- **Score Delta:** `{'+' if regression.score_delta >= 0 else ''}{regression.score_delta:.2f}%`",
+                f"- **Regression Alert:** `{'REGRESSION DETECTED' if regression.regression_detected else 'CLEAN - No Quality Degradation'}`",
+                f"",
+                f"---",
+                f"",
+                f"## 6. Recommendations & SRE Action Plan",
+                f"",
+            ]
+        )
 
         for rec in decision.recommendations:
             lines.append(f"1. {rec}")
 
-        lines.extend([
-            f"",
-            f"---",
-            f"*Certified by DocuTask Agent Automated Enterprise Infrastructure Certification Authority (Phase 3O)*",
-        ])
+        lines.extend(
+            [
+                f"",
+                f"---",
+                f"*Certified by DocuTask Agent Automated Enterprise Infrastructure Certification Authority (Phase 3O)*",
+            ]
+        )
 
         return "\n".join(lines)

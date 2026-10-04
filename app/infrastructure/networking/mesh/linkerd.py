@@ -16,27 +16,33 @@ class LinkerdMeshAdapter(IServiceMeshAdapter):
         """Generate Linkerd ServiceProfile."""
         manifests = []
         profile_spec = {
-            "routes": [{
-                "name": "default-route",
-                "isRetryable": True,
-                "timeout": f"{route.timeout_ms}ms",
-            }],
+            "routes": [
+                {
+                    "name": "default-route",
+                    "isRetryable": True,
+                    "timeout": f"{route.timeout_ms}ms",
+                }
+            ],
             "retryBudget": {
                 "retryRatio": 0.2,
                 "minRetriesPerSecond": 10,
                 "ttl": "10s",
             },
         }
-        manifests.append(MeshConfigurationManifest(
-            mesh_type="linkerd",
-            resource_kind="ServiceProfile",
-            name=f"{route.service_name}.{namespace}.svc.cluster.local",
-            namespace=namespace,
-            spec=profile_spec,
-        ))
+        manifests.append(
+            MeshConfigurationManifest(
+                mesh_type="linkerd",
+                resource_kind="ServiceProfile",
+                name=f"{route.service_name}.{namespace}.svc.cluster.local",
+                namespace=namespace,
+                spec=profile_spec,
+            )
+        )
         return manifests
 
-    def generate_mtls_policy(self, service_name: str, namespace: str = "default", mode: str = "STRICT") -> List[MeshConfigurationManifest]:
+    def generate_mtls_policy(
+        self, service_name: str, namespace: str = "default", mode: str = "STRICT"
+    ) -> List[MeshConfigurationManifest]:
         """Generate Linkerd ServerAuthorization manifest."""
         spec = {
             "server": {"name": f"{service_name}-server"},
@@ -44,32 +50,38 @@ class LinkerdMeshAdapter(IServiceMeshAdapter):
                 "meshTLS": {
                     "identities": [f"*.{namespace}.serviceaccount.identity.linkerd.cluster.local"],
                 }
-            }
+            },
         }
-        return [MeshConfigurationManifest(
-            mesh_type="linkerd",
-            resource_kind="ServerAuthorization",
-            name=f"{service_name}-server-auth",
-            namespace=namespace,
-            spec=spec,
-        )]
+        return [
+            MeshConfigurationManifest(
+                mesh_type="linkerd",
+                resource_kind="ServerAuthorization",
+                name=f"{service_name}-server-auth",
+                namespace=namespace,
+                spec=spec,
+            )
+        ]
 
-    def generate_traffic_split(self, service_name: str, primary_weight: int, canary_weight: int, namespace: str = "default") -> List[MeshConfigurationManifest]:
+    def generate_traffic_split(
+        self, service_name: str, primary_weight: int, canary_weight: int, namespace: str = "default"
+    ) -> List[MeshConfigurationManifest]:
         """Generate Linkerd TrafficSplit resource."""
         spec = {
             "service": service_name,
             "backends": [
                 {"service": f"{service_name}-primary", "weight": f"{primary_weight}m"},
                 {"service": f"{service_name}-canary", "weight": f"{canary_weight}m"},
-            ]
+            ],
         }
-        return [MeshConfigurationManifest(
-            mesh_type="linkerd",
-            resource_kind="TrafficSplit",
-            name=f"{service_name}-traffic-split",
-            namespace=namespace,
-            spec=spec,
-        )]
+        return [
+            MeshConfigurationManifest(
+                mesh_type="linkerd",
+                resource_kind="TrafficSplit",
+                name=f"{service_name}-traffic-split",
+                namespace=namespace,
+                spec=spec,
+            )
+        ]
 
     def sync_mesh_state(self) -> Dict[str, Any]:
         """Return Linkerd synchronization status."""

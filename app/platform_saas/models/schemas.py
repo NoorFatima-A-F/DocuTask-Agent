@@ -84,7 +84,9 @@ class TenantConfiguration(BaseModel):
     custom_domain: Optional[str] = None
     enforce_sso: bool = False
     mfa_required: bool = True
-    allowed_model_families: List[str] = Field(default_factory=lambda: ["gemini-pro", "gemini-flash", "claude-3-5", "gpt-4o"])
+    allowed_model_families: List[str] = Field(
+        default_factory=lambda: ["gemini-pro", "gemini-flash", "claude-3-5", "gpt-4o"]
+    )
 
 
 class Tenant(BaseModel):

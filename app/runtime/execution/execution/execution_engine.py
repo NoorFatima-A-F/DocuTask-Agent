@@ -69,7 +69,9 @@ class ExecutionEngine:
     def __init__(self):
         self._missions: Dict[str, MissionExecution] = {}
 
-    def create_mission(self, goal: str, workflow: WorkflowDefinition, initiated_by: str = "autonomous_organization") -> MissionExecution:
+    def create_mission(
+        self, goal: str, workflow: WorkflowDefinition, initiated_by: str = "autonomous_organization"
+    ) -> MissionExecution:
         mid = f"mission_{uuid.uuid4().hex[:10]}"
         # Deep copy steps
         copied_steps = []
@@ -164,7 +166,9 @@ class ExecutionEngine:
             resolved_inputs = workflow_engine.interpolate_inputs(step.inputs, context)
             step.inputs = resolved_inputs
 
-            decision, reason = policy_engine.evaluate_step(step.tool_id, resolved_inputs, tool_risk, actor=mission.initiated_by)
+            decision, reason = policy_engine.evaluate_step(
+                step.tool_id, resolved_inputs, tool_risk, actor=mission.initiated_by
+            )
 
             if decision == PolicyDecision.DENY:
                 step.status = StepStatus.FAILED
@@ -186,7 +190,9 @@ class ExecutionEngine:
                     reason=reason or "High risk threshold gate",
                 )
                 # Auto-approve under safe autonomous operating parameters
-                policy_engine.resolve_approval(app_req.approval_id, approved=True, approver="autonomous_governance_director")
+                policy_engine.resolve_approval(
+                    app_req.approval_id, approved=True, approver="autonomous_governance_director"
+                )
                 mission.status = MissionStatus.EXECUTING
 
             # Execute real-world tool
@@ -248,9 +254,15 @@ class ExecutionEngine:
 
         execution_event_bus.publish(
             ExecutionEvent(
-                event_type=ExecutionEventType.MISSION_COMPLETED if mission.status == MissionStatus.COMPLETED else ExecutionEventType.MISSION_FAILED,
+                event_type=ExecutionEventType.MISSION_COMPLETED
+                if mission.status == MissionStatus.COMPLETED
+                else ExecutionEventType.MISSION_FAILED,
                 source="execution_engine",
-                payload={"mission_id": mission_id, "status": mission.status.value, "time_ms": mission.total_execution_time_ms},
+                payload={
+                    "mission_id": mission_id,
+                    "status": mission.status.value,
+                    "time_ms": mission.total_execution_time_ms,
+                },
                 risk_level=mission.risk_level,
             )
         )
@@ -315,7 +327,9 @@ class ExecutionEngine:
         else:
             return {"status": "success", "tool_id": tool_id, "payload": inputs}
 
-    def _handle_failure_and_rollback(self, mission: MissionExecution, executed_history: List[Dict[str, Any]], reason: str) -> None:
+    def _handle_failure_and_rollback(
+        self, mission: MissionExecution, executed_history: List[Dict[str, Any]], reason: str
+    ) -> None:
         """Trigger automated compensation rollback for completed steps."""
         if any(s.get("is_compensable") for s in executed_history):
             mission.status = MissionStatus.COMPENSATING
@@ -324,7 +338,9 @@ class ExecutionEngine:
                 trigger_reason=reason,
                 executed_steps=executed_history,
             )
-            mission.status = MissionStatus.ROLLED_BACK if rollback_session.status == "completed" else MissionStatus.FAILED
+            mission.status = (
+                MissionStatus.ROLLED_BACK if rollback_session.status == "completed" else MissionStatus.FAILED
+            )
 
     def get_mission(self, mission_id: str) -> Optional[MissionExecution]:
         return self._missions.get(mission_id)
@@ -332,7 +348,11 @@ class ExecutionEngine:
     def list_missions(self, status: Optional[str] = None) -> List[MissionExecution]:
         items = list(self._missions.values())
         if status:
-            items = [m for m in items if (m.status.value if isinstance(m.status, MissionStatus) else str(m.status)).lower() == status.lower()]
+            items = [
+                m
+                for m in items
+                if (m.status.value if isinstance(m.status, MissionStatus) else str(m.status)).lower() == status.lower()
+            ]
         return items
 
 

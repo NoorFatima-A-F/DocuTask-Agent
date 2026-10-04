@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class InjectionScanResult(BaseModel):
     """Result of static prompt injection vulnerability analysis."""
+
     is_safe: bool
     risk_score: float  # 0.0 to 1.0 (higher = riskier)
     flagged_patterns: List[str] = Field(default_factory=list)

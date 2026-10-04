@@ -29,12 +29,48 @@ class DatabaseRecoveryVerifier(IDatabaseRecoveryVerifier):
 
     def verify(self) -> DatabaseRecoveryReport:
         tables = [
-            DatabaseTableBackupValidation(table_name="users", record_count_original=250, record_count_restored=250, checksum_match=True, indexes_rebuilt=True),
-            DatabaseTableBackupValidation(table_name="documents", record_count_original=1500, record_count_restored=1500, checksum_match=True, indexes_rebuilt=True),
-            DatabaseTableBackupValidation(table_name="tasks", record_count_original=4200, record_count_restored=4200, checksum_match=True, indexes_rebuilt=True),
-            DatabaseTableBackupValidation(table_name="ocr_results", record_count_original=1500, record_count_restored=1500, checksum_match=True, indexes_rebuilt=True),
-            DatabaseTableBackupValidation(table_name="ai_extractions", record_count_original=1500, record_count_restored=1500, checksum_match=True, indexes_rebuilt=True),
-            DatabaseTableBackupValidation(table_name="audit_logs", record_count_original=18500, record_count_restored=18500, checksum_match=True, indexes_rebuilt=True),
+            DatabaseTableBackupValidation(
+                table_name="users",
+                record_count_original=250,
+                record_count_restored=250,
+                checksum_match=True,
+                indexes_rebuilt=True,
+            ),
+            DatabaseTableBackupValidation(
+                table_name="documents",
+                record_count_original=1500,
+                record_count_restored=1500,
+                checksum_match=True,
+                indexes_rebuilt=True,
+            ),
+            DatabaseTableBackupValidation(
+                table_name="tasks",
+                record_count_original=4200,
+                record_count_restored=4200,
+                checksum_match=True,
+                indexes_rebuilt=True,
+            ),
+            DatabaseTableBackupValidation(
+                table_name="ocr_results",
+                record_count_original=1500,
+                record_count_restored=1500,
+                checksum_match=True,
+                indexes_rebuilt=True,
+            ),
+            DatabaseTableBackupValidation(
+                table_name="ai_extractions",
+                record_count_original=1500,
+                record_count_restored=1500,
+                checksum_match=True,
+                indexes_rebuilt=True,
+            ),
+            DatabaseTableBackupValidation(
+                table_name="audit_logs",
+                record_count_original=18500,
+                record_count_restored=18500,
+                checksum_match=True,
+                indexes_rebuilt=True,
+            ),
         ]
 
         checks = [

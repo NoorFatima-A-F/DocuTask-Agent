@@ -1,6 +1,7 @@
 """
 Domain module for Phase 3I.2 Enterprise Logging Infrastructure Verification
 """
+
 from .models import (
     LogLevel,
     LoggingCertificationTier,

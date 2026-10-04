@@ -12,9 +12,7 @@ from app.ai.providers.gemini import GeminiProvider
 class LLMRegistry:
     """Registry maintaining available LLM providers."""
 
-    _providers: Dict[str, Type[LLMProvider]] = {
-        "gemini": GeminiProvider
-    }
+    _providers: Dict[str, Type[LLMProvider]] = {"gemini": GeminiProvider}
 
     @classmethod
     def register_provider(cls, name: str, provider_class: Type[LLMProvider]) -> None:

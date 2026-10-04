@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for AiExtraction.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.ai_extraction.domain.models import AiExtractionEntity
 from app.platform_verification.modules.ai_extraction.domain.interfaces import AiExtractionRepositoryInterface
+
 
 class InMemoryAiExtractionRepository(AiExtractionRepositoryInterface):
     def __init__(self):

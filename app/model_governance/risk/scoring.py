@@ -39,7 +39,9 @@ class ModelRiskScorer:
         provider_risk = provider_weights.get(model.provider, 0.30)
 
         # 2. Deployment Risk
-        deploy_risk = 0.10 if model.deployment_type in (DeploymentType.ON_PREMISES, DeploymentType.VPC_PRIVATE) else 0.25
+        deploy_risk = (
+            0.10 if model.deployment_type in (DeploymentType.ON_PREMISES, DeploymentType.VPC_PRIVATE) else 0.25
+        )
 
         # 3. Jailbreak Vulnerability
         jailbreak_risk = jailbreak_test_score
@@ -47,12 +49,7 @@ class ModelRiskScorer:
         # 4. Explainability limitation
         explain_risk = 1.0 - explainability_score
 
-        composite = (
-            provider_risk * 0.30
-            + deploy_risk * 0.25
-            + jailbreak_risk * 0.25
-            + explain_risk * 0.20
-        )
+        composite = provider_risk * 0.30 + deploy_risk * 0.25 + jailbreak_risk * 0.25 + explain_risk * 0.20
 
         if composite >= 0.70:
             level = RiskLevel.CRITICAL

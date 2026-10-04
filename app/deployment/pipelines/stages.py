@@ -1,4 +1,5 @@
 """Pipeline Stages and Execution Results."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -7,6 +8,7 @@ from typing import Any, Callable, Dict
 
 class PipelineStageType(str, Enum):
     """Supported pipeline execution stages."""
+
     LINT = "LINT"
     UNIT_TEST = "UNIT_TEST"
     SECURITY_SCAN = "SECURITY_SCAN"
@@ -23,6 +25,7 @@ class PipelineStageType(str, Enum):
 @dataclass
 class PipelineStageResult:
     """Result of a pipeline stage execution."""
+
     stage_name: str
     stage_type: PipelineStageType
     passed: bool

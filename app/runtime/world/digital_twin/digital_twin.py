@@ -72,13 +72,15 @@ class DigitalTwinEngine:
         )
 
         self._twins[twin_id] = state
-        self._sync_history.append({
-            "twin_id": twin_id,
-            "timestamp": sync_time,
-            "fidelity": state.fidelity_score,
-            "latency_ms": state.sync_latency_ms,
-            "subsystems_count": len(targets),
-        })
+        self._sync_history.append(
+            {
+                "twin_id": twin_id,
+                "timestamp": sync_time,
+                "fidelity": state.fidelity_score,
+                "latency_ms": state.sync_latency_ms,
+                "subsystems_count": len(targets),
+            }
+        )
 
         return state
 

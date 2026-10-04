@@ -47,7 +47,9 @@ class WorldRuntime:
         self.memory = memory_consolidation_engine
         self.event_bus = world_model_event_bus
 
-    def execute_cognitive_learning_cycle(self, context_goal: str = "Optimize enterprise operational stability and cloud ROI") -> Dict[str, Any]:
+    def execute_cognitive_learning_cycle(
+        self, context_goal: str = "Optimize enterprise operational stability and cloud ROI"
+    ) -> Dict[str, Any]:
         """Runs the complete Core Cognitive Intelligence Invariant loop."""
         cycle_id = f"cycle_{uuid.uuid4().hex[:8]}"
 
@@ -102,7 +104,9 @@ class WorldRuntime:
         )
 
         # 8. Uncertainty Profile
-        unc = self.uncertainty.compute_uncertainty("core_api_capacity", observation_count=len(self.observation.list_observations()), variance=0.15)
+        unc = self.uncertainty.compute_uncertainty(
+            "core_api_capacity", observation_count=len(self.observation.list_observations()), variance=0.15
+        )
 
         # 9. Optimize Decision Portfolio
         decisions = self.decision.evaluate_decision_portfolio(context_goal)
@@ -112,14 +116,21 @@ class WorldRuntime:
             tier="working",
             title=f"Cognitive Cycle {cycle_id} Invariant Proof",
             summary=f"Evaluated goal: {context_goal}. Causal intervention confirmed 4-replica optimal frontier.",
-            key_facts=[f"Predicted P99 latency: {pred.predicted_value}ms", f"Expected utility of top action: {decisions[0].expected_utility if decisions else 0.9}"],
+            key_facts=[
+                f"Predicted P99 latency: {pred.predicted_value}ms",
+                f"Expected utility of top action: {decisions[0].expected_utility if decisions else 0.9}",
+            ],
         )
 
         world_model_event_bus.publish(
             WorldModelEvent(
                 event_type=WorldModelEventType.LEARNING_CYCLE_COMPLETED,
                 source="world_runtime",
-                payload={"cycle_id": cycle_id, "goal": context_goal, "top_decision": decisions[0].title if decisions else ""},
+                payload={
+                    "cycle_id": cycle_id,
+                    "goal": context_goal,
+                    "top_decision": decisions[0].title if decisions else "",
+                },
             )
         )
 

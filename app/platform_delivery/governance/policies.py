@@ -1,4 +1,5 @@
 """Release Freeze and Change Window Policies (Req 54)."""
+
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum

@@ -11,6 +11,7 @@ from app.agents.workflow.exceptions import OrphanedChildWorkflowError
 
 class ChildWorkflowLink(BaseModel):
     """Linkage between parent and child workflow instances."""
+
     parent_instance_id: UUID
     child_instance_id: UUID
     node_id: str

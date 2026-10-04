@@ -3,7 +3,11 @@
 import json
 from pathlib import Path
 from typing import List, Dict, Any
-from enterprise_audit_engine.domain.evidence.models import EvidenceRecord, CollectorExecutionManifest, VerificationScorecard
+from enterprise_audit_engine.domain.evidence.models import (
+    EvidenceRecord,
+    CollectorExecutionManifest,
+    VerificationScorecard,
+)
 
 
 class AuditQualityMetrics:
@@ -34,7 +38,9 @@ class AuditQualityMetrics:
         static_pct = 100.0 if "STATIC_SOURCE_CODE" in source_types else 0.0
         runtime_pct = 100.0 if "RUNTIME_EXECUTION" in source_types else 0.0
         security_pct = 100.0 if "SecurityAndCompliance" in categories else 0.0
-        benchmark_pct = 100.0 if any("benchmark" in r.summary.lower() or "latency" in r.summary.lower() for r in records) else 50.0
+        benchmark_pct = (
+            100.0 if any("benchmark" in r.summary.lower() or "latency" in r.summary.lower() for r in records) else 50.0
+        )
 
         metrics = {
             "evidence_quality": {
@@ -56,7 +62,9 @@ class AuditQualityMetrics:
                 "benchmark_coverage_pct": benchmark_pct,
             },
             "summary_score": {
-                "overall_quality_rating": "ENTERPRISE_GRADE" if failed_collectors == 0 and unsupported_claims_count == 0 else "DEGRADED",
+                "overall_quality_rating": "ENTERPRISE_GRADE"
+                if failed_collectors == 0 and unsupported_claims_count == 0
+                else "DEGRADED",
             },
         }
         return metrics

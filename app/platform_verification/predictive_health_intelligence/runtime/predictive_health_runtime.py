@@ -117,8 +117,7 @@ class PredictiveHealthRuntime:
         # 6. Preventive Recommendations & Verification
         recommendation_report: RecommendationReport = self.recommender.generate_recommendations()
         action_verifications = [
-            self.action_verifier.verify_action_pipeline(rec)
-            for rec in recommendation_report.recommendations
+            self.action_verifier.verify_action_pipeline(rec) for rec in recommendation_report.recommendations
         ]
 
         # 7. False Positive & Accuracy Validation

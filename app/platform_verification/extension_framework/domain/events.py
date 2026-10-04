@@ -1,6 +1,7 @@
 """
 Strongly-typed Domain Events for Plugin Extensibility.
 """
+
 from dataclasses import dataclass
 from typing import Optional
 from datetime import datetime, timezone

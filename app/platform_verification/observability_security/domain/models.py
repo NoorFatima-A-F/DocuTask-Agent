@@ -1,6 +1,7 @@
 """
 Phase 3I.7: Observability Security, Privacy & Compliance Verification Framework — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -9,9 +10,9 @@ from datetime import datetime, timezone
 
 class SecurityCertificationTier(str, Enum):
     ENTERPRISE_OBSERVABILITY_SECURE = "Enterprise Observability Secure"  # 95 - 100%
-    PRODUCTION_SECURE = "Production Secure"                              # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                        # 80 - 89.99%
-    FAILED = "Failed"                                                    # < 80%
+    PRODUCTION_SECURE = "Production Secure"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 class ThreatSeverity(str, Enum):
@@ -29,6 +30,7 @@ class RBACRole(str, Enum):
 
 
 # ─── 3I.7.1: Threat Model Models ──────────────────────────────────────────────
+
 
 class SecurityThreatSpec(BaseModel):
     threat_id: str
@@ -49,6 +51,7 @@ class ObservabilityThreatModelReport(BaseModel):
 
 # ─── 3I.7.2: Sensitive Data Discovery Models ──────────────────────────────────
 
+
 class SensitiveDataScanSpec(BaseModel):
     telemetry_type: str  # Logs, Metrics, Traces
     scanned_entities_count: int
@@ -65,6 +68,7 @@ class SensitiveDataReport(BaseModel):
 
 
 # ─── 3I.7.3: Log Redaction Models ─────────────────────────────────────────────
+
 
 class RedactionRuleSpec(BaseModel):
     rule_name: str
@@ -83,6 +87,7 @@ class LogRedactionReport(BaseModel):
 
 # ─── 3I.7.4: AI Telemetry Privacy Models ──────────────────────────────────────
 
+
 class AITelemetryPrivacySpec(BaseModel):
     data_element: str
     is_sensitive: bool
@@ -99,6 +104,7 @@ class AITelemetryPrivacyReport(BaseModel):
 
 
 # ─── 3I.7.5: Access Control Models ────────────────────────────────────────────
+
 
 class RolePermissionSpec(BaseModel):
     role: RBACRole
@@ -119,6 +125,7 @@ class AccessControlReport(BaseModel):
 
 # ─── 3I.7.6: Telemetry Encryption Models ──────────────────────────────────────
 
+
 class EncryptionScopeSpec(BaseModel):
     layer: str  # In-Transit, At-Rest, Central Storage
     protocol_or_cipher: str
@@ -133,6 +140,7 @@ class TelemetryEncryptionReport(BaseModel):
 
 
 # ─── 3I.7.7: Data Retention Policy Models ─────────────────────────────────────
+
 
 class RetentionPolicySpec(BaseModel):
     log_category: str  # Debug Logs, Application Logs, Audit Logs, Security Logs
@@ -149,6 +157,7 @@ class TelemetryRetentionReport(BaseModel):
 
 
 # ─── 3I.7.8: Audit Trail Models ───────────────────────────────────────────────
+
 
 class AuditTrailEventSpec(BaseModel):
     event_id: str
@@ -168,6 +177,7 @@ class ObservabilityAuditReport(BaseModel):
 
 # ─── 3I.7.9: Compliance Mapping Models ────────────────────────────────────────
 
+
 class ComplianceStandardSpec(BaseModel):
     standard: str  # OWASP Logging, OWASP ASVS, OWASP LLM, GDPR, SOC 2
     control_id: str
@@ -182,6 +192,7 @@ class ComplianceMappingReport(BaseModel):
 
 
 # ─── 3I.7.10: Security Attack Simulation Models ───────────────────────────────
+
 
 class SecurityAttackSimulationSpec(BaseModel):
     test_id: str
@@ -201,6 +212,7 @@ class AttackSimulationReport(BaseModel):
 
 # ─── 3I.7.11: Incident Response Models ────────────────────────────────────────
 
+
 class IncidentResponseStepSpec(BaseModel):
     phase: str  # Detection, Alert, Access Restriction, Log Isolation, Removal, Root Cause
     description: str
@@ -218,6 +230,7 @@ class TelemetryIncidentResponseReport(BaseModel):
 
 # ─── 3I.7.12: Continuous Security Verification Models ─────────────────────────
 
+
 class ContinuousSecurityCheckSpec(BaseModel):
     tool_name: str  # Gitleaks, Trivy, Semgrep, OpenTelemetry Security Linter
     check_type: str
@@ -233,6 +246,7 @@ class ContinuousSecurityReport(BaseModel):
 
 
 # ─── 3I.7.13 & 3I.7.14: Scoring & Certification Models ────────────────────────
+
 
 class SecurityPillarScore(BaseModel):
     pillar_name: str

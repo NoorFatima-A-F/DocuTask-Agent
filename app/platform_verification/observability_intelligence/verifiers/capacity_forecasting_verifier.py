@@ -2,6 +2,7 @@
 Phase 3I.9.4: Multi-Horizon Capacity Forecasting Verifier
 Verifies long-term resource runway predictions across CPU, Memory, Worker Replicas, Database Storage, and Queue Throughput for 30 and 90-day horizons.
 """
+
 from typing import List
 from ..domain.interfaces import ICapacityForecastingVerifier
 from ..domain.models import CapacityForecastSpec, CapacityForecastingReport

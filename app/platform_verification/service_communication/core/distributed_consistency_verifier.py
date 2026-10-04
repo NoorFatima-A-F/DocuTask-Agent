@@ -1,6 +1,7 @@
 """
 Distributed Transaction & State Consistency Verifier.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.service_communication.domain.models import DistributedConsistencyReport
 from app.platform_verification.service_communication.domain.interfaces import IDistributedConsistencyVerifier

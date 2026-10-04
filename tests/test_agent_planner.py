@@ -184,11 +184,22 @@ def test_fluent_builders_suite():
     assert cand.strategy_used == "LEAST_COST"
     assert cand.rank_score == 0.85
 
-    ev = PlanningEvidenceBuilder("Verified tool exists").with_source("TOOL_REGISTRY").with_data("status", "AVAILABLE").build()
+    ev = (
+        PlanningEvidenceBuilder("Verified tool exists")
+        .with_source("TOOL_REGISTRY")
+        .with_data("status", "AVAILABLE")
+        .build()
+    )
     assert ev.source == "TOOL_REGISTRY"
     assert ev.data["status"] == "AVAILABLE"
 
-    trace = PlanningTraceBuilder("G1").with_strategy("HIERARCHICAL").add_evidence(ev).add_rejected_alternative("AltPlan", "High cost", 0.4).build()
+    trace = (
+        PlanningTraceBuilder("G1")
+        .with_strategy("HIERARCHICAL")
+        .add_evidence(ev)
+        .add_rejected_alternative("AltPlan", "High cost", 0.4)
+        .build()
+    )
     assert trace.goal_id == "G1"
     assert len(trace.evidences) == 1
     assert len(trace.rejected_alternatives) == 1

@@ -12,6 +12,7 @@ from app.model_governance.registry.models import Model
 
 class BenchmarkTestCase(BaseModel):
     """Single test item in an evaluation dataset."""
+
     case_id: str = Field(default_factory=lambda: f"tc_{uuid.uuid4().hex[:6]}")
     prompt: Optional[str] = None
     input: Optional[Any] = None
@@ -22,6 +23,7 @@ class BenchmarkTestCase(BaseModel):
 
 class ModelBenchmarkDataset(BaseModel):
     """Named evaluation benchmark dataset."""
+
     dataset_id: str
     name: str
     domain: str = "Finance & Legal"
@@ -52,7 +54,9 @@ class ModelBenchmarkRunner:
             for item in test_items:
                 try:
                     out = fn(item)
-                    expected = item.get("expected") if isinstance(item, dict) else getattr(item, "expected_output", None)
+                    expected = (
+                        item.get("expected") if isinstance(item, dict) else getattr(item, "expected_output", None)
+                    )
                     if out == expected or (isinstance(expected, dict) and out == expected):
                         correct += 1
                 except Exception:

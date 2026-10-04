@@ -26,4 +26,3 @@ class BaseOCRProvider(ABC):
 
 # Alias for backward compatibility across pipeline
 OCRProvider = BaseOCRProvider
-

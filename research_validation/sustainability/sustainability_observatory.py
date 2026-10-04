@@ -25,10 +25,11 @@ class MeasurementSourceType(str, Enum):
 @dataclass
 class WorkflowCarbonMeasurement:
     """Telemetry for energy and carbon consumed by an execution."""
+
     workflow_id: str
     source_type: MeasurementSourceType
     is_measured_telemetry: bool  # Strictly flagged!
-    is_estimate: bool            # Strictly flagged!
+    is_estimate: bool  # Strictly flagged!
     duration_seconds: float
     documents_processed: int
     cpu_energy_joules: float
@@ -43,6 +44,7 @@ class WorkflowCarbonMeasurement:
 @dataclass
 class SustainabilityObservatoryReport:
     """Consolidated sustainability and environmental impact report."""
+
     total_workflows_evaluated: int
     measured_telemetry_count: int
     estimated_models_count: int
@@ -74,7 +76,7 @@ class SustainabilityObservatory:
         cpu_power_watts: float = 45.0,
         gpu_power_watts: float = 0.0,
         grid_intensity: float = 60.0,  # Finland green cloud baseline (gCO2eq/kWh)
-        pue: float = 1.10
+        pue: float = 1.10,
     ) -> WorkflowCarbonMeasurement:
         """Create a single carbon and energy telemetry record."""
         is_measured = source in (MeasurementSourceType.MEASURED_HARDWARE_RAPL, MeasurementSourceType.MEASURED_GPU_NVML)
@@ -104,14 +106,11 @@ class SustainabilityObservatory:
             grid_carbon_intensity_g_per_kwh=grid_intensity,
             total_carbon_emissions_g_co2=carbon_g,
             energy_per_document_joules=e_per_doc,
-            carbon_per_document_g=c_per_doc
+            carbon_per_document_g=c_per_doc,
         )
 
     @classmethod
-    def generate_observatory_report(
-        cls,
-        records: List[WorkflowCarbonMeasurement]
-    ) -> SustainabilityObservatoryReport:
+    def generate_observatory_report(cls, records: List[WorkflowCarbonMeasurement]) -> SustainabilityObservatoryReport:
         """Generate comprehensive sustainability observatory audit."""
         if not records:
             return SustainabilityObservatoryReport(
@@ -127,7 +126,7 @@ class SustainabilityObservatory:
                 assumptions=["Workload energy monitored"],
                 limitations=["No energy telemetry recorded"],
                 reproducibility_instructions="Run workloads through SustainabilityObservatory.record_measurement()",
-                status="PASS"
+                status="PASS",
             )
 
         n = len(records)
@@ -139,7 +138,9 @@ class SustainabilityObservatory:
         mean_e_doc = sum(r.energy_per_document_joules for r in records) / n
         mean_c_doc = sum(r.carbon_per_document_g for r in records) / n
 
-        grade = "A_GREEN_OPTIMIZED" if mean_c_doc < 0.05 else "B_STANDARD" if mean_c_doc < 0.50 else "C_CARBON_INTENSIVE"
+        grade = (
+            "A_GREEN_OPTIMIZED" if mean_c_doc < 0.05 else "B_STANDARD" if mean_c_doc < 0.50 else "C_CARBON_INTENSIVE"
+        )
         status = "PASS" if grade != "C_CARBON_INTENSIVE" else "HIGH_EMISSIONS"
 
         return SustainabilityObservatoryReport(
@@ -154,12 +155,12 @@ class SustainabilityObservatory:
             measurements=records,
             assumptions=[
                 "Grid carbon intensity derived from Electricity Maps / Our World in Data regional averages",
-                "Datacenter Power Usage Effectiveness (PUE) assumed at 1.10 for hyperscaler facilities"
+                "Datacenter Power Usage Effectiveness (PUE) assumed at 1.10 for hyperscaler facilities",
             ],
             methodology="Hardware energy integration (Joules) converted to operational CO2 equivalent via regional grid carbon intensity factors.",
             limitations=[
                 "Embodied hardware manufacturing carbon (Scope 3) is amortized separately and not included in per-query operational totals"
             ],
             reproducibility_instructions="Execute SustainabilityObservatory with Intel RAPL or estimated TDP profiles.",
-            status=status
+            status=status,
         )

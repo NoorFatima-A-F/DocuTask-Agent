@@ -1,6 +1,7 @@
 """
 Runtime Coordinator for Enterprise Database Architecture Verification.
 """
+
 import uuid
 from typing import Dict, List, Any, Optional
 from app.platform_verification.database_verification.domain.models import (
@@ -139,7 +140,13 @@ class DatabaseVerificationRuntime:
                 table_name="users",
                 columns={
                     "id": ColumnDefinition(name="id", data_type="uuid", is_primary_key=True),
-                    "tenant_id": ColumnDefinition(name="tenant_id", data_type="uuid", is_foreign_key=True, foreign_target="tenants.id", is_indexed=True),
+                    "tenant_id": ColumnDefinition(
+                        name="tenant_id",
+                        data_type="uuid",
+                        is_foreign_key=True,
+                        foreign_target="tenants.id",
+                        is_indexed=True,
+                    ),
                     "email": ColumnDefinition(name="email", data_type="varchar", is_nullable=False, is_unique=True),
                     "username": ColumnDefinition(name="username", data_type="varchar", is_nullable=False),
                     "created_at": ColumnDefinition(name="created_at", data_type="timestamp", is_nullable=False),
@@ -152,8 +159,20 @@ class DatabaseVerificationRuntime:
                 table_name="documents",
                 columns={
                     "id": ColumnDefinition(name="id", data_type="uuid", is_primary_key=True),
-                    "tenant_id": ColumnDefinition(name="tenant_id", data_type="uuid", is_foreign_key=True, foreign_target="tenants.id", is_indexed=True),
-                    "user_id": ColumnDefinition(name="user_id", data_type="uuid", is_foreign_key=True, foreign_target="users.id", is_indexed=True),
+                    "tenant_id": ColumnDefinition(
+                        name="tenant_id",
+                        data_type="uuid",
+                        is_foreign_key=True,
+                        foreign_target="tenants.id",
+                        is_indexed=True,
+                    ),
+                    "user_id": ColumnDefinition(
+                        name="user_id",
+                        data_type="uuid",
+                        is_foreign_key=True,
+                        foreign_target="users.id",
+                        is_indexed=True,
+                    ),
                     "filename": ColumnDefinition(name="filename", data_type="varchar", is_nullable=False),
                     "status": ColumnDefinition(name="status", data_type="varchar", is_nullable=False),
                     "created_at": ColumnDefinition(name="created_at", data_type="timestamp", is_nullable=False),
@@ -169,8 +188,18 @@ class DatabaseVerificationRuntime:
 
     def _default_migrations(self) -> List[MigrationStep]:
         return [
-            MigrationStep(version="001_initial", description="Create initial tenants and users", has_upgrade=True, has_downgrade=True),
-            MigrationStep(version="002_documents", description="Create documents table with indexes", has_upgrade=True, has_downgrade=True),
+            MigrationStep(
+                version="001_initial",
+                description="Create initial tenants and users",
+                has_upgrade=True,
+                has_downgrade=True,
+            ),
+            MigrationStep(
+                version="002_documents",
+                description="Create documents table with indexes",
+                has_upgrade=True,
+                has_downgrade=True,
+            ),
         ]
 
     def _default_workflows(self) -> List[Dict[str, Any]]:

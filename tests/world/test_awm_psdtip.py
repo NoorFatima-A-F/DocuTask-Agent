@@ -320,10 +320,13 @@ def test_predictive_governance_and_rest_endpoints(client):
     assert isinstance(resp.json(), list)
 
     # Test POST /api/v1/world/predict
-    resp = client.post("/api/v1/world/predict", json={
-        "mission_goal": "Process 500 Enterprise Invoice Documents",
-        "sample_trials": 200,
-    })
+    resp = client.post(
+        "/api/v1/world/predict",
+        json={
+            "mission_goal": "Process 500 Enterprise Invoice Documents",
+            "sample_trials": 200,
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "PREDICTION_COMPLETED"
     plan_id = resp.json()["selected_plan"]["candidate_id"]
@@ -334,14 +337,17 @@ def test_predictive_governance_and_rest_endpoints(client):
     assert isinstance(resp.json(), list)
 
     # Test POST /api/v1/world/simulate
-    resp = client.post("/api/v1/world/simulate", json={
-        "name": "API Burst Simulation",
-        "scenario_type": "BURST_TRAFFIC",
-        "mode": "MONTE_CARLO",
-        "parameters": {"traffic_multiplier": 2.0},
-        "concurrency": 8,
-        "trials_count": 50,
-    })
+    resp = client.post(
+        "/api/v1/world/simulate",
+        json={
+            "name": "API Burst Simulation",
+            "scenario_type": "BURST_TRAFFIC",
+            "mode": "MONTE_CARLO",
+            "parameters": {"traffic_multiplier": 2.0},
+            "concurrency": 8,
+            "trials_count": 50,
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "SIMULATION_COMPLETED"
 
@@ -351,11 +357,14 @@ def test_predictive_governance_and_rest_endpoints(client):
     assert "outcomes" in resp.json()
 
     # Test POST /api/v1/world/counterfactual
-    resp = client.post("/api/v1/world/counterfactual", json={
-        "premise": "What if cache TTL is extended to 1 hour?",
-        "altered_variables": {"cache_ttl_sec": 3600},
-        "target_objectives": ["LATENCY", "COST"],
-    })
+    resp = client.post(
+        "/api/v1/world/counterfactual",
+        json={
+            "premise": "What if cache TTL is extended to 1 hour?",
+            "altered_variables": {"cache_ttl_sec": 3600},
+            "target_objectives": ["LATENCY", "COST"],
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "COUNTERFACTUAL_EVALUATED"
 
@@ -364,12 +373,15 @@ def test_predictive_governance_and_rest_endpoints(client):
     assert resp.status_code == 200
 
     # Test POST /api/v1/world/forecast
-    resp = client.post("/api/v1/world/forecast", json={
-        "target_metric": "THROUGHPUT_QPS",
-        "horizon": "SHORT_TERM",
-        "baseline_value": 45.0,
-        "historical_variance": 3.0,
-    })
+    resp = client.post(
+        "/api/v1/world/forecast",
+        json={
+            "target_metric": "THROUGHPUT_QPS",
+            "horizon": "SHORT_TERM",
+            "baseline_value": 45.0,
+            "historical_variance": 3.0,
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "FORECAST_GENERATED"
 
@@ -379,15 +391,18 @@ def test_predictive_governance_and_rest_endpoints(client):
     assert "scorecard" in resp.json()
 
     # Test POST /api/v1/world/analyze-risk
-    resp = client.post("/api/v1/world/analyze-risk", json={
-        "risk_type": "LATENCY_DEGRADATION",
-        "severity": "LOW",
-        "probability": 0.05,
-        "impact_score": 0.25,
-        "description": "Minor serialization on large batches",
-        "affected_components": ["DAG_SCHEDULER"],
-        "mitigation": "Increase pre-fetch queue depth",
-    })
+    resp = client.post(
+        "/api/v1/world/analyze-risk",
+        json={
+            "risk_type": "LATENCY_DEGRADATION",
+            "severity": "LOW",
+            "probability": 0.05,
+            "impact_score": 0.25,
+            "description": "Minor serialization on large batches",
+            "affected_components": ["DAG_SCHEDULER"],
+            "mitigation": "Increase pre-fetch queue depth",
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "RISK_RECORDED"
 
@@ -396,15 +411,18 @@ def test_predictive_governance_and_rest_endpoints(client):
     assert resp.status_code == 200
 
     # Test POST /api/v1/world/discover-opportunities
-    resp = client.post("/api/v1/world/discover-opportunities", json={
-        "title": "Batch Vector Search Parallelism",
-        "category": "COST_REDUCTION",
-        "description": "Parallelize embedding similarity searches across worker cores",
-        "latency_gain_pct": 24.0,
-        "cost_saving_pct": 14.0,
-        "confidence": 0.99,
-        "directive": "Enable multi-threaded vector indexing",
-    })
+    resp = client.post(
+        "/api/v1/world/discover-opportunities",
+        json={
+            "title": "Batch Vector Search Parallelism",
+            "category": "COST_REDUCTION",
+            "description": "Parallelize embedding similarity searches across worker cores",
+            "latency_gain_pct": 24.0,
+            "cost_saving_pct": 14.0,
+            "confidence": 0.99,
+            "directive": "Enable multi-threaded vector indexing",
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "OPPORTUNITY_REGISTERED"
 
@@ -422,20 +440,26 @@ def test_predictive_governance_and_rest_endpoints(client):
     assert resp.status_code == 200
 
     # Test POST /api/v1/world/approve
-    resp = client.post("/api/v1/world/approve", json={
-        "target_prediction_id": plan_id,
-        "target_type": "PLAN_EXECUTION",
-        "approver_role": "EXECUTIVE_DIRECTOR",
-        "decision": "APPROVED",
-        "rationale": "Empirically validated via Monte Carlo simulation with 99.9% success rate.",
-    })
+    resp = client.post(
+        "/api/v1/world/approve",
+        json={
+            "target_prediction_id": plan_id,
+            "target_type": "PLAN_EXECUTION",
+            "approver_role": "EXECUTIVE_DIRECTOR",
+            "decision": "APPROVED",
+            "rationale": "Empirically validated via Monte Carlo simulation with 99.9% success rate.",
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "APPROVED"
 
     # Test POST /api/v1/world/rollback
-    resp = client.post("/api/v1/world/rollback", json={
-        "target_id": plan_id,
-        "reason": "Test rollback API endpoint",
-    })
+    resp = client.post(
+        "/api/v1/world/rollback",
+        json={
+            "target_id": plan_id,
+            "reason": "Test rollback API endpoint",
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["status"] == "ROLLED_BACK"

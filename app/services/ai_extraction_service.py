@@ -36,10 +36,7 @@ class AIExtractionService:
     MAX_RETRIES = 3
 
     def __init__(
-        self,
-        document_repo: DocumentRepository,
-        ai_extraction_repo: AIExtractionRepository,
-        ocr_service: OCRService
+        self, document_repo: DocumentRepository, ai_extraction_repo: AIExtractionRepository, ocr_service: OCRService
     ):
         self.doc_repo = document_repo
         self.ai_repo = ai_extraction_repo
@@ -47,7 +44,9 @@ class AIExtractionService:
 
     def _to_response_schema(self, record: AIExtraction) -> ExtractionResponse:
         """Converts database ORM entity to ExtractionResponse Pydantic schema."""
-        parsed_json = json.loads(record.structured_json) if isinstance(record.structured_json, str) else record.structured_json
+        parsed_json = (
+            json.loads(record.structured_json) if isinstance(record.structured_json, str) else record.structured_json
+        )
 
         return ExtractionResponse(
             id=record.id,
@@ -57,27 +56,22 @@ class AIExtractionService:
                 provider=record.provider,
                 model=record.model,
                 prompt_version=record.prompt_version,
-                created_at=record.created_at
+                created_at=record.created_at,
             ),
             statistics=ExtractionStatistics(
                 processing_time_ms=record.processing_time_ms,
                 input_tokens=record.input_tokens,
                 output_tokens=record.output_tokens,
                 estimated_cost=record.estimated_cost,
-                retry_count=0
+                retry_count=0,
             ),
             result=ExtractionResult(
-                raw_response=record.raw_response,
-                structured_json=parsed_json,
-                confidence=record.confidence
-            )
+                raw_response=record.raw_response, structured_json=parsed_json, confidence=record.confidence
+            ),
         )
 
     async def extract_structured_data(
-        self,
-        document_id: UUID,
-        owner: User,
-        request: ExtractionRequest
+        self, document_id: UUID, owner: User, request: ExtractionRequest
     ) -> ExtractionResponse:
         """
         Extracts structured JSON data for document using specified LLM provider and document schema.
@@ -89,7 +83,11 @@ class AIExtractionService:
 
         # Ownership authorization check
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning("Unauthorized AI extraction attempt: User '%s' on Document '%s'", sanitize_log_input(owner.id), sanitize_log_input(document_id))
+            logger.warning(
+                "Unauthorized AI extraction attempt: User '%s' on Document '%s'",
+                sanitize_log_input(owner.id),
+                sanitize_log_input(document_id),
+            )
             raise ResourceNotFoundException("Document not found")
 
         doc_type = request.document_type.lower().strip()
@@ -98,7 +96,11 @@ class AIExtractionService:
         if not request.force_reextract:
             latest = await self.ai_repo.get_latest(document_id, document_type=doc_type)
             if latest:
-                logger.info("Returning cached AI extraction for document '%s' type '%s'", sanitize_log_input(document_id), sanitize_log_input(doc_type))
+                logger.info(
+                    "Returning cached AI extraction for document '%s' type '%s'",
+                    sanitize_log_input(document_id),
+                    sanitize_log_input(doc_type),
+                )
                 return self._to_response_schema(latest)
 
         # Update status to EXTRACTION_RUNNING
@@ -109,11 +111,15 @@ class AIExtractionService:
             try:
                 doc_content = await self.ocr_service.get_extracted_text(document_id, owner)
             except ResourceNotFoundException:
-                logger.info("No text found for doc '%s'. Executing OCR extraction first...", sanitize_log_input(document_id))
+                logger.info(
+                    "No text found for doc '%s'. Executing OCR extraction first...", sanitize_log_input(document_id)
+                )
                 doc_content = await self.ocr_service.extract_text_for_document(document_id, owner)
 
             if not doc_content.text or not doc_content.text.strip():
-                logger.warning("Document '%s' contains no text content for AI extraction", sanitize_log_input(document_id))
+                logger.warning(
+                    "Document '%s' contains no text content for AI extraction", sanitize_log_input(document_id)
+                )
                 doc_text = "No readable text content was found in this document."
             else:
                 doc_text = doc_content.text
@@ -144,7 +150,7 @@ class AIExtractionService:
                         prompt=current_prompt,
                         json_schema=json_schema,
                         system_instruction=system_instruction,
-                        model=target_model
+                        model=target_model,
                     )
 
                     total_input_tokens += in_tok
@@ -181,20 +187,22 @@ class AIExtractionService:
             estimated_cost = provider.calculate_cost(total_input_tokens, total_output_tokens, target_model)
 
             # Persist AIExtraction record in database
-            extraction_record = await self.ai_repo.create({
-                "document_id": document_id,
-                "document_type": doc_type,
-                "provider": provider.provider_name,
-                "model": target_model,
-                "raw_response": final_raw_response,
-                "structured_json": json.dumps(validated_dict),
-                "prompt_version": "v1.0",
-                "processing_time_ms": processing_time_ms,
-                "input_tokens": total_input_tokens,
-                "output_tokens": total_output_tokens,
-                "estimated_cost": estimated_cost,
-                "confidence": confidence
-            })
+            extraction_record = await self.ai_repo.create(
+                {
+                    "document_id": document_id,
+                    "document_type": doc_type,
+                    "provider": provider.provider_name,
+                    "model": target_model,
+                    "raw_response": final_raw_response,
+                    "structured_json": json.dumps(validated_dict),
+                    "prompt_version": "v1.0",
+                    "processing_time_ms": processing_time_ms,
+                    "input_tokens": total_input_tokens,
+                    "output_tokens": total_output_tokens,
+                    "estimated_cost": estimated_cost,
+                    "confidence": confidence,
+                }
+            )
 
             # Update document status to EXTRACTION_COMPLETED
             await self.doc_repo.update_status(doc, "EXTRACTION_COMPLETED")
@@ -215,24 +223,24 @@ class AIExtractionService:
                     provider=provider.provider_name,
                     model=target_model,
                     prompt_version="v1.0",
-                    created_at=extraction_record.created_at
+                    created_at=extraction_record.created_at,
                 ),
                 statistics=ExtractionStatistics(
                     processing_time_ms=processing_time_ms,
                     input_tokens=total_input_tokens,
                     output_tokens=total_output_tokens,
                     estimated_cost=estimated_cost,
-                    retry_count=retry_count
+                    retry_count=retry_count,
                 ),
                 result=ExtractionResult(
-                    raw_response=final_raw_response,
-                    structured_json=validated_dict,
-                    confidence=confidence
-                )
+                    raw_response=final_raw_response, structured_json=validated_dict, confidence=confidence
+                ),
             )
 
         except Exception as exc:
-            logger.error("AI extraction failed for document '%s': %s", sanitize_log_input(document_id), sanitize_log_input(exc))
+            logger.error(
+                "AI extraction failed for document '%s': %s", sanitize_log_input(document_id), sanitize_log_input(exc)
+            )
             await self.doc_repo.update_status(doc, "EXTRACTION_FAILED")
             raise exc
 
@@ -260,7 +268,7 @@ class AIExtractionService:
             "status": doc.upload_status,
             "has_extraction": latest is not None,
             "document_type": latest.document_type if latest else None,
-            "confidence": latest.confidence if latest else None
+            "confidence": latest.confidence if latest else None,
         }
 
     async def get_extraction_history(self, document_id: UUID, owner: User) -> List[ExtractionResponse]:

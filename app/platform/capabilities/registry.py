@@ -12,6 +12,7 @@ from ..kernel.versioning import SemanticVersion
 @dataclass
 class CapabilityDescriptor:
     """Descriptor of an advertised platform capability."""
+
     name: str  # e.g., 'document.ocr', 'ai.embedding', 'tool_calling'
     provider: str  # Module or plugin name
     version: SemanticVersion = field(default_factory=lambda: SemanticVersion(1, 0, 0))

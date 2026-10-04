@@ -1,6 +1,7 @@
 """
 Comprehensive Test Suite for Enterprise Configuration, Secret & Cryptographic Backup Verification (Part 3G.2D).
 """
+
 import os
 import json
 import pytest
@@ -65,6 +66,7 @@ from app.platform_verification.configuration_backup_verification.api.configurati
 @pytest.fixture
 def test_client():
     from fastapi import FastAPI
+
     app = FastAPI()
     app.include_router(router)
     return TestClient(app)

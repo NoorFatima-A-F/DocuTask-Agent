@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field, ConfigDict
 
 class CertificationStatus(str, Enum):
     """Permitted certification lifecycle statuses."""
+
     PENDING = "PENDING"
     VALID = "VALID"
     REVOKED = "REVOKED"
@@ -17,6 +18,7 @@ class CertificationStatus(str, Enum):
 
 class RevocationReason(str, Enum):
     """Strictly categorized reasons for certificate revocation."""
+
     EVIDENCE_TAMPERING = "EVIDENCE_TAMPERING"
     SECURITY_VULNERABILITY = "SECURITY_VULNERABILITY"
     INVALID_AUDIT = "INVALID_AUDIT"
@@ -26,6 +28,7 @@ class RevocationReason(str, Enum):
 
 class RevocationRecord(BaseModel):
     """Cryptographically attributable revocation record."""
+
     certificate_id: str
     revocation_timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     reason: RevocationReason
@@ -36,17 +39,19 @@ class RevocationRecord(BaseModel):
 
 class EQIBreakdown(BaseModel):
     """Detailed formula components of the Evidence Quality Index."""
+
     evidence_coverage_score: float  # max 25
     verification_depth_score: float  # max 25
-    reproducibility_score: float     # max 20
-    integrity_score: float           # max 15
-    freshness_score: float           # max 15
-    total_eqi: float                 # max 100
-    rating: str                      # ENTERPRISE_GRADE, ACCEPTABLE, DEGRADED
+    reproducibility_score: float  # max 20
+    integrity_score: float  # max 15
+    freshness_score: float  # max 15
+    total_eqi: float  # max 100
+    rating: str  # ENTERPRISE_GRADE, ACCEPTABLE, DEGRADED
 
 
 class CertificationRecord(BaseModel):
     """Formal, cryptographically signed certification artifact."""
+
     model_config = ConfigDict(frozen=True)
 
     certificate_id: str
@@ -104,6 +109,7 @@ class CertificationRecord(BaseModel):
     def canonical_payload_for_signing(self) -> str:
         """Produces deterministic JSON representation for digital signature calculation."""
         import json
+
         payload = {
             "certificate_id": self.certificate_id,
             "system_name": self.system_name,

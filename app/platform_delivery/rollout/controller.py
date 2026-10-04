@@ -1,4 +1,5 @@
 """Progressive Delivery Controller."""
+
 from typing import Optional
 from ..control_plane.controller import DeploymentRecord
 from ..strategies.canary import CanaryStrategy

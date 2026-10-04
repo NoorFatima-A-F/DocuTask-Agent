@@ -78,7 +78,10 @@ class BaselineStressVerifier(IBaselineStressVerifier):
                 name="Task State & Results Retrieval Baselines (< 15ms p95)",
                 passed=endpoint_baselines[1].p95_latency_ms < 15.0 and endpoint_baselines[2].p95_latency_ms < 15.0,
                 details=f"Tasks: {endpoint_baselines[1].p95_latency_ms}ms p95, Results: {endpoint_baselines[2].p95_latency_ms}ms p95",
-                metrics={"tasks_p95_ms": endpoint_baselines[1].p95_latency_ms, "results_p95_ms": endpoint_baselines[2].p95_latency_ms},
+                metrics={
+                    "tasks_p95_ms": endpoint_baselines[1].p95_latency_ms,
+                    "results_p95_ms": endpoint_baselines[2].p95_latency_ms,
+                },
             ),
             CheckResult(
                 name="6-Stage Agent Execution Lifecycle (< 1,500ms total)",

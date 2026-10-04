@@ -34,10 +34,34 @@ class ResourceAlertingVerifier(IResourceAlertingVerifier):
 
     def verify(self) -> ResourceAlertReport:
         alerts = [
-            AlertRuleVerification(alert_name="HighCPUUtilizationAlert", metric_condition="container_cpu_usage_pct > 90%", detection_window="5m", alert_fired=True, notification_delivered=True),
-            AlertRuleVerification(alert_name="HighMemoryUsageAlert", metric_condition="container_memory_rss_pct > 85%", detection_window="2m", alert_fired=True, notification_delivered=True),
-            AlertRuleVerification(alert_name="QueueBacklogGrowthAlert", metric_condition="redis_queue_growth_rate > 0 AND processing_rate < ingress_rate", detection_window="3m", alert_fired=True, notification_delivered=True),
-            AlertRuleVerification(alert_name="DBConnectionExhaustionAlert", metric_condition="pg_active_connections_pct > 85%", detection_window="1m", alert_fired=True, notification_delivered=True),
+            AlertRuleVerification(
+                alert_name="HighCPUUtilizationAlert",
+                metric_condition="container_cpu_usage_pct > 90%",
+                detection_window="5m",
+                alert_fired=True,
+                notification_delivered=True,
+            ),
+            AlertRuleVerification(
+                alert_name="HighMemoryUsageAlert",
+                metric_condition="container_memory_rss_pct > 85%",
+                detection_window="2m",
+                alert_fired=True,
+                notification_delivered=True,
+            ),
+            AlertRuleVerification(
+                alert_name="QueueBacklogGrowthAlert",
+                metric_condition="redis_queue_growth_rate > 0 AND processing_rate < ingress_rate",
+                detection_window="3m",
+                alert_fired=True,
+                notification_delivered=True,
+            ),
+            AlertRuleVerification(
+                alert_name="DBConnectionExhaustionAlert",
+                metric_condition="pg_active_connections_pct > 85%",
+                detection_window="1m",
+                alert_fired=True,
+                notification_delivered=True,
+            ),
         ]
 
         all_delivered = all(a.alert_fired and a.notification_delivered for a in alerts)

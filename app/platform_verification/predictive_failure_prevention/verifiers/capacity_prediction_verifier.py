@@ -1,6 +1,7 @@
 """
 Phase 3H.5.9.5: Capacity Risk Prediction Verifier
 """
+
 from ..domain.interfaces import ICapacityPredictionVerifier
 from ..domain.models import CapacityPredictionReport, CapacityPredictionItem, PredictionRiskLevel
 
@@ -51,8 +52,7 @@ class CapacityPredictionVerifier(ICapacityPredictionVerifier):
         ]
 
         critical = sum(
-            1 for p in predictions
-            if p.risk_level in (PredictionRiskLevel.HIGH, PredictionRiskLevel.CRITICAL)
+            1 for p in predictions if p.risk_level in (PredictionRiskLevel.HIGH, PredictionRiskLevel.CRITICAL)
         )
 
         return CapacityPredictionReport(

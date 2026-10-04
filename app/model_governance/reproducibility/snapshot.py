@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 
 class ExecutionSnapshot(BaseModel):
     """Immutable execution context snapshot for model reproducibility."""
+
     snapshot_id: str
     organization_id: str
     workflow_id: Optional[str] = None

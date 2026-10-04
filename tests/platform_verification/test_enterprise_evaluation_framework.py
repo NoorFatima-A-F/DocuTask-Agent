@@ -1,6 +1,7 @@
 """
 Comprehensive test suite for Enterprise Verification Metrics, Evaluation & Scoring Framework (PART 5).
 """
+
 from app.platform_verification.evaluation_engine import (
     MetricCategory,
     CertificationBand,
@@ -45,12 +46,20 @@ def test_automated_regression_detection():
     runtime = EvaluationPlatformRuntime()
 
     candidate_results = [
-        runtime.pipeline.agents[0].calculator.calculate({"correct_predictions": 85, "total_predictions": 100}, runtime.registry.get("func_accuracy")),
-        runtime.pipeline.agents[1].calculator.calculate({"p95_latency_ms": 900.0}, runtime.registry.get("perf_p95_latency")),
+        runtime.pipeline.agents[0].calculator.calculate(
+            {"correct_predictions": 85, "total_predictions": 100}, runtime.registry.get("func_accuracy")
+        ),
+        runtime.pipeline.agents[1].calculator.calculate(
+            {"p95_latency_ms": 900.0}, runtime.registry.get("perf_p95_latency")
+        ),
     ]
     baseline_results = [
-        runtime.pipeline.agents[0].calculator.calculate({"correct_predictions": 98, "total_predictions": 100}, runtime.registry.get("func_accuracy")),
-        runtime.pipeline.agents[1].calculator.calculate({"p95_latency_ms": 400.0}, runtime.registry.get("perf_p95_latency")),
+        runtime.pipeline.agents[0].calculator.calculate(
+            {"correct_predictions": 98, "total_predictions": 100}, runtime.registry.get("func_accuracy")
+        ),
+        runtime.pipeline.agents[1].calculator.calculate(
+            {"p95_latency_ms": 400.0}, runtime.registry.get("perf_p95_latency")
+        ),
     ]
 
     alerts = runtime.detect_regressions(candidate_results, baseline_results)

@@ -1,6 +1,7 @@
 """
 Phase 3H.5.9: Predictive Health Intelligence Runtime Orchestrator
 """
+
 from typing import Dict, Any
 from ..verifiers import (
     PredictiveArchitectureVerifier,
@@ -35,9 +36,7 @@ class PredictiveHealthRuntime:
         self.scorer = PredictiveHealthScorer()
         self.exporter = PredictiveHealthExporter()
 
-    def run_full_verification(
-        self, output_dir: str = "predictive_failure_prevention_verification"
-    ) -> Dict[str, Any]:
+    def run_full_verification(self, output_dir: str = "predictive_failure_prevention_verification") -> Dict[str, Any]:
         arch_report = self.arch_verifier.verify_architecture()
         feature_report = self.feature_verifier.verify_feature_engineering()
         anomaly_report = self.anomaly_verifier.verify_anomaly_detection()

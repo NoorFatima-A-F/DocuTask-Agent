@@ -17,7 +17,7 @@ class EvaluationMetricsEngine:
         actual_json: Dict[str, Any],
         ground_truth_json: Dict[str, Any],
         schema_valid: bool = True,
-        confidence: float = 1.0
+        confidence: float = 1.0,
     ) -> MetricEvaluationResult:
         """
         Calculates field-level and document-level metrics comparing actual AI output against ground truth.
@@ -85,7 +85,7 @@ class EvaluationMetricsEngine:
             recall=recall,
             f1_score=f1_score,
             average_confidence=confidence,
-            confidence_correctness=confidence_correctness
+            confidence_correctness=confidence_correctness,
         )
 
     @staticmethod

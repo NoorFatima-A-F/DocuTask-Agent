@@ -15,7 +15,7 @@ class DependencyNode:
     criticality: str  # "CRITICAL", "HIGH", "MEDIUM", "LOW"
     redundancy_level: int = 2
     dependencies: List[str] = field(default_factory=list)  # IDs of nodes this node depends on
-    dependents: List[str] = field(default_factory=list)    # IDs of nodes that depend on this node
+    dependents: List[str] = field(default_factory=list)  # IDs of nodes that depend on this node
 
 
 class DependencyGraph:
@@ -37,7 +37,9 @@ class DependencyGraph:
             DependencyNode("redis-cache", "Redis Fast KV State Store", "DATASTORE", "HIGH", redundancy_level=3),
             DependencyNode("memory-graph", "Episodic Causal Memory", "DATASTORE", "HIGH", redundancy_level=2),
             DependencyNode("truth-ledger", "Truth & Proof Ledger", "DATASTORE", "CRITICAL", redundancy_level=3),
-            DependencyNode("evidence-store", "Cryptographic Evidence Store", "DATASTORE", "CRITICAL", redundancy_level=3),
+            DependencyNode(
+                "evidence-store", "Cryptographic Evidence Store", "DATASTORE", "CRITICAL", redundancy_level=3
+            ),
             DependencyNode("policy-engine", "Dynamic Sandbox & Policy", "SERVICE", "MEDIUM", redundancy_level=2),
             DependencyNode("dag-workers", "DAG Worker Subsystems", "SERVICE", "CRITICAL", redundancy_level=4),
             DependencyNode("planner-engine", "Autonomous Planner Engine", "SERVICE", "CRITICAL", redundancy_level=2),

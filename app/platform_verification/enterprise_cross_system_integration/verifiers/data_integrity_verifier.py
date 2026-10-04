@@ -25,11 +25,41 @@ class DataIntegrityVerifier(IDataIntegrityVerifier):
 
     def verify(self) -> DataIntegrityReport:
         probes = [
-            DataIntegrityProbe(target_layer="VectorIndexEmbedding", corruption_injected="BitFlipVectorCorruption", detected_automatically=True, recovery_successful=True, alert_triggered=True),
-            DataIntegrityProbe(target_layer="KnowledgeGraphTriples", corruption_injected="DanglingEdgeInjection", detected_automatically=True, recovery_successful=True, alert_triggered=True),
-            DataIntegrityProbe(target_layer="EpisodicMemoryCache", corruption_injected="CorruptedJSONSerialization", detected_automatically=True, recovery_successful=True, alert_triggered=True),
-            DataIntegrityProbe(target_layer="PostgreSQLStateSnapshots", corruption_injected="TruncatedTransactionRecord", detected_automatically=True, recovery_successful=True, alert_triggered=True),
-            DataIntegrityProbe(target_layer="ConfigurationCatalog", corruption_injected="InvalidYAMLSchemaTampering", detected_automatically=True, recovery_successful=True, alert_triggered=True),
+            DataIntegrityProbe(
+                target_layer="VectorIndexEmbedding",
+                corruption_injected="BitFlipVectorCorruption",
+                detected_automatically=True,
+                recovery_successful=True,
+                alert_triggered=True,
+            ),
+            DataIntegrityProbe(
+                target_layer="KnowledgeGraphTriples",
+                corruption_injected="DanglingEdgeInjection",
+                detected_automatically=True,
+                recovery_successful=True,
+                alert_triggered=True,
+            ),
+            DataIntegrityProbe(
+                target_layer="EpisodicMemoryCache",
+                corruption_injected="CorruptedJSONSerialization",
+                detected_automatically=True,
+                recovery_successful=True,
+                alert_triggered=True,
+            ),
+            DataIntegrityProbe(
+                target_layer="PostgreSQLStateSnapshots",
+                corruption_injected="TruncatedTransactionRecord",
+                detected_automatically=True,
+                recovery_successful=True,
+                alert_triggered=True,
+            ),
+            DataIntegrityProbe(
+                target_layer="ConfigurationCatalog",
+                corruption_injected="InvalidYAMLSchemaTampering",
+                detected_automatically=True,
+                recovery_successful=True,
+                alert_triggered=True,
+            ),
         ]
 
         checks = [

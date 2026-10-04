@@ -1,8 +1,10 @@
 """
 Domain Events for Configuration, Versioning & Dependency Management.
 """
+
 from dataclasses import dataclass
 from app.platform_verification.shared_kernel.events import DomainEvent
+
 
 @dataclass(frozen=True)
 class ConfigurationSnapshotCreatedEvent(DomainEvent):

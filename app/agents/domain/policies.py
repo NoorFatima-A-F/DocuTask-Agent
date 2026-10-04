@@ -10,6 +10,7 @@ from app.agents.domain.enums import RetryStrategy
 
 class RetryPolicy(BaseModel):
     """Retry policy configuration."""
+
     max_retries: int = Field(default=3, ge=0)
     strategy: RetryStrategy = Field(default=RetryStrategy.EXPONENTIAL_BACKOFF)
     initial_interval_seconds: float = Field(default=2.0, gt=0.0)
@@ -20,18 +21,21 @@ class RetryPolicy(BaseModel):
 
 class TimeoutPolicy(BaseModel):
     """Timeout policy configuration."""
+
     timeout_seconds: float = Field(default=300.0, gt=0.0)
     model_config = {"frozen": True}
 
 
 class ConcurrencyPolicy(BaseModel):
     """Concurrency policy configuration."""
+
     max_parallel_tasks: int = Field(default=4, ge=1)
     model_config = {"frozen": True}
 
 
 class FailurePolicy(BaseModel):
     """Failure policy configuration."""
+
     allow_partial_failure: bool = Field(default=False)
     fail_fast: bool = Field(default=True)
     model_config = {"frozen": True}
@@ -39,6 +43,7 @@ class FailurePolicy(BaseModel):
 
 class HumanReviewPolicy(BaseModel):
     """Human-in-the-loop review policy configuration."""
+
     require_human_review: bool = Field(default=False)
     confidence_threshold_for_review: float = Field(default=0.8, ge=0.0, le=1.0)
     model_config = {"frozen": True}
@@ -46,6 +51,7 @@ class HumanReviewPolicy(BaseModel):
 
 class FallbackPolicy(BaseModel):
     """Fallback policy configuration."""
+
     enable_fallback: bool = Field(default=True)
     fallback_handler_name: Optional[str] = Field(default=None)
     model_config = {"frozen": True}
@@ -53,6 +59,7 @@ class FallbackPolicy(BaseModel):
 
 class CheckpointPolicy(BaseModel):
     """State checkpoint policy configuration."""
+
     enable_checkpointing: bool = Field(default=True)
     checkpoint_frequency_steps: int = Field(default=1, ge=1)
     model_config = {"frozen": True}
@@ -60,6 +67,7 @@ class CheckpointPolicy(BaseModel):
 
 class ExecutionPolicy(BaseModel):
     """Aggregate Execution Policy combining sub-policies."""
+
     retry: RetryPolicy = Field(default_factory=RetryPolicy)
     timeout: TimeoutPolicy = Field(default_factory=TimeoutPolicy)
     concurrency: ConcurrencyPolicy = Field(default_factory=ConcurrencyPolicy)

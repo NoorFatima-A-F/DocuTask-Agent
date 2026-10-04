@@ -44,7 +44,9 @@ class ValidationReport:
             "hypothesis_id": self.hypothesis_id,
             "experiment_id": self.experiment_id,
             "evidence_ids": self.evidence_ids,
-            "validation_method": self.validation_method.value if hasattr(self.validation_method, "value") else str(self.validation_method),
+            "validation_method": self.validation_method.value
+            if hasattr(self.validation_method, "value")
+            else str(self.validation_method),
             "p_value": self.p_value,
             "effect_size_cohens_d": round(self.effect_size_cohens_d, 4),
             "confidence_interval_95": self.confidence_interval_95,

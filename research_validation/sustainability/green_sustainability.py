@@ -18,6 +18,7 @@ from typing import Any, Dict
 
 class CloudRegionGridIntensity(float, Enum):
     """Grid Carbon Intensity in grams CO2eq per kWh (gCO2eq/kWh)."""
+
     US_CENTRAL1_IOWA = 380.0
     US_EAST4_VIRGINIA = 310.0
     EUROPE_WEST1_BELGIUM = 120.0
@@ -29,6 +30,7 @@ class CloudRegionGridIntensity(float, Enum):
 @dataclass
 class CarbonFootprintReport:
     """Rigorous environmental sustainability and carbon audit."""
+
     execution_time_sec: float
     total_energy_joules: float
     total_energy_kwh: float
@@ -60,7 +62,7 @@ class GreenSustainabilityLab:
         cpu_utilization_ratio: float = 0.50,
         grid_intensity: CloudRegionGridIntensity = CloudRegionGridIntensity.EUROPE_NORTH1_FINLAND,
         pue: float = DEFAULT_PUE,
-        cpu_tdp_watts: float = DEFAULT_CPU_TDP_WATTS
+        cpu_tdp_watts: float = DEFAULT_CPU_TDP_WATTS,
     ) -> CarbonFootprintReport:
         """
         Calculate energy consumption and operational carbon emissions.
@@ -77,7 +79,7 @@ class GreenSustainabilityLab:
                 carbon_per_document_g=0.0,
                 energy_per_document_joules=0.0,
                 is_carbon_optimized=True,
-                status="INSUFFICIENT_EVIDENCE"
+                status="INSUFFICIENT_EVIDENCE",
             )
 
         # Total power = (CPU_TDP * utilization) + DRAM_power
@@ -108,5 +110,5 @@ class GreenSustainabilityLab:
             energy_per_document_joules=energy_per_doc,
             is_carbon_optimized=is_opt,
             status=status,
-            details={"grid_region": grid_intensity.name, "power_watts": datacenter_power_watts}
+            details={"grid_region": grid_intensity.name, "power_watts": datacenter_power_watts},
         )

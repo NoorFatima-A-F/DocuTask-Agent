@@ -1,6 +1,7 @@
 """
 Standardized interfaces for Enterprise Verification Test Harness.
 """
+
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
@@ -16,15 +17,15 @@ from app.platform_verification.test_harness.domain.models import (
 
 class ITestHarnessRunner(ABC):
     """Executes a test specification inside an isolated verification context."""
+
     @abstractmethod
-    def execute_test(
-        self, spec: VerificationTestSpec, context: VerificationContext
-    ) -> HarnessExecutionResult:
+    def execute_test(self, spec: VerificationTestSpec, context: VerificationContext) -> HarnessExecutionResult:
         pass
 
 
 class ITestOrchestrator(ABC):
     """Orchestrates multi-test verification jobs through execution DAGs."""
+
     @abstractmethod
     def run_suite(
         self,
@@ -37,6 +38,7 @@ class ITestOrchestrator(ABC):
 
 class IWorkerPool(ABC):
     """Manages worker node registration, heartbeat, and task dispatch."""
+
     @abstractmethod
     def register_worker(self, worker_id: str, capabilities: List[Any]) -> WorkerNode:
         pass
@@ -56,6 +58,7 @@ class IWorkerPool(ABC):
 
 class IVerificationPlugin(ABC):
     """Standardized plugin extension contract for custom runners/evaluators/reporters."""
+
     @abstractmethod
     def initialize(self, config: Dict[str, Any]) -> None:
         pass

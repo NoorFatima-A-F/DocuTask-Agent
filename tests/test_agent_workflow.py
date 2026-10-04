@@ -61,6 +61,7 @@ from app.agents.workflow.workflow_cache import WorkflowCache
 # 1. Lifecycle State Machine Tests
 # ============================================================================
 
+
 def test_lifecycle_states_and_valid_transitions():
     """Tests valid transitions across 15 lifecycle states."""
     instance = WorkflowInstance(
@@ -122,6 +123,7 @@ def test_invalid_state_transitions_raise_error():
 # 2. DAG Graph & Cycle Detection Tests
 # ============================================================================
 
+
 def test_dag_graph_acyclic_and_topological_sort():
     """Validates acyclic DAG topological ordering."""
     node1 = WorkflowNode(node_id="n1", name="Step 1", handler="h1")
@@ -160,6 +162,7 @@ def test_dag_graph_cycle_detection():
 # ============================================================================
 # 3. Fluent Builders Tests
 # ============================================================================
+
 
 def test_fluent_builders():
     """Tests node, graph, definition, and request builders."""
@@ -205,6 +208,7 @@ def test_fluent_builders():
 # ============================================================================
 # 4. Saga Orchestrator & Compensation Tests
 # ============================================================================
+
 
 @pytest.mark.asyncio
 async def test_saga_orchestrator_forward_and_rollback():
@@ -280,12 +284,14 @@ def test_missing_compensation_strict_mode():
     )
     with pytest.raises(MissingCompensationPathError):
         import asyncio
+
         asyncio.run(coordinator.execute_compensation(wf_id, lambda name: None))
 
 
 # ============================================================================
 # 5. Child Workflow & Hierarchy Tests
 # ============================================================================
+
 
 def test_child_workflow_manager_and_cascading_cancellation():
     """Tests parent-child linkage and recursive cascade cancellation."""
@@ -316,6 +322,7 @@ def test_child_workflow_manager_and_cascading_cancellation():
 # ============================================================================
 # 6. Signals, Timers, Waits & Gateways Tests
 # ============================================================================
+
 
 def test_signals_and_waits():
     """Tests signal emission/consumption and wait barrier tracking."""
@@ -357,6 +364,7 @@ def test_timer_manager():
 # 7. Human in the Loop Approval Tests
 # ============================================================================
 
+
 def test_human_approval_workflow():
     """Tests human approval workflow engine lifecycle."""
     engine = ApprovalWorkflowEngine()
@@ -383,6 +391,7 @@ def test_human_approval_workflow():
 # ============================================================================
 # 8. Replay & Migration Tests
 # ============================================================================
+
 
 @pytest.mark.asyncio
 async def test_workflow_replay_engine():
@@ -439,11 +448,7 @@ def test_workflow_migration_engine():
     assert migrated.state == WorkflowLifecycleState.RUNNING
 
     # Attempt invalid migration
-    def_v2 = (
-        WorkflowDefinitionBuilder("Pipeline")
-        .with_version(2, 0, 0)
-        .build()
-    )
+    def_v2 = WorkflowDefinitionBuilder("Pipeline").with_version(2, 0, 0).build()
     with pytest.raises(InvalidWorkflowMigrationError):
         migration.migrate_instance(instance, def_v2)
 
@@ -451,6 +456,7 @@ def test_workflow_migration_engine():
 # ============================================================================
 # 9. Adapters Tests
 # ============================================================================
+
 
 @pytest.mark.asyncio
 async def test_workflow_adapters():
@@ -489,6 +495,7 @@ async def test_workflow_adapters():
 # ============================================================================
 # 10. Telemetry, Metrics, Serialization, & Cache Tests
 # ============================================================================
+
 
 def test_telemetry_and_metrics():
     """Tests OpenTelemetry trace context and Cloud Monitoring metrics."""
@@ -550,6 +557,7 @@ def test_serialization_and_cache():
 # 11. End-to-End Workflow Execution & Factory Tests
 # ============================================================================
 
+
 @pytest.mark.asyncio
 async def test_end_to_end_workflow_execution():
     """Tests complete end-to-end execution of a 3-node workflow via WorkflowEngine."""
@@ -572,11 +580,7 @@ async def test_end_to_end_workflow_execution():
     )
     runtime.registry.register_definition(wf_def)
 
-    req = (
-        WorkflowRequestBuilder(wf_def.definition_id)
-        .with_input("document_id", "DOC-999")
-        .build()
-    )
+    req = WorkflowRequestBuilder(wf_def.definition_id).with_input("document_id", "DOC-999").build()
 
     result = await runtime.engine.start_workflow(req)
     assert result.lifecycle_state == WorkflowLifecycleState.COMPLETED

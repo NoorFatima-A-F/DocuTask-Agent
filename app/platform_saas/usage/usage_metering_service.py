@@ -11,9 +11,9 @@ from app.platform_saas.models.schemas import UsageRecord
 
 class UsageMeteringService:
     RATES = {
-        "llm_tokens": 0.000002,      # $2 per 1M tokens
-        "ocr_pages": 0.015,          # $0.015 per page
-        "api_requests": 0.0001,      # $0.10 per 1k requests
+        "llm_tokens": 0.000002,  # $2 per 1M tokens
+        "ocr_pages": 0.015,  # $0.015 per page
+        "api_requests": 0.0001,  # $0.10 per 1k requests
         "compute_seconds": 0.00005,  # $0.05 per 1k seconds
     }
 

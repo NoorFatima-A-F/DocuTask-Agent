@@ -30,7 +30,7 @@ class QualityEvaluator(IEvaluator):
             dimension=EvaluationDimension.QUALITY,
             score=quality_score,
             confidence=0.9,
-            evidence=[f"Output fields count: {output_count}", f"Errors encountered: {error_count}"]
+            evidence=[f"Output fields count: {output_count}", f"Errors encountered: {error_count}"],
         )
 
         return DimensionEvaluation(
@@ -39,5 +39,7 @@ class QualityEvaluator(IEvaluator):
             status=status,
             metrics=[metric],
             findings=[f"Overall output quality rated {status} ({quality_score:.2f})."],
-            recommendation_hints=["Enhance validation of generated intermediate fields."] if quality_score < 0.8 else []
+            recommendation_hints=["Enhance validation of generated intermediate fields."]
+            if quality_score < 0.8
+            else [],
         )

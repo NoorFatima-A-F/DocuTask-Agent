@@ -21,6 +21,7 @@ class ApprovalTier(str, Enum):
 
 class GovernanceDecision(BaseModel):
     """Decision made by the enterprise governance gatekeeper."""
+
     governance_id: str = Field(default_factory=lambda: f"gov_{uuid.uuid4().hex[:8]}")
     mission_id: str
     strategy_id: str

@@ -1,6 +1,7 @@
 """
 Interfaces and Contracts for Enterprise Verification Plugins and Extensibility.
 """
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Tuple
 from app.platform_verification.extension_framework.domain.models import (
@@ -173,7 +174,9 @@ class PluginRegistryInterface(ABC):
 
 class PluginLifecycleManagerInterface(ABC):
     @abstractmethod
-    def transition_state(self, plugin_id: str, target_state: PluginLifecycleState, reason: str = "") -> PluginLifecycleState:
+    def transition_state(
+        self, plugin_id: str, target_state: PluginLifecycleState, reason: str = ""
+    ) -> PluginLifecycleState:
         pass
 
     @abstractmethod

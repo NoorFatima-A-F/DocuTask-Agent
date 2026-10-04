@@ -2,6 +2,7 @@
 Phase 3I.8.7: Self-Healing Workflow Verifier
 Verifies complete autonomous recovery loops: Detection -> Diagnosis -> Decision -> Action -> Health Check -> Resume -> Learn.
 """
+
 from typing import List
 from ..domain.interfaces import ISelfHealingVerifier
 from ..domain.models import SelfHealingLoopSpec, SelfHealingValidationReport
@@ -44,7 +45,8 @@ class SelfHealingVerifier(ISelfHealingVerifier):
 
         all_loops_passed = all(l.loop_successful for l in loops)
         avg_mttr = round(
-            sum(l.detection_latency_sec + l.diagnosis_latency_sec + l.remediation_duration_sec for l in loops) / len(loops),
+            sum(l.detection_latency_sec + l.diagnosis_latency_sec + l.remediation_duration_sec for l in loops)
+            / len(loops),
             2,
         )
 

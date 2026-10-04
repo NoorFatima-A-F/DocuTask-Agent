@@ -10,7 +10,10 @@ class FactualityChecker:
 
     CONTRADICTION_PATTERNS = [
         (re.compile(r"(?i)\b(is\s+true)\b.*\b(is\s+false)\b"), "Direct logical contradiction in same passage"),
-        (re.compile(r"(?i)\b(total\s+is\s+\$?\d+)\b.*\b(total\s+amount\s+is\s+\$?\d+)\b"), "Conflicting totals reported"),
+        (
+            re.compile(r"(?i)\b(total\s+is\s+\$?\d+)\b.*\b(total\s+amount\s+is\s+\$?\d+)\b"),
+            "Conflicting totals reported",
+        ),
     ]
 
     def check(self, text: str) -> Tuple[bool, List[SafetyViolation]]:

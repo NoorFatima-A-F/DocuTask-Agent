@@ -1,6 +1,7 @@
 """
 Phase 3I.5: Enterprise Alerting & Incident Detection Verification - Unit and Integration Tests
 """
+
 import os
 import json
 import hashlib
@@ -15,27 +16,46 @@ from app.platform_verification.alerting_infrastructure.domain.models import (
     AlertRuleSpec,
     AlertingCertificationReport,
 )
-from app.platform_verification.alerting_infrastructure.verifiers.alerting_architecture_verifier import AlertingArchitectureVerifier
-from app.platform_verification.alerting_infrastructure.verifiers.alert_signal_coverage_verifier import AlertSignalCoverageVerifier
-from app.platform_verification.alerting_infrastructure.verifiers.alert_rule_engineering_verifier import AlertRuleEngineeringVerifier
+from app.platform_verification.alerting_infrastructure.verifiers.alerting_architecture_verifier import (
+    AlertingArchitectureVerifier,
+)
+from app.platform_verification.alerting_infrastructure.verifiers.alert_signal_coverage_verifier import (
+    AlertSignalCoverageVerifier,
+)
+from app.platform_verification.alerting_infrastructure.verifiers.alert_rule_engineering_verifier import (
+    AlertRuleEngineeringVerifier,
+)
 from app.platform_verification.alerting_infrastructure.verifiers.ai_agent_alert_verifier import AIAgentAlertVerifier
-from app.platform_verification.alerting_infrastructure.verifiers.severity_routing_verifier import SeverityRoutingVerifier
-from app.platform_verification.alerting_infrastructure.verifiers.automated_remediation_verifier import AutomatedRemediationVerifier
+from app.platform_verification.alerting_infrastructure.verifiers.severity_routing_verifier import (
+    SeverityRoutingVerifier,
+)
+from app.platform_verification.alerting_infrastructure.verifiers.automated_remediation_verifier import (
+    AutomatedRemediationVerifier,
+)
 from app.platform_verification.alerting_infrastructure.verifiers.alert_security_verifier import AlertSecurityVerifier
-from app.platform_verification.alerting_infrastructure.verifiers.alert_testing_simulation_verifier import AlertTestingSimulationVerifier
+from app.platform_verification.alerting_infrastructure.verifiers.alert_testing_simulation_verifier import (
+    AlertTestingSimulationVerifier,
+)
 from app.platform_verification.alerting_infrastructure.scoring.alerting_quality_scorer import AlertingQualityScorer
-from app.platform_verification.alerting_infrastructure.runtime.alerting_verification_runtime import AlertingVerificationRuntime
-from app.platform_verification.alerting_infrastructure.api.alerting_verification_api import router as alerting_api_router
+from app.platform_verification.alerting_infrastructure.runtime.alerting_verification_runtime import (
+    AlertingVerificationRuntime,
+)
+from app.platform_verification.alerting_infrastructure.api.alerting_verification_api import (
+    router as alerting_api_router,
+)
 
 
 # ─── 1. Domain Models Tests ───────────────────────────────────────────────────
+
 
 def test_domain_models_instantiation():
     arch = AlertingArchitectureReport(
         rules_configured_count=124,
         notification_channels=[
-            NotificationChannelSpec(channel_name="PagerDuty", channel_type="PagerDuty", target_destination="https://events.pagerduty.com")
-        ]
+            NotificationChannelSpec(
+                channel_name="PagerDuty", channel_type="PagerDuty", target_destination="https://events.pagerduty.com"
+            )
+        ],
     )
     assert arch.rules_configured_count == 124
     assert arch.monitored_services == 8
@@ -48,20 +68,20 @@ def test_domain_models_instantiation():
         condition_expression="p95 > 2.0",
         duration_window="for: 5m",
         severity=IncidentSeverity.SEV_2,
-        description="High latency rule"
+        description="High latency rule",
     )
     assert rule.severity == IncidentSeverity.SEV_2
     assert rule.false_positive_protection is True
 
     cert_rep = AlertingCertificationReport(
-        certification_tier=AlertCertificationTier.ENTERPRISE_INCIDENT_READY,
-        overall_score_pct=98.5
+        certification_tier=AlertCertificationTier.ENTERPRISE_INCIDENT_READY, overall_score_pct=98.5
     )
     assert cert_rep.certification_granted is True
     assert cert_rep.certification_tier == AlertCertificationTier.ENTERPRISE_INCIDENT_READY
 
 
 # ─── 2. Architecture Verifier Tests ───────────────────────────────────────────
+
 
 def test_alerting_architecture_verifier():
     verifier = AlertingArchitectureVerifier()
@@ -81,6 +101,7 @@ def test_alerting_architecture_verifier():
 
 # ─── 3. Signal Coverage Verifier Tests ────────────────────────────────────────
 
+
 def test_alert_signal_coverage_verifier():
     verifier = AlertSignalCoverageVerifier()
     report = verifier.verify_signal_coverage()
@@ -97,6 +118,7 @@ def test_alert_signal_coverage_verifier():
 
 
 # ─── 4. Alert Rule Engineering Verifier Tests ─────────────────────────────────
+
 
 def test_alert_rule_engineering_verifier():
     verifier = AlertRuleEngineeringVerifier()
@@ -121,6 +143,7 @@ def test_alert_rule_engineering_verifier():
 
 # ─── 5. AI Agent Alert Verifier Tests ─────────────────────────────────────────
 
+
 def test_ai_agent_alert_verifier():
     verifier = AIAgentAlertVerifier()
     report = verifier.verify_ai_agent_alerts()
@@ -140,6 +163,7 @@ def test_ai_agent_alert_verifier():
 
 
 # ─── 6. Severity & Routing Verifier Tests ─────────────────────────────────────
+
 
 def test_severity_routing_verifier():
     verifier = SeverityRoutingVerifier()
@@ -162,6 +186,7 @@ def test_severity_routing_verifier():
 
 # ─── 7. Automated Remediation Verifier Tests ──────────────────────────────────
 
+
 def test_automated_remediation_verifier():
     verifier = AutomatedRemediationVerifier()
     report = verifier.verify_remediation_workflows()
@@ -177,6 +202,7 @@ def test_automated_remediation_verifier():
 
 
 # ─── 8. Security Verifier Tests ───────────────────────────────────────────────
+
 
 def test_alert_security_verifier():
     verifier = AlertSecurityVerifier()
@@ -194,6 +220,7 @@ def test_alert_security_verifier():
 
 
 # ─── 9. Alert Testing / Chaos Simulation Tests ────────────────────────────────
+
 
 def test_alert_testing_simulation_verifier():
     verifier = AlertTestingSimulationVerifier()
@@ -216,6 +243,7 @@ def test_alert_testing_simulation_verifier():
 
 
 # ─── 10. Quality Scorer Tests ─────────────────────────────────────────────────
+
 
 def test_alerting_quality_scorer():
     runtime = AlertingVerificationRuntime()
@@ -251,6 +279,7 @@ def test_alerting_quality_scorer():
 
 # ─── 11. Exporter & Runtime Tests ─────────────────────────────────────────────
 
+
 def test_alerting_evidence_exporter(tmp_path):
     out_dir = str(tmp_path / "observability_verification" / "alerting")
     runtime = AlertingVerificationRuntime()
@@ -277,6 +306,7 @@ def test_alerting_evidence_exporter(tmp_path):
 
 
 # ─── 12. FastAPI Router Tests ─────────────────────────────────────────────────
+
 
 def test_alerting_verification_api_endpoints():
     app = FastAPI()

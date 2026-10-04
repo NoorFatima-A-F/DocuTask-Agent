@@ -11,8 +11,20 @@ from app.runtime.explainability.validation_explainer import (
 
 def test_planner_explainer():
     candidates = [
-        {"candidate_id": "cand-flash", "model_name": "gemini-2.5-flash", "predicted_cost_usd": 0.001, "predicted_latency_ms": 300.0, "predicted_accuracy": 0.98},
-        {"candidate_id": "cand-pro", "model_name": "gemini-2.5-pro", "predicted_cost_usd": 0.015, "predicted_latency_ms": 1200.0, "predicted_accuracy": 0.995},
+        {
+            "candidate_id": "cand-flash",
+            "model_name": "gemini-2.5-flash",
+            "predicted_cost_usd": 0.001,
+            "predicted_latency_ms": 300.0,
+            "predicted_accuracy": 0.98,
+        },
+        {
+            "candidate_id": "cand-pro",
+            "model_name": "gemini-2.5-pro",
+            "predicted_cost_usd": 0.015,
+            "predicted_latency_ms": 1200.0,
+            "predicted_accuracy": 0.995,
+        },
     ]
     exp = PlannerExplainer.explain_plan_selection(
         decision_id="dec-101",
@@ -51,7 +63,14 @@ def test_decision_explainer():
 def test_validation_and_reflection_explainers():
     val_rules = [
         {"rule_name": "Total Check", "passed": True, "observed_value": 100, "expected_threshold": 100},
-        {"rule_name": "Tax Check", "passed": False, "observed_value": 5, "expected_threshold": 8, "deviation_percent": 37.5, "remediation_suggestion": "Re-run tax parsing sub-dag"},
+        {
+            "rule_name": "Tax Check",
+            "passed": False,
+            "observed_value": 5,
+            "expected_threshold": 8,
+            "deviation_percent": 37.5,
+            "remediation_suggestion": "Re-run tax parsing sub-dag",
+        },
     ]
     val_exp = ValidationExplainer.explain_validation("val-01", "art-hash-123", val_rules)
     assert val_exp.overall_passed is False

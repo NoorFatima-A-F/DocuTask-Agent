@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11.12: Automated Remediation Recommendation Generator
 """
+
 from typing import List
 from ..domain.interfaces import IRemediationRecommendationGenerator
 from ..domain.models import (
@@ -67,24 +68,26 @@ class RemediationRecommendationGenerator(IRemediationRecommendationGenerator):
 
         # Ensure at least 2 proactive optimization recommendations
         if len(recommendations) < 2:
-            recommendations.extend([
-                RemediationAction(
-                    action_id="REC-OPT-001",
-                    target_category="Continuous Resilience",
-                    priority="P3",
-                    issue_detected="Platform operates at Level 5 Enterprise readiness",
-                    recommended_action="Schedule bi-weekly automated synthetic chaos fault injections in staging pipeline.",
-                    impact="Maintains continuous verification and prevents operational regression.",
-                ),
-                RemediationAction(
-                    action_id="REC-OPT-002",
-                    target_category="Cost & Efficiency",
-                    priority="P3",
-                    issue_detected="High telemetry collection frequency",
-                    recommended_action="Implement dynamic metric downsampling for logs and traces older than 14 days.",
-                    impact="Optimizes long-term observability storage cost by 25%.",
-                ),
-            ])
+            recommendations.extend(
+                [
+                    RemediationAction(
+                        action_id="REC-OPT-001",
+                        target_category="Continuous Resilience",
+                        priority="P3",
+                        issue_detected="Platform operates at Level 5 Enterprise readiness",
+                        recommended_action="Schedule bi-weekly automated synthetic chaos fault injections in staging pipeline.",
+                        impact="Maintains continuous verification and prevents operational regression.",
+                    ),
+                    RemediationAction(
+                        action_id="REC-OPT-002",
+                        target_category="Cost & Efficiency",
+                        priority="P3",
+                        issue_detected="High telemetry collection frequency",
+                        recommended_action="Implement dynamic metric downsampling for logs and traces older than 14 days.",
+                        impact="Optimizes long-term observability storage cost by 25%.",
+                    ),
+                ]
+            )
 
         return RemediationReport(
             total_recommendations=len(recommendations),

@@ -31,14 +31,54 @@ class PerformanceTestArchitectureVerifier(IPerformanceTestArchitectureVerifier):
 
     def verify(self) -> PerformanceTestArchitectureReport:
         components = [
-            TestArchitectureComponent(component_name="Load Generator Engine", component_type="Synthetic Load Generator", role="Traffic injection, burst, and concurrency ramp-up", status="READY"),
-            TestArchitectureComponent(component_name="API Gateway Ingress", component_type="FastAPI Core", role="HTTP ingress, auth token inspection, and rate limiting", status="READY"),
-            TestArchitectureComponent(component_name="Message Queue Broker", component_type="Redis 7.x Queue", role="Task buffering, priority dispatch, and backpressure", status="READY"),
-            TestArchitectureComponent(component_name="Autonomous Worker Pool", component_type="Celery / Distributed Async Workers", role="Workflow execution, OCR triggering, AI orchestrating", status="READY"),
-            TestArchitectureComponent(component_name="Metadata & Task Persistence", component_type="PostgreSQL 16", role="ACID state persistence, audit logging, result storage", status="READY"),
-            TestArchitectureComponent(component_name="Document Blob Storage", component_type="MinIO S3 Subsystem", role="Binary file storage, multipart upload, checksumming", status="READY"),
-            TestArchitectureComponent(component_name="OCR Rasterization Engine", component_type="Tesseract / Native Vision OCR", role="Text extraction, bounding box detection, layout analysis", status="READY"),
-            TestArchitectureComponent(component_name="AI LLM Inference Layer", component_type="Google Gemini 1.5 Pro Provider", role="Structured schema extraction and semantic evaluation", status="READY"),
+            TestArchitectureComponent(
+                component_name="Load Generator Engine",
+                component_type="Synthetic Load Generator",
+                role="Traffic injection, burst, and concurrency ramp-up",
+                status="READY",
+            ),
+            TestArchitectureComponent(
+                component_name="API Gateway Ingress",
+                component_type="FastAPI Core",
+                role="HTTP ingress, auth token inspection, and rate limiting",
+                status="READY",
+            ),
+            TestArchitectureComponent(
+                component_name="Message Queue Broker",
+                component_type="Redis 7.x Queue",
+                role="Task buffering, priority dispatch, and backpressure",
+                status="READY",
+            ),
+            TestArchitectureComponent(
+                component_name="Autonomous Worker Pool",
+                component_type="Celery / Distributed Async Workers",
+                role="Workflow execution, OCR triggering, AI orchestrating",
+                status="READY",
+            ),
+            TestArchitectureComponent(
+                component_name="Metadata & Task Persistence",
+                component_type="PostgreSQL 16",
+                role="ACID state persistence, audit logging, result storage",
+                status="READY",
+            ),
+            TestArchitectureComponent(
+                component_name="Document Blob Storage",
+                component_type="MinIO S3 Subsystem",
+                role="Binary file storage, multipart upload, checksumming",
+                status="READY",
+            ),
+            TestArchitectureComponent(
+                component_name="OCR Rasterization Engine",
+                component_type="Tesseract / Native Vision OCR",
+                role="Text extraction, bounding box detection, layout analysis",
+                status="READY",
+            ),
+            TestArchitectureComponent(
+                component_name="AI LLM Inference Layer",
+                component_type="Google Gemini 1.5 Pro Provider",
+                role="Structured schema extraction and semantic evaluation",
+                status="READY",
+            ),
         ]
 
         checks: List[CheckResult] = [

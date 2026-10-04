@@ -17,10 +17,12 @@ class AuditEvidenceExtractor:
         for ev in events:
             evt_type = ev.get("event_type", "")
             if "evidence" in evt_type or "truth.invariant" in evt_type:
-                evidences.append({
-                    "event_id": ev.get("event_id"),
-                    "type": evt_type,
-                    "payload": ev.get("payload", {}),
-                    "timestamp": ev.get("timestamp"),
-                })
+                evidences.append(
+                    {
+                        "event_id": ev.get("event_id"),
+                        "type": evt_type,
+                        "payload": ev.get("payload", {}),
+                        "timestamp": ev.get("timestamp"),
+                    }
+                )
         return evidences

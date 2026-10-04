@@ -14,7 +14,7 @@ ctx = TelemetryContext(
     region="us-east-1",
     cluster_id="cluster-prod-alpha",
     user_id="usr_892341",
-    attributes={"workflow_id": "wf_ocr_v2"}
+    attributes={"workflow_id": "wf_ocr_v2"},
 )
 token = set_current_context(ctx)
 ```
@@ -29,18 +29,9 @@ The pipeline automatically scrubs sensitive data across logs and telemetry attri
 
 ## 3. Telemetry Collector Pipeline Configuration
 ```python
-from app.infrastructure.observability.telemetry import (
-    TelemetryCollectorPipeline,
-    InMemoryExporter,
-    OTLPJsonExporter
-)
+from app.infrastructure.observability.telemetry import TelemetryCollectorPipeline, InMemoryExporter, OTLPJsonExporter
 
 exporter = OTLPJsonExporter(endpoint="https://otlp.collector.internal:4318/v1/traces")
-pipeline = TelemetryCollectorPipeline(
-    exporter=exporter,
-    batch_size=1000,
-    flush_interval_seconds=5.0,
-    mask_pii=True
-)
+pipeline = TelemetryCollectorPipeline(exporter=exporter, batch_size=1000, flush_interval_seconds=5.0, mask_pii=True)
 pipeline.start()
 ```

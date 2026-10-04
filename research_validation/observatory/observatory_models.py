@@ -21,6 +21,7 @@ class BenchmarkStatus(str, Enum):
 @dataclass(frozen=True)
 class BenchmarkDatasetRecord:
     """Status and version tracking for an external public benchmark."""
+
     benchmark_id: str
     benchmark_name: str
     version: str
@@ -36,6 +37,7 @@ class BenchmarkDatasetRecord:
 @dataclass(frozen=True)
 class LeaderboardEntry:
     """Historical or active leaderboard position."""
+
     rank: int
     model_name: str
     model_version: str

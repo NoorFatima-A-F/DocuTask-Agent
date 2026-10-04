@@ -44,11 +44,13 @@ def test_workflow_replay_engine():
 
     # Replay with override
     replay_engine = WorkflowReplayEngine(runtime)
-    replayed_rec = asyncio.run(replay_engine.replay_execution(
-        execution_id=rec.execution_id,
-        definition=defn,
-        override_variables={"val": 20},
-    ))
+    replayed_rec = asyncio.run(
+        replay_engine.replay_execution(
+            execution_id=rec.execution_id,
+            definition=defn,
+            override_variables={"val": 20},
+        )
+    )
 
     assert replayed_rec.status == ExecutionState.COMPLETED
     assert replayed_rec.context.variables["val"] == 30

@@ -7,6 +7,7 @@ from typing import List
 @dataclass
 class EnvironmentPolicy:
     """Governance and security policy for an environment."""
+
     env_id: str
     require_approvals_count: int = 0
     require_signed_artifacts: bool = True

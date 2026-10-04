@@ -14,15 +14,13 @@ class DocumentTypeDetector:
     """Detector for document type classification and OCR necessity determination."""
 
     IMAGE_EXTENSIONS: Set[str] = {".png", ".jpg", ".jpeg", ".tiff", ".tif", ".bmp", ".webp"}
-    IMAGE_MIMES: Set[str] = {
-        "image/png", "image/jpeg", "image/tiff", "image/bmp", "image/webp"
-    }
+    IMAGE_MIMES: Set[str] = {"image/png", "image/jpeg", "image/tiff", "image/bmp", "image/webp"}
 
     @classmethod
     def detect_type(cls, file_content: bytes, file_extension: str, mime_type: str) -> str:
         """
         Detects document classification strategy.
-        
+
         :return: 'txt', 'docx', 'native_pdf', 'scanned_pdf', 'image', or 'unsupported'
         """
         ext = file_extension.lower().strip()

@@ -255,7 +255,7 @@ class PromptGovernanceSDK:
         finally:
             latency = (time.time() - t0) * 1000.0
             event = PromptExecutionEvent(
-                event_id=f"evt_p_{int(time.time()*1000)}",
+                event_id=f"evt_p_{int(time.time() * 1000)}",
                 prompt_id=prompt_id,
                 version_id=version_id,
                 organization_id=organization_id,

@@ -1,6 +1,7 @@
 """
 Verification Plan Domain: Execution Strategies, Orders, Concurrency, and Resource Policies.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 from typing import List, Optional
@@ -26,7 +27,9 @@ class RetryPolicy(BaseModel):
     max_attempts: int = 3
     initial_interval_seconds: float = 1.0
     backoff_multiplier: float = 2.0
-    retryable_errors: List[str] = Field(default_factory=lambda: ["RATE_LIMIT_EXCEEDED", "NETWORK_TIMEOUT", "GPU_OOM_RECOVERABLE"])
+    retryable_errors: List[str] = Field(
+        default_factory=lambda: ["RATE_LIMIT_EXCEEDED", "NETWORK_TIMEOUT", "GPU_OOM_RECOVERABLE"]
+    )
 
 
 class ResourceRequirements(BaseModel):

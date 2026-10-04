@@ -24,10 +24,14 @@ class AIChaosRunner(IChaosExperimentRunner):
             recovered_count = 0
 
             for i in range(documents_per_experiment):
-                req = {"document_id": f"DOC-CHAOS-{sc.scenario_id}-{i+1:04d}", "provider": sc.target_provider}
+                req = {"document_id": f"DOC-CHAOS-{sc.scenario_id}-{i + 1:04d}", "provider": sc.target_provider}
                 res = self.simulator.inject_fault(sc, req)
 
-                if not res.get("success", True) or res.get("is_valid_json") is False or res.get("confidence_score", 1.0) < 0.85:
+                if (
+                    not res.get("success", True)
+                    or res.get("is_valid_json") is False
+                    or res.get("confidence_score", 1.0) < 0.85
+                ):
                     fault_count += 1
                     # Automated resilience loop recovers the request
                     recovered_count += 1

@@ -103,7 +103,7 @@ class RateLimiter:
         cost: int = 1,
     ) -> tuple[bool, Dict[str, Any]]:
         """Evaluate rate limits across all applicable dimensions.
-        
+
         Returns (is_allowed, details).
         """
         keys_to_check = [

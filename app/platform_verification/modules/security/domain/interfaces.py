@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Security.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.security.domain.models import SecurityEntity
+
 
 class SecurityRepositoryInterface(ABC):
     @abstractmethod

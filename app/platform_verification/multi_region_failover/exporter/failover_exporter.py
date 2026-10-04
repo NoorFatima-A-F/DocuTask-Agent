@@ -2,6 +2,7 @@
 Multi-Region Failover Evidence Exporter (Part 3G.6M).
 Exports all 9 verification manifests and certificates into multi_region_verification/
 """
+
 import json
 from pathlib import Path
 from typing import Dict, Any

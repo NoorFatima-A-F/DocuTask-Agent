@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 
 class InvariantProofItem(BaseModel):
     """Evaluation of a single mathematical safety invariant."""
+
     invariant_name: str
     formula: str
     is_satisfied: bool
@@ -23,6 +24,7 @@ class InvariantProofItem(BaseModel):
 
 class FormalVerificationProof(BaseModel):
     """Cryptographic formal verification certificate."""
+
     proof_id: str = Field(default_factory=lambda: f"proof_smt_{uuid.uuid4().hex[:8]}")
     mission_id: str
     strategy_id: str
@@ -98,7 +100,7 @@ class FormalVerificationEngine:
         proof_items.append(
             InvariantProofItem(
                 invariant_name="ACCURACY_GATE",
-                formula=f"Accuracy({estimated_accuracy*100:.1f}%) >= MinGate({min_accuracy_gate*100:.1f}%)",
+                formula=f"Accuracy({estimated_accuracy * 100:.1f}%) >= MinGate({min_accuracy_gate * 100:.1f}%)",
                 is_satisfied=acc_sat,
                 margin=round(acc_margin, 4),
                 status="SATISFIABLE" if acc_sat else "UNSATISFIABLE",

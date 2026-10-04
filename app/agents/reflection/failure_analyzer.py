@@ -40,5 +40,5 @@ class FailureAnalyzer:
             "total_errors": len(errors),
             "error_categories": categories,
             "recovery_attempts_observed": recovery_count,
-            "recovered_successfully": trace.final_state == "COMPLETED" and recovery_count > 0
+            "recovered_successfully": trace.final_state == "COMPLETED" and recovery_count > 0,
         }

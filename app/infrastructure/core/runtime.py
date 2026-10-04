@@ -52,7 +52,9 @@ class InfrastructureRuntime:
         config: Optional[Dict[str, Any]] = None,
     ) -> ServiceInstance:
         """Deploy a new service instance with environment validation."""
-        env_type = EnvironmentType(environment) if environment in EnvironmentType.__members__ else EnvironmentType.PRODUCTION
+        env_type = (
+            EnvironmentType(environment) if environment in EnvironmentType.__members__ else EnvironmentType.PRODUCTION
+        )
         allowed, reason = self.env_manager.validate_deployment_allowed(
             requested_replicas=replicas,
             requested_cpu=replicas * 1,
@@ -80,7 +82,12 @@ class InfrastructureRuntime:
         inst.updated_at = datetime.now(timezone.utc)
 
         self._instances[inst_id] = inst
-        logger.info("Deployed service %s (instance %s) in %s [RUNNING]", sanitize_log_input(service), sanitize_log_input(inst_id), sanitize_log_input(environment))
+        logger.info(
+            "Deployed service %s (instance %s) in %s [RUNNING]",
+            sanitize_log_input(service),
+            sanitize_log_input(inst_id),
+            sanitize_log_input(environment),
+        )
         return inst
 
     def start_service(self, instance_id: str) -> ServiceInstance:

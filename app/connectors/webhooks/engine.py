@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 class WebhookConfig(BaseModel):
     """Configuration for an incoming or outgoing webhook endpoint."""
+
     endpoint_id: str
     secret: str
     algorithm: str = "sha256"  # sha256, sha1
@@ -112,6 +113,7 @@ class WebhookEngine:
         Simulates signing and dispatching an outgoing webhook to a remote partner system.
         """
         import json
+
         payload_bytes = json.dumps(payload).encode("utf-8")
         sig = self.sign_outgoing_payload(secret, payload_bytes)
         headers = {

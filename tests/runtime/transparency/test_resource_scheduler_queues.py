@@ -2,13 +2,14 @@
 Test Suite: Heterogeneous Resource Scheduler & Fair Priority Queue
 Validates worker allocation/release, priority ranking (CRITICAL > HIGH > NORMAL > LOW), and backpressure limits.
 """
+
 from app.runtime.resource_scheduler.worker_pool import WorkerPoolManager
 from app.runtime.resource_scheduler.priority_scheduler import PriorityScheduler
 
 
 def test_worker_pool_allocation_and_release():
     pool_mgr = WorkerPoolManager()
-    
+
     w1 = pool_mgr.allocate_worker("OCR_POOL")
     assert w1 is not None
     assert w1.pool_type == "OCR_POOL"

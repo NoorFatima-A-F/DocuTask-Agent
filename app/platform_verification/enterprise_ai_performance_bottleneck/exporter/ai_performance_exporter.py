@@ -16,7 +16,6 @@ from ..domain.models import (
 
 
 class AIPerformanceExporter(IAIPerformanceExporter):
-
     PHASE_TO_FILENAME_MAP: Dict[str, str] = {
         "3j.9.1": "architecture_report.json",
         "3j.9.2": "latency_report.json",

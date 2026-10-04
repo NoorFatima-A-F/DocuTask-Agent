@@ -9,12 +9,15 @@ from app.agents.runtime.enterprise.scheduler_state import JobPriority, JobStatus
 from app.agents.runtime.scheduler import MemoryTaskQueue, SchedulerController
 
 
-@pytest.mark.parametrize("priority,expected_order", [
-    (JobPriority.CRITICAL, 1),
-    (JobPriority.HIGH, 2),
-    (JobPriority.NORMAL, 3),
-    (JobPriority.LOW, 4),
-])
+@pytest.mark.parametrize(
+    "priority,expected_order",
+    [
+        (JobPriority.CRITICAL, 1),
+        (JobPriority.HIGH, 2),
+        (JobPriority.NORMAL, 3),
+        (JobPriority.LOW, 4),
+    ],
+)
 def test_job_priority_enum_values(priority, expected_order):
     assert priority.value == expected_order
 

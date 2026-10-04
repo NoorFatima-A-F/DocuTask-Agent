@@ -14,13 +14,15 @@ class DecisionCandidate:
     candidate_id: str = field(default_factory=lambda: f"cand-{uuid.uuid4().hex[:6]}")
     name: str = "Candidate Strategy A"
     description: str = "Deploy Speculative Layout Cache + Triadic Coalitions"
-    criteria_scores: Dict[str, float] = field(default_factory=lambda: {
-        "roi_multiplier": 3.8,
-        "latency_reduction_pct": 28.0,
-        "governance_compliance": 0.99,
-        "cost_efficiency": 0.92,
-        "risk_safety": 0.94,
-    })
+    criteria_scores: Dict[str, float] = field(
+        default_factory=lambda: {
+            "roi_multiplier": 3.8,
+            "latency_reduction_pct": 28.0,
+            "governance_compliance": 0.99,
+            "cost_efficiency": 0.92,
+            "risk_safety": 0.94,
+        }
+    )
     composite_utility: float = 0.945
     pareto_rank: int = 1
     is_recommended: bool = True
@@ -41,13 +43,15 @@ class DecisionCandidate:
 class DecisionRanking:
     ranking_id: str = field(default_factory=lambda: f"rnk-{uuid.uuid4().hex[:8]}")
     decision_context: str = "Q3 Infrastructure Investment Allocation"
-    criteria_weights: Dict[str, float] = field(default_factory=lambda: {
-        "roi_multiplier": 0.30,
-        "latency_reduction_pct": 0.25,
-        "governance_compliance": 0.20,
-        "cost_efficiency": 0.15,
-        "risk_safety": 0.10,
-    })
+    criteria_weights: Dict[str, float] = field(
+        default_factory=lambda: {
+            "roi_multiplier": 0.30,
+            "latency_reduction_pct": 0.25,
+            "governance_compliance": 0.20,
+            "cost_efficiency": 0.15,
+            "risk_safety": 0.10,
+        }
+    )
     candidates: List[DecisionCandidate] = field(default_factory=list)
     selected_candidate_id: Optional[str] = None
     created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())

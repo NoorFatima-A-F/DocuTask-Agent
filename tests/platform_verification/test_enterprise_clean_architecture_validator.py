@@ -1,6 +1,7 @@
 """
 Unit and Integration tests for Clean Architecture & Dependency Validation (PART 2B).
 """
+
 import pytest
 from app.platform_verification.clean_architecture import (
     ArchitectureExceptionWaiver,
@@ -127,6 +128,7 @@ def test_metrics_calculator_instability_and_distance(runtime):
 def test_full_clean_architecture_validation_run(runtime):
     """Test running full Clean Architecture validation scan on shared_kernel."""
     import os
+
     target_dir = os.path.join(runtime.base_repo_dir, "app", "shared_kernel")
     if os.path.exists(target_dir):
         pkg = runtime.run_full_validation(target_dir=target_dir)

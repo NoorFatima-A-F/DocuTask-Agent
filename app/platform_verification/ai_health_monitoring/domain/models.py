@@ -16,9 +16,9 @@ class AIMetricCategory(str, Enum):
 
 
 class AIObservabilityTier(str, Enum):
-    FAILED = "Failed"                                                 # < 80%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                     # 80 - 89%
-    PRODUCTION_AI_MONITORING_READY = "Production AI Monitoring Ready" # 90 - 94%
+    FAILED = "Failed"  # < 80%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89%
+    PRODUCTION_AI_MONITORING_READY = "Production AI Monitoring Ready"  # 90 - 94%
     ENTERPRISE_AI_OBSERVABILITY_READY = "Enterprise AI Observability Ready"  # 95 - 100%
 
 
@@ -233,13 +233,13 @@ class AIMonitoringSecurityReport:
 @dataclass
 class AIObservabilityScorecard:
     telemetry_completeness_score: float  # Weight 20%
-    metrics_coverage_score: float        # Weight 20%
-    dashboard_quality_score: float       # Weight 15%
-    logging_quality_score: float         # Weight 15%
-    alert_reliability_score: float       # Weight 15%
-    security_score: float                # Weight 15%
-    overall_score: float                 # Composite 0 - 100
+    metrics_coverage_score: float  # Weight 20%
+    dashboard_quality_score: float  # Weight 15%
+    logging_quality_score: float  # Weight 15%
+    alert_reliability_score: float  # Weight 15%
+    security_score: float  # Weight 15%
+    overall_score: float  # Composite 0 - 100
     certification_tier: AIObservabilityTier
-    certification_verdict: str           # CERTIFIED / CONDITIONAL_APPROVAL / REJECTED
+    certification_verdict: str  # CERTIFIED / CONDITIONAL_APPROVAL / REJECTED
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

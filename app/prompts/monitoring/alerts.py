@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class PromptAlert(BaseModel):
     """Alert record for prompt health issues."""
+
     alert_id: str
     prompt_id: str
     organization_id: str

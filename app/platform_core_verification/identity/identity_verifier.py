@@ -77,7 +77,7 @@ class IdentityVerifier:
         header = base64.urlsafe_b64encode(json.dumps({"alg": "HS256", "typ": "JWT"}).encode()).decode().rstrip("=")
         payload_data = {"sub": "user_42", "tenant_id": "tenant_enterprise_1", "exp": 1800000000, "jti": "jwt_tok_001"}
         payload = base64.urlsafe_b64encode(json.dumps(payload_data).encode()).decode().rstrip("=")
-        
+
         signature = hmac.new(secret, f"{header}.{payload}".encode(), hashlib.sha256).hexdigest()
         token = f"{header}.{payload}.{signature}"
 
@@ -151,8 +151,10 @@ class IdentityVerifier:
         docs_b = query_tenant_docs("tenant_B")
 
         passed = (
-            len(docs_a) == 1 and docs_a[0]["title"] == "Secret A"
-            and len(docs_b) == 1 and docs_b[0]["title"] == "Secret B"
+            len(docs_a) == 1
+            and docs_a[0]["title"] == "Secret A"
+            and len(docs_b) == 1
+            and docs_b[0]["title"] == "Secret B"
         )
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 

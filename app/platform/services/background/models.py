@@ -18,6 +18,7 @@ class ServicePriority(int, Enum):
 @dataclass
 class ServiceDefinition:
     """Specification of a background service task."""
+
     name: str
     handler: Callable[..., Any]
     service_id: str = field(default_factory=lambda: str(uuid.uuid4()))

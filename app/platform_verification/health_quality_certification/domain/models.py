@@ -1,6 +1,7 @@
 """
 Phase 3H.5.11: Enterprise Health Quality Scoring & Operational Certification Framework — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List
 from pydantic import BaseModel, Field
@@ -8,11 +9,11 @@ from datetime import datetime, timezone
 
 
 class HealthMaturityLevel(str, Enum):
-    LEVEL_4_ENTERPRISE_HEALTH = "Enterprise Health"        # 95 - 100
-    LEVEL_3_PRODUCTION_HEALTH = "Production Health"        # 85 - 94.99
-    LEVEL_2_OPERATIONAL_HEALTH = "Operational Health"      # 70 - 84.99
-    LEVEL_1_BASIC_HEALTH = "Basic Health"                  # 50 - 69.99
-    LEVEL_0_UNKNOWN = "Unknown / Unverified"               # 0 - 49.99
+    LEVEL_4_ENTERPRISE_HEALTH = "Enterprise Health"  # 95 - 100
+    LEVEL_3_PRODUCTION_HEALTH = "Production Health"  # 85 - 94.99
+    LEVEL_2_OPERATIONAL_HEALTH = "Operational Health"  # 70 - 84.99
+    LEVEL_1_BASIC_HEALTH = "Basic Health"  # 50 - 69.99
+    LEVEL_0_UNKNOWN = "Unknown / Unverified"  # 0 - 49.99
 
 
 class CertificationStatus(str, Enum):
@@ -28,6 +29,7 @@ class DeploymentDecision(str, Enum):
 
 
 # ─── 3H.5.11.1: 8-Category Quality Models ───────────────────────────────────
+
 
 class LivenessQualityMetrics(BaseModel):
     liveness_accuracy: float = 99.5
@@ -91,9 +93,7 @@ class MonitoringIntegrationMetrics(BaseModel):
     metric_coverage_pct: float = 98.0
     dashboard_quality_score: float = 96.0
     alert_visibility_pct: float = 100.0
-    integrations: List[str] = Field(
-        default_factory=lambda: ["Prometheus", "Grafana", "OpenTelemetry", "AlertManager"]
-    )
+    integrations: List[str] = Field(default_factory=lambda: ["Prometheus", "Grafana", "OpenTelemetry", "AlertManager"])
     score: float = 97.0
 
 
@@ -119,6 +119,7 @@ class EvidenceQualityMetrics(BaseModel):
 
 # ─── 3H.5.11.6: SRE Reliability Metrics ─────────────────────────────────────
 
+
 class SREReliabilityMetrics(BaseModel):
     report_title: str = "SRE Reliability Metrics Report"
     uptime_seconds: float = 86350.0
@@ -133,6 +134,7 @@ class SREReliabilityMetrics(BaseModel):
 
 
 # ─── 3H.5.11.4: Regression Health Testing ───────────────────────────────────
+
 
 class RegressionComparison(BaseModel):
     category_name: str
@@ -153,6 +155,7 @@ class RegressionReport(BaseModel):
 
 
 # ─── 3H.5.11.5 / 3H.5.11.9: Production Readiness Gate ───────────────────────
+
 
 class DeploymentGateCheckItem(BaseModel):
     check_name: str
@@ -175,6 +178,7 @@ class DeploymentGateReport(BaseModel):
 
 
 # ─── 3H.5.11.7: Certification Scorecard & Reports ───────────────────────────
+
 
 class CategoryScoreItem(BaseModel):
     category_id: str

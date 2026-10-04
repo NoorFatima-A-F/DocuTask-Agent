@@ -27,7 +27,7 @@ from app.audit.evidence.artifacts import EvidenceType
 
 def test_audit_sdk_record_and_integrity_check():
     sdk = AuditSDK()
-    
+
     event = sdk.record(
         action="model.generate",
         resource_type="model",

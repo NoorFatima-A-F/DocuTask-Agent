@@ -1,6 +1,7 @@
 """
 3I.4.13: Trace Security & Data Sanitization Verifier
 """
+
 from typing import List
 from ..domain.models import SpanSecurityAuditSpec, TraceSecurityReport
 from ..domain.interfaces import ITraceSecurityVerifier
@@ -19,7 +20,7 @@ class TraceSecurityVerifier(ITraceSecurityVerifier):
                 pii_exposed=False,
                 passwords_exposed=False,
                 raw_document_payload_exposed=False,
-                status="SECURE"
+                status="SECURE",
             ),
             SpanSecurityAuditSpec(
                 span_name="tesseract_ocr_extraction",
@@ -27,7 +28,7 @@ class TraceSecurityVerifier(ITraceSecurityVerifier):
                 pii_exposed=False,
                 passwords_exposed=False,
                 raw_document_payload_exposed=False,
-                status="SECURE"
+                status="SECURE",
             ),
             SpanSecurityAuditSpec(
                 span_name="gemini_structured_extraction",
@@ -35,7 +36,7 @@ class TraceSecurityVerifier(ITraceSecurityVerifier):
                 pii_exposed=False,
                 passwords_exposed=False,
                 raw_document_payload_exposed=False,
-                status="SECURE"
+                status="SECURE",
             ),
             SpanSecurityAuditSpec(
                 span_name="postgres_persist_document_result",
@@ -43,7 +44,7 @@ class TraceSecurityVerifier(ITraceSecurityVerifier):
                 pii_exposed=False,
                 passwords_exposed=False,
                 raw_document_payload_exposed=False,
-                status="SECURE"
+                status="SECURE",
             ),
         ]
 
@@ -52,5 +53,5 @@ class TraceSecurityVerifier(ITraceSecurityVerifier):
             audits=audits,
             forbidden_attributes_prevented=True,
             no_pii_in_spans=True,
-            security_score_pct=100.0
+            security_score_pct=100.0,
         )

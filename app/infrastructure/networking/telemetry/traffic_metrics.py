@@ -8,6 +8,7 @@ import threading
 @dataclass
 class NetworkMetricSummary:
     """Aggregated network telemetry metrics."""
+
     total_requests: int = 0
     successful_requests: int = 0
     failed_requests: int = 0

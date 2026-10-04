@@ -29,10 +29,34 @@ class DatabaseBottleneckVerifier(IDatabaseBottleneckVerifier):
 
     def verify(self) -> DatabaseBottleneckReport:
         slow_queries = [
-            SlowQuery(query_id="SQ-001", query_summary="Full-text search on documents without GIN index", avg_duration_ms=320.0, execution_count=45, recommendation="Add GIN index on document_content column"),
-            SlowQuery(query_id="SQ-002", query_summary="JOIN across verification_results and audit_log without index", avg_duration_ms=180.0, execution_count=120, recommendation="Add composite index on (document_id, created_at)"),
-            SlowQuery(query_id="SQ-003", query_summary="Aggregation query on processing_metrics unpartitioned table", avg_duration_ms=450.0, execution_count=30, recommendation="Partition processing_metrics by date range"),
-            SlowQuery(query_id="SQ-004", query_summary="Sequential scan on user_sessions for active lookups", avg_duration_ms=95.0, execution_count=500, recommendation="Add btree index on (user_id, is_active)"),
+            SlowQuery(
+                query_id="SQ-001",
+                query_summary="Full-text search on documents without GIN index",
+                avg_duration_ms=320.0,
+                execution_count=45,
+                recommendation="Add GIN index on document_content column",
+            ),
+            SlowQuery(
+                query_id="SQ-002",
+                query_summary="JOIN across verification_results and audit_log without index",
+                avg_duration_ms=180.0,
+                execution_count=120,
+                recommendation="Add composite index on (document_id, created_at)",
+            ),
+            SlowQuery(
+                query_id="SQ-003",
+                query_summary="Aggregation query on processing_metrics unpartitioned table",
+                avg_duration_ms=450.0,
+                execution_count=30,
+                recommendation="Partition processing_metrics by date range",
+            ),
+            SlowQuery(
+                query_id="SQ-004",
+                query_summary="Sequential scan on user_sessions for active lookups",
+                avg_duration_ms=95.0,
+                execution_count=500,
+                recommendation="Add btree index on (user_id, is_active)",
+            ),
         ]
 
         checks: List[CheckResult] = [

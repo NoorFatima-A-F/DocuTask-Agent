@@ -1,6 +1,7 @@
 """
 Phase 3H.5: Health Intelligence Scorer
 """
+
 from ..domain.interfaces import IHealthIntelligenceScorer
 from ..domain.models import (
     HealthEventArchitectureReport,
@@ -36,7 +37,9 @@ class HealthIntelligenceScorer(IHealthIntelligenceScorer):
         det_score = 100.0 if (event_report.architecture_valid and len(event_report.events) >= 7) else 80.0
 
         # 2. Diagnosis accuracy (20%)
-        diag_score = 100.0 if (class_report.classification_valid and class_report.classification_accuracy_pct >= 95.0) else 80.0
+        diag_score = (
+            100.0 if (class_report.classification_valid and class_report.classification_accuracy_pct >= 95.0) else 80.0
+        )
 
         # 3. Event correlation (15%)
         corr_score = 100.0 if (corr_report.correlation_valid and corr_report.noise_reduction_pct >= 50.0) else 80.0
@@ -45,18 +48,26 @@ class HealthIntelligenceScorer(IHealthIntelligenceScorer):
         rca_score = 100.0 if (rca_report.rca_valid and rca_report.mean_confidence_score >= 0.95) else 80.0
 
         # 5. Recovery automation (20%)
-        recov_score = 100.0 if (
-            recov_report.all_recoveries_successful
-            and self_heal_report.self_healing_certified
-            and chaos_report.all_chaos_tests_passed
-        ) else 80.0
+        recov_score = (
+            100.0
+            if (
+                recov_report.all_recoveries_successful
+                and self_heal_report.self_healing_certified
+                and chaos_report.all_chaos_tests_passed
+            )
+            else 80.0
+        )
 
         # 6. Safety controls (15%)
-        safety_score = 100.0 if (
-            remed_report.safety_classification_enforced
-            and safety_report.security_score_pct >= 95.0
-            and obs_report.all_dashboards_active
-        ) else 80.0
+        safety_score = (
+            100.0
+            if (
+                remed_report.safety_classification_enforced
+                and safety_report.security_score_pct >= 95.0
+                and obs_report.all_dashboards_active
+            )
+            else 80.0
+        )
 
         composite = (
             det_score * 0.15

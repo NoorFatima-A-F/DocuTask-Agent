@@ -1,6 +1,7 @@
 """
 OWASP API Security Top 10 Evaluator.
 """
+
 from __future__ import annotations
 import uuid
 from typing import List

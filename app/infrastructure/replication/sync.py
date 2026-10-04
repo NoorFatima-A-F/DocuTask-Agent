@@ -18,6 +18,7 @@ logger = logging.getLogger("infrastructure.replication.sync")
 
 class SyncBatch(BaseModel):
     """Batch of delta mutations to replicate across regions."""
+
     batch_id: str
     stream_id: str
     mutation_count: int = Field(default=0, ge=0)

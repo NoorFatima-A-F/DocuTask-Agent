@@ -29,7 +29,7 @@ class MockLLMPlanningAdapter(ILLMPlanningAdapter):
             "tasks": [
                 {"id": "t1_ocr", "name": "OCR Text Extraction", "capability": "OCR", "duration": 5.0},
                 {"id": "t2_extract", "name": "LLM Entity Extraction", "capability": "LLM", "duration": 10.0},
-                {"id": "t3_validate", "name": "Compliance Check", "capability": "DECISION", "duration": 2.0}
+                {"id": "t3_validate", "name": "Compliance Check", "capability": "DECISION", "duration": 2.0},
             ]
         }
 

@@ -13,6 +13,7 @@ from .approvals import ReleaseApprovalGate
 
 class ReleaseLifecycleStatus(str, Enum):
     """Lifecycle statuses for an enterprise software release."""
+
     CREATED = "created"
     VALIDATED = "validated"
     APPROVED = "approved"
@@ -26,6 +27,7 @@ class ReleaseLifecycleStatus(str, Enum):
 @dataclass
 class ReleaseMetadata:
     """Full lifecycle tracking metadata for an enterprise release."""
+
     release_id: str
     version: str
     components_changed: List[str]
@@ -83,7 +85,9 @@ class ReleaseManager:
 
             if new_status == ReleaseLifecycleStatus.RELEASED:
                 if not self.approval_gate.is_release_approved(release_id):
-                    raise PermissionError(f"Cannot mark release '{release_id}' as RELEASED without mandatory stakeholder approvals")
+                    raise PermissionError(
+                        f"Cannot mark release '{release_id}' as RELEASED without mandatory stakeholder approvals"
+                    )
                 rel.released_at = datetime.now(timezone.utc)
 
             if new_status == ReleaseLifecycleStatus.COMPLETED:

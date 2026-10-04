@@ -27,6 +27,7 @@ class PolicyEnforcementAction(str, Enum):
 @dataclass(frozen=True)
 class GovernancePolicyRule:
     """A formal rule in the research governance policy."""
+
     rule_id: str
     category: PolicyCategory
     name: str

@@ -34,12 +34,27 @@ class RuntimeLifecycleStateMachine:
         RuntimeState.CREATED: {RuntimeState.INITIALIZING, RuntimeState.FAILED},
         RuntimeState.INITIALIZING: {RuntimeState.STARTING, RuntimeState.FAILED, RuntimeState.STOPPED},
         RuntimeState.STARTING: {RuntimeState.RUNNING, RuntimeState.FAILED, RuntimeState.DEGRADED},
-        RuntimeState.RUNNING: {RuntimeState.DEGRADED, RuntimeState.STOPPING, RuntimeState.FAILED, RuntimeState.RECOVERING},
-        RuntimeState.DEGRADED: {RuntimeState.RUNNING, RuntimeState.RECOVERING, RuntimeState.STOPPING, RuntimeState.FAILED},
+        RuntimeState.RUNNING: {
+            RuntimeState.DEGRADED,
+            RuntimeState.STOPPING,
+            RuntimeState.FAILED,
+            RuntimeState.RECOVERING,
+        },
+        RuntimeState.DEGRADED: {
+            RuntimeState.RUNNING,
+            RuntimeState.RECOVERING,
+            RuntimeState.STOPPING,
+            RuntimeState.FAILED,
+        },
         RuntimeState.STOPPING: {RuntimeState.STOPPED, RuntimeState.FAILED},
         RuntimeState.STOPPED: {RuntimeState.INITIALIZING, RuntimeState.STARTING, RuntimeState.CREATED},
         RuntimeState.FAILED: {RuntimeState.RECOVERING, RuntimeState.STOPPED, RuntimeState.CREATED},
-        RuntimeState.RECOVERING: {RuntimeState.RUNNING, RuntimeState.DEGRADED, RuntimeState.FAILED, RuntimeState.STOPPED},
+        RuntimeState.RECOVERING: {
+            RuntimeState.RUNNING,
+            RuntimeState.DEGRADED,
+            RuntimeState.FAILED,
+            RuntimeState.STOPPED,
+        },
     }
 
     @classmethod
@@ -61,7 +76,12 @@ class ResourceLifecycleStateMachine:
     ALLOWED_TRANSITIONS: Dict[ResourceState, Set[ResourceState]] = {
         ResourceState.REQUESTED: {ResourceState.ALLOCATING, ResourceState.FAILED},
         ResourceState.ALLOCATING: {ResourceState.READY, ResourceState.FAILED},
-        ResourceState.READY: {ResourceState.ACTIVE, ResourceState.DRAINING, ResourceState.RELEASED, ResourceState.FAILED},
+        ResourceState.READY: {
+            ResourceState.ACTIVE,
+            ResourceState.DRAINING,
+            ResourceState.RELEASED,
+            ResourceState.FAILED,
+        },
         ResourceState.ACTIVE: {ResourceState.DRAINING, ResourceState.FAILED, ResourceState.READY},
         ResourceState.DRAINING: {ResourceState.RELEASED, ResourceState.FAILED, ResourceState.ACTIVE},
         ResourceState.RELEASED: set(),

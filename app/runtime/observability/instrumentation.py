@@ -27,17 +27,24 @@ def instrument_task(
     priority: EventPriority = EventPriority.NORMAL,
 ) -> Callable:
     """Decorator for automatic task timing, span propagation, and event emission."""
+
     def decorator(func: Callable) -> Callable:
         op_name = func.__name__
 
         if inspect.iscoroutinefunction(func):
+
             @functools.wraps(func)
             async def async_wrapper(*args: Any, **kwargs: Any) -> Any:
                 from app.runtime.observability.runtime_monitor import get_runtime_monitor
+
                 monitor = get_runtime_monitor()
 
                 async with async_trace_span(operation=op_name, component=stage) as ctx:
-                    mission_id = kwargs.get("mission_id") or getattr(args[0], "mission_id", "default_mission") if args else "default_mission"
+                    mission_id = (
+                        kwargs.get("mission_id") or getattr(args[0], "mission_id", "default_mission")
+                        if args
+                        else "default_mission"
+                    )
                     node_id = kwargs.get("node_id") or getattr(args[0], "node_id", None) if args else None
                     start_t = time.time()
 
@@ -92,9 +99,11 @@ def instrument_task(
 
             return async_wrapper
         else:
+
             @functools.wraps(func)
             def sync_wrapper(*args: Any, **kwargs: Any) -> Any:
                 from app.runtime.observability.runtime_monitor import get_runtime_monitor
+
                 monitor = get_runtime_monitor()
 
                 ctx = get_current_trace_context()

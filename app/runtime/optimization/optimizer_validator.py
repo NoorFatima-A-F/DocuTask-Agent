@@ -17,6 +17,7 @@ class OptimizerValidator:
     ) -> bool:
         """Verifies that arbitrary permutations of the candidate list produce the exact same Pareto frontier."""
         import random
+
         base_frontier, _ = ParetoOptimizer.extract_pareto_frontier(candidates)
         base_ids = {c.get("id", c.get("plan_id")) for c in base_frontier}
 

@@ -1,6 +1,7 @@
 """
 Abstract Interfaces for Enterprise Automated Restore Verification System (Part 3G.2E).
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 
@@ -45,9 +46,7 @@ class IBackupDiscoveryEngine(ABC):
 
 class IRestoreExecutionEngine(ABC):
     @abstractmethod
-    def execute_ordered_restore(
-        self, plan: RestoreExecutionPlan
-    ) -> Dict[str, Any]:
+    def execute_ordered_restore(self, plan: RestoreExecutionPlan) -> Dict[str, Any]:
         pass
 
 

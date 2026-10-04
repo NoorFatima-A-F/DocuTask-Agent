@@ -1,6 +1,7 @@
 """
 Domain module for Autonomous Operational Intelligence & Self-Optimization
 """
+
 from .models import (
     RiskTier,
     ExecutionMode,

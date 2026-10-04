@@ -78,7 +78,9 @@ class TenantMigrationEngine:
         """Transfer organization primary ownership to a new user."""
         org = self.org_manager.get_organization(organization_id)
         if org.owner_id != current_owner_id:
-            raise TenancyError(f"User '{current_owner_id}' is not the current owner of organization '{organization_id}'")
+            raise TenancyError(
+                f"User '{current_owner_id}' is not the current owner of organization '{organization_id}'"
+            )
 
         org.owner_id = new_owner_id
         return {

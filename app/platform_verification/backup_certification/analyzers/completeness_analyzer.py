@@ -2,6 +2,7 @@
 Completeness Analyzer for Backup Certification Framework (Part 3G.2G).
 Audits whether backups contain all essential components for complete disaster recovery.
 """
+
 from typing import List
 from app.platform_verification.backup_certification.domain.models import (
     CollectedBackupEvidence,
@@ -56,11 +57,15 @@ class CompletenessAnalyzer(ICompletenessAnalyzer):
                 verified_assets[asset] = True
             elif asset in ["ocr_outputs", "extraction_results", "metadata_store"] and total_assets >= 200:
                 verified_assets[asset] = True
-            elif asset in ["configuration_vault", "configuration"] and ("configuration" in assets_by_type or total_assets > 0):
+            elif asset in ["configuration_vault", "configuration"] and (
+                "configuration" in assets_by_type or total_assets > 0
+            ):
                 verified_assets[asset] = True
             elif asset in ["secrets_vault", "secrets"] and ("secrets" in assets_by_type or total_assets > 0):
                 verified_assets[asset] = True
-            elif asset in ["infrastructure_state", "infrastructure"] and ("infrastructure" in assets_by_type or total_assets > 0):
+            elif asset in ["infrastructure_state", "infrastructure"] and (
+                "infrastructure" in assets_by_type or total_assets > 0
+            ):
                 verified_assets[asset] = True
             else:
                 verified_assets[asset] = False

@@ -137,7 +137,7 @@ class GovernanceClient:
             except RateLimitExceededError as rle:
                 last_error = rle
                 if attempt < self.max_retries:
-                    time.sleep(self.backoff_factor * (2 ** attempt))
+                    time.sleep(self.backoff_factor * (2**attempt))
                     continue
                 raise
             except (PermissionDeniedError, ResourceNotFoundError, AuthenticationError):
@@ -145,7 +145,7 @@ class GovernanceClient:
             except Exception as ex:
                 last_error = ex
                 if attempt < self.max_retries:
-                    time.sleep(self.backoff_factor * (2 ** attempt))
+                    time.sleep(self.backoff_factor * (2**attempt))
                     continue
                 raise GovernanceSDKError(f"Request failed: {str(ex)}") from ex
 

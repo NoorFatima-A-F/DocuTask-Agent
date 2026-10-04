@@ -1,6 +1,7 @@
 """
 3H.11.2: Scenario Registry Verifier
 """
+
 from typing import List
 from ..domain.models import FailureSeverity, FailureScenario, ScenarioRegistryReport
 from ..domain.interfaces import IScenarioRegistryVerifier
@@ -24,7 +25,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="unhealthy",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
             FailureScenario(
                 scenario_id="QUEUE_FAILURE_001",
@@ -36,7 +37,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="unhealthy",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
             FailureScenario(
                 scenario_id="STORAGE_FAILURE_001",
@@ -48,7 +49,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="unhealthy",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
             # Application
             FailureScenario(
@@ -61,7 +62,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="unhealthy",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=20
+                max_duration_seconds=20,
             ),
             FailureScenario(
                 scenario_id="WORKER_CRASH_001",
@@ -73,7 +74,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="unhealthy",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=25
+                max_duration_seconds=25,
             ),
             FailureScenario(
                 scenario_id="RUNTIME_FAILURE_001",
@@ -85,7 +86,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="unhealthy",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=25
+                max_duration_seconds=25,
             ),
             # External Dependencies
             FailureScenario(
@@ -98,7 +99,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="degraded",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
             FailureScenario(
                 scenario_id="LLM_RATE_LIMIT_001",
@@ -110,7 +111,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="degraded",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
             FailureScenario(
                 scenario_id="PROVIDER_UNAVAILABLE_001",
@@ -122,7 +123,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="degraded",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
             # Resources
             FailureScenario(
@@ -135,7 +136,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="degraded",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
             FailureScenario(
                 scenario_id="CPU_SATURATION_001",
@@ -147,7 +148,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="degraded",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
             FailureScenario(
                 scenario_id="DISK_FULL_001",
@@ -159,7 +160,7 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
                 expected_state_during="unhealthy",
                 expected_state_after="healthy",
                 rollback_required=True,
-                max_duration_seconds=30
+                max_duration_seconds=30,
             ),
         ]
 
@@ -170,5 +171,5 @@ class ScenarioRegistryVerifier(IScenarioRegistryVerifier):
             total_scenarios=len(scenarios),
             scenarios=scenarios,
             categories_covered=categories,
-            registry_validated=True
+            registry_validated=True,
         )

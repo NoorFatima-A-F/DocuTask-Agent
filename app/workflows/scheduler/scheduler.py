@@ -27,6 +27,7 @@ class QueueTier(str, Enum):
 @dataclass
 class ScheduledTask:
     """Scheduled task waiting in execution queue."""
+
     task_id: str
     execution_id: str
     task_name: str

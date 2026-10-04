@@ -11,6 +11,7 @@ from app.agents.execution.worker import Worker
 
 class WorkerSnapshot(BaseModel):
     """Snapshot of active workers and allocations."""
+
     workers: List[Worker]
     model_config = {"frozen": True}
 

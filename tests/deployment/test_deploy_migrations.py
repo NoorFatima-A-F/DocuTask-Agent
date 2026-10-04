@@ -1,4 +1,5 @@
 """Unit tests for Database Migration Manager."""
+
 import pytest
 from app.deployment.core.exceptions import MigrationException
 from app.deployment.migrations.database import MigrationManager

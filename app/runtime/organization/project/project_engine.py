@@ -179,7 +179,7 @@ class ProjectEngine:
                 ProjectMilestone(
                     title="Phase 1 Completion",
                     due_week=4,
-                    target_tasks=[t.task_id for t in tasks[:max(1, len(tasks) // 2)]],
+                    target_tasks=[t.task_id for t in tasks[: max(1, len(tasks) // 2)]],
                 )
             ],
             total_progress_percent=0.0,

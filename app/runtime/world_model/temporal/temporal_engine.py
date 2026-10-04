@@ -134,7 +134,9 @@ class TemporalEngine:
         return {
             "total_patterns": len(self._patterns),
             "patterns": [p.to_dict() for p in self._patterns.values()],
-            "mean_confidence": round(sum(p.confidence for p in self._patterns.values()) / max(1, len(self._patterns)), 4),
+            "mean_confidence": round(
+                sum(p.confidence for p in self._patterns.values()) / max(1, len(self._patterns)), 4
+            ),
         }
 
 

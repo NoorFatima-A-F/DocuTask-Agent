@@ -66,7 +66,6 @@ class StrategySelector:
             else:  # BALANCED_UTILITY
                 u = (w_cost * cost_norm) + (w_speed * speed_norm) + (w_conf * conf_norm)
 
-
             cand.utility_score = round(u, 4)
             if u > max_utility:
                 max_utility = u

@@ -113,7 +113,7 @@ class EvidenceNode:
         sig_data = f"{digest}:{private_seed}:{self.timestamp}"
         sig_hash = hashlib.sha256(sig_data.encode("utf-8")).hexdigest()
         pub_key = hashlib.sha256(private_seed.encode("utf-8")).hexdigest()[:32]
-        
+
         self.crypto_proof = CryptoProof(
             algorithm="SHA-256+Ed25519-Sim",
             hash_value=digest,

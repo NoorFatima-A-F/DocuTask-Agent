@@ -59,7 +59,9 @@ class AgentRegistry:
         if isinstance(profile_or_name, SwarmAgentProfile):
             profile = profile_or_name
         else:
-            agent_id = kwargs.get("agent_id") or f"agt-{role.value.lower()[:3] if role else 'gen'}-{uuid.uuid4().hex[:6]}"
+            agent_id = (
+                kwargs.get("agent_id") or f"agt-{role.value.lower()[:3] if role else 'gen'}-{uuid.uuid4().hex[:6]}"
+            )
             profile = SwarmAgentProfile(
                 agent_id=agent_id,
                 name=profile_or_name,
@@ -104,7 +106,11 @@ class AgentRegistry:
         if role:
             res = [a for a in res if a.role == role]
         if capability:
-            res = [a for a in res if capability in a.capabilities or capability.lower() in [c.lower() for c in a.capabilities]]
+            res = [
+                a
+                for a in res
+                if capability in a.capabilities or capability.lower() in [c.lower() for c in a.capabilities]
+            ]
         if state:
             res = [a for a in res if a.state == state]
         return res
@@ -156,7 +162,12 @@ class AgentRegistry:
                 name="Security Validator",
                 role=AgentRole.VALIDATOR,
                 state=AgentState.AVAILABLE,
-                capabilities=["security_verification", "cryptographic_audit", "schema_validation", "governance_assurance"],
+                capabilities=[
+                    "security_verification",
+                    "cryptographic_audit",
+                    "schema_validation",
+                    "governance_assurance",
+                ],
                 tools=["sha256_verifier", "policy_evaluator"],
                 reputation_score=0.99,
                 avg_latency_ms=90.0,

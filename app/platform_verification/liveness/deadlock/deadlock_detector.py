@@ -2,6 +2,7 @@
 Deadlock Detector & Watchdog (Part 4).
 Runs a watchdog thread to detect thread deadlocks, async lock deadlocks, and worker starvation.
 """
+
 import threading
 from app.platform_verification.liveness.domain.models import DeadlockReport
 

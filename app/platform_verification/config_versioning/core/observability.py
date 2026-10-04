@@ -1,6 +1,7 @@
 """
 Configuration Observability & Audit Trail Service.
 """
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -22,22 +23,15 @@ class ConfigurationObservabilityService:
         self._events: List[ConfigAuditEvent] = []
 
     def record_event(
-        self,
-        event_type: str,
-        actor: str,
-        environment: str,
-        details: Optional[Dict[str, Any]] = None
+        self, event_type: str, actor: str, environment: str, details: Optional[Dict[str, Any]] = None
     ) -> ConfigAuditEvent:
-        ev = ConfigAuditEvent(
-            event_type=event_type,
-            actor=actor,
-            environment=environment,
-            details=details or {}
-        )
+        ev = ConfigAuditEvent(event_type=event_type, actor=actor, environment=environment, details=details or {})
         self._events.append(ev)
         return ev
 
-    def query_events(self, event_type: Optional[str] = None, environment: Optional[str] = None) -> List[ConfigAuditEvent]:
+    def query_events(
+        self, event_type: Optional[str] = None, environment: Optional[str] = None
+    ) -> List[ConfigAuditEvent]:
         res = self._events
         if event_type:
             res = [e for e in res if e.event_type == event_type]

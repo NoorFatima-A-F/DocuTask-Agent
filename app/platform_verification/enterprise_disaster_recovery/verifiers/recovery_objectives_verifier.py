@@ -29,10 +29,42 @@ class RecoveryObjectivesVerifier(IRecoveryObjectivesVerifier):
 
     def verify(self) -> RecoveryObjectivesReport:
         benchmarks = [
-            ObjectiveBenchmark(tier="Tier 0", service_group="Core Database & Storage", target_rto_minutes=30, observed_rto_minutes=18.4, target_rpo_minutes=15, observed_rpo_minutes=0.0, within_sla=True),
-            ObjectiveBenchmark(tier="Tier 0", service_group="Authentication & Secrets", target_rto_minutes=15, observed_rto_minutes=4.2, target_rpo_minutes=0, observed_rpo_minutes=0.0, within_sla=True),
-            ObjectiveBenchmark(tier="Tier 1", service_group="Worker & Extraction Engine", target_rto_minutes=45, observed_rto_minutes=24.5, target_rpo_minutes=15, observed_rpo_minutes=8.0, within_sla=True),
-            ObjectiveBenchmark(tier="Tier 2", service_group="Reporting & Dashboard UI", target_rto_minutes=60, observed_rto_minutes=42.0, target_rpo_minutes=60, observed_rpo_minutes=15.0, within_sla=True),
+            ObjectiveBenchmark(
+                tier="Tier 0",
+                service_group="Core Database & Storage",
+                target_rto_minutes=30,
+                observed_rto_minutes=18.4,
+                target_rpo_minutes=15,
+                observed_rpo_minutes=0.0,
+                within_sla=True,
+            ),
+            ObjectiveBenchmark(
+                tier="Tier 0",
+                service_group="Authentication & Secrets",
+                target_rto_minutes=15,
+                observed_rto_minutes=4.2,
+                target_rpo_minutes=0,
+                observed_rpo_minutes=0.0,
+                within_sla=True,
+            ),
+            ObjectiveBenchmark(
+                tier="Tier 1",
+                service_group="Worker & Extraction Engine",
+                target_rto_minutes=45,
+                observed_rto_minutes=24.5,
+                target_rpo_minutes=15,
+                observed_rpo_minutes=8.0,
+                within_sla=True,
+            ),
+            ObjectiveBenchmark(
+                tier="Tier 2",
+                service_group="Reporting & Dashboard UI",
+                target_rto_minutes=60,
+                observed_rto_minutes=42.0,
+                target_rpo_minutes=60,
+                observed_rpo_minutes=15.0,
+                within_sla=True,
+            ),
         ]
 
         checks = [

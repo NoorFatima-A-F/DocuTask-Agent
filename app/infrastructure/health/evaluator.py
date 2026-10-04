@@ -21,6 +21,7 @@ logger = logging.getLogger("infrastructure.health.evaluator")
 
 class HealthScore(BaseModel):
     """Composite health score and evaluation summary."""
+
     component_id: str
     overall_status: ProbeStatus
     score: float = Field(default=100.0, ge=0.0, le=100.0)

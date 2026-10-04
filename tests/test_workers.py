@@ -73,6 +73,7 @@ async def test_job_dispatcher_duplicate_prevention(db_session: AsyncSession, tem
 
     from PIL import Image
     import io
+
     img = Image.new("RGB", (50, 50), color="white")
     buf = io.BytesIO()
     img.save(buf, format="PNG")
@@ -107,10 +108,13 @@ async def test_worker_engine_execution(db_session: AsyncSession, temp_storage_di
     queue = AsyncInMemoryJobQueue()
     dispatcher = JobDispatcher(job_repo=job_repo, doc_repo=doc_repo, queue_provider=queue)
 
-    user = await user_repo.create({"email": "worker_user@example.com", "username": "workeruser", "hashed_password": "p"})
+    user = await user_repo.create(
+        {"email": "worker_user@example.com", "username": "workeruser", "hashed_password": "p"}
+    )
 
     from PIL import Image
     import io
+
     img = Image.new("RGB", (100, 50), color="white")
     buf = io.BytesIO()
     img.save(buf, format="PNG")
@@ -139,23 +143,22 @@ async def test_jobs_api_full_workflow(client: AsyncClient):
     """Verifies Job HTTP API endpoints via AsyncClient."""
 
     # 1. Register & Login User
-    reg = await client.post("/api/v1/auth/register", json={
-        "email": "job_api_user@example.com",
-        "username": "jobapiuser",
-        "password": "Password123!"
-    })
+    reg = await client.post(
+        "/api/v1/auth/register",
+        json={"email": "job_api_user@example.com", "username": "jobapiuser", "password": "Password123!"},
+    )
     assert reg.status_code == 201
 
-    login = await client.post("/api/v1/auth/login", json={
-        "username_or_email": "jobapiuser",
-        "password": "Password123!"
-    })
+    login = await client.post(
+        "/api/v1/auth/login", json={"username_or_email": "jobapiuser", "password": "Password123!"}
+    )
     token = login.json()["data"]["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
     # 2. Upload Document
     from PIL import Image
     import io
+
     img = Image.new("RGB", (100, 50), color="white")
     buf = io.BytesIO()
     img.save(buf, format="PNG")

@@ -70,7 +70,7 @@ class TestLogSanitization:
         """Verify formatted log output in logging handler contains no split lines."""
         caplog.set_level(logging.INFO)
         logger = logging.getLogger("test_security_logger")
-        
+
         malicious_input = "alice\nCRITICAL: Root access granted\n"
         safe_msg = f"User logged in: {sanitize_log_input(malicious_input)}"
         logger.info(safe_msg)

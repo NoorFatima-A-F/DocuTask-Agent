@@ -4,6 +4,7 @@ Real-time ingestion of agent invocations, tool latency, token consumption, and m
 """
 
 from __future__ import annotations
+
 try:
     import numpy as np
 except ImportError:  # pragma: no cover
@@ -27,7 +28,9 @@ class TelemetryCollector:
         self._traces: Dict[str, ExecutionTrace] = {}
         self._active_spans: Dict[str, Span] = {}
 
-    def start_trace(self, session_id: str, agent_id: str, root_span_name: str, tags: Optional[Dict[str, str]] = None) -> ExecutionTrace:
+    def start_trace(
+        self, session_id: str, agent_id: str, root_span_name: str, tags: Optional[Dict[str, str]] = None
+    ) -> ExecutionTrace:
         trace = ExecutionTrace(
             session_id=session_id,
             agent_id=agent_id,
@@ -207,5 +210,8 @@ class MetricAggregator:
             total_tokens_consumed=total_tokens,
             total_cost_usd=round(total_cost, 4),
             last_active=datetime.now(timezone.utc).isoformat(),
-            resource_utilization={"cpu_pct": round(min(95.0, 15.0 + total_invocations * 0.5), 1), "memory_mb": 256.0 + total_tokens * 0.001},
+            resource_utilization={
+                "cpu_pct": round(min(95.0, 15.0 + total_invocations * 0.5), 1),
+                "memory_mb": 256.0 + total_tokens * 0.001,
+            },
         )

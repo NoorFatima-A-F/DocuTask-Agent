@@ -15,7 +15,7 @@ class EventNormalizer:
             return data
 
         d = dict(data)
-        
+
         # Ensure mandatory event_id and timestamp
         if "event_id" not in d:
             d["event_id"] = f"aud_evt_{uuid.uuid4().hex[:12]}"

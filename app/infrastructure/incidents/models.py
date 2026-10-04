@@ -17,6 +17,7 @@ from app.infrastructure.reliability.models import SeverityLevel
 
 class IncidentStatus(str, enum.Enum):
     """Seven-stage incident lifecycle status."""
+
     DETECTED = "DETECTED"
     INVESTIGATING = "INVESTIGATING"
     IDENTIFIED = "IDENTIFIED"
@@ -28,6 +29,7 @@ class IncidentStatus(str, enum.Enum):
 
 class IncidentTimelineEntry(BaseModel):
     """Timestamped log entry within an incident timeline."""
+
     entry_id: str
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     actor: str = "system"
@@ -38,6 +40,7 @@ class IncidentTimelineEntry(BaseModel):
 
 class Incident(BaseModel):
     """First-class enterprise incident entity."""
+
     incident_id: str
     title: str
     severity: SeverityLevel

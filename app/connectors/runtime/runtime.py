@@ -202,7 +202,10 @@ class ConnectorRuntime:
                     connector_id=connector_id,
                     action_name=action_name,
                     status="SUCCESS",
-                    output={"result": f"Executed action '{action_name}' on connector '{connector_id}'", "inputs": inputs},
+                    output={
+                        "result": f"Executed action '{action_name}' on connector '{connector_id}'",
+                        "inputs": inputs,
+                    },
                     latency_ms=12.0,
                     cost_usd=matching_action.cost_usd,
                 )

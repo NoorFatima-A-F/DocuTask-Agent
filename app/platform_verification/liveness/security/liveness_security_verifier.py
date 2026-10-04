@@ -3,6 +3,7 @@ Liveness Security Verifier (Part 13).
 Validates that liveness probe endpoints are free of sensitive information leakage
 (database hosts, api keys, credentials, connection strings, infrastructure IPs) and enforce rate limiting.
 """
+
 import re
 from app.platform_verification.liveness.domain.models import SecurityReport
 
@@ -42,7 +43,7 @@ class LivenessSecurityVerifier:
             if regex.search(payload_str):
                 leaks += 1
 
-        clean = (leaks == 0)
+        clean = leaks == 0
         auth_enforced = True
         rate_limiting = True
         passed = clean and auth_enforced and rate_limiting

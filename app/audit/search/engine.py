@@ -56,7 +56,7 @@ class AuditSearchEngine:
 
     def search(self, search_filter: AuditSearchFilter) -> AuditSearchResult:
         tenant_events = self.repository.list_by_tenant(search_filter.tenant_id)
-        
+
         # 1. Full-text filter if query provided
         matching_ids: Optional[set] = None
         if search_filter.query:
@@ -73,7 +73,11 @@ class AuditSearchEngine:
                 continue
             if search_filter.actor_id and ev.actor_id != search_filter.actor_id:
                 continue
-            if search_filter.actor_type and (ev.actor_type.value if hasattr(ev.actor_type, "value") else str(ev.actor_type)) != search_filter.actor_type:
+            if (
+                search_filter.actor_type
+                and (ev.actor_type.value if hasattr(ev.actor_type, "value") else str(ev.actor_type))
+                != search_filter.actor_type
+            ):
                 continue
             if search_filter.resource_type and ev.resource_type != search_filter.resource_type:
                 continue
@@ -81,11 +85,20 @@ class AuditSearchEngine:
                 continue
             if search_filter.event_type and ev.event_type != search_filter.event_type:
                 continue
-            if search_filter.category and (ev.category.value if hasattr(ev.category, "value") else str(ev.category)) != search_filter.category:
+            if (
+                search_filter.category
+                and (ev.category.value if hasattr(ev.category, "value") else str(ev.category)) != search_filter.category
+            ):
                 continue
-            if search_filter.severity and (ev.severity.value if hasattr(ev.severity, "value") else str(ev.severity)) != search_filter.severity:
+            if (
+                search_filter.severity
+                and (ev.severity.value if hasattr(ev.severity, "value") else str(ev.severity)) != search_filter.severity
+            ):
                 continue
-            if search_filter.outcome and (ev.outcome.value if hasattr(ev.outcome, "value") else str(ev.outcome)) != search_filter.outcome:
+            if (
+                search_filter.outcome
+                and (ev.outcome.value if hasattr(ev.outcome, "value") else str(ev.outcome)) != search_filter.outcome
+            ):
                 continue
             if search_filter.correlation_id and ev.correlation_id != search_filter.correlation_id:
                 continue

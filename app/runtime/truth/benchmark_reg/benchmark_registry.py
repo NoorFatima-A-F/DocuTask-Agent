@@ -19,6 +19,7 @@ class BenchmarkRecord:
     """
     Independently reproducible benchmark record.
     """
+
     benchmark_id: str
     name: str
     dataset_name: str
@@ -27,19 +28,19 @@ class BenchmarkRecord:
     frozen_rng_seed: int = 42
     environment_runtime: str = "python-3.14-fastapi"
     hardware_architecture: str = "x86_64-multi-worker"
-    
+
     # Measured Benchmark Performance
     observed_accuracy: float = 0.992
     observed_latency_p50_ms: float = 880.0
     observed_latency_p95_ms: float = 1250.0
     observed_cost_usd_per_1k: float = 8.40
     retry_rate_pct: float = 0.20
-    
+
     # Statistical Attestation
     confidence_interval_95: str = "[98.9%, 99.5%]"
     p_value: float = 0.0001
     repeatability_score: float = 0.9992  # 10-run reproducibility
-    
+
     # Evidence & Cryptographic Attestation
     supporting_evidence_root: str = ""
     registered_at: float = field(default_factory=time.time)

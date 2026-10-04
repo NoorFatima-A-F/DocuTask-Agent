@@ -57,6 +57,7 @@ from app.agents.runtime.workspace import WorkspaceManager
 # 1. Lifecycle State Machine Tests
 # ============================================================================
 
+
 def test_runtime_lifecycle_valid_transitions():
     """Tests valid lifecycle transitions for the platform kernel."""
     state = RuntimeState(lifecycle_state=RuntimeLifecycleState.OFFLINE)
@@ -108,6 +109,7 @@ def test_runtime_lifecycle_invalid_transitions_raise_error():
 # 2. Dependency Graph & Cycle Detection Tests
 # ============================================================================
 
+
 def test_dependency_graph_topological_order():
     """Verifies acyclic dependency graph produces deterministic topological order."""
     graph = DependencyGraph()
@@ -148,6 +150,7 @@ def test_dependency_manager_missing_dependency():
 # 3. Dependency Injection Container Tests
 # ============================================================================
 
+
 def test_dependency_container_singleton_and_transient():
     """Tests singleton and transient lifetimes in the IoC container."""
     container = DependencyContainer()
@@ -187,6 +190,7 @@ def test_dependency_container_singleton_and_transient():
 # 4. Service Registry & Service Locator Tests
 # ============================================================================
 
+
 def test_service_registry_and_locator():
     """Tests service registration, resolution, duplicate prevention, and locator."""
     registry = ServiceRegistry()
@@ -220,6 +224,7 @@ def test_service_registry_and_locator():
 # ============================================================================
 # 5. Module Registry & Discovery Tests
 # ============================================================================
+
 
 def test_module_loader_and_discovery():
     """Tests auto-discovery of all 9 canonical platform subsystems."""
@@ -256,6 +261,7 @@ def test_module_loader_and_discovery():
 # ============================================================================
 # 6. Dynamic Plugin Runtime Tests
 # ============================================================================
+
 
 @pytest.mark.asyncio
 async def test_plugin_lifecycle():
@@ -295,6 +301,7 @@ async def test_plugin_lifecycle():
 # ============================================================================
 # 7. Erlang OTP-Style Supervisor Tests
 # ============================================================================
+
 
 @pytest.mark.asyncio
 async def test_runtime_supervisor_restart_and_budget():
@@ -337,6 +344,7 @@ async def test_runtime_supervisor_restart_and_budget():
 # 8. Health Aggregation & Monitoring Tests
 # ============================================================================
 
+
 @pytest.mark.asyncio
 async def test_runtime_health_aggregation():
     """Tests subsystem health probes and platform aggregate calculation."""
@@ -361,6 +369,7 @@ async def test_runtime_health_aggregation():
 # ============================================================================
 # 9. Multi-Tenancy & Workspace Isolation Tests
 # ============================================================================
+
 
 def test_multi_tenancy_and_workspace():
     """Tests tenant enrollment, validation, tool policies, and workspace isolation."""
@@ -392,6 +401,7 @@ def test_multi_tenancy_and_workspace():
 # 10. Feature Flags & Configuration Tests
 # ============================================================================
 
+
 def test_feature_flags_and_environment():
     """Tests feature flags toggling and environment policy."""
     flags = RuntimeFeatureFlags()
@@ -413,6 +423,7 @@ def test_feature_flags_and_environment():
 # ============================================================================
 # 11. Serialization, Caching & Telemetry Tests
 # ============================================================================
+
 
 def test_telemetry_cache_and_serialization():
     """Tests W3C traceparents, runtime metrics, cache LRU/TTL, and serialization."""
@@ -444,6 +455,7 @@ def test_telemetry_cache_and_serialization():
 # ============================================================================
 # 12. Fluent Builders Tests
 # ============================================================================
+
 
 def test_fluent_builders():
     """Tests configuration, tenant, plugin, and module builders."""
@@ -492,6 +504,7 @@ def test_fluent_builders():
 # ============================================================================
 # 13. End-to-End Platform Runtime & Kernel Boot/Shutdown Tests
 # ============================================================================
+
 
 @pytest.mark.asyncio
 async def test_end_to_end_runtime_boot_and_shutdown():

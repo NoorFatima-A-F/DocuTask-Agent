@@ -52,7 +52,10 @@ class QueueCapacityVerifier(IQueueCapacityVerifier):
                 name="Backlog Detection & Automated Drain Dynamics",
                 passed=metric.processing_rate_jobs_min > metric.incoming_rate_jobs_min,
                 details=f"Processing rate ({metric.processing_rate_jobs_min} jobs/min) exceeds incoming rate ({metric.incoming_rate_jobs_min} jobs/min), preventing queue accumulation",
-                metrics={"processing_rate": metric.processing_rate_jobs_min, "incoming_rate": metric.incoming_rate_jobs_min},
+                metrics={
+                    "processing_rate": metric.processing_rate_jobs_min,
+                    "incoming_rate": metric.incoming_rate_jobs_min,
+                },
             ),
             CheckResult(
                 name="Zero Job Loss Verification Under Queue Surge",

@@ -29,10 +29,34 @@ class ContainerSecurityVerifier(IContainerSecurityVerifier):
 
     def verify(self) -> ContainerSecurityReport:
         containers = [
-            ContainerSecuritySpec(container_name="docutask-api", user_uid=10001, read_only_rootfs=True, capabilities_dropped=["ALL"], privilege_escalation_blocked=True),
-            ContainerSecuritySpec(container_name="docutask-worker", user_uid=10001, read_only_rootfs=True, capabilities_dropped=["ALL"], privilege_escalation_blocked=True),
-            ContainerSecuritySpec(container_name="docutask-agent-runtime", user_uid=10001, read_only_rootfs=True, capabilities_dropped=["ALL"], privilege_escalation_blocked=True),
-            ContainerSecuritySpec(container_name="docutask-db-migration", user_uid=10001, read_only_rootfs=True, capabilities_dropped=["ALL"], privilege_escalation_blocked=True),
+            ContainerSecuritySpec(
+                container_name="docutask-api",
+                user_uid=10001,
+                read_only_rootfs=True,
+                capabilities_dropped=["ALL"],
+                privilege_escalation_blocked=True,
+            ),
+            ContainerSecuritySpec(
+                container_name="docutask-worker",
+                user_uid=10001,
+                read_only_rootfs=True,
+                capabilities_dropped=["ALL"],
+                privilege_escalation_blocked=True,
+            ),
+            ContainerSecuritySpec(
+                container_name="docutask-agent-runtime",
+                user_uid=10001,
+                read_only_rootfs=True,
+                capabilities_dropped=["ALL"],
+                privilege_escalation_blocked=True,
+            ),
+            ContainerSecuritySpec(
+                container_name="docutask-db-migration",
+                user_uid=10001,
+                read_only_rootfs=True,
+                capabilities_dropped=["ALL"],
+                privilege_escalation_blocked=True,
+            ),
         ]
 
         checks = [

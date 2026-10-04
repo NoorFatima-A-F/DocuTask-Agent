@@ -17,6 +17,7 @@ from app.data_governance.registry.models import ClassificationLevel
 
 class TechnicalMetadata(BaseModel):
     """File format, size, checksum, schema, storage location."""
+
     format: str
     size_bytes: int
     checksum_sha256: str
@@ -30,6 +31,7 @@ class TechnicalMetadata(BaseModel):
 
 class BusinessMetadata(BaseModel):
     """Department, owner, business purpose, domain criticality."""
+
     department: str = "General"
     owner_user_id: str
     purpose: str = "Operational Processing"
@@ -40,6 +42,7 @@ class BusinessMetadata(BaseModel):
 
 class AIMetadata(BaseModel):
     """Embedding models, LLM versions, agent cognition, retrieval grounding."""
+
     embedding_model: Optional[str] = None
     embedding_dimensions: Optional[int] = None
     model_version: Optional[str] = None
@@ -52,6 +55,7 @@ class AIMetadata(BaseModel):
 
 class ComplianceMetadata(BaseModel):
     """Classification, sensitivity, regulatory scope, retention schedule."""
+
     classification: ClassificationLevel = ClassificationLevel.INTERNAL
     sensitivity: str = "GENERAL"
     retention_days: int = 365
@@ -62,6 +66,7 @@ class ComplianceMetadata(BaseModel):
 
 class ComprehensiveAssetMetadata(BaseModel):
     """Unified 4-dimensional metadata container."""
+
     asset_id: str
     technical: TechnicalMetadata
     business: BusinessMetadata

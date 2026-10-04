@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Certification.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.certification.domain.models import CertificationEntity
 from app.platform_verification.modules.certification.domain.interfaces import CertificationRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageCertificationUseCase:
     def __init__(self, repository: CertificationRepositoryInterface):

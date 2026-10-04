@@ -1,6 +1,7 @@
 """
 Spike and Long-running Endurance Tester.
 """
+
 from app.platform_verification.performance_chaos_verification.domain.models import (
     SpikeTestReport,
     EnduranceTestReport,
@@ -12,6 +13,7 @@ from app.platform_verification.performance_chaos_verification.domain.interfaces 
 
 class SpikeEnduranceTester(ISpikeEnduranceTester):
     """Simulates sudden traffic spikes and multi-day endurance workloads."""
+
     __test__ = False
 
     def execute_spike_test(self) -> SpikeTestReport:

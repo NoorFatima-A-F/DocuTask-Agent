@@ -1,4 +1,5 @@
 """Domain package for Workforce Verification."""
+
 from .models import (
     VerificationStatus,
     PartId,

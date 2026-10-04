@@ -41,16 +41,16 @@ from app.platform_verification.enterprise_ai_performance_bottleneck.verifiers.pe
 def get_all_verifiers():
     """Return ordered list of all 12 Phase 3J.9 verifier instances."""
     return [
-        PerformanceArchitectureModelingVerifier(),    # 3J.9.1
-        LatencyProfilingVerifier(),                    # 3J.9.2
-        ThroughputCapacityVerifier(),                  # 3J.9.3
-        ResourceBottleneckVerifier(),                  # 3J.9.4
-        DatabasePerformanceVerifier(),                 # 3J.9.5
-        QueueCapacityVerifier(),                       # 3J.9.6
-        WorkerScalingVerifier(),                       # 3J.9.7
-        AIModelPerformanceVerifier(),                  # 3J.9.8
-        PerformanceRegressionVerifier(),               # 3J.9.9
-        CapacityPlanningVerifier(),                    # 3J.9.10
-        PerformanceFailureSimulationVerifier(),        # 3J.9.11
-        PerformanceObservabilityVerifier(),            # 3J.9.12
+        PerformanceArchitectureModelingVerifier(),  # 3J.9.1
+        LatencyProfilingVerifier(),  # 3J.9.2
+        ThroughputCapacityVerifier(),  # 3J.9.3
+        ResourceBottleneckVerifier(),  # 3J.9.4
+        DatabasePerformanceVerifier(),  # 3J.9.5
+        QueueCapacityVerifier(),  # 3J.9.6
+        WorkerScalingVerifier(),  # 3J.9.7
+        AIModelPerformanceVerifier(),  # 3J.9.8
+        PerformanceRegressionVerifier(),  # 3J.9.9
+        CapacityPlanningVerifier(),  # 3J.9.10
+        PerformanceFailureSimulationVerifier(),  # 3J.9.11
+        PerformanceObservabilityVerifier(),  # 3J.9.12
     ]

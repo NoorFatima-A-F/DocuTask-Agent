@@ -20,6 +20,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class MissionNode:
     """Base immutable node in the hierarchical mission graph."""
+
     node_id: str
     parent_id: Optional[str]
     title: str
@@ -36,6 +37,7 @@ class MissionNode:
 @dataclass(frozen=True)
 class ActionNode(MissionNode):
     """Atomic executable action step within a task."""
+
     tool_or_executor: str = ""
     parameters: Dict[str, Any] = field(default_factory=dict)
 
@@ -43,24 +45,28 @@ class ActionNode(MissionNode):
 @dataclass(frozen=True)
 class TaskNode(MissionNode):
     """A cohesive unit of work composed of actions."""
+
     actions: Tuple[ActionNode, ...] = ()
 
 
 @dataclass(frozen=True)
 class SubgoalNode(MissionNode):
     """A sub-objective delivering specific scientific sub-outcomes."""
+
     tasks: Tuple[TaskNode, ...] = ()
 
 
 @dataclass(frozen=True)
 class MilestoneNode(MissionNode):
     """A major intermediate scientific checkpoint."""
+
     subgoals: Tuple[SubgoalNode, ...] = ()
 
 
 @dataclass(frozen=True)
 class ObjectiveNode(MissionNode):
     """A high-level strategic objective derived from the user goal."""
+
     milestones: Tuple[MilestoneNode, ...] = ()
 
 
@@ -70,6 +76,7 @@ class Mission:
     Authoritative immutable Mission entity representing a fully validated,
     measurable, and planned scientific research campaign.
     """
+
     mission_id: str
     goal_id: str
     title: str

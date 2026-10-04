@@ -1,6 +1,7 @@
 """
 Multi-Tenant Isolation Validator for Enterprise Database Verification.
 """
+
 from typing import Dict, List, Any
 from app.platform_verification.database_verification.domain.models import TenantIsolationReport
 from app.platform_verification.database_verification.domain.interfaces import ITenantIsolationValidator

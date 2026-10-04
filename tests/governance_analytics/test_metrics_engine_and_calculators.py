@@ -57,9 +57,7 @@ def test_metrics_engine_calculations():
 
 
 def test_time_series_aggregator_period_comparison():
-    change_pct, trend = TimeSeriesAggregator.compare_periods(
-        current_val=15.0, previous_val=10.0, is_lower_better=True
-    )
+    change_pct, trend = TimeSeriesAggregator.compare_periods(current_val=15.0, previous_val=10.0, is_lower_better=True)
     assert change_pct == 50.0
     assert trend == MetricTrend.CRITICAL_SPIKE
 

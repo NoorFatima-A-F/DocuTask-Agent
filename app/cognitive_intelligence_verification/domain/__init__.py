@@ -1,4 +1,5 @@
 """Domain models package for Cognitive Intelligence Verification."""
+
 from .models import (
     VerificationStatus,
     PartId,

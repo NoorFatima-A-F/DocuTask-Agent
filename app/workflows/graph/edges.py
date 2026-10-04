@@ -19,6 +19,7 @@ class EdgeType(str, Enum):
 @dataclass(frozen=True)
 class GraphEdge:
     """Directed dependency edge between workflow nodes."""
+
     source_node_id: str
     target_node_id: str
     edge_type: EdgeType = EdgeType.SUCCESS

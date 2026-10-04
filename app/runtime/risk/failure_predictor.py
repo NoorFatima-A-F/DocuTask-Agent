@@ -21,8 +21,8 @@ class DAGFailurePredictor:
     @staticmethod
     def predict_dag_nodes(nodes: List[Dict[str, Any]], features: Dict[str, float]) -> List[NodeRiskPrediction]:
         predictions: List[NodeRiskPrediction] = []
-        base_ocr_risk = (1.0 - features.get("ocr_confidence", 0.85))
-        base_val_risk = (1.0 - features.get("schema_validation_score", 1.0))
+        base_ocr_risk = 1.0 - features.get("ocr_confidence", 0.85)
+        base_val_risk = 1.0 - features.get("schema_validation_score", 1.0)
 
         for node in nodes:
             node_id = node.get("id", "task_node")

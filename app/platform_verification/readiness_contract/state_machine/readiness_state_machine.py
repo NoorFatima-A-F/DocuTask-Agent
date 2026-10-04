@@ -3,6 +3,7 @@ Readiness State Machine (Part 2).
 Implements the 6-state deterministic lifecycle model:
 INITIALIZING -> CHECKING_DEPENDENCIES -> READY <-> DEGRADED <-> NOT_READY -> RECOVERING -> READY.
 """
+
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessState,
     StateMachineReport,
@@ -45,9 +46,7 @@ class ReadinessStateMachine(IReadinessStateMachine):
 
     def transition_to(self, to_state: ReadinessState) -> ReadinessState:
         if not self.is_valid_transition(self._current_state, to_state):
-            raise ValueError(
-                f"Illegal readiness transition from {self._current_state.value} to {to_state.value}"
-            )
+            raise ValueError(f"Illegal readiness transition from {self._current_state.value} to {to_state.value}")
         self._current_state = to_state
         return self._current_state
 
@@ -71,9 +70,7 @@ class ReadinessStateMachine(IReadinessStateMachine):
                     "NOT_READY": "Critical dependency down (e.g. postgres), traffic withheld",
                     "RECOVERING": "Dependencies returned, system validating warm pool stability",
                 },
-                "transitions": {
-                    k.value: [v.value for v in vals] for k, vals in self.ALLOWED_TRANSITIONS.items()
-                },
+                "transitions": {k.value: [v.value for v in vals] for k, vals in self.ALLOWED_TRANSITIONS.items()},
                 "status": "STATE_MACHINE_VERIFIED" if valid else "STATE_MACHINE_INVALID",
             },
         )

@@ -1,10 +1,12 @@
 """
 Domain Models & Value Objects for Certification.
 """
+
 from datetime import datetime, timezone
 from typing import Any, Dict
 from pydantic import BaseModel, Field as PydField
 import uuid
+
 
 class CertificationEntity(BaseModel):
     id: str = PydField(default_factory=lambda: f"cert_{uuid.uuid4().hex[:8]}")

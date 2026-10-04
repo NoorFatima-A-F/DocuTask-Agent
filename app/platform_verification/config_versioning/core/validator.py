@@ -1,8 +1,10 @@
 """
 Configuration Schema & Policy Validator.
 """
+
 from typing import Any, Dict, List, Tuple
 from pydantic import ValidationError
+
 
 class ConfigurationValidator:
     @staticmethod
@@ -23,5 +25,6 @@ class ConfigurationValidator:
                 errors.append("Invalid 'ai.max_tokens': must be positive")
 
         return len(errors) == 0, errors
+
 
 configuration_validator = ConfigurationValidator()

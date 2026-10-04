@@ -202,8 +202,14 @@ async def get_operations_history() -> Dict[str, Any]:
 @router.post("/heal", summary="Trigger autonomous or targeted self-healing")
 async def post_heal_incident(request: HealRequest) -> Dict[str, Any]:
     engine = get_healing_engine()
-    subsystem_enum = SubsystemType(request.subsystem) if request.subsystem in SubsystemType.__members__ else SubsystemType.WORKERS
-    action_enum = HealingActionType(request.action_type) if request.action_type and request.action_type in HealingActionType.__members__ else None
+    subsystem_enum = (
+        SubsystemType(request.subsystem) if request.subsystem in SubsystemType.__members__ else SubsystemType.WORKERS
+    )
+    action_enum = (
+        HealingActionType(request.action_type)
+        if request.action_type and request.action_type in HealingActionType.__members__
+        else None
+    )
 
     result = engine.execute_healing(
         incident_id=request.incident_id,

@@ -230,7 +230,7 @@ class TestResearchValidationEcosystem:
     # -------------------------------------------------------------------------
     def test_infrastructure_lab(self):
         def sample_work():
-            _ = [x ** 2 for x in range(100)]
+            _ = [x**2 for x in range(100)]
 
         lab_rep = InfrastructureLabEngine.run_infrastructure_lab(sample_work)
         assert isinstance(lab_rep, InfrastructureLabReport)
@@ -305,7 +305,9 @@ class TestResearchValidationEcosystem:
         # Transition to CANDIDATE
         mgr.transition_state("EVI-TEST-100", EvidenceLifecycleState.CANDIDATE, "alice", "Completed generation.")
         # Transition to VERIFIED
-        verified = mgr.transition_state("EVI-TEST-100", EvidenceLifecycleState.VERIFIED, "taskmaster-judge", "Approved.")
+        verified = mgr.transition_state(
+            "EVI-TEST-100", EvidenceLifecycleState.VERIFIED, "taskmaster-judge", "Approved."
+        )
         assert verified.state == EvidenceLifecycleState.VERIFIED
         assert verified.reviewer == "taskmaster-judge"
         assert len(verified.history) == 2

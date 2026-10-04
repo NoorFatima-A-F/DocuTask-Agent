@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 class PlanningSubTask(BaseModel):
     """Sub-task component of a parent PlanningTask."""
+
     subtask_id: str
     parent_task_id: str
     name: str

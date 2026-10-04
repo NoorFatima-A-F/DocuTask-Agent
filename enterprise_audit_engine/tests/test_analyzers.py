@@ -9,12 +9,15 @@ from enterprise_audit_engine.analyzers.runtime_verifier import RuntimeVerifier
 
 def test_test_quality_analyzer(tmp_path: Path):
     test_file = tmp_path / "test_sample.py"
-    test_file.write_text("""
+    test_file.write_text(
+        """
 def test_addition():
     x = 1 + 1
     assert x == 2
     assert x > 0
-""", encoding="utf-8")
+""",
+        encoding="utf-8",
+    )
 
     res = TestQualityAnalyzer.analyze_test_directory(tmp_path)
     assert res["total_test_files"] == 1
@@ -26,7 +29,7 @@ def test_addition():
 def test_security_pipeline_verifier(tmp_path: Path):
     clean_file = tmp_path / "service.py"
     clean_file.write_text("import os\nAPI_KEY = os.getenv('API_KEY')\n", encoding="utf-8")
-    
+
     res = SecurityPipelineVerifier.scan_security_posture(tmp_path)
     assert res["secrets_detected_count"] == 0
 

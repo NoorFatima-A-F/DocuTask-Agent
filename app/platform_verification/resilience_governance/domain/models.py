@@ -1,6 +1,7 @@
 """
 Domain Models for Disaster Recovery Governance & Operational Resilience Framework (Part 3G.4).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any
@@ -11,8 +12,8 @@ class ResilienceMaturityTier(str, Enum):
     LEVEL_1_DOCUMENTED = "Level 1 — Documented"
     LEVEL_2_TESTED = "Level 2 — Tested"
     LEVEL_3_AUTOMATED = "Level 3 — Automated"
-    LEVEL_4_RESILIENT = "Level 4 — Resilient"      # >= 90%
-    LEVEL_5_ADAPTIVE = "Level 5 — Adaptive"        # >= 95%
+    LEVEL_4_RESILIENT = "Level 4 — Resilient"  # >= 90%
+    LEVEL_5_ADAPTIVE = "Level 5 — Adaptive"  # >= 95%
 
 
 class GovernanceRiskSeverity(str, Enum):
@@ -97,7 +98,7 @@ class DocumentationDriftReport:
 class ResilienceMaturityScore:
     maturity_level: ResilienceMaturityTier
     maturity_score: float  # 0 - 100
-    level_numeric: int     # 0 to 5
+    level_numeric: int  # 0 to 5
     dimension_scores: Dict[str, float] = field(default_factory=dict)
     passed: bool = True
     target_tier: ResilienceMaturityTier = ResilienceMaturityTier.LEVEL_4_RESILIENT
@@ -142,14 +143,14 @@ class ContinuousResilienceMetricsReport:
 
 @dataclass
 class GovernanceScorecard:
-    ownership_score: float           # Weight 20%
-    policy_governance_score: float   # Weight 15%
-    change_drift_score: float        # Weight 20%
-    maturity_score: float            # Weight 20%
-    incident_learning_score: float   # Weight 15%
-    audit_readiness_score: float     # Weight 10%
+    ownership_score: float  # Weight 20%
+    policy_governance_score: float  # Weight 15%
+    change_drift_score: float  # Weight 20%
+    maturity_score: float  # Weight 20%
+    incident_learning_score: float  # Weight 15%
+    audit_readiness_score: float  # Weight 10%
     overall_governance_score: float  # Composite 0 - 100
-    certification_status: str        # CERTIFIED / REJECTED
+    certification_status: str  # CERTIFIED / REJECTED
     ci_cd_deployment_approved: bool
     passed: bool
     evaluation_metadata: Dict[str, Any] = field(default_factory=dict)

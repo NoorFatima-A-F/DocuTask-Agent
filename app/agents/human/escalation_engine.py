@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class EscalationReason(str, Enum):
     """Triggers mandating human intervention."""
+
     LOW_CONFIDENCE = "LOW_CONFIDENCE"
     SECURITY_RISK = "SECURITY_RISK"
     COMPLIANCE_ISSUE = "COMPLIANCE_ISSUE"
@@ -28,6 +29,7 @@ class EscalationReason(str, Enum):
 
 class EscalationStatus(str, Enum):
     """Lifecycle states of an escalation ticket."""
+
     PENDING = "PENDING"
     ASSIGNED = "ASSIGNED"
     APPROVED = "APPROVED"
@@ -38,6 +40,7 @@ class EscalationStatus(str, Enum):
 @dataclass
 class EscalationRecord:
     """Audit and operational record for human escalation."""
+
     id: str = field(default_factory=lambda: f"esc-{uuid.uuid4().hex[:12]}")
     reason: EscalationReason | str = EscalationReason.LOW_CONFIDENCE
     priority: str = "HIGH"  # CRITICAL, HIGH, NORMAL, LOW

@@ -24,13 +24,18 @@ class AsyncInMemoryJobQueue(JobQueueProvider):
     async def enqueue(self, task: JobTask) -> None:
         """Pushes job task onto queue."""
         await self._queue.put(task)
-        logger.info("Enqueued job '%s' (Type=%s, Document=%s)", sanitize_log_input(task.job_id), sanitize_log_input(task.job_type), sanitize_log_input(task.document_id))
+        logger.info(
+            "Enqueued job '%s' (Type=%s, Document=%s)",
+            sanitize_log_input(task.job_id),
+            sanitize_log_input(task.job_type),
+            sanitize_log_input(task.document_id),
+        )
 
     async def dequeue(self, timeout: float = 1.0) -> Optional[JobTask]:
         """Dequeues next task from queue within timeout."""
         try:
             task = await asyncio.wait_for(self._queue.get(), timeout=timeout)
-            
+
             # Check if task was cancelled while sitting in queue
             if task.job_id in self._cancelled_jobs:
                 self._cancelled_jobs.remove(task.job_id)
@@ -55,4 +60,3 @@ class AsyncInMemoryJobQueue(JobQueueProvider):
     def task_done(self) -> None:
         """Marks current task as completed in queue."""
         self._queue.task_done()
-

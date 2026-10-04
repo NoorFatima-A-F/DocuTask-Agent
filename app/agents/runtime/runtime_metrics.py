@@ -11,6 +11,7 @@ from pydantic import BaseModel
 
 class RuntimeMetricsSnapshot(BaseModel):
     """Snapshot of platform runtime telemetry and performance counters."""
+
     boot_duration_ms: float = 0.0
     shutdown_duration_ms: float = 0.0
     registered_services_count: int = 0

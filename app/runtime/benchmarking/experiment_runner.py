@@ -93,31 +93,49 @@ class ExperimentRunner:
 
             # 2. Greedy Baseline
             greedy_cand = BaselinePolicies.greedy_planner(candidates)
-            greedy_u = (greedy_cand.get("accuracy", 0.9) * 0.5) + (1.0 - greedy_cand.get("latency_ms", 1000)/task.sla_deadline_ms)*0.25 + (1.0 - greedy_cand.get("cost_usd", 0.01)/task.max_budget_usd)*0.25
+            greedy_u = (
+                (greedy_cand.get("accuracy", 0.9) * 0.5)
+                + (1.0 - greedy_cand.get("latency_ms", 1000) / task.sla_deadline_ms) * 0.25
+                + (1.0 - greedy_cand.get("cost_usd", 0.01) / task.max_budget_usd) * 0.25
+            )
             greedy_utilities.append(max(0.0, min(1.0, greedy_u)))
 
             # 3. Random Baseline
             rand_cand = BaselinePolicies.random_planner(candidates, seed=rng.randint(1, 10000))
-            rand_u = (rand_cand.get("accuracy", 0.9) * 0.5) + (1.0 - rand_cand.get("latency_ms", 1000)/task.sla_deadline_ms)*0.25 + (1.0 - rand_cand.get("cost_usd", 0.01)/task.max_budget_usd)*0.25
+            rand_u = (
+                (rand_cand.get("accuracy", 0.9) * 0.5)
+                + (1.0 - rand_cand.get("latency_ms", 1000) / task.sla_deadline_ms) * 0.25
+                + (1.0 - rand_cand.get("cost_usd", 0.01) / task.max_budget_usd) * 0.25
+            )
             random_utilities.append(max(0.0, min(1.0, rand_u)))
 
             # 4. Cost First Baseline
             cheap_cand = BaselinePolicies.cost_first_planner(candidates)
-            cheap_u = (cheap_cand.get("accuracy", 0.9) * 0.5) + (1.0 - cheap_cand.get("latency_ms", 1000)/task.sla_deadline_ms)*0.25 + (1.0 - cheap_cand.get("cost_usd", 0.01)/task.max_budget_usd)*0.25
+            cheap_u = (
+                (cheap_cand.get("accuracy", 0.9) * 0.5)
+                + (1.0 - cheap_cand.get("latency_ms", 1000) / task.sla_deadline_ms) * 0.25
+                + (1.0 - cheap_cand.get("cost_usd", 0.01) / task.max_budget_usd) * 0.25
+            )
             cost_first_utilities.append(max(0.0, min(1.0, cheap_u)))
 
             # 5. Latency First Baseline
             fast_cand = BaselinePolicies.latency_first_planner(candidates)
-            fast_u = (fast_cand.get("accuracy", 0.9) * 0.5) + (1.0 - fast_cand.get("latency_ms", 1000)/task.sla_deadline_ms)*0.25 + (1.0 - fast_cand.get("cost_usd", 0.01)/task.max_budget_usd)*0.25
+            fast_u = (
+                (fast_cand.get("accuracy", 0.9) * 0.5)
+                + (1.0 - fast_cand.get("latency_ms", 1000) / task.sla_deadline_ms) * 0.25
+                + (1.0 - fast_cand.get("cost_usd", 0.01) / task.max_budget_usd) * 0.25
+            )
             latency_first_utilities.append(max(0.0, min(1.0, fast_u)))
 
-            task_results.append({
-                "task_id": task.task_id,
-                "workload": task.workload_type,
-                "selected_plan": opt_cand.get("plan_name", "Optimizer Selected"),
-                "optimizer_utility": round(opt_u, 4),
-                "greedy_utility": round(greedy_u, 4),
-            })
+            task_results.append(
+                {
+                    "task_id": task.task_id,
+                    "workload": task.workload_type,
+                    "selected_plan": opt_cand.get("plan_name", "Optimizer Selected"),
+                    "optimizer_utility": round(opt_u, 4),
+                    "greedy_utility": round(greedy_u, 4),
+                }
+            )
 
         # Compare stats against greedy
         stats_vs_greedy = BenchmarkStatistics.compute_comparative_stats(optimizer_utilities, greedy_utilities)

@@ -17,11 +17,13 @@ from app.runtime.observability.schemas import (
 def setup_teardown_arol():
     monitor = get_runtime_monitor()
     monitor.clear()
-    
+
     # Emit some sample real events
     m_id = "test_mission_101"
     e1 = MissionEvent(category=EventCategory.MISSION, event_type="MISSION_STARTED", mission_id=m_id)
-    e2 = ExecutionEvent(category=EventCategory.EXECUTION, event_type="OCR_TASK", mission_id=m_id, duration_ms=180.0, status="SUCCESS")
+    e2 = ExecutionEvent(
+        category=EventCategory.EXECUTION, event_type="OCR_TASK", mission_id=m_id, duration_ms=180.0, status="SUCCESS"
+    )
     monitor.emit_event_sync(e1)
     monitor.emit_event_sync(e2)
     yield

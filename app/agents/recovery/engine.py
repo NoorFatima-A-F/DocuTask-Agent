@@ -29,7 +29,7 @@ class RecoveryEngine:
         root_cause_analyzer: Optional[RootCauseAnalyzer] = None,
         strategy_selector: Optional[RecoveryStrategySelector] = None,
         planner: Optional[RecoveryPlanner] = None,
-        executor: Optional[RecoveryExecutor] = None
+        executor: Optional[RecoveryExecutor] = None,
     ):
         self.classifier = classifier or FailureClassifier()
         self.root_cause_analyzer = root_cause_analyzer or RootCauseAnalyzer()
@@ -59,7 +59,7 @@ class RecoveryEngine:
         stats = RecoveryStatistics(
             retry_attempts=1,
             checkpoints_evaluated=1,
-            nodes_compensated=1 if "COMPENSATE" in str(strategy_def.strategy) else 0
+            nodes_compensated=1 if "COMPENSATE" in str(strategy_def.strategy) else 0,
         )
 
         return RecoveryResult(
@@ -69,5 +69,5 @@ class RecoveryEngine:
             strategy_executed=strategy_def.strategy,
             is_remediated=success,
             statistics=stats,
-            messages=[f"Recovery executed strategy: {strategy_def.strategy.value}"]
+            messages=[f"Recovery executed strategy: {strategy_def.strategy.value}"],
         )

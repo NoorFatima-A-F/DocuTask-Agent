@@ -11,14 +11,13 @@ from typing import Dict, List, Set, Tuple
 
 from research_validation.knowledge_graph.knowledge_node import KnowledgeNode
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
-from research_validation.knowledge_graph.relationship_engine import (
-    RelationshipEngine
-)
+from research_validation.knowledge_graph.relationship_engine import RelationshipEngine
 
 
 @dataclass(frozen=True)
 class InferredRelationship:
     """A logically derived relation not directly observed."""
+
     source_id: str
     relationship: RelationshipType
     target_id: str
@@ -30,6 +29,7 @@ class InferredRelationship:
 @dataclass(frozen=True)
 class CausalGraphResult:
     """Extracted causal subgraph mapping interventions to empirical metrics."""
+
     interventions: List[str]
     mediators: List[str]
     outcomes: List[str]
@@ -56,14 +56,16 @@ class ScientificReasoningEngine:
             if edge1.relationship == RelationshipType.CAUSES:
                 for edge2 in self.rel_engine.get_outgoing_edges(edge1.target_id):
                     if edge2.relationship == RelationshipType.CAUSES:
-                        inferred.append(InferredRelationship(
-                            source_id=edge1.source_id,
-                            relationship=RelationshipType.CAUSES,
-                            target_id=edge2.target_id,
-                            rationale=f"Transitive deduction: {edge1.source_id} -> {edge1.target_id} -> {edge2.target_id}",
-                            confidence=edge1.confidence * edge2.confidence * 0.9,
-                            derivation_rule="TRANSITIVE_CAUSALITY",
-                        ))
+                        inferred.append(
+                            InferredRelationship(
+                                source_id=edge1.source_id,
+                                relationship=RelationshipType.CAUSES,
+                                target_id=edge2.target_id,
+                                rationale=f"Transitive deduction: {edge1.source_id} -> {edge1.target_id} -> {edge2.target_id}",
+                                confidence=edge1.confidence * edge2.confidence * 0.9,
+                                derivation_rule="TRANSITIVE_CAUSALITY",
+                            )
+                        )
         return inferred
 
     def build_causal_graph(self) -> CausalGraphResult:

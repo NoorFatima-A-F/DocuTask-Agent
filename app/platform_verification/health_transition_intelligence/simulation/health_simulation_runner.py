@@ -6,14 +6,19 @@ Executes the 4 mandatory health intelligence failure & recovery simulations:
 - Test 3: AI Provider Slow Response (READY -> DEGRADED)
 - Test 4: Worker Memory Leak & Auto-Recovery (READY -> DEGRADED -> Auto-Recycled -> READY)
 """
+
 from typing import List
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
     SimulationScenarioResult,
     SimulationReport,
 )
-from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import HealthStateMachine
-from app.platform_verification.health_transition_intelligence.recovery.recovery_orchestrator import ServiceRecoveryOrchestrator
+from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import (
+    HealthStateMachine,
+)
+from app.platform_verification.health_transition_intelligence.recovery.recovery_orchestrator import (
+    ServiceRecoveryOrchestrator,
+)
 
 
 class HealthSimulationRunner:
@@ -33,7 +38,7 @@ class HealthSimulationRunner:
             reason="PostgreSQL connection pool dropped / database unreachable",
             trigger_signal="postgres_connection_failure",
         )
-        passed1 = (sm1.current_state == HealthState.NOT_READY)
+        passed1 = sm1.current_state == HealthState.NOT_READY
         scenarios.append(
             SimulationScenarioResult(
                 scenario_id="SIM-01",
@@ -61,7 +66,7 @@ class HealthSimulationRunner:
             reason="Validation checks (BEGIN; SELECT 1; COMMIT;) passed",
             trigger_signal="recovery_validator",
         )
-        passed2 = (sm2.current_state == HealthState.READY)
+        passed2 = sm2.current_state == HealthState.READY
         scenarios.append(
             SimulationScenarioResult(
                 scenario_id="SIM-02",
@@ -84,7 +89,7 @@ class HealthSimulationRunner:
             reason="Gemini API latency elevated (>2000ms), switching to async queue fallback",
             trigger_signal="ai_latency_spike",
         )
-        passed3 = (sm3.current_state == HealthState.DEGRADED)
+        passed3 = sm3.current_state == HealthState.DEGRADED
         scenarios.append(
             SimulationScenarioResult(
                 scenario_id="SIM-03",
@@ -125,7 +130,7 @@ class HealthSimulationRunner:
         )
 
         passed_count = sum(1 for s in scenarios if s.passed)
-        all_passed = (passed_count == len(scenarios))
+        all_passed = passed_count == len(scenarios)
 
         return SimulationReport(
             total_scenarios=len(scenarios),

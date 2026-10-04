@@ -1,6 +1,7 @@
 """
 Phase 3I.5: Enterprise Alerting & Incident Detection Verification — Interfaces
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 from .models import (

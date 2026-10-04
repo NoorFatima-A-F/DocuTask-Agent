@@ -1,11 +1,13 @@
 """
 Domain Models & Value Objects for Core.
 """
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field as PydField
 import uuid
+
 
 class CoreEntity(BaseModel):
     id: str = PydField(default_factory=lambda: f"core_{uuid.uuid4().hex[:8]}")

@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class ConnectorMetricsSummary(BaseModel):
     """Aggregated operational telemetry for an individual connector."""
+
     connector_id: str
     total_calls: int = 0
     successful_calls: int = 0

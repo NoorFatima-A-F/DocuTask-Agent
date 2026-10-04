@@ -50,7 +50,12 @@ class ShadowExecutor:
 
         actions = simulated_shadow_actions or [
             {"type": "OCR_PARSE", "is_mutation": False, "key": "ocr_text"},
-            {"type": "DB_PERSIST_DRAFT", "is_mutation": True, "target": "DB.invoices", "value": "shadow_invoice_record"},
+            {
+                "type": "DB_PERSIST_DRAFT",
+                "is_mutation": True,
+                "target": "DB.invoices",
+                "value": "shadow_invoice_record",
+            },
         ]
 
         sandbox_rec = self.sandbox.execute_in_sandbox(sandbox_id, mission_id, actions)

@@ -12,9 +12,9 @@ from typing import Dict, List
 from pydantic import BaseModel, Field
 
 
-
 class SynthesizedOperatorSpec(BaseModel):
     """Full specification of a synthesized worker operator with executable code representation."""
+
     spec_id: str = Field(default_factory=lambda: f"spec_{uuid.uuid4().hex[:8]}")
     name: str
     description: str
@@ -44,7 +44,7 @@ class ConstrainedOperatorGenerator:
         expected_latency_ms: float = 85.0,
     ) -> SynthesizedOperatorSpec:
         """Synthesizes an operator with code and verifies its AST safety."""
-        code = f'''
+        code = f"""
 def execute_{operator_name}(inputs: dict) -> dict:
     raw_table = inputs.get("table_cells", [])
     reconciled_items = []
@@ -58,7 +58,7 @@ def execute_{operator_name}(inputs: dict) -> dict:
         "calculated_total": running_sum,
         "status": "SUCCESS"
     }}
-'''
+"""
         is_safe, violations = self.verify_code_safety(code)
 
         spec = SynthesizedOperatorSpec(

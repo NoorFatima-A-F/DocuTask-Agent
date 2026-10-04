@@ -24,9 +24,7 @@ class RegionManager:
 
     def list_regions(self) -> List[Dict[str, any]]:
         """List all supported platform deployment regions."""
-        return [
-            {"region": r.value, **meta} for r, meta in self.REGION_METADATA.items()
-        ]
+        return [{"region": r.value, **meta} for r, meta in self.REGION_METADATA.items()]
 
     def get_region_metadata(self, region: Region) -> Dict[str, any]:
         """Get metadata for a specific region."""

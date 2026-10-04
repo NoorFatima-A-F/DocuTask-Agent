@@ -25,7 +25,7 @@ class HierarchicalTaskDecomposer:
             node_id=root_node_id,
             name=goal.name,
             level=AbstractionLevel.STRATEGIC_GOAL,
-            children_ids=["t1_ocr", "t2_extract", "t3_validate"]
+            children_ids=["t1_ocr", "t2_extract", "t3_validate"],
         )
 
         # Level: Tasks / Atomic Tasks
@@ -34,7 +34,7 @@ class HierarchicalTaskDecomposer:
             name="OCR Processing",
             capability_requirement="OCR",
             estimated_duration_seconds=5.0,
-            estimated_cost_usd=0.1
+            estimated_cost_usd=0.1,
         )
         t2 = PlanningTask(
             task_id="t2_extract",
@@ -42,7 +42,7 @@ class HierarchicalTaskDecomposer:
             capability_requirement="LLM",
             dependencies=["t1_ocr"],
             estimated_duration_seconds=10.0,
-            estimated_cost_usd=0.4
+            estimated_cost_usd=0.4,
         )
         t3 = PlanningTask(
             task_id="t3_validate",
@@ -50,20 +50,13 @@ class HierarchicalTaskDecomposer:
             capability_requirement="DECISION",
             dependencies=["t2_extract"],
             estimated_duration_seconds=2.0,
-            estimated_cost_usd=0.05
+            estimated_cost_usd=0.05,
         )
 
         for task in [t1, t2, t3]:
             atomic_tasks.append(task)
             tree_nodes[task.task_id] = DecompositionNode(
-                node_id=task.task_id,
-                name=task.name,
-                level=AbstractionLevel.ATOMIC_TASK,
-                parent_id=root_node_id
+                node_id=task.task_id, name=task.name, level=AbstractionLevel.ATOMIC_TASK, parent_id=root_node_id
             )
 
-        return DecompositionTree(
-            root_goal=goal,
-            nodes=tree_nodes,
-            atomic_tasks=atomic_tasks
-        )
+        return DecompositionTree(root_goal=goal, nodes=tree_nodes, atomic_tasks=atomic_tasks)

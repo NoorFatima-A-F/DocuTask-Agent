@@ -33,13 +33,28 @@ async def health_check() -> Dict[str, str]:
 async def list_stages() -> List[Dict[str, str]]:
     """List the 7 automated CI/CD continuous infrastructure verification stages."""
     return [
-        {"stage": "1. Change Impact Analysis", "description": "Detects modified architectural components & required tests"},
+        {
+            "stage": "1. Change Impact Analysis",
+            "description": "Detects modified architectural components & required tests",
+        },
         {"stage": "2. Build & Metadata Verification", "description": "Deterministic container builds & image digests"},
-        {"stage": "3. Automated Security Gates", "description": "Zero Critical CVEs (Trivy) & Zero Secret Leaks (Gitleaks)"},
-        {"stage": "4. Disposable Test Environments", "description": "Ephemeral Docker test network & deep health probes"},
+        {
+            "stage": "3. Automated Security Gates",
+            "description": "Zero Critical CVEs (Trivy) & Zero Secret Leaks (Gitleaks)",
+        },
+        {
+            "stage": "4. Disposable Test Environments",
+            "description": "Ephemeral Docker test network & deep health probes",
+        },
         {"stage": "5. End-to-End Integration", "description": "Full document processing flow validation"},
-        {"stage": "6. Performance Regression Gate", "description": "Automated P95 latency & throughput SLA verification"},
-        {"stage": "7. Release Decision & Certification", "description": "Automated PASS/BLOCK decision & production certificate"},
+        {
+            "stage": "6. Performance Regression Gate",
+            "description": "Automated P95 latency & throughput SLA verification",
+        },
+        {
+            "stage": "7. Release Decision & Certification",
+            "description": "Automated PASS/BLOCK decision & production certificate",
+        },
     ]
 
 

@@ -2,12 +2,14 @@
 Phase V8 — Enterprise Autonomous Agent Workforce Verification Program (EAAWDOP Verification)
 Domain Models & Verification Schemas
 """
+
 from __future__ import annotations
 from enum import Enum
 from typing import Dict, List, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid
+
 
 class VerificationCategory(str, Enum):
     REGISTRY = "REGISTRY"
@@ -22,11 +24,13 @@ class VerificationCategory(str, Enum):
     GOVERNANCE_SAFETY = "GOVERNANCE_SAFETY"
     SCENARIOS = "SCENARIOS"
 
+
 class VerificationStatus(str, Enum):
     PASSED = "PASSED"
     FAILED = "FAILED"
     WARNING = "WARNING"
     SKIPPED = "SKIPPED"
+
 
 class WorkforceVerificationRun(BaseModel):
     id: str = Field(default_factory=lambda: f"vrun-{uuid.uuid4().hex[:10]}")
@@ -39,6 +43,7 @@ class WorkforceVerificationRun(BaseModel):
     status: VerificationStatus = VerificationStatus.PASSED
     evidence_location: str = "workforce_verification_evidence/"
     details: Dict[str, Any] = Field(default_factory=dict)
+
 
 class SectionResult(BaseModel):
     section_id: str
@@ -53,6 +58,7 @@ class SectionResult(BaseModel):
     metrics: Dict[str, Any] = Field(default_factory=dict)
     summary: str = ""
     executed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class MasterWorkforceScore(BaseModel):
     tenant_id: str = "enterprise-corp"

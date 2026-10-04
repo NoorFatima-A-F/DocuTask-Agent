@@ -17,11 +17,11 @@ class EventSchemaVersioning:
     def migrate_if_needed(event_dict: Dict[str, Any]) -> Dict[str, Any]:
         """Upgrades older event schema versions to the latest canonical format."""
         event_dict.get("version", "1.0.0")
-        
+
         # If older schema without correlation_id
         if "correlation_id" not in event_dict:
             event_dict["correlation_id"] = f"corr-{event_dict.get('mission_id', 'global')}"
-            
+
         if "causation_id" not in event_dict:
             event_dict["causation_id"] = f"cause-{event_dict.get('event_id', 'init')}"
 

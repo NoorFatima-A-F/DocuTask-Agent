@@ -1,4 +1,5 @@
 """Artifact Domain Models and Supported Asset Types."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -7,6 +8,7 @@ from typing import Any, Dict, Optional
 
 class ArtifactType(str, Enum):
     """Supported artifact asset categories (Req 13)."""
+
     CONTAINER_IMAGE = "CONTAINER_IMAGE"
     HELM_PACKAGE = "HELM_PACKAGE"
     WORKFLOW_PACKAGE = "WORKFLOW_PACKAGE"
@@ -21,6 +23,7 @@ class ArtifactType(str, Enum):
 
 class ArtifactQuarantineStatus(str, Enum):
     """Artifact quarantine & safety states (Req 24)."""
+
     ACTIVE = "ACTIVE"
     QUARANTINED = "QUARANTINED"
     BLOCKED = "BLOCKED"
@@ -30,6 +33,7 @@ class ArtifactQuarantineStatus(str, Enum):
 @dataclass
 class ArtifactIdentity:
     """Content-addressed artifact representation (Req 14)."""
+
     artifact_id: str
     type: ArtifactType
     name: str

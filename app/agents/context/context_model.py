@@ -57,11 +57,7 @@ class AgentContext:
     def with_history_entry(self, stage: str, details: Dict[str, Any]) -> "AgentContext":
         """Returns a new AgentContext instance with the updated execution history entry."""
         new_history = list(self.execution_history)
-        new_history.append({
-            "stage": stage,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "details": details
-        })
+        new_history.append({"stage": stage, "timestamp": datetime.now(timezone.utc).isoformat(), "details": details})
         return AgentContext(
             document_id=self.document_id,
             user_id=self.user_id,
@@ -69,5 +65,5 @@ class AgentContext:
             metadata=self.metadata,
             configuration=self.configuration,
             execution_history=new_history,
-            variables=self.variables
+            variables=self.variables,
         )

@@ -23,14 +23,12 @@ class AgentDirectory:
         """Finds agents capable in a specific domain (e.g., financial, legal)."""
         all_agents = await self.registry.list_available()
         return [
-            a for a in all_agents
-            if domain.lower() in [d.lower() for d in a.profile.capabilities.execution_domains]
+            a for a in all_agents if domain.lower() in [d.lower() for d in a.profile.capabilities.execution_domains]
         ]
 
     async def find_by_skill(self, skill_name: str) -> List[Agent]:
         """Finds agents advertising a specific skill name."""
         all_agents = await self.registry.list_available()
         return [
-            a for a in all_agents
-            if any(s.name.lower() == skill_name.lower() for s in a.profile.capabilities.skills)
+            a for a in all_agents if any(s.name.lower() == skill_name.lower() for s in a.profile.capabilities.skills)
         ]

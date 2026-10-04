@@ -2,6 +2,7 @@
 Test Suite: Failure Recovery & Chaos Fault Injection
 Validates runtime fault injection, dynamic subgraph replanning, and autonomous self-healing execution.
 """
+
 import pytest
 from app.runtime.failure_recovery.chaos_injector import ChaosFaultInjector
 from app.runtime.failure_recovery.recovery_orchestrator import AutonomousRecoveryOrchestrator
@@ -9,7 +10,7 @@ from app.runtime.failure_recovery.recovery_orchestrator import AutonomousRecover
 
 def test_chaos_fault_injection_lifecycle():
     injector = ChaosFaultInjector()
-    
+
     faults = injector.list_faults()
     assert len(faults) >= 3
     assert any(f["fault_id"] == "fault_ocr_crash" for f in faults)
@@ -24,7 +25,7 @@ def test_chaos_fault_injection_lifecycle():
 
 def test_autonomous_recovery_orchestration_actions():
     orchestrator = AutonomousRecoveryOrchestrator()
-    
+
     # Test OCR crash recovery
     ocr_rec = orchestrator.handle_task_failure("m1", "t_ocr_1", "PROCESS_CRASH")
     assert ocr_rec.recovery_action == "ALTERNATE_OCR_FALLBACK"

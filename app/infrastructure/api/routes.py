@@ -24,6 +24,7 @@ infrastructure_sdk = InfrastructureSDK()
 # Runtime Routes
 # -----------------------------------------------------------------------------
 
+
 @router.post("/runtime/deploy", response_model=ServiceInstanceResponse)
 def deploy_service(req: RuntimeDeployRequest) -> ServiceInstanceResponse:
     try:
@@ -121,6 +122,7 @@ def get_runtime_status(environment: Optional[str] = None) -> List[ServiceInstanc
 # Services & Health Routes
 # -----------------------------------------------------------------------------
 
+
 @router.get("/services")
 def list_services(environment: Optional[str] = None) -> List[Dict[str, Any]]:
     services = infrastructure_sdk.service_registry.list_services(environment=environment)
@@ -155,6 +157,7 @@ def get_service_health(id: str) -> ServiceHealthResponse:
 # -----------------------------------------------------------------------------
 # Resources Routes
 # -----------------------------------------------------------------------------
+
 
 @router.get("/resources", response_model=List[ResourceResponse])
 def list_resources(environment: Optional[str] = None) -> List[ResourceResponse]:

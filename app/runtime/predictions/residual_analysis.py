@@ -56,15 +56,15 @@ class ResidualAnalyzer:
 
         # Durbin-Watson statistic for autocorrelation: sum((e_t - e_{t-1})^2) / sum(e_t^2)
         diff_sq = sum((residuals[t] - residuals[t - 1]) ** 2 for t in range(1, n))
-        sum_sq = sum(e ** 2 for e in residuals) + 1e-9
+        sum_sq = sum(e**2 for e in residuals) + 1e-9
         dw_stat = diff_sq / sum_sq
 
         # Skewness and Kurtosis of residuals
         m3 = sum((e - mean_res) ** 3 for e in residuals) / n
-        skew = m3 / (std_res ** 3)
+        skew = m3 / (std_res**3)
 
         m4 = sum((e - mean_res) ** 4 for e in residuals) / n
-        kurt = (m4 / (std_res ** 4)) - 3.0
+        kurt = (m4 / (std_res**4)) - 3.0
 
         return ResidualAnalysisResult(
             sample_size=n,

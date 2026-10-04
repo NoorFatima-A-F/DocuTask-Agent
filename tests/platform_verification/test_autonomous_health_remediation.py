@@ -180,7 +180,6 @@ def test_part_3h_4_3_5_safety_guard_rate_limits_and_blast_radius():
     assert res_exceeded.cooldown_remaining_seconds > 0
 
 
-
 def test_part_3h_4_3_6_remediation_executor():
     executor = RemediationExecutor()
     engine = RecoveryDecisionEngine()

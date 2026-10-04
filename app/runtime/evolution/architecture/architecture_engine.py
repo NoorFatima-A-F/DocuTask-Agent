@@ -67,7 +67,9 @@ class ArchitectureImprovementPlan:
     title: str = "Decouple Swarm Coordination Ring from Central Memory Store"
     target_subsystems: List[str] = field(default_factory=lambda: ["swarm_orchestrator", "shared_memory"])
     action_type: str = "DECOUPLE_ASYNC_EVENT_BUS"
-    rationale: str = "High efferent coupling (Ce=14) in swarm orchestrator creates lock bottlenecks under high parallelism."
+    rationale: str = (
+        "High efferent coupling (Ce=14) in swarm orchestrator creates lock bottlenecks under high parallelism."
+    )
     expected_coupling_reduction: float = 0.45
     expected_latency_gain_pct: float = 32.5
     status: str = "PROPOSED"
@@ -102,7 +104,16 @@ class ArchitectureEngine:
     def _initialize_bootstrap_topology(self) -> None:
         bootstrap_nodes = [
             ArchitectureGraphNode("node_gateway", "API Gateway & Router", "network", "service", 0.32, 1, 8),
-            ArchitectureGraphNode("node_orchestrator", "Swarm Coordinator", "orchestration", "agent", 0.65, 8, 12, ArchitectureHealth.DEGRADED.value),
+            ArchitectureGraphNode(
+                "node_orchestrator",
+                "Swarm Coordinator",
+                "orchestration",
+                "agent",
+                0.65,
+                8,
+                12,
+                ArchitectureHealth.DEGRADED.value,
+            ),
             ArchitectureGraphNode("node_memory", "Episodic Vector Memory", "memory", "memory", 0.42, 6, 2),
             ArchitectureGraphNode("node_planner", "Recursive Meta Planner", "cognition", "agent", 0.58, 4, 7),
             ArchitectureGraphNode("node_governance", "Cryptographic Sentinel", "governance", "governance", 0.25, 5, 2),
@@ -141,13 +152,9 @@ class ArchitectureEngine:
         """Returns the full architectural dependency graph."""
         nodes_list = [n.to_dict() for n in self.nodes.values()]
         edges_list = [e.to_dict() for e in self.edges.values()]
-        
+
         # Calculate platform structural metrics
-        avg_complexity = (
-            sum(n.complexity_score for n in self.nodes.values()) / len(self.nodes)
-            if self.nodes
-            else 0.0
-        )
+        avg_complexity = sum(n.complexity_score for n in self.nodes.values()) / len(self.nodes) if self.nodes else 0.0
         total_qps = sum(e.weight_qps for e in self.edges.values())
 
         return {
@@ -181,9 +188,7 @@ class ArchitectureEngine:
         )
         self.improvement_plans[plan_id] = plan
 
-        self.event_bus.publish(
-            ArchitectureOptimizationProposed(payload=plan.to_dict())
-        )
+        self.event_bus.publish(ArchitectureOptimizationProposed(payload=plan.to_dict()))
         return plan
 
     def list_improvement_plans(self) -> List[ArchitectureImprovementPlan]:

@@ -29,9 +29,9 @@ class CalibrationBin:
 class CalibrationAuditReport:
     report_id: str
     expected_calibration_error: float  # ECE
-    maximum_calibration_error: float   # MCE
+    maximum_calibration_error: float  # MCE
     brier_score: float
-    is_well_calibrated: bool           # ECE < 0.05
+    is_well_calibrated: bool  # ECE < 0.05
     total_samples: int
     bins: Tuple[CalibrationBin, ...]
     timestamp_utc: str
@@ -58,7 +58,7 @@ class EmpiricalCalibrationEngine:
         n = len(confidences)
 
         # Brier Score = (1/N) * sum((conf - gt)^2)
-        brier = sum((c - gt)**2 for c, gt in zip(confidences, ground_truths)) / n
+        brier = sum((c - gt) ** 2 for c, gt in zip(confidences, ground_truths)) / n
 
         bin_width = 1.0 / num_bins
         bins: List[CalibrationBin] = []
@@ -71,7 +71,8 @@ class EmpiricalCalibrationEngine:
 
             # Find samples in bin
             bin_samples = [
-                (c, gt) for c, gt in zip(confidences, ground_truths)
+                (c, gt)
+                for c, gt in zip(confidences, ground_truths)
                 if (b_min <= c < b_max) or (b_idx == num_bins - 1 and c == b_max)
             ]
             count = len(bin_samples)
@@ -88,17 +89,19 @@ class EmpiricalCalibrationEngine:
                 emp_acc = 0.0
                 err = 0.0
 
-            bins.append(CalibrationBin(
-                bin_index=b_idx,
-                confidence_min=b_min,
-                confidence_max=b_max,
-                mean_confidence=mean_conf,
-                empirical_accuracy=emp_acc,
-                sample_count=count,
-                bin_error=err,
-            ))
+            bins.append(
+                CalibrationBin(
+                    bin_index=b_idx,
+                    confidence_min=b_min,
+                    confidence_max=b_max,
+                    mean_confidence=mean_conf,
+                    empirical_accuracy=emp_acc,
+                    sample_count=count,
+                    bin_error=err,
+                )
+            )
 
-        well_calibrated = (ece < 0.05)
+        well_calibrated = ece < 0.05
         h_payload = {
             "ece": ece,
             "mce": mce,

@@ -2,6 +2,7 @@
 Immutable Audit Trail Service.
 Appends cryptographically signed audit events adhering to past-tense standards.
 """
+
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from app.platform_verification.evidence_engine.domain.models import AuditEvent
@@ -35,11 +36,7 @@ class ImmutableAuditTrail(AuditLoggerInterface):
     def get_events_for_resource(self, resource: str) -> List[AuditEvent]:
         return [e for e in self._events if e.resource == resource]
 
-    def query_events(
-        self,
-        resource: Optional[str] = None,
-        action: Optional[str] = None
-    ) -> List[AuditEvent]:
+    def query_events(self, resource: Optional[str] = None, action: Optional[str] = None) -> List[AuditEvent]:
         results = self._events
         if resource:
             results = [e for e in results if e.resource == resource]

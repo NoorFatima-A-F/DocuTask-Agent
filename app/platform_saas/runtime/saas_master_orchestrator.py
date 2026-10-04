@@ -44,7 +44,7 @@ class SaaSMasterOrchestrator:
         tenants_list = self.tenants.list_tenants()
         orgs_list = self.organizations.list_organizations()
         workspaces_list = self.workspaces.list_workspaces()
-        
+
         mrr = sum(s.base_price_monthly_usd for s in self.subscriptions.list_subscriptions() if s.status == "ACTIVE")
         records = self.usage.list_records()
         tokens = sum(int(r.quantity) for r in records if r.metric_name == "llm_tokens")

@@ -41,10 +41,9 @@ class CostAnalyzer:
     ) -> CostBreakdown:
         compute = cpu_hours * self.cost_per_cpu_hour
         storage = storage_gb * (self.cost_per_gb_storage / (30 * 24))
-        ai_cost = (
-            (prompt_tokens / 1000.0) * self.cost_per_1k_prompt
-            + (completion_tokens / 1000.0) * self.cost_per_1k_completion
-        )
+        ai_cost = (prompt_tokens / 1000.0) * self.cost_per_1k_prompt + (
+            completion_tokens / 1000.0
+        ) * self.cost_per_1k_completion
         network = network_gb * 0.01
         total = compute + storage + ai_cost + network
 

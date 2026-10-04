@@ -17,7 +17,9 @@ class DecisionRecord(BaseModel):
     planner_generation: int = Field(default=1, description="Planner graph generation")
     goal: str = Field(..., description="Goal under deliberation")
     selected_plan: str = Field(..., description="Name of the selected plan")
-    alternative_plans: List[PlanUtilityScore] = Field(default_factory=list, description="Candidate alternatives with utility scores")
+    alternative_plans: List[PlanUtilityScore] = Field(
+        default_factory=list, description="Candidate alternatives with utility scores"
+    )
     utility_scores: Dict[str, float] = Field(default_factory=dict, description="Selected plan utility metrics")
     constraints: List[str] = Field(default_factory=list, description="Evaluated constraints")
     evidence_ids: List[str] = Field(default_factory=list, description="Supporting evidence IDs")
@@ -56,7 +58,11 @@ class DecisionProvenanceEngine:
         planner_version: str = "v2.1-APDLE",
     ) -> DecisionRecord:
         alts = alternative_plans or []
-        why_not = {alt.plan_name: alt.rejection_reason or "Sub-optimal Pareto utility" for alt in alts if alt.plan_name != selected_plan}
+        why_not = {
+            alt.plan_name: alt.rejection_reason or "Sub-optimal Pareto utility"
+            for alt in alts
+            if alt.plan_name != selected_plan
+        }
         based = list(evidence_ids or []) + list(constraints or [])
 
         raw_dict = {

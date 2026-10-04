@@ -1,4 +1,5 @@
 """Rolling Deployment Strategy Engine."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Callable, List, Optional
@@ -8,6 +9,7 @@ from ..core.exceptions import StrategyExecutionException
 @dataclass
 class RollingStepResult:
     """Outcome of a single rolling batch step."""
+
     batch_index: int
     updated_replicas: int
     total_replicas: int

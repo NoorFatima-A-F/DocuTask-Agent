@@ -25,10 +25,7 @@ class NodeExecutor:
         ExecutionStateMachine.transition(exec_node.state, ExecutionLifecycleState.SCHEDULED, exec_node.node.node_id)
         exec_node.state = ExecutionLifecycleState.SCHEDULED
 
-        lease = await self.dispatcher.dispatch_task(
-            exec_node.node.node_id,
-            exec_node.node.capability_requirement
-        )
+        lease = await self.dispatcher.dispatch_task(exec_node.node.node_id, exec_node.node.capability_requirement)
         exec_node.assigned_worker_id = lease.worker_id
 
         # 2. RUNNING

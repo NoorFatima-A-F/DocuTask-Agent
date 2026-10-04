@@ -20,6 +20,7 @@ T = TypeVar("T")
 
 class Lifetime(str, Enum):
     """Component registration lifetime in IoC container."""
+
     SINGLETON = "SINGLETON"
     TRANSIENT = "TRANSIENT"
     SCOPED = "SCOPED"
@@ -243,9 +244,7 @@ class DependencyContainer:
 
         cls = target
         if cls in self._resolving_stack:
-            raise CyclicDependencyError(
-                f"Circular constructor dependency detected while resolving '{cls.__name__}'."
-            )
+            raise CyclicDependencyError(f"Circular constructor dependency detected while resolving '{cls.__name__}'.")
 
         self._resolving_stack.add(cls)
         try:

@@ -25,11 +25,25 @@ class PerformanceBenchmarker(IPerformanceBenchmarker):
 
     def evaluate(self) -> PerformanceBenchmarkReport:
         latencies = [
-            LatencyPercentile(operation_name="API_Ingress_Routing", p50_ms=3.2, p95_ms=8.5, p99_ms=14.0, sla_target_ms=50.0),
-            LatencyPercentile(operation_name="Multimodal_OCR", p50_ms=35.0, p95_ms=65.0, p99_ms=95.0, sla_target_ms=200.0),
-            LatencyPercentile(operation_name="Vector_Search_RAG", p50_ms=12.0, p95_ms=25.0, p99_ms=42.0, sla_target_ms=100.0),
-            LatencyPercentile(operation_name="Agent_Planning_TaskGraph", p50_ms=15.0, p95_ms=32.0, p99_ms=55.0, sla_target_ms=150.0),
-            LatencyPercentile(operation_name="End_to_End_Document_Workflow", p50_ms=120.0, p95_ms=285.0, p99_ms=450.0, sla_target_ms=1000.0),
+            LatencyPercentile(
+                operation_name="API_Ingress_Routing", p50_ms=3.2, p95_ms=8.5, p99_ms=14.0, sla_target_ms=50.0
+            ),
+            LatencyPercentile(
+                operation_name="Multimodal_OCR", p50_ms=35.0, p95_ms=65.0, p99_ms=95.0, sla_target_ms=200.0
+            ),
+            LatencyPercentile(
+                operation_name="Vector_Search_RAG", p50_ms=12.0, p95_ms=25.0, p99_ms=42.0, sla_target_ms=100.0
+            ),
+            LatencyPercentile(
+                operation_name="Agent_Planning_TaskGraph", p50_ms=15.0, p95_ms=32.0, p99_ms=55.0, sla_target_ms=150.0
+            ),
+            LatencyPercentile(
+                operation_name="End_to_End_Document_Workflow",
+                p50_ms=120.0,
+                p95_ms=285.0,
+                p99_ms=450.0,
+                sla_target_ms=1000.0,
+            ),
         ]
 
         checks = [

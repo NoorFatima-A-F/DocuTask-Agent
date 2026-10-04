@@ -34,9 +34,9 @@ class GlobalControlPlane:
             active_regions = [r for r in all_regions if r.status == RegionStatus.ACTIVE]
             all_clusters = self.cluster_registry.list_clusters()
             healthy_clusters = [
-                c for c in all_clusters
-                if c.status in (ClusterStatus.READY, ClusterStatus.ACTIVE)
-                and c.health_status == "HEALTHY"
+                c
+                for c in all_clusters
+                if c.status in (ClusterStatus.READY, ClusterStatus.ACTIVE) and c.health_status == "HEALTHY"
             ]
 
             return GlobalControlPlaneState(

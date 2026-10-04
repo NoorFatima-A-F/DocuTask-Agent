@@ -1,6 +1,7 @@
 """
 Domain module for Enterprise Automated Recovery & Self-Healing Verification
 """
+
 from .models import (
     CircuitBreakerState,
     RecoveryActionType,

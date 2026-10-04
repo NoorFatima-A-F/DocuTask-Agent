@@ -76,7 +76,9 @@ def test_adaptive_replanning_engine_tool_replacement():
     engine = AdaptiveReplanningEngine()
     graph = DynamicTaskGraph()
     t1 = PlannedTask(task_id="t1", name="OCR Task", action="ocr", required_tools=["legacy_tesseract_ocr"])
-    t2 = PlannedTask(task_id="t2", name="Extraction", action="extract", required_tools=["llm_extractor"], dependencies=["t1"])
+    t2 = PlannedTask(
+        task_id="t2", name="Extraction", action="extract", required_tools=["llm_extractor"], dependencies=["t1"]
+    )
     graph.add_task(t1)
     graph.add_task(t2)
     graph.refresh_states()
@@ -93,8 +95,16 @@ def test_adaptive_replanning_engine_validation_gate_insertion():
     """Test dynamic validation gate insertion from reflection critique."""
     engine = AdaptiveReplanningEngine()
     graph = DynamicTaskGraph()
-    t1 = PlannedTask(task_id="t1_extract", name="Data Extraction", action="extract", required_tools=["invoice_extractor"])
-    t2 = PlannedTask(task_id="t2_export", name="Export", action="export", required_tools=["json_exporter"], dependencies=["t1_extract"])
+    t1 = PlannedTask(
+        task_id="t1_extract", name="Data Extraction", action="extract", required_tools=["invoice_extractor"]
+    )
+    t2 = PlannedTask(
+        task_id="t2_export",
+        name="Export",
+        action="export",
+        required_tools=["json_exporter"],
+        dependencies=["t1_extract"],
+    )
     graph.add_task(t1)
     graph.add_task(t2)
     graph.refresh_states()

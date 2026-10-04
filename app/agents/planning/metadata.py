@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class PlanIdentity(BaseModel):
     """Immutable Plan Identity identifying plan instance across distributed executions."""
+
     plan_id: UUID = Field(default_factory=uuid4)
     goal_id: Optional[str] = Field(default=None)
     workflow_id: Optional[str] = Field(default=None)
@@ -24,6 +25,7 @@ class PlanIdentity(BaseModel):
 
 class PlanStatistics(BaseModel):
     """Execution estimates and performance statistics."""
+
     total_nodes_count: int = Field(default=0, ge=0)
     total_edges_count: int = Field(default=0, ge=0)
     estimated_duration_seconds: float = Field(default=0.0, ge=0.0)
@@ -36,6 +38,7 @@ class PlanStatistics(BaseModel):
 
 class PlanContext(BaseModel):
     """Context parameters provided during plan generation and evaluation."""
+
     document_id: Optional[UUID] = Field(default=None)
     user_id: Optional[UUID] = Field(default=None)
     task_scope: str = Field(default="DOCUMENT_PROCESSING")
@@ -46,6 +49,7 @@ class PlanContext(BaseModel):
 
 class PlanMetadata(BaseModel):
     """Comprehensive Plan Metadata."""
+
     plan_type: str = Field(default="EXECUTION")  # STRATEGIC, TACTICAL, OPERATIONAL, EXECUTION, RECOVERY, MULTI_AGENT
     priority: str = Field(default="MEDIUM")  # LOW, MEDIUM, HIGH, CRITICAL
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

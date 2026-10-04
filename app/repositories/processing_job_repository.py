@@ -30,9 +30,7 @@ class ProcessingJobRepository(BaseRepository[ProcessingJob]):
 
     async def get_by_id(self, job_id: uuid.UUID) -> Optional[ProcessingJob]:
         """Retrieves background job by UUID."""
-        result = await self.db.execute(
-            select(ProcessingJob).where(ProcessingJob.id == job_id)
-        )
+        result = await self.db.execute(select(ProcessingJob).where(ProcessingJob.id == job_id))
         return result.scalar_one_or_none()
 
     async def get_pending_jobs(self, limit: int = 10) -> List[ProcessingJob]:
@@ -63,20 +61,14 @@ class ProcessingJobRepository(BaseRepository[ProcessingJob]):
         query = (
             select(ProcessingJob)
             .where(
-                ProcessingJob.document_id == document_id,
-                ProcessingJob.status.in_(["QUEUED", "RUNNING", "RETRYING"])
+                ProcessingJob.document_id == document_id, ProcessingJob.status.in_(["QUEUED", "RUNNING", "RETRYING"])
             )
             .limit(1)
         )
         result = await self.db.execute(query)
         return result.scalar_one_or_none()
 
-    async def list_jobs(
-        self,
-        owner_id: uuid.UUID,
-        skip: int = 0,
-        limit: int = 20
-    ) -> Tuple[List[ProcessingJob], int]:
+    async def list_jobs(self, owner_id: uuid.UUID, skip: int = 0, limit: int = 20) -> Tuple[List[ProcessingJob], int]:
         """Retrieves paginated background jobs owned by specified user via document relationship."""
         count_stmt = (
             select(func.count(ProcessingJob.id))
@@ -98,18 +90,14 @@ class ProcessingJobRepository(BaseRepository[ProcessingJob]):
         return list(result.scalars().all()), total
 
     async def update_status(
-        self,
-        job: ProcessingJob,
-        status: str,
-        progress: float = 0.0,
-        last_error: Optional[str] = None
+        self, job: ProcessingJob, status: str, progress: float = 0.0, last_error: Optional[str] = None
     ) -> ProcessingJob:
         """Updates job status, progress percentage, and timestamps."""
         job.status = status
         job.progress = max(0.0, min(100.0, progress))
         if last_error:
             job.last_error = last_error
-        
+
         now = datetime.now(timezone.utc)
         if status == "RUNNING" and not job.started_at:
             job.started_at = now
@@ -131,7 +119,9 @@ class ProcessingJobRepository(BaseRepository[ProcessingJob]):
 
     async def cancel(self, job: ProcessingJob) -> ProcessingJob:
         """Cancels a job."""
-        return await self.update_status(job, status="CANCELLED", progress=job.progress, last_error="Cancelled by user request")
+        return await self.update_status(
+            job, status="CANCELLED", progress=job.progress, last_error="Cancelled by user request"
+        )
 
     async def delete(self, job: ProcessingJob) -> None:
         """Deletes job record."""

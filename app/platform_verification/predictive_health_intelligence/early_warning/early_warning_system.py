@@ -7,6 +7,7 @@ Generates proactive early warning alerts across the 5 core reliability categorie
 - AI_FAILURE_RISK
 - CAPACITY_RISK
 """
+
 import uuid
 from datetime import datetime, timezone
 from typing import List

@@ -72,13 +72,15 @@ class ConfidenceBudgetManager:
         for name, serr in stage_errors:
             c_var = serr**2
             c_pct = (c_var / equal_alloc) * 100.0 if equal_alloc > 0 else 0.0
-            consumptions.append(StageBudgetConsumption(
-                stage_name=name,
-                allocated_variance=equal_alloc,
-                consumed_variance=c_var,
-                consumed_pct=c_pct,
-                is_exceeded=(c_var > equal_alloc),
-            ))
+            consumptions.append(
+                StageBudgetConsumption(
+                    stage_name=name,
+                    allocated_variance=equal_alloc,
+                    consumed_variance=c_var,
+                    consumed_pct=c_pct,
+                    is_exceeded=(c_var > equal_alloc),
+                )
+            )
 
         return ConfidenceBudgetReport(
             total_budget_variance=self.max_variance,

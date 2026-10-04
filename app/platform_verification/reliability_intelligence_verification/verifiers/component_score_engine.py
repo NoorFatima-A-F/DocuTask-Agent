@@ -1,6 +1,7 @@
 """
 Phase 3H.5.7.2: Component Reliability Score Engine
 """
+
 from typing import List
 from ..domain.interfaces import IComponentScoreEngine
 from ..domain.models import (
@@ -30,12 +31,7 @@ class ComponentScoreEngine(IComponentScoreEngine):
             stab_score = max(88.0, 100.0 - (item.failure_count * 2.5))
 
             # Composite per component: 35% Avail, 25% Perf, 20% Rec, 20% Stab
-            comp_score = (
-                avail_score * 0.35
-                + perf_score * 0.25
-                + rec_score * 0.20
-                + stab_score * 0.20
-            )
+            comp_score = avail_score * 0.35 + perf_score * 0.25 + rec_score * 0.20 + stab_score * 0.20
 
             scores.append(
                 ComponentReliabilityScore(

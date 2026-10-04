@@ -29,7 +29,7 @@ def test_event_normalizer_dict_and_enum_conversion():
 
 def test_collector_gateway_enrichment_and_recording():
     gateway = AuditCollectorGateway()
-    
+
     # Ingest using kwargs
     event = gateway.record(
         event_type="workflow.start",
@@ -54,7 +54,14 @@ def test_collector_gateway_enrichment_and_recording():
 def test_collector_gateway_batch_recording():
     gateway = AuditCollectorGateway()
     batch = [
-        {"event_type": f"step_{i}", "tenant_id": "tenant_batch", "actor_id": "u", "action": "run", "resource_type": "step", "resource_id": f"s_{i}"}
+        {
+            "event_type": f"step_{i}",
+            "tenant_id": "tenant_batch",
+            "actor_id": "u",
+            "action": "run",
+            "resource_type": "step",
+            "resource_id": f"s_{i}",
+        }
         for i in range(5)
     ]
     recorded = gateway.record_batch(batch)

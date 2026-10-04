@@ -21,18 +21,20 @@ class DomainEvent(BaseModel):
 AgentEvent = DomainEvent
 
 
-
 class SystemEvent(DomainEvent):
     """System-level infrastructure event."""
+
     event_type: str = Field(default="SystemEvent")
 
 
 class ProgressEvent(DomainEvent):
     """Execution progress tracking event."""
+
     event_type: str = Field(default="ProgressEvent")
     progress_percentage: float = Field(default=0.0, ge=0.0, le=100.0)
 
 
 class HeartbeatMessage(DomainEvent):
     """Agent liveness heartbeat event."""
+
     event_type: str = Field(default="Heartbeat")

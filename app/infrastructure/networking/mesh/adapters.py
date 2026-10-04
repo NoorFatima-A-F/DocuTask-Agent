@@ -11,6 +11,7 @@ from ..control_plane.registry import RouteRule
 @dataclass
 class MeshConfigurationManifest:
     """A generated native mesh configuration manifest."""
+
     mesh_type: str
     resource_kind: str
     name: str
@@ -34,12 +35,16 @@ class IServiceMeshAdapter(ABC):
         pass
 
     @abstractmethod
-    def generate_mtls_policy(self, service_name: str, namespace: str = "default", mode: str = "STRICT") -> List[MeshConfigurationManifest]:
+    def generate_mtls_policy(
+        self, service_name: str, namespace: str = "default", mode: str = "STRICT"
+    ) -> List[MeshConfigurationManifest]:
         """Generate mesh mutual TLS security manifests."""
         pass
 
     @abstractmethod
-    def generate_traffic_split(self, service_name: str, primary_weight: int, canary_weight: int, namespace: str = "default") -> List[MeshConfigurationManifest]:
+    def generate_traffic_split(
+        self, service_name: str, primary_weight: int, canary_weight: int, namespace: str = "default"
+    ) -> List[MeshConfigurationManifest]:
         """Generate traffic splitting configuration for canary or blue/green deployments."""
         pass
 

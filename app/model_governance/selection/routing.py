@@ -19,6 +19,7 @@ from app.model_governance.selection.selector import (
 
 class ModelInvocationRecord(BaseModel):
     """Execution telemetry record for model routing."""
+
     model_id: str
     organization_id: str
     task_name: str

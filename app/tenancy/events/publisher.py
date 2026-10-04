@@ -20,6 +20,7 @@ from pydantic import BaseModel, Field
 
 class SaaSEvent(BaseModel):
     """Canonical SaaS lifecycle event."""
+
     event_type: str
     organization_id: str
     workspace_id: Optional[str] = None

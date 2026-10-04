@@ -6,7 +6,7 @@ from app.runtime.simulation.chaos_generator import ChaosFaultGenerator
 def test_digital_twin_cluster_simulation():
     sim = DigitalTwinClusterSimulator(virtual_worker_count=50)
     assert len(sim.workers) == 50
-    
+
     report = sim.simulate_mission_workload(mission_count=20, arrival_rate_per_sec=5.0)
     assert report.total_virtual_workers == 50
     assert report.processed_missions_count == 20

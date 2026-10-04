@@ -27,6 +27,7 @@ class ScientificAgentRole(str, Enum):
 @dataclass(frozen=True)
 class ScientificAgentMessage:
     """Strongly-typed message passed between autonomous scientific agents."""
+
     message_id: str
     sender_role: ScientificAgentRole
     recipient_role: ScientificAgentRole
@@ -38,6 +39,7 @@ class ScientificAgentMessage:
 @dataclass(frozen=True)
 class ScientificAgentState:
     """State record for an individual scientific agent."""
+
     role: ScientificAgentRole
     tasks_completed: int
     active_status: str  # "IDLE", "PROCESSING", "AWAITING_CONSENSUS"

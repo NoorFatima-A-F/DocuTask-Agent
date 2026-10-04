@@ -13,7 +13,7 @@ class AIAuthFailureVerifier(IAuthFailureVerifier):
         res = AuthenticationFailureScenario.execute(req, status_code=401)
 
         # Non-retryable error must halt retries immediately
-        infinite_retries_prevented = (res["retryable"] is False)
+        infinite_retries_prevented = res["retryable"] is False
         max_retry_enforced = 1 if infinite_retries_prevented else 999
 
         return AuthFailureReport(

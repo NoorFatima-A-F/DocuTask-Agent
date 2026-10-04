@@ -14,7 +14,7 @@ class AITaskPreservationVerifier(ITaskPreservationVerifier):
 
         # 1. Initialize tasks in database
         for i in range(document_count):
-            doc_id = f"DOC-TASK-{i+1:04d}"
+            doc_id = f"DOC-TASK-{i + 1:04d}"
             task_store[doc_id] = {
                 "document_id": doc_id,
                 "status": TaskResilienceStatus.PROCESSING.value,

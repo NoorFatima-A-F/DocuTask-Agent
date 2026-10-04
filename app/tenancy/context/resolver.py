@@ -45,16 +45,8 @@ class TenantContextResolver:
             or (jwt_claims.get("workspace_id") if jwt_claims else None)
             or "default_workspace"
         )
-        environment_id = (
-            headers.get("X-Environment-Id")
-            or headers.get("x-environment-id")
-            or "production"
-        )
-        project_id = (
-            headers.get("X-Project-Id")
-            or headers.get("x-project-id")
-            or "default_project"
-        )
+        environment_id = headers.get("X-Environment-Id") or headers.get("x-environment-id") or "production"
+        project_id = headers.get("X-Project-Id") or headers.get("x-project-id") or "default_project"
         resolved_user_id = (
             user_id
             or headers.get("X-User-Id")
@@ -62,16 +54,8 @@ class TenantContextResolver:
             or (jwt_claims.get("sub") if jwt_claims else None)
             or "anonymous_user"
         )
-        request_id = (
-            headers.get("X-Request-Id")
-            or headers.get("x-request-id")
-            or str(uuid.uuid4())
-        )
-        trace_id = (
-            headers.get("X-Trace-Id")
-            or headers.get("x-trace-id")
-            or str(uuid.uuid4())
-        )
+        request_id = headers.get("X-Request-Id") or headers.get("x-request-id") or str(uuid.uuid4())
+        trace_id = headers.get("X-Trace-Id") or headers.get("x-trace-id") or str(uuid.uuid4())
 
         permissions = set()
         role_ids = []
@@ -109,9 +93,7 @@ class TenantContextResolver:
             compliance_profile=ComplianceProfileType(
                 metadata.get("compliance_profile", ComplianceProfileType.STANDARD.value)
             ),
-            subscription_plan=SubscriptionTier(
-                metadata.get("subscription_plan", SubscriptionTier.FREE.value)
-            ),
+            subscription_plan=SubscriptionTier(metadata.get("subscription_plan", SubscriptionTier.FREE.value)),
             feature_flags=metadata.get("feature_flags", {}),
             request_id=metadata.get("request_id"),
             trace_id=metadata.get("trace_id"),

@@ -24,11 +24,7 @@ async def test_auth_service_full_flow(db_session: AsyncSession):
     auth_service = AuthService(user_repo=user_repo, token_repo=token_repo)
 
     # 1. Register User
-    reg_req = RegisterRequest(
-        email="service_test@example.com",
-        username="servicetest",
-        password="Password123!"
-    )
+    reg_req = RegisterRequest(email="service_test@example.com", username="servicetest", password="Password123!")
     user_resp = await auth_service.register_user(reg_req)
     assert user_resp.email == "service_test@example.com"
     assert user_resp.username == "servicetest"
@@ -38,19 +34,13 @@ async def test_auth_service_full_flow(db_session: AsyncSession):
         await auth_service.register_user(reg_req)
 
     # 2. Login
-    login_req = LoginRequest(
-        username_or_email="servicetest",
-        password="Password123!"
-    )
+    login_req = LoginRequest(username_or_email="servicetest", password="Password123!")
     tokens = await auth_service.login(login_req)
     assert tokens.access_token is not None
     assert tokens.refresh_token is not None
 
     # Invalid login attempt
-    bad_login = LoginRequest(
-        username_or_email="servicetest",
-        password="WrongPassword"
-    )
+    bad_login = LoginRequest(username_or_email="servicetest", password="WrongPassword")
     with pytest.raises(InvalidCredentialsException):
         await auth_service.login(bad_login)
 
@@ -72,10 +62,7 @@ async def test_auth_service_full_flow(db_session: AsyncSession):
     # 5. Change Password
     # Re-login to get active refresh token
     await auth_service.login(login_req)
-    change_pwd_req = ChangePasswordRequest(
-        old_password="Password123!",
-        new_password="NewPassword456!"
-    )
+    change_pwd_req = ChangePasswordRequest(old_password="Password123!", new_password="NewPassword456!")
     await auth_service.change_password(user_resp.id, change_pwd_req)
 
     # Old password login should fail now
@@ -83,9 +70,6 @@ async def test_auth_service_full_flow(db_session: AsyncSession):
         await auth_service.login(login_req)
 
     # New password login succeeds
-    new_login_req = LoginRequest(
-        username_or_email="servicetest",
-        password="NewPassword456!"
-    )
+    new_login_req = LoginRequest(username_or_email="servicetest", password="NewPassword456!")
     success_login = await auth_service.login(new_login_req)
     assert success_login.access_token is not None

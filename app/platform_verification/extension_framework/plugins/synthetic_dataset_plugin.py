@@ -1,11 +1,18 @@
 """
 Reference Dataset Provider Plugin: Synthetic Benchmark Dataset Generator.
 """
+
 from typing import Any, Dict, List, Tuple
 from app.platform_verification.extension_framework.domain.interfaces import DatasetProviderPluginInterface
 from app.platform_verification.extension_framework.domain.models import (
-    PluginMetadata, PluginCategory, PluginExecutionContext, PluginExecutionResult,
-    PluginHealthMetrics, PluginHealthState, PluginPermission, SecurityClassification
+    PluginMetadata,
+    PluginCategory,
+    PluginExecutionContext,
+    PluginExecutionResult,
+    PluginHealthMetrics,
+    PluginHealthState,
+    PluginPermission,
+    SecurityClassification,
 )
 
 
@@ -24,7 +31,7 @@ class SyntheticDatasetPlugin(DatasetProviderPluginInterface):
             description="Generates deterministic synthetic invoice and receipt verification datasets",
             capabilities=["synthetic_invoice_generation", "noisy_scan_augmentation"],
             granted_permissions=[PluginPermission.READ_DATASET],
-            security_classification=SecurityClassification.INTERNAL
+            security_classification=SecurityClassification.INTERNAL,
         )
 
     def initialize(self, context: Dict[str, Any]) -> bool:
@@ -43,7 +50,7 @@ class SyntheticDatasetPlugin(DatasetProviderPluginInterface):
             plugin_id="synthetic_dataset_plugin",
             is_success=True,
             metrics=[{"metric": "samples_generated", "value": len(data)}],
-            raw_evidence={"dataset_name": "synthetic_invoices", "sample_count": len(data)}
+            raw_evidence={"dataset_name": "synthetic_invoices", "sample_count": len(data)},
         )
 
     def load_dataset(self, dataset_name: str, version: str) -> List[Dict[str, Any]]:
@@ -63,5 +70,5 @@ class SyntheticDatasetPlugin(DatasetProviderPluginInterface):
             plugin_id="synthetic_dataset_plugin",
             state=PluginHealthState.HEALTHY,
             total_executions=1,
-            successful_executions=1
+            successful_executions=1,
         )

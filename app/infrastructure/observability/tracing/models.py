@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class SpanKind(str, enum.Enum):
     """OpenTelemetry span kind classifications."""
+
     INTERNAL = "INTERNAL"
     SERVER = "SERVER"
     CLIENT = "CLIENT"
@@ -24,6 +25,7 @@ class SpanKind(str, enum.Enum):
 
 class SpanStatus(str, enum.Enum):
     """Execution outcome status of a span."""
+
     UNSET = "UNSET"
     OK = "OK"
     ERROR = "ERROR"
@@ -31,6 +33,7 @@ class SpanStatus(str, enum.Enum):
 
 class SpanEvent(BaseModel):
     """Timestamped event annotation within a span."""
+
     name: str
     timestamp: float = Field(default_factory=lambda: datetime.now(timezone.utc).timestamp())
     attributes: Dict[str, Any] = Field(default_factory=dict)
@@ -38,6 +41,7 @@ class SpanEvent(BaseModel):
 
 class SpanLink(BaseModel):
     """Cross-trace causal link."""
+
     trace_id: str
     span_id: str
     attributes: Dict[str, Any] = Field(default_factory=dict)
@@ -45,6 +49,7 @@ class SpanLink(BaseModel):
 
 class Span(BaseModel):
     """OpenTelemetry-compatible distributed trace span."""
+
     trace_id: str
     span_id: str = Field(default_factory=lambda: uuid.uuid4().hex[:16])
     parent_span_id: Optional[str] = None

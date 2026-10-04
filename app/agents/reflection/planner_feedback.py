@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class PlannerCritiqueItem(BaseModel):
     """Specific critique item targeting planner decomposition or dependency graph."""
+
     code: str  # DUPLICATED_TASKS, UNNECESSARY_TASK, MISSING_DEPENDENCY, POOR_DECOMPOSITION, EXCESSIVE_BRANCHING, INVALID_ASSUMPTION
     description: str
     affected_tasks: List[str] = Field(default_factory=list)
@@ -25,6 +26,7 @@ class PlannerFeedback(BaseModel):
     Structured feedback delivered to the Intelligent Planner.
     The planner consumes this feedback without reflection modifying planning models directly.
     """
+
     feedback_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     plan_id: Optional[UUID] = None

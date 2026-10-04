@@ -36,7 +36,7 @@ async def test_ocr_provider_plugin_suite():
         DocumentAIOCRProvider(),
         TextractOCRProvider(),
         AzureDocIntelligenceOCRProvider(),
-        PaddleOCRProvider()
+        PaddleOCRProvider(),
     ]
 
     for provider in providers:
@@ -54,7 +54,7 @@ def test_vector_search_orm_model():
         embedding_provider="gemini",
         embedding_model="text-embedding-004",
         embedding_dim=768,
-        vector_payload="[0.12, 0.45, -0.89]"
+        vector_payload="[0.12, 0.45, -0.89]",
     )
     assert emb.embedding_provider == "gemini"
     assert emb.embedding_dim == 768

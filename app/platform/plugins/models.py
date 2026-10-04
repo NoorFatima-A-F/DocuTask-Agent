@@ -11,6 +11,7 @@ from ..kernel.versioning import SemanticVersion
 
 class PluginType(str, Enum):
     """Plugin categories."""
+
     CONNECTOR = "CONNECTOR"
     AI = "AI"
     WORKFLOW = "WORKFLOW"
@@ -32,6 +33,7 @@ class PluginStatus(str, Enum):
 @dataclass
 class PluginManifest:
     """Plugin declarative manifest descriptor."""
+
     id: str
     name: str
     version: SemanticVersion
@@ -65,6 +67,7 @@ class PluginManifest:
 @dataclass
 class PluginRecord:
     """Runtime tracking record of a plugin."""
+
     manifest: PluginManifest
     status: PluginStatus = PluginStatus.REGISTERED
     instance: Optional[Any] = None

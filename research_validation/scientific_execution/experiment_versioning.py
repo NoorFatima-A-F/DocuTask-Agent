@@ -15,9 +15,9 @@ from research_validation.scientific_execution.experiment_manifest import Experim
 
 
 class VersionChangeType(str, Enum):
-    MAJOR_BREAKING = "MAJOR_BREAKING"          # Dataset changed or target metrics altered
-    MINOR_FEATURE = "MINOR_FEATURE"            # New parameters added with backward compatibility
-    PATCH_STABILIZATION = "PATCH_STABILIZATION"# Parameter tuning / seed changes
+    MAJOR_BREAKING = "MAJOR_BREAKING"  # Dataset changed or target metrics altered
+    MINOR_FEATURE = "MINOR_FEATURE"  # New parameters added with backward compatibility
+    PATCH_STABILIZATION = "PATCH_STABILIZATION"  # Parameter tuning / seed changes
     NO_CHANGE = "NO_CHANGE"
 
 

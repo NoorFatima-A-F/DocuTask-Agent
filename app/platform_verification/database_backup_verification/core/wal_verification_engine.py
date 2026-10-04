@@ -3,6 +3,7 @@ Write-Ahead Log (WAL) Verification Subsystem (Part 3G.2B).
 Validates WAL archival continuity, timeline integrity, missing segment detection,
 and automated archive replay into a clean PostgreSQL sandbox.
 """
+
 import time
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
@@ -33,11 +34,7 @@ class WALVerificationEngine(IWALVerificationEngine):
         replay_simulation_successful = True
         replay_throughput_mb_s = 185.4
 
-        passed = (
-            archive_continuity_verified
-            and timeline_integrity_verified
-            and replay_simulation_successful
-        )
+        passed = archive_continuity_verified and timeline_integrity_verified and replay_simulation_successful
 
         duration = round(time.perf_counter() - start_time + 0.18, 4)
 

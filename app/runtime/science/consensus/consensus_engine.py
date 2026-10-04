@@ -23,12 +23,16 @@ class ConsensusReview:
     hypothesis_id: str = "hypo_seed_01"
     evidence_ids: List[str] = field(default_factory=list)
     validation_id: Optional[str] = None
-    tribunal_members: List[str] = field(default_factory=lambda: ["Agent_Sentinel", "Agent_Statistician", "Agent_Architect"])
-    reviewer_votes: Dict[str, str] = field(default_factory=lambda: {
-        "Agent_Sentinel": "ACCEPT",
-        "Agent_Statistician": "ACCEPT",
-        "Agent_Architect": "ACCEPT",
-    })
+    tribunal_members: List[str] = field(
+        default_factory=lambda: ["Agent_Sentinel", "Agent_Statistician", "Agent_Architect"]
+    )
+    reviewer_votes: Dict[str, str] = field(
+        default_factory=lambda: {
+            "Agent_Sentinel": "ACCEPT",
+            "Agent_Statistician": "ACCEPT",
+            "Agent_Architect": "ACCEPT",
+        }
+    )
     consensus_score: float = 1.0
     consensus_state: ScientificConsensus = ScientificConsensus.ACCEPTED
     dissenting_opinions: List[str] = field(default_factory=list)
@@ -56,7 +60,11 @@ class ConsensusReview:
 
     @property
     def consensus_reached(self) -> bool:
-        return self.consensus_state in [ScientificConsensus.ACCEPTED, ScientificConsensus.SUPERMAJORITY, ScientificConsensus.UNANIMOUS]
+        return self.consensus_state in [
+            ScientificConsensus.ACCEPTED,
+            ScientificConsensus.SUPERMAJORITY,
+            ScientificConsensus.UNANIMOUS,
+        ]
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -70,8 +78,12 @@ class ConsensusReview:
             "peer_reviewer_votes": self.peer_reviewer_votes,
             "consensus_score": round(self.consensus_score, 4),
             "approval_percentage": self.approval_percentage,
-            "consensus_state": self.consensus_state.value if hasattr(self.consensus_state, "value") else str(self.consensus_state),
-            "consensus_type": self.consensus_state.value if hasattr(self.consensus_state, "value") else str(self.consensus_state),
+            "consensus_state": self.consensus_state.value
+            if hasattr(self.consensus_state, "value")
+            else str(self.consensus_state),
+            "consensus_type": self.consensus_state.value
+            if hasattr(self.consensus_state, "value")
+            else str(self.consensus_state),
             "dissenting_opinions": self.dissenting_opinions,
             "minority_dissent_notes": self.minority_dissent_notes,
             "consensus_reached": self.consensus_reached,

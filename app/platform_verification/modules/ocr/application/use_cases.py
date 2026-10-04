@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Ocr.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.ocr.domain.models import OcrEntity
 from app.platform_verification.modules.ocr.domain.interfaces import OcrRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageOcrUseCase:
     def __init__(self, repository: OcrRepositoryInterface):

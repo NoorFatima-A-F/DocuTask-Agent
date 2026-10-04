@@ -1,6 +1,7 @@
 """
 Approval Workflow Manager for human governance and multi-stakeholder reviews.
 """
+
 from __future__ import annotations
 from typing import Dict, List, Optional
 from app.platform_verification.certification_engine.domain.interfaces import IApprovalWorkflowManager
@@ -28,7 +29,5 @@ class EnterpriseApprovalWorkflow(IApprovalWorkflowManager):
     def is_fully_approved(self, certification_id: str, required_roles: Optional[List[str]] = None) -> bool:
         roles = required_roles or ["ReleaseArchitect", "SecurityLead"]
         reviews = self.get_reviews_for_certification(certification_id)
-        approved_roles = {
-            r.reviewer_role for r in reviews if r.action == ApprovalAction.APPROVE
-        }
+        approved_roles = {r.reviewer_role for r in reviews if r.action == ApprovalAction.APPROVE}
         return all(req in approved_roles for req in roles)

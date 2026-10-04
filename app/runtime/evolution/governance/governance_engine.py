@@ -114,17 +114,18 @@ class GovernanceEngine:
         )
         self.reviews[rev.review_id] = rev
 
-    def create_rollback_snapshot(self, platform_version: str = "v13.12.0", state_payload: Optional[Dict[str, Any]] = None) -> RollbackSnapshot:
+    def create_rollback_snapshot(
+        self, platform_version: str = "v13.12.0", state_payload: Optional[Dict[str, Any]] = None
+    ) -> RollbackSnapshot:
         snap = RollbackSnapshot(
             snapshot_id=f"snap_{uuid.uuid4().hex[:8]}",
             platform_version=platform_version,
-            state_payload=state_payload or {"status": "stable_baseline", "timestamp": datetime.now(timezone.utc).isoformat()},
+            state_payload=state_payload
+            or {"status": "stable_baseline", "timestamp": datetime.now(timezone.utc).isoformat()},
         )
         self.snapshots[snap.snapshot_id] = snap
 
-        self.event_bus.publish(
-            RollbackSnapshotCreated(payload=snap.to_dict())
-        )
+        self.event_bus.publish(RollbackSnapshotCreated(payload=snap.to_dict()))
         return snap
 
     def submit_for_review(
@@ -159,26 +160,26 @@ class GovernanceEngine:
         if review.approval_status == "APPROVED":
             raw = f"{review.review_id}:{review.mutation_id}:{review.reviewer_agent_id}:{review.approval_status}"
             review.cryptographic_signature = hashlib.sha256(raw.encode("utf-8")).hexdigest()
-            self.event_bus.publish(
-                GovernanceApprovalGranted(payload=review.to_dict())
-            )
+            self.event_bus.publish(GovernanceApprovalGranted(payload=review.to_dict()))
 
         self.reviews[review_id] = review
         return review
 
-    def approve_review(self, review_id: str, reviewer_agent_id: str = "agent_human_override") -> Optional[EvolutionGovernanceReview]:
+    def approve_review(
+        self, review_id: str, reviewer_agent_id: str = "agent_human_override"
+    ) -> Optional[EvolutionGovernanceReview]:
         review = self.reviews.get(review_id)
         if review:
             review.approval_status = "APPROVED"
             review.reviewer_agent_id = reviewer_agent_id
             raw = f"{review.review_id}:{review.mutation_id}:{review.reviewer_agent_id}:{review.approval_status}"
             review.cryptographic_signature = hashlib.sha256(raw.encode("utf-8")).hexdigest()
-            self.event_bus.publish(
-                GovernanceApprovalGranted(payload=review.to_dict())
-            )
+            self.event_bus.publish(GovernanceApprovalGranted(payload=review.to_dict()))
         return review
 
-    def reject_review(self, review_id: str, reason: str = "Rejected by governance policy") -> Optional[EvolutionGovernanceReview]:
+    def reject_review(
+        self, review_id: str, reason: str = "Rejected by governance policy"
+    ) -> Optional[EvolutionGovernanceReview]:
         review = self.reviews.get(review_id)
         if review:
             review.approval_status = "REJECTED"

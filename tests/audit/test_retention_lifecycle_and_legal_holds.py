@@ -65,7 +65,7 @@ def test_legal_hold_locks_prevent_archival_and_deletion():
 
     tenant_id = "tenant_litigation"
     old_time = datetime.now(timezone.utc) - timedelta(days=500)
-    
+
     repo.record(
         AuditEvent(
             event_id="ev_subpoena",

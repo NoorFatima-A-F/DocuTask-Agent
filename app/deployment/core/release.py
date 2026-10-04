@@ -1,4 +1,5 @@
 """Release Management Domain Model."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -9,6 +10,7 @@ from .exceptions import ReleaseException
 
 class ReleaseStatus(str, Enum):
     """Lifecycle status for platform releases."""
+
     DRAFT = "DRAFT"
     PUBLISHED = "PUBLISHED"
     DEPRECATED = "DEPRECATED"
@@ -18,6 +20,7 @@ class ReleaseStatus(str, Enum):
 @dataclass
 class Release:
     """Immutable release package representation."""
+
     version: str
     name: str
     commit_sha: str

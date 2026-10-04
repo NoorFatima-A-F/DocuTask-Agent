@@ -1,6 +1,7 @@
 """
 Phase 3I.10: Observability Intelligence Governance, Reliability Automation Maturity & Enterprise Operations Certification — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -9,9 +10,9 @@ from datetime import datetime, timezone
 
 class OperationsCertificationTier(str, Enum):
     ENTERPRISE_AUTONOMOUS_CERTIFIED = "Enterprise Autonomous Operations Certified"  # >= 95.0%
-    ADVANCED_RELIABILITY_CAPABLE = "Advanced Reliability Capable"                   # 90.0 - 94.99%
-    GOVERNANCE_IMPROVEMENT_REQUIRED = "Governance Improvement Required"             # 80.0 - 89.99%
-    NON_COMPLIANT = "Non-Compliant"                                                 # < 80.0%
+    ADVANCED_RELIABILITY_CAPABLE = "Advanced Reliability Capable"  # 90.0 - 94.99%
+    GOVERNANCE_IMPROVEMENT_REQUIRED = "Governance Improvement Required"  # 80.0 - 89.99%
+    NON_COMPLIANT = "Non-Compliant"  # < 80.0%
 
 
 class MaturityLevel(str, Enum):
@@ -30,13 +31,14 @@ class IncidentSeverity(str, Enum):
 
 
 class ActionRiskTier(str, Enum):
-    LOW = "LOW"            # Automated execution without approval (e.g. cache flush, log rotation)
-    MEDIUM = "MEDIUM"      # Automated with safety guardrails (e.g. horizontal pod autoscale)
-    HIGH = "HIGH"          # Automated with human confirmation gate (e.g. AI model switchover, DB failover)
+    LOW = "LOW"  # Automated execution without approval (e.g. cache flush, log rotation)
+    MEDIUM = "MEDIUM"  # Automated with safety guardrails (e.g. horizontal pod autoscale)
+    HIGH = "HIGH"  # Automated with human confirmation gate (e.g. AI model switchover, DB failover)
     CRITICAL = "CRITICAL"  # Multi-party approval required (e.g. region failover, schema rollback)
 
 
 # ─── 3I.10.1: Governance Architecture Models ───────────────────────────────────
+
 
 class GovernanceComponentSpec(BaseModel):
     component_name: str
@@ -59,6 +61,7 @@ class GovernanceArchitectureReport(BaseModel):
 
 # ─── 3I.10.2: Policy Management Models ────────────────────────────────────────
 
+
 class PolicyRuleSpec(BaseModel):
     policy_id: str
     category: str  # Alert Policy, Automation Permission, Escalation Policy
@@ -80,6 +83,7 @@ class ObservabilityPolicyReport(BaseModel):
 
 # ─── 3I.10.3: Reliability Maturity Model Models ───────────────────────────────
 
+
 class MaturityDimensionScore(BaseModel):
     dimension_name: str
     achieved_level: MaturityLevel = MaturityLevel.LEVEL_5_AUTONOMOUS
@@ -97,6 +101,7 @@ class ReliabilityMaturityReport(BaseModel):
 
 
 # ─── 3I.10.4: SRE Reliability Management Models ───────────────────────────────
+
 
 class SLOSpec(BaseModel):
     service_name: str
@@ -119,6 +124,7 @@ class SREManagementReport(BaseModel):
 
 # ─── 3I.10.5: Runbook Automation Models ───────────────────────────────────────
 
+
 class AutomatedRunbookSpec(BaseModel):
     runbook_id: str
     name: str
@@ -139,6 +145,7 @@ class RunbookAutomationReport(BaseModel):
 
 # ─── 3I.10.6: Automation Safety Governance Models ─────────────────────────────
 
+
 class ActionSafetyRuleSpec(BaseModel):
     action_type: str
     risk_tier: ActionRiskTier
@@ -157,6 +164,7 @@ class AutomationSafetyGovernanceReport(BaseModel):
 
 
 # ─── 3I.10.7: Change Management Models ────────────────────────────────────────
+
 
 class ChangeValidationPipelineSpec(BaseModel):
     stage_name: str
@@ -177,6 +185,7 @@ class ChangeManagementReport(BaseModel):
 
 
 # ─── 3I.10.8: Incident Governance Models ──────────────────────────────────────
+
 
 class IncidentLifecycleRecord(BaseModel):
     incident_id: str
@@ -199,6 +208,7 @@ class IncidentGovernanceReport(BaseModel):
 
 # ─── 3I.10.9: Continuous Improvement Models ───────────────────────────────────
 
+
 class PostmortemActionItem(BaseModel):
     action_id: str
     incident_ref: str
@@ -219,6 +229,7 @@ class ContinuousImprovementReport(BaseModel):
 
 # ─── 3I.10.10: Operations Dashboard Models ─────────────────────────────────────
 
+
 class DashboardViewSpec(BaseModel):
     tier: str  # Executive, Engineering, AI Operations
     view_name: str
@@ -236,6 +247,7 @@ class OperationsDashboardReport(BaseModel):
 
 
 # ─── 3I.10.11 & 12: Pillar Scoring & Certification Models ──────────────────────
+
 
 class OperationsPillarScore(BaseModel):
     pillar_name: str

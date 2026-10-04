@@ -84,7 +84,9 @@ class PredictionVerificationEngine:
         for v in seeds:
             self._verifications.append(v)
 
-    def verify_prediction(self, prediction_id: str, actual_value: float, tolerance_pct: float = 10.0) -> VerificationRecord:
+    def verify_prediction(
+        self, prediction_id: str, actual_value: float, tolerance_pct: float = 10.0
+    ) -> VerificationRecord:
         pred = predictive_engine.get_prediction(prediction_id)
         if not pred:
             raise ValueError(f"Prediction {prediction_id} not found.")
@@ -116,7 +118,9 @@ class PredictionVerificationEngine:
 
         world_model_event_bus.publish(
             WorldModelEvent(
-                event_type=WorldModelEventType.PREDICTION_VALIDATED if passed else WorldModelEventType.PREDICTION_REJECTED,
+                event_type=WorldModelEventType.PREDICTION_VALIDATED
+                if passed
+                else WorldModelEventType.PREDICTION_REJECTED,
                 source="prediction_verification_engine",
                 payload=rec.to_dict(),
             )
@@ -130,7 +134,12 @@ class PredictionVerificationEngine:
     def get_calibration_summary(self) -> Dict[str, Any]:
         total = len(self._verifications)
         if total == 0:
-            return {"total_verifications": 0, "mean_brier_score": 0.0, "mean_percentage_error": 0.0, "accuracy_pct": 100.0}
+            return {
+                "total_verifications": 0,
+                "mean_brier_score": 0.0,
+                "mean_percentage_error": 0.0,
+                "accuracy_pct": 100.0,
+            }
 
         avg_brier = sum(v.brier_score for v in self._verifications) / total
         avg_pct_err = sum(v.percentage_error for v in self._verifications) / total
@@ -143,8 +152,12 @@ class PredictionVerificationEngine:
             "accuracy_pct": round((passed_count / total) * 100.0, 2),
         }
 
-    def record_ground_truth(self, prediction_id: str, actual_value: float, tolerance_pct: float = 10.0) -> VerificationRecord:
-        return self.verify_prediction(prediction_id=prediction_id, actual_value=actual_value, tolerance_pct=tolerance_pct)
+    def record_ground_truth(
+        self, prediction_id: str, actual_value: float, tolerance_pct: float = 10.0
+    ) -> VerificationRecord:
+        return self.verify_prediction(
+            prediction_id=prediction_id, actual_value=actual_value, tolerance_pct=tolerance_pct
+        )
 
 
 # Global Singleton

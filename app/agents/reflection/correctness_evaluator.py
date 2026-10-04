@@ -33,7 +33,7 @@ class CorrectnessEvaluator(IEvaluator):
             name="execution_correctness_ratio",
             dimension=EvaluationDimension.CORRECTNESS,
             score=score,
-            evidence=[f"{len(failed_tasks)} failed tasks", f"{len(trace.errors)} logged errors"]
+            evidence=[f"{len(failed_tasks)} failed tasks", f"{len(trace.errors)} logged errors"],
         )
 
         return DimensionEvaluation(
@@ -42,5 +42,5 @@ class CorrectnessEvaluator(IEvaluator):
             status=status,
             metrics=[metric],
             findings=[f"Correctness evaluated at {score:.2f} with status {status}."],
-            recommendation_hints=["Implement pre-condition guards on input validation."] if score < 0.8 else []
+            recommendation_hints=["Implement pre-condition guards on input validation."] if score < 0.8 else [],
         )

@@ -1,4 +1,5 @@
 """Automated Post-Deployment Recovery and Telemetry Sentry."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import List, Optional
@@ -7,6 +8,7 @@ from typing import List, Optional
 @dataclass
 class TelemetryObservation:
     """Snapshot of service operational health after deployment."""
+
     deployment_id: str
     error_rate: float
     p99_latency_ms: float
@@ -18,6 +20,7 @@ class TelemetryObservation:
 @dataclass
 class RecoveryDecision:
     """Automated assessment indicating whether deployment should be rolled back."""
+
     deployment_id: str
     should_rollback: bool
     trigger_reason: Optional[str]
@@ -60,7 +63,7 @@ class AutomatedRecoveryEngine:
 
         reasons = []
         if error_rate > self.max_error_rate:
-            reasons.append(f"Error rate {error_rate*100:.2f}% breached max {self.max_error_rate*100:.2f}%")
+            reasons.append(f"Error rate {error_rate * 100:.2f}% breached max {self.max_error_rate * 100:.2f}%")
         if p99_latency_ms > self.max_p99_latency_ms:
             reasons.append(f"P99 latency {p99_latency_ms:.1f}ms breached max {self.max_p99_latency_ms:.1f}ms")
         if cpu_pct > self.max_cpu_pct:

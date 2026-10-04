@@ -25,10 +25,34 @@ class SchedulerVerifier(ISchedulerVerifier):
 
     def verify(self) -> SchedulerReport:
         jobs = [
-            SchedulerJobMetric(job_id="job-sla-audit-cron", schedule_type="CronHourly", lease_acquired=True, duplicate_runs=0, failover_recovery_sec=1.2),
-            SchedulerJobMetric(job_id="job-memory-compaction", schedule_type="PeriodicDaily", lease_acquired=True, duplicate_runs=0, failover_recovery_sec=1.5),
-            SchedulerJobMetric(job_id="job-model-drift-evaluation", schedule_type="Periodic6Hours", lease_acquired=True, duplicate_runs=0, failover_recovery_sec=1.1),
-            SchedulerJobMetric(job_id="job-backup-snapshot-sync", schedule_type="CronNightly", lease_acquired=True, duplicate_runs=0, failover_recovery_sec=1.4),
+            SchedulerJobMetric(
+                job_id="job-sla-audit-cron",
+                schedule_type="CronHourly",
+                lease_acquired=True,
+                duplicate_runs=0,
+                failover_recovery_sec=1.2,
+            ),
+            SchedulerJobMetric(
+                job_id="job-memory-compaction",
+                schedule_type="PeriodicDaily",
+                lease_acquired=True,
+                duplicate_runs=0,
+                failover_recovery_sec=1.5,
+            ),
+            SchedulerJobMetric(
+                job_id="job-model-drift-evaluation",
+                schedule_type="Periodic6Hours",
+                lease_acquired=True,
+                duplicate_runs=0,
+                failover_recovery_sec=1.1,
+            ),
+            SchedulerJobMetric(
+                job_id="job-backup-snapshot-sync",
+                schedule_type="CronNightly",
+                lease_acquired=True,
+                duplicate_runs=0,
+                failover_recovery_sec=1.4,
+            ),
         ]
 
         checks = [

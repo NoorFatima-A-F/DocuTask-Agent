@@ -1,6 +1,7 @@
 """
 Phase 3I.4: Enterprise Distributed Tracing Infrastructure Verification — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, Field
@@ -16,13 +17,14 @@ class SpanKind(str, Enum):
 
 
 class TracingCertificationTier(str, Enum):
-    ENTERPRISE_TRACING_READY = "Enterprise Tracing Ready"         # 95 - 100
-    PRODUCTION_READY = "Production Ready"                         # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                 # 80 - 89.99
-    FAILED = "Failed"                                             # < 80
+    ENTERPRISE_TRACING_READY = "Enterprise Tracing Ready"  # 95 - 100
+    PRODUCTION_READY = "Production Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3I.4.1: Architecture Models ──────────────────────────────────────────────
+
 
 class TracingServiceInstrumentation(BaseModel):
     service_name: str
@@ -45,6 +47,7 @@ class TracingArchitectureReport(BaseModel):
 
 # ─── 3I.4.2: Context Propagation Models ───────────────────────────────────────
 
+
 class TraceContextPropagationHop(BaseModel):
     hop_number: int
     from_service: str
@@ -66,6 +69,7 @@ class ContextPropagationReport(BaseModel):
 
 
 # ─── 3I.4.3 & 3I.4.5: Workflow Trace Models ───────────────────────────────────
+
 
 class SpanDetail(BaseModel):
     span_id: str
@@ -91,6 +95,7 @@ class WorkflowTraceReport(BaseModel):
 
 # ─── 3I.4.4: AI Agent Execution Tracing Models ────────────────────────────────
 
+
 class AgentLifecycleSpan(BaseModel):
     stage: str  # Goal, Planning, Tool Selection, OCR Execution, LLM Extraction, Validation, Reflection, Result Store
     span_name: str
@@ -115,6 +120,7 @@ class AgentTraceReport(BaseModel):
 
 # ─── 3I.4.6 & 3I.4.7: Database, Queue & Worker Models ─────────────────────────
 
+
 class QueueWorkerSpanSummary(BaseModel):
     task_id: str
     queue_enqueue_time_ms: float
@@ -135,6 +141,7 @@ class DatabaseSpanSummary(BaseModel):
 
 # ─── 3I.4.8: External Dependency Models ───────────────────────────────────────
 
+
 class ExternalDependencySpan(BaseModel):
     dependency_name: str  # Gemini API, Tesseract OCR, Cloud Storage, Email Service
     target_endpoint: str
@@ -153,6 +160,7 @@ class DependencyTraceReport(BaseModel):
 
 
 # ─── 3I.4.9: Error Trace Models ───────────────────────────────────────────────
+
 
 class FailedSpanDiagnostic(BaseModel):
     trace_id: str
@@ -173,6 +181,7 @@ class ErrorTraceReport(BaseModel):
 
 
 # ─── 3I.4.10 & 3I.4.11: Correlation & Sampling Models ─────────────────────────
+
 
 class TraceCorrelationReport(BaseModel):
     report_title: str = "Trace, Log & Metric Bidirectional Correlation Report"
@@ -201,6 +210,7 @@ class TraceSamplingReport(BaseModel):
 
 # ─── 3I.4.13: Security Models ─────────────────────────────────────────────────
 
+
 class SpanSecurityAuditSpec(BaseModel):
     span_name: str
     attribute_keys_audited: List[str]
@@ -220,6 +230,7 @@ class TraceSecurityReport(BaseModel):
 
 # ─── 3I.4.14: Performance Models ──────────────────────────────────────────────
 
+
 class TracePerformanceReport(BaseModel):
     report_title: str = "Distributed Tracing Overhead & Performance Benchmark Report"
     benchmark_traces_count: int = 100000
@@ -232,6 +243,7 @@ class TracePerformanceReport(BaseModel):
 
 
 # ─── 3I.4.15: Failure Simulation Models ───────────────────────────────────────
+
 
 class ChaosTraceScenarioSpec(BaseModel):
     scenario_id: str
@@ -250,6 +262,7 @@ class ChaosTraceReport(BaseModel):
 
 
 # ─── 3I.4.16 & 3I.4.17: Scoring & Certification Models ────────────────────────
+
 
 class TracingPillarScore(BaseModel):
     pillar_name: str

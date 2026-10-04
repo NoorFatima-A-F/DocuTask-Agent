@@ -1,10 +1,15 @@
 """
 AI Artifact Version Manager (Models, System Prompts, RAG Configurations, Agents).
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.config_versioning.domain.models import (
-    AIModelMetadata, PromptTemplateVersion, RAGRetrievalConfigVersion, AgentConfigVersion
+    AIModelMetadata,
+    PromptTemplateVersion,
+    RAGRetrievalConfigVersion,
+    AgentConfigVersion,
 )
+
 
 class AIArtifactVersionManager:
     def __init__(self):
@@ -17,7 +22,7 @@ class AIArtifactVersionManager:
         p1 = PromptTemplateVersion(
             name="system_extraction_prompt",
             semantic_version="1.0.0",
-            raw_prompt="You are an enterprise document extraction agent. Extract structured schema with 100% fidelity."
+            raw_prompt="You are an enterprise document extraction agent. Extract structured schema with 100% fidelity.",
         )
         self.register_prompt(p1)
 
@@ -43,5 +48,6 @@ class AIArtifactVersionManager:
     def register_agent_config(self, config: AgentConfigVersion) -> AgentConfigVersion:
         self._agent_configs[config.agent_id] = config
         return config
+
 
 ai_artifact_manager = AIArtifactVersionManager()

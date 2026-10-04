@@ -20,6 +20,7 @@ logger = logging.getLogger("infrastructure.reliability.state_machine")
 
 class ReliabilityInvalidTransitionError(Exception):
     """Raised when an invalid reliability state transition is attempted."""
+
     pass
 
 

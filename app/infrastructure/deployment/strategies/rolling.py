@@ -7,6 +7,7 @@ from typing import Callable, Optional
 @dataclass
 class RollingStrategyConfig:
     """Configuration for rolling updates."""
+
     batch_size: int = 2
     max_unavailable: int = 1
     health_check_interval_seconds: float = 0.5

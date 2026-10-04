@@ -28,11 +28,7 @@ index = LogIndex()
 index.index_record(record)
 
 results = index.search(
-    tenant_id="tenant-corp",
-    service="document-pipeline-worker",
-    min_level=LogLevel.WARN,
-    query="OCR timeout",
-    limit=50
+    tenant_id="tenant-corp", service="document-pipeline-worker", min_level=LogLevel.WARN, query="OCR timeout", limit=50
 )
 ```
 

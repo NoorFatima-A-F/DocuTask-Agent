@@ -1,6 +1,7 @@
 """
 3H.11.3: Database Failure Simulation Verifier
 """
+
 from ..domain.models import DatabaseFailureReport
 from ..domain.interfaces import IDatabaseFailureVerifier
 
@@ -24,5 +25,5 @@ class DatabaseFailureVerifier(IDatabaseFailureVerifier):
             active_connections_drained=True,
             time_to_detect_ms=420.0,
             time_to_recover_ms=1250.0,
-            simulation_passed=True
+            simulation_passed=True,
         )

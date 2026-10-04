@@ -11,14 +11,11 @@ from datetime import datetime, timezone
 from typing import Any, Dict, Tuple
 
 from research_validation.review.artifact_completeness_checker import (
-    ArtifactCompletenessChecker, CompletenessAuditReport
+    ArtifactCompletenessChecker,
+    CompletenessAuditReport,
 )
-from research_validation.review.review_comment_generator import (
-    ReviewCommentGenerator, ReviewComment, CommentCategory
-)
-from research_validation.review.review_score_predictor import (
-    ReviewScorePredictor, ReviewScorePrediction, ReviewVerdict
-)
+from research_validation.review.review_comment_generator import ReviewCommentGenerator, ReviewComment, CommentCategory
+from research_validation.review.review_score_predictor import ReviewScorePredictor, ReviewScorePrediction, ReviewVerdict
 from research_validation.provenance.hashing import hash_canonical_json
 
 
@@ -78,12 +75,8 @@ class ReviewSimulator:
             has_uncertainty_bounds=has_unc,
         )
 
-        strengths = tuple(
-            c.summary for c in comments if c.category == CommentCategory.STRENGTH
-        )
-        remediations = tuple(
-            c.suggested_remediation for c in comments if c.suggested_remediation
-        )
+        strengths = tuple(c.summary for c in comments if c.category == CommentCategory.STRENGTH)
+        remediations = tuple(c.suggested_remediation for c in comments if c.suggested_remediation)
 
         h_payload = {
             "review_id": rev_id,

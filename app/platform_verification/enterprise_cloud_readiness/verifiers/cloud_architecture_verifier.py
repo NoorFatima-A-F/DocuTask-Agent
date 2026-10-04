@@ -29,13 +29,48 @@ class CloudArchitectureAssessmentVerifier(ICloudArchitectureAssessmentVerifier):
 
     def verify(self) -> CloudArchitectureAssessmentReport:
         layers = [
-            CloudLayerAssessment(layer_name="Compute Layer", current_state="Docker Compose local containers", target_cloud_state="Cloud Run / ECS / EKS / AKS auto-scaled pods", readiness_status="COMPLIANT"),
-            CloudLayerAssessment(layer_name="Networking Layer", current_state="Bridge network with host bindings", target_cloud_state="Cloud Application Load Balancer + VPC private subnets", readiness_status="COMPLIANT"),
-            CloudLayerAssessment(layer_name="Storage Layer", current_state="Local filesystem volume mount", target_cloud_state="S3 / Cloud Storage / Azure Blob with signed URLs", readiness_status="COMPLIANT"),
-            CloudLayerAssessment(layer_name="Database Layer", current_state="Single PostgreSQL container", target_cloud_state="Managed RDS / Cloud SQL PostgreSQL with HA read replicas", readiness_status="COMPLIANT"),
-            CloudLayerAssessment(layer_name="Messaging Layer", current_state="Local Redis container broker", target_cloud_state="Managed Redis ElastiCache / MemoryStore / SQS", readiness_status="COMPLIANT"),
-            CloudLayerAssessment(layer_name="Observability Layer", current_state="Local Prometheus/Grafana compose", target_cloud_state="OpenTelemetry collector -> CloudWatch / Cloud Monitoring", readiness_status="COMPLIANT"),
-            CloudLayerAssessment(layer_name="Security Layer", current_state="Local .env plaintext file", target_cloud_state="AWS Secrets Manager / GCP Secret Manager / Vault", readiness_status="COMPLIANT"),
+            CloudLayerAssessment(
+                layer_name="Compute Layer",
+                current_state="Docker Compose local containers",
+                target_cloud_state="Cloud Run / ECS / EKS / AKS auto-scaled pods",
+                readiness_status="COMPLIANT",
+            ),
+            CloudLayerAssessment(
+                layer_name="Networking Layer",
+                current_state="Bridge network with host bindings",
+                target_cloud_state="Cloud Application Load Balancer + VPC private subnets",
+                readiness_status="COMPLIANT",
+            ),
+            CloudLayerAssessment(
+                layer_name="Storage Layer",
+                current_state="Local filesystem volume mount",
+                target_cloud_state="S3 / Cloud Storage / Azure Blob with signed URLs",
+                readiness_status="COMPLIANT",
+            ),
+            CloudLayerAssessment(
+                layer_name="Database Layer",
+                current_state="Single PostgreSQL container",
+                target_cloud_state="Managed RDS / Cloud SQL PostgreSQL with HA read replicas",
+                readiness_status="COMPLIANT",
+            ),
+            CloudLayerAssessment(
+                layer_name="Messaging Layer",
+                current_state="Local Redis container broker",
+                target_cloud_state="Managed Redis ElastiCache / MemoryStore / SQS",
+                readiness_status="COMPLIANT",
+            ),
+            CloudLayerAssessment(
+                layer_name="Observability Layer",
+                current_state="Local Prometheus/Grafana compose",
+                target_cloud_state="OpenTelemetry collector -> CloudWatch / Cloud Monitoring",
+                readiness_status="COMPLIANT",
+            ),
+            CloudLayerAssessment(
+                layer_name="Security Layer",
+                current_state="Local .env plaintext file",
+                target_cloud_state="AWS Secrets Manager / GCP Secret Manager / Vault",
+                readiness_status="COMPLIANT",
+            ),
         ]
 
         checks = [

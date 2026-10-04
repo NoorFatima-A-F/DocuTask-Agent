@@ -19,7 +19,7 @@ class EnvironmentSecurityEnricher(BaseAuditProcessor):
     def process(self, event: AuditEvent) -> AuditEvent:
         if not event.environment:
             event.environment = self.default_environment
-        
+
         # Add basic runtime tag if missing
         if "collector_version" not in event.metadata:
             event.metadata["collector_version"] = "8G.1.0"

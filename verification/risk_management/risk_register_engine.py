@@ -179,7 +179,11 @@ class RiskRegisterEngine:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"total_risks": len(risks), "mean_residual_risk": mean_residual, "critical_unmitigated": critical_unmitigated},
+            metrics={
+                "total_risks": len(risks),
+                "mean_residual_risk": mean_residual,
+                "critical_unmitigated": critical_unmitigated,
+            },
             execution_time_ms=elapsed_ms,
         )
 

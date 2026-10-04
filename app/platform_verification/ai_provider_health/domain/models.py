@@ -18,17 +18,17 @@ class AIProviderHealthState(str, Enum):
 
 
 class AIFailureCategory(str, Enum):
-    PROVIDER_UNAVAILABLE = "PROVIDER_UNAVAILABLE"       # HTTP 500, 503 -> Retry
-    AUTHENTICATION_FAILURE = "AUTHENTICATION_FAILURE"   # HTTP 401 -> Alert & Pause
-    QUOTA_EXHAUSTION = "QUOTA_EXHAUSTION"               # HTTP 429 -> Backoff & Queue
-    INVALID_RESPONSE = "INVALID_RESPONSE"               # Schema failure -> Fallback/Retry
+    PROVIDER_UNAVAILABLE = "PROVIDER_UNAVAILABLE"  # HTTP 500, 503 -> Retry
+    AUTHENTICATION_FAILURE = "AUTHENTICATION_FAILURE"  # HTTP 401 -> Alert & Pause
+    QUOTA_EXHAUSTION = "QUOTA_EXHAUSTION"  # HTTP 429 -> Backoff & Queue
+    INVALID_RESPONSE = "INVALID_RESPONSE"  # Schema failure -> Fallback/Retry
 
 
 class AIQualityCertificationTier(str, Enum):
-    FAILED = "Failed"                                         # < 80%
-    IMPROVEMENT_REQUIRED = "Improvement Required"             # 80 - 89%
-    PRODUCTION_AI_READY = "Production AI Ready"               # 90 - 94%
-    AI_RELIABILITY_CERTIFIED = "AI Reliability Certified"     # 95 - 100%
+    FAILED = "Failed"  # < 80%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89%
+    PRODUCTION_AI_READY = "Production AI Ready"  # 90 - 94%
+    AI_RELIABILITY_CERTIFIED = "AI Reliability Certified"  # 95 - 100%
 
 
 @dataclass
@@ -37,7 +37,7 @@ class AIProviderHealthStatus:
     status: AIProviderHealthState
     latency_ms: float
     authentication: str  # VALID / INVALID / EXPIRED
-    quota_status: str   # AVAILABLE / THROTTLED / EXHAUSTED
+    quota_status: str  # AVAILABLE / THROTTLED / EXHAUSTED
     model: str
     timestamp: str
     failure_count_24h: int = 0
@@ -280,14 +280,14 @@ class AIFailureSimulationReport:
 
 @dataclass
 class AIHealthQualityScorecard:
-    availability_score: float      # Weight 20%
-    authentication_score: float    # Weight 15%
-    latency_score: float           # Weight 15%
+    availability_score: float  # Weight 20%
+    authentication_score: float  # Weight 15%
+    latency_score: float  # Weight 15%
     failure_handling_score: float  # Weight 20%
     response_quality_score: float  # Weight 15%
-    security_score: float          # Weight 15%
-    overall_score: float           # Composite 0 - 100
+    security_score: float  # Weight 15%
+    overall_score: float  # Composite 0 - 100
     certification_tier: AIQualityCertificationTier
-    certification_verdict: str     # CERTIFIED / CONDITIONAL_APPROVAL / REJECTED
+    certification_verdict: str  # CERTIFIED / CONDITIONAL_APPROVAL / REJECTED
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

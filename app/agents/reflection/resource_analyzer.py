@@ -26,5 +26,5 @@ class ResourceAnalyzer:
             "total_tokens": total_tokens,
             "cost_usd": cost_usd,
             "average_tokens_per_task": avg_tokens_per_task,
-            "is_cost_efficient": cost_usd < 1.0  # Threshold
+            "is_cost_efficient": cost_usd < 1.0,  # Threshold
         }

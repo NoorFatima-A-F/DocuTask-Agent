@@ -2,6 +2,7 @@
 Policy Manager for Disaster Recovery Governance Framework (Part 3G.4).
 Generates, validates, and audits formal DR policies: backup_policy, restore_policy, incident_policy, testing_policy.
 """
+
 import os
 import yaml
 from typing import Dict
@@ -117,8 +118,16 @@ class PolicyManager(IPolicyManager):
             "policy_name": "DocuTask Disaster Incident Response Policy",
             "version": "3.1",
             "severity_definitions": {
-                "SEV-1": {"description": "Total datacenter / DB outage", "mttd_target_minutes": 5, "rto_sla_minutes": 45},
-                "SEV-2": {"description": "Partial degradation / worker backlog", "mttd_target_minutes": 15, "rto_sla_minutes": 120},
+                "SEV-1": {
+                    "description": "Total datacenter / DB outage",
+                    "mttd_target_minutes": 5,
+                    "rto_sla_minutes": 45,
+                },
+                "SEV-2": {
+                    "description": "Partial degradation / worker backlog",
+                    "mttd_target_minutes": 15,
+                    "rto_sla_minutes": 120,
+                },
             },
             "war_room_protocol": {
                 "slack_channel": "#incident-disaster-recovery",

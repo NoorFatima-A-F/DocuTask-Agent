@@ -10,7 +10,7 @@ from app.safety.gateway.context import SafetyContext, KnowledgeChunk, SourceTrus
 
 def test_input_safety_validator_length_and_malicious_commands():
     validator = InputSafetyValidator(max_length=50)
-    
+
     # Exceed length
     is_valid, violations = validator.validate("A" * 60)
     assert is_valid is False

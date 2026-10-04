@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10.12: Observability Security Quality Scorer
 """
+
 from ..domain.interfaces import IObservabilitySecurityScorer
 from ..domain.models import (
     ObservabilitySecurityScorecard,
@@ -45,7 +46,11 @@ class ObservabilitySecurityScorer(IObservabilitySecurityScorer):
         if trace_report.trace_security_passed:
             trace_score = 100.0
         else:
-            trace_score = (trace_report.compliant_spans / trace_report.total_spans_inspected) * 100.0 if trace_report.total_spans_inspected > 0 else 0.0
+            trace_score = (
+                (trace_report.compliant_spans / trace_report.total_spans_inspected) * 100.0
+                if trace_report.total_spans_inspected > 0
+                else 0.0
+            )
 
         # 5. Access control (15%)
         if access_report.rbac_enforcement_passed and access_report.unauthorized_attempts_blocked > 0:
@@ -60,7 +65,11 @@ class ObservabilitySecurityScorer(IObservabilitySecurityScorer):
             pipeline_score = 50.0
 
         # 7. AI telemetry security (10%)
-        if ai_report.ai_observability_safe and ai_report.zero_prompt_leakage_verified and ai_report.zero_response_leakage_verified:
+        if (
+            ai_report.ai_observability_safe
+            and ai_report.zero_prompt_leakage_verified
+            and ai_report.zero_response_leakage_verified
+        ):
             ai_score = 100.0
         else:
             ai_score = 40.0

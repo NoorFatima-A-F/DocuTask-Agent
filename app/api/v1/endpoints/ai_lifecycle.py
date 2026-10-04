@@ -41,7 +41,16 @@ async def get_lifecycle_overview():
 @router.post("/full-release", tags=["AI Lifecycle Executive Control"])
 async def full_lifecycle_release(payload: Dict[str, Any] = Body(...)):
     """Runs end-to-end automated DevSecOps release pipeline for an AI application."""
-    required = ["tenant_id", "organization_id", "workspace_id", "name", "slug", "owner_id", "owner_email", "system_prompt"]
+    required = [
+        "tenant_id",
+        "organization_id",
+        "workspace_id",
+        "name",
+        "slug",
+        "owner_id",
+        "owner_email",
+        "system_prompt",
+    ]
     if not all(k in payload for k in required):
         raise HTTPException(status_code=400, detail="Missing required release fields")
 
@@ -146,7 +155,9 @@ async def run_agent_tests(agent_id: str, version_tag: str = Query("1.0.0")):
     return orchestrator.testing.run_comprehensive_test_suite(agent_id, version_tag)
 
 
-@router.get("/agents/{agent_id}/test-results", response_model=List[AgentTestResult], tags=["AI Quality & Security Testing"])
+@router.get(
+    "/agents/{agent_id}/test-results", response_model=List[AgentTestResult], tags=["AI Quality & Security Testing"]
+)
 async def list_test_results(agent_id: str):
     return orchestrator.testing.list_test_results(agent_id)
 
@@ -204,9 +215,15 @@ async def list_approvals(agent_id: str):
 @router.post("/agents/{agent_id}/deploy", response_model=AgentDeployment, tags=["Distributed Deployment"])
 async def deploy_agent(agent_id: str, payload: Dict[str, Any] = Body(...)):
     env_str = payload.get("environment", "PRODUCTION")
-    environment = DeploymentEnvironment(env_str) if env_str in DeploymentEnvironment.__members__ else DeploymentEnvironment.PRODUCTION
+    environment = (
+        DeploymentEnvironment(env_str)
+        if env_str in DeploymentEnvironment.__members__
+        else DeploymentEnvironment.PRODUCTION
+    )
     strat_str = payload.get("strategy", "CANARY")
-    strategy = DeploymentStrategy(strat_str) if strat_str in DeploymentStrategy.__members__ else DeploymentStrategy.CANARY
+    strategy = (
+        DeploymentStrategy(strat_str) if strat_str in DeploymentStrategy.__members__ else DeploymentStrategy.CANARY
+    )
 
     dep = orchestrator.deployment.deploy_agent_version(
         agent_id=agent_id,

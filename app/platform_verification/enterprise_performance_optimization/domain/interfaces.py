@@ -24,7 +24,8 @@ from .models import (
 class IOptimizationVerifier(ABC):
     @property
     @abstractmethod
-    def verifier_id(self) -> str: pass
+    def verifier_id(self) -> str:
+        pass
 
     @property
     def phase_id(self) -> str:
@@ -36,67 +37,81 @@ class IOptimizationVerifier(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str: pass
+    def name(self) -> str:
+        pass
 
     @abstractmethod
-    def verify(self) -> Any: pass
+    def verify(self) -> Any:
+        pass
 
 
 class IPerformanceIntelligenceArchitectureVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceIntelligenceArchitectureReport: pass
+    def verify(self) -> PerformanceIntelligenceArchitectureReport:
+        pass
 
 
 class IBottleneckRootCauseVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> RootCauseAnalysisReport: pass
+    def verify(self) -> RootCauseAnalysisReport:
+        pass
 
 
 class IOptimizationRecommendationVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> OptimizationRecommendationReport: pass
+    def verify(self) -> OptimizationRecommendationReport:
+        pass
 
 
 class IIntelligentAutoscalingVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> WorkerAutoscalingReport: pass
+    def verify(self) -> WorkerAutoscalingReport:
+        pass
 
 
 class IDatabaseOptimizationVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> DatabaseOptimizationReport: pass
+    def verify(self) -> DatabaseOptimizationReport:
+        pass
 
 
 class IAIPipelineOptimizationVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> AIPipelineOptimizationReport: pass
+    def verify(self) -> AIPipelineOptimizationReport:
+        pass
 
 
 class IPredictiveCapacityPlanningVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> CapacityPredictionReport: pass
+    def verify(self) -> CapacityPredictionReport:
+        pass
 
 
 class IPerformanceAnomalyVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceAnomalyReport: pass
+    def verify(self) -> PerformanceAnomalyReport:
+        pass
 
 
 class IAutomatedRemediationVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> AutomatedRemediationReport: pass
+    def verify(self) -> AutomatedRemediationReport:
+        pass
 
 
 class IOptimizationSafetyVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> OptimizationSafetyReport: pass
+    def verify(self) -> OptimizationSafetyReport:
+        pass
 
 
 class IContinuousOptimizationLoopVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> ContinuousOptimizationLoopReport: pass
+    def verify(self) -> ContinuousOptimizationLoopReport:
+        pass
 
 
 class ICICDOptimizationPipelineVerifier(IOptimizationVerifier):
     @abstractmethod
-    def verify(self) -> OptimizationPipelineReport: pass
+    def verify(self) -> OptimizationPipelineReport:
+        pass

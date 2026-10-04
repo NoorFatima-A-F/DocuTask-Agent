@@ -3,6 +3,7 @@ Part 13: Evidence Generation & Manifest Engine.
 Automatically writes all 14 machine-readable audit artifacts to evidence/backup_architecture_verification/
 with standardized verification metadata, cryptographic checksums, and execution manifests.
 """
+
 import os
 import json
 import hashlib
@@ -50,9 +51,7 @@ class EvidenceManifestEngine(IEvidenceManifestEngine):
         output_dir: Optional[str] = None,
     ) -> Dict[str, str]:
         if not output_dir:
-            output_dir = os.path.join(
-                os.getcwd(), "evidence", "backup_architecture_verification"
-            )
+            output_dir = os.path.join(os.getcwd(), "evidence", "backup_architecture_verification")
 
         os.makedirs(output_dir, exist_ok=True)
         execution_duration_ms = verification_data.get("execution_duration_ms", 450.0)

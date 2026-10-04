@@ -91,6 +91,7 @@ def sample_agents():
 # Part 1: Agent Registry & Lifecycle Tests
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_agent_registry_lifecycle_and_duplicates(sample_agents):
     """Tests agent registration, duplicate rejection, and state transitions."""
@@ -136,13 +137,11 @@ async def test_agent_directory_queries(sample_agents):
 # Part 2: Capability Matching & Discovery Tests
 # ---------------------------------------------------------------------------
 
+
 def test_capability_matcher_and_selector(sample_agents):
     """Tests multi-criteria scoring and selection."""
     matcher = CapabilityMatcher()
-    req = CapabilityRequirement(
-        required_skills=["pdf_parsing"],
-        required_tools=["pdf_parser"]
-    )
+    req = CapabilityRequirement(required_skills=["pdf_parsing"], required_tools=["pdf_parser"])
     results = matcher.match_capabilities(req, sample_agents)
     assert len(results) == 3
     # Top result should be fully qualified ExtractorAlpha
@@ -172,6 +171,7 @@ def test_capability_graph():
 # ---------------------------------------------------------------------------
 # Part 3: Delegation Subsystem Tests
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_delegation_planner_and_executor(sample_agents):
@@ -225,6 +225,7 @@ def test_delegation_policy_circular_detection():
 # Part 4: Team Formation & Swarms Tests
 # ---------------------------------------------------------------------------
 
+
 def test_team_formation_and_integrity(sample_agents):
     """Tests supervisor-led, peer, and dynamic team formation."""
     engine = TeamFormationEngine()
@@ -271,6 +272,7 @@ def test_swarm_fan_out_fan_in(sample_agents):
 # Part 5: Communication & Routing Tests
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_message_router_point_to_point_and_broadcast():
     """Tests point-to-point and broadcast message delivery."""
@@ -294,10 +296,7 @@ async def test_message_router_point_to_point_and_broadcast():
 
     # Broadcast
     b_msg = AgentMessage(
-        sender_id=a1_id,
-        recipient_id=None,
-        pattern=CommunicationPattern.BROADCAST,
-        content={"alert": "system update"}
+        sender_id=a1_id, recipient_id=None, pattern=CommunicationPattern.BROADCAST, content={"alert": "system update"}
     )
     await router.send_message(b_msg)
 
@@ -309,6 +308,7 @@ async def test_message_router_point_to_point_and_broadcast():
 # ---------------------------------------------------------------------------
 # Part 6: Protocols, Auctions, Voting & Consensus Tests
 # ---------------------------------------------------------------------------
+
 
 def test_contract_net_protocol():
     """Tests Call for Proposals, bidding, and proposal scoring."""
@@ -352,9 +352,7 @@ async def test_consensus_and_leader_election(sample_agents):
     ]
 
     outcome: ConsensusOutcome = await consensus_engine.reach_consensus(
-        topic="migration_target",
-        votes=votes,
-        total_cluster_size=3
+        topic="migration_target", votes=votes, total_cluster_size=3
     )
     assert outcome.agreed_decision == "OPTION_A"
     assert outcome.quorum_met is True
@@ -362,10 +360,7 @@ async def test_consensus_and_leader_election(sample_agents):
     # Quorum failure check
     with pytest.raises(ConsensusNotReachedError):
         await consensus_engine.reach_consensus(
-            topic="upgrade",
-            votes=[votes[0]],
-            total_cluster_size=5,
-            quorum_fraction=0.6
+            topic="upgrade", votes=[votes[0]], total_cluster_size=5, quorum_fraction=0.6
         )
 
     # Leader election
@@ -377,6 +372,7 @@ async def test_consensus_and_leader_election(sample_agents):
 # ---------------------------------------------------------------------------
 # Part 7: Shared State, Work Stealing & Leases
 # ---------------------------------------------------------------------------
+
 
 def test_shared_context_and_optimistic_locking():
     """Tests shared context synchronization and distributed state optimistic locking."""
@@ -435,6 +431,7 @@ def test_lease_manager_concurrency():
 # Part 8: End-to-End Coordination Engine & Runtime
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_coordination_engine_end_to_end(sample_agents):
     """Verifies end-to-end multi-agent coordination workflow."""
@@ -445,7 +442,7 @@ async def test_coordination_engine_end_to_end(sample_agents):
     req = CoordinationRequest(
         goal="Parse financial document tables",
         initiator_agent_id=sample_agents[2].agent_id,
-        required_capabilities=["pdf_parsing"]
+        required_capabilities=["pdf_parsing"],
     )
 
     result: CoordinationResult = await engine.coordinate(req)
@@ -467,9 +464,7 @@ async def test_coordination_runtime_lifecycle(sample_agents):
         await runtime.engine.manager.registry.register(a)
 
     req = CoordinationRequest(
-        goal="Extract document",
-        initiator_agent_id=sample_agents[2].agent_id,
-        required_capabilities=["pdf_parsing"]
+        goal="Extract document", initiator_agent_id=sample_agents[2].agent_id, required_capabilities=["pdf_parsing"]
     )
     res = await runtime.coordinate_goal(req)
     assert res.lifecycle_state == CoordinationLifecycleState.COMPLETED
@@ -481,6 +476,7 @@ async def test_coordination_runtime_lifecycle(sample_agents):
 # ---------------------------------------------------------------------------
 # Part 9: Serialization & Telemetry Tests
 # ---------------------------------------------------------------------------
+
 
 def test_coordination_serialization_roundtrip(sample_agents):
     """Tests versioned JSON and Pub/Sub serialization."""

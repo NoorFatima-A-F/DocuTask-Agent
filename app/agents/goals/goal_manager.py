@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class GoalNotFoundError(Exception):
     """Raised when a goal ID cannot be resolved."""
+
     pass
 
 
@@ -30,7 +31,7 @@ class GoalManager:
     def __init__(self):
         self._goals: Dict[str, GoalModel] = {}
         self._subgoal_tree: Dict[str, List[str]] = {}  # parent_id -> list of child_ids
-        self._parent_map: Dict[str, str] = {}          # child_id -> parent_id
+        self._parent_map: Dict[str, str] = {}  # child_id -> parent_id
 
     def create_goal(
         self,

@@ -2,6 +2,7 @@
 Phase 3I.7.12: Continuous Observability Security Verification Verifier
 Verifies automated pre-commit and CI/CD pipeline scans across Gitleaks, Trivy, Semgrep, and OpenTelemetry security rules.
 """
+
 from typing import List
 from ..domain.interfaces import IContinuousSecurityVerifier
 from ..domain.models import ContinuousSecurityCheckSpec, ContinuousSecurityReport

@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Document Storage Backup & Recovery Verification Framework (Part 3G.2C).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any
@@ -40,11 +41,11 @@ class StorageCorruptionType(str, Enum):
 
 class StorageCertificationTier(str, Enum):
     ENTERPRISE_STORAGE_CERTIFIED = "Enterprise Storage Certified"  # 98 - 100
-    ENTERPRISE_READY = "Enterprise Ready"                        # 95 - 97
-    PRODUCTION_READY = "Production Ready"                        # 90 - 94
-    CONDITIONALLY_READY = "Conditionally Ready"                  # 80 - 89
-    DEVELOPMENT_GRADE = "Development Grade"                      # 70 - 79
-    FAILED = "Failed"                                            # < 70
+    ENTERPRISE_READY = "Enterprise Ready"  # 95 - 97
+    PRODUCTION_READY = "Production Ready"  # 90 - 94
+    CONDITIONALLY_READY = "Conditionally Ready"  # 80 - 89
+    DEVELOPMENT_GRADE = "Development Grade"  # 70 - 79
+    FAILED = "Failed"  # < 70
 
 
 @dataclass
@@ -255,15 +256,15 @@ class CrossSystemValidationReport:
 
 @dataclass
 class StorageQualityScorecard:
-    recoverability_score: float         # Weight 20%
-    integrity_score: float              # Weight 20%
-    coverage_score: float               # Weight 15%
-    cross_system_consistency_score: float # Weight 15%
-    security_score: float               # Weight 10%
-    performance_score: float            # Weight 10%
-    tenant_isolation_score: float       # Weight 5%
-    automation_score: float             # Weight 5%
-    composite_score: float              # 0 - 100
+    recoverability_score: float  # Weight 20%
+    integrity_score: float  # Weight 20%
+    coverage_score: float  # Weight 15%
+    cross_system_consistency_score: float  # Weight 15%
+    security_score: float  # Weight 10%
+    performance_score: float  # Weight 10%
+    tenant_isolation_score: float  # Weight 5%
+    automation_score: float  # Weight 5%
+    composite_score: float  # 0 - 100
     certification_tier: StorageCertificationTier
     passed: bool
     execution_duration_ms: float

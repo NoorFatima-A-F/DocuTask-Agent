@@ -33,6 +33,7 @@ class PriorityLevel(str, Enum):
 
 class CompletionCriteria(BaseModel):
     """Specific measurable criterion for goal completion."""
+
     criterion_id: str = Field(default_factory=lambda: f"crit_{uuid.uuid4().hex[:8]}")
     metric_name: str
     target_value: float
@@ -57,6 +58,7 @@ class CompletionCriteria(BaseModel):
 
 class Deliverable(BaseModel):
     """Concrete deliverable produced by the goal hierarchy."""
+
     deliverable_id: str = Field(default_factory=lambda: f"deliv_{uuid.uuid4().hex[:8]}")
     name: str
     mime_type: str = "application/json"
@@ -68,6 +70,7 @@ class Deliverable(BaseModel):
 
 class SemanticObjective(BaseModel):
     """Atomic semantic objective node within the GoalGraph."""
+
     objective_id: str = Field(default_factory=lambda: f"obj_{uuid.uuid4().hex[:8]}")
     parent_id: Optional[str] = None
     name: str
@@ -83,12 +86,15 @@ class SemanticObjective(BaseModel):
 
 class GoalGraph(BaseModel):
     """Deterministic, DAG-structured Goal Representation."""
+
     graph_id: str = Field(default_factory=lambda: f"goal_graph_{uuid.uuid4().hex[:10]}")
     mission_id: str
     root_intent: str
     objectives: Dict[str, SemanticObjective] = Field(default_factory=dict)
     root_objective_ids: List[str] = Field(default_factory=list)
-    dependencies: Dict[str, List[str]] = Field(default_factory=dict, description="objective_id -> list of prerequisite objective_ids")
+    dependencies: Dict[str, List[str]] = Field(
+        default_factory=dict, description="objective_id -> list of prerequisite objective_ids"
+    )
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     version: str = "1.0.0"
 
@@ -214,9 +220,7 @@ class GoalUnderstandingEngine:
                     required_fields=["document_type", "entities", "line_items", "metadata"],
                 )
             ],
-            completion_criteria=[
-                CompletionCriteria(metric_name="field_recall", target_value=0.92, comparator=">=")
-            ],
+            completion_criteria=[CompletionCriteria(metric_name="field_recall", target_value=0.92, comparator=">=")],
             estimated_complexity=1.8,
         )
         sub_objectives.append(extract_obj)
@@ -244,9 +248,7 @@ class GoalUnderstandingEngine:
             objective_type=ObjectiveType.AUDIT,
             priority=PriorityLevel.MEDIUM,
             required_capabilities=["memory_indexer", "reflection_engine"],
-            completion_criteria=[
-                CompletionCriteria(metric_name="memory_indexed", target_value=1.0, comparator="==")
-            ],
+            completion_criteria=[CompletionCriteria(metric_name="memory_indexed", target_value=1.0, comparator="==")],
             estimated_complexity=0.8,
         )
         sub_objectives.append(memory_obj)

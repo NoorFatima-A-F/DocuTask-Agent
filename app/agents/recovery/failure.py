@@ -37,6 +37,7 @@ class FailureCategory(str, Enum):
 
 class FailureIdentity(BaseModel):
     """Unique identity of a detected runtime failure."""
+
     failure_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     node_id: Optional[str] = None
@@ -47,6 +48,7 @@ class FailureIdentity(BaseModel):
 
 class FailureEvidence(BaseModel):
     """Evidence and telemetry gathered around the point of failure."""
+
     error_type: str
     error_message: str
     stack_trace: Optional[str] = None
@@ -57,6 +59,7 @@ class FailureEvidence(BaseModel):
 
 class Failure(BaseModel):
     """Canonical strongly typed Failure entity representing an execution fault."""
+
     identity: FailureIdentity
     category: FailureCategory = Field(default=FailureCategory.UNKNOWN_FAILURE)
     severity: FailureSeverity = Field(default=FailureSeverity.MEDIUM)

@@ -33,7 +33,7 @@ def test_prompt_telemetry_analytics_and_alerting():
     assert summary.success_rate_pct == 90.0
 
     # Test alert trigger on 10% error rate (threshold 5%)
-    alerts = alert_mgr.check_health("prompt_a", "org_test", error_rate=0.10, avg_latency_ms= summary.avg_latency_ms)
+    alerts = alert_mgr.check_health("prompt_a", "org_test", error_rate=0.10, avg_latency_ms=summary.avg_latency_ms)
     assert len(alerts) >= 1
     assert alerts[0].alert_type == "ERROR_SPIKE"
 

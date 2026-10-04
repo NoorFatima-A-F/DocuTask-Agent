@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Optional, Set
 @dataclass
 class FeatureFlagRule:
     """Evaluation rule for a feature flag."""
+
     flag_key: str
     default_enabled: bool = False
     enabled_orgs: Set[str] = field(default_factory=set)

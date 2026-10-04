@@ -62,7 +62,6 @@ async def get_phase_report(phase_id: str) -> Dict[str, Any]:
         raise HTTPException(status_code=404, detail=str(exc))
 
 
-
 @router.get("/certification", response_model=EnterprisePerformanceCertificationReport)
 async def get_certification() -> EnterprisePerformanceCertificationReport:
     """Run full verification and return only the final Enterprise Performance Certification Report."""
@@ -71,6 +70,7 @@ async def get_certification() -> EnterprisePerformanceCertificationReport:
     cert_path = os.path.join("performance_verification", "certification_report.json")
     if os.path.exists(cert_path):
         import json
+
         with open(cert_path, "r", encoding="utf-8") as f:
             data = json.load(f)
         return EnterprisePerformanceCertificationReport(**data)
@@ -83,6 +83,7 @@ async def get_manifest() -> PerformanceVerificationManifest:
     manifest_path = os.path.join("performance_verification", "metadata.json")
     if os.path.exists(manifest_path):
         import json
+
         with open(manifest_path, "r", encoding="utf-8") as f:
             data = json.load(f)
         return PerformanceVerificationManifest(**data)

@@ -1,6 +1,7 @@
 """
 Phase 3H.7.2: Enterprise Circuit Breaker Protection Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_resilience.domain.interfaces import ICircuitBreakerVerifier

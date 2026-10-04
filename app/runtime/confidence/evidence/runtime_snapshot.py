@@ -24,4 +24,4 @@ class RuntimeEvidenceSnapshot(BaseModel):
     def model_post_init(self, __context: Any) -> None:
         if not self.snapshot_hash:
             content = f"{self.mission_id}:{self.timestamp}:{json.dumps(self.signals, sort_keys=True)}"
-            self.snapshot_hash = hashlib.sha256(content.encode('utf-8')).hexdigest()
+            self.snapshot_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()

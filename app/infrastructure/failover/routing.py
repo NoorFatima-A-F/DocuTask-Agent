@@ -17,6 +17,7 @@ logger = logging.getLogger("infrastructure.failover.routing")
 
 class RouteTarget(BaseModel):
     """Target destination endpoint or region."""
+
     target_id: str
     region_id: str
     cluster_id: Optional[str] = None
@@ -27,6 +28,7 @@ class RouteTarget(BaseModel):
 
 class ServiceRouteTable(BaseModel):
     """Routing configuration for a specific service or tenant."""
+
     service_name: str
     active_targets: List[RouteTarget] = Field(default_factory=list)
     fallback_target: Optional[str] = None
@@ -40,7 +42,9 @@ class FailoverRouter:
     def __init__(self) -> None:
         self._route_tables: Dict[str, ServiceRouteTable] = {}  # service_name -> ServiceRouteTable
 
-    def register_service_route(self, service_name: str, targets: List[RouteTarget], fallback_target: Optional[str] = None) -> ServiceRouteTable:
+    def register_service_route(
+        self, service_name: str, targets: List[RouteTarget], fallback_target: Optional[str] = None
+    ) -> ServiceRouteTable:
         table = ServiceRouteTable(
             service_name=service_name,
             active_targets=targets,

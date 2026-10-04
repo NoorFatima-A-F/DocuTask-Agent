@@ -1,4 +1,5 @@
 """Provenance Integrity and Builder Identity Verification."""
+
 from typing import Optional, Set
 from .builder import SLSAProvenanceStatement
 

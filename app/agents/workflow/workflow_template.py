@@ -33,7 +33,7 @@ class WorkflowTemplate:
             name=name,
             description="Extracts data from financial PDFs.",
             version=WorkflowVersion(major=1, minor=0, patch=0),
-            graph=graph
+            graph=graph,
         )
 
     @staticmethod
@@ -44,7 +44,7 @@ class WorkflowTemplate:
             node_id="approval",
             name="Compliance Review",
             node_type=WorkflowNodeType.HUMAN_APPROVAL,
-            handler="request_approval"
+            handler="request_approval",
         )
         n3 = WorkflowNode(node_id="archive", name="Archive Record", handler="archive_record")
 
@@ -60,11 +60,9 @@ class WorkflowTemplate:
             name=name,
             description="Workflow gated by human compliance sign-off.",
             version=WorkflowVersion(major=1, minor=0, patch=0),
-            graph=graph
+            graph=graph,
         )
 
 
 DocumentExtractionWorkflowTemplate = WorkflowTemplate
 HumanApprovalWorkflowTemplate = WorkflowTemplate
-
-

@@ -29,8 +29,22 @@ class PITRRecoveryVerifier(IPITRRecoveryVerifier):
 
     def verify(self) -> PITRReport:
         snapshots = [
-            PITRSnapshotValidation(snapshot_timestamp="2026-09-16T13:00:00Z", target_recovery_point="2026-09-16T13:45:00Z", corruption_timestamp="2026-09-16T14:00:00Z", recovered_records=1485, data_loss_window_seconds=0.0, accuracy_pct=100.0),
-            PITRSnapshotValidation(snapshot_timestamp="2026-09-16T10:00:00Z", target_recovery_point="2026-09-16T10:28:30Z", corruption_timestamp="2026-09-16T10:30:00Z", recovered_records=1420, data_loss_window_seconds=0.0, accuracy_pct=100.0),
+            PITRSnapshotValidation(
+                snapshot_timestamp="2026-09-16T13:00:00Z",
+                target_recovery_point="2026-09-16T13:45:00Z",
+                corruption_timestamp="2026-09-16T14:00:00Z",
+                recovered_records=1485,
+                data_loss_window_seconds=0.0,
+                accuracy_pct=100.0,
+            ),
+            PITRSnapshotValidation(
+                snapshot_timestamp="2026-09-16T10:00:00Z",
+                target_recovery_point="2026-09-16T10:28:30Z",
+                corruption_timestamp="2026-09-16T10:30:00Z",
+                recovered_records=1420,
+                data_loss_window_seconds=0.0,
+                accuracy_pct=100.0,
+            ),
         ]
 
         checks = [

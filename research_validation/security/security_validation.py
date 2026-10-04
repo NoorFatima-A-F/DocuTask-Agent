@@ -30,6 +30,7 @@ class SecurityControlCategory(str, Enum):
 @dataclass
 class ASVSControlVerification:
     """Verification of a specific ASVS security requirement."""
+
     control_id: str
     category: SecurityControlCategory
     title: str
@@ -41,6 +42,7 @@ class ASVSControlVerification:
 @dataclass
 class FuzzTestResult:
     """Result of a fuzz test execution."""
+
     mutation_type: str
     input_payload: str
     exception_caught: Optional[str]
@@ -51,6 +53,7 @@ class FuzzTestResult:
 @dataclass
 class SecurityAuditReport:
     """Comprehensive Security Verification & Fuzzing Audit Report."""
+
     total_asvs_controls: int
     passed_asvs_controls: int
     asvs_compliance_score: float
@@ -67,12 +70,54 @@ class SecurityValidationLab:
     """
 
     CORE_ASVS_CONTROLS = [
-        ASVSControlVerification("V1.1.1", SecurityControlCategory.V1_ARCHITECTURE, "Secure Software Development Lifecycle", 2, True, "Rigorous automated linting, typing, and verification."),
-        ASVSControlVerification("V2.1.1", SecurityControlCategory.V2_AUTHENTICATION, "Password & Token Complexity", 2, True, "Strict minimum length, JWT expiration, and hash verification."),
-        ASVSControlVerification("V4.1.1", SecurityControlCategory.V4_ACCESS_CONTROL, "Principle of Least Privilege", 2, True, "Role-based access control and tenant isolation enforced."),
-        ASVSControlVerification("V5.1.1", SecurityControlCategory.V5_VALIDATION, "Input Validation & Strict Typing", 2, True, "Pydantic & dataclass schemas reject unexpected payload fields."),
-        ASVSControlVerification("V8.1.1", SecurityControlCategory.V8_DATA_PROTECTION, "Cryptographic Signature & Integrity", 2, True, "DSSE envelope cryptographic signing on evidence artifacts."),
-        ASVSControlVerification("V13.1.1", SecurityControlCategory.V13_API, "API Rate Limiting & DoS Protection", 2, True, "Token bucket rate limiting and payload size bounds enforced."),
+        ASVSControlVerification(
+            "V1.1.1",
+            SecurityControlCategory.V1_ARCHITECTURE,
+            "Secure Software Development Lifecycle",
+            2,
+            True,
+            "Rigorous automated linting, typing, and verification.",
+        ),
+        ASVSControlVerification(
+            "V2.1.1",
+            SecurityControlCategory.V2_AUTHENTICATION,
+            "Password & Token Complexity",
+            2,
+            True,
+            "Strict minimum length, JWT expiration, and hash verification.",
+        ),
+        ASVSControlVerification(
+            "V4.1.1",
+            SecurityControlCategory.V4_ACCESS_CONTROL,
+            "Principle of Least Privilege",
+            2,
+            True,
+            "Role-based access control and tenant isolation enforced.",
+        ),
+        ASVSControlVerification(
+            "V5.1.1",
+            SecurityControlCategory.V5_VALIDATION,
+            "Input Validation & Strict Typing",
+            2,
+            True,
+            "Pydantic & dataclass schemas reject unexpected payload fields.",
+        ),
+        ASVSControlVerification(
+            "V8.1.1",
+            SecurityControlCategory.V8_DATA_PROTECTION,
+            "Cryptographic Signature & Integrity",
+            2,
+            True,
+            "DSSE envelope cryptographic signing on evidence artifacts.",
+        ),
+        ASVSControlVerification(
+            "V13.1.1",
+            SecurityControlCategory.V13_API,
+            "API Rate Limiting & DoS Protection",
+            2,
+            True,
+            "Token bucket rate limiting and payload size bounds enforced.",
+        ),
     ]
 
     @staticmethod
@@ -99,7 +144,7 @@ class SecurityValidationLab:
         mutations.append(("huge_int", json.dumps(huge_int_dict)))
 
         # 4. Truncated malformed JSON
-        mutations.append(("truncated_json", json.dumps(base_json)[:len(json.dumps(base_json))//2]))
+        mutations.append(("truncated_json", json.dumps(base_json)[: len(json.dumps(base_json)) // 2]))
 
         # 5. Null-byte injection
         null_dict = dict(base_json)
@@ -128,10 +173,7 @@ class SecurityValidationLab:
 
     @classmethod
     def execute_fuzz_campaign(
-        cls,
-        parser_fn: Callable[[str], Any],
-        base_payload: Dict[str, Any],
-        num_mutations: int = 25
+        cls, parser_fn: Callable[[str], Any], base_payload: Dict[str, Any], num_mutations: int = 25
     ) -> List[FuzzTestResult]:
         """
         Execute mutation fuzz test campaign against a parser/validator function.
@@ -143,31 +185,37 @@ class SecurityValidationLab:
             try:
                 parser_fn(payload)
                 # If handled normally without crash
-                results.append(FuzzTestResult(
-                    mutation_type=name,
-                    input_payload=payload[:100],
-                    exception_caught=None,
-                    crashed_or_corrupted=False,
-                    handled_gracefully=True
-                ))
+                results.append(
+                    FuzzTestResult(
+                        mutation_type=name,
+                        input_payload=payload[:100],
+                        exception_caught=None,
+                        crashed_or_corrupted=False,
+                        handled_gracefully=True,
+                    )
+                )
             except (ValueError, KeyError, TypeError, json.JSONDecodeError) as e:
                 # Handled cleanly as expected error
-                results.append(FuzzTestResult(
-                    mutation_type=name,
-                    input_payload=payload[:100],
-                    exception_caught=str(e),
-                    crashed_or_corrupted=False,
-                    handled_gracefully=True
-                ))
+                results.append(
+                    FuzzTestResult(
+                        mutation_type=name,
+                        input_payload=payload[:100],
+                        exception_caught=str(e),
+                        crashed_or_corrupted=False,
+                        handled_gracefully=True,
+                    )
+                )
             except Exception as e:
                 # Unexpected unhandled exception (crash)
-                results.append(FuzzTestResult(
-                    mutation_type=name,
-                    input_payload=payload[:100],
-                    exception_caught=f"UNHANDLED: {type(e).__name__}: {str(e)}",
-                    crashed_or_corrupted=True,
-                    handled_gracefully=False
-                ))
+                results.append(
+                    FuzzTestResult(
+                        mutation_type=name,
+                        input_payload=payload[:100],
+                        exception_caught=f"UNHANDLED: {type(e).__name__}: {str(e)}",
+                        crashed_or_corrupted=True,
+                        handled_gracefully=False,
+                    )
+                )
 
         return results
 
@@ -176,7 +224,7 @@ class SecurityValidationLab:
         cls,
         parser_fn: Callable[[str], Any],
         base_payload: Dict[str, Any],
-        custom_asvs: Optional[List[ASVSControlVerification]] = None
+        custom_asvs: Optional[List[ASVSControlVerification]] = None,
     ) -> SecurityAuditReport:
         """Run full security controls verification and fuzzing audit."""
         controls = custom_asvs or cls.CORE_ASVS_CONTROLS
@@ -200,5 +248,5 @@ class SecurityValidationLab:
             fuzz_handled_gracefully_rate=graceful_rate,
             detected_vulnerabilities_count=vuln_count,
             status=status,
-            details={"asvs_controls": [c.control_id for c in controls if c.verified]}
+            details={"asvs_controls": [c.control_id for c in controls if c.verified]},
         )

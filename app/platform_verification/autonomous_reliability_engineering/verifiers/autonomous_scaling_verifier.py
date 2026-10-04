@@ -2,6 +2,7 @@
 3I.12.6: Autonomous Scaling Intelligence Verifier
 Verifies predictive scaling decisions, scale up/down controls, cooldown safety, and rollback capabilities.
 """
+
 from typing import List
 from app.platform_verification.autonomous_reliability_engineering.domain.models import (
     AutonomousScalingReport,

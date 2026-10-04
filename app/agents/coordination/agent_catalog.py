@@ -18,8 +18,8 @@ class AgentCatalog:
             capabilities=CapabilityProfile(
                 skills=[AgentSkill(name="coordination", domain="orchestration")],
                 execution_domains=["orchestration", "governance"],
-                confidence_rating=0.99
-            )
+                confidence_rating=0.99,
+            ),
         )
 
     @staticmethod
@@ -29,12 +29,12 @@ class AgentCatalog:
             capabilities=CapabilityProfile(
                 skills=[
                     AgentSkill(name="pdf_parsing", domain="document_processing"),
-                    AgentSkill(name="table_extraction", domain="document_processing")
+                    AgentSkill(name="table_extraction", domain="document_processing"),
                 ],
                 supported_tools=["pdf_parser", "table_extractor"],
                 execution_domains=["document_processing", "financial"],
-                confidence_rating=0.95
-            )
+                confidence_rating=0.95,
+            ),
         )
 
     @staticmethod
@@ -44,10 +44,10 @@ class AgentCatalog:
             capabilities=CapabilityProfile(
                 skills=[
                     AgentSkill(name="financial_analysis", domain="financial"),
-                    AgentSkill(name="risk_assessment", domain="compliance")
+                    AgentSkill(name="risk_assessment", domain="compliance"),
                 ],
                 supported_tools=["calculator", "compliance_checker"],
                 execution_domains=["financial", "compliance"],
-                confidence_rating=0.97
-            )
+                confidence_rating=0.97,
+            ),
         )

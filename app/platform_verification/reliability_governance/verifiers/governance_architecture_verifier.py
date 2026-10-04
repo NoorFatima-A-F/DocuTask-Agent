@@ -1,6 +1,7 @@
 """
 3I.6.1 & 3I.6.2: Reliability Governance Architecture & User Journey Reliability Verifier
 """
+
 from typing import List
 from ..domain.models import ServiceOwnershipBoundary, ReliabilityGovernanceReport
 from ..domain.interfaces import IGovernanceArchitectureVerifier
@@ -29,7 +30,7 @@ class GovernanceArchitectureVerifier(IGovernanceArchitectureVerifier):
                 owner_team=s[1],
                 on_call_rotation=s[2],
                 slos_assigned_count=s[3],
-                operational_status="MANAGED"
+                operational_status="MANAGED",
             )
             for s in services
         ]
@@ -41,5 +42,5 @@ class GovernanceArchitectureVerifier(IGovernanceArchitectureVerifier):
             ownership_mapping=True,
             user_journey_reliability_model_active=True,
             ownership_boundaries=boundaries,
-            status="PASS"
+            status="PASS",
         )

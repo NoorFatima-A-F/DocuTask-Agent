@@ -3,6 +3,7 @@ Dependency Policy Engine (Part 3H.3.2.2).
 Loads dependency_policy.yaml, classifies dependencies into Critical, Important, and Optional,
 and resolves operational failure actions.
 """
+
 import os
 import yaml
 from typing import Dict, Any, List, Optional

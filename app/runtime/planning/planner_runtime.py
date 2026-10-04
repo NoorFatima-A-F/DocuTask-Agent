@@ -43,13 +43,18 @@ from app.runtime.planning.strategy_ranker import StrategyRankingEngine, Strategy
 from app.runtime.planning.counterfactual_engine import CounterfactualEngine, CounterfactualExplanation
 from app.runtime.planning.mutable_dag import MutableExecutionDAG, DAGNode, DAGNodeStatus
 from app.runtime.planning.scheduler import EnterpriseResourceScheduler
-from app.runtime.planning.adaptive_replanner import AdaptiveReplanningEngine, ReplanningTrigger, SubGraphReplanningResult
+from app.runtime.planning.adaptive_replanner import (
+    AdaptiveReplanningEngine,
+    ReplanningTrigger,
+    SubGraphReplanningResult,
+)
 from app.runtime.planning.planning_memory import PlanningMemoryEngine, PlanSignature
 from app.runtime.planning.self_evaluator import PlannerSelfEvaluationEngine, PlanCalibrationMetric
 
 
 class MissionPlanResult(BaseModel):
     """Complete, self-contained planning outcome for a mission."""
+
     mission_id: str
     goal_graph: GoalGraph
     constraint_set: MissionConstraintSet
@@ -98,36 +103,55 @@ class AutonomousPlanningRuntime:
         """Executes the complete autonomous planning pipeline from intent to executable DAG."""
         # 1. Goal Understanding
         goal_graph = self.goal_engine.parse_intent(mission_id=mission_id, raw_intent=raw_intent)
-        self._publish(GoalParsedEvent(mission_id, raw_intent, "document_operations", "CRITICAL", list(goal_graph.objectives.keys())))
-        self._publish(GoalGraphCreatedEvent(mission_id, len(goal_graph.objectives), len(goal_graph.dependencies), ["confidence>=0.90", "schema_valid==1.0"]))
+        self._publish(
+            GoalParsedEvent(
+                mission_id, raw_intent, "document_operations", "CRITICAL", list(goal_graph.objectives.keys())
+            )
+        )
+        self._publish(
+            GoalGraphCreatedEvent(
+                mission_id,
+                len(goal_graph.objectives),
+                len(goal_graph.dependencies),
+                ["confidence>=0.90", "schema_valid==1.0"],
+            )
+        )
 
         # 2. Constraint Extraction
-        constraint_set = self.constraint_engine.extract_constraints(mission_id=mission_id, user_constraints=user_constraints)
-        self._publish(ConstraintsExtractedEvent(
-            mission_id,
-            [c.name for c in constraint_set.get_hard_constraints()],
-            [c.name for c in constraint_set.get_soft_constraints()],
-            user_constraints.get("budget_usd", 0.50) if user_constraints else 0.50,
-            user_constraints.get("max_latency_ms", 5000.0) if user_constraints else 5000.0,
-        ))
+        constraint_set = self.constraint_engine.extract_constraints(
+            mission_id=mission_id, user_constraints=user_constraints
+        )
+        self._publish(
+            ConstraintsExtractedEvent(
+                mission_id,
+                [c.name for c in constraint_set.get_hard_constraints()],
+                [c.name for c in constraint_set.get_soft_constraints()],
+                user_constraints.get("budget_usd", 0.50) if user_constraints else 0.50,
+                user_constraints.get("max_latency_ms", 5000.0) if user_constraints else 5000.0,
+            )
+        )
 
         # 3. Planning Memory Lookup
         sig = signature or PlanSignature(document_type="invoice")
         similar = self.memory_engine.retrieve_similar_plans(sig, top_k=2)
         if similar:
             best_mem, sim_score = similar[0]
-            self._publish(PlanningMemoryRetrievedEvent(mission_id, sim_score, best_mem.mission_id, best_mem.selected_archetype))
+            self._publish(
+                PlanningMemoryRetrievedEvent(mission_id, sim_score, best_mem.mission_id, best_mem.selected_archetype)
+            )
 
         # 4. Candidate Strategy Generation
         strategies = self.strategy_generator.generate_strategies(goal_graph=goal_graph, constraint_set=constraint_set)
         for strat in strategies:
-            self._publish(CandidateStrategyGeneratedEvent(
-                mission_id,
-                strat.strategy_id,
-                strat.name,
-                len(strat.steps),
-                strat.archetype.value,
-            ))
+            self._publish(
+                CandidateStrategyGeneratedEvent(
+                    mission_id,
+                    strat.strategy_id,
+                    strat.name,
+                    len(strat.steps),
+                    strat.archetype.value,
+                )
+            )
 
         # 5. Prediction, Risk, Simulation & Utility Optimization
         cost_predictions: Dict[str, CostPredictionResult] = {}
@@ -147,20 +171,24 @@ class AutonomousPlanningRuntime:
             risk_profiles[strat.strategy_id] = r_prof
             simulations[strat.strategy_id] = sim_res
 
-            self._publish(StrategySimulationCompletedEvent(
-                mission_id,
-                strat.strategy_id,
-                sim_res.mean_duration_ms,
-                strat.estimated_total_cost_usd,
-                1.0 - sim_res.simulated_success_rate,
-            ))
-            self._publish(RiskEstimatedEvent(
-                mission_id,
-                strat.strategy_id,
-                r_prof.overall_risk_score,
-                r_prof.high_risk_vectors[0].name if r_prof.high_risk_vectors else "None",
-                r_prof.high_risk_vectors[0].mitigation_strategy if r_prof.high_risk_vectors else "Nominal",
-            ))
+            self._publish(
+                StrategySimulationCompletedEvent(
+                    mission_id,
+                    strat.strategy_id,
+                    sim_res.mean_duration_ms,
+                    strat.estimated_total_cost_usd,
+                    1.0 - sim_res.simulated_success_rate,
+                )
+            )
+            self._publish(
+                RiskEstimatedEvent(
+                    mission_id,
+                    strat.strategy_id,
+                    r_prof.overall_risk_score,
+                    r_prof.high_risk_vectors[0].name if r_prof.high_risk_vectors else "None",
+                    r_prof.high_risk_vectors[0].mitigation_strategy if r_prof.high_risk_vectors else "Nominal",
+                )
+            )
 
             soft_penalty = strat.constraint_compliance.get("soft_penalty", 0.0)
             u_score = self.utility_engine.calculate_utility(
@@ -168,18 +196,20 @@ class AutonomousPlanningRuntime:
             )
             utility_scores[strat.strategy_id] = u_score
 
-            self._publish(UtilityCalculatedEvent(
-                mission_id,
-                strat.strategy_id,
-                u_score.total_utility,
-                u_score.version,
-                {
-                    "accuracy": u_score.accuracy_term,
-                    "latency": u_score.latency_penalty_term,
-                    "cost": u_score.cost_penalty_term,
-                    "risk": u_score.risk_penalty_term,
-                },
-            ))
+            self._publish(
+                UtilityCalculatedEvent(
+                    mission_id,
+                    strat.strategy_id,
+                    u_score.total_utility,
+                    u_score.version,
+                    {
+                        "accuracy": u_score.accuracy_term,
+                        "latency": u_score.latency_penalty_term,
+                        "cost": u_score.cost_penalty_term,
+                        "risk": u_score.risk_penalty_term,
+                    },
+                )
+            )
 
         # 6. Strategy Ranking & Selection
         selection_record = self.strategy_ranker.evaluate_and_rank(
@@ -192,19 +222,23 @@ class AutonomousPlanningRuntime:
         )
 
         ranked_ids = [e.strategy_id for e in selection_record.comparison_matrix.entries]
-        self._publish(StrategyRankedEvent(
-            mission_id,
-            ranked_ids,
-            selection_record.selected_strategy_id,
-            0.15,
-        ))
-        self._publish(StrategySelectedEvent(
-            mission_id,
-            selection_record.selected_strategy_id,
-            selection_record.selected_archetype,
-            utility_scores[selection_record.selected_strategy_id].total_utility,
-            0.98,
-        ))
+        self._publish(
+            StrategyRankedEvent(
+                mission_id,
+                ranked_ids,
+                selection_record.selected_strategy_id,
+                0.15,
+            )
+        )
+        self._publish(
+            StrategySelectedEvent(
+                mission_id,
+                selection_record.selected_strategy_id,
+                selection_record.selected_archetype,
+                utility_scores[selection_record.selected_strategy_id].total_utility,
+                0.98,
+            )
+        )
 
         # 7. Counterfactual Generation
         explanations: List[CounterfactualExplanation] = []
@@ -220,28 +254,38 @@ class AutonomousPlanningRuntime:
         for strat in strategies:
             if strat.strategy_id != sel_id:
                 why_rej = self.counterfactual_engine.explain_rejection(
-                    strat.strategy_id, sel_id, strategies, utility_scores, cost_predictions, latency_predictions, risk_profiles
+                    strat.strategy_id,
+                    sel_id,
+                    strategies,
+                    utility_scores,
+                    cost_predictions,
+                    latency_predictions,
+                    risk_profiles,
                 )
                 explanations.append(why_rej)
-                self._publish(CounterfactualGeneratedEvent(
-                    mission_id,
-                    sel_id,
-                    strat.strategy_id,
-                    why_rej.summary_explanation,
-                    why_rej.tipping_point.get("parameter", "w_latency") if why_rej.tipping_point else "w_latency",
-                ))
+                self._publish(
+                    CounterfactualGeneratedEvent(
+                        mission_id,
+                        sel_id,
+                        strat.strategy_id,
+                        why_rej.summary_explanation,
+                        why_rej.tipping_point.get("parameter", "w_latency") if why_rej.tipping_point else "w_latency",
+                    )
+                )
 
         # 8. Compile Executable Mutable DAG
         selected_strat = next(s for s in strategies if s.strategy_id == sel_id)
         dag = self._compile_dag_from_strategy(mission_id, selected_strat)
         self._active_dags[mission_id] = dag
 
-        self._publish(DAGCreatedEvent(
-            mission_id,
-            dag.dag_id,
-            len(dag.nodes),
-            latency_predictions[sel_id].critical_path_ms,
-        ))
+        self._publish(
+            DAGCreatedEvent(
+                mission_id,
+                dag.dag_id,
+                len(dag.nodes),
+                latency_predictions[sel_id].critical_path_ms,
+            )
+        )
 
         plan_result = MissionPlanResult(
             mission_id=mission_id,
@@ -289,19 +333,19 @@ class AutonomousPlanningRuntime:
         if not dag:
             raise ValueError(f"No active DAG for mission {mission_id}")
         shards = dag.split_node(node_id, split_count, rationale)
-        self._publish(DAGMutatedEvent(
-            mission_id, dag.dag_id, "NODE_SPLIT", [node_id] + [s.node_id for s in shards], rationale
-        ))
+        self._publish(
+            DAGMutatedEvent(mission_id, dag.dag_id, "NODE_SPLIT", [node_id] + [s.node_id for s in shards], rationale)
+        )
         return shards
 
-    def mutate_dag_replace(self, mission_id: str, node_id: str, new_capability_id: str, new_provider: str, rationale: str) -> DAGNode:
+    def mutate_dag_replace(
+        self, mission_id: str, node_id: str, new_capability_id: str, new_provider: str, rationale: str
+    ) -> DAGNode:
         dag = self._active_dags.get(mission_id)
         if not dag:
             raise ValueError(f"No active DAG for mission {mission_id}")
         node = dag.replace_node_capability(node_id, new_capability_id, new_provider, rationale)
-        self._publish(DAGMutatedEvent(
-            mission_id, dag.dag_id, "NODE_REPLACE", [node_id], rationale
-        ))
+        self._publish(DAGMutatedEvent(mission_id, dag.dag_id, "NODE_REPLACE", [node_id], rationale))
         return node
 
     def trigger_adaptive_replanning(self, mission_id: str, trigger: ReplanningTrigger) -> SubGraphReplanningResult:
@@ -309,15 +353,17 @@ class AutonomousPlanningRuntime:
         if not dag:
             raise ValueError(f"No active DAG for mission {mission_id}")
 
-        self._publish(ReplanningStartedEvent(
-            mission_id, trigger.rationale or trigger.trigger_type.value, [trigger.node_id] if trigger.node_id else []
-        ))
+        self._publish(
+            ReplanningStartedEvent(
+                mission_id,
+                trigger.rationale or trigger.trigger_type.value,
+                [trigger.node_id] if trigger.node_id else [],
+            )
+        )
 
         res = self.adaptive_replanner.handle_trigger(dag, trigger)
 
-        self._publish(ReplanningCompletedEvent(
-            mission_id, 45.0, len(res.new_nodes_added), 0, 0.92
-        ))
+        self._publish(ReplanningCompletedEvent(mission_id, 45.0, len(res.new_nodes_added), 0, 0.92))
 
         return res
 
@@ -363,13 +409,15 @@ class AutonomousPlanningRuntime:
             success=not actual_failure,
         )
         self._publish(PlanningMemoryStoredEvent(mission_id, "invoice_p2_f12", 0.04, "Nominal accuracy within bounds"))
-        self._publish(PlannerSelfEvaluationCompletedEvent(
-            mission_id,
-            0.02,
-            calib.comparison.cost_error_pct,
-            calib.comparison.latency_error_pct,
-            calib.overall_calibration_score,
-        ))
+        self._publish(
+            PlannerSelfEvaluationCompletedEvent(
+                mission_id,
+                0.02,
+                calib.comparison.cost_error_pct,
+                calib.comparison.latency_error_pct,
+                calib.overall_calibration_score,
+            )
+        )
 
         return calib
 

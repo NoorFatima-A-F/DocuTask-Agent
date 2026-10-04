@@ -41,7 +41,7 @@ class AIFailureSimulator(IAIFailureSimulator):
         AIFailureSimulationItem(
             scenario_id="SIM-MALFORMED-03",
             name="Malformed / Truncated JSON Generation",
-            injected_fault="Inject truncated string: '{\"invoice_id\": \"INV-9921\", \"total\": ' into parser",
+            injected_fault='Inject truncated string: \'{"invoice_id": "INV-9921", "total": \' into parser',
             expected_behavior="Reject payload in schema validator, trigger auto-repair prompt, then fallback if needed",
             observed_behavior="Validator caught malformed JSON; secondary repair prompt successfully recovered structured object",
             recovered_successfully=True,

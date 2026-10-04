@@ -25,12 +25,54 @@ class PlanningPipelineVerifier(IPlanningPipelineVerifier):
 
     def verify(self) -> PlanningPipelineReport:
         stages = [
-            PlanPipelineStage(phase_name="GoalIngestion", inputs="NaturalLanguageGoal", outputs="NormalizedGoalSpec", execution_time_ms=8.5, reflection_applied=False, deterministic_score=100.0),
-            PlanPipelineStage(phase_name="TaskDecomposition", inputs="NormalizedGoalSpec", outputs="TaskDependencyGraph", execution_time_ms=22.1, reflection_applied=True, deterministic_score=99.8),
-            PlanPipelineStage(phase_name="WorkerCapabilityMatching", inputs="TaskDependencyGraph", outputs="WorkerAllocationMatrix", execution_time_ms=14.3, reflection_applied=False, deterministic_score=100.0),
-            PlanPipelineStage(phase_name="ParallelTaskExecution", inputs="WorkerAllocationMatrix", outputs="ExecutionResults", execution_time_ms=120.0, reflection_applied=False, deterministic_score=100.0),
-            PlanPipelineStage(phase_name="ResultValidationAndConfidence", inputs="ExecutionResults", outputs="ValidatedOutput", execution_time_ms=16.8, reflection_applied=True, deterministic_score=99.5),
-            PlanPipelineStage(phase_name="ReflectionAndLearningCommit", inputs="ValidatedOutput", outputs="MemoryAndExperienceUpdate", execution_time_ms=11.2, reflection_applied=True, deterministic_score=100.0),
+            PlanPipelineStage(
+                phase_name="GoalIngestion",
+                inputs="NaturalLanguageGoal",
+                outputs="NormalizedGoalSpec",
+                execution_time_ms=8.5,
+                reflection_applied=False,
+                deterministic_score=100.0,
+            ),
+            PlanPipelineStage(
+                phase_name="TaskDecomposition",
+                inputs="NormalizedGoalSpec",
+                outputs="TaskDependencyGraph",
+                execution_time_ms=22.1,
+                reflection_applied=True,
+                deterministic_score=99.8,
+            ),
+            PlanPipelineStage(
+                phase_name="WorkerCapabilityMatching",
+                inputs="TaskDependencyGraph",
+                outputs="WorkerAllocationMatrix",
+                execution_time_ms=14.3,
+                reflection_applied=False,
+                deterministic_score=100.0,
+            ),
+            PlanPipelineStage(
+                phase_name="ParallelTaskExecution",
+                inputs="WorkerAllocationMatrix",
+                outputs="ExecutionResults",
+                execution_time_ms=120.0,
+                reflection_applied=False,
+                deterministic_score=100.0,
+            ),
+            PlanPipelineStage(
+                phase_name="ResultValidationAndConfidence",
+                inputs="ExecutionResults",
+                outputs="ValidatedOutput",
+                execution_time_ms=16.8,
+                reflection_applied=True,
+                deterministic_score=99.5,
+            ),
+            PlanPipelineStage(
+                phase_name="ReflectionAndLearningCommit",
+                inputs="ValidatedOutput",
+                outputs="MemoryAndExperienceUpdate",
+                execution_time_ms=11.2,
+                reflection_applied=True,
+                deterministic_score=100.0,
+            ),
         ]
 
         checks = [

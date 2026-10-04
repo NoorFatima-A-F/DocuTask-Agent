@@ -1,6 +1,7 @@
 """
 Phase 3H.8.2: Runtime Configuration Change & Immutability Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_governance.domain.interfaces import IConfigurationChangeVerifier

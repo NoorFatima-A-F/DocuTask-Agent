@@ -2,8 +2,16 @@
 Section 3.2: Agent Memory & Knowledge Base Cross-Tenant Isolation Verification
 Ensures agent long-term memory, episodic memory, and vector embeddings are partitioned per tenant.
 """
+
 from typing import Dict, List, Any
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
+from ..domain.models import (
+    SecurityVerificationRun,
+    SecuritySectionResult,
+    SecurityCategory,
+    SecurityStatus,
+    SeverityLevel,
+)
+
 
 class MemoryIsolationVerifier:
     def __init__(self):
@@ -14,7 +22,7 @@ class MemoryIsolationVerifier:
             ],
             "tenant-talentpulse-hr": [
                 {"id": "mem-02", "key": "EXEC_SALARY_DATA", "value": "VP Engineering compensation package details"}
-            ]
+            ],
         }
 
     def recall_agent_memory(self, requesting_tenant: str, memory_key: str) -> List[Dict[str, Any]]:
@@ -25,14 +33,13 @@ class MemoryIsolationVerifier:
     def verify_memory_isolation(self) -> SecuritySectionResult:
         runs: List[SecurityVerificationRun] = []
         metrics: Dict[str, Any] = {}
-        
+
         # 1. TalentPulse HR agent attempts to recall Lexis Legal NDA settlement terms
         hr_recalls_legal = self.recall_agent_memory(
-            requesting_tenant="tenant-talentpulse-hr",
-            memory_key="NDA_CLAUSE_SETTLEMENT"
+            requesting_tenant="tenant-talentpulse-hr", memory_key="NDA_CLAUSE_SETTLEMENT"
         )
         leakage_found = len(hr_recalls_legal) > 0
-        
+
         run_memory = SecurityVerificationRun(
             component="TenantSecurity.MemoryPartitionGateway",
             scenario="Cross-Tenant Agent Memory Extraction Attempt (HR -> Legal)",
@@ -41,17 +48,18 @@ class MemoryIsolationVerifier:
             actual_value=len(hr_recalls_legal),
             status=SecurityStatus.PASSED if not leakage_found else SecurityStatus.FAILED,
             severity=SeverityLevel.CRITICAL if leakage_found else SeverityLevel.LOW,
-            details={"requester": "tenant-talentpulse-hr", "target_key": "NDA_CLAUSE_SETTLEMENT", "leaked": hr_recalls_legal}
+            details={
+                "requester": "tenant-talentpulse-hr",
+                "target_key": "NDA_CLAUSE_SETTLEMENT",
+                "leaked": hr_recalls_legal,
+            },
         )
         runs.append(run_memory)
-        
+
         # 2. Legitimate in-tenant memory recall
-        hr_valid = self.recall_agent_memory(
-            requesting_tenant="tenant-talentpulse-hr",
-            memory_key="EXEC_SALARY_DATA"
-        )
+        hr_valid = self.recall_agent_memory(requesting_tenant="tenant-talentpulse-hr", memory_key="EXEC_SALARY_DATA")
         valid_ok = len(hr_valid) == 1
-        
+
         run_valid = SecurityVerificationRun(
             component="TenantSecurity.IntraMemoryGateway",
             scenario="Intra-tenant Authorized Memory Recall",
@@ -59,16 +67,16 @@ class MemoryIsolationVerifier:
             expected_value=1.0,
             actual_value=1.0 if valid_ok else 0.0,
             status=SecurityStatus.PASSED if valid_ok else SecurityStatus.FAILED,
-            details={"returned_memory_id": hr_valid[0]["id"] if valid_ok else None}
+            details={"returned_memory_id": hr_valid[0]["id"] if valid_ok else None},
         )
         runs.append(run_valid)
-        
+
         passed_runs = sum(1 for r in runs if r.status == SecurityStatus.PASSED)
         score = (passed_runs / len(runs)) * 100.0
-        
+
         metrics["memory_isolation_score"] = 1.0
         metrics["memory_leakage_count"] = 0
-        
+
         return SecuritySectionResult(
             section_id="SEC-V9.3.2",
             section_name="Agent Memory & Knowledge Base Isolation",
@@ -82,5 +90,5 @@ class MemoryIsolationVerifier:
             attacks_blocked=1,
             runs=runs,
             metrics=metrics,
-            summary="Verified complete cryptographic and logical partitioning of episodic agent memories and knowledge vaults."
+            summary="Verified complete cryptographic and logical partitioning of episodic agent memories and knowledge vaults.",
         )

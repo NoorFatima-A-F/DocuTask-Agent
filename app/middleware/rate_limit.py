@@ -22,9 +22,9 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
 
     # Default route rate limits: (max_requests, window_seconds)
     ROUTE_LIMITS: Dict[str, Tuple[int, int]] = {
-        "/api/v1/auth/login": (5, 60),      # 5 requests per minute
+        "/api/v1/auth/login": (5, 60),  # 5 requests per minute
         "/api/v1/auth/register": (10, 60),  # 10 requests per minute
-        "/api/v1/auth/refresh": (20, 60),   # 20 requests per minute
+        "/api/v1/auth/refresh": (20, 60),  # 20 requests per minute
     }
 
     def __init__(self, app):
@@ -50,17 +50,20 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
             account_id = ""
             try:
                 body_bytes = await request.body()
+
                 async def receive():
                     return {"type": "http.request", "body": body_bytes}
+
                 request = Request(request.scope, receive=receive)
                 import json
+
                 parsed = json.loads(body_bytes)
                 account_id = str(parsed.get("username_or_email") or parsed.get("username") or parsed.get("email") or "")
             except Exception:
                 pass
 
             key = f"{client_ip}:{account_id}:{path}" if account_id else f"{client_ip}:{path}"
-            
+
             now = time.time()
             cutoff = now - window_seconds
 
@@ -77,10 +80,14 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
                     len(timestamps),
                     max_requests,
                 )
-                
+
                 response_body = APIResponse.error_response(
                     message="Rate limit exceeded. Please try again later.",
-                    errors={"limit": max_requests, "window_seconds": window_seconds, "retry_after_seconds": retry_after}
+                    errors={
+                        "limit": max_requests,
+                        "window_seconds": window_seconds,
+                        "retry_after_seconds": retry_after,
+                    },
                 ).model_dump()
 
                 return JSONResponse(
@@ -89,8 +96,8 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
                     headers={
                         "Retry-After": str(retry_after),
                         "X-RateLimit-Limit": str(max_requests),
-                        "X-RateLimit-Remaining": "0"
-                    }
+                        "X-RateLimit-Remaining": "0",
+                    },
                 )
 
             # Record current request timestamp

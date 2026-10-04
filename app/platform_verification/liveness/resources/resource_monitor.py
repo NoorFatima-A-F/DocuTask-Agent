@@ -3,6 +3,7 @@ Resource & Memory Health Monitor (Parts 6 & 7).
 Monitors RSS memory, heap usage, memory growth rate (states: NORMAL, WARNING, CRITICAL, UNHEALTHY),
 and CPU saturation vs responsiveness.
 """
+
 from app.platform_verification.liveness.domain.models import ResourceHealthReport
 
 try:
@@ -38,7 +39,7 @@ class ResourceMonitor:
         else:
             mem_state = "NORMAL"
 
-        cpu_throttled = (cpu_pct >= 99.0 and not responsive)
+        cpu_throttled = cpu_pct >= 99.0 and not responsive
         passed = (mem_state in ["NORMAL", "WARNING"]) and not cpu_throttled
 
         return ResourceHealthReport(

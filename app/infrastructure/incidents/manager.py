@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 """
 Incident Manager.
 
@@ -95,7 +96,11 @@ class IncidentManager:
                 content=f"Immediate response required for {components}",
             )
 
-        logger.info("Created incident '%s' with severity %s", sanitize_log_input(incident_id), sanitize_log_input(severity.value))
+        logger.info(
+            "Created incident '%s' with severity %s",
+            sanitize_log_input(incident_id),
+            sanitize_log_input(severity.value),
+        )
         return incident
 
     def get_incident(self, incident_id: str) -> Optional[Incident]:
@@ -161,7 +166,8 @@ class IncidentManager:
 
     def list_active_incidents(self) -> List[Incident]:
         return [
-            inc for inc in self._incidents.values()
+            inc
+            for inc in self._incidents.values()
             if inc.status not in (IncidentStatus.RESOLVED, IncidentStatus.CLOSED)
         ]
 

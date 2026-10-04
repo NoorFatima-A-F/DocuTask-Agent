@@ -23,7 +23,9 @@ class AuditLogBuilder:
                 "actor": "HUMAN_OPERATOR" if "human" in str(event.category).lower() else "SYSTEM",
                 "component": str(event.category.value if hasattr(event.category, "value") else event.category).upper(),
                 "action": str(event.event_type.value if hasattr(event.event_type, "value") else event.event_type),
-                "reason": event.payload.get("rationale", event.payload.get("reason", f"Execution in stage '{event.stage}'")),
+                "reason": event.payload.get(
+                    "rationale", event.payload.get("reason", f"Execution in stage '{event.stage}'")
+                ),
                 "evidence_ids": [event.event_id],
                 "input_payload": event.payload.get("inputs", {}),
                 "output_payload": event.payload.get("outputs", {}),

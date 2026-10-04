@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 class TriggerState(str, Enum):
     """Lifecycle state of an active trigger listener instance."""
+
     REGISTERED = "REGISTERED"
     VALIDATED = "VALIDATED"
     LISTENING = "LISTENING"
@@ -30,6 +31,7 @@ class TriggerState(str, Enum):
 
 class TriggerSubscription(BaseModel):
     """Tenant subscription to an external trigger event stream."""
+
     id: str = Field(default_factory=lambda: f"sub-{uuid.uuid4().hex[:8]}")
     trigger_name: str
     connector_id: str

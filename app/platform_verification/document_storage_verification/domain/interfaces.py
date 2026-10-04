@@ -1,6 +1,7 @@
 """
 Abstract Interfaces for Enterprise Document Storage Backup & Recovery Verification (Part 3G.2C).
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 
@@ -28,17 +29,13 @@ class IStorageInventoryEngine(ABC):
         pass
 
     @abstractmethod
-    def verify_backup_coverage(
-        self, inventory: StorageInventoryReport
-    ) -> StorageBackupCoverageReport:
+    def verify_backup_coverage(self, inventory: StorageInventoryReport) -> StorageBackupCoverageReport:
         pass
 
 
 class IStorageClassificationEngine(ABC):
     @abstractmethod
-    def classify_storage_objects(
-        self, inventory: StorageInventoryReport
-    ) -> StorageClassificationReport:
+    def classify_storage_objects(self, inventory: StorageInventoryReport) -> StorageClassificationReport:
         pass
 
 

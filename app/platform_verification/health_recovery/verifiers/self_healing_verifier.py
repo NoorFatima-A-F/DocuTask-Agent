@@ -1,6 +1,7 @@
 """
 Phase 3H.5.12.6: Self-Healing Workflow Verification
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     SelfHealingScenario,

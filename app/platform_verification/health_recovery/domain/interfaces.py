@@ -1,6 +1,7 @@
 """
 Phase 3H.5.12: Domain Interfaces for Health Recovery Verification Framework
 """
+
 from abc import ABC, abstractmethod
 from .models import (
     HealthStateTransitionReport,

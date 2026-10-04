@@ -90,12 +90,14 @@ class WorkflowEngine:
         t0 = time.perf_counter()
         executed_steps = []
         for node_id, node in workflow.nodes.items():
-            executed_steps.append({
-                "node_id": node_id,
-                "capability": node.capability_name,
-                "status": "SUCCESS",
-                "latency_ms": 32.5,
-            })
+            executed_steps.append(
+                {
+                    "node_id": node_id,
+                    "capability": node.capability_name,
+                    "status": "SUCCESS",
+                    "latency_ms": 32.5,
+                }
+            )
 
         elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 2)
         return {

@@ -34,24 +34,34 @@ def test_incident_lifecycle_transitions():
     assert incident.status == IncidentStatus.DETECTED
 
     # DETECTED -> INVESTIGATING
-    IncidentLifecycleStateMachine.transition(incident, IncidentStatus.INVESTIGATING, actor="oncall", message="Assigned oncall engineer")
+    IncidentLifecycleStateMachine.transition(
+        incident, IncidentStatus.INVESTIGATING, actor="oncall", message="Assigned oncall engineer"
+    )
     assert incident.status == IncidentStatus.INVESTIGATING
 
     # INVESTIGATING -> IDENTIFIED
-    IncidentLifecycleStateMachine.transition(incident, IncidentStatus.IDENTIFIED, actor="oncall", message="Identified memory leak in worker pool")
+    IncidentLifecycleStateMachine.transition(
+        incident, IncidentStatus.IDENTIFIED, actor="oncall", message="Identified memory leak in worker pool"
+    )
     assert incident.status == IncidentStatus.IDENTIFIED
 
     # IDENTIFIED -> MITIGATING
-    IncidentLifecycleStateMachine.transition(incident, IncidentStatus.MITIGATING, actor="oncall", message="Restarting worker pool")
+    IncidentLifecycleStateMachine.transition(
+        incident, IncidentStatus.MITIGATING, actor="oncall", message="Restarting worker pool"
+    )
     assert incident.status == IncidentStatus.MITIGATING
 
     # MITIGATING -> RESOLVED
-    IncidentLifecycleStateMachine.transition(incident, IncidentStatus.RESOLVED, actor="oncall", message="Error rate dropped below threshold")
+    IncidentLifecycleStateMachine.transition(
+        incident, IncidentStatus.RESOLVED, actor="oncall", message="Error rate dropped below threshold"
+    )
     assert incident.status == IncidentStatus.RESOLVED
     assert incident.resolved_at is not None
 
     # RESOLVED -> POSTMORTEM
-    IncidentLifecycleStateMachine.transition(incident, IncidentStatus.POSTMORTEM, actor="sre", message="PIR doc scheduled")
+    IncidentLifecycleStateMachine.transition(
+        incident, IncidentStatus.POSTMORTEM, actor="sre", message="PIR doc scheduled"
+    )
     assert incident.status == IncidentStatus.POSTMORTEM
 
     # POSTMORTEM -> CLOSED

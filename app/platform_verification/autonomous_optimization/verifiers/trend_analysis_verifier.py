@@ -1,6 +1,7 @@
 """
 3H.10.3: Trend Analysis Verifier
 """
+
 from typing import List
 from ..domain.models import MetricTrendTrajectory, TrendAnalysisReport
 from ..domain.interfaces import ITrendAnalysisVerifier
@@ -21,7 +22,7 @@ class TrendAnalysisVerifier(ITrendAnalysisVerifier):
                 growth_rate_per_day_pct=0.15,
                 trajectory_direction="STABLE",
                 seasonality_detected=True,
-                projected_value_30d=355.0
+                projected_value_30d=355.0,
             ),
             MetricTrendTrajectory(
                 metric_name="task_queue_depth_p95",
@@ -31,7 +32,7 @@ class TrendAnalysisVerifier(ITrendAnalysisVerifier):
                 growth_rate_per_day_pct=0.45,
                 trajectory_direction="INCREASING",
                 seasonality_detected=True,
-                projected_value_30d=32.0
+                projected_value_30d=32.0,
             ),
             MetricTrendTrajectory(
                 metric_name="worker_memory_rss_mb",
@@ -41,7 +42,7 @@ class TrendAnalysisVerifier(ITrendAnalysisVerifier):
                 growth_rate_per_day_pct=0.08,
                 trajectory_direction="STABLE",
                 seasonality_detected=False,
-                projected_value_30d=525.0
+                projected_value_30d=525.0,
             ),
             MetricTrendTrajectory(
                 metric_name="vector_db_index_size_gb",
@@ -51,7 +52,7 @@ class TrendAnalysisVerifier(ITrendAnalysisVerifier):
                 growth_rate_per_day_pct=0.35,
                 trajectory_direction="INCREASING",
                 seasonality_detected=False,
-                projected_value_30d=28.0
+                projected_value_30d=28.0,
             ),
             MetricTrendTrajectory(
                 metric_name="redis_cache_eviction_rate_sec",
@@ -61,8 +62,8 @@ class TrendAnalysisVerifier(ITrendAnalysisVerifier):
                 growth_rate_per_day_pct=0.05,
                 trajectory_direction="STABLE",
                 seasonality_detected=True,
-                projected_value_30d=1.6
-            )
+                projected_value_30d=1.6,
+            ),
         ]
 
         return TrendAnalysisReport(
@@ -70,5 +71,5 @@ class TrendAnalysisVerifier(ITrendAnalysisVerifier):
             metrics_analyzed=len(trends),
             trends=trends,
             analysis_time_window="Rolling 60 Days",
-            trend_stability_index=98.8
+            trend_stability_index=98.8,
         )

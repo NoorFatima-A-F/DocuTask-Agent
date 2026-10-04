@@ -146,7 +146,9 @@ class RepeatabilityFramework:
             verdict = f"Passed repeatability audit (R={r_coeff:.3f}, Drift={max_drift_pct:.2f}% <= {max_acceptable_drift_pct}%)."
         elif max_drift_pct <= (max_acceptable_drift_pct * 1.5):
             status = RepeatabilityStatus.MODERATE_DRIFT
-            verdict = f"Moderate cross-run drift observed ({max_drift_pct:.2f}%). Measurements show acceptable variance."
+            verdict = (
+                f"Moderate cross-run drift observed ({max_drift_pct:.2f}%). Measurements show acceptable variance."
+            )
         else:
             status = RepeatabilityStatus.INSTABLE_HIGH_DRIFT
             verdict = f"REJECTED: High cross-run drift ({max_drift_pct:.2f}% > {max_acceptable_drift_pct}%) indicates unstable runtime environment."

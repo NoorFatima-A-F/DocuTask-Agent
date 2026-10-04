@@ -29,7 +29,7 @@ class StatisticalAnomalyDetector:
             if key in normalized_features:
                 val = normalized_features[key]
                 z = (val - mean) / (std + 1e-6)
-                total_sq_z += z ** 2
+                total_sq_z += z**2
                 dims += 1
 
         if dims == 0:

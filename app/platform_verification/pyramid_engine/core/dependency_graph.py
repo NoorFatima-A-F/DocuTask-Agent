@@ -1,6 +1,7 @@
 """
 Strict Progressive Dependency Graph and Gatekeeper for Verification Pyramid.
 """
+
 from __future__ import annotations
 from typing import Dict, List
 from app.platform_verification.pyramid_engine.domain.models import (

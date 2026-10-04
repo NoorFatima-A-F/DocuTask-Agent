@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Reporting.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.reporting.domain.models import ReportingEntity
 from app.platform_verification.modules.reporting.domain.interfaces import ReportingRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageReportingUseCase:
     def __init__(self, repository: ReportingRepositoryInterface):

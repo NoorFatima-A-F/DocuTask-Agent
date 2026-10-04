@@ -2,6 +2,7 @@
 Maturity Assessment Engine for Disaster Recovery Governance Framework (Part 3G.4).
 Evaluates platform disaster recovery maturity across 6 levels (Level 0 Undefined to Level 5 Adaptive).
 """
+
 from app.platform_verification.resilience_governance.domain.models import (
     ResilienceMaturityTier,
     ResilienceMaturityScore,
@@ -54,9 +55,7 @@ class MaturityAssessmentEngine(IMaturityAssessmentEngine):
             "drift_prevention": 100.0 if drift.passed else 50.0,
         }
 
-        composite_score = sum(
-            dim_scores[dim] * self.DIMENSION_WEIGHTS[dim] for dim in self.DIMENSION_WEIGHTS
-        )
+        composite_score = sum(dim_scores[dim] * self.DIMENSION_WEIGHTS[dim] for dim in self.DIMENSION_WEIGHTS)
         composite_score = round(composite_score, 2)
 
         if composite_score >= 95.0:

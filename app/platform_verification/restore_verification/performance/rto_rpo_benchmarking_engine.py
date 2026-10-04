@@ -20,9 +20,9 @@ class RTORPOBenchmarkingEngine(IRTORPOBenchmarkingEngine):
         """
         Calculates end-to-end restoration timeline metrics against enterprise SLAs.
         """
-        measured_rto = 18.5   # 18.5 minutes (Target: <= 45.0 min)
+        measured_rto = 18.5  # 18.5 minutes (Target: <= 45.0 min)
         target_rto = 45.0
-        measured_rpo = 0.0    # 0.0 minutes data loss (Target: <= 5.0 min)
+        measured_rpo = 0.0  # 0.0 minutes data loss (Target: <= 5.0 min)
         target_rpo = 5.0
 
         t_start = "2026-03-15T08:00:00Z"

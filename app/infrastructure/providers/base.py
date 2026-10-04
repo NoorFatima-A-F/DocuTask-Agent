@@ -22,7 +22,9 @@ class ComputeProvider(ABC):
         self.provider_name = provider_name
 
     @abstractmethod
-    def create_instance(self, name: str, image: str, cpu: float, memory_mb: int, env_vars: Optional[Dict[str, str]] = None) -> ProviderInstanceResult:
+    def create_instance(
+        self, name: str, image: str, cpu: float, memory_mb: int, env_vars: Optional[Dict[str, str]] = None
+    ) -> ProviderInstanceResult:
         pass
 
     @abstractmethod

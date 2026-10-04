@@ -49,18 +49,46 @@ class RuntimeDriftDetector:
         current_data: Optional[Dict[str, List[float]]] = None,
     ) -> RuntimeDriftReport:
         # Default representative baseline distributions
-        b_lat = baseline_data.get("latency", [920.0, 940.0, 910.0, 950.0, 930.0]) if baseline_data else [920.0, 940.0, 910.0, 950.0, 930.0]
-        c_lat = current_data.get("latency", [925.0, 942.0, 918.0, 935.0, 928.0]) if current_data else [925.0, 942.0, 918.0, 935.0, 928.0]
+        b_lat = (
+            baseline_data.get("latency", [920.0, 940.0, 910.0, 950.0, 930.0])
+            if baseline_data
+            else [920.0, 940.0, 910.0, 950.0, 930.0]
+        )
+        c_lat = (
+            current_data.get("latency", [925.0, 942.0, 918.0, 935.0, 928.0])
+            if current_data
+            else [925.0, 942.0, 918.0, 935.0, 928.0]
+        )
 
-        b_cost = baseline_data.get("cost", [0.0082, 0.0084, 0.0080, 0.0085]) if baseline_data else [0.0082, 0.0084, 0.0080, 0.0085]
-        c_cost = current_data.get("cost", [0.0083, 0.0085, 0.0081, 0.0084]) if current_data else [0.0083, 0.0085, 0.0081, 0.0084]
+        b_cost = (
+            baseline_data.get("cost", [0.0082, 0.0084, 0.0080, 0.0085])
+            if baseline_data
+            else [0.0082, 0.0084, 0.0080, 0.0085]
+        )
+        c_cost = (
+            current_data.get("cost", [0.0083, 0.0085, 0.0081, 0.0084])
+            if current_data
+            else [0.0083, 0.0085, 0.0081, 0.0084]
+        )
 
-        b_conf = baseline_data.get("confidence", [0.975, 0.980, 0.970, 0.985]) if baseline_data else [0.975, 0.980, 0.970, 0.985]
-        c_conf = current_data.get("confidence", [0.978, 0.982, 0.974, 0.986]) if current_data else [0.978, 0.982, 0.974, 0.986]
+        b_conf = (
+            baseline_data.get("confidence", [0.975, 0.980, 0.970, 0.985])
+            if baseline_data
+            else [0.975, 0.980, 0.970, 0.985]
+        )
+        c_conf = (
+            current_data.get("confidence", [0.978, 0.982, 0.974, 0.986])
+            if current_data
+            else [0.978, 0.982, 0.974, 0.986]
+        )
 
         metrics: List[DriftMetricReport] = []
 
-        for name, b_vals, c_vals in [("Execution Latency (ms)", b_lat, c_lat), ("Cost ($/mission)", b_cost, c_cost), ("Confidence Score", b_conf, c_conf)]:
+        for name, b_vals, c_vals in [
+            ("Execution Latency (ms)", b_lat, c_lat),
+            ("Cost ($/mission)", b_cost, c_cost),
+            ("Confidence Score", b_conf, c_conf),
+        ]:
             b_mean = sum(b_vals) / len(b_vals)
             c_mean = sum(c_vals) / len(c_vals)
             shift_abs = c_mean - b_mean
@@ -69,7 +97,7 @@ class RuntimeDriftDetector:
             # Approximate p-value
             is_drift = abs(shift_pct) > 10.0
             p_val = 0.01 if is_drift else 0.45
-            
+
             if abs(shift_pct) > 20.0:
                 alert = "CRITICAL_REGRESSION"
             elif abs(shift_pct) > 10.0:

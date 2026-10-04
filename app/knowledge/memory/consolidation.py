@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 class ConsolidationReport(BaseModel):
     """Execution summary of memory consolidation batch process."""
+
     items_scanned: int = 0
     items_promoted: int = 0
     items_expired: int = 0

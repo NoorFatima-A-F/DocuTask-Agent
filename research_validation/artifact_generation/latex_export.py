@@ -20,7 +20,9 @@ class LatexExporter:
     def export_table(cls, table: PublicationTable, label: Optional[str] = None) -> str:
         """Render publication table as LaTeX booktabs code."""
         tbl_label = label or f"tab:{table.table_id}"
-        col_aligns = "".join("l" if c.alignment == "left" else "r" if c.alignment == "right" else "c" for c in table.columns)
+        col_aligns = "".join(
+            "l" if c.alignment == "left" else "r" if c.alignment == "right" else "c" for c in table.columns
+        )
 
         lines = [
             f"% LaTeX Table generated for Experiment(s): {', '.join(table.originating_experiment_ids)}",
@@ -49,11 +51,13 @@ class LatexExporter:
                     row_vals.append(str(val))
             lines.append(" & ".join(row_vals) + r" \\")
 
-        lines.extend([
-            r"\bottomrule",
-            r"\end{tabular}",
-            r"\end{table}",
-        ])
+        lines.extend(
+            [
+                r"\bottomrule",
+                r"\end{tabular}",
+                r"\end{table}",
+            ]
+        )
 
         return "\n".join(lines)
 

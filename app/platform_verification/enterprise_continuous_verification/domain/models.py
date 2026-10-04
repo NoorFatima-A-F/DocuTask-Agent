@@ -25,6 +25,7 @@ class GateDecision(str, Enum):
 
 # ─── 1. Change Impact Models (Part 3Q.2) ──────────────────────────────────────
 
+
 class ChangeImpactReport(BaseModel):
     changed_components: List[str] = Field(default_factory=list)
     files_modified: List[str] = Field(default_factory=list)
@@ -34,6 +35,7 @@ class ChangeImpactReport(BaseModel):
 
 
 # ─── 2. Build Artifact Models (Part 3Q.3) ─────────────────────────────────────
+
 
 class BuildArtifactReport(BaseModel):
     image_name: str = "docutask-api"
@@ -46,6 +48,7 @@ class BuildArtifactReport(BaseModel):
 
 
 # ─── 3. Security Gate Models (Part 3Q.4) ──────────────────────────────────────
+
 
 class SecurityGateReport(BaseModel):
     container_scan_status: PipelineStageStatus = PipelineStageStatus.PASSED
@@ -61,12 +64,11 @@ class SecurityGateReport(BaseModel):
 
 # ─── 4. Disposable Test Environment Models (Part 3Q.5, 3Q.6) ──────────────────
 
+
 class DisposableEnvReport(BaseModel):
     environment_id: str = "env-ci-disposable-8492"
     isolation_mode: str = "Isolated Ephemeral Docker Network"
-    services_deployed: List[str] = Field(
-        default_factory=lambda: ["api", "worker", "postgres", "redis", "minio"]
-    )
+    services_deployed: List[str] = Field(default_factory=lambda: ["api", "worker", "postgres", "redis", "minio"])
     startup_duration_sec: float = 3.8
     health_check_status: PipelineStageStatus = PipelineStageStatus.PASSED
     teardown_status: PipelineStageStatus = PipelineStageStatus.PASSED
@@ -74,6 +76,7 @@ class DisposableEnvReport(BaseModel):
 
 
 # ─── 5. Integration Workflow Models (Part 3Q.7) ───────────────────────────────
+
 
 class IntegrationWorkflowReport(BaseModel):
     upload_status: PipelineStageStatus = PipelineStageStatus.PASSED
@@ -88,6 +91,7 @@ class IntegrationWorkflowReport(BaseModel):
 
 # ─── 6. Performance Regression Models (Part 3Q.8) ─────────────────────────────
 
+
 class PerformanceRegressionReport(BaseModel):
     baseline_p95_ms: float = 40.0
     current_p95_ms: float = 42.1
@@ -100,6 +104,7 @@ class PerformanceRegressionReport(BaseModel):
 
 
 # ─── 7. Chaos Pipeline Models (Part 3Q.9) ─────────────────────────────────────
+
 
 class ChaosPipelineReport(BaseModel):
     worker_failure_recovered: bool = True
@@ -114,6 +119,7 @@ class ChaosPipelineReport(BaseModel):
 
 # ─── 8. Infrastructure Drift Models (Part 3Q.14) ──────────────────────────────
 
+
 class InfrastructureDriftReport(BaseModel):
     declared_resources: int = 28
     actual_resources: int = 28
@@ -125,6 +131,7 @@ class InfrastructureDriftReport(BaseModel):
 
 
 # ─── 9. Release Decision & Certificate (Part 3Q.11, 3Q.15) ────────────────────
+
 
 class ReleaseDecision(BaseModel):
     release_version: str = "3.19.0"
@@ -149,6 +156,7 @@ class ProductionReadinessCertificate(BaseModel):
 
 
 # ─── 10. Manifest Models ──────────────────────────────────────────────────────
+
 
 class ManifestEntry(BaseModel):
     filename: str

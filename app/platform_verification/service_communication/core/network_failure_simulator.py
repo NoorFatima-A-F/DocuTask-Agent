@@ -1,6 +1,7 @@
 """
 Network Chaos and Failure Simulator.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.service_communication.domain.models import NetworkFailureReport
 from app.platform_verification.service_communication.domain.interfaces import INetworkFailureSimulator

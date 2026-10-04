@@ -1,6 +1,7 @@
 """
 Phase 3H.5.5: Layer 5 - Stability Window Monitoring Verifier
 """
+
 from ..domain.interfaces import ILayer5StabilityWindowVerifier
 from ..domain.models import StabilityWindowReport
 
@@ -15,7 +16,9 @@ class Layer5StabilityWindowVerifier(ILayer5StabilityWindowVerifier):
         err_spikes = False
         queue_backlog = True
 
-        all_stable = w_5m and w_30m and w_1h and (crashes == 0) and (not mem_leak) and (not err_spikes) and queue_backlog
+        all_stable = (
+            w_5m and w_30m and w_1h and (crashes == 0) and (not mem_leak) and (not err_spikes) and queue_backlog
+        )
 
         return StabilityWindowReport(
             layer_name="Layer 5 - Stability Window Monitoring",

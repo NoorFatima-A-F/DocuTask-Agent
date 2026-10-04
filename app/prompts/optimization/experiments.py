@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class ExperimentStatus(str, enum.Enum):
     """Lifecycle states of a prompt optimization experiment."""
+
     DRAFT = "DRAFT"
     RUNNING = "RUNNING"
     CONCLUDED = "CONCLUDED"
@@ -18,6 +19,7 @@ class ExperimentStatus(str, enum.Enum):
 
 class PromptVariant(BaseModel):
     """Single prompt candidate variant in an A/B experiment."""
+
     variant_id: str  # e.g. "variant_a", "variant_b"
     version_id: str
     traffic_weight: float = 0.5  # 0.0 to 1.0
@@ -29,6 +31,7 @@ class PromptVariant(BaseModel):
 
 class PromptExperiment(BaseModel):
     """A/B prompt optimization experiment container."""
+
     experiment_id: str
     prompt_id: str
     name: str

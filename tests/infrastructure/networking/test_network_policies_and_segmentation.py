@@ -33,37 +33,46 @@ def test_network_policy_cidr_and_namespace_filtering() -> None:
     engine.add_policy(policy)
 
     # Allowed from matching namespace, CIDR, port, protocol
-    assert engine.evaluate_traffic(
-        direction=NetworkPolicyType.INGRESS,
-        source_ip="10.0.1.50",
-        dest_service="ocr-service",
-        dest_namespace="workers",
-        dest_port=8443,
-        protocol="https",
-        source_namespace="ingestion",
-    ) is True
+    assert (
+        engine.evaluate_traffic(
+            direction=NetworkPolicyType.INGRESS,
+            source_ip="10.0.1.50",
+            dest_service="ocr-service",
+            dest_namespace="workers",
+            dest_port=8443,
+            protocol="https",
+            source_namespace="ingestion",
+        )
+        is True
+    )
 
     # Denied due to disallowed source IP CIDR
-    assert engine.evaluate_traffic(
-        direction=NetworkPolicyType.INGRESS,
-        source_ip="192.168.1.100",
-        dest_service="ocr-service",
-        dest_namespace="workers",
-        dest_port=8443,
-        protocol="https",
-        source_namespace="ingestion",
-    ) is False
+    assert (
+        engine.evaluate_traffic(
+            direction=NetworkPolicyType.INGRESS,
+            source_ip="192.168.1.100",
+            dest_service="ocr-service",
+            dest_namespace="workers",
+            dest_port=8443,
+            protocol="https",
+            source_namespace="ingestion",
+        )
+        is False
+    )
 
     # Denied due to disallowed source namespace
-    assert engine.evaluate_traffic(
-        direction=NetworkPolicyType.INGRESS,
-        source_ip="10.0.1.50",
-        dest_service="ocr-service",
-        dest_namespace="workers",
-        dest_port=8443,
-        protocol="https",
-        source_namespace="untrusted-ns",
-    ) is False
+    assert (
+        engine.evaluate_traffic(
+            direction=NetworkPolicyType.INGRESS,
+            source_ip="10.0.1.50",
+            dest_service="ocr-service",
+            dest_namespace="workers",
+            dest_port=8443,
+            protocol="https",
+            source_namespace="untrusted-ns",
+        )
+        is False
+    )
 
 
 def test_egress_policy_manager() -> None:

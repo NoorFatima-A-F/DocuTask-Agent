@@ -90,6 +90,7 @@ class ResourceOwnershipManager:
             return []
 
         return [
-            ident for ident in self._identities.values()
+            ident
+            for ident in self._identities.values()
             if ident.resource_type == resource_type and ident.organization_id == ctx.organization_id
         ]

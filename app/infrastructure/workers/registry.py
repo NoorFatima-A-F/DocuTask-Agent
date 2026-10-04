@@ -93,10 +93,7 @@ class WorkerRegistry:
             if status:
                 results = [w for w in results if w.status == status]
             if tenant_id:
-                results = [
-                    w for w in results
-                    if not w.tenant_restrictions or tenant_id in w.tenant_restrictions
-                ]
+                results = [w for w in results if not w.tenant_restrictions or tenant_id in w.tenant_restrictions]
             return results
 
     def find_eligible_workers(

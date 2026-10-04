@@ -18,6 +18,7 @@ class GoalStatus(str, Enum):
 
 class PlanGoal(BaseModel):
     """Goal definition within a planning hierarchy."""
+
     goal_id: str
     name: str
     description: str = Field(default="")
@@ -30,4 +31,5 @@ class PlanGoal(BaseModel):
 
 class StrategicGoal(PlanGoal):
     """High-level strategic goal decomposing into operational subgoals."""
+
     subgoal_ids: List[str] = Field(default_factory=list)

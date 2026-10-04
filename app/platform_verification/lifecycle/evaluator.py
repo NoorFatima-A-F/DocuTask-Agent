@@ -3,6 +3,7 @@ from typing import Dict, List
 from .metric_pipeline import ComputedMetric
 from .definitions import VerificationSpecification
 
+
 @dataclass(frozen=True)
 class EvaluationCriterionResult:
     metric_name: str
@@ -12,6 +13,7 @@ class EvaluationCriterionResult:
     passed: bool
     is_hard_blocker: bool
 
+
 @dataclass(frozen=True)
 class IndependentEvaluationResult:
     specification_id: str
@@ -19,6 +21,7 @@ class IndependentEvaluationResult:
     quality_score: float
     criteria_results: List[EvaluationCriterionResult]
     recommendations: List[str]
+
 
 class IndependentEvaluationEngine:
     @staticmethod
@@ -49,14 +52,16 @@ class IndependentEvaluationEngine:
             elif rule.is_hard_blocker:
                 overall_passed = False
 
-            criteria_results.append(EvaluationCriterionResult(
-                metric_name=rule.metric_name,
-                actual_value=actual,
-                threshold=rule.threshold,
-                operator=rule.operator,
-                passed=passed,
-                is_hard_blocker=rule.is_hard_blocker
-            ))
+            criteria_results.append(
+                EvaluationCriterionResult(
+                    metric_name=rule.metric_name,
+                    actual_value=actual,
+                    threshold=rule.threshold,
+                    operator=rule.operator,
+                    passed=passed,
+                    is_hard_blocker=rule.is_hard_blocker,
+                )
+            )
 
         score = passed_rules / max(1, total_rules)
         recs = [] if overall_passed else ["Tune model extraction prompts to improve precision", "Optimize IO latency"]
@@ -66,5 +71,5 @@ class IndependentEvaluationEngine:
             overall_passed=overall_passed,
             quality_score=score,
             criteria_results=criteria_results,
-            recommendations=recs
+            recommendations=recs,
         )

@@ -10,7 +10,7 @@ from app.validation.schemas import MetricEvaluationResult, RegressionComparison
 class RegressionEngine:
     """Engine comparing evaluation metrics against baseline to detect regressions."""
 
-    MINOR_THRESHOLD = 0.02    # 2% drop
+    MINOR_THRESHOLD = 0.02  # 2% drop
     WARNING_THRESHOLD = 0.05  # 5% drop
 
     @classmethod
@@ -19,7 +19,7 @@ class RegressionEngine:
         current_metrics: MetricEvaluationResult,
         baseline_accuracy: float = 0.95,
         baseline_version: str = "v1.0_baseline",
-        current_version: str = "v1.1_candidate"
+        current_version: str = "v1.1_candidate",
     ) -> RegressionComparison:
         """
         Compares current evaluation field accuracy against baseline accuracy.
@@ -55,6 +55,6 @@ class RegressionEngine:
                 "precision": current_metrics.precision,
                 "recall": current_metrics.recall,
                 "f1_score": current_metrics.f1_score,
-                "hallucination_rate": current_metrics.hallucination_rate
-            }
+                "hallucination_rate": current_metrics.hallucination_rate,
+            },
         )

@@ -25,11 +25,41 @@ class CrossSystemPerformanceVerifier(ICrossSystemPerformanceVerifier):
 
     def verify(self) -> CrossSystemPerformanceReport:
         metrics = [
-            CrossSystemPerformanceMetric(interaction_surface="GatewayToPlanner", latency_p95_ms=18.4, memory_delta_mb=2.4, token_amplification_ratio=1.05, serialization_overhead_pct=1.2),
-            CrossSystemPerformanceMetric(interaction_surface="PlannerToWorkerPool", latency_p95_ms=24.2, memory_delta_mb=4.8, token_amplification_ratio=1.10, serialization_overhead_pct=1.8),
-            CrossSystemPerformanceMetric(interaction_surface="WorkerToKnowledgeRAG", latency_p95_ms=42.0, memory_delta_mb=8.5, token_amplification_ratio=1.25, serialization_overhead_pct=2.1),
-            CrossSystemPerformanceMetric(interaction_surface="WorkerToMemoryTiers", latency_p95_ms=12.1, memory_delta_mb=3.1, token_amplification_ratio=1.02, serialization_overhead_pct=0.8),
-            CrossSystemPerformanceMetric(interaction_surface="WorkerToPostgreSQLDB", latency_p95_ms=15.5, memory_delta_mb=1.8, token_amplification_ratio=1.00, serialization_overhead_pct=0.9),
+            CrossSystemPerformanceMetric(
+                interaction_surface="GatewayToPlanner",
+                latency_p95_ms=18.4,
+                memory_delta_mb=2.4,
+                token_amplification_ratio=1.05,
+                serialization_overhead_pct=1.2,
+            ),
+            CrossSystemPerformanceMetric(
+                interaction_surface="PlannerToWorkerPool",
+                latency_p95_ms=24.2,
+                memory_delta_mb=4.8,
+                token_amplification_ratio=1.10,
+                serialization_overhead_pct=1.8,
+            ),
+            CrossSystemPerformanceMetric(
+                interaction_surface="WorkerToKnowledgeRAG",
+                latency_p95_ms=42.0,
+                memory_delta_mb=8.5,
+                token_amplification_ratio=1.25,
+                serialization_overhead_pct=2.1,
+            ),
+            CrossSystemPerformanceMetric(
+                interaction_surface="WorkerToMemoryTiers",
+                latency_p95_ms=12.1,
+                memory_delta_mb=3.1,
+                token_amplification_ratio=1.02,
+                serialization_overhead_pct=0.8,
+            ),
+            CrossSystemPerformanceMetric(
+                interaction_surface="WorkerToPostgreSQLDB",
+                latency_p95_ms=15.5,
+                memory_delta_mb=1.8,
+                token_amplification_ratio=1.00,
+                serialization_overhead_pct=0.9,
+            ),
         ]
 
         checks = [

@@ -33,7 +33,9 @@ class AgentProfile:
 
     def increment_load(self) -> None:
         if not self.can_accept_task():
-            raise RuntimeError(f"Agent {self.agent_id} cannot accept more load ({self.current_load}/{self.max_concurrency})")
+            raise RuntimeError(
+                f"Agent {self.agent_id} cannot accept more load ({self.current_load}/{self.max_concurrency})"
+            )
         self.current_load += 1
 
     def decrement_load(self) -> None:

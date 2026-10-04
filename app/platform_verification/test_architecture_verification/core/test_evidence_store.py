@@ -1,6 +1,7 @@
 """
 Immutable Evidence Store for Test Architecture Verification.
 """
+
 import hashlib
 from typing import Dict, Optional
 from app.platform_verification.test_architecture_verification.domain.models import TestArchitectureEvidencePackage
@@ -9,6 +10,7 @@ from app.platform_verification.test_architecture_verification.domain.interfaces 
 
 class TestEvidenceStore(ITestEvidenceStore):
     """Persists and seals test architecture verification evidence with SHA-256."""
+
     __test__ = False
 
     def __init__(self):

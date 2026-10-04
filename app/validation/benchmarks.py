@@ -15,11 +15,7 @@ class ReproducibilityEngine:
 
     @classmethod
     async def evaluate_reproducibility(
-        cls,
-        provider: LLMProvider,
-        ocr_text: str,
-        document_type: str,
-        iterations: int = 3
+        cls, provider: LLMProvider, ocr_text: str, document_type: str, iterations: int = 3
     ) -> Dict[str, Any]:
         """
         Executes iterations identical runs and measures output consistency.
@@ -32,9 +28,7 @@ class ReproducibilityEngine:
 
         for idx in range(iterations):
             parsed_dict, raw_text, in_tok, out_tok = await provider.generate_json(
-                prompt=prompt,
-                json_schema=json_schema,
-                system_instruction=system_instruction
+                prompt=prompt, json_schema=json_schema, system_instruction=system_instruction
             )
             validated_dict, _ = AIValidator.validate(parsed_dict, document_type)
             results.append(validated_dict)
@@ -47,7 +41,9 @@ class ReproducibilityEngine:
         identical_runs = sum(1 for r in results if r == results[0])
         consistency_rate = round(identical_runs / iterations, 4)
 
-        logger.info(f"Reproducibility profiling completed: Iterations={iterations}, ConsistencyRate={consistency_rate * 100}%")
+        logger.info(
+            f"Reproducibility profiling completed: Iterations={iterations}, ConsistencyRate={consistency_rate * 100}%"
+        )
 
         return {
             "iterations": iterations,
@@ -55,5 +51,5 @@ class ReproducibilityEngine:
             "consistency_rate": consistency_rate,
             "key_structure_match": key_matches,
             "is_fully_reproducible": consistency_rate == 1.0,
-            "sample_output": results[0]
+            "sample_output": results[0],
         }

@@ -1,17 +1,23 @@
 """
 Interfaces and Contracts for Enterprise Verification Dataset Architecture.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional, Tuple
 from app.platform_verification.dataset_governance.domain.models import (
-    DatasetMetadata, DatasetSample, GroundTruthAnnotation, DatasetQualityReport,
-    DatasetCategory
+    DatasetMetadata,
+    DatasetSample,
+    GroundTruthAnnotation,
+    DatasetQualityReport,
+    DatasetCategory,
 )
 
 
 class DatasetRegistryInterface(ABC):
     @abstractmethod
-    def register_dataset(self, metadata: DatasetMetadata, samples: List[DatasetSample], annotations: List[GroundTruthAnnotation]) -> None:
+    def register_dataset(
+        self, metadata: DatasetMetadata, samples: List[DatasetSample], annotations: List[GroundTruthAnnotation]
+    ) -> None:
         pass
 
     @abstractmethod
@@ -31,7 +37,9 @@ class DatasetValidatorInterface(ABC):
 
 class DatasetQualityEngineInterface(ABC):
     @abstractmethod
-    def evaluate_quality(self, dataset_id: str, samples: List[DatasetSample], annotations: List[GroundTruthAnnotation]) -> DatasetQualityReport:
+    def evaluate_quality(
+        self, dataset_id: str, samples: List[DatasetSample], annotations: List[GroundTruthAnnotation]
+    ) -> DatasetQualityReport:
         pass
 
 

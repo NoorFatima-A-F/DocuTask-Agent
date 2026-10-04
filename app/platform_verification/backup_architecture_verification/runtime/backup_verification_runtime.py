@@ -2,6 +2,7 @@
 Unified Runtime Orchestrator for Enterprise Backup Architecture Verification (Part 3G.2A).
 Coordinates all 14 verification engines and generates enterprise certification scorecards.
 """
+
 import time
 from typing import Dict, Any, Optional
 
@@ -91,9 +92,7 @@ class BackupArchitectureVerificationRuntime:
         )
         self.scoring_engine = ReadinessScoringEngine()
 
-    def run_full_verification(
-        self, export_evidence: bool = True, output_dir: Optional[str] = None
-    ) -> Dict[str, Any]:
+    def run_full_verification(self, export_evidence: bool = True, output_dir: Optional[str] = None) -> Dict[str, Any]:
         start_time = time.perf_counter()
 
         # 1. Asset Discovery (10% weight)

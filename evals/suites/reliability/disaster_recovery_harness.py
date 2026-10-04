@@ -6,6 +6,7 @@ Simulates cross-region failover, state migration, and data loss prevention.
 from typing import Dict, Any
 from app.runtime.distributed import DisasterRecoveryEngine, RegionName
 
+
 class DisasterRecoveryHarness:
     """Executes multi-region failover and recovery drills."""
 

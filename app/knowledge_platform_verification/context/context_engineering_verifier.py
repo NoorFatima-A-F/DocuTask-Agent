@@ -106,7 +106,7 @@ class ContextEngineeringVerifier:
         t0 = time.perf_counter()
         raw_text = "Please note that pursuant to the agreed upon terms between the parties, the total cost is $500."
         compact_text = "Terms: Total cost is $500."
-        
+
         ratio = len(compact_text) / len(raw_text)
         passed = "$500" in compact_text and ratio < 0.5
         t_elapsed = (time.perf_counter() - t0) * 1000.0
@@ -115,7 +115,7 @@ class ContextEngineeringVerifier:
             "assertion": AssertionResult(
                 name="Semantic_Compaction_And_Boilerplate_Pruning",
                 passed=passed,
-                message=f"Context compressor pruned boilerplate text by {(1-ratio)*100:.1f}% while preserving critical financial entity.",
+                message=f"Context compressor pruned boilerplate text by {(1 - ratio) * 100:.1f}% while preserving critical financial entity.",
                 execution_time_ms=t_elapsed,
                 details={"compression_ratio": round(ratio, 2)},
             ),
@@ -128,7 +128,7 @@ class ContextEngineeringVerifier:
             "Do not disclose confidential client names.",
             "Always cite the source document reference ID.",
         ]
-        
+
         # Context assembler injects constraints into system preamble
         assembled_prompt = f"SYSTEM INSTRUCTIONS:\n- {constraints[0]}\n- {constraints[1]}\n\nCONTEXT:\n..."
         injected = all(c in assembled_prompt for c in constraints)
@@ -153,7 +153,9 @@ class ContextEngineeringVerifier:
             "[Source: PO_991.pdf | Page 1]: Total amount is $12,000."
         )
 
-        has_citations = "[Source: MSA_2026.pdf | Page 3]" in context_block and "[Source: PO_991.pdf | Page 1]" in context_block
+        has_citations = (
+            "[Source: MSA_2026.pdf | Page 3]" in context_block and "[Source: PO_991.pdf | Page 1]" in context_block
+        )
         passed = has_citations is True
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 

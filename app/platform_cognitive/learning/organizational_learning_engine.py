@@ -2,8 +2,10 @@
 Organizational Learning Engine
 Discovers best practices across agent execution histories, pattern mining, policy updates, and capability distillation.
 """
+
 from typing import Dict, List, Any
 from datetime import datetime, timezone
+
 
 class OrganizationalLearningEngine:
     def __init__(self):
@@ -18,7 +20,7 @@ class OrganizationalLearningEngine:
             "observation": "Agent B completed 3,000 runs 42% faster by utilizing parallel OCR regex passes.",
             "action": "DISTILL_BEST_PRACTICE",
             "recommended_policy": "Propagate parallel regex preprocessing to all 12 invoice agent pods.",
-            "discovered_at": datetime.now(timezone.utc).isoformat()
+            "discovered_at": datetime.now(timezone.utc).isoformat(),
         }
         self._learned_insights.append(insight)
         return insight

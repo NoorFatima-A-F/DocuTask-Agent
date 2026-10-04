@@ -45,7 +45,11 @@ class PerformanceRecoveryVerifier(IPerformanceVerifier):
                 name="Backlog Queue Drain Velocity",
                 passed=drain_time_sec <= 60.0,
                 details=f"Cleared {peak_backlog:,} queued tasks in {drain_time_sec}s ({drain_rate_docs_per_sec} docs/sec) after burst ended",
-                metrics={"peak_backlog": peak_backlog, "drain_time_sec": drain_time_sec, "drain_rate_docs_per_sec": drain_rate_docs_per_sec},
+                metrics={
+                    "peak_backlog": peak_backlog,
+                    "drain_time_sec": drain_time_sec,
+                    "drain_rate_docs_per_sec": drain_rate_docs_per_sec,
+                },
             )
         )
 
@@ -58,7 +62,11 @@ class PerformanceRecoveryVerifier(IPerformanceVerifier):
                 name="Latency Normalization & MTTR (Mean Time to Recover)",
                 passed=mttr_seconds <= 60.0 and post_stress_p95_ms <= baseline_p95_ms * 1.15,
                 details=f"API latency returned to baseline ({post_stress_p95_ms}ms vs {baseline_p95_ms}ms) in {mttr_seconds}s (MTTR threshold: < 60s)",
-                metrics={"mttr_seconds": mttr_seconds, "post_stress_p95_ms": post_stress_p95_ms, "baseline_p95_ms": baseline_p95_ms},
+                metrics={
+                    "mttr_seconds": mttr_seconds,
+                    "post_stress_p95_ms": post_stress_p95_ms,
+                    "baseline_p95_ms": baseline_p95_ms,
+                },
             )
         )
 

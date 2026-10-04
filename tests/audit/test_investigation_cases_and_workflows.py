@@ -22,15 +22,25 @@ def test_investigation_case_lifecycle():
     assert case.state == CaseLifecycleState.OPEN
 
     # Transition: OPEN -> TRIAGED
-    c1 = mgr.transition_state(case.case_id, CaseLifecycleState.TRIAGED, actor="lead_secops", notes="Assigned severity critical", tenant_id="tenant_inv")
+    c1 = mgr.transition_state(
+        case.case_id,
+        CaseLifecycleState.TRIAGED,
+        actor="lead_secops",
+        notes="Assigned severity critical",
+        tenant_id="tenant_inv",
+    )
     assert c1.state == CaseLifecycleState.TRIAGED
 
     # Transition: TRIAGED -> INVESTIGATING
-    c2 = mgr.transition_state(case.case_id, CaseLifecycleState.INVESTIGATING, actor="lead_secops", tenant_id="tenant_inv")
+    c2 = mgr.transition_state(
+        case.case_id, CaseLifecycleState.INVESTIGATING, actor="lead_secops", tenant_id="tenant_inv"
+    )
     assert c2.state == CaseLifecycleState.INVESTIGATING
 
     # Transition: INVESTIGATING -> EVIDENCE_COLLECTED
-    c3 = mgr.transition_state(case.case_id, CaseLifecycleState.EVIDENCE_COLLECTED, actor="lead_secops", tenant_id="tenant_inv")
+    c3 = mgr.transition_state(
+        case.case_id, CaseLifecycleState.EVIDENCE_COLLECTED, actor="lead_secops", tenant_id="tenant_inv"
+    )
     assert c3.state == CaseLifecycleState.EVIDENCE_COLLECTED
 
     # Transition: EVIDENCE_COLLECTED -> RESOLVED

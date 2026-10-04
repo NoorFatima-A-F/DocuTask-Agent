@@ -27,13 +27,17 @@ class ExternalReviewPackageExporterV2:
         out_path.mkdir(parents=True, exist_ok=True)
 
         # 1. certificate.json
-        (out_path / "certificate.json").write_text(json.dumps(certificate_data, indent=2, sort_keys=True), encoding="utf-8")
+        (out_path / "certificate.json").write_text(
+            json.dumps(certificate_data, indent=2, sort_keys=True), encoding="utf-8"
+        )
 
         # 2. public_key.pem
         (out_path / "public_key.pem").write_text(public_key_pem, encoding="utf-8")
 
         # 3. merkle_root.json
-        (out_path / "merkle_root.json").write_text(json.dumps(merkle_manifest_data, indent=2, sort_keys=True), encoding="utf-8")
+        (out_path / "merkle_root.json").write_text(
+            json.dumps(merkle_manifest_data, indent=2, sort_keys=True), encoding="utf-8"
+        )
 
         # 4. evidence/ directory
         target_ev = out_path / "evidence"
@@ -50,15 +54,21 @@ class ExternalReviewPackageExporterV2:
                 if f.is_file():
                     shutil.copy2(f, target_logs / f.name)
         else:
-            (target_logs / "execution_summary.log").write_text(f"Audit executed at {datetime.now(timezone.utc).isoformat()}", encoding="utf-8")
+            (target_logs / "execution_summary.log").write_text(
+                f"Audit executed at {datetime.now(timezone.utc).isoformat()}", encoding="utf-8"
+            )
 
         # 6. benchmark_results.json
         bench_data = benchmark_report_data or {"status": "BENCHMARK_CALIBRATED", "accuracy": 100.0}
-        (out_path / "benchmark_results.json").write_text(json.dumps(bench_data, indent=2, sort_keys=True), encoding="utf-8")
+        (out_path / "benchmark_results.json").write_text(
+            json.dumps(bench_data, indent=2, sort_keys=True), encoding="utf-8"
+        )
 
         # 7. contradiction_report.json
         con_data = contradiction_report_data or {"has_contradictions": False, "status": "NO_CONTRADICTIONS"}
-        (out_path / "contradiction_report.json").write_text(json.dumps(con_data, indent=2, sort_keys=True), encoding="utf-8")
+        (out_path / "contradiction_report.json").write_text(
+            json.dumps(con_data, indent=2, sort_keys=True), encoding="utf-8"
+        )
 
         # 8. trust_score.json
         t_data = trust_score_data or {"overall_trust_score": 94.8, "trust_level": "ENTERPRISE_VERIFIED"}
@@ -119,5 +129,5 @@ if __name__ == "__main__":
                 "trust_score.json",
                 "reproduction_script.py",
                 "verification_cli.py",
-            ]
+            ],
         }

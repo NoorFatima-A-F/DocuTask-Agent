@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Reporting.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.reporting.domain.models import ReportingEntity
+
 
 class ReportingRepositoryInterface(ABC):
     @abstractmethod

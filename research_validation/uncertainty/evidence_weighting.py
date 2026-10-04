@@ -135,14 +135,13 @@ class DynamicEvidenceWeightEngine:
         is_robust = spread < 0.20
 
         elasticities = {
-            lvl.value: (quality_counts.get(lvl, 0) / total_items) * weights[lvl]
-            for lvl in EvidenceQualityLevel
+            lvl.value: (quality_counts.get(lvl, 0) / total_items) * weights[lvl] for lvl in EvidenceQualityLevel
         }
 
         rec = (
             "Readiness score is resilient to weight perturbations (spread < 0.20)."
-            if is_robust else
-            "High sensitivity to evidence weights! Increase sample counts for lower tiers."
+            if is_robust
+            else "High sensitivity to evidence weights! Increase sample counts for lower tiers."
         )
 
         return WeightSensitivityReport(

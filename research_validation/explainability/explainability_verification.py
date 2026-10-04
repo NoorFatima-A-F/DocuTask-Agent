@@ -20,12 +20,13 @@ from typing import Callable, List, Tuple
 @dataclass
 class ExplanationFidelityMetricSuite:
     """Metrics quantifying if an explanation is causally correct."""
+
     sample_id: str
     audc: float
     auic: float
     comprehensiveness: float  # f(x) - f(x \ e)
-    sufficiency: float        # f(x) - f(e)
-    infidelity_score: float   # Mean squared difference between attribution and actual prediction change
+    sufficiency: float  # f(x) - f(e)
+    infidelity_score: float  # Mean squared difference between attribution and actual prediction change
     sensitivity_gradient: float
     is_faithful: bool
     verdict: str  # "HIGH_FIDELITY", "PLAUSIBLE_BUT_UNFAITHFUL", "DEGENERATE"
@@ -34,6 +35,7 @@ class ExplanationFidelityMetricSuite:
 @dataclass
 class ExplainabilityVerificationReport:
     """Consolidated explainability fidelity report."""
+
     total_samples_evaluated: int
     faithful_samples_count: int
     mean_comprehensiveness: float
@@ -55,11 +57,7 @@ class ExplainabilityVerificationLab:
 
     @classmethod
     def evaluate_explanation(
-        cls,
-        sample_id: str,
-        full_text: str,
-        attributed_tokens: List[str],
-        scorer_fn: Callable[[str], float]
+        cls, sample_id: str, full_text: str, attributed_tokens: List[str], scorer_fn: Callable[[str], float]
     ) -> ExplanationFidelityMetricSuite:
         """
         Evaluate faithfulness metrics on a single sample and its attributed explanation tokens.
@@ -100,14 +98,12 @@ class ExplainabilityVerificationLab:
             infidelity_score=infidelity,
             sensitivity_gradient=0.05,
             is_faithful=is_faithful,
-            verdict=verdict
+            verdict=verdict,
         )
 
     @classmethod
     def run_verification_battery(
-        cls,
-        samples: List[Tuple[str, str, List[str]]],
-        scorer_fn: Callable[[str], float]
+        cls, samples: List[Tuple[str, str, List[str]]], scorer_fn: Callable[[str], float]
     ) -> ExplainabilityVerificationReport:
         """Run full explainability evaluation across test cases."""
         if not samples:
@@ -122,7 +118,7 @@ class ExplainabilityVerificationLab:
                 assumptions=["Sample explanations provided"],
                 limitations=["No samples submitted"],
                 reproducibility_instructions="Provide non-empty list of (sample_id, text, explanation_tokens)",
-                overall_status="FAILED"
+                overall_status="FAILED",
             )
 
         evals = [cls.evaluate_explanation(s_id, text, attrs, scorer_fn) for s_id, text, attrs in samples]
@@ -145,12 +141,12 @@ class ExplainabilityVerificationLab:
             evaluations=evals,
             assumptions=[
                 "Model score function f(x) is deterministic and returns continuous confidence in [0, 1]",
-                "Token deletion preserves natural syntactic word boundaries"
+                "Token deletion preserves natural syntactic word boundaries",
             ],
             methodology="Axiomatic explanation verification measuring deletion drop (comprehensiveness) and isolated sufficiency.",
             limitations=[
                 "Out-of-distribution artifacts induced by [MASK] tokens may slightly distort language model latent states"
             ],
             reproducibility_instructions="Execute ExplainabilityVerificationLab.run_verification_battery() with evaluation set.",
-            overall_status=status
+            overall_status=status,
         )

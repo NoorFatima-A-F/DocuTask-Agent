@@ -14,6 +14,7 @@ from typing import List
 @dataclass(frozen=True)
 class PublicationDiffItem:
     """A specific change between two publication versions."""
+
     section: str
     item_key: str
     old_value: str
@@ -25,6 +26,7 @@ class PublicationDiffItem:
 @dataclass(frozen=True)
 class PublicationEvolutionReport:
     """Consolidated summary of publication evolution."""
+
     from_version: str
     to_version: str
     changes: List[PublicationDiffItem]

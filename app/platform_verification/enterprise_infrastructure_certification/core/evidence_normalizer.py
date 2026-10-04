@@ -28,28 +28,79 @@ class EvidenceNormalizer(IEvidenceNormalizer):
 
     CATEGORY_PATTERNS = {
         "Reliability": [
-            r"chaos", r"resilience", r"health", r"liveness", r"failover",
-            r"3k", r"3h", r"availability", r"worker_rel"
+            r"chaos",
+            r"resilience",
+            r"health",
+            r"liveness",
+            r"failover",
+            r"3k",
+            r"3h",
+            r"availability",
+            r"worker_rel",
         ],
         "Security": [
-            r"security", r"secret", r"iam", r"rbac", r"network_sec", r"mtls",
-            r"vulnerability", r"cve", r"supply_chain", r"3n", r"threat", r"ai_sec"
+            r"security",
+            r"secret",
+            r"iam",
+            r"rbac",
+            r"network_sec",
+            r"mtls",
+            r"vulnerability",
+            r"cve",
+            r"supply_chain",
+            r"3n",
+            r"threat",
+            r"ai_sec",
         ],
         "Scalability": [
-            r"performance", r"capacity", r"throughput", r"latency", r"autoscaling",
-            r"load", r"stress", r"soak", r"3j", r"worker_eff", r"bottleneck"
+            r"performance",
+            r"capacity",
+            r"throughput",
+            r"latency",
+            r"autoscaling",
+            r"load",
+            r"stress",
+            r"soak",
+            r"3j",
+            r"worker_eff",
+            r"bottleneck",
         ],
         "Observability": [
-            r"observability", r"logging", r"tracing", r"metrics", r"telemetry",
-            r"alert", r"3i", r"siem", r"grafana", r"prometheus"
+            r"observability",
+            r"logging",
+            r"tracing",
+            r"metrics",
+            r"telemetry",
+            r"alert",
+            r"3i",
+            r"siem",
+            r"grafana",
+            r"prometheus",
         ],
         "Deployment Quality": [
-            r"deploy", r"iac", r"terraform", r"helm", r"cicd", r"cloud_readiness",
-            r"3m", r"3g", r"3b", r"environment", r"migration"
+            r"deploy",
+            r"iac",
+            r"terraform",
+            r"helm",
+            r"cicd",
+            r"cloud_readiness",
+            r"3m",
+            r"3g",
+            r"3b",
+            r"environment",
+            r"migration",
         ],
         "Recovery Capability": [
-            r"backup", r"disaster", r"recovery", r"restore", r"pitr", r"bcp",
-            r"rto", r"rpo", r"3l", r"storage_backup"
+            r"backup",
+            r"disaster",
+            r"recovery",
+            r"restore",
+            r"pitr",
+            r"bcp",
+            r"rto",
+            r"rpo",
+            r"3l",
+            r"storage_backup",
         ],
     }
 
@@ -106,7 +157,9 @@ class EvidenceNormalizer(IEvidenceNormalizer):
                     # Fallback: Treat the whole report as a single item
                     raw_score = float(payload.get("score", 100.0))
                     status_val = payload.get("status", "PASSED")
-                    status = VerificationStatus.PASSED if "PASS" in str(status_val).upper() else VerificationStatus.FAILED
+                    status = (
+                        VerificationStatus.PASSED if "PASS" in str(status_val).upper() else VerificationStatus.FAILED
+                    )
                     severity = RiskLevel.NONE if status == VerificationStatus.PASSED else RiskLevel.HIGH
 
                     normalized_items.append(

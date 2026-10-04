@@ -14,6 +14,7 @@ from app.agents.planning.nodes import PlanNode
 
 class ExecutionNode(BaseModel):
     """Runtime wrapper around a PlanNode maintaining execution lifecycle state and output artifacts."""
+
     node: PlanNode
     state: ExecutionLifecycleState = Field(default=ExecutionLifecycleState.CREATED)
     assigned_worker_id: Optional[str] = Field(default=None)
@@ -32,8 +33,7 @@ class ExecutionGraph:
         self.graph_id = plan_graph.graph_id
         self.plan_graph = plan_graph
         self.nodes: Dict[str, ExecutionNode] = {
-            node_id: ExecutionNode(node=node)
-            for node_id, node in plan_graph.nodes.items()
+            node_id: ExecutionNode(node=node) for node_id, node in plan_graph.nodes.items()
         }
         self.edges: List[PlanEdge] = list(plan_graph.edges)
 
@@ -51,7 +51,7 @@ class ExecutionGraph:
         node_id: str,
         state: ExecutionLifecycleState,
         outputs: Optional[Dict[str, Any]] = None,
-        error_message: Optional[str] = None
+        error_message: Optional[str] = None,
     ) -> None:
         node = self.nodes.get(node_id)
         if node:

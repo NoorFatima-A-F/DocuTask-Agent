@@ -47,7 +47,9 @@ class WorkspaceManager:
         if not ws:
             raise WorkspaceNotFoundError(f"Workspace '{workspace_id}' not found")
         if organization_id and ws.organization_id != organization_id:
-            raise WorkspaceNotFoundError(f"Workspace '{workspace_id}' does not belong to organization '{organization_id}'")
+            raise WorkspaceNotFoundError(
+                f"Workspace '{workspace_id}' does not belong to organization '{organization_id}'"
+            )
         return ws
 
     def list_workspaces(self, organization_id: str) -> List[Workspace]:

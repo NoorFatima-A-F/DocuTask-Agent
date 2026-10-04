@@ -1,6 +1,7 @@
 """
 Unit and Integration Tests for Phase 3H.5.11: Health Quality Scoring & Operational Certification Framework
 """
+
 import os
 import json
 import pytest
@@ -121,9 +122,15 @@ class TestHealthQualityCertification:
         detector = RegressionDetector()
         clean_reg_report = detector.detect_regression(
             current_scores={
-                "liveness": 99.0, "readiness": 98.5, "dependencies": 99.5,
-                "failure_detection": 97.5, "recovery": 96.0, "monitoring": 98.5,
-                "security": 100.0, "evidence": 100.0, "overall": 98.4,
+                "liveness": 99.0,
+                "readiness": 98.5,
+                "dependencies": 99.5,
+                "failure_detection": 97.5,
+                "recovery": 96.0,
+                "monitoring": 98.5,
+                "security": 100.0,
+                "evidence": 100.0,
+                "overall": 98.4,
             }
         )
 
@@ -171,9 +178,15 @@ class TestHealthQualityCertification:
         sre = sre_engine.calculate_reliability_metrics()
         reg = reg_detector.detect_regression(
             current_scores={
-                "liveness": l.score, "readiness": r.score, "dependencies": d.score,
-                "failure_detection": fd.score, "recovery": rec.score, "monitoring": m.score,
-                "security": sec.score, "evidence": ev.score, "overall": 98.4,
+                "liveness": l.score,
+                "readiness": r.score,
+                "dependencies": d.score,
+                "failure_detection": fd.score,
+                "recovery": rec.score,
+                "monitoring": m.score,
+                "security": sec.score,
+                "evidence": ev.score,
+                "overall": 98.4,
             }
         )
         gate = gatekeeper.evaluate_deployment_gate(
@@ -226,15 +239,27 @@ class TestHealthQualityCertification:
         sre = sre_engine.calculate_reliability_metrics()
         reg = reg_detector.detect_regression(current_scores={"overall": 95.0})
         gate = gatekeeper.evaluate_deployment_gate(
-            overall_score=95.0, liveness_score=l.score, readiness_score=r.score,
-            security_score=sec.score, failure_detection_score=fd.score,
-            sre_metrics=sre, regression_report=reg,
+            overall_score=95.0,
+            liveness_score=l.score,
+            readiness_score=r.score,
+            security_score=sec.score,
+            failure_detection_score=fd.score,
+            sre_metrics=sre,
+            regression_report=reg,
         )
 
         scorecard = scorer.calculate_certification_scorecard(
-            liveness=l, readiness=r, dependencies=d, failure_detection=fd,
-            recovery=rec, monitoring=m, security=sec, evidence=ev,
-            sre_metrics=sre, regression_report=reg, gate_report=gate,
+            liveness=l,
+            readiness=r,
+            dependencies=d,
+            failure_detection=fd,
+            recovery=rec,
+            monitoring=m,
+            security=sec,
+            evidence=ev,
+            sre_metrics=sre,
+            regression_report=reg,
+            gate_report=gate,
         )
 
         assert scorecard.certification_report.veto_triggered is True

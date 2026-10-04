@@ -45,7 +45,7 @@ class RuntimeContextBuilder:
             max_concurrency=self._max_concurrency,
             timeout_seconds=self._timeout_seconds,
             token_budget_limit=self._token_limit,
-            parameters=self._parameters
+            parameters=self._parameters,
         )
 
 
@@ -66,11 +66,7 @@ class ExecutionRequestBuilder:
         return self
 
     def build(self) -> ExecutionRequest:
-        return ExecutionRequest(
-            plan=self._plan,
-            context=self._context,
-            initial_inputs=self._inputs
-        )
+        return ExecutionRequest(plan=self._plan, context=self._context, initial_inputs=self._inputs)
 
 
 class WorkerBuilder:
@@ -85,11 +81,7 @@ class WorkerBuilder:
         return self
 
     def build(self) -> Worker:
-        return Worker(
-            worker_id=self._worker_id,
-            capabilities=self._capabilities,
-            status=WorkerStatus.IDLE
-        )
+        return Worker(worker_id=self._worker_id, capabilities=self._capabilities, status=WorkerStatus.IDLE)
 
 
 class CheckpointBuilder:
@@ -116,7 +108,7 @@ class CheckpointBuilder:
             metadata=meta,
             node_states=self._node_states,
             accumulated_outputs=self._outputs,
-            completed_node_ids=self._completed_nodes
+            completed_node_ids=self._completed_nodes,
         )
 
 
@@ -148,5 +140,5 @@ class ExecutionResultBuilder:
             plan_id=self._plan_id,
             lifecycle_state=self._state,
             outputs=self._outputs,
-            errors=self._errors
+            errors=self._errors,
         )

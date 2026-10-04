@@ -1,6 +1,7 @@
 """
 Phase 3I.12: Autonomous Reliability Engineering — Domain Interfaces
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 
@@ -106,6 +107,8 @@ class IAutonomousReliabilityScorer(ABC):
 
 class IAutonomousReliabilityExporter(ABC):
     @abstractmethod
-    def export(self, verification_results: Dict[str, Any], certification_report: AutonomousReliabilityCertificationReport) -> Dict[str, str]:
+    def export(
+        self, verification_results: Dict[str, Any], certification_report: AutonomousReliabilityCertificationReport
+    ) -> Dict[str, str]:
         """Export all verification manifests and signed metadata.json."""
         pass

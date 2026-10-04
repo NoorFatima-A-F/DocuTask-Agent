@@ -111,7 +111,9 @@ class EvolutionRuntime:
         started_at = datetime.now(timezone.utc).isoformat()
 
         self.event_bus.publish(
-            EvolutionCycleInitiated(payload={"cycle_id": cycle_id, "target_subsystem": target_subsystem, "objective": objective})
+            EvolutionCycleInitiated(
+                payload={"cycle_id": cycle_id, "target_subsystem": target_subsystem, "objective": objective}
+            )
         )
 
         # Stage 1: Profile
@@ -146,7 +148,9 @@ class EvolutionRuntime:
         )
 
         # Stage 6: Simulate
-        sim_report = self.simulation.run_simulation(mutation_id=mutation.mutation_id, simulation_mode="SHADOW_REPLAY", traces_count=2000)
+        sim_report = self.simulation.run_simulation(
+            mutation_id=mutation.mutation_id, simulation_mode="SHADOW_REPLAY", traces_count=2000
+        )
 
         # Stage 7: Benchmark
         bench_result = self.benchmark.run_benchmark(
@@ -204,9 +208,7 @@ class EvolutionRuntime:
         )
         self.cycle_history.append(result)
 
-        self.event_bus.publish(
-            EvolutionCycleCompleted(payload=result.to_dict())
-        )
+        self.event_bus.publish(EvolutionCycleCompleted(payload=result.to_dict()))
         return result
 
     def get_executive_summary(self) -> Dict[str, Any]:

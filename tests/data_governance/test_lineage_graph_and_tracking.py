@@ -12,17 +12,63 @@ def test_lineage_graph_traversal():
     org_id = "org_lineage_test"
 
     # Nodes: Doc -> Task -> JSON -> Model -> Summary
-    graph.add_node(LineageNode(node_id="node_doc", node_type=LineageNodeType.DOCUMENT, label="Invoice.pdf", organization_id=org_id))
-    graph.add_node(LineageNode(node_id="node_ocr", node_type=LineageNodeType.TASK, label="OCR Pipeline", organization_id=org_id))
-    graph.add_node(LineageNode(node_id="node_json", node_type=LineageNodeType.DATASET, label="Extracted.json", organization_id=org_id))
-    graph.add_node(LineageNode(node_id="node_ai", node_type=LineageNodeType.MODEL, label="Gemini LLM", organization_id=org_id))
-    graph.add_node(LineageNode(node_id="node_summary", node_type=LineageNodeType.DOCUMENT, label="Summary.txt", organization_id=org_id))
+    graph.add_node(
+        LineageNode(node_id="node_doc", node_type=LineageNodeType.DOCUMENT, label="Invoice.pdf", organization_id=org_id)
+    )
+    graph.add_node(
+        LineageNode(node_id="node_ocr", node_type=LineageNodeType.TASK, label="OCR Pipeline", organization_id=org_id)
+    )
+    graph.add_node(
+        LineageNode(
+            node_id="node_json", node_type=LineageNodeType.DATASET, label="Extracted.json", organization_id=org_id
+        )
+    )
+    graph.add_node(
+        LineageNode(node_id="node_ai", node_type=LineageNodeType.MODEL, label="Gemini LLM", organization_id=org_id)
+    )
+    graph.add_node(
+        LineageNode(
+            node_id="node_summary", node_type=LineageNodeType.DOCUMENT, label="Summary.txt", organization_id=org_id
+        )
+    )
 
     # Edges
-    graph.add_edge(LineageEdge(edge_id="e1", source_node_id="node_doc", target_node_id="node_ocr", edge_type=LineageEdgeType.READ, organization_id=org_id))
-    graph.add_edge(LineageEdge(edge_id="e2", source_node_id="node_ocr", target_node_id="node_json", edge_type=LineageEdgeType.GENERATED_BY, organization_id=org_id))
-    graph.add_edge(LineageEdge(edge_id="e3", source_node_id="node_json", target_node_id="node_ai", edge_type=LineageEdgeType.READ, organization_id=org_id))
-    graph.add_edge(LineageEdge(edge_id="e4", source_node_id="node_ai", target_node_id="node_summary", edge_type=LineageEdgeType.GENERATED_BY, organization_id=org_id))
+    graph.add_edge(
+        LineageEdge(
+            edge_id="e1",
+            source_node_id="node_doc",
+            target_node_id="node_ocr",
+            edge_type=LineageEdgeType.READ,
+            organization_id=org_id,
+        )
+    )
+    graph.add_edge(
+        LineageEdge(
+            edge_id="e2",
+            source_node_id="node_ocr",
+            target_node_id="node_json",
+            edge_type=LineageEdgeType.GENERATED_BY,
+            organization_id=org_id,
+        )
+    )
+    graph.add_edge(
+        LineageEdge(
+            edge_id="e3",
+            source_node_id="node_json",
+            target_node_id="node_ai",
+            edge_type=LineageEdgeType.READ,
+            organization_id=org_id,
+        )
+    )
+    graph.add_edge(
+        LineageEdge(
+            edge_id="e4",
+            source_node_id="node_ai",
+            target_node_id="node_summary",
+            edge_type=LineageEdgeType.GENERATED_BY,
+            organization_id=org_id,
+        )
+    )
 
     # Upstream from Summary
     upstream = graph.get_upstream_lineage("node_summary")

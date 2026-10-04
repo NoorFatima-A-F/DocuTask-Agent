@@ -23,14 +23,13 @@ class ValidationRun(Base, UUIDMixin):
     average_f1_score: Mapped[float] = mapped_column(Float, nullable=False, default=1.0)
     regression_status: Mapped[str] = mapped_column(String(20), nullable=False, default="NONE")
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        index=True,
-        nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True, nullable=False
     )
 
     # Relationships
-    results: Mapped[list["ValidationResult"]] = relationship("ValidationResult", back_populates="run", cascade="all, delete-orphan")
+    results: Mapped[list["ValidationResult"]] = relationship(
+        "ValidationResult", back_populates="run", cascade="all, delete-orphan"
+    )
 
 
 class ValidationResult(Base, UUIDMixin):
@@ -39,10 +38,7 @@ class ValidationResult(Base, UUIDMixin):
     __tablename__ = "validation_results"
 
     run_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid(as_uuid=True),
-        ForeignKey("validation_runs.id", ondelete="CASCADE"),
-        index=True,
-        nullable=False
+        Uuid(as_uuid=True), ForeignKey("validation_runs.id", ondelete="CASCADE"), index=True, nullable=False
     )
     document_id: Mapped[str] = mapped_column(String(100), index=True, nullable=False)
     document_type: Mapped[str] = mapped_column(String(50), index=True, nullable=False)
@@ -51,10 +47,7 @@ class ValidationResult(Base, UUIDMixin):
     evidence_path: Mapped[str] = mapped_column(Text, nullable=False)
     pass_fail: Mapped[str] = mapped_column(String(10), nullable=False, default="PASS")
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        index=True,
-        nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True, nullable=False
     )
 
     # Relationship

@@ -11,11 +11,13 @@ from app.agents.runtime.exceptions import PluginValidationError
 
 class PermissionDeniedError(PluginValidationError):
     """Raised when a plugin performs an action without required security permission."""
+
     pass
 
 
 class PluginPermission(str, Enum):
     """Standard enterprise security permissions granted to plugins."""
+
     FILESYSTEM_READ = "filesystem.read"
     FILESYSTEM_WRITE = "filesystem.write"
     NETWORK_ACCESS = "network.access"
@@ -67,6 +69,4 @@ class PluginPermissionManager:
                 unauthorized.append(perm_str)
 
         if unauthorized:
-            raise PluginValidationError(
-                f"Plugin requested unauthorized security permissions: {unauthorized}"
-            )
+            raise PluginValidationError(f"Plugin requested unauthorized security permissions: {unauthorized}")

@@ -81,9 +81,7 @@ class RegionalScheduler:
         # 2. Collect candidate workers from eligible clusters
         valid_workers: List[Worker] = []
         for cluster in eligible_clusters:
-            cluster_workers = self.worker_registry.list_workers(
-                region_id=self.region_id, cluster_id=cluster.cluster_id
-            )
+            cluster_workers = self.worker_registry.list_workers(region_id=self.region_id, cluster_id=cluster.cluster_id)
 
             for worker in cluster_workers:
                 # Evaluate hard constraints
@@ -173,9 +171,7 @@ class RegionalScheduler:
         )
 
         # 7. Track concurrency admission
-        self.concurrency_controller.track_admission(
-            workload, self.region_id, selected_worker.cluster_id
-        )
+        self.concurrency_controller.track_admission(workload, self.region_id, selected_worker.cluster_id)
 
         # 8. Update workload state
         workload.state = WorkloadState.ASSIGNED

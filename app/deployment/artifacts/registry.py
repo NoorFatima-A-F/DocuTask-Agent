@@ -1,4 +1,5 @@
 """Enterprise Artifact Registry and Provenance Platform."""
+
 from typing import Any, Dict, List, Optional
 import uuid
 from ..core.exceptions import ArtifactValidationException
@@ -113,7 +114,7 @@ class ArtifactRegistry:
         meta = self.get_artifact(artifact_id)
         if not meta:
             raise ArtifactValidationException(f"Artifact '{artifact_id}' not found")
-        
+
         passed = (critical <= max_critical_allowed) and (high <= max_high_allowed)
         scan_record = {
             "critical": critical,
@@ -128,7 +129,7 @@ class ArtifactRegistry:
         """Strictly validates signature, checksum, and security scan status."""
         if not self.verify_artifact(artifact_id, secret_key):
             raise ArtifactValidationException(f"Artifact '{artifact_id}' failed cryptographic signature verification")
-        
+
         meta = self.get_artifact(artifact_id)
         if meta and not meta.vulnerability_scan.get("passed", False):
             raise ArtifactValidationException(

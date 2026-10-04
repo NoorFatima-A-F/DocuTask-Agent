@@ -51,9 +51,7 @@ class BenchmarkEngine:
 
         duration_sec = time.perf_counter() - start_wall
 
-        distribution = LatencyAnalyzer.compute_distribution(
-            latencies, sla_target_p95_ms=sla_target_p95_ms
-        )
+        distribution = LatencyAnalyzer.compute_distribution(latencies, sla_target_p95_ms=sla_target_p95_ms)
 
         error_rate_pct = (errors / iterations * 100.0) if iterations > 0 else 0.0
         status = PerformanceStatus.OPTIMAL

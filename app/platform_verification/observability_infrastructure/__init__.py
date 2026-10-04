@@ -1,6 +1,7 @@
 """
 Part 3I: Enterprise Observability Infrastructure Verification Framework
 """
+
 from .domain.models import (
     LogLevel,
     GoldenSignalType,

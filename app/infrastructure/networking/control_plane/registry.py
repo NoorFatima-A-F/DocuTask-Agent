@@ -9,6 +9,7 @@ import threading
 
 class NetworkProtocol(str, Enum):
     """Supported network protocols."""
+
     HTTP = "http"
     HTTPS = "https"
     GRPC = "grpc"
@@ -19,6 +20,7 @@ class NetworkProtocol(str, Enum):
 
 class MeshType(str, Enum):
     """Supported service mesh providers."""
+
     ISTIO = "istio"
     LINKERD = "linkerd"
     CONSUL = "consul"
@@ -28,6 +30,7 @@ class MeshType(str, Enum):
 
 class RoutingStrategy(str, Enum):
     """Traffic routing algorithms and policies."""
+
     ROUND_ROBIN = "round_robin"
     LEAST_CONNECTIONS = "least_connections"
     WEIGHTED = "weighted"
@@ -41,6 +44,7 @@ class RoutingStrategy(str, Enum):
 
 class ZeroTrustAction(str, Enum):
     """Evaluation actions for zero-trust policies."""
+
     ALLOW = "allow"
     DENY = "deny"
     AUDIT = "audit"
@@ -49,6 +53,7 @@ class ZeroTrustAction(str, Enum):
 
 class CertificateStatus(str, Enum):
     """X.509 certificate lifecycle status."""
+
     ACTIVE = "active"
     ROTATING = "rotating"
     EXPIRED = "expired"
@@ -58,6 +63,7 @@ class CertificateStatus(str, Enum):
 
 class NetworkPolicyType(str, Enum):
     """Network policy directions."""
+
     INGRESS = "ingress"
     EGRESS = "egress"
     BIDIRECTIONAL = "bidirectional"
@@ -66,6 +72,7 @@ class NetworkPolicyType(str, Enum):
 @dataclass
 class NetworkEndpoint:
     """Network endpoint target address and port."""
+
     host: str
     port: int
     protocol: NetworkProtocol = NetworkProtocol.HTTPS
@@ -87,6 +94,7 @@ class NetworkEndpoint:
 @dataclass
 class RouteRule:
     """Traffic routing rule definition."""
+
     rule_id: str
     service_name: str
     strategy: RoutingStrategy = RoutingStrategy.ROUND_ROBIN

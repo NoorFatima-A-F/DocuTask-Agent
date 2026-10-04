@@ -32,10 +32,30 @@ class MemoryLeakVerifier(IMemoryLeakVerifier):
 
     def verify(self) -> MemoryLeakReport:
         timeline = [
-            MemoryTimelinePoint(time_label="t0 (Initial)", elapsed_hours=0, memory_used_mb=145.0, rss_mb=145.0, gc_reclaimed_mb=0.0),
-            MemoryTimelinePoint(time_label="t6 (Warmup/Sustained)", elapsed_hours=6, memory_used_mb=146.2, rss_mb=146.5, gc_reclaimed_mb=350.0),
-            MemoryTimelinePoint(time_label="t24 (Day 1 Soak)", elapsed_hours=24, memory_used_mb=146.5, rss_mb=146.8, gc_reclaimed_mb=1420.0),
-            MemoryTimelinePoint(time_label="t72 (Full 72h Endurance)", elapsed_hours=72, memory_used_mb=147.1, rss_mb=147.4, gc_reclaimed_mb=4250.0),
+            MemoryTimelinePoint(
+                time_label="t0 (Initial)", elapsed_hours=0, memory_used_mb=145.0, rss_mb=145.0, gc_reclaimed_mb=0.0
+            ),
+            MemoryTimelinePoint(
+                time_label="t6 (Warmup/Sustained)",
+                elapsed_hours=6,
+                memory_used_mb=146.2,
+                rss_mb=146.5,
+                gc_reclaimed_mb=350.0,
+            ),
+            MemoryTimelinePoint(
+                time_label="t24 (Day 1 Soak)",
+                elapsed_hours=24,
+                memory_used_mb=146.5,
+                rss_mb=146.8,
+                gc_reclaimed_mb=1420.0,
+            ),
+            MemoryTimelinePoint(
+                time_label="t72 (Full 72h Endurance)",
+                elapsed_hours=72,
+                memory_used_mb=147.1,
+                rss_mb=147.4,
+                gc_reclaimed_mb=4250.0,
+            ),
         ]
 
         total_hours = timeline[-1].elapsed_hours

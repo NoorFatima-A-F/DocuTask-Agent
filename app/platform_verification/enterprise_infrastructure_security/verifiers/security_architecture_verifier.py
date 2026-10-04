@@ -29,11 +29,41 @@ class SecurityArchitectureVerifier(ISecurityArchitectureVerifier):
 
     def verify(self) -> SecurityArchitectureReport:
         assets = [
-            SecurityAssetEntry(asset_name="User Documents (PDF/TIFF)", asset_type="Customer Data", data_classification="Confidential / PII", exposure_level="Private", trust_boundary="Storage Perimeter"),
-            SecurityAssetEntry(asset_name="Extracted Structured Data (JSON)", asset_type="Processed Business Data", data_classification="Confidential", exposure_level="Private", trust_boundary="Database Perimeter"),
-            SecurityAssetEntry(asset_name="User Identity & Password Hashes", asset_type="Auth Credentials", data_classification="Restricted", exposure_level="Private", trust_boundary="Auth Boundary"),
-            SecurityAssetEntry(asset_name="JWT Signing Secret Keys", asset_type="Crypto Material", data_classification="Top Secret", exposure_level="Isolated", trust_boundary="KMS Key Vault"),
-            SecurityAssetEntry(asset_name="Gemini AI Provider API Keys", asset_type="Third-Party Credential", data_classification="Top Secret", exposure_level="Isolated", trust_boundary="Cloud Secret Manager"),
+            SecurityAssetEntry(
+                asset_name="User Documents (PDF/TIFF)",
+                asset_type="Customer Data",
+                data_classification="Confidential / PII",
+                exposure_level="Private",
+                trust_boundary="Storage Perimeter",
+            ),
+            SecurityAssetEntry(
+                asset_name="Extracted Structured Data (JSON)",
+                asset_type="Processed Business Data",
+                data_classification="Confidential",
+                exposure_level="Private",
+                trust_boundary="Database Perimeter",
+            ),
+            SecurityAssetEntry(
+                asset_name="User Identity & Password Hashes",
+                asset_type="Auth Credentials",
+                data_classification="Restricted",
+                exposure_level="Private",
+                trust_boundary="Auth Boundary",
+            ),
+            SecurityAssetEntry(
+                asset_name="JWT Signing Secret Keys",
+                asset_type="Crypto Material",
+                data_classification="Top Secret",
+                exposure_level="Isolated",
+                trust_boundary="KMS Key Vault",
+            ),
+            SecurityAssetEntry(
+                asset_name="Gemini AI Provider API Keys",
+                asset_type="Third-Party Credential",
+                data_classification="Top Secret",
+                exposure_level="Isolated",
+                trust_boundary="Cloud Secret Manager",
+            ),
         ]
 
         checks = [

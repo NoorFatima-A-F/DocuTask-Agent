@@ -11,14 +11,15 @@ from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 from research_validation.hypothesis.hypothesis_model import ScientificHypothesis
-from research_validation.planning.execution_strategy import (
-    AdaptiveExecutionStrategy, TargetHardware
-)
+from research_validation.planning.execution_strategy import AdaptiveExecutionStrategy, TargetHardware
 from research_validation.scientific_execution.experiment_manifest import (
-    ExperimentManifest, ExperimentParameters, DatasetFingerprint
+    ExperimentManifest,
+    ExperimentParameters,
+    DatasetFingerprint,
 )
 from research_validation.scientific_execution.experiment_dependency_graph import (
-    ExperimentDependencyGraph, PipelineStageType
+    ExperimentDependencyGraph,
+    PipelineStageType,
 )
 from research_validation.provenance.hashing import hash_canonical_json
 
@@ -26,6 +27,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class PlannedExperimentDAG:
     """Complete executable plan ready for orchestrator execution."""
+
     plan_id: str
     hypothesis_id: str
     manifest: ExperimentManifest
@@ -60,7 +62,7 @@ class AdaptiveExperimentPlanner:
         )
 
         plan_id = f"plan_{hypothesis.hypothesis_id}_{int(datetime.now(timezone.utc).timestamp())}"
-        
+
         # 1. Build Manifest Parameters
         params_dict = {
             "hypothesis_id": hypothesis.hypothesis_id,
@@ -111,7 +113,12 @@ class AdaptiveExperimentPlanner:
             ("aggregation", PipelineStageType.AGGREGATION, "Metric Aggregation", ["benchmark"]),
             ("visualization", PipelineStageType.VISUALIZATION, "Uncertainty & Diagnostic Plotting", ["aggregation"]),
             ("publication_figure", PipelineStageType.PUBLICATION_FIGURE, "Vector Figure Generation", ["visualization"]),
-            ("research_report", PipelineStageType.RESEARCH_REPORT, "Scientific Report Synthesis", ["publication_figure"]),
+            (
+                "research_report",
+                PipelineStageType.RESEARCH_REPORT,
+                "Scientific Report Synthesis",
+                ["publication_figure"],
+            ),
         ]
 
         for s_id, s_type, s_name, parents in stages:

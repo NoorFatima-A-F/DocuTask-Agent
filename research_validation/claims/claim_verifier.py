@@ -50,7 +50,7 @@ class ClaimVerificationAudit:
     total_claims: int
     classification_counts: Dict[str, int]
     claim_groundedness_index: float  # (MEASURED + DERIVED) / Total
-    evidence_backed_ratio: float     # Claims with at least one valid Merkle hash / Total
+    evidence_backed_ratio: float  # Claims with at least one valid Merkle hash / Total
     is_fully_grounded: bool
     claims: Tuple[ClaimStatement, ...]
     unsupported_claims: Tuple[ClaimStatement, ...]
@@ -64,8 +64,27 @@ class ScientificClaimVerifier:
     """
 
     # Heuristics for classifying claims when parsing text
-    MEASURED_KEYWORDS = {"measured", "observed", "benchmarked", "profiled", "recorded", "telemetry", "hardware clock", "perf_counter"}
-    DERIVED_KEYWORDS = {"computed", "calculated", "derived", "wilson ci", "confidence interval", "f1-score", "mean", "median", "p99"}
+    MEASURED_KEYWORDS = {
+        "measured",
+        "observed",
+        "benchmarked",
+        "profiled",
+        "recorded",
+        "telemetry",
+        "hardware clock",
+        "perf_counter",
+    }
+    DERIVED_KEYWORDS = {
+        "computed",
+        "calculated",
+        "derived",
+        "wilson ci",
+        "confidence interval",
+        "f1-score",
+        "mean",
+        "median",
+        "p99",
+    }
     ESTIMATED_KEYWORDS = {"estimated", "projected", "extrapolated", "approximated", "expected"}
     LITERATURE_KEYWORDS = {"cited", "according to", "baseline", "prior work", "published by", "et al", "icdar", "cvpr"}
     SIMULATION_KEYWORDS = {"simulated", "synthetic", "chaos injected", "mock", "emulated"}
@@ -95,14 +114,21 @@ class ScientificClaimVerifier:
         backing_hashes = tuple(n.node_hash for n in evidence_nodes if n.node_hash)
 
         # Determine quality level and confidence
-        if not backing_hashes and classification not in (ClaimClassification.LITERATURE, ClaimClassification.SIMULATION):
+        if not backing_hashes and classification not in (
+            ClaimClassification.LITERATURE,
+            ClaimClassification.SIMULATION,
+        ):
             classification = ClaimClassification.UNSUPPORTED
 
         quality_level = EvidenceQualityLevel.LEVEL_E
         conf = 0.0
 
         if classification == ClaimClassification.MEASURED:
-            quality_level = EvidenceQualityLevel.LEVEL_A if any(n.quality_level == EvidenceQualityLevel.LEVEL_A for n in evidence_nodes) else EvidenceQualityLevel.LEVEL_C
+            quality_level = (
+                EvidenceQualityLevel.LEVEL_A
+                if any(n.quality_level == EvidenceQualityLevel.LEVEL_A for n in evidence_nodes)
+                else EvidenceQualityLevel.LEVEL_C
+            )
             conf = 0.95
             rationale = f"Claim supported by {len(backing_hashes)} empirical observation node(s)."
         elif classification == ClaimClassification.DERIVED:
@@ -152,7 +178,7 @@ class ScientificClaimVerifier:
         for idx, s in enumerate(sentences):
             if not s.strip():
                 continue
-            cid = f"claim_{idx+1:04d}"
+            cid = f"claim_{idx + 1:04d}"
             claims.append(self.verify_statement(cid, s))
 
         total = len(claims)
@@ -212,16 +238,14 @@ class ScientificClaimVerifier:
             if node.name.lower() in lower or node.stage.value.lower() in lower:
                 matches.append(node)
                 continue
-            tokens = [t.lower() for t in re.split(r'\W+', node.name) if len(t) > 3]
+            tokens = [t.lower() for t in re.split(r"\W+", node.name) if len(t) > 3]
             if any(t in lower for t in tokens):
                 matches.append(node)
         return matches
 
-
-
     @staticmethod
     def _split_into_sentences(text: str) -> List[str]:
         # Split on period, newline, or list bullets
-        raw_parts = re.split(r'(?:\r?\n|(?<=[.!?])\s+)', text)
+        raw_parts = re.split(r"(?:\r?\n|(?<=[.!?])\s+)", text)
         cleaned = [p.strip().lstrip("-*#0123456789. ") for p in raw_parts if p.strip()]
         return [p for p in cleaned if len(p) > 10]

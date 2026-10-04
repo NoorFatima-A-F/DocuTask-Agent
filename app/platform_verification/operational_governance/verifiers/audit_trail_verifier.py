@@ -1,6 +1,7 @@
 """
 Phase 3H.8.8: Immutable Operational Audit Trail Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_governance.domain.interfaces import IAuditTrailVerifier

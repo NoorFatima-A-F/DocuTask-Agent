@@ -13,8 +13,19 @@ class DataAccessPermissionEnforcer:
         "PUBLIC": {ClassificationLevel.PUBLIC},
         "INTERNAL": {ClassificationLevel.PUBLIC, ClassificationLevel.INTERNAL},
         "CONFIDENTIAL": {ClassificationLevel.PUBLIC, ClassificationLevel.INTERNAL, ClassificationLevel.CONFIDENTIAL},
-        "RESTRICTED": {ClassificationLevel.PUBLIC, ClassificationLevel.INTERNAL, ClassificationLevel.CONFIDENTIAL, ClassificationLevel.RESTRICTED},
-        "HIGHLY_RESTRICTED": {ClassificationLevel.PUBLIC, ClassificationLevel.INTERNAL, ClassificationLevel.CONFIDENTIAL, ClassificationLevel.RESTRICTED, ClassificationLevel.HIGHLY_RESTRICTED},
+        "RESTRICTED": {
+            ClassificationLevel.PUBLIC,
+            ClassificationLevel.INTERNAL,
+            ClassificationLevel.CONFIDENTIAL,
+            ClassificationLevel.RESTRICTED,
+        },
+        "HIGHLY_RESTRICTED": {
+            ClassificationLevel.PUBLIC,
+            ClassificationLevel.INTERNAL,
+            ClassificationLevel.CONFIDENTIAL,
+            ClassificationLevel.RESTRICTED,
+            ClassificationLevel.HIGHLY_RESTRICTED,
+        },
     }
 
     def can_access(

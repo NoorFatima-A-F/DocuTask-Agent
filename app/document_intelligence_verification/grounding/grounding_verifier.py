@@ -160,7 +160,7 @@ class GroundingVerifier:
             "assertion": AssertionResult(
                 name="Grounded_Precision_Recall_F1_Benchmark",
                 passed=passed,
-                message=f"Grounded entity evaluation achieved Precision={precision*100:.1f}%, Recall={recall*100:.1f}%, Grounded F1={f1*100:.1f}%.",
+                message=f"Grounded entity evaluation achieved Precision={precision * 100:.1f}%, Recall={recall * 100:.1f}%, Grounded F1={f1 * 100:.1f}%.",
                 execution_time_ms=t_elapsed,
                 details={"precision": precision, "recall": recall, "f1": f1},
             ),

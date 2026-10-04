@@ -24,7 +24,7 @@ class LocalStorageProvider(StorageProvider):
             self.base_dir = os.path.abspath(base_directory)
         else:
             self.base_dir = os.path.abspath(settings.STORAGE_LOCAL_DIR)
-        
+
         os.makedirs(self.base_dir, exist_ok=True)
 
     def _validate_path_safety(self, absolute_path: str) -> None:
@@ -67,11 +67,11 @@ class LocalStorageProvider(StorageProvider):
     async def save(self, content: bytes, original_filename: str, subfolder: str = "") -> tuple[str, str, str]:
         """
         Saves file content to date-partitioned directory on disk.
-        
+
         :return: Tuple of (stored_filename, relative_path, absolute_path)
         """
         stored_filename = self.generate_unique_filename(original_filename)
-        
+
         if not subfolder:
             date_dir = self._get_date_partition()
         else:

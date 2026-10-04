@@ -68,7 +68,11 @@ class IncidentQualityScorer(IIncidentQualityScorer):
         # 3. Safety Controls (20%)
         # Policy rules active, dangerous actions blocked, rollback supported
         safe_pts = 0.0
-        if policy_report.passed and policy_report.blocked_dangerous_actions >= 2 and policy_report.approval_gated_actions >= 2:
+        if (
+            policy_report.passed
+            and policy_report.blocked_dangerous_actions >= 2
+            and policy_report.approval_gated_actions >= 2
+        ):
             safe_pts += 50.0
         if arch_report.rollback_supported and arch_report.detection_layer_isolated:
             safe_pts += 50.0

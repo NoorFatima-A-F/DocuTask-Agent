@@ -11,14 +11,16 @@ from .synchronizer import GitOpsSynchronizer
 
 class DriftType(str, Enum):
     """Types of detected GitOps drift."""
-    MISSING = "missing"      # Exists in desired state, absent in actual cluster
-    MODIFIED = "modified"    # Spec differs between desired and actual
-    EXTRA = "extra"          # Exists in actual cluster, absent in desired state
+
+    MISSING = "missing"  # Exists in desired state, absent in actual cluster
+    MODIFIED = "modified"  # Spec differs between desired and actual
+    EXTRA = "extra"  # Exists in actual cluster, absent in desired state
 
 
 @dataclass
 class DriftItem:
     """A detected divergence between desired and actual state."""
+
     resource_key: str
     drift_type: DriftType
     desired_spec: Optional[Dict[str, Any]] = None
@@ -42,29 +44,35 @@ class GitOpsReconciler:
         # 1. Check for missing or modified
         for key, desired in desired_map.items():
             if key not in actual_resources:
-                drifts.append(DriftItem(
-                    resource_key=key,
-                    drift_type=DriftType.MISSING,
-                    desired_spec=desired.desired_spec,
-                ))
+                drifts.append(
+                    DriftItem(
+                        resource_key=key,
+                        drift_type=DriftType.MISSING,
+                        desired_spec=desired.desired_spec,
+                    )
+                )
             else:
                 actual = actual_resources[key]
                 if self._specs_differ(desired.desired_spec, actual):
-                    drifts.append(DriftItem(
-                        resource_key=key,
-                        drift_type=DriftType.MODIFIED,
-                        desired_spec=desired.desired_spec,
-                        actual_spec=actual,
-                    ))
+                    drifts.append(
+                        DriftItem(
+                            resource_key=key,
+                            drift_type=DriftType.MODIFIED,
+                            desired_spec=desired.desired_spec,
+                            actual_spec=actual,
+                        )
+                    )
 
         # 2. Check for extra unmanaged resources
         for key, actual in actual_resources.items():
             if key not in desired_map:
-                drifts.append(DriftItem(
-                    resource_key=key,
-                    drift_type=DriftType.EXTRA,
-                    actual_spec=actual,
-                ))
+                drifts.append(
+                    DriftItem(
+                        resource_key=key,
+                        drift_type=DriftType.EXTRA,
+                        actual_spec=actual,
+                    )
+                )
 
         return drifts
 

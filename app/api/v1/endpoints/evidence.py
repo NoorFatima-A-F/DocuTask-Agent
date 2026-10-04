@@ -73,9 +73,27 @@ def _seed_initial_evidence_if_empty():
 
     if global_decision_ledger.count() == 0:
         candidates = [
-            {"candidate_id": "cand-flash-p3", "model": "gemini-2.5-flash", "predicted_cost_usd": 0.0018, "predicted_latency_ms": 380.0, "predicted_accuracy": 0.985},
-            {"candidate_id": "cand-pro-p1", "model": "gemini-2.5-pro", "predicted_cost_usd": 0.0120, "predicted_latency_ms": 1150.0, "predicted_accuracy": 0.994},
-            {"candidate_id": "cand-hybrid-p2", "model": "gemini-2.5-flash+heuristics", "predicted_cost_usd": 0.0009, "predicted_latency_ms": 420.0, "predicted_accuracy": 0.962},
+            {
+                "candidate_id": "cand-flash-p3",
+                "model": "gemini-2.5-flash",
+                "predicted_cost_usd": 0.0018,
+                "predicted_latency_ms": 380.0,
+                "predicted_accuracy": 0.985,
+            },
+            {
+                "candidate_id": "cand-pro-p1",
+                "model": "gemini-2.5-pro",
+                "predicted_cost_usd": 0.0120,
+                "predicted_latency_ms": 1150.0,
+                "predicted_accuracy": 0.994,
+            },
+            {
+                "candidate_id": "cand-hybrid-p2",
+                "model": "gemini-2.5-flash+heuristics",
+                "predicted_cost_usd": 0.0009,
+                "predicted_latency_ms": 420.0,
+                "predicted_accuracy": 0.962,
+            },
         ]
         global_decision_ledger.record_decision(
             decision_id="dec-opt-8891",
@@ -105,7 +123,10 @@ def _seed_initial_evidence_if_empty():
             step_index=1,
             random_seed=42,
             model_configs={"primary": "gemini-2.5-flash", "temperature": 0.1, "top_p": 0.95},
-            dag_topology={"nodes": ["ocr", "entity_extract", "validate"], "edges": [["ocr", "entity_extract"], ["entity_extract", "validate"]]},
+            dag_topology={
+                "nodes": ["ocr", "entity_extract", "validate"],
+                "edges": [["ocr", "entity_extract"], ["entity_extract", "validate"]],
+            },
             memory_state_digest="a4f98b12e3914a87c53d0e91f1a238bb920",
             input_digest="c7e12f00a8918231bbd93172ca0913ef451",
             output_digest="f81d4fae7dec11d0a76500a0c91e6bf6012",
@@ -113,10 +134,18 @@ def _seed_initial_evidence_if_empty():
 
     if global_provenance_dag.count() == 0:
         global_provenance_dag.add_node("node-raw-doc", "INPUT", "Raw PDF Document #8891", "c7e12f00a8918231")
-        global_provenance_dag.add_node("node-plan-dec", "PLAN", "Planner Strategy (Flash+P3)", "8891dec0001a", parent_ids=["node-raw-doc"])
-        global_provenance_dag.add_node("node-ocr-tool", "TOOL", "Adaptive OCR Execution", "ocr001trace99", parent_ids=["node-plan-dec"])
-        global_provenance_dag.add_node("node-val-check", "VALIDATION", "Rule Reconciliation Check", "val001pass77", parent_ids=["node-ocr-tool"])
-        global_provenance_dag.add_node("node-out-json", "OUTPUT", "Certified Extraction JSON", "f81d4fae7dec11", parent_ids=["node-val-check"])
+        global_provenance_dag.add_node(
+            "node-plan-dec", "PLAN", "Planner Strategy (Flash+P3)", "8891dec0001a", parent_ids=["node-raw-doc"]
+        )
+        global_provenance_dag.add_node(
+            "node-ocr-tool", "TOOL", "Adaptive OCR Execution", "ocr001trace99", parent_ids=["node-plan-dec"]
+        )
+        global_provenance_dag.add_node(
+            "node-val-check", "VALIDATION", "Rule Reconciliation Check", "val001pass77", parent_ids=["node-ocr-tool"]
+        )
+        global_provenance_dag.add_node(
+            "node-out-json", "OUTPUT", "Certified Extraction JSON", "f81d4fae7dec11", parent_ids=["node-val-check"]
+        )
 
 
 _seed_initial_evidence_if_empty()
@@ -146,6 +175,7 @@ class SnapshotCreateRequest(BaseModel):
 
 
 # Endpoints
+
 
 @router.get("/nodes", summary="List execution evidence nodes")
 def get_evidence_nodes(limit: int = Query(50, ge=1, le=500)) -> List[Dict[str, Any]]:
@@ -197,9 +227,30 @@ def explain_planner(
     mission_id: str = "mission-alpha-889",
 ) -> Dict[str, Any]:
     candidates = [
-        {"candidate_id": "cand-flash-p3", "model_name": "gemini-2.5-flash", "predicted_cost_usd": 0.0018, "predicted_latency_ms": 380.0, "predicted_accuracy": 0.985, "risk_score": 0.05},
-        {"candidate_id": "cand-pro-p1", "model_name": "gemini-2.5-pro", "predicted_cost_usd": 0.0120, "predicted_latency_ms": 1150.0, "predicted_accuracy": 0.994, "risk_score": 0.02},
-        {"candidate_id": "cand-hybrid-p2", "model_name": "gemini-2.5-flash+heuristics", "predicted_cost_usd": 0.0009, "predicted_latency_ms": 420.0, "predicted_accuracy": 0.962, "risk_score": 0.12},
+        {
+            "candidate_id": "cand-flash-p3",
+            "model_name": "gemini-2.5-flash",
+            "predicted_cost_usd": 0.0018,
+            "predicted_latency_ms": 380.0,
+            "predicted_accuracy": 0.985,
+            "risk_score": 0.05,
+        },
+        {
+            "candidate_id": "cand-pro-p1",
+            "model_name": "gemini-2.5-pro",
+            "predicted_cost_usd": 0.0120,
+            "predicted_latency_ms": 1150.0,
+            "predicted_accuracy": 0.994,
+            "risk_score": 0.02,
+        },
+        {
+            "candidate_id": "cand-hybrid-p2",
+            "model_name": "gemini-2.5-flash+heuristics",
+            "predicted_cost_usd": 0.0009,
+            "predicted_latency_ms": 420.0,
+            "predicted_accuracy": 0.962,
+            "risk_score": 0.12,
+        },
     ]
     explanation = PlannerExplainer.explain_plan_selection(decision_id, mission_id, candidates)
     return explanation.to_dict()
@@ -234,9 +285,33 @@ def explain_validation(
     artifact_hash: str = "f81d4fae7dec11d0a76500a0c91e6bf6012",
 ) -> Dict[str, Any]:
     rules = [
-        {"rule_name": "Invoice Subtotal + Tax == Total", "passed": True, "observed_value": 4850.0, "expected_threshold": 4850.0, "tolerance": 0.01, "deviation_percent": 0.0, "criticality": "HIGH"},
-        {"rule_name": "Due Date >= Invoice Date", "passed": True, "observed_value": "2026-10-15", "expected_threshold": "2026-09-10", "tolerance": 0.0, "deviation_percent": 0.0, "criticality": "HIGH"},
-        {"rule_name": "Vendor Tax ID Mod11 Checksum", "passed": True, "observed_value": "US-88912-A", "expected_threshold": "VALID", "tolerance": 0.0, "deviation_percent": 0.0, "criticality": "MEDIUM"},
+        {
+            "rule_name": "Invoice Subtotal + Tax == Total",
+            "passed": True,
+            "observed_value": 4850.0,
+            "expected_threshold": 4850.0,
+            "tolerance": 0.01,
+            "deviation_percent": 0.0,
+            "criticality": "HIGH",
+        },
+        {
+            "rule_name": "Due Date >= Invoice Date",
+            "passed": True,
+            "observed_value": "2026-10-15",
+            "expected_threshold": "2026-09-10",
+            "tolerance": 0.0,
+            "deviation_percent": 0.0,
+            "criticality": "HIGH",
+        },
+        {
+            "rule_name": "Vendor Tax ID Mod11 Checksum",
+            "passed": True,
+            "observed_value": "US-88912-A",
+            "expected_threshold": "VALID",
+            "tolerance": 0.0,
+            "deviation_percent": 0.0,
+            "criticality": "MEDIUM",
+        },
     ]
     exp = ValidationExplainer.explain_validation(validation_id, artifact_hash, rules)
     return exp.to_dict()

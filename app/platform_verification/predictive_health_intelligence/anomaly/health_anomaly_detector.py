@@ -6,6 +6,7 @@ Detects abnormal operational behavior using 4 complementary algorithms:
 3. Trend Slope Detection (rapid linear acceleration)
 4. Pattern Anomaly Detection (cyclic frequency spikes)
 """
+
 from datetime import datetime, timezone
 from typing import List, Optional
 from app.platform_verification.predictive_health_intelligence.domain.models import (
@@ -13,7 +14,9 @@ from app.platform_verification.predictive_health_intelligence.domain.models impo
     AnomalyReport,
     AnomalySeverity,
 )
-from app.platform_verification.predictive_health_intelligence.storage.timeseries_health_store import TimeSeriesHealthStore
+from app.platform_verification.predictive_health_intelligence.storage.timeseries_health_store import (
+    TimeSeriesHealthStore,
+)
 
 
 class HealthAnomalyDetector:

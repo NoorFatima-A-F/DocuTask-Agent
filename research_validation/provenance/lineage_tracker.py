@@ -20,14 +20,13 @@ from typing import Callable, List, Optional
 
 from research_validation.provenance.digital_signatures import DetachedSignature, ProvenanceSigner
 from research_validation.provenance.evidence_graph import EvidenceGraph, LineageAncestryTrace
-from research_validation.provenance.provenance_models import (
-    EvidenceNode, EvidenceQualityLevel, LineageStage
-)
+from research_validation.provenance.provenance_models import EvidenceNode, EvidenceQualityLevel, LineageStage
 
 
 @dataclass
 class CompleteLineageChain:
     """A fully materialized, 7-stage verifiable lineage pipeline."""
+
     chain_id: str
     raw_observation_node: EvidenceNode
     transformation_node: EvidenceNode
@@ -60,7 +59,7 @@ class LineageTracker:
         metric_name: str,
         report_title: str,
         quality_level: EvidenceQualityLevel = EvidenceQualityLevel.LEVEL_B,
-        signer: Optional[ProvenanceSigner] = None
+        signer: Optional[ProvenanceSigner] = None,
     ) -> CompleteLineageChain:
         """
         Record and link all 7 stages from raw data to digital signature.
@@ -76,7 +75,7 @@ class LineageTracker:
             description=f"Direct empirical observations ({len(raw_data)} samples)",
             payload={"raw_samples": raw_data, "sample_count": len(raw_data)},
             parent_node_ids=[],
-            quality_level=quality_level
+            quality_level=quality_level,
         )
 
         # 2. Transformation
@@ -89,7 +88,7 @@ class LineageTracker:
             description="Normalized & sanitized data transform",
             payload={"input_count": len(raw_data), "output_count": len(transformed_data)},
             parent_node_ids=[raw_id],
-            quality_level=quality_level
+            quality_level=quality_level,
         )
 
         # 3. Intermediate Artifact
@@ -101,7 +100,7 @@ class LineageTracker:
             description="Intermediate feature matrix array",
             payload={"features": transformed_data[:10]},
             parent_node_ids=[trans_id],
-            quality_level=quality_level
+            quality_level=quality_level,
         )
 
         # 4. Aggregation
@@ -114,7 +113,7 @@ class LineageTracker:
             description="Statistical reduction & moment calculation",
             payload={"aggregated_value": aggregated_val},
             parent_node_ids=[inter_id],
-            quality_level=quality_level
+            quality_level=quality_level,
         )
 
         # 5. Final Metric
@@ -126,7 +125,7 @@ class LineageTracker:
             description=f"Published scientific metric value: {aggregated_val:.4f}",
             payload={"metric_name": metric_name, "value": aggregated_val},
             parent_node_ids=[agg_id],
-            quality_level=quality_level
+            quality_level=quality_level,
         )
 
         # 6. Scientific Report
@@ -138,18 +137,16 @@ class LineageTracker:
             description="Consolidated peer-review summary report",
             payload={"report_title": report_title, "primary_metric": metric_name, "value": aggregated_val},
             parent_node_ids=[metric_id],
-            quality_level=quality_level
+            quality_level=quality_level,
         )
 
         # 7. Digital Signature
         sig_id = f"sig_{cid}"
         active_signer = signer or ProvenanceSigner(
-            key_id="KEY-PROV-MASTER",
-            secret_or_private_key="rvisf_internal_verification_key_sec256"
+            key_id="KEY-PROV-MASTER", secret_or_private_key="rvisf_internal_verification_key_sec256"
         )
         detached_sig = active_signer.sign_digest(
-            digest_hex=report_node.node_hash,
-            signer_identity="Principal Research Systems Engineer"
+            digest_hex=report_node.node_hash, signer_identity="Principal Research Systems Engineer"
         )
 
         sig_node = self.graph.record_node(
@@ -161,10 +158,10 @@ class LineageTracker:
                 "key_id": detached_sig.key_id,
                 "signature_b64": detached_sig.signature_base64,
                 "signed_digest": detached_sig.payload_digest_sha256,
-                "expires_at": detached_sig.expires_at_epoch
+                "expires_at": detached_sig.expires_at_epoch,
             },
             parent_node_ids=[report_id],
-            quality_level=quality_level
+            quality_level=quality_level,
         )
 
         # Trace complete ancestry back to raw observation
@@ -183,5 +180,5 @@ class LineageTracker:
             ancestry_trace=trace,
             is_replayable=True,
             quality_level=trace.overall_quality_level,
-            quality_score=trace.evidence_quality_score
+            quality_score=trace.evidence_quality_score,
         )

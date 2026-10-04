@@ -28,9 +28,15 @@ class PlatformMetricsCollector:
         self.registry.gauge("node_cpu_usage_percent", "Node CPU usage percentage", labels).set(cpu_usage_pct)
         self.registry.gauge("node_memory_usage_percent", "Node memory usage percentage", labels).set(memory_usage_pct)
         self.registry.gauge("node_disk_usage_percent", "Node disk usage percentage", labels).set(disk_usage_pct)
-        self.registry.gauge("node_health_status", "Node health (1=healthy, 0=unhealthy)", labels).set(1.0 if healthy else 0.0)
-        self.registry.counter("node_network_rx_bytes_total", "Total network received bytes", labels).inc(network_rx_bytes)
-        self.registry.counter("node_network_tx_bytes_total", "Total network transmitted bytes", labels).inc(network_tx_bytes)
+        self.registry.gauge("node_health_status", "Node health (1=healthy, 0=unhealthy)", labels).set(
+            1.0 if healthy else 0.0
+        )
+        self.registry.counter("node_network_rx_bytes_total", "Total network received bytes", labels).inc(
+            network_rx_bytes
+        )
+        self.registry.counter("node_network_tx_bytes_total", "Total network transmitted bytes", labels).inc(
+            network_tx_bytes
+        )
 
     # 2. Runtime Metrics
     def record_runtime(
@@ -45,11 +51,17 @@ class PlatformMetricsCollector:
         labels = {"cluster_id": cluster_id}
         self.registry.gauge("runtime_worker_count", "Active runtime workers", labels).set(float(worker_count))
         self.registry.gauge("runtime_queue_depth", "Current queue depth", labels).set(float(queue_depth))
-        self.registry.gauge("runtime_execution_rate_dpm", "Document processing rate per minute", labels).set(execution_rate_dpm)
+        self.registry.gauge("runtime_execution_rate_dpm", "Document processing rate per minute", labels).set(
+            execution_rate_dpm
+        )
         if failure_count > 0:
-            self.registry.counter("runtime_tasks_failed_total", "Total runtime tasks failed", labels).inc(float(failure_count))
+            self.registry.counter("runtime_tasks_failed_total", "Total runtime tasks failed", labels).inc(
+                float(failure_count)
+            )
         if retry_count > 0:
-            self.registry.counter("runtime_tasks_retried_total", "Total runtime tasks retried", labels).inc(float(retry_count))
+            self.registry.counter("runtime_tasks_retried_total", "Total runtime tasks retried", labels).inc(
+                float(retry_count)
+            )
 
     # 3. Workflow Metrics
     def record_workflow_execution(
@@ -65,7 +77,9 @@ class PlatformMetricsCollector:
             self.registry.counter("workflow_completed_total", "Total workflows successfully completed", labels).inc(1.0)
         else:
             self.registry.counter("workflow_failed_total", "Total workflows failed", labels).inc(1.0)
-        self.registry.histogram("workflow_duration_seconds", "Workflow total execution duration", labels=labels).observe(duration_seconds)
+        self.registry.histogram(
+            "workflow_duration_seconds", "Workflow total execution duration", labels=labels
+        ).observe(duration_seconds)
 
     # 4. Agent Execution Metrics
     def record_agent_execution(
@@ -84,10 +98,14 @@ class PlatformMetricsCollector:
         if not success:
             self.registry.counter("agent_failures_total", "Total agent execution failures", labels).inc(1.0)
         self.registry.counter("agent_tool_calls_total", "Total agent tool invocations", labels).inc(float(tool_calls))
-        self.registry.counter("agent_reasoning_steps_total", "Total reasoning steps executed", labels).inc(float(reasoning_steps))
+        self.registry.counter("agent_reasoning_steps_total", "Total reasoning steps executed", labels).inc(
+            float(reasoning_steps)
+        )
         self.registry.counter("agent_token_usage_total", "Total tokens used by agent", labels).inc(float(token_usage))
         self.registry.counter("agent_cost_usd_total", "Total dollar cost of agent runs", labels).inc(cost_usd)
-        self.registry.histogram("agent_latency_seconds", "Agent end-to-end latency", labels=labels).observe(latency_seconds)
+        self.registry.histogram("agent_latency_seconds", "Agent end-to-end latency", labels=labels).observe(
+            latency_seconds
+        )
 
     # 5. AI Model Metrics
     def record_ai_inference(
@@ -104,8 +122,12 @@ class PlatformMetricsCollector:
         labels = {"model": model_name, "provider": provider}
         self.registry.counter("ai_model_requests_total", "Total AI model invocations", labels).inc(1.0)
         self.registry.counter("ai_prompt_tokens_total", "Total prompt tokens", labels).inc(float(prompt_tokens))
-        self.registry.counter("ai_completion_tokens_total", "Total completion tokens", labels).inc(float(completion_tokens))
-        self.registry.histogram("ai_model_latency_seconds", "Model inference latency", labels=labels).observe(latency_seconds)
+        self.registry.counter("ai_completion_tokens_total", "Total completion tokens", labels).inc(
+            float(completion_tokens)
+        )
+        self.registry.histogram("ai_model_latency_seconds", "Model inference latency", labels=labels).observe(
+            latency_seconds
+        )
         self.registry.histogram("ai_eval_scores", "Model evaluation score", labels=labels).observe(eval_score)
         if hallucination_detected:
             self.registry.counter("ai_hallucinations_total", "Total hallucinations detected", labels).inc(1.0)
@@ -127,4 +149,6 @@ class PlatformMetricsCollector:
             self.registry.counter("connector_failures_total", "Total connector call failures", labels).inc(1.0)
         if rate_limited:
             self.registry.counter("connector_rate_limits_total", "Total connector rate limit events", labels).inc(1.0)
-        self.registry.histogram("connector_latency_seconds", "Connector call latency", labels=labels).observe(latency_seconds)
+        self.registry.histogram("connector_latency_seconds", "Connector call latency", labels=labels).observe(
+            latency_seconds
+        )

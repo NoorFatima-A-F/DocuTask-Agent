@@ -19,8 +19,4 @@ class WorkflowDispatcher:
         if self.execution_adapter and hasattr(self.execution_adapter, "execute_task_plan"):
             return await self.execution_adapter.execute_task_plan(node.handler, state_vars)
         # Default mock simulation
-        return {
-            "status": "COMPLETED",
-            "node_id": node.node_id,
-            "output": f"Output of {node.name}"
-        }
+        return {"status": "COMPLETED", "node_id": node.node_id, "output": f"Output of {node.name}"}

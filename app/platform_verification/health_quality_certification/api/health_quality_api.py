@@ -1,6 +1,7 @@
 """
 Phase 3H.5.11: Health Quality & Certification API Router
 """
+
 from fastapi import APIRouter
 from ..runtime.health_quality_runtime import HealthQualityRuntime
 

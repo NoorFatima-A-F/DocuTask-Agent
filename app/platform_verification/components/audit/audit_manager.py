@@ -1,6 +1,7 @@
 """
 Audit Manager: Immutable append-only hash-chained ledger: H_n = SHA256(H_{n-1} || Payload_n).
 """
+
 from typing import Dict, Any, List
 import hashlib
 import json
@@ -11,9 +12,10 @@ from ...domain.models import AuditEntry
 
 GENESIS_HASH = "0000000000000000000000000000000000000000000000000000000000000000"
 
+
 class AuditManager(AuditManagerInterface):
     """Cryptographic append-only audit ledger."""
-    
+
     def __init__(self):
         self._chain: List[Dict[str, Any]] = []
         self._domain_entries: List[AuditEntry] = []
@@ -32,18 +34,20 @@ class AuditManager(AuditManagerInterface):
             actor="system_verifier",
             sha256_prev_hash=prev_hash,
             sha256_entry_hash=entry_hash,
-            details=payload
+            details=payload,
         )
         self._domain_entries.append(entry)
-        self._chain.append({
-            "sequence": seq,
-            "event_type": event_type,
-            "actor": "system_verifier",
-            "timestamp": entry.timestamp,
-            "payload": payload,
-            "previous_hash": prev_hash,
-            "record_hash": entry_hash
-        })
+        self._chain.append(
+            {
+                "sequence": seq,
+                "event_type": event_type,
+                "actor": "system_verifier",
+                "timestamp": entry.timestamp,
+                "payload": payload,
+                "previous_hash": prev_hash,
+                "record_hash": entry_hash,
+            }
+        )
         return entry
 
     async def log_event(self, event_type: str, actor: str, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -56,7 +60,7 @@ class AuditManager(AuditManagerInterface):
             "actor": actor,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "payload": payload,
-            "previous_hash": prev_hash
+            "previous_hash": prev_hash,
         }
         serialized = json.dumps(entry_payload, sort_keys=True)
         h = hashlib.sha256((prev_hash + serialized).encode("utf-8")).hexdigest()
@@ -68,12 +72,12 @@ class AuditManager(AuditManagerInterface):
         self.observability.record_operation(2.0)
         if self._domain_entries:
             for i, entry in enumerate(self._domain_entries):
-                prev = GENESIS_HASH if i == 0 else self._domain_entries[i-1].sha256_entry_hash
+                prev = GENESIS_HASH if i == 0 else self._domain_entries[i - 1].sha256_entry_hash
                 if entry.sha256_prev_hash != prev:
                     return False
         if self._chain:
             for i, entry in enumerate(self._chain):
-                prev = GENESIS_HASH if i == 0 else self._chain[i-1]["record_hash"]
+                prev = GENESIS_HASH if i == 0 else self._chain[i - 1]["record_hash"]
                 if entry["previous_hash"] != prev:
                     return False
         return True

@@ -1,6 +1,7 @@
 """
 Weighted Database Quality Scoring and Certification Engine.
 """
+
 from app.platform_verification.database_verification.domain.models import (
     SchemaQualityReport,
     TransactionSafetyReport,

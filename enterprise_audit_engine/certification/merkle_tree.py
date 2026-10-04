@@ -78,10 +78,12 @@ class MerkleEvidenceTree:
             is_right = idx % 2 == 1
             sibling_idx = idx - 1 if is_right else (idx + 1 if idx + 1 < len(level) else idx)
             sibling_hash = level[sibling_idx]
-            proof.append({
-                "position": "left" if is_right else "right",
-                "hash": sibling_hash,
-            })
+            proof.append(
+                {
+                    "position": "left" if is_right else "right",
+                    "hash": sibling_hash,
+                }
+            )
             idx = idx // 2
 
         return proof

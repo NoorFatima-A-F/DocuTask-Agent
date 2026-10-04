@@ -13,6 +13,7 @@ from app.agents.recovery.root_cause import RootCauseReport
 
 class IFailureClassifier(ABC):
     """Abstract classifier categorizing raw errors into typed Failures."""
+
     @abstractmethod
     def classify(self, identity: FailureIdentity, evidence: FailureEvidence) -> Failure:
         pass
@@ -20,6 +21,7 @@ class IFailureClassifier(ABC):
 
 class IRootCauseAnalyzer(ABC):
     """Abstract root cause diagnostic analyzer."""
+
     @abstractmethod
     def analyze(self, failure: Failure) -> RootCauseReport:
         pass
@@ -27,6 +29,7 @@ class IRootCauseAnalyzer(ABC):
 
 class IRecoveryStrategySelector(ABC):
     """Abstract strategy selector."""
+
     @abstractmethod
     def select_strategy(self, failure: Failure, root_cause: RootCauseReport) -> RecoveryStrategyDefinition:
         pass
@@ -34,6 +37,7 @@ class IRecoveryStrategySelector(ABC):
 
 class IRecoveryPlanner(ABC):
     """Abstract planner constructing RecoveryGraph DAGs."""
+
     @abstractmethod
     def plan_recovery(self, failure: Failure, strategy_def: RecoveryStrategyDefinition) -> RecoveryGraph:
         pass
@@ -41,6 +45,7 @@ class IRecoveryPlanner(ABC):
 
 class IRecoveryEngine(ABC):
     """Abstract interface for the autonomous recovery engine."""
+
     @abstractmethod
     async def recover(self, request: RecoveryRequest) -> RecoveryResult:
         pass

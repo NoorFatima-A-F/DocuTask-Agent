@@ -1,6 +1,7 @@
 """
 Enterprise Reporting, Audit Intelligence & Governance Dashboard Package.
 """
+
 from app.platform_verification.reporting_audit.domain.models import (
     AiGovernanceDashboardView,
     AuditPackage,

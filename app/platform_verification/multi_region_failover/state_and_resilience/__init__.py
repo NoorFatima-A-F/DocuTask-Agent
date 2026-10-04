@@ -1,6 +1,7 @@
 """
 State and Split-Brain Defense Subsystem.
 """
+
 from app.platform_verification.multi_region_failover.state_and_resilience.workflow_checkpoint_verifier import (
     WorkflowCheckpointVerifier,
 )

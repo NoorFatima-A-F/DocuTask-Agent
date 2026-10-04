@@ -9,6 +9,7 @@ from app.agents.planning.graph import PlanGraph
 
 class TaskSequence(BaseModel):
     """Linear execution sequence derived from plan DAG."""
+
     ordered_node_ids: List[str] = Field(default_factory=list)
     critical_path_node_ids: List[str] = Field(default_factory=list)
     estimated_critical_path_duration_seconds: float = Field(default=0.0, ge=0.0)
@@ -25,5 +26,5 @@ class CriticalPathCalculator:
         return TaskSequence(
             ordered_node_ids=topological_order,
             critical_path_node_ids=critical_path,
-            estimated_critical_path_duration_seconds=duration
+            estimated_critical_path_duration_seconds=duration,
         )

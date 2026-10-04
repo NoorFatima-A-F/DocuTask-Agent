@@ -1,11 +1,13 @@
 """
 Enterprise Retry Policies & Circuit Breakers.
 """
+
 import time
 import random
 from typing import Callable, TypeVar, Optional
 
 T = TypeVar("T")
+
 
 class RetryPolicy:
     def __init__(self, max_retries: int = 3, initial_delay_sec: float = 0.1, backoff_multiplier: float = 2.0):

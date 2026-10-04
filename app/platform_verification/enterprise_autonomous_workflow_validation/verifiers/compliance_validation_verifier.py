@@ -25,11 +25,30 @@ class ComplianceValidationVerifier(IComplianceValidationVerifier):
 
     def verify(self) -> ComplianceValidationReport:
         frameworks = [
-            ComplianceFrameworkAudit(framework_name="SOC2_TypeII", controls_tested=42, controls_passed=42, compliance_status="COMPLIANT"),
-            ComplianceFrameworkAudit(framework_name="HIPAA_SecurityAndPrivacy", controls_tested=36, controls_passed=36, compliance_status="COMPLIANT"),
-            ComplianceFrameworkAudit(framework_name="GDPR_DataProtection", controls_tested=28, controls_passed=28, compliance_status="COMPLIANT"),
-            ComplianceFrameworkAudit(framework_name="ISO27001_ISMS", controls_tested=50, controls_passed=50, compliance_status="COMPLIANT"),
-            ComplianceFrameworkAudit(framework_name="EnterpriseDataRetentionPolicy", controls_tested=15, controls_passed=15, compliance_status="COMPLIANT"),
+            ComplianceFrameworkAudit(
+                framework_name="SOC2_TypeII", controls_tested=42, controls_passed=42, compliance_status="COMPLIANT"
+            ),
+            ComplianceFrameworkAudit(
+                framework_name="HIPAA_SecurityAndPrivacy",
+                controls_tested=36,
+                controls_passed=36,
+                compliance_status="COMPLIANT",
+            ),
+            ComplianceFrameworkAudit(
+                framework_name="GDPR_DataProtection",
+                controls_tested=28,
+                controls_passed=28,
+                compliance_status="COMPLIANT",
+            ),
+            ComplianceFrameworkAudit(
+                framework_name="ISO27001_ISMS", controls_tested=50, controls_passed=50, compliance_status="COMPLIANT"
+            ),
+            ComplianceFrameworkAudit(
+                framework_name="EnterpriseDataRetentionPolicy",
+                controls_tested=15,
+                controls_passed=15,
+                compliance_status="COMPLIANT",
+            ),
         ]
 
         checks = [

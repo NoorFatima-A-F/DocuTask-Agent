@@ -1,6 +1,7 @@
 """
 Dependency Graph Manager for Health Check Architecture Verification (Part 3H.1).
 """
+
 from typing import Dict, List
 from app.platform_verification.health_architecture.domain.models import (
     DependencyPriority,
@@ -77,7 +78,6 @@ class DependencyGraphManager(IDependencyGraphManager):
                 recovery_strategy="drop_telemetry_spans_fail_open",
                 owner_team="sre_observability_team",
             ),
-
             # Celery / Worker Cluster Dependencies
             DependencyNodeSpec(
                 dependency_id="worker_to_broker",
@@ -133,7 +133,6 @@ class DependencyGraphManager(IDependencyGraphManager):
                 recovery_strategy="buffer_or_drop_silently",
                 owner_team="sre_observability_team",
             ),
-
             # Vector Search Dependencies
             DependencyNodeSpec(
                 dependency_id="vector_to_chroma",
@@ -193,8 +192,7 @@ class DependencyGraphManager(IDependencyGraphManager):
         # 2. Critical dependencies must define a recovery strategy and timeout < 5000ms
         # 3. Graph connectivity must be validated
         valid_specs = all(
-            s.timeout_ms <= 3000 and len(s.recovery_strategy) > 0 and len(s.owner_team) > 0
-            for s in self._specs
+            s.timeout_ms <= 3000 and len(s.recovery_strategy) > 0 and len(s.owner_team) > 0 for s in self._specs
         )
 
         passed = (

@@ -106,4 +106,3 @@ class HumanTaskManager:
 
     def get_tickets_for_execution(self, execution_id: str) -> List[HumanTaskTicket]:
         return self.queue.get_tickets_for_execution(execution_id)
-

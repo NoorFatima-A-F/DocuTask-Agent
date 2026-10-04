@@ -10,6 +10,7 @@ import uuid
 
 class ServiceHealthState(str, Enum):
     """Service instance health state."""
+
     HEALTHY = "healthy"
     DEGRADED = "degraded"
     UNHEALTHY = "unhealthy"
@@ -20,6 +21,7 @@ class ServiceHealthState(str, Enum):
 @dataclass
 class ServiceEndpoint:
     """Network connection details for a service endpoint."""
+
     port: int
     protocol: str = "https"
     path_prefix: str = "/"
@@ -29,6 +31,7 @@ class ServiceEndpoint:
 @dataclass
 class ServiceInstance:
     """A registered running instance of a service workload."""
+
     instance_id: str
     service_id: str
     service_name: str
@@ -67,6 +70,7 @@ class ServiceInstance:
 @dataclass
 class ServiceRegistration:
     """Request payload for registering a service instance."""
+
     service_name: str
     host: str
     port: int
@@ -114,7 +118,11 @@ class ServiceDiscoveryRegistry:
                 labels=registration.labels,
                 capabilities=registration.capabilities,
                 tenant_scope=registration.tenant_scope,
-                security_profile=registration.security_profile or {"mtls_required": True, "spiffe_id": f"spiffe://docutask.internal/ns/{registration.namespace}/sa/{registration.service_name}"},
+                security_profile=registration.security_profile
+                or {
+                    "mtls_required": True,
+                    "spiffe_id": f"spiffe://docutask.internal/ns/{registration.namespace}/sa/{registration.service_name}",
+                },
                 registered_at=now,
                 last_heartbeat_at=now,
                 ttl_seconds=registration.ttl_seconds,

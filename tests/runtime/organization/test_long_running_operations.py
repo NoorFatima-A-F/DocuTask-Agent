@@ -2,6 +2,7 @@
 Test Suite: Long Running Operations & State Durability
 Validates persistent checkpointing, heartbeat monitoring, persistent scheduler, crash recovery, and distributed leases.
 """
+
 from app.runtime.operations.checkpoint_manager import CheckpointManager
 from app.runtime.operations.heartbeat_manager import HeartbeatManager
 from app.runtime.operations.persistent_scheduler import PersistentScheduler
@@ -11,7 +12,7 @@ from app.runtime.operations.lease_manager import LeaseManager
 
 def test_checkpoint_manager_persistence():
     mgr = CheckpointManager()
-    
+
     cp = mgr.create_checkpoint(
         mission_id="mission_test_chk",
         completed_tasks=["task_1", "task_2"],
@@ -31,7 +32,7 @@ def test_checkpoint_manager_persistence():
 
 def test_heartbeat_manager_liveness():
     mgr = HeartbeatManager(timeout_seconds=1.0)
-    
+
     status_initial = mgr.check_liveness()
     assert status_initial["all_departments_healthy"] is True
 
@@ -42,7 +43,7 @@ def test_heartbeat_manager_liveness():
 
 def test_persistent_scheduler():
     sched = PersistentScheduler()
-    
+
     op = sched.schedule_operation(
         name="Test Periodic Sync",
         target_department_id="dept_validation",
@@ -64,7 +65,7 @@ def test_recovery_snapshot_engine():
 
 def test_lease_manager_fencing_tokens():
     mgr = LeaseManager()
-    
+
     l1 = mgr.acquire_lease("GPU_NODE_99", "dept_ocr", ttl_seconds=30.0)
     assert l1 is not None
     assert l1.holder_department_id == "dept_ocr"

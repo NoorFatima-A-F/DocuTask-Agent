@@ -20,14 +20,14 @@ class IncidentManager:
             FailureSeverity.CRITICAL: IncidentSeverity.SEV1,
             FailureSeverity.HIGH: IncidentSeverity.SEV2,
             FailureSeverity.MEDIUM: IncidentSeverity.SEV3,
-            FailureSeverity.LOW: IncidentSeverity.SEV4
+            FailureSeverity.LOW: IncidentSeverity.SEV4,
         }
         incident = Incident(
             execution_id=failure.identity.execution_id,
             failure_id=failure.identity.failure_id,
             title=title,
             description=description,
-            severity=sev_map.get(failure.severity, IncidentSeverity.SEV3)
+            severity=sev_map.get(failure.severity, IncidentSeverity.SEV3),
         )
         self._incidents[incident.incident_id] = incident
         return incident

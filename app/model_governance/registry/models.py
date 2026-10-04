@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field, model_validator
 
 class ModelLifecycleState(str, enum.Enum):
     """9-state Model Lifecycle FSM."""
+
     REGISTERED = "REGISTERED"
     EVALUATING = "EVALUATING"
     REVIEW = "REVIEW"
@@ -23,6 +24,7 @@ class ModelLifecycleState(str, enum.Enum):
 
 class ModelCategory(str, enum.Enum):
     """Supported model functional categories."""
+
     LLM = "LLM"
     FOUNDATION_LLM = "FOUNDATION_LLM"
     REASONING_LLM = "REASONING_LLM"
@@ -41,6 +43,7 @@ class ModelCategory(str, enum.Enum):
 
 class ModelProvider(str, enum.Enum):
     """Supported AI model providers."""
+
     GOOGLE = "GOOGLE"
     GOOGLE_GEMINI = "GOOGLE_GEMINI"
     OPENAI = "OPENAI"
@@ -59,6 +62,7 @@ class ModelProvider(str, enum.Enum):
 
 class DeploymentType(str, enum.Enum):
     """Model deployment hosting architectures."""
+
     CLOUD_SaaS = "CLOUD_SaaS"
     MANAGED_CLOUD = "MANAGED_CLOUD"
     DEDICATED_ENDPOINT = "DEDICATED_ENDPOINT"
@@ -69,6 +73,7 @@ class DeploymentType(str, enum.Enum):
 
 class RiskLevel(str, enum.Enum):
     """Risk tiers for AI models."""
+
     LOW = "LOW"
     MEDIUM = "MEDIUM"
     HIGH = "HIGH"
@@ -77,6 +82,7 @@ class RiskLevel(str, enum.Enum):
 
 class ApprovalStatus(str, enum.Enum):
     """Multi-stage approval status."""
+
     PENDING_SUBMISSION = "PENDING_SUBMISSION"
     UNDER_TECHNICAL_REVIEW = "UNDER_TECHNICAL_REVIEW"
     UNDER_SECURITY_REVIEW = "UNDER_SECURITY_REVIEW"
@@ -88,6 +94,7 @@ class ApprovalStatus(str, enum.Enum):
 
 class Model(BaseModel):
     """Canonical Governed AI Model Entity."""
+
     model_id: str
     name: Optional[str] = None
     model_name: Optional[str] = None

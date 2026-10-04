@@ -11,6 +11,7 @@ from typing import List
 @dataclass(frozen=True)
 class EvidenceRequirement:
     """Specifies evidence depth, SLSA provenance tier, and cryptographic requirements."""
+
     target_quality_level: str = "LEVEL_A"  # LEVEL_A to LEVEL_E
     min_slsa_level: int = 3
     require_merkle_dag_lineage: bool = True

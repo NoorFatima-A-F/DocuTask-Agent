@@ -24,6 +24,7 @@ logger = logging.getLogger("infrastructure.reliability.coordinator")
 
 class ReliabilityAssessment(BaseModel):
     """Assessment of component or platform resilience."""
+
     target_id: str
     component_name: str
     state: ReliabilityState
@@ -80,21 +81,33 @@ class ReliabilityCoordinator:
             at_risk = True
             recommended_action = "TRIGGER_EMERGENCY_FAILOVER"
             if sm.can_transition_to(ReliabilityState.OUTAGE):
-                sm.transition_to(ReliabilityState.OUTAGE, reason="RTO max acceptable threshold breached", trigger_source="coordinator")
+                sm.transition_to(
+                    ReliabilityState.OUTAGE,
+                    reason="RTO max acceptable threshold breached",
+                    trigger_source="coordinator",
+                )
         elif current_downtime_seconds > target.rto.target_seconds:
             at_risk = True
             recommended_action = "INITIATE_FAILOVER_PLANNING"
             if sm.can_transition_to(ReliabilityState.FAILING):
-                sm.transition_to(ReliabilityState.FAILING, reason="RTO target threshold breached", trigger_source="coordinator")
+                sm.transition_to(
+                    ReliabilityState.FAILING, reason="RTO target threshold breached", trigger_source="coordinator"
+                )
         elif current_lag_seconds > target.rpo.target_seconds:
             at_risk = True
             recommended_action = "THROTTLE_INGESTION_AND_SYNC"
             if sm.can_transition_to(ReliabilityState.DEGRADED):
-                sm.transition_to(ReliabilityState.DEGRADED, reason="RPO replication lag threshold breached", trigger_source="coordinator")
+                sm.transition_to(
+                    ReliabilityState.DEGRADED,
+                    reason="RPO replication lag threshold breached",
+                    trigger_source="coordinator",
+                )
         elif sm.current_state in (ReliabilityState.DEGRADED, ReliabilityState.FAILING, ReliabilityState.RECOVERED):
             if current_downtime_seconds == 0.0 and current_lag_seconds < target.rpo.target_seconds:
                 if sm.can_transition_to(ReliabilityState.OPTIMAL):
-                    sm.transition_to(ReliabilityState.OPTIMAL, reason="Metrics returned to normal", trigger_source="coordinator")
+                    sm.transition_to(
+                        ReliabilityState.OPTIMAL, reason="Metrics returned to normal", trigger_source="coordinator"
+                    )
 
         assessment = ReliabilityAssessment(
             target_id=target_id,

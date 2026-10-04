@@ -75,4 +75,3 @@ def compute_sha256(data: Union[bytes, str]) -> str:
     if isinstance(data, str):
         data = data.encode("utf-8")
     return ProvenanceHasher.hash_bytes(data, HashAlgorithm.SHA256)
-

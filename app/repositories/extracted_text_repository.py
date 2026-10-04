@@ -47,7 +47,5 @@ class ExtractedTextRepository(BaseRepository[ExtractedText]):
 
     async def delete_document_text(self, document_id: uuid.UUID) -> None:
         """Deletes all extracted text records for a given document."""
-        await self.db.execute(
-            delete(ExtractedText).where(ExtractedText.document_id == document_id)
-        )
+        await self.db.execute(delete(ExtractedText).where(ExtractedText.document_id == document_id))
         await self.db.flush()

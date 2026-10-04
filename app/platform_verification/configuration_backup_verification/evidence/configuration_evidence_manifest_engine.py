@@ -1,6 +1,7 @@
 """
 Evidence Manifest Engine for Enterprise Configuration Backup Verification (Part 3G.2D).
 """
+
 import json
 from pathlib import Path
 from app.core.security import resolve_safe_path, validate_safe_filename_segment
@@ -65,10 +66,18 @@ class ConfigurationEvidenceManifestEngine(IConfigurationEvidenceManifestEngine):
                 "version": "1.0.0",
                 "composite_score": getattr(verification_data.get("scorecard"), "composite_score", 0.0),
                 "certification_tier": getattr(verification_data.get("scorecard"), "certification_tier", "UNKNOWN"),
-                "total_configuration_sources": getattr(verification_data.get("configuration_inventory"), "configuration_sources", 0),
-                "total_secrets_audited": getattr(verification_data.get("secret_inventory"), "total_secrets_discovered", 0),
-                "cryptographic_outputs_identical": getattr(verification_data.get("encryption_key_recovery"), "all_cryptographic_outputs_identical", False),
-                "compliance_score_percent": getattr(verification_data.get("compliance_report"), "compliance_score_percent", 0.0),
+                "total_configuration_sources": getattr(
+                    verification_data.get("configuration_inventory"), "configuration_sources", 0
+                ),
+                "total_secrets_audited": getattr(
+                    verification_data.get("secret_inventory"), "total_secrets_discovered", 0
+                ),
+                "cryptographic_outputs_identical": getattr(
+                    verification_data.get("encryption_key_recovery"), "all_cryptographic_outputs_identical", False
+                ),
+                "compliance_score_percent": getattr(
+                    verification_data.get("compliance_report"), "compliance_score_percent", 0.0
+                ),
                 "gate_passed": getattr(verification_data.get("scorecard"), "passed", False),
             },
         }

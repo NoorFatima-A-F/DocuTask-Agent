@@ -13,14 +13,16 @@ def test_service_impersonation_rejection() -> None:
     sdk = NetworkSDK()
 
     # Deny all rule except for verified service account
-    sdk.zero_trust_engine.add_rule(ZeroTrustRule(
-        rule_id="strict-finance",
-        name="Strict Finance Access",
-        action=ZeroTrustAction.DENY,
-        source_spiffe_pattern="spiffe://docutask.internal/ns/default/sa/untrusted-service",
-        target_spiffe_pattern="spiffe://docutask.internal/ns/default/sa/finance-ledger",
-        priority=10,
-    ))
+    sdk.zero_trust_engine.add_rule(
+        ZeroTrustRule(
+            rule_id="strict-finance",
+            name="Strict Finance Access",
+            action=ZeroTrustAction.DENY,
+            source_spiffe_pattern="spiffe://docutask.internal/ns/default/sa/untrusted-service",
+            target_spiffe_pattern="spiffe://docutask.internal/ns/default/sa/finance-ledger",
+            priority=10,
+        )
+    )
 
     res = sdk.secure_call(
         caller_service="untrusted-service",
@@ -53,7 +55,10 @@ def test_mesh_network_partition_failover() -> None:
     sdk.register_service("storage-broker", host="10.0.2.20", port=443)
 
     # Primary crashes / fails health check
-    sdk.discovery_registry.update_instance_health(inst_primary.instance_id, state=sdk.discovery_registry.get_instance(inst_primary.instance_id).health_state.UNHEALTHY)
+    sdk.discovery_registry.update_instance_health(
+        inst_primary.instance_id,
+        state=sdk.discovery_registry.get_instance(inst_primary.instance_id).health_state.UNHEALTHY,
+    )
 
     # Resolution should automatically bypass unhealthy instance
     resolved = sdk.resolve_service("storage-broker")

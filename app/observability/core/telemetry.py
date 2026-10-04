@@ -43,7 +43,7 @@ class InMemoryTelemetryExporter(ITelemetryExporter):
     def export(self, batch: List[TelemetryRecord]) -> None:
         self.records.extend(batch)
         if len(self.records) > self.max_records:
-            self.records = self.records[-self.max_records:]
+            self.records = self.records[-self.max_records :]
 
     def clear(self) -> None:
         self.records.clear()

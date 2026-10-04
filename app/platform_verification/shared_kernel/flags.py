@@ -1,8 +1,10 @@
 """
 Feature Flag System.
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict
+
 
 class FeatureFlagProvider(ABC):
     @abstractmethod
@@ -18,7 +20,7 @@ class MemoryFeatureFlagProvider(FeatureFlagProvider):
             "enable_cas_merkle_trees": True,
             "enable_hmac_certification": True,
             "enable_audit_hash_chain": True,
-            "enable_async_worker_execution": True
+            "enable_async_worker_execution": True,
         }
 
     def is_enabled(self, flag_key: str, tenant_id: str = "default", default: bool = False) -> bool:

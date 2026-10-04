@@ -40,11 +40,10 @@ class ExecutionDAG:
         if node_id not in self.nodes:
             return None
         node = self.nodes.pop(node_id)
-        
+
         # Remove attached edges
         edges_to_remove = [
-            e_id for e_id, e in self.edges.items()
-            if e.source_node_id == node_id or e.target_node_id == node_id
+            e_id for e_id, e in self.edges.items() if e.source_node_id == node_id or e.target_node_id == node_id
         ]
         for e_id in edges_to_remove:
             self.remove_edge(e_id)
@@ -57,7 +56,7 @@ class ExecutionDAG:
         """Adds an edge between existing nodes, ensuring no cycles."""
         if edge.source_node_id not in self.nodes or edge.target_node_id not in self.nodes:
             raise ValueError(f"Source {edge.source_node_id} or target {edge.target_node_id} does not exist in DAG.")
-        
+
         self.edges[edge.edge_id] = edge
         self._adjacency_out[edge.source_node_id].append(edge.target_node_id)
         self._adjacency_in[edge.target_node_id].append(edge.source_node_id)
@@ -68,7 +67,9 @@ class ExecutionDAG:
             target_node.dependencies.append(
                 DependencySpec(
                     parent_node_id=edge.source_node_id,
-                    dependency_type=DependencyType.HARD if edge.edge_type != EdgeType.CONDITIONAL_BRANCH else DependencyType.CONDITIONAL,
+                    dependency_type=DependencyType.HARD
+                    if edge.edge_type != EdgeType.CONDITIONAL_BRANCH
+                    else DependencyType.CONDITIONAL,
                     condition_expr=edge.condition_expression,
                 )
             )
@@ -90,8 +91,7 @@ class ExecutionDAG:
         # Remove from target node dependencies
         if edge.target_node_id in self.nodes:
             self.nodes[edge.target_node_id].dependencies = [
-                d for d in self.nodes[edge.target_node_id].dependencies
-                if d.parent_node_id != edge.source_node_id
+                d for d in self.nodes[edge.target_node_id].dependencies if d.parent_node_id != edge.source_node_id
             ]
         return edge
 
@@ -161,7 +161,7 @@ class ExecutionDAG:
             return [], 0.0
 
         topo = self.topological_sort()
-        
+
         # Forward pass: Earliest Start (ES) and Earliest Finish (EF)
         for node in topo:
             parents = self._adjacency_in.get(node.node_id, [])
@@ -183,7 +183,7 @@ class ExecutionDAG:
                 node.latest_finish_ms = min(self.nodes[c].latest_start_ms for c in children)
             node.latest_start_ms = node.latest_finish_ms - max(node.estimated_runtime_ms, 1.0)
             node.total_slack_ms = round(max(0.0, node.latest_start_ms - node.earliest_start_ms), 2)
-            node.is_critical_path = (node.total_slack_ms == 0.0)
+            node.is_critical_path = node.total_slack_ms == 0.0
 
         critical_nodes = [n.node_id for n in topo if n.is_critical_path]
         return critical_nodes, round(total_duration, 2)

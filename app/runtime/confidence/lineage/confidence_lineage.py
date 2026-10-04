@@ -30,8 +30,8 @@ class ConfidenceLineageEngine:
         truth_ledger_hash: str,
         replay_offset: int,
     ) -> ConfidenceLineageRecord:
-        ev_hash = hashlib.sha256(json.dumps(evidence_signals, sort_keys=True).encode('utf-8')).hexdigest()
-        feat_hash = hashlib.sha256(json.dumps(features, sort_keys=True).encode('utf-8')).hexdigest()
+        ev_hash = hashlib.sha256(json.dumps(evidence_signals, sort_keys=True).encode("utf-8")).hexdigest()
+        feat_hash = hashlib.sha256(json.dumps(features, sort_keys=True).encode("utf-8")).hexdigest()
 
         record = ConfidenceLineageRecord(
             lineage_id=f"lin-{mission_id}-{dimension.lower()}",

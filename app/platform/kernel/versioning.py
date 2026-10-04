@@ -11,6 +11,7 @@ from typing import Optional
 @dataclass(frozen=True, order=True)
 class SemanticVersion:
     """Immutable SemVer 2.0.0 implementation."""
+
     major: int
     minor: int
     patch: int
@@ -70,6 +71,7 @@ class SemanticVersion:
 @dataclass(frozen=True)
 class VersionRange:
     """Specifies minimum and optional maximum version compatibility bounds."""
+
     min_version: SemanticVersion
     max_version: Optional[SemanticVersion] = None
     include_min: bool = True

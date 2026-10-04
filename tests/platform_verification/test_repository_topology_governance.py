@@ -1,6 +1,7 @@
 """
 Unit and Integration Test Suite for Repository Topology, Metadata, and Architecture Governance.
 """
+
 import pytest
 import json
 from pathlib import Path
@@ -8,11 +9,18 @@ from datetime import datetime, timezone
 
 from tooling.governance.repository_validator import RepositoryTopologyValidator
 from app.shared_kernel import (
-    Ok, Err,
-    VerificationRunId, DatasetId, EvidenceId, CertificateId,
+    Ok,
+    Err,
+    VerificationRunId,
+    DatasetId,
+    EvidenceId,
+    CertificateId,
     DeterministicTimeProvider,
-    CorrelationContext, get_current_correlation, set_current_correlation,
-    PlatformVerificationError, InvariantViolationError
+    CorrelationContext,
+    get_current_correlation,
+    set_current_correlation,
+    PlatformVerificationError,
+    InvariantViolationError,
 )
 from app.infrastructure.storage.cas_store import ContentAddressableStore
 from app.infrastructure.telemetry.otel_adapter import TelemetryAdapter
@@ -59,7 +67,7 @@ def test_shared_kernel_result_monad():
 def test_shared_kernel_typed_ids():
     run_id = VerificationRunId.generate()
     assert str(run_id).startswith("vrun_")
-    
+
     ds_id = DatasetId.generate()
     assert str(ds_id).startswith("ds_")
 

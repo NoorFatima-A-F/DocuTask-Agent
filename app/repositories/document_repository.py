@@ -63,7 +63,7 @@ class DocumentRepository(BaseRepository[Document]):
                 or_(
                     func.lower(Document.original_filename).like(term),
                     func.lower(Document.file_extension).like(term),
-                    func.lower(Document.mime_type).like(term)
+                    func.lower(Document.mime_type).like(term),
                 )
             )
         result = await self.db.execute(query)
@@ -79,8 +79,8 @@ class DocumentRepository(BaseRepository[Document]):
                 or_(
                     func.lower(Document.original_filename).like(term),
                     func.lower(Document.file_extension).like(term),
-                    func.lower(Document.mime_type).like(term)
-                )
+                    func.lower(Document.mime_type).like(term),
+                ),
             )
             .order_by(Document.created_at.desc())
             .offset(skip)
@@ -90,15 +90,11 @@ class DocumentRepository(BaseRepository[Document]):
         return list(result.scalars().all())
 
     async def paginate(
-        self,
-        owner_id: uuid.UUID,
-        page: int = 1,
-        page_size: int = 20,
-        search_query: Optional[str] = None
+        self, owner_id: uuid.UUID, page: int = 1, page_size: int = 20, search_query: Optional[str] = None
     ) -> Tuple[List[Document], int]:
         """
         Returns paginated list of documents alongside total count.
-        
+
         :return: Tuple of (document_list, total_count)
         """
         page = max(1, page)

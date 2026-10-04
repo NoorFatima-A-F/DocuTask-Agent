@@ -19,6 +19,7 @@ class BranchType(str, Enum):
 
 class ConditionalBranch(BaseModel):
     """Conditional branch routed based on boolean evaluation of condition."""
+
     branch_id: str
     condition: BranchCondition
     target_node_id: str
@@ -28,6 +29,7 @@ class ConditionalBranch(BaseModel):
 
 class ParallelBranch(BaseModel):
     """Set of independent node branches executed concurrently."""
+
     branch_id: str
     concurrent_node_ids: List[str] = Field(default_factory=list)
     join_node_id: Optional[str] = Field(default=None)

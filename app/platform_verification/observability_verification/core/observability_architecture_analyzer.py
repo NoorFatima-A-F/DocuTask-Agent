@@ -1,6 +1,7 @@
 """
 Observability Architecture & Instrumentation Analyzer.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.observability_verification.domain.models import ObservabilityArchitectureReport
 from app.platform_verification.observability_verification.domain.interfaces import IObservabilityArchitectureAnalyzer
@@ -10,9 +11,18 @@ class ObservabilityArchitectureAnalyzer(IObservabilityArchitectureAnalyzer):
     """Audits telemetry instrumentation across all core subsystems."""
 
     REQUIRED_SUBSYSTEMS = {
-        "api", "worker", "agent_runtime", "memory", "database",
-        "queue", "storage", "ocr", "llm_provider", "security",
-        "verification_engine", "telemetry_collector"
+        "api",
+        "worker",
+        "agent_runtime",
+        "memory",
+        "database",
+        "queue",
+        "storage",
+        "ocr",
+        "llm_provider",
+        "security",
+        "verification_engine",
+        "telemetry_collector",
     }
 
     def analyze_architecture(self, services: List[Dict[str, Any]]) -> ObservabilityArchitectureReport:

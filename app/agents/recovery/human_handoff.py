@@ -12,6 +12,7 @@ from app.agents.recovery.root_cause import RootCauseReport
 
 class HumanHandoffTicket(BaseModel):
     """Ticket presented to human operator when autonomous recovery cannot proceed safely."""
+
     execution_id: UUID
     failure_id: UUID
     summary: str
@@ -27,5 +28,5 @@ class HumanHandoffManager:
             execution_id=failure.identity.execution_id,
             failure_id=failure.identity.failure_id,
             summary=f"Failure: {failure.category.value} - {report.primary_cause}",
-            suggested_actions={"remedy": report.remediation_recommendation}
+            suggested_actions={"remedy": report.remediation_recommendation},
         )

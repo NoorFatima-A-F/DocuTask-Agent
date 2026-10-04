@@ -95,14 +95,16 @@ class TrafficSplitter:
         shadow_response: MeshResponse,
     ) -> None:
         """Record shadow execution telemetry asynchronously."""
-        self._shadow_records.append({
-            "request_id": request.request_id,
-            "target_service": request.target_service,
-            "shadow_version": shadow_version,
-            "status_code": shadow_response.status_code,
-            "duration_ms": shadow_response.duration_ms,
-            "timestamp": time.time(),
-        })
+        self._shadow_records.append(
+            {
+                "request_id": request.request_id,
+                "target_service": request.target_service,
+                "shadow_version": shadow_version,
+                "status_code": shadow_response.status_code,
+                "duration_ms": shadow_response.duration_ms,
+                "timestamp": time.time(),
+            }
+        )
         # Keep capped
         if len(self._shadow_records) > 200:
             self._shadow_records.pop(0)

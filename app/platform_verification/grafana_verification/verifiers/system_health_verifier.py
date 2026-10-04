@@ -63,7 +63,7 @@ class SystemHealthDashboardVerifier(IDashboardSpecVerifier):
                 panel_id=5,
                 title="HTTP 4xx/5xx Error Rates",
                 panel_type=PanelVisualizationType.TIME_SERIES,
-                promql_query="sum(rate(docutask_http_requests_total{status=~\"[45]..\"}[5m])) by (status)",
+                promql_query='sum(rate(docutask_http_requests_total{status=~"[45].."}[5m])) by (status)',
                 operational_question="What is the proportion of failing client and server requests?",
                 threshold_warning=1.0,
                 threshold_critical=5.0,

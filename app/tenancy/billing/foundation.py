@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 
 class InvoiceItem(BaseModel):
     """Line item in a tenant billing invoice."""
+
     description: str
     quantity: float
     unit_price_usd: float
@@ -22,6 +23,7 @@ class InvoiceItem(BaseModel):
 
 class Invoice(BaseModel):
     """Billing invoice entity."""
+
     invoice_id: str
     organization_id: str
     subscription_id: str
@@ -87,7 +89,9 @@ class BillingFoundation:
 
         balance = self.get_credit_balance(invoice.organization_id)
         if balance < invoice.total_usd:
-            raise ValueError(f"Insufficient credit balance (${balance:.2f}) for invoice total (${invoice.total_usd:.2f})")
+            raise ValueError(
+                f"Insufficient credit balance (${balance:.2f}) for invoice total (${invoice.total_usd:.2f})"
+            )
 
         self._credit_balances[invoice.organization_id] = balance - invoice.total_usd
         invoice.status = "PAID"

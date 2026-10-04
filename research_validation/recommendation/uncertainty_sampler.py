@@ -13,6 +13,7 @@ from typing import Dict, List, Tuple
 @dataclass(frozen=True)
 class UncertaintyTarget:
     """A scientific domain or benchmark region requiring more empirical observations."""
+
     target_name: str
     current_sample_count: int
     current_uncertainty_std: float
@@ -47,13 +48,15 @@ class UncertaintySampler:
             else:
                 prio = "LOW"
 
-            targets.append(UncertaintyTarget(
-                target_name=name,
-                current_sample_count=count,
-                current_uncertainty_std=std_dev,
-                required_sample_count=min_desired_samples,
-                epistemic_gap=epistemic_gap,
-                priority_level=prio,
-            ))
+            targets.append(
+                UncertaintyTarget(
+                    target_name=name,
+                    current_sample_count=count,
+                    current_uncertainty_std=std_dev,
+                    required_sample_count=min_desired_samples,
+                    epistemic_gap=epistemic_gap,
+                    priority_level=prio,
+                )
+            )
 
         return sorted(targets, key=lambda t: t.epistemic_gap, reverse=True)

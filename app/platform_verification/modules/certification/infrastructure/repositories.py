@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Certification.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.certification.domain.models import CertificationEntity
 from app.platform_verification.modules.certification.domain.interfaces import CertificationRepositoryInterface
+
 
 class InMemoryCertificationRepository(CertificationRepositoryInterface):
     def __init__(self):

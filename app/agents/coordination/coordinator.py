@@ -20,7 +20,7 @@ class AgentCoordinator(IAgentCoordinator):
         registry: AgentRegistry,
         planner: Optional[DelegationPlanner] = None,
         executor: Optional[DelegationExecutor] = None,
-        formation_engine: Optional[TeamFormationEngine] = None
+        formation_engine: Optional[TeamFormationEngine] = None,
     ):
         self.registry = registry
         self.planner = planner or DelegationPlanner()
@@ -33,9 +33,7 @@ class AgentCoordinator(IAgentCoordinator):
         if not available:
             # Return failed delegation if no agents registered
             return DelegationResult(
-                delegation_id=request.delegation_id,
-                status="FAILED",
-                errors=["No available agents in registry."]
+                delegation_id=request.delegation_id, status="FAILED", errors=["No available agents in registry."]
             )
 
         # 1. Plan delegation

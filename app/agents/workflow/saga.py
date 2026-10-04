@@ -55,9 +55,7 @@ class SagaOrchestrator(ISagaOrchestrator):
             )
             return output_dict
         except Exception as exc:
-            logger.error(
-                f"Saga forward step '{node.node_id}' failed: {exc}. Initiating rollback compensation."
-            )
+            logger.error(f"Saga forward step '{node.node_id}' failed: {exc}. Initiating rollback compensation.")
             await self.execute_compensation(workflow_id)
             raise
 

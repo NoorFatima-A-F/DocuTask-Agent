@@ -163,4 +163,3 @@ def test_postgres_leader_election_provider():
     # Step down
     assert coord.step_down("node-pg-1")
     assert coord.get_leader() is None
-

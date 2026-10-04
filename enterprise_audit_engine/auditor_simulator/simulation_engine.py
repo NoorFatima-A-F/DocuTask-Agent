@@ -12,6 +12,7 @@ from .personas import AuditorPersonas, PersonaReviewResult
 
 class AuditorSimulationReport(BaseModel):
     """Consolidated report across all simulated auditor personas."""
+
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     target_system: str
     target_version: str
@@ -36,7 +37,7 @@ class AuditorSimulator:
         target_version: str = "v1.0.0",
     ) -> AuditorSimulationReport:
         metrics = metrics or {}
-        
+
         pe_res = AuditorPersonas.review_as_principal_engineer(evidence_items, metrics)
         sec_res = AuditorPersonas.review_as_security_auditor(evidence_items, metrics)
         cto_res = AuditorPersonas.review_as_cto(evidence_items, metrics)

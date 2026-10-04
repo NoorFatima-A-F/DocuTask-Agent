@@ -58,7 +58,12 @@ from app.runtime.observability.trace_context import (
 )
 from app.runtime.observability.observability_config import ObservabilityConfig
 from app.runtime.observability.timeline_builder import TimelineBuilder, TimelineEntry
-from app.runtime.observability.execution_state import ExecutionStateManager, execution_state_manager, TaskExecutionState, MissionExecutionSnapshot
+from app.runtime.observability.execution_state import (
+    ExecutionStateManager,
+    execution_state_manager,
+    TaskExecutionState,
+    MissionExecutionSnapshot,
+)
 from app.runtime.observability.worker_monitor import WorkerMonitor, worker_monitor, WorkerTelemetryInfo
 from app.runtime.observability.runtime_metrics import LiveRuntimeMetrics, live_runtime_metrics
 

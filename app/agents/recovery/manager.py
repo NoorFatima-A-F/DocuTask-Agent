@@ -17,7 +17,7 @@ class RecoveryManager:
         self,
         engine: Optional[RecoveryEngine] = None,
         dead_letter_queue: Optional[DeadLetterQueue] = None,
-        incident_manager: Optional[IncidentManager] = None
+        incident_manager: Optional[IncidentManager] = None,
     ):
         self.engine = engine or RecoveryEngine()
         self.dead_letter_queue = dead_letter_queue or DeadLetterQueue()
@@ -29,6 +29,6 @@ class RecoveryManager:
             self.dead_letter_queue.push(
                 execution_id=request.failure.identity.execution_id,
                 failure=request.failure,
-                reason="Automatic recovery strategies exhausted"
+                reason="Automatic recovery strategies exhausted",
             )
         return result

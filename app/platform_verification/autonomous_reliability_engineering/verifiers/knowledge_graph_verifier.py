@@ -2,6 +2,7 @@
 3I.12.9: Reliability Knowledge Graph Verifier
 Verifies operational intelligence memory structured as Failure -> Cause -> Component -> Solution -> Outcome graph.
 """
+
 from typing import List
 from app.platform_verification.autonomous_reliability_engineering.domain.models import (
     ReliabilityKnowledgeGraphReport,
@@ -29,7 +30,9 @@ class KnowledgeGraphVerifier(IKnowledgeGraphVerifier):
             KnowledgeGraphNode(node_id="FAIL_03", node_type="Failure", label="AI Provider Inference Latency Spike"),
             KnowledgeGraphNode(node_id="CAUSE_03", node_type="Cause", label="Upstream LLM Service Degradation"),
             KnowledgeGraphNode(node_id="COMP_03", node_type="Component", label="AI Provider Gateway"),
-            KnowledgeGraphNode(node_id="SOL_03", node_type="Solution", label="Instantaneous Multi-Provider Fallback Shift"),
+            KnowledgeGraphNode(
+                node_id="SOL_03", node_type="Solution", label="Instantaneous Multi-Provider Fallback Shift"
+            ),
             KnowledgeGraphNode(node_id="OUT_03", node_type="Outcome", label="Zero User-Facing Timeout Errors"),
         ]
 

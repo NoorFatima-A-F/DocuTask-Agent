@@ -19,13 +19,38 @@ class RuntimeQueueManager:
     def get_queues(self) -> Dict[str, Any]:
         queues = {
             "WAITING": [
-                {"task_id": "node_extract_schema", "name": "Extract Financial Schema", "priority": 1, "queue_duration_ms": 12.0},
-                {"task_id": "node_validate_invariants", "name": "Scientific Validation Check", "priority": 1, "queue_duration_ms": 5.0},
-                {"task_id": "node_barrier_governance", "name": "Governance Sync Barrier", "priority": 2, "queue_duration_ms": 0.0},
-                {"task_id": "node_join_finalize", "name": "Join & Truth Ledger Commit", "priority": 3, "queue_duration_ms": 0.0},
+                {
+                    "task_id": "node_extract_schema",
+                    "name": "Extract Financial Schema",
+                    "priority": 1,
+                    "queue_duration_ms": 12.0,
+                },
+                {
+                    "task_id": "node_validate_invariants",
+                    "name": "Scientific Validation Check",
+                    "priority": 1,
+                    "queue_duration_ms": 5.0,
+                },
+                {
+                    "task_id": "node_barrier_governance",
+                    "name": "Governance Sync Barrier",
+                    "priority": 2,
+                    "queue_duration_ms": 0.0,
+                },
+                {
+                    "task_id": "node_join_finalize",
+                    "name": "Join & Truth Ledger Commit",
+                    "priority": 3,
+                    "queue_duration_ms": 0.0,
+                },
             ],
             "RUNNING": [
-                {"task_id": "node_merge_ocr", "name": "Merge OCR Texts", "worker_id": "worker-extract-01", "elapsed_ms": 35.0},
+                {
+                    "task_id": "node_merge_ocr",
+                    "name": "Merge OCR Texts",
+                    "worker_id": "worker-extract-01",
+                    "elapsed_ms": 35.0,
+                },
             ],
             "BLOCKED": [],
             "RETRY": [],

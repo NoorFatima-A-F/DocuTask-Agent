@@ -158,10 +158,7 @@ class EvaluationMetrics:
         rec = tp / (tp + fn) if (tp + fn) > 0 else 0.0
         f1 = (2 * prec * rec) / (prec + rec) if (prec + rec) > 0 else 0.0
 
-        field_acc = {
-            k: (field_matches.get(k, 0) / field_totals[k])
-            for k in field_totals
-        }
+        field_acc = {k: (field_matches.get(k, 0) / field_totals[k]) for k in field_totals}
 
         return EvaluationMetricSummary(
             total_samples=n,

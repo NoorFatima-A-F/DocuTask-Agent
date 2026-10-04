@@ -15,12 +15,7 @@ class ApprovalWorkflowEngine:
         self._tasks: Dict[UUID, HumanTask] = {}
 
     def create_human_task(
-        self,
-        workflow_id: UUID,
-        node_id: str,
-        title: str,
-        approvers: List[str],
-        description: str = ""
+        self, workflow_id: UUID, node_id: str, title: str, approvers: List[str], description: str = ""
     ) -> HumanTask:
         task = HumanTask(
             workflow_id=workflow_id,
@@ -29,22 +24,17 @@ class ApprovalWorkflowEngine:
             title=title,
             approvers=approvers,
             assigned_user_or_role=approvers[0] if approvers else "reviewer",
-            description=description
+            description=description,
         )
         self._tasks[task.task_id] = task
         return task
 
-    def decide_task(
-        self,
-        task_id: UUID,
-        decision: Any,
-        reviewer_id: str,
-        notes: str = ""
-    ) -> Optional[HumanTask]:
+    def decide_task(self, task_id: UUID, decision: Any, reviewer_id: str, notes: str = "") -> Optional[HumanTask]:
         task = self._tasks.get(task_id)
         if not task:
             return None
         from app.agents.workflow.human_task import HumanTaskDecision
+
         is_approved = decision in (HumanTaskDecision.APPROVED, HumanTaskDecision.APPROVE, True, "APPROVED", "APPROVE")
         updated = task.approve(reviewer_id, notes) if is_approved else task.reject(reviewer_id, notes)
         updated.reviewer_id = reviewer_id
@@ -52,29 +42,14 @@ class ApprovalWorkflowEngine:
         self._tasks[task_id] = updated
         return updated
 
-    def create_approval_task(
-        self,
-        instance_id: UUID,
-        title: str,
-        assigned_to: str,
-        description: str = ""
-    ) -> HumanTask:
+    def create_approval_task(self, instance_id: UUID, title: str, assigned_to: str, description: str = "") -> HumanTask:
         task = HumanTask(
-            workflow_instance_id=instance_id,
-            title=title,
-            assigned_user_or_role=assigned_to,
-            description=description
+            workflow_instance_id=instance_id, title=title, assigned_user_or_role=assigned_to, description=description
         )
         self._tasks[task.task_id] = task
         return task
 
-    def record_decision(
-        self,
-        task_id: UUID,
-        approved: bool,
-        user_id: str,
-        reason: str = ""
-    ) -> Optional[HumanTask]:
+    def record_decision(self, task_id: UUID, approved: bool, user_id: str, reason: str = "") -> Optional[HumanTask]:
         task = self._tasks.get(task_id)
         if not task:
             return None
@@ -84,6 +59,7 @@ class ApprovalWorkflowEngine:
 
     def get_pending_tasks_for_user(self, user_or_role: str) -> List[HumanTask]:
         return [
-            t for t in self._tasks.values()
+            t
+            for t in self._tasks.values()
             if t.assigned_user_or_role == user_or_role and t.status == HumanTaskStatus.PENDING
         ]

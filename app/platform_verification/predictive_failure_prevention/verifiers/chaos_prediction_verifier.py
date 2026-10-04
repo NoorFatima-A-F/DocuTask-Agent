@@ -1,6 +1,7 @@
 """
 Phase 3H.5.9.10: Chaos Prediction Validation Verifier
 """
+
 from ..domain.interfaces import IChaosPredictionVerifier
 from ..domain.models import ChaosPredictionReport, ChaosPredictionScenario
 
@@ -47,8 +48,7 @@ class ChaosPredictionVerifier(IChaosPredictionVerifier):
         ]
 
         mean_lead_time = (
-            sum(s.prediction_time_before_failure_seconds for s in scenarios) / len(scenarios)
-            if scenarios else 0.0
+            sum(s.prediction_time_before_failure_seconds for s in scenarios) / len(scenarios) if scenarios else 0.0
         )
 
         return ChaosPredictionReport(

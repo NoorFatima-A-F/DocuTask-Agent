@@ -2,6 +2,7 @@
 3I.12.8: Incident Learning Intelligence Verifier
 Verifies automated root cause analysis, pattern extraction, operational learning, and recurrence prevention.
 """
+
 from typing import List
 from app.platform_verification.autonomous_reliability_engineering.domain.models import (
     IncidentLearningReport,

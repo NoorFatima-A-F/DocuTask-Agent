@@ -31,13 +31,30 @@ class E2EWorkflowVerifier(IE2EWorkflowVerifier):
 
     def verify(self) -> E2EWorkflowReport:
         stages = [
-            WorkflowStageTiming(stage_name="Document Upload & Validation", duration_ms=120.0, percentage_of_total=4.7, is_bottleneck=False),
-            WorkflowStageTiming(stage_name="Queue Dispatch & Wait", duration_ms=200.0, percentage_of_total=7.8, is_bottleneck=False),
-            WorkflowStageTiming(stage_name="OCR Processing", duration_ms=850.0, percentage_of_total=33.2, is_bottleneck=False),
-            WorkflowStageTiming(stage_name="AI Inference & Extraction", duration_ms=1200.0, percentage_of_total=46.9, is_bottleneck=True),
-            WorkflowStageTiming(stage_name="Validation Loop", duration_ms=80.0, percentage_of_total=3.1, is_bottleneck=False),
-            WorkflowStageTiming(stage_name="Database Persistence", duration_ms=80.0, percentage_of_total=3.1, is_bottleneck=False),
-            WorkflowStageTiming(stage_name="Evidence Generation", duration_ms=30.0, percentage_of_total=1.2, is_bottleneck=False),
+            WorkflowStageTiming(
+                stage_name="Document Upload & Validation",
+                duration_ms=120.0,
+                percentage_of_total=4.7,
+                is_bottleneck=False,
+            ),
+            WorkflowStageTiming(
+                stage_name="Queue Dispatch & Wait", duration_ms=200.0, percentage_of_total=7.8, is_bottleneck=False
+            ),
+            WorkflowStageTiming(
+                stage_name="OCR Processing", duration_ms=850.0, percentage_of_total=33.2, is_bottleneck=False
+            ),
+            WorkflowStageTiming(
+                stage_name="AI Inference & Extraction", duration_ms=1200.0, percentage_of_total=46.9, is_bottleneck=True
+            ),
+            WorkflowStageTiming(
+                stage_name="Validation Loop", duration_ms=80.0, percentage_of_total=3.1, is_bottleneck=False
+            ),
+            WorkflowStageTiming(
+                stage_name="Database Persistence", duration_ms=80.0, percentage_of_total=3.1, is_bottleneck=False
+            ),
+            WorkflowStageTiming(
+                stage_name="Evidence Generation", duration_ms=30.0, percentage_of_total=1.2, is_bottleneck=False
+            ),
         ]
 
         total_ms = sum(s.duration_ms for s in stages)

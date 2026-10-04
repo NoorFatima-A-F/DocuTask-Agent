@@ -33,7 +33,9 @@ class OutcomeStatisticsTracker:
         if len(self._records) > self.max_history:
             self._records.pop(0)
 
-    def compute_window_statistics(self, records: Optional[List[MissionOutcomeRecord]] = None) -> WindowStatisticsSummary:
+    def compute_window_statistics(
+        self, records: Optional[List[MissionOutcomeRecord]] = None
+    ) -> WindowStatisticsSummary:
         target = records if records is not None else self._records
         n = len(target)
         if n == 0:

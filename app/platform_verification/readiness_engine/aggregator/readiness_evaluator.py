@@ -3,6 +3,7 @@ Readiness Evaluator & Aggregation Engine (Part 3H.3.2.8).
 Aggregates health signals from Database, Redis/Queue, Storage, AI Provider, and Worker Fleet,
 applies the dependency policy, and generates deterministic traffic admission decisions.
 """
+
 import time
 from datetime import datetime, timezone
 from typing import List, Optional
@@ -79,8 +80,7 @@ class ReadinessEvaluator:
         # Compute Final State & Action
         # Any critical failure -> NOT_READY, REJECT_TRAFFIC
         has_critical_failure = any(
-            self.policy_engine.get_criticality(dep) == DependencyCriticality.CRITICAL
-            for dep in failed_deps
+            self.policy_engine.get_criticality(dep) == DependencyCriticality.CRITICAL for dep in failed_deps
         )
 
         if has_critical_failure or len(failed_deps) > 0:

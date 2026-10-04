@@ -1,4 +1,8 @@
-from app.platform_verification.predictive_health_intelligence.recommendation.preventive_action_recommender import PreventiveActionRecommender
-from app.platform_verification.predictive_health_intelligence.recommendation.automated_action_verifier import AutomatedActionVerifier
+from app.platform_verification.predictive_health_intelligence.recommendation.preventive_action_recommender import (
+    PreventiveActionRecommender,
+)
+from app.platform_verification.predictive_health_intelligence.recommendation.automated_action_verifier import (
+    AutomatedActionVerifier,
+)
 
 __all__ = ["PreventiveActionRecommender", "AutomatedActionVerifier"]

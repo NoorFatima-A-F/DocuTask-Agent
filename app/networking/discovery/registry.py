@@ -92,8 +92,7 @@ class ServiceRegistry:
     def prune_stale_endpoints(self) -> int:
         now = time.time()
         stale_ids = [
-            ep_id for ep_id, ep in self._endpoints.items()
-            if (now - ep.last_seen) > self.stale_threshold_seconds
+            ep_id for ep_id, ep in self._endpoints.items() if (now - ep.last_seen) > self.stale_threshold_seconds
         ]
         for s_id in stale_ids:
             del self._endpoints[s_id]

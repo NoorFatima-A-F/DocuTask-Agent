@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 class PlanApprovalGate(BaseModel):
     """Approval gate blocking plan execution until authorized."""
+
     gate_id: str
     node_id: str
     approver_roles: List[str] = Field(default_factory=lambda: ["ADMIN"])

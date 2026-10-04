@@ -29,7 +29,9 @@ class SimulationReport:
     safety_invariant_violations: int = 0
     verified_safe: bool = True
     stability_confidence: float = 0.985
-    execution_notes: str = "2,500 historical high-load request traces replayed with zero data corruption or unhandled exceptions."
+    execution_notes: str = (
+        "2,500 historical high-load request traces replayed with zero data corruption or unhandled exceptions."
+    )
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -112,9 +114,7 @@ class SimulationEngine:
         )
         self.reports[sim_id] = report
 
-        self.event_bus.publish(
-            SimulationCompleted(payload=report.to_dict())
-        )
+        self.event_bus.publish(SimulationCompleted(payload=report.to_dict()))
         return report
 
     def list_simulations(self) -> List[SimulationReport]:

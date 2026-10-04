@@ -23,10 +23,10 @@ class AuditRegistry:
             raise ValueError(f"Security violation: Invalid release version path '{record.release_version}'")
         version_dir.mkdir(parents=True, exist_ok=True)
         cert_file = version_dir / "certificate.json"
-        
+
         with open(cert_file, "w", encoding="utf-8") as fp:
             json.dump(record.model_dump(), fp, indent=2, sort_keys=True)
-        
+
         # Also maintain index in registry
         self._update_index(record)
         return cert_file
@@ -63,7 +63,7 @@ class AuditRegistry:
                     index = json.load(fp)
             except Exception:
                 index = {}
-        
+
         index[record.release_version] = {
             "certificate_id": record.certificate_id,
             "issued_timestamp": record.issued_timestamp,

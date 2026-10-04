@@ -39,7 +39,9 @@ class InfrastructureCertifier(IInfrastructureCertifier):
         # Check category minimums (no single pillar should be catastrophic)
         for cat_name, cat_score in scorecard.categories.items():
             if cat_score.score < 60.0:
-                blockers.append(f"Category '{cat_name}' score {cat_score.score:.1f}% below minimum viable threshold (60%).")
+                blockers.append(
+                    f"Category '{cat_name}' score {cat_score.score:.1f}% below minimum viable threshold (60%)."
+                )
                 recommendations.append(f"Prioritize re-architecting {cat_name} infrastructure.")
             elif cat_score.score < 90.0:
                 recommendations.append(f"Improve {cat_name} test coverage to reach enterprise 95%+ standard.")

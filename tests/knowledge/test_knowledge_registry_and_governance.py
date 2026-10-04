@@ -121,8 +121,12 @@ def test_knowledge_governance_clearance_and_tenant_isolation():
 def test_governance_retrieval_filtering():
     gov = KnowledgeGovernanceEngine()
 
-    doc1 = KnowledgeObject(id="kobj-1", name="Doc 1", organization_id="org-1", classification=ClassificationLevel.PUBLIC)
-    doc2 = KnowledgeObject(id="kobj-2", name="Doc 2", organization_id="org-1", classification=ClassificationLevel.RESTRICTED)
+    doc1 = KnowledgeObject(
+        id="kobj-1", name="Doc 1", organization_id="org-1", classification=ClassificationLevel.PUBLIC
+    )
+    doc2 = KnowledgeObject(
+        id="kobj-2", name="Doc 2", organization_id="org-1", classification=ClassificationLevel.RESTRICTED
+    )
 
     objects_map = {"kobj-1": doc1, "kobj-2": doc2}
 

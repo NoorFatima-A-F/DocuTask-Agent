@@ -2,6 +2,7 @@
 Test Suite: Executive Coordination & Strategic Mission Direction
 Validates executive decision issuing, multi-department mission lifecycle, barrier sync, and delegation policies.
 """
+
 from app.runtime.executive.executive_controller import ExecutiveController
 from app.runtime.executive.mission_director import MissionDirector
 from app.runtime.executive.coordination_engine import CoordinationEngine
@@ -11,7 +12,7 @@ from app.runtime.executive.executive_metrics import ExecutiveMetricsEngine
 
 def test_executive_controller_decision_making():
     ctrl = ExecutiveController()
-    
+
     decisions = ctrl.list_executive_decisions()
     assert len(decisions) >= 2
 
@@ -29,7 +30,7 @@ def test_executive_controller_decision_making():
 
 def test_mission_director_lifecycle_and_stages():
     director = MissionDirector()
-    
+
     missions = director.list_missions()
     assert len(missions) >= 1
     m1 = director.get_mission("mission_live_001")
@@ -46,7 +47,7 @@ def test_mission_director_lifecycle_and_stages():
 
 def test_coordination_engine_barriers():
     engine = CoordinationEngine()
-    
+
     barrier = engine.create_barrier("bar_test_01", "m1", ["dept_ocr", "dept_validation"])
     assert barrier.is_released is False
 
@@ -61,7 +62,7 @@ def test_coordination_engine_barriers():
 
 def test_delegation_manager_and_metrics():
     del_mgr = DelegationManager()
-    
+
     assert del_mgr.can_autonomously_execute("dept_ocr", estimated_cost_usd=2.50) is True
     assert del_mgr.can_autonomously_execute("dept_ocr", estimated_cost_usd=15.00) is False
 

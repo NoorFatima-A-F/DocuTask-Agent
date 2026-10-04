@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 
 class RestartStrategy(str, Enum):
     """Erlang OTP restart strategy."""
+
     ONE_FOR_ONE = "ONE_FOR_ONE"
     ONE_FOR_ALL = "ONE_FOR_ALL"
     REST_FOR_ONE = "REST_FOR_ONE"
@@ -35,6 +36,7 @@ class RestartStrategy(str, Enum):
 
 class WorkerStatus(str, Enum):
     """Lifecycle state of a supervised worker."""
+
     IDLE = "IDLE"
     RUNNING = "RUNNING"
     UNHEALTHY = "UNHEALTHY"
@@ -45,6 +47,7 @@ class WorkerStatus(str, Enum):
 
 class BackoffStrategy(str, Enum):
     """Backoff strategies for supervisor child restarts."""
+
     EXPONENTIAL = "EXPONENTIAL"
     CONSTANT = "CONSTANT"
     LINEAR = "LINEAR"
@@ -52,6 +55,7 @@ class BackoffStrategy(str, Enum):
 
 class RestartPolicy(BaseModel):
     """Configuration governing worker failure thresholds and backoff."""
+
     max_restarts: int = 3
     restart_window_seconds: float = 60.0
     initial_backoff_seconds: float = 1.0
@@ -96,7 +100,6 @@ class RestartPolicy(BaseModel):
 
 
 class BaseSupervisedWorker(ABC):
-
     """Base class for supervised runtime workers."""
 
     def __init__(self, name: str) -> None:
@@ -386,9 +389,7 @@ class SupervisorTree:
         if spec.last_restart_time and (now - spec.last_restart_time > spec.policy.cooldown_seconds):
             spec.restart_timestamps.clear()
 
-        spec.restart_timestamps = [
-            t for t in spec.restart_timestamps if now - t <= spec.policy.restart_window_seconds
-        ]
+        spec.restart_timestamps = [t for t in spec.restart_timestamps if now - t <= spec.policy.restart_window_seconds]
         spec.restart_timestamps.append(now)
         spec.last_restart_time = now
 

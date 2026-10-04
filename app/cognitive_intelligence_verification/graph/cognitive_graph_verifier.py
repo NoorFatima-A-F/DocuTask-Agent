@@ -68,7 +68,7 @@ class CognitiveGraphVerifier:
     def _verify_multi_hop_traversal(self) -> AssertionResult:
         t0 = time.perf_counter()
         # Construct linear 10-hop graph: n0 -> n1 -> n2 -> ... -> n10
-        adj: Dict[str, List[str]] = {f"n{i}": [f"n{i+1}"] for i in range(10)}
+        adj: Dict[str, List[str]] = {f"n{i}": [f"n{i + 1}"] for i in range(10)}
         adj["n10"] = []
 
         def bfs_path(start: str, target: str) -> List[str]:
@@ -91,7 +91,7 @@ class CognitiveGraphVerifier:
         return AssertionResult(
             name="assert_multi_hop_traversal_10_hops",
             passed=passed,
-            message=f"BFS multi-hop traversal successfully resolved deep 10-hop causal chain ({len(path)-1} transitions)",
+            message=f"BFS multi-hop traversal successfully resolved deep 10-hop causal chain ({len(path) - 1} transitions)",
             execution_time_ms=t_ms,
             details={"hop_count": len(path) - 1, "path": path},
         )

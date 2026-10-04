@@ -29,14 +29,62 @@ class KubernetesReadinessVerifier(IKubernetesReadinessVerifier):
 
     def verify(self) -> KubernetesReadinessReport:
         manifests = [
-            K8sResourceValidation(kind="Deployment", name="docutask-api", health_probes_configured=True, resource_limits_defined=True, status="VALID"),
-            K8sResourceValidation(kind="Deployment", name="docutask-worker", health_probes_configured=True, resource_limits_defined=True, status="VALID"),
-            K8sResourceValidation(kind="Service", name="docutask-api-svc", health_probes_configured=True, resource_limits_defined=True, status="VALID"),
-            K8sResourceValidation(kind="ConfigMap", name="docutask-config", health_probes_configured=True, resource_limits_defined=True, status="VALID"),
-            K8sResourceValidation(kind="Secret", name="docutask-secrets", health_probes_configured=True, resource_limits_defined=True, status="VALID"),
-            K8sResourceValidation(kind="Ingress", name="docutask-ingress", health_probes_configured=True, resource_limits_defined=True, status="VALID"),
-            K8sResourceValidation(kind="HorizontalPodAutoscaler", name="docutask-api-hpa", health_probes_configured=True, resource_limits_defined=True, status="VALID"),
-            K8sResourceValidation(kind="HorizontalPodAutoscaler", name="docutask-worker-hpa", health_probes_configured=True, resource_limits_defined=True, status="VALID"),
+            K8sResourceValidation(
+                kind="Deployment",
+                name="docutask-api",
+                health_probes_configured=True,
+                resource_limits_defined=True,
+                status="VALID",
+            ),
+            K8sResourceValidation(
+                kind="Deployment",
+                name="docutask-worker",
+                health_probes_configured=True,
+                resource_limits_defined=True,
+                status="VALID",
+            ),
+            K8sResourceValidation(
+                kind="Service",
+                name="docutask-api-svc",
+                health_probes_configured=True,
+                resource_limits_defined=True,
+                status="VALID",
+            ),
+            K8sResourceValidation(
+                kind="ConfigMap",
+                name="docutask-config",
+                health_probes_configured=True,
+                resource_limits_defined=True,
+                status="VALID",
+            ),
+            K8sResourceValidation(
+                kind="Secret",
+                name="docutask-secrets",
+                health_probes_configured=True,
+                resource_limits_defined=True,
+                status="VALID",
+            ),
+            K8sResourceValidation(
+                kind="Ingress",
+                name="docutask-ingress",
+                health_probes_configured=True,
+                resource_limits_defined=True,
+                status="VALID",
+            ),
+            K8sResourceValidation(
+                kind="HorizontalPodAutoscaler",
+                name="docutask-api-hpa",
+                health_probes_configured=True,
+                resource_limits_defined=True,
+                status="VALID",
+            ),
+            K8sResourceValidation(
+                kind="HorizontalPodAutoscaler",
+                name="docutask-worker-hpa",
+                health_probes_configured=True,
+                resource_limits_defined=True,
+                status="VALID",
+            ),
         ]
 
         checks = [

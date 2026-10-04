@@ -17,14 +17,13 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from research_validation.provenance.provenance_models import (
-    EvidenceNode, EvidenceQualityLevel, LineageStage
-)
+from research_validation.provenance.provenance_models import EvidenceNode, EvidenceQualityLevel, LineageStage
 
 
 @dataclass
 class VersionedEvidenceRecord:
     """A versioned entry in the append-only evidence store."""
+
     record_id: str
     version_number: int
     previous_version_record_id: Optional[str]
@@ -40,7 +39,7 @@ class EvidenceStore:
     def __init__(self, storage_dir: Optional[Path] = None):
         self.storage_dir = storage_dir
         self.records: Dict[str, VersionedEvidenceRecord] = {}  # record_id -> record
-        self.logical_versions: Dict[str, List[str]] = {}       # logical_name/node_id -> [record_id, ...]
+        self.logical_versions: Dict[str, List[str]] = {}  # logical_name/node_id -> [record_id, ...]
 
     def store_evidence_node(self, node: EvidenceNode, logical_key: Optional[str] = None) -> VersionedEvidenceRecord:
         """
@@ -62,7 +61,7 @@ class EvidenceStore:
             record_id=node.node_id,
             version_number=version_num,
             previous_version_record_id=prev_record_id,
-            evidence_node=node
+            evidence_node=node,
         )
 
         self.records[node.node_id] = record
@@ -102,10 +101,14 @@ class EvidenceStore:
         self.storage_dir.mkdir(parents=True, exist_ok=True)
         file_path = self.storage_dir / f"{record.record_id}_v{record.version_number}.json"
         with open(file_path, "w", encoding="utf-8") as f:
-            json.dump({
-                "record_id": record.record_id,
-                "version_number": record.version_number,
-                "previous_version_record_id": record.previous_version_record_id,
-                "stored_at_epoch": record.stored_at_epoch,
-                "evidence_node": record.evidence_node.to_dict()
-            }, f, indent=2)
+            json.dump(
+                {
+                    "record_id": record.record_id,
+                    "version_number": record.version_number,
+                    "previous_version_record_id": record.previous_version_record_id,
+                    "stored_at_epoch": record.stored_at_epoch,
+                    "evidence_node": record.evidence_node.to_dict(),
+                },
+                f,
+                indent=2,
+            )

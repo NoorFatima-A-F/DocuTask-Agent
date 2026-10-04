@@ -27,25 +27,31 @@ def test_governance_analytics_sdk_end_to_end():
     sdk = GovernanceAnalyticsSDK()
 
     # 1. Ingest Events
-    sdk.ingest_event({
-        "event_type": "GovernanceDecisionCreated",
-        "tenant_id": "tenant_sdk_test",
-        "risk_score": 0.25,
-        "is_success": True,
-    })
-    sdk.ingest_event({
-        "event_type": "PolicyViolation",
-        "tenant_id": "tenant_sdk_test",
-        "policy_id": "pol_safety_1",
-        "severity": "HIGH",
-    })
-    sdk.ingest_event({
-        "event_type": "ModelInvocation",
-        "tenant_id": "tenant_sdk_test",
-        "model_id": "gemini-1.5-pro",
-        "cost_usd": 0.004,
-        "latency_ms": 320.0,
-    })
+    sdk.ingest_event(
+        {
+            "event_type": "GovernanceDecisionCreated",
+            "tenant_id": "tenant_sdk_test",
+            "risk_score": 0.25,
+            "is_success": True,
+        }
+    )
+    sdk.ingest_event(
+        {
+            "event_type": "PolicyViolation",
+            "tenant_id": "tenant_sdk_test",
+            "policy_id": "pol_safety_1",
+            "severity": "HIGH",
+        }
+    )
+    sdk.ingest_event(
+        {
+            "event_type": "ModelInvocation",
+            "tenant_id": "tenant_sdk_test",
+            "model_id": "gemini-1.5-pro",
+            "cost_usd": 0.004,
+            "latency_ms": 320.0,
+        }
+    )
 
     # 2. Get Overview
     overview = sdk.get_overview("tenant_sdk_test")

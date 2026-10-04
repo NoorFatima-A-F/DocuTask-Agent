@@ -16,7 +16,7 @@ def test_replay_exporter_package():
     prev_hash = "0" * 64
     for i in range(3):
         ev = RuntimeEvent(
-            event_id=f"ev_exp_{i+1}",
+            event_id=f"ev_exp_{i + 1}",
             mission_id="m_exp_01",
             sequence_number=i + 1,
             category=EventCategory.EXECUTION,

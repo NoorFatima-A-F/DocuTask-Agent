@@ -1,6 +1,7 @@
 """
 Master Runtime Orchestrator for Automated Restore Verification System (Part 3G.2E).
 """
+
 import time
 from typing import Dict, Any, Optional
 
@@ -92,9 +93,7 @@ class RestoreVerificationRuntime:
         self.scoring_engine = scoring_engine or RestoreQualityScoringEngine()
         self.evidence_engine = evidence_engine or RestoreEvidenceManifestEngine()
 
-    def execute_full_restore_verification(
-        self, output_dir: Optional[str] = None
-    ) -> Dict[str, Any]:
+    def execute_full_restore_verification(self, output_dir: Optional[str] = None) -> Dict[str, Any]:
         """
         Runs the complete automated disaster recovery validation workflow.
         """
@@ -174,9 +173,7 @@ class RestoreVerificationRuntime:
         }
 
         # Step 14: Evidence Serialization
-        manifest_paths = self.evidence_engine.export_all_evidence_artifacts(
-            verification_data, output_dir=output_dir
-        )
+        manifest_paths = self.evidence_engine.export_all_evidence_artifacts(verification_data, output_dir=output_dir)
 
         verification_data["exported_manifest_paths"] = manifest_paths
         verification_data["passed"] = scorecard.passed

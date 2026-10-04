@@ -115,8 +115,14 @@ def test_independent_rule_validator_invariants():
 def test_rule_validator_monotonicity():
     validator = IndependentRuleValidator()
     # Higher quality score should not downgrade tier
-    assert validator.verify_monotonic_tier(score_low=75.0, tier_low="COMMERCIAL", score_high=95.0, tier_high="ENTERPRISE") is True
-    assert validator.verify_monotonic_tier(score_low=95.0, tier_low="ENTERPRISE", score_high=60.0, tier_high="COMMERCIAL") is True
+    assert (
+        validator.verify_monotonic_tier(score_low=75.0, tier_low="COMMERCIAL", score_high=95.0, tier_high="ENTERPRISE")
+        is True
+    )
+    assert (
+        validator.verify_monotonic_tier(score_low=95.0, tier_low="ENTERPRISE", score_high=60.0, tier_high="COMMERCIAL")
+        is True
+    )
 
 
 def test_rule_validator_tamper_detection():

@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Quality.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.quality.domain.models import QualityEntity
+
 
 class QualityRepositoryInterface(ABC):
     @abstractmethod

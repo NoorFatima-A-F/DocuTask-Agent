@@ -12,7 +12,16 @@ class MessageRouter:
 
     def __init__(self):
         self.channel_subscribers: Dict[str, List[str]] = {
-            "#executive-dispatch": ["dept_executive", "dept_ocr", "dept_extraction", "dept_validation", "dept_governance", "dept_qa", "dept_research", "dept_memory"],
+            "#executive-dispatch": [
+                "dept_executive",
+                "dept_ocr",
+                "dept_extraction",
+                "dept_validation",
+                "dept_governance",
+                "dept_qa",
+                "dept_research",
+                "dept_memory",
+            ],
             "#ocr-extraction-handoff": ["dept_ocr", "dept_extraction", "dept_memory"],
             "#validation-alerts": ["dept_extraction", "dept_validation", "dept_qa"],
             "#governance-review": ["dept_validation", "dept_governance", "dept_executive"],

@@ -1,6 +1,7 @@
 """
 Enterprise Module Boundary Platform Runtime facade.
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional, Tuple
 import uuid
@@ -50,14 +51,19 @@ class EnterpriseModuleBoundaryRuntime:
         class GeminiLLMPlugin(PluginInterface):
             def initialize(self, config: Dict[str, Any]) -> bool:
                 return True
+
             def execute(self, context: Dict[str, Any]) -> Dict[str, Any]:
                 return {"result": "Document extraction completed"}
+
             def health(self) -> Dict[str, Any]:
                 return {"status": "HEALTHY"}
+
             def shutdown(self) -> bool:
                 return True
 
-        self._sample_plugins.append((GeminiLLMPlugin, {"name": "GeminiLLMProvider", "version": "1.0.0", "type": "LLM_PROVIDER"}))
+        self._sample_plugins.append(
+            (GeminiLLMPlugin, {"name": "GeminiLLMProvider", "version": "1.0.0", "type": "LLM_PROVIDER"})
+        )
 
     def register_plugin_for_verification(self, plugin_cls: Any, manifest: Dict[str, Any]) -> None:
         self._sample_plugins.append((plugin_cls, manifest))

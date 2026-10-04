@@ -37,7 +37,9 @@ class FailurePredictor:
     Predictive intelligence forecasting impending subsystem failures from telemetry rate-of-change.
     """
 
-    def predict_capacity_exhaustion(self, current_concurrency: int, max_concurrency: int, growth_rate: float) -> FailureForecast:
+    def predict_capacity_exhaustion(
+        self, current_concurrency: int, max_concurrency: int, growth_rate: float
+    ) -> FailureForecast:
         headroom = max_concurrency - current_concurrency
         time_to_exhaust = round(headroom / (growth_rate if growth_rate > 0 else 0.1), 1)
         prob = round(min(1.0, current_concurrency / max_concurrency), 2)
@@ -52,7 +54,9 @@ class FailurePredictor:
             preventative_recommendation="AUTO_SCALE_WORKER_POOL_OR_BURST_LOCAL_OCR",
         )
 
-    def predict_budget_exhaustion(self, current_spend: float, budget_cap: float, burn_rate_usd_per_min: float) -> FailureForecast:
+    def predict_budget_exhaustion(
+        self, current_spend: float, budget_cap: float, burn_rate_usd_per_min: float
+    ) -> FailureForecast:
         remaining = max(0.0, budget_cap - current_spend)
         burn = burn_rate_usd_per_min if burn_rate_usd_per_min > 0 else 0.01
         time_to_exhaust = round((remaining / burn) * 60.0, 1)
@@ -123,7 +127,9 @@ class RiskForecastEngine:
 
         avg_prob = sum(p.probability for p in predictions) / len(predictions)
         sla_prob = round(min(1.0, avg_prob * 1.25), 3)
-        risk_index = round(min(1.0, avg_prob * 0.85 + (0.15 if any(p.impact_severity == "CRITICAL" for p in predictions) else 0.0)), 3)
+        risk_index = round(
+            min(1.0, avg_prob * 0.85 + (0.15 if any(p.impact_severity == "CRITICAL" for p in predictions) else 0.0)), 3
+        )
 
         top_threat = max(predictions, key=lambda p: p.probability)
 

@@ -148,9 +148,7 @@ class OptimizerEngine:
         )
         self.candidates[candidate_id] = candidate
 
-        self.event_bus.publish(
-            OptimizationCandidateGenerated(payload=candidate.to_dict())
-        )
+        self.event_bus.publish(OptimizationCandidateGenerated(payload=candidate.to_dict()))
         return candidate
 
     def compute_pareto_frontier(self) -> List[OptimizationCandidate]:

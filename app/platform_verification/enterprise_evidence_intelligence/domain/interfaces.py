@@ -18,41 +18,50 @@ from .models import (
 class IEvidenceCollector(ABC):
     @property
     @abstractmethod
-    def collector_name(self) -> str: pass
+    def collector_name(self) -> str:
+        pass
 
     @property
     @abstractmethod
-    def category(self) -> str: pass
+    def category(self) -> str:
+        pass
 
     @abstractmethod
-    def collect(self) -> List[StandardizedEvidenceItem]: pass
+    def collect(self) -> List[StandardizedEvidenceItem]:
+        pass
 
 
 class IEvidenceValidator(ABC):
     @abstractmethod
-    def validate(self, item: StandardizedEvidenceItem) -> bool: pass
+    def validate(self, item: StandardizedEvidenceItem) -> bool:
+        pass
 
 
 class IComplianceMapper(ABC):
     @abstractmethod
-    def map_to_frameworks(self, items: List[StandardizedEvidenceItem]) -> ComplianceReport: pass
+    def map_to_frameworks(self, items: List[StandardizedEvidenceItem]) -> ComplianceReport:
+        pass
 
 
 class IFailureEvidenceManager(ABC):
     @abstractmethod
-    def analyze_failures(self, items: List[StandardizedEvidenceItem]) -> FailureEvidenceReport: pass
+    def analyze_failures(self, items: List[StandardizedEvidenceItem]) -> FailureEvidenceReport:
+        pass
 
 
 class IExecutiveReportGenerator(ABC):
     @abstractmethod
-    def generate(self, items: List[StandardizedEvidenceItem], score: float) -> ExecutiveCertificationReport: pass
+    def generate(self, items: List[StandardizedEvidenceItem], score: float) -> ExecutiveCertificationReport:
+        pass
 
 
 class IEngineeringAuditGenerator(ABC):
     @abstractmethod
-    def generate(self, items: List[StandardizedEvidenceItem]) -> EngineeringAuditReport: pass
+    def generate(self, items: List[StandardizedEvidenceItem]) -> EngineeringAuditReport:
+        pass
 
 
 class IPortfolioLayerGenerator(ABC):
     @abstractmethod
-    def generate(self, items: List[StandardizedEvidenceItem], score: float) -> PortfolioEvidenceBundle: pass
+    def generate(self, items: List[StandardizedEvidenceItem], score: float) -> PortfolioEvidenceBundle:
+        pass

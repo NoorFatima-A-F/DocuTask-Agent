@@ -1,6 +1,7 @@
 """
 Phase 3H.5.11: Domain Interfaces for Health Quality Scoring & Certification Framework
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict
 from .models import (
@@ -61,7 +62,9 @@ class ISREReliabilityEngine(ABC):
 
 class IRegressionDetector(ABC):
     @abstractmethod
-    def detect_regression(self, current_scores: Dict[str, float], previous_scores: Dict[str, float] = None) -> RegressionReport:
+    def detect_regression(
+        self, current_scores: Dict[str, float], previous_scores: Dict[str, float] = None
+    ) -> RegressionReport:
         pass
 
 

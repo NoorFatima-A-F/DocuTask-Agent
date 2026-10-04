@@ -1,6 +1,7 @@
 """
 Part 3I.1: Enterprise Logging Quality & Compliance Scorer
 """
+
 from typing import List
 from datetime import datetime, timezone
 from ..domain.models import (
@@ -72,15 +73,55 @@ class LoggingQualityScorer(ILoggingScorer):
         total_score = round(total_score, 2)
 
         pillar_scores: List[LoggingPillarScore] = [
-            LoggingPillarScore(pillar_name="Structured Event Schema & Field Compliance", weight_pct=struct_weight, achieved_score_pct=round(struct_score, 2), weighted_score_pct=round(struct_weighted, 2), status="PASSED"),
-            LoggingPillarScore(pillar_name="Distributed Request ID Correlation", weight_pct=corr_weight, achieved_score_pct=round(corr_score, 2), weighted_score_pct=round(corr_weighted, 2), status="PASSED"),
-            LoggingPillarScore(pillar_name="Security Masking & Zero PII Leakage", weight_pct=sec_weight, achieved_score_pct=round(sec_score, 2), weighted_score_pct=round(sec_weighted, 2), status="PASSED"),
-            LoggingPillarScore(pillar_name="AI Agent, OCR & LLM Workflow Visibility", weight_pct=ai_weight, achieved_score_pct=round(ai_score, 2), weighted_score_pct=round(ai_weighted, 2), status="PASSED"),
-            LoggingPillarScore(pillar_name="High-Volume Performance & Non-Blocking Async", weight_pct=perf_weight, achieved_score_pct=round(perf_score, 2), weighted_score_pct=round(perf_weighted, 2), status="PASSED"),
-            LoggingPillarScore(pillar_name="Log Retention, Rotation & Storage Limits", weight_pct=ret_weight, achieved_score_pct=round(ret_score, 2), weighted_score_pct=round(ret_weighted, 2), status="PASSED"),
+            LoggingPillarScore(
+                pillar_name="Structured Event Schema & Field Compliance",
+                weight_pct=struct_weight,
+                achieved_score_pct=round(struct_score, 2),
+                weighted_score_pct=round(struct_weighted, 2),
+                status="PASSED",
+            ),
+            LoggingPillarScore(
+                pillar_name="Distributed Request ID Correlation",
+                weight_pct=corr_weight,
+                achieved_score_pct=round(corr_score, 2),
+                weighted_score_pct=round(corr_weighted, 2),
+                status="PASSED",
+            ),
+            LoggingPillarScore(
+                pillar_name="Security Masking & Zero PII Leakage",
+                weight_pct=sec_weight,
+                achieved_score_pct=round(sec_score, 2),
+                weighted_score_pct=round(sec_weighted, 2),
+                status="PASSED",
+            ),
+            LoggingPillarScore(
+                pillar_name="AI Agent, OCR & LLM Workflow Visibility",
+                weight_pct=ai_weight,
+                achieved_score_pct=round(ai_score, 2),
+                weighted_score_pct=round(ai_weighted, 2),
+                status="PASSED",
+            ),
+            LoggingPillarScore(
+                pillar_name="High-Volume Performance & Non-Blocking Async",
+                weight_pct=perf_weight,
+                achieved_score_pct=round(perf_score, 2),
+                weighted_score_pct=round(perf_weighted, 2),
+                status="PASSED",
+            ),
+            LoggingPillarScore(
+                pillar_name="Log Retention, Rotation & Storage Limits",
+                weight_pct=ret_weight,
+                achieved_score_pct=round(ret_score, 2),
+                weighted_score_pct=round(ret_weighted, 2),
+                status="PASSED",
+            ),
         ]
 
-        tier = "Enterprise Logging Ready" if total_score >= 95.0 else ("Production Ready" if total_score >= 90.0 else "Improvement Required")
+        tier = (
+            "Enterprise Logging Ready"
+            if total_score >= 95.0
+            else ("Production Ready" if total_score >= 90.0 else "Improvement Required")
+        )
 
         return LoggingCertificationReport(
             report_title="Part 3I.1 Enterprise Logging Infrastructure Certification",
@@ -89,5 +130,5 @@ class LoggingQualityScorer(ILoggingScorer):
             overall_score_pct=total_score,
             minimum_passing_threshold_pct=95.0,
             pillar_scores=pillar_scores,
-            certification_granted=total_score >= 95.0
+            certification_granted=total_score >= 95.0,
         )

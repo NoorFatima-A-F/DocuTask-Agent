@@ -31,10 +31,42 @@ class WorkerEfficiencyVerifier(IWorkerEfficiencyVerifier):
 
     def verify(self) -> WorkerEfficiencyReport:
         tiers = [
-            WorkerEfficiencyTier(worker_tier_label="Small", worker_count=2, tasks_completed_per_hour=240, avg_task_processing_sec=30.0, avg_cpu_pct=45.0, avg_memory_mb=256.0, failure_rate_pct=0.0),
-            WorkerEfficiencyTier(worker_tier_label="Medium", worker_count=5, tasks_completed_per_hour=580, avg_task_processing_sec=31.0, avg_cpu_pct=52.0, avg_memory_mb=512.0, failure_rate_pct=0.0),
-            WorkerEfficiencyTier(worker_tier_label="Large", worker_count=10, tasks_completed_per_hour=1100, avg_task_processing_sec=32.7, avg_cpu_pct=58.0, avg_memory_mb=850.0, failure_rate_pct=0.0),
-            WorkerEfficiencyTier(worker_tier_label="XLarge", worker_count=20, tasks_completed_per_hour=2000, avg_task_processing_sec=36.0, avg_cpu_pct=65.0, avg_memory_mb=1400.0, failure_rate_pct=0.1),
+            WorkerEfficiencyTier(
+                worker_tier_label="Small",
+                worker_count=2,
+                tasks_completed_per_hour=240,
+                avg_task_processing_sec=30.0,
+                avg_cpu_pct=45.0,
+                avg_memory_mb=256.0,
+                failure_rate_pct=0.0,
+            ),
+            WorkerEfficiencyTier(
+                worker_tier_label="Medium",
+                worker_count=5,
+                tasks_completed_per_hour=580,
+                avg_task_processing_sec=31.0,
+                avg_cpu_pct=52.0,
+                avg_memory_mb=512.0,
+                failure_rate_pct=0.0,
+            ),
+            WorkerEfficiencyTier(
+                worker_tier_label="Large",
+                worker_count=10,
+                tasks_completed_per_hour=1100,
+                avg_task_processing_sec=32.7,
+                avg_cpu_pct=58.0,
+                avg_memory_mb=850.0,
+                failure_rate_pct=0.0,
+            ),
+            WorkerEfficiencyTier(
+                worker_tier_label="XLarge",
+                worker_count=20,
+                tasks_completed_per_hour=2000,
+                avg_task_processing_sec=36.0,
+                avg_cpu_pct=65.0,
+                avg_memory_mb=1400.0,
+                failure_rate_pct=0.1,
+            ),
         ]
 
         optimal = next((t for t in tiers if t.worker_count == 10), tiers[-1])

@@ -142,7 +142,8 @@ class ConnectorManager(IConnectorManager):
         if not category:
             return list(self._connectors.values())
         return [
-            c for c in self._connectors.values()
+            c
+            for c in self._connectors.values()
             if c.category.value.lower() == category.lower() or c.category.name.lower() == category.lower()
         ]
 

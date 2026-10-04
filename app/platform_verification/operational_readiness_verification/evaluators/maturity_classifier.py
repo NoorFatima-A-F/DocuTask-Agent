@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11.9: Operational Maturity Classifier
 """
+
 from typing import List
 from ..domain.interfaces import IMaturityClassifier
 from ..domain.models import MaturityReport, MaturityLevel, OperationalRiskReport

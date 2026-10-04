@@ -37,7 +37,13 @@ class ResourceUtilizationVerifier(IResourceUtilizationVerifier):
 
     def verify(self) -> ResourceUtilizationReport:
         cpu = CPUUtilizationMetric(avg_usage_pct=38.5, peak_usage_pct=72.0, saturation_point_pct=88.0)
-        memory = MemoryUtilizationMetric(rss_initial_mb=145.0, rss_peak_mb=195.0, growth_slope_mb_per_hr=0.002, gc_pressure_status="NORMAL_CYCLIC", leak_detected=False)
+        memory = MemoryUtilizationMetric(
+            rss_initial_mb=145.0,
+            rss_peak_mb=195.0,
+            growth_slope_mb_per_hr=0.002,
+            gc_pressure_status="NORMAL_CYCLIC",
+            leak_detected=False,
+        )
         disk = DiskIOUtilizationMetric(storage_throughput_mb_sec=142.0, io_latency_ms=2.4)
         network = NetworkUtilizationMetric(bandwidth_mbps=340.0, packet_delay_ms=0.8)
 

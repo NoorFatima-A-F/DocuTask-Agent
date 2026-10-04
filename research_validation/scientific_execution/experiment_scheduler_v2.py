@@ -13,9 +13,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Optional, Set, Tuple
 
-from research_validation.scientific_execution.experiment_manifest import (
-    ExperimentManifest, ExperimentStatus
-)
+from research_validation.scientific_execution.experiment_manifest import ExperimentManifest, ExperimentStatus
 
 
 class PriorityLevel(int, Enum):

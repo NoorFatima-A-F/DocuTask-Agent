@@ -39,15 +39,18 @@ def test_agent_message_bus_routing_and_broadcast():
 
 import asyncio
 
+
 def test_supervisor_worker_plan_execution():
     async def _run():
         bus = AgentMessageBus()
         skills = SkillRegistry()
-        skills.register(AgentSkill(
-            name="custom_extraction",
-            capability="extraction",
-            handler=lambda data: {"extracted": True, "data": data},
-        ))
+        skills.register(
+            AgentSkill(
+                name="custom_extraction",
+                capability="extraction",
+                handler=lambda data: {"extracted": True, "data": data},
+            )
+        )
 
         worker1 = WorkerAgent(
             agent_id="worker-exec-1",
@@ -83,4 +86,3 @@ def test_supervisor_worker_plan_execution():
         assert len(report.step_results) == len(plan.steps)
 
     asyncio.run(_run())
-

@@ -12,6 +12,7 @@ import uuid
 
 class KernelEventType(str, Enum):
     """Core event types generated within the platform kernel."""
+
     RUNTIME_STATE_CHANGED = "platform.runtime.state_changed"
     BOOTSTRAP_COMPLETED = "platform.runtime.bootstrap_completed"
     SHUTDOWN_INITIATED = "platform.runtime.shutdown_initiated"
@@ -53,6 +54,7 @@ class IKernelEvent(ABC):
 @dataclass(frozen=True)
 class KernelEvent(IKernelEvent):
     """Concrete immutable kernel event envelope."""
+
     event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     event_type: str = KernelEventType.RUNTIME_STATE_CHANGED.value
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))

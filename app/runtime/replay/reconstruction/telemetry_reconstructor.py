@@ -47,11 +47,13 @@ class TelemetryReconstructor:
                 state.total_tokens_consumed += tokens
 
             if "step.completed" in evt_type or "task_completed" in evt_type:
-                state.step_timings.append({
-                    "event_id": ev.get("event_id"),
-                    "name": payload.get("task_id") or payload.get("task_type") or evt_type,
-                    "duration_ms": float(payload.get("duration_ms", 0.0)),
-                    "timestamp": ev.get("timestamp"),
-                })
+                state.step_timings.append(
+                    {
+                        "event_id": ev.get("event_id"),
+                        "name": payload.get("task_id") or payload.get("task_type") or evt_type,
+                        "duration_ms": float(payload.get("duration_ms", 0.0)),
+                        "timestamp": ev.get("timestamp"),
+                    }
+                )
 
         return state

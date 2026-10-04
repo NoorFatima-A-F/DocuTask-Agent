@@ -89,15 +89,17 @@ class MasterReproducibilityOrchestrator:
             "architecture": platform.machine(),
             "processor": platform.processor(),
         }
-        stages.append(StageResult(
-            stage_index=1,
-            stage_name="ENVIRONMENT_AUDIT",
-            status="SUCCESS",
-            is_success=True,
-            duration_ms=(time.perf_counter() - t0) * 1000.0,
-            details=env_dict,
-            messages=("Host environment fingerprinted successfully.",),
-        ))
+        stages.append(
+            StageResult(
+                stage_index=1,
+                stage_name="ENVIRONMENT_AUDIT",
+                status="SUCCESS",
+                is_success=True,
+                duration_ms=(time.perf_counter() - t0) * 1000.0,
+                details=env_dict,
+                messages=("Host environment fingerprinted successfully.",),
+            )
+        )
 
         # STAGE 2: Dataset Manifest Checksum Verification
         t0 = time.perf_counter()
@@ -111,31 +113,35 @@ class MasterReproducibilityOrchestrator:
 
         stage2_success = True
         stage2_msg = f"Audited {len(DatasetType)} dataset manifests ({missing_count} absent on local disk)."
-        stages.append(StageResult(
-            stage_index=2,
-            stage_name="DATASET_MANIFEST_CHECK",
-            status="SUCCESS" if stage2_success else "WARNING",
-            is_success=stage2_success,
-            duration_ms=(time.perf_counter() - t0) * 1000.0,
-            details=manifest_statuses,
-            messages=(stage2_msg,),
-        ))
+        stages.append(
+            StageResult(
+                stage_index=2,
+                stage_name="DATASET_MANIFEST_CHECK",
+                status="SUCCESS" if stage2_success else "WARNING",
+                is_success=stage2_success,
+                duration_ms=(time.perf_counter() - t0) * 1000.0,
+                details=manifest_statuses,
+                messages=(stage2_msg,),
+            )
+        )
 
         # STAGE 3: Cryptographic Merkle DAG Re-computation
         t0 = time.perf_counter()
         test_payload = {"experiment": "baseline_proof", "timestamp": "2026-09-08T00:00:00Z"}
         h1 = hash_canonical_json(test_payload)
         h2 = hash_canonical_json(test_payload)
-        merkle_match = (h1 == h2)
-        stages.append(StageResult(
-            stage_index=3,
-            stage_name="MERKLE_DAG_INTEGRITY",
-            status="SUCCESS" if merkle_match else "FAILED",
-            is_success=merkle_match,
-            duration_ms=(time.perf_counter() - t0) * 1000.0,
-            details={"root_hash": h1, "deterministic_match": merkle_match},
-            messages=("Deterministic JSON canonical hashing validated.",),
-        ))
+        merkle_match = h1 == h2
+        stages.append(
+            StageResult(
+                stage_index=3,
+                stage_name="MERKLE_DAG_INTEGRITY",
+                status="SUCCESS" if merkle_match else "FAILED",
+                is_success=merkle_match,
+                duration_ms=(time.perf_counter() - t0) * 1000.0,
+                details={"root_hash": h1, "deterministic_match": merkle_match},
+                messages=("Deterministic JSON canonical hashing validated.",),
+            )
+        )
 
         # STAGE 4: Public Benchmark Suite Execution
         t0 = time.perf_counter()
@@ -153,15 +159,17 @@ class MasterReproducibilityOrchestrator:
             if res.is_measured:
                 benchmarks_measured += 1
 
-        stages.append(StageResult(
-            stage_index=4,
-            stage_name="BENCHMARK_EXECUTION",
-            status="SUCCESS",
-            is_success=True,
-            duration_ms=(time.perf_counter() - t0) * 1000.0,
-            details=benchmark_results,
-            messages=(f"Executed benchmarks for {len(DatasetType)} datasets ({benchmarks_measured} measured).",),
-        ))
+        stages.append(
+            StageResult(
+                stage_index=4,
+                stage_name="BENCHMARK_EXECUTION",
+                status="SUCCESS",
+                is_success=True,
+                duration_ms=(time.perf_counter() - t0) * 1000.0,
+                details=benchmark_results,
+                messages=(f"Executed benchmarks for {len(DatasetType)} datasets ({benchmarks_measured} measured).",),
+            )
+        )
 
         # STAGE 5: Differential Metric Divergence Assessment
         t0 = time.perf_counter()
@@ -182,15 +190,17 @@ class MasterReproducibilityOrchestrator:
                 "rel_divergence": rel_diff,
             }
 
-        stages.append(StageResult(
-            stage_index=5,
-            stage_name="METRIC_DIVERGENCE_CHECK",
-            status="SUCCESS" if divergence_passed else "DIVERGED",
-            is_success=divergence_passed,
-            duration_ms=(time.perf_counter() - t0) * 1000.0,
-            details=metric_divs,
-            messages=("Metric divergence within expected empirical tolerance.",),
-        ))
+        stages.append(
+            StageResult(
+                stage_index=5,
+                stage_name="METRIC_DIVERGENCE_CHECK",
+                status="SUCCESS" if divergence_passed else "DIVERGED",
+                is_success=divergence_passed,
+                duration_ms=(time.perf_counter() - t0) * 1000.0,
+                details=metric_divs,
+                messages=("Metric divergence within expected empirical tolerance.",),
+            )
+        )
 
         # STAGE 6: Artifact & Visual Reproduction
         t0 = time.perf_counter()
@@ -199,15 +209,17 @@ class MasterReproducibilityOrchestrator:
             "artifacts/reproducibility/provenance_dag.svg",
             "artifacts/reproducibility/metric_deltas.md",
         )
-        stages.append(StageResult(
-            stage_index=6,
-            stage_name="ARTIFACT_SYNTHESIS",
-            status="SUCCESS",
-            is_success=True,
-            duration_ms=(time.perf_counter() - t0) * 1000.0,
-            details={"artifacts_generated": list(reproduced_artifacts)},
-            messages=("Synthesized reproducible figures and tables.",),
-        ))
+        stages.append(
+            StageResult(
+                stage_index=6,
+                stage_name="ARTIFACT_SYNTHESIS",
+                status="SUCCESS",
+                is_success=True,
+                duration_ms=(time.perf_counter() - t0) * 1000.0,
+                details={"artifacts_generated": list(reproduced_artifacts)},
+                messages=("Synthesized reproducible figures and tables.",),
+            )
+        )
 
         total_elapsed = time.perf_counter() - start_t
         passed_count = sum(1 for s in stages if s.is_success)

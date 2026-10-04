@@ -1,6 +1,7 @@
 """
 Storage Classification Engine for Enterprise Document Storage (Part 3G.2C).
 """
+
 from typing import Dict, Any
 
 from app.platform_verification.document_storage_verification.domain.models import (
@@ -21,7 +22,12 @@ class StorageClassificationEngine(IStorageClassificationEngine):
 
     CATEGORY_METADATA_SPEC = {
         StorageArtifactCategory.ORIGINAL_DOCUMENTS.value: {
-            "mime_types": ["application/pdf", "image/png", "image/tiff", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
+            "mime_types": [
+                "application/pdf",
+                "image/png",
+                "image/tiff",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            ],
             "retention_policy": "7_YEARS_LEGAL_HOLD",
             "compliance_standards": ["SOC2_TYPE_II", "HIPAA", "GDPR", "ISO_27001"],
             "encryption_requirement": "AES_256_GCM_ENFORCED",
@@ -56,7 +62,11 @@ class StorageClassificationEngine(IStorageClassificationEngine):
             "immutability_status": "TAMPER_EVIDENT",
         },
         StorageArtifactCategory.GENERATED_REPORTS.value: {
-            "mime_types": ["application/pdf", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+            "mime_types": [
+                "application/pdf",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ],
             "retention_policy": "3_YEARS_OPERATIONAL",
             "compliance_standards": ["SOC2_TYPE_II"],
             "encryption_requirement": "AES_256_GCM_ENFORCED",
@@ -92,9 +102,7 @@ class StorageClassificationEngine(IStorageClassificationEngine):
         },
     }
 
-    def classify_storage_objects(
-        self, inventory: StorageInventoryReport
-    ) -> StorageClassificationReport:
+    def classify_storage_objects(self, inventory: StorageInventoryReport) -> StorageClassificationReport:
         """
         Executes deep classification of all discovered inventory objects.
         """

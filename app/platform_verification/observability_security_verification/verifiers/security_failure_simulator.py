@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10.11: Observability Security Failure Simulator
 """
+
 from typing import List
 from ..domain.interfaces import ISecurityFailureSimulator
 from ..domain.models import SecurityFailureSimulationResult

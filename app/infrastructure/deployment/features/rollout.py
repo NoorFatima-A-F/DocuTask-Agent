@@ -15,7 +15,9 @@ class FeatureRolloutManager:
         self._flags: Dict[str, FeatureFlag] = {}
         self._lock = threading.RLock()
 
-    def create_flag(self, flag_key: str, name: str, description: str = "", default_enabled: bool = False) -> FeatureFlag:
+    def create_flag(
+        self, flag_key: str, name: str, description: str = "", default_enabled: bool = False
+    ) -> FeatureFlag:
         """Create a new feature flag."""
         with self._lock:
             flag = FeatureFlag(

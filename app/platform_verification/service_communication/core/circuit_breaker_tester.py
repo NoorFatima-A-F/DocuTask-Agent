@@ -1,6 +1,7 @@
 """
 Circuit Breaker State Machine Tester.
 """
+
 from app.platform_verification.service_communication.domain.models import (
     CircuitBreakerReport,
     CircuitBreakerState,
@@ -10,6 +11,7 @@ from app.platform_verification.service_communication.domain.interfaces import IC
 
 class CircuitBreakerTester(ICircuitBreakerTester):
     """Simulates 3-state transitions (CLOSED -> OPEN -> HALF_OPEN -> CLOSED)."""
+
     __test__ = False
 
     def test_circuit_breaker(self, service_name: str, simulated_failures: int) -> CircuitBreakerReport:

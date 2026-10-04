@@ -137,7 +137,9 @@ class TestEventTypes:
         assert mem_c.promoted_patterns_count == 3
         assert st_tr.from_state == "PLANNING"
 
-    @pytest.mark.parametrize("priority", [EventPriority.LOW, EventPriority.NORMAL, EventPriority.HIGH, EventPriority.CRITICAL])
+    @pytest.mark.parametrize(
+        "priority", [EventPriority.LOW, EventPriority.NORMAL, EventPriority.HIGH, EventPriority.CRITICAL]
+    )
     def test_event_priority_parameterization(self, priority):
         evt = AgentEvent(priority=priority)
         assert evt.priority == priority
@@ -435,35 +437,38 @@ class TestEnterpriseEventBus:
         assert len(bus.event_store.get_by_execution_id("g10")) == 1
 
     @pytest.mark.asyncio
-    @pytest.mark.parametrize("event_cls", [
-        GoalReceivedEvent,
-        PlanningStartedEvent,
-        PlanningCompletedEvent,
-        ExecutionStartedEvent,
-        ExecutionCompletedEvent,
-        ObservationCompletedEvent,
-        ReflectionStartedEvent,
-        AgentCompletedEvent,
-        AgentFailedEvent,
-        RetryRequestedEvent,
-        GoalUnderstandingCompletedEvent,
-        PlanOptimizedEvent,
-        TaskStartedEvent,
-        TaskCompletedEvent,
-        TaskFailedEvent,
-        TaskMutatedEvent,
-        AgentNegotiationStartedEvent,
-        AgentNegotiationCompletedEvent,
-        ToolInvokedEvent,
-        ToolPolicyViolationEvent,
-        ReflectionCritiqueCompletedEvent,
-        SelfCorrectionTriggeredEvent,
-        HumanEscalationRequestedEvent,
-        HumanFeedbackReceivedEvent,
-        MemoryConsolidationCompletedEvent,
-        StateTransitionEvent,
-        SecurityViolationEvent,
-    ])
+    @pytest.mark.parametrize(
+        "event_cls",
+        [
+            GoalReceivedEvent,
+            PlanningStartedEvent,
+            PlanningCompletedEvent,
+            ExecutionStartedEvent,
+            ExecutionCompletedEvent,
+            ObservationCompletedEvent,
+            ReflectionStartedEvent,
+            AgentCompletedEvent,
+            AgentFailedEvent,
+            RetryRequestedEvent,
+            GoalUnderstandingCompletedEvent,
+            PlanOptimizedEvent,
+            TaskStartedEvent,
+            TaskCompletedEvent,
+            TaskFailedEvent,
+            TaskMutatedEvent,
+            AgentNegotiationStartedEvent,
+            AgentNegotiationCompletedEvent,
+            ToolInvokedEvent,
+            ToolPolicyViolationEvent,
+            ReflectionCritiqueCompletedEvent,
+            SelfCorrectionTriggeredEvent,
+            HumanEscalationRequestedEvent,
+            HumanFeedbackReceivedEvent,
+            MemoryConsolidationCompletedEvent,
+            StateTransitionEvent,
+            SecurityViolationEvent,
+        ],
+    )
     async def test_all_event_types_dispatch_correctly(self, event_cls):
         bus = EnterpriseEventBus()
         captured = []
@@ -477,35 +482,38 @@ class TestEnterpriseEventBus:
         assert invoked == 1
         assert len(captured) == 1
 
-    @pytest.mark.parametrize("event_cls", [
-        GoalReceivedEvent,
-        PlanningStartedEvent,
-        PlanningCompletedEvent,
-        ExecutionStartedEvent,
-        ExecutionCompletedEvent,
-        ObservationCompletedEvent,
-        ReflectionStartedEvent,
-        AgentCompletedEvent,
-        AgentFailedEvent,
-        RetryRequestedEvent,
-        GoalUnderstandingCompletedEvent,
-        PlanOptimizedEvent,
-        TaskStartedEvent,
-        TaskCompletedEvent,
-        TaskFailedEvent,
-        TaskMutatedEvent,
-        AgentNegotiationStartedEvent,
-        AgentNegotiationCompletedEvent,
-        ToolInvokedEvent,
-        ToolPolicyViolationEvent,
-        ReflectionCritiqueCompletedEvent,
-        SelfCorrectionTriggeredEvent,
-        HumanEscalationRequestedEvent,
-        HumanFeedbackReceivedEvent,
-        MemoryConsolidationCompletedEvent,
-        StateTransitionEvent,
-        SecurityViolationEvent,
-    ])
+    @pytest.mark.parametrize(
+        "event_cls",
+        [
+            GoalReceivedEvent,
+            PlanningStartedEvent,
+            PlanningCompletedEvent,
+            ExecutionStartedEvent,
+            ExecutionCompletedEvent,
+            ObservationCompletedEvent,
+            ReflectionStartedEvent,
+            AgentCompletedEvent,
+            AgentFailedEvent,
+            RetryRequestedEvent,
+            GoalUnderstandingCompletedEvent,
+            PlanOptimizedEvent,
+            TaskStartedEvent,
+            TaskCompletedEvent,
+            TaskFailedEvent,
+            TaskMutatedEvent,
+            AgentNegotiationStartedEvent,
+            AgentNegotiationCompletedEvent,
+            ToolInvokedEvent,
+            ToolPolicyViolationEvent,
+            ReflectionCritiqueCompletedEvent,
+            SelfCorrectionTriggeredEvent,
+            HumanEscalationRequestedEvent,
+            HumanFeedbackReceivedEvent,
+            MemoryConsolidationCompletedEvent,
+            StateTransitionEvent,
+            SecurityViolationEvent,
+        ],
+    )
     def test_all_event_types_serialization_roundtrip(self, event_cls):
         evt = event_cls(execution_id="roundtrip-test", payload={"source": "test_runner"})
         d = evt.to_dict()
@@ -522,4 +530,3 @@ class TestEnterpriseEventBus:
         store.append(e1)
         store.append(e2)
         assert len(store.get_all()) == 2
-

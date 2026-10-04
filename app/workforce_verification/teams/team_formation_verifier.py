@@ -114,7 +114,7 @@ class TeamFormationVerifier:
         return AssertionResult(
             name="assert_team_fitness_and_sla_probability",
             passed=passed,
-            message=f"Dynamic team fitness calibrated at {fitness_score*100:.1f}% with {sla_prob*100:.1f}% SLA completion probability",
+            message=f"Dynamic team fitness calibrated at {fitness_score * 100:.1f}% with {sla_prob * 100:.1f}% SLA completion probability",
             execution_time_ms=t_ms,
             details={"fitness_score": fitness_score, "sla_probability": sla_prob},
         )

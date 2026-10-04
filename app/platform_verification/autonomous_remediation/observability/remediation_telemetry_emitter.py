@@ -11,7 +11,9 @@ from datetime import datetime, timezone
 class RemediationTelemetryEmitter:
     """Emits logs, metrics, and traces for autonomous remediation events."""
 
-    def emit_lifecycle_log(self, event_type: str, execution_id: str, action: str, target: str, details: Dict[str, Any]) -> Dict[str, Any]:
+    def emit_lifecycle_log(
+        self, event_type: str, execution_id: str, action: str, target: str, details: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Emits structured JSON log for remediation lifecycle events."""
         log_entry = {
             "timestamp": datetime.now(timezone.utc).isoformat(),

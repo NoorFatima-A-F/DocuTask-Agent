@@ -116,15 +116,17 @@ class EvidenceGenerator:
             clean_name = dim_name.replace("_", " ").title()
             lines.append(f"| **{clean_name}** | Core Quality Dimension | `{score:.1f}%` | **PASSED** |")
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "## Section Verification Results (Sections A through R)",
-            "",
-            "| Section | Domain Name | Weight | Score | Assertions Passed | Status |",
-            "| :--- | :--- | :---: | :---: | :---: | :---: |",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "## Section Verification Results (Sections A through R)",
+                "",
+                "| Section | Domain Name | Weight | Score | Assertions Passed | Status |",
+                "| :--- | :--- | :---: | :---: | :---: | :---: |",
+            ]
+        )
 
         for sec_key, sec in sc.sections.items():
             lines.append(
@@ -132,51 +134,57 @@ class EvidenceGenerator:
                 f"`{sec.passed_assertions_count}/{sec.total_assertions_count}` | **{sec.status.value}** |"
             )
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "## Detailed Section Audits",
-            "",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "## Detailed Section Audits",
+                "",
+            ]
+        )
 
         for sec_key, sec in sc.sections.items():
-            lines.extend([
-                f"### {sec.title}",
-                "",
-                f"> {sec.description}",
-                "",
-                f"- **Status**: `{sec.status.value}`",
-                f"- **Section Score**: `{sec.score:.1f}%`",
-                f"- **Execution Time**: `{sec.execution_time_ms:.2f} ms`",
-                "",
-                "#### Verified Assertions:",
-            ])
+            lines.extend(
+                [
+                    f"### {sec.title}",
+                    "",
+                    f"> {sec.description}",
+                    "",
+                    f"- **Status**: `{sec.status.value}`",
+                    f"- **Section Score**: `{sec.score:.1f}%`",
+                    f"- **Execution Time**: `{sec.execution_time_ms:.2f} ms`",
+                    "",
+                    "#### Verified Assertions:",
+                ]
+            )
             for a in sec.assertions:
                 badge = "[PASS]" if a.passed else "[FAIL]"
                 lines.append(f"- {badge} **`{a.name}`**: {a.message} (`{a.execution_time_ms:.2f} ms`)")
             lines.append("")
 
-        lines.extend([
-            "---",
-            "",
-            "## Cryptographic Evidence Ledger",
-            "",
-            "All empirical telemetry, test logs, and section results are cryptographically signed and tracked in `./document_intelligence_verification_evidence/manifest.json`.",
-            "",
-            "```json",
-            json.dumps(
-                {
-                    "program": "Phase V5 Document Intelligence Verification",
-                    "status": "100% PRODUCTION READY",
-                    "composite_score": sc.composite_score,
-                    "grade": sc.grade,
-                    "production_ready": sc.production_ready,
-                },
-                indent=2,
-            ),
-            "```",
-            "",
-        ])
+        lines.extend(
+            [
+                "---",
+                "",
+                "## Cryptographic Evidence Ledger",
+                "",
+                "All empirical telemetry, test logs, and section results are cryptographically signed and tracked in `./document_intelligence_verification_evidence/manifest.json`.",
+                "",
+                "```json",
+                json.dumps(
+                    {
+                        "program": "Phase V5 Document Intelligence Verification",
+                        "status": "100% PRODUCTION READY",
+                        "composite_score": sc.composite_score,
+                        "grade": sc.grade,
+                        "production_ready": sc.production_ready,
+                    },
+                    indent=2,
+                ),
+                "```",
+                "",
+            ]
+        )
 
         return "\n".join(lines)

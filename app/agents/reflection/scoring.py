@@ -21,11 +21,7 @@ class CompositeScorer:
         "RISK_AND_SAFETY": 0.10,
     }
 
-    def compute_composite_score(
-        self,
-        report: EvaluationReport,
-        custom_weights: Dict[str, float] = None
-    ) -> float:
+    def compute_composite_score(self, report: EvaluationReport, custom_weights: Dict[str, float] = None) -> float:
         """Aggregates dimensional scores into a normalized [0.0, 1.0] composite score."""
         weights = custom_weights or self.DEFAULT_WEIGHTS
         total_weight = 0.0

@@ -1,6 +1,7 @@
 """
 REST API Router for Clean Architecture Dependency Validation (PART 2B).
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, status

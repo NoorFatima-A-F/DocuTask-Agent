@@ -32,9 +32,24 @@ class ApprovalCenterEngine(IApprovalCenterEngine):
             recommended_action="APPROVE_AND_POST_TO_QUICKBOOKS",
             status=ApprovalStatus.PENDING,
             citations=[
-                BoundingBoxCitation(page_number=1, coordinates=[0.12, 0.15, 0.45, 0.22], extracted_text="Acme Global Solutions Inc.", field_name="vendor_name"),
-                BoundingBoxCitation(page_number=1, coordinates=[0.75, 0.15, 0.92, 0.20], extracted_text="$14,500.50", field_name="total_amount"),
-                BoundingBoxCitation(page_number=1, coordinates=[0.75, 0.85, 0.90, 0.90], extracted_text="INV-2026-8891", field_name="invoice_number"),
+                BoundingBoxCitation(
+                    page_number=1,
+                    coordinates=[0.12, 0.15, 0.45, 0.22],
+                    extracted_text="Acme Global Solutions Inc.",
+                    field_name="vendor_name",
+                ),
+                BoundingBoxCitation(
+                    page_number=1,
+                    coordinates=[0.75, 0.15, 0.92, 0.20],
+                    extracted_text="$14,500.50",
+                    field_name="total_amount",
+                ),
+                BoundingBoxCitation(
+                    page_number=1,
+                    coordinates=[0.75, 0.85, 0.90, 0.90],
+                    extracted_text="INV-2026-8891",
+                    field_name="invoice_number",
+                ),
             ],
             reviewer_notes="High-confidence extraction verified against PO #PO-9912.",
         )
@@ -48,7 +63,12 @@ class ApprovalCenterEngine(IApprovalCenterEngine):
             recommended_action="FLAG_UNLIMITED_LIABILITY_CLAUSE",
             status=ApprovalStatus.PENDING,
             citations=[
-                BoundingBoxCitation(page_number=4, coordinates=[0.10, 0.45, 0.85, 0.60], extracted_text="Neither party shall be subject to any limitation of liability for data breaches.", field_name="liability_cap"),
+                BoundingBoxCitation(
+                    page_number=4,
+                    coordinates=[0.10, 0.45, 0.85, 0.60],
+                    extracted_text="Neither party shall be subject to any limitation of liability for data breaches.",
+                    field_name="liability_cap",
+                ),
             ],
             reviewer_notes="Detected non-standard indemnification clause requiring Legal Counsel approval.",
         )

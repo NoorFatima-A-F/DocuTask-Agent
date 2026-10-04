@@ -13,6 +13,7 @@ from .runners import StageRunner
 @dataclass
 class PipelineRun:
     """Represents a complete execution instance of a CI/CD pipeline."""
+
     run_id: str
     pipeline_name: str
     commit_sha: str
@@ -43,8 +44,12 @@ class PipelineEngine:
         """Generate a standard 8-stage enterprise CI/CD pipeline."""
         return [
             PipelineStageConfig(name="Source Checkout", stage_type=StageType.SOURCE),
-            PipelineStageConfig(name="Compile & Container Build", stage_type=StageType.BUILD, handler=custom_build_handler),
-            PipelineStageConfig(name="Unit & Integration Tests", stage_type=StageType.TEST, handler=custom_test_handler),
+            PipelineStageConfig(
+                name="Compile & Container Build", stage_type=StageType.BUILD, handler=custom_build_handler
+            ),
+            PipelineStageConfig(
+                name="Unit & Integration Tests", stage_type=StageType.TEST, handler=custom_test_handler
+            ),
             PipelineStageConfig(name="Vulnerability & SAST Scan", stage_type=StageType.SECURITY_SCAN),
             PipelineStageConfig(name="Artifact Cryptographic Signing", stage_type=StageType.ARTIFACT_SIGN),
             PipelineStageConfig(name="Registry Publish", stage_type=StageType.PUBLISH),

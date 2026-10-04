@@ -1,6 +1,7 @@
 """
 3H.11.5: Worker Failure Simulation Verifier
 """
+
 from ..domain.models import WorkerFailureReport
 from ..domain.interfaces import IWorkerFailureVerifier
 
@@ -24,5 +25,5 @@ class WorkerFailureVerifier(IWorkerFailureVerifier):
             worker_pool_health="HEALTHY",
             time_to_detect_ms=1100.0,
             time_to_recover_ms=3200.0,
-            simulation_passed=True
+            simulation_passed=True,
         )

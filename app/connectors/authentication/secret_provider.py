@@ -134,14 +134,17 @@ class EnvSecretProvider(InMemoryVaultSecretProvider):
 
 class GCPSecretProvider(InMemoryVaultSecretProvider):
     """Google Cloud Secret Manager provider implementation."""
+
     pass
 
 
 class AWSSecretProvider(InMemoryVaultSecretProvider):
     """AWS Secrets Manager provider implementation."""
+
     pass
 
 
 class AzureSecretProvider(InMemoryVaultSecretProvider):
     """Azure Key Vault provider implementation."""
+
     pass

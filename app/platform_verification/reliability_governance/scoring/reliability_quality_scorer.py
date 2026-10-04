@@ -8,6 +8,7 @@ Calculates weighted scores across the 6 enterprise reliability governance pillar
 5. Regression Prevention & Production Gates (15%)
 6. Telemetry Data Quality & Reliability Automation (10%)
 """
+
 from typing import List
 from ..domain.interfaces import IReliabilityQualityScorer
 from ..domain.models import (
@@ -45,7 +46,16 @@ class ReliabilityQualityScorer(IReliabilityQualityScorer):
 
         # Pillar 1: SLI Coverage & User Journey Completeness (20%)
         # Criteria: Minimum 4 primary SLIs measured, 100% user journey coverage, 8 services mapped
-        p1_achieved = 100.0 if (sli_report.all_slis_measured and sli_report.user_journey_coverage_pct >= 95.0 and len(sli_report.slis) >= 4 and gov_report.services_monitored >= 8) else 90.0
+        p1_achieved = (
+            100.0
+            if (
+                sli_report.all_slis_measured
+                and sli_report.user_journey_coverage_pct >= 95.0
+                and len(sli_report.slis) >= 4
+                and gov_report.services_monitored >= 8
+            )
+            else 90.0
+        )
         p1_weighted = round((p1_achieved * 20.0) / 100.0, 2)
         pillar_scores.append(
             ReliabilityPillarScore(
@@ -59,7 +69,15 @@ class ReliabilityQualityScorer(IReliabilityQualityScorer):
 
         # Pillar 2: SLO Maturity & Target Engineering (20%)
         # Criteria: All SLOs compliant, overall compliance >= 95%, explicit ownership
-        p2_achieved = 100.0 if (slo_report.all_slos_compliant and slo_report.overall_compliance_pct >= 95.0 and len(slo_report.slos) >= 4) else 85.0
+        p2_achieved = (
+            100.0
+            if (
+                slo_report.all_slos_compliant
+                and slo_report.overall_compliance_pct >= 95.0
+                and len(slo_report.slos) >= 4
+            )
+            else 85.0
+        )
         p2_weighted = round((p2_achieved * 20.0) / 100.0, 2)
         pillar_scores.append(
             ReliabilityPillarScore(
@@ -73,7 +91,15 @@ class ReliabilityQualityScorer(IReliabilityQualityScorer):
 
         # Pillar 3: Error Budget Management & Burn Rate Tracking (20%)
         # Criteria: Multi-window burn rates (1h, 6h, 24h) calculated, no unmitigated budget freeze, average remaining budget >= 50%
-        p3_achieved = 100.0 if (len(budget_report.budgets) >= 4 and not budget_report.deployment_freeze_required and budget_report.average_remaining_budget_pct >= 50.0) else 90.0
+        p3_achieved = (
+            100.0
+            if (
+                len(budget_report.budgets) >= 4
+                and not budget_report.deployment_freeze_required
+                and budget_report.average_remaining_budget_pct >= 50.0
+            )
+            else 90.0
+        )
         p3_weighted = round((p3_achieved * 20.0) / 100.0, 2)
         pillar_scores.append(
             ReliabilityPillarScore(
@@ -87,7 +113,15 @@ class ReliabilityQualityScorer(IReliabilityQualityScorer):
 
         # Pillar 4: Executive Reliability Dashboards & Visibility (15%)
         # Criteria: 4 primary views verified, trend stability verified without unmitigated degradation
-        p4_achieved = 100.0 if (dash_report.dashboards_verified and trend_report.trend_stability_pct >= 95.0 and len(dash_report.views) >= 4) else 88.0
+        p4_achieved = (
+            100.0
+            if (
+                dash_report.dashboards_verified
+                and trend_report.trend_stability_pct >= 95.0
+                and len(dash_report.views) >= 4
+            )
+            else 88.0
+        )
         p4_weighted = round((p4_achieved * 15.0) / 100.0, 2)
         pillar_scores.append(
             ReliabilityPillarScore(
@@ -115,7 +149,9 @@ class ReliabilityQualityScorer(IReliabilityQualityScorer):
 
         # Pillar 6: Telemetry Data Quality & Reliability Automation (10%)
         # Criteria: Telemetry quality score >= 98%, automation rules enforced
-        p6_achieved = 100.0 if (qual_report.data_quality_score_pct >= 98.0 and auto_report.automation_enforced) else 85.0
+        p6_achieved = (
+            100.0 if (qual_report.data_quality_score_pct >= 98.0 and auto_report.automation_enforced) else 85.0
+        )
         p6_weighted = round((p6_achieved * 10.0) / 100.0, 2)
         pillar_scores.append(
             ReliabilityPillarScore(

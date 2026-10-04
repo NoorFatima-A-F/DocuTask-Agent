@@ -114,7 +114,7 @@ class AuditMutationSuite:
             classification=EvidenceClassification.VERIFIED,
         )
         original_hash = rec.calculate_hash()
-        
+
         # Tamper payload
         tampered_rec = rec.model_copy(
             update={
@@ -164,7 +164,7 @@ class AuditMutationSuite:
         forged_cert = signed_cert.model_copy(update={"release_version": "9.9.9"})
         is_valid = CertificateSignatureVerifier.verify_record_signature(forged_cert, pub_key)
 
-        detected = (is_valid is False)
+        detected = is_valid is False
         return {
             "mutation_name": "MUTATION_FORGED_CERTIFICATE_SIGNATURE",
             "detected": detected,

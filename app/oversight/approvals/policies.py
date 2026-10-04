@@ -63,7 +63,9 @@ class ApprovalPolicyEngine:
             tenant_id="*",
             name="Restricted / PHI Data Access",
             policy_type=ApprovalPolicyType.DATA_ACCESS_APPROVAL,
-            conditions=[ApprovalPolicyCondition(field="data_classification", operator="in", value=["RESTRICTED", "PHI", "PCI"])],
+            conditions=[
+                ApprovalPolicyCondition(field="data_classification", operator="in", value=["RESTRICTED", "PHI", "PCI"])
+            ],
             required_approval_level=2,
             required_roles=["data_steward", "privacy_officer"],
         ),
@@ -109,7 +111,9 @@ class ApprovalPolicyEngine:
         ctx_dict = context.model_dump()
 
         # Check tenant specific and global policies
-        applicable_policies = [p for p in self.policies if p.is_active and (p.tenant_id == "*" or p.tenant_id == context.tenant_id)]
+        applicable_policies = [
+            p for p in self.policies if p.is_active and (p.tenant_id == "*" or p.tenant_id == context.tenant_id)
+        ]
 
         for pol in applicable_policies:
             if not pol.conditions:

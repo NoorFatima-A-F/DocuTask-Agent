@@ -54,7 +54,9 @@ class TestEvidenceCollector:
             source=source_dir,
             generated_by="pytest_runner",
             artifact_location=artifact_path,
-            verification_status=VerificationStatus.VERIFIED if failed_tests == 0 else VerificationStatus.FAILED_VERIFICATION,
+            verification_status=VerificationStatus.VERIFIED
+            if failed_tests == 0
+            else VerificationStatus.FAILED_VERIFICATION,
             confidence=1.0 if failed_tests == 0 else 0.0,
             reproducibility="DETERMINISTIC",
             raw_payload=payload,

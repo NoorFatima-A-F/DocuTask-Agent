@@ -10,6 +10,7 @@ class ExecutionLifecycleState(str, Enum):
     """
     Canonical 14 runtime states representing deterministic task and execution lifecycle.
     """
+
     CREATED = "CREATED"
     READY = "READY"
     WAITING = "WAITING"

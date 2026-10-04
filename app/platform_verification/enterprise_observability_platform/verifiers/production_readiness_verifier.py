@@ -2,6 +2,7 @@
 3I.11.7: Production Readiness Gate Verifier
 Verifies multi-stage automated pre-production release approval gates.
 """
+
 from typing import List
 from app.platform_verification.enterprise_observability_platform.domain.models import (
     ProductionReadinessGateReport,
@@ -25,42 +26,66 @@ class ProductionReadinessVerifier(IProductionReadinessVerifier):
             ReadinessGateStage(
                 stage_name="Security & Vulnerability Scanning",
                 stage_order=2,
-                criteria_evaluated=["Zero Critical/High CVEs (Trivy scan)", "SAST security scan pass", "Secret detection check"],
+                criteria_evaluated=[
+                    "Zero Critical/High CVEs (Trivy scan)",
+                    "SAST security scan pass",
+                    "Secret detection check",
+                ],
                 health_score=100.0,
                 passed=True,
             ),
             ReadinessGateStage(
                 stage_name="Infrastructure & GitOps Validation",
                 stage_order=3,
-                criteria_evaluated=["Kubernetes manifest validation", "Resource request/limit boundaries", "NetworkPolicy enforcement"],
+                criteria_evaluated=[
+                    "Kubernetes manifest validation",
+                    "Resource request/limit boundaries",
+                    "NetworkPolicy enforcement",
+                ],
                 health_score=98.5,
                 passed=True,
             ),
             ReadinessGateStage(
                 stage_name="Observability Standardization Check",
                 stage_order=4,
-                criteria_evaluated=["Prometheus metric exposure", "Structured JSON logging schema", "OTel trace propagation headers"],
+                criteria_evaluated=[
+                    "Prometheus metric exposure",
+                    "Structured JSON logging schema",
+                    "OTel trace propagation headers",
+                ],
                 health_score=100.0,
                 passed=True,
             ),
             ReadinessGateStage(
                 stage_name="Reliability & Chaos Verification",
                 stage_order=5,
-                criteria_evaluated=["Chaos pod failure recovery < 30s", "Circuit breaker fallback validation", "Graceful shutdown handling"],
+                criteria_evaluated=[
+                    "Chaos pod failure recovery < 30s",
+                    "Circuit breaker fallback validation",
+                    "Graceful shutdown handling",
+                ],
                 health_score=98.0,
                 passed=True,
             ),
             ReadinessGateStage(
                 stage_name="Performance & Load Testing",
                 stage_order=6,
-                criteria_evaluated=["P95 latency < 500ms under 2x peak load", "Zero memory leaks in 1-hour soak", "DB pool headroom > 30%"],
+                criteria_evaluated=[
+                    "P95 latency < 500ms under 2x peak load",
+                    "Zero memory leaks in 1-hour soak",
+                    "DB pool headroom > 30%",
+                ],
                 health_score=98.8,
                 passed=True,
             ),
             ReadinessGateStage(
                 stage_name="Final Release Approval Gate",
                 stage_order=7,
-                criteria_evaluated=["Automated multi-gate synthesis", "Rollback plan validated", "SRE automated sign-off"],
+                criteria_evaluated=[
+                    "Automated multi-gate synthesis",
+                    "Rollback plan validated",
+                    "SRE automated sign-off",
+                ],
                 health_score=100.0,
                 passed=True,
             ),

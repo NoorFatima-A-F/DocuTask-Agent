@@ -9,11 +9,13 @@ from app.core.logging import logger
 
 class InvalidJobStateTransitionException(Exception):
     """Raised when an invalid job state transition is attempted."""
+
     pass
 
 
 class JobState:
     """DocumentJob state constants."""
+
     CREATED = "CREATED"
     UPLOADED = "UPLOADED"
     QUEUED = "QUEUED"
@@ -41,7 +43,7 @@ class JobStateMachine:
         JobState.RETRYING: {JobState.QUEUED, JobState.PROCESSING, JobState.FAILED, JobState.CANCELLED},
         JobState.COMPLETED: set(),  # Terminal state
         JobState.FAILED: {JobState.QUEUED},  # Allowed via DLQ manual replay
-        JobState.CANCELLED: set()   # Terminal state
+        JobState.CANCELLED: set(),  # Terminal state
     }
 
     @classmethod

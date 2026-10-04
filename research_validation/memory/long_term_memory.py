@@ -16,6 +16,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class LongTermMemoryItem:
     """A consolidated fact, invariant, or empirical law."""
+
     item_id: str
     concept: str
     assertion: str
@@ -103,8 +104,7 @@ class LongTermMemoryStore:
         """Removes items whose retention strength has decayed below threshold."""
         t = current_time or datetime.now(timezone.utc).timestamp()
         to_delete = [
-            iid for iid, item in self.items.items()
-            if item.current_retention_strength(t) < self.forgetting_threshold
+            iid for iid, item in self.items.items() if item.current_retention_strength(t) < self.forgetting_threshold
         ]
         for iid in to_delete:
             del self.items[iid]

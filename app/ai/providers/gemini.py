@@ -51,8 +51,10 @@ class GeminiProvider(LLMProvider):
     def calculate_cost(self, input_tokens: int, output_tokens: int, model: str = "", model_name: str = "") -> float:
         """Calculates estimated cost in USD based on Gemini pricing."""
         target_model = model_name or model or self._default_model
-        rates = self.PRICING_PER_1K.get(target_model, self.PRICING_PER_1K.get("gemini-1.5-flash", {"input": 0.000075, "output": 0.0003}))
-        
+        rates = self.PRICING_PER_1K.get(
+            target_model, self.PRICING_PER_1K.get("gemini-1.5-flash", {"input": 0.000075, "output": 0.0003})
+        )
+
         in_cost = (input_tokens / 1000.0) * rates["input"]
         out_cost = (output_tokens / 1000.0) * rates["output"]
         return round(in_cost + out_cost, 6)
@@ -74,19 +76,17 @@ class GeminiProvider(LLMProvider):
 
         try:
             url = f"https://generativelanguage.googleapis.com/v1beta/models/{target_model}:generateContent?key={self.api_key}"
-            payload = {
-                "contents": [{"parts": [{"text": full_prompt}]}]
-            }
+            payload = {"contents": [{"parts": [{"text": full_prompt}]}]}
             async with httpx.AsyncClient(timeout=30.0) as client:
                 response = await client.post(url, json=payload)
                 if response.status_code != 200:
                     raise AIProviderException(f"Gemini API returned HTTP {response.status_code}: {response.text}")
-                
+
                 data = response.json()
                 candidates = data.get("candidates", [])
                 if not candidates:
                     raise AIProviderException("Gemini API returned no completion candidates")
-                
+
                 parts = candidates[0].get("content", {}).get("parts", [])
                 return parts[0].get("text", "") if parts else ""
         except Exception as e:
@@ -94,15 +94,11 @@ class GeminiProvider(LLMProvider):
             raise AIProviderException(f"Gemini provider failure: {str(e)}")
 
     async def generate_json(
-        self,
-        prompt: str,
-        json_schema: Dict[str, Any],
-        system_instruction: str = "",
-        model: str = ""
+        self, prompt: str, json_schema: Dict[str, Any], system_instruction: str = "", model: str = ""
     ) -> Tuple[Dict[str, Any], str, int, int]:
         """
         Generates structured JSON output conforming to json_schema.
-        
+
         :return: Tuple of (parsed_json_dict, raw_response_str, input_tokens, output_tokens)
         """
         target_model = model or self._default_model
@@ -125,7 +121,7 @@ class GeminiProvider(LLMProvider):
                 url = f"https://generativelanguage.googleapis.com/v1beta/models/{target_model}:generateContent?key={self.api_key}"
                 payload = {
                     "contents": [{"parts": [{"text": f"{json_instruction}\n\n{prompt}"}]}],
-                    "generationConfig": {"responseMimeType": "application/json"}
+                    "generationConfig": {"responseMimeType": "application/json"},
                 }
                 async with httpx.AsyncClient(timeout=45.0) as client:
                     res = await client.post(url, json=payload)
@@ -179,8 +175,14 @@ class GeminiProvider(LLMProvider):
                     if isinstance(item, dict) and "type" in item and item["type"] != "null":
                         prop_types.append(item["type"])
 
-            if "number" in prop_types or "integer" in prop_types or any(k in key.lower() for k in ["amount", "total", "tax", "price", "rate", "cost", "quantity"]):
-                sample_dict[key] = 1500.00 if any(k in key.lower() for k in ["amount", "total", "tax", "price", "cost"]) else 1
+            if (
+                "number" in prop_types
+                or "integer" in prop_types
+                or any(k in key.lower() for k in ["amount", "total", "tax", "price", "rate", "cost", "quantity"])
+            ):
+                sample_dict[key] = (
+                    1500.00 if any(k in key.lower() for k in ["amount", "total", "tax", "price", "cost"]) else 1
+                )
             elif "array" in prop_types or "items" in prop:
                 sample_dict[key] = []
             elif "object" in prop_types:

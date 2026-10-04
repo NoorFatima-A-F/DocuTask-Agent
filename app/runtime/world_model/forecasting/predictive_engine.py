@@ -31,9 +31,7 @@ class WorldPrediction:
     prediction_error: Optional[float] = None
     brier_score: Optional[float] = None
     created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-    expires_at: str = field(
-        default_factory=lambda: (datetime.now(timezone.utc) + timedelta(hours=24)).isoformat()
-    )
+    expires_at: str = field(default_factory=lambda: (datetime.now(timezone.utc) + timedelta(hours=24)).isoformat())
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -43,7 +41,9 @@ class WorldPrediction:
             "predicted_value": round(self.predicted_value, 3),
             "confidence_interval_lower": round(self.confidence_interval_lower, 3),
             "confidence_interval_upper": round(self.confidence_interval_upper, 3),
-            "confidence": self.confidence.value if isinstance(self.confidence, ForecastConfidence) else str(self.confidence),
+            "confidence": self.confidence.value
+            if isinstance(self.confidence, ForecastConfidence)
+            else str(self.confidence),
             "state": self.state.value if isinstance(self.state, PredictionState) else str(self.state),
             "ground_truth_actual": round(self.ground_truth_actual, 3) if self.ground_truth_actual is not None else None,
             "prediction_error": round(self.prediction_error, 4) if self.prediction_error is not None else None,
@@ -131,7 +131,11 @@ class PredictiveEngine:
     def list_predictions(self, state: Optional[str] = None) -> List[WorldPrediction]:
         items = list(self._predictions.values())
         if state:
-            items = [p for p in items if (p.state.value if isinstance(p.state, PredictionState) else str(p.state)).lower() == state.lower()]
+            items = [
+                p
+                for p in items
+                if (p.state.value if isinstance(p.state, PredictionState) else str(p.state)).lower() == state.lower()
+            ]
         return items
 
     def get_prediction(self, prediction_id: str) -> Optional[WorldPrediction]:

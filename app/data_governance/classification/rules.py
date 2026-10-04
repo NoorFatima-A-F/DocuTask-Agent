@@ -9,6 +9,7 @@ from app.data_governance.registry.models import ClassificationLevel, Sensitivity
 
 class ClassificationRule(BaseModel):
     """Rule mapping sensitivity categories and patterns to a classification tier."""
+
     classification_level: ClassificationLevel
     required_sensitivity: Set[SensitivityCategory] = Field(default_factory=set)
     keywords: List[str] = Field(default_factory=list)
@@ -25,7 +26,16 @@ DEFAULT_CLASSIFICATION_RULES: List[ClassificationRule] = [
     ClassificationRule(
         classification_level=ClassificationLevel.RESTRICTED,
         required_sensitivity={SensitivityCategory.FINANCIAL, SensitivityCategory.LEGAL},
-        keywords=["nda", "confidential settlement", "salary", "compensation", "audit report", "bank account", "wire transfer", "restricted"],
+        keywords=[
+            "nda",
+            "confidential settlement",
+            "salary",
+            "compensation",
+            "audit report",
+            "bank account",
+            "wire transfer",
+            "restricted",
+        ],
         description="Confidential Legal, Payroll, or Sensitive Financial Data",
     ),
     ClassificationRule(

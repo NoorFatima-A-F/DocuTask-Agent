@@ -240,7 +240,19 @@ class TestFastAPIRouter:
         assert res.json()["overall_score"] >= 95.0
 
         # 4. Get individual reports
-        for r_type in ["profile", "policy", "cpu", "memory", "worker", "queue", "database", "ai", "model", "scaling", "alert"]:
+        for r_type in [
+            "profile",
+            "policy",
+            "cpu",
+            "memory",
+            "worker",
+            "queue",
+            "database",
+            "ai",
+            "model",
+            "scaling",
+            "alert",
+        ]:
             res = client.get(f"{prefix}/reports/{r_type}")
             assert res.status_code == 200
             assert "status" in res.json()

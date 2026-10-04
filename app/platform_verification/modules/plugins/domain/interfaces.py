@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Plugins.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.plugins.domain.models import PluginsEntity
+
 
 class PluginsRepositoryInterface(ABC):
     @abstractmethod

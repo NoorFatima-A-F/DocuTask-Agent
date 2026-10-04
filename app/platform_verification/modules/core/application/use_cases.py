@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Core.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.core.domain.models import CoreEntity
 from app.platform_verification.modules.core.domain.interfaces import CoreRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageCoreUseCase:
     def __init__(self, repository: CoreRepositoryInterface):

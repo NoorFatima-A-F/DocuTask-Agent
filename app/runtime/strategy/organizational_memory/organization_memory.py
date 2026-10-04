@@ -17,7 +17,9 @@ from app.runtime.strategy.events.strategy_events import (
 @dataclass
 class OrganizationKnowledge:
     entry_id: str = field(default_factory=lambda: f"know-{uuid.uuid4().hex[:8]}")
-    category: str = "PLAYBOOK"  # "PLAYBOOK" | "LESSON_LEARNED" | "ANTI_PATTERN" | "FAILURE_POSTMORTEM" | "SUCCESS_STRATEGY"
+    category: str = (
+        "PLAYBOOK"  # "PLAYBOOK" | "LESSON_LEARNED" | "ANTI_PATTERN" | "FAILURE_POSTMORTEM" | "SUCCESS_STRATEGY"
+    )
     title: str = "High-Concurrency Balance Sheet Extraction Playbook"
     description: str = "Deploy triadic agent strike teams with pre-warmed speculative tensor caches."
     context_tags: List[str] = field(default_factory=list)

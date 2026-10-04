@@ -15,6 +15,7 @@ from research_validation.hypothesis.hypothesis_model import ScientificHypothesis
 @dataclass(frozen=True)
 class PrioritizedHypothesis:
     """Hypothesis decorated with multi-objective composite priority rank."""
+
     hypothesis: ScientificHypothesis
     composite_priority_score: float
     rank: int
@@ -56,12 +57,14 @@ class HypothesisPrioritizer:
             else:
                 verdict = "DEFER"
 
-            scored.append(PrioritizedHypothesis(
-                hypothesis=h,
-                composite_priority_score=score,
-                rank=0,
-                recommendation_verdict=verdict,
-            ))
+            scored.append(
+                PrioritizedHypothesis(
+                    hypothesis=h,
+                    composite_priority_score=score,
+                    rank=0,
+                    recommendation_verdict=verdict,
+                )
+            )
 
         scored.sort(key=lambda p: p.composite_priority_score, reverse=True)
         ranked = [

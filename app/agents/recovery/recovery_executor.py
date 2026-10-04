@@ -14,7 +14,7 @@ class RecoveryExecutor:
     def __init__(
         self,
         execution_adapter: RecoveryExecutionAdapter | None = None,
-        planner_adapter: RecoveryPlannerAdapter | None = None
+        planner_adapter: RecoveryPlannerAdapter | None = None,
     ):
         self.execution_adapter = execution_adapter or RecoveryExecutionAdapter()
         self.planner_adapter = planner_adapter or RecoveryPlannerAdapter()

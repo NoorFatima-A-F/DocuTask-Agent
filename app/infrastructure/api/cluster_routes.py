@@ -73,18 +73,14 @@ def list_clusters(
     status: Optional[ClusterStatus] = None,
     environment: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
-    clusters = cluster_sdk.list_clusters(
-        region_id=region_id, status=status, environment=environment
-    )
+    clusters = cluster_sdk.list_clusters(region_id=region_id, status=status, environment=environment)
     return [c.model_dump(mode="json") for c in clusters]
 
 
 @router.post("/{cluster_id}/state", response_model=Dict[str, Any])
 def transition_cluster_state(cluster_id: str, req: StateTransitionRequest) -> Dict[str, Any]:
     try:
-        cluster = cluster_sdk.transition_cluster_state(
-            cluster_id, req.target_state, reason=req.reason
-        )
+        cluster = cluster_sdk.transition_cluster_state(cluster_id, req.target_state, reason=req.reason)
         if not cluster:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,

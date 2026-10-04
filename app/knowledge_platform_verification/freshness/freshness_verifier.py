@@ -78,7 +78,7 @@ class FreshnessVerifier:
         stale_age_days = 400
 
         active_score = 1.0 / (1.0 + (lambda_val * active_age_days))  # ~0.95
-        stale_score = 1.0 / (1.0 + (lambda_val * stale_age_days))   # ~0.33
+        stale_score = 1.0 / (1.0 + (lambda_val * stale_age_days))  # ~0.33
 
         passed = active_score > 0.90 and stale_score < 0.50
         t_elapsed = (time.perf_counter() - t0) * 1000.0

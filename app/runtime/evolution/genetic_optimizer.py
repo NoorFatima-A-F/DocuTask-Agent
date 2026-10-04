@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 
 class PlannerChromosome(BaseModel):
     """Genetic chromosome representing planner hyperparameters."""
+
     chromosome_id: str = Field(default_factory=lambda: f"chrom_{uuid.uuid4().hex[:8]}")
     generation: int = 1
     weight_accuracy: float = 0.45
@@ -91,7 +92,9 @@ class GeneticPlannerOptimizer:
     def _crossover_and_mutate(self, p1: PlannerChromosome, p2: PlannerChromosome, gen: int) -> PlannerChromosome:
         child = PlannerChromosome(
             generation=gen,
-            weight_accuracy=round((p1.weight_accuracy + p2.weight_accuracy) / 2.0 + self.random.uniform(-0.02, 0.02), 3),
+            weight_accuracy=round(
+                (p1.weight_accuracy + p2.weight_accuracy) / 2.0 + self.random.uniform(-0.02, 0.02), 3
+            ),
             weight_cost=round((p1.weight_cost + p2.weight_cost) / 2.0 + self.random.uniform(-0.02, 0.02), 3),
             weight_latency=round((p1.weight_latency + p2.weight_latency) / 2.0 + self.random.uniform(-0.02, 0.02), 3),
             search_beam_width=self.random.choice([p1.search_beam_width, p2.search_beam_width]),

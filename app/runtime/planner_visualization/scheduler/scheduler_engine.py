@@ -21,12 +21,54 @@ class SchedulerEngine:
         self.mission_id = mission_id
         self.decisions_count = 14
         self.active_workers = [
-            {"worker_id": "worker-ocr-01", "role": "OCR_EXTRACTION", "status": "BUSY", "cpu_pct": 28.5, "mem_mb": 256, "active_task": "node_ocr_chunk_1"},
-            {"worker_id": "worker-ocr-02", "role": "OCR_EXTRACTION", "status": "BUSY", "cpu_pct": 34.0, "mem_mb": 256, "active_task": "node_ocr_chunk_2"},
-            {"worker_id": "worker-extract-01", "role": "SCHEMA_EXTRACTION", "status": "RUNNING", "cpu_pct": 18.0, "mem_mb": 512, "active_task": "node_merge_ocr"},
-            {"worker_id": "worker-validate-01", "role": "SCIENTIFIC_VALIDATION", "status": "IDLE", "cpu_pct": 5.0, "mem_mb": 128, "active_task": None},
-            {"worker_id": "worker-gov-01", "role": "GOVERNANCE_AUDIT", "status": "IDLE", "cpu_pct": 3.0, "mem_mb": 128, "active_task": None},
-            {"worker_id": "worker-trust-01", "role": "TRUTH_LEDGER_COMMIT", "status": "IDLE", "cpu_pct": 4.0, "mem_mb": 256, "active_task": None},
+            {
+                "worker_id": "worker-ocr-01",
+                "role": "OCR_EXTRACTION",
+                "status": "BUSY",
+                "cpu_pct": 28.5,
+                "mem_mb": 256,
+                "active_task": "node_ocr_chunk_1",
+            },
+            {
+                "worker_id": "worker-ocr-02",
+                "role": "OCR_EXTRACTION",
+                "status": "BUSY",
+                "cpu_pct": 34.0,
+                "mem_mb": 256,
+                "active_task": "node_ocr_chunk_2",
+            },
+            {
+                "worker_id": "worker-extract-01",
+                "role": "SCHEMA_EXTRACTION",
+                "status": "RUNNING",
+                "cpu_pct": 18.0,
+                "mem_mb": 512,
+                "active_task": "node_merge_ocr",
+            },
+            {
+                "worker_id": "worker-validate-01",
+                "role": "SCIENTIFIC_VALIDATION",
+                "status": "IDLE",
+                "cpu_pct": 5.0,
+                "mem_mb": 128,
+                "active_task": None,
+            },
+            {
+                "worker_id": "worker-gov-01",
+                "role": "GOVERNANCE_AUDIT",
+                "status": "IDLE",
+                "cpu_pct": 3.0,
+                "mem_mb": 128,
+                "active_task": None,
+            },
+            {
+                "worker_id": "worker-trust-01",
+                "role": "TRUTH_LEDGER_COMMIT",
+                "status": "IDLE",
+                "cpu_pct": 4.0,
+                "mem_mb": 256,
+                "active_task": None,
+            },
         ]
 
     def get_scheduler_status(self) -> Dict[str, Any]:

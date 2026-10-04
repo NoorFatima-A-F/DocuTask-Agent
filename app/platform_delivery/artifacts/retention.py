@@ -1,4 +1,5 @@
 """Artifact Retention and Immutability Policy Engine."""
+
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Optional
@@ -8,6 +9,7 @@ from .models import ArtifactIdentity, ArtifactQuarantineStatus
 @dataclass
 class RetentionPolicy:
     """Retention rule configuration."""
+
     min_retention_days: int = 90
     keep_production_forever: bool = True
     allow_delete_active: bool = False

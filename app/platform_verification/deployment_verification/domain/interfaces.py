@@ -1,6 +1,7 @@
 """
 Abstract interfaces for Part 3D: Enterprise Deployment & Environment Verification Framework.
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional, Tuple
 from app.platform_verification.deployment_verification.domain.models import (
@@ -20,7 +21,9 @@ from app.platform_verification.deployment_verification.domain.models import (
 
 class IBuildPipelineValidator(ABC):
     @abstractmethod
-    def validate_build_pipeline(self, build_meta: Dict[str, Any]) -> Tuple[BuildReproducibilityReport, DependencyLockReport]:
+    def validate_build_pipeline(
+        self, build_meta: Dict[str, Any]
+    ) -> Tuple[BuildReproducibilityReport, DependencyLockReport]:
         """Verifies build determinism and lock file dependency pinning."""
         pass
 
@@ -48,11 +51,13 @@ class IDeploymentAutomationValidator(ABC):
 
 class IRolloutRollbackTester(ABC):
     __test__ = False
+
     @abstractmethod
-    def test_rollout_and_rollback(self, rollout_config: Dict[str, Any]) -> Tuple[ReleaseStrategyReport, RollbackVerificationReport, ZeroDowntimeReport]:
+    def test_rollout_and_rollback(
+        self, rollout_config: Dict[str, Any]
+    ) -> Tuple[ReleaseStrategyReport, RollbackVerificationReport, ZeroDowntimeReport]:
         """Tests rolling/canary rollouts, automated rollback triggers, and zero downtime availability."""
         pass
-
 
 
 class ISecretConfigurationAuditor(ABC):

@@ -61,7 +61,9 @@ class AgentDirectory:
             return None
 
         # Find agent with highest capability overlap
-        other_agents = [a for a in self.registry.list_agents() if a.agent_id != failed_agent_id and a.state == AgentState.AVAILABLE]
+        other_agents = [
+            a for a in self.registry.list_agents() if a.agent_id != failed_agent_id and a.state == AgentState.AVAILABLE
+        ]
         if not other_agents:
             other_agents = [a for a in self.registry.list_agents() if a.agent_id != failed_agent_id]
 

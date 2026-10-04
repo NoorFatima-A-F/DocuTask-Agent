@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10: Enterprise Observability Security Test Suite
 """
+
 import os
 import json
 from app.platform_verification.observability_security_verification.verifiers import (
@@ -33,8 +34,14 @@ class TestObservabilitySecurityVerification:
         assert report.classification_policy_passed is True
         assert report.total_fields_audited >= 8
         assert report.restricted_fields >= 3
-        assert any(i.field_name == "database_password" and i.classification == DataClassification.RESTRICTED for i in report.items)
-        assert any(i.field_name == "llm_prompt_raw_text" and i.classification == DataClassification.RESTRICTED for i in report.items)
+        assert any(
+            i.field_name == "database_password" and i.classification == DataClassification.RESTRICTED
+            for i in report.items
+        )
+        assert any(
+            i.field_name == "llm_prompt_raw_text" and i.classification == DataClassification.RESTRICTED
+            for i in report.items
+        )
 
     def test_log_security_scanning(self):
         """3H.4.10.2: Scan application logs for credentials, PII, and document text."""

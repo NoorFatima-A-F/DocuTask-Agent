@@ -1,4 +1,5 @@
 """Authoritative Enterprise Artifact Registry (Req 13, 14, 15, 24)."""
+
 from typing import Dict, List, Optional
 import uuid
 

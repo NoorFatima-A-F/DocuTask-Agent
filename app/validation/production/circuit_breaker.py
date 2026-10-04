@@ -9,6 +9,7 @@ from app.core.logging import logger
 
 class CircuitBreakerStatus(BaseModel):
     """Status metrics of Circuit Breaker testing."""
+
     state: str = "CLOSED"  # CLOSED, OPEN, HALF-OPEN
     failure_threshold: int = 5
     consecutive_failures: int = 0
@@ -47,5 +48,5 @@ class CircuitBreakerValidator:
             consecutive_failures=0,
             circuit_opened_count=circuit_opened,
             half_open_recovery_count=half_open_recovery,
-            state_transitions_verified=True
+            state_transitions_verified=True,
         )

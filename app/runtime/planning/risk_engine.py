@@ -29,6 +29,7 @@ class RiskVectorType(str, Enum):
 
 class RiskAssessment(BaseModel):
     """Evaluation of a specific risk vector."""
+
     risk_id: str = Field(default_factory=lambda: f"risk_{uuid.uuid4().hex[:8]}")
     vector_type: RiskVectorType
     name: str
@@ -42,6 +43,7 @@ class RiskAssessment(BaseModel):
 
 class StrategyRiskProfile(BaseModel):
     """Comprehensive risk intelligence report for a candidate strategy."""
+
     strategy_id: str
     overall_risk_score: float = Field(ge=0.0, le=1.0)
     high_risk_vectors: List[RiskAssessment] = Field(default_factory=list)
@@ -201,9 +203,7 @@ class RiskIntelligenceEngine:
         composite_risk = min(1.0, total_severity * 1.5)
 
         high_risk = [a for a in assessments if a.severity_score >= 0.05]
-        guardrails = [
-            f"Activate {a.mitigation_strategy}" for a in high_risk
-        ]
+        guardrails = [f"Activate {a.mitigation_strategy}" for a in high_risk]
         if not guardrails:
             guardrails.append("Standard telemetry assertions and heartbeat supervision active.")
 

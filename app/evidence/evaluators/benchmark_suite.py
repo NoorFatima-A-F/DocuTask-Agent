@@ -50,37 +50,49 @@ class SubsystemBenchmarkSuite:
 
         # 1. Planner Benchmark
         b_planner = await self.benchmark_planner(iterations=iterations_per_benchmark)
-        evi_planner = BenchmarkEvidenceCollector.create_evidence_item(b_planner, "app.agents.planning.autonomous_planner")
+        evi_planner = BenchmarkEvidenceCollector.create_evidence_item(
+            b_planner, "app.agents.planning.autonomous_planner"
+        )
         self.registry.register(evi_planner)
         evidence_items.append(evi_planner)
 
         # 2. Reasoner Benchmark
         b_reasoner = await self.benchmark_reasoner(iterations=iterations_per_benchmark)
-        evi_reasoner = BenchmarkEvidenceCollector.create_evidence_item(b_reasoner, "app.agents.intelligence.reasoning.semantic_reasoner")
+        evi_reasoner = BenchmarkEvidenceCollector.create_evidence_item(
+            b_reasoner, "app.agents.intelligence.reasoning.semantic_reasoner"
+        )
         self.registry.register(evi_reasoner)
         evidence_items.append(evi_reasoner)
 
         # 3. Reflection Consensus Benchmark
         b_reflection = await self.benchmark_reflection(iterations=iterations_per_benchmark)
-        evi_reflection = BenchmarkEvidenceCollector.create_evidence_item(b_reflection, "app.agents.reflection.critics.consensus_evaluator")
+        evi_reflection = BenchmarkEvidenceCollector.create_evidence_item(
+            b_reflection, "app.agents.reflection.critics.consensus_evaluator"
+        )
         self.registry.register(evi_reflection)
         evidence_items.append(evi_reflection)
 
         # 4. Memory Retrieval Benchmark
         b_memory = await self.benchmark_memory(iterations=iterations_per_benchmark)
-        evi_memory = BenchmarkEvidenceCollector.create_evidence_item(b_memory, "app.agents.memory.intelligence.semantic_memory")
+        evi_memory = BenchmarkEvidenceCollector.create_evidence_item(
+            b_memory, "app.agents.memory.intelligence.semantic_memory"
+        )
         self.registry.register(evi_memory)
         evidence_items.append(evi_memory)
 
         # 5. Checkpoint Serialization & Hash Benchmark
         b_checkpoint = await self.benchmark_checkpoint(iterations=iterations_per_benchmark)
-        evi_checkpoint = BenchmarkEvidenceCollector.create_evidence_item(b_checkpoint, "app.agents.workflow.persistence.workflow_checkpoint")
+        evi_checkpoint = BenchmarkEvidenceCollector.create_evidence_item(
+            b_checkpoint, "app.agents.workflow.persistence.workflow_checkpoint"
+        )
         self.registry.register(evi_checkpoint)
         evidence_items.append(evi_checkpoint)
 
         # 6. Adaptive Replanning Benchmark
         b_replanning = await self.benchmark_replanning(iterations=iterations_per_benchmark)
-        evi_replanning = BenchmarkEvidenceCollector.create_evidence_item(b_replanning, "app.agents.planning.adaptive.replanning_engine")
+        evi_replanning = BenchmarkEvidenceCollector.create_evidence_item(
+            b_replanning, "app.agents.planning.adaptive.replanning_engine"
+        )
         self.registry.register(evi_replanning)
         evidence_items.append(evi_replanning)
 
@@ -92,7 +104,9 @@ class SubsystemBenchmarkSuite:
 
         # 8. Distributed Lock Manager Benchmark
         b_lock = await self.benchmark_lock_manager(iterations=iterations_per_benchmark)
-        evi_lock = BenchmarkEvidenceCollector.create_evidence_item(b_lock, "app.agents.runtime.distributed.distributed_lock")
+        evi_lock = BenchmarkEvidenceCollector.create_evidence_item(
+            b_lock, "app.agents.runtime.distributed.distributed_lock"
+        )
         self.registry.register(evi_lock)
         evidence_items.append(evi_lock)
 
@@ -210,7 +224,9 @@ class SubsystemBenchmarkSuite:
             latencies.append((time.perf_counter() - s) * 1000.0)
 
         total_time = time.perf_counter() - t0
-        stats = BenchmarkEvidenceCollector.compute_stats("Workflow Checkpoint Serialization", latencies, total_time, failures)
+        stats = BenchmarkEvidenceCollector.compute_stats(
+            "Workflow Checkpoint Serialization", latencies, total_time, failures
+        )
         self.results["checkpoint"] = stats
         return stats
 
@@ -238,7 +254,9 @@ class SubsystemBenchmarkSuite:
             latencies.append((time.perf_counter() - s) * 1000.0)
 
         total_time = time.perf_counter() - t0
-        stats = BenchmarkEvidenceCollector.compute_stats("Adaptive Replanning DAG Mutation", latencies, total_time, failures)
+        stats = BenchmarkEvidenceCollector.compute_stats(
+            "Adaptive Replanning DAG Mutation", latencies, total_time, failures
+        )
         self.results["replanning"] = stats
         return stats
 
@@ -266,7 +284,9 @@ class SubsystemBenchmarkSuite:
             latencies.append((time.perf_counter() - s) * 1000.0)
 
         total_time = time.perf_counter() - t0
-        stats = BenchmarkEvidenceCollector.compute_stats("Enterprise Event Bus Dispatch", latencies, total_time, failures)
+        stats = BenchmarkEvidenceCollector.compute_stats(
+            "Enterprise Event Bus Dispatch", latencies, total_time, failures
+        )
         self.results["event_bus"] = stats
         return stats
 

@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11: Operational Readiness Verification API
 """
+
 from fastapi import APIRouter, HTTPException, Query
 from ..runtime.operational_readiness_runtime import OperationalReadinessRuntime
 

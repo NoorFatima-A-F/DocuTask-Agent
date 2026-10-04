@@ -58,7 +58,9 @@ class MissionProjection:
         elif event.event_type == DomainEventType.MISSION_COMPLETED:
             m_data["status"] = "COMPLETED"
             m_data["completed_at_utc"] = event.timestamp_utc
-            m_data["duration_seconds"] = event.payload.get("duration_seconds", round(event.timestamp_utc - m_data["created_at_utc"], 2))
+            m_data["duration_seconds"] = event.payload.get(
+                "duration_seconds", round(event.timestamp_utc - m_data["created_at_utc"], 2)
+            )
             m_data["total_cost_usd"] = event.payload.get("total_cost_usd", 0.0)
             self.total_missions_completed += 1
 

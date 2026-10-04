@@ -67,7 +67,9 @@ def test_specialized_collectors():
         safety_violation=False,
         hallucination_score=0.05,
     )
-    prompt_series = registry.get_series("ai_prompt_tokens_total", labels={"model_id": "gemini-1.5-pro", "provider": "google"})
+    prompt_series = registry.get_series(
+        "ai_prompt_tokens_total", labels={"model_id": "gemini-1.5-pro", "provider": "google"}
+    )
     assert prompt_series.points[-1].value == 500.0
 
 

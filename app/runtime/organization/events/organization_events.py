@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 # Enums
 # ---------------------------------------------------------------------------
 
+
 class OrganizationState(str, Enum):
     CREATED = "CREATED"
     PLANNING = "PLANNING"
@@ -89,6 +90,7 @@ class SimulationType(str, Enum):
 # Base Domain Event
 # ---------------------------------------------------------------------------
 
+
 class OrganizationDomainEvent(BaseModel):
     event_id: str = Field(default_factory=lambda: f"org_evt_{uuid.uuid4().hex[:10]}")
     event_type: str
@@ -104,116 +106,154 @@ class OrganizationDomainEvent(BaseModel):
 # 40+ Specific Domain Events
 # ---------------------------------------------------------------------------
 
+
 class MissionCreated(OrganizationDomainEvent):
     event_type: str = "MissionCreated"
+
 
 class MissionValidated(OrganizationDomainEvent):
     event_type: str = "MissionValidated"
 
+
 class StrategyGenerated(OrganizationDomainEvent):
     event_type: str = "StrategyGenerated"
+
 
 class OrganizationDesigned(OrganizationDomainEvent):
     event_type: str = "OrganizationDesigned"
 
+
 class DepartmentCreated(OrganizationDomainEvent):
     event_type: str = "DepartmentCreated"
+
 
 class AgentAssigned(OrganizationDomainEvent):
     event_type: str = "AgentAssigned"
 
+
 class AgentCapabilityExpanded(OrganizationDomainEvent):
     event_type: str = "AgentCapabilityExpanded"
+
 
 class ProjectCreated(OrganizationDomainEvent):
     event_type: str = "ProjectCreated"
 
+
 class ProjectCompleted(OrganizationDomainEvent):
     event_type: str = "ProjectCompleted"
+
 
 class ResourceAllocated(OrganizationDomainEvent):
     event_type: str = "ResourceAllocated"
 
+
 class BudgetOptimized(OrganizationDomainEvent):
     event_type: str = "BudgetOptimized"
+
 
 class DecisionGenerated(OrganizationDomainEvent):
     event_type: str = "DecisionGenerated"
 
+
 class DecisionApproved(OrganizationDomainEvent):
     event_type: str = "DecisionApproved"
+
 
 class DecisionRejected(OrganizationDomainEvent):
     event_type: str = "DecisionRejected"
 
+
 class ConflictDetected(OrganizationDomainEvent):
     event_type: str = "ConflictDetected"
+
 
 class ConflictResolved(OrganizationDomainEvent):
     event_type: str = "ConflictResolved"
 
+
 class PerformanceMeasured(OrganizationDomainEvent):
     event_type: str = "PerformanceMeasured"
+
 
 class PerformanceRegressionDetected(OrganizationDomainEvent):
     event_type: str = "PerformanceRegressionDetected"
 
+
 class ObjectiveCompleted(OrganizationDomainEvent):
     event_type: str = "ObjectiveCompleted"
+
 
 class ObjectiveFailed(OrganizationDomainEvent):
     event_type: str = "ObjectiveFailed"
 
+
 class OrganizationOptimized(OrganizationDomainEvent):
     event_type: str = "OrganizationOptimized"
+
 
 class AgentRetired(OrganizationDomainEvent):
     event_type: str = "AgentRetired"
 
+
 class AgentPromoted(OrganizationDomainEvent):
     event_type: str = "AgentPromoted"
+
 
 class TeamMerged(OrganizationDomainEvent):
     event_type: str = "TeamMerged"
 
+
 class TeamSplit(OrganizationDomainEvent):
     event_type: str = "TeamSplit"
+
 
 class KnowledgeTransferred(OrganizationDomainEvent):
     event_type: str = "KnowledgeTransferred"
 
+
 class StrategyUpdated(OrganizationDomainEvent):
     event_type: str = "StrategyUpdated"
+
 
 class ROIImproved(OrganizationDomainEvent):
     event_type: str = "ROIImproved"
 
+
 class CostReduced(OrganizationDomainEvent):
     event_type: str = "CostReduced"
+
 
 class RiskDetected(OrganizationDomainEvent):
     event_type: str = "RiskDetected"
 
+
 class SimulationStarted(OrganizationDomainEvent):
     event_type: str = "SimulationStarted"
+
 
 class SimulationCompleted(OrganizationDomainEvent):
     event_type: str = "SimulationCompleted"
 
+
 class GovernanceApproved(OrganizationDomainEvent):
     event_type: str = "GovernanceApproved"
+
 
 class GovernanceRejected(OrganizationDomainEvent):
     event_type: str = "GovernanceRejected"
 
+
 class OrganizationPaused(OrganizationDomainEvent):
     event_type: str = "OrganizationPaused"
+
 
 class OrganizationResumed(OrganizationDomainEvent):
     event_type: str = "OrganizationResumed"
 
+
 class LearningCycleCompleted(OrganizationDomainEvent):
     event_type: str = "LearningCycleCompleted"
+
 
 class OrganizationEvolutionTriggered(OrganizationDomainEvent):
     event_type: str = "OrganizationEvolutionTriggered"
@@ -222,6 +262,7 @@ class OrganizationEvolutionTriggered(OrganizationDomainEvent):
 # ---------------------------------------------------------------------------
 # Organization Event Bus
 # ---------------------------------------------------------------------------
+
 
 class OrganizationEventBus:
     """In-memory typed event bus for organizational runtime events."""

@@ -2,6 +2,7 @@
 Comprehensive Unit and Integration Test Suite for Enterprise Disaster Recovery Simulation Framework.
 Part 3G.3 — Disaster Recovery Simulation & Operational Resilience Verification for DocuTask Agent.
 """
+
 import pytest
 import os
 import tempfile
@@ -78,7 +79,7 @@ def test_scenario_database_loss():
     assert res.scenario_type == DisasterScenarioType.DATABASE_LOSS
     assert res.simulation_passed is True
     assert res.measured_rto_seconds <= 2700.0  # <= 45 minutes
-    assert res.measured_rpo_seconds <= 300.0   # <= 5 minutes
+    assert res.measured_rpo_seconds <= 300.0  # <= 5 minutes
     assert res.data_consistency_passed is True
     assert res.schema_intact is True
     assert res.relations_preserved is True
@@ -268,11 +269,13 @@ def test_runbook_catalog():
 
 def test_dr_simulation_runtime_e2e():
     """Verify master DR simulation runtime execution and dual-directory artifact export."""
-    with tempfile.TemporaryDirectory() as tmpdir_cert, tempfile.TemporaryDirectory() as tmpdir_ev, tempfile.TemporaryDirectory() as tmpdir_rb:
+    with (
+        tempfile.TemporaryDirectory() as tmpdir_cert,
+        tempfile.TemporaryDirectory() as tmpdir_ev,
+        tempfile.TemporaryDirectory() as tmpdir_rb,
+    ):
         runtime = DisasterRecoverySimulationRuntime()
-        results = runtime.execute_full_dr_program(
-            cert_dir=tmpdir_cert, evidence_dir=tmpdir_ev, runbooks_dir=tmpdir_rb
-        )
+        results = runtime.execute_full_dr_program(cert_dir=tmpdir_cert, evidence_dir=tmpdir_ev, runbooks_dir=tmpdir_rb)
 
         assert results["passed"] is True
         assert results["ci_cd_deployment_approved"] is True

@@ -1,6 +1,7 @@
 """
 Unit and Integration Tests for Phase 3H.5.10: Health Security, Privacy & Information Exposure Verification
 """
+
 import os
 import json
 import pytest
@@ -56,11 +57,17 @@ class TestHealthSecurityVerification:
         assert report.anonymous_admin_blocked is True
 
         # Check anonymous /diagnostics access is 401
-        anon_diag = next(t for t in report.auth_test_matrix if t.endpoint_path == "/diagnostics" and t.presented_credentials is None)
+        anon_diag = next(
+            t for t in report.auth_test_matrix if t.endpoint_path == "/diagnostics" and t.presented_credentials is None
+        )
         assert anon_diag.actual_status == 401
 
         # Check viewer role to /diagnostics is 403
-        viewer_diag = next(t for t in report.auth_test_matrix if t.endpoint_path == "/diagnostics" and t.presented_credentials == "Bearer viewer-user-jwt")
+        viewer_diag = next(
+            t
+            for t in report.auth_test_matrix
+            if t.endpoint_path == "/diagnostics" and t.presented_credentials == "Bearer viewer-user-jwt"
+        )
         assert viewer_diag.actual_status == 403
 
     def test_03_metrics_privacy_verifier(self):
@@ -218,4 +225,3 @@ class TestHealthSecurityVerification:
         assert verify_res["overall_health_security_score"] >= 95.0
         assert verify_res["passed"] is True
         assert verify_res["certification_tier"] == "Secure Observability Ready"
-

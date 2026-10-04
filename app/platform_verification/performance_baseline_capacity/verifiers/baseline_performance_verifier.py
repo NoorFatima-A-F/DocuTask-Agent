@@ -64,12 +64,42 @@ class BaselinePerformanceVerifier(IBaselinePerformanceVerifier):
         ]
 
         workflow_metrics = [
-            WorkflowLifecycleMetric(stage_name="1. Document Upload & Ingress", avg_processing_time_ms=35.0, completion_rate_pct=100.0, retry_count=0),
-            WorkflowLifecycleMetric(stage_name="2. Task Scheduling & Queue Dispatch", avg_processing_time_ms=20.0, completion_rate_pct=100.0, retry_count=0),
-            WorkflowLifecycleMetric(stage_name="3. OCR Text & Layout Rasterization", avg_processing_time_ms=280.0, completion_rate_pct=100.0, retry_count=0),
-            WorkflowLifecycleMetric(stage_name="4. Gemini LLM Entity Extraction", avg_processing_time_ms=720.0, completion_rate_pct=100.0, retry_count=0),
-            WorkflowLifecycleMetric(stage_name="5. Schema & Confidence Validation", avg_processing_time_ms=55.0, completion_rate_pct=100.0, retry_count=0),
-            WorkflowLifecycleMetric(stage_name="6. Persistence & Evidence Storage", avg_processing_time_ms=25.0, completion_rate_pct=100.0, retry_count=0),
+            WorkflowLifecycleMetric(
+                stage_name="1. Document Upload & Ingress",
+                avg_processing_time_ms=35.0,
+                completion_rate_pct=100.0,
+                retry_count=0,
+            ),
+            WorkflowLifecycleMetric(
+                stage_name="2. Task Scheduling & Queue Dispatch",
+                avg_processing_time_ms=20.0,
+                completion_rate_pct=100.0,
+                retry_count=0,
+            ),
+            WorkflowLifecycleMetric(
+                stage_name="3. OCR Text & Layout Rasterization",
+                avg_processing_time_ms=280.0,
+                completion_rate_pct=100.0,
+                retry_count=0,
+            ),
+            WorkflowLifecycleMetric(
+                stage_name="4. Gemini LLM Entity Extraction",
+                avg_processing_time_ms=720.0,
+                completion_rate_pct=100.0,
+                retry_count=0,
+            ),
+            WorkflowLifecycleMetric(
+                stage_name="5. Schema & Confidence Validation",
+                avg_processing_time_ms=55.0,
+                completion_rate_pct=100.0,
+                retry_count=0,
+            ),
+            WorkflowLifecycleMetric(
+                stage_name="6. Persistence & Evidence Storage",
+                avg_processing_time_ms=25.0,
+                completion_rate_pct=100.0,
+                retry_count=0,
+            ),
         ]
 
         total_lifecycle_ms = sum(m.avg_processing_time_ms for m in workflow_metrics)

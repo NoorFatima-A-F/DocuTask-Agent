@@ -25,7 +25,8 @@ from .models import (
 class IDisasterRecoveryVerifier(ABC):
     @property
     @abstractmethod
-    def verifier_id(self) -> str: pass
+    def verifier_id(self) -> str:
+        pass
 
     @property
     def phase_id(self) -> str:
@@ -37,72 +38,87 @@ class IDisasterRecoveryVerifier(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str: pass
+    def name(self) -> str:
+        pass
 
     @abstractmethod
-    def verify(self) -> Any: pass
+    def verify(self) -> Any:
+        pass
 
 
 class IDisasterRecoveryArchitectureVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> DisasterRecoveryArchitectureReport: pass
+    def verify(self) -> DisasterRecoveryArchitectureReport:
+        pass
 
 
 class IBusinessImpactAnalysisVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> BusinessImpactAnalysisReport: pass
+    def verify(self) -> BusinessImpactAnalysisReport:
+        pass
 
 
 class IRecoveryObjectivesVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> RecoveryObjectivesReport: pass
+    def verify(self) -> RecoveryObjectivesReport:
+        pass
 
 
 class IDatabaseRecoveryVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> DatabaseRecoveryReport: pass
+    def verify(self) -> DatabaseRecoveryReport:
+        pass
 
 
 class IStorageRecoveryVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> StorageRecoveryReport: pass
+    def verify(self) -> StorageRecoveryReport:
+        pass
 
 
 class IConfigurationRecoveryVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> ConfigurationRecoveryReport: pass
+    def verify(self) -> ConfigurationRecoveryReport:
+        pass
 
 
 class ISecretRecoveryVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> SecretRecoveryReport: pass
+    def verify(self) -> SecretRecoveryReport:
+        pass
 
 
 class ICompleteSystemRestoreVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> CompleteSystemRestoreReport: pass
+    def verify(self) -> CompleteSystemRestoreReport:
+        pass
 
 
 class IPITRRecoveryVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> PITRReport: pass
+    def verify(self) -> PITRReport:
+        pass
 
 
 class IBackupSecurityVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> BackupSecurityReport: pass
+    def verify(self) -> BackupSecurityReport:
+        pass
 
 
 class IDRAutomationPipelineVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> DRAutomationReport: pass
+    def verify(self) -> DRAutomationReport:
+        pass
 
 
 class IDRFailureSimulationVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> DRFailureSimulationReport: pass
+    def verify(self) -> DRFailureSimulationReport:
+        pass
 
 
 class IRecoveryObservabilityVerifier(IDisasterRecoveryVerifier):
     @abstractmethod
-    def verify(self) -> RecoveryObservabilityReport: pass
+    def verify(self) -> RecoveryObservabilityReport:
+        pass

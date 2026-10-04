@@ -5,7 +5,9 @@ from enterprise_audit_engine.certification.security_auditor import EngineSecurit
 
 def test_engine_security_validator_clean(tmp_path):
     # Create safe engine files
-    (tmp_path / "safe.py").write_text("import json\nimport os\n\ndef run():\n    return json.loads('{}')\n", encoding="utf-8")
+    (tmp_path / "safe.py").write_text(
+        "import json\nimport os\n\ndef run():\n    return json.loads('{}')\n", encoding="utf-8"
+    )
 
     result = EngineSecurityValidator.audit_engine_security(tmp_path)
     assert result["is_secure"] is True

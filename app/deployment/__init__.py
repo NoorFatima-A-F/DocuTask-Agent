@@ -2,6 +2,7 @@
 
 Phase 9J Enterprise Platform for DocuTask Agent.
 """
+
 from .artifacts.metadata import ArtifactMetadata
 from .artifacts.registry import ArtifactRegistry
 from .artifacts.versions import ArtifactVersion

@@ -2,11 +2,14 @@
 AI and OCR Benchmarking CLI.
 Measures precision, recall, latency, and memory footprints for model evaluations.
 """
+
 import time
 from typing import Dict, Any
 
+
 class BenchmarkRunner:
     """Executes standard benchmark evaluation suites."""
+
     @staticmethod
     def benchmark_ai_inference(iterations: int = 20) -> Dict[str, Any]:
         latencies = []
@@ -22,8 +25,9 @@ class BenchmarkRunner:
             "iterations": iterations,
             "p99_latency_ms": p99,
             "average_latency_ms": sum(latencies) / len(latencies),
-            "status": "PASS" if p99 < 50.0 else "FAIL"
+            "status": "PASS" if p99 < 50.0 else "FAIL",
         }
+
 
 if __name__ == "__main__":
     res = BenchmarkRunner.benchmark_ai_inference()

@@ -110,7 +110,9 @@ class SimulationVerifier:
         predicted_latencies = [12.2, 14.1, 12.0, 13.0, 14.8]
 
         # Mean Absolute Percentage Error (MAPE)
-        mape = sum(abs(a - p) / a for a, p in zip(actual_latencies, predicted_latencies)) / len(actual_latencies) * 100.0
+        mape = (
+            sum(abs(a - p) / a for a, p in zip(actual_latencies, predicted_latencies)) / len(actual_latencies) * 100.0
+        )
         passed = mape < 5.0
         t_ms = (time.perf_counter() - t0) * 1000.0
         return AssertionResult(

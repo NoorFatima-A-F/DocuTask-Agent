@@ -16,10 +16,14 @@ class WorkflowStateMachine:
             WorkflowLifecycleState.REGISTERED,
             WorkflowLifecycleState.READY,
             WorkflowLifecycleState.SCHEDULED,
-            WorkflowLifecycleState.RUNNING
+            WorkflowLifecycleState.RUNNING,
         },
         WorkflowLifecycleState.REGISTERED: {WorkflowLifecycleState.READY, WorkflowLifecycleState.ARCHIVED},
-        WorkflowLifecycleState.READY: {WorkflowLifecycleState.SCHEDULED, WorkflowLifecycleState.RUNNING, WorkflowLifecycleState.CANCELLED},
+        WorkflowLifecycleState.READY: {
+            WorkflowLifecycleState.SCHEDULED,
+            WorkflowLifecycleState.RUNNING,
+            WorkflowLifecycleState.CANCELLED,
+        },
         WorkflowLifecycleState.SCHEDULED: {WorkflowLifecycleState.RUNNING, WorkflowLifecycleState.CANCELLED},
         WorkflowLifecycleState.RUNNING: {
             WorkflowLifecycleState.WAITING,
@@ -30,10 +34,18 @@ class WorkflowStateMachine:
             WorkflowLifecycleState.RECOVERING,
             WorkflowLifecycleState.COMPLETED,
             WorkflowLifecycleState.FAILED,
-            WorkflowLifecycleState.CANCELLED
+            WorkflowLifecycleState.CANCELLED,
         },
-        WorkflowLifecycleState.WAITING: {WorkflowLifecycleState.RUNNING, WorkflowLifecycleState.CANCELLED, WorkflowLifecycleState.FAILED},
-        WorkflowLifecycleState.BLOCKED: {WorkflowLifecycleState.RUNNING, WorkflowLifecycleState.FAILED, WorkflowLifecycleState.CANCELLED},
+        WorkflowLifecycleState.WAITING: {
+            WorkflowLifecycleState.RUNNING,
+            WorkflowLifecycleState.CANCELLED,
+            WorkflowLifecycleState.FAILED,
+        },
+        WorkflowLifecycleState.BLOCKED: {
+            WorkflowLifecycleState.RUNNING,
+            WorkflowLifecycleState.FAILED,
+            WorkflowLifecycleState.CANCELLED,
+        },
         WorkflowLifecycleState.PAUSED: {WorkflowLifecycleState.RUNNING, WorkflowLifecycleState.CANCELLED},
         WorkflowLifecycleState.MIGRATING: {WorkflowLifecycleState.RUNNING, WorkflowLifecycleState.FAILED},
         WorkflowLifecycleState.COMPENSATING: {WorkflowLifecycleState.FAILED, WorkflowLifecycleState.COMPLETED},
@@ -45,11 +57,7 @@ class WorkflowStateMachine:
     }
 
     @classmethod
-    def validate_transition(
-        cls,
-        current_state: WorkflowLifecycleState,
-        target_state: WorkflowLifecycleState
-    ) -> None:
+    def validate_transition(cls, current_state: WorkflowLifecycleState, target_state: WorkflowLifecycleState) -> None:
         """Validates that current_state -> target_state transition is permitted."""
         allowed = cls.ALLOWED_TRANSITIONS.get(current_state, set())
         if target_state not in allowed:

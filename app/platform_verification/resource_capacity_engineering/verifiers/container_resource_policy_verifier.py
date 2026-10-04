@@ -32,11 +32,41 @@ class ContainerResourcePolicyVerifier(IContainerResourcePolicyVerifier):
 
     def verify(self) -> ContainerResourcePolicyReport:
         containers = [
-            ContainerLimitSpec(container_name="docutask-api-gateway", cpu_limit="2.0", mem_limit="2G", resource_reservation="1G", compliant=True),
-            ContainerLimitSpec(container_name="docutask-worker-pool", cpu_limit="4.0", mem_limit="4G", resource_reservation="2G", compliant=True),
-            ContainerLimitSpec(container_name="docutask-ocr-engine", cpu_limit="4.0", mem_limit="4G", resource_reservation="2G", compliant=True),
-            ContainerLimitSpec(container_name="docutask-postgres", cpu_limit="4.0", mem_limit="8G", resource_reservation="4G", compliant=True),
-            ContainerLimitSpec(container_name="docutask-redis", cpu_limit="1.0", mem_limit="2G", resource_reservation="512M", compliant=True),
+            ContainerLimitSpec(
+                container_name="docutask-api-gateway",
+                cpu_limit="2.0",
+                mem_limit="2G",
+                resource_reservation="1G",
+                compliant=True,
+            ),
+            ContainerLimitSpec(
+                container_name="docutask-worker-pool",
+                cpu_limit="4.0",
+                mem_limit="4G",
+                resource_reservation="2G",
+                compliant=True,
+            ),
+            ContainerLimitSpec(
+                container_name="docutask-ocr-engine",
+                cpu_limit="4.0",
+                mem_limit="4G",
+                resource_reservation="2G",
+                compliant=True,
+            ),
+            ContainerLimitSpec(
+                container_name="docutask-postgres",
+                cpu_limit="4.0",
+                mem_limit="8G",
+                resource_reservation="4G",
+                compliant=True,
+            ),
+            ContainerLimitSpec(
+                container_name="docutask-redis",
+                cpu_limit="1.0",
+                mem_limit="2G",
+                resource_reservation="512M",
+                compliant=True,
+            ),
         ]
 
         unlimited_containers = [c for c in containers if c.unlimited_memory_detected or not c.mem_limit]

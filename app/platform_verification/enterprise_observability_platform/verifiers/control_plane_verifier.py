@@ -2,6 +2,7 @@
 3I.11.1: Enterprise Observability Control Plane Architecture Verifier
 Verifies centralized architecture, environment separation, telemetry federation, RBAC, and scalability.
 """
+
 from typing import List
 from app.platform_verification.enterprise_observability_platform.domain.models import (
     ControlPlaneArchitectureReport,

@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 
 class MemoryTier(str, Enum):
     """The 8 hierarchical tiers of enterprise agent memory."""
+
     WORKING = "WORKING"
     SHORT_TERM = "SHORT_TERM"
     LONG_TERM = "LONG_TERM"
@@ -40,6 +41,7 @@ class MemoryTier(str, Enum):
 @dataclass
 class EnterpriseMemoryRecord:
     """A governed memory record within the enterprise memory platform."""
+
     id: str = field(default_factory=lambda: f"mem-{uuid.uuid4().hex[:12]}")
     tier: MemoryTier = MemoryTier.WORKING
     namespace: str = "default"
@@ -78,9 +80,7 @@ class EnterpriseMemoryPlatform:
 
     def __init__(self):
         # Tiered storage: tier -> key -> EnterpriseMemoryRecord
-        self._stores: Dict[MemoryTier, Dict[str, EnterpriseMemoryRecord]] = {
-            t: {} for t in MemoryTier
-        }
+        self._stores: Dict[MemoryTier, Dict[str, EnterpriseMemoryRecord]] = {t: {} for t in MemoryTier}
 
     def store(
         self,
@@ -110,10 +110,7 @@ class EnterpriseMemoryPlatform:
         return record
 
     def retrieve(
-        self,
-        key: str,
-        tier: Optional[MemoryTier | str] = None,
-        namespace: Optional[str] = None
+        self, key: str, tier: Optional[MemoryTier | str] = None, namespace: Optional[str] = None
     ) -> Optional[EnterpriseMemoryRecord]:
         """
         Retrieves a record by key, searching across the specified tier or
@@ -151,11 +148,7 @@ class EnterpriseMemoryPlatform:
         return None
 
     def search(
-        self,
-        query: str,
-        tier: Optional[MemoryTier | str] = None,
-        namespace: Optional[str] = None,
-        limit: int = 10
+        self, query: str, tier: Optional[MemoryTier | str] = None, namespace: Optional[str] = None, limit: int = 10
     ) -> List[EnterpriseMemoryRecord]:
         """Performs search across memory tiers."""
         results: List[EnterpriseMemoryRecord] = []
@@ -178,7 +171,9 @@ class EnterpriseMemoryPlatform:
         results.sort(key=lambda r: (r.importance, r.access_count), reverse=True)
         return results[:limit]
 
-    def promote(self, key: str, from_tier: MemoryTier | str, to_tier: MemoryTier | str) -> Optional[EnterpriseMemoryRecord]:
+    def promote(
+        self, key: str, from_tier: MemoryTier | str, to_tier: MemoryTier | str
+    ) -> Optional[EnterpriseMemoryRecord]:
         """Promotes a memory record from a lower tier (e.g. WORKING) to a higher tier (e.g. LONG_TERM)."""
         f_tier = from_tier if isinstance(from_tier, MemoryTier) else MemoryTier(from_tier)
         t_tier = to_tier if isinstance(to_tier, MemoryTier) else MemoryTier(to_tier)
@@ -196,7 +191,9 @@ class EnterpriseMemoryPlatform:
         logger.info(f"Promoted memory '{key}': {f_tier.value} -> {t_tier.value}")
         return record
 
-    def demote(self, key: str, from_tier: MemoryTier | str, to_tier: MemoryTier | str) -> Optional[EnterpriseMemoryRecord]:
+    def demote(
+        self, key: str, from_tier: MemoryTier | str, to_tier: MemoryTier | str
+    ) -> Optional[EnterpriseMemoryRecord]:
         """Demotes a memory record to a lower tier or marks it summarized."""
         f_tier = from_tier if isinstance(from_tier, MemoryTier) else MemoryTier(from_tier)
         t_tier = to_tier if isinstance(to_tier, MemoryTier) else MemoryTier(to_tier)
@@ -232,7 +229,9 @@ class EnterpriseMemoryPlatform:
         logger.info(f"Compressed {to_compress_count} records in tier {m_tier.value}")
         return to_compress_count
 
-    def merge(self, target_key: str, source_keys: List[str], tier: MemoryTier | str) -> Optional[EnterpriseMemoryRecord]:
+    def merge(
+        self, target_key: str, source_keys: List[str], tier: MemoryTier | str
+    ) -> Optional[EnterpriseMemoryRecord]:
         """Merges multiple related memory records into a consolidated target record."""
         m_tier = tier if isinstance(tier, MemoryTier) else MemoryTier(tier)
         store = self._stores[m_tier]

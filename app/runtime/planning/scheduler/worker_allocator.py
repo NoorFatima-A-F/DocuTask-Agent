@@ -16,7 +16,7 @@ class WorkerDescriptor(BaseModel):
     worker_id: str
     name: str
     capabilities: List[str]  # e.g., ["OCR", "VISION", "NLP", "SMT", "REFLECTION"]
-    status: str = "IDLE"     # IDLE, BUSY, OFFLINE
+    status: str = "IDLE"  # IDLE, BUSY, OFFLINE
     active_tasks: int = 0
     max_concurrency: int = 4
     historical_success_rate: float = 0.98
@@ -36,12 +36,28 @@ class WorkerAllocator:
 
     def _init_default_worker_pool(self) -> None:
         defaults = [
-            WorkerDescriptor(worker_id="worker_ocr_01", name="OCR GPU Worker 1", capabilities=["OCR", "VISION", "GENERAL"]),
-            WorkerDescriptor(worker_id="worker_ocr_02", name="OCR GPU Worker 2", capabilities=["OCR", "VISION", "GENERAL"]),
-            WorkerDescriptor(worker_id="worker_nlp_01", name="NLP Extraction Worker 1", capabilities=["EXTRACTION", "NLP", "GENERAL"]),
-            WorkerDescriptor(worker_id="worker_nlp_02", name="NLP Extraction Worker 2", capabilities=["EXTRACTION", "NLP", "GENERAL"]),
-            WorkerDescriptor(worker_id="worker_smt_01", name="Formal SMT Governance Worker", capabilities=["VALIDATION", "GOVERNANCE", "SMT", "GENERAL"]),
-            WorkerDescriptor(worker_id="worker_meta_01", name="Meta-Cognitive Reflection Worker", capabilities=["REFLECTION", "MEMORY", "GENERAL"]),
+            WorkerDescriptor(
+                worker_id="worker_ocr_01", name="OCR GPU Worker 1", capabilities=["OCR", "VISION", "GENERAL"]
+            ),
+            WorkerDescriptor(
+                worker_id="worker_ocr_02", name="OCR GPU Worker 2", capabilities=["OCR", "VISION", "GENERAL"]
+            ),
+            WorkerDescriptor(
+                worker_id="worker_nlp_01", name="NLP Extraction Worker 1", capabilities=["EXTRACTION", "NLP", "GENERAL"]
+            ),
+            WorkerDescriptor(
+                worker_id="worker_nlp_02", name="NLP Extraction Worker 2", capabilities=["EXTRACTION", "NLP", "GENERAL"]
+            ),
+            WorkerDescriptor(
+                worker_id="worker_smt_01",
+                name="Formal SMT Governance Worker",
+                capabilities=["VALIDATION", "GOVERNANCE", "SMT", "GENERAL"],
+            ),
+            WorkerDescriptor(
+                worker_id="worker_meta_01",
+                name="Meta-Cognitive Reflection Worker",
+                capabilities=["REFLECTION", "MEMORY", "GENERAL"],
+            ),
         ]
         for w in defaults:
             self.workers[w.worker_id] = w
@@ -68,11 +84,7 @@ class WorkerAllocator:
             # Match score
             cap_match = len(required_caps.intersection(worker_caps)) / max(1, len(required_caps))
             load_factor = w.active_tasks / max(1, w.max_concurrency)
-            score = (
-                0.40 * cap_match
-                + 0.30 * w.historical_success_rate
-                + 0.30 * (1.0 - load_factor)
-            )
+            score = 0.40 * cap_match + 0.30 * w.historical_success_rate + 0.30 * (1.0 - load_factor)
             candidates.append((score, w))
 
         if not candidates:

@@ -114,13 +114,11 @@ def sample_successful_trace() -> ExecutionTraceEnvelope:
                 rationale="Table contains Balance Sheet headers.",
                 evidence=["Assets", "Liabilities"],
                 conclusion="Recognized as Balance Sheet",
-                confidence_score=0.95
+                confidence_score=0.95,
             )
         ],
-        decisions=[
-            DecisionTrace(decision_id="dec_1", policy_name="PII_Filter", outcome="ALLOWED", risk_score=0.05)
-        ],
-        final_outputs={"extracted_revenue": 1000000.0, "currency": "USD"}
+        decisions=[DecisionTrace(decision_id="dec_1", policy_name="PII_Filter", outcome="ALLOWED", risk_score=0.05)],
+        final_outputs={"extracted_revenue": 1000000.0, "currency": "USD"},
     )
 
 
@@ -142,13 +140,14 @@ def sample_failed_trace() -> ExecutionTraceEnvelope:
             ToolCallTrace(tool_name="translator_tool", success=False, error_details="Timeout 10000ms exceeded")
         ],
         errors=["Task TranslateChunk1 failed: ToolTimeoutException"],
-        recovery_actions=[{"action": "RETRY", "status": "FAILED"}]
+        recovery_actions=[{"action": "RETRY", "status": "FAILED"}],
     )
 
 
 # ---------------------------------------------------------------------------
 # Part 1 & Runtime Tests
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_reflection_engine_success_pipeline(sample_successful_trace):
@@ -202,6 +201,7 @@ async def test_reflection_runtime_start_stop(sample_successful_trace):
 # Part 2: Analyzers Tests
 # ---------------------------------------------------------------------------
 
+
 def test_analyzers_diagnostics(sample_successful_trace, sample_failed_trace):
     """Tests execution, plan, reasoning, decision, tool, and resource analyzers."""
     # Execution Analyzer
@@ -218,9 +218,7 @@ def test_analyzers_diagnostics(sample_successful_trace, sample_failed_trace):
 
     # Reasoning Analyzer
     reasoning_analyzer = ReasoningAnalyzer()
-    res_reas = reasoning_analyzer.analyze_reasoning([
-        {"confidence_score": 0.9, "evidence": ["E1"], "assumptions": []}
-    ])
+    res_reas = reasoning_analyzer.analyze_reasoning([{"confidence_score": 0.9, "evidence": ["E1"], "assumptions": []}])
     assert res_reas["total_reasoning_steps"] == 1
     assert res_reas["reasoning_rigor_score"] == 0.9
 
@@ -231,10 +229,12 @@ def test_analyzers_diagnostics(sample_successful_trace, sample_failed_trace):
 
     # Tool Usage Analyzer
     tool_analyzer = ToolUsageAnalyzer()
-    res_tool = tool_analyzer.analyze_tool_usage([
-        {"tool_name": "t1", "success": True, "duration_ms": 100.0},
-        {"tool_name": "t2", "success": False, "duration_ms": 500.0}
-    ])
+    res_tool = tool_analyzer.analyze_tool_usage(
+        [
+            {"tool_name": "t1", "success": True, "duration_ms": 100.0},
+            {"tool_name": "t2", "success": False, "duration_ms": 500.0},
+        ]
+    )
     assert res_tool["total_tool_calls"] == 2
     assert res_tool["reliability_rate"] == 0.5
     assert res_tool["slowest_tool"] == "t2"
@@ -267,6 +267,7 @@ def test_analyzers_diagnostics(sample_successful_trace, sample_failed_trace):
 # Part 3: Evaluators Tests
 # ---------------------------------------------------------------------------
 
+
 def test_all_dimensional_evaluators(sample_successful_trace):
     """Tests all 10 quantitative dimensional evaluators."""
     assert GoalEvaluator().evaluate(sample_successful_trace).score >= 0.8
@@ -285,6 +286,7 @@ def test_all_dimensional_evaluators(sample_successful_trace):
 # Part 4 & 5: Critique & Detectors Tests
 # ---------------------------------------------------------------------------
 
+
 def test_hallucination_and_inconsistency_detection():
     """Tests detection of hallucinations, circular logic, and contradictions."""
     hallucination_trace = ExecutionTraceEnvelope(
@@ -295,9 +297,9 @@ def test_hallucination_and_inconsistency_detection():
                 step_id="s1",
                 rationale="Derived from nothing",
                 evidence=["phantom_fact_99"],
-                conclusion="Phantom claim asserted"
+                conclusion="Phantom claim asserted",
             )
-        ]
+        ],
     )
 
     detector = HallucinationDetector()
@@ -312,7 +314,7 @@ def test_hallucination_and_inconsistency_detection():
         reasoning_steps=[
             ReasoningStepTrace(step_id="s1", rationale="r1", conclusion="tax rate is high"),
             ReasoningStepTrace(step_id="s2", rationale="r2", conclusion="not tax rate is high"),
-        ]
+        ],
     )
     inconsistency_detector = InconsistencyDetector()
     incon_findings = inconsistency_detector.detect_inconsistencies(contradiction_trace)
@@ -325,9 +327,7 @@ def test_bias_detector():
     skewed_trace = ExecutionTraceEnvelope(
         execution_id=uuid4(),
         final_state="COMPLETED",
-        tool_calls=[
-            ToolCallTrace(tool_name="heavy_tool") for _ in range(15)
-        ] + [ToolCallTrace(tool_name="light_tool")]
+        tool_calls=[ToolCallTrace(tool_name="heavy_tool") for _ in range(15)] + [ToolCallTrace(tool_name="light_tool")],
     )
     bias_detector = BiasDetector()
     findings = bias_detector.detect_bias(skewed_trace)
@@ -339,11 +339,11 @@ def test_bias_detector():
 # Part 6: Learning Artifacts & Immutability Tests
 # ---------------------------------------------------------------------------
 
+
 def test_learning_artifacts_immutability(sample_successful_trace):
     """Verifies learning artifact generation and frozen immutability."""
     critique = CritiqueEngine().generate_critique(
-        sample_successful_trace,
-        EvaluationPipeline().run_pipeline(sample_successful_trace)
+        sample_successful_trace, EvaluationPipeline().run_pipeline(sample_successful_trace)
     )
     extractor = KnowledgeExtractor()
     artifacts = extractor.extract_artifacts(sample_successful_trace, critique)
@@ -361,11 +361,11 @@ def test_learning_artifacts_immutability(sample_successful_trace):
 # Part 7: Recommendations, Adaptation Proposals & Approvals
 # ---------------------------------------------------------------------------
 
+
 def test_recommendation_and_adaptation_lifecycle(sample_successful_trace):
     """Tests recommendation generation and formal adaptation proposal approval gate."""
     critique = CritiqueEngine().generate_critique(
-        sample_successful_trace,
-        EvaluationPipeline().run_pipeline(sample_successful_trace)
+        sample_successful_trace, EvaluationPipeline().run_pipeline(sample_successful_trace)
     )
     artifacts = KnowledgeExtractor().extract_artifacts(sample_successful_trace, critique)
 
@@ -397,11 +397,11 @@ def test_recommendation_and_adaptation_lifecycle(sample_successful_trace):
 # Part 8: Subsystem Feedback Generation
 # ---------------------------------------------------------------------------
 
+
 def test_feedback_generation(sample_successful_trace):
     """Verifies typed feedback generation for Planner, Execution, Memory, and Tools."""
     critique = CritiqueEngine().generate_critique(
-        sample_successful_trace,
-        EvaluationPipeline().run_pipeline(sample_successful_trace)
+        sample_successful_trace, EvaluationPipeline().run_pipeline(sample_successful_trace)
     )
     recs = RecommendationEngine().generate_recommendations(critique, [])
 
@@ -418,6 +418,7 @@ def test_feedback_generation(sample_successful_trace):
 # ---------------------------------------------------------------------------
 # Part 9: Pattern Detection, Trends & Root Cause
 # ---------------------------------------------------------------------------
+
 
 def test_patterns_trends_and_root_cause(sample_successful_trace, sample_failed_trace):
     """Tests cross-run pattern detection, trend analysis, and root cause discovery."""
@@ -457,6 +458,7 @@ def test_comparative_benchmark_and_scoring(sample_successful_trace):
 # Part 10: Serialization & Versioning
 # ---------------------------------------------------------------------------
 
+
 def test_serialization_round_trip(sample_successful_trace):
     """Tests Pydantic v2 JSON serialization and Cloud Tasks/PubSub encoding."""
     req = ReflectionRequest(trace=sample_successful_trace)
@@ -464,9 +466,7 @@ def test_serialization_round_trip(sample_successful_trace):
     assert "schema_version" in json_str
     assert "20.0" in json_str
 
-    deserialized: ReflectionRequest = ReflectionSerializer.deserialize_from_json(
-        json_str, ReflectionRequest
-    )
+    deserialized: ReflectionRequest = ReflectionSerializer.deserialize_from_json(json_str, ReflectionRequest)
     assert deserialized.trace.execution_id == sample_successful_trace.execution_id
 
     pubsub_msg = ReflectionSerializer.to_pubsub_message(req)
@@ -477,6 +477,7 @@ def test_serialization_round_trip(sample_successful_trace):
 # ---------------------------------------------------------------------------
 # Part 11: Fail-Fast Validators Tests
 # ---------------------------------------------------------------------------
+
 
 def test_validators_fail_fast():
     """Tests validation errors on invalid inputs, malformed recommendations, and out-of-bound scores."""
@@ -489,10 +490,7 @@ def test_validators_fail_fast():
     with pytest.raises(MalformedRecommendationError):
         ReflectionValidator.validate_recommendation(
             Recommendation(
-                target_subsystem=SubsystemTarget.PLANNER,
-                title="",
-                rationale="valid",
-                expected_impact="gain"
+                target_subsystem=SubsystemTarget.PLANNER, title="", rationale="valid", expected_impact="gain"
             )
         )
 
@@ -507,6 +505,7 @@ def test_validators_fail_fast():
 # ---------------------------------------------------------------------------
 # Part 12: Fluent Builders Tests
 # ---------------------------------------------------------------------------
+
 
 def test_builders_suite():
     """Verifies fluent builders for request, artifact, recommendation, critique, evaluation, and feedback."""
@@ -563,13 +562,12 @@ def test_builders_suite():
 # Part 13: Repositories & Cache Tests
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_repositories_and_cache(sample_successful_trace):
     """Tests in-memory repositories and LRU/TTL cache operations."""
     repo = InMemoryReflectionRepository()
-    ref = Reflection(
-        identity=ReflectionIdentity(execution_id=sample_successful_trace.execution_id)
-    )
+    ref = Reflection(identity=ReflectionIdentity(execution_id=sample_successful_trace.execution_id))
     await repo.save(ref)
     retrieved = await repo.get_by_id(ref.identity.reflection_id)
     assert retrieved is not None
@@ -592,6 +590,7 @@ async def test_repositories_and_cache(sample_successful_trace):
 # ---------------------------------------------------------------------------
 # Part 14: Metrics Collector Tests
 # ---------------------------------------------------------------------------
+
 
 def test_metrics_collector():
     """Tests metric recording and Cloud Monitoring export format."""

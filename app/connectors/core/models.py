@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class ConnectorCategory(str, Enum):
     """Broad functional categories for technology-independent capability discovery."""
+
     COMMUNICATION = "communication"
     STORAGE = "storage"
     SEARCH = "search"
@@ -32,6 +33,7 @@ class ConnectorCategory(str, Enum):
 
 class ConnectorStatus(str, Enum):
     """10-state connector lifecycle specification."""
+
     DISCOVERED = "DISCOVERED"
     INSTALLED = "INSTALLED"
     CONFIGURED = "CONFIGURED"
@@ -46,6 +48,7 @@ class ConnectorStatus(str, Enum):
 
 class ConnectorHealth(str, Enum):
     """Health indicator of a connector and its external backend dependencies."""
+
     HEALTHY = "HEALTHY"
     DEGRADED = "DEGRADED"
     UNHEALTHY = "UNHEALTHY"
@@ -54,6 +57,7 @@ class ConnectorHealth(str, Enum):
 
 class AuthType(str, Enum):
     """Supported authentication mechanisms across the universal connector framework."""
+
     OAUTH2 = "OAUTH2"
     OAUTH2_PKCE = "OAUTH2_PKCE"
     API_KEY = "API_KEY"
@@ -69,6 +73,7 @@ class AuthType(str, Enum):
 
 class TriggerType(str, Enum):
     """Supported trigger types for external event ingestion."""
+
     WEBHOOK = "WEBHOOK"
     SCHEDULE = "SCHEDULE"
     POLLING = "POLLING"
@@ -80,6 +85,7 @@ class TriggerType(str, Enum):
 
 class CapabilityDescriptor(BaseModel):
     """Technology-independent capability descriptor (e.g., email.send, message.send)."""
+
     name: str  # e.g., "email.send"
     category: ConnectorCategory = ConnectorCategory.COMMUNICATION
     description: str = ""
@@ -90,6 +96,7 @@ class CapabilityDescriptor(BaseModel):
 
 class ActionDescriptor(BaseModel):
     """Contract and metadata for an executable connector action."""
+
     id: str = Field(default_factory=lambda: f"act-{uuid.uuid4().hex[:8]}")
     name: str  # e.g., "send_email"
     connector_id: str
@@ -106,6 +113,7 @@ class ActionDescriptor(BaseModel):
 
 class TriggerDescriptor(BaseModel):
     """Specification for an external event trigger."""
+
     id: str = Field(default_factory=lambda: f"trig-{uuid.uuid4().hex[:8]}")
     name: str  # e.g., "new_email_received"
     connector_id: str
@@ -118,6 +126,7 @@ class TriggerDescriptor(BaseModel):
 
 class NormalizedEvent(BaseModel):
     """Canonical cross-platform event structure for all ingested vendor triggers."""
+
     id: str = Field(default_factory=lambda: f"evt-{uuid.uuid4().hex[:12]}")
     type: str  # e.g., "email.received"
     source: str  # e.g., "connector.gmail"
@@ -131,6 +140,7 @@ class NormalizedEvent(BaseModel):
 
 class CredentialMetadata(BaseModel):
     """Tenant-isolated credential metadata (secrets stored in SecretProvider)."""
+
     id: str = Field(default_factory=lambda: f"cred-{uuid.uuid4().hex[:8]}")
     connector: str
     organization: str = "org-default"
@@ -148,6 +158,7 @@ class CredentialMetadata(BaseModel):
 
 class ExecutionResult(BaseModel):
     """Result of an action execution through the connector runtime."""
+
     execution_id: str = Field(default_factory=lambda: f"exec-{uuid.uuid4().hex[:10]}")
     connector_id: str
     action_name: str
@@ -162,6 +173,7 @@ class ExecutionResult(BaseModel):
 
 class ConnectorPolicyRule(BaseModel):
     """Governance and security policy governing connector invocation."""
+
     id: str = Field(default_factory=lambda: f"cpol-{uuid.uuid4().hex[:8]}")
     name: str = "default_policy"
     allowed_connectors: Optional[List[str]] = None  # None = all allowed
@@ -178,6 +190,7 @@ class Connector(BaseModel):
     """
     First-class platform resource representing an installable integration provider.
     """
+
     id: str
     name: str
     vendor: str

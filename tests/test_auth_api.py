@@ -12,7 +12,7 @@ async def test_health_check_endpoint(client: AsyncClient):
     """Verifies health check endpoint returns 200 and standard success envelope."""
     response = await client.get("/api/v1/health")
     assert response.status_code == 200
-    
+
     data = response.json()
     assert data["success"] is True
     assert data["message"] == "System operating normally"
@@ -25,14 +25,10 @@ async def test_auth_api_full_workflow(client: AsyncClient):
     """Verifies complete authentication HTTP API workflow."""
 
     # 1. Register User
-    reg_payload = {
-        "email": "api_user@example.com",
-        "username": "apiuser",
-        "password": "SecurePassword123!"
-    }
+    reg_payload = {"email": "api_user@example.com", "username": "apiuser", "password": "SecurePassword123!"}
     response = await client.post("/api/v1/auth/register", json=reg_payload)
     assert response.status_code == 201
-    
+
     body = response.json()
     assert body["success"] is True
     assert body["data"]["email"] == "api_user@example.com"
@@ -46,22 +42,18 @@ async def test_auth_api_full_workflow(client: AsyncClient):
     assert "already exists" in body_dup["message"]
 
     # 2. Login
-    login_payload = {
-        "username_or_email": "apiuser",
-        "password": "SecurePassword123!"
-    }
+    login_payload = {"username_or_email": "apiuser", "password": "SecurePassword123!"}
     login_res = await client.post("/api/v1/auth/login", json=login_payload)
     assert login_res.status_code == 200
-    
+
     tokens = login_res.json()["data"]
     access_token = tokens["access_token"]
     refresh_token = tokens["refresh_token"]
 
     # Bad Login Attempt -> 401
-    bad_login_res = await client.post("/api/v1/auth/login", json={
-        "username_or_email": "apiuser",
-        "password": "WrongPassword"
-    })
+    bad_login_res = await client.post(
+        "/api/v1/auth/login", json={"username_or_email": "apiuser", "password": "WrongPassword"}
+    )
     assert bad_login_res.status_code == 401
     assert bad_login_res.json()["success"] is False
 
@@ -84,19 +76,15 @@ async def test_auth_api_full_workflow(client: AsyncClient):
 
     # 5. Change Password
     new_headers = {"Authorization": f"Bearer {new_access_token}"}
-    change_pwd_payload = {
-        "old_password": "SecurePassword123!",
-        "new_password": "NewSecurePassword456!"
-    }
+    change_pwd_payload = {"old_password": "SecurePassword123!", "new_password": "NewSecurePassword456!"}
     pwd_res = await client.post("/api/v1/auth/change-password", json=change_pwd_payload, headers=new_headers)
     assert pwd_res.status_code == 200
     assert pwd_res.json()["success"] is True
 
     # Login with new password
-    login_new_pwd = await client.post("/api/v1/auth/login", json={
-        "username_or_email": "api_user@example.com",
-        "password": "NewSecurePassword456!"
-    })
+    login_new_pwd = await client.post(
+        "/api/v1/auth/login", json={"username_or_email": "api_user@example.com", "password": "NewSecurePassword456!"}
+    )
     assert login_new_pwd.status_code == 200
     latest_tokens = login_new_pwd.json()["data"]
 

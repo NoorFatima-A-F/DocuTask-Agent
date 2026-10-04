@@ -7,6 +7,7 @@ from typing import Callable, Dict, List, Optional
 @dataclass
 class CanaryStep:
     """A progressive traffic milestone."""
+
     percentage: float  # 1.0, 5.0, 25.0, 50.0, 100.0
     evaluation_duration_seconds: float = 1.0
 

@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class WorkflowVersion(BaseModel):
     """Semantic version (major.minor.patch) representation for workflow definitions."""
+
     major: int = Field(default=1, ge=0)
     minor: int = Field(default=0, ge=0)
     patch: int = Field(default=0, ge=0)

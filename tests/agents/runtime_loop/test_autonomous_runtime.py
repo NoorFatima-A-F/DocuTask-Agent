@@ -283,9 +283,9 @@ class TestCloudObservability:
             (AutonomousState.EXECUTING, AutonomousState.REFLECTING, True),
             (AutonomousState.REFLECTING, AutonomousState.LEARNING, True),
             (AutonomousState.LEARNING, AutonomousState.COMPLETED, True),
-            (AutonomousState.REFLECTING, AutonomousState.PLANNING, True),      # Self-correction loop
-            (AutonomousState.EXECUTING, AutonomousState.PAUSED_FOR_HUMAN, True), # HITL pause
-            (AutonomousState.PAUSED_FOR_HUMAN, AutonomousState.EXECUTING, True), # HITL resume
+            (AutonomousState.REFLECTING, AutonomousState.PLANNING, True),  # Self-correction loop
+            (AutonomousState.EXECUTING, AutonomousState.PAUSED_FOR_HUMAN, True),  # HITL pause
+            (AutonomousState.PAUSED_FOR_HUMAN, AutonomousState.EXECUTING, True),  # HITL resume
             (AutonomousState.EXECUTING, AutonomousState.FAILED, True),
             (AutonomousState.CREATED, AutonomousState.COMPLETED, False),
             (AutonomousState.OPTIMIZING, AutonomousState.CREATED, False),
@@ -304,6 +304,7 @@ class TestCloudObservability:
 
     def test_file_task_graph_repository(self, tmp_path):
         from app.agents.workflow.persistence.task_graph_repository import FileTaskGraphRepository
+
         repo = FileTaskGraphRepository(base_directory=tmp_path)
         recovery = RecoveryManager(repository=repo)
 
@@ -327,6 +328,7 @@ class TestCloudObservability:
 
     def test_historical_critic_cross_examination(self):
         from app.agents.memory.intelligence.semantic_memory import SemanticFact, SemanticMemory
+
         sem_mem = SemanticMemory()
         sem_mem.store_fact(
             SemanticFact(
@@ -431,4 +433,3 @@ class TestCloudObservability:
         bus.subscribe("agent.state.*", capture_state)
         # Verify controller does not fail on broadcast
         assert ctrl.event_bus is not None
-

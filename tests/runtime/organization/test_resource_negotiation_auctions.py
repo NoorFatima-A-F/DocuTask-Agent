@@ -2,6 +2,7 @@
 Test Suite: Autonomous Negotiation & Game-Theoretic Framework
 Validates Vickrey second-price auctions, bilateral resource trades, Nash Bargaining, and signed SLA contracts.
 """
+
 from app.runtime.negotiation.auction_manager import VickreyAuctionManager, AuctionBid
 from app.runtime.negotiation.resource_negotiation import ResourceNegotiator
 from app.runtime.negotiation.utility_negotiator import UtilityNegotiator
@@ -10,7 +11,7 @@ from app.runtime.negotiation.contract_manager import ContractManager
 
 def test_vickrey_second_price_auction():
     mgr = VickreyAuctionManager()
-    
+
     bids = [
         AuctionBid("dept_a", 100.0, 2, 0.9),
         AuctionBid("dept_b", 75.0, 2, 0.8),
@@ -18,7 +19,7 @@ def test_vickrey_second_price_auction():
     ]
 
     result = mgr.run_auction("GPU_SLOT", units_available=2, bids=bids)
-    
+
     # Highest bidder wins (dept_a at 100.0)
     assert result.winning_department_id == "dept_a"
     assert result.winning_bid_amount == 100.0
@@ -28,7 +29,7 @@ def test_vickrey_second_price_auction():
 
 def test_bilateral_resource_trade():
     negotiator = ResourceNegotiator()
-    
+
     prop = negotiator.propose_trade(
         initiator_dept_id="dept_ocr",
         target_dept_id="dept_extraction",
@@ -64,7 +65,7 @@ def test_nash_bargaining_utility_solution():
 
 def test_contract_manager_creation_and_signature():
     mgr = ContractManager()
-    
+
     contract = mgr.create_contract(
         provider_dept_id="dept_ocr",
         consumer_dept_id="dept_extraction",

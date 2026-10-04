@@ -2,6 +2,7 @@
 
 Enterprise Deployment Control Plane, Release Engineering, Software Supply Chain & Infrastructure Developer Platform.
 """
+
 from .artifacts.digests import DigestCalculator
 from .artifacts.metadata import OCIManifest, OCIReferrerDescriptor
 from .artifacts.models import ArtifactIdentity, ArtifactQuarantineStatus, ArtifactType

@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class ReplicationMode(str, enum.Enum):
     """Replication synchronization semantics."""
+
     SYNCHRONOUS = "SYNCHRONOUS"
     ASYNCHRONOUS = "ASYNCHRONOUS"
     SEMI_SYNCHRONOUS = "SEMI_SYNCHRONOUS"
@@ -22,6 +23,7 @@ class ReplicationMode(str, enum.Enum):
 
 class ReplicationLagMetric(BaseModel):
     """Telemetry tracking lag between primary and replica."""
+
     stream_id: str
     source_region: str
     target_region: str
@@ -33,6 +35,7 @@ class ReplicationLagMetric(BaseModel):
 
 class ReplicationStream(BaseModel):
     """Replication stream connecting data stores across regions."""
+
     stream_id: str
     source_region: str
     target_region: str

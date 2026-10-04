@@ -1,6 +1,7 @@
 """
 Phase 3I.8: Observability Automation, Self-Healing Operations & Autonomous Reliability — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -8,10 +9,10 @@ from datetime import datetime, timezone
 
 
 class AutonomousCertificationTier(str, Enum):
-    AUTONOMOUS_OPERATIONS_READY = "Autonomous Operations Ready"          # 95 - 100%
-    ADVANCED_PRODUCTION_OPERATIONS = "Advanced Production Operations"    # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                        # 80 - 89.99%
-    FAILED = "Failed"                                                    # < 80%
+    AUTONOMOUS_OPERATIONS_READY = "Autonomous Operations Ready"  # 95 - 100%
+    ADVANCED_PRODUCTION_OPERATIONS = "Advanced Production Operations"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 class RiskLevel(str, Enum):
@@ -32,6 +33,7 @@ class AutomationActionType(str, Enum):
 
 # ─── 3I.8.1: Autonomous Architecture Models ───────────────────────────────────
 
+
 class AutonomousComponentSpec(BaseModel):
     component_name: str
     role: str
@@ -50,6 +52,7 @@ class AutonomousArchitectureReport(BaseModel):
 
 
 # ─── 3I.8.2: Intelligent Anomaly Detection Models ─────────────────────────────
+
 
 class AnomalyDetectionSpec(BaseModel):
     anomaly_id: str
@@ -72,6 +75,7 @@ class AnomalyDetectionReport(BaseModel):
 
 # ─── 3I.8.3: Event Correlation Models ─────────────────────────────────────────
 
+
 class CorrelatedIncidentSpec(BaseModel):
     incident_id: str
     incident_title: str
@@ -90,6 +94,7 @@ class EventCorrelationReport(BaseModel):
 
 
 # ─── 3I.8.4: Root Cause Analysis Models ───────────────────────────────────────
+
 
 class RootCauseHypothesisSpec(BaseModel):
     hypothesis_id: str
@@ -110,6 +115,7 @@ class RootCauseAnalysisReport(BaseModel):
 
 # ─── 3I.8.5: Automated Remediation Models ─────────────────────────────────────
 
+
 class RemediationActionSpec(BaseModel):
     action_id: str
     action_type: AutomationActionType
@@ -129,6 +135,7 @@ class RemediationExecutionReport(BaseModel):
 
 # ─── 3I.8.6: Safety Control Models ────────────────────────────────────────────
 
+
 class SafetyRuleSpec(BaseModel):
     action_name: str
     category: str  # ALLOWLIST, RESTRICTED, APPROVAL_REQUIRED
@@ -146,6 +153,7 @@ class AutomationSafetyReport(BaseModel):
 
 
 # ─── 3I.8.7: Self-Healing Workflow Models ─────────────────────────────────────
+
 
 class SelfHealingLoopSpec(BaseModel):
     scenario_name: str
@@ -167,6 +175,7 @@ class SelfHealingValidationReport(BaseModel):
 
 # ─── 3I.8.8: Autonomous Incident Management Models ────────────────────────────
 
+
 class IncidentLifecycleSpec(BaseModel):
     incident_id: str
     severity: str  # SEV-1, SEV-2, SEV-3
@@ -186,6 +195,7 @@ class IncidentAutomationReport(BaseModel):
 
 # ─── 3I.8.9: Reliability Learning Models ──────────────────────────────────────
 
+
 class ReliabilityLessonSpec(BaseModel):
     lesson_id: str
     incident_trigger: str
@@ -204,6 +214,7 @@ class ReliabilityLearningReport(BaseModel):
 
 # ─── 3I.8.10: Autonomous Testing Models ───────────────────────────────────────
 
+
 class AutonomousTestingSimulationSpec(BaseModel):
     test_id: str
     simulation_scenario: str
@@ -221,6 +232,7 @@ class AutonomousTestingReport(BaseModel):
 
 # ─── 3I.8.11: Human-in-the-Loop Models ────────────────────────────────────────
 
+
 class HumanControlPolicySpec(BaseModel):
     tier_name: str  # Fully Automatic, Approval Required, Human Controlled
     risk_level: RiskLevel
@@ -237,6 +249,7 @@ class HumanControlPolicyReport(BaseModel):
 
 # ─── 3I.8.12: Autonomous Dashboard Models ─────────────────────────────────────
 
+
 class AIOpsDashboardMetricSpec(BaseModel):
     metric_category: str  # System Intelligence, Recovery Metrics, AI Operations
     key_indicators: List[str]
@@ -251,6 +264,7 @@ class AutonomousDashboardReport(BaseModel):
 
 
 # ─── 3I.8.13 & 3I.8.14: Scoring & Certification Models ────────────────────────
+
 
 class AutonomousPillarScore(BaseModel):
     pillar_name: str

@@ -44,6 +44,7 @@ from app.observability.sdk import ObservabilitySDK, trace, metric_counter, profi
 
 sdk = ObservabilitySDK(service_name="document-pipeline")
 
+
 @trace(operation="agent.reasoning")
 @profile(block_name="ai.inference")
 @metric_counter(name="agent_executions_total")

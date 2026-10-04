@@ -42,7 +42,7 @@ class ReflectionEngine(IReflectionEngine):
             execution_id=request.trace.execution_id,
             plan_id=request.trace.plan_id,
             tenant_id=request.context.tenant_id,
-            correlation_id=request.context.correlation_id
+            correlation_id=request.context.correlation_id,
         )
 
         self.metrics.record_reflection_started()
@@ -52,9 +52,7 @@ class ReflectionEngine(IReflectionEngine):
         if not validation_report.is_valid:
             self.metrics.record_reflection_failed()
             return ReflectionResult(
-                identity=identity,
-                lifecycle_state=ReflectionLifecycleState.FAILED,
-                errors=validation_report.errors
+                identity=identity, lifecycle_state=ReflectionLifecycleState.FAILED, errors=validation_report.errors
             )
 
         try:
@@ -78,7 +76,7 @@ class ReflectionEngine(IReflectionEngine):
                 critiques_generated=1,
                 learning_artifacts_created=len(results["learning_artifacts"]),
                 recommendations_generated=len(results["recommendations"]),
-                adaptation_proposals_created=len(results["adaptation_proposals"])
+                adaptation_proposals_created=len(results["adaptation_proposals"]),
             )
 
             # 3. Create and persist Reflection aggregate
@@ -88,7 +86,7 @@ class ReflectionEngine(IReflectionEngine):
                 statistics=stats,
                 learning_artifact_ids=[a.artifact_id for a in results["learning_artifacts"]],
                 recommendation_ids=[r.recommendation_id for r in results["recommendations"]],
-                adaptation_proposal_ids=[p.proposal_id for p in results["adaptation_proposals"]]
+                adaptation_proposal_ids=[p.proposal_id for p in results["adaptation_proposals"]],
             )
             await self.manager.persist_reflection(reflection_entity)
 
@@ -106,7 +104,7 @@ class ReflectionEngine(IReflectionEngine):
                 execution_feedback=feedback_bundle.execution_feedback,
                 memory_feedback=feedback_bundle.memory_feedback,
                 tool_feedback=feedback_bundle.tool_feedback,
-                statistics=stats
+                statistics=stats,
             )
 
         except Exception as e:
@@ -116,5 +114,5 @@ class ReflectionEngine(IReflectionEngine):
                 identity=identity,
                 lifecycle_state=ReflectionLifecycleState.FAILED,
                 statistics=ReflectionStatistics(total_reflection_duration_ms=duration_ms),
-                errors=[str(e)]
+                errors=[str(e)],
             )

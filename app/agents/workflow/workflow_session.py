@@ -12,6 +12,7 @@ from app.agents.workflow.workflow_instance import WorkflowInstance
 
 class WorkflowSession(BaseModel):
     """Session container managing active runtime context for a workflow instance."""
+
     session_id: UUID = Field(default_factory=uuid4)
     instance: WorkflowInstance
     active_node_id: Optional[str] = None

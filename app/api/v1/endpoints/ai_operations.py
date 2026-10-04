@@ -78,7 +78,9 @@ async def get_trace_by_id(trace_id: str) -> ExecutionTrace:
     return trace
 
 
-@router.get("/evaluation/results", summary="Get continuous evaluation benchmark history", response_model=List[EvaluationResult])
+@router.get(
+    "/evaluation/results", summary="Get continuous evaluation benchmark history", response_model=List[EvaluationResult]
+)
 async def get_evaluation_results(
     limit: int = Query(50, ge=1, le=500),
     agent_id: Optional[str] = Query(None),
@@ -86,7 +88,9 @@ async def get_evaluation_results(
     return ai_operations_runtime.evaluation.get_evaluation_history(limit=limit, agent_id=agent_id)
 
 
-@router.post("/optimization/model-route", summary="Evaluate Pareto optimal model selection", response_model=ModelRouteDecision)
+@router.post(
+    "/optimization/model-route", summary="Evaluate Pareto optimal model selection", response_model=ModelRouteDecision
+)
 async def route_model(request: RouteTaskRequest) -> ModelRouteDecision:
     return ai_operations_runtime.model_router.route_task(
         task_id=request.task_id,
@@ -113,7 +117,11 @@ async def get_cost_analytics() -> Dict[str, Any]:
     return ai_operations_runtime.cost_optimizer.calculate_cost_analytics(fleet)
 
 
-@router.get("/debugging/failures", summary="List failure classifications and root-cause diagnoses", response_model=List[FailureAnalysisResult])
+@router.get(
+    "/debugging/failures",
+    summary="List failure classifications and root-cause diagnoses",
+    response_model=List[FailureAnalysisResult],
+)
 async def get_failure_diagnoses(
     limit: int = Query(50, ge=1, le=500),
     agent_id: Optional[str] = Query(None),
@@ -126,12 +134,18 @@ async def get_predictive_risks(limit: int = Query(20, ge=1, le=100)) -> List[Dic
     return ai_operations_runtime.prediction.get_active_predictions(limit=limit)
 
 
-@router.get("/improvement/proposals", summary="List self-improvement proposals", response_model=List[ImprovementProposal])
+@router.get(
+    "/improvement/proposals", summary="List self-improvement proposals", response_model=List[ImprovementProposal]
+)
 async def get_proposals(agent_id: Optional[str] = Query(None)) -> List[ImprovementProposal]:
     return ai_operations_runtime.improvement.list_proposals(agent_id=agent_id)
 
 
-@router.post("/improvement/proposals/{proposal_id}/approve", summary="HITL Approval for proposal deployment", response_model=ImprovementProposal)
+@router.post(
+    "/improvement/proposals/{proposal_id}/approve",
+    summary="HITL Approval for proposal deployment",
+    response_model=ImprovementProposal,
+)
 async def approve_proposal(proposal_id: str, request: ProposalDecisionRequest) -> ImprovementProposal:
     prop = ai_operations_runtime.improvement.approve_proposal(proposal_id, approved_by=request.actor)
     if not prop:
@@ -147,7 +161,11 @@ async def approve_proposal(proposal_id: str, request: ProposalDecisionRequest) -
     return prop
 
 
-@router.post("/improvement/proposals/{proposal_id}/reject", summary="Reject improvement proposal", response_model=ImprovementProposal)
+@router.post(
+    "/improvement/proposals/{proposal_id}/reject",
+    summary="Reject improvement proposal",
+    response_model=ImprovementProposal,
+)
 async def reject_proposal(proposal_id: str, request: ProposalDecisionRequest) -> ImprovementProposal:
     prop = ai_operations_runtime.improvement.reject_proposal(proposal_id, reason=request.reason or "Rejected by user")
     if not prop:
@@ -178,7 +196,11 @@ async def run_experiment(request: RunExperimentRequest) -> ExperimentRecord:
     )
 
 
-@router.get("/governance/audit-logs", summary="List governance & compliance audit logs", response_model=List[GovernanceAuditRecord])
+@router.get(
+    "/governance/audit-logs",
+    summary="List governance & compliance audit logs",
+    response_model=List[GovernanceAuditRecord],
+)
 async def get_governance_audit_logs(
     limit: int = Query(50, ge=1, le=500),
     agent_id: Optional[str] = Query(None),

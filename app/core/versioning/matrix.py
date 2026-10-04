@@ -11,6 +11,7 @@ from ...platform.kernel.versioning import SemanticVersion, VersionRange
 @dataclass(frozen=True)
 class APIVersionInfo:
     """API version metadata."""
+
     version: str
     status: str = "CURRENT"  # CURRENT, DEPRECATED, SUNSET
     sunset_date: Optional[str] = None

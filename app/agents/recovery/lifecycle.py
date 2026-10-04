@@ -8,6 +8,7 @@ from enum import Enum
 
 class RecoveryLifecycleState(str, Enum):
     """Lifecycle states of an autonomous recovery session."""
+
     INITIALIZING = "INITIALIZING"
     DETECTING = "DETECTING"
     CLASSIFYING = "CLASSIFYING"

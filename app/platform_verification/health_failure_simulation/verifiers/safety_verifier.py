@@ -1,6 +1,7 @@
 """
 3H.11.10: Chaos Safety Controls Verifier
 """
+
 from ..domain.models import ChaosSafetyReport
 from ..domain.interfaces import IChaosSafetyVerifier
 
@@ -22,5 +23,5 @@ class ChaosSafetyVerifier(IChaosSafetyVerifier):
             critical_data_loss_risk_detected=False,
             environment_isolation_verified=True,
             target_environment="STAGING_SANDBOX",
-            safety_audit_passed=True
+            safety_audit_passed=True,
         )

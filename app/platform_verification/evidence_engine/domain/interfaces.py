@@ -1,6 +1,7 @@
 """
 Standardized interfaces for Enterprise Verification Evidence Collection, Traceability & Audit System.
 """
+
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
@@ -19,7 +20,9 @@ from app.platform_verification.evidence_engine.domain.models import (
 
 class IEvidenceStore(ABC):
     @abstractmethod
-    def store_artifact(self, execution_id: str, category: EvidenceCategory, content: bytes, metadata: Dict[str, Any]) -> EvidenceArtifact:
+    def store_artifact(
+        self, execution_id: str, category: EvidenceCategory, content: bytes, metadata: Dict[str, Any]
+    ) -> EvidenceArtifact:
         pass
 
     @abstractmethod
@@ -33,7 +36,9 @@ class IEvidenceStore(ABC):
 
 class IEvidenceCollector(ABC):
     @abstractmethod
-    def collect(self, execution_id: str, category: EvidenceCategory, data: Any, metadata: Optional[Dict[str, Any]] = None) -> EvidenceArtifact:
+    def collect(
+        self, execution_id: str, category: EvidenceCategory, data: Any, metadata: Optional[Dict[str, Any]] = None
+    ) -> EvidenceArtifact:
         pass
 
 
@@ -57,7 +62,9 @@ class IEvidenceAccessController(ABC):
 
 class ILineageEngine(ABC):
     @abstractmethod
-    def register_node(self, node_id: str, node_type: str, attributes: Dict[str, Any], checksum: str = "") -> EvidenceLineageNode:
+    def register_node(
+        self, node_id: str, node_type: str, attributes: Dict[str, Any], checksum: str = ""
+    ) -> EvidenceLineageNode:
         pass
 
     @abstractmethod
@@ -71,7 +78,15 @@ class ILineageEngine(ABC):
 
 class IAuditTrail(ABC):
     @abstractmethod
-    def record_event(self, actor: str, action: str, resource: str, details: Dict[str, Any], previous_state: Optional[str] = None, new_state: Optional[str] = None) -> AuditEvent:
+    def record_event(
+        self,
+        actor: str,
+        action: str,
+        resource: str,
+        details: Dict[str, Any],
+        previous_state: Optional[str] = None,
+        new_state: Optional[str] = None,
+    ) -> AuditEvent:
         pass
 
     @abstractmethod
@@ -81,7 +96,14 @@ class IAuditTrail(ABC):
 
 class IEvidencePackager(ABC):
     @abstractmethod
-    def compile_package(self, execution_id: str, verification_def_id: str, metrics: Dict[str, Any], decision: Dict[str, Any], approvals: Optional[List[Dict[str, Any]]] = None) -> CertificationEvidencePackage:
+    def compile_package(
+        self,
+        execution_id: str,
+        verification_def_id: str,
+        metrics: Dict[str, Any],
+        decision: Dict[str, Any],
+        approvals: Optional[List[Dict[str, Any]]] = None,
+    ) -> CertificationEvidencePackage:
         pass
 
 

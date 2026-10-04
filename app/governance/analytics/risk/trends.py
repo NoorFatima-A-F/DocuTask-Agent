@@ -10,7 +10,7 @@ from ..warehouse.schemas import WarehouseQueryFilter
 
 class RiskTrendSignal(BaseModel):
     signal_type: str  # SUDDEN_RISK_SPIKE, REPEATED_VIOLATIONS, UNCONTROLLED_AGENT, UNSAFE_MODEL
-    severity: str     # MEDIUM, HIGH, CRITICAL
+    severity: str  # MEDIUM, HIGH, CRITICAL
     entity_id: str
     description: str
     detected_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

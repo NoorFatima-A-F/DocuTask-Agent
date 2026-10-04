@@ -8,6 +8,7 @@ from typing import Any, Dict, List
 @dataclass
 class RolloutRule:
     """Targeting rule for feature flag evaluation."""
+
     target_environments: List[str] = field(default_factory=lambda: ["*"])
     target_tenants: List[str] = field(default_factory=lambda: ["*"])
     target_users: List[str] = field(default_factory=list)
@@ -17,6 +18,7 @@ class RolloutRule:
 @dataclass
 class FeatureFlag:
     """A governed feature flag definition."""
+
     flag_key: str
     name: str
     description: str = ""

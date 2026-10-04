@@ -20,6 +20,7 @@ logger = logging.getLogger("infrastructure.observability.dashboards.widgets")
 
 class RenderedWidgetData(BaseModel):
     """Processed data payload ready for frontend or API dashboard rendering."""
+
     widget_id: str
     title: str
     widget_type: WidgetType
@@ -41,7 +42,15 @@ class WidgetQueryEvaluator:
             series = self.metric_registry.get_series(widget.metric_query) if widget.metric_query else None
             if series and series.points:
                 agg = TimeWindowAggregator.aggregate(series, window_seconds=window_seconds)
-                val = agg.avg if widget.widget_type == WidgetType.GAUGE else (agg.sum if widget.widget_type == WidgetType.SINGLESTAT else [pt.model_dump() for pt in series.points[-20:]])
+                val = (
+                    agg.avg
+                    if widget.widget_type == WidgetType.GAUGE
+                    else (
+                        agg.sum
+                        if widget.widget_type == WidgetType.SINGLESTAT
+                        else [pt.model_dump() for pt in series.points[-20:]]
+                    )
+                )
                 return RenderedWidgetData(
                     widget_id=widget.widget_id,
                     title=widget.title,

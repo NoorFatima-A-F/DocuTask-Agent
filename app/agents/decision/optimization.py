@@ -32,7 +32,9 @@ class OptimizationScore(BaseModel):
 class OptimizationEngine:
     """Multi-objective optimization engine for agent execution parameters."""
 
-    def optimize(self, targets: List[OptimizationTarget], strategy: OptimizationStrategy = OptimizationStrategy.BALANCED_PARETO) -> OptimizationScore:
+    def optimize(
+        self, targets: List[OptimizationTarget], strategy: OptimizationStrategy = OptimizationStrategy.BALANCED_PARETO
+    ) -> OptimizationScore:
         score = 0.95
         breakdown = {t.metric.value: t.target_value for t in targets}
         return OptimizationScore(composite_score=score, metric_breakdown=breakdown)

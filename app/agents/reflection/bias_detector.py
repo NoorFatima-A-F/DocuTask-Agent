@@ -21,12 +21,14 @@ class BiasDetector:
             counts = {name: tool_names.count(name) for name in set(tool_names)}
             for tool, count in counts.items():
                 if count / len(tool_names) >= 0.90 and len(set(tool_names)) > 1:
-                    findings.append(CritiqueFinding(
-                        category="BIAS",
-                        severity="LOW",
-                        description=f"Tool selection bias observed: tool '{tool}' represents {count/len(tool_names):.1%} of all calls.",
-                        evidence=[f"Tool {tool} called {count}/{len(tool_names)} times."],
-                        suggested_correction="Evaluate if specialized alternate tools provide superior efficiency."
-                    ))
+                    findings.append(
+                        CritiqueFinding(
+                            category="BIAS",
+                            severity="LOW",
+                            description=f"Tool selection bias observed: tool '{tool}' represents {count / len(tool_names):.1%} of all calls.",
+                            evidence=[f"Tool {tool} called {count}/{len(tool_names)} times."],
+                            suggested_correction="Evaluate if specialized alternate tools provide superior efficiency.",
+                        )
+                    )
 
         return findings

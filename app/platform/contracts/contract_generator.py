@@ -58,8 +58,12 @@ class ContractGenerator:
 
         # Generate dynamic OpenAPI paths
         paths: Dict[str, Any] = {
-            "/api/v1/platform/plugins": {"get": {"summary": "List installed plugins", "responses": {"200": {"description": "OK"}}}},
-            "/api/v1/platform/capabilities": {"get": {"summary": "Query capabilities", "responses": {"200": {"description": "OK"}}}},
+            "/api/v1/platform/plugins": {
+                "get": {"summary": "List installed plugins", "responses": {"200": {"description": "OK"}}}
+            },
+            "/api/v1/platform/capabilities": {
+                "get": {"summary": "Query capabilities", "responses": {"200": {"description": "OK"}}}
+            },
         }
         for p in plugins:
             paths[f"/api/v1/agents/{p.manifest.plugin_id}/execute"] = {
@@ -82,7 +86,10 @@ class ContractGenerator:
         }
 
         json_schemas = {
-            "PluginManifest": {"type": "object", "properties": {"plugin_id": {"type": "string"}, "version": {"type": "string"}}},
+            "PluginManifest": {
+                "type": "object",
+                "properties": {"plugin_id": {"type": "string"}, "version": {"type": "string"}},
+            },
             "CapabilityDefinition": {"type": "object", "properties": {"capability_name": {"type": "string"}}},
         }
 

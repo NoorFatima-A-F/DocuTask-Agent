@@ -8,6 +8,7 @@ from enum import Enum
 
 class GoalType(str, Enum):
     """Supported business and technical goal types."""
+
     BUSINESS = "BUSINESS"
     DOCUMENT = "DOCUMENT"
     EXTRACTION = "EXTRACTION"
@@ -21,6 +22,7 @@ class GoalType(str, Enum):
 
 class TaskType(str, Enum):
     """Supported agent task execution types."""
+
     OCR = "OCR"
     EXTRACTION = "EXTRACTION"
     VALIDATION = "VALIDATION"
@@ -36,6 +38,7 @@ class TaskType(str, Enum):
 
 class WorkflowType(str, Enum):
     """Workflow graph topology types."""
+
     LINEAR = "LINEAR"
     CONDITIONAL = "CONDITIONAL"
     PARALLEL = "PARALLEL"
@@ -46,6 +49,7 @@ class WorkflowType(str, Enum):
 
 class ResultStatus(str, Enum):
     """Execution result outcome status."""
+
     SUCCESS = "SUCCESS"
     FAILURE = "FAILURE"
     PARTIAL_SUCCESS = "PARTIAL_SUCCESS"
@@ -55,6 +59,7 @@ class ResultStatus(str, Enum):
 
 class ExecutionStatus(str, Enum):
     """Execution status lifecycle states."""
+
     PENDING = "PENDING"
     RUNNING = "RUNNING"
     COMPLETED = "COMPLETED"
@@ -65,6 +70,7 @@ class ExecutionStatus(str, Enum):
 
 class PriorityLevel(str, Enum):
     """Priority levels for goals, tasks, and queues."""
+
     LOW = "LOW"
     MEDIUM = "MEDIUM"
     HIGH = "HIGH"
@@ -73,6 +79,7 @@ class PriorityLevel(str, Enum):
 
 class ArtifactType(str, Enum):
     """Produced execution artifact categories."""
+
     OCR_OUTPUT = "OCR_OUTPUT"
     EXTRACTED_JSON = "EXTRACTED_JSON"
     VALIDATION_REPORT = "VALIDATION_REPORT"
@@ -89,6 +96,7 @@ class ArtifactType(str, Enum):
 
 class RetryStrategy(str, Enum):
     """Retry policy backoff strategies."""
+
     IMMEDIATE = "IMMEDIATE"
     FIXED_INTERVAL = "FIXED_INTERVAL"
     EXPONENTIAL_BACKOFF = "EXPONENTIAL_BACKOFF"
@@ -97,6 +105,7 @@ class RetryStrategy(str, Enum):
 
 class DependencyType(str, Enum):
     """Task dependency relation types."""
+
     HARD = "HARD"
     SOFT = "SOFT"
     OPTIONAL = "OPTIONAL"
@@ -106,6 +115,7 @@ class DependencyType(str, Enum):
 
 class ConstraintType(str, Enum):
     """Execution constraint categories."""
+
     TIME = "TIME"
     BUDGET = "BUDGET"
     TOKEN = "TOKEN"
@@ -120,6 +130,7 @@ class ConstraintType(str, Enum):
 
 class CapabilityType(str, Enum):
     """Agent and tool capability classifications."""
+
     OCR = "OCR"
     EXTRACTION = "EXTRACTION"
     VALIDATION = "VALIDATION"

@@ -9,6 +9,7 @@ from app.core.logging import logger
 
 class CostControlMetrics(BaseModel):
     """Metrics validating AI cost controls."""
+
     max_input_tokens_cap: int = 32000
     max_pages_per_doc_cap: int = 500
     cost_per_doc_usd: float = 0.000103
@@ -25,5 +26,7 @@ class CostSecurityValidator:
         """
         Validates token limits and cost quota security.
         """
-        logger.info("Cost Security Validation completed: Token caps (32k), Page limits (500 pages), Cost quotas enforced.")
+        logger.info(
+            "Cost Security Validation completed: Token caps (32k), Page limits (500 pages), Cost quotas enforced."
+        )
         return CostControlMetrics()

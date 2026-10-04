@@ -1,10 +1,12 @@
 """
 Verification Schema & Contract Validator.
 """
+
 from typing import Dict, Any
 import json
 from pydantic import ValidationError
 from app.platform_verification.domain.models import VerificationDefinition
+
 
 def validate_definition_schema(json_str: str) -> Dict[str, Any]:
     try:
@@ -14,6 +16,7 @@ def validate_definition_schema(json_str: str) -> Dict[str, Any]:
     except (json.JSONDecodeError, ValidationError) as e:
         return {"valid": False, "error": str(e)}
 
+
 if __name__ == "__main__":
-    sample = '''{"name": "Valid Test", "description": "Desc", "target_domain": "ENTERPRISE"}'''
+    sample = """{"name": "Valid Test", "description": "Desc", "target_domain": "ENTERPRISE"}"""
     print("Schema Check:", validate_definition_schema(sample))

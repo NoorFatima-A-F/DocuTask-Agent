@@ -1,6 +1,7 @@
 """
 Phase 3H.4.9: Enterprise Incident Recovery Verification Test Suite
 """
+
 import os
 import json
 from app.platform_verification.incident_recovery_verification.verifiers import (
@@ -15,7 +16,9 @@ from app.platform_verification.incident_recovery_verification.verifiers import (
     RecoverySafetyVerifier,
     PostIncidentImprovementVerifier,
 )
-from app.platform_verification.incident_recovery_verification.runtime.recovery_verification_runtime import RecoveryVerificationRuntime
+from app.platform_verification.incident_recovery_verification.runtime.recovery_verification_runtime import (
+    RecoveryVerificationRuntime,
+)
 from app.platform_verification.incident_recovery_verification.domain.models import (
     IncidentType,
     RecoveryTier,

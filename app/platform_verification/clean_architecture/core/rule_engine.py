@@ -1,6 +1,7 @@
 """
 Clean Architecture Inward Dependency & Forbidden Imports Rule Engine.
 """
+
 from __future__ import annotations
 from typing import Dict, List, Optional
 import uuid
@@ -37,7 +38,8 @@ class EnterpriseDependencyRuleEngine(IDependencyRuleEngine):
         for edge in edges:
             # Check if waived
             is_waived = any(
-                w.source_file in edge.source_module and (w.target_module in edge.target_module or w.target_module == "*")
+                w.source_file in edge.source_module
+                and (w.target_module in edge.target_module or w.target_module == "*")
                 for w in active_waivers
             )
             if is_waived:

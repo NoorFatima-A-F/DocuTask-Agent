@@ -9,11 +9,29 @@ from app.model_governance.registry.models import RiskLevel
 
 class ModelGovernancePolicyRule(BaseModel):
     """Governance constraints defining permitted model executions."""
+
     policy_id: str = "default_policy"
     rule_id: Optional[str] = None
     name: str = "Default Model Governance Rule"
     organization_id: str = "org_default"
-    allowed_providers: Set[str] = Field(default_factory=lambda: {"GOOGLE", "GOOGLE_GEMINI", "OPENAI", "ANTHROPIC", "ANTHROPIC_CLAUDE", "AZURE_OPENAI", "AWS_BEDROCK", "VERTEX_AI", "COHERE", "MISTRAL", "OLLAMA", "HUGGINGFACE", "SELF_HOSTED", "CUSTOM"})
+    allowed_providers: Set[str] = Field(
+        default_factory=lambda: {
+            "GOOGLE",
+            "GOOGLE_GEMINI",
+            "OPENAI",
+            "ANTHROPIC",
+            "ANTHROPIC_CLAUDE",
+            "AZURE_OPENAI",
+            "AWS_BEDROCK",
+            "VERTEX_AI",
+            "COHERE",
+            "MISTRAL",
+            "OLLAMA",
+            "HUGGINGFACE",
+            "SELF_HOSTED",
+            "CUSTOM",
+        }
+    )
     max_risk_level: RiskLevel = RiskLevel.HIGH
     allowed_regions: Set[str] = Field(default_factory=lambda: {"us-east-1", "eu-west-1", "eu-central-1"})
     max_input_cost_per_1k: float = 0.05

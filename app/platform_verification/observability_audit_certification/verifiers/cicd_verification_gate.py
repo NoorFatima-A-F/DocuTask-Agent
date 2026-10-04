@@ -1,6 +1,7 @@
 """
 Phase 3H.4.12.7: CI/CD Verification Gate Evaluator
 """
+
 from datetime import datetime, timezone
 from typing import List
 from ..domain.interfaces import ICICDVerificationGate

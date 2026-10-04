@@ -94,6 +94,7 @@ class StartupPipeline:
             async def _cleanup_container():
                 container.clear()
                 registry.clear()
+
             self.tx_manager.record_action("bootstrap_container", _cleanup_container)
 
             # 2. Configuration Validation & Initialization State
@@ -104,9 +105,7 @@ class StartupPipeline:
             discovered_modules = module_loader.discover_modules()
             for mod in discovered_modules:
                 dep_manager.register_subsystem(mod.name, mod.dependencies)
-                await self._publish_event(
-                    ModuleDiscoveredEvent(payload={"module": mod.name, "version": mod.version})
-                )
+                await self._publish_event(ModuleDiscoveredEvent(payload={"module": mod.name, "version": mod.version}))
 
             # 4. Dependency Ordering & Service Registration
             startup_order = dep_manager.compute_initialization_order()
@@ -116,9 +115,7 @@ class StartupPipeline:
             for mod_name in startup_order:
                 subsystem_instance = await initializer.initialize_subsystem(mod_name)
                 registry.register(dict, subsystem_instance, name=mod_name)
-                await self._publish_event(
-                    SubsystemRegisteredEvent(payload={"subsystem": mod_name})
-                )
+                await self._publish_event(SubsystemRegisteredEvent(payload={"subsystem": mod_name}))
 
             # 5. Plugin Loading
             plugin_manager = PluginManager()
@@ -139,9 +136,7 @@ class StartupPipeline:
 
             self.tx_manager.commit()
             await self._publish_event(
-                RuntimeBootCompletedEvent(
-                    payload={"duration_ms": duration_ms, "state": state.lifecycle_state.value}
-                )
+                RuntimeBootCompletedEvent(payload={"duration_ms": duration_ms, "state": state.lifecycle_state.value})
             )
 
             return {
@@ -159,9 +154,7 @@ class StartupPipeline:
             duration_ms = (time.perf_counter() - start_time) * 1000.0
             logger.error(f"StartupPipeline failed during boot: {exc}. Rolling back initialized state.")
             await self.tx_manager.execute_rollback()
-            await self._publish_event(
-                RuntimeBootFailedEvent(payload={"error": str(exc), "duration_ms": duration_ms})
-            )
+            await self._publish_event(RuntimeBootFailedEvent(payload={"error": str(exc), "duration_ms": duration_ms}))
             raise
 
     async def _publish_event(self, event: Any) -> None:

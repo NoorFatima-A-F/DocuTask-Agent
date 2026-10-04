@@ -1,4 +1,5 @@
 """Unit tests for Deployment Core and Control Plane."""
+
 import pytest
 from app.deployment.core.controller import DeploymentController
 from app.deployment.core.deployment import DeploymentStrategyType

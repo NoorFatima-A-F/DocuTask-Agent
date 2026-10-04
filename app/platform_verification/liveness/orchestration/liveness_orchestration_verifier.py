@@ -3,6 +3,7 @@ Liveness Orchestration Verifier (Part 3H.2J).
 Validates Docker HEALTHCHECK definitions, Kubernetes livenessProbe specifications,
 and automated container restart and recovery workflows.
 """
+
 from app.platform_verification.liveness.domain.models import OrchestrationReport
 from app.platform_verification.liveness.domain.interfaces import ILivenessOrchestrationVerifier
 
@@ -37,8 +38,7 @@ class LivenessOrchestrationVerifier(ILivenessOrchestrationVerifier):
 
     def verify_orchestration(self) -> OrchestrationReport:
         docker_valid = (
-            "/live" in str(self._docker_config.get("test", []))
-            and self._docker_config.get("retries", 0) >= 2
+            "/live" in str(self._docker_config.get("test", [])) and self._docker_config.get("retries", 0) >= 2
         )
 
         k8s_valid = (

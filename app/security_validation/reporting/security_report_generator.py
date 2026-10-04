@@ -140,48 +140,54 @@ class SecurityReportGenerator:
         for cat, (label, weight) in weights.items():
             score = scorecard.weighted_scores.get(cat, 100.0)
             contrib = score * weight
-            lines.append(f"| **{label}** | {weight*100:.0f}% | {score:.1f}% | {contrib:.2f}% | **PASSED** |")
+            lines.append(f"| **{label}** | {weight * 100:.0f}% | {score:.1f}% | {contrib:.2f}% | **PASSED** |")
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "### Detailed Verification Engines Summary",
-            "",
-            "| Pillar Key | Module Description | Assertions | Score | Status |",
-            "| :--- | :--- | :---: | :---: | :---: |",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "### Detailed Verification Engines Summary",
+                "",
+                "| Pillar Key | Module Description | Assertions | Score | Status |",
+                "| :--- | :--- | :---: | :---: | :---: |",
+            ]
+        )
 
         for key, res in scorecard.pillars.items():
             lines.append(
                 f"| `{key}` | {res.title} | {res.passed_assertions_count}/{res.total_assertions_count} | {res.score:.1f}% | **{res.status.value}** |"
             )
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "### Cryptographic Evidence Manifest (SHA-256)",
-            "",
-            "| Artifact File | SHA-256 Checksum Digest |",
-            "| :--- | :--- |",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "### Cryptographic Evidence Manifest (SHA-256)",
+                "",
+                "| Artifact File | SHA-256 Checksum Digest |",
+                "| :--- | :--- |",
+            ]
+        )
 
         for fname, digest in manifest["checksums"].items():
             lines.append(f"| `{fname}` | `{digest}` |")
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "### Production Certification Statement",
-            "",
-            "> **OFFICIAL CERTIFICATION NOTICE**:",
-            "> DocuTask Agent has completed the comprehensive **Phase V9 Enterprise AI Security Validation & Adversarial Assurance Program (EA-SVAAP)**.",
-            "> All 14 verification engines, 56 empirical security assertions, and 5 adversarial benchmark suites passed with **100% compliance** and **0 critical vulnerabilities**.",
-            "> The platform is officially certified secure for enterprise multi-tenant deployments.",
-            "",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "### Production Certification Statement",
+                "",
+                "> **OFFICIAL CERTIFICATION NOTICE**:",
+                "> DocuTask Agent has completed the comprehensive **Phase V9 Enterprise AI Security Validation & Adversarial Assurance Program (EA-SVAAP)**.",
+                "> All 14 verification engines, 56 empirical security assertions, and 5 adversarial benchmark suites passed with **100% compliance** and **0 critical vulnerabilities**.",
+                "> The platform is officially certified secure for enterprise multi-tenant deployments.",
+                "",
+            ]
+        )
 
         with open(self.report_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))

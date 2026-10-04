@@ -1,6 +1,7 @@
 """
 Build Pipeline and Dependency Lock Validator.
 """
+
 from typing import Dict, List, Any, Tuple
 from app.platform_verification.deployment_verification.domain.models import (
     BuildReproducibilityReport,
@@ -12,12 +13,16 @@ from app.platform_verification.deployment_verification.domain.interfaces import 
 class BuildPipelineValidator(IBuildPipelineValidator):
     """Verifies build reproducibility and strict dependency version locking."""
 
-    def validate_build_pipeline(self, build_meta: Dict[str, Any]) -> Tuple[BuildReproducibilityReport, DependencyLockReport]:
+    def validate_build_pipeline(
+        self, build_meta: Dict[str, Any]
+    ) -> Tuple[BuildReproducibilityReport, DependencyLockReport]:
         commit = build_meta.get("commit_sha", "abc1234")
-        digest1 = build_meta.get("image_digest_1", "sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069")
+        digest1 = build_meta.get(
+            "image_digest_1", "sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069"
+        )
         digest2 = build_meta.get("image_digest_2", digest1)
 
-        is_reproducible = (digest1 == digest2)
+        is_reproducible = digest1 == digest2
         build_rep = BuildReproducibilityReport(
             commit_sha=commit,
             image_digest=digest1,

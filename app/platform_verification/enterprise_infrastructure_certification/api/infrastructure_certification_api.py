@@ -34,12 +34,36 @@ async def health_check() -> Dict[str, str]:
 async def list_pillars() -> List[Dict[str, Any]]:
     """List the 6 SRE infrastructure quality pillars and their evaluation weights."""
     return [
-        {"name": "Reliability", "weight": 0.25, "description": "Chaos resilience, health liveness/readiness, worker resilience"},
-        {"name": "Security", "weight": 0.20, "description": "Zero-trust container isolation, KMS secrets, IAM RBAC, mTLS, AI defense"},
-        {"name": "Scalability", "weight": 0.20, "description": "Throughput capacity, latency SLAs, resource efficiency, horizontal scaling"},
-        {"name": "Observability", "weight": 0.15, "description": "OpenTelemetry tracing, structured JSON logs, Prometheus metrics, alert precision"},
-        {"name": "Deployment Quality", "weight": 0.10, "description": "IaC Terraform/Helm reproducibility, CI/CD blocking quality gates"},
-        {"name": "Recovery Capability", "weight": 0.10, "description": "PITR restore consistency, RTO (<15m), RPO (<5m), multi-region DR"},
+        {
+            "name": "Reliability",
+            "weight": 0.25,
+            "description": "Chaos resilience, health liveness/readiness, worker resilience",
+        },
+        {
+            "name": "Security",
+            "weight": 0.20,
+            "description": "Zero-trust container isolation, KMS secrets, IAM RBAC, mTLS, AI defense",
+        },
+        {
+            "name": "Scalability",
+            "weight": 0.20,
+            "description": "Throughput capacity, latency SLAs, resource efficiency, horizontal scaling",
+        },
+        {
+            "name": "Observability",
+            "weight": 0.15,
+            "description": "OpenTelemetry tracing, structured JSON logs, Prometheus metrics, alert precision",
+        },
+        {
+            "name": "Deployment Quality",
+            "weight": 0.10,
+            "description": "IaC Terraform/Helm reproducibility, CI/CD blocking quality gates",
+        },
+        {
+            "name": "Recovery Capability",
+            "weight": 0.10,
+            "description": "PITR restore consistency, RTO (<15m), RPO (<5m), multi-region DR",
+        },
     ]
 
 

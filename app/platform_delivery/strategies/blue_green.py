@@ -1,4 +1,5 @@
 """Blue-Green Deployment Strategy with Standby Rollback Retention (Req 38)."""
+
 from dataclasses import dataclass
 from typing import Callable, Optional
 

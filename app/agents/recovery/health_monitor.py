@@ -18,15 +18,12 @@ class RecoveryHealthMonitor:
     """Continuously monitors health of recovery pipelines and protective circuit breakers."""
 
     def get_health_report(
-        self,
-        active_incidents: int = 0,
-        dead_letters: int = 0,
-        open_circuits: int = 0
+        self, active_incidents: int = 0, dead_letters: int = 0, open_circuits: int = 0
     ) -> SubsystemHealthReport:
-        is_healthy = (active_incidents == 0 and open_circuits == 0)
+        is_healthy = active_incidents == 0 and open_circuits == 0
         return SubsystemHealthReport(
             is_healthy=is_healthy,
             active_incidents_count=active_incidents,
             dead_letters_count=dead_letters,
-            circuit_breakers_open_count=open_circuits
+            circuit_breakers_open_count=open_circuits,
         )

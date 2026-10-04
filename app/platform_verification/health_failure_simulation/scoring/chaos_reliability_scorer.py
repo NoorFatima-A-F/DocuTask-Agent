@@ -1,6 +1,7 @@
 """
 Phase 3H.11: 5-Pillar Chaos Reliability & Failure Simulation Scorer
 """
+
 from typing import List
 from datetime import datetime, timezone
 from ..domain.models import (
@@ -99,35 +100,35 @@ class ChaosReliabilityScorer(IChaosReliabilityScorer):
                 weight_pct=det_weight,
                 achieved_score_pct=round(det_score, 2),
                 weighted_score_pct=round(det_weighted, 2),
-                status="PASSED" if det_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if det_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             ChaosPillarScore(
                 pillar_name="Recovery Success & Self-Healing",
                 weight_pct=rec_weight,
                 achieved_score_pct=round(rec_score, 2),
                 weighted_score_pct=round(rec_weighted, 2),
-                status="PASSED" if rec_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if rec_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             ChaosPillarScore(
                 pillar_name="System Stability & Non-Crash Resilience",
                 weight_pct=stab_weight,
                 achieved_score_pct=round(stab_score, 2),
                 weighted_score_pct=round(stab_weighted, 2),
-                status="PASSED" if stab_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if stab_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             ChaosPillarScore(
                 pillar_name="Chaos Safety & Blast-Radius Controls",
                 weight_pct=safe_weight,
                 achieved_score_pct=round(safe_score, 2),
                 weighted_score_pct=round(safe_weighted, 2),
-                status="PASSED" if safe_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if safe_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             ChaosPillarScore(
                 pillar_name="Evidence Completeness & Audit Integrity",
                 weight_pct=ev_weight,
                 achieved_score_pct=round(ev_score, 2),
                 weighted_score_pct=round(ev_weighted, 2),
-                status="PASSED" if ev_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if ev_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
         ]
 
@@ -152,5 +153,5 @@ class ChaosReliabilityScorer(IChaosReliabilityScorer):
             minimum_passing_threshold_pct=95.0,
             pillar_scores=pillar_scores,
             certification_granted=granted,
-            auditor="DocuTask Chaos Engineering & Reliability Certification Engine"
+            auditor="DocuTask Chaos Engineering & Reliability Certification Engine",
         )

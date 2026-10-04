@@ -1,6 +1,7 @@
 """
 Injectors module for Disaster Recovery Simulation Framework.
 """
+
 from app.platform_verification.disaster_recovery_simulation.injectors.container_terminator import (
     ContainerTerminationInjector,
 )

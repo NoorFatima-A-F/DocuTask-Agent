@@ -129,7 +129,9 @@ class ChaosOrchestrator:
         digital_twin_engine.mutate_node_health(
             node_id=target_node,
             status=NodeHealthStatus.FAILING,
-            latency_ms=2500.0 if "latency" in scenario.fault_type.value.lower() or "timeout" in scenario.fault_type.value.lower() else 500.0,
+            latency_ms=2500.0
+            if "latency" in scenario.fault_type.value.lower() or "timeout" in scenario.fault_type.value.lower()
+            else 500.0,
             error_rate=0.85,
         )
 
@@ -194,7 +196,10 @@ class ChaosOrchestrator:
         active_injections = [s for s in self._scenarios.values() if s.status == InjectionStatus.ACTIVE]
         healed_injections = [s for s in self._scenarios.values() if s.status == InjectionStatus.HEALED]
         avg_recovery_latency_ms = (
-            round(sum(s.recovery_latency_ms for s in healed_injections if s.recovery_latency_ms) / len(healed_injections), 2)
+            round(
+                sum(s.recovery_latency_ms for s in healed_injections if s.recovery_latency_ms) / len(healed_injections),
+                2,
+            )
             if healed_injections
             else 185.0
         )

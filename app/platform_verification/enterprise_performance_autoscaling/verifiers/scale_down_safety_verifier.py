@@ -28,8 +28,12 @@ class ScaleDownSafetyVerifier(IScaleDownSafetyVerifier):
         stages = [
             ScaleDownStage(stage_label="Peak Operating Stage", worker_count=50, active_tasks=48, status="ACTIVE"),
             ScaleDownStage(stage_label="Traffic Decline Detected", worker_count=50, active_tasks=12, status="DRAINING"),
-            ScaleDownStage(stage_label="Scale-Down Step 1 (50 -> 25)", worker_count=25, active_tasks=10, status="DRAINED_SAFELY"),
-            ScaleDownStage(stage_label="Scale-Down Step 2 (25 -> 10)", worker_count=10, active_tasks=5, status="DRAINED_SAFELY"),
+            ScaleDownStage(
+                stage_label="Scale-Down Step 1 (50 -> 25)", worker_count=25, active_tasks=10, status="DRAINED_SAFELY"
+            ),
+            ScaleDownStage(
+                stage_label="Scale-Down Step 2 (25 -> 10)", worker_count=10, active_tasks=5, status="DRAINED_SAFELY"
+            ),
             ScaleDownStage(stage_label="Final Steady State (10 -> 5)", worker_count=5, active_tasks=2, status="STEADY"),
         ]
 

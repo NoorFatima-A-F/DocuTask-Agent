@@ -2,9 +2,11 @@
 Section 5.3: Conflict Resolution & Formal Arbitration Verification
 Validates formal dispute settlement between conflicting agents with binding resolution.
 """
+
 from typing import Dict, List, Any
 from app.platform_workforce.models.schemas import ConflictResolutionRecord
 from ..domain.models import WorkforceVerificationRun, SectionResult, VerificationCategory, VerificationStatus
+
 
 class CollaborationConflictVerifier:
     def __init__(self, tenant_id: str = "enterprise-v8-tenant"):
@@ -13,7 +15,7 @@ class CollaborationConflictVerifier:
     def verify_conflict_arbitration(self) -> SectionResult:
         runs: List[WorkforceVerificationRun] = []
         metrics: Dict[str, Any] = {}
-        
+
         # 1. Simulate dispute between Operations Agent and Security Auditor
         # Dispute: Rate limit throttling vs OCR batch throughput
         record = ConflictResolutionRecord(
@@ -27,10 +29,10 @@ class CollaborationConflictVerifier:
             binding_agreements=[
                 "Off-peak burst limit: 150 RPS",
                 "Peak working hours limit: 50 RPS",
-                "Automated backpressure alerts enabled"
-            ]
+                "Automated backpressure alerts enabled",
+            ],
         )
-        
+
         arbitration_ok = record.status == "RESOLVED" and len(record.binding_agreements) == 3
         run_arbitration = WorkforceVerificationRun(
             component="CollaborationEngine.DisputeArbitrator",
@@ -39,16 +41,16 @@ class CollaborationConflictVerifier:
             expected_value="RESOLVED",
             actual_value=record.status,
             status=VerificationStatus.PASSED if arbitration_ok else VerificationStatus.FAILED,
-            details={"dispute_subject": record.dispute_subject, "binding_agreements": record.binding_agreements}
+            details={"dispute_subject": record.dispute_subject, "binding_agreements": record.binding_agreements},
         )
         runs.append(run_arbitration)
-        
+
         passed_runs = sum(1 for r in runs if r.status == VerificationStatus.PASSED)
         score = (passed_runs / len(runs)) * 100.0
-        
+
         metrics["dispute_status"] = record.status
         metrics["binding_agreements_count"] = len(record.binding_agreements)
-        
+
         return SectionResult(
             section_id="SEC-V8.5.3",
             section_name="Conflict Resolution & Arbitration Verification",
@@ -60,5 +62,5 @@ class CollaborationConflictVerifier:
             total_checks=len(runs),
             runs=runs,
             metrics=metrics,
-            summary="Validated binding arbitration protocol resolving inter-departmental concurrency conflict with 3 enforceable contractual terms."
+            summary="Validated binding arbitration protocol resolving inter-departmental concurrency conflict with 3 enforceable contractual terms.",
         )

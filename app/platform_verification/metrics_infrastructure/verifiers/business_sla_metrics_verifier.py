@@ -1,6 +1,7 @@
 """
 3I.3.10: Business Workflow & Document Extraction SLA Metrics Verifier
 """
+
 from ..domain.models import BusinessSLAMetricsReport
 from ..domain.interfaces import IBusinessSLAMetricsVerifier
 
@@ -27,5 +28,5 @@ class BusinessSLAMetricsVerifier(IBusinessSLAMetricsVerifier):
             processing_time_sla_target_sec=10.0,
             sla_compliance_rate_pct=sla_compliance,
             sla_breach_count=breaches,
-            business_health="EXCELLENT"
+            business_health="EXCELLENT",
         )

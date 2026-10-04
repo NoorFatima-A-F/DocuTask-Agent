@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class FieldAnnotation(BaseModel):
     """Annotation schema for a single extracted field."""
+
     field_name: str = Field(..., description="Target JSON field name")
     expected_value: Any = Field(..., description="Ground truth expected value")
     data_type: str = Field("string", description="Field data type ('string', 'number', 'array', 'boolean', 'object')")
@@ -21,6 +22,7 @@ class FieldAnnotation(BaseModel):
 
 class DatasetMetadata(BaseModel):
     """Metadata describing a gold evaluation dataset entry."""
+
     document_id: str = Field(..., description="Unique dataset document identifier")
     document_type: str = Field(..., description="Document type category (invoice, receipt, contract, etc.)")
     page_count: int = Field(1, description="Page count")
@@ -31,6 +33,7 @@ class DatasetMetadata(BaseModel):
 
 class GoldDatasetItem(BaseModel):
     """Gold standard dataset entry containing raw OCR text and ground truth annotations."""
+
     metadata: DatasetMetadata
     ocr_text: str = Field(..., description="Raw input OCR text string")
     ground_truth_json: Dict[str, Any] = Field(..., description="Ground truth target JSON object")
@@ -39,6 +42,7 @@ class GoldDatasetItem(BaseModel):
 
 class MetricEvaluationResult(BaseModel):
     """Calculated metric evaluation scores for an extraction run."""
+
     total_fields: int
     correct_fields: int
     missing_fields: int
@@ -57,6 +61,7 @@ class MetricEvaluationResult(BaseModel):
 
 class EvidenceRecord(BaseModel):
     """Structured evidence record proving evaluation execution results with SHA-256 hash chaining."""
+
     test_id: str = Field(default_factory=lambda: str(uuid4()))
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     environment: str = Field("production_audit", description="Execution environment")
@@ -74,6 +79,7 @@ class EvidenceRecord(BaseModel):
 
 class RegressionComparison(BaseModel):
     """Regression comparison result between baseline and current evaluation run."""
+
     run_id: str = Field(default_factory=lambda: str(uuid4()))
     baseline_version: str
     current_version: str

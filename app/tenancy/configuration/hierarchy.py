@@ -71,7 +71,5 @@ class ConfigurationHierarchyEngine:
         default: Any = None,
     ) -> Any:
         """Get a specific resolved configuration parameter."""
-        resolved = self.resolve(
-            org_config, workspace_config, project_config, environment_config, execution_config
-        )
+        resolved = self.resolve(org_config, workspace_config, project_config, environment_config, execution_config)
         return resolved.get(key, default)

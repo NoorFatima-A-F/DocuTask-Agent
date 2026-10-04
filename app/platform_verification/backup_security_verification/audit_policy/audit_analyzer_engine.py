@@ -31,9 +31,30 @@ class AuditAnalyzerEngine(IAuditAnalyzerEngine):
         Verifies forensic audit trails and log immutability.
         """
         sample_log_events = [
-            {"event_id": "EVT-9001", "principal": "svc-backup-writer", "action": "BACKUP_WRITE", "target": "s3://docutask-dr-vault/postgres/full.dump", "status": "SUCCESS", "timestamp_iso": "2026-03-15T08:00:00Z"},
-            {"event_id": "EVT-9002", "principal": "svc-dr-recovery", "action": "BACKUP_READ", "target": "s3://docutask-dr-vault/postgres/full.dump", "status": "SUCCESS", "timestamp_iso": "2026-03-15T08:15:00Z"},
-            {"event_id": "EVT-9003", "principal": "usr-dev-unauthorized", "action": "BACKUP_DELETE", "target": "s3://docutask-dr-vault/postgres/full.dump", "status": "DENIED_403", "timestamp_iso": "2026-03-15T08:20:00Z"},
+            {
+                "event_id": "EVT-9001",
+                "principal": "svc-backup-writer",
+                "action": "BACKUP_WRITE",
+                "target": "s3://docutask-dr-vault/postgres/full.dump",
+                "status": "SUCCESS",
+                "timestamp_iso": "2026-03-15T08:00:00Z",
+            },
+            {
+                "event_id": "EVT-9002",
+                "principal": "svc-dr-recovery",
+                "action": "BACKUP_READ",
+                "target": "s3://docutask-dr-vault/postgres/full.dump",
+                "status": "SUCCESS",
+                "timestamp_iso": "2026-03-15T08:15:00Z",
+            },
+            {
+                "event_id": "EVT-9003",
+                "principal": "usr-dev-unauthorized",
+                "action": "BACKUP_DELETE",
+                "target": "s3://docutask-dr-vault/postgres/full.dump",
+                "status": "DENIED_403",
+                "timestamp_iso": "2026-03-15T08:20:00Z",
+            },
         ]
 
         details = {

@@ -70,6 +70,7 @@ class ComposePipelineRequest(BaseModel):
 
 # Endpoints
 
+
 @router.get("/sdk", summary="List SDK interfaces, base classes, and extension points")
 def get_sdk_manifest() -> Dict[str, Any]:
     return {

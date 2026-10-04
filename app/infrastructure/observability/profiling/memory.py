@@ -16,6 +16,7 @@ logger = logging.getLogger("infrastructure.observability.profiling.memory")
 
 class MemoryAllocationSample(BaseModel):
     """Snapshot of heap allocations by type or component."""
+
     timestamp: float = Field(default_factory=time.time)
     total_allocated_bytes: int
     object_counts: Dict[str, int] = Field(default_factory=dict)
@@ -24,6 +25,7 @@ class MemoryAllocationSample(BaseModel):
 
 class MemoryLeakWarning(BaseModel):
     """Warning for component showing persistent monotonic memory growth."""
+
     component_name: str
     initial_bytes: int
     current_bytes: int
@@ -76,13 +78,15 @@ class MemoryProfiler:
 
             if init_b > 0 and (growth / init_b * 100.0) >= min_growth_pct:
                 rate = growth / time_span
-                warnings.append(MemoryLeakWarning(
-                    component_name=comp,
-                    initial_bytes=init_b,
-                    current_bytes=curr_b,
-                    growth_bytes=growth,
-                    growth_rate_bytes_per_sec=round(rate, 2),
-                    confidence_score=0.95,
-                ))
+                warnings.append(
+                    MemoryLeakWarning(
+                        component_name=comp,
+                        initial_bytes=init_b,
+                        current_bytes=curr_b,
+                        growth_bytes=growth,
+                        growth_rate_bytes_per_sec=round(rate, 2),
+                        confidence_score=0.95,
+                    )
+                )
 
         return warnings

@@ -24,7 +24,7 @@ class MemoryItem(BaseModel):
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     expires_at: Optional[datetime] = Field(default=None)
-    
+
     lifecycle_state: MemoryLifecycleState = Field(default=MemoryLifecycleState.ACTIVE)
     metadata: MemoryMetadata = Field(default_factory=MemoryMetadata)
     statistics: MemoryStatistics = Field(default_factory=MemoryStatistics)

@@ -1,6 +1,7 @@
 """
 Phase 3J.1: Performance Infrastructure Verification: Load Testing & Baseline Capacity Engineering — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -8,10 +9,10 @@ from datetime import datetime, timezone
 
 
 class PerformanceCertificationTier(str, Enum):
-    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"          # 95 - 100%
-    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"          # 90 - 94.99%
-    OPTIMIZATION_REQUIRED = "Optimization Required"                        # 80 - 89.99%
-    FAILED = "Failed"                                                      # < 80%
+    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"  # 95 - 100%
+    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"  # 90 - 94.99%
+    OPTIMIZATION_REQUIRED = "Optimization Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 class WorkloadClass(str, Enum):
@@ -29,6 +30,7 @@ class BottleneckSeverity(str, Enum):
 
 
 # ─── 3J.1.1: Performance Testing Architecture Models ───────────────────────────
+
 
 class TestToolIntegrationSpec(BaseModel):
     tool_name: str
@@ -49,6 +51,7 @@ class PerformanceArchitectureReport(BaseModel):
 
 
 # ─── 3J.1.2: Baseline Performance Models ──────────────────────────────────────
+
 
 class EndpointLatencySpec(BaseModel):
     endpoint: str
@@ -79,6 +82,7 @@ class BaselinePerformanceReport(BaseModel):
 
 # ─── 3J.1.3: Workload Modeling Models ─────────────────────────────────────────
 
+
 class DocumentDistributionSpec(BaseModel):
     document_type: str
     percentage: float
@@ -103,6 +107,7 @@ class WorkloadModelingReport(BaseModel):
 
 # ─── 3J.1.4: Controlled Load Test Models ──────────────────────────────────────
 
+
 class LoadTestStageResult(BaseModel):
     stage_name: str
     concurrent_users: int
@@ -126,6 +131,7 @@ class ControlledLoadTestReport(BaseModel):
 
 
 # ─── 3J.1.5 & 11: Capacity Modeling & Automation Pipeline Models ──────────────
+
 
 class SLIValidationSpec(BaseModel):
     sli_name: str
@@ -153,6 +159,7 @@ class CapacityReport(BaseModel):
 
 # ─── 3J.1.6: Bottleneck Analysis Models ───────────────────────────────────────
 
+
 class BottleneckDiagnosticSpec(BaseModel):
     subsystem: str  # API, Database, Queue, Worker, AI Provider
     symptoms: List[str]
@@ -175,6 +182,7 @@ class BottleneckAnalysisReport(BaseModel):
 
 # ─── 3J.1.7: Performance Regression Models ────────────────────────────────────
 
+
 class RegressionMetricComparison(BaseModel):
     metric_name: str
     previous_version_value: str
@@ -194,6 +202,7 @@ class PerformanceRegressionReport(BaseModel):
 
 
 # ─── 3J.1.8: AI Pipeline Performance Models ───────────────────────────────────
+
 
 class AIPipelineStageLatency(BaseModel):
     stage_name: str
@@ -215,6 +224,7 @@ class AIPipelinePerformanceReport(BaseModel):
 
 # ─── 3J.1.9: Database Performance Models ──────────────────────────────────────
 
+
 class ConnectionPoolBenchmark(BaseModel):
     concurrency_level: int  # 10, 100, 500
     active_connections: int
@@ -234,6 +244,7 @@ class DatabasePerformanceReport(BaseModel):
 
 
 # ─── 3J.1.10: Queue Performance Models ────────────────────────────────────────
+
 
 class QueueStressBenchmark(BaseModel):
     documents_submitted: int = 10000
@@ -255,6 +266,7 @@ class QueuePerformanceReport(BaseModel):
 
 
 # ─── 3J.1.12 & 13: 6-Category Scoring & Certification Models ──────────────────
+
 
 class PerformanceCategoryScore(BaseModel):
     category_name: str

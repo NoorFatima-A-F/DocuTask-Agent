@@ -32,11 +32,21 @@ class ThroughputScalingVerifier(IThroughputScalingVerifier):
 
     def verify(self) -> ThroughputScalingReport:
         scaling_curve = [
-            WorkerScalingPoint(worker_count=1, throughput_dpm=2.0, throughput_dph=120, jobs_per_sec=0.033, efficiency_pct=100.0),
-            WorkerScalingPoint(worker_count=2, throughput_dpm=3.8, throughput_dph=228, jobs_per_sec=0.063, efficiency_pct=95.0),
-            WorkerScalingPoint(worker_count=4, throughput_dpm=7.2, throughput_dph=432, jobs_per_sec=0.120, efficiency_pct=90.0),
-            WorkerScalingPoint(worker_count=8, throughput_dpm=13.6, throughput_dph=816, jobs_per_sec=0.227, efficiency_pct=85.0),
-            WorkerScalingPoint(worker_count=16, throughput_dpm=24.0, throughput_dph=1440, jobs_per_sec=0.400, efficiency_pct=75.0),
+            WorkerScalingPoint(
+                worker_count=1, throughput_dpm=2.0, throughput_dph=120, jobs_per_sec=0.033, efficiency_pct=100.0
+            ),
+            WorkerScalingPoint(
+                worker_count=2, throughput_dpm=3.8, throughput_dph=228, jobs_per_sec=0.063, efficiency_pct=95.0
+            ),
+            WorkerScalingPoint(
+                worker_count=4, throughput_dpm=7.2, throughput_dph=432, jobs_per_sec=0.120, efficiency_pct=90.0
+            ),
+            WorkerScalingPoint(
+                worker_count=8, throughput_dpm=13.6, throughput_dph=816, jobs_per_sec=0.227, efficiency_pct=85.0
+            ),
+            WorkerScalingPoint(
+                worker_count=16, throughput_dpm=24.0, throughput_dph=1440, jobs_per_sec=0.400, efficiency_pct=75.0
+            ),
         ]
 
         min_efficiency = min(p.efficiency_pct for p in scaling_curve)

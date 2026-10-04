@@ -12,6 +12,7 @@ from app.agents.runtime.runtime_context import RuntimeContext
 
 class RuntimeSession(BaseModel):
     """Root execution session unifying workflow, execution, recovery, and reflection sessions."""
+
     session_id: UUID = Field(default_factory=uuid4)
     parent_session_id: Optional[UUID] = None
     context: RuntimeContext = Field(default_factory=RuntimeContext)

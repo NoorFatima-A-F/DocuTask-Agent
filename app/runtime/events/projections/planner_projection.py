@@ -51,11 +51,13 @@ class PlannerProjection:
 
         elif event.event_type == DomainEventType.PLANNER_REPLANNED:
             self.total_replans_executed += 1
-            self.replan_history.append({
-                "timestamp_utc": event.timestamp_utc,
-                "reason": event.payload.get("replan_reason"),
-                "mutated_nodes": event.payload.get("mutated_node_ids", []),
-            })
+            self.replan_history.append(
+                {
+                    "timestamp_utc": event.timestamp_utc,
+                    "reason": event.payload.get("replan_reason"),
+                    "mutated_nodes": event.payload.get("mutated_node_ids", []),
+                }
+            )
 
         elif event.event_type == DomainEventType.PLANNER_FAILED:
             self.state = "FAILED"

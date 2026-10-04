@@ -29,6 +29,7 @@ class DatasetType(str, Enum):
 @dataclass(frozen=True)
 class BoundingBox:
     """Normalized or pixel bounding box [x0, y0, x1, y1]."""
+
     x0: float
     y0: float
     x1: float
@@ -55,6 +56,7 @@ class BoundingBox:
 @dataclass
 class GroundTruthItem:
     """A single annotated entity or field in a document dataset."""
+
     item_id: str
     label: str
     text: str
@@ -65,6 +67,7 @@ class GroundTruthItem:
 @dataclass
 class PublicDatasetCard:
     """Research dataset card compliant with MLCommons and Data Cards Playbook."""
+
     dataset_name: str
     dataset_type: DatasetType
     version: str
@@ -82,6 +85,7 @@ class PublicDatasetCard:
 @dataclass
 class DatasetBenchmarkEvaluation:
     """Results of evaluating an engine against a public benchmark dataset."""
+
     dataset_name: str
     dataset_type: DatasetType
     total_samples: int
@@ -112,7 +116,7 @@ class PublicBenchmarkSuite:
             primary_task="Key-Value Extraction & Form Layout Analysis",
             primary_metric="Entity F1",
             supported_languages=["en"],
-            ethical_risk_level="LOW"
+            ethical_risk_level="LOW",
         ),
         DatasetType.CORD: PublicDatasetCard(
             dataset_name="CORD: Consolidated Receipt Dataset for Post-OCR Parsing",
@@ -126,7 +130,7 @@ class PublicBenchmarkSuite:
             primary_task="Receipt Key Information Extraction",
             primary_metric="Entity F1",
             supported_languages=["id", "en"],
-            ethical_risk_level="LOW"
+            ethical_risk_level="LOW",
         ),
         DatasetType.SROIE: PublicDatasetCard(
             dataset_name="SROIE: Scanned Receipts OCR and Information Extraction",
@@ -140,7 +144,7 @@ class PublicBenchmarkSuite:
             primary_task="4-Field Extraction (Company, Date, Address, Total)",
             primary_metric="Entity F1",
             supported_languages=["en"],
-            ethical_risk_level="LOW"
+            ethical_risk_level="LOW",
         ),
         DatasetType.DOCVQA: PublicDatasetCard(
             dataset_name="DocVQA: Document Visual Question Answering",
@@ -154,7 +158,7 @@ class PublicBenchmarkSuite:
             primary_task="Question Answering on Document Images",
             primary_metric="ANLS",
             supported_languages=["en"],
-            ethical_risk_level="LOW"
+            ethical_risk_level="LOW",
         ),
         DatasetType.RVL_CDIP: PublicDatasetCard(
             dataset_name="RVL-CDIP: Complex Document Information Processing",
@@ -168,7 +172,7 @@ class PublicBenchmarkSuite:
             primary_task="16-Class Document Image Classification",
             primary_metric="Top-1 Accuracy",
             supported_languages=["en"],
-            ethical_risk_level="LOW"
+            ethical_risk_level="LOW",
         ),
     }
 
@@ -203,9 +207,9 @@ class PublicBenchmarkSuite:
             for j in range(1, len_g + 1):
                 cost = 0 if p[i - 1] == g[j - 1] else 1
                 dp[i][j] = min(
-                    dp[i - 1][j] + 1,      # deletion
-                    dp[i][j - 1] + 1,      # insertion
-                    dp[i - 1][j - 1] + cost # substitution
+                    dp[i - 1][j] + 1,  # deletion
+                    dp[i][j - 1] + 1,  # insertion
+                    dp[i - 1][j - 1] + cost,  # substitution
                 )
 
         dist = dp[len_p][len_g]
@@ -216,10 +220,7 @@ class PublicBenchmarkSuite:
 
     @classmethod
     def evaluate_predictions(
-        cls,
-        dataset_type: DatasetType,
-        predictions: List[Dict[str, str]],
-        ground_truth: List[Dict[str, str]]
+        cls, dataset_type: DatasetType, predictions: List[Dict[str, str]], ground_truth: List[Dict[str, str]]
     ) -> DatasetBenchmarkEvaluation:
         """
         Evaluate predictions against ground truth pairs.
@@ -237,7 +238,7 @@ class PublicBenchmarkSuite:
                 recall=0.0,
                 f1_score=0.0,
                 exact_match_ratio=0.0,
-                status="INSUFFICIENT_EVIDENCE"
+                status="INSUFFICIENT_EVIDENCE",
             )
 
         tp = 0
@@ -289,5 +290,5 @@ class PublicBenchmarkSuite:
             exact_match_ratio=emr,
             anls_score=mean_anls,
             status="PASS" if f1 >= 0.80 else "VALIDATION_FAILED",
-            details={"tp": tp, "fp": fp, "fn": fn, "exact_matches": exact_matches}
+            details={"tp": tp, "fp": fp, "fn": fn, "exact_matches": exact_matches},
         )

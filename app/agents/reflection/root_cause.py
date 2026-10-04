@@ -10,6 +10,7 @@ from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 class SystemicRootCause(BaseModel):
     """Diagnosed systemic reason for execution failure or degradation."""
+
     root_cause_id: str
     primary_fault_domain: str  # PLANNER, TOOL, INFRASTRUCTURE, POLICY, TIMEOUT
     description: str
@@ -37,7 +38,7 @@ class ReflectionRootCauseAnalyzer:
                 description=f"Downstream failure in tool '{failed_tools[0].tool_name}': {failed_tools[0].error_details}",
                 causal_factors=[f"Tool {c.tool_name} failed" for c in failed_tools],
                 confidence=0.95,
-                preventative_action="Configure circuit breaker and secondary tool fallback."
+                preventative_action="Configure circuit breaker and secondary tool fallback.",
             )
 
         # Check for timeouts
@@ -48,7 +49,7 @@ class ReflectionRootCauseAnalyzer:
                 description="Task exceeded maximum allowed wall-clock duration.",
                 causal_factors=trace.errors,
                 confidence=0.90,
-                preventative_action="Increase step timeout limit or partition task into smaller subtasks."
+                preventative_action="Increase step timeout limit or partition task into smaller subtasks.",
             )
 
         # Check for policy rejections
@@ -60,7 +61,7 @@ class ReflectionRootCauseAnalyzer:
                 description=f"Execution halted due to policy rule: {denied_decisions[0].policy_name}",
                 causal_factors=[d.policy_name for d in denied_decisions],
                 confidence=0.98,
-                preventative_action="Refine plan preconditions to respect policy constraints."
+                preventative_action="Refine plan preconditions to respect policy constraints.",
             )
 
         return SystemicRootCause(
@@ -69,5 +70,5 @@ class ReflectionRootCauseAnalyzer:
             description="Execution terminated with unhandled task errors.",
             causal_factors=trace.errors or ["Task state incomplete"],
             confidence=0.75,
-            preventative_action="Enforce strict plan validation prior to dispatch."
+            preventative_action="Enforce strict plan validation prior to dispatch.",
         )

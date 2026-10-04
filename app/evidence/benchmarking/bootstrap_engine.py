@@ -196,11 +196,11 @@ class BootstrapValidationEngine:
 
             jack_mean = statistics.mean(jackknife_estimates)
             diffs = [jack_mean - t for t in jackknife_estimates]
-            sum_cubes = sum(d ** 3 for d in diffs)
-            sum_squares = sum(d ** 2 for d in diffs)
+            sum_cubes = sum(d**3 for d in diffs)
+            sum_squares = sum(d**2 for d in diffs)
 
             if sum_squares > 1e-12:
-                a = sum_cubes / (6.0 * (sum_squares ** 1.5))
+                a = sum_cubes / (6.0 * (sum_squares**1.5))
             else:
                 a = 0.0
 
@@ -289,6 +289,6 @@ class BootstrapValidationEngine:
         d1 = 1.432788
         d2 = 0.189269
         d3 = 0.001308
-        numerator = c0 + c1 * t + c2 * (t ** 2)
-        denominator = 1.0 + d1 * t + d2 * (t ** 2) + d3 * (t ** 3)
+        numerator = c0 + c1 * t + c2 * (t**2)
+        denominator = 1.0 + d1 * t + d2 * (t**2) + d3 * (t**3)
         return t - (numerator / denominator)

@@ -18,6 +18,7 @@ logger = logging.getLogger("infrastructure.observability.alerts.routing")
 
 class AlertRouteRule(BaseModel):
     """Specification mapping alert criteria to notification channels."""
+
     route_id: str
     team: Optional[str] = None
     min_severity: Optional[AlertSeverity] = None

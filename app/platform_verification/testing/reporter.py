@@ -2,11 +2,14 @@
 Test Evidence & Certification Reporter.
 Renders standardized JSON/Markdown audit evidence from verification test runs.
 """
+
 import json
 from .runner import TestSuiteReport
 
+
 class TestEvidenceReporter:
     """Formats verification run reports for audit and compliance certification."""
+
     @staticmethod
     def to_json(report: TestSuiteReport) -> str:
         data = {
@@ -24,10 +27,10 @@ class TestEvidenceReporter:
                     "passed_tests": r.passed_tests,
                     "failed_tests": r.failed_tests,
                     "duration_ms": r.duration_ms,
-                    "evidence": r.evidence_payload
+                    "evidence": r.evidence_payload,
                 }
                 for r in report.tier_results
-            ]
+            ],
         }
         return json.dumps(data, indent=2)
 
@@ -40,7 +43,7 @@ class TestEvidenceReporter:
             "",
             "## Testing Tier Breakdown",
             "| Tier | Status | Passed | Failed | Duration (ms) |",
-            "|---|---|---|---|---|"
+            "|---|---|---|---|---|",
         ]
         for r in report.tier_results:
             st = "PASS" if r.passed else "FAIL"

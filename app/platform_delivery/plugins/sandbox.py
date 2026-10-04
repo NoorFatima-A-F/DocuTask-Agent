@@ -1,11 +1,14 @@
 """Plugin Capability Sandboxing and Permission Enforcement (Req 62)."""
+
 from dataclasses import dataclass, field
 from typing import List, Optional, Set
 
 
 @dataclass
 class PluginSandboxPolicy:
-    allowed_permissions: Set[str] = field(default_factory=lambda: {"storage:read", "telemetry:emit", "artifacts:verify"})
+    allowed_permissions: Set[str] = field(
+        default_factory=lambda: {"storage:read", "telemetry:emit", "artifacts:verify"}
+    )
     max_memory_mb: int = 512
     allow_network: bool = False
     allow_raw_secrets: bool = False

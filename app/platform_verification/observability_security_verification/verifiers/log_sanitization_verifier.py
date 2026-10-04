@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10.3: Log Sanitization Middleware Verifier
 """
+
 import re
 from typing import List
 from ..domain.interfaces import ILogSanitizationVerifier

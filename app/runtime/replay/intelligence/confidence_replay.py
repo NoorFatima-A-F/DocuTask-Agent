@@ -24,13 +24,15 @@ class ConfidenceReplayEngine:
             if "total_uncertainty" in payload:
                 curr_unc = float(payload["total_uncertainty"])
 
-            trajectory.append({
-                "cursor": idx,
-                "event_id": ev.get("event_id"),
-                "confidence_score": round(curr_score, 4),
-                "uncertainty_band": round(curr_unc, 4),
-                "ci_lower": round(max(0.0, curr_score - curr_unc), 4),
-                "ci_upper": round(min(1.0, curr_score + curr_unc), 4),
-            })
+            trajectory.append(
+                {
+                    "cursor": idx,
+                    "event_id": ev.get("event_id"),
+                    "confidence_score": round(curr_score, 4),
+                    "uncertainty_band": round(curr_unc, 4),
+                    "ci_lower": round(max(0.0, curr_score - curr_unc), 4),
+                    "ci_upper": round(min(1.0, curr_score + curr_unc), 4),
+                }
+            )
 
         return trajectory

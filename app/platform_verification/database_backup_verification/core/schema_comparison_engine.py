@@ -2,6 +2,7 @@
 Schema Comparison Engine for PostgreSQL (Part 3G.2B).
 Compares restored schema against source database DDL across all database catalogs.
 """
+
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
     SchemaComparisonReport,

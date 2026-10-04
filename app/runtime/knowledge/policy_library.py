@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class PlanningPolicy(BaseModel):
     """Compiled executable planning policy."""
+
     policy_id: str = Field(default_factory=lambda: f"pol_{uuid.uuid4().hex[:8]}")
     name: str
     version: str = "1.0.0"

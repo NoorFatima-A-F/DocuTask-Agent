@@ -11,6 +11,7 @@ from app.model_governance.registry.models import ApprovalStatus
 
 class StageStatus(str, Enum):
     """Status of an individual review stage."""
+
     PENDING = "PENDING"
     UNDER_REVIEW = "UNDER_REVIEW"
     APPROVED = "APPROVED"
@@ -20,6 +21,7 @@ class StageStatus(str, Enum):
 
 class ApprovalStage(BaseModel):
     """Single stage in a multi-stage approval workflow."""
+
     stage_name: str
     status: StageStatus = StageStatus.PENDING
     reviewer_id: Optional[str] = None
@@ -30,6 +32,7 @@ class ApprovalStage(BaseModel):
 
 class ApprovalDecisionRecord(BaseModel):
     """Single stage review decision."""
+
     stage_name: str  # TECHNICAL_VALIDATION, SECURITY_REVIEW, etc.
     reviewer_id: str
     decision: str  # APPROVED, REJECTED, CHANGES_REQUESTED
@@ -40,6 +43,7 @@ class ApprovalDecisionRecord(BaseModel):
 
 class ModelApprovalRecord(BaseModel):
     """Comprehensive approval history container for an AI model."""
+
     approval_id: str
     model_id: str
     organization_id: str

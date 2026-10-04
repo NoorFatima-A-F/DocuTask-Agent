@@ -15,6 +15,7 @@ from app.runtime.planning.strategy_generator import CandidateStrategy
 
 class SimulationResult(BaseModel):
     """Detailed output of Monte Carlo execution simulation."""
+
     strategy_id: str
     simulated_iterations: int = 1000
     simulated_success_rate: float

@@ -13,7 +13,11 @@ from ..domain.models import KnowledgeReadinessScorecard
 class EvidenceGenerator:
     """Exports structured verification evidence, cryptographic checksums, and comprehensive markdown report."""
 
-    def __init__(self, output_dir: str = "knowledge_platform_verification_evidence", report_path: str = "docs/phase_V6_knowledge_platform_verification_report.md"):
+    def __init__(
+        self,
+        output_dir: str = "knowledge_platform_verification_evidence",
+        report_path: str = "docs/phase_V6_knowledge_platform_verification_report.md",
+    ):
         self.output_dir = Path(output_dir)
         self.report_path = Path(report_path)
 
@@ -126,16 +130,16 @@ Autonomous Optimization & Scalability (Dead Chunk Pruning, 10M+ Chunks @ 520 QPS
 
 | Pillar Index | Score | Grade | Status |
 | :--- | :---: | :---: | :---: |
-| **Ingestion & Registry Index** | {scorecard.indices.get('ingestion_and_registry_index', 100.0):.1f}% | A+ | PASSED |
-| **Vector & Embedding Index** | {scorecard.indices.get('vector_and_embedding_index', 100.0):.1f}% | A+ | PASSED |
-| **Retrieval & Reranking Index** | {scorecard.indices.get('retrieval_and_reranking_index', 100.0):.1f}% | A+ | PASSED |
-| **Context & Graph Index** | {scorecard.indices.get('context_and_graph_index', 100.0):.1f}% | A+ | PASSED |
-| **Memory & Freshness Index** | {scorecard.indices.get('memory_and_freshness_index', 100.0):.1f}% | A+ | PASSED |
-| **Quality & Drift Index** | {scorecard.indices.get('quality_and_drift_index', 100.0):.1f}% | A+ | PASSED |
-| **Security & Governance Index** | {scorecard.indices.get('security_and_governance_index', 100.0):.1f}% | A+ | PASSED |
-| **Optimization & Scalability Index** | {scorecard.indices.get('optimization_and_scalability_index', 100.0):.1f}% | A+ | PASSED |
-| **Explainability & Benchmarking Index** | {scorecard.indices.get('explainability_and_benchmarking_index', 100.0):.1f}% | A+ | PASSED |
-| **Executive Dashboard Index** | {scorecard.indices.get('executive_dashboard_index', 100.0):.1f}% | A+ | PASSED |
+| **Ingestion & Registry Index** | {scorecard.indices.get("ingestion_and_registry_index", 100.0):.1f}% | A+ | PASSED |
+| **Vector & Embedding Index** | {scorecard.indices.get("vector_and_embedding_index", 100.0):.1f}% | A+ | PASSED |
+| **Retrieval & Reranking Index** | {scorecard.indices.get("retrieval_and_reranking_index", 100.0):.1f}% | A+ | PASSED |
+| **Context & Graph Index** | {scorecard.indices.get("context_and_graph_index", 100.0):.1f}% | A+ | PASSED |
+| **Memory & Freshness Index** | {scorecard.indices.get("memory_and_freshness_index", 100.0):.1f}% | A+ | PASSED |
+| **Quality & Drift Index** | {scorecard.indices.get("quality_and_drift_index", 100.0):.1f}% | A+ | PASSED |
+| **Security & Governance Index** | {scorecard.indices.get("security_and_governance_index", 100.0):.1f}% | A+ | PASSED |
+| **Optimization & Scalability Index** | {scorecard.indices.get("optimization_and_scalability_index", 100.0):.1f}% | A+ | PASSED |
+| **Explainability & Benchmarking Index** | {scorecard.indices.get("explainability_and_benchmarking_index", 100.0):.1f}% | A+ | PASSED |
+| **Executive Dashboard Index** | {scorecard.indices.get("executive_dashboard_index", 100.0):.1f}% | A+ | PASSED |
 
 ---
 

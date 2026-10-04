@@ -20,11 +20,7 @@ class IntelligentPlanner(IIntelligentPlanner):
     candidate generation, multi-objective ranking, reflection critique, and automatic repair.
     """
 
-    def __init__(
-        self,
-        engine: Optional[PlanningEngine] = None,
-        validator: Optional[PlannerPlanValidator] = None
-    ):
+    def __init__(self, engine: Optional[PlanningEngine] = None, validator: Optional[PlannerPlanValidator] = None):
         self.engine = engine or PlanningEngine()
         self.validator = validator or PlannerPlanValidator()
 
@@ -43,5 +39,5 @@ class IntelligentPlanner(IIntelligentPlanner):
             success=validation_report.is_valid,
             plan=synthesized_plan,
             errors=validation_report.errors,
-            warnings=validation_report.warnings
+            warnings=validation_report.warnings,
         )

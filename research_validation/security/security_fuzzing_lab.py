@@ -31,6 +31,7 @@ class FuzzStrategy(str, Enum):
 @dataclass
 class FuzzCampaignResult:
     """Telemetry from an automated fuzzing campaign."""
+
     campaign_id: str
     strategy: FuzzStrategy
     total_iterations: int
@@ -44,6 +45,7 @@ class FuzzCampaignResult:
 @dataclass
 class OWASPControlAuditRecord:
     """Audit verification for an OWASP security requirement."""
+
     standard_name: str  # "OWASP_ASVS_L2" or "OWASP_API_TOP10"
     control_id: str
     requirement_name: str
@@ -54,6 +56,7 @@ class OWASPControlAuditRecord:
 @dataclass
 class SecurityFuzzingReport:
     """Comprehensive security research laboratory report."""
+
     total_fuzz_campaigns: int
     total_fuzz_iterations: int
     total_crashes_detected: int
@@ -73,21 +76,53 @@ class SecurityFuzzingLab:
     """
 
     DEFAULT_OWASP_CONTROLS = [
-        OWASPControlAuditRecord("OWASP_ASVS_L2", "V1.2.1", "Thread & Memory Safety Bounds", True, "Bounded buffers, timeout guards, and resource quotas."),
-        OWASPControlAuditRecord("OWASP_ASVS_L2", "V5.1.1", "Input Validation & Structural Schemas", True, "Pydantic v2 strict models reject unexpected keys."),
-        OWASPControlAuditRecord("OWASP_ASVS_L2", "V8.2.1", "Cryptographic Envelope Integrity", True, "DSSE SHA-256 HMAC / Ed25519 signatures."),
-        OWASPControlAuditRecord("OWASP_API_TOP10", "API1:2023", "Broken Object Level Authorization (BOLA)", True, "Tenant ID scoping enforced on every query."),
-        OWASPControlAuditRecord("OWASP_API_TOP10", "API2:2023", "Broken Authentication", True, "JWT token validation with short TTL and rotation."),
-        OWASPControlAuditRecord("OWASP_API_TOP10", "API8:2023", "Security Misconfiguration & Verbose Stacktraces", True, "Production exception handler sanitizes internal stack traces."),
+        OWASPControlAuditRecord(
+            "OWASP_ASVS_L2",
+            "V1.2.1",
+            "Thread & Memory Safety Bounds",
+            True,
+            "Bounded buffers, timeout guards, and resource quotas.",
+        ),
+        OWASPControlAuditRecord(
+            "OWASP_ASVS_L2",
+            "V5.1.1",
+            "Input Validation & Structural Schemas",
+            True,
+            "Pydantic v2 strict models reject unexpected keys.",
+        ),
+        OWASPControlAuditRecord(
+            "OWASP_ASVS_L2",
+            "V8.2.1",
+            "Cryptographic Envelope Integrity",
+            True,
+            "DSSE SHA-256 HMAC / Ed25519 signatures.",
+        ),
+        OWASPControlAuditRecord(
+            "OWASP_API_TOP10",
+            "API1:2023",
+            "Broken Object Level Authorization (BOLA)",
+            True,
+            "Tenant ID scoping enforced on every query.",
+        ),
+        OWASPControlAuditRecord(
+            "OWASP_API_TOP10",
+            "API2:2023",
+            "Broken Authentication",
+            True,
+            "JWT token validation with short TTL and rotation.",
+        ),
+        OWASPControlAuditRecord(
+            "OWASP_API_TOP10",
+            "API8:2023",
+            "Security Misconfiguration & Verbose Stacktraces",
+            True,
+            "Production exception handler sanitizes internal stack traces.",
+        ),
     ]
 
     @classmethod
     def execute_mutation_fuzzer(
-        cls,
-        target_fn: Callable[[str], Any],
-        base_payload: Dict[str, Any],
-        iterations: int = 50,
-        seed: int = 42
+        cls, target_fn: Callable[[str], Any], base_payload: Dict[str, Any], iterations: int = 50, seed: int = 42
     ) -> FuzzCampaignResult:
         """Run mutation-based payload fuzzing."""
         rnd = random.Random(seed)
@@ -122,14 +157,12 @@ class SecurityFuzzingLab:
             graceful_rejections_count=graceful,
             unique_exceptions_found=sorted(list(exceptions_found)),
             code_branches_covered=14,
-            is_hardened=(crashes == 0)
+            is_hardened=(crashes == 0),
         )
 
     @classmethod
     def run_security_fuzzing_audit(
-        cls,
-        target_fn: Callable[[str], Any],
-        base_payload: Dict[str, Any]
+        cls, target_fn: Callable[[str], Any], base_payload: Dict[str, Any]
     ) -> SecurityFuzzingReport:
         """Run complete security research audit."""
         mut_campaign = cls.execute_mutation_fuzzer(target_fn, base_payload, iterations=50)
@@ -142,7 +175,13 @@ class SecurityFuzzingLab:
         passed_owasp = sum(1 for c in owasp if c.verified)
         owasp_pct = (passed_owasp / len(owasp)) * 100.0 if owasp else 0.0
 
-        verdict = "PASS" if (total_crashes == 0 and owasp_pct >= 90.0) else "CRITICAL_DEFECT_FOUND" if total_crashes > 0 else "DEGRADED"
+        verdict = (
+            "PASS"
+            if (total_crashes == 0 and owasp_pct >= 90.0)
+            else "CRITICAL_DEFECT_FOUND"
+            if total_crashes > 0
+            else "DEGRADED"
+        )
 
         return SecurityFuzzingReport(
             total_fuzz_campaigns=len(campaigns),
@@ -153,12 +192,12 @@ class SecurityFuzzingLab:
             owasp_compliance_pct=owasp_pct,
             assumptions=[
                 "Fuzzing harnesses execute against isolated in-memory parser instances",
-                "Schema models strictly enforce input field types"
+                "Schema models strictly enforce input field types",
             ],
             methodology="Automated mutation fuzz testing combined with OWASP ASVS v4.0.3 Level 2 and API Security Top 10 control audits.",
             limitations=[
                 "Static fuzzing cannot prove total absence of logical race conditions under extreme concurrent thread contention"
             ],
             reproducibility_instructions="Execute SecurityFuzzingLab.run_security_fuzzing_audit() with target parser harness.",
-            security_verdict=verdict
+            security_verdict=verdict,
         )

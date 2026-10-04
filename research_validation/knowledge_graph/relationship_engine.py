@@ -10,15 +10,14 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
-from research_validation.knowledge_graph.ontology import (
-    EntityType, RelationshipType, ScientificOntology
-)
+from research_validation.knowledge_graph.ontology import EntityType, RelationshipType, ScientificOntology
 from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)
 class RelationshipEdge:
     """Directed, typed relationship between two knowledge nodes."""
+
     edge_id: str
     source_id: str
     relationship: RelationshipType
@@ -105,9 +104,6 @@ class RelationshipEngine:
         for e1 in self.edges.values():
             if e1.relationship == RelationshipType.SUPPORTS_CLAIM:
                 for e2 in self.get_outgoing_edges(e1.source_id):
-                    if (
-                        e2.relationship == RelationshipType.REFUTES_CLAIM
-                        and e2.target_id == e1.target_id
-                    ):
+                    if e2.relationship == RelationshipType.REFUTES_CLAIM and e2.target_id == e1.target_id:
                         contradictions.append((e1, e2))
         return contradictions

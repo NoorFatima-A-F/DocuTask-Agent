@@ -1,6 +1,7 @@
 """
 Phase 3H.6.8: SRE Reliability Deployment Gating Engine Verification
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     DeploymentGateCriterion,
@@ -101,5 +102,7 @@ class DeploymentGateVerifier(IDeploymentGateVerifier):
             decision=DeploymentGateDecision.APPROVED if all_passed else DeploymentGateDecision.BLOCKED,
             criteria=criteria,
             deployment_allowed=all_passed,
-            rationale="All SLOs satisfied, error budget healthy, burn rate safe, and AI reliability validated." if all_passed else "Deployment blocked due to reliability policy violations.",
+            rationale="All SLOs satisfied, error budget healthy, burn rate safe, and AI reliability validated."
+            if all_passed
+            else "Deployment blocked due to reliability policy violations.",
         )

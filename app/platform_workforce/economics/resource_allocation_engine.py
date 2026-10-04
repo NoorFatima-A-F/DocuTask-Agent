@@ -1,8 +1,10 @@
 """
 10. Economic Resource Allocation Engine Subsystem
 """
+
 from typing import Dict
 from app.platform_workforce.models.schemas import EconomicResourceBudget
+
 
 class EconomicResourceAllocationEngine:
     def __init__(self):
@@ -22,8 +24,8 @@ class EconomicResourceAllocationEngine:
             efficiency_roi_ratio=5.4,
             reallocation_recommendations=[
                 "Shift 200 GPU hours from Overnight Batching to Real-Time Interactive OCR.",
-                "Compress prompt tokens by 15% using schema-distilled semantic encodings."
-            ]
+                "Compress prompt tokens by 15% using schema-distilled semantic encodings.",
+            ],
         )
 
     def get_budget(self, tenant_id: str = "default-tenant") -> EconomicResourceBudget:
@@ -31,11 +33,14 @@ class EconomicResourceAllocationEngine:
             self._seed_default_budget()
         return self._budgets.get(tenant_id, self._budgets["default-tenant"])
 
-    def record_usage(self, gpu_hours: float, tokens: int, cost_usd: float, tenant_id: str = "default-tenant") -> EconomicResourceBudget:
+    def record_usage(
+        self, gpu_hours: float, tokens: int, cost_usd: float, tenant_id: str = "default-tenant"
+    ) -> EconomicResourceBudget:
         budget = self.get_budget(tenant_id)
         budget.used_gpu_hours += gpu_hours
         budget.used_tokens += tokens
         budget.total_spent_usd += cost_usd
         return budget
+
 
 economic_resource_allocation_engine = EconomicResourceAllocationEngine()

@@ -13,7 +13,11 @@ from ..domain.models import CognitiveReadinessScorecard
 class EvidenceGenerator:
     """Exports structured verification evidence, cryptographic checksums, and comprehensive markdown report."""
 
-    def __init__(self, output_dir: str = "cognitive_intelligence_verification_evidence", report_path: str = "docs/phase_V7_cognitive_intelligence_verification_report.md"):
+    def __init__(
+        self,
+        output_dir: str = "cognitive_intelligence_verification_evidence",
+        report_path: str = "docs/phase_V7_cognitive_intelligence_verification_report.md",
+    ):
         self.output_dir = Path(output_dir)
         self.report_path = Path(report_path)
 
@@ -126,16 +130,16 @@ Autonomous Optimization & Scalability (> 340 TPS, 10k+ Hypotheses/sec)
 
 | Pillar Index | Score | Grade | Status |
 | :--- | :---: | :---: | :---: |
-| **Reasoning & Graph Index** | {scorecard.indices.get('reasoning_and_graph_index', 100.0):.1f}% | A+ | PASSED |
-| **Hypothesis & Decision Index** | {scorecard.indices.get('hypothesis_and_decision_index', 100.0):.1f}% | A+ | PASSED |
-| **Simulation & Process Index** | {scorecard.indices.get('simulation_and_process_index', 100.0):.1f}% | A+ | PASSED |
-| **Learning & Experience Index** | {scorecard.indices.get('learning_and_experience_index', 100.0):.1f}% | A+ | PASSED |
-| **Alignment & Strategy Index** | {scorecard.indices.get('alignment_and_strategy_index', 100.0):.1f}% | A+ | PASSED |
-| **Continuous Learning & Optimization Index** | {scorecard.indices.get('continuous_learning_and_optimization_index', 100.0):.1f}% | A+ | PASSED |
-| **Executive & Explainability Index** | {scorecard.indices.get('executive_and_explainability_index', 100.0):.1f}% | A+ | PASSED |
-| **Calibration & Adversarial Index** | {scorecard.indices.get('calibration_and_adversarial_index', 100.0):.1f}% | A+ | PASSED |
-| **Scalability & Benchmarking Index** | {scorecard.indices.get('scalability_and_benchmarking_index', 100.0):.1f}% | A+ | PASSED |
-| **Readiness & Dashboard Index** | {scorecard.indices.get('readiness_and_dashboard_index', 100.0):.1f}% | A+ | PASSED |
+| **Reasoning & Graph Index** | {scorecard.indices.get("reasoning_and_graph_index", 100.0):.1f}% | A+ | PASSED |
+| **Hypothesis & Decision Index** | {scorecard.indices.get("hypothesis_and_decision_index", 100.0):.1f}% | A+ | PASSED |
+| **Simulation & Process Index** | {scorecard.indices.get("simulation_and_process_index", 100.0):.1f}% | A+ | PASSED |
+| **Learning & Experience Index** | {scorecard.indices.get("learning_and_experience_index", 100.0):.1f}% | A+ | PASSED |
+| **Alignment & Strategy Index** | {scorecard.indices.get("alignment_and_strategy_index", 100.0):.1f}% | A+ | PASSED |
+| **Continuous Learning & Optimization Index** | {scorecard.indices.get("continuous_learning_and_optimization_index", 100.0):.1f}% | A+ | PASSED |
+| **Executive & Explainability Index** | {scorecard.indices.get("executive_and_explainability_index", 100.0):.1f}% | A+ | PASSED |
+| **Calibration & Adversarial Index** | {scorecard.indices.get("calibration_and_adversarial_index", 100.0):.1f}% | A+ | PASSED |
+| **Scalability & Benchmarking Index** | {scorecard.indices.get("scalability_and_benchmarking_index", 100.0):.1f}% | A+ | PASSED |
+| **Readiness & Dashboard Index** | {scorecard.indices.get("readiness_and_dashboard_index", 100.0):.1f}% | A+ | PASSED |
 
 ---
 

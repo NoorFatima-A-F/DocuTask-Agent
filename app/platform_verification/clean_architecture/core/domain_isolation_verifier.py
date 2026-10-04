@@ -1,6 +1,7 @@
 """
 Domain Isolation Verifier ensuring domain modules execute without infrastructure.
 """
+
 from __future__ import annotations
 import importlib
 import sys

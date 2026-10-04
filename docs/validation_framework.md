@@ -85,15 +85,9 @@ pytest tests/test_validation_framework.py -v
 Edit `app/validation/datasets.py` and register a new `GoldDatasetItem`:
 ```python
 GoldDatasetItem(
-    metadata=DatasetMetadata(
-        document_id="gold_custom_001",
-        document_type="invoice",
-        page_count=1
-    ),
+    metadata=DatasetMetadata(document_id="gold_custom_001", document_type="invoice", page_count=1),
     ocr_text="Raw OCR text here...",
     ground_truth_json={"invoice_number": "INV-101"},
-    annotations=[
-        FieldAnnotation(field_name="invoice_number", expected_value="INV-101")
-    ]
+    annotations=[FieldAnnotation(field_name="invoice_number", expected_value="INV-101")],
 )
 ```

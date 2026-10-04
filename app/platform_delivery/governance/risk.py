@@ -1,4 +1,5 @@
 """Release Risk Assessment Engine (Req 53)."""
+
 from enum import Enum
 
 

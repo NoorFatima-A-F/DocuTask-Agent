@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Metrics.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.metrics.domain.models import MetricsEntity
+
 
 class MetricsRepositoryInterface(ABC):
     @abstractmethod

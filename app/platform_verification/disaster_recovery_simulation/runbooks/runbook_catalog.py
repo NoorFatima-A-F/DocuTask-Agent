@@ -2,6 +2,7 @@
 Runbook Catalog and Generator for Disaster Recovery Simulation Framework (Part 3G.3).
 Provides executable disaster recovery runbooks: database_failure, storage_failure, complete_outage, rollback, communication.
 """
+
 import os
 from pathlib import Path
 from typing import Dict, Union

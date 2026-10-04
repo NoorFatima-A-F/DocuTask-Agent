@@ -170,7 +170,7 @@ class MetricsEngine:
     def get_summary(self) -> Dict[str, Any]:
         """Calculates derived metrics (success rates, throughput, cost/mission)."""
         metrics = self.registry.get_all_metrics_dict()
-        
+
         # Calculate derived success rates
         executed = metrics.get("nodes_executed_total", 0.0)
         failed = metrics.get("nodes_failed_total", 0.0)

@@ -126,5 +126,7 @@ def safety_guard(
                     return output_decision.sanitized_content
 
             return result
+
         return wrapper
+
     return decorator

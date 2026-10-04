@@ -17,9 +17,7 @@ class NestedWorkflowExecutor:
     def validate_nesting_depth(self, current_depth: int) -> None:
         """Ensures nesting depth does not exceed configured maximum."""
         if current_depth >= self.max_depth:
-            raise WorkflowException(
-                f"Maximum workflow nesting depth exceeded: {current_depth} >= {self.max_depth}"
-            )
+            raise WorkflowException(f"Maximum workflow nesting depth exceeded: {current_depth} >= {self.max_depth}")
 
     async def execute_nested(
         self,

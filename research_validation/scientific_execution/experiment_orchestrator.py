@@ -11,18 +11,13 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-from research_validation.scientific_execution.experiment_manifest import (
-    ExperimentManifest, ExperimentStatus
-)
-from research_validation.scientific_execution.experiment_registry import (
-    ExperimentRegistry
-)
+from research_validation.scientific_execution.experiment_manifest import ExperimentManifest, ExperimentStatus
+from research_validation.scientific_execution.experiment_registry import ExperimentRegistry
 from research_validation.scientific_execution.experiment_dependency_graph import (
-    ExperimentDependencyGraph, PipelineStageType
+    ExperimentDependencyGraph,
+    PipelineStageType,
 )
-from research_validation.scientific_execution.experiment_runner import (
-    ScientificExperimentRunner, ExperimentRunResult
-)
+from research_validation.scientific_execution.experiment_runner import ScientificExperimentRunner, ExperimentRunResult
 from research_validation.provenance.evidence_graph import EvidenceGraph
 from research_validation.provenance.provenance_models import LineageStage
 
@@ -151,6 +146,10 @@ class ScientificExperimentOrchestrator:
         dag.add_node("benchmark", PipelineStageType.BENCHMARK, "Model Evaluation Loop", ["preprocessing"])
         dag.add_node("aggregation", PipelineStageType.AGGREGATION, "Statistical Metrics Aggregation", ["benchmark"])
         dag.add_node("visualization", PipelineStageType.VISUALIZATION, "Charts & Plots Synthesis", ["aggregation"])
-        dag.add_node("publication_figure", PipelineStageType.PUBLICATION_FIGURE, "Figure Vectorization", ["visualization"])
-        dag.add_node("research_report", PipelineStageType.RESEARCH_REPORT, "Final Research Report", ["publication_figure"])
+        dag.add_node(
+            "publication_figure", PipelineStageType.PUBLICATION_FIGURE, "Figure Vectorization", ["visualization"]
+        )
+        dag.add_node(
+            "research_report", PipelineStageType.RESEARCH_REPORT, "Final Research Report", ["publication_figure"]
+        )
         return dag

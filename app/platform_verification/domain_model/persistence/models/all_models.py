@@ -1,10 +1,9 @@
 """
 SQLAlchemy 2.0 Declarative Persistence Models for Verification Platform.
 """
+
 from typing import Any, Dict, List, Optional
-from sqlalchemy import (
-    String, Integer, Float, Boolean, ForeignKey, Text, JSON
-)
+from sqlalchemy import String, Integer, Float, Boolean, ForeignKey, Text, JSON
 from sqlalchemy.orm import Mapped, mapped_column
 from app.platform_verification.domain_model.persistence.database import VerificationBase
 
@@ -35,7 +34,9 @@ class DBVerificationPlan(VerificationBase):
     __tablename__ = "vp_verification_plans"
 
     plan_id: Mapped[str] = mapped_column(String(64), primary_key=True, index=True)
-    definition_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_verification_definitions.definition_id"), index=True)
+    definition_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_verification_definitions.definition_id"), index=True
+    )
     tenant_id: Mapped[str] = mapped_column(String(64), index=True, default="default-tenant")
     version: Mapped[str] = mapped_column(String(32), default="1.0.0")
     execution_strategy: Mapped[str] = mapped_column(String(64))
@@ -109,11 +110,19 @@ class DBVerificationExecution(VerificationBase):
 
     execution_id: Mapped[str] = mapped_column(String(64), primary_key=True, index=True)
     tenant_id: Mapped[str] = mapped_column(String(64), index=True, default="default-tenant")
-    verification_definition_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_verification_definitions.definition_id"), index=True)
+    verification_definition_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_verification_definitions.definition_id"), index=True
+    )
     plan_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_verification_plans.plan_id"), index=True)
-    dataset_version_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_dataset_versions.dataset_version_id"), index=True)
-    environment_snapshot_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_environment_snapshots.snapshot_id"), index=True)
-    configuration_snapshot_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_configuration_snapshots.snapshot_id"), index=True)
+    dataset_version_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_dataset_versions.dataset_version_id"), index=True
+    )
+    environment_snapshot_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_environment_snapshots.snapshot_id"), index=True
+    )
+    configuration_snapshot_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_configuration_snapshots.snapshot_id"), index=True
+    )
     status: Mapped[str] = mapped_column(String(32), default="CREATED", index=True)
     started_at: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)
     completed_at: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)
@@ -126,7 +135,9 @@ class DBEvidenceArtifact(VerificationBase):
     __tablename__ = "vp_evidence_artifacts"
 
     evidence_id: Mapped[str] = mapped_column(String(64), primary_key=True, index=True)
-    execution_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_verification_executions.execution_id"), index=True)
+    execution_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_verification_executions.execution_id"), index=True
+    )
     evidence_type: Mapped[str] = mapped_column(String(64), index=True)
     storage_location: Mapped[str] = mapped_column(String(512))
     content_hash_sha256: Mapped[str] = mapped_column(String(64), index=True)
@@ -140,7 +151,9 @@ class DBMetricResult(VerificationBase):
     __tablename__ = "vp_metric_results"
 
     result_id: Mapped[str] = mapped_column(String(64), primary_key=True, index=True)
-    execution_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_verification_executions.execution_id"), index=True)
+    execution_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_verification_executions.execution_id"), index=True
+    )
     metric_id: Mapped[str] = mapped_column(String(64), index=True)
     metric_name: Mapped[str] = mapped_column(String(128), index=True)
     category: Mapped[str] = mapped_column(String(64), index=True)
@@ -155,7 +168,9 @@ class DBQualityDecision(VerificationBase):
     __tablename__ = "vp_quality_decisions"
 
     decision_id: Mapped[str] = mapped_column(String(64), primary_key=True, index=True)
-    execution_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_verification_executions.execution_id"), index=True)
+    execution_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_verification_executions.execution_id"), index=True
+    )
     gate_id: Mapped[str] = mapped_column(String(64), index=True)
     gate_name: Mapped[str] = mapped_column(String(128))
     outcome: Mapped[str] = mapped_column(String(32), index=True)
@@ -170,8 +185,12 @@ class DBCertification(VerificationBase):
     __tablename__ = "vp_certifications"
 
     certification_id: Mapped[str] = mapped_column(String(64), primary_key=True, index=True)
-    execution_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_verification_executions.execution_id"), index=True)
-    verification_definition_id: Mapped[str] = mapped_column(String(64), ForeignKey("vp_verification_definitions.definition_id"), index=True)
+    execution_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_verification_executions.execution_id"), index=True
+    )
+    verification_definition_id: Mapped[str] = mapped_column(
+        String(64), ForeignKey("vp_verification_definitions.definition_id"), index=True
+    )
     level: Mapped[str] = mapped_column(String(64), index=True)
     composite_quality_score: Mapped[float] = mapped_column(Float)
     evidence_bundle_hash: Mapped[str] = mapped_column(String(64), index=True)

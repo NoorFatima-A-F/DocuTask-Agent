@@ -63,8 +63,16 @@ class GrafanaDashboardBuilder(IGrafanaDashboardBuilder):
             category="Infrastructure",
             refresh_rate="15s",
             panels=[
-                GrafanaPanel("Node CPU Utilization (%)", "timeseries", "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)"),
-                GrafanaPanel("Node Memory Utilization (%)", "timeseries", "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100"),
+                GrafanaPanel(
+                    "Node CPU Utilization (%)",
+                    "timeseries",
+                    "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)",
+                ),
+                GrafanaPanel(
+                    "Node Memory Utilization (%)",
+                    "timeseries",
+                    "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
+                ),
                 GrafanaPanel("Storage Volume Disk Usage (%)", "gauge", "storage_disk_utilization_pct"),
                 GrafanaPanel("Storage IOPS Rate", "timeseries", "storage_read_write_iops"),
                 GrafanaPanel("Container Restart Counts", "table", "sum by (container) (container_restarts_total)"),
@@ -79,9 +87,15 @@ class GrafanaDashboardBuilder(IGrafanaDashboardBuilder):
             refresh_rate="5s",
             panels=[
                 GrafanaPanel("Active Outage & Alert Count", "stat", "count(ALERTS{alertstate='firing'})"),
-                GrafanaPanel("Degraded Service Inventory", "table", "service_health_status == 0 or service_ready_status == 0"),
+                GrafanaPanel(
+                    "Degraded Service Inventory", "table", "service_health_status == 0 or service_ready_status == 0"
+                ),
                 GrafanaPanel("Dead Letter Queue (DLQ) Spillage", "timeseries", "redis_failed_jobs_total"),
-                GrafanaPanel("Recovery Progress & Healing Status", "stat", "sum(service_ready_status) / count(service_ready_status) * 100"),
+                GrafanaPanel(
+                    "Recovery Progress & Healing Status",
+                    "stat",
+                    "sum(service_ready_status) / count(service_ready_status) * 100",
+                ),
             ],
             valid=True,
         ),

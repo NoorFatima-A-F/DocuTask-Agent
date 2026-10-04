@@ -14,7 +14,7 @@ class AINetworkFailureVerifier(INetworkFailureVerifier):
 
         for i in range(fault_count):
             ft = fault_types[i % len(fault_types)]
-            req = {"document_id": f"DOC-NET-{i+1:04d}", "provider": "gemini-2.5-flash"}
+            req = {"document_id": f"DOC-NET-{i + 1:04d}", "provider": "gemini-2.5-flash"}
             res = NetworkFailureScenario.execute(req, fault_type=ft)
 
             if not res["success"] and res["retryable"]:

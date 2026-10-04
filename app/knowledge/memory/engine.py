@@ -17,18 +17,20 @@ logger = logging.getLogger(__name__)
 
 class MemoryTier(str, Enum):
     """Eight distinct enterprise memory storage tiers."""
-    WORKING = "WORKING"            # In-flight task memory
-    SHORT_TERM = "SHORT_TERM"      # Session context
-    EPISODIC = "EPISODIC"          # Past executions and run events
-    SEMANTIC = "SEMANTIC"          # Distilled domain concepts
-    PROCEDURAL = "PROCEDURAL"      # Playbooks, recipes, execution patterns
+
+    WORKING = "WORKING"  # In-flight task memory
+    SHORT_TERM = "SHORT_TERM"  # Session context
+    EPISODIC = "EPISODIC"  # Past executions and run events
+    SEMANTIC = "SEMANTIC"  # Distilled domain concepts
+    PROCEDURAL = "PROCEDURAL"  # Playbooks, recipes, execution patterns
     ORGANIZATION = "ORGANIZATION"  # Company policies and workspace rules
-    WORKFLOW = "WORKFLOW"          # Workflow execution state
-    AGENT = "AGENT"                # Agent identity and past decisions
+    WORKFLOW = "WORKFLOW"  # Workflow execution state
+    AGENT = "AGENT"  # Agent identity and past decisions
 
 
 class MemoryItem(BaseModel):
     """Atomic memory unit stored within a memory tier."""
+
     id: str
     tier: MemoryTier
     key: str

@@ -1,10 +1,13 @@
 """
 Phase 3H.9: Operational Intelligence Verification FastAPI Endpoints
 """
+
 from fastapi import APIRouter, Query
 from typing import Dict, Any
 
-from app.platform_verification.operational_intelligence.runtime.operational_intelligence_runtime import OperationalIntelligenceRuntime
+from app.platform_verification.operational_intelligence.runtime.operational_intelligence_runtime import (
+    OperationalIntelligenceRuntime,
+)
 
 router = APIRouter(
     prefix="/api/v1/platform-verification/operational-intelligence",
@@ -15,7 +18,9 @@ _runtime = OperationalIntelligenceRuntime()
 
 
 @router.post("/verify", summary="Execute Full Operational Intelligence Verification")
-async def run_intelligence_verification(export_evidence: bool = Query(True, description="Whether to export verification reports to disk")) -> Dict[str, Any]:
+async def run_intelligence_verification(
+    export_evidence: bool = Query(True, description="Whether to export verification reports to disk"),
+) -> Dict[str, Any]:
     result = _runtime.run_full_verification(export_evidence=export_evidence)
     return {
         "status": "SUCCESS",

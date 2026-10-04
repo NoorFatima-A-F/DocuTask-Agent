@@ -300,7 +300,11 @@ async def get_replay_audit_package(mission_id: str) -> Dict[str, Any]:
         "audit_package": pkg.model_dump(),
         "compliance_summary": compliance,
         "audit_records": events,
-        "verification_report": {"is_valid": True, "hash_chain_valid": True, "merkle_root": "sha256:7fa189c4de910bca0012e88a"},
+        "verification_report": {
+            "is_valid": True,
+            "hash_chain_valid": True,
+            "merkle_root": "sha256:7fa189c4de910bca0012e88a",
+        },
     }
 
 
@@ -328,7 +332,11 @@ async def verify_replay_mission(mission_id: str) -> Dict[str, Any]:
 async def export_replay_mission(mission_id: str, format: str = Query("json")):
     if format == "csv":
         csv_data = "event_id,event_type,timestamp\nevt_001,mission.started,2026-09-12T00:00:01Z\n"
-        return Response(content=csv_data, media_type="text/csv", headers={"Content-Disposition": f"attachment; filename=replay_{mission_id}.csv"})
+        return Response(
+            content=csv_data,
+            media_type="text/csv",
+            headers={"Content-Disposition": f"attachment; filename=replay_{mission_id}.csv"},
+        )
     return {
         "status": "SUCCESS",
         "mission_id": mission_id,
@@ -349,11 +357,15 @@ async def get_replay_forensics(mission_id: str, fault_event_id: Optional[str] = 
 
 
 @router.get("/{mission_id}/diff")
-async def get_replay_diff(mission_id: str, compare_to: Optional[str] = Query("mission_resilience_probe_042")) -> Dict[str, Any]:
+async def get_replay_diff(
+    mission_id: str, compare_to: Optional[str] = Query("mission_resilience_probe_042")
+) -> Dict[str, Any]:
     """Computes deterministic diff between two missions."""
     ref_events = _get_demo_events(mission_id)
     comp_events = _get_demo_events(compare_to or "mission_resilience_probe_042")
-    diff = TimelineDiffEngine.compute_diff(mission_id, compare_to or "mission_resilience_probe_042", ref_events, comp_events)
+    diff = TimelineDiffEngine.compute_diff(
+        mission_id, compare_to or "mission_resilience_probe_042", ref_events, comp_events
+    )
     return {
         "status": "SUCCESS",
         "diff": diff.model_dump(),

@@ -3,6 +3,7 @@ Database Readiness Checker (Part 3H.3.2.3).
 Verifies PostgreSQL connectivity, authentication, transaction execution (BEGIN; SELECT 1; COMMIT;),
 schema migration version compatibility, and connection pool health metrics.
 """
+
 import time
 from typing import Optional
 from app.platform_verification.readiness_engine.domain.models import (
@@ -40,7 +41,7 @@ class DatabaseReadinessChecker:
         # Simulate transaction execution: BEGIN; SELECT 1; COMMIT;
         transaction_supported = connected and authenticated
         current_schema = self.required_schema_version
-        schema_compatible = (current_schema == self.required_schema_version)
+        schema_compatible = current_schema == self.required_schema_version
 
         # Connection pool stats
         active = 5 if not pool_exhausted else 50

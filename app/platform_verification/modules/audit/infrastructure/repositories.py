@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Audit.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.audit.domain.models import AuditEntity
 from app.platform_verification.modules.audit.domain.interfaces import AuditRepositoryInterface
+
 
 class InMemoryAuditRepository(AuditRepositoryInterface):
     def __init__(self):

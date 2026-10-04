@@ -18,7 +18,7 @@ class CoordinationManager:
         registry: Optional[AgentRegistry] = None,
         lease_manager: Optional[LeaseManager] = None,
         presence_manager: Optional[PresenceManager] = None,
-        team_repository: Optional[TeamRepository] = None
+        team_repository: Optional[TeamRepository] = None,
     ):
         self.registry = registry or AgentRegistry()
         self.lease_manager = lease_manager or LeaseManager()

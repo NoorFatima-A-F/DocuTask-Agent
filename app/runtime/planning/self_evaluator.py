@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 
 class ExpectedVsActual(BaseModel):
     """Side-by-side comparison of planner predictions vs observed execution telemetry."""
+
     predicted_latency_ms: float
     actual_latency_ms: float
     latency_delta_ms: float
@@ -34,6 +35,7 @@ class ExpectedVsActual(BaseModel):
 
 class PlanCalibrationMetric(BaseModel):
     """Aggregate model calibration scores and feedback adjustments."""
+
     calibration_id: str = Field(default_factory=lambda: f"calib_{uuid.uuid4().hex[:8]}")
     mission_id: str
     strategy_id: str

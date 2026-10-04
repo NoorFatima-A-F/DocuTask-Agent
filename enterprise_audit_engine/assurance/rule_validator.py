@@ -14,6 +14,7 @@ from enterprise_audit_engine.analyzers.verification_strength_model import Verifi
 
 class RuleExecutionEvidence:
     """Proof of rule engine invariant testing."""
+
     def __init__(self, rule_name: str, passed: bool, input_summary: str, expected: str, actual: str):
         self.rule_name = rule_name
         self.passed = passed
@@ -33,6 +34,7 @@ class RuleExecutionEvidence:
 
 class RuleValidationResult(BaseModel):
     """Result of invariant validation testing."""
+
     is_valid: bool = True
     rules_checked_count: int = 0
     violations: List[str] = Field(default_factory=list)
@@ -44,7 +46,9 @@ class IndependentRuleValidator:
     TIER_RANK = {"DEVELOPMENT": 1, "COMMERCIAL": 2, "ENTERPRISE": 3}
 
     @classmethod
-    def _create_record(cls, eid: str, cat: str, src: EvidenceSourceType, cls_type: EvidenceClassification, conf: EvidenceConfidence) -> EvidenceRecord:
+    def _create_record(
+        cls, eid: str, cat: str, src: EvidenceSourceType, cls_type: EvidenceClassification, conf: EvidenceConfidence
+    ) -> EvidenceRecord:
         rec = EvidenceRecord(
             id=eid,
             collector="RuleTestCollector",
@@ -63,59 +67,76 @@ class IndependentRuleValidator:
 
         # Invariant 1: Configuration only MUST NOT be VERIFIED
         cfg_record = cls._create_record(
-            "EV-R1", "Database", EvidenceSourceType.CONFIGURATION_FILE,
-            EvidenceClassification.CONFIGURATION_PRESENT, EvidenceConfidence.LOW,
+            "EV-R1",
+            "Database",
+            EvidenceSourceType.CONFIGURATION_FILE,
+            EvidenceClassification.CONFIGURATION_PRESENT,
+            EvidenceConfidence.LOW,
         )
         sc1 = VerificationStrengthModel.evaluate_subsystem("Database", [cfg_record])
-        inv1_passed = (sc1.classification != EvidenceClassification.VERIFIED)
-        evidence_list.append(RuleExecutionEvidence(
-            rule_name="INVARIANT_CONFIG_ONLY_NOT_VERIFIED",
-            passed=inv1_passed,
-            input_summary="Only CONFIGURATION_FILE evidence present",
-            expected="NOT VERIFIED / CONFIGURATION_PRESENT",
-            actual=sc1.classification.value,
-        ))
+        inv1_passed = sc1.classification != EvidenceClassification.VERIFIED
+        evidence_list.append(
+            RuleExecutionEvidence(
+                rule_name="INVARIANT_CONFIG_ONLY_NOT_VERIFIED",
+                passed=inv1_passed,
+                input_summary="Only CONFIGURATION_FILE evidence present",
+                expected="NOT VERIFIED / CONFIGURATION_PRESENT",
+                actual=sc1.classification.value,
+            )
+        )
 
         # Invariant 2: Static code only cannot claim VERIFIED_BY_EXECUTION
         stat_record = cls._create_record(
-            "EV-R2", "Security", EvidenceSourceType.STATIC_SOURCE_CODE,
-            EvidenceClassification.VERIFIED_BY_STATIC_ANALYSIS, EvidenceConfidence.MEDIUM,
+            "EV-R2",
+            "Security",
+            EvidenceSourceType.STATIC_SOURCE_CODE,
+            EvidenceClassification.VERIFIED_BY_STATIC_ANALYSIS,
+            EvidenceConfidence.MEDIUM,
         )
         sc2 = VerificationStrengthModel.evaluate_subsystem("Security", [stat_record])
-        inv2_passed = (sc2.classification != EvidenceClassification.VERIFIED_BY_EXECUTION)
-        evidence_list.append(RuleExecutionEvidence(
-            rule_name="INVARIANT_STATIC_CANNOT_CLAIM_EXECUTION",
-            passed=inv2_passed,
-            input_summary="Only STATIC_SOURCE_CODE evidence present",
-            expected="NOT VERIFIED_BY_EXECUTION",
-            actual=sc2.classification.value,
-        ))
+        inv2_passed = sc2.classification != EvidenceClassification.VERIFIED_BY_EXECUTION
+        evidence_list.append(
+            RuleExecutionEvidence(
+                rule_name="INVARIANT_STATIC_CANNOT_CLAIM_EXECUTION",
+                passed=inv2_passed,
+                input_summary="Only STATIC_SOURCE_CODE evidence present",
+                expected="NOT VERIFIED_BY_EXECUTION",
+                actual=sc2.classification.value,
+            )
+        )
 
         # Invariant 3: Empty evidence pool MUST be EVIDENCE_INSUFFICIENT
         sc3_cls = ConfidenceEngine.classify_subsystem([])
-        inv3_passed = (sc3_cls in {EvidenceClassification.EVIDENCE_INSUFFICIENT, EvidenceClassification.UNKNOWN})
-        evidence_list.append(RuleExecutionEvidence(
-            rule_name="INVARIANT_EMPTY_EVIDENCE_IS_INSUFFICIENT",
-            passed=inv3_passed,
-            input_summary="Empty evidence list",
-            expected="EVIDENCE_INSUFFICIENT",
-            actual=sc3_cls.value,
-        ))
+        inv3_passed = sc3_cls in {EvidenceClassification.EVIDENCE_INSUFFICIENT, EvidenceClassification.UNKNOWN}
+        evidence_list.append(
+            RuleExecutionEvidence(
+                rule_name="INVARIANT_EMPTY_EVIDENCE_IS_INSUFFICIENT",
+                passed=inv3_passed,
+                input_summary="Empty evidence list",
+                expected="EVIDENCE_INSUFFICIENT",
+                actual=sc3_cls.value,
+            )
+        )
 
         # Invariant 4: Critical finding dominates classification
         crit_record = cls._create_record(
-            "EV-R4", "Database", EvidenceSourceType.RUNTIME_EXECUTION,
-            EvidenceClassification.CRITICAL_FINDING, EvidenceConfidence.LOW,
+            "EV-R4",
+            "Database",
+            EvidenceSourceType.RUNTIME_EXECUTION,
+            EvidenceClassification.CRITICAL_FINDING,
+            EvidenceConfidence.LOW,
         )
         sc4_cls = ConfidenceEngine.classify_subsystem([crit_record])
-        inv4_passed = (sc4_cls == EvidenceClassification.CRITICAL_FINDING)
-        evidence_list.append(RuleExecutionEvidence(
-            rule_name="INVARIANT_CRITICAL_FINDING_DOMINANCE",
-            passed=inv4_passed,
-            input_summary="Contains CRITICAL_FINDING record",
-            expected="CRITICAL_FINDING",
-            actual=sc4_cls.value,
-        ))
+        inv4_passed = sc4_cls == EvidenceClassification.CRITICAL_FINDING
+        evidence_list.append(
+            RuleExecutionEvidence(
+                rule_name="INVARIANT_CRITICAL_FINDING_DOMINANCE",
+                passed=inv4_passed,
+                input_summary="Contains CRITICAL_FINDING record",
+                expected="CRITICAL_FINDING",
+                actual=sc4_cls.value,
+            )
+        )
 
         all_passed = all(e.passed for e in evidence_list)
         return {

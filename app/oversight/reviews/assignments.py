@@ -10,6 +10,7 @@ from .requests import ReviewRequest
 
 class ReviewerAuthority(BaseModel):
     """Authority matrix determining what a reviewer is permitted to approve or override."""
+
     max_financial_limit: float = 10000.0
     authorized_risk_levels: List[str] = Field(default_factory=lambda: ["LOW", "MEDIUM"])
     authorized_roles: List[str] = Field(default_factory=lambda: ["reviewer"])
@@ -20,6 +21,7 @@ class ReviewerAuthority(BaseModel):
 
 class Reviewer(BaseModel):
     """Reviewer profile with skillset, department, and active queue telemetry."""
+
     user_id: str
     name: str
     email: str
@@ -69,7 +71,10 @@ class ReviewerAssignmentEngine:
 
         # 3. Risk level check
         impact_level = context.business_impact.upper()
-        if impact_level not in reviewer.authority.authorized_risk_levels and "CRITICAL" not in reviewer.authority.authorized_risk_levels:
+        if (
+            impact_level not in reviewer.authority.authorized_risk_levels
+            and "CRITICAL" not in reviewer.authority.authorized_risk_levels
+        ):
             if context.risk_score > 0.8 and "HIGH" not in reviewer.authority.authorized_risk_levels:
                 return (
                     False,
@@ -132,6 +137,4 @@ class ReviewerAssignmentEngine:
     def release_reviewer(self, user_id: str) -> None:
         """Decrements the active review count when a review is resolved or cancelled."""
         if user_id in self._reviewers:
-            self._reviewers[user_id].active_reviews_count = max(
-                0, self._reviewers[user_id].active_reviews_count - 1
-            )
+            self._reviewers[user_id].active_reviews_count = max(0, self._reviewers[user_id].active_reviews_count - 1)

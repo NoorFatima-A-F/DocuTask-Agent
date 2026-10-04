@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class CapabilityGraph(BaseModel):
     """Directed acyclic graph tracking prerequisites and composability between capabilities."""
+
     nodes: Set[str] = Field(default_factory=set)
     prerequisites: Dict[str, List[str]] = Field(default_factory=dict)
 

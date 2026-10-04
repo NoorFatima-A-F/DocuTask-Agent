@@ -3,6 +3,7 @@ Master Database Backup & Recovery Platform Runtime (Part 3G.2B Advanced).
 Orchestrates all 17 verification phases, enforces CI/CD quality gates,
 and produces the Enterprise Platinum Database Recovery Scorecard.
 """
+
 import time
 from typing import Dict, Any, Optional
 
@@ -176,7 +177,11 @@ class DatabaseBackupVerificationRuntime:
 
         # Compute Category Scores for Quality Scoring Model:
         # 1. Recoverability (25%): Logical, Physical, PITR, Restore Orchestrator
-        rec_score = 100.0 if (logical_report.passed and physical_report.passed and pitr_report.passed and restore_report.passed) else 75.0
+        rec_score = (
+            100.0
+            if (logical_report.passed and physical_report.passed and pitr_report.passed and restore_report.passed)
+            else 75.0
+        )
 
         # 2. Consistency (20%): ACID transaction boundaries + Coverage 100%
         cons_score = 100.0 if (tx_consistency_report.passed and coverage.passed) else 70.0

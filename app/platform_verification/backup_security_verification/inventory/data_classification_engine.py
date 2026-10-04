@@ -1,6 +1,7 @@
 """
 Data Classification Engine for Backup Security Verification Framework (Part 3G.2F).
 """
+
 from typing import List
 
 from app.platform_verification.backup_security_verification.domain.models import (
@@ -24,32 +25,42 @@ class DataClassificationEngine(IDataClassificationEngine):
         (
             "Public Documentation & Guides",
             DataClassificationLevel.PUBLIC,
-            True, False, True, True,
+            True,
+            False,
+            True,
+            True,
             ["docs/architecture.pdf", "specs/api_swagger.json"],
         ),
         (
             "Operational Telemetry & Logs",
             DataClassificationLevel.INTERNAL,
-            True, True, True, True,
+            True,
+            True,
+            True,
+            True,
             ["logs/telemetry_archive.json", "metrics/prometheus_snap.bin"],
         ),
         (
             "Customer Documents & Database Records",
             DataClassificationLevel.CONFIDENTIAL,
-            True, True, True, True,
+            True,
+            True,
+            True,
+            True,
             ["postgres/full_20260315.dump", "documents/invoices_bundle.tar", "ocr/ai_results.json"],
         ),
         (
             "Cryptographic Keys, Passwords & Certificates",
             DataClassificationLevel.HIGHLY_SENSITIVE,
-            True, True, True, True,
+            True,
+            True,
+            True,
+            True,
             ["secrets/sealed_tokens.enc", "kms/master_kek.wrapped", "pki/ca_private.key"],
         ),
     ]
 
-    def verify_data_classification_controls(
-        self, inventory: BackupSecurityInventoryReport
-    ) -> DataClassificationReport:
+    def verify_data_classification_controls(self, inventory: BackupSecurityInventoryReport) -> DataClassificationReport:
         """
         Audits all data sensitivity classifications and confirms policy enforcement.
         """
@@ -67,9 +78,17 @@ class DataClassificationEngine(IDataClassificationEngine):
                 )
             )
 
-        sensitive_items = [i for i in items if i.classification_level in (DataClassificationLevel.CONFIDENTIAL, DataClassificationLevel.HIGHLY_SENSITIVE)]
+        sensitive_items = [
+            i
+            for i in items
+            if i.classification_level
+            in (DataClassificationLevel.CONFIDENTIAL, DataClassificationLevel.HIGHLY_SENSITIVE)
+        ]
         all_sensitive_protected = all(
-            i.encryption_enforced and i.restricted_access_enforced and i.audit_logging_enforced and i.retention_control_enforced
+            i.encryption_enforced
+            and i.restricted_access_enforced
+            and i.audit_logging_enforced
+            and i.retention_control_enforced
             for i in sensitive_items
         )
 

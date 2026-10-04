@@ -20,6 +20,7 @@ logger = logging.getLogger("infrastructure.health.aggregator")
 
 class SystemHealthMatrix(BaseModel):
     """Platform-wide aggregated health status."""
+
     total_components: int
     healthy_count: int
     degraded_count: int

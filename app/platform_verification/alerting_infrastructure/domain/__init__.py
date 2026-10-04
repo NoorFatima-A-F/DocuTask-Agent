@@ -1,6 +1,7 @@
 """
 Domain package for Phase 3I.5 Alerting and Incident Detection Verification
 """
+
 from .models import (
     IncidentSeverity,
     AlertTriggerState,

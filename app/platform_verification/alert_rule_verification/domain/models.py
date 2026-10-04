@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 
 class AlertLifecycleState(str, Enum):
     """Alert lifecycle transition states."""
+
     NORMAL = "NORMAL"
     PENDING = "PENDING"
     FIRING = "FIRING"
@@ -21,6 +22,7 @@ class AlertLifecycleState(str, Enum):
 
 class AlertCategory(str, Enum):
     """5-Category enterprise alert taxonomy."""
+
     AVAILABILITY = "AVAILABILITY"
     PERFORMANCE = "PERFORMANCE"
     CAPACITY = "CAPACITY"
@@ -30,6 +32,7 @@ class AlertCategory(str, Enum):
 
 class AlertSeverity(str, Enum):
     """Alert severity tiers."""
+
     CRITICAL = "CRITICAL"
     HIGH = "HIGH"
     WARNING = "WARNING"
@@ -38,10 +41,11 @@ class AlertSeverity(str, Enum):
 
 class AlertCertificationTier(str, Enum):
     """Certification tiers for alert intelligence readiness (3H.4.5.14)."""
+
     ENTERPRISE_ALERTING_CERTIFIED = "Enterprise Alerting Certified"  # 95 - 100%
-    PRODUCTION_ALERTING_READY = "Production Alerting Ready"          # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                  # 80 - 89.99%
-    FAILED = "Failed"                                              # < 80%
+    PRODUCTION_ALERTING_READY = "Production Alerting Ready"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 # ---------------------------------------------------------------------------
@@ -50,6 +54,7 @@ class AlertCertificationTier(str, Enum):
 @dataclass
 class AlertRuleSpec:
     """Specification of an evaluated Prometheus alert rule."""
+
     alert_name: str
     expr: str
     for_duration_seconds: int
@@ -69,6 +74,7 @@ class AlertRuleSpec:
 @dataclass
 class ArchitectureReport:
     """Results of alert architecture and lifecycle verification."""
+
     alert_system: str = "Prometheus AlertManager"
     rules_defined_count: int = 8
     severity_levels_count: int = 4
@@ -85,6 +91,7 @@ class ArchitectureReport:
 @dataclass
 class TaxonomyReport:
     """Results of alert categorization across 5 enterprise domains."""
+
     total_categories: int = 5
     categories_covered: List[str] = field(
         default_factory=lambda: ["AVAILABILITY", "PERFORMANCE", "CAPACITY", "DEPENDENCY", "SECURITY"]
@@ -108,6 +115,7 @@ class TaxonomyReport:
 @dataclass
 class CriticalAlertReport:
     """Validation of high-impact business critical failure rules."""
+
     critical_rules_count: int = 4
     database_failure_rule_verified: bool = True
     api_service_down_rule_verified: bool = True
@@ -123,6 +131,7 @@ class CriticalAlertReport:
 @dataclass
 class WarningAlertReport:
     """Validation of early degradation warning rules."""
+
     warning_rules_count: int = 3
     high_latency_warning_verified: bool = True
     queue_growth_warning_verified: bool = True
@@ -138,6 +147,7 @@ class WarningAlertReport:
 @dataclass
 class ConditionTransitionResult:
     """Result of simulating false -> true -> recovered state transitions."""
+
     alert_name: str
     condition_false_state: AlertLifecycleState = AlertLifecycleState.NORMAL
     condition_true_state: AlertLifecycleState = AlertLifecycleState.FIRING
@@ -148,6 +158,7 @@ class ConditionTransitionResult:
 @dataclass
 class ConditionTestReport:
     """Aggregate report on alert condition lifecycle simulation."""
+
     rules_tested_count: int = 8
     transition_results: List[ConditionTransitionResult] = field(default_factory=list)
     lifecycle_accuracy_score: float = 100.0
@@ -160,6 +171,7 @@ class ConditionTestReport:
 @dataclass
 class SeverityReport:
     """Validation of severity alignment to business impact."""
+
     total_severities: int = 4
     critical_count: int = 4
     high_count: int = 1
@@ -175,6 +187,7 @@ class SeverityReport:
 @dataclass
 class MessageQualityReport:
     """Audit of alert message actionable components."""
+
     total_messages_audited: int = 8
     all_have_summary: bool = True
     all_have_description: bool = True
@@ -191,9 +204,8 @@ class MessageQualityReport:
 @dataclass
 class RoutingReport:
     """Audit of alert destination routing and multi-channel delivery."""
-    routing_channels_configured: List[str] = field(
-        default_factory=lambda: ["PagerDuty", "Slack", "Email", "Webhook"]
-    )
+
+    routing_channels_configured: List[str] = field(default_factory=lambda: ["PagerDuty", "Slack", "Email", "Webhook"])
     team_routes_verified: Dict[str, str] = field(
         default_factory=lambda: {
             "database-infra": "PagerDuty (#oncall-db)",
@@ -214,6 +226,7 @@ class RoutingReport:
 @dataclass
 class FatigueReport:
     """Audit of deduplication, alert grouping, and inhibition policies."""
+
     deduplication_enabled: bool = True
     inhibition_rules_active: bool = True
     cascade_grouping_verified: bool = True
@@ -228,6 +241,7 @@ class FatigueReport:
 @dataclass
 class FailureInjectionResult:
     """Individual failure injection test scenario."""
+
     injected_failure: str
     expected_alert: str
     alert_fired: bool
@@ -238,6 +252,7 @@ class FailureInjectionResult:
 @dataclass
 class FailureTestReport:
     """Aggregate report on chaos and failure injection tests."""
+
     total_scenarios_tested: int = 5
     scenarios: List[FailureInjectionResult] = field(default_factory=list)
     all_scenarios_passed: bool = True
@@ -250,10 +265,11 @@ class FailureTestReport:
 @dataclass
 class PerformanceReport:
     """Operational latency and precision/recall metrics."""
-    mttd_seconds: float = 4.2       # Mean Time to Detect (< 30s)
-    mttr_seconds: float = 28.5      # Mean Time to Recover
+
+    mttd_seconds: float = 4.2  # Mean Time to Detect (< 30s)
+    mttr_seconds: float = 28.5  # Mean Time to Recover
     alert_precision_ratio: float = 0.99  # 99% true alerts
-    alert_recall_ratio: float = 1.00     # 100% actual failures detected
+    alert_recall_ratio: float = 1.00  # 100% actual failures detected
     performance_score: float = 100.0
     status: str = "PASS"
 
@@ -264,12 +280,13 @@ class PerformanceReport:
 @dataclass
 class AlertQualityScorecard:
     """6-Category Weighted Alert Quality Scorecard."""
-    detection_accuracy_score: float = 100.0   # Weight: 25%
-    severity_correctness_score: float = 100.0 # Weight: 20%
-    message_quality_score: float = 100.0      # Weight: 15%
+
+    detection_accuracy_score: float = 100.0  # Weight: 25%
+    severity_correctness_score: float = 100.0  # Weight: 20%
+    message_quality_score: float = 100.0  # Weight: 15%
     routing_correctness_score: float = 100.0  # Weight: 15%
-    noise_reduction_score: float = 100.0      # Weight: 15%
-    performance_score: float = 100.0          # Weight: 10%
+    noise_reduction_score: float = 100.0  # Weight: 15%
+    performance_score: float = 100.0  # Weight: 10%
     overall_score: float = 100.0
     certification_tier: AlertCertificationTier = AlertCertificationTier.ENTERPRISE_ALERTING_CERTIFIED
     certification_verdict: str = "CERTIFIED"

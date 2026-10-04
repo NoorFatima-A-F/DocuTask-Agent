@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class PlanningTask(BaseModel):
     """Atomic executable task unit within a plan graph."""
+
     task_id: str
     name: str
     task_type: str = Field(default="STANDARD")

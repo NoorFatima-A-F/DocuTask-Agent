@@ -2,6 +2,7 @@
 Phase 3I.7.11: Telemetry Leakage Incident Response & Containment Verifier
 Verifies automated telemetry leakage detection, alerting, access restriction, isolation, purging, and RCA workflows.
 """
+
 from typing import List
 from ..domain.interfaces import IIncidentResponseVerifier
 from ..domain.models import IncidentResponseStepSpec, TelemetryIncidentResponseReport

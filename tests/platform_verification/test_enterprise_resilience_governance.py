@@ -2,6 +2,7 @@
 Comprehensive Test Suite for Part 3G.4:
 Disaster Recovery Governance, Continuous Resilience Management & Operational Maturity Verification Framework.
 """
+
 import pytest
 import yaml
 
@@ -52,7 +53,6 @@ def api_client():
 
 
 class TestEnterpriseResilienceGovernance:
-
     def test_ownership_validation_all_42_components_owned(self):
         validator = OwnershipValidator()
         report = validator.validate_ownership()
@@ -77,9 +77,7 @@ class TestEnterpriseResilienceGovernance:
     def test_ownership_validation_orphaned_component_detection(self):
         validator = OwnershipValidator()
         # Simulate an unowned component on the instance
-        validator.components_map.append(
-            ("unowned-experimental-service", "", "Unknown", "", "", "")
-        )
+        validator.components_map.append(("unowned-experimental-service", "", "Unknown", "", "", ""))
         report = validator.validate_ownership()
         assert report.missing_owner == 1
         assert report.passed is False

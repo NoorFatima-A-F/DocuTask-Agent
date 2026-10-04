@@ -1,12 +1,17 @@
 """
 Domain Interfaces for Configuration & Dependency Management.
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional, Any
 from app.platform_verification.config_versioning.domain.models import (
-    ConfigurationSnapshot, DependencyItem, DriftReport,
-    ChangeRequest, RollbackRecord
+    ConfigurationSnapshot,
+    DependencyItem,
+    DriftReport,
+    ChangeRequest,
+    RollbackRecord,
 )
+
 
 class ConfigurationRegistryInterface(ABC):
     @abstractmethod

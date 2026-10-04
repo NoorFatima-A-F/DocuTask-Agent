@@ -269,7 +269,9 @@ class TestSemanticReasoner:
         p1 = mem.add_premise("Subtotal is $100")
         p2 = mem.add_premise("Tax is $10")
         p3 = mem.add_premise("Shipping is $5")
-        h = mem.create_hypothesis("Total must be $115", supporting_premises=[p1.premise_id, p2.premise_id, p3.premise_id])
+        h = mem.create_hypothesis(
+            "Total must be $115", supporting_premises=[p1.premise_id, p2.premise_id, p3.premise_id]
+        )
 
         assert len(h.supporting_premises) == 3
         validated = mem.validate_hypothesis(h.hypothesis_id, final_confidence=0.95)
@@ -292,11 +294,11 @@ class TestSemanticReasoner:
     @pytest.mark.parametrize(
         "dirty_json,expected_key,expected_val",
         [
-            ("```\n{\"key1\": \"val1\"}\n```", "key1", "val1"),
-            ("```json\n{\"num\": 1234}\n```", "num", 1234),
-            ("Prefix before JSON {\"flag\": true} suffix after JSON", "flag", True),
-            ("{\n  \"nested\": [1, 2, 3],\n}", "nested", [1, 2, 3]),
-            ("{\"float_val\": 3.14159,}", "float_val", 3.14159),
+            ('```\n{"key1": "val1"}\n```', "key1", "val1"),
+            ('```json\n{"num": 1234}\n```', "num", 1234),
+            ('Prefix before JSON {"flag": true} suffix after JSON', "flag", True),
+            ('{\n  "nested": [1, 2, 3],\n}', "nested", [1, 2, 3]),
+            ('{"float_val": 3.14159,}', "float_val", 3.14159),
         ],
     )
     def test_structured_output_parser_dirty_patterns(self, dirty_json, expected_key, expected_val):
@@ -307,7 +309,9 @@ class TestSemanticReasoner:
     async def test_llm_client_token_estimation_and_custom_pricing(self):
         client = LLMReasoningClient()
         res1 = await client.complete("Short prompt")
-        res2 = await client.complete("A much longer prompt with significantly more words to test token estimation scaling")
+        res2 = await client.complete(
+            "A much longer prompt with significantly more words to test token estimation scaling"
+        )
         assert res1.prompt_tokens > 0
         assert res2.prompt_tokens > 0
         assert client.total_calls == 2
@@ -328,4 +332,3 @@ class TestSemanticReasoner:
         summary = mem.get_summary()
         assert summary["session_id"] == "session-preservation-test"
         assert summary["total_hypotheses"] >= 1
-

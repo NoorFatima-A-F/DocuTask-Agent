@@ -1,6 +1,7 @@
 """
 Phase 3H.9.1: Multi-Dimensional Telemetry Correlation Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_intelligence.domain.interfaces import ITelemetryCorrelationVerifier
@@ -79,7 +80,9 @@ class TelemetryCorrelationVerifier(ITelemetryCorrelationVerifier):
             ),
         ]
 
-        logger.info(f"Verified telemetry correlation across {len(services)} services and {len(sample_events)} trace spans.")
+        logger.info(
+            f"Verified telemetry correlation across {len(services)} services and {len(sample_events)} trace spans."
+        )
         return TelemetryCorrelationReport(
             total_correlated_events=len(sample_events),
             services_covered=services,

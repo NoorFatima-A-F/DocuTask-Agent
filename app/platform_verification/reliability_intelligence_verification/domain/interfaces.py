@@ -1,6 +1,7 @@
 """
 Phase 3H.5.7: Domain Interfaces for Reliability Intelligence
 """
+
 from abc import ABC, abstractmethod
 from .models import (
     ReliabilityDataCollectionReport,
@@ -33,9 +34,7 @@ class IComponentScoreEngine(ABC):
 
 class ISystemHealthScoreEngine(ABC):
     @abstractmethod
-    def calculate_system_health(
-        self, comp_report: ComponentReliabilityScoreReport
-    ) -> SystemReliabilityHealthReport:
+    def calculate_system_health(self, comp_report: ComponentReliabilityScoreReport) -> SystemReliabilityHealthReport:
         pass
 
 
@@ -59,9 +58,7 @@ class IReliabilityRiskAnalyzer(ABC):
 
 class IResilienceRecommendationEngine(ABC):
     @abstractmethod
-    def generate_recommendations(
-        self, risk_report: ReliabilityRiskReport
-    ) -> ResilienceRecommendationReport:
+    def generate_recommendations(self, risk_report: ReliabilityRiskReport) -> ResilienceRecommendationReport:
         pass
 
 

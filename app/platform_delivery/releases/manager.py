@@ -1,4 +1,5 @@
 """Release Management Engine and Immutable Registry (Req 9, 10)."""
+
 from typing import Any, Dict, List, Optional
 import uuid
 
@@ -31,7 +32,9 @@ class ReleaseManager:
         risk_score: str = "LOW",
     ) -> Release:
         if version in self._releases_by_version:
-            raise ValueError(f"Immutability Violation: Release version '{version}' already exists and cannot be mutated")
+            raise ValueError(
+                f"Immutability Violation: Release version '{version}' already exists and cannot be mutated"
+            )
 
         rel_id = f"rel-{uuid.uuid4().hex[:10]}"
         rel = Release(
@@ -73,7 +76,7 @@ class ReleaseManager:
             raise KeyError(f"Release '{release_id}' not found")
         if not rel.artifacts:
             raise ValueError(f"Cannot publish release '{release_id}' without attached artifact digests")
-        
+
         # Verify compatibility
         compat_info = rel.compatibility
         is_compat, violations = self.compat_matrix.validate_compatibility(

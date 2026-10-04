@@ -30,7 +30,10 @@ def test_verification_strength_static_only():
     assert card.source_inspection_score == 20.0
     assert card.automated_tests_score == 0.0
     assert card.runtime_execution_score == 0.0
-    assert card.classification == EvidenceClassification.EVIDENCE_INSUFFICIENT or card.classification == EvidenceClassification.PARTIALLY_VERIFIED
+    assert (
+        card.classification == EvidenceClassification.EVIDENCE_INSUFFICIENT
+        or card.classification == EvidenceClassification.PARTIALLY_VERIFIED
+    )
 
 
 def test_verification_strength_full_stack():

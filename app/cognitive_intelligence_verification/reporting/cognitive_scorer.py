@@ -79,15 +79,40 @@ class CognitivePlatformScorer:
 
         # Calculate Pillar Indices
         indices = {
-            "reasoning_and_graph_index": (part_results["PART_01_REASONING"].score + part_results["PART_02_GRAPH"].score) / 2.0,
-            "hypothesis_and_decision_index": (part_results["PART_03_HYPOTHESIS"].score + part_results["PART_04_DECISION"].score) / 2.0,
-            "simulation_and_process_index": (part_results["PART_05_SIMULATION"].score + part_results["PART_08_PROCESS_DISCOVERY"].score) / 2.0,
-            "learning_and_experience_index": (part_results["PART_06_LEARNING"].score + part_results["PART_07_EXPERIENCE"].score) / 2.0,
-            "alignment_and_strategy_index": (part_results["PART_09_ALIGNMENT"].score + part_results["PART_10_RECOMMENDATIONS"].score) / 2.0,
-            "continuous_learning_and_optimization_index": (part_results["PART_11_CONTINUOUS_LEARNING"].score + part_results["PART_12_OPTIMIZATION"].score) / 2.0,
-            "executive_and_explainability_index": (part_results["PART_13_EXECUTIVE"].score + part_results["PART_14_EXPLAINABILITY"].score) / 2.0,
-            "calibration_and_adversarial_index": (part_results["PART_15_CALIBRATION"].score + part_results["PART_16_ADVERSARIAL"].score) / 2.0,
-            "scalability_and_benchmarking_index": (part_results["PART_17_SCALABILITY"].score + part_results["PART_18_BENCHMARKS"].score) / 2.0,
+            "reasoning_and_graph_index": (part_results["PART_01_REASONING"].score + part_results["PART_02_GRAPH"].score)
+            / 2.0,
+            "hypothesis_and_decision_index": (
+                part_results["PART_03_HYPOTHESIS"].score + part_results["PART_04_DECISION"].score
+            )
+            / 2.0,
+            "simulation_and_process_index": (
+                part_results["PART_05_SIMULATION"].score + part_results["PART_08_PROCESS_DISCOVERY"].score
+            )
+            / 2.0,
+            "learning_and_experience_index": (
+                part_results["PART_06_LEARNING"].score + part_results["PART_07_EXPERIENCE"].score
+            )
+            / 2.0,
+            "alignment_and_strategy_index": (
+                part_results["PART_09_ALIGNMENT"].score + part_results["PART_10_RECOMMENDATIONS"].score
+            )
+            / 2.0,
+            "continuous_learning_and_optimization_index": (
+                part_results["PART_11_CONTINUOUS_LEARNING"].score + part_results["PART_12_OPTIMIZATION"].score
+            )
+            / 2.0,
+            "executive_and_explainability_index": (
+                part_results["PART_13_EXECUTIVE"].score + part_results["PART_14_EXPLAINABILITY"].score
+            )
+            / 2.0,
+            "calibration_and_adversarial_index": (
+                part_results["PART_15_CALIBRATION"].score + part_results["PART_16_ADVERSARIAL"].score
+            )
+            / 2.0,
+            "scalability_and_benchmarking_index": (
+                part_results["PART_17_SCALABILITY"].score + part_results["PART_18_BENCHMARKS"].score
+            )
+            / 2.0,
             "readiness_and_dashboard_index": part_results["PART_19_DASHBOARDS"].score,
         }
 

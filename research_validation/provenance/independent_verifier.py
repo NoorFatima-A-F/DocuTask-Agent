@@ -20,7 +20,6 @@ from research_validation.provenance.hashing import hash_canonical_json, compute_
 from research_validation.provenance.evidence_graph import EvidenceGraph
 
 
-
 class VerificationStatus(str, Enum):
     CONSISTENT = "CONSISTENT"
     INCONSISTENT = "INCONSISTENT"
@@ -380,7 +379,6 @@ class IndependentProvenanceVerifier:
                     hash_mismatches.append(
                         f"Hash mismatch for {nid}: orig={orig_node.node_hash[:12]} vs replay={rep_h[:12]}"
                     )
-
 
         for rep_id in replayed_hashes:
             if rep_id not in orig_nodes:

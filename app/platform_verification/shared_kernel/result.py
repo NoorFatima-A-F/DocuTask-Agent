@@ -1,11 +1,13 @@
 """
 Result and Option Patterns (Railway Oriented Programming).
 """
+
 from typing import TypeVar, Generic, Union, Callable, Any, Optional
 
 T = TypeVar("T")
 E = TypeVar("E")
 U = TypeVar("U")
+
 
 class Success(Generic[T]):
     __slots__ = ("_value",)

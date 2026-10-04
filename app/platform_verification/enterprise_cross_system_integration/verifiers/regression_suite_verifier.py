@@ -25,11 +25,41 @@ class IntegrationRegressionVerifier(IIntegrationRegressionVerifier):
 
     def verify(self) -> IntegrationRegressionReport:
         matrices = [
-            IntegrationRegressionMatrix(suite_id="SUITE-A-RUNTIME-WORKERS", interaction_pairs_tested=120, passed_tests=120, failed_tests=0, regression_detected=False),
-            IntegrationRegressionMatrix(suite_id="SUITE-B-KNOWLEDGE-COGNITIVE", interaction_pairs_tested=150, passed_tests=150, failed_tests=0, regression_detected=False),
-            IntegrationRegressionMatrix(suite_id="SUITE-C-SECURITY-SAAS", interaction_pairs_tested=95, passed_tests=95, failed_tests=0, regression_detected=False),
-            IntegrationRegressionMatrix(suite_id="SUITE-D-DEPLOYMENT-LIFECYCLE", interaction_pairs_tested=85, passed_tests=85, failed_tests=0, regression_detected=False),
-            IntegrationRegressionMatrix(suite_id="SUITE-E-OBSERVABILITY-EVENTBUS", interaction_pairs_tested=110, passed_tests=110, failed_tests=0, regression_detected=False),
+            IntegrationRegressionMatrix(
+                suite_id="SUITE-A-RUNTIME-WORKERS",
+                interaction_pairs_tested=120,
+                passed_tests=120,
+                failed_tests=0,
+                regression_detected=False,
+            ),
+            IntegrationRegressionMatrix(
+                suite_id="SUITE-B-KNOWLEDGE-COGNITIVE",
+                interaction_pairs_tested=150,
+                passed_tests=150,
+                failed_tests=0,
+                regression_detected=False,
+            ),
+            IntegrationRegressionMatrix(
+                suite_id="SUITE-C-SECURITY-SAAS",
+                interaction_pairs_tested=95,
+                passed_tests=95,
+                failed_tests=0,
+                regression_detected=False,
+            ),
+            IntegrationRegressionMatrix(
+                suite_id="SUITE-D-DEPLOYMENT-LIFECYCLE",
+                interaction_pairs_tested=85,
+                passed_tests=85,
+                failed_tests=0,
+                regression_detected=False,
+            ),
+            IntegrationRegressionMatrix(
+                suite_id="SUITE-E-OBSERVABILITY-EVENTBUS",
+                interaction_pairs_tested=110,
+                passed_tests=110,
+                failed_tests=0,
+                regression_detected=False,
+            ),
         ]
 
         total_tests = sum(m.interaction_pairs_tested for m in matrices)

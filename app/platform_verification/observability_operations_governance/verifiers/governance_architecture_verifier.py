@@ -2,6 +2,7 @@
 3I.10.1: Governance Architecture Verifier
 Verifies Policy Engine, Decision Audit System, and Reliability Review System.
 """
+
 from typing import List
 from app.platform_verification.observability_operations_governance.domain.models import (
     GovernanceArchitectureReport,

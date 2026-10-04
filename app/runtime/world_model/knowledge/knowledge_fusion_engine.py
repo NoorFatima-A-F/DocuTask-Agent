@@ -56,7 +56,9 @@ class KnowledgeFact:
             "confidence": round(self.confidence, 4),
             "truth_rank": round(self.truth_rank, 4),
             "evidence_refs": self.evidence_refs,
-            "freshness": self.freshness.value if isinstance(self.freshness, KnowledgeFreshness) else str(self.freshness),
+            "freshness": self.freshness.value
+            if isinstance(self.freshness, KnowledgeFreshness)
+            else str(self.freshness),
             "freshness_score": round(fresh_score, 3),
             "decay_half_life_hours": self.decay_half_life_hours,
             "created_at": self.created_at,

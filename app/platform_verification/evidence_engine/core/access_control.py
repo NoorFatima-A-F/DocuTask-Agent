@@ -1,6 +1,7 @@
 """
 Role-Based Access Control (RBAC) for Verification Evidence System.
 """
+
 from __future__ import annotations
 from typing import Dict, List
 from app.platform_verification.evidence_engine.domain.models import (
@@ -19,20 +20,53 @@ ROLE_PERMISSIONS: Dict[EvidenceRole, Dict[str, List[EvidenceClassification]]] = 
     EvidenceRole.REVIEWER: {
         "VIEW": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL],
         "EXPORT": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL],
-        "APPROVE": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL],
+        "APPROVE": [
+            EvidenceClassification.PUBLIC,
+            EvidenceClassification.INTERNAL,
+            EvidenceClassification.CONFIDENTIAL,
+        ],
         "ADMIN": [],
     },
     EvidenceRole.AUDITOR: {
-        "VIEW": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL, EvidenceClassification.RESTRICTED],
+        "VIEW": [
+            EvidenceClassification.PUBLIC,
+            EvidenceClassification.INTERNAL,
+            EvidenceClassification.CONFIDENTIAL,
+            EvidenceClassification.RESTRICTED,
+        ],
         "EXPORT": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL],
-        "APPROVE": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL],
+        "APPROVE": [
+            EvidenceClassification.PUBLIC,
+            EvidenceClassification.INTERNAL,
+            EvidenceClassification.CONFIDENTIAL,
+        ],
         "ADMIN": [],
     },
     EvidenceRole.ADMINISTRATOR: {
-        "VIEW": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL, EvidenceClassification.RESTRICTED],
-        "EXPORT": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL, EvidenceClassification.RESTRICTED],
-        "APPROVE": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL, EvidenceClassification.RESTRICTED],
-        "ADMIN": [EvidenceClassification.PUBLIC, EvidenceClassification.INTERNAL, EvidenceClassification.CONFIDENTIAL, EvidenceClassification.RESTRICTED],
+        "VIEW": [
+            EvidenceClassification.PUBLIC,
+            EvidenceClassification.INTERNAL,
+            EvidenceClassification.CONFIDENTIAL,
+            EvidenceClassification.RESTRICTED,
+        ],
+        "EXPORT": [
+            EvidenceClassification.PUBLIC,
+            EvidenceClassification.INTERNAL,
+            EvidenceClassification.CONFIDENTIAL,
+            EvidenceClassification.RESTRICTED,
+        ],
+        "APPROVE": [
+            EvidenceClassification.PUBLIC,
+            EvidenceClassification.INTERNAL,
+            EvidenceClassification.CONFIDENTIAL,
+            EvidenceClassification.RESTRICTED,
+        ],
+        "ADMIN": [
+            EvidenceClassification.PUBLIC,
+            EvidenceClassification.INTERNAL,
+            EvidenceClassification.CONFIDENTIAL,
+            EvidenceClassification.RESTRICTED,
+        ],
     },
 }
 

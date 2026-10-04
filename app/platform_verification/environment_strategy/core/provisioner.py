@@ -3,11 +3,17 @@ Automated Environment Provisioning System.
 Implements the 7-step lifecycle:
 Request -> Validate -> Create -> Configure -> Install Dependencies -> Health Check -> Ready.
 """
+
 import hashlib
 from typing import Any, Dict, Optional
 from app.platform_verification.environment_strategy.domain.models import (
-    EnvironmentProvisioningRequest, EnvironmentProvisioningResult, EnvironmentClassification,
-    EnvironmentDefinition, EnvironmentSecurityLevel, DataClassificationPolicy, DeploymentStrategyType
+    EnvironmentProvisioningRequest,
+    EnvironmentProvisioningResult,
+    EnvironmentClassification,
+    EnvironmentDefinition,
+    EnvironmentSecurityLevel,
+    DataClassificationPolicy,
+    DeploymentStrategyType,
 )
 from app.platform_verification.environment_strategy.domain.interfaces import EnvironmentProvisionerInterface
 from app.platform_verification.environment_strategy.core.registry import environment_registry
@@ -27,7 +33,7 @@ class EnvironmentProvisioner(EnvironmentProvisionerInterface):
                 classification=request.environment_classification,
                 purpose="Automated dynamically provisioned verification environment",
                 security_level=EnvironmentSecurityLevel.ISOLATED_TEST,
-                data_policy=DataClassificationPolicy.SYNTHETIC_ONLY
+                data_policy=DataClassificationPolicy.SYNTHETIC_ONLY,
             )
             environment_registry.register_environment(target_def)
 
@@ -46,14 +52,14 @@ class EnvironmentProvisioner(EnvironmentProvisionerInterface):
                 "cluster": request.target_cluster,
                 "cpu_cores": target_def.min_cpu_cores,
                 "memory_gb": target_def.min_memory_gb,
-                "isolated_namespace": f"ns-verify-{request.environment_classification.value.lower()}"
+                "isolated_namespace": f"ns-verify-{request.environment_classification.value.lower()}",
             },
-            infrastructure_digest=digest
+            infrastructure_digest=digest,
         )
         self._active_instances[target_def.environment_id] = {
             "result": res,
             "status": "RUNNING",
-            "overrides": request.config_overrides
+            "overrides": request.config_overrides,
         }
         return res
 
@@ -69,10 +75,11 @@ class EnvironmentProvisioner(EnvironmentProvisionerInterface):
             return True
         return False
 
-    def clone_environment(self, source_id: str, target_classification: EnvironmentClassification) -> EnvironmentProvisioningResult:
+    def clone_environment(
+        self, source_id: str, target_classification: EnvironmentClassification
+    ) -> EnvironmentProvisioningResult:
         req = EnvironmentProvisioningRequest(
-            environment_classification=target_classification,
-            target_cluster="k8s-platform-us-central1"
+            environment_classification=target_classification, target_cluster="k8s-platform-us-central1"
         )
         return self.provision_environment(req)
 

@@ -1,7 +1,9 @@
 """
 Configuration Scopes.
 """
+
 from enum import Enum
+
 
 class ConfigScope(str, Enum):
     GLOBAL = "GLOBAL"

@@ -74,33 +74,21 @@ class ReliabilityEvidenceExporter:
         exported_files["reliability_model_report.json"] = self._write_json(
             "reliability_model_report.json", model_report
         )
-        exported_files["slo_report.json"] = self._write_json(
-            "slo_report.json", slo_report
-        )
-        exported_files["error_budget_report.json"] = self._write_json(
-            "error_budget_report.json", error_budget_report
-        )
+        exported_files["slo_report.json"] = self._write_json("slo_report.json", slo_report)
+        exported_files["error_budget_report.json"] = self._write_json("error_budget_report.json", error_budget_report)
         exported_files["failure_pattern_report.json"] = self._write_json(
             "failure_pattern_report.json", failure_pattern_report
         )
-        exported_files["root_cause_report.json"] = self._write_json(
-            "root_cause_report.json", root_cause_report
-        )
-        exported_files["risk_score_report.json"] = self._write_json(
-            "risk_score_report.json", risk_score_report
-        )
-        exported_files["capacity_report.json"] = self._write_json(
-            "capacity_report.json", capacity_report
-        )
+        exported_files["root_cause_report.json"] = self._write_json("root_cause_report.json", root_cause_report)
+        exported_files["risk_score_report.json"] = self._write_json("risk_score_report.json", risk_score_report)
+        exported_files["capacity_report.json"] = self._write_json("capacity_report.json", capacity_report)
         exported_files["change_impact_report.json"] = self._write_json(
             "change_impact_report.json", change_impact_report
         )
         exported_files["recommendation_report.json"] = self._write_json(
             "recommendation_report.json", recommendation_report
         )
-        exported_files["improvement_report.json"] = self._write_json(
-            "improvement_report.json", improvement_report
-        )
+        exported_files["improvement_report.json"] = self._write_json("improvement_report.json", improvement_report)
 
         metadata = {
             "platform": "DocuTask Agent Enterprise",
@@ -118,8 +106,6 @@ class ReliabilityEvidenceExporter:
             "security_summary": dataclasses.asdict(security_report) if security_report else None,
         }
 
-        exported_files["metadata.json"] = self._write_json(
-            "metadata.json", metadata
-        )
+        exported_files["metadata.json"] = self._write_json("metadata.json", metadata)
 
         return exported_files

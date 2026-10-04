@@ -35,12 +35,29 @@ PERMITTED_TRANSITIONS: Dict[MissionState, Set[MissionState]] = {
     MissionState.CREATED: {MissionState.VALIDATING, MissionState.ABORTED},
     MissionState.VALIDATING: {MissionState.VALIDATED, MissionState.FAILED, MissionState.ABORTED},
     MissionState.VALIDATED: {MissionState.ANALYZING_CAPABILITIES, MissionState.ABORTED},
-    MissionState.ANALYZING_CAPABILITIES: {MissionState.ANALYZING_DEPENDENCIES, MissionState.FAILED, MissionState.ABORTED},
+    MissionState.ANALYZING_CAPABILITIES: {
+        MissionState.ANALYZING_DEPENDENCIES,
+        MissionState.FAILED,
+        MissionState.ABORTED,
+    },
     MissionState.ANALYZING_DEPENDENCIES: {MissionState.ANALYZING_RISK, MissionState.FAILED, MissionState.ABORTED},
     MissionState.ANALYZING_RISK: {MissionState.ESTIMATING_BUDGET, MissionState.FAILED, MissionState.ABORTED},
-    MissionState.ESTIMATING_BUDGET: {MissionState.GENERATING_SUCCESS_CRITERIA, MissionState.FAILED, MissionState.ABORTED},
-    MissionState.GENERATING_SUCCESS_CRITERIA: {MissionState.READY_FOR_OBSERVATION, MissionState.FAILED, MissionState.ABORTED},
-    MissionState.READY_FOR_OBSERVATION: {MissionState.ACTIVE, MissionState.PAUSED, MissionState.ABORTED, MissionState.ARCHIVED},
+    MissionState.ESTIMATING_BUDGET: {
+        MissionState.GENERATING_SUCCESS_CRITERIA,
+        MissionState.FAILED,
+        MissionState.ABORTED,
+    },
+    MissionState.GENERATING_SUCCESS_CRITERIA: {
+        MissionState.READY_FOR_OBSERVATION,
+        MissionState.FAILED,
+        MissionState.ABORTED,
+    },
+    MissionState.READY_FOR_OBSERVATION: {
+        MissionState.ACTIVE,
+        MissionState.PAUSED,
+        MissionState.ABORTED,
+        MissionState.ARCHIVED,
+    },
     MissionState.ACTIVE: {MissionState.PAUSED, MissionState.COMPLETED, MissionState.FAILED, MissionState.ABORTED},
     MissionState.PAUSED: {MissionState.ACTIVE, MissionState.ABORTED, MissionState.ARCHIVED},
     MissionState.COMPLETED: {MissionState.ARCHIVED},
@@ -53,6 +70,7 @@ PERMITTED_TRANSITIONS: Dict[MissionState, Set[MissionState]] = {
 @dataclass(frozen=True)
 class StateTransitionRecord:
     """Audit record of a single state transition in the mission lifecycle."""
+
     from_state: MissionState
     to_state: MissionState
     timestamp_utc: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())

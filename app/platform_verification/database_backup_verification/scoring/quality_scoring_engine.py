@@ -2,6 +2,7 @@
 Quality Scoring and Enterprise Certification Engine (Part 3G.2B Quality Scoring).
 Applies the 8-category weighted scoring model and awards enterprise certification tiers.
 """
+
 from typing import Dict, Any
 from app.platform_verification.database_backup_verification.domain.models import (
     DBCertificationTier,

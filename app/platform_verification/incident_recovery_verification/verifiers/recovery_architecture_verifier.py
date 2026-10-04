@@ -1,6 +1,7 @@
 """
 Phase 3H.4.9.1: Incident Recovery Architecture Verifier
 """
+
 from typing import Dict, Any, List
 from ..domain.interfaces import IRecoveryArchitectureVerifier
 from ..domain.models import RecoveryState
@@ -10,10 +11,24 @@ class RecoveryArchitectureVerifier(IRecoveryArchitectureVerifier):
     def __init__(self):
         self.lifecycle_states: List[str] = [state.value for state in RecoveryState]
         self.state_transitions: Dict[str, List[str]] = {
-            RecoveryState.RECOVERY_REQUIRED.value: [RecoveryState.RECOVERY_PLANNING.value, RecoveryState.RECOVERY_FAILED.value],
-            RecoveryState.RECOVERY_PLANNING.value: [RecoveryState.RECOVERY_EXECUTING.value, RecoveryState.RECOVERY_FAILED.value],
-            RecoveryState.RECOVERY_EXECUTING.value: [RecoveryState.RECOVERY_VALIDATING.value, RecoveryState.ROLLED_BACK.value, RecoveryState.RECOVERY_FAILED.value],
-            RecoveryState.RECOVERY_VALIDATING.value: [RecoveryState.SERVICE_RESTORED.value, RecoveryState.ROLLED_BACK.value, RecoveryState.RECOVERY_FAILED.value],
+            RecoveryState.RECOVERY_REQUIRED.value: [
+                RecoveryState.RECOVERY_PLANNING.value,
+                RecoveryState.RECOVERY_FAILED.value,
+            ],
+            RecoveryState.RECOVERY_PLANNING.value: [
+                RecoveryState.RECOVERY_EXECUTING.value,
+                RecoveryState.RECOVERY_FAILED.value,
+            ],
+            RecoveryState.RECOVERY_EXECUTING.value: [
+                RecoveryState.RECOVERY_VALIDATING.value,
+                RecoveryState.ROLLED_BACK.value,
+                RecoveryState.RECOVERY_FAILED.value,
+            ],
+            RecoveryState.RECOVERY_VALIDATING.value: [
+                RecoveryState.SERVICE_RESTORED.value,
+                RecoveryState.ROLLED_BACK.value,
+                RecoveryState.RECOVERY_FAILED.value,
+            ],
             RecoveryState.SERVICE_RESTORED.value: [RecoveryState.POST_RECOVERY_ANALYSIS.value],
             RecoveryState.POST_RECOVERY_ANALYSIS.value: [],
             RecoveryState.RECOVERY_FAILED.value: [RecoveryState.POST_RECOVERY_ANALYSIS.value],

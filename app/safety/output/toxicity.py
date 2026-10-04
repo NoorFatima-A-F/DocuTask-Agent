@@ -21,14 +21,41 @@ class ToxicityDetector:
 
     TOXICITY_PATTERNS: List[Tuple[re.Pattern, ToxicityCategory, ViolationSeverity, str]] = [
         # Self-harm
-        (re.compile(r"(?i)\b(how\s+to\s+(kill|harm|cut)\s+yourself|commit\s+suicide|suicide\s+methods)\b"), ToxicityCategory.SELF_HARM, ViolationSeverity.CRITICAL, "Self-harm instructional content"),
+        (
+            re.compile(r"(?i)\b(how\s+to\s+(kill|harm|cut)\s+yourself|commit\s+suicide|suicide\s+methods)\b"),
+            ToxicityCategory.SELF_HARM,
+            ViolationSeverity.CRITICAL,
+            "Self-harm instructional content",
+        ),
         # Violence & Weapons
-        (re.compile(r"(?i)\b(how\s+to\s+build\s+a\s+bomb|synthesize\s+(ricin|sarin|anthrax|explosive)|manufacture\s+weapons)\b"), ToxicityCategory.DANGEROUS_CONTENT, ViolationSeverity.CRITICAL, "CBRN / weapons manufacturing instruction"),
-        (re.compile(r"(?i)\b(kill\s+all\s+|exterminate\s+|eliminate\s+them\s+all)\b"), ToxicityCategory.VIOLENCE, ViolationSeverity.CRITICAL, "Violent threats / incitement"),
+        (
+            re.compile(
+                r"(?i)\b(how\s+to\s+build\s+a\s+bomb|synthesize\s+(ricin|sarin|anthrax|explosive)|manufacture\s+weapons)\b"
+            ),
+            ToxicityCategory.DANGEROUS_CONTENT,
+            ViolationSeverity.CRITICAL,
+            "CBRN / weapons manufacturing instruction",
+        ),
+        (
+            re.compile(r"(?i)\b(kill\s+all\s+|exterminate\s+|eliminate\s+them\s+all)\b"),
+            ToxicityCategory.VIOLENCE,
+            ViolationSeverity.CRITICAL,
+            "Violent threats / incitement",
+        ),
         # Hate Speech
-        (re.compile(r"(?i)\b(subhuman|inferior\s+race|racial\s+slur)\b"), ToxicityCategory.HATE_SPEECH, ViolationSeverity.CRITICAL, "Hate speech and discriminatory slurs"),
+        (
+            re.compile(r"(?i)\b(subhuman|inferior\s+race|racial\s+slur)\b"),
+            ToxicityCategory.HATE_SPEECH,
+            ViolationSeverity.CRITICAL,
+            "Hate speech and discriminatory slurs",
+        ),
         # Harassment
-        (re.compile(r"(?i)\b(doxx|doxxing|swatting|harass\s+them\s+at)\b"), ToxicityCategory.HARASSMENT, ViolationSeverity.HIGH, "Harassment and doxxing directive"),
+        (
+            re.compile(r"(?i)\b(doxx|doxxing|swatting|harass\s+them\s+at)\b"),
+            ToxicityCategory.HARASSMENT,
+            ViolationSeverity.HIGH,
+            "Harassment and doxxing directive",
+        ),
     ]
 
     def scan(self, text: str) -> Tuple[bool, List[SafetyViolation], float]:

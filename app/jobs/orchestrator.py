@@ -13,11 +13,7 @@ class PipelineOrchestrator:
 
     @classmethod
     async def execute_pipeline(
-        cls,
-        job_id: str,
-        document_id: str,
-        raw_ocr_text: str,
-        document_type: str = "invoice"
+        cls, job_id: str, document_id: str, raw_ocr_text: str, document_type: str = "invoice"
     ) -> Dict[str, Any]:
         """
         Executes end-to-end multi-stage pipeline.
@@ -52,5 +48,5 @@ class PipelineOrchestrator:
             "job_id": job_id,
             "document_id": document_id,
             "status": JobState.COMPLETED,
-            "extracted_data": {"invoice_number": "INV-2026-901", "total_amount": 5400.0}
+            "extracted_data": {"invoice_number": "INV-2026-901", "total_amount": 5400.0},
         }

@@ -22,9 +22,7 @@ class WorkflowRecoveryAdapter:
     ) -> Dict[str, Any]:
         """Invokes recovery engine to diagnose and propose or execute a remediation strategy."""
         if self._recovery_engine and hasattr(self._recovery_engine, "diagnose_and_recover"):
-            recovery_result = await self._recovery_engine.diagnose_and_recover(
-                instance_id, error, context or {}
-            )
+            recovery_result = await self._recovery_engine.diagnose_and_recover(instance_id, error, context or {})
             return recovery_result if isinstance(recovery_result, dict) else {"outcome": recovery_result}
         return {
             "status": "RECOVERED",

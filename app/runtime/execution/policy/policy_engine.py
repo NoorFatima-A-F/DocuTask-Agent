@@ -156,18 +156,27 @@ class PolicyEngine:
                                 risk_level=RiskLevel.CRITICAL,
                             )
                         )
-                        return PolicyDecision.DENY, f"Violated policy '{rule.name}': Destructive SQL queries are strictly denied."
+                        return (
+                            PolicyDecision.DENY,
+                            f"Violated policy '{rule.name}': Destructive SQL queries are strictly denied.",
+                        )
 
                 if tool_id == "stripe_create_customer_invoice":
                     amount = inputs.get("amount_cents", 0)
                     if amount > 100000:
-                        return PolicyDecision.REQUIRE_APPROVAL, f"Invoice amount ({amount} cents) exceeds $1,000 threshold. Approval required."
+                        return (
+                            PolicyDecision.REQUIRE_APPROVAL,
+                            f"Invoice amount ({amount} cents) exceeds $1,000 threshold. Approval required.",
+                        )
 
                 if tool_id == "k8s_scale_deployment":
                     replicas = inputs.get("replicas", 0)
                     namespace = inputs.get("namespace", "production")
                     if replicas > 10 and namespace == "production":
-                        return PolicyDecision.REQUIRE_APPROVAL, f"Scaling replica count to {replicas} in {namespace} requires operator sign-off."
+                        return (
+                            PolicyDecision.REQUIRE_APPROVAL,
+                            f"Scaling replica count to {replicas} in {namespace} requires operator sign-off.",
+                        )
 
         if tool_risk in [RiskLevel.HIGH, RiskLevel.CRITICAL]:
             return PolicyDecision.REQUIRE_SIMULATION, "High-risk tool invocation requires digital twin simulation."
@@ -204,7 +213,9 @@ class PolicyEngine:
         )
         return req
 
-    def resolve_approval(self, approval_id: str, approved: bool, approver: str = "executive_lead") -> Optional[ApprovalRequest]:
+    def resolve_approval(
+        self, approval_id: str, approved: bool, approver: str = "executive_lead"
+    ) -> Optional[ApprovalRequest]:
         req = self._approvals.get(approval_id)
         if not req:
             return None

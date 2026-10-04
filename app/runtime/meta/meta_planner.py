@@ -24,6 +24,7 @@ from app.runtime.meta.planner_optimizer import PlannerOptimizer, PlannerHyperpar
 
 class MetaPlanningReview(BaseModel):
     """Complete metacognitive evaluation package."""
+
     mission_id: str
     critique: PlannerCritiqueReport
     regret: RegretAnalysisResult
@@ -59,12 +60,14 @@ class MetaPlanner:
             strategy_utilities=strategy_utilities,
             strategy_costs=strategy_costs,
         )
-        self._publish(RegretComputedEvent(
-            mission_id=mission_id,
-            expected_regret=regret_res.expected_regret,
-            counterfactual_regret=regret_res.counterfactual_regret,
-            opportunity_cost=regret_res.opportunity_cost_usd,
-        ))
+        self._publish(
+            RegretComputedEvent(
+                mission_id=mission_id,
+                expected_regret=regret_res.expected_regret,
+                counterfactual_regret=regret_res.counterfactual_regret,
+                opportunity_cost=regret_res.opportunity_cost_usd,
+            )
+        )
 
         # 2. Self-Critique
         critique_res = self.critic.critique_plan(
@@ -75,21 +78,25 @@ class MetaPlanner:
             estimated_risk=estimated_risk,
             confidence_score=confidence,
         )
-        self._publish(PlannerCritiquedEvent(
-            mission_id=mission_id,
-            mistake_count=len(critique_res.diagnoses),
-            bias_detected=any("BIAS" in d.code for d in critique_res.diagnoses),
-            critique_score=critique_res.critique_score,
-        ))
+        self._publish(
+            PlannerCritiquedEvent(
+                mission_id=mission_id,
+                mistake_count=len(critique_res.diagnoses),
+                bias_detected=any("BIAS" in d.code for d in critique_res.diagnoses),
+                critique_score=critique_res.critique_score,
+            )
+        )
 
         # 3. Exploration / MAB selection
         exploration_res = self.exploration_engine.select_arm_ucb1()
-        self._publish(ExplorationTriggeredEvent(
-            mission_id=mission_id,
-            chosen_arm=exploration_res.selected_arm_id,
-            ucb_score=exploration_res.score,
-            novelty_reward=exploration_res.exploration_bonus,
-        ))
+        self._publish(
+            ExplorationTriggeredEvent(
+                mission_id=mission_id,
+                chosen_arm=exploration_res.selected_arm_id,
+                ucb_score=exploration_res.score,
+                novelty_reward=exploration_res.exploration_bonus,
+            )
+        )
 
         # 4. Dynamic Hyperparameter Tuning
         opt_params = self.optimizer.optimize_parameters(
@@ -103,12 +110,14 @@ class MetaPlanner:
         elif critique_res.should_switch_algorithm:
             verdict = "SWITCH_ALGORITHM"
 
-        self._publish(MetaPlanningStartedEvent(
-            mission_id=mission_id,
-            planner_strategy=chosen_strategy_id,
-            search_depth=opt_params.search_depth_limit,
-            beam_width=opt_params.beam_width,
-        ))
+        self._publish(
+            MetaPlanningStartedEvent(
+                mission_id=mission_id,
+                planner_strategy=chosen_strategy_id,
+                search_depth=opt_params.search_depth_limit,
+                beam_width=opt_params.beam_width,
+            )
+        )
 
         return MetaPlanningReview(
             mission_id=mission_id,

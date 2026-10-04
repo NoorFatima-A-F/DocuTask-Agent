@@ -1,6 +1,7 @@
 """
 Phase 3H.5.1: Health Event Intelligence Architecture Verifier
 """
+
 from datetime import datetime, timezone
 from ..domain.interfaces import IHealthEventArchitectureVerifier
 from ..domain.models import HealthEventArchitectureReport, HealthEvent, HealthEventType

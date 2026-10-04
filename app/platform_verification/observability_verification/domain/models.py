@@ -1,6 +1,7 @@
 """
 Domain models for Part 3E: Enterprise Observability & Reliability Verification Framework.
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import List

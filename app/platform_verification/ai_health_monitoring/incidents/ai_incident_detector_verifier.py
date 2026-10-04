@@ -55,7 +55,11 @@ class AIIncidentDetectorVerifier(IAIIncidentDetectorVerifier):
     def verify_incident_detection(self) -> AIIncidentTestReport:
         tests = list(self.TESTS)
         all_passed = all(
-            t.alert_triggered and t.dashboard_updated and t.automated_response_executed and t.recovery_validated and t.passed
+            t.alert_triggered
+            and t.dashboard_updated
+            and t.automated_response_executed
+            and t.recovery_validated
+            and t.passed
             for t in tests
         )
         passed = len(tests) >= 3 and all_passed

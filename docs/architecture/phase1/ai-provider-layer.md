@@ -49,8 +49,8 @@ from enum import Enum
 
 class AIModelTier(str, Enum):
     TIER_1_REASONING = "TIER_1_REASONING"  # Complex planning, causal analysis (GPT-4o, Claude 3.5, Gemini 1.5 Pro)
-    TIER_2_BALANCED = "TIER_2_BALANCED"    # Standard extraction, summarization (Gemini Flash, GPT-4o-mini)
-    TIER_3_EDGE = "TIER_3_EDGE"            # Low-latency classification, local privacy (Local Llama-3, vLLM)
+    TIER_2_BALANCED = "TIER_2_BALANCED"  # Standard extraction, summarization (Gemini Flash, GPT-4o-mini)
+    TIER_3_EDGE = "TIER_3_EDGE"  # Low-latency classification, local privacy (Local Llama-3, vLLM)
 
 
 @dataclass

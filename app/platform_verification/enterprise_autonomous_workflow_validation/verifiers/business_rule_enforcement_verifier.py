@@ -25,11 +25,41 @@ class BusinessRuleEnforcementVerifier(IBusinessRuleEnforcementVerifier):
 
     def verify(self) -> BusinessRuleEnforcementReport:
         rules = [
-            BusinessRulePolicy(rule_name="DualApprovalThresholdOver10k", policy_category="FinancialMatrix", threshold_value="$10,000.00", enforcement_passed=True, override_authorized=False),
-            BusinessRulePolicy(rule_name="VendorMatchAgainstMasterList", policy_category="ProcurementCompliance", threshold_value="ExactMatch", enforcement_passed=True, override_authorized=False),
-            BusinessRulePolicy(rule_name="MedicalDataRetentionLimitation", policy_category="RegulatoryHIPAA", threshold_value="7YearsEncrypted", enforcement_passed=True, override_authorized=False),
-            BusinessRulePolicy(rule_name="CrossBorderTransferRestriction", policy_category="DataResidencyGDPR", threshold_value="EU_Region_Strict", enforcement_passed=True, override_authorized=False),
-            BusinessRulePolicy(rule_name="HighRiskContractLegalEscalation", policy_category="LegalGovernance", threshold_value="LiabilityCapMissing", enforcement_passed=True, override_authorized=False),
+            BusinessRulePolicy(
+                rule_name="DualApprovalThresholdOver10k",
+                policy_category="FinancialMatrix",
+                threshold_value="$10,000.00",
+                enforcement_passed=True,
+                override_authorized=False,
+            ),
+            BusinessRulePolicy(
+                rule_name="VendorMatchAgainstMasterList",
+                policy_category="ProcurementCompliance",
+                threshold_value="ExactMatch",
+                enforcement_passed=True,
+                override_authorized=False,
+            ),
+            BusinessRulePolicy(
+                rule_name="MedicalDataRetentionLimitation",
+                policy_category="RegulatoryHIPAA",
+                threshold_value="7YearsEncrypted",
+                enforcement_passed=True,
+                override_authorized=False,
+            ),
+            BusinessRulePolicy(
+                rule_name="CrossBorderTransferRestriction",
+                policy_category="DataResidencyGDPR",
+                threshold_value="EU_Region_Strict",
+                enforcement_passed=True,
+                override_authorized=False,
+            ),
+            BusinessRulePolicy(
+                rule_name="HighRiskContractLegalEscalation",
+                policy_category="LegalGovernance",
+                threshold_value="LiabilityCapMissing",
+                enforcement_passed=True,
+                override_authorized=False,
+            ),
         ]
 
         checks = [

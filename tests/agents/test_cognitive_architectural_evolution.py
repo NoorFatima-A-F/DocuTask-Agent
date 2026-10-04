@@ -60,9 +60,13 @@ def test_cognitive_memory_temporal_decay():
 
     now = time.time()
     # Fact created 2 days ago (2 half-lives -> confidence should drop to ~0.25 of original)
-    f_old = SemanticFact(subject="BetaCorp", predicate="discount", fact_value="10%", confidence=0.8, created_at=now - (2 * 86400))
+    f_old = SemanticFact(
+        subject="BetaCorp", predicate="discount", fact_value="10%", confidence=0.8, created_at=now - (2 * 86400)
+    )
     # Verified ground truth fact (confidence=1.0) should NOT decay
-    f_ground = SemanticFact(subject="BetaCorp", predicate="tax_id", fact_value="999-888", confidence=1.0, created_at=now - (2 * 86400))
+    f_ground = SemanticFact(
+        subject="BetaCorp", predicate="tax_id", fact_value="999-888", confidence=1.0, created_at=now - (2 * 86400)
+    )
     mem.store_fact(f_old)
     mem.store_fact(f_ground)
 

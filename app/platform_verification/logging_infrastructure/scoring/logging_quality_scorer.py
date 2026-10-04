@@ -1,6 +1,7 @@
 """
 Phase 3I.2: 6-Pillar Enterprise Logging Quality Scorer
 """
+
 from typing import List
 from datetime import datetime, timezone
 from ..domain.models import (
@@ -78,42 +79,42 @@ class LoggingQualityScorer(ILoggingQualityScorer):
                 weight_pct=struct_weight,
                 achieved_score_pct=round(struct_score, 2),
                 weighted_score_pct=round(struct_weighted, 2),
-                status="PASSED" if struct_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if struct_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             LoggingPillarScore(
                 pillar_name="Distributed Request Correlation Capability",
                 weight_pct=corr_weight,
                 achieved_score_pct=round(corr_score, 2),
                 weighted_score_pct=round(corr_weighted, 2),
-                status="PASSED" if corr_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if corr_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             LoggingPillarScore(
                 pillar_name="AI Agent Execution & Workflow Visibility",
                 weight_pct=ai_weight,
                 achieved_score_pct=round(ai_score, 2),
                 weighted_score_pct=round(ai_weighted, 2),
-                status="PASSED" if ai_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if ai_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             LoggingPillarScore(
                 pillar_name="Security Protection & Sensitive Data Masking",
                 weight_pct=sec_weight,
                 achieved_score_pct=round(sec_score, 2),
                 weighted_score_pct=round(sec_weighted, 2),
-                status="PASSED" if sec_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if sec_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             LoggingPillarScore(
                 pillar_name="Log Centralization & OTel Pipeline Readiness",
                 weight_pct=cent_weight,
                 achieved_score_pct=round(cent_score, 2),
                 weighted_score_pct=round(cent_weighted, 2),
-                status="PASSED" if cent_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if cent_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             LoggingPillarScore(
                 pillar_name="Performance Impact & Low Latency Overhead",
                 weight_pct=perf_weight,
                 achieved_score_pct=round(perf_score, 2),
                 weighted_score_pct=round(perf_weighted, 2),
-                status="PASSED" if perf_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if perf_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
         ]
 
@@ -138,5 +139,5 @@ class LoggingQualityScorer(ILoggingQualityScorer):
             minimum_passing_threshold_pct=95.0,
             pillar_scores=pillar_scores,
             certification_granted=granted,
-            auditor="DocuTask Enterprise Observability & SRE Certification Engine"
+            auditor="DocuTask Enterprise Observability & SRE Certification Engine",
         )

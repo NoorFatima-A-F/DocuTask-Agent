@@ -34,7 +34,9 @@ class CausalEdge:
             "cause_variable": self.cause_variable,
             "effect_variable": self.effect_variable,
             "direct_effect_strength": round(self.direct_effect_strength, 3),
-            "confidence": self.confidence.value if isinstance(self.confidence, CausalConfidence) else str(self.confidence),
+            "confidence": self.confidence.value
+            if isinstance(self.confidence, CausalConfidence)
+            else str(self.confidence),
             "p_value": round(self.p_value, 5),
             "is_confounded": self.is_confounded,
             "confounder_variable": self.confounder_variable,
@@ -166,7 +168,9 @@ class CausalEngine:
         return {
             "total_edges": len(self._edges),
             "edges": [e.to_dict() for e in self._edges.values()],
-            "mean_effect_strength": round(sum(e.direct_effect_strength for e in self._edges.values()) / max(1, len(self._edges)), 4),
+            "mean_effect_strength": round(
+                sum(e.direct_effect_strength for e in self._edges.values()) / max(1, len(self._edges)), 4
+            ),
         }
 
 

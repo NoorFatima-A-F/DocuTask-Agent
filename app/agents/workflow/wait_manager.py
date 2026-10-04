@@ -10,13 +10,13 @@ from pydantic import BaseModel
 
 class WaitCondition(BaseModel):
     """Represents a discrete synchronization barrier condition."""
+
     condition_id: str
     description: str = ""
     is_satisfied: bool = False
 
 
 class WaitManager:
-
     """Tracks workflows blocked waiting for one or more conditions."""
 
     def __init__(self):

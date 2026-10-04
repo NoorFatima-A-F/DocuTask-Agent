@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10.8 & 3H.4.10.9: Telemetry Pipeline & Storage Security Verifier
 """
+
 from ..domain.interfaces import IPipelineSecurityVerifier
 from ..domain.models import PipelineSecurityReport
 
@@ -18,13 +19,7 @@ class PipelineSecurityVerifier(IPipelineSecurityVerifier):
         lifecycle_enforced = True
         storage_enc = True  # AES-256 encryption at rest
 
-        all_passed = (
-            tls_active
-            and ingestion_auth
-            and integrity_signing
-            and lifecycle_enforced
-            and storage_enc
-        )
+        all_passed = tls_active and ingestion_auth and integrity_signing and lifecycle_enforced and storage_enc
 
         return PipelineSecurityReport(
             transport_encryption_tls13=tls_active,

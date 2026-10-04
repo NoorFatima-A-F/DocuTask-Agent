@@ -14,6 +14,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class ResearchEpisode:
     """A bounded chronological episode of scientific inquiry."""
+
     episode_id: str
     cycle_number: int
     intent: str

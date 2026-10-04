@@ -11,6 +11,7 @@ from app.agents.coordination.capability import CapabilityProfile
 
 class AgentProfile(BaseModel):
     """Profile describing an agent's identity, advertised capabilities, and operational attributes."""
+
     identity: AgentIdentity
     capabilities: CapabilityProfile = Field(default_factory=CapabilityProfile)
     endpoint_url: Optional[str] = None

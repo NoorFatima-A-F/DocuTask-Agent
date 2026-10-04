@@ -74,19 +74,19 @@ __all__ = [
 def get_all_verifiers() -> List[IEnterprisePerformanceVerifier]:
     """Returns an instantiated list of all 15 Phase 3J.5 verifiers in sequential order."""
     return [
-        PerformanceBaselineVerifier(),       # 3J.5.1
-        LatencyBreakdownVerifier(),          # 3J.5.2
-        ThroughputCapacityVerifier(),        # 3J.5.3
-        LoadTestingVerifier(),               # 3J.5.4 & 3J.5.5
-        StressTestingVerifier(),             # 3J.5.6
-        SpikeTestingVerifier(),              # 3J.5.7
-        EnduranceTestingVerifier(),          # 3J.5.8
-        AIWorkloadVerifier(),                # 3J.5.9
-        QueuePerformanceVerifier(),          # 3J.5.10
-        DatabasePerformanceVerifier(),       # 3J.5.11
-        StoragePerformanceVerifier(),        # 3J.5.12
-        ResourceUtilizationVerifier(),       # 3J.5.13
-        BottleneckAnalysisVerifier(),        # 3J.5.14
-        CapacityPlanningVerifier(),          # 3J.5.15
-        PerformanceRegressionVerifier(),     # 3J.5.16
+        PerformanceBaselineVerifier(),  # 3J.5.1
+        LatencyBreakdownVerifier(),  # 3J.5.2
+        ThroughputCapacityVerifier(),  # 3J.5.3
+        LoadTestingVerifier(),  # 3J.5.4 & 3J.5.5
+        StressTestingVerifier(),  # 3J.5.6
+        SpikeTestingVerifier(),  # 3J.5.7
+        EnduranceTestingVerifier(),  # 3J.5.8
+        AIWorkloadVerifier(),  # 3J.5.9
+        QueuePerformanceVerifier(),  # 3J.5.10
+        DatabasePerformanceVerifier(),  # 3J.5.11
+        StoragePerformanceVerifier(),  # 3J.5.12
+        ResourceUtilizationVerifier(),  # 3J.5.13
+        BottleneckAnalysisVerifier(),  # 3J.5.14
+        CapacityPlanningVerifier(),  # 3J.5.15
+        PerformanceRegressionVerifier(),  # 3J.5.16
     ]

@@ -23,6 +23,7 @@ class InformationActionType(str, Enum):
 
 class InformationActionRecommendation(BaseModel):
     """Calculated EVOI tradeoff evaluation for a single sensing action."""
+
     action_type: InformationActionType
     name: str
     cost_usd: float

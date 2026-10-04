@@ -32,20 +32,22 @@ class DependencyReadinessEngine(IDependencyReadinessEngine):
         items: List[DependencyEvaluationItem] = []
 
         # 1. Database (Critical)
-        db_healthy = (db_rep.status == "READY")
+        db_healthy = db_rep.status == "READY"
         items.append(
             DependencyEvaluationItem(
                 name="PostgreSQL",
                 status=db_rep.status,
                 latency_ms=db_rep.query_latency_ms,
                 criticality=DependencyCriticality.CRITICAL,
-                message="Transactions, schema, and connection pool verified" if db_healthy else "Database degraded or disconnected",
+                message="Transactions, schema, and connection pool verified"
+                if db_healthy
+                else "Database degraded or disconnected",
                 healthy=db_healthy,
             )
         )
 
         # 2. Redis Queue (Critical)
-        queue_healthy = (queue_rep.status == "READY")
+        queue_healthy = queue_rep.status == "READY"
         items.append(
             DependencyEvaluationItem(
                 name="Redis Queue",
@@ -70,20 +72,22 @@ class DependencyReadinessEngine(IDependencyReadinessEngine):
         )
 
         # 4. Background Workers (Critical)
-        workers_healthy = (worker_rep.status == "READY")
+        workers_healthy = worker_rep.status == "READY"
         items.append(
             DependencyEvaluationItem(
                 name="Worker Fleet",
                 status=worker_rep.status,
                 latency_ms=4.0,
                 criticality=DependencyCriticality.CRITICAL,
-                message=f"Capacity verified ({worker_rep.available_fleet_capacity} slots available)" if workers_healthy else "Zero workers or fleet overloaded",
+                message=f"Capacity verified ({worker_rep.available_fleet_capacity} slots available)"
+                if workers_healthy
+                else "Zero workers or fleet overloaded",
                 healthy=workers_healthy,
             )
         )
 
         # 5. External AI Provider (Non-Critical / Fallback Capable)
-        ai_healthy = (ai_rep.status == "READY")
+        ai_healthy = ai_rep.status == "READY"
         items.append(
             DependencyEvaluationItem(
                 name="Gemini AI Provider",

@@ -149,12 +149,16 @@ class ProductionEvidenceCollector:
         now_str = datetime.now(timezone.utc).isoformat()
         is_measured = live_telemetry_dict is not None
         status = TelemetryCollectionStatus.MEASURED_LIVE if is_measured else TelemetryCollectionStatus.NOT_COLLECTED
-        metrics = dict(live_telemetry_dict) if live_telemetry_dict is not None else {
-            "active_connections": 0.0,
-            "read_iops": 0.0,
-            "write_iops": 0.0,
-            "query_latency_p95_ms": 0.0,
-        }
+        metrics = (
+            dict(live_telemetry_dict)
+            if live_telemetry_dict is not None
+            else {
+                "active_connections": 0.0,
+                "read_iops": 0.0,
+                "write_iops": 0.0,
+                "query_latency_p95_ms": 0.0,
+            }
+        )
         source = f"sqladmin.googleapis.com/instances/{instance_name}" if is_measured else "uncollected"
 
         points = tuple(
@@ -191,11 +195,15 @@ class ProductionEvidenceCollector:
         now_str = datetime.now(timezone.utc).isoformat()
         is_measured = live_telemetry_dict is not None
         status = TelemetryCollectionStatus.MEASURED_LIVE if is_measured else TelemetryCollectionStatus.NOT_COLLECTED
-        metrics = dict(live_telemetry_dict) if live_telemetry_dict is not None else {
-            "hit_ratio": 0.0,
-            "used_memory_mb": 0.0,
-            "evicted_keys_count": 0.0,
-        }
+        metrics = (
+            dict(live_telemetry_dict)
+            if live_telemetry_dict is not None
+            else {
+                "hit_ratio": 0.0,
+                "used_memory_mb": 0.0,
+                "evicted_keys_count": 0.0,
+            }
+        )
         source = f"redis.cache/{cache_name}" if is_measured else "uncollected"
 
         points = tuple(
@@ -232,11 +240,15 @@ class ProductionEvidenceCollector:
         now_str = datetime.now(timezone.utc).isoformat()
         is_measured = live_telemetry_dict is not None
         status = TelemetryCollectionStatus.MEASURED_LIVE if is_measured else TelemetryCollectionStatus.NOT_COLLECTED
-        metrics = dict(live_telemetry_dict) if live_telemetry_dict is not None else {
-            "unacked_messages_count": 0.0,
-            "publish_latency_p95_ms": 0.0,
-            "subscription_age_seconds": 0.0,
-        }
+        metrics = (
+            dict(live_telemetry_dict)
+            if live_telemetry_dict is not None
+            else {
+                "unacked_messages_count": 0.0,
+                "publish_latency_p95_ms": 0.0,
+                "subscription_age_seconds": 0.0,
+            }
+        )
         source = f"pubsub.googleapis.com/topics/{topic_name}" if is_measured else "uncollected"
 
         points = tuple(
@@ -273,11 +285,15 @@ class ProductionEvidenceCollector:
         now_str = datetime.now(timezone.utc).isoformat()
         is_measured = live_telemetry_dict is not None
         status = TelemetryCollectionStatus.MEASURED_LIVE if is_measured else TelemetryCollectionStatus.FALLBACK_LOCAL
-        metrics = dict(live_telemetry_dict) if live_telemetry_dict is not None else {
-            "oom_kill_count": 0.0,
-            "cgroup_cpu_throttled_sec": 0.0,
-            "memory_usage_mb": 0.0,
-        }
+        metrics = (
+            dict(live_telemetry_dict)
+            if live_telemetry_dict is not None
+            else {
+                "oom_kill_count": 0.0,
+                "cgroup_cpu_throttled_sec": 0.0,
+                "memory_usage_mb": 0.0,
+            }
+        )
         source = f"cgroup://{container_id}"
 
         points = tuple(
@@ -315,7 +331,11 @@ class ProductionEvidenceCollector:
 
         total = len(snapshots)
         measured_count = sum(1 for s in snapshots if s.is_measured)
-        simulated_count = sum(1 for s in snapshots if s.status in (TelemetryCollectionStatus.SIMULATED_TEST, TelemetryCollectionStatus.FALLBACK_LOCAL))
+        simulated_count = sum(
+            1
+            for s in snapshots
+            if s.status in (TelemetryCollectionStatus.SIMULATED_TEST, TelemetryCollectionStatus.FALLBACK_LOCAL)
+        )
         uncollected_count = sum(1 for s in snapshots if s.status == TelemetryCollectionStatus.NOT_COLLECTED)
         ratio = measured_count / total if total > 0 else 0.0
 

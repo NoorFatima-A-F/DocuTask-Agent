@@ -18,6 +18,7 @@ from typing import Any, Callable, Dict, List, Tuple
 @dataclass
 class TokenAttribution:
     """Attribution score assigned to a specific token or word."""
+
     token: str
     index: int
     score: float
@@ -26,6 +27,7 @@ class TokenAttribution:
 @dataclass
 class FidelityCurveReport:
     """Evaluation of explanation faithfulness along deletion/insertion curves."""
+
     deletion_curve_scores: List[float]
     insertion_curve_scores: List[float]
     audc: float  # Area Under Deletion Curve (lower is better, meaning removing important tokens drops performance fast)
@@ -37,6 +39,7 @@ class FidelityCurveReport:
 @dataclass
 class ExplainabilityAuditReport:
     """Audit report for explainability, faithfulness, and attribution validity."""
+
     total_samples: int
     mean_audc: float
     mean_auic: float
@@ -65,11 +68,7 @@ class ExplainabilityFidelityLab:
 
     @classmethod
     def evaluate_deletion_insertion_fidelity(
-        cls,
-        text: str,
-        attributions: List[TokenAttribution],
-        scorer: Callable[[str], float],
-        steps: int = 10
+        cls, text: str, attributions: List[TokenAttribution], scorer: Callable[[str], float], steps: int = 10
     ) -> FidelityCurveReport:
         """
         Compute Deletion and Insertion curves by removing or adding tokens in order of attribution importance.
@@ -82,7 +81,7 @@ class ExplainabilityFidelityLab:
                 audc=0.0,
                 auic=0.0,
                 monotonicity_score=0.0,
-                is_faithful=False
+                is_faithful=False,
             )
 
         # Sort attributions in descending order of importance
@@ -95,7 +94,7 @@ class ExplainabilityFidelityLab:
 
         chunk_size = max(1, len(sorted_indices) // steps)
         for i in range(0, len(sorted_indices), chunk_size):
-            to_remove = set(sorted_indices[i:i + chunk_size])
+            to_remove = set(sorted_indices[i : i + chunk_size])
             current_del_words = [w if idx not in to_remove else "[MASK]" for idx, w in enumerate(current_del_words)]
             del_scores.append(scorer(" ".join(current_del_words)))
 
@@ -104,7 +103,7 @@ class ExplainabilityFidelityLab:
         current_ins_words = ["[MASK]"] * len(words)
 
         for i in range(0, len(sorted_indices), chunk_size):
-            to_add = set(sorted_indices[i:i + chunk_size])
+            to_add = set(sorted_indices[i : i + chunk_size])
             for idx in to_add:
                 current_ins_words[idx] = words[idx]
             ins_scores.append(scorer(" ".join(current_ins_words)))
@@ -124,14 +123,12 @@ class ExplainabilityFidelityLab:
             audc=audc,
             auic=auic,
             monotonicity_score=del_mono,
-            is_faithful=is_faithful
+            is_faithful=is_faithful,
         )
 
     @classmethod
     def run_explainability_audit(
-        cls,
-        samples: List[Tuple[str, List[TokenAttribution]]],
-        scorer: Callable[[str], float]
+        cls, samples: List[Tuple[str, List[TokenAttribution]]], scorer: Callable[[str], float]
     ) -> ExplainabilityAuditReport:
         """Run explainability fidelity verification across sample attributions."""
         if not samples:
@@ -141,7 +138,7 @@ class ExplainabilityFidelityLab:
                 mean_auic=0.0,
                 mean_monotonicity=0.0,
                 faithfulness_pass_rate=0.0,
-                status="INSUFFICIENT_EVIDENCE"
+                status="INSUFFICIENT_EVIDENCE",
             )
 
         reports = [cls.evaluate_deletion_insertion_fidelity(t, a, scorer) for t, a in samples]
@@ -161,5 +158,5 @@ class ExplainabilityFidelityLab:
             mean_monotonicity=mean_mono,
             faithfulness_pass_rate=pass_rate,
             status=status,
-            details={"audc_lt_auic": mean_audc < mean_auic}
+            details={"audc_lt_auic": mean_audc < mean_auic},
         )

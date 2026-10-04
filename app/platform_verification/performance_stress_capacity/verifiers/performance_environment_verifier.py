@@ -29,14 +29,54 @@ class PerformanceEnvironmentVerifier(IPerformanceEnvironmentVerifier):
 
     def verify(self) -> EnvironmentIsolationReport:
         services: List[ServiceIsolationSpec] = [
-            ServiceIsolationSpec(service_name="k6 Distributed Load Generator", role="Synthetic load generation cluster", isolated_from_prod=True, status="VERIFIED"),
-            ServiceIsolationSpec(service_name="API Gateway (FastAPI)", role="Isolated ingress endpoint target", isolated_from_prod=True, status="VERIFIED"),
-            ServiceIsolationSpec(service_name="Task Creation & Orchestration", role="Ephemeral task router", isolated_from_prod=True, status="VERIFIED"),
-            ServiceIsolationSpec(service_name="Celery / Redis Queue Broker", role="Isolated dedicated test broker", isolated_from_prod=True, status="VERIFIED"),
-            ServiceIsolationSpec(service_name="Agent Runtime & Planner", role="Dedicated worker pool test replica", isolated_from_prod=True, status="VERIFIED"),
-            ServiceIsolationSpec(service_name="OCR Tesseract Engine", role="Isolated OCR container group", isolated_from_prod=True, status="VERIFIED"),
-            ServiceIsolationSpec(service_name="PostgreSQL Performance DB", role="Isolated standalone database instance", isolated_from_prod=True, status="VERIFIED"),
-            ServiceIsolationSpec(service_name="Document Evidence Storage", role="Ephemeral S3/MinIO bucket", isolated_from_prod=True, status="VERIFIED"),
+            ServiceIsolationSpec(
+                service_name="k6 Distributed Load Generator",
+                role="Synthetic load generation cluster",
+                isolated_from_prod=True,
+                status="VERIFIED",
+            ),
+            ServiceIsolationSpec(
+                service_name="API Gateway (FastAPI)",
+                role="Isolated ingress endpoint target",
+                isolated_from_prod=True,
+                status="VERIFIED",
+            ),
+            ServiceIsolationSpec(
+                service_name="Task Creation & Orchestration",
+                role="Ephemeral task router",
+                isolated_from_prod=True,
+                status="VERIFIED",
+            ),
+            ServiceIsolationSpec(
+                service_name="Celery / Redis Queue Broker",
+                role="Isolated dedicated test broker",
+                isolated_from_prod=True,
+                status="VERIFIED",
+            ),
+            ServiceIsolationSpec(
+                service_name="Agent Runtime & Planner",
+                role="Dedicated worker pool test replica",
+                isolated_from_prod=True,
+                status="VERIFIED",
+            ),
+            ServiceIsolationSpec(
+                service_name="OCR Tesseract Engine",
+                role="Isolated OCR container group",
+                isolated_from_prod=True,
+                status="VERIFIED",
+            ),
+            ServiceIsolationSpec(
+                service_name="PostgreSQL Performance DB",
+                role="Isolated standalone database instance",
+                isolated_from_prod=True,
+                status="VERIFIED",
+            ),
+            ServiceIsolationSpec(
+                service_name="Document Evidence Storage",
+                role="Ephemeral S3/MinIO bucket",
+                isolated_from_prod=True,
+                status="VERIFIED",
+            ),
         ]
 
         checks: List[CheckResult] = [

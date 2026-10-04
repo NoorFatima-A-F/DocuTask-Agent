@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class RankedItem(BaseModel):
     """An individual item evaluated and assigned a relative rank."""
+
     item_id: str
     rank: int
     score: float
@@ -26,11 +27,13 @@ class AlternativeRanker:
         ranked: List[RankedItem] = []
 
         for idx, item in enumerate(sorted_items, start=1):
-            ranked.append(RankedItem(
-                item_id=str(item.get("id", f"item_{idx}")),
-                rank=idx,
-                score=float(item.get(score_key, 0.0)),
-                metadata=item
-            ))
+            ranked.append(
+                RankedItem(
+                    item_id=str(item.get("id", f"item_{idx}")),
+                    rank=idx,
+                    score=float(item.get(score_key, 0.0)),
+                    metadata=item,
+                )
+            )
 
         return ranked

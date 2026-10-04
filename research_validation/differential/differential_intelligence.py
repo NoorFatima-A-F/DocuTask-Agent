@@ -28,6 +28,7 @@ class SemanticDivergenceCategory(str, Enum):
 @dataclass
 class PreservedDifferentialTrial:
     """Exact preserved test trial containing full inputs and multi-engine outputs."""
+
     trial_id: str
     input_document_hash: str
     input_document_text: str  # Preserved input
@@ -41,6 +42,7 @@ class PreservedDifferentialTrial:
 @dataclass
 class DifferentialIntelligenceReport:
     """Consolidated differential multi-model testing report."""
+
     total_trials_evaluated: int
     engines_participating: List[str]
     overall_consensus_rate: float
@@ -60,12 +62,7 @@ class DifferentialIntelligenceLab:
     """
 
     @classmethod
-    def evaluate_trial(
-        cls,
-        trial_id: str,
-        input_text: str,
-        responses: Dict[str, str]
-    ) -> PreservedDifferentialTrial:
+    def evaluate_trial(cls, trial_id: str, input_text: str, responses: Dict[str, str]) -> PreservedDifferentialTrial:
         """Evaluate a single trial and preserve raw payloads."""
         doc_hash = hashlib.sha256(input_text.encode("utf-8")).hexdigest()
         norm_responses = {k: " ".join(v.strip().lower().split()) for k, v in responses.items()}
@@ -96,14 +93,12 @@ class DifferentialIntelligenceLab:
             consensus_value=best_text,
             consensus_rate=consensus_rate,
             category=cat,
-            details={"vote_counts": freq}
+            details={"vote_counts": freq},
         )
 
     @classmethod
     def run_differential_study(
-        cls,
-        trials_data: List[Tuple[str, str, Dict[str, str]]],
-        consensus_threshold: float = 0.75
+        cls, trials_data: List[Tuple[str, str, Dict[str, str]]], consensus_threshold: float = 0.75
     ) -> DifferentialIntelligenceReport:
         """
         Run differential testing study preserving all raw inputs and outputs.
@@ -120,7 +115,7 @@ class DifferentialIntelligenceLab:
                 assumptions=["Multi-model responses submitted"],
                 limitations=["No trials recorded"],
                 reproducibility_instructions="Provide trials containing matching input and engine response pairs",
-                verdict="DISPUTED"
+                verdict="DISPUTED",
             )
 
         evaluated = [cls.evaluate_trial(t_id, in_txt, resps) for t_id, in_txt, resps in trials_data]
@@ -135,7 +130,13 @@ class DifferentialIntelligenceLab:
         for t in evaluated:
             cat_counts[t.category.value] = cat_counts.get(t.category.value, 0) + 1
 
-        verdict = "HIGH_CONSENSUS" if overall_cons_rate >= 0.85 else "MODERATE_DIVERGENCE" if overall_cons_rate >= 0.65 else "DISPUTED"
+        verdict = (
+            "HIGH_CONSENSUS"
+            if overall_cons_rate >= 0.85
+            else "MODERATE_DIVERGENCE"
+            if overall_cons_rate >= 0.65
+            else "DISPUTED"
+        )
 
         return DifferentialIntelligenceReport(
             total_trials_evaluated=n,
@@ -146,12 +147,12 @@ class DifferentialIntelligenceLab:
             preserved_trials=evaluated,
             assumptions=[
                 "Independent LLM models invoked with zero temperature (greedy deterministic generation)",
-                "Input document text preserved verbatim without truncation in archive logs"
+                "Input document text preserved verbatim without truncation in archive logs",
             ],
             methodology="Differential multi-engine comparison preserving raw prompts and outputs for retrospective auditability.",
             limitations=[
                 "Different LLMs utilize distinct tokenization schemes which may produce subtle morphological variations in extracted values"
             ],
             reproducibility_instructions="Re-run preserved inputs through respective model API endpoints using recorded model checkpoints.",
-            verdict=verdict
+            verdict=verdict,
         )

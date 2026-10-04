@@ -257,7 +257,9 @@ class HypothesisEngine:
         )
         return hypo
 
-    def retire_hypothesis(self, hypothesis_id: str, reason: str = "Retired due to obsolescence") -> ScientificHypothesis:
+    def retire_hypothesis(
+        self, hypothesis_id: str, reason: str = "Retired due to obsolescence"
+    ) -> ScientificHypothesis:
         hypo = self.hypotheses.get(hypothesis_id)
         if not hypo:
             raise ValueError(f"Hypothesis {hypothesis_id} not found")

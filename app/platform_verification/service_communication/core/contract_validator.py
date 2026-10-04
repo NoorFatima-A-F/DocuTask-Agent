@@ -1,6 +1,7 @@
 """
 Communication Contract & Schema Validator.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.service_communication.domain.models import CommunicationContractReport
 from app.platform_verification.service_communication.domain.interfaces import IContractValidator
@@ -22,7 +23,9 @@ class ContractValidator(IContractValidator):
                 undocumented.append(f"Endpoint '{endpoint}' lacks formal schema definition")
 
             if c.get("has_breaking_change", False):
-                breaking.append(f"Breaking change detected in '{endpoint}': {c.get('breaking_reason', 'modified payload')}")
+                breaking.append(
+                    f"Breaking change detected in '{endpoint}': {c.get('breaking_reason', 'modified payload')}"
+                )
 
         status = "PASS" if len(undocumented) == 0 and len(breaking) == 0 else "FAIL"
 

@@ -13,6 +13,7 @@ from ..artifacts.registry import ArtifactRegistry, ArtifactMetadata
 @dataclass
 class PromotionChecklist:
     """Audit verification checklist for promoting a release across environments."""
+
     from_env: str
     to_env: str
     release_id: str
@@ -68,7 +69,9 @@ class EnvironmentPromotionManager:
             to_env=to_env,
             release_id=release_id,
             artifact_signed=artifact.signature is not None,
-            vulnerability_scan_passed=not artifact.has_critical_vulnerabilities if policy.block_on_critical_vulnerabilities else True,
+            vulnerability_scan_passed=not artifact.has_critical_vulnerabilities
+            if policy.block_on_critical_vulnerabilities
+            else True,
             tests_passed=tests_passed,
             approvals_obtained=len(approvers),
             approved_by=approvers,

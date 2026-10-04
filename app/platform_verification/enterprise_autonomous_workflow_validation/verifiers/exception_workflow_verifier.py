@@ -25,11 +25,41 @@ class ExceptionWorkflowVerifier(IExceptionWorkflowVerifier):
 
     def verify(self) -> ExceptionWorkflowReport:
         simulations = [
-            ExceptionSimulation(exception_type="CorruptedPDFFile", fault_payload="TruncatedByteStream", detected_properly=True, graceful_fallback="RouteToManualInspectionQueue", recovered_successfully=True),
-            ExceptionSimulation(exception_type="ConflictingVendorData", fault_payload="MismatchTaxIDvsVendorName", detected_properly=True, graceful_fallback="FlagForSupervisorReview", recovered_successfully=True),
-            ExceptionSimulation(exception_type="DuplicateDocumentSubmission", fault_payload="IdenticalPayloadHash", detected_properly=True, graceful_fallback="DeduplicateAndAttachExistingCase", recovered_successfully=True),
-            ExceptionSimulation(exception_type="ExpiredIdentificationDocument", fault_payload="ExpirationDatePast", detected_properly=True, graceful_fallback="RequestUpdatedDocumentFromUser", recovered_successfully=True),
-            ExceptionSimulation(exception_type="PrimaryLLMProviderTimeout", fault_payload="504GatewayTimeout", detected_properly=True, graceful_fallback="FallbackToSecondaryLLMAndCache", recovered_successfully=True),
+            ExceptionSimulation(
+                exception_type="CorruptedPDFFile",
+                fault_payload="TruncatedByteStream",
+                detected_properly=True,
+                graceful_fallback="RouteToManualInspectionQueue",
+                recovered_successfully=True,
+            ),
+            ExceptionSimulation(
+                exception_type="ConflictingVendorData",
+                fault_payload="MismatchTaxIDvsVendorName",
+                detected_properly=True,
+                graceful_fallback="FlagForSupervisorReview",
+                recovered_successfully=True,
+            ),
+            ExceptionSimulation(
+                exception_type="DuplicateDocumentSubmission",
+                fault_payload="IdenticalPayloadHash",
+                detected_properly=True,
+                graceful_fallback="DeduplicateAndAttachExistingCase",
+                recovered_successfully=True,
+            ),
+            ExceptionSimulation(
+                exception_type="ExpiredIdentificationDocument",
+                fault_payload="ExpirationDatePast",
+                detected_properly=True,
+                graceful_fallback="RequestUpdatedDocumentFromUser",
+                recovered_successfully=True,
+            ),
+            ExceptionSimulation(
+                exception_type="PrimaryLLMProviderTimeout",
+                fault_payload="504GatewayTimeout",
+                detected_properly=True,
+                graceful_fallback="FallbackToSecondaryLLMAndCache",
+                recovered_successfully=True,
+            ),
         ]
 
         checks = [

@@ -1,6 +1,7 @@
 """
 Quality Gate Engine evaluating operational verification rules and release gating.
 """
+
 from __future__ import annotations
 from typing import Dict, List, Optional
 from app.platform_verification.evaluation_engine.domain.models import (
@@ -16,9 +17,7 @@ from app.platform_verification.evaluation_engine.domain.interfaces import IQuali
 class QualityGateEngine(IQualityGateEngine):
     """Evaluates metrics against enterprise quality gates with deterministic multi-status outcomes."""
 
-    def evaluate_gate(
-        self, metric_results: List[MetricResult], rules: List[QualityGateRule]
-    ) -> QualityGateDecision:
+    def evaluate_gate(self, metric_results: List[MetricResult], rules: List[QualityGateRule]) -> QualityGateDecision:
         metric_map: Dict[str, MetricResult] = {m.metric_id: m for m in metric_results}
 
         passed_rules: List[str] = []

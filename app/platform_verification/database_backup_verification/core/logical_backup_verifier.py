@@ -2,6 +2,7 @@
 Logical Backup Verifier for PostgreSQL (Part 3G.2B).
 Verifies logical backup dumps (pg_dump, pg_dumpall, directory format, custom format).
 """
+
 import time
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
@@ -41,11 +42,7 @@ class LogicalBackupVerifier(ILogicalBackupVerifier):
         roles_and_privileges_captured = True
         schema_completeness_verified = True
         row_counts_verified = True
-        passed = (
-            roles_and_privileges_captured
-            and schema_completeness_verified
-            and row_counts_verified
-        )
+        passed = roles_and_privileges_captured and schema_completeness_verified and row_counts_verified
 
         duration = round(time.perf_counter() - start_time + 0.12, 4)
 

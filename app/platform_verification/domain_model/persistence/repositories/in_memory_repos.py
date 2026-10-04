@@ -1,6 +1,7 @@
 """
 Repositories for Verification Platform Bounded Contexts.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.domain_model.domain.verification_management import VerificationDefinition
 from app.platform_verification.domain_model.domain.verification_plan import VerificationPlan
@@ -124,14 +125,16 @@ class VerificationDomainRepository:
         return None
 
     # Audit
-    def append_audit_record(self, entity_type: str, entity_id: str, action: str, new_state: dict, previous_state: Optional[dict] = None) -> AuditRecord:
+    def append_audit_record(
+        self, entity_type: str, entity_id: str, action: str, new_state: dict, previous_state: Optional[dict] = None
+    ) -> AuditRecord:
         record = AuditRecord(
             entity_type=entity_type,
             entity_id=entity_id,
             action=action,
             previous_state=previous_state,
             new_state=new_state,
-            previous_hash=self._last_audit_hash
+            previous_hash=self._last_audit_hash,
         )
         record.compute_hash()
         self._last_audit_hash = record.record_hash

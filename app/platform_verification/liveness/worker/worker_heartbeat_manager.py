@@ -2,6 +2,7 @@
 Worker Runtime Liveness & Thread/Task Monitor (Parts 5 & 8).
 Tracks worker heartbeats, task processing viability, and identifies zombie workers.
 """
+
 import time
 from typing import Dict, Any
 from app.platform_verification.liveness.domain.models import (
@@ -68,7 +69,7 @@ class WorkerHeartbeatManager:
         for wid, wdata in self._workers.items():
             age = now - wdata["last_heartbeat"]
             is_zombie = age > self.heartbeat_timeout
-            
+
             if is_zombie:
                 status = "unhealthy"
                 zombie_count += 1
@@ -77,15 +78,17 @@ class WorkerHeartbeatManager:
                 status = "alive"
                 active_count += 1
 
-            workers_list.append({
-                "worker_id": wid,
-                "status": status,
-                "last_heartbeat_age_seconds": round(age, 2),
-                "current_task": wdata["current_task"],
-                "running_tasks": wdata.get("running_tasks", 0),
-                "pending_tasks": wdata.get("pending_tasks", 0),
-                "failed_tasks": wdata.get("failed_tasks", 0),
-            })
+            workers_list.append(
+                {
+                    "worker_id": wid,
+                    "status": status,
+                    "last_heartbeat_age_seconds": round(age, 2),
+                    "current_task": wdata["current_task"],
+                    "running_tasks": wdata.get("running_tasks", 0),
+                    "pending_tasks": wdata.get("pending_tasks", 0),
+                    "failed_tasks": wdata.get("failed_tasks", 0),
+                }
+            )
 
         total = len(self._workers)
         all_healthy = (active_count == total) and (zombie_count == 0)

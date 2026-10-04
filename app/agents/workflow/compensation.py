@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 class CompensationStep(BaseModel):
     """A record of an executed forward step that may need compensation."""
+
     node_id: str
     action_name: str
     compensating_handler: Optional[str] = None
@@ -71,9 +72,7 @@ class CompensationCoordinator:
                         f"Step '{step.node_id}' failed and has no registered compensating action.",
                         workflow_id=workflow_id,
                     )
-                logger.warning(
-                    f"Workflow {workflow_id}: Step '{step.node_id}' has no compensating handler. Skipping."
-                )
+                logger.warning(f"Workflow {workflow_id}: Step '{step.node_id}' has no compensating handler. Skipping.")
                 continue
 
             handler = handler_resolver(step.compensating_handler)
@@ -90,9 +89,7 @@ class CompensationCoordinator:
                 outcome = await handler({"input": step.input_data, "output": step.output_data})
                 results.append({"node_id": step.node_id, "status": "COMPENSATED", "result": outcome})
             except Exception as ex:
-                logger.error(
-                    f"Workflow {workflow_id}: Compensation for node '{step.node_id}' failed: {ex}"
-                )
+                logger.error(f"Workflow {workflow_id}: Compensation for node '{step.node_id}' failed: {ex}")
                 results.append({"node_id": step.node_id, "status": "FAILED", "error": str(ex)})
                 raise
 

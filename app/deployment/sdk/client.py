@@ -1,4 +1,5 @@
 """Enterprise Infrastructure & Deployment SDK."""
+
 from typing import Any, Dict, List, Optional
 from ..artifacts.metadata import ArtifactMetadata
 from ..artifacts.registry import ArtifactRegistry
@@ -128,7 +129,7 @@ class InfrastructureSDK:
             target_env=target_env,
             source_env=source_env,
         )
-        for role in (approved_roles or []):
+        for role in approved_roles or []:
             self.promotions.approve_promotion(
                 promotion_id=record.promotion_id,
                 role=role,

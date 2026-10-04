@@ -21,11 +21,8 @@ class AuditDashboardService:
     def get_dashboard(self, tenant_id: str) -> AuditDashboardSummary:
         metrics = self.metrics_collector.get_metrics_summary(tenant_id)
         events = self.metrics_collector.repository.list_by_tenant(tenant_id)
-        
-        critical_events = [
-            e.model_dump(mode="json") for e in events
-            if e.severity.value in ["HIGH", "CRITICAL"]
-        ][:10]
+
+        critical_events = [e.model_dump(mode="json") for e in events if e.severity.value in ["HIGH", "CRITICAL"]][:10]
 
         # Calculate compliance health score (deducting points for critical errors)
         health = max(0.0, 100.0 - (metrics.critical_severity_count * 15.0) - (metrics.high_severity_count * 5.0))

@@ -1,6 +1,7 @@
 """
 Domain module for Enterprise Observability Infrastructure Verification
 """
+
 from .models import (
     LogLevel,
     GoldenSignalType,

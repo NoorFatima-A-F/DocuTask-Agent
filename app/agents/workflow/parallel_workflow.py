@@ -28,8 +28,4 @@ class ParallelWorkflowEngine:
             if not b.success:
                 all_ok = False
 
-        return {
-            "all_branches_successful": all_ok,
-            "merged_outputs": merged,
-            "total_branches": len(branch_results)
-        }
+        return {"all_branches_successful": all_ok, "merged_outputs": merged, "total_branches": len(branch_results)}

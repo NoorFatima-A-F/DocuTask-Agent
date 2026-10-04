@@ -19,10 +19,10 @@ PerformanceVerificationStatus = VerificationStatus
 
 
 class EnterprisePerformanceTier(str, Enum):
-    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"          # 95.0 - 100.0%
-    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"          # 90.0 - 94.99%
-    OPTIMIZATION_REQUIRED = "Optimization Required"                        # 80.0 - 89.99%
-    FAILED = "Failed"                                                      # < 80.0%
+    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"  # 95.0 - 100.0%
+    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"  # 90.0 - 94.99%
+    OPTIMIZATION_REQUIRED = "Optimization Required"  # 80.0 - 89.99%
+    FAILED = "Failed"  # < 80.0%
 
 
 CertificationTier = EnterprisePerformanceTier
@@ -47,8 +47,8 @@ class BaseVerificationReport(BaseModel):
     summary: str = ""
 
 
-
 # ─── 3J.5.1: Performance Baseline Models ───────────────────────────────────────
+
 
 class BaselineMetricSummary(BaseModel):
     api_latency_p95: str = "42.0ms"
@@ -65,6 +65,7 @@ class PerformanceBaselineReport(BaseVerificationReport):
 
 
 # ─── 3J.5.2: Latency Breakdown Models ─────────────────────────────────────────
+
 
 class ComponentLatencySpec(BaseModel):
     component_name: str
@@ -85,6 +86,7 @@ class LatencyBreakdownReport(BaseVerificationReport):
 
 # ─── 3J.5.3: Throughput Capacity Models ───────────────────────────────────────
 
+
 class DocumentClassBenchmark(BaseModel):
     document_class: str
     volume_tested: int
@@ -103,6 +105,7 @@ class ThroughputCapacityReport(BaseVerificationReport):
 
 
 # ─── 3J.5.4 & 5: Controlled Load Testing Models ───────────────────────────────
+
 
 class UserConcurrencyProfile(BaseModel):
     profile_name: str
@@ -124,8 +127,8 @@ class ControlledLoadTestReport(BaseVerificationReport):
 LoadTestReport = ControlledLoadTestReport
 
 
-
 # ─── 3J.5.6: Stress Testing Models ────────────────────────────────────────────
+
 
 class StressLevelResult(BaseModel):
     users: int
@@ -145,6 +148,7 @@ class StressTestReport(BaseVerificationReport):
 
 # ─── 3J.5.7: Spike Testing Models ─────────────────────────────────────────────
 
+
 class SpikeTestReport(BaseVerificationReport):
     report_title: str = "Traffic Surge & Spike Handling Report"
     baseline_rate_docs_hr: int = 100
@@ -158,6 +162,7 @@ class SpikeTestReport(BaseVerificationReport):
 
 
 # ─── 3J.5.8: Endurance Testing Models ─────────────────────────────────────────
+
 
 class EnduranceCheckpoint(BaseModel):
     checkpoint_hour: int
@@ -176,6 +181,7 @@ class EnduranceTestReport(BaseVerificationReport):
 
 
 # ─── 3J.5.9: AI Workload Performance Models ───────────────────────────────────
+
 
 class AIExecutionVarianceSample(BaseModel):
     execution_index: int
@@ -197,6 +203,7 @@ class AIWorkloadReport(BaseVerificationReport):
 
 # ─── 3J.5.10: Queue Performance Models ────────────────────────────────────────
 
+
 class QueuePerformanceReport(BaseVerificationReport):
     report_title: str = "Queue Performance & Backpressure Report"
     producer_rate_jobs_min: int = 1000
@@ -207,6 +214,7 @@ class QueuePerformanceReport(BaseVerificationReport):
 
 
 # ─── 3J.5.11: Database Performance Models ─────────────────────────────────────
+
 
 class DatabasePerformanceReport(BaseVerificationReport):
     report_title: str = "Database Performance & Write Concurrency Report"
@@ -219,6 +227,7 @@ class DatabasePerformanceReport(BaseVerificationReport):
 
 
 # ─── 3J.5.12: Storage Performance Models ──────────────────────────────────────
+
 
 class LargeFileBenchmark(BaseModel):
     file_size_label: str
@@ -238,6 +247,7 @@ class StoragePerformanceReport(BaseVerificationReport):
 
 # ─── 3J.5.13: Resource Utilization Models ─────────────────────────────────────
 
+
 class ResourceUtilizationReport(BaseVerificationReport):
     report_title: str = "Resource Utilization Verification Report"
     avg_cpu_pct: float = 38.5
@@ -248,6 +258,7 @@ class ResourceUtilizationReport(BaseVerificationReport):
 
 
 # ─── 3J.5.14: Bottleneck Detection Models ─────────────────────────────────────
+
 
 class BottleneckCategoryResult(BaseModel):
     category: str
@@ -265,6 +276,7 @@ class BottleneckAnalysisReport(BaseVerificationReport):
 
 # ─── 3J.5.15: Capacity Planning Models ────────────────────────────────────────
 
+
 class CapacityPlanReport(BaseVerificationReport):
     report_title: str = "Capacity Planning & Scaling Model Report"
     current_capacity_dph: int = 1200
@@ -277,6 +289,7 @@ class CapacityPlanReport(BaseVerificationReport):
 
 # ─── 3J.5.16: Performance Regression Models ───────────────────────────────────
 
+
 class PerformanceRegressionReport(BaseVerificationReport):
     report_title: str = "Performance Regression Verification Report"
     previous_version: str = "v3.1.0"
@@ -288,6 +301,7 @@ class PerformanceRegressionReport(BaseVerificationReport):
 
 
 # ─── 3J.5.18: 6-Category Quality Scoring & Certification Models ────────────────
+
 
 class CategoryScore(BaseModel):
     category: str
@@ -326,4 +340,3 @@ class PerformanceVerificationManifest(BaseModel):
 
 # Backward / general alias
 PerformanceCertificationReport = EnterprisePerformanceCertificationReport
-

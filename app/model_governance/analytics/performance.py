@@ -13,6 +13,7 @@ from pydantic import BaseModel
 
 class PerformanceMetricSample(BaseModel):
     """Execution telemetry sample."""
+
     model_id: str
     organization_id: str
     latency_ms: float
@@ -22,6 +23,7 @@ class PerformanceMetricSample(BaseModel):
 
 class ModelPerformanceReport(BaseModel):
     """Aggregated performance summary."""
+
     model_id: str
     sample_count: int
     error_count: int

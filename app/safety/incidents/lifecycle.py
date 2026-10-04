@@ -10,6 +10,7 @@ from ..gateway.decision import SafetyCategory, ViolationSeverity, SafetyViolatio
 
 class IncidentLifecycleState(str, Enum):
     """FSM Lifecycle states for AI Safety incidents."""
+
     DETECTED = "DETECTED"
     CLASSIFIED = "CLASSIFIED"
     INVESTIGATING = "INVESTIGATING"

@@ -27,7 +27,11 @@ class ContinuousPerformanceExporter:
         r"3j\.12\.4(?!\d)": ["regression_report.json", "performance_regression_report.json"],
         r"3j\.12\.5(?!\d)": ["impact_analysis.json", "change_impact_analysis_report.json"],
         r"3j\.12\.6(?!\d)": ["quality_gate_report.json", "performance_gate_report.json"],
-        r"3j\.12\.7(?!\d)": ["environment_comparison.json", "environment_performance_comparison.json", "multi_environment_comparison_report.json"],
+        r"3j\.12\.7(?!\d)": [
+            "environment_comparison.json",
+            "environment_performance_comparison.json",
+            "multi_environment_comparison_report.json",
+        ],
         r"3j\.12\.8(?!\d)": ["knowledge_repository.json", "performance_knowledge_report.json"],
         r"3j\.12\.9(?!\d)": ["trend_analysis.json", "performance_trend_report.json"],
         r"3j\.12\.10(?!\d)": ["dashboard_report.json", "performance_dashboard_report.json"],
@@ -55,7 +59,9 @@ class ContinuousPerformanceExporter:
         target_filenames: List[str] = []
 
         for pattern, filenames in self.PHASE_FILENAME_MAP.items():
-            if re.search(pattern, report.phase_id, re.IGNORECASE) or re.search(pattern, report.verifier_id, re.IGNORECASE):
+            if re.search(pattern, report.phase_id, re.IGNORECASE) or re.search(
+                pattern, report.verifier_id, re.IGNORECASE
+            ):
                 target_filenames.extend(filenames)
                 break
 

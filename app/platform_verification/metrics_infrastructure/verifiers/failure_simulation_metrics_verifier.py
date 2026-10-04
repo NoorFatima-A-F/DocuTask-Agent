@@ -1,6 +1,7 @@
 """
 3I.3.16: Failure Simulation & Chaos Metrics Reaction Verifier
 """
+
 from typing import List
 from ..domain.models import ChaosMetricScenarioSpec, ChaosMetricReport
 from ..domain.interfaces import IFailureSimulationMetricsVerifier
@@ -20,15 +21,15 @@ class FailureSimulationMetricsVerifier(IFailureSimulationMetricsVerifier):
                 expected_metric_response=[
                     "workers_active decreased by 1",
                     "queue_depth increased above threshold",
-                    "worker_restart_total incremented"
+                    "worker_restart_total incremented",
                 ],
                 actual_metric_response=[
                     "workers_active decreased by 1",
                     "queue_depth increased above threshold",
-                    "worker_restart_total incremented"
+                    "worker_restart_total incremented",
                 ],
                 alert_triggered=True,
-                metric_anomaly_detected=True
+                metric_anomaly_detected=True,
             ),
             ChaosMetricScenarioSpec(
                 scenario_id="CHAOS-METRIC-002",
@@ -37,15 +38,15 @@ class FailureSimulationMetricsVerifier(IFailureSimulationMetricsVerifier):
                 expected_metric_response=[
                     "database_errors_total incremented",
                     "http_errors_total 5xx rate spiked",
-                    "database_connections_active dropped to 0"
+                    "database_connections_active dropped to 0",
                 ],
                 actual_metric_response=[
                     "database_errors_total incremented",
                     "http_errors_total 5xx rate spiked",
-                    "database_connections_active dropped to 0"
+                    "database_connections_active dropped to 0",
                 ],
                 alert_triggered=True,
-                metric_anomaly_detected=True
+                metric_anomaly_detected=True,
             ),
             ChaosMetricScenarioSpec(
                 scenario_id="CHAOS-METRIC-003",
@@ -54,20 +55,20 @@ class FailureSimulationMetricsVerifier(IFailureSimulationMetricsVerifier):
                 expected_metric_response=[
                     "llm_errors_total{error_type='timeout'} incremented",
                     "fallback_execution_total incremented",
-                    "agent_task_duration_seconds shifted into P99 bucket"
+                    "agent_task_duration_seconds shifted into P99 bucket",
                 ],
                 actual_metric_response=[
                     "llm_errors_total{error_type='timeout'} incremented",
                     "fallback_execution_total incremented",
-                    "agent_task_duration_seconds shifted into P99 bucket"
+                    "agent_task_duration_seconds shifted into P99 bucket",
                 ],
                 alert_triggered=True,
-                metric_anomaly_detected=True
+                metric_anomaly_detected=True,
             ),
         ]
 
         return ChaosMetricReport(
             report_title="Failure Simulation & Chaos Metrics Reaction Report",
             scenarios=scenarios,
-            all_scenarios_verified=True
+            all_scenarios_verified=True,
         )

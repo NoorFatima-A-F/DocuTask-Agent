@@ -12,6 +12,7 @@ from .versioning import SemanticVersion
 @dataclass(frozen=True)
 class ComponentMetadata:
     """Universal metadata container for any kernel component."""
+
     name: str
     version: SemanticVersion = field(default_factory=lambda: SemanticVersion(1, 0, 0))
     description: str = ""
@@ -35,6 +36,7 @@ class ComponentMetadata:
 @dataclass(frozen=True)
 class ModuleMetadata(ComponentMetadata):
     """Metadata specification for managed modules."""
+
     dependencies: List[str] = field(default_factory=list)
     capabilities: List[str] = field(default_factory=list)
     permissions: List[str] = field(default_factory=list)
@@ -44,20 +46,23 @@ class ModuleMetadata(ComponentMetadata):
 
     def to_dict(self) -> Dict[str, Any]:
         base = super().to_dict()
-        base.update({
-            "dependencies": self.dependencies,
-            "capabilities": self.capabilities,
-            "permissions": self.permissions,
-            "events_published": self.events_published,
-            "events_subscribed": self.events_subscribed,
-            "configuration_schema": self.configuration_schema,
-        })
+        base.update(
+            {
+                "dependencies": self.dependencies,
+                "capabilities": self.capabilities,
+                "permissions": self.permissions,
+                "events_published": self.events_published,
+                "events_subscribed": self.events_subscribed,
+                "configuration_schema": self.configuration_schema,
+            }
+        )
         return base
 
 
 @dataclass(frozen=True)
 class PluginMetadata(ComponentMetadata):
     """Metadata specification for dynamic plugins."""
+
     plugin_type: str = "general"
     entrypoint: str = ""
     required_permissions: List[str] = field(default_factory=list)
@@ -66,19 +71,22 @@ class PluginMetadata(ComponentMetadata):
 
     def to_dict(self) -> Dict[str, Any]:
         base = super().to_dict()
-        base.update({
-            "plugin_type": self.plugin_type,
-            "entrypoint": self.entrypoint,
-            "required_permissions": self.required_permissions,
-            "sandbox_required": self.sandbox_required,
-            "min_platform_version": self.min_platform_version,
-        })
+        base.update(
+            {
+                "plugin_type": self.plugin_type,
+                "entrypoint": self.entrypoint,
+                "required_permissions": self.required_permissions,
+                "sandbox_required": self.sandbox_required,
+                "min_platform_version": self.min_platform_version,
+            }
+        )
         return base
 
 
 @dataclass(frozen=True)
 class ServiceMetadata(ComponentMetadata):
     """Metadata specification for registered platform services."""
+
     module_owner: str = "core"
     endpoints: List[str] = field(default_factory=list)
     health_check_url: Optional[str] = None
@@ -86,10 +94,12 @@ class ServiceMetadata(ComponentMetadata):
 
     def to_dict(self) -> Dict[str, Any]:
         base = super().to_dict()
-        base.update({
-            "module_owner": self.module_owner,
-            "endpoints": self.endpoints,
-            "health_check_url": self.health_check_url,
-            "service_type": self.service_type,
-        })
+        base.update(
+            {
+                "module_owner": self.module_owner,
+                "endpoints": self.endpoints,
+                "health_check_url": self.health_check_url,
+                "service_type": self.service_type,
+            }
+        )
         return base

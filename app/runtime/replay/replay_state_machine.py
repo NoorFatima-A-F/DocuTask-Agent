@@ -71,7 +71,10 @@ class ReplayStateMachine:
                 state.status = "RUNNING"
             elif etype_str == "MISSION_COMPLETED" or event.event_type == EventType.MISSION_COMPLETED:
                 state.status = "COMPLETED"
-            elif etype_str in {"MISSION_FAILED", "MISSION_ABORTED"} or event.event_type in {EventType.MISSION_FAILED, EventType.MISSION_ABORTED}:
+            elif etype_str in {"MISSION_FAILED", "MISSION_ABORTED"} or event.event_type in {
+                EventType.MISSION_FAILED,
+                EventType.MISSION_ABORTED,
+            }:
                 state.status = "FAILED"
 
         # Planner & Generation Events
@@ -96,13 +99,19 @@ class ReplayStateMachine:
             task = state.tasks[task_id]
             task.assigned_worker = event.worker_id or task.assigned_worker
 
-            if etype_str in {"EXECUTION_TASK_STARTED", "EXECUTION_NODE_EXECUTED"} or event.event_type in {EventType.EXECUTION_TASK_STARTED, EventType.EXECUTION_NODE_EXECUTED}:
+            if etype_str in {"EXECUTION_TASK_STARTED", "EXECUTION_NODE_EXECUTED"} or event.event_type in {
+                EventType.EXECUTION_TASK_STARTED,
+                EventType.EXECUTION_NODE_EXECUTED,
+            }:
                 task.status = "RUNNING"
                 task.started_at = ts_str
                 if task_id not in state.running_tasks:
                     state.running_tasks.append(task_id)
 
-            elif etype_str in {"EXECUTION_TASK_COMPLETED", "EXECUTION_STEP_COMPLETED"} or event.event_type in {EventType.EXECUTION_TASK_COMPLETED, EventType.EXECUTION_STEP_COMPLETED}:
+            elif etype_str in {"EXECUTION_TASK_COMPLETED", "EXECUTION_STEP_COMPLETED"} or event.event_type in {
+                EventType.EXECUTION_TASK_COMPLETED,
+                EventType.EXECUTION_STEP_COMPLETED,
+            }:
                 task.status = "COMPLETED"
                 task.completed_at = ts_str
                 if task_id in state.running_tasks:
@@ -112,7 +121,10 @@ class ReplayStateMachine:
                 if "duration_ms" in event.payload:
                     task.duration_ms = float(event.payload["duration_ms"])
 
-            elif etype_str in {"EXECUTION_TASK_FAILED", "EXECUTION_STEP_FAILED"} or event.event_type in {EventType.EXECUTION_TASK_FAILED, EventType.EXECUTION_STEP_FAILED}:
+            elif etype_str in {"EXECUTION_TASK_FAILED", "EXECUTION_STEP_FAILED"} or event.event_type in {
+                EventType.EXECUTION_TASK_FAILED,
+                EventType.EXECUTION_STEP_FAILED,
+            }:
                 task.status = "FAILED"
                 task.error = event.payload.get("error", "Task execution failed")
                 if task_id in state.running_tasks:
@@ -123,11 +135,14 @@ class ReplayStateMachine:
         # Worker Allocation
         elif cat_str == "WORKER" or event.category == EventCategory.WORKER:
             if event.worker_id:
-                w_state = state.active_workers.setdefault(event.worker_id, {
-                    "worker_id": event.worker_id,
-                    "status": "ACTIVE",
-                    "tasks_processed": 0,
-                })
+                w_state = state.active_workers.setdefault(
+                    event.worker_id,
+                    {
+                        "worker_id": event.worker_id,
+                        "status": "ACTIVE",
+                        "tasks_processed": 0,
+                    },
+                )
                 w_state["last_active"] = ts_str
                 if etype_str == "WORKER_TASK_ASSIGNED" or event.event_type == EventType.WORKER_TASK_ASSIGNED:
                     w_state["tasks_processed"] += 1
@@ -144,20 +159,24 @@ class ReplayStateMachine:
 
         # Human Review
         elif cat_str == "HUMAN_REVIEW" or event.category == EventCategory.HUMAN_REVIEW:
-            state.human_interventions.append({
-                "event_id": event.event_id,
-                "timestamp": ts_str,
-                "action": event.payload.get("action", "HUMAN_EDIT"),
-                "details": event.payload,
-            })
+            state.human_interventions.append(
+                {
+                    "event_id": event.event_id,
+                    "timestamp": ts_str,
+                    "action": event.payload.get("action", "HUMAN_EDIT"),
+                    "details": event.payload,
+                }
+            )
 
         # Reflection
         elif cat_str == "REFLECTION" or event.category == EventCategory.REFLECTION:
-            state.reflections_recorded.append({
-                "event_id": event.event_id,
-                "timestamp": ts_str,
-                "rule": event.payload.get("rule", "Observation recorded"),
-            })
+            state.reflections_recorded.append(
+                {
+                    "event_id": event.event_id,
+                    "timestamp": ts_str,
+                    "rule": event.payload.get("rule", "Observation recorded"),
+                }
+            )
 
         # Governance
         elif cat_str == "GOVERNANCE" or event.category == EventCategory.GOVERNANCE:

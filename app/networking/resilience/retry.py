@@ -87,4 +87,6 @@ class RetryPolicyEngine:
 
             attempt += 1
 
-        return last_response or MeshResponse(status_code=500, error_message="Retry exhausted", request_id=request.request_id)
+        return last_response or MeshResponse(
+            status_code=500, error_message="Retry exhausted", request_id=request.request_id
+        )

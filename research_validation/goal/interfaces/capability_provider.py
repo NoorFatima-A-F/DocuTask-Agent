@@ -12,6 +12,7 @@ from typing import Any, Dict, List, Optional
 @dataclass(frozen=True)
 class DiscoveredCapability:
     """A verified capability discovered in the host environment."""
+
     capability_name: str
     category: str  # "MODEL", "TOOL", "BENCHMARK", "HARDWARE", "AGENT", "STORAGE"
     version: str
@@ -60,14 +61,16 @@ class DefaultSystemCapabilityProvider(ICapabilityProvider):
         discovered: List[DiscoveredCapability] = []
         for name, meta in self.KNOWN_CAPABILITIES.items():
             avail = self._overrides.get(name, True)
-            discovered.append(DiscoveredCapability(
-                capability_name=name,
-                category=meta["category"],
-                version=meta["version"],
-                is_available=avail,
-                confidence=meta["confidence"] if avail else 0.0,
-                diagnostic="Discovered active subsystem." if avail else "Subsystem disabled by policy override.",
-            ))
+            discovered.append(
+                DiscoveredCapability(
+                    capability_name=name,
+                    category=meta["category"],
+                    version=meta["version"],
+                    is_available=avail,
+                    confidence=meta["confidence"] if avail else 0.0,
+                    diagnostic="Discovered active subsystem." if avail else "Subsystem disabled by policy override.",
+                )
+            )
         return discovered
 
     def is_capability_available(self, capability_name: str) -> bool:

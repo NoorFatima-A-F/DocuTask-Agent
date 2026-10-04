@@ -18,6 +18,7 @@ logger = logging.getLogger("infrastructure.replication.conflict_resolution")
 
 class ConflictResolutionStrategy(str, enum.Enum):
     """Supported conflict resolution strategies."""
+
     LAST_WRITE_WINS = "LAST_WRITE_WINS"
     VECTOR_CLOCK = "VECTOR_CLOCK"
     QUORUM_BASED = "QUORUM_BASED"
@@ -26,6 +27,7 @@ class ConflictResolutionStrategy(str, enum.Enum):
 
 class ReplicationConflict(BaseModel):
     """Specification of a detected replication conflict."""
+
     conflict_id: str
     entity_id: str
     local_value: Any
@@ -41,6 +43,7 @@ class ReplicationConflict(BaseModel):
 
 class ResolutionResult(BaseModel):
     """Result of resolving a replication conflict."""
+
     conflict_id: str
     entity_id: str
     strategy_used: ConflictResolutionStrategy

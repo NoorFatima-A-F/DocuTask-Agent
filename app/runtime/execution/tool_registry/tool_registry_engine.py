@@ -201,7 +201,14 @@ class ToolRegistryEngine:
                 parameters=[
                     ToolParameter("channel", "string", "Target Slack channel (e.g. #ops-war-room)", True),
                     ToolParameter("message", "string", "Message markdown payload", True),
-                    ToolParameter("priority", "string", "Urgency level", False, default="normal", enum_values=["low", "normal", "high", "urgent"]),
+                    ToolParameter(
+                        "priority",
+                        "string",
+                        "Urgency level",
+                        False,
+                        default="normal",
+                        enum_values=["low", "normal", "high", "urgent"],
+                    ),
                 ],
                 output_schema={"message_ts": "string", "channel_id": "string", "delivered": "boolean"},
             ),
@@ -223,7 +230,12 @@ class ToolRegistryEngine:
                     ToolParameter("deployment_name", "string", "Name of the deployment", True),
                     ToolParameter("replicas", "integer", "Desired replica count", True),
                 ],
-                output_schema={"namespace": "string", "deployment": "string", "previous_replicas": "integer", "new_replicas": "integer"},
+                output_schema={
+                    "namespace": "string",
+                    "deployment": "string",
+                    "previous_replicas": "integer",
+                    "new_replicas": "integer",
+                },
             ),
             ToolDefinition(
                 tool_id="playwright_web_scraper",
@@ -239,10 +251,24 @@ class ToolRegistryEngine:
                 parameters=[
                     ToolParameter("url", "string", "Full HTTPS URL to navigate", True),
                     ToolParameter("extract_selector", "string", "CSS selector to extract", False, default="body"),
-                    ToolParameter("capture_screenshot", "boolean", "Capture visual base64 snapshot", False, default=True),
-                    ToolParameter("wait_until", "string", "Navigation wait state", False, default="networkidle", enum_values=["load", "domcontentloaded", "networkidle"]),
+                    ToolParameter(
+                        "capture_screenshot", "boolean", "Capture visual base64 snapshot", False, default=True
+                    ),
+                    ToolParameter(
+                        "wait_until",
+                        "string",
+                        "Navigation wait state",
+                        False,
+                        default="networkidle",
+                        enum_values=["load", "domcontentloaded", "networkidle"],
+                    ),
                 ],
-                output_schema={"title": "string", "extracted_text": "string", "status_code": "integer", "screenshot_base64": "string"},
+                output_schema={
+                    "title": "string",
+                    "extracted_text": "string",
+                    "status_code": "integer",
+                    "screenshot_base64": "string",
+                },
             ),
             ToolDefinition(
                 tool_id="postgres_execute_query",
@@ -300,7 +326,12 @@ class ToolRegistryEngine:
                     ToolParameter("currency", "string", "ISO currency code (usd, eur, gbp)", False, default="usd"),
                     ToolParameter("description", "string", "Service rendered summary", True),
                 ],
-                output_schema={"invoice_id": "string", "hosted_invoice_url": "string", "status": "string", "total_cents": "integer"},
+                output_schema={
+                    "invoice_id": "string",
+                    "hosted_invoice_url": "string",
+                    "status": "string",
+                    "total_cents": "integer",
+                },
             ),
             ToolDefinition(
                 tool_id="rest_api_universal_caller",
@@ -315,7 +346,14 @@ class ToolRegistryEngine:
                 tags=["rest", "http", "api", "universal"],
                 parameters=[
                     ToolParameter("url", "string", "Target HTTP URL", True),
-                    ToolParameter("method", "string", "HTTP Method", True, default="POST", enum_values=["GET", "POST", "PUT", "PATCH", "DELETE"]),
+                    ToolParameter(
+                        "method",
+                        "string",
+                        "HTTP Method",
+                        True,
+                        default="POST",
+                        enum_values=["GET", "POST", "PUT", "PATCH", "DELETE"],
+                    ),
                     ToolParameter("headers", "object", "HTTP headers dictionary", False, default={}),
                     ToolParameter("body", "object", "JSON body payload", False, default={}),
                 ],
@@ -353,14 +391,27 @@ class ToolRegistryEngine:
         if category:
             results = [t for t in results if t.category.lower() == category.lower()]
         if tool_type:
-            results = [t for t in results if (t.tool_type.value if isinstance(t.tool_type, ToolType) else str(t.tool_type)).lower() == tool_type.lower()]
+            results = [
+                t
+                for t in results
+                if (t.tool_type.value if isinstance(t.tool_type, ToolType) else str(t.tool_type)).lower()
+                == tool_type.lower()
+            ]
         if risk_level:
-            results = [t for t in results if (t.risk_level.value if isinstance(t.risk_level, RiskLevel) else str(t.risk_level)).lower() == risk_level.lower()]
+            results = [
+                t
+                for t in results
+                if (t.risk_level.value if isinstance(t.risk_level, RiskLevel) else str(t.risk_level)).lower()
+                == risk_level.lower()
+            ]
         if search:
             query = search.lower()
             results = [
-                t for t in results
-                if query in t.name.lower() or query in t.description.lower() or any(query in tag.lower() for tag in t.tags)
+                t
+                for t in results
+                if query in t.name.lower()
+                or query in t.description.lower()
+                or any(query in tag.lower() for tag in t.tags)
             ]
         return results
 

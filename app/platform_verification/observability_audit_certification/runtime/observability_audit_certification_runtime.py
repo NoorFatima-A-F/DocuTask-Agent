@@ -1,6 +1,7 @@
 """
 Phase 3H.4.12: Observability Audit Certification Runtime
 """
+
 from typing import Dict, Any
 from ..verifiers import (
     EvidenceCollectionArchitectureVerifier,
@@ -27,7 +28,9 @@ class ObservabilityAuditCertificationRuntime:
 
     def run_full_audit_and_certification(self, output_dir: str = "observability_certification") -> Dict[str, Any]:
         arch_report = self.arch_verifier.verify_collection_architecture()
-        integrity_report = self.integrity_verifier.verify_evidence_integrity([m.model_dump() for m in arch_report.manifests])
+        integrity_report = self.integrity_verifier.verify_evidence_integrity(
+            [m.model_dump() for m in arch_report.manifests]
+        )
         audit_trail_report = self.audit_verifier.generate_audit_trail()
         prr_report = self.prr_reviewer.execute_prr_review()
         compliance_report = self.compliance_validator.validate_compliance()

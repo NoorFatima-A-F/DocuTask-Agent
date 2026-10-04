@@ -127,13 +127,17 @@ class SafetyPipeline:
         )
 
         has_critical = any(v.severity == ViolationSeverity.CRITICAL for v in violations)
-        status = SafetyStatus.BLOCK if has_critical else (SafetyStatus.REQUIRE_HUMAN if not is_safe else SafetyStatus.ALLOW)
+        status = (
+            SafetyStatus.BLOCK if has_critical else (SafetyStatus.REQUIRE_HUMAN if not is_safe else SafetyStatus.ALLOW)
+        )
 
         return SafetyDecision(
             status=status,
             is_allowed=is_safe,
             violations=violations,
-            explanation="Tool invocation validated by safety sandbox" if is_safe else "Tool invocation blocked or restricted by policy",
+            explanation="Tool invocation validated by safety sandbox"
+            if is_safe
+            else "Tool invocation blocked or restricted by policy",
         )
 
     def guard_output(
@@ -165,9 +169,13 @@ class SafetyPipeline:
             violations.extend(hal_violations)
 
         # 3. Output risk scoring (evaluating unmitigated violations)
-        unmitigated_critical = any(v.severity == ViolationSeverity.CRITICAL and not v.details.get("mitigated_by_redaction") for v in violations)
-        unmitigated_high = any(v.severity == ViolationSeverity.HIGH and not v.details.get("mitigated_by_redaction") for v in violations)
-        
+        unmitigated_critical = any(
+            v.severity == ViolationSeverity.CRITICAL and not v.details.get("mitigated_by_redaction") for v in violations
+        )
+        unmitigated_high = any(
+            v.severity == ViolationSeverity.HIGH and not v.details.get("mitigated_by_redaction") for v in violations
+        )
+
         if unmitigated_critical:
             out_risk = 0.95
         elif unmitigated_high:

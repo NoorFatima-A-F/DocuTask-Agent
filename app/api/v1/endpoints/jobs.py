@@ -26,6 +26,7 @@ router = APIRouter(prefix="/jobs", tags=["Asynchronous Jobs"])
 
 class JobSubmitRequest(BaseModel):
     """Payload for submitting an asynchronous processing job."""
+
     document_id: str
     document_hash: str
     document_type: str = "invoice"
@@ -34,6 +35,7 @@ class JobSubmitRequest(BaseModel):
 
 class JobSubmitResponse(BaseModel):
     """Response returned upon job submission in <100ms."""
+
     job_id: str
     document_id: str
     status: str
@@ -43,6 +45,7 @@ class JobSubmitResponse(BaseModel):
 
 class JobExtractRequest(BaseModel):
     """Payload for extracting document via async worker pipeline."""
+
     document_type: str = "generic"
     priority: int = 1
     force_reextract: bool = False
@@ -53,25 +56,20 @@ async def enqueue_extraction_job(
     document_id: UUID,
     request: JobExtractRequest = JobExtractRequest(),
     current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
 ):
     """Enqueues an asynchronous document extraction pipeline job."""
     dispatcher = JobDispatcher(
-        job_repo=ProcessingJobRepository(db),
-        doc_repo=DocumentRepository(db),
-        queue_provider=get_queue_provider()
+        job_repo=ProcessingJobRepository(db), doc_repo=DocumentRepository(db), queue_provider=get_queue_provider()
     )
     job_res = await dispatcher.enqueue_document_pipeline(
         document_id=document_id,
         owner=current_user,
         document_type=request.document_type,
         priority=request.priority,
-        force_reextract=request.force_reextract
+        force_reextract=request.force_reextract,
     )
-    return {
-        "success": True,
-        "data": job_res.model_dump()
-    }
+    return {"success": True, "data": job_res.model_dump()}
 
 
 @router.get("", status_code=status.HTTP_200_OK)
@@ -79,19 +77,14 @@ async def list_jobs(
     page: int = Query(default=1, ge=1),
     page_size: int = Query(default=20, ge=1, le=100),
     current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
 ):
     """Lists current user background jobs with pagination."""
     dispatcher = JobDispatcher(
-        job_repo=ProcessingJobRepository(db),
-        doc_repo=DocumentRepository(db),
-        queue_provider=get_queue_provider()
+        job_repo=ProcessingJobRepository(db), doc_repo=DocumentRepository(db), queue_provider=get_queue_provider()
     )
     job_list = await dispatcher.list_user_jobs(current_user, page=page, page_size=page_size)
-    return {
-        "success": True,
-        "data": job_list.model_dump()
-    }
+    return {"success": True, "data": job_list.model_dump()}
 
 
 @router.post("/submit", response_model=JobSubmitResponse, status_code=status.HTTP_202_ACCEPTED)
@@ -109,7 +102,7 @@ async def submit_job(request: JobSubmitRequest):
         "document_type": request.document_type,
         "idempotency_key": idempotency_key,
         "priority": request.priority,
-        "status": JobState.QUEUED
+        "status": JobState.QUEUED,
     }
 
     # Enqueue payload to broker (<100ms)
@@ -120,7 +113,7 @@ async def submit_job(request: JobSubmitRequest):
         document_id=request.document_id,
         status=JobState.QUEUED,
         idempotency_key=idempotency_key,
-        priority=request.priority
+        priority=request.priority,
     )
 
 
@@ -151,43 +144,27 @@ async def get_job_legacy_status(job_id: str):
         "status": JobState.PROCESSING,
         "checkpoint_page": 1,
         "total_pages": 1,
-        "progress_percentage": 100.0
+        "progress_percentage": 100.0,
     }
 
 
 @router.get("/{job_id}", status_code=status.HTTP_200_OK)
 async def get_job_by_id(
-    job_id: UUID,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    job_id: UUID, current_user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)
 ):
     """Retrieves current job status and details by job ID."""
     dispatcher = JobDispatcher(
-        job_repo=ProcessingJobRepository(db),
-        doc_repo=DocumentRepository(db),
-        queue_provider=get_queue_provider()
+        job_repo=ProcessingJobRepository(db), doc_repo=DocumentRepository(db), queue_provider=get_queue_provider()
     )
     job_res = await dispatcher.get_job_status(job_id, current_user)
-    return {
-        "success": True,
-        "data": job_res.model_dump()
-    }
+    return {"success": True, "data": job_res.model_dump()}
 
 
 @router.delete("/{job_id}", status_code=status.HTTP_200_OK)
-async def cancel_job(
-    job_id: UUID,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
-):
+async def cancel_job(job_id: UUID, current_user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     """Cancels a queued or running job."""
     dispatcher = JobDispatcher(
-        job_repo=ProcessingJobRepository(db),
-        doc_repo=DocumentRepository(db),
-        queue_provider=get_queue_provider()
+        job_repo=ProcessingJobRepository(db), doc_repo=DocumentRepository(db), queue_provider=get_queue_provider()
     )
     cancelled = await dispatcher.cancel_job(job_id, current_user)
-    return {
-        "success": True,
-        "data": cancelled.model_dump()
-    }
+    return {"success": True, "data": cancelled.model_dump()}

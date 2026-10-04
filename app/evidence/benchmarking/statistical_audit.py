@@ -119,7 +119,7 @@ class StatisticalAuditFramework:
             std_b = statistics.stdev(baseline_samples)
 
             # Welch's t-test statistic
-            se_diff = math.sqrt((std_t ** 2) / n1 + (std_b ** 2) / n2)
+            se_diff = math.sqrt((std_t**2) / n1 + (std_b**2) / n2)
             t_stat = (mean_t - mean_b) / max(1e-9, se_diff)
 
             # Approximate p-value from t_stat
@@ -127,7 +127,7 @@ class StatisticalAuditFramework:
             p_val = 2.0 * (1.0 - 0.5 * (1.0 + math.erf(z / math.sqrt(2.0))))
             p_val = max(0.0, min(1.0, p_val))
 
-            pooled_s = math.sqrt(((n1 - 1) * (std_t ** 2) + (n2 - 1) * (std_b ** 2)) / max(1, n1 + n2 - 2))
+            pooled_s = math.sqrt(((n1 - 1) * (std_t**2) + (n2 - 1) * (std_b**2)) / max(1, n1 + n2 - 2))
             effect_d = abs(mean_t - mean_b) / max(1e-9, pooled_s)
             ci_low = (mean_t - mean_b) - 1.96 * se_diff
             ci_high = (mean_t - mean_b) + 1.96 * se_diff

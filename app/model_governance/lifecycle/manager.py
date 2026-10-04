@@ -18,11 +18,29 @@ class ModelLifecycleManager:
 
     VALID_TRANSITIONS: Dict[ModelLifecycleState, Set[ModelLifecycleState]] = {
         ModelLifecycleState.REGISTERED: {ModelLifecycleState.EVALUATING, ModelLifecycleState.ARCHIVED},
-        ModelLifecycleState.EVALUATING: {ModelLifecycleState.REVIEW, ModelLifecycleState.REGISTERED, ModelLifecycleState.ARCHIVED},
-        ModelLifecycleState.REVIEW: {ModelLifecycleState.APPROVED, ModelLifecycleState.EVALUATING, ModelLifecycleState.ARCHIVED},
+        ModelLifecycleState.EVALUATING: {
+            ModelLifecycleState.REVIEW,
+            ModelLifecycleState.REGISTERED,
+            ModelLifecycleState.ARCHIVED,
+        },
+        ModelLifecycleState.REVIEW: {
+            ModelLifecycleState.APPROVED,
+            ModelLifecycleState.EVALUATING,
+            ModelLifecycleState.ARCHIVED,
+        },
         ModelLifecycleState.APPROVED: {ModelLifecycleState.ACTIVE, ModelLifecycleState.ARCHIVED},
-        ModelLifecycleState.ACTIVE: {ModelLifecycleState.RESTRICTED, ModelLifecycleState.DEPRECATED, ModelLifecycleState.RETIRED, ModelLifecycleState.ARCHIVED},
-        ModelLifecycleState.RESTRICTED: {ModelLifecycleState.ACTIVE, ModelLifecycleState.DEPRECATED, ModelLifecycleState.RETIRED, ModelLifecycleState.ARCHIVED},
+        ModelLifecycleState.ACTIVE: {
+            ModelLifecycleState.RESTRICTED,
+            ModelLifecycleState.DEPRECATED,
+            ModelLifecycleState.RETIRED,
+            ModelLifecycleState.ARCHIVED,
+        },
+        ModelLifecycleState.RESTRICTED: {
+            ModelLifecycleState.ACTIVE,
+            ModelLifecycleState.DEPRECATED,
+            ModelLifecycleState.RETIRED,
+            ModelLifecycleState.ARCHIVED,
+        },
         ModelLifecycleState.DEPRECATED: {ModelLifecycleState.RETIRED, ModelLifecycleState.ARCHIVED},
         ModelLifecycleState.RETIRED: {ModelLifecycleState.ARCHIVED},
         ModelLifecycleState.ARCHIVED: set(),  # Terminal state

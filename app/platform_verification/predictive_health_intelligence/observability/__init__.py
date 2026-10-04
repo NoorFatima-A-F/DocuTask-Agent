@@ -1,3 +1,5 @@
-from app.platform_verification.predictive_health_intelligence.observability.predictive_metrics_exporter import PredictiveMetricsExporter
+from app.platform_verification.predictive_health_intelligence.observability.predictive_metrics_exporter import (
+    PredictiveMetricsExporter,
+)
 
 __all__ = ["PredictiveMetricsExporter"]

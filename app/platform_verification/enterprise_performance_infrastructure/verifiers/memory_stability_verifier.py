@@ -64,7 +64,10 @@ class MemoryStabilityVerifier(IMemoryStabilityVerifier):
             ),
             CheckResult(
                 name="Checkpoint Consistency Verified",
-                passed=all(checkpoints[i].memory_rss_mb <= checkpoints[i+1].memory_rss_mb + 5.0 for i in range(len(checkpoints)-1)),
+                passed=all(
+                    checkpoints[i].memory_rss_mb <= checkpoints[i + 1].memory_rss_mb + 5.0
+                    for i in range(len(checkpoints) - 1)
+                ),
                 details="Memory progression is monotonically increasing without sudden spikes (±5MB tolerance)",
                 metrics={"checkpoint_count": len(checkpoints)},
             ),

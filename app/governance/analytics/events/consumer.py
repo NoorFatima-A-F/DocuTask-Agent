@@ -24,7 +24,11 @@ class GovernanceEventConsumer:
             event = EventNormalizer.normalize_dict(raw_or_event, event_type=event_type)
         else:
             # Pydantic or object with model_dump or __dict__
-            d = raw_or_event.model_dump() if hasattr(raw_or_event, "model_dump") else getattr(raw_or_event, "__dict__", {})
+            d = (
+                raw_or_event.model_dump()
+                if hasattr(raw_or_event, "model_dump")
+                else getattr(raw_or_event, "__dict__", {})
+            )
             event = EventNormalizer.normalize_dict(d, event_type=event_type)
 
         processed = self.processor.process(event)

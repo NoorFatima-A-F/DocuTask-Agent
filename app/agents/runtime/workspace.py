@@ -15,7 +15,6 @@ class WorkspaceManager:
     def __init__(self, root_dir: Optional[str] = None) -> None:
         self.root_dir = Path(root_dir or os.path.join(tempfile.gettempdir(), "antigravity", "workspaces"))
 
-
     def get_tenant_workspace(self, tenant_id: str) -> Path:
         """Returns isolated workspace path for a specific tenant."""
         tenant_path = self.root_dir / tenant_id

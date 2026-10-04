@@ -8,6 +8,7 @@ from pydantic import BaseModel
 
 class PIIType(str, enum.Enum):
     """Specific Personally Identifiable Information types."""
+
     EMAIL = "EMAIL"
     PHONE = "PHONE"
     SSN = "SSN"
@@ -20,6 +21,7 @@ class PIIType(str, enum.Enum):
 
 class PIISpan(BaseModel):
     """Identified PII occurrence within a string."""
+
     pii_type: PIIType
     start_pos: int
     end_pos: int

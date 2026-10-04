@@ -1,6 +1,7 @@
 """
 Weighted API Quality Scoring Engine.
 """
+
 from __future__ import annotations
 from typing import List
 from app.platform_verification.api_verification.domain.interfaces import IApiScoringEngine

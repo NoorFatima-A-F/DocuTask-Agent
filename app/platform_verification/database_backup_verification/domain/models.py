@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Database Backup & Recovery Verification Platform (Part 3G.2B Advanced).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any
@@ -26,12 +27,12 @@ class CorruptionSeverity(str, Enum):
 
 
 class DBCertificationTier(str, Enum):
-    ENTERPRISE_PLATINUM = "Enterprise Platinum"          # 98 - 100
-    ENTERPRISE_CERTIFIED = "Enterprise Certified"        # 95 - 97
-    PRODUCTION_READY = "Production Ready"                # 90 - 94
-    CONDITIONALLY_READY = "Conditionally Ready"          # 80 - 89
-    DEVELOPMENT_GRADE = "Development Grade"              # 70 - 79
-    FAILED = "Failed"                                    # < 70
+    ENTERPRISE_PLATINUM = "Enterprise Platinum"  # 98 - 100
+    ENTERPRISE_CERTIFIED = "Enterprise Certified"  # 95 - 97
+    PRODUCTION_READY = "Production Ready"  # 90 - 94
+    CONDITIONALLY_READY = "Conditionally Ready"  # 80 - 89
+    DEVELOPMENT_GRADE = "Development Grade"  # 70 - 79
+    FAILED = "Failed"  # < 70
 
 
 @dataclass
@@ -334,15 +335,15 @@ class ContinuousVerificationScheduleReport:
 
 @dataclass
 class QualityScorecard:
-    recoverability_score: float     # Weight 25%
-    consistency_score: float        # Weight 20%
-    integrity_score: float          # Weight 15%
-    security_score: float           # Weight 15%
-    performance_score: float        # Weight 10%
-    compatibility_score: float      # Weight 5%
-    automation_score: float         # Weight 5%
-    evidence_quality_score: float   # Weight 5%
-    composite_score: float          # 0 - 100
+    recoverability_score: float  # Weight 25%
+    consistency_score: float  # Weight 20%
+    integrity_score: float  # Weight 15%
+    security_score: float  # Weight 15%
+    performance_score: float  # Weight 10%
+    compatibility_score: float  # Weight 5%
+    automation_score: float  # Weight 5%
+    evidence_quality_score: float  # Weight 5%
+    composite_score: float  # 0 - 100
     certification_tier: DBCertificationTier
     passed: bool
     execution_duration_ms: float
@@ -468,7 +469,6 @@ class PerformanceMetricsReport:
     passed: bool = True
 
 
-
 @dataclass
 class RecoveryMetricsReport:
     target_rto_seconds: float = 300.0
@@ -481,7 +481,6 @@ class RecoveryMetricsReport:
     rpo_compliant: bool = True
     simulated_failure_scenarios: List[Dict[str, Any]] = field(default_factory=list)
     passed: bool = True
-
 
 
 @dataclass
@@ -498,4 +497,3 @@ class DatabaseReadinessScorecard:
     passed: bool
     execution_duration_ms: float
     category_breakdown: Dict[str, float] = field(default_factory=dict)
-

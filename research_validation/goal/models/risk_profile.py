@@ -20,10 +20,11 @@ class RiskSeverity(str, Enum):
 @dataclass(frozen=True)
 class RiskItem:
     """A specific evaluated risk item."""
+
     category: str  # "TECHNICAL", "SCIENTIFIC", "STATISTICAL", "GOVERNANCE", "PRIVACY", "EXECUTION", "RESOURCE", "DEPENDENCY", "OPERATIONAL"
     description: str
     likelihood: float  # 0.0 to 1.0
-    impact: float      # 0.0 to 1.0
+    impact: float  # 0.0 to 1.0
     severity: RiskSeverity
     mitigation_strategy: str
     is_blocking: bool = False
@@ -36,6 +37,7 @@ class RiskItem:
 @dataclass(frozen=True)
 class RiskProfile:
     """Multidimensional risk profile encompassing all 9 risk vectors."""
+
     overall_risk_score: float  # 0.0 to 1.0
     severity: RiskSeverity
     risk_items: List[RiskItem] = field(default_factory=list)

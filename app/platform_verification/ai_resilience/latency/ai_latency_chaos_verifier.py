@@ -15,7 +15,7 @@ class AILatencyChaosVerifier(ILatencyChaosVerifier):
 
         for i in range(test_count):
             delay = injected_latencies[i % len(injected_latencies)]
-            req = {"document_id": f"DOC-LATENCY-{i+1:04d}"}
+            req = {"document_id": f"DOC-LATENCY-{i + 1:04d}"}
             res = LatencyInjectionScenario.execute(
                 req, injected_delay_ms=delay, timeout_threshold_ms=timeout_threshold_ms
             )

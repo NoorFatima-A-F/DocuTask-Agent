@@ -1,6 +1,7 @@
 """
 3I.2.1 & 3I.2.7: Logging Architecture & Centralization Verifier
 """
+
 from typing import List
 from ..domain.models import LoggingServiceCoverage, ArchitectureReport
 from ..domain.interfaces import ILoggingArchitectureVerifier
@@ -24,7 +25,9 @@ class LoggingArchitectureVerifier(ILoggingArchitectureVerifier):
         ]
 
         coverage: List[LoggingServiceCoverage] = [
-            LoggingServiceCoverage(service_name=s, log_format="JSON", collector_attached=True, centralized_delivery_latency_ms=35.0)
+            LoggingServiceCoverage(
+                service_name=s, log_format="JSON", collector_attached=True, centralized_delivery_latency_ms=35.0
+            )
             for s in services
         ]
 
@@ -35,5 +38,5 @@ class LoggingArchitectureVerifier(ILoggingArchitectureVerifier):
             structured_logging=True,
             centralized_collection=True,
             collection_backend="OpenTelemetry Collector -> Loki / Elasticsearch",
-            status="PASS"
+            status="PASS",
         )

@@ -17,7 +17,16 @@ class ReportExporter:
             output = io.StringIO()
             writer = csv.writer(output)
             writer.writerow(["Report ID", "Tenant ID", "Report Type", "Title", "Governance Score", "Generated At"])
-            writer.writerow([report.report_id, report.tenant_id, report.report_type.value, report.title, report.governance_score, report.generated_at.isoformat()])
+            writer.writerow(
+                [
+                    report.report_id,
+                    report.tenant_id,
+                    report.report_type.value,
+                    report.title,
+                    report.governance_score,
+                    report.generated_at.isoformat(),
+                ]
+            )
             writer.writerow([])
             writer.writerow(["Section Title", "Summary Text", "Key Findings Count", "Recommendations Count"])
             for s in report.sections:

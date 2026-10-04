@@ -11,6 +11,7 @@ T = TypeVar("T")
 @dataclass
 class PageRequest:
     """Standard pagination request parameters."""
+
     page: int = 1
     page_size: int = 20
     sort_by: Optional[str] = None
@@ -24,6 +25,7 @@ class PageRequest:
 @dataclass
 class PageResult(Generic[T]):
     """Standard paginated response envelope."""
+
     items: List[T] = field(default_factory=list)
     total_count: int = 0
     page: int = 1

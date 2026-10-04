@@ -78,10 +78,10 @@ def test_audit_integrity_verification_detects_tampering():
         )
 
     events = store.get_tenant_events("tenant_tamper")
-    
+
     # Tamper with the 2nd event payload
     events[1].action = "MALICIOUS_TAMPERED_ACTION"
-    
+
     result = verifier.verify_chain(events)
     assert result.is_valid is False
     assert "aud_tamper_1" in result.tampered_event_ids

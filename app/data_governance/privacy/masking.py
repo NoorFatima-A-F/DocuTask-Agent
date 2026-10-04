@@ -41,6 +41,7 @@ class PrivacyMaskingEngine:
 
     def tokenize(self, text: str) -> str:
         """Replace sensitive email and SSN occurrences with reversible surrogate tokens."""
+
         def _replace_email(match):
             raw = match.group(0)
             token = f"TOK_EMAIL_{hashlib.sha256(raw.encode('utf-8')).hexdigest()[:8]}"

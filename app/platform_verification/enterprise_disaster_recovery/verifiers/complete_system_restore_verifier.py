@@ -29,15 +29,60 @@ class CompleteSystemRestoreVerifier(ICompleteSystemRestoreVerifier):
 
     def verify(self) -> CompleteSystemRestoreReport:
         steps = [
-            E2EValidationCheck(step_name="1. Infrastructure Provisioning", action="Spin up compute, networking, security groups", duration_seconds=320.0, passed=True),
-            E2EValidationCheck(step_name="2. Secrets Decryption & Injection", action="Inject KMS-decrypted environment variables", duration_seconds=15.0, passed=True),
-            E2EValidationCheck(step_name="3. Database Snapshot & WAL Replay", action="Restore PostgreSQL schema and table data", duration_seconds=180.0, passed=True),
-            E2EValidationCheck(step_name="4. Object Storage Mirror Restoration", action="Restore document storage files", duration_seconds=240.0, passed=True),
-            E2EValidationCheck(step_name="5. Microservice Deployment", action="Deploy FastAPI, Celery, Redis, Prometheus", duration_seconds=180.0, passed=True),
-            E2EValidationCheck(step_name="6. User Authentication Test", action="Authenticate test user & issue JWT token", duration_seconds=2.5, passed=True),
-            E2EValidationCheck(step_name="7. Document Ingestion Test", action="Upload multi-page invoice PDF", duration_seconds=4.8, passed=True),
-            E2EValidationCheck(step_name="8. OCR & AI Processing Test", action="Execute OCR and Gemini model extraction", duration_seconds=12.4, passed=True),
-            E2EValidationCheck(step_name="9. Audit Trail & Result Verification", action="Validate result retrieval and audit event", duration_seconds=3.1, passed=True),
+            E2EValidationCheck(
+                step_name="1. Infrastructure Provisioning",
+                action="Spin up compute, networking, security groups",
+                duration_seconds=320.0,
+                passed=True,
+            ),
+            E2EValidationCheck(
+                step_name="2. Secrets Decryption & Injection",
+                action="Inject KMS-decrypted environment variables",
+                duration_seconds=15.0,
+                passed=True,
+            ),
+            E2EValidationCheck(
+                step_name="3. Database Snapshot & WAL Replay",
+                action="Restore PostgreSQL schema and table data",
+                duration_seconds=180.0,
+                passed=True,
+            ),
+            E2EValidationCheck(
+                step_name="4. Object Storage Mirror Restoration",
+                action="Restore document storage files",
+                duration_seconds=240.0,
+                passed=True,
+            ),
+            E2EValidationCheck(
+                step_name="5. Microservice Deployment",
+                action="Deploy FastAPI, Celery, Redis, Prometheus",
+                duration_seconds=180.0,
+                passed=True,
+            ),
+            E2EValidationCheck(
+                step_name="6. User Authentication Test",
+                action="Authenticate test user & issue JWT token",
+                duration_seconds=2.5,
+                passed=True,
+            ),
+            E2EValidationCheck(
+                step_name="7. Document Ingestion Test",
+                action="Upload multi-page invoice PDF",
+                duration_seconds=4.8,
+                passed=True,
+            ),
+            E2EValidationCheck(
+                step_name="8. OCR & AI Processing Test",
+                action="Execute OCR and Gemini model extraction",
+                duration_seconds=12.4,
+                passed=True,
+            ),
+            E2EValidationCheck(
+                step_name="9. Audit Trail & Result Verification",
+                action="Validate result retrieval and audit event",
+                duration_seconds=3.1,
+                passed=True,
+            ),
         ]
 
         total_time_mins = sum(s.duration_seconds for s in steps) / 60.0

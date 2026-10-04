@@ -1,16 +1,19 @@
 """
 Resilience Policies, Exponential Backoff, Circuit Breaker and Rate Limiter Contracts.
 """
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import List, Type
 import math
 
+
 class RetryStrategy(str, Enum):
     IMMEDIATE = "IMMEDIATE"
     LINEAR = "LINEAR"
     EXPONENTIAL_BACKOFF = "EXPONENTIAL_BACKOFF"
+
 
 @dataclass(frozen=True)
 class RetryPolicy:
@@ -30,10 +33,12 @@ class RetryPolicy:
         delay = self.initial_delay_seconds * math.pow(self.backoff_multiplier, attempt - 1)
         return min(self.max_delay_seconds, delay)
 
+
 class CircuitState(str, Enum):
     CLOSED = "CLOSED"
     OPEN = "OPEN"
     HALF_OPEN = "HALF_OPEN"
+
 
 class CircuitBreakerContract(ABC):
     @abstractmethod
@@ -52,6 +57,7 @@ class CircuitBreakerContract(ABC):
     def allow_execution(self) -> bool:
         pass
 
+
 class BulkheadContract(ABC):
     @abstractmethod
     def acquire(self) -> bool:
@@ -60,6 +66,7 @@ class BulkheadContract(ABC):
     @abstractmethod
     def release(self) -> None:
         pass
+
 
 class RateLimiterContract(ABC):
     @abstractmethod

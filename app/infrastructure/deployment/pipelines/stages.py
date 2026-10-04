@@ -8,6 +8,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 class StageType(str, Enum):
     """Supported pipeline stage categories."""
+
     SOURCE = "source"
     BUILD = "build"
     TEST = "test"
@@ -20,6 +21,7 @@ class StageType(str, Enum):
 
 class StageStatus(str, Enum):
     """Status of a pipeline stage execution."""
+
     PENDING = "pending"
     RUNNING = "running"
     PASSED = "passed"
@@ -30,6 +32,7 @@ class StageStatus(str, Enum):
 @dataclass
 class StageExecutionResult:
     """Outcome of a single pipeline stage execution."""
+
     stage_name: str
     stage_type: StageType
     status: StageStatus = StageStatus.PENDING
@@ -44,6 +47,7 @@ class StageExecutionResult:
 @dataclass
 class PipelineStageConfig:
     """Configuration definition for a pipeline stage."""
+
     name: str
     stage_type: StageType
     enabled: bool = True

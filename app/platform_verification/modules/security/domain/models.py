@@ -1,10 +1,12 @@
 """
 Domain Models & Value Objects for Security.
 """
+
 from datetime import datetime, timezone
 from typing import Any, Dict
 from pydantic import BaseModel, Field as PydField
 import uuid
+
 
 class SecurityEntity(BaseModel):
     id: str = PydField(default_factory=lambda: f"secu_{uuid.uuid4().hex[:8]}")

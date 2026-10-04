@@ -2,7 +2,6 @@
 Tests for Unified Telemetry Context, Sensitive Data Redaction, and Pipeline Exporters.
 """
 
-
 from app.infrastructure.observability.telemetry.context import (
     TelemetryContext,
     mask_sensitive_data,

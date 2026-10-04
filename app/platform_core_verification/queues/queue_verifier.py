@@ -183,7 +183,11 @@ class QueueVerifier:
                 passed=passed,
                 message=f"Producer backpressure activated at depth {current_queue_depth} (High watermark: {high_watermark}).",
                 execution_time_ms=t_elapsed,
-                details={"queue_depth": current_queue_depth, "high_watermark": high_watermark, "backpressure": backpressure_active},
+                details={
+                    "queue_depth": current_queue_depth,
+                    "high_watermark": high_watermark,
+                    "backpressure": backpressure_active,
+                },
             ),
             "triggered": backpressure_active,
             "high_watermark": high_watermark,

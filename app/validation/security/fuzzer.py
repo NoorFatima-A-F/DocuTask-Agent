@@ -53,5 +53,5 @@ class SecurityFuzzer:
             "passed_cases": passed,
             "failed_cases": failed,
             "pass_rate_percentage": pass_rate,
-            "system_crashes": 0
+            "system_crashes": 0,
         }

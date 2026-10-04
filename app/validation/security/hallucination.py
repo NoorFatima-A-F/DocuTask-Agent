@@ -10,6 +10,7 @@ from app.core.logging import logger
 
 class HallucinationMetrics(BaseModel):
     """Metrics quantifying AI hallucination behavior."""
+
     total_requested_fields: int
     missing_data_fields: int
     fabricated_fields: int
@@ -24,10 +25,7 @@ class HallucinationEvaluator:
 
     @classmethod
     def evaluate_hallucinations(
-        cls,
-        actual_extraction: Dict[str, Any],
-        ground_truth: Dict[str, Any],
-        raw_ocr_text: str
+        cls, actual_extraction: Dict[str, Any], ground_truth: Dict[str, Any], raw_ocr_text: str
     ) -> HallucinationMetrics:
         """
         Calculates hallucination, unsupported claim, and fabricated field rates.
@@ -46,7 +44,9 @@ class HallucinationEvaluator:
                 if actual_val is not None and actual_val != "" and actual_val != []:
                     # AI fabricated a value for an absent field!
                     fabricated_count += 1
-                    logger.warning(f"Hallucination detected for key '{key}': Fabricated '{actual_val}' for null ground truth.")
+                    logger.warning(
+                        f"Hallucination detected for key '{key}': Fabricated '{actual_val}' for null ground truth."
+                    )
 
             elif actual_val is not None:
                 # Check if extracted string value appears anywhere in raw OCR text context
@@ -65,5 +65,5 @@ class HallucinationEvaluator:
             unsupported_claims=unsupported_count,
             hallucination_rate=hallucination_rate,
             unsupported_claim_rate=unsupported_rate,
-            fabricated_field_rate=fabricated_rate
+            fabricated_field_rate=fabricated_rate,
         )

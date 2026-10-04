@@ -28,6 +28,7 @@ class CadenceType(str, Enum):
 @dataclass
 class HistoricalBenchmarkSnapshot:
     """Historical record of a benchmark metric over time."""
+
     snapshot_id: str
     benchmark_name: str
     cadence: CadenceType
@@ -42,6 +43,7 @@ class HistoricalBenchmarkSnapshot:
 @dataclass
 class TrendForecast:
     """Linear trend analysis and future metric projection."""
+
     metric_name: str
     historical_points_count: int
     current_value: float
@@ -55,6 +57,7 @@ class TrendForecast:
 @dataclass
 class ObservatoryAlert:
     """Automated alert generated upon performance regression or distribution change."""
+
     alert_id: str
     severity: str  # "INFO", "WARNING", "CRITICAL"
     metric_name: str
@@ -65,6 +68,7 @@ class ObservatoryAlert:
 @dataclass
 class ContinuousObservatoryReport:
     """Consolidated longitudinal benchmark observatory report."""
+
     total_archived_snapshots: int
     metrics_tracked_count: int
     forecasts: List[TrendForecast]
@@ -107,7 +111,7 @@ class ContinuousBenchmarkObservatory:
         slope = (cov_tv / var_t) if var_t > 1e-12 else 0.0
 
         var_v = sum((v - mean_v) ** 2 for v in vals)
-        r_sq = ((cov_tv ** 2) / (var_t * var_v)) if (var_t * var_v) > 1e-12 else 0.0
+        r_sq = ((cov_tv**2) / (var_t * var_v)) if (var_t * var_v) > 1e-12 else 0.0
 
         t_days[-1]
         last_val = vals[-1]
@@ -131,7 +135,7 @@ class ContinuousBenchmarkObservatory:
             forecast_30d=fc_30,
             forecast_90d=fc_90,
             r_squared=r_sq,
-            trend_direction=direction
+            trend_direction=direction,
         )
 
     def detect_regressions(self, threshold_pct: float = 0.10) -> List[ObservatoryAlert]:
@@ -142,24 +146,28 @@ class ContinuousBenchmarkObservatory:
         for m in metrics:
             m_snaps = sorted([s for s in self.snapshots if s.metric_name == m], key=lambda s: s.timestamp_epoch_sec)
             if len(m_snaps) >= 3:
-                baseline = sum(s.metric_value for s in m_snaps[:len(m_snaps)//2]) / (len(m_snaps)//2)
+                baseline = sum(s.metric_value for s in m_snaps[: len(m_snaps) // 2]) / (len(m_snaps) // 2)
                 recent = m_snaps[-1].metric_value
 
                 is_latency = "latency" in m.lower() or "error" in m.lower()
                 if is_latency and recent > baseline * (1.0 + threshold_pct):
-                    alerts.append(ObservatoryAlert(
-                        alert_id=f"ALERT-REG-{m}-{int(time.time())}",
-                        severity="WARNING",
-                        metric_name=m,
-                        trigger_reason=f"Latency regression: recent {recent:.2f} > baseline {baseline:.2f} (+{(recent/baseline - 1)*100:.1f}%)"
-                    ))
+                    alerts.append(
+                        ObservatoryAlert(
+                            alert_id=f"ALERT-REG-{m}-{int(time.time())}",
+                            severity="WARNING",
+                            metric_name=m,
+                            trigger_reason=f"Latency regression: recent {recent:.2f} > baseline {baseline:.2f} (+{(recent / baseline - 1) * 100:.1f}%)",
+                        )
+                    )
                 elif not is_latency and recent < baseline * (1.0 - threshold_pct):
-                    alerts.append(ObservatoryAlert(
-                        alert_id=f"ALERT-REG-{m}-{int(time.time())}",
-                        severity="CRITICAL",
-                        metric_name=m,
-                        trigger_reason=f"Accuracy/Throughput drop: recent {recent:.2f} < baseline {baseline:.2f} (-{(1 - recent/baseline)*100:.1f}%)"
-                    ))
+                    alerts.append(
+                        ObservatoryAlert(
+                            alert_id=f"ALERT-REG-{m}-{int(time.time())}",
+                            severity="CRITICAL",
+                            metric_name=m,
+                            trigger_reason=f"Accuracy/Throughput drop: recent {recent:.2f} < baseline {baseline:.2f} (-{(1 - recent / baseline) * 100:.1f}%)",
+                        )
+                    )
 
         return alerts
 
@@ -181,5 +189,5 @@ class ContinuousBenchmarkObservatory:
             forecasts=valid_forecasts,
             active_alerts=alerts,
             storage_archive_path=str(self.archive_dir),
-            status=status
+            status=status,
         )

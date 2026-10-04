@@ -31,6 +31,7 @@ class EvidenceSignal:
     """
     Individual observable evidence signal entering the Bayesian fusion engine.
     """
+
     source_name: str
     category: str  # OCR, SCHEMA, MEMORY, CONSENSUS, VALIDATION, HUMAN_FEEDBACK
     observed_score: float  # [0.0, 1.0]
@@ -58,6 +59,7 @@ class BayesianConfidenceResult:
     """
     Complete mathematically derived confidence result with full signal decomposition.
     """
+
     posterior_confidence: float
     prior_confidence: float
     log_odds_delta: float

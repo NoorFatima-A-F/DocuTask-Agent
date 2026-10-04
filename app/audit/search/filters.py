@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 class AuditSearchFilter(BaseModel):
     """Multi-facet query filters for searching audit logs."""
+
     tenant_id: str
     organization_id: Optional[str] = None
     workspace_id: Optional[str] = None

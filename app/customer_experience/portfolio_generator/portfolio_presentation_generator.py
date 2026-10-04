@@ -41,7 +41,9 @@ class PortfolioPresentationGenerator(IPortfolioPresentationGenerator):
 
             # Write Demo Scripts
             for ds in scripts:
-                raw_aud = "".join(c if c.isalnum() else "_" for c in ds.target_audience.lower())[:30].strip("_") or "audience"
+                raw_aud = (
+                    "".join(c if c.isalnum() else "_" for c in ds.target_audience.lower())[:30].strip("_") or "audience"
+                )
                 safe_aud = validate_safe_filename_segment(raw_aud)
                 filename = f"demo_script_{safe_aud}.md"
                 fpath = resolve_safe_path(safe_dir, filename)
@@ -157,7 +159,7 @@ BioHealth Systems integrated DocuTask Agent to automate clinical prior authoriza
             DemoScript(
                 target_audience="Recruiter & Hiring Manager (5-Minute Walkthrough)",
                 duration_minutes=5,
-                opening_hook="\"Hi, I built DocuTask Agent—an enterprise-grade autonomous AI document automation platform that turns complex, messy business workflows into deterministic, self-healing multi-agent systems that save companies millions.\"",
+                opening_hook='"Hi, I built DocuTask Agent—an enterprise-grade autonomous AI document automation platform that turns complex, messy business workflows into deterministic, self-healing multi-agent systems that save companies millions."',
                 key_talking_points=[
                     "Most AI demos are simple chatbots or brittle Python scripts. DocuTask is a full enterprise operating system with multi-agent orchestration, SRE self-healing, and human-in-the-loop governance.",
                     "Demonstrated 99.0% extraction accuracy, sub-300ms P95 latency, and $2.28M annual ROI for a 125k-document enterprise tenant.",
@@ -173,12 +175,12 @@ BioHealth Systems integrated DocuTask Agent to automate clinical prior authoriza
                     "How do you handle LLM hallucinations?": "We enforce dual-stage grounding checks, bounding-box provenance, and a strict 0.95 confidence threshold that routes ambiguous edge cases to the Human Approval Center.",
                     "How does this scale in production?": "The platform is built on asynchronous queue dispatch, linear worker elasticity, Redis caching, and tested up to 3,500 documents per minute.",
                 },
-                closing_call_to_action="\"I architected this to demonstrate my capability as a Principal AI Automation Engineer who doesn't just build prompts, but builds resilient, compliant, high-ROI enterprise AI systems.\"",
+                closing_call_to_action='"I architected this to demonstrate my capability as a Principal AI Automation Engineer who doesn\'t just build prompts, but builds resilient, compliant, high-ROI enterprise AI systems."',
             ),
             DemoScript(
                 target_audience="Prospective Client / Business Executive (10-Minute Demo)",
                 duration_minutes=10,
-                opening_hook="\"If your team is spending thousands of hours manually reviewing invoices, contracts, or claims, you're losing money on labor and delays. Let me show you how DocuTask cuts document processing costs by 92.8% with zero change to your existing ERP or email workflows.\"",
+                opening_hook='"If your team is spending thousands of hours manually reviewing invoices, contracts, or claims, you\'re losing money on labor and delays. Let me show you how DocuTask cuts document processing costs by 92.8% with zero change to your existing ERP or email workflows."',
                 key_talking_points=[
                     "No rip-and-replace: Connects directly to your Outlook, Google Drive, and QuickBooks/SAP.",
                     "Turnkey onboarding in under 5 minutes using pre-configured industry templates.",
@@ -193,12 +195,12 @@ BioHealth Systems integrated DocuTask Agent to automate clinical prior authoriza
                 handling_tough_questions={
                     "Is our data safe?": "Yes, we implement cryptographic tenant partitioning, zero LLM training retention, and immutable audit logging.",
                 },
-                closing_call_to_action="\"We can deploy a pilot template for your accounts payable or HR team in one afternoon. Let's schedule a proof of concept.\"",
+                closing_call_to_action='"We can deploy a pilot template for your accounts payable or HR team in one afternoon. Let\'s schedule a proof of concept."',
             ),
             DemoScript(
                 target_audience="Technical Architect / System Design Interviewer (30-Minute Deep Dive)",
                 duration_minutes=30,
-                opening_hook="\"DocuTask is designed as a distributed, event-driven multi-agent cognitive architecture with deterministic execution guarantees and autonomous fault recovery.\"",
+                opening_hook='"DocuTask is designed as a distributed, event-driven multi-agent cognitive architecture with deterministic execution guarantees and autonomous fault recovery."',
                 key_talking_points=[
                     "Layered Architecture: Visual DAG Workflow Builder -> DAG Topological Validator -> Worker Fleet -> LLM Reasoning Agents -> Guardrail Middleware -> Storage.",
                     "SRE & Reliability: Self-healing circuit breakers, MTTR < 2.2s, 100% automated fault recovery across chaos injection benchmarks.",
@@ -213,7 +215,7 @@ BioHealth Systems integrated DocuTask Agent to automate clinical prior authoriza
                 handling_tough_questions={
                     "Why not just use LangChain/LlamaIndex?": "Off-the-shelf frameworks often introduce unnecessary abstractions, flaky async state, and poor observability. We engineered clean, decoupled domain interfaces with pure-Python synchronous runtime execution for deterministic testability and SRE reliability.",
                 },
-                closing_call_to_action="\"I'd be glad to dive deeper into our state management, vector retrieval strategies, or horizontal autoscaling designs.\"",
+                closing_call_to_action='"I\'d be glad to dive deeper into our state management, vector retrieval strategies, or horizontal autoscaling designs."',
             ),
         ]
 

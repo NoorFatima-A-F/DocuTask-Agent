@@ -1,6 +1,7 @@
 """
 Phase 3H.6.9: Executive Multi-Persona Reliability Dashboard Verification
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     DashboardPersonaView,
@@ -29,7 +30,12 @@ class ExecutiveDashboardVerifier(IExecutiveDashboardVerifier):
         personas.append(
             DashboardPersonaView(
                 persona="Operations",
-                focus_metrics=["Active Incidents (0)", "Queue Depth (12 items)", "Cluster CPU (42%)", "Liveness Probes (100% UP)"],
+                focus_metrics=[
+                    "Active Incidents (0)",
+                    "Queue Depth (12 items)",
+                    "Cluster CPU (42%)",
+                    "Liveness Probes (100% UP)",
+                ],
                 current_status="HEALTHY",
                 summary_insight="Platform operating within nominal parameters; zero active operational alerts.",
             )
@@ -39,7 +45,11 @@ class ExecutiveDashboardVerifier(IExecutiveDashboardVerifier):
         personas.append(
             DashboardPersonaView(
                 persona="Engineering",
-                focus_metrics=["API P95 Latency (185ms)", "DB Transaction Commit Rate (99.97%)", "Worker Exception Rate (0.02%)"],
+                focus_metrics=[
+                    "API P95 Latency (185ms)",
+                    "DB Transaction Commit Rate (99.97%)",
+                    "Worker Exception Rate (0.02%)",
+                ],
                 current_status="HEALTHY",
                 summary_insight="Service endpoints meeting tight performance budgets with no regression in recent PRs.",
             )
@@ -49,7 +59,11 @@ class ExecutiveDashboardVerifier(IExecutiveDashboardVerifier):
         personas.append(
             DashboardPersonaView(
                 persona="Management",
-                focus_metrics=["Monthly Availability (99.96%)", "Error Budget Remaining (82.4%)", "SLO Target Adherence (100%)"],
+                focus_metrics=[
+                    "Monthly Availability (99.96%)",
+                    "Error Budget Remaining (82.4%)",
+                    "SLO Target Adherence (100%)",
+                ],
                 current_status="HEALTHY",
                 summary_insight="Enterprise customer SLAs satisfied; robust error budget reserve available for product launches.",
             )
@@ -69,7 +83,11 @@ class ExecutiveDashboardVerifier(IExecutiveDashboardVerifier):
         personas.append(
             DashboardPersonaView(
                 persona="AI_Operations",
-                focus_metrics=["OCR Recognition Rate (99.0%)", "LLM Extraction Consistency (99.3%)", "Schema Adherence (100%)"],
+                focus_metrics=[
+                    "OCR Recognition Rate (99.0%)",
+                    "LLM Extraction Consistency (99.3%)",
+                    "Schema Adherence (100%)",
+                ],
                 current_status="HEALTHY",
                 summary_insight="Document processing pipelines functioning with high token efficiency and zero schema drift.",
             )

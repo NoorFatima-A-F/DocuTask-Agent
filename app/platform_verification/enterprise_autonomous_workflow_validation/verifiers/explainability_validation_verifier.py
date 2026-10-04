@@ -25,11 +25,36 @@ class ExplainabilityValidationVerifier(IExplainabilityValidationVerifier):
 
     def verify(self) -> ExplainabilityValidationReport:
         items = [
-            ExplainabilityItem(item_type="InvoiceAmountMismatchReasoning", explanation_provided=True, evidence_citation_valid=True, policy_reference_linked=True),
-            ExplainabilityItem(item_type="LegalClauseRiskClassification", explanation_provided=True, evidence_citation_valid=True, policy_reference_linked=True),
-            ExplainabilityItem(item_type="MedicalTreatmentPriorAuthDecision", explanation_provided=True, evidence_citation_valid=True, policy_reference_linked=True),
-            ExplainabilityItem(item_type="FraudDetectionAnomalyJustification", explanation_provided=True, evidence_citation_valid=True, policy_reference_linked=True),
-            ExplainabilityItem(item_type="VendorSelectionEvaluationBreakdown", explanation_provided=True, evidence_citation_valid=True, policy_reference_linked=True),
+            ExplainabilityItem(
+                item_type="InvoiceAmountMismatchReasoning",
+                explanation_provided=True,
+                evidence_citation_valid=True,
+                policy_reference_linked=True,
+            ),
+            ExplainabilityItem(
+                item_type="LegalClauseRiskClassification",
+                explanation_provided=True,
+                evidence_citation_valid=True,
+                policy_reference_linked=True,
+            ),
+            ExplainabilityItem(
+                item_type="MedicalTreatmentPriorAuthDecision",
+                explanation_provided=True,
+                evidence_citation_valid=True,
+                policy_reference_linked=True,
+            ),
+            ExplainabilityItem(
+                item_type="FraudDetectionAnomalyJustification",
+                explanation_provided=True,
+                evidence_citation_valid=True,
+                policy_reference_linked=True,
+            ),
+            ExplainabilityItem(
+                item_type="VendorSelectionEvaluationBreakdown",
+                explanation_provided=True,
+                evidence_citation_valid=True,
+                policy_reference_linked=True,
+            ),
         ]
 
         checks = [

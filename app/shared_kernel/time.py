@@ -1,6 +1,7 @@
 """
 Alias forwarding for clock.py
 """
+
 from .clock import (
     TimeProvider,
     SystemClock,
@@ -8,7 +9,7 @@ from .clock import (
     MonotonicClock,
     VirtualClock,
     DeterministicTimeProvider,
-    FrozenClock
+    FrozenClock,
 )
 
 __all__ = [
@@ -18,5 +19,5 @@ __all__ = [
     "MonotonicClock",
     "VirtualClock",
     "DeterministicTimeProvider",
-    "FrozenClock"
+    "FrozenClock",
 ]

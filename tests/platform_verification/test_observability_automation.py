@@ -1,6 +1,7 @@
 """
 Test Suite: Phase 3I.8 Observability Automation, Self-Healing Operations & Autonomous Reliability
 """
+
 import os
 import json
 import pytest
@@ -70,6 +71,7 @@ from app.platform_verification.observability_automation.api.observability_automa
 
 
 # ─── 1. Individual Verifier Tests ─────────────────────────────────────────────
+
 
 def test_architecture_verifier():
     verifier = ArchitectureVerifier()
@@ -199,6 +201,7 @@ def test_autonomous_dashboard_verifier():
 
 # ─── 2. Scorer Tests ──────────────────────────────────────────────────────────
 
+
 def test_autonomous_reliability_scorer():
     runtime = ObservabilityAutomationRuntime()
     scorer = runtime.scorer
@@ -229,6 +232,7 @@ def test_autonomous_reliability_scorer():
 
 
 # ─── 3. Exporter & Artifact Verification ──────────────────────────────────────
+
 
 def test_observability_automation_evidence_exporter(tmp_path):
     output_dir = str(tmp_path / "automation_test_export")
@@ -264,6 +268,7 @@ def test_observability_automation_evidence_exporter(tmp_path):
 
 
 # ─── 4. REST API Endpoints ───────────────────────────────────────────────────
+
 
 @pytest.fixture
 def api_client():

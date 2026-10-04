@@ -11,6 +11,7 @@ from typing import Dict
 @dataclass(frozen=True)
 class ResourceBudget:
     """Estimated resource allocation required for mission execution."""
+
     gpu_hours: float = 0.0
     cpu_hours: float = 1.0
     ram_gb: float = 4.0

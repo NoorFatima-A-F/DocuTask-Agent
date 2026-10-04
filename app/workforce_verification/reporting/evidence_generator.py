@@ -13,7 +13,11 @@ from ..domain.models import WorkforceReadinessScorecard
 class EvidenceGenerator:
     """Exports structured verification evidence, cryptographic checksums, and comprehensive markdown report."""
 
-    def __init__(self, output_dir: str = "workforce_verification_evidence", report_path: str = "docs/phase_V8_autonomous_workforce_verification_report.md"):
+    def __init__(
+        self,
+        output_dir: str = "workforce_verification_evidence",
+        report_path: str = "docs/phase_V8_autonomous_workforce_verification_report.md",
+    ):
         self.output_dir = Path(output_dir)
         self.report_path = Path(report_path)
 
@@ -126,16 +130,16 @@ Workforce Scalability & Enterprise Cockpits (10,000 Agents Concurrency @ 97.2% E
 
 | Pillar Index | Score | Grade | Status |
 | :--- | :---: | :---: | :---: |
-| **Registry & Capabilities Index** | {scorecard.indices.get('registry_and_capabilities_index', 100.0):.1f}% | A+ | PASSED |
-| **Hierarchy & Teams Index** | {scorecard.indices.get('hierarchy_and_teams_index', 100.0):.1f}% | A+ | PASSED |
-| **Marketplace & Negotiation Index** | {scorecard.indices.get('marketplace_and_negotiation_index', 100.0):.1f}% | A+ | PASSED |
-| **Collaboration & Management Index** | {scorecard.indices.get('collaboration_and_management_index', 100.0):.1f}% | A+ | PASSED |
-| **Council & Economics Index** | {scorecard.indices.get('council_and_economics_index', 100.0):.1f}% | A+ | PASSED |
-| **Hiring & Career Index** | {scorecard.indices.get('hiring_and_career_index', 100.0):.1f}% | A+ | PASSED |
-| **Scheduler & Conflict Index** | {scorecard.indices.get('scheduler_and_conflict_index', 100.0):.1f}% | A+ | PASSED |
-| **Memory & Trust Index** | {scorecard.indices.get('memory_and_trust_index', 100.0):.1f}% | A+ | PASSED |
-| **Security & Scalability Index** | {scorecard.indices.get('security_and_scalability_index', 100.0):.1f}% | A+ | PASSED |
-| **Benchmarking & Dashboards Index** | {scorecard.indices.get('benchmarking_and_dashboards_index', 100.0):.1f}% | A+ | PASSED |
+| **Registry & Capabilities Index** | {scorecard.indices.get("registry_and_capabilities_index", 100.0):.1f}% | A+ | PASSED |
+| **Hierarchy & Teams Index** | {scorecard.indices.get("hierarchy_and_teams_index", 100.0):.1f}% | A+ | PASSED |
+| **Marketplace & Negotiation Index** | {scorecard.indices.get("marketplace_and_negotiation_index", 100.0):.1f}% | A+ | PASSED |
+| **Collaboration & Management Index** | {scorecard.indices.get("collaboration_and_management_index", 100.0):.1f}% | A+ | PASSED |
+| **Council & Economics Index** | {scorecard.indices.get("council_and_economics_index", 100.0):.1f}% | A+ | PASSED |
+| **Hiring & Career Index** | {scorecard.indices.get("hiring_and_career_index", 100.0):.1f}% | A+ | PASSED |
+| **Scheduler & Conflict Index** | {scorecard.indices.get("scheduler_and_conflict_index", 100.0):.1f}% | A+ | PASSED |
+| **Memory & Trust Index** | {scorecard.indices.get("memory_and_trust_index", 100.0):.1f}% | A+ | PASSED |
+| **Security & Scalability Index** | {scorecard.indices.get("security_and_scalability_index", 100.0):.1f}% | A+ | PASSED |
+| **Benchmarking & Dashboards Index** | {scorecard.indices.get("benchmarking_and_dashboards_index", 100.0):.1f}% | A+ | PASSED |
 
 ---
 

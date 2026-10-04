@@ -25,12 +25,16 @@ class EventDensityCalculator:
 
         for i in range(0, len(events), chunk_size):
             chunk = events[i : i + chunk_size]
-            buckets.append({
-                "bucket_index": len(buckets),
-                "start_cursor": i,
-                "end_cursor": min(len(events) - 1, i + len(chunk) - 1),
-                "event_count": len(chunk),
-                "subsystems": list({e.get("event_type", "").split(".")[0] for e in chunk if "." in e.get("event_type", "")}),
-            })
+            buckets.append(
+                {
+                    "bucket_index": len(buckets),
+                    "start_cursor": i,
+                    "end_cursor": min(len(events) - 1, i + len(chunk) - 1),
+                    "event_count": len(chunk),
+                    "subsystems": list(
+                        {e.get("event_type", "").split(".")[0] for e in chunk if "." in e.get("event_type", "")}
+                    ),
+                }
+            )
 
         return buckets

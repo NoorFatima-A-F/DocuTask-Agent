@@ -59,7 +59,7 @@ class TopologyDiscoveryService:
 
         # Add inter-region backbone links
         for i, r1 in enumerate(regions):
-            for r2 in regions[i + 1:]:
+            for r2 in regions[i + 1 :]:
                 # Regional inter-connect latency model
                 est_latency = 35.0 if r1.geography.continent == r2.geography.continent else 95.0
                 self.graph.add_edge(

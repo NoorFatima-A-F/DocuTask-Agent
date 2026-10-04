@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10.7: Alert Security & Privacy Verifier
 """
+
 from ..domain.interfaces import IAlertSecurityVerifier
 from ..domain.models import AlertSecurityReport, AlertTemplateAudit
 
@@ -50,7 +51,11 @@ class AlertSecurityVerifier(IAlertSecurityVerifier):
             ),
         ]
 
-        safe_count = sum(1 for a in templates if a.is_safe and not a.contains_pii and not a.contains_credentials and not a.contains_document_content)
+        safe_count = sum(
+            1
+            for a in templates
+            if a.is_safe and not a.contains_pii and not a.contains_credentials and not a.contains_document_content
+        )
 
         return AlertSecurityReport(
             total_alert_templates_audited=len(templates),

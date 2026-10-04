@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class RecoveryIdentity(BaseModel):
     """Immutable identity identifying a recovery session across distributed recovery coordinators."""
+
     recovery_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     incident_id: Optional[UUID] = Field(default=None)
@@ -21,6 +22,7 @@ class RecoveryIdentity(BaseModel):
 
 class RecoveryStatistics(BaseModel):
     """Telemetry tracking recovery latency, retry counts, and MTTR."""
+
     diagnosis_duration_ms: float = Field(default=0.0, ge=0.0)
     strategy_selection_duration_ms: float = Field(default=0.0, ge=0.0)
     execution_recovery_duration_ms: float = Field(default=0.0, ge=0.0)
@@ -33,6 +35,7 @@ class RecoveryStatistics(BaseModel):
 
 class RecoveryMetadata(BaseModel):
     """Audit metadata describing recovery context and environmental attributes."""
+
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     completed_at: Optional[datetime] = Field(default=None)
     recovery_trigger: str = Field(default="EXECUTION_FAILURE_EVENT")

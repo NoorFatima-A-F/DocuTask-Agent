@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class PromptEvaluationMetrics(BaseModel):
     """Multi-dimensional evaluation quality score."""
+
     evaluation_id: str = Field(default_factory=lambda: f"eval_{uuid.uuid4().hex[:8]}")
     prompt_id: str
     version_id: str
@@ -32,14 +33,8 @@ class PromptEvaluationMetrics(BaseModel):
         faith = self.faithfulness_score
         fmt = self.format_compliance_score
         safe = self.safety_score
-        halluc_penalty = (1.0 - self.hallucination_rate)
+        halluc_penalty = 1.0 - self.hallucination_rate
 
-        composite = (
-            acc * 0.35
-            + faith * 0.25
-            + fmt * 0.15
-            + safe * 0.15
-            + halluc_penalty * 0.10
-        )
+        composite = acc * 0.35 + faith * 0.25 + fmt * 0.15 + safe * 0.15 + halluc_penalty * 0.10
         self.composite_score = round(composite, 4)
         return self.composite_score

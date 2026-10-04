@@ -1,6 +1,7 @@
 """
 Immutable Evidence Store for Observability Verification.
 """
+
 import hashlib
 from typing import Dict, Optional
 from app.platform_verification.observability_verification.domain.models import ObservabilityVerificationEvidencePackage

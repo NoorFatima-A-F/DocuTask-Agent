@@ -11,6 +11,7 @@ from app.agents.exceptions import InvalidStateTransitionException
 
 class AgentState(Enum):
     """Production Agent States."""
+
     CREATED = "CREATED"
     INITIALIZED = "INITIALIZED"
     PLANNING = "PLANNING"
@@ -35,9 +36,22 @@ class AgentStateMachine:
         AgentState.CREATED: {AgentState.INITIALIZED, AgentState.CANCELLED},
         AgentState.INITIALIZED: {AgentState.PLANNING, AgentState.CANCELLED, AgentState.FAILED},
         AgentState.PLANNING: {AgentState.EXECUTING, AgentState.FAILED, AgentState.CANCELLED},
-        AgentState.EXECUTING: {AgentState.OBSERVING, AgentState.WAITING, AgentState.RETRYING, AgentState.FAILED, AgentState.CANCELLED},
+        AgentState.EXECUTING: {
+            AgentState.OBSERVING,
+            AgentState.WAITING,
+            AgentState.RETRYING,
+            AgentState.FAILED,
+            AgentState.CANCELLED,
+        },
         AgentState.OBSERVING: {AgentState.REFLECTING, AgentState.FAILED, AgentState.CANCELLED},
-        AgentState.REFLECTING: {AgentState.COMPLETED, AgentState.PLANNING, AgentState.EXECUTING, AgentState.RETRYING, AgentState.FAILED, AgentState.CANCELLED},
+        AgentState.REFLECTING: {
+            AgentState.COMPLETED,
+            AgentState.PLANNING,
+            AgentState.EXECUTING,
+            AgentState.RETRYING,
+            AgentState.FAILED,
+            AgentState.CANCELLED,
+        },
         AgentState.WAITING: {AgentState.EXECUTING, AgentState.CANCELLED, AgentState.FAILED},
         AgentState.RETRYING: {AgentState.PLANNING, AgentState.EXECUTING, AgentState.FAILED, AgentState.CANCELLED},
         AgentState.COMPLETED: set(),

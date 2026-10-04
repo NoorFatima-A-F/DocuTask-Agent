@@ -49,9 +49,13 @@ def resolve_safe_path(
     try:
         is_contained = (candidate == base and allow_base) or candidate.is_relative_to(base)
     except AttributeError:
-        is_contained = (candidate == base and allow_base) or os.path.commonpath([str(base), str(candidate)]) == str(base)
+        is_contained = (candidate == base and allow_base) or os.path.commonpath([str(base), str(candidate)]) == str(
+            base
+        )
     if not is_contained:
-        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base}'")
+        raise UnsafePathError(
+            f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base}'"
+        )
     return candidate
 ```
 
@@ -65,7 +69,9 @@ def validate_safe_filename_segment(value: str) -> str:
     if not value or not isinstance(value, str):
         raise UnsafePathError("Filename segment cannot be empty or non-string.")
     if "\x00" in value or "/" in value or "\\" in value or ".." in value:
-        raise UnsafePathError(f"Security violation: Filename segment contains illegal path traversal characters: '{value}'")
+        raise UnsafePathError(
+            f"Security violation: Filename segment contains illegal path traversal characters: '{value}'"
+        )
     sanitized = re.sub(r"[^a-zA-Z0-9_.\-]", "_", value.strip())
     if not sanitized or sanitized in (".", ".."):
         raise UnsafePathError(f"Security violation: Invalid filename segment '{value}'")

@@ -1,6 +1,7 @@
 """
 Unit and Integration Tests for Disaster Recovery Architecture Verification (Part 3G.1).
 """
+
 import pytest
 from app.platform_verification.disaster_recovery_verification.domain.models import (
     ComponentTier,
@@ -42,13 +43,19 @@ def test_recovery_dependency_graph(runtime):
     assert graph.topological_order[-1] == "API"
 
     # Verify correct order validation
-    assert runtime.dep_graph_engine.validate_recovery_order(
-        ["Infrastructure", "Database", "Storage", "Queue", "Workers", "API"]
-    ) is True
+    assert (
+        runtime.dep_graph_engine.validate_recovery_order(
+            ["Infrastructure", "Database", "Storage", "Queue", "Workers", "API"]
+        )
+        is True
+    )
     # Verify incorrect order detection (Workers before Database)
-    assert runtime.dep_graph_engine.validate_recovery_order(
-        ["Infrastructure", "Workers", "Database", "Storage", "Queue", "API"]
-    ) is False
+    assert (
+        runtime.dep_graph_engine.validate_recovery_order(
+            ["Infrastructure", "Workers", "Database", "Storage", "Queue", "API"]
+        )
+        is False
+    )
 
 
 def test_recovery_orchestration_execution(runtime):

@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class ProvenanceSourceRecord(BaseModel):
     """Immutable record of the primary source and origin of a data asset."""
+
     source_id: str
     asset_id: str
     original_uri: str

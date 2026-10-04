@@ -50,87 +50,107 @@ class IPerformanceVerifier(ABC):
 
 class IAutoscalingArchitectureVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> AutoscalingArchitectureReport: pass
+    def verify(self) -> AutoscalingArchitectureReport:
+        pass
 
 
 class IScalingMetricsVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ScalingMetricsReport: pass
+    def verify(self) -> ScalingMetricsReport:
+        pass
 
 
 class IWorkerScalingVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> WorkerScalingReport: pass
+    def verify(self) -> WorkerScalingReport:
+        pass
 
 
 class IQueueAutoscalingVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> QueueAutoscalingReport: pass
+    def verify(self) -> QueueAutoscalingReport:
+        pass
 
 
 class IAPIScalingVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> APIScalingReport: pass
+    def verify(self) -> APIScalingReport:
+        pass
 
 
 class IScalingPolicyVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ScalingPolicyReport: pass
+    def verify(self) -> ScalingPolicyReport:
+        pass
 
 
 class IScaleUpVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ScaleUpValidationReport: pass
+    def verify(self) -> ScaleUpValidationReport:
+        pass
 
 
 class IScaleDownSafetyVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ScaleDownSafetyReport: pass
+    def verify(self) -> ScaleDownSafetyReport:
+        pass
 
 
 class IDatabaseScalingImpactVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> DatabaseScalingImpactReport: pass
+    def verify(self) -> DatabaseScalingImpactReport:
+        pass
 
 
 class IAIProviderScalingVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> AIScalingReport: pass
+    def verify(self) -> AIScalingReport:
+        pass
 
 
 class IK8sScalingReadinessVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> K8sScalingReadinessReport: pass
+    def verify(self) -> K8sScalingReadinessReport:
+        pass
 
 
 class ICloudScalingVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> CloudScalingReport: pass
+    def verify(self) -> CloudScalingReport:
+        pass
 
 
 class ICostScalingVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> CostScalingReport: pass
+    def verify(self) -> CostScalingReport:
+        pass
 
 
 class IScalingFailureVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ScalingFailureReport: pass
+    def verify(self) -> ScalingFailureReport:
+        pass
 
 
 class IAutoscalingScorer(ABC):
     @abstractmethod
-    def score_reports(self, reports: Dict[str, Any]) -> EnterpriseAutoscalingCertificationReport: pass
+    def score_reports(self, reports: Dict[str, Any]) -> EnterpriseAutoscalingCertificationReport:
+        pass
 
 
 class IAutoscalingExporter(ABC):
     @abstractmethod
-    def export(self, reports: Dict[str, Any], certification: EnterpriseAutoscalingCertificationReport, output_dir: str) -> List[str]: pass
+    def export(
+        self, reports: Dict[str, Any], certification: EnterpriseAutoscalingCertificationReport, output_dir: str
+    ) -> List[str]:
+        pass
 
 
 class IAutoscalingRuntime(ABC):
     @abstractmethod
-    def run_full_verification(self, output_dir: str) -> Dict[str, Any]: pass
+    def run_full_verification(self, output_dir: str) -> Dict[str, Any]:
+        pass
 
     @abstractmethod
-    def get_latest_certification(self) -> Optional[EnterpriseAutoscalingCertificationReport]: pass
+    def get_latest_certification(self) -> Optional[EnterpriseAutoscalingCertificationReport]:
+        pass

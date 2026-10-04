@@ -10,6 +10,7 @@ from app.data_governance.registry.models import ClassificationLevel
 
 class DataAssetVersion(BaseModel):
     """Immutable snapshot record of an asset version."""
+
     version_id: str
     asset_id: str
     version_number: int
@@ -24,6 +25,7 @@ class DataAssetVersion(BaseModel):
 
 class AssetTag(BaseModel):
     """Governed metadata tag attached to an asset."""
+
     tag_name: str
     tag_value: str
     assigned_by: str

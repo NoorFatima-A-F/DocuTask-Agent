@@ -9,6 +9,7 @@ from app.model_governance.registry.models import ModelLifecycleState
 
 class ModelLifecycleAuditEvent(BaseModel):
     """Audit log entry for model lifecycle transitions."""
+
     model_id: str
     organization_id: str
     from_state: ModelLifecycleState

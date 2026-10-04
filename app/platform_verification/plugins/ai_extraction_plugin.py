@@ -1,9 +1,11 @@
 """
 AI Extraction Verification Plugin (F1, Zero-Fabrication Sentinel, Exact Match)
 """
+
 from typing import Dict, Any
 from app.platform_verification.domain.models import VerificationDefinition, MetricResult, RuntimeEnvironmentProfile
 from app.platform_verification.domain.interfaces import VerificationPlugin
+
 
 class AIExtractionVerificationPlugin(VerificationPlugin):
     @property
@@ -18,7 +20,7 @@ class AIExtractionVerificationPlugin(VerificationPlugin):
         self,
         definition: VerificationDefinition,
         env_profile: RuntimeEnvironmentProfile,
-        dataset_payload: Dict[str, Any]
+        dataset_payload: Dict[str, Any],
     ) -> Dict[str, Any]:
         f1_samples = [0.985, 0.982, 0.988, 0.990, 0.984]
         sentinel_samples = [1.0, 1.0, 1.0, 1.0, 1.0]
@@ -31,7 +33,7 @@ class AIExtractionVerificationPlugin(VerificationPlugin):
                 value=round(sum(f1_samples) / len(f1_samples), 4),
                 target_threshold=0.95,
                 passed=True,
-                details={"samples": f1_samples}
+                details={"samples": f1_samples},
             ),
             MetricResult(
                 metric_name="zero_fabrication_sentinel",
@@ -39,7 +41,7 @@ class AIExtractionVerificationPlugin(VerificationPlugin):
                 value=1.0,
                 target_threshold=1.0,
                 passed=True,
-                details={"samples": sentinel_samples}
+                details={"samples": sentinel_samples},
             ),
             MetricResult(
                 metric_name="p95_extraction_latency_ms",
@@ -48,8 +50,8 @@ class AIExtractionVerificationPlugin(VerificationPlugin):
                 unit="ms",
                 target_threshold=200.0,
                 passed=True,
-                details={"samples": latency_samples}
-            )
+                details={"samples": latency_samples},
+            ),
         ]
 
         return {
@@ -57,6 +59,6 @@ class AIExtractionVerificationPlugin(VerificationPlugin):
             "raw_evidence": {
                 "f1_distribution": f1_samples,
                 "sentinel_fidelity": sentinel_samples,
-                "model_profile": env_profile.active_model_name
-            }
+                "model_profile": env_profile.active_model_name,
+            },
         }

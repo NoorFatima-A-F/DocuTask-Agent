@@ -22,9 +22,13 @@ class RetryValidator:
             errors.append(f"Exceeded max allowed retries ({current_retries} >= {policy.max_retries})")
 
         if cumulative_cost > policy.max_cumulative_cost_usd:
-            errors.append(f"Cumulative retry cost ${cumulative_cost:.4f} exceeded policy cap ${policy.max_cumulative_cost_usd:.4f}")
+            errors.append(
+                f"Cumulative retry cost ${cumulative_cost:.4f} exceeded policy cap ${policy.max_cumulative_cost_usd:.4f}"
+            )
 
         if cumulative_delay > policy.max_cumulative_delay_ms:
-            errors.append(f"Cumulative retry delay {cumulative_delay:.1f}ms exceeded policy cap {policy.max_cumulative_delay_ms:.1f}ms")
+            errors.append(
+                f"Cumulative retry delay {cumulative_delay:.1f}ms exceeded policy cap {policy.max_cumulative_delay_ms:.1f}ms"
+            )
 
         return len(errors) == 0, errors

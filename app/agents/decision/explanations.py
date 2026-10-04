@@ -11,6 +11,7 @@ from app.agents.decision.reasoning import ReasoningStep
 
 class Evidence(BaseModel):
     """Supporting empirical evidence for a decision outcome."""
+
     source_type: str = Field(default="POLICY_EVALUATION")
     description: str
     data: Dict[str, Any] = Field(default_factory=dict)
@@ -20,6 +21,7 @@ class Evidence(BaseModel):
 
 class DecisionGraphNode(BaseModel):
     """Node in a decision reasoning graph."""
+
     node_id: str
     label: str
     node_type: str = Field(default="RULE")
@@ -29,6 +31,7 @@ class DecisionGraphNode(BaseModel):
 
 class DecisionGraphEdge(BaseModel):
     """Edge connecting decision graph nodes."""
+
     source_id: str
     target_id: str
     relationship: str = Field(default="DEPENDS_ON")
@@ -37,6 +40,7 @@ class DecisionGraphEdge(BaseModel):
 
 class DecisionGraph(BaseModel):
     """Graph structure representing hierarchical policy and rule evaluation."""
+
     nodes: List[DecisionGraphNode] = Field(default_factory=list)
     edges: List[DecisionGraphEdge] = Field(default_factory=list)
     model_config = {"frozen": True}

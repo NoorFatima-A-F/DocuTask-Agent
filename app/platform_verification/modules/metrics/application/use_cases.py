@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Metrics.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.metrics.domain.models import MetricsEntity
 from app.platform_verification.modules.metrics.domain.interfaces import MetricsRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManageMetricsUseCase:
     def __init__(self, repository: MetricsRepositoryInterface):

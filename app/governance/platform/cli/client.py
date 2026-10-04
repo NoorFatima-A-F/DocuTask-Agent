@@ -39,7 +39,9 @@ class CLIConfig:
 
     @property
     def base_url(self) -> str:
-        return os.environ.get("DOCTASK_GOVERNANCE_URL") or self._data.get("base_url", "https://api.governance.doctask.io")
+        return os.environ.get("DOCTASK_GOVERNANCE_URL") or self._data.get(
+            "base_url", "https://api.governance.doctask.io"
+        )
 
     def get_client(self) -> GovernanceClient:
         return GovernanceClient(api_key=self.api_key or "default_cli_key", base_url=self.base_url)

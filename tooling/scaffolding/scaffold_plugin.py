@@ -2,6 +2,7 @@
 Plugin Scaffolder CLI.
 Creates isolated sandboxed verification plugins following the Enterprise Plugin Framework.
 """
+
 import sys
 
 PLUGIN_MANIFEST = """name: {plugin_name}
@@ -12,10 +13,12 @@ capabilities:
   - {plugin_name}:execute
 """
 
+
 def scaffold_plugin(plugin_name: str, base_path: str = "app/plugins") -> str:
     import re
     from pathlib import Path
-    sanitized_name = re.sub(r'[^a-zA-Z0-9_]', '_', plugin_name.lower())
+
+    sanitized_name = re.sub(r"[^a-zA-Z0-9_]", "_", plugin_name.lower())
     base = Path(base_path).resolve()
     target = (base / sanitized_name).resolve()
     if not (target == base or target.is_relative_to(base)):
@@ -31,6 +34,7 @@ def scaffold_plugin(plugin_name: str, base_path: str = "app/plugins") -> str:
         f.write(f"# Plugin implementation for {sanitized_name}\n")
 
     return str(target)
+
 
 if __name__ == "__main__":
     name = sys.argv[1] if len(sys.argv) > 1 else "sample_plugin"

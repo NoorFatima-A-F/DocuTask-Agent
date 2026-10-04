@@ -18,7 +18,7 @@ class CriticalPathEngine:
     def analyze(cls, dag: ExecutionDAG) -> Dict[str, Any]:
         """Performs full CPM analysis over the DAG."""
         crit_nodes, total_duration = dag.compute_critical_path()
-        
+
         node_cpm_details = {}
         for nid, node in dag.nodes.items():
             node_cpm_details[nid] = {

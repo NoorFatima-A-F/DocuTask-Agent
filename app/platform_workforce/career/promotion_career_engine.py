@@ -1,10 +1,12 @@
 """
 12. Promotion & Career Engine Subsystem
 """
+
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from app.platform_workforce.models.schemas import CareerPromotionPath, EmployeeRole
 from app.platform_workforce.registry.workforce_registry import workforce_registry
+
 
 class PromotionCareerEngine:
     def __init__(self):
@@ -22,9 +24,9 @@ class PromotionCareerEngine:
             completed_milestones=[
                 "Completed 100+ flawless extractions",
                 "Authored 5 collective memory best practices",
-                "Maintained >98% trust score"
+                "Maintained >98% trust score",
             ],
-            status="READY"
+            status="READY",
         )
         self._career_paths[tenant] = {promo.id: promo}
 
@@ -35,7 +37,7 @@ class PromotionCareerEngine:
         emp = workforce_registry.get_employee(employee_id, tenant_id)
         if not emp:
             return None
-        
+
         # Determine next role
         role_ladder = [
             EmployeeRole.JUNIOR_WORKER,
@@ -46,7 +48,7 @@ class PromotionCareerEngine:
             EmployeeRole.MANAGER,
             EmployeeRole.DIRECTOR,
             EmployeeRole.VP,
-            EmployeeRole.CEO
+            EmployeeRole.CEO,
         ]
         curr_idx = 0
         for i, r in enumerate(role_ladder):
@@ -54,7 +56,7 @@ class PromotionCareerEngine:
                 curr_idx = i
                 break
         next_role = role_ladder[min(curr_idx + 1, len(role_ladder) - 1)]
-        
+
         path = CareerPromotionPath(
             tenant_id=tenant_id,
             employee_id=employee_id,
@@ -62,14 +64,16 @@ class PromotionCareerEngine:
             target_role=next_role,
             eligibility_score=round(emp.trust_score * 0.95 + emp.task_success_rate * 0.05, 2),
             completed_milestones=[f"Executed {emp.lifetime_tasks_completed} tasks", f"Trust rating: {emp.trust_score}"],
-            status="READY" if emp.trust_score >= 0.95 else "IN_PROGRESS"
+            status="READY" if emp.trust_score >= 0.95 else "IN_PROGRESS",
         )
         if tenant_id not in self._career_paths:
             self._career_paths[tenant_id] = {}
         self._career_paths[tenant_id][path.id] = path
         return path
 
-    def execute_promotion(self, promotion_path_id: str, tenant_id: str = "default-tenant") -> Optional[CareerPromotionPath]:
+    def execute_promotion(
+        self, promotion_path_id: str, tenant_id: str = "default-tenant"
+    ) -> Optional[CareerPromotionPath]:
         path = self._career_paths.get(tenant_id, {}).get(promotion_path_id)
         if not path:
             return None
@@ -78,12 +82,12 @@ class PromotionCareerEngine:
             emp.role = path.target_role
             emp.level += 1
             emp.hourly_salary_usd = round(emp.hourly_salary_usd * 1.25, 2)
-            emp.career_history.append({
-                "promoted_to": str(path.target_role),
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            })
+            emp.career_history.append(
+                {"promoted_to": str(path.target_role), "timestamp": datetime.now(timezone.utc).isoformat()}
+            )
         path.status = "PROMOTED"
         path.promoted_at = datetime.now(timezone.utc)
         return path
+
 
 promotion_career_engine = PromotionCareerEngine()

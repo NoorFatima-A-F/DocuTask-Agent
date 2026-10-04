@@ -3,6 +3,7 @@ Readiness Observability Exporter (Part 3H.3.2.12).
 Generates Prometheus and OpenTelemetry metrics for dependency health, readiness states,
 failure counts, state transitions, and dependency latencies.
 """
+
 from typing import Dict, Any, List
 from app.platform_verification.readiness_engine.domain.models import ReadinessState
 
@@ -74,11 +75,13 @@ class ReadinessMetricsExporter:
         for dep, h_val in self._dependency_health.items():
             lines.append(f'dependency_health_status{{dependency="{dep}"}} {h_val}')
 
-        lines.extend([
-            "",
-            "# HELP dependency_latency_seconds Latency of dependency health probe in seconds",
-            "# TYPE dependency_latency_seconds gauge",
-        ])
+        lines.extend(
+            [
+                "",
+                "# HELP dependency_latency_seconds Latency of dependency health probe in seconds",
+                "# TYPE dependency_latency_seconds gauge",
+            ]
+        )
 
         for dep, lat in self._dependency_latency.items():
             lines.append(f'dependency_latency_seconds{{dependency="{dep}"}} {lat:.6f}')

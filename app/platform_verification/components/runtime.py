@@ -2,6 +2,7 @@
 Enterprise Verification Runtime: Dependency Injection Container and Facade.
 Coordinates all 16 specialized core components with clean separation of concerns.
 """
+
 from typing import Optional
 
 from .orchestrator.orchestrator import VerificationOrchestrator
@@ -20,6 +21,7 @@ from .reporting.reporting_engine import ReportingEngine
 from .audit.audit_manager import AuditManager
 from .traceability.traceability_manager import TraceabilityManager
 from .plugins.plugin_manager import PluginManager
+
 
 class EnterpriseVerificationRuntime:
     """Master runtime assembling and exposing all 16 core components."""
@@ -58,7 +60,9 @@ class EnterpriseVerificationRuntime:
             plugin_manager=self.plugin_manager,
         )
 
+
 _runtime_instance: Optional[EnterpriseVerificationRuntime] = None
+
 
 def get_verification_runtime() -> EnterpriseVerificationRuntime:
     global _runtime_instance

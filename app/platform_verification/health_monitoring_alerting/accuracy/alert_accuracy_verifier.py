@@ -12,10 +12,10 @@ class AlertAccuracyVerifier(IAlertAccuracyVerifier):
     """Verifies alert accuracy, precision, recall, and auto-resolution lifecycle."""
 
     def verify_alert_accuracy(self) -> AlertAccuracyReport:
-        tp = 4   # True Positives (Failure occurred -> Alert fired)
-        fp = 0   # False Positives (Normal operation -> No alert)
+        tp = 4  # True Positives (Failure occurred -> Alert fired)
+        fp = 0  # False Positives (Normal operation -> No alert)
         tn = 20  # True Negatives
-        fn = 0   # False Negatives
+        fn = 0  # False Negatives
 
         precision = round((tp / (tp + fp)) * 100.0, 2) if (tp + fp) else 100.0
         recall = round((tp / (tp + fn)) * 100.0, 2) if (tp + fn) else 100.0

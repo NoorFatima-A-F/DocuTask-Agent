@@ -37,7 +37,9 @@ class DiagnosticsReporter:
         modules = [m.name for m in self.module_registry.list_modules()] if self.module_registry else []
         plugins = [p.manifest.id for p in self.plugin_registry.list_plugins()] if self.plugin_registry else []
         services = [s.name for s in self.service_registry.list_services()] if self.service_registry else []
-        capabilities = [c.name for c in self.capability_registry.list_capabilities()] if self.capability_registry else []
+        capabilities = (
+            [c.name for c in self.capability_registry.list_capabilities()] if self.capability_registry else []
+        )
 
         status_str = "HEALTHY"
         if self.health_manager:

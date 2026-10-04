@@ -1,10 +1,12 @@
 """
 Cryptographic Utilities and Canonical Hashing.
 """
+
 import hashlib
 import hmac
 import json
 from typing import Any
+
 
 class CanonicalHasher:
     @staticmethod
@@ -29,7 +31,7 @@ class CanonicalHasher:
             next_level = []
             for i in range(0, len(current), 2):
                 if i + 1 < len(current):
-                    combined = (current[i] + current[i+1]).encode("utf-8")
+                    combined = (current[i] + current[i + 1]).encode("utf-8")
                 else:
                     combined = (current[i] + current[i]).encode("utf-8")
                 next_level.append(hashlib.sha256(combined).hexdigest())
@@ -40,11 +42,7 @@ class CanonicalHasher:
 class HMACSigner:
     @staticmethod
     def sign(secret_key: str, message: str) -> str:
-        return hmac.new(
-            secret_key.encode("utf-8"),
-            message.encode("utf-8"),
-            hashlib.sha256
-        ).hexdigest()
+        return hmac.new(secret_key.encode("utf-8"), message.encode("utf-8"), hashlib.sha256).hexdigest()
 
     @staticmethod
     def verify(secret_key: str, message: str, expected_signature: str) -> bool:

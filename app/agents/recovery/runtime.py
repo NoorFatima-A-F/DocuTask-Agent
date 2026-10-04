@@ -18,7 +18,7 @@ class RecoveryRuntime:
         self,
         engine: Optional[RecoveryEngine] = None,
         health_monitor: Optional[RecoveryHealthMonitor] = None,
-        bulkhead_manager: Optional[BulkheadManager] = None
+        bulkhead_manager: Optional[BulkheadManager] = None,
     ):
         self.engine = engine or RecoveryEngine()
         self.health_monitor = health_monitor or RecoveryHealthMonitor()

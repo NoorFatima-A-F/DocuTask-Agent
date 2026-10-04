@@ -40,9 +40,9 @@ class ApprovalStep(BaseModel):
 
 
 class ApprovalStrategy(str, Enum):
-    SEQUENTIAL = "SEQUENTIAL"    # Step 1 -> Step 2 -> Step 3
-    PARALLEL = "PARALLEL"        # All steps must be approved concurrently
-    THRESHOLD = "THRESHOLD"      # M-of-N approvers across pool
+    SEQUENTIAL = "SEQUENTIAL"  # Step 1 -> Step 2 -> Step 3
+    PARALLEL = "PARALLEL"  # All steps must be approved concurrently
+    THRESHOLD = "THRESHOLD"  # M-of-N approvers across pool
 
 
 class ApprovalChain(BaseModel):

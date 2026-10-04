@@ -29,10 +29,38 @@ class DRFailureSimulationVerifier(IDRFailureSimulationVerifier):
 
     def verify(self) -> DRFailureSimulationReport:
         simulations = [
-            SimulationScenarioResult(scenario_name="1. Database Corruption Simulation", injected_disaster="Corrupted primary table pages & forced WAL panic", detection_time_seconds=2.1, recovery_action="Automatic failover to read replica + PITR restore of damaged partition", data_loss=0, passed=True),
-            SimulationScenarioResult(scenario_name="2. Storage Deletion Simulation", injected_disaster="Recursive rm -rf on document object store bucket", detection_time_seconds=1.4, recovery_action="Asynchronous mirror restore from immutable cross-region vault", data_loss=0, passed=True),
-            SimulationScenarioResult(scenario_name="3. Complete Infrastructure Loss", injected_disaster="Simulated primary cloud availability zone destruction", detection_time_seconds=4.8, recovery_action="IaC multi-region cold-standby bootstrap & automated DNS reroute", data_loss=0, passed=True),
-            SimulationScenarioResult(scenario_name="4. Configuration Loss Simulation", injected_disaster="Accidental wipe of environment variables and secrets", detection_time_seconds=0.8, recovery_action="KMS-decrypted secret reconstitution from secure backup vault", data_loss=0, passed=True),
+            SimulationScenarioResult(
+                scenario_name="1. Database Corruption Simulation",
+                injected_disaster="Corrupted primary table pages & forced WAL panic",
+                detection_time_seconds=2.1,
+                recovery_action="Automatic failover to read replica + PITR restore of damaged partition",
+                data_loss=0,
+                passed=True,
+            ),
+            SimulationScenarioResult(
+                scenario_name="2. Storage Deletion Simulation",
+                injected_disaster="Recursive rm -rf on document object store bucket",
+                detection_time_seconds=1.4,
+                recovery_action="Asynchronous mirror restore from immutable cross-region vault",
+                data_loss=0,
+                passed=True,
+            ),
+            SimulationScenarioResult(
+                scenario_name="3. Complete Infrastructure Loss",
+                injected_disaster="Simulated primary cloud availability zone destruction",
+                detection_time_seconds=4.8,
+                recovery_action="IaC multi-region cold-standby bootstrap & automated DNS reroute",
+                data_loss=0,
+                passed=True,
+            ),
+            SimulationScenarioResult(
+                scenario_name="4. Configuration Loss Simulation",
+                injected_disaster="Accidental wipe of environment variables and secrets",
+                detection_time_seconds=0.8,
+                recovery_action="KMS-decrypted secret reconstitution from secure backup vault",
+                data_loss=0,
+                passed=True,
+            ),
         ]
 
         checks = [

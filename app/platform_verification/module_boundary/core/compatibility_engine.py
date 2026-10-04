@@ -1,6 +1,7 @@
 """
 Version Compatibility Validator for Core and Plugins.
 """
+
 from __future__ import annotations
 from app.platform_verification.module_boundary.domain.interfaces import ICompatibilityValidator
 

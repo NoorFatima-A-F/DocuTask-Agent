@@ -64,10 +64,7 @@ async def test_security_headers_presence(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_rate_limiting_enforcement(client: AsyncClient):
     """Verifies sliding window rate limiting on sensitive POST /login route."""
-    login_payload = {
-        "username_or_email": "nonexistent_user",
-        "password": "WrongPassword123!"
-    }
+    login_payload = {"username_or_email": "nonexistent_user", "password": "WrongPassword123!"}
 
     # Execute 5 allowed login requests
     for _ in range(5):

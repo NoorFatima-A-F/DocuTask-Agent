@@ -9,6 +9,7 @@ import threading
 
 class DeploymentStatus(str, Enum):
     """Lifecycle statuses for a deployment execution."""
+
     PENDING = "pending"
     VALIDATING = "validating"
     RUNNING = "running"
@@ -21,6 +22,7 @@ class DeploymentStatus(str, Enum):
 
 class DeploymentStrategyType(str, Enum):
     """Supported deployment strategies."""
+
     ROLLING = "rolling"
     CANARY = "canary"
     BLUE_GREEN = "blue_green"
@@ -30,6 +32,7 @@ class DeploymentStrategyType(str, Enum):
 @dataclass
 class DeploymentRecord:
     """Represents an active or historic deployment execution."""
+
     deployment_id: str
     release_id: str
     service_name: str
@@ -54,11 +57,13 @@ class DeploymentRecord:
         if new_status in (DeploymentStatus.COMPLETED, DeploymentStatus.FAILED, DeploymentStatus.ROLLED_BACK):
             self.completed_at = self.updated_at
 
-        self.audit_trail.append({
-            "status": new_status.value,
-            "timestamp": self.updated_at.isoformat(),
-            "message": message or f"Transitioned to {new_status.value}",
-        })
+        self.audit_trail.append(
+            {
+                "status": new_status.value,
+                "timestamp": self.updated_at.isoformat(),
+                "message": message or f"Transitioned to {new_status.value}",
+            }
+        )
 
 
 class DeploymentHistoryTracker:
@@ -105,8 +110,11 @@ class DeploymentHistoryTracker:
         """Retrieve most recent completed deployment for a service in an environment."""
         with self._lock:
             deps = [
-                d for d in self._deployments.values()
-                if d.service_name == service_name and d.target_environment == environment and d.status == DeploymentStatus.COMPLETED
+                d
+                for d in self._deployments.values()
+                if d.service_name == service_name
+                and d.target_environment == environment
+                and d.status == DeploymentStatus.COMPLETED
             ]
             if not deps:
                 return None

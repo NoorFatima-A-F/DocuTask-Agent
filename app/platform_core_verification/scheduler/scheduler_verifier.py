@@ -102,17 +102,13 @@ class SchedulerVerifier:
         # Deterministic pseudo-random seed for verification
         random.seed(42)
         for attempt in range(5):
-            exp_delay = min(max_delay, base_delay * (2 ** attempt))
+            exp_delay = min(max_delay, base_delay * (2**attempt))
             # Full jitter: random uniform between 0 and exp_delay
             jittered_delay = random.uniform(0.5 * exp_delay, exp_delay)
             backoffs.append(jittered_delay)
 
         # Verify backoffs increase on average and are bounded
-        valid = (
-            backoffs[0] < backoffs[-1]
-            and all(b <= max_delay for b in backoffs)
-            and all(b >= 0.5 for b in backoffs)
-        )
+        valid = backoffs[0] < backoffs[-1] and all(b <= max_delay for b in backoffs) and all(b >= 0.5 for b in backoffs)
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 
         return {
@@ -138,11 +134,11 @@ class SchedulerVerifier:
 
         # Worker 2 tries to acquire when lease is active -> rejected
         current_time = 950
-        acquired_by_worker_2_early = (current_time > distributed_lock["lease_expires_at"])
+        acquired_by_worker_2_early = current_time > distributed_lock["lease_expires_at"]
 
         # Current time advances past lease expiration without worker 1 heartbeat
         current_time = 1050
-        can_acquire_worker_2 = (current_time > distributed_lock["lease_expires_at"])
+        can_acquire_worker_2 = current_time > distributed_lock["lease_expires_at"]
         if can_acquire_worker_2:
             distributed_lock["owner"] = "worker_node_2"
             distributed_lock["lease_expires_at"] = current_time + 100

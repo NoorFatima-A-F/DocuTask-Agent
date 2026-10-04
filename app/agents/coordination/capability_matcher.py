@@ -11,6 +11,7 @@ from app.agents.coordination.interfaces import ICapabilityMatcher
 
 class CapabilityRequirement(BaseModel):
     """Specification of capabilities required to execute a task."""
+
     required_skills: List[str] = Field(default_factory=list)
     required_tools: List[str] = Field(default_factory=list)
     domain: Optional[str] = None
@@ -23,6 +24,7 @@ class CapabilityRequirement(BaseModel):
 
 class CapabilityMatchResult(BaseModel):
     """Scored match result for an agent candidate."""
+
     agent_id: str
     match_score: float = Field(ge=0.0, le=1.0)
     matched_skills: List[str] = Field(default_factory=list)
@@ -37,9 +39,7 @@ class CapabilityMatcher(ICapabilityMatcher):
     """Evaluates agent capability profiles against task requirements."""
 
     def match_capabilities(
-        self,
-        required: CapabilityRequirement,
-        candidates: List[Agent]
+        self, required: CapabilityRequirement, candidates: List[Agent]
     ) -> List[CapabilityMatchResult]:
         """Calculates multi-criteria capability scores for all candidates."""
         results: List[CapabilityMatchResult] = []
@@ -73,20 +73,19 @@ class CapabilityMatcher(ICapabilityMatcher):
             skill_ratio = len(matched_skills) / len(required.required_skills) if required.required_skills else 1.0
             tool_ratio = len(matched_tools) / len(required.required_tools) if required.required_tools else 1.0
             score = (
-                0.4 * skill_ratio
-                + 0.3 * tool_ratio
-                + 0.2 * cap.confidence_rating
-                + 0.1 * candidate.reputation_score
+                0.4 * skill_ratio + 0.3 * tool_ratio + 0.2 * cap.confidence_rating + 0.1 * candidate.reputation_score
             )
 
-            results.append(CapabilityMatchResult(
-                agent_id=str(candidate.agent_id),
-                match_score=max(0.0, min(1.0, score)),
-                matched_skills=matched_skills,
-                missing_skills=missing_skills,
-                matched_tools=matched_tools,
-                is_fully_qualified=fully_qualified
-            ))
+            results.append(
+                CapabilityMatchResult(
+                    agent_id=str(candidate.agent_id),
+                    match_score=max(0.0, min(1.0, score)),
+                    matched_skills=matched_skills,
+                    missing_skills=missing_skills,
+                    matched_tools=matched_tools,
+                    is_fully_qualified=fully_qualified,
+                )
+            )
 
         # Sort descending by match_score
         results.sort(key=lambda r: (r.is_fully_qualified, r.match_score), reverse=True)

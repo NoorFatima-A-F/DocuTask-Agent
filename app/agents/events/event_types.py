@@ -15,6 +15,7 @@ from uuid import UUID, uuid4
 
 class EventPriority(str, Enum):
     """Priority levels for event dispatching."""
+
     LOW = "low"
     NORMAL = "normal"
     HIGH = "high"
@@ -47,6 +48,7 @@ class AgentEvent:
 # ==========================================
 # Legacy-Compatible Lifecycle Events
 # ==========================================
+
 
 @dataclass(frozen=True)
 class GoalReceivedEvent(AgentEvent):
@@ -102,21 +104,25 @@ class RetryRequestedEvent(AgentEvent):
 # Phase 26 Advanced Autonomous Events
 # ==========================================
 
+
 @dataclass(frozen=True)
 class GoalUnderstandingCompletedEvent(AgentEvent):
     """Emitted when natural language goal is parsed and formal specification is generated."""
+
     event_type: str = "GoalUnderstandingCompleted"
 
 
 @dataclass(frozen=True)
 class PlanOptimizedEvent(AgentEvent):
     """Emitted when candidate execution plans have been Pareto-optimized."""
+
     event_type: str = "PlanOptimized"
 
 
 @dataclass(frozen=True)
 class TaskStartedEvent(AgentEvent):
     """Emitted when an individual node in the DAG begins execution."""
+
     event_type: str = "TaskStarted"
     task_id: str = ""
     assigned_agent: str = ""
@@ -125,6 +131,7 @@ class TaskStartedEvent(AgentEvent):
 @dataclass(frozen=True)
 class TaskCompletedEvent(AgentEvent):
     """Emitted when an individual node in the DAG completes successfully."""
+
     event_type: str = "TaskCompleted"
     task_id: str = ""
     duration_ms: float = 0.0
@@ -133,6 +140,7 @@ class TaskCompletedEvent(AgentEvent):
 @dataclass(frozen=True)
 class TaskFailedEvent(AgentEvent):
     """Emitted when an individual node in the DAG encounters an error."""
+
     event_type: str = "TaskFailed"
     task_id: str = ""
     error_message: str = ""
@@ -142,6 +150,7 @@ class TaskFailedEvent(AgentEvent):
 @dataclass(frozen=True)
 class TaskMutatedEvent(AgentEvent):
     """Emitted when the TaskGraph is dynamically altered during execution."""
+
     event_type: str = "TaskMutated"
     mutation_type: str = ""
     affected_tasks: List[str] = field(default_factory=list)
@@ -150,6 +159,7 @@ class TaskMutatedEvent(AgentEvent):
 @dataclass(frozen=True)
 class AgentNegotiationStartedEvent(AgentEvent):
     """Emitted when multiple agents begin contract negotiation for a task."""
+
     event_type: str = "AgentNegotiationStarted"
     task_id: str = ""
 
@@ -157,6 +167,7 @@ class AgentNegotiationStartedEvent(AgentEvent):
 @dataclass(frozen=True)
 class AgentNegotiationCompletedEvent(AgentEvent):
     """Emitted when task delegation is finalized between agents."""
+
     event_type: str = "AgentNegotiationCompleted"
     task_id: str = ""
     selected_agent_id: str = ""
@@ -166,6 +177,7 @@ class AgentNegotiationCompletedEvent(AgentEvent):
 @dataclass(frozen=True)
 class ToolInvokedEvent(AgentEvent):
     """Emitted when a cognitive tool is triggered."""
+
     event_type: str = "ToolInvoked"
     tool_name: str = ""
     agent_id: str = ""
@@ -174,6 +186,7 @@ class ToolInvokedEvent(AgentEvent):
 @dataclass(frozen=True)
 class ToolPolicyViolationEvent(AgentEvent):
     """Emitted when a tool invocation breaches compliance or security policy."""
+
     event_type: str = "ToolPolicyViolation"
     tool_name: str = ""
     policy_name: str = ""
@@ -183,6 +196,7 @@ class ToolPolicyViolationEvent(AgentEvent):
 @dataclass(frozen=True)
 class ReflectionCritiqueCompletedEvent(AgentEvent):
     """Emitted when multi-critic evaluation concludes."""
+
     event_type: str = "ReflectionCritiqueCompleted"
     overall_score: float = 0.0
     passed: bool = False
@@ -191,6 +205,7 @@ class ReflectionCritiqueCompletedEvent(AgentEvent):
 @dataclass(frozen=True)
 class SelfCorrectionTriggeredEvent(AgentEvent):
     """Emitted when a low critique score triggers autonomous replanning."""
+
     event_type: str = "SelfCorrectionTriggered"
     iteration: int = 1
     reason: str = ""
@@ -199,6 +214,7 @@ class SelfCorrectionTriggeredEvent(AgentEvent):
 @dataclass(frozen=True)
 class HumanEscalationRequestedEvent(AgentEvent):
     """Emitted when autonomous confidence falls below safety thresholds."""
+
     event_type: str = "HumanEscalationRequested"
     ticket_id: str = ""
     priority: EventPriority = EventPriority.HIGH
@@ -208,6 +224,7 @@ class HumanEscalationRequestedEvent(AgentEvent):
 @dataclass(frozen=True)
 class HumanFeedbackReceivedEvent(AgentEvent):
     """Emitted when human operator provides feedback or overrides a decision."""
+
     event_type: str = "HumanFeedbackReceived"
     ticket_id: str = ""
     action: str = ""  # APPROVE, REJECT, MODIFY
@@ -217,6 +234,7 @@ class HumanFeedbackReceivedEvent(AgentEvent):
 @dataclass(frozen=True)
 class MemoryConsolidationCompletedEvent(AgentEvent):
     """Emitted when background pattern mining distills semantic rules."""
+
     event_type: str = "MemoryConsolidationCompleted"
     promoted_patterns_count: int = 0
 
@@ -224,6 +242,7 @@ class MemoryConsolidationCompletedEvent(AgentEvent):
 @dataclass(frozen=True)
 class StateTransitionEvent(AgentEvent):
     """Emitted on every state transition of the autonomous runtime state machine."""
+
     event_type: str = "StateTransition"
     from_state: str = ""
     to_state: str = ""
@@ -232,6 +251,7 @@ class StateTransitionEvent(AgentEvent):
 @dataclass(frozen=True)
 class SecurityViolationEvent(AgentEvent):
     """Emitted when an agent attempts an unauthorized operation."""
+
     event_type: str = "SecurityViolation"
     agent_id: str = ""
     action: str = ""

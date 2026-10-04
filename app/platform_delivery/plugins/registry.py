@@ -1,4 +1,5 @@
 """Plugin Registry Management."""
+
 from typing import Dict, List, Optional
 from .contracts import PlatformPlugin
 from .lifecycle import PluginLifecycleState
@@ -16,7 +17,9 @@ class PluginRegistry:
     def register_plugin(self, plugin: PlatformPlugin) -> None:
         meta = plugin.metadata()
         if not self.sandbox.check_permissions(meta.declared_permissions):
-            raise PermissionError(f"Plugin '{meta.name}' requested disallowed sandbox permissions: {meta.declared_permissions}")
+            raise PermissionError(
+                f"Plugin '{meta.name}' requested disallowed sandbox permissions: {meta.declared_permissions}"
+            )
 
         self._plugins[meta.plugin_id] = plugin
         self._states[meta.plugin_id] = PluginLifecycleState.REGISTERED

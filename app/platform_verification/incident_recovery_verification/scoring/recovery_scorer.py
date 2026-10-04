@@ -1,6 +1,7 @@
 """
 Phase 3H.4.9.11: Recovery Quality Scorer
 """
+
 from typing import Dict, Any
 from ..domain.interfaces import IRecoveryScorer
 from ..domain.models import (
@@ -40,7 +41,11 @@ class RecoveryScorer(IRecoveryScorer):
             speed_score = 50.0
 
         # 3. Data integrity (20%)
-        if integrity_report.checksum_match and integrity_report.database_transactions_consistent and integrity_report.queue_jobs_lost == 0:
+        if (
+            integrity_report.checksum_match
+            and integrity_report.database_transactions_consistent
+            and integrity_report.queue_jobs_lost == 0
+        ):
             integrity_score = 100.0
         else:
             integrity_score = 0.0

@@ -23,7 +23,7 @@ class SecurityReportGenerator:
         cls,
         attack_results: List[AttackResult],
         hallucination_metrics: HallucinationMetrics,
-        calibration_metrics: CalibrationMetrics
+        calibration_metrics: CalibrationMetrics,
     ) -> str:
         """
         Persists security evidence artifacts and exports Markdown report.

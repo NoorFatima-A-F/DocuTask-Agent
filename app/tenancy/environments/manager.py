@@ -41,9 +41,7 @@ class EnvironmentManager:
         self._environments[environment_id] = env
         return env
 
-    def get_environment(
-        self, environment_id: str, workspace_id: Optional[str] = None
-    ) -> Environment:
+    def get_environment(self, environment_id: str, workspace_id: Optional[str] = None) -> Environment:
         """Retrieve an environment with optional workspace ownership check."""
         env = self._environments.get(environment_id)
         if not env:

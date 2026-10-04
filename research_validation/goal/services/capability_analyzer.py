@@ -8,17 +8,14 @@ detects gaps, and calculates overall capability confidence.
 from dataclasses import dataclass
 from typing import List, Optional
 
-from research_validation.goal.models.capability_requirement import (
-    CapabilityRequirement, CapabilityCriticality
-)
-from research_validation.goal.interfaces.capability_provider import (
-    ICapabilityProvider, DefaultSystemCapabilityProvider
-)
+from research_validation.goal.models.capability_requirement import CapabilityRequirement, CapabilityCriticality
+from research_validation.goal.interfaces.capability_provider import ICapabilityProvider, DefaultSystemCapabilityProvider
 
 
 @dataclass(frozen=True)
 class CapabilityAnalysisResult:
     """Consolidated outcome of capability discovery and gap evaluation."""
+
     is_fully_satisfied: bool
     satisfied_capabilities: List[str]
     missing_mandatory_capabilities: List[str]
@@ -65,12 +62,12 @@ class CapabilityAnalyzer:
                     confidence_scores.append(0.5)
 
         avg_conf = sum(confidence_scores) / len(confidence_scores) if confidence_scores else 1.0
-        fully_satisfied = (len(missing_mandatory) == 0)
+        fully_satisfied = len(missing_mandatory) == 0
 
         diag = (
             "All mandatory capabilities satisfied."
-            if fully_satisfied else
-            f"Blocked: Missing mandatory capabilities: {', '.join(missing_mandatory)}"
+            if fully_satisfied
+            else f"Blocked: Missing mandatory capabilities: {', '.join(missing_mandatory)}"
         )
 
         return CapabilityAnalysisResult(

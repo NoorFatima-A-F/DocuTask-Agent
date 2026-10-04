@@ -1,6 +1,7 @@
 """
 Runtime Coordinator for Enterprise Deployment & Environment Verification.
 """
+
 import uuid
 from typing import Dict, List, Any, Optional
 from app.platform_verification.deployment_verification.domain.models import (
@@ -10,11 +11,17 @@ from app.platform_verification.deployment_verification.domain.models import (
     DeploymentObservabilityReport,
 )
 from app.platform_verification.deployment_verification.core.build_pipeline_validator import BuildPipelineValidator
-from app.platform_verification.deployment_verification.core.environment_parity_validator import EnvironmentParityValidator
+from app.platform_verification.deployment_verification.core.environment_parity_validator import (
+    EnvironmentParityValidator,
+)
 from app.platform_verification.deployment_verification.core.iac_validator import IacValidator
-from app.platform_verification.deployment_verification.core.deployment_automation_validator import DeploymentAutomationValidator
+from app.platform_verification.deployment_verification.core.deployment_automation_validator import (
+    DeploymentAutomationValidator,
+)
 from app.platform_verification.deployment_verification.core.rollout_rollback_tester import RolloutRollbackTester
-from app.platform_verification.deployment_verification.core.secret_configuration_auditor import SecretConfigurationAuditor
+from app.platform_verification.deployment_verification.core.secret_configuration_auditor import (
+    SecretConfigurationAuditor,
+)
 from app.platform_verification.deployment_verification.core.deployment_scoring_engine import DeploymentScoringEngine
 from app.platform_verification.deployment_verification.core.evidence_store import DeploymentEvidenceStore
 from app.platform_verification.deployment_verification.api.deployment_verification_api import DeploymentVerificationApi
@@ -22,6 +29,7 @@ from app.platform_verification.deployment_verification.api.deployment_verificati
 
 class DeploymentVerificationRuntime:
     """High-level facade orchestrating deployment & environment verification."""
+
     __test__ = False
 
     def __init__(self):
@@ -57,13 +65,35 @@ class DeploymentVerificationRuntime:
             }
         if env_configs is None:
             env_configs = {
-                "STAGING": {"DATABASE_URL": "pg://staging", "REDIS_URL": "redis://staging", "STORAGE_BUCKET": "s3-stg", "ENVIRONMENT": "staging", "SECRET_KEY": "enc:key1"},
-                "PRODUCTION": {"DATABASE_URL": "pg://prod", "REDIS_URL": "redis://prod", "STORAGE_BUCKET": "s3-prod", "ENVIRONMENT": "production", "SECRET_KEY": "enc:key2"},
+                "STAGING": {
+                    "DATABASE_URL": "pg://staging",
+                    "REDIS_URL": "redis://staging",
+                    "STORAGE_BUCKET": "s3-stg",
+                    "ENVIRONMENT": "staging",
+                    "SECRET_KEY": "enc:key1",
+                },
+                "PRODUCTION": {
+                    "DATABASE_URL": "pg://prod",
+                    "REDIS_URL": "redis://prod",
+                    "STORAGE_BUCKET": "s3-prod",
+                    "ENVIRONMENT": "production",
+                    "SECRET_KEY": "enc:key2",
+                },
             }
         if iac_manifests is None:
             iac_manifests = [
-                {"framework": "docker_compose", "has_networking": True, "has_healthcheck": True, "idempotent_recreation": True},
-                {"framework": "kubernetes", "has_networking": True, "has_healthcheck": True, "idempotent_recreation": True},
+                {
+                    "framework": "docker_compose",
+                    "has_networking": True,
+                    "has_healthcheck": True,
+                    "idempotent_recreation": True,
+                },
+                {
+                    "framework": "kubernetes",
+                    "has_networking": True,
+                    "has_healthcheck": True,
+                    "idempotent_recreation": True,
+                },
             ]
         if pipeline_steps is None:
             pipeline_steps = [
@@ -102,9 +132,15 @@ class DeploymentVerificationRuntime:
         sec_rep = self.secret_auditor.audit_secrets(secret_targets)
 
         # 5. Standard simulated verification outputs
-        art_rep = ArtifactSecurityReport(image_name="doctask-api:release", is_signed=True, is_immutable=True, vulnerability_scan_passed=True)
-        mig_rep = MigrationVerificationReport(forward_migration_verified=True, backward_compatibility_verified=True, rollback_tested=True)
-        obs_rep = DeploymentObservabilityReport(lifecycle_logs_verified=True, metrics_collected=True, git_to_deployment_trace_verified=True)
+        art_rep = ArtifactSecurityReport(
+            image_name="doctask-api:release", is_signed=True, is_immutable=True, vulnerability_scan_passed=True
+        )
+        mig_rep = MigrationVerificationReport(
+            forward_migration_verified=True, backward_compatibility_verified=True, rollback_tested=True
+        )
+        obs_rep = DeploymentObservabilityReport(
+            lifecycle_logs_verified=True, metrics_collected=True, git_to_deployment_trace_verified=True
+        )
 
         # 6. Scorecard & Evidence
         scorecard = self.scoring_engine.calculate_scorecard(

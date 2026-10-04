@@ -12,23 +12,31 @@ from pathlib import Path
 
 from research_validation.provenance.hashing import HashAlgorithm, ProvenanceHasher
 from research_validation.provenance.provenance_models import (
-    EvidenceNode, EvidenceQualityLevel, LineageStage, ProvEntity, ProvActivity, ProvAgent, ProvRelationType
+    EvidenceNode,
+    EvidenceQualityLevel,
+    LineageStage,
+    ProvEntity,
+    ProvActivity,
+    ProvAgent,
+    ProvRelationType,
 )
-from research_validation.provenance.digital_signatures import (
-    DetachedSignature, ProvenanceSigner, SignatureAlgorithm
-)
+from research_validation.provenance.digital_signatures import DetachedSignature, ProvenanceSigner, SignatureAlgorithm
 from research_validation.provenance.provenance_schema import (
-    ProvDocument, ProvRelation, OpenLineageJob, OpenLineageRun,
-    OpenLineageDataset, OpenLineageInputDataset, OpenLineageOutputDataset,
-    OpenLineageRunEvent, OpenLineageEventType
+    ProvDocument,
+    ProvRelation,
+    OpenLineageJob,
+    OpenLineageRun,
+    OpenLineageDataset,
+    OpenLineageInputDataset,
+    OpenLineageOutputDataset,
+    OpenLineageRunEvent,
+    OpenLineageEventType,
 )
 from research_validation.provenance.provenance_serialization import ProvenanceSerializer
 from research_validation.provenance.evidence_graph import EvidenceGraph
 from research_validation.provenance.evidence_store import EvidenceStore
 from research_validation.provenance.evidence_diff import EvidenceDiffer
-from research_validation.provenance.provenance_validator import (
-    ProvenanceValidator, ProvenanceValidationVerdict
-)
+from research_validation.provenance.provenance_validator import ProvenanceValidator, ProvenanceValidationVerdict
 from research_validation.provenance.provenance_visualizer import ProvenanceVisualizer
 from research_validation.provenance.evidence_bundle import EvidenceBundleBuilder
 from research_validation.provenance.provenance_engine import ProvenanceEngine
@@ -61,7 +69,7 @@ def test_merkle_dag_construction_and_tampering():
         description="500 inference latency measurements",
         payload={"mean": 42.5},
         parent_node_ids=[],
-        quality_level=EvidenceQualityLevel.LEVEL_B
+        quality_level=EvidenceQualityLevel.LEVEL_B,
     )
 
     # 2. Add child metric node
@@ -72,7 +80,7 @@ def test_merkle_dag_construction_and_tampering():
         description="Measured P99 latency",
         payload={"p99": 110.2},
         parent_node_ids=["raw_1"],
-        quality_level=EvidenceQualityLevel.LEVEL_B
+        quality_level=EvidenceQualityLevel.LEVEL_B,
     )
 
     assert n2.parent_hashes == [n1.node_hash]
@@ -91,10 +99,7 @@ def test_merkle_dag_construction_and_tampering():
 
 
 def test_digital_signatures():
-    signer = ProvenanceSigner(
-        key_id="KEY-TEST-01",
-        secret_or_private_key="super_secret_signing_key"
-    )
+    signer = ProvenanceSigner(key_id="KEY-TEST-01", secret_or_private_key="super_secret_signing_key")
     digest = ProvenanceHasher.hash_string("Report Summary Claims")
     sig = signer.sign_digest(digest, signer_identity="Auditor A")
 
@@ -120,7 +125,7 @@ def test_digital_signatures():
         payload_digest_sha256=digest,
         signed_at_epoch=1000.0,
         expires_at_epoch=2000.0,
-        signer_identity="Auditor A"
+        signer_identity="Auditor A",
     )
     is_exp, reason_exp = ProvenanceSigner.verify_signature(
         sig_expired, digest, "super_secret_signing_key", check_time=3000.0
@@ -161,7 +166,7 @@ def test_openlineage_schema_serialization():
         run=OpenLineageRun(runId="run-abc-123", facets={"environment": "Cloud Run"}),
         job=OpenLineageJob(namespace="rvisf.provenance", name="document_benchmark_job"),
         inputs=[OpenLineageInputDataset(OpenLineageDataset("gcs://bucket", "invoices_test"))],
-        outputs=[OpenLineageOutputDataset(OpenLineageDataset("gcs://bucket", "metrics_f1"))]
+        outputs=[OpenLineageOutputDataset(OpenLineageDataset("gcs://bucket", "metrics_f1"))],
     )
     ol_json = ProvenanceSerializer.to_openlineage_json(event)
     data = json.loads(ol_json)
@@ -174,8 +179,28 @@ def test_evidence_store_immutability_and_versioning(tmp_path: Path):
     store = EvidenceStore(storage_dir=tmp_path)
     env = EvidenceGraph.capture_current_environment()
 
-    n1 = EvidenceNode("node_v1", LineageStage.FINAL_METRIC, "F1 Score", "Run 1", {"f1": 0.95}, [], [], env, EvidenceQualityLevel.LEVEL_B)
-    n2 = EvidenceNode("node_v2", LineageStage.FINAL_METRIC, "F1 Score", "Run 2", {"f1": 0.96}, ["node_v1"], [n1.node_hash], env, EvidenceQualityLevel.LEVEL_B)
+    n1 = EvidenceNode(
+        "node_v1",
+        LineageStage.FINAL_METRIC,
+        "F1 Score",
+        "Run 1",
+        {"f1": 0.95},
+        [],
+        [],
+        env,
+        EvidenceQualityLevel.LEVEL_B,
+    )
+    n2 = EvidenceNode(
+        "node_v2",
+        LineageStage.FINAL_METRIC,
+        "F1 Score",
+        "Run 2",
+        {"f1": 0.96},
+        ["node_v1"],
+        [n1.node_hash],
+        env,
+        EvidenceQualityLevel.LEVEL_B,
+    )
 
     # Store version 1
     r1 = store.store_evidence_node(n1, logical_key="f1_metric")
@@ -202,8 +227,28 @@ def test_evidence_differ():
     env1 = EvidenceGraph.capture_current_environment(git_commit_sha="commit_aaa")
     env2 = EvidenceGraph.capture_current_environment(git_commit_sha="commit_bbb")
 
-    node1 = EvidenceNode("n1", LineageStage.FINAL_METRIC, "F1 Metric", "Run 1", {"f1": 0.92, "latency_ms": 50.0}, [], [], env1, EvidenceQualityLevel.LEVEL_C)
-    node2 = EvidenceNode("n2", LineageStage.FINAL_METRIC, "F1 Metric", "Run 2", {"f1": 0.96, "latency_ms": 45.0}, ["n1"], [node1.node_hash], env2, EvidenceQualityLevel.LEVEL_B)
+    node1 = EvidenceNode(
+        "n1",
+        LineageStage.FINAL_METRIC,
+        "F1 Metric",
+        "Run 1",
+        {"f1": 0.92, "latency_ms": 50.0},
+        [],
+        [],
+        env1,
+        EvidenceQualityLevel.LEVEL_C,
+    )
+    node2 = EvidenceNode(
+        "n2",
+        LineageStage.FINAL_METRIC,
+        "F1 Metric",
+        "Run 2",
+        {"f1": 0.96, "latency_ms": 45.0},
+        ["n1"],
+        [node1.node_hash],
+        env2,
+        EvidenceQualityLevel.LEVEL_B,
+    )
 
     diff = EvidenceDiffer.compare_nodes(node1, node2)
     assert len(diff.metric_deltas) == 2
@@ -215,7 +260,9 @@ def test_evidence_differ():
 def test_provenance_validator():
     graph = EvidenceGraph()
     graph.record_node("r1", LineageStage.RAW_OBSERVATION, "Raw", "Raw data", {}, [], EvidenceQualityLevel.LEVEL_B)
-    graph.record_node("m1", LineageStage.FINAL_METRIC, "Metric", "Metric data", {}, ["r1"], EvidenceQualityLevel.LEVEL_B)
+    graph.record_node(
+        "m1", LineageStage.FINAL_METRIC, "Metric", "Metric data", {}, ["r1"], EvidenceQualityLevel.LEVEL_B
+    )
 
     audit = ProvenanceValidator.audit_graph(graph)
     assert audit.is_valid is True
@@ -225,8 +272,12 @@ def test_provenance_validator():
 
 def test_provenance_visualizer():
     graph = EvidenceGraph()
-    graph.record_node("r1", LineageStage.RAW_OBSERVATION, "Raw Observations", "500 samples", {}, [], EvidenceQualityLevel.LEVEL_A)
-    graph.record_node("m1", LineageStage.FINAL_METRIC, "Entity Macro F1", "F1=0.96", {}, ["r1"], EvidenceQualityLevel.LEVEL_A)
+    graph.record_node(
+        "r1", LineageStage.RAW_OBSERVATION, "Raw Observations", "500 samples", {}, [], EvidenceQualityLevel.LEVEL_A
+    )
+    graph.record_node(
+        "m1", LineageStage.FINAL_METRIC, "Entity Macro F1", "F1=0.96", {}, ["r1"], EvidenceQualityLevel.LEVEL_A
+    )
 
     # Mermaid
     mermaid_str = ProvenanceVisualizer.to_mermaid(graph)
@@ -276,7 +327,7 @@ def test_complete_7_stage_lineage_pipeline_and_quality_scoring():
         aggregation_fn=lambda xs: sum(xs) / len(xs),
         metric_name="Mean Latency ms",
         report_title="Document Ingestion Benchmark Report",
-        quality_level=EvidenceQualityLevel.LEVEL_A
+        quality_level=EvidenceQualityLevel.LEVEL_A,
     )
 
     assert chain.raw_observation_node.stage == LineageStage.RAW_OBSERVATION

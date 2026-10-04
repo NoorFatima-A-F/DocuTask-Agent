@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 class TenantSafetyPolicy(BaseModel):
     """Tenant-specific safety governance parameters."""
+
     tenant_id: str
     max_input_length: int = 100_000
     block_on_prompt_injection: bool = True

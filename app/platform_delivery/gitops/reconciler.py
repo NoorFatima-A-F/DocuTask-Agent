@@ -1,4 +1,5 @@
 """GitOps Controller and State Reconciliation Engine (Req 25, 27)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Dict, Optional

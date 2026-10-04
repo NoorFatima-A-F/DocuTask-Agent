@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 class PolicyEvaluationResult(BaseModel):
     """Result of policy engine pre-execution validation."""
+
     allowed: bool
     requires_human_approval: bool = False
     policy_name: str = "default_policy"
@@ -69,7 +70,9 @@ class ConnectorPolicyEngine:
         # 2. Regional data residency
         if policy.allowed_regions is not None:
             if region not in policy.allowed_regions:
-                violations.append(f"Execution in region '{region}' violates data residency policy {policy.allowed_regions}")
+                violations.append(
+                    f"Execution in region '{region}' violates data residency policy {policy.allowed_regions}"
+                )
 
         # 3. Disallowed data tags (e.g. PCI, HIPAA, SECRET)
         for tag in tags:
@@ -78,11 +81,15 @@ class ConnectorPolicyEngine:
 
         # 4. Financial cost thresholds
         if action.cost_usd > policy.max_cost_per_call_usd:
-            violations.append(f"Action cost (${action.cost_usd:.3f}) exceeds maximum allowed per-call limit (${policy.max_cost_per_call_usd:.3f})")
+            violations.append(
+                f"Action cost (${action.cost_usd:.3f}) exceeds maximum allowed per-call limit (${policy.max_cost_per_call_usd:.3f})"
+            )
 
         if action.cost_usd > policy.require_approval_above_cost_usd:
             requires_approval = True
-            warnings.append(f"Action cost (${action.cost_usd:.3f}) exceeds approval threshold (${policy.require_approval_above_cost_usd:.3f})")
+            warnings.append(
+                f"Action cost (${action.cost_usd:.3f}) exceeds approval threshold (${policy.require_approval_above_cost_usd:.3f})"
+            )
 
         allowed = len(violations) == 0
         if not allowed:

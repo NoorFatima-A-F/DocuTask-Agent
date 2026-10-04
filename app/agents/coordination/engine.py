@@ -30,13 +30,12 @@ class CoordinationEngine(IAgentCoordinator):
         manager: Optional[CoordinationManager] = None,
         coordinator: Optional[AgentCoordinator] = None,
         orchestrator: Optional[CoordinationOrchestrator] = None,
-        metrics_collector: Optional[CoordinationMetricsCollector] = None
+        metrics_collector: Optional[CoordinationMetricsCollector] = None,
     ):
         self.manager = manager or CoordinationManager()
         self.coordinator = coordinator or AgentCoordinator(registry=self.manager.registry)
         self.orchestrator = orchestrator or CoordinationOrchestrator(
-            registry=self.manager.registry,
-            coordinator=self.coordinator
+            registry=self.manager.registry, coordinator=self.coordinator
         )
         self.metrics = metrics_collector or CoordinationMetricsCollector()
 
@@ -44,8 +43,7 @@ class CoordinationEngine(IAgentCoordinator):
         """Executes distributed multi-agent coordination workflow for a goal."""
         start_time = time.monotonic()
         identity = CoordinationIdentity(
-            tenant_id=request.context.tenant_id,
-            correlation_id=request.context.correlation_id
+            tenant_id=request.context.tenant_id, correlation_id=request.context.correlation_id
         )
 
         self.metrics.record_delegation_started()
@@ -57,7 +55,7 @@ class CoordinationEngine(IAgentCoordinator):
                 return CoordinationResult(
                     identity=identity,
                     lifecycle_state=CoordinationLifecycleState.FAILED,
-                    errors=["Zero available agents in registry to coordinate."]
+                    errors=["Zero available agents in registry to coordinate."],
                 )
 
             # Create delegation task for the goal
@@ -65,12 +63,10 @@ class CoordinationEngine(IAgentCoordinator):
                 task_id=f"task_{uuid4().hex[:8]}",
                 task_name=f"Process: {request.goal[:40]}",
                 required_skills=request.required_capabilities,
-                payload=request.input_data
+                payload=request.input_data,
             )
             del_request = DelegationRequest(
-                delegator_agent_id=request.initiator_agent_id,
-                mode=DelegationMode.SINGLE,
-                tasks=[task]
+                delegator_agent_id=request.initiator_agent_id, mode=DelegationMode.SINGLE, tasks=[task]
             )
 
             del_result = await self.coordinator.coordinate(del_request)
@@ -86,13 +82,10 @@ class CoordinationEngine(IAgentCoordinator):
                 delegation_duration_ms=duration_ms * 0.7,
                 total_duration_ms=duration_ms,
                 agents_discovered=len(available_agents),
-                agents_allocated=len(del_result.delegation_chain)
+                agents_allocated=len(del_result.delegation_chain),
             )
 
-            state = (
-                CoordinationLifecycleState.COMPLETED
-                if not del_result.errors else CoordinationLifecycleState.FAILED
-            )
+            state = CoordinationLifecycleState.COMPLETED if not del_result.errors else CoordinationLifecycleState.FAILED
 
             return CoordinationResult(
                 identity=identity,
@@ -100,7 +93,7 @@ class CoordinationEngine(IAgentCoordinator):
                 outputs=del_result.results,
                 participating_agents=del_result.delegation_chain,
                 statistics=stats,
-                errors=del_result.errors
+                errors=del_result.errors,
             )
 
         except Exception as e:
@@ -110,5 +103,5 @@ class CoordinationEngine(IAgentCoordinator):
                 identity=identity,
                 lifecycle_state=CoordinationLifecycleState.FAILED,
                 statistics=CoordinationStatistics(total_duration_ms=duration_ms),
-                errors=[str(e)]
+                errors=[str(e)],
             )

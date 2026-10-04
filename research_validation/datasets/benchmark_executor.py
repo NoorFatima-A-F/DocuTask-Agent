@@ -108,9 +108,9 @@ def compute_anls(prediction: str, ground_truth: str, threshold: float = 0.5) -> 
         for j in range(1, n + 1):
             cost = 0 if pred[i - 1] == gt[j - 1] else 1
             dp[i][j] = min(
-                dp[i - 1][j] + 1,      # deletion
-                dp[i][j - 1] + 1,      # insertion
-                dp[i - 1][j - 1] + cost  # substitution
+                dp[i - 1][j] + 1,  # deletion
+                dp[i][j - 1] + 1,  # insertion
+                dp[i - 1][j - 1] + cost,  # substitution
             )
 
     dist = dp[m][n]
@@ -166,7 +166,9 @@ class PublicBenchmarkExecutor:
     def __init__(self, data_root_dir: Optional[str] = None):
         self.data_root = data_root_dir or "data/benchmarks"
 
-    def verify_dataset_integrity(self, dataset_type: DatasetType, custom_path: Optional[str] = None) -> Tuple[bool, str]:
+    def verify_dataset_integrity(
+        self, dataset_type: DatasetType, custom_path: Optional[str] = None
+    ) -> Tuple[bool, str]:
         """Check if dataset directory and files exist locally."""
         path = custom_path or os.path.join(self.data_root, dataset_type.value.lower())
         if not os.path.exists(path):
@@ -281,15 +283,20 @@ class PublicBenchmarkExecutor:
         elapsed = time.perf_counter() - start_time
 
         # Cryptographic Merkle payload hash
-        hash_payload = json.dumps({
-            "dataset": dataset_type.value,
-            "samples": n_samples,
-            "tp": tp, "fp": fp, "fn": fn,
-            "f1": f1,
-            "exact_match_or_anls": exact_or_anls,
-            "p50_ms": p50,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-        }, sort_keys=True)
+        hash_payload = json.dumps(
+            {
+                "dataset": dataset_type.value,
+                "samples": n_samples,
+                "tp": tp,
+                "fp": fp,
+                "fn": fn,
+                "f1": f1,
+                "exact_match_or_anls": exact_or_anls,
+                "p50_ms": p50,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            },
+            sort_keys=True,
+        )
         merkle_h = hashlib.sha256(hash_payload.encode()).hexdigest()
 
         return BenchmarkRunResult(

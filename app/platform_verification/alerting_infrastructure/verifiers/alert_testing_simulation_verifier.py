@@ -1,6 +1,7 @@
 """
 3I.5.15: Alert Testing & Failure Simulation Chaos Verifier
 """
+
 from typing import List
 from ..domain.models import IncidentSeverity, ChaosAlertScenarioSpec, AlertTestingReport
 from ..domain.interfaces import IAlertTestingSimulationVerifier
@@ -22,7 +23,7 @@ class AlertTestingSimulationVerifier(IAlertTestingSimulationVerifier):
                 actual_alert_fired="WorkerPoolStarvation",
                 actual_severity=IncidentSeverity.SEV_1,
                 remediation_triggered=True,
-                passed=True
+                passed=True,
             ),
             ChaosAlertScenarioSpec(
                 test_id="CHAOS-ALERT-002",
@@ -33,7 +34,7 @@ class AlertTestingSimulationVerifier(IAlertTestingSimulationVerifier):
                 actual_alert_fired="DatabaseUnavailableCritical",
                 actual_severity=IncidentSeverity.SEV_1,
                 remediation_triggered=True,
-                passed=True
+                passed=True,
             ),
             ChaosAlertScenarioSpec(
                 test_id="CHAOS-ALERT-003",
@@ -44,7 +45,7 @@ class AlertTestingSimulationVerifier(IAlertTestingSimulationVerifier):
                 actual_alert_fired="QueueSaturationWarning",
                 actual_severity=IncidentSeverity.SEV_2,
                 remediation_triggered=True,
-                passed=True
+                passed=True,
             ),
             ChaosAlertScenarioSpec(
                 test_id="CHAOS-ALERT-004",
@@ -55,12 +56,10 @@ class AlertTestingSimulationVerifier(IAlertTestingSimulationVerifier):
                 actual_alert_fired="GeminiProviderTimeoutSpike",
                 actual_severity=IncidentSeverity.SEV_2,
                 remediation_triggered=True,
-                passed=True
+                passed=True,
             ),
         ]
 
         return AlertTestingReport(
-            report_title="Alert Testing & Failure Simulation Chaos Report",
-            scenarios=scenarios,
-            all_tests_passed=True
+            report_title="Alert Testing & Failure Simulation Chaos Report", scenarios=scenarios, all_tests_passed=True
         )

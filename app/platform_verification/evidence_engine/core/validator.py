@@ -1,6 +1,7 @@
 """
 Evidence Validation Engine checking completeness, integrity, consistency, authenticity, and security.
 """
+
 from __future__ import annotations
 import hashlib
 from typing import Any, Dict, List
@@ -19,7 +20,7 @@ class EvidenceValidationEngine(IEvidenceValidator):
 
         # 1. Integrity Check (SHA-256 Checksum)
         actual_hash = hashlib.sha256(content).hexdigest()
-        integrity_verified = (actual_hash == artifact.checksum_sha256)
+        integrity_verified = actual_hash == artifact.checksum_sha256
         if not integrity_verified:
             issues.append(f"Integrity check failed: expected checksum {artifact.checksum_sha256}, got {actual_hash}")
 
@@ -41,7 +42,9 @@ class EvidenceValidationEngine(IEvidenceValidator):
         # 5. Security Scan (check for unencrypted private credentials in metadata)
         security_passed = True
         for k, v in artifact.metadata.items():
-            if any(term in str(k).lower() or term in str(v).lower() for term in ["private_key", "password", "secret_token"]):
+            if any(
+                term in str(k).lower() or term in str(v).lower() for term in ["private_key", "password", "secret_token"]
+            ):
                 security_passed = False
                 issues.append(f"Security violation: unmasked secret detected in metadata key '{k}'")
 

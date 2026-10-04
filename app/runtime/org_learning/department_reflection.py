@@ -27,7 +27,9 @@ class DepartmentReflectionEngine:
     """Coordinates independent post-mission reflection within each department."""
 
     @classmethod
-    def conduct_department_retrospective(cls, department_id: str, mission_id: str = "mission_live_001") -> DepartmentRetrospective:
+    def conduct_department_retrospective(
+        cls, department_id: str, mission_id: str = "mission_live_001"
+    ) -> DepartmentRetrospective:
         if department_id == "dept_ocr":
             bottlenecks = ["Multi-column skewed tables caused 15ms latency tail in LayoutLM bounding box assignment."]
             actions = ["Synthesize pre-rotation OpenCV affine transform before LayoutLM tokenization."]

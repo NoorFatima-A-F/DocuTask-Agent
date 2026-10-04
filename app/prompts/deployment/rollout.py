@@ -14,6 +14,7 @@ from app.prompts.deployment.publisher import DeploymentEnvironment, PromptPublis
 
 class RolloutStrategyType(str, Enum):
     """Supported rollout strategies."""
+
     IMMEDIATE = "IMMEDIATE"
     CANARY = "CANARY"
     A_B_SPLIT = "A_B_SPLIT"
@@ -21,6 +22,7 @@ class RolloutStrategyType(str, Enum):
 
 class CanaryStage(BaseModel):
     """Canary progression stage."""
+
     traffic_pct: float
     duration_hours: int = 24
 

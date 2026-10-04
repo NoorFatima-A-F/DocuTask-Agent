@@ -44,12 +44,48 @@ class IncidentCommander:
             forensic_snapshot_id="twin-snap-a1b2c3d4",
         )
         inc1.timeline = [
-            IncidentTimelineEntry("t1", inc1.created_at_utc, IncidentState.DETECTED, "Anomalous error rate (85%) detected on Gemini provider endpoint.", "AUTONOMOUS_INCIDENT_COMMANDER"),
-            IncidentTimelineEntry("t2", inc1.created_at_utc + 12.0, IncidentState.TRIAGING, "Diagnostic subagent confirmed upstream 504 Gateway Timeout.", "DIAGNOSTIC_SUBAGENT"),
-            IncidentTimelineEntry("t3", inc1.created_at_utc + 25.0, IncidentState.ISOLATING, "Circuit breaker tripped for node-gemini. Traffic halted to failed replica.", "AUTONOMOUS_INCIDENT_COMMANDER"),
-            IncidentTimelineEntry("t4", inc1.created_at_utc + 40.0, IncidentState.RECOVERING, "Activated strat-gemini-flash-fallback. In-flight requests rerouted.", "AUTONOMOUS_INCIDENT_COMMANDER"),
-            IncidentTimelineEntry("t5", inc1.created_at_utc + 70.0, IncidentState.VERIFYING, "Invariant check passed: replay parity 99.98%, zero data drop.", "AUTONOMOUS_INCIDENT_COMMANDER"),
-            IncidentTimelineEntry("t6", inc1.created_at_utc + 90.0, IncidentState.RESOLVED, "Incident resolved. Health score restored to 100.0.", "AUTONOMOUS_INCIDENT_COMMANDER"),
+            IncidentTimelineEntry(
+                "t1",
+                inc1.created_at_utc,
+                IncidentState.DETECTED,
+                "Anomalous error rate (85%) detected on Gemini provider endpoint.",
+                "AUTONOMOUS_INCIDENT_COMMANDER",
+            ),
+            IncidentTimelineEntry(
+                "t2",
+                inc1.created_at_utc + 12.0,
+                IncidentState.TRIAGING,
+                "Diagnostic subagent confirmed upstream 504 Gateway Timeout.",
+                "DIAGNOSTIC_SUBAGENT",
+            ),
+            IncidentTimelineEntry(
+                "t3",
+                inc1.created_at_utc + 25.0,
+                IncidentState.ISOLATING,
+                "Circuit breaker tripped for node-gemini. Traffic halted to failed replica.",
+                "AUTONOMOUS_INCIDENT_COMMANDER",
+            ),
+            IncidentTimelineEntry(
+                "t4",
+                inc1.created_at_utc + 40.0,
+                IncidentState.RECOVERING,
+                "Activated strat-gemini-flash-fallback. In-flight requests rerouted.",
+                "AUTONOMOUS_INCIDENT_COMMANDER",
+            ),
+            IncidentTimelineEntry(
+                "t5",
+                inc1.created_at_utc + 70.0,
+                IncidentState.VERIFYING,
+                "Invariant check passed: replay parity 99.98%, zero data drop.",
+                "AUTONOMOUS_INCIDENT_COMMANDER",
+            ),
+            IncidentTimelineEntry(
+                "t6",
+                inc1.created_at_utc + 90.0,
+                IncidentState.RESOLVED,
+                "Incident resolved. Health score restored to 100.0.",
+                "AUTONOMOUS_INCIDENT_COMMANDER",
+            ),
         ]
         self._incidents[inc1.incident_id] = inc1
 
@@ -119,7 +155,9 @@ class IncidentCommander:
 
         if next_state == IncidentState.RESOLVED:
             inc.resolved_at_utc = now
-            inc.post_mortem_summary = f"Root cause on {inc.root_cause_node_id} mitigated successfully. All runtime invariants verified."
+            inc.post_mortem_summary = (
+                f"Root cause on {inc.root_cause_node_id} mitigated successfully. All runtime invariants verified."
+            )
             digital_twin_engine.heal_node(inc.root_cause_node_id)
 
         return inc
@@ -131,11 +169,15 @@ class IncidentCommander:
             return {"error": "Incident not found"}
 
         # 1. Triaging
-        self.advance_incident_state(incident_id, IncidentState.TRIAGING, f"Triaging root cause node {inc.root_cause_node_id}.")
+        self.advance_incident_state(
+            incident_id, IncidentState.TRIAGING, f"Triaging root cause node {inc.root_cause_node_id}."
+        )
 
         # 2. Isolating
         digital_twin_engine.isolate_node(inc.root_cause_node_id)
-        self.advance_incident_state(incident_id, IncidentState.ISOLATING, f"Isolated {inc.root_cause_node_id} and opened circuit breakers.")
+        self.advance_incident_state(
+            incident_id, IncidentState.ISOLATING, f"Isolated {inc.root_cause_node_id} and opened circuit breakers."
+        )
 
         # 3. Executing Recovery
         strat_id = strategy_id or "strat-gemini-flash-fallback"
@@ -144,7 +186,9 @@ class IncidentCommander:
         self.advance_incident_state(incident_id, IncidentState.RECOVERING, f"Executed recovery strategy: {strat_id}.")
 
         # 4. Verifying
-        self.advance_incident_state(incident_id, IncidentState.VERIFYING, "Runtime invariants verified: 0 state drift detected.")
+        self.advance_incident_state(
+            incident_id, IncidentState.VERIFYING, "Runtime invariants verified: 0 state drift detected."
+        )
 
         # 5. Resolved
         self.advance_incident_state(incident_id, IncidentState.RESOLVED, "Incident resolved autonomously.")
@@ -159,11 +203,19 @@ class IncidentCommander:
 
     def get_commander_summary(self) -> Dict[str, Any]:
         """Returns high-level incident response analytics."""
-        active = [i for i in self._incidents.values() if i.current_state not in [IncidentState.RESOLVED, IncidentState.CLOSED]]
-        resolved = [i for i in self._incidents.values() if i.current_state in [IncidentState.RESOLVED, IncidentState.CLOSED]]
+        active = [
+            i for i in self._incidents.values() if i.current_state not in [IncidentState.RESOLVED, IncidentState.CLOSED]
+        ]
+        resolved = [
+            i for i in self._incidents.values() if i.current_state in [IncidentState.RESOLVED, IncidentState.CLOSED]
+        ]
 
         mttr_seconds = (
-            round(sum((i.resolved_at_utc - i.created_at_utc) for i in resolved if i.resolved_at_utc) / max(1, len(resolved)), 1)
+            round(
+                sum((i.resolved_at_utc - i.created_at_utc) for i in resolved if i.resolved_at_utc)
+                / max(1, len(resolved)),
+                1,
+            )
             if resolved
             else 68.0
         )

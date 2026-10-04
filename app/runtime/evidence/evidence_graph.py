@@ -28,13 +28,13 @@ class EvidenceGraph:
         """Adds a sealed evidence node to the graph."""
         if not node.hash_digest:
             node.seal()
-        
+
         self._nodes_by_id[node.evidence_id] = node
         self._nodes_by_hash[node.hash_digest] = node
-        
+
         for parent_hash in node.parent_hashes:
             self._children_by_hash[parent_hash].append(node.hash_digest)
-            
+
         self._merkle_root = None  # invalidate cache
         return node.hash_digest
 
@@ -61,7 +61,11 @@ class EvidenceGraph:
     def get_leaves(self) -> List[EvidenceNode]:
         """Nodes with no children."""
         all_child_parents = set(self._children_by_hash.keys())
-        return [node for node in self._nodes_by_id.values() if node.hash_digest not in all_child_parents or not self._children_by_hash[node.hash_digest]]
+        return [
+            node
+            for node in self._nodes_by_id.values()
+            if node.hash_digest not in all_child_parents or not self._children_by_hash[node.hash_digest]
+        ]
 
     def compute_merkle_root(self) -> Tuple[str, List[MerkleNode]]:
         """Constructs a deterministic binary Merkle tree over all sorted leaf/node hashes."""
@@ -72,8 +76,7 @@ class EvidenceGraph:
 
         sorted_hashes = sorted(self._nodes_by_hash.keys())
         current_layer: List[MerkleNode] = [
-            MerkleNode(hash_value=h, evidence_id=self._nodes_by_hash[h].evidence_id, level=0)
-            for h in sorted_hashes
+            MerkleNode(hash_value=h, evidence_id=self._nodes_by_hash[h].evidence_id, level=0) for h in sorted_hashes
         ]
         all_tree_nodes: List[MerkleNode] = list(current_layer)
         level = 1
@@ -117,7 +120,9 @@ class EvidenceGraph:
         for node in self._nodes_by_id.values():
             recomputed = node.compute_hash()
             if recomputed != node.hash_digest:
-                errors.append(f"Node {node.evidence_id} hash mismatch: computed {recomputed} != recorded {node.hash_digest}")
+                errors.append(
+                    f"Node {node.evidence_id} hash mismatch: computed {recomputed} != recorded {node.hash_digest}"
+                )
             for ph in node.parent_hashes:
                 if ph not in self._nodes_by_hash:
                     errors.append(f"Node {node.evidence_id} references missing parent hash {ph}")

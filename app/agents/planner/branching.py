@@ -16,6 +16,6 @@ class BranchPlanner:
                 branch_id="br_confidence_check",
                 condition=BranchCondition(condition_id="c_conf", expression="confidence >= 0.85"),
                 target_node_id="t3_validate",
-                fallback_node_id="t1_ocr"
+                fallback_node_id="t1_ocr",
             )
         ]

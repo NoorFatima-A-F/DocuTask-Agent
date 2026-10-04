@@ -53,8 +53,18 @@ def test_evidence_builder_fluent_api():
 def test_evidence_graph_and_merkle_tree():
     graph = EvidenceGraph(graph_id="test-dag")
     n1 = EvidenceBuilder(EvidenceType.PLANNER_DECISION).with_inputs({"step": 1}).build_and_seal()
-    n2 = EvidenceBuilder(EvidenceType.TOOL_EXECUTION).with_parent(n1.hash_digest).with_inputs({"step": 2}).build_and_seal()
-    n3 = EvidenceBuilder(EvidenceType.VALIDATION_CHECK).with_parent(n2.hash_digest).with_inputs({"step": 3}).build_and_seal()
+    n2 = (
+        EvidenceBuilder(EvidenceType.TOOL_EXECUTION)
+        .with_parent(n1.hash_digest)
+        .with_inputs({"step": 2})
+        .build_and_seal()
+    )
+    n3 = (
+        EvidenceBuilder(EvidenceType.VALIDATION_CHECK)
+        .with_parent(n2.hash_digest)
+        .with_inputs({"step": 3})
+        .build_and_seal()
+    )
 
     graph.add_node(n1)
     graph.add_node(n2)

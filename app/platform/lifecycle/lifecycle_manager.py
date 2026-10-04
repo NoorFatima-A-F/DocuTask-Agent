@@ -80,12 +80,14 @@ class LifecycleManager:
         return success
 
     def _log_action(self, action: str, plugin_id: str, details: str = "") -> None:
-        self._action_log.append({
-            "action": action,
-            "plugin_id": plugin_id,
-            "details": details,
-            "timestamp": time.time(),
-        })
+        self._action_log.append(
+            {
+                "action": action,
+                "plugin_id": plugin_id,
+                "details": details,
+                "timestamp": time.time(),
+            }
+        )
 
     def get_action_log(self) -> List[Dict[str, Any]]:
         return list(self._action_log)

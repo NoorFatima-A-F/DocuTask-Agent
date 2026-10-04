@@ -1,4 +1,5 @@
 """Expand-Contract Schema Migration Safety Validator."""
+
 import re
 from ..core.exceptions import MigrationException
 from .schema import MigrationPhase, SchemaMigration
@@ -23,7 +24,7 @@ class ExpandContractValidator:
                         f"Unsafe EXPAND phase migration '{migration.name}': contains destructive operation "
                         f"({pattern.pattern}). Destructive operations must only run in CONTRACT phase."
                     )
-            
+
             # Check for adding NOT NULL column without DEFAULT
             if re.search(r"ADD\s+COLUMN.*NOT\s+NULL", migration.up_sql, re.IGNORECASE):
                 if not re.search(r"DEFAULT", migration.up_sql, re.IGNORECASE):
@@ -36,8 +37,6 @@ class ExpandContractValidator:
                 raise MigrationException(f"CONTRACT migration '{migration.name}' cannot have empty up_sql")
 
         if migration.is_reversible and not migration.down_sql:
-            raise MigrationException(
-                f"Migration '{migration.name}' marked as reversible but down_sql is missing"
-            )
+            raise MigrationException(f"Migration '{migration.name}' marked as reversible but down_sql is missing")
 
         return True

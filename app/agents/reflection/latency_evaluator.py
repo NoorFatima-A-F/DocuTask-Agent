@@ -34,7 +34,7 @@ class LatencyEvaluator(IEvaluator):
             dimension=EvaluationDimension.LATENCY,
             score=score,
             evidence=[f"Duration: {duration_ms:.1f}ms"],
-            details={"duration_ms": duration_ms}
+            details={"duration_ms": duration_ms},
         )
 
         return DimensionEvaluation(
@@ -43,5 +43,5 @@ class LatencyEvaluator(IEvaluator):
             status=status,
             metrics=[metric],
             findings=[f"Execution took {duration_ms:.1f}ms ({status})."],
-            recommendation_hints=["Enable parallel node execution for independent subtasks."] if score < 0.7 else []
+            recommendation_hints=["Enable parallel node execution for independent subtasks."] if score < 0.7 else [],
         )

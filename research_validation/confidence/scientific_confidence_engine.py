@@ -90,10 +90,7 @@ class ScientificConfidenceEngine:
         if quality_level_counts:
             total_items = sum(quality_level_counts.values())
             if total_items > 0:
-                weighted_sum = sum(
-                    self.QUALITY_WEIGHTS[lvl] * cnt
-                    for lvl, cnt in quality_level_counts.items()
-                )
+                weighted_sum = sum(self.QUALITY_WEIGHTS[lvl] * cnt for lvl, cnt in quality_level_counts.items())
                 evidence_quality_score = weighted_sum / total_items
 
         pillars = {

@@ -170,13 +170,15 @@ DocuTask Agent orchestrates a multi-agent workforce to execute end-to-end docume
                 f"| {cat.name} | {cat.weight * 100:.0f}% | {cat.score:.2f}% | {cat.weighted_score:.2f}% | {cat.checks_passed}/{cat.checks_total} | {cat.status.value} |"
             )
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "## 3. Cryptographic Verification Ledger",
-            "",
-            "All evaluation metrics and benchmark outputs are signed with SHA-256 digests and recorded in `manifest.json`.",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "## 3. Cryptographic Verification Ledger",
+                "",
+                "All evaluation metrics and benchmark outputs are signed with SHA-256 digests and recorded in `manifest.json`.",
+            ]
+        )
 
         return "\n".join(lines)

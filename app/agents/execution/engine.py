@@ -32,7 +32,7 @@ class ExecutionEngine:
         worker_pool: Optional[WorkerPool] = None,
         tool_adapter: Optional[ExecutionToolAdapter] = None,
         checkpoint_manager: Optional[CheckpointManager] = None,
-        scheduler: Optional[RuntimeScheduler] = None
+        scheduler: Optional[RuntimeScheduler] = None,
     ):
         self.worker_pool = worker_pool or WorkerPool(max_workers=4)
         self.tool_adapter = tool_adapter or ExecutionToolAdapter()
@@ -41,13 +41,9 @@ class ExecutionEngine:
 
         self.tool_dispatcher = ToolDispatcher(adapter=self.tool_adapter)
         self.task_dispatcher = TaskDispatcher(worker_pool=self.worker_pool)
-        self.node_executor = NodeExecutor(
-            dispatcher=self.task_dispatcher,
-            tool_dispatcher=self.tool_dispatcher
-        )
+        self.node_executor = NodeExecutor(dispatcher=self.task_dispatcher, tool_dispatcher=self.tool_dispatcher)
         self.parallel_executor = ParallelExecutor(
-            node_executor=self.node_executor,
-            max_concurrency=self.worker_pool.max_workers
+            node_executor=self.node_executor, max_concurrency=self.worker_pool.max_workers
         )
 
     async def execute(self, request: ExecutionRequest) -> ExecutionResult:
@@ -67,7 +63,7 @@ class ExecutionEngine:
             trigger="PRE_EXECUTION",
             node_states={nid: n.state for nid, n in exec_graph.nodes.items()},
             outputs=accumulated_outputs,
-            completed_nodes=completed_nodes
+            completed_nodes=completed_nodes,
         )
 
         while tracker.has_pending_work():
@@ -83,11 +79,7 @@ class ExecutionEngine:
             ordered_nodes = self.scheduler.order_runnable_nodes(runnable, exec_graph)
 
             # Execute batch concurrently
-            results = await self.parallel_executor.execute_batch(
-                ordered_nodes,
-                exec_graph,
-                execution_id
-            )
+            results = await self.parallel_executor.execute_batch(ordered_nodes, exec_graph, execution_id)
 
             for res in results:
                 if res:
@@ -101,7 +93,7 @@ class ExecutionEngine:
                 trigger="POST_TASK_BATCH",
                 node_states={nid: n.state for nid, n in exec_graph.nodes.items()},
                 outputs=accumulated_outputs,
-                completed_nodes=completed_nodes
+                completed_nodes=completed_nodes,
             )
 
         final_state = ExecutionLifecycleState.COMPLETED if len(errors) == 0 else ExecutionLifecycleState.FAILED
@@ -109,7 +101,7 @@ class ExecutionEngine:
         stats = ExecutionStatistics(
             total_nodes_count=len(exec_graph.nodes),
             completed_nodes_count=len(completed_nodes),
-            failed_nodes_count=len(errors)
+            failed_nodes_count=len(errors),
         )
 
         return ExecutionResult(
@@ -118,5 +110,5 @@ class ExecutionEngine:
             lifecycle_state=final_state,
             outputs=accumulated_outputs,
             statistics=stats,
-            errors=errors
+            errors=errors,
         )

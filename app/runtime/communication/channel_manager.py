@@ -24,12 +24,44 @@ class ChannelManager:
 
     def __init__(self):
         self.channels: Dict[str, CommunicationChannel] = {
-            "#executive-dispatch": CommunicationChannel("#executive-dispatch", "Strategic directives and mission intake authorizations", "EXECUTIVE_ONLY", 42, True),
-            "#ocr-extraction-handoff": CommunicationChannel("#ocr-extraction-handoff", "Perception bounding box transfers and OCR artifacts", "RESTRICTED", 128, True),
-            "#validation-alerts": CommunicationChannel("#validation-alerts", "Invariant verification notifications and arithmetic alerts", "RESTRICTED", 96, True),
-            "#governance-review": CommunicationChannel("#governance-review", "Regulatory compliance approvals and audit vault signing", "EXECUTIVE_ONLY", 34, True),
-            "#negotiation-floor": CommunicationChannel("#negotiation-floor", "Resource auctions, Nash bargaining, and quota loans", "PUBLIC", 58, True),
-            "#incident-war-room": CommunicationChannel("#incident-war-room", "Real-time emergency coordination, triage, and mitigation", "EXECUTIVE_ONLY", 14, True),
+            "#executive-dispatch": CommunicationChannel(
+                "#executive-dispatch",
+                "Strategic directives and mission intake authorizations",
+                "EXECUTIVE_ONLY",
+                42,
+                True,
+            ),
+            "#ocr-extraction-handoff": CommunicationChannel(
+                "#ocr-extraction-handoff",
+                "Perception bounding box transfers and OCR artifacts",
+                "RESTRICTED",
+                128,
+                True,
+            ),
+            "#validation-alerts": CommunicationChannel(
+                "#validation-alerts",
+                "Invariant verification notifications and arithmetic alerts",
+                "RESTRICTED",
+                96,
+                True,
+            ),
+            "#governance-review": CommunicationChannel(
+                "#governance-review",
+                "Regulatory compliance approvals and audit vault signing",
+                "EXECUTIVE_ONLY",
+                34,
+                True,
+            ),
+            "#negotiation-floor": CommunicationChannel(
+                "#negotiation-floor", "Resource auctions, Nash bargaining, and quota loans", "PUBLIC", 58, True
+            ),
+            "#incident-war-room": CommunicationChannel(
+                "#incident-war-room",
+                "Real-time emergency coordination, triage, and mitigation",
+                "EXECUTIVE_ONLY",
+                14,
+                True,
+            ),
         }
 
     def list_channels(self) -> List[Dict[str, Any]]:

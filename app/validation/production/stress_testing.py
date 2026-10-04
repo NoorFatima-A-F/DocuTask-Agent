@@ -9,6 +9,7 @@ from app.core.logging import logger
 
 class StressTestResult(BaseModel):
     """Result of system stress testing."""
+
     max_supported_concurrency: int
     breaking_point_concurrency: int
     failure_reason: str
@@ -30,5 +31,5 @@ class CapacityStressEvaluator:
             breaking_point_concurrency=3000,
             failure_reason="Provider Rate Limit 429 triggered gracefully",
             graceful_degradation_verified=True,
-            recovery_time_seconds=1.2
+            recovery_time_seconds=1.2,
         )

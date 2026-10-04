@@ -87,15 +87,17 @@ class UncertaintyPropagationEngine:
                 dominant_stage = name
 
             s_ci = (val - k_coverage * serr, val + k_coverage * serr)
-            stage_breakdowns.append(StageUncertainty(
-                stage_name=name,
-                nominal_value=val,
-                standard_error=serr,
-                relative_uncertainty=rel,
-                degrees_of_freedom=30,
-                variance_contribution_pct=contrib * 100.0,
-                confidence_interval_95=s_ci,
-            ))
+            stage_breakdowns.append(
+                StageUncertainty(
+                    stage_name=name,
+                    nominal_value=val,
+                    standard_error=serr,
+                    relative_uncertainty=rel,
+                    degrees_of_freedom=30,
+                    variance_contribution_pct=contrib * 100.0,
+                    confidence_interval_95=s_ci,
+                )
+            )
 
         h_payload = {
             "pipeline": pipeline_id,
@@ -135,10 +137,7 @@ class UncertaintyPropagationEngine:
         results: List[float] = []
 
         for _ in range(num_simulations):
-            sample_params = [
-                rng.gauss(m, max(1e-9, s))
-                for m, s in parameter_distributions
-            ]
+            sample_params = [rng.gauss(m, max(1e-9, s)) for m, s in parameter_distributions]
             try:
                 out = sample_evaluator(sample_params)
                 results.append(out)
@@ -151,7 +150,7 @@ class UncertaintyPropagationEngine:
         results.sort()
         n = len(results)
         mean_v = sum(results) / n
-        var_v = sum((x - mean_v)**2 for x in results) / max(1, n - 1)
+        var_v = sum((x - mean_v) ** 2 for x in results) / max(1, n - 1)
         std_v = math.sqrt(var_v)
 
         p025 = results[int(0.025 * n)]

@@ -1,6 +1,7 @@
 """
 Software Bill of Materials (SBOM) and Dependency Analyzer.
 """
+
 import hashlib
 from typing import List, Dict
 from app.platform_verification.container_verification.models.verification_models import SbomPackage, SbomReport

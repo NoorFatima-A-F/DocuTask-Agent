@@ -35,7 +35,9 @@ class SecurityTestRunner:
                 elif hasattr(verifier_instance, "verify_all"):
                     result = verifier_instance.verify_all()
                 else:
-                    raise AttributeError(f"Verifier {verifier_instance.__class__.__name__} lacks verify() or verify_all() method")
+                    raise AttributeError(
+                        f"Verifier {verifier_instance.__class__.__name__} lacks verify() or verify_all() method"
+                    )
                 break
             except Exception as ex:
                 if attempt == self.max_retries:

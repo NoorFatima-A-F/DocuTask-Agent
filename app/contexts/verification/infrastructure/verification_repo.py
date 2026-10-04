@@ -1,6 +1,7 @@
 from typing import Dict, Optional
 from ..domain.verification_domain import VerificationDefinition
 
+
 class InMemoryVerificationRepository:
     def __init__(self):
         self._store: Dict[str, VerificationDefinition] = {}

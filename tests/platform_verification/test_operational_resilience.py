@@ -1,6 +1,7 @@
 """
 Phase 3H.7: Comprehensive Test Suite for Enterprise Operational Resilience, Fault Tolerance & Self-Healing Verification
 """
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -132,9 +133,7 @@ def test_adaptive_load_shedding():
     assert report.cpu_pressure_threshold_pct == 85.0
     assert report.memory_pressure_threshold_pct == 90.0
 
-    critical_decisions = [
-        d for d in report.decisions if "P0" in d.traffic_priority_level
-    ]
+    critical_decisions = [d for d in report.decisions if "P0" in d.traffic_priority_level]
     assert len(critical_decisions) >= 2
     for d in critical_decisions:
         assert d.decision_under_stress == "ACCEPTED"

@@ -12,6 +12,7 @@ from typing import Dict, Optional
 @dataclass
 class SecretRecord:
     """Encapsulated secret record with rotation and expiration metadata."""
+
     key: str
     value: str
     version: int = 1
@@ -30,7 +31,9 @@ class ISecretManager(ABC):
         pass
 
     @abstractmethod
-    def create_secret(self, key: str, value: str, tenant_id: Optional[str] = None, expires_at: Optional[datetime] = None) -> SecretRecord:
+    def create_secret(
+        self, key: str, value: str, tenant_id: Optional[str] = None, expires_at: Optional[datetime] = None
+    ) -> SecretRecord:
         pass
 
     @abstractmethod

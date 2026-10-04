@@ -1,4 +1,5 @@
 """DORA & Platform Delivery Telemetry Metrics (Req 67, 69)."""
+
 from dataclasses import dataclass
 from typing import Any, Dict
 
@@ -6,6 +7,7 @@ from typing import Any, Dict
 @dataclass
 class DORAMetrics:
     """Core DORA Operational Measurements (Req 69)."""
+
     deployment_frequency_per_day: float = 4.2
     lead_time_for_changes_minutes: float = 18.5
     change_failure_rate_pct: float = 0.012  # 1.2%

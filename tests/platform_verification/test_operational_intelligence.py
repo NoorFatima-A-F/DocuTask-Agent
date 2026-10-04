@@ -1,6 +1,7 @@
 """
 Phase 3H.9: Comprehensive Test Suite for Enterprise Operational Intelligence Verification
 """
+
 import pytest
 from fastapi.testclient import TestClient
 from fastapi import FastAPI
@@ -106,7 +107,12 @@ def test_capacity_forecasting_verification():
     assert len(report.horizons_evaluated) == 3
 
     for fc in report.forecasts:
-        assert fc.current_utilization_pct <= fc.forecast_7d_utilization_pct <= fc.forecast_30d_utilization_pct <= fc.forecast_90d_utilization_pct
+        assert (
+            fc.current_utilization_pct
+            <= fc.forecast_7d_utilization_pct
+            <= fc.forecast_30d_utilization_pct
+            <= fc.forecast_90d_utilization_pct
+        )
         assert fc.forecast_90d_utilization_pct < 85.0  # Safe within 90-day headroom
         assert fc.saturation_risk_horizon == "NONE_IN_90_DAYS"
 

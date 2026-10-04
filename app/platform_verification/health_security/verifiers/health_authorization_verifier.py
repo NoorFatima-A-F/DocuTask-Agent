@@ -1,6 +1,7 @@
 """
 Phase 3H.5.10.2: Health Endpoint Access Control & RBAC Verification
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     HealthAuthorizationReport,

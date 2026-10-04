@@ -76,7 +76,7 @@ class RobustnessVerifier:
             "assertion": AssertionResult(
                 name="Gaussian_Blur_And_Noise_Resilience",
                 passed=passed,
-                message=f"Vision model achieved F1={blurred_f1*100:.1f}% under heavy Gaussian blur and noise (Threshold >= 90%).",
+                message=f"Vision model achieved F1={blurred_f1 * 100:.1f}% under heavy Gaussian blur and noise (Threshold >= 90%).",
                 execution_time_ms=t_elapsed,
                 details={"f1_score": blurred_f1},
             ),
@@ -118,7 +118,7 @@ class RobustnessVerifier:
             "assertion": AssertionResult(
                 name="Fax_Low_DPI_Super_Resolution_Enhancement",
                 passed=passed,
-                message=f"Enhanced {input_dpi} DPI fax scan to {target_dpi} DPI equivalent, achieving {ocr_accuracy*100:.1f}% OCR accuracy.",
+                message=f"Enhanced {input_dpi} DPI fax scan to {target_dpi} DPI equivalent, achieving {ocr_accuracy * 100:.1f}% OCR accuracy.",
                 execution_time_ms=t_elapsed,
                 details={"input_dpi": input_dpi, "target_dpi": target_dpi},
             ),
@@ -136,7 +136,7 @@ class RobustnessVerifier:
             "assertion": AssertionResult(
                 name="Composite_Multi_Perturbation_Stress_Benchmark",
                 passed=passed,
-                message=f"Composite multi-perturbation stress test maintained {accuracy*100:.1f}% end-to-end extraction accuracy.",
+                message=f"Composite multi-perturbation stress test maintained {accuracy * 100:.1f}% end-to-end extraction accuracy.",
                 execution_time_ms=t_elapsed,
                 details={"composite_accuracy": accuracy},
             ),

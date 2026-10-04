@@ -1,12 +1,14 @@
 """
 Container Chaos and Failure Injection Tests.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.container_verification.models.verification_models import ContainerFailureReport
 
 
 class FailureExperiments:
     """Simulates service kills (API, worker, redis) and validates state preservation."""
+
     __test__ = False
 
     def execute_failure_simulations(self, scenarios: List[Dict[str, Any]]) -> ContainerFailureReport:

@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class PolicyEvaluationResult:
     """Verdict of a pre-action policy check."""
+
     is_allowed: bool = True
     action: str = ""
     resource: str = ""

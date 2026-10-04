@@ -18,6 +18,7 @@ logger = logging.getLogger("infrastructure.observability.tracing.spans")
 
 class SpanTreeNode(BaseModel):
     """Hierarchical node in a distributed trace tree."""
+
     span: Span
     children: List[SpanTreeNode] = Field(default_factory=list)
     depth: int = 0
@@ -26,6 +27,7 @@ class SpanTreeNode(BaseModel):
 
 class TraceAnalysisReport(BaseModel):
     """Comprehensive analysis report for a distributed trace."""
+
     trace_id: str
     root_service: str
     total_duration_ms: float

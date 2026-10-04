@@ -1,4 +1,5 @@
 """Semantic Versioning Engine for Artifacts and Releases."""
+
 import re
 from functools import total_ordering
 from typing import Optional, Tuple
@@ -77,7 +78,7 @@ class ArtifactVersion:
             return NotImplemented
         if (self.major, self.minor, self.patch) != (other.major, other.minor, other.patch):
             return (self.major, self.minor, self.patch) < (other.major, other.minor, other.patch)
-        
+
         # When normal version numbers are equal, release without prerelease > release with prerelease
         if self.prerelease is None and other.prerelease is not None:
             return False

@@ -1,4 +1,5 @@
 """Zero-Downtime Expand-Contract Database Migration Framework (Req 46, 47)."""
+
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
@@ -8,9 +9,10 @@ import re
 
 class ExpandContractPhase(str, Enum):
     """Phases for non-breaking schema evolution (Req 46)."""
-    EXPAND = "EXPAND"               # Add columns/tables, ensure backwards-compatible writes
-    MIGRATE_DATA = "MIGRATE_DATA"   # Backfill historical rows asynchronously
-    CONTRACT = "CONTRACT"           # Drop legacy columns/constraints after old app replicas decommissioned
+
+    EXPAND = "EXPAND"  # Add columns/tables, ensure backwards-compatible writes
+    MIGRATE_DATA = "MIGRATE_DATA"  # Backfill historical rows asynchronously
+    CONTRACT = "CONTRACT"  # Drop legacy columns/constraints after old app replicas decommissioned
 
 
 @dataclass

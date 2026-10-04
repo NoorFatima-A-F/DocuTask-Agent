@@ -12,8 +12,20 @@ from enterprise_audit_engine.trust_metrics.trust_score import (
 
 def test_eri_calculator_high_trust():
     evidence = [
-        {"id": "EV-1", "category": "RuntimeExecution", "confidence": "HIGH", "raw_payload": {"ok": True}, "content_hash": "abc"},
-        {"id": "EV-2", "category": "AutomatedTesting", "confidence": "HIGH", "raw_payload": {"ok": True}, "content_hash": "def"},
+        {
+            "id": "EV-1",
+            "category": "RuntimeExecution",
+            "confidence": "HIGH",
+            "raw_payload": {"ok": True},
+            "content_hash": "abc",
+        },
+        {
+            "id": "EV-2",
+            "category": "AutomatedTesting",
+            "confidence": "HIGH",
+            "raw_payload": {"ok": True},
+            "content_hash": "def",
+        },
     ]
     rep = EvidenceReliabilityIndexCalculator.calculate_eri(
         evidence_items=evidence,
@@ -29,9 +41,7 @@ def test_eri_calculator_high_trust():
 
 
 def test_eri_calculator_untrusted_on_drift_and_failure():
-    evidence = [
-        {"id": "EV-1", "category": "Config", "confidence": "LOW", "raw_payload": {}, "content_hash": ""}
-    ]
+    evidence = [{"id": "EV-1", "category": "Config", "confidence": "LOW", "raw_payload": {}, "content_hash": ""}]
     rep = EvidenceReliabilityIndexCalculator.calculate_eri(
         evidence_items=evidence,
         reality_checks_passed=False,

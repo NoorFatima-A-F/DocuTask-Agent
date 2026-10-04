@@ -11,6 +11,7 @@ from app.agents.coordination.exceptions import InconsistentSharedStateError
 
 class StateEntry(BaseModel):
     """Versioned state item with optimistic lock check."""
+
     key: str
     value: Any
     version: int = 1
@@ -29,13 +30,7 @@ class DistributedStateStore:
         """Retrieves state entry."""
         return self._store.get(key)
 
-    def set_with_optimistic_lock(
-        self,
-        key: str,
-        value: Any,
-        expected_version: int,
-        agent_id: UUID
-    ) -> StateEntry:
+    def set_with_optimistic_lock(self, key: str, value: Any, expected_version: int, agent_id: UUID) -> StateEntry:
         """Sets value ensuring expected version matches current version."""
         current = self._store.get(key)
         curr_ver = current.version if current else 0
@@ -45,11 +40,6 @@ class DistributedStateStore:
                 f"Optimistic lock conflict on key '{key}'. Expected version {expected_version}, found {curr_ver}."
             )
 
-        new_entry = StateEntry(
-            key=key,
-            value=value,
-            version=curr_ver + 1,
-            updated_by=agent_id
-        )
+        new_entry = StateEntry(key=key, value=value, version=curr_ver + 1, updated_by=agent_id)
         self._store[key] = new_entry
         return new_entry

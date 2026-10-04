@@ -50,12 +50,12 @@ class StatisticalHypothesisTests:
             return {"u_stat": 0.0, "p_val": 1.0}
 
         # Combine and rank
-        combined = [(x, 'a') for x in sample_a] + [(y, 'b') for y in sample_b]
+        combined = [(x, "a") for x in sample_a] + [(y, "b") for y in sample_b]
         combined.sort(key=lambda item: item[0])
 
         rank_a = 0
         for rank, (val, group) in enumerate(combined, start=1):
-            if group == 'a':
+            if group == "a":
                 rank_a += rank
 
         u1 = rank_a - (n1 * (n1 + 1)) / 2.0

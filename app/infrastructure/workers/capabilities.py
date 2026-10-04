@@ -84,6 +84,5 @@ class WorkerCapabilityRegistry:
         """Find all worker IDs satisfying mandatory capabilities."""
         with self._lock:
             return [
-                w_id for w_id in self._capabilities.keys()
-                if self.satisfies_capabilities(w_id, mandatory, optional)
+                w_id for w_id in self._capabilities.keys() if self.satisfies_capabilities(w_id, mandatory, optional)
             ]

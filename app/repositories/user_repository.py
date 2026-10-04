@@ -28,23 +28,17 @@ class UserRepository(BaseRepository[User]):
 
     async def get_by_email(self, email: str) -> Optional[User]:
         """Retrieves user by case-insensitive email address."""
-        result = await self.db.execute(
-            select(User).where(func.lower(User.email) == func.lower(email.strip()))
-        )
+        result = await self.db.execute(select(User).where(func.lower(User.email) == func.lower(email.strip())))
         return result.scalar_one_or_none()
 
     async def get_by_username(self, username: str) -> Optional[User]:
         """Retrieves user by case-insensitive username."""
-        result = await self.db.execute(
-            select(User).where(func.lower(User.username) == func.lower(username.strip()))
-        )
+        result = await self.db.execute(select(User).where(func.lower(User.username) == func.lower(username.strip())))
         return result.scalar_one_or_none()
 
     async def get_by_id(self, user_id: uuid.UUID) -> Optional[User]:
         """Retrieves user by primary key UUID."""
-        result = await self.db.execute(
-            select(User).where(User.id == user_id)
-        )
+        result = await self.db.execute(select(User).where(User.id == user_id))
         return result.scalar_one_or_none()
 
     async def exists_email(self, email: str) -> bool:

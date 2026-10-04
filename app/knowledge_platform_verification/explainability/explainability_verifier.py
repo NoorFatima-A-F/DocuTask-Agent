@@ -136,11 +136,24 @@ class ExplainabilityVerifier:
         # Counterfactual explanation: Why Doc B ranked lower than Doc A
         audit_record = {
             "query_id": "qry_5021",
-            "doc_a": {"id": "doc_a", "rank": 1, "score": 0.91, "reason": "High semantic similarity + exact keyword match"},
-            "doc_b": {"id": "doc_b", "rank": 2, "score": 0.74, "reason": "Penalty applied: Policy expired on 2026-01-01"},
+            "doc_a": {
+                "id": "doc_a",
+                "rank": 1,
+                "score": 0.91,
+                "reason": "High semantic similarity + exact keyword match",
+            },
+            "doc_b": {
+                "id": "doc_b",
+                "rank": 2,
+                "score": 0.74,
+                "reason": "Penalty applied: Policy expired on 2026-01-01",
+            },
         }
 
-        passed = audit_record["doc_b"]["score"] < audit_record["doc_a"]["score"] and "Penalty" in audit_record["doc_b"]["reason"]
+        passed = (
+            audit_record["doc_b"]["score"] < audit_record["doc_a"]["score"]
+            and "Penalty" in audit_record["doc_b"]["reason"]
+        )
         t_ms = (time.perf_counter() - t0) * 1000.0
         return AssertionResult(
             name="assert_counterfactual_audit_trail",

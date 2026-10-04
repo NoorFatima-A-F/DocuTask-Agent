@@ -2,8 +2,10 @@
 Continuous Learning Pipeline
 Consumes feedback, evaluations, and execution traces to continuously refine policies, prompts, and memory.
 """
+
 from typing import Dict, Any, List
 from datetime import datetime, timezone
+
 
 class ContinuousLearningPipeline:
     def __init__(self):
@@ -15,7 +17,7 @@ class ContinuousLearningPipeline:
             "tenant_id": tenant_id,
             "event_type": event_type,  # "USER_CORRECTION", "BENCHMARK_EVAL", "HALLUCINATION_RESOLVED", "POLICY_UPDATED"
             "details": details,
-            "recorded_at": datetime.now(timezone.utc).isoformat()
+            "recorded_at": datetime.now(timezone.utc).isoformat(),
         }
         self._learning_events.append(event)
         return event

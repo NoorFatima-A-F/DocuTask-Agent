@@ -1,6 +1,7 @@
 """
 Weighted Test Quality Scoring and Certification Engine.
 """
+
 from app.platform_verification.test_architecture_verification.domain.models import (
     TestPyramidReport,
     UnitTestQualityReport,
@@ -16,6 +17,7 @@ from app.platform_verification.test_architecture_verification.domain.interfaces 
 
 class TestScoringEngine(ITestScoringEngine):
     """Calculates weighted composite score across all 6 test architecture pillars."""
+
     __test__ = False
 
     # Weights: Coverage (25%), Reliability (20%), Organization/Pyramid (15%), AI Eval (15%), Reproducibility (15%), Execution/Performance (10%)
@@ -35,7 +37,11 @@ class TestScoringEngine(ITestScoringEngine):
         reliability: FlakyTestDetectionReport,
         env: EnvironmentReproducibilityReport,
     ) -> TestQualityScorecard:
-        cov_s = (coverage.line_coverage_pct * 0.4) + (coverage.branch_coverage_pct * 0.3) + (coverage.mutation_score_pct * 0.3)
+        cov_s = (
+            (coverage.line_coverage_pct * 0.4)
+            + (coverage.branch_coverage_pct * 0.3)
+            + (coverage.mutation_score_pct * 0.3)
+        )
         rel_s = 100.0 - (reliability.flaky_tests * 5.0) - (reliability.unstable_tests * 25.0)
         rel_s = max(0.0, min(100.0, rel_s))
 

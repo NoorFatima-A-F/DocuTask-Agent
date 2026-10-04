@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class ConnectorLifecycleEvent(BaseModel):
     """Immutable audit record emitted during a connector lifecycle state transition."""
+
     event_id: str
     connector_id: str
     from_state: ConnectorStatus
@@ -114,7 +115,9 @@ class ConnectorLifecycleManager:
         Executes a validated state transition, updates the connector entity,
         records an audit entry, updates metrics, and dispatches a lifecycle event.
         """
-        current_state = connector.status if isinstance(connector.status, ConnectorStatus) else ConnectorStatus(connector.status)
+        current_state = (
+            connector.status if isinstance(connector.status, ConnectorStatus) else ConnectorStatus(connector.status)
+        )
         to_state = target_state if isinstance(target_state, ConnectorStatus) else ConnectorStatus(target_state)
 
         if not self.can_transition(current_state, to_state):
@@ -123,6 +126,7 @@ class ConnectorLifecycleManager:
             raise InvalidConnectorStateError(msg, connector_id=connector.id)
 
         import uuid
+
         event = ConnectorLifecycleEvent(
             event_id=f"clevt-{uuid.uuid4().hex[:10]}",
             connector_id=connector.id,

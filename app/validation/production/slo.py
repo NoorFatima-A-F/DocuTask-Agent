@@ -10,6 +10,7 @@ from app.core.logging import logger
 
 class SLOMetrics(BaseModel):
     """Metrics comparing actual production SLIs against SLO targets."""
+
     availability_target_pct: float = 99.5
     availability_actual_pct: float = 99.98
     extraction_success_target_pct: float = 98.0
@@ -29,5 +30,7 @@ class SLOEvaluator:
         """
         Evaluates actual operational metrics against SLO targets.
         """
-        logger.info("SLO Compliance Evaluation completed: Availability=99.98% (Target >99.5%), ExtractionSuccess=100.0% (Target >98.0%)")
+        logger.info(
+            "SLO Compliance Evaluation completed: Availability=99.98% (Target >99.5%), ExtractionSuccess=100.0% (Target >98.0%)"
+        )
         return SLOMetrics()

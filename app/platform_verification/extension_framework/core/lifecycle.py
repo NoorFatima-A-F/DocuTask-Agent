@@ -2,6 +2,7 @@
 Plugin Lifecycle Manager governing 10 discrete states with observable audit trails.
 States: DISCOVERED -> VALIDATED -> REGISTERED -> INITIALIZED -> READY -> EXECUTING -> PAUSED -> DISABLED -> FAILED -> REMOVED
 """
+
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime, timezone
 from app.platform_verification.extension_framework.domain.models import PluginLifecycleState
@@ -13,14 +14,44 @@ class PluginLifecycleManager(PluginLifecycleManagerInterface):
     VALID_TRANSITIONS: Dict[PluginLifecycleState, List[PluginLifecycleState]] = {
         PluginLifecycleState.DISCOVERED: [PluginLifecycleState.VALIDATED, PluginLifecycleState.FAILED],
         PluginLifecycleState.VALIDATED: [PluginLifecycleState.REGISTERED, PluginLifecycleState.FAILED],
-        PluginLifecycleState.REGISTERED: [PluginLifecycleState.INITIALIZED, PluginLifecycleState.DISABLED, PluginLifecycleState.REMOVED],
-        PluginLifecycleState.INITIALIZED: [PluginLifecycleState.READY, PluginLifecycleState.FAILED, PluginLifecycleState.DISABLED],
-        PluginLifecycleState.READY: [PluginLifecycleState.EXECUTING, PluginLifecycleState.PAUSED, PluginLifecycleState.DISABLED, PluginLifecycleState.REMOVED],
-        PluginLifecycleState.EXECUTING: [PluginLifecycleState.READY, PluginLifecycleState.FAILED, PluginLifecycleState.DISABLED],
-        PluginLifecycleState.PAUSED: [PluginLifecycleState.READY, PluginLifecycleState.DISABLED, PluginLifecycleState.REMOVED],
-        PluginLifecycleState.DISABLED: [PluginLifecycleState.INITIALIZED, PluginLifecycleState.READY, PluginLifecycleState.REMOVED],
-        PluginLifecycleState.FAILED: [PluginLifecycleState.VALIDATED, PluginLifecycleState.INITIALIZED, PluginLifecycleState.REMOVED, PluginLifecycleState.DISABLED],
-        PluginLifecycleState.REMOVED: []
+        PluginLifecycleState.REGISTERED: [
+            PluginLifecycleState.INITIALIZED,
+            PluginLifecycleState.DISABLED,
+            PluginLifecycleState.REMOVED,
+        ],
+        PluginLifecycleState.INITIALIZED: [
+            PluginLifecycleState.READY,
+            PluginLifecycleState.FAILED,
+            PluginLifecycleState.DISABLED,
+        ],
+        PluginLifecycleState.READY: [
+            PluginLifecycleState.EXECUTING,
+            PluginLifecycleState.PAUSED,
+            PluginLifecycleState.DISABLED,
+            PluginLifecycleState.REMOVED,
+        ],
+        PluginLifecycleState.EXECUTING: [
+            PluginLifecycleState.READY,
+            PluginLifecycleState.FAILED,
+            PluginLifecycleState.DISABLED,
+        ],
+        PluginLifecycleState.PAUSED: [
+            PluginLifecycleState.READY,
+            PluginLifecycleState.DISABLED,
+            PluginLifecycleState.REMOVED,
+        ],
+        PluginLifecycleState.DISABLED: [
+            PluginLifecycleState.INITIALIZED,
+            PluginLifecycleState.READY,
+            PluginLifecycleState.REMOVED,
+        ],
+        PluginLifecycleState.FAILED: [
+            PluginLifecycleState.VALIDATED,
+            PluginLifecycleState.INITIALIZED,
+            PluginLifecycleState.REMOVED,
+            PluginLifecycleState.DISABLED,
+        ],
+        PluginLifecycleState.REMOVED: [],
     }
 
     def __init__(self):
@@ -32,10 +63,7 @@ class PluginLifecycleManager(PluginLifecycleManagerInterface):
         self._record_transition(plugin_id, None, state, "Initial state assignment")
 
     def transition_state(
-        self,
-        plugin_id: str,
-        target_state: PluginLifecycleState,
-        reason: str = ""
+        self, plugin_id: str, target_state: PluginLifecycleState, reason: str = ""
     ) -> PluginLifecycleState:
         current_state = self._states.get(plugin_id, PluginLifecycleState.DISCOVERED)
         allowed = self.VALID_TRANSITIONS.get(current_state, [])
@@ -52,14 +80,18 @@ class PluginLifecycleManager(PluginLifecycleManagerInterface):
     def get_state(self, plugin_id: str) -> PluginLifecycleState:
         return self._states.get(plugin_id, PluginLifecycleState.DISCOVERED)
 
-    def _record_transition(self, plugin_id: str, from_state: Optional[PluginLifecycleState], to_state: PluginLifecycleState, reason: str):
-        self._audit_log.append({
-            "plugin_id": plugin_id,
-            "from_state": from_state.value if from_state else "NONE",
-            "to_state": to_state.value,
-            "reason": reason,
-            "timestamp": datetime.now(timezone.utc).isoformat()
-        })
+    def _record_transition(
+        self, plugin_id: str, from_state: Optional[PluginLifecycleState], to_state: PluginLifecycleState, reason: str
+    ):
+        self._audit_log.append(
+            {
+                "plugin_id": plugin_id,
+                "from_state": from_state.value if from_state else "NONE",
+                "to_state": to_state.value,
+                "reason": reason,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+        )
 
     def get_audit_trail(self, plugin_id: Optional[str] = None) -> List[Dict[str, str]]:
         if plugin_id:

@@ -1,4 +1,5 @@
 """Pipeline Execution Engine."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -9,6 +10,7 @@ from .stages import PipelineStage, PipelineStageResult
 
 class PipelineRunStatus(str, Enum):
     """Execution status of a pipeline run."""
+
     RUNNING = "RUNNING"
     SUCCESS = "SUCCESS"
     FAILED = "FAILED"
@@ -18,6 +20,7 @@ class PipelineRunStatus(str, Enum):
 @dataclass
 class PipelineRun:
     """Execution trace of a complete deployment pipeline run."""
+
     pipeline_name: str
     run_id: str = field(default_factory=lambda: f"run-{uuid.uuid4().hex[:8]}")
     status: PipelineRunStatus = PipelineRunStatus.RUNNING

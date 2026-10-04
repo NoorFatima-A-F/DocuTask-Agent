@@ -10,6 +10,7 @@ from app.agents.execution.lifecycle import ExecutionLifecycleState
 
 class ExecutionProgress(BaseModel):
     """Calculated progress indicators for an active execution."""
+
     total_nodes: int = Field(default=0, ge=0)
     completed_nodes: int = Field(default=0, ge=0)
     failed_nodes: int = Field(default=0, ge=0)
@@ -29,7 +30,9 @@ class ProgressTracker:
 
         completed = sum(1 for s in node_states.values() if s == ExecutionLifecycleState.COMPLETED)
         failed = sum(1 for s in node_states.values() if s == ExecutionLifecycleState.FAILED)
-        running = sum(1 for s in node_states.values() if s in (ExecutionLifecycleState.RUNNING, ExecutionLifecycleState.SCHEDULED))
+        running = sum(
+            1 for s in node_states.values() if s in (ExecutionLifecycleState.RUNNING, ExecutionLifecycleState.SCHEDULED)
+        )
 
         pct = round((completed / total) * 100.0, 1)
         return ExecutionProgress(
@@ -37,5 +40,5 @@ class ProgressTracker:
             completed_nodes=completed,
             failed_nodes=failed,
             in_progress_nodes=running,
-            percentage_complete=pct
+            percentage_complete=pct,
         )

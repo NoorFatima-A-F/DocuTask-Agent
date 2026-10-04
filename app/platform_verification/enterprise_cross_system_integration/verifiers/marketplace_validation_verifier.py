@@ -25,10 +25,38 @@ class MarketplaceValidationVerifier(IMarketplaceValidationVerifier):
 
     def verify(self) -> MarketplaceValidationReport:
         packages = [
-            MarketplacePackageVerification(package_id="pkg-ocr-financial", package_type="ToolPackage", version="1.4.0", dependency_resolved=True, clean_install_verified=True, clean_uninstall_verified=True),
-            MarketplacePackageVerification(package_id="pkg-agent-compliance", package_type="AgentPackage", version="2.1.0", dependency_resolved=True, clean_install_verified=True, clean_uninstall_verified=True),
-            MarketplacePackageVerification(package_id="pkg-workflow-invoice", package_type="WorkflowPackage", version="3.0.1", dependency_resolved=True, clean_install_verified=True, clean_uninstall_verified=True),
-            MarketplacePackageVerification(package_id="pkg-rag-legal", package_type="KnowledgePackage", version="1.2.0", dependency_resolved=True, clean_install_verified=True, clean_uninstall_verified=True),
+            MarketplacePackageVerification(
+                package_id="pkg-ocr-financial",
+                package_type="ToolPackage",
+                version="1.4.0",
+                dependency_resolved=True,
+                clean_install_verified=True,
+                clean_uninstall_verified=True,
+            ),
+            MarketplacePackageVerification(
+                package_id="pkg-agent-compliance",
+                package_type="AgentPackage",
+                version="2.1.0",
+                dependency_resolved=True,
+                clean_install_verified=True,
+                clean_uninstall_verified=True,
+            ),
+            MarketplacePackageVerification(
+                package_id="pkg-workflow-invoice",
+                package_type="WorkflowPackage",
+                version="3.0.1",
+                dependency_resolved=True,
+                clean_install_verified=True,
+                clean_uninstall_verified=True,
+            ),
+            MarketplacePackageVerification(
+                package_id="pkg-rag-legal",
+                package_type="KnowledgePackage",
+                version="1.2.0",
+                dependency_resolved=True,
+                clean_install_verified=True,
+                clean_uninstall_verified=True,
+            ),
         ]
 
         checks = [

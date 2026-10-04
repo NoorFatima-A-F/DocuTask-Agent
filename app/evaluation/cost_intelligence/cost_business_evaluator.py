@@ -25,11 +25,41 @@ class CostBusinessEvaluator(ICostBusinessEvaluator):
 
     def evaluate(self) -> CostBusinessReport:
         use_cases = [
-            BusinessROISpec(use_case="AccountsPayableInvoiceProcessing", manual_cost_per_doc_usd=0.35, ai_cost_per_doc_usd=0.025, annual_savings_usd=420000.0, hours_saved_annual=14000.0),
-            BusinessROISpec(use_case="LegalContractReviewAndExtraction", manual_cost_per_doc_usd=1.20, ai_cost_per_doc_usd=0.045, annual_savings_usd=350000.0, hours_saved_annual=8500.0),
-            BusinessROISpec(use_case="HealthcarePriorAuthorization", manual_cost_per_doc_usd=0.85, ai_cost_per_doc_usd=0.035, annual_savings_usd=580000.0, hours_saved_annual=19000.0),
-            BusinessROISpec(use_case="HumanResourcesResumeScreening", manual_cost_per_doc_usd=0.50, ai_cost_per_doc_usd=0.018, annual_savings_usd=280000.0, hours_saved_annual=11000.0),
-            BusinessROISpec(use_case="RegulatoryComplianceAuditing", manual_cost_per_doc_usd=1.50, ai_cost_per_doc_usd=0.050, annual_savings_usd=650000.0, hours_saved_annual=5000.0),
+            BusinessROISpec(
+                use_case="AccountsPayableInvoiceProcessing",
+                manual_cost_per_doc_usd=0.35,
+                ai_cost_per_doc_usd=0.025,
+                annual_savings_usd=420000.0,
+                hours_saved_annual=14000.0,
+            ),
+            BusinessROISpec(
+                use_case="LegalContractReviewAndExtraction",
+                manual_cost_per_doc_usd=1.20,
+                ai_cost_per_doc_usd=0.045,
+                annual_savings_usd=350000.0,
+                hours_saved_annual=8500.0,
+            ),
+            BusinessROISpec(
+                use_case="HealthcarePriorAuthorization",
+                manual_cost_per_doc_usd=0.85,
+                ai_cost_per_doc_usd=0.035,
+                annual_savings_usd=580000.0,
+                hours_saved_annual=19000.0,
+            ),
+            BusinessROISpec(
+                use_case="HumanResourcesResumeScreening",
+                manual_cost_per_doc_usd=0.50,
+                ai_cost_per_doc_usd=0.018,
+                annual_savings_usd=280000.0,
+                hours_saved_annual=11000.0,
+            ),
+            BusinessROISpec(
+                use_case="RegulatoryComplianceAuditing",
+                manual_cost_per_doc_usd=1.50,
+                ai_cost_per_doc_usd=0.050,
+                annual_savings_usd=650000.0,
+                hours_saved_annual=5000.0,
+            ),
         ]
 
         total_savings = sum(u.annual_savings_usd for u in use_cases)

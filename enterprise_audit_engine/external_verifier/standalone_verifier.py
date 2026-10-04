@@ -10,6 +10,7 @@ try:
     from cryptography.hazmat.primitives.asymmetric import ed25519
     from cryptography.hazmat.primitives import serialization
     from cryptography.exceptions import InvalidSignature
+
     HAS_CRYPTOGRAPHY = True
 except ImportError:
     HAS_CRYPTOGRAPHY = False
@@ -63,21 +64,24 @@ class StandaloneExternalVerifier:
             issues.append("Missing signature or public key")
         else:
             # Reconstruct canonical payload
-            canonical_payload = json.dumps({
-                "certificate_id": cert.get("certificate_id"),
-                "system_name": cert.get("system_name"),
-                "release_version": cert.get("release_version"),
-                "audit_engine_version": cert.get("audit_engine_version"),
-                "audit_execution_id": cert.get("audit_execution_id"),
-                "issued_timestamp": cert.get("issued_timestamp"),
-                "expiry_timestamp": cert.get("expiry_timestamp"),
-                "merkle_root": cert.get("merkle_root"),
-                "evidence_root_hash": cert.get("evidence_root_hash"),
-                "eqi_score": cert.get("eqi_score"),
-                "policy_name": cert.get("policy_name"),
-                "issuer": cert.get("issuer"),
-                "algorithm": cert.get("algorithm"),
-            }, sort_keys=True).encode("utf-8")
+            canonical_payload = json.dumps(
+                {
+                    "certificate_id": cert.get("certificate_id"),
+                    "system_name": cert.get("system_name"),
+                    "release_version": cert.get("release_version"),
+                    "audit_engine_version": cert.get("audit_engine_version"),
+                    "audit_execution_id": cert.get("audit_execution_id"),
+                    "issued_timestamp": cert.get("issued_timestamp"),
+                    "expiry_timestamp": cert.get("expiry_timestamp"),
+                    "merkle_root": cert.get("merkle_root"),
+                    "evidence_root_hash": cert.get("evidence_root_hash"),
+                    "eqi_score": cert.get("eqi_score"),
+                    "policy_name": cert.get("policy_name"),
+                    "issuer": cert.get("issuer"),
+                    "algorithm": cert.get("algorithm"),
+                },
+                sort_keys=True,
+            ).encode("utf-8")
 
             if HAS_CRYPTOGRAPHY and "BEGIN PUBLIC KEY" in pub_key_pem:
                 try:
@@ -125,7 +129,7 @@ class StandaloneExternalVerifier:
         elif cert_status not in {"VALID", "CertificationStatus.VALID"}:
             issues.append(f"Certificate status is not VALID ({cert_status})")
 
-        is_trusted = (sig_valid and not is_expired and merkle_valid and len(issues) == 0)
+        is_trusted = sig_valid and not is_expired and merkle_valid and len(issues) == 0
 
         return {
             "is_trusted": is_trusted,

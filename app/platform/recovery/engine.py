@@ -15,6 +15,7 @@ from ...core.errors.exceptions import PlatformException
 @dataclass
 class RecoveryAction:
     """Record of a triggered recovery action."""
+
     action_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     policy: RecoveryPolicy = RecoveryPolicy.RETRY
     error_id: str = ""
@@ -38,7 +39,9 @@ class RecoveryEngine:
         """Register default recovery handlers if needed."""
         pass
 
-    def register_handler(self, policy: RecoveryPolicy, handler: Callable[[PlatformException, RecoveryAction], Any]) -> None:
+    def register_handler(
+        self, policy: RecoveryPolicy, handler: Callable[[PlatformException, RecoveryAction], Any]
+    ) -> None:
         """Register custom recovery strategy handler."""
         self._handlers[policy] = handler
 

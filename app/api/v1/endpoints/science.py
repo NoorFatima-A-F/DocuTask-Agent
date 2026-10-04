@@ -17,6 +17,7 @@ scientific_runtime = ScientificRuntime()
 
 # --- Request/Response Models ---
 
+
 class DiscoveryCycleRequest(BaseModel):
     domain: str = Field(default="performance", description="Domain of scientific exploration")
 
@@ -135,6 +136,7 @@ class RelationCreateRequest(BaseModel):
 
 # --- Endpoints ---
 
+
 @router.get("/overview")
 def get_overview() -> Dict[str, Any]:
     """Provides platform overview and metrics across all 9 scientific engines."""
@@ -155,6 +157,7 @@ def run_discovery_cycle(req: DiscoveryCycleRequest) -> Dict[str, Any]:
 
 
 # --- Hypotheses & Knowledge Gaps ---
+
 
 @router.get("/hypotheses")
 def list_hypotheses(
@@ -212,6 +215,7 @@ def create_knowledge_gap(req: KnowledgeGapCreateRequest) -> Dict[str, Any]:
 
 # --- Experiments ---
 
+
 @router.get("/experiments")
 def list_experiments(
     domain: Optional[str] = Query(None),
@@ -254,6 +258,7 @@ def execute_experiment(experiment_id: str, req: ExperimentExecuteRequest) -> Dic
 
 # --- Evidence ---
 
+
 @router.get("/evidence")
 def list_evidence(
     hypothesis_id: Optional[str] = Query(None),
@@ -284,6 +289,7 @@ def record_evidence(req: EvidenceCreateRequest) -> Dict[str, Any]:
 
 # --- Validation ---
 
+
 @router.get("/validations")
 def list_validations(hypothesis_id: Optional[str] = Query(None)) -> List[Dict[str, Any]]:
     """Lists statistical validation reports."""
@@ -305,6 +311,7 @@ def run_validation(req: ValidationRunRequest) -> Dict[str, Any]:
 
 
 # --- Knowledge Base (Facts & Laws) ---
+
 
 @router.get("/knowledge/facts")
 def list_facts(domain: Optional[str] = Query(None)) -> List[Dict[str, Any]]:
@@ -349,6 +356,7 @@ def formulate_law(req: LawCreateRequest) -> Dict[str, Any]:
 
 # --- Research Streams & Roadmaps ---
 
+
 @router.get("/research/streams")
 def list_research_streams(domain: Optional[str] = Query(None)) -> List[Dict[str, Any]]:
     """Lists research streams."""
@@ -376,6 +384,7 @@ def list_research_roadmaps() -> List[Dict[str, Any]]:
 
 
 # --- Publications ---
+
 
 @router.get("/publications")
 def list_publications(domain: Optional[str] = Query(None)) -> List[Dict[str, Any]]:
@@ -409,6 +418,7 @@ def publish_paper(publication_id: str) -> Dict[str, Any]:
 
 # --- Consensus Review ---
 
+
 @router.get("/consensus/reviews")
 def list_consensus_reviews(hypothesis_id: Optional[str] = Query(None)) -> List[Dict[str, Any]]:
     """Lists multi-agent consensus review tribunal decisions."""
@@ -429,6 +439,7 @@ def run_consensus_review(req: ConsensusReviewRequest) -> Dict[str, Any]:
 
 
 # --- Ontology Graph ---
+
 
 @router.get("/ontology/concepts")
 def list_ontology_concepts(domain: Optional[str] = Query(None)) -> List[Dict[str, Any]]:

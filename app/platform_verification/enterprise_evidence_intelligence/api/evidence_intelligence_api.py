@@ -131,7 +131,9 @@ async def get_executive_markdown() -> str:
     if md_path.exists():
         return md_path.read_text(encoding="utf-8")
     _runtime.run_full_pipeline()
-    return (Path("infrastructure_verification") / "reports" / "executive_certification_report.md").read_text(encoding="utf-8")
+    return (Path("infrastructure_verification") / "reports" / "executive_certification_report.md").read_text(
+        encoding="utf-8"
+    )
 
 
 @router.get("/reports/audit/markdown", response_class=PlainTextResponse)

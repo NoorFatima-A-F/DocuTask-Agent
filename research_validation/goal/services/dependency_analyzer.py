@@ -13,6 +13,7 @@ from research_validation.goal.models.dependency import GoalDependency
 @dataclass(frozen=True)
 class DependencyAnalysisResult:
     """Consolidated outcome of dependency graph evaluation."""
+
     is_valid: bool
     total_dependencies_count: int
     topological_order: List[str]

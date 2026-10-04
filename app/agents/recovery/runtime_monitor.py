@@ -18,7 +18,5 @@ class RuntimeMonitor:
 
     def evaluate_runtime_status(self, active_sessions: int, congested_queues: int) -> RuntimeHealthStatus:
         return RuntimeHealthStatus(
-            is_operational=(congested_queues == 0),
-            active_sessions=active_sessions,
-            congested_queues=congested_queues
+            is_operational=(congested_queues == 0), active_sessions=active_sessions, congested_queues=congested_queues
         )

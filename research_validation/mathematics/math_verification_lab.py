@@ -130,42 +130,87 @@ class MathVerificationLab:
 
         # 1. Normal CDF Inverse Probit (p=0.975 -> z=1.95996398454)
         from app.evidence.benchmarking.power_analysis import StatisticalPowerEngine
+
         z_calc = StatisticalPowerEngine._inv_normal_cdf(0.975)
-        records.append(cls.verify_algorithm("Inverse_Normal_CDF_Probit", 1.95996398454, z_calc, tolerance=1e-3, authority="NIST Handbook"))
+        records.append(
+            cls.verify_algorithm(
+                "Inverse_Normal_CDF_Probit", 1.95996398454, z_calc, tolerance=1e-3, authority="NIST Handbook"
+            )
+        )
 
         # 2. D'Agostino K^2 Normal Skewness & Kurtosis
         from app.evidence.benchmarking.distribution_validation import DistributionValidationEngine
+
         # Known synthetic sample: [1, 2, 3, 4, 5] -> mean=3, skewness=0.0, excess kurtosis=-1.3
         k2_skew = DistributionValidationEngine._skewness([1.0, 2.0, 3.0, 4.0, 5.0], 3.0, math.sqrt(2.5))
-        records.append(cls.verify_algorithm("DAgostino_Skewness_Symmetric", 0.0, k2_skew, tolerance=1e-5, authority="SciPy stats.skew"))
+        records.append(
+            cls.verify_algorithm(
+                "DAgostino_Skewness_Symmetric", 0.0, k2_skew, tolerance=1e-5, authority="SciPy stats.skew"
+            )
+        )
 
         # 3. Kolmogorov-Smirnov CDF distance
         ks_val = DistributionValidationEngine._ks_p_value(0.20, 50)
-        records.append(cls.verify_algorithm("Kolmogorov_Smirnov_Asymptotic_PValue", 0.268, ks_val, tolerance=0.08, authority="SciPy stats.kstest"))
+        records.append(
+            cls.verify_algorithm(
+                "Kolmogorov_Smirnov_Asymptotic_PValue", 0.268, ks_val, tolerance=0.08, authority="SciPy stats.kstest"
+            )
+        )
 
         # 4. Cohen's Kappa exact formula (P_o=0.90, P_e=0.50 -> kappa=0.80)
         from evals.evaluation.human_eval.inter_rater import HumanEvaluationEngine
-        k_val = HumanEvaluationEngine.compute_cohens_kappa([1, 1, 2, 2, 1, 1, 2, 2, 1, 2], [1, 1, 2, 2, 1, 1, 2, 2, 1, 1])
-        records.append(cls.verify_algorithm("Cohens_Kappa_Pairwise", 0.80, k_val, tolerance=0.02, authority="Cohen (1960)"))
+
+        k_val = HumanEvaluationEngine.compute_cohens_kappa(
+            [1, 1, 2, 2, 1, 1, 2, 2, 1, 2], [1, 1, 2, 2, 1, 1, 2, 2, 1, 1]
+        )
+        records.append(
+            cls.verify_algorithm("Cohens_Kappa_Pairwise", 0.80, k_val, tolerance=0.02, authority="Cohen (1960)")
+        )
 
         # 5. Little's Law Concurrency (lambda=100, W=0.05 -> L=5.0)
         w_sec = 0.05
-        records.append(cls.verify_algorithm("Littles_Law_L_lambda_W", 5.0, 100.0 * w_sec, tolerance=1e-6, authority="Little (1961) Operations Research"))
+        records.append(
+            cls.verify_algorithm(
+                "Littles_Law_L_lambda_W",
+                5.0,
+                100.0 * w_sec,
+                tolerance=1e-6,
+                authority="Little (1961) Operations Research",
+            )
+        )
 
         # 6. Brier Score exact calculation
         from app.evidence.benchmarking.calibration import ConfidenceCalibrationEngine
+
         calib = ConfidenceCalibrationEngine.evaluate_calibration("brier_test", [0.9, 0.1], [True, False])
         # Expected Brier = ((0.9-1)^2 + (0.1-0)^2) / 2 = (0.01 + 0.01)/2 = 0.01
-        records.append(cls.verify_algorithm("Brier_Score_Binary", 0.01, calib.brier_score, tolerance=1e-5, authority="Brier (1950) Monthly Weather Review"))
+        records.append(
+            cls.verify_algorithm(
+                "Brier_Score_Binary",
+                0.01,
+                calib.brier_score,
+                tolerance=1e-5,
+                authority="Brier (1950) Monthly Weather Review",
+            )
+        )
 
         # 7. Levenshtein Distance ("KITTEN" -> "SITTING" = 3)
         from evals.evaluation.metrics.evaluation_metrics import EvaluationMetrics
+
         lev = EvaluationMetrics.compute_levenshtein_distance("KITTEN", "SITTING")
-        records.append(cls.verify_algorithm("Levenshtein_Edit_Distance", 3.0, float(lev), tolerance=0.0, authority="Levenshtein (1966)"))
+        records.append(
+            cls.verify_algorithm(
+                "Levenshtein_Edit_Distance", 3.0, float(lev), tolerance=0.0, authority="Levenshtein (1966)"
+            )
+        )
 
         # 8. CER Metric ("ABC", "ADC" -> 1/3 = 0.333333)
         cer = EvaluationMetrics.compute_cer("ABC", "ADC")
-        records.append(cls.verify_algorithm("Character_Error_Rate_CER", 1.0 / 3.0, cer, tolerance=1e-5, authority="NIST Speech Recognition Standard"))
+        records.append(
+            cls.verify_algorithm(
+                "Character_Error_Rate_CER", 1.0 / 3.0, cer, tolerance=1e-5, authority="NIST Speech Recognition Standard"
+            )
+        )
 
         compliant_count = sum(1 for r in records if r.is_compliant)
         total = len(records)

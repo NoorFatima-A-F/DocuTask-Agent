@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class MemoryIdentity(BaseModel):
     """Immutable Memory Identity."""
+
     memory_id: UUID = Field(default_factory=uuid4)
     session_id: Optional[str] = Field(default=None)
     execution_id: Optional[str] = Field(default=None)
@@ -25,6 +26,7 @@ class MemoryIdentity(BaseModel):
 
 class MemoryStatistics(BaseModel):
     """Operational statistics for a memory record."""
+
     access_count: int = Field(default=0, ge=0)
     last_accessed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     retrieval_count: int = Field(default=0, ge=0)
@@ -35,6 +37,7 @@ class MemoryStatistics(BaseModel):
 
 class MemoryMetadata(BaseModel):
     """Metadata parameters for a memory record."""
+
     source_component: str = Field(default="DocumentAgent")
     memory_type: str = Field(default="WORKING")
     security_classification: str = Field(default="INTERNAL")

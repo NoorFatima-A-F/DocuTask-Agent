@@ -8,6 +8,7 @@ from enum import Enum
 
 class PlanLifecycleState(str, Enum):
     """Plan lifecycle states throughout generation, validation, execution, and archiving."""
+
     DRAFT = "DRAFT"
     VALIDATED = "VALIDATED"
     OPTIMIZED = "OPTIMIZED"

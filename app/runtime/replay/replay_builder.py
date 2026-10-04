@@ -26,6 +26,7 @@ class ReplayStreamBuilder:
         else:
             res = []
         import inspect
+
         if inspect.iscoroutine(res):
             raw_events = await res
         else:

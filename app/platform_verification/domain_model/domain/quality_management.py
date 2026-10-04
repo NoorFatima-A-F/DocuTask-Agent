@@ -1,6 +1,7 @@
 """
 Quality Management Domain: Quality Gates, Blocker Policies, and Decision Aggregation.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict

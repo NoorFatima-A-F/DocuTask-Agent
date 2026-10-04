@@ -2,15 +2,18 @@
 Distributed Tracing Interfaces.
 Neutral abstractions for Spans and Trace propagation without OpenTelemetry SDK vendor lock-in.
 """
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, Optional
 
+
 class SpanStatus(str, Enum):
     UNSET = "UNSET"
     OK = "OK"
     ERROR = "ERROR"
+
 
 @dataclass(frozen=True)
 class SpanContextContract:
@@ -18,6 +21,7 @@ class SpanContextContract:
     span_id: str
     parent_span_id: Optional[str] = None
     baggage: Dict[str, str] = field(default_factory=dict)
+
 
 class SpanContract(ABC):
     @abstractmethod
@@ -39,6 +43,7 @@ class SpanContract(ABC):
     @abstractmethod
     def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
         pass
+
 
 class TracerContract(ABC):
     @abstractmethod

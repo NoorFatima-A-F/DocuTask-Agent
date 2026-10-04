@@ -1,6 +1,7 @@
 """
 Visualization Layer compiling Metric, Benchmark, and AI Quality Dashboards.
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from app.platform_verification.evaluation_engine.domain.models import (
@@ -76,9 +77,7 @@ class MetricsDashboardEngine:
             improvement_count=imp_count,
         )
 
-    def generate_ai_quality_dashboard(
-        self, ai_metrics: Dict[str, float]
-    ) -> AiQualityDashboardView:
+    def generate_ai_quality_dashboard(self, ai_metrics: Dict[str, float]) -> AiQualityDashboardView:
         radar = {
             "Grounding": ai_metrics.get("grounding_score", 95.0),
             "Faithfulness": ai_metrics.get("faithfulness_score", 94.0),

@@ -1,6 +1,7 @@
 """
 Phase 3H.4.12: Enterprise Observability Audit & Certification Package
 """
+
 from .domain import (
     CertificationTier,
     CICDDecision,

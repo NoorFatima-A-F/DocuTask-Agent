@@ -1,6 +1,7 @@
 """
 3I.4.2: Trace Context Propagation Verifier
 """
+
 from typing import List
 from ..domain.models import TraceContextPropagationHop, ContextPropagationReport
 from ..domain.interfaces import IContextPropagationVerifier
@@ -23,7 +24,7 @@ class ContextPropagationVerifier(IContextPropagationVerifier):
                 trace_id=target_trace_id,
                 parent_span_id=None,
                 span_id="span_api_root_001",
-                propagation_valid=True
+                propagation_valid=True,
             ),
             TraceContextPropagationHop(
                 hop_number=2,
@@ -33,7 +34,7 @@ class ContextPropagationVerifier(IContextPropagationVerifier):
                 trace_id=target_trace_id,
                 parent_span_id="span_api_root_001",
                 span_id="span_auth_sub_002",
-                propagation_valid=True
+                propagation_valid=True,
             ),
             TraceContextPropagationHop(
                 hop_number=3,
@@ -43,7 +44,7 @@ class ContextPropagationVerifier(IContextPropagationVerifier):
                 trace_id=target_trace_id,
                 parent_span_id="span_api_root_001",
                 span_id="span_enqueue_003",
-                propagation_valid=True
+                propagation_valid=True,
             ),
             TraceContextPropagationHop(
                 hop_number=4,
@@ -53,7 +54,7 @@ class ContextPropagationVerifier(IContextPropagationVerifier):
                 trace_id=target_trace_id,
                 parent_span_id="span_enqueue_003",
                 span_id="span_worker_proc_004",
-                propagation_valid=True
+                propagation_valid=True,
             ),
             TraceContextPropagationHop(
                 hop_number=5,
@@ -63,7 +64,7 @@ class ContextPropagationVerifier(IContextPropagationVerifier):
                 trace_id=target_trace_id,
                 parent_span_id="span_worker_proc_004",
                 span_id="span_ocr_exec_005",
-                propagation_valid=True
+                propagation_valid=True,
             ),
             TraceContextPropagationHop(
                 hop_number=6,
@@ -73,7 +74,7 @@ class ContextPropagationVerifier(IContextPropagationVerifier):
                 trace_id=target_trace_id,
                 parent_span_id="span_worker_proc_004",
                 span_id="span_gemini_call_006",
-                propagation_valid=True
+                propagation_valid=True,
             ),
             TraceContextPropagationHop(
                 hop_number=7,
@@ -83,7 +84,7 @@ class ContextPropagationVerifier(IContextPropagationVerifier):
                 trace_id=target_trace_id,
                 parent_span_id="span_worker_proc_004",
                 span_id="span_db_commit_007",
-                propagation_valid=True
+                propagation_valid=True,
             ),
         ]
 
@@ -93,5 +94,5 @@ class ContextPropagationVerifier(IContextPropagationVerifier):
             propagation_hops=hops,
             context_integrity_pct=100.0,
             async_queue_propagation_valid=True,
-            context_propagation_passed=True
+            context_propagation_passed=True,
         )

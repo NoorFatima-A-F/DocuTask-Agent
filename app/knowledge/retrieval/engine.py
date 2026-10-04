@@ -17,7 +17,9 @@ from app.knowledge.vector.store import InMemoryVectorStore, VectorStoreInterface
 logger = logging.getLogger(__name__)
 
 
-def bm25_score(query_tokens: List[str], doc_tokens: List[str], k1: float = 1.5, b: float = 0.75, avgdl: float = 100.0) -> float:
+def bm25_score(
+    query_tokens: List[str], doc_tokens: List[str], k1: float = 1.5, b: float = 0.75, avgdl: float = 100.0
+) -> float:
     """Calculates standard BM25 score for a document against query tokens."""
     if not query_tokens or not doc_tokens:
         return 0.0

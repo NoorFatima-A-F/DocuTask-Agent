@@ -119,7 +119,9 @@ class MonitoringEvidenceExporter:
             "component": "Enterprise Health Monitoring Integration",
             "status": scorecard.certification_verdict,
             "overall_score": scorecard.overall_score,
-            "tier": scorecard.certification_tier.value if isinstance(scorecard.certification_tier, ObservabilityTier) else str(scorecard.certification_tier),
+            "tier": scorecard.certification_tier.value
+            if isinstance(scorecard.certification_tier, ObservabilityTier)
+            else str(scorecard.certification_tier),
             "passed": scorecard.passed,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "environment": "production-simulation",

@@ -2,6 +2,7 @@
 Test Suite: Cost & Energy Intelligence Accounting
 Validates token cost models, prompt cache discounts, carbon footprints, and budget governor threshold enforcement.
 """
+
 from app.runtime.cost_intelligence.cost_calculator import CostCalculator
 from app.runtime.cost_intelligence.cost_aggregator import CostAggregator
 from app.runtime.cost_intelligence.budget_governor import BudgetGovernor
@@ -28,7 +29,7 @@ def test_step_cost_calculation_with_prompt_cache():
 
 def test_cost_aggregator_mission_report():
     report = CostAggregator.get_canonical_mission_cost("mission_cost_001")
-    
+
     assert report.mission_id == "mission_cost_001"
     assert report.total_net_cost_usd > 0.0
     assert report.total_tokens_consumed > 0

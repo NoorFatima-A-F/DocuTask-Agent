@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class SafetyScanResult:
     """Findings and risk scoring from an AI safety inspection."""
+
     is_safe: bool = True
     risk_level: str = "LOW"  # LOW, MEDIUM, HIGH, CRITICAL
     detected_threats: List[str] = field(default_factory=list)

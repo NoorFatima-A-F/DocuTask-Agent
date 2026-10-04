@@ -29,11 +29,41 @@ class CloudNetworkingVerifier(ICloudNetworkingVerifier):
 
     def verify(self) -> CloudNetworkingReport:
         segments = [
-            NetworkSegmentRule(segment_name="Public Ingress / ALB", access_type="Public Ingress (HTTPS 443)", allowed_ingress="0.0.0.0/0", restricted_access=False, tls_enforced=True),
-            NetworkSegmentRule(segment_name="Application Tier (API & Web)", access_type="Private Subnet (Port 8000)", allowed_ingress="ALB Security Group Only", restricted_access=True, tls_enforced=True),
-            NetworkSegmentRule(segment_name="Worker Processing Tier", access_type="Private Subnet (No Ingress)", allowed_ingress="Internal VPC / None", restricted_access=True, tls_enforced=True),
-            NetworkSegmentRule(segment_name="Database Tier (PostgreSQL)", access_type="Private Isolated Subnet (Port 5432)", allowed_ingress="API & Worker Security Groups Only", restricted_access=True, tls_enforced=True),
-            NetworkSegmentRule(segment_name="Cache Tier (Redis)", access_type="Private Isolated Subnet (Port 6379)", allowed_ingress="API & Worker Security Groups Only", restricted_access=True, tls_enforced=True),
+            NetworkSegmentRule(
+                segment_name="Public Ingress / ALB",
+                access_type="Public Ingress (HTTPS 443)",
+                allowed_ingress="0.0.0.0/0",
+                restricted_access=False,
+                tls_enforced=True,
+            ),
+            NetworkSegmentRule(
+                segment_name="Application Tier (API & Web)",
+                access_type="Private Subnet (Port 8000)",
+                allowed_ingress="ALB Security Group Only",
+                restricted_access=True,
+                tls_enforced=True,
+            ),
+            NetworkSegmentRule(
+                segment_name="Worker Processing Tier",
+                access_type="Private Subnet (No Ingress)",
+                allowed_ingress="Internal VPC / None",
+                restricted_access=True,
+                tls_enforced=True,
+            ),
+            NetworkSegmentRule(
+                segment_name="Database Tier (PostgreSQL)",
+                access_type="Private Isolated Subnet (Port 5432)",
+                allowed_ingress="API & Worker Security Groups Only",
+                restricted_access=True,
+                tls_enforced=True,
+            ),
+            NetworkSegmentRule(
+                segment_name="Cache Tier (Redis)",
+                access_type="Private Isolated Subnet (Port 6379)",
+                allowed_ingress="API & Worker Security Groups Only",
+                restricted_access=True,
+                tls_enforced=True,
+            ),
         ]
 
         checks = [

@@ -29,10 +29,34 @@ class CloudStorageCompatibilityVerifier(ICloudStorageCompatibilityVerifier):
 
     def verify(self) -> CloudStorageReport:
         backends = [
-            StorageBackendCompatibility(provider_name="AWS", service_name="Amazon S3", latency_ms=18.5, streaming_supported=True, metadata_preserved=True),
-            StorageBackendCompatibility(provider_name="GCP", service_name="Google Cloud Storage (GCS)", latency_ms=16.2, streaming_supported=True, metadata_preserved=True),
-            StorageBackendCompatibility(provider_name="Azure", service_name="Azure Blob Storage", latency_ms=19.4, streaming_supported=True, metadata_preserved=True),
-            StorageBackendCompatibility(provider_name="Generic", service_name="MinIO / S3 API Compatible", latency_ms=4.2, streaming_supported=True, metadata_preserved=True),
+            StorageBackendCompatibility(
+                provider_name="AWS",
+                service_name="Amazon S3",
+                latency_ms=18.5,
+                streaming_supported=True,
+                metadata_preserved=True,
+            ),
+            StorageBackendCompatibility(
+                provider_name="GCP",
+                service_name="Google Cloud Storage (GCS)",
+                latency_ms=16.2,
+                streaming_supported=True,
+                metadata_preserved=True,
+            ),
+            StorageBackendCompatibility(
+                provider_name="Azure",
+                service_name="Azure Blob Storage",
+                latency_ms=19.4,
+                streaming_supported=True,
+                metadata_preserved=True,
+            ),
+            StorageBackendCompatibility(
+                provider_name="Generic",
+                service_name="MinIO / S3 API Compatible",
+                latency_ms=4.2,
+                streaming_supported=True,
+                metadata_preserved=True,
+            ),
         ]
 
         checks = [

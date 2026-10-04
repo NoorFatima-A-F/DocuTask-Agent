@@ -60,7 +60,7 @@ class BenchmarkVisualizationPlatform:
 
         svg_lines = [
             f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" style="background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;">',
-            f'<text x="{width/2}" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">{html.escape(title)}</text>',
+            f'<text x="{width / 2}" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">{html.escape(title)}</text>',
             f'<line x1="{pad_left}" y1="{pad_top + plot_h}" x2="{pad_left + plot_w}" y2="{pad_top + plot_h}" stroke="#94a3b8" stroke-width="1.5"/>',
             f'<line x1="{pad_left}" y1="{pad_top}" x2="{pad_left}" y2="{pad_top + plot_h}" stroke="#94a3b8" stroke-width="1.5"/>',
         ]
@@ -77,7 +77,7 @@ class BenchmarkVisualizationPlatform:
             )
             if count > 0:
                 svg_lines.append(
-                    f'<text x="{x_px + b_w_px/2}" y="{y_px - 4}" text-anchor="middle" font-size="10" fill="#475569">{count}</text>'
+                    f'<text x="{x_px + b_w_px / 2}" y="{y_px - 4}" text-anchor="middle" font-size="10" fill="#475569">{count}</text>'
                 )
 
         # X-axis labels (min, median, max)
@@ -85,16 +85,16 @@ class BenchmarkVisualizationPlatform:
             f'<text x="{pad_left}" y="{pad_top + plot_h + 20}" text-anchor="middle" font-size="11" fill="#64748b">{min_v:.1f}</text>'
         )
         svg_lines.append(
-            f'<text x="{pad_left + plot_w/2}" y="{pad_top + plot_h + 20}" text-anchor="middle" font-size="11" fill="#64748b">{(min_v + max_v)/2:.1f}</text>'
+            f'<text x="{pad_left + plot_w / 2}" y="{pad_top + plot_h + 20}" text-anchor="middle" font-size="11" fill="#64748b">{(min_v + max_v) / 2:.1f}</text>'
         )
         svg_lines.append(
             f'<text x="{pad_left + plot_w}" y="{pad_top + plot_h + 20}" text-anchor="middle" font-size="11" fill="#64748b">{max_v:.1f}</text>'
         )
         svg_lines.append(
-            f'<text x="{width/2}" y="{pad_top + plot_h + 40}" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Execution Time (ms / ns)</text>'
+            f'<text x="{width / 2}" y="{pad_top + plot_h + 40}" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Execution Time (ms / ns)</text>'
         )
 
-        svg_lines.append('</svg>')
+        svg_lines.append("</svg>")
         return "\n".join(svg_lines)
 
     @classmethod
@@ -131,18 +131,18 @@ class BenchmarkVisualizationPlatform:
         polyline = " ".join(points)
 
         svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" style="background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;">
-<text x="{width/2}" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">{html.escape(title)}</text>
+<text x="{width / 2}" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">{html.escape(title)}</text>
 <line x1="{pad_left}" y1="{pad_top + plot_h}" x2="{pad_left + plot_w}" y2="{pad_top + plot_h}" stroke="#94a3b8" stroke-width="1.5"/>
 <line x1="{pad_left}" y1="{pad_top}" x2="{pad_left}" y2="{pad_top + plot_h}" stroke="#94a3b8" stroke-width="1.5"/>
 <line x1="{pad_left}" y1="{pad_top}" x2="{pad_left + plot_w}" y2="{pad_top}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
-<line x1="{pad_left}" y1="{pad_top + plot_h/2}" x2="{pad_left + plot_w}" y2="{pad_top + plot_h/2}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+<line x1="{pad_left}" y1="{pad_top + plot_h / 2}" x2="{pad_left + plot_w}" y2="{pad_top + plot_h / 2}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
 <polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="{polyline}"/>
 <text x="{pad_left - 10}" y="{pad_top + 5}" text-anchor="end" font-size="11" fill="#64748b">1.0</text>
-<text x="{pad_left - 10}" y="{pad_top + plot_h/2 + 5}" text-anchor="end" font-size="11" fill="#64748b">0.5</text>
+<text x="{pad_left - 10}" y="{pad_top + plot_h / 2 + 5}" text-anchor="end" font-size="11" fill="#64748b">0.5</text>
 <text x="{pad_left - 10}" y="{pad_top + plot_h + 5}" text-anchor="end" font-size="11" fill="#64748b">0.0</text>
 <text x="{pad_left}" y="{pad_top + plot_h + 20}" text-anchor="middle" font-size="11" fill="#64748b">{min_v:.1f}</text>
 <text x="{pad_left + plot_w}" y="{pad_top + plot_h + 20}" text-anchor="middle" font-size="11" fill="#64748b">{max_v:.1f}</text>
-<text x="{width/2}" y="{pad_top + plot_h + 40}" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Quantile Value</text>
+<text x="{width / 2}" y="{pad_top + plot_h + 40}" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Quantile Value</text>
 </svg>"""
         return svg
 
@@ -180,14 +180,14 @@ class BenchmarkVisualizationPlatform:
             pts_lat.append(f"{x_px:.1f},{y_lat:.1f}")
 
         svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" style="background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;">
-<text x="{width/2}" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">{html.escape(title)}</text>
+<text x="{width / 2}" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">{html.escape(title)}</text>
 <line x1="{pad_left}" y1="{pad_top + plot_h}" x2="{pad_left + plot_w}" y2="{pad_top + plot_h}" stroke="#94a3b8" stroke-width="1.5"/>
 <line x1="{pad_left}" y1="{pad_top}" x2="{pad_left}" y2="{pad_top + plot_h}" stroke="#3b82f6" stroke-width="1.5"/>
 <line x1="{pad_left + plot_w}" y1="{pad_top}" x2="{pad_left + plot_w}" y2="{pad_top + plot_h}" stroke="#ef4444" stroke-width="1.5"/>
-<polyline fill="none" stroke="#3b82f6" stroke-width="2.5" points="{' '.join(pts_thru)}"/>
-<polyline fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4" points="{' '.join(pts_lat)}"/>
+<polyline fill="none" stroke="#3b82f6" stroke-width="2.5" points="{" ".join(pts_thru)}"/>
+<polyline fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4" points="{" ".join(pts_lat)}"/>
 <text x="{pad_left - 10}" y="{pad_top + 10}" text-anchor="end" font-size="10" fill="#3b82f6">{max_thru:.0f} ops/s</text>
 <text x="{pad_left + plot_w + 10}" y="{pad_top + 10}" text-anchor="start" font-size="10" fill="#ef4444">{max_lat:.1f} ms</text>
-<text x="{width/2}" y="{pad_top + plot_h + 35}" text-anchor="middle" font-size="11" fill="#64748b">Concurrent Workers</text>
+<text x="{width / 2}" y="{pad_top + plot_h + 35}" text-anchor="middle" font-size="11" fill="#64748b">Concurrent Workers</text>
 </svg>"""
         return svg

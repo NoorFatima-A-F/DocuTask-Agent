@@ -388,11 +388,16 @@ def test_rest_api_endpoints():
     assert r_bs.status_code == 200
     sess_id = r_bs.json()["session"]["session_id"]
 
-    r_act = client.post(f"/api/v1/execution/browser/sessions/{sess_id}/actions", json={"action_type": "navigate", "value": "https://enterprise.internal"})
+    r_act = client.post(
+        f"/api/v1/execution/browser/sessions/{sess_id}/actions",
+        json={"action_type": "navigate", "value": "https://enterprise.internal"},
+    )
     assert r_act.status_code == 200
 
     # Planner
-    r_plan = client.post("/api/v1/execution/planner/plan", json={"mission_goal": "Issue enterprise invoice and store receipt"})
+    r_plan = client.post(
+        "/api/v1/execution/planner/plan", json={"mission_goal": "Issue enterprise invoice and store receipt"}
+    )
     assert r_plan.status_code == 200
     assert "plan" in r_plan.json()
 
@@ -401,7 +406,10 @@ def test_rest_api_endpoints():
     assert r_rules.status_code == 200
 
     # Execute Goal
-    r_exec = client.post("/api/v1/execution/missions/execute-goal", json={"goal": "Scrape portal status and notify ops", "dry_run": False})
+    r_exec = client.post(
+        "/api/v1/execution/missions/execute-goal",
+        json={"goal": "Scrape portal status and notify ops", "dry_run": False},
+    )
     assert r_exec.status_code == 200
     assert r_exec.json()["status"] == "completed"
 

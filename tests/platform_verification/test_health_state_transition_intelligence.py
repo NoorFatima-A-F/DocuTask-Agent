@@ -1,6 +1,7 @@
 """
 Pytest Test Suite for Part 3H.3.3: Enterprise Health State Transition & Service Recovery Intelligence Framework
 """
+
 import json
 import pytest
 
@@ -8,19 +9,37 @@ from app.platform_verification.health_transition_intelligence.domain.models impo
     HealthState,
     HealthTier,
 )
-from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import HealthStateMachine
-from app.platform_verification.health_transition_intelligence.signals.health_signal_collector import HealthSignalCollector
+from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import (
+    HealthStateMachine,
+)
+from app.platform_verification.health_transition_intelligence.signals.health_signal_collector import (
+    HealthSignalCollector,
+)
 from app.platform_verification.health_transition_intelligence.rules.health_rule_engine import HealthRuleEngine
 from app.platform_verification.health_transition_intelligence.analysis.degradation_analyzer import DegradationAnalyzer
 from app.platform_verification.health_transition_intelligence.history.health_history_storage import HealthHistoryStorage
 from app.platform_verification.health_transition_intelligence.flapping.flapping_detector import HealthFlappingDetector
-from app.platform_verification.health_transition_intelligence.protection.cascading_failure_protector import CascadingFailureProtector
-from app.platform_verification.health_transition_intelligence.recovery.recovery_orchestrator import ServiceRecoveryOrchestrator
-from app.platform_verification.health_transition_intelligence.orchestration.k8s_transition_verifier import KubernetesTransitionVerifier
-from app.platform_verification.health_transition_intelligence.alerting.health_alerting_engine import HealthAlertingEngine
-from app.platform_verification.health_transition_intelligence.incident.incident_reconstruction_engine import IncidentReconstructionEngine
-from app.platform_verification.health_transition_intelligence.simulation.health_simulation_runner import HealthSimulationRunner
-from app.platform_verification.health_transition_intelligence.runtime.health_intelligence_runtime import HealthIntelligenceRuntime
+from app.platform_verification.health_transition_intelligence.protection.cascading_failure_protector import (
+    CascadingFailureProtector,
+)
+from app.platform_verification.health_transition_intelligence.recovery.recovery_orchestrator import (
+    ServiceRecoveryOrchestrator,
+)
+from app.platform_verification.health_transition_intelligence.orchestration.k8s_transition_verifier import (
+    KubernetesTransitionVerifier,
+)
+from app.platform_verification.health_transition_intelligence.alerting.health_alerting_engine import (
+    HealthAlertingEngine,
+)
+from app.platform_verification.health_transition_intelligence.incident.incident_reconstruction_engine import (
+    IncidentReconstructionEngine,
+)
+from app.platform_verification.health_transition_intelligence.simulation.health_simulation_runner import (
+    HealthSimulationRunner,
+)
+from app.platform_verification.health_transition_intelligence.runtime.health_intelligence_runtime import (
+    HealthIntelligenceRuntime,
+)
 
 
 def test_health_state_machine():
@@ -73,7 +92,12 @@ def test_health_rule_engine():
     # Nominal snapshot -> READY
     nominal = {
         "service": {"memory_usage_pct": 60.0, "event_loop_latency_ms": 4.0},
-        "dependencies": {"postgres_available": True, "postgres_latency_ms": 10.0, "redis_available": True, "ai_latency_ms": 150.0},
+        "dependencies": {
+            "postgres_available": True,
+            "postgres_latency_ms": 10.0,
+            "redis_available": True,
+            "ai_latency_ms": 150.0,
+        },
     }
     state_nom, _ = rule_engine.evaluate_signals(nominal)
     assert state_nom == HealthState.READY
@@ -81,7 +105,12 @@ def test_health_rule_engine():
     # Database unavailable -> NOT_READY
     db_down = {
         "service": {"memory_usage_pct": 60.0, "event_loop_latency_ms": 4.0},
-        "dependencies": {"postgres_available": False, "postgres_latency_ms": 10.0, "redis_available": True, "ai_latency_ms": 150.0},
+        "dependencies": {
+            "postgres_available": False,
+            "postgres_latency_ms": 10.0,
+            "redis_available": True,
+            "ai_latency_ms": 150.0,
+        },
     }
     state_db, _ = rule_engine.evaluate_signals(db_down)
     assert state_db == HealthState.NOT_READY
@@ -89,7 +118,12 @@ def test_health_rule_engine():
     # Memory >95% -> DEGRADED
     mem_high = {
         "service": {"memory_usage_pct": 97.0, "event_loop_latency_ms": 4.0},
-        "dependencies": {"postgres_available": True, "postgres_latency_ms": 10.0, "redis_available": True, "ai_latency_ms": 150.0},
+        "dependencies": {
+            "postgres_available": True,
+            "postgres_latency_ms": 10.0,
+            "redis_available": True,
+            "ai_latency_ms": 150.0,
+        },
     }
     state_mem, _ = rule_engine.evaluate_signals(mem_high)
     assert state_mem == HealthState.DEGRADED

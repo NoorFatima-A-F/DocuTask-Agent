@@ -24,7 +24,8 @@ from .models import (
 class ISLASLOVerifier(ABC):
     @property
     @abstractmethod
-    def verifier_id(self) -> str: pass
+    def verifier_id(self) -> str:
+        pass
 
     @property
     def phase_id(self) -> str:
@@ -36,67 +37,81 @@ class ISLASLOVerifier(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str: pass
+    def name(self) -> str:
+        pass
 
     @abstractmethod
-    def verify(self) -> Any: pass
+    def verify(self) -> Any:
+        pass
 
 
 class ISLADefinitionVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> SLADefinitionReport: pass
+    def verify(self) -> SLADefinitionReport:
+        pass
 
 
 class ISLOImplementationVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> SLOConfigurationReport: pass
+    def verify(self) -> SLOConfigurationReport:
+        pass
 
 
 class IErrorBudgetVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> ErrorBudgetReport: pass
+    def verify(self) -> ErrorBudgetReport:
+        pass
 
 
 class IContinuousMonitoringVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> ContinuousMonitoringReport: pass
+    def verify(self) -> ContinuousMonitoringReport:
+        pass
 
 
 class IPerformanceRegressionVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceRegressionReport: pass
+    def verify(self) -> PerformanceRegressionReport:
+        pass
 
 
 class ILongRunningReliabilityVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> EndurancePerformanceReport: pass
+    def verify(self) -> EndurancePerformanceReport:
+        pass
 
 
 class IPerformanceAlertVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceAlertReport: pass
+    def verify(self) -> PerformanceAlertReport:
+        pass
 
 
 class IPerformanceIncidentVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceIncidentReport: pass
+    def verify(self) -> PerformanceIncidentReport:
+        pass
 
 
 class IPerformanceRecoveryVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceRecoveryReport: pass
+    def verify(self) -> PerformanceRecoveryReport:
+        pass
 
 
 class IDashboardValidationVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> DashboardValidationReport: pass
+    def verify(self) -> DashboardValidationReport:
+        pass
 
 
 class IPerformanceGovernanceVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceGovernanceReport: pass
+    def verify(self) -> PerformanceGovernanceReport:
+        pass
 
 
 class ICICDPerformancePipelineVerifier(ISLASLOVerifier):
     @abstractmethod
-    def verify(self) -> PerformancePipelineReport: pass
+    def verify(self) -> PerformancePipelineReport:
+        pass

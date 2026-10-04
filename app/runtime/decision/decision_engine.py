@@ -47,8 +47,12 @@ class MasterDecisionEngine:
             if event.category == EventCategory.PLANNER or "plan" in str(event.event_type).lower():
                 d_id = f"dec_{mission_id}_{idx}"
                 goal = event.payload.get("goal", "Execute document pipeline")
-                selected = event.payload.get("selected_strategy", event.payload.get("plan", "Adaptive Pareto Execution"))
-                why = event.payload.get("rationale", f"Selected strategy based on {event.stage} stage execution parameters.")
+                selected = event.payload.get(
+                    "selected_strategy", event.payload.get("plan", "Adaptive Pareto Execution")
+                )
+                why = event.payload.get(
+                    "rationale", f"Selected strategy based on {event.stage} stage execution parameters."
+                )
 
                 dec = DecisionProvenanceEngine.create_decision(
                     decision_id=d_id,

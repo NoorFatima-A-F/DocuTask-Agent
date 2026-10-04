@@ -70,13 +70,16 @@ async def test_circuit_breaker_half_open_recovery_thresholds(success_threshold):
     assert cb.failure_count == 0
 
 
-@pytest.mark.parametrize("fault_type", [
-    FaultType.WORKER_CRASH,
-    FaultType.NETWORK_FAILURE,
-    FaultType.DEPENDENCY_TIMEOUT,
-    FaultType.MEMORY_PRESSURE,
-    FaultType.LATENCY_JITTER,
-])
+@pytest.mark.parametrize(
+    "fault_type",
+    [
+        FaultType.WORKER_CRASH,
+        FaultType.NETWORK_FAILURE,
+        FaultType.DEPENDENCY_TIMEOUT,
+        FaultType.MEMORY_PRESSURE,
+        FaultType.LATENCY_JITTER,
+    ],
+)
 @pytest.mark.asyncio
 async def test_fault_injector_all_types(fault_type):
     injector = FaultInjector()

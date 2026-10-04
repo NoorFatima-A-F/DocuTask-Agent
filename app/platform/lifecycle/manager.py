@@ -41,7 +41,9 @@ class LifecycleManager:
         """Add event listener for lifecycle state transitions."""
         self._listeners.append(listener)
 
-    def _record_transition(self, component_id: str, from_state: str, to_state: str, success: bool = True, error: Optional[str] = None) -> None:
+    def _record_transition(
+        self, component_id: str, from_state: str, to_state: str, success: bool = True, error: Optional[str] = None
+    ) -> None:
         t = LifecycleTransition(
             component_id=component_id,
             from_state=from_state,
@@ -95,7 +97,13 @@ class LifecycleManager:
                 await comp.initialize()
                 self._record_transition(comp.name, LifecycleState.UNINITIALIZED.value, comp.state.value)
             except Exception as e:
-                self._record_transition(comp.name, LifecycleState.UNINITIALIZED.value, LifecycleState.FAILED.value, success=False, error=str(e))
+                self._record_transition(
+                    comp.name,
+                    LifecycleState.UNINITIALIZED.value,
+                    LifecycleState.FAILED.value,
+                    success=False,
+                    error=str(e),
+                )
                 self._state = LifecycleState.FAILED
                 raise LifecycleException(f"Failed to initialize component '{comp.name}': {str(e)}") from e
         self._state = LifecycleState.INITIALIZED
@@ -112,7 +120,13 @@ class LifecycleManager:
                 await comp.start()
                 self._record_transition(comp.name, LifecycleState.INITIALIZED.value, comp.state.value)
             except Exception as e:
-                self._record_transition(comp.name, LifecycleState.INITIALIZED.value, LifecycleState.FAILED.value, success=False, error=str(e))
+                self._record_transition(
+                    comp.name,
+                    LifecycleState.INITIALIZED.value,
+                    LifecycleState.FAILED.value,
+                    success=False,
+                    error=str(e),
+                )
                 self._state = LifecycleState.FAILED
                 raise LifecycleException(f"Failed to start component '{comp.name}': {str(e)}") from e
         self._state = LifecycleState.ACTIVE

@@ -2,18 +2,17 @@
 Environment Promotion Quality Gates.
 Enforces multi-tier criteria before allowing environment promotion.
 """
+
 from typing import Any, Dict, List, Optional, Tuple
 from app.platform_verification.environment_strategy.domain.models import (
-    EnvironmentClassification, EnvironmentQualityGateResult
+    EnvironmentClassification,
+    EnvironmentQualityGateResult,
 )
 
 
 class EnvironmentQualityGateEngine:
     def evaluate_gate(
-        self,
-        from_env: EnvironmentClassification,
-        to_env: EnvironmentClassification,
-        metrics: Dict[str, Any]
+        self, from_env: EnvironmentClassification, to_env: EnvironmentClassification, metrics: Dict[str, Any]
     ) -> EnvironmentQualityGateResult:
         criteria: Dict[str, bool] = {}
         blockers: List[str] = []
@@ -52,7 +51,7 @@ class EnvironmentQualityGateEngine:
             is_passed=is_passed,
             score=score,
             evaluated_criteria=criteria,
-            blockers=blockers
+            blockers=blockers,
         )
 
 

@@ -17,15 +17,12 @@ class PerformanceAnalyzer:
         sum_task_duration = sum(task_durations)
 
         # Theoretical parallelism factor = sum(task durations) / total execution duration
-        parallelism_factor = (
-            sum_task_duration / total_duration
-            if total_duration > 0.0 else 1.0
-        )
+        parallelism_factor = sum_task_duration / total_duration if total_duration > 0.0 else 1.0
 
         return {
             "total_duration_ms": total_duration,
             "sum_task_duration_ms": sum_task_duration,
             "parallelism_factor": parallelism_factor,
             "is_parallelized": parallelism_factor > 1.1,
-            "task_count": len(trace.tasks)
+            "task_count": len(trace.tasks),
         }

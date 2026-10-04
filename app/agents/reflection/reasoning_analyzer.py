@@ -19,7 +19,7 @@ class ReasoningAnalyzer(IReasoningAnalyzer):
                 "average_confidence": 1.0,
                 "unsupported_assertions_count": 0,
                 "assumptions_count": 0,
-                "reasoning_rigor_score": 1.0
+                "reasoning_rigor_score": 1.0,
             }
 
         confidences = [float(s.get("confidence_score", 1.0)) for s in reasoning_trace]
@@ -44,5 +44,5 @@ class ReasoningAnalyzer(IReasoningAnalyzer):
             "average_confidence": avg_confidence,
             "unsupported_assertions_count": unsupported,
             "assumptions_count": total_assumptions,
-            "reasoning_rigor_score": rigor_score
+            "reasoning_rigor_score": rigor_score,
         }

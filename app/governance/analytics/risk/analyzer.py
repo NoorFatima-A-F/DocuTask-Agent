@@ -71,7 +71,9 @@ class RiskAnalyzer:
             anomalies.append(f"Elevated frequency of high/critical risk events ({crit_count} detected)")
         for eid, item in entity_scores.items():
             if len(item) >= 3 and (sum(item) / len(item)) > 0.8:
-                anomalies.append(f"Entity '{eid}' exhibiting persistent critical risk score ({sum(item)/len(item):.2f})")
+                anomalies.append(
+                    f"Entity '{eid}' exhibiting persistent critical risk score ({sum(item) / len(item):.2f})"
+                )
 
         return RiskAnalysisSummary(
             tenant_id=tenant_id,

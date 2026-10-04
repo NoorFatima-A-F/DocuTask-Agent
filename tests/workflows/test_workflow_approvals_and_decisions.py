@@ -26,7 +26,9 @@ def test_human_approval_suspends_and_resumes():
         name="Approval Workflow",
         tasks=[
             TaskDefinition(id="extract", name="Extract", type=TaskType.SYSTEM),
-            TaskDefinition(id="manager_approval", name="Manager Approval", type=TaskType.APPROVAL, dependencies=["extract"]),
+            TaskDefinition(
+                id="manager_approval", name="Manager Approval", type=TaskType.APPROVAL, dependencies=["extract"]
+            ),
             TaskDefinition(id="finalize", name="Finalize", type=TaskType.SYSTEM, dependencies=["manager_approval"]),
         ],
     )
@@ -50,10 +52,12 @@ def test_human_approval_suspends_and_resumes():
     assert req.status == ApprovalStatus.APPROVED
 
     # 3. Resume workflow execution
-    resumed_rec = asyncio.run(runtime.resume_execution(
-        execution_id=record.execution_id,
-        definition=defn,
-        resumed_variables={"approved_by": "alice_manager"},
-    ))
+    resumed_rec = asyncio.run(
+        runtime.resume_execution(
+            execution_id=record.execution_id,
+            definition=defn,
+            resumed_variables={"approved_by": "alice_manager"},
+        )
+    )
 
     assert resumed_rec.status == ExecutionState.COMPLETED

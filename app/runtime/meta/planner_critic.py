@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class CriticDiagnosis(BaseModel):
     """Specific diagnostic finding from metacognitive review."""
+
     code: str
     severity: str = "MEDIUM"  # 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL'
     title: str
@@ -21,6 +22,7 @@ class CriticDiagnosis(BaseModel):
 
 class PlannerCritiqueReport(BaseModel):
     """Aggregate metacognitive critique of a mission plan."""
+
     mission_id: str
     strategy_id: str
     critique_score: float = Field(ge=0.0, le=1.0, description="1.0 = Flawless, 0.0 = Rejected")
@@ -67,7 +69,7 @@ class PlannerCritic:
                     code="OVERCONFIDENCE_BIAS",
                     severity="HIGH",
                     title="Overconfidence Under Elevated Risk",
-                    description=f"Confidence ({confidence_score*100:.1f}%) is disproportionate to risk score ({estimated_risk*100:.1f}%).",
+                    description=f"Confidence ({confidence_score * 100:.1f}%) is disproportionate to risk score ({estimated_risk * 100:.1f}%).",
                     remediation="Inject secondary AST verification layer and activate EVOI sensing checks.",
                 )
             )
@@ -81,7 +83,7 @@ class PlannerCritic:
 
         final_score = max(0.0, round(score, 4))
         summary = (
-            f"Metacognitive Critique: Score {final_score*100:.1f}%. "
+            f"Metacognitive Critique: Score {final_score * 100:.1f}%. "
             f"{len(diagnoses)} diagnoses found. Search Depth: {'ADEQUATE' if depth_adequate else 'SHALLOW'}."
         )
 

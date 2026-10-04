@@ -7,7 +7,9 @@ from fastapi import APIRouter
 from typing import Dict, Any
 import json
 
-from app.platform_verification.ai_health_monitoring.runtime.ai_health_monitoring_runtime import AIHealthMonitoringRuntime
+from app.platform_verification.ai_health_monitoring.runtime.ai_health_monitoring_runtime import (
+    AIHealthMonitoringRuntime,
+)
 from app.platform_verification.ai_health_monitoring.exporter.ai_monitoring_evidence_exporter import EnhancedJSONEncoder
 
 router = APIRouter(prefix="/health/ai-monitoring", tags=["AI Health Monitoring"])

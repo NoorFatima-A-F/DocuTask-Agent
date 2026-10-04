@@ -3,6 +3,7 @@ Part 9: Backup Metadata Engine.
 Generates and verifies cryptographic metadata records for all platform backups,
 providing immutable traceability, integrity verification, and audit readiness.
 """
+
 import uuid
 import hashlib
 from datetime import datetime, timezone
@@ -50,11 +51,22 @@ class BackupMetadataEngine(IMetadataEngine):
             sha256_hash = hashlib.sha256(payload_sample.encode("utf-8")).hexdigest()
 
             # Determine backup type
-            if "postgres" in asset.name or "raw" in asset.name or "evidence" in asset.name or "object_store" in asset.name:
+            if (
+                "postgres" in asset.name
+                or "raw" in asset.name
+                or "evidence" in asset.name
+                or "object_store" in asset.name
+            ):
                 b_type = BackupStrategyType.CONTINUOUS
             elif "artifact" in asset.name or "json" in asset.name or "memory" in asset.name or "registry" in asset.name:
                 b_type = BackupStrategyType.INCREMENTAL
-            elif "redis" in asset.name or "volume" in asset.name or "queue" in asset.name or "vector" in asset.name or "metrics" in asset.name:
+            elif (
+                "redis" in asset.name
+                or "volume" in asset.name
+                or "queue" in asset.name
+                or "vector" in asset.name
+                or "metrics" in asset.name
+            ):
                 b_type = BackupStrategyType.SNAPSHOT
             else:
                 b_type = BackupStrategyType.FULL
@@ -80,9 +92,7 @@ class BackupMetadataEngine(IMetadataEngine):
 
         return entries
 
-    def export_metadata_registry_json(
-        self, entries: List[BackupMetadataEntry]
-    ) -> Dict[str, Any]:
+    def export_metadata_registry_json(self, entries: List[BackupMetadataEntry]) -> Dict[str, Any]:
         """Formats the metadata registry to JSON dictionary."""
         return {
             "total_backups_registered": len(entries),

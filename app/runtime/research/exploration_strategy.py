@@ -39,13 +39,15 @@ class ThompsonSamplingBandit:
             a = self.alphas[arm]
             b = self.betas[arm]
             expected_mean = a / (a + b)
-            stats.append({
-                "arm": arm,
-                "pull_count": self.pull_counts[arm],
-                "alpha": round(a, 2),
-                "beta": round(b, 2),
-                "expected_reward": round(expected_mean, 4),
-            })
+            stats.append(
+                {
+                    "arm": arm,
+                    "pull_count": self.pull_counts[arm],
+                    "alpha": round(a, 2),
+                    "beta": round(b, 2),
+                    "expected_reward": round(expected_mean, 4),
+                }
+            )
         return stats
 
 

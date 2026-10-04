@@ -12,6 +12,7 @@ from app.agents.workflow.workflow_state import WorkflowState
 
 class WorkflowCheckpoint(BaseModel):
     """Durable checkpoint capturing completed nodes, variables, and lifecycle state."""
+
     checkpoint_id: UUID = Field(default_factory=uuid4)
     instance_id: UUID
     state: WorkflowLifecycleState

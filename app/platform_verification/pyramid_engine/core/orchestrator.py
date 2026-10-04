@@ -1,6 +1,7 @@
 """
 Verification Pyramid Orchestration Engine handling multi-level test runs, dependency gating, and reports.
 """
+
 from __future__ import annotations
 import uuid
 import time
@@ -117,15 +118,13 @@ class PyramidOrchestrator(ITestOrchestrator):
                 if record.status == PyramidExecutionStatus.FAILED:
                     defect = self.failure_manager.classify_failure(record)
                     defects_created.append(defect)
-                    blocking_failures.append(
-                        f"[{defect.severity.value}] {defect.title}: {defect.original_failure}"
-                    )
+                    blocking_failures.append(f"[{defect.severity.value}] {defect.title}: {defect.original_failure}")
 
             if summary.status == PyramidExecutionStatus.FAILED:
                 overall_status = PyramidExecutionStatus.FAILED
                 # Mark all remaining levels as BLOCKED
                 curr_idx = target_levels.index(level)
-                for rem_level in target_levels[curr_idx + 1:]:
+                for rem_level in target_levels[curr_idx + 1 :]:
                     rem_tests = grouped_tests.get(rem_level, [])
                     level_summaries[rem_level] = LevelExecutionSummary(
                         level=rem_level,
@@ -137,7 +136,9 @@ class PyramidOrchestrator(ITestOrchestrator):
                         status=PyramidExecutionStatus.BLOCKED,
                         pass_rate=0.0,
                     )
-                    blocking_failures.append(f"Level '{rem_level.value}' was BLOCKED due to failure in '{level.value}'.")
+                    blocking_failures.append(
+                        f"Level '{rem_level.value}' was BLOCKED due to failure in '{level.value}'."
+                    )
                 break
 
         total_duration = (time.time() - start_time) * 1000.0
@@ -163,6 +164,7 @@ class PyramidOrchestrator(ITestOrchestrator):
 
     def _default_class(self, level: VerificationLevel):
         from app.platform_verification.pyramid_engine.domain.models import TestClassification
+
         if level == VerificationLevel.L6_ADVERSARIAL:
             return TestClassification.SECURITY
         elif level == VerificationLevel.L5_PRODUCTION:

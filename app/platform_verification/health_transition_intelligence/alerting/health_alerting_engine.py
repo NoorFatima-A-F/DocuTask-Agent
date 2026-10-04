@@ -3,6 +3,7 @@ Health Alerting Engine (Part 3H.3.3.11).
 Evaluates health events to generate multi-tier alerts compatible with Prometheus AlertManager,
 Grafana, and incident management notification channels (CRITICAL, WARNING, RECOVERY).
 """
+
 from typing import List
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthEvent,
@@ -48,7 +49,9 @@ class HealthAlertingEngine:
                         timestamp=e.timestamp,
                     )
                 )
-            elif e.previous_state in [HealthState.NOT_READY, HealthState.RECOVERING] and e.new_state == HealthState.READY:
+            elif (
+                e.previous_state in [HealthState.NOT_READY, HealthState.RECOVERING] and e.new_state == HealthState.READY
+            ):
                 rec_count += 1
                 alerts.append(
                     AlertItem(

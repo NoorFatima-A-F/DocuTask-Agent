@@ -2,6 +2,7 @@
 Enterprise Verification Runtime: Master Dependency Injection Container and Facade.
 Assembles and coordinates the 15 specialized core components.
 """
+
 from typing import Dict, List, Any, Optional
 from ..components.registry.registry import VerificationRegistry
 from ..components.definitions.definition_manager import VerificationDefinitionManager
@@ -21,6 +22,7 @@ from ..components.orchestrator.orchestrator import VerificationOrchestrator
 from ..domain.models import (
     ComponentHealth,
 )
+
 
 class EnterpriseVerificationRuntime:
     _instance: Optional["EnterpriseVerificationRuntime"] = None
@@ -109,5 +111,5 @@ class EnterpriseVerificationRuntime:
             "environments_count": len(self.env_mgr.list_environments()),
             "completed_runs": len(self.orchestrator.list_runs()),
             "audit_ledger_size": len(self.audit_mgr.get_audit_trail()),
-            "chain_tamper_verified": self.audit_mgr.verify_chain_integrity()
+            "chain_tamper_verified": self.audit_mgr.verify_chain_integrity(),
         }

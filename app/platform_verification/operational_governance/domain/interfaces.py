@@ -1,6 +1,7 @@
 """
 Phase 3H.8: Domain Interfaces for Operational Governance Verification
 """
+
 from abc import ABC, abstractmethod
 from .models import (
     ChangeGovernanceReport,

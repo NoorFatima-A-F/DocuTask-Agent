@@ -3,6 +3,7 @@ Part 12: Observability Engine.
 Collects and exposes backup architecture metrics compatible with
 Prometheus, OpenTelemetry, and Grafana.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     VerificationStatus,
@@ -31,10 +32,10 @@ class ObservabilityEngine(IObservabilityEngine):
         verif_success_pct = (verified_count / total_backups * 100.0) if total_backups > 0 else 100.0
 
         total_bytes = sum(m.size_bytes for m in metadata_list)
-        total_gb = round(total_bytes / (1024 ** 3), 2)
-        avg_compression = round(
-            sum(m.compression_ratio for m in metadata_list) / total_backups, 2
-        ) if total_backups > 0 else 2.5
+        total_gb = round(total_bytes / (1024**3), 2)
+        avg_compression = (
+            round(sum(m.compression_ratio for m in metadata_list) / total_backups, 2) if total_backups > 0 else 2.5
+        )
 
         # Prometheus metrics exposition string
         prometheus_text = (

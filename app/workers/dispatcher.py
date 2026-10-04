@@ -22,10 +22,7 @@ class JobDispatcher:
     """Dispatcher managing job creation, queuing, and duplicate prevention."""
 
     def __init__(
-        self,
-        job_repo: ProcessingJobRepository,
-        doc_repo: DocumentRepository,
-        queue_provider: JobQueueProvider
+        self, job_repo: ProcessingJobRepository, doc_repo: DocumentRepository, queue_provider: JobQueueProvider
     ):
         self.job_repo = job_repo
         self.doc_repo = doc_repo
@@ -37,7 +34,7 @@ class JobDispatcher:
         owner: User,
         document_type: str = "generic",
         priority: int = 1,
-        force_reextract: bool = False
+        force_reextract: bool = False,
     ) -> ProcessingJobResponse:
         """
         Enqueues an asynchronous document extraction job with duplicate active job protection.
@@ -49,22 +46,28 @@ class JobDispatcher:
         # Duplicate job prevention: Check if active job already running for this document
         active_job = await self.job_repo.get_active_job_for_document(document_id)
         if active_job and not force_reextract:
-            logger.warning("Active job '%s' already running for document '%s'", sanitize_log_input(active_job.id), sanitize_log_input(document_id))
+            logger.warning(
+                "Active job '%s' already running for document '%s'",
+                sanitize_log_input(active_job.id),
+                sanitize_log_input(document_id),
+            )
             raise DuplicateJobException(
                 f"An active background job '{active_job.id}' is already processing this document."
             )
 
         # Create ProcessingJob record in database
-        job_record = await self.job_repo.create({
-            "document_id": document_id,
-            "job_type": JobType.DOCUMENT_PIPELINE.value,
-            "status": JobState.QUEUED.value,
-            "priority": priority,
-            "attempts": 0,
-            "max_attempts": 3,
-            "progress": 0.0,
-            "last_error": None
-        })
+        job_record = await self.job_repo.create(
+            {
+                "document_id": document_id,
+                "job_type": JobType.DOCUMENT_PIPELINE.value,
+                "status": JobState.QUEUED.value,
+                "priority": priority,
+                "attempts": 0,
+                "max_attempts": 3,
+                "progress": 0.0,
+                "last_error": None,
+            }
+        )
 
         # Update document status to QUEUED
         await self.doc_repo.update_status(doc, "QUEUED")
@@ -76,15 +79,15 @@ class JobDispatcher:
             job_type=JobType.DOCUMENT_PIPELINE.value,
             priority=priority,
             max_attempts=3,
-            payload={
-                "owner_id": str(owner.id),
-                "document_type": document_type,
-                "force_reextract": force_reextract
-            }
+            payload={"owner_id": str(owner.id), "document_type": document_type, "force_reextract": force_reextract},
         )
         await self.queue.enqueue(task)
 
-        logger.info("Dispatched background job '%s' for document '%s'", sanitize_log_input(job_record.id), sanitize_log_input(document_id))
+        logger.info(
+            "Dispatched background job '%s' for document '%s'",
+            sanitize_log_input(job_record.id),
+            sanitize_log_input(document_id),
+        )
         return ProcessingJobResponse.model_validate(job_record)
 
     async def get_job_status(self, job_id: UUID, owner: User) -> ProcessingJobResponse:
@@ -100,12 +103,7 @@ class JobDispatcher:
 
         return ProcessingJobResponse.model_validate(job)
 
-    async def list_user_jobs(
-        self,
-        owner: User,
-        page: int = 1,
-        page_size: int = 20
-    ) -> JobListResponse:
+    async def list_user_jobs(self, owner: User, page: int = 1, page_size: int = 20) -> JobListResponse:
         """Lists user background jobs with pagination."""
         page = max(1, page)
         page_size = max(1, min(100, page_size))
@@ -115,13 +113,7 @@ class JobDispatcher:
         pages = math.ceil(total / page_size) if total > 0 else 0
 
         items = [ProcessingJobResponse.model_validate(j) for j in jobs]
-        return JobListResponse(
-            items=items,
-            total=total,
-            page=page,
-            page_size=page_size,
-            pages=pages
-        )
+        return JobListResponse(items=items, total=total, page=page, page_size=page_size, pages=pages)
 
     async def cancel_job(self, job_id: UUID, owner: User) -> ProcessingJobResponse:
         """Cancels a queued or running job."""

@@ -91,14 +91,14 @@ class MissionEngine:
                 "token_distillation",
                 "ocr_batching",
                 "smart_caching",
-                "accuracy_verification"
+                "accuracy_verification",
             ],
             assigned_roles=[
                 AgentRole.CEO_AGENT,
                 AgentRole.CTO_AGENT,
                 AgentRole.FINANCE_AGENT,
                 AgentRole.ENGINEERING_AGENT,
-                AgentRole.ANALYST_AGENT
+                AgentRole.ANALYST_AGENT,
             ],
             objectives=[
                 MissionObjective(

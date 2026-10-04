@@ -29,10 +29,34 @@ class CloudSecretManagementVerifier(ICloudSecretManagementVerifier):
 
     def verify(self) -> CloudSecretReport:
         vaults = [
-            SecretVaultTarget(vault_name="AWS Secrets Manager", provider="AWS", kms_encryption="AWS KMS Customer Managed Key", rotation_supported=True, rbac_verified=True),
-            SecretVaultTarget(vault_name="Google Secret Manager", provider="GCP", kms_encryption="Google Cloud KMS", rotation_supported=True, rbac_verified=True),
-            SecretVaultTarget(vault_name="Azure Key Vault", provider="Azure", kms_encryption="Azure Managed HSM / Key Vault", rotation_supported=True, rbac_verified=True),
-            SecretVaultTarget(vault_name="HashiCorp Vault", provider="Multi-Cloud / On-Prem", kms_encryption="Vault Transit Engine", rotation_supported=True, rbac_verified=True),
+            SecretVaultTarget(
+                vault_name="AWS Secrets Manager",
+                provider="AWS",
+                kms_encryption="AWS KMS Customer Managed Key",
+                rotation_supported=True,
+                rbac_verified=True,
+            ),
+            SecretVaultTarget(
+                vault_name="Google Secret Manager",
+                provider="GCP",
+                kms_encryption="Google Cloud KMS",
+                rotation_supported=True,
+                rbac_verified=True,
+            ),
+            SecretVaultTarget(
+                vault_name="Azure Key Vault",
+                provider="Azure",
+                kms_encryption="Azure Managed HSM / Key Vault",
+                rotation_supported=True,
+                rbac_verified=True,
+            ),
+            SecretVaultTarget(
+                vault_name="HashiCorp Vault",
+                provider="Multi-Cloud / On-Prem",
+                kms_encryption="Vault Transit Engine",
+                rotation_supported=True,
+                rbac_verified=True,
+            ),
         ]
 
         checks = [

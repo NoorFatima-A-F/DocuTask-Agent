@@ -18,6 +18,7 @@ class ConstraintType(str, Enum):
 
 class PlanConstraint(BaseModel):
     """Execution constraint applied to a plan or plan node."""
+
     constraint_id: str
     constraint_type: ConstraintType = Field(default=ConstraintType.TIMEOUT)
     limit_value: float = Field(default=0.0)
@@ -57,4 +58,3 @@ class ConstraintBuilder:
             limit_value=self._limit,
             parameters=self._params,
         )
-

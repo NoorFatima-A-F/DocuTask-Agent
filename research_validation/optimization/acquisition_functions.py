@@ -12,7 +12,7 @@ import random
 
 def norm_pdf(x: float) -> float:
     """Standard normal probability density function."""
-    return math.exp(-0.5 * (x ** 2)) / math.sqrt(2.0 * math.pi)
+    return math.exp(-0.5 * (x**2)) / math.sqrt(2.0 * math.pi)
 
 
 def norm_cdf(x: float) -> float:

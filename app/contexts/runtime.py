@@ -2,6 +2,7 @@
 Master Contexts Runtime Container.
 Wires the 12 Bounded Contexts with clean separation of concerns and event publishing.
 """
+
 from typing import Optional
 
 from .verification.contracts import VerificationService, InMemoryVerificationRepository
@@ -19,8 +20,10 @@ from .plugins.contracts import PluginService, InMemoryPluginRepository
 from ..infrastructure.storage.cas_store import ContentAddressableStore
 from ..shared_kernel.events import get_event_bus
 
+
 class BoundedContextsRuntime:
     """Enterprise Master Container coordinating all 12 Bounded Contexts."""
+
     def __init__(self):
         self.cas_store = ContentAddressableStore()
         self.event_bus = get_event_bus()
@@ -38,7 +41,9 @@ class BoundedContextsRuntime:
         self.audit = AuditLedgerService(InMemoryAuditRepository())
         self.plugins = PluginService(InMemoryPluginRepository())
 
+
 _global_contexts_runtime: Optional[BoundedContextsRuntime] = None
+
 
 def get_contexts_runtime() -> BoundedContextsRuntime:
     global _global_contexts_runtime

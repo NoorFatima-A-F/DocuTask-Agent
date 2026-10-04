@@ -2,7 +2,6 @@
 Tests for Alert Rule Evaluation, Routing, Throttling, and SLO Error Budgets.
 """
 
-
 from app.infrastructure.observability.alerts.models import (
     AlertInstance,
     AlertRule,
@@ -62,12 +61,14 @@ def test_alert_rule_evaluation_and_auto_resolve():
 
 def test_alert_routing_and_dispatcher():
     router = AlertRouter()
-    router.add_route(AlertRouteRule(
-        route_id="route-sre-critical",
-        team="sre",
-        min_severity=AlertSeverity.CRITICAL,
-        channels=["pagerduty-sre", "slack-incidents"],
-    ))
+    router.add_route(
+        AlertRouteRule(
+            route_id="route-sre-critical",
+            team="sre",
+            min_severity=AlertSeverity.CRITICAL,
+            channels=["pagerduty-sre", "slack-incidents"],
+        )
+    )
 
     dispatcher = AlertDispatcher(router=router, cooldown_seconds=0.1)
 

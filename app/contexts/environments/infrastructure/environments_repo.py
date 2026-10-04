@@ -1,6 +1,7 @@
 from typing import Dict, Optional
 from ..domain.environments_domain import EnvironmentAggregate
 
+
 class InMemoryEnvironmentRepository:
     def __init__(self):
         self._store: Dict[str, EnvironmentAggregate] = {}

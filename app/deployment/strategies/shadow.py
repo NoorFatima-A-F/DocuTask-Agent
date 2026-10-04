@@ -1,4 +1,5 @@
 """Shadow Traffic Mirroring Strategy."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -8,6 +9,7 @@ import uuid
 @dataclass
 class ShadowComparison:
     """Telemetry comparing primary production response with shadowed release response."""
+
     request_id: str
     primary_status_code: int
     shadow_status_code: int
@@ -53,10 +55,7 @@ class ShadowStrategy:
         """Calculates response parity percentage (status match + payload match)."""
         if not self.comparisons:
             return 1.0
-        matching = sum(
-            1 for c in self.comparisons
-            if c.primary_status_code == c.shadow_status_code and c.payload_match
-        )
+        matching = sum(1 for c in self.comparisons if c.primary_status_code == c.shadow_status_code and c.payload_match)
         return matching / len(self.comparisons)
 
     def get_latency_metrics(self) -> Dict[str, float]:

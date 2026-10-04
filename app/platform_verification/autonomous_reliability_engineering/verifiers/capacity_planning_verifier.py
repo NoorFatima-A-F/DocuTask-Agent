@@ -2,6 +2,7 @@
 3I.12.5: Intelligent Capacity Planning Verifier
 Forecasts future infrastructure requirements across workers, database, and queue capacity.
 """
+
 from typing import List
 from app.platform_verification.autonomous_reliability_engineering.domain.models import (
     CapacityIntelligenceReport,

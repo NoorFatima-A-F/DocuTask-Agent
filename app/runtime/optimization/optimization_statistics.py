@@ -26,7 +26,8 @@ class OptimizationStatistics:
                 o1 = frontier[i].get("objectives", frontier[i])
                 o2 = frontier[i + 1].get("objectives", frontier[i + 1])
                 numeric_keys = [
-                    k for k in o1.keys()
+                    k
+                    for k in o1.keys()
                     if k in o2 and isinstance(o1[k], (int, float)) and isinstance(o2[k], (int, float))
                 ]
                 dist = math.sqrt(sum((float(o1[k]) - float(o2[k])) ** 2 for k in numeric_keys)) if numeric_keys else 0.0

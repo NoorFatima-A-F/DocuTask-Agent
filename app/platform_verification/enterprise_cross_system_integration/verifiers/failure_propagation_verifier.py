@@ -25,11 +25,41 @@ class FailurePropagationVerifier(IFailurePropagationVerifier):
 
     def verify(self) -> FailurePropagationReport:
         drills = [
-            FailurePropagationDrill(failed_subsystem="LLMProvider", failure_type="503Unavailable", blast_radius_isolated=True, circuit_breaker_tripped=True, graceful_fallback_activated=True),
-            FailurePropagationDrill(failed_subsystem="KnowledgeVectorStore", failure_type="ConnectionTimeout", blast_radius_isolated=True, circuit_breaker_tripped=True, graceful_fallback_activated=True),
-            FailurePropagationDrill(failed_subsystem="WorkerAgentNode", failure_type="SuddenSIGKILL", blast_radius_isolated=True, circuit_breaker_tripped=False, graceful_fallback_activated=True),
-            FailurePropagationDrill(failed_subsystem="PostgreSQLDatabase", failure_type="PrimaryReplicaFailover", blast_radius_isolated=True, circuit_breaker_tripped=True, graceful_fallback_activated=True),
-            FailurePropagationDrill(failed_subsystem="MarketplaceService", failure_type="InternalServerError", blast_radius_isolated=True, circuit_breaker_tripped=True, graceful_fallback_activated=True),
+            FailurePropagationDrill(
+                failed_subsystem="LLMProvider",
+                failure_type="503Unavailable",
+                blast_radius_isolated=True,
+                circuit_breaker_tripped=True,
+                graceful_fallback_activated=True,
+            ),
+            FailurePropagationDrill(
+                failed_subsystem="KnowledgeVectorStore",
+                failure_type="ConnectionTimeout",
+                blast_radius_isolated=True,
+                circuit_breaker_tripped=True,
+                graceful_fallback_activated=True,
+            ),
+            FailurePropagationDrill(
+                failed_subsystem="WorkerAgentNode",
+                failure_type="SuddenSIGKILL",
+                blast_radius_isolated=True,
+                circuit_breaker_tripped=False,
+                graceful_fallback_activated=True,
+            ),
+            FailurePropagationDrill(
+                failed_subsystem="PostgreSQLDatabase",
+                failure_type="PrimaryReplicaFailover",
+                blast_radius_isolated=True,
+                circuit_breaker_tripped=True,
+                graceful_fallback_activated=True,
+            ),
+            FailurePropagationDrill(
+                failed_subsystem="MarketplaceService",
+                failure_type="InternalServerError",
+                blast_radius_isolated=True,
+                circuit_breaker_tripped=True,
+                graceful_fallback_activated=True,
+            ),
         ]
 
         checks = [

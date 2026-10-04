@@ -63,7 +63,7 @@ class StructuredOutputParser:
 
         # Repair pass 1: Replace unescaped newlines within string literals
         try:
-            repaired = re.sub(r'(?<!\\)\n', r'\\n', cleaned)
+            repaired = re.sub(r"(?<!\\)\n", r"\\n", cleaned)
             parsed = json.loads(repaired)
             if isinstance(parsed, dict):
                 return parsed

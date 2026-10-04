@@ -24,7 +24,11 @@ class WorkerReflector:
     def reflect(cls, mission_id: str, events: Optional[List[Dict[str, Any]]] = None) -> WorkerReflectionMetrics:
         if events:
             worker_evs = [e for e in events if "worker" in (e.get("event_type") or "").lower()]
-            errs = [e for e in worker_evs if "fail" in (e.get("event_type") or "").lower() or "error" in (e.get("event_type") or "").lower()]
+            errs = [
+                e
+                for e in worker_evs
+                if "fail" in (e.get("event_type") or "").lower() or "error" in (e.get("event_type") or "").lower()
+            ]
             rel = (len(worker_evs) - len(errs)) / max(len(worker_evs), 1)
             return WorkerReflectionMetrics(
                 total_worker_tasks=max(len(worker_evs), 6),

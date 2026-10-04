@@ -1,4 +1,5 @@
 """Unit tests for Artifact Management Platform."""
+
 import pytest
 from app.deployment.artifacts.registry import ArtifactRegistry
 from app.deployment.artifacts.versions import ArtifactVersion

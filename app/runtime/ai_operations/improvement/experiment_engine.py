@@ -8,6 +8,7 @@ import math
 import random
 from datetime import datetime, timezone
 from typing import Dict, List
+
 try:
     import numpy as np
 except ImportError:  # pragma: no cover

@@ -1,6 +1,7 @@
 """
 Phase 3H.4.9.4: Health Based Recovery Validation Verifier
 """
+
 import uuid
 from ..domain.interfaces import IHealthValidationVerifier
 from ..domain.models import (
@@ -17,7 +18,9 @@ class HealthValidationVerifier(IHealthValidationVerifier):
             DependencyHealthCheck(dependency_name="Redis", status="HEALTHY", latency_ms=0.6, healthy=True),
             DependencyHealthCheck(dependency_name="Storage_MinIO", status="HEALTHY", latency_ms=4.2, healthy=True),
             DependencyHealthCheck(dependency_name="WorkerPool", status="HEALTHY", latency_ms=2.1, healthy=True),
-            DependencyHealthCheck(dependency_name="Gemini_AI_Provider", status="HEALTHY", latency_ms=18.5, healthy=True),
+            DependencyHealthCheck(
+                dependency_name="Gemini_AI_Provider", status="HEALTHY", latency_ms=18.5, healthy=True
+            ),
         ]
 
         functional_test = ApplicationFunctionalTestResult(

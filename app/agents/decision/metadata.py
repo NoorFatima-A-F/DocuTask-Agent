@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class DecisionIdentity(BaseModel):
     """Immutable Decision Identity."""
+
     decision_id: UUID = Field(default_factory=uuid4)
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     execution_id: Optional[str] = Field(default=None)
@@ -24,6 +25,7 @@ class DecisionIdentity(BaseModel):
 
 class DecisionStatistics(BaseModel):
     """Evaluation operational metrics."""
+
     evaluation_duration_ms: float = Field(default=0.0, ge=0.0)
     rules_evaluated_count: int = Field(default=0, ge=0)
     policies_evaluated_count: int = Field(default=0, ge=0)
@@ -35,6 +37,7 @@ class DecisionStatistics(BaseModel):
 
 class DecisionMetadata(BaseModel):
     """Metadata parameters for a decision record."""
+
     decision_type: str = Field(default="OPERATIONAL")
     evaluator_version: str = Field(default="v1.0")
     security_classification: str = Field(default="INTERNAL")
@@ -47,6 +50,7 @@ class DecisionMetadata(BaseModel):
 
 class DecisionTrace(BaseModel):
     """Detailed execution trace of decision evaluation."""
+
     trace_id: str = Field(default_factory=lambda: uuid4().hex)
     evaluated_policy_ids: List[str] = Field(default_factory=list)
     triggered_rule_ids: List[str] = Field(default_factory=list)

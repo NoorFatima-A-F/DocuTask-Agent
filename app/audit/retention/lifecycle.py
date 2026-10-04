@@ -84,7 +84,11 @@ class RetentionLifecycleManager:
 
         # Default 365-day archive policy if no custom policy set
         if not tenant_policies:
-            tenant_policies = [RetentionPolicy(tenant_id=tenant_id, name="Default Archive", action=RetentionAction.ARCHIVE, retention_days=365)]
+            tenant_policies = [
+                RetentionPolicy(
+                    tenant_id=tenant_id, name="Default Archive", action=RetentionAction.ARCHIVE, retention_days=365
+                )
+            ]
 
         eligible_archive: List[str] = []
         eligible_delete: List[str] = []
@@ -97,7 +101,7 @@ class RetentionLifecycleManager:
 
             # Find matching policy
             age_days = (now - ev.timestamp).total_seconds() / 86400.0
-            
+
             for pol in tenant_policies:
                 if pol.action == RetentionAction.PERMANENT_RETENTION:
                     continue

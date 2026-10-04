@@ -160,18 +160,11 @@ def test_checkpointing_and_recovery():
     checkpoint_mgr = CheckpointManager()
     exec_id = uuid4()
 
-    node_states = {
-        "A": ExecutionLifecycleState.COMPLETED,
-        "B": ExecutionLifecycleState.FAILED
-    }
+    node_states = {"A": ExecutionLifecycleState.COMPLETED, "B": ExecutionLifecycleState.FAILED}
     outputs = {"A": {"result": "ok"}}
 
     snapshot = checkpoint_mgr.create_checkpoint(
-        execution_id=exec_id,
-        trigger="POST_TASK",
-        node_states=node_states,
-        outputs=outputs,
-        completed_nodes=["A"]
+        execution_id=exec_id, trigger="POST_TASK", node_states=node_states, outputs=outputs, completed_nodes=["A"]
     )
 
     assert snapshot.metadata.execution_id == exec_id
@@ -190,13 +183,7 @@ def test_checkpointing_and_recovery():
 @pytest.mark.asyncio
 async def test_rollback_engine():
     """Verifies RollbackEngine executing node and workflow rollbacks."""
-    graph = (
-        GraphBuilder("rb_g")
-        .add_node("A", "Node A")
-        .add_node("B", "Node B")
-        .add_edge("A", "B")
-        .build()
-    )
+    graph = GraphBuilder("rb_g").add_node("A", "Node A").add_node("B", "Node B").add_edge("A", "B").build()
     exec_graph = ExecutionGraph(graph)
     exec_graph.update_node_state("A", ExecutionLifecycleState.COMPLETED)
     exec_graph.update_node_state("B", ExecutionLifecycleState.FAILED)
@@ -252,13 +239,7 @@ def test_retry_manager_and_budget():
 
 def test_builders_and_serialization():
     """Verifies fluent builders suite and JSON serialization."""
-    ctx = (
-        RuntimeContextBuilder()
-        .with_tenant("tenant_01")
-        .with_concurrency(8)
-        .with_token_limit(10000)
-        .build()
-    )
+    ctx = RuntimeContextBuilder().with_tenant("tenant_01").with_concurrency(8).with_token_limit(10000).build()
     assert ctx.tenant_id == "tenant_01"
     assert ctx.max_concurrency == 8
 

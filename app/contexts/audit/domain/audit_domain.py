@@ -2,10 +2,12 @@ from dataclasses import dataclass, field
 from typing import Dict, Any
 from app.shared_kernel import BaseEntity, DomainEvent
 
+
 @dataclass
 class AuditRecordAppended(DomainEvent):
     record_id: str = ""
     event_type: str = ""
+
 
 @dataclass
 class AuditRecordAggregate(BaseEntity):

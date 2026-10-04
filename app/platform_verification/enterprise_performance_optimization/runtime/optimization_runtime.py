@@ -86,10 +86,7 @@ class OptimizationRuntime:
 
     def run_verifier(self, verifier_id: str) -> Optional[BaseVerificationReport]:
         for verifier in self.verifiers:
-            if (
-                verifier.verifier_id.lower() == verifier_id.lower()
-                or verifier.phase_id.lower() == verifier_id.lower()
-            ):
+            if verifier.verifier_id.lower() == verifier_id.lower() or verifier.phase_id.lower() == verifier_id.lower():
                 report = verifier.verify()
                 self.exporter.export_report(report)
                 return report

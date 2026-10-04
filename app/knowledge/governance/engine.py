@@ -31,6 +31,7 @@ CLEARANCE_RANKS: Dict[ClassificationLevel, int] = {
 
 class UserSecurityContext(BaseModel):
     """Identity, role, and clearance attributes of the requesting user or agent."""
+
     user_id: str
     organization_id: str = "org-default"
     workspace_id: str = "ws-default"

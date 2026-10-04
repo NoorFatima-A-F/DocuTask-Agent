@@ -46,7 +46,11 @@ class InvestigationManager:
     VALID_TRANSITIONS: Dict[CaseLifecycleState, List[CaseLifecycleState]] = {
         CaseLifecycleState.OPEN: [CaseLifecycleState.TRIAGED, CaseLifecycleState.CLOSED],
         CaseLifecycleState.TRIAGED: [CaseLifecycleState.INVESTIGATING, CaseLifecycleState.CLOSED],
-        CaseLifecycleState.INVESTIGATING: [CaseLifecycleState.EVIDENCE_COLLECTED, CaseLifecycleState.RESOLVED, CaseLifecycleState.CLOSED],
+        CaseLifecycleState.INVESTIGATING: [
+            CaseLifecycleState.EVIDENCE_COLLECTED,
+            CaseLifecycleState.RESOLVED,
+            CaseLifecycleState.CLOSED,
+        ],
         CaseLifecycleState.EVIDENCE_COLLECTED: [CaseLifecycleState.RESOLVED, CaseLifecycleState.INVESTIGATING],
         CaseLifecycleState.RESOLVED: [CaseLifecycleState.CLOSED, CaseLifecycleState.INVESTIGATING],
         CaseLifecycleState.CLOSED: [],

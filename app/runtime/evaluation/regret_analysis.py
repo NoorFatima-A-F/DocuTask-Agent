@@ -37,11 +37,7 @@ class RegretAnalyzer:
         avg_regret = cum / n if n > 0 else 0.0
 
         # Sublinear test: check if average regret is decreasing over time
-        is_sublinear = (
-            cum_regrets[-1] / n <= (cum_regrets[max(0, n // 2)] / max(1, n // 2)) + 0.01
-            if n > 4
-            else True
-        )
+        is_sublinear = cum_regrets[-1] / n <= (cum_regrets[max(0, n // 2)] / max(1, n // 2)) + 0.01 if n > 4 else True
 
         return {
             "instantaneous_regrets": instant_regrets,

@@ -1,8 +1,10 @@
 """
 1. Enterprise Workforce Registry Subsystem
 """
+
 from typing import Dict, List, Optional
 from app.platform_workforce.models.schemas import DigitalEmployee, EmployeeRole, DepartmentType, EmployeeStatus
+
 
 class WorkforceRegistry:
     def __init__(self):
@@ -21,7 +23,7 @@ class WorkforceRegistry:
                 skills=["Strategic Planning", "Autonomous Governance", "Resource Allocation", "Executive Leadership"],
                 security_clearance="TOP_SECRET",
                 trust_score=0.99,
-                hourly_salary_usd=5.00
+                hourly_salary_usd=5.00,
             ),
             DigitalEmployee(
                 id="emp-eng-vp",
@@ -33,7 +35,7 @@ class WorkforceRegistry:
                 skills=["Distributed Architecture", "System Design", "Cloud Infrastructure", "Fleet Orchestration"],
                 security_clearance="TOP_SECRET",
                 trust_score=0.98,
-                hourly_salary_usd=4.00
+                hourly_salary_usd=4.00,
             ),
             DigitalEmployee(
                 id="emp-sec-dir",
@@ -45,7 +47,7 @@ class WorkforceRegistry:
                 skills=["Zero-Trust Verification", "Forensic Auditing", "Compliance Guardrails", "Threat Defense"],
                 security_clearance="TOP_SECRET",
                 trust_score=0.99,
-                hourly_salary_usd=3.50
+                hourly_salary_usd=3.50,
             ),
             DigitalEmployee(
                 id="emp-eng-mgr",
@@ -57,7 +59,7 @@ class WorkforceRegistry:
                 skills=["Workload Balancing", "Sprint Orchestration", "Code Review", "Team Coaching"],
                 security_clearance="SECRET",
                 trust_score=0.96,
-                hourly_salary_usd=3.00
+                hourly_salary_usd=3.00,
             ),
             DigitalEmployee(
                 id="emp-doc-spec-01",
@@ -69,7 +71,7 @@ class WorkforceRegistry:
                 skills=["Document Extraction", "OCR Verification", "Multi-modal Parsing", "Knowledge Extraction"],
                 security_clearance="CONFIDENTIAL",
                 trust_score=0.97,
-                hourly_salary_usd=2.50
+                hourly_salary_usd=2.50,
             ),
             DigitalEmployee(
                 id="emp-qa-rev-01",
@@ -81,12 +83,17 @@ class WorkforceRegistry:
                 skills=["Automated Validation", "Invariant Checking", "Regression Testing", "Critique Analysis"],
                 security_clearance="CONFIDENTIAL",
                 trust_score=0.98,
-                hourly_salary_usd=2.00
+                hourly_salary_usd=2.00,
             ),
         ]
         self._employees[tenant] = {e.id: e for e in defaults}
 
-    def get_employees(self, tenant_id: str = "default-tenant", department: Optional[DepartmentType] = None, role: Optional[EmployeeRole] = None) -> List[DigitalEmployee]:
+    def get_employees(
+        self,
+        tenant_id: str = "default-tenant",
+        department: Optional[DepartmentType] = None,
+        role: Optional[EmployeeRole] = None,
+    ) -> List[DigitalEmployee]:
         emps = list(self._employees.get(tenant_id, {}).values())
         if department:
             emps = [e for e in emps if e.department == department]
@@ -103,13 +110,17 @@ class WorkforceRegistry:
         self._employees[employee.tenant_id][employee.id] = employee
         return employee
 
-    def update_employee_status(self, employee_id: str, status: EmployeeStatus, tenant_id: str = "default-tenant") -> Optional[DigitalEmployee]:
+    def update_employee_status(
+        self, employee_id: str, status: EmployeeStatus, tenant_id: str = "default-tenant"
+    ) -> Optional[DigitalEmployee]:
         emp = self.get_employee(employee_id, tenant_id)
         if emp:
             emp.availability_status = status
         return emp
 
-    def record_task_completion(self, employee_id: str, success: bool, latency_ms: float, tenant_id: str = "default-tenant") -> Optional[DigitalEmployee]:
+    def record_task_completion(
+        self, employee_id: str, success: bool, latency_ms: float, tenant_id: str = "default-tenant"
+    ) -> Optional[DigitalEmployee]:
         emp = self.get_employee(employee_id, tenant_id)
         if emp:
             emp.lifetime_tasks_completed += 1
@@ -125,5 +136,6 @@ class WorkforceRegistry:
             else:
                 emp.trust_score = max(0.50, round(emp.trust_score - 0.02, 3))
         return emp
+
 
 workforce_registry = WorkforceRegistry()

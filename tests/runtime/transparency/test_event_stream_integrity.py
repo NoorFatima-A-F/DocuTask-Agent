@@ -2,6 +2,7 @@
 Test Suite: Event Stream Integrity & Timeline Builder
 Validates unforgeable timeline construction, state machine transitions, worker monitor, and runtime metrics.
 """
+
 import time
 from app.runtime.observability.timeline_builder import TimelineBuilder
 from app.runtime.observability.execution_state import ExecutionStateManager
@@ -40,7 +41,7 @@ def test_timeline_builder_event_sorting_and_transformation():
 
 def test_execution_state_manager_lifecycle():
     manager = ExecutionStateManager()
-    
+
     # Check default active mission
     snap = manager.get_mission_snapshot("mission_live_001")
     assert snap is not None
@@ -63,7 +64,7 @@ def test_execution_state_manager_lifecycle():
 
 def test_worker_monitor_telemetry():
     monitor = WorkerMonitor()
-    
+
     workers = monitor.list_workers()
     assert len(workers) >= 4
 
@@ -81,7 +82,7 @@ def test_worker_monitor_telemetry():
 
 def test_live_runtime_metrics_aggregation():
     metrics = LiveRuntimeMetrics(window_seconds=30.0)
-    
+
     metrics.record_mission_completion(latency_ms=350.0, tokens=1500)
     metrics.record_mission_completion(latency_ms=400.0, tokens=2000)
 

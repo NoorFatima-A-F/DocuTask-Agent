@@ -110,50 +110,56 @@ class EvidenceGenerator:
                 f"`{sec.passed_assertions_count}/{sec.total_assertions_count}` | **{sec.status.value}** |"
             )
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "## Detailed Section Audits",
-            "",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "## Detailed Section Audits",
+                "",
+            ]
+        )
 
         for sec_key, sec in sc.sections.items():
-            lines.extend([
-                f"### {sec.title}",
-                "",
-                f"> {sec.description}",
-                "",
-                f"- **Status**: `{sec.status.value}`",
-                f"- **Section Score**: `{sec.score:.1f}%`",
-                f"- **Execution Time**: `{sec.execution_time_ms:.2f} ms`",
-                "",
-                "#### Verified Assertions:",
-            ])
+            lines.extend(
+                [
+                    f"### {sec.title}",
+                    "",
+                    f"> {sec.description}",
+                    "",
+                    f"- **Status**: `{sec.status.value}`",
+                    f"- **Section Score**: `{sec.score:.1f}%`",
+                    f"- **Execution Time**: `{sec.execution_time_ms:.2f} ms`",
+                    "",
+                    "#### Verified Assertions:",
+                ]
+            )
             for a in sec.assertions:
                 badge = "[PASS]" if a.passed else "[FAIL]"
                 lines.append(f"- {badge} **`{a.name}`**: {a.message} (`{a.execution_time_ms:.2f} ms`)")
             lines.append("")
 
-        lines.extend([
-            "---",
-            "",
-            "## Cryptographic Integrity & Evidence Ledger",
-            "",
-            "All empirical telemetry, test logs, and section results are cryptographically signed and tracked in `./core_services_verification_evidence/manifest.json`.",
-            "",
-            "```json",
-            json.dumps(
-                {
-                    "program": "Part 4 Core Services Verification",
-                    "status": "100% VERIFIED",
-                    "composite_score": sc.composite_score,
-                    "grade": sc.grade,
-                },
-                indent=2,
-            ),
-            "```",
-            "",
-        ])
+        lines.extend(
+            [
+                "---",
+                "",
+                "## Cryptographic Integrity & Evidence Ledger",
+                "",
+                "All empirical telemetry, test logs, and section results are cryptographically signed and tracked in `./core_services_verification_evidence/manifest.json`.",
+                "",
+                "```json",
+                json.dumps(
+                    {
+                        "program": "Part 4 Core Services Verification",
+                        "status": "100% VERIFIED",
+                        "composite_score": sc.composite_score,
+                        "grade": sc.grade,
+                    },
+                    indent=2,
+                ),
+                "```",
+                "",
+            ]
+        )
 
         return "\n".join(lines)

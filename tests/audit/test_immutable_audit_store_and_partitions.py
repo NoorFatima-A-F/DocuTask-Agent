@@ -44,10 +44,10 @@ def test_audit_repository_multi_key_lookups():
                 event_id=f"repo_evt_{i}",
                 event_type="agent.step",
                 tenant_id="tenant_repo",
-                actor_id=f"agent_{i%2}",
+                actor_id=f"agent_{i % 2}",
                 action="step",
                 resource_type="agent",
-                resource_id=f"agent_res_{i%2}",
+                resource_id=f"agent_res_{i % 2}",
                 correlation_id="corr_shared_100",
                 request_id=f"req_{i}",
             )

@@ -34,9 +34,7 @@ class DocumentService:
     """Service providing document ingestion, validation, storage, and lifecycle management."""
 
     # Disallowed dangerous extensions for executable attack prevention
-    DANGEROUS_EXTENSIONS = {
-        ".exe", ".bat", ".cmd", ".sh", ".bash", ".php", ".js", ".vbs", ".ps1", ".jar", ".py"
-    }
+    DANGEROUS_EXTENSIONS = {".exe", ".bat", ".cmd", ".sh", ".bash", ".php", ".js", ".vbs", ".ps1", ".jar", ".py"}
 
     # File magic byte header signatures for file content validation
     FILE_SIGNATURES = {
@@ -48,18 +46,14 @@ class DocumentService:
         ".tif": [b"II*\x00", b"MM\x00*"],
     }
 
-    def __init__(
-        self,
-        document_repo: DocumentRepository,
-        storage_provider: StorageProvider
-    ):
+    def __init__(self, document_repo: DocumentRepository, storage_provider: StorageProvider):
         self.doc_repo = document_repo
         self.storage = storage_provider
 
     def validate_file(self, content: bytes, original_filename: str, mime_type: str) -> None:
         """
         Validates uploaded file parameters against security rules and magic byte signatures.
-        
+
         :raises ValidationAppException: If file fails validation criteria
         """
         # 1. Empty file check
@@ -73,9 +67,7 @@ class DocumentService:
             logger.warning(
                 f"Upload validation failure: File '{original_filename}' size ({len(content)} bytes) exceeds limit ({settings.MAX_UPLOAD_SIZE_MB}MB)"
             )
-            raise ValidationAppException(
-                f"File size exceeds maximum allowed limit of {settings.MAX_UPLOAD_SIZE_MB} MB"
-            )
+            raise ValidationAppException(f"File size exceeds maximum allowed limit of {settings.MAX_UPLOAD_SIZE_MB} MB")
 
         # 3. Filename sanitization & length check
         if not original_filename or len(original_filename) > settings.MAX_FILENAME_LENGTH:
@@ -100,7 +92,9 @@ class DocumentService:
             raise ValidationAppException(f"Forbidden executable file extension '{ext}'")
 
         if ext not in [e.lower() for e in settings.ALLOWED_EXTENSIONS]:
-            logger.warning(f"Unsupported extension rejected: '{sanitize_log_input(ext)}' for file '{sanitize_log_input(original_filename)}'")
+            logger.warning(
+                f"Unsupported extension rejected: '{sanitize_log_input(ext)}' for file '{sanitize_log_input(original_filename)}'"
+            )
             raise ValidationAppException(
                 f"File extension '{ext}' is not supported. Allowed extensions: {', '.join(settings.ALLOWED_EXTENSIONS)}"
             )
@@ -117,17 +111,27 @@ class DocumentService:
         clean_mime = mime_type.lower().split(";")[0].strip() if mime_type else ""
         allowed_mimes = [m.lower() for m in settings.ALLOWED_MIME_TYPES]
         if clean_mime not in allowed_mimes:
-            logger.warning("Unsupported MIME type rejected: '%s' for file '%s'", sanitize_log_input(clean_mime), sanitize_log_input(original_filename))
-            raise ValidationAppException(
-                f"File MIME type '{clean_mime}' is not supported."
+            logger.warning(
+                "Unsupported MIME type rejected: '%s' for file '%s'",
+                sanitize_log_input(clean_mime),
+                sanitize_log_input(original_filename),
             )
+            raise ValidationAppException(f"File MIME type '{clean_mime}' is not supported.")
 
         # 8. Magic Bytes / File Header Signature Verification
-        is_test_env = "pytest" in sys.modules or getattr(settings, "ENVIRONMENT", "").lower() in ("test", "testing") or os.getenv("APP_ENV") == "test"
+        is_test_env = (
+            "pytest" in sys.modules
+            or getattr(settings, "ENVIRONMENT", "").lower() in ("test", "testing")
+            or os.getenv("APP_ENV") == "test"
+        )
         if ext in self.FILE_SIGNATURES and not is_test_env:
             expected_sigs = self.FILE_SIGNATURES[ext]
             if not any(content.startswith(sig) for sig in expected_sigs):
-                logger.error("Magic bytes signature mismatch for file '%s': Extension='%s'", sanitize_log_input(original_filename), sanitize_log_input(ext))
+                logger.error(
+                    "Magic bytes signature mismatch for file '%s': Extension='%s'",
+                    sanitize_log_input(original_filename),
+                    sanitize_log_input(ext),
+                )
                 raise ValidationAppException(
                     f"File content magic byte header does not match declared extension '{ext}'."
                 )
@@ -137,17 +141,17 @@ class DocumentService:
         return hashlib.sha256(content).hexdigest()
 
     async def upload_document(
-        self,
-        content: bytes,
-        original_filename: str,
-        mime_type: str,
-        owner: User
+        self, content: bytes, original_filename: str, mime_type: str, owner: User
     ) -> UploadResponse:
         """
         Ingests file, performs security validation, checks SHA256 duplicate detection,
         stores file safely, and records metadata in database with transactional rollback safety.
         """
-        logger.info("Document upload initiated by user '%s': File='%s'", sanitize_log_input(owner.username), sanitize_log_input(original_filename))
+        logger.info(
+            "Document upload initiated by user '%s': File='%s'",
+            sanitize_log_input(owner.username),
+            sanitize_log_input(original_filename),
+        )
 
         # Validate file parameters & magic bytes
         self.validate_file(content, original_filename, mime_type)
@@ -158,19 +162,20 @@ class DocumentService:
         # Duplicate Detection
         existing_doc = await self.doc_repo.get_by_hash(sha256_h, owner_id=owner.id)
         if existing_doc:
-            logger.info("Duplicate document detected for user '%s': Hash=%s...", sanitize_log_input(owner.id), sha256_h[:10])
+            logger.info(
+                "Duplicate document detected for user '%s': Hash=%s...", sanitize_log_input(owner.id), sha256_h[:10]
+            )
             doc_resp = DocumentResponse.model_validate(existing_doc)
             return UploadResponse(
                 document=doc_resp,
                 is_duplicate=True,
-                message="Duplicate document detected. Returned existing document record."
+                message="Duplicate document detected. Returned existing document record.",
             )
 
         # Store binary file on storage provider
         ext = Path(original_filename).suffix.lower()
         stored_filename, rel_path, abs_path = await self.storage.save(
-            content=content,
-            original_filename=original_filename
+            content=content, original_filename=original_filename
         )
 
         # Record metadata in DB with transactional rollback protection
@@ -185,24 +190,22 @@ class DocumentService:
                 "mime_type": mime_type.lower().split(";")[0].strip(),
                 "file_size": len(content),
                 "sha256_hash": sha256_h,
-                "upload_status": "QUEUED"
+                "upload_status": "QUEUED",
             }
 
             new_doc = await self.doc_repo.create(doc_data)
         except Exception as exc:
             # Database creation failure: Delete stored file from disk to prevent orphaned files!
-            logger.error(f"Database commit failed after file save. Rolling back file storage for '{stored_filename}': {str(exc)}")
+            logger.error(
+                f"Database commit failed after file save. Rolling back file storage for '{stored_filename}': {str(exc)}"
+            )
             await self.storage.delete(rel_path)
             raise exc
 
         logger.info(f"Document successfully created: ID={new_doc.id}, File='{stored_filename}'")
 
         doc_resp = DocumentResponse.model_validate(new_doc)
-        return UploadResponse(
-            document=doc_resp,
-            is_duplicate=False,
-            message="Document uploaded successfully."
-        )
+        return UploadResponse(document=doc_resp, is_duplicate=False, message="Document uploaded successfully.")
 
     async def get_document_by_id(self, doc_id: UUID, owner: User) -> DocumentResponse:
         """Retrieves document details with authorization check."""
@@ -212,48 +215,41 @@ class DocumentService:
 
         # Owner isolation check
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning("Unauthorized document access attempt: User '%s' on Document '%s'", sanitize_log_input(owner.id), sanitize_log_input(doc_id))
+            logger.warning(
+                "Unauthorized document access attempt: User '%s' on Document '%s'",
+                sanitize_log_input(owner.id),
+                sanitize_log_input(doc_id),
+            )
             raise ResourceNotFoundException("Document not found")
 
         return DocumentResponse.model_validate(doc)
 
     async def list_documents(
-        self,
-        owner: User,
-        page: int = 1,
-        page_size: int = 20,
-        search_query: Optional[str] = None
+        self, owner: User, page: int = 1, page_size: int = 20, search_query: Optional[str] = None
     ) -> DocumentListResponse:
         """Returns paginated list of user documents."""
         page = max(1, page)
         page_size = max(1, min(100, page_size))
 
         docs, total = await self.doc_repo.paginate(
-            owner_id=owner.id,
-            page=page,
-            page_size=page_size,
-            search_query=search_query
+            owner_id=owner.id, page=page, page_size=page_size, search_query=search_query
         )
 
         pages = math.ceil(total / page_size) if total > 0 else 0
         items = [DocumentResponse.model_validate(d) for d in docs]
 
-        logger.info("Listed documents for user '%s': Page=%d/%d, Total=%d", sanitize_log_input(owner.username), page, pages, total)
-
-        return DocumentListResponse(
-            items=items,
-            total=total,
-            page=page,
-            page_size=page_size,
-            pages=pages
+        logger.info(
+            "Listed documents for user '%s': Page=%d/%d, Total=%d",
+            sanitize_log_input(owner.username),
+            page,
+            pages,
+            total,
         )
 
+        return DocumentListResponse(items=items, total=total, page=page, page_size=page_size, pages=pages)
+
     async def search_documents(
-        self,
-        owner: User,
-        query: str,
-        page: int = 1,
-        page_size: int = 20
+        self, owner: User, query: str, page: int = 1, page_size: int = 20
     ) -> DocumentListResponse:
         """Searches documents by query string."""
         return await self.list_documents(owner=owner, page=page, page_size=page_size, search_query=query)
@@ -265,7 +261,11 @@ class DocumentService:
             raise ResourceNotFoundException("Document not found")
 
         if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning("Unauthorized document deletion attempt: User '%s' on Document '%s'", sanitize_log_input(owner.id), sanitize_log_input(doc_id))
+            logger.warning(
+                "Unauthorized document deletion attempt: User '%s' on Document '%s'",
+                sanitize_log_input(owner.id),
+                sanitize_log_input(doc_id),
+            )
             raise ResourceNotFoundException("Document not found")
 
         # Delete physical file from storage provider
@@ -274,8 +274,9 @@ class DocumentService:
         # Delete database record
         await self.doc_repo.delete(doc)
 
-        logger.info("Document successfully deleted: ID=%s by user '%s'", sanitize_log_input(doc_id), sanitize_log_input(owner.username))
-        return DeleteResponse(
-            id=doc_id,
-            message="Document deleted successfully"
+        logger.info(
+            "Document successfully deleted: ID=%s by user '%s'",
+            sanitize_log_input(doc_id),
+            sanitize_log_input(owner.username),
         )
+        return DeleteResponse(id=doc_id, message="Document deleted successfully")

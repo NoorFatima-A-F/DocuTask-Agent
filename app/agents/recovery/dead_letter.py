@@ -12,6 +12,7 @@ from app.agents.recovery.failure import Failure
 
 class DeadLetterRecord(BaseModel):
     """Record placed in dead-letter storage when automatic recovery is exhausted."""
+
     dead_letter_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     failure: Failure

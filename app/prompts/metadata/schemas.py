@@ -16,6 +16,7 @@ from app.prompts.registry.models import RiskLevel
 
 class PromptTechnicalMetadata(BaseModel):
     """Technical requirements and runtime specifications."""
+
     estimated_tokens: int = 150
     recommended_temperature: float = 0.2
     max_tokens: int = 2048
@@ -26,6 +27,7 @@ class PromptTechnicalMetadata(BaseModel):
 
 class PromptBusinessMetadata(BaseModel):
     """Business ownership, alignment, and operational context."""
+
     business_owner_email: str = "ai-core@enterprise.com"
     department: str = "AI Engineering"
     cost_center: str = "CC-102"
@@ -35,6 +37,7 @@ class PromptBusinessMetadata(BaseModel):
 
 class PromptGovernanceMetadata(BaseModel):
     """Governance, compliance, and auditing restrictions."""
+
     risk_level: RiskLevel = RiskLevel.MEDIUM
     requires_human_review_for_changes: bool = True
     allowed_environments: List[str] = Field(default_factory=lambda: ["Development", "Staging", "Production"])
@@ -44,6 +47,7 @@ class PromptGovernanceMetadata(BaseModel):
 
 class ComprehensivePromptMetadata(BaseModel):
     """Unified 3D enterprise prompt metadata descriptor."""
+
     prompt_id: str
     technical: PromptTechnicalMetadata = Field(default_factory=PromptTechnicalMetadata)
     business: PromptBusinessMetadata = Field(default_factory=PromptBusinessMetadata)

@@ -1,6 +1,7 @@
 """
 Comprehensive Unit & Integration Test Suite for Enterprise Backup Architecture Verification (Part 3G.2A).
 """
+
 import pytest
 from app.platform_verification.backup_architecture_verification.domain.models import (
     CriticalityTier,
@@ -206,7 +207,7 @@ def test_retention_verification_engine(runtime):
         yearly_retention_years=0,
         archival_tier="standard",
         legal_hold_supported=False,  # FLAW: No legal hold
-        immutability_enabled=False,   # FLAW: No immutability
+        immutability_enabled=False,  # FLAW: No immutability
         auto_expiration_enabled=True,
         secure_deletion_method="simple_delete",
     )
@@ -292,9 +293,7 @@ def test_architecture_consistency_engine(runtime):
     ownerships = runtime.ownership_engine.verify_ownership(assets)
     dep_graph = runtime.dep_graph_engine.build_and_validate_graph(assets)
 
-    report = runtime.consistency_engine.verify_consistency(
-        assets, strategies, retentions, ownerships, dep_graph
-    )
+    report = runtime.consistency_engine.verify_consistency(assets, strategies, retentions, ownerships, dep_graph)
     assert report.passed is True
     assert report.no_nonexistent_asset_references is True
     assert report.no_nonexistent_policy_references is True

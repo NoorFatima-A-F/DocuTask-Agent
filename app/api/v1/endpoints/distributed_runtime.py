@@ -139,7 +139,9 @@ async def pause_workflow(workflow_id: str) -> DurableWorkflow:
     return wf
 
 
-@router.post("/workflows/{workflow_id}/resume", summary="Resume durable workflow from checkpoint", response_model=DurableWorkflow)
+@router.post(
+    "/workflows/{workflow_id}/resume", summary="Resume durable workflow from checkpoint", response_model=DurableWorkflow
+)
 async def resume_workflow(workflow_id: str) -> DurableWorkflow:
     wf = distributed_runtime.workflow_engine.resume_workflow(workflow_id)
     if not wf:
@@ -147,7 +149,11 @@ async def resume_workflow(workflow_id: str) -> DurableWorkflow:
     return wf
 
 
-@router.get("/checkpoints/{workflow_id}", summary="Get checkpoint snapshots for workflow", response_model=List[WorkflowCheckpoint])
+@router.get(
+    "/checkpoints/{workflow_id}",
+    summary="Get checkpoint snapshots for workflow",
+    response_model=List[WorkflowCheckpoint],
+)
 async def get_checkpoints(workflow_id: str) -> List[WorkflowCheckpoint]:
     wf = distributed_runtime.workflow_engine.get_workflow(workflow_id)
     if not wf:
@@ -197,7 +203,11 @@ async def inject_chaos_failure(request: ChaosFailureRequest) -> Dict[str, Any]:
     }
 
 
-@router.get("/disaster-recovery/status", summary="Get disaster recovery snapshots", response_model=List[DisasterRecoverySnapshot])
+@router.get(
+    "/disaster-recovery/status",
+    summary="Get disaster recovery snapshots",
+    response_model=List[DisasterRecoverySnapshot],
+)
 async def get_dr_status() -> List[DisasterRecoverySnapshot]:
     return distributed_runtime.dr_engine.list_snapshots()
 

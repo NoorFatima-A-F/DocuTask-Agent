@@ -1,6 +1,7 @@
 """
 Immutable Evidence Store for Deployment Verification.
 """
+
 import hashlib
 from typing import Dict, Optional
 from app.platform_verification.deployment_verification.domain.models import DeploymentVerificationEvidencePackage

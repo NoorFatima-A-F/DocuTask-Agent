@@ -30,7 +30,11 @@ class InfrastructureRiskAnalyzer(IInfrastructureRiskAnalyzer):
         findings: List[RiskFinding] = []
 
         for item in evidence_items:
-            if item.status == VerificationStatus.FAILED or item.severity in [RiskLevel.CRITICAL, RiskLevel.HIGH, RiskLevel.MEDIUM]:
+            if item.status == VerificationStatus.FAILED or item.severity in [
+                RiskLevel.CRITICAL,
+                RiskLevel.HIGH,
+                RiskLevel.MEDIUM,
+            ]:
                 is_blocker = item.severity in [RiskLevel.CRITICAL, RiskLevel.HIGH]
                 findings.append(
                     RiskFinding(

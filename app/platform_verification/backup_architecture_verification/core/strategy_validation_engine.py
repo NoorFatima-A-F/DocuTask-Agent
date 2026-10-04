@@ -3,6 +3,7 @@ Part 3: Backup Strategy Validation Engine.
 Verifies backup strategy matches asset criticality (Full, Incremental, Differential, Snapshot, Continuous).
 Detects missing, conflicting, and incorrect backup strategies.
 """
+
 from typing import List, Dict, Any, Optional
 from app.platform_verification.backup_architecture_verification.domain.models import (
     AssetCategory,
@@ -304,7 +305,9 @@ class StrategyValidationEngine(IStrategyValidationEngine):
                         configured_strategy=BackupStrategyType.FULL,
                         is_adequate=False,
                         findings=["CRITICAL: Missing backup strategy for protected asset."],
-                        recommendations=["Configure a valid backup strategy (Full, Incremental, Snapshot, or Continuous)."],
+                        recommendations=[
+                            "Configure a valid backup strategy (Full, Incremental, Snapshot, or Continuous)."
+                        ],
                     )
                 )
                 continue
@@ -323,13 +326,17 @@ class StrategyValidationEngine(IStrategyValidationEngine):
                     BackupStrategyType.INCREMENTAL,
                 ]:
                     is_adequate = False
-                    findings.append("Tier 0 asset has inadequate strategy type (requires Continuous, Snapshot, Incremental, or Full).")
+                    findings.append(
+                        "Tier 0 asset has inadequate strategy type (requires Continuous, Snapshot, Incremental, or Full)."
+                    )
                     recommendations.append("Upgrade strategy to Continuous WAL streaming or frequent replication.")
 
                 if asset.category == AssetCategory.DATABASE and not strat.wal_archiving_enabled:
                     is_adequate = False
                     findings.append("Tier 0 Relational Database missing continuous WAL archiving.")
-                    recommendations.append("Enable WAL archiving to guarantee zero data loss Point-In-Time-Recovery (PITR).")
+                    recommendations.append(
+                        "Enable WAL archiving to guarantee zero data loss Point-In-Time-Recovery (PITR)."
+                    )
 
             # Rule 2: Incremental backups must have a base snapshot ID or parent dependency
             if strat.strategy_type == BackupStrategyType.INCREMENTAL:
@@ -352,7 +359,9 @@ class StrategyValidationEngine(IStrategyValidationEngine):
                 recommendations.append("Configure a secure target storage URI (e.g. S3 WORM or CSI volume snapshot).")
 
             if not findings:
-                findings.append(f"Strategy {strat.strategy_type.value} validated successfully against {asset.criticality.value} requirements.")
+                findings.append(
+                    f"Strategy {strat.strategy_type.value} validated successfully against {asset.criticality.value} requirements."
+                )
 
             results.append(
                 StrategyValidationResult(
@@ -374,7 +383,9 @@ class StrategyValidationEngine(IStrategyValidationEngine):
             "total_strategies_evaluated": len(results),
             "passed_strategies_count": passed_count,
             "failed_strategies_count": len(results) - passed_count,
-            "overall_strategy_compliance_percent": round((passed_count / len(results) * 100.0), 2) if results else 100.0,
+            "overall_strategy_compliance_percent": round((passed_count / len(results) * 100.0), 2)
+            if results
+            else 100.0,
             "strategy_evaluations": [
                 {
                     "asset_name": r.asset_name,

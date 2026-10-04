@@ -1,6 +1,7 @@
 """
 Secret and Credential Scanner for Container Definitions.
 """
+
 import re
 from typing import List
 

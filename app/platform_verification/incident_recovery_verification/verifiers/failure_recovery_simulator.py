@@ -1,6 +1,7 @@
 """
 Phase 3H.4.9.6: Failure Recovery Simulator
 """
+
 from typing import List
 from ..domain.interfaces import IFailureRecoverySimulator
 from ..domain.models import FailureSimulationResult

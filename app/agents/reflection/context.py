@@ -13,6 +13,7 @@ from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 class ReflectionContext(BaseModel):
     """Operational context and environment limits for reflection processing."""
+
     tenant_id: str = Field(default="default")
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     max_evaluation_timeout_sec: float = Field(default=300.0, gt=0.0)
@@ -26,6 +27,7 @@ class ReflectionContext(BaseModel):
 
 class ReflectionRequest(BaseModel):
     """Request payload to initiate reflection on a completed execution."""
+
     trace: ExecutionTraceEnvelope
     context: ReflectionContext = Field(default_factory=ReflectionContext)
     historical_traces: List[ExecutionTraceEnvelope] = Field(default_factory=list)
@@ -35,6 +37,7 @@ class ReflectionRequest(BaseModel):
 
 class ReflectionResult(BaseModel):
     """Structured, immutable outcome produced by the reflection engine."""
+
     identity: ReflectionIdentity
     lifecycle_state: ReflectionLifecycleState = Field(default=ReflectionLifecycleState.COMPLETED)
     evaluation_report: Optional[Any] = None

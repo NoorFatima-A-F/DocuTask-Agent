@@ -1,6 +1,7 @@
 """
 Phase 3H.5.12.4: Component Recovery Verification
 """
+
 from typing import List, Dict, Any
 from ..domain.models import (
     ComponentRecoveryItem,

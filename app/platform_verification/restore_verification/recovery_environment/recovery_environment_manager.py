@@ -46,7 +46,6 @@ class RecoveryEnvironmentManager(IRecoveryEnvironmentManager):
             "storage_sandbox_path": "/var/tmp/dr_sandbox_storage",  # nosec B108
         }
 
-
         return RecoveryEnvironmentReport(
             environment_type="ephemeral-k8s-namespace",
             environment_name=self.environment_name,

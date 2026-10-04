@@ -72,6 +72,7 @@ class ServiceResolver:
 
         # Locality prioritization: same zone first, same region second, others third
         if caller_region or caller_zone:
+
             def locality_score(ep: ServiceEndpoint) -> int:
                 if caller_zone and ep.zone == caller_zone:
                     return 0

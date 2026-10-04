@@ -1,6 +1,7 @@
 """
 Specialized Test Runners for Functional, AI Quality, Performance, Security, and Chaos verification.
 """
+
 from __future__ import annotations
 import time
 from typing import Any, Dict
@@ -60,7 +61,10 @@ class AiEvaluationHarnessRunner(ITestHarnessRunner):
             passed=passed,
             exit_code=0 if passed else 1,
             output_data={"grounded_claims": 98 if passed else 50, "total_claims": 100},
-            metrics_collected={"grounding_score": 98.0 if passed else 50.0, "hallucination_rate": 2.0 if passed else 50.0},
+            metrics_collected={
+                "grounding_score": 98.0 if passed else 50.0,
+                "hallucination_rate": 2.0 if passed else 50.0,
+            },
             evidence_paths=[],
             error_message="High hallucination rate detected" if sim_fail else None,
             duration_ms=round(duration, 2),

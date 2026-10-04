@@ -29,7 +29,9 @@ class RollbackManager:
     def __init__(self):
         self._rollbacks: List[RollbackRecord] = []
 
-    def rollback(self, policy_id: str, operator_id: str = "system-operator", reason: str = "Safety rollback") -> RollbackRecord:
+    def rollback(
+        self, policy_id: str, operator_id: str = "system-operator", reason: str = "Safety rollback"
+    ) -> RollbackRecord:
         baseline_id = "pol-baseline-planner"
         baseline_policy = ActivePolicyEntry(
             policy_id=policy_id,

@@ -1,6 +1,7 @@
 """
 Celery worker instance configuration and task definitions for background jobs.
 """
+
 import os
 from celery import Celery
 

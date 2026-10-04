@@ -50,9 +50,13 @@ class PredictionValidator:
     def validate_accuracy(metrics: PredictionAccuracyMetrics, max_allowed_mape: float = 15.0) -> Tuple[bool, List[str]]:
         errors = []
         if metrics.mape_percent > max_allowed_mape and metrics.mae > 0.10:
-            errors.append(f"Dimension '{metrics.dimension}' MAPE ({metrics.mape_percent:.1f}%) exceeds threshold ({max_allowed_mape:.1f}%)")
+            errors.append(
+                f"Dimension '{metrics.dimension}' MAPE ({metrics.mape_percent:.1f}%) exceeds threshold ({max_allowed_mape:.1f}%)"
+            )
 
         if abs(metrics.mean_bias) > 0.15:
-            errors.append(f"Dimension '{metrics.dimension}' shows severe systematic prediction bias ({metrics.mean_bias:.4f})")
+            errors.append(
+                f"Dimension '{metrics.dimension}' shows severe systematic prediction bias ({metrics.mean_bias:.4f})"
+            )
 
         return len(errors) == 0, errors

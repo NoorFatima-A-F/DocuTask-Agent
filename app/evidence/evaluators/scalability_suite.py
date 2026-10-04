@@ -77,12 +77,14 @@ class ScalabilityValidationLaboratory:
                 title=f"Scalability Benchmark: {count} Concurrent Workers",
                 description=(
                     f"Scalability test for {count} workers: Throughput={res.throughput_ops_sec:.1f} ops/s, "
-                    f"P95={res.p95_latency_ms:.2f}ms, Success Rate={(res.successful_ops/res.total_operations)*100:.1f}%"
+                    f"P95={res.p95_latency_ms:.2f}ms, Success Rate={(res.successful_ops / res.total_operations) * 100:.1f}%"
                 ),
                 evidence_type=EvidenceType.STRESS_TEST if count >= 500 else EvidenceType.LOAD_TEST,
                 source="app.evidence.evaluators.scalability_suite",
                 generated_by="scalability_laboratory",
-                verification_status=VerificationStatus.VERIFIED if res.failed_ops == 0 else VerificationStatus.FAILED_VERIFICATION,
+                verification_status=VerificationStatus.VERIFIED
+                if res.failed_ops == 0
+                else VerificationStatus.FAILED_VERIFICATION,
                 confidence=1.0,
                 reproducibility="STATISTICAL",
                 raw_payload=res.to_dict(),
@@ -116,10 +118,14 @@ class ScalabilityValidationLaboratory:
                 res_id = f"doc_resource_{(worker_id + op_idx) % max(1, worker_count // 5)}"
                 s = time.perf_counter()
                 try:
-                    lease = await lock_mgr.acquire_lock(res_id, f"worker_{worker_id}", ttl_seconds=1.0, timeout_seconds=2.0)
+                    lease = await lock_mgr.acquire_lock(
+                        res_id, f"worker_{worker_id}", ttl_seconds=1.0, timeout_seconds=2.0
+                    )
                     if lease:
                         # Commit state under lock
-                        await state_mgr.commit_state(f"sess_{worker_id}", {"w": worker_id, "op": op_idx}, expected_version=op_idx)
+                        await state_mgr.commit_state(
+                            f"sess_{worker_id}", {"w": worker_id, "op": op_idx}, expected_version=op_idx
+                        )
                         await lock_mgr.release_lock(lease)
                         successes += 1
                     else:
@@ -143,7 +149,9 @@ class ScalabilityValidationLaboratory:
         p95 = sorted_lat[min(int(n * 0.95), n - 1)]
         p99 = sorted_lat[min(int(n * 0.99), n - 1)]
         throughput = total_ops / duration
-        contention_pct = (lock_mgr.contention_count / max(1, lock_mgr.acquisition_count + lock_mgr.contention_count)) * 100.0
+        contention_pct = (
+            lock_mgr.contention_count / max(1, lock_mgr.acquisition_count + lock_mgr.contention_count)
+        ) * 100.0
 
         return ScalabilityTierResult(
             worker_count=worker_count,

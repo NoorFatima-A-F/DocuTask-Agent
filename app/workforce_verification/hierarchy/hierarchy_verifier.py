@@ -81,7 +81,9 @@ class HierarchyVerifier:
         t0 = time.perf_counter()
         # Escalation: Worker -> Team Lead -> Department Manager -> Executive -> CEO
         escalation_chain = ["Worker_01", "TeamLead_AP", "DeptMgr_Finance", "Exec_Ops", "CEO_Agent"]
-        passed = len(escalation_chain) == 5 and escalation_chain[0] == "Worker_01" and escalation_chain[-1] == "CEO_Agent"
+        passed = (
+            len(escalation_chain) == 5 and escalation_chain[0] == "Worker_01" and escalation_chain[-1] == "CEO_Agent"
+        )
         t_ms = (time.perf_counter() - t0) * 1000.0
         return AssertionResult(
             name="assert_authority_escalation_paths",

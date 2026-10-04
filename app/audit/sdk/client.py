@@ -111,6 +111,7 @@ def audited(
 
     def decorator(func: Callable):
         if inspect.iscoroutinefunction(func):
+
             @functools.wraps(func)
             async def async_wrapper(*args, **kwargs):
                 start_time = time.perf_counter()
@@ -143,8 +144,10 @@ def audited(
                         metadata={"error": str(ex), "error_type": type(ex).__name__},
                     )
                     raise
+
             return async_wrapper
         else:
+
             @functools.wraps(func)
             def sync_wrapper(*args, **kwargs):
                 start_time = time.perf_counter()
@@ -177,5 +180,7 @@ def audited(
                         metadata={"error": str(ex), "error_type": type(ex).__name__},
                     )
                     raise
+
             return sync_wrapper
+
     return decorator

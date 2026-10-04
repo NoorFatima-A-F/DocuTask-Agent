@@ -11,7 +11,9 @@ from datetime import datetime, timezone
 from typing import Dict, List
 
 from research_validation.regression.drift_detector import (
-    DriftSeverity, DimensionDriftResult, MultiDimensionalDriftDetector
+    DriftSeverity,
+    DimensionDriftResult,
+    MultiDimensionalDriftDetector,
 )
 from research_validation.provenance.hashing import hash_canonical_json
 
@@ -19,6 +21,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class ScientificRegressionReport:
     """Consolidated regression report across all evaluated metrics and dimensions."""
+
     report_id: str
     experiment_id: str
     baseline_run_id: str
@@ -55,7 +58,7 @@ class ScientificRegressionDetector:
         for m_name, base_val in baseline_metrics.items():
             eval_val = evaluated_metrics.get(m_name, base_val)
             higher_better = not ("latency" in m_name or "error" in m_name or m_name.endswith("_ms"))
-            
+
             res = self.detector.evaluate_metric_drift(
                 metric_name=m_name,
                 baseline=base_val,
@@ -69,8 +72,8 @@ class ScientificRegressionDetector:
                 crit_count += 1
 
         rep_id = f"reg_rep_{experiment_id}_{len(dim_results)}"
-        has_critical = (crit_count > 0)
-        
+        has_critical = crit_count > 0
+
         if has_critical:
             rec = "BLOCK_RELEASE: Critical performance/accuracy regression detected. Trigger bisect."
         elif reg_count > 0:

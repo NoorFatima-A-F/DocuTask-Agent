@@ -16,7 +16,7 @@ class HashChainCalculator:
         """Serializes event fields in deterministic sorted key order excluding volatile hash/signature fields."""
         excluded_fields = {"integrity_hash", "signature"}
         filtered = {k: v for k, v in event_dict.items() if k not in excluded_fields}
-        
+
         # Convert datetimes and complex objects to string representation
         def serialize_helper(obj):
             if hasattr(obj, "isoformat"):
@@ -39,6 +39,6 @@ class HashChainCalculator:
         event_dict = event.model_dump()
         event_dict["previous_hash"] = prev
         canonical_str = cls.canonical_serialize(event_dict)
-        
+
         combined = f"{canonical_str}|{prev}".encode("utf-8")
         return hashlib.sha256(combined).hexdigest()

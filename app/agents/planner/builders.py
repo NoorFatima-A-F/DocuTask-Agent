@@ -42,7 +42,7 @@ class PlannerContextBuilder:
             user_id=self._user_id,
             planning_budget_usd=self._budget_usd,
             max_candidates=self._max_candidates,
-            parameters=self._parameters
+            parameters=self._parameters,
         )
 
 
@@ -69,11 +69,7 @@ class PlannerRequestBuilder:
 
     def build(self) -> PlannerRequest:
         goal = PlanGoal(goal_id=self._goal_id, name=self._goal_name)
-        return PlannerRequest(
-            goal=goal,
-            context=self._context,
-            constraints=self._constraints
-        )
+        return PlannerRequest(goal=goal, context=self._context, constraints=self._constraints)
 
 
 class CandidatePlanBuilder:
@@ -102,7 +98,7 @@ class CandidatePlanBuilder:
             rank_score=self._rank_score,
             estimated_cost_usd=self._cost,
             estimated_duration_seconds=self._duration,
-            confidence=self._confidence
+            confidence=self._confidence,
         )
 
 
@@ -125,10 +121,7 @@ class PlanningEvidenceBuilder:
 
     def build(self) -> PlanningEvidence:
         return PlanningEvidence(
-            description=self._description,
-            source=self._source,
-            confidence=self._confidence,
-            data=self._data
+            description=self._description, source=self._source, confidence=self._confidence, data=self._data
         )
 
 
@@ -158,5 +151,5 @@ class PlanningTraceBuilder:
             goal_id=self._goal_id,
             selected_strategy=self._strategy,
             evidences=self._evidences,
-            rejected_alternatives=self._rejected
+            rejected_alternatives=self._rejected,
         )

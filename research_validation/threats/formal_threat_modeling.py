@@ -37,16 +37,17 @@ class RiskLevel(str, Enum):
 @dataclass
 class FormalThreatScenario:
     """Comprehensive threat analysis node."""
+
     threat_id: str
     title: str
     kill_chain_stage: KillChainStage
     trust_boundary_crossed: str
     abuse_case_description: str
     inherent_likelihood: int  # 1 to 5
-    inherent_impact: int      # 1 to 5
+    inherent_impact: int  # 1 to 5
     compensating_controls: List[str]
     residual_likelihood: int  # 1 to 5
-    residual_impact: int      # 1 to 5
+    residual_impact: int  # 1 to 5
     residual_risk_level: RiskLevel
     risk_accepted_by: str
     risk_acceptance_justification: str
@@ -55,6 +56,7 @@ class FormalThreatScenario:
 @dataclass
 class FormalThreatModelReport:
     """Consolidated threat modeling platform report."""
+
     total_threats_analyzed: int
     critical_risks_count: int
     high_risks_count: int
@@ -86,13 +88,13 @@ class FormalThreatModelingPlatform:
             compensating_controls=[
                 "Structural Pydantic field schemas",
                 "Delimited system context fencing",
-                "Deterministic downstream output validators"
+                "Deterministic downstream output validators",
             ],
             residual_likelihood=2,
             residual_impact=2,
             residual_risk_level=RiskLevel.LOW,
             risk_accepted_by="Principal Security Architect",
-            risk_acceptance_justification="Strict JSON schema extraction and isolated tool execution prevent unauthorized action execution."
+            risk_acceptance_justification="Strict JSON schema extraction and isolated tool execution prevent unauthorized action execution.",
         ),
         FormalThreatScenario(
             threat_id="THR-002",
@@ -105,13 +107,13 @@ class FormalThreatModelingPlatform:
             compensating_controls=[
                 "HMAC-SHA256 signature verification on all persisted state snapshots",
                 "mTLS encrypted cache transit",
-                "Tamper-evident rollback triggers"
+                "Tamper-evident rollback triggers",
             ],
             residual_likelihood=1,
             residual_impact=2,
             residual_risk_level=RiskLevel.LOW,
             risk_accepted_by="Lead Security Architect",
-            risk_acceptance_justification="Cryptographic signature mismatch triggers immediate state eviction and emergency pause."
+            risk_acceptance_justification="Cryptographic signature mismatch triggers immediate state eviction and emergency pause.",
         ),
         FormalThreatScenario(
             threat_id="THR-003",
@@ -124,21 +126,18 @@ class FormalThreatModelingPlatform:
             compensating_controls=[
                 "Pre-decompression zip header inspection",
                 "25MB uncompressed size cap",
-                "Memory cgroups and subprocess sandboxing"
+                "Memory cgroups and subprocess sandboxing",
             ],
             residual_likelihood=1,
             residual_impact=2,
             residual_risk_level=RiskLevel.LOW,
             risk_accepted_by="Infrastructure SRE Lead",
-            risk_acceptance_justification="Hard memory limits and ratio bounds reject malicious archives prior to buffer inflation."
+            risk_acceptance_justification="Hard memory limits and ratio bounds reject malicious archives prior to buffer inflation.",
         ),
     ]
 
     @classmethod
-    def evaluate_threat_model(
-        cls,
-        threats: Optional[List[FormalThreatScenario]] = None
-    ) -> FormalThreatModelReport:
+    def evaluate_threat_model(cls, threats: Optional[List[FormalThreatScenario]] = None) -> FormalThreatModelReport:
         """Evaluate full formal threat matrix."""
         scenarios = threats or cls.DEFAULT_FORMAL_THREATS
         total = len(scenarios)
@@ -148,8 +147,14 @@ class FormalThreatModelingPlatform:
         med_count = sum(1 for s in scenarios if s.residual_risk_level == RiskLevel.MEDIUM)
         low_count = sum(1 for s in scenarios if s.residual_risk_level == RiskLevel.LOW)
 
-        all_crit_ok = (crit_count == 0 and high_count == 0)
-        verdict = "PASS_SECURE" if (all_crit_ok and med_count == 0) else "ACCEPTABLE_RESIDUAL_RISK" if all_crit_ok else "UNMITIGATED_CRITICAL_RISK"
+        all_crit_ok = crit_count == 0 and high_count == 0
+        verdict = (
+            "PASS_SECURE"
+            if (all_crit_ok and med_count == 0)
+            else "ACCEPTABLE_RESIDUAL_RISK"
+            if all_crit_ok
+            else "UNMITIGATED_CRITICAL_RISK"
+        )
 
         return FormalThreatModelReport(
             total_threats_analyzed=total,
@@ -161,12 +166,12 @@ class FormalThreatModelingPlatform:
             all_critical_mitigated=all_crit_ok,
             assumptions=[
                 "Threat modeling conforms to NIST SP 800-154 and OWASP Threat Dragon methodology",
-                "Compensating controls are tested continuously in automated CI regression pipelines"
+                "Compensating controls are tested continuously in automated CI regression pipelines",
             ],
             methodology="Formal STRIDE-per-element and Cyber Kill Chain decomposition with quantitative 5x5 residual risk scoring.",
             limitations=[
                 "Novel zero-day vulnerability classes outside established attack trees require quarterly review cycles"
             ],
             reproducibility_instructions="Execute FormalThreatModelingPlatform.evaluate_threat_model() against active architecture catalog.",
-            verdict=verdict
+            verdict=verdict,
         )

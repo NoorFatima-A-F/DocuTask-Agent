@@ -20,30 +20,31 @@ class ReplayCertificationReport:
     """
     Official certificate proving deterministic replay reproducibility of a mission.
     """
+
     certification_id: str
     mission_id: str
     certified_at: float = field(default_factory=time.time)
-    
+
     # Original vs Replay Measurements
     original_latency_ms: float = 1150.0
     replayed_latency_ms: float = 1158.0
     latency_delta_pct: float = 0.69
-    
+
     original_cost_usd: float = 0.0120
     replayed_cost_usd: float = 0.0120
     cost_delta_pct: float = 0.00
-    
+
     # State & Output Matching
     bitwise_state_match_rate: float = 0.9998
     output_json_similarity_pct: float = 99.95
     dag_path_exact_match: bool = True
     tool_sequence_exact_match: bool = True
-    
+
     # Tolerances & Verdict
     max_latency_tolerance_pct: float = 5.0
     max_cost_tolerance_pct: float = 1.0
     min_similarity_tolerance_pct: float = 99.5
-    
+
     is_certified: bool = True
     certification_tier: str = "SCIENTIFIC_REPRODUCIBLE"
     verifier_signature: str = ""

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 """
 Failover Orchestrator.
 
@@ -24,6 +25,7 @@ logger = logging.getLogger("infrastructure.failover.orchestrator")
 
 class FailoverExecutionResult(BaseModel):
     """Execution outcome of a failover plan."""
+
     plan_id: str
     status: FailoverStatus
     start_time: datetime
@@ -63,7 +65,9 @@ class FailoverOrchestrator:
             raise KeyError(f"Failover plan '{plan_id}' not found.")
 
         start_time = datetime.now(timezone.utc)
-        audit_trail: List[str] = [f"Failover started for plan '{plan_id}' from '{plan.source_region}' to '{plan.target_region}'"]
+        audit_trail: List[str] = [
+            f"Failover started for plan '{plan_id}' from '{plan.source_region}' to '{plan.target_region}'"
+        ]
         leases_revoked = 0
         services_shifted: List[str] = []
 
@@ -147,7 +151,9 @@ class FailoverOrchestrator:
                 audit_trail=audit_trail,
             )
             self._execution_history[plan_id] = result
-            logger.error("Failover execution failed for plan '%s': %s", sanitize_log_input(plan_id), sanitize_log_input(e))
+            logger.error(
+                "Failover execution failed for plan '%s': %s", sanitize_log_input(plan_id), sanitize_log_input(e)
+            )
             return result
 
     def get_execution_result(self, plan_id: str) -> Optional[FailoverExecutionResult]:

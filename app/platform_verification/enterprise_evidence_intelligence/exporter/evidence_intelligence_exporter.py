@@ -49,7 +49,14 @@ class EvidenceIntelligenceExporter:
         self.hashes_dir = self.base_dir / "hashes"
         self.portfolio_dir = self.base_dir / "portfolio_evidence"
 
-        for d in [self.evidence_dir, self.reports_dir, self.artifacts_dir, self.metadata_dir, self.hashes_dir, self.portfolio_dir]:
+        for d in [
+            self.evidence_dir,
+            self.reports_dir,
+            self.artifacts_dir,
+            self.metadata_dir,
+            self.hashes_dir,
+            self.portfolio_dir,
+        ]:
             d.mkdir(parents=True, exist_ok=True)
 
     def _compute_sha256(self, file_path: Union[str, Path]) -> str:

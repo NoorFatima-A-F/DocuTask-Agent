@@ -12,9 +12,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 # Knowledge Graph (83C)
-from research_validation.knowledge_graph.knowledge_graph import (
-    ScientificKnowledgeGraph
-)
+from research_validation.knowledge_graph.knowledge_graph import ScientificKnowledgeGraph
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
 
 # Memory Engine (84C)
@@ -28,64 +26,55 @@ from research_validation.memory.memory_consolidation import ScientificMemoryCons
 
 # Recommendation (85C)
 from research_validation.recommendation.recommendation_engine import (
-    ExperimentRecommendationEngine, ExperimentRecommendation
+    ExperimentRecommendationEngine,
+    ExperimentRecommendation,
 )
 
 # Hypothesis (86C)
 from research_validation.hypothesis.hypothesis_generator import AutonomousHypothesisGenerator
-from research_validation.hypothesis.hypothesis_prioritizer import (
-    HypothesisPrioritizer, PrioritizedHypothesis
-)
+from research_validation.hypothesis.hypothesis_prioritizer import HypothesisPrioritizer, PrioritizedHypothesis
 
 # Planning (87C)
-from research_validation.planning.adaptive_planner import (
-    AdaptiveExperimentPlanner
-)
+from research_validation.planning.adaptive_planner import AdaptiveExperimentPlanner
 
 # Optimization (88C)
-from research_validation.optimization.bayesian_optimizer import (
-    BayesianResearchOptimizer
-)
+from research_validation.optimization.bayesian_optimizer import BayesianResearchOptimizer
 
 # Regression (89C)
-from research_validation.regression.regression_detector import (
-    ScientificRegressionDetector, ScientificRegressionReport
-)
+from research_validation.regression.regression_detector import ScientificRegressionDetector, ScientificRegressionReport
 
 # Observatory (90C)
 from research_validation.observatory.benchmark_tracker import LivingBenchmarkTracker
 from research_validation.observatory.leaderboard_tracker import LivingLeaderboardTracker
 
 # Decision (91C)
-from research_validation.decision.research_decision_engine import (
-    ResearchDecisionEngine, ResearchDecision
-)
+from research_validation.decision.research_decision_engine import ResearchDecisionEngine, ResearchDecision
 
 # Publication (92C)
 from research_validation.publication.publication_evolution_engine import (
-    PublicationEvolutionEngine, PublicationDraft, PublicationEvolutionReport
+    PublicationEvolutionEngine,
+    PublicationDraft,
+    PublicationEvolutionReport,
 )
 
 # Governance (93C)
-from research_validation.governance.governance_engine import (
-    ResearchGovernanceEngine, GovernanceVerificationVerdict
-)
+from research_validation.governance.governance_engine import ResearchGovernanceEngine, GovernanceVerificationVerdict
 
 # Agents (94C)
 from research_validation.scientific_agents.scientific_agent_runtime import (
-    ScientificAgentRuntime, ResearchDeliberationVerdict
+    ScientificAgentRuntime,
+    ResearchDeliberationVerdict,
 )
 
 # Scientific Execution & Provenance from Phase 82B
-from research_validation.scientific_execution.experiment_runner import (
-    ScientificExperimentRunner, ExperimentRunResult
-)
+from research_validation.scientific_execution.experiment_runner import ScientificExperimentRunner, ExperimentRunResult
 from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)
 class AutonomousResearchCycleResult:
     """Consolidated outcome of an end-to-end autonomous research cycle."""
+
     cycle_id: str
     selected_hypothesis: PrioritizedHypothesis
     research_decision: ResearchDecision

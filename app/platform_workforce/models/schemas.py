@@ -1,12 +1,14 @@
 """
 Phase 13.23 - Enterprise Autonomous Agent Workforce & Digital Organization Platform (EAAWDOP) Schemas
 """
+
 from __future__ import annotations
 from enum import Enum
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid
+
 
 class EmployeeRole(str, Enum):
     CEO = "CEO"
@@ -22,6 +24,7 @@ class EmployeeRole(str, Enum):
     AUDITOR = "AUDITOR"
     ARBITRATOR = "ARBITRATOR"
 
+
 class DepartmentType(str, Enum):
     EXECUTIVE = "EXECUTIVE"
     ENGINEERING = "ENGINEERING"
@@ -32,6 +35,7 @@ class DepartmentType(str, Enum):
     QUALITY_ASSURANCE = "QUALITY_ASSURANCE"
     CUSTOMER_SUCCESS = "CUSTOMER_SUCCESS"
 
+
 class EmployeeStatus(str, Enum):
     ACTIVE = "ACTIVE"
     BUSY = "BUSY"
@@ -41,6 +45,7 @@ class EmployeeStatus(str, Enum):
     MAINTENANCE = "MAINTENANCE"
     PROMOTED = "PROMOTED"
     RETIRED = "RETIRED"
+
 
 class DigitalEmployee(BaseModel):
     id: str = Field(default_factory=lambda: f"emp-{uuid.uuid4().hex[:8]}")
@@ -64,6 +69,7 @@ class DigitalEmployee(BaseModel):
     career_history: List[Dict[str, Any]] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class Department(BaseModel):
     id: str = Field(default_factory=lambda: f"dept-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -75,6 +81,7 @@ class Department(BaseModel):
     active_projects: List[str] = Field(default_factory=list)
     okrs: List[str] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class DynamicTeam(BaseModel):
     id: str = Field(default_factory=lambda: f"team-{uuid.uuid4().hex[:8]}")
@@ -90,6 +97,7 @@ class DynamicTeam(BaseModel):
     team_health_score: float = 0.96
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class TaskMarketplaceListing(BaseModel):
     id: str = Field(default_factory=lambda: f"task-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -104,6 +112,7 @@ class TaskMarketplaceListing(BaseModel):
     bids: List[Dict[str, Any]] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class TaskBid(BaseModel):
     bid_id: str = Field(default_factory=lambda: f"bid-{uuid.uuid4().hex[:8]}")
     task_id: str
@@ -113,6 +122,7 @@ class TaskBid(BaseModel):
     confidence_score: float = 0.95
     proposed_solution_outline: str = ""
     submitted_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class NegotiationSession(BaseModel):
     id: str = Field(default_factory=lambda: f"neg-{uuid.uuid4().hex[:8]}")
@@ -125,6 +135,7 @@ class NegotiationSession(BaseModel):
     status: str = "IN_PROGRESS"  # IN_PROGRESS, AGREED, DEADLOCKED, ESCALATED
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class CollaborationVote(BaseModel):
     id: str = Field(default_factory=lambda: f"vote-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -136,6 +147,7 @@ class CollaborationVote(BaseModel):
     status: str = "PENDING"  # PENDING, APPROVED, REJECTED
     decided_at: Optional[datetime] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class ManagerReviewRecord(BaseModel):
     id: str = Field(default_factory=lambda: f"rev-{uuid.uuid4().hex[:8]}")
@@ -150,6 +162,7 @@ class ManagerReviewRecord(BaseModel):
     promotion_recommended: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class ExecutiveCouncilProposition(BaseModel):
     id: str = Field(default_factory=lambda: f"prop-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -161,6 +174,7 @@ class ExecutiveCouncilProposition(BaseModel):
     enacted: bool = False
     impact_assessment: Dict[str, Any] = Field(default_factory=dict)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class WorkforcePerformanceMetric(BaseModel):
     tenant_id: str = "default-tenant"
@@ -174,6 +188,7 @@ class WorkforcePerformanceMetric(BaseModel):
     workforce_burnout_risk: float = 0.08
     monthly_salary_burn_usd: float = 12450.0
 
+
 class EconomicResourceBudget(BaseModel):
     tenant_id: str = "default-tenant"
     allocated_gpu_hours: float = 1200.0
@@ -184,6 +199,7 @@ class EconomicResourceBudget(BaseModel):
     total_spent_usd: float = 14200.0
     efficiency_roi_ratio: float = 4.85
     reallocation_recommendations: List[str] = Field(default_factory=list)
+
 
 class HiringRequisition(BaseModel):
     id: str = Field(default_factory=lambda: f"req-{uuid.uuid4().hex[:8]}")
@@ -197,6 +213,7 @@ class HiringRequisition(BaseModel):
     hired_employee_id: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class CareerPromotionPath(BaseModel):
     id: str = Field(default_factory=lambda: f"promo-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -208,6 +225,7 @@ class CareerPromotionPath(BaseModel):
     status: str = "READY"  # IN_PROGRESS, READY, PROMOTED
     promoted_at: Optional[datetime] = None
 
+
 class WorkforceScheduleEntry(BaseModel):
     id: str = Field(default_factory=lambda: f"sched-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -217,6 +235,7 @@ class WorkforceScheduleEntry(BaseModel):
     start_hour: int = 0
     end_hour: int = 8
     is_active: bool = True
+
 
 class CollectiveMemoryRecord(BaseModel):
     id: str = Field(default_factory=lambda: f"cmem-{uuid.uuid4().hex[:8]}")
@@ -230,6 +249,7 @@ class CollectiveMemoryRecord(BaseModel):
     trust_weight: float = 0.98
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class ConflictResolutionRecord(BaseModel):
     id: str = Field(default_factory=lambda: f"conf-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -241,6 +261,7 @@ class ConflictResolutionRecord(BaseModel):
     resolution_summary: str
     binding_agreements: List[str] = Field(default_factory=list)
     resolved_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class OrganizationOverviewReport(BaseModel):
     tenant_id: str = "default-tenant"

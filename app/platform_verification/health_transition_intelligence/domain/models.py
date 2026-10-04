@@ -1,6 +1,7 @@
 """
 Domain Models for Health State Transition & Service Recovery Intelligence (Part 3H.3.3).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, Any, List
@@ -31,9 +32,9 @@ class RecoveryActionType(str, Enum):
 
 
 class HealthTier(str, Enum):
-    FAILED = "Failed"                                         # < 80
-    NEEDS_IMPROVEMENT = "Improvement Required"               # 80 - 89
-    PRODUCTION_READY = "Production Ready"                     # 90 - 94
+    FAILED = "Failed"  # < 80
+    NEEDS_IMPROVEMENT = "Improvement Required"  # 80 - 89
+    PRODUCTION_READY = "Production Ready"  # 90 - 94
     ENTERPRISE_READY = "Enterprise Health Intelligence Ready"  # 95 - 100
 
 
@@ -184,14 +185,14 @@ class SimulationReport:
 
 @dataclass
 class HealthIntelligenceScorecard:
-    state_accuracy_score: float         # Weight 25%
-    transition_logic_score: float       # Weight 20%
-    failure_detection_score: float      # Weight 20%
-    recovery_validation_score: float    # Weight 15%
-    alerting_score: float               # Weight 10%
-    evidence_quality_score: float       # Weight 10%
-    overall_score: float                # Composite 0 - 100
+    state_accuracy_score: float  # Weight 25%
+    transition_logic_score: float  # Weight 20%
+    failure_detection_score: float  # Weight 20%
+    recovery_validation_score: float  # Weight 15%
+    alerting_score: float  # Weight 10%
+    evidence_quality_score: float  # Weight 10%
+    overall_score: float  # Composite 0 - 100
     certification_tier: HealthTier
-    certification_verdict: str          # CERTIFIED / REJECTED
+    certification_verdict: str  # CERTIFIED / REJECTED
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

@@ -13,6 +13,7 @@ from app.agents.recovery.recovery_strategy import RecoveryStrategy
 
 class RecoveryContext(BaseModel):
     """Contextual parameters controlling autonomous recovery execution."""
+
     tenant_id: str = Field(default="default")
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     max_retries: int = Field(default=3, ge=0)
@@ -23,6 +24,7 @@ class RecoveryContext(BaseModel):
 
 class RecoveryRequest(BaseModel):
     """Request payload asking RecoveryEngine to diagnose and remediate a failure."""
+
     failure: Optional[Failure] = Field(default=None)
     context: RecoveryContext = Field(default_factory=RecoveryContext)
     model_config = {"frozen": True}
@@ -30,6 +32,7 @@ class RecoveryRequest(BaseModel):
 
 class RecoveryResult(BaseModel):
     """Result payload emitted upon completion of a recovery operation."""
+
     recovery_id: UUID
     execution_id: UUID
     lifecycle_state: RecoveryLifecycleState = Field(default=RecoveryLifecycleState.COMPLETED)

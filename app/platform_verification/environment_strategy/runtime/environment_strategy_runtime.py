@@ -1,12 +1,19 @@
 """
 Master Unified Runtime Facade for Enterprise Verification Environment Strategy & Infrastructure.
 """
+
 from typing import Any, Dict, List, Optional
 from app.platform_verification.environment_strategy.domain.models import (
-    EnvironmentClassification, EnvironmentDefinition, EnvironmentProvisioningRequest,
-    EnvironmentProvisioningResult, ChaosExperimentSpec, ChaosExperimentResult,
-    SecurityLabExperimentSpec, SecurityLabExperimentResult, DeploymentPromotionRecord,
-    EnvironmentHealthState
+    EnvironmentClassification,
+    EnvironmentDefinition,
+    EnvironmentProvisioningRequest,
+    EnvironmentProvisioningResult,
+    ChaosExperimentSpec,
+    ChaosExperimentResult,
+    SecurityLabExperimentSpec,
+    SecurityLabExperimentResult,
+    DeploymentPromotionRecord,
+    EnvironmentHealthState,
 )
 from app.platform_verification.environment_strategy.core.registry import environment_registry
 from app.platform_verification.environment_strategy.core.provisioner import environment_provisioner
@@ -34,9 +41,11 @@ class EnterpriseEnvironmentStrategyRuntime:
         version: str,
         from_env: EnvironmentClassification,
         to_env: EnvironmentClassification,
-        metrics: Optional[Dict[str, Any]] = None
+        metrics: Optional[Dict[str, Any]] = None,
     ) -> DeploymentPromotionRecord:
-        return deployment_orchestrator.promote_deployment(version=version, from_env=from_env, to_env=to_env, metrics=metrics)
+        return deployment_orchestrator.promote_deployment(
+            version=version, from_env=from_env, to_env=to_env, metrics=metrics
+        )
 
     def get_all_environments(self) -> List[EnvironmentDefinition]:
         return environment_registry.list_environments()

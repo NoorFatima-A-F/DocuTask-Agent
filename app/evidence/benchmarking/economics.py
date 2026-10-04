@@ -113,7 +113,9 @@ class EngineeringEconomicsEngine:
         c_ram = avg_duration_sec * ram_gb_allocated * cls.PRICE_RAM_GB_PER_SEC
 
         # 2. Vertex AI LLM costs
-        c_llm = (input_tokens / 1000.0) * cls.PRICE_GEMINI_INPUT_PER_1K + (output_tokens / 1000.0) * cls.PRICE_GEMINI_OUTPUT_PER_1K
+        c_llm = (input_tokens / 1000.0) * cls.PRICE_GEMINI_INPUT_PER_1K + (
+            output_tokens / 1000.0
+        ) * cls.PRICE_GEMINI_OUTPUT_PER_1K
 
         # 3. GCS & Data costs
         c_gcs = (doc_size_kb / (1024.0 * 1024.0)) * cls.PRICE_GCS_STORAGE_GB_MO

@@ -1,6 +1,7 @@
 """
 Query Performance and Index Analyzer for Database Verification.
 """
+
 from typing import Dict, List, Any
 from app.platform_verification.database_verification.domain.models import (
     TableSchemaDefinition,
@@ -13,9 +14,7 @@ class QueryPerformanceAnalyzer(IQueryPerformanceAnalyzer):
     """Analyzes queries and schemas for sequential scans, missing indexes, and N+1 patterns."""
 
     def analyze_queries(
-        self,
-        queries: List[Dict[str, Any]],
-        schemas: Dict[str, TableSchemaDefinition]
+        self, queries: List[Dict[str, Any]], schemas: Dict[str, TableSchemaDefinition]
     ) -> QueryPerformanceReport:
         seq_scan_hazards: List[str] = []
         missing_indexes: List[str] = []
@@ -39,8 +38,14 @@ class QueryPerformanceAnalyzer(IQueryPerformanceAnalyzer):
                     indexed_columns.update(idx.columns)
 
                 for fc in filter_cols:
-                    if fc not in indexed_columns and not table_schema.columns.get(fc, None) and fc not in table_schema.primary_key_columns:
-                        seq_scan_hazards.append(f"Filter column '{table_name}.{fc}' is unindexed; causes sequential scan")
+                    if (
+                        fc not in indexed_columns
+                        and not table_schema.columns.get(fc, None)
+                        and fc not in table_schema.primary_key_columns
+                    ):
+                        seq_scan_hazards.append(
+                            f"Filter column '{table_name}.{fc}' is unindexed; causes sequential scan"
+                        )
                         missing_indexes.append(f"CREATE INDEX idx_{table_name}_{fc} ON {table_name}({fc});")
 
         latencies.sort()

@@ -1,6 +1,7 @@
 """
 Phase 3H.9.10: 7-Pillar Enterprise Operational Intelligence Scorer
 """
+
 import uuid
 from datetime import datetime, timezone
 from typing import List
@@ -62,7 +63,11 @@ class OperationalIntelligenceScorer(IOperationalIntelligenceScorer):
         )
 
         # 2. Analytics Coverage (15%)
-        analytics_raw = 100.0 if analytics_report.analytics_coverage_complete and len(analytics_report.subsystem_analytics) >= 4 else 85.0
+        analytics_raw = (
+            100.0
+            if analytics_report.analytics_coverage_complete and len(analytics_report.subsystem_analytics) >= 4
+            else 85.0
+        )
         analytics_weight = 0.15
         pillars.append(
             OperationalIntelligencePillarScore(
@@ -76,7 +81,9 @@ class OperationalIntelligenceScorer(IOperationalIntelligenceScorer):
         )
 
         # 3. Anomaly Detection (20%)
-        anomaly_raw = 100.0 if anomaly_report.accuracy_rate_pct >= 99.0 and anomaly_report.false_positive_rate_pct < 1.0 else 85.0
+        anomaly_raw = (
+            100.0 if anomaly_report.accuracy_rate_pct >= 99.0 and anomaly_report.false_positive_rate_pct < 1.0 else 85.0
+        )
         anomaly_weight = 0.20
         pillars.append(
             OperationalIntelligencePillarScore(
@@ -104,7 +111,11 @@ class OperationalIntelligenceScorer(IOperationalIntelligenceScorer):
         )
 
         # 5. Capacity Forecasting (15%)
-        forecast_raw = 100.0 if len(forecast_report.forecasts) >= 4 and forecast_report.capacity_exhaustion_risk == "VERY_LOW" else 85.0
+        forecast_raw = (
+            100.0
+            if len(forecast_report.forecasts) >= 4 and forecast_report.capacity_exhaustion_risk == "VERY_LOW"
+            else 85.0
+        )
         forecast_weight = 0.15
         pillars.append(
             OperationalIntelligencePillarScore(
@@ -132,7 +143,11 @@ class OperationalIntelligenceScorer(IOperationalIntelligenceScorer):
         )
 
         # 7. Decision Support (10%)
-        decision_raw = 100.0 if decision_report.decision_support_confidence_pct >= 95.0 and len(decision_report.inquiries) >= 3 else 85.0
+        decision_raw = (
+            100.0
+            if decision_report.decision_support_confidence_pct >= 95.0 and len(decision_report.inquiries) >= 3
+            else 85.0
+        )
         decision_weight = 0.10
         pillars.append(
             OperationalIntelligencePillarScore(

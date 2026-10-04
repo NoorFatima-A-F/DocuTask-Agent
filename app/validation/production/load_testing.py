@@ -9,6 +9,7 @@ from app.core.logging import logger
 
 class LoadTestMetrics(BaseModel):
     """Metrics produced during workload load testing."""
+
     scenario_name: str
     target_concurrency: int
     completed_requests: int
@@ -47,7 +48,9 @@ class WorkloadSimulator:
             p95 = 48.0
             ram = 68.5
 
-        logger.info(f"Executed Load Test Scenario '{scenario_name}': Concurrency={concurrency}, Throughput={throughput} req/s, P95={p95}ms")
+        logger.info(
+            f"Executed Load Test Scenario '{scenario_name}': Concurrency={concurrency}, Throughput={throughput} req/s, P95={p95}ms"
+        )
 
         return LoadTestMetrics(
             scenario_name=scenario_name,
@@ -58,5 +61,5 @@ class WorkloadSimulator:
             avg_latency_ms=p95 * 0.7,
             p95_latency_ms=p95,
             max_queue_depth=0,
-            peak_ram_mb=ram
+            peak_ram_mb=ram,
         )

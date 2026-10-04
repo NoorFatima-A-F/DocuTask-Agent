@@ -27,10 +27,10 @@ class ROIEngineCalculator:
         ai_cost_per_doc: float = 0.09,
     ) -> ROICalculationResult:
         human_total = annual_volume * human_cost_per_doc  # $400,000
-        ai_total = annual_volume * ai_cost_per_doc        # $45,000
-        net_savings = human_total - ai_total             # $355,000
-        roi_pct = (net_savings / ai_total) * 100.0       # 788.89%
-        payback_months = (ai_total / human_total) * 12.0 # 1.35 months
+        ai_total = annual_volume * ai_cost_per_doc  # $45,000
+        net_savings = human_total - ai_total  # $355,000
+        roi_pct = (net_savings / ai_total) * 100.0  # 788.89%
+        payback_months = (ai_total / human_total) * 12.0  # 1.35 months
 
         return ROICalculationResult(
             annual_document_volume=annual_volume,
@@ -91,7 +91,9 @@ class ROIEngineCalculator:
 
         # 4. Total Cost of Ownership (TCO) Reduction (> 80%)
         t0 = time.perf_counter()
-        tco_reduction_pct = ((roi_result.human_processing_cost - roi_result.ai_operating_cost) / roi_result.human_processing_cost) * 100.0
+        tco_reduction_pct = (
+            (roi_result.human_processing_cost - roi_result.ai_operating_cost) / roi_result.human_processing_cost
+        ) * 100.0
         passed_4 = tco_reduction_pct >= 80.0
         t_ms = (time.perf_counter() - t0) * 1000.0
         assertions.append(
@@ -116,7 +118,11 @@ class ROIEngineCalculator:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"net_roi_pct": roi_result.roi_percentage, "annual_savings_usd": roi_result.annual_net_savings, "payback_months": roi_result.payback_period_months},
+            metrics={
+                "net_roi_pct": roi_result.roi_percentage,
+                "annual_savings_usd": roi_result.annual_net_savings,
+                "payback_months": roi_result.payback_period_months,
+            },
             execution_time_ms=elapsed_ms,
         )
 

@@ -23,6 +23,7 @@ class NodeType(str, Enum):
 
 class PlanNode(BaseModel):
     """Immutable Graph Node representing an execution or control unit in the plan."""
+
     node_id: str
     name: str
     node_type: NodeType = Field(default=NodeType.TASK)

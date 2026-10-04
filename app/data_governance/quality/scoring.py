@@ -9,6 +9,7 @@ from app.data_governance.quality.validators import QualityValidationResult, Data
 
 class DataQualityReport(BaseModel):
     """Overall Data Quality Assessment Report."""
+
     asset_id: str
     composite_score: float  # 0.0 to 1.0
     completeness_score: float
@@ -44,11 +45,7 @@ class DataQualityScorer:
         fresh_res = DataQualityValidators.validate_freshness(record_timestamp)
         valid_res = DataQualityValidators.validate_validity(record, schema_types)
 
-        composite = (
-            self.w_comp * comp_res.score
-            + self.w_fresh * fresh_res.score
-            + self.w_valid * valid_res.score
-        )
+        composite = self.w_comp * comp_res.score + self.w_fresh * fresh_res.score + self.w_valid * valid_res.score
 
         return DataQualityReport(
             asset_id=asset_id,

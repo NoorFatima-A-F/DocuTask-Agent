@@ -1,6 +1,7 @@
 from typing import Dict, List
 from ..domain.metrics_domain import MetricAggregate
 
+
 class InMemoryMetricsRepository:
     def __init__(self):
         self._store: Dict[str, MetricAggregate] = {}

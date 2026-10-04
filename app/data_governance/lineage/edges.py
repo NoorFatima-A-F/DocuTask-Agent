@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class LineageEdgeType(str, enum.Enum):
     """Directed dependency relationships in data lineage graphs."""
+
     CREATED = "CREATED"
     READ = "READ"
     WRITTEN = "WRITTEN"
@@ -22,6 +23,7 @@ class LineageEdgeType(str, enum.Enum):
 
 class LineageEdge(BaseModel):
     """Directed edge representing data flow or transformation dependency."""
+
     edge_id: str
     source_node_id: str
     target_node_id: str

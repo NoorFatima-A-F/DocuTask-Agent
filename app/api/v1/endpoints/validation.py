@@ -177,6 +177,7 @@ class GateSignoffRequest(BaseModel):
 # Endpoints
 # -------------------------------------------------------------
 
+
 # 1. Outcomes
 @router.get("/outcomes", summary="List verified empirical outcomes")
 async def get_outcomes():

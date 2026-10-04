@@ -36,9 +36,7 @@ class GlobalScheduler:
 
             # 2. Compliance check
             if workload.compliance_context:
-                comp_ok, _ = self.region_policy_engine.validate_compliance(
-                    reg, workload.compliance_context
-                )
+                comp_ok, _ = self.region_policy_engine.validate_compliance(reg, workload.compliance_context)
                 if not comp_ok:
                     continue
 
@@ -46,9 +44,7 @@ class GlobalScheduler:
 
         return eligible
 
-    def rank_eligible_regions(
-        self, eligible_regions: List[Region], workload: WorkloadRequest
-    ) -> List[Region]:
+    def rank_eligible_regions(self, eligible_regions: List[Region], workload: WorkloadRequest) -> List[Region]:
         """Rank eligible regions by data locality, preference, priority, and primary status."""
         loc_region = DataLocalityResolver.resolve_locality_region(workload.data_locality_uri)
 
@@ -57,9 +53,7 @@ class GlobalScheduler:
             loc_match = 0 if loc_region and r.region_id == loc_region else 1
             # 2. Preference match rank
             pref_rank = (
-                workload.region_preferences.index(r.region_id)
-                if r.region_id in workload.region_preferences
-                else 999
+                workload.region_preferences.index(r.region_id) if r.region_id in workload.region_preferences else 999
             )
             # 3. Is Primary
             primary_score = 0 if r.is_primary else 1

@@ -21,7 +21,7 @@ async def test_user_repository_crud(db_session: AsyncSession):
         "username": "repotest",
         "hashed_password": "hashed_secret_password",
         "is_active": True,
-        "is_superuser": False
+        "is_superuser": False,
     }
     user = await repo.create(user_data)
     assert user.id is not None
@@ -58,21 +58,20 @@ async def test_refresh_token_repository_operations(db_session: AsyncSession):
     token_repo = RefreshTokenRepository(db_session)
 
     # Setup User
-    user = await user_repo.create({
-        "email": "token_repo_test@example.com",
-        "username": "tokenrepotest",
-        "hashed_password": "hashed_secret",
-    })
+    user = await user_repo.create(
+        {
+            "email": "token_repo_test@example.com",
+            "username": "tokenrepotest",
+            "hashed_password": "hashed_secret",
+        }
+    )
 
     # 1. Create Refresh Token
     token_hash = "mock_sha256_hash_value_1234567890"
     expires_at = datetime.now(timezone.utc) + timedelta(days=7)
-    token_obj = await token_repo.create({
-        "user_id": user.id,
-        "token_hash": token_hash,
-        "expires_at": expires_at,
-        "revoked": False
-    })
+    token_obj = await token_repo.create(
+        {"user_id": user.id, "token_hash": token_hash, "expires_at": expires_at, "revoked": False}
+    )
     assert token_obj.id is not None
 
     # 2. Retrieve valid token
@@ -86,18 +85,8 @@ async def test_refresh_token_repository_operations(db_session: AsyncSession):
     assert fetched_after_revoke is None
 
     # 4. Create multiple tokens and revoke_all_for_user
-    await token_repo.create({
-        "user_id": user.id,
-        "token_hash": "hash_1",
-        "expires_at": expires_at,
-        "revoked": False
-    })
-    await token_repo.create({
-        "user_id": user.id,
-        "token_hash": "hash_2",
-        "expires_at": expires_at,
-        "revoked": False
-    })
+    await token_repo.create({"user_id": user.id, "token_hash": "hash_1", "expires_at": expires_at, "revoked": False})
+    await token_repo.create({"user_id": user.id, "token_hash": "hash_2", "expires_at": expires_at, "revoked": False})
 
     await token_repo.revoke_all_for_user(user.id)
     assert await token_repo.get_valid_token("hash_1") is None

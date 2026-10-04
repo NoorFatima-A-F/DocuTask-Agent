@@ -2,6 +2,7 @@
 Document Storage Cross-Region Replication Verifier (Part 3G.6D).
 Validates cross-region object storage replication and SHA-256 byte-for-byte cryptographic parity.
 """
+
 from app.platform_verification.multi_region_failover.domain.models import (
     StorageReplicationReport,
 )
@@ -22,12 +23,7 @@ class StorageReplicationVerifier(IStorageReplicationVerifier):
         sync_lag_sec = 1.2
         zero_loss = True
 
-        passed = (
-            replicated_docs == total_docs
-            and checksum_match_pct == 100.0
-            and sync_lag_sec <= 5.0
-            and zero_loss
-        )
+        passed = replicated_docs == total_docs and checksum_match_pct == 100.0 and sync_lag_sec <= 5.0 and zero_loss
 
         details = {
             "tested_document_types": [

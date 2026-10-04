@@ -63,7 +63,9 @@ class IndependentCertificateVerifier:
                 is_revoked = True
                 rev_rec = crl.get_revocation(record.certificate_id)
                 revocation_details = rev_rec.model_dump() if rev_rec else {}
-                issues.append(f"Certificate {record.certificate_id} is REVOKED in registry. Reason: {revocation_details.get('reason')}")
+                issues.append(
+                    f"Certificate {record.certificate_id} is REVOKED in registry. Reason: {revocation_details.get('reason')}"
+                )
 
         # 3. Cryptographic Signature Verification
         pub_key_pem = ""
@@ -78,7 +80,9 @@ class IndependentCertificateVerifier:
         else:
             sig_valid = CertificateSignatureVerifier.verify_record_signature(record, pub_key_pem)
             if not sig_valid:
-                issues.append("Cryptographic Ed25519 digital signature validation FAILED (tampered content or invalid key).")
+                issues.append(
+                    "Cryptographic Ed25519 digital signature validation FAILED (tampered content or invalid key)."
+                )
 
         # 4. Merkle Root Match Verification (if manifest provided)
         merkle_valid = True
@@ -89,7 +93,9 @@ class IndependentCertificateVerifier:
                     manifest_root = m_data.get("merkle_root")
                     if manifest_root != record.merkle_root:
                         merkle_valid = False
-                        issues.append(f"Merkle root mismatch: manifest ({manifest_root}) != certificate ({record.merkle_root})")
+                        issues.append(
+                            f"Merkle root mismatch: manifest ({manifest_root}) != certificate ({record.merkle_root})"
+                        )
             except Exception as ex:
                 merkle_valid = False
                 issues.append(f"Failed to verify Merkle manifest: {str(ex)}")
@@ -99,18 +105,12 @@ class IndependentCertificateVerifier:
         if has_critical:
             issues.append(f"Certificate contains unresolved critical findings: {record.critical_findings}")
 
-        is_valid = (
-            sig_valid
-            and not is_expired
-            and not is_revoked
-            and merkle_valid
-            and not has_critical
-        )
+        is_valid = sig_valid and not is_expired and not is_revoked and merkle_valid and not has_critical
 
-        final_status = "CERTIFIED" if is_valid else (
-            "REVOKED" if is_revoked else (
-                "EXPIRED" if is_expired else "INVALID_SIGNATURE_OR_TAMPERED"
-            )
+        final_status = (
+            "CERTIFIED"
+            if is_valid
+            else ("REVOKED" if is_revoked else ("EXPIRED" if is_expired else "INVALID_SIGNATURE_OR_TAMPERED"))
         )
 
         return {

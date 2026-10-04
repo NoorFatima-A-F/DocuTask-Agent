@@ -49,16 +49,20 @@ class DAGScheduler:
 
         # Default executor if none provided
         if executor_func is None:
+
             async def default_executor(node: DAGNode, worker_id: str) -> Dict[str, Any]:
                 await asyncio.sleep(0.01)  # Simulated non-blocking work
                 return {"status": "SUCCESS", "extracted_entities": 4, "worker_id": worker_id}
+
             executor_func = default_executor
 
         start_time = time.time()
         max_iterations = len(dag.nodes) * 2 + 10
         iteration = 0
 
-        while len(self._completed_node_ids) + len(self._failed_node_ids) < len(dag.nodes) and iteration < max_iterations:
+        while (
+            len(self._completed_node_ids) + len(self._failed_node_ids) < len(dag.nodes) and iteration < max_iterations
+        ):
             iteration += 1
             completed_in_wave = await self.parallel_scheduler.schedule_wavefront(
                 dag=dag,

@@ -1,4 +1,5 @@
 """Immutable Release Domain Model (Req 9, 10, 80)."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -10,6 +11,7 @@ from ..control_plane.state_machine import ReleaseState
 @dataclass
 class ReleaseComponent:
     """Sub-component version within a consolidated release."""
+
     name: str
     version: str
     artifact_digest: str
@@ -18,6 +20,7 @@ class ReleaseComponent:
 @dataclass
 class ReleaseManifest:
     """Machine-readable Release Manifest (Req 80)."""
+
     release_id: str
     version: str
     commit_sha: str
@@ -49,6 +52,7 @@ class ReleaseManifest:
 @dataclass
 class Release:
     """Authoritative Release Package Entity."""
+
     release_id: str
     version: str
     commit_sha: str
@@ -98,7 +102,9 @@ class Release:
             "branch": self.branch,
             "repository": self.repository,
             "created_by": self.created_by,
-            "components": [{"name": c.name, "version": c.version, "digest": c.artifact_digest} for c in self.components],
+            "components": [
+                {"name": c.name, "version": c.version, "digest": c.artifact_digest} for c in self.components
+            ],
             "artifacts": self.artifacts,
             "sbom_refs": self.sbom_refs,
             "provenance_refs": self.provenance_refs,

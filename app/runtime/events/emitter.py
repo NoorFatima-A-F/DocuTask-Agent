@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 class EventBus:
     """Singleton event bus for synchronous and asynchronous runtime events."""
+
     _instance: Optional[EventBus] = None
 
     def __init__(self, store: Optional[EventStore] = None, dispatcher: Optional[EventDispatcher] = None):
@@ -55,6 +56,7 @@ class EventBus:
 
 class RuntimeEventEmitter:
     """Convenience emitter attached to workers, planners, and runtimes."""
+
     def __init__(self, bus: Optional[EventBus] = None, mission_id: str = ""):
         self.bus = bus or EventBus.get_instance()
         self.mission_id = mission_id

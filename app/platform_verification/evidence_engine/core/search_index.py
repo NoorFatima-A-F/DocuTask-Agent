@@ -2,10 +2,9 @@
 Evidence Search & Discovery Index.
 Queries artifacts across execution IDs, categories, and tags.
 """
+
 from typing import Dict, List, Optional
-from app.platform_verification.evidence_engine.domain.models import (
-    EvidenceArtifact, EvidenceCategory
-)
+from app.platform_verification.evidence_engine.domain.models import EvidenceArtifact, EvidenceCategory
 from app.platform_verification.evidence_engine.domain.interfaces import EvidenceSearchInterface
 from app.platform_verification.evidence_engine.core.collector import evidence_collector
 
@@ -26,9 +25,7 @@ class EvidenceSearchIndex(EvidenceSearchInterface):
         return results
 
     def search_artifacts(
-        self,
-        execution_id: Optional[str] = None,
-        category: Optional[EvidenceCategory] = None
+        self, execution_id: Optional[str] = None, category: Optional[EvidenceCategory] = None
     ) -> List[EvidenceArtifact]:
         all_artifacts = list(self._indexed.values())
         if execution_id:

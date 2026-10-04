@@ -1,6 +1,7 @@
 """
 Phase 3H.9.4: Long-Term Statistical Trend Analysis Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_intelligence.domain.interfaces import ITrendAnalysisVerifier

@@ -12,14 +12,13 @@ from typing import Any, Dict, List, Optional, Set
 
 from research_validation.knowledge_graph.knowledge_node import KnowledgeNode
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
-from research_validation.knowledge_graph.relationship_engine import (
-    RelationshipEdge, RelationshipEngine
-)
+from research_validation.knowledge_graph.relationship_engine import RelationshipEdge, RelationshipEngine
 
 
 @dataclass(frozen=True)
 class GraphPath:
     """A traversed path through knowledge nodes and edges."""
+
     nodes: List[KnowledgeNode]
     edges: List[RelationshipEdge]
     total_weight: float

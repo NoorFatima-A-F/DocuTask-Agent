@@ -62,8 +62,7 @@ class TelemetryCollectorPipeline:
                 record[k] = mask_sensitive_data(v)
             elif isinstance(v, dict):
                 record[k] = {
-                    sub_k: mask_sensitive_data(sub_v) if isinstance(sub_v, str) else sub_v
-                    for sub_k, sub_v in v.items()
+                    sub_k: mask_sensitive_data(sub_v) if isinstance(sub_v, str) else sub_v for sub_k, sub_v in v.items()
                 }
         return record
 
@@ -132,6 +131,7 @@ class TelemetryCollectorPipeline:
 
 class TelemetryCollector:
     """In-memory telemetry accumulator for verification workloads."""
+
     def __init__(self):
         self._metrics: Dict[str, float] = {}
         self._counters: Dict[str, int] = {}
@@ -143,8 +143,4 @@ class TelemetryCollector:
         self._metrics[metric_name] = value
 
     def get_snapshot(self) -> Dict[str, Any]:
-        return {
-            "metrics": dict(self._metrics),
-            "counters": dict(self._counters)
-        }
-
+        return {"metrics": dict(self._metrics), "counters": dict(self._counters)}

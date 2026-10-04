@@ -13,6 +13,7 @@ from app.agents.planning.interfaces import IPlanValidator
 
 class GraphValidationResult(BaseModel):
     """Validation report containing error list and validity flag."""
+
     is_valid: bool = Field(default=True)
     errors: List[str] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)
@@ -39,7 +40,4 @@ class PlanValidator(IPlanValidator):
 
     def validate_and_report(self, plan: Plan) -> GraphValidationResult:
         errors = self.validate_plan(plan)
-        return GraphValidationResult(
-            is_valid=len(errors) == 0,
-            errors=errors
-        )
+        return GraphValidationResult(is_valid=len(errors) == 0, errors=errors)

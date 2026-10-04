@@ -101,7 +101,7 @@ class ToolTraceCollector:
         out_digest = hashlib.sha256(json.dumps(outputs, sort_keys=True, default=str).encode("utf-8")).hexdigest()
 
         return ToolTrace(
-            trace_id=f"tr-{int(time.time()*1000)}",
+            trace_id=f"tr-{int(time.time() * 1000)}",
             tool_name=tool_name,
             input_digest=in_digest,
             output_digest=out_digest,

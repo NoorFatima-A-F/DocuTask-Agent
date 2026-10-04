@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class KnowledgeSource(BaseModel):
     """Origin of a knowledge item."""
+
     source_type: str = Field(default="EXECUTION_OBSERVATION")
     uri: Optional[str] = Field(default=None)
     model_config = {"frozen": True}
@@ -19,6 +20,7 @@ class KnowledgeSource(BaseModel):
 
 class KnowledgeItem(BaseModel):
     """Knowledge item representation."""
+
     item_id: UUID = Field(default_factory=uuid4)
     category: str = Field(default="FACT")  # FACT, RULE, PATTERN, EXAMPLE, TEMPLATE, SCHEMA
     topic: str
@@ -31,6 +33,7 @@ class KnowledgeItem(BaseModel):
 
 class KnowledgeGraphNode(BaseModel):
     """Node in a knowledge graph."""
+
     node_id: str
     label: str
     properties: Dict[str, Any] = Field(default_factory=dict)
@@ -39,6 +42,7 @@ class KnowledgeGraphNode(BaseModel):
 
 class KnowledgeEdge(BaseModel):
     """Edge connecting two nodes in a knowledge graph."""
+
     edge_id: str
     source_node_id: str
     target_node_id: str
@@ -49,6 +53,7 @@ class KnowledgeEdge(BaseModel):
 
 class KnowledgeCluster(BaseModel):
     """Cluster of related knowledge graph nodes and items."""
+
     cluster_id: str
     name: str
     nodes: List[KnowledgeGraphNode] = Field(default_factory=list)

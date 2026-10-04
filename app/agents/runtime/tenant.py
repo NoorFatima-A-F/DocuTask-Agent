@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class TenantTier(str, Enum):
     """SaaS pricing and isolation tier."""
+
     FREE = "FREE"
     STANDARD = "STANDARD"
     ENTERPRISE = "ENTERPRISE"
@@ -17,6 +18,7 @@ class TenantTier(str, Enum):
 
 class Tenant(BaseModel):
     """Enterprise tenant record governing platform resource quotas and isolation."""
+
     tenant_id: str
     name: str
     tier: TenantTier = TenantTier.ENTERPRISE

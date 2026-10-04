@@ -13,6 +13,7 @@ from app.agents.coordination.capability_matcher import CapabilityRequirement
 
 class ScheduledTaskItem(BaseModel):
     """Task scheduled for allocation to an agent."""
+
     task_id: str
     task_name: str
     priority: int = Field(default=1, ge=1, le=10)
@@ -28,11 +29,7 @@ class DistributedAgentScheduler:
     def __init__(self, selector: Optional[AgentSelector] = None):
         self.selector = selector or AgentSelector()
 
-    def schedule_tasks(
-        self,
-        tasks: List[ScheduledTaskItem],
-        available_agents: List[Agent]
-    ) -> List[ScheduledTaskItem]:
+    def schedule_tasks(self, tasks: List[ScheduledTaskItem], available_agents: List[Agent]) -> List[ScheduledTaskItem]:
         """Schedules tasks ordered by priority (highest first) and binds to optimal agents."""
         # Sort tasks by descending priority
         sorted_tasks = sorted(tasks, key=lambda t: t.priority, reverse=True)

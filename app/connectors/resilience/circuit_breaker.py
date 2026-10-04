@@ -19,14 +19,16 @@ logger = logging.getLogger(__name__)
 
 class CircuitState(str, Enum):
     """Four-state circuit breaker finite state machine."""
-    CLOSED = "CLOSED"        # Normal operations; calls are allowed through
-    OPEN = "OPEN"            # Tripped; calls immediately fail fast
+
+    CLOSED = "CLOSED"  # Normal operations; calls are allowed through
+    OPEN = "OPEN"  # Tripped; calls immediately fail fast
     HALF_OPEN = "HALF_OPEN"  # Testing recovery; allows a limited probe call
-    RECOVERY = "RECOVERY"    # Progressive stabilization phase
+    RECOVERY = "RECOVERY"  # Progressive stabilization phase
 
 
 class CircuitBreakerConfig(BaseModel):
     """Configuration for circuit breaker failure thresholds and reset windows."""
+
     failure_threshold: int = 5
     recovery_timeout_seconds: float = 10.0
     half_open_success_threshold: int = 2
@@ -91,7 +93,9 @@ class CircuitBreaker:
 
         if self.state in (CircuitState.CLOSED, CircuitState.RECOVERY):
             if self._consecutive_failures >= self.config.failure_threshold:
-                self._transition_to(CircuitState.OPEN, f"Failure threshold ({self.config.failure_threshold}) exceeded: {error}")
+                self._transition_to(
+                    CircuitState.OPEN, f"Failure threshold ({self.config.failure_threshold}) exceeded: {error}"
+                )
         elif self.state == CircuitState.HALF_OPEN:
             # Immediate trip back to OPEN on any failure during trial
             self._transition_to(CircuitState.OPEN, f"Failed probe in HALF_OPEN: {error}")

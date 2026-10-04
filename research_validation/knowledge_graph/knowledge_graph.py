@@ -11,22 +11,17 @@ from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 from research_validation.knowledge_graph.ontology import EntityType, RelationshipType
-from research_validation.knowledge_graph.knowledge_node import (
-    KnowledgeNode, create_node
-)
-from research_validation.knowledge_graph.relationship_engine import (
-    RelationshipEdge, RelationshipEngine
-)
+from research_validation.knowledge_graph.knowledge_node import KnowledgeNode, create_node
+from research_validation.knowledge_graph.relationship_engine import RelationshipEdge, RelationshipEngine
 from research_validation.knowledge_graph.semantic_query import SemanticQueryEngine
-from research_validation.knowledge_graph.reasoning_engine import (
-    ScientificReasoningEngine
-)
+from research_validation.knowledge_graph.reasoning_engine import ScientificReasoningEngine
 from research_validation.provenance.hashing import hash_canonical_json
 
 
 @dataclass(frozen=True)
 class KnowledgeGraphSnapshot:
     """Immutable, hash-sealed snapshot of the complete knowledge graph."""
+
     node_count: int
     edge_count: int
     root_digest_sha256: str
@@ -110,8 +105,12 @@ class ScientificKnowledgeGraph:
 
     def export_dot(self) -> str:
         """Exports graph to Graphviz DOT format for publication visualization."""
-        lines = ["digraph ScientificKnowledgeGraph {", '  rankdir="LR";', '  node [shape="box", style="rounded,filled", fontname="Helvetica"];']
-        
+        lines = [
+            "digraph ScientificKnowledgeGraph {",
+            '  rankdir="LR";',
+            '  node [shape="box", style="rounded,filled", fontname="Helvetica"];',
+        ]
+
         color_map = {
             EntityType.EXPERIMENT: "#D0E1FD",
             EntityType.DATASET: "#D1FADF",
@@ -127,7 +126,9 @@ class ScientificKnowledgeGraph:
             lines.append(f'  "{node.node_id}" [label="{node.name}\\n({node.entity_type.value})", fillcolor="{color}"];')
 
         for edge in self.rel_engine.edges.values():
-            lines.append(f'  "{edge.source_id}" -> "{edge.target_id}" [label="{edge.relationship.value}", fontsize="9"];')
+            lines.append(
+                f'  "{edge.source_id}" -> "{edge.target_id}" [label="{edge.relationship.value}", fontsize="9"];'
+            )
 
         lines.append("}")
         return "\n".join(lines)

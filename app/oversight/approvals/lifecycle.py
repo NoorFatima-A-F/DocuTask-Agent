@@ -5,6 +5,7 @@ from enum import Enum
 
 class ApprovalLifecycleState(str, Enum):
     """10-State Lifecycle FSM for Human Reviews & Approvals."""
+
     CREATED = "CREATED"
     PENDING_REVIEW = "PENDING_REVIEW"
     ASSIGNED = "ASSIGNED"

@@ -21,6 +21,7 @@ class ServiceStatus(str, Enum):
 @dataclass
 class ServiceRecord:
     """Registered platform service record."""
+
     name: str
     version: SemanticVersion = field(default_factory=lambda: SemanticVersion(1, 0, 0))
     module_owner: str = "core"

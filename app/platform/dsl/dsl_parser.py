@@ -46,11 +46,11 @@ class DSLParser:
         steps: List[DSLStepSpec] = []
         for i, s in enumerate(steps_raw):
             if isinstance(s, str):
-                steps.append(DSLStepSpec(name=f"step_{i+1}_{s}", capability=s))
+                steps.append(DSLStepSpec(name=f"step_{i + 1}_{s}", capability=s))
             elif isinstance(s, dict):
                 steps.append(
                     DSLStepSpec(
-                        name=s.get("name", f"step_{i+1}"),
+                        name=s.get("name", f"step_{i + 1}"),
                         capability=s.get("capability", "general"),
                         depends_on=s.get("depends_on", []),
                         config=s.get("config", {}),

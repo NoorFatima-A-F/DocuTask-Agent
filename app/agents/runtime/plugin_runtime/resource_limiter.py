@@ -10,6 +10,7 @@ from app.agents.runtime.exceptions import RuntimeKernelException
 
 class PluginResourceLimitExceededError(RuntimeKernelException):
     """Raised when a plugin exceeds allocated CPU execution time or memory quotas."""
+
     pass
 
 
@@ -25,7 +26,9 @@ class PluginResourceLimiter:
         max_cpu_time_seconds: Optional[float] = None,
         max_memory_mb: float = 128.0,
     ) -> None:
-        self.max_execution_time = max_cpu_time_seconds if max_cpu_time_seconds is not None else max_execution_time_seconds
+        self.max_execution_time = (
+            max_cpu_time_seconds if max_cpu_time_seconds is not None else max_execution_time_seconds
+        )
         self.max_memory_mb = max_memory_mb
 
     async def execute_bounded(self, action: Callable[[], Coroutine[Any, Any, Any]]) -> Any:

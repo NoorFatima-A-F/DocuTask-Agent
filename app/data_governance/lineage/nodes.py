@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class LineageNodeType(str, enum.Enum):
     """Supported entity types in a data lineage graph."""
+
     DATASET = "DATASET"
     DOCUMENT = "DOCUMENT"
     WORKFLOW = "WORKFLOW"
@@ -24,6 +25,7 @@ class LineageNodeType(str, enum.Enum):
 
 class LineageNode(BaseModel):
     """Node in the enterprise data lineage DAG."""
+
     node_id: str
     node_type: LineageNodeType
     label: str

@@ -16,6 +16,7 @@ from app.model_governance.lifecycle.manager import ModelLifecycleManager
 
 class DeprecationPlan(BaseModel):
     """Structured plan for deprecating and retiring an AI model."""
+
     model_id: str
     organization_id: str
     replacement_model_id: Optional[str] = None

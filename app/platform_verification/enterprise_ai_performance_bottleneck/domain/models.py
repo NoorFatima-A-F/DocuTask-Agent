@@ -17,10 +17,10 @@ PerformanceVerificationStatus = VerificationStatus
 
 
 class EnterprisePerformanceTier(str, Enum):
-    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"    # 95-100
-    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"    # 90-94.99
-    OPTIMIZATION_REQUIRED = "Optimization Required"                  # 80-89.99
-    FAILED = "Failed"                                                # <80
+    ENTERPRISE_PERFORMANCE_READY = "Enterprise Performance Ready"  # 95-100
+    PRODUCTION_PERFORMANCE_READY = "Production Performance Ready"  # 90-94.99
+    OPTIMIZATION_REQUIRED = "Optimization Required"  # 80-89.99
+    FAILED = "Failed"  # <80
 
 
 CertificationTier = EnterprisePerformanceTier
@@ -47,6 +47,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3J.9.1: Performance Architecture Modeling ───────────────────────────────
 
+
 class ComponentCapacity(BaseModel):
     name: str
     layer: str
@@ -66,6 +67,7 @@ class PerformanceArchitectureReport(BaseVerificationReport):
 
 
 # ─── 3J.9.2: End-to-End Latency Profiling ────────────────────────────────────
+
 
 class LatencyBreakdownStage(BaseModel):
     stage_name: str
@@ -88,6 +90,7 @@ class LatencyBreakdownReport(BaseVerificationReport):
 
 # ─── 3J.9.3: Throughput Capacity Verification ────────────────────────────────
 
+
 class ThroughputWorkloadTier(BaseModel):
     workload_docs: int
     sustainable: bool
@@ -108,6 +111,7 @@ class ThroughputCapacityReport(BaseVerificationReport):
 
 # ─── 3J.9.4: Resource Bottleneck Analysis ────────────────────────────────────
 
+
 class ResourceMetricAnalysis(BaseModel):
     resource_type: str
     avg_usage_pct: float
@@ -118,15 +122,44 @@ class ResourceMetricAnalysis(BaseModel):
 
 class ResourceBottleneckReport(BaseVerificationReport):
     report_title: str = "System Resource Bottleneck Analysis Report"
-    cpu_metrics: ResourceMetricAnalysis = Field(default_factory=lambda: ResourceMetricAnalysis(resource_type="CPU", avg_usage_pct=42.0, peak_usage_pct=68.0, bottleneck_detected=False, headroom_pct=32.0))
-    memory_metrics: ResourceMetricAnalysis = Field(default_factory=lambda: ResourceMetricAnalysis(resource_type="Memory", avg_usage_pct=52.0, peak_usage_pct=70.0, bottleneck_detected=False, headroom_pct=30.0))
-    disk_metrics: ResourceMetricAnalysis = Field(default_factory=lambda: ResourceMetricAnalysis(resource_type="Disk IO", avg_usage_pct=28.0, peak_usage_pct=45.0, bottleneck_detected=False, headroom_pct=55.0))
-    network_metrics: ResourceMetricAnalysis = Field(default_factory=lambda: ResourceMetricAnalysis(resource_type="Network", avg_usage_pct=22.0, peak_usage_pct=40.0, bottleneck_detected=False, headroom_pct=60.0))
+    cpu_metrics: ResourceMetricAnalysis = Field(
+        default_factory=lambda: ResourceMetricAnalysis(
+            resource_type="CPU", avg_usage_pct=42.0, peak_usage_pct=68.0, bottleneck_detected=False, headroom_pct=32.0
+        )
+    )
+    memory_metrics: ResourceMetricAnalysis = Field(
+        default_factory=lambda: ResourceMetricAnalysis(
+            resource_type="Memory",
+            avg_usage_pct=52.0,
+            peak_usage_pct=70.0,
+            bottleneck_detected=False,
+            headroom_pct=30.0,
+        )
+    )
+    disk_metrics: ResourceMetricAnalysis = Field(
+        default_factory=lambda: ResourceMetricAnalysis(
+            resource_type="Disk IO",
+            avg_usage_pct=28.0,
+            peak_usage_pct=45.0,
+            bottleneck_detected=False,
+            headroom_pct=55.0,
+        )
+    )
+    network_metrics: ResourceMetricAnalysis = Field(
+        default_factory=lambda: ResourceMetricAnalysis(
+            resource_type="Network",
+            avg_usage_pct=22.0,
+            peak_usage_pct=40.0,
+            bottleneck_detected=False,
+            headroom_pct=60.0,
+        )
+    )
     soak_72h_stable: bool = True
     memory_leak_detected: bool = False
 
 
 # ─── 3J.9.5: Database Performance Analysis ───────────────────────────────────
+
 
 class SlowQueryAnalysis(BaseModel):
     query_pattern: str
@@ -149,6 +182,7 @@ class DatabasePerformanceReport(BaseVerificationReport):
 
 # ─── 3J.9.6: Queue Performance Analysis ──────────────────────────────────────
 
+
 class QueueCapacityReport(BaseVerificationReport):
     report_title: str = "Redis Queue Performance & Drain Capacity Report"
     initial_depth: int = 100
@@ -161,6 +195,7 @@ class QueueCapacityReport(BaseVerificationReport):
 
 
 # ─── 3J.9.7: Worker Scaling Analysis ─────────────────────────────────────────
+
 
 class WorkerScalingPoint(BaseModel):
     worker_count: int
@@ -179,6 +214,7 @@ class WorkerScalingReport(BaseVerificationReport):
 
 
 # ─── 3J.9.8: AI Model Performance Verification ───────────────────────────────
+
 
 class AIModelMetric(BaseModel):
     model_name: str
@@ -201,6 +237,7 @@ class AIModelPerformanceReport(BaseVerificationReport):
 
 # ─── 3J.9.9: Performance Regression Detection ────────────────────────────────
 
+
 class RegressionMetricComparison(BaseModel):
     metric_name: str
     v1_0_baseline: float
@@ -219,6 +256,7 @@ class PerformanceRegressionReport(BaseVerificationReport):
 
 
 # ─── 3J.9.10: Capacity Planning Model ────────────────────────────────────────
+
 
 class CapacityPlanProjection(BaseModel):
     horizon_label: str
@@ -239,6 +277,7 @@ class CapacityPlanReport(BaseVerificationReport):
 
 
 # ─── 3J.9.11: Performance Failure Simulation ─────────────────────────────────
+
 
 class PerformanceFailureScenario(BaseModel):
     scenario_id: str
@@ -261,6 +300,7 @@ class PerformanceFailureReport(BaseVerificationReport):
 
 # ─── 3J.9.12: Performance Observability Validation ───────────────────────────
 
+
 class ObservabilitySignal(BaseModel):
     signal_type: str
     metric_name: str
@@ -276,6 +316,7 @@ class PerformanceObservabilityReport(BaseVerificationReport):
 
 
 # ─── Quality Scoring & Certification ─────────────────────────────────────────
+
 
 class CategoryScore(BaseModel):
     category: str
@@ -301,6 +342,7 @@ class EnterpriseAIPerformanceCertificationReport(BaseVerificationReport):
 
 
 # ─── Manifest ────────────────────────────────────────────────────────────────
+
 
 class AIPerformanceVerificationManifest(BaseModel):
     system: str = "DocuTask Agent"

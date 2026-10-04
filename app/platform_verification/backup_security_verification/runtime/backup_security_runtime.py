@@ -1,6 +1,7 @@
 """
 Master Runtime Orchestrator for Backup Security Verification Framework (Part 3G.2F).
 """
+
 import time
 from typing import Dict, Any, Optional
 
@@ -92,9 +93,7 @@ class BackupSecurityVerificationRuntime:
         self.scoring_engine = scoring_engine or BackupSecurityQualityScoringEngine()
         self.evidence_engine = evidence_engine or BackupSecurityEvidenceEngine()
 
-    def execute_full_security_verification(
-        self, output_dir: Optional[str] = None
-    ) -> Dict[str, Any]:
+    def execute_full_security_verification(self, output_dir: Optional[str] = None) -> Dict[str, Any]:
         """
         Executes end-to-end backup security verification across all 14 phases.
         """
@@ -130,7 +129,9 @@ class BackupSecurityVerificationRuntime:
         # Step 7: Scoring & Certification
         enc_score = 100.0 if encryption_report.passed and inventory_report.unencrypted_assets == 0 else 60.0
         acc_score = 100.0 if access_control_report.passed and iam_test_report.passed else 50.0
-        integ_score = 100.0 if (tamper_report.passed and poisoning_report.passed and immutability_report.passed) else 65.0
+        integ_score = (
+            100.0 if (tamper_report.passed and poisoning_report.passed and immutability_report.passed) else 65.0
+        )
         key_score = 100.0 if key_management_report.passed and key_rotation_report.passed else 55.0
         aud_score = 100.0 if audit_report.passed and retention_report.passed else 70.0
         comp_score = compliance_report.compliance_score_percent
@@ -163,9 +164,7 @@ class BackupSecurityVerificationRuntime:
         }
 
         # Step 8: Evidence Serialization
-        manifest_paths = self.evidence_engine.export_all_evidence_artifacts(
-            verification_data, output_dir=output_dir
-        )
+        manifest_paths = self.evidence_engine.export_all_evidence_artifacts(verification_data, output_dir=output_dir)
 
         verification_data["exported_manifest_paths"] = manifest_paths
         verification_data["passed"] = scorecard.passed

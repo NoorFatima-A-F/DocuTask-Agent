@@ -18,9 +18,7 @@ class ToolSelector(IToolSelector):
         self.registry = registry
 
     async def select(
-        self,
-        requirement: CapabilityRequirement,
-        policy: Optional[SelectionPolicy] = None
+        self, requirement: CapabilityRequirement, policy: Optional[SelectionPolicy] = None
     ) -> Optional[BaseTool]:
         """Resolves capability matches and selects optimal tool using active selection policy."""
         matches = await self.resolver.resolve(requirement)

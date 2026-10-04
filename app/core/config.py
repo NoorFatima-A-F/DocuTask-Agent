@@ -9,12 +9,15 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 import yaml
 from pydantic import Field
+
 try:
     from pydantic_settings import BaseSettings, SettingsConfigDict
 except ImportError:
     from pydantic import BaseModel as BaseSettings  # type: ignore
+
     def SettingsConfigDict(**kwargs):  # type: ignore
         return None
+
 
 # Canonical Path Hierarchy
 REPO_ROOT: Path = Path(__file__).resolve().parent.parent.parent
@@ -120,9 +123,7 @@ class Settings(BaseSettings):
     STORAGE_LOCAL_DIR: str = "./uploads"
     MAX_UPLOAD_SIZE_MB: int = 50
     MAX_FILENAME_LENGTH: int = 255
-    ALLOWED_EXTENSIONS: List[str] = Field(
-        default_factory=lambda: [".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp"]
-    )
+    ALLOWED_EXTENSIONS: List[str] = Field(default_factory=lambda: [".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp"])
     ALLOWED_MIME_TYPES: List[str] = Field(
         default_factory=lambda: ["application/pdf", "image/png", "image/jpeg", "image/tiff", "image/bmp"]
     )

@@ -2,6 +2,7 @@
 3I.12.10: Autonomous Decision Safety Verifier
 Enforces Safe, Controlled, and Restricted action tiers with confidence thresholds and safety checks.
 """
+
 from typing import List
 from app.platform_verification.autonomous_reliability_engineering.domain.models import (
     AutonomousSafetyReport,
@@ -20,7 +21,11 @@ class DecisionSafetyVerifier(IDecisionSafetyVerifier):
                 action_type="WorkerPodGracefulRestart",
                 assigned_safety_level=ActionSafetyLevel.SAFE,
                 required_confidence_threshold=0.85,
-                risk_evaluation_criteria=["Non-terminating traffic disruption", "Zero data loss", "Health probe validation"],
+                risk_evaluation_criteria=[
+                    "Non-terminating traffic disruption",
+                    "Zero data loss",
+                    "Health probe validation",
+                ],
                 verification_check="Post-restart pod readiness probe passes within 30s",
             ),
             DecisionSafetyRuleSpec(
@@ -34,7 +39,11 @@ class DecisionSafetyVerifier(IDecisionSafetyVerifier):
                 action_type="HorizontalWorkerClusterScaling",
                 assigned_safety_level=ActionSafetyLevel.CONTROLLED,
                 required_confidence_threshold=0.90,
-                risk_evaluation_criteria=["Node capacity headroom", "Cost rate limit ceiling", "Cooldown period enforced"],
+                risk_evaluation_criteria=[
+                    "Node capacity headroom",
+                    "Cost rate limit ceiling",
+                    "Cooldown period enforced",
+                ],
                 verification_check="Cluster queue latency returns below 10s within 5 minutes",
             ),
             DecisionSafetyRuleSpec(
@@ -48,7 +57,10 @@ class DecisionSafetyVerifier(IDecisionSafetyVerifier):
                 action_type="PostgreSQLSchemaOrConstraintModification",
                 assigned_safety_level=ActionSafetyLevel.RESTRICTED,
                 required_confidence_threshold=0.98,
-                risk_evaluation_criteria=["Mandatory human SRE dual-approval", "Zero lock blocking verified in staging"],
+                risk_evaluation_criteria=[
+                    "Mandatory human SRE dual-approval",
+                    "Zero lock blocking verified in staging",
+                ],
                 verification_check="Explicit signed cryptographic approval token required",
             ),
         ]

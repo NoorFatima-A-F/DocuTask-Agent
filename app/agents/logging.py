@@ -4,6 +4,7 @@ Injects execution_id, request_id, document_id, state, duration, agent_name, and 
 """
 
 from typing import Any, Dict
+
 try:
     from app.core.logging import logger
 except ImportError:
@@ -11,6 +12,7 @@ except ImportError:
         from core.logging import logger
     except ImportError:
         import logging
+
         logger = logging.getLogger("ai_doc_platform")
 from app.agents.context import AgentContext
 from app.agents.state import AgentState
@@ -29,7 +31,7 @@ class AgentLogger:
         context: AgentContext,
         state: AgentState | None = None,
         duration_ms: float | None = None,
-        extra: Dict[str, Any] | None = None
+        extra: Dict[str, Any] | None = None,
     ) -> None:
         """Emits structured log message with context attributes."""
         payload = {
@@ -40,7 +42,7 @@ class AgentLogger:
             "document_id": str(context.document_id),
             "state": state.value if state else "N/A",
             "duration_ms": duration_ms,
-            "details": extra or {}
+            "details": extra or {},
         }
         log_msg = f"[{self.agent_name}] [{payload['state']}] {message} | ExecID={payload['execution_id']} | DocID={payload['document_id']}"
 

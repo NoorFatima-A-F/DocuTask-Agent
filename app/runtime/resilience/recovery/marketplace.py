@@ -109,7 +109,9 @@ class RecoveryMarketplace:
     def get_strategy(self, strategy_id: str) -> Optional[RecoveryStrategy]:
         return self._strategies.get(strategy_id)
 
-    def execute_recovery(self, strategy_id: str, trigger: Optional[FallbackTriggerType] = None) -> RecoveryExecutionResult:
+    def execute_recovery(
+        self, strategy_id: str, trigger: Optional[FallbackTriggerType] = None
+    ) -> RecoveryExecutionResult:
         """Executes a registered recovery strategy and tracks outcome metrics."""
         strat = self.get_strategy(strategy_id)
         if not strat:
@@ -160,13 +162,17 @@ class RecoveryMarketplace:
         for s in self._strategies.values():
             # Utility formula: U = 0.60 * SuccessRate + 0.30 * (1000 / mean_recovery_ms) - 0.10 * (cost_impact * 10000)
             utility_score = round(
-                (0.60 * s.success_rate_pct) + (0.30 * (1000.0 / max(1.0, s.mean_recovery_ms))) - (0.10 * max(0.0, s.cost_impact_usd * 10000.0)),
-                2
+                (0.60 * s.success_rate_pct)
+                + (0.30 * (1000.0 / max(1.0, s.mean_recovery_ms)))
+                - (0.10 * max(0.0, s.cost_impact_usd * 10000.0)),
+                2,
             )
-            ranked_strategies.append({
-                **s.__dict__,
-                "utility_score": utility_score,
-            })
+            ranked_strategies.append(
+                {
+                    **s.__dict__,
+                    "utility_score": utility_score,
+                }
+            )
 
         ranked_strategies.sort(key=lambda x: x["utility_score"], reverse=True)
 

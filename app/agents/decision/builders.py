@@ -52,7 +52,7 @@ class DecisionBuilder:
             user_id=self._user_id,
             action_type=self._action_type,
             estimated_cost_usd=self._estimated_cost_usd,
-            parameters=self._parameters
+            parameters=self._parameters,
         )
         DecisionValidator.validate_context(ctx)
         return ctx
@@ -90,7 +90,7 @@ class RuleBuilder:
             name=self._name,
             rule_type=self._rule_type,
             action_type=self._action_type,
-            priority=self._priority
+            priority=self._priority,
         )
 
 
@@ -116,7 +116,7 @@ class PolicyBuilder:
             cost_policy=self._cost_policy,
             security_policy=self._security_policy,
             compliance_policy=self._compliance_policy,
-            approval_policy=self._approval_policy
+            approval_policy=self._approval_policy,
         )
 
 
@@ -137,11 +137,7 @@ class OptimizationBuilder:
         return self
 
     def build(self) -> OptimizationTarget:
-        return OptimizationTarget(
-            metric=self._metric,
-            target_value=self._target_value,
-            weight=self._weight
-        )
+        return OptimizationTarget(metric=self._metric, target_value=self._target_value, weight=self._weight)
 
 
 class RecommendationBuilder:
@@ -157,11 +153,7 @@ class RecommendationBuilder:
         return self
 
     def build(self) -> Recommendation:
-        return Recommendation(
-            action=self._action,
-            rationale=self._rationale,
-            confidence=self._confidence
-        )
+        return Recommendation(action=self._action, rationale=self._rationale, confidence=self._confidence)
 
 
 class ExplanationBuilder:
@@ -175,10 +167,7 @@ class ExplanationBuilder:
     def add_step(self, step_number: int, rule_or_policy: str, outcome: str, explanation: str) -> "ExplanationBuilder":
         self._reasoning_steps.append(
             ReasoningStep(
-                step_number=step_number,
-                rule_or_policy=rule_or_policy,
-                outcome=outcome,
-                explanation=explanation
+                step_number=step_number, rule_or_policy=rule_or_policy, outcome=outcome, explanation=explanation
             )
         )
         return self
@@ -189,7 +178,5 @@ class ExplanationBuilder:
 
     def build(self) -> DecisionExplanation:
         return DecisionExplanation(
-            summary=self._summary,
-            reasoning_steps=self._reasoning_steps,
-            confidence_breakdown=self._confidence
+            summary=self._summary, reasoning_steps=self._reasoning_steps, confidence_breakdown=self._confidence
         )

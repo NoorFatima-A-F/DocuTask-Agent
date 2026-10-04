@@ -1,6 +1,7 @@
 """
 Weighted Deployment Quality Scoring and Certification Engine.
 """
+
 from app.platform_verification.deployment_verification.domain.models import (
     BuildReproducibilityReport,
     DependencyLockReport,
@@ -38,7 +39,9 @@ class DeploymentScoringEngine(IDeploymentScoringEngine):
         rollback_rep: RollbackVerificationReport,
         zero_rep: ZeroDowntimeReport,
     ) -> DeploymentCertificationReport:
-        repro_s = (100.0 if build_rep.is_reproducible else 50.0) * 0.5 + (100.0 if lock_rep.is_strictly_pinned else 60.0) * 0.5
+        repro_s = (100.0 if build_rep.is_reproducible else 50.0) * 0.5 + (
+            100.0 if lock_rep.is_strictly_pinned else 60.0
+        ) * 0.5
         auto_s = auto_rep.automation_percentage
         sec_s = 100.0 if sec_rep.status == "PASS" else 40.0
         rel_s = 100.0 if release_rep.status == "PASS" and zero_rep.status == "PASS" else 70.0

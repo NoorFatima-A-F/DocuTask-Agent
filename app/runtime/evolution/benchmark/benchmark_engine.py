@@ -111,7 +111,9 @@ class BenchmarkEngine:
         b_acc = round(random.uniform(0.950, 0.975), 4)
         c_acc = round(min(0.999, b_acc + random.uniform(0.005, 0.022)), 4)
 
-        improvement_pct = round(((b_p95 - c_p95) / b_p95 * 0.4 + (b_cost - c_cost) / b_cost * 0.3 + (c_acc - b_acc) * 100 * 0.3) * 100, 2)
+        improvement_pct = round(
+            ((b_p95 - c_p95) / b_p95 * 0.4 + (b_cost - c_cost) / b_cost * 0.3 + (c_acc - b_acc) * 100 * 0.3) * 100, 2
+        )
         regression = c_p95 > b_p95 or c_acc < (b_acc - 0.01)
 
         status = BenchmarkStatus.FAILED.value if regression else BenchmarkStatus.PASSED.value
@@ -135,13 +137,16 @@ class BenchmarkEngine:
         )
         self.comparisons[comp_id] = comparison
 
-        self.event_bus.publish(
-            BenchmarkCompleted(payload=comparison.to_dict())
-        )
+        self.event_bus.publish(BenchmarkCompleted(payload=comparison.to_dict()))
 
         if regression:
             self.event_bus.publish(
-                PerformanceRegressionDetected(payload={"comparison_id": comp_id, "reason": "Candidate exceeded baseline latency or degraded accuracy."})
+                PerformanceRegressionDetected(
+                    payload={
+                        "comparison_id": comp_id,
+                        "reason": "Candidate exceeded baseline latency or degraded accuracy.",
+                    }
+                )
             )
 
         return comparison

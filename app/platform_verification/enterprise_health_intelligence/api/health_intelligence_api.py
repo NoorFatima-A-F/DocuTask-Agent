@@ -1,6 +1,7 @@
 """
 Phase 3H.5: Enterprise Health Intelligence API Router
 """
+
 from fastapi import APIRouter
 from ..runtime.health_intelligence_runtime import HealthIntelligenceRuntime
 

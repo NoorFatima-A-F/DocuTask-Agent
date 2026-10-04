@@ -84,10 +84,7 @@ async def test_ocr_service_full_workflow(db_session: AsyncSession, temp_storage_
     doc_service = DocumentService(document_repo=doc_repo, storage_provider=storage)
     ocr_pipeline = OCRPipeline(ocr_provider=TesseractOCRProvider())
     ocr_service = OCRService(
-        document_repo=doc_repo,
-        extracted_text_repo=text_repo,
-        storage_provider=storage,
-        ocr_pipeline=ocr_pipeline
+        document_repo=doc_repo, extracted_text_repo=text_repo, storage_provider=storage, ocr_pipeline=ocr_pipeline
     )
 
     user = await user_repo.create({"email": "ocr_user@example.com", "username": "ocruser", "hashed_password": "p"})
@@ -126,17 +123,15 @@ async def test_ocr_service_full_workflow(db_session: AsyncSession, temp_storage_
 async def test_ocr_api_endpoints(client: AsyncClient):
     """Verifies OCR HTTP endpoints via AsyncClient."""
     # 1. Register & Login User
-    reg = await client.post("/api/v1/auth/register", json={
-        "email": "ocr_api_user@example.com",
-        "username": "ocrapiuser",
-        "password": "Password123!"
-    })
+    reg = await client.post(
+        "/api/v1/auth/register",
+        json={"email": "ocr_api_user@example.com", "username": "ocrapiuser", "password": "Password123!"},
+    )
     assert reg.status_code == 201
 
-    login = await client.post("/api/v1/auth/login", json={
-        "username_or_email": "ocrapiuser",
-        "password": "Password123!"
-    })
+    login = await client.post(
+        "/api/v1/auth/login", json={"username_or_email": "ocrapiuser", "password": "Password123!"}
+    )
     token = login.json()["data"]["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 

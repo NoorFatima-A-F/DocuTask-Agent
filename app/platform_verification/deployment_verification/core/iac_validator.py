@@ -1,6 +1,7 @@
 """
 Infrastructure as Code (IaC) Validator.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.deployment_verification.domain.models import IacValidationReport
 from app.platform_verification.deployment_verification.domain.interfaces import IIacValidator

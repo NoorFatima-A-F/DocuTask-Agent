@@ -2,6 +2,7 @@
 FastAPI REST Gateway for Enterprise Configuration, Versioning & Dependency Management.
 Part 1.1E of the Enterprise Verification Platform.
 """
+
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
@@ -24,6 +25,7 @@ from app.platform_verification.config_versioning.runtime.config_versioning_runti
 )
 
 router = APIRouter(tags=["Verification Configuration & Versioning"])
+
 
 def get_config_runtime() -> EnterpriseConfigVersioningRuntime:
     return config_versioning_runtime

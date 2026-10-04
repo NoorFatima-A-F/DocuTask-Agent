@@ -25,11 +25,19 @@ class AutonomousWorkflowQualityScorer(IAutonomousWorkflowQualityScorer):
     }
 
     PILLAR_REPORT_MAPPINGS = {
-        "Business Process Execution & Scenario Breadth": ["scenario_library", "complete_execution", "enterprise_dataset"],
+        "Business Process Execution & Scenario Breadth": [
+            "scenario_library",
+            "complete_execution",
+            "enterprise_dataset",
+        ],
         "Autonomous Decision & AI Quality": ["decision_quality", "explainability", "optimization"],
         "Human-in-the-Loop & Governance Enforcement": ["human_in_the_loop", "business_rules", "compliance"],
         "Multi-Agent & Organizational Coordination": ["multi_agent_collaboration", "organizational_workflow"],
-        "Resilience, Exception Recovery & Long-Running State": ["exception_workflow", "autonomous_recovery", "long_running"],
+        "Resilience, Exception Recovery & Long-Running State": [
+            "exception_workflow",
+            "autonomous_recovery",
+            "long_running",
+        ],
         "Business Value, KPIs & Cost Economics": ["business_kpi", "cost_validation", "business_value"],
         "Scalability, Audit & Executive Readiness": ["audit_trail", "scalability", "executive_readiness"],
     }

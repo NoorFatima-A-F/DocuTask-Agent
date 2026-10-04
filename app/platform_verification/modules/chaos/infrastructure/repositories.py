@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Chaos.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.chaos.domain.models import ChaosEntity
 from app.platform_verification.modules.chaos.domain.interfaces import ChaosRepositoryInterface
+
 
 class InMemoryChaosRepository(ChaosRepositoryInterface):
     def __init__(self):

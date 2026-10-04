@@ -18,9 +18,9 @@ class RegionStatus(str, Enum):
 
 class LatencyClass(str, Enum):
     ULTRA_LOW = "ULTRA_LOW"  # < 20ms
-    LOW = "LOW"              # < 50ms
-    MEDIUM = "MEDIUM"        # < 100ms
-    HIGH = "HIGH"            # >= 100ms
+    LOW = "LOW"  # < 50ms
+    MEDIUM = "MEDIUM"  # < 100ms
+    HIGH = "HIGH"  # >= 100ms
 
 
 class Geography(BaseModel):
@@ -49,9 +49,7 @@ class Region(BaseModel):
     failover_region_id: Optional[str] = None
     active_cluster_ids: List[str] = Field(default_factory=list)
     data_residency_jurisdiction: str = "US"
-    compliance_certifications: List[str] = Field(
-        default_factory=lambda: ["SOC2_TYPE_II", "ISO_27001", "GDPR", "HIPAA"]
-    )
+    compliance_certifications: List[str] = Field(default_factory=lambda: ["SOC2_TYPE_II", "ISO_27001", "GDPR", "HIPAA"])
     ingress_endpoint: str = "https://ingress.us-east-1.docutask.internal"
     egress_gateways: List[str] = Field(default_factory=list)
     metadata: Dict[str, str] = Field(default_factory=dict)

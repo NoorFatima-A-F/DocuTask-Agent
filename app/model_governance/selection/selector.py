@@ -19,6 +19,7 @@ from app.model_governance.policies.enforcement import ModelPolicyEnforcer
 
 class ModelSelectionRequest(BaseModel):
     """Execution task specifications for model selection."""
+
     task_name: str
     organization_id: str
     required_capabilities: Set[str] = Field(default_factory=set)
@@ -31,6 +32,7 @@ class ModelSelectionRequest(BaseModel):
 
 class ModelSelectionResult(BaseModel):
     """Output from intelligent model selector."""
+
     selected_model: Model
     selection_reason: str
     evaluated_candidates_count: int
@@ -62,7 +64,10 @@ class ModelSelectionService:
                 continue
 
             # 2. Cost cap check
-            if request.max_input_cost_per_1k is not None and model.input_token_cost_per_1k > request.max_input_cost_per_1k:
+            if (
+                request.max_input_cost_per_1k is not None
+                and model.input_token_cost_per_1k > request.max_input_cost_per_1k
+            ):
                 continue
 
             # 3. Policy validation

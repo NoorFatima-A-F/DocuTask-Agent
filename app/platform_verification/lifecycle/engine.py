@@ -6,6 +6,7 @@ import time
 from .planner import VerificationPlan
 from .tasks import VerificationTask, TaskState
 
+
 @dataclass
 class ExecutionSession:
     execution_id: str
@@ -17,11 +18,16 @@ class ExecutionSession:
     completed_at: Optional[str] = None
     total_duration_ms: float = 0.0
 
+
 class VerificationExecutionEngine:
     def __init__(self):
         self._sessions: Dict[str, ExecutionSession] = {}
 
-    def start_execution(self, plan: VerificationPlan, custom_handlers: Optional[Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]]] = None) -> ExecutionSession:
+    def start_execution(
+        self,
+        plan: VerificationPlan,
+        custom_handlers: Optional[Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]]] = None,
+    ) -> ExecutionSession:
         exec_id = f"exec_{uuid.uuid4().hex[:12]}"
         session = ExecutionSession(execution_id=exec_id, plan_id=plan.plan_id)
         self._sessions[exec_id] = session
@@ -34,7 +40,7 @@ class VerificationExecutionEngine:
                 task_id=f"task_{uuid.uuid4().hex[:8]}",
                 step_id=step.step_id,
                 task_name=step.step_name,
-                inputs=step.payload
+                inputs=step.payload,
             )
 
             handler = handlers.get(step.action_type, lambda inp: {"status": "ok", "processed_input": inp})
@@ -45,11 +51,7 @@ class VerificationExecutionEngine:
                 session.status = "FAILED"
                 break
 
-            session.raw_artifacts.append({
-                "step_id": step.step_id,
-                "step_name": step.step_name,
-                "output": task.outputs
-            })
+            session.raw_artifacts.append({"step_id": step.step_id, "step_name": step.step_name, "output": task.outputs})
 
         if session.status != "FAILED":
             session.status = "SUCCESS"

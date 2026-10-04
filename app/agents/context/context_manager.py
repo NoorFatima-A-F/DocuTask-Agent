@@ -21,6 +21,7 @@ class CognitiveContext:
     Rich structured context container supplied to LLMs, reasoning frameworks,
     and worker agents.
     """
+
     goal: Dict[str, Any] = field(default_factory=dict)
     workflow_id: Optional[str] = None
     history: List[Dict[str, Any]] = field(default_factory=list)
@@ -131,8 +132,7 @@ class ContextManager:
         )
         compressed.estimated_token_count = self.estimate_tokens(compressed.to_dict())
         logger.info(
-            f"Context compressed from {context.estimated_token_count} to "
-            f"{compressed.estimated_token_count} tokens"
+            f"Context compressed from {context.estimated_token_count} to {compressed.estimated_token_count} tokens"
         )
         return compressed
 

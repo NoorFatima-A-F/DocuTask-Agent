@@ -1,6 +1,7 @@
 """
 Data Recovery Integrity and Referential Consistency Validator.
 """
+
 import hashlib
 from app.platform_verification.disaster_recovery_verification.domain.models import (
     DataRecoveryValidationReport,
@@ -20,8 +21,8 @@ class DataRecoveryValidator(IDataRecoveryValidator):
         expected_count: int,
         restored_count: int,
     ) -> DataRecoveryValidationReport:
-        integrity_ok = (original_hash == restored_hash)
-        completeness_ok = (expected_count == restored_count)
+        integrity_ok = original_hash == restored_hash
+        completeness_ok = expected_count == restored_count
         consistency_ok = True
         isolation_ok = True
 

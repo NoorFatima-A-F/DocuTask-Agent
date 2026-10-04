@@ -2,6 +2,7 @@
 Test Suite: Organizational Learning & Department Memory
 Validates department knowledge accumulation, retrospective self-critique, and enterprise learning synthesis.
 """
+
 from app.runtime.org_learning.department_memory import DepartmentMemoryManager
 from app.runtime.org_learning.department_reflection import DepartmentReflectionEngine
 from app.runtime.org_learning.organizational_learning import OrganizationalLearningSynthesizer
@@ -9,7 +10,7 @@ from app.runtime.org_learning.organizational_learning import OrganizationalLearn
 
 def test_department_memory_manager():
     mgr = DepartmentMemoryManager()
-    
+
     item = mgr.add_knowledge(
         department_id="dept_ocr",
         category="HEURISTIC",

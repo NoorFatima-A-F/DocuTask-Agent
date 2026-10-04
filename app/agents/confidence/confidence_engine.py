@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ConfidenceReport:
     """Detailed confidence breakdown and review recommendations."""
+
     confidence_score: float = 1.0
     evidence_score: float = 1.0
     risk_score: float = 0.0
@@ -114,17 +115,18 @@ class ConfidenceEngine:
             risk_score=round(risk_score, 3),
             verification_score=round(verification_score, 3),
             requires_human_review=requires_human,
-            recommendation_reason="; ".join(reasons) if reasons else "Confidence satisfied, autonomous execution permitted",
+            recommendation_reason="; ".join(reasons)
+            if reasons
+            else "Confidence satisfied, autonomous execution permitted",
             factors={
                 "verification": verification_score,
                 "evidence": evidence_score,
                 "policy": policy_compliance,
                 "model": model_confidence,
-            }
+            },
         )
 
         logger.info(
-            f"ConfidenceEngine calculated: Score={composite_score}, Risk={risk_score}, "
-            f"RequiresHuman={requires_human}"
+            f"ConfidenceEngine calculated: Score={composite_score}, Risk={risk_score}, RequiresHuman={requires_human}"
         )
         return report

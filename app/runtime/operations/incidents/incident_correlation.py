@@ -53,7 +53,7 @@ class IncidentCorrelationEngine:
         results = []
         for key, group in grouped.items():
             subsystem, err_type = key.split(":", 1)
-            fingerprint = f"fp-{hash(key) & 0xffffffff:08x}"
+            fingerprint = f"fp-{hash(key) & 0xFFFFFFFF:08x}"
 
             envelope = CorrelatedIncidentEnvelope(
                 incident_id=f"inc-{uuid.uuid4().hex[:8]}",

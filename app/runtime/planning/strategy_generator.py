@@ -18,14 +18,15 @@ from app.runtime.planning.capability_discovery import CapabilityDiscoveryEngine
 
 
 class StrategyArchetype(str, Enum):
-    ALPHA_FAST = "ALPHA_FAST"                 # Ultra-low latency, local OCR, Flash Lite
-    BETA_ACCURATE = "BETA_ACCURATE"           # Maximum precision, Cloud Neural OCR, Pro LLM, Cross-validation
-    GAMMA_COST = "GAMMA_COST"                 # Budget frugal, local models, cached embeddings
-    DELTA_PARETO = "DELTA_PARETO"             # Adaptive multi-objective Pareto-balanced
+    ALPHA_FAST = "ALPHA_FAST"  # Ultra-low latency, local OCR, Flash Lite
+    BETA_ACCURATE = "BETA_ACCURATE"  # Maximum precision, Cloud Neural OCR, Pro LLM, Cross-validation
+    GAMMA_COST = "GAMMA_COST"  # Budget frugal, local models, cached embeddings
+    DELTA_PARETO = "DELTA_PARETO"  # Adaptive multi-objective Pareto-balanced
 
 
 class StrategyStep(BaseModel):
     """Specific step within a candidate strategy."""
+
     step_id: str = Field(default_factory=lambda: f"step_{uuid.uuid4().hex[:8]}")
     objective_id: str
     name: str
@@ -41,6 +42,7 @@ class StrategyStep(BaseModel):
 
 class CandidateStrategy(BaseModel):
     """Complete executable strategy configuration."""
+
     strategy_id: str = Field(default_factory=lambda: f"strat_{uuid.uuid4().hex[:8]}")
     archetype: StrategyArchetype
     name: str

@@ -165,7 +165,12 @@ class ObservationEngine:
     ) -> List[ObservationRecord]:
         items = self._observations
         if source:
-            items = [o for o in items if (o.source.value if isinstance(o.source, ObservationSource) else str(o.source)).lower() == source.lower()]
+            items = [
+                o
+                for o in items
+                if (o.source.value if isinstance(o.source, ObservationSource) else str(o.source)).lower()
+                == source.lower()
+            ]
         if entity_id:
             items = [o for o in items if o.entity_id.lower() == entity_id.lower()]
         return items[-limit:]

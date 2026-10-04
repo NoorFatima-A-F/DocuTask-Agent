@@ -3,42 +3,30 @@ Master DI Container & Domain Runtime Facade for Verification Platform Domain & P
 """
 
 from app.platform_verification.domain_model.domain.verification_management import (
-    VerificationDefinition, VerificationRequirement, VerificationCategory, VerificationStatus
+    VerificationDefinition,
+    VerificationRequirement,
+    VerificationCategory,
+    VerificationStatus,
 )
-from app.platform_verification.domain_model.domain.verification_plan import (
-    VerificationPlan, ExecutionStrategy
-)
+from app.platform_verification.domain_model.domain.verification_plan import VerificationPlan, ExecutionStrategy
 from app.platform_verification.domain_model.domain.dataset_management import (
-    Dataset, DatasetVersion, DatasetClassification, DatasetLineage
+    Dataset,
+    DatasetVersion,
+    DatasetClassification,
+    DatasetLineage,
 )
-from app.platform_verification.domain_model.domain.environment_management import (
-    EnvironmentSnapshot, EnvironmentType
-)
-from app.platform_verification.domain_model.domain.configuration_management import (
-    ConfigurationSnapshot
-)
-from app.platform_verification.domain_model.domain.execution_management import (
-    VerificationExecution, ExecutionState
-)
-from app.platform_verification.domain_model.domain.evidence_management import (
-    EvidenceArtifact, EvidenceType
-)
-from app.platform_verification.domain_model.domain.metrics_management import (
-    MetricResult, MetricCategory
-)
-from app.platform_verification.domain_model.domain.quality_management import (
-    QualityDecision, QualityDecisionOutcome
-)
-from app.platform_verification.domain_model.domain.certification_management import (
-    Certification, CertificationLevel
-)
+from app.platform_verification.domain_model.domain.environment_management import EnvironmentSnapshot, EnvironmentType
+from app.platform_verification.domain_model.domain.configuration_management import ConfigurationSnapshot
+from app.platform_verification.domain_model.domain.execution_management import VerificationExecution, ExecutionState
+from app.platform_verification.domain_model.domain.evidence_management import EvidenceArtifact, EvidenceType
+from app.platform_verification.domain_model.domain.metrics_management import MetricResult, MetricCategory
+from app.platform_verification.domain_model.domain.quality_management import QualityDecision, QualityDecisionOutcome
+from app.platform_verification.domain_model.domain.certification_management import Certification, CertificationLevel
 
 from app.platform_verification.domain_model.persistence.repositories.in_memory_repos import (
-    verification_domain_repository
+    verification_domain_repository,
 )
-from app.platform_verification.domain_model.lineage.evidence_graph import (
-    evidence_graph_engine
-)
+from app.platform_verification.domain_model.lineage.evidence_graph import evidence_graph_engine
 
 
 class VerificationDomainRuntime:
@@ -60,7 +48,7 @@ class VerificationDomainRuntime:
                 VerificationRequirement(metric_name="word_error_rate", operator="<=", target_threshold=0.03),
                 VerificationRequirement(metric_name="table_iou", operator=">=", target_threshold=0.95),
             ],
-            status=VerificationStatus.APPROVED
+            status=VerificationStatus.APPROVED,
         )
         self.repo.save_definition(vdef)
 
@@ -69,7 +57,7 @@ class VerificationDomainRuntime:
             plan_id="vplan_ocr_standard",
             definition_id=vdef.definition_id,
             execution_strategy=ExecutionStrategy.PARALLEL,
-            parallelism=8
+            parallelism=8,
         )
         self.repo.save_plan(vplan)
 
@@ -78,7 +66,7 @@ class VerificationDomainRuntime:
             dataset_id="dset_invoice_gold_standard",
             name="Invoice Ground Truth Benchmark 2026",
             purpose="Standardized evaluation corpus with 5,000 annotated invoices.",
-            classification=DatasetClassification.HAPPY_PATH
+            classification=DatasetClassification.HAPPY_PATH,
         )
         self.repo.save_dataset(dset)
 
@@ -91,8 +79,8 @@ class VerificationDomainRuntime:
             lineage=DatasetLineage(
                 dataset_version_id="dver_invoice_v2_1",
                 original_sources=["Kaggle Enterprise Invoices", "DocuTask Gold Standard Repo"],
-                transformation_pipeline=["OCR Normalization", "PII Redaction", "Bounding Box Tagging"]
-            )
+                transformation_pipeline=["OCR Normalization", "PII Redaction", "Bounding Box Tagging"],
+            ),
         )
         self.repo.save_dataset_version(dver)
 
@@ -102,7 +90,7 @@ class VerificationDomainRuntime:
             environment_id="env_prod_shadow",
             tier=EnvironmentType.PRODUCTION_SHADOW,
             operating_system="Ubuntu 24.04 LTS (Linux 6.8)",
-            git_commit_sha="main-e9f8a12b"
+            git_commit_sha="main-e9f8a12b",
         )
         self.repo.save_env_snapshot(env_snap)
 
@@ -110,7 +98,7 @@ class VerificationDomainRuntime:
             snapshot_id="cfg_snap_ocr_v2",
             configuration_id="cfg_ocr_standard",
             canonical_hash_sha256="c0ff33e189201948301928401928491028340192834019283401928340192834",
-            resolved_values={"timeout_seconds": 300, "parallelism": 8, "strict_quality_gates": True}
+            resolved_values={"timeout_seconds": 300, "parallelism": 8, "strict_quality_gates": True},
         )
         self.repo.save_cfg_snapshot(cfg_snap)
 
@@ -126,7 +114,7 @@ class VerificationDomainRuntime:
             started_at="2026-09-14T10:00:00+00:00",
             completed_at="2026-09-14T10:04:12+00:00",
             duration_ms=252000.0,
-            triggered_by="CI/CD Autonomous Gatekeeper"
+            triggered_by="CI/CD Autonomous Gatekeeper",
         )
         self.repo.save_execution(execution)
 
@@ -137,7 +125,7 @@ class VerificationDomainRuntime:
             evidence_type=EvidenceType.LOGS,
             storage_location="cas://evidence/sha256/logs_ocr_99.bin",
             content_hash_sha256="11223344556677889900aabbccddeeff11223344556677889900aabbccddeeff",
-            size_bytes=45280
+            size_bytes=45280,
         )
         self.repo.add_evidence(evi1)
 
@@ -150,7 +138,7 @@ class VerificationDomainRuntime:
             category=MetricCategory.CORRECTNESS,
             value=0.0075,
             unit="ratio",
-            passed=True
+            passed=True,
         )
         self.repo.add_metric_result(met1)
 
@@ -162,7 +150,7 @@ class VerificationDomainRuntime:
             category=MetricCategory.CORRECTNESS,
             value=0.0124,
             unit="ratio",
-            passed=True
+            passed=True,
         )
         self.repo.add_metric_result(met2)
 
@@ -175,7 +163,7 @@ class VerificationDomainRuntime:
             outcome=QualityDecisionOutcome.PASSED,
             composite_score=0.992,
             passed_requirements_count=3,
-            failed_requirements_count=0
+            failed_requirements_count=0,
         )
         self.repo.add_quality_decision(qdec)
 
@@ -187,7 +175,7 @@ class VerificationDomainRuntime:
             level=CertificationLevel.ENTERPRISE_CERTIFIED,
             composite_quality_score=0.992,
             evidence_bundle_hash="bundlesha256_99887766554433221100aabbccddeeff",
-            approved_by="Enterprise Certification Board"
+            approved_by="Enterprise Certification Board",
         )
         self.repo.save_certification(cert)
 
@@ -196,7 +184,11 @@ class VerificationDomainRuntime:
             entity_type="Certification",
             entity_id=cert.certification_id,
             action="CERTIFY",
-            new_state={"certification_id": cert.certification_id, "level": cert.level.value, "score": cert.composite_quality_score}
+            new_state={
+                "certification_id": cert.certification_id,
+                "level": cert.level.value,
+                "score": cert.composite_quality_score,
+            },
         )
 
 

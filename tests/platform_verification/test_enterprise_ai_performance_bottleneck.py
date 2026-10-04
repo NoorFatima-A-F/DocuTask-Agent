@@ -98,6 +98,7 @@ from app.platform_verification.enterprise_ai_performance_bottleneck.runtime.ai_p
 # 1. Domain Model Instantiation
 # ────────────────────────────────────────────────────────────────────────────────
 
+
 def test_domain_models_instantiation():
     """Verify all 3J.9 domain models can be instantiated with defaults."""
     report_classes = [
@@ -132,14 +133,25 @@ def test_domain_models_instantiation():
 # 2. Verifier Registry
 # ────────────────────────────────────────────────────────────────────────────────
 
+
 def test_all_verifiers_registered():
     """Verify exactly 12 verifiers are registered in proper order."""
     verifiers = get_all_verifiers()
     assert len(verifiers) == 12
 
     expected_phases = [
-        "3J.9.1", "3J.9.2", "3J.9.3", "3J.9.4", "3J.9.5", "3J.9.6",
-        "3J.9.7", "3J.9.8", "3J.9.9", "3J.9.10", "3J.9.11", "3J.9.12",
+        "3J.9.1",
+        "3J.9.2",
+        "3J.9.3",
+        "3J.9.4",
+        "3J.9.5",
+        "3J.9.6",
+        "3J.9.7",
+        "3J.9.8",
+        "3J.9.9",
+        "3J.9.10",
+        "3J.9.11",
+        "3J.9.12",
     ]
     for v, expected in zip(verifiers, expected_phases):
         assert expected in v.verifier_id, f"Expected {expected} in {v.verifier_id}"
@@ -149,6 +161,7 @@ def test_all_verifiers_registered():
 # ────────────────────────────────────────────────────────────────────────────────
 # 3. Individual Verifier Tests (3J.9.1–3J.9.12)
 # ────────────────────────────────────────────────────────────────────────────────
+
 
 def test_3j_9_1_architecture_modeling_verifier():
     verifier = PerformanceArchitectureModelingVerifier()
@@ -324,6 +337,7 @@ def test_3j_9_12_performance_observability_verifier():
 # 4. 6-Category Quality Scorer
 # ────────────────────────────────────────────────────────────────────────────────
 
+
 def test_scorer_calculation():
     """Verify 6-category weighted scoring with expected weights."""
     verifiers = get_all_verifiers()
@@ -352,6 +366,7 @@ def test_scorer_calculation():
 # ────────────────────────────────────────────────────────────────────────────────
 # 5. SHA-256 Exporter
 # ────────────────────────────────────────────────────────────────────────────────
+
 
 def test_exporter_manifest_and_files():
     """Verify exporter generates all reports with SHA-256 integrity manifest."""
@@ -416,6 +431,7 @@ def test_exporter_manifest_and_files():
 # 6. Runtime Orchestrator
 # ────────────────────────────────────────────────────────────────────────────────
 
+
 def test_runtime_orchestrator():
     """Verify runtime runs all verifiers, scores, and exports."""
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -438,6 +454,7 @@ def test_runtime_orchestrator():
 # ────────────────────────────────────────────────────────────────────────────────
 # 7. REST API Endpoints
 # ────────────────────────────────────────────────────────────────────────────────
+
 
 def test_rest_api_endpoints():
     """Verify FastAPI router configuration and endpoint availability."""

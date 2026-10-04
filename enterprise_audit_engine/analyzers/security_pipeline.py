@@ -46,19 +46,29 @@ class SecurityPipelineVerifier:
                             # Secret check
                             for pattern, desc in cls.SECRET_PATTERNS:
                                 if re.search(pattern, content):
-                                    secrets_found.append({
-                                        "file": rel_path,
-                                        "type": desc,
-                                    })
+                                    secrets_found.append(
+                                        {
+                                            "file": rel_path,
+                                            "type": desc,
+                                        }
+                                    )
 
                             lower_content = content.lower()
-                            if "jwt" in lower_content or "oauth" in lower_content or "get_current_user" in lower_content:
+                            if (
+                                "jwt" in lower_content
+                                or "oauth" in lower_content
+                                or "get_current_user" in lower_content
+                            ):
                                 has_auth = True
                             if "limiter" in lower_content or "ratelimit" in lower_content or "slowapi" in lower_content:
                                 has_rate_limiting = True
                             if "corsmiddleware" in lower_content or "allow_origins" in lower_content:
                                 has_cors_protection = True
-                            if "execute(" in lower_content and "%s" not in lower_content and "f\"select" in lower_content:
+                            if (
+                                "execute(" in lower_content
+                                and "%s" not in lower_content
+                                and 'f"select' in lower_content
+                            ):
                                 has_sql_injection_guard = False
                     except Exception:
                         pass
@@ -77,7 +87,15 @@ class SecurityPipelineVerifier:
         if has_dependabot:
             security_score += 10.0
 
-        risk_level = "CRITICAL" if secrets_found else "HIGH" if security_score < 50.0 else "MEDIUM" if security_score < 80.0 else "LOW"
+        risk_level = (
+            "CRITICAL"
+            if secrets_found
+            else "HIGH"
+            if security_score < 50.0
+            else "MEDIUM"
+            if security_score < 80.0
+            else "LOW"
+        )
 
         return {
             "secrets_detected_count": len(secrets_found),

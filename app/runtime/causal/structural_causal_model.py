@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class CausalNode(BaseModel):
     """Variable node in a Structural Causal Model DAG."""
+
     node_id: str
     name: str
     description: str

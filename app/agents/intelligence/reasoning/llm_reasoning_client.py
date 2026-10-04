@@ -83,7 +83,7 @@ class LLMReasoningClient:
         # High-precision deterministic reasoning engine
         latency_ms = (time.perf_counter() - start_time) * 1000.0 + 12.5
         simulated_content = self._synthesize_reasoning(prompt, system_instruction)
-        
+
         # Estimate simulated tokens and cost
         p_tokens = len(prompt.split()) * 2
         c_tokens = len(simulated_content.split()) * 2
@@ -107,7 +107,9 @@ class LLMReasoningClient:
 
         # Goal Understanding / Intent Classification
         if any(k in p_lower for k in ["intent", "goal", "extract", "document", "invoice", "analyze"]):
-            doc_type = "invoice" if "invoice" in p_lower else "tax_form" if "w2" in p_lower or "tax" in p_lower else "document"
+            doc_type = (
+                "invoice" if "invoice" in p_lower else "tax_form" if "w2" in p_lower or "tax" in p_lower else "document"
+            )
             return f"""```json
 {{
     "primary_intent": "document_processing",

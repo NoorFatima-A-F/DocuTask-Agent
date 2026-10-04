@@ -34,12 +34,8 @@ class ScientificCalibrationEngine:
 
     def evaluate_calibration(self, num_bins: int = 10) -> Dict[str, Any]:
         """Calculates reliability bins and calibration statistics for current system history."""
-        bins = ReliabilityDiagramGenerator.generate_bins(
-            self._history_preds, self._history_labels, num_bins=num_bins
-        )
-        stats = CalibrationStatistics.compute_metrics(
-            self._history_preds, self._history_labels, num_bins=num_bins
-        )
+        bins = ReliabilityDiagramGenerator.generate_bins(self._history_preds, self._history_labels, num_bins=num_bins)
+        stats = CalibrationStatistics.compute_metrics(self._history_preds, self._history_labels, num_bins=num_bins)
         is_valid, errors = CalibrationValidator.validate_calibration_quality(stats)
 
         return {

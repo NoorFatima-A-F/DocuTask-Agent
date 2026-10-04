@@ -20,6 +20,7 @@ logger = logging.getLogger("infrastructure.observability.alerts.notifications")
 
 class DispatchedAlertNotification(BaseModel):
     """Record of a dispatched alert notification."""
+
     notification_id: str
     alert_id: str
     channel: str

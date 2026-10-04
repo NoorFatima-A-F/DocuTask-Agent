@@ -6,6 +6,7 @@ Verifies that readiness probe endpoints adhere to Kubernetes standards:
 - Zero side-effects on read probe execution
 - Correct readinessProbe manifest alignment
 """
+
 import time
 from app.platform_verification.readiness_engine.domain.models import (
     KubernetesCompatibilityReport,
@@ -37,7 +38,7 @@ class KubernetesReadinessVerifier:
         time.perf_counter()
 
         probe_cfg = self.k8s_manifest["readinessProbe"]
-        path_valid = (probe_cfg["httpGet"]["path"] == "/ready")
+        path_valid = probe_cfg["httpGet"]["path"] == "/ready"
         initial_delay = probe_cfg["initialDelaySeconds"]
         period = probe_cfg["periodSeconds"]
         timeout = probe_cfg["timeoutSeconds"]
@@ -46,7 +47,7 @@ class KubernetesReadinessVerifier:
 
         # Simulate probe execution latency check
         probe_latency_ms = 4.5
-        fast_response = (probe_latency_ms < 100.0)
+        fast_response = probe_latency_ms < 100.0
         deterministic = True
         no_side_effects = True
 

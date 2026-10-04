@@ -25,6 +25,7 @@ class EvidenceSeverity(str, Enum):
 
 # ─── 1. Standardized Universal Evidence Model (Part 3P.2) ─────────────────────
 
+
 class StandardizedEvidenceItem(BaseModel):
     id: str
     type: str
@@ -43,6 +44,7 @@ class StandardizedEvidenceItem(BaseModel):
 
 # ─── 2. Evidence Provenance Model (Part 3P.3) ─────────────────────────────────
 
+
 class EvidenceProvenance(BaseModel):
     repository: str = "DocuTask-Agent"
     commit_hash: str = "7a4f9b8c2d1e0f3a5b7c9d1e3f5a7b9c1d3e5f7a"
@@ -55,6 +57,7 @@ class EvidenceProvenance(BaseModel):
 
 
 # ─── 3. Cryptographic Evidence Integrity Models (Part 3P.4) ───────────────────
+
 
 class EvidenceHashRecord(BaseModel):
     artifact: str
@@ -73,6 +76,7 @@ class EvidenceChain(BaseModel):
 
 
 # ─── 4. Compliance Mapping Models (Part 3P.13) ────────────────────────────────
+
 
 class ComplianceControlMapping(BaseModel):
     framework: str  # SOC 2, ISO 27001, NIST CSF
@@ -93,6 +97,7 @@ class ComplianceReport(BaseModel):
 
 
 # ─── 5. Failure Evidence Management (Part 3P.8) ───────────────────────────────
+
 
 class FailureEvidenceItem(BaseModel):
     failure_id: str
@@ -115,6 +120,7 @@ class FailureEvidenceReport(BaseModel):
 
 
 # ─── 6. Engineering & Executive Reports (Part 3P.6, 3P.9, 3P.10) ──────────────
+
 
 class ExecutiveCertificationReport(BaseModel):
     system: str = "DocuTask Agent"
@@ -140,6 +146,7 @@ class EngineeringAuditReport(BaseModel):
 
 # ─── 7. Portfolio Presentation Layer Models (Part 3P.14) ──────────────────────
 
+
 class DeploymentBadge(BaseModel):
     schemaVersion: int = 1
     label: str = "Infrastructure"
@@ -160,6 +167,7 @@ class PortfolioEvidenceBundle(BaseModel):
 
 
 # ─── 8. Manifest & Regression Models (Part 3P.12, 3P.15) ──────────────────────
+
 
 class ManifestEntry(BaseModel):
     filename: str

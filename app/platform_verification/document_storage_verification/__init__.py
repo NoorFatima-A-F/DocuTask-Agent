@@ -1,6 +1,7 @@
 """
 Enterprise Document Storage Backup & Recovery Verification Platform (Part 3G.2C).
 """
+
 from app.platform_verification.document_storage_verification.domain.models import (
     StorageArtifactCategory,
     StorageProviderType,

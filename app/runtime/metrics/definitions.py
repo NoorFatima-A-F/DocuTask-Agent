@@ -41,6 +41,7 @@ class SamplingRule:
     """
     Defines how events are sampled from the runtime event stream for a metric.
     """
+
     window_type: str = "SLIDING_COUNT"  # SLIDING_COUNT, SLIDING_TIME, TUMBLING, ALL_SESSION
     window_size: int = 100
     filter_event_types: Set[str] = field(default_factory=set)
@@ -54,6 +55,7 @@ class MetricDefinition:
     Authoritative First-Class Metric Definition.
     No metric may be computed or rendered without a registered MetricDefinition.
     """
+
     id: str
     name: str
     description: str

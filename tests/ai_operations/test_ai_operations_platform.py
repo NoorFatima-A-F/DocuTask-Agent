@@ -48,6 +48,7 @@ def runtime():
 # 1. Telemetry & Distributed Tracing Tests
 # -----------------------------------------------------------------------------
 
+
 def test_telemetry_trace_and_spans():
     collector = TelemetryCollector()
     trace = collector.start_trace("session_123", "agent_chief_architect", "System Refactor")
@@ -61,7 +62,7 @@ def test_telemetry_trace_and_spans():
         agent_id="agent_chief_architect",
     )
     assert span1.span_id.startswith("span_")
-    
+
     ended_span = collector.end_span(
         span_id=span1.span_id,
         status=SpanStatus.OK,
@@ -83,7 +84,9 @@ def test_metric_aggregator_percentiles():
     for i in range(10):
         t = collector.start_trace(f"sess_{i}", "agent_scientist", "Hypothesis Test")
         s = collector.start_span(t.trace_id, "Eval Step", SpanType.AGENT_RUN, "agent_scientist")
-        collector.end_span(s.span_id, SpanStatus.OK, token_usage={"prompt_tokens": 500, "completion_tokens": 200, "total_tokens": 700})
+        collector.end_span(
+            s.span_id, SpanStatus.OK, token_usage={"prompt_tokens": 500, "completion_tokens": 200, "total_tokens": 700}
+        )
         collector.end_trace(t.trace_id, SpanStatus.OK)
 
     telemetry = MetricAggregator.aggregate_agent_telemetry(
@@ -109,6 +112,7 @@ def test_telemetry_engine_fleet_overview():
 # -----------------------------------------------------------------------------
 # 2. Evaluation Subsystem Tests
 # -----------------------------------------------------------------------------
+
 
 def test_evaluation_metrics_calculations():
     # Grounding & Hallucination
@@ -151,6 +155,7 @@ def test_llm_judge_and_evaluation_engine():
 # 3. Debugging & Root Cause Analysis Tests
 # -----------------------------------------------------------------------------
 
+
 def test_failure_classification():
     collector = TelemetryCollector()
     trace = collector.start_trace("sess_err", "agent_doc_extractor", "OCR Extract")
@@ -179,6 +184,7 @@ def test_debugging_engine():
 # -----------------------------------------------------------------------------
 # 4. Optimization & Model Routing Tests
 # -----------------------------------------------------------------------------
+
 
 def test_pareto_model_router():
     # Balanced task
@@ -211,9 +217,7 @@ def test_prompt_optimizer_and_cost():
     prompts = prompt_opt.get_all_prompts()
     assert len(prompts) >= 2
 
-    mutated = prompt_opt.propose_prompt_refinement(
-        "agent_scientist", "Enforce empirical falsification criteria"
-    )
+    mutated = prompt_opt.propose_prompt_refinement("agent_scientist", "Enforce empirical falsification criteria")
     assert mutated.agent_id == "agent_scientist"
     assert "empirical falsification" in mutated.system_instruction
 
@@ -229,6 +233,7 @@ def test_prompt_optimizer_and_cost():
 # 5. Predictive Intelligence Tests
 # -----------------------------------------------------------------------------
 
+
 def test_failure_prediction_engine():
     engine = FailurePredictionEngine()
     preds = engine.get_active_predictions()
@@ -238,7 +243,9 @@ def test_failure_prediction_engine():
     collector = TelemetryCollector()
     t = collector.start_trace("err_t", "agent_risk_auditor", "Audit")
     collector.end_trace(t.trace_id, SpanStatus.ERROR)
-    telemetry = MetricAggregator.aggregate_agent_telemetry("agent_risk_auditor", "Risk Agent", "Audit", collector.list_traces())
+    telemetry = MetricAggregator.aggregate_agent_telemetry(
+        "agent_risk_auditor", "Risk Agent", "Audit", collector.list_traces()
+    )
 
     pred = engine.analyze_agent_risk(telemetry)
     assert pred["agent_id"] == "agent_risk_auditor"
@@ -249,6 +256,7 @@ def test_failure_prediction_engine():
 # -----------------------------------------------------------------------------
 # 6. Improvement & A/B Canary Tests
 # -----------------------------------------------------------------------------
+
 
 def test_experiment_engine_stat_sig():
     exp_engine = ExperimentEngine()
@@ -297,6 +305,7 @@ def test_improvement_proposals_and_hitl_lifecycle():
 # 7. Governance & Compliance Tests
 # -----------------------------------------------------------------------------
 
+
 def test_compliance_monitor_pii_sanitization():
     raw_prompt = "Contact user at john.doe@enterprise.com with secret token api_key: 'abc123456789012345'."
     redacted, detected = ComplianceMonitor.scan_and_redact(raw_prompt)
@@ -326,6 +335,7 @@ def test_ai_governance_engine_audit_log():
 # 8. Master Runtime Cycle Test
 # -----------------------------------------------------------------------------
 
+
 @pytest.mark.asyncio
 async def test_full_operations_runtime_cycle(runtime):
     cycle_res = await runtime.execute_operations_cycle(target_agent_id="agent_chief_architect")
@@ -342,6 +352,7 @@ async def test_full_operations_runtime_cycle(runtime):
 # -----------------------------------------------------------------------------
 # 9. FastAPI Endpoints Integration Tests
 # -----------------------------------------------------------------------------
+
 
 def test_api_operations_overview(client):
     res = client.get("/api/v1/ai_operations/overview")

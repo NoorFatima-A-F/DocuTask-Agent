@@ -1,6 +1,7 @@
 """
 Phase 3I.6: Observability Governance, SLO Engineering & Reliability Certification — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -15,20 +16,21 @@ class SLIType(str, Enum):
 
 
 class ErrorBudgetAction(str, Enum):
-    NORMAL_VELOCITY = "Normal Development Velocity"             # 0 - 50% consumed
-    INCREASE_MONITORING = "Increase Monitoring & Review"         # 50 - 80% consumed
-    PRIORITIZE_RELIABILITY = "Prioritize Reliability Engineering" # 80 - 100% consumed
-    FREEZE_CHANGES = "Freeze Risky Deployments"                  # >= 100% consumed
+    NORMAL_VELOCITY = "Normal Development Velocity"  # 0 - 50% consumed
+    INCREASE_MONITORING = "Increase Monitoring & Review"  # 50 - 80% consumed
+    PRIORITIZE_RELIABILITY = "Prioritize Reliability Engineering"  # 80 - 100% consumed
+    FREEZE_CHANGES = "Freeze Risky Deployments"  # >= 100% consumed
 
 
 class ReliabilityCertificationTier(str, Enum):
-    ENTERPRISE_RELIABILITY_CERTIFIED = "Enterprise Reliability Certified" # 95 - 100
-    PRODUCTION_RELIABILITY_READY = "Production Reliability Ready"         # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                         # 80 - 89.99
-    FAILED = "Failed"                                                     # < 80
+    ENTERPRISE_RELIABILITY_CERTIFIED = "Enterprise Reliability Certified"  # 95 - 100
+    PRODUCTION_RELIABILITY_READY = "Production Reliability Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3I.6.1 & 3I.6.2: Governance Architecture Models ──────────────────────────
+
 
 class ServiceOwnershipBoundary(BaseModel):
     service_name: str
@@ -50,6 +52,7 @@ class ReliabilityGovernanceReport(BaseModel):
 
 # ─── 3I.6.3: SLI Models ───────────────────────────────────────────────────────
 
+
 class SLIDefinitionSpec(BaseModel):
     sli_id: str
     name: str
@@ -70,6 +73,7 @@ class SLIReport(BaseModel):
 
 # ─── 3I.6.4: SLO Models ───────────────────────────────────────────────────────
 
+
 class SLODefinitionSpec(BaseModel):
     slo_id: str
     name: str
@@ -88,6 +92,7 @@ class SLOReport(BaseModel):
 
 
 # ─── 3I.6.5: Error Budget Models ──────────────────────────────────────────────
+
 
 class ErrorBudgetSpec(BaseModel):
     slo_id: str
@@ -111,6 +116,7 @@ class ErrorBudgetReport(BaseModel):
 
 # ─── 3I.6.6: Reliability Dashboard Models ─────────────────────────────────────
 
+
 class ReliabilityDashboardViewSpec(BaseModel):
     view_name: str  # System Health, SLO Status, AI Reliability, Infrastructure
     key_metrics_displayed: List[str]
@@ -125,6 +131,7 @@ class ReliabilityDashboardReport(BaseModel):
 
 
 # ─── 3I.6.7: Reliability Trend Models ─────────────────────────────────────────
+
 
 class TrendIndicatorSpec(BaseModel):
     metric_name: str
@@ -144,6 +151,7 @@ class ReliabilityTrendReport(BaseModel):
 
 # ─── 3I.6.8 & 3I.6.9: Production Gate & Change Management Models ──────────────
 
+
 class ReadinessGateCheckSpec(BaseModel):
     gate_name: str
     category: str  # Reliability, Security, Performance, Observability
@@ -160,6 +168,7 @@ class ProductionGateReport(BaseModel):
 
 
 # ─── 3I.6.10: Regression Testing Models ───────────────────────────────────────
+
 
 class RegressionTestSpec(BaseModel):
     test_scenario: str
@@ -180,6 +189,7 @@ class ReliabilityRegressionReport(BaseModel):
 
 # ─── 3I.6.11: Observability Data Quality Models ───────────────────────────────
 
+
 class TelemetryQualityAuditSpec(BaseModel):
     telemetry_type: str  # Metrics, Logs, Traces
     completeness_pct: float
@@ -196,6 +206,7 @@ class TelemetryQualityReport(BaseModel):
 
 # ─── 3I.6.12: Reliability Automation Models ───────────────────────────────────
 
+
 class AutomationRuleSpec(BaseModel):
     rule_name: str
     condition: str
@@ -210,6 +221,7 @@ class ReliabilityAutomationReport(BaseModel):
 
 
 # ─── 3I.6.13 & 3I.6.14: Scoring & Certification Models ────────────────────────
+
 
 class ReliabilityPillarScore(BaseModel):
     pillar_name: str

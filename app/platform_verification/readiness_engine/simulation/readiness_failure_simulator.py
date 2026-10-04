@@ -6,6 +6,7 @@ Executes 4 controlled failure injection scenarios to verify dependency-aware dec
 - Scenario 3: Gemini AI API timeout -> Graceful degradation -> DEGRADED, traffic throttled (not hard failure)
 - Scenario 4: Storage permission failure -> NOT_READY, traffic rejected
 """
+
 from typing import List
 from app.platform_verification.readiness_engine.domain.models import (
     ReadinessState,
@@ -144,7 +145,7 @@ class ReadinessFailureSimulator:
         )
 
         passed_count = sum(1 for s in scenarios if s.passed)
-        all_passed = (passed_count == len(scenarios))
+        all_passed = passed_count == len(scenarios)
 
         return FailureSimulationReport(
             total_scenarios=len(scenarios),

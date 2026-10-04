@@ -53,6 +53,4 @@ class RegionalControlPlane:
     def list_local_clusters(self, status: Optional[ClusterStatus] = None) -> List[Cluster]:
         """List clusters strictly belonging to this region."""
         with self._lock:
-            return self.cluster_registry.list_clusters(
-                region_id=self.region_id, status=status
-            )
+            return self.cluster_registry.list_clusters(region_id=self.region_id, status=status)

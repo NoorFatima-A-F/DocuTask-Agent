@@ -13,5 +13,5 @@ class ResourcePlanner:
     def plan_resources(self, tasks: List[PlanningTask]) -> List[ResourceRequirement]:
         return [
             ResourceRequirement(resource_type="MEMORY", amount=256.0, unit="MB"),
-            ResourceRequirement(resource_type="TOKEN", amount=1500.0, unit="TOKENS")
+            ResourceRequirement(resource_type="TOKEN", amount=1500.0, unit="TOKENS"),
         ]

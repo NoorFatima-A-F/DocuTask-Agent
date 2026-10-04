@@ -64,12 +64,7 @@ class AlertQualityScorer(IAlertQualityScorer):
 
         # Weighted calculation
         overall = (
-            det_acc * 0.25
-            + sev_corr * 0.20
-            + msg_qual * 0.15
-            + route_corr * 0.15
-            + noise_red * 0.15
-            + perf * 0.10
+            det_acc * 0.25 + sev_corr * 0.20 + msg_qual * 0.15 + route_corr * 0.15 + noise_red * 0.15 + perf * 0.10
         )
         overall = round(overall, 2)
 

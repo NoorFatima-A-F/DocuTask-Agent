@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class TaskPriority(int, Enum):
     """Numeric priority values for min-heap priority queuing (lower int = higher priority)."""
+
     CRITICAL = 0
     HIGH = 1
     NORMAL = 2
@@ -28,6 +29,7 @@ class TaskPriority(int, Enum):
 @dataclass(order=True)
 class ScheduledTask:
     """Prioritized scheduled task wrapper."""
+
     priority_level: int
     scheduled_time: float
     task_id: str = field(compare=False)
@@ -58,7 +60,11 @@ class AgentScheduler:
     ) -> ScheduledTask:
         """Enqueues a task for execution."""
         if isinstance(priority, str):
-            p_val = TaskPriority[priority.upper()].value if priority.upper() in TaskPriority.__members__ else TaskPriority.NORMAL.value
+            p_val = (
+                TaskPriority[priority.upper()].value
+                if priority.upper() in TaskPriority.__members__
+                else TaskPriority.NORMAL.value
+            )
         else:
             p_val = priority.value
 

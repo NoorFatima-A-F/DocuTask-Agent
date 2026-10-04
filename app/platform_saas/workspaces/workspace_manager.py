@@ -128,9 +128,7 @@ class WorkspaceManager:
         self._projects[prj_id] = prj
         return prj
 
-    def list_projects(
-        self, tenant_id: Optional[str] = None, workspace_id: Optional[str] = None
-    ) -> List[Project]:
+    def list_projects(self, tenant_id: Optional[str] = None, workspace_id: Optional[str] = None) -> List[Project]:
         items = list(self._projects.values())
         if tenant_id:
             items = [p for p in items if p.tenant_id == tenant_id]

@@ -26,14 +26,10 @@ class OnlineDriftDetector:
         }
 
         # Streaming current windows
-        self.current_windows: Dict[str, List[float]] = {
-            k: list(v[-window_size:]) for k, v in self.baselines.items()
-        }
+        self.current_windows: Dict[str, List[float]] = {k: list(v[-window_size:]) for k, v in self.baselines.items()}
 
         # Sequential detectors per metric
-        self.adwin_detectors: Dict[str, ADWINDetector] = {
-            k: ADWINDetector() for k in self.baselines
-        }
+        self.adwin_detectors: Dict[str, ADWINDetector] = {k: ADWINDetector() for k in self.baselines}
 
     def record_observation(self, metric_name: str, value: float) -> bool:
         """Records a new streaming data point and checks for sequential drift."""
@@ -77,14 +73,16 @@ class OnlineDriftDetector:
             elif alert.severity == "WARNING" and overall_status == "HEALTHY":
                 overall_status = "DRIFT_WARNING"
 
-            reports.append({
-                "metric_name": metric,
-                "psi": psi,
-                "kl_divergence": kl,
-                "js_divergence": js,
-                "wasserstein_distance": wass,
-                "alert": alert.to_dict(),
-            })
+            reports.append(
+                {
+                    "metric_name": metric,
+                    "psi": psi,
+                    "kl_divergence": kl,
+                    "js_divergence": js,
+                    "wasserstein_distance": wass,
+                    "alert": alert.to_dict(),
+                }
+            )
 
         return {
             "overall_status": overall_status,

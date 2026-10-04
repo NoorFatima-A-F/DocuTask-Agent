@@ -52,6 +52,7 @@ _runtime: EvolutionRuntime = get_evolution_runtime()
 # Legacy Request Models
 # ==========================================
 
+
 class SynthesizeStrategyRequest(BaseModel):
     goal_intent: str = "extract_financial_invoice"
     branch_index: int = 0
@@ -87,6 +88,7 @@ class DeliberationRequest(BaseModel):
 # ==========================================
 # Phase 13.13 Request Models
 # ==========================================
+
 
 class RunEvolutionCycleRequest(BaseModel):
     target_subsystem: str = "llm_orchestrator"
@@ -124,7 +126,9 @@ class ProposeMutationRequest(BaseModel):
     title: str = "Lock-Free Async Ring Buffer"
     mutation_type: str = "ROUTING_REFACTOR"
     target_components: List[str] = ["event_bus", "swarm_orchestrator"]
-    code_diff_spec: str = "--- a/app/runtime/events.py\n+++ b/app/runtime/events.py\n@@ -1,3 +1,3 @@\n-lock.acquire()\n+lock_free_cas()"
+    code_diff_spec: str = (
+        "--- a/app/runtime/events.py\n+++ b/app/runtime/events.py\n@@ -1,3 +1,3 @@\n-lock.acquire()\n+lock_free_cas()"
+    )
     rationale: str = "Eliminates mutex bottlenecks"
     safety_analysis: str = "Non-blocking verified"
     confidence_score: float = 0.95
@@ -172,6 +176,7 @@ class TriggerRollbackRequest(BaseModel):
 # ==========================================
 # Legacy Endpoints (Maintained for Backward Compatibility)
 # ==========================================
+
 
 @router.post("/strategy/synthesize", response_model=SynthesizedStrategyRecord, summary="Synthesize Strategy via HTN")
 async def synthesize_strategy(req: SynthesizeStrategyRequest) -> SynthesizedStrategyRecord:
@@ -230,7 +235,11 @@ async def evaluate_causal_intervention(req: CausalInterventionRequest) -> Interv
     )
 
 
-@router.post("/deliberation/session", response_model=DeliberationSessionSummary, summary="Convene Multi-Agent Deliberation Council")
+@router.post(
+    "/deliberation/session",
+    response_model=DeliberationSessionSummary,
+    summary="Convene Multi-Agent Deliberation Council",
+)
 async def convene_council_deliberation(req: DeliberationRequest) -> DeliberationSessionSummary:
     """Convenes the 8-agent council for dialectic debate, Borda voting, and resource auctioning."""
     return _council.convene_deliberation_session(
@@ -242,6 +251,7 @@ async def convene_council_deliberation(req: DeliberationRequest) -> Deliberation
 # ==========================================
 # Phase 13.13 Advanced Self-Evolution Endpoints
 # ==========================================
+
 
 @router.get("/executive-summary", summary="Phase 13.13 Executive Summary KPIs")
 async def get_executive_summary() -> Dict[str, Any]:
@@ -273,6 +283,7 @@ async def list_cycle_history() -> List[Dict[str, Any]]:
 
 # --- Profiler & Health ---
 
+
 @router.get("/profiler/snapshots", summary="List Runtime Telemetry Snapshots")
 async def list_profiler_snapshots() -> List[Dict[str, Any]]:
     return [s.to_dict() for s in _runtime.profiler.list_snapshots()]
@@ -285,6 +296,7 @@ async def collect_profiler_snapshot() -> Dict[str, Any]:
 
 
 # --- Diagnostics ---
+
 
 @router.get("/diagnostics", summary="List Architectural Diagnoses & Bottlenecks")
 async def list_diagnoses() -> List[Dict[str, Any]]:
@@ -299,6 +311,7 @@ async def run_diagnostics() -> List[Dict[str, Any]]:
 
 
 # --- Capability Engine ---
+
 
 @router.get("/capabilities", summary="List Registered Subsystem Capabilities")
 async def list_capabilities() -> List[Dict[str, Any]]:
@@ -327,6 +340,7 @@ async def register_capability(req: RegisterCapabilityRequest) -> Dict[str, Any]:
 
 # --- Architecture Engine ---
 
+
 @router.get("/architecture/topology", summary="Get Architectural Dependency Topology")
 async def get_architecture_topology() -> Dict[str, Any]:
     return _runtime.architecture.get_topology()
@@ -352,6 +366,7 @@ async def propose_architecture_plan(req: ProposeImprovementPlanRequest) -> Dict[
 
 # --- Optimizer Engine ---
 
+
 @router.get("/optimizer/candidates", summary="List Multi-Objective Candidates")
 async def list_optimization_candidates() -> List[Dict[str, Any]]:
     return [c.to_dict() for c in _runtime.optimizer.list_candidates()]
@@ -375,6 +390,7 @@ async def generate_optimization_candidate(req: GenerateCandidateRequest) -> Dict
 
 # --- Self-Modification & Mutations ---
 
+
 @router.get("/mutations", summary="List Architectural Mutation Proposals")
 async def list_mutations() -> List[Dict[str, Any]]:
     return [m.to_dict() for m in _runtime.mutation.list_proposals()]
@@ -396,6 +412,7 @@ async def propose_mutation(req: ProposeMutationRequest) -> Dict[str, Any]:
 
 # --- Benchmarks ---
 
+
 @router.get("/benchmarks", summary="List Empirical Benchmark Comparisons")
 async def list_benchmarks() -> List[Dict[str, Any]]:
     return [b.to_dict() for b in _runtime.benchmark.list_benchmarks()]
@@ -414,6 +431,7 @@ async def run_benchmark(req: RunBenchmarkRequest) -> Dict[str, Any]:
 
 # --- Simulations & Digital Twin Sandbox ---
 
+
 @router.get("/simulations", summary="List Digital Twin Replay Simulations")
 async def list_simulations() -> List[Dict[str, Any]]:
     return [s.to_dict() for s in _runtime.simulation.list_simulations()]
@@ -430,6 +448,7 @@ async def run_simulation(req: RunSandboxSimulationRequest) -> Dict[str, Any]:
 
 
 # --- Governance & Cryptographic Rollback ---
+
 
 @router.get("/governance/reviews", summary="List Governance Reviews")
 async def list_governance_reviews() -> List[Dict[str, Any]]:
@@ -471,6 +490,7 @@ async def list_rollback_snapshots() -> List[Dict[str, Any]]:
 
 
 # --- Deployment & Progressive Rollout ---
+
 
 @router.get("/deployments", summary="List Deployments")
 async def list_deployments() -> List[Dict[str, Any]]:

@@ -13,6 +13,7 @@ from app.agents.execution.lifecycle import ExecutionLifecycleState
 
 class CheckpointMetadata(BaseModel):
     """Metadata describing a captured checkpoint."""
+
     checkpoint_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     trigger: str = Field(default="POST_TASK")  # PRE_TOOL, POST_TASK, POST_BRANCH, PERIODIC
@@ -23,6 +24,7 @@ class CheckpointMetadata(BaseModel):
 
 class ExecutionSnapshot(BaseModel):
     """Immutable point-in-time snapshot of the execution graph and runtime state."""
+
     metadata: CheckpointMetadata
     node_states: Dict[str, ExecutionLifecycleState]
     accumulated_outputs: Dict[str, Any]
@@ -43,14 +45,14 @@ class CheckpointManager:
         trigger: str,
         node_states: Dict[str, ExecutionLifecycleState],
         outputs: Dict[str, Any],
-        completed_nodes: List[str]
+        completed_nodes: List[str],
     ) -> ExecutionSnapshot:
         meta = CheckpointMetadata(execution_id=execution_id, trigger=trigger)
         snapshot = ExecutionSnapshot(
             metadata=meta,
             node_states=dict(node_states),
             accumulated_outputs=dict(outputs),
-            completed_node_ids=list(completed_nodes)
+            completed_node_ids=list(completed_nodes),
         )
         self._checkpoints[meta.checkpoint_id] = snapshot
         if execution_id not in self._execution_index:

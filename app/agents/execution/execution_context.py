@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class TaskExecutionContext(BaseModel):
     """Contextual parameters provided to a worker for executing a task node."""
+
     execution_id: UUID
     node_id: str
     task_id: Optional[str] = None

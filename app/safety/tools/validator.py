@@ -10,10 +10,22 @@ class ToolSafetyValidator:
     """Validates tool invocation safety before actual execution."""
 
     DANGEROUS_PARAM_PATTERNS = [
-        (r"(?i)\b(rm\s+-rf|format\s+[c-z]:|del\s+/[fF])\b", "Destructive system deletion command", ViolationSeverity.CRITICAL),
+        (
+            r"(?i)\b(rm\s+-rf|format\s+[c-z]:|del\s+/[fF])\b",
+            "Destructive system deletion command",
+            ViolationSeverity.CRITICAL,
+        ),
         (r"(\.\./\.\./|\.\.\\\.\.\\)", "Path traversal directory escape attempt", ViolationSeverity.HIGH),
-        (r"(?i)\b(DROP\s+TABLE|DROP\s+DATABASE|TRUNCATE\s+TABLE)\b", "Destructive SQL DDL command", ViolationSeverity.CRITICAL),
-        (r"(?i)\b(GRANT\s+ALL|ALTER\s+USER\s+.*SUPERUSER)\b", "Privilege escalation attempt in database", ViolationSeverity.CRITICAL),
+        (
+            r"(?i)\b(DROP\s+TABLE|DROP\s+DATABASE|TRUNCATE\s+TABLE)\b",
+            "Destructive SQL DDL command",
+            ViolationSeverity.CRITICAL,
+        ),
+        (
+            r"(?i)\b(GRANT\s+ALL|ALTER\s+USER\s+.*SUPERUSER)\b",
+            "Privilege escalation attempt in database",
+            ViolationSeverity.CRITICAL,
+        ),
     ]
 
     def __init__(self, permission_manager: ToolPermissionManager = None):
@@ -43,7 +55,11 @@ class ToolSafetyValidator:
             )
 
         # 2. Check danger level vs human approval
-        if policy.danger_level == ToolDangerLevel.DESTRUCTIVE_HIGH_RISK and policy.requires_human_approval and not is_dry_run:
+        if (
+            policy.danger_level == ToolDangerLevel.DESTRUCTIVE_HIGH_RISK
+            and policy.requires_human_approval
+            and not is_dry_run
+        ):
             violations.append(
                 SafetyViolation(
                     category=SafetyCategory.DESTRUCTIVE_TOOL,
@@ -70,5 +86,7 @@ class ToolSafetyValidator:
                     )
                 )
 
-        is_safe = len([v for v in violations if v.severity in [ViolationSeverity.HIGH, ViolationSeverity.CRITICAL]]) == 0
+        is_safe = (
+            len([v for v in violations if v.severity in [ViolationSeverity.HIGH, ViolationSeverity.CRITICAL]]) == 0
+        )
         return is_safe, violations

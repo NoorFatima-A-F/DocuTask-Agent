@@ -41,7 +41,9 @@ def evaluate(
         harness = ExtractionHarness(confidence_threshold=threshold)
         res = harness.evaluate_dataset("golden_invoices")
         telemetry["extraction"] = res
-        print(f"[+] Extraction Suite: {res.get('status', 'PASSED')} | Accuracy: {res.get('precision', 0.0) * 100:.1f}% | F1: {res.get('f1_score', 0.0)}")
+        print(
+            f"[+] Extraction Suite: {res.get('status', 'PASSED')} | Accuracy: {res.get('precision', 0.0) * 100:.1f}% | F1: {res.get('f1_score', 0.0)}"
+        )
         if strict and res.get("precision", 1.0) < threshold:
             print(f"[!] Warning: Extraction precision below strict threshold ({threshold})")
 
@@ -49,19 +51,25 @@ def evaluate(
         chaos = ChaosEngine(fault_rate=0.15)
         res = chaos.run_chaos_drill()
         telemetry["chaos"] = res
-        print(f"[+] Chaos Drill Suite: {res.get('status', 'PASSED')} | Recovery: {res.get('self_healing_recovery_time_sec', 0.0)}s")
+        print(
+            f"[+] Chaos Drill Suite: {res.get('status', 'PASSED')} | Recovery: {res.get('self_healing_recovery_time_sec', 0.0)}s"
+        )
 
     if suite in ("reliability", "all"):
         dr = DisasterRecoveryHarness(workers=10, fault_rate=0.2)
         res = dr.run(source_region="us-east-1", target_region="eu-central-1")
         telemetry["reliability"] = res
-        print(f"[+] Reliability Suite: {res.get('status', 'PASSED')} | RPO: {res.get('rpo_achieved_sec', 0.0)}s | Data Loss: {res.get('data_loss_detected', False)}")
+        print(
+            f"[+] Reliability Suite: {res.get('status', 'PASSED')} | RPO: {res.get('rpo_achieved_sec', 0.0)}s | Data Loss: {res.get('data_loss_detected', False)}"
+        )
 
     if suite in ("fuzz", "all"):
         fuzzer = SyntheticOCRFuzzer(corruption_rate=0.08)
         res = fuzzer.run_fuzzing_drill()
         telemetry["fuzz_ocr_resilience"] = res
-        print(f"[+] Synthetic OCR Fuzzer: {res.get('status', 'PASSED')} | Resilience: {res.get('resilience_score', 0.0) * 100:.1f}% | Recovered: {res.get('recovered_schemas', 0)}/{res.get('total_fuzzed_samples', 0)}")
+        print(
+            f"[+] Synthetic OCR Fuzzer: {res.get('status', 'PASSED')} | Resilience: {res.get('resilience_score', 0.0) * 100:.1f}% | Recovered: {res.get('recovered_schemas', 0)}/{res.get('total_fuzzed_samples', 0)}"
+        )
 
     artifact_path = Path(output_dir) / "verification_telemetry.json"
     with open(artifact_path, "w", encoding="utf-8") as f:
@@ -76,7 +84,9 @@ def simulate_chaos(fault_rate: float = 0.15) -> Dict[str, Any]:
     print(f"[*] Executing Chaos Drill with fault injection probability: {fault_rate:.2f}")
     engine = ChaosEngine(fault_rate=fault_rate)
     res = engine.run_chaos_drill()
-    print(f"[+] Chaos Drill Completed: status={res.get('status')} self_healing_time={res.get('self_healing_recovery_time_sec')}s")
+    print(
+        f"[+] Chaos Drill Completed: status={res.get('status')} self_healing_time={res.get('self_healing_recovery_time_sec')}s"
+    )
     return res
 
 
@@ -85,7 +95,9 @@ def fuzz_resilience(corruption_rate: float = 0.08) -> Dict[str, Any]:
     print(f"[*] Executing Adversarial OCR Fuzzing Drill (corruption_rate: {corruption_rate:.2f})...")
     fuzzer = SyntheticOCRFuzzer(corruption_rate=corruption_rate)
     res = fuzzer.run_fuzzing_drill()
-    print(f"[+] OCR Fuzzing Complete: status={res.get('status')} resilience_score={res.get('resilience_score')} recovered={res.get('recovered_schemas')}/{res.get('total_fuzzed_samples')}")
+    print(
+        f"[+] OCR Fuzzing Complete: status={res.get('status')} resilience_score={res.get('resilience_score')} recovered={res.get('recovered_schemas')}/{res.get('total_fuzzed_samples')}"
+    )
     return res
 
 
@@ -132,7 +144,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     # fuzz-resilience
-    fuzz_p = subparsers.add_parser("fuzz-resilience", help="Execute synthetic OCR adversarial fuzzing against extraction contracts")
+    fuzz_p = subparsers.add_parser(
+        "fuzz-resilience", help="Execute synthetic OCR adversarial fuzzing against extraction contracts"
+    )
     fuzz_p.add_argument(
         "--corruption-rate",
         type=float,

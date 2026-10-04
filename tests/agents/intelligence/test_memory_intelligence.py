@@ -416,4 +416,3 @@ class TestExpandedMemoryScenarios:
     def test_short_term_memory_delete_nonexistent_returns_false(self):
         stm = ShortTermMemory()
         assert stm.delete("not_there") is False
-

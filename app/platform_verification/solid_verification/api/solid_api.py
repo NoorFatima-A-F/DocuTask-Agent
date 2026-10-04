@@ -1,6 +1,7 @@
 """
 REST API Router for SOLID Principle Verification (PART 2C).
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, HTTPException, status
@@ -31,7 +32,9 @@ def run_solid_analysis(req: SolidScanRequest):
         "scan_id": package.scan_id,
         "total_score": score,
         "certification_band": band,
-        "is_design_certified": package.clean_architecture_certified if hasattr(package, "clean_architecture_certified") else True,
+        "is_design_certified": package.clean_architecture_certified
+        if hasattr(package, "clean_architecture_certified")
+        else True,
         "violations_count": len(package.violations),
         "total_classes_analyzed": package.total_classes_analyzed,
         "evidence_sha256": package.evidence_sha256,

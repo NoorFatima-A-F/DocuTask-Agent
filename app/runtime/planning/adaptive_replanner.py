@@ -25,6 +25,7 @@ class ReplanningTriggerType(str, Enum):
 
 class ReplanningTrigger(BaseModel):
     """Event triggering the localized replanning loop."""
+
     trigger_type: ReplanningTriggerType
     node_id: Optional[str] = None
     metric_value: Optional[float] = None
@@ -35,6 +36,7 @@ class ReplanningTrigger(BaseModel):
 
 class SubGraphReplanningResult(BaseModel):
     """Result of adaptive replanning, describing modified sub-graph while preserving validated work."""
+
     mission_id: str
     trigger: ReplanningTrigger
     affected_node_ids: List[str]
@@ -55,10 +57,7 @@ class AdaptiveReplanningEngine:
         dag: MutableExecutionDAG,
         trigger: ReplanningTrigger,
     ) -> SubGraphReplanningResult:
-        preserved_nodes = [
-            nid for nid, node in dag.nodes.items()
-            if node.status == DAGNodeStatus.COMPLETED
-        ]
+        preserved_nodes = [nid for nid, node in dag.nodes.items() if node.status == DAGNodeStatus.COMPLETED]
 
         affected_nodes: List[str] = []
         new_nodes: List[DAGNode] = []

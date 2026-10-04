@@ -36,7 +36,9 @@ class CompatibilityMatrix:
 
         try:
             cp_v = version.parse(control_plane_version)
-            if not (version.parse(cls.SUPPORTED_CONTROL_PLANE_MIN) <= cp_v <= version.parse(cls.SUPPORTED_CONTROL_PLANE_MAX)):
+            if not (
+                version.parse(cls.SUPPORTED_CONTROL_PLANE_MIN) <= cp_v <= version.parse(cls.SUPPORTED_CONTROL_PLANE_MAX)
+            ):
                 errors.append(
                     f"Control Plane version '{control_plane_version}' is outside supported range "
                     f"[{cls.SUPPORTED_CONTROL_PLANE_MIN} - {cls.SUPPORTED_CONTROL_PLANE_MAX}]."

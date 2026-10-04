@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class PlanMilestone(BaseModel):
     """Execution progress milestone requiring verification of prerequisite task completions."""
+
     milestone_id: str
     name: str
     required_task_ids: List[str] = Field(default_factory=list)

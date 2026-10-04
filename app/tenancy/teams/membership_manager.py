@@ -13,29 +13,51 @@ class MembershipManager:
     ROLE_PERMISSIONS: Dict[MembershipRole, Set[str]] = {
         MembershipRole.OWNER: {"*"},
         MembershipRole.ADMIN: {
-            "workspace:read", "workspace:write", "workspace:delete",
-            "workflow:read", "workflow:write", "workflow:execute",
-            "agent:read", "agent:write", "agent:execute",
-            "knowledge:read", "knowledge:write",
-            "connector:read", "connector:write",
-            "user:invite", "user:manage", "billing:read",
+            "workspace:read",
+            "workspace:write",
+            "workspace:delete",
+            "workflow:read",
+            "workflow:write",
+            "workflow:execute",
+            "agent:read",
+            "agent:write",
+            "agent:execute",
+            "knowledge:read",
+            "knowledge:write",
+            "connector:read",
+            "connector:write",
+            "user:invite",
+            "user:manage",
+            "billing:read",
         },
         MembershipRole.MEMBER: {
             "workspace:read",
-            "workflow:read", "workflow:write", "workflow:execute",
-            "agent:read", "agent:write", "agent:execute",
-            "knowledge:read", "knowledge:write",
+            "workflow:read",
+            "workflow:write",
+            "workflow:execute",
+            "agent:read",
+            "agent:write",
+            "agent:execute",
+            "knowledge:read",
+            "knowledge:write",
             "connector:read",
         },
         MembershipRole.VIEWER: {
-            "workspace:read", "workflow:read", "agent:read",
-            "knowledge:read", "connector:read",
+            "workspace:read",
+            "workflow:read",
+            "agent:read",
+            "knowledge:read",
+            "connector:read",
         },
         MembershipRole.GUEST: {
-            "workspace:read", "workflow:execute",
+            "workspace:read",
+            "workflow:execute",
         },
         MembershipRole.AUDITOR: {
-            "workspace:read", "audit:read", "compliance:read", "logs:read",
+            "workspace:read",
+            "audit:read",
+            "compliance:read",
+            "logs:read",
         },
     }
 
@@ -67,7 +89,9 @@ class MembershipManager:
         self._memberships[membership_id] = membership
         return membership
 
-    def get_membership(self, user_id: str, organization_id: str, workspace_id: Optional[str] = None) -> Optional[Membership]:
+    def get_membership(
+        self, user_id: str, organization_id: str, workspace_id: Optional[str] = None
+    ) -> Optional[Membership]:
         """Find active membership for user in specific context."""
         for m in self._memberships.values():
             if m.user_id == user_id and m.organization_id == organization_id:
@@ -93,6 +117,7 @@ class MembershipManager:
     def list_members(self, organization_id: str, workspace_id: Optional[str] = None) -> List[Membership]:
         """List members for an organization or workspace."""
         return [
-            m for m in self._memberships.values()
+            m
+            for m in self._memberships.values()
             if m.organization_id == organization_id and (workspace_id is None or m.workspace_id == workspace_id)
         ]

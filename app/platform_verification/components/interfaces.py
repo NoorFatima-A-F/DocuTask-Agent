@@ -2,6 +2,7 @@
 Abstract Contracts and Ports for the 16 Enterprise Verification Core Components.
 Strictly enforces the Interface Segregation and Dependency Inversion Principles.
 """
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Callable
 
@@ -26,7 +27,9 @@ class VerificationOrchestratorInterface(ABC):
 
 class VerificationRegistryInterface(ABC):
     @abstractmethod
-    async def register_capability(self, module_id: str, capability: str, version: str, metadata: Optional[Dict[str, Any]] = None) -> None:
+    async def register_capability(
+        self, module_id: str, capability: str, version: str, metadata: Optional[Dict[str, Any]] = None
+    ) -> None:
         pass
 
     @abstractmethod
@@ -40,7 +43,9 @@ class VerificationRegistryInterface(ABC):
 
 class VerificationDefinitionManagerInterface(ABC):
     @abstractmethod
-    async def create_definition(self, spec_id: str, name: str, invariants: List[str], parameters: Dict[str, Any]) -> Dict[str, Any]:
+    async def create_definition(
+        self, spec_id: str, name: str, invariants: List[str], parameters: Dict[str, Any]
+    ) -> Dict[str, Any]:
         pass
 
     @abstractmethod
@@ -54,7 +59,9 @@ class VerificationDefinitionManagerInterface(ABC):
 
 class VerificationExecutionEngineInterface(ABC):
     @abstractmethod
-    async def execute_task(self, task_id: str, executable: Callable, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def execute_task(
+        self, task_id: str, executable: Callable, context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         pass
 
     @abstractmethod
@@ -64,7 +71,9 @@ class VerificationExecutionEngineInterface(ABC):
 
 class DatasetManagerInterface(ABC):
     @abstractmethod
-    async def register_dataset(self, dataset_id: str, category: str, content_or_uri: bytes | str, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def register_dataset(
+        self, dataset_id: str, category: str, content_or_uri: bytes | str, metadata: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         pass
 
     @abstractmethod
@@ -84,7 +93,9 @@ class EnvironmentManagerInterface(ABC):
 
 class ConfigurationManagerInterface(ABC):
     @abstractmethod
-    async def resolve_configuration(self, run_id: str, tier_overrides: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def resolve_configuration(
+        self, run_id: str, tier_overrides: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         pass
 
     @abstractmethod
@@ -94,7 +105,9 @@ class ConfigurationManagerInterface(ABC):
 
 class EvidenceManagerInterface(ABC):
     @abstractmethod
-    async def record_evidence(self, evidence_id: str, run_id: str, tier: str, content: bytes, tags: Optional[List[str]] = None) -> Dict[str, Any]:
+    async def record_evidence(
+        self, evidence_id: str, run_id: str, tier: str, content: bytes, tags: Optional[List[str]] = None
+    ) -> Dict[str, Any]:
         pass
 
     @abstractmethod
@@ -126,7 +139,9 @@ class QualityGateEngineInterface(ABC):
 
 class CertificationEngineInterface(ABC):
     @abstractmethod
-    async def issue_certificate(self, run_id: str, level: str, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def issue_certificate(
+        self, run_id: str, level: str, metadata: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         pass
 
     @abstractmethod

@@ -41,6 +41,6 @@ class MissionReflector:
                 total_cost_usd=round(cost, 5),
                 task_count=task_count,
             )
-        
+
         # Default high-fidelity baseline
         return MacroKPIs(mission_id=mission_id)

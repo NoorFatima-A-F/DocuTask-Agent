@@ -36,11 +36,41 @@ class ResourceProfilingVerifier(IResourceProfilingVerifier):
         {c.collector_name: c.collect() for c in collectors}
 
         services = [
-            ServiceResourceProfile(service_name="API Gateway (FastAPI)", cpu_average_pct=24.5, memory_average_mb=580.0, network_bandwidth_mbps=85.0, status="HEALTHY"),
-            ServiceResourceProfile(service_name="Worker Pool (10 Replicas)", cpu_average_pct=62.0, memory_average_mb=4200.0, network_bandwidth_mbps=180.0, status="HEALTHY"),
-            ServiceResourceProfile(service_name="PostgreSQL Database", cpu_average_pct=34.0, memory_average_mb=1850.0, network_bandwidth_mbps=65.0, status="HEALTHY"),
-            ServiceResourceProfile(service_name="Redis Queue Broker", cpu_average_pct=14.0, memory_average_mb=480.0, network_bandwidth_mbps=45.0, status="HEALTHY"),
-            ServiceResourceProfile(service_name="Document Storage (S3)", cpu_average_pct=12.0, memory_average_mb=350.0, network_bandwidth_mbps=120.0, status="HEALTHY"),
+            ServiceResourceProfile(
+                service_name="API Gateway (FastAPI)",
+                cpu_average_pct=24.5,
+                memory_average_mb=580.0,
+                network_bandwidth_mbps=85.0,
+                status="HEALTHY",
+            ),
+            ServiceResourceProfile(
+                service_name="Worker Pool (10 Replicas)",
+                cpu_average_pct=62.0,
+                memory_average_mb=4200.0,
+                network_bandwidth_mbps=180.0,
+                status="HEALTHY",
+            ),
+            ServiceResourceProfile(
+                service_name="PostgreSQL Database",
+                cpu_average_pct=34.0,
+                memory_average_mb=1850.0,
+                network_bandwidth_mbps=65.0,
+                status="HEALTHY",
+            ),
+            ServiceResourceProfile(
+                service_name="Redis Queue Broker",
+                cpu_average_pct=14.0,
+                memory_average_mb=480.0,
+                network_bandwidth_mbps=45.0,
+                status="HEALTHY",
+            ),
+            ServiceResourceProfile(
+                service_name="Document Storage (S3)",
+                cpu_average_pct=12.0,
+                memory_average_mb=350.0,
+                network_bandwidth_mbps=120.0,
+                status="HEALTHY",
+            ),
         ]
 
         checks: List[CheckResult] = [

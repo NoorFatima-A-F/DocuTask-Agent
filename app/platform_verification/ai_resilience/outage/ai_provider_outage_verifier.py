@@ -18,7 +18,7 @@ class AIProviderOutageVerifier(IProviderOutageVerifier):
 
         # Simulate stream of requests during 503 outage
         for i in range(request_count):
-            req = {"document_id": f"DOC-OUTAGE-{i+1:04d}", "provider": "gemini-2.5-flash"}
+            req = {"document_id": f"DOC-OUTAGE-{i + 1:04d}", "provider": "gemini-2.5-flash"}
             res = ProviderUnavailableScenario.execute(req, fault_mode="HTTP_503")
 
             if not res["success"] and res["status_code"] == 503:

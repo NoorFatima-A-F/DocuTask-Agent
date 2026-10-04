@@ -20,6 +20,7 @@ from app.agents.domain.value_objects import (
 
 class BaseDomainResult(BaseModel):
     """Base domain result contract."""
+
     status: ResultStatus = Field(default=ResultStatus.SUCCESS)
     success: bool = Field(default=True)
     failure_reason: Optional[str] = Field(default=None)
@@ -40,59 +41,70 @@ class BaseDomainResult(BaseModel):
 
 class PlanningResult(BaseDomainResult):
     """Result of agent goal planning phase."""
+
     plan_steps: List[Dict[str, Any]] = Field(default_factory=list)
 
 
 class ExecutionResult(BaseDomainResult):
     """Result of step execution phase."""
+
     executed_step_count: int = Field(default=0, ge=0)
 
 
 class ObservationResult(BaseDomainResult):
     """Result of environment observation phase."""
+
     environment_feedback: Dict[str, Any] = Field(default_factory=dict)
 
 
 class ReflectionResult(BaseDomainResult):
     """Result of self-reflection phase."""
+
     quality_score: float = Field(default=1.0, ge=0.0, le=1.0)
     requires_replanning: bool = Field(default=False)
 
 
 class RecoveryResult(BaseDomainResult):
     """Result of error recovery phase."""
+
     recovered_successfully: bool = Field(default=False)
     recovery_action_taken: str = Field(default="NONE")
 
 
 class TaskResult(BaseDomainResult):
     """Result of a single task execution."""
+
     task_id: str = Field(default="")
 
 
 class ValidationResult(BaseDomainResult):
     """Result of schema or constraint validation."""
+
     is_schema_valid: bool = Field(default=True)
 
 
 class ToolSelectionResult(BaseDomainResult):
     """Result of tool selection and invocation."""
+
     selected_tool_name: str = Field(default="")
     tool_output: Optional[Any] = Field(default=None)
 
 
 class WorkflowResult(BaseDomainResult):
     """Result of workflow orchestration."""
+
     workflow_id: str = Field(default="")
 
 
 class GoalResult(BaseDomainResult):
     """Result of overall goal evaluation."""
+
     goal_id: str = Field(default="")
 
 
 class AgentResult(BaseDomainResult):
     """Aggregate result of complete agent run."""
+
     agent_name: str = Field(default="DocumentAgent")
     goal_result: Optional[GoalResult] = Field(default=None)
     planning_result: Optional[PlanningResult] = Field(default=None)

@@ -33,15 +33,21 @@ class ConstraintSolver:
         # Build graph nodes
         if "max_budget_usd" in constraints:
             graph.add_constraint(
-                ConstraintNode("budget", "Max Cost USD", "HARD", "cost <= max_budget_usd", constraints["max_budget_usd"])
+                ConstraintNode(
+                    "budget", "Max Cost USD", "HARD", "cost <= max_budget_usd", constraints["max_budget_usd"]
+                )
             )
         if "max_latency_ms" in constraints:
             graph.add_constraint(
-                ConstraintNode("latency", "Max Latency ms", "HARD", "latency <= max_latency_ms", constraints["max_latency_ms"])
+                ConstraintNode(
+                    "latency", "Max Latency ms", "HARD", "latency <= max_latency_ms", constraints["max_latency_ms"]
+                )
             )
         if "min_accuracy" in constraints:
             graph.add_constraint(
-                ConstraintNode("accuracy", "Min Accuracy", "HARD", "accuracy >= min_accuracy", constraints["min_accuracy"])
+                ConstraintNode(
+                    "accuracy", "Min Accuracy", "HARD", "accuracy >= min_accuracy", constraints["min_accuracy"]
+                )
             )
         if "max_risk" in constraints:
             graph.add_constraint(

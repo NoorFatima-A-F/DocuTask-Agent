@@ -62,21 +62,20 @@ class ComplianceAssessmentEngine:
         for ctrl in framework_controls:
             # Check matching events by category/type
             matching_events = [
-                e for e in tenant_events
+                e
+                for e in tenant_events
                 if e.category.value in ctrl.required_evidence_types or e.event_type in ctrl.required_evidence_types
             ]
             # Check matching artifacts
-            matching_artifacts = [
-                a for a in tenant_artifacts
-                if a.evidence_type.value in ctrl.required_evidence_types
-            ]
+            matching_artifacts = [a for a in tenant_artifacts if a.evidence_type.value in ctrl.required_evidence_types]
 
             total_evidence = len(matching_events) + len(matching_artifacts)
             missing: List[str] = []
 
             for req in ctrl.required_evidence_types:
-                has_req = any(e.category.value == req or e.event_type == req for e in matching_events) or \
-                          any(a.evidence_type.value == req for a in matching_artifacts)
+                has_req = any(e.category.value == req or e.event_type == req for e in matching_events) or any(
+                    a.evidence_type.value == req for a in matching_artifacts
+                )
                 if not has_req:
                     missing.append(f"Missing evidence type '{req}'")
 

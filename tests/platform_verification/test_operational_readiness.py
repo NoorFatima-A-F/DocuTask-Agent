@@ -1,6 +1,7 @@
 """
 Phase 3H.4.11: Enterprise Operational Readiness Scoring Test Suite
 """
+
 import os
 import json
 from app.platform_verification.operational_readiness_verification.evaluators import (
@@ -150,7 +151,7 @@ class TestOperationalReadinessVerification:
         alt_eval = AlertReliabilityEvaluator().evaluate_alert_reliability()
         inc_eval = IncidentQualityEvaluator().evaluate_incident_quality()
         dsh_eval = DashboardUsabilityEvaluator().evaluate_dashboard_usability()
-        
+
         # Injected low security score
         sec_eval = SecurityReadinessEvaluator().evaluate_security_readiness()
         sec_eval.score = 65.0  # Under 70 threshold
@@ -194,7 +195,9 @@ class TestOperationalReadinessVerification:
         sec_eval = SecurityReadinessEvaluator().evaluate_security_readiness()
 
         risk_rep = analyzer.analyze_operational_risks(metrics_eval, mon_eval, alt_eval, inc_eval, dsh_eval, sec_eval)
-        remediation = generator.generate_recommendations(metrics_eval, mon_eval, alt_eval, inc_eval, dsh_eval, sec_eval, risk_rep)
+        remediation = generator.generate_recommendations(
+            metrics_eval, mon_eval, alt_eval, inc_eval, dsh_eval, sec_eval, risk_rep
+        )
 
         assert remediation.total_recommendations >= 2
         for rec in remediation.recommendations:

@@ -1,6 +1,7 @@
 """
 3H.11.4: Queue Failure Simulation Verifier
 """
+
 from ..domain.models import QueueFailureReport
 from ..domain.interfaces import IQueueFailureVerifier
 
@@ -23,5 +24,5 @@ class QueueFailureVerifier(IQueueFailureVerifier):
             system_crashed=False,
             time_to_detect_ms=380.0,
             time_to_recover_ms=980.0,
-            simulation_passed=True
+            simulation_passed=True,
         )

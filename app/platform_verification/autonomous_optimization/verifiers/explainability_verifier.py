@@ -1,6 +1,7 @@
 """
 3H.10.7: Explainability Verifier
 """
+
 from typing import List
 from ..domain.models import ExplainabilityTrace, ExplainabilityReport
 from ..domain.interfaces import IExplainabilityVerifier
@@ -20,14 +21,14 @@ class ExplainabilityVerifier(IExplainabilityVerifier):
                 supporting_telemetry_evidence=[
                     "metric:task_queue_depth_p95 reached 24 items (threshold 20)",
                     "metric:worker_pool_utilization reached 88.5% over 15m window",
-                    "trace:span_duration for 'document_ingest_job' increased from 420ms to 980ms"
+                    "trace:span_duration for 'document_ingest_job' increased from 420ms to 980ms",
                 ],
                 counterfactual_scenarios_evaluated=[
                     "Do Nothing: Queue depth would exceed 60 items by 09:00 AM, violating P95 SLA.",
-                    "Purge Queue: Irreversible document processing data loss (unacceptable risk)."
+                    "Purge Queue: Irreversible document processing data loss (unacceptable risk).",
                 ],
                 human_readable_rationale="Scaling worker concurrency from 32 to 48 directly addresses task starvation while remaining within container CPU allocation limits.",
-                explainability_score_pct=99.5
+                explainability_score_pct=99.5,
             ),
             ExplainabilityTrace(
                 trace_id="exp-trace-002",
@@ -36,14 +37,14 @@ class ExplainabilityVerifier(IExplainabilityVerifier):
                 supporting_telemetry_evidence=[
                     "metric:redis_memory_used_pct reached 86.4%",
                     "metric:redis_evicted_keys_per_sec surged to 1.5",
-                    "log:eviction_warning detected across 4 cluster nodes"
+                    "log:eviction_warning detected across 4 cluster nodes",
                 ],
                 counterfactual_scenarios_evaluated=[
                     "Expand Redis Memory: Requires cluster downtime/reprovisioning ($$$)",
-                    "No Action: Risk of OOM kill on master Redis node."
+                    "No Action: Risk of OOM kill on master Redis node.",
                 ],
                 human_readable_rationale="Proactively flushing keys with TTL < 0 and expired embeddings frees 280MB of memory instantly with zero user impact.",
-                explainability_score_pct=99.1
+                explainability_score_pct=99.1,
             ),
             ExplainabilityTrace(
                 trace_id="exp-trace-003",
@@ -52,15 +53,15 @@ class ExplainabilityVerifier(IExplainabilityVerifier):
                 supporting_telemetry_evidence=[
                     "metric:llm_upstream_p95_ms reached 1850ms (SLA is 1000ms)",
                     "log:http_status_429 received from primary endpoint (14 occurrences in 2m)",
-                    "trace:gateway_timeout_spans increased by 8.2%"
+                    "trace:gateway_timeout_spans increased by 8.2%",
                 ],
                 counterfactual_scenarios_evaluated=[
                     "Retry Primary: Cascading failure and client-side timeouts.",
-                    "Degrade to Stub: Degrades document classification accuracy."
+                    "Degrade to Stub: Degrades document classification accuracy.",
                 ],
                 human_readable_rationale="Routing 30% canary traffic to secondary provider restores overall P95 latency to 420ms with identical semantic quality.",
-                explainability_score_pct=99.3
-            )
+                explainability_score_pct=99.3,
+            ),
         ]
 
         mean_score = sum(t.explainability_score_pct for t in traces) / len(traces) if traces else 100.0
@@ -69,5 +70,5 @@ class ExplainabilityVerifier(IExplainabilityVerifier):
             report_title="Autonomous Decision Explainability & Telemetry Justification Report",
             decisions_explained=len(traces),
             traces=traces,
-            explainability_index=round(mean_score, 2)
+            explainability_index=round(mean_score, 2),
         )

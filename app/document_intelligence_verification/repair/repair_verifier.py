@@ -71,7 +71,7 @@ class RepairVerifier:
         t0 = time.perf_counter()
         # Malformed JSON with trailing comma and missing closing brace
         malformed_json_str = '{"invoice_id": "INV-101", "total": 450.0, "vendor": "Acme Corp",'
-        
+
         # Repair algorithm
         repaired = malformed_json_str.rstrip(",") + "}"
         parsed = json.loads(repaired)
@@ -147,7 +147,7 @@ class RepairVerifier:
     def _verify_adversarial_repair_neutralization(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
         # Malicious repair payload containing prompt injection instruction
-        
+
         # Sanitizer strips instructions and retains structured numeric/text fields
         sanitized = {"correction": "REDACTED_INJECTION", "safe_status": True}
         passed = sanitized["safe_status"] is True

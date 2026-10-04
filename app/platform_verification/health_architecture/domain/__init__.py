@@ -1,6 +1,7 @@
 """
 Health Check Architecture Domain Subsystem.
 """
+
 from app.platform_verification.health_architecture.domain.models import (
     HealthState,
     HealthLayer,

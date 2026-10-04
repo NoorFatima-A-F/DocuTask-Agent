@@ -15,7 +15,7 @@ sdk = DeploymentSDK()
 rca_report = sdk.rollback(
     deployment_id="dep-12345",
     reason="Elevated 5xx error rate detected during 25% canary step",
-    trigger_type=RollbackTriggerType.METRIC_ANOMALY
+    trigger_type=RollbackTriggerType.METRIC_ANOMALY,
 )
 
 print(f"Restored version: {rca_report.restored_version}")

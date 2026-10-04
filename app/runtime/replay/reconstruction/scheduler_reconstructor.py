@@ -9,15 +9,17 @@ from pydantic import BaseModel, Field
 
 class ReconstructedSchedulerState(BaseModel):
     current_wavefront: int = 0
-    queues: Dict[str, List[str]] = Field(default_factory=lambda: {
-        "pending": [],
-        "ready": [],
-        "scheduled": [],
-        "running": [],
-        "blocked": [],
-        "completed": [],
-        "failed": [],
-    })
+    queues: Dict[str, List[str]] = Field(
+        default_factory=lambda: {
+            "pending": [],
+            "ready": [],
+            "scheduled": [],
+            "running": [],
+            "blocked": [],
+            "completed": [],
+            "failed": [],
+        }
+    )
     worker_allocations: Dict[str, str] = Field(default_factory=dict)
     active_concurrency: int = 0
     max_concurrency: int = 8

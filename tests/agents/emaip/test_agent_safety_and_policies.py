@@ -27,7 +27,9 @@ def test_ai_safety_layer_injection_defense():
 def test_ai_safety_layer_pii_masking_and_leakage_detection():
     safety = AISafetyLayer()
 
-    text_with_pii = "Contact John Doe at john.doe@example.com or +1 555-123-4567 with API key sk-1234567890abcdef1234567890."
+    text_with_pii = (
+        "Contact John Doe at john.doe@example.com or +1 555-123-4567 with API key sk-1234567890abcdef1234567890."
+    )
     masked = safety.mask_pii(text_with_pii)
 
     assert "john.doe@example.com" not in masked

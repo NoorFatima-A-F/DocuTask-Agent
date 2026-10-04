@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class CorrelationContext(BaseModel):
     """Correlation and causation tracing context."""
+
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     causation_id: Optional[str] = Field(default=None)
     conversation_id: Optional[str] = Field(default=None)
@@ -23,6 +24,7 @@ class CorrelationContext(BaseModel):
 
 class TraceContext(BaseModel):
     """OpenTelemetry W3C distributed tracing context."""
+
     trace_id: str = Field(default_factory=lambda: uuid4().hex)
     span_id: str = Field(default_factory=lambda: uuid4().hex[:16])
     parent_span_id: Optional[str] = Field(default=None)
@@ -32,6 +34,7 @@ class TraceContext(BaseModel):
 
 class MessageMetadata(BaseModel):
     """Comprehensive Message Metadata."""
+
     message_id: UUID = Field(default_factory=uuid4)
     correlation: CorrelationContext = Field(default_factory=CorrelationContext)
     trace: TraceContext = Field(default_factory=TraceContext)

@@ -1,6 +1,7 @@
 """
 Phase 3I.3: Enterprise Metrics Infrastructure Verification — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -15,13 +16,14 @@ class MetricType(str, Enum):
 
 
 class MetricsCertificationTier(str, Enum):
-    ENTERPRISE_METRICS_READY = "Enterprise Metrics Ready"         # 95 - 100
-    PRODUCTION_READY = "Production Ready"                         # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                 # 80 - 89.99
-    FAILED = "Failed"                                             # < 80
+    ENTERPRISE_METRICS_READY = "Enterprise Metrics Ready"  # 95 - 100
+    PRODUCTION_READY = "Production Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3I.3.1: Architecture Models ──────────────────────────────────────────────
+
 
 class MetricsServiceCoverage(BaseModel):
     service_name: str
@@ -43,6 +45,7 @@ class MetricsArchitectureReport(BaseModel):
 
 
 # ─── 3I.3.2: Standards Models ─────────────────────────────────────────────────
+
 
 class MetricDefinitionSpec(BaseModel):
     metric_name: str
@@ -66,6 +69,7 @@ class MetricsStandardReport(BaseModel):
 
 # ─── 3I.3.3: Application Metrics Models ───────────────────────────────────────
 
+
 class EndpointMetricSummary(BaseModel):
     endpoint: str
     method: str = "POST"
@@ -88,6 +92,7 @@ class ApplicationMetricsReport(BaseModel):
 
 
 # ─── 3I.3.4 & 3I.3.5: AI Agent & LLM Models ──────────────────────────────────
+
 
 class AgentExecutionMetricSpec(BaseModel):
     agent_name: str = "document_processor"
@@ -121,6 +126,7 @@ class AIMetricsReport(BaseModel):
 
 
 # ─── 3I.3.6 - 3I.3.9: Infrastructure, Queue & DB Models ───────────────────────
+
 
 class QueueMetricSpec(BaseModel):
     queue_name: str = "document_processing_queue"
@@ -173,6 +179,7 @@ class InfrastructureMetricsReport(BaseModel):
 
 # ─── 3I.3.10: Business & SLA Models ───────────────────────────────────────────
 
+
 class BusinessSLAMetricsReport(BaseModel):
     report_title: str = "Business Workflow & Document Extraction SLA Report"
     documents_uploaded_total: int = 10000
@@ -187,6 +194,7 @@ class BusinessSLAMetricsReport(BaseModel):
 
 
 # ─── 3I.3.11: Dashboard Models ────────────────────────────────────────────────
+
 
 class DashboardPanelSpec(BaseModel):
     panel_title: str
@@ -210,6 +218,7 @@ class DashboardReport(BaseModel):
 
 # ─── 3I.3.12: Alert Rule Models ───────────────────────────────────────────────
 
+
 class AlertRuleValidationSpec(BaseModel):
     alert_name: str
     metric_query: str
@@ -226,6 +235,7 @@ class AlertValidationReport(BaseModel):
 
 
 # ─── 3I.3.13: Metrics Accuracy Models ─────────────────────────────────────────
+
 
 class MetricAccuracySimulationSpec(BaseModel):
     operation: str
@@ -245,6 +255,7 @@ class MetricsAccuracyReport(BaseModel):
 
 # ─── 3I.3.14: Security Models ─────────────────────────────────────────────────
 
+
 class LabelSecurityAuditSpec(BaseModel):
     metric_name: str
     label_keys_audited: List[str]
@@ -263,6 +274,7 @@ class MetricsSecurityReport(BaseModel):
 
 # ─── 3I.3.15: Performance Models ──────────────────────────────────────────────
 
+
 class MetricsPerformanceReport(BaseModel):
     report_title: str = "Metrics Ingestion Performance & Overhead Benchmark Report"
     stress_events_per_minute: int = 100000
@@ -277,6 +289,7 @@ class MetricsPerformanceReport(BaseModel):
 
 
 # ─── 3I.3.16: Failure Simulation Models ───────────────────────────────────────
+
 
 class ChaosMetricScenarioSpec(BaseModel):
     scenario_id: str
@@ -295,6 +308,7 @@ class ChaosMetricReport(BaseModel):
 
 
 # ─── 3I.3.17 & 3I.3.18: Scoring & Certification Models ────────────────────────
+
 
 class MetricsPillarScore(BaseModel):
     pillar_name: str

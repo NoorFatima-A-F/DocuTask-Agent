@@ -36,20 +36,22 @@ class AuditExporter:
         writer = csv.DictWriter(output, fieldnames=fieldnames)
         writer.writeheader()
         for r in records:
-            writer.writerow({
-                "audit_id": r.audit_id,
-                "mission_id": r.mission_id,
-                "actor": r.actor,
-                "component": r.component,
-                "action": r.action,
-                "reason": r.reason,
-                "worker_id": r.worker_id or "",
-                "planner_generation": r.planner_generation,
-                "timestamp": r.timestamp,
-                "sha256": r.sha256 or "",
-                "previous_sha256": r.previous_sha256,
-                "signature": r.signature or "",
-            })
+            writer.writerow(
+                {
+                    "audit_id": r.audit_id,
+                    "mission_id": r.mission_id,
+                    "actor": r.actor,
+                    "component": r.component,
+                    "action": r.action,
+                    "reason": r.reason,
+                    "worker_id": r.worker_id or "",
+                    "planner_generation": r.planner_generation,
+                    "timestamp": r.timestamp,
+                    "sha256": r.sha256 or "",
+                    "previous_sha256": r.previous_sha256,
+                    "signature": r.signature or "",
+                }
+            )
         return output.getvalue()
 
     @staticmethod

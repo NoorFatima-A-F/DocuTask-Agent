@@ -24,7 +24,7 @@ class IntegrityChecker(IIntegrityChecker):
         rest_hash = "sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069"
         rt_hash = "sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069"
 
-        triple_match = (bk_hash == rest_hash == rt_hash)
+        triple_match = bk_hash == rest_hash == rt_hash
 
         return IntegrityValidationReport(
             backup_checksum=bk_hash,

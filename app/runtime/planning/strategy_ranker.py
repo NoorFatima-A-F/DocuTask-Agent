@@ -18,6 +18,7 @@ from app.runtime.planning.risk_engine import StrategyRiskProfile
 
 class StrategyComparisonEntry(BaseModel):
     """Single row in the Strategy Comparison Matrix."""
+
     strategy_id: str
     archetype: str
     name: str
@@ -36,6 +37,7 @@ class StrategyComparisonEntry(BaseModel):
 
 class StrategyComparisonMatrix(BaseModel):
     """Full comparative evaluation matrix across all candidate strategies."""
+
     mission_id: str
     entries: List[StrategyComparisonEntry] = Field(default_factory=list)
     pareto_frontier_strategy_ids: List[str] = Field(default_factory=list)
@@ -45,6 +47,7 @@ class StrategyComparisonMatrix(BaseModel):
 
 class StrategySelectionRecord(BaseModel):
     """Complete auditable selection decision package."""
+
     selected_strategy_id: str
     selected_archetype: str
     selection_rationale: str
@@ -83,7 +86,7 @@ class StrategyRankingEngine:
         rejection_reasons: Dict[str, str] = {}
 
         for rank, strat in enumerate(sorted_strategies, start=1):
-            is_sel = (strat.strategy_id == selected.strategy_id)
+            is_sel = strat.strategy_id == selected.strategy_id
             u_score = utility_scores[strat.strategy_id].total_utility
             cost_p = cost_predictions[strat.strategy_id]
             lat_p = latency_predictions[strat.strategy_id]
@@ -128,7 +131,7 @@ class StrategyRankingEngine:
 
         rationale = (
             f"Selected {selected.name} with highest multi-objective utility score ({utility_scores[selected.strategy_id].total_utility:.4f}). "
-            f"Provides optimal trade-off: {selected.estimated_accuracy*100:.1f}% accuracy at ${cost_predictions[selected.strategy_id].total_cost_usd:.4f} cost "
+            f"Provides optimal trade-off: {selected.estimated_accuracy * 100:.1f}% accuracy at ${cost_predictions[selected.strategy_id].total_cost_usd:.4f} cost "
             f"and {latency_predictions[selected.strategy_id].critical_path_ms:.1f}ms critical path latency."
         )
 
@@ -151,16 +154,16 @@ class StrategyRankingEngine:
                     continue
                 # s2 dominates s1 if s2 is as good or better in all 4 dimensions AND strictly better in at least one
                 better_or_equal = (
-                    s2.estimated_accuracy >= s1.estimated_accuracy and
-                    s2.estimated_critical_path_ms <= s1.estimated_critical_path_ms and
-                    s2.estimated_total_cost_usd <= s1.estimated_total_cost_usd and
-                    s2.estimated_risk_score <= s1.estimated_risk_score
+                    s2.estimated_accuracy >= s1.estimated_accuracy
+                    and s2.estimated_critical_path_ms <= s1.estimated_critical_path_ms
+                    and s2.estimated_total_cost_usd <= s1.estimated_total_cost_usd
+                    and s2.estimated_risk_score <= s1.estimated_risk_score
                 )
                 strictly_better = (
-                    s2.estimated_accuracy > s1.estimated_accuracy or
-                    s2.estimated_critical_path_ms < s1.estimated_critical_path_ms or
-                    s2.estimated_total_cost_usd < s1.estimated_total_cost_usd or
-                    s2.estimated_risk_score < s1.estimated_risk_score
+                    s2.estimated_accuracy > s1.estimated_accuracy
+                    or s2.estimated_critical_path_ms < s1.estimated_critical_path_ms
+                    or s2.estimated_total_cost_usd < s1.estimated_total_cost_usd
+                    or s2.estimated_risk_score < s1.estimated_risk_score
                 )
                 if better_or_equal and strictly_better:
                     dominated = True

@@ -1,8 +1,11 @@
 """
 Comprehensive Test Suite for Part 3E: Enterprise Observability & Reliability Verification Framework.
 """
+
 import pytest
-from app.platform_verification.observability_verification.runtime.observability_verification_runtime import ObservabilityVerificationRuntime
+from app.platform_verification.observability_verification.runtime.observability_verification_runtime import (
+    ObservabilityVerificationRuntime,
+)
 from app.platform_verification.observability_verification.domain.models import (
     ObservabilityCertificationTier,
 )
@@ -32,7 +35,15 @@ def test_observability_architecture_analyzer(obs_runtime):
 def test_structured_logging_and_pii_leak_validator(obs_runtime):
     """Validates structured JSON logging schema and detects unredacted secret leaks."""
     clean_logs = [
-        {"timestamp": "2026-09-15T00:00:00Z", "service": "api", "severity": "INFO", "request_id": "r1", "trace_id": "t1", "tenant_id": "ten1", "event": "doc_parsed"}
+        {
+            "timestamp": "2026-09-15T00:00:00Z",
+            "service": "api",
+            "severity": "INFO",
+            "request_id": "r1",
+            "trace_id": "t1",
+            "tenant_id": "ten1",
+            "event": "doc_parsed",
+        }
     ]
     good_rep = obs_runtime.logging_validator.validate_logging(clean_logs)
     assert good_rep.status == "PASS"
@@ -40,7 +51,16 @@ def test_structured_logging_and_pii_leak_validator(obs_runtime):
     assert len(good_rep.sensitive_data_leaks_detected) == 0
 
     leaky_logs = [
-        {"timestamp": "2026-09-15T00:00:00Z", "service": "api", "severity": "INFO", "request_id": "r1", "trace_id": "t1", "tenant_id": "ten1", "event": "user_login", "payload": "password='supersecretpass123'"}
+        {
+            "timestamp": "2026-09-15T00:00:00Z",
+            "service": "api",
+            "severity": "INFO",
+            "request_id": "r1",
+            "trace_id": "t1",
+            "tenant_id": "ten1",
+            "event": "user_login",
+            "payload": "password='supersecretpass123'",
+        }
     ]
     bad_rep = obs_runtime.logging_validator.validate_logging(leaky_logs)
     assert bad_rep.status == "FAIL"
@@ -103,9 +123,7 @@ def test_alert_quality_and_slo_compliance_engine(obs_runtime):
     assert alert_rep.status == "PASS"
     assert alert_rep.alert_quality_score == 100.0
 
-    slos = [
-        {"name": "Availability", "target_percentage": 99.5, "actual_percentage": 99.9}
-    ]
+    slos = [{"name": "Availability", "target_percentage": 99.5, "actual_percentage": 99.9}]
     slo_rep = obs_runtime.slo_engine.evaluate_slos(slos)
     assert slo_rep.status == "PASS"
     assert slo_rep.slo_compliance_score == 100.0
@@ -126,7 +144,10 @@ def test_end_to_end_observability_verification_and_api(obs_runtime):
     """Tests end-to-end full execution, evidence sealing, and in-process REST API."""
     package = obs_runtime.run_full_verification(commit_sha="git-commit-3e-77")
     assert package.scorecard.composite_score >= 90.0
-    assert package.scorecard.tier in [ObservabilityCertificationTier.ENTERPRISE_OBSERVABILITY_READY, ObservabilityCertificationTier.PRODUCTION_READY]
+    assert package.scorecard.tier in [
+        ObservabilityCertificationTier.ENTERPRISE_OBSERVABILITY_READY,
+        ObservabilityCertificationTier.PRODUCTION_READY,
+    ]
     assert package.package_sha256 != ""
 
     api = obs_runtime.api

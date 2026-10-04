@@ -2,6 +2,7 @@
 Strategy Matrix Engine for Enterprise PostgreSQL Backup Verification (Part 3G.2B).
 Evaluates support for all 10 enterprise database backup strategies.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.database_backup_verification.domain.models import (
     DatabaseBackupStrategyType,
@@ -27,7 +28,9 @@ class StrategyMatrixEngine(IStrategyMatrixEngine):
                 automation_level="100%_AUTOMATED",
                 verification_status="VERIFIED_CONTINUOUS",
                 limitations=["Requires dedicated high-throughput S3/blob archive storage with WORM locking."],
-                operational_recommendations=["Archive_command with pgBackRest or Wal-G with LZ4/ZSTD compression and parallel streaming."],
+                operational_recommendations=[
+                    "Archive_command with pgBackRest or Wal-G with LZ4/ZSTD compression and parallel streaming."
+                ],
             ),
             DatabaseBackupStrategyEntry(
                 strategy_name="Point-in-Time Recovery (PITR)",
@@ -37,7 +40,9 @@ class StrategyMatrixEngine(IStrategyMatrixEngine):
                 automation_level="100%_AUTOMATED",
                 verification_status="VERIFIED_CONTINUOUS",
                 limitations=["Recovery duration scales linearly with transaction replay volume from base backup."],
-                operational_recommendations=["Schedule daily physical base backups to cap maximum WAL replay window to 24 hours."],
+                operational_recommendations=[
+                    "Schedule daily physical base backups to cap maximum WAL replay window to 24 hours."
+                ],
             ),
             DatabaseBackupStrategyEntry(
                 strategy_name="Physical Base Backup (pg_basebackup)",
@@ -46,8 +51,12 @@ class StrategyMatrixEngine(IStrategyMatrixEngine):
                 implementation_status="ACTIVE_PRODUCTION",
                 automation_level="100%_AUTOMATED",
                 verification_status="VERIFIED_DAILY",
-                limitations=["Requires identical database architecture and platform architecture for binary restoration."],
-                operational_recommendations=["Utilize tar format with AES-256 encryption and multi-stream parallel socket transfers."],
+                limitations=[
+                    "Requires identical database architecture and platform architecture for binary restoration."
+                ],
+                operational_recommendations=[
+                    "Utilize tar format with AES-256 encryption and multi-stream parallel socket transfers."
+                ],
             ),
             DatabaseBackupStrategyEntry(
                 strategy_name="Logical Backup (pg_dump / pg_dumpall)",
@@ -57,7 +66,9 @@ class StrategyMatrixEngine(IStrategyMatrixEngine):
                 automation_level="100%_AUTOMATED",
                 verification_status="VERIFIED_DAILY",
                 limitations=["Higher CPU load and restore duration for multi-terabyte datasets."],
-                operational_recommendations=["Execute parallel directory format (-F d -j 8) for schema migrations and cross-major version upgrades."],
+                operational_recommendations=[
+                    "Execute parallel directory format (-F d -j 8) for schema migrations and cross-major version upgrades."
+                ],
             ),
             DatabaseBackupStrategyEntry(
                 strategy_name="Storage & Volume Snapshot (CSI)",
@@ -66,7 +77,9 @@ class StrategyMatrixEngine(IStrategyMatrixEngine):
                 implementation_status="ACTIVE_PRODUCTION",
                 automation_level="100%_AUTOMATED",
                 verification_status="VERIFIED_4HOURLY",
-                limitations=["Must invoke pg_backup_start() / pg_backup_stop() or freeze I/O to guarantee crash consistency."],
+                limitations=[
+                    "Must invoke pg_backup_start() / pg_backup_stop() or freeze I/O to guarantee crash consistency."
+                ],
                 operational_recommendations=["Integrate Kubernetes VolumeSnapshotClass with pre-snapshot flush hooks."],
             ),
             DatabaseBackupStrategyEntry(
@@ -97,7 +110,9 @@ class StrategyMatrixEngine(IStrategyMatrixEngine):
                 automation_level="100%_AUTOMATED",
                 verification_status="VERIFIED_DAILY",
                 limitations=["Slight increase in transaction write latency during active checksum generation."],
-                operational_recommendations=["Execute hot backups from Patroni read-only standby replica to avoid primary contention."],
+                operational_recommendations=[
+                    "Execute hot backups from Patroni read-only standby replica to avoid primary contention."
+                ],
             ),
             DatabaseBackupStrategyEntry(
                 strategy_name="Cold Backup (Offline State)",
@@ -107,7 +122,9 @@ class StrategyMatrixEngine(IStrategyMatrixEngine):
                 automation_level="ON_DEMAND",
                 verification_status="VERIFIED_PERIODIC",
                 limitations=["Requires service maintenance window and database shutdown."],
-                operational_recommendations=["Reserve for major operating system upgrades or storage hardware migrations."],
+                operational_recommendations=[
+                    "Reserve for major operating system upgrades or storage hardware migrations."
+                ],
             ),
             DatabaseBackupStrategyEntry(
                 strategy_name="Full Base Backup",
@@ -117,13 +134,13 @@ class StrategyMatrixEngine(IStrategyMatrixEngine):
                 automation_level="100%_AUTOMATED",
                 verification_status="VERIFIED_DAILY",
                 limitations=["Consumes substantial network bandwidth during initial transfer."],
-                operational_recommendations=["Offload full backups to off-peak hours (02:00 UTC) with dedicated 10Gbps DR link."],
+                operational_recommendations=[
+                    "Offload full backups to off-peak hours (02:00 UTC) with dedicated 10Gbps DR link."
+                ],
             ),
         ]
 
-    def export_strategy_matrix_json(
-        self, entries: List[DatabaseBackupStrategyEntry]
-    ) -> Dict[str, Any]:
+    def export_strategy_matrix_json(self, entries: List[DatabaseBackupStrategyEntry]) -> Dict[str, Any]:
         supported_count = len([e for e in entries if e.supported])
         return {
             "total_strategies_evaluated": len(entries),

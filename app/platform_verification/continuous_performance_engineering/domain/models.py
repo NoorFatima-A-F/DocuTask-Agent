@@ -20,9 +20,9 @@ PerformanceVerificationStatus = VerificationStatus
 
 class ContinuousPerformanceEngineeringTier(str, Enum):
     CONTINUOUS_PERFORMANCE_ENGINEERING_READY = "Continuous Performance Engineering Ready"  # 95-100
-    PRODUCTION_PERFORMANCE_GOVERNANCE_READY = "Production Performance Governance Ready"    # 90-94.99
-    NEEDS_IMPROVEMENT = "Needs Improvement"                                                # 80-89.99
-    FAILED = "Failed"                                                                      # <80
+    PRODUCTION_PERFORMANCE_GOVERNANCE_READY = "Production Performance Governance Ready"  # 90-94.99
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80-89.99
+    FAILED = "Failed"  # <80
 
 
 CertificationTier = ContinuousPerformanceEngineeringTier
@@ -49,6 +49,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3J.12.1: Continuous Performance Engineering Architecture ─────────────────
 
+
 class ArchitecturePipelineComponent(BaseModel):
     component_name: str
     stage: str
@@ -69,6 +70,7 @@ class ContinuousPerformanceArchitectureReport(BaseVerificationReport):
 
 
 # ─── 3J.12.2: Performance Baseline Management ────────────────────────────────
+
 
 class PerformanceBaselineProfile(BaseModel):
     domain: str
@@ -93,6 +95,7 @@ class PerformanceBaselineReport(BaseVerificationReport):
 
 # ─── 3J.12.3: Automated Benchmark Execution Framework ────────────────────────
 
+
 class BenchmarkScenarioResult(BaseModel):
     scenario_name: str
     workload_size: str
@@ -116,6 +119,7 @@ class BenchmarkExecutionReport(BaseVerificationReport):
 
 
 # ─── 3J.12.4: Performance Regression Detection Engine ────────────────────────
+
 
 class DetectedRegressionItem(BaseModel):
     category: str
@@ -142,6 +146,7 @@ class PerformanceRegressionReport(BaseVerificationReport):
 
 # ─── 3J.12.5: Performance Change Impact Analysis ─────────────────────────────
 
+
 class ChangeImpactRecord(BaseModel):
     commit_sha: str
     modified_component: str
@@ -160,6 +165,7 @@ class ChangeImpactAnalysisReport(BaseVerificationReport):
 
 
 # ─── 3J.12.6: Performance Quality Gates ──────────────────────────────────────
+
 
 class QualityGateCriterion(BaseModel):
     gate_name: str
@@ -185,6 +191,7 @@ class PerformanceGateReport(BaseVerificationReport):
 
 # ─── 3J.12.7: Multi Environment Performance Comparison ───────────────────────
 
+
 class EnvironmentBenchmark(BaseModel):
     environment_name: str
     runtime_type: str
@@ -205,6 +212,7 @@ class MultiEnvironmentComparisonReport(BaseVerificationReport):
 
 # ─── 3J.12.8: Performance Knowledge Repository ───────────────────────────────
 
+
 class PerformanceKnowledgeEntry(BaseModel):
     entry_id: str
     event_category: str
@@ -223,6 +231,7 @@ class PerformanceKnowledgeReport(BaseVerificationReport):
 
 
 # ─── 3J.12.9: Performance Trend Analysis ─────────────────────────────────────
+
 
 class TrendHorizonAnalysis(BaseModel):
     horizon: str
@@ -245,6 +254,7 @@ class PerformanceTrendReport(BaseVerificationReport):
 
 # ─── 3J.12.10: Continuous Performance Dashboard ──────────────────────────────
 
+
 class ContinuousDashboardPanel(BaseModel):
     panel_name: str
     target_audience: str
@@ -265,6 +275,7 @@ class PerformanceDashboardReport(BaseVerificationReport):
 
 # ─── 3J.12.11: CI/CD Integration ─────────────────────────────────────────────
 
+
 class CIPipelineIntegrationSpec(BaseModel):
     platform: str
     pipeline_file: str
@@ -275,15 +286,14 @@ class CIPipelineIntegrationSpec(BaseModel):
 
 class CICDPerformancePipelineReport(BaseVerificationReport):
     report_title: str = "CI/CD Performance Pipeline Integration Report"
-    supported_platforms: List[str] = Field(
-        default_factory=lambda: ["GitHub Actions", "GitLab CI", "Jenkins"]
-    )
+    supported_platforms: List[str] = Field(default_factory=lambda: ["GitHub Actions", "GitLab CI", "Jenkins"])
     pipeline_integrations: List[CIPipelineIntegrationSpec] = Field(default_factory=list)
     artifact_archival_enabled: bool = True
     automated_gating_verified: bool = True
 
 
 # ─── 3J.12.12: Performance Experiment Tracking ───────────────────────────────
+
 
 class PerformanceExperiment(BaseModel):
     experiment_id: str
@@ -304,6 +314,7 @@ class PerformanceExperimentReport(BaseVerificationReport):
 
 
 # ─── Scoring, Certification & Manifest Models ────────────────────────────────
+
 
 class CategoryScore(BaseModel):
     name: str

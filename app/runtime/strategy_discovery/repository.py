@@ -14,6 +14,7 @@ from app.runtime.strategy_discovery.evaluation import StrategyEvaluationReport
 
 class SynthesizedStrategyRecord(BaseModel):
     """Archival record of a discovered strategy with its evaluation telemetry."""
+
     strategy_id: str
     dag: SynthesizedDAG
     evaluation: StrategyEvaluationReport

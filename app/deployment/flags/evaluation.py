@@ -1,4 +1,5 @@
 """Feature Flag Evaluation Engine."""
+
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 import hashlib
@@ -7,6 +8,7 @@ import hashlib
 @dataclass
 class FlagEvaluationContext:
     """Evaluation context for feature flag checks."""
+
     tenant_id: Optional[str] = None
     user_id: Optional[str] = None
     environment: str = "prod"

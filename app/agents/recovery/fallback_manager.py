@@ -13,5 +13,5 @@ class FallbackManager:
         return {
             "status": "DEGRADED_FALLBACK",
             "capability": capability,
-            "message": "Fallback default payload provided due to unrecoverable fault."
+            "message": "Fallback default payload provided due to unrecoverable fault.",
         }

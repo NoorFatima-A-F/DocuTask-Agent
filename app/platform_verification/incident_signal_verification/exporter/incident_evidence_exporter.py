@@ -56,9 +56,7 @@ class IncidentEvidenceExporter(IIncidentEvidenceExporter):
         )
 
         # 2. alert_mapping_report.json
-        exported_files["alert_mapping_report.json"] = self._write_json(
-            "alert_mapping_report.json", asdict(map_rep)
-        )
+        exported_files["alert_mapping_report.json"] = self._write_json("alert_mapping_report.json", asdict(map_rep))
 
         # 3. payload_quality_report.json
         exported_files["payload_quality_report.json"] = self._write_json(
@@ -71,44 +69,28 @@ class IncidentEvidenceExporter(IIncidentEvidenceExporter):
         )
 
         # 5. impact_report.json
-        exported_files["impact_report.json"] = self._write_json(
-            "impact_report.json", asdict(impact_rep)
-        )
+        exported_files["impact_report.json"] = self._write_json("impact_report.json", asdict(impact_rep))
 
         # 6. priority_report.json
-        exported_files["priority_report.json"] = self._write_json(
-            "priority_report.json", asdict(prio_rep)
-        )
+        exported_files["priority_report.json"] = self._write_json("priority_report.json", asdict(prio_rep))
 
         # 7. correlation_report.json
-        exported_files["correlation_report.json"] = self._write_json(
-            "correlation_report.json", asdict(corr_rep)
-        )
+        exported_files["correlation_report.json"] = self._write_json("correlation_report.json", asdict(corr_rep))
 
         # 8. timeline_report.json
-        exported_files["timeline_report.json"] = self._write_json(
-            "timeline_report.json", asdict(time_rep)
-        )
+        exported_files["timeline_report.json"] = self._write_json("timeline_report.json", asdict(time_rep))
 
         # 9. runbook_report.json
-        exported_files["runbook_report.json"] = self._write_json(
-            "runbook_report.json", asdict(runbook_rep)
-        )
+        exported_files["runbook_report.json"] = self._write_json("runbook_report.json", asdict(runbook_rep))
 
         # 10. security_report.json
-        exported_files["security_report.json"] = self._write_json(
-            "security_report.json", asdict(sec_rep)
-        )
+        exported_files["security_report.json"] = self._write_json("security_report.json", asdict(sec_rep))
 
         # 11. automation_report.json
-        exported_files["automation_report.json"] = self._write_json(
-            "automation_report.json", asdict(auto_rep)
-        )
+        exported_files["automation_report.json"] = self._write_json("automation_report.json", asdict(auto_rep))
 
         # 12. certification_report.json
-        exported_files["certification_report.json"] = self._write_json(
-            "certification_report.json", asdict(scorecard)
-        )
+        exported_files["certification_report.json"] = self._write_json("certification_report.json", asdict(scorecard))
 
         # 13. metadata.json
         metadata = {

@@ -1,8 +1,10 @@
 """
 Versioned Domain Events.
 """
+
 from dataclasses import dataclass
 from app.platform_verification.shared_kernel.events import DomainEvent
+
 
 @dataclass(frozen=True)
 class VerificationStartedDomainEvent(DomainEvent):

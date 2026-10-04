@@ -34,27 +34,31 @@ class AnomalyReconstruction:
             # Check latency anomalies (> 5000ms)
             dur = float(payload.get("duration_ms", 0.0))
             if dur > 5000.0:
-                anomalies.append(ReplayAnomaly(
-                    anomaly_id=f"anom_lat_{idx}",
-                    event_id=ev.get("event_id", f"ev_{idx}"),
-                    metric_name="task_duration_ms",
-                    expected_value=500.0,
-                    observed_value=dur,
-                    z_score=round((dur - 500.0) / 200.0, 2),
-                    severity="WARNING",
-                ))
+                anomalies.append(
+                    ReplayAnomaly(
+                        anomaly_id=f"anom_lat_{idx}",
+                        event_id=ev.get("event_id", f"ev_{idx}"),
+                        metric_name="task_duration_ms",
+                        expected_value=500.0,
+                        observed_value=dur,
+                        z_score=round((dur - 500.0) / 200.0, 2),
+                        severity="WARNING",
+                    )
+                )
 
             # Check confidence drops (< 0.60)
             conf = payload.get("overall_score") or payload.get("confidence")
             if conf is not None and conf < 0.60:
-                anomalies.append(ReplayAnomaly(
-                    anomaly_id=f"anom_conf_{idx}",
-                    event_id=ev.get("event_id", f"ev_{idx}"),
-                    metric_name="confidence_score",
-                    expected_value=0.95,
-                    observed_value=float(conf),
-                    z_score=-3.5,
-                    severity="CRITICAL",
-                ))
+                anomalies.append(
+                    ReplayAnomaly(
+                        anomaly_id=f"anom_conf_{idx}",
+                        event_id=ev.get("event_id", f"ev_{idx}"),
+                        metric_name="confidence_score",
+                        expected_value=0.95,
+                        observed_value=float(conf),
+                        z_score=-3.5,
+                        severity="CRITICAL",
+                    )
+                )
 
         return anomalies

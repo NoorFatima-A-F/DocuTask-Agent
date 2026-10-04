@@ -61,13 +61,17 @@ def main():
     results = runner.run_all_experiments(documents_per_experiment=args.documents)
 
     if args.scenario != "all":
-        results = [r for r in results if r.scenario_type.value == args.scenario or args.scenario in r.experiment_id.lower()]
+        results = [
+            r for r in results if r.scenario_type.value == args.scenario or args.scenario in r.experiment_id.lower()
+        ]
 
     print("-" * 80)
     print(f" {'EXP ID':<24} | {'SCENARIO':<22} | {'DOCS':<6} | {'FAULTS':<8} | {'RECOVERED':<10} | {'STATUS'}")
     print("-" * 80)
     for r in results:
-        print(f" {r.experiment_id:<24} | {r.scenario_type.value:<22} | {r.total_documents:>4} | {r.fault_count:>6} | {r.recovered_count:>8} | {'PASS' if r.passed else 'FAIL'}")
+        print(
+            f" {r.experiment_id:<24} | {r.scenario_type.value:<22} | {r.total_documents:>4} | {r.fault_count:>6} | {r.recovered_count:>8} | {'PASS' if r.passed else 'FAIL'}"
+        )
     print("-" * 80)
 
     total_faults = sum(r.fault_count for r in results)

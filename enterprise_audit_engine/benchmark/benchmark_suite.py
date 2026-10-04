@@ -22,6 +22,7 @@ from enterprise_audit_engine.governance.claim_validator import ClaimValidator
 
 class BenchmarkArchetypeResult(BaseModel):
     """Result of running the audit engine against a benchmark archetype."""
+
     archetype_name: str
     expected_outcome: str
     actual_outcome: str
@@ -32,6 +33,7 @@ class BenchmarkArchetypeResult(BaseModel):
 
 class BenchmarkSuiteReport(BaseModel):
     """Full external benchmark calibration report."""
+
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     total_archetypes_tested: int
     archetypes_passed: int
@@ -89,14 +91,16 @@ class ExternalBenchmarkSuite:
             active_domains=["runtime", "security", "testing", "reproducibility"],
         )
         good_pass = eval_good["passed"]
-        results.append(BenchmarkArchetypeResult(
-            archetype_name="GOOD_ENTERPRISE_SYSTEM",
-            expected_outcome="PASS",
-            actual_outcome="PASS" if good_pass else "FAIL",
-            matched=good_pass,
-            discrimination_score=100.0 if good_pass else 0.0,
-            details={"policy_passed": good_pass},
-        ))
+        results.append(
+            BenchmarkArchetypeResult(
+                archetype_name="GOOD_ENTERPRISE_SYSTEM",
+                expected_outcome="PASS",
+                actual_outcome="PASS" if good_pass else "FAIL",
+                matched=good_pass,
+                discrimination_score=100.0 if good_pass else 0.0,
+                details={"policy_passed": good_pass},
+            )
+        )
 
         # 2. Archetype: Vulnerable System
         [
@@ -130,14 +134,16 @@ class ExternalBenchmarkSuite:
             active_domains=["security"],
         )
         vuln_blocked = not eval_vuln["passed"]
-        results.append(BenchmarkArchetypeResult(
-            archetype_name="VULNERABLE_SYSTEM",
-            expected_outcome="FAIL",
-            actual_outcome="FAIL" if vuln_blocked else "PASS",
-            matched=vuln_blocked,
-            discrimination_score=100.0 if vuln_blocked else 0.0,
-            details={"blocked_properly": vuln_blocked},
-        ))
+        results.append(
+            BenchmarkArchetypeResult(
+                archetype_name="VULNERABLE_SYSTEM",
+                expected_outcome="FAIL",
+                actual_outcome="FAIL" if vuln_blocked else "PASS",
+                matched=vuln_blocked,
+                discrimination_score=100.0 if vuln_blocked else 0.0,
+                details={"blocked_properly": vuln_blocked},
+            )
+        )
 
         # 3. Archetype: Misleading / Inflated Claims System
         misleading_evidence = [
@@ -153,6 +159,7 @@ class ExternalBenchmarkSuite:
             ),
         ]
         from enterprise_audit_engine.domain.evidence.models import AuditFinding
+
         fnd_mis = AuditFinding(
             finding_id="FND-MIS-1",
             subsystem="General",
@@ -164,14 +171,16 @@ class ExternalBenchmarkSuite:
         )
         is_valid_claim, _ = ClaimValidator.validate_claim(fnd_mis, misleading_evidence)
         mis_detected = not is_valid_claim
-        results.append(BenchmarkArchetypeResult(
-            archetype_name="MISLEADING_SYSTEM_WITH_INFLATED_CLAIMS",
-            expected_outcome="DETECTED_AND_BLOCKED",
-            actual_outcome="DETECTED_AND_BLOCKED" if mis_detected else "UNNOTICED",
-            matched=mis_detected,
-            discrimination_score=100.0 if mis_detected else 0.0,
-            details={"unbacked_claim_blocked": mis_detected},
-        ))
+        results.append(
+            BenchmarkArchetypeResult(
+                archetype_name="MISLEADING_SYSTEM_WITH_INFLATED_CLAIMS",
+                expected_outcome="DETECTED_AND_BLOCKED",
+                actual_outcome="DETECTED_AND_BLOCKED" if mis_detected else "UNNOTICED",
+                matched=mis_detected,
+                discrimination_score=100.0 if mis_detected else 0.0,
+                details={"unbacked_claim_blocked": mis_detected},
+            )
+        )
 
         passed_archetypes = sum(1 for r in results if r.matched)
         accuracy = (passed_archetypes / len(results) * 100.0) if results else 100.0

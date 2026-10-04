@@ -13,6 +13,7 @@ from app.agents.workflow.workflow_node import WorkflowNode
 
 class WorkflowGraph(BaseModel):
     """Directed graph representing dependencies between workflow nodes."""
+
     graph_id: UUID = Field(default_factory=uuid4)
     nodes: Dict[str, WorkflowNode] = Field(default_factory=dict)
     edges: List[WorkflowEdge] = Field(default_factory=list)

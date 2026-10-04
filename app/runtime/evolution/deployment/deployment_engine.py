@@ -94,9 +94,7 @@ class DeploymentEngine:
         )
         self.deployments[dep_id] = record
 
-        self.event_bus.publish(
-            DeploymentProgressed(payload=record.to_dict())
-        )
+        self.event_bus.publish(DeploymentProgressed(payload=record.to_dict()))
         return record
 
     def advance_canary(self, deployment_id: str, target_traffic_pct: float) -> Optional[DeploymentRecord]:
@@ -108,17 +106,15 @@ class DeploymentEngine:
         if record.canary_traffic_pct >= 100.0:
             record.deployment_state = DeploymentState.PROMOTED.value
             self.current_platform_version = record.target_version
-            self.event_bus.publish(
-                DeploymentCompleted(payload=record.to_dict())
-            )
+            self.event_bus.publish(DeploymentCompleted(payload=record.to_dict()))
         else:
             record.deployment_state = DeploymentState.CANARY.value
-            self.event_bus.publish(
-                DeploymentProgressed(payload=record.to_dict())
-            )
+            self.event_bus.publish(DeploymentProgressed(payload=record.to_dict()))
         return record
 
-    def trigger_rollback(self, deployment_id: str, reason: str = "Automated SLA threshold breach") -> Optional[DeploymentRecord]:
+    def trigger_rollback(
+        self, deployment_id: str, reason: str = "Automated SLA threshold breach"
+    ) -> Optional[DeploymentRecord]:
         record = self.deployments.get(deployment_id)
         if not record:
             return None

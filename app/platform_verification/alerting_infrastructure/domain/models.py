@@ -1,6 +1,7 @@
 """
 Phase 3I.5: Enterprise Alerting & Incident Detection Verification — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -22,13 +23,14 @@ class AlertTriggerState(str, Enum):
 
 
 class AlertCertificationTier(str, Enum):
-    ENTERPRISE_INCIDENT_READY = "Enterprise Incident Ready"       # 95 - 100
-    PRODUCTION_ALERTING_READY = "Production Alerting Ready"       # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                 # 80 - 89.99
-    FAILED = "Failed"                                             # < 80
+    ENTERPRISE_INCIDENT_READY = "Enterprise Incident Ready"  # 95 - 100
+    PRODUCTION_ALERTING_READY = "Production Alerting Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3I.5.1: Alerting Architecture Models ─────────────────────────────────────
+
 
 class NotificationChannelSpec(BaseModel):
     channel_name: str
@@ -50,6 +52,7 @@ class AlertingArchitectureReport(BaseModel):
 
 # ─── 3I.5.2: Signal Coverage Models ───────────────────────────────────────────
 
+
 class SignalSourceCoverageSpec(BaseModel):
     source_category: str  # Metrics, Logs, Traces, Business Signals
     signals_monitored_count: int
@@ -65,6 +68,7 @@ class AlertSignalCoverageReport(BaseModel):
 
 
 # ─── 3I.5.3 & 3I.5.4: Alert Rules & Golden Signals Models ─────────────────────
+
 
 class AlertRuleSpec(BaseModel):
     rule_id: str
@@ -87,6 +91,7 @@ class AlertRulesReport(BaseModel):
 
 # ─── 3I.5.5: AI Agent Specific Alert Models ───────────────────────────────────
 
+
 class AIAgentAlertRuleSpec(BaseModel):
     alert_name: str
     agent_subsystem: str  # Planning, Tool Execution, LLM Gateway, Reflection, Validation
@@ -106,6 +111,7 @@ class AIAgentAlertReport(BaseModel):
 
 # ─── 3I.5.7 & 3I.5.8: Severity Classification & Routing Models ────────────────
 
+
 class RoutingDestinationSpec(BaseModel):
     severity: IncidentSeverity
     team_owner: str  # SRE On-Call, DBA Team, ML Platform Team, Security Team
@@ -122,6 +128,7 @@ class IncidentSeverityReport(BaseModel):
 
 
 # ─── 3I.5.9, 3I.5.10 & 3I.5.11: Context, Deduplication & Fatigue Models ────────
+
 
 class AlertContextSampleSpec(BaseModel):
     alert_name: str
@@ -145,6 +152,7 @@ class AlertDeduplicationFatigueSpec(BaseModel):
 
 # ─── 3I.5.12 & 3I.5.13: Automated Remediation Models ──────────────────────────
 
+
 class RemediationActionSpec(BaseModel):
     trigger_alert: str
     target_component: str
@@ -163,6 +171,7 @@ class RemediationReport(BaseModel):
 
 # ─── 3I.5.14: Security Models ─────────────────────────────────────────────────
 
+
 class AlertSecurityAuditSpec(BaseModel):
     notification_channel: str
     payload_audited_fields: List[str]
@@ -180,6 +189,7 @@ class AlertSecurityReport(BaseModel):
 
 
 # ─── 3I.5.15: Failure Simulation Testing Models ───────────────────────────────
+
 
 class ChaosAlertScenarioSpec(BaseModel):
     test_id: str
@@ -200,6 +210,7 @@ class AlertTestingReport(BaseModel):
 
 
 # ─── 3I.5.16 & 3I.5.17: Scoring & Certification Models ────────────────────────
+
 
 class AlertingPillarScore(BaseModel):
     pillar_name: str

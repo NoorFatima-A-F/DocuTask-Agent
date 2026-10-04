@@ -37,7 +37,9 @@ class GovernanceCLI:
         report_parser = subparsers.add_parser("report", help="Generate governance reports")
         report_sub = report_parser.add_subparsers(dest="subcommand", help="Report subcommands")
         gen_r = report_sub.add_parser("generate", help="Generate report")
-        gen_r.add_argument("--type", default="compliance", choices=["compliance", "executive", "risk"], help="Report type")
+        gen_r.add_argument(
+            "--type", default="compliance", choices=["compliance", "executive", "risk"], help="Report type"
+        )
 
         return parser
 

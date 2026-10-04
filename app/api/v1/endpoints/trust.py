@@ -92,9 +92,27 @@ def _seed_initial_truth_data():
         mission_id="msn_1001",
         document_type="invoice",
         candidates=[
-            {"strategy_id": "strat_inv_fanout", "strategy_name": "Invoice Parallel Fan-Out Strategy", "expected_accuracy": 0.994, "expected_latency_ms": 730.0, "expected_cost_usd": 0.0078},
-            {"strategy_id": "strat_inv_sequential", "strategy_name": "Sequential Single-Pass Baseline", "expected_accuracy": 0.978, "expected_latency_ms": 940.0, "expected_cost_usd": 0.0084},
-            {"strategy_id": "strat_inv_heavy_vision", "strategy_name": "Heavy Vision Multi-Pass OCR", "expected_accuracy": 0.996, "expected_latency_ms": 2800.0, "expected_cost_usd": 0.0450},
+            {
+                "strategy_id": "strat_inv_fanout",
+                "strategy_name": "Invoice Parallel Fan-Out Strategy",
+                "expected_accuracy": 0.994,
+                "expected_latency_ms": 730.0,
+                "expected_cost_usd": 0.0078,
+            },
+            {
+                "strategy_id": "strat_inv_sequential",
+                "strategy_name": "Sequential Single-Pass Baseline",
+                "expected_accuracy": 0.978,
+                "expected_latency_ms": 940.0,
+                "expected_cost_usd": 0.0084,
+            },
+            {
+                "strategy_id": "strat_inv_heavy_vision",
+                "strategy_name": "Heavy Vision Multi-Pass OCR",
+                "expected_accuracy": 0.996,
+                "expected_latency_ms": 2800.0,
+                "expected_cost_usd": 0.0450,
+            },
         ],
         evidence_hash="0x8f2ac31b4e5d6a7b",
     )
@@ -103,7 +121,12 @@ def _seed_initial_truth_data():
     _replay_certifier.certify_replay(
         mission_id="msn_1001",
         original_telemetry={"total_latency_ms": 940.5, "total_cost_usd": 0.0084},
-        replayed_telemetry={"total_latency_ms": 942.0, "total_cost_usd": 0.0084, "output_similarity_pct": 99.95, "bitwise_state_match_rate": 0.9998},
+        replayed_telemetry={
+            "total_latency_ms": 942.0,
+            "total_cost_usd": 0.0084,
+            "output_similarity_pct": 99.95,
+            "bitwise_state_match_rate": 0.9998,
+        },
     )
 
     # 4. Seed Mission Certificate
@@ -120,6 +143,7 @@ _seed_initial_truth_data()
 # ---------------------------------------------------------------------------
 # Request Models
 # ---------------------------------------------------------------------------
+
 
 class GenerateProofRequest(BaseModel):
     mission_id: str
@@ -151,6 +175,7 @@ class VerifyBundleRequest(BaseModel):
 # ---------------------------------------------------------------------------
 # API Endpoints
 # ---------------------------------------------------------------------------
+
 
 @router.get("/summary")
 def get_truth_summary() -> Dict[str, Any]:
@@ -225,7 +250,12 @@ def get_replay_certification(mission_id: str) -> Dict[str, Any]:
     cert = _replay_certifier.certify_replay(
         mission_id=mission_id,
         original_telemetry={"total_latency_ms": 940.5, "total_cost_usd": 0.0084},
-        replayed_telemetry={"total_latency_ms": 942.0, "total_cost_usd": 0.0084, "output_similarity_pct": 99.95, "bitwise_state_match_rate": 0.9998},
+        replayed_telemetry={
+            "total_latency_ms": 942.0,
+            "total_cost_usd": 0.0084,
+            "output_similarity_pct": 99.95,
+            "bitwise_state_match_rate": 0.9998,
+        },
     )
     return cert.to_dict()
 

@@ -1,6 +1,7 @@
 """
 Phase 3H.5.12: Automated Health Recovery Verification Framework — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -28,13 +29,14 @@ class RecoveryActionType(str, Enum):
 
 
 class RecoveryCertificationTier(str, Enum):
-    AUTONOMOUS_RECOVERY_READY = "Autonomous Recovery Ready"    # 95 - 100
-    PRODUCTION_RECOVERY_READY = "Production Recovery Ready"    # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"              # 80 - 89.99
-    FAILED = "Failed"                                          # < 80
+    AUTONOMOUS_RECOVERY_READY = "Autonomous Recovery Ready"  # 95 - 100
+    PRODUCTION_RECOVERY_READY = "Production Recovery Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3H.5.12.1: Health State Transition Models ───────────────────────────────
+
 
 class StateTransitionRecord(BaseModel):
     transition_id: str
@@ -57,6 +59,7 @@ class HealthStateTransitionReport(BaseModel):
 
 # ─── 3H.5.12.2: Automated Failure Detection Pipeline Models ──────────────────
 
+
 class FailureDetectionItem(BaseModel):
     scenario_id: str
     category: str  # Application, Infrastructure, Dependency
@@ -77,6 +80,7 @@ class FailureDetectionReport(BaseModel):
 
 
 # ─── 3H.5.12.3: Recovery Policy Engine Models ────────────────────────────────
+
 
 class RecoveryPolicyRule(BaseModel):
     policy_id: str
@@ -100,6 +104,7 @@ class RecoveryPolicyReport(BaseModel):
 
 # ─── 3H.5.12.4: Component Recovery Verification Models ───────────────────────
 
+
 class ComponentRecoveryItem(BaseModel):
     component_name: str  # API, PostgreSQL, Redis, Worker, Gemini_AI
     simulated_failure: str
@@ -119,6 +124,7 @@ class ComponentRecoveryReport(BaseModel):
 
 # ─── 3H.5.12.5: Recovery Safety Models ───────────────────────────────────────
 
+
 class SafetyCheckItem(BaseModel):
     safety_rule: str  # Max retries, Exponential backoff, Blast radius isolation, Cooldown period, Execution timeout
     target_component: str
@@ -136,6 +142,7 @@ class RecoverySafetyReport(BaseModel):
 
 
 # ─── 3H.5.12.6: Self-Healing Workflow Models ─────────────────────────────────
+
 
 class SelfHealingScenario(BaseModel):
     scenario_id: str
@@ -159,6 +166,7 @@ class SelfHealingReport(BaseModel):
 
 # ─── 3H.5.12.7: Recovery Chaos Testing Models ────────────────────────────────
 
+
 class ChaosExperiment(BaseModel):
     experiment_id: str
     target_subsystem: str
@@ -179,6 +187,7 @@ class RecoveryChaosReport(BaseModel):
 
 # ─── 3H.5.12.8: Recovery Validation Engine Models ────────────────────────────
 
+
 class ValidationProbeItem(BaseModel):
     component: str
     pre_recovery_state: HealthState
@@ -198,6 +207,7 @@ class RecoveryValidationReport(BaseModel):
 
 # ─── 3H.5.12.9: Recovery Observability Models ────────────────────────────────
 
+
 class ObservabilityMetricItem(BaseModel):
     metric_name: str
     metric_type: str  # Counter, Gauge, Histogram
@@ -214,6 +224,7 @@ class RecoveryObservabilityReport(BaseModel):
 
 
 # ─── 3H.5.12.10: Recovery Security Models ────────────────────────────────────
+
 
 class SecurityAuditRecord(BaseModel):
     action_id: str
@@ -235,6 +246,7 @@ class RecoverySecurityReport(BaseModel):
 
 
 # ─── 3H.5.12.11: Master Scorecard & Certification Models ─────────────────────
+
 
 class PillarScore(BaseModel):
     pillar_name: str

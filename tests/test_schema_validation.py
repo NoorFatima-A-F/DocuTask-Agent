@@ -14,7 +14,7 @@ def test_schema_validation_success():
         "vendor_name": "Acme Corp",
         "total_amount": 500.0,
         "currency": "USD",
-        "line_items": []
+        "line_items": [],
     }
 
     validated_dict, confidence = AIValidator.validate(valid_data, "invoice")
@@ -25,9 +25,7 @@ def test_schema_validation_success():
 
 def test_schema_validation_failure():
     """Verifies exception handling for invalid field types."""
-    invalid_data = {
-        "total_amount": "invalid_number_string_here"
-    }
+    invalid_data = {"total_amount": "invalid_number_string_here"}
 
     with pytest.raises(AIValidationException) as exc_info:
         AIValidator.validate(invalid_data, "invoice")

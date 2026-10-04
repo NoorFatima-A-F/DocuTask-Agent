@@ -45,10 +45,7 @@ class ClusterCapabilityRegistry:
         return self.satisfies_capabilities(cluster_id, required_capabilities)
 
     def find_clusters_with_capabilities(self, required_capabilities: Set[str]) -> List[str]:
-        return [
-            cid for cid, caps in self._cluster_capabilities.items()
-            if required_capabilities.issubset(caps)
-        ]
+        return [cid for cid, caps in self._cluster_capabilities.items() if required_capabilities.issubset(caps)]
 
     def query_clusters(self, required_capabilities: Set[str]) -> List[str]:
         return self.find_clusters_with_capabilities(required_capabilities)

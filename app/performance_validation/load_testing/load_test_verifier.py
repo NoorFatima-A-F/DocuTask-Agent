@@ -97,7 +97,11 @@ class LoadTestVerifier:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"max_concurrency_tested": 1000, "p95_latency_ms": c1000_p95_ms, "sla_compliance_pct": c1000_sla_pct},
+            metrics={
+                "max_concurrency_tested": 1000,
+                "p95_latency_ms": c1000_p95_ms,
+                "sla_compliance_pct": c1000_sla_pct,
+            },
             execution_time_ms=elapsed_ms,
         )
 

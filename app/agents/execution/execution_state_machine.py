@@ -17,25 +17,25 @@ class ExecutionStateMachine:
             ExecutionLifecycleState.READY,
             ExecutionLifecycleState.SCHEDULED,
             ExecutionLifecycleState.WAITING,
-            ExecutionLifecycleState.CANCELLED
+            ExecutionLifecycleState.CANCELLED,
         },
         ExecutionLifecycleState.WAITING: {
             ExecutionLifecycleState.READY,
             ExecutionLifecycleState.BLOCKED,
             ExecutionLifecycleState.CANCELLED,
-            ExecutionLifecycleState.TIMED_OUT
+            ExecutionLifecycleState.TIMED_OUT,
         },
         ExecutionLifecycleState.READY: {
             ExecutionLifecycleState.SCHEDULED,
             ExecutionLifecycleState.BLOCKED,
             ExecutionLifecycleState.PAUSED,
-            ExecutionLifecycleState.CANCELLED
+            ExecutionLifecycleState.CANCELLED,
         },
         ExecutionLifecycleState.SCHEDULED: {
             ExecutionLifecycleState.RUNNING,
             ExecutionLifecycleState.PAUSED,
             ExecutionLifecycleState.CANCELLED,
-            ExecutionLifecycleState.TIMED_OUT
+            ExecutionLifecycleState.TIMED_OUT,
         },
         ExecutionLifecycleState.RUNNING: {
             ExecutionLifecycleState.COMPLETED,
@@ -44,52 +44,36 @@ class ExecutionStateMachine:
             ExecutionLifecycleState.ROLLING_BACK,
             ExecutionLifecycleState.PAUSED,
             ExecutionLifecycleState.CANCELLED,
-            ExecutionLifecycleState.TIMED_OUT
+            ExecutionLifecycleState.TIMED_OUT,
         },
         ExecutionLifecycleState.BLOCKED: {
             ExecutionLifecycleState.READY,
             ExecutionLifecycleState.WAITING,
             ExecutionLifecycleState.FAILED,
-            ExecutionLifecycleState.CANCELLED
+            ExecutionLifecycleState.CANCELLED,
         },
         ExecutionLifecycleState.PAUSED: {
             ExecutionLifecycleState.READY,
             ExecutionLifecycleState.SCHEDULED,
             ExecutionLifecycleState.RUNNING,
-            ExecutionLifecycleState.CANCELLED
+            ExecutionLifecycleState.CANCELLED,
         },
         ExecutionLifecycleState.RETRYING: {
             ExecutionLifecycleState.SCHEDULED,
             ExecutionLifecycleState.RUNNING,
             ExecutionLifecycleState.FAILED,
-            ExecutionLifecycleState.CANCELLED
+            ExecutionLifecycleState.CANCELLED,
         },
-        ExecutionLifecycleState.ROLLING_BACK: {
-            ExecutionLifecycleState.ROLLED_BACK,
-            ExecutionLifecycleState.FAILED
-        },
+        ExecutionLifecycleState.ROLLING_BACK: {ExecutionLifecycleState.ROLLED_BACK, ExecutionLifecycleState.FAILED},
         ExecutionLifecycleState.ROLLED_BACK: set(),  # Terminal
-        ExecutionLifecycleState.COMPLETED: {
-            ExecutionLifecycleState.ROLLING_BACK,
-            ExecutionLifecycleState.ROLLED_BACK
-        },
-        ExecutionLifecycleState.FAILED: {
-            ExecutionLifecycleState.ROLLING_BACK,
-            ExecutionLifecycleState.RETRYING
-        },
-        ExecutionLifecycleState.CANCELLED: set(),    # Terminal
-        ExecutionLifecycleState.TIMED_OUT: {
-            ExecutionLifecycleState.ROLLING_BACK,
-            ExecutionLifecycleState.FAILED
-        }
+        ExecutionLifecycleState.COMPLETED: {ExecutionLifecycleState.ROLLING_BACK, ExecutionLifecycleState.ROLLED_BACK},
+        ExecutionLifecycleState.FAILED: {ExecutionLifecycleState.ROLLING_BACK, ExecutionLifecycleState.RETRYING},
+        ExecutionLifecycleState.CANCELLED: set(),  # Terminal
+        ExecutionLifecycleState.TIMED_OUT: {ExecutionLifecycleState.ROLLING_BACK, ExecutionLifecycleState.FAILED},
     }
 
     @classmethod
-    def can_transition(
-        cls,
-        current_state: ExecutionLifecycleState,
-        target_state: ExecutionLifecycleState
-    ) -> bool:
+    def can_transition(cls, current_state: ExecutionLifecycleState, target_state: ExecutionLifecycleState) -> bool:
         """Checks if transition is valid according to state machine rules."""
         if current_state == target_state:
             return True
@@ -98,10 +82,7 @@ class ExecutionStateMachine:
 
     @classmethod
     def transition(
-        cls,
-        current_state: ExecutionLifecycleState,
-        target_state: ExecutionLifecycleState,
-        entity_id: str = "node"
+        cls, current_state: ExecutionLifecycleState, target_state: ExecutionLifecycleState, entity_id: str = "node"
     ) -> ExecutionLifecycleState:
         """Validates and applies transition, raising IllegalStateTransitionException on invalid move."""
         if not cls.can_transition(current_state, target_state):

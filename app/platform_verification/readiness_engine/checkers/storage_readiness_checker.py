@@ -3,6 +3,7 @@ Storage Readiness Checker (Part 3H.3.2.5).
 Verifies document storage availability by running an ephemeral probe lifecycle:
 Create temporary test object -> Read -> Validate hash -> Clean Delete (Zero residual files).
 """
+
 import hashlib
 from typing import Optional
 from app.platform_verification.readiness_engine.domain.models import (

@@ -61,7 +61,9 @@ class RoutingEligibilityEngine:
             # 2. Region & Jurisdiction check
             region = self.region_registry.get_region(cluster.region_id)
             if not region:
-                rejection_reasons.append(f"Cluster '{cluster_id}' belongs to unregistered region '{cluster.region_id}'.")
+                rejection_reasons.append(
+                    f"Cluster '{cluster_id}' belongs to unregistered region '{cluster.region_id}'."
+                )
                 continue
 
             if request.target_region and cluster.region_id != request.target_region:
@@ -90,9 +92,7 @@ class RoutingEligibilityEngine:
 
             # 4. Workload, Capabilities & Compliance
             if request.workload_type not in cluster.supported_workloads:
-                rejection_reasons.append(
-                    f"Cluster '{cluster_id}' does not support workload '{request.workload_type}'."
-                )
+                rejection_reasons.append(f"Cluster '{cluster_id}' does not support workload '{request.workload_type}'.")
                 continue
 
             if not request.required_capabilities.issubset(cluster.capabilities):
@@ -102,18 +102,14 @@ class RoutingEligibilityEngine:
                 )
                 continue
 
-            comp_ok, comp_errs = self.region_policy_engine.validate_compliance(
-                region, request.required_compliance
-            )
+            comp_ok, comp_errs = self.region_policy_engine.validate_compliance(region, request.required_compliance)
             if not comp_ok:
                 rejection_reasons.extend(comp_errs)
                 continue
 
             # 5. Labels selector
             if request.labels_selector:
-                match_ok, match_errs = self.label_system.matches_selector(
-                    cluster.labels, request.labels_selector
-                )
+                match_ok, match_errs = self.label_system.matches_selector(cluster.labels, request.labels_selector)
                 if not match_ok:
                     rejection_reasons.extend([f"Cluster '{cluster_id}': {e}" for e in match_errs])
                     continue
@@ -137,9 +133,7 @@ class RoutingEligibilityEngine:
 
         # Rank candidate clusters by available CPU capacity (highest available first)
         candidate_clusters.sort(
-            key=lambda c: (
-                c.capacity.allocatable_cpu_cores - c.capacity.utilized_cpu_cores
-            ),
+            key=lambda c: c.capacity.allocatable_cpu_cores - c.capacity.utilized_cpu_cores,
             reverse=True,
         )
 

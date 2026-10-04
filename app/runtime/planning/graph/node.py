@@ -27,11 +27,11 @@ class NodeStatus(str, enum.Enum):
 
 
 class DependencyType(str, enum.Enum):
-    HARD = "HARD"                  # Must succeed; failure blocks downstream
-    SOFT = "SOFT"                  # Best effort; failure produces partial input
-    OPTIONAL = "OPTIONAL"          # May be skipped if bypassed
-    CONDITIONAL = "CONDITIONAL"    # Evaluates boolean runtime condition predicate
-    RUNTIME = "RUNTIME"            # Dynamically discovered during execution
+    HARD = "HARD"  # Must succeed; failure blocks downstream
+    SOFT = "SOFT"  # Best effort; failure produces partial input
+    OPTIONAL = "OPTIONAL"  # May be skipped if bypassed
+    CONDITIONAL = "CONDITIONAL"  # Evaluates boolean runtime condition predicate
+    RUNTIME = "RUNTIME"  # Dynamically discovered during execution
     HUMAN_APPROVAL = "HUMAN_APPROVAL"  # Requires explicit operator signoff
 
 
@@ -45,6 +45,7 @@ class DependencySpec(BaseModel):
 
 class DAGNode(BaseModel):
     """Production-grade DAG Execution Node with complete provenance and economic tracking."""
+
     node_id: str = Field(default_factory=lambda: f"node-{uuid.uuid4().hex[:8]}")
     mission_id: str
     name: str
@@ -52,7 +53,7 @@ class DAGNode(BaseModel):
     status: NodeStatus = NodeStatus.WAITING
     dependencies: List[DependencySpec] = Field(default_factory=list)
     priority: int = Field(default=50, ge=1, le=100)  # 1 = Highest, 100 = Lowest
-    
+
     # Economics & Predictions
     estimated_cost_usd: float = 0.001
     estimated_tokens: int = 500
@@ -60,18 +61,18 @@ class DAGNode(BaseModel):
     expected_utility: float = 0.85
     risk_score: float = 0.10
     confidence_score: float = 0.90
-    
+
     # Worker Allocation
     assigned_worker: Optional[str] = None
     required_capabilities: List[str] = Field(default_factory=lambda: ["GENERAL"])
-    
+
     # Execution Lifecycle
     retry_count: int = 0
     max_retries: int = 3
     start_time: Optional[float] = None
     end_time: Optional[float] = None
     actual_runtime_ms: float = 0.0
-    
+
     # Critical Path Method (CPM) Metrics
     earliest_start_ms: float = 0.0
     latest_start_ms: float = 0.0
@@ -79,7 +80,7 @@ class DAGNode(BaseModel):
     latest_finish_ms: float = 0.0
     total_slack_ms: float = 0.0
     is_critical_path: bool = False
-    
+
     # Payload & Evidence
     inputs: Dict[str, Any] = Field(default_factory=dict)
     outputs: Dict[str, Any] = Field(default_factory=dict)

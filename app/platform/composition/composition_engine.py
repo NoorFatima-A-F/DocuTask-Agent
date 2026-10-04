@@ -102,12 +102,14 @@ class CompositionEngine:
         t0 = time.perf_counter()
         results = []
         for step in pipe.steps:
-            results.append({
-                "step_name": step.step_name,
-                "agent_id": step.agent_id,
-                "status": "COMPLETED",
-                "latency_ms": 28.4,
-            })
+            results.append(
+                {
+                    "step_name": step.step_name,
+                    "agent_id": step.agent_id,
+                    "status": "COMPLETED",
+                    "latency_ms": 28.4,
+                }
+            )
 
         elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 2)
         return {

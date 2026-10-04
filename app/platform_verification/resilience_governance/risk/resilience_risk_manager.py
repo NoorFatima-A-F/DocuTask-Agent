@@ -7,6 +7,7 @@ Manages, assesses, and mitigates enterprise DR risks across 5 key dimensions:
 4. OPERATIONAL_AND_HUMAN
 5. COMPLIANCE_AND_AUDIT
 """
+
 from dataclasses import dataclass, field
 from typing import Dict, Any, List
 from enum import Enum
@@ -21,9 +22,9 @@ class RiskCategory(str, Enum):
 
 
 class RiskLevel(str, Enum):
-    LOW = "LOW"            # 1 - 5
-    MEDIUM = "MEDIUM"      # 6 - 11
-    HIGH = "HIGH"          # 12 - 19
+    LOW = "LOW"  # 1 - 5
+    MEDIUM = "MEDIUM"  # 6 - 11
+    HIGH = "HIGH"  # 12 - 19
     CRITICAL = "CRITICAL"  # 20 - 25
 
 
@@ -34,7 +35,7 @@ class RiskItem:
     title: str
     description: str
     likelihood: int  # 1 to 5
-    impact: int      # 1 to 5
+    impact: int  # 1 to 5
     inherent_score: int
     inherent_level: RiskLevel
     mitigating_control: str
@@ -171,7 +172,9 @@ class ResilienceRiskManager:
             "category_distribution": category_distribution,
             "total_risks": len(self.risks),
             "unmitigated_risks_count": unmitigated_count,
-            "risk_mitigation_percentage": 100.0 if passed else round((len(self.risks) - unmitigated_count) / len(self.risks) * 100, 2),
+            "risk_mitigation_percentage": 100.0
+            if passed
+            else round((len(self.risks) - unmitigated_count) / len(self.risks) * 100, 2),
             "risk_assessment_framework": "ISO_31000_RESILIENCE_RISK_MODEL",
         }
 

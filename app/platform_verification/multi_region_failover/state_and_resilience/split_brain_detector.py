@@ -2,6 +2,7 @@
 Split-Brain Prevention & Fencing Token Subsystem (Part 3G.6H).
 Proves that simultaneous regional activations or network partitions never permit dual active writers.
 """
+
 from dataclasses import dataclass, field
 from typing import Dict, Any
 
@@ -29,13 +30,7 @@ class SplitBrainDetector:
         rejections_pct = 100.0
         active_primaries = 1  # Exactly 1 active writer guaranteed
 
-        passed = (
-            raft_ok
-            and fencing_ok
-            and stonith_ok
-            and rejections_pct == 100.0
-            and active_primaries == 1
-        )
+        passed = raft_ok and fencing_ok and stonith_ok and rejections_pct == 100.0 and active_primaries == 1
 
         details = {
             "consensus_engine": "Patroni DCS 3-Node Raft Cluster with Third-Party Arbitrator Witness",

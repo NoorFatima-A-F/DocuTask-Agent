@@ -37,7 +37,7 @@ class ConfigurationProvider:
         prefix = "DOCUTASK_"
         for env_k, env_v in os.environ.items():
             if env_k.startswith(prefix):
-                key = env_k[len(prefix):].lower().replace("__", ".").replace("_", ".")
+                key = env_k[len(prefix) :].lower().replace("__", ".").replace("_", ".")
                 self._layers[ConfigSource.ENVIRONMENT][key] = env_v
 
     def get(

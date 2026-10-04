@@ -76,10 +76,9 @@ class ModelRouter:
         candidates: List[Tuple[str, float, float, float, float]] = []
 
         for model_id, prof in ModelCatalog.PROFILES.items():
-            est_cost = (
-                (estimated_prompt_tokens / 1000.0) * prof["cost_per_1k_prompt"]
-                + (estimated_completion_tokens / 1000.0) * prof["cost_per_1k_completion"]
-            )
+            est_cost = (estimated_prompt_tokens / 1000.0) * prof["cost_per_1k_prompt"] + (
+                estimated_completion_tokens / 1000.0
+            ) * prof["cost_per_1k_completion"]
             est_lat = prof["typical_latency_ms"]
             quality = prof["quality_rating"]
 
@@ -91,9 +90,7 @@ class ModelRouter:
 
             # Pareto score formula: wq * Quality - wl * (Latency / LatMax) - wc * (Cost / CostMax)
             pareto_score = (
-                (wq * quality)
-                - (wl * min(1.0, est_lat / max_latency_ref))
-                - (wc * min(1.0, est_cost / max_cost_ref))
+                (wq * quality) - (wl * min(1.0, est_lat / max_latency_ref)) - (wc * min(1.0, est_cost / max_cost_ref))
             )
             candidates.append((model_id, pareto_score, est_cost, est_lat, quality))
 

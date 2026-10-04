@@ -1,6 +1,7 @@
 """
 Interfaces and Abstract Base Classes for Backup Architecture Verification Framework (Part 3G.2A).
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional
 
@@ -25,6 +26,7 @@ from app.platform_verification.backup_architecture_verification.domain.models im
 
 class IAssetDiscoveryEngine(ABC):
     """Part 1: Automatically inventories all platform assets."""
+
     @abstractmethod
     def discover_assets(self) -> List[AssetInventoryItem]:
         pass
@@ -32,6 +34,7 @@ class IAssetDiscoveryEngine(ABC):
 
 class IClassificationEngine(ABC):
     """Part 2: Classifies assets into Tier 0 to Tier 3 with RPO/RTO parameters."""
+
     @abstractmethod
     def classify_assets(self, assets: List[AssetInventoryItem]) -> Dict[str, ClassificationEntry]:
         pass
@@ -39,6 +42,7 @@ class IClassificationEngine(ABC):
 
 class IStrategyValidationEngine(ABC):
     """Part 3: Verifies backup strategy matches asset importance and requirements."""
+
     @abstractmethod
     def validate_strategies(
         self,
@@ -51,6 +55,7 @@ class IStrategyValidationEngine(ABC):
 
 class IDependencyGraphEngine(ABC):
     """Part 4: Generates recovery dependency DAG and checks for circular dependencies."""
+
     @abstractmethod
     def build_and_validate_graph(self, assets: List[AssetInventoryItem]) -> BackupDependencyGraph:
         pass
@@ -58,6 +63,7 @@ class IDependencyGraphEngine(ABC):
 
 class ICoverageAnalysisEngine(ABC):
     """Part 5: Analyzes coverage matrix across Tier 0-3 assets."""
+
     @abstractmethod
     def analyze_coverage(
         self,
@@ -70,6 +76,7 @@ class ICoverageAnalysisEngine(ABC):
 
 class IRetentionVerificationEngine(ABC):
     """Part 6: Validates retention policies, legal holds, and detects infinite/missing retention."""
+
     @abstractmethod
     def verify_retention_policies(
         self,
@@ -81,6 +88,7 @@ class IRetentionVerificationEngine(ABC):
 
 class ILifecycleValidationEngine(ABC):
     """Part 7: Validates 8-stage backup lifecycle, detects orphaned or unexpired backups."""
+
     @abstractmethod
     def validate_lifecycles(self, assets: List[AssetInventoryItem]) -> List[LifecycleValidationReport]:
         pass
@@ -88,6 +96,7 @@ class ILifecycleValidationEngine(ABC):
 
 class IOwnershipModelEngine(ABC):
     """Part 8: Enforces ownership model across all protected assets."""
+
     @abstractmethod
     def verify_ownership(self, assets: List[AssetInventoryItem]) -> List[BackupOwnershipRecord]:
         pass
@@ -95,6 +104,7 @@ class IOwnershipModelEngine(ABC):
 
 class IMetadataEngine(ABC):
     """Part 9: Generates cryptographically verifiable metadata for backups."""
+
     @abstractmethod
     def generate_metadata_registry(self, assets: List[AssetInventoryItem]) -> List[BackupMetadataEntry]:
         pass
@@ -102,6 +112,7 @@ class IMetadataEngine(ABC):
 
 class IPolicyValidationEngine(ABC):
     """Part 10: Validates backup policy schedules, encryption, and notifications."""
+
     @abstractmethod
     def validate_policies(self, policies: List[Dict[str, Any]]) -> List[PolicyValidationResult]:
         pass
@@ -109,6 +120,7 @@ class IPolicyValidationEngine(ABC):
 
 class IArchitectureConsistencyEngine(ABC):
     """Part 11: Validates referential integrity and consistency across the backup architecture."""
+
     @abstractmethod
     def verify_consistency(
         self,
@@ -123,6 +135,7 @@ class IArchitectureConsistencyEngine(ABC):
 
 class IObservabilityEngine(ABC):
     """Part 12: Collects metrics and exposes Prometheus, OpenTelemetry, and Grafana exports."""
+
     @abstractmethod
     def generate_metrics_report(
         self,
@@ -134,6 +147,7 @@ class IObservabilityEngine(ABC):
 
 class IEvidenceManifestEngine(ABC):
     """Part 13: Emits all 14 machine-readable audit artifacts."""
+
     @abstractmethod
     def export_evidence_artifacts(
         self,
@@ -145,6 +159,7 @@ class IEvidenceManifestEngine(ABC):
 
 class IReadinessScoringEngine(ABC):
     """Part 14: Computes weighted readiness score and certification tier."""
+
     @abstractmethod
     def calculate_readiness_score(
         self,

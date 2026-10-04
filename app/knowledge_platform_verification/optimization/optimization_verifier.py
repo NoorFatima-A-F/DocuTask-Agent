@@ -68,7 +68,7 @@ class OptimizationVerifier:
         t0 = time.perf_counter()
         # Test semantic boundary chunking vs fixed-size chunking
         text = "Chapter 1: Overview. All sales are audited. \n\nChapter 2: Tax Code. IRS rule 1040 requires compliance."
-        
+
         # Adaptive chunking splits along structural headers rather than mid-sentence
         chunks = [c.strip() for c in text.split("\n\n") if c.strip()]
         passed = len(chunks) == 2 and chunks[0].startswith("Chapter 1") and chunks[1].startswith("Chapter 2")
@@ -112,7 +112,7 @@ class OptimizationVerifier:
         return AssertionResult(
             name="assert_dead_chunk_pruning",
             passed=passed,
-            message=f"Dead chunk pruner reclaimed {pruned_chunks} orphaned chunks yielding {compression_ratio*100:.1f}% storage reduction",
+            message=f"Dead chunk pruner reclaimed {pruned_chunks} orphaned chunks yielding {compression_ratio * 100:.1f}% storage reduction",
             execution_time_ms=t_ms,
             details={"total": total_chunks, "pruned": pruned_chunks, "savings_pct": 35.0},
         )
@@ -131,5 +131,9 @@ class OptimizationVerifier:
             passed=passed,
             message=f"Context and retrieval optimization reduced LLM token consumption by {cost_savings_pct:.2f}% per query",
             execution_time_ms=t_ms,
-            details={"baseline_tokens": baseline_tokens_per_query, "optimized_tokens": optimized_tokens_per_query, "savings_pct": cost_savings_pct},
+            details={
+                "baseline_tokens": baseline_tokens_per_query,
+                "optimized_tokens": optimized_tokens_per_query,
+                "savings_pct": cost_savings_pct,
+            },
         )

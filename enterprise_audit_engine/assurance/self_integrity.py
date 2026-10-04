@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class CertificationAuthorityIntegrityReport(BaseModel):
     """Integrity report verifying that the Certification Authority logic has not been modified or weakened."""
+
     engine_version: str = "2.1.0"
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     source_hash: str
@@ -24,6 +25,7 @@ class CertificationAuthorityIntegrityReport(BaseModel):
 
 class EngineIntegrityFingerprint(BaseModel):
     """Immutable cryptographic fingerprint of the engine."""
+
     overall_engine_hash: str
     source_code_hash: str
     policy_definitions_hash: str
@@ -51,7 +53,9 @@ class CertificationAuthoritySelfIntegrityVerifier:
                     try:
                         content = file_path.read_bytes()
                         rel_path = file_path.relative_to(target_dir).as_posix()
-                        f_hash = hashlib.sha256(f"{rel_path}:{hashlib.sha256(content).hexdigest()}".encode("utf-8")).hexdigest()
+                        f_hash = hashlib.sha256(
+                            f"{rel_path}:{hashlib.sha256(content).hexdigest()}".encode("utf-8")
+                        ).hexdigest()
                         file_hashes.append(f_hash)
                     except Exception:
                         pass
@@ -142,10 +146,12 @@ class SelfIntegrityVerifier:
                         pass
 
         source_hash = hashlib.sha256(":".join(file_hashes).encode("utf-8")).hexdigest()
-        policy_hash = CertificationAuthoritySelfIntegrityVerifier.compute_directory_hash(self.engine_dir / "certification_authority" / "policy")
+        policy_hash = CertificationAuthoritySelfIntegrityVerifier.compute_directory_hash(
+            self.engine_dir / "certification_authority" / "policy"
+        )
         schema_hash = CertificationAuthoritySelfIntegrityVerifier.compute_directory_hash(self.engine_dir / "domain")
         rules_hash = CertificationAuthoritySelfIntegrityVerifier.compute_directory_hash(self.engine_dir / "analyzers")
-        
+
         overall = hashlib.sha256(f"{source_hash}:{policy_hash}:{schema_hash}:{rules_hash}".encode("utf-8")).hexdigest()
 
         return EngineIntegrityFingerprint(

@@ -21,8 +21,8 @@ PerformanceVerificationStatus = VerificationStatus
 class AutonomousPerformanceTier(str, Enum):
     AUTONOMOUS_PERFORMANCE_READY = "Autonomous Performance Ready"  # 95-100
     PRODUCTION_OPTIMIZATION_READY = "Production Optimization Ready"  # 90-94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                  # 80-89.99
-    FAILED = "Failed"                                              # <80
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80-89.99
+    FAILED = "Failed"  # <80
 
 
 CertificationTier = AutonomousPerformanceTier
@@ -49,6 +49,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3J.11.1: Performance Intelligence Architecture ─────────────────────────
 
+
 class IntelligenceLayer(BaseModel):
     layer_name: str
     purpose: str
@@ -69,6 +70,7 @@ class PerformanceIntelligenceArchitectureReport(BaseVerificationReport):
 
 # ─── 3J.11.2: Automated Bottleneck Root Cause Analysis ───────────────────────
 
+
 class RootCauseHypothesis(BaseModel):
     component: str
     issue_detected: str
@@ -88,6 +90,7 @@ class RootCauseAnalysisReport(BaseVerificationReport):
 
 
 # ─── 3J.11.3: Performance Optimization Recommendation Engine ────────────────
+
 
 class OptimizationRecommendation(BaseModel):
     recommendation_id: str
@@ -111,6 +114,7 @@ class OptimizationRecommendationReport(BaseVerificationReport):
 
 
 # ─── 3J.11.4: Intelligent Worker Auto-Scaling Verification ───────────────────
+
 
 class ScalingTransition(BaseModel):
     trigger_reason: str
@@ -136,6 +140,7 @@ class WorkerAutoscalingReport(BaseVerificationReport):
 
 # ─── 3J.11.5: Database Performance Optimization Verification ─────────────────
 
+
 class DBOptimizationItem(BaseModel):
     item_id: str
     issue_type: str
@@ -157,6 +162,7 @@ class DatabaseOptimizationReport(BaseVerificationReport):
 
 # ─── 3J.11.6: AI Pipeline Optimization Verification ──────────────────────────
 
+
 class AIModelRoutingRule(BaseModel):
     document_complexity: str
     assigned_model: str
@@ -176,6 +182,7 @@ class AIPipelineOptimizationReport(BaseVerificationReport):
 
 
 # ─── 3J.11.7: Predictive Capacity Planning ───────────────────────────────────
+
 
 class CapacityForecast(BaseModel):
     projection_horizon: str
@@ -198,6 +205,7 @@ class CapacityPredictionReport(BaseVerificationReport):
 
 # ─── 3J.11.8: Performance Anomaly Detection ──────────────────────────────────
 
+
 class DetectedAnomaly(BaseModel):
     metric_name: str
     baseline_value: str
@@ -219,6 +227,7 @@ class PerformanceAnomalyReport(BaseVerificationReport):
 
 # ─── 3J.11.9: Automated Performance Remediation ──────────────────────────────
 
+
 class RemediationExecution(BaseModel):
     case_id: str
     problem: str
@@ -239,6 +248,7 @@ class AutomatedRemediationReport(BaseVerificationReport):
 
 
 # ─── 3J.11.10: Optimization Safety Controls ──────────────────────────────────
+
 
 class SafetyLimit(BaseModel):
     parameter: str
@@ -262,6 +272,7 @@ class OptimizationSafetyReport(BaseVerificationReport):
 
 # ─── 3J.11.11: Continuous Optimization Loop ──────────────────────────────────
 
+
 class ContinuousOptimizationLoopReport(BaseVerificationReport):
     report_title: str = "Continuous Optimization Loop Verification Report"
     cycle_stages: List[str] = Field(
@@ -275,6 +286,7 @@ class ContinuousOptimizationLoopReport(BaseVerificationReport):
 
 
 # ─── 3J.11.12: CI/CD Performance Optimization Gates ──────────────────────────
+
 
 class OptimizationGateRule(BaseModel):
     rule_name: str
@@ -297,6 +309,7 @@ class OptimizationPipelineReport(BaseVerificationReport):
 
 # ─── Scoring, Certification & Manifest Models ────────────────────────────────
 
+
 class CategoryScore(BaseModel):
     name: str
     weight: float
@@ -309,9 +322,7 @@ class CategoryScore(BaseModel):
 
 class OptimizationScorecard(BaseModel):
     overall_score: float = 100.0
-    certification_tier: AutonomousPerformanceTier = (
-        AutonomousPerformanceTier.AUTONOMOUS_PERFORMANCE_READY
-    )
+    certification_tier: AutonomousPerformanceTier = AutonomousPerformanceTier.AUTONOMOUS_PERFORMANCE_READY
     status: VerificationStatus = VerificationStatus.PASSED
     categories: Dict[str, CategoryScore] = Field(default_factory=dict)
     total_verifiers_executed: int = 12

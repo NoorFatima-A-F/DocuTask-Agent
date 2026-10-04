@@ -90,6 +90,7 @@ def client():
 
 # --- 1. Hypothesis Engine Tests ---
 
+
 def test_hypothesis_formulation_and_gaps(hypothesis_engine):
     gap = hypothesis_engine.detect_knowledge_gap(
         domain="caching",
@@ -125,6 +126,7 @@ def test_hypothesis_formulation_and_gaps(hypothesis_engine):
 
 # --- 2. Experiment Engine Tests ---
 
+
 def test_experiment_design_and_execution(experiment_engine):
     exp = experiment_engine.design_experiment(
         hypothesis_id="hypo_test_123",
@@ -151,6 +153,7 @@ def test_experiment_design_and_execution(experiment_engine):
 
 # --- 3. Evidence Engine Tests ---
 
+
 def test_evidence_recording_and_integrity(evidence_engine):
     ev = evidence_engine.record_evidence(
         hypothesis_id="hypo_test_123",
@@ -163,11 +166,16 @@ def test_evidence_recording_and_integrity(evidence_engine):
     )
     assert ev.evidence_id.startswith("ev_")
     assert len(ev.evidence_hash_sha256) == 64
-    assert ev.strength in [EvidenceStrength.STATISTICALLY_SIGNIFICANT, EvidenceStrength.EMPIRICAL_DEFINITIVE, EvidenceStrength.VERY_STRONG]
+    assert ev.strength in [
+        EvidenceStrength.STATISTICALLY_SIGNIFICANT,
+        EvidenceStrength.EMPIRICAL_DEFINITIVE,
+        EvidenceStrength.VERY_STRONG,
+    ]
     assert evidence_engine.verify_evidence_integrity(ev.evidence_id) is True
 
 
 # --- 4. Validation Engine Tests ---
+
 
 def test_statistical_validation(validation_engine):
     report = validation_engine.validate_hypothesis(
@@ -186,6 +194,7 @@ def test_statistical_validation(validation_engine):
 
 
 # --- 5. Knowledge Engine Tests ---
+
 
 def test_knowledge_facts_and_laws(knowledge_engine):
     fact = knowledge_engine.record_fact(
@@ -210,6 +219,7 @@ def test_knowledge_facts_and_laws(knowledge_engine):
 
 # --- 6. Research Engine Tests ---
 
+
 def test_research_streams_and_roadmaps(research_engine):
     stream = research_engine.create_stream(
         title="Distributed Query Acceleration",
@@ -230,6 +240,7 @@ def test_research_streams_and_roadmaps(research_engine):
 
 
 # --- 7. Publication Engine Tests ---
+
 
 def test_publication_and_doi_signing(publication_engine):
     pub = publication_engine.create_publication(
@@ -253,6 +264,7 @@ def test_publication_and_doi_signing(publication_engine):
 
 # --- 8. Consensus Engine Tests ---
 
+
 def test_consensus_review_tribunal(consensus_engine):
     review = consensus_engine.conduct_consensus_review(
         hypothesis_id="hypo_test_123",
@@ -267,6 +279,7 @@ def test_consensus_review_tribunal(consensus_engine):
 
 
 # --- 9. Ontology Engine Tests ---
+
 
 def test_ontology_concepts_and_paths(ontology_engine):
     concept1 = ontology_engine.register_concept(
@@ -295,6 +308,7 @@ def test_ontology_concepts_and_paths(ontology_engine):
 
 # --- 10. Scientific Runtime End-to-End Cycle Tests ---
 
+
 def test_scientific_runtime_discovery_cycle(scientific_runtime):
     result = scientific_runtime.run_discovery_cycle(domain="performance")
     assert result.cycle_id.startswith("cycle_")
@@ -318,6 +332,7 @@ def test_scientific_runtime_discovery_cycle(scientific_runtime):
 
 
 # --- 11. FastAPI REST API Endpoint Tests ---
+
 
 def test_fastapi_science_endpoints(client):
     # GET overview

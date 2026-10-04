@@ -33,7 +33,6 @@ from ..domain.models import (
 
 
 class BottleneckDiscoveryScorer(IBottleneckDiscoveryScorer):
-
     def _find_report(self, reports: Dict[str, Any], key_patterns: List[str], expected_type: type) -> Optional[Any]:
         for k, v in reports.items():
             if isinstance(v, expected_type):
@@ -80,12 +79,48 @@ class BottleneckDiscoveryScorer(IBottleneckDiscoveryScorer):
         evidence_score = sum(evidence_scores) / len(evidence_scores) if evidence_scores else 100.0
 
         category_scores: List[CategoryScore] = [
-            CategoryScore(category="Bottleneck Detection", weight=0.25, score=round(bottleneck_score, 2), weighted_score=round(bottleneck_score * 0.25, 2), description="Application, database, and queue bottleneck identification accuracy"),
-            CategoryScore(category="Resource Analysis", weight=0.20, score=round(resource_score, 2), weighted_score=round(resource_score * 0.20, 2), description="Architecture profiling and resource saturation detection depth"),
-            CategoryScore(category="Capacity Modeling", weight=0.20, score=round(capacity_score, 2), weighted_score=round(capacity_score * 0.20, 2), description="Worker capacity modeling and boundary discovery precision"),
-            CategoryScore(category="Regression Detection", weight=0.15, score=round(regression_score, 2), weighted_score=round(regression_score * 0.15, 2), description="Cross-version performance regression detection accuracy"),
-            CategoryScore(category="Optimization Quality", weight=0.10, score=round(optimization_score, 2), weighted_score=round(optimization_score * 0.10, 2), description="Evidence-backed optimization recommendation completeness"),
-            CategoryScore(category="Evidence Generation", weight=0.10, score=round(evidence_score, 2), weighted_score=round(evidence_score * 0.10, 2), description="AI provider analysis and architecture evidence quality"),
+            CategoryScore(
+                category="Bottleneck Detection",
+                weight=0.25,
+                score=round(bottleneck_score, 2),
+                weighted_score=round(bottleneck_score * 0.25, 2),
+                description="Application, database, and queue bottleneck identification accuracy",
+            ),
+            CategoryScore(
+                category="Resource Analysis",
+                weight=0.20,
+                score=round(resource_score, 2),
+                weighted_score=round(resource_score * 0.20, 2),
+                description="Architecture profiling and resource saturation detection depth",
+            ),
+            CategoryScore(
+                category="Capacity Modeling",
+                weight=0.20,
+                score=round(capacity_score, 2),
+                weighted_score=round(capacity_score * 0.20, 2),
+                description="Worker capacity modeling and boundary discovery precision",
+            ),
+            CategoryScore(
+                category="Regression Detection",
+                weight=0.15,
+                score=round(regression_score, 2),
+                weighted_score=round(regression_score * 0.15, 2),
+                description="Cross-version performance regression detection accuracy",
+            ),
+            CategoryScore(
+                category="Optimization Quality",
+                weight=0.10,
+                score=round(optimization_score, 2),
+                weighted_score=round(optimization_score * 0.10, 2),
+                description="Evidence-backed optimization recommendation completeness",
+            ),
+            CategoryScore(
+                category="Evidence Generation",
+                weight=0.10,
+                score=round(evidence_score, 2),
+                weighted_score=round(evidence_score * 0.10, 2),
+                description="AI provider analysis and architecture evidence quality",
+            ),
         ]
 
         overall_score = round(sum(cat.weighted_score for cat in category_scores), 2)
@@ -110,7 +145,7 @@ class BottleneckDiscoveryScorer(IBottleneckDiscoveryScorer):
 
         checks: List[CheckResult] = [
             CheckResult(
-                name=f"Quality Category: {cat.category} (Weight: {cat.weight*100:.0f}%)",
+                name=f"Quality Category: {cat.category} (Weight: {cat.weight * 100:.0f}%)",
                 passed=cat.score >= 80.0,
                 details=f"Category score {cat.score:.1f}% contributing {cat.weighted_score:.2f}% to total",
                 metrics={"score": cat.score, "weighted": cat.weighted_score},

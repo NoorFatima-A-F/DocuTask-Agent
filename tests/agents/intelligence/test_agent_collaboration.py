@@ -130,9 +130,13 @@ class TestAgentDiscoveryService:
     @pytest.fixture
     def discovery_env(self):
         reg = AgentRegistry()
-        p1 = AgentProfile("ag_cheap", "OCR", ["ocr"], cost_per_call=0.0005, latency_p95_ms=300.0, confidence_rating=0.90)
+        p1 = AgentProfile(
+            "ag_cheap", "OCR", ["ocr"], cost_per_call=0.0005, latency_p95_ms=300.0, confidence_rating=0.90
+        )
         p2 = AgentProfile("ag_fast", "OCR", ["ocr"], cost_per_call=0.002, latency_p95_ms=50.0, confidence_rating=0.95)
-        p3 = AgentProfile("ag_accurate", "OCR", ["ocr"], cost_per_call=0.005, latency_p95_ms=400.0, confidence_rating=0.99)
+        p3 = AgentProfile(
+            "ag_accurate", "OCR", ["ocr"], cost_per_call=0.005, latency_p95_ms=400.0, confidence_rating=0.99
+        )
         reg.register(p1)
         reg.register(p2)
         reg.register(p3)
@@ -168,8 +172,12 @@ class TestAgentNegotiator:
     def setup_negotiator(self):
         reg = AgentRegistry()
         p1 = AgentProfile("ag_supervisor", "SUP", ["orchestration"])
-        p2 = AgentProfile("ag_bidder_1", "OCR", ["ocr"], cost_per_call=0.002, latency_p95_ms=200.0, confidence_rating=0.96)
-        p3 = AgentProfile("ag_bidder_2", "OCR", ["ocr"], cost_per_call=0.001, latency_p95_ms=150.0, confidence_rating=0.98)
+        p2 = AgentProfile(
+            "ag_bidder_1", "OCR", ["ocr"], cost_per_call=0.002, latency_p95_ms=200.0, confidence_rating=0.96
+        )
+        p3 = AgentProfile(
+            "ag_bidder_2", "OCR", ["ocr"], cost_per_call=0.001, latency_p95_ms=150.0, confidence_rating=0.98
+        )
         reg.register(p1)
         reg.register(p2)
         reg.register(p3)
@@ -283,7 +291,10 @@ class TestAgentMessaging:
     @pytest.mark.asyncio
     async def test_get_history_by_correlation_id(self):
         bus = AgentMessageBus()
-        async def dummy(m): pass
+
+        async def dummy(m):
+            pass
+
         bus.subscribe_agent("ag_2", dummy)
 
         m1 = AgentMessage("ag_1", "ag_2", MessageType.TASK_REQUEST, {}, correlation_id="c_100")
@@ -300,16 +311,19 @@ class TestAgentMessaging:
 
 
 class TestExpandedCollaborationScenarios:
-    @pytest.mark.parametrize("m_type", [
-        MessageType.TASK_REQUEST,
-        MessageType.TASK_RESULT,
-        MessageType.FAILURE_EVENT,
-        MessageType.HELP_REQUEST,
-        MessageType.NEGOTIATION_OFFER,
-        MessageType.NEGOTIATION_ACCEPT,
-        MessageType.REFLECTION_UPDATE,
-        MessageType.HEARTBEAT,
-    ])
+    @pytest.mark.parametrize(
+        "m_type",
+        [
+            MessageType.TASK_REQUEST,
+            MessageType.TASK_RESULT,
+            MessageType.FAILURE_EVENT,
+            MessageType.HELP_REQUEST,
+            MessageType.NEGOTIATION_OFFER,
+            MessageType.NEGOTIATION_ACCEPT,
+            MessageType.REFLECTION_UPDATE,
+            MessageType.HEARTBEAT,
+        ],
+    )
     def test_all_message_types(self, m_type):
         msg = AgentMessage("s", "r", m_type)
         assert msg.message_type == m_type
@@ -339,10 +353,7 @@ class TestExpandedCollaborationScenarios:
 
         bus.subscribe_agent("ag_sink", handler)
 
-        tasks = [
-            bus.send(AgentMessage("ag_src", "ag_sink", MessageType.TASK_REQUEST, {"idx": i}))
-            for i in range(25)
-        ]
+        tasks = [bus.send(AgentMessage("ag_src", "ag_sink", MessageType.TASK_REQUEST, {"idx": i})) for i in range(25)]
         results = await asyncio.gather(*tasks)
 
         assert all(results)
@@ -414,10 +425,12 @@ class TestExpandedCollaborationScenarios:
     @pytest.mark.asyncio
     async def test_message_bus_history_unfiltered(self):
         bus = AgentMessageBus()
-        async def dummy(m): pass
+
+        async def dummy(m):
+            pass
+
         bus.subscribe_agent("ag_target", dummy)
 
         for i in range(5):
             await bus.send(AgentMessage("s", "ag_target", MessageType.TASK_REQUEST, {"i": i}))
         assert len(bus.get_history()) == 5
-

@@ -2,6 +2,7 @@
 Complete Environment Destruction Scenario (Scenario 4) for Part 3G.3.
 Simulates total infrastructure wiping, bare-metal recreation, database/storage restore, and full platform resurrection.
 """
+
 import datetime
 from typing import List
 from app.platform_verification.disaster_recovery_simulation.domain.models import (

@@ -27,7 +27,8 @@ class WorkStealingPool:
     def steal_task(self, thief_agent_id: UUID) -> Optional[str]:
         """Attempts to steal a pending task from the agent with the largest queue."""
         eligible_targets = [
-            (aid, q) for aid, q in self._queues.items()
+            (aid, q)
+            for aid, q in self._queues.items()
             if aid != thief_agent_id and len(q) > 1  # Leave at least 1 task for the owner
         ]
 

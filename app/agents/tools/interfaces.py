@@ -49,9 +49,7 @@ class IToolSelector(ABC):
 
     @abstractmethod
     async def select(
-        self,
-        requirement: CapabilityRequirement,
-        policy: Optional[SelectionPolicy] = None
+        self, requirement: CapabilityRequirement, policy: Optional[SelectionPolicy] = None
     ) -> Optional[BaseTool]:
         """Selects the best matching tool for a capability requirement using selection policies."""
         pass

@@ -1,6 +1,7 @@
 """
 Verification Maturity Model Engine managing Level 0 through Level 7 component inventories.
 """
+
 from __future__ import annotations
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
@@ -48,7 +49,11 @@ class MaturityEngine:
 
     def get_unverified_components(self) -> List[ComponentCoverageItem]:
         """Returns Level 0 unverified components."""
-        return [c for c in self._inventory.values() if c.current_level == VerificationLevel.L0_NOT_TESTED or not c.is_verified]
+        return [
+            c
+            for c in self._inventory.values()
+            if c.current_level == VerificationLevel.L0_NOT_TESTED or not c.is_verified
+        ]
 
     def _load_default_platform_components(self) -> None:
         defaults = [

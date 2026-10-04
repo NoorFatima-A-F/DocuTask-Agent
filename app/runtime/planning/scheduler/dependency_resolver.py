@@ -55,7 +55,6 @@ class DependencyResolver:
                         if not cond_result:
                             return False
                     except Exception:
-
                         return False
                 dep.is_satisfied = True
 

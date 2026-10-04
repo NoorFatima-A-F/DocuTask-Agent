@@ -33,6 +33,7 @@ class ConstraintEnforcement(str, Enum):
 
 class MissionConstraint(BaseModel):
     """Single operational constraint."""
+
     constraint_id: str = Field(default_factory=lambda: f"cnstr_{uuid.uuid4().hex[:8]}")
     name: str
     constraint_type: ConstraintType
@@ -40,7 +41,9 @@ class MissionConstraint(BaseModel):
     limit_value: float
     unit: str = ""
     comparator: str = Field(default="<=", description="'<=', '>=', '==', '<', '>'")
-    penalty_weight: float = Field(default=1.0, ge=0.0, description="Utility penalty weight if soft constraint is breached")
+    penalty_weight: float = Field(
+        default=1.0, ge=0.0, description="Utility penalty weight if soft constraint is breached"
+    )
     description: str = ""
 
     def is_satisfied(self, candidate_value: float) -> bool:
@@ -69,6 +72,7 @@ class MissionConstraint(BaseModel):
 
 class MissionConstraintSet(BaseModel):
     """Aggregated constraint set for a mission."""
+
     constraint_set_id: str = Field(default_factory=lambda: f"cset_{uuid.uuid4().hex[:10]}")
     mission_id: str
     constraints: List[MissionConstraint] = Field(default_factory=list)
@@ -82,7 +86,7 @@ class MissionConstraintSet(BaseModel):
 
     def validate_candidate(self, metrics: Dict[str, float]) -> tuple[bool, List[str], float]:
         """Validates metrics dictionary against all constraints.
-        
+
         Returns:
             (is_valid, violation_reasons, total_soft_penalty)
         """
@@ -148,7 +152,9 @@ class ConstraintExtractionEngine:
             MissionConstraint(
                 name="Max Execution Latency",
                 constraint_type=ConstraintType.LATENCY_MS,
-                enforcement=ConstraintEnforcement.SOFT if "strict_latency" not in user_constraints else ConstraintEnforcement.HARD,
+                enforcement=ConstraintEnforcement.SOFT
+                if "strict_latency" not in user_constraints
+                else ConstraintEnforcement.HARD,
                 limit_value=latency,
                 unit="ms",
                 comparator="<=",

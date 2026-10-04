@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 class MCPServerRegistration(BaseModel):
     """Metadata describing a registered Model Context Protocol (MCP) server."""
+
     server_id: str
     name: str
     endpoint_url: str

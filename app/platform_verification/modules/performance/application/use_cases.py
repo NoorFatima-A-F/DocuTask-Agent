@@ -1,10 +1,12 @@
 """
 Application Use Cases & Workflows for Performance.
 """
+
 from typing import List, Optional
 from app.platform_verification.modules.performance.domain.models import PerformanceEntity
 from app.platform_verification.modules.performance.domain.interfaces import PerformanceRepositoryInterface
 from app.platform_verification.shared_kernel.result import Result, Success, Failure
+
 
 class ManagePerformanceUseCase:
     def __init__(self, repository: PerformanceRepositoryInterface):

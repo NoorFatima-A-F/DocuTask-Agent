@@ -1,6 +1,7 @@
 """
 Database Security, SQL Injection and Credential Protection Evaluator.
 """
+
 import re
 from typing import List
 from app.platform_verification.database_verification.domain.models import DatabaseSecurityReport
@@ -45,7 +46,7 @@ class DatabaseSecurityEvaluator(IDatabaseSecurityEvaluator):
         if not sql_injection_safe:
             score -= 50.0
         if hardcoded_creds:
-            score -= (len(hardcoded_creds) * 25.0)
+            score -= len(hardcoded_creds) * 25.0
         if unencrypted_fields:
             score -= 15.0
 

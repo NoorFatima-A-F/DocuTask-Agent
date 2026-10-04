@@ -12,10 +12,11 @@ from datetime import datetime, timezone
 
 class AlertAccuracyTier(str, Enum):
     """Certification tiers for alert intelligence accuracy (3H.4.6.14)."""
+
     ENTERPRISE_ALERT_INTELLIGENCE_CERTIFIED = "Enterprise Alert Intelligence Certified"  # 95 - 100%
-    PRODUCTION_RELIABLE_ALERTING = "Production Reliable Alerting"                        # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                                        # 80 - 89.99%
-    FAILED = "Failed"                                                                    # < 80%
+    PRODUCTION_RELIABLE_ALERTING = "Production Reliable Alerting"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 # ---------------------------------------------------------------------------
@@ -24,6 +25,7 @@ class AlertAccuracyTier(str, Enum):
 @dataclass
 class GroundTruthReport:
     """Confusion matrix results against verified system failure reality."""
+
     total_evaluations: int = 100
     true_positives: int = 96
     false_positives: int = 2
@@ -202,12 +204,12 @@ class RecoveryReport:
 # ---------------------------------------------------------------------------
 @dataclass
 class AlertAccuracyScorecard:
-    true_positive_score: float = 100.0       # Weight: 25%
-    false_positive_score: float = 100.0      # Weight: 20%
-    false_negative_score: float = 100.0      # Weight: 20%
-    severity_accuracy_score: float = 100.0   # Weight: 15%
-    detection_speed_score: float = 100.0     # Weight: 10%
-    correlation_quality_score: float = 100.0 # Weight: 10%
+    true_positive_score: float = 100.0  # Weight: 25%
+    false_positive_score: float = 100.0  # Weight: 20%
+    false_negative_score: float = 100.0  # Weight: 20%
+    severity_accuracy_score: float = 100.0  # Weight: 15%
+    detection_speed_score: float = 100.0  # Weight: 10%
+    correlation_quality_score: float = 100.0  # Weight: 10%
     overall_score: float = 100.0
     certification_tier: AlertAccuracyTier = AlertAccuracyTier.ENTERPRISE_ALERT_INTELLIGENCE_CERTIFIED
     certification_verdict: str = "CERTIFIED"

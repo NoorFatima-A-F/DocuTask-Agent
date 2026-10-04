@@ -55,9 +55,21 @@ class GoldenBaselineManager:
 
         # 3. Extract rule baselines
         rule_baselines = [
-            RuleBaseline(rule_name="config_only", expected_classification="CONFIGURATION_PRESENT", required_evidence_type="CONFIGURATION_FILE"),
-            RuleBaseline(rule_name="static_only", expected_classification="VERIFIED_BY_STATIC_ANALYSIS", required_evidence_type="STATIC_SOURCE_CODE"),
-            RuleBaseline(rule_name="runtime_verified", expected_classification="VERIFIED_BY_EXECUTION", required_evidence_type="RUNTIME_EXECUTION"),
+            RuleBaseline(
+                rule_name="config_only",
+                expected_classification="CONFIGURATION_PRESENT",
+                required_evidence_type="CONFIGURATION_FILE",
+            ),
+            RuleBaseline(
+                rule_name="static_only",
+                expected_classification="VERIFIED_BY_STATIC_ANALYSIS",
+                required_evidence_type="STATIC_SOURCE_CODE",
+            ),
+            RuleBaseline(
+                rule_name="runtime_verified",
+                expected_classification="VERIFIED_BY_EXECUTION",
+                required_evidence_type="RUNTIME_EXECUTION",
+            ),
         ]
 
         manifest = GoldenBaselineManifest(
@@ -126,11 +138,13 @@ class GoldenBaselineManager:
                 weakened_rules.append(f"Policy '{p_name}' was removed entirely.")
             else:
                 if curr_pol.get("minimum_eqi", 0.0) < b_pol.minimum_eqi:
-                    weakened_rules.append(f"Policy '{p_name}' minimum EQI lowered from {b_pol.minimum_eqi} to {curr_pol.get('minimum_eqi')}.")
+                    weakened_rules.append(
+                        f"Policy '{p_name}' minimum EQI lowered from {b_pol.minimum_eqi} to {curr_pol.get('minimum_eqi')}."
+                    )
                 if b_pol.forbidden_critical_findings and not curr_pol.get("forbidden_critical_findings", True):
                     weakened_rules.append(f"Policy '{p_name}' allowed critical findings (previously forbidden).")
 
-        matched = (len(modified_files) == 0 and len(removed_files) == 0 and len(weakened_rules) == 0)
+        matched = len(modified_files) == 0 and len(removed_files) == 0 and len(weakened_rules) == 0
 
         return {
             "matched": matched,

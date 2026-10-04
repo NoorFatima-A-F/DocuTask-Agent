@@ -37,6 +37,7 @@ def client():
 # 1. Mission Engine Tests
 # ---------------------------------------------------------------------------
 
+
 def test_mission_decomposition():
     goal = "Reduce cloud document processing latency by 50% and maintain 99% accuracy"
     mission = mission_engine.decompose_goal(goal, priority=MissionPriority.HIGH, timeline_days=60)
@@ -63,6 +64,7 @@ def test_mission_validation():
 # ---------------------------------------------------------------------------
 # 2. Strategy Engine Tests
 # ---------------------------------------------------------------------------
+
 
 def test_strategy_generation_and_monte_carlo():
     mission_id = "msn_reduce_cost_40pct"
@@ -91,8 +93,11 @@ def test_optimal_strategy_selection():
 # 3. Organization Designer Tests
 # ---------------------------------------------------------------------------
 
+
 def test_organization_designer():
-    org = organization_engine.design_organization_for_mission("msn_reduce_cost_40pct", "strat_adaptive_quantization_001")
+    org = organization_engine.design_organization_for_mission(
+        "msn_reduce_cost_40pct", "strat_adaptive_quantization_001"
+    )
 
     assert org.org_id.startswith("org_")
     assert len(org.departments) >= 2
@@ -105,6 +110,7 @@ def test_organization_designer():
 # ---------------------------------------------------------------------------
 # 4. Workforce Manager Tests
 # ---------------------------------------------------------------------------
+
 
 def test_workforce_operations():
     # Listing
@@ -138,6 +144,7 @@ def test_workforce_operations():
 # 5. Project Engine Tests
 # ---------------------------------------------------------------------------
 
+
 def test_project_lifecycle_and_critical_path():
     proj = project_engine.create_project(
         mission_id="msn_reduce_cost_40pct",
@@ -168,6 +175,7 @@ def test_project_lifecycle_and_critical_path():
 # 6. Resource Intelligence Tests
 # ---------------------------------------------------------------------------
 
+
 def test_resource_optimization():
     pool = resource_engine.get_pool_status()
     assert pool.compute_slots_total >= 32
@@ -183,6 +191,7 @@ def test_resource_optimization():
 # 7. Performance Scorecard Tests
 # ---------------------------------------------------------------------------
 
+
 def test_performance_scorecard_generation():
     scorecard = performance_engine.generate_scorecard()
 
@@ -195,6 +204,7 @@ def test_performance_scorecard_generation():
 # ---------------------------------------------------------------------------
 # 8. Finance & Economic Intelligence Tests
 # ---------------------------------------------------------------------------
+
 
 def test_finance_engine_forecasting():
     summary = finance_engine.get_financial_summary()
@@ -212,6 +222,7 @@ def test_finance_engine_forecasting():
 # ---------------------------------------------------------------------------
 # 9. Multi-Agent Negotiation Tests
 # ---------------------------------------------------------------------------
+
 
 def test_multi_agent_negotiation_nash_solution():
     neg = negotiation_engine.initiate_negotiation(
@@ -244,6 +255,7 @@ def test_multi_agent_negotiation_nash_solution():
 # 10. Governance & Simulation Tests
 # ---------------------------------------------------------------------------
 
+
 def test_governance_multi_pillar_review():
     review = governance_engine.review_decision(
         decision_title="Deploy 4-Bit Quantized Extractor",
@@ -269,6 +281,7 @@ def test_simulation_engine():
 # 11. Master Organization Runtime Cycle Tests
 # ---------------------------------------------------------------------------
 
+
 def test_end_to_end_autonomous_organization_cycle():
     summary = organization_runtime.run_full_autonomous_cycle(
         mission_goal="Reduce total OCR infrastructure spend by 40% while preserving 99% accuracy"
@@ -287,6 +300,7 @@ def test_end_to_end_autonomous_organization_cycle():
 # ---------------------------------------------------------------------------
 # 12. REST API Integration Tests
 # ---------------------------------------------------------------------------
+
 
 def test_api_organization_endpoints(client):
     # Overview

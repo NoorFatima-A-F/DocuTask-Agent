@@ -1,6 +1,7 @@
 """
 Risk Evaluation Engine implementing Probability * Impact * Exposure scoring model.
 """
+
 from __future__ import annotations
 import uuid
 from typing import Any, Dict, List, Optional
@@ -25,7 +26,7 @@ class EnterpriseRiskEngine(IRiskEngine):
     ) -> RiskAssessment:
         ctx = context or {}
         exposure = int(ctx.get("exposure_level", 4))  # 1 (isolated test) to 5 (full prod)
-        
+
         # Calculate impact and probability based on failed gates
         if not failed_gates:
             probability = 1
@@ -35,7 +36,7 @@ class EnterpriseRiskEngine(IRiskEngine):
             has_critical = any(g.severity == Severity.CRITICAL for g in failed_gates)
             has_high = any(g.severity == Severity.HIGH for g in failed_gates)
             has_security = any(g.category.value == "SECURITY" for g in failed_gates)
-            
+
             if has_critical or has_security:
                 impact = 5
                 probability = 4
@@ -55,7 +56,9 @@ class EnterpriseRiskEngine(IRiskEngine):
         if metrics.get("critical_vulnerabilities", 0) > 0:
             impact = 5
             probability = 5
-            identified_risks.append(f"Detected {metrics.get('critical_vulnerabilities')} critical security vulnerabilities.")
+            identified_risks.append(
+                f"Detected {metrics.get('critical_vulnerabilities')} critical security vulnerabilities."
+            )
 
         if metrics.get("hallucination_rate", 0.0) > 0.08:
             impact = max(impact, 4)

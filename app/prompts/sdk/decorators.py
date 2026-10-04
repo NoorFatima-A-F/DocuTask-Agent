@@ -19,6 +19,7 @@ def governed_prompt(
     model_id: str = "gpt-4o",
 ):
     """Decorator wrapping model invocation functions with governed prompt resolution."""
+
     def decorator(fn: Callable[..., Any]):
         @functools.wraps(fn)
         def wrapper(*args, **kwargs):
@@ -42,5 +43,7 @@ def governed_prompt(
                 model_executor=executor,
                 model_id=model_id,
             )
+
         return wrapper
+
     return decorator

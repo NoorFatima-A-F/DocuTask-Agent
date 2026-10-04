@@ -1,6 +1,7 @@
 """
 Weighted Observability Quality Scoring and Certification Engine.
 """
+
 from app.platform_verification.observability_verification.domain.models import (
     LoggingQualityReport,
     MetricsInventoryReport,
@@ -51,7 +52,11 @@ class ObservabilityScoringEngine(IObservabilityScoringEngine):
         )
         composite = round(composite, 2)
 
-        if composite >= 95.0 and len(log_rep.sensitive_data_leaks_detected) == 0 and trace_rep.unbroken_context_propagation:
+        if (
+            composite >= 95.0
+            and len(log_rep.sensitive_data_leaks_detected) == 0
+            and trace_rep.unbroken_context_propagation
+        ):
             tier = ObservabilityCertificationTier.ENTERPRISE_OBSERVABILITY_READY
         elif composite >= 90.0:
             tier = ObservabilityCertificationTier.PRODUCTION_READY

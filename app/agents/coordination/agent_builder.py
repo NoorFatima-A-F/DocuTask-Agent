@@ -59,19 +59,14 @@ class AgentBuilder:
         return self
 
     def build(self) -> Agent:
-        identity = AgentIdentity(
-            agent_id=self._agent_id,
-            name=self._name,
-            role=self._role,
-            version=self._version
-        )
+        identity = AgentIdentity(agent_id=self._agent_id, name=self._name, role=self._role, version=self._version)
         capabilities = CapabilityProfile(
             skills=self._skills,
             supported_tools=self._tools,
             execution_domains=list(set(self._domains)),
             confidence_rating=self._confidence,
             cost_per_task_usd=self._cost_usd,
-            average_latency_ms=self._latency_ms
+            average_latency_ms=self._latency_ms,
         )
         profile = AgentProfile(identity=identity, capabilities=capabilities)
         return Agent(profile=profile)

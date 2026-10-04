@@ -16,6 +16,7 @@ class DependencyType(str, Enum):
 
 class Dependency(BaseModel):
     """Dependency relationship between two tasks or graph nodes."""
+
     source_id: str
     target_id: str
     dependency_type: DependencyType = Field(default=DependencyType.HARD)

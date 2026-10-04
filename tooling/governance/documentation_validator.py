@@ -2,14 +2,16 @@
 Documentation as Code Validator.
 Ensures every public module contains markdown docs, ADR index integrity, and zero broken local links.
 """
+
 import os
 import sys
 
 REQUIRED_DOCS = [
     "docs/verification_platform/architecture/architecture_blueprint.md",
     "docs/verification_platform/architecture/shared_kernel_governance.md",
-    "docs/verification_platform/adr/README.md"
+    "docs/verification_platform/adr/README.md",
 ]
+
 
 def validate_docs(base_dir: str = ".") -> int:
     print("Validating Documentation architecture...")
@@ -25,6 +27,7 @@ def validate_docs(base_dir: str = ".") -> int:
 
     print("SUCCESS: Documentation as Code integrity verified!")
     return 0
+
 
 if __name__ == "__main__":
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))

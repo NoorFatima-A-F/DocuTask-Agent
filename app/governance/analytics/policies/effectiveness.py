@@ -10,7 +10,7 @@ from ..warehouse.schemas import WarehouseQueryFilter
 class PolicyRecommendation(BaseModel):
     policy_id: str
     recommendation_type: str  # LOOSEN_THRESHOLD, TIGHTEN_RULE, SPLIT_POLICY, DEPRECATE_UNUSED
-    severity: str             # LOW, MEDIUM, HIGH
+    severity: str  # LOW, MEDIUM, HIGH
     rationale: str
     suggested_action: str
 
@@ -49,7 +49,7 @@ class PolicyEffectivenessEngine:
                     policy_id="pol_global_friction",
                     recommendation_type="LOOSEN_THRESHOLD",
                     severity="HIGH",
-                    rationale=f"Over {false_pos_rate*100:.1f}% of policy triggers were manually approved or overridden by human reviewers.",
+                    rationale=f"Over {false_pos_rate * 100:.1f}% of policy triggers were manually approved or overridden by human reviewers.",
                     suggested_action="Review and loosen risk threshold triggers to reduce reviewer fatigue on legitimate requests.",
                 )
             )

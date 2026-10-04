@@ -24,13 +24,13 @@ class StrategyLibrary:
 
     def register_strategy(self, strategy: ExecutionStrategy) -> str:
         self._strategies[strategy.strategy_id] = strategy
-        
+
         domain = strategy.document_domain
         if domain not in self._domain_index:
             self._domain_index[domain] = []
         if strategy.strategy_id not in self._domain_index[domain]:
             self._domain_index[domain].append(strategy.strategy_id)
-            
+
         if strategy.is_promoted:
             self._promoted_index[domain] = strategy.strategy_id
 

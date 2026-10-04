@@ -1,6 +1,7 @@
 """
 3H.10.8: Continuous Learning Effectiveness Verifier
 """
+
 from typing import List
 from ..domain.models import LearningCycleMetric, LearningEffectivenessReport
 from ..domain.interfaces import ILearningEffectivenessVerifier
@@ -20,7 +21,7 @@ class LearningEffectivenessVerifier(ILearningEffectivenessVerifier):
                 recommendations_executed=27,
                 positive_outcome_rate_pct=96.4,
                 false_optimization_rate_pct=3.6,
-                adaptation_speed_minutes=4.2
+                adaptation_speed_minutes=4.2,
             ),
             LearningCycleMetric(
                 cycle_id="cycle-opt-002",
@@ -29,7 +30,7 @@ class LearningEffectivenessVerifier(ILearningEffectivenessVerifier):
                 recommendations_executed=34,
                 positive_outcome_rate_pct=97.8,
                 false_optimization_rate_pct=2.2,
-                adaptation_speed_minutes=3.5
+                adaptation_speed_minutes=3.5,
             ),
             LearningCycleMetric(
                 cycle_id="cycle-opt-003",
@@ -38,8 +39,8 @@ class LearningEffectivenessVerifier(ILearningEffectivenessVerifier):
                 recommendations_executed=42,
                 positive_outcome_rate_pct=99.2,
                 false_optimization_rate_pct=0.8,
-                adaptation_speed_minutes=2.8
-            )
+                adaptation_speed_minutes=2.8,
+            ),
         ]
 
         mean_gain = sum(c.positive_outcome_rate_pct for c in cycles) / len(cycles) if cycles else 100.0
@@ -49,5 +50,5 @@ class LearningEffectivenessVerifier(ILearningEffectivenessVerifier):
             learning_cycles_evaluated=len(cycles),
             cycles=cycles,
             cumulative_learning_gain_pct=round(mean_gain, 2),
-            learning_effectiveness_score=99.1
+            learning_effectiveness_score=99.1,
         )

@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class LearningArtifactType(str, Enum):
     """Classification of learned knowledge artifacts."""
+
     DECOMPOSITION_STRATEGY = "DECOMPOSITION_STRATEGY"
     SCHEDULING_RECOMMENDATION = "SCHEDULING_RECOMMENDATION"
     TOOL_SELECTION = "TOOL_SELECTION"
@@ -27,6 +28,7 @@ class LearningArtifact(BaseModel):
     Immutable learning artifact representing distilled procedural or declarative knowledge.
     Stored and provided as candidates for Memory promotion.
     """
+
     artifact_id: UUID = Field(default_factory=uuid4)
     artifact_type: LearningArtifactType
     title: str

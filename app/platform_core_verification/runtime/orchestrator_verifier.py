@@ -218,7 +218,7 @@ class OrchestratorVerifier:
             if key in idempotency_cache:
                 filtered_count += 1
                 return idempotency_cache[key]
-            
+
             # Execute
             execution_count += 1
             result = {"status": "SUCCESS", "result_id": f"res_{key}", "data": payload}

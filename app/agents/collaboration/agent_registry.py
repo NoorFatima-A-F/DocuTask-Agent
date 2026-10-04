@@ -47,10 +47,7 @@ class AgentRegistry:
         return list(self._profiles.values())
 
     def find_by_capability(self, capability: str) -> List[AgentProfile]:
-        return [
-            p for p in self.list_all()
-            if p.has_capability(capability) and p.is_healthy
-        ]
+        return [p for p in self.list_all() if p.has_capability(capability) and p.is_healthy]
 
     def record_heartbeat(self, agent_id: str) -> bool:
         profile = self._profiles.get(agent_id)

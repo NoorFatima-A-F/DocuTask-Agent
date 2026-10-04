@@ -2,6 +2,7 @@
 Storage Failure Simulation Scenario (Scenario 3) for Part 3G.3.
 Simulates catastrophic object storage loss, vault restoration, and cryptographic hash preservation (H_orig == H_rec).
 """
+
 import datetime
 from typing import List
 from app.platform_verification.disaster_recovery_simulation.domain.models import (

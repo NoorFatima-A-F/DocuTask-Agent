@@ -60,28 +60,32 @@ class BinaryReproducibilityAnalyzer:
         # Audit Python runtime binary
         py_digest = compute_sha256(sys.executable.encode())
         expected_py = expected.get("python_runtime", py_digest)
-        audited.append(BinaryArtifactDigest(
-            artifact_name="python_runtime",
-            artifact_type="PYTHON_ABI",
-            expected_sha256=expected_py,
-            observed_sha256=py_digest,
-            is_bit_identical=(expected_py == py_digest),
-            size_bytes=1024 * 1024,
-        ))
+        audited.append(
+            BinaryArtifactDigest(
+                artifact_name="python_runtime",
+                artifact_type="PYTHON_ABI",
+                expected_sha256=expected_py,
+                observed_sha256=py_digest,
+                is_bit_identical=(expected_py == py_digest),
+                size_bytes=1024 * 1024,
+            )
+        )
 
         # Audit custom expected packages if provided
         for name, exp_h in expected.items():
             if name == "python_runtime":
                 continue
             obs_h = compute_sha256(name.encode())  # Simulated / live hash
-            audited.append(BinaryArtifactDigest(
-                artifact_name=name,
-                artifact_type="WHEEL",
-                expected_sha256=exp_h,
-                observed_sha256=obs_h,
-                is_bit_identical=(exp_h == obs_h),
-                size_bytes=4096,
-            ))
+            audited.append(
+                BinaryArtifactDigest(
+                    artifact_name=name,
+                    artifact_type="WHEEL",
+                    expected_sha256=exp_h,
+                    observed_sha256=obs_h,
+                    is_bit_identical=(exp_h == obs_h),
+                    size_bytes=4096,
+                )
+            )
 
         bit_ident_count = sum(1 for b in audited if b.is_bit_identical)
         divergent_count = len(audited) - bit_ident_count

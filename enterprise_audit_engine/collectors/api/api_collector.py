@@ -45,11 +45,13 @@ class APICollector(BaseCollector):
                                     for dec in node.decorator_list:
                                         if isinstance(dec, ast.Call) and isinstance(dec.func, ast.Attribute):
                                             if dec.func.attr in {"get", "post", "put", "delete", "patch"}:
-                                                routes_found.append({
-                                                    "function": node.name,
-                                                    "method": dec.func.attr.upper(),
-                                                    "file": file_path.relative_to(self.repo_root).as_posix(),
-                                                })
+                                                routes_found.append(
+                                                    {
+                                                        "function": node.name,
+                                                        "method": dec.func.attr.upper(),
+                                                        "file": file_path.relative_to(self.repo_root).as_posix(),
+                                                    }
+                                                )
                                 elif isinstance(node, ast.ClassDef):
                                     for base in node.bases:
                                         if isinstance(base, ast.Name) and "BaseModel" in base.id:

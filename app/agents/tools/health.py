@@ -11,6 +11,7 @@ from app.agents.tools.provider import ProviderStatus
 
 class ToolHealthRecord(BaseModel):
     """Health status record for a single registered tool."""
+
     tool_id: str
     status: ProviderStatus = Field(default=ProviderStatus.HEALTHY)
     last_heartbeat: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -34,7 +35,7 @@ class ToolHealthMonitor:
             last_heartbeat=datetime.now(timezone.utc),
             consecutive_failures=0,
             total_calls=rec.total_calls + 1,
-            total_failures=rec.total_failures
+            total_failures=rec.total_failures,
         )
 
     def record_failure(self, tool_id: str) -> None:
@@ -49,7 +50,7 @@ class ToolHealthMonitor:
             last_heartbeat=datetime.now(timezone.utc),
             consecutive_failures=new_failures,
             total_calls=rec.total_calls + 1,
-            total_failures=rec.total_failures + 1
+            total_failures=rec.total_failures + 1,
         )
 
     def get_health(self, tool_id: str) -> ToolHealthRecord:

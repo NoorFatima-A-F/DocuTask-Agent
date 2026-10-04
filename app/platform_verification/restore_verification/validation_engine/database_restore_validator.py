@@ -48,11 +48,7 @@ class DatabaseRestoreValidator(IDatabaseRestoreValidator):
             "wal_lsn_consistency_verified": True,
         }
 
-        passed = (
-            doc_count_before == doc_count_after
-            and tables >= 42
-            and indexes >= 100
-        )
+        passed = doc_count_before == doc_count_after and tables >= 42 and indexes >= 100
 
         return DatabaseRestoreValidationReport(
             tables_restored=tables,

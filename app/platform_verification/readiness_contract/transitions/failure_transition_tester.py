@@ -6,6 +6,7 @@ Test 2: Database Failure (READY -> NOT_READY)
 Test 3: Recovery (NOT_READY -> RECOVERING -> READY)
 Test 4: Optional Dependency Failure (READY -> DEGRADED)
 """
+
 from app.platform_verification.readiness_contract.domain.models import (
     FailureTransitionReport,
     ReadinessState,
@@ -34,7 +35,13 @@ class FailureTransitionTester(IFailureTransitionTester):
                 "action": "Container initialization and dependency discovery",
                 "from_state": ReadinessState.INITIALIZING.value,
                 "to_state": ReadinessState.READY.value,
-                "signals": {"database": "healthy", "queue": "healthy", "storage": "healthy", "workers": "healthy", "ai_provider": "healthy"},
+                "signals": {
+                    "database": "healthy",
+                    "queue": "healthy",
+                    "storage": "healthy",
+                    "workers": "healthy",
+                    "ai_provider": "healthy",
+                },
                 "expected_traffic_action": TrafficAction.ADMIT_TRAFFIC.value,
                 "passed": True,
             },
@@ -43,7 +50,13 @@ class FailureTransitionTester(IFailureTransitionTester):
                 "action": "Simulate PostgreSQL connection pool exhaustion / failure",
                 "from_state": ReadinessState.READY.value,
                 "to_state": ReadinessState.NOT_READY.value,
-                "signals": {"database": "failed", "queue": "healthy", "storage": "healthy", "workers": "healthy", "ai_provider": "healthy"},
+                "signals": {
+                    "database": "failed",
+                    "queue": "healthy",
+                    "storage": "healthy",
+                    "workers": "healthy",
+                    "ai_provider": "healthy",
+                },
                 "expected_traffic_action": TrafficAction.WITHHOLD_TRAFFIC.value,
                 "passed": True,
             },
@@ -53,7 +66,13 @@ class FailureTransitionTester(IFailureTransitionTester):
                 "from_state": ReadinessState.NOT_READY.value,
                 "to_state": ReadinessState.READY.value,
                 "intermediate_state": ReadinessState.RECOVERING.value,
-                "signals": {"database": "healthy", "queue": "healthy", "storage": "healthy", "workers": "healthy", "ai_provider": "healthy"},
+                "signals": {
+                    "database": "healthy",
+                    "queue": "healthy",
+                    "storage": "healthy",
+                    "workers": "healthy",
+                    "ai_provider": "healthy",
+                },
                 "expected_traffic_action": TrafficAction.ADMIT_TRAFFIC.value,
                 "passed": True,
             },
@@ -62,7 +81,13 @@ class FailureTransitionTester(IFailureTransitionTester):
                 "action": "Simulate Gemini API rate limit or transient 503 outage",
                 "from_state": ReadinessState.READY.value,
                 "to_state": ReadinessState.DEGRADED.value,
-                "signals": {"database": "healthy", "queue": "healthy", "storage": "healthy", "workers": "healthy", "ai_provider": "failed"},
+                "signals": {
+                    "database": "healthy",
+                    "queue": "healthy",
+                    "storage": "healthy",
+                    "workers": "healthy",
+                    "ai_provider": "failed",
+                },
                 "expected_traffic_action": TrafficAction.THROTTLE_TRAFFIC.value,
                 "passed": True,
             },
@@ -75,7 +100,7 @@ class FailureTransitionTester(IFailureTransitionTester):
         t3_passed = transitions[2]["passed"]
         t4_passed = transitions[3]["passed"]
 
-        all_passed = (passed_count == total)
+        all_passed = passed_count == total
 
         return FailureTransitionReport(
             total_transitions_tested=total,

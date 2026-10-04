@@ -27,7 +27,7 @@ class CaseStudyGenerator:
                     "straight_through_processing": "91.5% autonomous approval",
                     "error_rate": "Dropped from 8.2% to 0.4%",
                 },
-                executive_testimonial="\"DocuTask Agent eliminated our month-end invoice backlog in days. Our AP team transitioned from manual data entry to strategic vendor negotiation.\"",
+                executive_testimonial='"DocuTask Agent eliminated our month-end invoice backlog in days. Our AP team transitioned from manual data entry to strategic vendor negotiation."',
             ),
             # Case Study 2: BioHealth Systems (Prior Authorization)
             CaseStudyResult(
@@ -43,7 +43,7 @@ class CaseStudyGenerator:
                     "nursing_hours_liberated": "24,000 hours / year redirected to patient care",
                     "first_pass_approval_rate": "Increased from 72% to 94.2%",
                 },
-                executive_testimonial="\"Our nurses are back at the bedside where they belong. Turnaround time dropped from 4 business days to under 10 seconds.\"",
+                executive_testimonial='"Our nurses are back at the bedside where they belong. Turnaround time dropped from 4 business days to under 10 seconds."',
             ),
             # Case Study 3: Lexis Legal Partners (Contract Redlining)
             CaseStudyResult(
@@ -58,6 +58,6 @@ class CaseStudyGenerator:
                     "annual_net_savings": "$520,000 / year",
                     "risk_clause_catch_rate": "99.1% (vs 89.0% human baseline)",
                 },
-                executive_testimonial="\"DocuTask Agent acts as an infallible first-chair associate. It flags high-risk indemnification clauses with zero false negatives.\"",
+                executive_testimonial='"DocuTask Agent acts as an infallible first-chair associate. It flags high-risk indemnification clauses with zero false negatives."',
             ),
         ]

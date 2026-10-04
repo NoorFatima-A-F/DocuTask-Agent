@@ -69,7 +69,7 @@ class PredictionErrorCalculator:
         mae = sum(abs(e) for e in residuals) / n
 
         # 3. RMSE: sqrt((1/N) * sum(e_i^2))
-        mse = sum(e ** 2 for e in residuals) / n
+        mse = sum(e**2 for e in residuals) / n
         rmse = math.sqrt(mse)
 
         # 4. Mean Bias: (1/N) * sum(e_i) (positive = underpredicting, negative = overpredicting)
@@ -85,10 +85,7 @@ class PredictionErrorCalculator:
         # 7. Coverage probability: fraction of observations inside [ci_lower, ci_upper]
         coverage = 0.95
         if ci_lowers and ci_uppers and len(ci_lowers) >= n and len(ci_uppers) >= n:
-            inside_count = sum(
-                1 for y, low, up in zip(obs, ci_lowers[:n], ci_uppers[:n])
-                if low <= y <= up
-            )
+            inside_count = sum(1 for y, low, up in zip(obs, ci_lowers[:n], ci_uppers[:n]) if low <= y <= up)
             coverage = inside_count / n
 
         is_tier_ok = (mape <= 10.0 or mae <= 0.05) and abs(mean_bias) <= 0.05

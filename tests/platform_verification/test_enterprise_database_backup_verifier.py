@@ -2,6 +2,7 @@
 Comprehensive Unit & Integration Test Suite for Enterprise Database Backup & Recovery Platform (Part 3G.2B Advanced).
 Validates all 17 verification phases, 8-category quality scoring, and CI/CD release gate.
 """
+
 import pytest
 from app.platform_verification.database_backup_verification.domain.models import (
     CorruptionSeverity,
@@ -450,5 +451,3 @@ def test_all_database_backup_api_endpoints():
     full_run = run_full_database_verification_pipeline(export_evidence=False)
     assert full_run["status"] == "SUCCESS"
     assert full_run["cicd_gate_passed"] is True
-
-

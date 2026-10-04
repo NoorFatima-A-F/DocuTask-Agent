@@ -22,6 +22,7 @@ from research_validation.provenance.provenance_models import EvidenceNode, Evide
 @dataclass
 class MetricDelta:
     """Quantitative divergence between two versions of a metric."""
+
     metric_name: str
     baseline_value: float
     comparison_value: float
@@ -33,6 +34,7 @@ class MetricDelta:
 @dataclass
 class EnvironmentDelta:
     """Differences in runtime hardware or software dependencies."""
+
     git_commit_changed: bool
     baseline_commit: str
     comparison_commit: str
@@ -45,6 +47,7 @@ class EnvironmentDelta:
 @dataclass
 class EvidenceBundleDiffReport:
     """Comprehensive difference report between two evidence bundles."""
+
     baseline_bundle_id: str
     comparison_bundle_id: str
     metric_deltas: List[MetricDelta]
@@ -64,11 +67,7 @@ class EvidenceDiffer:
     """
 
     @classmethod
-    def compare_nodes(
-        cls,
-        baseline_node: EvidenceNode,
-        comparison_node: EvidenceNode
-    ) -> EvidenceBundleDiffReport:
+    def compare_nodes(cls, baseline_node: EvidenceNode, comparison_node: EvidenceNode) -> EvidenceBundleDiffReport:
         """Compare two specific evidence nodes and their environments."""
         # 1. Metric deltas
         deltas: List[MetricDelta] = []
@@ -83,14 +82,16 @@ class EvidenceDiffer:
                 abs_d = v_comp - v_base
                 rel_pct = (abs_d / max(abs(v_base), 1e-12)) * 100.0
                 is_imp = abs_d >= 0 if "error" not in k.lower() and "latency" not in k.lower() else abs_d <= 0
-                deltas.append(MetricDelta(
-                    metric_name=k,
-                    baseline_value=float(v_base),
-                    comparison_value=float(v_comp),
-                    absolute_delta=abs_d,
-                    relative_delta_pct=rel_pct,
-                    is_improved=is_imp
-                ))
+                deltas.append(
+                    MetricDelta(
+                        metric_name=k,
+                        baseline_value=float(v_base),
+                        comparison_value=float(v_comp),
+                        absolute_delta=abs_d,
+                        relative_delta_pct=rel_pct,
+                        is_improved=is_imp,
+                    )
+                )
 
         # 2. Environment deltas
         b_env = baseline_node.environment
@@ -111,10 +112,10 @@ class EvidenceDiffer:
             package_version_changes=pkg_changes,
             config_hash_changed=(b_env.config_hash != c_env.config_hash),
             dataset_version_changed=(b_env.dataset_version != c_env.dataset_version),
-            model_version_changed=(b_env.model_version != c_env.model_version)
+            model_version_changed=(b_env.model_version != c_env.model_version),
         )
 
-        qual_changed = (baseline_node.quality_level != comparison_node.quality_level)
+        qual_changed = baseline_node.quality_level != comparison_node.quality_level
 
         # Generate markdown summary table
         md_lines = [
@@ -125,7 +126,7 @@ class EvidenceDiffer:
             f"- **Git Commit**: `{b_env.git_commit_sha[:8]}` → `{c_env.git_commit_sha[:8]}`",
             "",
             "| Metric | Baseline | Comparison | Absolute Delta | Relative Change | Improved |",
-            "| :--- | :--- | :--- | :--- | :--- | :--- |"
+            "| :--- | :--- | :--- | :--- | :--- | :--- |",
         ]
         for d in deltas:
             imp_str = "YES" if d.is_improved else "REGRESSED"
@@ -145,5 +146,5 @@ class EvidenceDiffer:
             added_nodes_count=0,
             removed_nodes_count=0,
             modified_nodes_count=1,
-            summary_markdown="\n".join(md_lines)
+            summary_markdown="\n".join(md_lines),
         )

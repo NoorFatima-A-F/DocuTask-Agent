@@ -1,6 +1,7 @@
 """
 Certification Engine: 5 certification levels, digital signature hashing, expiration & revocation.
 """
+
 from typing import Dict, Any, Optional
 import hashlib
 import json
@@ -9,14 +10,17 @@ import uuid
 from ..interfaces import CertificationEngineInterface
 from ...crosscutting.observability import ComponentObservability
 
+
 class CertificationEngine(CertificationEngineInterface):
     """Issues, cryptographically signs, and revokes compliance certificates."""
-    
+
     def __init__(self):
         self._certificates: Dict[str, Dict[str, Any]] = {}
         self.observability = ComponentObservability("CertificationEngine")
 
-    async def issue_certificate(self, run_id: str, level: str, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def issue_certificate(
+        self, run_id: str, level: str, metadata: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         self.observability.record_operation(2.0)
         cert_id = f"cert-{uuid.uuid4().hex[:12]}"
         issued_at = datetime.now(timezone.utc).isoformat()
@@ -26,7 +30,7 @@ class CertificationEngine(CertificationEngineInterface):
             "level": level,
             "status": "active",
             "issued_at": issued_at,
-            "metadata": metadata or {}
+            "metadata": metadata or {},
         }
         sig = hashlib.sha256(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()
         payload["digital_signature_hash"] = sig

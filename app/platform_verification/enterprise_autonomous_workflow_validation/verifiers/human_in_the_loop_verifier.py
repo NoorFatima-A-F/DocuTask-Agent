@@ -25,11 +25,46 @@ class HumanInTheLoopVerifier(IHumanInTheLoopVerifier):
 
     def verify(self) -> HumanInTheLoopReport:
         interactions = [
-            HITLInteraction(interaction_id="HITL-01", event_type="HighValueInvoiceApproval", human_role="FinanceDirector", response_latency_sec=4.5, outcome="APPROVED", audit_logged=True),
-            HITLInteraction(interaction_id="HITL-02", event_type="LowConfidenceExtractionCorrection", human_role="OperationsReviewer", response_latency_sec=12.2, outcome="MANUALLY_CORRECTED", audit_logged=True),
-            HITLInteraction(interaction_id="HITL-03", event_type="PolicyExceptionEscalation", human_role="ComplianceOfficer", response_latency_sec=8.0, outcome="POLICY_OVERRIDE_GRANTED", audit_logged=True),
-            HITLInteraction(interaction_id="HITL-04", event_type="SuspiciousClaimRejection", human_role="FraudInvestigator", response_latency_sec=15.0, outcome="REJECTED_WITH_FEEDBACK", audit_logged=True),
-            HITLInteraction(interaction_id="HITL-05", event_type="ReviewTimeoutEscalation", human_role="BackupManager", response_latency_sec=1.5, outcome="TIMEOUT_ESCALATED", audit_logged=True),
+            HITLInteraction(
+                interaction_id="HITL-01",
+                event_type="HighValueInvoiceApproval",
+                human_role="FinanceDirector",
+                response_latency_sec=4.5,
+                outcome="APPROVED",
+                audit_logged=True,
+            ),
+            HITLInteraction(
+                interaction_id="HITL-02",
+                event_type="LowConfidenceExtractionCorrection",
+                human_role="OperationsReviewer",
+                response_latency_sec=12.2,
+                outcome="MANUALLY_CORRECTED",
+                audit_logged=True,
+            ),
+            HITLInteraction(
+                interaction_id="HITL-03",
+                event_type="PolicyExceptionEscalation",
+                human_role="ComplianceOfficer",
+                response_latency_sec=8.0,
+                outcome="POLICY_OVERRIDE_GRANTED",
+                audit_logged=True,
+            ),
+            HITLInteraction(
+                interaction_id="HITL-04",
+                event_type="SuspiciousClaimRejection",
+                human_role="FraudInvestigator",
+                response_latency_sec=15.0,
+                outcome="REJECTED_WITH_FEEDBACK",
+                audit_logged=True,
+            ),
+            HITLInteraction(
+                interaction_id="HITL-05",
+                event_type="ReviewTimeoutEscalation",
+                human_role="BackupManager",
+                response_latency_sec=1.5,
+                outcome="TIMEOUT_ESCALATED",
+                audit_logged=True,
+            ),
         ]
 
         checks = [

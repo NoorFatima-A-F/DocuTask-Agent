@@ -14,6 +14,7 @@ from app.agents.runtime.exceptions import RuntimeKernelException
 
 class FaultType(str, Enum):
     """Typology of synthetic faults injected during chaos testing."""
+
     WORKER_CRASH = "WORKER_CRASH"
     NETWORK_FAILURE = "NETWORK_FAILURE"
     DEPENDENCY_TIMEOUT = "DEPENDENCY_TIMEOUT"
@@ -23,11 +24,13 @@ class FaultType(str, Enum):
 
 class InjectedFaultException(RuntimeKernelException):
     """Exception raised when a synthetic fault is triggered."""
+
     pass
 
 
 class FaultSpec(BaseModel):
     """Configuration specification for an armed fault."""
+
     fault_type: FaultType
     probability: float = 1.0
     remaining_bursts: Optional[int] = None

@@ -1,6 +1,7 @@
 """
 Phase 3H.5.12: Automated Health Recovery API Router
 """
+
 from fastapi import APIRouter
 from ..runtime.health_recovery_runtime import HealthRecoveryRuntime
 

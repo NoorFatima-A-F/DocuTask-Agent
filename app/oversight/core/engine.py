@@ -117,7 +117,10 @@ class HumanOversightEngine:
             chain_id=chain.chain_id,
             required_roles=req_roles,
             deadline=context.deadline,
-            metadata={"risk_score": context.risk_score, "policy_id": matching_policy.policy_id if matching_policy else None},
+            metadata={
+                "risk_score": context.risk_score,
+                "policy_id": matching_policy.policy_id if matching_policy else None,
+            },
         )
 
         self._reviews[review.review_id] = review
@@ -230,9 +233,7 @@ class HumanOversightEngine:
         final_chain_outcome = None
 
         if chain:
-            chain_completed, final_chain_outcome = self.workflow_engine.process_decision(
-                chain, decision
-            )
+            chain_completed, final_chain_outcome = self.workflow_engine.process_decision(chain, decision)
 
         # Transition lifecycle state
         from_state = review.status

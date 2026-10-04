@@ -2,6 +2,7 @@
 Resource Exhaustion Chaos Injector for Part 3G.3.
 Injects synthetic CPU, memory, and disk pressure to evaluate Kubernetes HPA autoscaling and OOM protection.
 """
+
 from app.platform_verification.disaster_recovery_simulation.domain.models import (
     ChaosExperimentType,
     ChaosExperimentResult,

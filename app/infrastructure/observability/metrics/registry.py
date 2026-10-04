@@ -77,7 +77,7 @@ class MetricRegistry:
             series.points.append(MetricPoint(value=value, labels=labels or {}))
 
             if len(series.points) > self.max_points_per_series:
-                series.points = series.points[-self.max_points_per_series:]
+                series.points = series.points[-self.max_points_per_series :]
 
     def increment(self, name: str, value: float = 1.0, labels: Optional[Dict[str, str]] = None) -> None:
         """Increment a counter metric."""
@@ -94,7 +94,7 @@ class MetricRegistry:
             new_val = current + value
             series.points.append(MetricPoint(value=new_val, labels=labels or {}))
             if len(series.points) > self.max_points_per_series:
-                series.points = series.points[-self.max_points_per_series:]
+                series.points = series.points[-self.max_points_per_series :]
 
     def get_series(self, name: str, labels: Optional[Dict[str, str]] = None) -> Optional[MetricSeries]:
         key = self._make_key(name, labels)

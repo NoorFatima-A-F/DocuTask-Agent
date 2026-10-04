@@ -60,7 +60,7 @@ def trace_span(
     """Synchronous context manager for creating a child span."""
     parent = _active_trace_context.get()
     new_span_id = uuid.uuid4().hex[:16]
-    
+
     if parent is None:
         child_ctx = TraceContext(
             trace_id=uuid.uuid4().hex,
@@ -88,7 +88,7 @@ def trace_span(
             timestamp_ns=time.time_ns(),
             baggage=merged_baggage,
         )
-    
+
     token = _active_trace_context.set(child_ctx)
     try:
         yield child_ctx
@@ -107,7 +107,7 @@ async def async_trace_span(
     """Asynchronous context manager for creating a child span across async coroutines."""
     parent = _active_trace_context.get()
     new_span_id = uuid.uuid4().hex[:16]
-    
+
     if parent is None:
         child_ctx = TraceContext(
             trace_id=uuid.uuid4().hex,
@@ -135,7 +135,7 @@ async def async_trace_span(
             timestamp_ns=time.time_ns(),
             baggage=merged_baggage,
         )
-    
+
     token = _active_trace_context.set(child_ctx)
     try:
         yield child_ctx

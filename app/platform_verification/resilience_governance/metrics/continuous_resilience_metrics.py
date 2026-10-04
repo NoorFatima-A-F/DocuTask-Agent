@@ -3,6 +3,7 @@ Continuous Resilience Metrics Engine for Disaster Recovery Governance (Part 3G.4
 Tracks RTO, RPO, MTTR, Restore Success Rates, Open Risks, Action Item Overdue Status,
 and generates operational reliability metrics.
 """
+
 from app.platform_verification.resilience_governance.domain.models import (
     ContinuousResilienceMetricsReport,
 )
@@ -46,11 +47,7 @@ class ContinuousResilienceMetricsEngine:
         rto = rto_override if rto_override is not None else self.rto_average_minutes
         rpo = rpo_override if rpo_override is not None else self.rpo_average_minutes
         mttr = mttr_override if mttr_override is not None else self.mttr_average_minutes
-        success_rate = (
-            success_rate_override
-            if success_rate_override is not None
-            else self.restore_success_rate_pct
-        )
+        success_rate = success_rate_override if success_rate_override is not None else self.restore_success_rate_pct
         risks = open_risks if open_risks is not None else self.open_risks_count
         overdue = overdue_actions if overdue_actions is not None else self.overdue_actions_count
 
@@ -61,14 +58,7 @@ class ContinuousResilienceMetricsEngine:
         passed_risks = risks <= self.TARGET_THRESHOLDS["max_open_high_risks"]
         passed_overdue = overdue <= self.TARGET_THRESHOLDS["max_overdue_actions"]
 
-        passed = (
-            passed_rto
-            and passed_rpo
-            and passed_mttr
-            and passed_success_rate
-            and passed_risks
-            and passed_overdue
-        )
+        passed = passed_rto and passed_rpo and passed_mttr and passed_success_rate and passed_risks and passed_overdue
 
         verdict = "EXEMPLARY_OPERATIONAL_HEALTH" if passed else "ACTION_REQUIRED"
 

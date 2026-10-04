@@ -18,13 +18,15 @@ class DeadLetterQueue:
 
     def route_to_dlq(self, event: CloudEventEnvelope, subscriber_name: str, error: Exception, attempts: int) -> None:
         """Store failed event in Dead Letter Queue."""
-        self._dead_letters.append({
-            "event": event.to_dict(),
-            "subscriber": subscriber_name,
-            "error": str(error),
-            "attempts": attempts,
-            "queued_at": datetime.now(timezone.utc).isoformat(),
-        })
+        self._dead_letters.append(
+            {
+                "event": event.to_dict(),
+                "subscriber": subscriber_name,
+                "error": str(error),
+                "attempts": attempts,
+                "queued_at": datetime.now(timezone.utc).isoformat(),
+            }
+        )
 
     def list_dead_letters(self) -> List[Dict[str, Any]]:
         return list(self._dead_letters)
@@ -45,7 +47,9 @@ class EventBus:
         self._event_history: List[CloudEventEnvelope] = []
         self._processed_event_ids: Set[str] = set()
 
-    def subscribe(self, pattern: str, handler: Callable[[CloudEventEnvelope], Any], subscriber_name: str = "default") -> None:
+    def subscribe(
+        self, pattern: str, handler: Callable[[CloudEventEnvelope], Any], subscriber_name: str = "default"
+    ) -> None:
         """Subscribe handler to event type pattern (e.g. 'document.*', 'platform.runtime.*')."""
         if pattern not in self._subscribers:
             self._subscribers[pattern] = []

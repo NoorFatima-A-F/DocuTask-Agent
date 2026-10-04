@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class LatencyRecord(BaseModel):
     """Latency measurements for a specific node execution."""
+
     node_id: str
     queue_latency_ms: float = Field(default=0.0, ge=0.0)
     scheduling_latency_ms: float = Field(default=0.0, ge=0.0)
@@ -19,6 +20,7 @@ class LatencyRecord(BaseModel):
 
 class ExecutionTelemetry(BaseModel):
     """Runtime observability telemetry record."""
+
     execution_id: str
     trace_id: str
     span_id: str

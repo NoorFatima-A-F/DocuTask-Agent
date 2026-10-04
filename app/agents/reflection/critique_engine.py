@@ -24,18 +24,14 @@ class CritiqueEngine(ICritiqueEngine):
         reasoning_validator: Optional[ReasoningValidator] = None,
         hallucination_detector: Optional[HallucinationDetector] = None,
         inconsistency_detector: Optional[InconsistencyDetector] = None,
-        bias_detector: Optional[BiasDetector] = None
+        bias_detector: Optional[BiasDetector] = None,
     ):
         self.reasoning_validator = reasoning_validator or ReasoningValidator()
         self.hallucination_detector = hallucination_detector or HallucinationDetector()
         self.inconsistency_detector = inconsistency_detector or InconsistencyDetector()
         self.bias_detector = bias_detector or BiasDetector()
 
-    def generate_critique(
-        self,
-        trace: ExecutionTraceEnvelope,
-        evaluation_report: EvaluationReport
-    ) -> SelfCritique:
+    def generate_critique(self, trace: ExecutionTraceEnvelope, evaluation_report: EvaluationReport) -> SelfCritique:
         """Synthesizes all critical findings into a SelfCritique aggregate."""
         findings: List[CritiqueFinding] = []
 
@@ -81,6 +77,9 @@ class CritiqueEngine(ICritiqueEngine):
             missed_opportunities=[f.suggested_correction for f in findings if f.suggested_correction],
             improvement_opportunities=opportunities,
             confidence_explanation=f"Critique synthesized from {len(findings)} findings with score {critique_score:.2f}.",
-            uncertainty_analysis={"findings_count": len(findings), "critical_issues": sum(1 for f in findings if f.severity == "CRITICAL")},
-            overall_critique_score=critique_score
+            uncertainty_analysis={
+                "findings_count": len(findings),
+                "critical_issues": sum(1 for f in findings if f.severity == "CRITICAL"),
+            },
+            overall_critique_score=critique_score,
         )

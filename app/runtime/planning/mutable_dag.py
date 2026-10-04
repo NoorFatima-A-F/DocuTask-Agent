@@ -37,6 +37,7 @@ class DAGMutationType(str, Enum):
 
 class DAGNode(BaseModel):
     """Execution unit within the dynamic DAG."""
+
     node_id: str = Field(default_factory=lambda: f"node_{uuid.uuid4().hex[:8]}")
     name: str
     capability_id: str
@@ -55,6 +56,7 @@ class DAGNode(BaseModel):
 
 class DAGEdge(BaseModel):
     """Directed dependency edge between two DAG nodes."""
+
     edge_id: str = Field(default_factory=lambda: f"edge_{uuid.uuid4().hex[:8]}")
     source_id: str
     target_id: str
@@ -64,6 +66,7 @@ class DAGEdge(BaseModel):
 
 class DAGMutationRecord(BaseModel):
     """Audit log entry capturing a structural DAG transformation at runtime."""
+
     mutation_id: str = Field(default_factory=lambda: f"mut_{uuid.uuid4().hex[:8]}")
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     mutation_type: DAGMutationType
@@ -75,6 +78,7 @@ class DAGMutationRecord(BaseModel):
 
 class MutableExecutionDAG(BaseModel):
     """Stateful, mutable DAG representing the active mission execution graph."""
+
     dag_id: str = Field(default_factory=lambda: f"dag_{uuid.uuid4().hex[:10]}")
     mission_id: str
     strategy_id: str
@@ -103,7 +107,7 @@ class MutableExecutionDAG(BaseModel):
         new_nodes: List[DAGNode] = []
         for i in range(split_count):
             sub_node = DAGNode(
-                name=f"{target.name} [Shard {i+1}/{split_count}]",
+                name=f"{target.name} [Shard {i + 1}/{split_count}]",
                 capability_id=target.capability_id,
                 provider=target.provider,
                 payload={"parent_node_id": target.node_id, "shard_index": i, "total_shards": split_count},

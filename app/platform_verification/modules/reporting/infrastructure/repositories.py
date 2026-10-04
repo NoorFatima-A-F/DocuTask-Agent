@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Reporting.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.reporting.domain.models import ReportingEntity
 from app.platform_verification.modules.reporting.domain.interfaces import ReportingRepositoryInterface
+
 
 class InMemoryReportingRepository(ReportingRepositoryInterface):
     def __init__(self):

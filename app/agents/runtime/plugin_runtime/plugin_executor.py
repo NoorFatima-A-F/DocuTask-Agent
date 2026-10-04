@@ -13,6 +13,7 @@ from app.agents.runtime.plugin_runtime.sandbox_provider import LocalRestrictedSa
 
 class PluginExecutionResult(BaseModel):
     """Result of sandboxed plugin execution."""
+
     success: bool
     result: Optional[Any] = None
     error: Optional[str] = None

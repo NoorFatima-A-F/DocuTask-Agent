@@ -36,10 +36,7 @@ class ReflectionOrchestrator:
         self.adaptation_engine = adaptation_engine or AdaptationEngine()
         self.feedback_generator = feedback_generator or FeedbackGenerator()
 
-    async def orchestrate_reflection(
-        self,
-        trace: ExecutionTraceEnvelope
-    ) -> Dict[str, Any]:
+    async def orchestrate_reflection(self, trace: ExecutionTraceEnvelope) -> Dict[str, Any]:
         """Runs ordered reflection stages over completed execution trace."""
         # Stage 1: Multi-dimensional evaluation
         evaluation_report: EvaluationReport = self.evaluation_pipeline.run_pipeline(trace)
@@ -51,19 +48,13 @@ class ReflectionOrchestrator:
         artifacts: List[LearningArtifact] = self.knowledge_extractor.extract_artifacts(trace, critique)
 
         # Stage 4: Synthesize cross-subsystem recommendations
-        recommendations: List[Recommendation] = self.recommendation_engine.generate_recommendations(
-            critique, artifacts
-        )
+        recommendations: List[Recommendation] = self.recommendation_engine.generate_recommendations(critique, artifacts)
 
         # Stage 5: Formulate adaptation proposals
-        adaptation_proposals: List[AdaptationProposal] = self.adaptation_engine.generate_proposals(
-            recommendations
-        )
+        adaptation_proposals: List[AdaptationProposal] = self.adaptation_engine.generate_proposals(recommendations)
 
         # Stage 6: Produce typed feedback bundles for Planner, Execution, Memory, Tools
-        feedback_bundle: SubsystemFeedbackBundle = self.feedback_generator.generate_feedback(
-            critique, recommendations
-        )
+        feedback_bundle: SubsystemFeedbackBundle = self.feedback_generator.generate_feedback(critique, recommendations)
 
         return {
             "evaluation_report": evaluation_report,
@@ -71,5 +62,5 @@ class ReflectionOrchestrator:
             "learning_artifacts": artifacts,
             "recommendations": recommendations,
             "adaptation_proposals": adaptation_proposals,
-            "feedback_bundle": feedback_bundle
+            "feedback_bundle": feedback_bundle,
         }

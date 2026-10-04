@@ -18,6 +18,7 @@ logger = logging.getLogger("infrastructure.observability.profiling.flamegraphs")
 
 class FlamegraphNode(BaseModel):
     """Hierarchical node in an interactive flamegraph visualization."""
+
     name: str
     value: float = 0.0
     children: List[FlamegraphNode] = Field(default_factory=list)

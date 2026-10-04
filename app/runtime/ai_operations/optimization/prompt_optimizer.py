@@ -25,7 +25,7 @@ class PromptOptimizer:
             version="v1.0.0",
             agent_id="agent_chief_architect",
             system_instruction="You are the Chief System Architect. Analyze codebase dependencies, detect bottlenecks, and output structured architectural refactoring plans.",
-            few_shot_examples=[{"input": "Analyze module A", "output": "{\"status\": \"OPTIMAL\", \"refactor\": []}"}],
+            few_shot_examples=[{"input": "Analyze module A", "output": '{"status": "OPTIMAL", "refactor": []}'}],
             active=False,
             average_score=0.88,
             mutation_notes="Baseline production prompt.",
@@ -35,7 +35,9 @@ class PromptOptimizer:
             version="v1.1.0",
             agent_id="agent_chief_architect",
             system_instruction="You are the Chief System Architect. Analyze codebase dependencies with strict JSON schema compliance. Include quantitative latency and memory trade-offs.",
-            few_shot_examples=[{"input": "Analyze module A", "output": "{\"status\": \"OPTIMAL\", \"latency_gain_pct\": 14.5}"}],
+            few_shot_examples=[
+                {"input": "Analyze module A", "output": '{"status": "OPTIMAL", "latency_gain_pct": 14.5}'}
+            ],
             active=True,
             average_score=0.96,
             mutation_notes="Refined with schema constraints & quantitative trade-off metrics.",
@@ -55,7 +57,7 @@ class PromptOptimizer:
         existing = self.get_prompt_versions(agent_id)
         ver_num = f"v1.{len(existing)}.0"
         base_inst = existing[-1].system_instruction if existing else "You are an autonomous AI Agent."
-        
+
         refined_instruction = (
             f"{base_inst} Follow strict grounding: cite verifiable sources. "
             f"Adhere to safety boundaries and avoid redundant tool invocations. "

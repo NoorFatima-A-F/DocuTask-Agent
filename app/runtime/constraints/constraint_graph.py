@@ -38,7 +38,9 @@ class ConstraintGraph:
             b_thresh = self.nodes["budget"].threshold
             a_thresh = self.nodes["accuracy"].threshold
             if b_thresh < 0.001 and a_thresh > 0.95:
-                conflicts.append("Infeasible trade-off: Ultra-low budget (<$0.001) conflicts with ultra-high accuracy (>0.95)")
+                conflicts.append(
+                    "Infeasible trade-off: Ultra-low budget (<$0.001) conflicts with ultra-high accuracy (>0.95)"
+                )
         return conflicts
 
     def get_graph_data(self) -> Dict[str, Any]:

@@ -10,6 +10,7 @@ from app.agents.coordination.agent import Agent
 
 class LoadBalancingStrategy(str, Enum):
     """Load balancing algorithm."""
+
     ROUND_ROBIN = "ROUND_ROBIN"
     LEAST_LOADED = "LEAST_LOADED"
     CAPABILITY_WEIGHTED = "CAPABILITY_WEIGHTED"
@@ -38,9 +39,6 @@ class AgentLoadBalancer:
 
         if self.strategy == LoadBalancingStrategy.CAPABILITY_WEIGHTED:
             # Score = confidence / (1 + current_tasks)
-            return max(
-                candidates,
-                key=lambda a: a.profile.capabilities.confidence_rating / (1 + len(a.current_tasks))
-            )
+            return max(candidates, key=lambda a: a.profile.capabilities.confidence_rating / (1 + len(a.current_tasks)))
 
         return candidates[0]

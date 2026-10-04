@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class RecoveryStrategy(str, Enum):
     """Canonical recovery strategies for self-healing and failure remediation."""
+
     RETRY = "Retry"
     RETRY_SUBTREE = "RetrySubtree"
     RETRY_WORKFLOW = "RetryWorkflow"
@@ -28,6 +29,7 @@ class RecoveryStrategy(str, Enum):
 
 class RecoveryStrategyDefinition(BaseModel):
     """Detailed definition and parameters of an assigned recovery strategy."""
+
     strategy: RecoveryStrategy
     parameters: Dict[str, Any] = Field(default_factory=dict)
     estimated_cost_usd: float = Field(default=0.0, ge=0.0)

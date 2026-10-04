@@ -3,6 +3,7 @@ Data Consistency and Transaction Integrity Validator (Part 3G.2B).
 Verifies table checksums, foreign key referential integrity, sequence alignments,
 and MVCC transaction boundary isolation.
 """
+
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
     DataConsistencyReport,

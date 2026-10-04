@@ -12,6 +12,7 @@ from app.agents.coordination.collaboration_context import CollaborationContext
 
 class CollaborationSession(BaseModel):
     """Session container tracking multi-agent collaboration on a shared goal."""
+
     session_id: UUID = Field(default_factory=uuid4)
     goal: str
     initiator_agent_id: UUID
@@ -23,9 +24,7 @@ class CollaborationSession(BaseModel):
     def add_participant(self, agent_id: UUID) -> "CollaborationSession":
         """Adds an agent to the collaboration session."""
         if agent_id not in self.participating_agent_ids:
-            return self.model_copy(update={
-                "participating_agent_ids": [*self.participating_agent_ids, agent_id]
-            })
+            return self.model_copy(update={"participating_agent_ids": [*self.participating_agent_ids, agent_id]})
         return self
 
     def close_session(self) -> "CollaborationSession":

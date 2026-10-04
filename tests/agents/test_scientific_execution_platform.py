@@ -5,72 +5,44 @@ Comprehensive Test Suite for Orchestrated Scientific Experimentation Platform
 
 import pytest
 from research_validation.scientific_execution.experiment_manifest import (
-    ExperimentManifest, ExperimentParameters, DatasetFingerprint, ExperimentStatus
+    ExperimentManifest,
+    ExperimentParameters,
+    DatasetFingerprint,
+    ExperimentStatus,
 )
-from research_validation.scientific_execution.experiment_registry import (
-    ExperimentRegistry
-)
+from research_validation.scientific_execution.experiment_registry import ExperimentRegistry
 from research_validation.scientific_execution.experiment_dependency_graph import (
-    ExperimentDependencyGraph, PipelineStageType, NodeState
+    ExperimentDependencyGraph,
+    PipelineStageType,
+    NodeState,
 )
-from research_validation.scientific_execution.experiment_runner import (
-    ScientificExperimentRunner, ExperimentRunResult
-)
-from research_validation.scientific_execution.experiment_orchestrator import (
-    ScientificExperimentOrchestrator
-)
-from research_validation.scientific_execution.experiment_replay import (
-    ExperimentReplayEngine
-)
-from research_validation.scientific_execution.experiment_archive import (
-    ExperimentArchiver
-)
-from research_validation.scientific_execution.experiment_versioning import (
-    ExperimentVersionManager, VersionChangeType
-)
-from research_validation.scientific_execution.experiment_scheduler_v2 import (
-    ExperimentSchedulerV2, PriorityLevel
-)
+from research_validation.scientific_execution.experiment_runner import ScientificExperimentRunner, ExperimentRunResult
+from research_validation.scientific_execution.experiment_orchestrator import ScientificExperimentOrchestrator
+from research_validation.scientific_execution.experiment_replay import ExperimentReplayEngine
+from research_validation.scientific_execution.experiment_archive import ExperimentArchiver
+from research_validation.scientific_execution.experiment_versioning import ExperimentVersionManager, VersionChangeType
+from research_validation.scientific_execution.experiment_scheduler_v2 import ExperimentSchedulerV2, PriorityLevel
 from research_validation.scientific_execution.evidence_reconciliation import (
-    EvidenceReconciliationEngine, ConflictSeverity
+    EvidenceReconciliationEngine,
+    ConflictSeverity,
 )
-from research_validation.artifact_generation.paper_figures import (
-    PaperFigureGenerator
-)
-from research_validation.artifact_generation.publication_tables import (
-    PublicationTableGenerator
-)
+from research_validation.artifact_generation.paper_figures import PaperFigureGenerator
+from research_validation.artifact_generation.publication_tables import PublicationTableGenerator
 from research_validation.artifact_generation.latex_export import LatexExporter
 from research_validation.artifact_generation.markdown_export import MarkdownExporter
 from research_validation.artifact_generation.csv_export import CSVExporter
 from research_validation.artifact_generation.parquet_export import ParquetDatasetExporter
 from research_validation.artifact_generation.artifact_index import ArtifactIndexer
-from research_validation.review.artifact_completeness_checker import (
-    ArtifactCompletenessChecker
-)
-from research_validation.review.review_score_predictor import (
-    ReviewVerdict
-)
+from research_validation.review.artifact_completeness_checker import ArtifactCompletenessChecker
+from research_validation.review.review_score_predictor import ReviewVerdict
 from research_validation.review.review_simulator import ReviewSimulator
-from research_validation.review.review_readiness_matrix import (
-    ReviewReadinessMatrixBuilder
-)
-from research_validation.uncertainty.uncertainty_propagation import (
-    UncertaintyPropagationEngine
-)
-from research_validation.uncertainty.confidence_budget import (
-    ConfidenceBudgetManager, BudgetStatus
-)
-from research_validation.uncertainty.evidence_weighting import (
-    DynamicEvidenceWeightEngine, EvidenceQualityLevel
-)
+from research_validation.review.review_readiness_matrix import ReviewReadinessMatrixBuilder
+from research_validation.uncertainty.uncertainty_propagation import UncertaintyPropagationEngine
+from research_validation.uncertainty.confidence_budget import ConfidenceBudgetManager, BudgetStatus
+from research_validation.uncertainty.evidence_weighting import DynamicEvidenceWeightEngine, EvidenceQualityLevel
 from research_validation.uncertainty.calibration import EmpiricalCalibrationEngine
-from research_validation.reproducibility.cross_platform_runner import (
-    CrossPlatformRunner
-)
-from research_validation.reproducibility.cross_architecture_runner import (
-    CrossArchitectureRunner
-)
+from research_validation.reproducibility.cross_platform_runner import CrossPlatformRunner
+from research_validation.reproducibility.cross_architecture_runner import CrossArchitectureRunner
 from research_validation.reproducibility.environment_diff import EnvironmentDiffEngine
 from research_validation.reproducibility.binary_reproducibility import BinaryReproducibilityAnalyzer
 
@@ -215,16 +187,28 @@ def test_experiment_scheduler_v2(sample_manifest):
 # 4. Phase 82B.4: Evidence Reconciliation Engine
 def test_evidence_reconciliation():
     r1 = ExperimentRunResult(
-        run_id="r1", experiment_id="exp1", status=ExperimentStatus.COMPLETED,
-        start_time_utc="", end_time_utc="", duration_ms=100.0,
+        run_id="r1",
+        experiment_id="exp1",
+        status=ExperimentStatus.COMPLETED,
+        start_time_utc="",
+        end_time_utc="",
+        duration_ms=100.0,
         metrics={"f1": 0.950, "precision": 0.960},
-        intermediate_hashes={}, final_output_digest="h1", is_measured=True
+        intermediate_hashes={},
+        final_output_digest="h1",
+        is_measured=True,
     )
     r2 = ExperimentRunResult(
-        run_id="r2", experiment_id="exp1", status=ExperimentStatus.COMPLETED,
-        start_time_utc="", end_time_utc="", duration_ms=102.0,
+        run_id="r2",
+        experiment_id="exp1",
+        status=ExperimentStatus.COMPLETED,
+        start_time_utc="",
+        end_time_utc="",
+        duration_ms=102.0,
         metrics={"f1": 0.952, "precision": 0.958},
-        intermediate_hashes={}, final_output_digest="h2", is_measured=True
+        intermediate_hashes={},
+        final_output_digest="h2",
+        is_measured=True,
     )
     reconciler = EvidenceReconciliationEngine()
     consensus = reconciler.reconcile_runs([r1, r2])
@@ -246,7 +230,15 @@ def test_artifact_generation_pipeline(sample_manifest):
     # Tables
     tbl = PublicationTableGenerator.create_benchmark_comparison_table(
         dataset_results=[
-            {"dataset": "FUNSD", "samples": 199, "precision": 0.92, "recall": 0.91, "f1_score": 0.915, "p99_latency_ms": 42.0, "evidence_level": "LEVEL_A"}
+            {
+                "dataset": "FUNSD",
+                "samples": 199,
+                "precision": 0.92,
+                "recall": 0.91,
+                "f1_score": 0.915,
+                "p99_latency_ms": 42.0,
+                "evidence_level": "LEVEL_A",
+            }
         ],
         originating_exp_id=sample_manifest.experiment_id,
     )

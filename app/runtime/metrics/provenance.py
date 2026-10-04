@@ -36,6 +36,7 @@ class MetricProvenanceRecord:
     """
     Authoritative scientific audit record for any metric computation.
     """
+
     metric_id: str
     metric_name: str
     metric_version: str
@@ -51,9 +52,7 @@ class MetricProvenanceRecord:
     observation_window: Dict[str, Any]
     statistical_summary: Optional[Dict[str, Any]]
     merkle_events_root_sha256: str
-    calculated_at_utc: str = field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat()
-    )
+    calculated_at_utc: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     sentinel_state: Optional[str] = None
     tags: List[str] = field(default_factory=list)
 

@@ -10,6 +10,7 @@ from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 class BenchmarkCriteria(BaseModel):
     """Target thresholds for benchmark compliance."""
+
     max_duration_ms: float = 15000.0
     max_cost_usd: float = 0.25
     max_tokens: int = 10000
@@ -20,6 +21,7 @@ class BenchmarkCriteria(BaseModel):
 
 class BenchmarkReport(BaseModel):
     """Outcome of benchmarking against baseline criteria."""
+
     passed_all: bool
     duration_passed: bool
     cost_passed: bool
@@ -64,6 +66,6 @@ class BenchmarkEvaluator:
                 "actual_duration_ms": trace.total_duration_ms,
                 "actual_cost_usd": trace.cost_usd,
                 "actual_tokens": total_tokens,
-                "actual_success_rate": rate
-            }
+                "actual_success_rate": rate,
+            },
         )

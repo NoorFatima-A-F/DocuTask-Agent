@@ -40,6 +40,6 @@ def test_hallucination_detector_numeric_inventions():
     # Output with fabricated currency figure $9,999.00
     output_text = "The invoice states a total balance of $9,999.00."
     is_hal, violations, report = detector.detect(output_text, chunks)
-    
+
     assert is_hal is True
     assert any("Invented numeric figure '$9,999.00'" in v.message for v in violations)

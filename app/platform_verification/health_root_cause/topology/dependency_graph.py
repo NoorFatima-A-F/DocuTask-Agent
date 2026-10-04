@@ -95,8 +95,7 @@ class DependencyGraphEngine(IDependencyGraph):
 
     def build_graph_report(self) -> DependencyGraphReport:
         critical_nodes = [
-            name for name, node in self._nodes.items()
-            if node.criticality == ComponentCriticality.CRITICAL
+            name for name, node in self._nodes.items() if node.criticality == ComponentCriticality.CRITICAL
         ]
         return DependencyGraphReport(
             total_nodes=len(self._nodes),

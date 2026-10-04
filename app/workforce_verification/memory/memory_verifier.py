@@ -114,7 +114,7 @@ class CollectiveMemoryVerifier:
         return AssertionResult(
             name="assert_knowledge_propagation_accuracy",
             passed=passed,
-            message=f"Cross-team institutional memory hit rate measured at {hit_rate*100:.1f}% with zero corruption",
+            message=f"Cross-team institutional memory hit rate measured at {hit_rate * 100:.1f}% with zero corruption",
             execution_time_ms=t_ms,
             details={"hit_rate": hit_rate},
         )

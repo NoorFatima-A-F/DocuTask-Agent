@@ -34,7 +34,7 @@ class CostEvaluator(IEvaluator):
             dimension=EvaluationDimension.COST,
             score=score,
             evidence=[f"Actual cost: ${cost:.4f} USD"],
-            details={"cost_usd": cost}
+            details={"cost_usd": cost},
         )
 
         return DimensionEvaluation(
@@ -43,5 +43,5 @@ class CostEvaluator(IEvaluator):
             status=status,
             metrics=[metric],
             findings=[f"Cost evaluated at ${cost:.4f} USD ({status})."],
-            recommendation_hints=["Recommend prompt distillation or smaller model tier."] if score < 0.7 else []
+            recommendation_hints=["Recommend prompt distillation or smaller model tier."] if score < 0.7 else [],
         )

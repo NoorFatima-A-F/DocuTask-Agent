@@ -1,6 +1,7 @@
 """
 Phase 3H.12: 6-Pillar Automated Recovery Quality & Self-Healing Scorer
 """
+
 from typing import List
 from datetime import datetime, timezone
 from ..domain.models import (
@@ -126,42 +127,42 @@ class AutomatedRecoveryScorer(IAutomatedRecoveryScorer):
                 weight_pct=acc_weight,
                 achieved_score_pct=round(acc_score, 2),
                 weighted_score_pct=round(acc_weighted, 2),
-                status="PASSED" if acc_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if acc_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             RecoveryPillarScore(
                 pillar_name="Automation Reliability & Policy Execution",
                 weight_pct=auto_weight,
                 achieved_score_pct=round(auto_score, 2),
                 weighted_score_pct=round(auto_weighted, 2),
-                status="PASSED" if auto_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if auto_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             RecoveryPillarScore(
                 pillar_name="Safety Controls & Non-Destructive Guards",
                 weight_pct=safe_weight,
                 achieved_score_pct=round(safe_score, 2),
                 weighted_score_pct=round(safe_weighted, 2),
-                status="PASSED" if safe_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if safe_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             RecoveryPillarScore(
                 pillar_name="Recovery Speed & MTTR SLA Conformance",
                 weight_pct=spd_weight,
                 achieved_score_pct=round(spd_score, 2),
                 weighted_score_pct=round(spd_weighted, 2),
-                status="PASSED" if spd_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if spd_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             RecoveryPillarScore(
                 pillar_name="Validation Quality & Synthetic E2E Proof",
                 weight_pct=val_weight,
                 achieved_score_pct=round(val_score, 2),
                 weighted_score_pct=round(val_weighted, 2),
-                status="PASSED" if val_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if val_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             RecoveryPillarScore(
                 pillar_name="Audit Trail & Immutable Logging Integrity",
                 weight_pct=aud_weight,
                 achieved_score_pct=round(aud_score, 2),
                 weighted_score_pct=round(aud_weighted, 2),
-                status="PASSED" if aud_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if aud_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
         ]
 
@@ -186,5 +187,5 @@ class AutomatedRecoveryScorer(IAutomatedRecoveryScorer):
             minimum_passing_threshold_pct=95.0,
             pillar_scores=pillar_scores,
             certification_granted=granted,
-            auditor="DocuTask Autonomous Recovery & SRE Certification Engine"
+            auditor="DocuTask Autonomous Recovery & SRE Certification Engine",
         )

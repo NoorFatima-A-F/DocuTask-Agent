@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 class KnowledgeAnalyticsReport(BaseModel):
     """Aggregated analytical report on platform knowledge usage and search effectiveness."""
+
     total_queries: int = 0
     successful_queries: int = 0
     zero_hit_queries: int = 0

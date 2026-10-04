@@ -3,25 +3,46 @@ Master Health Intelligence Runtime Coordinator (Part 3H.3.3).
 Executes end-to-end health state transition, degradation trend analysis, flapping detection,
 cascading protection, automated recovery orchestration, alerting, and evidence generation.
 """
+
 from typing import Dict, Any
 
 from app.platform_verification.health_transition_intelligence.domain.models import (
     HealthState,
 )
-from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import HealthStateMachine
-from app.platform_verification.health_transition_intelligence.signals.health_signal_collector import HealthSignalCollector
+from app.platform_verification.health_transition_intelligence.state_machine.health_state_machine import (
+    HealthStateMachine,
+)
+from app.platform_verification.health_transition_intelligence.signals.health_signal_collector import (
+    HealthSignalCollector,
+)
 from app.platform_verification.health_transition_intelligence.rules.health_rule_engine import HealthRuleEngine
 from app.platform_verification.health_transition_intelligence.analysis.degradation_analyzer import DegradationAnalyzer
 from app.platform_verification.health_transition_intelligence.history.health_history_storage import HealthHistoryStorage
 from app.platform_verification.health_transition_intelligence.flapping.flapping_detector import HealthFlappingDetector
-from app.platform_verification.health_transition_intelligence.protection.cascading_failure_protector import CascadingFailureProtector
-from app.platform_verification.health_transition_intelligence.recovery.recovery_orchestrator import ServiceRecoveryOrchestrator
-from app.platform_verification.health_transition_intelligence.orchestration.k8s_transition_verifier import KubernetesTransitionVerifier
-from app.platform_verification.health_transition_intelligence.alerting.health_alerting_engine import HealthAlertingEngine
-from app.platform_verification.health_transition_intelligence.incident.incident_reconstruction_engine import IncidentReconstructionEngine
-from app.platform_verification.health_transition_intelligence.simulation.health_simulation_runner import HealthSimulationRunner
-from app.platform_verification.health_transition_intelligence.scoring.health_intelligence_scorer import HealthIntelligenceScorer
-from app.platform_verification.health_transition_intelligence.exporter.health_evidence_exporter import HealthEvidenceExporter
+from app.platform_verification.health_transition_intelligence.protection.cascading_failure_protector import (
+    CascadingFailureProtector,
+)
+from app.platform_verification.health_transition_intelligence.recovery.recovery_orchestrator import (
+    ServiceRecoveryOrchestrator,
+)
+from app.platform_verification.health_transition_intelligence.orchestration.k8s_transition_verifier import (
+    KubernetesTransitionVerifier,
+)
+from app.platform_verification.health_transition_intelligence.alerting.health_alerting_engine import (
+    HealthAlertingEngine,
+)
+from app.platform_verification.health_transition_intelligence.incident.incident_reconstruction_engine import (
+    IncidentReconstructionEngine,
+)
+from app.platform_verification.health_transition_intelligence.simulation.health_simulation_runner import (
+    HealthSimulationRunner,
+)
+from app.platform_verification.health_transition_intelligence.scoring.health_intelligence_scorer import (
+    HealthIntelligenceScorer,
+)
+from app.platform_verification.health_transition_intelligence.exporter.health_evidence_exporter import (
+    HealthEvidenceExporter,
+)
 
 
 class HealthIntelligenceRuntime:

@@ -115,12 +115,14 @@ class MissionScheduler:
         )
 
         self.repo.save_mission(activated)
-        self.event_bus.publish(MissionStateTransitionEvent(
-            event_id=f"evt_{activated.mission_id}_{len(updated_transitions)}",
-            event_type="MissionStateTransition",
-            aggregate_id=activated.mission_id,
-            timestamp_utc=now_str,
-            payload={"from_state": MissionState.READY_FOR_OBSERVATION.value, "to_state": MissionState.ACTIVE.value},
-        ))
+        self.event_bus.publish(
+            MissionStateTransitionEvent(
+                event_id=f"evt_{activated.mission_id}_{len(updated_transitions)}",
+                event_type="MissionStateTransition",
+                aggregate_id=activated.mission_id,
+                timestamp_utc=now_str,
+                payload={"from_state": MissionState.READY_FOR_OBSERVATION.value, "to_state": MissionState.ACTIVE.value},
+            )
+        )
 
         return activated

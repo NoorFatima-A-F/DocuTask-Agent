@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class PromptExecutionEvent(BaseModel):
     """Telemetry record for a single prompt runtime invocation."""
+
     event_id: str
     prompt_id: str
     version_id: str

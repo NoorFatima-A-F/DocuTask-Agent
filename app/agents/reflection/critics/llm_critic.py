@@ -42,7 +42,7 @@ class LLMCritic:
         prompt = f"""Review the extracted document payload for semantic correctness, plausible values, and hallucinations:
 Goal: {goal_description}
 Extracted Data: {extracted_data}
-Context Snippet: {raw_text_context or 'N/A'}
+Context Snippet: {raw_text_context or "N/A"}
 
 Provide plausibility score, detect hallucinations or contradictions, and list recommended repair actions."""
 

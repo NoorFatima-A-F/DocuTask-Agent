@@ -8,9 +8,7 @@ from app.observability.profiling.profiler import ContinuousProfiler
 def test_rca_engine_multi_signal_correlation():
     engine = RCAEngine()
     metrics = {"node_cpu_usage_percent": 92.0, "runtime_queue_depth": 250.0}
-    spans = [
-        {"name": "ai_inference_step", "service": "llm-worker", "duration_ms": 4500.0}
-    ]
+    spans = [{"name": "ai_inference_step", "service": "llm-worker", "duration_ms": 4500.0}]
 
     rca = engine.analyze_incident(
         service_name="llm-worker",

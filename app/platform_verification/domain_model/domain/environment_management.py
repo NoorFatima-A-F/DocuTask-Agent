@@ -1,6 +1,7 @@
 """
 Environment Domain: Tier Provisioning, Snapshots, Hardware Profiles, and Runtime Fingerprints.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Dict, Optional
@@ -34,7 +35,9 @@ class EnvironmentSnapshot(BaseModel):
     container_image_digest: str = "sha256:d41d8cd98f00b204e9800998ecf8427e"
     infrastructure_version: str = "k8s-v1.30.2"
     hardware_profile: HardwareProfile = Field(default_factory=HardwareProfile)
-    network_configuration: Dict[str, str] = Field(default_factory=lambda: {"vpc": "verification-vpc-01", "egress": "RESTRICTED"})
+    network_configuration: Dict[str, str] = Field(
+        default_factory=lambda: {"vpc": "verification-vpc-01", "egress": "RESTRICTED"}
+    )
     dependency_fingerprint_sha256: str = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     git_commit_sha: str = "main-e9f8a12b"
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())

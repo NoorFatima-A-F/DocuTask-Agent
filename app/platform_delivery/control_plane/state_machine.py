@@ -1,4 +1,5 @@
 """Deployment and Release State Machines for Platform Delivery Operating System."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -7,6 +8,7 @@ from typing import Dict, List, Optional, Set
 
 class DeploymentState(str, Enum):
     """Authoritative lifecycle states for an enterprise deployment."""
+
     REQUESTED = "REQUESTED"
     VALIDATING = "VALIDATING"
     AWAITING_APPROVAL = "AWAITING_APPROVAL"
@@ -27,6 +29,7 @@ class DeploymentState(str, Enum):
 
 class ReleaseState(str, Enum):
     """Lifecycle states for immutable release packages."""
+
     CREATED = "CREATED"
     BUILDING = "BUILDING"
     VALIDATING = "VALIDATING"
@@ -43,6 +46,7 @@ class ReleaseState(str, Enum):
 @dataclass
 class TransitionLog:
     """Historical audit record for state machine transitions."""
+
     from_state: str
     to_state: str
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
@@ -55,13 +59,34 @@ class DeploymentStateMachine:
 
     VALID_TRANSITIONS: Dict[DeploymentState, Set[DeploymentState]] = {
         DeploymentState.REQUESTED: {DeploymentState.VALIDATING, DeploymentState.FAILED, DeploymentState.ABORTED},
-        DeploymentState.VALIDATING: {DeploymentState.AWAITING_APPROVAL, DeploymentState.APPROVED, DeploymentState.FAILED, DeploymentState.QUARANTINED},
+        DeploymentState.VALIDATING: {
+            DeploymentState.AWAITING_APPROVAL,
+            DeploymentState.APPROVED,
+            DeploymentState.FAILED,
+            DeploymentState.QUARANTINED,
+        },
         DeploymentState.AWAITING_APPROVAL: {DeploymentState.APPROVED, DeploymentState.ABORTED, DeploymentState.FAILED},
         DeploymentState.APPROVED: {DeploymentState.PREPARING, DeploymentState.ABORTED, DeploymentState.FAILED},
         DeploymentState.PREPARING: {DeploymentState.DEPLOYING, DeploymentState.FAILED, DeploymentState.ROLLING_BACK},
-        DeploymentState.DEPLOYING: {DeploymentState.VERIFYING, DeploymentState.CANARY, DeploymentState.FAILED, DeploymentState.ROLLING_BACK},
-        DeploymentState.VERIFYING: {DeploymentState.PROMOTING, DeploymentState.ACTIVE, DeploymentState.FAILED, DeploymentState.ROLLING_BACK},
-        DeploymentState.CANARY: {DeploymentState.PROMOTING, DeploymentState.ACTIVE, DeploymentState.FAILED, DeploymentState.ABORTED, DeploymentState.ROLLING_BACK},
+        DeploymentState.DEPLOYING: {
+            DeploymentState.VERIFYING,
+            DeploymentState.CANARY,
+            DeploymentState.FAILED,
+            DeploymentState.ROLLING_BACK,
+        },
+        DeploymentState.VERIFYING: {
+            DeploymentState.PROMOTING,
+            DeploymentState.ACTIVE,
+            DeploymentState.FAILED,
+            DeploymentState.ROLLING_BACK,
+        },
+        DeploymentState.CANARY: {
+            DeploymentState.PROMOTING,
+            DeploymentState.ACTIVE,
+            DeploymentState.FAILED,
+            DeploymentState.ABORTED,
+            DeploymentState.ROLLING_BACK,
+        },
         DeploymentState.PROMOTING: {DeploymentState.ACTIVE, DeploymentState.FAILED, DeploymentState.ROLLING_BACK},
         DeploymentState.ACTIVE: {DeploymentState.ROLLING_BACK, DeploymentState.QUARANTINED, DeploymentState.FAILED},
         DeploymentState.ROLLING_BACK: {DeploymentState.ROLLED_BACK, DeploymentState.FAILED},

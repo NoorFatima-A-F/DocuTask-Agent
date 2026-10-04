@@ -10,6 +10,7 @@ from app.runtime.feature_store.feature_registry import feature_registry
 
 class FeatureValidationError(ValueError):
     """Raised when a feature vector violates required mathematical or domain invariants."""
+
     pass
 
 

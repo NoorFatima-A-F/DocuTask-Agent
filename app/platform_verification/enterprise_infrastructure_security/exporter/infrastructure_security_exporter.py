@@ -24,7 +24,11 @@ class InfrastructureSecurityExporter:
         r"3n\.1(?!\d)": ["security_architecture_report.json", "architecture_report.json"],
         r"3n\.2(?!\d)": ["threat_model_report.json"],
         r"3n\.3(?!\d)": ["container_security_report.json"],
-        r"3n\.4(?!\d)": ["image_supply_chain_report.json", "image_security_report.json", "software_bill_of_materials.json"],
+        r"3n\.4(?!\d)": [
+            "image_supply_chain_report.json",
+            "image_security_report.json",
+            "software_bill_of_materials.json",
+        ],
         r"3n\.5(?!\d)": ["vulnerability_report.json"],
         r"3n\.6(?!\d)": ["secret_security_report.json", "secret_report.json"],
         r"3n\.7(?!\d)": ["iam_security_report.json", "iam_report.json"],
@@ -59,7 +63,9 @@ class InfrastructureSecurityExporter:
         target_filenames: List[str] = []
 
         for pattern, filenames in self.PHASE_FILENAME_MAP.items():
-            if re.search(pattern, report.phase_id, re.IGNORECASE) or re.search(pattern, report.verifier_id, re.IGNORECASE):
+            if re.search(pattern, report.phase_id, re.IGNORECASE) or re.search(
+                pattern, report.verifier_id, re.IGNORECASE
+            ):
                 target_filenames.extend(filenames)
                 break
 

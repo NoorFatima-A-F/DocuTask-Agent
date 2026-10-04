@@ -1,6 +1,7 @@
 """
 Phase 3I.12: Autonomous Reliability Engineering, Continuous Optimization & Operational Intelligence — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Any
 from pydantic import BaseModel, Field
@@ -8,14 +9,14 @@ from datetime import datetime, timezone
 
 
 class AutonomousCertificationTier(str, Enum):
-    AUTONOMOUS_RELIABILITY_CERTIFIED = "Autonomous Reliability Certified"          # 95 - 100%
-    INTELLIGENT_OPERATIONS_READY = "Intelligent Operations Ready"                  # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                                  # 80 - 89.99%
-    FAILED = "Failed"                                                              # < 80%
+    AUTONOMOUS_RELIABILITY_CERTIFIED = "Autonomous Reliability Certified"  # 95 - 100%
+    INTELLIGENT_OPERATIONS_READY = "Intelligent Operations Ready"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 class ActionSafetyLevel(str, Enum):
-    SAFE = "Safe"              # Automatic execution without approval (e.g. restart worker, clear cache)
+    SAFE = "Safe"  # Automatic execution without approval (e.g. restart worker, clear cache)
     CONTROLLED = "Controlled"  # Automated with policy gate / approval (e.g. scale infra, modify config)
     RESTRICTED = "Restricted"  # Human engineer mandatory confirmation (e.g. DB schema, security rules)
 
@@ -28,6 +29,7 @@ class FailureSeverity(str, Enum):
 
 
 # ─── 3I.12.1: Autonomous Reliability Architecture Models ───────────────────────
+
 
 class AutonomousArchitectureComponent(BaseModel):
     layer_name: str
@@ -50,6 +52,7 @@ class AutonomousArchitectureReport(BaseModel):
 
 # ─── 3I.12.2: Reliability Anomaly Intelligence Models ─────────────────────────
 
+
 class AnomalyPatternSpec(BaseModel):
     telemetry_type: str  # Metrics, Logs, Traces
     anomaly_signature: str
@@ -70,6 +73,7 @@ class AnomalyIntelligenceReport(BaseModel):
 
 
 # ─── 3I.12.3: Failure Prediction Models ───────────────────────────────────────
+
 
 class FailurePredictionSpec(BaseModel):
     prediction: str
@@ -93,6 +97,7 @@ class FailurePredictionReport(BaseModel):
 
 # ─── 3I.12.4: Reliability Optimization Engine Models ──────────────────────────
 
+
 class OptimizationRecommendationSpec(BaseModel):
     category: str  # Performance, Cost, Resource Allocation, Architecture
     target_component: str
@@ -115,6 +120,7 @@ class OptimizationRecommendationReport(BaseModel):
 
 # ─── 3I.12.5: Intelligent Capacity Planning Models ────────────────────────────
 
+
 class CapacityForecastSpec(BaseModel):
     resource_type: str  # Worker Capacity, Database Capacity, Queue Capacity
     current_allocation: str
@@ -135,6 +141,7 @@ class CapacityIntelligenceReport(BaseModel):
 
 # ─── 3I.12.6: Autonomous Scaling Intelligence Models ──────────────────────────
 
+
 class ScalingDecisionSpec(BaseModel):
     action_name: str
     condition_evaluated: str
@@ -154,6 +161,7 @@ class AutonomousScalingReport(BaseModel):
 
 
 # ─── 3I.12.7: Self-Optimization Models ────────────────────────────────────────
+
 
 class SelfOptimizationActionSpec(BaseModel):
     subsystem: str  # Database, Queue, AI Pipeline, Infrastructure
@@ -177,6 +185,7 @@ class SelfOptimizationReport(BaseModel):
 
 # ─── 3I.12.8: Incident Learning Intelligence Models ───────────────────────────
 
+
 class IncidentLearningCycleSpec(BaseModel):
     incident_id: str
     root_cause: str
@@ -197,6 +206,7 @@ class IncidentLearningReport(BaseModel):
 
 
 # ─── 3I.12.9: Reliability Knowledge Graph Models ──────────────────────────────
+
 
 class KnowledgeGraphNode(BaseModel):
     node_id: str
@@ -224,6 +234,7 @@ class ReliabilityKnowledgeGraphReport(BaseModel):
 
 # ─── 3I.12.10: Autonomous Decision Safety Models ──────────────────────────────
 
+
 class DecisionSafetyRuleSpec(BaseModel):
     action_type: str
     assigned_safety_level: ActionSafetyLevel
@@ -245,6 +256,7 @@ class AutonomousSafetyReport(BaseModel):
 
 # ─── 3I.12.11: Continuous Improvement Loop Models ─────────────────────────────
 
+
 class ImprovementLoopMetricSpec(BaseModel):
     dimension: str
     baseline_value: str
@@ -265,6 +277,7 @@ class ContinuousReliabilityImprovementReport(BaseModel):
 
 
 # ─── 3I.12.12 & 13: 7-Category Scoring & Certification Models ─────────────────
+
 
 class AutonomousCategoryScore(BaseModel):
     category_name: str

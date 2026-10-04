@@ -109,9 +109,12 @@ class StorageVerifier:
             "assertion": AssertionResult(
                 name="Tenant_Storage_Quota_Enforcement",
                 passed=passed,
-                message=f"Storage quota hard cap enforced: Rejected write exceeding {quota_bytes // (1024*1024)}MB quota.",
+                message=f"Storage quota hard cap enforced: Rejected write exceeding {quota_bytes // (1024 * 1024)}MB quota.",
                 execution_time_ms=t_elapsed,
-                details={"quota_mb": quota_bytes / (1024*1024), "attempted_mb": (current_usage + new_payload_size) / (1024*1024)},
+                details={
+                    "quota_mb": quota_bytes / (1024 * 1024),
+                    "attempted_mb": (current_usage + new_payload_size) / (1024 * 1024),
+                },
             ),
             "quota_limit": quota_bytes,
             "rejected": rejected,
@@ -164,7 +167,7 @@ class StorageVerifier:
         corrupted_data = b"Critical financial balance sheet 2027"
         corrupted_hash = hashlib.sha256(corrupted_data).hexdigest()
 
-        corruption_detected = (corrupted_hash != expected_hash)
+        corruption_detected = corrupted_hash != expected_hash
         passed = corruption_detected is True
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 

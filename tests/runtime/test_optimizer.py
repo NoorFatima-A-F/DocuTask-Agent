@@ -24,9 +24,33 @@ def test_objective_scalarizations():
 
 def test_multi_objective_plan_optimizer():
     candidates = [
-        {"id": "plan_a", "plan_name": "Fast Wavefront", "accuracy": 0.92, "latency_ms": 400.0, "cost_usd": 0.005, "safety_compliance": 1.0, "reliability": 0.95},
-        {"id": "plan_b", "plan_name": "Balanced Hybrid", "accuracy": 0.98, "latency_ms": 800.0, "cost_usd": 0.015, "safety_compliance": 1.0, "reliability": 0.98},
-        {"id": "plan_c", "plan_name": "Slow High-Cost", "accuracy": 0.93, "latency_ms": 2500.0, "cost_usd": 0.050, "safety_compliance": 0.9, "reliability": 0.90},
+        {
+            "id": "plan_a",
+            "plan_name": "Fast Wavefront",
+            "accuracy": 0.92,
+            "latency_ms": 400.0,
+            "cost_usd": 0.005,
+            "safety_compliance": 1.0,
+            "reliability": 0.95,
+        },
+        {
+            "id": "plan_b",
+            "plan_name": "Balanced Hybrid",
+            "accuracy": 0.98,
+            "latency_ms": 800.0,
+            "cost_usd": 0.015,
+            "safety_compliance": 1.0,
+            "reliability": 0.98,
+        },
+        {
+            "id": "plan_c",
+            "plan_name": "Slow High-Cost",
+            "accuracy": 0.93,
+            "latency_ms": 2500.0,
+            "cost_usd": 0.050,
+            "safety_compliance": 0.9,
+            "reliability": 0.90,
+        },
     ]
 
     res = MultiObjectivePlanOptimizer.optimize(

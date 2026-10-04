@@ -23,7 +23,8 @@ from .models import (
 class IPerformanceVerifier(ABC):
     @property
     @abstractmethod
-    def verifier_id(self) -> str: pass
+    def verifier_id(self) -> str:
+        pass
 
     @property
     def phase_id(self) -> str:
@@ -35,85 +36,105 @@ class IPerformanceVerifier(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str: pass
+    def name(self) -> str:
+        pass
 
     @abstractmethod
-    def verify(self) -> Any: pass
+    def verify(self) -> Any:
+        pass
 
 
 class IPerformanceArchitectureVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceArchitectureReport: pass
+    def verify(self) -> PerformanceArchitectureReport:
+        pass
 
 
 class ILatencyBreakdownVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> LatencyBreakdownReport: pass
+    def verify(self) -> LatencyBreakdownReport:
+        pass
 
 
 class IThroughputCapacityVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ThroughputCapacityReport: pass
+    def verify(self) -> ThroughputCapacityReport:
+        pass
 
 
 class IResourceBottleneckVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> ResourceBottleneckReport: pass
+    def verify(self) -> ResourceBottleneckReport:
+        pass
 
 
 class IDatabasePerformanceVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> DatabasePerformanceReport: pass
+    def verify(self) -> DatabasePerformanceReport:
+        pass
 
 
 class IQueueCapacityVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> QueueCapacityReport: pass
+    def verify(self) -> QueueCapacityReport:
+        pass
 
 
 class IWorkerScalingVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> WorkerScalingReport: pass
+    def verify(self) -> WorkerScalingReport:
+        pass
 
 
 class IAIModelPerformanceVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> AIModelPerformanceReport: pass
+    def verify(self) -> AIModelPerformanceReport:
+        pass
 
 
 class IPerformanceRegressionVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceRegressionReport: pass
+    def verify(self) -> PerformanceRegressionReport:
+        pass
 
 
 class ICapacityPlanningVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> CapacityPlanReport: pass
+    def verify(self) -> CapacityPlanReport:
+        pass
 
 
 class IPerformanceFailureVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceFailureReport: pass
+    def verify(self) -> PerformanceFailureReport:
+        pass
 
 
 class IPerformanceObservabilityVerifier(IPerformanceVerifier):
     @abstractmethod
-    def verify(self) -> PerformanceObservabilityReport: pass
+    def verify(self) -> PerformanceObservabilityReport:
+        pass
 
 
 class IAIPerformanceScorer(ABC):
     @abstractmethod
-    def score_reports(self, reports: Dict[str, Any]) -> EnterpriseAIPerformanceCertificationReport: pass
+    def score_reports(self, reports: Dict[str, Any]) -> EnterpriseAIPerformanceCertificationReport:
+        pass
 
 
 class IAIPerformanceExporter(ABC):
     @abstractmethod
-    def export(self, reports: Dict[str, Any], certification: EnterpriseAIPerformanceCertificationReport, output_dir: str) -> List[str]: pass
+    def export(
+        self, reports: Dict[str, Any], certification: EnterpriseAIPerformanceCertificationReport, output_dir: str
+    ) -> List[str]:
+        pass
 
 
 class IAIPerformanceRuntime(ABC):
     @abstractmethod
-    def run_full_verification(self, output_dir: str) -> Dict[str, Any]: pass
+    def run_full_verification(self, output_dir: str) -> Dict[str, Any]:
+        pass
 
     @abstractmethod
-    def get_latest_certification(self) -> Optional[EnterpriseAIPerformanceCertificationReport]: pass
+    def get_latest_certification(self) -> Optional[EnterpriseAIPerformanceCertificationReport]:
+        pass

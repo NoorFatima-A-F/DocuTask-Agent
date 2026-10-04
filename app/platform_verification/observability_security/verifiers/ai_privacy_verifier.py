@@ -3,6 +3,7 @@ Phase 3I.7.4: AI Workflow Telemetry Privacy Verifier
 Verifies that raw user documents, prompts with private data, and unredacted model responses are NEVER stored in telemetry.
 Only metadata (document_id, processing_time, schema_success, token_count, model_version) is allowed.
 """
+
 from typing import List
 from ..domain.interfaces import IAIPrivacyVerifier
 from ..domain.models import AITelemetryPrivacySpec, AITelemetryPrivacyReport

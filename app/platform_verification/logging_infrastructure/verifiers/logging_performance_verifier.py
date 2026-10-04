@@ -1,6 +1,7 @@
 """
 3I.2.8 & 3I.2.10: Logging Performance & Retention Verifier
 """
+
 from typing import List
 from ..domain.models import RetentionTierSpec, PerformanceReport
 from ..domain.interfaces import ILoggingPerformanceVerifier
@@ -28,5 +29,5 @@ class LoggingPerformanceVerifier(ILoggingPerformanceVerifier):
             cpu_overhead_pct=1.4,
             memory_usage_mb=48.0,
             retention_tiers=tiers,
-            performance_compliant=True
+            performance_compliant=True,
         )

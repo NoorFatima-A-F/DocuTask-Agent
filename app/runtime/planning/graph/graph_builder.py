@@ -18,9 +18,7 @@ class ExecutionGraphBuilder:
     """Builds fully specified ExecutionDAG instances from domain mission templates."""
 
     @classmethod
-    def build_financial_invoice_audit_dag(
-        cls, mission_id: str, document_id: Optional[str] = None
-    ) -> ExecutionDAG:
+    def build_financial_invoice_audit_dag(cls, mission_id: str, document_id: Optional[str] = None) -> ExecutionDAG:
         """Synthesizes standard 5-stage parallel invoice audit DAG."""
         dag = ExecutionDAG(dag_id=f"dag-{uuid.uuid4().hex[:8]}", mission_id=mission_id)
 

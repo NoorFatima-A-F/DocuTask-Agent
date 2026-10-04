@@ -1,6 +1,7 @@
 """
 Enterprise Quality Gate Engine for evaluating functional, performance, AI quality, security, and reliability gates.
 """
+
 from __future__ import annotations
 from typing import Any, Dict, List, Optional
 from app.platform_verification.certification_engine.domain.interfaces import IQualityGateEngine
@@ -35,9 +36,7 @@ class EnterpriseQualityGateEngine(IQualityGateEngine):
         active_exceptions: Optional[List[ExceptionRequest]] = None,
     ) -> List[GateEvaluationResult]:
         exceptions = active_exceptions or []
-        active_exception_map = {
-            e.gate_id: e for e in exceptions if e.status == ExceptionStatus.APPROVED
-        }
+        active_exception_map = {e.gate_id: e for e in exceptions if e.status == ExceptionStatus.APPROVED}
 
         results: List[GateEvaluationResult] = []
         for gid in gate_ids:
@@ -56,7 +55,7 @@ class EnterpriseQualityGateEngine(IQualityGateEngine):
                     if passed
                     else f"Failed: {cond.metric_name} is {actual_val}, required {cond.operator.value} {cond.threshold}"
                 )
-                
+
                 # Check for active approved exception
                 if not passed and gate.id in active_exception_map:
                     exc = active_exception_map[gate.id]

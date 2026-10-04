@@ -122,7 +122,9 @@ class DecisionLoop:
 
             # Checkpoint graph state prior to execution wave
             if self.repo:
-                snapshot = TaskGraphSnapshot.create(ctx.task_graph, session_id=ctx.session_id, step_index=ctx.iteration_count)
+                snapshot = TaskGraphSnapshot.create(
+                    ctx.task_graph, session_id=ctx.session_id, step_index=ctx.iteration_count
+                )
                 self.repo.save(snapshot)
 
             # Execute topological waves until DAG completes or blocks
@@ -185,7 +187,9 @@ class DecisionLoop:
             await self.events.emit_completion(ctx)
         else:
             self._transition(AutonomousState.FAILED, ctx)
-            await self.events.emit_failure(f"Reflection failed: {critique_result.all_issues if critique_result else 'Unknown'}", ctx)
+            await self.events.emit_failure(
+                f"Reflection failed: {critique_result.all_issues if critique_result else 'Unknown'}", ctx
+            )
 
         summary = (
             f"Execution {ctx.execution_id} concluded in state {self.state_machine.current_state.value} "

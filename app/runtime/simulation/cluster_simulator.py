@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class VirtualWorker(BaseModel):
     """Virtual worker node within the digital twin cluster."""
+
     worker_id: str
     node_tier: str = "GPU_A10G_24GB"
     cpu_utilization_pct: float = 24.0
@@ -35,6 +36,7 @@ class SimulationEvent(BaseModel):
 
 class DigitalTwinClusterReport(BaseModel):
     """Execution telemetry from a digital twin simulation run."""
+
     simulation_id: str = Field(default_factory=lambda: f"sim_{uuid.uuid4().hex[:8]}")
     total_virtual_workers: int = 1000
     simulated_duration_sec: float = 300.0
@@ -102,7 +104,7 @@ class DigitalTwinClusterSimulator:
             if evt.event_type == "MISSION_ARRIVAL":
                 # Find least loaded worker
                 min(self.workers.values(), key=lambda w: w.active_tasks)
-                
+
                 # Check for chaos fault
                 is_fault = self.random.random() < chaos_fault_rate
                 if is_fault:

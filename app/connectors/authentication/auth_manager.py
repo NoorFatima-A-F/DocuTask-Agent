@@ -37,7 +37,9 @@ class AuthenticationManager:
         elif auth_type == AuthType.BASIC:
             return "username" in credentials and "password" in credentials
         elif auth_type == AuthType.SERVICE_ACCOUNT:
-            return "client_email" in credentials or "private_key" in credentials or "service_account_json" in credentials
+            return (
+                "client_email" in credentials or "private_key" in credentials or "service_account_json" in credentials
+            )
         return len(credentials) > 0
 
     def build_auth_headers(self, auth_type: AuthType, credentials: Dict[str, Any]) -> Dict[str, str]:

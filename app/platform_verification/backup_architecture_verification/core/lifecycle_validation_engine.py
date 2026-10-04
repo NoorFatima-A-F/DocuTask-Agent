@@ -4,6 +4,7 @@ Validates the complete 8-stage lifecycle:
 Asset -> Backup -> Verification -> Storage -> Replication -> Retention -> Expiration -> Secure Destruction.
 Detects orphaned backups, unexpired backups, and missing deletion audit records.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     LifecycleStage,
@@ -138,9 +139,7 @@ class LifecycleValidationEngine(ILifecycleValidationEngine):
 
         return reports
 
-    def export_lifecycle_report_json(
-        self, reports: List[LifecycleValidationReport]
-    ) -> Dict[str, Any]:
+    def export_lifecycle_report_json(self, reports: List[LifecycleValidationReport]) -> Dict[str, Any]:
         """Formats the lifecycle validation report to JSON dictionary."""
         passed_count = len([r for r in reports if r.lifecycle_complete])
         return {

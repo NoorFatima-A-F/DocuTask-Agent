@@ -61,7 +61,10 @@ class CounterfactualEngine:
                 counterfactual_state={"p99_latency_ms": 28.1, "monthly_spend_usd": 21200.0, "error_count": 0},
                 divergence_metric=0.28,
                 regret_score=0.15,
-                insights=["Doubling replicas would reduce latency by 33% but increase cloud cost by $2,700/mo.", "Optimal trade-off achieved at 4 replicas."],
+                insights=[
+                    "Doubling replicas would reduce latency by 33% but increase cloud cost by $2,700/mo.",
+                    "Optimal trade-off achieved at 4 replicas.",
+                ],
             ),
             CounterfactualExperiment(
                 experiment_id="cf_stripe_batch_invoicing",

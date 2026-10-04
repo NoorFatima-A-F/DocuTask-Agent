@@ -46,7 +46,7 @@ class ExecutionDiffComparator:
         target_run: ExperimentRunResult,
     ) -> ExecutionTraceDiffReport:
         """Execute fine-grained diff between two run results."""
-        status_match = (base_run.status == target_run.status)
+        status_match = base_run.status == target_run.status
         lat_diff = target_run.duration_ms - base_run.duration_ms
         lat_ratio = (target_run.duration_ms / base_run.duration_ms) if base_run.duration_ms > 0 else 1.0
 
@@ -58,17 +58,21 @@ class ExecutionDiffComparator:
         for step in sorted(all_steps):
             h1 = base_run.intermediate_hashes.get(step)
             h2 = target_run.intermediate_hashes.get(step)
-            identical = (h1 == h2 and h1 is not None)
+            identical = h1 == h2 and h1 is not None
             if not identical:
                 differing_count += 1
-            step_deltas.append(ExecutionStepDelta(
-                step_name=step,
-                base_hash=h1,
-                target_hash=h2,
-                is_identical=identical,
-            ))
+            step_deltas.append(
+                ExecutionStepDelta(
+                    step_name=step,
+                    base_hash=h1,
+                    target_hash=h2,
+                    is_identical=identical,
+                )
+            )
 
-        exact = status_match and (differing_count == 0) and (base_run.final_output_digest == target_run.final_output_digest)
+        exact = (
+            status_match and (differing_count == 0) and (base_run.final_output_digest == target_run.final_output_digest)
+        )
 
         h_payload = {
             "base": base_run.run_id,

@@ -18,5 +18,5 @@ class CorrelationManager:
             workflow_id=parent.workflow_id,
             execution_id=parent.execution_id,
             session_id=parent.session_id,
-            tenant_id=parent.tenant_id
+            tenant_id=parent.tenant_id,
         )

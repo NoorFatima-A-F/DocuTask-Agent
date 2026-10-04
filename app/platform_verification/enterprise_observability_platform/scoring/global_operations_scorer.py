@@ -9,6 +9,7 @@ Evaluates weighted scores across:
   - Automation control: 10%
   - Cloud readiness: 10%
 """
+
 from typing import Dict, Any, List
 from datetime import datetime, timezone
 from app.platform_verification.enterprise_observability_platform.domain.models import (
@@ -128,7 +129,11 @@ class GlobalOperationsScorer(IGlobalOperationsScorer):
             weight_pct=weight_cr,
             raw_score_pct=round(raw_cr, 2),
             weighted_score_pct=round(weighted_cr, 2),
-            evaluated_verifiers=["multi_region_verifier", "cloud_integration_verifier", "production_readiness_verifier"],
+            evaluated_verifiers=[
+                "multi_region_verifier",
+                "cloud_integration_verifier",
+                "production_readiness_verifier",
+            ],
             status="PASS" if raw_cr >= 90.0 else "FAIL",
         )
 
@@ -153,7 +158,7 @@ class GlobalOperationsScorer(IGlobalOperationsScorer):
         else:
             cert_tier = GlobalCertificationTier.FAILED
 
-        is_certified = (cert_tier == GlobalCertificationTier.ENTERPRISE_GLOBAL_OPERATIONS_READY)
+        is_certified = cert_tier == GlobalCertificationTier.ENTERPRISE_GLOBAL_OPERATIONS_READY
 
         return GlobalOperationsCertificationReport(
             report_title="Enterprise Observability Platform & Global Reliability Control Certification",

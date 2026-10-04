@@ -2,19 +2,25 @@
 Change Tracker & Single-Click Rollback Engine.
 Governs change requests, formal approvals, audit logging, and automated rollbacks.
 """
+
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from app.platform_verification.config_versioning.domain.models import (
-    ChangeRequest, ChangeApprovalStatus, RollbackRecord
+    ChangeRequest,
+    ChangeApprovalStatus,
+    RollbackRecord,
 )
 from app.platform_verification.config_versioning.core.registry import configuration_registry
+
 
 class ChangeTracker:
     def __init__(self):
         self._change_requests: Dict[str, ChangeRequest] = {}
         self._rollback_records: Dict[str, RollbackRecord] = {}
 
-    def submit_change(self, title: str, author: str, reason: str, proposed_changes: dict, rollback_plan: str) -> ChangeRequest:
+    def submit_change(
+        self, title: str, author: str, reason: str, proposed_changes: dict, rollback_plan: str
+    ) -> ChangeRequest:
         req = ChangeRequest(
             title=title,
             author=author,
@@ -22,7 +28,7 @@ class ChangeTracker:
             proposed_changes=proposed_changes,
             impact_assessment=f"Assessed impact on verification modules for {len(proposed_changes)} modified keys.",
             rollback_plan=rollback_plan,
-            status=ChangeApprovalStatus.SUBMITTED
+            status=ChangeApprovalStatus.SUBMITTED,
         )
         self._change_requests[req.change_id] = req
         return req
@@ -36,7 +42,9 @@ class ChangeTracker:
         req.approved_at = datetime.now(timezone.utc).isoformat()
         return req
 
-    def execute_rollback(self, change_id: str, to_snapshot_id: str, reason: str, executed_by: str = "Enterprise SRE Architect") -> RollbackRecord:
+    def execute_rollback(
+        self, change_id: str, to_snapshot_id: str, reason: str, executed_by: str = "Enterprise SRE Architect"
+    ) -> RollbackRecord:
         req = self._change_requests.get(change_id)
         target_snapshot = configuration_registry.get_snapshot(to_snapshot_id)
         if not target_snapshot:
@@ -48,7 +56,7 @@ class ChangeTracker:
             to_snapshot_id=to_snapshot_id,
             reason=reason,
             executed_by=executed_by,
-            is_successful=True
+            is_successful=True,
         )
         if req:
             req.status = ChangeApprovalStatus.ROLLED_BACK
@@ -60,5 +68,6 @@ class ChangeTracker:
 
     def list_rollbacks(self) -> List[RollbackRecord]:
         return list(self._rollback_records.values())
+
 
 change_tracker = ChangeTracker()

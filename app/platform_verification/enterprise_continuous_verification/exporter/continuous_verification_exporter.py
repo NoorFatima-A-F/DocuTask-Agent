@@ -45,7 +45,15 @@ class ContinuousVerificationExporter:
         self.deploy_dir = self.base_dir / "deployment"
         self.cert_dir = self.base_dir / "certification"
 
-        for d in [self.build_dir, self.security_dir, self.infra_dir, self.perf_dir, self.chaos_dir, self.deploy_dir, self.cert_dir]:
+        for d in [
+            self.build_dir,
+            self.security_dir,
+            self.infra_dir,
+            self.perf_dir,
+            self.chaos_dir,
+            self.deploy_dir,
+            self.cert_dir,
+        ]:
             d.mkdir(parents=True, exist_ok=True)
 
     def _compute_sha256(self, file_path: Union[str, Path]) -> str:

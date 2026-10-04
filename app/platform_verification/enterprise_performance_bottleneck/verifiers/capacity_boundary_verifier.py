@@ -29,11 +29,51 @@ class CapacityBoundaryVerifier(ICapacityBoundaryVerifier):
 
     def verify(self) -> CapacityBoundaryReport:
         stages = [
-            CapacityBoundaryStage(concurrent_users=100, p95_latency_ms=42.0, error_rate_pct=0.0, cpu_pct=25.0, memory_pct=35.0, queue_size=50, zone="Normal"),
-            CapacityBoundaryStage(concurrent_users=500, p95_latency_ms=85.0, error_rate_pct=0.0, cpu_pct=42.0, memory_pct=48.0, queue_size=200, zone="Normal"),
-            CapacityBoundaryStage(concurrent_users=1000, p95_latency_ms=180.0, error_rate_pct=0.1, cpu_pct=65.0, memory_pct=62.0, queue_size=800, zone="Warning"),
-            CapacityBoundaryStage(concurrent_users=2000, p95_latency_ms=450.0, error_rate_pct=0.5, cpu_pct=82.0, memory_pct=78.0, queue_size=3500, zone="Warning"),
-            CapacityBoundaryStage(concurrent_users=5000, p95_latency_ms=2200.0, error_rate_pct=5.0, cpu_pct=96.0, memory_pct=92.0, queue_size=15000, zone="Failure"),
+            CapacityBoundaryStage(
+                concurrent_users=100,
+                p95_latency_ms=42.0,
+                error_rate_pct=0.0,
+                cpu_pct=25.0,
+                memory_pct=35.0,
+                queue_size=50,
+                zone="Normal",
+            ),
+            CapacityBoundaryStage(
+                concurrent_users=500,
+                p95_latency_ms=85.0,
+                error_rate_pct=0.0,
+                cpu_pct=42.0,
+                memory_pct=48.0,
+                queue_size=200,
+                zone="Normal",
+            ),
+            CapacityBoundaryStage(
+                concurrent_users=1000,
+                p95_latency_ms=180.0,
+                error_rate_pct=0.1,
+                cpu_pct=65.0,
+                memory_pct=62.0,
+                queue_size=800,
+                zone="Warning",
+            ),
+            CapacityBoundaryStage(
+                concurrent_users=2000,
+                p95_latency_ms=450.0,
+                error_rate_pct=0.5,
+                cpu_pct=82.0,
+                memory_pct=78.0,
+                queue_size=3500,
+                zone="Warning",
+            ),
+            CapacityBoundaryStage(
+                concurrent_users=5000,
+                p95_latency_ms=2200.0,
+                error_rate_pct=5.0,
+                cpu_pct=96.0,
+                memory_pct=92.0,
+                queue_size=15000,
+                zone="Failure",
+            ),
         ]
 
         normal_max = max(s.concurrent_users for s in stages if s.zone == "Normal")

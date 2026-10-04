@@ -25,6 +25,7 @@ def require_oversight(
 
     def decorator(func: Callable):
         if inspect.iscoroutinefunction(func):
+
             @functools.wraps(func)
             async def async_wrapper(*args, **kwargs):
                 ctx = kwargs.get("oversight_context")
@@ -48,8 +49,10 @@ def require_oversight(
                     )
 
                 return await func(*args, **kwargs)
+
             return async_wrapper
         else:
+
             @functools.wraps(func)
             def sync_wrapper(*args, **kwargs):
                 ctx = kwargs.get("oversight_context")
@@ -73,6 +76,7 @@ def require_oversight(
                     )
 
                 return func(*args, **kwargs)
+
             return sync_wrapper
 
     return decorator

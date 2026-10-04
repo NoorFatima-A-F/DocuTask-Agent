@@ -2,10 +2,12 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import List
 
+
 class ChangeType(str, Enum):
     TYPE_A_PATCH = "TYPE_A_PATCH"
     TYPE_B_FEATURE = "TYPE_B_FEATURE"
     TYPE_C_ARCHITECTURAL = "TYPE_C_ARCHITECTURAL"
+
 
 @dataclass(frozen=True)
 class ChangeClassificationResult:
@@ -13,6 +15,7 @@ class ChangeClassificationResult:
     requires_adr: bool
     requires_architecture_review: bool
     affected_components: List[str]
+
 
 class ChangeClassifier:
     @staticmethod
@@ -40,19 +43,19 @@ class ChangeClassifier:
                 change_type=ChangeType.TYPE_C_ARCHITECTURAL,
                 requires_adr=True,
                 requires_architecture_review=True,
-                affected_components=sorted(list(affected))
+                affected_components=sorted(list(affected)),
             )
         if is_type_b:
             return ChangeClassificationResult(
                 change_type=ChangeType.TYPE_B_FEATURE,
                 requires_adr=False,
                 requires_architecture_review=False,
-                affected_components=sorted(list(affected))
+                affected_components=sorted(list(affected)),
             )
 
         return ChangeClassificationResult(
             change_type=ChangeType.TYPE_A_PATCH,
             requires_adr=False,
             requires_architecture_review=False,
-            affected_components=sorted(list(affected))
+            affected_components=sorted(list(affected)),
         )

@@ -21,12 +21,14 @@ from .models import (
 
 class IChangeImpactAnalyzer(ABC):
     @abstractmethod
-    def analyze_changes(self, modified_files: Optional[List[str]] = None) -> ChangeImpactReport: pass
+    def analyze_changes(self, modified_files: Optional[List[str]] = None) -> ChangeImpactReport:
+        pass
 
 
 class IBuildVerifier(ABC):
     @abstractmethod
-    def verify_build(self, image_name: str = "docutask-api", commit_hash: str = "HEAD") -> BuildArtifactReport: pass
+    def verify_build(self, image_name: str = "docutask-api", commit_hash: str = "HEAD") -> BuildArtifactReport:
+        pass
 
 
 class ISecurityGateEngine(ABC):
@@ -36,17 +38,20 @@ class ISecurityGateEngine(ABC):
         critical_cves: int = 0,
         high_cves: int = 0,
         secrets_found: int = 0,
-    ) -> SecurityGateReport: pass
+    ) -> SecurityGateReport:
+        pass
 
 
 class IDisposableEnvManager(ABC):
     @abstractmethod
-    def provision_and_test(self) -> DisposableEnvReport: pass
+    def provision_and_test(self) -> DisposableEnvReport:
+        pass
 
 
 class IIntegrationWorkflowRunner(ABC):
     @abstractmethod
-    def execute_e2e_workflow(self) -> IntegrationWorkflowReport: pass
+    def execute_e2e_workflow(self) -> IntegrationWorkflowReport:
+        pass
 
 
 class IPerformanceGateValidator(ABC):
@@ -55,21 +60,29 @@ class IPerformanceGateValidator(ABC):
         self,
         current_p95_ms: float = 42.1,
         baseline_p95_ms: float = 40.0,
-    ) -> PerformanceRegressionReport: pass
+    ) -> PerformanceRegressionReport:
+        pass
 
 
 class IChaosPipelineRunner(ABC):
     @abstractmethod
-    def run_chaos_experiments(self) -> ChaosPipelineReport: pass
+    def run_chaos_experiments(self) -> ChaosPipelineReport:
+        pass
 
 
 class IDriftDetector(ABC):
     @abstractmethod
-    def detect_drift(self, declared_count: int = 28, actual_count: int = 28) -> InfrastructureDriftReport: pass
+    def detect_drift(self, declared_count: int = 28, actual_count: int = 28) -> InfrastructureDriftReport:
+        pass
 
 
 class IReleaseGatekeeper(ABC):
     @abstractmethod
-    def evaluate_release(self, gate_reports: Dict[str, Any]) -> ReleaseDecision: pass
+    def evaluate_release(self, gate_reports: Dict[str, Any]) -> ReleaseDecision:
+        pass
+
     @abstractmethod
-    def issue_certificate(self, decision: ReleaseDecision, gate_reports: Dict[str, Any]) -> ProductionReadinessCertificate: pass
+    def issue_certificate(
+        self, decision: ReleaseDecision, gate_reports: Dict[str, Any]
+    ) -> ProductionReadinessCertificate:
+        pass

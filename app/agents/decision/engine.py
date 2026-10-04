@@ -53,7 +53,7 @@ class DecisionEngine(IDecisionEngine):
         self,
         governance: Optional[GovernanceFramework] = None,
         rule_evaluator: Optional[RuleEvaluator] = None,
-        policy_evaluator: Optional[PolicyEvaluator] = None
+        policy_evaluator: Optional[PolicyEvaluator] = None,
     ):
         self.governance = governance or GovernanceFramework()
         self.rule_evaluator = rule_evaluator or RuleEvaluator()
@@ -75,7 +75,7 @@ class DecisionEngine(IDecisionEngine):
                 step_number=1,
                 rule_or_policy="CostPolicy",
                 outcome="PASSED" if cost_passed else "FAILED",
-                explanation=f"Estimated cost ${context.estimated_cost_usd} vs limit ${self.governance.cost_policy.max_cost_per_execution_usd}"
+                explanation=f"Estimated cost ${context.estimated_cost_usd} vs limit ${self.governance.cost_policy.max_cost_per_execution_usd}",
             )
         )
 
@@ -85,18 +85,28 @@ class DecisionEngine(IDecisionEngine):
             risk_value = 0.85
 
         # 2. Approval Requirement Check
-        req_approval = context.estimated_cost_usd > self.governance.approval_policy.require_human_approval_above_cost_usd
-        approval_req = ApprovalRequirement(requires_approval=req_approval, reason="Cost threshold exceeded" if req_approval else None)
+        req_approval = (
+            context.estimated_cost_usd > self.governance.approval_policy.require_human_approval_above_cost_usd
+        )
+        approval_req = ApprovalRequirement(
+            requires_approval=req_approval, reason="Cost threshold exceeded" if req_approval else None
+        )
 
         duration_ms = (time.perf_counter() - start_time) * 1000.0
 
         explanation = DecisionExplanation(
-            summary="Decision evaluation completed successfully." if is_approved else "Decision evaluation rejected due to policy bounds.",
+            summary="Decision evaluation completed successfully."
+            if is_approved
+            else "Decision evaluation rejected due to policy bounds.",
             reasoning_steps=reasoning,
-            confidence_breakdown=0.98 if is_approved else 0.4
+            confidence_breakdown=0.98 if is_approved else 0.4,
         )
 
-        recs = [Recommendation(action="PROCEED", rationale="All policy checks passed")] if is_approved else [Recommendation(action="REQUEST_HUMAN_APPROVAL", rationale="Cost limits exceeded")]
+        recs = (
+            [Recommendation(action="PROCEED", rationale="All policy checks passed")]
+            if is_approved
+            else [Recommendation(action="REQUEST_HUMAN_APPROVAL", rationale="Cost limits exceeded")]
+        )
 
         return DecisionResult(
             is_approved=is_approved,
@@ -104,5 +114,5 @@ class DecisionEngine(IDecisionEngine):
             approval_requirement=approval_req,
             explanation=explanation,
             recommendations=recs,
-            evaluation_duration_ms=round(duration_ms, 2)
+            evaluation_duration_ms=round(duration_ms, 2),
         )

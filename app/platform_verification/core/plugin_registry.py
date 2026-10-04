@@ -1,9 +1,11 @@
 """
 Plugin Registry & Dynamic Discovery Engine
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.domain.interfaces import VerificationPlugin
 from app.platform_verification.domain.exceptions import PluginNotFoundException
+
 
 class PluginRegistry:
     def __init__(self):
@@ -18,9 +20,7 @@ class PluginRegistry:
         return self._plugins[plugin_name]
 
     def list_plugins(self) -> List[Dict[str, str]]:
-        return [
-            {"plugin_name": p.plugin_name, "target_domain": p.target_domain}
-            for p in self._plugins.values()
-        ]
+        return [{"plugin_name": p.plugin_name, "target_domain": p.target_domain} for p in self._plugins.values()]
+
 
 plugin_registry = PluginRegistry()

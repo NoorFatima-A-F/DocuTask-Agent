@@ -5,6 +5,7 @@ from datetime import datetime
 from typing import Callable, Optional, Set
 from app.runtime.events.base import RuntimeEvent
 
+
 @dataclass
 class EventSubscription:
     subscription_id: str

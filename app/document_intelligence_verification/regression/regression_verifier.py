@@ -82,7 +82,7 @@ class RegressionVerifier:
             "assertion": AssertionResult(
                 name="Accuracy_Drift_Regression_Guardrails",
                 passed=passed,
-                message=f"Accuracy regression monitor verified stable performance (Delta: {delta*100:+.2f}%, Zero drift).",
+                message=f"Accuracy regression monitor verified stable performance (Delta: {delta * 100:+.2f}%, Zero drift).",
                 execution_time_ms=t_elapsed,
                 details={"baseline": baseline_accuracy, "current": current_accuracy, "delta": delta},
             ),

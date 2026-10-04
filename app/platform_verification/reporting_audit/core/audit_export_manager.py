@@ -1,6 +1,7 @@
 """
 Audit Export Manager bundling immutable audit packages for external and internal review.
 """
+
 from __future__ import annotations
 from datetime import datetime, timezone
 import hashlib
@@ -48,9 +49,7 @@ class EnterpriseAuditExportManager(IAuditExportManager):
             {"level": "LEVEL_7_ENTERPRISE_CERTIFIED", "status": "ACTIVE", "issued_by": "GovernanceBoard"}
         ]
 
-        approval_history = [
-            {"actor": "LeadReleaseArchitect", "action": "Approved", "timestamp": generated_at}
-        ]
+        approval_history = [{"actor": "LeadReleaseArchitect", "action": "Approved", "timestamp": generated_at}]
 
         # Compute composite package checksum
         payload = f"{pkg_id}:{system_version}:{generated_at}:{len(reports)}:{len(evidence_manifest)}"

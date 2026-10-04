@@ -53,7 +53,7 @@ class PluginRuntime:
 
         latency_ms = round((time.perf_counter() - t0) * 1000.0, 2)
         exec_record = {
-            "execution_id": f"exec-{int(time.time()*1000)}",
+            "execution_id": f"exec-{int(time.time() * 1000)}",
             "plugin_id": plugin_id,
             "capability": capability,
             "latency_ms": max(latency_ms, 5.0),

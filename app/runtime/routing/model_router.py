@@ -41,7 +41,7 @@ class ScientificModelRouter:
 
         reason = (
             f"Selected {selected['display_name']} maximizing utility ({selected['expected_utility']}) "
-            f"with expected accuracy {selected['expected_accuracy']*100:.1f}%, latency {selected['expected_latency_ms']}ms, "
+            f"with expected accuracy {selected['expected_accuracy'] * 100:.1f}%, latency {selected['expected_latency_ms']}ms, "
             f"and cost ${selected['expected_cost_usd']:.5f}."
         )
 

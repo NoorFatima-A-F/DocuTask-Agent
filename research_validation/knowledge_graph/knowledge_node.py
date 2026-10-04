@@ -16,6 +16,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class KnowledgeNode:
     """Base immutable node in the scientific knowledge graph."""
+
     node_id: str
     entity_type: EntityType
     name: str
@@ -36,42 +37,49 @@ class KnowledgeNode:
 @dataclass(frozen=True)
 class ExperimentNode(KnowledgeNode):
     """Represents a specific executed or planned scientific experiment."""
+
     pass
 
 
 @dataclass(frozen=True)
 class DatasetNode(KnowledgeNode):
     """Represents a benchmark or training dataset."""
+
     pass
 
 
 @dataclass(frozen=True)
 class MetricNode(KnowledgeNode):
     """Represents an observed or derived quantitative metric."""
+
     pass
 
 
 @dataclass(frozen=True)
 class ModelNode(KnowledgeNode):
     """Represents a machine learning or rule-based document model."""
+
     pass
 
 
 @dataclass(frozen=True)
 class EnvironmentNode(KnowledgeNode):
     """Represents the computational runtime and hardware environment."""
+
     pass
 
 
 @dataclass(frozen=True)
 class HypothesisNode(KnowledgeNode):
     """Represents an active or tested scientific hypothesis."""
+
     pass
 
 
 @dataclass(frozen=True)
 class ClaimNode(KnowledgeNode):
     """Represents an empirical or scientific claim."""
+
     pass
 
 
@@ -90,7 +98,7 @@ def create_node(
         "properties": props,
     }
     digest = hash_canonical_json(payload)
-    
+
     node_cls_map = {
         EntityType.EXPERIMENT: ExperimentNode,
         EntityType.DATASET: DatasetNode,

@@ -1,6 +1,7 @@
 """
 Weighted Architecture Scoring Engine.
 """
+
 from __future__ import annotations
 from typing import List
 from app.platform_verification.architecture_verification.domain.interfaces import IArchitectureScoringEngine

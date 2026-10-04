@@ -34,11 +34,13 @@ class TelemetryExporter:
         now_ns = time.time_ns()
         data_points = []
         for name, val in metrics_dict.items():
-            data_points.append({
-                "name": f"docutask.{name}",
-                "time_unix_nano": now_ns,
-                "as_double": float(val),
-            })
+            data_points.append(
+                {
+                    "name": f"docutask.{name}",
+                    "time_unix_nano": now_ns,
+                    "as_double": float(val),
+                }
+            )
         return {
             "resource_metrics": [
                 {

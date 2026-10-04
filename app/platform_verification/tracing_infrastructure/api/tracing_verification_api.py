@@ -1,6 +1,7 @@
 """
 FastAPI Router for Phase 3I.4 Enterprise Distributed Tracing Infrastructure Verification
 """
+
 from fastapi import APIRouter
 from typing import Dict, Any
 from ..runtime.tracing_verification_runtime import TracingVerificationRuntime
@@ -121,5 +122,5 @@ def get_health() -> Dict[str, Any]:
         "status": "HEALTHY",
         "subsystem": "tracing_infrastructure",
         "engine": "DocuTask Enterprise Tracing Engine",
-        "phase": "3I.4"
+        "phase": "3I.4",
     }

@@ -104,8 +104,12 @@ class TaskDecomposer:
         t3_id = f"task_compliance_eval_{uuid.uuid4().hex[:6]}"
 
         t1 = PlannedTask(task_id=t1_id, name="Document Ingestion & OCR", action="ocr", dependencies=[])
-        t2 = PlannedTask(task_id=t2_id, name="Legal Clause Extraction", action="clause_extraction", dependencies=[t1_id])
-        t3 = PlannedTask(task_id=t3_id, name="Regulatory Compliance Evaluation", action="regulatory_audit", dependencies=[t2_id])
+        t2 = PlannedTask(
+            task_id=t2_id, name="Legal Clause Extraction", action="clause_extraction", dependencies=[t1_id]
+        )
+        t3 = PlannedTask(
+            task_id=t3_id, name="Regulatory Compliance Evaluation", action="regulatory_audit", dependencies=[t2_id]
+        )
         return [t1, t2, t3]
 
     def _decompose_contract_review(self, goal: GoalSpecification) -> List[PlannedTask]:
@@ -114,7 +118,9 @@ class TaskDecomposer:
         t3_id = f"task_risk_assessment_{uuid.uuid4().hex[:6]}"
 
         t1 = PlannedTask(task_id=t1_id, name="Contract Ingestion & OCR", action="ocr", dependencies=[])
-        t2 = PlannedTask(task_id=t2_id, name="Contract Clause Extraction", action="clause_extraction", dependencies=[t1_id])
+        t2 = PlannedTask(
+            task_id=t2_id, name="Contract Clause Extraction", action="clause_extraction", dependencies=[t1_id]
+        )
         t3 = PlannedTask(task_id=t3_id, name="Legal Risk Assessment", action="risk_assessment", dependencies=[t2_id])
         return [t1, t2, t3]
 
@@ -124,7 +130,9 @@ class TaskDecomposer:
         t3_id = f"task_anomaly_score_{uuid.uuid4().hex[:6]}"
 
         t1 = PlannedTask(task_id=t1_id, name="High-Res Image Acquisition", action="ocr", dependencies=[])
-        t2 = PlannedTask(task_id=t2_id, name="Visual & Font Tamper Analysis", action="tamper_analysis", dependencies=[t1_id])
+        t2 = PlannedTask(
+            task_id=t2_id, name="Visual & Font Tamper Analysis", action="tamper_analysis", dependencies=[t1_id]
+        )
         t3 = PlannedTask(task_id=t3_id, name="Fraud & Anomaly Scoring", action="fraud_scoring", dependencies=[t2_id])
         return [t1, t2, t3]
 

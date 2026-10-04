@@ -13,6 +13,7 @@ from app.prompts.monitoring.metrics import PromptExecutionEvent
 
 class PromptUsageSummary(BaseModel):
     """Aggregated usage and cost metrics for a prompt asset."""
+
     prompt_id: str
     organization_id: str
     total_invocations: int = 0
@@ -41,10 +42,7 @@ class PromptAnalyticsEngine:
         organization_id: str,
     ) -> PromptUsageSummary:
         """Generate usage and latency summary for a specific prompt."""
-        events = [
-            e for e in self._events
-            if e.organization_id == organization_id and e.prompt_id == prompt_id
-        ]
+        events = [e for e in self._events if e.organization_id == organization_id and e.prompt_id == prompt_id]
         if not events:
             return PromptUsageSummary(
                 prompt_id=prompt_id,

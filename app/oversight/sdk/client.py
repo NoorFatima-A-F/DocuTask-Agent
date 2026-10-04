@@ -87,9 +87,7 @@ class OversightSDK:
     def get_review(self, review_id: str) -> Optional[ReviewRequest]:
         return self.engine.get_review_request(review_id)
 
-    def list_reviews(
-        self, tenant_id: Optional[str] = None, status: Optional[str] = None
-    ) -> List[ReviewRequest]:
+    def list_reviews(self, tenant_id: Optional[str] = None, status: Optional[str] = None) -> List[ReviewRequest]:
         return self.engine.list_review_requests(tenant_id=tenant_id)
 
     def get_evidence(self, review_id: str) -> Optional[ReviewEvidencePackage]:

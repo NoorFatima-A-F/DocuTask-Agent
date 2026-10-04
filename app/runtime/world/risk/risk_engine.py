@@ -75,7 +75,11 @@ class RiskPredictionEngine:
         return {
             "total_active_risks": len(self._risks),
             "composite_risk_index": composite_risk_index,
-            "overall_status": "STABLE" if composite_risk_index < 0.3 else "ATTENTION_REQUIRED" if composite_risk_index < 0.7 else "CRITICAL",
+            "overall_status": "STABLE"
+            if composite_risk_index < 0.3
+            else "ATTENTION_REQUIRED"
+            if composite_risk_index < 0.7
+            else "CRITICAL",
             "breakdown": {
                 "critical": criticals,
                 "high": highs,

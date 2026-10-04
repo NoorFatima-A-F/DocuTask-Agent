@@ -13,18 +13,18 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, List
 
-from research_validation.provenance.provenance_models import (
-    ProvActivity, ProvAgent, ProvEntity, ProvRelationType
-)
+from research_validation.provenance.provenance_models import ProvActivity, ProvAgent, ProvEntity, ProvRelationType
 
 
 # ============================================================================
 # 1. W3C PROV Document Schema
 # ============================================================================
 
+
 @dataclass
 class ProvRelation:
     """W3C PROV Relationship statement."""
+
     relation_type: ProvRelationType
     source_id: str
     target_id: str
@@ -34,12 +34,15 @@ class ProvRelation:
 @dataclass
 class ProvDocument:
     """Complete W3C PROV Document containing Entities, Activities, Agents, and Relations."""
+
     document_id: str
-    namespaces: Dict[str, str] = field(default_factory=lambda: {
-        "prov": "http://www.w3.org/ns/prov#",
-        "xsd": "http://www.w3.org/2001/XMLSchema#",
-        "rvisf": "https://deepmind.google/rvisf/provenance#"
-    })
+    namespaces: Dict[str, str] = field(
+        default_factory=lambda: {
+            "prov": "http://www.w3.org/ns/prov#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "rvisf": "https://deepmind.google/rvisf/provenance#",
+        }
+    )
     entities: Dict[str, ProvEntity] = field(default_factory=dict)
     activities: Dict[str, ProvActivity] = field(default_factory=dict)
     agents: Dict[str, ProvAgent] = field(default_factory=dict)
@@ -62,6 +65,7 @@ class ProvDocument:
 # 2. OpenLineage Specification Schema
 # ============================================================================
 
+
 class OpenLineageEventType(str, Enum):
     START = "START"
     RUNNING = "RUNNING"
@@ -74,6 +78,7 @@ class OpenLineageEventType(str, Enum):
 @dataclass
 class OpenLineageJob:
     """OpenLineage Job representation."""
+
     namespace: str
     name: str
     facets: Dict[str, Any] = field(default_factory=dict)
@@ -82,6 +87,7 @@ class OpenLineageJob:
 @dataclass
 class OpenLineageRun:
     """OpenLineage Run representation."""
+
     runId: str
     facets: Dict[str, Any] = field(default_factory=dict)
 
@@ -89,6 +95,7 @@ class OpenLineageRun:
 @dataclass
 class OpenLineageDataset:
     """OpenLineage Dataset representation."""
+
     namespace: str
     name: str
     facets: Dict[str, Any] = field(default_factory=dict)
@@ -109,6 +116,7 @@ class OpenLineageOutputDataset:
 @dataclass
 class OpenLineageRunEvent:
     """OpenLineage standard RunEvent JSON structure."""
+
     eventType: OpenLineageEventType
     eventTime: str  # ISO-8601 formatted string
     run: OpenLineageRun
@@ -122,21 +130,14 @@ class OpenLineageRunEvent:
         return {
             "eventType": self.eventType.value,
             "eventTime": self.eventTime,
-            "run": {
-                "runId": self.run.runId,
-                "facets": self.run.facets
-            },
-            "job": {
-                "namespace": self.job.namespace,
-                "name": self.job.name,
-                "facets": self.job.facets
-            },
+            "run": {"runId": self.run.runId, "facets": self.run.facets},
+            "job": {"namespace": self.job.namespace, "name": self.job.name, "facets": self.job.facets},
             "inputs": [
                 {
                     "namespace": i.dataset.namespace,
                     "name": i.dataset.name,
                     "facets": i.dataset.facets,
-                    "inputFacets": i.inputFacets
+                    "inputFacets": i.inputFacets,
                 }
                 for i in self.inputs
             ],
@@ -145,10 +146,10 @@ class OpenLineageRunEvent:
                     "namespace": o.dataset.namespace,
                     "name": o.dataset.name,
                     "facets": o.dataset.facets,
-                    "outputFacets": o.outputFacets
+                    "outputFacets": o.outputFacets,
                 }
                 for o in self.outputs
             ],
             "producer": self.producer,
-            "schemaURL": self.schemaURL
+            "schemaURL": self.schemaURL,
         }

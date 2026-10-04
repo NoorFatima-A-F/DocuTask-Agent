@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field, model_validator
 
 class PromptLifecycleState(str, enum.Enum):
     """10-state Prompt Lifecycle FSM."""
+
     DRAFT = "DRAFT"
     VALIDATION = "VALIDATION"
     TESTING = "TESTING"
@@ -27,6 +28,7 @@ class PromptLifecycleState(str, enum.Enum):
 
 class PromptCategory(str, enum.Enum):
     """Supported prompt functional categories."""
+
     SYSTEM_PROMPT = "SYSTEM_PROMPT"
     TASK_PROMPT = "TASK_PROMPT"
     AGENT_PROMPT = "AGENT_PROMPT"
@@ -42,6 +44,7 @@ class PromptCategory(str, enum.Enum):
 
 class RiskLevel(str, enum.Enum):
     """Risk classification for prompt assets."""
+
     LOW = "LOW"
     MEDIUM = "MEDIUM"
     HIGH = "HIGH"
@@ -50,6 +53,7 @@ class RiskLevel(str, enum.Enum):
 
 class PromptApprovalStatus(str, enum.Enum):
     """Approval gate status."""
+
     NOT_SUBMITTED = "NOT_SUBMITTED"
     PENDING_REVIEW = "PENDING_REVIEW"
     APPROVED = "APPROVED"
@@ -58,6 +62,7 @@ class PromptApprovalStatus(str, enum.Enum):
 
 class PromptVersion(BaseModel):
     """Immutable version snapshot of an enterprise prompt."""
+
     version_id: str
     prompt_id: str
     version_number: str = "1.0.0"
@@ -76,6 +81,7 @@ class PromptVersion(BaseModel):
 
 class Prompt(BaseModel):
     """Canonical Governed Enterprise Prompt Entity."""
+
     prompt_id: str
     name: str
     description: str = ""

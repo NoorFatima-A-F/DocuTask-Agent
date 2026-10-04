@@ -139,7 +139,7 @@ class InfrastructureLabEngine:
             )
         )
 
-        cold_overhead = (cold_lat / max(1e-9, warm_mean))
+        cold_overhead = cold_lat / max(1e-9, warm_mean)
 
         return InfrastructureLabReport(
             total_scenarios=len(scenarios),

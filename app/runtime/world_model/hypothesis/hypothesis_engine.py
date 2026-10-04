@@ -38,7 +38,9 @@ class HypothesisCandidate:
             "title": self.title,
             "explanation": self.explanation,
             "phenomenon_observed": self.phenomenon_observed,
-            "reasoning_mode": self.reasoning_mode.value if isinstance(self.reasoning_mode, ReasoningMode) else str(self.reasoning_mode),
+            "reasoning_mode": self.reasoning_mode.value
+            if isinstance(self.reasoning_mode, ReasoningMode)
+            else str(self.reasoning_mode),
             "status": self.status.value if isinstance(self.status, HypothesisStatus) else str(self.status),
             "prior_probability": round(self.prior_probability, 3),
             "posterior_probability": round(self.posterior_probability, 3),
@@ -116,7 +118,12 @@ class HypothesisEngine:
     def list_hypotheses(self, status: Optional[str] = None) -> List[HypothesisCandidate]:
         items = list(self._hypotheses.values())
         if status:
-            items = [h for h in items if (h.status.value if isinstance(h.status, HypothesisStatus) else str(h.status)).lower() == status.lower()]
+            items = [
+                h
+                for h in items
+                if (h.status.value if isinstance(h.status, HypothesisStatus) else str(h.status)).lower()
+                == status.lower()
+            ]
         return items
 
     def get_hypothesis(self, hypothesis_id: str) -> Optional[HypothesisCandidate]:

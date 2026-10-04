@@ -12,6 +12,7 @@ from app.agents.runtime.exceptions import PluginValidationError
 
 class PluginState(str, Enum):
     """Full 8-state plugin lifecycle."""
+
     DISCOVERED = "DISCOVERED"
     VALIDATED = "VALIDATED"
     LOADED = "LOADED"
@@ -24,6 +25,7 @@ class PluginState(str, Enum):
 
 class PluginManifest(BaseModel):
     """Complete enterprise specification for a runtime plugin."""
+
     plugin_id: str
     name: str
     version: str = "1.0.0"

@@ -1,6 +1,7 @@
 """
 Abstract interfaces and protocols for Part 3H.3.2.
 """
+
 from typing import Dict, Any, Protocol
 from app.platform_verification.readiness_engine.domain.models import (
     DatabaseReadinessReport,

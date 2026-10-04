@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 
 class PlanSignature(BaseModel):
     """Contextual fingerprint of a mission document and goal characteristics."""
+
     document_type: str = "invoice"
     page_count: int = 1
     field_count: int = 10
@@ -23,6 +24,7 @@ class PlanSignature(BaseModel):
 
 class StrategyOutcomeRecord(BaseModel):
     """Historical execution record of an applied planning strategy."""
+
     record_id: str = Field(default_factory=lambda: f"mem_{uuid.uuid4().hex[:8]}")
     mission_id: str
     signature: PlanSignature
@@ -46,7 +48,13 @@ class PlanningMemoryEngine:
         """Seeds initial empirical ground truth memory."""
         self.store_outcome(
             mission_id="mission_seed_001",
-            signature=PlanSignature(document_type="invoice", page_count=2, field_count=12, noise_level=0.05, domain_tags=["finance", "invoicing"]),
+            signature=PlanSignature(
+                document_type="invoice",
+                page_count=2,
+                field_count=12,
+                noise_level=0.05,
+                domain_tags=["finance", "invoicing"],
+            ),
             selected_archetype="DELTA_PARETO",
             selected_strategy_id="strat_delta_pareto",
             actual_latency_ms=1850.0,
@@ -56,7 +64,13 @@ class PlanningMemoryEngine:
         )
         self.store_outcome(
             mission_id="mission_seed_002",
-            signature=PlanSignature(document_type="receipt", page_count=1, field_count=6, noise_level=0.35, domain_tags=["retail", "receipt"]),
+            signature=PlanSignature(
+                document_type="receipt",
+                page_count=1,
+                field_count=6,
+                noise_level=0.35,
+                domain_tags=["retail", "receipt"],
+            ),
             selected_archetype="BETA_ACCURATE",
             selected_strategy_id="strat_beta_accurate",
             actual_latency_ms=2900.0,
@@ -66,7 +80,13 @@ class PlanningMemoryEngine:
         )
         self.store_outcome(
             mission_id="mission_seed_003",
-            signature=PlanSignature(document_type="tax_form_1040", page_count=4, field_count=45, noise_level=0.1, domain_tags=["tax", "irs", "compliance"]),
+            signature=PlanSignature(
+                document_type="tax_form_1040",
+                page_count=4,
+                field_count=45,
+                noise_level=0.1,
+                domain_tags=["tax", "irs", "compliance"],
+            ),
             selected_archetype="BETA_ACCURATE",
             selected_strategy_id="strat_beta_accurate",
             actual_latency_ms=3800.0,

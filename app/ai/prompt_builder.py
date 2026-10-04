@@ -76,7 +76,7 @@ class PromptBuilder:
     def build_system_instruction(cls, document_type: str) -> str:
         """Constructs system instruction context."""
         doc_type_clean = document_type.lower().strip()
-        
+
         instructions = (
             "You are an expert AI Document Processing System specializing in accurate structured information extraction.\n"
             f"Your task is to analyze the provided document content and extract structured data for document type: '{doc_type_clean}'.\n\n"
@@ -93,7 +93,7 @@ class PromptBuilder:
     def build_prompt(cls, document_text: str, document_type: str) -> str:
         """Constructs final user prompt containing sanitized document text."""
         sanitized_content = cls.sanitize_text(document_text)
-        
+
         prompt = (
             f"DOCUMENT CONTENT TO PROCESS:\n"
             f"=========================================\n"

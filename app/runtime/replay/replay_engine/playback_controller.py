@@ -4,7 +4,6 @@ Controls replay stepping rates (0.25x, 0.5x, 1x, 2x, 5x, 10x) and frame loop del
 """
 
 
-
 class PlaybackRateController:
     """
     Manages variable playback speed and frame delay calculations.

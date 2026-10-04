@@ -9,6 +9,7 @@ Evaluates weighted scores across:
   - Scaling intelligence: 10%
   - Continuous improvement: 10%
 """
+
 from typing import Dict, Any, List
 from datetime import datetime, timezone
 from app.platform_verification.autonomous_reliability_engineering.domain.models import (
@@ -154,7 +155,7 @@ class AutonomousReliabilityScorer(IAutonomousReliabilityScorer):
         else:
             cert_tier = AutonomousCertificationTier.FAILED
 
-        is_certified = (cert_tier == AutonomousCertificationTier.AUTONOMOUS_RELIABILITY_CERTIFIED)
+        is_certified = cert_tier == AutonomousCertificationTier.AUTONOMOUS_RELIABILITY_CERTIFIED
 
         return AutonomousReliabilityCertificationReport(
             report_title="Autonomous Reliability Engineering & Continuous Optimization Certification",

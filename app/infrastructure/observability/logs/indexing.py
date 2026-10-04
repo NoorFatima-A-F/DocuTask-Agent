@@ -112,7 +112,11 @@ class LogIndex:
             if end_time and record.timestamp > end_time:
                 continue
 
-            if kw_lower and kw_lower not in record.message.lower() and (not record.exception or kw_lower not in record.exception.lower()):
+            if (
+                kw_lower
+                and kw_lower not in record.message.lower()
+                and (not record.exception or kw_lower not in record.exception.lower())
+            ):
                 continue
 
             results.append(record)

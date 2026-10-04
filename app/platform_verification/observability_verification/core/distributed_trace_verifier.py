@@ -1,6 +1,7 @@
 """
 OpenTelemetry Distributed Tracing & Reconstructability Verifier.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.observability_verification.domain.models import DistributedTraceReport
 from app.platform_verification.observability_verification.domain.interfaces import IDistributedTraceVerifier

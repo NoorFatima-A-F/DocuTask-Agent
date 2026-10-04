@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Execution.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.execution.domain.models import ExecutionEntity
 from app.platform_verification.modules.execution.domain.interfaces import ExecutionRepositoryInterface
+
 
 class InMemoryExecutionRepository(ExecutionRepositoryInterface):
     def __init__(self):

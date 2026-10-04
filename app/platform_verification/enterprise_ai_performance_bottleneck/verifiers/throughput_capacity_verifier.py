@@ -26,10 +26,42 @@ class ThroughputCapacityVerifier(IThroughputCapacityVerifier):
 
     def verify(self) -> ThroughputCapacityReport:
         tiers = [
-            ThroughputWorkloadTier(workload_docs=10, sustainable=True, throughput_dpm=20.0, throughput_dph=1200.0, success_rate_pct=100.0, queue_growth_rate=0.0, worker_utilization_pct=25.0),
-            ThroughputWorkloadTier(workload_docs=100, sustainable=True, throughput_dpm=45.0, throughput_dph=2700.0, success_rate_pct=100.0, queue_growth_rate=0.0, worker_utilization_pct=55.0),
-            ThroughputWorkloadTier(workload_docs=1000, sustainable=True, throughput_dpm=80.0, throughput_dph=4800.0, success_rate_pct=100.0, queue_growth_rate=0.0, worker_utilization_pct=82.0),
-            ThroughputWorkloadTier(workload_docs=10000, sustainable=False, throughput_dpm=95.0, throughput_dph=5700.0, success_rate_pct=99.8, queue_growth_rate=12.5, worker_utilization_pct=98.0),
+            ThroughputWorkloadTier(
+                workload_docs=10,
+                sustainable=True,
+                throughput_dpm=20.0,
+                throughput_dph=1200.0,
+                success_rate_pct=100.0,
+                queue_growth_rate=0.0,
+                worker_utilization_pct=25.0,
+            ),
+            ThroughputWorkloadTier(
+                workload_docs=100,
+                sustainable=True,
+                throughput_dpm=45.0,
+                throughput_dph=2700.0,
+                success_rate_pct=100.0,
+                queue_growth_rate=0.0,
+                worker_utilization_pct=55.0,
+            ),
+            ThroughputWorkloadTier(
+                workload_docs=1000,
+                sustainable=True,
+                throughput_dpm=80.0,
+                throughput_dph=4800.0,
+                success_rate_pct=100.0,
+                queue_growth_rate=0.0,
+                worker_utilization_pct=82.0,
+            ),
+            ThroughputWorkloadTier(
+                workload_docs=10000,
+                sustainable=False,
+                throughput_dpm=95.0,
+                throughput_dph=5700.0,
+                success_rate_pct=99.8,
+                queue_growth_rate=12.5,
+                worker_utilization_pct=98.0,
+            ),
         ]
 
         max_sustainable = 4800

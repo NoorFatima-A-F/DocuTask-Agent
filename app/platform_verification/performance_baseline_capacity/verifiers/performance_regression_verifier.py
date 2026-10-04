@@ -73,7 +73,9 @@ class PerformanceRegressionVerifier(IPerformanceRegressionVerifier):
         checks: List[CheckResult] = [
             CheckResult(
                 name="P95 Latency Regression Gate (< 20% degradation limit)",
-                passed=all(c.delta_pct <= 20.0 for c in comparisons if "Latency" in c.metric_name or "Time" in c.metric_name),
+                passed=all(
+                    c.delta_pct <= 20.0 for c in comparisons if "Latency" in c.metric_name or "Time" in c.metric_name
+                ),
                 details="All latency percentiles improved by 8.7% to 17.8% over baseline; 0 latency regressions",
                 metrics={"latency_regressions": 0},
             ),

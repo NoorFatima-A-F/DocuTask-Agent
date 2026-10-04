@@ -29,11 +29,36 @@ class BackupSecurityVerifier(IBackupSecurityVerifier):
 
     def verify(self) -> BackupSecurityReport:
         controls = [
-            SecurityControlCheck(control_name="Encryption at Rest", requirement="AES-256-GCM / KMS Managed", implementation="All database snapshots and storage mirrors encrypted with customer-managed KMS key", status="COMPLIANT"),
-            SecurityControlCheck(control_name="Encryption in Transit", requirement="TLS 1.3 Strict", implementation="All replication traffic and backup transfers enforced over TLS 1.3 with cipher restrictions", status="COMPLIANT"),
-            SecurityControlCheck(control_name="Immutability / WORM Lock", requirement="Write-Once-Read-Many", implementation="Object lock compliance mode active; backup deletion and overwrites blocked for 90 days", status="COMPLIANT"),
-            SecurityControlCheck(control_name="RBAC & Least Privilege", requirement="Strict Access Segregation", implementation="Restoration privileges restricted to automated DR service account and emergency SRE break-glass", status="COMPLIANT"),
-            SecurityControlCheck(control_name="Ransomware & Tamper Defense", requirement="Tamper-Evident Signatures", implementation="Automated cryptographic signature validation on backup manifest triggers immediate alert on modification", status="COMPLIANT"),
+            SecurityControlCheck(
+                control_name="Encryption at Rest",
+                requirement="AES-256-GCM / KMS Managed",
+                implementation="All database snapshots and storage mirrors encrypted with customer-managed KMS key",
+                status="COMPLIANT",
+            ),
+            SecurityControlCheck(
+                control_name="Encryption in Transit",
+                requirement="TLS 1.3 Strict",
+                implementation="All replication traffic and backup transfers enforced over TLS 1.3 with cipher restrictions",
+                status="COMPLIANT",
+            ),
+            SecurityControlCheck(
+                control_name="Immutability / WORM Lock",
+                requirement="Write-Once-Read-Many",
+                implementation="Object lock compliance mode active; backup deletion and overwrites blocked for 90 days",
+                status="COMPLIANT",
+            ),
+            SecurityControlCheck(
+                control_name="RBAC & Least Privilege",
+                requirement="Strict Access Segregation",
+                implementation="Restoration privileges restricted to automated DR service account and emergency SRE break-glass",
+                status="COMPLIANT",
+            ),
+            SecurityControlCheck(
+                control_name="Ransomware & Tamper Defense",
+                requirement="Tamper-Evident Signatures",
+                implementation="Automated cryptographic signature validation on backup manifest triggers immediate alert on modification",
+                status="COMPLIANT",
+            ),
         ]
 
         checks = [

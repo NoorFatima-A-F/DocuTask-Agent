@@ -1,6 +1,7 @@
 """
 Verification Management Domain: Definitions, Requirements, Categories, and Invariants.
 """
+
 from datetime import datetime, timezone
 from enum import Enum
 from typing import List

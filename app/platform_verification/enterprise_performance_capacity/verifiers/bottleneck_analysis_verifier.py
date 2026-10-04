@@ -32,13 +32,36 @@ class BottleneckAnalysisVerifier(IBottleneckAnalysisVerifier):
 
     def verify(self) -> BottleneckAnalysisReport:
         categories = [
-            BottleneckCategoryResult(category="API Gateway", dominant_latency_ms=28.0, saturation_risk="Low", is_primary_bottleneck=False),
-            BottleneckCategoryResult(category="Queue Layer", dominant_latency_ms=14.5, saturation_risk="Low", is_primary_bottleneck=False),
-            BottleneckCategoryResult(category="Worker Orchestration", dominant_latency_ms=25.0, saturation_risk="Low", is_primary_bottleneck=False),
-            BottleneckCategoryResult(category="OCR Preprocessing", dominant_latency_ms=240.0, saturation_risk="Medium", is_primary_bottleneck=False),
-            BottleneckCategoryResult(category="AI Inference (Gemini API)", dominant_latency_ms=750.0, saturation_risk="High", is_primary_bottleneck=True),
-            BottleneckCategoryResult(category="Database Layer", dominant_latency_ms=15.2, saturation_risk="Low", is_primary_bottleneck=False),
-            BottleneckCategoryResult(category="Storage Layer", dominant_latency_ms=12.3, saturation_risk="Low", is_primary_bottleneck=False),
+            BottleneckCategoryResult(
+                category="API Gateway", dominant_latency_ms=28.0, saturation_risk="Low", is_primary_bottleneck=False
+            ),
+            BottleneckCategoryResult(
+                category="Queue Layer", dominant_latency_ms=14.5, saturation_risk="Low", is_primary_bottleneck=False
+            ),
+            BottleneckCategoryResult(
+                category="Worker Orchestration",
+                dominant_latency_ms=25.0,
+                saturation_risk="Low",
+                is_primary_bottleneck=False,
+            ),
+            BottleneckCategoryResult(
+                category="OCR Preprocessing",
+                dominant_latency_ms=240.0,
+                saturation_risk="Medium",
+                is_primary_bottleneck=False,
+            ),
+            BottleneckCategoryResult(
+                category="AI Inference (Gemini API)",
+                dominant_latency_ms=750.0,
+                saturation_risk="High",
+                is_primary_bottleneck=True,
+            ),
+            BottleneckCategoryResult(
+                category="Database Layer", dominant_latency_ms=15.2, saturation_risk="Low", is_primary_bottleneck=False
+            ),
+            BottleneckCategoryResult(
+                category="Storage Layer", dominant_latency_ms=12.3, saturation_risk="Low", is_primary_bottleneck=False
+            ),
         ]
 
         primary = next((c.category for c in categories if c.is_primary_bottleneck), "AI Inference (Gemini API)")

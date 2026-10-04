@@ -58,12 +58,14 @@ def test_governance_event_consumer_ingestion():
     received = []
     consumer.subscribe(lambda e: received.append(e))
 
-    consumer.ingest({
-        "event_type": "ModelInvocation",
-        "tenant_id": "tenant_1",
-        "model_id": "gemini-1.5-pro",
-        "cost_usd": 0.005,
-    })
+    consumer.ingest(
+        {
+            "event_type": "ModelInvocation",
+            "tenant_id": "tenant_1",
+            "model_id": "gemini-1.5-pro",
+            "cost_usd": 0.005,
+        }
+    )
 
     assert len(received) == 1
     assert received[0].model_id == "gemini-1.5-pro"

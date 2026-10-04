@@ -27,9 +27,9 @@ class HumanTaskDecision(str, Enum):
     ESCALATED = "ESCALATED"
 
 
-
 class HumanTask(BaseModel):
     """Interactive human approval / review request."""
+
     task_id: UUID = Field(default_factory=uuid4)
     workflow_instance_id: Optional[UUID] = None
     workflow_id: Optional[UUID] = None
@@ -49,21 +49,14 @@ class HumanTask(BaseModel):
     model_config = {"frozen": False}
 
     def approve(self, user_id: str, reason: str = "") -> "HumanTask":
-        return self.model_copy(update={
-            "status": HumanTaskStatus.APPROVED,
-            "decided_by": user_id,
-            "decision_reason": reason
-        })
+        return self.model_copy(
+            update={"status": HumanTaskStatus.APPROVED, "decided_by": user_id, "decision_reason": reason}
+        )
 
     def reject(self, user_id: str, reason: str = "") -> "HumanTask":
-        return self.model_copy(update={
-            "status": HumanTaskStatus.REJECTED,
-            "decided_by": user_id,
-            "decision_reason": reason
-        })
+        return self.model_copy(
+            update={"status": HumanTaskStatus.REJECTED, "decided_by": user_id, "decision_reason": reason}
+        )
 
     def escalate(self, escalated_to: str) -> "HumanTask":
-        return self.model_copy(update={
-            "status": HumanTaskStatus.ESCALATED,
-            "assigned_user_or_role": escalated_to
-        })
+        return self.model_copy(update={"status": HumanTaskStatus.ESCALATED, "assigned_user_or_role": escalated_to})

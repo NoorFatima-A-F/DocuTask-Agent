@@ -14,7 +14,7 @@ class AuditRegressionDetector:
         current: CertificationRecord,
     ) -> Dict[str, Any]:
         """Performs structured comparative delta analysis between previous and current release audits."""
-        
+
         # 1. Critical findings regression
         prev_crit_count = len(previous.critical_findings)
         curr_crit_count = len(current.critical_findings)
@@ -48,7 +48,9 @@ class AuditRegressionDetector:
         if crit_delta > 0:
             regressions.append(f"Security/Stability regression: +{crit_delta} critical finding(s) introduced.")
         if eqi_delta < -5.0:
-            regressions.append(f"Evidence Quality degradation: EQI dropped by {abs(eqi_delta)} points ({previous.eqi_score} -> {current.eqi_score}).")
+            regressions.append(
+                f"Evidence Quality degradation: EQI dropped by {abs(eqi_delta)} points ({previous.eqi_score} -> {current.eqi_score})."
+            )
         if previous.status.value == "VALID" and current.status.value != "VALID":
             regressions.append(f"Certification status degraded from {previous.status.value} to {current.status.value}.")
 
@@ -56,11 +58,36 @@ class AuditRegressionDetector:
 
         # Format comparison table lines
         table_rows = [
-            {"area": "Release Version", "previous": previous.release_version, "current": current.release_version, "status": "UPGRADE"},
-            {"area": "Certification Status", "previous": previous.status.value, "current": current.status.value, "status": "MATCH" if previous.status == current.status else "CHANGED"},
-            {"area": "EQI Quality Score", "previous": f"{previous.eqi_score}/100", "current": f"{current.eqi_score}/100", "status": "IMPROVED" if eqi_delta >= 0 else "DEGRADED"},
-            {"area": "Critical Findings", "previous": str(prev_crit_count), "current": str(curr_crit_count), "status": "SAFE" if curr_crit_count == 0 else "WARNING"},
-            {"area": "Merkle Tree Root", "previous": f"{previous.merkle_root[:12]}...", "current": f"{current.merkle_root[:12]}...", "status": "UPDATED"},
+            {
+                "area": "Release Version",
+                "previous": previous.release_version,
+                "current": current.release_version,
+                "status": "UPGRADE",
+            },
+            {
+                "area": "Certification Status",
+                "previous": previous.status.value,
+                "current": current.status.value,
+                "status": "MATCH" if previous.status == current.status else "CHANGED",
+            },
+            {
+                "area": "EQI Quality Score",
+                "previous": f"{previous.eqi_score}/100",
+                "current": f"{current.eqi_score}/100",
+                "status": "IMPROVED" if eqi_delta >= 0 else "DEGRADED",
+            },
+            {
+                "area": "Critical Findings",
+                "previous": str(prev_crit_count),
+                "current": str(curr_crit_count),
+                "status": "SAFE" if curr_crit_count == 0 else "WARNING",
+            },
+            {
+                "area": "Merkle Tree Root",
+                "previous": f"{previous.merkle_root[:12]}...",
+                "current": f"{current.merkle_root[:12]}...",
+                "status": "UPDATED",
+            },
         ]
 
         return {

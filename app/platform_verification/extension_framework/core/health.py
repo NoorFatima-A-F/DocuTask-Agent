@@ -2,12 +2,11 @@
 Plugin Health & Telemetry Monitor.
 Tracks error rates, latency histograms, and availability states.
 """
+
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 import numpy as np
-from app.platform_verification.extension_framework.domain.models import (
-    PluginHealthMetrics, PluginHealthState
-)
+from app.platform_verification.extension_framework.domain.models import PluginHealthMetrics, PluginHealthState
 
 
 class PluginHealthMonitor:
@@ -22,11 +21,7 @@ class PluginHealthMonitor:
         return self._metrics[plugin_id]
 
     def record_execution(
-        self,
-        plugin_id: str,
-        is_success: bool,
-        latency_ms: float,
-        error: Optional[str] = None
+        self, plugin_id: str, is_success: bool, latency_ms: float, error: Optional[str] = None
     ) -> PluginHealthMetrics:
         health = self.get_health(plugin_id)
         health.total_executions += 1

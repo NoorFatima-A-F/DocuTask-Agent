@@ -1,4 +1,5 @@
 """OCI Referrers and Associated Metadata Descriptors (Req 15)."""
+
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
@@ -6,6 +7,7 @@ from typing import Any, Dict, List, Optional
 @dataclass
 class OCIReferrerDescriptor:
     """OCI 1.1 Referrer descriptor representing metadata attached to an image."""
+
     media_type: str
     digest: str
     size: int
@@ -16,6 +18,7 @@ class OCIReferrerDescriptor:
 @dataclass
 class OCIManifest:
     """Standard OCI v1.1 Manifest Representation."""
+
     schema_version: int = 2
     media_type: str = "application/vnd.oci.image.manifest.v1+json"
     config_digest: str = ""

@@ -2,6 +2,7 @@
 Schema Evolution and Cross-Version Compatibility Verifier (Part 3G.2B Phase 9).
 Verifies Alembic migration ordering, forward/backward rollback idempotency, and PostgreSQL cross-version upgrades.
 """
+
 from typing import Dict, Any, List
 from app.platform_verification.database_backup_verification.domain.models import (
     SchemaEvolutionReport,
@@ -33,12 +34,7 @@ class SchemaEvolutionVerifier(ISchemaEvolutionVerifier):
 
         incompatible_objects: List[str] = []
 
-        passed = (
-            forward_migration
-            and rollback_downgrade
-            and reapply_forward
-            and len(incompatible_objects) == 0
-        )
+        passed = forward_migration and rollback_downgrade and reapply_forward and len(incompatible_objects) == 0
 
         details = {
             "alembic_current_revision": "20260915_part3g_evidence_tables",

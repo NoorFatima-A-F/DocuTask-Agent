@@ -73,12 +73,7 @@ def test_dag_cycle_detection_exception():
 
 def test_dag_missing_node_in_edge():
     """Verifies MissingDependencyException when an edge targets a non-existent node."""
-    graph = (
-        GraphBuilder("broken_graph")
-        .add_node("A", "Node A")
-        .add_edge("A", "UNKNOWN_NODE")
-        .build()
-    )
+    graph = GraphBuilder("broken_graph").add_node("A", "Node A").add_edge("A", "UNKNOWN_NODE").build()
 
     with pytest.raises(MissingDependencyException):
         DAGValidator.detect_cycles(graph)
@@ -86,13 +81,7 @@ def test_dag_missing_node_in_edge():
 
 def test_plan_builder_and_validation():
     """Verifies PlanBuilder constructing Plan and PlanValidator validating structure."""
-    graph = (
-        GraphBuilder("g1")
-        .add_node("T1", "Task 1")
-        .add_node("T2", "Task 2")
-        .add_edge("T1", "T2")
-        .build()
-    )
+    graph = GraphBuilder("g1").add_node("T1", "Task 1").add_node("T2", "Task 2").add_edge("T1", "T2").build()
 
     plan = (
         PlanBuilder("DocumentProcessPlan")

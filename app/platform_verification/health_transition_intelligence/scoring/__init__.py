@@ -1,3 +1,5 @@
-from app.platform_verification.health_transition_intelligence.scoring.health_intelligence_scorer import HealthIntelligenceScorer
+from app.platform_verification.health_transition_intelligence.scoring.health_intelligence_scorer import (
+    HealthIntelligenceScorer,
+)
 
 __all__ = ["HealthIntelligenceScorer"]

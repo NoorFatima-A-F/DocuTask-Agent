@@ -8,6 +8,7 @@ from typing import Optional
 @dataclass
 class ReleaseVersion:
     """Semantic version (SemVer 2.0.0)."""
+
     major: int
     minor: int
     patch: int

@@ -34,17 +34,17 @@ class EventStore:
         async with self._lock:
             mission_id = event.mission_id
             prev_hash = self._last_event_hash_by_mission.get(mission_id, "GENESIS")
-            
+
             # Sign and hash-chain event
             signed_event = EventSerializer.sign_and_chain_event(event, prev_hash)
-            
+
             self._events.append(signed_event)
             self._index.index_event(signed_event)
-            
+
             # Update hash pointers
             self._last_event_hash_by_mission[mission_id] = signed_event.event_hash  # type: ignore
             self._global_last_hash = signed_event.event_hash  # type: ignore
-            
+
             return signed_event
 
     def append_sync(self, event: BaseRuntimeEvent) -> BaseRuntimeEvent:

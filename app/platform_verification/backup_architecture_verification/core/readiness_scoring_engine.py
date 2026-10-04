@@ -3,6 +3,7 @@ Part 14: Backup Readiness Scoring Engine.
 Computes the weighted Backup Architecture Readiness Score across all 9 evaluation
 categories and awards official enterprise certification tiers.
 """
+
 from typing import Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     CertificationTier,

@@ -2,6 +2,7 @@
 Secret Management, Leak Detection, and Rotation Governance.
 Zero Plaintext Storage Policy.
 """
+
 from datetime import datetime, timezone
 import hashlib
 import re
@@ -17,24 +18,18 @@ class SecretManagerService:
         self._known_secret_values: set[str] = set()
 
     def register_secret_reference(
-        self,
-        key_name: str,
-        vault_path: str,
-        initial_value: Optional[str] = None,
-        rotation_interval_days: int = 90
+        self, key_name: str, vault_path: str, initial_value: Optional[str] = None, rotation_interval_days: int = 90
     ) -> SecretReference:
-        ref = SecretReference(
-            key_name=key_name,
-            vault_path=vault_path,
-            rotation_interval_days=rotation_interval_days
-        )
+        ref = SecretReference(key_name=key_name, vault_path=vault_path, rotation_interval_days=rotation_interval_days)
         self._secrets[key_name] = ref
         if initial_value:
             self._mock_vault_store[vault_path] = initial_value
             self._known_secret_values.add(initial_value)
         return ref
 
-    def rotate_secret(self, key_name: str, new_value: str, rotated_by: str = "KMS Automation", reason: str = "Scheduled rotation") -> SecretRotationRecord:
+    def rotate_secret(
+        self, key_name: str, new_value: str, rotated_by: str = "KMS Automation", reason: str = "Scheduled rotation"
+    ) -> SecretRotationRecord:
         if key_name not in self._secrets:
             raise KeyError(f"Secret {key_name} not registered")
         ref = self._secrets[key_name]
@@ -46,11 +41,7 @@ class SecretManagerService:
             self._known_secret_values.add(new_value)
 
         record = SecretRotationRecord(
-            secret_id=ref.secret_id,
-            old_version=old_v,
-            new_version=ref.version,
-            reason=reason,
-            rotated_by=rotated_by
+            secret_id=ref.secret_id, old_version=old_v, new_version=ref.version, reason=reason, rotated_by=rotated_by
         )
         self._rotation_history.append(record)
         return record

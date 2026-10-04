@@ -1,4 +1,5 @@
 """Canary Progressive Traffic Shifting Strategy."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Callable, List, Optional, Tuple
@@ -8,6 +9,7 @@ from ..core.exceptions import StrategyExecutionException
 @dataclass
 class CanaryStep:
     """Evaluation result for a single traffic canary step."""
+
     step_index: int
     traffic_percentage: int
     observed_error_rate: float
@@ -44,9 +46,13 @@ class CanaryStrategy:
     ) -> CanaryStep:
         """Evaluates health criteria for a specific traffic split."""
         passed = (error_rate <= self.max_error_rate) and (p99_ms <= self.max_p99_latency_ms)
-        details = "Passed SLO thresholds" if passed else (
-            f"Breached SLO: error_rate={error_rate*100:.2f}% (max {self.max_error_rate*100:.2f}%), "
-            f"p99={p99_ms:.1f}ms (max {self.max_p99_latency_ms:.1f}ms)"
+        details = (
+            "Passed SLO thresholds"
+            if passed
+            else (
+                f"Breached SLO: error_rate={error_rate * 100:.2f}% (max {self.max_error_rate * 100:.2f}%), "
+                f"p99={p99_ms:.1f}ms (max {self.max_p99_latency_ms:.1f}ms)"
+            )
         )
         step = CanaryStep(
             step_index=step_index,

@@ -12,6 +12,7 @@ from app.agents.coordination.agent import Agent
 
 class SwarmExecutionPattern(str, Enum):
     """Patterns of swarm intelligence execution."""
+
     FAN_OUT_FAN_IN = "FAN_OUT_FAN_IN"
     MAP_REDUCE = "MAP_REDUCE"
     COOPERATIVE_SOLVING = "COOPERATIVE_SOLVING"
@@ -21,6 +22,7 @@ class SwarmExecutionPattern(str, Enum):
 
 class SwarmTask(BaseModel):
     """Task item distributed across swarm agents."""
+
     task_id: str
     input_data: Any
     assigned_agent_id: Optional[UUID] = None
@@ -30,6 +32,7 @@ class SwarmTask(BaseModel):
 
 class SwarmResult(BaseModel):
     """Aggregated output from swarm execution."""
+
     swarm_id: UUID = Field(default_factory=uuid4)
     pattern: SwarmExecutionPattern
     individual_results: Dict[str, Any] = Field(default_factory=dict)
@@ -51,17 +54,13 @@ class SwarmEngine:
         agent_count = len(swarm_agents)
         for i, item in enumerate(items):
             assigned_agent = swarm_agents[i % agent_count]
-            tasks.append(SwarmTask(
-                task_id=f"swarm_subtask_{i}",
-                input_data=item,
-                assigned_agent_id=assigned_agent.agent_id
-            ))
+            tasks.append(
+                SwarmTask(task_id=f"swarm_subtask_{i}", input_data=item, assigned_agent_id=assigned_agent.agent_id)
+            )
         return tasks
 
     def fan_in_aggregate(
-        self,
-        subtask_results: Dict[str, Any],
-        reducer: Optional[Callable[[List[Any]], Any]] = None
+        self, subtask_results: Dict[str, Any], reducer: Optional[Callable[[List[Any]], Any]] = None
     ) -> Any:
         """Aggregates distributed subtask results into a single synthesized payload."""
         values = list(subtask_results.values())

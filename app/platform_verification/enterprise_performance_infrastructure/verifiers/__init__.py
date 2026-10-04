@@ -66,17 +66,17 @@ __all__ = [
 def get_all_verifiers() -> List[IEnterprisePerformanceVerifier]:
     """Returns an instantiated list of all 13 Phase 3J.6 verifiers in sequential order."""
     return [
-        PerformanceTestArchitectureVerifier(),   # 3J.6.1
-        WorkloadModelingVerifier(),              # 3J.6.2
-        APIPerformanceVerifier(),                # 3J.6.3
-        E2EWorkflowVerifier(),                   # 3J.6.4
-        ThroughputScalingVerifier(),             # 3J.6.5
-        DatabasePerformanceVerifier(),           # 3J.6.6
-        QueueCapacityVerifier(),                 # 3J.6.7
-        WorkerEfficiencyVerifier(),              # 3J.6.8
-        ResourceUtilizationVerifier(),           # 3J.6.9
-        MemoryStabilityVerifier(),               # 3J.6.10
-        DegradationAnalysisVerifier(),           # 3J.6.11
-        CapacityBoundaryVerifier(),              # 3J.6.12
-        MonitoringIntegrationVerifier(),         # 3J.6.13
+        PerformanceTestArchitectureVerifier(),  # 3J.6.1
+        WorkloadModelingVerifier(),  # 3J.6.2
+        APIPerformanceVerifier(),  # 3J.6.3
+        E2EWorkflowVerifier(),  # 3J.6.4
+        ThroughputScalingVerifier(),  # 3J.6.5
+        DatabasePerformanceVerifier(),  # 3J.6.6
+        QueueCapacityVerifier(),  # 3J.6.7
+        WorkerEfficiencyVerifier(),  # 3J.6.8
+        ResourceUtilizationVerifier(),  # 3J.6.9
+        MemoryStabilityVerifier(),  # 3J.6.10
+        DegradationAnalysisVerifier(),  # 3J.6.11
+        CapacityBoundaryVerifier(),  # 3J.6.12
+        MonitoringIntegrationVerifier(),  # 3J.6.13
     ]

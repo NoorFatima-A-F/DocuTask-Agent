@@ -1,6 +1,7 @@
 """
 Phase 3H.5.7 Domain Module
 """
+
 from .models import (
     ErrorBudgetStatus,
     HealthScoreTier,

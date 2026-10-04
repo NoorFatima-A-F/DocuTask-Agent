@@ -8,6 +8,7 @@ from enum import Enum
 
 class ProtocolType(str, Enum):
     """Supported coordination and negotiation protocol types."""
+
     FIPA_REQUEST = "FIPA_REQUEST"
     CONTRACT_NET = "CONTRACT_NET"
     AUCTION_FIRST_PRICE = "AUCTION_FIRST_PRICE"
@@ -19,6 +20,7 @@ class ProtocolType(str, Enum):
 
 class ProtocolState(str, Enum):
     """Protocol negotiation lifecycle states."""
+
     INITIATED = "INITIATED"
     IN_PROGRESS = "IN_PROGRESS"
     PROPOSALS_RECEIVED = "PROPOSALS_RECEIVED"

@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 class WorkflowMetricsSnapshot(BaseModel):
     """Snapshot of workflow runtime operational metrics."""
+
     total_workflows_started: int = 0
     total_workflows_completed: int = 0
     total_workflows_failed: int = 0
@@ -40,9 +41,7 @@ class WorkflowMetricsCollector:
         self._metrics.total_workflows_completed += 1
         self._metrics.total_active_instances = max(0, self._metrics.total_active_instances - 1)
         self._workflow_durations.append(duration_ms)
-        self._metrics.average_workflow_duration_ms = (
-            sum(self._workflow_durations) / len(self._workflow_durations)
-        )
+        self._metrics.average_workflow_duration_ms = sum(self._workflow_durations) / len(self._workflow_durations)
 
     def record_workflow_failed(self) -> None:
         self._metrics.total_workflows_failed += 1

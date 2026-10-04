@@ -85,7 +85,10 @@ class ReliabilityRecommender:
             for item in error_budget_report.budgets:
                 if item.risk_level.value in ("CRITICAL_EXHAUSTED", "HIGH"):
                     # Ensure high priority recommendation exists
-                    existing = any(r.target_component == item.service and r.priority == RecommendationPriority.P0_CRITICAL for r in recommendations)
+                    existing = any(
+                        r.target_component == item.service and r.priority == RecommendationPriority.P0_CRITICAL
+                        for r in recommendations
+                    )
                     if not existing:
                         recommendations.append(
                             ReliabilityRecommendation(

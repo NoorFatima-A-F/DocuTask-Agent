@@ -11,6 +11,7 @@ from app.agents.runtime.runtime_lifecycle import RuntimeLifecycleState, RuntimeL
 
 class RuntimeState(BaseModel):
     """Observable operational state of the running platform kernel."""
+
     lifecycle_state: RuntimeLifecycleState = Field(default=RuntimeLifecycleState.OFFLINE)
     boot_timestamp: Optional[datetime] = None
     registered_services_count: int = 0

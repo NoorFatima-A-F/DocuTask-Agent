@@ -92,7 +92,7 @@ class IngestionVerifier:
         t0 = time.perf_counter()
         # Simulated sync state: 50 existing assets, 5 modified, 2 deleted
         existing_assets = {f"doc_{i}": {"v": 1} for i in range(50)}
-        
+
         # Incremental sync event
         updates = {"doc_1": {"v": 2}, "doc_2": {"v": 2}}
         deletions = ["doc_48", "doc_49"]

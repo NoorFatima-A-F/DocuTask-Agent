@@ -95,7 +95,11 @@ class ReliabilityCertifier:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"availability_pct": availability_pct, "rto_minutes": rto_minutes, "max_concurrent_users": max_users},
+            metrics={
+                "availability_pct": availability_pct,
+                "rto_minutes": rto_minutes,
+                "max_concurrent_users": max_users,
+            },
             execution_time_ms=elapsed_ms,
         )
 

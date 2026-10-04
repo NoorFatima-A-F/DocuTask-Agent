@@ -11,6 +11,7 @@ from .registry import ServiceDiscoveryRegistry, ServiceInstance
 @dataclass
 class ResolvedServiceTarget:
     """Resolved service target address and metadata."""
+
     service_name: str
     host: str
     port: int
@@ -85,7 +86,9 @@ class ServiceResolver:
         # Pick least-connections / lowest latency instance
         selected: ServiceInstance = min(instances, key=lambda i: (i.active_connections, i.latency_ms))
 
-        spiffe = selected.security_profile.get("spiffe_id", f"spiffe://docutask.internal/ns/{selected.namespace}/sa/{selected.service_name}")
+        spiffe = selected.security_profile.get(
+            "spiffe_id", f"spiffe://docutask.internal/ns/{selected.namespace}/sa/{selected.service_name}"
+        )
         target = ResolvedServiceTarget(
             service_name=canonical_name,
             host=selected.host,

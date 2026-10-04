@@ -1,11 +1,13 @@
 """
 Container Restart Simulation & Verification.
 """
+
 from typing import Dict, Any
 
 
 class RestartExperiments:
     """Simulates container restart behaviors."""
+
     __test__ = False
 
     def test_graceful_restart(self, service_name: str) -> Dict[str, Any]:

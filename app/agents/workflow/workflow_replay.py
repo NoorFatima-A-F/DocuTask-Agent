@@ -38,9 +38,7 @@ class WorkflowReplayEngine(IWorkflowReplayEngine):
         lifecycle_state = WorkflowLifecycleState.CREATED
 
         for event in history.events:
-            logger.debug(
-                f"Replaying event {event.event_id} ({event.event_type}) for instance {event.instance_id}"
-            )
+            logger.debug(f"Replaying event {event.event_id} ({event.event_type}) for instance {event.instance_id}")
             if event.event_type == "NODE_COMPLETED":
                 if event.node_id:
                     state = state.mark_node_completed(event.node_id, event.payload)

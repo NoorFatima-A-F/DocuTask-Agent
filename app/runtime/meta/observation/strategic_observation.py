@@ -75,8 +75,12 @@ class StrategicEvidenceGraph:
         }
 
     def _seed_default_evidence(self):
-        n1 = StrategicEvidenceNode("obs_node_planner", "SUBSYSTEM", "APDLE Live Planner", {"avg_latency_ms": 180.0, "status": "OPTIMAL"})
-        n2 = StrategicEvidenceNode("obs_node_ocr_burst", "METRIC_ANOMALY", "OCR Burst Serialization", {"queue_depth": 14, "severity": "MEDIUM"})
+        n1 = StrategicEvidenceNode(
+            "obs_node_planner", "SUBSYSTEM", "APDLE Live Planner", {"avg_latency_ms": 180.0, "status": "OPTIMAL"}
+        )
+        n2 = StrategicEvidenceNode(
+            "obs_node_ocr_burst", "METRIC_ANOMALY", "OCR Burst Serialization", {"queue_depth": 14, "severity": "MEDIUM"}
+        )
         n3 = StrategicEvidenceNode("obs_node_val_sec", "SUBSYSTEM", "Security Validator", {"verification_ratio": 1.0})
 
         self.add_node(n1)

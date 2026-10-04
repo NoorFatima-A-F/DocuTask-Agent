@@ -1,6 +1,7 @@
 """
 Phase 3H.5: Enterprise Health Intelligence Runtime
 """
+
 from typing import Dict, Any
 from ..verifiers import (
     HealthEventArchitectureVerifier,
@@ -33,9 +34,7 @@ class HealthIntelligenceRuntime:
         self.scorer = HealthIntelligenceScorer()
         self.exporter = HealthIntelligenceExporter()
 
-    def run_full_verification(
-        self, output_dir: str = "health_intelligence_verification"
-    ) -> Dict[str, Any]:
+    def run_full_verification(self, output_dir: str = "health_intelligence_verification") -> Dict[str, Any]:
         event_report = self.event_verifier.verify_event_architecture()
         class_report = self.classification_engine.classify_failures()
         corr_report = self.correlation_engine.correlate_signals()

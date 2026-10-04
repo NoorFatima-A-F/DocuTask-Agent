@@ -119,7 +119,7 @@ class HumanEvaluationEngine:
             p_j[j] = sum(ratings_matrix[i][j] for i in range(n)) / total_ratings
 
         # Expected agreement Pe
-        p_e = sum(pj ** 2 for pj in p_j)
+        p_e = sum(pj**2 for pj in p_j)
 
         # Extent of agreement for subject i: P_i
         p_i = []

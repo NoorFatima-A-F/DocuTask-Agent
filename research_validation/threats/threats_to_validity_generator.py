@@ -175,7 +175,7 @@ class ThreatsToValidityGenerator:
             "# Threats to Scientific Validity",
             "",
             f"**Audit Timestamp**: {now_str}  ",
-            f"**Mitigated Threats**: {mitigated}/{total} ({ratio*100:.1f}%)  ",
+            f"**Mitigated Threats**: {mitigated}/{total} ({ratio * 100:.1f}%)  ",
             "",
             "This document formally characterizes potential validity threats, experimental confounders, and empirical limitations adhering to standard empirical research methodologies (Wohlin et al., ACM Artifact Guidelines).",
             "",

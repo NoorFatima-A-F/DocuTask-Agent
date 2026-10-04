@@ -16,6 +16,7 @@ from app.runtime.strategy_discovery.graph_synthesis import SynthesizedDAG
 
 class GraphGrammarRule(BaseModel):
     """Production rule in a context-sensitive workflow graph grammar (LHS -> RHS)."""
+
     rule_id: str = Field(default_factory=lambda: f"gram_{uuid.uuid4().hex[:8]}")
     name: str
     pattern_lhs: str  # e.g., 'SEQUENTIAL_EXTRACTION_VERIFY'
@@ -62,7 +63,7 @@ class GraphGrammarEngine:
             node_ids = list(optimized.nodes.keys())
             # Convert node 1 and 2 to parallel siblings under node 0
             n0, n1, n2, n3 = node_ids[0], node_ids[1], node_ids[2], node_ids[3]
-            
+
             # n0 connects to both n1 and n2
             optimized.adjacency[n0] = [n1, n2]
             # n1 and n2 both converge into n3

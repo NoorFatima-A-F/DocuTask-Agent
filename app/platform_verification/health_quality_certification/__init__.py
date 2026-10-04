@@ -1,6 +1,7 @@
 """
 Phase 3H.5.11: Enterprise Health Quality Scoring & Operational Certification Framework
 """
+
 from .domain import (
     HealthMaturityLevel,
     CertificationStatus,

@@ -13,6 +13,7 @@ from app.agents.planning.contracts import Plan
 
 class RuntimeContext(BaseModel):
     """Execution runtime parameters, environment limits, and tenant boundaries."""
+
     tenant_id: str = Field(default="default")
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     max_concurrency: int = Field(default=4, ge=1)
@@ -24,6 +25,7 @@ class RuntimeContext(BaseModel):
 
 class ExecutionRequest(BaseModel):
     """Request payload to initiate execution of a validated Plan."""
+
     plan: Optional[Plan] = Field(default=None)
     context: RuntimeContext = Field(default_factory=RuntimeContext)
     initial_inputs: Dict[str, Any] = Field(default_factory=dict)
@@ -32,6 +34,7 @@ class ExecutionRequest(BaseModel):
 
 class ExecutionResult(BaseModel):
     """Structured execution outcome payload."""
+
     execution_id: UUID
     plan_id: UUID
     lifecycle_state: ExecutionLifecycleState = Field(default=ExecutionLifecycleState.COMPLETED)

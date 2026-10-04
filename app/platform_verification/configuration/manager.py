@@ -1,6 +1,7 @@
 """
 Scoped Configuration Manager with Immutability and Hashing.
 """
+
 import copy
 import hashlib
 import json
@@ -8,11 +9,10 @@ from typing import Any, Dict, Optional
 from app.platform_verification.configuration.scopes import ConfigScope
 from app.platform_verification.configuration.schemas import VerificationPlatformConfig
 
+
 class EnterpriseConfigurationManager:
     def __init__(self):
-        self._scoped_configs: Dict[ConfigScope, Dict[str, Any]] = {
-            scope: {} for scope in ConfigScope
-        }
+        self._scoped_configs: Dict[ConfigScope, Dict[str, Any]] = {scope: {} for scope in ConfigScope}
         self._frozen_configs: Dict[str, Dict[str, Any]] = {}
         self._load_defaults()
 
@@ -30,11 +30,11 @@ class EnterpriseConfigurationManager:
         self,
         module_name: Optional[str] = None,
         execution_id: Optional[str] = None,
-        overrides: Optional[Dict[str, Any]] = None
+        overrides: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """Resolves configuration hierarchy: GLOBAL -> ENV -> MODULE -> EXECUTION -> EXPERIMENT -> OVERRIDE."""
         effective: Dict[str, Any] = {}
-        
+
         # 1. Global
         effective.update(self._scoped_configs[ConfigScope.GLOBAL])
         # 2. Environment
@@ -55,13 +55,11 @@ class EnterpriseConfigurationManager:
         """Locks configuration during execution and returns its SHA-256 fingerprint."""
         frozen_copy = copy.deepcopy(config_dict)
         config_hash = hashlib.sha256(json.dumps(frozen_copy, sort_keys=True, default=str).encode("utf-8")).hexdigest()
-        self._frozen_configs[execution_id] = {
-            "config": frozen_copy,
-            "hash": config_hash
-        }
+        self._frozen_configs[execution_id] = {"config": frozen_copy, "hash": config_hash}
         return config_hash
 
     def get_frozen_config(self, execution_id: str) -> Optional[Dict[str, Any]]:
         return self._frozen_configs.get(execution_id, {}).get("config")
+
 
 verification_config_manager = EnterpriseConfigurationManager()

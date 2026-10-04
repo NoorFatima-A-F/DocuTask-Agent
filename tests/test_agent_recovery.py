@@ -78,7 +78,7 @@ def test_failure_classifier():
     # Test 1: Timeout error
     f1 = classifier.classify(
         FailureIdentity(execution_id=exec_id, node_id="N1"),
-        FailureEvidence(error_type="TimeoutException", error_message="Task timed out after 300s")
+        FailureEvidence(error_type="TimeoutException", error_message="Task timed out after 300s"),
     )
     assert f1.category == FailureCategory.TIMEOUT_FAILURE
     assert f1.severity == FailureSeverity.MEDIUM
@@ -86,7 +86,7 @@ def test_failure_classifier():
     # Test 2: Tool error
     f2 = classifier.classify(
         FailureIdentity(execution_id=exec_id, node_id="N2", tool_name="OCR_Tool"),
-        FailureEvidence(error_type="ToolError", error_message="Tool failed to process image")
+        FailureEvidence(error_type="ToolError", error_message="Tool failed to process image"),
     )
     assert f2.category == FailureCategory.TOOL_FAILURE
     assert f2.recoverability_score > 0.8
@@ -94,7 +94,7 @@ def test_failure_classifier():
     # Test 3: Deadlock error
     f3 = classifier.classify(
         FailureIdentity(execution_id=exec_id, node_id="N3"),
-        FailureEvidence(error_type="DeadlockError", error_message="Circular dependency deadlock")
+        FailureEvidence(error_type="DeadlockError", error_message="Circular dependency deadlock"),
     )
     assert f3.category == FailureCategory.DEPENDENCY_FAILURE
     assert f3.severity == FailureSeverity.CRITICAL
@@ -173,9 +173,7 @@ def test_replay_and_state_reconciliation():
     # Reconciliation
     reconciler = StateReconciliationEngine()
     report = reconciler.reconcile(
-        active_worker_ids=["w1", "w2"],
-        active_lease_ids=["l1", "l2", "l3"],
-        running_node_ids=["n1", "n2"]
+        active_worker_ids=["w1", "w2"], active_lease_ids=["l1", "l2", "l3"], running_node_ids=["n1", "n2"]
     )
     assert report.is_consistent is True
     assert report.remediated_count == 1  # 1 stale lease purged
@@ -262,11 +260,7 @@ def test_builders_and_serialization():
     """Verifies fluent builders and JSON serialization."""
     exec_id = uuid4()
     failure = (
-        FailureBuilder(exec_id)
-        .on_node("N_1")
-        .with_tool("Parser")
-        .with_error("ParseError", "Malformed JSON")
-        .build()
+        FailureBuilder(exec_id).on_node("N_1").with_tool("Parser").with_error("ParseError", "Malformed JSON").build()
     )
     assert failure.identity.execution_id == exec_id
 
@@ -274,10 +268,7 @@ def test_builders_and_serialization():
     assert req.failure.identity.execution_id == exec_id
 
     strat_def = (
-        RecoveryStrategyBuilder(RecoveryStrategy.ALTERNATE_TOOL)
-        .with_cost(0.15)
-        .require_human_gate(False)
-        .build()
+        RecoveryStrategyBuilder(RecoveryStrategy.ALTERNATE_TOOL).with_cost(0.15).require_human_gate(False).build()
     )
     assert strat_def.strategy == RecoveryStrategy.ALTERNATE_TOOL
     assert strat_def.estimated_cost_usd == 0.15

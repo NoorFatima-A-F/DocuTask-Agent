@@ -16,12 +16,40 @@ class AgentLifecycleManager:
     VALID_TRANSITIONS: Dict[AgentLifecycleState, Set[AgentLifecycleState]] = {
         AgentLifecycleState.CREATED: {AgentLifecycleState.REGISTERED, AgentLifecycleState.ARCHIVED},
         AgentLifecycleState.REGISTERED: {AgentLifecycleState.AVAILABLE, AgentLifecycleState.ARCHIVED},
-        AgentLifecycleState.AVAILABLE: {AgentLifecycleState.ASSIGNED, AgentLifecycleState.NEGOTIATING, AgentLifecycleState.VOTING, AgentLifecycleState.RECOVERING, AgentLifecycleState.ARCHIVED},
-        AgentLifecycleState.ASSIGNED: {AgentLifecycleState.EXECUTING, AgentLifecycleState.WAITING, AgentLifecycleState.RECOVERING, AgentLifecycleState.AVAILABLE},
-        AgentLifecycleState.EXECUTING: {AgentLifecycleState.WAITING, AgentLifecycleState.COMPLETED, AgentLifecycleState.RECOVERING, AgentLifecycleState.AVAILABLE},
-        AgentLifecycleState.WAITING: {AgentLifecycleState.EXECUTING, AgentLifecycleState.RECOVERING, AgentLifecycleState.AVAILABLE},
-        AgentLifecycleState.NEGOTIATING: {AgentLifecycleState.ASSIGNED, AgentLifecycleState.AVAILABLE, AgentLifecycleState.RECOVERING},
-        AgentLifecycleState.VOTING: {AgentLifecycleState.ASSIGNED, AgentLifecycleState.AVAILABLE, AgentLifecycleState.RECOVERING},
+        AgentLifecycleState.AVAILABLE: {
+            AgentLifecycleState.ASSIGNED,
+            AgentLifecycleState.NEGOTIATING,
+            AgentLifecycleState.VOTING,
+            AgentLifecycleState.RECOVERING,
+            AgentLifecycleState.ARCHIVED,
+        },
+        AgentLifecycleState.ASSIGNED: {
+            AgentLifecycleState.EXECUTING,
+            AgentLifecycleState.WAITING,
+            AgentLifecycleState.RECOVERING,
+            AgentLifecycleState.AVAILABLE,
+        },
+        AgentLifecycleState.EXECUTING: {
+            AgentLifecycleState.WAITING,
+            AgentLifecycleState.COMPLETED,
+            AgentLifecycleState.RECOVERING,
+            AgentLifecycleState.AVAILABLE,
+        },
+        AgentLifecycleState.WAITING: {
+            AgentLifecycleState.EXECUTING,
+            AgentLifecycleState.RECOVERING,
+            AgentLifecycleState.AVAILABLE,
+        },
+        AgentLifecycleState.NEGOTIATING: {
+            AgentLifecycleState.ASSIGNED,
+            AgentLifecycleState.AVAILABLE,
+            AgentLifecycleState.RECOVERING,
+        },
+        AgentLifecycleState.VOTING: {
+            AgentLifecycleState.ASSIGNED,
+            AgentLifecycleState.AVAILABLE,
+            AgentLifecycleState.RECOVERING,
+        },
         AgentLifecycleState.RECOVERING: {AgentLifecycleState.AVAILABLE, AgentLifecycleState.ARCHIVED},
         AgentLifecycleState.COMPLETED: {AgentLifecycleState.AVAILABLE, AgentLifecycleState.ARCHIVED},
         AgentLifecycleState.ARCHIVED: set(),
@@ -59,12 +87,14 @@ class AgentLifecycleManager:
 
             if agent_id not in self._history:
                 self._history[agent_id] = []
-            self._history[agent_id].append({
-                "from_state": old_state.value,
-                "to_state": target_state.value,
-                "reason": reason,
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            })
+            self._history[agent_id].append(
+                {
+                    "from_state": old_state.value,
+                    "to_state": target_state.value,
+                    "reason": reason,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }
+            )
             return True, f"Agent transitioned to {target_state.value}."
 
         # Overload 2: transition(current_state, target_state)

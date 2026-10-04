@@ -26,9 +26,7 @@ class AdaptiveExecutionMonitor:
     def __init__(self, min_confidence_threshold: float = 0.70) -> None:
         self.min_confidence_threshold = min_confidence_threshold
 
-    def evaluate_node_output(
-        self, node_id: str, output: Dict[str, Any]
-    ) -> Optional[AdaptationTrigger]:
+    def evaluate_node_output(self, node_id: str, output: Dict[str, Any]) -> Optional[AdaptationTrigger]:
         """Checks if node output falls below acceptable confidence or invariant thresholds."""
         # 1. Confidence check
         conf = output.get("confidence")

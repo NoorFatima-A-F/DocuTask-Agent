@@ -1,6 +1,7 @@
 """
 Runtime Coordinator for Enterprise Observability & Reliability Verification.
 """
+
 import uuid
 from typing import Dict, List, Any, Optional
 from app.platform_verification.observability_verification.domain.models import (
@@ -8,21 +9,38 @@ from app.platform_verification.observability_verification.domain.models import (
     DashboardValidationReport,
     ReliabilityEngineeringMetricsReport,
 )
-from app.platform_verification.observability_verification.core.observability_architecture_analyzer import ObservabilityArchitectureAnalyzer
-from app.platform_verification.observability_verification.core.logging_security_validator import LoggingSecurityValidator
-from app.platform_verification.observability_verification.core.metrics_telemetry_verifier import MetricsTelemetryVerifier
-from app.platform_verification.observability_verification.core.distributed_trace_verifier import DistributedTraceVerifier
-from app.platform_verification.observability_verification.core.ai_workflow_observability_auditor import AiWorkflowObservabilityAuditor
+from app.platform_verification.observability_verification.core.observability_architecture_analyzer import (
+    ObservabilityArchitectureAnalyzer,
+)
+from app.platform_verification.observability_verification.core.logging_security_validator import (
+    LoggingSecurityValidator,
+)
+from app.platform_verification.observability_verification.core.metrics_telemetry_verifier import (
+    MetricsTelemetryVerifier,
+)
+from app.platform_verification.observability_verification.core.distributed_trace_verifier import (
+    DistributedTraceVerifier,
+)
+from app.platform_verification.observability_verification.core.ai_workflow_observability_auditor import (
+    AiWorkflowObservabilityAuditor,
+)
 from app.platform_verification.observability_verification.core.alert_quality_validator import AlertQualityValidator
 from app.platform_verification.observability_verification.core.slo_compliance_engine import SloComplianceEngine
-from app.platform_verification.observability_verification.core.incident_recovery_simulator import IncidentRecoverySimulator
-from app.platform_verification.observability_verification.core.observability_scoring_engine import ObservabilityScoringEngine
+from app.platform_verification.observability_verification.core.incident_recovery_simulator import (
+    IncidentRecoverySimulator,
+)
+from app.platform_verification.observability_verification.core.observability_scoring_engine import (
+    ObservabilityScoringEngine,
+)
 from app.platform_verification.observability_verification.core.evidence_store import ObservabilityEvidenceStore
-from app.platform_verification.observability_verification.api.observability_verification_api import ObservabilityVerificationApi
+from app.platform_verification.observability_verification.api.observability_verification_api import (
+    ObservabilityVerificationApi,
+)
 
 
 class ObservabilityVerificationRuntime:
     """High-level facade orchestrating observability verification."""
+
     __test__ = False
 
     def __init__(self):
@@ -97,8 +115,18 @@ class ObservabilityVerificationRuntime:
             }
         if alert_rules is None:
             alert_rules = [
-                {"name": "PostgresPoolExhausted", "has_symptoms": True, "has_probable_cause": True, "has_remediation_link": True},
-                {"name": "AiProviderHighLatency", "has_symptoms": True, "has_probable_cause": True, "has_remediation_link": True},
+                {
+                    "name": "PostgresPoolExhausted",
+                    "has_symptoms": True,
+                    "has_probable_cause": True,
+                    "has_remediation_link": True,
+                },
+                {
+                    "name": "AiProviderHighLatency",
+                    "has_symptoms": True,
+                    "has_probable_cause": True,
+                    "has_remediation_link": True,
+                },
             ]
         if slos is None:
             slos = [
@@ -107,7 +135,12 @@ class ObservabilityVerificationRuntime:
             ]
         if incidents is None:
             incidents = [
-                {"incident_name": "db_latency_spike", "mttd_seconds": 25.0, "mttr_seconds": 90.0, "recovery_successful": True}
+                {
+                    "incident_name": "db_latency_spike",
+                    "mttd_seconds": 25.0,
+                    "mttr_seconds": 90.0,
+                    "recovery_successful": True,
+                }
             ]
 
         # 1. Architecture, Logging & Metrics
@@ -124,7 +157,9 @@ class ObservabilityVerificationRuntime:
         slo_rep = self.slo_engine.evaluate_slos(slos)
         inc_rep = self.incident_simulator.simulate_incidents(incidents)
 
-        dash_rep = DashboardValidationReport(dashboards_validated=["System", "AI Workflow", "Queue", "Reliability"], all_panels_functional=True)
+        dash_rep = DashboardValidationReport(
+            dashboards_validated=["System", "AI Workflow", "Queue", "Reliability"], all_panels_functional=True
+        )
         rel_metrics = ReliabilityEngineeringMetricsReport()
 
         # 4. Scorecard & Evidence

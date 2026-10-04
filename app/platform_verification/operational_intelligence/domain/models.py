@@ -1,6 +1,7 @@
 """
 Phase 3H.9: Enterprise Operational Intelligence, Anomaly Analytics & Decision Support — Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
@@ -28,13 +29,14 @@ class ForecastHorizon(str, Enum):
 
 class IntelligenceCertificationTier(str, Enum):
     ENTERPRISE_OPERATIONAL_INTELLIGENCE_CERTIFIED = "Enterprise Operational Intelligence Certified"  # 98 - 100
-    ADVANCED_OPERATIONAL_INTELLIGENCE = "Advanced Operational Intelligence"                          # 95 - 97.99
-    PRODUCTION_INTELLIGENCE_READY = "Production Intelligence Ready"                                  # 90 - 94.99
-    NEEDS_IMPROVEMENT = "Needs Improvement"                                                          # 80 - 89.99
-    FAILED = "Failed"                                                                                # < 80
+    ADVANCED_OPERATIONAL_INTELLIGENCE = "Advanced Operational Intelligence"  # 95 - 97.99
+    PRODUCTION_INTELLIGENCE_READY = "Production Intelligence Ready"  # 90 - 94.99
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3H.9.1: Telemetry Correlation Models ───────────────────────────────────
+
 
 class CorrelatedEventRecord(BaseModel):
     correlation_id: str
@@ -60,6 +62,7 @@ class TelemetryCorrelationReport(BaseModel):
 
 # ─── 3H.9.2: Operational Analytics Models ───────────────────────────────────
 
+
 class SubsystemAnalyticsMetric(BaseModel):
     subsystem: str
     p50_latency_ms: float
@@ -80,6 +83,7 @@ class OperationalAnalyticsReport(BaseModel):
 
 
 # ─── 3H.9.3: Anomaly Detection Models ───────────────────────────────────────
+
 
 class AnomalyFinding(BaseModel):
     anomaly_id: str
@@ -107,6 +111,7 @@ class AnomalyDetectionReport(BaseModel):
 
 # ─── 3H.9.4: Trend Analysis Models ──────────────────────────────────────────
 
+
 class MetricTrendTrajectory(BaseModel):
     metric_name: str
     historical_direction: str  # IMPROVING, STABLE, DEGRADING
@@ -124,6 +129,7 @@ class TrendAnalysisReport(BaseModel):
 
 
 # ─── 3H.9.5: Capacity Forecasting Models ────────────────────────────────────
+
 
 class CapacityForecastItem(BaseModel):
     resource_type: str  # CPU_CORES, MEMORY_GIGABYTES, STORAGE_TERABYTES, CELERY_WORKERS, GEMINI_TOKEN_BUDGET
@@ -143,6 +149,7 @@ class CapacityForecastReport(BaseModel):
 
 
 # ─── 3H.9.6: Operational Recommendation Models ──────────────────────────────
+
 
 class OperationalRecommendation(BaseModel):
     recommendation_id: str
@@ -165,6 +172,7 @@ class RecommendationEngineReport(BaseModel):
 
 # ─── 3H.9.7: Executive Operational Dashboard Models ─────────────────────────
 
+
 class ExecutiveKPIItem(BaseModel):
     kpi_name: str
     current_value: str
@@ -182,6 +190,7 @@ class ExecutiveDashboardReport(BaseModel):
 
 
 # ─── 3H.9.8: Operational Decision Support Models ─────────────────────────────
+
 
 class DecisionSupportInquiry(BaseModel):
     inquiry_id: str
@@ -201,6 +210,7 @@ class DecisionSupportReport(BaseModel):
 
 # ─── 3H.9.9: Continuous Operational Insight Models ──────────────────────────
 
+
 class InsightRefreshCheck(BaseModel):
     insight_stream: str
     refresh_cadence: str
@@ -217,6 +227,7 @@ class ContinuousInsightReport(BaseModel):
 
 
 # ─── 3H.9.10: Master Certification Scorecard Models ─────────────────────────
+
 
 class OperationalIntelligencePillarScore(BaseModel):
     pillar_name: str

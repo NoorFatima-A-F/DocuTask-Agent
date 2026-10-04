@@ -1,6 +1,7 @@
 """
 3I.2.3 & 3I.2.4: Application & Infrastructure Metrics Verifier
 """
+
 from ..domain.models import AppInfraMetricsReport
 from ..domain.interfaces import IAppInfraMetricsVerifier
 
@@ -20,5 +21,5 @@ class AppInfraMetricsVerifier(IAppInfraMetricsVerifier):
             container_cpu_memory_active=True,
             database_connection_metrics_active=True,
             redis_memory_commands_active=True,
-            telemetry_coverage_passed=True
+            telemetry_coverage_passed=True,
         )

@@ -37,7 +37,7 @@ class GoalEvaluator(IEvaluator):
             score=score,
             confidence=0.95,
             evidence=[f"State: {trace.final_state}", f"Completed {completed_tasks}/{total_tasks} tasks"],
-            details={"has_outputs": has_outputs, "status": status}
+            details={"has_outputs": has_outputs, "status": status},
         )
 
         return DimensionEvaluation(
@@ -46,5 +46,5 @@ class GoalEvaluator(IEvaluator):
             status=status,
             metrics=[metric],
             findings=[f"Execution concluded with state {trace.final_state} and status {status}."],
-            recommendation_hints=["Ensure all planned subtasks produce non-empty outputs."] if not has_outputs else []
+            recommendation_hints=["Ensure all planned subtasks produce non-empty outputs."] if not has_outputs else [],
         )

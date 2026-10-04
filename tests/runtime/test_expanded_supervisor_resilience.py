@@ -14,11 +14,14 @@ from app.agents.runtime.runtime_supervisor import (
 )
 
 
-@pytest.mark.parametrize("strategy", [
-    RestartStrategy.ONE_FOR_ONE,
-    RestartStrategy.ONE_FOR_ALL,
-    RestartStrategy.REST_FOR_ONE,
-])
+@pytest.mark.parametrize(
+    "strategy",
+    [
+        RestartStrategy.ONE_FOR_ONE,
+        RestartStrategy.ONE_FOR_ALL,
+        RestartStrategy.REST_FOR_ONE,
+    ],
+)
 @pytest.mark.asyncio
 async def test_supervisor_strategy_instantiation(strategy):
     supervisor = SupervisorTree(strategy=strategy, max_restarts=3, cooldown_seconds=10.0)
@@ -26,18 +29,21 @@ async def test_supervisor_strategy_instantiation(strategy):
     assert supervisor.max_restarts == 3
 
 
-@pytest.mark.parametrize("initial_delay,multiplier,max_delay,attempt,expected_delay", [
-    (1.0, 2.0, 10.0, 1, 1.0),
-    (1.0, 2.0, 10.0, 2, 2.0),
-    (1.0, 2.0, 10.0, 3, 4.0),
-    (1.0, 2.0, 10.0, 4, 8.0),
-    (1.0, 2.0, 10.0, 5, 10.0),  # Capped at max_delay
-    (0.5, 3.0, 15.0, 1, 0.5),
-    (0.5, 3.0, 15.0, 2, 1.5),
-    (0.5, 3.0, 15.0, 3, 4.5),
-    (0.5, 3.0, 15.0, 4, 13.5),
-    (0.5, 3.0, 15.0, 5, 15.0),  # Capped at max_delay
-])
+@pytest.mark.parametrize(
+    "initial_delay,multiplier,max_delay,attempt,expected_delay",
+    [
+        (1.0, 2.0, 10.0, 1, 1.0),
+        (1.0, 2.0, 10.0, 2, 2.0),
+        (1.0, 2.0, 10.0, 3, 4.0),
+        (1.0, 2.0, 10.0, 4, 8.0),
+        (1.0, 2.0, 10.0, 5, 10.0),  # Capped at max_delay
+        (0.5, 3.0, 15.0, 1, 0.5),
+        (0.5, 3.0, 15.0, 2, 1.5),
+        (0.5, 3.0, 15.0, 3, 4.5),
+        (0.5, 3.0, 15.0, 4, 13.5),
+        (0.5, 3.0, 15.0, 5, 15.0),  # Capped at max_delay
+    ],
+)
 def test_backoff_delay_calculation_matrix(initial_delay, multiplier, max_delay, attempt, expected_delay):
     policy = RestartPolicy(
         max_restarts=10,
@@ -58,9 +64,11 @@ async def test_supervisor_one_for_all_cascaded_restarts(child_count):
 
     for i in range(child_count):
         wname = f"worker_{i}"
+
         async def make_starter(n):
             async def _start():
                 restarted[n] += 1
+
             return _start
 
         supervisor.add_child(
@@ -88,9 +96,11 @@ async def test_supervisor_rest_for_one_partial_restarts(fail_index):
     restart_counts = {c: 0 for c in children}
 
     for c in children:
+
         async def make_starter(n):
             async def _start():
                 restart_counts[n] += 1
+
             return _start
 
         supervisor.add_child(

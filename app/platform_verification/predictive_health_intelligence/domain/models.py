@@ -1,16 +1,17 @@
 """
 Domain Models for Predictive Health Intelligence & Early Failure Detection (Part 3H.3.4).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, Any, List
 
 
 class RiskLevel(str, Enum):
-    LOW = "LOW"             # 0 - 30%
-    MEDIUM = "MEDIUM"       # 31 - 70%
-    HIGH = "HIGH"           # 71 - 90%
-    CRITICAL = "CRITICAL"   # 91 - 100%
+    LOW = "LOW"  # 0 - 30%
+    MEDIUM = "MEDIUM"  # 31 - 70%
+    HIGH = "HIGH"  # 71 - 90%
+    CRITICAL = "CRITICAL"  # 91 - 100%
 
 
 class AnomalySeverity(str, Enum):
@@ -37,10 +38,10 @@ class PreventiveActionType(str, Enum):
 
 
 class PredictiveHealthTier(str, Enum):
-    FAILED = "Failed"                                         # < 80
-    NEEDS_IMPROVEMENT = "Improvement Required"               # 80 - 89
-    PRODUCTION_READY = "Production Ready"                     # 90 - 94
-    ENTERPRISE_READY = "Predictive Reliability Ready"          # 95 - 100
+    FAILED = "Failed"  # < 80
+    NEEDS_IMPROVEMENT = "Improvement Required"  # 80 - 89
+    PRODUCTION_READY = "Production Ready"  # 90 - 94
+    ENTERPRISE_READY = "Predictive Reliability Ready"  # 95 - 100
 
 
 @dataclass
@@ -204,14 +205,14 @@ class AccuracyReport:
 
 @dataclass
 class PredictiveHealthScorecard:
-    telemetry_quality_score: float       # Weight 20%
-    anomaly_detection_score: float       # Weight 20%
-    prediction_accuracy_score: float     # Weight 20%
-    early_warning_score: float           # Weight 15%
-    preventive_actions_score: float      # Weight 15%
-    observability_score: float           # Weight 10%
-    overall_score: float                 # Composite 0 - 100
+    telemetry_quality_score: float  # Weight 20%
+    anomaly_detection_score: float  # Weight 20%
+    prediction_accuracy_score: float  # Weight 20%
+    early_warning_score: float  # Weight 15%
+    preventive_actions_score: float  # Weight 15%
+    observability_score: float  # Weight 10%
+    overall_score: float  # Composite 0 - 100
     certification_tier: PredictiveHealthTier
-    certification_verdict: str           # CERTIFIED / REJECTED
+    certification_verdict: str  # CERTIFIED / REJECTED
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

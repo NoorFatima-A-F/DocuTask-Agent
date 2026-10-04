@@ -95,7 +95,11 @@ class BusinessValueCertifier:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"net_roi_pct": net_roi_pct, "annual_savings_usd": annual_savings_usd, "payback_months": payback_months},
+            metrics={
+                "net_roi_pct": net_roi_pct,
+                "annual_savings_usd": annual_savings_usd,
+                "payback_months": payback_months,
+            },
             execution_time_ms=elapsed_ms,
         )
 

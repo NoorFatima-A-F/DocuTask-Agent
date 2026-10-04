@@ -139,7 +139,9 @@ class BenchmarkEvidenceCollector:
             source=source_module,
             generated_by="benchmark_harness",
             artifact_location=artifact_path,
-            verification_status=VerificationStatus.VERIFIED if stats.failures == 0 else VerificationStatus.FAILED_VERIFICATION,
+            verification_status=VerificationStatus.VERIFIED
+            if stats.failures == 0
+            else VerificationStatus.FAILED_VERIFICATION,
             confidence=1.0,
             reproducibility="STATISTICAL",
             raw_payload=payload,

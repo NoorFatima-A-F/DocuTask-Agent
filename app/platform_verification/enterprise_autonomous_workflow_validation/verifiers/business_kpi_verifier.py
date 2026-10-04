@@ -25,11 +25,37 @@ class BusinessKPIVerifier(IBusinessKPIVerifier):
 
     def verify(self) -> BusinessKPIReport:
         kpis = [
-            BusinessKPIData(kpi_name="EndToEndAutomationRate", baseline_value=20.0, achieved_value=95.4, unit="%", improvement_pct=377.0),
-            BusinessKPIData(kpi_name="HumanLaborEffortReduction", baseline_value=100.0, achieved_value=12.5, unit="HoursPer1000Docs", improvement_pct=87.5),
-            BusinessKPIData(kpi_name="DocumentProcessingCycleTime", baseline_value=1800.0, achieved_value=145.0, unit="Seconds", improvement_pct=91.9),
-            BusinessKPIData(kpi_name="FirstPassAccuracyRate", baseline_value=72.0, achieved_value=99.2, unit="%", improvement_pct=37.8),
-            BusinessKPIData(kpi_name="SLAComplianceRate", baseline_value=88.0, achieved_value=99.95, unit="%", improvement_pct=13.6),
+            BusinessKPIData(
+                kpi_name="EndToEndAutomationRate",
+                baseline_value=20.0,
+                achieved_value=95.4,
+                unit="%",
+                improvement_pct=377.0,
+            ),
+            BusinessKPIData(
+                kpi_name="HumanLaborEffortReduction",
+                baseline_value=100.0,
+                achieved_value=12.5,
+                unit="HoursPer1000Docs",
+                improvement_pct=87.5,
+            ),
+            BusinessKPIData(
+                kpi_name="DocumentProcessingCycleTime",
+                baseline_value=1800.0,
+                achieved_value=145.0,
+                unit="Seconds",
+                improvement_pct=91.9,
+            ),
+            BusinessKPIData(
+                kpi_name="FirstPassAccuracyRate",
+                baseline_value=72.0,
+                achieved_value=99.2,
+                unit="%",
+                improvement_pct=37.8,
+            ),
+            BusinessKPIData(
+                kpi_name="SLAComplianceRate", baseline_value=88.0, achieved_value=99.95, unit="%", improvement_pct=13.6
+            ),
         ]
 
         checks = [

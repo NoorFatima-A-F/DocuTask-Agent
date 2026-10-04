@@ -11,9 +11,7 @@ class ConditionalWorkflowEngine:
     """Evaluates edge condition expressions against workflow state variables."""
 
     def select_next_edge(
-        self,
-        outgoing_edges: List[WorkflowEdge],
-        state_vars: Dict[str, Any]
+        self, outgoing_edges: List[WorkflowEdge], state_vars: Dict[str, Any]
     ) -> Optional[WorkflowEdge]:
         """Selects the first edge whose condition evaluates True, or default edge."""
         default_edge = None

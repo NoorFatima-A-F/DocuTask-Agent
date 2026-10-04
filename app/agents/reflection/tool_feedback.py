@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class ToolPerformanceFeedback(BaseModel):
     """Performance feedback on a specific tool definition or capability."""
+
     tool_name: str
     reliability_rate: float
     average_duration_ms: float
@@ -24,6 +25,7 @@ class ToolPerformanceFeedback(BaseModel):
 
 class ToolFeedback(BaseModel):
     """Feedback payload for the Tool Registry and Tool Capability Resolution layer."""
+
     feedback_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     tool_evaluations: List[ToolPerformanceFeedback] = Field(default_factory=list)

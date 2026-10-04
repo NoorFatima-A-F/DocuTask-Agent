@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class TenantInstalledResource(BaseModel):
     """Tenant-scoped installation of a global marketplace asset."""
+
     installation_id: str
     organization_id: str
     workspace_id: str
@@ -61,9 +62,12 @@ class MarketplaceTenantIsolation:
             return None
         return inst
 
-    def list_installations(self, organization_id: str, workspace_id: Optional[str] = None) -> List[TenantInstalledResource]:
+    def list_installations(
+        self, organization_id: str, workspace_id: Optional[str] = None
+    ) -> List[TenantInstalledResource]:
         """List all marketplace installations within an organization."""
         return [
-            inst for inst in self._installations.values()
+            inst
+            for inst in self._installations.values()
             if inst.organization_id == organization_id and (workspace_id is None or inst.workspace_id == workspace_id)
         ]

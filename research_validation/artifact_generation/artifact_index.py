@@ -110,7 +110,7 @@ class ArtifactIndexer:
                     "path": e.relative_path,
                 }
                 for e in self._entries
-            ]
+            ],
         }
         root_h = hash_canonical_json(payload)
 

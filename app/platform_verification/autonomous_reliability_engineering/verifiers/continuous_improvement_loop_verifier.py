@@ -2,6 +2,7 @@
 3I.12.11: Continuous Reliability Improvement Loop Verifier
 Verifies the closed-loop Observe -> Analyze -> Improve -> Measure -> Learn -> Repeat lifecycle.
 """
+
 from typing import List
 from app.platform_verification.autonomous_reliability_engineering.domain.models import (
     ContinuousReliabilityImprovementReport,

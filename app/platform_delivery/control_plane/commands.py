@@ -1,4 +1,5 @@
 """CQRS Command Models for Platform Delivery Control Plane."""
+
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
@@ -6,6 +7,7 @@ from typing import Any, Dict, List, Optional
 @dataclass
 class RequestDeploymentCommand:
     """Command to initiate a new deployment."""
+
     release_id: str
     environment_id: str
     strategy: str = "ROLLING"
@@ -22,6 +24,7 @@ class RequestDeploymentCommand:
 @dataclass
 class ApproveDeploymentCommand:
     """Command to grant governance approval to an awaiting deployment."""
+
     deployment_id: str
     approved_by: str
     role: str
@@ -32,6 +35,7 @@ class ApproveDeploymentCommand:
 @dataclass
 class RollbackDeploymentCommand:
     """Command to execute a controlled rollback."""
+
     deployment_id: str
     target_release_id: Optional[str] = None
     reason: str = "Automated SLO or operator rollback trigger"
@@ -41,6 +45,7 @@ class RollbackDeploymentCommand:
 @dataclass
 class QuarantineArtifactCommand:
     """Command to quarantine an artifact due to security or integrity violation."""
+
     artifact_digest: str
     reason: str
     reported_by: str = "security_scanner"

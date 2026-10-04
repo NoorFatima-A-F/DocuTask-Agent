@@ -107,16 +107,42 @@ class RunBenchmarkRequest(BaseModel):
 # Endpoints
 # -------------------------------------------------------------
 
+
 # 1. Observability & Live State
 @router.get("/timeline", summary="Get live chronological mission timeline")
 async def get_mission_timeline(mission_id: str = Query(default="mission_live_001")):
     # Sample real events for timeline
     events = [
-        {"timestamp": 100.0, "event_type": "MISSION_DISPATCHED", "actor": "TaskOrchestrator", "summary": "Mission initiated"},
-        {"timestamp": 100.12, "event_type": "OCR_INGEST_COMPLETED", "actor": "Worker-OCR-1", "payload": {"duration_ms": 120.0, "confidence": 0.98}},
-        {"timestamp": 100.45, "event_type": "LLM_INFERENCE_DONE", "actor": "Worker-LLM-1", "payload": {"duration_ms": 330.0, "cost_usd": 0.0018, "confidence": 0.965}},
-        {"timestamp": 100.75, "event_type": "VALIDATION_INVARIANT_PASSED", "actor": "Worker-Val-1", "payload": {"duration_ms": 50.0, "confidence": 0.985}},
-        {"timestamp": 100.82, "event_type": "CRYPTO_AUDIT_SIGNED", "actor": "Worker-Sec-1", "payload": {"signature": "ED25519_SIG_8F3A"}},
+        {
+            "timestamp": 100.0,
+            "event_type": "MISSION_DISPATCHED",
+            "actor": "TaskOrchestrator",
+            "summary": "Mission initiated",
+        },
+        {
+            "timestamp": 100.12,
+            "event_type": "OCR_INGEST_COMPLETED",
+            "actor": "Worker-OCR-1",
+            "payload": {"duration_ms": 120.0, "confidence": 0.98},
+        },
+        {
+            "timestamp": 100.45,
+            "event_type": "LLM_INFERENCE_DONE",
+            "actor": "Worker-LLM-1",
+            "payload": {"duration_ms": 330.0, "cost_usd": 0.0018, "confidence": 0.965},
+        },
+        {
+            "timestamp": 100.75,
+            "event_type": "VALIDATION_INVARIANT_PASSED",
+            "actor": "Worker-Val-1",
+            "payload": {"duration_ms": 50.0, "confidence": 0.985},
+        },
+        {
+            "timestamp": 100.82,
+            "event_type": "CRYPTO_AUDIT_SIGNED",
+            "actor": "Worker-Sec-1",
+            "payload": {"signature": "ED25519_SIG_8F3A"},
+        },
     ]
     timeline = TimelineBuilder.build_timeline_from_events(mission_id, events)
     return {

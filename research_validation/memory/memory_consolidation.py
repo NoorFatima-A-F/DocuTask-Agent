@@ -17,6 +17,7 @@ from research_validation.memory.long_term_memory import LongTermMemoryStore
 @dataclass(frozen=True)
 class ConsolidationReport:
     """Summary of memory consolidation process."""
+
     episodes_processed: int
     new_invariants_stored: int
     pruned_memories: int

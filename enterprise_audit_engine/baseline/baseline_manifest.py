@@ -21,6 +21,7 @@ class RuleBaseline(BaseModel):
 
 class GoldenBaselineManifest(BaseModel):
     """Immutable snapshot of a certified baseline release."""
+
     baseline_version: str = "1.0.0"
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     engine_version: str = "2.1.0"

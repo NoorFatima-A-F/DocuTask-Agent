@@ -3,6 +3,7 @@ Part 8: Backup Ownership Model Engine.
 Enforces that every recoverable asset has defined engineering ownership,
 automation systems, restore owners, and verification owners.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.backup_architecture_verification.domain.models import (
     AssetInventoryItem,
@@ -280,9 +281,12 @@ class OwnershipModelEngine(IOwnershipModelEngine):
                 continue
 
             has_valid_owners = bool(
-                info.get("owner_team") and info.get("owner_team") != "UNASSIGNED"
-                and info.get("restore_owner_team") and info.get("restore_owner_team") != "UNASSIGNED"
-                and info.get("verification_owner_team") and info.get("verification_owner_team") != "UNASSIGNED"
+                info.get("owner_team")
+                and info.get("owner_team") != "UNASSIGNED"
+                and info.get("restore_owner_team")
+                and info.get("restore_owner_team") != "UNASSIGNED"
+                and info.get("verification_owner_team")
+                and info.get("verification_owner_team") != "UNASSIGNED"
             )
 
             record = BackupOwnershipRecord(
@@ -300,9 +304,7 @@ class OwnershipModelEngine(IOwnershipModelEngine):
 
         return records
 
-    def export_ownership_report_json(
-        self, records: List[BackupOwnershipRecord]
-    ) -> Dict[str, Any]:
+    def export_ownership_report_json(self, records: List[BackupOwnershipRecord]) -> Dict[str, Any]:
         """Formats the ownership report to JSON dictionary."""
         valid_count = len([r for r in records if r.has_assigned_owners])
         return {

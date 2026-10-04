@@ -1,6 +1,7 @@
 """
 Permanent Regression Test Database and Defect Replay Engine.
 """
+
 from __future__ import annotations
 import uuid
 from typing import Any, Dict, List

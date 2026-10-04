@@ -57,10 +57,7 @@ class AuditApiService:
         page_size: int = 50,
     ) -> Dict[str, Any]:
         """Query audit records scoped to tenant."""
-        results = [
-            a for a in self._audit_records
-            if a["tenant_id"] == ctx.tenant_id
-        ]
+        results = [a for a in self._audit_records if a["tenant_id"] == ctx.tenant_id]
         if event_type:
             results = [a for a in results if a.get("event_type") == event_type]
         if actor:
@@ -111,5 +108,11 @@ def handle_get_audit_proof(ctx: APIRequestContext, path_params: Dict[str, Any]) 
     audit_id = path_params["id"]
     proof = audit_api_service.get_audit_proof(ctx, audit_id)
     if not proof:
-        return {"error": {"code": "NOT_FOUND", "message": f"Audit record {audit_id} not found", "request_id": ctx.request_id}}
+        return {
+            "error": {
+                "code": "NOT_FOUND",
+                "message": f"Audit record {audit_id} not found",
+                "request_id": ctx.request_id,
+            }
+        }
     return proof

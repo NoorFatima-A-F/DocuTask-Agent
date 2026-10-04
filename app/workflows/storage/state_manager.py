@@ -61,7 +61,9 @@ class WorkflowStateManager:
 
         return record
 
-    def record_task_start(self, execution_id: str, task_id: str, task_name: str, inputs: Dict[str, Any]) -> TaskExecutionRecord:
+    def record_task_start(
+        self, execution_id: str, task_id: str, task_name: str, inputs: Dict[str, Any]
+    ) -> TaskExecutionRecord:
         """Mark task start."""
         record = self.get_execution(execution_id)
         if not record:

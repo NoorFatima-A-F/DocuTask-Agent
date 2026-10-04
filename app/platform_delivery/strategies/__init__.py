@@ -1,4 +1,5 @@
 """Platform Delivery Strategies Package."""
+
 from .blue_green import BlueGreenStrategy, EnvironmentSlot
 from .canary import CanaryStepEvaluation, CanaryStrategy
 from .rolling import RollingStep, RollingStrategy

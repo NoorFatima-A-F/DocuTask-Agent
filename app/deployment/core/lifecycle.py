@@ -1,4 +1,5 @@
 """Deployment Lifecycle and State Machine Engine."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
@@ -8,6 +9,7 @@ from .exceptions import DeploymentException
 
 class DeploymentStatus(str, Enum):
     """Lifecycle states for deployments."""
+
     PENDING = "PENDING"
     VALIDATING = "VALIDATING"
     PREPARING = "PREPARING"
@@ -22,6 +24,7 @@ class DeploymentStatus(str, Enum):
 @dataclass
 class StateTransitionRecord:
     """Audit record for a single state transition."""
+
     from_status: DeploymentStatus
     to_status: DeploymentStatus
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
@@ -38,8 +41,16 @@ class DeploymentStateEngine:
         DeploymentStatus.PREPARING: {DeploymentStatus.DEPLOYING, DeploymentStatus.FAILED},
         DeploymentStatus.DEPLOYING: {DeploymentStatus.VERIFYING, DeploymentStatus.FAILED, DeploymentStatus.ROLLED_BACK},
         DeploymentStatus.VERIFYING: {DeploymentStatus.ACTIVE, DeploymentStatus.FAILED, DeploymentStatus.ROLLED_BACK},
-        DeploymentStatus.ACTIVE: {DeploymentStatus.ROLLED_BACK, DeploymentStatus.DECOMMISSIONED, DeploymentStatus.FAILED},
-        DeploymentStatus.FAILED: {DeploymentStatus.ROLLED_BACK, DeploymentStatus.PENDING, DeploymentStatus.DECOMMISSIONED},
+        DeploymentStatus.ACTIVE: {
+            DeploymentStatus.ROLLED_BACK,
+            DeploymentStatus.DECOMMISSIONED,
+            DeploymentStatus.FAILED,
+        },
+        DeploymentStatus.FAILED: {
+            DeploymentStatus.ROLLED_BACK,
+            DeploymentStatus.PENDING,
+            DeploymentStatus.DECOMMISSIONED,
+        },
         DeploymentStatus.ROLLED_BACK: {DeploymentStatus.DECOMMISSIONED, DeploymentStatus.PENDING},
         DeploymentStatus.DECOMMISSIONED: set(),
     }

@@ -73,7 +73,11 @@ class DashboardService:
         model_metrics = self.metrics.get_model_metrics(tenant_id=tenant_id)
         prompt_metrics = self.metrics.get_prompt_metrics(tenant_id=tenant_id)
 
-        fail_rate = (agent_metrics.failed_agent_executions / agent_metrics.total_agent_executions) if agent_metrics.total_agent_executions > 0 else 0.0
+        fail_rate = (
+            (agent_metrics.failed_agent_executions / agent_metrics.total_agent_executions)
+            if agent_metrics.total_agent_executions > 0
+            else 0.0
+        )
 
         return DeveloperDashboardDTO(
             tenant_id=tenant_id,

@@ -171,10 +171,7 @@ class EventReplayEngine:
 
         # Query intermediate events
         all_events = await self.store.query(mission_id=mission_id, limit=10000)
-        intermediates = [
-            e for e in all_events
-            if step_a < e.sequence_number <= step_b
-        ]
+        intermediates = [e for e in all_events if step_a < e.sequence_number <= step_b]
 
         delta_completed = [t for t in snap_b.completed_tasks if t not in snap_a.completed_tasks]
         delta_running = [t for t in snap_b.running_tasks if t not in snap_a.running_tasks]

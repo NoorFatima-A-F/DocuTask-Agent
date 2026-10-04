@@ -77,7 +77,10 @@ class AIGovernanceEngine:
                 passed=passed_4,
                 message=f"Formal compliance verified across NIST AI RMF (Map, Measure, Manage, Govern) and ISO 42001 ({standards_alignment_pct}%)",
                 execution_time_ms=t_ms,
-                details={"frameworks": ["NIST AI RMF 1.0", "ISO/IEC 42001", "EU AI Act High-Risk"], "alignment_score": standards_alignment_pct},
+                details={
+                    "frameworks": ["NIST AI RMF 1.0", "ISO/IEC 42001", "EU AI Act High-Risk"],
+                    "alignment_score": standards_alignment_pct,
+                },
             )
         )
 
@@ -93,7 +96,10 @@ class AIGovernanceEngine:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"decision_traceability_pct": decision_traceability_pct, "standards_alignment_pct": standards_alignment_pct},
+            metrics={
+                "decision_traceability_pct": decision_traceability_pct,
+                "standards_alignment_pct": standards_alignment_pct,
+            },
             execution_time_ms=elapsed_ms,
         )
 

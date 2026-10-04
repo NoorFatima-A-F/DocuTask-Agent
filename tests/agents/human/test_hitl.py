@@ -292,5 +292,3 @@ class TestHumanTaskManager:
         mgr = HumanTaskManager()
         with pytest.raises(ValueError):
             mgr.submit_operator_decision(ticket_id=uuid4(), action=HumanActionType.APPROVE)
-
-

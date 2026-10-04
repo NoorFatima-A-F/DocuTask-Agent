@@ -17,6 +17,7 @@ from app.runtime.intelligence.belief_state import BeliefStateEngine
 
 class BayesianEvidenceNode(BaseModel):
     """Single observed piece of empirical evidence."""
+
     evidence_id: str = Field(default_factory=lambda: f"evi_{uuid.uuid4().hex[:8]}")
     variable_name: str
     observed_signal: str
@@ -35,6 +36,7 @@ class BayesianEvidenceNode(BaseModel):
 
 class BayesianPosteriorReport(BaseModel):
     """Complete posterior probability report with credible intervals and algebraic provenance."""
+
     variable_name: str
     prior_mean: float
     posterior_mean: float
@@ -81,9 +83,7 @@ class BayesianUpdateEngine:
         self._evidence_chain.append(node)
 
         # 3. Update belief state engine
-        updated_belief, _ = self.belief_engine.update_belief(
-            variable_name, success_increment, failure_increment
-        )
+        updated_belief, _ = self.belief_engine.update_belief(variable_name, success_increment, failure_increment)
         ci_lower, ci_upper = updated_belief.get_credible_interval_95()
 
         return BayesianPosteriorReport(

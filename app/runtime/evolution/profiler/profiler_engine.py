@@ -93,14 +93,17 @@ class ProfilerEngine:
             cache_hit_rate=0.82,
             health_grade=ArchitectureHealth.HEALTHY,
             composite_health_score=0.912,
-            active_bottlenecks=["Context token redundancy during multi-turn reasoning", "Sequential queue lock contention"],
+            active_bottlenecks=[
+                "Context token redundancy during multi-turn reasoning",
+                "Sequential queue lock contention",
+            ],
         )
         self.snapshots.append(snap)
 
     def profile_system(self, overrides: Optional[Dict[str, Any]] = None) -> PlatformHealthSnapshot:
         """Collects holistic runtime metrics and computes composite architecture health."""
         overrides = overrides or {}
-        
+
         cpu = overrides.get("cpu_utilization_pct", 42.0)
         mem = overrides.get("memory_usage_mb", 1200.0)
         mem_pct = overrides.get("memory_utilization_pct", 46.0)
@@ -121,7 +124,7 @@ class ProfilerEngine:
         if p95 > 200.0:
             bottlenecks.append("P95 Latency threshold exceeded (>200ms)")
         if waste > 0.05:
-            bottlenecks.append(f"Elevated Token Waste Rate ({round(waste*100, 1)}%)")
+            bottlenecks.append(f"Elevated Token Waste Rate ({round(waste * 100, 1)}%)")
         if queue > 75.0:
             bottlenecks.append("Queue Saturation Warning (>75%)")
         if cache < 0.80:

@@ -64,13 +64,7 @@ class RuntimeHealthEvaluator:
 
         # Weighted composition:
         # weights: fail(0.30), retry(0.15), cpu(0.20), mem(0.20), queue(0.15)
-        raw_score = (
-            0.30 * score_fail
-            + 0.15 * score_retry
-            + 0.20 * score_cpu
-            + 0.20 * score_mem
-            + 0.15 * score_queue
-        )
+        raw_score = 0.30 * score_fail + 0.15 * score_retry + 0.20 * score_cpu + 0.20 * score_mem + 0.15 * score_queue
         overall_score = max(0.0, min(1.0, raw_score - anomaly_penalty))
         is_healthy = overall_score >= 0.70
 

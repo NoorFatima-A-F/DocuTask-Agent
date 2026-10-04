@@ -58,13 +58,16 @@ class MultiObjectivePlanOptimizer:
         highest_utility = -1.0
 
         for cand in valid_candidates:
-            objs = cand.get("objectives", {
-                "accuracy": cand.get("accuracy", 0.95),
-                "latency_ms": cand.get("latency_ms", 1200.0) / 5000.0,  # normalized
-                "cost_usd": cand.get("cost_usd", 0.02) / 0.10,         # normalized
-                "safety_compliance": cand.get("safety_compliance", 1.0),
-                "reliability": cand.get("reliability", 0.98),
-            })
+            objs = cand.get(
+                "objectives",
+                {
+                    "accuracy": cand.get("accuracy", 0.95),
+                    "latency_ms": cand.get("latency_ms", 1200.0) / 5000.0,  # normalized
+                    "cost_usd": cand.get("cost_usd", 0.02) / 0.10,  # normalized
+                    "safety_compliance": cand.get("safety_compliance", 1.0),
+                    "reliability": cand.get("reliability", 0.98),
+                },
+            )
             # Scalarize utility
             score = ObjectiveFunctions.weighted_sum_scalarization(objs, applied_weights, cls.IS_COST_MAP)
             chebyshev_score = ObjectiveFunctions.chebyshev_scalarization(objs, applied_weights, cls.IS_COST_MAP)
@@ -75,8 +78,7 @@ class MultiObjectivePlanOptimizer:
             scored["chebyshev_utility"] = chebyshev_score
             scored["distance_to_utopian"] = dist_utopian
             scored["is_pareto_optimal"] = any(
-                (c.get("id") or c.get("plan_id")) == (cand.get("id") or cand.get("plan_id"))
-                for c in frontier
+                (c.get("id") or c.get("plan_id")) == (cand.get("id") or cand.get("plan_id")) for c in frontier
             )
             scored_candidates.append(scored)
 
@@ -94,7 +96,9 @@ class MultiObjectivePlanOptimizer:
             timestamp_utc=datetime.now(timezone.utc).isoformat(),
             context_id=context_id,
             weights=applied_weights,
-            selected_plan_id=best_candidate.get("id", best_candidate.get("plan_id", "plan_0")) if best_candidate else "none",
+            selected_plan_id=best_candidate.get("id", best_candidate.get("plan_id", "plan_0"))
+            if best_candidate
+            else "none",
             selected_plan_utility=highest_utility,
             candidate_count=len(candidate_plans),
             pareto_frontier_count=len(frontier),

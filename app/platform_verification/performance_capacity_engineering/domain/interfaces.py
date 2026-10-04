@@ -1,6 +1,7 @@
 """
 Phase 3J.1: Performance Infrastructure Verification — Domain Interfaces
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 
@@ -98,6 +99,8 @@ class IPerformanceCertificationScorer(ABC):
 
 class IPerformanceVerificationExporter(ABC):
     @abstractmethod
-    def export(self, verification_results: Dict[str, Any], certification_report: PerformanceCertificationReport) -> Dict[str, str]:
+    def export(
+        self, verification_results: Dict[str, Any], certification_report: PerformanceCertificationReport
+    ) -> Dict[str, str]:
         """Export all verification manifests and signed metadata.json."""
         pass

@@ -1,6 +1,7 @@
 """
 CLI Entrypoint for Enterprise Container and Runtime Verification.
 """
+
 import uuid
 import hashlib
 from typing import Dict, Any, Optional
@@ -17,7 +18,9 @@ from app.platform_verification.container_verification.analyzers.dependency_analy
 from app.platform_verification.container_verification.analyzers.runtime_analyzer import RuntimeAnalyzer
 from app.platform_verification.container_verification.analyzers.security_analyzer import SecurityAnalyzer
 from app.platform_verification.container_verification.validators.isolation_validator import IsolationValidator
-from app.platform_verification.container_verification.validators.reproducibility_validator import ReproducibilityValidator
+from app.platform_verification.container_verification.validators.reproducibility_validator import (
+    ReproducibilityValidator,
+)
 from app.platform_verification.container_verification.validators.resource_validator import ResourceValidator
 from app.platform_verification.container_verification.validators.configuration_validator import ConfigurationValidator
 from app.platform_verification.container_verification.scanners.vulnerability_scanner import VulnerabilityScanner
@@ -59,19 +62,45 @@ class ContainerVerificationPlatform:
         if dockerfile_content is None:
             dockerfile_content = """FROM python:3.12-slim as builder\nWORKDIR /app\nRUN apt update && apt install -y gcc\nFROM python:3.12-slim\nUSER appuser\nWORKDIR /app\nCOPY . /app\nCMD ["uvicorn", "app.main:app"]"""
         if image_meta is None:
-            image_meta = {"image_name": "doctask-api", "compressed_size_mb": 170.0, "uncompressed_size_mb": 410.0, "layer_count": 8, "contained_files": []}
+            image_meta = {
+                "image_name": "doctask-api",
+                "compressed_size_mb": 170.0,
+                "uncompressed_size_mb": 410.0,
+                "layer_count": 8,
+                "contained_files": [],
+            }
         if dependencies is None:
             dependencies = [{"name": "fastapi", "version": "0.110.0", "license": "MIT", "source": "pypi"}]
         if runtime_meta is None:
-            runtime_meta = {"service_name": "api", "startup_time_seconds": 1.5, "health_endpoint_verified": True, "live_endpoint_verified": True, "ready_endpoint_verified": True}
+            runtime_meta = {
+                "service_name": "api",
+                "startup_time_seconds": 1.5,
+                "health_endpoint_verified": True,
+                "live_endpoint_verified": True,
+                "ready_endpoint_verified": True,
+            }
         if vuln_data is None:
             vuln_data = []
         if repro_meta is None:
-            repro_meta = {"source_commit": commit_sha, "digest_build_1": "sha256:abc123456", "digest_build_2": "sha256:abc123456"}
+            repro_meta = {
+                "source_commit": commit_sha,
+                "digest_build_1": "sha256:abc123456",
+                "digest_build_2": "sha256:abc123456",
+            }
         if failure_scenarios is None:
             failure_scenarios = [
-                {"target_service": "api", "recovered_successfully": True, "data_loss": False, "restart_latency_seconds": 1.2},
-                {"target_service": "worker", "recovered_successfully": True, "data_loss": False, "restart_latency_seconds": 2.0},
+                {
+                    "target_service": "api",
+                    "recovered_successfully": True,
+                    "data_loss": False,
+                    "restart_latency_seconds": 1.2,
+                },
+                {
+                    "target_service": "worker",
+                    "recovered_successfully": True,
+                    "data_loss": False,
+                    "restart_latency_seconds": 2.0,
+                },
             ]
 
         # 1. Discovery & Boundaries
@@ -129,10 +158,18 @@ class ContainerVerificationPlatform:
     def _default_architecture(self) -> ContainerArchitectureModel:
         return ContainerArchitectureModel(
             services={
-                "api": ServiceDefinition(name="api", image="doctask-api", ports=["8000:8000"], depends_on=["postgres", "redis"]),
-                "worker": ServiceDefinition(name="worker", image="doctask-worker", ports=[], depends_on=["postgres", "redis"]),
-                "postgres": ServiceDefinition(name="postgres", image="postgres:16-alpine", ports=["127.0.0.1:5432:5432"], depends_on=[]),
-                "redis": ServiceDefinition(name="redis", image="redis:7-alpine", ports=["127.0.0.1:6379:6379"], depends_on=[]),
+                "api": ServiceDefinition(
+                    name="api", image="doctask-api", ports=["8000:8000"], depends_on=["postgres", "redis"]
+                ),
+                "worker": ServiceDefinition(
+                    name="worker", image="doctask-worker", ports=[], depends_on=["postgres", "redis"]
+                ),
+                "postgres": ServiceDefinition(
+                    name="postgres", image="postgres:16-alpine", ports=["127.0.0.1:5432:5432"], depends_on=[]
+                ),
+                "redis": ServiceDefinition(
+                    name="redis", image="redis:7-alpine", ports=["127.0.0.1:6379:6379"], depends_on=[]
+                ),
             },
             networks={"default": NetworkDefinition(name="default")},
             volumes={"pgdata": VolumeDefinition(name="pgdata")},

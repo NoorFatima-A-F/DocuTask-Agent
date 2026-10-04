@@ -52,12 +52,18 @@ class DeploymentControlPlaneManager:
                 raise ValueError(f"Active deployment already in progress for '{lock_key}'")
 
             # 1. Pre-flight Governance check
-            if self._governance_verifier and not self._governance_verifier(service_name, target_version, target_environment):
-                raise PermissionError(f"Deployment governance gate rejected deployment of '{service_name}' to '{target_environment}'")
+            if self._governance_verifier and not self._governance_verifier(
+                service_name, target_version, target_environment
+            ):
+                raise PermissionError(
+                    f"Deployment governance gate rejected deployment of '{service_name}' to '{target_environment}'"
+                )
 
             # 2. Pre-flight Reliability check (e.g. no active critical incidents)
             if self._reliability_gate and not self._reliability_gate(target_environment):
-                raise RuntimeError(f"Reliability gate blocked deployment in '{target_environment}' due to active incidents or depleted error budget")
+                raise RuntimeError(
+                    f"Reliability gate blocked deployment in '{target_environment}' due to active incidents or depleted error budget"
+                )
 
             # Determine previous version
             latest = self.history_tracker.get_latest_deployment(service_name, target_environment)
@@ -90,6 +96,8 @@ class DeploymentControlPlaneManager:
         """Fetch deployment record."""
         return self.history_tracker.get_deployment(deployment_id)
 
-    def list_deployments(self, service_name: Optional[str] = None, environment: Optional[str] = None) -> List[DeploymentRecord]:
+    def list_deployments(
+        self, service_name: Optional[str] = None, environment: Optional[str] = None
+    ) -> List[DeploymentRecord]:
         """Query deployment history."""
         return self.history_tracker.list_deployments(service_name=service_name, environment=environment)

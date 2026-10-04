@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10: Enterprise Observability Security - Abstract Interfaces
 """
+
 from abc import ABC, abstractmethod
 from typing import List
 from .models import (

@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class BetaBelief(BaseModel):
     """Beta distribution parameterization for a continuous probability in [0, 1]."""
+
     alpha: float = Field(default=1.0, ge=0.001, description="Pseudo-counts of successes")
     beta_param: float = Field(default=1.0, ge=0.001, description="Pseudo-counts of failures")
     name: str = ""
@@ -27,7 +28,7 @@ class BetaBelief(BaseModel):
     @property
     def variance(self) -> float:
         ab = self.alpha + self.beta_param
-        return (self.alpha * self.beta_param) / ((ab ** 2) * (ab + 1.0))
+        return (self.alpha * self.beta_param) / ((ab**2) * (ab + 1.0))
 
     @property
     def std_dev(self) -> float:
@@ -58,6 +59,7 @@ class BetaBelief(BaseModel):
 
 class KalmanBelief(BaseModel):
     """1D Kalman Filter state for continuous Gaussian variables (e.g. worker latency ms)."""
+
     state_mean: float = 250.0
     state_variance: float = 2500.0
     process_noise_q: float = 10.0
@@ -79,6 +81,7 @@ class KalmanBelief(BaseModel):
 
 class BeliefSnapshot(BaseModel):
     """Immutable snapshot of the multi-dimensional belief state."""
+
     snapshot_id: str = Field(default_factory=lambda: f"snap_{uuid.uuid4().hex[:8]}")
     mission_id: str
     version: int
@@ -118,8 +121,12 @@ class BeliefStateEngine:
             self._beliefs[name] = BetaBelief(alpha=alpha, beta_param=beta, name=name, description=desc)
 
         # Kalman state trackers
-        self._kalman_states["execution_latency_ms"] = KalmanBelief(state_mean=450.0, state_variance=1200.0, name="execution_latency_ms")
-        self._kalman_states["worker_cpu_utilization"] = KalmanBelief(state_mean=35.0, state_variance=100.0, name="worker_cpu_utilization")
+        self._kalman_states["execution_latency_ms"] = KalmanBelief(
+            state_mean=450.0, state_variance=1200.0, name="execution_latency_ms"
+        )
+        self._kalman_states["worker_cpu_utilization"] = KalmanBelief(
+            state_mean=35.0, state_variance=100.0, name="worker_cpu_utilization"
+        )
 
         self._record_snapshot()
 

@@ -1,12 +1,14 @@
 """
 OpenTelemetry-compatible Observability, Structured Logging, and Metrics Export for Verification Components.
 """
+
 import time
 import logging
 from typing import List
 from ..domain.models import ComponentHealth
 
 logger = logging.getLogger("EnterpriseVerificationPlatform")
+
 
 class ComponentObservability:
     def __init__(self, component_name: str):
@@ -36,5 +38,5 @@ class ComponentObservability:
             latency_ms=round(avg_lat, 2),
             error_rate_pct=round(err_rate, 2),
             uptime_seconds=uptime,
-            active_connections=2
+            active_connections=2,
         )

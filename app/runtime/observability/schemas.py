@@ -76,6 +76,7 @@ class EventType(str, enum.Enum):
 
 class TraceContext(BaseModel):
     """OpenTelemetry-compatible distributed trace context."""
+
     trace_id: str = Field(default_factory=lambda: uuid.uuid4().hex)
     span_id: str = Field(default_factory=lambda: uuid.uuid4().hex[:16])
     parent_span_id: Optional[str] = None
@@ -90,6 +91,7 @@ class TraceContext(BaseModel):
 
 class BaseRuntimeEvent(BaseModel):
     """Base immutable runtime event containing comprehensive provenance metadata."""
+
     event_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     category: EventCategory
     event_type: str
@@ -137,65 +139,85 @@ RuntimeEvent = BaseRuntimeEvent
 
 # --- 19 Concrete Event Models ---
 
+
 class MissionEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.MISSION
+
 
 class PlannerEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.PLANNER
 
+
 class ExecutionEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.EXECUTION
+
 
 class WorkerEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.WORKER
 
+
 class ResourceEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.RESOURCE
+
 
 class MemoryEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.MEMORY
 
+
 class ReflectionEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.REFLECTION
+
 
 class GovernanceEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.GOVERNANCE
 
+
 class ValidationEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.VALIDATION
+
 
 class ToolEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.TOOL
 
+
 class StorageEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.STORAGE
+
 
 class CostEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.COST
 
+
 class SchedulerEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.SCHEDULER
+
 
 class FailureEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.FAILURE
 
+
 class RecoveryEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.RECOVERY
+
 
 class HumanReviewEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.HUMAN_REVIEW
 
+
 class TelemetryEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.TELEMETRY
 
+
 class BenchmarkEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.BENCHMARK
+
 
 class SystemEvent(BaseRuntimeEvent):
     category: EventCategory = EventCategory.SYSTEM
 
 
 # --- Profiling, Metric & Health Data Models ---
+
 
 class SpanProfile(BaseModel):
     span_id: str

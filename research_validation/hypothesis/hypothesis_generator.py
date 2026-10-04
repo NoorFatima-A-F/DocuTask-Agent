@@ -45,22 +45,24 @@ class AutonomousHypothesisGenerator:
             }
             digest = hash_canonical_json(payload)
 
-            hypotheses.append(ScientificHypothesis(
-                hypothesis_id=hyp_id,
-                title="Adaptive Contrast Optimization for Invoices",
-                statement=payload["statement"],
-                premise=f"Current baseline F1 is {f1_score:.4f}, with primary errors located on scanned low-contrast tokens.",
-                proposed_mechanism=payload["mechanism"],
-                expected_outcome="F1 score increases by >= 1.5% with < 5ms latency overhead.",
-                confidence_level=0.75,
-                risk_score=0.20,
-                impact_score=0.80,
-                required_datasets=active_datasets or ["funsd", "sroie"],
-                required_benchmarks=["ocr_accuracy_benchmark"],
-                estimated_runtime_sec=25.0,
-                supporting_evidence_nodes=["metric_f1_baseline"],
-                hypothesis_digest_sha256=digest,
-            ))
+            hypotheses.append(
+                ScientificHypothesis(
+                    hypothesis_id=hyp_id,
+                    title="Adaptive Contrast Optimization for Invoices",
+                    statement=payload["statement"],
+                    premise=f"Current baseline F1 is {f1_score:.4f}, with primary errors located on scanned low-contrast tokens.",
+                    proposed_mechanism=payload["mechanism"],
+                    expected_outcome="F1 score increases by >= 1.5% with < 5ms latency overhead.",
+                    confidence_level=0.75,
+                    risk_score=0.20,
+                    impact_score=0.80,
+                    required_datasets=active_datasets or ["funsd", "sroie"],
+                    required_benchmarks=["ocr_accuracy_benchmark"],
+                    estimated_runtime_sec=25.0,
+                    supporting_evidence_nodes=["metric_f1_baseline"],
+                    hypothesis_digest_sha256=digest,
+                )
+            )
 
         # 2. Batching / Concurrency Latency Hypothesis
         p99_lat = current_metrics.get("latency_p99_ms", 120.0)
@@ -73,21 +75,23 @@ class AutonomousHypothesisGenerator:
             }
             digest = hash_canonical_json(payload)
 
-            hypotheses.append(ScientificHypothesis(
-                hypothesis_id=hyp_id,
-                title="Zero-Copy Asynchronous Batching",
-                statement=payload["statement"],
-                premise=f"Observed P99 latency is {p99_lat:.2f}ms, indicating lock contention or allocation stall.",
-                proposed_mechanism=payload["mechanism"],
-                expected_outcome="P99 latency drops by >= 30% under 50 req/sec load.",
-                confidence_level=0.82,
-                risk_score=0.35,
-                impact_score=0.85,
-                required_datasets=active_datasets or ["docvqa"],
-                required_benchmarks=["throughput_endurance_benchmark"],
-                estimated_runtime_sec=40.0,
-                supporting_evidence_nodes=["metric_latency_p99"],
-                hypothesis_digest_sha256=digest,
-            ))
+            hypotheses.append(
+                ScientificHypothesis(
+                    hypothesis_id=hyp_id,
+                    title="Zero-Copy Asynchronous Batching",
+                    statement=payload["statement"],
+                    premise=f"Observed P99 latency is {p99_lat:.2f}ms, indicating lock contention or allocation stall.",
+                    proposed_mechanism=payload["mechanism"],
+                    expected_outcome="P99 latency drops by >= 30% under 50 req/sec load.",
+                    confidence_level=0.82,
+                    risk_score=0.35,
+                    impact_score=0.85,
+                    required_datasets=active_datasets or ["docvqa"],
+                    required_benchmarks=["throughput_endurance_benchmark"],
+                    estimated_runtime_sec=40.0,
+                    supporting_evidence_nodes=["metric_latency_p99"],
+                    hypothesis_digest_sha256=digest,
+                )
+            )
 
         return hypotheses

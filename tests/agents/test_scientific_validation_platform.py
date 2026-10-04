@@ -148,13 +148,20 @@ class TestScientificValidationPlatform:
         assert result.lower_bound <= result.point_estimate <= result.upper_bound
         assert len(result.reproducibility_hash) == 64
         assert len(result.convergence_curve) >= 4
-        assert result.convergence_status in (BootstrapConvergenceStatus.CONVERGED, BootstrapConvergenceStatus.INCONCLUSIVE)
+        assert result.convergence_status in (
+            BootstrapConvergenceStatus.CONVERGED,
+            BootstrapConvergenceStatus.INCONCLUSIVE,
+        )
 
     def test_bootstrap_percentile_and_basic(self):
         samples = [5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
-        res_perc = BootstrapValidationEngine.run_bootstrap(samples, bootstrap_type=BootstrapType.PERCENTILE, resamples=200)
+        res_perc = BootstrapValidationEngine.run_bootstrap(
+            samples, bootstrap_type=BootstrapType.PERCENTILE, resamples=200
+        )
         res_basic = BootstrapValidationEngine.run_bootstrap(samples, bootstrap_type=BootstrapType.BASIC, resamples=200)
-        res_stud = BootstrapValidationEngine.run_bootstrap(samples, bootstrap_type=BootstrapType.STUDENTIZED, resamples=200)
+        res_stud = BootstrapValidationEngine.run_bootstrap(
+            samples, bootstrap_type=BootstrapType.STUDENTIZED, resamples=200
+        )
 
         assert res_perc.lower_bound <= res_perc.upper_bound
         assert res_basic.lower_bound <= res_basic.upper_bound
@@ -319,23 +326,28 @@ class TestScientificValidationPlatform:
 
         rep = GarbageCollectionValidationEngine.evaluate_workload("alloc_micro", alloc_heavy, iterations=50)
         assert isinstance(rep, GCValidationReport)
-        assert rep.recommended_mode in (RecommendedGCMode.GC_DISABLED_DETERMINISTIC, RecommendedGCMode.GC_ENABLED_REALISTIC_PRODUCTION)
+        assert rep.recommended_mode in (
+            RecommendedGCMode.GC_DISABLED_DETERMINISTIC,
+            RecommendedGCMode.GC_ENABLED_REALISTIC_PRODUCTION,
+        )
 
     # -------------------------------------------------------------------------
     # Phase 12: Repeatability Framework
     # -------------------------------------------------------------------------
     def test_repeatability_framework(self):
         def work():
-            _ = sum(i ** 2 for i in range(500))
+            _ = sum(i**2 for i in range(500))
 
-        rep = RepeatabilityFramework.execute_campaign("math_loop", work, total_runs=3, iterations_per_run=25, pause_between_runs_ms=5.0)
+        rep = RepeatabilityFramework.execute_campaign(
+            "math_loop", work, total_runs=3, iterations_per_run=25, pause_between_runs_ms=5.0
+        )
         assert isinstance(rep, RepeatabilityReport)
         assert rep.total_runs == 3
         assert 0.0 <= rep.repeatability_coefficient <= 1.0
         assert rep.status in (
             RepeatabilityStatus.HIGHLY_REPRODUCIBLE,
             RepeatabilityStatus.MODERATE_DRIFT,
-            RepeatabilityStatus.INSTABLE_HIGH_DRIFT
+            RepeatabilityStatus.INSTABLE_HIGH_DRIFT,
         )
 
     # -------------------------------------------------------------------------
@@ -358,7 +370,11 @@ class TestScientificValidationPlatform:
     def test_integrity_engine_audits(self):
         preflight = BenchmarkIntegrityEngine.run_preflight_audit("audit_test")
         assert isinstance(preflight, BenchmarkIntegrityAuditReport)
-        assert preflight.overall_status in (IntegrityCheckStatus.PASSED, IntegrityCheckStatus.WARNING, IntegrityCheckStatus.FAILED_REJECTED)
+        assert preflight.overall_status in (
+            IntegrityCheckStatus.PASSED,
+            IntegrityCheckStatus.WARNING,
+            IntegrityCheckStatus.FAILED_REJECTED,
+        )
         assert preflight.checks is not None
 
         in_flight = BenchmarkIntegrityEngine.validate_in_flight_samples("in_flight_test", [100.0, 101.0, 99.0, 100.5])
@@ -377,7 +393,9 @@ class TestScientificValidationPlatform:
             "item_hash": "a" * 64,
             "reproducibility": "DETERMINISTIC",
         }
-        is_valid, errors = EvidenceSchemaVersioning.validate_payload(SchemaType.EVIDENCE_ITEM, "2.0.0", valid_v2_payload)
+        is_valid, errors = EvidenceSchemaVersioning.validate_payload(
+            SchemaType.EVIDENCE_ITEM, "2.0.0", valid_v2_payload
+        )
         assert is_valid is True
         assert len(errors) == 0
 

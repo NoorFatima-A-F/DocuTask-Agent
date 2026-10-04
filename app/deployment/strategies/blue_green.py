@@ -1,4 +1,5 @@
 """Blue-Green Zero-Downtime Deployment Strategy."""
+
 from dataclasses import dataclass
 from enum import Enum
 from typing import Callable, Optional
@@ -7,6 +8,7 @@ from ..core.exceptions import StrategyExecutionException
 
 class BlueGreenPhase(str, Enum):
     """Phases in a Blue-Green deployment."""
+
     IDLE = "IDLE"
     GREEN_PROVISIONED = "GREEN_PROVISIONED"
     GREEN_VERIFIED = "GREEN_VERIFIED"
@@ -19,6 +21,7 @@ class BlueGreenPhase(str, Enum):
 @dataclass
 class EnvironmentSlot:
     """State of an environment slot (Blue or Green)."""
+
     name: str  # "blue" or "green"
     release_id: Optional[str] = None
     is_live: bool = False
@@ -73,7 +76,9 @@ class BlueGreenStrategy:
     def cutover(self) -> None:
         """Atomically shifts 100% of user traffic to the verified slot."""
         if self.phase != BlueGreenPhase.GREEN_VERIFIED:
-            raise StrategyExecutionException(f"Cannot cutover traffic in state {self.phase.value}; must be GREEN_VERIFIED")
+            raise StrategyExecutionException(
+                f"Cannot cutover traffic in state {self.phase.value}; must be GREEN_VERIFIED"
+            )
 
         old_live = self.live_slot
         new_live = self.idle_slot

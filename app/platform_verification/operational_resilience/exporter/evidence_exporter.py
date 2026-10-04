@@ -3,6 +3,7 @@ Evidence Exporter Subsystem for Operational Resilience Framework (Part 3G.5J).
 Assembles and exports all evidence manifests, metrics, dashboards, and certificates to:
 resilience_verification/
 """
+
 import json
 from pathlib import Path
 from typing import Dict, Any, List
@@ -227,7 +228,11 @@ class EvidenceExporter:
                 {"title": "Resilience Score", "type": "stat", "targets": [{"expr": "docutask_resilience_score"}]},
                 {"title": "MTTD (Seconds)", "type": "gauge", "targets": [{"expr": "docutask_resilience_mttd_seconds"}]},
                 {"title": "MTTR (Seconds)", "type": "gauge", "targets": [{"expr": "docutask_resilience_mttr_seconds"}]},
-                {"title": "Recovery Success Rate (%)", "type": "stat", "targets": [{"expr": "docutask_resilience_success_rate_pct"}]},
+                {
+                    "title": "Recovery Success Rate (%)",
+                    "type": "stat",
+                    "targets": [{"expr": "docutask_resilience_success_rate_pct"}],
+                },
             ],
         }
         dash_file.write_text(json.dumps(dash_data, indent=2), encoding="utf-8")

@@ -1,17 +1,18 @@
 """
 Domain Models for Enterprise Backup Certification Framework (Part 3G.2G).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any
 
 
 class BackupCertificationTier(str, Enum):
-    LEVEL_1_BASIC_READY = "Level 1 — Basic Backup Ready"             # 70 - 79
-    LEVEL_2_PRODUCTION_READY = "Level 2 — Production Backup Ready"   # 80 - 89
-    LEVEL_3_ENTERPRISE_READY = "Level 3 — Enterprise Backup Ready"   # 90 - 94
-    LEVEL_4_MISSION_CRITICAL_READY = "Level 4 — Mission Critical Ready" # 95 - 100
-    UNCERTIFIED_FAILED = "Uncertified — Failed"                     # < 70
+    LEVEL_1_BASIC_READY = "Level 1 — Basic Backup Ready"  # 70 - 79
+    LEVEL_2_PRODUCTION_READY = "Level 2 — Production Backup Ready"  # 80 - 89
+    LEVEL_3_ENTERPRISE_READY = "Level 3 — Enterprise Backup Ready"  # 90 - 94
+    LEVEL_4_MISSION_CRITICAL_READY = "Level 4 — Mission Critical Ready"  # 95 - 100
+    UNCERTIFIED_FAILED = "Uncertified — Failed"  # < 70
 
 
 class RiskSeverity(str, Enum):
@@ -152,14 +153,14 @@ class ContinuousVerificationSchedule:
 
 @dataclass
 class BackupReadinessScorecard:
-    backup_completeness: float    # Weight: 20%
-    restore_success: float        # Weight: 25%
-    integrity: float              # Weight: 15%
-    security: float               # Weight: 15%
-    automation: float             # Weight: 10%
-    monitoring: float             # Weight: 10%
-    documentation: float          # Weight: 5%
-    overall_score: float          # Sum of weighted scores (0 - 100)
+    backup_completeness: float  # Weight: 20%
+    restore_success: float  # Weight: 25%
+    integrity: float  # Weight: 15%
+    security: float  # Weight: 15%
+    automation: float  # Weight: 10%
+    monitoring: float  # Weight: 10%
+    documentation: float  # Weight: 5%
+    overall_score: float  # Sum of weighted scores (0 - 100)
     certification_level: BackupCertificationTier
     passed: bool
     ci_cd_deployment_approved: bool

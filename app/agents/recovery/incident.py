@@ -27,6 +27,7 @@ class IncidentStatus(str, Enum):
 
 class Incident(BaseModel):
     """Operational incident aggregate representing an escalated unrecoverable fault."""
+
     incident_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     failure_id: UUID

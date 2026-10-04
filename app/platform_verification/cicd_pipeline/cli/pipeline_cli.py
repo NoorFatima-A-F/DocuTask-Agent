@@ -1,6 +1,7 @@
 """
 CLI Interface for Continuous Verification Pipeline (PART 7).
 """
+
 from __future__ import annotations
 import argparse
 import sys

@@ -8,6 +8,7 @@ from typing import Any, Dict
 @dataclass
 class ConfigTemplate:
     """A parameterized configuration template."""
+
     template_id: str
     name: str
     template_string: str  # e.g. "MAX_WORKERS=${MAX_WORKERS:-4}\nDATABASE_URL=${DB_URL}"

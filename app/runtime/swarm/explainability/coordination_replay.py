@@ -92,13 +92,62 @@ class CoordinationReplayEngine:
 
     def _seed_default_frames(self):
         events = [
-            ("AGENT_DISCOVERY", "agent-exec-01", "agent-plan-01", {"query": "expert_in_dag_scheduling"}, ["coalition-alpha"], "Executive discovered Lead Planner for Mission 9482."),
-            ("TASK_AUCTION_PUBLISHED", "agent-plan-01", None, {"task_id": "task_ocr_batch_01", "budget": 120.0}, ["coalition-alpha"], "Published batch OCR task to auction marketplace."),
-            ("BID_SUBMITTED", "agent-spec-ocr", "agent-plan-01", {"bid_cost": 85.0, "latency_ms": 140.0}, ["coalition-alpha"], "OCR Specialist submitted competitive bid."),
-            ("BID_ACCEPTED", "agent-plan-01", "agent-spec-ocr", {"auction_id": "auc_001", "status": "AWARDED"}, ["coalition-alpha"], "Planner awarded task to OCR Specialist."),
-            ("CONSENSUS_INITIATED", "agent-coord-01", None, {"proposal": "VERIFY_SCHEMA_INVARIANT"}, ["coalition-alpha"], "Consensus initiated for document schema verification."),
-            ("VOTE_CAST", "agent-val-sec", "agent-coord-01", {"vote": "APPROVE", "weight": 1.0}, ["coalition-alpha"], "Security Validator cast affirmative vote."),
-            ("CONSENSUS_DECIDED", "agent-coord-01", None, {"verdict": "APPROVED", "tally": 1.0}, ["coalition-alpha"], "Consensus reached with 100% affirmative quorum."),
+            (
+                "AGENT_DISCOVERY",
+                "agent-exec-01",
+                "agent-plan-01",
+                {"query": "expert_in_dag_scheduling"},
+                ["coalition-alpha"],
+                "Executive discovered Lead Planner for Mission 9482.",
+            ),
+            (
+                "TASK_AUCTION_PUBLISHED",
+                "agent-plan-01",
+                None,
+                {"task_id": "task_ocr_batch_01", "budget": 120.0},
+                ["coalition-alpha"],
+                "Published batch OCR task to auction marketplace.",
+            ),
+            (
+                "BID_SUBMITTED",
+                "agent-spec-ocr",
+                "agent-plan-01",
+                {"bid_cost": 85.0, "latency_ms": 140.0},
+                ["coalition-alpha"],
+                "OCR Specialist submitted competitive bid.",
+            ),
+            (
+                "BID_ACCEPTED",
+                "agent-plan-01",
+                "agent-spec-ocr",
+                {"auction_id": "auc_001", "status": "AWARDED"},
+                ["coalition-alpha"],
+                "Planner awarded task to OCR Specialist.",
+            ),
+            (
+                "CONSENSUS_INITIATED",
+                "agent-coord-01",
+                None,
+                {"proposal": "VERIFY_SCHEMA_INVARIANT"},
+                ["coalition-alpha"],
+                "Consensus initiated for document schema verification.",
+            ),
+            (
+                "VOTE_CAST",
+                "agent-val-sec",
+                "agent-coord-01",
+                {"vote": "APPROVE", "weight": 1.0},
+                ["coalition-alpha"],
+                "Security Validator cast affirmative vote.",
+            ),
+            (
+                "CONSENSUS_DECIDED",
+                "agent-coord-01",
+                None,
+                {"verdict": "APPROVED", "tally": 1.0},
+                ["coalition-alpha"],
+                "Consensus reached with 100% affirmative quorum.",
+            ),
         ]
         for ev, init, tgt, payload, coals, rat in events:
             self.record_frame(ev, init, tgt, payload, coals, rat)

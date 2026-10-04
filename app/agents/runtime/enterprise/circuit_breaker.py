@@ -14,13 +14,15 @@ from app.agents.runtime.exceptions import RuntimeKernelException
 
 class CircuitState(str, Enum):
     """States of the Circuit Breaker."""
-    CLOSED = "CLOSED"        # Normal operation
-    OPEN = "OPEN"            # Tripped; requests immediately rejected
+
+    CLOSED = "CLOSED"  # Normal operation
+    OPEN = "OPEN"  # Tripped; requests immediately rejected
     HALF_OPEN = "HALF_OPEN"  # Testing probe requests to verify recovery
 
 
 class CircuitBreakerOpenError(RuntimeKernelException):
     """Raised when a request is rejected because the circuit breaker is OPEN."""
+
     pass
 
 
@@ -126,12 +128,14 @@ class RedisCircuitStateStore(CircuitBreakerStateStore):
         )
 
     def _save(self, name: str, state: CircuitState, failures: int, successes: int, changed_at: float) -> None:
-        data = json.dumps({
-            "state": state.value,
-            "failures": failures,
-            "successes": successes,
-            "changed_at": changed_at,
-        })
+        data = json.dumps(
+            {
+                "state": state.value,
+                "failures": failures,
+                "successes": successes,
+                "changed_at": changed_at,
+            }
+        )
         self.client.set(self._key(name), data)
 
     def check_transition(self, name: str, recovery_timeout: float) -> Tuple[CircuitState, int, int, float]:

@@ -2,25 +2,26 @@
 Dataset Quality Scoring Framework.
 Evaluates: Accuracy (30%), Completeness (20%), Diversity (20%), Consistency (15%), Freshness (15%).
 """
+
 from typing import List
 from app.platform_verification.dataset_governance.domain.models import (
-    DatasetSample, GroundTruthAnnotation, DatasetQualityReport, ReviewStatus
+    DatasetSample,
+    GroundTruthAnnotation,
+    DatasetQualityReport,
+    ReviewStatus,
 )
 from app.platform_verification.dataset_governance.domain.interfaces import DatasetQualityEngineInterface
 
 
 class DatasetQualityEngine(DatasetQualityEngineInterface):
     def evaluate_quality(
-        self,
-        dataset_id: str,
-        samples: List[DatasetSample],
-        annotations: List[GroundTruthAnnotation]
+        self, dataset_id: str, samples: List[DatasetSample], annotations: List[GroundTruthAnnotation]
     ) -> DatasetQualityReport:
         issues = []
 
         # 1. Accuracy (30% weight): Review status and confidence
         approved_count = sum(1 for a in annotations if a.review_status == ReviewStatus.APPROVED)
-        accuracy_score = (approved_count / max(1, len(annotations)))
+        accuracy_score = approved_count / max(1, len(annotations))
 
         # 2. Completeness (20% weight): Match between samples and annotations
         sample_ids = {s.sample_id for s in samples}
@@ -40,11 +41,11 @@ class DatasetQualityEngine(DatasetQualityEngineInterface):
 
         # Weighted Composite Score
         composite = (
-            accuracy_score * 0.30 +
-            completeness_score * 0.20 +
-            diversity_score * 0.20 +
-            consistency_score * 0.15 +
-            freshness_score * 0.15
+            accuracy_score * 0.30
+            + completeness_score * 0.20
+            + diversity_score * 0.20
+            + consistency_score * 0.15
+            + freshness_score * 0.15
         )
 
         is_acceptable = composite >= 0.85
@@ -62,7 +63,7 @@ class DatasetQualityEngine(DatasetQualityEngineInterface):
             freshness_score=round(freshness_score, 3),
             composite_quality_score=round(composite, 3),
             is_acceptable=is_acceptable,
-            issues_detected=issues
+            issues_detected=issues,
         )
 
 

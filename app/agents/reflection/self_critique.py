@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class CritiqueFinding(BaseModel):
     """An individual critical finding regarding planner, reasoning, or execution behavior."""
+
     finding_id: UUID = Field(default_factory=uuid4)
     category: str  # HALLUCINATION, INCONSISTENCY, SUBOPTIMAL_PLAN, RESOURCE_WASTE, UNCHECKED_ASSUMPTION, BIAS
     severity: str = Field(default="MEDIUM")  # LOW, MEDIUM, HIGH, CRITICAL
@@ -25,6 +26,7 @@ class CritiqueFinding(BaseModel):
 
 class SelfCritique(BaseModel):
     """Structured introspection and critique output produced by the reflection engine."""
+
     critique_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     strengths: List[str] = Field(default_factory=list)

@@ -1,14 +1,15 @@
 """
 Domain Models for Multi-Region / Cloud Failover Verification Framework (Part 3G.6).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, Any, List
 
 
 class CloudRegion(str, Enum):
-    PRIMARY = "us-east-1"      # Primary Region (N. Virginia)
-    SECONDARY = "us-west-2"    # Secondary Region (Oregon)
+    PRIMARY = "us-east-1"  # Primary Region (N. Virginia)
+    SECONDARY = "us-west-2"  # Secondary Region (Oregon)
 
 
 class FailoverMode(str, Enum):
@@ -18,15 +19,15 @@ class FailoverMode(str, Enum):
 
 
 class ReplicationHealth(str, Enum):
-    HEALTHY = "HEALTHY"        # Lag < 5s
-    DEGRADED = "DEGRADED"      # Lag 5-30s
-    CRITICAL = "CRITICAL"      # Lag > 60s
+    HEALTHY = "HEALTHY"  # Lag < 5s
+    DEGRADED = "DEGRADED"  # Lag 5-30s
+    CRITICAL = "CRITICAL"  # Lag > 60s
 
 
 class AvailabilityTier(str, Enum):
-    THREE_NINES = "99.9% (High Availability)"              # 8.7 hrs/yr
-    FOUR_NINES = "99.99% (Enterprise High Availability)"   # 52.6 min/yr
-    FIVE_NINES = "99.999% (Carrier Grade Resilient)"       # 5.2 min/yr
+    THREE_NINES = "99.9% (High Availability)"  # 8.7 hrs/yr
+    FOUR_NINES = "99.99% (Enterprise High Availability)"  # 52.6 min/yr
+    FIVE_NINES = "99.999% (Carrier Grade Resilient)"  # 5.2 min/yr
 
 
 @dataclass
@@ -134,16 +135,16 @@ class AvailabilityMetricsReport:
 
 @dataclass
 class MultiRegionScorecard:
-    architecture_score: float         # Weight 15%
-    portability_score: float          # Weight 10%
-    database_failover_score: float    # Weight 20%
+    architecture_score: float  # Weight 15%
+    portability_score: float  # Weight 10%
+    database_failover_score: float  # Weight 20%
     storage_replication_score: float  # Weight 15%
-    traffic_migration_score: float    # Weight 15%
+    traffic_migration_score: float  # Weight 15%
     workflow_continuity_score: float  # Weight 15%
-    availability_metrics_score: float # Weight 10%
-    overall_failover_score: float     # Composite 0 - 100
+    availability_metrics_score: float  # Weight 10%
+    overall_failover_score: float  # Composite 0 - 100
     availability_tier: AvailabilityTier
-    certification_verdict: str        # ENTERPRISE_CLOUD_RESILIENT
+    certification_verdict: str  # ENTERPRISE_CLOUD_RESILIENT
     ci_cd_deployment_approved: bool
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

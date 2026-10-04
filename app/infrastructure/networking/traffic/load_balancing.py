@@ -30,7 +30,8 @@ class LoadBalancerEngine:
         # Tenant affinity / Locality aware pre-filtering
         if tenant_id:
             tenant_matched = [
-                ep for ep in healthy
+                ep
+                for ep in healthy
                 if "*" in ep.metadata.get("tenant_scope", ["*"]) or tenant_id in ep.metadata.get("tenant_scope", [])
             ]
             if tenant_matched:

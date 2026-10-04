@@ -16,7 +16,7 @@ class ConstraintResolver:
             PlanConstraint(
                 constraint_id="const_budget",
                 constraint_type=ConstraintType.BUDGET,
-                limit_value=context.planning_budget_usd
+                limit_value=context.planning_budget_usd,
             )
         ]
         return constraints

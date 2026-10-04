@@ -116,7 +116,7 @@ class SchedulerVerifier:
         return AssertionResult(
             name="assert_scheduler_sla_and_utilization",
             passed=passed,
-            message=f"Workforce scheduler maintained {utilization*100:.1f}% asset utilization with {sla*100:.1f}% SLA compliance",
+            message=f"Workforce scheduler maintained {utilization * 100:.1f}% asset utilization with {sla * 100:.1f}% SLA compliance",
             execution_time_ms=t_ms,
             details={"utilization_pct": utilization * 100.0, "sla_compliance_pct": sla * 100.0},
         )

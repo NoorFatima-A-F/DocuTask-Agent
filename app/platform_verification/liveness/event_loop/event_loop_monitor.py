@@ -2,6 +2,7 @@
 Event Loop Responsiveness Monitor (Part 3).
 Performs periodic heartbeat task recording event loop response time (failure threshold >5000ms).
 """
+
 from app.platform_verification.liveness.domain.models import EventLoopHealthReport
 
 
@@ -20,7 +21,7 @@ class EventLoopMonitor:
         max_latency = 45.0
         pending_tasks = 3
 
-        loop_healthy = (max_latency < self.failure_threshold_ms)
+        loop_healthy = max_latency < self.failure_threshold_ms
 
         return EventLoopHealthReport(
             average_latency_ms=avg_latency,

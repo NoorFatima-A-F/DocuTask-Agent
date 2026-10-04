@@ -2,8 +2,10 @@
 Mutation Testing Harness.
 Evaluates test suite robustness by verifying tests fail when code mutations are introduced.
 """
+
 from dataclasses import dataclass
 from typing import List, Callable, Any
+
 
 @dataclass(frozen=True)
 class MutationScoreResult:
@@ -17,14 +19,12 @@ class MutationScoreResult:
     def passed_threshold(self) -> bool:
         return self.mutation_score >= 0.80
 
+
 class MutationTestingHarness:
     """Executes code mutations and validates test sensitivity."""
+
     def evaluate_test_strength(
-        self,
-        target_name: str,
-        test_fn: Callable[[Any], bool],
-        clean_inputs: List[Any],
-        mutated_inputs: List[Any]
+        self, target_name: str, test_fn: Callable[[Any], bool], clean_inputs: List[Any], mutated_inputs: List[Any]
     ) -> MutationScoreResult:
         killed = 0
         survived = 0
@@ -48,5 +48,5 @@ class MutationTestingHarness:
             mutations_generated=total,
             mutations_killed=killed,
             mutations_survived=survived,
-            mutation_score=score
+            mutation_score=score,
         )

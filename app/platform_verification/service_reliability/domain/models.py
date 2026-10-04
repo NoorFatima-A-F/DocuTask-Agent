@@ -1,6 +1,7 @@
 """
 Phase 3H.6: Enterprise Service Level Objectives (SLO), SLI, Error Budget & Reliability Compliance — Domain Models
 """
+
 from enum import Enum
 from typing import List
 from pydantic import BaseModel, Field
@@ -8,11 +9,11 @@ from datetime import datetime, timezone
 
 
 class ReliabilityTier(str, Enum):
-    ENTERPRISE_SRE_CERTIFIED = "Enterprise SRE Certified"    # 98 - 100
-    PRODUCTION_GOLD = "Production Gold"                      # 95 - 97.99
-    PRODUCTION_READY = "Production Ready"                    # 90 - 94.99
-    NEEDS_RELIABILITY_IMPROVEMENTS = "Needs Reliability Improvements" # 80 - 89.99
-    FAILED = "Failed"                                        # < 80
+    ENTERPRISE_SRE_CERTIFIED = "Enterprise SRE Certified"  # 98 - 100
+    PRODUCTION_GOLD = "Production Gold"  # 95 - 97.99
+    PRODUCTION_READY = "Production Ready"  # 90 - 94.99
+    NEEDS_RELIABILITY_IMPROVEMENTS = "Needs Reliability Improvements"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 class BurnRateSeverity(str, Enum):
@@ -28,6 +29,7 @@ class DeploymentGateDecision(str, Enum):
 
 
 # ─── 3H.6.1: Service Level Objective Architecture Models ─────────────────────
+
 
 class SLODefinition(BaseModel):
     slo_id: str
@@ -54,6 +56,7 @@ class SLOArchitectureReport(BaseModel):
 
 # ─── 3H.6.2: Service Level Indicator Collection Models ───────────────────────
 
+
 class SubsystemSLIMetric(BaseModel):
     subsystem: str  # API, Database, Queue, Workers, AI, OCR, Storage
     good_events: int
@@ -75,6 +78,7 @@ class SLICollectionReport(BaseModel):
 
 # ─── 3H.6.3: Availability SLO Verification Models ───────────────────────────
 
+
 class TrafficProfileAvailability(BaseModel):
     traffic_profile: str  # Normal Traffic, High Traffic, Peak Spike Traffic, Partial Degraded Traffic
     total_requests: int
@@ -95,6 +99,7 @@ class AvailabilitySLOReport(BaseModel):
 
 # ─── 3H.6.4: Latency SLO Verification Models ────────────────────────────────
 
+
 class EndpointLatencyBenchmark(BaseModel):
     endpoint_name: str  # Auth, Upload, OCR, AI Extraction, Validation, Export
     p50_ms: float
@@ -113,6 +118,7 @@ class LatencySLOReport(BaseModel):
 
 
 # ─── 3H.6.5: Error Budget Management Models ─────────────────────────────────
+
 
 class SubsystemErrorBudget(BaseModel):
     subsystem: str
@@ -135,6 +141,7 @@ class ErrorBudgetReport(BaseModel):
 
 # ─── 3H.6.6: Error Budget Burn Rate Models ───────────────────────────────────
 
+
 class BurnRateWindow(BaseModel):
     window_duration: str  # 1 hour (Fast burn), 6 hours, 24 hours (Slow burn), 3 days
     burn_rate_multiplier: float
@@ -153,6 +160,7 @@ class BurnRateReport(BaseModel):
 
 
 # ─── 3H.6.7: Reliability Compliance Models ──────────────────────────────────
+
 
 class ReliabilityCompliancePillar(BaseModel):
     pillar_name: str  # Availability, Latency, Error Rate, Self-Healing Recovery, Capacity & Scalability
@@ -173,6 +181,7 @@ class ReliabilityComplianceReport(BaseModel):
 
 # ─── 3H.6.8: Deployment Gate Models ─────────────────────────────────────────
 
+
 class DeploymentGateCriterion(BaseModel):
     criterion_name: str
     requirement: str
@@ -191,6 +200,7 @@ class DeploymentGateReport(BaseModel):
 
 # ─── 3H.6.9: Executive Reliability Dashboard Models ─────────────────────────
 
+
 class DashboardPersonaView(BaseModel):
     persona: str  # Operations, Engineering, Management, SRE, AI Operations
     focus_metrics: List[str] = Field(default_factory=list)
@@ -205,6 +215,7 @@ class ReliabilityDashboardReport(BaseModel):
 
 
 # ─── 3H.6.10: Historical Reliability Trend Models ───────────────────────────
+
 
 class HistoricalTrendPeriod(BaseModel):
     timeframe: str  # Last 24 Hours, Last 7 Days, Last 30 Days, Last 90 Days
@@ -223,6 +234,7 @@ class HistoricalReliabilityReport(BaseModel):
 
 # ─── 3H.6.11: AI Workload Reliability Models ────────────────────────────────
 
+
 class AIWorkloadMetric(BaseModel):
     workload_type: str  # OCR Recognition, LLM Extraction, Structured Output, Schema Validation, Fallback & Recovery
     accuracy_or_success_rate_pct: float
@@ -240,6 +252,7 @@ class AIReliabilityReport(BaseModel):
 
 
 # ─── 3H.6.12: Master Certification Scorecard Models ─────────────────────────
+
 
 class SREReliabilityPillarScore(BaseModel):
     pillar_name: str

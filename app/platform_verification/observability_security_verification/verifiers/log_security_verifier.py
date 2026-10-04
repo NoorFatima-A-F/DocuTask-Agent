@@ -1,6 +1,7 @@
 """
 Phase 3H.4.10.2: Log Security Verifier
 """
+
 from ..domain.interfaces import ILogSecurityVerifier
 from ..domain.models import LogSecurityReport, LogScanFinding
 

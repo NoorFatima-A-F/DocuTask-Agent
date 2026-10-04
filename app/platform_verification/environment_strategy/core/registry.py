@@ -2,12 +2,17 @@
 Environment Metadata Registry.
 Maintains live catalog of all 8 enterprise verification environments.
 """
+
 import hashlib
 from typing import Dict, List, Optional
 from app.platform_verification.environment_strategy.domain.models import (
-    EnvironmentDefinition, EnvironmentClassification, EnvironmentSecurityLevel,
-    DataClassificationPolicy, DeploymentStrategyType, EnvironmentMetadataRecord,
-    EnvironmentHealthState
+    EnvironmentDefinition,
+    EnvironmentClassification,
+    EnvironmentSecurityLevel,
+    DataClassificationPolicy,
+    DeploymentStrategyType,
+    EnvironmentMetadataRecord,
+    EnvironmentHealthState,
 )
 from app.platform_verification.environment_strategy.domain.interfaces import EnvironmentRegistryInterface
 
@@ -29,7 +34,7 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 data_policy=DataClassificationPolicy.SYNTHETIC_ONLY,
                 deployment_strategy=DeploymentStrategyType.RECREATE,
                 min_cpu_cores=2,
-                min_memory_gb=8.0
+                min_memory_gb=8.0,
             ),
             EnvironmentDefinition(
                 environment_id="env_int_01",
@@ -40,7 +45,7 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 data_policy=DataClassificationPolicy.BENCHMARK_CURATED,
                 deployment_strategy=DeploymentStrategyType.ROLLING,
                 min_cpu_cores=4,
-                min_memory_gb=16.0
+                min_memory_gb=16.0,
             ),
             EnvironmentDefinition(
                 environment_id="env_stg_01",
@@ -51,7 +56,7 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 data_policy=DataClassificationPolicy.REGRESSION_HISTORICAL,
                 deployment_strategy=DeploymentStrategyType.BLUE_GREEN,
                 min_cpu_cores=8,
-                min_memory_gb=32.0
+                min_memory_gb=32.0,
             ),
             EnvironmentDefinition(
                 environment_id="env_shd_01",
@@ -62,7 +67,7 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 data_policy=DataClassificationPolicy.PRODUCTION_ANONYMIZED,
                 deployment_strategy=DeploymentStrategyType.BLUE_GREEN,
                 min_cpu_cores=8,
-                min_memory_gb=32.0
+                min_memory_gb=32.0,
             ),
             EnvironmentDefinition(
                 environment_id="env_prd_01",
@@ -73,7 +78,7 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 data_policy=DataClassificationPolicy.PRODUCTION_LIVE,
                 deployment_strategy=DeploymentStrategyType.CANARY,
                 min_cpu_cores=16,
-                min_memory_gb=64.0
+                min_memory_gb=64.0,
             ),
             EnvironmentDefinition(
                 environment_id="env_chs_01",
@@ -84,7 +89,7 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 data_policy=DataClassificationPolicy.SYNTHETIC_ONLY,
                 deployment_strategy=DeploymentStrategyType.RECREATE,
                 min_cpu_cores=4,
-                min_memory_gb=16.0
+                min_memory_gb=16.0,
             ),
             EnvironmentDefinition(
                 environment_id="env_sec_01",
@@ -95,7 +100,7 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 data_policy=DataClassificationPolicy.SYNTHETIC_ONLY,
                 deployment_strategy=DeploymentStrategyType.RECREATE,
                 min_cpu_cores=4,
-                min_memory_gb=16.0
+                min_memory_gb=16.0,
             ),
             EnvironmentDefinition(
                 environment_id="env_res_01",
@@ -106,8 +111,8 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 data_policy=DataClassificationPolicy.SYNTHETIC_ONLY,
                 deployment_strategy=DeploymentStrategyType.RECREATE,
                 min_cpu_cores=4,
-                min_memory_gb=16.0
-            )
+                min_memory_gb=16.0,
+            ),
         ]
         for env in canonical:
             self.register_environment(env)
@@ -120,7 +125,7 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
             configuration_hash=hashlib.sha256(f"cfg_{definition.environment_id}".encode("utf-8")).hexdigest(),
             infrastructure_version="tf-v1.8-k8s-1.30",
             deployment_version="v2.4.0",
-            health_state=EnvironmentHealthState.HEALTHY
+            health_state=EnvironmentHealthState.HEALTHY,
         )
 
     def get_environment(self, environment_id: str) -> Optional[EnvironmentDefinition]:
@@ -132,7 +137,9 @@ class EnvironmentMetadataRegistry(EnvironmentRegistryInterface):
                 return env
         return None
 
-    def list_environments(self, classification: Optional[EnvironmentClassification] = None) -> List[EnvironmentDefinition]:
+    def list_environments(
+        self, classification: Optional[EnvironmentClassification] = None
+    ) -> List[EnvironmentDefinition]:
         envs = list(self._definitions.values())
         if classification:
             envs = [e for e in envs if e.classification == classification]

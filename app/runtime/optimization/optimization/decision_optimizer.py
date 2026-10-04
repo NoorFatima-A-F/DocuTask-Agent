@@ -28,7 +28,7 @@ class DecisionOptimizer:
                 selected_option="USE_CACHED_SCHEMA",
                 alternative_options=["FULL_RECOMPUTE", "HYBRID_MERGE"],
                 expected_gain_pct=85.0,
-                rationale=f"High semantic cache similarity ({cache_similarity*100:.1f}%) saves ${recompute_cost_usd:.4f} USD.",
+                rationale=f"High semantic cache similarity ({cache_similarity * 100:.1f}%) saves ${recompute_cost_usd:.4f} USD.",
             )
         return OptimizationDecision(
             decision_type="MEMORY_REUSE",

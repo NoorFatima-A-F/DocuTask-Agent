@@ -29,6 +29,7 @@ router = APIRouter()
 
 # --- Digital Twin Endpoints ---
 
+
 @router.get("/digital-twin/state")
 async def get_digital_twin_state() -> Dict[str, Any]:
     """Returns the live Operational Digital Twin topology and health metrics."""
@@ -54,6 +55,7 @@ async def register_node_heartbeat(payload: HeartbeatPayload) -> Dict[str, Any]:
 
 
 # --- Chaos Engineering Endpoints ---
+
 
 @router.get("/chaos/scenarios")
 async def list_chaos_scenarios() -> Dict[str, Any]:
@@ -84,6 +86,7 @@ async def recover_chaos_fault(payload: ChaosRecoverPayload) -> Dict[str, Any]:
 
 # --- Recovery Strategy Marketplace ---
 
+
 @router.get("/recovery/marketplace")
 async def get_recovery_marketplace() -> Dict[str, Any]:
     """Returns the vetted recovery strategies, success rates, and MTTR ranking."""
@@ -105,6 +108,7 @@ async def execute_recovery_strategy(payload: ExecuteRecoveryPayload) -> Dict[str
 
 # --- Incident Commander Endpoints ---
 
+
 @router.get("/incident/summary")
 async def get_incident_summary() -> Dict[str, Any]:
     """Returns incident management metrics and recent incident reports."""
@@ -121,7 +125,11 @@ class DeclareIncidentPayload(BaseModel):
 @router.post("/incident/declare")
 async def declare_incident(payload: DeclareIncidentPayload) -> Dict[str, Any]:
     """Autonomously declares a new incident."""
-    sev = IncidentSeverity(payload.severity) if payload.severity in IncidentSeverity.__members__ else IncidentSeverity.SEV2_HIGH
+    sev = (
+        IncidentSeverity(payload.severity)
+        if payload.severity in IncidentSeverity.__members__
+        else IncidentSeverity.SEV2_HIGH
+    )
     report = incident_commander.declare_incident(
         payload.title, sev, payload.root_cause_node_id, payload.blast_radius_nodes
     )
@@ -140,6 +148,7 @@ async def auto_mitigate_incident(payload: MitigateIncidentPayload) -> Dict[str, 
 
 
 # --- Dependency & Blast Radius Endpoints ---
+
 
 @router.get("/dependency/topology")
 async def get_dependency_topology() -> Dict[str, Any]:
@@ -164,6 +173,7 @@ async def get_blast_radius_matrix(node_id: Optional[str] = None) -> Dict[str, An
 
 # --- Reliability Mathematics Endpoints ---
 
+
 @router.get("/reliability/mathematics")
 async def get_reliability_mathematics() -> Dict[str, Any]:
     """Returns live mathematical reliability formulation, MTBF, MTTR, and availability."""
@@ -183,6 +193,7 @@ async def get_reliability_mathematics() -> Dict[str, Any]:
 
 # --- Runtime Invariants Endpoints ---
 
+
 @router.get("/invariants/matrix")
 async def get_invariants_matrix() -> Dict[str, Any]:
     """Returns runtime invariant evaluations and compliance status."""
@@ -190,6 +201,7 @@ async def get_invariants_matrix() -> Dict[str, Any]:
 
 
 # --- Production Readiness Endpoints ---
+
 
 @router.get("/production-readiness")
 async def get_production_readiness() -> Dict[str, Any]:
@@ -206,6 +218,7 @@ async def get_production_readiness() -> Dict[str, Any]:
 
 
 # --- Time Machine Endpoints ---
+
 
 @router.get("/time-machine/timeline")
 async def get_time_machine_timeline(mission_id: str = "mission-fin-audit-001") -> Dict[str, Any]:
@@ -246,6 +259,7 @@ async def fork_mission(payload: ForkPayload) -> Dict[str, Any]:
 
 # --- Stress Arena Endpoints ---
 
+
 @router.get("/stress/runs")
 async def list_stress_runs() -> Dict[str, Any]:
     """Returns historical multi-mission concurrency benchmark runs."""
@@ -269,6 +283,7 @@ async def execute_stress_test(payload: RunStressPayload) -> Dict[str, Any]:
 
 
 # --- Certification Dossier Endpoints ---
+
 
 @router.post("/certification/generate")
 async def generate_certification_dossier() -> Dict[str, Any]:

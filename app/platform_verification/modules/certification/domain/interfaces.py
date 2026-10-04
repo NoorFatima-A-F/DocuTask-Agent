@@ -1,9 +1,11 @@
 """
 Domain Interfaces (Ports) for Certification.
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from app.platform_verification.modules.certification.domain.models import CertificationEntity
+
 
 class CertificationRepositoryInterface(ABC):
     @abstractmethod

@@ -1,4 +1,5 @@
 """Domain models for security verification."""
+
 from .models import (
     SecurityCategory,
     SecurityStatus,

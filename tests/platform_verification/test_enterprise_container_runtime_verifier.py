@@ -1,6 +1,7 @@
 """
 Comprehensive Test Suite for Part 3A: Enterprise Container & Runtime Verification Framework.
 """
+
 import pytest
 from app.platform_verification.container_verification.cli import ContainerVerificationPlatform
 from app.platform_verification.container_verification.models.verification_models import (
@@ -60,7 +61,12 @@ def test_container_boundary_and_isolation_validator(container_platform):
     assert clean_rep.isolation_score >= 0.90
 
     leaky_services = {
-        "god_api": ServiceDefinition(name="god_api", image="god", ports=["80:80", "443:443", "5432:5432", "6379:6379"], volumes=["shared_data:/data"]),
+        "god_api": ServiceDefinition(
+            name="god_api",
+            image="god",
+            ports=["80:80", "443:443", "5432:5432", "6379:6379"],
+            volumes=["shared_data:/data"],
+        ),
         "worker": ServiceDefinition(name="worker", image="worker", volumes=["shared_data:/data"]),
     }
     leaky_rep = validator.validate_boundaries(leaky_services)
@@ -124,7 +130,9 @@ def test_network_security_and_resource_limits(container_platform):
     """Verifies that internal ports (Postgres, Redis) are not publicly exposed and limits are set."""
     services = {
         "api": ServiceDefinition(name="api", image="api", ports=["8000:8000"], cpu_limit="1.0", memory_limit="1G"),
-        "postgres": ServiceDefinition(name="postgres", image="pg", ports=["127.0.0.1:5432:5432"], cpu_limit="2.0", memory_limit="2G"),
+        "postgres": ServiceDefinition(
+            name="postgres", image="pg", ports=["127.0.0.1:5432:5432"], cpu_limit="2.0", memory_limit="2G"
+        ),
     }
     net_rep = container_platform.security_analyzer.analyze_network_security(services)
     res_rep = container_platform.resource_validator.validate_resource_limits(services)
@@ -132,7 +140,9 @@ def test_network_security_and_resource_limits(container_platform):
     assert res_rep.status == "PASS"
 
     insecure_services = {
-        "postgres": ServiceDefinition(name="postgres", image="pg", ports=["0.0.0.0:5432:5432"], cpu_limit=None, memory_limit=None),
+        "postgres": ServiceDefinition(
+            name="postgres", image="pg", ports=["0.0.0.0:5432:5432"], cpu_limit=None, memory_limit=None
+        ),
     }
     bad_net = container_platform.security_analyzer.analyze_network_security(insecure_services)
     bad_res = container_platform.resource_validator.validate_resource_limits(insecure_services)
@@ -144,7 +154,10 @@ def test_end_to_end_container_verification_and_evidence(container_platform, tmp_
     """Tests end-to-end container verification execution, scoring, and artifact export."""
     package = container_platform.run_full_verification(commit_sha="git-commit-3a-99")
     assert package.scorecard.composite_score >= 90.0
-    assert package.scorecard.tier in [ContainerCertificationTier.ENTERPRISE_CONTAINER_READY, ContainerCertificationTier.PRODUCTION_READY]
+    assert package.scorecard.tier in [
+        ContainerCertificationTier.ENTERPRISE_CONTAINER_READY,
+        ContainerCertificationTier.PRODUCTION_READY,
+    ]
     assert package.package_sha256 != ""
 
     # Test evidence export

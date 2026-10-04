@@ -65,7 +65,7 @@ def test_concurrency_wavefronts_and_transitive_reduction():
     """Verifies concurrency grouping and transitive edge reduction."""
     dag = ExecutionGraphBuilder.build_financial_invoice_audit_dag(mission_id="m-opt")
     wavefronts = dag.compute_concurrency_wavefronts()
-    
+
     # Layer 0: [OCR], Layer 1: [Items, Meta], Layer 2: [SMT], Layer 3: [Reflection]
     assert len(wavefronts) == 4
     assert len(wavefronts[1]) == 2  # 2 parallel extraction tasks

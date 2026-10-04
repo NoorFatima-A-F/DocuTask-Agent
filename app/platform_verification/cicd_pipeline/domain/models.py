@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Continuous Verification CI/CD Pipeline (PART 7).
 """
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -82,6 +83,7 @@ class RollbackTriggerReason(str, Enum):
 @dataclass
 class ChangedFile:
     """Individual file change in commit/PR."""
+
     file_path: str
     change_type: PipelineChangeType
     lines_added: int = 0
@@ -91,6 +93,7 @@ class ChangedFile:
 @dataclass
 class PipelineChangeContext:
     """Analyzed change payload driving adaptive verification."""
+
     change_id: str
     commit_sha: str
     branch: str
@@ -106,6 +109,7 @@ class PipelineChangeContext:
 @dataclass
 class StageExecutionRecord:
     """Execution status and metric output of a single pipeline stage."""
+
     stage_id: str
     stage_type: PipelineStageType
     stage_name: str
@@ -121,6 +125,7 @@ class StageExecutionRecord:
 @dataclass
 class PipelineExecutionRecord:
     """Full lifecycle execution trace of a continuous verification pipeline run."""
+
     pipeline_id: str
     pipeline_name: str
     target_environment: TargetEnvironment
@@ -139,6 +144,7 @@ class PipelineExecutionRecord:
 @dataclass
 class PipelineArtifactMetadata:
     """Artifact stored and verified in artifact registry."""
+
     artifact_id: str
     name: str
     version: str
@@ -154,6 +160,7 @@ class PipelineArtifactMetadata:
 @dataclass
 class SupplyChainSecurityReport:
     """Supply chain security scan report."""
+
     scan_id: str
     pipeline_id: str
     dependency_vulnerabilities_count: int = 0
@@ -168,6 +175,7 @@ class SupplyChainSecurityReport:
 @dataclass
 class EnvironmentPromotionRecord:
     """Audit record for environment promotion progression."""
+
     promotion_id: str
     pipeline_id: str
     source_env: TargetEnvironment
@@ -183,6 +191,7 @@ class EnvironmentPromotionRecord:
 @dataclass
 class RollbackEventRecord:
     """Audit record of automated deployment rollback."""
+
     rollback_id: str
     pipeline_id: str
     target_environment: TargetEnvironment
@@ -198,6 +207,7 @@ class RollbackEventRecord:
 @dataclass
 class PipelineObservabilityMetrics:
     """Consolidated CI/CD pipeline reliability and DORA metrics."""
+
     total_pipeline_runs: int = 0
     successful_runs: int = 0
     failed_runs: int = 0

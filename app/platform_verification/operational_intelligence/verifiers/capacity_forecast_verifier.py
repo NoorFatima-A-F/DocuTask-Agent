@@ -1,6 +1,7 @@
 """
 Phase 3H.9.5: Multi-Horizon Capacity Prediction & Saturation Forecasting Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_intelligence.domain.interfaces import ICapacityForecastVerifier
@@ -67,7 +68,9 @@ class CapacityForecastVerifier(ICapacityForecastVerifier):
             ),
         ]
 
-        logger.info(f"Verified multi-horizon capacity forecasting for {len(forecasts)} critical infrastructure resources.")
+        logger.info(
+            f"Verified multi-horizon capacity forecasting for {len(forecasts)} critical infrastructure resources."
+        )
         return CapacityForecastReport(
             horizons_evaluated=["7_DAYS", "30_DAYS", "90_DAYS"],
             forecasts=forecasts,

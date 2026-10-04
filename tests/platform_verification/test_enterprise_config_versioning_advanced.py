@@ -3,12 +3,17 @@ Advanced Verification Tests for Part 1.1E:
 Configuration Domains, Lifecycle, Reproducibility Engine, Database Migrations,
 Feature Flags, and Secret Governance.
 """
+
 from app.platform_verification.config_versioning.domain.models import (
-    SemanticVersion, EnvironmentTier, ConfigDomain, PromptTemplateVersion
+    SemanticVersion,
+    EnvironmentTier,
+    ConfigDomain,
+    PromptTemplateVersion,
 )
 from app.platform_verification.config_versioning.domain.schemas import schema_validator
 from app.platform_verification.config_versioning.domain.lifecycle import (
-    ConfigurationLifecycleRecord, ConfigurationLifecycleState
+    ConfigurationLifecycleRecord,
+    ConfigurationLifecycleState,
 )
 from app.platform_verification.config_versioning.core.migrations import migration_manager
 from app.platform_verification.config_versioning.core.feature_flags import feature_flag_manager
@@ -43,7 +48,7 @@ def test_configuration_domain_schema_validations():
         "temperature": 0.1,
         "top_p": 0.9,
         "max_tokens": 4096,
-        "request_timeout_seconds": 30
+        "request_timeout_seconds": 30,
     }
     is_valid, errors = schema_validator.validate_domain_config(ConfigDomain.AI, ai_cfg)
     assert is_valid is True
@@ -76,7 +81,7 @@ def test_database_migration_versioning_and_rollback():
         author="Principal Data Architect",
         description="Creates CAS table for evidence storage",
         forward_sql="CREATE TABLE evidence_cas (hash TEXT PRIMARY KEY, content BLOB);",
-        rollback_sql="DROP TABLE evidence_cas;"
+        rollback_sql="DROP TABLE evidence_cas;",
     )
     assert m1.is_applied is False
 
@@ -97,7 +102,7 @@ def test_feature_flag_percentage_and_environment_gating():
         description="Enables Gemini 2.5 Flash as synthetic judge",
         is_enabled=True,
         rollout_percentage=50,
-        enabled_environments=[EnvironmentTier.STAGING, EnvironmentTier.PRODUCTION_SHADOW]
+        enabled_environments=[EnvironmentTier.STAGING, EnvironmentTier.PRODUCTION_SHADOW],
     )
     # Production should be disabled (not in enabled_environments)
     assert feature_flag_manager.is_flag_active("experimental_llm_judge", EnvironmentTier.PRODUCTION) is False
@@ -109,17 +114,13 @@ def test_feature_flag_percentage_and_environment_gating():
 def test_secret_management_masking_and_rotation():
     # Register secret
     sec = secret_manager_service.register_secret_reference(
-        key_name="GEMINI_API_KEY",
-        vault_path="secret/data/gemini_key",
-        initial_value="TEST_SECRET_VAL_ALPHA_12345"
+        key_name="GEMINI_API_KEY", vault_path="secret/data/gemini_key", initial_value="TEST_SECRET_VAL_ALPHA_12345"
     )
     assert sec.version == 1
 
     # Rotation
     rot = secret_manager_service.rotate_secret(
-        key_name="GEMINI_API_KEY",
-        new_value="TEST_SECRET_VAL_BETA_98765",
-        reason="Quarterly key rotation"
+        key_name="GEMINI_API_KEY", new_value="TEST_SECRET_VAL_BETA_98765", reason="Quarterly key rotation"
     )
     assert rot.new_version == 2
     assert sec.version == 2
@@ -133,13 +134,10 @@ def test_secret_management_masking_and_rotation():
 
 def test_reproducibility_engine_execution_snapshot_and_fidelity():
     snap_cfg = config_versioning_runtime.resolve_and_snapshot(
-        environment=EnvironmentTier.STAGING,
-        module_name="ocr_verification"
+        environment=EnvironmentTier.STAGING, module_name="ocr_verification"
     )
     prompt = PromptTemplateVersion(
-        name="ocr_eval_prompt",
-        semantic_version="1.0.0",
-        raw_prompt="Extract all invoice line items strictly as JSON."
+        name="ocr_eval_prompt", semantic_version="1.0.0", raw_prompt="Extract all invoice line items strictly as JSON."
     )
 
     # Capture execution snapshot A
@@ -152,7 +150,7 @@ def test_reproducibility_engine_execution_snapshot_and_fidelity():
         dataset_hash="hash_ds_987",
         model_identifier="gemini-2.5-flash",
         model_version="2026-03-stable",
-        prompt_version=prompt
+        prompt_version=prompt,
     )
     assert len(exec_a.composite_execution_hash) == 64
 
@@ -173,7 +171,7 @@ def test_reproducibility_engine_execution_snapshot_and_fidelity():
         dependency_lock_hash=exec_a.dependency_lock_hash,
         sbom_manifest_id=exec_a.sbom_manifest_id,
         environment_tier=EnvironmentTier.STAGING,
-        infrastructure_version="k8s-cluster-v2"
+        infrastructure_version="k8s-cluster-v2",
     )
 
     report = reproducibility_engine.verify_reproducibility_fidelity(exec_a, exec_b)

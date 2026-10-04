@@ -29,6 +29,7 @@ class DivergenceType(str, Enum):
 @dataclass
 class DifferentialSampleResult:
     """Comparison of outputs for a single test input across multiple engines."""
+
     sample_id: str
     engine_outputs: Dict[str, str]  # {engine_name: output_str}
     consensus_reached: bool
@@ -40,6 +41,7 @@ class DifferentialSampleResult:
 @dataclass
 class DifferentialTestingReport:
     """Comprehensive differential cross-model comparison report."""
+
     total_samples_evaluated: int
     engines_participating: List[str]
     overall_consensus_rate: float
@@ -70,7 +72,7 @@ class DifferentialTestingEngine:
                 consensus_reached=False,
                 majority_output="",
                 divergence_type=DivergenceType.OMISSION,
-                inter_engine_agreement_ratio=0.0
+                inter_engine_agreement_ratio=0.0,
             )
 
         norm_outputs = {k: cls._normalize_text(v) for k, v in outputs.items()}
@@ -101,14 +103,12 @@ class DifferentialTestingEngine:
             consensus_reached=consensus,
             majority_output=best_text,
             divergence_type=div_type,
-            inter_engine_agreement_ratio=agreement_ratio
+            inter_engine_agreement_ratio=agreement_ratio,
         )
 
     @classmethod
     def run_differential_campaign(
-        cls,
-        dataset: List[Tuple[str, Dict[str, str]]],
-        consensus_threshold: float = 0.85
+        cls, dataset: List[Tuple[str, Dict[str, str]]], consensus_threshold: float = 0.85
     ) -> DifferentialTestingReport:
         """
         Run differential campaign on a dataset of (sample_id, {engine_name: output}).
@@ -121,7 +121,7 @@ class DifferentialTestingEngine:
                 mean_pairwise_agreement=0.0,
                 divergence_breakdown={},
                 disputed_samples_count=0,
-                status="INSUFFICIENT_EVIDENCE"
+                status="INSUFFICIENT_EVIDENCE",
             )
 
         sample_results = [cls.evaluate_sample(s_id, outs) for s_id, outs in dataset]
@@ -139,7 +139,13 @@ class DifferentialTestingEngine:
 
         disputed_count = sum(1 for r in sample_results if not r.consensus_reached)
 
-        status = "PASS" if consensus_rate >= consensus_threshold else "MODERATE_DIVERGENCE" if consensus_rate >= 0.70 else "HIGH_DISAGREEMENT"
+        status = (
+            "PASS"
+            if consensus_rate >= consensus_threshold
+            else "MODERATE_DIVERGENCE"
+            if consensus_rate >= 0.70
+            else "HIGH_DISAGREEMENT"
+        )
 
         return DifferentialTestingReport(
             total_samples_evaluated=total_samples,
@@ -149,5 +155,5 @@ class DifferentialTestingEngine:
             divergence_breakdown=div_breakdown,
             disputed_samples_count=disputed_count,
             status=status,
-            details={"samples": [r.sample_id for r in sample_results if not r.consensus_reached]}
+            details={"samples": [r.sample_id for r in sample_results if not r.consensus_reached]},
         )

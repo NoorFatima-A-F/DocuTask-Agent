@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Security.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.security.domain.models import SecurityEntity
 from app.platform_verification.modules.security.domain.interfaces import SecurityRepositoryInterface
+
 
 class InMemorySecurityRepository(SecurityRepositoryInterface):
     def __init__(self):

@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class ModuleDescriptor(BaseModel):
     """Declarative specification of a platform subsystem module."""
+
     name: str
     version: str = "1.0.0"
     dependencies: List[str] = Field(default_factory=list)

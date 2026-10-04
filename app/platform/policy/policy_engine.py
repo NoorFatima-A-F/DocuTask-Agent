@@ -120,21 +120,25 @@ class PolicyEngine:
             if policy.policy_id == "pol-cost-002":
                 cost = float(action_context.get("cost_usd", 0.001))
                 if cost > 0.05:
-                    violations.append({
-                        "policy_id": policy.policy_id,
-                        "name": policy.name,
-                        "reason": f"Cost ${cost:.4f} exceeds ceiling of $0.05",
-                    })
+                    violations.append(
+                        {
+                            "policy_id": policy.policy_id,
+                            "name": policy.name,
+                            "reason": f"Cost ${cost:.4f} exceeds ceiling of $0.05",
+                        }
+                    )
 
             elif policy.policy_id == "pol-gov-004":
                 amount = float(action_context.get("amount", 0.0))
                 human_signed = bool(action_context.get("human_signed", False))
                 if amount > 10000.0 and not human_signed:
-                    violations.append({
-                        "policy_id": policy.policy_id,
-                        "name": policy.name,
-                        "reason": f"Amount ${amount:,.2f} requires Human Supervisor Signature",
-                    })
+                    violations.append(
+                        {
+                            "policy_id": policy.policy_id,
+                            "name": policy.name,
+                            "reason": f"Amount ${amount:,.2f} requires Human Supervisor Signature",
+                        }
+                    )
 
         is_allowed = len(violations) == 0
         return PolicyEvaluationResult(

@@ -32,10 +32,7 @@ class CoordinationFactory:
         team_repo = InMemoryTeamRepository()
 
         manager = CoordinationManager(
-            registry=registry,
-            lease_manager=lease_manager,
-            presence_manager=presence_manager,
-            team_repository=team_repo
+            registry=registry, lease_manager=lease_manager, presence_manager=presence_manager, team_repository=team_repo
         )
 
         planner = DelegationPlanner()
@@ -43,26 +40,16 @@ class CoordinationFactory:
         formation_engine = TeamFormationEngine()
 
         coordinator = AgentCoordinator(
-            registry=registry,
-            planner=planner,
-            executor=executor,
-            formation_engine=formation_engine
+            registry=registry, planner=planner, executor=executor, formation_engine=formation_engine
         )
 
         swarm_engine = SwarmEngine()
-        orchestrator = CoordinationOrchestrator(
-            registry=registry,
-            coordinator=coordinator,
-            swarm_engine=swarm_engine
-        )
+        orchestrator = CoordinationOrchestrator(registry=registry, coordinator=coordinator, swarm_engine=swarm_engine)
 
         metrics = CoordinationMetricsCollector() if enable_metrics else None
 
         return CoordinationEngine(
-            manager=manager,
-            coordinator=coordinator,
-            orchestrator=orchestrator,
-            metrics_collector=metrics
+            manager=manager, coordinator=coordinator, orchestrator=orchestrator, metrics_collector=metrics
         )
 
     @staticmethod

@@ -11,24 +11,29 @@ from ..resilience.retry import RetryPolicy, RetryPolicyEngine
 
 def mesh_service(name: str, namespace: str = "default", mtls: bool = True):
     """Class decorator to tag a class as a mesh-managed service."""
+
     def decorator(cls):
         setattr(cls, "__mesh_service_name__", name)
         setattr(cls, "__mesh_namespace__", namespace)
         setattr(cls, "__mesh_mtls__", mtls)
         return cls
+
     return decorator
 
 
 def mesh_endpoint(action: str, method: str = "POST", path: Optional[str] = None):
     """Method decorator to expose a handler as a mesh-callable RPC/HTTP action."""
+
     def decorator(func: Callable[..., Any]):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             return func(*args, **kwargs)
+
         setattr(wrapper, "__mesh_action__", action)
         setattr(wrapper, "__mesh_method__", method)
         setattr(wrapper, "__mesh_path__", path or f"/{action}")
         return wrapper
+
     return decorator
 
 
@@ -48,7 +53,9 @@ def circuit_protected(service_name: str, config: Optional[CircuitBreakerConfig] 
             except Exception:
                 cb.record_result(is_failure=True)
                 raise
+
         return wrapper
+
     return decorator
 
 
@@ -69,7 +76,10 @@ def with_retry(max_attempts: int = 3, initial_backoff_ms: float = 50.0):
                         raise
                     delay_ms = engine.calculate_backoff(attempt, policy)
                     import time
+
                     time.sleep(delay_ms / 1000.0)
                     attempt += 1
+
         return wrapper
+
     return decorator

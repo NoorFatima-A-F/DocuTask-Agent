@@ -1,7 +1,9 @@
 """
 Strongly-Typed Exception Hierarchy.
 """
+
 from typing import Any, Dict, Optional
+
 
 class PlatformVerificationException(Exception):
     def __init__(self, message: str, code: str = "VERIFICATION_ERROR", details: Optional[Dict[str, Any]] = None):
@@ -21,7 +23,7 @@ class EntityNotFoundException(DomainException):
         super().__init__(
             f"Entity '{entity_name}' with ID '{entity_id}' was not found.",
             code="ENTITY_NOT_FOUND",
-            details={"entity_name": entity_name, "entity_id": entity_id}
+            details={"entity_name": entity_name, "entity_id": entity_id},
         )
 
 
@@ -30,7 +32,7 @@ class InvariantViolationException(DomainException):
         super().__init__(
             f"Domain invariant '{invariant_name}' violated: {reason}",
             code="INVARIANT_VIOLATION",
-            details={"invariant_name": invariant_name, "reason": reason}
+            details={"invariant_name": invariant_name, "reason": reason},
         )
 
 
@@ -42,16 +44,10 @@ class ConcurrencyException(DomainException):
 class SecurityViolationException(PlatformVerificationException):
     def __init__(self, message: str, policy_name: Optional[str] = None):
         super().__init__(
-            message,
-            code="SECURITY_VIOLATION",
-            details={"policy_name": policy_name} if policy_name else {}
+            message, code="SECURITY_VIOLATION", details={"policy_name": policy_name} if policy_name else {}
         )
 
 
 class ConfigurationException(PlatformVerificationException):
     def __init__(self, message: str, scope: Optional[str] = None):
-        super().__init__(
-            message,
-            code="CONFIGURATION_ERROR",
-            details={"scope": scope} if scope else {}
-        )
+        super().__init__(message, code="CONFIGURATION_ERROR", details={"scope": scope} if scope else {})

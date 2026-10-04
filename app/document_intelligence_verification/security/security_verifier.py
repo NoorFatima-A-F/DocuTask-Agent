@@ -68,7 +68,7 @@ class SecurityVerifier:
     def _verify_prompt_injection_defense(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
         # Adversarial document text containing indirect prompt injection
-        
+
         # Security sanitization filter strips prompt injection patterns
         extracted_vendor = "Vendor_Not_Specified"  # Prompt injection ignored, did not set to 'HACKED'
         extracted_total = 500.0
@@ -111,10 +111,10 @@ class SecurityVerifier:
 
     def _verify_pii_redaction(self) -> Dict[str, Any]:
         t0 = time.perf_counter()
-        
+
         # PII Redaction
         redacted = "Customer: John Doe, SSN: ***-**-6789, CC: ****-****-****-5566"
-        
+
         passed = "123-45-6789" not in redacted and "4532-1122-3344-5566" not in redacted
         t_elapsed = (time.perf_counter() - t0) * 1000.0
 

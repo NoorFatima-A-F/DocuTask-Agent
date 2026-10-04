@@ -30,6 +30,7 @@ class EvaluatorRole(str, Enum):
 @dataclass
 class ReplicationExperimentRow:
     """A single row in the peer-reviewed reproduction matrix."""
+
     reviewer_role: EvaluatorRole
     environment_desc: str
     operating_system: str
@@ -46,6 +47,7 @@ class ReplicationExperimentRow:
 @dataclass
 class ReproductionMatrixReport:
     """Complete reproduction matrix report for artifact evaluation committees."""
+
     benchmark_name: str
     total_evaluators: int
     concordant_evaluators_count: int
@@ -74,14 +76,18 @@ class IndependentReproductionMatrixLab:
         metric_name: str,
         baseline_val: float,
         reproduced_val: float,
-        tolerance_rel: float = 0.02
+        tolerance_rel: float = 0.02,
     ) -> ReplicationExperimentRow:
         """Create a single matrix row with exact divergence calculation."""
         abs_diff = abs(baseline_val - reproduced_val)
         rel_diff = abs_diff / max(abs(baseline_val), 1e-12)
         is_same = rel_diff <= tolerance_rel
 
-        notes = f"Replicated within {rel_diff*100:.2f}% tolerance." if is_same else f"Diverged by {rel_diff*100:.2f}% (> {tolerance_rel*100:.1f}% threshold)."
+        notes = (
+            f"Replicated within {rel_diff * 100:.2f}% tolerance."
+            if is_same
+            else f"Diverged by {rel_diff * 100:.2f}% (> {tolerance_rel * 100:.1f}% threshold)."
+        )
 
         return ReplicationExperimentRow(
             reviewer_role=role,
@@ -94,7 +100,7 @@ class IndependentReproductionMatrixLab:
             absolute_difference=abs_diff,
             relative_difference=rel_diff,
             same_result=is_same,
-            notes=notes
+            notes=notes,
         )
 
     @classmethod
@@ -102,14 +108,14 @@ class IndependentReproductionMatrixLab:
         """Generate markdown table conforming to ACM/IEEE Artifact Evaluation standards."""
         lines = [
             "| Reviewer / Evaluator | Environment | OS | Baseline | Reproduced | Abs Diff | Rel Diff | Same Result | Notes |",
-            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |"
+            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
         ]
         for r in rows:
             same_str = "**YES**" if r.same_result else "**NO**"
             lines.append(
                 f"| {r.reviewer_role.value} | {r.environment_desc} | {r.operating_system} | "
                 f"{r.baseline_value:.4f} | {r.reproduced_value:.4f} | {r.absolute_difference:.2e} | "
-                f"{r.relative_difference*100:.2f}% | {same_str} | {r.notes} |"
+                f"{r.relative_difference * 100:.2f}% | {same_str} | {r.notes} |"
             )
         return "\n".join(lines)
 
@@ -120,7 +126,7 @@ class IndependentReproductionMatrixLab:
         metric_name: str,
         baseline_val: float,
         evaluator_results: List[Tuple[EvaluatorRole, str, str, str, float]],
-        tolerance_rel: float = 0.02
+        tolerance_rel: float = 0.02,
     ) -> ReproductionMatrixReport:
         """
         Build full reproduction matrix across all evaluator submissions.
@@ -138,7 +144,7 @@ class IndependentReproductionMatrixLab:
                 assumptions=["Evaluator submissions provided"],
                 limitations=["No evaluator executions recorded"],
                 reproducibility_instructions="Execute benchmark across at least 2 independent environments",
-                verdict="UNVERIFIED"
+                verdict="UNVERIFIED",
             )
 
         rows = [
@@ -165,11 +171,11 @@ class IndependentReproductionMatrixLab:
             matrix_table_markdown=table_md,
             assumptions=[
                 "Independent environments configured with pinned dependency versions",
-                "Deterministic random seed applied across all evaluator runs"
+                "Deterministic random seed applied across all evaluator runs",
             ],
             limitations=[
                 "Floating point operations across diverse CPU architectures (x86_64 vs ARM64) may cause sub-ULP variation"
             ],
             reproducibility_instructions="Clone repository, execute `poetry install`, and run `poetry run pytest tests/` with specified seed.",
-            verdict=verdict
+            verdict=verdict,
         )

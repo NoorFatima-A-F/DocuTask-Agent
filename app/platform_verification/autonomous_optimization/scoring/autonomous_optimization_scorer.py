@@ -1,6 +1,7 @@
 """
 Phase 3H.10: 7-Pillar Autonomous Optimization & Operations Scorer
 """
+
 from typing import List
 from datetime import datetime, timezone
 from ..domain.models import (
@@ -79,7 +80,15 @@ class AutonomousOptimizationScorer(IAutonomousOptimizationScorer):
         gov_weight = 5.0
         gov_weighted = (gov_score * gov_weight) / 100.0
 
-        total_score = corr_weighted + pred_weighted + recom_weighted + safety_weighted + expl_weighted + learn_weighted + gov_weighted
+        total_score = (
+            corr_weighted
+            + pred_weighted
+            + recom_weighted
+            + safety_weighted
+            + expl_weighted
+            + learn_weighted
+            + gov_weighted
+        )
         total_score = round(total_score, 2)
 
         pillar_scores: List[PillarScore] = [
@@ -88,49 +97,49 @@ class AutonomousOptimizationScorer(IAutonomousOptimizationScorer):
                 weight_pct=corr_weight,
                 achieved_score_pct=round(corr_score, 2),
                 weighted_score_pct=round(corr_weighted, 2),
-                status="PASSED" if corr_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if corr_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             PillarScore(
                 pillar_name="Prediction & Trend Reliability",
                 weight_pct=pred_weight,
                 achieved_score_pct=round(pred_score, 2),
                 weighted_score_pct=round(pred_weighted, 2),
-                status="PASSED" if pred_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if pred_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             PillarScore(
                 pillar_name="Recommendation Quality & ROI",
                 weight_pct=recom_weight,
                 achieved_score_pct=round(recom_score, 2),
                 weighted_score_pct=round(recom_weighted, 2),
-                status="PASSED" if recom_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if recom_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             PillarScore(
                 pillar_name="Autonomous Execution Safety",
                 weight_pct=safety_weight,
                 achieved_score_pct=round(safety_score, 2),
                 weighted_score_pct=round(safety_weighted, 2),
-                status="PASSED" if safety_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if safety_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             PillarScore(
                 pillar_name="Decision Explainability & Proof",
                 weight_pct=expl_weight,
                 achieved_score_pct=round(expl_score, 2),
                 weighted_score_pct=round(expl_weighted, 2),
-                status="PASSED" if expl_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if expl_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             PillarScore(
                 pillar_name="Continuous Learning & Adaptation",
                 weight_pct=learn_weight,
                 achieved_score_pct=round(learn_score, 2),
                 weighted_score_pct=round(learn_weighted, 2),
-                status="PASSED" if learn_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if learn_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
             PillarScore(
                 pillar_name="Governance & Policy Compliance",
                 weight_pct=gov_weight,
                 achieved_score_pct=round(gov_score, 2),
                 weighted_score_pct=round(gov_weighted, 2),
-                status="PASSED" if gov_score >= 95.0 else "NEEDS_IMPROVEMENT"
+                status="PASSED" if gov_score >= 95.0 else "NEEDS_IMPROVEMENT",
             ),
         ]
 
@@ -158,5 +167,5 @@ class AutonomousOptimizationScorer(IAutonomousOptimizationScorer):
             minimum_passing_threshold_pct=98.0,
             pillar_scores=pillar_scores,
             certification_granted=granted,
-            auditor="DocuTask Autonomous Reliability & Operations Scorer"
+            auditor="DocuTask Autonomous Reliability & Operations Scorer",
         )

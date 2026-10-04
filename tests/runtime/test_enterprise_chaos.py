@@ -113,4 +113,3 @@ async def test_chaos_latency_jitter_and_metrics():
 
     assert res.passed is True
     assert res.duration_ms >= 40.0
-

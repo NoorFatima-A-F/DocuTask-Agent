@@ -77,7 +77,9 @@ class FailurePredictionEngine:
             "projected_time_to_failure_min": max(15, int(120 * (1.0 - risk_score))),
             "severity": severity,
             "early_warning_signals": signals or ["All telemetry metrics operating within normal baseline."],
-            "recommended_action": "Scale agent workers or throttle token burst rate." if risk_score > 0.50 else "Maintain current operational parameters.",
+            "recommended_action": "Scale agent workers or throttle token burst rate."
+            if risk_score > 0.50
+            else "Maintain current operational parameters.",
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
         self._predictions.append(pred)

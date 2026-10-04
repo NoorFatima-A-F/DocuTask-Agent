@@ -42,16 +42,9 @@ async def test_ai_extraction_service_workflow(db_session: AsyncSession, temp_sto
     doc_service = DocumentService(document_repo=doc_repo, storage_provider=storage)
     ocr_pipeline = OCRPipeline(ocr_provider=TesseractOCRProvider())
     ocr_service = OCRService(
-        document_repo=doc_repo,
-        extracted_text_repo=text_repo,
-        storage_provider=storage,
-        ocr_pipeline=ocr_pipeline
+        document_repo=doc_repo, extracted_text_repo=text_repo, storage_provider=storage, ocr_pipeline=ocr_pipeline
     )
-    ai_service = AIExtractionService(
-        document_repo=doc_repo,
-        ai_extraction_repo=ai_repo,
-        ocr_service=ocr_service
-    )
+    ai_service = AIExtractionService(document_repo=doc_repo, ai_extraction_repo=ai_repo, ocr_service=ocr_service)
 
     user = await user_repo.create({"email": "ai_user@example.com", "username": "aiuser", "hashed_password": "p"})
 

@@ -13,6 +13,7 @@ from app.agents.tools.metadata import CostProfile, LatencyProfile, ToolResourceR
 
 class ToolIdentity(BaseModel):
     """Immutable Tool Identity."""
+
     tool_id: str
     name: str
     provider_name: str
@@ -22,6 +23,7 @@ class ToolIdentity(BaseModel):
 
 class ToolVersion(BaseModel):
     """Tool Versioning Specification."""
+
     version: str = Field(default="1.0.0")
     is_deprecated: bool = Field(default=False)
     model_config = {"frozen": True}
@@ -29,6 +31,7 @@ class ToolVersion(BaseModel):
 
 class ToolStatistics(BaseModel):
     """Tool operational statistics."""
+
     execution_count: int = Field(default=0, ge=0)
     success_count: int = Field(default=0, ge=0)
     failure_count: int = Field(default=0, ge=0)
@@ -40,6 +43,7 @@ class ToolStatistics(BaseModel):
 
 class ToolMetadata(BaseModel):
     """Comprehensive Tool Metadata Description."""
+
     description: str
     supported_capabilities: List[str] = Field(default_factory=list)
     supported_document_types: List[str] = Field(default_factory=list)
@@ -57,6 +61,7 @@ class ToolMetadata(BaseModel):
 
 class ToolDescriptor(BaseModel):
     """Complete Immutable Tool Descriptor."""
+
     identity: ToolIdentity
     version: ToolVersion = Field(default_factory=ToolVersion)
     metadata: ToolMetadata

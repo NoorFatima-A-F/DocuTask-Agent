@@ -18,6 +18,7 @@ from app.prompts.lifecycle.manager import PromptLifecycleManager
 
 class ApprovalStageStatus(str, Enum):
     """Status of an approval stage."""
+
     PENDING = "PENDING"
     APPROVED = "APPROVED"
     REJECTED = "REJECTED"
@@ -25,6 +26,7 @@ class ApprovalStageStatus(str, Enum):
 
 class PromptApprovalStage(BaseModel):
     """Single stage in a prompt approval review pipeline."""
+
     stage_name: str
     status: ApprovalStageStatus = ApprovalStageStatus.PENDING
     reviewer: Optional[str] = None
@@ -34,6 +36,7 @@ class PromptApprovalStage(BaseModel):
 
 class PromptApprovalWorkflowRecord(BaseModel):
     """Container for complete approval workflow history."""
+
     workflow_id: str
     prompt_id: str
     version_id: str

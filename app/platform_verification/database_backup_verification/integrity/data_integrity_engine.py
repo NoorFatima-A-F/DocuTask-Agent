@@ -2,6 +2,7 @@
 Data Integrity and Cryptographic Signature Engine (Part 3G.2B Phase 11 & 12).
 Executes field-by-field record comparison, table checksums, and cryptographically signs manifests.
 """
+
 import hashlib
 from typing import Dict, Any
 from app.platform_verification.database_backup_verification.domain.models import (

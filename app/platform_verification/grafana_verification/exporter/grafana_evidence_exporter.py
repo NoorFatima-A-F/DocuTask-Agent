@@ -45,14 +45,10 @@ class GrafanaEvidenceExporter(IGrafanaEvidenceExporter):
         exported_files: Dict[str, str] = {}
 
         # 1. configuration_report.json
-        exported_files["configuration_report.json"] = self._write_json(
-            "configuration_report.json", asdict(config_rep)
-        )
+        exported_files["configuration_report.json"] = self._write_json("configuration_report.json", asdict(config_rep))
 
         # 2. provisioning_report.json
-        exported_files["provisioning_report.json"] = self._write_json(
-            "provisioning_report.json", asdict(prov_rep)
-        )
+        exported_files["provisioning_report.json"] = self._write_json("provisioning_report.json", asdict(prov_rep))
 
         # 3. system_dashboard_report.json
         exported_files["system_dashboard_report.json"] = self._write_json(
@@ -60,9 +56,7 @@ class GrafanaEvidenceExporter(IGrafanaEvidenceExporter):
         )
 
         # 4. ai_dashboard_report.json
-        exported_files["ai_dashboard_report.json"] = self._write_json(
-            "ai_dashboard_report.json", asdict(ai_rep)
-        )
+        exported_files["ai_dashboard_report.json"] = self._write_json("ai_dashboard_report.json", asdict(ai_rep))
 
         # 5. agent_dashboard_report.json
         exported_files["agent_dashboard_report.json"] = self._write_json(
@@ -80,24 +74,16 @@ class GrafanaEvidenceExporter(IGrafanaEvidenceExporter):
         )
 
         # 8. usability_report.json
-        exported_files["usability_report.json"] = self._write_json(
-            "usability_report.json", asdict(usability_rep)
-        )
+        exported_files["usability_report.json"] = self._write_json("usability_report.json", asdict(usability_rep))
 
         # 9. performance_report.json
-        exported_files["performance_report.json"] = self._write_json(
-            "performance_report.json", asdict(perf_rep)
-        )
+        exported_files["performance_report.json"] = self._write_json("performance_report.json", asdict(perf_rep))
 
         # 10. security_report.json
-        exported_files["security_report.json"] = self._write_json(
-            "security_report.json", asdict(sec_rep)
-        )
+        exported_files["security_report.json"] = self._write_json("security_report.json", asdict(sec_rep))
 
         # 11. certification_report.json
-        exported_files["certification_report.json"] = self._write_json(
-            "certification_report.json", asdict(scorecard)
-        )
+        exported_files["certification_report.json"] = self._write_json("certification_report.json", asdict(scorecard))
 
         # 12. metadata.json
         metadata = {

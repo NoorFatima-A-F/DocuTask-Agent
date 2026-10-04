@@ -1,6 +1,7 @@
 """
 Plugin Event Publisher & Telemetry Bus.
 """
+
 from typing import Callable, Dict, List, Optional
 from app.platform_verification.extension_framework.domain.models import PluginEvent
 

@@ -29,7 +29,12 @@ def planning_context():
     c_map = {s.strategy_id: cost_engine.predict_cost(s) for s in strategies}
     l_map = {s.strategy_id: lat_engine.predict_latency(s) for s in strategies}
     r_map = {s.strategy_id: risk_engine.evaluate_strategy_risk(s) for s in strategies}
-    u_map = {s.strategy_id: util_engine.calculate_utility(s, c_map[s.strategy_id], l_map[s.strategy_id], r_map[s.strategy_id]) for s in strategies}
+    u_map = {
+        s.strategy_id: util_engine.calculate_utility(
+            s, c_map[s.strategy_id], l_map[s.strategy_id], r_map[s.strategy_id]
+        )
+        for s in strategies
+    }
 
     return {
         "strategies": strategies,

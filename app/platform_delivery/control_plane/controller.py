@@ -1,4 +1,5 @@
 """Authoritative Deployment Control Plane for Platform Delivery Operating System."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -16,6 +17,7 @@ from .state_machine import DeploymentState, DeploymentStateMachine
 @dataclass
 class DeploymentRecord:
     """Authoritative Deployment Entity Model (Req 7)."""
+
     deployment_id: str
     release_id: str
     artifact_id: str
@@ -145,7 +147,7 @@ class DeploymentControlPlane:
                 results = [d for d in results if d.status.value == query.status.upper()]
             if query.application:
                 results = [d for d in results if d.application == query.application]
-            results = results[:query.limit]
+            results = results[: query.limit]
         return sorted(results, key=lambda d: d.created_at, reverse=True)
 
     def approve_deployment(self, cmd: ApproveDeploymentCommand) -> DeploymentRecord:

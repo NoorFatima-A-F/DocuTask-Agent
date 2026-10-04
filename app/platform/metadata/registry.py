@@ -23,6 +23,7 @@ class MetadataType(str, Enum):
 @dataclass
 class PlatformEntityMetadata:
     """Universal platform metadata envelope."""
+
     entity_id: str
     entity_type: MetadataType
     name: str
@@ -77,7 +78,8 @@ class MetadataRegistry:
         """Search across name, description, and tags."""
         q = query.lower()
         return [
-            m for m in self._entries.values()
+            m
+            for m in self._entries.values()
             if q in m.name.lower() or q in m.description.lower() or any(q in t.lower() for t in m.tags)
         ]
 

@@ -9,6 +9,7 @@ from app.core.logging import logger
 
 class EnduranceTestMetrics(BaseModel):
     """Metrics recorded during long-duration soak testing."""
+
     duration_hours: int
     total_processed_documents: int
     initial_ram_mb: float
@@ -31,7 +32,9 @@ class EnduranceTester:
         final_ram = 44.8
         accumulation = final_ram - initial_ram
 
-        logger.info(f"Completed Endurance Soak Test ({duration_hours} hrs): Initial RAM={initial_ram}MB, Final RAM={final_ram}MB, Memory Accumulation={accumulation}MB")
+        logger.info(
+            f"Completed Endurance Soak Test ({duration_hours} hrs): Initial RAM={initial_ram}MB, Final RAM={final_ram}MB, Memory Accumulation={accumulation}MB"
+        )
 
         return EnduranceTestMetrics(
             duration_hours=duration_hours,
@@ -41,5 +44,5 @@ class EnduranceTester:
             memory_accumulation_mb=round(accumulation, 2),
             connection_leaks_detected=0,
             memory_leak_detected=False,
-            soak_pass_status=True
+            soak_pass_status=True,
         )

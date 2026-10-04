@@ -22,7 +22,10 @@ class IncidentClassifier:
         if is_data_loss_risk or (is_sla_breached and affected_missions_count > 5):
             return OperationalSeverity.CRITICAL
 
-        if subsystem in (SubsystemType.PLANNER, SubsystemType.TRUTH, SubsystemType.DATABASE) and affected_missions_count > 1:
+        if (
+            subsystem in (SubsystemType.PLANNER, SubsystemType.TRUTH, SubsystemType.DATABASE)
+            and affected_missions_count > 1
+        ):
             return OperationalSeverity.HIGH
 
         if error_type in ("RETRY_STORM", "DEADLOCK", "MEMORY_LEAK", "MODEL_RATE_LIMIT"):

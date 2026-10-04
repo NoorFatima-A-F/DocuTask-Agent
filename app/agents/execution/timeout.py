@@ -17,7 +17,9 @@ class TimeoutManager:
     def check_deadline(self) -> None:
         elapsed = datetime.now(timezone.utc).timestamp() - self.started_at
         if elapsed > self.timeout_seconds:
-            raise ExecutionTimeoutException(f"Execution timed out after {elapsed:.2f}s (deadline: {self.timeout_seconds}s).")
+            raise ExecutionTimeoutException(
+                f"Execution timed out after {elapsed:.2f}s (deadline: {self.timeout_seconds}s)."
+            )
 
     @property
     def remaining_seconds(self) -> float:

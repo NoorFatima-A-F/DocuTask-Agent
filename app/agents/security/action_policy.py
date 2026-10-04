@@ -40,7 +40,9 @@ class ActionPolicy:
 
         # 1. Base RBAC Check
         if permission not in granted:
-            msg = f"Role '{role.value}' lacks required permission '{permission.value}' for resource '{target_resource}'."
+            msg = (
+                f"Role '{role.value}' lacks required permission '{permission.value}' for resource '{target_resource}'."
+            )
             logger.warning("Security denial: %s", msg)
             return ActionAuthResult(allowed=False, reason=msg, violating_permission=permission)
 

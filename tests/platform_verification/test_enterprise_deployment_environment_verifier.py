@@ -1,8 +1,11 @@
 """
 Comprehensive Test Suite for Part 3D: Enterprise Deployment & Environment Verification Framework.
 """
+
 import pytest
-from app.platform_verification.deployment_verification.runtime.deployment_verification_runtime import DeploymentVerificationRuntime
+from app.platform_verification.deployment_verification.runtime.deployment_verification_runtime import (
+    DeploymentVerificationRuntime,
+)
 from app.platform_verification.deployment_verification.domain.models import (
     DeploymentCertificationTier,
 )
@@ -42,8 +45,20 @@ def test_build_pipeline_and_lockfile_validator(deploy_runtime):
 def test_environment_parity_and_drift_analyzer(deploy_runtime):
     """Verifies environment parity between staging and production and detects missing required variables."""
     good_envs = {
-        "STAGING": {"DATABASE_URL": "pg", "REDIS_URL": "rd", "STORAGE_BUCKET": "s3", "ENVIRONMENT": "stg", "SECRET_KEY": "k"},
-        "PRODUCTION": {"DATABASE_URL": "pg", "REDIS_URL": "rd", "STORAGE_BUCKET": "s3", "ENVIRONMENT": "prd", "SECRET_KEY": "k"},
+        "STAGING": {
+            "DATABASE_URL": "pg",
+            "REDIS_URL": "rd",
+            "STORAGE_BUCKET": "s3",
+            "ENVIRONMENT": "stg",
+            "SECRET_KEY": "k",
+        },
+        "PRODUCTION": {
+            "DATABASE_URL": "pg",
+            "REDIS_URL": "rd",
+            "STORAGE_BUCKET": "s3",
+            "ENVIRONMENT": "prd",
+            "SECRET_KEY": "k",
+        },
     }
     drift_rep = deploy_runtime.parity_validator.validate_parity(good_envs)
     assert drift_rep.status == "PASS"
@@ -61,12 +76,16 @@ def test_environment_parity_and_drift_analyzer(deploy_runtime):
 
 def test_iac_manifest_and_idempotency_validator(deploy_runtime):
     """Validates declarative IaC manifests and recreation idempotency."""
-    good_iac = [{"framework": "compose", "has_networking": True, "has_healthcheck": True, "idempotent_recreation": True}]
+    good_iac = [
+        {"framework": "compose", "has_networking": True, "has_healthcheck": True, "idempotent_recreation": True}
+    ]
     iac_rep = deploy_runtime.iac_validator.validate_iac(good_iac)
     assert iac_rep.status == "PASS"
     assert iac_rep.is_valid
 
-    bad_iac = [{"framework": "compose", "has_networking": False, "has_healthcheck": False, "idempotent_recreation": False}]
+    bad_iac = [
+        {"framework": "compose", "has_networking": False, "has_healthcheck": False, "idempotent_recreation": False}
+    ]
     bad_rep = deploy_runtime.iac_validator.validate_iac(bad_iac)
     assert bad_rep.status == "FAIL"
     assert len(bad_rep.validation_issues) == 2
@@ -121,7 +140,10 @@ def test_end_to_end_deployment_verification_and_api(deploy_runtime):
     """Tests end-to-end full execution, evidence sealing, and in-process REST API."""
     package = deploy_runtime.run_full_verification(commit_sha="git-commit-3d-88")
     assert package.scorecard.composite_score >= 90.0
-    assert package.scorecard.tier in [DeploymentCertificationTier.ENTERPRISE_DEPLOYMENT_READY, DeploymentCertificationTier.PRODUCTION_READY]
+    assert package.scorecard.tier in [
+        DeploymentCertificationTier.ENTERPRISE_DEPLOYMENT_READY,
+        DeploymentCertificationTier.PRODUCTION_READY,
+    ]
     assert package.package_sha256 != ""
 
     api = deploy_runtime.api

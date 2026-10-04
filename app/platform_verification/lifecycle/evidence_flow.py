@@ -5,6 +5,7 @@ import json
 from typing import Dict, Any
 import uuid
 
+
 @dataclass(frozen=True)
 class SealedEvidenceArtifact:
     artifact_id: str
@@ -17,11 +18,14 @@ class SealedEvidenceArtifact:
     retention_tier: str = "PRODUCTION_CERTIFIED"
     sealed_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
+
 class EvidenceLifecycleManager:
     def __init__(self):
         self._store: Dict[str, SealedEvidenceArtifact] = {}
 
-    def collect_and_seal(self, execution_id: str, step_id: str, artifact_type: str, data: Dict[str, Any]) -> SealedEvidenceArtifact:
+    def collect_and_seal(
+        self, execution_id: str, step_id: str, artifact_type: str, data: Dict[str, Any]
+    ) -> SealedEvidenceArtifact:
         serialized = json.dumps(data, sort_keys=True).encode("utf-8")
         checksum = hashlib.sha256(serialized).hexdigest()
         artifact_id = f"evi_{uuid.uuid4().hex[:12]}"
@@ -33,7 +37,7 @@ class EvidenceLifecycleManager:
             artifact_type=artifact_type,
             sha256_checksum=checksum,
             size_bytes=len(serialized),
-            payload=data
+            payload=data,
         )
         self._store[artifact_id] = artifact
         return artifact

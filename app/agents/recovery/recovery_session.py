@@ -15,6 +15,7 @@ from app.agents.recovery.root_cause import RootCauseReport
 
 class RecoverySession(BaseModel):
     """Autonomous Recovery Session Aggregate Root."""
+
     identity: RecoveryIdentity
     failure: Failure
     root_cause: Optional[RootCauseReport] = None

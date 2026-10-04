@@ -25,15 +25,69 @@ class MultiAgentBusinessCollaborationVerifier(IMultiAgentBusinessCollaborationVe
 
     def verify(self) -> MultiAgentBusinessCollaborationReport:
         roles = [
-            AgentRolePerformance(role_name="PlannerAgent", tasks_assigned=500, tasks_completed=500, consensus_agreements=480, redundant_work_detected=False),
-            AgentRolePerformance(role_name="KnowledgeAgent", tasks_assigned=750, tasks_completed=750, consensus_agreements=720, redundant_work_detected=False),
-            AgentRolePerformance(role_name="OCRAgent", tasks_assigned=600, tasks_completed=600, consensus_agreements=590, redundant_work_detected=False),
-            AgentRolePerformance(role_name="ValidationAgent", tasks_assigned=600, tasks_completed=600, consensus_agreements=580, redundant_work_detected=False),
-            AgentRolePerformance(role_name="ComplianceAgent", tasks_assigned=450, tasks_completed=450, consensus_agreements=440, redundant_work_detected=False),
-            AgentRolePerformance(role_name="SecurityAgent", tasks_assigned=400, tasks_completed=400, consensus_agreements=400, redundant_work_detected=False),
-            AgentRolePerformance(role_name="ReviewerAgent", tasks_assigned=300, tasks_completed=300, consensus_agreements=295, redundant_work_detected=False),
-            AgentRolePerformance(role_name="ManagerAgent", tasks_assigned=200, tasks_completed=200, consensus_agreements=198, redundant_work_detected=False),
-            AgentRolePerformance(role_name="ExecutiveCouncilAgent", tasks_assigned=80, tasks_completed=80, consensus_agreements=80, redundant_work_detected=False),
+            AgentRolePerformance(
+                role_name="PlannerAgent",
+                tasks_assigned=500,
+                tasks_completed=500,
+                consensus_agreements=480,
+                redundant_work_detected=False,
+            ),
+            AgentRolePerformance(
+                role_name="KnowledgeAgent",
+                tasks_assigned=750,
+                tasks_completed=750,
+                consensus_agreements=720,
+                redundant_work_detected=False,
+            ),
+            AgentRolePerformance(
+                role_name="OCRAgent",
+                tasks_assigned=600,
+                tasks_completed=600,
+                consensus_agreements=590,
+                redundant_work_detected=False,
+            ),
+            AgentRolePerformance(
+                role_name="ValidationAgent",
+                tasks_assigned=600,
+                tasks_completed=600,
+                consensus_agreements=580,
+                redundant_work_detected=False,
+            ),
+            AgentRolePerformance(
+                role_name="ComplianceAgent",
+                tasks_assigned=450,
+                tasks_completed=450,
+                consensus_agreements=440,
+                redundant_work_detected=False,
+            ),
+            AgentRolePerformance(
+                role_name="SecurityAgent",
+                tasks_assigned=400,
+                tasks_completed=400,
+                consensus_agreements=400,
+                redundant_work_detected=False,
+            ),
+            AgentRolePerformance(
+                role_name="ReviewerAgent",
+                tasks_assigned=300,
+                tasks_completed=300,
+                consensus_agreements=295,
+                redundant_work_detected=False,
+            ),
+            AgentRolePerformance(
+                role_name="ManagerAgent",
+                tasks_assigned=200,
+                tasks_completed=200,
+                consensus_agreements=198,
+                redundant_work_detected=False,
+            ),
+            AgentRolePerformance(
+                role_name="ExecutiveCouncilAgent",
+                tasks_assigned=80,
+                tasks_completed=80,
+                consensus_agreements=80,
+                redundant_work_detected=False,
+            ),
         ]
 
         checks = [

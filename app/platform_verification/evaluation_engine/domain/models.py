@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Verification Metrics, Evaluation & Scoring Framework (PART 5).
 """
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -19,10 +20,10 @@ class MetricCategory(str, Enum):
 
 class CertificationBand(str, Enum):
     ENTERPRISE_CERTIFIED = "Enterprise Certified"  # 95-100
-    PRODUCTION_READY = "Production Ready"          # 90-94
-    CONDITIONALLY_READY = "Conditionally Ready"    # 80-89
-    DEVELOPMENT_QUALITY = "Development Quality"    # 70-79
-    NOT_READY = "Not Ready"                        # Below 70
+    PRODUCTION_READY = "Production Ready"  # 90-94
+    CONDITIONALLY_READY = "Conditionally Ready"  # 80-89
+    DEVELOPMENT_QUALITY = "Development Quality"  # 70-79
+    NOT_READY = "Not Ready"  # Below 70
 
 
 class QualityGateStatus(str, Enum):
@@ -55,6 +56,7 @@ class Severity(str, Enum):
 @dataclass(frozen=True)
 class MetricDefinition:
     """Standardized metric definition entity."""
+
     id: str
     name: str
     category: MetricCategory
@@ -75,6 +77,7 @@ class MetricDefinition:
 @dataclass(frozen=True)
 class MetricMetadata:
     """Metric metadata schema for export and serialization."""
+
     id: str
     name: str
     category: str
@@ -90,6 +93,7 @@ class MetricMetadata:
 @dataclass(frozen=True)
 class MetricExplanation:
     """Metric explainability record."""
+
     name: str
     formula: str
     purpose: str
@@ -100,6 +104,7 @@ class MetricExplanation:
 @dataclass(frozen=True)
 class ConfidenceInterval:
     """Statistical confidence interval."""
+
     metric_name: str
     value: float
     confidence_level: float  # e.g., 0.95
@@ -116,6 +121,7 @@ class ConfidenceInterval:
 @dataclass(frozen=True)
 class StatisticalSummary:
     """Statistical evaluation summary for a metric dataset."""
+
     mean: float
     median: float
     variance: float
@@ -133,6 +139,7 @@ class StatisticalSummary:
 @dataclass
 class MetricResult:
     """Calculated metric evaluation result."""
+
     metric_id: str
     metric_name: str
     category: MetricCategory
@@ -150,6 +157,7 @@ class MetricResult:
 @dataclass
 class ABComparisonResult:
     """A/B test comparison result between two variants (models, prompts, configs)."""
+
     variant_a: str
     variant_b: str
     metric_name: str
@@ -167,6 +175,7 @@ class ABComparisonResult:
 @dataclass
 class RegressionAlert:
     """Automated regression notification when a threshold is breached."""
+
     alert_id: str
     metric_id: str
     metric_name: str
@@ -183,6 +192,7 @@ class RegressionAlert:
 @dataclass
 class SampleSizeValidationResult:
     """Statistical power and minimum sample size validation result."""
+
     sample_size: int
     is_sufficient: bool
     minimum_required: int
@@ -195,6 +205,7 @@ class SampleSizeValidationResult:
 @dataclass
 class MetricStoreRecord:
     """Persistent storage entry for a metric calculation result."""
+
     record_id: str
     metric_id: str
     execution_id: str
@@ -208,6 +219,7 @@ class MetricStoreRecord:
 @dataclass
 class BenchmarkRecord:
     """Benchmark comparison against baseline or prior version."""
+
     system_version: str
     baseline: str
     dataset: str
@@ -224,6 +236,7 @@ class BenchmarkRecord:
 @dataclass
 class DimensionScore:
     """Weighted score for a specific metric dimension."""
+
     dimension: MetricCategory
     score: float
     weight: float
@@ -235,6 +248,7 @@ class DimensionScore:
 @dataclass
 class OverallScore:
     """Standardized composite quality score and certification classification."""
+
     overall_score: float
     certification_band: CertificationBand
     dimensions: Dict[MetricCategory, DimensionScore] = field(default_factory=dict)
@@ -246,6 +260,7 @@ class OverallScore:
 @dataclass(frozen=True)
 class QualityGateRule:
     """Operational quality gate threshold rule."""
+
     rule_id: str
     metric_id: str
     condition: str  # "gte", "lte", "gt", "lt", "eq"
@@ -258,6 +273,7 @@ class QualityGateRule:
 @dataclass
 class QualityGateDecision:
     """Outcome of quality gate evaluation."""
+
     status: QualityGateStatus
     passed_rules: List[str] = field(default_factory=list)
     failed_rules: List[str] = field(default_factory=list)
@@ -271,6 +287,7 @@ class QualityGateDecision:
 @dataclass
 class AIQualityAssessment:
     """Detailed multi-facet AI evaluation results."""
+
     grounding_score: float
     faithfulness_score: float
     hallucination_rate: float
@@ -286,6 +303,7 @@ class AIQualityAssessment:
 @dataclass
 class EvaluationRecommendation:
     """Actionable improvement recommendation."""
+
     recommendation_id: str
     category: MetricCategory
     severity: Severity
@@ -296,6 +314,7 @@ class EvaluationRecommendation:
 @dataclass
 class EvaluationReport:
     """Complete enterprise evaluation report."""
+
     report_id: str
     execution_id: str
     system_version: str
@@ -318,6 +337,7 @@ class TrendPoint:
 @dataclass
 class TrendReport:
     """Historical trend report for a specific metric."""
+
     metric_id: str
     metric_name: str
     points: List[TrendPoint] = field(default_factory=list)

@@ -67,9 +67,7 @@ def test_constraint_evaluator():
 def test_affinity_and_scoring_engine():
     aff_engine = AffinityEngine()
     cap_reg = WorkerCapabilityRegistry()
-    scoring_engine = PlacementScoringEngine(
-        capability_registry=cap_reg, affinity_engine=aff_engine
-    )
+    scoring_engine = PlacementScoringEngine(capability_registry=cap_reg, affinity_engine=aff_engine)
 
     w1 = Worker(
         worker_id="wrk-score-1",

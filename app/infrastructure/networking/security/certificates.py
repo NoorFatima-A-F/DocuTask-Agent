@@ -13,6 +13,7 @@ from ..control_plane.registry import CertificateStatus
 @dataclass
 class X509Certificate:
     """Represents an X.509 certificate and private key bundle."""
+
     cert_id: str
     subject_cn: str
     san_dns_names: List[str]

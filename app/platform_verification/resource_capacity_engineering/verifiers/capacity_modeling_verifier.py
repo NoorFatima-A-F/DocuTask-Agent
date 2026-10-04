@@ -32,11 +32,29 @@ class CapacityModelingVerifier(ICapacityModelingVerifier):
 
     def verify(self) -> CapacityModelReport:
         limits = [
-            ResourceBottleneckComponent(component="CPU Headroom Limits", max_sustainable_docs_hour=65000, limiting_factor="Core saturation at 85%"),
-            ResourceBottleneckComponent(component="Memory Capacity Limits", max_sustainable_docs_hour=80000, limiting_factor="Heap allocation threshold 4GB"),
-            ResourceBottleneckComponent(component="Redis Queue Broker", max_sustainable_docs_hour=120000, limiting_factor="Redis I/O throughput"),
-            ResourceBottleneckComponent(component="PostgreSQL Database", max_sustainable_docs_hour=55000, limiting_factor="Connection pool 100 conns"),
-            ResourceBottleneckComponent(component="Gemini AI Provider API", max_sustainable_docs_hour=50000, limiting_factor="Upstream tier rate limit"),
+            ResourceBottleneckComponent(
+                component="CPU Headroom Limits",
+                max_sustainable_docs_hour=65000,
+                limiting_factor="Core saturation at 85%",
+            ),
+            ResourceBottleneckComponent(
+                component="Memory Capacity Limits",
+                max_sustainable_docs_hour=80000,
+                limiting_factor="Heap allocation threshold 4GB",
+            ),
+            ResourceBottleneckComponent(
+                component="Redis Queue Broker", max_sustainable_docs_hour=120000, limiting_factor="Redis I/O throughput"
+            ),
+            ResourceBottleneckComponent(
+                component="PostgreSQL Database",
+                max_sustainable_docs_hour=55000,
+                limiting_factor="Connection pool 100 conns",
+            ),
+            ResourceBottleneckComponent(
+                component="Gemini AI Provider API",
+                max_sustainable_docs_hour=50000,
+                limiting_factor="Upstream tier rate limit",
+            ),
         ]
 
         # Max cluster throughput is min of all component limits

@@ -47,16 +47,16 @@ class Goal(BaseModel):
     goal_type: GoalType = Field(default=GoalType.BUSINESS)
     priority: PriorityLevel = Field(default=PriorityLevel.MEDIUM)
     is_active: bool = Field(default=True)
-    
+
     owner: str = Field(default="system")
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     deadline: Optional[datetime] = Field(default=None)
-    
+
     constraints: List[DomainConstraint] = Field(default_factory=list)
     expected_outputs: List[str] = Field(default_factory=list)
     execution_policy: ExecutionPolicy = Field(default_factory=ExecutionPolicy)
     metadata: GoalMetadata = Field(default_factory=GoalMetadata)
-    
+
     # Sub-goals for composite goals
     sub_goals: List["Goal"] = Field(default_factory=list)
 
@@ -79,5 +79,5 @@ class Goal(BaseModel):
             expected_outputs=self.expected_outputs,
             execution_policy=self.execution_policy,
             metadata=self.metadata,
-            sub_goals=new_sub_goals
+            sub_goals=new_sub_goals,
         )

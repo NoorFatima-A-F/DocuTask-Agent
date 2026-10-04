@@ -107,26 +107,28 @@ class RoutingOptimizer:
 
             # Expected utility
             utility = (
-                w.get("accuracy", 0.45) * u_acc +
-                w.get("cost", 0.25) * u_cost +
-                w.get("latency", 0.20) * u_lat +
-                w.get("risk", 0.10) * u_risk
+                w.get("accuracy", 0.45) * u_acc
+                + w.get("cost", 0.25) * u_cost
+                + w.get("latency", 0.20) * u_lat
+                + w.get("risk", 0.10) * u_risk
             )
 
             if not is_feasible:
                 utility *= 0.1  # Heavy penalty for infeasible candidates
 
-            evaluated.append({
-                "model_id": model.model_id,
-                "display_name": model.display_name,
-                "expected_accuracy": round(expected_acc, 4),
-                "expected_cost_usd": round(estimated_cost, 5),
-                "expected_latency_ms": round(estimated_lat, 1),
-                "inherent_risk": round(model.inherent_risk, 4),
-                "expected_utility": round(utility, 4),
-                "is_feasible": is_feasible,
-                "specialization": model.specialization,
-            })
+            evaluated.append(
+                {
+                    "model_id": model.model_id,
+                    "display_name": model.display_name,
+                    "expected_accuracy": round(expected_acc, 4),
+                    "expected_cost_usd": round(estimated_cost, 5),
+                    "expected_latency_ms": round(estimated_lat, 1),
+                    "inherent_risk": round(model.inherent_risk, 4),
+                    "expected_utility": round(utility, 4),
+                    "is_feasible": is_feasible,
+                    "specialization": model.specialization,
+                }
+            )
 
         # Sort descending by expected utility
         evaluated.sort(key=lambda m: m["expected_utility"], reverse=True)

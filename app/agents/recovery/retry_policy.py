@@ -16,6 +16,7 @@ class RecoveryBackoffType(str, Enum):
 
 class RecoveryRetryPolicy(BaseModel):
     """Configuration for autonomous recovery retries."""
+
     backoff_type: RecoveryBackoffType = Field(default=RecoveryBackoffType.EXPONENTIAL_JITTER)
     max_retries: int = Field(default=3, ge=0)
     initial_delay_seconds: float = Field(default=1.0, ge=0.0)

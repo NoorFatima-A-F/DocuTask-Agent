@@ -26,9 +26,33 @@ class CapacityPlanningVerifier(ICapacityPlanningVerifier):
 
     def verify(self) -> CapacityPlanReport:
         projections = [
-            CapacityPlanProjection(horizon_label="Current State", target_docs_per_day=25000, required_api_replicas=2, required_workers=10, required_db_connections=25, required_storage_gb=50.0, estimated_ai_tpm_quota=500000),
-            CapacityPlanProjection(horizon_label="Quarterly Target (100k)", target_docs_per_day=100000, required_api_replicas=4, required_workers=40, required_db_connections=65, required_storage_gb=200.0, estimated_ai_tpm_quota=2000000),
-            CapacityPlanProjection(horizon_label="Annual Enterprise (500k)", target_docs_per_day=500000, required_api_replicas=12, required_workers=120, required_db_connections=150, required_storage_gb=1000.0, estimated_ai_tpm_quota=10000000),
+            CapacityPlanProjection(
+                horizon_label="Current State",
+                target_docs_per_day=25000,
+                required_api_replicas=2,
+                required_workers=10,
+                required_db_connections=25,
+                required_storage_gb=50.0,
+                estimated_ai_tpm_quota=500000,
+            ),
+            CapacityPlanProjection(
+                horizon_label="Quarterly Target (100k)",
+                target_docs_per_day=100000,
+                required_api_replicas=4,
+                required_workers=40,
+                required_db_connections=65,
+                required_storage_gb=200.0,
+                estimated_ai_tpm_quota=2000000,
+            ),
+            CapacityPlanProjection(
+                horizon_label="Annual Enterprise (500k)",
+                target_docs_per_day=500000,
+                required_api_replicas=12,
+                required_workers=120,
+                required_db_connections=150,
+                required_storage_gb=1000.0,
+                estimated_ai_tpm_quota=10000000,
+            ),
         ]
 
         checks: List[CheckResult] = [

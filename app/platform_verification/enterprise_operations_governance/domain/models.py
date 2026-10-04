@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 # ─── Enums ───────────────────────────────────────────────────────────────────
 
+
 class SystemHealthStatus(str, Enum):
     HEALTHY = "HEALTHY"
     DEGRADED = "DEGRADED"
@@ -19,8 +20,8 @@ class SystemHealthStatus(str, Enum):
 
 class IncidentSeverity(str, Enum):
     SEV1_CRITICAL = "SEV1"  # Platform unavailable / outage
-    SEV2_MAJOR = "SEV2"     # Processing failures / partial outage
-    SEV3_MINOR = "SEV3"     # Performance degradation / minor issue
+    SEV2_MAJOR = "SEV2"  # Processing failures / partial outage
+    SEV3_MINOR = "SEV3"  # Performance degradation / minor issue
 
 
 class IncidentStatus(str, Enum):
@@ -53,6 +54,7 @@ class MaturityCertification(str, Enum):
 
 # ─── Part 3R.1: SLO Framework ────────────────────────────────────────────────
 
+
 class SLOTarget(BaseModel):
     name: str
     target_metric: str
@@ -77,6 +79,7 @@ class SLODefinitionReport(BaseModel):
 
 # ─── Part 3R.2: Error Budget Management ──────────────────────────────────────
 
+
 class ErrorBudgetReport(BaseModel):
     service: str = "document_processing"
     measurement_window_days: int = 30
@@ -94,6 +97,7 @@ class ErrorBudgetReport(BaseModel):
 
 
 # ─── Part 3R.3: Production Health Intelligence ────────────────────────────────
+
 
 class SubsystemHealth(BaseModel):
     subsystem: str
@@ -119,6 +123,7 @@ class ProductionHealthReport(BaseModel):
 
 
 # ─── Part 3R.4: Incident Management System ───────────────────────────────────
+
 
 class IncidentItem(BaseModel):
     id: str
@@ -148,6 +153,7 @@ class IncidentReport(BaseModel):
 
 # ─── Part 3R.5: Automated Alerting System ────────────────────────────────────
 
+
 class AlertItem(BaseModel):
     alert_id: str
     name: str
@@ -174,6 +180,7 @@ class AlertReport(BaseModel):
 
 # ─── Part 3R.6: Runbook Automation ───────────────────────────────────────────
 
+
 class RunbookItem(BaseModel):
     runbook_id: str
     title: str
@@ -193,6 +200,7 @@ class RunbookReport(BaseModel):
 
 
 # ─── Part 3R.7: Automated Remediation (Self-Healing) ──────────────────────────
+
 
 class SelfHealingAction(BaseModel):
     action_id: str
@@ -215,6 +223,7 @@ class SelfHealingReport(BaseModel):
 
 
 # ─── Part 3R.8: Root Cause Analysis (RCA) Engine ─────────────────────────────
+
 
 class RootCauseHypothesis(BaseModel):
     hypothesis: str
@@ -239,6 +248,7 @@ class RootCauseAnalysisReport(BaseModel):
 
 # ─── Part 3R.9: Change Management System ─────────────────────────────────────
 
+
 class ChangeHistoryEntry(BaseModel):
     change_id: str
     change_type: str
@@ -261,6 +271,7 @@ class ChangeManagementReport(BaseModel):
 
 
 # ─── Part 3R.10: Production Audit Trail ───────────────────────────────────────
+
 
 class AuditTrailEntry(BaseModel):
     audit_id: str
@@ -285,6 +296,7 @@ class AuditTrailReport(BaseModel):
 
 # ─── Part 3R.11: AI Operations Monitoring (AIOps) ────────────────────────────
 
+
 class AIOpsReport(BaseModel):
     model_name: str = "Gemini 1.5 Flash / Pro"
     total_inferences_processed: int = 14500
@@ -303,6 +315,7 @@ class AIOpsReport(BaseModel):
 
 # ─── Part 3R.12: FinOps Monitoring ───────────────────────────────────────────
 
+
 class FinOpsReport(BaseModel):
     monthly_budget_usd: float = 500.0
     current_month_spend_usd: float = 184.50
@@ -320,13 +333,14 @@ class FinOpsReport(BaseModel):
 
 # ─── Part 3R.13: Operational Maturity Scoring ────────────────────────────────
 
+
 class OperationalMaturityScore(BaseModel):
-    reliability_score: float = 98.5        # 25% weight
-    incident_management_score: float = 96.0 # 15% weight
-    observability_score: float = 98.0       # 15% weight
-    automation_score: float = 97.5          # 15% weight
-    governance_score: float = 100.0         # 15% weight
-    cost_control_score: float = 96.5        # 15% weight
+    reliability_score: float = 98.5  # 25% weight
+    incident_management_score: float = 96.0  # 15% weight
+    observability_score: float = 98.0  # 15% weight
+    automation_score: float = 97.5  # 15% weight
+    governance_score: float = 100.0  # 15% weight
+    cost_control_score: float = 96.5  # 15% weight
     overall_maturity_score: float = 97.8
     certification: MaturityCertification = MaturityCertification.ENTERPRISE_OPERATIONS_MATURE
     certified_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -334,6 +348,7 @@ class OperationalMaturityScore(BaseModel):
 
 
 # ─── Part 3R.14: Operations Manifest & Exporter Models ───────────────────────
+
 
 class ManifestEntry(BaseModel):
     filename: str

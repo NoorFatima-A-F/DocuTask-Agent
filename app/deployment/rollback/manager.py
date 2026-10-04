@@ -1,4 +1,5 @@
 """Enterprise Rollback & Recovery Orchestrator."""
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
@@ -11,6 +12,7 @@ from .recovery import AutomatedRecoveryEngine
 @dataclass
 class RollbackRecord:
     """Audit log entry for a rollback execution."""
+
     rollback_id: str
     failed_deployment_id: str
     target_release_id: str

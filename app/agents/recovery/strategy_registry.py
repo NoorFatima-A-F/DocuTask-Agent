@@ -15,39 +15,27 @@ class RecoveryStrategyRegistry:
         FailureCategory.TOOL_FAILURE: [
             RecoveryStrategy.RETRY,
             RecoveryStrategy.ALTERNATE_TOOL,
-            RecoveryStrategy.RESTORE_CHECKPOINT
+            RecoveryStrategy.RESTORE_CHECKPOINT,
         ],
         FailureCategory.WORKER_FAILURE: [
             RecoveryStrategy.ALTERNATE_WORKER,
             RecoveryStrategy.RETRY,
-            RecoveryStrategy.RESTORE_CHECKPOINT
+            RecoveryStrategy.RESTORE_CHECKPOINT,
         ],
-        FailureCategory.TIMEOUT_FAILURE: [
-            RecoveryStrategy.RETRY,
-            RecoveryStrategy.RESTORE_CHECKPOINT
-        ],
+        FailureCategory.TIMEOUT_FAILURE: [RecoveryStrategy.RETRY, RecoveryStrategy.RESTORE_CHECKPOINT],
         FailureCategory.TOKEN_BUDGET_FAILURE: [
             RecoveryStrategy.PLANNER_RE_ENTRY,
             RecoveryStrategy.HUMAN_APPROVAL,
-            RecoveryStrategy.PERMANENT_FAILURE
+            RecoveryStrategy.PERMANENT_FAILURE,
         ],
-        FailureCategory.DEPENDENCY_FAILURE: [
-            RecoveryStrategy.ROLLBACK,
-            RecoveryStrategy.PLANNER_RE_ENTRY
-        ],
-        FailureCategory.CHECKPOINT_FAILURE: [
-            RecoveryStrategy.REPLAY_EXECUTION,
-            RecoveryStrategy.ROLLBACK
-        ],
+        FailureCategory.DEPENDENCY_FAILURE: [RecoveryStrategy.ROLLBACK, RecoveryStrategy.PLANNER_RE_ENTRY],
+        FailureCategory.CHECKPOINT_FAILURE: [RecoveryStrategy.REPLAY_EXECUTION, RecoveryStrategy.ROLLBACK],
         FailureCategory.EXECUTION_FAILURE: [
             RecoveryStrategy.RETRY,
             RecoveryStrategy.RESTORE_CHECKPOINT,
-            RecoveryStrategy.COMPENSATION
+            RecoveryStrategy.COMPENSATION,
         ],
-        FailureCategory.UNKNOWN_FAILURE: [
-            RecoveryStrategy.RESTORE_CHECKPOINT,
-            RecoveryStrategy.HUMAN_APPROVAL
-        ]
+        FailureCategory.UNKNOWN_FAILURE: [RecoveryStrategy.RESTORE_CHECKPOINT, RecoveryStrategy.HUMAN_APPROVAL],
     }
 
     @classmethod

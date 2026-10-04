@@ -1,6 +1,7 @@
 """
 REST API Router for Enterprise Backup Architecture Verification (Part 3G.2A).
 """
+
 from typing import Dict, Any
 from fastapi import APIRouter, HTTPException, Query
 from app.platform_verification.backup_architecture_verification.runtime.backup_verification_runtime import (
@@ -17,7 +18,7 @@ runtime_instance = BackupArchitectureVerificationRuntime()
 
 @router.post("/run", response_model=Dict[str, Any])
 def run_full_backup_verification(
-    export_evidence: bool = Query(default=True, description="Whether to export evidence JSON artifacts to disk")
+    export_evidence: bool = Query(default=True, description="Whether to export evidence JSON artifacts to disk"),
 ) -> Dict[str, Any]:
     """Triggers the full 14-part backup architecture verification pipeline."""
     try:

@@ -21,6 +21,7 @@ logger = logging.getLogger("infrastructure.observability.slo.budgets")
 
 class ErrorBudgetStatus(BaseModel):
     """Real-time status of an SLO error budget."""
+
     slo_id: str
     service_name: str
     target_percent: float
@@ -56,7 +57,7 @@ class ErrorBudgetTracker:
         if not sli:
             raise KeyError(f"SLO '{slo_id}' not registered.")
         sli.good_events += good_count
-        sli.total_events += (good_count + bad_count)
+        sli.total_events += good_count + bad_count
 
     def evaluate_budget(
         self,

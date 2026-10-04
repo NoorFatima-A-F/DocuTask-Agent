@@ -25,11 +25,36 @@ class AutonomousRecoveryVerifier(IAutonomousRecoveryVerifier):
 
     def verify(self) -> AutonomousRecoveryReport:
         events = [
-            AutonomousRecoveryEvent(failure_mode="WorkerNodeOOMCrash", checkpoint_restored="Stage-11-PreExecution", continuation_successful=True, recovery_duration_sec=2.1),
-            AutonomousRecoveryEvent(failure_mode="DatabaseConnectionReset", checkpoint_restored="Stage-16-PreCommit", continuation_successful=True, recovery_duration_sec=1.8),
-            AutonomousRecoveryEvent(failure_mode="LLMRateLimit429", checkpoint_restored="Stage-08-PlanningRetry", continuation_successful=True, recovery_duration_sec=3.4),
-            AutonomousRecoveryEvent(failure_mode="RedisQueueRestart", checkpoint_restored="Stage-01-EventIngestion", continuation_successful=True, recovery_duration_sec=2.5),
-            AutonomousRecoveryEvent(failure_mode="ToolExecutionTimeout", checkpoint_restored="Stage-12-ToolFallback", continuation_successful=True, recovery_duration_sec=1.2),
+            AutonomousRecoveryEvent(
+                failure_mode="WorkerNodeOOMCrash",
+                checkpoint_restored="Stage-11-PreExecution",
+                continuation_successful=True,
+                recovery_duration_sec=2.1,
+            ),
+            AutonomousRecoveryEvent(
+                failure_mode="DatabaseConnectionReset",
+                checkpoint_restored="Stage-16-PreCommit",
+                continuation_successful=True,
+                recovery_duration_sec=1.8,
+            ),
+            AutonomousRecoveryEvent(
+                failure_mode="LLMRateLimit429",
+                checkpoint_restored="Stage-08-PlanningRetry",
+                continuation_successful=True,
+                recovery_duration_sec=3.4,
+            ),
+            AutonomousRecoveryEvent(
+                failure_mode="RedisQueueRestart",
+                checkpoint_restored="Stage-01-EventIngestion",
+                continuation_successful=True,
+                recovery_duration_sec=2.5,
+            ),
+            AutonomousRecoveryEvent(
+                failure_mode="ToolExecutionTimeout",
+                checkpoint_restored="Stage-12-ToolFallback",
+                continuation_successful=True,
+                recovery_duration_sec=1.2,
+            ),
         ]
 
         checks = [

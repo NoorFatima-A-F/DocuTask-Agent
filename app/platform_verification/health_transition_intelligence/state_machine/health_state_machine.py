@@ -4,6 +4,7 @@ Implements the 5-state deterministic health lifecycle:
 STARTING -> READY <-> DEGRADED <-> NOT_READY -> RECOVERING -> READY.
 Maintains state transition history and validates transition bounds.
 """
+
 import uuid
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional

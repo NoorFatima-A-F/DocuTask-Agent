@@ -8,8 +8,8 @@ from typing import Any, Dict, List
 
 
 class ReliabilityMaturityTier(str, Enum):
-    FAILED = "Failed"                                         # < 80
-    NEEDS_IMPROVEMENT = "Improvement Required"               # 80 - 89
+    FAILED = "Failed"  # < 80
+    NEEDS_IMPROVEMENT = "Improvement Required"  # 80 - 89
     ENTERPRISE_RELIABILITY_READY = "Enterprise Reliability Ready"  # 90 - 94
     RELIABILITY_ENGINEERING_MATURE = "Reliability Engineering Mature"  # 95 - 100
 
@@ -143,14 +143,14 @@ class RootCauseReport:
 @dataclass
 class ServiceRiskScoreItem:
     service: str
-    availability_score: float      # Weight 25%
-    failure_rate_score: float      # Weight 20%
-    recovery_time_score: float     # Weight 20%
-    incident_frequency_score: float# Weight 15%
-    capacity_risk_score: float     # Weight 10%
-    security_risk_score: float     # Weight 10%
-    composite_score: float         # 0 - 100
-    risk_tier: str                 # LOW / MEDIUM / HIGH
+    availability_score: float  # Weight 25%
+    failure_rate_score: float  # Weight 20%
+    recovery_time_score: float  # Weight 20%
+    incident_frequency_score: float  # Weight 15%
+    capacity_risk_score: float  # Weight 10%
+    security_risk_score: float  # Weight 10%
+    composite_score: float  # 0 - 100
+    risk_tier: str  # LOW / MEDIUM / HIGH
 
 
 @dataclass
@@ -284,14 +284,14 @@ class ReliabilitySecurityReport:
 
 @dataclass
 class ReliabilityMaturityScorecard:
-    slo_management_score: float        # Weight 20%
-    reliability_analytics_score: float # Weight 20%
+    slo_management_score: float  # Weight 20%
+    reliability_analytics_score: float  # Weight 20%
     failure_intelligence_score: float  # Weight 20%
-    capacity_prediction_score: float   # Weight 15%
-    improvement_automation_score: float# Weight 15%
-    security_score: float              # Weight 10%
-    overall_score: float               # Composite 0 - 100
+    capacity_prediction_score: float  # Weight 15%
+    improvement_automation_score: float  # Weight 15%
+    security_score: float  # Weight 10%
+    overall_score: float  # Composite 0 - 100
     certification_tier: ReliabilityMaturityTier
-    certification_verdict: str         # CERTIFIED / REJECTED
+    certification_verdict: str  # CERTIFIED / REJECTED
     passed: bool
     details: Dict[str, Any] = field(default_factory=dict)

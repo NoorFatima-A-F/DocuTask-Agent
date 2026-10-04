@@ -2,6 +2,7 @@
 Phase 3I.11: Enterprise Observability Platform REST API Router
 Provides endpoints for querying multi-environment telemetry, drift detection, readiness gates, and global certification.
 """
+
 from fastapi import APIRouter, HTTPException
 from typing import Dict, Any
 

@@ -29,9 +29,27 @@ class ImageSupplyChainSecurityVerifier(IImageSupplyChainSecurityVerifier):
 
     def verify(self) -> ImageSupplyChainReport:
         artifacts = [
-            SupplyChainArtifact(image_name="ghcr.io/docutask/docutask-api:v3.16.0", sbom_format="SPDX / CycloneDX JSON", signature_verified=True, cosign_pubkey="cosign.pub-sha256-e3b0c442", digest_sha256="sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069"),
-            SupplyChainArtifact(image_name="ghcr.io/docutask/docutask-worker:v3.16.0", sbom_format="SPDX / CycloneDX JSON", signature_verified=True, cosign_pubkey="cosign.pub-sha256-e3b0c442", digest_sha256="sha256:8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4"),
-            SupplyChainArtifact(image_name="ghcr.io/docutask/docutask-agent-runtime:v3.16.0", sbom_format="SPDX / CycloneDX JSON", signature_verified=True, cosign_pubkey="cosign.pub-sha256-e3b0c442", digest_sha256="sha256:eed2591b65e90d3d573f0f7f73587b1c31ec1ec2f0b7194528b74d3eab04a4b4"),
+            SupplyChainArtifact(
+                image_name="ghcr.io/docutask/docutask-api:v3.16.0",
+                sbom_format="SPDX / CycloneDX JSON",
+                signature_verified=True,
+                cosign_pubkey="cosign.pub-sha256-e3b0c442",
+                digest_sha256="sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+            ),
+            SupplyChainArtifact(
+                image_name="ghcr.io/docutask/docutask-worker:v3.16.0",
+                sbom_format="SPDX / CycloneDX JSON",
+                signature_verified=True,
+                cosign_pubkey="cosign.pub-sha256-e3b0c442",
+                digest_sha256="sha256:8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            ),
+            SupplyChainArtifact(
+                image_name="ghcr.io/docutask/docutask-agent-runtime:v3.16.0",
+                sbom_format="SPDX / CycloneDX JSON",
+                signature_verified=True,
+                cosign_pubkey="cosign.pub-sha256-e3b0c442",
+                digest_sha256="sha256:eed2591b65e90d3d573f0f7f73587b1c31ec1ec2f0b7194528b74d3eab04a4b4",
+            ),
         ]
 
         checks = [

@@ -91,7 +91,7 @@ class DecisionExplainer:
         }
 
         summary = (
-            f"Decision '{decision_id}' ({decision_type}) evaluated with {confidence*100:.1f}% confidence. "
+            f"Decision '{decision_id}' ({decision_type}) evaluated with {confidence * 100:.1f}% confidence. "
             f"Primary positive driver was 'doc_entropy' (+35%) followed by 'bounding_box_density' (+28%)."
         )
 

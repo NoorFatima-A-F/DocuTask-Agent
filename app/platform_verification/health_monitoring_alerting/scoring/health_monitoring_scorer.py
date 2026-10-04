@@ -52,9 +52,9 @@ class HealthMonitoringScorer(IHealthMonitoringScorer):
         # Precision and recall at 100%
         acc_score = 100.0
         if acc_rep.precision_pct < 100.0:
-            acc_score -= (100.0 - acc_rep.precision_pct)
+            acc_score -= 100.0 - acc_rep.precision_pct
         if acc_rep.recall_pct < 100.0:
-            acc_score -= (100.0 - acc_rep.recall_pct)
+            acc_score -= 100.0 - acc_rep.recall_pct
 
         # 3. Alert Reliability (20%)
         # Critical & warning rules defined, fatigue grouping active, auto-resolution verified

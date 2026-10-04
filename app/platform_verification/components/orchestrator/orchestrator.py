@@ -3,6 +3,7 @@ Verification Orchestrator: High-level lifecycle orchestrator.
 Manages workflow execution, lifecycle state transitions, timeouts, stage sequencing,
 and full end-to-end 12-stage verification orchestration.
 """
+
 from typing import Dict, Any, List
 from datetime import datetime, timezone
 import uuid
@@ -15,12 +16,13 @@ from ...domain.models import (
     VerificationStage,
     StageExecutionRecord,
     MetricResult,
-    MetricCategory
+    MetricCategory,
 )
+
 
 class VerificationOrchestrator(VerificationOrchestratorInterface):
     """Orchestrates verification lifecycle flows and state machines."""
-    
+
     def __init__(self, **dependencies):
         self.dependencies = dependencies
         self._runs: Dict[str, Any] = {}
@@ -34,7 +36,7 @@ class VerificationOrchestrator(VerificationOrchestratorInterface):
             "state": "INITIALIZED",
             "created_at": datetime.now(timezone.utc).isoformat(),
             "updated_at": datetime.now(timezone.utc).isoformat(),
-            "history": ["INITIALIZED"]
+            "history": ["INITIALIZED"],
         }
         return run_id
 
@@ -77,14 +79,21 @@ class VerificationOrchestrator(VerificationOrchestratorInterface):
             VerificationStage.TELEMETRY_EXPORT,
             VerificationStage.POST_FLIGHT_TEARDOWN,
         ]
-        history = [
-            StageExecutionRecord(stage=s, status=VerificationStatus.PASSED, duration_ms=12.5)
-            for s in stages
-        ]
+        history = [StageExecutionRecord(stage=s, status=VerificationStatus.PASSED, duration_ms=12.5) for s in stages]
         metrics = [
-            MetricResult(metric_name="accuracy", category=MetricCategory.AI_QUALITY, value=0.985, threshold=0.95, passed=True),
-            MetricResult(metric_name="cer", category=MetricCategory.CORRECTNESS, value=0.012, threshold=0.02, passed=True),
-            MetricResult(metric_name="latency_p95_ms", category=MetricCategory.PERFORMANCE, value=145.0, threshold=200.0, passed=True),
+            MetricResult(
+                metric_name="accuracy", category=MetricCategory.AI_QUALITY, value=0.985, threshold=0.95, passed=True
+            ),
+            MetricResult(
+                metric_name="cer", category=MetricCategory.CORRECTNESS, value=0.012, threshold=0.02, passed=True
+            ),
+            MetricResult(
+                metric_name="latency_p95_ms",
+                category=MetricCategory.PERFORMANCE,
+                value=145.0,
+                threshold=200.0,
+                passed=True,
+            ),
         ]
         run = VerificationRun(
             run_id=run_id,
@@ -98,17 +107,31 @@ class VerificationOrchestrator(VerificationOrchestratorInterface):
             failed_invariants_count=0,
             stage_history=history,
             metrics=metrics,
-            summary_report="All 12 lifecycle stages executed flawlessly. Quality gates passed."
+            summary_report="All 12 lifecycle stages executed flawlessly. Quality gates passed.",
         )
         self._runs[run_id] = run
-        
+
         # Link in traceability
         traceability_mgr = self.dependencies.get("traceability_mgr") or self.dependencies.get("traceability_manager")
         if traceability_mgr and hasattr(traceability_mgr, "record_trace_node"):
-            traceability_mgr.record_trace_node(node_id=run_id, node_type="RUN", label=f"Run {run_id}", parent_ids=[definition_id])
-            traceability_mgr.record_trace_node(node_id=f"cfg_{run_id}", node_type="CONFIG", label="Config Snapshot", parent_ids=[definition_id, run_id])
-            traceability_mgr.record_trace_node(node_id=f"dataset_{run_id}", node_type="DATASET", label="Dataset Record", parent_ids=[definition_id, run_id])
-            traceability_mgr.record_trace_node(node_id=f"cert_{run_id}", node_type="CERTIFICATION", label="Cert Record", parent_ids=[definition_id, run_id])
+            traceability_mgr.record_trace_node(
+                node_id=run_id, node_type="RUN", label=f"Run {run_id}", parent_ids=[definition_id]
+            )
+            traceability_mgr.record_trace_node(
+                node_id=f"cfg_{run_id}", node_type="CONFIG", label="Config Snapshot", parent_ids=[definition_id, run_id]
+            )
+            traceability_mgr.record_trace_node(
+                node_id=f"dataset_{run_id}",
+                node_type="DATASET",
+                label="Dataset Record",
+                parent_ids=[definition_id, run_id],
+            )
+            traceability_mgr.record_trace_node(
+                node_id=f"cert_{run_id}",
+                node_type="CERTIFICATION",
+                label="Cert Record",
+                parent_ids=[definition_id, run_id],
+            )
         return run
 
     def list_runs(self) -> List[Any]:

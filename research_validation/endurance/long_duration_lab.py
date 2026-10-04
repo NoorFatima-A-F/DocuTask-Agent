@@ -26,6 +26,7 @@ class SoakTargetWindow(str, Enum):
 @dataclass
 class SoakSnapshotTelemetry:
     """Periodic telemetry sample recorded during soak testing."""
+
     elapsed_seconds: float
     memory_rss_mb: float
     open_file_descriptors: int
@@ -38,6 +39,7 @@ class SoakSnapshotTelemetry:
 @dataclass
 class LongDurationReliabilityReport:
     """Comprehensive long-duration endurance audit."""
+
     target_window: SoakTargetWindow
     planned_duration_hours: float
     actual_measured_duration_hours: float  # Actual measured duration!
@@ -67,7 +69,7 @@ class LongDurationReliabilityLab:
         cls,
         target_window: SoakTargetWindow,
         snapshots: List[SoakSnapshotTelemetry],
-        max_allowed_mem_slope_mb_per_hr: float = 1.5
+        max_allowed_mem_slope_mb_per_hr: float = 1.5,
     ) -> LongDurationReliabilityReport:
         """Analyze time-series telemetry recorded over a soak duration."""
         if not snapshots:
@@ -87,13 +89,21 @@ class LongDurationReliabilityLab:
                 assumptions=["Continuous soak workload generator active"],
                 limitations=["No telemetry snapshots available"],
                 reproducibility_instructions="Run soak load generator over desired duration window",
-                verdict="DEGRADED"
+                verdict="DEGRADED",
             )
 
         n = len(snapshots)
         actual_hours = (snapshots[-1].elapsed_seconds - snapshots[0].elapsed_seconds) / 3600.0 if n > 1 else 0.0
 
-        planned_hours = 24.0 if target_window == SoakTargetWindow.WINDOW_24H else 72.0 if target_window == SoakTargetWindow.WINDOW_72H else 168.0 if target_window == SoakTargetWindow.WINDOW_168H else actual_hours
+        planned_hours = (
+            24.0
+            if target_window == SoakTargetWindow.WINDOW_24H
+            else 72.0
+            if target_window == SoakTargetWindow.WINDOW_72H
+            else 168.0
+            if target_window == SoakTargetWindow.WINDOW_168H
+            else actual_hours
+        )
 
         # OLS slope for memory
         t_hrs = [s.elapsed_seconds / 3600.0 for s in snapshots]
@@ -113,7 +123,11 @@ class LongDurationReliabilityLab:
 
         total_errs = sum(s.error_count for s in snapshots)
         mean_tp = sum(s.throughput_rps for s in snapshots) / n
-        avail = 100.0 if total_errs == 0 else max(0.0, 100.0 * (1.0 - (total_errs / (mean_tp * max(1.0, actual_hours * 3600.0)))))
+        avail = (
+            100.0
+            if total_errs == 0
+            else max(0.0, 100.0 * (1.0 - (total_errs / (mean_tp * max(1.0, actual_hours * 3600.0)))))
+        )
         mtbf = (actual_hours / total_errs) if total_errs > 0 else (actual_hours * 10.0 if actual_hours > 0 else 1000.0)
 
         is_stable = not is_mem_leak and not is_fd_leak and avail >= 99.9
@@ -134,12 +148,12 @@ class LongDurationReliabilityLab:
             mtbf_hours=mtbf,
             assumptions=[
                 "Constant synthetic ingestion traffic applied without deliberate quiescent cool-down periods",
-                "Operating system file descriptor limits (ulimit -n) configured to standard 65,535"
+                "Operating system file descriptor limits (ulimit -n) configured to standard 65,535",
             ],
             methodology="Continuous longitudinal resource profiling with OLS linear drift regression on memory and descriptor handles.",
             limitations=[
                 "Accelerated simulation runs scale temporal rates but may compress garbage collection cycle frequencies"
             ],
             reproducibility_instructions="Deploy daemon worker, run `python run_long_duration_soak.py --duration 24h` and record snapshots.",
-            verdict=verdict
+            verdict=verdict,
         )

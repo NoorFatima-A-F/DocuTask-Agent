@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class ValidationAssertionRecord(BaseModel):
     """Immutable validation record stored in the registry."""
+
     record_id: str
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     target_system: str

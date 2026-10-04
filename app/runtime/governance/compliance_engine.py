@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 class ComplianceRuleCheck(BaseModel):
     """Result of a single regulatory standard compliance assertion."""
+
     standard_name: str  # 'SOC2', 'GDPR_ART22', 'HIPAA', 'SEC_17A'
     rule_id: str
     is_compliant: bool
@@ -22,6 +23,7 @@ class ComplianceRuleCheck(BaseModel):
 
 class ComplianceAuditReport(BaseModel):
     """Comprehensive compliance audit report for a planned mission."""
+
     report_id: str = Field(default_factory=lambda: f"comp_{uuid.uuid4().hex[:8]}")
     mission_id: str
     is_fully_compliant: bool

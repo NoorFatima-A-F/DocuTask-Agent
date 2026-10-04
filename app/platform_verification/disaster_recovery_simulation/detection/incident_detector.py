@@ -2,6 +2,7 @@
 Incident Detection Engine for Part 3G.3.
 Verifies real-time Prometheus alert rules, blackbox probes, and Mean Time To Detect (MTTD <= 5m).
 """
+
 from app.platform_verification.disaster_recovery_simulation.domain.models import (
     IncidentDetectionResult,
 )
@@ -25,9 +26,24 @@ class IncidentDetector(IIncidentDetector):
     MONITORED_RULES = [
         {"rule": "DocuTaskApiDown", "expr": "probe_success == 0", "duration_for": "15s", "severity": "CRITICAL"},
         {"rule": "PostgresClusterUnavailable", "expr": "pg_up == 0", "duration_for": "10s", "severity": "CRITICAL"},
-        {"rule": "CeleryQueueBacklogSpike", "expr": "celery_queue_length > 1000", "duration_for": "30s", "severity": "HIGH"},
-        {"rule": "ObjectStorageErrorRateHigh", "expr": "rate(s3_request_errors_total[1m]) > 0.05", "duration_for": "20s", "severity": "CRITICAL"},
-        {"rule": "ApiLatencyP99Breached", "expr": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[1m])) > 0.5", "duration_for": "30s", "severity": "HIGH"},
+        {
+            "rule": "CeleryQueueBacklogSpike",
+            "expr": "celery_queue_length > 1000",
+            "duration_for": "30s",
+            "severity": "HIGH",
+        },
+        {
+            "rule": "ObjectStorageErrorRateHigh",
+            "expr": "rate(s3_request_errors_total[1m]) > 0.05",
+            "duration_for": "20s",
+            "severity": "CRITICAL",
+        },
+        {
+            "rule": "ApiLatencyP99Breached",
+            "expr": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[1m])) > 0.5",
+            "duration_for": "30s",
+            "severity": "HIGH",
+        },
     ]
 
     def test_incident_detection(self) -> IncidentDetectionResult:

@@ -1,6 +1,7 @@
 """
 3I.3.15: Metrics Ingestion Performance & Overhead Verifier
 """
+
 from ..domain.models import MetricsPerformanceReport
 from ..domain.interfaces import IMetricsPerformanceVerifier
 
@@ -29,5 +30,5 @@ class MetricsPerformanceVerifier(IMetricsPerformanceVerifier):
             with_metrics_memory_mb=with_metrics_mem,
             memory_overhead_mb=mem_overhead,
             collector_latency_p99_ms=2.4,
-            overhead_compliant=True
+            overhead_compliant=True,
         )

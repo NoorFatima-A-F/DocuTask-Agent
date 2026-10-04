@@ -237,15 +237,33 @@ async def run_all_benchmarks() -> Dict[str, Any]:
     print("\n================================================================================")
     print("                     BENCHMARK SUMMARY & METRICS                                ")
     print("================================================================================")
-    print(f"Context Store Save:        {ctx_results['save_throughput_ops']} ops/sec (p50: {ctx_results['save_latencies_ms']['p50']}ms, p99: {ctx_results['save_latencies_ms']['p99']}ms)")
-    print(f"Context Store Checkpoint:  {ctx_results['checkpoint_throughput_ops']} ops/sec (p50: {ctx_results['checkpoint_latencies_ms']['p50']}ms, p99: {ctx_results['checkpoint_latencies_ms']['p99']}ms)")
-    print(f"Context Store Load:        {ctx_results['load_throughput_ops']} ops/sec (p50: {ctx_results['load_latencies_ms']['p50']}ms, p99: {ctx_results['load_latencies_ms']['p99']}ms)")
-    print(f"Scheduler Enqueue:         {sched_results['enqueue_throughput_ops']} ops/sec (p50: {sched_results['enqueue_latencies_ms']['p50']}ms)")
-    print(f"Scheduler Dequeue+Lease:   {sched_results['dispatch_and_complete_throughput_ops']} ops/sec (p50: {sched_results['dispatch_latencies_ms']['p50']}ms)")
-    print(f"Circuit Breaker Overhead:  {cb_results['throughput_ops']} ops/sec (p50: {cb_results['overhead_latencies_ms']['p50']}ms)")
-    print(f"Audit Log Append Hash:     {audit_results['append_throughput_ops']} events/sec (p50: {audit_results['append_latencies_ms']['p50']}ms)")
-    print(f"Audit Log Verify Chain:    {audit_results['verify_throughput_events_per_sec']} events/sec (Valid: {audit_results['chain_valid']})")
-    print(f"E2E Pipeline with Recovery:{e2e_results['latencies_ms']['mean']}ms mean duration (p95: {e2e_results['latencies_ms']['p95']}ms)")
+    print(
+        f"Context Store Save:        {ctx_results['save_throughput_ops']} ops/sec (p50: {ctx_results['save_latencies_ms']['p50']}ms, p99: {ctx_results['save_latencies_ms']['p99']}ms)"
+    )
+    print(
+        f"Context Store Checkpoint:  {ctx_results['checkpoint_throughput_ops']} ops/sec (p50: {ctx_results['checkpoint_latencies_ms']['p50']}ms, p99: {ctx_results['checkpoint_latencies_ms']['p99']}ms)"
+    )
+    print(
+        f"Context Store Load:        {ctx_results['load_throughput_ops']} ops/sec (p50: {ctx_results['load_latencies_ms']['p50']}ms, p99: {ctx_results['load_latencies_ms']['p99']}ms)"
+    )
+    print(
+        f"Scheduler Enqueue:         {sched_results['enqueue_throughput_ops']} ops/sec (p50: {sched_results['enqueue_latencies_ms']['p50']}ms)"
+    )
+    print(
+        f"Scheduler Dequeue+Lease:   {sched_results['dispatch_and_complete_throughput_ops']} ops/sec (p50: {sched_results['dispatch_latencies_ms']['p50']}ms)"
+    )
+    print(
+        f"Circuit Breaker Overhead:  {cb_results['throughput_ops']} ops/sec (p50: {cb_results['overhead_latencies_ms']['p50']}ms)"
+    )
+    print(
+        f"Audit Log Append Hash:     {audit_results['append_throughput_ops']} events/sec (p50: {audit_results['append_latencies_ms']['p50']}ms)"
+    )
+    print(
+        f"Audit Log Verify Chain:    {audit_results['verify_throughput_events_per_sec']} events/sec (Valid: {audit_results['chain_valid']})"
+    )
+    print(
+        f"E2E Pipeline with Recovery:{e2e_results['latencies_ms']['mean']}ms mean duration (p95: {e2e_results['latencies_ms']['p95']}ms)"
+    )
     print("================================================================================\n")
     return full_results
 

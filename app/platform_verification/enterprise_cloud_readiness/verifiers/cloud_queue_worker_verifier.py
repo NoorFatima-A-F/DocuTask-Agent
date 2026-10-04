@@ -29,10 +29,34 @@ class CloudQueueWorkerScalabilityVerifier(ICloudQueueWorkerScalabilityVerifier):
 
     def verify(self) -> CloudQueueWorkerReport:
         profiles = [
-            QueueScalingProfile(workload_size_docs=10, workers_active=2, queue_drain_time_seconds=12.4, duplicate_executions=0, dead_letter_queue_working=True),
-            QueueScalingProfile(workload_size_docs=100, workers_active=5, queue_drain_time_seconds=38.2, duplicate_executions=0, dead_letter_queue_working=True),
-            QueueScalingProfile(workload_size_docs=1000, workers_active=15, queue_drain_time_seconds=145.0, duplicate_executions=0, dead_letter_queue_working=True),
-            QueueScalingProfile(workload_size_docs=10000, workers_active=50, queue_drain_time_seconds=480.0, duplicate_executions=0, dead_letter_queue_working=True),
+            QueueScalingProfile(
+                workload_size_docs=10,
+                workers_active=2,
+                queue_drain_time_seconds=12.4,
+                duplicate_executions=0,
+                dead_letter_queue_working=True,
+            ),
+            QueueScalingProfile(
+                workload_size_docs=100,
+                workers_active=5,
+                queue_drain_time_seconds=38.2,
+                duplicate_executions=0,
+                dead_letter_queue_working=True,
+            ),
+            QueueScalingProfile(
+                workload_size_docs=1000,
+                workers_active=15,
+                queue_drain_time_seconds=145.0,
+                duplicate_executions=0,
+                dead_letter_queue_working=True,
+            ),
+            QueueScalingProfile(
+                workload_size_docs=10000,
+                workers_active=50,
+                queue_drain_time_seconds=480.0,
+                duplicate_executions=0,
+                dead_letter_queue_working=True,
+            ),
         ]
 
         checks = [

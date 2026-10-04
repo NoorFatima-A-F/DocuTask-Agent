@@ -206,7 +206,9 @@ class WorldModelEvent:
     def to_dict(self) -> Dict[str, Any]:
         return {
             "event_id": self.event_id,
-            "event_type": self.event_type.value if isinstance(self.event_type, WorldModelEventType) else str(self.event_type),
+            "event_type": self.event_type.value
+            if isinstance(self.event_type, WorldModelEventType)
+            else str(self.event_type),
             "source": self.source,
             "payload": self.payload,
             "timestamp": self.timestamp,
@@ -236,7 +238,9 @@ class WorldModelEventBus:
         if len(self._history) > self._max_history:
             self._history.pop(0)
 
-        event_key = event.event_type.value if isinstance(event.event_type, WorldModelEventType) else str(event.event_type)
+        event_key = (
+            event.event_type.value if isinstance(event.event_type, WorldModelEventType) else str(event.event_type)
+        )
         if event_key in self._subscribers:
             for handler in self._subscribers[event_key]:
                 try:
@@ -255,8 +259,10 @@ class WorldModelEventBus:
         filtered = self._history
         if event_type:
             filtered = [
-                e for e in filtered
-                if (e.event_type.value if isinstance(e.event_type, WorldModelEventType) else str(e.event_type)) == event_type
+                e
+                for e in filtered
+                if (e.event_type.value if isinstance(e.event_type, WorldModelEventType) else str(e.event_type))
+                == event_type
             ]
         return [e.to_dict() for e in filtered[-limit:]]
 

@@ -12,6 +12,7 @@ from app.agents.workflow.interfaces import IWorkflowScheduler
 
 class ScheduledWorkflowItem(BaseModel):
     """Specification of a scheduled workflow run."""
+
     schedule_id: UUID = Field(default_factory=uuid4)
     definition_id: UUID
     cron_expression: Optional[str] = None
@@ -35,8 +36,5 @@ class WorkflowScheduler(IWorkflowScheduler):
     def get_ready_items(self) -> List[ScheduledWorkflowItem]:
         """Returns schedules whose delay threshold has elapsed, sorted by priority."""
         now = datetime.now(timezone.utc).timestamp()
-        ready = [
-            item for item in self._schedules.values()
-            if item.execute_after_timestamp <= now
-        ]
+        ready = [item for item in self._schedules.values() if item.execute_after_timestamp <= now]
         return sorted(ready, key=lambda x: x.priority, reverse=True)

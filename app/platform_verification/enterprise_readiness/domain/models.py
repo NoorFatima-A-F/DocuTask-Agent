@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 
 class ReadinessState(str, Enum):
     """6-State Operational Readiness Model."""
+
     UNKNOWN = "UNKNOWN"
     STARTING = "STARTING"
     INITIALIZING = "INITIALIZING"
@@ -23,13 +24,15 @@ class ReadinessState(str, Enum):
 
 class DependencyCriticality(str, Enum):
     """Criticality levels of platform dependencies."""
-    CRITICAL = "critical"        # Outage forces NOT_READY, traffic rejected
+
+    CRITICAL = "critical"  # Outage forces NOT_READY, traffic rejected
     NON_CRITICAL = "non_critical"  # Outage allows DEGRADED, traffic throttled / fallback
-    OPTIONAL = "optional"        # Outage logged, traffic normal
+    OPTIONAL = "optional"  # Outage logged, traffic normal
 
 
 class TrafficAction(str, Enum):
     """Traffic admission decisions made by the readiness engine."""
+
     ALLOW_TRAFFIC = "ALLOW_TRAFFIC"
     THROTTLE_TRAFFIC = "THROTTLE_TRAFFIC"
     REJECT_TRAFFIC = "REJECT_TRAFFIC"
@@ -37,6 +40,7 @@ class TrafficAction(str, Enum):
 
 class WorkerState(str, Enum):
     """Status of asynchronous AI background workers."""
+
     IDLE = "IDLE"
     BUSY = "BUSY"
     OVERLOADED = "OVERLOADED"
@@ -46,15 +50,17 @@ class WorkerState(str, Enum):
 
 class ReadinessCertificationTier(str, Enum):
     """Certification tiers for platform readiness quality."""
+
     ENTERPRISE_READY = "Enterprise Readiness Certified"  # 95 - 100%
-    PRODUCTION_READY = "Production Ready"                # 90 - 94.99%
-    NEEDS_IMPROVEMENT = "Needs Improvement"              # 80 - 89.99%
-    FAILED = "Failed"                                    # < 80%
+    PRODUCTION_READY = "Production Ready"  # 90 - 94.99%
+    NEEDS_IMPROVEMENT = "Needs Improvement"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 @dataclass
 class ReadinessContractReport:
     """Results of Readiness Contract Architecture Verification (3H.3.1)."""
+
     endpoint: str = "/ready"
     http_method: str = "GET"
     status_field_present: bool = True
@@ -72,6 +78,7 @@ class ReadinessContractReport:
 @dataclass
 class DependencyEvaluationItem:
     """Individual dependency health evaluation."""
+
     name: str
     status: str
     latency_ms: float
@@ -83,6 +90,7 @@ class DependencyEvaluationItem:
 @dataclass
 class DependencyReadinessReport:
     """Results of Dependency-Aware Readiness Engine Verification (3H.3.2)."""
+
     total_dependencies: int = 5
     critical_dependencies_count: int = 3
     non_critical_dependencies_count: int = 2
@@ -96,6 +104,7 @@ class DependencyReadinessReport:
 @dataclass
 class DatabaseReadinessReport:
     """Results of Database Readiness Verification (3H.3.3)."""
+
     connection_available: bool = True
     authentication_valid: bool = True
     schema_compatible: bool = True
@@ -111,6 +120,7 @@ class DatabaseReadinessReport:
 @dataclass
 class QueueReadinessReport:
     """Results of Queue Readiness Verification (3H.3.4)."""
+
     redis_ping_pong_ok: bool = True
     write_test_passed: bool = True
     read_test_passed: bool = True
@@ -123,6 +133,7 @@ class QueueReadinessReport:
 @dataclass
 class WorkerHeartbeatItem:
     """Worker heartbeat status record."""
+
     worker_id: str
     status: WorkerState
     last_seen_seconds_ago: float
@@ -134,6 +145,7 @@ class WorkerHeartbeatItem:
 @dataclass
 class WorkerReadinessReport:
     """Results of Worker Capacity Readiness Verification (3H.3.5)."""
+
     total_registered_workers: int = 4
     active_workers_count: int = 4
     stuck_workers_count: int = 0
@@ -149,6 +161,7 @@ class WorkerReadinessReport:
 @dataclass
 class AIProviderReadinessReport:
     """Results of AI Provider Readiness Verification (3H.3.6)."""
+
     gemini_auth_valid: bool = True
     gemini_reachable: bool = True
     gemini_latency_ms: float = 340.0
@@ -163,6 +176,7 @@ class AIProviderReadinessReport:
 @dataclass
 class StartupReadinessReport:
     """Results of Startup Readiness Sequencing Verification (3H.3.7)."""
+
     startup_steps_executed: int = 7
     all_steps_successful: bool = True
     pre_initialization_traffic_blocked: bool = True
@@ -185,6 +199,7 @@ class StartupReadinessReport:
 @dataclass
 class FailureSimulationResult:
     """Result of an individual readiness failure simulation."""
+
     simulation_id: str
     injected_failure: str
     expected_state: ReadinessState
@@ -198,6 +213,7 @@ class FailureSimulationResult:
 @dataclass
 class FailureSimulationReport:
     """Results of Controlled Readiness Failure Simulations (3H.3.8)."""
+
     total_simulations: int = 4
     passed_simulations: int = 4
     mean_detection_time_seconds: float = 1.15
@@ -210,6 +226,7 @@ class FailureSimulationReport:
 @dataclass
 class OrchestrationReport:
     """Results of Kubernetes / Orchestrator Integration Verification (3H.3.9)."""
+
     k8s_readiness_probe_path: str = "/ready"
     k8s_port: int = 8000
     initial_delay_seconds: int = 15
@@ -226,6 +243,7 @@ class OrchestrationReport:
 @dataclass
 class ReadinessMetricsReport:
     """Results of Readiness Observability & Prometheus Metrics (3H.3.10)."""
+
     metrics_count: int = 6
     prometheus_metrics_exposed: List[str] = field(
         default_factory=lambda: [
@@ -246,12 +264,13 @@ class ReadinessMetricsReport:
 @dataclass
 class ReadinessCertificationScorecard:
     """Composite Weighted Readiness Certification Scorecard (3H.3.11)."""
-    dependency_detection_score: float = 100.0   # Weight: 25%
-    traffic_safety_score: float = 100.0         # Weight: 20%
-    startup_correctness_score: float = 100.0    # Weight: 15%
-    failure_handling_score: float = 100.0       # Weight: 15%
-    recovery_validation_score: float = 100.0    # Weight: 15%
-    observability_score: float = 100.0          # Weight: 10%
+
+    dependency_detection_score: float = 100.0  # Weight: 25%
+    traffic_safety_score: float = 100.0  # Weight: 20%
+    startup_correctness_score: float = 100.0  # Weight: 15%
+    failure_handling_score: float = 100.0  # Weight: 15%
+    recovery_validation_score: float = 100.0  # Weight: 15%
+    observability_score: float = 100.0  # Weight: 10%
     overall_readiness_score: float = 100.0
     certification_tier: ReadinessCertificationTier = ReadinessCertificationTier.ENTERPRISE_READY
     certification_verdict: str = "CERTIFIED"

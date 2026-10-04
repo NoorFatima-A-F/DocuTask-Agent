@@ -1,6 +1,7 @@
 """
 Phase 3H.9.2: Continuous Operational Analytics Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_intelligence.domain.interfaces import IOperationalAnalyticsVerifier

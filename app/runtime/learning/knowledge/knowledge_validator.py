@@ -24,7 +24,7 @@ class KnowledgeValidator:
         errors = []
         if not getattr(record, "title", None):
             errors.append("Knowledge record missing title")
-        
+
         conf = getattr(record, "confidence_score", 0.0)
         if conf < 0.50 or conf > 1.0:
             errors.append(f"Confidence score {conf} out of valid bounds [0.50, 1.00]")

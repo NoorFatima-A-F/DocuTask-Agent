@@ -16,7 +16,9 @@ class Bulkhead:
 
     def acquire(self) -> None:
         if self.active_calls >= self.max_concurrent_calls:
-            raise BulkheadExhaustionException(f"Bulkhead '{self.name}' saturated ({self.active_calls}/{self.max_concurrent_calls}).")
+            raise BulkheadExhaustionException(
+                f"Bulkhead '{self.name}' saturated ({self.active_calls}/{self.max_concurrent_calls})."
+            )
         self.active_calls += 1
 
     def release(self) -> None:

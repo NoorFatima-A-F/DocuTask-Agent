@@ -1,6 +1,7 @@
 """
 AI Workflow and Context Observability Auditor.
 """
+
 from typing import Dict, Any
 from app.platform_verification.observability_verification.domain.models import AiWorkflowObservabilityReport
 from app.platform_verification.observability_verification.domain.interfaces import IAiWorkflowObservabilityAuditor

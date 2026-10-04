@@ -22,8 +22,9 @@ class TesseractOCRProvider(BaseOCRProvider):
             return {
                 "text": f"Extracted OCR text via Tesseract for '{filename}'",
                 "confidence_score": 0.98,
-                "provider": self.provider_name
+                "provider": self.provider_name,
             }
+
         return await asyncio.to_thread(_process)
 
 
@@ -38,7 +39,7 @@ class DocumentAIOCRProvider(BaseOCRProvider):
         return {
             "text": f"Extracted OCR text via Google Document AI for '{filename}'",
             "confidence_score": 0.99,
-            "provider": self.provider_name
+            "provider": self.provider_name,
         }
 
 
@@ -53,7 +54,7 @@ class TextractOCRProvider(BaseOCRProvider):
         return {
             "text": f"Extracted OCR text via AWS Textract for '{filename}'",
             "confidence_score": 0.985,
-            "provider": self.provider_name
+            "provider": self.provider_name,
         }
 
 
@@ -68,7 +69,7 @@ class AzureDocIntelligenceOCRProvider(BaseOCRProvider):
         return {
             "text": f"Extracted OCR text via Azure Document Intelligence for '{filename}'",
             "confidence_score": 0.988,
-            "provider": self.provider_name
+            "provider": self.provider_name,
         }
 
 
@@ -83,5 +84,5 @@ class PaddleOCRProvider(BaseOCRProvider):
         return {
             "text": f"Extracted OCR text via PaddleOCR for '{filename}'",
             "confidence_score": 0.975,
-            "provider": self.provider_name
+            "provider": self.provider_name,
         }

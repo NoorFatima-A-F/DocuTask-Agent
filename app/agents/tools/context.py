@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class ProviderContext(BaseModel):
     """Context information for tool provider interaction."""
+
     provider_name: str
     region: str = Field(default="us-central1")
     credentials_ref: Optional[str] = Field(default=None)
@@ -19,6 +20,7 @@ class ProviderContext(BaseModel):
 
 class CapabilityContext(BaseModel):
     """Context information for target capability matching."""
+
     capability_name: str
     min_confidence: float = Field(default=0.8, ge=0.0, le=1.0)
     max_cost_usd: float = Field(default=1.0, ge=0.0)
@@ -28,6 +30,7 @@ class CapabilityContext(BaseModel):
 
 class InvocationContext(BaseModel):
     """Context for a specific tool execution invocation."""
+
     invocation_id: UUID = Field(default_factory=uuid4)
     request_id: str = Field(default_factory=lambda: str(uuid4()))
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
@@ -38,6 +41,7 @@ class InvocationContext(BaseModel):
 
 class ToolExecutionContext(BaseModel):
     """Aggregate execution context for tool execution."""
+
     tool_id: str
     invocation: InvocationContext = Field(default_factory=InvocationContext)
     provider: ProviderContext = Field(default_factory=lambda: ProviderContext(provider_name="default"))

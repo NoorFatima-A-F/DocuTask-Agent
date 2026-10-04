@@ -26,7 +26,9 @@ class ModelMetadataValidator:
 
         # Business checks
         owner = metadata.business.owner_email or metadata.business.owner_user_id
-        if not owner or (metadata.business.owner_email and not re.match(r"[^@]+@[^@]+\.[^@]+", metadata.business.owner_email)):
+        if not owner or (
+            metadata.business.owner_email and not re.match(r"[^@]+@[^@]+\.[^@]+", metadata.business.owner_email)
+        ):
             errors.append("Valid business owner email or ID must be specified")
         if not metadata.business.business_unit:
             errors.append("Business unit must be specified")

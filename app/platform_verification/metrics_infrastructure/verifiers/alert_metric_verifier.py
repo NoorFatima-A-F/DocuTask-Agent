@@ -1,6 +1,7 @@
 """
 3I.3.12: Metric-Driven Alerting Rules & Thresholds Verifier
 """
+
 from typing import List
 from ..domain.models import AlertRuleValidationSpec, AlertValidationReport
 from ..domain.interfaces import IAlertMetricVerifier
@@ -19,7 +20,7 @@ class AlertMetricVerifier(IAlertMetricVerifier):
                 condition="queue_depth > 10000 for 5m",
                 severity="WARNING",
                 trigger_state="READY",
-                action="Trigger auto-scaling of worker pods and notify SRE on-call"
+                action="Trigger auto-scaling of worker pods and notify SRE on-call",
             ),
             AlertRuleValidationSpec(
                 alert_name="HighHttpErrorRateCritical",
@@ -27,7 +28,7 @@ class AlertMetricVerifier(IAlertMetricVerifier):
                 condition="error_rate > 5% for 2m",
                 severity="CRITICAL",
                 trigger_state="READY",
-                action="Page primary on-call SRE and initiate automated traffic reroute"
+                action="Page primary on-call SRE and initiate automated traffic reroute",
             ),
             AlertRuleValidationSpec(
                 alert_name="LatencySlaDegradation",
@@ -35,7 +36,7 @@ class AlertMetricVerifier(IAlertMetricVerifier):
                 condition="P95 latency > 2.0s for 5m",
                 severity="WARNING",
                 trigger_state="READY",
-                action="Log performance incident and scale upstream gateway replicas"
+                action="Log performance incident and scale upstream gateway replicas",
             ),
             AlertRuleValidationSpec(
                 alert_name="DatabaseConnectionExhaustionRisk",
@@ -43,7 +44,7 @@ class AlertMetricVerifier(IAlertMetricVerifier):
                 condition="active_connections > 85% for 3m",
                 severity="CRITICAL",
                 trigger_state="READY",
-                action="Alert DBA and initiate connection pool recycling"
+                action="Alert DBA and initiate connection pool recycling",
             ),
             AlertRuleValidationSpec(
                 alert_name="GeminiTimeoutSpike",
@@ -51,12 +52,12 @@ class AlertMetricVerifier(IAlertMetricVerifier):
                 condition="timeout rate > 5% for 2m",
                 severity="WARNING",
                 trigger_state="READY",
-                action="Activate fallback LLM provider and reduce batch sizes"
+                action="Activate fallback LLM provider and reduce batch sizes",
             ),
         ]
 
         return AlertValidationReport(
             report_title="Metric-Driven Alerting Rules & Thresholds Report",
             rules_validated=rules,
-            alerting_pipeline_verified=True
+            alerting_pipeline_verified=True,
         )

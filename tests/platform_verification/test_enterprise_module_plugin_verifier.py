@@ -1,6 +1,7 @@
 """
 Unit and Integration tests for Module Boundary & Plugin Architecture Verification (PART 2D).
 """
+
 import pytest
 from app.platform_verification.module_boundary import (
     EnterpriseModuleBoundaryRuntime,
@@ -36,20 +37,31 @@ def test_boundary_validator_detects_forbidden_plugin_to_database_dependency(runt
 
 def test_plugin_verifier_enforces_lifecycle_contract(runtime):
     """Test verifying full plugin interface lifecycle contracts."""
+
     # 1. Compliant Plugin
     class CompliantOcrPlugin(PluginInterface):
-        def initialize(self, config): return True
-        def execute(self, context): return {"extracted": True}
-        def health(self): return {"status": "OK"}
-        def shutdown(self): return True
+        def initialize(self, config):
+            return True
 
-    report = runtime.plugin_verifier.verify_plugin_contract(CompliantOcrPlugin, {"name": "TesseractOCR", "type": "OCR_PROVIDER"})
+        def execute(self, context):
+            return {"extracted": True}
+
+        def health(self):
+            return {"status": "OK"}
+
+        def shutdown(self):
+            return True
+
+    report = runtime.plugin_verifier.verify_plugin_contract(
+        CompliantOcrPlugin, {"name": "TesseractOCR", "type": "OCR_PROVIDER"}
+    )
     assert report.passed is True
     assert report.satisfies_plugin_interface is True
 
     # 2. Non-compliant incomplete plugin
     class IncompletePlugin:
-        def execute(self, context): return {}
+        def execute(self, context):
+            return {}
 
     bad_report = runtime.plugin_verifier.verify_plugin_contract(IncompletePlugin, {"name": "BrokenPlugin"})
     assert bad_report.passed is False
@@ -58,12 +70,19 @@ def test_plugin_verifier_enforces_lifecycle_contract(runtime):
 
 def test_failure_isolation_containment(runtime):
     """Test that a crashing plugin is safely caught and contained by host sandbox."""
+
     class FaultyPlugin(PluginInterface):
-        def initialize(self, config): return True
+        def initialize(self, config):
+            return True
+
         def execute(self, context):
             raise RuntimeError("Upstream OCR engine segfaulted!")
-        def health(self): return {"status": "ERROR"}
-        def shutdown(self): return True
+
+        def health(self):
+            return {"status": "ERROR"}
+
+        def shutdown(self):
+            return True
 
     faulty = FaultyPlugin()
     isolated, msg = runtime.plugin_verifier.test_failure_isolation(faulty, {})
@@ -73,8 +92,14 @@ def test_failure_isolation_containment(runtime):
 
 def test_version_compatibility_checker(runtime):
     """Test semver compatibility validation between core platform and plugin requirements."""
-    assert runtime.compatibility_validator.check_compatibility(core_version="2.4.0", plugin_req_core_version=">=2.0.0") is True
-    assert runtime.compatibility_validator.check_compatibility(core_version="1.9.0", plugin_req_core_version=">=2.0.0") is False
+    assert (
+        runtime.compatibility_validator.check_compatibility(core_version="2.4.0", plugin_req_core_version=">=2.0.0")
+        is True
+    )
+    assert (
+        runtime.compatibility_validator.check_compatibility(core_version="1.9.0", plugin_req_core_version=">=2.0.0")
+        is False
+    )
 
 
 def test_modularity_metrics_and_evidence_generation(runtime):

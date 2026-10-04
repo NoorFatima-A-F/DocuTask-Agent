@@ -10,6 +10,7 @@ from app.agents.runtime.exceptions import TenantIsolationViolationError
 
 class TenantQuota(BaseModel):
     """Resource quotas allocated to an enterprise tenant."""
+
     max_tokens_per_minute: int = 100_000
     max_active_workflows: int = 50
     max_active_agents: int = 20

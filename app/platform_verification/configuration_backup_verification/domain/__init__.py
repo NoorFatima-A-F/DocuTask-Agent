@@ -1,6 +1,7 @@
 """
 Domain Layer for Configuration Backup Verification (Part 3G.2D).
 """
+
 from app.platform_verification.configuration_backup_verification.domain.models import (
     ConfigurationSourceType,
     ConfigurationCategory,

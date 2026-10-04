@@ -45,7 +45,9 @@ class DomainEventStore:
             self._index_by_correlation[event.correlation_id].append(event)
 
             # 5. Index by Event Type
-            type_key = event.event_type.value if isinstance(event.event_type, DomainEventType) else str(event.event_type)
+            type_key = (
+                event.event_type.value if isinstance(event.event_type, DomainEventType) else str(event.event_type)
+            )
             if type_key not in self._index_by_type:
                 self._index_by_type[type_key] = []
             self._index_by_type[type_key].append(event)
@@ -112,7 +114,6 @@ class DomainEventStore:
             if delay_seconds > 0:
                 await asyncio.sleep(delay_seconds)
             yield event
-
 
     def query(
         self,

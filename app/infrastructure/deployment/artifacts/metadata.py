@@ -8,6 +8,7 @@ from typing import Any, Dict, List, Optional
 
 class ArtifactType(str, Enum):
     """Artifact format classification."""
+
     CONTAINER_IMAGE = "container_image"
     PYTHON_WHEEL = "python_wheel"
     AI_MODEL_BUNDLE = "ai_model_bundle"
@@ -17,6 +18,7 @@ class ArtifactType(str, Enum):
 
 class VulnerabilitySeverity(str, Enum):
     """Vulnerability severity ratings."""
+
     CRITICAL = "critical"
     HIGH = "high"
     MEDIUM = "medium"
@@ -27,6 +29,7 @@ class VulnerabilitySeverity(str, Enum):
 @dataclass
 class VulnerabilityFinding:
     """A detected software vulnerability."""
+
     cve_id: str
     package_name: str
     installed_version: str
@@ -38,6 +41,7 @@ class VulnerabilityFinding:
 @dataclass
 class SBOMComponent:
     """Software Bill of Materials (SBOM) item."""
+
     name: str
     version: str
     purl: str
@@ -48,6 +52,7 @@ class SBOMComponent:
 @dataclass
 class ArtifactMetadata:
     """Complete supply-chain metadata for an artifact."""
+
     artifact_id: str
     name: str
     version: str
@@ -68,4 +73,6 @@ class ArtifactMetadata:
     @property
     def has_critical_vulnerabilities(self) -> bool:
         """Check if any critical/high CVEs are detected."""
-        return any(v.severity in (VulnerabilitySeverity.CRITICAL, VulnerabilitySeverity.HIGH) for v in self.vulnerabilities)
+        return any(
+            v.severity in (VulnerabilitySeverity.CRITICAL, VulnerabilitySeverity.HIGH) for v in self.vulnerabilities
+        )

@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Plugins.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.plugins.domain.models import PluginsEntity
 from app.platform_verification.modules.plugins.domain.interfaces import PluginsRepositoryInterface
+
 
 class InMemoryPluginsRepository(PluginsRepositoryInterface):
     def __init__(self):

@@ -24,7 +24,7 @@ class RegionalCoordinator:
             )
             for c_id in expired:
                 self.cluster_registry.update_cluster_status(c_id, ClusterStatus.OFFLINE)
-            
+
             # Return current status mapping
             clusters = self.cluster_registry.list_clusters(region_id=self.region_id)
             return {c.cluster_id: c.status.value for c in clusters}

@@ -60,8 +60,7 @@ class ToolSelector:
         # If handwriting or complex tables, require multimodal vision
         if has_handwriting or has_complex_tables:
             vision_tools = [
-                t for t in eligible
-                if t.supports_modality(Modality.HANDWRITING) or t.supports_modality(Modality.TABLE)
+                t for t in eligible if t.supports_modality(Modality.HANDWRITING) or t.supports_modality(Modality.TABLE)
             ]
             if vision_tools:
                 eligible = vision_tools

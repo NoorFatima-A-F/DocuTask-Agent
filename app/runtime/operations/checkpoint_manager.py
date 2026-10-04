@@ -55,7 +55,7 @@ class CheckpointManager:
         history = self.checkpoints.setdefault(mission_id, [])
         seq = len(history) + 1
         cid = f"chk_{mission_id}_seq{seq}"
-        
+
         raw_json = json.dumps(full_state_payload, sort_keys=True, default=str)
         h = hashlib.sha256(raw_json.encode("utf-8")).hexdigest()[:16]
 

@@ -1,13 +1,16 @@
 """
 Enterprise Clean Architecture Runtime facade.
 """
+
 from __future__ import annotations
 import os
 from pathlib import Path
 from typing import List, Optional
 import uuid
 from app.platform_verification.clean_architecture.core.ast_dependency_analyzer import EnterpriseCleanArchASTScanner
-from app.platform_verification.clean_architecture.core.domain_isolation_verifier import EnterpriseDomainIsolationVerifier
+from app.platform_verification.clean_architecture.core.domain_isolation_verifier import (
+    EnterpriseDomainIsolationVerifier,
+)
 from app.platform_verification.clean_architecture.core.evidence_store import EnterpriseCleanArchEvidenceStore
 from app.platform_verification.clean_architecture.core.metrics_calculator import EnterpriseDependencyMetricsCalculator
 from app.platform_verification.clean_architecture.core.rule_engine import EnterpriseDependencyRuleEngine

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 """
 Incident Notifier & Alert Dispatcher.
 
@@ -22,6 +23,7 @@ logger = logging.getLogger("infrastructure.incidents.notifications")
 
 class NotificationChannel(str, enum.Enum):
     """Supported alerting channels."""
+
     WEBHOOK = "WEBHOOK"
     SLACK = "SLACK"
     EMAIL = "EMAIL"
@@ -31,6 +33,7 @@ class NotificationChannel(str, enum.Enum):
 
 class NotificationMessage(BaseModel):
     """Structured incident notification message."""
+
     message_id: str
     incident_id: str
     channel: NotificationChannel
@@ -96,7 +99,11 @@ class IncidentNotifier:
             try:
                 msg.delivered = handler(msg)
             except Exception as e:
-                logger.error("Error executing notification handler for %s: %s", sanitize_log_input(channel.value), sanitize_log_input(e))
+                logger.error(
+                    "Error executing notification handler for %s: %s",
+                    sanitize_log_input(channel.value),
+                    sanitize_log_input(e),
+                )
                 msg.delivered = False
         else:
             # Default simulated delivery
@@ -104,7 +111,12 @@ class IncidentNotifier:
 
         self._sent_messages.append(msg)
         self._last_sent_time[rate_key] = now
-        logger.info("Dispatched %s notification for incident '%s' (severity=%s)", sanitize_log_input(channel.value), sanitize_log_input(incident_id), sanitize_log_input(severity.value))
+        logger.info(
+            "Dispatched %s notification for incident '%s' (severity=%s)",
+            sanitize_log_input(channel.value),
+            sanitize_log_input(incident_id),
+            sanitize_log_input(severity.value),
+        )
         return msg
 
     def list_dispatched_messages(self, incident_id: Optional[str] = None) -> List[NotificationMessage]:

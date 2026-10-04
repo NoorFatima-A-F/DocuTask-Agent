@@ -1,6 +1,7 @@
 """
 REST API Router for API Architecture Verification (PART 2E).
 """
+
 from __future__ import annotations
 from typing import Any, Dict
 from fastapi import APIRouter, HTTPException, status

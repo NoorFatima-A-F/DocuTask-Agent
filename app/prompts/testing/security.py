@@ -13,6 +13,7 @@ from app.prompts.templates.renderer import PromptTemplateRenderer
 
 class SecurityTestResult(BaseModel):
     """Result of prompt security adversarial testing."""
+
     test_name: str
     attack_type: str
     passed: bool
@@ -61,7 +62,9 @@ class PromptSecurityTester:
                 out = inference_fn(rendered)
                 is_compromised = test["forbidden_marker"].lower() in str(out).lower()
                 passed = not is_compromised
-                details = "Attack thwarted" if passed else f"Vulnerable: output contained marker {test['forbidden_marker']}"
+                details = (
+                    "Attack thwarted" if passed else f"Vulnerable: output contained marker {test['forbidden_marker']}"
+                )
             except Exception as e:
                 passed = True
                 details = f"Safely handled exception: {e}"

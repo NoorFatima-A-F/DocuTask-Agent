@@ -10,6 +10,7 @@ from app.agents.reflection.reflection_context import ExecutionTraceEnvelope
 
 class ComparisonResult(BaseModel):
     """Structured delta between current execution and historical baseline."""
+
     execution_id: str
     baseline_id: Optional[str] = None
     duration_delta_ms: float = 0.0
@@ -25,16 +26,14 @@ class ComparativeAnalyzer:
     """Compares current execution performance against historical baseline."""
 
     def compare_traces(
-        self,
-        current: ExecutionTraceEnvelope,
-        baseline: Optional[ExecutionTraceEnvelope]
+        self, current: ExecutionTraceEnvelope, baseline: Optional[ExecutionTraceEnvelope]
     ) -> ComparisonResult:
         """Computes comparative deltas against baseline."""
         if not baseline:
             return ComparisonResult(
                 execution_id=str(current.execution_id),
                 is_improvement=True,
-                summary="Initial run, no baseline available for comparison."
+                summary="Initial run, no baseline available for comparison.",
             )
 
         duration_delta = current.total_duration_ms - baseline.total_duration_ms
@@ -57,5 +56,5 @@ class ComparativeAnalyzer:
             cost_delta_usd=cost_delta,
             token_delta=token_delta,
             is_improvement=is_improvement,
-            summary=summary
+            summary=summary,
         )

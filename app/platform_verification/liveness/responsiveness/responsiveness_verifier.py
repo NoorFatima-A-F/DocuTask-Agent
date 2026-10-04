@@ -2,6 +2,7 @@
 Internal Responsiveness Verifier (Part 3H.2C).
 Measures probe response latency, timeouts, and router loop execution responsiveness.
 """
+
 import time
 from typing import List
 from app.platform_verification.liveness.domain.models import ResponsivenessReport

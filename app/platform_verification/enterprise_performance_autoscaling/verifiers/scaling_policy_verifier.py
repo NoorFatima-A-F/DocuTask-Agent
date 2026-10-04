@@ -26,10 +26,42 @@ class ScalingPolicyVerifier(IScalingPolicyVerifier):
 
     def verify(self) -> ScalingPolicyReport:
         scenarios = [
-            ScalingDecisionScenario(scenario_name="Sustained Backlog", queue_depth=5000, worker_utilization_pct=95.0, latency_ms=8000.0, expected_action="SCALE_UP", actual_action="SCALE_UP", correct=True),
-            ScalingDecisionScenario(scenario_name="Temporary Micro-Spike (<60s)", queue_depth=500, worker_utilization_pct=65.0, latency_ms=2800.0, expected_action="HOLD", actual_action="HOLD", correct=True),
-            ScalingDecisionScenario(scenario_name="Low Traffic Window", queue_depth=30, worker_utilization_pct=15.0, latency_ms=2400.0, expected_action="SCALE_DOWN", actual_action="SCALE_DOWN", correct=True),
-            ScalingDecisionScenario(scenario_name="Cooldown Active", queue_depth=1200, worker_utilization_pct=78.0, latency_ms=3100.0, expected_action="HOLD_COOLDOWN", actual_action="HOLD_COOLDOWN", correct=True),
+            ScalingDecisionScenario(
+                scenario_name="Sustained Backlog",
+                queue_depth=5000,
+                worker_utilization_pct=95.0,
+                latency_ms=8000.0,
+                expected_action="SCALE_UP",
+                actual_action="SCALE_UP",
+                correct=True,
+            ),
+            ScalingDecisionScenario(
+                scenario_name="Temporary Micro-Spike (<60s)",
+                queue_depth=500,
+                worker_utilization_pct=65.0,
+                latency_ms=2800.0,
+                expected_action="HOLD",
+                actual_action="HOLD",
+                correct=True,
+            ),
+            ScalingDecisionScenario(
+                scenario_name="Low Traffic Window",
+                queue_depth=30,
+                worker_utilization_pct=15.0,
+                latency_ms=2400.0,
+                expected_action="SCALE_DOWN",
+                actual_action="SCALE_DOWN",
+                correct=True,
+            ),
+            ScalingDecisionScenario(
+                scenario_name="Cooldown Active",
+                queue_depth=1200,
+                worker_utilization_pct=78.0,
+                latency_ms=3100.0,
+                expected_action="HOLD_COOLDOWN",
+                actual_action="HOLD_COOLDOWN",
+                correct=True,
+            ),
         ]
 
         checks: List[CheckResult] = [

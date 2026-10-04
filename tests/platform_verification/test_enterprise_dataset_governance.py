@@ -2,10 +2,13 @@
 Comprehensive Unit & Integration Test Suite for Part 1.3:
 Enterprise Verification Dataset Architecture & Test Data Governance.
 """
+
 import pytest
 from app.platform_verification.dataset_governance.domain.models import (
-    DatasetCategory, DatasetLifecycleState, DatasetSample,
-    DatasetMetadata
+    DatasetCategory,
+    DatasetLifecycleState,
+    DatasetSample,
+    DatasetMetadata,
 )
 from app.platform_verification.dataset_governance.core.registry import dataset_registry
 from app.platform_verification.dataset_governance.core.validator import dataset_validator
@@ -55,11 +58,11 @@ def test_dataset_validation_pipeline():
         version="1.0.0",
         description="Testing validation rules",
         purpose="Unit testing",
-        category=DatasetCategory.SYNTHETIC
+        category=DatasetCategory.SYNTHETIC,
     )
     samples = [
         DatasetSample(sample_id="s1", content="Sample content 1"),
-        DatasetSample(sample_id="s2", content="Sample content 2")
+        DatasetSample(sample_id="s2", content="Sample content 2"),
     ]
     is_valid, errors = dataset_validator.validate_dataset(meta, samples)
     assert is_valid is True
@@ -74,7 +77,7 @@ def test_dataset_validation_pipeline():
 def test_privacy_preservation_pii_masking():
     dirty_sample = DatasetSample(
         sample_id="pii_sample_01",
-        content="Customer John Doe, email john.doe@enterprise.com, phone 555-123-4567, SSN 123-45-6789 paid $500."
+        content="Customer John Doe, email john.doe@enterprise.com, phone 555-123-4567, SSN 123-45-6789 paid $500.",
     )
     clean_sample = dataset_privacy_engine.anonymize_sample(dirty_sample)
     assert "[REDACTED_EMAIL]" in clean_sample.content
@@ -98,7 +101,7 @@ def test_defect_regression_generator_and_snapshots():
     defect_sample = dataset_governance_runtime.generate_regression_sample(
         defect_id="BUG-2026-9081",
         content="Invoice with zero-width spaces breaking regex tokenizer",
-        remediation={"fixed_total": 1250.0, "tokenizer_mode": "UNICODE_NORMALIZED"}
+        remediation={"fixed_total": 1250.0, "tokenizer_mode": "UNICODE_NORMALIZED"},
     )
     assert defect_sample.sample_id == "reg_smp_BUG-2026-9081"
 

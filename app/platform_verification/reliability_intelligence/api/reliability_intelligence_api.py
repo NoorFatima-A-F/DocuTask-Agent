@@ -6,8 +6,12 @@ FastAPI router exposing SRE intelligence, SLO metrics, and reliability scorecard
 from fastapi import APIRouter
 from typing import Dict, Any
 
-from app.platform_verification.reliability_intelligence.runtime.reliability_intelligence_runtime import ReliabilityIntelligenceRuntime
-from app.platform_verification.reliability_intelligence.exporter.reliability_evidence_exporter import EnhancedJSONEncoder
+from app.platform_verification.reliability_intelligence.runtime.reliability_intelligence_runtime import (
+    ReliabilityIntelligenceRuntime,
+)
+from app.platform_verification.reliability_intelligence.exporter.reliability_evidence_exporter import (
+    EnhancedJSONEncoder,
+)
 import json
 
 router = APIRouter(prefix="/health/reliability", tags=["Reliability Intelligence"])

@@ -1,6 +1,7 @@
 """
 3I.3.1: Metrics Collection Architecture Verifier
 """
+
 from typing import List
 from ..domain.models import MetricsServiceCoverage, MetricsArchitectureReport
 from ..domain.interfaces import IMetricsArchitectureVerifier
@@ -29,7 +30,7 @@ class MetricsArchitectureVerifier(IMetricsArchitectureVerifier):
                 exporter_type="OpenTelemetry SDK / Prometheus Exporter",
                 metrics_endpoint=endpoint,
                 scrape_interval_seconds=interval,
-                status="HEALTHY"
+                status="HEALTHY",
             )
             for name, endpoint, interval in services
         ]
@@ -42,5 +43,5 @@ class MetricsArchitectureVerifier(IMetricsArchitectureVerifier):
             alerting="Alertmanager",
             services_monitored=len(coverage),
             services_coverage=coverage,
-            status="PASS"
+            status="PASS",
         )

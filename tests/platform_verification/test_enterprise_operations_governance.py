@@ -260,12 +260,20 @@ class TestEnterpriseOperationsGovernance:
         audit = AuditTrailEngine().verify_audit_trail()
         ai_ops = AIOpsMonitor().monitor_ai_operations()
         finops = FinOpsMonitor().calculate_unit_economics()
-        maturity = OperationalMaturityScorer().score_maturity({
-            "slo": slo, "error_budget": budget, "health": health,
-            "incidents": incidents, "alerts": alerts, "runbooks": runbooks,
-            "self_healing": self_healing, "changes": changes, "audit": audit,
-            "finops": finops,
-        })
+        maturity = OperationalMaturityScorer().score_maturity(
+            {
+                "slo": slo,
+                "error_budget": budget,
+                "health": health,
+                "incidents": incidents,
+                "alerts": alerts,
+                "runbooks": runbooks,
+                "self_healing": self_healing,
+                "changes": changes,
+                "audit": audit,
+                "finops": finops,
+            }
+        )
 
         manifest = exporter.export_all(
             slo=slo,

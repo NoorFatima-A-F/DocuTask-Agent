@@ -17,8 +17,7 @@ class PlanningFactory:
 
     @staticmethod
     def create_planning_subsystem(
-        repository: Optional[IPlanRepository] = None,
-        validator: Optional[IPlanValidator] = None
+        repository: Optional[IPlanRepository] = None, validator: Optional[IPlanValidator] = None
     ):
         repo = repository or PlanRepository()
         val = validator or PlanValidator()

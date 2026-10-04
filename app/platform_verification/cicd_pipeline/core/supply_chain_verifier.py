@@ -1,6 +1,7 @@
 """
 Supply Chain Security Verifier for packages, SBOMs, licenses, and secrets.
 """
+
 from __future__ import annotations
 import uuid
 from typing import List

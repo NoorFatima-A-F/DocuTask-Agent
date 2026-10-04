@@ -5,6 +5,7 @@ import hashlib
 import hmac
 import uuid
 
+
 @dataclass(frozen=True)
 class VerificationCertificate:
     certificate_id: str
@@ -18,6 +19,7 @@ class VerificationCertificate:
     is_revoked: bool = False
     certification_level: str = "ENTERPRISE_CERTIFIED"
 
+
 class CertificationAuthorityWorkflow:
     def __init__(self, signing_secret: str = "cert_secret_key_123"):
         self._secret = signing_secret
@@ -30,7 +32,7 @@ class CertificationAuthorityWorkflow:
         target_subsystem: str,
         target_version: str,
         level: str = "ENTERPRISE_CERTIFIED",
-        valid_days: int = 90
+        valid_days: int = 90,
     ) -> VerificationCertificate:
         cert_id = f"cert_{uuid.uuid4().hex[:12]}"
         now = datetime.now(timezone.utc)
@@ -49,7 +51,7 @@ class CertificationAuthorityWorkflow:
             digital_signature=signature,
             issued_at=issued_at,
             expires_at=expires_at,
-            certification_level=level
+            certification_level=level,
         )
         self._issued_certificates[cert_id] = cert
         return cert

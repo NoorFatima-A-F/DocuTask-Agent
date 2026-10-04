@@ -29,11 +29,41 @@ class DRAutomationPipelineVerifier(IDRAutomationPipelineVerifier):
 
     def verify(self) -> DRAutomationReport:
         stages = [
-            DRAutomationStage(stage_number=1, stage_name="Backup Create", automated_script="scripts/dr_backup_create.py", execution_duration_seconds=14.2, status="PASSED"),
-            DRAutomationStage(stage_number=2, stage_name="Backup Verify", automated_script="scripts/dr_backup_verify.py", execution_duration_seconds=8.5, status="PASSED"),
-            DRAutomationStage(stage_number=3, stage_name="Restore Environment", automated_script="scripts/dr_restore_env.py", execution_duration_seconds=22.1, status="PASSED"),
-            DRAutomationStage(stage_number=4, stage_name="Run Validation", automated_script="scripts/dr_run_validation.py", execution_duration_seconds=15.4, status="PASSED"),
-            DRAutomationStage(stage_number=5, stage_name="Generate Certificate", automated_script="scripts/dr_generate_cert.py", execution_duration_seconds=5.0, status="PASSED"),
+            DRAutomationStage(
+                stage_number=1,
+                stage_name="Backup Create",
+                automated_script="scripts/dr_backup_create.py",
+                execution_duration_seconds=14.2,
+                status="PASSED",
+            ),
+            DRAutomationStage(
+                stage_number=2,
+                stage_name="Backup Verify",
+                automated_script="scripts/dr_backup_verify.py",
+                execution_duration_seconds=8.5,
+                status="PASSED",
+            ),
+            DRAutomationStage(
+                stage_number=3,
+                stage_name="Restore Environment",
+                automated_script="scripts/dr_restore_env.py",
+                execution_duration_seconds=22.1,
+                status="PASSED",
+            ),
+            DRAutomationStage(
+                stage_number=4,
+                stage_name="Run Validation",
+                automated_script="scripts/dr_run_validation.py",
+                execution_duration_seconds=15.4,
+                status="PASSED",
+            ),
+            DRAutomationStage(
+                stage_number=5,
+                stage_name="Generate Certificate",
+                automated_script="scripts/dr_generate_cert.py",
+                execution_duration_seconds=5.0,
+                status="PASSED",
+            ),
         ]
 
         total_duration = sum(s.execution_duration_seconds for s in stages)

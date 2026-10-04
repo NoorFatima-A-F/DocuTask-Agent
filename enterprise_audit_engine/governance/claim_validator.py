@@ -11,6 +11,7 @@ from enterprise_audit_engine.domain.evidence.models import (
 
 class UnsupportedClaimError(Exception):
     """Raised when an audit claim lacks backing evidence or exceeds allowable evidence strength."""
+
     pass
 
 
@@ -41,7 +42,10 @@ class ClaimValidator:
         if finding.classification == EvidenceClassification.VERIFIED_BY_EXECUTION:
             has_runtime = any(r.source_type == EvidenceSourceType.RUNTIME_EXECUTION for r in matching_records)
             if not has_runtime:
-                return False, f"Finding '{finding.finding_id}' claims VERIFIED_BY_EXECUTION without RUNTIME_EXECUTION evidence."
+                return (
+                    False,
+                    f"Finding '{finding.finding_id}' claims VERIFIED_BY_EXECUTION without RUNTIME_EXECUTION evidence.",
+                )
 
         # 4. Claim Promotion rule: Cannot claim VERIFIED if all backing records are EVIDENCE_INSUFFICIENT or NOT_VERIFIED
         verified_classes = {
@@ -57,7 +61,10 @@ class ClaimValidator:
         }
         if finding.classification in verified_classes:
             if all(r.classification in insufficient_classes for r in matching_records):
-                return False, f"Finding '{finding.finding_id}' claims '{finding.classification.value}' but backing evidence is insufficient."
+                return (
+                    False,
+                    f"Finding '{finding.finding_id}' claims '{finding.classification.value}' but backing evidence is insufficient.",
+                )
 
         return True, "Valid"
 
@@ -72,7 +79,9 @@ class ClaimValidator:
                 violations.append(msg)
 
         if violations:
-            raise UnsupportedClaimError(f"Report generation blocked due to unsupported claims:\n" + "\n".join(violations))
+            raise UnsupportedClaimError(
+                f"Report generation blocked due to unsupported claims:\n" + "\n".join(violations)
+            )
 
         return {
             "valid": True,

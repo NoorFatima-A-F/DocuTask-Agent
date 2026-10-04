@@ -1,27 +1,31 @@
 """
 Configuration Manager: 7-tier resolution, schema validation, immutable snapshots.
 """
+
 from typing import Dict, Any, Optional
 import hashlib
 import json
 from ..interfaces import ConfigurationManagerInterface
 from ...crosscutting.observability import ComponentObservability
 
+
 class ConfigurationManager(ConfigurationManagerInterface):
     """Resolves hierarchical configurations and creates immutable verification snapshots."""
-    
+
     def __init__(self):
         self._snapshots: Dict[str, Dict[str, Any]] = {}
         self.observability = ComponentObservability("ConfigurationManager")
 
-    async def resolve_configuration(self, run_id: str, tier_overrides: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def resolve_configuration(
+        self, run_id: str, tier_overrides: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         self.observability.record_operation(1.1)
         base_config = {
             "timeout_seconds": 300,
             "retry_limit": 3,
             "precision": "float32",
             "tier": "staging",
-            "sample_rate": 1.0
+            "sample_rate": 1.0,
         }
         if tier_overrides:
             base_config.update(tier_overrides)

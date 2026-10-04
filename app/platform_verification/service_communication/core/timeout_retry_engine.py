@@ -1,6 +1,7 @@
 """
 Timeout & Exponential Backoff Retry Engine.
 """
+
 from typing import List, Dict, Any, Tuple
 from app.platform_verification.service_communication.domain.models import (
     TimeoutValidationReport,
@@ -12,7 +13,9 @@ from app.platform_verification.service_communication.domain.interfaces import IT
 class TimeoutRetryEngine(ITimeoutRetryEvaluator):
     """Evaluates timeout guarantees and exponential backoff retry behaviors."""
 
-    def evaluate_timeouts_and_retries(self, services: List[Dict[str, Any]]) -> Tuple[TimeoutValidationReport, RetryBehaviorReport]:
+    def evaluate_timeouts_and_retries(
+        self, services: List[Dict[str, Any]]
+    ) -> Tuple[TimeoutValidationReport, RetryBehaviorReport]:
         infinite_waits: List[str] = []
         exponential_ok = True
         jitter_ok = True

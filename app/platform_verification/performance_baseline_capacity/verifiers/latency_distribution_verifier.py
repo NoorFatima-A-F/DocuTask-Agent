@@ -31,10 +31,16 @@ class LatencyDistributionVerifier(ILatencyDistributionVerifier):
 
     def verify(self) -> LatencyDistributionReport:
         percentiles = [
-            PercentileDistribution(percentile="P50 (Median)", measured_latency_ms=24.0, sla_target_ms=50.0, compliant=True),
+            PercentileDistribution(
+                percentile="P50 (Median)", measured_latency_ms=24.0, sla_target_ms=50.0, compliant=True
+            ),
             PercentileDistribution(percentile="P90", measured_latency_ms=36.5, sla_target_ms=80.0, compliant=True),
-            PercentileDistribution(percentile="P95 (SLA Core)", measured_latency_ms=44.2, sla_target_ms=100.0, compliant=True),
-            PercentileDistribution(percentile="P99 (Tail Limit)", measured_latency_ms=68.0, sla_target_ms=250.0, compliant=True),
+            PercentileDistribution(
+                percentile="P95 (SLA Core)", measured_latency_ms=44.2, sla_target_ms=100.0, compliant=True
+            ),
+            PercentileDistribution(
+                percentile="P99 (Tail Limit)", measured_latency_ms=68.0, sla_target_ms=250.0, compliant=True
+            ),
         ]
 
         all_compliant = all(p.compliant and p.measured_latency_ms <= p.sla_target_ms for p in percentiles)
@@ -64,7 +70,9 @@ class LatencyDistributionVerifier(ILatencyDistributionVerifier):
                 name="Tail Ratio Stability (P99 / P50 Ratio < 3.5x)",
                 passed=(p99_metric.measured_latency_ms / percentiles[0].measured_latency_ms) < 3.5,
                 details=f"Tail skew ratio is {p99_metric.measured_latency_ms / percentiles[0].measured_latency_ms:.2f}x; indicates bounded tail jitter",
-                metrics={"tail_skew_ratio": round(p99_metric.measured_latency_ms / percentiles[0].measured_latency_ms, 2)},
+                metrics={
+                    "tail_skew_ratio": round(p99_metric.measured_latency_ms / percentiles[0].measured_latency_ms, 2)
+                },
             ),
         ]
 

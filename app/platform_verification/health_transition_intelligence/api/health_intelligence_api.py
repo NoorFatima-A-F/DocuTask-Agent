@@ -2,11 +2,14 @@
 Health Intelligence API Router.
 Exposes FastAPI endpoints for health verification execution, state timeline, alerts, and degradation status.
 """
+
 from fastapi import APIRouter
 from typing import Dict, Any, List
 from dataclasses import asdict
 
-from app.platform_verification.health_transition_intelligence.runtime.health_intelligence_runtime import HealthIntelligenceRuntime
+from app.platform_verification.health_transition_intelligence.runtime.health_intelligence_runtime import (
+    HealthIntelligenceRuntime,
+)
 
 router = APIRouter(prefix="/verification/health-intelligence", tags=["Health Intelligence"])
 runtime = HealthIntelligenceRuntime()

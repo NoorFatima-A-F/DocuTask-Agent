@@ -13,6 +13,7 @@ logger = logging.getLogger("app.infrastructure.networking.telemetry.flow_logs")
 
 class NetworkSecurityEventType(str, Enum):
     """Network security event categories."""
+
     CERTIFICATE_ISSUED = "CertificateIssued"
     CERTIFICATE_ROTATED = "CertificateRotated"
     CERTIFICATE_EXPIRED = "CertificateExpired"
@@ -29,6 +30,7 @@ class NetworkSecurityEventType(str, Enum):
 @dataclass
 class NetworkFlowRecord:
     """Standardized VPC/Mesh flow log entry."""
+
     flow_id: str
     source_address: str
     destination_address: str
@@ -47,6 +49,7 @@ class NetworkFlowRecord:
 @dataclass
 class NetworkSecurityEvent:
     """Published network security event."""
+
     event_id: str
     event_type: NetworkSecurityEventType
     source: str

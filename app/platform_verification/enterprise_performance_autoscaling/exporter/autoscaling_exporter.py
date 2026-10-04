@@ -16,7 +16,6 @@ from ..domain.models import (
 
 
 class AutoscalingExporter(IAutoscalingExporter):
-
     PHASE_TO_FILENAME_MAP: Dict[str, str] = {
         "3j.8.1": "autoscaling_architecture.json",
         "3j.8.2": "scaling_metrics.json",

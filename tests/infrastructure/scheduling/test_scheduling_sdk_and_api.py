@@ -116,9 +116,7 @@ def test_api_endpoints_direct():
     assert hb_res["is_valid"] is True
 
     # 4. Drain Worker via API
-    drain_res = drain_worker(
-        "wrk-api-1", DrainWorkerRequest(reason="Maintenance")
-    )
+    drain_res = drain_worker("wrk-api-1", DrainWorkerRequest(reason="Maintenance"))
     assert drain_res["status"] == WorkerStatus.DRAINING.value
 
     # 5. Submit Workload via API

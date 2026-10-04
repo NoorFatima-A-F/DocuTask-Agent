@@ -1,6 +1,7 @@
 """
 Comprehensive Test Suite for Enterprise Automated Restore Verification System (Part 3G.2E).
 """
+
 import os
 import json
 import pytest
@@ -63,6 +64,7 @@ from app.platform_verification.restore_verification.api.restore_verification_api
 @pytest.fixture
 def test_client():
     from fastapi import FastAPI
+
     app = FastAPI()
     app.include_router(router)
     return TestClient(app)

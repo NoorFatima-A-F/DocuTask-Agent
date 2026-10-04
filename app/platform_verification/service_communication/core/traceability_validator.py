@@ -1,6 +1,7 @@
 """
 End-to-End Request Traceability Validator.
 """
+
 from typing import List, Dict, Any
 from app.platform_verification.service_communication.domain.models import TraceabilityReport
 from app.platform_verification.service_communication.domain.interfaces import ITraceabilityValidator

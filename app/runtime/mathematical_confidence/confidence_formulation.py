@@ -48,7 +48,7 @@ class MathematicalConfidenceEngine:
         historical_sample_size: int = 150,
     ) -> ConfidenceProofDossier:
         inputs = {
-            "ocr_confidence": (ocr_confidence, 0.02),          # (value, standard_error)
+            "ocr_confidence": (ocr_confidence, 0.02),  # (value, standard_error)
             "schema_validation": (schema_validation, 0.01),
             "cross_doc_agreement": (cross_doc_agreement, 0.03),
             "memory_similarity": (memory_similarity, 0.04),
@@ -64,7 +64,7 @@ class MathematicalConfidenceEngine:
             val, se = inputs[k]
             weighted_sum += weight * val
             # Variance propagation: sigma^2_total = sum(w_i^2 * sigma_i^2)
-            var_propagated += (weight ** 2) * (se ** 2)
+            var_propagated += (weight**2) * (se**2)
 
             breakdown[k] = {
                 "observed_value": round(val, 4),

@@ -1,6 +1,7 @@
 """
 Domain models for Enterprise Verification Pyramid & Multi-Level Testing Architecture (PART 2).
 """
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -31,9 +32,9 @@ class TestClassification(str, Enum):
 
 class FailureSeverity(str, Enum):
     CRITICAL = "CRITICAL"  # security breach, data corruption, crash
-    HIGH = "HIGH"          # workflow failure, incorrect AI output
-    MEDIUM = "MEDIUM"      # degraded performance, non-blocking bug
-    LOW = "LOW"            # minor UI/log issue
+    HIGH = "HIGH"  # workflow failure, incorrect AI output
+    MEDIUM = "MEDIUM"  # degraded performance, non-blocking bug
+    LOW = "LOW"  # minor UI/log issue
 
 
 class PyramidExecutionStatus(str, Enum):
@@ -44,15 +45,16 @@ class PyramidExecutionStatus(str, Enum):
 
 
 class ContinuousTrigger(str, Enum):
-    COMMIT = "COMMIT"              # Runs L1
+    COMMIT = "COMMIT"  # Runs L1
     PULL_REQUEST = "PULL_REQUEST"  # Runs L1 - L3
-    NIGHTLY = "NIGHTLY"            # Runs L1 - L5
-    RELEASE = "RELEASE"            # Runs L1 - L7
+    NIGHTLY = "NIGHTLY"  # Runs L1 - L5
+    RELEASE = "RELEASE"  # Runs L1 - L7
 
 
 @dataclass
 class ComponentCoverageItem:
     """Tracks verification status and risk for a platform component."""
+
     component_name: str
     owner: str
     risk_level: FailureSeverity
@@ -65,6 +67,7 @@ class ComponentCoverageItem:
 @dataclass(frozen=True)
 class TestDefinition:
     """Defines an executable test case in the pyramid."""
+
     __test__ = False
     id: str
     name: str
@@ -80,6 +83,7 @@ class TestDefinition:
 @dataclass
 class TestExecutionRecord:
     """Execution metadata and results for a single test."""
+
     test_id: str
     name: str
     level: VerificationLevel
@@ -98,6 +102,7 @@ class TestExecutionRecord:
 @dataclass
 class LevelExecutionSummary:
     """Aggregated execution results for a specific pyramid level."""
+
     level: VerificationLevel
     total_tests: int
     passed_tests: int
@@ -112,6 +117,7 @@ class LevelExecutionSummary:
 @dataclass
 class DefectRecord:
     """Permanent defect record created upon verification failure."""
+
     bug_id: str
     title: str
     original_failure: str
@@ -127,6 +133,7 @@ class DefectRecord:
 @dataclass
 class RegressionRecord:
     """Permanent regression test definition safeguarding against recurring bugs."""
+
     bug_id: str
     original_failure: str
     test_case_id: str
@@ -140,6 +147,7 @@ class RegressionRecord:
 @dataclass
 class PyramidDashboardSummary:
     """High-level metrics for verification maturity and platform risk."""
+
     total_components: int
     verified_components: int
     unverified_components: int
@@ -153,6 +161,7 @@ class PyramidDashboardSummary:
 @dataclass
 class PyramidExecutionReport:
     """Complete multi-level verification pyramid execution report."""
+
     report_id: str
     execution_id: str
     system_version: str

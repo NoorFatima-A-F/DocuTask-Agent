@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class EvaluationDimension(str, Enum):
     """Core evaluation dimensions for analyzing autonomous agent runs."""
+
     GOAL_ACHIEVEMENT = "GOAL_ACHIEVEMENT"
     QUALITY = "QUALITY"
     CONFIDENCE = "CONFIDENCE"
@@ -29,6 +30,7 @@ class EvaluationDimension(str, Enum):
 
 class EvaluationMetric(BaseModel):
     """An individual quantitative or qualitative evaluation metric."""
+
     name: str
     dimension: EvaluationDimension
     score: float = Field(ge=0.0, le=1.0)
@@ -42,6 +44,7 @@ class EvaluationMetric(BaseModel):
 
 class DimensionEvaluation(BaseModel):
     """Aggregated evaluation for a specific dimension."""
+
     dimension: EvaluationDimension
     score: float = Field(ge=0.0, le=1.0)
     status: str = Field(default="SATISFACTORY")  # EXCELLENT, SATISFACTORY, MARGINAL, POOR
@@ -54,6 +57,7 @@ class DimensionEvaluation(BaseModel):
 
 class EvaluationReport(BaseModel):
     """Comprehensive evaluation report summarizing all analytical and quantitative findings."""
+
     report_id: UUID = Field(default_factory=uuid4)
     execution_id: UUID
     overall_score: float = Field(ge=0.0, le=1.0)

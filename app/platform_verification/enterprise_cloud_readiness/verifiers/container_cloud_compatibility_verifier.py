@@ -29,13 +29,55 @@ class ContainerCloudCompatibilityVerifier(IContainerCloudCompatibilityVerifier):
 
     def verify(self) -> ContainerCloudCompatibilityReport:
         runtimes = [
-            TargetCloudRuntimeSpec(cloud_provider="AWS", runtime_name="AWS ECS Fargate", stateless_verified=True, graceful_shutdown_verified=True, restart_safe=True),
-            TargetCloudRuntimeSpec(cloud_provider="AWS", runtime_name="AWS EKS (Kubernetes)", stateless_verified=True, graceful_shutdown_verified=True, restart_safe=True),
-            TargetCloudRuntimeSpec(cloud_provider="GCP", runtime_name="Google Cloud Run", stateless_verified=True, graceful_shutdown_verified=True, restart_safe=True),
-            TargetCloudRuntimeSpec(cloud_provider="GCP", runtime_name="Google GKE (Kubernetes)", stateless_verified=True, graceful_shutdown_verified=True, restart_safe=True),
-            TargetCloudRuntimeSpec(cloud_provider="Azure", runtime_name="Azure Container Apps", stateless_verified=True, graceful_shutdown_verified=True, restart_safe=True),
-            TargetCloudRuntimeSpec(cloud_provider="Azure", runtime_name="Azure AKS (Kubernetes)", stateless_verified=True, graceful_shutdown_verified=True, restart_safe=True),
-            TargetCloudRuntimeSpec(cloud_provider="Generic", runtime_name="Docker Engine / Containerd", stateless_verified=True, graceful_shutdown_verified=True, restart_safe=True),
+            TargetCloudRuntimeSpec(
+                cloud_provider="AWS",
+                runtime_name="AWS ECS Fargate",
+                stateless_verified=True,
+                graceful_shutdown_verified=True,
+                restart_safe=True,
+            ),
+            TargetCloudRuntimeSpec(
+                cloud_provider="AWS",
+                runtime_name="AWS EKS (Kubernetes)",
+                stateless_verified=True,
+                graceful_shutdown_verified=True,
+                restart_safe=True,
+            ),
+            TargetCloudRuntimeSpec(
+                cloud_provider="GCP",
+                runtime_name="Google Cloud Run",
+                stateless_verified=True,
+                graceful_shutdown_verified=True,
+                restart_safe=True,
+            ),
+            TargetCloudRuntimeSpec(
+                cloud_provider="GCP",
+                runtime_name="Google GKE (Kubernetes)",
+                stateless_verified=True,
+                graceful_shutdown_verified=True,
+                restart_safe=True,
+            ),
+            TargetCloudRuntimeSpec(
+                cloud_provider="Azure",
+                runtime_name="Azure Container Apps",
+                stateless_verified=True,
+                graceful_shutdown_verified=True,
+                restart_safe=True,
+            ),
+            TargetCloudRuntimeSpec(
+                cloud_provider="Azure",
+                runtime_name="Azure AKS (Kubernetes)",
+                stateless_verified=True,
+                graceful_shutdown_verified=True,
+                restart_safe=True,
+            ),
+            TargetCloudRuntimeSpec(
+                cloud_provider="Generic",
+                runtime_name="Docker Engine / Containerd",
+                stateless_verified=True,
+                graceful_shutdown_verified=True,
+                restart_safe=True,
+            ),
         ]
 
         checks = [

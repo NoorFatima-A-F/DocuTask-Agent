@@ -39,5 +39,5 @@ class SchemaAttackTester:
             actual_behavior=actual_behavior,
             severity=attack_case.severity,
             passed=passed,
-            evidence_reference=f"docs/audits/security-evidence/{attack_case.attack_id}.json"
+            evidence_reference=f"docs/audits/security-evidence/{attack_case.attack_id}.json",
         )

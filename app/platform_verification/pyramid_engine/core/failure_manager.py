@@ -1,6 +1,7 @@
 """
 Failure Management, Root Cause Analysis, and Defect Creation.
 """
+
 from __future__ import annotations
 import uuid
 from typing import Dict, List, Optional
@@ -24,10 +25,16 @@ class FailureManager(IFailureClassifier):
         test_name = test_record.name.lower()
 
         # Automatic Severity Classification
-        if any(term in msg or term in test_name for term in ["security", "injection", "leak", "corruption", "crash", "auth"]):
+        if any(
+            term in msg or term in test_name
+            for term in ["security", "injection", "leak", "corruption", "crash", "auth"]
+        ):
             severity = FailureSeverity.CRITICAL
             root_cause = "Security vulnerability or critical system integrity violation."
-        elif any(term in msg or term in test_name for term in ["workflow", "extraction", "accuracy", "hallucination", "timeout"]):
+        elif any(
+            term in msg or term in test_name
+            for term in ["workflow", "extraction", "accuracy", "hallucination", "timeout"]
+        ):
             severity = FailureSeverity.HIGH
             root_cause = "Workflow orchestration failure or AI accuracy degradation."
         elif any(term in msg or term in test_name for term in ["latency", "slow", "performance", "memory"]):

@@ -3,6 +3,7 @@ Cascading Failure Protector (Part 3H.3.3.8).
 Prevents single dependency failures (e.g. Gemini AI outage) from cascading into
 queue backpressure, database exhaustion, or total system collapse using circuit breakers and fallback isolation.
 """
+
 from app.platform_verification.health_transition_intelligence.domain.models import (
     CascadingProtectionReport,
 )
@@ -32,8 +33,8 @@ class CascadingFailureProtector:
         if self._consecutive_failures >= self.failure_threshold:
             self._circuit_state = "OPEN"
 
-        rate_dampened = (self._circuit_state == "OPEN")
-        fallback_engaged = (self._circuit_state == "OPEN")
+        rate_dampened = self._circuit_state == "OPEN"
+        fallback_engaged = self._circuit_state == "OPEN"
         cascading_prevented = True
 
         return CascadingProtectionReport(

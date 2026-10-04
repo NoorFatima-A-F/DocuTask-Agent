@@ -1,8 +1,11 @@
 """
 Comprehensive Test Suite for Part 3B: Enterprise Service Communication & Distributed System Verification Framework.
 """
+
 import pytest
-from app.platform_verification.service_communication.runtime.service_communication_runtime import ServiceCommunicationRuntime
+from app.platform_verification.service_communication.runtime.service_communication_runtime import (
+    ServiceCommunicationRuntime,
+)
 from app.platform_verification.service_communication.domain.models import (
     DistributedCertificationTier,
     ServiceDependencyNode,
@@ -52,7 +55,13 @@ def test_communication_contract_validator(comm_runtime):
     assert clean_rep.schema_validation_passed
 
     breaking_contracts = [
-        {"endpoint": "/api/v1/extract", "request_schema": {}, "response_schema": {}, "has_breaking_change": True, "breaking_reason": "removed field"}
+        {
+            "endpoint": "/api/v1/extract",
+            "request_schema": {},
+            "response_schema": {},
+            "has_breaking_change": True,
+            "breaking_reason": "removed field",
+        }
     ]
     break_rep = comm_runtime.contract_validator.validate_contracts(breaking_contracts)
     assert break_rep.status == "FAIL"
@@ -63,7 +72,13 @@ def test_communication_contract_validator(comm_runtime):
 def test_timeout_and_exponential_backoff_retry_engine(comm_runtime):
     """Evaluates timeouts, exponential backoff with jitter, and retry storm prevention."""
     valid_configs = [
-        {"name": "gemini", "timeout_seconds": 15.0, "backoff_strategy": "exponential", "jitter_enabled": True, "max_retries": 3}
+        {
+            "name": "gemini",
+            "timeout_seconds": 15.0,
+            "backoff_strategy": "exponential",
+            "jitter_enabled": True,
+            "max_retries": 3,
+        }
     ]
     t_rep, r_rep = comm_runtime.timeout_retry_engine.evaluate_timeouts_and_retries(valid_configs)
     assert t_rep.status == "PASS"
@@ -72,7 +87,13 @@ def test_timeout_and_exponential_backoff_retry_engine(comm_runtime):
     assert r_rep.jitter_verified
 
     risky_configs = [
-        {"name": "unbounded", "timeout_seconds": 0.0, "backoff_strategy": "linear", "jitter_enabled": False, "max_retries": 10}
+        {
+            "name": "unbounded",
+            "timeout_seconds": 0.0,
+            "backoff_strategy": "linear",
+            "jitter_enabled": False,
+            "max_retries": 10,
+        }
     ]
     bad_t, bad_r = comm_runtime.timeout_retry_engine.evaluate_timeouts_and_retries(risky_configs)
     assert bad_t.status == "FAIL"
@@ -113,14 +134,26 @@ def test_network_chaos_failure_simulator(comm_runtime):
 def test_distributed_consistency_and_idempotency_verifier(comm_runtime):
     """Tests idempotency keys, compensation transactions, and orphan document prevention."""
     consistent_wf = [
-        {"name": "doc_pipeline", "uses_idempotency_key": True, "orphan_records_created_on_crash": False, "duplicate_queue_task_on_retry": False, "has_compensation_rollback": True}
+        {
+            "name": "doc_pipeline",
+            "uses_idempotency_key": True,
+            "orphan_records_created_on_crash": False,
+            "duplicate_queue_task_on_retry": False,
+            "has_compensation_rollback": True,
+        }
     ]
     cons_rep = comm_runtime.consistency_verifier.verify_consistency(consistent_wf)
     assert cons_rep.status == "PASS"
     assert cons_rep.idempotency_keys_enforced
 
     inconsistent_wf = [
-        {"name": "bad_pipeline", "uses_idempotency_key": False, "orphan_records_created_on_crash": True, "duplicate_queue_task_on_retry": True, "has_compensation_rollback": False}
+        {
+            "name": "bad_pipeline",
+            "uses_idempotency_key": False,
+            "orphan_records_created_on_crash": True,
+            "duplicate_queue_task_on_retry": True,
+            "has_compensation_rollback": False,
+        }
     ]
     fail_rep = comm_runtime.consistency_verifier.verify_consistency(inconsistent_wf)
     assert fail_rep.status == "FAIL"
@@ -148,7 +181,10 @@ def test_end_to_end_service_communication_verification_and_api(comm_runtime):
     """Tests end-to-end full execution, evidence sealing, and in-process REST API."""
     package = comm_runtime.run_full_verification(commit_sha="git-commit-3b-55")
     assert package.scorecard.composite_score >= 90.0
-    assert package.scorecard.tier in [DistributedCertificationTier.ENTERPRISE_DISTRIBUTED_SYSTEM_READY, DistributedCertificationTier.PRODUCTION_READY]
+    assert package.scorecard.tier in [
+        DistributedCertificationTier.ENTERPRISE_DISTRIBUTED_SYSTEM_READY,
+        DistributedCertificationTier.PRODUCTION_READY,
+    ]
     assert package.package_sha256 != ""
 
     api = comm_runtime.api

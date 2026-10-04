@@ -60,14 +60,16 @@ class StrategySwitcher:
 
         if budget_remaining_usd < 0.005 and current_strategy != PlanningStrategy.COST_OPTIMIZED:
             new_strategy = PlanningStrategy.COST_OPTIMIZED
-            reason = f"Budget critical (${budget_remaining_usd:.4f} remaining): Switching to cost-minimal operator pruning."
+            reason = (
+                f"Budget critical (${budget_remaining_usd:.4f} remaining): Switching to cost-minimal operator pruning."
+            )
             utility_delta = -0.05
             cost_delta = -0.003
             lat_delta = +50.0
 
         elif current_error_rate > 0.30 and current_strategy != PlanningStrategy.RISK_OPTIMIZED:
             new_strategy = PlanningStrategy.RISK_OPTIMIZED
-            reason = f"High error rate ({current_error_rate*100:.1f}%): Switching to redundant verification branches."
+            reason = f"High error rate ({current_error_rate * 100:.1f}%): Switching to redundant verification branches."
             utility_delta = +0.15
             cost_delta = +0.001
             lat_delta = +80.0

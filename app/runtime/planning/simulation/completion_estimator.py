@@ -15,12 +15,10 @@ class CompletionEstimator:
     """Estimates remaining execution duration and percentage progress."""
 
     @classmethod
-    def estimate_remaining(
-        cls, dag: ExecutionDAG, completed_node_ids: Set[str]
-    ) -> Dict[str, float]:
+    def estimate_remaining(cls, dag: ExecutionDAG, completed_node_ids: Set[str]) -> Dict[str, float]:
         """Calculates remaining critical path duration for uncompleted nodes."""
         uncompleted_nodes = [n for nid, n in dag.nodes.items() if nid not in completed_node_ids]
-        
+
         if not uncompleted_nodes:
             return {
                 "remaining_ms": 0.0,

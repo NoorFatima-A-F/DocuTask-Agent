@@ -29,9 +29,33 @@ class CloudComputeResourceVerifier(ICloudComputeResourceVerifier):
 
     def verify(self) -> CloudComputeResourceReport:
         allocations = [
-            ResourceAllocationSpec(service_name="API Gateway (FastAPI)", cpu_limit="2.0", memory_limit="2Gi", cpu_request="500m", memory_request="512Mi", concurrency_limit=250, throttling_detected=False),
-            ResourceAllocationSpec(service_name="Celery Workers (OCR/AI)", cpu_limit="4.0", memory_limit="8Gi", cpu_request="1.0", memory_request="2Gi", concurrency_limit=8, throttling_detected=False),
-            ResourceAllocationSpec(service_name="Agent Autonomous Runtime", cpu_limit="2.0", memory_limit="4Gi", cpu_request="500m", memory_request="1Gi", concurrency_limit=20, throttling_detected=False),
+            ResourceAllocationSpec(
+                service_name="API Gateway (FastAPI)",
+                cpu_limit="2.0",
+                memory_limit="2Gi",
+                cpu_request="500m",
+                memory_request="512Mi",
+                concurrency_limit=250,
+                throttling_detected=False,
+            ),
+            ResourceAllocationSpec(
+                service_name="Celery Workers (OCR/AI)",
+                cpu_limit="4.0",
+                memory_limit="8Gi",
+                cpu_request="1.0",
+                memory_request="2Gi",
+                concurrency_limit=8,
+                throttling_detected=False,
+            ),
+            ResourceAllocationSpec(
+                service_name="Agent Autonomous Runtime",
+                cpu_limit="2.0",
+                memory_limit="4Gi",
+                cpu_request="500m",
+                memory_request="1Gi",
+                concurrency_limit=20,
+                throttling_detected=False,
+            ),
         ]
 
         checks = [

@@ -74,6 +74,6 @@ class DataMasker:
         result = text
         for match in reversed(matches):
             masked = self.mask_value(match.pii_type, match.raw_value)
-            result = result[:match.start] + masked + result[match.end:]
+            result = result[: match.start] + masked + result[match.end :]
 
         return result

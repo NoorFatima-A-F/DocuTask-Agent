@@ -1,6 +1,7 @@
 """
 Scenarios module for Disaster Recovery Simulation Framework.
 """
+
 from app.platform_verification.disaster_recovery_simulation.scenarios.database_loss_scenario import (
     DatabaseLossScenario,
 )

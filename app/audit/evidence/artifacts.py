@@ -8,16 +8,17 @@ import uuid
 
 
 class EvidenceType(str, Enum):
-    AI_EVIDENCE = "AI_EVIDENCE"                # Model card, prompt template, evaluation metrics, citations
-    DATA_EVIDENCE = "DATA_EVIDENCE"            # Source document hash, lineage snapshot, schema delta
-    GOVERNANCE_EVIDENCE = "GOVERNANCE_EVIDENCE" # Policy rule snapshot, approval records, risk score
+    AI_EVIDENCE = "AI_EVIDENCE"  # Model card, prompt template, evaluation metrics, citations
+    DATA_EVIDENCE = "DATA_EVIDENCE"  # Source document hash, lineage snapshot, schema delta
+    GOVERNANCE_EVIDENCE = "GOVERNANCE_EVIDENCE"  # Policy rule snapshot, approval records, risk score
     EXECUTION_EVIDENCE = "EXECUTION_EVIDENCE"  # DAG trace, tool parameters, error log, latency
-    SAFETY_EVIDENCE = "SAFETY_EVIDENCE"        # Injection scan result, toxicity report, PII redaction log
-    COMPLIANCE_EVIDENCE = "COMPLIANCE_EVIDENCE" # Control assessment report, auditor certification
+    SAFETY_EVIDENCE = "SAFETY_EVIDENCE"  # Injection scan result, toxicity report, PII redaction log
+    COMPLIANCE_EVIDENCE = "COMPLIANCE_EVIDENCE"  # Control assessment report, auditor certification
 
 
 class EvidenceArtifact(BaseModel):
     """Immutable evidence artifact supporting regulatory scrutiny."""
+
     evidence_id: str = Field(default_factory=lambda: f"evi_{uuid.uuid4().hex[:12]}")
     tenant_id: str
     name: str

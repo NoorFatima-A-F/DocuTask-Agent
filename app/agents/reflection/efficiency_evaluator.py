@@ -19,7 +19,7 @@ class EfficiencyEvaluator(IEvaluator):
                 dimension=EvaluationDimension.EFFICIENCY,
                 score=1.0,
                 status="EXCELLENT",
-                findings=["Zero tasks in execution trace."]
+                findings=["Zero tasks in execution trace."],
             )
 
         retries = sum(t.retry_count for t in trace.tasks)
@@ -36,7 +36,7 @@ class EfficiencyEvaluator(IEvaluator):
             name="task_path_efficiency",
             dimension=EvaluationDimension.EFFICIENCY,
             score=efficiency_score,
-            evidence=[f"{retries} retries across {total_tasks} tasks."]
+            evidence=[f"{retries} retries across {total_tasks} tasks."],
         )
 
         return DimensionEvaluation(
@@ -45,5 +45,7 @@ class EfficiencyEvaluator(IEvaluator):
             status=status,
             metrics=[metric],
             findings=[f"Workflow efficiency calculated at {efficiency_score:.2f}."],
-            recommendation_hints=["Consider reducing retry thresholds on flaky tasks."] if efficiency_score < 0.8 else []
+            recommendation_hints=["Consider reducing retry thresholds on flaky tasks."]
+            if efficiency_score < 0.8
+            else [],
         )

@@ -154,7 +154,9 @@ class ContinuousBenchmarkObservatory:
 
         has_crit = any(a.severity == RegressionSeverity.CRITICAL_REGRESSION for a in alerts)
         verdict = f"Observatory analyzed {len(points)} historical campaigns. " + (
-            f"CRITICAL: {len(alerts)} regression alert(s) detected!" if has_crit else "Performance is stable with zero regressions."
+            f"CRITICAL: {len(alerts)} regression alert(s) detected!"
+            if has_crit
+            else "Performance is stable with zero regressions."
         )
 
         return ObservatoryAnalysisReport(

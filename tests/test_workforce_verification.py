@@ -299,17 +299,14 @@ def test_workforce_scorer():
 def test_evidence_generator(tmp_path):
     scorer = WorkforceScorer()
     scorecard = scorer.run_all()
-    
-    exporter = EvidenceGenerator(
-        output_dir=str(tmp_path / "evidence"),
-        report_path=str(tmp_path / "report.md")
-    )
+
+    exporter = EvidenceGenerator(output_dir=str(tmp_path / "evidence"), report_path=str(tmp_path / "report.md"))
     summary = exporter.export_all(scorecard)
-    
+
     assert os.path.exists(summary["output_dir"])
     assert os.path.exists(summary["manifest_file"])
     assert os.path.exists(summary["report_path"])
-    
+
     with open(summary["manifest_file"], "r", encoding="utf-8") as f:
         manifest = json.load(f)
     assert len(manifest["checksums"]) == 21  # 20 parts + 1 summary

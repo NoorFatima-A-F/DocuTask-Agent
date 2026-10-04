@@ -26,11 +26,37 @@ class WorkerScalingVerifier(IWorkerScalingVerifier):
 
     def verify(self) -> WorkerScalingReport:
         stages = [
-            WorkerScalingStage(stage_label="Initial (Idle/Low)", worker_count=2, queue_depth=50, throughput_dpm=50.0, avg_latency_ms=2500.0),
-            WorkerScalingStage(stage_label="Moderate Load", worker_count=5, queue_depth=450, throughput_dpm=125.0, avg_latency_ms=2550.0),
-            WorkerScalingStage(stage_label="Peak Load (1000 docs)", worker_count=10, queue_depth=1200, throughput_dpm=250.0, avg_latency_ms=2580.0),
-            WorkerScalingStage(stage_label="Recovery Stage", worker_count=10, queue_depth=180, throughput_dpm=250.0, avg_latency_ms=2520.0),
-            WorkerScalingStage(stage_label="Scaled Down", worker_count=3, queue_depth=40, throughput_dpm=75.0, avg_latency_ms=2500.0),
+            WorkerScalingStage(
+                stage_label="Initial (Idle/Low)",
+                worker_count=2,
+                queue_depth=50,
+                throughput_dpm=50.0,
+                avg_latency_ms=2500.0,
+            ),
+            WorkerScalingStage(
+                stage_label="Moderate Load",
+                worker_count=5,
+                queue_depth=450,
+                throughput_dpm=125.0,
+                avg_latency_ms=2550.0,
+            ),
+            WorkerScalingStage(
+                stage_label="Peak Load (1000 docs)",
+                worker_count=10,
+                queue_depth=1200,
+                throughput_dpm=250.0,
+                avg_latency_ms=2580.0,
+            ),
+            WorkerScalingStage(
+                stage_label="Recovery Stage",
+                worker_count=10,
+                queue_depth=180,
+                throughput_dpm=250.0,
+                avg_latency_ms=2520.0,
+            ),
+            WorkerScalingStage(
+                stage_label="Scaled Down", worker_count=3, queue_depth=40, throughput_dpm=75.0, avg_latency_ms=2500.0
+            ),
         ]
 
         checks: List[CheckResult] = [

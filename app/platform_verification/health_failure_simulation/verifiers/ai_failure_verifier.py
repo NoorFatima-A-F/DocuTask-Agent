@@ -1,6 +1,7 @@
 """
 3H.11.6: AI Provider Failure Simulation Verifier
 """
+
 from ..domain.models import AIProviderFailureReport
 from ..domain.interfaces import IAIProviderFailureVerifier
 
@@ -21,5 +22,5 @@ class AIProviderFailureVerifier(IAIProviderFailureVerifier):
             retry_with_exponential_backoff_verified=True,
             time_to_detect_ms=250.0,
             time_to_recover_ms=850.0,
-            simulation_passed=True
+            simulation_passed=True,
         )

@@ -1,6 +1,7 @@
 """
 Feature Flag Governance and Evaluation Engine.
 """
+
 from datetime import datetime, timezone
 import hashlib
 from typing import Dict, List, Optional
@@ -22,7 +23,7 @@ class FeatureFlagManager:
         rollout_percentage: int = 100,
         enabled_environments: Optional[List[EnvironmentTier]] = None,
         allowed_tenants: Optional[List[str]] = None,
-        expiration_date: Optional[str] = None
+        expiration_date: Optional[str] = None,
     ) -> FeatureFlag:
         flag = FeatureFlag(
             flag_key=flag_key,
@@ -33,7 +34,7 @@ class FeatureFlagManager:
             rollout_percentage=rollout_percentage,
             enabled_environments=enabled_environments or list(EnvironmentTier),
             allowed_tenants=allowed_tenants or [],
-            expiration_date=expiration_date
+            expiration_date=expiration_date,
         )
         self._flags[flag_key] = flag
         return flag
@@ -43,7 +44,7 @@ class FeatureFlagManager:
         flag_key: str,
         environment: EnvironmentTier = EnvironmentTier.PRODUCTION,
         tenant_id: Optional[str] = None,
-        context_id: Optional[str] = None
+        context_id: Optional[str] = None,
     ) -> bool:
         if flag_key not in self._flags:
             return False
@@ -55,7 +56,10 @@ class FeatureFlagManager:
         if flag.allowed_tenants and tenant_id and tenant_id not in flag.allowed_tenants:
             return False
             # Hash-based deterministic percentage rollout
-            score = int(hashlib.md5(f"{flag_key}:{context_id}".encode("utf-8"), usedforsecurity=False).hexdigest(), 16) % 100
+            score = (
+                int(hashlib.md5(f"{flag_key}:{context_id}".encode("utf-8"), usedforsecurity=False).hexdigest(), 16)
+                % 100
+            )
             if score >= flag.rollout_percentage:
                 return False
 

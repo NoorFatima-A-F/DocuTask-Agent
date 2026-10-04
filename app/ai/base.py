@@ -26,7 +26,7 @@ class LLMProvider(ABC):
     async def generate(self, prompt: str, system_instruction: str = "", model: str = "") -> str:
         """
         Generates text completion for prompt.
-        
+
         :param prompt: User prompt
         :param system_instruction: System prompt context
         :param model: Optional model override
@@ -36,15 +36,11 @@ class LLMProvider(ABC):
 
     @abstractmethod
     async def generate_json(
-        self,
-        prompt: str,
-        json_schema: Dict[str, Any],
-        system_instruction: str = "",
-        model: str = ""
+        self, prompt: str, json_schema: Dict[str, Any], system_instruction: str = "", model: str = ""
     ) -> Tuple[Dict[str, Any], str, int, int]:
         """
         Generates structured JSON response conforming to schema.
-        
+
         :return: Tuple of (parsed_json_dict, raw_response_string, input_tokens, output_tokens)
         """
         pass

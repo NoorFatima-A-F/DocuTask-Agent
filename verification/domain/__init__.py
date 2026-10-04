@@ -1,4 +1,5 @@
 """Domain models exports."""
+
 from .models import (
     CertificationLevel,
     CertificationDecisionStatus,

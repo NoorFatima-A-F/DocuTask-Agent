@@ -19,44 +19,52 @@ class IstioMeshAdapter(IServiceMeshAdapter):
         # 1. VirtualService
         routes = []
         if route.canary_endpoints and route.canary_weight > 0.0:
-            routes.append({
-                "destination": {"host": f"{route.service_name}.{namespace}.svc.cluster.local", "subset": "primary"},
-                "weight": int((1.0 - route.canary_weight) * 100),
-            })
-            routes.append({
-                "destination": {"host": f"{route.service_name}.{namespace}.svc.cluster.local", "subset": "canary"},
-                "weight": int(route.canary_weight * 100),
-            })
+            routes.append(
+                {
+                    "destination": {"host": f"{route.service_name}.{namespace}.svc.cluster.local", "subset": "primary"},
+                    "weight": int((1.0 - route.canary_weight) * 100),
+                }
+            )
+            routes.append(
+                {
+                    "destination": {"host": f"{route.service_name}.{namespace}.svc.cluster.local", "subset": "canary"},
+                    "weight": int(route.canary_weight * 100),
+                }
+            )
         else:
-            routes.append({
-                "destination": {"host": f"{route.service_name}.{namespace}.svc.cluster.local", "subset": "primary"},
-                "weight": 100,
-            })
+            routes.append(
+                {
+                    "destination": {"host": f"{route.service_name}.{namespace}.svc.cluster.local", "subset": "primary"},
+                    "weight": 100,
+                }
+            )
 
         vs_spec = {
             "hosts": [f"{route.service_name}.{namespace}.svc.cluster.local"],
-            "http": [{
-                "route": routes,
-                "timeout": f"{route.timeout_ms / 1000.0}s",
-                "retries": {
-                    "attempts": route.retry_count,
-                    "perTryTimeout": "1s",
-                    "retryOn": "5xx,connect-failure,refused-stream",
-                },
-            }],
+            "http": [
+                {
+                    "route": routes,
+                    "timeout": f"{route.timeout_ms / 1000.0}s",
+                    "retries": {
+                        "attempts": route.retry_count,
+                        "perTryTimeout": "1s",
+                        "retryOn": "5xx,connect-failure,refused-stream",
+                    },
+                }
+            ],
         }
         if route.shadow_endpoints:
-            vs_spec["http"][0]["mirror"] = {
-                "host": f"{route.service_name}-shadow.{namespace}.svc.cluster.local"
-            }
+            vs_spec["http"][0]["mirror"] = {"host": f"{route.service_name}-shadow.{namespace}.svc.cluster.local"}
 
-        manifests.append(MeshConfigurationManifest(
-            mesh_type="istio",
-            resource_kind="VirtualService",
-            name=f"{route.service_name}-vs",
-            namespace=namespace,
-            spec=vs_spec,
-        ))
+        manifests.append(
+            MeshConfigurationManifest(
+                mesh_type="istio",
+                resource_kind="VirtualService",
+                name=f"{route.service_name}-vs",
+                namespace=namespace,
+                spec=vs_spec,
+            )
+        )
 
         # 2. DestinationRule
         lb_policy = "ROUND_ROBIN"
@@ -80,48 +88,72 @@ class IstioMeshAdapter(IServiceMeshAdapter):
                 {"name": "canary", "labels": {"version": "canary"}},
             ],
         }
-        manifests.append(MeshConfigurationManifest(
-            mesh_type="istio",
-            resource_kind="DestinationRule",
-            name=f"{route.service_name}-dr",
-            namespace=namespace,
-            spec=dr_spec,
-        ))
+        manifests.append(
+            MeshConfigurationManifest(
+                mesh_type="istio",
+                resource_kind="DestinationRule",
+                name=f"{route.service_name}-dr",
+                namespace=namespace,
+                spec=dr_spec,
+            )
+        )
 
         return manifests
 
-    def generate_mtls_policy(self, service_name: str, namespace: str = "default", mode: str = "STRICT") -> List[MeshConfigurationManifest]:
+    def generate_mtls_policy(
+        self, service_name: str, namespace: str = "default", mode: str = "STRICT"
+    ) -> List[MeshConfigurationManifest]:
         """Generate Istio PeerAuthentication resource."""
         spec = {
             "selector": {"matchLabels": {"app": service_name}},
             "mtls": {"mode": mode},
         }
-        return [MeshConfigurationManifest(
-            mesh_type="istio",
-            resource_kind="PeerAuthentication",
-            name=f"{service_name}-peer-auth",
-            namespace=namespace,
-            spec=spec,
-        )]
+        return [
+            MeshConfigurationManifest(
+                mesh_type="istio",
+                resource_kind="PeerAuthentication",
+                name=f"{service_name}-peer-auth",
+                namespace=namespace,
+                spec=spec,
+            )
+        ]
 
-    def generate_traffic_split(self, service_name: str, primary_weight: int, canary_weight: int, namespace: str = "default") -> List[MeshConfigurationManifest]:
+    def generate_traffic_split(
+        self, service_name: str, primary_weight: int, canary_weight: int, namespace: str = "default"
+    ) -> List[MeshConfigurationManifest]:
         """Generate VirtualService traffic split."""
         vs_spec = {
             "hosts": [f"{service_name}.{namespace}.svc.cluster.local"],
-            "http": [{
-                "route": [
-                    {"destination": {"host": f"{service_name}.{namespace}.svc.cluster.local", "subset": "primary"}, "weight": primary_weight},
-                    {"destination": {"host": f"{service_name}.{namespace}.svc.cluster.local", "subset": "canary"}, "weight": canary_weight},
-                ]
-            }],
+            "http": [
+                {
+                    "route": [
+                        {
+                            "destination": {
+                                "host": f"{service_name}.{namespace}.svc.cluster.local",
+                                "subset": "primary",
+                            },
+                            "weight": primary_weight,
+                        },
+                        {
+                            "destination": {
+                                "host": f"{service_name}.{namespace}.svc.cluster.local",
+                                "subset": "canary",
+                            },
+                            "weight": canary_weight,
+                        },
+                    ]
+                }
+            ],
         }
-        return [MeshConfigurationManifest(
-            mesh_type="istio",
-            resource_kind="VirtualService",
-            name=f"{service_name}-traffic-split",
-            namespace=namespace,
-            spec=vs_spec,
-        )]
+        return [
+            MeshConfigurationManifest(
+                mesh_type="istio",
+                resource_kind="VirtualService",
+                name=f"{service_name}-traffic-split",
+                namespace=namespace,
+                spec=vs_spec,
+            )
+        ]
 
     def sync_mesh_state(self) -> Dict[str, Any]:
         """Return Istio synchronization status."""

@@ -11,6 +11,7 @@ import uuid
 @dataclass
 class RequestContext:
     """Standard execution context extracted from incoming API requests."""
+
     request_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     correlation_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     organization_id: Optional[str] = None

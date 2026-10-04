@@ -80,9 +80,7 @@ class ShutdownPipeline:
         duration_ms = (time.perf_counter() - start_time) * 1000.0
         self.metrics.record_shutdown_time(duration_ms)
 
-        await self._publish_event(
-            RuntimeTerminatedEvent(payload={"duration_ms": duration_ms, "forced": force_timeout})
-        )
+        await self._publish_event(RuntimeTerminatedEvent(payload={"duration_ms": duration_ms, "forced": force_timeout}))
         logger.info("Platform Runtime successfully TERMINATED.")
         return state
 

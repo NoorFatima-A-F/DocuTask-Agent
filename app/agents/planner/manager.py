@@ -17,7 +17,7 @@ class PlannerManager:
         self,
         planner: Optional[IntelligentPlanner] = None,
         cache: Optional[PlannerCache] = None,
-        repository: Optional[PlannerRepository] = None
+        repository: Optional[PlannerRepository] = None,
     ):
         self.planner = planner or IntelligentPlanner()
         self.cache = cache or PlannerCache()

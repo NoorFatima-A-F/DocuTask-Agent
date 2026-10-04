@@ -55,11 +55,11 @@ class PaperFigureGenerator:
 
         svg_parts = [
             f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">',
-            f'<!-- Originating Experiment ID: {originating_exp_id} -->',
-            f'<!-- Generated At UTC: {now_str} -->',
+            f"<!-- Originating Experiment ID: {originating_exp_id} -->",
+            f"<!-- Generated At UTC: {now_str} -->",
             '<rect width="100%" height="100%" fill="#ffffff"/>',
-            f'<text x="{width//2}" y="35" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1e293b">{title}</text>',
-            f'<text x="{width//2}" y="52" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">Provenance: {originating_exp_id}</text>',
+            f'<text x="{width // 2}" y="35" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1e293b">{title}</text>',
+            f'<text x="{width // 2}" y="52" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">Provenance: {originating_exp_id}</text>',
             # Y Axis
             f'<line x1="{margin_left}" y1="70" x2="{margin_left}" y2="{70 + chart_height}" stroke="#94a3b8" stroke-width="1.5"/>',
             # X Axis
@@ -86,19 +86,17 @@ class PaperFigureGenerator:
             y = 70 + chart_height - bar_h
             color = colors[idx % len(colors)]
 
-            svg_parts.append(
-                f'<rect x="{x}" y="{y}" width="{bar_width}" height="{bar_h}" rx="4" fill="{color}"/>'
-            )
+            svg_parts.append(f'<rect x="{x}" y="{y}" width="{bar_width}" height="{bar_h}" rx="4" fill="{color}"/>')
             # Value label
             svg_parts.append(
-                f'<text x="{x + bar_width//2}" y="{y - 8}" font-family="Arial, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1e293b">{val:.3f}</text>'
+                f'<text x="{x + bar_width // 2}" y="{y - 8}" font-family="Arial, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1e293b">{val:.3f}</text>'
             )
             # Metric label
             svg_parts.append(
-                f'<text x="{x + bar_width//2}" y="{70 + chart_height + 20}" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#475569">{label}</text>'
+                f'<text x="{x + bar_width // 2}" y="{70 + chart_height + 20}" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#475569">{label}</text>'
             )
 
-        svg_parts.append('</svg>')
+        svg_parts.append("</svg>")
         full_svg = "\n".join(svg_parts)
         sha = compute_sha256(full_svg.encode())
 
@@ -124,9 +122,9 @@ class PaperFigureGenerator:
         fig_id = f"fig_dot_{originating_exp_id[:8]}"
 
         dot_lines = [
-            f'// Experiment Provenance DAG: {originating_exp_id}',
-            'digraph PipelineLineage {',
-            '  rankdir=LR;',
+            f"// Experiment Provenance DAG: {originating_exp_id}",
+            "digraph PipelineLineage {",
+            "  rankdir=LR;",
             '  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=11, fillcolor="#f8fafc", color="#cbd5e1"];',
             '  edge [color="#64748b", arrowhead=vee];',
         ]
@@ -139,7 +137,7 @@ class PaperFigureGenerator:
         for src, dst in edges:
             dot_lines.append(f'  "{src}" -> "{dst}";')
 
-        dot_lines.append('}')
+        dot_lines.append("}")
         content = "\n".join(dot_lines)
         sha = compute_sha256(content.encode())
 

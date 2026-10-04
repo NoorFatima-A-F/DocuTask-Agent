@@ -16,7 +16,7 @@ class CoordinationOrchestrator:
         self,
         registry: AgentRegistry,
         coordinator: Optional[AgentCoordinator] = None,
-        swarm_engine: Optional[SwarmEngine] = None
+        swarm_engine: Optional[SwarmEngine] = None,
     ):
         self.registry = registry
         self.coordinator = coordinator or AgentCoordinator(registry=registry)

@@ -1,6 +1,7 @@
 """
 Phase 3I.2: Enterprise Logging Infrastructure Verification — Domain Models
 """
+
 from enum import Enum
 from typing import List, Optional
 from pydantic import BaseModel, Field
@@ -16,13 +17,14 @@ class LogLevel(str, Enum):
 
 
 class LoggingCertificationTier(str, Enum):
-    ENTERPRISE_LOGGING_READY = "Enterprise Logging Ready"         # 95 - 100
-    PRODUCTION_READY = "Production Ready"                         # 90 - 94.99
-    IMPROVEMENT_REQUIRED = "Improvement Required"                 # 80 - 89.99
-    FAILED = "Failed"                                             # < 80
+    ENTERPRISE_LOGGING_READY = "Enterprise Logging Ready"  # 95 - 100
+    PRODUCTION_READY = "Production Ready"  # 90 - 94.99
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99
+    FAILED = "Failed"  # < 80
 
 
 # ─── 3I.2.1: Logging Architecture Models ──────────────────────────────────
+
 
 class LoggingServiceCoverage(BaseModel):
     service_name: str
@@ -42,6 +44,7 @@ class ArchitectureReport(BaseModel):
 
 
 # ─── 3I.2.2 & 3I.2.3: Structured Logging & Log Level Models ───────────────
+
 
 class StructuredEventSample(BaseModel):
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -63,9 +66,19 @@ class StructuredLoggingReport(BaseModel):
     report_title: str = "Structured Logging Schema & Level Classification Report"
     mandatory_fields: List[str] = Field(
         default_factory=lambda: [
-            "timestamp", "level", "service", "environment", "event_name",
-            "message", "request_id", "trace_id", "user_id", "task_id",
-            "duration", "status", "error_type"
+            "timestamp",
+            "level",
+            "service",
+            "environment",
+            "event_name",
+            "message",
+            "request_id",
+            "trace_id",
+            "user_id",
+            "task_id",
+            "duration",
+            "status",
+            "error_type",
         ]
     )
     schema_compliance_pct: float = 100.0
@@ -76,6 +89,7 @@ class StructuredLoggingReport(BaseModel):
 
 
 # ─── 3I.2.4: Request Correlation Models ───────────────────────────────────
+
 
 class CorrelationTraceHop(BaseModel):
     hop_order: int
@@ -98,6 +112,7 @@ class CorrelationReport(BaseModel):
 
 
 # ─── 3I.2.5 & 3I.2.6: AI Agent Execution & Error Models ───────────────────
+
 
 class AgentDecisionLogEntry(BaseModel):
     agent: str = "document_processor"
@@ -125,9 +140,15 @@ class AgentLoggingReport(BaseModel):
     report_title: str = "AI Agent Execution & Diagnostic Error Observability Report"
     agent_lifecycle_stages_tracked: List[str] = Field(
         default_factory=lambda: [
-            "goal_created", "plan_generated", "task_assigned", "tool_called",
-            "ocr_executed", "llm_invoked", "validation_performed",
-            "reflection_triggered", "result_stored"
+            "goal_created",
+            "plan_generated",
+            "task_assigned",
+            "tool_called",
+            "ocr_executed",
+            "llm_invoked",
+            "validation_performed",
+            "reflection_triggered",
+            "result_stored",
         ]
     )
     sample_agent_decisions: List[AgentDecisionLogEntry] = Field(default_factory=list)
@@ -137,6 +158,7 @@ class AgentLoggingReport(BaseModel):
 
 
 # ─── 3I.2.9: Security Masking Models ──────────────────────────────────────
+
 
 class MaskedFieldRule(BaseModel):
     data_category: str  # CNIC, Email, Phone, Passwords, API Keys, JWT Tokens, Medical Data
@@ -156,6 +178,7 @@ class SecurityReport(BaseModel):
 
 
 # ─── 3I.2.8 & 3I.2.10: Performance & Retention Models ─────────────────────
+
 
 class RetentionTierSpec(BaseModel):
     log_level: str
@@ -178,6 +201,7 @@ class PerformanceReport(BaseModel):
 
 # ─── 3I.2.11: Failure Simulation Models ───────────────────────────────────
 
+
 class FailureScenarioLogVerification(BaseModel):
     scenario_id: str
     name: str
@@ -194,6 +218,7 @@ class FailureTestReport(BaseModel):
 
 
 # ─── 3I.2.12 & 3I.2.13: Scoring & Certification Models ────────────────────
+
 
 class LoggingPillarScore(BaseModel):
     pillar_name: str

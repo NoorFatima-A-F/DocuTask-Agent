@@ -37,7 +37,11 @@ class BusinessSimulationEngine:
                 passed=passed_1,
                 message=f"1M doc/yr simulation proved 20 FTE manual staff can be rebalanced to 3 supervisory FTEs + 17 strategic reallocations",
                 execution_time_ms=t_ms,
-                details={"baseline_fte": baseline_fte, "ai_supervisors_fte": ai_fte, "reallocated_fte": reallocated_fte},
+                details={
+                    "baseline_fte": baseline_fte,
+                    "ai_supervisors_fte": ai_fte,
+                    "reallocated_fte": reallocated_fte,
+                },
             )
         )
 
@@ -99,7 +103,11 @@ class BusinessSimulationEngine:
             score=score,
             weight=1.0,
             assertions=assertions,
-            metrics={"simulated_annual_volume": 1_000_000, "discounts_captured_usd": discounts_captured_usd, "fte_saved": reallocated_fte},
+            metrics={
+                "simulated_annual_volume": 1_000_000,
+                "discounts_captured_usd": discounts_captured_usd,
+                "fte_saved": reallocated_fte,
+            },
             execution_time_ms=elapsed_ms,
         )
 

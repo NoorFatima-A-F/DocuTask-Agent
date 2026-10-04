@@ -26,7 +26,9 @@ class ConfigurationManager:
         self._history[key].append(manifest)
         return manifest
 
-    def get_current_manifest(self, service_name: str, environment: str = "PRODUCTION") -> Optional[InfrastructureManifest]:
+    def get_current_manifest(
+        self, service_name: str, environment: str = "PRODUCTION"
+    ) -> Optional[InfrastructureManifest]:
         """Retrieve latest active manifest for a service."""
         key = self._get_key(service_name, environment)
         history = self._history.get(key, [])
@@ -37,7 +39,9 @@ class ConfigurationManager:
         key = self._get_key(service_name, environment)
         return list(self._history.get(key, []))
 
-    def rollback(self, service_name: str, target_version: str, environment: str = "PRODUCTION") -> InfrastructureManifest:
+    def rollback(
+        self, service_name: str, target_version: str, environment: str = "PRODUCTION"
+    ) -> InfrastructureManifest:
         """Roll back to a previously deployed manifest version."""
         key = self._get_key(service_name, environment)
         history = self._history.get(key, [])

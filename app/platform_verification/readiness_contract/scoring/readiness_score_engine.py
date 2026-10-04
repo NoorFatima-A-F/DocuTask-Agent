@@ -8,6 +8,7 @@ Computes weighted composite quality scorecards across the 6 core categories:
 5. Security: 10%
 6. Observability: 10%
 """
+
 from app.platform_verification.readiness_contract.domain.models import (
     ReadinessContractReport,
     StateMachineReport,

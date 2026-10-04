@@ -11,6 +11,7 @@ from ..control_plane.registry import ZeroTrustAction
 @dataclass
 class ZeroTrustRule:
     """A granular Zero-Trust authorization rule."""
+
     rule_id: str
     name: str
     action: ZeroTrustAction = ZeroTrustAction.ALLOW
@@ -27,6 +28,7 @@ class ZeroTrustRule:
 @dataclass
 class ZeroTrustEvaluationResult:
     """Decision output of Zero-Trust evaluation."""
+
     action: ZeroTrustAction
     matched_rule_id: Optional[str] = None
     reason: str = "default_deny"

@@ -23,17 +23,18 @@ class AnalyticsEventType(str, Enum):
 
 class GovernanceAnalyticsEvent(BaseModel):
     """Universal canonical analytics event schema for AI governance telemetry."""
+
     event_id: str = Field(default_factory=lambda: f"gev_{uuid.uuid4().hex[:12]}")
     tenant_id: str
     organization_id: str = "org_default"
     workspace_id: str = "workspace_default"
-    
+
     # Event Classification
     event_type: AnalyticsEventType
     source_system: str = "governance_control_plane"
     entity_type: str = "SYSTEM"
     entity_id: str = "default_entity"
-    
+
     # Actors & Governance Identifiers
     user_id: Optional[str] = None
     agent_id: Optional[str] = None
@@ -41,16 +42,16 @@ class GovernanceAnalyticsEvent(BaseModel):
     model_id: Optional[str] = None
     prompt_id: Optional[str] = None
     policy_id: Optional[str] = None
-    
+
     # Risk, Severity, and Performance Metrics
-    risk_level: str = "LOW"            # LOW, MEDIUM, HIGH, CRITICAL
-    severity: str = "INFO"             # INFO, WARNING, HIGH, CRITICAL
-    risk_score: float = 0.0            # 0.0 to 1.0 (or 0 to 100)
+    risk_level: str = "LOW"  # LOW, MEDIUM, HIGH, CRITICAL
+    severity: str = "INFO"  # INFO, WARNING, HIGH, CRITICAL
+    risk_score: float = 0.0  # 0.0 to 1.0 (or 0 to 100)
     confidence_score: Optional[float] = None
     cost_usd: float = 0.0
     latency_ms: float = 0.0
     is_success: bool = True
-    
+
     # Timing & Metadata
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     metadata: Dict[str, Any] = Field(default_factory=dict)
@@ -60,7 +61,9 @@ class EventNormalizer:
     """Transforms heterogeneous governance events into unified analytics events."""
 
     @staticmethod
-    def normalize_dict(raw: Dict[str, Any], event_type: Optional[AnalyticsEventType] = None) -> GovernanceAnalyticsEvent:
+    def normalize_dict(
+        raw: Dict[str, Any], event_type: Optional[AnalyticsEventType] = None
+    ) -> GovernanceAnalyticsEvent:
         # Determine event type
         t_str = raw.get("event_type") or raw.get("type")
         if event_type:
@@ -95,6 +98,8 @@ class EventNormalizer:
             cost_usd=float(raw.get("cost_usd", 0.0)),
             latency_ms=float(raw.get("latency_ms", 0.0)),
             is_success=bool(raw.get("is_success", True)),
-            timestamp=raw.get("timestamp") if isinstance(raw.get("timestamp"), datetime) else datetime.now(timezone.utc),
+            timestamp=raw.get("timestamp")
+            if isinstance(raw.get("timestamp"), datetime)
+            else datetime.now(timezone.utc),
             metadata=raw.get("metadata", {}),
         )

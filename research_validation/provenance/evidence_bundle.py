@@ -24,6 +24,7 @@ from research_validation.provenance.provenance_serialization import ProvenanceSe
 @dataclass
 class SealedEvidenceBundle:
     """Portable, verifiable scientific evidence bundle."""
+
     bundle_id: str
     bundle_title: str
     version: str
@@ -47,12 +48,10 @@ class SealedEvidenceBundle:
             payload_digest_sha256=sig_data["payload_digest_sha256"],
             signed_at_epoch=sig_data["signed_at_epoch"],
             expires_at_epoch=sig_data["expires_at_epoch"],
-            signer_identity=sig_data["signer_identity"]
+            signer_identity=sig_data["signer_identity"],
         )
         return ProvenanceSigner.verify_signature(
-            signature=sig_obj,
-            expected_digest_hex=self.root_merkle_digest,
-            secret_or_public_key=secret_or_pubkey
+            signature=sig_obj, expected_digest_hex=self.root_merkle_digest, secret_or_public_key=secret_or_pubkey
         )
 
 
@@ -67,7 +66,7 @@ class EvidenceBundleBuilder:
         graph: EvidenceGraph,
         bundle_title: str = "Empirical Research Validation Evidence",
         version: str = "2.0.0",
-        signer: Optional[ProvenanceSigner] = None
+        signer: Optional[ProvenanceSigner] = None,
     ) -> SealedEvidenceBundle:
         """Package an EvidenceGraph into a signed SealedEvidenceBundle."""
         root_digest = graph.merkle_dag.compute_root_digest()
@@ -75,14 +74,23 @@ class EvidenceBundleBuilder:
         # Compute average quality score
         weights = [n.quality_level.numeric_weight for n in graph.merkle_dag.nodes.values()]
         score = sum(weights) / len(weights) if weights else 0.0
-        qual_level = EvidenceQualityLevel.LEVEL_A if score >= 0.95 else EvidenceQualityLevel.LEVEL_B if score >= 0.80 else EvidenceQualityLevel.LEVEL_C if score >= 0.65 else EvidenceQualityLevel.LEVEL_D if score >= 0.35 else EvidenceQualityLevel.LEVEL_E
+        qual_level = (
+            EvidenceQualityLevel.LEVEL_A
+            if score >= 0.95
+            else EvidenceQualityLevel.LEVEL_B
+            if score >= 0.80
+            else EvidenceQualityLevel.LEVEL_C
+            if score >= 0.65
+            else EvidenceQualityLevel.LEVEL_D
+            if score >= 0.35
+            else EvidenceQualityLevel.LEVEL_E
+        )
 
         # Provenance Serializations
         json_ld = ProvenanceSerializer.to_json_ld(graph.prov_doc)
 
         active_signer = signer or ProvenanceSigner(
-            key_id="KEY-BUNDLE-MASTER",
-            secret_or_private_key="rvisf_internal_verification_key_sec256"
+            key_id="KEY-BUNDLE-MASTER", secret_or_private_key="rvisf_internal_verification_key_sec256"
         )
         sig = active_signer.sign_digest(root_digest, signer_identity="Scientific Evidence Custodian")
 
@@ -101,7 +109,7 @@ class EvidenceBundleBuilder:
             prov_json_ld=json_ld,
             openlineage_json="{}",
             detached_signature=asdict(sig),
-            environment_manifest=env.canonical_dict()
+            environment_manifest=env.canonical_dict(),
         )
 
     @classmethod

@@ -193,7 +193,12 @@ class OrganizationStrategyEngine:
                 rationale=f"Methodology calibrated around {arch_name.lower()} to satisfy mission criteria with calculated utility.",
                 objectives=[f"Implement {arch_name.lower()} pipeline", "Meet operational SLA and cost constraints"],
                 actions=actions,
-                required_agent_roles=[AgentRole.CEO_AGENT, AgentRole.CTO_AGENT, AgentRole.ENGINEERING_AGENT, AgentRole.ANALYST_AGENT],
+                required_agent_roles=[
+                    AgentRole.CEO_AGENT,
+                    AgentRole.CTO_AGENT,
+                    AgentRole.ENGINEERING_AGENT,
+                    AgentRole.ANALYST_AGENT,
+                ],
                 timeline_weeks=int(8 * cost_mult),
                 expected_roi_multiplier=roi_val,
                 total_estimated_cost_usd=4500.0 * cost_mult,
@@ -273,7 +278,7 @@ class OrganizationStrategyEngine:
 
         best = max(strats, key=utility_fn)
         for s in strats:
-            s.is_selected = (s.strategy_id == best.strategy_id)
+            s.is_selected = s.strategy_id == best.strategy_id
 
         org_event_bus.publish(
             StrategyUpdated(

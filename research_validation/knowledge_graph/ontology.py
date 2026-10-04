@@ -41,6 +41,7 @@ class RelationshipType(str, Enum):
 @dataclass(frozen=True)
 class RelationshipConstraint:
     """Formal ontological constraint on edge validity."""
+
     source_type: EntityType
     relationship: RelationshipType
     target_type: EntityType
@@ -58,12 +59,16 @@ class ScientificOntology:
         RelationshipConstraint(EntityType.EXPERIMENT, RelationshipType.PRODUCES_METRIC, EntityType.METRIC),
         RelationshipConstraint(EntityType.EXPERIMENT, RelationshipType.TESTED_IN_ENV, EntityType.ENVIRONMENT),
         RelationshipConstraint(EntityType.EXPERIMENT, RelationshipType.REPLICATES, EntityType.EXPERIMENT),
-        RelationshipConstraint(EntityType.EXPERIMENT, RelationshipType.CONTRADICTS, EntityType.EXPERIMENT, is_symmetric=True),
+        RelationshipConstraint(
+            EntityType.EXPERIMENT, RelationshipType.CONTRADICTS, EntityType.EXPERIMENT, is_symmetric=True
+        ),
         RelationshipConstraint(EntityType.EXPERIMENT, RelationshipType.SUPPORTS_CLAIM, EntityType.CLAIM),
         RelationshipConstraint(EntityType.EXPERIMENT, RelationshipType.REFUTES_CLAIM, EntityType.CLAIM),
         RelationshipConstraint(EntityType.MODEL, RelationshipType.TRAINED_ON, EntityType.DATASET),
         RelationshipConstraint(EntityType.METRIC, RelationshipType.DERIVED_FROM, EntityType.DATASET),
-        RelationshipConstraint(EntityType.METRIC, RelationshipType.CORRELATES_WITH, EntityType.METRIC, is_symmetric=True),
+        RelationshipConstraint(
+            EntityType.METRIC, RelationshipType.CORRELATES_WITH, EntityType.METRIC, is_symmetric=True
+        ),
         RelationshipConstraint(EntityType.METRIC, RelationshipType.CAUSES, EntityType.METRIC, is_transitive=True),
         RelationshipConstraint(EntityType.HYPOTHESIS, RelationshipType.SUPPORTS_CLAIM, EntityType.CLAIM),
         RelationshipConstraint(EntityType.HYPOTHESIS, RelationshipType.INVALIDATES, EntityType.CLAIM),

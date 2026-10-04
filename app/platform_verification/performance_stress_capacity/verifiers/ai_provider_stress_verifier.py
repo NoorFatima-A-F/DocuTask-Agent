@@ -48,7 +48,11 @@ class AIProviderStressVerifier(IPerformanceVerifier):
                 name="AI Rate-Limit Backoff & Jitter Resilience",
                 passed=recovery_rate >= 99.0,
                 details=f"All {rate_limited_count} HTTP 429 rate-limited calls resolved via jittered exponential backoff; 0 dropped requests",
-                metrics={"burst_total": burst_total, "rate_limited": rate_limited_count, "recovered": rate_limit_recovered},
+                metrics={
+                    "burst_total": burst_total,
+                    "rate_limited": rate_limited_count,
+                    "recovered": rate_limit_recovered,
+                },
             )
         )
 
@@ -86,7 +90,11 @@ class AIProviderStressVerifier(IPerformanceVerifier):
                 name="Live AI Stress Telemetry & Monitoring (3J.2.12)",
                 passed=telemetry_capture_rate == 100.0 and p95_ai_latency_ms < 600.0,
                 details=f"100% of AI requests metered with token count, latency percentiles (p95: {p95_ai_latency_ms}ms), and error metrics",
-                metrics={"telemetry_capture_rate": telemetry_capture_rate, "p95_ms": p95_ai_latency_ms, "p99_ms": p99_ai_latency_ms},
+                metrics={
+                    "telemetry_capture_rate": telemetry_capture_rate,
+                    "p95_ms": p95_ai_latency_ms,
+                    "p99_ms": p99_ai_latency_ms,
+                },
             )
         )
 

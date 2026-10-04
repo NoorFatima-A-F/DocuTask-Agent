@@ -1,6 +1,7 @@
 """
 Phase 3H.8.4: Zero-Downtime Database Change & Schema Governance Verifier
 """
+
 import logging
 from typing import List
 from app.platform_verification.operational_governance.domain.interfaces import IDatabaseChangeVerifier

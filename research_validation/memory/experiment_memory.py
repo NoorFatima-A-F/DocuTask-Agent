@@ -16,6 +16,7 @@ from research_validation.provenance.hashing import hash_canonical_json
 @dataclass(frozen=True)
 class ExperimentMemoryEntry:
     """Historical record of an executed experiment."""
+
     entry_id: str
     experiment_id: str
     manifest_digest: str

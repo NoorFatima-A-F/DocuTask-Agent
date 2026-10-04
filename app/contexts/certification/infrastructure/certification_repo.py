@@ -1,6 +1,7 @@
 from typing import Dict, Optional
 from ..domain.certification_domain import ComplianceCertificateAggregate
 
+
 class InMemoryCertificationRepository:
     def __init__(self):
         self._store: Dict[str, ComplianceCertificateAggregate] = {}

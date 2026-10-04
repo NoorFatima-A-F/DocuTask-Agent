@@ -1,6 +1,7 @@
 """
 Phase 3I.3: Enterprise Metrics Infrastructure Verification - Unit and Integration Tests
 """
+
 import os
 import json
 import hashlib
@@ -15,31 +16,48 @@ from app.platform_verification.metrics_infrastructure.domain.models import (
     MetricDefinitionSpec,
     MetricsCertificationReport,
 )
-from app.platform_verification.metrics_infrastructure.verifiers.metrics_architecture_verifier import MetricsArchitectureVerifier
+from app.platform_verification.metrics_infrastructure.verifiers.metrics_architecture_verifier import (
+    MetricsArchitectureVerifier,
+)
 from app.platform_verification.metrics_infrastructure.verifiers.metrics_standard_verifier import MetricsStandardVerifier
-from app.platform_verification.metrics_infrastructure.verifiers.application_metrics_verifier import ApplicationMetricsVerifier
+from app.platform_verification.metrics_infrastructure.verifiers.application_metrics_verifier import (
+    ApplicationMetricsVerifier,
+)
 from app.platform_verification.metrics_infrastructure.verifiers.ai_metrics_verifier import AIMetricsVerifier
-from app.platform_verification.metrics_infrastructure.verifiers.infrastructure_metrics_verifier import InfrastructureMetricsVerifier
-from app.platform_verification.metrics_infrastructure.verifiers.business_sla_metrics_verifier import BusinessSLAMetricsVerifier
-from app.platform_verification.metrics_infrastructure.verifiers.metrics_dashboard_verifier import MetricsDashboardVerifier
+from app.platform_verification.metrics_infrastructure.verifiers.infrastructure_metrics_verifier import (
+    InfrastructureMetricsVerifier,
+)
+from app.platform_verification.metrics_infrastructure.verifiers.business_sla_metrics_verifier import (
+    BusinessSLAMetricsVerifier,
+)
+from app.platform_verification.metrics_infrastructure.verifiers.metrics_dashboard_verifier import (
+    MetricsDashboardVerifier,
+)
 from app.platform_verification.metrics_infrastructure.verifiers.alert_metric_verifier import AlertMetricVerifier
 from app.platform_verification.metrics_infrastructure.verifiers.metrics_accuracy_verifier import MetricsAccuracyVerifier
 from app.platform_verification.metrics_infrastructure.verifiers.metrics_security_verifier import MetricsSecurityVerifier
-from app.platform_verification.metrics_infrastructure.verifiers.metrics_performance_verifier import MetricsPerformanceVerifier
-from app.platform_verification.metrics_infrastructure.verifiers.failure_simulation_metrics_verifier import FailureSimulationMetricsVerifier
+from app.platform_verification.metrics_infrastructure.verifiers.metrics_performance_verifier import (
+    MetricsPerformanceVerifier,
+)
+from app.platform_verification.metrics_infrastructure.verifiers.failure_simulation_metrics_verifier import (
+    FailureSimulationMetricsVerifier,
+)
 from app.platform_verification.metrics_infrastructure.scoring.metrics_quality_scorer import MetricsQualityScorer
-from app.platform_verification.metrics_infrastructure.runtime.metrics_verification_runtime import MetricsVerificationRuntime
+from app.platform_verification.metrics_infrastructure.runtime.metrics_verification_runtime import (
+    MetricsVerificationRuntime,
+)
 from app.platform_verification.metrics_infrastructure.api.metrics_verification_api import router as metrics_api_router
 
 
 # ─── 1. Domain Models Tests ───────────────────────────────────────────────────
+
 
 def test_domain_models_instantiation():
     arch = MetricsArchitectureReport(
         services_monitored=8,
         services_coverage=[
             MetricsServiceCoverage(service_name="api_gateway", metrics_endpoint="/metrics", scrape_interval_seconds=15)
-        ]
+        ],
     )
     assert arch.services_monitored == 8
     assert arch.collector == "OpenTelemetry"
@@ -50,19 +68,19 @@ def test_domain_models_instantiation():
         metric_type=MetricType.HISTOGRAM,
         description="Duration of document processing",
         unit="seconds",
-        labels=["document_type", "status"]
+        labels=["document_type", "status"],
     )
     assert metric_def.metric_type == MetricType.HISTOGRAM
 
     cert_rep = MetricsCertificationReport(
-        certification_tier=MetricsCertificationTier.ENTERPRISE_METRICS_READY,
-        overall_score_pct=98.0
+        certification_tier=MetricsCertificationTier.ENTERPRISE_METRICS_READY, overall_score_pct=98.0
     )
     assert cert_rep.certification_granted is True
     assert cert_rep.certification_tier == MetricsCertificationTier.ENTERPRISE_METRICS_READY
 
 
 # ─── 2. Architecture Verifier Tests ───────────────────────────────────────────
+
 
 def test_metrics_architecture_verifier():
     verifier = MetricsArchitectureVerifier()
@@ -81,6 +99,7 @@ def test_metrics_architecture_verifier():
 
 
 # ─── 3. Standard Verifier Tests ───────────────────────────────────────────────
+
 
 def test_metrics_standard_verifier():
     verifier = MetricsStandardVerifier()
@@ -105,6 +124,7 @@ def test_metrics_standard_verifier():
 
 # ─── 4. Application Metrics Verifier Tests ────────────────────────────────────
 
+
 def test_application_metrics_verifier():
     verifier = ApplicationMetricsVerifier()
     report = verifier.verify_application_metrics()
@@ -117,6 +137,7 @@ def test_application_metrics_verifier():
 
 
 # ─── 5. AI Agent & LLM Metrics Verifier Tests ─────────────────────────────────
+
 
 def test_ai_metrics_verifier():
     verifier = AIMetricsVerifier()
@@ -143,6 +164,7 @@ def test_ai_metrics_verifier():
 
 
 # ─── 6. Infrastructure, Queue & DB Metrics Verifier Tests ─────────────────────
+
 
 def test_infrastructure_metrics_verifier():
     verifier = InfrastructureMetricsVerifier()
@@ -173,6 +195,7 @@ def test_infrastructure_metrics_verifier():
 
 # ─── 7. Business & SLA Metrics Verifier Tests ─────────────────────────────────
 
+
 def test_business_sla_metrics_verifier():
     verifier = BusinessSLAMetricsVerifier()
     report = verifier.verify_business_sla_metrics()
@@ -185,6 +208,7 @@ def test_business_sla_metrics_verifier():
 
 
 # ─── 8. Dashboard Verifier Tests ──────────────────────────────────────────────
+
 
 def test_metrics_dashboard_verifier():
     verifier = MetricsDashboardVerifier()
@@ -206,6 +230,7 @@ def test_metrics_dashboard_verifier():
 
 # ─── 9. Alert Metric Verifier Tests ───────────────────────────────────────────
 
+
 def test_alert_metric_verifier():
     verifier = AlertMetricVerifier()
     report = verifier.verify_alert_metrics()
@@ -221,6 +246,7 @@ def test_alert_metric_verifier():
 
 
 # ─── 10. Accuracy & Security Verifier Tests ───────────────────────────────────
+
 
 def test_metrics_accuracy_verifier():
     verifier = MetricsAccuracyVerifier()
@@ -247,6 +273,7 @@ def test_metrics_security_verifier():
 
 
 # ─── 11. Performance & Failure Simulation Verifier Tests ──────────────────────
+
 
 def test_metrics_performance_verifier():
     verifier = MetricsPerformanceVerifier()
@@ -276,6 +303,7 @@ def test_failure_simulation_metrics_verifier():
 
 
 # ─── 12. Quality Scorer Tests ─────────────────────────────────────────────────
+
 
 def test_metrics_quality_scorer():
     runtime = MetricsVerificationRuntime()
@@ -320,6 +348,7 @@ def test_metrics_quality_scorer():
 
 # ─── 13. Exporter & Runtime Tests ─────────────────────────────────────────────
 
+
 def test_metrics_evidence_exporter(tmp_path):
     out_dir = str(tmp_path / "observability_verification" / "metrics")
     runtime = MetricsVerificationRuntime()
@@ -347,6 +376,7 @@ def test_metrics_evidence_exporter(tmp_path):
 
 
 # ─── 14. FastAPI Router Tests ─────────────────────────────────────────────────
+
 
 def test_metrics_verification_api_endpoints():
     app = FastAPI()

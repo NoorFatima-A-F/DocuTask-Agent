@@ -1,6 +1,7 @@
 """
 Phase 3H.6.12: Enterprise Service Level Objectives & Reliability Scorer
 """
+
 from uuid import uuid4
 from typing import List
 from datetime import datetime, timezone
@@ -53,7 +54,11 @@ class ServiceReliabilityScorer(IServiceReliabilityScorer):
         pillar_scores: List[SREReliabilityPillarScore] = []
 
         # 1. Availability (20%)
-        avail_raw = min(100.0, (availability_report.measured_availability_pct / availability_report.target_slo_pct) * 100.0) if availability_report.target_slo_pct > 0 else 100.0
+        avail_raw = (
+            min(100.0, (availability_report.measured_availability_pct / availability_report.target_slo_pct) * 100.0)
+            if availability_report.target_slo_pct > 0
+            else 100.0
+        )
         avail_weighted = avail_raw * 0.20
         pillar_scores.append(
             SREReliabilityPillarScore(
@@ -87,7 +92,9 @@ class ServiceReliabilityScorer(IServiceReliabilityScorer):
         # 3. Error Budget & Burn Rate (15%)
         # Blend remaining budget health and burn rate status
         budget_health = min(100.0, (error_budget_report.overall_remaining_budget_pct / 80.0) * 100.0)
-        burn_health = 100.0 if not burn_rate_report.fast_burn_detected and not burn_rate_report.slow_burn_detected else 75.0
+        burn_health = (
+            100.0 if not burn_rate_report.fast_burn_detected and not burn_rate_report.slow_burn_detected else 75.0
+        )
         eb_raw = (budget_health * 0.5) + (burn_health * 0.5)
         eb_weighted = eb_raw * 0.15
         pillar_scores.append(

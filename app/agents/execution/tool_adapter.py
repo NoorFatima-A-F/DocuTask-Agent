@@ -14,11 +14,7 @@ class ExecutionToolAdapter:
     def __init__(self, registry: Optional[ToolRegistry] = None):
         self.registry = registry or ToolRegistry()
 
-    async def invoke_tool(
-        self,
-        capability: str,
-        parameters: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    async def invoke_tool(self, capability: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
         """Dispatches invocation to the registered tool for the specified capability."""
         # Simulated/delegated tool execution returning structured result
         if capability == "OCR":

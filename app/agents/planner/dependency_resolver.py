@@ -16,10 +16,6 @@ class DependencyResolver:
         for task in tasks:
             for dep_id in task.dependencies:
                 dependencies.append(
-                    Dependency(
-                        source_id=dep_id,
-                        target_id=task.task_id,
-                        dependency_type=DependencyType.HARD
-                    )
+                    Dependency(source_id=dep_id, target_id=task.task_id, dependency_type=DependencyType.HARD)
                 )
         return dependencies

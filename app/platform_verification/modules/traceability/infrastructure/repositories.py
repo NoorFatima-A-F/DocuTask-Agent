@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Traceability.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.traceability.domain.models import TraceabilityEntity
 from app.platform_verification.modules.traceability.domain.interfaces import TraceabilityRepositoryInterface
+
 
 class InMemoryTraceabilityRepository(TraceabilityRepositoryInterface):
     def __init__(self):

@@ -128,7 +128,7 @@ def process_document_task(self, task_id: str, document_path: str):
         return extraction_service.process(document_path)
     except TransientNetworkError as exc:
         # Exponential backoff: 5s, 10s, 20s
-        countdown = 5 * (2 ** self.request.retries)
+        countdown = 5 * (2**self.request.retries)
         raise self.retry(exc=exc, countdown=countdown)
     except Exception as exc:
         # Terminal failure: route to Dead-Letter Queue for forensic inspection

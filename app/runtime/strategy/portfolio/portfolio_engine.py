@@ -131,7 +131,13 @@ class MissionPortfolioEngine:
             value_type=MissionValue.EFFICIENCY_GAIN,
             allocated_budget_usd=3200.0,
             expected_gain_usd=9800.0,
-            score=MissionValueScore(expected_roi_multiplier=3.06, latency_impact_pct=28.0, risk_score=0.08, strategic_fit_score=0.95, composite_utility=0.925),
+            score=MissionValueScore(
+                expected_roi_multiplier=3.06,
+                latency_impact_pct=28.0,
+                risk_score=0.08,
+                strategic_fit_score=0.95,
+                composite_utility=0.925,
+            ),
             pareto_rank=1,
         )
         m2 = PortfolioMission(
@@ -141,7 +147,13 @@ class MissionPortfolioEngine:
             value_type=MissionValue.CORE_REVENUE,
             allocated_budget_usd=4500.0,
             expected_gain_usd=12500.0,
-            score=MissionValueScore(expected_roi_multiplier=2.77, latency_impact_pct=22.0, risk_score=0.12, strategic_fit_score=0.92, composite_utility=0.890),
+            score=MissionValueScore(
+                expected_roi_multiplier=2.77,
+                latency_impact_pct=22.0,
+                risk_score=0.12,
+                strategic_fit_score=0.92,
+                composite_utility=0.890,
+            ),
             pareto_rank=1,
         )
         c1.missions.extend([m1, m2])
@@ -159,7 +171,13 @@ class MissionPortfolioEngine:
             value_type=MissionValue.RISK_MITIGATION,
             allocated_budget_usd=2800.0,
             expected_gain_usd=6000.0,
-            score=MissionValueScore(expected_roi_multiplier=2.14, latency_impact_pct=0.0, risk_score=0.04, strategic_fit_score=0.99, composite_utility=0.940),
+            score=MissionValueScore(
+                expected_roi_multiplier=2.14,
+                latency_impact_pct=0.0,
+                risk_score=0.04,
+                strategic_fit_score=0.99,
+                composite_utility=0.940,
+            ),
             pareto_rank=1,
         )
         c2.missions.append(m3)
@@ -177,7 +195,13 @@ class MissionPortfolioEngine:
             value_type=MissionValue.TRANSFORMATIVE,
             allocated_budget_usd=5000.0,
             expected_gain_usd=18000.0,
-            score=MissionValueScore(expected_roi_multiplier=3.60, latency_impact_pct=15.0, risk_score=0.14, strategic_fit_score=0.96, composite_utility=0.955),
+            score=MissionValueScore(
+                expected_roi_multiplier=3.60,
+                latency_impact_pct=15.0,
+                risk_score=0.14,
+                strategic_fit_score=0.96,
+                composite_utility=0.955,
+            ),
             pareto_rank=1,
         )
         c3.missions.append(m4)
@@ -192,7 +216,9 @@ class MissionPortfolioEngine:
 
         for c in self.portfolio.clusters:
             c_budget = sum(m.allocated_budget_usd for m in c.missions if m.status != "CANCELLED")
-            c_util = sum(m.score.composite_utility for m in c.missions if m.status != "CANCELLED") / max(len(c.missions), 1)
+            c_util = sum(m.score.composite_utility for m in c.missions if m.status != "CANCELLED") / max(
+                len(c.missions), 1
+            )
             c.allocated_budget_usd = c_budget
             c.aggregated_utility = c_util
             total_usd += c_budget
@@ -227,10 +253,20 @@ class MissionPortfolioEngine:
     ) -> PortfolioMission:
         cluster = next((c for c in self.portfolio.clusters if c.cluster_id == cluster_id), None)
         if not cluster:
-            cluster = MissionCluster(cluster_id=cluster_id, name=f"Cluster {category}", description=f"Missions for {category}")
+            cluster = MissionCluster(
+                cluster_id=cluster_id, name=f"Cluster {category}", description=f"Missions for {category}"
+            )
             self.portfolio.clusters.append(cluster)
 
-        composite = min(1.0, max(0.1, (0.4 * min(expected_roi / 4.0, 1.0)) + (0.3 * (1.0 - risk_score)) + (0.3 * min(latency_impact_pct / 30.0, 1.0))))
+        composite = min(
+            1.0,
+            max(
+                0.1,
+                (0.4 * min(expected_roi / 4.0, 1.0))
+                + (0.3 * (1.0 - risk_score))
+                + (0.3 * min(latency_impact_pct / 30.0, 1.0)),
+            ),
+        )
         score = MissionValueScore(
             expected_roi_multiplier=expected_roi,
             latency_impact_pct=latency_impact_pct,

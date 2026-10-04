@@ -40,9 +40,7 @@ class RollingAggregationEngine:
         if metric_name not in self._samples:
             return
         cutoff = current_time - self.window_seconds
-        self._samples[metric_name] = [
-            (ts, val) for ts, val in self._samples[metric_name] if ts >= cutoff
-        ]
+        self._samples[metric_name] = [(ts, val) for ts, val in self._samples[metric_name] if ts >= cutoff]
 
     def aggregate(self, metric_name: str, current_time: Optional[float] = None) -> AggregatedWindow:
         now = current_time or time.time()

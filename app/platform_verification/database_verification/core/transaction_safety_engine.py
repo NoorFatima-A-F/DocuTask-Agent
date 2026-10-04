@@ -1,6 +1,7 @@
 """
 Transaction Safety and ACID Concurrency Engine.
 """
+
 from typing import Dict, List, Any
 from app.platform_verification.database_verification.domain.models import (
     TransactionSafetyReport,
@@ -47,7 +48,7 @@ class TransactionSafetyEngine(ITransactionSafetyEngine):
         if not optimistic_locking:
             score -= 20.0
         if unprotected:
-            score -= (len(unprotected) * 10.0)
+            score -= len(unprotected) * 10.0
 
         score = max(0.0, min(100.0, score))
         status = "PASS" if score >= 85.0 else "FAIL"

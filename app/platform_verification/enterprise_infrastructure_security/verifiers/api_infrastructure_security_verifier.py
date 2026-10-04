@@ -29,12 +29,42 @@ class APIInfrastructureSecurityVerifier(IAPIInfrastructureSecurityVerifier):
 
     def verify(self) -> APISecurityReport:
         defenses = [
-            APISecurityDefenseCheck(attack_vector="Invalid / Expired JWT Token", simulated_payload="Bearer eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxNjIzOTAyMn0...", response_code=401, mitigation_active=True),
-            APISecurityDefenseCheck(attack_vector="Unauthorized Role Access", simulated_payload="GET /api/v1/admin/users with User token", response_code=403, mitigation_active=True),
-            APISecurityDefenseCheck(attack_vector="Rate Limit Flood (10,000 req/s)", simulated_payload="High-concurrency GET /api/v1/documents flood", response_code=429, mitigation_active=True),
-            APISecurityDefenseCheck(attack_vector="SQL Injection Payload", simulated_payload="' OR '1'='1' -- in document ID path", response_code=422, mitigation_active=True),
-            APISecurityDefenseCheck(attack_vector="Cross-Site Scripting (XSS)", simulated_payload="<script>alert('xss')</script> in metadata name", response_code=422, mitigation_active=True),
-            APISecurityDefenseCheck(attack_vector="Oversized File Upload (>25MB)", simulated_payload="50MB synthetic binary payload", response_code=413, mitigation_active=True),
+            APISecurityDefenseCheck(
+                attack_vector="Invalid / Expired JWT Token",
+                simulated_payload="Bearer eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxNjIzOTAyMn0...",
+                response_code=401,
+                mitigation_active=True,
+            ),
+            APISecurityDefenseCheck(
+                attack_vector="Unauthorized Role Access",
+                simulated_payload="GET /api/v1/admin/users with User token",
+                response_code=403,
+                mitigation_active=True,
+            ),
+            APISecurityDefenseCheck(
+                attack_vector="Rate Limit Flood (10,000 req/s)",
+                simulated_payload="High-concurrency GET /api/v1/documents flood",
+                response_code=429,
+                mitigation_active=True,
+            ),
+            APISecurityDefenseCheck(
+                attack_vector="SQL Injection Payload",
+                simulated_payload="' OR '1'='1' -- in document ID path",
+                response_code=422,
+                mitigation_active=True,
+            ),
+            APISecurityDefenseCheck(
+                attack_vector="Cross-Site Scripting (XSS)",
+                simulated_payload="<script>alert('xss')</script> in metadata name",
+                response_code=422,
+                mitigation_active=True,
+            ),
+            APISecurityDefenseCheck(
+                attack_vector="Oversized File Upload (>25MB)",
+                simulated_payload="50MB synthetic binary payload",
+                response_code=413,
+                mitigation_active=True,
+            ),
         ]
 
         checks = [

@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class WorkerLease(BaseModel):
     """Exclusive lease granted to an execution node on a worker."""
+
     lease_id: str
     worker_id: str
     node_id: str
@@ -25,12 +26,7 @@ class WorkerLeaseManager:
         self._leases: Dict[str, WorkerLease] = {}
 
     def grant_lease(self, lease_id: str, worker_id: str, node_id: str, duration_seconds: float = 300.0) -> WorkerLease:
-        lease = WorkerLease(
-            lease_id=lease_id,
-            worker_id=worker_id,
-            node_id=node_id,
-            duration_seconds=duration_seconds
-        )
+        lease = WorkerLease(lease_id=lease_id, worker_id=worker_id, node_id=node_id, duration_seconds=duration_seconds)
         self._leases[lease_id] = lease
         return lease
 

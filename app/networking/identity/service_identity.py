@@ -12,6 +12,7 @@ from typing import Any, Dict, List, Optional, Set
 @dataclass(frozen=True)
 class SPIFFEIdentity:
     """SPIFFE ID representation following standard spiffe://<trust_domain>/ns/<namespace>/sa/<service>."""
+
     trust_domain: str = "docutask.internal"
     namespace: str = "default"
     service_name: str = "anonymous"

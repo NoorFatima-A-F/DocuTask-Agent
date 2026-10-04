@@ -95,7 +95,9 @@ class CalibrationVerifier:
 
         # NLL
         eps = 1e-12
-        nll = -sum(y * math.log(p + eps) + (1 - y) * math.log(1 - p + eps) for p, y in zip(predictions, actuals)) / len(predictions)
+        nll = -sum(y * math.log(p + eps) + (1 - y) * math.log(1 - p + eps) for p, y in zip(predictions, actuals)) / len(
+            predictions
+        )
 
         passed = brier < 0.08 and nll < 0.20
         t_ms = (time.perf_counter() - t0) * 1000.0
@@ -129,6 +131,7 @@ class CalibrationVerifier:
             {"id": "doc_blurry", "conf": 0.42, "conflicting": False, "expected_action": "ABSTAIN"},
             {"id": "doc_conflict", "conf": 0.90, "conflicting": True, "expected_action": "ABSTAIN"},
         ]
+
         def decide_action(c):
             if c["conf"] < 0.80 or c["conflicting"]:
                 return "ABSTAIN"

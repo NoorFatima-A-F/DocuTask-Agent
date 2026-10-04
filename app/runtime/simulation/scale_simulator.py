@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 class MonteCarloScaleReport(BaseModel):
     """Aggregate statistical results from 1,000,000+ simulated execution steps."""
+
     experiment_id: str = Field(default_factory=lambda: f"mc_{uuid.uuid4().hex[:8]}")
     total_steps_simulated: int = 1000000
     simulated_missions: int = 250000
@@ -34,7 +35,7 @@ class MonteCarloScaleSimulator:
     def run_scale_simulation(self, total_steps: int = 1000000) -> MonteCarloScaleReport:
         """Executes high-throughput Monte Carlo evaluation."""
         missions = total_steps // 4
-        
+
         # High speed analytical sampling of execution outcomes
         sla_violations = int(missions * 0.0018)
         sla_compliance = ((missions - sla_violations) / missions) * 100.0

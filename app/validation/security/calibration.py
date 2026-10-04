@@ -10,6 +10,7 @@ from app.core.logging import logger
 
 class CalibrationMetrics(BaseModel):
     """Metrics quantifying confidence calibration error."""
+
     expected_calibration_error: float = Field(..., description="Expected Calibration Error (ECE)")
     brier_score: float = Field(..., description="Brier Score (lower is better, 0.0 is perfect)")
     calibration_bins: List[dict] = Field(default_factory=list, description="Reliability diagram bin breakdown")
@@ -20,20 +21,13 @@ class ConfidenceCalibrator:
 
     @classmethod
     def compute_calibration(
-        cls,
-        confidences: List[float],
-        accuracies: List[float],
-        num_bins: int = 5
+        cls, confidences: List[float], accuracies: List[float], num_bins: int = 5
     ) -> CalibrationMetrics:
         """
         Computes ECE and Brier Score over paired confidence and accuracy samples.
         """
         if not confidences or not accuracies or len(confidences) != len(accuracies):
-            return CalibrationMetrics(
-                expected_calibration_error=0.0,
-                brier_score=0.0,
-                calibration_bins=[]
-            )
+            return CalibrationMetrics(expected_calibration_error=0.0, brier_score=0.0, calibration_bins=[])
 
         n = len(confidences)
 
@@ -62,18 +56,18 @@ class ConfidenceCalibrator:
                 avg_acc = sum(a for _, a in bin_samples) / count
                 ece += (count / n) * abs(avg_acc - avg_conf)
 
-                bin_records.append({
-                    "bin": f"[{bin_lower:.1f}-{bin_upper:.1f}]",
-                    "sample_count": count,
-                    "avg_confidence": round(avg_conf, 4),
-                    "avg_accuracy": round(avg_acc, 4),
-                    "bin_calibration_error": round(abs(avg_acc - avg_conf), 4)
-                })
+                bin_records.append(
+                    {
+                        "bin": f"[{bin_lower:.1f}-{bin_upper:.1f}]",
+                        "sample_count": count,
+                        "avg_confidence": round(avg_conf, 4),
+                        "avg_accuracy": round(avg_acc, 4),
+                        "bin_calibration_error": round(abs(avg_acc - avg_conf), 4),
+                    }
+                )
 
         logger.info(f"Calculated Confidence Calibration: ECE={ece:.4f}, BrierScore={brier_score:.4f}")
 
         return CalibrationMetrics(
-            expected_calibration_error=round(ece, 4),
-            brier_score=brier_score,
-            calibration_bins=bin_records
+            expected_calibration_error=round(ece, 4), brier_score=brier_score, calibration_bins=bin_records
         )

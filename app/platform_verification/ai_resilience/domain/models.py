@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 
 class ChaosScenarioType(str, Enum):
     """Types of AI chaos failure scenarios."""
+
     PROVIDER_OUTAGE = "provider_outage"
     LATENCY_SPIKE = "latency_spike"
     INVALID_RESPONSE = "invalid_response"
@@ -23,13 +24,15 @@ class ChaosScenarioType(str, Enum):
 
 class CircuitBreakerState(str, Enum):
     """Operational states of the AI Circuit Breaker."""
-    CLOSED = "CLOSED"           # Normal operation, traffic flows to primary AI
-    OPEN = "OPEN"               # Failing, traffic immediately diverted to fallback / fast fail
-    HALF_OPEN = "HALF_OPEN"     # Testing recovery with canary probes
+
+    CLOSED = "CLOSED"  # Normal operation, traffic flows to primary AI
+    OPEN = "OPEN"  # Failing, traffic immediately diverted to fallback / fast fail
+    HALF_OPEN = "HALF_OPEN"  # Testing recovery with canary probes
 
 
 class TaskResilienceStatus(str, Enum):
     """Lifecycle states of document processing tasks during failure."""
+
     PENDING = "PENDING"
     PROCESSING = "PROCESSING"
     RETRY_PENDING = "RETRY_PENDING"
@@ -41,14 +44,16 @@ class TaskResilienceStatus(str, Enum):
 
 class AIResilienceTier(str, Enum):
     """Certification tiers for AI resilience quality."""
+
     ENTERPRISE_AI_RESILIENT = "Enterprise AI Resilient"  # 95 - 100%
-    PRODUCTION_AI_READY = "Production AI Ready"          # 90 - 94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"        # 80 - 89.99%
-    FAILED = "Failed"                                    # < 80%
+    PRODUCTION_AI_READY = "Production AI Ready"  # 90 - 94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89.99%
+    FAILED = "Failed"  # < 80%
 
 
 class FallbackProviderType(str, Enum):
     """Provider types used in fallback routing."""
+
     PRIMARY_GEMINI = "gemini-2.5-flash"
     FALLBACK_CLAUDE = "claude-3-5-sonnet"
     LOCAL_VLLM = "vllm-llama-3-70b-local"
@@ -58,6 +63,7 @@ class FallbackProviderType(str, Enum):
 @dataclass
 class FailureInjectionScenario:
     """Definition of a single failure injection experiment."""
+
     scenario_id: str
     scenario_type: ChaosScenarioType
     description: str
@@ -72,6 +78,7 @@ class FailureInjectionScenario:
 @dataclass
 class OutageSimulationReport:
     """Results of AI Provider Outage Chaos Simulation (3H.3.10.2)."""
+
     scenario: str = "provider_outage"
     detection_seconds: float = 1.8
     recovery_seconds: float = 3.2
@@ -87,6 +94,7 @@ class OutageSimulationReport:
 @dataclass
 class LatencyChaosReport:
     """Results of AI Latency Chaos Testing (3H.3.10.3)."""
+
     scenario: str = "latency_chaos"
     injected_latencies_ms: List[float] = field(default_factory=lambda: [5000.0, 10000.0, 30000.0])
     p50_latency_ms: float = 420.0
@@ -103,6 +111,7 @@ class LatencyChaosReport:
 @dataclass
 class MalformedResponseReport:
     """Results of Malformed AI Response Simulation (3H.3.10.4)."""
+
     scenario: str = "malformed_response"
     total_corrupted_payloads: int = 50
     json_syntax_errors_injected: int = 20
@@ -119,6 +128,7 @@ class MalformedResponseReport:
 @dataclass
 class AuthFailureReport:
     """Results of AI Authentication Failure Simulation (3H.3.10.5)."""
+
     scenario: str = "auth_failure"
     injected_auth_error: str = "401_INVALID_API_KEY"
     infinite_retries_prevented: bool = True
@@ -133,6 +143,7 @@ class AuthFailureReport:
 @dataclass
 class QuotaExhaustionReport:
     """Results of AI Quota & 429 Exhaustion Simulation (3H.3.10.6)."""
+
     scenario: str = "quota_exhaustion"
     injected_http_status: int = 429
     total_rate_limited_requests: int = 60
@@ -149,6 +160,7 @@ class QuotaExhaustionReport:
 @dataclass
 class NetworkFailureReport:
     """Results of AI Network Failure Simulation (3H.3.10.7)."""
+
     scenario: str = "network_failure"
     failure_types_tested: List[str] = field(
         default_factory=lambda: ["TCP_RESET", "DNS_RESOLUTION_TIMEOUT", "TLS_HANDSHAKE_DROP"]
@@ -164,6 +176,7 @@ class NetworkFailureReport:
 @dataclass
 class QualityDegradationReport:
     """Results of AI Quality & Hallucination Degradation Simulation (3H.3.10.8)."""
+
     scenario: str = "quality_degradation"
     low_confidence_injected: int = 25
     hallucinated_fields_injected: int = 20
@@ -178,6 +191,7 @@ class QualityDegradationReport:
 @dataclass
 class FallbackVerificationReport:
     """Results of AI Fallback & Multi-Provider Failover (3H.3.10.9)."""
+
     scenario: str = "fallback_verification"
     primary_provider: str = "gemini-2.5-flash"
     secondary_provider: str = "claude-3-5-sonnet"
@@ -195,6 +209,7 @@ class FallbackVerificationReport:
 @dataclass
 class TaskPreservationReport:
     """Results of Task State & Document Preservation during failure (3H.3.10.10)."""
+
     scenario: str = "task_preservation"
     total_simulated_documents: int = 100
     tasks_interrupted_by_faults: int = 45
@@ -210,6 +225,7 @@ class TaskPreservationReport:
 @dataclass
 class CircuitBreakerReport:
     """Results of AI Circuit Breaker State Transition Verification (3H.3.10.11)."""
+
     scenario: str = "circuit_breaker"
     initial_state: CircuitBreakerState = CircuitBreakerState.CLOSED
     failure_threshold_count: int = 5
@@ -226,6 +242,7 @@ class CircuitBreakerReport:
 @dataclass
 class ChaosExperimentResult:
     """Aggregated outcome of an individual chaos experiment."""
+
     experiment_id: str
     scenario_type: ChaosScenarioType
     total_documents: int
@@ -241,6 +258,7 @@ class ChaosExperimentResult:
 @dataclass
 class RecoveryMetricsReport:
     """Comprehensive Resilience & SRE Metrics Report (3H.3.10.13)."""
+
     total_experiments: int = 7
     total_documents_processed: int = 350
     successful_recoveries: int = 350
@@ -260,12 +278,13 @@ class RecoveryMetricsReport:
 @dataclass
 class AIResilienceScorecard:
     """Composite Weighted Resilience Quality Scorecard (3H.3.10.15)."""
-    failure_detection_score: float = 100.0       # Weight: 20%
-    recovery_capability_score: float = 100.0     # Weight: 25%
-    data_preservation_score: float = 100.0       # Weight: 20%
-    fallback_handling_score: float = 100.0       # Weight: 15%
-    circuit_breaker_score: float = 100.0         # Weight: 10%
-    observability_score: float = 100.0           # Weight: 10%
+
+    failure_detection_score: float = 100.0  # Weight: 20%
+    recovery_capability_score: float = 100.0  # Weight: 25%
+    data_preservation_score: float = 100.0  # Weight: 20%
+    fallback_handling_score: float = 100.0  # Weight: 15%
+    circuit_breaker_score: float = 100.0  # Weight: 10%
+    observability_score: float = 100.0  # Weight: 10%
     overall_score: float = 100.0
     certification_tier: AIResilienceTier = AIResilienceTier.ENTERPRISE_AI_RESILIENT
     certification_verdict: str = "CERTIFIED"

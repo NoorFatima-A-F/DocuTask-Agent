@@ -52,7 +52,6 @@ class IPerformanceVerifier(ABC):
         pass
 
 
-
 class IPerformanceBaselineVerifier(IPerformanceVerifier):
     @abstractmethod
     def verify(self) -> PerformanceBaselineReport:
@@ -180,4 +179,3 @@ IEnterprisePerformanceVerifier = IPerformanceVerifier
 IEnterprisePerformanceScorer = IPerformanceScorer
 IEnterprisePerformanceExporter = IPerformanceExporter
 IEnterprisePerformanceRuntime = IPerformanceRuntime
-

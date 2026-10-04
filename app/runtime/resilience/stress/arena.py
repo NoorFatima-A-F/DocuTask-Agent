@@ -85,7 +85,7 @@ class StressArenaEngine:
     def run_stress_test(self, concurrency: int = 25, total_missions: int = 100) -> StressTestRun:
         """Executes a simulated multi-mission saturation test against DAG workers."""
         start_time = time.time()
-        
+
         # Calculate dynamic realistic stress values
         base_rps = 6.5 + (concurrency * 0.03)
         duration = round(total_missions / max(1.0, base_rps), 2)

@@ -25,7 +25,7 @@ def test_planner_version_registry():
     gens = registry.list_generations()
     assert len(gens) >= 3
     assert registry.get_active_generation().version_tag == "v3.0.0"
-    
+
     # Test rollback
     rolled_back = registry.rollback_to_previous()
     assert rolled_back is not None
@@ -35,12 +35,12 @@ def test_planner_version_registry():
 def test_planner_self_evolution_cycle():
     registry = PlannerVersionRegistry()
     engine = PlannerSelfEvolutionEngine(registry=registry)
-    
+
     report = engine.run_evolution_cycle(
         weakness_diagnosis="Sub-optimal token allocation in high-noise scans",
         target_simulated_trials=500,
     )
-    
+
     assert report.is_promoted is True
     assert report.utility_gain_pct > 0
     assert registry.get_active_generation().version_tag.startswith("v3.")

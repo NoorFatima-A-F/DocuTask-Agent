@@ -1,14 +1,18 @@
 """
 Master Unified Runtime Facade for Enterprise Extension Framework & Plugin Architecture.
 """
+
 from typing import Any, Dict, List, Optional
 from app.platform_verification.extension_framework.domain.models import (
-    PluginMetadata, PluginExecutionContext, PluginExecutionResult, PluginHealthMetrics,
-    PluginLifecycleState, PluginSecurityContext, PluginCategory
+    PluginMetadata,
+    PluginExecutionContext,
+    PluginExecutionResult,
+    PluginHealthMetrics,
+    PluginLifecycleState,
+    PluginSecurityContext,
+    PluginCategory,
 )
-from app.platform_verification.extension_framework.domain.interfaces import (
-    BasePluginInterface
-)
+from app.platform_verification.extension_framework.domain.interfaces import BasePluginInterface
 from app.platform_verification.extension_framework.core.registry import plugin_registry
 from app.platform_verification.extension_framework.core.lifecycle import plugin_lifecycle_manager
 from app.platform_verification.extension_framework.core.health import plugin_health_monitor
@@ -53,7 +57,7 @@ class EnterpriseExtensionFrameworkRuntime:
                 version=p.metadata.version,
                 category=p.metadata.category,
                 author=p.metadata.author,
-                certification_level=p.metadata.security_classification
+                certification_level=p.metadata.security_classification,
             )
 
     def execute_verification_plugin(
@@ -62,7 +66,7 @@ class EnterpriseExtensionFrameworkRuntime:
         verification_id: str,
         dataset_ref: Optional[Dict[str, Any]] = None,
         config_snapshot: Optional[Dict[str, Any]] = None,
-        security_context: Optional[PluginSecurityContext] = None
+        security_context: Optional[PluginSecurityContext] = None,
     ) -> PluginExecutionResult:
         plugin = plugin_registry.get_plugin(plugin_id)
         if not plugin:
@@ -72,10 +76,10 @@ class EnterpriseExtensionFrameworkRuntime:
             verification_id=verification_id,
             dataset_reference=dataset_ref or {},
             configuration_snapshot=config_snapshot or {},
-            security_context=security_context or PluginSecurityContext(
-                caller_identity="ExtensionFrameworkRuntime",
-                permissions=plugin.metadata.granted_permissions
-            )
+            security_context=security_context
+            or PluginSecurityContext(
+                caller_identity="ExtensionFrameworkRuntime", permissions=plugin.metadata.granted_permissions
+            ),
         )
         return plugin_executor.execute_plugin(plugin_id, ctx)
 

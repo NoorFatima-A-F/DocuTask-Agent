@@ -1,6 +1,7 @@
 """
 Backward compatible alias module for errors/exceptions.
 """
+
 from .exceptions import (
     PlatformException,
     PlatformVerificationError,
@@ -17,7 +18,7 @@ from .exceptions import (
     TimeoutException,
     DependencyException,
     ConcurrencyException,
-    SerializationException
+    SerializationException,
 )
 
 __all__ = [
@@ -36,5 +37,5 @@ __all__ = [
     "TimeoutException",
     "DependencyException",
     "ConcurrencyException",
-    "SerializationException"
+    "SerializationException",
 ]

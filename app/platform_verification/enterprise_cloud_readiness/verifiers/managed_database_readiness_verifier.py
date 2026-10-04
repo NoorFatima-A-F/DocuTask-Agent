@@ -29,9 +29,27 @@ class ManagedDatabaseReadinessVerifier(IManagedDatabaseReadinessVerifier):
 
     def verify(self) -> ManagedDatabaseReport:
         targets = [
-            ManagedDBTarget(platform="AWS", service="Amazon RDS for PostgreSQL", ssl_enforced=True, connection_pooling_active=True, auto_reconnect_verified=True),
-            ManagedDBTarget(platform="GCP", service="Google Cloud SQL for PostgreSQL", ssl_enforced=True, connection_pooling_active=True, auto_reconnect_verified=True),
-            ManagedDBTarget(platform="Azure", service="Azure Database for PostgreSQL Flexible Server", ssl_enforced=True, connection_pooling_active=True, auto_reconnect_verified=True),
+            ManagedDBTarget(
+                platform="AWS",
+                service="Amazon RDS for PostgreSQL",
+                ssl_enforced=True,
+                connection_pooling_active=True,
+                auto_reconnect_verified=True,
+            ),
+            ManagedDBTarget(
+                platform="GCP",
+                service="Google Cloud SQL for PostgreSQL",
+                ssl_enforced=True,
+                connection_pooling_active=True,
+                auto_reconnect_verified=True,
+            ),
+            ManagedDBTarget(
+                platform="Azure",
+                service="Azure Database for PostgreSQL Flexible Server",
+                ssl_enforced=True,
+                connection_pooling_active=True,
+                auto_reconnect_verified=True,
+            ),
         ]
 
         checks = [

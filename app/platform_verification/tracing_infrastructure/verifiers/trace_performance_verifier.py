@@ -1,6 +1,7 @@
 """
 3I.4.14: Distributed Tracing Overhead & Performance Verifier
 """
+
 from ..domain.models import TracePerformanceReport
 from ..domain.interfaces import ITracePerformanceVerifier
 
@@ -23,5 +24,5 @@ class TracePerformanceVerifier(ITracePerformanceVerifier):
             overhead_pct=overhead,
             collector_cpu_pct=1.1,
             collector_memory_mb=38.0,
-            latency_impact_acceptable=True
+            latency_impact_acceptable=True,
         )

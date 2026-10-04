@@ -1,6 +1,7 @@
 """
 Domain Models for Enterprise Configuration, Secret & Cryptographic Material Backup Verification Platform (Part 3G.2D).
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Any, Optional
@@ -74,11 +75,11 @@ class KeyAlgorithm(str, Enum):
 
 
 class ConfigCertificationTier(str, Enum):
-    ENTERPRISE_CERTIFIED = "Enterprise Certified"      # 98 - 100
-    PRODUCTION_READY = "Production Ready"              # 95 - 97
-    ACCEPTABLE = "Acceptable"                          # 90 - 94
-    IMPROVEMENT_REQUIRED = "Improvement Required"      # 80 - 89
-    FAILED = "Failed"                                  # < 80
+    ENTERPRISE_CERTIFIED = "Enterprise Certified"  # 98 - 100
+    PRODUCTION_READY = "Production Ready"  # 95 - 97
+    ACCEPTABLE = "Acceptable"  # 90 - 94
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80 - 89
+    FAILED = "Failed"  # < 80
 
 
 @dataclass
@@ -351,15 +352,15 @@ class ConfigurationComplianceReport:
 
 @dataclass
 class ConfigurationQualityScorecard:
-    configuration_coverage_score: float         # Weight 15%
-    secret_coverage_encryption_score: float     # Weight 15%
-    cryptographic_continuity_score: float       # Weight 15%
-    certificate_health_score: float             # Weight 10%
-    iac_and_feature_flags_score: float          # Weight 10%
-    restore_simulation_score: float             # Weight 15%
-    drift_and_version_score: float              # Weight 10%
-    security_and_compliance_score: float        # Weight 10%
-    composite_score: float                      # 0 - 100
+    configuration_coverage_score: float  # Weight 15%
+    secret_coverage_encryption_score: float  # Weight 15%
+    cryptographic_continuity_score: float  # Weight 15%
+    certificate_health_score: float  # Weight 10%
+    iac_and_feature_flags_score: float  # Weight 10%
+    restore_simulation_score: float  # Weight 15%
+    drift_and_version_score: float  # Weight 10%
+    security_and_compliance_score: float  # Weight 10%
+    composite_score: float  # 0 - 100
     certification_tier: ConfigCertificationTier
     passed: bool
     execution_duration_ms: float

@@ -1,6 +1,7 @@
 """
 Unit and Integration tests for SOLID Principle Automated Verification System (PART 2C).
 """
+
 import pytest
 from app.platform_verification.solid_verification import (
     ClassDesignMetrics,

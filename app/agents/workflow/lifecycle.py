@@ -8,6 +8,7 @@ from enum import Enum
 
 class WorkflowLifecycleState(str, Enum):
     """15-state deterministic lifecycle for long-running workflows."""
+
     CREATED = "CREATED"
     REGISTERED = "REGISTERED"
     READY = "READY"

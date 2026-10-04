@@ -15,7 +15,6 @@ from enum import Enum
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 
-
 class PipelineStageType(str, Enum):
     RAW_DATASET = "RAW_DATASET"
     PREPROCESSING = "PREPROCESSING"

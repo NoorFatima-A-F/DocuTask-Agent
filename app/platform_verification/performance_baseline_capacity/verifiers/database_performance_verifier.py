@@ -42,7 +42,9 @@ class DatabasePerformanceVerifier(IDatabasePerformanceVerifier):
         ]
 
         pool = DBConnectionPoolMetric(pool_size=100, avg_wait_time_ms=1.4, timeout_count=0)
-        index = DBIndexEffectiveness(slow_queries_count=0, missing_indexes_detected=0, sequential_scans_on_large_tables=0)
+        index = DBIndexEffectiveness(
+            slow_queries_count=0, missing_indexes_detected=0, sequential_scans_on_large_tables=0
+        )
 
         max_p95 = max(q.p95_ms for q in queries)
 

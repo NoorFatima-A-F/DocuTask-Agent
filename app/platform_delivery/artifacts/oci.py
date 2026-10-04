@@ -1,4 +1,5 @@
 """OCI Registry Client Adapters (GHCR, GAR, ECR, ACR, Harbor, Generic OCI)."""
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 from .models import ArtifactIdentity

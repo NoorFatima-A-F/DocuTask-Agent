@@ -2,9 +2,16 @@
 Section 4.2: Injection Attack Defense (SQLi, NoSQL, Command Injection)
 Evaluates parameter sanitization, AST validation, and SQL/Command injection barrier defenses.
 """
+
 import re
 from typing import Dict, List, Any
-from ..domain.models import SecurityVerificationRun, SecuritySectionResult, SecurityCategory, SecurityStatus, SeverityLevel
+from ..domain.models import (
+    SecurityVerificationRun,
+    SecuritySectionResult,
+    SecurityCategory,
+    SecurityStatus,
+    SeverityLevel,
+)
 
 SQL_INJECTION_PAYLOADS = [
     "' OR '1'='1",
@@ -14,7 +21,7 @@ SQL_INJECTION_PAYLOADS = [
     "1' OR 1=1 ORDER BY 1--",
     "1; EXEC xp_cmdshell('dir'); --",
     "' OR sleep(5) --",
-    "1 AND (SELECT * FROM (SELECT(SLEEP(5)))a)"
+    "1 AND (SELECT * FROM (SELECT(SLEEP(5)))a)",
 ]
 
 COMMAND_INJECTION_PAYLOADS = [
@@ -25,7 +32,7 @@ COMMAND_INJECTION_PAYLOADS = [
     "`whoami`",
     "$(id)",
     "&& ping -c 10 127.0.0.1",
-    "| netstat -an"
+    "| netstat -an",
 ]
 
 NOSQL_INJECTION_PAYLOADS = [
@@ -33,13 +40,16 @@ NOSQL_INJECTION_PAYLOADS = [
     '{"$gt": ""}',
     '{"$where": "this.password.length > 0"}',
     '{"$regex": ".*"}',
-    '{"$or": [{"a": 1}, {"b": 2}]}'
+    '{"$or": [{"a": 1}, {"b": 2}]}',
 ]
+
 
 class InjectionVerifier:
     def __init__(self):
         # Multi-layer input sanitization regex & AST validator simulator
-        self._sqli_pattern = re.compile(r"('|\b(OR|AND|UNION|SELECT|DROP|INSERT|DELETE|UPDATE|EXEC|SLEEP)\b|--|;)", re.IGNORECASE)
+        self._sqli_pattern = re.compile(
+            r"('|\b(OR|AND|UNION|SELECT|DROP|INSERT|DELETE|UPDATE|EXEC|SLEEP)\b|--|;)", re.IGNORECASE
+        )
         self._cmdi_pattern = re.compile(r"(;|\||&|`|\$\(|\b(cat|dir|rm|curl|whoami|id|ping|netstat)\b)", re.IGNORECASE)
         self._nosqli_pattern = re.compile(r"(\$ne|\$gt|\$where|\$regex|\$or)", re.IGNORECASE)
 
@@ -55,27 +65,25 @@ class InjectionVerifier:
     def verify_injection_defenses(self) -> SecuritySectionResult:
         runs: List[SecurityVerificationRun] = []
         metrics: Dict[str, Any] = {}
-        
-        all_payloads = [
-            ("SQL", p) for p in SQL_INJECTION_PAYLOADS
-        ] + [
-            ("COMMAND", p) for p in COMMAND_INJECTION_PAYLOADS
-        ] + [
-            ("NOSQL", p) for p in NOSQL_INJECTION_PAYLOADS
-        ]
-        
+
+        all_payloads = (
+            [("SQL", p) for p in SQL_INJECTION_PAYLOADS]
+            + [("COMMAND", p) for p in COMMAND_INJECTION_PAYLOADS]
+            + [("NOSQL", p) for p in NOSQL_INJECTION_PAYLOADS]
+        )
+
         blocked_count = 0
         leaked_count = 0
-        
+
         for ctx, payload in all_payloads:
             safe = self.is_safe_input(payload, context=ctx)
             if not safe:
                 blocked_count += 1
             else:
                 leaked_count += 1
-                
+
         all_defended = (leaked_count == 0) and (blocked_count == len(all_payloads))
-        
+
         run_sqli = SecurityVerificationRun(
             component="APISecurity.InjectionBarrier",
             scenario=f"Injection Barrier Testing ({len(all_payloads)} SQLi, Command, NoSQL Payloads)",
@@ -84,17 +92,17 @@ class InjectionVerifier:
             actual_value=f"{(blocked_count / len(all_payloads)) * 100.0:.1f}%",
             status=SecurityStatus.PASSED if all_defended else SecurityStatus.FAILED,
             severity=SeverityLevel.CRITICAL if leaked_count > 0 else SeverityLevel.LOW,
-            details={"total_payloads": len(all_payloads), "blocked_count": blocked_count, "leaked_count": leaked_count}
+            details={"total_payloads": len(all_payloads), "blocked_count": blocked_count, "leaked_count": leaked_count},
         )
         runs.append(run_sqli)
-        
+
         passed_runs = sum(1 for r in runs if r.status == SecurityStatus.PASSED)
         score = (passed_runs / len(runs)) * 100.0
-        
+
         metrics["total_injection_vectors"] = len(all_payloads)
         metrics["blocked_vectors_count"] = blocked_count
         metrics["rejection_rate_pct"] = 100.0
-        
+
         return SecuritySectionResult(
             section_id="SEC-V9.4.2",
             section_name="SQL, Command & NoSQL Injection Rejection",
@@ -108,5 +116,5 @@ class InjectionVerifier:
             attacks_blocked=blocked_count,
             runs=runs,
             metrics=metrics,
-            summary=f"Defended against {len(all_payloads)} injection attacks (SQLi, shell command injection, NoSQL operator injection): 100% rejection rate."
+            summary=f"Defended against {len(all_payloads)} injection attacks (SQLi, shell command injection, NoSQL operator injection): 100% rejection rate.",
         )

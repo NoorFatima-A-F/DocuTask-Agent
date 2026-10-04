@@ -31,7 +31,7 @@ class ImagePreprocessor:
     def binarize(image: Image.Image, threshold: int = 140) -> Image.Image:
         """Converts grayscale image to high-contrast binary (black & white)."""
         gray = ImageOps.grayscale(image)
-        return gray.point(lambda p: 255 if p > threshold else 0, mode='1')
+        return gray.point(lambda p: 255 if p > threshold else 0, mode="1")
 
     @classmethod
     def preprocess_image(cls, image: Image.Image) -> Image.Image:

@@ -18,7 +18,9 @@ class EnterpriseAuditPackage(BaseModel):
     total_events: int
     planner_decisions_count: int
     confidence_scores: Dict[str, float] = Field(default_factory=dict)
-    compliance_frameworks: List[str] = Field(default_factory=lambda: ["ISO/IEC 42001", "EU AI Act Art. 12", "SOC2 Type II"])
+    compliance_frameworks: List[str] = Field(
+        default_factory=lambda: ["ISO/IEC 42001", "EU AI Act Art. 12", "SOC2 Type II"]
+    )
     digital_signature: str
     is_audit_certified: bool = True
 

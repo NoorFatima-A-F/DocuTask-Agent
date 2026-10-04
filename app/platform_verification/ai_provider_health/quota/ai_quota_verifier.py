@@ -54,7 +54,9 @@ class AIQuotaVerifier(IAIQuotaVerifier):
 
     def verify_quota(self) -> AIQuotaReport:
         quotas = list(self.QUOTAS)
-        exhaustion = any(q.current_rpm_utilization_pct >= 100.0 or q.current_tpm_utilization_pct >= 100.0 for q in quotas)
+        exhaustion = any(
+            q.current_rpm_utilization_pct >= 100.0 or q.current_tpm_utilization_pct >= 100.0 for q in quotas
+        )
         all_backoff_ok = all(q.backoff_strategy_verified and q.queue_preserved_under_burst for q in quotas)
         passed = len(quotas) >= 2 and not exhaustion and all_backoff_ok
 

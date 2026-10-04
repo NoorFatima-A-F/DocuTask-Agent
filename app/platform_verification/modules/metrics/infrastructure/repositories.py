@@ -1,9 +1,11 @@
 """
 In-Memory / Async SQLAlchemy Repository for Metrics.
 """
+
 from typing import Dict, List, Optional
 from app.platform_verification.modules.metrics.domain.models import MetricsEntity
 from app.platform_verification.modules.metrics.domain.interfaces import MetricsRepositoryInterface
+
 
 class InMemoryMetricsRepository(MetricsRepositoryInterface):
     def __init__(self):

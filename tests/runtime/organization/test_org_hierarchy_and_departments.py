@@ -2,6 +2,7 @@
 Test Suite: Organizational Hierarchy & Specialized Department Engine
 Validates organizational departments, graph topology, state manager metrics, and escalation paths.
 """
+
 from app.runtime.organization.department import CANONICAL_DEPARTMENTS
 from app.runtime.organization.organization_graph import OrganizationGraphBuilder
 from app.runtime.organization.organizational_state import OrganizationalStateManager
@@ -26,7 +27,7 @@ def test_canonical_departments_integrity():
 
 def test_organization_graph_structure():
     graph = OrganizationGraphBuilder.get_organization_graph()
-    
+
     assert graph["total_departments"] == 8
     assert graph["total_active_agents"] >= 20
     assert len(graph["nodes"]) == 8
@@ -36,7 +37,7 @@ def test_organization_graph_structure():
 
 def test_organizational_state_manager():
     mgr = OrganizationalStateManager()
-    
+
     kpis = mgr.get_organizational_kpis()
     assert kpis["organization_health_index"] >= 95.0
     assert kpis["total_active_agents"] >= 20

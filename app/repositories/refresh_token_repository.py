@@ -50,9 +50,7 @@ class RefreshTokenRepository(BaseRepository[RefreshToken]):
         now = datetime.now(timezone.utc)
         result = await self.db.execute(
             select(RefreshToken).where(
-                RefreshToken.token_hash == token_hash,
-                RefreshToken.revoked == False,
-                RefreshToken.expires_at > now
+                RefreshToken.token_hash == token_hash, RefreshToken.revoked == False, RefreshToken.expires_at > now
             )
         )
         return result.scalar_one_or_none()

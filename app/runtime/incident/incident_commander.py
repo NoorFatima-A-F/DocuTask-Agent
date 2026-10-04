@@ -60,10 +60,30 @@ class IncidentCommander:
             mitigation_action="Auto-switched extraction traffic to Gemini Flash Lite with exponential jitter backoff.",
             impact_assessment="14 tasks delayed by 420ms; zero data loss; 100% invariant math verified.",
             timeline=[
-                IncidentTimelineEntry("2026-09-10T16:05:00Z", "DETECTED", "HTTP 429 spike detected in Extraction Department.", "WorkerMonitor"),
-                IncidentTimelineEntry("2026-09-10T16:05:02Z", "TRIAGING", "Incident Commander assigned; war room #incident-war-room opened.", "IncidentCommander"),
-                IncidentTimelineEntry("2026-09-10T16:05:05Z", "MITIGATING", "Traffic routed to Flash Lite fallback pool; prompt compression applied.", "Lead Extraction Specialist"),
-                IncidentTimelineEntry("2026-09-10T16:05:12Z", "RESOLVED", "Quota recovered; nominal queue latency restored.", "IncidentCommander"),
+                IncidentTimelineEntry(
+                    "2026-09-10T16:05:00Z",
+                    "DETECTED",
+                    "HTTP 429 spike detected in Extraction Department.",
+                    "WorkerMonitor",
+                ),
+                IncidentTimelineEntry(
+                    "2026-09-10T16:05:02Z",
+                    "TRIAGING",
+                    "Incident Commander assigned; war room #incident-war-room opened.",
+                    "IncidentCommander",
+                ),
+                IncidentTimelineEntry(
+                    "2026-09-10T16:05:05Z",
+                    "MITIGATING",
+                    "Traffic routed to Flash Lite fallback pool; prompt compression applied.",
+                    "Lead Extraction Specialist",
+                ),
+                IncidentTimelineEntry(
+                    "2026-09-10T16:05:12Z",
+                    "RESOLVED",
+                    "Quota recovered; nominal queue latency restored.",
+                    "IncidentCommander",
+                ),
             ],
             resolved_at=time.time() - 300.0,
         )
@@ -78,7 +98,7 @@ class IncidentCommander:
     ) -> EnterpriseIncident:
         inc_id = f"inc_{uuid.uuid4().hex[:6]}"
         now_str = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-        
+
         inc = EnterpriseIncident(
             incident_id=inc_id,
             title=title,
@@ -97,7 +117,9 @@ class IncidentCommander:
         self.incidents[inc_id] = inc
         return inc
 
-    def resolve_incident(self, incident_id: str, final_root_cause: str, mitigation_applied: str) -> Optional[EnterpriseIncident]:
+    def resolve_incident(
+        self, incident_id: str, final_root_cause: str, mitigation_applied: str
+    ) -> Optional[EnterpriseIncident]:
         if incident_id not in self.incidents:
             return None
         inc = self.incidents[incident_id]
@@ -106,7 +128,9 @@ class IncidentCommander:
         inc.mitigation_action = mitigation_applied
         inc.resolved_at = time.time()
         now_str = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-        inc.timeline.append(IncidentTimelineEntry(now_str, "RESOLVED", f"Resolved: {mitigation_applied}", "IncidentCommander"))
+        inc.timeline.append(
+            IncidentTimelineEntry(now_str, "RESOLVED", f"Resolved: {mitigation_applied}", "IncidentCommander")
+        )
         return inc
 
     def list_incidents(self) -> List[Dict[str, Any]]:

@@ -23,7 +23,9 @@ class OrganizationalLearningSynthesizer:
         ]
 
         # Cumulative learning impact
-        total_accuracy_gain_pct = round(sum(item["accuracy_delta"] for dept_items in all_kn.values() for item in dept_items) * 100, 2)
+        total_accuracy_gain_pct = round(
+            sum(item["accuracy_delta"] for dept_items in all_kn.values() for item in dept_items) * 100, 2
+        )
 
         return {
             "total_versioned_knowledge_rules": total_rules,

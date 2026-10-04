@@ -18,6 +18,7 @@ from app.infrastructure.observability.telemetry.context import mask_sensitive_da
 
 class LogLevel(str, enum.Enum):
     """Eight enterprise log severity classifications."""
+
     TRACE = "TRACE"
     DEBUG = "DEBUG"
     INFO = "INFO"
@@ -30,6 +31,7 @@ class LogLevel(str, enum.Enum):
 
 class LogRecord(BaseModel):
     """Structured JSON log record capturing ambient context and exceptions."""
+
     log_id: str = Field(default_factory=lambda: f"log-{uuid.uuid4().hex[:12]}")
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     level: LogLevel = LogLevel.INFO

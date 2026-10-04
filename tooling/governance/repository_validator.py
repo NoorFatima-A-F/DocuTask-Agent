@@ -2,10 +2,12 @@
 Enterprise Repository Topology & Architecture Governance Validator.
 Enforces Clean Architecture dependency invariants, metadata integrity, and CODEOWNERS completeness.
 """
+
 import json
 import sys
 from pathlib import Path
 from typing import List, Tuple
+
 
 class RepositoryTopologyValidator:
     def __init__(self, repo_root: Path):
@@ -22,7 +24,14 @@ class RepositoryTopologyValidator:
             return False
         try:
             data = json.loads(meta_file.read_text(encoding="utf-8"))
-            required_keys = ["repository_name", "platform_name", "repository_version", "architecture_version", "bounded_contexts", "topology_roots"]
+            required_keys = [
+                "repository_name",
+                "platform_name",
+                "repository_version",
+                "architecture_version",
+                "bounded_contexts",
+                "topology_roots",
+            ]
             for k in required_keys:
                 if k not in data:
                     self.errors.append(f"repo_metadata.json is missing required field: '{k}'")
@@ -53,7 +62,9 @@ class RepositoryTopologyValidator:
             for py_file in sk_path.glob("**/*.py"):
                 text = py_file.read_text(encoding="utf-8")
                 if "app.platform_verification" in text or "app.infrastructure" in text or "app.interfaces" in text:
-                    self.errors.append(f"Shared Kernel layer violation in {py_file.name}: cannot depend on upper layers.")
+                    self.errors.append(
+                        f"Shared Kernel layer violation in {py_file.name}: cannot depend on upper layers."
+                    )
 
         # Scan app/platform_verification
         pv_path = self.repo_root / "app" / "platform_verification"
@@ -65,7 +76,19 @@ class RepositoryTopologyValidator:
         return len(self.errors) == 0
 
     def validate_topology_roots(self) -> bool:
-        required_roots = ["app", "cli", "config", "datasets", "docs", "evals", "infra", "migrations", "scripts", "tests", "tooling"]
+        required_roots = [
+            "app",
+            "cli",
+            "config",
+            "datasets",
+            "docs",
+            "evals",
+            "infra",
+            "migrations",
+            "scripts",
+            "tests",
+            "tooling",
+        ]
         for r in required_roots:
             p = self.repo_root / r
             if not p.exists():

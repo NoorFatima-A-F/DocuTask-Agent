@@ -58,13 +58,21 @@ class AnalyticsApiService:
 analytics_api_service = AnalyticsApiService()
 
 
-def handle_get_analytics_summary(ctx: APIRequestContext, query_params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def handle_get_analytics_summary(
+    ctx: APIRequestContext, query_params: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
     return analytics_api_service.get_summary(ctx)
 
 
 def handle_get_risk_overview(ctx: APIRequestContext, query_params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-    return analytics_api_service.get_overview_risk(ctx) if hasattr(analytics_api_service, "get_overview_risk") else analytics_api_service.get_risk_overview(ctx)
+    return (
+        analytics_api_service.get_overview_risk(ctx)
+        if hasattr(analytics_api_service, "get_overview_risk")
+        else analytics_api_service.get_risk_overview(ctx)
+    )
 
 
-def handle_get_compliance_status(ctx: APIRequestContext, query_params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def handle_get_compliance_status(
+    ctx: APIRequestContext, query_params: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
     return analytics_api_service.get_compliance_status(ctx)

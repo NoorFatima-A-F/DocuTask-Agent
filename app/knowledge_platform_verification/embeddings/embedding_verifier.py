@@ -141,7 +141,7 @@ class EmbeddingVerifier:
             "assertion": AssertionResult(
                 name="INT8_Scalar_Quantization_Compression_Quality",
                 passed=passed,
-                message=f"INT8 vector quantization achieved 4x memory reduction with minimal cosine loss ({cosine_loss*100:.2f}% < 1.0%).",
+                message=f"INT8 vector quantization achieved 4x memory reduction with minimal cosine loss ({cosine_loss * 100:.2f}% < 1.0%).",
                 execution_time_ms=t_elapsed,
                 details={"cosine_loss": cosine_loss, "compression_ratio": "4x"},
             ),

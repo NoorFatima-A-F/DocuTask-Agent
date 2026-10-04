@@ -16,9 +16,9 @@ class VerificationStatus(str, Enum):
 
 
 class CertificationTier(str, Enum):
-    ENTERPRISE_PERFORMANCE_CERTIFIED = "Enterprise Performance Certified"          # >= 95.0%
-    ENTERPRISE_PERFORMANCE_VERIFIED = "Enterprise Performance Verified"            # 80.0 - 94.99%
-    CERTIFICATION_FAILED = "Certification Failed"                                  # < 80.0%
+    ENTERPRISE_PERFORMANCE_CERTIFIED = "Enterprise Performance Certified"  # >= 95.0%
+    ENTERPRISE_PERFORMANCE_VERIFIED = "Enterprise Performance Verified"  # 80.0 - 94.99%
+    CERTIFICATION_FAILED = "Certification Failed"  # < 80.0%
 
 
 class CapacityZone(str, Enum):
@@ -48,6 +48,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3J.2.1: Performance Environment Models ───────────────────────────────────
 
+
 class ServiceIsolationSpec(BaseModel):
     service_name: str
     role: str
@@ -68,6 +69,7 @@ PerformanceEnvironmentReport = EnvironmentIsolationReport
 
 
 # ─── 3J.2.2: Baseline Stress Models ───────────────────────────────────────────
+
 
 class EndpointStressBaseline(BaseModel):
     endpoint: str
@@ -96,6 +98,7 @@ class BaselineStressReport(BaseVerificationReport):
 
 # ─── 3J.2.3: Progressive Load Models ──────────────────────────────────────────
 
+
 class ProgressiveStageResult(BaseModel):
     stage_number: int
     concurrent_users: int
@@ -118,6 +121,7 @@ class ProgressiveLoadReport(BaseVerificationReport):
 
 # ─── 3J.2.4 & 6: Overload Stress & Queue Saturation Models ─────────────────────
 
+
 class StressVolumeTier(BaseModel):
     document_volume: int
     queue_peak_depth: int
@@ -138,6 +142,7 @@ class OverloadStressReport(BaseVerificationReport):
 
 # ─── 3J.2.5: Capacity Boundary Models ─────────────────────────────────────────
 
+
 class BoundaryZoneSpec(BaseModel):
     zone: CapacityZone
     workload_throughput_dph: str
@@ -156,6 +161,7 @@ class CapacityBoundaryReport(BaseVerificationReport):
 
 # ─── 3J.2.7: Worker Scaling Models ────────────────────────────────────────────
 
+
 class WorkerScalingBenchmark(BaseModel):
     worker_count: int
     throughput_docs_per_hour: int
@@ -172,6 +178,7 @@ class WorkerScalingReport(BaseVerificationReport):
 
 # ─── 3J.2.8: Database Performance Models ──────────────────────────────────────
 
+
 class DatabasePerformanceReport(BaseVerificationReport):
     report_title: str = "Database Performance Stress Verification Report"
     max_connections_tested: int = 1000
@@ -182,6 +189,7 @@ class DatabasePerformanceReport(BaseVerificationReport):
 
 # ─── 3J.2.9 & 12: AI Provider Stress Models ───────────────────────────────────
 
+
 class AIProviderStressReport(BaseVerificationReport):
     report_title: str = "AI Provider Stress & Telemetry Verification Report"
     burst_requests: int = 1000
@@ -191,6 +199,7 @@ class AIProviderStressReport(BaseVerificationReport):
 
 
 # ─── 3J.2.10: Memory Stability Models ─────────────────────────────────────────
+
 
 class MemorySoakSample(BaseModel):
     elapsed_hours: int
@@ -210,6 +219,7 @@ class MemoryStabilityReport(BaseVerificationReport):
 
 
 # ─── 3J.2.11: Performance Recovery Models ─────────────────────────────────────
+
 
 class RecoveryStepMetric(BaseModel):
     step_name: str
@@ -233,6 +243,7 @@ PerformanceRecoveryReport = RecoveryReport
 
 # ─── 3J.2.13: Performance Regression Gate Models ──────────────────────────────
 
+
 class RegressionGateCheck(BaseModel):
     metric_name: str
     previous_value: str
@@ -255,6 +266,7 @@ PerformanceRegressionReport = RegressionReport
 
 
 # ─── 3J.2.14 & 15: 6-Category Scoring & Certification Models ──────────────────
+
 
 class CategoryScore(BaseModel):
     category: str

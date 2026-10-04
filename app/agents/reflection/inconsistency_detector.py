@@ -19,25 +19,29 @@ class InconsistencyDetector:
         total_tasks = len(trace.tasks)
         failed_tasks = sum(1 for t in trace.tasks if t.status == "FAILED")
         if total_tasks > 0 and failed_tasks == total_tasks and trace.final_state == "COMPLETED":
-            findings.append(CritiqueFinding(
-                category="INCONSISTENCY",
-                severity="HIGH",
-                description="State contradiction: execution marked COMPLETED despite 100% task failure.",
-                evidence=[f"Failed tasks: {failed_tasks}/{total_tasks}", f"State: {trace.final_state}"],
-                suggested_correction="Harmonize execution state transitions with task outcome rollups."
-            ))
+            findings.append(
+                CritiqueFinding(
+                    category="INCONSISTENCY",
+                    severity="HIGH",
+                    description="State contradiction: execution marked COMPLETED despite 100% task failure.",
+                    evidence=[f"Failed tasks: {failed_tasks}/{total_tasks}", f"State: {trace.final_state}"],
+                    suggested_correction="Harmonize execution state transitions with task outcome rollups.",
+                )
+            )
 
         # Check for conflicting conclusions in reasoning steps
         conclusions = [s.conclusion.lower().strip() for s in trace.reasoning_steps]
         for i, c1 in enumerate(conclusions):
             for j, c2 in enumerate(conclusions):
                 if i < j and (("not " + c1) == c2 or ("not " + c2) == c1):
-                    findings.append(CritiqueFinding(
-                        category="INCONSISTENCY",
-                        severity="HIGH",
-                        description=f"Direct logical contradiction between reasoning steps {i} and {j}.",
-                        evidence=[f"Step {i}: {c1}", f"Step {j}: {c2}"],
-                        suggested_correction="Reconcile divergent reasoning branches before finalizing inferences."
-                    ))
+                    findings.append(
+                        CritiqueFinding(
+                            category="INCONSISTENCY",
+                            severity="HIGH",
+                            description=f"Direct logical contradiction between reasoning steps {i} and {j}.",
+                            evidence=[f"Step {i}: {c1}", f"Step {j}: {c2}"],
+                            suggested_correction="Reconcile divergent reasoning branches before finalizing inferences.",
+                        )
+                    )
 
         return findings

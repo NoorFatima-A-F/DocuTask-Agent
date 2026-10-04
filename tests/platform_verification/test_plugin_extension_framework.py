@@ -2,6 +2,7 @@
 Comprehensive Unit & Integration Test Suite for Part 1.1F:
 Enterprise Verification Extension Framework, Interfaces & Plugin Architecture (EV-EFIPA).
 """
+
 import pytest
 from app.platform_verification.extension_framework.domain.models import (
     PluginMetadata,
@@ -23,7 +24,9 @@ from app.platform_verification.extension_framework.tooling.validator import plug
 from app.platform_verification.extension_framework.tooling.docs_generator import plugin_doc_generator
 from app.platform_verification.extension_framework.plugins.ocr_plugin import OCRVerificationPlugin
 from app.platform_verification.extension_framework.plugins.ai_extraction_plugin import AIExtractionEvaluationPlugin
-from app.platform_verification.extension_framework.runtime.extension_framework_runtime import extension_framework_runtime
+from app.platform_verification.extension_framework.runtime.extension_framework_runtime import (
+    extension_framework_runtime,
+)
 
 
 def test_plugin_metadata_and_capabilities():
@@ -110,17 +113,13 @@ def test_plugin_lifecycle_10_state_machine():
 def test_plugin_security_permissions_enforcement():
     # 1. Authorized context
     auth_ctx = PluginSecurityContext(
-        caller_identity="TestRunner",
-        permissions=[PluginPermission.READ_DATASET, PluginPermission.WRITE_EVIDENCE]
+        caller_identity="TestRunner", permissions=[PluginPermission.READ_DATASET, PluginPermission.WRITE_EVIDENCE]
     )
     is_auth, msg = plugin_security_manager.validate_permissions(PluginPermission.READ_DATASET, auth_ctx)
     assert is_auth is True
 
     # 2. Denied context
-    unauth_ctx = PluginSecurityContext(
-        caller_identity="UntrustedGuest",
-        permissions=[PluginPermission.EXECUTE_CODE]
-    )
+    unauth_ctx = PluginSecurityContext(caller_identity="UntrustedGuest", permissions=[PluginPermission.EXECUTE_CODE])
     is_auth, msg = plugin_security_manager.validate_permissions(PluginPermission.READ_DATASET, unauth_ctx)
     assert is_auth is False
     assert "Missing required permission" in msg
@@ -129,9 +128,7 @@ def test_plugin_security_permissions_enforcement():
 def test_plugin_execution_adapter_sandboxing():
     # Setup runtime with registered plugin
     res = extension_framework_runtime.execute_verification_plugin(
-        plugin_id="ocr_verification_plugin",
-        verification_id="ver_run_1001",
-        dataset_ref={"name": "invoice_ocr_v1"}
+        plugin_id="ocr_verification_plugin", verification_id="ver_run_1001", dataset_ref={"name": "invoice_ocr_v1"}
     )
     assert res.is_success is True
     assert res.plugin_id == "ocr_verification_plugin"
@@ -165,8 +162,8 @@ def test_plugin_dependency_validation():
         description="Plugin with strict dependencies",
         dependencies=[
             PluginDependencyDeclaration(name="ocr_verification_plugin", min_version="1.5.0"),
-            PluginDependencyDeclaration(name="non_existent_plugin", min_version="1.0.0", is_optional=False)
-        ]
+            PluginDependencyDeclaration(name="non_existent_plugin", min_version="1.0.0", is_optional=False),
+        ],
     )
 
     available = {"ocr_verification_plugin": "2.0.0"}
@@ -180,9 +177,9 @@ def test_plugin_configuration_engine():
         "properties": {
             "timeout_seconds": {"type": "integer", "default": 60},
             "strict_mode": {"type": "boolean", "default": True},
-            "api_key": {"type": "string"}
+            "api_key": {"type": "string"},
         },
-        "required": ["api_key"]
+        "required": ["api_key"],
     }
 
     # 1. Valid with defaults applied
@@ -205,7 +202,7 @@ def test_plugin_scaffolding_and_docs_generation():
         plugin_name="ChaosInjection",
         plugin_id="chaos_injection_plugin",
         author="SRE Squad",
-        capabilities=["latency_spike", "process_crash"]
+        capabilities=["latency_spike", "process_crash"],
     )
     assert "plugin.py" in scaffold
     assert "metadata.yaml" in scaffold
@@ -222,24 +219,21 @@ def test_plugin_scaffolding_and_docs_generation():
 def test_core_reference_plugins_end_to_end():
     # 1. AI Extraction
     res_ai = extension_framework_runtime.execute_verification_plugin(
-        plugin_id="ai_extraction_eval_plugin",
-        verification_id="ver_run_ai_101"
+        plugin_id="ai_extraction_eval_plugin", verification_id="ver_run_ai_101"
     )
     assert res_ai.is_success is True
     assert any(m["metric"] == "extraction_precision" for m in res_ai.metrics)
 
     # 2. RAG Evaluation
     res_rag = extension_framework_runtime.execute_verification_plugin(
-        plugin_id="rag_evaluation_plugin",
-        verification_id="ver_run_rag_202"
+        plugin_id="rag_evaluation_plugin", verification_id="ver_run_rag_202"
     )
     assert res_rag.is_success is True
     assert any(m["metric"] == "faithfulness" for m in res_rag.metrics)
 
     # 3. Prompt Injection Security
     res_sec = extension_framework_runtime.execute_verification_plugin(
-        plugin_id="prompt_injection_security_plugin",
-        verification_id="ver_run_sec_303"
+        plugin_id="prompt_injection_security_plugin", verification_id="ver_run_sec_303"
     )
     assert res_sec.is_success is True
     assert any(m["metric"] == "adversarial_robustness" for m in res_sec.metrics)

@@ -1,12 +1,14 @@
 """
 Phase 13.22 - Enterprise Cognitive Intelligence & Autonomous Organizational Learning Platform (ECIAOLP) Schemas
 """
+
 from __future__ import annotations
 from enum import Enum
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 import uuid
+
 
 class ReasoningNodeType(str, Enum):
     AGENT = "AGENT"
@@ -21,6 +23,7 @@ class ReasoningNodeType(str, Enum):
     DECISION = "DECISION"
     HYPOTHESIS = "HYPOTHESIS"
 
+
 class ReasoningRelationType(str, Enum):
     CAUSED_BY = "caused_by"
     INFLUENCES = "influences"
@@ -32,6 +35,7 @@ class ReasoningRelationType(str, Enum):
     VALIDATES = "validates"
     PREDICTS = "predicts"
 
+
 class CognitiveNode(BaseModel):
     id: str = Field(default_factory=lambda: f"cnode-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -42,6 +46,7 @@ class CognitiveNode(BaseModel):
     confidence: float = 1.0
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class CognitiveEdge(BaseModel):
     id: str = Field(default_factory=lambda: f"cedge-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -51,6 +56,7 @@ class CognitiveEdge(BaseModel):
     weight: float = 1.0
     evidence: str = ""
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class ExperienceMemoryEntry(BaseModel):
     id: str = Field(default_factory=lambda: f"exp-{uuid.uuid4().hex[:8]}")
@@ -64,6 +70,7 @@ class ExperienceMemoryEntry(BaseModel):
     reuse_count: int = 0
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class DiscoveredProcess(BaseModel):
     id: str = Field(default_factory=lambda: f"proc-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -74,6 +81,7 @@ class DiscoveredProcess(BaseModel):
     bottlenecks: List[str] = Field(default_factory=list)
     automation_opportunity_score: float = 0.85
     discovered_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class DecisionRecord(BaseModel):
     id: str = Field(default_factory=lambda: f"dec-{uuid.uuid4().hex[:8]}")
@@ -90,6 +98,7 @@ class DecisionRecord(BaseModel):
     decided_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     resolved_at: Optional[datetime] = None
 
+
 class Hypothesis(BaseModel):
     id: str = Field(default_factory=lambda: f"hyp-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -101,6 +110,7 @@ class Hypothesis(BaseModel):
     status: str = "PROPOSED"  # "PROPOSED", "VALIDATED", "DISPROVED", "EXECUTED"
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class SimulationScenario(BaseModel):
     id: str = Field(default_factory=lambda: f"sim-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -111,6 +121,7 @@ class SimulationScenario(BaseModel):
     projected_roi_factor: float = 2.4
     risk_assessment: str = "LOW"
 
+
 class OptimizationOpportunity(BaseModel):
     id: str = Field(default_factory=lambda: f"opt-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -119,6 +130,7 @@ class OptimizationOpportunity(BaseModel):
     recommended_change: str
     projected_savings_monthly_usd: float = 1250.0
     status: str = "READY_TO_APPLY"
+
 
 class GoalAlignmentNode(BaseModel):
     id: str = Field(default_factory=lambda: f"goal-{uuid.uuid4().hex[:8]}")
@@ -130,6 +142,7 @@ class GoalAlignmentNode(BaseModel):
     current_progress_pct: float = 82.5
     alignment_health: str = "HEALTHY"
 
+
 class StrategicRecommendation(BaseModel):
     id: str = Field(default_factory=lambda: f"rec-{uuid.uuid4().hex[:8]}")
     tenant_id: str = "default-tenant"
@@ -139,6 +152,7 @@ class StrategicRecommendation(BaseModel):
     urgency: str = "HIGH"
     projected_business_impact: str
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 class ExecutiveInsightReport(BaseModel):
     tenant_id: str

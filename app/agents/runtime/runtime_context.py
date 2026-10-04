@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class RuntimeContext(BaseModel):
     """Contextual metadata propagated across platform layers and distributed workers."""
+
     tenant_id: str = Field(default="default")
     workspace_id: str = Field(default="default-workspace")
     runtime_id: str = Field(default_factory=lambda: str(uuid4()))

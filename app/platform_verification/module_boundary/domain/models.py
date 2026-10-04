@@ -1,6 +1,7 @@
 """
 Domain models for Module Boundary & Plugin Architecture Verification (PART 2D).
 """
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -37,15 +38,16 @@ class BoundaryViolationSeverity(str, Enum):
 
 class ModularityCertificationBand(str, Enum):
     ENTERPRISE_PLATFORM_MODULAR = "ENTERPRISE_PLATFORM_MODULAR"  # 95-100
-    PRODUCTION_MODULAR = "PRODUCTION_MODULAR"                    # 90-94
-    ACCEPTABLE_MODULARITY = "ACCEPTABLE_MODULARITY"              # 80-89
-    MONOLITHIC_COUPLING_RISK = "MONOLITHIC_COUPLING_RISK"        # 70-79
-    FAILED = "FAILED"                                            # < 70
+    PRODUCTION_MODULAR = "PRODUCTION_MODULAR"  # 90-94
+    ACCEPTABLE_MODULARITY = "ACCEPTABLE_MODULARITY"  # 80-89
+    MONOLITHIC_COUPLING_RISK = "MONOLITHIC_COUPLING_RISK"  # 70-79
+    FAILED = "FAILED"  # < 70
 
 
 @dataclass
 class ModuleManifest:
     """Explicit declaration of module identity, boundaries, and ownership."""
+
     module_name: str
     version: str
     module_type: ModuleType
@@ -63,6 +65,7 @@ class ModuleManifest:
 @dataclass
 class ModuleDependencyEdge:
     """Directed dependency between two modules."""
+
     source_module: str
     target_module: str
     is_allowed: bool = True
@@ -73,6 +76,7 @@ class ModuleDependencyEdge:
 @dataclass
 class ModuleBoundaryViolation:
     """Detected boundary violation between modules or from plugin to core."""
+
     violation_id: str
     source_module: str
     target_module: str
@@ -86,6 +90,7 @@ class ModuleBoundaryViolation:
 @dataclass
 class PluginContractReport:
     """Verification result for a plugin's contract and lifecycle compliance."""
+
     plugin_id: str
     plugin_name: str
     version: str
@@ -104,11 +109,12 @@ class PluginContractReport:
 @dataclass
 class ModuleQualityMetrics:
     """Modularity quality indices for a module."""
+
     module_name: str
-    coupling_score: float      # Lower is better (0 to 100)
-    cohesion_score: float      # Higher is better (0 to 100)
+    coupling_score: float  # Lower is better (0 to 100)
+    cohesion_score: float  # Higher is better (0 to 100)
     independence_score: float  # Higher is better (0 to 100)
-    extension_score: float     # Higher is better (0 to 100)
+    extension_score: float  # Higher is better (0 to 100)
     composite_modularity_index: float  # 0 to 100
     risk_level: str = "LOW"
 
@@ -116,6 +122,7 @@ class ModuleQualityMetrics:
 @dataclass
 class ModuleArchitectureEvidencePackage:
     """Comprehensive sealed evidence package for module boundary verification."""
+
     scan_id: str
     repository_name: str = "DocuTask-Agent"
     commit_sha: str = "HEAD"

@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 class TaskTrace(BaseModel):
     """Execution trace of an individual task node in the plan."""
+
     task_id: str
     task_name: str
     status: str = Field(default="COMPLETED")  # COMPLETED, FAILED, CANCELLED, TIMED_OUT
@@ -29,6 +30,7 @@ class TaskTrace(BaseModel):
 
 class ToolCallTrace(BaseModel):
     """Detailed trace of an external tool invocation."""
+
     call_id: UUID = Field(default_factory=uuid4)
     tool_name: str
     action: str = Field(default="execute")
@@ -44,6 +46,7 @@ class ToolCallTrace(BaseModel):
 
 class ReasoningStepTrace(BaseModel):
     """Cognitive reasoning and inference trace from planner or decision engine."""
+
     step_id: str
     rationale: str
     hypotheses: List[str] = Field(default_factory=list)
@@ -57,6 +60,7 @@ class ReasoningStepTrace(BaseModel):
 
 class DecisionTrace(BaseModel):
     """Trace of policy evaluation or operational decision."""
+
     decision_id: str
     policy_name: str
     outcome: str = Field(default="ALLOWED")
@@ -69,6 +73,7 @@ class DecisionTrace(BaseModel):
 
 class ExecutionTraceEnvelope(BaseModel):
     """Complete, immutable envelope capturing all trace details of a finished execution."""
+
     execution_id: UUID
     plan_id: Optional[UUID] = None
     goal: str = Field(default="")

@@ -2,8 +2,10 @@
 Enterprise Multi-Tier Memory System
 Short-Term (working), Long-Term (episodic), Organizational (company-wide), and Procedural (SOPs).
 """
+
 from typing import Dict, List, Optional
 from ..models.schemas import MemoryEntry, MemoryTier
+
 
 class EnterpriseMemorySystem:
     def __init__(self):
@@ -17,7 +19,7 @@ class EnterpriseMemorySystem:
         tier: MemoryTier = MemoryTier.SHORT_TERM,
         agent_id: Optional[str] = None,
         importance_score: float = 1.0,
-        metadata: Optional[Dict] = None
+        metadata: Optional[Dict] = None,
     ) -> MemoryEntry:
         mem = MemoryEntry(
             tenant_id=tenant_id,
@@ -26,7 +28,7 @@ class EnterpriseMemorySystem:
             tier=tier,
             agent_id=agent_id,
             importance_score=importance_score,
-            metadata=metadata or {}
+            metadata=metadata or {},
         )
         self._memories[mem.id] = mem
         return mem
@@ -37,23 +39,23 @@ class EnterpriseMemorySystem:
         query: str,
         tier: Optional[MemoryTier] = None,
         agent_id: Optional[str] = None,
-        limit: int = 5
+        limit: int = 5,
     ) -> List[MemoryEntry]:
         results = [m for m in self._memories.values() if m.tenant_id == tenant_id]
         if tier:
             results = [m for m in results if m.tier == tier]
         if agent_id:
             results = [m for m in results if m.agent_id == agent_id]
-            
+
         # Keyword relevance ranking
         query_words = set(query.lower().split())
         scored = []
         for m in results:
             content_words = set(f"{m.key} {m.content}".lower().split())
             overlap = len(query_words.intersection(content_words))
-            score = (overlap * 2.0 + m.importance_score)
+            score = overlap * 2.0 + m.importance_score
             scored.append((score, m))
-            
+
         scored.sort(key=lambda x: x[0], reverse=True)
         return [item[1] for item in scored[:limit]]
 

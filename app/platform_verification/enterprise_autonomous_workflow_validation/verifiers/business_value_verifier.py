@@ -25,11 +25,36 @@ class BusinessValueVerifier(IBusinessValueVerifier):
 
     def verify(self) -> BusinessValueReport:
         values = [
-            ValueRealizationSpec(metric_name="AccountsPayableLaborSavings", annual_impact_usd=420000.0, hours_saved_annual=14000.0, roi_multiple=4.5),
-            ValueRealizationSpec(metric_name="LegalContractReviewAcceleration", annual_impact_usd=350000.0, hours_saved_annual=8500.0, roi_multiple=3.8),
-            ValueRealizationSpec(metric_name="HealthcarePriorAuthEfficiency", annual_impact_usd=580000.0, hours_saved_annual=19000.0, roi_multiple=5.2),
-            ValueRealizationSpec(metric_name="CustomerSupportResolutionSpeed", annual_impact_usd=280000.0, hours_saved_annual=11000.0, roi_multiple=3.2),
-            ValueRealizationSpec(metric_name="RegulatoryComplianceErrorAvoidance", annual_impact_usd=650000.0, hours_saved_annual=5000.0, roi_multiple=6.1),
+            ValueRealizationSpec(
+                metric_name="AccountsPayableLaborSavings",
+                annual_impact_usd=420000.0,
+                hours_saved_annual=14000.0,
+                roi_multiple=4.5,
+            ),
+            ValueRealizationSpec(
+                metric_name="LegalContractReviewAcceleration",
+                annual_impact_usd=350000.0,
+                hours_saved_annual=8500.0,
+                roi_multiple=3.8,
+            ),
+            ValueRealizationSpec(
+                metric_name="HealthcarePriorAuthEfficiency",
+                annual_impact_usd=580000.0,
+                hours_saved_annual=19000.0,
+                roi_multiple=5.2,
+            ),
+            ValueRealizationSpec(
+                metric_name="CustomerSupportResolutionSpeed",
+                annual_impact_usd=280000.0,
+                hours_saved_annual=11000.0,
+                roi_multiple=3.2,
+            ),
+            ValueRealizationSpec(
+                metric_name="RegulatoryComplianceErrorAvoidance",
+                annual_impact_usd=650000.0,
+                hours_saved_annual=5000.0,
+                roi_multiple=6.1,
+            ),
         ]
 
         total_annual_impact = sum(v.annual_impact_usd for v in values)

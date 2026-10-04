@@ -1,6 +1,7 @@
 """
 ORM and Repository Boundary Verifier for Enterprise Database Verification.
 """
+
 import ast
 from pathlib import Path
 from typing import List
@@ -15,7 +16,14 @@ from app.platform_verification.database_verification.domain.interfaces import ID
 class OrmBoundaryVerifier(IDatabaseBoundaryVerifier):
     """Verifies that ORM models and Repositories respect architectural boundaries."""
 
-    FORBIDDEN_MODEL_CALLS = {"call_gemini", "generate_content", "process_ocr", "send_notification", "http_post", "requests.post"}
+    FORBIDDEN_MODEL_CALLS = {
+        "call_gemini",
+        "generate_content",
+        "process_ocr",
+        "send_notification",
+        "http_post",
+        "requests.post",
+    }
 
     def verify_boundaries(self, source_paths: List[str]) -> DatabaseBoundaryReport:
         violations: List[DatabaseBoundaryViolation] = []
@@ -26,14 +34,14 @@ class OrmBoundaryVerifier(IDatabaseBoundaryVerifier):
             path = Path(path_str)
             if not path.exists():
                 continue
-            
+
             for file_path in path.glob("**/*.py"):
                 if "__pycache__" in str(file_path):
                     continue
                 try:
                     with open(file_path, "r", encoding="utf-8") as f:
                         tree = ast.parse(f.read(), filename=str(file_path))
-                    
+
                     is_model_file = "models" in str(file_path) or "entities" in str(file_path)
                     is_repo_file = "repositories" in str(file_path)
                     is_service_file = "services" in str(file_path)

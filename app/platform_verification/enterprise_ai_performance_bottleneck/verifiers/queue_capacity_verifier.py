@@ -46,7 +46,7 @@ class QueueCapacityVerifier(IQueueCapacityVerifier):
             CheckResult(
                 name="Queue Drain Time Under 5 Minutes (<300s)",
                 passed=drain_time < 300.0,
-                details=f"10,000 job backlog drained completely in {drain_time:.1f}s ({drain_time/60:.1f} minutes)",
+                details=f"10,000 job backlog drained completely in {drain_time:.1f}s ({drain_time / 60:.1f} minutes)",
                 metrics={"drain_time_sec": drain_time, "sla_target_sec": 300.0},
             ),
             CheckResult(

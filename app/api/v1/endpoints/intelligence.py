@@ -122,10 +122,30 @@ def _seed_initial_intelligence_data():
     _kg.add_node(n_evidence)
     _kg.add_node(n_outcome)
 
-    _kg.add_edge(GraphEdge(edge_id="e1", source_id="msn_1001", target_id="ent_invoice", relationship="PROCESSES_ENTITY"))
-    _kg.add_edge(GraphEdge(edge_id="e2", source_id="msn_1001", target_id="strat_invoice_fast", relationship="APPLIES_STRATEGY"))
-    _kg.add_edge(GraphEdge(edge_id="e3", source_id="msn_1001", target_id="ev_root_001", relationship="SUPPORTED_BY_EVIDENCE", evidence_hash="0x0001abcdef"))
-    _kg.add_edge(GraphEdge(edge_id="e4", source_id="ev_root_001", target_id="out_success_001", relationship="PRODUCED_OUTCOME", evidence_hash="0x0001abcdef"))
+    _kg.add_edge(
+        GraphEdge(edge_id="e1", source_id="msn_1001", target_id="ent_invoice", relationship="PROCESSES_ENTITY")
+    )
+    _kg.add_edge(
+        GraphEdge(edge_id="e2", source_id="msn_1001", target_id="strat_invoice_fast", relationship="APPLIES_STRATEGY")
+    )
+    _kg.add_edge(
+        GraphEdge(
+            edge_id="e3",
+            source_id="msn_1001",
+            target_id="ev_root_001",
+            relationship="SUPPORTED_BY_EVIDENCE",
+            evidence_hash="0x0001abcdef",
+        )
+    )
+    _kg.add_edge(
+        GraphEdge(
+            edge_id="e4",
+            source_id="ev_root_001",
+            target_id="out_success_001",
+            relationship="PRODUCED_OUTCOME",
+            evidence_hash="0x0001abcdef",
+        )
+    )
 
 
 _seed_initial_intelligence_data()
@@ -134,6 +154,7 @@ _seed_initial_intelligence_data()
 # ---------------------------------------------------------------------------
 # Request / Response Schemas
 # ---------------------------------------------------------------------------
+
 
 class ExtractExperienceRequest(BaseModel):
     mission_id: str
@@ -187,6 +208,7 @@ class ContinuousCycleRequest(BaseModel):
 # ---------------------------------------------------------------------------
 # Endpoints
 # ---------------------------------------------------------------------------
+
 
 @router.get("/summary")
 def get_intelligence_summary() -> Dict[str, Any]:

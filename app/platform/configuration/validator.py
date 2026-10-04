@@ -8,6 +8,7 @@ from .schema import ConfigEntrySchema
 
 class ConfigurationValidationError(Exception):
     """Raised when configuration values fail validation rules."""
+
     def __init__(self, message: str, errors: Optional[List[str]] = None):
         super().__init__(message)
         self.errors = errors or []
@@ -27,24 +28,34 @@ class ConfigurationValidator:
                 try:
                     int(value)
                 except (ValueError, TypeError):
-                    raise ConfigurationValidationError(f"Configuration key '{key}' expects int, got {type(value).__name__}")
+                    raise ConfigurationValidationError(
+                        f"Configuration key '{key}' expects int, got {type(value).__name__}"
+                    )
         elif expected_type == "float":
             if not isinstance(value, (int, float)) or isinstance(value, bool):
                 try:
                     float(value)
                 except (ValueError, TypeError):
-                    raise ConfigurationValidationError(f"Configuration key '{key}' expects float, got {type(value).__name__}")
+                    raise ConfigurationValidationError(
+                        f"Configuration key '{key}' expects float, got {type(value).__name__}"
+                    )
         elif expected_type == "bool":
             if not isinstance(value, bool):
                 if isinstance(value, str) and value.lower() in ("true", "false", "1", "0", "yes", "no"):
                     return
-                raise ConfigurationValidationError(f"Configuration key '{key}' expects bool, got {type(value).__name__}")
+                raise ConfigurationValidationError(
+                    f"Configuration key '{key}' expects bool, got {type(value).__name__}"
+                )
         elif expected_type == "list":
             if not isinstance(value, (list, tuple)):
-                raise ConfigurationValidationError(f"Configuration key '{key}' expects list, got {type(value).__name__}")
+                raise ConfigurationValidationError(
+                    f"Configuration key '{key}' expects list, got {type(value).__name__}"
+                )
         elif expected_type == "dict":
             if not isinstance(value, dict):
-                raise ConfigurationValidationError(f"Configuration key '{key}' expects dict, got {type(value).__name__}")
+                raise ConfigurationValidationError(
+                    f"Configuration key '{key}' expects dict, got {type(value).__name__}"
+                )
 
     @classmethod
     def validate_entry(cls, schema: ConfigEntrySchema, value: Any) -> Any:

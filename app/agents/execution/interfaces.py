@@ -14,6 +14,7 @@ from app.agents.execution.lease_manager import WorkerLease
 
 class IExecutionEngine(ABC):
     """Abstract interface for stateful plan execution."""
+
     @abstractmethod
     async def execute(self, request: ExecutionRequest) -> ExecutionResult:
         pass
@@ -21,6 +22,7 @@ class IExecutionEngine(ABC):
 
 class IRuntimeScheduler(ABC):
     """Abstract interface for runtime node scheduling."""
+
     @abstractmethod
     def order_runnable_nodes(self, runnable_node_ids: List[str], graph: ExecutionGraph) -> List[str]:
         pass
@@ -28,6 +30,7 @@ class IRuntimeScheduler(ABC):
 
 class IWorkerPool(ABC):
     """Abstract interface for worker pool concurrency."""
+
     @abstractmethod
     async def acquire_worker(self, node_id: str, capability: Optional[str] = None) -> WorkerLease:
         pass
@@ -39,6 +42,7 @@ class IWorkerPool(ABC):
 
 class ICheckpointManager(ABC):
     """Abstract interface for execution checkpointing."""
+
     @abstractmethod
     def create_checkpoint(
         self,
@@ -46,6 +50,6 @@ class ICheckpointManager(ABC):
         trigger: str,
         node_states: Dict[str, Any],
         outputs: Dict[str, Any],
-        completed_nodes: List[str]
+        completed_nodes: List[str],
     ) -> ExecutionSnapshot:
         pass

@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class PlannerBenchmarkMetric(BaseModel):
     """Evaluation score for a single planner algorithm."""
+
     algorithm_name: str
     composite_utility: float
     critical_path_latency_ms: float
@@ -25,6 +26,7 @@ class PlannerBenchmarkMetric(BaseModel):
 
 class BenchmarkSuiteResult(BaseModel):
     """Comparative benchmarking report across all evaluated planners."""
+
     suite_id: str
     evaluated_algorithms: List[PlannerBenchmarkMetric] = Field(default_factory=list)
     winner_algorithm: str = "ADIP_AAOS_PROBABILISTIC_PLANNER"

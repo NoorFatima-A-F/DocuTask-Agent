@@ -5,6 +5,7 @@ from typing import Dict, List, Optional, Any
 import uuid
 from app.platform_verification.lifecycle.states import LifecycleState
 
+
 @dataclass
 class StageResult:
     stage_name: str
@@ -12,6 +13,7 @@ class StageResult:
     executed_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     produced_artifacts: Dict[str, Any] = field(default_factory=dict)
     details: Dict[str, Any] = field(default_factory=dict)
+
 
 @dataclass
 class VerificationExecutionContext:

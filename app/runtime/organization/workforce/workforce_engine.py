@@ -90,7 +90,9 @@ class WorkforceEngine:
                 role=AgentRole.RESEARCH_AGENT,
                 department_id="dept_research_ai",
                 skills=[
-                    SkillProfile(skill_name="quantization_optimization", proficiency_level=0.97, verified_tasks_count=110),
+                    SkillProfile(
+                        skill_name="quantization_optimization", proficiency_level=0.97, verified_tasks_count=110
+                    ),
                     SkillProfile(skill_name="prompt_distillation", proficiency_level=0.95, verified_tasks_count=130),
                 ],
                 current_workload_percent=50.0,
@@ -195,7 +197,12 @@ class WorkforceEngine:
         org_event_bus.publish(
             AgentAssigned(
                 actor_agent_role=AgentRole.CEO_AGENT,
-                payload={"agent_id": agent.agent_id, "name": agent.name, "role": agent.role, "department": department_id},
+                payload={
+                    "agent_id": agent.agent_id,
+                    "name": agent.name,
+                    "role": agent.role,
+                    "department": department_id,
+                },
             )
         )
         return agent
@@ -258,7 +265,9 @@ class WorkforceEngine:
         for a in active:
             # Smooth towards target average
             a.current_workload_percent = round((a.current_workload_percent * 0.7) + (target_avg * 0.3), 1)
-            a.status = "BUSY" if a.current_workload_percent > 70 else ("IDLE" if a.current_workload_percent < 20 else "ACTIVE")
+            a.status = (
+                "BUSY" if a.current_workload_percent > 70 else ("IDLE" if a.current_workload_percent < 20 else "ACTIVE")
+            )
 
         return {
             "rebalanced_agents": len(active),

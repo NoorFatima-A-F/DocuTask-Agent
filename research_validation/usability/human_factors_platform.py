@@ -20,6 +20,7 @@ from typing import List
 @dataclass
 class AnonymizedParticipantTelemetry:
     """Anonymized operator session metrics."""
+
     participant_hash: str
     sus_score: float  # 0 to 100
     nasa_tlx_score: float  # 0 to 100 (lower is lighter workload)
@@ -33,6 +34,7 @@ class AnonymizedParticipantTelemetry:
 @dataclass
 class HumanFactorsResearchReport:
     """Consolidated human factors usability report."""
+
     total_participants: int
     mean_sus_score: float
     sus_percentile_rank: float
@@ -70,9 +72,7 @@ class HumanFactorsPlatform:
 
     @classmethod
     def evaluate_study_data(
-        cls,
-        telemetries: List[AnonymizedParticipantTelemetry],
-        wcag_score: float = 0.95
+        cls, telemetries: List[AnonymizedParticipantTelemetry], wcag_score: float = 0.95
     ) -> HumanFactorsResearchReport:
         """Evaluate participant usability session data."""
         if not telemetries:
@@ -91,7 +91,7 @@ class HumanFactorsPlatform:
                 assumptions=["Human operator session data collected"],
                 limitations=["No participant telemetry recorded"],
                 reproducibility_instructions="Execute user study protocol with standard SUS/NASA-TLX questionnaires",
-                usability_status="UNACCEPTABLE"
+                usability_status="UNACCEPTABLE",
             )
 
         n = len(telemetries)
@@ -104,7 +104,13 @@ class HumanFactorsPlatform:
         mean_trust = sum(t.operator_trust_rating for t in telemetries) / n
 
         adjective = cls.get_sus_adjective(mean_sus)
-        status = "EXCELLENT" if mean_sus >= 80.0 and comp_pct >= 90.0 and mean_tlx <= 40.0 else "ACCEPTABLE" if mean_sus >= 68.0 else "UNACCEPTABLE"
+        status = (
+            "EXCELLENT"
+            if mean_sus >= 80.0 and comp_pct >= 90.0 and mean_tlx <= 40.0
+            else "ACCEPTABLE"
+            if mean_sus >= 68.0
+            else "UNACCEPTABLE"
+        )
 
         return HumanFactorsResearchReport(
             total_participants=n,
@@ -120,12 +126,12 @@ class HumanFactorsPlatform:
             participant_telemetries=telemetries,
             assumptions=[
                 "Participants received standardized 5-minute platform onboarding walkthrough",
-                "Work environment standardized with 1080p display and broadband connectivity"
+                "Work environment standardized with 1080p display and broadband connectivity",
             ],
             methodology="Empirical human-in-the-loop usability study measuring standard SUS (10-item) and NASA-TLX cognitive workload.",
             limitations=[
                 "Sample size bounded to controlled operator cohorts; longitudinal expertise effects not fully captured"
             ],
             reproducibility_instructions="Distribute SUS survey questionnaire to operator cohort and run HumanFactorsPlatform.evaluate_study_data()",
-            usability_status=status
+            usability_status=status,
         )

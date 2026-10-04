@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 class VariableType(str, enum.Enum):
     """Supported variable data types."""
+
     STRING = "STRING"
     NUMBER = "NUMBER"
     BOOLEAN = "BOOLEAN"
@@ -18,6 +19,7 @@ class VariableType(str, enum.Enum):
 
 class PromptVariableDefinition(BaseModel):
     """Schema specification for a prompt template input variable."""
+
     name: str
     var_type: VariableType = VariableType.STRING
     description: str = ""

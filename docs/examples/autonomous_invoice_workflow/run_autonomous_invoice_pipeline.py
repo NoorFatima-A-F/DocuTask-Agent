@@ -155,7 +155,9 @@ class AutonomousInvoicePipeline:
             "vendor_verified": True,
             "po_match": True,
         }
-        v3 = await self.context_store.checkpoint_context(runtime_id, {"stage": "VALIDATION_DONE", "state": pipeline_state})
+        v3 = await self.context_store.checkpoint_context(
+            runtime_id, {"stage": "VALIDATION_DONE", "state": pipeline_state}
+        )
         logger.info(f"[Step 4: ValidationAgent] Validation complete. Checkpoint v{v3} saved.")
 
         # -------------------------------------------------------------
@@ -188,7 +190,9 @@ class AutonomousInvoicePipeline:
         }
         pipeline_state["reflection_critique"] = reflection_critique
         await self.context_store.checkpoint_context(runtime_id, {"stage": "COMPLETED", "state": pipeline_state})
-        logger.info(f"[Step 6: ReflectionAgent] Quality Score: {reflection_score} -> {reflection_critique['recommendation']}")
+        logger.info(
+            f"[Step 6: ReflectionAgent] Quality Score: {reflection_score} -> {reflection_critique['recommendation']}"
+        )
 
         # -------------------------------------------------------------
         # Final Telemetry & Summary

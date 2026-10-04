@@ -41,9 +41,7 @@ class ConstraintEvaluator:
 
         # 5. Mandatory Capabilities
         if workload.required_capabilities:
-            if not self.capability_registry.satisfies_capabilities(
-                worker.worker_id, workload.required_capabilities
-            ):
+            if not self.capability_registry.satisfies_capabilities(worker.worker_id, workload.required_capabilities):
                 missing = workload.required_capabilities - worker.capabilities
                 reasons.append(f"Worker '{worker.worker_id}' missing mandatory capabilities: {list(missing)}.")
 
@@ -51,13 +49,21 @@ class ConstraintEvaluator:
         avail = worker.resource_available
         req = workload.resource_requirements
         if avail.cpu_cores < req.cpu_cores:
-            reasons.append(f"Insufficient CPU on worker '{worker.worker_id}': free={avail.cpu_cores}, req={req.cpu_cores}.")
+            reasons.append(
+                f"Insufficient CPU on worker '{worker.worker_id}': free={avail.cpu_cores}, req={req.cpu_cores}."
+            )
         if avail.memory_gb < req.memory_gb:
-            reasons.append(f"Insufficient Memory on worker '{worker.worker_id}': free={avail.memory_gb}GB, req={req.memory_gb}GB.")
+            reasons.append(
+                f"Insufficient Memory on worker '{worker.worker_id}': free={avail.memory_gb}GB, req={req.memory_gb}GB."
+            )
         if req.gpu_count > 0 and avail.gpu_count < req.gpu_count:
-            reasons.append(f"Insufficient GPU on worker '{worker.worker_id}': free={avail.gpu_count}, req={req.gpu_count}.")
+            reasons.append(
+                f"Insufficient GPU on worker '{worker.worker_id}': free={avail.gpu_count}, req={req.gpu_count}."
+            )
         if avail.worker_slots < req.worker_slots:
-            reasons.append(f"Insufficient Slots on worker '{worker.worker_id}': free={avail.worker_slots}, req={req.worker_slots}.")
+            reasons.append(
+                f"Insufficient Slots on worker '{worker.worker_id}': free={avail.worker_slots}, req={req.worker_slots}."
+            )
 
         # 7. Worker Concurrency Limit
         if len(worker.active_assignments) >= worker.concurrency_limit:

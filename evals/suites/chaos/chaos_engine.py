@@ -6,6 +6,7 @@ Simulates worker node crashes, queue latency spikes, and network partitions.
 from typing import Dict, Any, List
 from app.runtime.distributed import WorkerFleetManager
 
+
 class ChaosEngine:
     """Executes controlled fault injection drills on distributed workers."""
 

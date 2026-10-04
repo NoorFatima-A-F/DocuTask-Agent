@@ -71,7 +71,10 @@ class CriticalPathEngine:
 
         # Identify top bottleneck (node with highest duration on critical path)
         bottlenecks = sorted(
-            [{"node_id": nid, "duration_ms": node_map[nid].estimated_duration_ms, "name": node_map[nid].name} for nid in critical_path],
+            [
+                {"node_id": nid, "duration_ms": node_map[nid].estimated_duration_ms, "name": node_map[nid].name}
+                for nid in critical_path
+            ],
             key=lambda x: x["duration_ms"],
             reverse=True,
         )

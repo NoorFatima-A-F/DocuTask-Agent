@@ -1,7 +1,10 @@
 """
 Part 2F: Enterprise Database Architecture Verification Framework Package.
 """
-from app.platform_verification.database_verification.runtime.database_verification_runtime import DatabaseVerificationRuntime
+
+from app.platform_verification.database_verification.runtime.database_verification_runtime import (
+    DatabaseVerificationRuntime,
+)
 from app.platform_verification.database_verification.domain.models import (
     DatabaseCertificationTier,
     TableQualityGrade,

@@ -2,6 +2,7 @@
 Phase 3I.7.6: Telemetry Encryption In-Transit & At-Rest Verifier
 Verifies encryption across application emitters, collectors, transmission channels (TLS 1.3), and persistent storage (AES-256-GCM).
 """
+
 from typing import List
 from ..domain.interfaces import ITelemetryEncryptionVerifier
 from ..domain.models import EncryptionScopeSpec, TelemetryEncryptionReport

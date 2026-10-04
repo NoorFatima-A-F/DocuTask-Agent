@@ -1,6 +1,7 @@
 """
 Configuration Domain: Configurations and Immutable Canonical Execution Snapshots.
 """
+
 from datetime import datetime, timezone
 from typing import Any, Dict
 from pydantic import BaseModel, Field

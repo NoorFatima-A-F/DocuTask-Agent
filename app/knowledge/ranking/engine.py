@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class RankingWeights(BaseModel):
     """Configurable weights for multi-factor ranking formula."""
+
     semantic_weight: float = 0.40
     keyword_weight: float = 0.25
     authority_weight: float = 0.15

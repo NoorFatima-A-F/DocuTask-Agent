@@ -1,6 +1,7 @@
 """
 Service Dependency Graph & Topology Analyzer.
 """
+
 from typing import Dict, List, Set
 from app.platform_verification.service_communication.domain.models import (
     ServiceDependencyGraph,

@@ -2,6 +2,7 @@
 Database Session Manager Adapter for Async SQLAlchemy.
 """
 
+
 class DatabaseSessionManager:
     def __init__(self, database_url: str = "sqlite+aiosqlite:///:memory:"):
         self.database_url = database_url

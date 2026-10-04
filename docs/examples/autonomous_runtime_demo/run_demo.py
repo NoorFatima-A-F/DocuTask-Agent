@@ -82,8 +82,8 @@ async def run_enterprise_autonomous_demo() -> None:
     # 2. Goal Understanding & LLM Semantic Reasoning
     # ---------------------------------------------------------
     goal_text = "Process MedTech Medical invoice #MED-9021 with SSN: 111-22-3333 and compute total"
-    print(f"\n--- [2/9] Submitting Goal to Semantic Reasoner ---\n  Goal: \"{goal_text}\"")
-    
+    print(f'\n--- [2/9] Submitting Goal to Semantic Reasoner ---\n  Goal: "{goal_text}"')
+
     analysis = await reasoner.reason_about_goal(goal_text=goal_text)
     print(f"  [+] Intent Classified : {analysis.primary_intent}")
     print(f"  [+] Document Type     : {analysis.document_type}")
@@ -98,9 +98,23 @@ async def run_enterprise_autonomous_demo() -> None:
         goal_id="goal_demo_01",
         plan_id="plan_demo_01",
         tasks=[
-            PlannedTask(task_id="t_ocr", name="OCR Ingest", action="ocr", required_tools=["gemini_vision"], dependencies=[]),
-            PlannedTask(task_id="t_extract", name="Field Extract", action="extract", required_tools=["gemini_vision"], dependencies=["t_ocr"]),
-            PlannedTask(task_id="t_audit", name="Financial Audit", action="audit", required_tools=["rule_engine"], dependencies=["t_extract"]),
+            PlannedTask(
+                task_id="t_ocr", name="OCR Ingest", action="ocr", required_tools=["gemini_vision"], dependencies=[]
+            ),
+            PlannedTask(
+                task_id="t_extract",
+                name="Field Extract",
+                action="extract",
+                required_tools=["gemini_vision"],
+                dependencies=["t_ocr"],
+            ),
+            PlannedTask(
+                task_id="t_audit",
+                name="Financial Audit",
+                action="audit",
+                required_tools=["rule_engine"],
+                dependencies=["t_extract"],
+            ),
         ],
     )
     opt_result = plan_selector.optimize_and_select(raw_plan, strategy=OptimizationStrategy.RISK_MINIMIZED)
@@ -159,7 +173,7 @@ async def run_enterprise_autonomous_demo() -> None:
         extracted_data=extracted_data,
     )
     print(f"  [+] Review Ticket Enqueued: {ticket.ticket_id} (Priority: {ticket.priority.name})")
-    
+
     # Operator resolution
     hitl_mgr.submit_operator_decision(
         ticket_id=ticket.ticket_id,
@@ -185,9 +199,11 @@ async def run_enterprise_autonomous_demo() -> None:
                 metadata={"vendor_name": "MedTech Global Inc"},
             )
         )
-    
+
     report = consolidation_agent.run_consolidation(cycle_id="demo_consolidation_01")
-    print(f"  [+] Consolidation Complete: {report.episodes_analyzed} episodes analyzed, {report.patterns_mined} patterns mined, {report.facts_promoted} facts promoted to Semantic Memory.")
+    print(
+        f"  [+] Consolidation Complete: {report.episodes_analyzed} episodes analyzed, {report.patterns_mined} patterns mined, {report.facts_promoted} facts promoted to Semantic Memory."
+    )
 
     # ---------------------------------------------------------
     # 9. Second Run Proving Zero-Error Execution
@@ -196,8 +212,10 @@ async def run_enterprise_autonomous_demo() -> None:
     learned_facts = semantic_mem.retrieve_relevant_facts("MedTech Global Inc")
     print(f"  [+] Querying Semantic Memory for 'MedTech Global Inc'...")
     for fact, score in learned_facts:
-        print(f"    * Learned Fact: [{fact.predicate}] = {fact.fact_value} (Confidence: {fact.confidence:.2f}, Score: {score:.2f})")
-    
+        print(
+            f"    * Learned Fact: [{fact.predicate}] = {fact.fact_value} (Confidence: {fact.confidence:.2f}, Score: {score:.2f})"
+        )
+
     second_reflection = await consensus_evaluator.evaluate_extraction(
         {
             "vendor_name": "MedTech Global Inc",

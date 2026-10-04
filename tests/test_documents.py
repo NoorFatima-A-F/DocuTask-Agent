@@ -70,11 +70,9 @@ async def test_document_service_upload_and_deduplication(db_session: AsyncSessio
     storage = LocalStorageProvider(base_directory=temp_storage_dir)
     service = DocumentService(document_repo=doc_repo, storage_provider=storage)
 
-    user = await user_repo.create({
-        "email": "doc_owner@example.com",
-        "username": "docowner",
-        "hashed_password": "hashed_pass"
-    })
+    user = await user_repo.create(
+        {"email": "doc_owner@example.com", "username": "docowner", "hashed_password": "hashed_pass"}
+    )
 
     file_content = b"Sample Invoice Data for SHA256 Deduplication Test"
     filename = "invoice_2026.pdf"
@@ -124,17 +122,15 @@ async def test_document_api_full_workflow(client: AsyncClient):
     """Verifies complete document API HTTP endpoint workflow."""
 
     # 1. Register & Login User
-    reg = await client.post("/api/v1/auth/register", json={
-        "email": "doc_api_user@example.com",
-        "username": "docapiuser",
-        "password": "Password123!"
-    })
+    reg = await client.post(
+        "/api/v1/auth/register",
+        json={"email": "doc_api_user@example.com", "username": "docapiuser", "password": "Password123!"},
+    )
     assert reg.status_code == 201
 
-    login = await client.post("/api/v1/auth/login", json={
-        "username_or_email": "docapiuser",
-        "password": "Password123!"
-    })
+    login = await client.post(
+        "/api/v1/auth/login", json={"username_or_email": "docapiuser", "password": "Password123!"}
+    )
     token = login.json()["data"]["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
@@ -144,7 +140,7 @@ async def test_document_api_full_workflow(client: AsyncClient):
 
     upload_res = await client.post("/api/v1/documents/upload", files=files, headers=headers)
     assert upload_res.status_code == 201
-    
+
     body = upload_res.json()
     assert body["success"] is True
     doc_data = body["data"]["document"]

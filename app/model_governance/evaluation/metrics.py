@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field, model_validator
 
 class ModelEvaluationMetrics(BaseModel):
     """Multidimensional evaluation scores."""
+
     evaluation_id: str = Field(default_factory=lambda: "eval_default")
     model_id: str = "model_default"
     benchmark_name: str = "general_benchmark"
@@ -64,7 +65,7 @@ class ModelEvaluationMetrics(BaseModel):
         comp = self.completeness if self.completeness is not None else (self.completeness_score or 0.0)
         halluc = self.hallucination_rate or 0.0
 
-        score = (acc * 0.35 + faith * 0.35 + comp * 0.15 + (1.0 - halluc) * 0.15)
+        score = acc * 0.35 + faith * 0.35 + comp * 0.15 + (1.0 - halluc) * 0.15
         self.composite_score = round(score, 4)
         self.composite_quality_score = self.composite_score
         return self.composite_score

@@ -147,31 +147,35 @@ class BusinessReportGenerator:
                 f"| `{key}` | {res.title} | {res.passed_assertions_count}/{res.total_assertions_count} | {res.score:.1f}% | **{res.status.value}** |"
             )
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "### Cryptographic Evidence Manifest (SHA-256)",
-            "",
-            "| Artifact File | SHA-256 Checksum Digest |",
-            "| :--- | :--- |",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "### Cryptographic Evidence Manifest (SHA-256)",
+                "",
+                "| Artifact File | SHA-256 Checksum Digest |",
+                "| :--- | :--- |",
+            ]
+        )
 
         for fname, digest in manifest["checksums"].items():
             lines.append(f"| `{fname}` | `{digest}` |")
 
-        lines.extend([
-            "",
-            "---",
-            "",
-            "### Commercial Certification Statement",
-            "",
-            "> **OFFICIAL BUSINESS CERTIFICATION NOTICE**:",
-            "> DocuTask Agent has successfully completed **Phase V11 Enterprise Business Validation, ROI Verification & Operational Value Assessment Framework (EBV-AIVVS)**.",
-            "> All 10 business verification engines, 40 empirical assertions, 6 enterprise acceptance gates, and 4 multi-industry scenario suites passed with **100% compliance**.",
-            "> The platform is officially certified commercially viable, financially justified, and ready for enterprise-wide production deployment.",
-            "",
-        ])
+        lines.extend(
+            [
+                "",
+                "---",
+                "",
+                "### Commercial Certification Statement",
+                "",
+                "> **OFFICIAL BUSINESS CERTIFICATION NOTICE**:",
+                "> DocuTask Agent has successfully completed **Phase V11 Enterprise Business Validation, ROI Verification & Operational Value Assessment Framework (EBV-AIVVS)**.",
+                "> All 10 business verification engines, 40 empirical assertions, 6 enterprise acceptance gates, and 4 multi-industry scenario suites passed with **100% compliance**.",
+                "> The platform is officially certified commercially viable, financially justified, and ready for enterprise-wide production deployment.",
+                "",
+            ]
+        )
 
         with open(self.report_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))

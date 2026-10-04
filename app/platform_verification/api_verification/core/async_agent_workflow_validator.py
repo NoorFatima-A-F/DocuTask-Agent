@@ -1,6 +1,7 @@
 """
 Asynchronous AI Agent Workflow State Transition Validator.
 """
+
 from __future__ import annotations
 from typing import Set, Tuple
 from app.platform_verification.api_verification.domain.interfaces import IAsyncAgentWorkflowValidator
@@ -12,7 +13,12 @@ class EnterpriseAsyncAgentWorkflowValidator(IAsyncAgentWorkflowValidator):
 
     ALLOWED_TRANSITIONS = {
         AgentTaskState.CREATED: {AgentTaskState.RUNNING, AgentTaskState.CANCELLED},
-        AgentTaskState.RUNNING: {AgentTaskState.WAITING_FOR_HUMAN, AgentTaskState.COMPLETED, AgentTaskState.FAILED, AgentTaskState.CANCELLED},
+        AgentTaskState.RUNNING: {
+            AgentTaskState.WAITING_FOR_HUMAN,
+            AgentTaskState.COMPLETED,
+            AgentTaskState.FAILED,
+            AgentTaskState.CANCELLED,
+        },
         AgentTaskState.WAITING_FOR_HUMAN: {AgentTaskState.RUNNING, AgentTaskState.CANCELLED},
         AgentTaskState.COMPLETED: set(),  # Terminal state
         AgentTaskState.FAILED: {AgentTaskState.CREATED},  # Can retry
@@ -30,4 +36,7 @@ class EnterpriseAsyncAgentWorkflowValidator(IAsyncAgentWorkflowValidator):
         if next_enum in allowed:
             return True, f"Valid state transition: {current_state} -> {next_state}"
         else:
-            return False, f"Illegal state transition: Cannot transition from terminal/invalid state '{current_state}' to '{next_state}'."
+            return (
+                False,
+                f"Illegal state transition: Cannot transition from terminal/invalid state '{current_state}' to '{next_state}'.",
+            )

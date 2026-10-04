@@ -33,6 +33,7 @@ class CanonicalDataset(str, Enum):
 @dataclass
 class PublishedLiteratureBaseline:
     """Authentic published baseline from peer-reviewed literature."""
+
     model_name: str
     paper_citation: str
     published_f1_or_metric: float
@@ -43,6 +44,7 @@ class PublishedLiteratureBaseline:
 @dataclass
 class BenchmarkExecutionMetric:
     """Measured metric results for a benchmark run."""
+
     dataset: CanonicalDataset
     sample_count: int
     accuracy: float
@@ -75,43 +77,43 @@ class PublicBenchmarkSuiteV2:
             paper_citation="Huang et al., ACM MM 2022",
             published_f1_or_metric=0.9029,
             metric_name="Entity F1",
-            evaluation_protocol="Exact match entity recognition on test split (50 docs)"
+            evaluation_protocol="Exact match entity recognition on test split (50 docs)",
         ),
         CanonicalDataset.CORD: PublishedLiteratureBaseline(
             model_name="Donut-Proto",
             paper_citation="Kim et al., ECCV 2022",
             published_f1_or_metric=0.8410,
             metric_name="Entity F1",
-            evaluation_protocol="End-to-end receipt parsing on test split (100 docs)"
+            evaluation_protocol="End-to-end receipt parsing on test split (100 docs)",
         ),
         CanonicalDataset.SROIE: PublishedLiteratureBaseline(
             model_name="BROS-Base",
             paper_citation="Baek et al., NeurIPS 2021",
             published_f1_or_metric=0.9573,
             metric_name="4-Field Macro F1",
-            evaluation_protocol="Company, Date, Address, Total extraction on 347 receipts"
+            evaluation_protocol="Company, Date, Address, Total extraction on 347 receipts",
         ),
         CanonicalDataset.XFUND: PublishedLiteratureBaseline(
             model_name="XLM-RoBERTa-LayoutLMv2",
             paper_citation="Xu et al., Findings of ACL 2022",
             published_f1_or_metric=0.8240,
             metric_name="Multilingual Entity F1",
-            evaluation_protocol="7-language cross-lingual key-value extraction"
+            evaluation_protocol="7-language cross-lingual key-value extraction",
         ),
         CanonicalDataset.DOCVQA: PublishedLiteratureBaseline(
             model_name="LayoutLMv3-Large",
             paper_citation="Huang et al., ACM MM 2022",
             published_f1_or_metric=0.8337,
             metric_name="ANLS",
-            evaluation_protocol="Average Normalized Levenshtein Similarity on 5188 QA pairs"
+            evaluation_protocol="Average Normalized Levenshtein Similarity on 5188 QA pairs",
         ),
         CanonicalDataset.RVL_CDIP: PublishedLiteratureBaseline(
             model_name="DiT-Base",
             paper_citation="Li et al., CVPR 2022",
             published_f1_or_metric=0.9269,
             metric_name="Top-1 Accuracy",
-            evaluation_protocol="16-class document image classification on 40,000 test images"
-        )
+            evaluation_protocol="16-class document image classification on 40,000 test images",
+        ),
     }
 
     @staticmethod
@@ -165,7 +167,7 @@ class PublicBenchmarkSuiteV2:
         predictions: List[str],
         ground_truth: List[str],
         latencies_ms: List[float],
-        memory_mb: float = 128.0
+        memory_mb: float = 128.0,
     ) -> BenchmarkExecutionMetric:
         """
         Evaluate full metrics on predictions vs ground truth pairs.
@@ -191,7 +193,7 @@ class PublicBenchmarkSuiteV2:
                 methodology="Mismatched prediction and ground truth sets",
                 limitations=["No data evaluated"],
                 reproducibility_instructions="Provide matching non-empty prediction and truth arrays",
-                status="NOT_VERIFIED"
+                status="NOT_VERIFIED",
             )
 
         n = len(predictions)
@@ -252,12 +254,10 @@ class PublicBenchmarkSuiteV2:
             delta_vs_baseline=delta,
             assumptions=[
                 "Test samples evaluated in isolation under deterministic greedy decoding",
-                "Ground truth normalized to lower-case UTF-8 string representation"
+                "Ground truth normalized to lower-case UTF-8 string representation",
             ],
             methodology=f"Evaluated against canonical {dataset.value} test corpus using standard token-level F1 and Levenshtein ANLS metrics.",
-            limitations=[
-                "OCR bounding box alignment variance may slightly affect token-level F1 on rotated scans"
-            ],
+            limitations=["OCR bounding box alignment variance may slightly affect token-level F1 on rotated scans"],
             reproducibility_instructions=f"Run PublicBenchmarkSuiteV2.evaluate_dataset_benchmark({dataset.name}) with matching test set.",
-            status=status
+            status=status,
         )

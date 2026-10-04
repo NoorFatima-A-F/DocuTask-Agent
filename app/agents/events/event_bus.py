@@ -48,7 +48,7 @@ class EnterpriseEventBus(AgentEventBus):
         self._subscribers: Dict[str, List[AnyEventHandler]] = defaultdict(list)
         # Event type class -> list of handlers
         self._type_subscribers: Dict[Type[AgentEvent], List[AnyEventHandler]] = defaultdict(list)
-        
+
         # Telemetry metrics
         self._published_count: int = 0
         self._handled_count: int = 0
@@ -87,7 +87,7 @@ class EnterpriseEventBus(AgentEventBus):
         else:
             topic = str(event_type_or_topic)
             self._subscribers[topic].append(handler)
-            logger.debug("Subscribed %s to topic pattern '%s'", getattr(handler, '__name__', str(handler)), topic)
+            logger.debug("Subscribed %s to topic pattern '%s'", getattr(handler, "__name__", str(handler)), topic)
 
     def unsubscribe(
         self,
@@ -147,10 +147,7 @@ class EnterpriseEventBus(AgentEventBus):
             return 0
 
         # 3. Dispatch concurrently
-        tasks = [
-            self._dispatch_to_handler(handler, event, effective_topic)
-            for handler in unique_handlers
-        ]
+        tasks = [self._dispatch_to_handler(handler, event, effective_topic) for handler in unique_handlers]
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         invoked = 0

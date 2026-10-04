@@ -80,7 +80,9 @@ class EscalationEngine:
 
         if candidate_rules:
             rule_to_apply = candidate_rules[0]
-            reason = f"Review SLA exceeded ({elapsed_seconds:.0f}s elapsed >= {rule_to_apply.timeout_seconds}s threshold)"
+            reason = (
+                f"Review SLA exceeded ({elapsed_seconds:.0f}s elapsed >= {rule_to_apply.timeout_seconds}s threshold)"
+            )
             event = self.handler.handle_escalation(request, rule_to_apply, reason)
             request.status = ApprovalLifecycleState.ESCALATED
             return True, event

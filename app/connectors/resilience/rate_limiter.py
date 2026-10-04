@@ -19,15 +19,17 @@ logger = logging.getLogger(__name__)
 
 class RateLimitAlgorithm(str, Enum):
     """Supported rate limiting algorithms."""
+
     TOKEN_BUCKET = "TOKEN_BUCKET"
     SLIDING_WINDOW = "SLIDING_WINDOW"
 
 
 class RateLimitPolicy(BaseModel):
     """Configuration for an individual rate limit tier."""
+
     key_prefix: str = "global"
-    rate_limit_rps: float = 10.0      # Tokens added per second / Max requests per second
-    burst_capacity: float = 20.0      # Maximum token capacity
+    rate_limit_rps: float = 10.0  # Tokens added per second / Max requests per second
+    burst_capacity: float = 20.0  # Maximum token capacity
     window_seconds: float = 1.0
     algorithm: RateLimitAlgorithm = RateLimitAlgorithm.TOKEN_BUCKET
 

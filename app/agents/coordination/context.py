@@ -12,6 +12,7 @@ from app.agents.coordination.metadata import CoordinationIdentity, CoordinationS
 
 class CoordinationContext(BaseModel):
     """Operational limits and correlation boundaries for coordination."""
+
     tenant_id: str = Field(default="default")
     correlation_id: str = Field(default_factory=lambda: str(uuid4()))
     max_coordination_timeout_sec: float = Field(default=300.0, gt=0.0)
@@ -24,6 +25,7 @@ class CoordinationContext(BaseModel):
 
 class CoordinationRequest(BaseModel):
     """Request payload to coordinate multi-agent execution for a high-level goal."""
+
     goal: str
     initiator_agent_id: UUID
     context: CoordinationContext = Field(default_factory=CoordinationContext)
@@ -35,6 +37,7 @@ class CoordinationRequest(BaseModel):
 
 class CoordinationResult(BaseModel):
     """Structured outcome produced by the Coordination Engine."""
+
     identity: CoordinationIdentity
     lifecycle_state: CoordinationLifecycleState = Field(default=CoordinationLifecycleState.COMPLETED)
     outputs: Dict[str, Any] = Field(default_factory=dict)

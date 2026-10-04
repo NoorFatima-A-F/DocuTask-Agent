@@ -14,6 +14,7 @@ from pydantic import BaseModel
 
 class BanditArmState(BaseModel):
     """Execution statistics for a candidate planner capability arm."""
+
     arm_id: str
     name: str
     pull_count: int = 0
@@ -28,6 +29,7 @@ class BanditArmState(BaseModel):
 
 class ExplorationDecision(BaseModel):
     """Result of Multi-Armed Bandit arm selection."""
+
     selected_arm_id: str
     strategy_name: str
     algorithm: str = "UCB1"
@@ -44,10 +46,38 @@ class ExplorationEngine:
         self.exploration_c = exploration_c
         self.random = random.Random(seed)
         self._arms: Dict[str, BanditArmState] = {
-            "strat_alpha": BanditArmState(arm_id="strat_alpha", name="Strategy Alpha (Fast Turbo)", pull_count=12, total_reward=9.6, alpha_successes=10, beta_failures=3),
-            "strat_beta": BanditArmState(arm_id="strat_beta", name="Strategy Beta (Deep Reasoning)", pull_count=18, total_reward=16.2, alpha_successes=17, beta_failures=2),
-            "strat_gamma": BanditArmState(arm_id="strat_gamma", name="Strategy Gamma (Budget Frugal)", pull_count=8, total_reward=5.6, alpha_successes=6, beta_failures=3),
-            "strat_delta": BanditArmState(arm_id="strat_delta", name="Strategy Delta (Adaptive Pareto)", pull_count=24, total_reward=22.8, alpha_successes=23, beta_failures=2),
+            "strat_alpha": BanditArmState(
+                arm_id="strat_alpha",
+                name="Strategy Alpha (Fast Turbo)",
+                pull_count=12,
+                total_reward=9.6,
+                alpha_successes=10,
+                beta_failures=3,
+            ),
+            "strat_beta": BanditArmState(
+                arm_id="strat_beta",
+                name="Strategy Beta (Deep Reasoning)",
+                pull_count=18,
+                total_reward=16.2,
+                alpha_successes=17,
+                beta_failures=2,
+            ),
+            "strat_gamma": BanditArmState(
+                arm_id="strat_gamma",
+                name="Strategy Gamma (Budget Frugal)",
+                pull_count=8,
+                total_reward=5.6,
+                alpha_successes=6,
+                beta_failures=3,
+            ),
+            "strat_delta": BanditArmState(
+                arm_id="strat_delta",
+                name="Strategy Delta (Adaptive Pareto)",
+                pull_count=24,
+                total_reward=22.8,
+                alpha_successes=23,
+                beta_failures=2,
+            ),
         }
 
     def select_arm_ucb1(self) -> ExplorationDecision:

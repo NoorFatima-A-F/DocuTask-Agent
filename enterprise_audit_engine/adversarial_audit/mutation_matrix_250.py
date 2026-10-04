@@ -30,6 +30,7 @@ from enterprise_audit_engine.policy_validation.policy_regression import PolicyRe
 
 class AdversarialMutationResult(BaseModel := type("BaseModel", (), {})):
     """Summary of 250+ mutation test execution."""
+
     pass
 
 
@@ -76,7 +77,7 @@ class MutationMatrix250:
 
         total_tested = len(results)
         blocked_count = sum(1 for r in results if r["blocked"])
-        all_passed = (blocked_count == total_tested)
+        all_passed = blocked_count == total_tested
 
         categories_summary = {}
         for r in results:
@@ -104,13 +105,17 @@ class MutationMatrix250:
         if idx <= 10:
             desc = f"Payload tampering without hash recomputation #{idx}"
             tampered = rec.model_copy(update={"summary": f"Tampered summary {idx}"})
-            blocked = (tampered.content_hash != tampered.calculate_hash())
+            blocked = tampered.content_hash != tampered.calculate_hash()
         elif idx <= 20:
             desc = f"Missing referenced evidence item in coverage #{idx}"
             fnd = AuditFinding(
-                finding_id=f"FND-MISS-{idx}", subsystem="Security", claim="Valid claim",
-                classification=EvidenceClassification.VERIFIED, evidence_ids=[f"NON-EXISTENT-{idx}"],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id=f"FND-MISS-{idx}",
+                subsystem="Security",
+                claim="Valid claim",
+                classification=EvidenceClassification.VERIFIED,
+                evidence_ids=[f"NON-EXISTENT-{idx}"],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             try:
                 EvidenceCoverageAnalyzer.verify_coverage([fnd], [rec])
@@ -126,9 +131,13 @@ class MutationMatrix250:
             empty_rec = rec.model_copy(update={"raw_payload": {}})
             empty_rec = empty_rec.model_copy(update={"content_hash": empty_rec.calculate_hash()})
             fnd = AuditFinding(
-                finding_id=f"FND-EMPTY-{idx}", subsystem="Security", claim="Valid claim",
-                classification=EvidenceClassification.VERIFIED, evidence_ids=[empty_rec.id],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id=f"FND-EMPTY-{idx}",
+                subsystem="Security",
+                claim="Valid claim",
+                classification=EvidenceClassification.VERIFIED,
+                evidence_ids=[empty_rec.id],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             try:
                 EvidenceCoverageAnalyzer.verify_coverage([fnd], [empty_rec])
@@ -137,7 +146,7 @@ class MutationMatrix250:
         else:
             desc = f"Structural timestamp / identity spoofing #{idx}"
             tampered = rec.model_copy(update={"id": f"SPOOFED-ID-{idx}"})
-            blocked = (tampered.content_hash != tampered.calculate_hash())
+            blocked = tampered.content_hash != tampered.calculate_hash()
 
         return {
             "attack_id": f"ATK-EVID-{idx:03d}",
@@ -150,10 +159,14 @@ class MutationMatrix250:
     @classmethod
     def _run_certification_attack(cls, idx: int) -> Dict[str, Any]:
         cert = CertificationRecord.create_pending(
-            certificate_id=f"CERT-ATK-{idx}", system_name="DocuTask Agent",
-            release_version="1.0.0", audit_engine_version="2.1.0",
-            audit_execution_id="RUN-ATK", merkle_root=f"merkle_root_original_{idx}",
-            evidence_root_hash=f"evidence_root_{idx}", eqi_score=95.0,
+            certificate_id=f"CERT-ATK-{idx}",
+            system_name="DocuTask Agent",
+            release_version="1.0.0",
+            audit_engine_version="2.1.0",
+            audit_execution_id="RUN-ATK",
+            merkle_root=f"merkle_root_original_{idx}",
+            evidence_root_hash=f"evidence_root_{idx}",
+            eqi_score=95.0,
         )
         signed_cert, pub_key_pem = CertificateSigner.sign_certificate(cert)
         blocked = False
@@ -177,12 +190,14 @@ class MutationMatrix250:
             # Verify expired timestamp detection
             expired_cert = signed_cert.model_copy(update={"expiry_timestamp": "2020-01-01T00:00:00+00:00"})
             from datetime import datetime, timezone
+
             blocked = datetime.now(timezone.utc) > datetime.fromisoformat(expired_cert.expiry_timestamp)
         else:
             desc = f"Revoked certificate acceptance attempt #{idx}"
             from enterprise_audit_engine.certification_authority.domain.models import CertificationStatus
+
             rev_cert = signed_cert.model_copy(update={"status": CertificationStatus.REVOKED})
-            blocked = (rev_cert.status == CertificationStatus.REVOKED)
+            blocked = rev_cert.status == CertificationStatus.REVOKED
 
         return {
             "attack_id": f"ATK-CERT-{idx:03d}",
@@ -207,9 +222,13 @@ class MutationMatrix250:
             desc = f"Static-only source claiming execution #{idx}"
             rec = cls._create_sample_record(f"EV-AI-STAT-{idx}")
             fnd = AuditFinding(
-                finding_id=f"FND-AI-{idx}", subsystem="Security", claim="Verified by execution",
-                classification=EvidenceClassification.VERIFIED_BY_EXECUTION, evidence_ids=[rec.id],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id=f"FND-AI-{idx}",
+                subsystem="Security",
+                claim="Verified by execution",
+                classification=EvidenceClassification.VERIFIED_BY_EXECUTION,
+                evidence_ids=[rec.id],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             is_valid, _ = ClaimValidator.validate_claim(fnd, [rec])
             blocked = not is_valid
@@ -218,9 +237,13 @@ class MutationMatrix250:
             rec = cls._create_sample_record(f"EV-AI-INSUF-{idx}")
             rec = rec.model_copy(update={"classification": EvidenceClassification.EVIDENCE_INSUFFICIENT})
             fnd = AuditFinding(
-                finding_id=f"FND-AI-PROM-{idx}", subsystem="Security", claim="Fully verified system",
-                classification=EvidenceClassification.VERIFIED, evidence_ids=[rec.id],
-                confidence=EvidenceConfidence.HIGH, analysis="Test",
+                finding_id=f"FND-AI-PROM-{idx}",
+                subsystem="Security",
+                claim="Fully verified system",
+                classification=EvidenceClassification.VERIFIED,
+                evidence_ids=[rec.id],
+                confidence=EvidenceConfidence.HIGH,
+                analysis="Test",
             )
             is_valid, _ = ClaimValidator.validate_claim(fnd, [rec])
             blocked = not is_valid

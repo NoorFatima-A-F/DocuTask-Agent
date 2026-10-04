@@ -14,7 +14,10 @@ class EvidenceIntegrityVerifier:
         """Recalculates the SHA-256 fingerprint of an EvidenceRecord and matches against stored hash."""
         recalculated_hash = record.calculate_hash()
         if record.content_hash != recalculated_hash:
-            return False, f"Evidence hash mismatch for {record.id}: expected {record.content_hash}, calculated {recalculated_hash}"
+            return (
+                False,
+                f"Evidence hash mismatch for {record.id}: expected {record.content_hash}, calculated {recalculated_hash}",
+            )
         return True, "Valid"
 
     @classmethod

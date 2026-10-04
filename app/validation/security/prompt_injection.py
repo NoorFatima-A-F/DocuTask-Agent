@@ -25,7 +25,11 @@ class PromptInjectionTester:
         delim_blocked = "<|im_start|>" not in sanitized and "<|im_end|>" not in sanitized
 
         passed = tag_blocked and delim_blocked
-        actual_behavior = f"Sanitized payload: '{sanitized[:80]}...'. Direct system override tags neutralized." if passed else "System tags persisted in prompt."
+        actual_behavior = (
+            f"Sanitized payload: '{sanitized[:80]}...'. Direct system override tags neutralized."
+            if passed
+            else "System tags persisted in prompt."
+        )
 
         logger.info(f"Executed prompt injection test '{attack_case.attack_id}': Passed={passed}")
 
@@ -38,5 +42,5 @@ class PromptInjectionTester:
             actual_behavior=actual_behavior,
             severity=attack_case.severity,
             passed=passed,
-            evidence_reference=f"docs/audits/security-evidence/{attack_case.attack_id}.json"
+            evidence_reference=f"docs/audits/security-evidence/{attack_case.attack_id}.json",
         )

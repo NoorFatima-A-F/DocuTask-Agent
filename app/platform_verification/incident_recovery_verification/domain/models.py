@@ -1,6 +1,7 @@
 """
 Phase 3H.4.9: Enterprise Incident Recovery Verification Framework - Domain Models
 """
+
 from enum import Enum
 from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, Field

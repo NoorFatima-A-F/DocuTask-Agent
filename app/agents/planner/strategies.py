@@ -8,6 +8,7 @@ from app.agents.planner.strategy import PlanningStrategy
 
 class IPlanningStrategyHandler(ABC):
     """Abstract strategy handler."""
+
     @property
     @abstractmethod
     def strategy_name(self) -> PlanningStrategy:

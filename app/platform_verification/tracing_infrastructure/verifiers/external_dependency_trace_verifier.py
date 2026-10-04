@@ -1,6 +1,7 @@
 """
 3I.4.8: External Dependency Tracing Verifier
 """
+
 from typing import List
 from ..domain.models import ExternalDependencySpan, DependencyTraceReport
 from ..domain.interfaces import IDependencyTraceVerifier
@@ -20,7 +21,7 @@ class ExternalDependencyTraceVerifier(IDependencyTraceVerifier):
                 status_code=200,
                 timeout_occurred=False,
                 retry_attempt=0,
-                status="OK"
+                status="OK",
             ),
             ExternalDependencySpan(
                 dependency_name="Tesseract OCR Daemon",
@@ -29,7 +30,7 @@ class ExternalDependencyTraceVerifier(IDependencyTraceVerifier):
                 status_code=200,
                 timeout_occurred=False,
                 retry_attempt=0,
-                status="OK"
+                status="OK",
             ),
             ExternalDependencySpan(
                 dependency_name="Cloud Object Storage",
@@ -38,7 +39,7 @@ class ExternalDependencyTraceVerifier(IDependencyTraceVerifier):
                 status_code=200,
                 timeout_occurred=False,
                 retry_attempt=0,
-                status="OK"
+                status="OK",
             ),
             ExternalDependencySpan(
                 dependency_name="Transactional Notification Service",
@@ -47,7 +48,7 @@ class ExternalDependencyTraceVerifier(IDependencyTraceVerifier):
                 status_code=202,
                 timeout_occurred=False,
                 retry_attempt=0,
-                status="OK"
+                status="OK",
             ),
         ]
 
@@ -55,5 +56,5 @@ class ExternalDependencyTraceVerifier(IDependencyTraceVerifier):
             report_title="External Dependency & Third-Party Latency Tracing Report",
             dependencies=dependencies,
             bottleneck_service="Google Gemini 1.5 Pro",
-            external_tracing_passed=True
+            external_tracing_passed=True,
         )

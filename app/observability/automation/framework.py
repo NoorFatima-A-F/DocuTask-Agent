@@ -58,7 +58,10 @@ class SREAutomationFramework:
         now = time.time()
         for rule in self._rules.values():
             import fnmatch
-            if fnmatch.fnmatch(alert.name, rule.alert_name_pattern) or fnmatch.fnmatch(alert.rule_id, rule.alert_name_pattern):
+
+            if fnmatch.fnmatch(alert.name, rule.alert_name_pattern) or fnmatch.fnmatch(
+                alert.rule_id, rule.alert_name_pattern
+            ):
                 if (now - rule.last_executed) < rule.cooldown_seconds:
                     # In cooldown
                     continue

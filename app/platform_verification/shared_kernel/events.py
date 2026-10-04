@@ -1,10 +1,12 @@
 """
 Base Event Architecture Primitives.
 """
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 import uuid
+
 
 @dataclass(frozen=True)
 class EventMetadata:

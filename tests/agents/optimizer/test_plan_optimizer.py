@@ -283,12 +283,15 @@ class TestPlanSelector:
     def test_plan_selector_custom_extreme_weights(self, sample_execution_plan):
         selector = PlanSelector()
         # 100% cost sensitivity
-        cost_weights = StrategyWeights(weight_quality=0.0, weight_cost=1.0, weight_latency=0.0, weight_reliability=0.0, weight_risk=0.0)
+        cost_weights = StrategyWeights(
+            weight_quality=0.0, weight_cost=1.0, weight_latency=0.0, weight_reliability=0.0, weight_risk=0.0
+        )
         res_cost = selector.score_plan(sample_execution_plan, "CostCentric", cost_weights)
         assert res_cost.composite_score > 0.0
 
         # 100% latency sensitivity
-        lat_weights = StrategyWeights(weight_quality=0.0, weight_cost=0.0, weight_latency=1.0, weight_reliability=0.0, weight_risk=0.0)
+        lat_weights = StrategyWeights(
+            weight_quality=0.0, weight_cost=0.0, weight_latency=1.0, weight_reliability=0.0, weight_risk=0.0
+        )
         res_lat = selector.score_plan(sample_execution_plan, "LatencyCentric", lat_weights)
         assert res_lat.composite_score > 0.0
-

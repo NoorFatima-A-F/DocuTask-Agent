@@ -9,12 +9,14 @@ from typing import Optional
 
 class DeploymentSlot(str, Enum):
     """Active deployment color."""
+
     BLUE = "BLUE"
     GREEN = "GREEN"
 
 
 class UpgradeStatus(str, Enum):
     """Status of a rolling upgrade."""
+
     IDLE = "IDLE"
     PREPARING = "PREPARING"
     DRAINING_OLD = "DRAINING_OLD"
@@ -34,29 +36,17 @@ class RollingUpgradeManager:
         """Prepares alternate deployment slot for new version."""
         self.status = UpgradeStatus.PREPARING
         self._target_version = target_version
-        target_slot = (
-            DeploymentSlot.GREEN
-            if self.active_slot == DeploymentSlot.BLUE
-            else DeploymentSlot.BLUE
-        )
+        target_slot = DeploymentSlot.GREEN if self.active_slot == DeploymentSlot.BLUE else DeploymentSlot.BLUE
         return target_slot
 
     def complete_switch(self) -> DeploymentSlot:
         """Switches live traffic to target slot."""
-        self.active_slot = (
-            DeploymentSlot.GREEN
-            if self.active_slot == DeploymentSlot.BLUE
-            else DeploymentSlot.BLUE
-        )
+        self.active_slot = DeploymentSlot.GREEN if self.active_slot == DeploymentSlot.BLUE else DeploymentSlot.BLUE
         self.status = UpgradeStatus.SWITCHED
         return self.active_slot
 
     def rollback(self, reason: str = "Health check failed") -> DeploymentSlot:
         """Rolls back live traffic to previous slot."""
-        self.active_slot = (
-            DeploymentSlot.GREEN
-            if self.active_slot == DeploymentSlot.BLUE
-            else DeploymentSlot.BLUE
-        )
+        self.active_slot = DeploymentSlot.GREEN if self.active_slot == DeploymentSlot.BLUE else DeploymentSlot.BLUE
         self.status = UpgradeStatus.ROLLED_BACK
         return self.active_slot

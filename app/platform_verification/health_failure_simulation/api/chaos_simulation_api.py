@@ -1,6 +1,7 @@
 """
 Phase 3H.11: FastAPI Router for Enterprise Health Failure Simulation & Chaos Verification
 """
+
 from fastapi import APIRouter
 from typing import Dict, Any
 from ..runtime.chaos_simulation_runtime import ChaosSimulationRuntime
@@ -86,5 +87,5 @@ def get_health() -> Dict[str, Any]:
         "status": "HEALTHY",
         "subsystem": "health_failure_simulation",
         "engine": "DocuTask Chaos Simulation Engine",
-        "phase": "3H.11"
+        "phase": "3H.11",
     }

@@ -13,7 +13,7 @@ class PlanningPromptBuilder:
         return TASK_DECOMPOSITION_PROMPT.format(
             goal_name=request.goal.name,
             goal_description=request.goal.description,
-            budget_usd=request.context.planning_budget_usd
+            budget_usd=request.context.planning_budget_usd,
         )
 
     def build_system_prompt(self) -> str:

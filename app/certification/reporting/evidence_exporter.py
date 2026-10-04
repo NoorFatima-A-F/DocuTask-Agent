@@ -59,9 +59,7 @@ class EvidenceExporter:
         generated_files["phase_V12_maturity_assessment.json"] = mat_path
 
         # 3. Risk Register JSON
-        risk_data = {
-            "risk_register": [r.to_dict() if hasattr(r, "to_dict") else r for r in risk_register]
-        }
+        risk_data = {"risk_register": [r.to_dict() if hasattr(r, "to_dict") else r for r in risk_register]}
         risk_path = os.path.join(docs_dir, "phase_V12_risk_register.json")
         with open(risk_path, "w", encoding="utf-8") as f:
             json.dump(risk_data, f, indent=2)
@@ -75,18 +73,14 @@ class EvidenceExporter:
         generated_files["phase_V12_governance_report.json"] = gov_path
 
         # 5. Evidence Graph JSON
-        graph_data = {
-            "evidence_graph": [e.to_dict() if hasattr(e, "to_dict") else e for e in evidence_graph]
-        }
+        graph_data = {"evidence_graph": [e.to_dict() if hasattr(e, "to_dict") else e for e in evidence_graph]}
         graph_path = os.path.join(docs_dir, "phase_V12_evidence_graph.json")
         with open(graph_path, "w", encoding="utf-8") as f:
             json.dump(graph_data, f, indent=2)
         generated_files["phase_V12_evidence_graph.json"] = graph_path
 
         # 6. Portfolio Manifest JSON
-        port_data = {
-            "portfolio_documents": [p.to_dict() if hasattr(p, "to_dict") else p for p in portfolio_docs]
-        }
+        port_data = {"portfolio_documents": [p.to_dict() if hasattr(p, "to_dict") else p for p in portfolio_docs]}
         port_path = os.path.join(docs_dir, "phase_V12_portfolio_manifest.json")
         with open(port_path, "w", encoding="utf-8") as f:
             json.dump(port_data, f, indent=2)

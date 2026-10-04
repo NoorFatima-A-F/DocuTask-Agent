@@ -41,7 +41,9 @@ class DiscoveryValidator:
 
         lat_ok = predicted_latency_ms <= latency_ceiling_ms
         if not lat_ok:
-            violations.append(f"Predicted latency {predicted_latency_ms:.1f}ms exceeds ceiling {latency_ceiling_ms:.1f}ms")
+            violations.append(
+                f"Predicted latency {predicted_latency_ms:.1f}ms exceeds ceiling {latency_ceiling_ms:.1f}ms"
+            )
 
         cost_ok = predicted_cost_usd <= cost_ceiling_usd
         if not cost_ok:

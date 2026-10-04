@@ -1,6 +1,7 @@
 """
 Domain models for Part 2F: Enterprise Database Architecture Verification Framework.
 """
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Optional

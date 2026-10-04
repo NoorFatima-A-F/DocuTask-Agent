@@ -17,9 +17,9 @@ class VerificationStatus(str, Enum):
 
 class DisasterRecoveryTier(str, Enum):
     ENTERPRISE_DR_READY = "Enterprise Disaster Recovery Ready"  # 95-100%
-    PRODUCTION_RECOVERY_READY = "Production Recovery Ready"      # 90-94.99%
-    IMPROVEMENT_REQUIRED = "Improvement Required"                # 80-89.99%
-    FAILED = "Failed"                                            # <80%
+    PRODUCTION_RECOVERY_READY = "Production Recovery Ready"  # 90-94.99%
+    IMPROVEMENT_REQUIRED = "Improvement Required"  # 80-89.99%
+    FAILED = "Failed"  # <80%
 
 
 class CheckResult(BaseModel):
@@ -43,6 +43,7 @@ class BaseVerificationReport(BaseModel):
 
 # ─── 3L.1: Disaster Recovery Architecture Design ────────────────────────────
 
+
 class CriticalAssetSpec(BaseModel):
     layer: str
     component_name: str
@@ -64,6 +65,7 @@ class DisasterRecoveryArchitectureReport(BaseVerificationReport):
 
 # ─── 3L.2: Business Impact Analysis Verification ─────────────────────────────
 
+
 class ServiceImpactSpec(BaseModel):
     service_name: str
     tier: str
@@ -84,6 +86,7 @@ class BusinessImpactAnalysisReport(BaseVerificationReport):
 
 
 # ─── 3L.3: Recovery Objective Definition (RTO & RPO) ─────────────────────────
+
 
 class ObjectiveBenchmark(BaseModel):
     tier: str
@@ -108,6 +111,7 @@ class RecoveryObjectivesReport(BaseVerificationReport):
 
 # ─── 3L.4: Database Backup Verification ──────────────────────────────────────
 
+
 class DatabaseTableBackupValidation(BaseModel):
     table_name: str
     record_count_original: int
@@ -130,6 +134,7 @@ class DatabaseRecoveryReport(BaseVerificationReport):
 
 # ─── 3L.5: Document Storage Backup Verification ──────────────────────────────
 
+
 class DocumentStorageValidationItem(BaseModel):
     category: str
     original_files_count: int
@@ -151,6 +156,7 @@ class StorageRecoveryReport(BaseVerificationReport):
 
 # ─── 3L.6: Application Configuration Recovery ────────────────────────────────
 
+
 class ConfigAssetItem(BaseModel):
     asset_name: str
     asset_type: str
@@ -171,6 +177,7 @@ class ConfigurationRecoveryReport(BaseVerificationReport):
 
 # ─── 3L.7: Secret and Credential Recovery Verification ───────────────────────
 
+
 class SecretRestorationItem(BaseModel):
     secret_name: str
     encryption_algorithm: str = "AES-256-GCM"
@@ -189,6 +196,7 @@ class SecretRecoveryReport(BaseVerificationReport):
 
 
 # ─── 3L.8: Complete System Restore Test ──────────────────────────────────────
+
 
 class E2EValidationCheck(BaseModel):
     step_name: str
@@ -209,6 +217,7 @@ class CompleteSystemRestoreReport(BaseVerificationReport):
 
 
 # ─── 3L.9: Point-in-Time Recovery Verification ───────────────────────────────
+
 
 class PITRSnapshotValidation(BaseModel):
     snapshot_timestamp: str
@@ -231,6 +240,7 @@ class PITRReport(BaseVerificationReport):
 
 # ─── 3L.10: Backup Security Verification ─────────────────────────────────────
 
+
 class SecurityControlCheck(BaseModel):
     control_name: str
     requirement: str
@@ -250,6 +260,7 @@ class BackupSecurityReport(BaseVerificationReport):
 
 # ─── 3L.11: Disaster Recovery Automation Pipeline ────────────────────────────
 
+
 class DRAutomationStage(BaseModel):
     stage_number: int
     stage_name: str
@@ -268,6 +279,7 @@ class DRAutomationReport(BaseVerificationReport):
 
 
 # ─── 3L.12: Disaster Recovery Failure Simulations ────────────────────────────
+
 
 class SimulationScenarioResult(BaseModel):
     scenario_name: str
@@ -291,6 +303,7 @@ class DRFailureSimulationReport(BaseVerificationReport):
 
 # ─── 3L.13: Recovery Observability ───────────────────────────────────────────
 
+
 class RecoveryMetricItem(BaseModel):
     metric_name: str
     value: float
@@ -310,6 +323,7 @@ class RecoveryObservabilityReport(BaseVerificationReport):
 
 
 # ─── Scoring, Certification & Manifest Models ────────────────────────────────
+
 
 class CategoryScore(BaseModel):
     name: str

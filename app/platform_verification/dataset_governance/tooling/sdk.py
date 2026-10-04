@@ -1,10 +1,15 @@
 """
 Dataset Authoring & Validation Developer SDK.
 """
+
 from typing import Any, Dict, List
 from app.platform_verification.dataset_governance.domain.models import (
-    DatasetMetadata, DatasetSample, GroundTruthAnnotation, DatasetCategory,
-    DatasetLifecycleState, DatasetQualityReport
+    DatasetMetadata,
+    DatasetSample,
+    GroundTruthAnnotation,
+    DatasetCategory,
+    DatasetLifecycleState,
+    DatasetQualityReport,
 )
 from app.platform_verification.dataset_governance.core.registry import dataset_registry
 from app.platform_verification.dataset_governance.core.validator import dataset_validator
@@ -20,7 +25,7 @@ class DatasetDeveloperSDK:
         description: str,
         category: DatasetCategory,
         samples_raw: List[Dict[str, Any]],
-        ground_truth_raw: List[Dict[str, Any]]
+        ground_truth_raw: List[Dict[str, Any]],
     ) -> DatasetMetadata:
         meta = DatasetMetadata(
             dataset_id=dataset_id,
@@ -29,10 +34,12 @@ class DatasetDeveloperSDK:
             description=description,
             purpose=f"Verification evaluations for {name}",
             category=category,
-            lifecycle_state=DatasetLifecycleState.CREATED
+            lifecycle_state=DatasetLifecycleState.CREATED,
         )
         samples = [
-            DatasetSample(sample_id=s.get("id", f"{dataset_id}_{i}"), content=s["content"], language=s.get("language", "en"))
+            DatasetSample(
+                sample_id=s.get("id", f"{dataset_id}_{i}"), content=s["content"], language=s.get("language", "en")
+            )
             for i, s in enumerate(samples_raw)
         ]
         annotations = [

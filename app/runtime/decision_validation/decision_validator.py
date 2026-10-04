@@ -64,6 +64,7 @@ class DecisionValidator:
 
         import hashlib
         import json
+
         cert_data = json.dumps({"plan": plan, "errors": errors, "approved": is_approved}, sort_keys=True)
         cert_hash = hashlib.sha256(cert_data.encode()).hexdigest()[:16]
 

@@ -3,6 +3,7 @@ Platform Universal Constants.
 Contains only universal time formats, MIME types, hash algorithms, encodings, and SemVer patterns.
 Zero business constants allowed here.
 """
+
 ISO_8601_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 UTC_TIMESTAMP_FORMAT = "%Y-%m-%d %H:%M:%SZ"
 

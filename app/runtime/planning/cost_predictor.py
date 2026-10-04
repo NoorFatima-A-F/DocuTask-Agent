@@ -15,6 +15,7 @@ from app.runtime.planning.strategy_generator import CandidateStrategy
 
 class CostPredictionResult(BaseModel):
     """Rigorous cost estimate with 95% confidence bounds and step breakdown."""
+
     strategy_id: str
     total_cost_usd: float
     llm_cost_usd: float
@@ -58,7 +59,7 @@ class CostPredictionEngine:
 
             # Variance estimation (assume 15% standard deviation)
             std_dev = step_cost * 0.15
-            variance_sum += (std_dev ** 2)
+            variance_sum += std_dev**2
 
             if "gemini" in step.provider or "llm" in step.capability_id:
                 llm_cost += step_cost

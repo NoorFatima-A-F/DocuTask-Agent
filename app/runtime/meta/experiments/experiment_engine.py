@@ -61,7 +61,7 @@ class AutonomousExperimentationEngine:
         t_stat = diff / max(0.001, std_err)
 
         # Approximate p-value
-        p_val = max(0.0001, round(math.exp(-0.5 * (t_stat ** 0.5)), 4)) if t_stat > 0 else 0.50
+        p_val = max(0.0001, round(math.exp(-0.5 * (t_stat**0.5)), 4)) if t_stat > 0 else 0.50
         is_sig = p_val < 0.05
 
         winner = treatment_strategy if (is_sig and gain_pct > 0) else control_strategy

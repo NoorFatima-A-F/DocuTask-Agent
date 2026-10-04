@@ -17,9 +17,7 @@ class RecoveryGraphGenerator:
     """Generates structured recovery subgraphs targeting specific fault categories."""
 
     @classmethod
-    def generate_ocr_enhancement_recovery(
-        cls, mission_id: str, failed_node_id: str
-    ) -> List[DAGNode]:
+    def generate_ocr_enhancement_recovery(cls, mission_id: str, failed_node_id: str) -> List[DAGNode]:
         """
         Synthesizes recovery pipeline for poor scan / low OCR confidence:
         [Contrast & Deskew Preprocessing] -> [High-Res OCR Retry]
@@ -51,9 +49,7 @@ class RecoveryGraphGenerator:
         return [n1, n2]
 
     @classmethod
-    def generate_smt_schema_relaxation_recovery(
-        cls, mission_id: str, failed_node_id: str
-    ) -> List[DAGNode]:
+    def generate_smt_schema_relaxation_recovery(cls, mission_id: str, failed_node_id: str) -> List[DAGNode]:
         """
         Synthesizes recovery pipeline for arithmetic / schema mismatch:
         [Meta-Reflection Error Diagnosis] -> [Schema Relaxation & Rule Synthesis] -> [SMT Re-Validation]

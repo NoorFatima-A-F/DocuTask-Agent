@@ -62,9 +62,9 @@ class PerformanceEngine:
         agent_cards: List[AgentScorecard] = []
         for a in agents:
             perf_state = (
-                PerformanceState.EXCEEDING if a.productivity_score >= 0.98
-                else (PerformanceState.OPTIMAL if a.productivity_score >= 0.90
-                else PerformanceState.WARNING)
+                PerformanceState.EXCEEDING
+                if a.productivity_score >= 0.98
+                else (PerformanceState.OPTIMAL if a.productivity_score >= 0.90 else PerformanceState.WARNING)
             )
             agent_cards.append(
                 AgentScorecard(

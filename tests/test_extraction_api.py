@@ -12,17 +12,13 @@ from httpx import AsyncClient
 async def test_ai_extraction_api_endpoints(client: AsyncClient):
     """Verifies AI extraction HTTP API routes."""
     # 1. Register & Login User
-    reg = await client.post("/api/v1/auth/register", json={
-        "email": "ai_api_user@example.com",
-        "username": "aiapiuser",
-        "password": "Password123!"
-    })
+    reg = await client.post(
+        "/api/v1/auth/register",
+        json={"email": "ai_api_user@example.com", "username": "aiapiuser", "password": "Password123!"},
+    )
     assert reg.status_code == 201
 
-    login = await client.post("/api/v1/auth/login", json={
-        "username_or_email": "aiapiuser",
-        "password": "Password123!"
-    })
+    login = await client.post("/api/v1/auth/login", json={"username_or_email": "aiapiuser", "password": "Password123!"})
     token = login.json()["data"]["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
@@ -37,10 +33,7 @@ async def test_ai_extraction_api_endpoints(client: AsyncClient):
     doc_id = up_res.json()["data"]["document"]["id"]
 
     # 3. POST /api/v1/ai/extract/{document_id}
-    ext_payload = {
-        "document_type": "invoice",
-        "force_reextract": False
-    }
+    ext_payload = {"document_type": "invoice", "force_reextract": False}
     ext_res = await client.post(f"/api/v1/ai/extract/{doc_id}", json=ext_payload, headers=headers)
     assert ext_res.status_code == 200
     body = ext_res.json()

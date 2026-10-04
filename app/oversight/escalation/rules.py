@@ -15,6 +15,7 @@ class EscalationLevel(int, Enum):
 
 class EscalationRule(BaseModel):
     """Configuration for when and how to escalate stalled or high-risk review requests."""
+
     rule_id: str = Field(default_factory=lambda: f"esc_rule_{uuid.uuid4().hex[:8]}")
     tenant_id: str = "*"
     name: str

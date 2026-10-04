@@ -74,7 +74,9 @@ class DistributedEventBus:
             except Exception:
                 pass
 
-    def get_history(self, limit: int = 100, event_type: Optional[DistributedEventType] = None) -> List[DistributedEvent]:
+    def get_history(
+        self, limit: int = 100, event_type: Optional[DistributedEventType] = None
+    ) -> List[DistributedEvent]:
         if event_type:
             filtered = [e for e in self._history if e.event_type == event_type]
             return filtered[-limit:]

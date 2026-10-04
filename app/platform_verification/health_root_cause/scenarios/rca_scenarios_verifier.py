@@ -15,6 +15,7 @@ from dataclasses import dataclass, field
 @dataclass
 class RCAScenarioResult:
     """Result of an individual RCA verification scenario."""
+
     scenario_id: str
     name: str
     injected_condition: str
@@ -30,6 +31,7 @@ class RCAScenarioResult:
 @dataclass
 class RCAScenariosReport:
     """Report of all 5 RCA verification scenario test results."""
+
     total_scenarios: int = 5
     passed_scenarios: int = 5
     accuracy_rate_pct: float = 100.0

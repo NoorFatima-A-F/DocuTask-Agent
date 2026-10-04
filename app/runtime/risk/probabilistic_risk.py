@@ -39,7 +39,7 @@ class ProbabilisticRiskEstimator:
 
         # Explicit probabilistic formulas:
         # P(timeout) increases with high latency p95 and queue length
-        p_timeout = min(0.95, max(0.01, 0.7 * (lat_norm ** 2) + 0.3 * anomaly))
+        p_timeout = min(0.95, max(0.01, 0.7 * (lat_norm**2) + 0.3 * anomaly))
 
         # P(ocr_failure) inversely relates to ocr_confidence
         p_ocr = min(0.95, max(0.01, (1.0 - ocr_c) ** 1.5))
