@@ -1,19 +1,50 @@
-# Engineering Contribution Guidelines
+# Contributing to DocuTask-Agent
 
-## 1. Development Workflow
-1. Create a feature branch off `main`: `feature/issue-<id>-<description>`.
-2. Ensure strict adherence to repository topology boundaries.
-3. Write unit, integration, and contract tests for all new capabilities.
-4. Run static governance validation:
+Thank you for contributing to DocuTask-Agent. This project follows strict enterprise engineering practices, architectural boundaries, and deterministic quality gates.
+
+---
+
+## 1. Branching & PR Discipline
+
+1. **Trunk-Based Feature Branches**:
+   - Create focused branches off `main`: `feature/short-description` or `fix/issue-id`.
+   - Never commit directly to `main` without PR review and passing CI gates.
+
+2. **Pull Request Verification Matrix**:
+   All PRs must satisfy the local validation suite before merge:
    ```bash
-   python tooling/governance/repository_validator.py
-   python -m pytest tests/platform_verification/ -v
-   ```
-5. Ensure 0 lint errors, 0 type errors, and 100% test pass rate.
+   # 1. Linting & Formatting
+   ruff check app/ tests/ cli/ evals/ tooling/
 
-## 2. Code Structure Guidelines
-- Place business logic in `app/platform_verification/`.
-- Place generic enterprise primitives in `app/shared_kernel/`.
-- Place database, cache, storage, and telemetry adapters in `app/infrastructure/`.
-- Place ingress endpoints, CLI tools, and API routers in `app/interfaces/`.
-- Never commit secrets, raw evidence, or mock payloads into source control.
+   # 2. Static Type Checking
+   mypy app/ --ignore-missing-imports
+
+   # 3. Security AST & Dependency Auditing
+   bandit -r app/ -ll -q
+   pip-audit -r requirements.txt --ignore-vuln PYSEC-2026-1325
+
+   # 4. Pytest Test Matrix
+   pytest tests/ -v
+
+   # 5. Autonomous Evaluation Matrix
+   python -m cli.agent_cli evaluate --suite all
+   ```
+
+---
+
+## 2. Architecture & Design Standards
+
+- **Deterministic Contracts**: Always enforce Pydantic v2 validation for model and agent input/output boundaries (`app/schemas/`).
+- **Telemetry & Tracing**: Instrument non-deterministic LLM operations with `AgentSpan` and structured JSON logs (`app/core/telemetry.py`).
+- **Architecture Decision Records (ADRs)**: If you introduce structural changes, database migrations, or model selections, submit an ADR under `docs/adr/`.
+- **Fault-Tolerant Async Tasks**: Asynchronous tasks must define retry backoff, jitter, and route terminal failures to Dead-Letter Queues (DLQ) (`app/workers/tasks.py`).
+- **Path Portability**: Always resolve file and configuration paths dynamically using `REPO_ROOT` and `CONFIG_DIR` (`app/core/config.py`). Never use hardcoded absolute paths.
+
+---
+
+## 3. Release & Tagging Hygiene
+
+Releases follow [Semantic Versioning 2.0.0](https://semver.org/):
+- **Major (`v1.0.0`)**: Breaking API or schema changes.
+- **Minor (`v1.1.0`)**: Backwards-compatible features and new agent capabilities.
+- **Patch (`v1.0.1`)**: Bug fixes and security patches.

@@ -1,22 +1,17 @@
-## Description
-Provide a concise overview of the problem being solved and the rationale for the implementation.
+### Description
+Brief summary of the architectural changes, motivation, and intent.
 
-## Changes
-- Summary of technical changes made
-- Any modified schemas, interfaces, or configuration keys
+---
 
-## Testing
-- [ ] Automated tests executed and passing (`pytest tests/ enterprise_audit_engine/tests/ -v`)
-- [ ] Linting and style clean (`ruff check .`)
-- [ ] Static type checking clean (`mypy app/ enterprise_audit_engine/`)
+### Verification Matrix
+- [ ] Unit & Integration Tests pass (`pytest tests/`)
+- [ ] Static typing verified (`mypy app/ --ignore-missing-imports`)
+- [ ] Code formatting & linting clean (`ruff check .`)
+- [ ] AST Security & Dependency audit clean (`bandit -r app/ -ll -q`, `pip-audit -r requirements.txt --ignore-vuln PYSEC-2026-1325`)
+- [ ] AI Evaluation conformance score >= 0.90 (`python -m cli.agent_cli evaluate --suite all`)
+- [ ] Zero hardcoded secrets and paths dynamically resolved via `REPO_ROOT` / `CONFIG_DIR`
 
-## Security Impact
-- [ ] No hardcoded secrets, tokens, or private credentials introduced
-- [ ] Dependency vulnerabilities verified clean (`pip-audit`)
-- [ ] Input validation, authentication, and RBAC constraints enforced
+---
 
-## Checklist
-- [ ] My code adheres to the project's coding style and architecture standards
-- [ ] I have updated corresponding documentation in `docs/` (if applicable)
-- [ ] Any new dependencies are justified and pinned in `requirements.txt`
-- [ ] All CI checks are passing
+### Architecture Decision Records (ADRs)
+- [ ] Relevant ADR added or updated under `docs/adr/` if introducing architectural changes or trade-offs.
