@@ -337,3 +337,28 @@ scratch_*/
 *.swp
 *.orig
 *.rej
+
+# Enterprise Verification & Telemetry Evidence Dumps (stored in CAS / Artifacts, not Git)
+/*_verification/
+!app/platform_verification/
+!tests/platform_verification/
+/*_evidence/
+/*_certification/
+/*_simulation*/
+/*_package*/
+/audit_output/
+/evaluation_evidence/
+/release_audit/
+/reports/
+
+# Scratch & Debug Test Scripts at Root
+/powershell.bat
+/test_*.txt
+/test_*.py
+/run_*.py
+/codeql_alerts.json
+/95%
+/100%
+/RuntimeEvent
+/RuntimeEventBus
+

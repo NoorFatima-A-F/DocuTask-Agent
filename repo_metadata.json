@@ -52,13 +52,8 @@
     },
     {
       "name": "datasets",
-      "description": "Verification corpora, benchmarks & manifests",
+      "description": "Evaluation corpora, benchmarks & manifests",
       "owner": "@mlops-team"
-    },
-    {
-      "name": "evidence",
-      "description": "Non-production verification artifacts & CAS",
-      "owner": "@qa-automation"
     },
     {
       "name": "docs",
@@ -66,29 +61,34 @@
       "owner": "@architecture-board"
     },
     {
-      "name": "tooling",
-      "description": "Development, migration, and governance tools",
-      "owner": "@developer-experience"
+      "name": "evals",
+      "description": "Multimodal AI evaluation & accuracy benchmarks",
+      "owner": "@mlops-team"
     },
     {
-      "name": "deploy",
-      "description": "Cloud-native deployment manifests and IaC",
+      "name": "infra",
+      "description": "Cloud-native deployment manifests, Docker, K8s & Observability IaC",
       "owner": "@release-engineering"
     },
     {
-      "name": "security",
-      "description": "Security policies, threat models & compliance",
-      "owner": "@security-architects"
+      "name": "migrations",
+      "description": "Database schema migrations and evolution",
+      "owner": "@database-leads"
     },
     {
-      "name": "observability",
-      "description": "Dashboards, alerts, telemetry & schemas",
-      "owner": "@sre-team"
+      "name": "scripts",
+      "description": "Maintenance, database seeds, and operational runbooks",
+      "owner": "@developer-experience"
     },
     {
       "name": "tests",
       "description": "Hierarchical test suites across all tiers",
       "owner": "@qa-leads"
+    },
+    {
+      "name": "tooling",
+      "description": "Development, migration, and governance tools",
+      "owner": "@developer-experience"
     }
   ]
 }

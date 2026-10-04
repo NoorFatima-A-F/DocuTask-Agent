@@ -63,7 +63,7 @@ class RepositoryTopologyValidator:
         return len(self.errors) == 0
 
     def validate_topology_roots(self) -> bool:
-        required_roots = ["app", "config", "datasets", "evidence", "docs", "tooling", "deploy", "security", "observability", "tests"]
+        required_roots = ["app", "config", "datasets", "docs", "evals", "infra", "migrations", "scripts", "tests", "tooling"]
         for r in required_roots:
             p = self.repo_root / r
             if not p.exists():

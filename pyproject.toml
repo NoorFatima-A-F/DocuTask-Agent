@@ -55,6 +55,9 @@ test = [
 ]
 
 
+[project.scripts]
+docutask = "app.cli.main:main"
+
 [tool.pytest.ini_options]
 minversion = "8.0"
 addopts = "-ra -q"

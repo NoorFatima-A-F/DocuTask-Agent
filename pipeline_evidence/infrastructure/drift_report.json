@@ -1,9 +1,0 @@
-{
-  "declared_resources": 28,
-  "actual_resources": 28,
-  "drifted_resources": 0,
-  "drift_detected": false,
-  "drift_severity": "NONE",
-  "status": "PASSED",
-  "timestamp": "2026-10-04T07:27:00.412174+00:00"
-}
