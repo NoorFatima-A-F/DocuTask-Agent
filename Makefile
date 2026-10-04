@@ -1,4 +1,4 @@
-.PHONY: install check lint format test eval run-local clean
+.PHONY: install check lint format test eval run-local docker-build docker-run clean
 
 install:
 	pip install --upgrade pip
@@ -25,6 +25,14 @@ check: lint test eval
 
 run-local:
 	uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+docker-build:
+	docker build -t docutask-agent:latest .
+
+docker-run:
+	docker run -d --name docutask-agent -p 8000:8000 docutask-agent:latest
+	@sleep 3
+	curl -f http://localhost:8000/healthz || (docker logs docutask-agent && exit 1)
 
 clean:
 	rm -rf .pytest_cache .ruff_cache .mypy_cache htmlcov coverage.xml artifacts/

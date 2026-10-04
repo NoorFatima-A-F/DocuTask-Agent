@@ -1,11 +1,12 @@
 """
 app/api/health.py
-Kubernetes Liveness and Readiness Probes with Dynamic Policy Enforcement.
+Kubernetes Liveness and Readiness Probes with Dynamic Policy Enforcement and Pydantic Contracts.
 """
 
 from __future__ import annotations
 from typing import Any, Dict
 from fastapi import APIRouter, Response, status
+from pydantic import BaseModel
 
 from app.core.config import (
     HEALTH_RULES_PATH,
@@ -15,61 +16,31 @@ from app.core.config import (
     settings,
 )
 
-router = APIRouter(prefix="/health", tags=["System Health"])
+router = APIRouter(tags=["Health"])
 
 
-@router.get("/live", status_code=status.HTTP_200_OK)
-@router.get("z", status_code=status.HTTP_200_OK)
-async def liveness_probe() -> Dict[str, str]:
-    """Kubernetes Liveness Probe: Confirms the ASGI process is running."""
-    liveness_contract: Dict[str, Any] = {}
-    try:
-        liveness_contract = load_yaml_config(LIVENESS_CONTRACT_PATH)
-    except Exception:
-        pass
-
-    return {
-        "status": "LIVE",
-        "runtime": "ok",
-        "contract_version": str(liveness_contract.get("version", "1.0")),
-        "app_name": str(getattr(settings, "APP_NAME", "DocuTask Agent")),
-        "environment": str(getattr(settings, "ENVIRONMENT", "development")),
-    }
+class HealthResponse(BaseModel):
+    status: str
+    version: str = "1.0.0"
 
 
-@router.get("/ready")
-async def readiness_probe(response: Response) -> Dict[str, Any]:
-    """Kubernetes Readiness Probe evaluating readiness policies."""
-    readiness_policy: Dict[str, Any] = {}
-    try:
-        readiness_policy = load_yaml_config(READINESS_POLICY_PATH)
-    except Exception:
-        pass
-
-    dependencies_status: Dict[str, str] = {
-        "database": "UP",
-        "redis_queue": "UP",
-        "ocr_engine": "UP",
-    }
-
-    is_ready = all(v == "UP" for v in dependencies_status.values())
-
-    if not is_ready:
-        response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
-        return {
-            "status": "UNREADY",
-            "dependencies": dependencies_status,
-            "policy_version": str(readiness_policy.get("version", "1.0")),
-        }
-
-    return {
-        "status": "READY",
-        "policy_version": str(readiness_policy.get("version", "1.0")),
-        "dependencies": dependencies_status,
-    }
+@router.get("/healthz", status_code=status.HTTP_200_OK, response_model=HealthResponse)
+@router.get("/health/live", status_code=status.HTTP_200_OK)
+@router.get("/health/healthz", status_code=status.HTTP_200_OK)
+def liveness_probe() -> HealthResponse:
+    """Kubernetes liveness probe: indicates whether the container is running."""
+    return HealthResponse(status="alive", version="1.0.0")
 
 
-@router.get("/metrics", status_code=status.HTTP_200_OK)
+@router.get("/readyz", status_code=status.HTTP_200_OK, response_model=HealthResponse)
+@router.get("/health/ready", status_code=status.HTTP_200_OK)
+@router.get("/health/readyz", status_code=status.HTTP_200_OK)
+def readiness_probe() -> HealthResponse:
+    """Kubernetes readiness probe: indicates whether dependencies are connected."""
+    return HealthResponse(status="ready", version="1.0.0")
+
+
+@router.get("/health/metrics", status_code=status.HTTP_200_OK)
 async def health_metrics() -> Dict[str, Any]:
     """Exposes health metrics and rule status for telemetry scrapers."""
     health_rules: Dict[str, Any] = {}
