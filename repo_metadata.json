@@ -46,6 +46,11 @@
       "owner": "@platform-architects"
     },
     {
+      "name": "cli",
+      "description": "Unified platform CLI entrypoints and commands",
+      "owner": "@developer-experience"
+    },
+    {
       "name": "config",
       "description": "Configuration profiles and schemas",
       "owner": "@devops-leads"

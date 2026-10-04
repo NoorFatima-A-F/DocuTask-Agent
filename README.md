@@ -237,22 +237,22 @@ curl -X POST "http://localhost:8000/api/v1/documents/process" \
 
 ---
 
-## Testing & Verification
+## Testing & Autonomous Verification
 
-The repository contains an exhaustive test suite covering security controls, API contracts, and platform resilience:
+The platform features deterministic unit and integration test pyramids along with autonomous agent evaluation harnesses:
 
 ```bash
-# Run security regressions (path traversal, symlinks, log sanitization)
+# Execute centralized platform verification & governance
+python -m cli.main verify --suite all
+
+# Run autonomous agent evaluation & accuracy benchmarks
+python -m cli.main evaluate --suite extraction --strict
+
+# Execute distributed chaos injection & multi-region failover drill
+python -m cli.main simulate-failover --workers 10 --fault-rate 0.2
+
+# Execute security & CodeQL regression suites
 pytest tests/security/ -v
-
-# Run core pipeline & schema validation tests
-pytest tests/core/ -v
-
-# Run platform verification & integration tests
-pytest tests/platform_verification/ -q
-
-# Run full suite
-pytest
 ```
 
 ---
@@ -261,26 +261,43 @@ pytest
 
 ```text
 DocuTask-Agent/
-├── app/
-│   ├── ai/                 # Multimodal extraction logic & prompt templates
-│   ├── core/               # Security primitives, config, and database engines
-│   ├── connectors/         # Storage and external platform adapters
-│   ├── evaluation/         # Confidence thresholding & schema verification
-│   ├── infrastructure/     # Failover planners, orchestrators, and incident monitors
-│   ├── jobs/               # Celery task definitions, broker configs, and DLQ
-│   ├── middleware/         # Request context, rate limiting, and exception handlers
-│   ├── ocr/                # Layout parsers and OCR pipeline wrappers
-│   └── services/           # Extraction, document, and auth service controllers
-├── docs/                   # Architecture diagrams and security verification reports
-├── migrations/             # Alembic database migrations
-├── tests/
-│   ├── connectors/         # Webhook and external storage mock suites
-│   ├── core/               # Token hashing and configuration tests
-│   ├── platform_verification/ # End-to-end integration and resilience tests
-│   └── security/           # Path traversal, log injection, and boundary tests
-├── docker-compose.yml
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                 # Linting (Ruff), Type checking (Mypy), AST Security (Bandit), Pytest
+│       └── agent-evals.yml        # Scheduled autonomous evaluation & chaos matrix
+├── app/                           # Core production package
+│   ├── api/                       # FastAPI routers & middlewares
+│   ├── core/                      # Settings (Pydantic-Settings), security primitives, database
+│   ├── cli/                       # Centralized platform CLI implementation
+│   ├── models/                    # SQLAlchemy Async ORM models
+│   ├── schemas/                   # Pydantic v2 data contracts
+│   ├── services/                  # Multimodal extraction, OCR routing, LLM orchestration
+│   ├── agents/                    # Autonomous multi-agent framework
+│   ├── pipeline/                  # Async pipeline processing
+│   ├── runtime/                   # Distributed cloud runtime & fabric
+│   └── workers/                   # Celery / Redis task queues & DLQ
+├── cli/                           # Unified Platform CLI Entrypoint
+│   └── main.py                    # Centralized CLI runner
+├── evals/                         # AI evaluation benchmarks & accuracy datasets
+│   ├── benchmarks/                # Latency, p99, and cost budgets
+│   ├── datasets/                  # Golden document samples & edge cases
+│   ├── ground_truth/              # Validated Pydantic target schemas
+│   └── suites/                    # Consolidated verification logic (chaos, extraction, reliability)
+├── infra/                         # Infrastructure as Code
+│   ├── docker/                    # Dockerfiles & compose manifests
+│   ├── k8s/                       # Kubernetes base & overlay manifests
+│   └── observability/             # Grafana dashboards & Prometheus alerts
+├── migrations/                    # Alembic migration scripts
+├── scripts/                       # Maintenance, database seeds, and operational runbooks
+├── tests/                         # Consolidated test suite
+│   ├── distributed/               # Cloud runtime & worker fleet tests
+│   ├── security/                  # CodeQL regression & path security tests
+│   └── platform_verification/     # Full 16-stage platform verification pyramid
+├── .env.example
+├── .gitignore                     # Hardened against telemetry dumps, bytecode, and scratch files
+├── .pre-commit-config.yaml        # Standard hooks: Ruff, secret detection, large file block
 ├── Dockerfile
-├── requirements.txt
+├── pyproject.toml                 # Unified packaging, build system, and tool configs
 └── README.md
 ```
 

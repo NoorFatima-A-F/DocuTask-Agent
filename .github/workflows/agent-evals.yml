@@ -1,0 +1,55 @@
+name: Autonomous Agent Evaluation & Chaos Harness
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Daily midnight execution
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Target Evaluation Suite (extraction | chaos | reliability | all)"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - extraction
+          - chaos
+          - reliability
+
+permissions:
+  contents: read
+
+jobs:
+  agent-verification:
+    name: Autonomous Agent & Chaos Verification Matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio pytest-cov
+
+      - name: Run Autonomous Verification Suite
+        env:
+          PYTHONPATH: .
+          APP_ENV: test
+          DEBUG: "false"
+        run: |
+          python -m cli.main evaluate --suite ${{ github.event.inputs.suite || 'all' }} --strict
+
+      - name: Archive Verification Evidence Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-telemetry
+          path: artifacts/
+          if-no-files-found: ignore

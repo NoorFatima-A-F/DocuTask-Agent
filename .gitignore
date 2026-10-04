@@ -350,6 +350,7 @@ scratch_*/
 /evaluation_evidence/
 /release_audit/
 /reports/
+/artifacts/
 
 # Scratch & Debug Test Scripts at Root
 /powershell.bat
