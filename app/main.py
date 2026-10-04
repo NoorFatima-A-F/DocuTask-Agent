@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
+from app.api.health import router as health_router
 from app.api.v1.router import api_v1_router
 from app.core.config import settings
 from app.core.logging import logger
@@ -88,6 +89,10 @@ def create_application() -> FastAPI:
 
     # Exception Handlers
     register_exception_handlers(app)
+
+    # Include Health & System Readiness Probes
+    app.include_router(health_router)
+    app.include_router(health_router, prefix=settings.API_V1_STR)
 
     # Include API Routers
     app.include_router(api_v1_router, prefix=settings.API_V1_STR)

@@ -1,6 +1,6 @@
 """
 DocuTask Agentic CLI.
-Autonomous Evaluation, Chaos Injection, and Telemetry Engine.
+Autonomous Evaluation, Chaos Injection, Adversarial OCR Fuzzing, and Telemetry Engine.
 """
 
 from __future__ import annotations
@@ -11,6 +11,12 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+# Bootstrap path
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from evals.runners.fuzz_ocr_resilience import SyntheticOCRFuzzer
 from evals.suites.chaos import ChaosEngine
 from evals.suites.extraction import ExtractionHarness
 from evals.suites.reliability import DisasterRecoveryHarness
@@ -51,6 +57,12 @@ def evaluate(
         telemetry["reliability"] = res
         print(f"[+] Reliability Suite: {res.get('status', 'PASSED')} | RPO: {res.get('rpo_achieved_sec', 0.0)}s | Data Loss: {res.get('data_loss_detected', False)}")
 
+    if suite in ("fuzz", "all"):
+        fuzzer = SyntheticOCRFuzzer(corruption_rate=0.08)
+        res = fuzzer.run_fuzzing_drill()
+        telemetry["fuzz_ocr_resilience"] = res
+        print(f"[+] Synthetic OCR Fuzzer: {res.get('status', 'PASSED')} | Resilience: {res.get('resilience_score', 0.0) * 100:.1f}% | Recovered: {res.get('recovered_schemas', 0)}/{res.get('total_fuzzed_samples', 0)}")
+
     artifact_path = Path(output_dir) / "verification_telemetry.json"
     with open(artifact_path, "w", encoding="utf-8") as f:
         json.dump(telemetry, f, indent=2)
@@ -68,10 +80,19 @@ def simulate_chaos(fault_rate: float = 0.15) -> Dict[str, Any]:
     return res
 
 
+def fuzz_resilience(corruption_rate: float = 0.08) -> Dict[str, Any]:
+    """Executes synthetic OCR adversarial fuzzing against extraction contracts."""
+    print(f"[*] Executing Adversarial OCR Fuzzing Drill (corruption_rate: {corruption_rate:.2f})...")
+    fuzzer = SyntheticOCRFuzzer(corruption_rate=corruption_rate)
+    res = fuzzer.run_fuzzing_drill()
+    print(f"[+] OCR Fuzzing Complete: status={res.get('status')} resilience_score={res.get('resilience_score')} recovered={res.get('recovered_schemas')}/{res.get('total_fuzzed_samples')}")
+    return res
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="docutask-agent",
-        description="DocuTask Agent CLI: Autonomous Evaluations & Chaos Testing",
+        description="DocuTask Agent CLI: Autonomous Evaluations, Fuzzing & Resilience",
     )
     subparsers = parser.add_subparsers(dest="command", help="Agent commands")
 
@@ -80,8 +101,8 @@ def build_parser() -> argparse.ArgumentParser:
     eval_p.add_argument(
         "--suite",
         default="all",
-        choices=["all", "extraction", "chaos", "reliability"],
-        help="Target suite (extraction | chaos | reliability | all)",
+        choices=["all", "extraction", "chaos", "reliability", "fuzz"],
+        help="Target suite (extraction | chaos | reliability | fuzz | all)",
     )
     eval_p.add_argument(
         "--threshold",
@@ -110,6 +131,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Stochastic failure injection probability (0.0 - 1.0)",
     )
 
+    # fuzz-resilience
+    fuzz_p = subparsers.add_parser("fuzz-resilience", help="Execute synthetic OCR adversarial fuzzing against extraction contracts")
+    fuzz_p.add_argument(
+        "--corruption-rate",
+        type=float,
+        default=0.08,
+        help="Character corruption rate (0.0 - 1.0)",
+    )
+
     return parser
 
 
@@ -131,6 +161,9 @@ def main(args: Optional[List[str]] = None) -> int:
         return 0
     elif parsed.command == "simulate-chaos":
         simulate_chaos(fault_rate=parsed.fault_rate)
+        return 0
+    elif parsed.command == "fuzz-resilience":
+        fuzz_resilience(corruption_rate=parsed.corruption_rate)
         return 0
 
     parser.print_help()

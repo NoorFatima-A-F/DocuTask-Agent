@@ -76,3 +76,22 @@ class DeleteResponse(BaseModel):
 
     id: UUID
     message: str = "Document deleted successfully"
+
+
+class DocumentExtractionSchema(BaseModel):
+    """Deterministic Pydantic V2 Contract for Invoice and Document Extractions."""
+
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)
+
+    invoice_number: str = Field(..., description="Invoice or reference identifier")
+    vendor_name: str = Field(..., description="Issuing vendor or merchant name")
+    total_amount: float = Field(..., description="Total monetary amount")
+    currency: str = Field(default="USD", description="ISO 4217 Currency Code")
+    due_date: Optional[str] = Field(default=None, description="Due date string")
+
+    @classmethod
+    def clean_ocr_text(cls, text: Any) -> str:
+        """Helper to sanitize common optical artifacts."""
+        if not isinstance(text, str):
+            return str(text) if text is not None else ""
+        return text.strip()
