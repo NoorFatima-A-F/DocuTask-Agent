@@ -121,7 +121,7 @@ def resolve_safe_path(
 ) -> Path:
     """
     CodeQL recognized pattern for py/path-injection prevention.
-    Relies on os.path.commonpath boundary verification.
+    Relies on os.path.commonpath boundary verification and strict token parsing.
     """
     if untrusted_path is None:
         raise UnsafePathError("Empty or None path provided")
@@ -130,16 +130,32 @@ def resolve_safe_path(
     if not untrusted_str:
         raise UnsafePathError("Empty path provided")
 
-    if untrusted_str == ".":
+    if "\x00" in untrusted_str:
+        raise UnsafePathError("Null byte detected in path expression")
+
+    # 1. Reject Windows-style drive letters (e.g., C:\...)
+    if len(untrusted_str) >= 2 and untrusted_str[1] == ":" and untrusted_str[0].isalpha():
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+
+    # 2. Normalize backslashes to forward slashes to defend against Windows-style traversal on POSIX
+    normalized = untrusted_str.replace("\\", "/")
+
+    # 3. Check for raw absolute paths
+    if normalized.startswith("/") or Path(normalized).is_absolute():
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+
+    # 4. Check for traversal tokens
+    parts = [p for p in normalized.split("/") if p]
+    if ".." in parts:
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+
+    if normalized == ".":
         if allow_base:
             return Path(os.path.abspath(str(base_dir)))
         raise UnsafePathError("Security violation: Candidate path matches base directory when allow_base=False")
 
-    if "\x00" in untrusted_str:
-        raise UnsafePathError("Null byte detected in path expression")
-
     base = os.path.abspath(str(base_dir))
-    target = os.path.abspath(os.path.join(base, untrusted_str))
+    target = os.path.abspath(os.path.join(base, *parts))
 
     try:
         common = os.path.commonpath([base, target])
