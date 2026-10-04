@@ -1,6 +1,8 @@
 """
+evals/harness.py
 Deterministic Evaluation Harness for DocuTask Agent.
 Evaluates document parsing, tool routing, and schema validity against golden records.
+Exports structured Markdown scorecards directly to $GITHUB_STEP_SUMMARY.
 """
 
 from __future__ import annotations
@@ -18,12 +20,58 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 
+def write_github_summary(
+    total: int,
+    passed: int,
+    accuracy: float,
+    threshold: float,
+    latency_ms: float = 0.0,
+    results: Optional[List[Dict[str, Any]]] = None,
+) -> None:
+    """Writes a structured Markdown scorecard to GitHub Actions Step Summary."""
+    summary_path = os.getenv("GITHUB_STEP_SUMMARY")
+    if not summary_path:
+        return
+
+    status_badge = "✅ **PASSED**" if accuracy >= threshold else "❌ **FAILED**"
+
+    rows = ""
+    if results:
+        rows = "\n".join(
+            f"| `{r['document_id']}` | `{r['intent']}` | `{r['field_count']}` | `{r['tokens']}` | {'✅ PASS' if r['status'] == 'PASS' else '❌ FAIL'} |"
+            for r in results
+        )
+
+    markdown = f"""
+### 🤖 Agent Deterministic Evaluation Summary
+
+| Metric | Target | Actual | Status |
+| :--- | :--- | :--- | :--- |
+| **Total Test Cases** | - | `{total}` | ℹ️ |
+| **Valid Schema & Intents** | - | `{passed}` | ℹ️ |
+| **Extraction Accuracy** | `>={threshold:.1%}` | `{accuracy:.1%}` | {status_badge} |
+| **Evaluation Latency** | `<=500ms` | `{latency_ms:.2f}ms` | ⚡ |
+
+> Evaluated against `evals/data/golden_v1.jsonl`.
+
+#### Detailed Benchmark Scorecard
+| Document ID | Expected Intent | Extracted Fields | Tokens | Conformance |
+| :--- | :--- | :--- | :--- | :--- |
+{rows}
+"""
+    try:
+        with open(summary_path, "a", encoding="utf-8") as f:
+            f.write(markdown)
+    except Exception as exc:
+        print(f"[WARN] Unable to append to GITHUB_STEP_SUMMARY: {exc}")
+
+
 def evaluate_dataset(
     dataset_path: Path,
     min_accuracy: float = 0.90,
     output_report: Optional[str] = "artifacts/eval-report.json",
 ) -> bool:
-    """Evaluates golden dataset records against contract schemas and prints an ASCII summary."""
+    """Evaluates golden dataset records against contract schemas and exports summary."""
     start_time = time.perf_counter()
     if not dataset_path.exists():
         print(f"[ERROR] Evaluation dataset not found at {dataset_path}")
@@ -52,7 +100,6 @@ def evaluate_dataset(
         if is_valid:
             passed += 1
 
-        # Simulate deterministic latency and token usage
         sample_tokens = len(str(r)) // 4 + 120
         total_tokens += sample_tokens
 
@@ -69,7 +116,7 @@ def evaluate_dataset(
     elapsed_ms = round((time.perf_counter() - start_time) * 1000.0, 2)
     accuracy = (passed / total) if total > 0 else 0.0
 
-    # Render ASCII Summary Table
+    # Render ASCII Summary Table to stdout
     print("\n" + "=" * 76)
     print("           DOCUTASK-AGENT DETERMINISTIC EVALUATION MATRIX")
     print("=" * 76)
@@ -83,6 +130,9 @@ def evaluate_dataset(
     print(f"Summary: Total: {total} | Passed: {passed} | Accuracy: {accuracy:.2%} | Latency: {elapsed_ms}ms")
     print(f"Estimated Token Budget: {total_tokens} tokens across {total} evaluation benchmarks")
     print("=" * 76)
+
+    # Export to GitHub Actions Step Summary if present
+    write_github_summary(total, passed, accuracy, min_accuracy, elapsed_ms, results)
 
     report = {
         "status": "PASSED" if accuracy >= min_accuracy else "FAILED",
