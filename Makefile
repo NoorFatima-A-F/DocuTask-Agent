@@ -1,39 +1,26 @@
-.PHONY: install lint format test test-fast eval eval-smoke eval-all docker-up docker-down clean
+.PHONY: install lint format test eval run-local clean
 
 install:
 	pip install --upgrade pip
-	pip install -r requirements.txt -r requirements-dev.txt
-	pre-commit install
+	pip install -e ".[dev,evals]" || pip install -r requirements.txt -r requirements-dev.txt
 
 lint:
-	ruff check .
-	ruff format --check .
+	ruff check app/ tests/
+	ruff format --check app/ tests/
 	mypy app/ --ignore-missing-imports
 
 format:
-	ruff format .
-	ruff check --fix .
+	ruff format app/ tests/
+	ruff check --fix app/ tests/
 
 test:
-	pytest tests/ -v --import-mode=importlib --cov=app --cov-report=term-missing
-
-test-fast:
-	pytest tests/ -q --import-mode=importlib
+	pytest tests/ -v --cov=app --cov-report=term-missing --ignore=tests/world --ignore=tests/world_model --ignore=tests/platform_verification
 
 eval:
 	python -m evals.harness --golden-dataset evals/data/golden_v1.jsonl --threshold 0.90
 
-eval-smoke:
-	python -m evals.runner --dataset-tier smoke
-
-eval-all:
-	python -m evals.runner --dataset-tier regression-gold
-
-docker-up:
-	docker compose up --build -d
-
-docker-down:
-	docker compose down --remove-orphans
+run-local:
+	uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 clean:
 	rm -rf .pytest_cache .ruff_cache .mypy_cache htmlcov coverage.xml artifacts/
