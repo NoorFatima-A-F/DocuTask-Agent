@@ -133,18 +133,22 @@ def resolve_safe_path(
     if "\x00" in untrusted_str:
         raise UnsafePathError("Null byte detected in path expression")
 
-    # 1. Reject Windows-style drive letters (e.g., C:\...)
-    if len(untrusted_str) >= 2 and untrusted_str[1] == ":" and untrusted_str[0].isalpha():
+    # 1. Reject Windows-style drive letters (e.g., C:\..., D:/...)
+    if re.match(r"^[a-zA-Z]:", untrusted_str) or (len(untrusted_str) >= 2 and untrusted_str[1] == ":" and untrusted_str[0].isalpha()):
         raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
 
-    # 2. Normalize backslashes to forward slashes to defend against Windows-style traversal on POSIX
+    # 2. Reject UNC paths (e.g., \\server\share or //server/share)
+    if untrusted_str.startswith(("\\\\", "//")):
+        raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
+
+    # 3. Normalize backslashes to forward slashes to defend against Windows-style traversal on POSIX
     normalized = untrusted_str.replace("\\", "/")
 
-    # 3. Check for raw absolute paths
-    if normalized.startswith("/") or Path(normalized).is_absolute():
+    # 4. Check for raw absolute paths
+    if normalized.startswith("/") or Path(normalized).is_absolute() or Path(untrusted_str).is_absolute():
         raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
 
-    # 4. Check for traversal tokens
+    # 5. Check for traversal tokens
     parts = [p for p in normalized.split("/") if p]
     if ".." in parts:
         raise UnsafePathError(f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'")
