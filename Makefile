@@ -1,4 +1,4 @@
-.PHONY: install lint format test test-fast eval-smoke eval-all docker-up docker-down clean
+.PHONY: install lint format test test-fast eval eval-smoke eval-all docker-up docker-down clean
 
 install:
 	pip install --upgrade pip
@@ -19,6 +19,9 @@ test:
 
 test-fast:
 	pytest tests/ -q --import-mode=importlib
+
+eval:
+	python -m evals.harness --golden-dataset evals/data/golden_v1.jsonl --threshold 0.90
 
 eval-smoke:
 	python -m evals.runner --dataset-tier smoke
