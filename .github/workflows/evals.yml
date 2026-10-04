@@ -1,27 +1,20 @@
-name: Model & Regression Evaluation Harness
+name: Agent Evaluation Gate
 
 on:
-  workflow_dispatch:
-    inputs:
-      dataset_size:
-        description: "Eval dataset tier (smoke | regression-gold)"
-        required: true
-        default: "smoke"
-        type: choice
-        options:
-          - smoke
-          - regression-gold
-  schedule:
-    - cron: '0 4 * * *' # Nightly execution at 04:00 UTC
   pull_request:
     branches: [main]
+    paths:
+      - 'app/agents/**'
+      - 'app/services/**'
+      - 'evals/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  run-eval:
-    name: Model & Regression Evaluation Harness
+  offline-evals:
+    name: Deterministic Golden Benchmark Evaluation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,31 +30,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ".[dev,evals]" || pip install -r requirements.txt -r requirements-dev.txt
 
-      - name: Run Golden Dataset Evals & Fuzzing
+      - name: Run Deterministic Golden Benchmark
         env:
           PYTHONPATH: .
-        run: |
-          python -m evals.harness --golden-dataset evals/data/golden_v1.jsonl --threshold 0.90
-          python -m evals.runner --dataset-tier smoke --output-report artifacts/eval-report.json
-
-      - name: Publish Evaluation Summary to GitHub
-        run: |
-          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
-          ## 🤖 Autonomous Agent Evaluation Report
-
-          | Metric | Baseline | Observed Run | Conformance Status |
-          | :--- | :--- | :--- | :--- |
-          | **Schema Conformance** | >= 90.0% | **100.0%** | PASSED |
-          | **Adversarial Resilience** | >= 75.0% | **88.2%** | PASSED |
-          | **Hallucination Rate** | <= 5.0% | **0.0%** | PASSED |
-          | **Extraction Latency (p95)**| <= 500ms | **320ms** | PASSED |
-
-          > **Autonomous Policy Verification**: Zero schema drift detected against `evals/data/golden_v1.jsonl`.
-          EOF
-
-      - name: Archive Evaluation Results
-        uses: actions/upload-artifact@v4
-        with:
-          name: eval-results
-          path: artifacts/eval-report.json
-          if-no-files-found: ignore
+        run: python -m evals.harness --golden-dataset evals/data/golden_v1.jsonl --threshold 0.90

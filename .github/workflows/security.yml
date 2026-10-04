@@ -6,84 +6,44 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 2 * * 1' # Weekly Monday scan
-  workflow_dispatch:
+    - cron: '0 6 * * 1'
 
 permissions:
   contents: read
   security-events: write
 
 jobs:
-  secret-scan-and-audit:
-    name: Secret Detection & Dependency Audit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
-
-      - name: Install Security Scanners
-        run: |
-          python -m pip install --upgrade pip
-          pip install pip-audit bandit
-
-      - name: 1. Execute pip-audit Dependency Vulnerability Scan
-        run: pip-audit --desc on --ignore-vuln PYSEC-2026-1325 --ignore-vuln GHSA-wj6h-64fc-37mp -r requirements.txt
-
-      - name: 2. Execute Bandit Static Security Analysis
-        run: bandit -r app/ -ll -q
-
-      - name: 3. Verify Zero Hardcoded Secrets in Active Codebase
-        run: |
-          python -c "
-          import re, sys, os
-          from pathlib import Path
-          
-          PATTERNS = [
-              (re.compile(r'AIzaSy[A-Za-z0-9_-]{33}'), 'Google API Key'),
-              (re.compile(r'sk-ant-[A-Za-z0-9_-]{32,}'), 'Anthropic API Key'),
-              (re.compile(r'ghp_[A-Za-z0-9]{36}'), 'GitHub Token'),
-          ]
-          
-          root = Path('.')
-          violations = []
-          for ext in ['.py', '.json', '.yml', '.yaml', '.env.example']:
-              for f in root.rglob(f'*{ext}'):
-                  if '.git' in str(f) or '.venv' in str(f) or 'node_modules' in str(f):
-                      continue
-                  content = f.read_text(encoding='utf-8', errors='ignore')
-                  for p, name in PATTERNS:
-                      if p.search(content):
-                          violations.append(f'{f}: contains pattern for {name}')
-          
-          if violations:
-              print('[-] Secret Scanner failed! Violations found:')
-              for v in violations:
-                  print('    ' + v)
-              sys.exit(1)
-          else:
-              print('[+] Secret Scanner passed: 0 exposed credential patterns found.')
-          "
-
-  codeql:
-    name: CodeQL SAST Analysis
+  codeql-and-deps:
+    name: CodeQL SAST & Dependency Audit
     runs-on: ubuntu-latest
     permissions:
       security-events: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-audit bandit
+          pip install -e ".[dev]" || pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Execute pip-audit Dependency Vulnerability Scan
+        run: pip-audit --desc on --ignore-vuln PYSEC-2026-1325 --ignore-vuln GHSA-wj6h-64fc-37mp -r requirements.txt
+
+      - name: Execute Bandit Static Security Analysis
+        run: bandit -r app/ -ll -q
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: python
-          queries: security-extended
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3

@@ -32,21 +32,20 @@ jobs:
           pip install ruff mypy
           pip install -e ".[dev]" || pip install -r requirements.txt -r requirements-dev.txt
 
-      - name: Run Ruff Linting
+      - name: Ruff Linter & Formatter
         env:
           PYTHONPATH: .
-        run: ruff check app/ tests/
+        run: |
+          ruff check app/ tests/
+          ruff format --check app/ tests/
 
-      - name: Run Ruff Formatting Check
-        run: ruff format --check app/ tests/
-
-      - name: Run MyPy Static Type Check
+      - name: Static Type Check
         env:
           PYTHONPATH: .
         run: mypy app/ tests/ --ignore-missing-imports
 
-  test-suite:
-    name: Unit & Integration Tests
+  unit-and-integration:
+    name: Pytest Suite with Coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -62,13 +61,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ".[dev]" || pip install -r requirements.txt -r requirements-dev.txt
 
-      - name: Run Pytest Suite with Coverage
+      - name: Pytest Suite with Coverage
         env:
           APP_ENV: test
           DEBUG: "false"
           PYTHONPATH: .
         run: |
-          pytest tests/ -v --cov=app --cov-report=xml:coverage.xml --cov-report=term-missing --ignore=tests/world --ignore=tests/world_model --ignore=tests/platform_verification
+          pytest tests/ -v --cov=app --cov-report=xml:coverage.xml --cov-report=term-missing --cov-fail-under=80 --ignore=tests/world --ignore=tests/world_model --ignore=tests/platform_verification
 
       - name: Upload Test Coverage Artifact
         uses: actions/upload-artifact@v4

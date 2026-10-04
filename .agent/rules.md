@@ -1,11 +1,10 @@
-# Agent Engineering Protocol
+# Antigravity Operating Rules for DocuTask-Agent
 
-## Architectural Constraints
-1. Clean Architecture: Maintain strict separation between `core/models`, `services/ocr`, `services/extraction`, and `api/`.
-2. Type Safety: All domain models and API contracts must use Pydantic v2 schemas with explicit Field constraints.
-3. Observability: Every agent workflow must emit structured OpenTelemetry spans with document ID, duration, and token usage attributes.
+## 1. Architectural Boundaries
+- Strict Layering: `src/api` -> `src/services` -> `src/core/models`.
+- No inline prompt strings: Extract all system instructions and schema definitions into `src/agents/prompts/` and `src/schemas/`.
+- Observability: Wrap all LLM and OCR operations in OpenTelemetry spans.
 
-## Verification Checklist Prior to PR
-- Run `make lint` to confirm zero Ruff and Mypy violations.
-- Run `make test` to confirm unit test coverage >= 80%.
-- Run `make eval` to verify extraction accuracy >= 90% against `evals/data/golden_v1.jsonl`.
+## 2. Testing & Evaluation Mandate
+- Any change to OCR extraction logic requires a matching test fixture in `tests/fixtures/` and an evaluation case in `evals/data/golden_v1.jsonl`.
+- PRs that degrade eval accuracy below 90% must be rejected.
