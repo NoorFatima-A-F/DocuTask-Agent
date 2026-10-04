@@ -14,9 +14,11 @@ class RepositoryTopologyValidator:
         self.warnings: List[str] = []
 
     def validate_metadata(self) -> bool:
-        meta_file = self.repo_root / "repo_metadata.json"
+        meta_file = self.repo_root / "config" / "policies" / "repo_metadata.json"
         if not meta_file.exists():
-            self.errors.append("Missing required 'repo_metadata.json' at repository root.")
+            meta_file = self.repo_root / "repo_metadata.json"
+        if not meta_file.exists():
+            self.errors.append("Missing required 'repo_metadata.json' in config/policies/ or repository root.")
             return False
         try:
             data = json.loads(meta_file.read_text(encoding="utf-8"))

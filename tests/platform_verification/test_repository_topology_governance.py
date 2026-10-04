@@ -29,7 +29,9 @@ def test_repository_topology_validation():
 
 def test_repository_metadata_file():
     repo_root = Path(__file__).resolve().parent.parent.parent
-    meta_path = repo_root / "repo_metadata.json"
+    meta_path = repo_root / "config" / "policies" / "repo_metadata.json"
+    if not meta_path.exists():
+        meta_path = repo_root / "repo_metadata.json"
     assert meta_path.exists()
     data = json.loads(meta_path.read_text(encoding="utf-8"))
     assert data["platform_name"] == "DocuTask Agent Enterprise Verification Platform"

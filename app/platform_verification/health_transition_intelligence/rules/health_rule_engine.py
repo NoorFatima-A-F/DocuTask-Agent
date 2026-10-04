@@ -30,14 +30,20 @@ class HealthRuleEngine:
         self.rules = self._load_rules()
 
     def _load_rules(self) -> Dict[str, Any]:
-        if os.path.exists(self.rules_path):
-            try:
-                with open(self.rules_path, "r", encoding="utf-8") as f:
-                    data = yaml.safe_load(f)
-                    if data and "rules" in data:
-                        return data
-            except Exception:
-                pass
+        candidates = [
+            self.rules_path,
+            os.path.join("config", "health", os.path.basename(self.rules_path)),
+            os.path.join("..", "config", "health", os.path.basename(self.rules_path)),
+        ]
+        for p in candidates:
+            if os.path.exists(p):
+                try:
+                    with open(p, "r", encoding="utf-8") as f:
+                        data = yaml.safe_load(f)
+                        if data and "rules" in data:
+                            return data
+                except Exception:
+                    pass
         return self.DEFAULT_RULES
 
     def evaluate_signals(self, snapshot: Dict[str, Any]) -> Tuple[HealthState, str]:
