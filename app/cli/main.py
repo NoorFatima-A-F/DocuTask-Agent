@@ -99,9 +99,11 @@ def cmd_eval(args: argparse.Namespace) -> int:
     print(f"======================================================================")
     print(f"  DocuTask-Agent Multimodal AI Evaluation Harness [Benchmark: {benchmark.upper()}]")
     print(f"======================================================================")
-    print(f"[*] Evaluating extraction accuracy and confidence calibrations...")
-    time.sleep(0.5)
-    print(f"[+] Accuracy: 99.4% | Hallucination Index: <0.02% | F1-Score: 0.992")
+    from evals.runners.eval_runner import EvaluationRunner
+    runner = EvaluationRunner()
+    res = runner.run_benchmark(benchmark)
+    print(f"[+] Evaluation Status: {res['status']}")
+    print(f"[+] Accuracy Score: {res['accuracy_score'] * 100:.1f}% | Hallucination Rate: {res['hallucination_rate'] * 100:.2f}% | F1-Score: {res['f1_score']}")
     return 0
 
 
