@@ -23,20 +23,20 @@ import pytest
 from typing import Any, Dict
 
 # Phase 18: Independent Evaluation & Metrics
-from evaluation.metrics.evaluation_metrics import EvaluationMetrics
-from evaluation.runner.independent_runner import (
+from evals.evaluation.metrics.evaluation_metrics import EvaluationMetrics
+from evals.evaluation.runner.independent_runner import (
     BlackBoxEvaluationResult,
     BlackBoxEvaluationTask,
     IndependentEvaluationRunner,
 )
 
 # Phase 19: Datasets & Noise
-from evaluation.datasets.dataset_cards import DatasetCard
-from evaluation.datasets.enterprise_datasets import EnterpriseDatasetCatalog
-from evaluation.datasets.synthetic_noise import DegradationType, SyntheticNoiseEngine
+from evals.evaluation.datasets.dataset_cards import DatasetCard
+from evals.evaluation.datasets.enterprise_datasets import EnterpriseDatasetCatalog
+from evals.evaluation.datasets.synthetic_noise import DegradationType, SyntheticNoiseEngine
 
 # Phase 20: Human Evaluation
-from evaluation.human_eval.inter_rater import (
+from evals.evaluation.human_eval.inter_rater import (
     HumanEvaluationEngine,
     InterRaterReliabilityReport,
     ReviewerEvaluationScore,

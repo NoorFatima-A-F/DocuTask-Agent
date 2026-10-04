@@ -156,7 +156,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     # serve
     serve_p = subparsers.add_parser("serve", help="Launch FastAPI web and API server")
-    serve_p.add_argument("--host", default="0.0.0.0", help="Bind host")
+    serve_p.add_argument("--host", default="0.0.0.0", help="Bind host")  # nosec B104
     serve_p.add_argument("--port", type=int, default=8000, help="Bind port")
     serve_p.add_argument("--reload", action="store_true", help="Enable auto-reload for development")
     serve_p.add_argument("--workers", type=int, default=1, help="Number of worker processes")

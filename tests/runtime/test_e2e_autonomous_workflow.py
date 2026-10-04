@@ -10,7 +10,7 @@ Validates:
 """
 
 import pytest
-from examples.autonomous_invoice_workflow.run_autonomous_invoice_pipeline import AutonomousInvoicePipeline
+from evals.suites.invoice_pipeline import AutonomousInvoicePipeline
 
 
 @pytest.mark.asyncio

@@ -37,7 +37,7 @@ jobs:
 
 
       - name: 2. Execute Bandit Static Security Analysis
-        run: bandit -r app/ enterprise_audit_engine/ -ll -q
+        run: bandit -r app/ -ll -q
 
       - name: 3. Verify Zero Hardcoded Secrets in Active Codebase
         run: |

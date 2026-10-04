@@ -20,8 +20,8 @@ from __future__ import annotations
 import logging
 from typing import List
 
-from evaluation.datasets.dataset_cards import AnnotationProtocol, DatasetCard
-from evaluation.runner.independent_runner import BlackBoxEvaluationTask
+from evals.evaluation.datasets.dataset_cards import AnnotationProtocol, DatasetCard
+from evals.evaluation.runner.independent_runner import BlackBoxEvaluationTask
 
 logger = logging.getLogger(__name__)
 

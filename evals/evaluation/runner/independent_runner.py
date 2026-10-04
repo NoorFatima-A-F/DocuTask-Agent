@@ -11,7 +11,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List
 
-from evaluation.metrics.evaluation_metrics import EvaluationMetrics, EvaluationMetricSummary
+from evals.evaluation.metrics.evaluation_metrics import EvaluationMetrics, EvaluationMetricSummary
 
 logger = logging.getLogger(__name__)
 

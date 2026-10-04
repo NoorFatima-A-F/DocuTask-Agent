@@ -144,7 +144,7 @@ class MathVerificationLab:
         records.append(cls.verify_algorithm("Kolmogorov_Smirnov_Asymptotic_PValue", 0.268, ks_val, tolerance=0.08, authority="SciPy stats.kstest"))
 
         # 4. Cohen's Kappa exact formula (P_o=0.90, P_e=0.50 -> kappa=0.80)
-        from evaluation.human_eval.inter_rater import HumanEvaluationEngine
+        from evals.evaluation.human_eval.inter_rater import HumanEvaluationEngine
         k_val = HumanEvaluationEngine.compute_cohens_kappa([1, 1, 2, 2, 1, 1, 2, 2, 1, 2], [1, 1, 2, 2, 1, 1, 2, 2, 1, 1])
         records.append(cls.verify_algorithm("Cohens_Kappa_Pairwise", 0.80, k_val, tolerance=0.02, authority="Cohen (1960)"))
 
@@ -159,7 +159,7 @@ class MathVerificationLab:
         records.append(cls.verify_algorithm("Brier_Score_Binary", 0.01, calib.brier_score, tolerance=1e-5, authority="Brier (1950) Monthly Weather Review"))
 
         # 7. Levenshtein Distance ("KITTEN" -> "SITTING" = 3)
-        from evaluation.metrics.evaluation_metrics import EvaluationMetrics
+        from evals.evaluation.metrics.evaluation_metrics import EvaluationMetrics
         lev = EvaluationMetrics.compute_levenshtein_distance("KITTEN", "SITTING")
         records.append(cls.verify_algorithm("Levenshtein_Edit_Distance", 3.0, float(lev), tolerance=0.0, authority="Levenshtein (1966)"))
 

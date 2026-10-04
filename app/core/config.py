@@ -5,7 +5,9 @@ typing, validation, and secure defaults via Pydantic Settings.
 """
 
 import os
-from typing import List, Optional
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+import yaml
 from pydantic import Field
 try:
     from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -13,6 +15,29 @@ except ImportError:
     from pydantic import BaseModel as BaseSettings  # type: ignore
     def SettingsConfigDict(**kwargs):  # type: ignore
         return None
+
+# Canonical Path Hierarchy
+REPO_ROOT: Path = Path(__file__).resolve().parent.parent.parent
+CONFIG_DIR: Path = REPO_ROOT / "config"
+HEALTH_CONFIG_DIR: Path = CONFIG_DIR / "health"
+POLICIES_CONFIG_DIR: Path = CONFIG_DIR / "policies"
+ENVIRONMENTS_CONFIG_DIR: Path = CONFIG_DIR / "environments"
+
+HEALTH_RULES_PATH: Path = HEALTH_CONFIG_DIR / "health_rules.yaml"
+LIVENESS_CONTRACT_PATH: Path = HEALTH_CONFIG_DIR / "liveness_contract.yaml"
+READINESS_POLICY_PATH: Path = HEALTH_CONFIG_DIR / "readiness_policy.yaml"
+DEPENDENCY_POLICY_PATH: Path = POLICIES_CONFIG_DIR / "dependency_policy.yaml"
+
+
+def load_yaml_config(file_path: Path) -> Dict[str, Any]:
+    """Safely loads a YAML configuration file with error handling."""
+    if not file_path.exists():
+        return {}
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f) or {}
+    except Exception:
+        return {}
 
 
 class Settings(BaseSettings):

@@ -33,7 +33,7 @@ jobs:
       - name: Run Ruff Linting
         env:
           PYTHONPATH: .
-        run: ruff check app/ tests/ enterprise_audit_engine/
+        run: ruff check app/ tests/ cli/ evals/ tooling/
 
       - name: Run MyPy Type Checking
         env:
