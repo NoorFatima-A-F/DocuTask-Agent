@@ -2,53 +2,53 @@
   "total_transitions": 5,
   "events": [
     {
-      "event_id": "30e96b4b-d220-4cbb-9362-6b75242d915c",
+      "event_id": "816f9f0e-4cfe-4745-b864-1dcbd9b2bebe",
       "service_name": "docutask-api",
       "previous_state": "STARTING",
       "new_state": "READY",
       "reason": "Service startup sequence and internal validation complete",
       "trigger_signal": "startup_init_complete",
-      "timestamp": "2026-10-03T17:45:17.788505+00:00",
+      "timestamp": "2026-10-04T07:27:40.781126+00:00",
       "metadata": {}
     },
     {
-      "event_id": "40d430f5-1001-4f72-9abb-9f4cd468d63e",
+      "event_id": "631837de-8ef0-4c4d-bd1b-b1f279f4db00",
       "service_name": "docutask-api",
       "previous_state": "READY",
       "new_state": "DEGRADED",
       "reason": "Gemini AI latency elevation detected",
       "trigger_signal": "ai_latency_probe",
-      "timestamp": "2026-10-03T17:45:17.795219+00:00",
+      "timestamp": "2026-10-04T07:27:40.782633+00:00",
       "metadata": {}
     },
     {
-      "event_id": "c5b45429-dcf1-4123-9bce-a4e7fbe6beff",
+      "event_id": "dc00bcf7-3059-4d6f-88d9-8ab908518408",
       "service_name": "docutask-api",
       "previous_state": "DEGRADED",
       "new_state": "NOT_READY",
       "reason": "PostgreSQL connection dropped",
       "trigger_signal": "db_connection_failure",
-      "timestamp": "2026-10-03T17:45:17.795748+00:00",
+      "timestamp": "2026-10-04T07:27:40.782633+00:00",
       "metadata": {}
     },
     {
-      "event_id": "7a482955-e43c-44aa-8aed-61924028cfe5",
+      "event_id": "e1262ce0-130e-457f-aaac-81f4edf89a3e",
       "service_name": "docutask-api",
       "previous_state": "NOT_READY",
       "new_state": "RECOVERING",
       "reason": "Database connection pool restored, validating transactions",
       "trigger_signal": "db_pool_restored",
-      "timestamp": "2026-10-03T17:45:17.795748+00:00",
+      "timestamp": "2026-10-04T07:27:40.782633+00:00",
       "metadata": {}
     },
     {
-      "event_id": "2b91cba7-cc7f-45e5-a6d4-64973689c4a3",
+      "event_id": "277cac44-02bf-4b2a-a34d-de4cf32ea43a",
       "service_name": "docutask-api",
       "previous_state": "RECOVERING",
       "new_state": "READY",
       "reason": "All validation prerequisites satisfied",
       "trigger_signal": "recovery_validator",
-      "timestamp": "2026-10-03T17:45:17.795748+00:00",
+      "timestamp": "2026-10-04T07:27:40.782633+00:00",
       "metadata": {}
     }
   ]

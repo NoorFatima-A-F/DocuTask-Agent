@@ -43,8 +43,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:40.324389+00:00",
-  "execution_timestamp": "2026-10-03T17:44:40.324389+00:00",
+  "timestamp": "2026-10-04T07:27:07.108845+00:00",
+  "execution_timestamp": "2026-10-04T07:27:07.108845+00:00",
   "summary": "Complete system disaster simulation passed: platform rebuilt and functional in 16.0m.",
   "report_title": "Complete System Restore Simulation Report",
   "user_login_works": true,

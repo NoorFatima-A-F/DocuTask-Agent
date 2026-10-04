@@ -41,8 +41,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:45:10.538606+00:00",
-  "execution_timestamp": "2026-10-03T17:45:10.538606+00:00",
+  "timestamp": "2026-10-04T07:27:35.121325+00:00",
+  "execution_timestamp": "2026-10-04T07:27:35.121325+00:00",
   "summary": "Rapid detection and autonomous recovery verified with mean MTTD=4.2s and MTTR=28.5s.",
   "report_title": "Performance Recovery & MTTD/MTTR Report",
   "mttd_mean_seconds": 4.2,

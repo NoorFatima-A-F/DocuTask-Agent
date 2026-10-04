@@ -107,7 +107,7 @@ class WorkerFleetManager:
             try:
                 t_last = datetime.fromisoformat(worker.last_heartbeat)
                 delta_sec = (now - t_last).total_seconds()
-                if delta_sec > self.heartbeat_timeout_sec:
+                if delta_sec >= self.heartbeat_timeout_sec:
                     worker.status = WorkerStatus.CRASHED
                     crashed_ids.append(wid)
             except Exception:

@@ -15,7 +15,7 @@
       "service": "worker",
       "value": 42.5,
       "unit": "%",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "infrastructure"
       }
@@ -25,7 +25,7 @@
       "service": "worker",
       "value": 68.0,
       "unit": "%",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "infrastructure"
       }
@@ -35,7 +35,7 @@
       "service": "storage",
       "value": 54.0,
       "unit": "%",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "infrastructure"
       }
@@ -45,7 +45,7 @@
       "service": "api",
       "value": 0.0,
       "unit": "count",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "infrastructure"
       }
@@ -55,7 +55,7 @@
       "service": "api",
       "value": 35.0,
       "unit": "ms",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "application"
       }
@@ -65,7 +65,7 @@
       "service": "api",
       "value": 0.02,
       "unit": "%",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "application"
       }
@@ -75,7 +75,7 @@
       "service": "api",
       "value": 120.0,
       "unit": "rps",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "application"
       }
@@ -85,7 +85,7 @@
       "service": "docutask-agent",
       "value": 480.0,
       "unit": "ms",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "ai_workflows"
       }
@@ -95,7 +95,7 @@
       "service": "docutask-agent",
       "value": 0.0,
       "unit": "count",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "ai_workflows"
       }
@@ -105,7 +105,7 @@
       "service": "gemini-api",
       "value": 0.001,
       "unit": "%",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "ai_workflows"
       }
@@ -115,7 +115,7 @@
       "service": "gemini-api",
       "value": 1450.0,
       "unit": "tokens/sec",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "ai_workflows"
       }
@@ -125,7 +125,7 @@
       "service": "celery",
       "value": 340.0,
       "unit": "count",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "queues"
       }
@@ -135,7 +135,7 @@
       "service": "celery",
       "value": 1.8,
       "unit": "seconds",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.874488+00:00",
       "metadata": {
         "category": "queues"
       }
@@ -145,7 +145,7 @@
       "service": "celery",
       "value": 0.0,
       "unit": "count",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.876498+00:00",
       "metadata": {
         "category": "queues"
       }
@@ -155,7 +155,7 @@
       "service": "postgres",
       "value": 38.0,
       "unit": "%",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.876498+00:00",
       "metadata": {
         "category": "database"
       }
@@ -165,7 +165,7 @@
       "service": "postgres",
       "value": 8.5,
       "unit": "ms",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.876498+00:00",
       "metadata": {
         "category": "database"
       }
@@ -175,7 +175,7 @@
       "service": "postgres",
       "value": 0.0,
       "unit": "count",
-      "timestamp": "2026-10-03T17:45:33.161499+00:00",
+      "timestamp": "2026-10-04T07:27:55.876498+00:00",
       "metadata": {
         "category": "database"
       }

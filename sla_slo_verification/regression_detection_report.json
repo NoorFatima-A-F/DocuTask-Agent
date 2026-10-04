@@ -41,8 +41,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:45:10.511670+00:00",
-  "execution_timestamp": "2026-10-03T17:45:10.511670+00:00",
+  "timestamp": "2026-10-04T07:27:35.035695+00:00",
+  "execution_timestamp": "2026-10-04T07:27:35.035695+00:00",
   "summary": "Zero performance regression detected across deployment versions, configs, and infrastructure.",
   "report_title": "Performance Regression Detection Report",
   "regression_detected": false,

@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:27.630014+00:00",
-  "execution_timestamp": "2026-10-03T17:44:27.630014+00:00",
+  "timestamp": "2026-10-04T07:26:53.609960+00:00",
+  "execution_timestamp": "2026-10-04T07:26:53.610574+00:00",
   "summary": "Cloud migration simulation passed: platform deployed and verified operational in 7.7m.",
   "report_title": "Cloud Migration Simulation Report",
   "simulation_successful": true,

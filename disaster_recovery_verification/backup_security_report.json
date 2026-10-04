@@ -40,8 +40,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:40.324389+00:00",
-  "execution_timestamp": "2026-10-03T17:44:40.324389+00:00",
+  "timestamp": "2026-10-04T07:27:07.109455+00:00",
+  "execution_timestamp": "2026-10-04T07:27:07.110052+00:00",
   "summary": "Backup security verified: AES-256 encryption, TLS 1.3, WORM immutability locks, and RBAC active.",
   "report_title": "Backup Security & Immutability Report",
   "encryption_at_rest": "AES-256",

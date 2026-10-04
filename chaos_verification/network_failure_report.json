@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:24.807410+00:00",
-  "execution_timestamp": "2026-10-03T17:44:24.807410+00:00",
+  "timestamp": "2026-10-04T07:26:50.213289+00:00",
+  "execution_timestamp": "2026-10-04T07:26:50.213289+00:00",
   "summary": "Network failure chaos verified: 500ms latency tolerance, 10% packet loss handling, and dependency isolation.",
   "report_title": "Network Failure Simulation Report",
   "latency_delay_injected_ms": 500.0,

@@ -49,7 +49,7 @@
       "details": {
         "decision_trace_coverage_pct": 100.0
       },
-      "timestamp": "2026-10-03T19:16:26.999842+00:00"
+      "timestamp": "2026-10-04T07:38:06.555917+00:00"
     },
     {
       "check_id": "CHK-6I-02",
@@ -60,7 +60,7 @@
       "details": {
         "citation_precision_pct": 100.0
       },
-      "timestamp": "2026-10-03T19:16:26.999842+00:00"
+      "timestamp": "2026-10-04T07:38:06.555917+00:00"
     },
     {
       "check_id": "CHK-6I-03",
@@ -71,7 +71,7 @@
       "details": {
         "counterfactuals_logged": true
       },
-      "timestamp": "2026-10-03T19:16:26.999842+00:00"
+      "timestamp": "2026-10-04T07:38:06.555917+00:00"
     },
     {
       "check_id": "CHK-6I-04",
@@ -82,8 +82,8 @@
       "details": {
         "executive_transparency_score": 100.0
       },
-      "timestamp": "2026-10-03T19:16:26.999842+00:00"
+      "timestamp": "2026-10-04T07:38:06.555917+00:00"
     }
   ],
-  "timestamp": "2026-10-03T19:16:26.999842+00:00"
+  "timestamp": "2026-10-04T07:38:06.555917+00:00"
 }

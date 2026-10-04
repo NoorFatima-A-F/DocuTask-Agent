@@ -42,7 +42,7 @@
       "details": {
         "max_duration_simulated": "30 Days"
       },
-      "timestamp": "2026-10-03T17:44:19.819558+00:00"
+      "timestamp": "2026-10-04T07:26:43.895054+00:00"
     },
     {
       "check_id": "CHK-5K-02",
@@ -53,7 +53,7 @@
       "details": {
         "resume_verified": true
       },
-      "timestamp": "2026-10-03T17:44:19.819558+00:00"
+      "timestamp": "2026-10-04T07:26:43.895054+00:00"
     },
     {
       "check_id": "CHK-5K-03",
@@ -64,7 +64,7 @@
       "details": {
         "approval_continuity_verified": true
       },
-      "timestamp": "2026-10-03T17:44:19.819558+00:00"
+      "timestamp": "2026-10-04T07:26:43.895054+00:00"
     },
     {
       "check_id": "CHK-5K-04",
@@ -75,8 +75,8 @@
       "details": {
         "checkpoint_integrity_pct": 100.0
       },
-      "timestamp": "2026-10-03T17:44:19.819558+00:00"
+      "timestamp": "2026-10-04T07:26:43.895054+00:00"
     }
   ],
-  "timestamp": "2026-10-03T17:44:19.819558+00:00"
+  "timestamp": "2026-10-04T07:26:43.895054+00:00"
 }

@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:24.810922+00:00",
-  "execution_timestamp": "2026-10-03T17:44:24.810922+00:00",
+  "timestamp": "2026-10-04T07:26:50.215314+00:00",
+  "execution_timestamp": "2026-10-04T07:26:50.215314+00:00",
   "summary": "Resource exhaustion chaos verified: graceful degradation under 95% CPU, 16GB RAM stress, and full disk state.",
   "report_title": "Resource Exhaustion Chaos Report",
   "cpu_stress_level_pct": 95.0,

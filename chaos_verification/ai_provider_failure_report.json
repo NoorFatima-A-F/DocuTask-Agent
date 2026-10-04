@@ -40,8 +40,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:24.807410+00:00",
-  "execution_timestamp": "2026-10-03T17:44:24.807410+00:00",
+  "timestamp": "2026-10-04T07:26:50.213289+00:00",
+  "execution_timestamp": "2026-10-04T07:26:50.213289+00:00",
   "summary": "AI provider outage chaos verified: 2.4s detection, local cached extraction fallback, and 0 document losses.",
   "report_title": "AI Provider Failure Chaos Report",
   "gemini_outage_simulated": true,

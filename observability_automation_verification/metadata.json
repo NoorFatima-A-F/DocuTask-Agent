@@ -3,7 +3,7 @@
   "phase": "3I.8",
   "framework_phase": "Phase 3I.8 \u2014 Observability Automation, Self-Healing Operations & Autonomous Reliability",
   "automation_level": "autonomous",
-  "exported_at": "2026-10-03T17:45:22.385641+00:00",
+  "exported_at": "2026-10-04T07:27:45.378169+00:00",
   "target_directory": "observability_automation_verification",
   "overall_certification_tier": "Autonomous Operations Ready",
   "overall_score_pct": 100.0,
@@ -73,7 +73,7 @@
     "certification_report.json": {
       "file_path": "observability_automation_verification\\certification_report.json",
       "file_size_bytes": 1702,
-      "sha256_hash": "f3e934a8ea38de63e3cc5fbb9b4806747015cfc3db64d84a104e7ec41469410f"
+      "sha256_hash": "9ebd4bc85ac08eefaab595feb71639dca57fea03a8775d063cfe4d12980190d9"
     }
   }
 }

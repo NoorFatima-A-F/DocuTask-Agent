@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:54.216975+00:00",
-  "execution_timestamp": "2026-10-03T17:44:54.216975+00:00",
+  "timestamp": "2026-10-04T07:27:23.582023+00:00",
+  "execution_timestamp": "2026-10-04T07:27:23.582023+00:00",
   "summary": "IAM security verified: Least privilege RBAC enforced with 100% privilege escalation defense.",
   "report_title": "Identity and Access Management (IAM) Report",
   "rbac_enforced": true,

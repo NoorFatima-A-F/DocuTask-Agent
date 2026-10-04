@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:27.628124+00:00",
-  "execution_timestamp": "2026-10-03T17:44:27.628124+00:00",
+  "timestamp": "2026-10-04T07:26:53.600667+00:00",
+  "execution_timestamp": "2026-10-04T07:26:53.600667+00:00",
   "summary": "Container compatibility verified: 7/7 cloud runtimes supported with stateless SIGTERM handling.",
   "report_title": "Container Cloud Compatibility Report",
   "runtimes_tested": 7,

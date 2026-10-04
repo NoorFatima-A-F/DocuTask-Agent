@@ -1,50 +1,50 @@
 {
   "ai_capability_report.json": {
-    "sha256": "be62a28dc3fae3c229c4513d87d412e6cc2ab68ca9ee1f0e2b437ad66b025755",
+    "sha256": "3f34e4422f9eaf738e20c79206cb712671e2dae245537231b8a51cb1afc07cc2",
     "size_bytes": 2804
   },
   "llm_evaluation_report.json": {
-    "sha256": "c7d3152436fe61d25845b02874fc307bac183f8b162cd54f17c0b3ca650de80e",
+    "sha256": "385d7cc6aa8b62ff0200935d4301fad4f1731ae4dfb8e92f9a2b58d1bddff871",
     "size_bytes": 2973
   },
   "agent_evaluation_report.json": {
-    "sha256": "a421c3f477c76d57dc7d297ca19e198ef2eb4ad22747a7278b40422de960bada",
+    "sha256": "c53c2f94cc53dddd4503a82b5abcdfff2305deec43e78b311ffed832e0e5a21e",
     "size_bytes": 2901
   },
   "rag_evaluation_report.json": {
-    "sha256": "cc850541f74a2e450e488fcfb872dc34420534d39707b5f2008f2fad0f624c89",
+    "sha256": "b0875804e8a1836a3842d109d9ffb6e84ae659996c6098397d18f4dbf7962a37",
     "size_bytes": 3036
   },
   "performance_report.json": {
-    "sha256": "0149aec4b631db21651d1ced896693bd57612ad2e836b33beea7a129c1f85b86",
+    "sha256": "84661c0d1f7968d52d2dfc47cb92161339628a308d60f0d902d784c8d860ca80",
     "size_bytes": 2830
   },
   "cost_business_report.json": {
-    "sha256": "59f58797d44ce9b88937b93f19560dbabbf48cdad6db5e741ccbebd5b835a8f1",
+    "sha256": "ae2f291a62f801585e886aad603682247a0e93127931bd234386d33389f5a65f",
     "size_bytes": 3084
   },
   "reliability_report.json": {
-    "sha256": "ebee8408feedab1654c720ffec081a0da2bf54540633d696be962238437967cc",
+    "sha256": "66793410a9fc339a37e5861ef0f17cc7a803def6d2cb4ef362600acd3d32644e",
     "size_bytes": 2779
   },
   "security_report.json": {
-    "sha256": "761a07641e7c70ff6fcc4b41c6c8916c74c7ac8afbd0ef8e73887569a8fa175c",
+    "sha256": "b472c34771a439a898466f6b95400e60493992af5f97ed19e78046833611ee70",
     "size_bytes": 2751
   },
   "explainability_report.json": {
-    "sha256": "bf4ebd4d3504f8e4a8b41dadb50234319aa274f78b06a810525b6a4d9509612c",
+    "sha256": "3d292d1c7fd31c99ca2a17158fbb439386add064541875ff92fbc2be2b190415",
     "size_bytes": 3071
   },
   "human_experience_report.json": {
-    "sha256": "807853b785121c74292b30e98a3645843b18e04c9f1719d757aeeb5c60d31319",
+    "sha256": "a3e99bb6f10602df8f63114760e831893ed00b009dfb8b1ad344028115940622",
     "size_bytes": 3039
   },
   "ai_evaluation_score.json": {
-    "sha256": "065d7f3fe90ceb1fe543d9c0afa10006e2a4efca44733d416dae3faefc277e49",
+    "sha256": "40fb8c8e5f186e2ac2109e103836be8c9417ddbda6a1a6b960e22fe976e27831",
     "size_bytes": 1520
   },
   "portfolio_showcase_report.json": {
-    "sha256": "3c98053c50fc5c88823705b9da816affc2a0a3468f2e973cd53f89ace2e8c678",
+    "sha256": "4a39a374fe1c2e6fa7119775f79a7bb0d217cb8c67451c83ac91797403c696b9",
     "size_bytes": 35743
   },
   "executive_case_study.md": {
@@ -52,7 +52,7 @@
     "size_bytes": 2186
   },
   "technical_whitepaper.md": {
-    "sha256": "0314420ad08d912fe894d645fb56feb1dcd4babdaf34f6af19c858115085ffaf",
+    "sha256": "0b96fdbaad659d9cde6793e47ae65e404e638315958681ed8a5b657571c34a66",
     "size_bytes": 1813
   }
 }

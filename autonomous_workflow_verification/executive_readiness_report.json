@@ -49,7 +49,7 @@
         "pillars_count": 5,
         "readiness_score_pct": 100.0
       },
-      "timestamp": "2026-10-03T17:44:19.819558+00:00"
+      "timestamp": "2026-10-04T07:26:43.902626+00:00"
     },
     {
       "check_id": "CHK-5T-02",
@@ -60,7 +60,7 @@
       "details": {
         "unattended_operation_certified": true
       },
-      "timestamp": "2026-10-03T17:44:19.819558+00:00"
+      "timestamp": "2026-10-04T07:26:43.902626+00:00"
     },
     {
       "check_id": "CHK-5T-03",
@@ -71,7 +71,7 @@
       "details": {
         "governance_compliance_certified": true
       },
-      "timestamp": "2026-10-03T17:44:19.819558+00:00"
+      "timestamp": "2026-10-04T07:26:43.902626+00:00"
     },
     {
       "check_id": "CHK-5T-04",
@@ -82,8 +82,8 @@
       "details": {
         "reproducibility_verified": true
       },
-      "timestamp": "2026-10-03T17:44:19.819558+00:00"
+      "timestamp": "2026-10-04T07:26:43.902626+00:00"
     }
   ],
-  "timestamp": "2026-10-03T17:44:19.819558+00:00"
+  "timestamp": "2026-10-04T07:26:43.902626+00:00"
 }

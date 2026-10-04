@@ -1,6 +1,6 @@
 {
   "framework_phase": "Phase 3I.6 \u2014 Observability Governance, SLO Engineering & Reliability Certification",
-  "exported_at": "2026-10-03T17:45:35.170218+00:00",
+  "exported_at": "2026-10-04T07:27:57.758151+00:00",
   "target_directory": "observability_verification/reliability",
   "overall_certification_tier": "Enterprise Reliability Certified",
   "overall_score_pct": 100.0,
@@ -60,7 +60,7 @@
     "certification_report.json": {
       "file_path": "observability_verification/reliability\\certification_report.json",
       "file_size_bytes": 1638,
-      "sha256_hash": "f10815187e0512d5c274eb6c0eb3ca31f2200459424b74fd8b301a210f6857b7"
+      "sha256_hash": "c0275213ab852af5a67183adb2061425f9858165aa83c53b09fb02c6f3527c3f"
     }
   }
 }

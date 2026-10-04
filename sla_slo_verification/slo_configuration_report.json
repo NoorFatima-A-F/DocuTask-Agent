@@ -44,8 +44,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:45:10.489558+00:00",
-  "execution_timestamp": "2026-10-03T17:45:10.489558+00:00",
+  "timestamp": "2026-10-04T07:27:35.015107+00:00",
+  "execution_timestamp": "2026-10-04T07:27:35.015107+00:00",
   "summary": "All 4 core SLO targets mathematically configured, monitored, and compliant.",
   "report_title": "SLO Configuration & Compliance Report",
   "total_slos_configured": 4,

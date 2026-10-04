@@ -15,7 +15,7 @@
   "plain_text_rejected": true,
   "production_log_level_enforced": true,
   "sample_log": {
-    "timestamp": "2026-10-03T17:45:23.069892+00:00",
+    "timestamp": "2026-10-04T07:27:45.867329+00:00",
     "severity": "INFO",
     "service_name": "document-worker",
     "environment": "production",

@@ -40,8 +40,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:45:04.722316+00:00",
-  "execution_timestamp": "2026-10-03T17:45:04.722316+00:00",
+  "timestamp": "2026-10-04T07:27:30.766743+00:00",
+  "execution_timestamp": "2026-10-04T07:27:30.766743+00:00",
   "summary": "AI extraction pipeline optimized with dynamic model routing, token pruning (-28.4%), and cost reduction (-34.2%).",
   "report_title": "AI Pipeline & LLM Efficiency Optimization Report",
   "token_reduction_pct": 28.4,

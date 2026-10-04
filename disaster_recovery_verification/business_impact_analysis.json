@@ -39,8 +39,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:40.316064+00:00",
-  "execution_timestamp": "2026-10-03T17:44:40.316064+00:00",
+  "timestamp": "2026-10-04T07:27:07.104388+00:00",
+  "execution_timestamp": "2026-10-04T07:27:07.104388+00:00",
   "summary": "Business impact analysis complete with 10 services tiered and prioritized for recovery sequencing.",
   "report_title": "Business Impact Analysis Report",
   "tier_0_mission_critical_count": 3,

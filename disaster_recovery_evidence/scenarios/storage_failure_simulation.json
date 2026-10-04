@@ -10,31 +10,31 @@
   "relations_preserved": true,
   "timeline": [
     {
-      "timestamp_iso": "2026-10-03T17:44:43.456571+00:00",
+      "timestamp_iso": "2026-10-04T07:27:10.007195+00:00",
       "phase": "DISASTER_INJECTED",
       "description": "Simulated total unavailability and deletion of primary document storage bucket",
       "elapsed_seconds_from_start": 0.0
     },
     {
-      "timestamp_iso": "2026-10-03T17:45:03.456571+00:00",
+      "timestamp_iso": "2026-10-04T07:27:30.007195+00:00",
       "phase": "DETECTED",
       "description": "Storage synthetic health probe failed with S3 API error; SEV-1 triggered",
       "elapsed_seconds_from_start": 20.0
     },
     {
-      "timestamp_iso": "2026-10-03T17:45:33.456571+00:00",
+      "timestamp_iso": "2026-10-04T07:28:00.007195+00:00",
       "phase": "MITIGATION_INITIATED",
       "description": "DNS failover switched read path to us-west-2 replica; vault restore initiated for primary",
       "elapsed_seconds_from_start": 50.0
     },
     {
-      "timestamp_iso": "2026-10-03T17:49:23.456571+00:00",
+      "timestamp_iso": "2026-10-04T07:31:50.007195+00:00",
       "phase": "SERVICE_RESTORED",
       "description": "Primary bucket recreated, 245 backup packages synchronized from WORM vault",
       "elapsed_seconds_from_start": 280.0
     },
     {
-      "timestamp_iso": "2026-10-03T17:50:03.456571+00:00",
+      "timestamp_iso": "2026-10-04T07:32:30.007195+00:00",
       "phase": "FULLY_OPERATIONAL",
       "description": "All document SHA-256 hashes matched original manifests (100.0% integrity match)",
       "elapsed_seconds_from_start": 320.0

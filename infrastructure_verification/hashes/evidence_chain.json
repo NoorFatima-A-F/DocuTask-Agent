@@ -1,123 +1,123 @@
 {
   "chain_id": "CHAIN-3P-VERIFY-001",
   "root_hash": "6e22fc426399cb757cb4072cc958d661637d9c6272a8f0ca3bb96b3eeb1d982b",
-  "head_hash": "11af41af3d900a170a7bd564bfb91aa0134ade4abba601fa84011f11c5ea583e",
-  "timestamp": "2026-10-03T17:44:47.117406+00:00",
+  "head_hash": "3861be07ccfd6378a7d4ebd9d090b53e91c6ba95db8ddc78859060e03afdfffc",
+  "timestamp": "2026-10-04T07:27:14.560520+00:00",
   "artifacts_count": 19,
   "records": [
     {
       "artifact": "artifacts/chaos_report.json",
       "sha256": "6e22fc426399cb757cb4072cc958d661637d9c6272a8f0ca3bb96b3eeb1d982b",
       "size_bytes": 78,
-      "generated_at": "2026-10-03T17:44:46.929036+00:00"
+      "generated_at": "2026-10-04T07:27:14.320590+00:00"
     },
     {
       "artifact": "artifacts/cloud_readiness_report.json",
       "sha256": "98dbf47d778b51c9006565ead1a687728052a44b3b34e170cc3809cf3abe3b93",
       "size_bytes": 75,
-      "generated_at": "2026-10-03T17:44:46.935806+00:00"
+      "generated_at": "2026-10-04T07:27:14.327463+00:00"
     },
     {
       "artifact": "artifacts/container_report.json",
       "sha256": "396a9f393207ff7804ac5d2ee4951f5b4628bdb01a561d9d629721e213165926",
       "size_bytes": 82,
-      "generated_at": "2026-10-03T17:44:46.935806+00:00"
+      "generated_at": "2026-10-04T07:27:14.329118+00:00"
     },
     {
       "artifact": "artifacts/deployment_report.json",
       "sha256": "e7758372decc77e4dec88d7c45978015d6c11b6dc4c9ab68121d91640d186aa6",
       "size_bytes": 78,
-      "generated_at": "2026-10-03T17:44:46.935806+00:00"
+      "generated_at": "2026-10-04T07:27:14.349431+00:00"
     },
     {
       "artifact": "artifacts/final_certification.json",
-      "sha256": "706e1816aaa0927c4f5f5f1804cf1700d43ca47d58941c16f7fe56cd85529bf9",
+      "sha256": "76738b3a349ae7275b38d918c1992abc359c1090102239febe22e65680e78978",
       "size_bytes": 794,
-      "generated_at": "2026-10-03T17:44:46.953679+00:00"
+      "generated_at": "2026-10-04T07:27:14.362163+00:00"
     },
     {
       "artifact": "artifacts/observability_report.json",
       "sha256": "62cc1c32155faad87c7f30bcb1548f50e8cc14a758ccda1790fe16cd6050c93f",
       "size_bytes": 85,
-      "generated_at": "2026-10-03T17:44:46.962790+00:00"
+      "generated_at": "2026-10-04T07:27:14.370693+00:00"
     },
     {
       "artifact": "artifacts/performance_report.json",
       "sha256": "998748cad2ff9f14a018038adfa8f917ebd5ebb52535e265681189767b7d791d",
       "size_bytes": 85,
-      "generated_at": "2026-10-03T17:44:46.962790+00:00"
+      "generated_at": "2026-10-04T07:27:14.372228+00:00"
     },
     {
       "artifact": "artifacts/recovery_report.json",
       "sha256": "7813b47578c58ffc6858e0c62482b4fb225838baffd2a3b83f3cbead86550f5b",
       "size_bytes": 77,
-      "generated_at": "2026-10-03T17:44:46.970381+00:00"
+      "generated_at": "2026-10-04T07:27:14.372228+00:00"
     },
     {
       "artifact": "artifacts/security_report.json",
       "sha256": "2d888b524057a210871c934a6137a4711cb4e98af53930e45febc3036a86dfc1",
       "size_bytes": 86,
-      "generated_at": "2026-10-03T17:44:46.970381+00:00"
+      "generated_at": "2026-10-04T07:27:14.378955+00:00"
     },
     {
       "artifact": "evidence/standardized_evidence.json",
-      "sha256": "1a16d9394e3284c95d74fba308d1c49a954bc2e6479624315c56f42d34c30a1f",
+      "sha256": "af477183d88158bc38e5b4f89c30ffadd2aee245229b6a3eac570559963b48d9",
       "size_bytes": 14027,
-      "generated_at": "2026-10-03T17:44:46.995971+00:00"
+      "generated_at": "2026-10-04T07:27:14.404215+00:00"
     },
     {
       "artifact": "metadata/provenance.json",
-      "sha256": "c7c3df1ee56dd8010cc4d37fb7a68b0d02e86dbbac09f098cef2e6ad9171cb07",
+      "sha256": "7973dc05f0e934f4a2c226e530e8370237380bd8355b82d0986626c395fdf6d2",
       "size_bytes": 340,
-      "generated_at": "2026-10-03T17:44:47.013180+00:00"
+      "generated_at": "2026-10-04T07:27:14.420583+00:00"
     },
     {
       "artifact": "portfolio_evidence/deployment_badge.json",
       "sha256": "65e30a686d230f753f0cc90146285c43e86bc7fe17bab4c687af332624b96385",
       "size_bytes": 145,
-      "generated_at": "2026-10-03T17:44:47.017380+00:00"
+      "generated_at": "2026-10-04T07:27:14.426913+00:00"
     },
     {
       "artifact": "portfolio_evidence/infrastructure_score.md",
       "sha256": "eaf34b89b560566f4ad65071cd5543c1a8c7ae859722c9e72e3f932326480160",
       "size_bytes": 387,
-      "generated_at": "2026-10-03T17:44:47.021018+00:00"
+      "generated_at": "2026-10-04T07:27:14.442907+00:00"
     },
     {
       "artifact": "portfolio_evidence/reliability_summary.md",
       "sha256": "89cbe63d9291303e1005bad935cdfefb1fa98ff82c75a2735e3aaff0d779d8de",
       "size_bytes": 436,
-      "generated_at": "2026-10-03T17:44:47.025151+00:00"
+      "generated_at": "2026-10-04T07:27:14.446941+00:00"
     },
     {
       "artifact": "portfolio_evidence/security_summary.md",
       "sha256": "0847fdebfd5301bc2978bf3c80ca5ed0f674cc28799500282b21e6744d415855",
       "size_bytes": 557,
-      "generated_at": "2026-10-03T17:44:47.029472+00:00"
+      "generated_at": "2026-10-04T07:27:14.452992+00:00"
     },
     {
       "artifact": "reports/compliance_mapping.json",
-      "sha256": "7520259b52b4e8bf9a5f6439d9a440e36b0e885d64ec380781cd073e70cd558b",
+      "sha256": "d90cc796a665d39fc94364a8fdd06b2d7fe42b302830700cf51921a17d92e35e",
       "size_bytes": 4310,
-      "generated_at": "2026-10-03T17:44:47.051930+00:00"
+      "generated_at": "2026-10-04T07:27:14.476288+00:00"
     },
     {
       "artifact": "reports/engineering_audit_report.md",
-      "sha256": "bf3c81145b669ac7c5be7fd11992139413b8deac4e90d526261c7d07bcbd48a6",
+      "sha256": "fb9ef6089cc2eab211ed57481aa2c4314dad8c8f2a0b2469327431e947eb39b6",
       "size_bytes": 1941,
-      "generated_at": "2026-10-03T17:44:47.067954+00:00"
+      "generated_at": "2026-10-04T07:27:14.516209+00:00"
     },
     {
       "artifact": "reports/executive_certification_report.md",
-      "sha256": "35773a011a2d215c59ead72d42a260ba4c25a78a56ef597136088ac34320dd0d",
+      "sha256": "ba474be3d0e19983ef7df07a2774776b2ba6012db99097511976fbce98682c0f",
       "size_bytes": 1470,
-      "generated_at": "2026-10-03T17:44:47.095146+00:00"
+      "generated_at": "2026-10-04T07:27:14.536375+00:00"
     },
     {
       "artifact": "reports/failure_evidence.json",
-      "sha256": "4b3d042afef58b109c551448ae10ef7dc4e53eab7934d6630fc10b5c5b9069bd",
+      "sha256": "f47e14cc077996d5b6acfd4fbd078a81b2ef58207e5c79d4d8f5449fb49526da",
       "size_bytes": 166,
-      "generated_at": "2026-10-03T17:44:47.117406+00:00"
+      "generated_at": "2026-10-04T07:27:14.560520+00:00"
     }
   ]
 }

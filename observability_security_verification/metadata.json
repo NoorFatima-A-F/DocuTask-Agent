@@ -3,7 +3,7 @@
   "phase": "3I.7",
   "framework_phase": "Phase 3I.7 \u2014 Observability Security, Privacy & Compliance Verification",
   "security_level": "enterprise",
-  "exported_at": "2026-10-03T17:45:25.999709+00:00",
+  "exported_at": "2026-10-04T07:27:48.732648+00:00",
   "target_directory": "observability_security_verification",
   "overall_certification_tier": "Enterprise Observability Secure",
   "overall_score_pct": 100.0,
@@ -73,7 +73,7 @@
     "certification_report.json": {
       "file_path": "observability_security_verification\\certification_report.json",
       "file_size_bytes": 1650,
-      "sha256_hash": "4588c340ba4f7727707e91c8daad85d7e2ab55f409800dc7f24a8f3554044f2f"
+      "sha256_hash": "c56bb98a5a430a86d83b420e84ceb373e701f91a0b99e68399e0fa12b93ebd40"
     }
   }
 }

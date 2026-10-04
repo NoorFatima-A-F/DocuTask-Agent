@@ -60,7 +60,7 @@
       "details": {
         "trace_propagation_rate_pct": 100.0
       },
-      "timestamp": "2026-10-03T17:44:36.533391+00:00"
+      "timestamp": "2026-10-04T07:27:03.586367+00:00"
     },
     {
       "check_id": "CHK-4P-02",
@@ -71,7 +71,7 @@
       "details": {
         "unreconstructable_executions_count": 0
       },
-      "timestamp": "2026-10-03T17:44:36.533391+00:00"
+      "timestamp": "2026-10-04T07:27:03.586367+00:00"
     },
     {
       "check_id": "CHK-4P-03",
@@ -82,7 +82,7 @@
       "details": {
         "metrics_emitted_pct": 100.0
       },
-      "timestamp": "2026-10-03T17:44:36.533391+00:00"
+      "timestamp": "2026-10-04T07:27:03.586367+00:00"
     },
     {
       "check_id": "CHK-4P-04",
@@ -93,8 +93,8 @@
       "details": {
         "audit_trail_completeness_pct": 100.0
       },
-      "timestamp": "2026-10-03T17:44:36.533391+00:00"
+      "timestamp": "2026-10-04T07:27:03.586367+00:00"
     }
   ],
-  "timestamp": "2026-10-03T17:44:36.533391+00:00"
+  "timestamp": "2026-10-04T07:27:03.586367+00:00"
 }

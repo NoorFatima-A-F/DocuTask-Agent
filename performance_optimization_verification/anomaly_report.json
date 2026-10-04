@@ -42,8 +42,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:45:04.730732+00:00",
-  "execution_timestamp": "2026-10-03T17:45:04.730732+00:00",
+  "timestamp": "2026-10-04T07:27:30.778112+00:00",
+  "execution_timestamp": "2026-10-04T07:27:30.778112+00:00",
   "summary": "Statistical anomaly engine detected 4 preemptive anomalies with 1.2% false positive rate.",
   "report_title": "Performance Anomaly Detection Report",
   "total_anomalies_detected": 4,

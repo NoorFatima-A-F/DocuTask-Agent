@@ -1,7 +1,7 @@
 {
   "scenario": "provider_outage",
-  "detection_seconds": 0.02,
-  "recovery_seconds": 0.03,
+  "detection_seconds": 0.03,
+  "recovery_seconds": 0.04,
   "data_loss_documents": 0,
   "total_injected_requests": 100,
   "failed_initial_requests": 100,

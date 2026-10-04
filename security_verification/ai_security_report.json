@@ -38,8 +38,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:44:54.218991+00:00",
-  "execution_timestamp": "2026-10-03T17:44:54.218991+00:00",
+  "timestamp": "2026-10-04T07:27:23.583073+00:00",
+  "execution_timestamp": "2026-10-04T07:27:23.583073+00:00",
   "summary": "AI infrastructure security verified: 4 AI threat scenarios neutralized (prompt injection, secret leaks, output sanitization).",
   "report_title": "AI Infrastructure Security Report",
   "prompt_injection_neutralized": true,

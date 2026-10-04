@@ -42,8 +42,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:45:10.534617+00:00",
-  "execution_timestamp": "2026-10-03T17:45:10.534617+00:00",
+  "timestamp": "2026-10-04T07:27:35.110071+00:00",
+  "execution_timestamp": "2026-10-04T07:27:35.110704+00:00",
   "summary": "All 4 performance degradation incident scenarios simulated and successfully mitigated.",
   "report_title": "Performance Incident Simulation Report",
   "total_scenarios_tested": 4,

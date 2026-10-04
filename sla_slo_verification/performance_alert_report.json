@@ -42,8 +42,8 @@
       }
     }
   ],
-  "timestamp": "2026-10-03T17:45:10.528104+00:00",
-  "execution_timestamp": "2026-10-03T17:45:10.528104+00:00",
+  "timestamp": "2026-10-04T07:27:35.052261+00:00",
+  "execution_timestamp": "2026-10-04T07:27:35.052261+00:00",
   "summary": "All 4 core performance alert rules tested and verified with dispatch latency < 150ms.",
   "report_title": "Performance Alert Verification Report",
   "total_alert_rules": 4,
