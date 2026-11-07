@@ -33,7 +33,6 @@ def test_ai_validator_schema_matching():
         "total_amount": 2500.50,
         "currency": "USD",
     }
-    validated_dict, conf = AIValidator.validate(sample_invoice, "invoice")
+    validated_dict = AIValidator.validate(sample_invoice, "invoice")
     assert validated_dict["invoice_number"] == "INV-100200"
     assert validated_dict["total_amount"] == 2500.50
-    assert conf > 0.0

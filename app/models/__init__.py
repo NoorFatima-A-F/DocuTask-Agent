@@ -10,6 +10,7 @@ from app.models.document import Document
 from app.models.extracted_text import ExtractedText
 from app.models.ai_extraction import AIExtraction
 from app.models.processing_job import ProcessingJob
+from app.models.review_event import ReviewEvent
 
 __all__ = [
     "Base",
@@ -19,4 +20,5 @@ __all__ = [
     "ExtractedText",
     "AIExtraction",
     "ProcessingJob",
+    "ReviewEvent",
 ]

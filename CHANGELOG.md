@@ -30,6 +30,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   are now typed objects instead of free-form dicts.
 - Removed unused `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` settings.
 
+- Confidence is now evidence-based (`app/ai/confidence.py`): grounding of each value in the OCR
+  text, required-field completeness, arithmetic/date consistency checks, and OCR word confidence.
+  The old non-null-field ratio with a 0.5 floor is gone. `result.confidence_details` explains the score.
+- Extractions below `CONFIDENCE_THRESHOLD_HITL`, with a missing/ungrounded required field, or with a
+  failed consistency check get status `NEEDS_REVIEW` (document status `EXTRACTION_NEEDS_REVIEW`).
+- `result.final_json` is the data to treat as final: set for auto-accepted results and after reviewer
+  approval, null otherwise. `AIValidator.validate` now returns only the validated dict.
+- Invoices gain an optional `subtotal` field.
+
+### Added
+- Review API (`reviewer` role; admins inherit): `GET /api/v1/reviews`, `GET /api/v1/reviews/{id}`,
+  `GET /api/v1/reviews/{id}/document`, `POST /api/v1/reviews/{id}/approve` (optional schema-validated
+  corrections), `POST /api/v1/reviews/{id}/reject`. Decisions are recorded in `review_events`.
+
 ### Removed
 - Fake OCR provider classes (Textract, Document AI, Azure, Paddle), the shadowed `app/ocr/providers.py`,
   `app/ai/registry.py`, `app/ai/factory.py`, and `app/validation/` (benchmarks built on fabricated output).
@@ -37,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Database
 - Alembic `007_extraction_failure_status`: `ai_extractions.status/error_code/error_message`;
   nullable `structured_json`, `raw_response`, `confidence`, `estimated_cost`, `extracted_texts.confidence`.
+- Alembic `008_review_queue`: `ai_extractions.confidence_details`, `ai_extractions.final_json`, `review_events` table.
 
 ---
 

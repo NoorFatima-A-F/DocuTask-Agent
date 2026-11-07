@@ -42,7 +42,7 @@ async def main(model: str | None) -> int:
     except LLMError as exc:
         print(f"FAILED: {exc.error_code}: {exc.message}")
         return 2
-    data, _ = AIValidator.validate(result.data, "invoice")
+    data = AIValidator.validate(result.data, "invoice")
     print(f"tokens: in={result.input_tokens} out={result.output_tokens}")
     print(f"cost:   {provider.calculate_cost(result.input_tokens, result.output_tokens)}")
     failures = 0

@@ -14,6 +14,7 @@ from typing import Any, Awaitable, Callable, Dict, List, Optional
 from uuid import UUID
 
 from app.ai.base import LLMProvider, LLMResult
+from app.ai.confidence import assess, routing_status
 from app.ai.exceptions import AIValidationException
 from app.ai.prompt_builder import PromptBuilder
 from app.ai.schemas import (
@@ -24,6 +25,7 @@ from app.ai.schemas import (
     ExtractionStatistics,
 )
 from app.ai.validator import AIValidator
+from app.core.config import settings
 from app.core.errors.extraction import ErrorCode, ExtractionError, ExtractionStatus, LLMError, OCRError
 from app.core.exceptions import ResourceNotFoundException, ValidationAppException
 from app.core.logging import logger
@@ -37,6 +39,10 @@ from app.services.ocr_service import OCRService
 
 PROMPT_VERSION = "v1.0"
 INTERNAL_ERROR_CODE = "INTERNAL_ERROR"
+DOCUMENT_STATUS_BY_RESULT = {
+    ExtractionStatus.COMPLETED: "EXTRACTION_COMPLETED",
+    ExtractionStatus.NEEDS_REVIEW: "EXTRACTION_NEEDS_REVIEW",
+}
 
 
 class AIExtractionService:
@@ -67,6 +73,8 @@ class AIExtractionService:
     def _to_response_schema(record: AIExtraction, retry_count: int = 0) -> ExtractionResponse:
         """Converts database ORM entity to ExtractionResponse Pydantic schema."""
         parsed_json = json.loads(record.structured_json) if record.structured_json else None
+        final_json = json.loads(record.final_json) if record.final_json else None
+        details = json.loads(record.confidence_details) if record.confidence_details else None
         return ExtractionResponse(
             id=record.id,
             metadata=ExtractionMetadata(
@@ -88,7 +96,9 @@ class AIExtractionService:
                 status=record.status,
                 raw_response=record.raw_response,
                 structured_json=parsed_json,
+                final_json=final_json,
                 confidence=record.confidence,
+                confidence_details=details,
                 error_code=record.error_code,
                 error_message=record.error_message,
             ),
@@ -187,7 +197,6 @@ class AIExtractionService:
 
         current_prompt = user_prompt
         validated: Optional[Dict[str, Any]] = None
-        confidence: Optional[float] = None
         raw_response = ""
         retry_count = 0
         for attempt in range(self.MAX_SCHEMA_RETRIES + 1):
@@ -196,7 +205,7 @@ class AIExtractionService:
                 usage["input"] += result.input_tokens
                 usage["output"] += result.output_tokens
                 raw_response = result.raw_text
-                validated, confidence = AIValidator.validate(result.data, doc_type)
+                validated = AIValidator.validate(result.data, doc_type)
                 break
             except (AIValidationException, LLMError) as exc:
                 if isinstance(exc, LLMError) and exc.code != ErrorCode.LLM_INVALID_OUTPUT:
@@ -218,6 +227,11 @@ class AIExtractionService:
                     f"({exc.message}). Respond again with a single JSON object that conforms to the schema."
                 )
 
+        assert validated is not None  # loop either broke with a value or raised
+        threshold = settings.CONFIDENCE_THRESHOLD_HITL
+        report = assess(doc_type, validated, doc_content.text, doc_content.average_confidence, threshold)
+        status = routing_status(report, threshold)
+
         processing_time_ms = int((time.perf_counter() - start_time) * 1000)
         record = await self.ai_repo.create(
             {
@@ -225,22 +239,27 @@ class AIExtractionService:
                 "document_type": doc_type,
                 "provider": self.llm.provider_name,
                 "model": target_model,
-                "status": ExtractionStatus.COMPLETED.value,
+                "status": status.value,
                 "raw_response": raw_response,
                 "structured_json": json.dumps(validated),
+                # Only auto-accepted results become final; NEEDS_REVIEW waits for a reviewer.
+                "final_json": json.dumps(validated) if status == ExtractionStatus.COMPLETED else None,
                 "prompt_version": PROMPT_VERSION,
                 "processing_time_ms": processing_time_ms,
                 "input_tokens": usage["input"],
                 "output_tokens": usage["output"],
                 "estimated_cost": self.llm.calculate_cost(usage["input"], usage["output"], target_model),
-                "confidence": confidence,
+                "confidence": report.score,
+                "confidence_details": json.dumps(report.to_dict(), default=str),
             }
         )
-        await self.doc_repo.update_status(doc, "EXTRACTION_COMPLETED")
+        await self.doc_repo.update_status(doc, DOCUMENT_STATUS_BY_RESULT[status])
         logger.info(
-            "AI extraction completed for doc '%s': type=%s time=%dms",
+            "AI extraction finished for doc '%s': type=%s status=%s confidence=%.3f time=%dms",
             sanitize_log_input(doc.id),
             sanitize_log_input(doc_type),
+            status.value,
+            report.score,
             processing_time_ms,
         )
         return self._to_response_schema(record, retry_count=retry_count)
