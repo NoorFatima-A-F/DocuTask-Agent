@@ -1,28 +1,29 @@
+"""OCR provider contract.
+
+A provider extracts one page of text from an image, or raises
+:class:`app.core.errors.extraction.OCRError` / ``CorruptedDocumentException``.
+It never returns placeholder text or a guessed confidence.
 """
-Abstract OCR Provider Plugin Interface.
-Defines base class for swappable OCR engines (Tesseract, Document AI, Textract, Azure, PaddleOCR).
-"""
+
+from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict
+
+from app.ocr.schemas import PageContent
 
 
-class BaseOCRProvider(ABC):
-    """Abstract base class for all OCR engine implementations."""
+class OCRProvider(ABC):
+    """Abstract base class for OCR engines."""
 
     @property
     @abstractmethod
     def provider_name(self) -> str:
-        """Returns unique identifier name for the OCR provider."""
-        pass
+        """Unique identifier, e.g. ``tesseract``."""
 
     @abstractmethod
-    async def extract_text(self, document_bytes: bytes, filename: str) -> Dict[str, Any]:
-        """
-        Processes document bytes and returns extracted text & metadata payload.
-        """
-        pass
+    async def extract_page(self, image_bytes: bytes, page_number: int = 1, language: str = "eng") -> PageContent:
+        """OCR a single page image."""
 
-
-# Alias for backward compatibility across pipeline
-OCRProvider = BaseOCRProvider
+    def is_available(self) -> bool:
+        """Whether the engine can run in this environment (used by readiness)."""
+        return True

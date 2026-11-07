@@ -249,16 +249,19 @@ class ExtractionStatistics(BaseModel):
     processing_time_ms: int
     input_tokens: int
     output_tokens: int
-    estimated_cost: float
+    estimated_cost: Optional[float] = Field(None, description="USD cost; null when model pricing is unknown")
     retry_count: int = 0
 
 
 class ExtractionResult(BaseModel):
-    """Extracted data payload."""
+    """Extracted data payload. ``structured_json`` and ``confidence`` are null unless status is a success."""
 
-    raw_response: str
-    structured_json: Dict[str, Any]
-    confidence: float = 1.0
+    status: str = Field(..., description="COMPLETED, NEEDS_REVIEW or FAILED")
+    raw_response: Optional[str] = None
+    structured_json: Optional[Dict[str, Any]] = None
+    confidence: Optional[float] = None
+    error_code: Optional[str] = None
+    error_message: Optional[str] = None
 
 
 class ExtractionResponse(BaseModel):

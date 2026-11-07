@@ -5,7 +5,7 @@ Stores page-level extracted text, confidence metrics, and extraction methodology
 
 import uuid
 from datetime import datetime, timezone
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, Text, Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -25,7 +25,7 @@ class ExtractedText(Base, UUIDMixin):
     )
     page_number: Mapped[int] = mapped_column(Integer, nullable=False)
     text: Mapped[str] = mapped_column(Text, nullable=False)
-    confidence: Mapped[float] = mapped_column(Float, nullable=False)
+    confidence: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     processing_method: Mapped[str] = mapped_column(String(50), nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False

@@ -19,7 +19,9 @@ from app.services.ocr_service import OCRService
 from app.services.ai_extraction_service import AIExtractionService
 from app.dependencies.storage import get_storage_provider
 from app.dependencies.ocr import get_ocr_pipeline
+from app.dependencies.llm import get_llm_provider
 from app.dependencies.workers import get_queue_provider
+from app.ai.base import LLMProvider
 from app.storage.base import StorageProvider
 from app.ocr.pipeline import OCRPipeline
 from app.workers.base import JobQueueProvider
@@ -88,9 +90,12 @@ def get_ai_extraction_service(
     doc_repo: DocumentRepository = Depends(get_document_repository),
     ai_repo: AIExtractionRepository = Depends(get_ai_extraction_repository),
     ocr_service: OCRService = Depends(get_ocr_service),
+    llm_provider: LLMProvider = Depends(get_llm_provider),
 ) -> AIExtractionService:
-    """Provides AIExtractionService instance injected with repositories and OCR service."""
-    return AIExtractionService(document_repo=doc_repo, ai_extraction_repo=ai_repo, ocr_service=ocr_service)
+    """Provides AIExtractionService instance injected with repositories, OCR service and LLM provider."""
+    return AIExtractionService(
+        document_repo=doc_repo, ai_extraction_repo=ai_repo, ocr_service=ocr_service, llm_provider=llm_provider
+    )
 
 
 def get_job_dispatcher(

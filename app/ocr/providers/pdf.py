@@ -9,6 +9,7 @@ from typing import List
 import pdfplumber
 
 from app.core.logging import logger
+from app.core.errors.extraction import OCRError
 from app.ocr.base import OCRProvider
 from app.ocr.exceptions import CorruptedDocumentException
 from app.ocr.schemas import PageContent
@@ -48,7 +49,7 @@ class PDFProcessor:
                             PageContent(
                                 page_number=page_idx,
                                 text=native_text.strip(),
-                                confidence=1.0,
+                                confidence=1.0,  # embedded text layer: no recognition uncertainty
                                 processing_method="native_pdf",
                             )
                         )
@@ -65,8 +66,8 @@ class PDFProcessor:
 
             return pages_content
 
-        except CorruptedDocumentException:
+        except (CorruptedDocumentException, OCRError):
             raise
         except Exception as e:
-            logger.error(f"Failed to parse PDF document: {str(e)}")
-            raise CorruptedDocumentException(f"Corrupted or unreadable PDF document: {str(e)}")
+            logger.warning("Failed to parse PDF document: %s", type(e).__name__)
+            raise CorruptedDocumentException("Corrupted or unreadable PDF document") from e

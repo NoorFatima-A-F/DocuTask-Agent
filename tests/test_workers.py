@@ -98,7 +98,7 @@ async def test_job_dispatcher_duplicate_prevention(db_session: AsyncSession, tem
 
 @pytest.mark.asyncio
 async def test_worker_engine_execution(db_session: AsyncSession, temp_storage_dir: str):
-    """Tests AsyncWorkerEngine task execution and status/progress updates."""
+    """AsyncWorkerEngine must not mark a job COMPLETED when the pipeline fails."""
     user_repo = UserRepository(db_session)
     doc_repo = DocumentRepository(db_session)
     job_repo = ProcessingJobRepository(db_session)
@@ -134,8 +134,10 @@ async def test_worker_engine_execution(db_session: AsyncSession, temp_storage_di
     # Check updated job status in DB
     updated_job = await job_repo.get_by_id(job_res.id)
     assert updated_job is not None
-    assert updated_job.status == JobState.COMPLETED.value
-    assert updated_job.progress == 100.0
+    # No OCR engine / LLM key in the unit-test environment: the job must not report success.
+    assert updated_job.status != JobState.COMPLETED.value
+    doc = await doc_repo.get_by_id(doc_id)
+    assert doc is not None and doc.upload_status == "OCR_FAILED"
 
 
 @pytest.mark.asyncio

@@ -21,6 +21,7 @@ from app.repositories.user_repository import UserRepository
 from app.services.ai_extraction_service import AIExtractionService
 from app.services.ocr_service import OCRService
 from app.storage.local import LocalStorageProvider
+from app.dependencies.llm import get_llm_provider
 from app.ocr.pipeline import OCRPipeline
 from app.ocr.providers.tesseract import TesseractOCRProvider
 from app.workers.base import JobQueueProvider
@@ -92,7 +93,10 @@ class AsyncWorkerEngine:
                 ocr_pipeline=OCRPipeline(ocr_provider=TesseractOCRProvider()),
             )
             ai_service = AIExtractionService(
-                document_repo=doc_repo, ai_extraction_repo=ai_repo, ocr_service=ocr_service
+                document_repo=doc_repo,
+                ai_extraction_repo=ai_repo,
+                ocr_service=ocr_service,
+                llm_provider=get_llm_provider(),
             )
 
             job = await job_repo.get_by_id(task.job_id)
