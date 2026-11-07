@@ -8,9 +8,9 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import jwt
 import pytest
 from httpx import AsyncClient
-from jose import jwt
 from pydantic import ValidationError
 
 from app.core.config import DEFAULT_JWT_SECRET, Settings, settings
