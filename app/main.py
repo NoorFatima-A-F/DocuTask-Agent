@@ -16,9 +16,10 @@ from app.ai.providers.gemini import default_timeout
 from app.api.health import router as health_router
 from app.api.v1.router import api_v1_router
 from app.core.config import settings
-from app.core.logging import logger
+from app.core.logging import install_secret_scrubbing, logger
 from app.database.base import Base
 from app.database.session import engine
+from app.middleware.body_limit import BodySizeLimitMiddleware
 from app.middleware.exception_handler import register_exception_handlers
 from app.middleware.request_context import RequestContextMiddleware
 from app.middleware.rate_limit import RateLimitMiddleware
@@ -27,6 +28,7 @@ from app.middleware.rate_limit import RateLimitMiddleware
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan context manager for application startup and shutdown events."""
+    install_secret_scrubbing()  # uvicorn configures its handlers before lifespan runs
     logger.info(f"Starting {settings.PROJECT_NAME} in [{settings.ENVIRONMENT}] mode...")
 
     # Auto-create tables for development mode if SQLite / local
@@ -85,6 +87,9 @@ def create_application() -> FastAPI:
             allow_methods=["*"],
             allow_headers=["*"],
         )
+
+    # Outermost: reject oversized bodies before anything parses them
+    app.add_middleware(BodySizeLimitMiddleware)
 
     # Exception Handlers
     register_exception_handlers(app)

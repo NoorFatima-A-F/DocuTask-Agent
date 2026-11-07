@@ -5,15 +5,19 @@ typing, validation, and secure defaults via Pydantic Settings.
 """
 
 from datetime import date
-from typing import Dict, List, Optional, Tuple
+from typing import Annotated, Any, Dict, List, Optional, Tuple
 
 from pydantic import Field, field_validator, model_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
-DEFAULT_JWT_SECRET = "replace-with-a-secure-random-secret-in-production-use-openssl-rand-hex-32"
+# Dev-only placeholder; startup refuses it outside development/test.
+DEFAULT_JWT_SECRET = "replace-with-a-secure-random-secret-in-production-use-openssl-rand-hex-32"  # nosec B105
 #: Environments where the insecure default JWT secret is tolerated.
 INSECURE_SECRET_ENVIRONMENTS = frozenset({"development", "test"})
 MIN_JWT_SECRET_BYTES = 32
+
+#: List settings read from env as comma-separated strings (or a JSON array).
+CsvList = Annotated[List[str], NoDecode]
 
 
 class Settings(BaseSettings):
@@ -40,11 +44,11 @@ class Settings(BaseSettings):
     HOST: str = "0.0.0.0"  # nosec B104
     PORT: int = 8000
 
-    CORS_ORIGINS: List[str] = Field(
+    CORS_ORIGINS: CsvList = Field(
         default_factory=lambda: ["http://localhost:3000", "http://localhost:8000"],
         description="Allowed CORS origins",
     )
-    BACKEND_CORS_ORIGINS: List[str] = Field(
+    BACKEND_CORS_ORIGINS: CsvList = Field(
         default_factory=lambda: ["http://localhost:3000", "http://localhost:8000"],
         description="Allowed CORS origins alias",
     )
@@ -79,6 +83,25 @@ class Settings(BaseSettings):
     GEMINI_CONNECT_TIMEOUT_SECONDS: float = 5.0
     GEMINI_READ_TIMEOUT_SECONDS: float = 60.0
 
+    @field_validator(
+        "CORS_ORIGINS",
+        "BACKEND_CORS_ORIGINS",
+        "TRUSTED_PROXIES",
+        "ALLOWED_EXTENSIONS",
+        "ALLOWED_MIME_TYPES",
+        mode="before",
+    )
+    @classmethod
+    def _split_csv(cls, value: Any) -> Any:
+        if isinstance(value, str):
+            text = value.strip()
+            if text.startswith("["):
+                import json  # noqa: PLC0415
+
+                return json.loads(text)
+            return [item.strip() for item in text.split(",") if item.strip()]
+        return value
+
     @field_validator("DATABASE_URL")
     @classmethod
     def _use_async_postgres_driver(cls, url: str) -> str:
@@ -112,8 +135,8 @@ class Settings(BaseSettings):
     STORAGE_LOCAL_DIR: str = "./uploads"
     MAX_UPLOAD_SIZE_MB: int = 50
     MAX_FILENAME_LENGTH: int = 255
-    ALLOWED_EXTENSIONS: List[str] = Field(default_factory=lambda: [".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp"])
-    ALLOWED_MIME_TYPES: List[str] = Field(
+    ALLOWED_EXTENSIONS: CsvList = Field(default_factory=lambda: [".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp"])
+    ALLOWED_MIME_TYPES: CsvList = Field(
         default_factory=lambda: ["application/pdf", "image/png", "image/jpeg", "image/tiff", "image/bmp"]
     )
     REDIS_URL: Optional[str] = Field(
@@ -122,7 +145,11 @@ class Settings(BaseSettings):
     )
 
     # Rate Limiting & Gating
-    RATE_LIMIT_PER_MINUTE: int = 60
+    RATE_LIMIT_PER_MINUTE: int = Field(default=120, description="Requests per minute per client IP on /api/*")
+    TRUSTED_PROXIES: CsvList = Field(
+        default_factory=list,
+        description="CIDRs of reverse proxies whose X-Forwarded-For is trusted (e.g. 10.0.0.0/8). Empty: use the TCP peer.",
+    )
     CONFIDENCE_THRESHOLD_HITL: float = 0.85
 
 

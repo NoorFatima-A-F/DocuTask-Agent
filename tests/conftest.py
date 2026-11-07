@@ -116,3 +116,14 @@ def mock_celery():
     celery_mock = MagicMock()
     celery_mock.send_task.return_value = MagicMock(id="mock-task-id")
     return celery_mock
+
+
+@pytest.fixture(autouse=True)
+def _reset_rate_limiter():
+    """Each test starts with empty in-process rate-limit counters (no Redis)."""
+    from app.middleware.rate_limit import rate_limiter
+
+    rate_limiter.memory.clear()
+    saved, rate_limiter.redis = rate_limiter.redis, None
+    yield
+    rate_limiter.redis = saved

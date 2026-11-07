@@ -59,6 +59,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - docker-compose: secrets are required from the environment (no hard-coded JWT secret or DB
   password), a `worker` service was added, Postgres/Redis ports are no longer published.
 
+### Security
+- Rate limiting: client IP is the TCP peer unless it is in `TRUSTED_PROXIES` (then the right-most
+  untrusted `X-Forwarded-For` hop), so a spoofed header no longer resets limits. Every `/api/`
+  route is limited per IP (`RATE_LIMIT_PER_MINUTE`, default 120); login also has a per-account
+  limit across IPs. Counters live in Redis when configured, else a bounded in-process LRU.
+- Request bodies are capped while streaming (413): uploads at `MAX_UPLOAD_SIZE_MB`, other
+  endpoints at 1 MB, including chunked bodies without `Content-Length`.
+- Document text is no longer rewritten for "prompt-injection sanitization" (which changed real
+  values). It is sent verbatim inside a random per-request delimiter, and the system instruction
+  treats it as untrusted data. Unknown document types are not interpolated into prompts.
+- All log output (app, uvicorn, Celery) is scrubbed of configured secrets, bearer tokens, JWTs,
+  Google API keys, credential parameters and URL passwords.
+- `LocalStorageProvider.read` no longer falls back to absolute or working-directory paths; reads
+  outside the storage root are refused. Review downloads resolve paths through the storage root.
+- Comma-separated list settings (`CORS_ORIGINS`, `TRUSTED_PROXIES`, ...) parse correctly
+  (previously the documented `.env.example` format crashed startup).
+- `bandit -r app`: no findings. `pip-audit -r requirements.txt`: no known vulnerabilities.
+
 ### Added
 - Review API (`reviewer` role; admins inherit): `GET /api/v1/reviews`, `GET /api/v1/reviews/{id}`,
   `GET /api/v1/reviews/{id}/document`, `POST /api/v1/reviews/{id}/approve` (optional schema-validated

@@ -5,8 +5,9 @@ Receives file upload requests, validates headers/tokens, delegates to DocumentSe
 
 from typing import Optional
 from uuid import UUID
-from fastapi import APIRouter, Depends, File, Query, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
 
+from app.core.config import settings
 from app.dependencies.auth import get_current_active_user
 from app.dependencies.db import get_document_service
 from app.models.user import User
@@ -23,6 +24,21 @@ from app.services.document_service import DocumentService
 router = APIRouter(prefix="/documents", tags=["Document Management"], dependencies=[Depends(get_current_active_user)])
 
 
+CHUNK_BYTES = 1024 * 1024
+
+
+async def read_capped(file: UploadFile, max_bytes: int) -> bytes:
+    """Read the upload in chunks, refusing (413) as soon as it passes ``max_bytes``."""
+    chunks: list[bytes] = []
+    total = 0
+    while chunk := await file.read(CHUNK_BYTES):
+        total += len(chunk)
+        if total > max_bytes:
+            raise HTTPException(status_code=413, detail=f"File exceeds {settings.MAX_UPLOAD_SIZE_MB} MB")
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
 @router.post(
     "/upload",
     response_model=APIResponse[UploadResponse],
@@ -36,7 +52,7 @@ async def upload_document(
     doc_service: DocumentService = Depends(get_document_service),
 ) -> APIResponse[UploadResponse]:
     """Handles document upload request."""
-    content = await file.read()
+    content = await read_capped(file, settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024)
     original_filename = file.filename or "file.bin"
     content_type = file.content_type or "application/octet-stream"
 

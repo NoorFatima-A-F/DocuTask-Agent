@@ -3,7 +3,6 @@ OCR Service Business Logic Layer.
 Coordinates document text extraction, result caching, page persistence, status tracking, and authorization.
 """
 
-import os
 from typing import Any, Dict, List
 from uuid import UUID
 
@@ -74,14 +73,7 @@ class OCRService:
 
         try:
             # Read document binary content from storage
-            try:
-                file_bytes = await self.storage.read(doc.relative_path)
-            except Exception:
-                if getattr(doc, "absolute_path", None) and os.path.isfile(doc.absolute_path):
-                    with open(doc.absolute_path, "rb") as f:
-                        file_bytes = f.read()
-                else:
-                    raise
+            file_bytes = await self.storage.read(doc.relative_path)
 
             # Execute OCR pipeline
             doc_content = await self.pipeline.process(

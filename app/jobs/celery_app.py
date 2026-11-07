@@ -8,8 +8,10 @@ the job row's status is checked before any work runs.
 """
 
 from celery import Celery
+from celery.signals import after_setup_logger, after_setup_task_logger
 
 from app.core.config import settings
+from app.core.logging import install_secret_scrubbing
 
 #: Seconds Redis waits for an ack before redelivering a task. Must exceed the longest job.
 VISIBILITY_TIMEOUT_SECONDS = 60 * 60
@@ -33,3 +35,9 @@ celery_app.conf.update(
     task_default_queue="extraction",
     timezone="UTC",
 )
+
+
+@after_setup_logger.connect
+@after_setup_task_logger.connect
+def _scrub_celery_logs(logger, **_kwargs):  # type: ignore[no-untyped-def]
+    install_secret_scrubbing(logger.name)

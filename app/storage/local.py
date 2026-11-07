@@ -35,7 +35,6 @@ class LocalStorageProvider(StorageProvider):
         resolved_path = os.path.abspath(absolute_path)
         common = os.path.commonpath([self.base_dir, resolved_path])
         if common != self.base_dir:
-            logger.security_warning = True
             logger.error(f"Path traversal detected! Attempted path: {resolved_path} outside base: {self.base_dir}")
             raise ValidationAppException("Access denied: Invalid file path")
 
@@ -93,21 +92,12 @@ class LocalStorageProvider(StorageProvider):
         return stored_filename, rel_path, abs_path
 
     async def read(self, relative_path: str) -> bytes:
-        """Reads file binary data from disk."""
-        if os.path.isabs(relative_path) and os.path.isfile(relative_path):
-            with open(relative_path, "rb") as f:
-                return f.read()
-        try:
-            abs_path = self.get_absolute_path(relative_path)
-            if os.path.isfile(abs_path):
-                with open(abs_path, "rb") as f:
-                    return f.read()
-        except Exception:
-            pass
-        if os.path.isfile(relative_path):
-            with open(relative_path, "rb") as f:
-                return f.read()
-        raise ValidationAppException("Requested file does not exist on disk")
+        """Read a stored file. Only paths inside the storage root are allowed."""
+        abs_path = self.get_absolute_path(relative_path)  # raises on traversal
+        if not os.path.isfile(abs_path):
+            raise ValidationAppException("Requested file does not exist on disk")
+        with open(abs_path, "rb") as f:
+            return f.read()
 
     async def delete(self, relative_path: str) -> bool:
         """Deletes file from disk if present."""
