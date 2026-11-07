@@ -10,6 +10,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
+import httpx
+
+from app.ai.providers.gemini import default_timeout
 from app.api.health import router as health_router
 from app.api.v1.router import api_v1_router
 from app.core.config import settings
@@ -32,11 +35,16 @@ async def lifespan(app: FastAPI):
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
 
+    # One shared HTTP client for outbound LLM calls (connection pooling, explicit timeouts).
+    app.state.http_client = httpx.AsyncClient(timeout=default_timeout())
+
     # Start Background Worker Engine
     worker_engine = get_worker_engine()
     await worker_engine.start()
 
     yield
+
+    await app.state.http_client.aclose()
 
     # Shutdown Background Worker Engine
     logger.info("Shutting down worker engine...")

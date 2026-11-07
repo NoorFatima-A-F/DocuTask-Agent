@@ -4,9 +4,9 @@ Loads settings from environment variables and optional .env file with strong
 typing, validation, and secure defaults via Pydantic Settings.
 """
 
-import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from datetime import date
+from typing import Any, Dict, List, Optional, Tuple
 import yaml
 from pydantic import Field
 
@@ -96,27 +96,20 @@ class Settings(BaseSettings):
     DB_MAX_OVERFLOW: int = 20
     DB_ECHO: bool = False
 
-    # AI & LLM Provider API Keys (Read exclusively from environment)
-    GEMINI_API_KEY: Optional[str] = Field(
-        default=None,
-        description="Google Gemini API Key alias",
-    )
+    # Gemini (the only LLM provider). Key precedence: GEMINI_API_KEY, then GOOGLE_API_KEY.
+    GEMINI_API_KEY: Optional[str] = Field(default=None, description="Gemini API key (preferred)")
+    GOOGLE_API_KEY: Optional[str] = Field(default=None, description="Gemini API key (used if GEMINI_API_KEY unset)")
     GEMINI_MODEL: str = Field(
-        default="gemini-1.5-flash",
-        description="Default Gemini model identifier",
+        default="gemini-3.8-flash",
+        description="Gemini model ID used for extraction (stable, no shutdown date as of 2026-11-08)",
     )
-    GOOGLE_API_KEY: Optional[str] = Field(
-        default=None,
-        description="Google Gemini API Key for document extraction and multimodal processing",
-    )
-    ANTHROPIC_API_KEY: Optional[str] = Field(
-        default=None,
-        description="Anthropic Claude API Key for secondary fallback extraction",
-    )
-    OPENAI_API_KEY: Optional[str] = Field(
-        default=None,
-        description="OpenAI API Key for comparative extraction workflows",
-    )
+    GEMINI_CONNECT_TIMEOUT_SECONDS: float = 5.0
+    GEMINI_READ_TIMEOUT_SECONDS: float = 60.0
+
+    @property
+    def gemini_api_key(self) -> Optional[str]:
+        """Resolved Gemini key: GEMINI_API_KEY wins over GOOGLE_API_KEY; blank values count as unset."""
+        return (self.GEMINI_API_KEY or "").strip() or (self.GOOGLE_API_KEY or "").strip() or None
 
     # Storage & Cache Configuration
     STORAGE_LOCAL_PATH: str = "./uploads"
@@ -135,6 +128,17 @@ class Settings(BaseSettings):
     # Rate Limiting & Gating
     RATE_LIMIT_PER_MINUTE: int = 60
     CONFIDENCE_THRESHOLD_HITL: float = 0.85
+
+
+#: USD per 1M tokens, keyed by model ID. Each entry is a list of (effective_from, input, output),
+#: newest last. Source: https://aistudio.google.com/docs/pricing (paid tier, text), checked 2026-11-08.
+#: Models not listed here get ``estimated_cost = None``; never guess a price.
+GEMINI_PRICING_USD_PER_1M: Dict[str, List[Tuple[date, float, float]]] = {
+    "gemini-3.8-flash": [(date(2026, 1, 1), 0.75, 3.75), (date(2027, 1, 1), 1.50, 7.50)],
+    "gemini-3.6-flash": [(date(2026, 1, 1), 0.75, 3.75), (date(2027, 1, 1), 1.50, 7.50)],
+    "gemini-3.5-flash-lite": [(date(2026, 1, 1), 0.30, 2.50)],
+    "gemini-3.1-flash-lite": [(date(2026, 1, 1), 0.25, 1.50)],
+}
 
 
 # Global Singleton Instance

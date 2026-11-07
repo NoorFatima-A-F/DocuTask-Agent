@@ -63,6 +63,14 @@ class ResumeExperience(BaseModel):
     responsibilities: List[str] = Field(default_factory=list, description="Key duties and achievements")
 
 
+class ResumeEducation(BaseModel):
+    institution: Optional[str] = Field(None, description="School or university")
+    degree: Optional[str] = Field(None, description="Degree or qualification")
+    field_of_study: Optional[str] = Field(None, description="Major or field")
+    start_date: Optional[str] = Field(None, description="Start date")
+    end_date: Optional[str] = Field(None, description="End or graduation date")
+
+
 class ResumeExtraction(BaseModel):
     """Structured output model for Resume documents."""
 
@@ -73,7 +81,7 @@ class ResumeExtraction(BaseModel):
     summary: Optional[str] = Field(None, description="Professional summary")
     skills: List[str] = Field(default_factory=list, description="Extracted skills and technologies")
     work_experience: List[ResumeExperience] = Field(default_factory=list, description="Career history")
-    education: List[Dict[str, Any]] = Field(default_factory=list, description="Degrees and educational background")
+    education: List[ResumeEducation] = Field(default_factory=list, description="Degrees and educational background")
 
 
 class ContractExtraction(BaseModel):
@@ -101,6 +109,13 @@ class MedicalReportExtraction(BaseModel):
     recommendations: Optional[str] = Field(None, description="Follow-up advice and recommendations")
 
 
+class ReceiptLineItem(BaseModel):
+    description: str = Field(..., description="Item description")
+    quantity: Optional[float] = Field(None, description="Quantity purchased")
+    unit_price: Optional[float] = Field(None, description="Price per unit")
+    total_price: Optional[float] = Field(None, description="Line total")
+
+
 class ReceiptExtraction(BaseModel):
     """Structured output model for Receipt documents."""
 
@@ -110,7 +125,7 @@ class ReceiptExtraction(BaseModel):
     tax: Optional[float] = Field(None, description="Sales tax amount")
     total_amount: Optional[float] = Field(None, description="Final charged total amount")
     payment_method: Optional[str] = Field(None, description="Payment method (Cash, Credit, Debit)")
-    line_items: List[Dict[str, Any]] = Field(default_factory=list, description="Purchased items")
+    line_items: List[ReceiptLineItem] = Field(default_factory=list, description="Purchased items")
 
 
 class PassportExtraction(BaseModel):
@@ -162,6 +177,13 @@ class InsuranceFormExtraction(BaseModel):
     premium_amount: Optional[float] = Field(None, description="Insurance premium monetary amount")
 
 
+class BankTransaction(BaseModel):
+    date: Optional[str] = Field(None, description="Transaction date")
+    description: Optional[str] = Field(None, description="Transaction description")
+    amount: Optional[float] = Field(None, description="Signed amount (negative for debits)")
+    balance: Optional[float] = Field(None, description="Running balance after the transaction")
+
+
 class BankStatementExtraction(BaseModel):
     """Structured output model for Bank Statement documents."""
 
@@ -171,7 +193,7 @@ class BankStatementExtraction(BaseModel):
     statement_period: Optional[str] = Field(None, description="Statement period range")
     opening_balance: Optional[float] = Field(None, description="Period opening balance")
     closing_balance: Optional[float] = Field(None, description="Period closing balance")
-    transactions: List[Dict[str, Any]] = Field(default_factory=list, description="Statement transactions list")
+    transactions: List[BankTransaction] = Field(default_factory=list, description="Statement transactions list")
 
 
 class UtilityBillExtraction(BaseModel):
@@ -198,6 +220,13 @@ class ResearchPaperExtraction(BaseModel):
     conclusions: Optional[str] = Field(None, description="Primary research conclusions")
 
 
+class PurchaseOrderItem(BaseModel):
+    description: str = Field(..., description="Item description")
+    quantity: Optional[float] = Field(None, description="Quantity ordered")
+    unit_price: Optional[float] = Field(None, description="Price per unit")
+    total_price: Optional[float] = Field(None, description="Line total")
+
+
 class PurchaseOrderExtraction(BaseModel):
     """Structured output model for Purchase Order documents."""
 
@@ -206,7 +235,7 @@ class PurchaseOrderExtraction(BaseModel):
     order_date: Optional[str] = Field(None, description="Order issuance date")
     delivery_date: Optional[str] = Field(None, description="Expected delivery date")
     total_cost: Optional[float] = Field(None, description="Total order monetary cost")
-    items: List[Dict[str, Any]] = Field(default_factory=list, description="Ordered items list")
+    items: List[PurchaseOrderItem] = Field(default_factory=list, description="Ordered items list")
 
 
 class GenericExtraction(BaseModel):

@@ -21,6 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `/readyz` returns 503 with `reasons` when tesseract is missing, or (outside dev/test) no LLM key is set.
 - Removed `/health/metrics` (returned hard-coded latency/queue numbers) and `/health/healthz`, `/health/readyz` aliases.
 - The Gemini API key is sent in the `x-goog-api-key` header instead of the URL.
+- `GEMINI_MODEL` (default `gemini-3.8-flash`) is the only source of the model ID; the
+  retired `gemini-1.5-flash` default is gone. `GEMINI_API_KEY` takes precedence over `GOOGLE_API_KEY`.
+- Gemini calls use structured output (`responseSchema` derived from the Pydantic models) and
+  a shared, lifespan-scoped HTTP client with explicit timeouts.
+- Cost comes from a dated per-model pricing table; unlisted models report `estimated_cost: null`.
+- Extraction schemas: receipt/purchase-order line items, bank transactions and resume education
+  are now typed objects instead of free-form dicts.
+- Removed unused `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` settings.
 
 ### Removed
 - Fake OCR provider classes (Textract, Document AI, Azure, Paddle), the shadowed `app/ocr/providers.py`,
