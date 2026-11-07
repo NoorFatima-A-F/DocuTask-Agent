@@ -11,19 +11,8 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional, Set, Union
 
-try:
-    from jose import JWTError, jwt
-except ImportError:
-    try:
-        import jwt
-
-        class JWTError(Exception):
-            pass
-    except ImportError:
-        jwt = None
-
-        class JWTError(Exception):
-            pass
+import jwt
+from jwt import PyJWTError as JWTError
 
 
 from app.core.config import settings
