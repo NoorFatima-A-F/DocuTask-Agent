@@ -1,25 +1,37 @@
-"""Google Gemini provider (REST ``generateContent``).
+"""Google Gemini provider (REST ``generateContent`` with structured JSON output).
 
 Fail-closed: a missing key, any non-200 response, a timeout, or unparseable output raises
 a typed :class:`LLMError`. Upstream response bodies and the API key never appear in
-exception messages; a truncated body is logged at DEBUG only.
+exception messages; a truncated, scrubbed body is logged at DEBUG only. The key is sent
+in the ``x-goog-api-key`` header, never in the URL.
 """
 
 from __future__ import annotations
 
-import json
 import re
+import json
+from datetime import date, datetime, timezone
 from typing import Any
 
 import httpx
 
 from app.ai.base import LLMProvider, LLMResult
-from app.core.config import settings
+from app.core.config import GEMINI_PRICING_USD_PER_1M, settings
 from app.core.errors.extraction import ErrorCode, LLMError
 from app.core.logging import logger
 
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
 _DEBUG_BODY_LIMIT = 300
+
+
+def default_timeout() -> httpx.Timeout:
+    """Explicit connect/read timeouts for Gemini calls."""
+    return httpx.Timeout(
+        connect=settings.GEMINI_CONNECT_TIMEOUT_SECONDS,
+        read=settings.GEMINI_READ_TIMEOUT_SECONDS,
+        write=10.0,
+        pool=5.0,
+    )
 
 
 def _parse_retry_after(value: str | None) -> float | None:
@@ -41,20 +53,17 @@ def _scrub(text: str, secret: str | None) -> str:
 class GeminiProvider(LLMProvider):
     """Concrete LLMProvider for Google Gemini models."""
 
-    PRICING_PER_1K = {
-        "gemini-1.5-pro": {"input": 0.00125, "output": 0.005},
-        "gemini-1.5-flash": {"input": 0.000075, "output": 0.0003},
-    }
-
     def __init__(
         self,
         api_key: str | None = None,
-        default_model_name: str = "gemini-1.5-flash",
-        timeout: float = 45.0,
+        default_model_name: str | None = None,
+        client: httpx.AsyncClient | None = None,
+        pricing: dict[str, list[tuple[date, float, float]]] | None = None,
     ):
-        self.api_key = api_key if api_key is not None else settings.GEMINI_API_KEY
-        self._default_model = default_model_name
-        self._timeout = timeout
+        self.api_key = api_key if api_key is not None else settings.gemini_api_key
+        self._default_model = default_model_name or settings.GEMINI_MODEL
+        self._client = client
+        self._pricing = GEMINI_PRICING_USD_PER_1M if pricing is None else pricing
 
     @property
     def provider_name(self) -> str:
@@ -64,11 +73,19 @@ class GeminiProvider(LLMProvider):
     def default_model(self) -> str:
         return self._default_model
 
-    def calculate_cost(self, input_tokens: int, output_tokens: int, model: str = "") -> float | None:
-        rates = self.PRICING_PER_1K.get(model or self._default_model)
-        if rates is None:
+    def calculate_cost(
+        self, input_tokens: int, output_tokens: int, model: str = "", on: date | None = None
+    ) -> float | None:
+        """USD cost from the pricing table; ``None`` for models without a listed price."""
+        periods = self._pricing.get(model or self._default_model)
+        if not periods:
             return None
-        return round((input_tokens / 1000.0) * rates["input"] + (output_tokens / 1000.0) * rates["output"], 6)
+        day = on or datetime.now(timezone.utc).date()
+        applicable = [p for p in periods if p[0] <= day]
+        if not applicable:
+            return None
+        _, in_rate, out_rate = applicable[-1]
+        return round(input_tokens / 1e6 * in_rate + output_tokens / 1e6 * out_rate, 6)
 
     async def generate_json(
         self, prompt: str, json_schema: dict[str, Any], system_instruction: str = "", model: str = ""
@@ -77,22 +94,24 @@ class GeminiProvider(LLMProvider):
             raise LLMError(ErrorCode.LLM_NOT_CONFIGURED)
 
         target_model = model or self._default_model
-        instruction = (
-            f"{system_instruction}\n\n"
-            "Respond ONLY with a JSON object matching this JSON schema:\n"
-            f"{json.dumps(json_schema)}"
-        )
-        payload = {
-            "contents": [{"parts": [{"text": f"{instruction}\n\n{prompt}"}]}],
-            "generationConfig": {"responseMimeType": "application/json"},
+        payload: dict[str, Any] = {
+            "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "responseSchema": to_gemini_schema(json_schema),
+            },
         }
+        if system_instruction:
+            payload["systemInstruction"] = {"parts": [{"text": system_instruction}]}
         url = f"{GEMINI_BASE_URL}/models/{target_model}:generateContent"
-        # The key goes in a header, never the URL: URLs end up in httpx/proxy access logs.
         headers = {"x-goog-api-key": self.api_key}
 
         try:
-            async with httpx.AsyncClient(timeout=self._timeout) as client:
-                response = await client.post(url, json=payload, headers=headers)
+            if self._client is not None:
+                response = await self._client.post(url, json=payload, headers=headers)
+            else:
+                async with httpx.AsyncClient(timeout=default_timeout()) as client:
+                    response = await client.post(url, json=payload, headers=headers)
         except httpx.TimeoutException as exc:
             raise LLMError(ErrorCode.LLM_TIMEOUT) from exc
         except httpx.HTTPError as exc:
@@ -130,7 +149,7 @@ class GeminiProvider(LLMProvider):
             raise LLMError(ErrorCode.LLM_INVALID_OUTPUT) from exc
 
         candidates = data.get("candidates") or []
-        parts = (candidates[0].get("content") or {}).get("parts") or [] if candidates else []
+        parts = ((candidates[0].get("content") or {}).get("parts") or []) if candidates else []
         raw_text = "".join(p.get("text", "") for p in parts if isinstance(p, dict)).strip()
         if not raw_text:
             raise LLMError(ErrorCode.LLM_EMPTY_OUTPUT)
@@ -163,3 +182,77 @@ def _is_invalid_key_error(response: httpx.Response) -> bool:
 def _strip_code_fence(text: str) -> str:
     match = re.fullmatch(r"```(?:json)?\s*(.*?)\s*```", text, re.DOTALL)
     return match.group(1) if match else text
+
+
+# --------------------------------------------------------------------------- responseSchema
+
+#: Keywords of the OpenAPI-subset ``Schema`` object accepted by Gemini's ``responseSchema``.
+_GEMINI_SCHEMA_KEYS = frozenset(
+    {"type", "format", "description", "nullable", "enum", "items", "properties", "required", "minItems", "maxItems"}
+)
+#: JSON Schema keywords with no meaning for Gemini; dropped.
+_IGNORED_KEYS = frozenset({"title", "default", "examples", "additionalProperties", "$defs"})
+
+
+def to_gemini_schema(schema: dict[str, Any]) -> dict[str, Any]:
+    """Convert a Pydantic JSON Schema into Gemini's ``responseSchema`` dialect.
+
+    * ``$ref`` -> inlined from ``$defs``
+    * ``anyOf: [X, {type: null}]`` -> ``X`` with ``nullable: true``
+    * types upper-cased (``STRING``, ``OBJECT``, ...)
+    * free-form objects (no ``properties``) cannot be expressed; such a property is omitted
+      from its parent and Pydantic applies the field default.
+
+    Raises ``ValueError`` for constructs Gemini cannot express (non-nullable unions, unknown
+    keywords, arrays of free-form objects), so schema changes fail in unit tests, not at runtime.
+    """
+    defs: dict[str, Any] = schema.get("$defs", {})
+
+    def resolve(node: dict[str, Any]) -> dict[str, Any]:
+        while "$ref" in node:
+            name = node["$ref"].rsplit("/", 1)[-1]
+            node = {**defs[name], **{k: v for k, v in node.items() if k != "$ref"}}
+        return node
+
+    def convert(node: dict[str, Any]) -> dict[str, Any] | None:
+        node = resolve(node)
+        nullable = False
+        if "anyOf" in node:
+            variants = [resolve(v) for v in node["anyOf"]]
+            non_null = [v for v in variants if v.get("type") != "null"]
+            if len(non_null) != 1:
+                raise ValueError(f"Unsupported union for Gemini responseSchema: {node['anyOf']}")
+            nullable = len(non_null) < len(variants)
+            node = {**non_null[0], **{k: v for k, v in node.items() if k != "anyOf"}}
+
+        if node.get("type") == "object" and not node.get("properties"):
+            return None
+
+        out: dict[str, Any] = {}
+        for key, value in node.items():
+            if key in _IGNORED_KEYS:
+                continue
+            if key not in _GEMINI_SCHEMA_KEYS:
+                raise ValueError(f"Unsupported JSON Schema keyword for Gemini: {key}")
+            if key == "type":
+                out["type"] = str(value).upper()
+            elif key == "properties":
+                props = {name: convert(sub) for name, sub in value.items()}
+                out["properties"] = {name: sub for name, sub in props.items() if sub is not None}
+            elif key == "items":
+                items = convert(value)
+                if items is None:
+                    raise ValueError("Arrays of free-form objects are not supported by Gemini responseSchema")
+                out["items"] = items
+            else:
+                out[key] = value
+        if "required" in out and "properties" in out:
+            out["required"] = [r for r in out["required"] if r in out["properties"]]
+        if nullable:
+            out["nullable"] = True
+        return out
+
+    converted = convert(schema)
+    if converted is None:
+        raise ValueError("Top-level schema must be an object with properties")
+    return converted
