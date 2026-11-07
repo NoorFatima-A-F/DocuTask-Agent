@@ -325,6 +325,8 @@ def decode_token(token: str, expected_type: str = "access") -> Dict[str, Any]:
     """
     try:
         payload = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
+        if "exp" not in payload or "iat" not in payload:
+            raise TokenException("Token missing required exp/iat claims")
         token_type: str = payload.get("type", "")
         if token_type != expected_type:
             raise TokenException(f"Invalid token type. Expected {expected_type}, got {token_type}")

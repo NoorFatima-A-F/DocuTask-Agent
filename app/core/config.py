@@ -8,7 +8,7 @@ from pathlib import Path
 from datetime import date
 from typing import Any, Dict, List, Optional, Tuple
 import yaml
-from pydantic import Field
+from pydantic import Field, model_validator
 
 try:
     from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -41,6 +41,12 @@ def load_yaml_config(file_path: Path) -> Dict[str, Any]:
             return yaml.safe_load(f) or {}
     except Exception:
         return {}
+
+
+DEFAULT_JWT_SECRET = "replace-with-a-secure-random-secret-in-production-use-openssl-rand-hex-32"
+#: Environments where the insecure default JWT secret is tolerated.
+INSECURE_SECRET_ENVIRONMENTS = frozenset({"development", "test"})
+MIN_JWT_SECRET_BYTES = 32
 
 
 class Settings(BaseSettings):
@@ -78,8 +84,8 @@ class Settings(BaseSettings):
 
     # Authentication & Security
     JWT_SECRET: str = Field(
-        default="replace-with-a-secure-random-secret-in-production-use-openssl-rand-hex-32",
-        description="Secret key used for signing JWT tokens",
+        default=DEFAULT_JWT_SECRET,
+        description="Secret key used for signing JWT tokens (generate with: openssl rand -hex 32)",
     )
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
@@ -105,6 +111,20 @@ class Settings(BaseSettings):
     )
     GEMINI_CONNECT_TIMEOUT_SECONDS: float = 5.0
     GEMINI_READ_TIMEOUT_SECONDS: float = 60.0
+
+    @model_validator(mode="after")
+    def _refuse_weak_jwt_secret_outside_dev(self) -> "Settings":
+        """Fail at startup if a non-dev/test environment uses the default or a short JWT secret."""
+        if self.ENVIRONMENT.strip().lower() in INSECURE_SECRET_ENVIRONMENTS:
+            return self
+        if self.JWT_SECRET == DEFAULT_JWT_SECRET:
+            raise ValueError(
+                f"JWT_SECRET is the built-in default; set a random secret for ENVIRONMENT={self.ENVIRONMENT!r} "
+                "(openssl rand -hex 32)"
+            )
+        if len(self.JWT_SECRET.encode("utf-8")) < MIN_JWT_SECRET_BYTES:
+            raise ValueError(f"JWT_SECRET must be at least {MIN_JWT_SECRET_BYTES} bytes outside development/test")
+        return self
 
     @property
     def gemini_api_key(self) -> Optional[str]:

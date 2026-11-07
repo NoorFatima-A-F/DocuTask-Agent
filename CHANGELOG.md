@@ -39,6 +39,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   approval, null otherwise. `AIValidator.validate` now returns only the validated dict.
 - Invoices gain an optional `subtotal` field.
 
+- Startup fails when `ENVIRONMENT` is not `development`/`test` and `JWT_SECRET` is the built-in
+  default or shorter than 32 bytes. Tokens without `exp`/`iat` claims are rejected.
+
 ### Added
 - Review API (`reviewer` role; admins inherit): `GET /api/v1/reviews`, `GET /api/v1/reviews/{id}`,
   `GET /api/v1/reviews/{id}/document`, `POST /api/v1/reviews/{id}/approve` (optional schema-validated
