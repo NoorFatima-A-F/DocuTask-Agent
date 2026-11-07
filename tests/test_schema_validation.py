@@ -17,10 +17,9 @@ def test_schema_validation_success():
         "line_items": [],
     }
 
-    validated_dict, confidence = AIValidator.validate(valid_data, "invoice")
+    validated_dict = AIValidator.validate(valid_data, "invoice")
     assert validated_dict["invoice_number"] == "INV-1001"
     assert validated_dict["total_amount"] == 500.0
-    assert 0.5 <= confidence <= 1.0
 
 
 def test_schema_validation_failure():
