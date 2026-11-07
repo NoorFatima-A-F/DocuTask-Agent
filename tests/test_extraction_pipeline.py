@@ -187,9 +187,7 @@ async def test_transient_error_gives_up_after_three_attempts(db_session: AsyncSe
     assert (await extraction_rows(db_session, env.doc_id))[0].status == "FAILED"
 
 
-async def test_schema_invalid_output_retries_with_corrective_prompt(
-    db_session: AsyncSession, storage_dir: str
-) -> None:
+async def test_schema_invalid_output_retries_with_corrective_prompt(db_session: AsyncSession, storage_dir: str) -> None:
     bad = {"line_items": [{"quantity": 1}]}  # missing required description
     env = await make_env(db_session, storage_dir, bad, CONTOSO_INVOICE_JSON)
 

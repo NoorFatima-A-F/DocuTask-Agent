@@ -44,3 +44,23 @@ async def test_not_ready_without_llm_key_in_production(client: AsyncClient, monk
     res = await client.get("/readyz")
     assert res.status_code == 503
     assert any(r.startswith("LLM_NOT_CONFIGURED") for r in res.json()["reasons"])
+
+
+async def test_not_ready_without_redis_in_production(client: AsyncClient, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(settings, "ENVIRONMENT", "production")
+    monkeypatch.setattr(settings, "REDIS_URL", None)
+    app.dependency_overrides[get_ocr_provider] = lambda: FakeOCRProvider()
+    app.dependency_overrides[get_llm_provider] = lambda: GeminiProvider(api_key="k")
+    res = await client.get("/readyz")
+    assert res.status_code == 503
+    assert res.json()["reasons"] == ["QUEUE_UNAVAILABLE: REDIS_URL is not set"]
+
+
+async def test_not_ready_when_configured_redis_is_unreachable(
+    client: AsyncClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(settings, "REDIS_URL", "redis://127.0.0.1:1/0")  # nothing listens on port 1
+    app.dependency_overrides[get_ocr_provider] = lambda: FakeOCRProvider()
+    res = await client.get("/readyz")
+    assert res.status_code == 503
+    assert any(r.startswith("QUEUE_UNAVAILABLE") for r in res.json()["reasons"])

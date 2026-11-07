@@ -42,6 +42,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Startup fails when `ENVIRONMENT` is not `development`/`test` and `JWT_SECRET` is the built-in
   default or shorter than 32 bytes. Tokens without `exp`/`iat` claims are rejected.
 
+- API trimmed to the document path (914 -> 36 operations). Only `/healthz`, `/readyz` and
+  auth login/register/refresh are public; logout requires an access token. `/health/live`,
+  `/health/ready` and `/api/v1/health` are gone. See `docs/remediation/deletions.md`.
+- Background jobs run on Celery + Redis instead of an in-process asyncio queue. New API:
+  `POST /api/v1/jobs` (202, idempotent: resubmissions or a reused `Idempotency-Key` return the
+  existing job with 200), `GET /api/v1/jobs`, `GET /api/v1/jobs/{id}`, `POST /api/v1/jobs/{id}/retry`,
+  `GET /api/v1/jobs/failed` (admin). Job statuses: QUEUED, RUNNING, RETRYING, COMPLETED,
+  NEEDS_REVIEW, FAILED, with `error_code`/`last_error` on failure. Only transient LLM errors are
+  retried (3 retries, exponential backoff honouring Retry-After). Without `REDIS_URL`, submission
+  fails with 503 `QUEUE_UNAVAILABLE`.
+- Removed `/jobs/submit`, `/jobs/extract/{id}`, `/jobs/dlq/*`, `/jobs/{id}/status` (returned a
+  hard-coded 100% progress) and `DELETE /jobs/{id}`.
+- `/readyz` also reports `QUEUE_UNAVAILABLE` when Redis is unset (outside dev/test) or unreachable.
+- `postgres://` / `postgresql://` database URLs are rewritten to the asyncpg driver.
+- docker-compose: secrets are required from the environment (no hard-coded JWT secret or DB
+  password), a `worker` service was added, Postgres/Redis ports are no longer published.
+
 ### Added
 - Review API (`reviewer` role; admins inherit): `GET /api/v1/reviews`, `GET /api/v1/reviews/{id}`,
   `GET /api/v1/reviews/{id}/document`, `POST /api/v1/reviews/{id}/approve` (optional schema-validated
@@ -55,6 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Alembic `007_extraction_failure_status`: `ai_extractions.status/error_code/error_message`;
   nullable `structured_json`, `raw_response`, `confidence`, `estimated_cost`, `extracted_texts.confidence`.
 - Alembic `008_review_queue`: `ai_extractions.confidence_details`, `ai_extractions.final_json`, `review_events` table.
+- Alembic `009_celery_jobs`: `processing_jobs.document_type`, `idempotency_key` (unique), `error_code`;
+  drops `job_type`, `priority`, `progress`, `worker_name`.
 
 ---
 

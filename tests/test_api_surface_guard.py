@@ -45,7 +45,10 @@ def _operations() -> list[tuple[str, str]]:
 
 def test_operation_budget() -> None:
     schema_ops = [
-        (m, p) for p, item in app.openapi()["paths"].items() for m in item if m in {"get", "post", "put", "patch", "delete"}
+        (m, p)
+        for p, item in app.openapi()["paths"].items()
+        for m in item
+        if m in {"get", "post", "put", "patch", "delete"}
     ]
     assert len(schema_ops) <= MAX_OPERATIONS, f"{len(schema_ops)} operations > {MAX_OPERATIONS}"
 

@@ -20,12 +20,9 @@ from app.services.ai_extraction_service import AIExtractionService
 from app.dependencies.storage import get_storage_provider
 from app.dependencies.ocr import get_ocr_pipeline
 from app.dependencies.llm import get_llm_provider
-from app.dependencies.workers import get_queue_provider
 from app.ai.base import LLMProvider
 from app.storage.base import StorageProvider
 from app.ocr.pipeline import OCRPipeline
-from app.workers.base import JobQueueProvider
-from app.workers.dispatcher import JobDispatcher
 
 
 def get_user_repository(db: AsyncSession = Depends(get_db)) -> UserRepository:
@@ -96,12 +93,3 @@ def get_ai_extraction_service(
     return AIExtractionService(
         document_repo=doc_repo, ai_extraction_repo=ai_repo, ocr_service=ocr_service, llm_provider=llm_provider
     )
-
-
-def get_job_dispatcher(
-    job_repo: ProcessingJobRepository = Depends(get_processing_job_repository),
-    doc_repo: DocumentRepository = Depends(get_document_repository),
-    queue: JobQueueProvider = Depends(get_queue_provider),
-) -> JobDispatcher:
-    """Provides JobDispatcher instance."""
-    return JobDispatcher(job_repo=job_repo, doc_repo=doc_repo, queue_provider=queue)

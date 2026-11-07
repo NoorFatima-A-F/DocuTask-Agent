@@ -7,7 +7,7 @@ typing, validation, and secure defaults via Pydantic Settings.
 from datetime import date
 from typing import Dict, List, Optional, Tuple
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 DEFAULT_JWT_SECRET = "replace-with-a-secure-random-secret-in-production-use-openssl-rand-hex-32"
@@ -78,6 +78,15 @@ class Settings(BaseSettings):
     )
     GEMINI_CONNECT_TIMEOUT_SECONDS: float = 5.0
     GEMINI_READ_TIMEOUT_SECONDS: float = 60.0
+
+    @field_validator("DATABASE_URL")
+    @classmethod
+    def _use_async_postgres_driver(cls, url: str) -> str:
+        """Managed Postgres providers hand out ``postgres://`` URLs; the app needs asyncpg."""
+        for prefix in ("postgres://", "postgresql://"):
+            if url.startswith(prefix):
+                return "postgresql+asyncpg://" + url[len(prefix) :]
+        return url
 
     @model_validator(mode="after")
     def _refuse_weak_jwt_secret_outside_dev(self) -> "Settings":

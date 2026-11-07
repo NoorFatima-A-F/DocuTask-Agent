@@ -1,50 +1,67 @@
+# Render blueprint: API (web), Celery worker, Postgres, Redis.
+#
+# KNOWN LIMITATION: uploaded files are stored on the local disk of the service that received
+# them. Render services do not share disks, so the worker cannot read files uploaded to the
+# web service. Until shared object storage is added, use docker-compose (shared volume) or the
+# single-container image (entrypoint.sh) instead of this blueprint for background jobs.
+
+envVarGroups:
+  - name: docutask-shared
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+
 services:
-  # Web API Service (FastAPI)
   - type: web
     name: docutask-api
     runtime: python
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    preDeployCommand: alembic upgrade head
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
-    plan: free
+    healthCheckPath: /readyz
+    plan: starter
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
-      - key: PROJECT_NAME
-        value: DocuTask-Agent
-      - key: API_V1_STR
-        value: /api/v1
-      - key: SECRET_KEY
-        generateValue: true
+      - fromGroup: docutask-shared
+      - key: DATABASE_URL
+        fromDatabase:
+          name: docutask-db
+          property: connectionString
       - key: REDIS_URL
         fromService:
           type: redis
           name: docutask-redis
           property: connectionString
-      - key: LLM_PROVIDER
-        value: gemini
-      - key: GEMINI_API_KEY
-        sync: false
 
-  # Background Extraction Worker (Celery)
   - type: worker
     name: docutask-worker
     runtime: python
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     startCommand: celery -A app.jobs.celery_app worker --loglevel=info --concurrency=2
-    plan: free
+    plan: starter
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
+      - fromGroup: docutask-shared
+      - key: DATABASE_URL
+        fromDatabase:
+          name: docutask-db
+          property: connectionString
       - key: REDIS_URL
         fromService:
           type: redis
           name: docutask-redis
           property: connectionString
-      - key: GEMINI_API_KEY
-        sync: false
 
-  # In-Memory Cache & Queue Broker
   - type: redis
     name: docutask-redis
-    plan: free
+    plan: starter
+    maxmemoryPolicy: noeviction # queued jobs must never be evicted
     ipAllowList: []
+
+databases:
+  - name: docutask-db
+    plan: basic-256mb

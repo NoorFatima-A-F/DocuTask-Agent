@@ -18,3 +18,13 @@ def test_secret_management_validation():
     # Prohibited key rejection
     with pytest.raises(ValueError):
         validate_secret_key_strength("changeme")
+
+
+def test_managed_postgres_url_is_rewritten_to_asyncpg() -> None:
+    from app.core.config import Settings
+
+    s = Settings(ENVIRONMENT="test", DATABASE_URL="postgres://u:p@h:5432/d")
+    assert s.DATABASE_URL == "postgresql+asyncpg://u:p@h:5432/d"
+    s = Settings(ENVIRONMENT="test", DATABASE_URL="postgresql://u:p@h/d")
+    assert s.DATABASE_URL == "postgresql+asyncpg://u:p@h/d"
+    assert Settings(ENVIRONMENT="test", DATABASE_URL="sqlite+aiosqlite:///x.db").DATABASE_URL.startswith("sqlite")

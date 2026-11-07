@@ -19,7 +19,6 @@ from app.core.config import settings
 from app.core.logging import logger
 from app.database.base import Base
 from app.database.session import engine
-from app.dependencies.workers import get_worker_engine
 from app.middleware.exception_handler import register_exception_handlers
 from app.middleware.request_context import RequestContextMiddleware
 from app.middleware.rate_limit import RateLimitMiddleware
@@ -38,17 +37,9 @@ async def lifespan(app: FastAPI):
     # One shared HTTP client for outbound LLM calls (connection pooling, explicit timeouts).
     app.state.http_client = httpx.AsyncClient(timeout=default_timeout())
 
-    # Start Background Worker Engine
-    worker_engine = get_worker_engine()
-    await worker_engine.start()
-
     yield
 
     await app.state.http_client.aclose()
-
-    # Shutdown Background Worker Engine
-    logger.info("Shutting down worker engine...")
-    await worker_engine.stop()
     logger.info("Shutting down application...")
 
 
