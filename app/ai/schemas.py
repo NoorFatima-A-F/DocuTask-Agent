@@ -49,8 +49,9 @@ class InvoiceExtraction(BaseModel):
     customer_name: Optional[str] = Field(None, description="Billed customer name")
     invoice_date: Optional[str] = Field(None, description="Invoice date")
     due_date: Optional[str] = Field(None, description="Payment due date")
+    subtotal: Optional[float] = Field(None, description="Amount before tax")
     total_amount: Optional[float] = Field(None, description="Total invoice monetary amount")
-    currency: Optional[str] = Field("USD", description="Currency symbol or code")
+    currency: Optional[str] = Field("USD", description="ISO 4217 currency code")
     tax_amount: Optional[float] = Field(None, description="Tax or VAT amount")
     line_items: List[InvoiceLineItem] = Field(default_factory=list, description="Extracted line items")
 
@@ -283,12 +284,21 @@ class ExtractionStatistics(BaseModel):
 
 
 class ExtractionResult(BaseModel):
-    """Extracted data payload. ``structured_json`` and ``confidence`` are null unless status is a success."""
+    """Extraction payload.
+
+    ``final_json`` is the data clients should treat as final: set for auto-accepted
+    (COMPLETED) results and after reviewer approval; null while NEEDS_REVIEW or FAILED.
+    ``structured_json`` is the raw model output (null on failure).
+    """
 
     status: str = Field(..., description="COMPLETED, NEEDS_REVIEW or FAILED")
     raw_response: Optional[str] = None
     structured_json: Optional[Dict[str, Any]] = None
+    final_json: Optional[Dict[str, Any]] = None
     confidence: Optional[float] = None
+    confidence_details: Optional[Dict[str, Any]] = Field(
+        None, description="Per-field grounding, missing/ungrounded required fields, consistency checks, OCR confidence"
+    )
     error_code: Optional[str] = None
     error_message: Optional[str] = None
 

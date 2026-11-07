@@ -37,6 +37,8 @@ class AIExtraction(Base, UUIDMixin):
     output_tokens: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     estimated_cost: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # NULL when pricing unknown
     confidence: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # NULL on failure
+    confidence_details: Mapped[Optional[str]] = mapped_column(Text, nullable=True)  # JSON breakdown
+    final_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)  # reviewer-approved data (JSON)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False
     )

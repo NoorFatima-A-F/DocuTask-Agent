@@ -24,6 +24,8 @@ def test_alembic_upgrade_head_and_downgrade(tmp_path: Path) -> None:
     assert {"status", "error_code", "error_message"} <= cols.keys()
     assert cols["structured_json"][3] == 0  # notnull flag off
     assert cols["confidence"][3] == 0
+    tables = {r[0] for r in sqlite3.connect(db).execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    assert "review_events" in tables
 
     down = subprocess.run(
         [sys.executable, "-m", "alembic", "downgrade", "006_add_user_roles_and_verified"],

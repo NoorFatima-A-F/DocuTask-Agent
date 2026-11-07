@@ -11,6 +11,7 @@ from app.api.v1.endpoints import (
     health,
     jobs,
     ocr,
+    reviews,
     runtime,
     planning,
     probabilistic,
@@ -59,6 +60,7 @@ api_v1_router.include_router(documents.router)
 api_v1_router.include_router(ocr.router)
 api_v1_router.include_router(ai.router)
 api_v1_router.include_router(jobs.router)
+api_v1_router.include_router(reviews.router)
 api_v1_router.include_router(runtime.router, prefix="/runtime", tags=["Runtime Observability"])
 api_v1_router.include_router(planning.router, prefix="/planning", tags=["Autonomous Planning"])
 api_v1_router.include_router(planner.router, prefix="/planner", tags=["Dynamic DAG & Replanning (APDLE)"])
