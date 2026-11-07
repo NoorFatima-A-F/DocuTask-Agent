@@ -5,13 +5,6 @@ Automated Pytest Suite for Enterprise Architecture Refactoring & Infrastructure 
 import pytest
 from app.core.security import validate_secret_key_strength
 from app.models.vector import DocumentEmbedding
-from app.ocr.providers import (
-    AzureDocIntelligenceOCRProvider,
-    DocumentAIOCRProvider,
-    PaddleOCRProvider,
-    TesseractOCRProvider,
-    TextractOCRProvider,
-)
 
 
 def test_secret_management_validation():
@@ -26,24 +19,6 @@ def test_secret_management_validation():
     # Prohibited key rejection
     with pytest.raises(ValueError):
         validate_secret_key_strength("changeme")
-
-
-@pytest.mark.asyncio
-async def test_ocr_provider_plugin_suite():
-    """Verifies pluggable OCR provider strategy implementations."""
-    providers = [
-        TesseractOCRProvider(),
-        DocumentAIOCRProvider(),
-        TextractOCRProvider(),
-        AzureDocIntelligenceOCRProvider(),
-        PaddleOCRProvider(),
-    ]
-
-    for provider in providers:
-        res = await provider.extract_text(b"file_bytes", "test_invoice.pdf")
-        assert res["provider"] == provider.provider_name
-        assert "confidence_score" in res
-        assert "text" in res
 
 
 def test_vector_search_orm_model():

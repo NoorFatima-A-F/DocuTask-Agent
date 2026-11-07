@@ -52,4 +52,4 @@ class AIValidator:
             )
             raise AIValidationException(
                 message=f"LLM generated JSON failed schema validation: {error_msg}", errors=error_details
-            )
+            ) from exc

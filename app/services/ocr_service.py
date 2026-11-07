@@ -11,7 +11,7 @@ from app.core.exceptions import ResourceNotFoundException
 from app.core.logging import logger
 from app.core.security import sanitize_log_input
 from app.models.user import User
-from app.ocr.pipeline import OCRPipeline
+from app.ocr.pipeline import OCRPipeline, average_confidence, merge_page_text
 from app.ocr.schemas import DocumentContent, PageContent
 from app.repositories.document_repository import DocumentRepository
 from app.repositories.extracted_text_repository import ExtractedTextRepository
@@ -67,17 +67,7 @@ class OCRService:
                     )
                     for p in existing_pages
                 ]
-                total_conf = sum(p.confidence for p in page_contents)
-                avg_conf = round(total_conf / len(page_contents), 4)
-                full_text = "\n\n".join([p.text for p in page_contents if p.text.strip()])
-
-                return DocumentContent(
-                    document_id=document_id,
-                    page_count=len(page_contents),
-                    text=full_text,
-                    pages=page_contents,
-                    average_confidence=avg_conf,
-                )
+                return self._to_content(document_id, page_contents)
 
         # Update status to OCR_RUNNING
         await self.doc_repo.update_status(doc, "OCR_RUNNING")
@@ -134,10 +124,12 @@ class OCRService:
             logger.error(
                 "OCR text extraction failed for document '%s': %s",
                 sanitize_log_input(document_id),
-                sanitize_log_input(exc),
+                getattr(exc, "error_code", type(exc).__name__),
             )
+            # Commit explicitly: the request session rolls back when the error propagates.
             await self.doc_repo.update_status(doc, "OCR_FAILED")
-            raise exc
+            await self.doc_repo.db.commit()
+            raise
 
     async def get_extracted_text(self, document_id: UUID, owner: User) -> DocumentContent:
         """Retrieves previously extracted text for a document from database."""
@@ -160,16 +152,16 @@ class OCRService:
             )
             for p in extracted_pages
         ]
-        total_conf = sum(p.confidence for p in page_contents)
-        avg_conf = round(total_conf / len(page_contents), 4)
-        full_text = "\n\n".join([p.text for p in page_contents if p.text.strip()])
+        return self._to_content(document_id, page_contents)
 
+    @staticmethod
+    def _to_content(document_id: UUID, pages: List[PageContent]) -> DocumentContent:
         return DocumentContent(
             document_id=document_id,
-            page_count=len(page_contents),
-            text=full_text,
-            pages=page_contents,
-            average_confidence=avg_conf,
+            page_count=len(pages),
+            text=merge_page_text(pages),
+            pages=pages,
+            average_confidence=average_confidence(pages),
         )
 
     async def get_extracted_pages(self, document_id: UUID, owner: User) -> List[PageContent]:
@@ -188,7 +180,7 @@ class OCRService:
 
         extracted_pages = await self.text_repo.get_document_text(document_id)
         page_count = len(extracted_pages)
-        avg_conf = round(sum(p.confidence for p in extracted_pages) / page_count, 4) if page_count > 0 else 0.0
+        avg_conf = average_confidence(extracted_pages)  # type: ignore[arg-type]
 
         return {
             "document_id": document_id,

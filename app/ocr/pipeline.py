@@ -1,14 +1,14 @@
-from app.core.security import sanitize_log_input
-
 """
 OCR Pipeline Orchestrator.
 Coordinates document detection, digital PDF / text native extraction, OCR execution, and output aggregation.
 """
 
-from typing import List
+from typing import List, Optional, Sequence
 from uuid import UUID
 
+from app.core.errors.extraction import ErrorCode, OCRError
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 from app.ocr.base import OCRProvider
 from app.ocr.detector import DocumentTypeDetector
 from app.ocr.exceptions import UnsupportedFileTypeException
@@ -68,19 +68,13 @@ class OCRPipeline:
             )
             raise UnsupportedFileTypeException(f"Unsupported document format '{file_extension}'")
 
-        if not pages:
-            pages = [PageContent(page_number=1, text="", confidence=0.0, processing_method="ocr")]
-
-        # Calculate average confidence
-        total_conf = sum(p.confidence for p in pages)
-        avg_confidence = round(total_conf / len(pages), 4)
-
-        # Merge full document text
-        full_text_chunks = [p.text for p in pages if p.text.strip()]
-        merged_text = "\n\n".join(full_text_chunks)
+        merged_text = merge_page_text(pages)
+        if not merged_text:
+            raise OCRError(ErrorCode.OCR_NO_TEXT)
+        avg_confidence = average_confidence(pages)
 
         logger.info(
-            "Extraction completed for doc '%s': Strategy=%s, Pages=%d, AvgConfidence=%f",
+            "Extraction completed for doc '%s': Strategy=%s, Pages=%d, AvgConfidence=%s",
             sanitize_log_input(document_id),
             doc_type,
             len(pages),
@@ -94,3 +88,14 @@ class OCRPipeline:
             pages=pages,
             average_confidence=avg_confidence,
         )
+
+
+def merge_page_text(pages: Sequence[PageContent]) -> str:
+    """Join non-empty page texts with blank lines."""
+    return "\n\n".join(p.text.strip() for p in pages if p.text and p.text.strip())
+
+
+def average_confidence(pages: Sequence[PageContent]) -> Optional[float]:
+    """Mean confidence over pages that reported one; ``None`` when no page did."""
+    confs = [p.confidence for p in pages if p.confidence is not None]
+    return round(sum(confs) / len(confs), 4) if confs else None

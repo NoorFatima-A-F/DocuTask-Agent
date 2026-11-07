@@ -1,16 +1,20 @@
 """
-AI Structured Extraction Service Business Logic Layer.
-Orchestrates LLM providers, prompt generation, JSON schema validation, automatic retries,
-cost tracking, and database persistence.
+AI structured extraction service.
+
+Orchestrates OCR text -> LLM -> schema validation -> persistence. Fail-closed: every
+failure is persisted as a FAILED extraction record (no structured data, no confidence),
+the document is marked EXTRACTION_FAILED, and the typed error is re-raised.
 """
 
+import asyncio
 import json
+import random
 import time
-from typing import Any, Dict, List
+from typing import Any, Awaitable, Callable, Dict, List, Optional
 from uuid import UUID
 
-from app.ai.exceptions import AIRetryLimitExceededException
-from app.ai.factory import LLMFactory
+from app.ai.base import LLMProvider, LLMResult
+from app.ai.exceptions import AIValidationException
 from app.ai.prompt_builder import PromptBuilder
 from app.ai.schemas import (
     ExtractionMetadata,
@@ -20,34 +24,49 @@ from app.ai.schemas import (
     ExtractionStatistics,
 )
 from app.ai.validator import AIValidator
-from app.core.exceptions import ResourceNotFoundException
+from app.core.errors.extraction import ErrorCode, ExtractionError, ExtractionStatus, LLMError, OCRError
+from app.core.exceptions import ResourceNotFoundException, ValidationAppException
 from app.core.logging import logger
 from app.core.security import sanitize_log_input
 from app.models.ai_extraction import AIExtraction
+from app.models.document import Document
 from app.models.user import User
 from app.repositories.ai_extraction_repository import AIExtractionRepository
 from app.repositories.document_repository import DocumentRepository
 from app.services.ocr_service import OCRService
 
+PROMPT_VERSION = "v1.0"
+INTERNAL_ERROR_CODE = "INTERNAL_ERROR"
+
 
 class AIExtractionService:
     """Service handling AI structured document extraction workflow."""
 
-    MAX_RETRIES = 3
+    #: Total attempts for transient provider errors (429, 5xx, timeout).
+    MAX_TRANSIENT_ATTEMPTS = 3
+    #: Extra attempts with a corrective prompt when output fails schema validation.
+    MAX_SCHEMA_RETRIES = 2
+    BACKOFF_BASE_SECONDS = 1.0
+    BACKOFF_CAP_SECONDS = 30.0
 
     def __init__(
-        self, document_repo: DocumentRepository, ai_extraction_repo: AIExtractionRepository, ocr_service: OCRService
+        self,
+        document_repo: DocumentRepository,
+        ai_extraction_repo: AIExtractionRepository,
+        ocr_service: OCRService,
+        llm_provider: LLMProvider,
+        sleep: Callable[[float], Awaitable[Any]] = asyncio.sleep,
     ):
         self.doc_repo = document_repo
         self.ai_repo = ai_extraction_repo
         self.ocr_service = ocr_service
+        self.llm = llm_provider
+        self._sleep = sleep
 
-    def _to_response_schema(self, record: AIExtraction) -> ExtractionResponse:
+    @staticmethod
+    def _to_response_schema(record: AIExtraction, retry_count: int = 0) -> ExtractionResponse:
         """Converts database ORM entity to ExtractionResponse Pydantic schema."""
-        parsed_json = (
-            json.loads(record.structured_json) if isinstance(record.structured_json, str) else record.structured_json
-        )
-
+        parsed_json = json.loads(record.structured_json) if record.structured_json else None
         return ExtractionResponse(
             id=record.id,
             metadata=ExtractionMetadata(
@@ -63,229 +82,250 @@ class AIExtractionService:
                 input_tokens=record.input_tokens,
                 output_tokens=record.output_tokens,
                 estimated_cost=record.estimated_cost,
-                retry_count=0,
+                retry_count=retry_count,
             ),
             result=ExtractionResult(
-                raw_response=record.raw_response, structured_json=parsed_json, confidence=record.confidence
+                status=record.status,
+                raw_response=record.raw_response,
+                structured_json=parsed_json,
+                confidence=record.confidence,
+                error_code=record.error_code,
+                error_message=record.error_message,
             ),
         )
+
+    async def _get_owned_document(self, document_id: UUID, owner: User) -> Document:
+        doc = await self.doc_repo.get_by_id(document_id)
+        if not doc or (doc.owner_id != owner.id and not owner.is_superuser):
+            if doc:
+                logger.warning(
+                    "Unauthorized AI extraction access: User '%s' on Document '%s'",
+                    sanitize_log_input(owner.id),
+                    sanitize_log_input(document_id),
+                )
+            raise ResourceNotFoundException("Document not found")
+        return doc
+
+    async def _call_llm(
+        self, prompt: str, json_schema: Dict[str, Any], system_instruction: str, model: str
+    ) -> LLMResult:
+        """Call the provider, retrying only transient errors with exponential backoff + jitter."""
+        attempt = 1
+        while True:
+            try:
+                return await self.llm.generate_json(
+                    prompt=prompt, json_schema=json_schema, system_instruction=system_instruction, model=model
+                )
+            except LLMError as exc:
+                if not exc.transient or attempt >= self.MAX_TRANSIENT_ATTEMPTS:
+                    raise
+                if exc.retry_after is not None:
+                    delay = min(exc.retry_after, self.BACKOFF_CAP_SECONDS)
+                else:
+                    delay = min(self.BACKOFF_BASE_SECONDS * 2 ** (attempt - 1), self.BACKOFF_CAP_SECONDS)
+                delay += random.uniform(0, self.BACKOFF_BASE_SECONDS)  # nosec B311 - jitter, not crypto
+                logger.warning(
+                    "Transient LLM error %s (attempt %d/%d); retrying in %.1fs",
+                    exc.error_code,
+                    attempt,
+                    self.MAX_TRANSIENT_ATTEMPTS,
+                    delay,
+                )
+                await self._sleep(delay)
+                attempt += 1
 
     async def extract_structured_data(
         self, document_id: UUID, owner: User, request: ExtractionRequest
     ) -> ExtractionResponse:
-        """
-        Extracts structured JSON data for document using specified LLM provider and document schema.
-        Handles auto-OCR execution, caching, validation, and retry logic.
-        """
-        doc = await self.doc_repo.get_by_id(document_id)
-        if not doc:
-            raise ResourceNotFoundException("Document not found")
-
-        # Ownership authorization check
-        if doc.owner_id != owner.id and not owner.is_superuser:
-            logger.warning(
-                "Unauthorized AI extraction attempt: User '%s' on Document '%s'",
-                sanitize_log_input(owner.id),
-                sanitize_log_input(document_id),
-            )
-            raise ResourceNotFoundException("Document not found")
-
+        """Run OCR (if needed), call the LLM, validate, and persist the extraction."""
+        doc = await self._get_owned_document(document_id, owner)
         doc_type = request.document_type.lower().strip()
 
-        # Caching check
+        if request.provider and request.provider.lower().strip() != self.llm.provider_name:
+            raise ValidationAppException(f"Unsupported LLM provider '{request.provider}'")
+
         if not request.force_reextract:
-            latest = await self.ai_repo.get_latest(document_id, document_type=doc_type)
-            if latest:
+            cached = await self.ai_repo.get_latest(document_id, document_type=doc_type, exclude_failed=True)
+            if cached:
                 logger.info(
                     "Returning cached AI extraction for document '%s' type '%s'",
                     sanitize_log_input(document_id),
                     sanitize_log_input(doc_type),
                 )
-                return self._to_response_schema(latest)
+                return self._to_response_schema(cached)
 
-        # Update status to EXTRACTION_RUNNING
+        target_model = request.model or self.llm.default_model
         await self.doc_repo.update_status(doc, "EXTRACTION_RUNNING")
 
+        start_time = time.perf_counter()
+        usage = {"input": 0, "output": 0}
         try:
-            # Obtain extracted text from OCR service (runs OCR pipeline automatically if missing)
+            return await self._run_extraction(doc, owner, doc_type, target_model, start_time, usage)
+        except Exception as exc:
+            await self._record_failure(doc, doc_type, target_model, exc, start_time, usage)
+            raise
+
+    async def _run_extraction(
+        self,
+        doc: Document,
+        owner: User,
+        doc_type: str,
+        target_model: str,
+        start_time: float,
+        usage: Dict[str, int],
+    ) -> ExtractionResponse:
+        try:
+            doc_content = await self.ocr_service.get_extracted_text(doc.id, owner)
+        except ResourceNotFoundException:
+            doc_content = await self.ocr_service.extract_text_for_document(doc.id, owner)
+        if not doc_content.text or not doc_content.text.strip():
+            raise OCRError(ErrorCode.OCR_NO_TEXT)
+
+        system_instruction = PromptBuilder.build_system_instruction(doc_type)
+        user_prompt = PromptBuilder.build_prompt(doc_content.text, doc_type)
+        json_schema = PromptBuilder.get_json_schema(doc_type)
+
+        current_prompt = user_prompt
+        validated: Optional[Dict[str, Any]] = None
+        confidence: Optional[float] = None
+        raw_response = ""
+        retry_count = 0
+        for attempt in range(self.MAX_SCHEMA_RETRIES + 1):
             try:
-                doc_content = await self.ocr_service.get_extracted_text(document_id, owner)
-            except ResourceNotFoundException:
-                logger.info(
-                    "No text found for doc '%s'. Executing OCR extraction first...", sanitize_log_input(document_id)
-                )
-                doc_content = await self.ocr_service.extract_text_for_document(document_id, owner)
-
-            if not doc_content.text or not doc_content.text.strip():
+                result = await self._call_llm(current_prompt, json_schema, system_instruction, target_model)
+                usage["input"] += result.input_tokens
+                usage["output"] += result.output_tokens
+                raw_response = result.raw_text
+                validated, confidence = AIValidator.validate(result.data, doc_type)
+                break
+            except (AIValidationException, LLMError) as exc:
+                if isinstance(exc, LLMError) and exc.code != ErrorCode.LLM_INVALID_OUTPUT:
+                    raise
+                if attempt == self.MAX_SCHEMA_RETRIES:
+                    raise LLMError(
+                        ErrorCode.LLM_INVALID_OUTPUT,
+                        f"LLM output failed schema validation after {attempt + 1} attempts.",
+                    ) from exc
+                retry_count += 1
                 logger.warning(
-                    "Document '%s' contains no text content for AI extraction", sanitize_log_input(document_id)
+                    "LLM output invalid for doc '%s' (attempt %d); retrying with corrective prompt",
+                    sanitize_log_input(doc.id),
+                    attempt + 1,
                 )
-                doc_text = "No readable text content was found in this document."
-            else:
-                doc_text = doc_content.text
+                current_prompt = (
+                    f"{user_prompt}\n\n"
+                    "CORRECTION REQUIRED: your previous response was not valid for the required schema "
+                    f"({exc.message}). Respond again with a single JSON object that conforms to the schema."
+                )
 
-            # Select LLM Provider via Factory
-            provider = LLMFactory.get_provider(request.provider)
-            target_model = request.model or provider.default_model
+        processing_time_ms = int((time.perf_counter() - start_time) * 1000)
+        record = await self.ai_repo.create(
+            {
+                "document_id": doc.id,
+                "document_type": doc_type,
+                "provider": self.llm.provider_name,
+                "model": target_model,
+                "status": ExtractionStatus.COMPLETED.value,
+                "raw_response": raw_response,
+                "structured_json": json.dumps(validated),
+                "prompt_version": PROMPT_VERSION,
+                "processing_time_ms": processing_time_ms,
+                "input_tokens": usage["input"],
+                "output_tokens": usage["output"],
+                "estimated_cost": self.llm.calculate_cost(usage["input"], usage["output"], target_model),
+                "confidence": confidence,
+            }
+        )
+        await self.doc_repo.update_status(doc, "EXTRACTION_COMPLETED")
+        logger.info(
+            "AI extraction completed for doc '%s': type=%s time=%dms",
+            sanitize_log_input(doc.id),
+            sanitize_log_input(doc_type),
+            processing_time_ms,
+        )
+        return self._to_response_schema(record, retry_count=retry_count)
 
-            # Build Prompts and Schema
-            system_instruction = PromptBuilder.build_system_instruction(doc_type)
-            user_prompt = PromptBuilder.build_prompt(doc_text, doc_type)
-            json_schema = PromptBuilder.get_json_schema(doc_type)
+    async def _record_failure(
+        self,
+        doc: Document,
+        doc_type: str,
+        model: str,
+        exc: Exception,
+        start_time: float,
+        usage: Dict[str, int],
+    ) -> None:
+        """Persist a FAILED extraction row and EXTRACTION_FAILED document status, then commit.
 
-            start_time = time.perf_counter()
-            retry_count = 0
-            validated_dict = None
-            final_raw_response = ""
-            total_input_tokens = 0
-            total_output_tokens = 0
-            confidence = 1.0
-
-            current_prompt = user_prompt
-
-            # Validation & Retry Loop
-            while retry_count < self.MAX_RETRIES:
-                try:
-                    parsed_json, raw_resp, in_tok, out_tok = await provider.generate_json(
-                        prompt=current_prompt,
-                        json_schema=json_schema,
-                        system_instruction=system_instruction,
-                        model=target_model,
-                    )
-
-                    total_input_tokens += in_tok
-                    total_output_tokens += out_tok
-                    final_raw_response = raw_resp
-
-                    # Validate parsed JSON against Pydantic schema
-                    validated_dict, confidence = AIValidator.validate(parsed_json, doc_type)
-                    break  # Successful validation
-
-                except Exception as exc:
-                    retry_count += 1
-                    logger.warning(
-                        "AI extraction validation failure on attempt %s/%s for doc '%s': %s",
-                        retry_count,
-                        self.MAX_RETRIES,
-                        sanitize_log_input(document_id),
-                        sanitize_log_input(exc),
-                    )
-                    if retry_count >= self.MAX_RETRIES:
-                        logger.error("Max retries reached for doc '%s'.", sanitize_log_input(document_id))
-                        raise AIRetryLimitExceededException(
-                            f"Failed to obtain valid JSON schema output after {self.MAX_RETRIES} attempts: {str(exc)}"
-                        )
-                    # Modify prompt for corrective retry
-                    current_prompt = (
-                        f"{user_prompt}\n\n"
-                        f"CORRECTION REQUIRED: Your previous attempt failed validation with error: {str(exc)}.\n"
-                        f"Please correct the JSON structure to strictly conform to the required schema."
-                    )
-
-            end_time = time.perf_counter()
-            processing_time_ms = int((end_time - start_time) * 1000)
-            estimated_cost = provider.calculate_cost(total_input_tokens, total_output_tokens, target_model)
-
-            # Persist AIExtraction record in database
-            extraction_record = await self.ai_repo.create(
+        The commit is explicit because the request-scoped session rolls back when the
+        error propagates; without it the failure record would be lost.
+        """
+        if isinstance(exc, ExtractionError):
+            error_code, error_message = exc.error_code, exc.message
+        else:
+            error_code, error_message = INTERNAL_ERROR_CODE, "Unexpected internal error during extraction."
+        document_id = doc.id
+        logger.error(
+            "AI extraction failed for document '%s': %s (%s)",
+            sanitize_log_input(document_id),
+            error_code,
+            type(exc).__name__,
+        )
+        try:
+            await self.ai_repo.create(
                 {
                     "document_id": document_id,
                     "document_type": doc_type,
-                    "provider": provider.provider_name,
-                    "model": target_model,
-                    "raw_response": final_raw_response,
-                    "structured_json": json.dumps(validated_dict),
-                    "prompt_version": "v1.0",
-                    "processing_time_ms": processing_time_ms,
-                    "input_tokens": total_input_tokens,
-                    "output_tokens": total_output_tokens,
-                    "estimated_cost": estimated_cost,
-                    "confidence": confidence,
+                    "provider": self.llm.provider_name,
+                    "model": model,
+                    "status": ExtractionStatus.FAILED.value,
+                    "error_code": error_code,
+                    "error_message": error_message,
+                    "raw_response": None,
+                    "structured_json": None,
+                    "confidence": None,
+                    "prompt_version": PROMPT_VERSION,
+                    "processing_time_ms": int((time.perf_counter() - start_time) * 1000),
+                    "input_tokens": usage["input"],
+                    "output_tokens": usage["output"],
+                    "estimated_cost": None,
                 }
             )
-
-            # Update document status to EXTRACTION_COMPLETED
-            await self.doc_repo.update_status(doc, "EXTRACTION_COMPLETED")
-
-            logger.info(
-                "AI extraction completed for doc '%s': Type='%s', Time=%dms, Cost=$%f",
-                sanitize_log_input(document_id),
-                sanitize_log_input(doc_type),
-                processing_time_ms,
-                estimated_cost,
-            )
-
-            return ExtractionResponse(
-                id=extraction_record.id,
-                metadata=ExtractionMetadata(
-                    document_id=document_id,
-                    document_type=doc_type,
-                    provider=provider.provider_name,
-                    model=target_model,
-                    prompt_version="v1.0",
-                    created_at=extraction_record.created_at,
-                ),
-                statistics=ExtractionStatistics(
-                    processing_time_ms=processing_time_ms,
-                    input_tokens=total_input_tokens,
-                    output_tokens=total_output_tokens,
-                    estimated_cost=estimated_cost,
-                    retry_count=retry_count,
-                ),
-                result=ExtractionResult(
-                    raw_response=final_raw_response, structured_json=validated_dict, confidence=confidence
-                ),
-            )
-
-        except Exception as exc:
-            logger.error(
-                "AI extraction failed for document '%s': %s", sanitize_log_input(document_id), sanitize_log_input(exc)
-            )
             await self.doc_repo.update_status(doc, "EXTRACTION_FAILED")
-            raise exc
+            await self.ai_repo.db.commit()
+        except Exception as persist_exc:  # noqa: BLE001 - the original error is re-raised by the caller
+            logger.error("Could not persist extraction failure record: %s", type(persist_exc).__name__)
 
     async def get_latest_result(self, document_id: UUID, owner: User) -> ExtractionResponse:
-        """Retrieves most recent AI extraction result for a document."""
-        doc = await self.doc_repo.get_by_id(document_id)
-        if not doc or (doc.owner_id != owner.id and not owner.is_superuser):
-            raise ResourceNotFoundException("Document not found")
-
+        """Most recent extraction for a document, whatever its status (clients must check ``status``)."""
+        await self._get_owned_document(document_id, owner)
         latest = await self.ai_repo.get_latest(document_id)
         if not latest:
             raise ResourceNotFoundException("No AI extraction results found for this document. Run extraction first.")
-
         return self._to_response_schema(latest)
 
     async def get_extraction_status(self, document_id: UUID, owner: User) -> Dict[str, Any]:
         """Retrieves AI extraction operational status for a document."""
-        doc = await self.doc_repo.get_by_id(document_id)
-        if not doc or (doc.owner_id != owner.id and not owner.is_superuser):
-            raise ResourceNotFoundException("Document not found")
-
+        doc = await self._get_owned_document(document_id, owner)
         latest = await self.ai_repo.get_latest(document_id)
         return {
             "document_id": document_id,
             "status": doc.upload_status,
             "has_extraction": latest is not None,
+            "extraction_status": latest.status if latest else None,
+            "error_code": latest.error_code if latest else None,
             "document_type": latest.document_type if latest else None,
             "confidence": latest.confidence if latest else None,
         }
 
     async def get_extraction_history(self, document_id: UUID, owner: User) -> List[ExtractionResponse]:
         """Retrieves complete history of past AI extractions for a document."""
-        doc = await self.doc_repo.get_by_id(document_id)
-        if not doc or (doc.owner_id != owner.id and not owner.is_superuser):
-            raise ResourceNotFoundException("Document not found")
-
+        await self._get_owned_document(document_id, owner)
         records = await self.ai_repo.get_history(document_id)
         return [self._to_response_schema(r) for r in records]
 
     async def delete_result(self, document_id: UUID, owner: User) -> None:
-        """Deletes AI extraction results for a document."""
-        doc = await self.doc_repo.get_by_id(document_id)
-        if not doc or (doc.owner_id != owner.id and not owner.is_superuser):
-            raise ResourceNotFoundException("Document not found")
-
+        """Deletes the latest AI extraction result for a document."""
+        await self._get_owned_document(document_id, owner)
         latest = await self.ai_repo.get_latest(document_id)
         if latest:
             await self.ai_repo.delete(latest.id)

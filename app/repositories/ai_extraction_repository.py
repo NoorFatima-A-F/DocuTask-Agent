@@ -26,11 +26,15 @@ class AIExtractionRepository(BaseRepository[AIExtraction]):
         await self.db.refresh(record)
         return record
 
-    async def get_latest(self, document_id: uuid.UUID, document_type: Optional[str] = None) -> Optional[AIExtraction]:
-        """Retrieves most recent extraction record for document."""
+    async def get_latest(
+        self, document_id: uuid.UUID, document_type: Optional[str] = None, exclude_failed: bool = False
+    ) -> Optional[AIExtraction]:
+        """Most recent extraction record for a document (optionally ignoring FAILED rows)."""
         query = select(AIExtraction).where(AIExtraction.document_id == document_id)
         if document_type:
             query = query.where(AIExtraction.document_type == document_type)
+        if exclude_failed:
+            query = query.where(AIExtraction.status != "FAILED")
         query = query.order_by(AIExtraction.created_at.desc()).limit(1)
 
         result = await self.db.execute(query)

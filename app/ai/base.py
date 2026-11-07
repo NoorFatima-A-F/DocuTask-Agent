@@ -1,71 +1,45 @@
-"""
-Abstract LLM Provider Base Class.
-Defines common provider contract for Gemini, OpenAI, Claude, Azure, and Local models.
+"""LLM provider contract.
+
+Providers either return a real, parsed model response or raise
+:class:`app.core.errors.extraction.LLMError`. They never return placeholder data.
 """
 
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Tuple
+from dataclasses import dataclass
+from typing import Any
+
+
+@dataclass(frozen=True)
+class LLMResult:
+    """A parsed structured response from an LLM provider."""
+
+    data: dict[str, Any]
+    raw_text: str
+    input_tokens: int
+    output_tokens: int
 
 
 class LLMProvider(ABC):
-    """Abstract interface for LLM extraction providers."""
+    """Abstract interface for structured-extraction LLM providers."""
 
     @property
     @abstractmethod
     def provider_name(self) -> str:
-        """Returns unique identifier name of provider (e.g. 'gemini')."""
-        pass
+        """Unique provider identifier, e.g. ``gemini``."""
 
     @property
     @abstractmethod
     def default_model(self) -> str:
-        """Returns default model identifier."""
-        pass
-
-    @abstractmethod
-    async def generate(self, prompt: str, system_instruction: str = "", model: str = "") -> str:
-        """
-        Generates text completion for prompt.
-
-        :param prompt: User prompt
-        :param system_instruction: System prompt context
-        :param model: Optional model override
-        :return: Raw text completion string
-        """
-        pass
+        """Model used when the request does not override it."""
 
     @abstractmethod
     async def generate_json(
-        self, prompt: str, json_schema: Dict[str, Any], system_instruction: str = "", model: str = ""
-    ) -> Tuple[Dict[str, Any], str, int, int]:
-        """
-        Generates structured JSON response conforming to schema.
-
-        :return: Tuple of (parsed_json_dict, raw_response_string, input_tokens, output_tokens)
-        """
-        pass
+        self, prompt: str, json_schema: dict[str, Any], system_instruction: str = "", model: str = ""
+    ) -> LLMResult:
+        """Return a JSON object produced by the model, or raise ``LLMError``."""
 
     @abstractmethod
-    async def health_check(self) -> bool:
-        """Checks provider operational status and API connectivity."""
-        pass
-
-    @abstractmethod
-    def supports_model(self, model_name: str) -> bool:
-        """Checks if specified model is supported by provider."""
-        pass
-
-    @abstractmethod
-    def supports_streaming(self) -> bool:
-        """Checks if provider supports token streaming responses."""
-        pass
-
-    @abstractmethod
-    def estimate_tokens(self, text: str) -> int:
-        """Estimates token count for input text."""
-        pass
-
-    @abstractmethod
-    def calculate_cost(self, input_tokens: int, output_tokens: int, model: str = "") -> float:
-        """Calculates estimated USD cost for token usage."""
-        pass
+    def calculate_cost(self, input_tokens: int, output_tokens: int, model: str = "") -> float | None:
+        """USD cost for the given usage, or ``None`` when pricing for the model is unknown."""
