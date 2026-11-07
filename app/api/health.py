@@ -33,14 +33,12 @@ class ReadinessResponse(HealthResponse):
 
 
 @router.get("/healthz", response_model=HealthResponse)
-@router.get("/health/live", include_in_schema=False)
 def liveness_probe() -> HealthResponse:
     """Liveness: the process is up."""
     return HealthResponse(status="alive")
 
 
 @router.get("/readyz", response_model=ReadinessResponse, responses={503: {"model": ReadinessResponse}})
-@router.get("/health/ready", include_in_schema=False)
 def readiness_probe(
     ocr: OCRProvider = Depends(get_ocr_provider),
     llm: LLMProvider = Depends(get_llm_provider),

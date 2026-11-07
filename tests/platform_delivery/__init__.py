@@ -1,1 +1,0 @@
-"""Platform Delivery Test Package."""

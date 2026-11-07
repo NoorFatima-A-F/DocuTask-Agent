@@ -1,1 +1,0 @@
-"""Deployment platform test package."""

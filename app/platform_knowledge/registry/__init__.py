@@ -1,1 +1,0 @@
-from .knowledge_registry import KnowledgeRegistryService

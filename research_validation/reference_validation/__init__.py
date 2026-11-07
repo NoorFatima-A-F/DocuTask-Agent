@@ -1,1 +1,0 @@
-"""Reference validation module."""

@@ -11,6 +11,7 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional, Set, Union
 
+import bcrypt
 import jwt
 from jwt import PyJWTError as JWTError
 
@@ -225,34 +226,17 @@ def sanitize_log_input(value: Any) -> str:
     return clean
 
 
-try:
-    import bcrypt
+def hash_password(password: str) -> str:
+    """Hash a password with bcrypt (input truncated to bcrypt's 72-byte limit)."""
+    return bcrypt.hashpw(password.encode("utf-8")[:72], bcrypt.gensalt()).decode("utf-8")
 
-    def hash_password(password: str) -> str:
-        """Hashes plain text password using bcrypt."""
-        pwd_bytes = password.encode("utf-8")[:72]
-        salt = bcrypt.gensalt()
-        return bcrypt.hashpw(pwd_bytes, salt).decode("utf-8")
 
-    def verify_password(plain_password: str, hashed_password: str) -> bool:
-        """Verifies plain text password against bcrypt hash."""
-        try:
-            pwd_bytes = plain_password.encode("utf-8")[:72]
-            return bcrypt.checkpw(pwd_bytes, hashed_password.encode("utf-8"))
-        except Exception:
-            return False
-except ImportError:
-    import hmac
-
-    def hash_password(password: str) -> str:
-        """Fallback PBKDF2 hashing when bcrypt is unavailable."""
-        salt = b"docutask_pwd_salt_pbkdf2_v1"
-        return hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 100000).hex()
-
-    def verify_password(plain_password: str, hashed_password: str) -> bool:
-        """Fallback PBKDF2 verification when bcrypt is unavailable."""
-        computed = hash_password(plain_password)
-        return hmac.compare_digest(computed, hashed_password)
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verify a password against a bcrypt hash; malformed hashes never verify."""
+    try:
+        return bcrypt.checkpw(plain_password.encode("utf-8")[:72], hashed_password.encode("utf-8"))
+    except ValueError:
+        return False
 
 
 def create_access_token(subject: str, expires_delta: Optional[timedelta] = None) -> str:

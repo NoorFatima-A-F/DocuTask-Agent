@@ -19,7 +19,8 @@ from app.schemas.document import (
 from app.schemas.response import APIResponse
 from app.services.document_service import DocumentService
 
-router = APIRouter(prefix="/documents", tags=["Document Management"])
+# Every route requires an authenticated, active user (new endpoints are protected by default).
+router = APIRouter(prefix="/documents", tags=["Document Management"], dependencies=[Depends(get_current_active_user)])
 
 
 @router.post(

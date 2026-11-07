@@ -30,6 +30,7 @@ AUTH_DEPENDENCY_NAMES = {
     "require_admin",
     "require_roles",
     "role_checker",
+    "RoleChecker",
 }
 
 

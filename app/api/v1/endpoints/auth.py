@@ -74,7 +74,9 @@ async def refresh_tokens(
     description="Revokes the provided refresh token session.",
 )
 async def logout(
-    request: RefreshTokenRequest, auth_service: AuthService = Depends(get_auth_service)
+    request: RefreshTokenRequest,
+    current_user: User = Depends(get_current_active_user),
+    auth_service: AuthService = Depends(get_auth_service),
 ) -> APIResponse[dict]:
     """Handles single session logout."""
     await auth_service.logout(request.refresh_token)

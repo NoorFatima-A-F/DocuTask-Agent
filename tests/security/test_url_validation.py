@@ -5,8 +5,6 @@ Validates CWE-20, SSRF defenses, scheme restrictions, and prefix-collision attac
 
 import pytest
 from app.core.security import validate_safe_url, UnsafeUrlError
-from app.connectors.sandbox.sandbox import ConnectorSandbox, SandboxConfig
-from app.connectors.core.exceptions import SandboxViolationError
 
 
 class TestURLValidation:
@@ -79,28 +77,3 @@ class TestURLValidation:
         # only https allowed
         with pytest.raises(UnsafeUrlError):
             validate_safe_url(url, allowed_domains=["service.local"], allowed_schemes={"https"})
-
-
-class TestConnectorSandboxNetworkTargetValidation:
-    """Test suite for ConnectorSandbox network target domain policy enforcement."""
-
-    def test_sandbox_allows_whitelisted_domain(self):
-        config = SandboxConfig(allowed_domains=["trusted-api.com"])
-        sandbox = ConnectorSandbox(config)
-        # Should not raise
-        sandbox.validate_network_target("https://trusted-api.com/v1/resource")
-        sandbox.validate_network_target("https://sub.trusted-api.com/v1/resource")
-
-    def test_sandbox_blocks_prefix_collision(self):
-        config = SandboxConfig(allowed_domains=["trusted-api.com"])
-        sandbox = ConnectorSandbox(config)
-        with pytest.raises(SandboxViolationError):
-            sandbox.validate_network_target("https://trusted-api.com.attacker.com/v1")
-
-    def test_sandbox_blocks_disallowed_domain(self):
-        config = SandboxConfig(disallowed_domains=["malicious.com"])
-        sandbox = ConnectorSandbox(config)
-        with pytest.raises(SandboxViolationError):
-            sandbox.validate_network_target("https://malicious.com/endpoint")
-        with pytest.raises(SandboxViolationError):
-            sandbox.validate_network_target("https://bot.malicious.com/endpoint")

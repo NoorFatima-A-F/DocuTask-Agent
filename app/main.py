@@ -100,7 +100,6 @@ def create_application() -> FastAPI:
 
     # Include Health & System Readiness Probes
     app.include_router(health_router)
-    app.include_router(health_router, prefix=settings.API_V1_STR)
 
     # Include API Routers
     app.include_router(api_v1_router, prefix=settings.API_V1_STR)

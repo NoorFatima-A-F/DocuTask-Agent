@@ -10,7 +10,7 @@ from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.session import get_db
-from app.dependencies.auth import get_current_user
+from app.dependencies.auth import get_current_active_user, get_current_user
 from app.dependencies.workers import get_queue_provider
 from app.jobs.broker import job_broker
 from app.jobs.dlq import DeadLetterQueueEngine
@@ -21,7 +21,8 @@ from app.repositories.document_repository import DocumentRepository
 from app.repositories.processing_job_repository import ProcessingJobRepository
 from app.workers.dispatcher import JobDispatcher
 
-router = APIRouter(prefix="/jobs", tags=["Asynchronous Jobs"])
+# Every route requires an authenticated, active user (new endpoints are protected by default).
+router = APIRouter(prefix="/jobs", tags=["Asynchronous Jobs"], dependencies=[Depends(get_current_active_user)])
 
 
 class JobSubmitRequest(BaseModel):

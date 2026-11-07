@@ -1,1 +1,0 @@
-from .workforce_registry import workforce_registry, WorkforceRegistry
