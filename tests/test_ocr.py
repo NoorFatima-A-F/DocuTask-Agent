@@ -177,7 +177,9 @@ async def test_ocr_api_endpoints(client: AsyncClient) -> None:
         json={"email": "ocr_api_user@example.com", "username": "ocrapiuser", "password": "Password123!"},
     )
     assert reg.status_code == 201
-    login = await client.post("/api/v1/auth/login", json={"username_or_email": "ocrapiuser", "password": "Password123!"})
+    login = await client.post(
+        "/api/v1/auth/login", json={"username_or_email": "ocrapiuser", "password": "Password123!"}
+    )
     headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
 
     buf = io.BytesIO(png_bytes())

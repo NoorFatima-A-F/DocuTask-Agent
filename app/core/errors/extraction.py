@@ -47,6 +47,9 @@ class ErrorCode(str, Enum):
     OCR_NO_TEXT = "OCR_NO_TEXT"
     # Human review
     REJECTED_BY_REVIEWER = "REJECTED_BY_REVIEWER"
+    # Background jobs
+    QUEUE_UNAVAILABLE = "QUEUE_UNAVAILABLE"
+    JOB_INTERNAL_ERROR = "JOB_INTERNAL_ERROR"
 
 
 HTTP_STATUS_BY_CODE: dict[ErrorCode, int] = {
@@ -63,6 +66,8 @@ HTTP_STATUS_BY_CODE: dict[ErrorCode, int] = {
     ErrorCode.OCR_FAILED: 500,
     ErrorCode.OCR_NO_TEXT: 422,
     ErrorCode.REJECTED_BY_REVIEWER: 422,
+    ErrorCode.QUEUE_UNAVAILABLE: 503,
+    ErrorCode.JOB_INTERNAL_ERROR: 500,
 }
 
 DEFAULT_MESSAGES: dict[ErrorCode, str] = {
@@ -79,6 +84,8 @@ DEFAULT_MESSAGES: dict[ErrorCode, str] = {
     ErrorCode.OCR_FAILED: "OCR processing failed for this document.",
     ErrorCode.OCR_NO_TEXT: "No readable text was found in this document.",
     ErrorCode.REJECTED_BY_REVIEWER: "The extraction was rejected by a reviewer.",
+    ErrorCode.QUEUE_UNAVAILABLE: "The job queue (Redis) is not configured or not reachable.",
+    ErrorCode.JOB_INTERNAL_ERROR: "The background job failed with an unexpected error.",
 }
 
 #: Codes worth retrying automatically (with backoff).

@@ -62,7 +62,10 @@ class AIExtractionService:
         ocr_service: OCRService,
         llm_provider: LLMProvider,
         sleep: Callable[[float], Awaitable[Any]] = asyncio.sleep,
+        max_transient_attempts: int | None = None,
     ):
+        #: Background jobs pass 1 so the job queue owns retries (durable, honours Retry-After).
+        self.max_transient_attempts = max_transient_attempts or self.MAX_TRANSIENT_ATTEMPTS
         self.doc_repo = document_repo
         self.ai_repo = ai_extraction_repo
         self.ocr_service = ocr_service
@@ -127,7 +130,7 @@ class AIExtractionService:
                     prompt=prompt, json_schema=json_schema, system_instruction=system_instruction, model=model
                 )
             except LLMError as exc:
-                if not exc.transient or attempt >= self.MAX_TRANSIENT_ATTEMPTS:
+                if not exc.transient or attempt >= self.max_transient_attempts:
                     raise
                 if exc.retry_after is not None:
                     delay = min(exc.retry_after, self.BACKOFF_CAP_SECONDS)
@@ -138,7 +141,7 @@ class AIExtractionService:
                     "Transient LLM error %s (attempt %d/%d); retrying in %.1fs",
                     exc.error_code,
                     attempt,
-                    self.MAX_TRANSIENT_ATTEMPTS,
+                    self.max_transient_attempts,
                     delay,
                 )
                 await self._sleep(delay)
