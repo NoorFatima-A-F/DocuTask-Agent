@@ -43,7 +43,7 @@ async def create_job(
     idempotency_key: str | None = Header(default=None, max_length=200),
     user: User = Depends(get_current_active_user),
     jobs: JobService = Depends(get_job_service),
-):
+) -> APIResponse[JobResponse]:
     job, created = await jobs.submit(user, body.document_id, body.document_type, idempotency_key)
     if not created:
         response.status_code = status.HTTP_200_OK
@@ -56,7 +56,7 @@ async def list_jobs(
     page_size: int = Query(20, ge=1, le=100),
     user: User = Depends(get_current_active_user),
     jobs: JobService = Depends(get_job_service),
-):
+) -> APIResponse[JobListResponse]:
     return APIResponse.success_response(data=await jobs.list_for_owner(user, page, page_size))
 
 
@@ -66,7 +66,7 @@ async def list_failed_jobs(
     page_size: int = Query(50, ge=1, le=200),
     _admin: User = Depends(require_admin),
     jobs: JobService = Depends(get_job_service),
-):
+) -> APIResponse[JobListResponse]:
     """All FAILED jobs with their error codes (admin only)."""
     return APIResponse.success_response(data=await jobs.list_failed(page, page_size))
 
@@ -74,13 +74,13 @@ async def list_failed_jobs(
 @router.get("/{job_id}", response_model=APIResponse[JobResponse])
 async def get_job(
     job_id: UUID, user: User = Depends(get_current_active_user), jobs: JobService = Depends(get_job_service)
-):
+) -> APIResponse[JobResponse]:
     return APIResponse.success_response(data=await jobs.get(user, job_id))
 
 
 @router.post("/{job_id}/retry", response_model=APIResponse[JobResponse], status_code=status.HTTP_202_ACCEPTED)
 async def retry_job(
     job_id: UUID, user: User = Depends(get_current_active_user), jobs: JobService = Depends(get_job_service)
-):
+) -> APIResponse[JobResponse]:
     """Re-queue a FAILED job."""
     return APIResponse.success_response(data=await jobs.retry(user, job_id), message="Job re-queued")

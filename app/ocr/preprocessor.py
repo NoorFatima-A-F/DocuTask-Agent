@@ -44,5 +44,5 @@ class ImagePreprocessor:
             processed = cls.enhance_contrast(processed, factor=1.4)
             return processed
         except Exception as e:
-            logger.warning(f"Image preprocessing fallback to original image: {str(e)}")
+            logger.warning(f"Image preprocessing fallback to original image: {e!s}")
             return image

@@ -4,4 +4,4 @@ from app.ai.base import LLMProvider, LLMResult
 from app.ai.prompt_builder import PromptBuilder
 from app.ai.validator import AIValidator
 
-__all__ = ["LLMProvider", "LLMResult", "PromptBuilder", "AIValidator"]
+__all__ = ["AIValidator", "LLMProvider", "LLMResult", "PromptBuilder"]

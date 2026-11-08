@@ -6,11 +6,13 @@ all CWE-22 Path Traversal and injection attack vectors.
 
 import os
 from pathlib import Path
+
 import pytest
+
 from app.core.security import (
-    sanitize_file_path,
-    resolve_safe_path,
     UnsafePathError,
+    resolve_safe_path,
+    sanitize_file_path,
 )
 
 

@@ -35,3 +35,26 @@ def test_alembic_upgrade_head_and_downgrade(tmp_path: Path) -> None:
         text=True,
     )
     assert down.returncode == 0, down.stderr[-2000:]
+
+
+def test_migrations_match_the_models(tmp_path: Path) -> None:
+    """`alembic upgrade head` produces exactly the schema the ORM models declare (no drift)."""
+    import os
+
+    from alembic.autogenerate import compare_metadata
+    from alembic.migration import MigrationContext
+    from sqlalchemy import create_engine
+
+    from app.models import Base
+
+    db = tmp_path / "drift.db"
+    env = {**os.environ, "DATABASE_URL": f"sqlite+aiosqlite:///{db.as_posix()}", "ENVIRONMENT": "test"}
+    up = subprocess.run(
+        [sys.executable, "-m", "alembic", "upgrade", "head"], cwd=REPO, env=env, capture_output=True, text=True
+    )
+    assert up.returncode == 0, up.stderr[-2000:]
+    engine = create_engine(f"sqlite:///{db.as_posix()}")
+    with engine.connect() as conn:
+        diff = compare_metadata(MigrationContext.configure(conn, opts={"compare_type": False}), Base.metadata)
+    engine.dispose()
+    assert diff == [], diff

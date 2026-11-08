@@ -15,11 +15,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app.ai.prompt_builder import PromptBuilder  # noqa: E402
-from app.ai.providers.gemini import GeminiProvider  # noqa: E402
-from app.ai.validator import AIValidator  # noqa: E402
-from app.core.errors.extraction import LLMError  # noqa: E402
-from tests.fakes.data import CONTOSO_INVOICE_TEXT  # noqa: E402
+from app.ai.prompt_builder import PromptBuilder
+from app.ai.providers.gemini import GeminiProvider
+from app.ai.validator import AIValidator
+from app.core.errors.extraction import LLMError
+from tests.fakes.data import CONTOSO_INVOICE_TEXT
 
 EXPECTED = {
     "vendor_name": "Contoso Ltd",

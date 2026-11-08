@@ -8,6 +8,7 @@ Redis passwords) and generic credential shapes (bearer tokens, JWTs, Google API 
 
 from __future__ import annotations
 
+import contextlib
 import logging
 import re
 import sys
@@ -36,10 +37,8 @@ def _configured_secrets() -> list[str]:
     values = [settings.JWT_SECRET, settings.GEMINI_API_KEY, settings.GOOGLE_API_KEY]
     for url in (settings.DATABASE_URL, settings.REDIS_URL):
         if url:
-            try:
+            with contextlib.suppress(ValueError):
                 values.append(urlsplit(url).password)
-            except ValueError:
-                pass
     # Very short values would mask ordinary words; real secrets are long.
     return sorted({v for v in values if v and len(v) >= 8}, key=len, reverse=True)
 

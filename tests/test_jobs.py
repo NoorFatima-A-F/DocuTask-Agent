@@ -57,7 +57,7 @@ async def _upload(client: AsyncClient, headers: dict[str, str]) -> str:
     return up.json()["data"]["document"]["id"]
 
 
-def _deps(*llm_script) -> JobDependencies:  # type: ignore[no-untyped-def]
+def _deps(*llm_script) -> JobDependencies:
     return JobDependencies(
         ocr_pipeline=OCRPipeline(ocr_provider=FakeOCRProvider(text=CONTOSO_INVOICE_TEXT)),
         llm_provider=FakeLLMProvider(*llm_script),

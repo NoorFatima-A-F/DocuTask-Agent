@@ -47,7 +47,7 @@ async def test_normal_upload_still_works(client: AsyncClient, db_session: AsyncS
     assert res.status_code == 201, res.text
 
 
-async def test_storage_read_refuses_paths_outside_root(tmp_path) -> None:  # type: ignore[no-untyped-def]
+async def test_storage_read_refuses_paths_outside_root(tmp_path) -> None:
     from app.core.exceptions import ValidationAppException
     from app.storage.local import LocalStorageProvider
 

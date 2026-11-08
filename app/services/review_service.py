@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 from uuid import UUID
 
 from sqlalchemy import func, select
@@ -35,7 +35,7 @@ class ReviewService:
     def __init__(self, db: AsyncSession):
         self.db = db
 
-    async def list_pending(self, page: int = 1, page_size: int = 20) -> Tuple[List[AIExtraction], int]:
+    async def list_pending(self, page: int = 1, page_size: int = 20) -> tuple[list[AIExtraction], int]:
         page, page_size = max(1, page), max(1, min(100, page_size))
         pending = AIExtraction.status == ExtractionStatus.NEEDS_REVIEW.value
         total = (await self.db.execute(select(func.count()).select_from(AIExtraction).where(pending))).scalar() or 0
@@ -54,7 +54,7 @@ class ReviewService:
             raise ResourceNotFoundException("Extraction not found")
         return record
 
-    async def get_detail(self, extraction_id: UUID) -> Dict[str, Any]:
+    async def get_detail(self, extraction_id: UUID) -> dict[str, Any]:
         record = await self.get(extraction_id)
         doc = await self.db.get(Document, record.document_id)
         pages = await self.db.execute(
@@ -65,14 +65,14 @@ class ReviewService:
         ocr_text = "\n\n".join(p.text for p in pages.scalars().all() if p.text)
         return {"record": record, "document": doc, "ocr_text": ocr_text}
 
-    async def get_document_path(self, extraction_id: UUID) -> Tuple[str, str, str]:
+    async def get_document_path(self, extraction_id: UUID) -> tuple[str, str, str]:
         record = await self.get(extraction_id)
         doc = await self.db.get(Document, record.document_id)
         if doc is None:
             raise ResourceNotFoundException("Document not found")
         return doc.relative_path, doc.mime_type, doc.original_filename
 
-    async def approve(self, extraction_id: UUID, reviewer: User, corrections: Optional[Dict[str, Any]]) -> AIExtraction:
+    async def approve(self, extraction_id: UUID, reviewer: User, corrections: dict[str, Any] | None) -> AIExtraction:
         record = await self._pending(extraction_id)
         original = json.loads(record.structured_json) if record.structured_json else {}
         if corrections:
@@ -126,7 +126,7 @@ class ReviewService:
         )
         return record
 
-    async def events_for(self, extraction_id: UUID) -> List[ReviewEvent]:
+    async def events_for(self, extraction_id: UUID) -> list[ReviewEvent]:
         rows = await self.db.execute(
             select(ReviewEvent).where(ReviewEvent.extraction_id == extraction_id).order_by(ReviewEvent.created_at)
         )

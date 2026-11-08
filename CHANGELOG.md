@@ -60,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   password), a `worker` service was added, Postgres/Redis ports are no longer published.
 
 ### Changed (frontend)
-- The web UI was rewritten against the real API (~1.1k lines replacing ~6k lines of simulated
+- The web UI was rewritten against the real API (~1.3k lines including tests, replacing ~6k lines of simulated
   screens). Upload -> `POST /jobs` -> polling `GET /jobs/{id}` until COMPLETED / NEEDS_REVIEW /
   FAILED; results show per-field grounding ("Found in document" / "Not found in document"),
   failed consistency checks and OCR confidence; NEEDS_REVIEW results are labelled not final.
@@ -70,6 +70,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   confidence), simulated upload queue, DLQ screen and `/runtime/*` calls, command palette.
 - Tailwind is compiled at build time (no CDN script). Tests: Vitest + Testing Library unit
   tests and Playwright end-to-end tests against the production build with a stubbed API.
+
+### Build, CI and tooling
+- Multi-stage Docker image: Node 20 builds the UI, Python 3.12 runtime with tesseract, non-root
+  user, port 7860. Entrypoint roles: `web` (runs `alembic upgrade head`, then uvicorn), `worker`,
+  `all-in-one` (local Redis + worker + web for single-container hosting).
+- The schema is managed only by Alembic; startup no longer calls `create_all`. A test asserts the
+  migrations produce exactly the ORM schema; CI runs upgrade/downgrade/upgrade on Postgres.
+- Python 3.12 everywhere (Docker, CI, Render, pyproject).
+- Ruff: the 21-rule ignore list is gone; rules E, F, W, I, B, UP, S, SIM, RUF, ASYNC are enforced.
+  mypy: strict for all of `app/` (previously 24 error codes disabled); tests are type-checked.
+- One CI workflow with no soft gates: backend (ruff, mypy, Postgres migrations, pytest with
+  Redis and coverage >= 80%), security (bandit, pip-audit without ignores, npm audit), frontend
+  (build, Vitest, Playwright), Docker build + smoke test. Separate CodeQL (Python, TS) and
+  dependency-review workflows. The old evals/security workflows were removed.
+- Test fixtures no longer fall back to `MagicMock` when imports fail.
 
 ### Security
 - Rate limiting: client IP is the TCP peer unless it is in `TRUSTED_PROXIES` (then the right-most

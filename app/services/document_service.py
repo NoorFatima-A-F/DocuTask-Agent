@@ -9,16 +9,16 @@ import math
 import os
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import ClassVar
 from uuid import UUID
 
 from app.core.config import settings
-from app.core.security import sanitize_log_input
 from app.core.exceptions import (
     ResourceNotFoundException,
     ValidationAppException,
 )
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 from app.models.user import User
 from app.repositories.document_repository import DocumentRepository
 from app.schemas.document import (
@@ -34,10 +34,12 @@ class DocumentService:
     """Service providing document ingestion, validation, storage, and lifecycle management."""
 
     # Disallowed dangerous extensions for executable attack prevention
-    DANGEROUS_EXTENSIONS = {".exe", ".bat", ".cmd", ".sh", ".bash", ".php", ".js", ".vbs", ".ps1", ".jar", ".py"}
+    DANGEROUS_EXTENSIONS: ClassVar[frozenset[str]] = frozenset(
+        {".exe", ".bat", ".cmd", ".sh", ".bash", ".php", ".js", ".vbs", ".ps1", ".jar", ".py"}
+    )
 
     # File magic byte header signatures for file content validation
-    FILE_SIGNATURES = {
+    FILE_SIGNATURES: ClassVar[dict[str, list[bytes]]] = {
         ".pdf": [b"%PDF-"],
         ".png": [b"\x89PNG\r\n\x1a\n"],
         ".jpg": [b"\xff\xd8\xff"],
@@ -65,7 +67,8 @@ class DocumentService:
         max_bytes = settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024
         if len(content) > max_bytes:
             logger.warning(
-                f"Upload validation failure: File '{original_filename}' size ({len(content)} bytes) exceeds limit ({settings.MAX_UPLOAD_SIZE_MB}MB)"
+                f"Upload validation failure: File '{original_filename}' size ({len(content)} bytes) "
+                f"exceeds limit ({settings.MAX_UPLOAD_SIZE_MB}MB)"
             )
             raise ValidationAppException(f"File size exceeds maximum allowed limit of {settings.MAX_UPLOAD_SIZE_MB} MB")
 
@@ -93,7 +96,8 @@ class DocumentService:
 
         if ext not in [e.lower() for e in settings.ALLOWED_EXTENSIONS]:
             logger.warning(
-                f"Unsupported extension rejected: '{sanitize_log_input(ext)}' for file '{sanitize_log_input(original_filename)}'"
+                f"Unsupported extension rejected: '{sanitize_log_input(ext)}' "
+                f"for file '{sanitize_log_input(original_filename)}'"
             )
             raise ValidationAppException(
                 f"File extension '{ext}' is not supported. Allowed extensions: {', '.join(settings.ALLOWED_EXTENSIONS)}"
@@ -197,7 +201,7 @@ class DocumentService:
         except Exception as exc:
             # Database creation failure: Delete stored file from disk to prevent orphaned files!
             logger.error(
-                f"Database commit failed after file save. Rolling back file storage for '{stored_filename}': {str(exc)}"
+                f"Database commit failed after file save. Rolling back file storage for '{stored_filename}': {exc!s}"
             )
             await self.storage.delete(rel_path)
             raise exc
@@ -225,7 +229,7 @@ class DocumentService:
         return DocumentResponse.model_validate(doc)
 
     async def list_documents(
-        self, owner: User, page: int = 1, page_size: int = 20, search_query: Optional[str] = None
+        self, owner: User, page: int = 1, page_size: int = 20, search_query: str | None = None
     ) -> DocumentListResponse:
         """Returns paginated list of user documents."""
         page = max(1, page)

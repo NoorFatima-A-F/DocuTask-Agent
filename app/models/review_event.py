@@ -1,8 +1,7 @@
 """Audit trail of human review decisions on extractions."""
 
 import uuid
-from datetime import datetime, timezone
-from typing import Optional
+from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, ForeignKey, String, Text, Uuid
 from sqlalchemy.orm import Mapped, mapped_column
@@ -22,9 +21,9 @@ class ReviewEvent(Base, UUIDMixin):
         Uuid(as_uuid=True), ForeignKey("users.id", ondelete="RESTRICT"), index=True, nullable=False
     )
     action: Mapped[str] = mapped_column(String(20), nullable=False)  # APPROVED | REJECTED
-    original_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    corrected_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    reason: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    original_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    corrected_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    reason: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
     )

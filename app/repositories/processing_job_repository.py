@@ -1,7 +1,6 @@
 """Persistence for ProcessingJob rows."""
 
 import uuid
-from typing import List, Optional, Tuple
 
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -23,17 +22,17 @@ class ProcessingJobRepository(BaseRepository[ProcessingJob]):
         await self.db.refresh(job)
         return job
 
-    async def get_by_id(self, job_id: uuid.UUID) -> Optional[ProcessingJob]:
+    async def get_by_id(self, job_id: uuid.UUID) -> ProcessingJob | None:
         result = await self.db.execute(select(ProcessingJob).where(ProcessingJob.id == job_id))
         return result.scalar_one_or_none()
 
-    async def get_by_idempotency_key(self, key: str) -> Optional[ProcessingJob]:
+    async def get_by_idempotency_key(self, key: str) -> ProcessingJob | None:
         result = await self.db.execute(select(ProcessingJob).where(ProcessingJob.idempotency_key == key))
         return result.scalar_one_or_none()
 
     async def list_for_owner(
         self, owner_id: uuid.UUID, skip: int = 0, limit: int = 20
-    ) -> Tuple[List[ProcessingJob], int]:
+    ) -> tuple[list[ProcessingJob], int]:
         """Jobs whose document belongs to ``owner_id``, newest first."""
         owned = (
             select(ProcessingJob)
@@ -44,7 +43,7 @@ class ProcessingJobRepository(BaseRepository[ProcessingJob]):
         rows = await self.db.execute(owned.order_by(ProcessingJob.created_at.desc()).offset(skip).limit(limit))
         return list(rows.scalars().all()), total
 
-    async def list_failed(self, skip: int = 0, limit: int = 50) -> Tuple[List[ProcessingJob], int]:
+    async def list_failed(self, skip: int = 0, limit: int = 50) -> tuple[list[ProcessingJob], int]:
         """All FAILED jobs (admin view), newest first."""
         failed = select(ProcessingJob).where(ProcessingJob.status == JobStatus.FAILED.value)
         total = (await self.db.execute(select(func.count()).select_from(failed.subquery()))).scalar() or 0

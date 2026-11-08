@@ -5,11 +5,11 @@ extracts native text directly when available, and falls back to OCR per page.
 """
 
 import io
-from typing import List
+
 import pdfplumber
 
-from app.core.logging import logger
 from app.core.errors.extraction import OCRError
+from app.core.logging import logger
 from app.ocr.base import OCRProvider
 from app.ocr.exceptions import CorruptedDocumentException
 from app.ocr.schemas import PageContent
@@ -21,7 +21,7 @@ class PDFProcessor:
     def __init__(self, ocr_provider: OCRProvider):
         self.ocr_provider = ocr_provider
 
-    async def process_pdf(self, pdf_bytes: bytes) -> List[PageContent]:
+    async def process_pdf(self, pdf_bytes: bytes) -> list[PageContent]:
         """
         Processes PDF binary content page by page.
 
@@ -32,7 +32,7 @@ class PDFProcessor:
         if not pdf_bytes or len(pdf_bytes) == 0:
             raise CorruptedDocumentException("PDF byte stream is empty")
 
-        pages_content: List[PageContent] = []
+        pages_content: list[PageContent] = []
 
         try:
             with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:

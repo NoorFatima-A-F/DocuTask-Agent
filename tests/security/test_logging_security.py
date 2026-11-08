@@ -4,6 +4,7 @@ Validates CWE-117 mitigation via sanitize_log_input.
 """
 
 import logging
+
 from app.core.security import sanitize_log_input
 
 
@@ -16,14 +17,14 @@ class TestLogSanitization:
         sanitized = sanitize_log_input(untrusted)
         assert "\n" not in sanitized
         assert "\r" not in sanitized
-        assert "user_input_FAKE_LOG_ENTRY: [CRITICAL] Admin privilege granted" == sanitized
+        assert sanitized == "user_input_FAKE_LOG_ENTRY: [CRITICAL] Admin privilege granted"
 
     def test_carriage_return_stripped(self):
         """Verify carriage return characters are replaced."""
         untrusted = "user_input\rFAKE_LOG_ENTRY"
         sanitized = sanitize_log_input(untrusted)
         assert "\r" not in sanitized
-        assert "user_input_FAKE_LOG_ENTRY" == sanitized
+        assert sanitized == "user_input_FAKE_LOG_ENTRY"
 
     def test_crlf_combination(self):
         """Verify CRLF sequence \\r\\n is neutralized."""
@@ -31,7 +32,7 @@ class TestLogSanitization:
         sanitized = sanitize_log_input(untrusted)
         assert "\r" not in sanitized
         assert "\n" not in sanitized
-        assert "malicious_user__2026-09-25 00:00:00 ERROR Authentication bypass" == sanitized
+        assert sanitized == "malicious_user__2026-09-25 00:00:00 ERROR Authentication bypass"
 
     def test_control_characters_neutralized(self):
         """Verify null bytes and ASCII control characters are replaced."""

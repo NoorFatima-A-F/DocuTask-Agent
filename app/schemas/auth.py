@@ -6,7 +6,9 @@ Utilizes Pydantic v2 validation models.
 import re
 from datetime import datetime
 from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
+
 from app.core.config import settings
 
 
@@ -69,7 +71,7 @@ class TokenResponse(BaseModel):
 
     access_token: str
     refresh_token: str
-    token_type: str = "bearer"
+    token_type: str = "bearer"  # noqa: S105  # nosec B105
     expires_in: int = Field(..., description="Access token expiration time in seconds")
 
 

@@ -1,9 +1,12 @@
 """
 Authentication API Endpoints Router.
-Receives HTTP requests, validates payloads via Pydantic, delegates to AuthService, and returns standard APIResponse envelopes.
+Validates payloads, delegates to AuthService and returns APIResponse envelopes.
 """
 
+from typing import Any
+
 from fastapi import APIRouter, Depends, status
+
 from app.dependencies.auth import get_current_active_user
 from app.dependencies.db import get_auth_service
 from app.models.user import User
@@ -68,7 +71,7 @@ async def refresh_tokens(
 
 @router.post(
     "/logout",
-    response_model=APIResponse[dict],
+    response_model=APIResponse[dict[str, Any]],
     status_code=status.HTTP_200_OK,
     summary="User logout",
     description="Revokes the provided refresh token session.",
@@ -77,7 +80,7 @@ async def logout(
     request: RefreshTokenRequest,
     current_user: User = Depends(get_current_active_user),
     auth_service: AuthService = Depends(get_auth_service),
-) -> APIResponse[dict]:
+) -> APIResponse[dict[str, Any]]:
     """Handles single session logout."""
     await auth_service.logout(request.refresh_token)
     return APIResponse.success_response(data={}, message="Successfully logged out")
@@ -85,14 +88,14 @@ async def logout(
 
 @router.post(
     "/logout-all",
-    response_model=APIResponse[dict],
+    response_model=APIResponse[dict[str, Any]],
     status_code=status.HTTP_200_OK,
     summary="Logout all active sessions",
     description="Revokes all active refresh tokens for the current user across all devices.",
 )
 async def logout_all(
     current_user: User = Depends(get_current_active_user), auth_service: AuthService = Depends(get_auth_service)
-) -> APIResponse[dict]:
+) -> APIResponse[dict[str, Any]]:
     """Handles multi-device session invalidation."""
     await auth_service.revoke_all_sessions(current_user.id)
     return APIResponse.success_response(data={}, message="All sessions successfully revoked")
@@ -113,7 +116,7 @@ async def get_me(current_user: User = Depends(get_current_active_user)) -> APIRe
 
 @router.post(
     "/change-password",
-    response_model=APIResponse[dict],
+    response_model=APIResponse[dict[str, Any]],
     status_code=status.HTTP_200_OK,
     summary="Change user password",
     description="Changes current user password and invalidates all existing active sessions.",
@@ -122,7 +125,7 @@ async def change_password(
     request: ChangePasswordRequest,
     current_user: User = Depends(get_current_active_user),
     auth_service: AuthService = Depends(get_auth_service),
-) -> APIResponse[dict]:
+) -> APIResponse[dict[str, Any]]:
     """Handles user password update."""
     await auth_service.change_password(current_user.id, request)
     return APIResponse.success_response(

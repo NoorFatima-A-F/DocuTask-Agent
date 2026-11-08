@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
@@ -56,7 +56,7 @@ def _finish(job: ProcessingJob, status: JobStatus, error_code: str | None = None
     job.error_code = error_code
     job.last_error = error
     if status != JobStatus.RETRYING:
-        job.completed_at = datetime.now(timezone.utc)
+        job.completed_at = datetime.now(UTC)
 
 
 async def execute_job(
@@ -79,7 +79,7 @@ async def execute_job(
 
         job.attempts += 1
         job.status = JobStatus.RUNNING.value
-        job.started_at = job.started_at or datetime.now(timezone.utc)
+        job.started_at = job.started_at or datetime.now(UTC)
         job.error_code = None
         await db.commit()
 

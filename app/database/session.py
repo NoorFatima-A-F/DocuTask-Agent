@@ -3,7 +3,8 @@ Database Async Session Management Module.
 Configures SQLAlchemy async engine and session factory.
 """
 
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
+
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from app.core.config import settings
@@ -25,5 +26,5 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
             await session.commit()
         except Exception as exc:
             await session.rollback()
-            logger.error(f"Database session error: {str(exc)}")
+            logger.error(f"Database session error: {exc!s}")
             raise

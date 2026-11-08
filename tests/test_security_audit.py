@@ -7,8 +7,8 @@ import pytest
 from httpx import AsyncClient
 from pydantic import ValidationError
 
-from app.dependencies.auth import RoleChecker
 from app.core.exceptions import AccessDeniedException
+from app.dependencies.auth import RoleChecker
 from app.models.user import User
 from app.schemas.auth import RegisterRequest
 

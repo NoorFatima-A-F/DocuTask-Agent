@@ -2,15 +2,16 @@
 User SQLAlchemy ORM Model.
 """
 
-from typing import List, TYPE_CHECKING
+from typing import TYPE_CHECKING
+
 from sqlalchemy import Boolean, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base, TimestampMixin, UUIDMixin
 
 if TYPE_CHECKING:
-    from app.models.refresh_token import RefreshToken
     from app.models.document import Document
+    from app.models.refresh_token import RefreshToken
 
 
 class User(Base, UUIDMixin, TimestampMixin):
@@ -27,10 +28,10 @@ class User(Base, UUIDMixin, TimestampMixin):
     is_superuser: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
     # Relationships
-    refresh_tokens: Mapped[List["RefreshToken"]] = relationship(
+    refresh_tokens: Mapped[list["RefreshToken"]] = relationship(
         "RefreshToken", back_populates="user", cascade="all, delete-orphan", lazy="selectin"
     )
-    documents: Mapped[List["Document"]] = relationship(
+    documents: Mapped[list["Document"]] = relationship(
         "Document", back_populates="owner", cascade="all, delete-orphan", lazy="selectin"
     )
 

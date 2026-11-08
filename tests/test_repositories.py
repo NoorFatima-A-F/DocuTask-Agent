@@ -2,12 +2,13 @@
 Unit Tests for Database Repositories Layer.
 """
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
+
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.repositories.user_repository import UserRepository
 from app.repositories.refresh_token_repository import RefreshTokenRepository
+from app.repositories.user_repository import UserRepository
 
 
 @pytest.mark.asyncio
@@ -68,7 +69,7 @@ async def test_refresh_token_repository_operations(db_session: AsyncSession):
 
     # 1. Create Refresh Token
     token_hash = "mock_sha256_hash_value_1234567890"
-    expires_at = datetime.now(timezone.utc) + timedelta(days=7)
+    expires_at = datetime.now(UTC) + timedelta(days=7)
     token_obj = await token_repo.create(
         {"user_id": user.id, "token_hash": token_hash, "expires_at": expires_at, "revoked": False}
     )

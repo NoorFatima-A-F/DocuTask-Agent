@@ -4,37 +4,33 @@ Initializes application, CORS middleware, exception handlers, API routers, and F
 """
 
 import os
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+
+import httpx
 from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
-
-import httpx
 
 from app.ai.providers.gemini import default_timeout
 from app.api.health import router as health_router
 from app.api.v1.router import api_v1_router
 from app.core.config import settings
 from app.core.logging import install_secret_scrubbing, logger
-from app.database.base import Base
-from app.database.session import engine
 from app.middleware.body_limit import BodySizeLimitMiddleware
 from app.middleware.exception_handler import register_exception_handlers
-from app.middleware.request_context import RequestContextMiddleware
 from app.middleware.rate_limit import RateLimitMiddleware
+from app.middleware.request_context import RequestContextMiddleware
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     """Lifespan context manager for application startup and shutdown events."""
     install_secret_scrubbing()  # uvicorn configures its handlers before lifespan runs
     logger.info(f"Starting {settings.PROJECT_NAME} in [{settings.ENVIRONMENT}] mode...")
 
-    # Auto-create tables for development mode if SQLite / local
-    if "sqlite" in settings.DATABASE_URL:
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
+    # The schema is managed by Alembic only (`alembic upgrade head`, run by the container entrypoint).
 
     # One shared HTTP client for outbound LLM calls (connection pooling, explicit timeouts).
     app.state.http_client = httpx.AsyncClient(timeout=default_timeout())
@@ -108,7 +104,7 @@ def create_application() -> FastAPI:
 
     # Favicon Route
     @app.get("/favicon.ico", include_in_schema=False)
-    async def favicon():
+    async def favicon() -> Response:
         return Response(status_code=status.HTTP_204_NO_CONTENT)
 
     # Root route and SPA Catch-all routes serving HITL Frontend Dashboard
@@ -117,12 +113,13 @@ def create_application() -> FastAPI:
     @app.get("/jobs/{job_id}", include_in_schema=False)
     @app.get("/reviews", include_in_schema=False)
     @app.get("/reviews/{extraction_id}", include_in_schema=False)
-    async def serve_frontend():
+    async def serve_frontend() -> Response:
         index_file = find_frontend_index()
         if index_file:
             return FileResponse(index_file)
         return HTMLResponse(
-            "<!DOCTYPE html><html><body style='background:#090d16;color:#fff;font-family:sans-serif;padding:2rem;text-align:center;'>"
+            "<!DOCTYPE html><html><body style='background:#090d16;color:#fff;"
+            "font-family:sans-serif;padding:2rem;text-align:center;'>"
             "<h1>DocuTask Agent API</h1>"
             "<p>API is healthy and online.</p>"
             "<a style='color:#6366f1;' href='/api/v1/docs'>Go to OpenAPI Documentation (/api/v1/docs)</a>"

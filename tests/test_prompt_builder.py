@@ -3,7 +3,7 @@ Unit tests for PromptBuilder module.
 """
 
 from app.ai.prompt_builder import PromptBuilder
-from app.ai.schemas import InvoiceExtraction, GenericExtraction
+from app.ai.schemas import GenericExtraction, InvoiceExtraction
 
 
 def test_prompt_builder_model_mapping():

@@ -4,8 +4,9 @@ Implements metadata persistence, pagination, and search queries for Document ent
 """
 
 import uuid
-from typing import Dict, Any, List, Optional, Tuple
-from sqlalchemy import select, func, or_
+from typing import Any
+
+from sqlalchemy import func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.document import Document
@@ -18,7 +19,7 @@ class DocumentRepository(BaseRepository[Document]):
     def __init__(self, db: AsyncSession):
         super().__init__(model=Document, db=db)
 
-    async def create(self, doc_data: Dict[str, Any]) -> Document:
+    async def create(self, doc_data: dict[str, Any]) -> Document:
         """Creates and persists a new document record."""
         doc = Document(**doc_data)
         self.db.add(doc)
@@ -26,7 +27,7 @@ class DocumentRepository(BaseRepository[Document]):
         await self.db.refresh(doc)
         return doc
 
-    async def get_by_id(self, doc_id: uuid.UUID, owner_id: Optional[uuid.UUID] = None) -> Optional[Document]:
+    async def get_by_id(self, doc_id: uuid.UUID, owner_id: uuid.UUID | None = None) -> Document | None:
         """Retrieves document by UUID with optional owner isolation check."""
         query = select(Document).where(Document.id == doc_id)
         if owner_id:
@@ -34,7 +35,7 @@ class DocumentRepository(BaseRepository[Document]):
         result = await self.db.execute(query)
         return result.scalar_one_or_none()
 
-    async def get_by_hash(self, sha256_hash: str, owner_id: Optional[uuid.UUID] = None) -> Optional[Document]:
+    async def get_by_hash(self, sha256_hash: str, owner_id: uuid.UUID | None = None) -> Document | None:
         """Retrieves document by matching SHA256 hash."""
         query = select(Document).where(Document.sha256_hash == sha256_hash)
         if owner_id:
@@ -42,7 +43,7 @@ class DocumentRepository(BaseRepository[Document]):
         result = await self.db.execute(query)
         return result.scalar_one_or_none()
 
-    async def list_documents(self, owner_id: uuid.UUID, skip: int = 0, limit: int = 20) -> List[Document]:
+    async def list_documents(self, owner_id: uuid.UUID, skip: int = 0, limit: int = 20) -> list[Document]:
         """Lists documents owned by user ordered by creation timestamp descending."""
         query = (
             select(Document)
@@ -54,7 +55,7 @@ class DocumentRepository(BaseRepository[Document]):
         result = await self.db.execute(query)
         return list(result.scalars().all())
 
-    async def count_documents(self, owner_id: uuid.UUID, search_term: Optional[str] = None) -> int:
+    async def count_documents(self, owner_id: uuid.UUID, search_term: str | None = None) -> int:
         """Counts total documents owned by user matching optional search term."""
         query = select(func.count(Document.id)).where(Document.owner_id == owner_id)
         if search_term and search_term.strip():
@@ -69,7 +70,7 @@ class DocumentRepository(BaseRepository[Document]):
         result = await self.db.execute(query)
         return result.scalar() or 0
 
-    async def search(self, owner_id: uuid.UUID, query: str, skip: int = 0, limit: int = 20) -> List[Document]:
+    async def search(self, owner_id: uuid.UUID, query: str, skip: int = 0, limit: int = 20) -> list[Document]:
         """Searches documents by original_filename, file_extension, or mime_type."""
         term = f"%{query.strip().lower()}%"
         stmt = (
@@ -90,8 +91,8 @@ class DocumentRepository(BaseRepository[Document]):
         return list(result.scalars().all())
 
     async def paginate(
-        self, owner_id: uuid.UUID, page: int = 1, page_size: int = 20, search_query: Optional[str] = None
-    ) -> Tuple[List[Document], int]:
+        self, owner_id: uuid.UUID, page: int = 1, page_size: int = 20, search_query: str | None = None
+    ) -> tuple[list[Document], int]:
         """
         Returns paginated list of documents alongside total count.
 

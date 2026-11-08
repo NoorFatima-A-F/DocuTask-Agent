@@ -1,13 +1,14 @@
 """Unit and regression tests for safe path resolution and log sanitization primitives."""
 
-import os
 from pathlib import Path
+
 import pytest
+
 from app.core.security import (
-    resolve_safe_path,
-    validate_safe_filename_segment,
-    sanitize_log_input,
     UnsafePathError,
+    resolve_safe_path,
+    sanitize_log_input,
+    validate_safe_filename_segment,
 )
 
 

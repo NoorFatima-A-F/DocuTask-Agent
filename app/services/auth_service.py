@@ -4,7 +4,7 @@ Handles registration, authentication, refresh token rotation, logout, and passwo
 """
 
 import uuid
-from typing import Optional
+
 from app.core.config import settings
 from app.core.exceptions import (
     AccessDeniedException,
@@ -15,12 +15,12 @@ from app.core.exceptions import (
 )
 from app.core.logging import logger
 from app.core.security import (
-    sanitize_log_input,
     create_access_token,
     create_refresh_token,
     decode_token,
     hash_password,
     hash_token,
+    sanitize_log_input,
     verify_password,
 )
 from app.models.user import User
@@ -78,7 +78,7 @@ class AuthService:
         Authenticates user credentials and generates access and refresh tokens.
         """
         identifier = request.username_or_email.strip()
-        user: Optional[User] = None
+        user: User | None = None
 
         # Check if identifier is email or username
         if "@" in identifier:
@@ -108,7 +108,7 @@ class AuthService:
         return TokenResponse(
             access_token=access_token,
             refresh_token=raw_refresh_token,
-            token_type="bearer",  # nosec B106
+            token_type="bearer",  # noqa: S106  # nosec B106
             expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         )
 
@@ -155,7 +155,7 @@ class AuthService:
         return TokenResponse(
             access_token=new_access_token,
             refresh_token=new_raw_refresh_token,
-            token_type="bearer",  # nosec B106
+            token_type="bearer",  # noqa: S106  # nosec B106
             expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         )
 

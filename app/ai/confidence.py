@@ -21,7 +21,7 @@ from __future__ import annotations
 import re
 import unicodedata
 from dataclasses import asdict, dataclass, field
-from datetime import date
+from datetime import date, datetime
 from typing import Any
 
 from dateutil import parser as date_parser
@@ -101,7 +101,7 @@ _NUMBER_RE = re.compile(r"(?<![\d.,])\d{1,3}(?:[.,' ]\d{3})*(?:[.,]\d+)?(?!\d)|\
 
 def parse_number(token: str) -> float | None:
     """Parse ``1.234,56`` / ``1,234.56`` / ``1234.5`` / ``1 234,56`` into a float."""
-    t = token.strip().replace("'", "").replace(" ", "").replace(" ", "")
+    t = token.strip().replace("'", "").replace(" ", "").replace("\u00a0", "")
     if not t or not re.search(r"\d", t):
         return None
     last_dot, last_comma = t.rfind("."), t.rfind(",")
@@ -131,7 +131,8 @@ def numbers_in(text: str) -> list[float]:
 
 def parse_date(value: str) -> date | None:
     try:
-        return date_parser.parse(value, fuzzy=False, default=None).date()  # type: ignore[arg-type]
+        parsed: datetime = date_parser.parse(value, fuzzy=False)
+        return parsed.date()
     except (ValueError, OverflowError, TypeError):
         return None
 
@@ -202,11 +203,18 @@ def _close(a: float, b: float) -> bool:
     return abs(a - b) <= max(AMOUNT_TOLERANCE, 0.005 * max(abs(a), abs(b)))
 
 
+def _num(value: Any) -> float | None:
+    """A JSON number as float; ``None`` for anything else (bools are not numbers here)."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    return float(value)
+
+
 def _line_checks(items: list[dict[str, Any]], prefix: str) -> list[CheckResult]:
     checks = []
     for i, item in enumerate(items):
-        qty, unit, total = item.get("quantity"), item.get("unit_price"), item.get("total_price")
-        if all(isinstance(v, (int, float)) for v in (qty, unit, total)) and total:
+        qty, unit, total = _num(item.get("quantity")), _num(item.get("unit_price")), _num(item.get("total_price"))
+        if qty is not None and unit is not None and total:
             ok = _close(qty * unit, total)
             checks.append(CheckResult(f"{prefix}[{i}].quantity_x_unit_price", ok, f"{qty} x {unit} vs {total}"))
     return checks
@@ -238,11 +246,12 @@ def consistency_checks(document_type: str, data: dict[str, Any]) -> list[CheckRe
         total = data.get("total_amount")
         checks += _line_checks(items, "line_items")
         checks += _sum_check(items, subtotal, "line_items_sum_equals_subtotal")
-        if all(isinstance(v, (int, float)) for v in (subtotal, tax, total)):
+        subtotal_n, tax_n, total_n = _num(subtotal), _num(tax), _num(total)
+        if subtotal_n is not None and tax_n is not None and total_n is not None:
             checks.append(
                 CheckResult(
                     "subtotal_plus_tax_equals_total",
-                    _close(subtotal + tax, total),  # type: ignore[operator]
+                    _close(subtotal_n + tax_n, total_n),
                     f"{subtotal} + {tax} vs {total}",
                 )
             )

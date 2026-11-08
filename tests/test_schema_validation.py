@@ -3,6 +3,7 @@ Unit tests for AIValidator JSON schema validation.
 """
 
 import pytest
+
 from app.ai.exceptions import AIValidationException
 from app.ai.validator import AIValidator
 

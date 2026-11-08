@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+from collections.abc import Iterator
 
 import httpx
 import pytest
@@ -31,7 +32,7 @@ def provider() -> GeminiProvider:
 
 
 @pytest.fixture
-def gemini() -> respx.MockRouter:
+def gemini() -> Iterator[respx.MockRouter]:
     with respx.mock(assert_all_called=False) as router:
         yield router
 
@@ -40,11 +41,11 @@ def route(router: respx.MockRouter) -> respx.Route:
     return router.post(url__startswith=URL_PATTERN)
 
 
-async def call(provider: GeminiProvider):  # type: ignore[no-untyped-def]
+async def call(provider: GeminiProvider):
     return await provider.generate_json("doc text", SCHEMA, "system")
 
 
-async def test_success_parses_json_and_uses_usage_metadata(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_success_parses_json_and_uses_usage_metadata(provider, gemini) -> None:
     route(gemini).respond(200, json=ok_body('{"vendor_name": "Contoso Ltd"}'))
 
     result = await call(provider)
@@ -53,12 +54,12 @@ async def test_success_parses_json_and_uses_usage_metadata(provider, gemini) -> 
     assert (result.input_tokens, result.output_tokens) == (321, 45)
 
 
-async def test_code_fenced_json_is_accepted(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_code_fenced_json_is_accepted(provider, gemini) -> None:
     route(gemini).respond(200, json=ok_body('```json\n{"vendor_name": "X"}\n```'))
     assert (await call(provider)).data == {"vendor_name": "X"}
 
 
-async def test_missing_key_raises_not_configured_without_network(gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_missing_key_raises_not_configured_without_network(gemini) -> None:
     r = route(gemini).respond(200, json=ok_body("{}"))
     with pytest.raises(LLMError) as exc_info:
         await call(GeminiProvider(api_key="", default_model_name=MODEL))
@@ -78,7 +79,7 @@ async def test_missing_key_raises_not_configured_without_network(gemini) -> None
         (503, ErrorCode.LLM_UNAVAILABLE, 503),
     ],
 )
-async def test_http_errors_map_to_typed_codes(provider, gemini, status, code, http_status) -> None:  # type: ignore[no-untyped-def]
+async def test_http_errors_map_to_typed_codes(provider, gemini, status, code, http_status) -> None:
     secret_body = {"error": {"message": f"upstream detail with {KEY}"}}
     route(gemini).respond(status, json=secret_body)
 
@@ -91,7 +92,7 @@ async def test_http_errors_map_to_typed_codes(provider, gemini, status, code, ht
     assert KEY not in str(err) and "upstream detail" not in str(err)
 
 
-async def test_429_is_rate_limited_and_carries_retry_after(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_429_is_rate_limited_and_carries_retry_after(provider, gemini) -> None:
     route(gemini).respond(429, headers={"Retry-After": "12"}, json={"error": {}})
     with pytest.raises(LLMError) as exc_info:
         await call(provider)
@@ -100,7 +101,7 @@ async def test_429_is_rate_limited_and_carries_retry_after(provider, gemini) -> 
     assert exc_info.value.transient
 
 
-async def test_timeout_maps_to_llm_timeout(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_timeout_maps_to_llm_timeout(provider, gemini) -> None:
     route(gemini).mock(side_effect=httpx.ReadTimeout("slow"))
     with pytest.raises(LLMError) as exc_info:
         await call(provider)
@@ -108,21 +109,21 @@ async def test_timeout_maps_to_llm_timeout(provider, gemini) -> None:  # type: i
     assert exc_info.value.status_code == 504
 
 
-async def test_connection_error_maps_to_unavailable(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_connection_error_maps_to_unavailable(provider, gemini) -> None:
     route(gemini).mock(side_effect=httpx.ConnectError("refused"))
     with pytest.raises(LLMError) as exc_info:
         await call(provider)
     assert exc_info.value.code == ErrorCode.LLM_UNAVAILABLE
 
 
-async def test_invalid_json_raises_invalid_output_never_empty_dict(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_invalid_json_raises_invalid_output_never_empty_dict(provider, gemini) -> None:
     route(gemini).respond(200, json=ok_body("Sure! Here is the invoice: vendor Contoso"))
     with pytest.raises(LLMError) as exc_info:
         await call(provider)
     assert exc_info.value.code == ErrorCode.LLM_INVALID_OUTPUT
 
 
-async def test_json_array_is_invalid_output(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_json_array_is_invalid_output(provider, gemini) -> None:
     route(gemini).respond(200, json=ok_body("[1, 2]"))
     with pytest.raises(LLMError) as exc_info:
         await call(provider)
@@ -138,21 +139,21 @@ async def test_json_array_is_invalid_output(provider, gemini) -> None:  # type: 
         {},
     ],
 )
-async def test_empty_candidates_raise_empty_output(provider, gemini, body) -> None:  # type: ignore[no-untyped-def]
+async def test_empty_candidates_raise_empty_output(provider, gemini, body) -> None:
     route(gemini).respond(200, json=body)
     with pytest.raises(LLMError) as exc_info:
         await call(provider)
     assert exc_info.value.code == ErrorCode.LLM_EMPTY_OUTPUT
 
 
-async def test_non_json_http_body_is_invalid_output(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_non_json_http_body_is_invalid_output(provider, gemini) -> None:
     route(gemini).respond(200, text="<html>proxy error</html>")
     with pytest.raises(LLMError) as exc_info:
         await call(provider)
     assert exc_info.value.code == ErrorCode.LLM_INVALID_OUTPUT
 
 
-async def test_error_body_is_logged_scrubbed_at_debug_only(provider, gemini, caplog) -> None:  # type: ignore[no-untyped-def]
+async def test_error_body_is_logged_scrubbed_at_debug_only(provider, gemini, caplog) -> None:
     route(gemini).respond(403, json={"error": {"message": f"bad key {KEY}"}})
     with caplog.at_level(logging.DEBUG), pytest.raises(LLMError):
         await call(provider)
@@ -163,15 +164,15 @@ async def test_error_body_is_logged_scrubbed_at_debug_only(provider, gemini, cap
             assert record.levelno == logging.DEBUG
 
 
-def test_unknown_model_cost_is_none(provider) -> None:  # type: ignore[no-untyped-def]
+def test_unknown_model_cost_is_none(provider) -> None:
     assert provider.calculate_cost(1000, 1000, "some-unknown-model") is None
 
 
-def test_request_payload_is_json(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+def test_request_payload_is_json(provider, gemini) -> None:
     assert json.dumps(SCHEMA)  # schema must be serialisable for the prompt
 
 
-async def test_api_key_sent_in_header_never_in_url(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_api_key_sent_in_header_never_in_url(provider, gemini) -> None:
     r = route(gemini).respond(200, json=ok_body('{"vendor_name": "X"}'))
     await call(provider)
     request = r.calls.last.request
@@ -179,7 +180,7 @@ async def test_api_key_sent_in_header_never_in_url(provider, gemini) -> None:  #
     assert request.headers["x-goog-api-key"] == KEY
 
 
-async def test_400_api_key_invalid_maps_to_auth_failed(provider, gemini) -> None:  # type: ignore[no-untyped-def]
+async def test_400_api_key_invalid_maps_to_auth_failed(provider, gemini) -> None:
     """Real Gemini behaviour (observed 2026-11-08): an invalid key returns 400, not 401."""
     body = {
         "error": {

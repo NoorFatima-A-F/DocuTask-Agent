@@ -2,9 +2,10 @@
 Enterprise Platform Exception Hierarchy.
 """
 
-from datetime import datetime, timezone
-from typing import Any, Dict, Optional
 import uuid
+from datetime import UTC, datetime
+from typing import Any
+
 from .error_codes import ErrorCategory, ErrorSeverity, RecoveryPolicy
 from .problem_details import ProblemDetails
 
@@ -23,11 +24,11 @@ class PlatformException(Exception):
         recovery_policy: RecoveryPolicy = RecoveryPolicy.RETRY,
         retryable: bool = False,
         error_code: str = "PLATFORM_ERROR",
-        correlation_id: Optional[str] = None,
-        tenant_id: Optional[str] = None,
-        root_cause: Optional[str] = None,
-        action: Optional[str] = None,
-        details: Optional[Dict[str, Any]] = None,
+        correlation_id: str | None = None,
+        tenant_id: str | None = None,
+        root_cause: str | None = None,
+        action: str | None = None,
+        details: dict[str, Any] | None = None,
         http_status: int = 500,
     ):
         super().__init__(message)
@@ -44,9 +45,9 @@ class PlatformException(Exception):
         self.action = action
         self.details = details or {}
         self.http_status = http_status
-        self.timestamp = datetime.now(timezone.utc)
+        self.timestamp = datetime.now(UTC)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to structured JSON dictionary."""
         return {
             "id": self.error_id,
@@ -85,14 +86,14 @@ class PlatformException(Exception):
 
 
 class DatabasePlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(
             message, category=ErrorCategory.DATABASE, error_code="DATABASE_ERROR", http_status=500, **kwargs
         )
 
 
 class NetworkPlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(
             message,
             category=ErrorCategory.NETWORK,
@@ -104,33 +105,33 @@ class NetworkPlatformException(PlatformException):
 
 
 class AIPlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(message, category=ErrorCategory.AI, error_code="AI_PROVIDER_ERROR", http_status=502, **kwargs)
 
 
 class AgentPlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(
             message, category=ErrorCategory.AGENT, error_code="AGENT_EXECUTION_ERROR", http_status=500, **kwargs
         )
 
 
 class WorkflowPlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(
             message, category=ErrorCategory.WORKFLOW, error_code="WORKFLOW_ERROR", http_status=500, **kwargs
         )
 
 
 class ConnectorPlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(
             message, category=ErrorCategory.CONNECTOR, error_code="CONNECTOR_ERROR", http_status=502, **kwargs
         )
 
 
 class SecurityPlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(
             message,
             category=ErrorCategory.SECURITY,
@@ -142,14 +143,14 @@ class SecurityPlatformException(PlatformException):
 
 
 class ValidationPlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(
             message, category=ErrorCategory.VALIDATION, error_code="VALIDATION_FAILED", http_status=422, **kwargs
         )
 
 
 class TimeoutPlatformException(PlatformException):
-    def __init__(self, message: str, **kwargs):
+    def __init__(self, message: str, **kwargs: Any) -> None:
         super().__init__(
             message,
             category=ErrorCategory.TIMEOUT,

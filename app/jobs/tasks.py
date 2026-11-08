@@ -35,8 +35,8 @@ def retry_delay(retries_so_far: int, retry_after: float | None) -> float:
     """Exponential backoff with jitter, never shorter than the provider's Retry-After."""
     backoff = min(BACKOFF_BASE_SECONDS * 2**retries_so_far, BACKOFF_CAP_SECONDS)
     # Jitter only; not security-sensitive.
-    backoff += random.uniform(0, BACKOFF_BASE_SECONDS)  # nosec B311
-    return max(backoff, retry_after or 0.0)
+    backoff += random.uniform(0, BACKOFF_BASE_SECONDS)  # noqa: S311  # nosec B311
+    return float(max(backoff, retry_after or 0.0))
 
 
 async def _run(job_id: uuid.UUID, final_attempt: bool) -> str | None:
@@ -49,11 +49,11 @@ async def _run(job_id: uuid.UUID, final_attempt: bool) -> str | None:
         await engine.dispose()
 
 
-@celery_app.task(bind=True, name="docutask.run_extraction", max_retries=MAX_RETRIES)
+@celery_app.task(bind=True, name="docutask.run_extraction", max_retries=MAX_RETRIES)  # type: ignore[untyped-decorator]
 def run_extraction(self, job_id: str) -> str | None:  # type: ignore[no-untyped-def]
     """Run one attempt of an extraction job; schedule a retry only for transient failures."""
     final_attempt = self.request.retries >= self.max_retries
     try:
         return asyncio.run(_run(uuid.UUID(job_id), final_attempt))
     except RetryJob as exc:
-        raise self.retry(exc=exc, countdown=retry_delay(self.request.retries, exc.retry_after))
+        raise self.retry(exc=exc, countdown=retry_delay(self.request.retries, exc.retry_after)) from exc

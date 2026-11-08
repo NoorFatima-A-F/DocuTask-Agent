@@ -2,10 +2,10 @@
 Global Error Categories, Severity Levels, and Recovery Policies.
 """
 
-from enum import Enum
+from enum import StrEnum
 
 
-class ErrorCategory(str, Enum):
+class ErrorCategory(StrEnum):
     """12 standard platform error categories."""
 
     PLATFORM = "PLATFORM"
@@ -22,7 +22,7 @@ class ErrorCategory(str, Enum):
     TIMEOUT = "TIMEOUT"
 
 
-class ErrorSeverity(str, Enum):
+class ErrorSeverity(StrEnum):
     """Severity classification for error handling and alerting."""
 
     LOW = "LOW"
@@ -32,7 +32,7 @@ class ErrorSeverity(str, Enum):
     FATAL = "FATAL"
 
 
-class RecoveryPolicy(str, Enum):
+class RecoveryPolicy(StrEnum):
     """Policy-driven recovery strategy."""
 
     RETRY = "RETRY"

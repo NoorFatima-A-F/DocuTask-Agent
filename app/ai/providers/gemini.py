@@ -8,9 +8,9 @@ in the ``x-goog-api-key`` header, never in the URL.
 
 from __future__ import annotations
 
-import re
 import json
-from datetime import date, datetime, timezone
+import re
+from datetime import UTC, date, datetime
 from typing import Any
 
 import httpx
@@ -80,7 +80,7 @@ class GeminiProvider(LLMProvider):
         periods = self._pricing.get(model or self._default_model)
         if not periods:
             return None
-        day = on or datetime.now(timezone.utc).date()
+        day = on or datetime.now(UTC).date()
         applicable = [p for p in periods if p[0] <= day]
         if not applicable:
             return None

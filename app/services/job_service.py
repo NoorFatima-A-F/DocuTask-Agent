@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import math
 import uuid
-from typing import Callable, Optional
+from collections.abc import Callable
 
 from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.exc import IntegrityError
@@ -34,7 +34,7 @@ def celery_enqueuer(job_id: uuid.UUID) -> None:
     """Publish to Redis via Celery. Refuses (fails closed) when no broker is configured."""
     if not settings.REDIS_URL:
         raise ExtractionError(ErrorCode.QUEUE_UNAVAILABLE, "REDIS_URL is not configured; cannot queue jobs.")
-    from app.jobs.tasks import run_extraction  # noqa: PLC0415 - keep celery out of API import time
+    from app.jobs.tasks import run_extraction
 
     run_extraction.apply_async(args=[str(job_id)], retry=False)
 
@@ -53,7 +53,7 @@ class JobService:
         self.enqueue = enqueue
 
     async def submit(
-        self, owner: User, document_id: uuid.UUID, document_type: str, client_key: Optional[str] = None
+        self, owner: User, document_id: uuid.UUID, document_type: str, client_key: str | None = None
     ) -> tuple[JobResponse, bool]:
         """Create and enqueue a job; returns ``(job, created)``. Resubmissions return the existing job."""
         doc = await self.docs.get_by_id(document_id)
@@ -64,7 +64,7 @@ class JobService:
         key = idempotency_key(owner.id, document_id, document_type, client_key)
         existing = await self.jobs.get_by_idempotency_key(key)
         if existing is None:
-            from app.jobs.tasks import MAX_RETRIES  # noqa: PLC0415
+            from app.jobs.tasks import MAX_RETRIES
 
             job = ProcessingJob(
                 document_id=document_id,

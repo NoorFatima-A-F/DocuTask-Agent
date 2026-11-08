@@ -6,23 +6,23 @@ Provides cleanly scoped instances bound to the request database session.
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.ai.base import LLMProvider
 from app.database.session import get_db
-from app.repositories.refresh_token_repository import RefreshTokenRepository
-from app.repositories.user_repository import UserRepository
+from app.dependencies.llm import get_llm_provider
+from app.dependencies.ocr import get_ocr_pipeline
+from app.dependencies.storage import get_storage_provider
+from app.ocr.pipeline import OCRPipeline
+from app.repositories.ai_extraction_repository import AIExtractionRepository
 from app.repositories.document_repository import DocumentRepository
 from app.repositories.extracted_text_repository import ExtractedTextRepository
-from app.repositories.ai_extraction_repository import AIExtractionRepository
 from app.repositories.processing_job_repository import ProcessingJobRepository
+from app.repositories.refresh_token_repository import RefreshTokenRepository
+from app.repositories.user_repository import UserRepository
+from app.services.ai_extraction_service import AIExtractionService
 from app.services.auth_service import AuthService
 from app.services.document_service import DocumentService
 from app.services.ocr_service import OCRService
-from app.services.ai_extraction_service import AIExtractionService
-from app.dependencies.storage import get_storage_provider
-from app.dependencies.ocr import get_ocr_pipeline
-from app.dependencies.llm import get_llm_provider
-from app.ai.base import LLMProvider
 from app.storage.base import StorageProvider
-from app.ocr.pipeline import OCRPipeline
 
 
 def get_user_repository(db: AsyncSession = Depends(get_db)) -> UserRepository:

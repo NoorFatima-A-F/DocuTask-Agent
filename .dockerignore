@@ -1,0 +1,26 @@
+# Only what the image needs is COPY'd, but keep the build context small and secret-free.
+.git
+.env
+.env.*
+!.env.example
+**/node_modules
+**/__pycache__
+**/*.pyc
+.venv
+venv
+frontend/dist
+frontend/test-results
+frontend/playwright-report
+storage
+uploads
+*.db
+*.sqlite3
+.pytest_cache
+.ruff_cache
+.mypy_cache
+htmlcov
+coverage.xml
+docs
+tests
+evals
+tooling

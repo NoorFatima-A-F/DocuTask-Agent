@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+from typing import Any
 
 import pytest
 
@@ -23,7 +24,7 @@ from tests.fakes.data import CONTOSO_INVOICE_JSON, CONTOSO_INVOICE_TEXT, FABRICA
 THRESHOLD = 0.85
 
 
-def run(data: dict, text: str = CONTOSO_INVOICE_TEXT, ocr: float | None = 0.92, doc_type: str = "invoice"):  # type: ignore[no-untyped-def]
+def run(data: dict, text: str = CONTOSO_INVOICE_TEXT, ocr: float | None = 0.92, doc_type: str = "invoice"):
     validated = AIValidator.validate(data, doc_type)
     report = assess(doc_type, validated, text, ocr, THRESHOLD)
     return report, routing_status(report, THRESHOLD)
@@ -77,7 +78,7 @@ def test_inconsistent_totals_route_to_review_with_named_check() -> None:
 
 
 def test_line_item_arithmetic_checked() -> None:
-    data = copy.deepcopy(CONTOSO_INVOICE_JSON)
+    data: dict[str, Any] = copy.deepcopy(CONTOSO_INVOICE_JSON)
     data["line_items"][0]["quantity"] = 3
     report, status = run(data, text=CONTOSO_INVOICE_TEXT + " 3")
     assert status == ExtractionStatus.NEEDS_REVIEW
@@ -144,7 +145,7 @@ def test_receipt_consistency() -> None:
     }
     report, status = run(data, text=text, doc_type="receipt")
     assert status == ExtractionStatus.COMPLETED, report.to_dict()
-    bad, bad_status = run({**data, "total_amount": 5.50}, text=text, doc_type="receipt")
+    _bad, bad_status = run({**data, "total_amount": 5.50}, text=text, doc_type="receipt")
     assert bad_status == ExtractionStatus.NEEDS_REVIEW
 
 

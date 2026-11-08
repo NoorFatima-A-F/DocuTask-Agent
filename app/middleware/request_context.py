@@ -6,12 +6,13 @@ sets enterprise security headers, and logs HTTP access events structuredly.
 
 import time
 import uuid
+
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
 
-from app.core.security import sanitize_log_input
 from app.core.logging import logger
+from app.core.security import sanitize_log_input
 
 
 class RequestContextMiddleware(BaseHTTPMiddleware):
@@ -71,7 +72,8 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
         response.headers["Cache-Control"] = "no-store, max-age=0"
 
         logger.info(
-            f"HTTP Response Completed: {request.method} {request.url.path} | Status={response.status_code} | Duration={duration_ms}ms | RequestID={request_id}"
+            f"HTTP Response Completed: {request.method} {request.url.path} | Status={response.status_code} "
+            f"| Duration={duration_ms}ms | RequestID={request_id}"
         )
 
         return response

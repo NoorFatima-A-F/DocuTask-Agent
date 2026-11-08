@@ -4,17 +4,18 @@ Stores document metadata, file system path references, and processing status.
 """
 
 import uuid
-from typing import List, TYPE_CHECKING
+from typing import TYPE_CHECKING
+
 from sqlalchemy import BigInteger, ForeignKey, String, Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base, TimestampMixin, UUIDMixin
 
 if TYPE_CHECKING:
-    from app.models.user import User
-    from app.models.extracted_text import ExtractedText
     from app.models.ai_extraction import AIExtraction
+    from app.models.extracted_text import ExtractedText
     from app.models.processing_job import ProcessingJob
+    from app.models.user import User
 
 
 class Document(Base, UUIDMixin, TimestampMixin):
@@ -37,21 +38,21 @@ class Document(Base, UUIDMixin, TimestampMixin):
 
     # Relationships
     owner: Mapped["User"] = relationship("User", back_populates="documents")
-    extracted_pages: Mapped[List["ExtractedText"]] = relationship(
+    extracted_pages: Mapped[list["ExtractedText"]] = relationship(
         "ExtractedText",
         back_populates="document",
         cascade="all, delete-orphan",
         order_by="ExtractedText.page_number",
         lazy="selectin",
     )
-    ai_extractions: Mapped[List["AIExtraction"]] = relationship(
+    ai_extractions: Mapped[list["AIExtraction"]] = relationship(
         "AIExtraction",
         back_populates="document",
         cascade="all, delete-orphan",
         order_by="AIExtraction.created_at.desc()",
         lazy="selectin",
     )
-    processing_jobs: Mapped[List["ProcessingJob"]] = relationship(
+    processing_jobs: Mapped[list["ProcessingJob"]] = relationship(
         "ProcessingJob",
         back_populates="document",
         cascade="all, delete-orphan",
