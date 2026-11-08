@@ -152,9 +152,18 @@ accuracy.
 
 **Live extraction (not yet measured).** `python evals/run_eval.py --mode live --record DIR` runs
 tesseract + Gemini on the images and reports field accuracy, document-level accuracy,
-auto-accept/review/failure rates, false-accept rate, latency and cost. It has not been run for this
-release because no working Gemini key was available; no accuracy figure is claimed until it is.
-`--mode replay --recordings DIR` re-scores a recorded run offline.
+auto-accept/review/failure rates, false-accept rate, latency and cost. No accuracy figure is claimed
+until it completes. A first attempt on 2026-11-08 (free-tier key, `gemini-3.8-flash`) produced no
+results: every request ended in a Google-side 503, a timeout or the free tier's 20-requests-per-day
+limit. Because of that limit, split the run across days:
+
+```bash
+python evals/run_eval.py --mode live --record evals/recordings/live --resume --limit 18 --delay 13
+```
+
+`--resume` skips documents already answered in the recording directory, `--limit` caps the requests
+sent, and the run stops at the first rate-limit error; the report always covers every recorded
+document. `--mode replay --recordings DIR` re-scores a recorded run offline.
 
 ## Security
 
