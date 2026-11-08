@@ -1,0 +1,43 @@
+{
+  "document_type": "receipt",
+  "fields": {
+    "store_name": "Saltmarsh Grocers",
+    "transaction_date": "2026-09-24",
+    "subtotal": 65.27,
+    "tax": 4.57,
+    "total_amount": 69.84,
+    "payment_method": "Debit",
+    "line_items": [
+      {
+        "description": "Apples 1kg",
+        "quantity": 1.0,
+        "unit_price": 5.91,
+        "total_price": 5.91
+      },
+      {
+        "description": "Tea 80ct",
+        "quantity": 3.0,
+        "unit_price": 3.72,
+        "total_price": 11.16
+      },
+      {
+        "description": "Milk 1L",
+        "quantity": 2.0,
+        "unit_price": 14.66,
+        "total_price": 29.32
+      },
+      {
+        "description": "Batteries AA",
+        "quantity": 2.0,
+        "unit_price": 7.11,
+        "total_price": 14.22
+      },
+      {
+        "description": "Sourdough loaf",
+        "quantity": 2.0,
+        "unit_price": 2.33,
+        "total_price": 4.66
+      }
+    ]
+  }
+}

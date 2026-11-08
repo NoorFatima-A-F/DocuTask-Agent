@@ -1,12 +1,12 @@
 #!/bin/sh
-# Container entrypoint. Usage: entrypoint.sh [web|worker|all-in-one]
+# Container entrypoint. Usage: entrypoint.sh [web|worker|all-in-one]  (or set ROLE)
 #   web         run migrations, then serve the API + UI on $PORT (default 7860)
 #   worker      run the Celery extraction worker
 #   all-in-one  local Redis + worker + web in one container (e.g. Hugging Face Spaces)
 set -eu
 
 PORT="${PORT:-7860}"
-role="${1:-web}"
+role="${1:-${ROLE:-web}}"
 
 migrate() {
   alembic upgrade head

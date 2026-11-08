@@ -1,0 +1,13 @@
+Bluebell Bakery
+Receipt #1002   July 02, 2026
+
+2 x Batteries AA     @ 8.35  16.70
+2 x Light bulb       @ 4.06  8.12
+1 x Milk 1L          @ 2.78  2.78
+1 x Apples 1kg       @ 6.33  6.33
+1 x Sourdough loaf   @ 9.67  9.67
+
+Subtotal 43.60
+Sales tax 7% 3.05
+TOTAL 46.65
+Paid by Cash

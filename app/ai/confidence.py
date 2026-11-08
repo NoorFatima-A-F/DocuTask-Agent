@@ -193,6 +193,9 @@ def ground_value(name: str, value: Any, text: str, norm_text: str) -> bool | Non
         return None
     if needle in norm_text:
         return True
+    if any(ch.isdigit() for ch in needle):
+        # Identifiers, account numbers, addresses: one wrong digit is a different value, so no fuzzy match.
+        return False
     return fuzz.partial_ratio(needle, norm_text) >= FUZZY_THRESHOLD
 
 

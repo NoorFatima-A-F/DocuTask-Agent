@@ -1,0 +1,28 @@
+{
+  "document_type": "invoice",
+  "fields": {
+    "invoice_number": "INV-20260011",
+    "vendor_name": "Brightwater Analytics",
+    "customer_name": "Pinecrest Dental",
+    "invoice_date": "2026-07-08",
+    "due_date": "2026-07-22",
+    "subtotal": 441.86,
+    "tax_amount": 22.09,
+    "total_amount": 463.95,
+    "currency": "GBP",
+    "line_items": [
+      {
+        "description": "Paper A4 box",
+        "quantity": 5.0,
+        "unit_price": 79.01,
+        "total_price": 395.05
+      },
+      {
+        "description": "Consulting hours",
+        "quantity": 1.0,
+        "unit_price": 46.81,
+        "total_price": 46.81
+      }
+    ]
+  }
+}

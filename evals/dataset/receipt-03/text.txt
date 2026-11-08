@@ -1,0 +1,10 @@
+Bluebell Bakery
+Receipt #1003   05/03/2026
+
+3 x Light bulb       @ 7.81  23.43
+3 x Batteries AA     @ 6.77  20.31
+
+Subtotal 43.74
+Sales tax 7% 3.06
+TOTAL 46.80
+Paid by Debit

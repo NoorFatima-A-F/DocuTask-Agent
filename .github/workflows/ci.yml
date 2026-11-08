@@ -42,11 +42,11 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - run: pip install -r requirements-dev.txt
       - name: Ruff lint
-        run: ruff check app tests tooling migrations
+        run: ruff check app tests tooling migrations evals
       - name: Ruff format
-        run: ruff format --check app tests tooling migrations
+        run: ruff format --check app tests tooling migrations evals
       - name: mypy (app strict)
-        run: mypy app tests
+        run: mypy app tests evals
       - name: Migrations on Postgres (upgrade, downgrade, upgrade)
         env:
           DATABASE_URL: postgresql+asyncpg://ci:ci@localhost:5432/ci
@@ -58,6 +58,8 @@ jobs:
         env:
           REDIS_URL: redis://localhost:6379/0
         run: pytest --cov=app --cov-report=term-missing --cov-report=xml --cov-fail-under=80
+      - name: Evaluation gate (routing false-accept rate on the synthetic dataset)
+        run: python evals/run_eval.py --mode routing --gate --out routing-report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:

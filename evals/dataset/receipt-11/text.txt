@@ -1,0 +1,10 @@
+Bluebell Bakery
+Receipt #1011   October 03, 2026
+
+2 x Eggs dozen       @ 9.39  18.78
+2 x Milk 1L          @ 10.89  21.78
+
+Subtotal 40.56
+Sales tax 7% 2.84
+TOTAL 43.40
+Paid by Debit

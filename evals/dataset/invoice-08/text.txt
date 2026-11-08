@@ -1,0 +1,15 @@
+LARCHMONT ELECTRICAL
+INVOICE
+Invoice No: INV-20260008
+Date: 2026-05-02
+Due: 2026-06-01
+Bill to: Aldermoor School
+
+Description            Qty   Unit price   Amount
+Printer toner            3       201.62       604.86
+Delivery fee             5       118.81       594.05
+Paper A4 box             1       392.28       392.28
+
+Subtotal: GBP 1,591.19
+Tax: GBP 127.30
+Total due (GBP): GBP 1,718.49

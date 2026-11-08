@@ -1,0 +1,12 @@
+{
+  "document_type": "utility_bill",
+  "fields": {
+    "utility_company": "Summit Gas & Light",
+    "account_number": "92-511735",
+    "service_address": "661 Elm Street",
+    "bill_date": "2026-09-17",
+    "due_date": "2026-10-08",
+    "amount_due": 41.86,
+    "consumption": "223 kWh"
+  }
+}

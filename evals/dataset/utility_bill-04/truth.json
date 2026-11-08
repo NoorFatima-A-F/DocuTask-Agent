@@ -1,0 +1,12 @@
+{
+  "document_type": "utility_bill",
+  "fields": {
+    "utility_company": "Riverbend Power",
+    "account_number": "23-831756",
+    "service_address": "878 Station Street",
+    "bill_date": "2026-06-12",
+    "due_date": "2026-07-03",
+    "amount_due": 297.55,
+    "consumption": "956 kWh"
+  }
+}

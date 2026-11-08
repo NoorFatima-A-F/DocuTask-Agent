@@ -1,3 +1,0 @@
-{"document_id": "doc_inv_001", "expected_intent": "extract_invoice", "expected_entities": ["vendor_name", "total_amount", "line_items"]}
-{"document_id": "doc_w2_002", "expected_intent": "extract_tax_form", "expected_entities": ["employer_ein", "wages", "federal_tax"]}
-{"document_id": "doc_receipt_003", "expected_intent": "extract_receipt", "expected_entities": ["merchant", "transaction_date", "subtotal"]}

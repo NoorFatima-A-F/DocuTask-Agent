@@ -8,13 +8,13 @@ migrate:
 	alembic upgrade head
 
 lint:
-	ruff check app tests tooling migrations
-	ruff format --check app tests tooling migrations
-	mypy app tests
+	ruff check app tests tooling migrations evals
+	ruff format --check app tests tooling migrations evals
+	mypy app tests evals
 
 format:
-	ruff check --fix app tests tooling migrations
-	ruff format app tests tooling migrations
+	ruff check --fix app tests tooling migrations evals
+	ruff format app tests tooling migrations evals
 
 test:
 	ENVIRONMENT=test pytest --cov=app --cov-report=term-missing --cov-fail-under=80

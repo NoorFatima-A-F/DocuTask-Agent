@@ -1,0 +1,15 @@
+LARCHMONT ELECTRICAL
+INVOICE
+Invoice No: INV-20260004
+Date: 2026-02-22
+Due: 24/03/2026
+Bill to: Ravensdale Cafe
+
+Description            Qty   Unit price   Amount
+Annual license           5       297.11     1,485.55
+Consulting hours         5       150.46       752.30
+Coffee beans 1kg         1       369.72       369.72
+
+Subtotal: EUR 2,607.57
+Tax: EUR 208.61
+Total due (EUR): EUR 2,816.18

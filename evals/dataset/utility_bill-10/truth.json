@@ -1,0 +1,12 @@
+{
+  "document_type": "utility_bill",
+  "fields": {
+    "utility_company": "Clearwell Water Authority",
+    "account_number": "62-958667",
+    "service_address": "366 Mill Street",
+    "bill_date": "2026-03-30",
+    "due_date": "2026-04-20",
+    "amount_due": 428.36,
+    "consumption": "1311 kWh"
+  }
+}

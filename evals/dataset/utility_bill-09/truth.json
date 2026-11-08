@@ -1,0 +1,12 @@
+{
+  "document_type": "utility_bill",
+  "fields": {
+    "utility_company": "Riverbend Power",
+    "account_number": "24-540793",
+    "service_address": "22 Elm Street",
+    "bill_date": "2026-10-23",
+    "due_date": "2026-11-13",
+    "amount_due": 197.75,
+    "consumption": "820 kWh"
+  }
+}

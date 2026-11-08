@@ -1,0 +1,16 @@
+KESTREL OFFICE SUPPLY
+INVOICE
+Invoice No: INV-20260012
+Date: 08/05/2026
+Due: 22/06/2026
+Bill to: Aldermoor School
+
+Description            Qty   Unit price   Amount
+Paper A4 box             1       372.86       372.86
+Coffee beans 1kg         4        51.30       205.20
+Printer toner            3       342.15     1,026.45
+Annual license           4       335.42     1,341.68
+
+Subtotal: $2,946.19
+Tax: $0.00
+Total due (USD): $2,946.19

@@ -1,0 +1,13 @@
+Fenwick Hardware
+Receipt #1007   2026-01-28
+
+2 x Apples 1kg       @ 2.33  4.66
+1 x Batteries AA     @ 0.94  0.94
+2 x Light bulb       @ 2.69  5.38
+3 x Eggs dozen       @ 13.66  40.98
+2 x Sourdough loaf   @ 11.89  23.78
+
+Subtotal 75.74
+Sales tax 7% 5.30
+TOTAL 81.04
+Paid by Cash

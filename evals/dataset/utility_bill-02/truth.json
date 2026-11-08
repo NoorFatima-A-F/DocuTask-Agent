@@ -1,0 +1,12 @@
+{
+  "document_type": "utility_bill",
+  "fields": {
+    "utility_company": "Riverbend Power",
+    "account_number": "29-297540",
+    "service_address": "285 Harbor Street",
+    "bill_date": "2026-05-14",
+    "due_date": "2026-06-04",
+    "amount_due": 169.74,
+    "consumption": "886 kWh"
+  }
+}
