@@ -93,6 +93,10 @@ cd frontend && npm run dev   # UI on :5173, proxies /api to :8000
 
 `make lint`, `make test` and `make test-frontend` run the same checks as CI.
 
+S3 storage is tested through the real boto3 stack against moto's in-memory S3. To run the same
+tests against a real S3-compatible server, set `S3_INTEGRATION_ENDPOINT`, `S3_INTEGRATION_BUCKET`
+and the `AWS_*` credentials, then run `pytest tests/test_s3_integration.py`.
+
 ## Configuration
 
 All settings are environment variables; `.env.example` documents each one. The important ones:
