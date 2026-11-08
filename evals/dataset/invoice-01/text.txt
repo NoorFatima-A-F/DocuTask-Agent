@@ -1,0 +1,15 @@
+HALVORSEN TOOLING
+INVOICE
+Invoice No: INV-20260001
+Date: August 19, 2026
+Due: 02/09/2026
+Bill to: Ravensdale Cafe
+
+Description            Qty   Unit price   Amount
+Paper A4 box             5       306.11     1,530.55
+Coffee beans 1kg         4        37.06       148.24
+Consulting hours         4       281.41     1,125.64
+
+Subtotal: EUR 2,804.43
+Tax: EUR 0.00
+Total due (EUR): EUR 2,804.43

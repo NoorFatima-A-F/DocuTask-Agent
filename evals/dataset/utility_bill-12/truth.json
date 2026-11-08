@@ -1,0 +1,12 @@
+{
+  "document_type": "utility_bill",
+  "fields": {
+    "utility_company": "Riverbend Power",
+    "account_number": "42-933993",
+    "service_address": "261 Mill Street",
+    "bill_date": "2026-09-11",
+    "due_date": "2026-10-02",
+    "amount_due": 110.55,
+    "consumption": "406 kWh"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "document_type": "receipt",
+  "fields": {
+    "store_name": "Saltmarsh Grocers",
+    "transaction_date": "2026-08-06",
+    "subtotal": 34.5,
+    "tax": 2.42,
+    "total_amount": 36.92,
+    "payment_method": "Debit",
+    "line_items": [
+      {
+        "description": "Apples 1kg",
+        "quantity": 1.0,
+        "unit_price": 9.79,
+        "total_price": 9.79
+      },
+      {
+        "description": "Milk 1L",
+        "quantity": 3.0,
+        "unit_price": 4.67,
+        "total_price": 14.01
+      },
+      {
+        "description": "Light bulb",
+        "quantity": 2.0,
+        "unit_price": 5.35,
+        "total_price": 10.7
+      }
+    ]
+  }
+}

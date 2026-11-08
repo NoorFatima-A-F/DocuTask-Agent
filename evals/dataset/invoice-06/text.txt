@@ -1,0 +1,15 @@
+BRIGHTWATER ANALYTICS
+INVOICE
+Invoice No: INV-20260006
+Date: 2026-08-26
+Due: 10/10/2026
+Bill to: Juniper Lane Studio
+
+Description            Qty   Unit price   Amount
+Consulting hours         1       299.27       299.27
+Annual license           2        96.20       192.40
+Coffee beans 1kg         1       265.99       265.99
+
+Subtotal: EUR 757.66
+Tax: EUR 151.53
+Total due (EUR): EUR 909.19

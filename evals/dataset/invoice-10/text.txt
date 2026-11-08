@@ -1,0 +1,15 @@
+LARCHMONT ELECTRICAL
+INVOICE
+Invoice No: INV-20260010
+Date: 07/05/2026
+Due: 21/06/2026
+Bill to: Juniper Lane Studio
+
+Description            Qty   Unit price   Amount
+USB-C hub                4       286.38     1,145.52
+Training session         1       141.14       141.14
+Printer toner            3       304.87       914.61
+
+Subtotal: GBP 2,201.27
+Tax: GBP 440.25
+Total due (GBP): GBP 2,641.52

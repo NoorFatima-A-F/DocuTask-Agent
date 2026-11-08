@@ -1,0 +1,11 @@
+Saltmarsh Grocers
+Receipt #1012   2026-06-05
+
+2 x Light bulb       @ 3.50  7.00
+3 x Sourdough loaf   @ 4.30  12.90
+2 x Tea 80ct         @ 9.24  18.48
+
+Subtotal 38.38
+Sales tax 7% 2.69
+TOTAL 41.07
+Paid by Debit

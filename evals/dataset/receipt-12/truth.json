@@ -1,0 +1,31 @@
+{
+  "document_type": "receipt",
+  "fields": {
+    "store_name": "Saltmarsh Grocers",
+    "transaction_date": "2026-06-05",
+    "subtotal": 38.38,
+    "tax": 2.69,
+    "total_amount": 41.07,
+    "payment_method": "Debit",
+    "line_items": [
+      {
+        "description": "Light bulb",
+        "quantity": 2.0,
+        "unit_price": 3.5,
+        "total_price": 7.0
+      },
+      {
+        "description": "Sourdough loaf",
+        "quantity": 3.0,
+        "unit_price": 4.3,
+        "total_price": 12.9
+      },
+      {
+        "description": "Tea 80ct",
+        "quantity": 2.0,
+        "unit_price": 9.24,
+        "total_price": 18.48
+      }
+    ]
+  }
+}

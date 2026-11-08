@@ -1,0 +1,15 @@
+HALVORSEN TOOLING
+INVOICE
+Invoice No: INV-20260002
+Date: 28/08/2026
+Due: September 11, 2026
+Bill to: Juniper Lane Studio
+
+Description            Qty   Unit price   Amount
+Training session         4       364.72     1,458.88
+Paper A4 box             3        84.81       254.43
+Consulting hours         4       198.19       792.76
+
+Subtotal: EUR 2,506.07
+Tax: EUR 125.30
+Total due (EUR): EUR 2,631.37

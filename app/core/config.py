@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     # Application Info
     APP_NAME: str = "DocuTask Agent"
     PROJECT_NAME: str = "DocuTask Agent"
-    APP_VERSION: str = "1.0.0"
+    APP_VERSION: str = "2.0.0"
     ENVIRONMENT: str = Field(default="development", description="Environment: development, staging, production")
     DEBUG: bool = Field(default=False, description="Debug mode flag")
     LOG_LEVEL: str = Field(default="INFO", description="Logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL")

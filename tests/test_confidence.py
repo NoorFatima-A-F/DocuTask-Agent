@@ -161,3 +161,12 @@ def test_purchase_order_consistency() -> None:
     report, status = run(data, text=text + " 12.00", doc_type="purchase_order")
     assert status == ExtractionStatus.NEEDS_REVIEW
     assert "items_sum_equals_total_cost" in report.to_dict()["failed_checks"]
+
+
+def test_identifier_with_one_wrong_digit_is_not_grounded() -> None:
+    """Found by evals/run_eval.py --mode routing: fuzzy matching accepted INV-...02 for INV-...01."""
+    text = "INVOICE\nInvoice No: INV-20260001\nTotal 10.00"
+    norm = normalise_text(text)
+    assert ground_value("invoice_number", "INV-20260001", text, norm) is True
+    assert ground_value("invoice_number", "INV-20260002", text, norm) is False
+    assert ground_value("vendor_name", "Contoso Ltd.", "Contoso Ltd invoice", normalise_text("Contoso Ltd invoice"))

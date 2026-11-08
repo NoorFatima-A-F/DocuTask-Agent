@@ -1,0 +1,15 @@
+QUILLFEATHER PRINT CO
+INVOICE
+Invoice No: INV-20260003
+Date: February 19, 2026
+Due: 21/03/2026
+Bill to: Pinecrest Dental
+
+Description            Qty   Unit price   Amount
+USB-C hub                5        38.83       194.15
+Printer toner            1       256.43       256.43
+Paper A4 box             3        25.11        75.33
+
+Subtotal: GBP 525.91
+Tax: GBP 105.18
+Total due (GBP): GBP 631.09

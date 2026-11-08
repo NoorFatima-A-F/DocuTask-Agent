@@ -1,0 +1,15 @@
+ORRIN & VALE LOGISTICS
+INVOICE
+Invoice No: INV-20260005
+Date: July 08, 2026
+Due: July 22, 2026
+Bill to: Pinecrest Dental
+
+Description            Qty   Unit price   Amount
+Paper A4 box             5        89.20       446.00
+Consulting hours         2       272.33       544.66
+Annual license           3       188.66       565.98
+
+Subtotal: EUR 1,556.64
+Tax: EUR 0.00
+Total due (EUR): EUR 1,556.64

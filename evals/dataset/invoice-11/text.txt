@@ -1,0 +1,14 @@
+BRIGHTWATER ANALYTICS
+INVOICE
+Invoice No: INV-20260011
+Date: July 08, 2026
+Due: 2026-07-22
+Bill to: Pinecrest Dental
+
+Description            Qty   Unit price   Amount
+Paper A4 box             5        79.01       395.05
+Consulting hours         1        46.81        46.81
+
+Subtotal: GBP 441.86
+Tax: GBP 22.09
+Total due (GBP): GBP 463.95

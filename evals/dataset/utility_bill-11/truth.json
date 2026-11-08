@@ -1,0 +1,12 @@
+{
+  "document_type": "utility_bill",
+  "fields": {
+    "utility_company": "Clearwell Water Authority",
+    "account_number": "98-902216",
+    "service_address": "295 Mill Street",
+    "bill_date": "2026-01-28",
+    "due_date": "2026-02-18",
+    "amount_due": 139.07,
+    "consumption": "768 kWh"
+  }
+}

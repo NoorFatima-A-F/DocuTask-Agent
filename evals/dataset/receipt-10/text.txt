@@ -1,0 +1,11 @@
+Corner Pantry
+Receipt #1010   2026-02-02
+
+1 x Milk 1L          @ 6.74  6.74
+3 x Batteries AA     @ 14.61  43.83
+1 x Eggs dozen       @ 9.76  9.76
+
+Subtotal 60.33
+Sales tax 7% 4.22
+TOTAL 64.55
+Paid by Credit

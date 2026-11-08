@@ -1,0 +1,31 @@
+{
+  "document_type": "receipt",
+  "fields": {
+    "store_name": "Corner Pantry",
+    "transaction_date": "2026-02-02",
+    "subtotal": 60.33,
+    "tax": 4.22,
+    "total_amount": 64.55,
+    "payment_method": "Credit",
+    "line_items": [
+      {
+        "description": "Milk 1L",
+        "quantity": 1.0,
+        "unit_price": 6.74,
+        "total_price": 6.74
+      },
+      {
+        "description": "Batteries AA",
+        "quantity": 3.0,
+        "unit_price": 14.61,
+        "total_price": 43.83
+      },
+      {
+        "description": "Eggs dozen",
+        "quantity": 1.0,
+        "unit_price": 9.76,
+        "total_price": 9.76
+      }
+    ]
+  }
+}

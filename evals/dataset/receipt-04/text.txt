@@ -1,0 +1,12 @@
+Saltmarsh Grocers
+Receipt #1004   September 18, 2026
+
+2 x Tea 80ct         @ 1.12  2.24
+1 x Apples 1kg       @ 11.99  11.99
+3 x Light bulb       @ 1.07  3.21
+3 x Batteries AA     @ 3.19  9.57
+
+Subtotal 27.01
+Sales tax 7% 1.89
+TOTAL 28.90
+Paid by Credit

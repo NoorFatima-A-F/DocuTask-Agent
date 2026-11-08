@@ -1,0 +1,12 @@
+{
+  "document_type": "utility_bill",
+  "fields": {
+    "utility_company": "Clearwell Water Authority",
+    "account_number": "18-555752",
+    "service_address": "413 Elm Street",
+    "bill_date": "2026-09-25",
+    "due_date": "2026-10-16",
+    "amount_due": 107.74,
+    "consumption": "834 kWh"
+  }
+}

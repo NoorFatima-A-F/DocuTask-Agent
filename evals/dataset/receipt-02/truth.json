@@ -1,0 +1,43 @@
+{
+  "document_type": "receipt",
+  "fields": {
+    "store_name": "Bluebell Bakery",
+    "transaction_date": "2026-07-02",
+    "subtotal": 43.6,
+    "tax": 3.05,
+    "total_amount": 46.65,
+    "payment_method": "Cash",
+    "line_items": [
+      {
+        "description": "Batteries AA",
+        "quantity": 2.0,
+        "unit_price": 8.35,
+        "total_price": 16.7
+      },
+      {
+        "description": "Light bulb",
+        "quantity": 2.0,
+        "unit_price": 4.06,
+        "total_price": 8.12
+      },
+      {
+        "description": "Milk 1L",
+        "quantity": 1.0,
+        "unit_price": 2.78,
+        "total_price": 2.78
+      },
+      {
+        "description": "Apples 1kg",
+        "quantity": 1.0,
+        "unit_price": 6.33,
+        "total_price": 6.33
+      },
+      {
+        "description": "Sourdough loaf",
+        "quantity": 1.0,
+        "unit_price": 9.67,
+        "total_price": 9.67
+      }
+    ]
+  }
+}

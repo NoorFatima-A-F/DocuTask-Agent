@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "docutask-agent"
-version = "2.0.0.dev0"
+version = "2.0.0"
 description = "Document extraction service: OCR -> Gemini -> schema validation -> evidence-based confidence -> human review"
 readme = "README.md"
 requires-python = ">=3.12"

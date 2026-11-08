@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased] - remediation
+## [2.0.0] - 2026-11-08
+
+Remediation release: removes fabricated behaviour and simulated features, and makes every
+claim in the README measurable. Upgrade notes: run `alembic upgrade head` (migrations 007-009);
+set `JWT_SECRET` outside development/test; set `REDIS_URL` and run a worker for jobs.
 
 ### Changed (breaking)
 - Extraction no longer fabricates data. A missing Gemini key, any non-200 response, a timeout,
@@ -70,6 +74,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   confidence), simulated upload queue, DLQ screen and `/runtime/*` calls, command palette.
 - Tailwind is compiled at build time (no CDN script). Tests: Vitest + Testing Library unit
   tests and Playwright end-to-end tests against the production build with a stubbed API.
+
+### Evaluation
+- New synthetic dataset (36 documents, `evals/generate.py`, `evals/SOURCES.md`) and
+  `evals/run_eval.py` with `routing` (offline, CI gate), `live` (tesseract + Gemini) and `replay`
+  modes. Routing gate: 0/156 corrupted extractions auto-accepted, 36/36 correct ones accepted.
+- Fixed (found by the eval): values containing digits (invoice/account numbers, addresses) were
+  fuzzy-matched as grounded; they now require an exact match.
+- The previous `evals/` harness and golden file were removed.
+- README rewritten to describe only implemented behaviour; live accuracy is marked unmeasured.
 
 ### Build, CI and tooling
 - Multi-stage Docker image: Node 20 builds the UI, Python 3.12 runtime with tesseract, non-root

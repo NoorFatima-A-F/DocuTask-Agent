@@ -1,0 +1,13 @@
+Saltmarsh Grocers
+Receipt #1005   September 24, 2026
+
+1 x Apples 1kg       @ 5.91  5.91
+3 x Tea 80ct         @ 3.72  11.16
+2 x Milk 1L          @ 14.66  29.32
+2 x Batteries AA     @ 7.11  14.22
+2 x Sourdough loaf   @ 2.33  4.66
+
+Subtotal 65.27
+Sales tax 7% 4.57
+TOTAL 69.84
+Paid by Debit

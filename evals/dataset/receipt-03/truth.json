@@ -1,0 +1,25 @@
+{
+  "document_type": "receipt",
+  "fields": {
+    "store_name": "Bluebell Bakery",
+    "transaction_date": "2026-03-05",
+    "subtotal": 43.74,
+    "tax": 3.06,
+    "total_amount": 46.8,
+    "payment_method": "Debit",
+    "line_items": [
+      {
+        "description": "Light bulb",
+        "quantity": 3.0,
+        "unit_price": 7.81,
+        "total_price": 23.43
+      },
+      {
+        "description": "Batteries AA",
+        "quantity": 3.0,
+        "unit_price": 6.77,
+        "total_price": 20.31
+      }
+    ]
+  }
+}

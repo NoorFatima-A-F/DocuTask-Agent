@@ -1,0 +1,34 @@
+{
+  "document_type": "invoice",
+  "fields": {
+    "invoice_number": "INV-20260001",
+    "vendor_name": "Halvorsen Tooling",
+    "customer_name": "Ravensdale Cafe",
+    "invoice_date": "2026-08-19",
+    "due_date": "2026-09-02",
+    "subtotal": 2804.43,
+    "tax_amount": 0.0,
+    "total_amount": 2804.43,
+    "currency": "EUR",
+    "line_items": [
+      {
+        "description": "Paper A4 box",
+        "quantity": 5.0,
+        "unit_price": 306.11,
+        "total_price": 1530.55
+      },
+      {
+        "description": "Coffee beans 1kg",
+        "quantity": 4.0,
+        "unit_price": 37.06,
+        "total_price": 148.24
+      },
+      {
+        "description": "Consulting hours",
+        "quantity": 4.0,
+        "unit_price": 281.41,
+        "total_price": 1125.64
+      }
+    ]
+  }
+}

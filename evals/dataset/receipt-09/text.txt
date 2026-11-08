@@ -1,0 +1,13 @@
+Saltmarsh Grocers
+Receipt #1009   2026-05-18
+
+3 x Batteries AA     @ 2.40  7.20
+3 x Milk 1L          @ 0.78  2.34
+3 x Eggs dozen       @ 14.58  43.74
+2 x Apples 1kg       @ 4.96  9.92
+2 x Tea 80ct         @ 9.58  19.16
+
+Subtotal 82.36
+Sales tax 7% 5.77
+TOTAL 88.13
+Paid by Debit

@@ -1,0 +1,15 @@
+MOSSGROVE CATERING
+INVOICE
+Invoice No: INV-20260007
+Date: 2026-05-03
+Due: 02/06/2026
+Bill to: Pinecrest Dental
+
+Description            Qty   Unit price   Amount
+Annual license           2       292.64       585.28
+Training session         2       169.14       338.28
+USB-C hub                1       264.50       264.50
+
+Subtotal: $1,188.06
+Tax: $0.00
+Total due (USD): $1,188.06

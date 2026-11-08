@@ -1,0 +1,15 @@
+LARCHMONT ELECTRICAL
+INVOICE
+Invoice No: INV-20260009
+Date: 2026-01-16
+Due: 2026-02-15
+Bill to: Ravensdale Cafe
+
+Description            Qty   Unit price   Amount
+Delivery fee             5       275.17     1,375.85
+USB-C hub                3        25.20        75.60
+Printer toner            2        23.53        47.06
+
+Subtotal: GBP 1,498.51
+Tax: GBP 119.88
+Total due (GBP): GBP 1,618.39
