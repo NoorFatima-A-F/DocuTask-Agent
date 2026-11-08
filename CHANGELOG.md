@@ -59,6 +59,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - docker-compose: secrets are required from the environment (no hard-coded JWT secret or DB
   password), a `worker` service was added, Postgres/Redis ports are no longer published.
 
+### Changed (frontend)
+- The web UI was rewritten against the real API (~1.1k lines replacing ~6k lines of simulated
+  screens). Upload -> `POST /jobs` -> polling `GET /jobs/{id}` until COMPLETED / NEEDS_REVIEW /
+  FAILED; results show per-field grounding ("Found in document" / "Not found in document"),
+  failed consistency checks and OCR confidence; NEEDS_REVIEW results are labelled not final.
+  Reviewers get a queue and a review page (document preview, OCR text, editable fields,
+  approve with typed corrections, reject with reason). Failures show the backend error code.
+- Removed: demo job/document IDs, hard-coded fallback telemetry (e.g. 1,284 documents, 94.2%
+  confidence), simulated upload queue, DLQ screen and `/runtime/*` calls, command palette.
+- Tailwind is compiled at build time (no CDN script). Tests: Vitest + Testing Library unit
+  tests and Playwright end-to-end tests against the production build with a stubbed API.
+
 ### Security
 - Rate limiting: client IP is the TCP peer unless it is in `TRUSTED_PROXIES` (then the right-most
   untrusted `X-Forwarded-For` hop), so a spoofed header no longer resets limits. Every `/api/`

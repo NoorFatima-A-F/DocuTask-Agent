@@ -8,8 +8,7 @@ lerna-debug.log*
 
 # Dependencies
 node_modules/
-dist/*
-!dist/index.html
+dist/
 dist-ssr/
 *.local
 
@@ -33,3 +32,8 @@ dist-ssr/
 
 # Vite cache
 .vite/
+
+# Test output
+test-results/
+playwright-report/
+coverage/

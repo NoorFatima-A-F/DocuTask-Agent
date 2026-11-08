@@ -112,13 +112,11 @@ def create_application() -> FastAPI:
         return Response(status_code=status.HTTP_204_NO_CONTENT)
 
     # Root route and SPA Catch-all routes serving HITL Frontend Dashboard
+    # Client-side routes of the SPA (frontend/src/router.ts)
     @app.get("/", include_in_schema=False)
-    @app.get("/upload", include_in_schema=False)
-    @app.get("/jobs", include_in_schema=False)
     @app.get("/jobs/{job_id}", include_in_schema=False)
-    @app.get("/documents/{document_id}/review", include_in_schema=False)
-    @app.get("/reviewer", include_in_schema=False)
-    @app.get("/dashboard", include_in_schema=False)
+    @app.get("/reviews", include_in_schema=False)
+    @app.get("/reviews/{extraction_id}", include_in_schema=False)
     async def serve_frontend():
         index_file = find_frontend_index()
         if index_file:
