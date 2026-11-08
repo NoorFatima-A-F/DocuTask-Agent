@@ -31,23 +31,11 @@ DUMMY = "00000000-0000-0000-0000-000000000001"
 APP_DIR = Path(__file__).resolve().parent.parent / "app"
 
 
-def _operations() -> list[tuple[str, str]]:
-    """Every API operation: documented routes plus hidden aliases under the API prefix.
-
-    The SPA shell routes (``/``, ``/upload`` ...) only serve static HTML and are public by design.
-    """
-    ops = []
-    for path, methods, in_schema in _api_routes():
-        if in_schema or path.startswith(settings.API_V1_STR):
-            ops.extend((method, path) for method in sorted(methods))
-    return ops
-
-
 def _api_routes() -> list[tuple[str, frozenset[str], bool]]:
-    """(path, methods, include_in_schema) for every APIRoute, however the app nests routers.
+    """(path, methods, include_in_schema) for every API route.
 
-    FastAPI >= 0.16x keeps included routers nested, so ``app.routes`` no longer lists their
-    routes; ``iter_route_contexts`` walks them with the full path. Older FastAPI flattens them.
+    FastAPI >= 0.16x keeps included routers as nested objects instead of flattening them into
+    ``app.routes``; ``iter_route_contexts`` walks both layouts.
     """
     iter_contexts = getattr(fastapi.routing, "iter_route_contexts", None)
     if iter_contexts is not None:
@@ -59,32 +47,40 @@ def _api_routes() -> list[tuple[str, frozenset[str], bool]]:
     return [(r.path, frozenset(r.methods or ()), r.include_in_schema) for r in app.routes if isinstance(r, APIRoute)]
 
 
-def _schema_operations() -> set[tuple[str, str]]:
-    return {
+def _operations() -> list[tuple[str, str]]:
+    """Every API operation: documented routes plus hidden aliases under the API prefix.
+
+    The SPA shell routes (``/``, ``/jobs/{id}`` ...) only serve static HTML and are public by design.
+    """
+    return sorted(
+        (method, path)
+        for path, methods, in_schema in _api_routes()
+        if in_schema or path.startswith(settings.API_V1_STR)
+        for method in methods
+    )
+
+
+def _schema_operations() -> list[tuple[str, str]]:
+    return [
         (m.upper(), p)
         for p, item in app.openapi()["paths"].items()
         for m in item
         if m in {"get", "post", "put", "patch", "delete"}
-    }
+    ]
+
+
+def test_route_discovery_sees_every_documented_operation() -> None:
+    """If route discovery breaks (e.g. a FastAPI upgrade), the auth test below would silently shrink."""
+    assert set(_schema_operations()) <= set(_operations())
 
 
 def test_operation_budget() -> None:
-    schema_ops = [
-        (m, p)
-        for p, item in app.openapi()["paths"].items()
-        for m in item
-        if m in {"get", "post", "put", "patch", "delete"}
-    ]
+    schema_ops = _schema_operations()
     assert len(schema_ops) <= MAX_OPERATIONS, f"{len(schema_ops)} operations > {MAX_OPERATIONS}"
 
 
 def test_public_allowlist_routes_exist() -> None:
     assert set(_operations()) >= PUBLIC
-
-
-def test_route_discovery_sees_every_documented_operation() -> None:
-    """If route discovery silently finds nothing, the auth guard below would test nothing."""
-    assert _schema_operations() <= set(_operations())
 
 
 @pytest.mark.parametrize(("method", "path"), [op for op in _operations() if op not in PUBLIC])
