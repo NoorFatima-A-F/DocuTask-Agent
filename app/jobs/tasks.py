@@ -34,7 +34,8 @@ def build_dependencies() -> JobDependencies:
 def retry_delay(retries_so_far: int, retry_after: float | None) -> float:
     """Exponential backoff with jitter, never shorter than the provider's Retry-After."""
     backoff = min(BACKOFF_BASE_SECONDS * 2**retries_so_far, BACKOFF_CAP_SECONDS)
-    backoff += random.uniform(0, BACKOFF_BASE_SECONDS)  # nosec B311 - jitter, not crypto
+    # Jitter only; not security-sensitive.
+    backoff += random.uniform(0, BACKOFF_BASE_SECONDS)  # nosec B311
     return max(backoff, retry_after or 0.0)
 
 

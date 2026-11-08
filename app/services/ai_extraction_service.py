@@ -136,7 +136,7 @@ class AIExtractionService:
                     delay = min(exc.retry_after, self.BACKOFF_CAP_SECONDS)
                 else:
                     delay = min(self.BACKOFF_BASE_SECONDS * 2 ** (attempt - 1), self.BACKOFF_CAP_SECONDS)
-                delay += random.uniform(0, self.BACKOFF_BASE_SECONDS)  # nosec B311 - jitter, not crypto
+                delay += random.uniform(0, self.BACKOFF_BASE_SECONDS)  # nosec B311
                 logger.warning(
                     "Transient LLM error %s (attempt %d/%d); retrying in %.1fs",
                     exc.error_code,
@@ -194,8 +194,9 @@ class AIExtractionService:
         if not doc_content.text or not doc_content.text.strip():
             raise OCRError(ErrorCode.OCR_NO_TEXT)
 
-        system_instruction = PromptBuilder.build_system_instruction(doc_type)
-        user_prompt = PromptBuilder.build_prompt(doc_content.text, doc_type)
+        boundary = PromptBuilder.new_boundary()
+        system_instruction = PromptBuilder.build_system_instruction(doc_type, boundary)
+        user_prompt = PromptBuilder.build_prompt(doc_content.text, doc_type, boundary)
         json_schema = PromptBuilder.get_json_schema(doc_type)
 
         current_prompt = user_prompt
@@ -230,7 +231,8 @@ class AIExtractionService:
                     f"({exc.message}). Respond again with a single JSON object that conforms to the schema."
                 )
 
-        assert validated is not None  # loop either broke with a value or raised
+        if validated is None:  # unreachable: the loop either breaks with a value or raises
+            raise LLMError(ErrorCode.LLM_INVALID_OUTPUT)
         threshold = settings.CONFIDENCE_THRESHOLD_HITL
         report = assess(doc_type, validated, doc_content.text, doc_content.average_confidence, threshold)
         status = routing_status(report, threshold)

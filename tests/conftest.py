@@ -116,3 +116,16 @@ def mock_celery():
     celery_mock = MagicMock()
     celery_mock.send_task.return_value = MagicMock(id="mock-task-id")
     return celery_mock
+
+
+@pytest.fixture(autouse=True)
+def _reset_rate_limiter():
+    """Each test starts with empty in-process counters (no Redis) and a frozen limiter clock,
+    so a fixed window never rolls over mid-test (that made rate-limit tests flaky)."""
+    from app.middleware.rate_limit import rate_limiter
+
+    rate_limiter.memory.clear()
+    saved_redis, rate_limiter.redis = rate_limiter.redis, None
+    saved_clock, rate_limiter.memory.clock = rate_limiter.memory.clock, lambda: 1_800_000_030.0
+    yield
+    rate_limiter.redis, rate_limiter.memory.clock = saved_redis, saved_clock

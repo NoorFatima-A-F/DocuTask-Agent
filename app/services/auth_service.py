@@ -108,7 +108,7 @@ class AuthService:
         return TokenResponse(
             access_token=access_token,
             refresh_token=raw_refresh_token,
-            token_type="bearer",
+            token_type="bearer",  # nosec B106
             expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         )
 
@@ -155,7 +155,7 @@ class AuthService:
         return TokenResponse(
             access_token=new_access_token,
             refresh_token=new_raw_refresh_token,
-            token_type="bearer",
+            token_type="bearer",  # nosec B106
             expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         )
 

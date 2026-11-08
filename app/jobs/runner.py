@@ -111,7 +111,8 @@ async def execute_job(
         except ExtractionError as exc:
             await db.rollback()
             job = await jobs.get_by_id(job_id)
-            assert job is not None  # nosec B101 - row existed at the start of this session
+            if job is None:  # deleted while running
+                return None
             retry = exc.transient and not final_attempt and job.attempts < job.max_attempts
             _finish(job, JobStatus.RETRYING if retry else JobStatus.FAILED, exc.error_code, exc.message)
             await db.commit()
@@ -123,7 +124,8 @@ async def execute_job(
             await db.rollback()
             logger.exception("Job %s failed with an unexpected error", job_id)
             job = await jobs.get_by_id(job_id)
-            assert job is not None  # nosec B101
+            if job is None:
+                return None
             _finish(job, JobStatus.FAILED, ErrorCode.JOB_INTERNAL_ERROR.value, f"{type(exc).__name__}: {exc}")
             await db.commit()
             return job.status

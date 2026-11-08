@@ -70,7 +70,7 @@ class ReviewService:
         doc = await self.db.get(Document, record.document_id)
         if doc is None:
             raise ResourceNotFoundException("Document not found")
-        return doc.absolute_path, doc.mime_type, doc.original_filename
+        return doc.relative_path, doc.mime_type, doc.original_filename
 
     async def approve(self, extraction_id: UUID, reviewer: User, corrections: Optional[Dict[str, Any]]) -> AIExtraction:
         record = await self._pending(extraction_id)

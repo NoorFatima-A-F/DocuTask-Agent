@@ -22,6 +22,8 @@ from app.dependencies.auth import RoleChecker
 from app.models.ai_extraction import AIExtraction
 from app.models.user import User
 from app.schemas.response import APIResponse
+from app.dependencies.storage import get_storage_provider
+from app.storage.base import StorageProvider
 from app.services.review_service import ReviewService
 
 require_reviewer = RoleChecker(["reviewer"])
@@ -140,8 +142,13 @@ async def get_review(
 
 
 @router.get("/{extraction_id}/document", summary="Download the source document", response_class=FileResponse)
-async def download_document(extraction_id: UUID, service: ReviewService = Depends(get_review_service)) -> FileResponse:
-    path, mime, filename = await service.get_document_path(extraction_id)
+async def download_document(
+    extraction_id: UUID,
+    service: ReviewService = Depends(get_review_service),
+    storage: StorageProvider = Depends(get_storage_provider),
+) -> FileResponse:
+    relative_path, mime, filename = await service.get_document_path(extraction_id)
+    path = storage.get_absolute_path(relative_path)  # confined to the storage root
     if not os.path.isfile(path):
         raise ResourceNotFoundException("Document file not found")
     return FileResponse(path, media_type=mime, filename=filename)
