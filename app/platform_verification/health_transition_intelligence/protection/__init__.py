@@ -1,5 +1,0 @@
-from app.platform_verification.health_transition_intelligence.protection.cascading_failure_protector import (
-    CascadingFailureProtector,
-)
-
-__all__ = ["CascadingFailureProtector"]

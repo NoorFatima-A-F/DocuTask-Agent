@@ -1,8 +1,0 @@
-{
-  "build_timestamp": "2026-10-03T16:31:03.670329+00:00",
-  "configuration_hash": "0146d5d3807203550473e2886ee8831258e127e2206a1e7fac8ee1103b1b7f83",
-  "dependencies_hash": "72018d65d5ae11ec00c2447c97da25bc384cfd27d366214edca8f682c653d80a",
-  "engine_version": "2.1.0",
-  "git_commit": "a718ca60da6e93c0ccbc1cd89114ca2e8dfc5c17",
-  "python_version": "3.12.1"
-}

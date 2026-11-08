@@ -14,7 +14,8 @@ from app.ocr.schemas import DocumentContent, PageContent
 from app.schemas.response import APIResponse
 from app.services.ocr_service import OCRService
 
-router = APIRouter(prefix="/ocr", tags=["OCR & Text Extraction"])
+# Every route requires an authenticated, active user (new endpoints are protected by default).
+router = APIRouter(prefix="/ocr", tags=["OCR & Text Extraction"], dependencies=[Depends(get_current_active_user)])
 
 
 @router.post(

@@ -48,7 +48,7 @@ def test_password_policy_strict_enforcement():
 @pytest.mark.asyncio
 async def test_security_headers_presence(client: AsyncClient):
     """Verifies OWASP security headers attached to every HTTP response."""
-    response = await client.get("/api/v1/health")
+    response = await client.get("/healthz")
     assert response.status_code == 200
 
     headers = response.headers

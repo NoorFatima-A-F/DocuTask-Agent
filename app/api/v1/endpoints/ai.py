@@ -14,7 +14,8 @@ from app.ai.schemas import ExtractionRequest, ExtractionResponse
 from app.schemas.response import APIResponse
 from app.services.ai_extraction_service import AIExtractionService
 
-router = APIRouter(prefix="/ai", tags=["AI Engine Extraction"])
+# Every route requires an authenticated, active user (new endpoints are protected by default).
+router = APIRouter(prefix="/ai", tags=["AI Engine Extraction"], dependencies=[Depends(get_current_active_user)])
 
 
 @router.post(

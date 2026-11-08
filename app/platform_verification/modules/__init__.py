@@ -1,3 +1,0 @@
-"""
-Modular Verification Bounded Contexts.
-"""

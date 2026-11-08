@@ -9,15 +9,10 @@ from httpx import AsyncClient
 
 @pytest.mark.asyncio
 async def test_health_check_endpoint(client: AsyncClient):
-    """Verifies health check endpoint returns 200 and standard success envelope."""
-    response = await client.get("/api/v1/health")
+    """Liveness probe is public and returns 200."""
+    response = await client.get("/healthz")
     assert response.status_code == 200
-
-    data = response.json()
-    assert data["success"] is True
-    assert data["message"] == "System operating normally"
-    assert data["data"]["status"] == "healthy"
-    assert data["errors"] is None
+    assert response.json()["status"] == "alive"
 
 
 @pytest.mark.asyncio
@@ -89,7 +84,12 @@ async def test_auth_api_full_workflow(client: AsyncClient):
     latest_tokens = login_new_pwd.json()["data"]
 
     # 6. Logout
-    logout_res = await client.post("/api/v1/auth/logout", json={"refresh_token": latest_tokens["refresh_token"]})
+    latest_headers = {"Authorization": f"Bearer {latest_tokens['access_token']}"}
+    unauth_logout = await client.post("/api/v1/auth/logout", json={"refresh_token": latest_tokens["refresh_token"]})
+    assert unauth_logout.status_code == 401  # logout requires an access token
+    logout_res = await client.post(
+        "/api/v1/auth/logout", json={"refresh_token": latest_tokens["refresh_token"]}, headers=latest_headers
+    )
     assert logout_res.status_code == 200
 
     # 7. Logout All Sessions
