@@ -5,19 +5,18 @@ All routes require the ``reviewer`` role (admins and superusers inherit it).
 
 from __future__ import annotations
 
-import asyncio
 import json
-import os
 from datetime import datetime
 from typing import Any
+from urllib.parse import quote
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query
-from fastapi.responses import FileResponse
+from fastapi.responses import Response
 from pydantic import BaseModel, Field
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.exceptions import ResourceNotFoundException
+from app.core.exceptions import ResourceNotFoundException, ValidationAppException
 from app.database.session import get_db
 from app.dependencies.auth import RoleChecker
 from app.dependencies.storage import get_storage_provider
@@ -142,17 +141,19 @@ async def get_review(
     return APIResponse.success_response(data=await _detail(service, extraction_id))
 
 
-@router.get("/{extraction_id}/document", summary="Download the source document", response_class=FileResponse)
+@router.get("/{extraction_id}/document", summary="Download the source document", response_class=Response)
 async def download_document(
     extraction_id: UUID,
     service: ReviewService = Depends(get_review_service),
     storage: StorageProvider = Depends(get_storage_provider),
-) -> FileResponse:
+) -> Response:
     relative_path, mime, filename = await service.get_document_path(extraction_id)
-    path = storage.get_absolute_path(relative_path)  # confined to the storage root
-    if not await asyncio.to_thread(os.path.isfile, path):
-        raise ResourceNotFoundException("Document file not found")
-    return FileResponse(path, media_type=mime, filename=filename)
+    try:
+        content = await storage.read(relative_path)  # local: confined to the root; s3: confined to the prefix
+    except ValidationAppException as exc:
+        raise ResourceNotFoundException("Document file not found") from exc
+    disposition = f"attachment; filename*=UTF-8''{quote(filename or 'document')}"
+    return Response(content=content, media_type=mime, headers={"Content-Disposition": disposition})
 
 
 @router.post(

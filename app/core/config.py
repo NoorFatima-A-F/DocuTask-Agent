@@ -5,7 +5,7 @@ typing, validation, and secure defaults via Pydantic Settings.
 """
 
 from datetime import date
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
@@ -112,6 +112,12 @@ class Settings(BaseSettings):
         return url
 
     @model_validator(mode="after")
+    def _require_bucket_for_s3(self) -> "Settings":
+        if self.STORAGE_BACKEND == "s3" and not (self.S3_BUCKET or "").strip():
+            raise ValueError("STORAGE_BACKEND=s3 requires S3_BUCKET")
+        return self
+
+    @model_validator(mode="after")
     def _refuse_weak_jwt_secret_outside_dev(self) -> "Settings":
         """Fail at startup if a non-dev/test environment uses the default or a short JWT secret."""
         if self.ENVIRONMENT.strip().lower() in INSECURE_SECRET_ENVIRONMENTS:
@@ -131,6 +137,15 @@ class Settings(BaseSettings):
         return (self.GEMINI_API_KEY or "").strip() or (self.GOOGLE_API_KEY or "").strip() or None
 
     # Storage & Cache Configuration
+    STORAGE_BACKEND: Literal["local", "s3"] = Field(
+        default="local",
+        description="local: files on this machine's disk (API and worker must share it). "
+        "s3: S3-compatible bucket, required when the API and worker run on different machines.",
+    )
+    S3_BUCKET: str | None = None
+    S3_PREFIX: str = "documents/"
+    S3_ENDPOINT_URL: str | None = Field(default=None, description="For R2/MinIO/B2; empty for AWS S3")
+    S3_REGION: str | None = None
     STORAGE_LOCAL_PATH: str = "./uploads"
     STORAGE_LOCAL_DIR: str = "./uploads"
     MAX_UPLOAD_SIZE_MB: int = 50

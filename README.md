@@ -49,6 +49,7 @@ Browser (React)  ──>  FastAPI  ──>  Postgres/SQLite   (documents, OCR te
   transient errors (rate limit, unavailable, timeout), honouring `Retry-After`.
 - `app/ai` – Gemini provider, prompts, schemas, validation, confidence.
 - `app/ocr` – tesseract and PDF text extraction.
+- `app/storage` – uploaded files on local disk or in an S3-compatible bucket.
 - `frontend/` – upload, job progress, results with per-field evidence, review queue.
 
 ## Quick start (Docker Compose)
@@ -102,6 +103,7 @@ All settings are environment variables; `.env.example` documents each one. The i
 | `GEMINI_API_KEY` | Gemini key (falls back to `GOOGLE_API_KEY`). |
 | `GEMINI_MODEL` | Model ID, default `gemini-3.8-flash`. Cost is reported only for models in the dated price table in `app/core/config.py`; otherwise it is null. |
 | `DATABASE_URL` | `sqlite+aiosqlite:///...` or Postgres (`postgres://` URLs are accepted). |
+| `STORAGE_BACKEND` | `local` (disk shared by API and worker) or `s3` (any S3-compatible bucket: `S3_BUCKET`, `S3_REGION`, `S3_ENDPOINT_URL`, standard `AWS_*` credentials). |
 | `REDIS_URL` | Celery broker and shared rate-limit counters. Without it, job submission returns 503 `QUEUE_UNAVAILABLE`. |
 | `CONFIDENCE_THRESHOLD_HITL` | Scores below this (default 0.85) go to review. |
 | `TRUSTED_PROXIES` | CIDRs of your reverse proxies; only then is `X-Forwarded-For` used for rate limiting. |
@@ -125,9 +127,8 @@ All routes except `/healthz`, `/readyz` and `auth/login|register|refresh` requir
   first argument or `ROLE`: `web` (default; migrates then serves), `worker`, `all-in-one`.
 - **Hugging Face Spaces**: set `ROLE=all-in-one` plus `JWT_SECRET`, `GEMINI_API_KEY` and
   `ENVIRONMENT=production` as Space secrets. Storage and the SQLite file are ephemeral there.
-- **Render** (`render.yaml`): web + worker + Postgres + Redis. Known limitation: uploads live on
-  the web service's disk, which the worker cannot read; background jobs on Render need shared
-  object storage, which is not implemented.
+- **Render** (`render.yaml`): web + worker + Postgres + Redis, with uploads in an S3-compatible
+  bucket (`STORAGE_BACKEND=s3`) because the services do not share a disk.
 
 ## Evaluation
 

@@ -75,6 +75,13 @@ set `JWT_SECRET` outside development/test; set `REDIS_URL` and run a worker for 
 - Tailwind is compiled at build time (no CDN script). Tests: Vitest + Testing Library unit
   tests and Playwright end-to-end tests against the production build with a stubbed API.
 
+### Storage
+- `STORAGE_BACKEND=s3` stores uploads in an S3-compatible bucket (AWS S3, R2, MinIO, B2) so the
+  API and the worker can run on different machines; Render uses it. Keys are confined to
+  `S3_PREFIX`, objects are written with server-side encryption, credentials come from the
+  standard AWS chain. Review downloads are served through the storage provider instead of a
+  local file path. `/readyz` reports `STORAGE_UNAVAILABLE` when the bucket or directory is unusable.
+
 ### Evaluation
 - New synthetic dataset (36 documents, `evals/generate.py`, `evals/SOURCES.md`) and
   `evals/run_eval.py` with `routing` (offline, CI gate), `live` (tesseract + Gemini) and `replay`
