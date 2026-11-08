@@ -277,9 +277,13 @@ def test_celery_task_retries_transient_errors_in_eager_mode(tmp_path: Path, monk
     monkeypatch.setattr(settings, "DATABASE_URL", db_url)
     monkeypatch.setattr(tasks, "build_dependencies", lambda: deps)
     monkeypatch.setattr(tasks, "retry_delay", lambda *_: 0)
-    monkeypatch.setattr(celery_app.conf, "task_always_eager", True)
-
-    tasks.run_extraction.apply(args=[str(job_id)])
+    # Celery's Settings object does not support monkeypatch's setattr/delattr undo; restore explicitly.
+    previous = celery_app.conf.task_always_eager
+    celery_app.conf.task_always_eager = True
+    try:
+        tasks.run_extraction.apply(args=[str(job_id)])
+    finally:
+        celery_app.conf.task_always_eager = previous
 
     job = asyncio.run(load(job_id))
     assert (job.status, job.attempts, job.error_code) == ("COMPLETED", 3, None)
