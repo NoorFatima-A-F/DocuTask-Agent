@@ -56,8 +56,10 @@ async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient, None]:
 
 @pytest.fixture(autouse=True)
 def _reset_rate_limiter() -> Iterator[None]:
-    """Each test starts with empty in-process rate-limit counters (no Redis)."""
+    """Each test starts with empty in-process counters (no Redis) and a frozen limiter clock,
+    so a fixed window never rolls over mid-test (that made rate-limit tests flaky)."""
     rate_limiter.memory.clear()
-    saved, rate_limiter.redis = rate_limiter.redis, None
+    saved_redis, rate_limiter.redis = rate_limiter.redis, None
+    saved_clock, rate_limiter.memory.clock = rate_limiter.memory.clock, lambda: 1_800_000_030.0
     yield
-    rate_limiter.redis = saved
+    rate_limiter.redis, rate_limiter.memory.clock = saved_redis, saved_clock

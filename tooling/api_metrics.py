@@ -82,23 +82,32 @@ def main(argv: list[str] | None = None) -> int:
     paths = schema.get("paths", {})
     ops = [(m.upper(), p) for p, item in paths.items() for m in item if m in {"get", "post", "put", "patch", "delete"}]
 
+    import fastapi.routing
+
+    # FastAPI >= 0.16x nests included routers; iter_route_contexts walks both layouts.
+    iter_contexts = getattr(fastapi.routing, "iter_route_contexts", None)
+    routes = (
+        [(c.path, c.methods, c.route) for c in iter_contexts(app.routes)]
+        if iter_contexts
+        else [(r.path, getattr(r, "methods", None), r) for r in app.routes]
+    )
     unprotected: list[tuple[str, str]] = []
-    for route in app.routes:
+    for path, methods, route in routes:
         if not isinstance(route, APIRoute) or not route.include_in_schema:
             continue
         protected = bool(_dep_names(route.dependant) & AUTH_DEPENDENCY_NAMES)
         if not protected:
-            for method in sorted(route.methods or []):
-                unprotected.append((method, route.path))
+            for method in sorted(methods or []):
+                unprotected.append((method, path))
 
     print(f"app_import_seconds: {import_s:.2f}")
     print(f"api_paths: {len(paths)}")
     print(f"api_operations: {len(ops)}")
     print(f"operations_without_auth_dependency: {len(unprotected)}")
     files = {
-        Path(sys.modules[r.endpoint.__module__].__file__ or "").as_posix()
-        for r in app.routes
-        if isinstance(r, APIRoute) and (sorted(r.methods or [""])[0], r.path) in set(unprotected)
+        Path(sys.modules[route.endpoint.__module__].__file__ or "").as_posix()
+        for path, methods, route in routes
+        if isinstance(route, APIRoute) and (sorted(methods or [""])[0], path) in set(unprotected)
     }
     print(f"route_modules_with_unprotected_operations: {len(files)}")
 

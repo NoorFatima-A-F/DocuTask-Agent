@@ -10,6 +10,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+import fastapi.routing
 import pytest
 from fastapi.routing import APIRoute
 from httpx import AsyncClient
@@ -30,26 +31,51 @@ DUMMY = "00000000-0000-0000-0000-000000000001"
 APP_DIR = Path(__file__).resolve().parent.parent / "app"
 
 
+def _api_routes() -> list[tuple[str, frozenset[str], bool]]:
+    """(path, methods, include_in_schema) for every API route.
+
+    FastAPI >= 0.16x keeps included routers as nested objects instead of flattening them into
+    ``app.routes``; ``iter_route_contexts`` walks both layouts.
+    """
+    iter_contexts = getattr(fastapi.routing, "iter_route_contexts", None)
+    if iter_contexts is not None:
+        return [
+            (c.path, frozenset(c.methods or ()), c.route.include_in_schema)
+            for c in iter_contexts(app.routes)
+            if isinstance(c.route, APIRoute)
+        ]
+    return [(r.path, frozenset(r.methods or ()), r.include_in_schema) for r in app.routes if isinstance(r, APIRoute)]
+
+
 def _operations() -> list[tuple[str, str]]:
     """Every API operation: documented routes plus hidden aliases under the API prefix.
 
-    The SPA shell routes (``/``, ``/upload`` ...) only serve static HTML and are public by design.
+    The SPA shell routes (``/``, ``/jobs/{id}`` ...) only serve static HTML and are public by design.
     """
-    ops = []
-    for route in app.routes:
-        if isinstance(route, APIRoute) and (route.include_in_schema or route.path.startswith(settings.API_V1_STR)):
-            for method in sorted(route.methods or []):
-                ops.append((method, route.path))
-    return ops
+    return sorted(
+        (method, path)
+        for path, methods, in_schema in _api_routes()
+        if in_schema or path.startswith(settings.API_V1_STR)
+        for method in methods
+    )
 
 
-def test_operation_budget() -> None:
-    schema_ops = [
-        (m, p)
+def _schema_operations() -> list[tuple[str, str]]:
+    return [
+        (m.upper(), p)
         for p, item in app.openapi()["paths"].items()
         for m in item
         if m in {"get", "post", "put", "patch", "delete"}
     ]
+
+
+def test_route_discovery_sees_every_documented_operation() -> None:
+    """If route discovery breaks (e.g. a FastAPI upgrade), the auth test below would silently shrink."""
+    assert set(_schema_operations()) <= set(_operations())
+
+
+def test_operation_budget() -> None:
+    schema_ops = _schema_operations()
     assert len(schema_ops) <= MAX_OPERATIONS, f"{len(schema_ops)} operations > {MAX_OPERATIONS}"
 
 

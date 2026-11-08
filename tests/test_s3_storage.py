@@ -41,9 +41,11 @@ async def test_round_trip_and_delete() -> None:
     assert fake.objects[("docs", key)]["ContentType"] == "application/pdf"
     assert await storage.read(key) == b"%PDF-1.7 data"
     assert await storage.exists(key)
-    assert await storage.delete(key) is True
+    deleted = await storage.delete(key)
+    assert deleted is True
     assert not await storage.exists(key)
-    assert await storage.delete(key) is False
+    deleted_again = await storage.delete(key)
+    assert deleted_again is False
 
 
 async def test_missing_object_raises_the_same_error_as_local_storage() -> None:
@@ -84,9 +86,18 @@ def test_backend_selection(monkeypatch: pytest.MonkeyPatch) -> None:
     assert isinstance(provider, S3StorageProvider) and provider.bucket == "docs"
 
 
+def _available_ocr() -> FakeOCRProvider:
+    return FakeOCRProvider()
+
+
+def _missing_bucket() -> S3StorageProvider:
+    return _s3(bucket="missing")
+
+
 async def test_readyz_reports_storage_unavailable(client: AsyncClient) -> None:
-    app.dependency_overrides[get_ocr_provider] = lambda: FakeOCRProvider()
-    app.dependency_overrides[get_storage_provider] = lambda: _s3(bucket="missing")
+    # Named factories, not the class itself: FastAPI would treat FakeOCRProvider.__init__ args as query params.
+    app.dependency_overrides[get_ocr_provider] = _available_ocr
+    app.dependency_overrides[get_storage_provider] = _missing_bucket
     res = await client.get("/readyz")
     assert res.status_code == 503
     assert any(r.startswith("STORAGE_UNAVAILABLE") for r in res.json()["reasons"])

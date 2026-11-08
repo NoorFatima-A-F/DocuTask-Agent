@@ -16,6 +16,7 @@ import ipaddress
 import json
 import time
 from collections import OrderedDict
+from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -54,12 +55,13 @@ class CounterStore(Protocol):
 class MemoryStore:
     """Fixed-window counters in a bounded LRU (oldest keys evicted first)."""
 
-    def __init__(self, max_keys: int = 10_000):
+    def __init__(self, max_keys: int = 10_000, clock: Callable[[], float] = time.time):
         self.max_keys = max_keys
+        self.clock = clock
         self._windows: OrderedDict[str, tuple[int, int]] = OrderedDict()
 
     async def hit(self, key: str, window_seconds: int) -> tuple[int, int]:
-        now = int(time.time())
+        now = int(self.clock())
         window = now // window_seconds
         slot = f"{key}:{window}"
         count = self._windows.pop(slot, (0, 0))[0] + 1
