@@ -10,11 +10,11 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from app.ai.providers.gemini import GeminiProvider
 from app.core.config import settings
+from app.dependencies.storage import build_storage_provider
 from app.jobs.celery_app import celery_app
 from app.jobs.runner import JobDependencies, RetryJob, execute_job
 from app.ocr.pipeline import OCRPipeline
 from app.ocr.providers.tesseract import TesseractOCRProvider
-from app.storage.local import LocalStorageProvider
 
 #: Retries after the first attempt, for transient errors only.
 MAX_RETRIES = 3
@@ -27,7 +27,7 @@ def build_dependencies() -> JobDependencies:
     return JobDependencies(
         ocr_pipeline=OCRPipeline(ocr_provider=TesseractOCRProvider()),
         llm_provider=GeminiProvider(),
-        storage=LocalStorageProvider(),
+        storage=build_storage_provider(),
     )
 
 

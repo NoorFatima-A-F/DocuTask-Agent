@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import contextlib
 import logging
+import os
 import re
 import sys
 from urllib.parse import urlsplit
@@ -35,6 +36,7 @@ _PATTERNS: list[tuple[re.Pattern[str], str]] = [
 
 def _configured_secrets() -> list[str]:
     values = [settings.JWT_SECRET, settings.GEMINI_API_KEY, settings.GOOGLE_API_KEY]
+    values += [os.environ.get("AWS_SECRET_ACCESS_KEY"), os.environ.get("AWS_SESSION_TOKEN")]
     for url in (settings.DATABASE_URL, settings.REDIS_URL):
         if url:
             with contextlib.suppress(ValueError):

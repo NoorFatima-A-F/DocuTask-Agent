@@ -1,9 +1,8 @@
 # Render blueprint: API (web), Celery worker, Postgres, Redis.
 #
-# KNOWN LIMITATION: uploaded files are stored on the local disk of the service that received
-# them. Render services do not share disks, so the worker cannot read files uploaded to the
-# web service. Until shared object storage is added, use docker-compose (shared volume) or the
-# single-container image (entrypoint.sh) instead of this blueprint for background jobs.
+# Uploaded files go to an S3-compatible bucket (STORAGE_BACKEND=s3) because Render services do
+# not share a disk: the worker must read what the web service stored. Create the bucket first
+# (AWS S3, Cloudflare R2, ...) and fill in the S3_* and AWS_* values in the dashboard.
 
 envVarGroups:
   - name: docutask-shared
@@ -15,6 +14,18 @@ envVarGroups:
       - key: JWT_SECRET
         generateValue: true
       - key: GEMINI_API_KEY
+        sync: false
+      - key: STORAGE_BACKEND
+        value: s3
+      - key: S3_BUCKET
+        sync: false
+      - key: S3_REGION
+        sync: false
+      - key: S3_ENDPOINT_URL # leave empty for AWS S3; set for R2/MinIO/B2
+        sync: false
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
         sync: false
 
 services:

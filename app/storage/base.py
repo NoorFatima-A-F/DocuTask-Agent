@@ -1,82 +1,35 @@
-"""
-Abstract Storage Provider Base Class.
-Defines mandatory interface for file persistence strategies (Local, AWS S3, Google Cloud Storage, Azure Blob).
-"""
+"""Storage interface for uploaded documents (local disk or S3-compatible object storage)."""
 
 from abc import ABC, abstractmethod
 
 
 class StorageProvider(ABC):
-    """Abstract storage interface enforcing modular storage providers."""
+    """Where uploaded files live. The API and the worker must use the same backend."""
 
     @abstractmethod
     async def save(self, content: bytes, original_filename: str, subfolder: str = "") -> tuple[str, str, str]:
-        """
-        Saves file content to storage.
+        """Store ``content``; return ``(stored_filename, relative_path, location)``.
 
-        :param content: Binary file content
-        :param original_filename: Name of the uploaded file
-        :param subfolder: Optional target subfolder directory
-        :return: Tuple of (stored_filename, relative_path, absolute_path)
+        ``relative_path`` is the key used for every later call; ``location`` is informational
+        (an absolute path or an ``s3://`` URI).
         """
-        pass
 
     @abstractmethod
     async def read(self, relative_path: str) -> bytes:
-        """
-        Reads binary file content from storage.
-
-        :param relative_path: Relative storage path
-        :return: File binary content
-        """
-        pass
+        """Return the stored bytes. Raises ``ValidationAppException`` if the file does not exist."""
 
     @abstractmethod
     async def delete(self, relative_path: str) -> bool:
-        """
-        Deletes file from storage if present.
-
-        :param relative_path: Relative storage path
-        :return: True if deleted, False if file did not exist
-        """
-        pass
+        """Delete the file; return False if it did not exist or could not be deleted."""
 
     @abstractmethod
     async def exists(self, relative_path: str) -> bool:
-        """
-        Checks if file exists at relative path.
-
-        :param relative_path: Relative storage path
-        :return: True if file exists, False otherwise
-        """
-        pass
+        """Whether a file is stored under ``relative_path``."""
 
     @abstractmethod
     def generate_unique_filename(self, original_filename: str) -> str:
-        """
-        Generates a collision-resistant filename preserving file extension.
-
-        :param original_filename: Original user filename
-        :return: UUID-based unique filename
-        """
-        pass
+        """Collision-resistant filename keeping the extension."""
 
     @abstractmethod
-    def get_absolute_path(self, relative_path: str) -> str:
-        """
-        Resolves absolute path on target storage system.
-
-        :param relative_path: Relative path
-        :return: Absolute file path
-        """
-        pass
-
-    @abstractmethod
-    def get_relative_path(self, absolute_path: str) -> str:
-        """
-        Converts absolute path to storage-root relative path.
-
-        :param absolute_path: Absolute file path
-        :return: Relative path
-        """
-        pass
+    async def check(self) -> str | None:
+        """Readiness: ``None`` when usable, otherwise a short reason."""

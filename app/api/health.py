@@ -4,7 +4,7 @@
 * ``/readyz`` (readiness) is 503 with reasons when the extraction path cannot work:
   the tesseract binary is missing, no LLM API key is configured outside
   development/test, or the job queue (Redis) is unconfigured outside development/test
-  or configured but unreachable.
+  or configured but unreachable, or document storage (disk or S3 bucket) is unusable.
 """
 
 from __future__ import annotations
@@ -18,7 +18,9 @@ from app.ai.base import LLMProvider
 from app.core.config import settings
 from app.dependencies.llm import get_llm_provider
 from app.dependencies.ocr import get_ocr_provider
+from app.dependencies.storage import get_storage_provider
 from app.ocr.base import OCRProvider
+from app.storage.base import StorageProvider
 
 router = APIRouter(tags=["Health"])
 
@@ -54,6 +56,7 @@ def redis_reachable(url: str) -> bool:
 async def readiness_probe(
     ocr: OCRProvider = Depends(get_ocr_provider),
     llm: LLMProvider = Depends(get_llm_provider),
+    storage: StorageProvider = Depends(get_storage_provider),
 ) -> JSONResponse:
     """Readiness: OCR engine present and (outside dev/test) an LLM key configured."""
     reasons: list[str] = []
@@ -66,5 +69,8 @@ async def readiness_probe(
             reasons.append("QUEUE_UNAVAILABLE: Redis did not answer PING")
     elif settings.ENVIRONMENT.lower() not in DEV_ENVIRONMENTS:
         reasons.append("QUEUE_UNAVAILABLE: REDIS_URL is not set")
+    storage_problem = await storage.check()
+    if storage_problem:
+        reasons.append(f"STORAGE_UNAVAILABLE: {storage_problem}")
     body = ReadinessResponse(status="not_ready" if reasons else "ready", reasons=reasons)
     return JSONResponse(status_code=503 if reasons else 200, content=body.model_dump())

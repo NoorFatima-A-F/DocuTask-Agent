@@ -111,6 +111,11 @@ class LocalStorageProvider(StorageProvider):
             logger.error(f"Failed to delete file '{relative_path}': {e!s}")
             return False
 
+    async def check(self) -> str | None:
+        """Readiness: the storage directory exists and is writable."""
+        ok = await asyncio.to_thread(lambda: os.path.isdir(self.base_dir) and os.access(self.base_dir, os.W_OK))
+        return None if ok else f"storage directory {self.base_dir} is not writable"
+
     async def exists(self, relative_path: str) -> bool:
         """Checks if file exists on disk."""
         try:
