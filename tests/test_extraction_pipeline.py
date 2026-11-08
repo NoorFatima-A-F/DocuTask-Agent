@@ -109,6 +109,7 @@ async def test_success_persists_real_llm_output(db_session: AsyncSession, storag
     res = await env.service.extract_structured_data(env.doc_id, env.user, INVOICE)
 
     assert res.result.status == "COMPLETED"
+    assert res.result.structured_json is not None
     assert res.result.structured_json["vendor_name"] == "Contoso Ltd"
     assert res.result.structured_json["total_amount"] == 42.10
     assert res.statistics.input_tokens == 100  # from the provider, not len(text)//4

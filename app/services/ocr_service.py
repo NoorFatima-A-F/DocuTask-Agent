@@ -3,7 +3,7 @@ OCR Service Business Logic Layer.
 Coordinates document text extraction, result caching, page persistence, status tracking, and authorization.
 """
 
-from typing import Any, Dict, List
+from typing import Any
 from uuid import UUID
 
 from app.core.exceptions import ResourceNotFoundException
@@ -147,7 +147,7 @@ class OCRService:
         return self._to_content(document_id, page_contents)
 
     @staticmethod
-    def _to_content(document_id: UUID, pages: List[PageContent]) -> DocumentContent:
+    def _to_content(document_id: UUID, pages: list[PageContent]) -> DocumentContent:
         return DocumentContent(
             document_id=document_id,
             page_count=len(pages),
@@ -156,12 +156,12 @@ class OCRService:
             average_confidence=average_confidence(pages),
         )
 
-    async def get_extracted_pages(self, document_id: UUID, owner: User) -> List[PageContent]:
+    async def get_extracted_pages(self, document_id: UUID, owner: User) -> list[PageContent]:
         """Retrieves page breakdown of extracted text for a document."""
         doc_content = await self.get_extracted_text(document_id, owner)
         return doc_content.pages
 
-    async def get_ocr_status(self, document_id: UUID, owner: User) -> Dict[str, Any]:
+    async def get_ocr_status(self, document_id: UUID, owner: User) -> dict[str, Any]:
         """Retrieves current OCR extraction status and metrics for a document."""
         doc = await self.doc_repo.get_by_id(document_id)
         if not doc:

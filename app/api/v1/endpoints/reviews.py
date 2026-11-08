@@ -5,10 +5,11 @@ All routes require the ``reviewer`` role (admins and superusers inherit it).
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query
@@ -19,12 +20,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.exceptions import ResourceNotFoundException
 from app.database.session import get_db
 from app.dependencies.auth import RoleChecker
+from app.dependencies.storage import get_storage_provider
 from app.models.ai_extraction import AIExtraction
 from app.models.user import User
 from app.schemas.response import APIResponse
-from app.dependencies.storage import get_storage_provider
-from app.storage.base import StorageProvider
 from app.services.review_service import ReviewService
+from app.storage.base import StorageProvider
 
 require_reviewer = RoleChecker(["reviewer"])
 
@@ -40,12 +41,12 @@ class ReviewSummary(BaseModel):
     document_id: UUID
     document_type: str
     status: str
-    confidence: Optional[float]
+    confidence: float | None
     created_at: datetime
 
 
 class ReviewPage(BaseModel):
-    items: List[ReviewSummary]
+    items: list[ReviewSummary]
     total: int
     page: int
     page_size: int
@@ -54,24 +55,24 @@ class ReviewPage(BaseModel):
 class ReviewEventOut(BaseModel):
     action: str
     reviewer_id: UUID
-    reason: Optional[str] = None
-    corrected_json: Optional[Dict[str, Any]] = None
+    reason: str | None = None
+    corrected_json: dict[str, Any] | None = None
     created_at: datetime
 
 
 class ReviewDetail(ReviewSummary):
-    structured_json: Optional[Dict[str, Any]]
-    final_json: Optional[Dict[str, Any]]
-    confidence_details: Optional[Dict[str, Any]]
-    error_code: Optional[str]
+    structured_json: dict[str, Any] | None
+    final_json: dict[str, Any] | None
+    confidence_details: dict[str, Any] | None
+    error_code: str | None
     ocr_text: str
-    document_filename: Optional[str]
+    document_filename: str | None
     document_download_url: str
-    events: List[ReviewEventOut]
+    events: list[ReviewEventOut]
 
 
 class ApproveRequest(BaseModel):
-    corrections: Optional[Dict[str, Any]] = Field(
+    corrections: dict[str, Any] | None = Field(
         None, description="Field overrides, validated against the document type's schema"
     )
 
@@ -80,7 +81,7 @@ class RejectRequest(BaseModel):
     reason: str = Field(..., min_length=3, max_length=2000)
 
 
-def _loads(value: Optional[str]) -> Optional[Dict[str, Any]]:
+def _loads(value: str | None) -> dict[str, Any] | None:
     return json.loads(value) if value else None
 
 
@@ -149,7 +150,7 @@ async def download_document(
 ) -> FileResponse:
     relative_path, mime, filename = await service.get_document_path(extraction_id)
     path = storage.get_absolute_path(relative_path)  # confined to the storage root
-    if not os.path.isfile(path):
+    if not await asyncio.to_thread(os.path.isfile, path):
         raise ResourceNotFoundException("Document file not found")
     return FileResponse(path, media_type=mime, filename=filename)
 
@@ -159,11 +160,11 @@ async def download_document(
 )
 async def approve_review(
     extraction_id: UUID,
-    body: ApproveRequest = ApproveRequest(),
+    body: ApproveRequest | None = None,
     reviewer: User = Depends(require_reviewer),
     service: ReviewService = Depends(get_review_service),
 ) -> APIResponse[ReviewDetail]:
-    await service.approve(extraction_id, reviewer, body.corrections)
+    await service.approve(extraction_id, reviewer, body.corrections if body else None)
     return APIResponse.success_response(data=await _detail(service, extraction_id), message="Extraction approved")
 
 

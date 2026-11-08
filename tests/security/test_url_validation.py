@@ -4,7 +4,8 @@ Validates CWE-20, SSRF defenses, scheme restrictions, and prefix-collision attac
 """
 
 import pytest
-from app.core.security import validate_safe_url, UnsafeUrlError
+
+from app.core.security import UnsafeUrlError, validate_safe_url
 
 
 class TestURLValidation:

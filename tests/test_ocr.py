@@ -54,7 +54,7 @@ def test_image_preprocessor() -> None:
 
 
 async def test_missing_tesseract_binary_is_engine_unavailable(monkeypatch: pytest.MonkeyPatch) -> None:
-    def boom(*_a, **_k):  # type: ignore[no-untyped-def]
+    def boom(*_a, **_k):
         raise pytesseract.TesseractNotFoundError()
 
     monkeypatch.setattr(pytesseract, "image_to_string", boom)
@@ -65,7 +65,7 @@ async def test_missing_tesseract_binary_is_engine_unavailable(monkeypatch: pytes
 
 
 async def test_tesseract_error_is_ocr_failed(monkeypatch: pytest.MonkeyPatch) -> None:
-    def boom(*_a, **_k):  # type: ignore[no-untyped-def]
+    def boom(*_a, **_k):
         raise pytesseract.TesseractError(1, "bad lang")
 
     monkeypatch.setattr(pytesseract, "image_to_string", boom)
@@ -123,7 +123,7 @@ async def test_pipeline_confidence_none_when_engine_reports_none() -> None:
 # ------------------------------------------------------------------ service
 
 
-async def _service_with(db: AsyncSession, storage_dir: str, ocr: FakeOCRProvider):  # type: ignore[no-untyped-def]
+async def _service_with(db: AsyncSession, storage_dir: str, ocr: FakeOCRProvider):
     storage = LocalStorageProvider(base_directory=storage_dir)
     doc_repo = DocumentRepository(db)
     service = OCRService(

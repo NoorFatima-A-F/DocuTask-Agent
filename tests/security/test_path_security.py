@@ -5,12 +5,14 @@ Tests both sanitize_file_path() (str) and resolve_safe_path() (Path).
 
 import os
 from pathlib import Path
+
 import pytest
+
 from app.core.security import (
-    sanitize_file_path,
-    resolve_safe_path,
-    validate_safe_filename_segment,
     UnsafePathError,
+    resolve_safe_path,
+    sanitize_file_path,
+    validate_safe_filename_segment,
 )
 
 

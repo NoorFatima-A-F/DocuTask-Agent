@@ -4,7 +4,7 @@ Validation answers only "is this shaped correctly?". How much to trust the value
 decided by :mod:`app.ai.confidence` against the source text.
 """
 
-from typing import Any, Dict
+from typing import Any
 
 from pydantic import ValidationError
 
@@ -18,7 +18,7 @@ class AIValidator:
     """Validates LLM output against Pydantic models."""
 
     @classmethod
-    def validate(cls, raw_json_dict: Dict[str, Any], document_type: str) -> Dict[str, Any]:
+    def validate(cls, raw_json_dict: dict[str, Any], document_type: str) -> dict[str, Any]:
         """Return the validated, normalised dict or raise :class:`AIValidationException`."""
         model_cls = PromptBuilder.get_target_model(document_type)
         try:

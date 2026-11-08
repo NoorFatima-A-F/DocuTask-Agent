@@ -75,10 +75,7 @@ def imports_of(name: str, path: Path, modules: dict[str, Path]) -> set[str]:
                 if alias.name.split(".")[0] == PACKAGE:
                     add(alias.name)
         elif isinstance(node, ast.ImportFrom):
-            if node.level:
-                base = _resolve_relative(name, is_pkg, node.level, node.module)
-            else:
-                base = node.module or ""
+            base = _resolve_relative(name, is_pkg, node.level, node.module) if node.level else node.module or ""
             if base.split(".")[0] != PACKAGE:
                 continue
             add(base)

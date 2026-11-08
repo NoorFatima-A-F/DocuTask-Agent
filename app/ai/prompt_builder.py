@@ -5,7 +5,8 @@ per-request random delimiter, and the system instruction says to treat it as dat
 """
 
 import secrets
-from typing import Any, Dict, Type
+from typing import Any, ClassVar
+
 from pydantic import BaseModel
 
 from app.ai.schemas import (
@@ -29,7 +30,7 @@ from app.ai.schemas import (
 class PromptBuilder:
     """Builder constructing prompts for structured document extraction."""
 
-    DOCUMENT_MODEL_MAP: Dict[str, Type[BaseModel]] = {
+    DOCUMENT_MODEL_MAP: ClassVar[dict[str, type[BaseModel]]] = {
         "invoice": InvoiceExtraction,
         "receipt": ReceiptExtraction,
         "resume": ResumeExtraction,
@@ -47,7 +48,7 @@ class PromptBuilder:
     }
 
     @classmethod
-    def get_target_model(cls, document_type: str) -> Type[BaseModel]:
+    def get_target_model(cls, document_type: str) -> type[BaseModel]:
         """Retrieves target Pydantic model for document type."""
         key = document_type.lower().strip()
         if key not in cls.DOCUMENT_MODEL_MAP:
@@ -55,7 +56,7 @@ class PromptBuilder:
         return cls.DOCUMENT_MODEL_MAP[key]
 
     @classmethod
-    def get_json_schema(cls, document_type: str) -> Dict[str, Any]:
+    def get_json_schema(cls, document_type: str) -> dict[str, Any]:
         """Generates JSON schema dict for document type."""
         model_cls = cls.get_target_model(document_type)
         return model_cls.model_json_schema()

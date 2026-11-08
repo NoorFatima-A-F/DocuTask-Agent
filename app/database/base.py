@@ -4,7 +4,8 @@ Provides UUID Primary Key mixin and automatic Audit Timestamps.
 """
 
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 from sqlalchemy import DateTime, Uuid
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -27,12 +28,12 @@ class TimestampMixin:
     """Mixin for audit timestamp fields: created_at and updated_at."""
 
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
     )
 
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        onupdate=lambda: datetime.now(timezone.utc),
+        default=lambda: datetime.now(UTC),
+        onupdate=lambda: datetime.now(UTC),
         nullable=False,
     )

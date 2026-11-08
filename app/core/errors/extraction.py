@@ -10,12 +10,12 @@ response bodies, API keys, or document content.
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 from app.core.exceptions import BaseAppException
 
 
-class ExtractionStatus(str, Enum):
+class ExtractionStatus(StrEnum):
     """Lifecycle status of an extraction record or job."""
 
     PENDING = "PENDING"
@@ -28,7 +28,7 @@ class ExtractionStatus(str, Enum):
 TERMINAL_STATUSES = frozenset({ExtractionStatus.COMPLETED, ExtractionStatus.NEEDS_REVIEW, ExtractionStatus.FAILED})
 
 
-class ErrorCode(str, Enum):
+class ErrorCode(StrEnum):
     """Machine-readable failure codes for the extraction path."""
 
     # LLM provider

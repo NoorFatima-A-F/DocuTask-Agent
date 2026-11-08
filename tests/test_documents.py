@@ -4,12 +4,13 @@ Unit and Integration Tests for Document Ingestion & Storage Subsystem.
 
 import shutil
 import tempfile
+
 import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
-from app.core.exceptions import ValidationAppException, ResourceNotFoundException
+from app.core.exceptions import ResourceNotFoundException, ValidationAppException
 from app.repositories.document_repository import DocumentRepository
 from app.repositories.user_repository import UserRepository
 from app.services.document_service import DocumentService
@@ -28,7 +29,7 @@ def temp_storage_dir():
 async def test_document_validation_rules(temp_storage_dir: str):
     """Verifies all DocumentService upload validation security rules."""
     storage = LocalStorageProvider(base_directory=temp_storage_dir)
-    service = DocumentService(document_repo=None, storage_provider=storage)
+    service = DocumentService(document_repo=None, storage_provider=storage)  # type: ignore[arg-type]  # validation only
 
     # 1. Empty file
     with pytest.raises(ValidationAppException) as exc:

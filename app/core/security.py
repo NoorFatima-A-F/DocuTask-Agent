@@ -6,15 +6,14 @@ Provides password hashing via bcrypt, JWT token generation/decoding, and token h
 import hashlib
 import os
 import re
-from pathlib import Path
 import uuid
-from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List, Optional, Set, Union
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from typing import Any
 
 import bcrypt
 import jwt
 from jwt import PyJWTError as JWTError
-
 
 from app.core.config import settings
 from app.core.exceptions import TokenException
@@ -46,14 +45,14 @@ class UnsafeUrlError(ValueError):
     pass
 
 
-PathInput = Union[str, Path, os.PathLike]
+PathInput = str | Path | os.PathLike[str]
 
 
 def validate_safe_url(
     url: str,
-    allowed_domains: Optional[Union[List[str], Set[str]]] = None,
-    disallowed_domains: Optional[Union[List[str], Set[str]]] = None,
-    allowed_schemes: Optional[Set[str]] = None,
+    allowed_domains: list[str] | set[str] | None = None,
+    disallowed_domains: list[str] | set[str] | None = None,
+    allowed_schemes: set[str] | None = None,
 ) -> str:
     """
     Validates and parses a URL, enforcing allowed schemes (http, https) and strict
@@ -177,10 +176,10 @@ def resolve_safe_path(
 
     try:
         common = os.path.commonpath([base, target])
-    except ValueError:
+    except ValueError as exc:
         raise UnsafePathError(
             f"Security violation: Candidate path '{untrusted_path}' escapes trusted base directory '{base_dir}'"
-        )
+        ) from exc
 
     if common != base:
         raise UnsafePathError(
@@ -239,7 +238,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
         return False
 
 
-def create_access_token(subject: str, expires_delta: Optional[timedelta] = None) -> str:
+def create_access_token(subject: str, expires_delta: timedelta | None = None) -> str:
     """
     Creates JWT Access Token signed with application secret key.
     Includes unique JWT ID (jti) for collision-resistant token identification.
@@ -248,13 +247,10 @@ def create_access_token(subject: str, expires_delta: Optional[timedelta] = None)
     :param expires_delta: Optional custom duration override
     :return: Encoded JWT string
     """
-    now = datetime.now(timezone.utc)
-    if expires_delta:
-        expire = now + expires_delta
-    else:
-        expire = now + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    now = datetime.now(UTC)
+    expire = now + (expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES))
 
-    to_encode: Dict[str, Any] = {
+    to_encode: dict[str, Any] = {
         "sub": str(subject),
         "jti": str(uuid.uuid4()),
         "exp": expire,
@@ -265,7 +261,7 @@ def create_access_token(subject: str, expires_delta: Optional[timedelta] = None)
     return encoded_jwt
 
 
-def create_refresh_token(subject: str, expires_delta: Optional[timedelta] = None) -> tuple[str, datetime]:
+def create_refresh_token(subject: str, expires_delta: timedelta | None = None) -> tuple[str, datetime]:
     """
     Creates JWT Refresh Token with unique JWT ID (jti).
 
@@ -273,13 +269,10 @@ def create_refresh_token(subject: str, expires_delta: Optional[timedelta] = None
     :param expires_delta: Optional custom duration override
     :return: Tuple of (raw_refresh_token, expiration_datetime)
     """
-    now = datetime.now(timezone.utc)
-    if expires_delta:
-        expire = now + expires_delta
-    else:
-        expire = now + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
+    now = datetime.now(UTC)
+    expire = now + (expires_delta or timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS))
 
-    to_encode: Dict[str, Any] = {
+    to_encode: dict[str, Any] = {
         "sub": str(subject),
         "jti": str(uuid.uuid4()),
         "exp": expire,
@@ -298,7 +291,7 @@ def hash_token(raw_token: str) -> str:
     return hashlib.sha256(raw_token.encode("utf-8")).hexdigest()
 
 
-def decode_token(token: str, expected_type: str = "access") -> Dict[str, Any]:
+def decode_token(token: str, expected_type: str = "access") -> dict[str, Any]:
     """
     Decodes and validates a JWT token.
 
@@ -315,10 +308,10 @@ def decode_token(token: str, expected_type: str = "access") -> Dict[str, Any]:
         if token_type != expected_type:
             raise TokenException(f"Invalid token type. Expected {expected_type}, got {token_type}")
 
-        subject: Optional[str] = payload.get("sub")
+        subject: str | None = payload.get("sub")
         if not subject:
             raise TokenException("Token missing subject identifier")
 
         return payload
     except JWTError as e:
-        raise TokenException(f"Could not validate token: {str(e)}")
+        raise TokenException(f"Could not validate token: {e!s}") from e

@@ -3,7 +3,7 @@ OCR Pipeline Orchestrator.
 Coordinates document detection, digital PDF / text native extraction, OCR execution, and output aggregation.
 """
 
-from typing import List, Optional, Sequence
+from collections.abc import Sequence
 from uuid import UUID
 
 from app.core.errors.extraction import ErrorCode, OCRError
@@ -39,7 +39,7 @@ class OCRPipeline:
         doc_type = DocumentTypeDetector.detect_type(file_content, file_extension, mime_type)
         logger.info("OCR Pipeline selected strategy [%s] for document '%s'", doc_type, sanitize_log_input(document_id))
 
-        pages: List[PageContent] = []
+        pages: list[PageContent] = []
 
         if doc_type == "txt":
             # Native TXT decoding (100% confidence)
@@ -95,7 +95,7 @@ def merge_page_text(pages: Sequence[PageContent]) -> str:
     return "\n\n".join(p.text.strip() for p in pages if p.text and p.text.strip())
 
 
-def average_confidence(pages: Sequence[PageContent]) -> Optional[float]:
+def average_confidence(pages: Sequence[PageContent]) -> float | None:
     """Mean confidence over pages that reported one; ``None`` when no page did."""
     confs = [p.confidence for p in pages if p.confidence is not None]
     return round(sum(confs) / len(confs), 4) if confs else None

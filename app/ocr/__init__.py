@@ -7,4 +7,4 @@ from app.ocr.base import OCRProvider
 from app.ocr.pipeline import OCRPipeline
 from app.ocr.schemas import DocumentContent, PageContent
 
-__all__ = ["OCRProvider", "OCRPipeline", "DocumentContent", "PageContent"]
+__all__ = ["DocumentContent", "OCRPipeline", "OCRProvider", "PageContent"]

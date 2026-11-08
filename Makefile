@@ -1,39 +1,39 @@
-.PHONY: install check lint format test eval run-local docker-build docker-run clean
+.PHONY: install migrate lint format test test-frontend check run worker docker-build docker-up
 
 install:
-	pip install --upgrade pip
-	pip install -e ".[dev,evals]" || pip install -r requirements.txt -r requirements-dev.txt
-	pre-commit install
+	pip install -r requirements-dev.txt
+	cd frontend && npm ci
+
+migrate:
+	alembic upgrade head
 
 lint:
-	ruff check app/ tests/
-	ruff format --check app/ tests/
-	mypy app/ tests/ --ignore-missing-imports
+	ruff check app tests tooling migrations
+	ruff format --check app tests tooling migrations
+	mypy app tests
 
 format:
-	ruff check --fix app/ tests/
-	ruff format app/ tests/
+	ruff check --fix app tests tooling migrations
+	ruff format app tests tooling migrations
 
 test:
-	pytest tests/ -v --cov=app --cov-report=term-missing --cov-fail-under=80 --ignore=tests/world --ignore=tests/world_model --ignore=tests/platform_verification
+	ENVIRONMENT=test pytest --cov=app --cov-report=term-missing --cov-fail-under=80
 
-eval:
-	python -m evals.harness --golden-dataset evals/data/golden_v1.jsonl --threshold 0.90
+test-frontend:
+	cd frontend && npm run build && npm test && npm run test:e2e
 
-check: lint test eval
-	@echo "All enterprise gates passed locally."
+check: lint test test-frontend
+	bandit -r app -q
+	pip-audit -r requirements.txt
 
-run-local:
-	uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+run: migrate
+	uvicorn app.main:app --reload --port 8000
+
+worker:
+	celery -A app.jobs.celery_app worker --loglevel=info
 
 docker-build:
-	docker build -t docutask-agent:latest .
+	docker build -t docutask-agent:local .
 
-docker-run:
-	docker run -d --name docutask-agent -p 8000:8000 docutask-agent:latest
-	@sleep 3
-	curl -f http://localhost:8000/healthz || (docker logs docutask-agent && exit 1)
-
-clean:
-	rm -rf .pytest_cache .ruff_cache .mypy_cache htmlcov coverage.xml artifacts/
-	find . -type d -name "__pycache__" -exec rm -rf {} +
+docker-up:
+	docker compose up --build

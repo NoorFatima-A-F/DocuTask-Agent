@@ -4,8 +4,9 @@ Implements token persistence and revocation operations using SQLAlchemy 2.0 asyn
 """
 
 import uuid
-from datetime import datetime, timezone
-from typing import Dict, Any, Optional
+from datetime import UTC, datetime
+from typing import Any
+
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -19,7 +20,7 @@ class RefreshTokenRepository(BaseRepository[RefreshToken]):
     def __init__(self, db: AsyncSession):
         super().__init__(model=RefreshToken, db=db)
 
-    async def create(self, token_data: Dict[str, Any]) -> RefreshToken:
+    async def create(self, token_data: dict[str, Any]) -> RefreshToken:
         """Persists a new refresh token record."""
         token_obj = RefreshToken(**token_data)
         self.db.add(token_obj)
@@ -37,20 +38,20 @@ class RefreshTokenRepository(BaseRepository[RefreshToken]):
         """Revokes all active refresh tokens associated with a given user ID."""
         await self.db.execute(
             update(RefreshToken)
-            .where(RefreshToken.user_id == user_id, RefreshToken.revoked == False)
+            .where(RefreshToken.user_id == user_id, RefreshToken.revoked.is_(False))
             .values(revoked=True)
         )
         await self.db.flush()
 
-    async def get_valid_token(self, token_hash: str) -> Optional[RefreshToken]:
+    async def get_valid_token(self, token_hash: str) -> RefreshToken | None:
         """
         Retrieves a refresh token record matching the token hash
         that is not revoked and has not expired.
         """
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         result = await self.db.execute(
             select(RefreshToken).where(
-                RefreshToken.token_hash == token_hash, RefreshToken.revoked == False, RefreshToken.expires_at > now
+                RefreshToken.token_hash == token_hash, RefreshToken.revoked.is_(False), RefreshToken.expires_at > now
             )
         )
         return result.scalar_one_or_none()

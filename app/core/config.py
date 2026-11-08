@@ -5,19 +5,19 @@ typing, validation, and secure defaults via Pydantic Settings.
 """
 
 from datetime import date
-from typing import Annotated, Any, Dict, List, Optional, Tuple
+from typing import Annotated, Any
 
 from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 # Dev-only placeholder; startup refuses it outside development/test.
-DEFAULT_JWT_SECRET = "replace-with-a-secure-random-secret-in-production-use-openssl-rand-hex-32"  # nosec B105
+DEFAULT_JWT_SECRET = "replace-with-a-secure-random-secret-in-production-use-openssl-rand-hex-32"  # noqa: S105  # nosec B105
 #: Environments where the insecure default JWT secret is tolerated.
 INSECURE_SECRET_ENVIRONMENTS = frozenset({"development", "test"})
 MIN_JWT_SECRET_BYTES = 32
 
 #: List settings read from env as comma-separated strings (or a JSON array).
-CsvList = Annotated[List[str], NoDecode]
+CsvList = Annotated[list[str], NoDecode]
 
 
 class Settings(BaseSettings):
@@ -41,7 +41,7 @@ class Settings(BaseSettings):
     # API & Server Configuration
     API_V1_PREFIX: str = "/api/v1"
     API_V1_STR: str = "/api/v1"
-    HOST: str = "0.0.0.0"  # nosec B104
+    HOST: str = "0.0.0.0"  # noqa: S104  # nosec B104 - container bind address
     PORT: int = 8000
 
     CORS_ORIGINS: CsvList = Field(
@@ -74,8 +74,8 @@ class Settings(BaseSettings):
     DB_ECHO: bool = False
 
     # Gemini (the only LLM provider). Key precedence: GEMINI_API_KEY, then GOOGLE_API_KEY.
-    GEMINI_API_KEY: Optional[str] = Field(default=None, description="Gemini API key (preferred)")
-    GOOGLE_API_KEY: Optional[str] = Field(default=None, description="Gemini API key (used if GEMINI_API_KEY unset)")
+    GEMINI_API_KEY: str | None = Field(default=None, description="Gemini API key (preferred)")
+    GOOGLE_API_KEY: str | None = Field(default=None, description="Gemini API key (used if GEMINI_API_KEY unset)")
     GEMINI_MODEL: str = Field(
         default="gemini-3.8-flash",
         description="Gemini model ID used for extraction (stable, no shutdown date as of 2026-11-08)",
@@ -96,7 +96,7 @@ class Settings(BaseSettings):
         if isinstance(value, str):
             text = value.strip()
             if text.startswith("["):
-                import json  # noqa: PLC0415
+                import json
 
                 return json.loads(text)
             return [item.strip() for item in text.split(",") if item.strip()]
@@ -126,7 +126,7 @@ class Settings(BaseSettings):
         return self
 
     @property
-    def gemini_api_key(self) -> Optional[str]:
+    def gemini_api_key(self) -> str | None:
         """Resolved Gemini key: GEMINI_API_KEY wins over GOOGLE_API_KEY; blank values count as unset."""
         return (self.GEMINI_API_KEY or "").strip() or (self.GOOGLE_API_KEY or "").strip() or None
 
@@ -139,7 +139,7 @@ class Settings(BaseSettings):
     ALLOWED_MIME_TYPES: CsvList = Field(
         default_factory=lambda: ["application/pdf", "image/png", "image/jpeg", "image/tiff", "image/bmp"]
     )
-    REDIS_URL: Optional[str] = Field(
+    REDIS_URL: str | None = Field(
         default=None,
         description="Redis connection URL for background task queues and rate limiting",
     )
@@ -148,7 +148,8 @@ class Settings(BaseSettings):
     RATE_LIMIT_PER_MINUTE: int = Field(default=120, description="Requests per minute per client IP on /api/*")
     TRUSTED_PROXIES: CsvList = Field(
         default_factory=list,
-        description="CIDRs of reverse proxies whose X-Forwarded-For is trusted (e.g. 10.0.0.0/8). Empty: use the TCP peer.",
+        description="CIDRs of reverse proxies whose X-Forwarded-For is trusted (e.g. 10.0.0.0/8). "
+        "Empty: use the TCP peer.",
     )
     CONFIDENCE_THRESHOLD_HITL: float = 0.85
 
@@ -156,7 +157,7 @@ class Settings(BaseSettings):
 #: USD per 1M tokens, keyed by model ID. Each entry is a list of (effective_from, input, output),
 #: newest last. Source: https://aistudio.google.com/docs/pricing (paid tier, text), checked 2026-11-08.
 #: Models not listed here get ``estimated_cost = None``; never guess a price.
-GEMINI_PRICING_USD_PER_1M: Dict[str, List[Tuple[date, float, float]]] = {
+GEMINI_PRICING_USD_PER_1M: dict[str, list[tuple[date, float, float]]] = {
     "gemini-3.8-flash": [(date(2026, 1, 1), 0.75, 3.75), (date(2027, 1, 1), 1.50, 7.50)],
     "gemini-3.6-flash": [(date(2026, 1, 1), 0.75, 3.75), (date(2027, 1, 1), 1.50, 7.50)],
     "gemini-3.5-flash-lite": [(date(2026, 1, 1), 0.30, 2.50)],

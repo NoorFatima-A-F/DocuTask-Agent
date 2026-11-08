@@ -4,15 +4,15 @@ Implements OAuth2 Bearer token extraction, RBAC role enforcement, and security c
 """
 
 import uuid
-from typing import List
+
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 
 from app.core.exceptions import AccessDeniedException, TokenException
 from app.core.security import decode_token
+from app.dependencies.db import get_user_repository
 from app.models.user import User
 from app.repositories.user_repository import UserRepository
-from app.dependencies.db import get_user_repository
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login", auto_error=True)
 
@@ -32,8 +32,8 @@ async def get_current_user(
 
     try:
         user_id = uuid.UUID(user_id_str)
-    except ValueError:
-        raise TokenException("Invalid user ID format in token payload")
+    except ValueError as exc:
+        raise TokenException("Invalid user ID format in token payload") from exc
 
     user = await user_repo.get_by_id(user_id)
     if not user:
@@ -67,7 +67,7 @@ async def get_current_superuser(current_user: User = Depends(get_current_active_
 class RoleChecker:
     """RBAC dependency checking whether active user possesses required roles."""
 
-    def __init__(self, allowed_roles: List[str]):
+    def __init__(self, allowed_roles: list[str]):
         self.allowed_roles = [r.lower().strip() for r in allowed_roles]
 
     def __call__(self, current_user: User = Depends(get_current_active_user)) -> User:

@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 import subprocess
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import jwt
@@ -58,12 +58,12 @@ def _token(**claims: object) -> str:
 
 def test_token_without_exp_rejected() -> None:
     with pytest.raises(TokenException):
-        decode_token(_token(sub="u", type="access", iat=datetime.now(timezone.utc)))
+        decode_token(_token(sub="u", type="access", iat=datetime.now(UTC)))
 
 
 def test_token_without_iat_rejected() -> None:
     with pytest.raises(TokenException):
-        decode_token(_token(sub="u", type="access", exp=datetime.now(timezone.utc) + timedelta(minutes=5)))
+        decode_token(_token(sub="u", type="access", exp=datetime.now(UTC) + timedelta(minutes=5)))
 
 
 def test_expired_token_rejected() -> None:
@@ -83,8 +83,8 @@ def test_token_signed_with_other_secret_rejected() -> None:
         {
             "sub": "u",
             "type": "access",
-            "iat": datetime.now(timezone.utc),
-            "exp": datetime.now(timezone.utc) + timedelta(minutes=5),
+            "iat": datetime.now(UTC),
+            "exp": datetime.now(UTC) + timedelta(minutes=5),
         },
         "attacker-secret-" + "x" * 32,
         algorithm="HS256",

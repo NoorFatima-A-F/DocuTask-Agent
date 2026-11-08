@@ -1,7 +1,6 @@
 """Background job request/response schemas."""
 
 from datetime import datetime
-from typing import List, Optional
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -21,16 +20,16 @@ class JobResponse(BaseModel):
     status: str = Field(..., description="QUEUED, RUNNING, RETRYING, COMPLETED, NEEDS_REVIEW or FAILED")
     attempts: int
     max_attempts: int
-    error_code: Optional[str] = None
-    last_error: Optional[str] = None
-    started_at: Optional[datetime] = None
-    completed_at: Optional[datetime] = None
+    error_code: str | None = None
+    last_error: str | None = None
+    started_at: datetime | None = None
+    completed_at: datetime | None = None
     created_at: datetime
     updated_at: datetime
 
 
 class JobListResponse(BaseModel):
-    items: List[JobResponse]
+    items: list[JobResponse]
     total: int
     page: int
     page_size: int

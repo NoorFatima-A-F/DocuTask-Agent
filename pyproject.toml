@@ -33,14 +33,15 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "ruff>=0.6.0",
-    "mypy>=1.11.0",
+    "ruff==0.16.10",
+    "mypy==2.4.0",
     "pytest>=8.3.0",
     "pytest-asyncio>=0.24.0",
     "pytest-cov>=5.0.0",
     "respx>=0.21.1",
     "bandit>=1.7.9",
     "pip-audit>=2.7.0",
+    "types-python-dateutil>=2.9.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -59,63 +60,43 @@ line-length = 120
 target-version = "py312"
 
 [tool.ruff.lint]
-select = ["E", "F", "W"]
-ignore = [
-    "E501",
-    "E401",
-    "E402",
-    "E701",
-    "E702",
-    "E711",
-    "E712",
-    "E722",
-    "E731",
-    "E741",
-    "W291",
-    "W292",
-    "W293",
-    "W391",
-    "F401",
-    "F403",
-    "F405",
-    "F541",
-    "F811",
-    "F821",
-    "F841",
+select = ["E", "F", "W", "I", "B", "UP", "S", "SIM", "RUF", "ASYNC"]
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI dependency markers are evaluated once by design.
+extend-immutable-calls = [
+    "fastapi.Depends", "fastapi.Query", "fastapi.Header", "fastapi.File", "fastapi.Body", "fastapi.Path",
 ]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests: asserts and literal test credentials are expected.
+"tests/**" = ["S101", "S105", "S106", "S108"]
+"migrations/**" = ["E501"]
 
 [tool.mypy]
 python_version = "3.12"
+plugins = ["pydantic.mypy"]
+warn_unused_ignores = true
+warn_redundant_casts = true
+check_untyped_defs = true
+no_implicit_optional = true
+
+# The whole application package is strict; tests are type-checked but not strict.
+[[tool.mypy.overrides]]
+module = ["app", "app.*"]
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["tests", "tests.*"]
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+disallow_untyped_calls = false
+disallow_any_generics = false
+warn_return_any = false
+
+[[tool.mypy.overrides]]
+module = ["celery.*", "pytesseract.*", "pdfplumber.*", "kombu.*"]
 ignore_missing_imports = true
-warn_unused_ignores = false
-warn_redundant_casts = false
-follow_imports = "silent"
-disable_error_code = [
-    "import-untyped",
-    "attr-defined",
-    "name-defined",
-    "type-arg",
-    "call-arg",
-    "union-attr",
-    "arg-type",
-    "var-annotated",
-    "misc",
-    "assignment",
-    "index",
-    "operator",
-    "return-value",
-    "valid-type",
-    "dict-item",
-    "override",
-    "list-item",
-    "func-returns-value",
-    "abstract",
-    "annotation-unchecked",
-    "type-var",
-    "has-type",
-    "no-redef",
-    "truthy-bool"
-]
 
 [tool.coverage.run]
 source = ["app"]

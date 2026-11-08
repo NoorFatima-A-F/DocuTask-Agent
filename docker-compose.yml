@@ -17,7 +17,7 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - "${API_PORT:-8000}:8000"
+      - "${API_PORT:-8000}:7860"
     environment: *app-env
     volumes:
       - storage_data:/app/storage
@@ -30,7 +30,7 @@ services:
   worker:
     build: .
     restart: unless-stopped
-    command: ["celery", "-A", "app.jobs.celery_app", "worker", "--loglevel=info", "--concurrency=2"]
+    command: ["worker"]
     environment: *app-env
     volumes:
       - storage_data:/app/storage # the worker reads the files the API stored

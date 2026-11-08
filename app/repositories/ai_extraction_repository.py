@@ -4,8 +4,9 @@ Implements metadata and structured JSON persistence for LLM extractions.
 """
 
 import uuid
-from typing import Dict, Any, List, Optional
-from sqlalchemy import select, delete
+from typing import Any
+
+from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.ai_extraction import AIExtraction
@@ -18,7 +19,7 @@ class AIExtractionRepository(BaseRepository[AIExtraction]):
     def __init__(self, db: AsyncSession):
         super().__init__(model=AIExtraction, db=db)
 
-    async def create(self, extraction_data: Dict[str, Any]) -> AIExtraction:
+    async def create(self, extraction_data: dict[str, Any]) -> AIExtraction:
         """Creates and persists a new AI extraction record."""
         record = AIExtraction(**extraction_data)
         self.db.add(record)
@@ -27,8 +28,8 @@ class AIExtractionRepository(BaseRepository[AIExtraction]):
         return record
 
     async def get_latest(
-        self, document_id: uuid.UUID, document_type: Optional[str] = None, exclude_failed: bool = False
-    ) -> Optional[AIExtraction]:
+        self, document_id: uuid.UUID, document_type: str | None = None, exclude_failed: bool = False
+    ) -> AIExtraction | None:
         """Most recent extraction record for a document (optionally ignoring FAILED rows)."""
         query = select(AIExtraction).where(AIExtraction.document_id == document_id)
         if document_type:
@@ -40,7 +41,7 @@ class AIExtractionRepository(BaseRepository[AIExtraction]):
         result = await self.db.execute(query)
         return result.scalar_one_or_none()
 
-    async def get_history(self, document_id: uuid.UUID) -> List[AIExtraction]:
+    async def get_history(self, document_id: uuid.UUID) -> list[AIExtraction]:
         """Retrieves all past extraction history records for document."""
         query = (
             select(AIExtraction).where(AIExtraction.document_id == document_id).order_by(AIExtraction.created_at.desc())

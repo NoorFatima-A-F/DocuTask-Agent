@@ -1,77 +1,142 @@
-name: CI Quality Gate
+name: CI
 
+# One workflow, no soft gates: every step must pass (no `continue-on-error`, no `|| true`).
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
-  lint-and-types:
-    name: Lint & Typecheck
+  backend:
+    name: Backend (lint, types, tests, migrations)
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: --health-cmd "redis-cli ping" --health-interval 5s --health-timeout 3s --health-retries 10
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: ci
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U ci" --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      ENVIRONMENT: test
+      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-          cache: "pip"
-
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install ruff mypy
-          pip install -e ".[dev]" || pip install -r requirements.txt -r requirements-dev.txt
-
-      - name: Ruff Linter & Formatter
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - name: Ruff lint
+        run: ruff check app tests tooling migrations
+      - name: Ruff format
+        run: ruff format --check app tests tooling migrations
+      - name: mypy (app strict)
+        run: mypy app tests
+      - name: Migrations on Postgres (upgrade, downgrade, upgrade)
         env:
-          PYTHONPATH: .
+          DATABASE_URL: postgresql+asyncpg://ci:ci@localhost:5432/ci
         run: |
-          ruff check app/ tests/
-          ruff format --check app/ tests/
-
-      - name: Static Type Check
+          alembic upgrade head
+          alembic downgrade base
+          alembic upgrade head
+      - name: Tests with coverage (Redis integration test enabled)
         env:
-          PYTHONPATH: .
-        run: mypy app/ tests/ --ignore-missing-imports
-
-  unit-and-integration:
-    name: Pytest Suite with Coverage
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+          REDIS_URL: redis://localhost:6379/0
+        run: pytest --cov=app --cov-report=term-missing --cov-report=xml --cov-fail-under=80
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          python-version: "3.11"
-          cache: "pip"
-
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e ".[dev]" || pip install -r requirements.txt -r requirements-dev.txt
-
-      - name: Pytest Suite with Coverage
-        env:
-          APP_ENV: test
-          DEBUG: "false"
-          PYTHONPATH: .
-        run: |
-          pytest tests/ -v --cov=app --cov-report=xml:coverage.xml --cov-report=term-missing --cov-fail-under=80 --ignore=tests/world --ignore=tests/world_model --ignore=tests/platform_verification
-
-      - name: Upload Test Coverage Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
+          name: coverage-xml
           path: coverage.xml
           if-no-files-found: ignore
+
+  security:
+    name: Security (bandit, pip-audit, npm audit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - name: bandit (all severities)
+        run: bandit -r app -q
+      - name: pip-audit (runtime dependencies, no ignores)
+        run: pip-audit -r requirements.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: npm audit (production + dev dependencies)
+        working-directory: frontend
+        run: npm audit --audit-level=moderate
+
+  frontend:
+    name: Frontend (types, unit, e2e)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - name: Typecheck and build
+        run: npm run build
+      - name: Unit tests (Vitest)
+        run: npm test
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end tests (Playwright)
+        env:
+          CI: "true"
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: frontend/test-results
+          if-no-files-found: ignore
+
+  docker:
+    name: Docker image build + smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: docker build -t docutask-agent:ci .
+      - name: Smoke test (migrations run, UI served, tesseract present, non-root)
+        run: |
+          docker run -d --name app -p 7860:7860 \
+            -e ENVIRONMENT=development \
+            -e DATABASE_URL=sqlite+aiosqlite:////app/storage/smoke.db \
+            docutask-agent:ci
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:7860/healthz && break; sleep 2; done
+          curl -fsS http://127.0.0.1:7860/healthz
+          curl -fsS http://127.0.0.1:7860/readyz
+          curl -fsS http://127.0.0.1:7860/ | grep -q '<div id="root">'
+          test "$(docker exec app id -u)" != "0"
+          docker exec app tesseract --version
+      - name: Container logs
+        if: always()
+        run: docker logs app

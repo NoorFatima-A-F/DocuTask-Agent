@@ -17,7 +17,7 @@ import json
 import time
 from collections import OrderedDict
 from dataclasses import dataclass
-from typing import Optional, Protocol
+from typing import Protocol
 
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
@@ -79,7 +79,7 @@ class RedisStore:
     """Fixed-window counters in Redis (INCR + EXPIRE)."""
 
     def __init__(self, url: str):
-        import redis.asyncio as aioredis  # noqa: PLC0415
+        import redis.asyncio as aioredis
 
         self._redis = aioredis.Redis.from_url(url, socket_connect_timeout=1, socket_timeout=1)
 
@@ -106,7 +106,7 @@ def _is_trusted(ip: str, trusted: list[ipaddress.IPv4Network | ipaddress.IPv6Net
     return any(addr in net for net in trusted)
 
 
-def client_ip(peer: Optional[str], forwarded_for: Optional[str], trusted_proxies: list[str]) -> str:
+def client_ip(peer: str | None, forwarded_for: str | None, trusted_proxies: list[str]) -> str:
     """Right-most untrusted hop; XFF is only honoured when the peer is a trusted proxy."""
     peer = peer or "unknown"
     trusted = _networks(trusted_proxies)
@@ -121,7 +121,7 @@ def client_ip(peer: Optional[str], forwarded_for: Optional[str], trusted_proxies
 class RateLimiter:
     def __init__(self) -> None:
         self.memory = MemoryStore()
-        self.redis: Optional[CounterStore] = RedisStore(settings.REDIS_URL) if settings.REDIS_URL else None
+        self.redis: CounterStore | None = RedisStore(settings.REDIS_URL) if settings.REDIS_URL else None
 
     async def hit(self, key: str, limit: Limit) -> tuple[bool, int, int]:
         """Return ``(allowed, remaining, retry_after)``."""

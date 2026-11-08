@@ -4,7 +4,8 @@ Classifies input documents into native_pdf, scanned_pdf, image, txt, docx, or un
 """
 
 import io
-from typing import Set
+from typing import ClassVar
+
 import pdfplumber
 
 from app.core.logging import logger
@@ -13,8 +14,10 @@ from app.core.logging import logger
 class DocumentTypeDetector:
     """Detector for document type classification and OCR necessity determination."""
 
-    IMAGE_EXTENSIONS: Set[str] = {".png", ".jpg", ".jpeg", ".tiff", ".tif", ".bmp", ".webp"}
-    IMAGE_MIMES: Set[str] = {"image/png", "image/jpeg", "image/tiff", "image/bmp", "image/webp"}
+    IMAGE_EXTENSIONS: ClassVar[frozenset[str]] = frozenset({".png", ".jpg", ".jpeg", ".tiff", ".tif", ".bmp", ".webp"})
+    IMAGE_MIMES: ClassVar[frozenset[str]] = frozenset(
+        {"image/png", "image/jpeg", "image/tiff", "image/bmp", "image/webp"}
+    )
 
     @classmethod
     def detect_type(cls, file_content: bytes, file_extension: str, mime_type: str) -> str:
@@ -48,7 +51,7 @@ class DocumentTypeDetector:
                             return "native_pdf"
                     return "scanned_pdf"
             except Exception as e:
-                logger.warning(f"PDF structure inspection error: {str(e)}")
+                logger.warning(f"PDF structure inspection error: {e!s}")
                 return "scanned_pdf"
 
         return "unsupported"

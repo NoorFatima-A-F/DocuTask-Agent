@@ -47,7 +47,7 @@ def _dep_names(dependant) -> set[str]:  # type: ignore[no-untyped-def]
 
 
 async def _probe(app, paths: list[str]) -> dict[str, int]:  # type: ignore[no-untyped-def]
-    from httpx import ASGITransport, AsyncClient  # noqa: PLC0415
+    from httpx import ASGITransport, AsyncClient
 
     results: dict[str, int] = {}
     transport = ASGITransport(app=app, raise_app_exceptions=False)
@@ -56,7 +56,7 @@ async def _probe(app, paths: list[str]) -> dict[str, int]:  # type: ignore[no-un
             try:
                 resp = await asyncio.wait_for(client.get(path), timeout=5)
                 results[path] = resp.status_code
-            except Exception:  # noqa: BLE001 - metrics script: record and continue
+            except Exception:
                 results[path] = -1
     return results
 
@@ -73,10 +73,10 @@ def main(argv: list[str] | None = None) -> int:
     os.environ.setdefault("ENVIRONMENT", "test")
 
     t0 = time.perf_counter()
-    from app.main import app  # noqa: PLC0415
+    from app.main import app
 
     import_s = time.perf_counter() - t0
-    from fastapi.routing import APIRoute  # noqa: PLC0415
+    from fastapi.routing import APIRoute
 
     schema = app.openapi()
     paths = schema.get("paths", {})

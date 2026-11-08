@@ -4,11 +4,11 @@ Persists files to local disk under date-partitioned directory structure (YYYY/MM
 Enforces path traversal safeguards.
 """
 
+import asyncio
 import os
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Optional
 
 from app.core.config import settings
 from app.core.exceptions import ValidationAppException
@@ -16,10 +16,16 @@ from app.core.logging import logger
 from app.storage.base import StorageProvider
 
 
+def _write_file(directory: str, path: str, content: bytes) -> None:
+    os.makedirs(directory, exist_ok=True)
+    with open(path, "wb") as f:
+        f.write(content)
+
+
 class LocalStorageProvider(StorageProvider):
     """Concrete StorageProvider persisting files to local file system."""
 
-    def __init__(self, base_directory: Optional[str] = None):
+    def __init__(self, base_directory: str | None = None):
         if base_directory:
             self.base_dir = os.path.abspath(base_directory)
         else:
@@ -46,7 +52,7 @@ class LocalStorageProvider(StorageProvider):
 
     def _get_date_partition(self) -> str:
         """Returns relative date partition string: YYYY/MM/DD."""
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         return os.path.join("uploads", now.strftime("%Y"), now.strftime("%m"), now.strftime("%d"))
 
     def get_absolute_path(self, relative_path: str) -> str:
@@ -71,20 +77,13 @@ class LocalStorageProvider(StorageProvider):
         """
         stored_filename = self.generate_unique_filename(original_filename)
 
-        if not subfolder:
-            date_dir = self._get_date_partition()
-        else:
-            date_dir = subfolder.strip("/\\")
+        date_dir = subfolder.strip("/\\") if subfolder else self._get_date_partition()
 
-        target_dir_abs = os.path.abspath(os.path.join(self.base_dir, date_dir))
+        target_dir_abs = os.path.abspath(os.path.join(self.base_dir, date_dir))  # noqa: ASYNC240 - path math only
         self._validate_path_safety(target_dir_abs)
-        os.makedirs(target_dir_abs, exist_ok=True)
-
         abs_path = os.path.join(target_dir_abs, stored_filename)
         self._validate_path_safety(abs_path)
-
-        with open(abs_path, "wb") as f:
-            f.write(content)
+        await asyncio.to_thread(_write_file, target_dir_abs, abs_path, content)
 
         rel_path = self.get_relative_path(abs_path)
         logger.info(f"File stored successfully: {rel_path} ({len(content)} bytes)")
@@ -94,28 +93,28 @@ class LocalStorageProvider(StorageProvider):
     async def read(self, relative_path: str) -> bytes:
         """Read a stored file. Only paths inside the storage root are allowed."""
         abs_path = self.get_absolute_path(relative_path)  # raises on traversal
-        if not os.path.isfile(abs_path):
-            raise ValidationAppException("Requested file does not exist on disk")
-        with open(abs_path, "rb") as f:
-            return f.read()
+        try:
+            return await asyncio.to_thread(Path(abs_path).read_bytes)
+        except (FileNotFoundError, IsADirectoryError, PermissionError) as exc:
+            raise ValidationAppException("Requested file does not exist on disk") from exc
 
     async def delete(self, relative_path: str) -> bool:
         """Deletes file from disk if present."""
         try:
             abs_path = self.get_absolute_path(relative_path)
-            if os.path.isfile(abs_path):
-                os.remove(abs_path)
+            if await asyncio.to_thread(os.path.isfile, abs_path):
+                await asyncio.to_thread(os.remove, abs_path)
                 logger.info(f"File deleted from storage: {relative_path}")
                 return True
             return False
         except Exception as e:
-            logger.error(f"Failed to delete file '{relative_path}': {str(e)}")
+            logger.error(f"Failed to delete file '{relative_path}': {e!s}")
             return False
 
     async def exists(self, relative_path: str) -> bool:
         """Checks if file exists on disk."""
         try:
             abs_path = self.get_absolute_path(relative_path)
-            return os.path.isfile(abs_path)
+            return await asyncio.to_thread(os.path.isfile, abs_path)
         except Exception:
             return False

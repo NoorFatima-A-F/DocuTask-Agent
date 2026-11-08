@@ -3,15 +3,16 @@ Document Request and Response Pydantic Schemas.
 """
 
 from datetime import datetime
-from enum import Enum
-from typing import Any, Dict, List, Optional, TypeVar
+from enum import StrEnum
+from typing import Any, TypeVar
 from uuid import UUID
+
 from pydantic import BaseModel, ConfigDict, Field
 
 T = TypeVar("T")
 
 
-class UploadStatusEnum(str, Enum):
+class UploadStatusEnum(StrEnum):
     """Possible document processing states."""
 
     UPLOADING = "UPLOADING"
@@ -59,13 +60,13 @@ class PaginationRequest(BaseModel):
 class SearchRequest(PaginationRequest):
     """Search query request payload."""
 
-    query: Optional[str] = Field(None, description="Filename or metadata search query")
+    query: str | None = Field(None, description="Filename or metadata search query")
 
 
 class DocumentListResponse(BaseModel):
     """Paginated document list response."""
 
-    items: List[DocumentResponse]
+    items: list[DocumentResponse]
     total: int = Field(..., description="Total records count")
     page: int = Field(..., description="Current page number")
     page_size: int = Field(..., description="Page size limit")
@@ -88,7 +89,7 @@ class DocumentExtractionSchema(BaseModel):
     vendor_name: str = Field(..., description="Issuing vendor or merchant name")
     total_amount: float = Field(..., description="Total monetary amount")
     currency: str = Field(default="USD", description="ISO 4217 Currency Code")
-    due_date: Optional[str] = Field(default=None, description="Due date string")
+    due_date: str | None = Field(default=None, description="Due date string")
 
     @classmethod
     def clean_ocr_text(cls, text: Any) -> str:

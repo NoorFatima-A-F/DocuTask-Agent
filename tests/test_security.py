@@ -3,7 +3,9 @@ Unit Tests for Core Security & Cryptography Module.
 """
 
 from datetime import timedelta
+
 import pytest
+
 from app.core.exceptions import TokenException
 from app.core.security import (
     create_access_token,
@@ -38,7 +40,7 @@ def test_access_token_creation_and_decoding():
 def test_refresh_token_creation_and_decoding():
     """Verifies JWT refresh token generation and expiration calculation."""
     subject = "user_67890"
-    raw_token, expires_at = create_refresh_token(subject=subject, expires_delta=timedelta(days=1))
+    raw_token, _expires_at = create_refresh_token(subject=subject, expires_delta=timedelta(days=1))
 
     payload = decode_token(raw_token, expected_type="refresh")
     assert payload["sub"] == subject

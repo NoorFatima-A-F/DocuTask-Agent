@@ -42,7 +42,7 @@ def liveness_probe() -> HealthResponse:
 
 def redis_reachable(url: str) -> bool:
     """PING the broker with a short timeout."""
-    import redis  # noqa: PLC0415
+    import redis
 
     try:
         return bool(redis.Redis.from_url(url, socket_connect_timeout=1, socket_timeout=1).ping())

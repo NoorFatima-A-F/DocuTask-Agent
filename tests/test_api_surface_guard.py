@@ -54,14 +54,14 @@ def test_operation_budget() -> None:
 
 
 def test_public_allowlist_routes_exist() -> None:
-    assert PUBLIC <= set(_operations())
+    assert set(_operations()) >= PUBLIC
 
 
 @pytest.mark.parametrize(("method", "path"), [op for op in _operations() if op not in PUBLIC])
 async def test_non_public_route_requires_auth(client: AsyncClient, method: str, path: str) -> None:
     url = re.sub(r"\{[^}]+\}", DUMMY, path)
-    kwargs = {"json": {}} if method in {"POST", "PUT", "PATCH"} else {}
-    response = await client.request(method, url, **kwargs)
+    body: dict[str, object] | None = {} if method in {"POST", "PUT", "PATCH"} else None
+    response = await client.request(method, url, json=body)
     assert response.status_code == 401, f"{method} {path} -> {response.status_code}"
 
 

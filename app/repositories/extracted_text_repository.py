@@ -4,7 +4,8 @@ Implements persistence and retrieval for page-level extracted document text.
 """
 
 import uuid
-from typing import Dict, Any, List
+from typing import Any
+
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -18,7 +19,7 @@ class ExtractedTextRepository(BaseRepository[ExtractedText]):
     def __init__(self, db: AsyncSession):
         super().__init__(model=ExtractedText, db=db)
 
-    async def create(self, extracted_data: Dict[str, Any]) -> ExtractedText:
+    async def create(self, extracted_data: dict[str, Any]) -> ExtractedText:
         """Creates and persists a single page extracted text record."""
         record = ExtractedText(**extracted_data)
         self.db.add(record)
@@ -26,7 +27,7 @@ class ExtractedTextRepository(BaseRepository[ExtractedText]):
         await self.db.refresh(record)
         return record
 
-    async def bulk_create(self, pages_data: List[Dict[str, Any]]) -> List[ExtractedText]:
+    async def bulk_create(self, pages_data: list[dict[str, Any]]) -> list[ExtractedText]:
         """Bulk persists multiple page extracted text records."""
         records = [ExtractedText(**data) for data in pages_data]
         self.db.add_all(records)
@@ -35,7 +36,7 @@ class ExtractedTextRepository(BaseRepository[ExtractedText]):
             await self.db.refresh(r)
         return records
 
-    async def get_document_text(self, document_id: uuid.UUID) -> List[ExtractedText]:
+    async def get_document_text(self, document_id: uuid.UUID) -> list[ExtractedText]:
         """Retrieves all extracted text pages for document ordered by page_number."""
         query = (
             select(ExtractedText)

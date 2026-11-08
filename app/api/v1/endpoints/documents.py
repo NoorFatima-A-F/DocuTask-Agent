@@ -1,10 +1,10 @@
 """
 Document Ingestion & Management API Endpoints Router.
-Receives file upload requests, validates headers/tokens, delegates to DocumentService, and returns APIResponse envelopes.
+Receives uploads, delegates to DocumentService and returns APIResponse envelopes.
 """
 
-from typing import Optional
 from uuid import UUID
+
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
 
 from app.core.config import settings
@@ -73,7 +73,7 @@ async def upload_document(
 async def list_documents(
     page: int = Query(1, ge=1, description="Page index"),
     page_size: int = Query(20, ge=1, le=100, description="Items per page"),
-    q: Optional[str] = Query(None, description="Optional search query filter"),
+    q: str | None = Query(None, description="Optional search query filter"),
     current_user: User = Depends(get_current_active_user),
     doc_service: DocumentService = Depends(get_document_service),
 ) -> APIResponse[DocumentListResponse]:

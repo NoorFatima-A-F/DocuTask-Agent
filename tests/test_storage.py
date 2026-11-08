@@ -2,9 +2,11 @@
 Unit Tests for Storage Subsystem (LocalStorageProvider).
 """
 
+import asyncio
 import os
 import shutil
 import tempfile
+
 import pytest
 
 from app.core.exceptions import ValidationAppException
@@ -30,7 +32,7 @@ async def test_local_storage_provider_crud(temp_storage_dir: str):
     # 1. Save
     stored_filename, rel_path, abs_path = await storage.save(content, original_filename)
     assert stored_filename.endswith(".pdf")
-    assert os.path.exists(abs_path)
+    assert await asyncio.to_thread(os.path.exists, abs_path)
     assert await storage.exists(rel_path) is True
 
     # 2. Read

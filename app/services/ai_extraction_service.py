@@ -10,7 +10,8 @@ import asyncio
 import json
 import random
 import time
-from typing import Any, Awaitable, Callable, Dict, List, Optional
+from collections.abc import Awaitable, Callable
+from typing import Any
 from uuid import UUID
 
 from app.ai.base import LLMProvider, LLMResult
@@ -120,7 +121,7 @@ class AIExtractionService:
         return doc
 
     async def _call_llm(
-        self, prompt: str, json_schema: Dict[str, Any], system_instruction: str, model: str
+        self, prompt: str, json_schema: dict[str, Any], system_instruction: str, model: str
     ) -> LLMResult:
         """Call the provider, retrying only transient errors with exponential backoff + jitter."""
         attempt = 1
@@ -136,7 +137,7 @@ class AIExtractionService:
                     delay = min(exc.retry_after, self.BACKOFF_CAP_SECONDS)
                 else:
                     delay = min(self.BACKOFF_BASE_SECONDS * 2 ** (attempt - 1), self.BACKOFF_CAP_SECONDS)
-                delay += random.uniform(0, self.BACKOFF_BASE_SECONDS)  # nosec B311
+                delay += random.uniform(0, self.BACKOFF_BASE_SECONDS)  # noqa: S311  # nosec B311
                 logger.warning(
                     "Transient LLM error %s (attempt %d/%d); retrying in %.1fs",
                     exc.error_code,
@@ -185,7 +186,7 @@ class AIExtractionService:
         doc_type: str,
         target_model: str,
         start_time: float,
-        usage: Dict[str, int],
+        usage: dict[str, int],
     ) -> ExtractionResponse:
         try:
             doc_content = await self.ocr_service.get_extracted_text(doc.id, owner)
@@ -200,7 +201,7 @@ class AIExtractionService:
         json_schema = PromptBuilder.get_json_schema(doc_type)
 
         current_prompt = user_prompt
-        validated: Optional[Dict[str, Any]] = None
+        validated: dict[str, Any] | None = None
         raw_response = ""
         retry_count = 0
         for attempt in range(self.MAX_SCHEMA_RETRIES + 1):
@@ -276,7 +277,7 @@ class AIExtractionService:
         model: str,
         exc: Exception,
         start_time: float,
-        usage: Dict[str, int],
+        usage: dict[str, int],
     ) -> None:
         """Persist a FAILED extraction row and EXTRACTION_FAILED document status, then commit.
 
@@ -316,7 +317,7 @@ class AIExtractionService:
             )
             await self.doc_repo.update_status(doc, "EXTRACTION_FAILED")
             await self.ai_repo.db.commit()
-        except Exception as persist_exc:  # noqa: BLE001 - the original error is re-raised by the caller
+        except Exception as persist_exc:
             logger.error("Could not persist extraction failure record: %s", type(persist_exc).__name__)
 
     async def get_latest_result(self, document_id: UUID, owner: User) -> ExtractionResponse:
@@ -327,7 +328,7 @@ class AIExtractionService:
             raise ResourceNotFoundException("No AI extraction results found for this document. Run extraction first.")
         return self._to_response_schema(latest)
 
-    async def get_extraction_status(self, document_id: UUID, owner: User) -> Dict[str, Any]:
+    async def get_extraction_status(self, document_id: UUID, owner: User) -> dict[str, Any]:
         """Retrieves AI extraction operational status for a document."""
         doc = await self._get_owned_document(document_id, owner)
         latest = await self.ai_repo.get_latest(document_id)
@@ -341,7 +342,7 @@ class AIExtractionService:
             "confidence": latest.confidence if latest else None,
         }
 
-    async def get_extraction_history(self, document_id: UUID, owner: User) -> List[ExtractionResponse]:
+    async def get_extraction_history(self, document_id: UUID, owner: User) -> list[ExtractionResponse]:
         """Retrieves complete history of past AI extractions for a document."""
         await self._get_owned_document(document_id, owner)
         records = await self.ai_repo.get_history(document_id)
