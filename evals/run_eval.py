@@ -13,6 +13,10 @@ Modes
     Runs the real pipeline on ``document.png``: tesseract OCR -> Gemini -> validation ->
     confidence routing, and compares the output with the ground truth. Needs tesseract and
     ``GEMINI_API_KEY``. ``--record DIR`` stores the OCR text and raw model output per document.
+    Free-tier keys have a small daily request quota, so a run can be split: ``--resume`` skips
+    documents that already have a model output in ``DIR``, ``--limit N`` sends at most N requests,
+    ``--delay S`` waits between requests, and the run stops at the first rate-limit error.
+    With ``--resume`` the report covers every document recorded in ``DIR`` so far.
 
 ``replay``
     Re-scores recordings made with ``live --record`` without OCR or network calls, so changes
@@ -22,6 +26,7 @@ Usage::
 
     python evals/run_eval.py --mode routing --gate
     python evals/run_eval.py --mode live --record evals/recordings/2026-11-08
+    python evals/run_eval.py --mode live --record evals/recordings/2026-11-08 --resume --limit 18
     python evals/run_eval.py --mode replay --recordings evals/recordings/2026-11-08
 """
 
@@ -305,17 +310,42 @@ def _save(record: Path, doc_id: str, rec: dict[str, Any]) -> None:
     (record / f"{doc_id}.json").write_text(json.dumps(rec, indent=2), encoding="utf-8")
 
 
-async def run_live(docs: list[Doc], record: Path | None) -> dict[str, Any]:
-    from app.ai.prompt_builder import PromptBuilder
-    from app.ai.providers.gemini import GeminiProvider
-    from app.core.errors.extraction import ExtractionError
-    from app.ocr.pipeline import OCRPipeline
-    from app.ocr.providers.tesseract import TesseractOCRProvider
+def _has_model_output(record: Path | None, doc_id: str) -> bool:
+    path = record / f"{doc_id}.json" if record else None
+    return bool(path and path.exists() and "raw_text" in json.loads(path.read_text(encoding="utf-8")))
 
-    provider = GeminiProvider()
-    pipeline = OCRPipeline(ocr_provider=TesseractOCRProvider())
+
+async def run_live(
+    docs: list[Doc],
+    record: Path | None,
+    *,
+    resume: bool = False,
+    limit: int | None = None,
+    delay: float = 0.0,
+    provider: Any = None,
+    pipeline: Any = None,
+) -> dict[str, Any]:
+    from app.ai.prompt_builder import PromptBuilder
+    from app.core.errors.extraction import ErrorCode, ExtractionError
+
+    if provider is None:
+        from app.ai.providers.gemini import GeminiProvider
+
+        provider = GeminiProvider()
+    if pipeline is None:
+        from app.ocr.pipeline import OCRPipeline
+        from app.ocr.providers.tesseract import TesseractOCRProvider
+
+        pipeline = OCRPipeline(ocr_provider=TesseractOCRProvider())
+    if resume and record is None:
+        raise ValueError("--resume needs --record")
+    todo = [d for d in docs if not (resume and _has_model_output(record, d.doc_id))]
+    if limit is not None:
+        todo = todo[:limit]
     results = []
-    for doc in docs:
+    for i, doc in enumerate(todo):
+        if i and delay:
+            await asyncio.sleep(delay)
         t0 = time.perf_counter()
         rec: dict[str, Any] = {"doc_id": doc.doc_id}
         try:
@@ -334,6 +364,7 @@ async def run_live(docs: list[Doc], record: Path | None) -> dict[str, Any]:
             )
             rec["raw_text"] = out.raw_text
             cost = provider.calculate_cost(out.input_tokens, out.output_tokens)
+            rec["latency_s"], rec["cost_usd"] = time.perf_counter() - t0, cost
             validated, status = _finish(doc, out.data, content.text, content.average_confidence)
             results.append(
                 score_output(
@@ -346,6 +377,13 @@ async def run_live(docs: list[Doc], record: Path | None) -> dict[str, Any]:
         if record:
             _save(record, doc.doc_id, rec)
         print(f"{doc.doc_id}: {results[-1].status} {results[-1].error_code or ''}", flush=True)
+        if results[-1].error_code == ErrorCode.LLM_RATE_LIMITED.value:
+            print("rate limited (quota): stopping; rerun later with --resume", flush=True)
+            break
+    if resume and record is not None:
+        report = run_replay(docs, record)
+        report.update(mode="live", model=provider.default_model)
+        return report
     return summarize(results, "live", provider.default_model)
 
 
@@ -360,12 +398,13 @@ def run_replay(docs: list[Doc], recordings: Path) -> dict[str, Any]:
         if "raw_text" not in rec:
             results.append(score_output(doc, None, "FAILED", rec.get("error_code"), 0.0, None))
             continue
+        latency, cost = float(rec.get("latency_s", 0.0)), rec.get("cost_usd")
         try:
             data = json.loads(rec["raw_text"])
         except json.JSONDecodeError:
             data = None
         validated, status = _finish(doc, data, rec["ocr_text"], rec.get("ocr_confidence"))
-        results.append(score_output(doc, validated, status, None if validated else "INVALID_OUTPUT", 0.0, None))
+        results.append(score_output(doc, validated, status, None if validated else "INVALID_OUTPUT", latency, cost))
     return summarize(results, "replay", None)
 
 
@@ -390,16 +429,23 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--record", type=Path, help="live: write per-document recordings here")
     ap.add_argument("--recordings", type=Path, help="replay: read recordings from here")
     ap.add_argument("--out", type=Path, help="Write the JSON report here (default: evals/reports/<mode>-<date>.json)")
+    ap.add_argument("--resume", action="store_true", help="live: skip documents already answered in --record")
+    ap.add_argument("--limit", type=int, help="live: send at most this many model requests")
+    ap.add_argument("--delay", type=float, default=0.0, help="live: seconds to wait between requests")
     args = ap.parse_args(argv)
 
     docs = load_dataset()
     runners: dict[str, Callable[[], dict[str, Any]]] = {
         "routing": lambda: run_routing(docs),
-        "live": lambda: asyncio.run(run_live(docs, args.record)),
+        "live": lambda: asyncio.run(
+            run_live(docs, args.record, resume=args.resume, limit=args.limit, delay=args.delay)
+        ),
         "replay": lambda: run_replay(docs, args.recordings),
     }
     if args.mode == "replay" and not args.recordings:
         ap.error("--recordings is required for replay")
+    if args.resume and not args.record:
+        ap.error("--resume needs --record")
     report = runners[args.mode]()
     report["generated_at"] = datetime.now(UTC).isoformat(timespec="seconds")
 
